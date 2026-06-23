@@ -24,20 +24,21 @@ return {
 			SettingType = "Toggle",
 			Key = "Enabled",
 			DisplayName = "启用过月优化",
-			Description = "启用将远离太吾的低风险区域过月任务延迟到过月后帧中分批执行。",
+			Description = "启用将使远离太吾的非实时区域中过月任务延迟到过月后与帧中分批执行。",
 			DefaultValue = true,
 		},
 		[2] = {
 			SettingType = "Toggle",
 			Key = "SyncNeighborStates",
 			DisplayName = "相邻州域同步结算",
-			Description = "相邻州域始终保持同步计算，不参与延迟。",
+			Description = "启用将使相邻州域保持同步计算，不参与延迟。",
 			DefaultValue = true,
 		},
 		[3] = {
 			SettingType = "Slider",
 			Key = "FrameBudgetMs",
 			DisplayName = "每帧处理预算(毫秒)",
+			Description = "限制每帧最多预留的帧时间。数值越高对帧率影响越大，延迟任务队列清空越快。",
 			GroupName = nil,
 			MinValue = 1,
 			MaxValue = 4,
@@ -45,48 +46,59 @@ return {
 			DefaultValue = 1,
 		},
 		[4] = {
+			SettingType = "Slider",
+			Key = "MaxJobsPerFrame",
+			DisplayName = "每帧最多任务数",
+			Description = "限制每帧最多处理的延迟任务数。数值越低帧率越平滑，延迟任务队列清空越慢。",
+			GroupName = nil,
+			MinValue = 1,
+			MaxValue = 4,
+			StepSize = 1,
+			DefaultValue = 1,
+		},
+		[5] = {
 			SettingType = "Toggle",
 			Key = "DelayEquipment",
 			DisplayName = "优化：延迟NPC装备/修理",
 			Description = "延迟非实时区域 NPC 的装备选择、修理和部分物品准备逻辑。",
 			DefaultValue = true,
 		},
-		[5] = {
+		[6] = {
 			SettingType = "Toggle",
 			Key = "DelayMissionGoal",
 			DisplayName = "优化：延迟NPC行为规划",
 			Description = "延迟非实时区域 NPC 的任务刷新和目标规划刷新。",
 			DefaultValue = true,
 		},
-		[6] = {
+		[7] = {
 			SettingType = "Toggle",
 			Key = "DelayLoseOverloadItems",
 			DisplayName = "优化：延迟NPC超重丢弃",
 			Description = "延迟非实时区域 NPC 的超重物品丢弃逻辑。",
 			DefaultValue = true,
 		},
-		[7] = {
+		[8] = {
 			SettingType = "Toggle",
 			Key = "DelayBrokenBlocks",
 			DisplayName = "优化：延迟破损地块倒计时",
 			Description = "延迟非实时区域破损地块的每月倒计时更新。",
 			DefaultValue = true,
 		},
-		[8] = {
+		[9] = {
 			SettingType = "Toggle",
 			Key = "DelayAnimalAreaData",
 			DisplayName = "优化：延迟野生动物生态",
 			Description = "延迟非实时区域的野生动物生成和自然死亡结算。",
 			DefaultValue = true,
 		},
-		[9] = {
+		[10] = {
 			SettingType = "Toggle",
 			Key = "DelaySkeletonGeneration",
 			DisplayName = "优化：延迟坟墓僵尸生成",
 			Description = "延迟非实时区域的坟墓僵尸生成。",
 			DefaultValue = true,
 		},
-		[10] = {
+		[11] = {
 			SettingType = "Toggle",
 			Key = "DelayMapPickups",
 			DisplayName = "优化：延迟拾取物状态刷新",

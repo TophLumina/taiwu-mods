@@ -1,3 +1,4 @@
+using System.Reflection;
 using GameData.Common;
 using GameData.Domains.Global;
 using GameData.Domains.World;
@@ -16,11 +17,19 @@ internal static class AdvanceMonthLifecyclePatch
         DelayMonthRuntime.EndAdvanceMonthDelayScope();
 }
 
-[HarmonyPatch(typeof(WorldDomain), nameof(WorldDomain.AdvanceMonth_DisplayedMonthlyNotifications))]
-internal static class MonthlyNotificationSavePatch
+[HarmonyPatch]
+internal static class PendingJobsBeforeSavePatch
 {
-    private static void Prefix(ref bool saveWorld) =>
-        DelayMonthRuntime.PostponeSaveUntilJobsComplete(ref saveWorld);
+    // SaveWorldAt writes temporary world files, for example before entering guide worlds.
+    private static MethodBase[] TargetMethods() =>
+        new[]
+        {
+            AccessTools.Method(typeof(GlobalDomain), nameof(GlobalDomain.SaveWorld), new[] { typeof(DataContext), typeof(sbyte) }),
+            AccessTools.Method(typeof(GlobalDomain), "SaveWorldAt", new[] { typeof(DataContext), typeof(string), typeof(bool) }),
+        };
+
+    private static void Prefix(DataContext context) =>
+        DelayMonthRuntime.FlushAllPendingJobs(context);
 }
 
 [HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.OnUpdate))]
@@ -28,4 +37,11 @@ internal static class DelayedMonthRuntimeTickPatch
 {
     private static void Postfix(DataContext context) =>
         DelayMonthRuntime.TickDelayedJobs(context);
+}
+
+[HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.LeaveWorld))]
+internal static class PendingJobsLeaveWorldPatch
+{
+    private static void Prefix() =>
+        DelayMonthRuntime.ClearPendingJobs();
 }
