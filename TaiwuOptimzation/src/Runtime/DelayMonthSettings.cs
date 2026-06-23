@@ -8,6 +8,7 @@ internal static class DelayMonthSettings
     public static bool Enabled = true;
     public static bool SyncNeighborStates = true;
     public static int FrameBudgetMs = 1;
+    public static int MaxJobsPerFrame = 1;
     public static bool DelayEquipment = true;
     public static bool DelayMissionGoal = true;
     public static bool DelayLoseOverloadItems = true;
@@ -21,6 +22,7 @@ internal static class DelayMonthSettings
         TryGet(modId, "Enabled", ref Enabled);
         TryGet(modId, "SyncNeighborStates", ref SyncNeighborStates);
         TryGet(modId, "FrameBudgetMs", ref FrameBudgetMs);
+        TryGet(modId, "MaxJobsPerFrame", ref MaxJobsPerFrame);
         TryGet(modId, "DelayEquipment", ref DelayEquipment);
         TryGet(modId, "DelayMissionGoal", ref DelayMissionGoal);
         TryGet(modId, "DelayLoseOverloadItems", ref DelayLoseOverloadItems);
@@ -30,6 +32,7 @@ internal static class DelayMonthSettings
         TryGet(modId, "DelayMapPickups", ref DelayMapPickups);
 
         FrameBudgetMs = Math.Clamp(FrameBudgetMs, 1, 4);
+        MaxJobsPerFrame = Math.Clamp(MaxJobsPerFrame, 1, 4);
     }
 
     private static void TryGet(string modId, string key, ref bool value)

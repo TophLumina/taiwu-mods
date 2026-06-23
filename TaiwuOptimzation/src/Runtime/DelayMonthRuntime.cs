@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using Config;
 using GameData.Common;
 using GameData.Domains;
@@ -16,6 +17,8 @@ internal static class DelayMonthRuntime
     private const int AreaCount = 141;
     private const int StateAreaCount = 135;
     private const int SkeletonAreaCount = 45;
+    private const int MapPickupCleanupLocationsPerJob = 32;
+    private const int MaxOverrunCooldownFrames = 3;
 
     private enum JobDrainMode
     {
@@ -30,22 +33,14 @@ internal static class DelayMonthRuntime
     private static readonly Dictionary<int, int> _pendingJobCountsByArea = new();
 
     private static Action<DataContext, int, ICharacterParallelAction>? _executeCharacterAreaAction;
+    private static int _pendingJobCount;
+    private static int _delayedJobCooldownFrames;
     private static bool _advancingMonth;
     private static bool _replaying;
-    private static bool _saveAfterFlush;
     private static short _liveSynchronousAreaSource = -1;
     private static bool _liveSynchronousAreaIncludesNeighbors;
 
-    private static bool HasPendingJobs
-    {
-        get
-        {
-            lock (_syncRoot)
-            {
-                return _pendingJobs.Count > 0;
-            }
-        }
-    }
+    private static bool HasPendingJobs => Volatile.Read(ref _pendingJobCount) > 0;
 
     public static void Initialize()
     {
@@ -59,25 +54,17 @@ internal static class DelayMonthRuntime
 
     public static void Dispose()
     {
-        lock (_syncRoot)
-        {
-            _pendingJobs.Clear();
-            InvalidateLiveSynchronousAreaCache();
-            _pendingJobCountsByArea.Clear();
-            _advancingMonth = false;
-            _replaying = false;
-            _saveAfterFlush = false;
-        }
+        ClearPendingJobs();
     }
 
     public static void BeginAdvanceMonthDelayScope(DataContext context)
     {
-        FlushAllJobs(context);
+        FlushAllPendingJobs(context);
 
         lock (_syncRoot)
         {
             InvalidateLiveSynchronousAreaCache();
-            _saveAfterFlush = false;
+            _delayedJobCooldownFrames = 0;
             _advancingMonth = DelayMonthSettings.Enabled;
         }
     }
@@ -157,13 +144,45 @@ internal static class DelayMonthRuntime
 
         foreach ((short areaId, List<Location> locations) in locationsByArea)
         {
-            if (!TryEnqueueAreaJob(DelayedMonthJob.MapPickupCleanup(areaId, locations)))
-            {
-                AreaLocalMonthExecutors.ExecuteMapPickupCleanup(context, areaId, locations);
-            }
+            EnqueueOrExecuteMapPickupCleanup(context, areaId, locations);
         }
 
         return true;
+    }
+
+    private static void EnqueueOrExecuteMapPickupCleanup(
+        DataContext context,
+        short areaId,
+        List<Location> locations)
+    {
+        if (locations.Count <= MapPickupCleanupLocationsPerJob)
+        {
+            EnqueueOrExecuteMapPickupCleanupChunk(context, areaId, locations);
+            return;
+        }
+
+        for (int offset = 0; offset < locations.Count; offset += MapPickupCleanupLocationsPerJob)
+        {
+            int count = Math.Min(MapPickupCleanupLocationsPerJob, locations.Count - offset);
+            List<Location> chunk = new(count);
+            for (int i = 0; i < count; i++)
+            {
+                chunk.Add(locations[offset + i]);
+            }
+
+            EnqueueOrExecuteMapPickupCleanupChunk(context, areaId, chunk);
+        }
+    }
+
+    private static void EnqueueOrExecuteMapPickupCleanupChunk(
+        DataContext context,
+        short areaId,
+        IReadOnlyList<Location> locations)
+    {
+        if (!TryEnqueueAreaJob(DelayedMonthJob.MapPickupCleanup(areaId, locations)))
+        {
+            AreaLocalMonthExecutors.ExecuteMapPickupCleanup(context, areaId, locations);
+        }
     }
 
     public static void TickDelayedJobs(DataContext context)
@@ -179,14 +198,34 @@ internal static class DelayMonthRuntime
             return;
         }
 
-        FlushLiveSyncAreas(context);
-        if (!HasPendingJobs)
+        if (!IsWorldDataAvailable())
         {
-            TryRunDeferredSave(context);
+            ClearPendingJobs();
             return;
         }
 
-        long deadline = Stopwatch.GetTimestamp() + DelayMonthSettings.FrameBudgetMs * Stopwatch.Frequency / 1000;
+        if (DomainManager.Global.GetSavingWorld())
+        {
+            ExecuteAllPendingJobs(context);
+            return;
+        }
+
+        FlushLiveSyncAreas(context);
+        if (!HasPendingJobs)
+        {
+            return;
+        }
+
+        if (_delayedJobCooldownFrames > 0)
+        {
+            _delayedJobCooldownFrames--;
+            return;
+        }
+
+        long budgetTicks = Math.Max(1, DelayMonthSettings.FrameBudgetMs * Stopwatch.Frequency / 1000);
+        long tickStart = Stopwatch.GetTimestamp();
+        long deadline = tickStart + budgetTicks;
+        int executedJobs = 0;
         DelayedMonthJob? currentBatch = null;
         bool hasPendingApply = false;
         do
@@ -195,10 +234,10 @@ internal static class DelayMonthRuntime
             if (job == null)
             {
                 ApplyPending(context, ref hasPendingApply);
-                TryRunDeferredSave(context);
                 return;
             }
 
+            executedJobs++;
             if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
             {
                 ApplyPending(context, ref hasPendingApply);
@@ -210,14 +249,11 @@ internal static class DelayMonthRuntime
                 hasPendingApply = true;
             }
         }
-        while (Stopwatch.GetTimestamp() < deadline);
+        while (executedJobs < DelayMonthSettings.MaxJobsPerFrame && Stopwatch.GetTimestamp() < deadline);
 
         ApplyPending(context, ref hasPendingApply);
+        ApplyOverrunCooldown(tickStart, budgetTicks);
 
-        if (!HasPendingJobs)
-        {
-            TryRunDeferredSave(context);
-        }
     }
 
     public static void FlushAreaJobs(DataContext context, short areaId)
@@ -227,33 +263,41 @@ internal static class DelayMonthRuntime
             return;
         }
 
-        ExecuteAndMaybeSave(context, DrainJobs(JobDrainMode.Area, areaId));
+        ExecuteJobsBatched(context, DrainJobs(JobDrainMode.Area, areaId));
     }
 
-    public static void FlushAllJobs(DataContext context)
+    public static void FlushAllPendingJobs(DataContext context)
     {
-        ExecuteAndMaybeSave(context, DrainJobs(JobDrainMode.All));
-    }
-
-    public static bool PostponeSaveUntilJobsComplete(ref bool saveWorld)
-    {
-        if (!saveWorld)
+        if (!HasPendingJobs)
         {
-            return false;
+            return;
         }
 
+        if (!IsWorldDataAvailable())
+        {
+            ClearPendingJobs();
+            return;
+        }
+
+        ExecuteAllPendingJobs(context);
+    }
+
+    public static void ClearPendingJobs()
+    {
         lock (_syncRoot)
         {
-            if (_pendingJobs.Count == 0)
-            {
-                return false;
-            }
-
-            _saveAfterFlush = true;
-            saveWorld = false;
-            return true;
+            _pendingJobs.Clear();
+            InvalidateLiveSynchronousAreaCache();
+            _pendingJobCountsByArea.Clear();
+            Volatile.Write(ref _pendingJobCount, 0);
+            _delayedJobCooldownFrames = 0;
+            _advancingMonth = false;
+            _replaying = false;
         }
     }
+
+    private static bool IsWorldDataAvailable() =>
+        GameData.ArchiveData.Common.IsInWorld() && DomainManager.Global.GetLoadedAllArchiveData();
 
     public static void ExecuteOriginalCharacterAreaAction(DataContext context, int areaId, ICharacterParallelAction action)
     {
@@ -297,7 +341,7 @@ internal static class DelayMonthRuntime
             return;
         }
 
-        ExecuteAndMaybeSave(context, DrainJobs(JobDrainMode.AreaSet, areaSet: areaIds));
+        ExecuteJobsBatched(context, DrainJobs(JobDrainMode.AreaSet, areaSet: areaIds));
     }
 
     private static bool ShouldDelayAction(ICharacterParallelAction action)
@@ -415,28 +459,21 @@ internal static class DelayMonthRuntime
         return false;
     }
 
-    private static void ExecuteAndMaybeSave(DataContext context, List<DelayedMonthJob> jobs)
-    {
-        if (jobs.Count > 0)
-        {
-            ExecuteJobsBatched(context, jobs);
-        }
-
-        if (!HasPendingJobs)
-        {
-            TryRunDeferredSave(context);
-        }
-    }
-
     private static void EnqueueJob(DelayedMonthJob job)
     {
         _pendingJobs.Enqueue(job);
+        Interlocked.Increment(ref _pendingJobCount);
         _pendingJobCountsByArea.TryGetValue(job.AreaId, out int count);
         _pendingJobCountsByArea[job.AreaId] = count + 1;
     }
 
     private static void DecrementJobCount(int areaId)
     {
+        if (Interlocked.Decrement(ref _pendingJobCount) < 0)
+        {
+            Volatile.Write(ref _pendingJobCount, 0);
+        }
+
         int count = _pendingJobCountsByArea[areaId] - 1;
         if (count <= 0)
         {
@@ -469,6 +506,32 @@ internal static class DelayMonthRuntime
         ApplyPending(context, ref hasPendingApply);
     }
 
+    private static void ExecuteAllPendingJobs(DataContext context)
+    {
+        DelayedMonthJob? currentBatch = null;
+        bool hasPendingApply = false;
+        while (true)
+        {
+            DelayedMonthJob? job = DequeueJob();
+            if (job == null)
+            {
+                ApplyPending(context, ref hasPendingApply);
+                return;
+            }
+
+            if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
+            {
+                ApplyPending(context, ref hasPendingApply);
+            }
+
+            if (ExecuteJobWithoutApply(context, job))
+            {
+                currentBatch = job;
+                hasPendingApply = true;
+            }
+        }
+    }
+
     private static bool ExecuteJobWithoutApply(DataContext context, DelayedMonthJob job)
     {
         _replaying = true;
@@ -494,19 +557,23 @@ internal static class DelayMonthRuntime
         hasPendingApply = false;
     }
 
-    private static void TryRunDeferredSave(DataContext context)
+    private static void ApplyOverrunCooldown(long tickStart, long budgetTicks)
     {
-        lock (_syncRoot)
+        if (!HasPendingJobs)
         {
-            if (!_saveAfterFlush || _pendingJobs.Count > 0)
-            {
-                return;
-            }
-
-            _saveAfterFlush = false;
+            _delayedJobCooldownFrames = 0;
+            return;
         }
 
-        DomainManager.Global.SaveWorld(context);
+        long elapsedTicks = Stopwatch.GetTimestamp() - tickStart;
+        if (elapsedTicks <= budgetTicks * 2)
+        {
+            _delayedJobCooldownFrames = 0;
+            return;
+        }
+
+        long excessFrames = (elapsedTicks - budgetTicks) / budgetTicks;
+        _delayedJobCooldownFrames = (int)Math.Min(MaxOverrunCooldownFrames, Math.Max(1, excessFrames));
     }
 
     private static bool TryHandleAreaLoop(
