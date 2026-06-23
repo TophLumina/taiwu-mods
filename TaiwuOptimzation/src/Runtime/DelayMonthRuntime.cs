@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection;
+using Config;
 using GameData.Common;
 using GameData.Domains;
 using GameData.Domains.Character.Ai.ParallelAdvanceMonth;
@@ -15,10 +15,10 @@ internal static class DelayMonthRuntime
 {
     private static readonly object Sync = new object();
     private static readonly Queue<DelayedMonthJob> Jobs = new Queue<DelayedMonthJob>(512);
-    private static readonly HashSet<int> ImmediateAreas = new HashSet<int>();
+    private static readonly HashSet<int> SyncAreas = new HashSet<int>();
     private static readonly Dictionary<int, int> JobCountsByArea = new Dictionary<int, int>();
 
-    private static MethodInfo? _characterAreaActionMethod;
+    private static Action<DataContext, int, ICharacterParallelAction>? _characterAreaAction;
     private static bool _advancingMonth;
     private static bool _replaying;
     private static bool _saveAfterFlush;
@@ -39,10 +39,12 @@ internal static class DelayMonthRuntime
 
     public static void Initialize()
     {
-        _characterAreaActionMethod = AccessTools.Method(
+        var method = AccessTools.Method(
             typeof(ParallelActionManager),
             "OfflineExecuteCharacterActionsInArea",
             new[] { typeof(DataContext), typeof(int), typeof(ICharacterParallelAction) });
+        _characterAreaAction = method.CreateDelegate<Action<DataContext, int, ICharacterParallelAction>>();
+        AreaLocalMonthExecutors.Initialize();
     }
 
     public static void Dispose()
@@ -50,7 +52,7 @@ internal static class DelayMonthRuntime
         lock (Sync)
         {
             Jobs.Clear();
-            ImmediateAreas.Clear();
+            SyncAreas.Clear();
             JobCountsByArea.Clear();
             _advancingMonth = false;
             _replaying = false;
@@ -66,7 +68,7 @@ internal static class DelayMonthRuntime
 
         lock (Sync)
         {
-            ImmediateAreas.Clear();
+            SyncAreas.Clear();
             _enqueuedThisMonth = 0;
             _appliedThisMonth = 0;
             _saveAfterFlush = false;
@@ -75,7 +77,7 @@ internal static class DelayMonthRuntime
 
         if (DelayMonthSettings.Enabled)
         {
-            BuildImmediateAreas();
+            BuildSyncAreas();
         }
     }
 
@@ -94,17 +96,7 @@ internal static class DelayMonthRuntime
             return false;
         }
 
-        lock (Sync)
-        {
-            if (!_advancingMonth || IsImmediateArea(areaId))
-            {
-                return false;
-            }
-
-            EnqueueJob(DelayedMonthJob.CharacterArea(areaId, action));
-            _enqueuedThisMonth++;
-            return true;
-        }
+        return TryEnqueueAreaJob(DelayedMonthJob.CharacterArea(areaId, action));
     }
 
     public static bool TryDelayBrokenBlockArea(int areaId)
@@ -114,17 +106,86 @@ internal static class DelayMonthRuntime
             return false;
         }
 
-        lock (Sync)
-        {
-            if (!_advancingMonth || IsImmediateArea(areaId))
-            {
-                return false;
-            }
+        return TryEnqueueAreaJob(DelayedMonthJob.BrokenBlockArea(areaId));
+    }
 
-            EnqueueJob(DelayedMonthJob.BrokenBlockArea(areaId));
-            _enqueuedThisMonth++;
-            return true;
+    public static bool TryDelayMapMonthlyArea(int areaId)
+    {
+        if (!DelayMonthSettings.Enabled || !DelayMonthSettings.DelayMapMonthlyUpdate || _replaying || areaId < 0)
+        {
+            return false;
         }
+
+        return TryEnqueueAreaJob(DelayedMonthJob.MapMonthlyArea(areaId));
+    }
+
+    public static bool TryDelayRandomEnemiesArea(int areaId)
+    {
+        if (!DelayMonthSettings.Enabled || !DelayMonthSettings.DelayRandomEnemies || _replaying || areaId < 0)
+        {
+            return false;
+        }
+
+        return TryEnqueueAreaJob(DelayedMonthJob.RandomEnemiesArea(areaId));
+    }
+
+    public static bool TryDelayNpcTamingArea(int areaId)
+    {
+        if (!DelayMonthSettings.Enabled || !DelayMonthSettings.DelayNpcTaming || _replaying || areaId < 0)
+        {
+            return false;
+        }
+
+        return TryEnqueueAreaJob(DelayedMonthJob.NpcTamingArea(areaId));
+    }
+
+    public static bool TryHandleAnimalAreaData(DataContext context)
+    {
+        return TryHandleAreaLoop(
+            context,
+            DelayMonthSettings.DelayAnimalAreaData,
+            0,
+            141,
+            DelayedMonthJob.AnimalAreaData,
+            AreaLocalMonthExecutors.ExecuteAnimalAreaData);
+    }
+
+    public static bool TryHandleSkeletonGeneration(DataContext context)
+    {
+        return TryHandleAreaLoop(
+            context,
+            DelayMonthSettings.DelaySkeletonGeneration,
+            0,
+            45,
+            DelayedMonthJob.SkeletonArea,
+            AreaLocalMonthExecutors.ExecuteSkeletonGeneration);
+    }
+
+    public static bool TryHandleMapPickupsPostAdvanceMonth(DataContext context)
+    {
+        if (!DelayMonthSettings.Enabled || !DelayMonthSettings.DelayMapPickups || _replaying || !IsAdvancingMonth())
+        {
+            return false;
+        }
+
+        HashSet<short> areaIds = new HashSet<short>();
+        foreach (Location location in DomainManager.Extra.PickupDict.Keys)
+        {
+            if (location.AreaId >= 0)
+            {
+                areaIds.Add(location.AreaId);
+            }
+        }
+
+        foreach (short areaId in areaIds)
+        {
+            if (!TryEnqueueAreaJob(DelayedMonthJob.MapPickupsArea(areaId)))
+            {
+                AreaLocalMonthExecutors.ExecuteMapPickupsPostAdvanceMonth(context, areaId);
+            }
+        }
+
+        return true;
     }
 
     public static void Tick(DataContext context)
@@ -134,22 +195,35 @@ internal static class DelayMonthRuntime
             return;
         }
 
-        FlushLiveImmediateAreas(context);
+        FlushLiveSyncAreas(context);
 
-        int budgetMs = DelayMonthSettings.FrameBudgetMs;
-        Stopwatch stopwatch = Stopwatch.StartNew();
+        long deadline = Stopwatch.GetTimestamp() + DelayMonthSettings.FrameBudgetMs * Stopwatch.Frequency / 1000;
+        DelayedMonthJob? currentBatch = null;
+        bool hasPendingApply = false;
         do
         {
             DelayedMonthJob? job = DequeueJob();
             if (job == null)
             {
+                ApplyPending(context, ref hasPendingApply);
                 TryRunDeferredSave(context);
                 return;
             }
 
-            ExecuteJob(context, job);
+            if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
+            {
+                ApplyPending(context, ref hasPendingApply);
+            }
+
+            if (ExecuteJobWithoutApply(context, job))
+            {
+                currentBatch = job;
+                hasPendingApply = true;
+            }
         }
-        while (stopwatch.ElapsedMilliseconds < budgetMs);
+        while (Stopwatch.GetTimestamp() < deadline);
+
+        ApplyPending(context, ref hasPendingApply);
 
         if (!HasPendingJobs)
         {
@@ -188,10 +262,7 @@ internal static class DelayMonthRuntime
             }
         }
 
-        foreach (DelayedMonthJob job in selected)
-        {
-            ExecuteJob(context, job);
-        }
+        ExecuteJobsBatched(context, selected);
 
         if (!HasPendingJobs)
         {
@@ -201,16 +272,18 @@ internal static class DelayMonthRuntime
 
     public static void FlushAll(DataContext context)
     {
+        List<DelayedMonthJob> selected = new List<DelayedMonthJob>();
         while (true)
         {
             DelayedMonthJob? job = DequeueJob();
             if (job == null)
             {
+                ExecuteJobsBatched(context, selected);
                 TryRunDeferredSave(context);
                 return;
             }
 
-            ExecuteJob(context, job);
+            selected.Add(job);
         }
     }
 
@@ -236,15 +309,15 @@ internal static class DelayMonthRuntime
 
     public static void ExecuteOriginalCharacterAreaAction(DataContext context, int areaId, ICharacterParallelAction action)
     {
-        if (_characterAreaActionMethod == null)
+        if (_characterAreaAction == null)
         {
             throw new InvalidOperationException("Character area action method was not resolved.");
         }
 
-        _characterAreaActionMethod.Invoke(null, new object[] { context, areaId, action });
+        _characterAreaAction(context, areaId, action);
     }
 
-    private static void BuildImmediateAreas()
+    private static void BuildSyncAreas()
     {
         Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
         if (!location.IsValid())
@@ -252,54 +325,46 @@ internal static class DelayMonthRuntime
             return;
         }
 
-        AddImmediateArea(location.AreaId);
-
-        List<short> areaList = new List<short>(16);
-        sbyte stateId = DomainManager.Map.GetStateIdByAreaId(location.AreaId);
-        DomainManager.Map.GetAllAreaInState(stateId, areaList);
-        foreach (short areaId in areaList)
-        {
-            AddImmediateArea(areaId);
-        }
-
-        AddNeighborAreas(location.AreaId);
+        AddLiveSyncAreas(AddSyncArea);
     }
 
-    private static void AddNeighborAreas(short areaId)
+    private static void AddNeighborStates(short areaId, Action<short> addArea)
     {
-        if (!DelayMonthSettings.ImmediateNeighborAreas || areaId < 0 || areaId >= 135)
+        if (!DelayMonthSettings.SyncNeighborStates || areaId < 0 || areaId >= 135)
         {
             return;
         }
 
-        foreach (short neighborArea in DomainManager.Map.GetAreaByAreaId(areaId).NeighborAreas)
+        sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(areaId);
+        foreach (sbyte neighborStateTemplateId in MapState.Instance[stateTemplateId].NeighborStates)
         {
-            AddImmediateArea(neighborArea);
+            sbyte neighborStateId = DomainManager.Map.GetStateIdByStateTemplateId(neighborStateTemplateId);
+            AddAreasInState(neighborStateId, addArea);
         }
     }
 
-    private static void AddImmediateArea(short areaId)
+    private static void AddSyncArea(short areaId)
     {
         if (areaId >= 0 && areaId < 141)
         {
             lock (Sync)
             {
-                ImmediateAreas.Add(areaId);
+                SyncAreas.Add(areaId);
             }
         }
     }
 
-    private static bool IsImmediateArea(int areaId)
+    private static bool IsSyncArea(int areaId)
     {
-        if (ImmediateAreas.Contains(areaId))
+        if (SyncAreas.Contains(areaId))
         {
             return true;
         }
 
-        return IsLiveImmediateArea(areaId);
+        return IsLiveSyncArea(areaId);
     }
 
-    private static bool IsLiveImmediateArea(int areaId)
+    private static bool IsLiveSyncArea(int areaId)
     {
         Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
         if (!location.IsValid())
@@ -312,32 +377,42 @@ internal static class DelayMonthRuntime
             return true;
         }
 
-        if (!DelayMonthSettings.ImmediateNeighborAreas || location.AreaId < 0 || location.AreaId >= 135)
+        if (areaId < 0 || location.AreaId < 0 || location.AreaId >= 135 || areaId >= 135)
         {
             return false;
         }
 
-        return DomainManager.Map.GetAreaByAreaId(location.AreaId).NeighborAreas.Contains((short)areaId);
+        sbyte taiwuStateId = DomainManager.Map.GetStateIdByAreaId(location.AreaId);
+        sbyte areaStateId = DomainManager.Map.GetStateIdByAreaId((short)areaId);
+        if (areaStateId == taiwuStateId)
+        {
+            return true;
+        }
+
+        if (!DelayMonthSettings.SyncNeighborStates)
+        {
+            return false;
+        }
+
+        sbyte taiwuStateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(location.AreaId);
+        foreach (sbyte neighborStateTemplateId in MapState.Instance[taiwuStateTemplateId].NeighborStates)
+        {
+            if (DomainManager.Map.GetStateIdByStateTemplateId(neighborStateTemplateId) == areaStateId)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    private static void FlushLiveImmediateAreas(DataContext context)
+    private static void FlushLiveSyncAreas(DataContext context)
     {
-        Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
-        if (!location.IsValid())
+        HashSet<short> areaIds = new HashSet<short>();
+        AddLiveSyncAreas(areaId => areaIds.Add(areaId));
+        foreach (short areaId in areaIds)
         {
-            return;
-        }
-
-        FlushArea(context, location.AreaId);
-
-        if (!DelayMonthSettings.ImmediateNeighborAreas || location.AreaId < 0 || location.AreaId >= 135)
-        {
-            return;
-        }
-
-        foreach (short neighborArea in DomainManager.Map.GetAreaByAreaId(location.AreaId).NeighborAreas)
-        {
-            FlushArea(context, neighborArea);
+            FlushArea(context, areaId);
         }
     }
 
@@ -409,19 +484,51 @@ internal static class DelayMonthRuntime
         }
     }
 
-    private static void ExecuteJob(DataContext context, DelayedMonthJob job)
+    private static void ExecuteJobsBatched(DataContext context, List<DelayedMonthJob> jobs)
+    {
+        DelayedMonthJob? currentBatch = null;
+        bool hasPendingApply = false;
+        foreach (DelayedMonthJob job in jobs)
+        {
+            if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
+            {
+                ApplyPending(context, ref hasPendingApply);
+            }
+
+            if (ExecuteJobWithoutApply(context, job))
+            {
+                currentBatch = job;
+                hasPendingApply = true;
+            }
+        }
+
+        ApplyPending(context, ref hasPendingApply);
+    }
+
+    private static bool ExecuteJobWithoutApply(DataContext context, DelayedMonthJob job)
     {
         _replaying = true;
         try
         {
             job.Execute(context);
-            context.ParallelModificationsRecorder.ApplyAll(context);
             _appliedThisMonth++;
+            return job.RequiresParallelApply;
         }
         finally
         {
             _replaying = false;
         }
+    }
+
+    private static void ApplyPending(DataContext context, ref bool hasPendingApply)
+    {
+        if (!hasPendingApply)
+        {
+            return;
+        }
+
+        context.ParallelModificationsRecorder.ApplyAll(context);
+        hasPendingApply = false;
     }
 
     private static void TryRunDeferredSave(DataContext context)
@@ -436,6 +543,87 @@ internal static class DelayMonthRuntime
         if (shouldSave)
         {
             DomainManager.Global.SaveWorld(context);
+        }
+    }
+
+    private static bool TryHandleAreaLoop(
+        DataContext context,
+        bool settingEnabled,
+        int startAreaId,
+        int endAreaId,
+        Func<int, DelayedMonthJob> createJob,
+        Action<DataContext, int> executeSync)
+    {
+        if (!DelayMonthSettings.Enabled || !settingEnabled || _replaying || !IsAdvancingMonth())
+        {
+            return false;
+        }
+
+        for (int areaId = startAreaId; areaId < endAreaId; areaId++)
+        {
+            if (!TryEnqueueAreaJob(createJob(areaId)))
+            {
+                executeSync(context, areaId);
+            }
+        }
+
+        return true;
+    }
+
+    private static bool TryEnqueueAreaJob(DelayedMonthJob job)
+    {
+        lock (Sync)
+        {
+            if (!_advancingMonth || IsSyncArea(job.AreaId))
+            {
+                return false;
+            }
+
+            EnqueueJob(job);
+            _enqueuedThisMonth++;
+            return true;
+        }
+    }
+
+    private static bool IsAdvancingMonth()
+    {
+        lock (Sync)
+        {
+            return _advancingMonth;
+        }
+    }
+
+    private static void AddLiveSyncAreas(Action<short> addArea)
+    {
+        Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
+        if (!location.IsValid())
+        {
+            return;
+        }
+
+        addArea(location.AreaId);
+        if (location.AreaId < 0 || location.AreaId >= 135)
+        {
+            return;
+        }
+
+        sbyte stateId = DomainManager.Map.GetStateIdByAreaId(location.AreaId);
+        AddAreasInState(stateId, addArea);
+        AddNeighborStates(location.AreaId, addArea);
+    }
+
+    private static void AddAreasInState(sbyte stateId, Action<short> addArea)
+    {
+        if (stateId < 0)
+        {
+            return;
+        }
+
+        List<short> areaList = new List<short>(16);
+        DomainManager.Map.GetAllAreaInState(stateId, areaList);
+        foreach (short areaId in areaList)
+        {
+            addArea(areaId);
         }
     }
 }

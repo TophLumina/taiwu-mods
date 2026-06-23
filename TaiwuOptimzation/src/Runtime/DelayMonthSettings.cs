@@ -6,24 +6,36 @@ namespace TaiwuOptimization.Runtime;
 internal static class DelayMonthSettings
 {
     public static bool Enabled = true;
-    public static bool ImmediateNeighborAreas = true;
-    public static int FrameBudgetMs = 4;
+    public static bool SyncNeighborStates = true;
+    public static int FrameBudgetMs = 1;
     public static bool DelayEquipment = true;
     public static bool DelayMissionGoal = true;
-    public static bool DelayLoseOverloadItems = false;
+    public static bool DelayLoseOverloadItems = true;
     public static bool DelayBrokenBlocks = true;
+    public static bool DelayMapMonthlyUpdate = true;
+    public static bool DelayRandomEnemies = true;
+    public static bool DelayNpcTaming = true;
+    public static bool DelayAnimalAreaData = true;
+    public static bool DelaySkeletonGeneration = true;
+    public static bool DelayMapPickups = true;
 
     public static void Load(string modId)
     {
         TryGet(modId, "Enabled", ref Enabled);
-        TryGet(modId, "ImmediateNeighborAreas", ref ImmediateNeighborAreas);
+        TryGet(modId, "SyncNeighborStates", ref SyncNeighborStates);
         TryGet(modId, "FrameBudgetMs", ref FrameBudgetMs);
         TryGet(modId, "DelayEquipment", ref DelayEquipment);
         TryGet(modId, "DelayMissionGoal", ref DelayMissionGoal);
         TryGet(modId, "DelayLoseOverloadItems", ref DelayLoseOverloadItems);
         TryGet(modId, "DelayBrokenBlocks", ref DelayBrokenBlocks);
+        TryGet(modId, "DelayMapMonthlyUpdate", ref DelayMapMonthlyUpdate);
+        TryGet(modId, "DelayRandomEnemies", ref DelayRandomEnemies);
+        TryGet(modId, "DelayNpcTaming", ref DelayNpcTaming);
+        TryGet(modId, "DelayAnimalAreaData", ref DelayAnimalAreaData);
+        TryGet(modId, "DelaySkeletonGeneration", ref DelaySkeletonGeneration);
+        TryGet(modId, "DelayMapPickups", ref DelayMapPickups);
 
-        FrameBudgetMs = Math.Clamp(FrameBudgetMs, 1, 20);
+        FrameBudgetMs = Math.Clamp(FrameBudgetMs, 1, 4);
     }
 
     private static void TryGet(string modId, string key, ref bool value)

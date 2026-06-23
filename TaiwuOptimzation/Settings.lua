@@ -1,9 +1,15 @@
 return {
 	Enabled = true,
-	ImmediateNeighborAreas = true,
-	FrameBudgetMs = 8,
+	SyncNeighborStates = true,
+	FrameBudgetMs = 1,
 	DelayEquipment = true,
 	DelayMissionGoal = true,
 	DelayLoseOverloadItems = true,
 	DelayBrokenBlocks = true,
+	DelayMapMonthlyUpdate = true,
+	DelayRandomEnemies = true,
+	DelayNpcTaming = true,
+	DelayAnimalAreaData = true,
+	DelaySkeletonGeneration = true,
+	DelayMapPickups = true,
 }
