@@ -8,7 +8,7 @@ return {
 	Title = "[天幕心帷]过月性能优化",
 	Version = "0.1.2.0",
 	Author = "man!",
-	Description = "过月性能优化模组\n通过将远离太吾的低风险过月计算任务延迟到过月后tick中分批执行，缩短过月伪死的时间。\n可中途添加，对原版存档无影响但是可能（大概率）与手动存档冲突",
+	Description = "过月性能优化模组\n通过将远离太吾的低风险过月计算任务延迟到过月后tick中分批执行，缩短过月伪死的时间。\n可中途添加，对原版存档无影响但是可能(大概率)与手动存档冲突",
 	Source = 0,
 	HasArchive = false,
 	NeedRestartWhenSettingChanged = false,
@@ -37,7 +37,7 @@ return {
 		[3] = {
 			SettingType = "Slider",
 			Key = "FrameBudgetMs",
-			DisplayName = "每帧处理预算",
+			DisplayName = "每帧处理预算(毫秒)",
 			GroupName = nil,
 			MinValue = 1,
 			MaxValue = 4,
@@ -54,7 +54,7 @@ return {
 		[5] = {
 			SettingType = "Toggle",
 			Key = "DelayMissionGoal",
-			DisplayName = "延迟NPC任务规划",
+			DisplayName = "延迟NPC行为规划",
 			Description = "延迟非实时区域 NPC 的任务刷新和目标规划刷新。",
 			DefaultValue = true,
 		},
