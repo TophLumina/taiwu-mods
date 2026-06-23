@@ -1,8 +1,8 @@
 return {
 	Enabled = true,
 	SyncNeighborStates = true,
-	FrameBudgetMs = 1,
-	MaxJobsPerFrame = 1,
+	FrameBudgetMs = 2,
+	MaxJobsPerFrame = 2,
 	DelayEquipment = true,
 	DelayMissionGoal = true,
 	DelayLoseOverloadItems = true,

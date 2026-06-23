@@ -6,9 +6,9 @@ return {
 		[1] = "TaiwuOptimizationFront.dll",
 	},
 	Title = "[天幕心帷]过月性能优化",
-	Version = "0.1.3.0",
+	Version = "0.1.6.0",
 	Author = "man!",
-	Description = "[h1] 过月性能优化 [/h1]\r\n\r\n将部分远离太吾当前位置的低风险过月任务，延迟到过月后的帧中分批执行，减少点击过月时的集中卡顿。\r\n\r\n当前[i]（无论何时，包括快速旅行时）[/i]州域始终同步结算，可选同步结算相邻州域，避免太吾附近区域出现状态滞后。\r\n\r\n[h3][b]不会影响原版存档执行次序/执行屏障/二进制读写！可在已有存档中自由加入/取消本mod。[/b][/h3]\r\n\r\n[list] [h2]当前可用延迟[/h2]\r\n[*] 部分远区 NPC 普通月行动/准备行动\r\n[*] 破损地块恢复倒计时\r\n[*] 野生动物生态更新\r\n[*] 坟墓僵尸生成\r\n[*] 地图拾取物状态更新\r\n[/list]\r\n\r\n[b] 使用 Harmony Patch，可能(大概率)与修改以上逻辑的mod冲突。[/b]\r\n\r\n[spoiler]PS:根据我个人反编译出来的后端源码，螺舟把月结计算全部压在太吾点击下个月按钮后触发的AdvanceMonth函数里，这函数各个阶段虽然内部并行但是写回世界数据的时候是串行。瓶颈就在这里。以原版太吾绘卷这样的后端设计想要减少月结等待时间就只能把这个月的计算延迟到月结后。\r\n\r\n个人认为理想的情况应该是这个月开始的时候使用帧预算计算太吾不行动时下个月的世界快照，然后月结只根据太吾本月实际行动产生的diff更新原来的快照。\r\n\r\n而且一个按钮就得让橡树化身守电脑前硬等这对吗？\r\n[/spoiler]",
+	Description = " [h1] 过月性能优化 [/h1]\n\n[h2]兼容更新#260624[/h2]\n\n已修复退出至主界面时的红字报错，pending队列在退出世界前会清空，同时不再触发/延迟原版保存世界行为。\n\n在原版执行保存世界前将确保pending队列中的任务完全执行完毕以维护存档一致性。\n\n\n将部分远离太吾当前位置的低风险过月任务，延迟到过月后的帧中分批执行，减少点击过月时的集中卡顿。\n\n当前[i]（无论何时，包括快速旅行时）[/i]州域始终同步结算，可选同步结算相邻州域，避免太吾附近区域出现状态滞后。\n\n[h3][b]不会影响原版存档执行次序/执行屏障/二进制读写！可在已有存档中自由加入/取消本mod。[/b][/h3]\n\n[list] [h2]当前可用延迟[/h2]\n[*] 部分远区 NPC 普通月行动/准备行动\n[*] 破损地块恢复倒计时\n[*] 野生动物生态更新\n[*] 坟墓僵尸生成\n[*] 地图拾取物状态更新\n[/list]\n\n[b] 使用 Harmony Patch，可能(大概率)与修改以上逻辑的mod冲突。[/b]\n\n[spoiler]PS:根据我个人反编译出来的后端源码，螺舟把月结计算全部压在太吾点击下个月按钮后触发的AdvanceMonth函数里，这函数各个阶段虽然内部并行但是写回世界数据的时候是串行。瓶颈就在这里。以原版太吾绘卷这样的后端设计想要减少月结等待时间就只能把这个月的计算延迟到月结后。\n\n个人认为理想的情况应该是这个月开始的时候使用帧预算计算太吾不行动时下个月的世界快照，然后月结只根据太吾本月实际行动产生的diff更新原来的快照。\n\n而且一个按钮就得让橡树化身守电脑前硬等这对吗？\n[/spoiler] ",
 	Source = 0,
 	HasArchive = false,
 	NeedRestartWhenSettingChanged = false,
@@ -16,7 +16,6 @@ return {
 	TagList = {
 		[1] = "Compatible Mods",
 		[2] = "Optimizations",
-		[3] = "Configurations",
 	},
 	GameVersion = "1.0.24.0",
 	DefaultSettings = {
@@ -39,22 +38,20 @@ return {
 			Key = "FrameBudgetMs",
 			DisplayName = "每帧处理预算(毫秒)",
 			Description = "限制每帧最多预留的帧时间。数值越高对帧率影响越大，延迟任务队列清空越快。",
-			GroupName = nil,
 			MinValue = 1,
 			MaxValue = 4,
 			StepSize = 1,
-			DefaultValue = 1,
+			DefaultValue = 2,
 		},
 		[4] = {
 			SettingType = "Slider",
 			Key = "MaxJobsPerFrame",
 			DisplayName = "每帧最多任务数",
 			Description = "限制每帧最多处理的延迟任务数。数值越低帧率越平滑，延迟任务队列清空越慢。",
-			GroupName = nil,
 			MinValue = 1,
 			MaxValue = 4,
 			StepSize = 1,
-			DefaultValue = 1,
+			DefaultValue = 2,
 		},
 		[5] = {
 			SettingType = "Toggle",
@@ -126,6 +123,12 @@ return {
 		},
 		[5] = {
 			Timestamp = 1782248252,
+		},
+		[6] = {
+			Timestamp = 1782257461,
+		},
+		[7] = {
+			Timestamp = 1782258542,
 		},
 	},
 	Cover = "c04bb314ab8daa46832bb42193ddebfb.jpg",
