@@ -5,19 +5,20 @@ return {
 	FrontendPlugins = {
 		[1] = "TaiwuOptimizationFront.dll",
 	},
-	Title = "太吾过月优化",
-	Version = "0.1.0",
+	Title = "[天幕心帷]过月优化",
+	Version = "0.1.0.0",
 	Author = "man!",
-	Description = "实验性优化：将远离太吾的低风险过月计算延迟到游玩过程中分批执行，减少点击过月时的阻塞时间。",
-	Source = 1,
+	Description = "通过将远离太吾的低风险过月计算任务延迟到过月后tick中分批执行，缩短过月伪死的时间。\n可中途添加，对原版存档无影响但是可能（大概率）与手动存档冲突",
+	Source = 0,
 	HasArchive = false,
 	NeedRestartWhenSettingChanged = false,
 	ChangeConfig = false,
 	TagList = {
 		[1] = "Compatible Mods",
 		[2] = "Optimizations",
+		[3] = "Configurations",
 	},
-	GameVersion = "1.0.10.0",
+	GameVersion = "1.0.20.0",
 	DefaultSettings = {
 		[1] = {
 			SettingType = "Toggle",
@@ -37,10 +38,11 @@ return {
 			SettingType = "Slider",
 			Key = "FrameBudgetMs",
 			DisplayName = "每帧预算毫秒",
+			GroupName = nil,
 			MinValue = 1,
 			MaxValue = 20,
 			StepSize = 1,
-			DefaultValue = 4,
+			DefaultValue = 8,
 		},
 		[4] = {
 			SettingType = "Toggle",
@@ -61,7 +63,7 @@ return {
 			Key = "DelayLoseOverloadItems",
 			DisplayName = "延迟超重丢弃",
 			Description = "实验选项：延迟非即时区域 NPC 的超重物品丢弃逻辑。",
-			DefaultValue = false,
+			DefaultValue = true,
 		},
 		[7] = {
 			SettingType = "Toggle",
@@ -71,4 +73,16 @@ return {
 			DefaultValue = true,
 		},
 	},
+	FileId = 3750430637,
+	WorkshopCover = nil,
+	Visibility = 0,
+	SettingGroups = {
+		[1] = "Default",
+	},
+	UpdateLogList = {
+		[1] = {
+			Timestamp = 1782234802,
+		},
+	},
+	Cover = nil,
 }

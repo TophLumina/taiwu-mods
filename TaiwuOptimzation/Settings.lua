@@ -1,9 +1,9 @@
 return {
 	Enabled = true,
 	ImmediateNeighborAreas = true,
-	FrameBudgetMs = 4,
+	FrameBudgetMs = 8,
 	DelayEquipment = true,
 	DelayMissionGoal = true,
-	DelayLoseOverloadItems = false,
+	DelayLoseOverloadItems = true,
 	DelayBrokenBlocks = true,
 }
