@@ -12,9 +12,6 @@ internal static class DelayMonthSettings
     public static bool DelayMissionGoal = true;
     public static bool DelayLoseOverloadItems = true;
     public static bool DelayBrokenBlocks = true;
-    public static bool DelayMapMonthlyUpdate = true;
-    public static bool DelayRandomEnemies = true;
-    public static bool DelayNpcTaming = true;
     public static bool DelayAnimalAreaData = true;
     public static bool DelaySkeletonGeneration = true;
     public static bool DelayMapPickups = true;
@@ -28,9 +25,6 @@ internal static class DelayMonthSettings
         TryGet(modId, "DelayMissionGoal", ref DelayMissionGoal);
         TryGet(modId, "DelayLoseOverloadItems", ref DelayLoseOverloadItems);
         TryGet(modId, "DelayBrokenBlocks", ref DelayBrokenBlocks);
-        TryGet(modId, "DelayMapMonthlyUpdate", ref DelayMapMonthlyUpdate);
-        TryGet(modId, "DelayRandomEnemies", ref DelayRandomEnemies);
-        TryGet(modId, "DelayNpcTaming", ref DelayNpcTaming);
         TryGet(modId, "DelayAnimalAreaData", ref DelayAnimalAreaData);
         TryGet(modId, "DelaySkeletonGeneration", ref DelaySkeletonGeneration);
         TryGet(modId, "DelayMapPickups", ref DelayMapPickups);

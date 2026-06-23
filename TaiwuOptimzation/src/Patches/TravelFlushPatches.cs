@@ -6,28 +6,22 @@ using TaiwuOptimization.Runtime;
 namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.StartTravel))]
-internal static class StartTravelFlushPatch
+internal static class StartTravelAreaFlushPatch
 {
-    private static void Prefix(DataContext context, short toAreaId)
-    {
-        DelayMonthRuntime.FlushArea(context, toAreaId);
-    }
+    private static void Prefix(DataContext context, short toAreaId) =>
+        DelayMonthRuntime.FlushAreaJobs(context, toAreaId);
 }
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.DirectTravel), new[] { typeof(DataContext), typeof(short) })]
-internal static class DirectTravelFlushPatch
+internal static class DirectTravelAreaFlushPatch
 {
-    private static void Prefix(DataContext context, short toAreaId)
-    {
-        DelayMonthRuntime.FlushArea(context, toAreaId);
-    }
+    private static void Prefix(DataContext context, short toAreaId) =>
+        DelayMonthRuntime.FlushAreaJobs(context, toAreaId);
 }
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.QuickTravel))]
-internal static class QuickTravelFlushPatch
+internal static class QuickTravelAreaFlushPatch
 {
-    private static void Prefix(DataContext context, short destAreaId)
-    {
-        DelayMonthRuntime.FlushArea(context, destAreaId);
-    }
+    private static void Prefix(DataContext context, short destAreaId) =>
+        DelayMonthRuntime.FlushAreaJobs(context, destAreaId);
 }

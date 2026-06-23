@@ -12,6 +12,9 @@ namespace TaiwuOptimization.Runtime;
 
 internal static class AreaLocalMonthExecutors
 {
+    private const int AreaCount = 141;
+    private const int SkeletonAreaCount = 45;
+
     private delegate bool TryGetRandomBlockForGeneratingAnimalDelegate(
         ExtraDomain domain,
         DataContext context,
@@ -40,7 +43,7 @@ internal static class AreaLocalMonthExecutors
 
     public static void ExecuteAnimalAreaData(DataContext context, int areaId)
     {
-        if (areaId < 0 || areaId >= 141)
+        if (areaId < 0 || areaId >= AreaCount)
         {
             return;
         }
@@ -88,15 +91,13 @@ internal static class AreaLocalMonthExecutors
 
     public static void ExecuteSkeletonGeneration(DataContext context, int areaId)
     {
-        if (areaId < 0 || areaId >= 45)
+        if (areaId < 0 || areaId >= SkeletonAreaCount)
         {
             return;
         }
 
-        Span<MapBlockData> areaBlocks = DomainManager.Map.GetAreaBlocks((short)areaId);
-        for (int i = 0; i < areaBlocks.Length; i++)
+        foreach (MapBlockData block in DomainManager.Map.GetAreaBlocks((short)areaId))
         {
-            MapBlockData block = areaBlocks[i];
             if (block.GetConfig().SubType != EMapBlockSubType.Ruin || block.GraveSet == null)
             {
                 continue;
@@ -104,8 +105,8 @@ internal static class AreaLocalMonthExecutors
 
             foreach (int graveId in block.GraveSet)
             {
-                if (DomainManager.Character.TryGetElement_Graves(graveId, out var grave) &&
-                    grave.GetSkeletonCharId() < 0 &&
+                var grave = DomainManager.Character.GetElement_Graves(graveId);
+                if (grave.GetSkeletonCharId() < 0 &&
                     context.Random.CheckPercentProb(50))
                 {
                     DomainManager.Character.CreateSkeletonCharacter(context, grave);
@@ -114,24 +115,30 @@ internal static class AreaLocalMonthExecutors
         }
     }
 
-    public static void ExecuteMapPickupsPostAdvanceMonth(DataContext context, int areaId)
+    public static void ExecuteMapPickupCleanup(
+        DataContext context,
+        int areaId,
+        IReadOnlyList<Location>? locations = null)
     {
         if (areaId < 0)
         {
             return;
         }
 
-        List<(Location location, MapPickupCollection pickupCollection)> updates =
-            new List<(Location location, MapPickupCollection pickupCollection)>();
-        foreach (KeyValuePair<Location, MapPickupCollection> item in DomainManager.Extra.PickupDict)
+        if (locations != null)
         {
-            Location location = item.Key;
+            ExecuteMapPickupCleanupByLocations(context, areaId, locations);
+            return;
+        }
+
+        List<(Location location, MapPickupCollection pickupCollection)> updates = new();
+        foreach ((Location location, MapPickupCollection pickupCollection) in DomainManager.Extra.PickupDict)
+        {
             if (location.AreaId != areaId)
             {
                 continue;
             }
 
-            MapPickupCollection pickupCollection = item.Value;
             RefreshPickupVisibleByResource(location, pickupCollection);
             pickupCollection.ClearIgnoredAndTriggered();
             updates.Add((location, pickupCollection));
@@ -139,6 +146,25 @@ internal static class AreaLocalMonthExecutors
 
         foreach ((Location location, MapPickupCollection pickupCollection) in updates)
         {
+            DomainManager.Extra.SetMapPickupCollection(context, location, pickupCollection);
+        }
+    }
+
+    private static void ExecuteMapPickupCleanupByLocations(
+        DataContext context,
+        int areaId,
+        IReadOnlyList<Location> locations)
+    {
+        foreach (Location location in locations)
+        {
+            if (location.AreaId != areaId ||
+                !DomainManager.Extra.TryGetElement_PickupDict(location, out MapPickupCollection? pickupCollection))
+            {
+                continue;
+            }
+
+            RefreshPickupVisibleByResource(location, pickupCollection);
+            pickupCollection.ClearIgnoredAndTriggered();
             DomainManager.Extra.SetMapPickupCollection(context, location, pickupCollection);
         }
     }
