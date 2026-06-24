@@ -32,7 +32,7 @@ internal static class DelayMonthSettings
         TryGet(modId, "DelayMapPickups", ref DelayMapPickups);
 
         FrameBudgetMs = Math.Clamp(FrameBudgetMs, 1, 4);
-        MaxJobsPerFrame = Math.Clamp(MaxJobsPerFrame, 1, 4);
+        MaxJobsPerFrame = Math.Clamp(MaxJobsPerFrame, 1, 16);
     }
 
     private static void TryGet(string modId, string key, ref bool value)

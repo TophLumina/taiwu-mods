@@ -25,3 +25,10 @@ internal static class QuickTravelAreaFlushPatch
     private static void Prefix(DataContext context, short destAreaId) =>
         DelayMonthRuntime.FlushAreaJobs(context, destAreaId);
 }
+
+[HarmonyPatch(typeof(MapDomain), nameof(MapDomain.StopTravel))]
+internal static class StopTravelLiveSyncFlushPatch
+{
+    private static void Postfix(DataContext context) =>
+        DelayMonthRuntime.FlushCurrentLiveSyncAreas(context);
+}

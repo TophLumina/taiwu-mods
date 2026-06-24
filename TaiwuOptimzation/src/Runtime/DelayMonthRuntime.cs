@@ -266,6 +266,23 @@ internal static class DelayMonthRuntime
         ExecuteJobsBatched(context, DrainJobs(JobDrainMode.Area, areaId));
     }
 
+    public static void FlushCurrentLiveSyncAreas(DataContext context)
+    {
+        if (_replaying || !HasPendingJobs)
+        {
+            return;
+        }
+
+        if (!IsWorldDataAvailable())
+        {
+            ClearPendingJobs();
+            return;
+        }
+
+        // Keep Taiwu's visible region in original month-end state before travel UI resumes.
+        FlushLiveSyncAreas(context);
+    }
+
     public static void FlushAllPendingJobs(DataContext context)
     {
         if (!HasPendingJobs)

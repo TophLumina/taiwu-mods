@@ -49,7 +49,7 @@ return {
 			DisplayName = "每帧最多任务数",
 			Description = "限制每帧最多处理的延迟任务数。数值越低帧率越平滑，延迟任务队列清空越慢。",
 			MinValue = 1,
-			MaxValue = 4,
+			MaxValue = 16,
 			StepSize = 1,
 			DefaultValue = 2,
 		},
