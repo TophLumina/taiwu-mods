@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Config;
 using GameData.Common;
 using GameData.Domains;
+using GameData.Domains.Character.Ai.ParallelAdvanceMonth;
 using GameData.Domains.Extra;
 using GameData.Domains.Map;
 using GameData.Utilities;
@@ -39,6 +40,73 @@ internal static class AreaLocalMonthExecutors
         _getRandomAnimalForGeneratingAnimal = AccessTools
             .Method(typeof(ExtraDomain), "GetRandomAnimalForGeneratingAnimal", new[] { typeof(DataContext) })
             .CreateDelegate<GetRandomAnimalForGeneratingAnimalDelegate>();
+    }
+
+    public static List<int> SnapshotAreaCharacterIdsForParallelAction(int areaId)
+    {
+        List<int> characterIds = new();
+        if (areaId < 0 || areaId >= AreaCount)
+        {
+            return characterIds;
+        }
+
+        foreach (MapBlockData block in DomainManager.Map.GetAreaBlocks((short)areaId))
+        {
+            if (block.CharacterSet == null)
+            {
+                continue;
+            }
+
+            foreach (int characterId in block.CharacterSet)
+            {
+                characterIds.Add(characterId);
+            }
+        }
+
+        return characterIds;
+    }
+
+    public static void ExecuteCharacterParallelActionChunk(
+        DataContext context,
+        ICharacterParallelAction action,
+        IReadOnlyList<int>? characterIds)
+    {
+        if (characterIds == null)
+        {
+            return;
+        }
+
+        foreach (int characterId in characterIds)
+        {
+            if (DomainManager.Character.TryGetElement_Objects(characterId, out var character))
+            {
+                action.Execute(context, character);
+            }
+        }
+    }
+
+    public static void ExecuteMapBrokenBlockUpdate(
+        DataContext context,
+        int areaId,
+        int blockStart,
+        int blockCount)
+    {
+        if (areaId < 0 || blockCount <= 0)
+        {
+            return;
+        }
+
+        Span<MapBlockData> areaBlocks = DomainManager.Map.GetAreaBlocks((short)areaId);
+        int end = Math.Min(areaBlocks.Length, blockStart + blockCount);
+        for (int i = Math.Max(0, blockStart); i < end; i++)
+        {
+            MapBlockData block = areaBlocks[i];
+            if (block.CountDown())
+            {
+                context.ParallelModificationsRecorder.RecordType(ParallelModificationType.UpdateBrokenArea);
+                context.ParallelModificationsRecorder.RecordParameterClass(block);
+            }
+        }
     }
 
     public static void ExecuteAnimalAreaData(DataContext context, int areaId)
@@ -89,15 +157,21 @@ internal static class AreaLocalMonthExecutors
         }
     }
 
-    public static void ExecuteSkeletonGeneration(DataContext context, int areaId)
+    public static void ExecuteSkeletonGeneration(DataContext context, int areaId) =>
+        ExecuteSkeletonGeneration(context, areaId, 0, int.MaxValue);
+
+    public static void ExecuteSkeletonGeneration(DataContext context, int areaId, int blockStart, int blockCount)
     {
-        if (areaId < 0 || areaId >= SkeletonAreaCount)
+        if (areaId < 0 || areaId >= SkeletonAreaCount || blockCount <= 0)
         {
             return;
         }
 
-        foreach (MapBlockData block in DomainManager.Map.GetAreaBlocks((short)areaId))
+        Span<MapBlockData> areaBlocks = DomainManager.Map.GetAreaBlocks((short)areaId);
+        int end = Math.Min(areaBlocks.Length, blockStart + blockCount);
+        for (int i = Math.Max(0, blockStart); i < end; i++)
         {
+            MapBlockData block = areaBlocks[i];
             if (block.GetConfig().SubType != EMapBlockSubType.Ruin || block.GraveSet == null)
             {
                 continue;

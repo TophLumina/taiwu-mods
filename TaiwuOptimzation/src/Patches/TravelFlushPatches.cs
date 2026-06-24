@@ -9,19 +9,26 @@ namespace TaiwuOptimization.Patches;
 internal static class StartTravelAreaFlushPatch
 {
     private static void Prefix(DataContext context, short toAreaId) =>
-        DelayMonthRuntime.FlushAreaJobs(context, toAreaId);
+        DeferredAdvanceMonthRuntime.FlushAreaJobs(context, toAreaId);
 }
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.DirectTravel), new[] { typeof(DataContext), typeof(short) })]
 internal static class DirectTravelAreaFlushPatch
 {
     private static void Prefix(DataContext context, short toAreaId) =>
-        DelayMonthRuntime.FlushAreaJobs(context, toAreaId);
+        DeferredAdvanceMonthRuntime.FlushAreaJobs(context, toAreaId);
 }
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.QuickTravel))]
 internal static class QuickTravelAreaFlushPatch
 {
     private static void Prefix(DataContext context, short destAreaId) =>
-        DelayMonthRuntime.FlushAreaJobs(context, destAreaId);
+        DeferredAdvanceMonthRuntime.FlushAreaJobs(context, destAreaId);
+}
+
+[HarmonyPatch(typeof(MapDomain), nameof(MapDomain.StopTravel))]
+internal static class StopTravelLiveSyncFlushPatch
+{
+    private static void Postfix(DataContext context) =>
+        DeferredAdvanceMonthRuntime.FlushCurrentLiveSyncAreas(context);
 }
