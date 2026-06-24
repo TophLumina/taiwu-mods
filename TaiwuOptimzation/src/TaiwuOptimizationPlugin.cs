@@ -11,10 +11,10 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
 
     public override void Initialize()
     {
-        DelayMonthSettings.Load(ModIdStr);
-        DelayMonthRuntime.Initialize();
+        DeferredAdvanceMonthSettings.Load(ModIdStr);
+        DeferredAdvanceMonthRuntime.Initialize();
 
-        _harmony = new Harmony("TaiwuOptimization.DelayMonth");
+        _harmony = new Harmony("TaiwuOptimization.DeferredAdvanceMonth");
         _harmony.PatchAll(typeof(TaiwuOptimizationPlugin).Assembly);
     }
 
@@ -22,11 +22,11 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     {
         _harmony?.UnpatchSelf();
         _harmony = null;
-        DelayMonthRuntime.Dispose();
+        DeferredAdvanceMonthRuntime.Dispose();
     }
 
     public override void OnModSettingUpdate()
     {
-        DelayMonthSettings.Load(ModIdStr);
+        DeferredAdvanceMonthSettings.Load(ModIdStr);
     }
 }

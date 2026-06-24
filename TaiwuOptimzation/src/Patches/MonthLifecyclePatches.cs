@@ -11,10 +11,10 @@ namespace TaiwuOptimization.Patches;
 internal static class AdvanceMonthLifecyclePatch
 {
     private static void Prefix(DataContext context) =>
-        DelayMonthRuntime.BeginAdvanceMonthDelayScope(context);
+        DeferredAdvanceMonthRuntime.BeginAdvanceMonthDelayScope(context);
 
     private static void Finalizer() =>
-        DelayMonthRuntime.EndAdvanceMonthDelayScope();
+        DeferredAdvanceMonthRuntime.EndAdvanceMonthDelayScope();
 }
 
 [HarmonyPatch]
@@ -29,19 +29,19 @@ internal static class PendingJobsBeforeSavePatch
         };
 
     private static void Prefix(DataContext context) =>
-        DelayMonthRuntime.FlushAllPendingJobs(context);
+        DeferredAdvanceMonthRuntime.FlushAllPendingJobs(context);
 }
 
 [HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.OnUpdate))]
-internal static class DelayedMonthRuntimeTickPatch
+internal static class DeferredAdvanceMonthRuntimeTickPatch
 {
     private static void Postfix(DataContext context) =>
-        DelayMonthRuntime.TickDelayedJobs(context);
+        DeferredAdvanceMonthRuntime.TickDelayedJobs(context);
 }
 
 [HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.LeaveWorld))]
 internal static class PendingJobsLeaveWorldPatch
 {
     private static void Prefix() =>
-        DelayMonthRuntime.ClearPendingJobs();
+        DeferredAdvanceMonthRuntime.ClearPendingJobs();
 }

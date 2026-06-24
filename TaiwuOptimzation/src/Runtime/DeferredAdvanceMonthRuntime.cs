@@ -8,16 +8,19 @@ using GameData.Domains;
 using GameData.Domains.Character.Ai.ParallelAdvanceMonth;
 using GameData.Domains.Character.Ai.ParallelAdvanceMonth.Definition;
 using GameData.Domains.Map;
-using HarmonyLib;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class DelayMonthRuntime
+internal static class DeferredAdvanceMonthRuntime
 {
     private const int AreaCount = 141;
     private const int StateAreaCount = 135;
     private const int SkeletonAreaCount = 45;
-    private const int MapPickupCleanupLocationsPerJob = 32;
+    private const int CharacterParallelActionCharactersPerJob = 16;
+    private const int HeavyCharacterParallelActionCharactersPerJob = 8;
+    private const int MapBrokenBlockCountdownBlocksPerJob = 24;
+    private const int GraveSkeletonBlocksPerJob = 16;
+    private const int MapPickupsPostAdvanceMonthLocationsPerJob = 16;
     private const int MaxOverrunCooldownFrames = 3;
 
     private enum JobDrainMode
@@ -28,11 +31,10 @@ internal static class DelayMonthRuntime
     }
 
     private static readonly object _syncRoot = new();
-    private static readonly Queue<DelayedMonthJob> _pendingJobs = new(512);
+    private static readonly Queue<DeferredAdvanceMonthJob> _pendingJobs = new(512);
     private static readonly HashSet<int> _liveSynchronousAreaIds = new();
     private static readonly Dictionary<int, int> _pendingJobCountsByArea = new();
 
-    private static Action<DataContext, int, ICharacterParallelAction>? _executeCharacterAreaAction;
     private static int _pendingJobCount;
     private static int _delayedJobCooldownFrames;
     private static bool _advancingMonth;
@@ -44,11 +46,6 @@ internal static class DelayMonthRuntime
 
     public static void Initialize()
     {
-        var method = AccessTools.Method(
-            typeof(ParallelActionManager),
-            "OfflineExecuteCharacterActionsInArea",
-            new[] { typeof(DataContext), typeof(int), typeof(ICharacterParallelAction) });
-        _executeCharacterAreaAction = method.CreateDelegate<Action<DataContext, int, ICharacterParallelAction>>();
         AreaLocalMonthExecutors.Initialize();
     }
 
@@ -65,7 +62,7 @@ internal static class DelayMonthRuntime
         {
             InvalidateLiveSynchronousAreaCache();
             _delayedJobCooldownFrames = 0;
-            _advancingMonth = DelayMonthSettings.Enabled;
+            _advancingMonth = DeferredAdvanceMonthSettings.Enabled;
         }
     }
 
@@ -77,51 +74,87 @@ internal static class DelayMonthRuntime
         }
     }
 
-    public static bool TryDelayCharacterAreaAction(int areaId, ICharacterParallelAction action)
+    public static bool TryDeferCharacterParallelActionInArea(int areaId, ICharacterParallelAction action)
     {
-        if (!DelayMonthSettings.Enabled || _replaying || areaId < 0 || !ShouldDelayAction(action))
+        if (!DeferredAdvanceMonthSettings.Enabled ||
+            _replaying ||
+            areaId < 0 ||
+            !CanDeferCharacterPeriAdvanceMonthParallelAction(action))
         {
             return false;
         }
 
-        return TryEnqueueAreaJob(DelayedMonthJob.CharacterAreaAction(areaId, action));
+        if (!CanDelayAreaJobs(areaId))
+        {
+            return false;
+        }
+
+        List<int> characterIds = AreaLocalMonthExecutors.SnapshotAreaCharacterIdsForParallelAction(areaId);
+        EnqueueCharacterParallelActionChunks(areaId, action, characterIds);
+        return true;
     }
 
     public static bool TryDelayMapBrokenBlockUpdate(int areaId)
     {
-        if (!DelayMonthSettings.Enabled || !DelayMonthSettings.DelayBrokenBlocks || _replaying || areaId < 0)
+        if (!DeferredAdvanceMonthSettings.Enabled ||
+            !DeferredAdvanceMonthSettings.DelayMapBrokenBlockCountdown ||
+            _replaying ||
+            areaId < 0)
         {
             return false;
         }
 
-        return TryEnqueueAreaJob(DelayedMonthJob.MapBrokenBlockUpdate(areaId));
+        if (!CanDelayAreaJobs(areaId))
+        {
+            return false;
+        }
+
+        EnqueueBlockRangeJobs(areaId, MapBrokenBlockCountdownBlocksPerJob, DeferredAdvanceMonthJob.MapBrokenBlockUpdate);
+        return true;
     }
 
     public static bool TryHandleAnimalAreaData(DataContext context)
     {
         return TryHandleAreaLoop(
             context,
-            DelayMonthSettings.DelayAnimalAreaData,
+            DeferredAdvanceMonthSettings.DelayAnimalAreaData,
             0,
             AreaCount,
-            DelayedMonthJob.AnimalAreaData,
+            DeferredAdvanceMonthJob.AnimalAreaData,
             AreaLocalMonthExecutors.ExecuteAnimalAreaData);
     }
 
     public static bool TryHandleSkeletonGeneration(DataContext context)
     {
-        return TryHandleAreaLoop(
-            context,
-            DelayMonthSettings.DelaySkeletonGeneration,
-            0,
-            SkeletonAreaCount,
-            DelayedMonthJob.SkeletonGeneration,
-            AreaLocalMonthExecutors.ExecuteSkeletonGeneration);
+        if (!DeferredAdvanceMonthSettings.Enabled ||
+            !DeferredAdvanceMonthSettings.DelayGraveSkeletonGeneration ||
+            _replaying ||
+            !IsAdvancingMonth())
+        {
+            return false;
+        }
+
+        for (int areaId = 0; areaId < SkeletonAreaCount; areaId++)
+        {
+            if (CanDelayAreaJobs(areaId))
+            {
+                EnqueueBlockRangeJobs(areaId, GraveSkeletonBlocksPerJob, DeferredAdvanceMonthJob.SkeletonGeneration);
+            }
+            else
+            {
+                AreaLocalMonthExecutors.ExecuteSkeletonGeneration(context, areaId);
+            }
+        }
+
+        return true;
     }
 
     public static bool TryDelayMapPickupCleanup(DataContext context)
     {
-        if (!DelayMonthSettings.Enabled || !DelayMonthSettings.DelayMapPickups || _replaying || !IsAdvancingMonth())
+        if (!DeferredAdvanceMonthSettings.Enabled ||
+            !DeferredAdvanceMonthSettings.DelayMapPickupsPostAdvanceMonth ||
+            _replaying ||
+            !IsAdvancingMonth())
         {
             return false;
         }
@@ -155,15 +188,15 @@ internal static class DelayMonthRuntime
         short areaId,
         List<Location> locations)
     {
-        if (locations.Count <= MapPickupCleanupLocationsPerJob)
+        if (locations.Count <= MapPickupsPostAdvanceMonthLocationsPerJob)
         {
             EnqueueOrExecuteMapPickupCleanupChunk(context, areaId, locations);
             return;
         }
 
-        for (int offset = 0; offset < locations.Count; offset += MapPickupCleanupLocationsPerJob)
+        for (int offset = 0; offset < locations.Count; offset += MapPickupsPostAdvanceMonthLocationsPerJob)
         {
-            int count = Math.Min(MapPickupCleanupLocationsPerJob, locations.Count - offset);
+            int count = Math.Min(MapPickupsPostAdvanceMonthLocationsPerJob, locations.Count - offset);
             List<Location> chunk = new(count);
             for (int i = 0; i < count; i++)
             {
@@ -179,7 +212,7 @@ internal static class DelayMonthRuntime
         short areaId,
         IReadOnlyList<Location> locations)
     {
-        if (!TryEnqueueAreaJob(DelayedMonthJob.MapPickupCleanup(areaId, locations)))
+        if (!TryEnqueueAreaJob(DeferredAdvanceMonthJob.MapPickupCleanup(areaId, locations)))
         {
             AreaLocalMonthExecutors.ExecuteMapPickupCleanup(context, areaId, locations);
         }
@@ -187,7 +220,7 @@ internal static class DelayMonthRuntime
 
     public static void TickDelayedJobs(DataContext context)
     {
-        if (!DelayMonthSettings.Enabled || _advancingMonth || _replaying)
+        if (!DeferredAdvanceMonthSettings.Enabled || _advancingMonth || _replaying)
         {
             return;
         }
@@ -222,15 +255,15 @@ internal static class DelayMonthRuntime
             return;
         }
 
-        long budgetTicks = Math.Max(1, DelayMonthSettings.FrameBudgetMs * Stopwatch.Frequency / 1000);
+        long budgetTicks = Math.Max(1, DeferredAdvanceMonthSettings.FrameBudgetMs * Stopwatch.Frequency / 1000);
         long tickStart = Stopwatch.GetTimestamp();
         long deadline = tickStart + budgetTicks;
         int executedJobs = 0;
-        DelayedMonthJob? currentBatch = null;
+        DeferredAdvanceMonthJob? currentBatch = null;
         bool hasPendingApply = false;
         do
         {
-            DelayedMonthJob? job = DequeueJob();
+            DeferredAdvanceMonthJob? job = DequeueJob();
             if (job == null)
             {
                 ApplyPending(context, ref hasPendingApply);
@@ -249,11 +282,10 @@ internal static class DelayMonthRuntime
                 hasPendingApply = true;
             }
         }
-        while (executedJobs < DelayMonthSettings.MaxJobsPerFrame && Stopwatch.GetTimestamp() < deadline);
+        while (executedJobs < DeferredAdvanceMonthSettings.MaxJobsPerFrame && Stopwatch.GetTimestamp() < deadline);
 
         ApplyPending(context, ref hasPendingApply);
         ApplyOverrunCooldown(tickStart, budgetTicks);
-
     }
 
     public static void FlushAreaJobs(DataContext context, short areaId)
@@ -316,19 +348,9 @@ internal static class DelayMonthRuntime
     private static bool IsWorldDataAvailable() =>
         GameData.ArchiveData.Common.IsInWorld() && DomainManager.Global.GetLoadedAllArchiveData();
 
-    public static void ExecuteOriginalCharacterAreaAction(DataContext context, int areaId, ICharacterParallelAction action)
-    {
-        if (_executeCharacterAreaAction == null)
-        {
-            throw new InvalidOperationException("Character area action method was not resolved.");
-        }
-
-        _executeCharacterAreaAction(context, areaId, action);
-    }
-
     private static void AddNeighborStates(short areaId, Action<short> addArea, List<short> areaBuffer)
     {
-        if (!DelayMonthSettings.SyncNeighborStates || areaId < 0 || areaId >= StateAreaCount)
+        if (!DeferredAdvanceMonthSettings.SyncNeighborStates || areaId < 0 || areaId >= StateAreaCount)
         {
             return;
         }
@@ -361,7 +383,8 @@ internal static class DelayMonthRuntime
         ExecuteJobsBatched(context, DrainJobs(JobDrainMode.AreaSet, areaSet: areaIds));
     }
 
-    private static bool ShouldDelayAction(ICharacterParallelAction action)
+    // Only defer pre-action AdvanceMonth stages; CharacterActionPlanning stays on the original barrier.
+    private static bool CanDeferCharacterPeriAdvanceMonthParallelAction(ICharacterParallelAction action)
     {
         Type type = action.GetType();
         if (type == typeof(CharacterSelfImprovement) ||
@@ -373,19 +396,13 @@ internal static class DelayMonthRuntime
             return true;
         }
 
-        if (DelayMonthSettings.DelayEquipment &&
+        if (DeferredAdvanceMonthSettings.DelayCharacterPreparationCombatSkillAndItemEquipping &&
             type == typeof(CharacterPreparation_CombatSkillAndItemEquipping))
         {
             return true;
         }
 
-        if (DelayMonthSettings.DelayMissionGoal &&
-            (type == typeof(UpdateCharacterMission) || type == typeof(UpdateCharacterGoal)))
-        {
-            return true;
-        }
-
-        if (DelayMonthSettings.DelayLoseOverloadItems &&
+        if (DeferredAdvanceMonthSettings.DelayCharacterPreparationLoseOverloadItems &&
             type == typeof(CharacterPreparation_LoseOverloadItems))
         {
             return true;
@@ -394,7 +411,49 @@ internal static class DelayMonthRuntime
         return false;
     }
 
-    private static DelayedMonthJob? DequeueJob()
+    private static int GetCharacterParallelActionChunkSize(ICharacterParallelAction action)
+    {
+        Type type = action.GetType();
+        return type == typeof(CharacterSelfImprovement_Reading) ||
+            type == typeof(CharacterPreparation_CombatSkillAndItemEquipping) ||
+            type == typeof(CharacterPreparation_LoseOverloadItems)
+                ? HeavyCharacterParallelActionCharactersPerJob
+                : CharacterParallelActionCharactersPerJob;
+    }
+
+    private static void EnqueueCharacterParallelActionChunks(
+        int areaId,
+        ICharacterParallelAction action,
+        IReadOnlyList<int> characterIds)
+    {
+        int chunkSize = GetCharacterParallelActionChunkSize(action);
+        for (int offset = 0; offset < characterIds.Count; offset += chunkSize)
+        {
+            int count = Math.Min(chunkSize, characterIds.Count - offset);
+            int[] chunk = new int[count];
+            for (int i = 0; i < count; i++)
+            {
+                chunk[i] = characterIds[offset + i];
+            }
+
+            EnqueueAreaJob(DeferredAdvanceMonthJob.CharacterParallelActionChunk(areaId, action, chunk));
+        }
+    }
+
+    private static void EnqueueBlockRangeJobs(
+        int areaId,
+        int blocksPerJob,
+        Func<int, int, int, DeferredAdvanceMonthJob> createJob)
+    {
+        int blockCount = DomainManager.Map.GetAreaBlocks((short)areaId).Length;
+        for (int blockStart = 0; blockStart < blockCount; blockStart += blocksPerJob)
+        {
+            int count = Math.Min(blocksPerJob, blockCount - blockStart);
+            EnqueueAreaJob(createJob(areaId, blockStart, count));
+        }
+    }
+
+    private static DeferredAdvanceMonthJob? DequeueJob()
     {
         lock (_syncRoot)
         {
@@ -403,18 +462,18 @@ internal static class DelayMonthRuntime
                 return null;
             }
 
-            DelayedMonthJob job = _pendingJobs.Dequeue();
+            DeferredAdvanceMonthJob job = _pendingJobs.Dequeue();
             DecrementJobCount(job.AreaId);
             return job;
         }
     }
 
-    private static List<DelayedMonthJob> DrainJobs(
+    private static List<DeferredAdvanceMonthJob> DrainJobs(
         JobDrainMode mode,
         int areaId = -1,
         HashSet<int>? areaSet = null)
     {
-        List<DelayedMonthJob> selected = new();
+        List<DeferredAdvanceMonthJob> selected = new();
         lock (_syncRoot)
         {
             if (_pendingJobs.Count == 0 ||
@@ -427,7 +486,7 @@ internal static class DelayMonthRuntime
             int count = _pendingJobs.Count;
             for (int i = 0; i < count; i++)
             {
-                DelayedMonthJob job = _pendingJobs.Dequeue();
+                DeferredAdvanceMonthJob job = _pendingJobs.Dequeue();
                 if (ShouldDrainJob(job, mode, areaId, areaSet))
                 {
                     selected.Add(job);
@@ -444,7 +503,7 @@ internal static class DelayMonthRuntime
     }
 
     private static bool ShouldDrainJob(
-        DelayedMonthJob job,
+        DeferredAdvanceMonthJob job,
         JobDrainMode mode,
         int areaId,
         HashSet<int>? areaSet)
@@ -476,7 +535,7 @@ internal static class DelayMonthRuntime
         return false;
     }
 
-    private static void EnqueueJob(DelayedMonthJob job)
+    private static void EnqueueJob(DeferredAdvanceMonthJob job)
     {
         _pendingJobs.Enqueue(job);
         Interlocked.Increment(ref _pendingJobCount);
@@ -502,11 +561,11 @@ internal static class DelayMonthRuntime
         }
     }
 
-    private static void ExecuteJobsBatched(DataContext context, List<DelayedMonthJob> jobs)
+    private static void ExecuteJobsBatched(DataContext context, List<DeferredAdvanceMonthJob> jobs)
     {
-        DelayedMonthJob? currentBatch = null;
+        DeferredAdvanceMonthJob? currentBatch = null;
         bool hasPendingApply = false;
-        foreach (DelayedMonthJob job in jobs)
+        foreach (DeferredAdvanceMonthJob job in jobs)
         {
             if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
             {
@@ -525,11 +584,11 @@ internal static class DelayMonthRuntime
 
     private static void ExecuteAllPendingJobs(DataContext context)
     {
-        DelayedMonthJob? currentBatch = null;
+        DeferredAdvanceMonthJob? currentBatch = null;
         bool hasPendingApply = false;
         while (true)
         {
-            DelayedMonthJob? job = DequeueJob();
+            DeferredAdvanceMonthJob? job = DequeueJob();
             if (job == null)
             {
                 ApplyPending(context, ref hasPendingApply);
@@ -549,7 +608,7 @@ internal static class DelayMonthRuntime
         }
     }
 
-    private static bool ExecuteJobWithoutApply(DataContext context, DelayedMonthJob job)
+    private static bool ExecuteJobWithoutApply(DataContext context, DeferredAdvanceMonthJob job)
     {
         _replaying = true;
         try
@@ -598,10 +657,10 @@ internal static class DelayMonthRuntime
         bool settingEnabled,
         int startAreaId,
         int endAreaId,
-        Func<int, DelayedMonthJob> createJob,
+        Func<int, DeferredAdvanceMonthJob> createJob,
         Action<DataContext, int> executeSync)
     {
-        if (!DelayMonthSettings.Enabled || !settingEnabled || _replaying || !IsAdvancingMonth())
+        if (!DeferredAdvanceMonthSettings.Enabled || !settingEnabled || _replaying || !IsAdvancingMonth())
         {
             return false;
         }
@@ -617,7 +676,7 @@ internal static class DelayMonthRuntime
         return true;
     }
 
-    private static bool TryEnqueueAreaJob(DelayedMonthJob job)
+    private static bool TryEnqueueAreaJob(DeferredAdvanceMonthJob job)
     {
         lock (_syncRoot)
         {
@@ -628,6 +687,22 @@ internal static class DelayMonthRuntime
 
             EnqueueJob(job);
             return true;
+        }
+    }
+
+    private static bool CanDelayAreaJobs(int areaId)
+    {
+        lock (_syncRoot)
+        {
+            return _advancingMonth && !IsSyncArea(areaId);
+        }
+    }
+
+    private static void EnqueueAreaJob(DeferredAdvanceMonthJob job)
+    {
+        lock (_syncRoot)
+        {
+            EnqueueJob(job);
         }
     }
 
@@ -648,7 +723,7 @@ internal static class DelayMonthRuntime
             return null;
         }
 
-        bool includeNeighborStates = DelayMonthSettings.SyncNeighborStates;
+        bool includeNeighborStates = DeferredAdvanceMonthSettings.SyncNeighborStates;
         if (_liveSynchronousAreaSource == location.AreaId &&
             _liveSynchronousAreaIncludesNeighbors == includeNeighborStates)
         {

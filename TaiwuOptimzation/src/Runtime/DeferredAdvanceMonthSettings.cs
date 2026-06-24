@@ -3,19 +3,18 @@ using GameData.Domains;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class DelayMonthSettings
+internal static class DeferredAdvanceMonthSettings
 {
     public static bool Enabled = true;
     public static bool SyncNeighborStates = true;
     public static int FrameBudgetMs = 1;
     public static int MaxJobsPerFrame = 1;
-    public static bool DelayEquipment = true;
-    public static bool DelayMissionGoal = true;
-    public static bool DelayLoseOverloadItems = true;
-    public static bool DelayBrokenBlocks = true;
+    public static bool DelayCharacterPreparationCombatSkillAndItemEquipping = true;
+    public static bool DelayCharacterPreparationLoseOverloadItems = true;
+    public static bool DelayMapBrokenBlockCountdown = true;
     public static bool DelayAnimalAreaData = true;
-    public static bool DelaySkeletonGeneration = true;
-    public static bool DelayMapPickups = true;
+    public static bool DelayGraveSkeletonGeneration = true;
+    public static bool DelayMapPickupsPostAdvanceMonth = true;
 
     public static void Load(string modId)
     {
@@ -23,13 +22,12 @@ internal static class DelayMonthSettings
         TryGet(modId, "SyncNeighborStates", ref SyncNeighborStates);
         TryGet(modId, "FrameBudgetMs", ref FrameBudgetMs);
         TryGet(modId, "MaxJobsPerFrame", ref MaxJobsPerFrame);
-        TryGet(modId, "DelayEquipment", ref DelayEquipment);
-        TryGet(modId, "DelayMissionGoal", ref DelayMissionGoal);
-        TryGet(modId, "DelayLoseOverloadItems", ref DelayLoseOverloadItems);
-        TryGet(modId, "DelayBrokenBlocks", ref DelayBrokenBlocks);
+        TryGet(modId, "DelayCharacterPreparationCombatSkillAndItemEquipping", ref DelayCharacterPreparationCombatSkillAndItemEquipping);
+        TryGet(modId, "DelayCharacterPreparationLoseOverloadItems", ref DelayCharacterPreparationLoseOverloadItems);
+        TryGet(modId, "DelayMapBrokenBlockCountdown", ref DelayMapBrokenBlockCountdown);
         TryGet(modId, "DelayAnimalAreaData", ref DelayAnimalAreaData);
-        TryGet(modId, "DelaySkeletonGeneration", ref DelaySkeletonGeneration);
-        TryGet(modId, "DelayMapPickups", ref DelayMapPickups);
+        TryGet(modId, "DelayGraveSkeletonGeneration", ref DelayGraveSkeletonGeneration);
+        TryGet(modId, "DelayMapPickupsPostAdvanceMonth", ref DelayMapPickupsPostAdvanceMonth);
 
         FrameBudgetMs = Math.Clamp(FrameBudgetMs, 1, 4);
         MaxJobsPerFrame = Math.Clamp(MaxJobsPerFrame, 1, 16);

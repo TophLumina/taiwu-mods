@@ -55,49 +55,42 @@ return {
 		},
 		[5] = {
 			SettingType = "Toggle",
-			Key = "DelayEquipment",
+			Key = "DelayCharacterPreparationCombatSkillAndItemEquipping",
 			DisplayName = "优化：延迟NPC装备/修理",
 			Description = "延迟非实时区域 NPC 的装备选择、修理和部分物品准备逻辑。",
 			DefaultValue = true,
 		},
 		[6] = {
 			SettingType = "Toggle",
-			Key = "DelayMissionGoal",
-			DisplayName = "优化：延迟NPC行为规划",
-			Description = "延迟非实时区域 NPC 的任务刷新和目标规划刷新。",
-			DefaultValue = true,
-		},
-		[7] = {
-			SettingType = "Toggle",
-			Key = "DelayLoseOverloadItems",
+			Key = "DelayCharacterPreparationLoseOverloadItems",
 			DisplayName = "优化：延迟NPC超重丢弃",
 			Description = "延迟非实时区域 NPC 的超重物品丢弃逻辑。",
 			DefaultValue = true,
 		},
-		[8] = {
+		[7] = {
 			SettingType = "Toggle",
-			Key = "DelayBrokenBlocks",
+			Key = "DelayMapBrokenBlockCountdown",
 			DisplayName = "优化：延迟破损地块倒计时",
 			Description = "延迟非实时区域破损地块的每月倒计时更新。",
 			DefaultValue = true,
 		},
-		[9] = {
+		[8] = {
 			SettingType = "Toggle",
 			Key = "DelayAnimalAreaData",
 			DisplayName = "优化：延迟野生动物生态",
 			Description = "延迟非实时区域的野生动物生成和自然死亡结算。",
 			DefaultValue = true,
 		},
-		[10] = {
+		[9] = {
 			SettingType = "Toggle",
-			Key = "DelaySkeletonGeneration",
+			Key = "DelayGraveSkeletonGeneration",
 			DisplayName = "优化：延迟坟墓僵尸生成",
 			Description = "延迟非实时区域的坟墓僵尸生成。",
 			DefaultValue = true,
 		},
-		[11] = {
+		[10] = {
 			SettingType = "Toggle",
-			Key = "DelayMapPickups",
+			Key = "DelayMapPickupsPostAdvanceMonth",
 			DisplayName = "优化：延迟拾取物状态刷新",
 			Description = "延迟非实时区域的地图拾取可见性刷新和已忽略状态清理。",
 			DefaultValue = true,
