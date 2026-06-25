@@ -73,7 +73,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
         if (protection.IsTaiwuOrGroupMember(charId) ||
             protection.IsDirectlyRelatedToTaiwuGroup(charId) ||
             IsSpecialOrEventCharacter(character) ||
-            IsInLiveSyncArea(character, protection) ||
+            IsInProtectedArea(character, protection) ||
             HasActionTargetInTaiwuGroup(character, protection))
         {
             return true;
@@ -103,13 +103,13 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
             DomainManager.LegendaryBook.IsCharacterActingCrazy(character);
     }
 
-    /// <summary>判断角色是否位于实时同步区域。</summary>
+    /// <summary>判断角色是否位于通用保护区域。</summary>
     /// <param name="character">待判断角色。</param>
     /// <param name="protection">当前 protection cache 快照。</param>
-    private static bool IsInLiveSyncArea(Character character, PeriAdvanceMonthProtectionCache.Snapshot protection)
+    private static bool IsInProtectedArea(Character character, PeriAdvanceMonthProtectionCache.Snapshot protection)
     {
         Location location = character.GetLocation();
-        return !location.IsValid() || protection.IsLiveSyncArea(location.AreaId);
+        return !location.IsValid() || protection.IsProtectedArea(location.AreaId);
     }
 
     /// <summary>判断角色当前目标是否直接指向太吾或队友。</summary>

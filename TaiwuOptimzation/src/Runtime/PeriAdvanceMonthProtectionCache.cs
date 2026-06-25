@@ -25,7 +25,7 @@ internal static class PeriAdvanceMonthProtectionCache
         RelationsInit,
         RelationAnchorBase,
         RelationAnchorReverse,
-        Areas,
+        ProtectedAreas,
         Publish,
     }
 
@@ -45,7 +45,7 @@ internal static class PeriAdvanceMonthProtectionCache
     private static BuildSession? _buildSession;
     private static TaiwuGroupComponent? _taiwuGroup;
     private static TaiwuRelationComponent? _taiwuRelations;
-    private static LiveSyncAreaComponent? _liveSyncAreas;
+    private static ProtectedAreaComponent? _protectedAreas;
     private static Snapshot? _snapshot;
     private static Snapshot? _frozenSnapshot;
 
@@ -82,7 +82,7 @@ internal static class PeriAdvanceMonthProtectionCache
             _areaVersion++;
             _taiwuGroup = null;
             _taiwuRelations = null;
-            _liveSyncAreas = null;
+            _protectedAreas = null;
             _snapshot = null;
             _frozenSnapshot = null;
             _buildSession = null;
@@ -124,7 +124,7 @@ internal static class PeriAdvanceMonthProtectionCache
         }
     }
 
-    public static void MarkLiveSyncAreasDirty()
+    public static void MarkProtectedAreasDirty()
     {
         lock (_syncRoot)
         {
@@ -188,6 +188,15 @@ internal static class PeriAdvanceMonthProtectionCache
 
     private static Snapshot GetOrBuildSnapshot(bool freeze)
     {
+        if (!freeze)
+        {
+            Snapshot? frozenSnapshot = Volatile.Read(ref _frozenSnapshot);
+            if (frozenSnapshot != null)
+            {
+                return frozenSnapshot;
+            }
+        }
+
         long synchronousBuildStartedAt = 0;
         int synchronousBuildSteps = 0;
         while (true)
@@ -242,15 +251,15 @@ internal static class PeriAdvanceMonthProtectionCache
 
     private static BuildSession CreateBuildSession()
     {
-        bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesFromOfflineActionPointReduction;
-        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetLiveSyncAreaCacheKey(
+        bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
+        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetProtectedAreaCacheKey(
             includeNeighborAreas,
             out short areaSource);
 
         TaiwuGroupComponent? group = IsGroupCurrent(_taiwuGroup) ? _taiwuGroup : null;
         TaiwuRelationComponent? relations = IsRelationSetCurrent(_taiwuRelations) ? _taiwuRelations : null;
-        LiveSyncAreaComponent? areas = IsAreaSetCurrent(_liveSyncAreas, hasAreaSource, areaSource, includeNeighborAreas)
-            ? _liveSyncAreas
+        ProtectedAreaComponent? areas = IsAreaSetCurrent(_protectedAreas, hasAreaSource, areaSource, includeNeighborAreas)
+            ? _protectedAreas
             : null;
 
         return new BuildSession(
@@ -282,7 +291,7 @@ internal static class PeriAdvanceMonthProtectionCache
             case BuildStage.RelationsInit:
                 if (session.Relations != null)
                 {
-                    session.Stage = BuildStage.Areas;
+                    session.Stage = BuildStage.ProtectedAreas;
                     break;
                 }
 
@@ -299,7 +308,7 @@ internal static class PeriAdvanceMonthProtectionCache
                         session.RelationVersion,
                         session.GroupVersion,
                         session.RelationCharIds ?? new HashSet<int>());
-                    session.Stage = BuildStage.Areas;
+                    session.Stage = BuildStage.ProtectedAreas;
                     break;
                 }
 
@@ -310,7 +319,7 @@ internal static class PeriAdvanceMonthProtectionCache
             case BuildStage.RelationAnchorReverse:
                 if (session.RelationAnchors == null || session.RelationCharIds == null)
                 {
-                    session.Stage = BuildStage.Areas;
+                    session.Stage = BuildStage.ProtectedAreas;
                     break;
                 }
 
@@ -327,13 +336,13 @@ internal static class PeriAdvanceMonthProtectionCache
                 session.RelationAnchorIndex++;
                 session.Stage = BuildStage.RelationAnchorBase;
                 break;
-            case BuildStage.Areas:
-                session.Areas ??= new LiveSyncAreaComponent(
+            case BuildStage.ProtectedAreas:
+                session.ProtectedAreas ??= new ProtectedAreaComponent(
                     session.AreaVersion,
-                    session.HasLiveSyncAreaSource,
-                    session.LiveSyncAreaSource,
-                    session.LiveSyncAreaIncludesNeighbors,
-                    BuildLiveSyncAreaIds(session.LiveSyncAreaIncludesNeighbors));
+                    session.HasProtectedAreaSource,
+                    session.ProtectedAreaSource,
+                    session.ProtectedAreaIncludesNeighbors,
+                    BuildProtectedAreaIds(session.ProtectedAreaIncludesNeighbors));
                 session.Stage = BuildStage.Publish;
                 break;
             case BuildStage.Publish:
@@ -354,8 +363,11 @@ internal static class PeriAdvanceMonthProtectionCache
 
         _taiwuGroup = session.Group;
         _taiwuRelations = session.Relations;
-        _liveSyncAreas = session.Areas;
-        _snapshot = new Snapshot(session.Group!, session.Relations!, session.Areas!);
+        _protectedAreas = session.ProtectedAreas;
+        _snapshot = new Snapshot(
+            session.Group!,
+            session.Relations!,
+            session.ProtectedAreas!);
         _buildSession = null;
         _state = CacheState.Ready;
         ClearNeedsFrameBuild();
@@ -370,14 +382,14 @@ internal static class PeriAdvanceMonthProtectionCache
             return false;
         }
 
-        bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesFromOfflineActionPointReduction;
-        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetLiveSyncAreaCacheKey(
+        bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
+        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetProtectedAreaCacheKey(
             includeNeighborAreas,
             out short areaSource);
 
-        return session.HasLiveSyncAreaSource == hasAreaSource &&
-            session.LiveSyncAreaSource == areaSource &&
-            session.LiveSyncAreaIncludesNeighbors == includeNeighborAreas;
+        return session.HasProtectedAreaSource == hasAreaSource &&
+            session.ProtectedAreaSource == areaSource &&
+            session.ProtectedAreaIncludesNeighbors == includeNeighborAreas;
     }
 
     private static void InvalidateCurrentSnapshot()
@@ -406,12 +418,12 @@ internal static class PeriAdvanceMonthProtectionCache
             return false;
         }
 
-        bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesFromOfflineActionPointReduction;
-        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetLiveSyncAreaCacheKey(
+        bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
+        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetProtectedAreaCacheKey(
             includeNeighborAreas,
             out short areaSource);
 
-        return snapshot.MatchesLiveSyncAreaKey(hasAreaSource, areaSource, includeNeighborAreas);
+        return snapshot.MatchesProtectedAreaKey(hasAreaSource, areaSource, includeNeighborAreas);
     }
 
     private static bool IsGroupCurrent(TaiwuGroupComponent? group) =>
@@ -423,7 +435,7 @@ internal static class PeriAdvanceMonthProtectionCache
         relations.GroupVersion == _groupVersion;
 
     private static bool IsAreaSetCurrent(
-        LiveSyncAreaComponent? areas,
+        ProtectedAreaComponent? areas,
         bool hasAreaSource,
         short areaSource,
         bool includeNeighborAreas) =>
@@ -469,10 +481,10 @@ internal static class PeriAdvanceMonthProtectionCache
         return charIds;
     }
 
-    private static HashSet<int> BuildLiveSyncAreaIds(bool includeNeighborAreas)
+    private static HashSet<int> BuildProtectedAreaIds(bool includeNeighborAreas)
     {
         HashSet<int> areaIds = new();
-        AdvanceMonthOptimizationRuntime.CopyLiveSyncAreaIdsTo(areaIds, includeNeighborAreas);
+        AdvanceMonthOptimizationRuntime.CopyProtectedAreaIdsTo(areaIds, includeNeighborAreas);
         return areaIds;
     }
 
@@ -622,14 +634,14 @@ internal static class PeriAdvanceMonthProtectionCache
         public readonly int GroupVersion;
         public readonly int RelationVersion;
         public readonly int AreaVersion;
-        public readonly bool HasLiveSyncAreaSource;
-        public readonly short LiveSyncAreaSource;
-        public readonly bool LiveSyncAreaIncludesNeighbors;
+        public readonly bool HasProtectedAreaSource;
+        public readonly short ProtectedAreaSource;
+        public readonly bool ProtectedAreaIncludesNeighbors;
 
         public BuildStage Stage;
         public TaiwuGroupComponent? Group;
         public TaiwuRelationComponent? Relations;
-        public LiveSyncAreaComponent? Areas;
+        public ProtectedAreaComponent? ProtectedAreas;
         public HashSet<int>? RelationCharIds;
         public int[]? RelationAnchors;
         public int RelationAnchorIndex;
@@ -639,22 +651,22 @@ internal static class PeriAdvanceMonthProtectionCache
             int groupVersion,
             int relationVersion,
             int areaVersion,
-            bool hasLiveSyncAreaSource,
-            short liveSyncAreaSource,
-            bool liveSyncAreaIncludesNeighbors,
+            bool hasProtectedAreaSource,
+            short protectedAreaSource,
+            bool protectedAreaIncludesNeighbors,
             TaiwuGroupComponent? group,
             TaiwuRelationComponent? relations,
-            LiveSyncAreaComponent? areas)
+            ProtectedAreaComponent? protectedAreas)
         {
             GroupVersion = groupVersion;
             RelationVersion = relationVersion;
             AreaVersion = areaVersion;
-            HasLiveSyncAreaSource = hasLiveSyncAreaSource;
-            LiveSyncAreaSource = liveSyncAreaSource;
-            LiveSyncAreaIncludesNeighbors = liveSyncAreaIncludesNeighbors;
+            HasProtectedAreaSource = hasProtectedAreaSource;
+            ProtectedAreaSource = protectedAreaSource;
+            ProtectedAreaIncludesNeighbors = protectedAreaIncludesNeighbors;
             Group = group;
             Relations = relations;
-            Areas = areas;
+            ProtectedAreas = protectedAreas;
             Stage = BuildStage.Group;
         }
     }
@@ -685,7 +697,7 @@ internal static class PeriAdvanceMonthProtectionCache
         }
     }
 
-    internal sealed class LiveSyncAreaComponent
+    internal sealed class ProtectedAreaComponent
     {
         public readonly int Version;
         private readonly bool _hasSourceArea;
@@ -693,7 +705,7 @@ internal static class PeriAdvanceMonthProtectionCache
         private readonly bool _includesNeighborAreas;
         public readonly HashSet<int> AreaIds;
 
-        public LiveSyncAreaComponent(
+        public ProtectedAreaComponent(
             int version,
             bool hasSourceArea,
             short sourceAreaId,
@@ -717,29 +729,29 @@ internal static class PeriAdvanceMonthProtectionCache
     {
         private readonly TaiwuGroupComponent _taiwuGroup;
         private readonly TaiwuRelationComponent _taiwuRelations;
-        private readonly LiveSyncAreaComponent _liveSyncAreas;
+        private readonly ProtectedAreaComponent _protectedAreas;
 
         internal Snapshot(
             TaiwuGroupComponent taiwuGroup,
             TaiwuRelationComponent taiwuRelations,
-            LiveSyncAreaComponent liveSyncAreas)
+            ProtectedAreaComponent protectedAreas)
         {
             _taiwuGroup = taiwuGroup;
             _taiwuRelations = taiwuRelations;
-            _liveSyncAreas = liveSyncAreas;
+            _protectedAreas = protectedAreas;
         }
 
         public bool IsCurrent(int groupVersion, int relationVersion, int areaVersion) =>
             _taiwuGroup.Version == groupVersion &&
             _taiwuRelations.Version == relationVersion &&
             _taiwuRelations.GroupVersion == groupVersion &&
-            _liveSyncAreas.Version == areaVersion;
+            _protectedAreas.Version == areaVersion;
 
-        public bool MatchesLiveSyncAreaKey(
+        public bool MatchesProtectedAreaKey(
             bool hasSourceArea,
             short sourceAreaId,
             bool includesNeighborAreas) =>
-            _liveSyncAreas.MatchesKey(hasSourceArea, sourceAreaId, includesNeighborAreas);
+            _protectedAreas.MatchesKey(hasSourceArea, sourceAreaId, includesNeighborAreas);
 
         public bool IsTaiwuOrGroupMember(int charId) =>
             _taiwuGroup.CharIds.Contains(charId);
@@ -747,8 +759,8 @@ internal static class PeriAdvanceMonthProtectionCache
         public bool IsDirectlyRelatedToTaiwuGroup(int charId) =>
             _taiwuRelations.CharIds.Contains(charId);
 
-        public bool IsLiveSyncArea(short areaId) =>
-            areaId >= 0 && _liveSyncAreas.AreaIds.Contains(areaId);
+        public bool IsProtectedArea(short areaId) =>
+            areaId >= 0 && _protectedAreas.AreaIds.Contains(areaId);
 
         public bool HasActionTargetInTaiwuGroup(CharacterActionData? actionData)
         {

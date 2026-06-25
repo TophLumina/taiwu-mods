@@ -14,9 +14,9 @@ internal static class StartTravelPendingAdvanceMonthAreaFlushPatch
         AdvanceMonthOptimizationRuntime.FlushPendingAdvanceMonthJobsInArea(context, toAreaId);
     }
 
-    // 旅行会改变实时区域来源，标记 protection cache 的 area 部分失效。
+    // 旅行会改变保护区域来源，标记 protection cache 的 area 部分失效。
     private static void Postfix() =>
-        PeriAdvanceMonthProtectionCache.MarkLiveSyncAreasDirty();
+        PeriAdvanceMonthProtectionCache.MarkProtectedAreasDirty();
 }
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.DirectTravel), new[] { typeof(DataContext), typeof(short) })]
@@ -28,9 +28,9 @@ internal static class DirectTravelPendingAdvanceMonthAreaFlushPatch
         AdvanceMonthOptimizationRuntime.FlushPendingAdvanceMonthJobsInArea(context, toAreaId);
     }
 
-    // 当前位置变化后重建实时 area 快照。
+    // 当前位置变化后重建保护区域快照。
     private static void Postfix() =>
-        PeriAdvanceMonthProtectionCache.MarkLiveSyncAreasDirty();
+        PeriAdvanceMonthProtectionCache.MarkProtectedAreasDirty();
 }
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.QuickTravel))]
@@ -44,16 +44,16 @@ internal static class QuickTravelPendingAdvanceMonthAreaFlushPatch
 
     // 快速旅行完成后刷新当前/相邻州域保护范围。
     private static void Postfix() =>
-        PeriAdvanceMonthProtectionCache.MarkLiveSyncAreasDirty();
+        PeriAdvanceMonthProtectionCache.MarkProtectedAreasDirty();
 }
 
 [HarmonyPatch(typeof(MapDomain), nameof(MapDomain.StopTravel))]
-internal static class StopTravelPendingAdvanceMonthLiveSyncAreaFlushPatch
+internal static class StopTravelPendingAdvanceMonthProtectedAreaFlushPatch
 {
     // 中途停止旅行时，立即同步新的当前州域和可选相邻州域。
     private static void Postfix(DataContext context)
     {
-        AdvanceMonthOptimizationRuntime.FlushPendingAdvanceMonthJobsInLiveSyncAreas(context);
-        PeriAdvanceMonthProtectionCache.MarkLiveSyncAreasDirty();
+        AdvanceMonthOptimizationRuntime.FlushPendingAdvanceMonthJobsInProtectedAreas(context);
+        PeriAdvanceMonthProtectionCache.MarkProtectedAreasDirty();
     }
 }

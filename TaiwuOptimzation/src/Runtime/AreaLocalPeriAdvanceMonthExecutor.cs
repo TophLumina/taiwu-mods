@@ -87,7 +87,8 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         for (int i = 0; i < characterIds.Count; i++)
         {
             int characterId = characterIds[i];
-            if (DomainManager.Character.TryGetElement_Objects(characterId, out var character))
+            if (DomainManager.Character.TryGetElement_Objects(characterId, out var character) &&
+                DomainManager.Character.IsCharacterAlive(characterId))
             {
                 action.Execute(context, character);
             }
@@ -105,7 +106,7 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         int blockStart,
         int blockCount)
     {
-        if (areaId < 0 || blockCount <= 0)
+        if (areaId < 0 || areaId >= AreaCount || blockCount <= 0)
         {
             return;
         }
@@ -204,7 +205,11 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
 
             foreach (int graveId in block.GraveSet)
             {
-                var grave = DomainManager.Character.GetElement_Graves(graveId);
+                if (!DomainManager.Character.TryGetElement_Graves(graveId, out var grave))
+                {
+                    continue;
+                }
+
                 if (grave.GetSkeletonCharId() < 0 &&
                     context.Random.CheckPercentProb(50))
                 {

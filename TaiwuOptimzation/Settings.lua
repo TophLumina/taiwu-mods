@@ -1,6 +1,6 @@
 return {
 	AdvanceMonthOptimizationEnabled = true,
-	SyncNeighborStatesForAdvanceMonth = true,
+	ProtectNeighborStatesForAdvanceMonthOptimization = true,
 	AdvanceMonthOptimizationFrameBudgetMs = 2,
 	MaxPeriAdvanceMonthDeferredJobsPerFrame = 4,
 	DeferPeriAdvanceMonthActivePreparationCombatSkillAndItemEquipping = true,
@@ -11,7 +11,6 @@ return {
 	DeferMapPickupsPostAdvanceMonth = true,
 	ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false,
 	RemoteNpcOfflineCurrentGoalActionPointGainReduction = 10,
-	ProtectNeighborStatesFromOfflineActionPointReduction = true,
 	ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true,
 	ProtectSectMembersFromOfflineActionPointReduction = false,
 	AdvanceMonthOptimizationDiagnosticsEnabled = false,

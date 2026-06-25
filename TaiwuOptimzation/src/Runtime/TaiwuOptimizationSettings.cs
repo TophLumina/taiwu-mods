@@ -5,11 +5,13 @@ namespace TaiwuOptimization.Runtime;
 
 internal static class TaiwuOptimizationSettings
 {
-    // 帧时间延迟结算。
+    // 通用配置。
     public static bool AdvanceMonthOptimizationEnabled = true;
-    public static bool SyncNeighborStatesForAdvanceMonth = true;
+    public static bool ProtectNeighborStatesForAdvanceMonthOptimization = true;
     public static int AdvanceMonthOptimizationFrameBudgetMs = 1;
     public static int MaxPeriAdvanceMonthDeferredJobsPerFrame = 1;
+
+    // 帧时间延迟结算。
     public static bool DeferPeriAdvanceMonthActivePreparationCombatSkillAndItemEquipping = true;
     public static bool DeferPeriAdvanceMonthLoseOverloadItems = true;
     public static bool DeferParallelUpdateBrokenBlockOnMonthChange = true;
@@ -20,7 +22,6 @@ internal static class TaiwuOptimizationSettings
     // 实验性：远区 NPC 月行动点削减。
     public static bool ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false;
     public static int RemoteNpcOfflineCurrentGoalActionPointGainReduction = 10;
-    public static bool ProtectNeighborStatesFromOfflineActionPointReduction = true;
     public static bool ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true;
     public static bool ProtectSectMembersFromOfflineActionPointReduction = false;
 
@@ -33,7 +34,7 @@ internal static class TaiwuOptimizationSettings
     public static void Load(string modId)
     {
         TryGet(modId, "AdvanceMonthOptimizationEnabled", ref AdvanceMonthOptimizationEnabled);
-        TryGet(modId, "SyncNeighborStatesForAdvanceMonth", ref SyncNeighborStatesForAdvanceMonth);
+        TryGet(modId, "ProtectNeighborStatesForAdvanceMonthOptimization", ref ProtectNeighborStatesForAdvanceMonthOptimization);
         TryGet(modId, "AdvanceMonthOptimizationFrameBudgetMs", ref AdvanceMonthOptimizationFrameBudgetMs);
         TryGet(modId, "MaxPeriAdvanceMonthDeferredJobsPerFrame", ref MaxPeriAdvanceMonthDeferredJobsPerFrame);
         TryGet(modId, "DeferPeriAdvanceMonthActivePreparationCombatSkillAndItemEquipping", ref DeferPeriAdvanceMonthActivePreparationCombatSkillAndItemEquipping);
@@ -44,7 +45,6 @@ internal static class TaiwuOptimizationSettings
         TryGet(modId, "DeferMapPickupsPostAdvanceMonth", ref DeferMapPickupsPostAdvanceMonth);
         TryGet(modId, "ReduceRemoteNpcOfflineCurrentGoalActionPointGain", ref ReduceRemoteNpcOfflineCurrentGoalActionPointGain);
         TryGet(modId, "RemoteNpcOfflineCurrentGoalActionPointGainReduction", ref RemoteNpcOfflineCurrentGoalActionPointGainReduction);
-        TryGet(modId, "ProtectNeighborStatesFromOfflineActionPointReduction", ref ProtectNeighborStatesFromOfflineActionPointReduction);
         TryGet(modId, "ProtectTaiwuVillageResidentsFromOfflineActionPointReduction", ref ProtectTaiwuVillageResidentsFromOfflineActionPointReduction);
         TryGet(modId, "ProtectSectMembersFromOfflineActionPointReduction", ref ProtectSectMembersFromOfflineActionPointReduction);
         TryGet(modId, "AdvanceMonthOptimizationDiagnosticsEnabled", ref AdvanceMonthOptimizationDiagnosticsEnabled);

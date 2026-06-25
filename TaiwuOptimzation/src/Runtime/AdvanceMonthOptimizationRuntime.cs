@@ -34,7 +34,7 @@ internal static class AdvanceMonthOptimizationRuntime
 
     private static readonly object _syncRoot = new();
     private static readonly Queue<PeriAdvanceMonthDeferredJob> _pendingAdvanceMonthJobs = new(512);
-    private static readonly HashSet<int> _liveSyncAreaIds = new();
+    private static readonly HashSet<int> _protectedAreaIds = new();
     private static readonly Dictionary<int, int> _pendingAdvanceMonthJobCountsByArea = new();
 
     // 在入队/出队时维护，避免诊断日志扫描 pending 队列。
@@ -44,8 +44,8 @@ internal static class AdvanceMonthOptimizationRuntime
     private static int _overrunCooldownFrames;
     private static bool _isInAdvanceMonth;
     private static bool _isReplayingDeferredJob;
-    private static short _liveSyncAreaSource = -1;
-    private static bool _liveSyncAreaIncludesNeighbors;
+    private static short _protectedAreaSource = -1;
+    private static bool _protectedAreaIncludesNeighbors;
 
     private static bool HasPendingAdvanceMonthJobs => Volatile.Read(ref _pendingAdvanceMonthJobCount) > 0;
 
@@ -67,7 +67,7 @@ internal static class AdvanceMonthOptimizationRuntime
 
         lock (_syncRoot)
         {
-            InvalidateLiveSyncAreaCache();
+            InvalidateProtectedAreaCache();
             _overrunCooldownFrames = 0;
             _isInAdvanceMonth = TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled;
         }
@@ -369,12 +369,12 @@ internal static class AdvanceMonthOptimizationRuntime
 
         if (collectStats)
         {
-            PeriAdvanceMonthDeferredJobStats flushedLiveSyncJobStats = FlushLiveSyncAreas(context, collectStats: true);
-            executedJobStats.Add(in flushedLiveSyncJobStats);
+            PeriAdvanceMonthDeferredJobStats flushedProtectedAreaJobStats = FlushProtectedAreas(context, collectStats: true);
+            executedJobStats.Add(in flushedProtectedAreaJobStats);
         }
         else
         {
-            FlushLiveSyncAreas(context);
+            FlushProtectedAreas(context);
         }
 
         if (!HasPendingAdvanceMonthJobs)
@@ -432,7 +432,7 @@ internal static class AdvanceMonthOptimizationRuntime
         ExecuteAdvanceMonthJobsBatched(context, DrainPendingAdvanceMonthJobs(PendingAdvanceMonthJobDrainMode.Area, areaId));
     }
 
-    public static void FlushPendingAdvanceMonthJobsInLiveSyncAreas(DataContext context)
+    public static void FlushPendingAdvanceMonthJobsInProtectedAreas(DataContext context)
     {
         if (_isReplayingDeferredJob || !HasPendingAdvanceMonthJobs)
         {
@@ -446,7 +446,7 @@ internal static class AdvanceMonthOptimizationRuntime
         }
 
         // 在旅行 UI 恢复前，确保太吾可见区域已回到原版月结后的状态。
-        FlushLiveSyncAreas(context);
+        FlushProtectedAreas(context);
     }
 
     public static void FlushAllPendingAdvanceMonthJobs(DataContext context)
@@ -470,7 +470,7 @@ internal static class AdvanceMonthOptimizationRuntime
         lock (_syncRoot)
         {
             _pendingAdvanceMonthJobs.Clear();
-            InvalidateLiveSyncAreaCache();
+            InvalidateProtectedAreaCache();
             _pendingAdvanceMonthJobCountsByArea.Clear();
             Array.Clear(_pendingAdvanceMonthJobCountsByKind);
             Volatile.Write(ref _pendingAdvanceMonthJobCount, 0);
@@ -483,25 +483,12 @@ internal static class AdvanceMonthOptimizationRuntime
         AdvanceMonthOptimizationDiagnostics.Reset();
     }
 
-    public static bool IsAreaLiveSync(short areaId)
-    {
-        if (areaId < 0)
-        {
-            return false;
-        }
-
-        lock (_syncRoot)
-        {
-            return IsLiveSyncArea(areaId);
-        }
-    }
-
-    public static void CopyLiveSyncAreaIdsTo(HashSet<int> destination)
+    public static void CopyProtectedAreaIdsTo(HashSet<int> destination)
     {
         lock (_syncRoot)
         {
             destination.Clear();
-            HashSet<int>? areaIds = GetLiveSyncAreaIds();
+            HashSet<int>? areaIds = GetProtectedAreaIds();
             if (areaIds == null)
             {
                 return;
@@ -514,19 +501,19 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
-    public static void CopyLiveSyncAreaIdsTo(HashSet<int> destination, bool includeNeighborStates)
+    public static void CopyProtectedAreaIdsTo(HashSet<int> destination, bool includeNeighborStates)
     {
         lock (_syncRoot)
         {
             destination.Clear();
-            AddLiveSyncAreas(areaId => destination.Add(areaId), includeNeighborStates);
+            AddProtectedAreas(areaId => destination.Add(areaId), includeNeighborStates);
         }
     }
 
-    public static bool TryGetLiveSyncAreaCacheKey(out short areaId, out bool includeNeighborStates)
+    public static bool TryGetProtectedAreaCacheKey(out short areaId, out bool includeNeighborStates)
     {
         Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
-        includeNeighborStates = TaiwuOptimizationSettings.SyncNeighborStatesForAdvanceMonth;
+        includeNeighborStates = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
         if (!location.IsValid())
         {
             areaId = -1;
@@ -537,7 +524,7 @@ internal static class AdvanceMonthOptimizationRuntime
         return true;
     }
 
-    public static bool TryGetLiveSyncAreaCacheKey(bool includeNeighborStates, out short areaId)
+    public static bool TryGetProtectedAreaCacheKey(bool includeNeighborStates, out short areaId)
     {
         Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
         if (!location.IsValid())
@@ -555,7 +542,7 @@ internal static class AdvanceMonthOptimizationRuntime
 
     private static void AddNeighborStates(short areaId, Action<short> addArea, List<short> areaBuffer)
     {
-        AddNeighborStates(areaId, TaiwuOptimizationSettings.SyncNeighborStatesForAdvanceMonth, addArea, areaBuffer);
+        AddNeighborStates(areaId, TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization, addArea, areaBuffer);
     }
 
     private static void AddNeighborStates(
@@ -578,17 +565,17 @@ internal static class AdvanceMonthOptimizationRuntime
     }
 
     private static bool IsSyncArea(int areaId) =>
-        IsLiveSyncArea(areaId);
+        IsProtectedArea(areaId);
 
-    private static bool IsLiveSyncArea(int areaId)
+    private static bool IsProtectedArea(int areaId)
     {
-        HashSet<int>? areaIds = GetLiveSyncAreaIds();
+        HashSet<int>? areaIds = GetProtectedAreaIds();
         return areaIds != null && areaIds.Contains(areaId);
     }
 
-    private static PeriAdvanceMonthDeferredJobStats FlushLiveSyncAreas(DataContext context, bool collectStats = false)
+    private static PeriAdvanceMonthDeferredJobStats FlushProtectedAreas(DataContext context, bool collectStats = false)
     {
-        HashSet<int>? areaIds = GetLiveSyncAreaIds();
+        HashSet<int>? areaIds = GetProtectedAreaIds();
         if (areaIds == null || areaIds.Count == 0)
         {
             return default;
@@ -694,7 +681,7 @@ internal static class AdvanceMonthOptimizationRuntime
         }
 
         Location location = character.GetLocation();
-        if (!location.IsValid() || protection.IsLiveSyncArea(location.AreaId))
+        if (!location.IsValid() || protection.IsProtectedArea(location.AreaId))
         {
             return true;
         }
@@ -1044,42 +1031,42 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
-    private static HashSet<int>? GetLiveSyncAreaIds()
+    private static HashSet<int>? GetProtectedAreaIds()
     {
         Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
         if (!location.IsValid())
         {
-            InvalidateLiveSyncAreaCache();
+            InvalidateProtectedAreaCache();
             return null;
         }
 
-        bool includeNeighborStates = TaiwuOptimizationSettings.SyncNeighborStatesForAdvanceMonth;
-        if (_liveSyncAreaSource == location.AreaId &&
-            _liveSyncAreaIncludesNeighbors == includeNeighborStates)
+        bool includeNeighborStates = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
+        if (_protectedAreaSource == location.AreaId &&
+            _protectedAreaIncludesNeighbors == includeNeighborStates)
         {
-            return _liveSyncAreaIds;
+            return _protectedAreaIds;
         }
 
-        _liveSyncAreaIds.Clear();
-        AddLiveSyncAreas(areaId => _liveSyncAreaIds.Add(areaId));
-        _liveSyncAreaSource = location.AreaId;
-        _liveSyncAreaIncludesNeighbors = includeNeighborStates;
-        return _liveSyncAreaIds;
+        _protectedAreaIds.Clear();
+        AddProtectedAreas(areaId => _protectedAreaIds.Add(areaId));
+        _protectedAreaSource = location.AreaId;
+        _protectedAreaIncludesNeighbors = includeNeighborStates;
+        return _protectedAreaIds;
     }
 
-    private static void InvalidateLiveSyncAreaCache()
+    private static void InvalidateProtectedAreaCache()
     {
-        _liveSyncAreaIds.Clear();
-        _liveSyncAreaSource = -1;
-        _liveSyncAreaIncludesNeighbors = false;
+        _protectedAreaIds.Clear();
+        _protectedAreaSource = -1;
+        _protectedAreaIncludesNeighbors = false;
     }
 
-    private static void AddLiveSyncAreas(Action<short> addArea)
+    private static void AddProtectedAreas(Action<short> addArea)
     {
-        AddLiveSyncAreas(addArea, TaiwuOptimizationSettings.SyncNeighborStatesForAdvanceMonth);
+        AddProtectedAreas(addArea, TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization);
     }
 
-    private static void AddLiveSyncAreas(Action<short> addArea, bool includeNeighborStates)
+    private static void AddProtectedAreas(Action<short> addArea, bool includeNeighborStates)
     {
         Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
         if (!location.IsValid())
