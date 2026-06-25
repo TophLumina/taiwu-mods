@@ -22,6 +22,7 @@ internal static class AdvanceMonthOptimizationRuntime
     private const int MapBrokenBlockCountdownBlocksPerJob = 24;
     private const int GraveSkeletonBlocksPerJob = 16;
     private const int MapPickupsPostAdvanceMonthLocationsPerJob = 16;
+    private const int PeriAdvanceMonthDeferredJobKindCount = 5;
     private const int MaxOverrunCooldownFrames = 3;
 
     private enum PendingAdvanceMonthJobDrainMode
@@ -36,6 +37,9 @@ internal static class AdvanceMonthOptimizationRuntime
     private static readonly HashSet<int> _liveSyncAreaIds = new();
     private static readonly Dictionary<int, int> _pendingAdvanceMonthJobCountsByArea = new();
 
+    // 在入队/出队时维护，避免诊断日志扫描 pending 队列。
+    private static readonly int[] _pendingAdvanceMonthJobCountsByKind = new int[PeriAdvanceMonthDeferredJobKindCount];
+
     private static int _pendingAdvanceMonthJobCount;
     private static int _overrunCooldownFrames;
     private static bool _isInAdvanceMonth;
@@ -49,6 +53,7 @@ internal static class AdvanceMonthOptimizationRuntime
     {
         AreaLocalPeriAdvanceMonthExecutor.Initialize();
         PeriAdvanceMonthProtectionCache.Reset();
+        AdvanceMonthOptimizationDiagnostics.Reset();
     }
 
     public static void Dispose()
@@ -174,7 +179,7 @@ internal static class AdvanceMonthOptimizationRuntime
             return false;
         }
 
-        // Snapshot pickup locations at month-end so delayed replay does not touch new pickups.
+        // 在月结时截取拾取物位置，避免延迟回放误处理后续新增的拾取物。
         Dictionary<short, List<Location>> locationsByArea = new();
         foreach (Location location in DomainManager.Extra.PickupDict.Keys)
         {
@@ -233,6 +238,8 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
+    /// <summary>执行受帧预算限制的 cache 构建和延迟月结任务。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
     public static void TickAdvanceMonthOptimization(DataContext context)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled || _isInAdvanceMonth || _isReplayingDeferredJob)
@@ -268,9 +275,84 @@ internal static class AdvanceMonthOptimizationRuntime
         }
 
         AdvanceMonthOptimizationFrameBudget frameBudget = AdvanceMonthOptimizationFrameBudget.Start();
+        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
+        {
+            TickAdvanceMonthOptimizationCore(context, needsProtectionCacheBuild, ref frameBudget);
+            return;
+        }
+
+        TickAdvanceMonthOptimizationWithDiagnostics(context, needsProtectionCacheBuild, ref frameBudget);
+    }
+
+    /// <summary>执行一次不收集诊断信息的优化 tick。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="needsProtectionCacheBuild">是否优先推进 protection-cache 构建。</param>
+    /// <param name="frameBudget">可变的单帧预算状态。</param>
+    private static void TickAdvanceMonthOptimizationCore(
+        DataContext context,
+        bool needsProtectionCacheBuild,
+        ref AdvanceMonthOptimizationFrameBudget frameBudget)
+    {
+        PeriAdvanceMonthDeferredJobStats ignoredStats = default;
+        TickAdvanceMonthOptimizationCore(
+            context,
+            needsProtectionCacheBuild,
+            ref frameBudget,
+            collectStats: false,
+            ref ignoredStats,
+            out _);
+    }
+
+    /// <summary>
+    /// 执行一次优化 tick，并确保所有退出路径都会记录诊断摘要。
+    /// </summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="needsProtectionCacheBuild">protection cache 是否需要构建。</param>
+    /// <param name="frameBudget">可变的单帧预算状态。</param>
+    private static void TickAdvanceMonthOptimizationWithDiagnostics(
+        DataContext context,
+        bool needsProtectionCacheBuild,
+        ref AdvanceMonthOptimizationFrameBudget frameBudget)
+    {
+        int cacheBuildSteps = 0;
+        PeriAdvanceMonthDeferredJobStats executedJobStats = default;
+        try
+        {
+            TickAdvanceMonthOptimizationCore(
+                context,
+                needsProtectionCacheBuild,
+                ref frameBudget,
+                collectStats: true,
+                ref executedJobStats,
+                out cacheBuildSteps);
+        }
+        finally
+        {
+            RecordAdvanceMonthOptimizationDiagnostics(in frameBudget, cacheBuildSteps, in executedJobStats);
+        }
+    }
+
+    /// <summary>
+    /// 共享的 tick 主体。诊断是可选的，因此普通热路径可以避开 try/finally。
+    /// </summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="needsProtectionCacheBuild">是否优先推进 protection-cache 构建。</param>
+    /// <param name="frameBudget">可变的单帧预算状态。</param>
+    /// <param name="collectStats">为 true 时按类型统计本 tick 执行的 job。</param>
+    /// <param name="executedJobStats">本 tick 执行的 job 计数。</param>
+    /// <param name="cacheBuildSteps">本 tick 执行的 cache build step 数。</param>
+    private static void TickAdvanceMonthOptimizationCore(
+        DataContext context,
+        bool needsProtectionCacheBuild,
+        ref AdvanceMonthOptimizationFrameBudget frameBudget,
+        bool collectStats,
+        ref PeriAdvanceMonthDeferredJobStats executedJobStats,
+        out int cacheBuildSteps)
+    {
+        cacheBuildSteps = 0;
         if (needsProtectionCacheBuild)
         {
-            PeriAdvanceMonthProtectionCache.TickBuildPeriAdvanceMonthProtection(in frameBudget);
+            cacheBuildSteps = PeriAdvanceMonthProtectionCache.TickBuildPeriAdvanceMonthProtection(in frameBudget);
         }
 
         if (!HasPendingAdvanceMonthJobs)
@@ -285,7 +367,16 @@ internal static class AdvanceMonthOptimizationRuntime
             return;
         }
 
-        FlushLiveSyncAreas(context);
+        if (collectStats)
+        {
+            PeriAdvanceMonthDeferredJobStats flushedLiveSyncJobStats = FlushLiveSyncAreas(context, collectStats: true);
+            executedJobStats.Add(in flushedLiveSyncJobStats);
+        }
+        else
+        {
+            FlushLiveSyncAreas(context);
+        }
+
         if (!HasPendingAdvanceMonthJobs)
         {
             _overrunCooldownFrames = 0;
@@ -320,6 +411,11 @@ internal static class AdvanceMonthOptimizationRuntime
                 currentBatch = job;
                 hasPendingApply = true;
             }
+
+            if (collectStats)
+            {
+                executedJobStats.Count(job.Kind);
+            }
         }
 
         ApplyPendingParallelModifications(context, ref hasPendingApply);
@@ -349,7 +445,7 @@ internal static class AdvanceMonthOptimizationRuntime
             return;
         }
 
-        // Keep Taiwu's visible region in original month-end state before travel UI resumes.
+        // 在旅行 UI 恢复前，确保太吾可见区域已回到原版月结后的状态。
         FlushLiveSyncAreas(context);
     }
 
@@ -376,6 +472,7 @@ internal static class AdvanceMonthOptimizationRuntime
             _pendingAdvanceMonthJobs.Clear();
             InvalidateLiveSyncAreaCache();
             _pendingAdvanceMonthJobCountsByArea.Clear();
+            Array.Clear(_pendingAdvanceMonthJobCountsByKind);
             Volatile.Write(ref _pendingAdvanceMonthJobCount, 0);
             _overrunCooldownFrames = 0;
             _isInAdvanceMonth = false;
@@ -383,6 +480,7 @@ internal static class AdvanceMonthOptimizationRuntime
         }
 
         PeriAdvanceMonthProtectionCache.Reset();
+        AdvanceMonthOptimizationDiagnostics.Reset();
     }
 
     public static bool IsAreaLiveSync(short areaId)
@@ -488,18 +586,21 @@ internal static class AdvanceMonthOptimizationRuntime
         return areaIds != null && areaIds.Contains(areaId);
     }
 
-    private static void FlushLiveSyncAreas(DataContext context)
+    private static PeriAdvanceMonthDeferredJobStats FlushLiveSyncAreas(DataContext context, bool collectStats = false)
     {
         HashSet<int>? areaIds = GetLiveSyncAreaIds();
         if (areaIds == null || areaIds.Count == 0)
         {
-            return;
+            return default;
         }
 
-        ExecuteAdvanceMonthJobsBatched(context, DrainPendingAdvanceMonthJobs(PendingAdvanceMonthJobDrainMode.AreaSet, areaSet: areaIds));
+        return ExecuteAdvanceMonthJobsBatched(
+            context,
+            DrainPendingAdvanceMonthJobs(PendingAdvanceMonthJobDrainMode.AreaSet, areaSet: areaIds),
+            collectStats);
     }
 
-    // Only defer pre-action AdvanceMonth stages; CharacterActionPlanning stays on the original barrier.
+    // 只延迟 AdvanceMonth 中行动前阶段；CharacterActionPlanning 仍保留在原版屏障内。
     private static bool CanDeferCharacterPeriAdvanceMonthParallelAction(ICharacterParallelAction action)
     {
         Type type = action.GetType();
@@ -636,7 +737,7 @@ internal static class AdvanceMonthOptimizationRuntime
             }
 
             PeriAdvanceMonthDeferredJob job = _pendingAdvanceMonthJobs.Dequeue();
-            DecrementPendingAdvanceMonthJobCount(job.AreaId);
+            DecrementPendingAdvanceMonthJobCount(job);
             return job;
         }
     }
@@ -663,7 +764,7 @@ internal static class AdvanceMonthOptimizationRuntime
                 if (ShouldDrainPendingAdvanceMonthJob(job, mode, areaId, areaSet))
                 {
                     selected.Add(job);
-                    DecrementPendingAdvanceMonthJobCount(job.AreaId);
+                    DecrementPendingAdvanceMonthJobCount(job);
                 }
                 else
                 {
@@ -713,15 +814,17 @@ internal static class AdvanceMonthOptimizationRuntime
         Interlocked.Increment(ref _pendingAdvanceMonthJobCount);
         _pendingAdvanceMonthJobCountsByArea.TryGetValue(job.AreaId, out int count);
         _pendingAdvanceMonthJobCountsByArea[job.AreaId] = count + 1;
+        _pendingAdvanceMonthJobCountsByKind[(int)job.Kind]++;
     }
 
-    private static void DecrementPendingAdvanceMonthJobCount(int areaId)
+    private static void DecrementPendingAdvanceMonthJobCount(PeriAdvanceMonthDeferredJob job)
     {
         if (Interlocked.Decrement(ref _pendingAdvanceMonthJobCount) < 0)
         {
             Volatile.Write(ref _pendingAdvanceMonthJobCount, 0);
         }
 
+        int areaId = job.AreaId;
         int count = _pendingAdvanceMonthJobCountsByArea[areaId] - 1;
         if (count <= 0)
         {
@@ -731,15 +834,25 @@ internal static class AdvanceMonthOptimizationRuntime
         {
             _pendingAdvanceMonthJobCountsByArea[areaId] = count;
         }
+
+        int kindIndex = (int)job.Kind;
+        if (_pendingAdvanceMonthJobCountsByKind[kindIndex] > 0)
+        {
+            _pendingAdvanceMonthJobCountsByKind[kindIndex]--;
+        }
     }
 
-    private static void ExecuteAdvanceMonthJobsBatched(DataContext context, List<PeriAdvanceMonthDeferredJob>? jobs)
+    private static PeriAdvanceMonthDeferredJobStats ExecuteAdvanceMonthJobsBatched(
+        DataContext context,
+        List<PeriAdvanceMonthDeferredJob>? jobs,
+        bool collectStats = false)
     {
         if (jobs == null)
         {
-            return;
+            return default;
         }
 
+        PeriAdvanceMonthDeferredJobStats stats = default;
         PeriAdvanceMonthDeferredJob? currentBatch = null;
         bool hasPendingApply = false;
         foreach (PeriAdvanceMonthDeferredJob job in jobs)
@@ -754,9 +867,15 @@ internal static class AdvanceMonthOptimizationRuntime
                 currentBatch = job;
                 hasPendingApply = true;
             }
+
+            if (collectStats)
+            {
+                stats.Count(job.Kind);
+            }
         }
 
         ApplyPendingParallelModifications(context, ref hasPendingApply);
+        return stats;
     }
 
     private static void ExecuteAllPendingAdvanceMonthJobs(DataContext context)
@@ -819,6 +938,48 @@ internal static class AdvanceMonthOptimizationRuntime
         }
 
         _overrunCooldownFrames = frameBudget.GetOverrunCooldownFrames(MaxOverrunCooldownFrames);
+    }
+
+    /// <summary>
+    /// 将本 tick 加入诊断聚合，并在日志间隔到期时写出摘要。
+    /// </summary>
+    /// <param name="frameBudget">本 tick 使用的帧预算。</param>
+    /// <param name="cacheBuildSteps">本 tick 执行的 protection-cache build step 数。</param>
+    /// <param name="executedJobStats">本 tick 执行的 deferred job 类型统计。</param>
+    private static void RecordAdvanceMonthOptimizationDiagnostics(
+        in AdvanceMonthOptimizationFrameBudget frameBudget,
+        int cacheBuildSteps,
+        in PeriAdvanceMonthDeferredJobStats executedJobStats)
+    {
+        if (!AdvanceMonthOptimizationDiagnostics.RecordFrame(in frameBudget, cacheBuildSteps, in executedJobStats))
+        {
+            return;
+        }
+
+        int pendingJobCount;
+        int overrunCooldownFrames;
+        PeriAdvanceMonthDeferredJobStats pendingJobStats;
+        lock (_syncRoot)
+        {
+            pendingJobCount = _pendingAdvanceMonthJobCount;
+            overrunCooldownFrames = _overrunCooldownFrames;
+            pendingJobStats = GetPendingAdvanceMonthJobStats();
+        }
+
+        AdvanceMonthOptimizationDiagnostics.FlushSummary(pendingJobCount, in pendingJobStats, overrunCooldownFrames);
+    }
+
+    /// <summary>从维护好的计数器中复制当前 pending 队列构成。</summary>
+    private static PeriAdvanceMonthDeferredJobStats GetPendingAdvanceMonthJobStats()
+    {
+        return new PeriAdvanceMonthDeferredJobStats
+        {
+            CharacterParallelActionChunks = _pendingAdvanceMonthJobCountsByKind[(int)PeriAdvanceMonthDeferredJobKind.CharacterParallelActionChunk],
+            MapBrokenBlockUpdates = _pendingAdvanceMonthJobCountsByKind[(int)PeriAdvanceMonthDeferredJobKind.MapBrokenBlockUpdate],
+            AnimalAreaDataUpdates = _pendingAdvanceMonthJobCountsByKind[(int)PeriAdvanceMonthDeferredJobKind.AnimalAreaData],
+            SkeletonGenerations = _pendingAdvanceMonthJobCountsByKind[(int)PeriAdvanceMonthDeferredJobKind.SkeletonGeneration],
+            MapPickupCleanups = _pendingAdvanceMonthJobCountsByKind[(int)PeriAdvanceMonthDeferredJobKind.MapPickupCleanup],
+        };
     }
 
     private static bool TryDeferAreaLoop(

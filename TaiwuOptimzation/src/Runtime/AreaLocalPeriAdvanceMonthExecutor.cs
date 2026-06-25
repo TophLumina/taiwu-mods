@@ -16,6 +16,7 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
     private const int AreaCount = 141;
     private const int SkeletonAreaCount = 45;
 
+    // 原版动物生成 helper 是非公开方法，初始化时用 Harmony 解析为委托。
     private delegate bool TryGetRandomBlockForGeneratingAnimalDelegate(
         ExtraDomain domain,
         DataContext context,
@@ -28,6 +29,7 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
     private static TryGetRandomBlockForGeneratingAnimalDelegate? _tryGetRandomBlockForGeneratingAnimal;
     private static GetRandomAnimalForGeneratingAnimalDelegate? _getRandomAnimalForGeneratingAnimal;
 
+    /// <summary>解析延迟回放时需要调用的原版非公开方法。</summary>
     public static void Initialize()
     {
         _tryGetRandomBlockForGeneratingAnimal = AccessTools
@@ -42,6 +44,8 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
             .CreateDelegate<GetRandomAnimalForGeneratingAnimalDelegate>();
     }
 
+    /// <summary>截取某个 area 当前地块上的角色列表，避免延迟回放时重新扫描变化后的角色集合。</summary>
+    /// <param name="areaId">目标 area。</param>
     public static List<int> SnapshotAreaCharacterIdsForParallelAction(int areaId)
     {
         List<int> characterIds = new();
@@ -66,6 +70,10 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         return characterIds;
     }
 
+    /// <summary>回放一组 NPC 月结行动前并行任务。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="action">原版 ICharacterParallelAction 实例。</param>
+    /// <param name="characterIds">本次回放处理的角色 id 快照。</param>
     public static void ExecuteCharacterParallelActionChunk(
         DataContext context,
         ICharacterParallelAction action,
@@ -86,6 +94,11 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         }
     }
 
+    /// <summary>回放破损地块倒计时更新，并将需要写回的 block 记录到 ParallelModificationsRecorder。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="areaId">目标 area。</param>
+    /// <param name="blockStart">本 job 的 block 起点。</param>
+    /// <param name="blockCount">本 job 的 block 数量。</param>
     public static void ExecuteMapBrokenBlockUpdate(
         DataContext context,
         int areaId,
@@ -110,6 +123,9 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         }
     }
 
+    /// <summary>回放原版野生动物生态更新，一个 job 对应一个 area。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="areaId">目标 area。</param>
     public static void ExecuteAnimalAreaData(DataContext context, int areaId)
     {
         if (areaId < 0 || areaId >= AreaCount)
@@ -158,9 +174,17 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         }
     }
 
+    /// <summary>同步执行整个 area 的坟墓骷髅生成。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="areaId">目标 area。</param>
     public static void ExecuteSkeletonGeneration(DataContext context, int areaId) =>
         ExecuteSkeletonGeneration(context, areaId, 0, int.MaxValue);
 
+    /// <summary>回放坟墓骷髅生成任务块。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="areaId">目标 area。</param>
+    /// <param name="blockStart">本 job 的 block 起点。</param>
+    /// <param name="blockCount">本 job 的 block 数量。</param>
     public static void ExecuteSkeletonGeneration(DataContext context, int areaId, int blockStart, int blockCount)
     {
         if (areaId < 0 || areaId >= SkeletonAreaCount || blockCount <= 0)
@@ -190,6 +214,10 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         }
     }
 
+    /// <summary>回放地图拾取物可见性刷新和状态清理。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="areaId">目标 area。</param>
+    /// <param name="locations">可选的位置快照；为 null 时扫描整个 area。</param>
     public static void ExecuteMapPickupCleanup(
         DataContext context,
         int areaId,
@@ -225,6 +253,10 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         }
     }
 
+    /// <summary>按月结时截取的位置列表回放拾取物清理。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="areaId">目标 area。</param>
+    /// <param name="locations">月结时截取的拾取物位置。</param>
     private static void ExecuteMapPickupCleanupByLocations(
         DataContext context,
         int areaId,
@@ -245,6 +277,10 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         }
     }
 
+    /// <summary>调用原版非公开方法，取得可生成动物的随机 block。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
+    /// <param name="areaId">目标 area。</param>
+    /// <param name="blockId">输出 block id。</param>
     private static bool TryGetRandomBlockForGeneratingAnimal(DataContext context, short areaId, out short blockId)
     {
         if (_tryGetRandomBlockForGeneratingAnimal == null)
@@ -255,6 +291,8 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         return _tryGetRandomBlockForGeneratingAnimal(DomainManager.Extra, context, areaId, false, out blockId);
     }
 
+    /// <summary>调用原版非公开方法，取得随机动物 template id。</summary>
+    /// <param name="context">当前游戏数据上下文。</param>
     private static short GetRandomAnimalForGeneratingAnimal(DataContext context)
     {
         if (_getRandomAnimalForGeneratingAnimal == null)
@@ -265,6 +303,9 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         return _getRandomAnimalForGeneratingAnimal(DomainManager.Extra, context);
     }
 
+    /// <summary>按当前地块资源刷新拾取物可见性。</summary>
+    /// <param name="location">拾取物位置。</param>
+    /// <param name="pickupCollection">该位置的拾取物集合。</param>
     private static void RefreshPickupVisibleByResource(Location location, MapPickupCollection pickupCollection)
     {
         MapBlockData block = DomainManager.Map.GetBlock(location);

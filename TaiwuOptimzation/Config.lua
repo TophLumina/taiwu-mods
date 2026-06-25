@@ -148,12 +148,32 @@ return {
 			GroupName = "实验性：NPC月行动点调整",
 			DefaultValue = false,
 		},
+		[16] = {
+			SettingType = "Toggle",
+			Key = "AdvanceMonthOptimizationDiagnosticsEnabled",
+			DisplayName = "启用运行时诊断日志",
+			Description = "测试用选项，默认关闭。开启后不会逐帧写日志，而是按下方间隔向游戏后端日志 Logs/GameData_*.log 写入一行聚合摘要。结构为：TaiwuOptimization: runtime budget summary；包含 interval、activeFrames、budget、avgElapsed、maxElapsed、overrunFrames、cooldownFrames、cacheBuildSteps、cacheStepOverruns、pendingExecuted、pendingExecutedByKind、pendingRemaining、pendingRemainingByKind、forcedCacheBuilds、forcedCacheBuildSteps、forcedCacheBuildElapsed。用于观察帧预算消耗和 pending 队列结构，正常游玩建议关闭。",
+			GroupName = "运行时诊断日志",
+			DefaultValue = false,
+		},
+		[17] = {
+			SettingType = "Slider",
+			Key = "AdvanceMonthOptimizationDiagnosticsIntervalSeconds",
+			DisplayName = "诊断日志间隔(秒)",
+			Description = "运行时诊断日志的聚合输出间隔。间隔越短日志越密集，对性能和日志体积影响越大；建议测试时使用 5 秒或更高。",
+			GroupName = "运行时诊断日志",
+			MinValue = 1,
+			MaxValue = 30,
+			StepSize = 1,
+			DefaultValue = 5,
+		},
 	},
 	FileId = 3750430637,
 	Visibility = 0,
 	SettingGroups = {
 		[1] = "帧时间延迟结算",
 		[2] = "实验性：NPC月行动点调整",
+		[3] = "运行时诊断日志",
 	},
 	UpdateLogList = {
 		[1] = {

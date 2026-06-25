@@ -14,4 +14,6 @@ return {
 	ProtectNeighborStatesFromOfflineActionPointReduction = true,
 	ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true,
 	ProtectSectMembersFromOfflineActionPointReduction = false,
+	AdvanceMonthOptimizationDiagnosticsEnabled = false,
+	AdvanceMonthOptimizationDiagnosticsIntervalSeconds = 5,
 }

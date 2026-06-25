@@ -12,12 +12,14 @@ namespace TaiwuOptimization.Patches;
 [HarmonyPatch]
 internal static class OfflineUpdateCurrentGoalActionsActionPointPatch
 {
+    // 目标方法是 private，需要用 AccessTools 精确定位签名。
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
             typeof(Character),
             "OfflineUpdateCurrentGoalActions",
             new[] { typeof(DataContext), typeof(ActionPlanningData.ECurrentGoalType) });
 
+    // Prefix 捕获原行动点，Postfix 才能只削减“本月新增量”。
     private static void Prefix(
         Character __instance,
         ActionPlanningData.ECurrentGoalType goalType,
@@ -26,6 +28,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointPatch
         __state = OfflineUpdateCurrentGoalActionsActionPointReducer.CaptureBeforeOfflineUpdateCurrentGoalActions(__instance, goalType);
     }
 
+    // 原版更新完成后再按保护规则回调行动点。
     private static void Postfix(
         Character __instance,
         ActionPlanningData.ECurrentGoalType goalType,
@@ -38,6 +41,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointPatch
 [HarmonyPatch]
 internal static class PeriAdvanceMonthRelationCacheInvalidationPatch
 {
+    // 只监听会改变人物关系图的原版入口。
     private static IEnumerable<MethodBase> TargetMethods()
     {
         yield return AccessTools.Method(
@@ -54,6 +58,7 @@ internal static class PeriAdvanceMonthRelationCacheInvalidationPatch
             new[] { typeof(DataContext), typeof(int), typeof(int) });
     }
 
+    // 只有关系变更涉及太吾/队友时才让 relation cache 失效。
     private static void Postfix(int charId, int relatedCharId) =>
         PeriAdvanceMonthProtectionCache.MarkRelationDirtyIfTaiwuGroupRelated(charId, relatedCharId);
 }
@@ -61,6 +66,7 @@ internal static class PeriAdvanceMonthRelationCacheInvalidationPatch
 [HarmonyPatch]
 internal static class PeriAdvanceMonthTaiwuGroupCacheInvalidationPatch
 {
+    // 队友加入/离开会改变保护锚点，需要重建 group 和 relation cache。
     private static IEnumerable<MethodBase> TargetMethods()
     {
         yield return AccessTools.Method(
@@ -73,6 +79,7 @@ internal static class PeriAdvanceMonthTaiwuGroupCacheInvalidationPatch
             new[] { typeof(DataContext), typeof(int), typeof(bool), typeof(bool), typeof(bool) });
     }
 
+    // 不尝试增量修补，直接标记相关 cache dirty。
     private static void Postfix() =>
         PeriAdvanceMonthProtectionCache.MarkTaiwuGroupDirty();
 }

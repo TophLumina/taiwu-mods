@@ -9,10 +9,16 @@ namespace TaiwuOptimization.Runtime;
 
 internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
 {
+    // 原版每月对 Primary/Secondary goal 各增加 40 行动点，上限 60。
     private const int OriginalMonthlyActionPointGain = 40;
     private const int OriginalActionPointCap = 60;
+
+    // 太吾村组织 template id，用于可选保护村民。
     private const sbyte TaiwuVillageOrgTemplateId = 16;
 
+    /// <summary>在原版 OfflineUpdateCurrentGoalActions 执行前记录行动点。</summary>
+    /// <param name="character">正在更新目标行动点的角色。</param>
+    /// <param name="goalType">Primary 或 Secondary goal。</param>
     public static OfflineCurrentGoalActionPointState CaptureBeforeOfflineUpdateCurrentGoalActions(Character character, ActionPlanningData.ECurrentGoalType goalType)
     {
         if (!IsAdvanceMonthOptimizationEnabled())
@@ -24,6 +30,10 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
         return new OfflineCurrentGoalActionPointState(previousActionPoint);
     }
 
+    /// <summary>在原版行动点增长后，按配置削减未受保护远区 NPC 的本月增长量。</summary>
+    /// <param name="character">正在更新目标行动点的角色。</param>
+    /// <param name="goalType">Primary 或 Secondary goal。</param>
+    /// <param name="state">Prefix 捕获到的原行动点状态。</param>
     public static void ReduceOfflineCurrentGoalActionPointGainIfNeeded(Character character, ActionPlanningData.ECurrentGoalType goalType, OfflineCurrentGoalActionPointState state)
     {
         if (!state.IsValid || !IsAdvanceMonthOptimizationEnabled() || ShouldKeepOriginalActionPointGain(character))
@@ -48,11 +58,14 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
         SetActionPoint(actionPlanningData, goalType, reducedActionPoint);
     }
 
+    /// <summary>检查实验性行动点削减是否启用。</summary>
     private static bool IsAdvanceMonthOptimizationEnabled() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
         TaiwuOptimizationSettings.ReduceRemoteNpcOfflineCurrentGoalActionPointGain &&
         TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointGainReduction > 0;
 
+    /// <summary>判断角色是否应保留原版行动点增长。</summary>
+    /// <param name="character">待判断角色。</param>
     private static bool ShouldKeepOriginalActionPointGain(Character character)
     {
         PeriAdvanceMonthProtectionCache.Snapshot protection = PeriAdvanceMonthProtectionCache.GetSnapshot();
@@ -78,6 +91,8 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
             OrganizationDomain.IsSect(organizationInfo.OrgTemplateId);
     }
 
+    /// <summary>排除临时角色、特殊组成员、旅行中角色和特殊事件角色。</summary>
+    /// <param name="character">待判断角色。</param>
     private static bool IsSpecialOrEventCharacter(Character character)
     {
         int charId = character.GetId();
@@ -88,12 +103,18 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
             DomainManager.LegendaryBook.IsCharacterActingCrazy(character);
     }
 
+    /// <summary>判断角色是否位于实时同步区域。</summary>
+    /// <param name="character">待判断角色。</param>
+    /// <param name="protection">当前 protection cache 快照。</param>
     private static bool IsInLiveSyncArea(Character character, PeriAdvanceMonthProtectionCache.Snapshot protection)
     {
         Location location = character.GetLocation();
         return !location.IsValid() || protection.IsLiveSyncArea(location.AreaId);
     }
 
+    /// <summary>判断角色当前目标是否直接指向太吾或队友。</summary>
+    /// <param name="character">待判断角色。</param>
+    /// <param name="protection">当前 protection cache 快照。</param>
     private static bool HasActionTargetInTaiwuGroup(Character character, PeriAdvanceMonthProtectionCache.Snapshot protection)
     {
         ActionPlanningData actionPlanningData = character.ActionPlanningData;
@@ -101,6 +122,9 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
             protection.HasActionTargetInTaiwuGroup(actionPlanningData.GetCurrentAction(ActionPlanningData.ECurrentGoalType.Secondary));
     }
 
+    /// <summary>读取指定 goal 的行动点。</summary>
+    /// <param name="actionPlanningData">角色的 ActionPlanningData。</param>
+    /// <param name="goalType">Primary 或 Secondary goal。</param>
     private static int GetActionPoint(ActionPlanningData actionPlanningData, ActionPlanningData.ECurrentGoalType goalType)
     {
         return goalType == ActionPlanningData.ECurrentGoalType.Primary
@@ -108,6 +132,10 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
             : actionPlanningData.SecondaryGoalActionPoint;
     }
 
+    /// <summary>写入指定 goal 的行动点。</summary>
+    /// <param name="actionPlanningData">角色的 ActionPlanningData。</param>
+    /// <param name="goalType">Primary 或 Secondary goal。</param>
+    /// <param name="value">新的行动点。</param>
     private static void SetActionPoint(ActionPlanningData actionPlanningData, ActionPlanningData.ECurrentGoalType goalType, int value)
     {
         if (goalType == ActionPlanningData.ECurrentGoalType.Primary)
@@ -122,7 +150,10 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
 
     internal readonly struct OfflineCurrentGoalActionPointState
     {
+        // Prefix 是否成功捕获到有效状态。
         public readonly bool IsValid;
+
+        // 原版更新前的行动点。
         public readonly int PreviousActionPoint;
 
         public OfflineCurrentGoalActionPointState(int previousActionPoint)

@@ -139,11 +139,16 @@ internal static class PeriAdvanceMonthProtectionCache
             Volatile.Read(ref _needsFrameBuild) != 0;
     }
 
-    public static void TickBuildPeriAdvanceMonthProtection(in AdvanceMonthOptimizationFrameBudget frameBudget)
+    /// <summary>
+    /// 在帧预算内最多推进一个 protection-cache build step。
+    /// </summary>
+    /// <param name="frameBudget">与 deferred job 共享的当前帧预算。</param>
+    /// <returns>本 tick 执行的 cache build step 数。</returns>
+    public static int TickBuildPeriAdvanceMonthProtection(in AdvanceMonthOptimizationFrameBudget frameBudget)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled || !frameBudget.HasTimeRemaining())
         {
-            return;
+            return 0;
         }
 
         lock (_syncRoot)
@@ -156,19 +161,28 @@ internal static class PeriAdvanceMonthProtectionCache
                 }
 
                 ClearNeedsFrameBuild();
-                return;
+                return 0;
             }
 
             EnsureBuildSession();
             if (!frameBudget.HasTimeRemaining())
             {
-                return;
+                return 0;
             }
 
-            BuildStepLogContext logContext = CaptureBuildStepLogContext();
-            long startedAt = Stopwatch.GetTimestamp();
-            ExecuteBuildStep();
-            LogFrameBuildStepOverrun(logContext, Stopwatch.GetTimestamp() - startedAt, frameBudget.BudgetTicks);
+            if (TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
+            {
+                BuildStepLogContext logContext = CaptureBuildStepLogContext();
+                long startedAt = Stopwatch.GetTimestamp();
+                ExecuteBuildStep();
+                LogFrameBuildStepOverrun(logContext, Stopwatch.GetTimestamp() - startedAt, frameBudget.BudgetTicks);
+            }
+            else
+            {
+                ExecuteBuildStep();
+            }
+
+            return 1;
         }
     }
 
@@ -199,7 +213,9 @@ internal static class PeriAdvanceMonthProtectionCache
                 }
 
                 EnsureBuildSession();
-                if (freeze && synchronousBuildStartedAt == 0)
+                if (freeze &&
+                    TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled &&
+                    synchronousBuildStartedAt == 0)
                 {
                     synchronousBuildStartedAt = Stopwatch.GetTimestamp();
                 }
@@ -462,7 +478,7 @@ internal static class PeriAdvanceMonthProtectionCache
 
     private static void AddBaseDirectRelations(int anchorCharId, HashSet<int> relatedCharIds)
     {
-        // Use the game's indexed relation helpers once; hot checks later are HashSet.Contains only.
+        // 先调用一次原版索引关系接口，后续热判断只走 HashSet.Contains。
         DomainManager.Character.GetAllRelatedCharIds(anchorCharId, relatedCharIds, includeGeneral: false);
         DomainManager.Character.GetAllTwoWayRelatedCharIds(anchorCharId, relatedCharIds);
     }
@@ -527,7 +543,13 @@ internal static class PeriAdvanceMonthProtectionCache
         long elapsedTicks,
         long budgetTicks)
     {
-        if (elapsedTicks <= budgetTicks || !Logger.IsWarnEnabled)
+        if (elapsedTicks <= budgetTicks)
+        {
+            return;
+        }
+
+        AdvanceMonthOptimizationDiagnostics.RecordCacheStepOverrun();
+        if (!Logger.IsWarnEnabled)
         {
             return;
         }
@@ -547,12 +569,20 @@ internal static class PeriAdvanceMonthProtectionCache
 
     private static void LogSynchronousBuildIfNeeded(bool freeze, long startedAt, int steps)
     {
-        if (!freeze || steps <= 0 || !Logger.IsInfoEnabled)
+        if (!freeze ||
+            steps <= 0 ||
+            !TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
         {
             return;
         }
 
         long elapsedTicks = Stopwatch.GetTimestamp() - startedAt;
+        AdvanceMonthOptimizationDiagnostics.RecordSynchronousCacheBuild(steps, elapsedTicks);
+        if (!Logger.IsInfoEnabled)
+        {
+            return;
+        }
+
         Logger.Info(
             "TaiwuOptimization: PeriAdvanceMonthProtectionCache was completed synchronously before AdvanceMonth. " +
             "steps={0}, elapsed={1:N3}ms.",
@@ -565,6 +595,7 @@ internal static class PeriAdvanceMonthProtectionCache
 
     private readonly struct BuildStepLogContext
     {
+        // ExecuteBuildStep 改变索引前的 builder 状态快照。
         public readonly BuildStage Stage;
         public readonly int AnchorIndex;
         public readonly int AnchorCharId;

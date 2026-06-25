@@ -5,6 +5,7 @@ namespace TaiwuOptimization.Runtime;
 
 internal static class TaiwuOptimizationSettings
 {
+    // 帧时间延迟结算。
     public static bool AdvanceMonthOptimizationEnabled = true;
     public static bool SyncNeighborStatesForAdvanceMonth = true;
     public static int AdvanceMonthOptimizationFrameBudgetMs = 1;
@@ -15,12 +16,20 @@ internal static class TaiwuOptimizationSettings
     public static bool DeferUpdateAnimalAreaData = true;
     public static bool DeferGenerateSkeletons = true;
     public static bool DeferMapPickupsPostAdvanceMonth = true;
+
+    // 实验性：远区 NPC 月行动点削减。
     public static bool ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false;
     public static int RemoteNpcOfflineCurrentGoalActionPointGainReduction = 10;
     public static bool ProtectNeighborStatesFromOfflineActionPointReduction = true;
     public static bool ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true;
     public static bool ProtectSectMembersFromOfflineActionPointReduction = false;
 
+    // 运行时诊断日志，默认关闭。
+    public static bool AdvanceMonthOptimizationDiagnosticsEnabled = false;
+    public static int AdvanceMonthOptimizationDiagnosticsIntervalSeconds = 5;
+
+    /// <summary>从游戏 mod 设置中读取配置，并限制到有效范围。</summary>
+    /// <param name="modId">当前 mod id。</param>
     public static void Load(string modId)
     {
         TryGet(modId, "AdvanceMonthOptimizationEnabled", ref AdvanceMonthOptimizationEnabled);
@@ -38,12 +47,19 @@ internal static class TaiwuOptimizationSettings
         TryGet(modId, "ProtectNeighborStatesFromOfflineActionPointReduction", ref ProtectNeighborStatesFromOfflineActionPointReduction);
         TryGet(modId, "ProtectTaiwuVillageResidentsFromOfflineActionPointReduction", ref ProtectTaiwuVillageResidentsFromOfflineActionPointReduction);
         TryGet(modId, "ProtectSectMembersFromOfflineActionPointReduction", ref ProtectSectMembersFromOfflineActionPointReduction);
+        TryGet(modId, "AdvanceMonthOptimizationDiagnosticsEnabled", ref AdvanceMonthOptimizationDiagnosticsEnabled);
+        TryGet(modId, "AdvanceMonthOptimizationDiagnosticsIntervalSeconds", ref AdvanceMonthOptimizationDiagnosticsIntervalSeconds);
 
         AdvanceMonthOptimizationFrameBudgetMs = Math.Clamp(AdvanceMonthOptimizationFrameBudgetMs, 1, 4);
         MaxPeriAdvanceMonthDeferredJobsPerFrame = Math.Clamp(MaxPeriAdvanceMonthDeferredJobsPerFrame, 1, 16);
         RemoteNpcOfflineCurrentGoalActionPointGainReduction = Math.Clamp(RemoteNpcOfflineCurrentGoalActionPointGainReduction, 0, 20);
+        AdvanceMonthOptimizationDiagnosticsIntervalSeconds = Math.Clamp(AdvanceMonthOptimizationDiagnosticsIntervalSeconds, 1, 30);
     }
 
+    /// <summary>读取 bool 设置；读取失败时保留默认值。</summary>
+    /// <param name="modId">当前 mod id。</param>
+    /// <param name="key">设置 key。</param>
+    /// <param name="value">设置值引用。</param>
     private static void TryGet(string modId, string key, ref bool value)
     {
         try
@@ -52,10 +68,14 @@ internal static class TaiwuOptimizationSettings
         }
         catch
         {
-            // Keep defaults when the settings file is absent or the backend is not ready yet.
+            // 设置文件不存在或后端未就绪时保留默认值。
         }
     }
 
+    /// <summary>读取 int 设置；读取失败时保留默认值。</summary>
+    /// <param name="modId">当前 mod id。</param>
+    /// <param name="key">设置 key。</param>
+    /// <param name="value">设置值引用。</param>
     private static void TryGet(string modId, string key, ref int value)
     {
         try
@@ -64,7 +84,7 @@ internal static class TaiwuOptimizationSettings
         }
         catch
         {
-            // Keep defaults when the settings file is absent or the backend is not ready yet.
+            // 设置文件不存在或后端未就绪时保留默认值。
         }
     }
 }
