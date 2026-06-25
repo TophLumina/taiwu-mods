@@ -11,7 +11,7 @@ using HarmonyLib;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class AreaLocalMonthExecutors
+internal static class AreaLocalPeriAdvanceMonthExecutor
 {
     private const int AreaCount = 141;
     private const int SkeletonAreaCount = 45;

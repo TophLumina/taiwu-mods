@@ -11,14 +11,14 @@ namespace TaiwuOptimization.Patches;
 internal static class AdvanceMonthLifecyclePatch
 {
     private static void Prefix(DataContext context) =>
-        DeferredAdvanceMonthRuntime.BeginAdvanceMonthDelayScope(context);
+        AdvanceMonthOptimizationRuntime.BeginAdvanceMonthOptimizationScope(context);
 
     private static void Finalizer() =>
-        DeferredAdvanceMonthRuntime.EndAdvanceMonthDelayScope();
+        AdvanceMonthOptimizationRuntime.EndAdvanceMonthOptimizationScope();
 }
 
 [HarmonyPatch]
-internal static class PendingJobsBeforeSavePatch
+internal static class PendingAdvanceMonthJobsBeforeSavePatch
 {
     // SaveWorldAt writes temporary world files, for example before entering guide worlds.
     private static MethodBase[] TargetMethods() =>
@@ -29,19 +29,19 @@ internal static class PendingJobsBeforeSavePatch
         };
 
     private static void Prefix(DataContext context) =>
-        DeferredAdvanceMonthRuntime.FlushAllPendingJobs(context);
+        AdvanceMonthOptimizationRuntime.FlushAllPendingAdvanceMonthJobs(context);
 }
 
 [HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.OnUpdate))]
-internal static class DeferredAdvanceMonthRuntimeTickPatch
+internal static class AdvanceMonthOptimizationRuntimeTickPatch
 {
     private static void Postfix(DataContext context) =>
-        DeferredAdvanceMonthRuntime.TickDelayedJobs(context);
+        AdvanceMonthOptimizationRuntime.TickAdvanceMonthOptimization(context);
 }
 
 [HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.LeaveWorld))]
-internal static class PendingJobsLeaveWorldPatch
+internal static class PendingAdvanceMonthJobsLeaveWorldPatch
 {
     private static void Prefix() =>
-        DeferredAdvanceMonthRuntime.ClearPendingJobs();
+        AdvanceMonthOptimizationRuntime.ClearPendingAdvanceMonthJobs();
 }
