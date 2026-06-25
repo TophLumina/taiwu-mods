@@ -1,15 +1,21 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
+using Config;
 using GameData.ActionPlanning.MonthlyAI;
+using GameData.Common;
 using GameData.Domains;
-using NLog;
+using GameData.Domains.Map;
 
 namespace TaiwuOptimization.Runtime;
 
 internal static class PeriAdvanceMonthProtectionCache
 {
-    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    private const int StateAreaCount = 135;
+
+    private static readonly ushort[] DirectRelationTypes =
+    {
+        1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
+    };
 
     private enum CacheState
     {
@@ -29,11 +35,6 @@ internal static class PeriAdvanceMonthProtectionCache
         Publish,
     }
 
-    private static readonly ushort[] DirectRelationTypes =
-    {
-        1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
-    };
-
     private static readonly object _syncRoot = new();
 
     private static int _groupVersion;
@@ -49,30 +50,72 @@ internal static class PeriAdvanceMonthProtectionCache
     private static Snapshot? _snapshot;
     private static Snapshot? _frozenSnapshot;
 
-    public static Snapshot GetSnapshot() =>
-        GetOrBuildSnapshot(freeze: false);
+    /// <summary>尝试取得当前可用快照；快照未完成时返回 `false`，调用方应保持原版行为。</summary>
+    public static bool TryGetSnapshot(out Snapshot snapshot)
+    {
+        lock (_syncRoot)
+        {
+            if (_frozenSnapshot != null)
+            {
+                snapshot = _frozenSnapshot;
+                return true;
+            }
 
-    public static void FreezeForPeriAdvanceMonth() =>
-        GetOrBuildSnapshot(freeze: true);
+            if (IsSnapshotCurrent(_snapshot))
+            {
+                _state = CacheState.Ready;
+                ClearNeedsFrameBuild();
+                snapshot = _snapshot!;
+                return true;
+            }
 
+            snapshot = null!;
+            EnsureBuildSession();
+            MarkNeedsFrameBuild();
+            return false;
+        }
+    }
+
+    /// <summary>过月开始时冻结已就绪快照；未就绪时不强制构建，避免增加过月阻塞。</summary>
+    public static bool TryFreezeForPeriAdvanceMonth()
+    {
+        lock (_syncRoot)
+        {
+            if (!IsSnapshotCurrent(_snapshot))
+            {
+                EnsureBuildSession();
+                MarkNeedsFrameBuild();
+                return false;
+            }
+
+            _frozenSnapshot = _snapshot;
+            _state = CacheState.Frozen;
+            ClearNeedsFrameBuild();
+            return true;
+        }
+    }
+
+    /// <summary>过月结束后释放冻结快照；如月结中标记过脏，则恢复到 `Invalid` 等待帧构建。</summary>
     public static void UnfreezePeriAdvanceMonth()
     {
         lock (_syncRoot)
         {
             _frozenSnapshot = null;
-            _state = IsSnapshotCurrent(_snapshot) ? CacheState.Ready : CacheState.Invalid;
-            if (_state == CacheState.Invalid)
+            if (IsSnapshotCurrent(_snapshot))
             {
-                _buildSession = null;
-                MarkNeedsFrameBuild();
+                _state = CacheState.Ready;
+                ClearNeedsFrameBuild();
             }
             else
             {
-                ClearNeedsFrameBuild();
+                _state = CacheState.Invalid;
+                _buildSession = null;
+                MarkNeedsFrameBuild();
             }
         }
     }
 
+    /// <summary>清空所有快照和构建状态，用于初始化、卸载、退出世界或切档。</summary>
     public static void Reset()
     {
         lock (_syncRoot)
@@ -91,6 +134,7 @@ internal static class PeriAdvanceMonthProtectionCache
         }
     }
 
+    /// <summary>设置改变后让全部保护数据失效。</summary>
     public static void MarkAllDirty()
     {
         lock (_syncRoot)
@@ -102,6 +146,7 @@ internal static class PeriAdvanceMonthProtectionCache
         }
     }
 
+    /// <summary>太吾队伍变化会影响队伍本身和直接关系保护集合。</summary>
     public static void MarkTaiwuGroupDirty()
     {
         lock (_syncRoot)
@@ -112,6 +157,7 @@ internal static class PeriAdvanceMonthProtectionCache
         }
     }
 
+    /// <summary>只在关系变化涉及太吾/队友时重建关系保护集合。</summary>
     public static void MarkRelationDirtyIfTaiwuGroupRelated(int charId, int relatedCharId)
     {
         lock (_syncRoot)
@@ -124,6 +170,7 @@ internal static class PeriAdvanceMonthProtectionCache
         }
     }
 
+    /// <summary>太吾位置变化后重建当前州域/相邻州域保护集合。</summary>
     public static void MarkProtectedAreasDirty()
     {
         lock (_syncRoot)
@@ -135,67 +182,25 @@ internal static class PeriAdvanceMonthProtectionCache
 
     public static bool NeedsFrameBuild()
     {
-        return TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-            Volatile.Read(ref _needsFrameBuild) != 0;
-    }
+        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
+        {
+            return false;
+        }
 
-    /// <summary>复制当前 protection-cache 状态，供低频诊断日志使用。</summary>
-    public static ProtectionCacheDiagnosticsSnapshot GetDiagnosticsSnapshot()
-    {
         lock (_syncRoot)
         {
-            BuildSession? session = _buildSession;
-            int buildAnchorCount = session?.RelationAnchors?.Length ?? 0;
-            int buildAnchorIndex = session?.RelationAnchorIndex ?? -1;
-            int buildAnchorCharId = -1;
-            if (session?.RelationAnchors != null &&
-                buildAnchorIndex >= 0 &&
-                buildAnchorIndex < session.RelationAnchors.Length)
+            if (_state != CacheState.Frozen && !IsSnapshotCurrent(_snapshot))
             {
-                buildAnchorCharId = session.RelationAnchors[buildAnchorIndex];
+                MarkNeedsFrameBuild();
             }
 
-            int buildRelationTypeIndex = session?.RelationTypeIndex ?? -1;
-            ushort buildRelationType = 0;
-            if (session?.Stage == BuildStage.RelationAnchorReverse &&
-                buildRelationTypeIndex >= 0 &&
-                buildRelationTypeIndex < DirectRelationTypes.Length)
-            {
-                buildRelationType = DirectRelationTypes[buildRelationTypeIndex];
-            }
-
-            return new ProtectionCacheDiagnosticsSnapshot(
-                _state.ToString(),
-                Volatile.Read(ref _needsFrameBuild) != 0,
-                _snapshot != null,
-                _frozenSnapshot != null,
-                _groupVersion,
-                _relationVersion,
-                _areaVersion,
-                _taiwuGroup?.CharIds.Count ?? 0,
-                _taiwuRelations?.CharIds.Count ?? 0,
-                _protectedAreas?.AreaIds.Count ?? 0,
-                session?.Stage.ToString() ?? "None",
-                buildAnchorIndex,
-                buildAnchorCount,
-                buildAnchorCharId,
-                buildRelationTypeIndex,
-                DirectRelationTypes.Length,
-                buildRelationType,
-                session?.Group?.CharIds.Count ?? 0,
-                session?.RelationCharIds?.Count ?? 0,
-                session?.ProtectedAreas?.AreaIds.Count ?? 0,
-                session?.HasProtectedAreaSource ?? false,
-                session?.ProtectedAreaSource ?? -1,
-                session?.ProtectedAreaIncludesNeighbors ?? TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization);
+            return Volatile.Read(ref _needsFrameBuild) != 0;
         }
     }
 
-    /// <summary>
-    /// 在帧预算内最多推进一个 protection-cache build step。
-    /// </summary>
-    /// <param name="frameBudget">与 deferred job 共享的当前帧预算。</param>
-    /// <returns>本 tick 执行的 cache build step 数。</returns>
+    /// <summary>在帧预算中推进一次保护快照构建。</summary>
+    /// <param name="frameBudget">当前帧预算。</param>
+    /// <returns>本帧执行的构建步骤数。</returns>
     public static int TickBuildPeriAdvanceMonthProtection(in AdvanceMonthOptimizationFrameBudget frameBudget)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled || !frameBudget.HasTimeRemaining())
@@ -222,71 +227,8 @@ internal static class PeriAdvanceMonthProtectionCache
                 return 0;
             }
 
-            if (TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
-            {
-                BuildStepLogContext logContext = CaptureBuildStepLogContext();
-                long startedAt = Stopwatch.GetTimestamp();
-                ExecuteBuildStep();
-                LogFrameBuildStepOverrun(logContext, Stopwatch.GetTimestamp() - startedAt, frameBudget.BudgetTicks);
-            }
-            else
-            {
-                ExecuteBuildStep();
-            }
-
+            ExecuteBuildStep();
             return 1;
-        }
-    }
-
-    private static Snapshot GetOrBuildSnapshot(bool freeze)
-    {
-        if (!freeze)
-        {
-            Snapshot? frozenSnapshot = Volatile.Read(ref _frozenSnapshot);
-            if (frozenSnapshot != null)
-            {
-                return frozenSnapshot;
-            }
-        }
-
-        long synchronousBuildStartedAt = 0;
-        int synchronousBuildSteps = 0;
-        while (true)
-        {
-            lock (_syncRoot)
-            {
-                if (_state == CacheState.Frozen && _frozenSnapshot != null)
-                {
-                    return _frozenSnapshot;
-                }
-
-                if (IsSnapshotCurrent(_snapshot))
-                {
-                    _state = freeze ? CacheState.Frozen : CacheState.Ready;
-                    if (freeze)
-                    {
-                        _frozenSnapshot = _snapshot;
-                    }
-
-                    ClearNeedsFrameBuild();
-                    LogSynchronousBuildIfNeeded(freeze, synchronousBuildStartedAt, synchronousBuildSteps);
-                    return _snapshot!;
-                }
-
-                EnsureBuildSession();
-                if (freeze &&
-                    TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled &&
-                    synchronousBuildStartedAt == 0)
-                {
-                    synchronousBuildStartedAt = Stopwatch.GetTimestamp();
-                }
-
-                ExecuteBuildStep();
-                if (freeze)
-                {
-                    synchronousBuildSteps++;
-                }
-            }
         }
     }
 
@@ -304,10 +246,7 @@ internal static class PeriAdvanceMonthProtectionCache
     private static BuildSession CreateBuildSession()
     {
         bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
-        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetProtectedAreaCacheKey(
-            includeNeighborAreas,
-            out short areaSource);
-
+        bool hasAreaSource = TryGetProtectedAreaCacheKey(includeNeighborAreas, out short areaSource);
         TaiwuGroupComponent? group = IsGroupCurrent(_taiwuGroup) ? _taiwuGroup : null;
         TaiwuRelationComponent? relations = IsRelationSetCurrent(_taiwuRelations) ? _taiwuRelations : null;
         ProtectedAreaComponent? areas = IsAreaSetCurrent(_protectedAreas, hasAreaSource, areaSource, includeNeighborAreas)
@@ -416,10 +355,7 @@ internal static class PeriAdvanceMonthProtectionCache
         _taiwuGroup = session.Group;
         _taiwuRelations = session.Relations;
         _protectedAreas = session.ProtectedAreas;
-        _snapshot = new Snapshot(
-            session.Group!,
-            session.Relations!,
-            session.ProtectedAreas!);
+        _snapshot = new Snapshot(session.Group!, session.Relations!, session.ProtectedAreas!);
         _buildSession = null;
         _state = CacheState.Ready;
         ClearNeedsFrameBuild();
@@ -435,10 +371,7 @@ internal static class PeriAdvanceMonthProtectionCache
         }
 
         bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
-        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetProtectedAreaCacheKey(
-            includeNeighborAreas,
-            out short areaSource);
-
+        bool hasAreaSource = TryGetProtectedAreaCacheKey(includeNeighborAreas, out short areaSource);
         return session.HasProtectedAreaSource == hasAreaSource &&
             session.ProtectedAreaSource == areaSource &&
             session.ProtectedAreaIncludesNeighbors == includeNeighborAreas;
@@ -464,17 +397,13 @@ internal static class PeriAdvanceMonthProtectionCache
 
     private static bool IsSnapshotCurrent(Snapshot? snapshot)
     {
-        if (snapshot == null ||
-            !snapshot.IsCurrent(_groupVersion, _relationVersion, _areaVersion))
+        if (snapshot == null || !snapshot.IsCurrent(_groupVersion, _relationVersion, _areaVersion))
         {
             return false;
         }
 
         bool includeNeighborAreas = TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization;
-        bool hasAreaSource = AdvanceMonthOptimizationRuntime.TryGetProtectedAreaCacheKey(
-            includeNeighborAreas,
-            out short areaSource);
-
+        bool hasAreaSource = TryGetProtectedAreaCacheKey(includeNeighborAreas, out short areaSource);
         return snapshot.MatchesProtectedAreaKey(hasAreaSource, areaSource, includeNeighborAreas);
     }
 
@@ -482,18 +411,16 @@ internal static class PeriAdvanceMonthProtectionCache
         group != null && group.Version == _groupVersion;
 
     private static bool IsRelationSetCurrent(TaiwuRelationComponent? relations) =>
-        relations != null &&
-        relations.Version == _relationVersion &&
-        relations.GroupVersion == _groupVersion;
+        relations != null && relations.Version == _relationVersion && relations.GroupVersion == _groupVersion;
 
     private static bool IsAreaSetCurrent(
         ProtectedAreaComponent? areas,
-        bool hasAreaSource,
-        short areaSource,
+        bool hasSourceArea,
+        short sourceAreaId,
         bool includeNeighborAreas) =>
         areas != null &&
         areas.Version == _areaVersion &&
-        areas.MatchesKey(hasAreaSource, areaSource, includeNeighborAreas);
+        areas.MatchesKey(hasSourceArea, sourceAreaId, includeNeighborAreas);
 
     private static bool IsCachedTaiwuGroupMember(int charId)
     {
@@ -536,13 +463,66 @@ internal static class PeriAdvanceMonthProtectionCache
     private static HashSet<int> BuildProtectedAreaIds(bool includeNeighborAreas)
     {
         HashSet<int> areaIds = new();
-        AdvanceMonthOptimizationRuntime.CopyProtectedAreaIdsTo(areaIds, includeNeighborAreas);
+        Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
+        if (!location.IsValid())
+        {
+            return areaIds;
+        }
+
+        areaIds.Add(location.AreaId);
+        if (location.AreaId < 0 || location.AreaId >= StateAreaCount)
+        {
+            return areaIds;
+        }
+
+        List<short> areaBuffer = new(16);
+        sbyte stateId = DomainManager.Map.GetStateIdByAreaId(location.AreaId);
+        AddAreasInState(stateId, areaIds, areaBuffer);
+
+        if (includeNeighborAreas)
+        {
+            sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(location.AreaId);
+            foreach (sbyte neighborStateTemplateId in MapState.Instance[stateTemplateId].NeighborStates)
+            {
+                sbyte neighborStateId = DomainManager.Map.GetStateIdByStateTemplateId(neighborStateTemplateId);
+                AddAreasInState(neighborStateId, areaIds, areaBuffer);
+            }
+        }
+
         return areaIds;
+    }
+
+    private static void AddAreasInState(sbyte stateId, HashSet<int> areaIds, List<short> areaBuffer)
+    {
+        if (stateId < 0)
+        {
+            return;
+        }
+
+        areaBuffer.Clear();
+        DomainManager.Map.GetAllAreaInState(stateId, areaBuffer);
+        foreach (short areaId in areaBuffer)
+        {
+            areaIds.Add(areaId);
+        }
+    }
+
+    private static bool TryGetProtectedAreaCacheKey(bool includeNeighborAreas, out short areaId)
+    {
+        areaId = -1;
+        Location location = DomainManager.Taiwu.GetTaiwu()?.GetLocation() ?? Location.Invalid;
+        if (!location.IsValid())
+        {
+            return false;
+        }
+
+        areaId = location.AreaId;
+        _ = includeNeighborAreas;
+        return true;
     }
 
     private static void AddBaseDirectRelations(int anchorCharId, HashSet<int> relatedCharIds)
     {
-        // 先调用一次原版索引关系接口，后续热判断只走 HashSet.Contains。
         DomainManager.Character.GetAllRelatedCharIds(anchorCharId, relatedCharIds, includeGeneral: false);
         DomainManager.Character.GetAllTwoWayRelatedCharIds(anchorCharId, relatedCharIds);
     }
@@ -568,123 +548,6 @@ internal static class PeriAdvanceMonthProtectionCache
         int[] result = new int[values.Count];
         values.CopyTo(result);
         return result;
-    }
-
-    private static BuildStepLogContext CaptureBuildStepLogContext()
-    {
-        BuildSession? session = _buildSession;
-        if (session == null)
-        {
-            return default;
-        }
-
-        int anchorCharId = -1;
-        ushort relationType = 0;
-        if (session.RelationAnchors != null &&
-            session.RelationAnchorIndex >= 0 &&
-            session.RelationAnchorIndex < session.RelationAnchors.Length)
-        {
-            anchorCharId = session.RelationAnchors[session.RelationAnchorIndex];
-        }
-
-        if (session.Stage == BuildStage.RelationAnchorReverse &&
-            session.RelationTypeIndex >= 0 &&
-            session.RelationTypeIndex < DirectRelationTypes.Length)
-        {
-            relationType = DirectRelationTypes[session.RelationTypeIndex];
-        }
-
-        return new BuildStepLogContext(
-            session.Stage,
-            session.RelationAnchorIndex,
-            anchorCharId,
-            session.RelationTypeIndex,
-            relationType);
-    }
-
-    private static void LogFrameBuildStepOverrun(
-        BuildStepLogContext context,
-        long elapsedTicks,
-        long budgetTicks)
-    {
-        if (elapsedTicks <= budgetTicks)
-        {
-            return;
-        }
-
-        AdvanceMonthOptimizationDiagnostics.RecordCacheStepOverrun();
-        if (!Logger.IsWarnEnabled)
-        {
-            return;
-        }
-
-        Logger.Warn(
-            "TaiwuOptimization: protection-cache build step exceeded frame budget\n" +
-            "  stage: {0}\n" +
-            "  anchorIndex: {1}\n" +
-            "  anchorCharId: {2}\n" +
-            "  relationTypeIndex: {3}\n" +
-            "  relationType: {4}\n" +
-            "  elapsed: {5:N3}ms\n" +
-            "  budget: {6:N3}ms",
-            context.Stage,
-            context.AnchorIndex,
-            context.AnchorCharId,
-            context.RelationTypeIndex,
-            context.RelationType,
-            TicksToMilliseconds(elapsedTicks),
-            TicksToMilliseconds(budgetTicks));
-    }
-
-    private static void LogSynchronousBuildIfNeeded(bool freeze, long startedAt, int steps)
-    {
-        if (!freeze ||
-            steps <= 0 ||
-            !TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
-        {
-            return;
-        }
-
-        long elapsedTicks = Stopwatch.GetTimestamp() - startedAt;
-        AdvanceMonthOptimizationDiagnostics.RecordSynchronousCacheBuild(steps, elapsedTicks);
-        if (!Logger.IsInfoEnabled)
-        {
-            return;
-        }
-
-        Logger.Info(
-            "TaiwuOptimization: protection-cache completed synchronously before AdvanceMonth\n" +
-            "  steps: {0}\n" +
-            "  elapsed: {1:N3}ms",
-            steps,
-            TicksToMilliseconds(elapsedTicks));
-    }
-
-    private static double TicksToMilliseconds(long ticks) =>
-        ticks * 1000.0 / Stopwatch.Frequency;
-
-    private readonly struct BuildStepLogContext
-    {
-        // ExecuteBuildStep 改变索引前的 builder 状态快照。
-        public readonly BuildStage Stage;
-        public readonly int AnchorIndex;
-        public readonly int AnchorCharId;
-        public readonly int RelationTypeIndex;
-        public readonly ushort RelationType;
-
-        public BuildStepLogContext(
-            BuildStage stage,
-            int anchorIndex,
-            int anchorCharId,
-            int relationTypeIndex,
-            ushort relationType)
-        {
-            Stage = stage;
-            AnchorIndex = anchorIndex;
-            AnchorCharId = anchorCharId;
-            RelationTypeIndex = relationTypeIndex;
-            RelationType = relationType;
-        }
     }
 
     private sealed class BuildSession
@@ -805,10 +668,7 @@ internal static class PeriAdvanceMonthProtectionCache
             _taiwuRelations.GroupVersion == groupVersion &&
             _protectedAreas.Version == areaVersion;
 
-        public bool MatchesProtectedAreaKey(
-            bool hasSourceArea,
-            short sourceAreaId,
-            bool includesNeighborAreas) =>
+        public bool MatchesProtectedAreaKey(bool hasSourceArea, short sourceAreaId, bool includesNeighborAreas) =>
             _protectedAreas.MatchesKey(hasSourceArea, sourceAreaId, includesNeighborAreas);
 
         public bool IsTaiwuOrGroupMember(int charId) =>
@@ -830,91 +690,13 @@ internal static class PeriAdvanceMonthProtectionCache
             int[] targetCharIds = actionData.TargetCharIds;
             for (int i = 0; i < targetCharIds.Length; i++)
             {
-                int targetCharId = targetCharIds[i];
-                if (IsTaiwuOrGroupMember(targetCharId))
+                if (IsTaiwuOrGroupMember(targetCharIds[i]))
                 {
                     return true;
                 }
             }
 
             return false;
-        }
-    }
-
-    internal readonly struct ProtectionCacheDiagnosticsSnapshot
-    {
-        public readonly string State;
-        public readonly bool NeedsFrameBuild;
-        public readonly bool HasSnapshot;
-        public readonly bool HasFrozenSnapshot;
-        public readonly int GroupVersion;
-        public readonly int RelationVersion;
-        public readonly int AreaVersion;
-        public readonly int PublishedGroupCharCount;
-        public readonly int PublishedRelationCharCount;
-        public readonly int PublishedProtectedAreaCount;
-        public readonly string BuildStage;
-        public readonly int BuildAnchorIndex;
-        public readonly int BuildAnchorCount;
-        public readonly int BuildAnchorCharId;
-        public readonly int BuildRelationTypeIndex;
-        public readonly int BuildRelationTypeCount;
-        public readonly ushort BuildRelationType;
-        public readonly int BuildGroupCharCount;
-        public readonly int BuildRelationCharCount;
-        public readonly int BuildProtectedAreaCount;
-        public readonly bool HasProtectedAreaSource;
-        public readonly short ProtectedAreaSource;
-        public readonly bool ProtectedAreaIncludesNeighbors;
-
-        public ProtectionCacheDiagnosticsSnapshot(
-            string state,
-            bool needsFrameBuild,
-            bool hasSnapshot,
-            bool hasFrozenSnapshot,
-            int groupVersion,
-            int relationVersion,
-            int areaVersion,
-            int publishedGroupCharCount,
-            int publishedRelationCharCount,
-            int publishedProtectedAreaCount,
-            string buildStage,
-            int buildAnchorIndex,
-            int buildAnchorCount,
-            int buildAnchorCharId,
-            int buildRelationTypeIndex,
-            int buildRelationTypeCount,
-            ushort buildRelationType,
-            int buildGroupCharCount,
-            int buildRelationCharCount,
-            int buildProtectedAreaCount,
-            bool hasProtectedAreaSource,
-            short protectedAreaSource,
-            bool protectedAreaIncludesNeighbors)
-        {
-            State = state;
-            NeedsFrameBuild = needsFrameBuild;
-            HasSnapshot = hasSnapshot;
-            HasFrozenSnapshot = hasFrozenSnapshot;
-            GroupVersion = groupVersion;
-            RelationVersion = relationVersion;
-            AreaVersion = areaVersion;
-            PublishedGroupCharCount = publishedGroupCharCount;
-            PublishedRelationCharCount = publishedRelationCharCount;
-            PublishedProtectedAreaCount = publishedProtectedAreaCount;
-            BuildStage = buildStage;
-            BuildAnchorIndex = buildAnchorIndex;
-            BuildAnchorCount = buildAnchorCount;
-            BuildAnchorCharId = buildAnchorCharId;
-            BuildRelationTypeIndex = buildRelationTypeIndex;
-            BuildRelationTypeCount = buildRelationTypeCount;
-            BuildRelationType = buildRelationType;
-            BuildGroupCharCount = buildGroupCharCount;
-            BuildRelationCharCount = buildRelationCharCount;
-            BuildProtectedAreaCount = buildProtectedAreaCount;
-            HasProtectedAreaSource = hasProtectedAreaSource;
-            ProtectedAreaSource = protectedAreaSource;
-            ProtectedAreaIncludesNeighbors = protectedAreaIncludesNeighbors;
         }
     }
 }

@@ -30,6 +30,7 @@
     <Reference Include="GameData.Utilities" HintPath="$(GameBackendDir)\GameData.Utilities.dll" Private="false" />
     <Reference Include="GameData.ArchiveData" HintPath="$(GameBackendDir)\GameData.ArchiveData.dll" Private="false" />
     <Reference Include="GameData.ActionPlanning" HintPath="$(GameBackendDir)\GameData.ActionPlanning.dll" Private="false" />
+    <Reference Include="GameData.SecretInformation" HintPath="$(GameBackendDir)\GameData.SecretInformation.dll" Private="false" />
     <Reference Include="NLog" HintPath="$(GameBackendDir)\NLog.dll" Private="false" />
     <Reference Include="Redzen" HintPath="$(GameBackendDir)\Redzen.dll" Private="false" />
   </ItemGroup>

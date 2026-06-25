@@ -68,7 +68,11 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
     /// <param name="character">待判断角色。</param>
     private static bool ShouldKeepOriginalActionPointGain(Character character)
     {
-        PeriAdvanceMonthProtectionCache.Snapshot protection = PeriAdvanceMonthProtectionCache.GetSnapshot();
+        if (!PeriAdvanceMonthProtectionCache.TryGetSnapshot(out PeriAdvanceMonthProtectionCache.Snapshot protection))
+        {
+            return true;
+        }
+
         int charId = character.GetId();
         if (protection.IsTaiwuOrGroupMember(charId) ||
             protection.IsDirectlyRelatedToTaiwuGroup(charId) ||
