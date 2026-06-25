@@ -8,7 +8,7 @@ return {
 	Title = "[天幕心帷]过月性能优化",
 	Version = "0.3.0.0",
 	Author = "man!",
-	Description = " [h1] 过月性能优化 [/h1]\n\n当前版本取消了跨帧延迟结算与 sidecar pending 机制，不再改动原版存档流程，也不再把区域月结任务推迟到下个月。\n\n主要优化改为等价热路径替换：为密闻传播/代谢阶段建立反查表，减少原版反复全表扫描带来的过月耗时。\n\n可选实验项：降低未受保护远区 NPC 的每月行动点增长。保护快照会在游玩帧中按预算构建；若过月时快照尚未就绪，则本次行动点削减会保守跳过，不会在过月里强制补建。\n\n[b]使用 Harmony Patch，可能与修改密闻月结或 NPC 月行动点逻辑的 mod 冲突。[/b]\n\n[spoiler]PS: 这版的方向从“延迟更多任务”转回“找原版热路径中的重复扫描”。目前密闻阶段的优化收益更高、风险更低，也更接近不改变原版语义的理想方案。[/spoiler] ",
+	Description = " [h1] 过月性能优化 [/h1]\n\n后期存档中，密闻 UpdateInformation 阶段通常可从秒级下降到百毫秒级；实测样本中，秘闻代谢相关阶段曾由约 1.5s 降至数十毫秒。具体收益取决于秘闻数量、人口规模和当前存档的实际瓶颈。\n\n当前主要优化改为密闻月结热路径替换：为密闻传播、持有人计数和代谢清理建立反查表，减少原版反复全表扫描带来的过月耗时。\n\n当前版本已经取消跨帧延迟结算、pending 队列和 sidecar 文件，不再把区域月结任务推迟到下个月，也不接管/延迟/新增原版保存。\n\n可选实验项：降低未受保护远区 NPC 的每月主/副目标行动点增长，以减少远区 NPC 行动循环压力。保护快照会在游玩帧中按预算构建；若过月时快照尚未就绪，则本次行动点削减会保守跳过。\n\n诊断项可输出密闻月结与 SaveWorld 写盘细分耗时，用于判断瓶颈在过月计算、密闻、domain 序列化、working.db 复制还是压缩写盘。\n\n[b]不修改存档结构；使用 Harmony Patch，可能与修改密闻月结、NPC 月行动点或存档写入诊断相关方法的 mod 冲突。[/b]\n\n[spoiler]PS: 这版的方向从“延迟更多任务”转回“找原版热路径中的重复扫描”。目前密闻阶段收益高、风险低，也更接近不改变原版语义的优化方式。[/spoiler] ",
 	Source = 0,
 	HasArchive = false,
 	NeedRestartWhenSettingChanged = false,
@@ -84,9 +84,9 @@ return {
 		[8] = {
 			SettingType = "Toggle",
 			Key = "AdvanceMonthOptimizationDiagnosticsEnabled",
-			DisplayName = "启用密闻诊断日志",
-			Description = "测试用选项，默认关闭。开启后会在后端 Logs/GameData_*.log 中输出 UpdateInformation 的密闻传播、代谢和查表耗时，便于判断过月热点。",
-			GroupName = "密闻诊断日志",
+			DisplayName = "启用过月诊断日志",
+			Description = "测试用选项，默认关闭。开启后会在后端 Logs/GameData_*.log 中输出密闻月结和 SaveWorld 写盘细分耗时，便于判断过月/保存热点。",
+			GroupName = "过月诊断日志",
 			DefaultValue = false,
 		},
 	},
@@ -95,7 +95,7 @@ return {
 	SettingGroups = {
 		[1] = "通用配置",
 		[2] = "实验性：NPC行动点",
-		[3] = "密闻诊断日志",
+		[3] = "过月诊断日志",
 	},
 	UpdateLogList = {
 		[1] = {

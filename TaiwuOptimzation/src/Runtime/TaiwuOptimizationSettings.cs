@@ -16,7 +16,7 @@ internal static class TaiwuOptimizationSettings
     public static bool ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true;
     public static bool ProtectSectMembersFromOfflineActionPointReduction = false;
 
-    // 密闻诊断日志，默认关闭。
+    // 过月诊断日志，默认关闭。
     public static bool AdvanceMonthOptimizationDiagnosticsEnabled = false;
 
     /// <summary>从游戏 mod 设置中读取配置，并限制到有效范围。</summary>
