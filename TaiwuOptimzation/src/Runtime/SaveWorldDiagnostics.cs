@@ -23,7 +23,7 @@ internal static class SaveWorldDiagnostics
     /// <summary>开始记录一次本地世界存档写入。</summary>
     /// <param name="archive">原版 ArchiveFileBase 实例。</param>
     /// <returns>诊断开启且目标是 LocalArchiveFile 时返回起始 ticks，否则返回 0。</returns>
-    public static long BeginArchiveSave(ArchiveFileBase archive)
+    public static long BeginArchiveSave(ArchiveFileBase archive, CompressionType compressionType)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled ||
             archive is not LocalArchiveFile)
@@ -35,6 +35,7 @@ internal static class SaveWorldDiagnostics
         _current = default;
         _current.StartTicks = Stopwatch.GetTimestamp();
         _current.ArchivePath = ArchivePathField?.GetValue(archive) as string ?? string.Empty;
+        _current.CompressionType = compressionType.ToString();
         return _current.StartTicks;
     }
 
@@ -88,6 +89,7 @@ internal static class SaveWorldDiagnostics
         _current.CopyWorkingDbTicks += Stopwatch.GetTimestamp() - startTicks;
         _current.CopyWorkingDbBytes += Math.Max(length, 0);
         _current.CopyWorkingDbCalls++;
+        _current.CopyBufferBytes = SaveWorldArchiveOptimization.GetDatabaseCopyBufferBytes();
     }
 
     /// <summary>记录 DatabaseBridge.Disconnect 耗时。</summary>
@@ -220,10 +222,13 @@ internal static class SaveWorldDiagnostics
         AppendMetric(builder, "DatabaseBridge.Disconnect", FormatMilliseconds(session.DatabaseDisconnectTicks));
         AppendMetric(builder, "CopyWorkingDb", FormatMilliseconds(session.CopyWorkingDbTicks) +
             ", calls=" + session.CopyWorkingDbCalls +
-            ", bytes=" + FormatBytes(session.CopyWorkingDbBytes));
+            ", bytes=" + FormatBytes(session.CopyWorkingDbBytes) +
+            ", bufferBytes=" + FormatBytes(session.CopyBufferBytes) +
+            ", estimatedChunks=" + EstimateChunks(session.CopyWorkingDbBytes, session.CopyBufferBytes));
         AppendMetric(builder, "DatabaseBridge.Connect", FormatMilliseconds(session.DatabaseConnectTicks));
 
         builder.AppendLine("  compression:");
+        AppendMetric(builder, "CompressionType", string.IsNullOrEmpty(session.CompressionType) ? "unknown" : session.CompressionType);
         AppendMetric(builder, "EndCompression", FormatMilliseconds(session.EndCompressionTicks));
         AppendMetric(builder, "WriteCrcToEnd", FormatMilliseconds(session.WriteCrcTicks));
         return builder.ToString();
@@ -234,6 +239,9 @@ internal static class SaveWorldDiagnostics
 
     private static string FormatBytes(long bytes) =>
         bytes < 0 ? "unknown" : bytes.ToString();
+
+    private static long EstimateChunks(long bytes, long bufferBytes) =>
+        bytes <= 0 || bufferBytes <= 0 ? 0 : (bytes + bufferBytes - 1) / bufferBytes;
 
     private static void AppendMetric(StringBuilder builder, string name, string value)
     {
@@ -255,10 +263,12 @@ internal static class SaveWorldDiagnostics
         public long DatabaseDisconnectTicks;
         public long CopyWorkingDbTicks;
         public long CopyWorkingDbBytes;
+        public long CopyBufferBytes;
         public int CopyWorkingDbCalls;
         public long DatabaseConnectTicks;
         public long EndCompressionTicks;
         public long WriteCrcTicks;
+        public string CompressionType;
     }
 
     private struct DomainMetric

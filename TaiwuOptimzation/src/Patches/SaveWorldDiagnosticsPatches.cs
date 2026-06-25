@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Reflection.Emit;
 using GameData.ArchiveData;
 using GameData.Common;
 using HarmonyLib;
@@ -13,8 +14,11 @@ namespace TaiwuOptimization.Patches;
 internal static class SaveWorldDiagnosticsArchiveFileSavePatch
 {
     // 以 ArchiveFileBase.Save 作为本地存档写盘诊断的总边界。
-    private static void Prefix(ArchiveFileBase __instance, out long __state) =>
-        __state = SaveWorldDiagnostics.BeginArchiveSave(__instance);
+    private static void Prefix(ArchiveFileBase __instance, ref CompressionType compressionType, out long __state)
+    {
+        compressionType = SaveWorldArchiveOptimization.GetCompressionType(__instance, compressionType);
+        __state = SaveWorldDiagnostics.BeginArchiveSave(__instance, compressionType);
+    }
 
     private static Exception? Finalizer(ArchiveFileBase __instance, long __state, Exception? __exception)
     {
@@ -107,12 +111,62 @@ internal static class SaveWorldDiagnosticsDatabaseConnectPatch
 [HarmonyPatch(typeof(ArchiveFileBase), nameof(ArchiveFileBase.CopyFrom))]
 internal static class SaveWorldDiagnosticsCopyFromPatch
 {
+    private static readonly MethodInfo CopyBufferGetter =
+        AccessTools.Method(typeof(SaveWorldArchiveOptimization), nameof(SaveWorldArchiveOptimization.GetDatabaseCopyBufferBytes));
+
     // LocalArchiveFile.WriteContent 中此调用对应 working.db 复制。
     private static void Prefix(out long __state) =>
         __state = SaveWorldDiagnostics.BeginStep();
 
     private static void Postfix(long length, long __state) =>
         SaveWorldDiagnostics.EndCopyFrom(__state, length);
+
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) =>
+        SaveWorldCopyBufferTranspiler.ReplaceOriginalCopyBuffer(instructions, CopyBufferGetter);
+}
+
+[HarmonyPatch(typeof(ArchiveFileBase), nameof(ArchiveFileBase.CopyTo))]
+internal static class SaveWorldCopyToBufferPatch
+{
+    private static readonly MethodInfo CopyBufferGetter =
+        AccessTools.Method(typeof(SaveWorldArchiveOptimization), nameof(SaveWorldArchiveOptimization.GetDatabaseCopyBufferBytes));
+
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) =>
+        SaveWorldCopyBufferTranspiler.ReplaceOriginalCopyBuffer(instructions, CopyBufferGetter);
+}
+
+internal static class SaveWorldCopyBufferTranspiler
+{
+    /// <summary>把原版 CopyFrom/CopyTo 中的 4KB 常量替换为配置的安全块大小。</summary>
+    public static IEnumerable<CodeInstruction> ReplaceOriginalCopyBuffer(
+        IEnumerable<CodeInstruction> instructions,
+        MethodInfo copyBufferGetter)
+    {
+        foreach (CodeInstruction instruction in instructions)
+        {
+            if (IsOriginalCopyBufferConstant(instruction))
+            {
+                instruction.opcode = OpCodes.Call;
+                instruction.operand = copyBufferGetter;
+            }
+
+            yield return instruction;
+        }
+    }
+
+    private static bool IsOriginalCopyBufferConstant(CodeInstruction instruction)
+    {
+        if (instruction.opcode == OpCodes.Ldc_I8 &&
+            instruction.operand is long longValue &&
+            longValue == SaveWorldArchiveOptimization.OriginalCopyBufferBytes)
+        {
+            return true;
+        }
+
+        return instruction.opcode == OpCodes.Ldc_I4 &&
+            instruction.operand is int intValue &&
+            intValue == SaveWorldArchiveOptimization.OriginalCopyBufferBytes;
+    }
 }
 
 [HarmonyPatch(typeof(CompressionStreamFactory), nameof(CompressionStreamFactory.EndCompression))]

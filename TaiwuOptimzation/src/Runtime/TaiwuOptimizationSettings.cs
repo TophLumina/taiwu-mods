@@ -9,6 +9,8 @@ internal static class TaiwuOptimizationSettings
     public static bool AdvanceMonthOptimizationEnabled = true;
     public static bool ProtectNeighborStatesForAdvanceMonthOptimization = true;
     public static int AdvanceMonthOptimizationFrameBudgetMs = 2;
+    public static int SaveWorldDatabaseCopyBufferTier = 2;
+    public static bool SaveWorldNoCompression = false;
 
     // 实验性：远区 NPC 月行动点削减。
     public static bool ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false;
@@ -26,6 +28,8 @@ internal static class TaiwuOptimizationSettings
         TryGet(modId, "AdvanceMonthOptimizationEnabled", ref AdvanceMonthOptimizationEnabled);
         TryGet(modId, "ProtectNeighborStatesForAdvanceMonthOptimization", ref ProtectNeighborStatesForAdvanceMonthOptimization);
         TryGet(modId, "AdvanceMonthOptimizationFrameBudgetMs", ref AdvanceMonthOptimizationFrameBudgetMs);
+        TryGet(modId, "SaveWorldDatabaseCopyBufferTier", ref SaveWorldDatabaseCopyBufferTier);
+        TryGet(modId, "SaveWorldNoCompression", ref SaveWorldNoCompression);
         TryGet(modId, "ReduceRemoteNpcOfflineCurrentGoalActionPointGain", ref ReduceRemoteNpcOfflineCurrentGoalActionPointGain);
         TryGet(modId, "RemoteNpcOfflineCurrentGoalActionPointGainReduction", ref RemoteNpcOfflineCurrentGoalActionPointGainReduction);
         TryGet(modId, "ProtectTaiwuVillageResidentsFromOfflineActionPointReduction", ref ProtectTaiwuVillageResidentsFromOfflineActionPointReduction);
@@ -33,6 +37,7 @@ internal static class TaiwuOptimizationSettings
         TryGet(modId, "AdvanceMonthOptimizationDiagnosticsEnabled", ref AdvanceMonthOptimizationDiagnosticsEnabled);
 
         AdvanceMonthOptimizationFrameBudgetMs = Math.Clamp(AdvanceMonthOptimizationFrameBudgetMs, 1, 4);
+        SaveWorldDatabaseCopyBufferTier = SaveWorldArchiveOptimization.NormalizeCopyBufferTier(SaveWorldDatabaseCopyBufferTier);
         RemoteNpcOfflineCurrentGoalActionPointGainReduction = Math.Clamp(RemoteNpcOfflineCurrentGoalActionPointGainReduction, 0, 20);
     }
 
