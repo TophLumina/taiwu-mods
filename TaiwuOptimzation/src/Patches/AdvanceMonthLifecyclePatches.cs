@@ -19,20 +19,26 @@ internal static class AdvanceMonthLifecyclePatch
         AdvanceMonthOptimizationRuntime.EndAdvanceMonthOptimizationScope();
 }
 
-[HarmonyPatch]
-internal static class PendingAdvanceMonthJobsBeforeSavePatch
+[HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.SaveWorld), new[] { typeof(DataContext), typeof(sbyte) })]
+internal static class PendingAdvanceMonthJobsSidecarOnSaveWorldPatch
 {
-    // SaveWorldAt 会写临时世界文件，例如进入指引世界前。
-    private static MethodBase[] TargetMethods() =>
-        new[]
-        {
-            AccessTools.Method(typeof(GlobalDomain), nameof(GlobalDomain.SaveWorld), new[] { typeof(DataContext), typeof(sbyte) }),
-            AccessTools.Method(typeof(GlobalDomain), "SaveWorldAt", new[] { typeof(DataContext), typeof(string), typeof(bool) }),
-        };
+    // 普通保存不再同步 flush pending，而是把剩余任务写到存档旁 sidecar。
+    private static void Postfix(DataContext context) =>
+        AdvanceMonthOptimizationRuntime.SavePendingAdvanceMonthJobsSidecarOrFlush(context);
+}
 
-    // 不接管原版保存，只在原版保存前强制补完 pending。
+[HarmonyPatch]
+internal static class PendingAdvanceMonthJobsBeforeSaveWorldAtPatch
+{
+    // SaveWorldAt 会写临时世界文件，例如进入指引世界前，保守地保持同步完整。
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(typeof(GlobalDomain), "SaveWorldAt", new[] { typeof(DataContext), typeof(string), typeof(bool) });
+
+    // 不接管原版保存，只在特殊保存前强制补完 pending。
     private static void Prefix(DataContext context) =>
-        AdvanceMonthOptimizationRuntime.FlushAllPendingAdvanceMonthJobs(context);
+        AdvanceMonthOptimizationRuntime.FlushAllPendingAdvanceMonthJobs(
+            context,
+            PeriAdvanceMonthForcedFlushReason.BeforeSaveWorld);
 }
 
 [HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.OnUpdate))]

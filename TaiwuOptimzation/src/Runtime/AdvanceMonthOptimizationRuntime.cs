@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using GameData.ActionPlanning.MonthlyAI;
 using Config;
@@ -11,6 +12,13 @@ using GameData.Domains.Character.Ai.ParallelAdvanceMonth.Definition;
 using GameData.Domains.Map;
 
 namespace TaiwuOptimization.Runtime;
+
+internal enum PeriAdvanceMonthForcedFlushReason
+{
+    BeforeAdvanceMonth,
+    BeforeSaveWorld,
+    SavingWorldUpdate,
+}
 
 internal static class AdvanceMonthOptimizationRuntime
 {
@@ -52,6 +60,7 @@ internal static class AdvanceMonthOptimizationRuntime
     public static void Initialize()
     {
         AreaLocalPeriAdvanceMonthExecutor.Initialize();
+        PeriAdvanceMonthPendingSidecar.ResetLoadState();
         PeriAdvanceMonthProtectionCache.Reset();
         AdvanceMonthOptimizationDiagnostics.Reset();
     }
@@ -63,7 +72,8 @@ internal static class AdvanceMonthOptimizationRuntime
 
     public static void BeginAdvanceMonthOptimizationScope(DataContext context)
     {
-        FlushAllPendingAdvanceMonthJobs(context);
+        RestorePendingAdvanceMonthJobsFromSidecarIfNeeded();
+        FlushAllPendingAdvanceMonthJobs(context, PeriAdvanceMonthForcedFlushReason.BeforeAdvanceMonth);
 
         lock (_syncRoot)
         {
@@ -249,11 +259,6 @@ internal static class AdvanceMonthOptimizationRuntime
 
         bool hasPendingAdvanceMonthJobs = HasPendingAdvanceMonthJobs;
         bool needsProtectionCacheBuild = PeriAdvanceMonthProtectionCache.NeedsFrameBuild();
-        if (!hasPendingAdvanceMonthJobs && !needsProtectionCacheBuild)
-        {
-            return;
-        }
-
         if (!IsWorldDataAvailable())
         {
             if (hasPendingAdvanceMonthJobs)
@@ -264,13 +269,18 @@ internal static class AdvanceMonthOptimizationRuntime
             return;
         }
 
-        if (DomainManager.Global.GetSavingWorld())
+        RestorePendingAdvanceMonthJobsFromSidecarIfNeeded();
+        hasPendingAdvanceMonthJobs = HasPendingAdvanceMonthJobs;
+        needsProtectionCacheBuild = PeriAdvanceMonthProtectionCache.NeedsFrameBuild();
+        if (!hasPendingAdvanceMonthJobs && !needsProtectionCacheBuild)
         {
-            if (hasPendingAdvanceMonthJobs)
-            {
-                ExecuteAllPendingAdvanceMonthJobs(context);
-            }
+            return;
+        }
 
+        // 月报界面仍属于原版过月收尾阶段，等状态回到游玩中再分帧处理。
+        if (DomainManager.World.GetAdvancingMonthState() != 0 ||
+            DomainManager.Global.GetSavingWorld())
+        {
             return;
         }
 
@@ -350,76 +360,81 @@ internal static class AdvanceMonthOptimizationRuntime
         out int cacheBuildSteps)
     {
         cacheBuildSteps = 0;
-        if (needsProtectionCacheBuild)
+        if (HasPendingAdvanceMonthJobs)
         {
-            cacheBuildSteps = PeriAdvanceMonthProtectionCache.TickBuildPeriAdvanceMonthProtection(in frameBudget);
-        }
-
-        if (!HasPendingAdvanceMonthJobs)
-        {
-            _overrunCooldownFrames = 0;
-            return;
-        }
-
-        if (!frameBudget.HasTimeRemaining())
-        {
-            ApplyOverrunCooldown(frameBudget);
-            return;
-        }
-
-        if (collectStats)
-        {
-            PeriAdvanceMonthDeferredJobStats flushedProtectedAreaJobStats = FlushProtectedAreas(context, collectStats: true);
-            executedJobStats.Add(in flushedProtectedAreaJobStats);
-        }
-        else
-        {
-            FlushProtectedAreas(context);
-        }
-
-        if (!HasPendingAdvanceMonthJobs)
-        {
-            _overrunCooldownFrames = 0;
-            return;
-        }
-
-        if (_overrunCooldownFrames > 0)
-        {
-            _overrunCooldownFrames--;
-            return;
-        }
-
-        PeriAdvanceMonthDeferredJob? currentBatch = null;
-        bool hasPendingApply = false;
-        while (frameBudget.CanExecutePendingAdvanceMonthJob())
-        {
-            PeriAdvanceMonthDeferredJob? job = DequeuePendingAdvanceMonthJob();
-            if (job == null)
+            if (!frameBudget.HasTimeRemaining())
             {
-                ApplyPendingParallelModifications(context, ref hasPendingApply);
+                ApplyOverrunCooldown(frameBudget);
                 return;
-            }
-
-            frameBudget.CountPendingAdvanceMonthJob();
-            if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
-            {
-                ApplyPendingParallelModifications(context, ref hasPendingApply);
-            }
-
-            if (ExecuteDeferredJobWithoutApply(context, job))
-            {
-                currentBatch = job;
-                hasPendingApply = true;
             }
 
             if (collectStats)
             {
-                executedJobStats.Count(job.Kind);
+                PeriAdvanceMonthDeferredJobStats flushedProtectedAreaJobStats = FlushProtectedAreas(context, collectStats: true);
+                executedJobStats.Add(in flushedProtectedAreaJobStats);
+            }
+            else
+            {
+                FlushProtectedAreas(context);
+            }
+
+            if (!HasPendingAdvanceMonthJobs)
+            {
+                _overrunCooldownFrames = 0;
+            }
+            else
+            {
+                if (_overrunCooldownFrames > 0)
+                {
+                    _overrunCooldownFrames--;
+                    return;
+                }
+
+                PeriAdvanceMonthDeferredJob? currentBatch = null;
+                bool hasPendingApply = false;
+                while (frameBudget.CanExecutePendingAdvanceMonthJob())
+                {
+                    PeriAdvanceMonthDeferredJob? job = DequeuePendingAdvanceMonthJob();
+                    if (job == null)
+                    {
+                        ApplyPendingParallelModifications(context, ref hasPendingApply);
+                        _overrunCooldownFrames = 0;
+                        break;
+                    }
+
+                    frameBudget.CountPendingAdvanceMonthJob();
+                    if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
+                    {
+                        ApplyPendingParallelModifications(context, ref hasPendingApply);
+                    }
+
+                    if (ExecuteDeferredJobWithoutApply(context, job))
+                    {
+                        currentBatch = job;
+                        hasPendingApply = true;
+                    }
+
+                    if (collectStats)
+                    {
+                        executedJobStats.Count(job.Kind);
+                    }
+                }
+
+                ApplyPendingParallelModifications(context, ref hasPendingApply);
+                if (HasPendingAdvanceMonthJobs)
+                {
+                    ApplyOverrunCooldown(frameBudget);
+                    return;
+                }
+
+                _overrunCooldownFrames = 0;
             }
         }
 
-        ApplyPendingParallelModifications(context, ref hasPendingApply);
-        ApplyOverrunCooldown(frameBudget);
+        if (needsProtectionCacheBuild && frameBudget.HasTimeRemaining())
+        {
+            cacheBuildSteps = PeriAdvanceMonthProtectionCache.TickBuildPeriAdvanceMonthProtection(in frameBudget);
+        }
     }
 
     public static void FlushPendingAdvanceMonthJobsInArea(DataContext context, short areaId)
@@ -449,7 +464,9 @@ internal static class AdvanceMonthOptimizationRuntime
         FlushProtectedAreas(context);
     }
 
-    public static void FlushAllPendingAdvanceMonthJobs(DataContext context)
+    public static void FlushAllPendingAdvanceMonthJobs(
+        DataContext context,
+        PeriAdvanceMonthForcedFlushReason reason)
     {
         if (!HasPendingAdvanceMonthJobs)
         {
@@ -462,7 +479,7 @@ internal static class AdvanceMonthOptimizationRuntime
             return;
         }
 
-        ExecuteAllPendingAdvanceMonthJobs(context);
+        ExecuteAllPendingAdvanceMonthJobs(context, reason);
     }
 
     public static void ClearPendingAdvanceMonthJobs()
@@ -479,8 +496,21 @@ internal static class AdvanceMonthOptimizationRuntime
             _isReplayingDeferredJob = false;
         }
 
+        PeriAdvanceMonthPendingSidecar.ResetLoadState();
         PeriAdvanceMonthProtectionCache.Reset();
         AdvanceMonthOptimizationDiagnostics.Reset();
+    }
+
+    public static void SavePendingAdvanceMonthJobsSidecarOrFlush(DataContext context)
+    {
+        List<PeriAdvanceMonthDeferredJob> jobs = CopyPendingAdvanceMonthJobsForSidecar();
+        if (PeriAdvanceMonthPendingSidecar.TrySave(jobs))
+        {
+            return;
+        }
+
+        FlushAllPendingAdvanceMonthJobs(context, PeriAdvanceMonthForcedFlushReason.BeforeSaveWorld);
+        _ = PeriAdvanceMonthPendingSidecar.TrySave(Array.Empty<PeriAdvanceMonthDeferredJob>());
     }
 
     public static void CopyProtectedAreaIdsTo(HashSet<int> destination)
@@ -539,6 +569,41 @@ internal static class AdvanceMonthOptimizationRuntime
 
     private static bool IsWorldDataAvailable() =>
         GameData.ArchiveData.Common.IsInWorld() && DomainManager.Global.GetLoadedAllArchiveData();
+
+    private static void RestorePendingAdvanceMonthJobsFromSidecarIfNeeded()
+    {
+        if (HasPendingAdvanceMonthJobs || !IsWorldDataAvailable())
+        {
+            return;
+        }
+
+        if (!PeriAdvanceMonthPendingSidecar.TryLoadOnce(out List<PeriAdvanceMonthDeferredJob> jobs) ||
+            jobs.Count == 0)
+        {
+            return;
+        }
+
+        lock (_syncRoot)
+        {
+            if (_pendingAdvanceMonthJobs.Count != 0)
+            {
+                return;
+            }
+
+            foreach (PeriAdvanceMonthDeferredJob job in jobs)
+            {
+                EnqueuePendingAdvanceMonthJob(job);
+            }
+        }
+    }
+
+    private static List<PeriAdvanceMonthDeferredJob> CopyPendingAdvanceMonthJobsForSidecar()
+    {
+        lock (_syncRoot)
+        {
+            return new List<PeriAdvanceMonthDeferredJob>(_pendingAdvanceMonthJobs);
+        }
+    }
 
     private static void AddNeighborStates(short areaId, Action<short> addArea, List<short> areaBuffer)
     {
@@ -865,8 +930,27 @@ internal static class AdvanceMonthOptimizationRuntime
         return stats;
     }
 
-    private static void ExecuteAllPendingAdvanceMonthJobs(DataContext context)
+    private static void ExecuteAllPendingAdvanceMonthJobs(
+        DataContext context,
+        PeriAdvanceMonthForcedFlushReason reason)
     {
+        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
+        {
+            ExecuteAllPendingAdvanceMonthJobsCore(context, collectStats: false);
+            return;
+        }
+
+        long startedAt = Stopwatch.GetTimestamp();
+        PeriAdvanceMonthDeferredJobStats stats = ExecuteAllPendingAdvanceMonthJobsCore(context, collectStats: true);
+        long elapsedTicks = Stopwatch.GetTimestamp() - startedAt;
+        AdvanceMonthOptimizationDiagnostics.RecordForcedPendingFlush(reason, in stats, elapsedTicks);
+    }
+
+    private static PeriAdvanceMonthDeferredJobStats ExecuteAllPendingAdvanceMonthJobsCore(
+        DataContext context,
+        bool collectStats)
+    {
+        PeriAdvanceMonthDeferredJobStats stats = default;
         PeriAdvanceMonthDeferredJob? currentBatch = null;
         bool hasPendingApply = false;
         while (true)
@@ -875,7 +959,7 @@ internal static class AdvanceMonthOptimizationRuntime
             if (job == null)
             {
                 ApplyPendingParallelModifications(context, ref hasPendingApply);
-                return;
+                return stats;
             }
 
             if (hasPendingApply && currentBatch != null && (!job.RequiresParallelApply || !currentBatch.CanBatchWith(job)))
@@ -887,6 +971,11 @@ internal static class AdvanceMonthOptimizationRuntime
             {
                 currentBatch = job;
                 hasPendingApply = true;
+            }
+
+            if (collectStats)
+            {
+                stats.Count(job.Kind);
             }
         }
     }

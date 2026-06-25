@@ -1,0 +1,1217 @@
+2026-06-26 02:05:49.0351|INFO|Main|AdaptableLog|AdaptableLog initialized.
+2026-06-26 02:05:49.0351|INFO|Main|AdaptableLog|ExternalDataBridge initialized.
+2026-06-26 02:05:49.0972|INFO|Main|GameData.Common.DataUpgradeManager|DataUpgradeManager initialized.
+2026-06-26 02:05:49.1656|INFO|Worker2|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker0|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker4|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker5|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker3|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker1|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker6|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker2|AdaptableLog|CharacterActionPlanner created.
+2026-06-26 02:05:49.1656|INFO|Worker7|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker15|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker9|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker10|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker20|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker11|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker12|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker13|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker14|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker8|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker16|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker29|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker17|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker18|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker19|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker21|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker22|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker23|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker24|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker25|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker26|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker27|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker28|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker30|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1656|INFO|Worker31|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-06-26 02:05:49.1767|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|ReadInterProcessMessages thread started.
+2026-06-26 02:05:49.1767|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|WriteInterProcessMessages thread started.
+2026-06-26 02:05:49.2580|INFO|Main|GameData.Steamworks.SteamManager|Verifying steam user successful! steam id 76561198177603869
+2026-06-26 02:05:49.2580|INFO|Main|GameData.Program|GameData module initialized.
+2026-06-26 02:05:49.3040|INFO|Main|GameData.GameDataBridge.GameDataBridge|Machine Frequency (Ticks/Second): 10000000
+2026-06-26 02:05:56.5459|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Incoming message: Initialize
+2026-06-26 02:05:56.5459|INFO|ReadInterProcessMessages|GameData.Domains.Global.GlobalDomain|Game Version: 1.0.29, Build Date: 202606250332180611
+2026-06-26 02:05:58.0695|INFO|ReadInterProcessMessages|AdaptableLog|CharacterActionPlanner initialized.
+2026-06-26 02:05:58.0802|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Transition: 0 -> 1
+2026-06-26 02:05:58.0802|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 太吾迎娇(npc立绘) for GameData ...
+2026-06-26 02:05:58.0929|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 解除婚配数量限制 for GameData ...
+2026-06-26 02:05:58.0929|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from NoMarriageLimit.dll
+2026-06-26 02:05:58.2824|INFO|Main|AdaptableLog|[NoMarriageLimit] Initialized (enableNoMarriageLimit=True)
+2026-06-26 02:05:58.2824|INFO|Main|AdaptableLog|[NoMarriageLimit] Settings updated: enableNoMarriageLimit=True
+2026-06-26 02:05:58.2824|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 【招聘简历速览】派遣村民高亮最高属性 for GameData ...
+2026-06-26 02:05:58.2824|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]拟真自动突破加强版 for GameData ...
+2026-06-26 02:05:58.2824|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from AutoBreakBackend.dll
+2026-06-26 02:05:58.3047|INFO|Main|AdaptableLog|Initialize 1_3467883114
+2026-06-26 02:05:58.3047|INFO|Main|自动突破|PreloadOrTools 执行，依赖目录=D:\SteamLibrary\steamapps\workshop\content\838350\3467883114\Plugins
+2026-06-26 02:05:58.3047|INFO|Main|自动突破|依赖 Google.Protobuf 已存在（Location=D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\Google.Protobuf.dll）
+2026-06-26 02:05:58.3047|INFO|Main|自动突破|依赖 Google.OrTools 已存在（Location=<空/字节加载>）
+2026-06-26 02:05:58.3047|INFO|Main|自动突破|已为 Google.OrTools 注册原生库解析器（目录=D:\SteamLibrary\steamapps\workshop\content\838350\3467883114\Plugins）
+2026-06-26 02:05:58.3047|INFO|Main|自动突破|自动突破设置 forceSuccessRate100=True, allGridVisible=True, timeout=0, useExactSolver=True, speedWarmStart=True, noInjuryBreak=False
+2026-06-26 02:05:58.6170|INFO|Main|自动突破|自动突破设置 forceSuccessRate100=True, allGridVisible=True, timeout=0, useExactSolver=True, speedWarmStart=True, noInjuryBreak=False
+2026-06-26 02:05:58.6170|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 蛐蛐透视 for GameData ...
+2026-06-26 02:05:58.6170|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 蛐蛐增强 for GameData ...
+2026-06-26 02:05:58.6170|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from QuQuSSR.dll
+2026-06-26 02:05:58.6395|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]更好的搜索 for GameData ...
+2026-06-26 02:05:58.6398|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from BetterSearchBackend.dll
+2026-06-26 02:05:58.9290|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 出生特质无限制 for GameData ...
+2026-06-26 02:05:58.9290|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]修改武器式 for GameData ...
+2026-06-26 02:05:58.9290|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from CustomWeaponBackend.dll
+2026-06-26 02:05:58.9290|INFO|Main|AdaptableLog|Initialize 1_3746604877
+2026-06-26 02:05:58.9754|INFO|Main|AdaptableLog|OnModSettingUpdate 1_3746604877
+2026-06-26 02:05:58.9754|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [正式版V1.0天幕心帷]自定义村民招募 for GameData ...
+2026-06-26 02:05:58.9754|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from CustomRecruitment.dll
+2026-06-26 02:05:59.0080|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [完全版]取消大太阴/洗髓经童子身限定 for GameData ...
+2026-06-26 02:05:59.0080|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from AlwaysVirgin.dll
+2026-06-26 02:05:59.0080|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 捏人优化框架（新） for GameData ...
+2026-06-26 02:05:59.0080|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 猪猪编辑器 for GameData ...
+2026-06-26 02:05:59.0080|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from FeatureEditor.Backend.dll
+2026-06-26 02:05:59.1189|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 自定义开局·点数无限 for GameData ...
+2026-06-26 02:05:59.1189|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 物品无重量 for GameData ...
+2026-06-26 02:05:59.1189|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from ItemWeight.dll
+2026-06-26 02:05:59.1309|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod myna12548的基础mod for GameData ...
+2026-06-26 02:05:59.1309|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from MynahBaseModBackend.dll
+2026-06-26 02:05:59.1768|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod ~更多信息 v3.43~ for GameData ...
+2026-06-26 02:05:59.1768|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from MynahMoreInfoBackend.dll
+2026-06-26 02:05:59.1768|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]自动战斗策略 for GameData ...
+2026-06-26 02:05:59.1768|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from AutoCombatBackend.dll
+2026-06-26 02:05:59.1768|INFO|Main|AdaptableLog|Initialize 1_3741592756
+2026-06-26 02:05:59.2998|INFO|Main|AdaptableLog|OnModSettingUpdate 1_3741592756
+2026-06-26 02:05:59.2998|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 【天幕心帷】功法一格 for GameData ...
+2026-06-26 02:05:59.2998|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from SkillOneGrid.dll
+2026-06-26 02:05:59.2998|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 璇女峰拯救计划 for GameData ...
+2026-06-26 02:05:59.2998|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from XuanNvMemberUpgrade.dll
+2026-06-26 02:05:59.3170|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 【天幕心帷】激昂元鸡 for GameData ...
+2026-06-26 02:05:59.3170|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from BigCheckenCoop.dll
+2026-06-26 02:05:59.3170|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from HyperactivityChicken.dll
+2026-06-26 02:05:59.3329|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 天人道修改 for GameData ...
+2026-06-26 02:05:59.3329|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from SamsaraMod.dll
+2026-06-26 02:05:59.3483|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 食物加强 for GameData ...
+2026-06-26 02:05:59.3483|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from FoodEnhance.dll
+2026-06-26 02:05:59.3591|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 具体春宵（重置版） for GameData ...
+2026-06-26 02:05:59.3591|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from JTCX.Backend.dll
+2026-06-26 02:05:59.5263|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 不易变老/长生不老 for GameData ...
+2026-06-26 02:05:59.5263|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from MoreYoung.dll
+2026-06-26 02:05:59.5345|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 无忧传剑 for GameData ...
+2026-06-26 02:05:59.5345|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from TransferTaiwuMod.dll
+2026-06-26 02:05:59.5673|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 太祖绘卷(UI,商人,制造,筛选,操作,仓库优化) for GameData ...
+2026-06-26 02:05:59.5673|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from Back/BetterTaiwuScrollBackend.dll
+2026-06-26 02:05:59.5673|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]过月性能优化 for GameData ...
+2026-06-26 02:05:59.5673|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from TaiwuOptimization.dll
+2026-06-26 02:05:59.7050|INFO|Main|AdaptableLog|AiNodeFactory.Register on GameData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null added 4 types
+2026-06-26 02:05:59.7050|INFO|Main|AdaptableLog|AiActionFactory.Register on GameData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null added 67 types
+2026-06-26 02:05:59.7050|INFO|Main|AdaptableLog|AiConditionFactory.Register on GameData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null added 127 types
+2026-06-26 02:06:05.9314|WARN|Main|AdaptableLog|Duplicate event 8327f785-a687-4e1e-9292-bd91f388852f detected.
+2026-06-26 02:06:06.4686|INFO|Main|AdaptableLog|ConchShip events init complete,can load mod events now
+2026-06-26 02:06:06.4686|INFO|Main|GameData.DLC.DlcManager|Start loading Dlc Events:
+2026-06-26 02:06:06.4686|INFO|Main|GameData.DLC.DlcManager|DLC: 3464590_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/YearOfSnakeCloth\1.0.0.0\Events
+2026-06-26 02:06:06.4686|INFO|Main|GameData.DLC.DlcManager|DLC: 4528730_90194313217, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/CricketPolymorph\1.0.21\Events
+2026-06-26 02:06:06.4860|INFO|Main|GameData.DLC.DlcManager|DLC: 2764960_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/HappyNewYear2024\1.0.0.0\Events
+2026-06-26 02:06:06.4860|INFO|Main|GameData.DLC.DlcManager|DLC: 2764950_4294967297, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/FiveLoong\1.0.1.0\Events
+2026-06-26 02:06:06.5791|INFO|Main|GameData.DLC.DlcManager|DLC: 2172690_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/GiftFromConchShip2\1.0.0.0\Events
+2026-06-26 02:06:06.5791|INFO|Main|GameData.DLC.DlcManager|DLC: 2241120_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/GiftFromConchShip1\1.0.0.0\Events
+2026-06-26 02:06:06.5949|INFO|Main|GameData.DLC.DlcManager|DLC: 4395170_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/HappyNewYear2026\1.0.0.0\Events
+2026-06-26 02:06:06.5949|INFO|Main|GameData.DLC.DlcManager|DLC: 4834450_287768313856, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/GreenHillsRemain\0.84.67.0\Events
+2026-06-26 02:06:06.5949|INFO|Main|GameData.DLC.DlcManager|DLC: 4834440_287768313856, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/EightYears\0.84.67.0\Events
+2026-06-26 02:06:06.6138|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading events from Taiwu_EventPackage_jutichunxiao.dll
+2026-06-26 02:06:06.6881|INFO|Main|GameData.GameDataBridge.GameDataBridge|Transition: 1 -> 2
+2026-06-26 02:06:06.6881|INFO|Main|AdaptableLog|CallMethod Load Config
+2026-06-26 02:06:06.7111|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Outgoing message: GameModuleInitialized
+2026-06-26 02:06:06.7111|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Transition: 2 -> 3
+2026-06-26 02:06:06.7190|INFO|Main|AdaptableLog|CallMethod Load Config
+2026-06-26 02:06:06.8415|INFO|Main|GameData.Domains.Global.GlobalDomain|Game Version: 1.0.29, Build Date: 202606250332180611
+2026-06-26 02:07:21.5865|INFO|Main|GameData.Domains.World.WorldDomain|WorldCreatingTime: 2026-06-25 [23:40]
+2026-06-26 02:07:21.5865|INFO|Main|GameData.Domains.World.WorldDomain|GameVersionCreating: 1.0.29
+2026-06-26 02:07:21.5865|INFO|Main|GameData.Domains.World.WorldDomain|GameVersionLastSaving: 1.0.29
+2026-06-26 02:07:21.5865|INFO|Main|GameData.Domains.World.WorldDomain|LoadWorld: 1512497495
+2026-06-26 02:07:22.0637|INFO|Main|GameData.Domains.World.WorldDomain|Currrent Population / World Standard Population: 6626/5957, Probability Adjustment of Creating Character: 100%
+2026-06-26 02:07:22.2452|INFO|Main|AdaptableLog|OnLoadedArchiveData
+2026-06-26 02:07:22.2452|INFO|Main|AdaptableLog|OnLoadedArchiveData
+2026-06-26 02:07:22.6170|INFO|Main|GameData.Domains.Global.GlobalDomain|LoadWorld: 1,040.3
+2026-06-26 02:07:22.6417|INFO|Main|GameData.Domains.Item.ItemDomain|Total unowned items: 0
+2026-06-26 02:07:22.6417|INFO|Main|GameData.Domains.Character.CharacterDomain|Clearing obsolete relations: 488156 => 488156
+2026-06-26 02:07:22.7431|INFO|Main|GameData.Domains.Global.GlobalDomain|FixAbnormalDomainArchiveData: 100.8
+2026-06-26 02:07:27.8682|INFO|Main|AdaptableLog|new Event triggered : 1505c7c2-8a55-4794-bd85-1c5aec7ea341, _triggeredEventList.Count = 1
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|1505c7c2-8a55-4794-bd85-1c5aec7ea341 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 71299605-65e4-4f30-9c57-83aec3976a76, _triggeredEventList.Count = 1
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : efe7bcff-9473-4642-8fcb-926b515fadfb, _triggeredEventList.Count = 2
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : f6b9c251-40ee-4d2c-b6eb-ed5d773cc280, _triggeredEventList.Count = 3
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : dfbd3ae5-d3cb-41a7-b173-dba659030a53, _triggeredEventList.Count = 4
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 47b16801-a628-466a-92a3-1340ebd855f3, _triggeredEventList.Count = 5
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 01f62c25-6b53-4f2d-b8bf-17bc85de1ffe, _triggeredEventList.Count = 6
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : a930d7f8-2aa7-4ba1-9dac-c739e6e0d588, _triggeredEventList.Count = 7
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : ffb3be21-ac9d-4bee-9416-6d9ce36c2bf5, _triggeredEventList.Count = 8
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 45b767f3-3d09-4502-bc94-6492c69c2e30, _triggeredEventList.Count = 9
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 48988c0c-1507-405f-bd84-b694ca524728, _triggeredEventList.Count = 10
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 784bc662-1b0d-4635-974b-795c85a9b6cd, _triggeredEventList.Count = 11
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 479cab4a-177c-4eab-8ff3-eb355a816a49, _triggeredEventList.Count = 12
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : bfb51350-2d44-4cb5-a962-a9d39f3b7813, _triggeredEventList.Count = 13
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 5e1562f8-4ce6-44e8-9c64-88250bcf706a, _triggeredEventList.Count = 14
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 4387ea59-e4b6-4253-a597-0626bc2dbe57, _triggeredEventList.Count = 15
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : cfce0d18-d248-453a-bb0c-c99e35fa7eee, _triggeredEventList.Count = 16
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 6c74677a-b6a8-4e73-a360-0482714758c2, _triggeredEventList.Count = 17
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : f73b8df1-5006-4369-8646-e55f6b4e6b91, _triggeredEventList.Count = 18
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : d76d1356-5005-40cf-84a3-af4ecc0794be, _triggeredEventList.Count = 19
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 08021ce5-d120-422e-88ed-e642360438c7, _triggeredEventList.Count = 20
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 65ce1528-da27-4ae8-a393-b8727970b8ad, _triggeredEventList.Count = 21
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 27492a80-0dae-40d1-9854-fc2593f01980, _triggeredEventList.Count = 22
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 768c8640-3845-4f35-bc35-21824189cdbf, _triggeredEventList.Count = 23
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 97d86bd8-61e1-4fb2-bcfa-8f3674e13b88, _triggeredEventList.Count = 24
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : a48b5771-4629-44fd-b816-8f9ba7707b97, _triggeredEventList.Count = 25
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 5de04bdc-3947-4db6-b2cb-f990b26ed6f4, _triggeredEventList.Count = 26
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : de53aedc-cb90-4c28-913f-43effff06ac6, _triggeredEventList.Count = 27
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 1412d1b2-3b80-43f2-ba8a-e4a1eaf6dd99, _triggeredEventList.Count = 28
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : f6c1339f-b90e-4c58-8639-26ff79191e97, _triggeredEventList.Count = 29
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 4cb982fb-fccd-4564-9267-6f4df8507a76, _triggeredEventList.Count = 30
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 9fc6207e-dd11-4c40-99df-a8a3e5c59a54, _triggeredEventList.Count = 31
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 01aff125-4f66-4c38-9fb2-33870cdfe846, _triggeredEventList.Count = 32
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 3782a2bb-6c5a-4331-bb40-048a8b392c8f, _triggeredEventList.Count = 33
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 6719c936-74b0-4b70-ba84-a45e64e66e4d, _triggeredEventList.Count = 34
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : ea5b8a77-9015-42f5-9323-72496f35bea7, _triggeredEventList.Count = 35
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 78f7d7fc-8c19-49f7-a380-c211c49d8cb7, _triggeredEventList.Count = 36
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : f30b9925-12ed-4d62-b21b-e6d8e7ecaae8, _triggeredEventList.Count = 37
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 50fbbc23-ad40-4de3-882c-d638f24c87f8, _triggeredEventList.Count = 38
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 8bb5b4b3-c498-4609-a89f-fcd2860c16e3, _triggeredEventList.Count = 39
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : c07d2f7a-c25a-42eb-976e-9a0b43f74e3b, _triggeredEventList.Count = 40
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 942deff8-49fd-497b-9fbd-8567dede8dc6, _triggeredEventList.Count = 41
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : f02a649c-fdf3-4160-85bc-840f8410d69d, _triggeredEventList.Count = 42
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : e864306a-d431-481a-99fc-8216df16532a, _triggeredEventList.Count = 43
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 6baee519-6108-4f0f-a44d-bbd4a6d65a02, _triggeredEventList.Count = 44
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|new Event triggered : 42b7b9de-2b93-4495-b475-6a8ef66d3fb8, _triggeredEventList.Count = 45
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|71299605-65e4-4f30-9c57-83aec3976a76 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|efe7bcff-9473-4642-8fcb-926b515fadfb to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|f6b9c251-40ee-4d2c-b6eb-ed5d773cc280 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|dfbd3ae5-d3cb-41a7-b173-dba659030a53 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|47b16801-a628-466a-92a3-1340ebd855f3 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|01f62c25-6b53-4f2d-b8bf-17bc85de1ffe to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|a930d7f8-2aa7-4ba1-9dac-c739e6e0d588 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|ffb3be21-ac9d-4bee-9416-6d9ce36c2bf5 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|45b767f3-3d09-4502-bc94-6492c69c2e30 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|48988c0c-1507-405f-bd84-b694ca524728 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|784bc662-1b0d-4635-974b-795c85a9b6cd to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|479cab4a-177c-4eab-8ff3-eb355a816a49 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|bfb51350-2d44-4cb5-a962-a9d39f3b7813 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|5e1562f8-4ce6-44e8-9c64-88250bcf706a to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|4387ea59-e4b6-4253-a597-0626bc2dbe57 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|cfce0d18-d248-453a-bb0c-c99e35fa7eee to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|6c74677a-b6a8-4e73-a360-0482714758c2 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|f73b8df1-5006-4369-8646-e55f6b4e6b91 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|d76d1356-5005-40cf-84a3-af4ecc0794be to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|08021ce5-d120-422e-88ed-e642360438c7 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|65ce1528-da27-4ae8-a393-b8727970b8ad to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|27492a80-0dae-40d1-9854-fc2593f01980 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|768c8640-3845-4f35-bc35-21824189cdbf to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|97d86bd8-61e1-4fb2-bcfa-8f3674e13b88 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|a48b5771-4629-44fd-b816-8f9ba7707b97 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|5de04bdc-3947-4db6-b2cb-f990b26ed6f4 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|de53aedc-cb90-4c28-913f-43effff06ac6 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|1412d1b2-3b80-43f2-ba8a-e4a1eaf6dd99 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|f6c1339f-b90e-4c58-8639-26ff79191e97 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|4cb982fb-fccd-4564-9267-6f4df8507a76 to event => 
+2026-06-26 02:07:28.0167|INFO|Main|AdaptableLog|9fc6207e-dd11-4c40-99df-a8a3e5c59a54 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|01aff125-4f66-4c38-9fb2-33870cdfe846 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|3782a2bb-6c5a-4331-bb40-048a8b392c8f to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|6719c936-74b0-4b70-ba84-a45e64e66e4d to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|ea5b8a77-9015-42f5-9323-72496f35bea7 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|78f7d7fc-8c19-49f7-a380-c211c49d8cb7 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|f30b9925-12ed-4d62-b21b-e6d8e7ecaae8 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|50fbbc23-ad40-4de3-882c-d638f24c87f8 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|8bb5b4b3-c498-4609-a89f-fcd2860c16e3 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|c07d2f7a-c25a-42eb-976e-9a0b43f74e3b to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|942deff8-49fd-497b-9fbd-8567dede8dc6 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|f02a649c-fdf3-4160-85bc-840f8410d69d to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|e864306a-d431-481a-99fc-8216df16532a to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|6baee519-6108-4f0f-a44d-bbd4a6d65a02 to event => 
+2026-06-26 02:07:28.0304|INFO|Main|AdaptableLog|42b7b9de-2b93-4495-b475-6a8ef66d3fb8 to event => 
+2026-06-26 02:07:29.5025|INFO|Main|GameData.Domains.Map.MapDomain|Move to 203
+2026-06-26 02:07:30.0371|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:30.0477|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:30.6357|INFO|Main|GameData.Domains.Map.MapDomain|Move to 183
+2026-06-26 02:07:31.1858|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:31.1858|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:31.7197|INFO|Main|GameData.Domains.Map.MapDomain|Move to 182
+2026-06-26 02:07:32.2364|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:32.2364|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:33.3032|INFO|Main|GameData.Domains.Map.MapDomain|Move to 183
+2026-06-26 02:07:33.8375|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:33.8375|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:33.8539|INFO|Main|GameData.Domains.Map.MapDomain|Move to 184
+2026-06-26 02:07:34.3872|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:34.3872|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:07:34.3872|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:34.3872|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:07:34.3934|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:07:34.9872|INFO|Main|GameData.Domains.Map.MapDomain|Move to 164
+2026-06-26 02:07:35.5039|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:35.5039|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:35.9723|INFO|Main|GameData.Domains.Map.MapDomain|Move to 163
+2026-06-26 02:07:36.5057|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:36.5057|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:36.8223|INFO|Main|GameData.Domains.Map.MapDomain|Move to 162
+2026-06-26 02:07:37.3557|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:37.3557|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:37.6890|INFO|Main|GameData.Domains.Map.MapDomain|Move to 142
+2026-06-26 02:07:38.2238|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:38.2238|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:38.5071|INFO|Main|GameData.Domains.Map.MapDomain|Move to 143
+2026-06-26 02:07:39.0571|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:39.0571|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:39.3237|INFO|Main|GameData.Domains.Map.MapDomain|Move to 123
+2026-06-26 02:07:39.8738|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:39.8738|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:40.1910|INFO|Main|GameData.Domains.Map.MapDomain|Move to 103
+2026-06-26 02:07:40.7243|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:40.7243|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:41.0743|INFO|Main|GameData.Domains.Map.MapDomain|Move to 104
+2026-06-26 02:07:41.6077|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:41.6084|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:41.8743|INFO|Main|GameData.Domains.Map.MapDomain|Move to 105
+2026-06-26 02:07:42.4244|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:42.4244|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:42.8910|INFO|Main|GameData.Domains.Map.MapDomain|Move to 85
+2026-06-26 02:07:43.4078|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:43.4078|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:43.7078|INFO|Main|GameData.Domains.Map.MapDomain|Move to 84
+2026-06-26 02:07:44.2411|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:44.2411|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:44.5078|INFO|Main|GameData.Domains.Map.MapDomain|Move to 85
+2026-06-26 02:07:45.0415|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:45.0415|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:45.0748|INFO|Main|GameData.Domains.Map.MapDomain|Move to 86
+2026-06-26 02:07:45.6248|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:45.6248|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:46.2248|INFO|Main|GameData.Domains.Map.MapDomain|Move to 87
+2026-06-26 02:07:46.7764|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:46.7764|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:47.1263|INFO|Main|GameData.Domains.Map.MapDomain|Move to 107
+2026-06-26 02:07:47.6597|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:47.6597|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:48.0764|INFO|Main|GameData.Domains.Map.MapDomain|Move to 108
+2026-06-26 02:07:48.6097|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:48.6097|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:07:48.6097|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:48.6097|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:07:48.6097|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:07:48.9600|INFO|Main|GameData.Domains.Map.MapDomain|Move to 88
+2026-06-26 02:07:49.5100|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:49.5100|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:50.0935|INFO|Main|GameData.Domains.Map.MapDomain|Move to 87
+2026-06-26 02:07:50.6435|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:50.6435|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:50.6602|INFO|Main|GameData.Domains.Map.MapDomain|Move to 67
+2026-06-26 02:07:51.1955|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:51.1955|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:51.5788|INFO|Main|GameData.Domains.Map.MapDomain|Move to 47
+2026-06-26 02:07:52.1122|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:52.1122|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:52.4455|INFO|Main|GameData.Domains.Map.MapDomain|Move to 48
+2026-06-26 02:07:52.9790|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:52.9790|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:53.3303|INFO|Main|GameData.Domains.Map.MapDomain|Move to 49
+2026-06-26 02:07:53.8637|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:53.8637|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:54.1971|INFO|Main|GameData.Domains.Map.MapDomain|Move to 50
+2026-06-26 02:07:54.7305|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:54.7305|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:55.0138|INFO|Main|GameData.Domains.Map.MapDomain|Move to 70
+2026-06-26 02:07:55.5640|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:55.5640|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:55.5973|INFO|Main|GameData.Domains.Map.MapDomain|Move to 71
+2026-06-26 02:07:56.1308|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:56.1308|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:56.5641|INFO|Main|GameData.Domains.Map.MapDomain|Move to 72
+2026-06-26 02:07:57.0975|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:57.0975|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:57.3641|INFO|Main|GameData.Domains.Map.MapDomain|Move to 52
+2026-06-26 02:07:57.8810|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:57.8810|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:57.8976|INFO|Main|GameData.Domains.Map.MapDomain|Move to 53
+2026-06-26 02:07:58.4311|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:58.4311|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:07:58.4311|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:58.4311|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:07:58.4311|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:07:58.7479|INFO|Main|GameData.Domains.Map.MapDomain|Move to 54
+2026-06-26 02:07:59.2813|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:07:59.2813|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:07:59.6812|INFO|Main|GameData.Domains.Map.MapDomain|Move to 74
+2026-06-26 02:08:00.2155|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:00.2155|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:00.4988|INFO|Main|GameData.Domains.Map.MapDomain|Move to 94
+2026-06-26 02:08:01.0490|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:01.0490|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:08:01.0490|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:01.0490|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:08:01.0490|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:08:01.5156|INFO|Main|GameData.Domains.Map.MapDomain|Move to 114
+2026-06-26 02:08:02.0671|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:02.0671|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:02.1004|INFO|Main|GameData.Domains.Map.MapDomain|Move to 113
+2026-06-26 02:08:02.6337|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:02.6337|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:02.6670|INFO|Main|GameData.Domains.Map.MapDomain|Move to 112
+2026-06-26 02:08:03.2171|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:03.2171|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:06.0364|INFO|Main|GameData.Domains.Map.MapDomain|Move to 113
+2026-06-26 02:08:06.5701|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:06.5701|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:06.6034|INFO|Main|GameData.Domains.Map.MapDomain|Move to 114
+2026-06-26 02:08:07.1367|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:07.1367|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:07.4200|INFO|Main|GameData.Domains.Map.MapDomain|Move to 115
+2026-06-26 02:08:07.9534|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:07.9534|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:08.2367|INFO|Main|GameData.Domains.Map.MapDomain|Move to 116
+2026-06-26 02:08:08.7701|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:08.7701|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:09.1201|INFO|Main|GameData.Domains.Map.MapDomain|Move to 96
+2026-06-26 02:08:09.6535|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:09.6535|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:08:09.6535|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:09.6535|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:08:09.6535|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:08:10.0034|INFO|Main|GameData.Domains.Map.MapDomain|Move to 97
+2026-06-26 02:08:10.5368|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:10.5368|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:08:10.5368|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:10.5368|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:08:10.5368|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:08:10.8874|INFO|Main|GameData.Domains.Map.MapDomain|Move to 77
+2026-06-26 02:08:11.4041|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:11.4041|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:11.7374|INFO|Main|GameData.Domains.Map.MapDomain|Move to 76
+2026-06-26 02:08:12.2708|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:12.2708|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:12.5208|INFO|Main|GameData.Domains.Map.MapDomain|Move to 77
+2026-06-26 02:08:13.0548|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:13.0548|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:13.0881|INFO|Main|GameData.Domains.Map.MapDomain|Move to 78
+2026-06-26 02:08:13.6215|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:13.6215|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:13.9548|INFO|Main|GameData.Domains.Map.MapDomain|Move to 98
+2026-06-26 02:08:14.5048|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:14.5048|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:14.5381|INFO|Main|GameData.Domains.Map.MapDomain|Move to 118
+2026-06-26 02:08:15.0720|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:15.0720|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:15.4720|INFO|Main|GameData.Domains.Map.MapDomain|Move to 119
+2026-06-26 02:08:16.0055|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:16.0055|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:08:16.0055|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:16.0055|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:08:16.0055|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:08:46.3553|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409284304896
+2026-06-26 02:08:46.3692|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: begin ------------------------------------------------------------
+2026-06-26 02:08:46.3735|INFO|Main|GameData.Domains.Character.CharacterDomain|Removing all temporary enemies with a total count of 6
+2026-06-26 02:08:46.3735|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409284304896
+2026-06-26 02:08:46.3735|INFO|Main|GameData.Domains.World.WorldDomain|New month begin: Year 2, Month 4 (15)
+2026-06-26 02:08:46.3735|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] PreAdvanceMonth: 5.6
+2026-06-26 02:08:46.6254|INFO|Main|GameData.Domains.Character.CharacterDomain|市镇权贵-巩莫(78) is dead at age 35.(玄灰绝命:{killer=-1, location={0, 519}, adventure=0})
+2026-06-26 02:08:46.6637|INFO|Main|GameData.Domains.Character.CharacterDomain|山寨大夫-何仁(127) is dead at age 27.(玄灰绝命:{killer=-1, location={2, 134}, adventure=0})
+2026-06-26 02:08:46.6637|INFO|Main|GameData.Domains.Character.CharacterDomain|山寨商人-经春随(3251) is dead at age 20.(玄灰绝命:{killer=-1, location={21, 799}, adventure=0})
+2026-06-26 02:08:46.6775|INFO|Main|GameData.Domains.Character.CharacterDomain|扬州豪富-屠淑凡(6346) is dead at age 36.(玄灰绝命:{killer=-1, location={42, 340}, adventure=0})
+2026-06-26 02:08:46.6912|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateStatus: 299.4
+2026-06-26 02:08:46.7390|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] SelfImprovement: 37.9
+2026-06-26 02:08:46.7514|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterPreparation: 12.1
+2026-06-26 02:08:46.8737|INFO|Main|GameData.Domains.Character.CharacterDomain|[DistantMarriage] PassConditionCount=1454, PassSuccessRateCheckCount=31, FoundTargetCount=16
+2026-06-26 02:08:46.8811|INFO|Main|GameData.Domains.Character.CharacterDomain|Adore Relations In Marriage: 35/38
+2026-06-26 02:08:46.8811|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterRelationsUpdate: 130.3
+2026-06-26 02:08:46.8924|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterActionPlanning: 10.1
+2026-06-26 02:08:46.8924|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterFixedAction: 0.0
+2026-06-26 02:08:48.2772|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInformation: 1,384.0
+2026-06-26 02:08:48.3026|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInfectedCharacters: 0.2
+2026-06-26 02:08:48.3180|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateCharacterMovements: 15.2
+2026-06-26 02:08:48.3563|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 市镇, grade 0: 1
+2026-06-26 02:08:48.3563|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 市镇, grade 0: 1
+2026-06-26 02:08:48.7030|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateOrganizationMembers: 361.5
+2026-06-26 02:08:48.7202|WARN|Main|AdaptableLog|[Adventure]: AutoGenerateByConfig cost 11ms
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左俘虏
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上俘虏
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右俘虏
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左俘虏
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上俘虏
+2026-06-26 02:08:48.7868|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右俘虏
+2026-06-26 02:08:48.8038|WARN|Main|AdaptableLog|get invalid vital data by type Heaven
+2026-06-26 02:08:48.8038|WARN|Main|AdaptableLog|get invalid vital data by type Earth
+2026-06-26 02:08:48.8038|WARN|Main|AdaptableLog|get invalid vital data by type Human
+2026-06-26 02:08:48.8146|INFO|Main|GameData.Domains.World.WorldDomain|Removing monthly event Config.MonthlyEventItem(470) at 0 of size 7 from a collection of size 7 and count 1
+2026-06-26 02:08:48.8146|INFO|Main|GameData.Domains.World.WorldDomain|CheckMonthlyEvents: 0 events detected.
+2026-06-26 02:08:48.8146|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: end --------------------------------------------------------------
+2026-06-26 02:08:48.8146|INFO|Main|GameData.Domains.World.WorldDomain|Advance Month Time Cost: 2449ms
+2026-06-26 02:08:48.8146|INFO|Main|TaiwuOptimization.Runtime.AdvanceMonthOptimizationDiagnostics|TaiwuOptimization: runtime budget summary
+  frame:
+    interval: 86.2s
+    activeFrames: 24
+    budget: 2.000ms
+    avgElapsed: 0.330ms
+    maxElapsed: 5.057ms
+    overrunFrames: 1
+    cooldownFrames: 1
+  protectionCache:
+    state: Ready
+    needsFrameBuild: False
+    hasSnapshot: True
+    hasFrozenSnapshot: False
+    versions: 2/2/2
+    cacheBuildSteps: 23
+    cacheStepOverruns: 0
+    forcedBuilds: 0
+    forcedBuildSteps: 0
+    forcedBuildElapsed: 0.000ms
+    publishedGroupChars: 1
+    publishedRelatedChars: 2
+    publishedProtectedAreas: 1
+    buildStage: None
+    buildAnchors: -1/0
+    buildAnchorCharId: -1
+    buildRelationTypes: -1/16
+    buildRelationType: 0
+    buildGroupChars: 0
+    buildRelatedChars: 0
+    buildProtectedAreas: 0
+    protectedAreaSource: none
+    protectNeighborAreas: True
+  pending:
+    executed: 1
+    executedByKind:
+      CharacterParallelActionChunk: 1
+      MapBrokenBlockUpdate: 0
+      AnimalAreaData: 0
+      SkeletonGeneration: 0
+      MapPickupCleanup: 0
+    remaining: 4708
+    remainingByKind:
+      CharacterParallelActionChunk: 3620
+      MapBrokenBlockUpdate: 180
+      AnimalAreaData: 140
+      SkeletonGeneration: 0
+      MapPickupCleanup: 768
+
+2026-06-26 02:08:48.8852|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409284128768
+2026-06-26 02:08:48.9686|INFO|Main|GameData.Domains.World.WorldDomain|Exit advancing month state and start saving world.
+2026-06-26 02:08:49.7629|INFO|Main|GameData.Domains.World.WorldDomain|Currrent Population / World Standard Population: 6648/5957, Probability Adjustment of Creating Character: 100%
+2026-06-26 02:08:49.7629|INFO|Main|GameData.Domains.Character.CharacterDomain|[[16]] Alive characters: 7232, dead characters: 640
+2026-06-26 02:08:49.7656|INFO|Main|GameData.Domains.Character.CharacterDomain|Non-intelligent characters: 44
+  7916: 1122-古将残魂
+  7915: 1117-古兵残魂
+  7196: 336-鬼仆
+  7201: 341-妖乐师
+  7207: 347-毒手客
+  7212: 352-恶煞
+  7216: 356-疯魔
+  7226: 366-闻恶声
+  7258: 398-八门正徒
+  7380: 646-恶徒
+  7381: 647-恶徒
+  7382: 648-恶徒
+  7383: 649-恶徒
+  7384: 650-恶徒
+  7392: 848-未知门人
+  7393: 849-未知门人
+  7771: 377-年轻侠士
+  7772: 377-年轻侠士
+  7773: 377-年轻侠士
+  7774: 377-年轻侠士
+  7775: 377-年轻侠士
+  7776: 377-年轻侠士
+  7777: 377-年轻侠士
+  7778: 377-年轻侠士
+  7779: 377-年轻侠士
+  7789: 377-年轻侠士
+  7788: 377-年轻侠士
+  7787: 377-年轻侠士
+  7841: 377-年轻侠士
+  7842: 377-年轻侠士
+  7843: 377-年轻侠士
+  7844: 377-年轻侠士
+  7845: 377-年轻侠士
+  7846: 377-年轻侠士
+  7847: 377-年轻侠士
+  7848: 377-年轻侠士
+  7849: 377-年轻侠士
+  7850: 377-年轻侠士
+  7883: 377-年轻侠士
+  7884: 377-年轻侠士
+
+2026-06-26 02:08:49.7656|INFO|Main|AdaptableLog|EventArgBox newly created: 261 instances, 568 object collections.
+2026-06-26 02:08:49.7656|INFO|Main|GameData.Domains.Item.ItemDomain|Total unowned items: 0
+2026-06-26 02:08:50.0079|INFO|Main|GameData.Domains.Global.GlobalDomain|Total managed memory usage: 390.1MB
+2026-06-26 02:08:50.0284|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409283989504
+2026-06-26 02:08:50.5036|INFO|Main|GameData.Domains.Global.GlobalDomain|SaveWorld: 474.8
+2026-06-26 02:08:52.3427|INFO|Main|AdaptableLog|new Event triggered : 1505c7c2-8a55-4794-bd85-1c5aec7ea341, _triggeredEventList.Count = 1
+2026-06-26 02:08:52.3431|INFO|Main|AdaptableLog|1505c7c2-8a55-4794-bd85-1c5aec7ea341 to event => 
+2026-06-26 02:08:54.6096|INFO|Main|GameData.Domains.Map.MapDomain|Move to 118
+2026-06-26 02:08:55.1597|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:55.1597|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:55.1930|INFO|Main|GameData.Domains.Map.MapDomain|Move to 138
+2026-06-26 02:08:55.7273|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:55.7273|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:56.1773|INFO|Main|GameData.Domains.Map.MapDomain|Move to 158
+2026-06-26 02:08:56.7273|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:56.7273|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:08:56.7273|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:56.7273|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:08:56.7273|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:08:57.2940|INFO|Main|GameData.Domains.Map.MapDomain|Move to 157
+2026-06-26 02:08:57.8107|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:57.8107|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:08:57.8107|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:57.8118|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:08:57.8118|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:08:58.2606|INFO|Main|GameData.Domains.Map.MapDomain|Move to 177
+2026-06-26 02:08:58.7773|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:08:58.7773|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:08:59.6274|INFO|Main|GameData.Domains.Map.MapDomain|Move to 197
+2026-06-26 02:09:00.1607|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:00.1607|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:09:00.1607|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:00.1607|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:09:00.1607|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:09:00.5941|INFO|Main|GameData.Domains.Map.MapDomain|Move to 198
+2026-06-26 02:09:01.1789|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:01.1789|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:01.5289|INFO|Main|GameData.Domains.Map.MapDomain|Move to 199
+2026-06-26 02:09:02.0622|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:02.0622|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:02.4122|INFO|Main|GameData.Domains.Map.MapDomain|Move to 219
+2026-06-26 02:09:02.9456|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:02.9456|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:03.2959|INFO|Main|GameData.Domains.Map.MapDomain|Move to 218
+2026-06-26 02:09:03.8293|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:03.8293|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:04.1793|INFO|Main|GameData.Domains.Map.MapDomain|Move to 238
+2026-06-26 02:09:04.6960|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:04.6960|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:05.0293|INFO|Main|GameData.Domains.Map.MapDomain|Move to 258
+2026-06-26 02:09:05.5631|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:05.5631|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:05.8965|INFO|Main|GameData.Domains.Map.MapDomain|Move to 278
+2026-06-26 02:09:06.4132|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:06.4132|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:06.7298|INFO|Main|GameData.Domains.Map.MapDomain|Move to 298
+2026-06-26 02:09:07.2632|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:07.2632|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:07.5648|INFO|Main|GameData.Domains.Map.MapDomain|Move to 318
+2026-06-26 02:09:08.0983|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:08.0983|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:08.4148|INFO|Main|GameData.Domains.Map.MapDomain|Move to 338
+2026-06-26 02:09:08.9315|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:08.9315|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:09.2482|INFO|Main|GameData.Domains.Map.MapDomain|Move to 358
+2026-06-26 02:09:09.7668|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:09.7668|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:10.1501|INFO|Main|GameData.Domains.Map.MapDomain|Move to 378
+2026-06-26 02:09:10.6668|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:10.6668|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:09:10.6668|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:10.6668|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:09:10.6668|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:09:11.0834|INFO|Main|GameData.Domains.Map.MapDomain|Move to 377
+2026-06-26 02:09:11.6335|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:11.6335|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:11.9168|INFO|Main|GameData.Domains.Map.MapDomain|Move to 376
+2026-06-26 02:09:12.4502|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:12.4502|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:12.7502|INFO|Main|GameData.Domains.Map.MapDomain|Move to 375
+2026-06-26 02:09:13.2835|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:13.2835|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:13.3335|INFO|Main|GameData.Domains.Map.MapDomain|Move to 374
+2026-06-26 02:09:13.8669|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:13.8669|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:14.1512|INFO|Main|GameData.Domains.Map.MapDomain|Move to 354
+2026-06-26 02:09:14.6846|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:14.6846|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:15.0179|INFO|Main|GameData.Domains.Map.MapDomain|Move to 353
+2026-06-26 02:09:15.5513|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:15.5513|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:09:15.5513|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:15.5513|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:09:15.5513|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:09:15.8680|INFO|Main|GameData.Domains.Map.MapDomain|Move to 333
+2026-06-26 02:09:16.4024|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:16.4024|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:16.4191|INFO|Main|GameData.Domains.Map.MapDomain|Move to 334
+2026-06-26 02:09:16.9525|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:16.9525|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:17.2358|INFO|Main|GameData.Domains.Map.MapDomain|Move to 314
+2026-06-26 02:09:17.7691|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:17.7691|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:18.4202|INFO|Main|GameData.Domains.Map.MapDomain|Move to 315
+2026-06-26 02:09:18.9535|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:18.9535|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:09:18.9535|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:18.9535|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:09:18.9535|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:09:19.2702|INFO|Main|GameData.Domains.Map.MapDomain|Move to 295
+2026-06-26 02:09:19.8202|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:19.8202|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:20.0868|INFO|Main|GameData.Domains.Map.MapDomain|Move to 275
+2026-06-26 02:09:20.6208|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:20.6208|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:20.6541|INFO|Main|GameData.Domains.Map.MapDomain|Move to 255
+2026-06-26 02:09:21.1875|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:21.1875|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:21.4375|INFO|Main|GameData.Domains.Map.MapDomain|Move to 254
+2026-06-26 02:09:21.9542|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:21.9542|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:21.9875|INFO|Main|GameData.Domains.Map.MapDomain|Move to 234
+2026-06-26 02:09:22.5208|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:22.5208|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:22.9717|INFO|Main|GameData.Domains.Map.MapDomain|Move to 233
+2026-06-26 02:09:23.5217|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:23.5217|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:23.5550|INFO|Main|GameData.Domains.Map.MapDomain|Move to 253
+2026-06-26 02:09:24.0717|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:24.0717|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:09:24.0717|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:24.0717|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:09:24.0717|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:09:24.5717|INFO|Main|GameData.Domains.Map.MapDomain|Move to 233
+2026-06-26 02:09:25.1070|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:25.1070|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:25.1403|INFO|Main|GameData.Domains.Map.MapDomain|Move to 234
+2026-06-26 02:09:25.6737|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:25.6737|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:25.6903|INFO|Main|GameData.Domains.Map.MapDomain|Move to 214
+2026-06-26 02:09:26.2237|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:26.2237|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:26.5403|INFO|Main|GameData.Domains.Map.MapDomain|Move to 215
+2026-06-26 02:09:27.0745|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:27.0745|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:27.3745|INFO|Main|GameData.Domains.Map.MapDomain|Move to 216
+2026-06-26 02:09:27.9245|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:27.9245|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:28.2745|INFO|Main|GameData.Domains.Map.MapDomain|Move to 196
+2026-06-26 02:09:28.8079|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:28.8079|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:28.8412|INFO|Main|GameData.Domains.Map.MapDomain|Move to 195
+2026-06-26 02:09:29.3747|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:29.3747|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:29.7080|INFO|Main|GameData.Domains.Map.MapDomain|Move to 175
+2026-06-26 02:09:30.2247|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:30.2247|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:30.8761|INFO|Main|GameData.Domains.Map.MapDomain|Move to 174
+2026-06-26 02:09:31.3940|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:31.3940|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:31.8440|INFO|Main|GameData.Domains.Map.MapDomain|Move to 173
+2026-06-26 02:09:32.3774|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:32.3774|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:09:32.3774|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:32.3774|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:09:32.3774|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:09:32.9775|INFO|Main|GameData.Domains.Map.MapDomain|Move to 153
+2026-06-26 02:09:33.5109|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:33.5109|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:09:33.5109|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:33.5109|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:09:33.5109|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:09:33.9293|INFO|Main|GameData.Domains.Map.MapDomain|Move to 152
+2026-06-26 02:09:34.4627|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:34.4627|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:34.4960|INFO|Main|GameData.Domains.Map.MapDomain|Move to 172
+2026-06-26 02:09:35.0297|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:35.0304|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:35.3964|INFO|Main|GameData.Domains.Map.MapDomain|Move to 192
+2026-06-26 02:09:35.9320|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:35.9320|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:36.3154|INFO|Main|GameData.Domains.Map.MapDomain|Move to 191
+2026-06-26 02:09:36.8487|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:36.8487|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:36.8820|INFO|Main|GameData.Domains.Map.MapDomain|Move to 190
+2026-06-26 02:09:37.4154|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:37.4154|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:37.9989|INFO|Main|GameData.Domains.Map.MapDomain|Move to 170
+2026-06-26 02:09:38.5322|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:38.5322|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:38.5655|INFO|Main|GameData.Domains.Map.MapDomain|Move to 150
+2026-06-26 02:09:39.0989|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:39.0989|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:39.1322|INFO|Main|GameData.Domains.Map.MapDomain|Move to 151
+2026-06-26 02:09:39.6656|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:39.6656|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:39.6822|INFO|Main|GameData.Domains.Map.MapDomain|Move to 152
+2026-06-26 02:09:40.2168|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:40.2175|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:40.2501|INFO|Main|GameData.Domains.Map.MapDomain|Move to 132
+2026-06-26 02:09:40.7836|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:40.7836|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:55.8735|INFO|Main|GameData.Domains.Map.MapDomain|Move to 112
+2026-06-26 02:09:56.4069|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:56.4069|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:56.4235|INFO|Main|GameData.Domains.Map.MapDomain|Move to 92
+2026-06-26 02:09:56.9569|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:56.9569|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:57.4235|INFO|Main|GameData.Domains.Map.MapDomain|Move to 91
+2026-06-26 02:09:57.9573|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:57.9573|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:57.9906|INFO|Main|GameData.Domains.Map.MapDomain|Move to 90
+2026-06-26 02:09:58.5073|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:58.5073|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:58.5407|INFO|Main|GameData.Domains.Map.MapDomain|Move to 89
+2026-06-26 02:09:59.0907|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:59.0907|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:59.1240|INFO|Main|GameData.Domains.Map.MapDomain|Move to 88
+2026-06-26 02:09:59.6574|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:09:59.6574|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:09:59.6907|INFO|Main|GameData.Domains.Map.MapDomain|Move to 87
+2026-06-26 02:10:00.2240|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:00.2240|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:01.1407|INFO|Main|GameData.Domains.Map.MapDomain|Move to 107
+2026-06-26 02:10:01.6740|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:01.6740|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:01.6907|INFO|Main|GameData.Domains.Map.MapDomain|Move to 127
+2026-06-26 02:10:02.2252|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:02.2252|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:02.6252|INFO|Main|GameData.Domains.Map.MapDomain|Move to 147
+2026-06-26 02:10:03.1587|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:03.1587|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:10:03.1587|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:03.1587|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:10:03.1587|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:10:03.5920|INFO|Main|GameData.Domains.Map.MapDomain|Move to 167
+2026-06-26 02:10:04.1257|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:04.1257|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:04.1423|INFO|Main|GameData.Domains.Map.MapDomain|Move to 187
+2026-06-26 02:10:04.6757|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:04.6757|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:04.7090|INFO|Main|GameData.Domains.Map.MapDomain|Move to 207
+2026-06-26 02:10:05.2425|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:05.2425|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:05.4758|INFO|Main|GameData.Domains.Map.MapDomain|Move to 227
+2026-06-26 02:10:06.0091|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:06.0091|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:06.3105|INFO|Main|GameData.Domains.Map.MapDomain|Move to 228
+2026-06-26 02:10:06.8272|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:06.8272|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:10:06.8272|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:06.8272|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:10:06.8272|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:10:07.2272|INFO|Main|GameData.Domains.Map.MapDomain|Move to 248
+2026-06-26 02:10:07.7773|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:07.7773|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:07.7939|INFO|Main|GameData.Domains.Map.MapDomain|Move to 268
+2026-06-26 02:10:08.3273|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:08.3273|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:08.3606|INFO|Main|GameData.Domains.Map.MapDomain|Move to 267
+2026-06-26 02:10:08.8942|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:08.8942|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:08.9108|INFO|Main|GameData.Domains.Map.MapDomain|Move to 287
+2026-06-26 02:10:09.4442|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:09.4442|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:09.4775|INFO|Main|GameData.Domains.Map.MapDomain|Move to 307
+2026-06-26 02:10:10.0109|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:10.0109|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:10.0442|INFO|Main|GameData.Domains.Map.MapDomain|Move to 327
+2026-06-26 02:10:10.5943|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:10.5943|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:10.6276|INFO|Main|GameData.Domains.Map.MapDomain|Move to 347
+2026-06-26 02:10:11.1443|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:11.1443|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:10:11.1443|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:11.1443|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:10:11.1443|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:10:11.5944|INFO|Main|GameData.Domains.Map.MapDomain|Move to 348
+2026-06-26 02:10:12.1279|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:12.1279|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:12.4445|INFO|Main|GameData.Domains.Map.MapDomain|Move to 349
+2026-06-26 02:10:12.9779|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:12.9779|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:13.4279|INFO|Main|GameData.Domains.Map.MapDomain|Move to 369
+2026-06-26 02:10:13.9613|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:13.9613|INFO|Main|AdaptableLog|new Event triggered : 525600f1-3064-4b93-9971-90e8b530418b, _triggeredEventList.Count = 2
+2026-06-26 02:10:13.9613|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:13.9613|INFO|Main|AdaptableLog|525600f1-3064-4b93-9971-90e8b530418b to event => 02a045ec-c77b-4bab-9b01-ff6ecd9b26d1
+2026-06-26 02:10:13.9613|INFO|Main|AdaptableLog|02a045ec-c77b-4bab-9b01-ff6ecd9b26d1 to event => 
+2026-06-26 02:10:14.4279|INFO|Main|GameData.Domains.Map.MapDomain|Move to 370
+2026-06-26 02:10:14.9613|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:14.9613|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:15.5298|INFO|Main|GameData.Domains.Map.MapDomain|Move to 350
+2026-06-26 02:10:16.0632|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:16.0632|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:16.0798|INFO|Main|GameData.Domains.Map.MapDomain|Move to 351
+2026-06-26 02:10:16.5965|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:16.5965|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:16.6298|INFO|Main|GameData.Domains.Map.MapDomain|Move to 331
+2026-06-26 02:10:17.1799|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:17.1799|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:17.6640|INFO|Main|GameData.Domains.Map.MapDomain|Move to 332
+2026-06-26 02:10:18.1973|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:18.1973|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:18.2140|INFO|Main|GameData.Domains.Map.MapDomain|Move to 333
+2026-06-26 02:10:18.7474|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:18.7474|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:18.7973|INFO|Main|GameData.Domains.Map.MapDomain|Move to 334
+2026-06-26 02:10:19.3307|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:19.3307|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:19.9480|INFO|Main|GameData.Domains.Map.MapDomain|Move to 335
+2026-06-26 02:10:20.4647|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:20.4647|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:23.5161|INFO|Main|GameData.Domains.Map.MapDomain|Move to 336
+2026-06-26 02:10:24.0495|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:24.0495|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:48.7182|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409274224640
+2026-06-26 02:10:48.7514|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: begin ------------------------------------------------------------
+2026-06-26 02:10:48.7514|INFO|Main|GameData.Domains.Character.CharacterDomain|Removing all temporary enemies with a total count of 6
+2026-06-26 02:10:48.7514|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409274224640
+2026-06-26 02:10:48.7514|INFO|Main|GameData.Domains.World.WorldDomain|New month begin: Year 2, Month 5 (16)
+2026-06-26 02:10:48.7514|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] PreAdvanceMonth: 2.5
+2026-06-26 02:10:49.0090|INFO|Main|GameData.Domains.Character.CharacterDomain|市镇商人-庞秋虹(117) is dead at age 26.(玄灰绝命:{killer=-1, location={0, 460}, adventure=0})
+2026-06-26 02:10:49.0159|INFO|Main|GameData.Domains.Character.CharacterDomain|山寨手艺人-公良双艳(1324) is dead at age 19.(玄灰绝命:{killer=-1, location={7, 467}, adventure=0})
+2026-06-26 02:10:49.0159|INFO|Main|GameData.Domains.Character.CharacterDomain|江陵权贵-桂英际(3190) is dead at age 30.(玄灰绝命:{killer=-1, location={21, 586}, adventure=0})
+2026-06-26 02:10:49.0159|INFO|Main|GameData.Domains.Character.CharacterDomain|山寨商人-芮竞恒(5539) is dead at age 33.(玄灰绝命:{killer=-1, location={36, 703}, adventure=0})
+2026-06-26 02:10:49.0305|INFO|Main|GameData.Domains.Character.CharacterDomain|市镇商人-穆素霖(6300) is dead at age 20.(玄灰绝命:{killer=-1, location={41, 271}, adventure=0})
+2026-06-26 02:10:49.0305|INFO|Main|GameData.Domains.Character.CharacterDomain|市镇大夫-匡东华(6309) is dead at age 23.(玄灰绝命:{killer=-1, location={41, 271}, adventure=0})
+2026-06-26 02:10:49.0305|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateStatus: 285.0
+2026-06-26 02:10:49.0787|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] SelfImprovement: 31.2
+2026-06-26 02:10:49.0787|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterPreparation: 2.2
+2026-06-26 02:10:49.1598|INFO|Main|GameData.Domains.Character.CharacterDomain|[DistantMarriage] PassConditionCount=1468, PassSuccessRateCheckCount=30, FoundTargetCount=20
+2026-06-26 02:10:49.1598|INFO|Main|GameData.Domains.Character.CharacterDomain|Adore Relations In Marriage: 44/46
+2026-06-26 02:10:49.1598|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterRelationsUpdate: 84.6
+2026-06-26 02:10:49.1598|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterActionPlanning: 3.3
+2026-06-26 02:10:49.1598|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterFixedAction: 0.0
+2026-06-26 02:10:50.2608|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInformation: 1,091.3
+2026-06-26 02:10:50.2608|INFO|Main|GameData.Domains.Item.ItemDomain|Getting item of type 1(Armor) and sub type 102 with grade 6
+2026-06-26 02:10:50.2608|INFO|Main|GameData.Domains.Item.ItemDomain|Getting item of type 10(SkillBook) and sub type 1000 with grade 6
+2026-06-26 02:10:50.2692|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInfectedCharacters: 0.0
+2026-06-26 02:10:50.2829|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateCharacterMovements: 13.5
+2026-06-26 02:10:50.5720|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 村庄, grade 0: 1
+2026-06-26 02:10:50.5720|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 市镇, grade 0: 1
+2026-06-26 02:10:50.5720|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 市镇, grade 0: 1
+2026-06-26 02:10:50.5720|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 村庄, grade 0: 1
+2026-06-26 02:10:50.8808|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateOrganizationMembers: 576.8
+2026-06-26 02:10:50.8808|WARN|Main|AdaptableLog|[Adventure]: AutoGenerateByConfig cost 1ms
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左俘虏
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上俘虏
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右俘虏
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左俘虏
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上俘虏
+2026-06-26 02:10:50.8947|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右俘虏
+2026-06-26 02:10:50.9049|WARN|Main|AdaptableLog|get invalid vital data by type Heaven
+2026-06-26 02:10:50.9049|WARN|Main|AdaptableLog|get invalid vital data by type Earth
+2026-06-26 02:10:50.9049|WARN|Main|AdaptableLog|get invalid vital data by type Human
+2026-06-26 02:10:50.9049|INFO|Main|GameData.Domains.World.WorldDomain|CheckMonthlyEvents: 0 events detected.
+2026-06-26 02:10:50.9049|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: end --------------------------------------------------------------
+2026-06-26 02:10:50.9049|INFO|Main|GameData.Domains.World.WorldDomain|Advance Month Time Cost: 2154ms
+2026-06-26 02:10:50.9049|INFO|Main|TaiwuOptimization.Runtime.AdvanceMonthOptimizationDiagnostics|TaiwuOptimization: runtime budget summary
+  frame:
+    interval: 122.1s
+    activeFrames: 8
+    budget: 2.000ms
+    avgElapsed: 1.020ms
+    maxElapsed: 3.140ms
+    overrunFrames: 2
+    cooldownFrames: 0
+  protectionCache:
+    state: Ready
+    needsFrameBuild: False
+    hasSnapshot: True
+    hasFrozenSnapshot: False
+    versions: 2/2/2
+    cacheBuildSteps: 0
+    cacheStepOverruns: 0
+    forcedBuilds: 0
+    forcedBuildSteps: 0
+    forcedBuildElapsed: 0.000ms
+    publishedGroupChars: 1
+    publishedRelatedChars: 2
+    publishedProtectedAreas: 1
+    buildStage: None
+    buildAnchors: -1/0
+    buildAnchorCharId: -1
+    buildRelationTypes: -1/16
+    buildRelationType: 0
+    buildGroupChars: 0
+    buildRelatedChars: 0
+    buildProtectedAreas: 0
+    protectedAreaSource: none
+    protectNeighborAreas: True
+  pending:
+    executed: 26
+    executedByKind:
+      CharacterParallelActionChunk: 26
+      MapBrokenBlockUpdate: 0
+      AnimalAreaData: 0
+      SkeletonGeneration: 0
+      MapPickupCleanup: 0
+    remaining: 4782
+    remainingByKind:
+      CharacterParallelActionChunk: 3694
+      MapBrokenBlockUpdate: 180
+      AnimalAreaData: 140
+      SkeletonGeneration: 0
+      MapPickupCleanup: 768
+
+2026-06-26 02:10:50.9631|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409274028032
+2026-06-26 02:10:51.0463|INFO|Main|GameData.Domains.World.WorldDomain|Exit advancing month state and start saving world.
+2026-06-26 02:10:51.7664|INFO|Main|GameData.Domains.World.WorldDomain|Currrent Population / World Standard Population: 6661/5957, Probability Adjustment of Creating Character: 100%
+2026-06-26 02:10:51.7664|INFO|Main|GameData.Domains.Character.CharacterDomain|[[17]] Alive characters: 7245, dead characters: 646
+2026-06-26 02:10:51.7664|INFO|Main|GameData.Domains.Character.CharacterDomain|Non-intelligent characters: 38
+  7196: 336-鬼仆
+  7201: 341-妖乐师
+  7207: 347-毒手客
+  7212: 352-恶煞
+  7216: 356-疯魔
+  7226: 366-闻恶声
+  7258: 398-八门正徒
+  7380: 646-恶徒
+  7381: 647-恶徒
+  7382: 648-恶徒
+  7383: 649-恶徒
+  7384: 650-恶徒
+  7392: 848-未知门人
+  7393: 849-未知门人
+  7771: 377-年轻侠士
+  7772: 377-年轻侠士
+  7773: 377-年轻侠士
+  7774: 377-年轻侠士
+  7775: 377-年轻侠士
+  7776: 377-年轻侠士
+  7777: 377-年轻侠士
+  7778: 377-年轻侠士
+  7779: 377-年轻侠士
+  7789: 377-年轻侠士
+  7788: 377-年轻侠士
+  7787: 377-年轻侠士
+  7841: 377-年轻侠士
+  7842: 377-年轻侠士
+  7843: 377-年轻侠士
+  7844: 377-年轻侠士
+  7845: 377-年轻侠士
+  7846: 377-年轻侠士
+  7847: 377-年轻侠士
+  7848: 377-年轻侠士
+  7849: 377-年轻侠士
+  7850: 377-年轻侠士
+  7883: 377-年轻侠士
+  7884: 377-年轻侠士
+
+2026-06-26 02:10:51.7664|INFO|Main|AdaptableLog|EventArgBox newly created: 197 instances, 371 object collections.
+2026-06-26 02:10:51.7664|WARN|Main|GameData.Domains.Item.ItemDomain|1 unowned CraftTool detected.
+2026-06-26 02:10:51.7664|INFO|Main|GameData.Domains.Item.ItemDomain|Total unowned items: 1
+2026-06-26 02:10:52.0107|INFO|Main|GameData.Domains.Global.GlobalDomain|Total managed memory usage: 395.9MB
+2026-06-26 02:10:52.0306|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409273806848
+2026-06-26 02:10:52.3934|INFO|Main|GameData.Domains.Global.GlobalDomain|SaveWorld: 362.4
+2026-06-26 02:10:53.1803|INFO|Main|AdaptableLog|new Event triggered : 1505c7c2-8a55-4794-bd85-1c5aec7ea341, _triggeredEventList.Count = 1
+2026-06-26 02:10:53.1803|INFO|Main|AdaptableLog|1505c7c2-8a55-4794-bd85-1c5aec7ea341 to event => 
+2026-06-26 02:10:55.3474|INFO|Main|GameData.Domains.Map.MapDomain|Move to 316
+2026-06-26 02:10:55.8641|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:55.8641|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:55.8974|INFO|Main|GameData.Domains.Map.MapDomain|Move to 296
+2026-06-26 02:10:56.4484|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:56.4484|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:57.2317|INFO|Main|GameData.Domains.Map.MapDomain|Move to 297
+2026-06-26 02:10:57.7652|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:57.7652|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:57.7819|INFO|Main|GameData.Domains.Map.MapDomain|Move to 277
+2026-06-26 02:10:58.3153|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:58.3153|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:58.3486|INFO|Main|GameData.Domains.Map.MapDomain|Move to 257
+2026-06-26 02:10:58.8837|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:10:58.8837|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:10:59.5336|INFO|Main|GameData.Domains.Map.MapDomain|Move to 237
+2026-06-26 02:11:00.0837|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:00.0837|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:00.1170|INFO|Main|GameData.Domains.Map.MapDomain|Move to 217
+2026-06-26 02:11:00.6504|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:00.6504|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:00.6837|INFO|Main|GameData.Domains.Map.MapDomain|Move to 197
+2026-06-26 02:11:01.2007|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:01.2007|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:01.9173|INFO|Main|GameData.Domains.Map.MapDomain|Move to 177
+2026-06-26 02:11:02.4507|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:02.4507|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:02.4673|INFO|Main|GameData.Domains.Map.MapDomain|Move to 157
+2026-06-26 02:11:03.0018|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:03.0018|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:03.0518|INFO|Main|GameData.Domains.Map.MapDomain|Move to 137
+2026-06-26 02:11:03.5850|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:03.5850|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:04.0350|INFO|Main|GameData.Domains.Map.MapDomain|Move to 136
+2026-06-26 02:11:04.5517|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:04.5517|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:04.5850|INFO|Main|GameData.Domains.Map.MapDomain|Move to 135
+2026-06-26 02:11:05.1351|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:05.1351|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:05.4367|INFO|Main|GameData.Domains.Map.MapDomain|Move to 134
+2026-06-26 02:11:05.9701|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:05.9701|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:05.9867|INFO|Main|GameData.Domains.Map.MapDomain|Move to 133
+2026-06-26 02:11:06.5201|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:06.5201|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:07.0034|INFO|Main|GameData.Domains.Map.MapDomain|Move to 132
+2026-06-26 02:11:07.5372|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:07.5372|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:07.5705|INFO|Main|GameData.Domains.Map.MapDomain|Move to 112
+2026-06-26 02:11:08.1039|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:08.1039|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:08.5873|INFO|Main|GameData.Domains.Map.MapDomain|Move to 111
+2026-06-26 02:11:09.1206|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:09.1206|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:09.1539|INFO|Main|GameData.Domains.Map.MapDomain|Move to 110
+2026-06-26 02:11:09.6886|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:09.6886|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:10.1052|INFO|Main|GameData.Domains.Map.MapDomain|Move to 109
+2026-06-26 02:11:10.6553|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:10.6553|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:10.6886|INFO|Main|GameData.Domains.Map.MapDomain|Move to 108
+2026-06-26 02:11:11.2219|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:11.2219|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:11.6052|INFO|Main|GameData.Domains.Map.MapDomain|Move to 107
+2026-06-26 02:11:12.1387|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:12.1387|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:12.6220|INFO|Main|GameData.Domains.Map.MapDomain|Move to 106
+2026-06-26 02:11:13.1554|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:13.1561|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:13.7221|INFO|Main|GameData.Domains.Map.MapDomain|Move to 105
+2026-06-26 02:11:14.2728|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:14.2728|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:14.3061|INFO|Main|GameData.Domains.Map.MapDomain|Move to 104
+2026-06-26 02:11:14.8395|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:14.8395|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:15.2561|INFO|Main|GameData.Domains.Map.MapDomain|Move to 124
+2026-06-26 02:11:15.7895|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:15.7895|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:15.8062|INFO|Main|GameData.Domains.Map.MapDomain|Move to 144
+2026-06-26 02:11:16.3567|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:16.3567|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:16.8733|INFO|Main|GameData.Domains.Map.MapDomain|Move to 164
+2026-06-26 02:11:17.4067|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:17.4067|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:17.4235|INFO|Main|GameData.Domains.Map.MapDomain|Move to 184
+2026-06-26 02:11:17.9402|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:17.9402|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:18.4072|INFO|Main|GameData.Domains.Map.MapDomain|Move to 204
+2026-06-26 02:11:18.9405|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:18.9405|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:18.9738|INFO|Main|GameData.Domains.Map.MapDomain|Move to 224
+2026-06-26 02:11:19.5239|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:19.5239|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:19.8574|INFO|Main|GameData.Domains.Map.MapDomain|Move to 244
+2026-06-26 02:11:20.3908|INFO|Main|AdaptableLog|new Event triggered : 101971f0-0261-4007-962d-aeef44d80060, _triggeredEventList.Count = 1
+2026-06-26 02:11:20.3908|INFO|Main|AdaptableLog|101971f0-0261-4007-962d-aeef44d80060 to event => 
+2026-06-26 02:11:24.6491|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Incoming message: Disconnect
+2026-06-26 02:11:24.6491|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|ReadInterProcessMessages thread is about to exit.
+2026-06-26 02:11:24.6491|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Outgoing message: Disconnect
+2026-06-26 02:11:24.6491|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|WriteInterProcessMessages thread is about to exit.
+2026-06-26 02:11:24.6592|INFO|Main|GameData.Program|GameData module is about to exit.

@@ -139,6 +139,58 @@ internal static class PeriAdvanceMonthProtectionCache
             Volatile.Read(ref _needsFrameBuild) != 0;
     }
 
+    /// <summary>复制当前 protection-cache 状态，供低频诊断日志使用。</summary>
+    public static ProtectionCacheDiagnosticsSnapshot GetDiagnosticsSnapshot()
+    {
+        lock (_syncRoot)
+        {
+            BuildSession? session = _buildSession;
+            int buildAnchorCount = session?.RelationAnchors?.Length ?? 0;
+            int buildAnchorIndex = session?.RelationAnchorIndex ?? -1;
+            int buildAnchorCharId = -1;
+            if (session?.RelationAnchors != null &&
+                buildAnchorIndex >= 0 &&
+                buildAnchorIndex < session.RelationAnchors.Length)
+            {
+                buildAnchorCharId = session.RelationAnchors[buildAnchorIndex];
+            }
+
+            int buildRelationTypeIndex = session?.RelationTypeIndex ?? -1;
+            ushort buildRelationType = 0;
+            if (session?.Stage == BuildStage.RelationAnchorReverse &&
+                buildRelationTypeIndex >= 0 &&
+                buildRelationTypeIndex < DirectRelationTypes.Length)
+            {
+                buildRelationType = DirectRelationTypes[buildRelationTypeIndex];
+            }
+
+            return new ProtectionCacheDiagnosticsSnapshot(
+                _state.ToString(),
+                Volatile.Read(ref _needsFrameBuild) != 0,
+                _snapshot != null,
+                _frozenSnapshot != null,
+                _groupVersion,
+                _relationVersion,
+                _areaVersion,
+                _taiwuGroup?.CharIds.Count ?? 0,
+                _taiwuRelations?.CharIds.Count ?? 0,
+                _protectedAreas?.AreaIds.Count ?? 0,
+                session?.Stage.ToString() ?? "None",
+                buildAnchorIndex,
+                buildAnchorCount,
+                buildAnchorCharId,
+                buildRelationTypeIndex,
+                DirectRelationTypes.Length,
+                buildRelationType,
+                session?.Group?.CharIds.Count ?? 0,
+                session?.RelationCharIds?.Count ?? 0,
+                session?.ProtectedAreas?.AreaIds.Count ?? 0,
+                session?.HasProtectedAreaSource ?? false,
+                session?.ProtectedAreaSource ?? -1,
+                session?.ProtectedAreaIncludesNeighbors ?? TaiwuOptimizationSettings.ProtectNeighborStatesForAdvanceMonthOptimization);
+        }
+    }
+
     /// <summary>
     /// 在帧预算内最多推进一个 protection-cache build step。
     /// </summary>
@@ -567,9 +619,14 @@ internal static class PeriAdvanceMonthProtectionCache
         }
 
         Logger.Warn(
-            "TaiwuOptimization: PeriAdvanceMonthProtectionCache build step exceeded frame budget. " +
-            "stage={0}, anchorIndex={1}, anchorCharId={2}, relationTypeIndex={3}, relationType={4}, " +
-            "elapsed={5:N3}ms, budget={6:N3}ms.",
+            "TaiwuOptimization: protection-cache build step exceeded frame budget\n" +
+            "  stage: {0}\n" +
+            "  anchorIndex: {1}\n" +
+            "  anchorCharId: {2}\n" +
+            "  relationTypeIndex: {3}\n" +
+            "  relationType: {4}\n" +
+            "  elapsed: {5:N3}ms\n" +
+            "  budget: {6:N3}ms",
             context.Stage,
             context.AnchorIndex,
             context.AnchorCharId,
@@ -596,8 +653,9 @@ internal static class PeriAdvanceMonthProtectionCache
         }
 
         Logger.Info(
-            "TaiwuOptimization: PeriAdvanceMonthProtectionCache was completed synchronously before AdvanceMonth. " +
-            "steps={0}, elapsed={1:N3}ms.",
+            "TaiwuOptimization: protection-cache completed synchronously before AdvanceMonth\n" +
+            "  steps: {0}\n" +
+            "  elapsed: {1:N3}ms",
             steps,
             TicksToMilliseconds(elapsedTicks));
     }
@@ -780,6 +838,83 @@ internal static class PeriAdvanceMonthProtectionCache
             }
 
             return false;
+        }
+    }
+
+    internal readonly struct ProtectionCacheDiagnosticsSnapshot
+    {
+        public readonly string State;
+        public readonly bool NeedsFrameBuild;
+        public readonly bool HasSnapshot;
+        public readonly bool HasFrozenSnapshot;
+        public readonly int GroupVersion;
+        public readonly int RelationVersion;
+        public readonly int AreaVersion;
+        public readonly int PublishedGroupCharCount;
+        public readonly int PublishedRelationCharCount;
+        public readonly int PublishedProtectedAreaCount;
+        public readonly string BuildStage;
+        public readonly int BuildAnchorIndex;
+        public readonly int BuildAnchorCount;
+        public readonly int BuildAnchorCharId;
+        public readonly int BuildRelationTypeIndex;
+        public readonly int BuildRelationTypeCount;
+        public readonly ushort BuildRelationType;
+        public readonly int BuildGroupCharCount;
+        public readonly int BuildRelationCharCount;
+        public readonly int BuildProtectedAreaCount;
+        public readonly bool HasProtectedAreaSource;
+        public readonly short ProtectedAreaSource;
+        public readonly bool ProtectedAreaIncludesNeighbors;
+
+        public ProtectionCacheDiagnosticsSnapshot(
+            string state,
+            bool needsFrameBuild,
+            bool hasSnapshot,
+            bool hasFrozenSnapshot,
+            int groupVersion,
+            int relationVersion,
+            int areaVersion,
+            int publishedGroupCharCount,
+            int publishedRelationCharCount,
+            int publishedProtectedAreaCount,
+            string buildStage,
+            int buildAnchorIndex,
+            int buildAnchorCount,
+            int buildAnchorCharId,
+            int buildRelationTypeIndex,
+            int buildRelationTypeCount,
+            ushort buildRelationType,
+            int buildGroupCharCount,
+            int buildRelationCharCount,
+            int buildProtectedAreaCount,
+            bool hasProtectedAreaSource,
+            short protectedAreaSource,
+            bool protectedAreaIncludesNeighbors)
+        {
+            State = state;
+            NeedsFrameBuild = needsFrameBuild;
+            HasSnapshot = hasSnapshot;
+            HasFrozenSnapshot = hasFrozenSnapshot;
+            GroupVersion = groupVersion;
+            RelationVersion = relationVersion;
+            AreaVersion = areaVersion;
+            PublishedGroupCharCount = publishedGroupCharCount;
+            PublishedRelationCharCount = publishedRelationCharCount;
+            PublishedProtectedAreaCount = publishedProtectedAreaCount;
+            BuildStage = buildStage;
+            BuildAnchorIndex = buildAnchorIndex;
+            BuildAnchorCount = buildAnchorCount;
+            BuildAnchorCharId = buildAnchorCharId;
+            BuildRelationTypeIndex = buildRelationTypeIndex;
+            BuildRelationTypeCount = buildRelationTypeCount;
+            BuildRelationType = buildRelationType;
+            BuildGroupCharCount = buildGroupCharCount;
+            BuildRelationCharCount = buildRelationCharCount;
+            BuildProtectedAreaCount = buildProtectedAreaCount;
+            HasProtectedAreaSource = hasProtectedAreaSource;
+            ProtectedAreaSource = protectedAreaSource;
+            ProtectedAreaIncludesNeighbors = protectedAreaIncludesNeighbors;
         }
     }
 }
