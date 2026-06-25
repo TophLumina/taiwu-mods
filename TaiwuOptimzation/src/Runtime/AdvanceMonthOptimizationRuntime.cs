@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
 using GameData.ActionPlanning.MonthlyAI;
 using Config;
@@ -241,9 +240,16 @@ internal static class AdvanceMonthOptimizationRuntime
             return;
         }
 
+        bool hasPendingAdvanceMonthJobs = HasPendingAdvanceMonthJobs;
+        bool needsProtectionCacheBuild = PeriAdvanceMonthProtectionCache.NeedsFrameBuild();
+        if (!hasPendingAdvanceMonthJobs && !needsProtectionCacheBuild)
+        {
+            return;
+        }
+
         if (!IsWorldDataAvailable())
         {
-            if (HasPendingAdvanceMonthJobs)
+            if (hasPendingAdvanceMonthJobs)
             {
                 ClearPendingAdvanceMonthJobs();
             }
@@ -253,12 +259,19 @@ internal static class AdvanceMonthOptimizationRuntime
 
         if (DomainManager.Global.GetSavingWorld())
         {
-            ExecuteAllPendingAdvanceMonthJobs(context);
+            if (hasPendingAdvanceMonthJobs)
+            {
+                ExecuteAllPendingAdvanceMonthJobs(context);
+            }
+
             return;
         }
 
         AdvanceMonthOptimizationFrameBudget frameBudget = AdvanceMonthOptimizationFrameBudget.Start();
-        PeriAdvanceMonthProtectionCache.TickBuildPeriAdvanceMonthProtection(frameBudget);
+        if (needsProtectionCacheBuild)
+        {
+            PeriAdvanceMonthProtectionCache.TickBuildPeriAdvanceMonthProtection(in frameBudget);
+        }
 
         if (!HasPendingAdvanceMonthJobs)
         {
@@ -549,8 +562,9 @@ internal static class AdvanceMonthOptimizationRuntime
         List<int> originalPassCharacterIds,
         List<int> deferredCharacterIds)
     {
-        foreach (int characterId in characterIds)
+        for (int i = 0; i < characterIds.Count; i++)
         {
+            int characterId = characterIds[i];
             if (ShouldKeepCharacterParallelActionInOriginalPass(characterId, protection))
             {
                 originalPassCharacterIds.Add(characterId);
@@ -627,21 +641,21 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
-    private static List<PeriAdvanceMonthDeferredJob> DrainPendingAdvanceMonthJobs(
+    private static List<PeriAdvanceMonthDeferredJob>? DrainPendingAdvanceMonthJobs(
         PendingAdvanceMonthJobDrainMode mode,
         int areaId = -1,
         HashSet<int>? areaSet = null)
     {
-        List<PeriAdvanceMonthDeferredJob> selected = new();
         lock (_syncRoot)
         {
             if (_pendingAdvanceMonthJobs.Count == 0 ||
                 (mode == PendingAdvanceMonthJobDrainMode.Area && !_pendingAdvanceMonthJobCountsByArea.ContainsKey(areaId)) ||
                 (mode == PendingAdvanceMonthJobDrainMode.AreaSet && !HasPendingAdvanceMonthJobInAreaSet(areaSet)))
             {
-                return selected;
+                return null;
             }
 
+            List<PeriAdvanceMonthDeferredJob> selected = new();
             int count = _pendingAdvanceMonthJobs.Count;
             for (int i = 0; i < count; i++)
             {
@@ -656,9 +670,8 @@ internal static class AdvanceMonthOptimizationRuntime
                     _pendingAdvanceMonthJobs.Enqueue(job);
                 }
             }
+            return selected;
         }
-
-        return selected;
     }
 
     private static bool ShouldDrainPendingAdvanceMonthJob(
@@ -720,8 +733,13 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
-    private static void ExecuteAdvanceMonthJobsBatched(DataContext context, List<PeriAdvanceMonthDeferredJob> jobs)
+    private static void ExecuteAdvanceMonthJobsBatched(DataContext context, List<PeriAdvanceMonthDeferredJob>? jobs)
     {
+        if (jobs == null)
+        {
+            return;
+        }
+
         PeriAdvanceMonthDeferredJob? currentBatch = null;
         bool hasPendingApply = false;
         foreach (PeriAdvanceMonthDeferredJob job in jobs)

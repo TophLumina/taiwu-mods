@@ -1,11 +1,16 @@
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.Domains;
+using NLog;
 
 namespace TaiwuOptimization.Runtime;
 
 internal static class PeriAdvanceMonthProtectionCache
 {
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
     private enum CacheState
     {
         Invalid,
@@ -34,6 +39,7 @@ internal static class PeriAdvanceMonthProtectionCache
     private static int _groupVersion;
     private static int _relationVersion;
     private static int _areaVersion;
+    private static int _needsFrameBuild = 1;
 
     private static CacheState _state = CacheState.Invalid;
     private static BuildSession? _buildSession;
@@ -58,6 +64,11 @@ internal static class PeriAdvanceMonthProtectionCache
             if (_state == CacheState.Invalid)
             {
                 _buildSession = null;
+                MarkNeedsFrameBuild();
+            }
+            else
+            {
+                ClearNeedsFrameBuild();
             }
         }
     }
@@ -76,6 +87,7 @@ internal static class PeriAdvanceMonthProtectionCache
             _frozenSnapshot = null;
             _buildSession = null;
             _state = CacheState.Invalid;
+            MarkNeedsFrameBuild();
         }
     }
 
@@ -121,7 +133,13 @@ internal static class PeriAdvanceMonthProtectionCache
         }
     }
 
-    public static void TickBuildPeriAdvanceMonthProtection(AdvanceMonthOptimizationFrameBudget frameBudget)
+    public static bool NeedsFrameBuild()
+    {
+        return TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
+            Volatile.Read(ref _needsFrameBuild) != 0;
+    }
+
+    public static void TickBuildPeriAdvanceMonthProtection(in AdvanceMonthOptimizationFrameBudget frameBudget)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled || !frameBudget.HasTimeRemaining())
         {
@@ -137,6 +155,7 @@ internal static class PeriAdvanceMonthProtectionCache
                     _state = CacheState.Ready;
                 }
 
+                ClearNeedsFrameBuild();
                 return;
             }
 
@@ -146,12 +165,17 @@ internal static class PeriAdvanceMonthProtectionCache
                 return;
             }
 
+            BuildStepLogContext logContext = CaptureBuildStepLogContext();
+            long startedAt = Stopwatch.GetTimestamp();
             ExecuteBuildStep();
+            LogFrameBuildStepOverrun(logContext, Stopwatch.GetTimestamp() - startedAt, frameBudget.BudgetTicks);
         }
     }
 
     private static Snapshot GetOrBuildSnapshot(bool freeze)
     {
+        long synchronousBuildStartedAt = 0;
+        int synchronousBuildSteps = 0;
         while (true)
         {
             lock (_syncRoot)
@@ -169,11 +193,22 @@ internal static class PeriAdvanceMonthProtectionCache
                         _frozenSnapshot = _snapshot;
                     }
 
+                    ClearNeedsFrameBuild();
+                    LogSynchronousBuildIfNeeded(freeze, synchronousBuildStartedAt, synchronousBuildSteps);
                     return _snapshot!;
                 }
 
                 EnsureBuildSession();
+                if (freeze && synchronousBuildStartedAt == 0)
+                {
+                    synchronousBuildStartedAt = Stopwatch.GetTimestamp();
+                }
+
                 ExecuteBuildStep();
+                if (freeze)
+                {
+                    synchronousBuildSteps++;
+                }
             }
         }
     }
@@ -297,6 +332,7 @@ internal static class PeriAdvanceMonthProtectionCache
         {
             _buildSession = null;
             _state = CacheState.Invalid;
+            MarkNeedsFrameBuild();
             return;
         }
 
@@ -306,6 +342,7 @@ internal static class PeriAdvanceMonthProtectionCache
         _snapshot = new Snapshot(session.Group!, session.Relations!, session.Areas!);
         _buildSession = null;
         _state = CacheState.Ready;
+        ClearNeedsFrameBuild();
     }
 
     private static bool IsBuildSessionCurrent(BuildSession session)
@@ -335,7 +372,15 @@ internal static class PeriAdvanceMonthProtectionCache
         {
             _state = CacheState.Invalid;
         }
+
+        MarkNeedsFrameBuild();
     }
+
+    private static void MarkNeedsFrameBuild() =>
+        Volatile.Write(ref _needsFrameBuild, 1);
+
+    private static void ClearNeedsFrameBuild() =>
+        Volatile.Write(ref _needsFrameBuild, 0);
 
     private static bool IsSnapshotCurrent(Snapshot? snapshot)
     {
@@ -443,6 +488,102 @@ internal static class PeriAdvanceMonthProtectionCache
         int[] result = new int[values.Count];
         values.CopyTo(result);
         return result;
+    }
+
+    private static BuildStepLogContext CaptureBuildStepLogContext()
+    {
+        BuildSession? session = _buildSession;
+        if (session == null)
+        {
+            return default;
+        }
+
+        int anchorCharId = -1;
+        ushort relationType = 0;
+        if (session.RelationAnchors != null &&
+            session.RelationAnchorIndex >= 0 &&
+            session.RelationAnchorIndex < session.RelationAnchors.Length)
+        {
+            anchorCharId = session.RelationAnchors[session.RelationAnchorIndex];
+        }
+
+        if (session.Stage == BuildStage.RelationAnchorReverse &&
+            session.RelationTypeIndex >= 0 &&
+            session.RelationTypeIndex < DirectRelationTypes.Length)
+        {
+            relationType = DirectRelationTypes[session.RelationTypeIndex];
+        }
+
+        return new BuildStepLogContext(
+            session.Stage,
+            session.RelationAnchorIndex,
+            anchorCharId,
+            session.RelationTypeIndex,
+            relationType);
+    }
+
+    private static void LogFrameBuildStepOverrun(
+        BuildStepLogContext context,
+        long elapsedTicks,
+        long budgetTicks)
+    {
+        if (elapsedTicks <= budgetTicks || !Logger.IsWarnEnabled)
+        {
+            return;
+        }
+
+        Logger.Warn(
+            "TaiwuOptimization: PeriAdvanceMonthProtectionCache build step exceeded frame budget. " +
+            "stage={0}, anchorIndex={1}, anchorCharId={2}, relationTypeIndex={3}, relationType={4}, " +
+            "elapsed={5:N3}ms, budget={6:N3}ms.",
+            context.Stage,
+            context.AnchorIndex,
+            context.AnchorCharId,
+            context.RelationTypeIndex,
+            context.RelationType,
+            TicksToMilliseconds(elapsedTicks),
+            TicksToMilliseconds(budgetTicks));
+    }
+
+    private static void LogSynchronousBuildIfNeeded(bool freeze, long startedAt, int steps)
+    {
+        if (!freeze || steps <= 0 || !Logger.IsInfoEnabled)
+        {
+            return;
+        }
+
+        long elapsedTicks = Stopwatch.GetTimestamp() - startedAt;
+        Logger.Info(
+            "TaiwuOptimization: PeriAdvanceMonthProtectionCache was completed synchronously before AdvanceMonth. " +
+            "steps={0}, elapsed={1:N3}ms.",
+            steps,
+            TicksToMilliseconds(elapsedTicks));
+    }
+
+    private static double TicksToMilliseconds(long ticks) =>
+        ticks * 1000.0 / Stopwatch.Frequency;
+
+    private readonly struct BuildStepLogContext
+    {
+        public readonly BuildStage Stage;
+        public readonly int AnchorIndex;
+        public readonly int AnchorCharId;
+        public readonly int RelationTypeIndex;
+        public readonly ushort RelationType;
+
+        public BuildStepLogContext(
+            BuildStage stage,
+            int anchorIndex,
+            int anchorCharId,
+            int relationTypeIndex,
+            ushort relationType)
+        {
+            Stage = stage;
+            AnchorIndex = anchorIndex;
+            AnchorCharId = anchorCharId;
+            RelationTypeIndex = relationTypeIndex;
+            RelationType = relationType;
+        }
     }
 
     private sealed class BuildSession
@@ -585,8 +726,10 @@ internal static class PeriAdvanceMonthProtectionCache
                 return false;
             }
 
-            foreach (int targetCharId in actionData.TargetCharIds)
+            int[] targetCharIds = actionData.TargetCharIds;
+            for (int i = 0; i < targetCharIds.Length; i++)
             {
+                int targetCharId = targetCharIds[i];
                 if (IsTaiwuOrGroupMember(targetCharId))
                 {
                     return true;

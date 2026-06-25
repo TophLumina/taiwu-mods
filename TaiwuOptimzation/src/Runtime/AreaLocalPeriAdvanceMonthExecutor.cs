@@ -76,8 +76,9 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
             return;
         }
 
-        foreach (int characterId in characterIds)
+        for (int i = 0; i < characterIds.Count; i++)
         {
+            int characterId = characterIds[i];
             if (DomainManager.Character.TryGetElement_Objects(characterId, out var character))
             {
                 action.Execute(context, character);
@@ -229,8 +230,9 @@ internal static class AreaLocalPeriAdvanceMonthExecutor
         int areaId,
         IReadOnlyList<Location> locations)
     {
-        foreach (Location location in locations)
+        for (int i = 0; i < locations.Count; i++)
         {
+            Location location = locations[i];
             if (location.AreaId != areaId ||
                 !DomainManager.Extra.TryGetElement_PickupDict(location, out MapPickupCollection? pickupCollection))
             {

@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace TaiwuOptimization.Runtime;
 
-internal sealed class AdvanceMonthOptimizationFrameBudget
+internal struct AdvanceMonthOptimizationFrameBudget
 {
     private readonly long _startedAt;
     private readonly long _budgetTicks;
@@ -19,15 +19,15 @@ internal sealed class AdvanceMonthOptimizationFrameBudget
 
     public long BudgetTicks => _budgetTicks;
 
-    public long ElapsedTicks => Stopwatch.GetTimestamp() - _startedAt;
+    public readonly long ElapsedTicks => Stopwatch.GetTimestamp() - _startedAt;
 
     public static AdvanceMonthOptimizationFrameBudget Start() =>
         new(TaiwuOptimizationSettings.AdvanceMonthOptimizationFrameBudgetMs);
 
-    public bool HasTimeRemaining() =>
+    public readonly bool HasTimeRemaining() =>
         Stopwatch.GetTimestamp() < _deadline;
 
-    public bool CanExecutePendingAdvanceMonthJob() =>
+    public readonly bool CanExecutePendingAdvanceMonthJob() =>
         _executedPendingAdvanceMonthJobs < TaiwuOptimizationSettings.MaxPeriAdvanceMonthDeferredJobsPerFrame &&
         HasTimeRemaining();
 
@@ -36,7 +36,7 @@ internal sealed class AdvanceMonthOptimizationFrameBudget
         _executedPendingAdvanceMonthJobs++;
     }
 
-    public int GetOverrunCooldownFrames(int maxCooldownFrames)
+    public readonly int GetOverrunCooldownFrames(int maxCooldownFrames)
     {
         if (ElapsedTicks <= _budgetTicks * 2)
         {
