@@ -22,15 +22,12 @@ internal static class CharacterActionTargetLookupCache
     private static int _offlineCurrentGoalActionScopeDepth;
 
     [ThreadStatic]
-    private static ActionPlanningData.ECurrentGoalType _offlineGoalType;
-
-    [ThreadStatic]
     private static Snapshot? _offlineTargetLookupSnapshot;
 
     [ThreadStatic]
     private static List<MapBlockData>? _blockRangeScratch;
 
-    /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 阶段；目前只在主目标阶段使用缓存。</summary>
+    /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 阶段；主/副目标阶段共用同一份冻结索引。</summary>
     /// <param name="goalType">原版当前处理的目标类型。</param>
     public static void EnterOfflineCurrentGoalActions(ActionPlanningData.ECurrentGoalType goalType)
     {
@@ -40,11 +37,8 @@ internal static class CharacterActionTargetLookupCache
             return;
         }
 
-        _offlineGoalType = goalType;
         _offlineCurrentGoalActionScopeDepth++;
-        _offlineTargetLookupSnapshot = goalType == ActionPlanningData.ECurrentGoalType.Primary
-            ? Volatile.Read(ref _frozenSnapshot)
-            : null;
+        _offlineTargetLookupSnapshot = Volatile.Read(ref _frozenSnapshot);
     }
 
     /// <summary>离开原版 `OfflineUpdateCurrentGoalActions` 阶段。</summary>
@@ -219,8 +213,7 @@ internal static class CharacterActionTargetLookupCache
     private static bool TryGetFrozenSnapshot(out Snapshot? snapshot)
     {
         snapshot = null;
-        if (_offlineCurrentGoalActionScopeDepth <= 0 ||
-            _offlineGoalType != ActionPlanningData.ECurrentGoalType.Primary)
+        if (_offlineCurrentGoalActionScopeDepth <= 0)
         {
             return false;
         }

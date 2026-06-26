@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Config;
 using GameData.ActionPlanning.MonthlyAI;
+using GameData.ActionPlanning.State;
+using GameData.Domains;
 using NLog;
+using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
@@ -28,6 +32,16 @@ internal enum CharacterActionPlanningStep
     CheckPrerequisites,
     GetCharactersInSelectRange,
     FilterActionTargets,
+    CharacterActionPlannerPlan,
+    CharacterActionPlannerReassess,
+    WeightBasedFindPath,
+    WeightBasedFindPathRecursive,
+    WeightBasedGetUnsatisfiedStateCount,
+    StateMemoryCheckCondition,
+    PrepareContext,
+    CalcCurrentState,
+    MatchTargetCharacter,
+    MatchTargetCharacterByConditions,
 }
 
 internal enum CharacterActionTargetLookupKind
@@ -37,6 +51,92 @@ internal enum CharacterActionTargetLookupKind
     SameState,
     BlockRange,
     SettlementRange,
+}
+
+internal enum CharacterTargetMatchScopeKind
+{
+    None,
+    Goal,
+    Action,
+}
+
+internal readonly struct TargetMatchDiagnosticsState
+{
+    public readonly long StartTicks;
+    public readonly CharacterTargetMatchScopeKind ScopeKind;
+    public readonly int ActionTemplateId;
+    public readonly int GoalTemplateId;
+    public readonly CharacterTargetMatchScopeKind PreviousScopeKind;
+    public readonly int PreviousActionTemplateId;
+    public readonly int PreviousGoalTemplateId;
+    public readonly EPlanningActionCharacterSelector PreviousSelector;
+    public readonly EPlanningActionCharacterSelectRange PreviousRange;
+    public readonly int PreviousRangeValue;
+    public readonly EPlanningActionCharacterSelector Selector;
+    public readonly EPlanningActionCharacterSelectRange Range;
+    public readonly int RangeValue;
+
+    public TargetMatchDiagnosticsState(
+        long startTicks,
+        CharacterTargetMatchScopeKind scopeKind,
+        int actionTemplateId,
+        int goalTemplateId,
+        CharacterTargetMatchScopeKind previousScopeKind,
+        int previousActionTemplateId,
+        int previousGoalTemplateId,
+        EPlanningActionCharacterSelector previousSelector = default,
+        EPlanningActionCharacterSelectRange previousRange = default,
+        int previousRangeValue = 0,
+        EPlanningActionCharacterSelector selector = default,
+        EPlanningActionCharacterSelectRange range = default,
+        int rangeValue = 0)
+    {
+        StartTicks = startTicks;
+        ScopeKind = scopeKind;
+        ActionTemplateId = actionTemplateId;
+        GoalTemplateId = goalTemplateId;
+        PreviousScopeKind = previousScopeKind;
+        PreviousActionTemplateId = previousActionTemplateId;
+        PreviousGoalTemplateId = previousGoalTemplateId;
+        PreviousSelector = previousSelector;
+        PreviousRange = previousRange;
+        PreviousRangeValue = previousRangeValue;
+        Selector = selector;
+        Range = range;
+        RangeValue = rangeValue;
+    }
+}
+
+internal readonly struct TargetConditionDiagnosticsState
+{
+    public readonly long StartTicks;
+    public readonly CharacterTargetMatchScopeKind ScopeKind;
+    public readonly int ActionTemplateId;
+    public readonly int GoalTemplateId;
+    public readonly EPlanningActionCharacterSelector Selector;
+    public readonly EPlanningActionCharacterSelectRange Range;
+    public readonly int RangeValue;
+    public readonly int ConditionCount;
+
+    public TargetConditionDiagnosticsState(
+        long startTicks,
+        CharacterTargetMatchScopeKind scopeKind,
+        int actionTemplateId,
+        int goalTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue,
+        int conditionCount)
+    {
+        StartTicks = startTicks;
+        ScopeKind = scopeKind;
+        ActionTemplateId = actionTemplateId;
+        GoalTemplateId = goalTemplateId;
+        Selector = selector;
+        Range = range;
+        RangeValue = rangeValue;
+        ConditionCount = conditionCount;
+    }
 }
 
 internal static class CharacterActionPlanningDiagnostics
@@ -55,6 +155,24 @@ internal static class CharacterActionPlanningDiagnostics
 
     [ThreadStatic]
     private static ActionPlanningData.ECurrentGoalType _goalType;
+
+    [ThreadStatic]
+    private static CharacterTargetMatchScopeKind _targetMatchScopeKind;
+
+    [ThreadStatic]
+    private static int _targetMatchActionTemplateId;
+
+    [ThreadStatic]
+    private static int _targetMatchGoalTemplateId;
+
+    [ThreadStatic]
+    private static EPlanningActionCharacterSelector _targetMatchSelector;
+
+    [ThreadStatic]
+    private static EPlanningActionCharacterSelectRange _targetMatchRange;
+
+    [ThreadStatic]
+    private static int _targetMatchRangeValue;
 
     /// <summary>开始记录一次过月中的 NPC 行动规划诊断。</summary>
     public static void BeginAdvanceMonth()
@@ -222,6 +340,273 @@ internal static class CharacterActionPlanningDiagnostics
         AddGoalMetricExtra(CharacterActionPlanningStep.FilterActionTargets, startTicks, selectableCount, resultCount);
     }
 
+    /// <summary>记录一次目标过滤，并归因到具体 `PlanningAction`。</summary>
+    public static void EndFilterActionTargets(
+        long startTicks,
+        int selectableCount,
+        int resultCount,
+        int actionTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue)
+    {
+        if (startTicks == 0)
+        {
+            return;
+        }
+
+        long ticks = Stopwatch.GetTimestamp() - startTicks;
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        AddMetric(metrics.Steps[(int)CharacterActionPlanningStep.FilterActionTargets], ticks, selectableCount, resultCount);
+        AddActionMetric(
+            metrics.FilterTargetsByAction,
+            actionTemplateId,
+            selector,
+            range,
+            rangeValue,
+            ticks,
+            selectableCount,
+            resultCount);
+    }
+
+    /// <summary>记录如果先用关系索引预筛，`FilterActionTargets` 理论上可以少检查多少候选。</summary>
+    public static void RecordRelationPrefilterCandidates(
+        int selfCharId,
+        IReadOnlyList<Character>? selectableCharacters,
+        int actionTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue)
+    {
+        if (!IsActive() || _goalScopeDepth <= 0 || actionTemplateId < 0 || selectableCharacters == null)
+        {
+            return;
+        }
+
+        int selectableCount = selectableCharacters.Count;
+        if (selectableCount <= 0)
+        {
+            return;
+        }
+
+        int relationCandidateCount = 0;
+        for (int i = 0; i < selectableCharacters.Count; i++)
+        {
+            Character targetChar = selectableCharacters[i];
+            if (targetChar != null &&
+                DomainManager.Character.TryGetRelation(selfCharId, targetChar.GetId(), out var _))
+            {
+                relationCandidateCount++;
+            }
+        }
+
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        lock (SyncRoot)
+        {
+            if (!metrics.RelationPrefilterByAction.TryGetValue(actionTemplateId, out RelationPrefilterMetric? metric))
+            {
+                metric = new RelationPrefilterMetric(actionTemplateId, selector, range, rangeValue);
+                metrics.RelationPrefilterByAction.Add(actionTemplateId, metric);
+            }
+
+            metric.Add(selectableCount, relationCandidateCount);
+        }
+    }
+
+    /// <summary>记录一次 `PrepareContext`，并归因到具体 `PlanningAction`。</summary>
+    public static void EndPrepareContext(
+        long startTicks,
+        int actionTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue)
+    {
+        if (startTicks == 0)
+        {
+            return;
+        }
+
+        long ticks = Stopwatch.GetTimestamp() - startTicks;
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        AddMetric(metrics.Steps[(int)CharacterActionPlanningStep.PrepareContext], ticks);
+        AddActionMetric(
+            metrics.PrepareContextByAction,
+            actionTemplateId,
+            selector,
+            range,
+            rangeValue,
+            ticks,
+            0,
+            0);
+    }
+
+    /// <summary>进入 `PlanningGoalNode.MatchTargetCharacter`，用于拆分目标匹配成本。</summary>
+    public static TargetMatchDiagnosticsState BeginGoalTargetMatch(int goalTemplateId, int actionTemplateId)
+    {
+        if (!IsActive() || _goalScopeDepth <= 0)
+        {
+            return default;
+        }
+
+        var state = new TargetMatchDiagnosticsState(
+            Stopwatch.GetTimestamp(),
+            CharacterTargetMatchScopeKind.Goal,
+            actionTemplateId,
+            goalTemplateId,
+            _targetMatchScopeKind,
+            _targetMatchActionTemplateId,
+            _targetMatchGoalTemplateId,
+            _targetMatchSelector,
+            _targetMatchRange,
+            _targetMatchRangeValue);
+        _targetMatchScopeKind = CharacterTargetMatchScopeKind.Goal;
+        _targetMatchActionTemplateId = actionTemplateId;
+        _targetMatchGoalTemplateId = goalTemplateId;
+        return state;
+    }
+
+    /// <summary>离开 `PlanningGoalNode.MatchTargetCharacter`。</summary>
+    public static void EndGoalTargetMatch(TargetMatchDiagnosticsState state, bool result)
+    {
+        if (state.StartTicks == 0)
+        {
+            return;
+        }
+
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        AddTemplateMetric(
+            metrics.GoalTargetMatchByGoal,
+            state.GoalTemplateId,
+            Stopwatch.GetTimestamp() - state.StartTicks,
+            result,
+            0,
+            0);
+        RestoreTargetMatchScope(state);
+    }
+
+    /// <summary>进入 `PlanningActionNode.MatchTargetCharacter`，用于拆分目标匹配成本。</summary>
+    public static TargetMatchDiagnosticsState BeginActionTargetMatch(
+        int actionTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue)
+    {
+        if (!IsActive() || _goalScopeDepth <= 0)
+        {
+            return default;
+        }
+
+        var state = new TargetMatchDiagnosticsState(
+            Stopwatch.GetTimestamp(),
+            CharacterTargetMatchScopeKind.Action,
+            actionTemplateId,
+            _targetMatchGoalTemplateId,
+            _targetMatchScopeKind,
+            _targetMatchActionTemplateId,
+            _targetMatchGoalTemplateId,
+            _targetMatchSelector,
+            _targetMatchRange,
+            _targetMatchRangeValue,
+            selector,
+            range,
+            rangeValue);
+        _targetMatchScopeKind = CharacterTargetMatchScopeKind.Action;
+        _targetMatchActionTemplateId = actionTemplateId;
+        _targetMatchSelector = selector;
+        _targetMatchRange = range;
+        _targetMatchRangeValue = rangeValue;
+        return state;
+    }
+
+    /// <summary>离开 `PlanningActionNode.MatchTargetCharacter`。</summary>
+    public static void EndActionTargetMatch(TargetMatchDiagnosticsState state, bool result)
+    {
+        if (state.StartTicks == 0)
+        {
+            return;
+        }
+
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        AddActionMetric(
+            metrics.ActionTargetMatchByAction,
+            state.ActionTemplateId,
+            state.Selector,
+            state.Range,
+            state.RangeValue,
+            Stopwatch.GetTimestamp() - state.StartTicks,
+            0,
+            0,
+            result);
+        RestoreTargetMatchScope(state);
+    }
+
+    /// <summary>进入目标条件数组匹配，记录当前 goal/action 上下文。</summary>
+    public static TargetConditionDiagnosticsState BeginTargetConditions(StateConditionAndValue<StateKey>[] conditions)
+    {
+        long startTicks = BeginGoalStep();
+        if (startTicks == 0)
+        {
+            return default;
+        }
+
+        return new TargetConditionDiagnosticsState(
+            startTicks,
+            _targetMatchScopeKind,
+            _targetMatchActionTemplateId,
+            _targetMatchGoalTemplateId,
+            _targetMatchSelector,
+            _targetMatchRange,
+            _targetMatchRangeValue,
+            conditions?.Length ?? 0);
+    }
+
+    /// <summary>离开目标条件数组匹配，并按 action/goal/sensor 粗分成本。</summary>
+    public static void EndTargetConditions(
+        TargetConditionDiagnosticsState state,
+        StateConditionAndValue<StateKey>[] conditions,
+        bool result,
+        Character selfChar,
+        Character targetChar)
+    {
+        if (state.StartTicks == 0)
+        {
+            return;
+        }
+
+        long ticks = Stopwatch.GetTimestamp() - state.StartTicks;
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        AddMetric(metrics.Steps[(int)CharacterActionPlanningStep.MatchTargetCharacterByConditions], ticks);
+
+        int conditionCount = conditions?.Length ?? state.ConditionCount;
+        int referenceConditionCount = CountReferenceConditions(conditions);
+        if (state.ScopeKind == CharacterTargetMatchScopeKind.Action)
+        {
+            AddActionMetric(
+                metrics.TargetConditionsByAction,
+                state.ActionTemplateId,
+                state.Selector,
+                state.Range,
+                state.RangeValue,
+                ticks,
+                conditionCount,
+                referenceConditionCount,
+                result);
+        }
+        else if (state.ScopeKind == CharacterTargetMatchScopeKind.Goal)
+        {
+            AddTemplateMetric(
+                metrics.TargetConditionsByGoal,
+                state.GoalTemplateId,
+                ticks,
+                result,
+                conditionCount,
+                referenceConditionCount);
+        }
+
+        AddTargetConditionSensorUsage(metrics.TargetConditionSensors, conditions);
+        RecordTargetRelationConditionPrefilter(metrics, state, conditions, result, selfChar, targetChar);
+    }
+
     /// <summary>记录一次目标索引查询。</summary>
     public static void RecordTargetLookup(
         CharacterActionTargetLookupKind kind,
@@ -306,6 +691,298 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
+    private static void AddActionMetric(
+        Dictionary<int, ActionMetric> metrics,
+        int actionTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue,
+        long ticks,
+        int inputCount,
+        int outputCount,
+        bool? result = null)
+    {
+        if (actionTemplateId < 0)
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            if (!metrics.TryGetValue(actionTemplateId, out ActionMetric? metric))
+            {
+                metric = new ActionMetric(actionTemplateId, selector, range, rangeValue);
+                metrics.Add(actionTemplateId, metric);
+            }
+
+            metric.Add(ticks, inputCount, outputCount, result);
+        }
+    }
+
+    private static void AddTemplateMetric(
+        Dictionary<int, TemplateMetric> metrics,
+        int templateId,
+        long ticks,
+        bool result,
+        int inputCount,
+        int outputCount)
+    {
+        if (templateId < 0)
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            if (!metrics.TryGetValue(templateId, out TemplateMetric? metric))
+            {
+                metric = new TemplateMetric(templateId);
+                metrics.Add(templateId, metric);
+            }
+
+            metric.Add(ticks, inputCount, outputCount, result);
+        }
+    }
+
+    private static void RestoreTargetMatchScope(TargetMatchDiagnosticsState state)
+    {
+        _targetMatchScopeKind = state.PreviousScopeKind;
+        _targetMatchActionTemplateId = state.PreviousActionTemplateId;
+        _targetMatchGoalTemplateId = state.PreviousGoalTemplateId;
+        _targetMatchSelector = state.PreviousSelector;
+        _targetMatchRange = state.PreviousRange;
+        _targetMatchRangeValue = state.PreviousRangeValue;
+    }
+
+    private static int CountReferenceConditions(StateConditionAndValue<StateKey>[]? conditions)
+    {
+        if (conditions == null)
+        {
+            return 0;
+        }
+
+        int count = 0;
+        foreach (StateConditionAndValue<StateKey> condition in conditions)
+        {
+            if (!condition.IsConstValue)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private static void AddTargetConditionSensorUsage(
+        Dictionary<int, SensorUsageMetric> metrics,
+        StateConditionAndValue<StateKey>[]? conditions)
+    {
+        if (conditions == null || conditions.Length == 0)
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            foreach (StateConditionAndValue<StateKey> condition in conditions)
+            {
+                AddSensorUsage(metrics, (int)condition.Key.Template.SensorType);
+                if (!condition.IsConstValue)
+                {
+                    AddSensorUsage(metrics, (int)condition.ReferenceKey.Template.SensorType);
+                }
+            }
+        }
+    }
+
+    private static void AddSensorUsage(Dictionary<int, SensorUsageMetric> metrics, int sensorType)
+    {
+        if (!metrics.TryGetValue(sensorType, out SensorUsageMetric? metric))
+        {
+            metric = new SensorUsageMetric(sensorType);
+            metrics.Add(sensorType, metric);
+        }
+
+        metric.Count++;
+    }
+
+    private static void RecordTargetRelationConditionPrefilter(
+        GoalMetrics metrics,
+        TargetConditionDiagnosticsState state,
+        StateConditionAndValue<StateKey>[]? conditions,
+        bool fullResult,
+        Character selfChar,
+        Character targetChar)
+    {
+        if (!TryEvaluateTargetRelationConditions(
+                conditions,
+                selfChar,
+                targetChar,
+                out int relationConditionCount,
+                out bool relationConditionsPassed))
+        {
+            return;
+        }
+
+        if (state.ScopeKind == CharacterTargetMatchScopeKind.Action)
+        {
+            AddRelationConditionMetric(
+                metrics.RelationConditionsByAction,
+                state.ActionTemplateId,
+                state.Selector,
+                state.Range,
+                state.RangeValue,
+                relationConditionCount,
+                relationConditionsPassed,
+                fullResult);
+        }
+        else if (state.ScopeKind == CharacterTargetMatchScopeKind.Goal)
+        {
+            AddRelationConditionMetric(
+                metrics.RelationConditionsByGoal,
+                state.GoalTemplateId,
+                relationConditionCount,
+                relationConditionsPassed,
+                fullResult);
+        }
+    }
+
+    private static bool TryEvaluateTargetRelationConditions(
+        StateConditionAndValue<StateKey>[]? conditions,
+        Character selfChar,
+        Character targetChar,
+        out int relationConditionCount,
+        out bool relationConditionsPassed)
+    {
+        relationConditionCount = 0;
+        relationConditionsPassed = true;
+        if (conditions == null || conditions.Length == 0 || selfChar == null || targetChar == null)
+        {
+            return false;
+        }
+
+        int actorCharId = selfChar.GetId();
+        int candidateCharId = targetChar.GetId();
+        foreach (StateConditionAndValue<StateKey> condition in conditions)
+        {
+            if (!condition.IsConstValue ||
+                !TryGetTargetRelationStateValue(actorCharId, candidateCharId, condition.Key.StateTemplateId, out int value))
+            {
+                continue;
+            }
+
+            relationConditionCount++;
+            if (!StateConditionHelper.Check(condition.ConditionType, value, condition.Value))
+            {
+                relationConditionsPassed = false;
+            }
+        }
+
+        return relationConditionCount > 0;
+    }
+
+    private static bool TryGetTargetRelationStateValue(int actorCharId, int candidateCharId, int stateTemplateId, out int value)
+    {
+        // 原版在 TargetStateSensor 中以候选角色为 selfChar、行动角色为 targetChar。
+        value = 0;
+        switch (stateTemplateId)
+        {
+            case 302:
+                value = ToInt(DomainManager.Character.HasRelation(actorCharId, candidateCharId, 16384));
+                return true;
+            case 303:
+                value = ToInt(DomainManager.Character.HasRelation(actorCharId, candidateCharId, 32768));
+                return true;
+            case 304:
+                value = ToInt(DomainManager.Character.IsCharacterRelationFriendly(candidateCharId, actorCharId));
+                return true;
+            case 305:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 73));
+                return true;
+            case 306:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 292));
+                return true;
+            case 307:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 146));
+                return true;
+            case 308:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 8192));
+                return true;
+            case 309:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 448));
+                return true;
+            case 310:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 1024));
+                return true;
+            case 311:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 512));
+                return true;
+            case 312:
+                value = ToInt(
+                    DomainManager.Character.HasRelation(candidateCharId, actorCharId, 16384) &&
+                    DomainManager.Character.HasRelation(actorCharId, candidateCharId, 16384));
+                return true;
+            case 313:
+                value = ToInt(DomainManager.Character.HasRelation(candidateCharId, actorCharId, 6144));
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static int ToInt(bool value) => value ? 1 : 0;
+
+    private static void AddRelationConditionMetric(
+        Dictionary<int, RelationConditionMetric> metrics,
+        int templateId,
+        int relationConditionCount,
+        bool relationConditionsPassed,
+        bool fullResult)
+    {
+        if (templateId < 0)
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            if (!metrics.TryGetValue(templateId, out RelationConditionMetric? metric))
+            {
+                metric = new RelationConditionMetric(templateId);
+                metrics.Add(templateId, metric);
+            }
+
+            metric.Add(relationConditionCount, relationConditionsPassed, fullResult);
+        }
+    }
+
+    private static void AddRelationConditionMetric(
+        Dictionary<int, ActionRelationConditionMetric> metrics,
+        int actionTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue,
+        int relationConditionCount,
+        bool relationConditionsPassed,
+        bool fullResult)
+    {
+        if (actionTemplateId < 0)
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            if (!metrics.TryGetValue(actionTemplateId, out ActionRelationConditionMetric? metric))
+            {
+                metric = new ActionRelationConditionMetric(actionTemplateId, selector, range, rangeValue);
+                metrics.Add(actionTemplateId, metric);
+            }
+
+            metric.Add(relationConditionCount, relationConditionsPassed, fullResult);
+        }
+    }
+
     private static void LeaveGoalScope()
     {
         if (_goalScopeDepth > 0)
@@ -324,7 +1001,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static string BuildMessage(long totalTicks)
     {
-        StringBuilder builder = new(2200);
+        StringBuilder builder = new(7600);
         builder.AppendLine("TaiwuOptimization: CharacterActionPlanning diagnostics");
         builder.AppendLine("  total:");
         AppendMetric(builder, "elapsed", FormatMilliseconds(totalTicks));
@@ -370,6 +1047,36 @@ internal static class CharacterActionPlanningDiagnostics
         AppendMetric(builder, nameof(CharacterActionPlanningStep.CheckPrerequisites), metrics.Steps[(int)CharacterActionPlanningStep.CheckPrerequisites]);
         AppendMetric(builder, nameof(CharacterActionPlanningStep.GetCharactersInSelectRange), metrics.Steps[(int)CharacterActionPlanningStep.GetCharactersInSelectRange]);
         AppendMetric(builder, nameof(CharacterActionPlanningStep.FilterActionTargets), metrics.Steps[(int)CharacterActionPlanningStep.FilterActionTargets]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.CharacterActionPlannerPlan), metrics.Steps[(int)CharacterActionPlanningStep.CharacterActionPlannerPlan]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.CharacterActionPlannerReassess), metrics.Steps[(int)CharacterActionPlanningStep.CharacterActionPlannerReassess]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.WeightBasedFindPath), metrics.Steps[(int)CharacterActionPlanningStep.WeightBasedFindPath]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.WeightBasedFindPathRecursive), metrics.Steps[(int)CharacterActionPlanningStep.WeightBasedFindPathRecursive]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.WeightBasedGetUnsatisfiedStateCount), metrics.Steps[(int)CharacterActionPlanningStep.WeightBasedGetUnsatisfiedStateCount]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.StateMemoryCheckCondition), metrics.Steps[(int)CharacterActionPlanningStep.StateMemoryCheckCondition]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.PrepareContext), metrics.Steps[(int)CharacterActionPlanningStep.PrepareContext]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.CalcCurrentState), metrics.Steps[(int)CharacterActionPlanningStep.CalcCurrentState]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.MatchTargetCharacter), metrics.Steps[(int)CharacterActionPlanningStep.MatchTargetCharacter]);
+        AppendMetric(builder, nameof(CharacterActionPlanningStep.MatchTargetCharacterByConditions), metrics.Steps[(int)CharacterActionPlanningStep.MatchTargetCharacterByConditions]);
+        AppendActionMetricTop(builder, "prepareContextByActionTop", metrics.PrepareContextByAction);
+        AppendActionMetricTop(builder, "filterActionTargetsByActionTop", metrics.FilterTargetsByAction);
+        AppendRelationPrefilterTop(builder, "relationPrefilterByActionTop", metrics.RelationPrefilterByAction);
+        AppendTemplateMetricTop(builder, "goalTargetMatchByGoalTop", metrics.GoalTargetMatchByGoal);
+        AppendActionMetricTop(builder, "actionTargetMatchByActionTop", metrics.ActionTargetMatchByAction);
+        AppendTemplateMetricTop(
+            builder,
+            "targetConditionsByGoalTop",
+            metrics.TargetConditionsByGoal,
+            "conditions",
+            "refConditions");
+        AppendActionMetricTop(
+            builder,
+            "targetConditionsByActionTop",
+            metrics.TargetConditionsByAction,
+            "conditions",
+            "refConditions");
+        AppendRelationConditionTop(builder, "relationConditionPrefilterByGoalTop", metrics.RelationConditionsByGoal);
+        AppendRelationConditionTop(builder, "relationConditionPrefilterByActionTop", metrics.RelationConditionsByAction);
+        AppendSensorUsageTop(builder, "targetConditionSensorUsageTop", metrics.TargetConditionSensors);
     }
 
     private static void AppendMetric(StringBuilder builder, string name, Metric metric)
@@ -413,6 +1120,353 @@ internal static class CharacterActionPlanningDiagnostics
         builder.Append(metric.CharactersAdded);
         builder.AppendLine();
     }
+
+    private static void AppendActionMetricTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, ActionMetric> metrics,
+        string inputLabel = "input",
+        string outputLabel = "output")
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<ActionMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Ticks.CompareTo(left.Ticks));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            ActionMetric metric = sorted[i];
+            builder.Append("      A");
+            builder.Append(metric.ActionTemplateId);
+            builder.Append(' ');
+            builder.Append(GetActionRefName(metric.ActionTemplateId));
+            builder.Append(": ");
+            builder.Append(FormatMilliseconds(metric.Ticks));
+            builder.Append(", calls=");
+            builder.Append(metric.Calls);
+            builder.Append(", max=");
+            builder.Append(FormatMilliseconds(metric.MaxTicks));
+            builder.Append(", selector=");
+            builder.Append(metric.Selector);
+            builder.Append(", range=");
+            builder.Append(metric.Range);
+            builder.Append(", rangeValue=");
+            builder.Append(metric.RangeValue);
+            AppendResultCounts(builder, metric.SuccessCount, metric.FailureCount);
+            if (metric.InputCount > 0 || metric.OutputCount > 0)
+            {
+                builder.Append(", ");
+                builder.Append(inputLabel);
+                builder.Append('=');
+                builder.Append(metric.InputCount);
+                builder.Append(", ");
+                builder.Append(outputLabel);
+                builder.Append('=');
+                builder.Append(metric.OutputCount);
+                builder.Append(", avg");
+                AppendPascalLabel(builder, inputLabel);
+                builder.Append('=');
+                builder.Append(metric.Calls == 0 ? "0.0" : (metric.InputCount / (double)metric.Calls).ToString("N1"));
+                builder.Append(", max");
+                AppendPascalLabel(builder, inputLabel);
+                builder.Append('=');
+                builder.Append(metric.MaxInputCount);
+                builder.Append(", max");
+                AppendPascalLabel(builder, outputLabel);
+                builder.Append('=');
+                builder.Append(metric.MaxOutputCount);
+            }
+
+            builder.AppendLine();
+        }
+    }
+
+    private static void AppendTemplateMetricTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, TemplateMetric> metrics,
+        string inputLabel = "input",
+        string outputLabel = "output")
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<TemplateMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Ticks.CompareTo(left.Ticks));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            TemplateMetric metric = sorted[i];
+            builder.Append("      G");
+            builder.Append(metric.TemplateId);
+            builder.Append(' ');
+            builder.Append(GetGoalRefName(metric.TemplateId));
+            builder.Append(": ");
+            builder.Append(FormatMilliseconds(metric.Ticks));
+            builder.Append(", calls=");
+            builder.Append(metric.Calls);
+            builder.Append(", max=");
+            builder.Append(FormatMilliseconds(metric.MaxTicks));
+            AppendResultCounts(builder, metric.SuccessCount, metric.FailureCount);
+            if (metric.InputCount > 0 || metric.OutputCount > 0)
+            {
+                builder.Append(", ");
+                builder.Append(inputLabel);
+                builder.Append('=');
+                builder.Append(metric.InputCount);
+                builder.Append(", ");
+                builder.Append(outputLabel);
+                builder.Append('=');
+                builder.Append(metric.OutputCount);
+                builder.Append(", avg");
+                AppendPascalLabel(builder, inputLabel);
+                builder.Append('=');
+                builder.Append(metric.Calls == 0 ? "0.0" : (metric.InputCount / (double)metric.Calls).ToString("N1"));
+                builder.Append(", max");
+                AppendPascalLabel(builder, inputLabel);
+                builder.Append('=');
+                builder.Append(metric.MaxInputCount);
+                builder.Append(", max");
+                AppendPascalLabel(builder, outputLabel);
+                builder.Append('=');
+                builder.Append(metric.MaxOutputCount);
+            }
+
+            builder.AppendLine();
+        }
+    }
+
+    private static void AppendSensorUsageTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, SensorUsageMetric> metrics)
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<SensorUsageMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Count.CompareTo(left.Count));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            SensorUsageMetric metric = sorted[i];
+            builder.Append("      ");
+            builder.Append(GetSensorName(metric.SensorType));
+            builder.Append(": ");
+            builder.Append(metric.Count);
+            builder.AppendLine();
+        }
+    }
+
+    private static void AppendRelationPrefilterTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, RelationPrefilterMetric> metrics)
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<RelationPrefilterMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Dropped.CompareTo(left.Dropped));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            RelationPrefilterMetric metric = sorted[i];
+            builder.Append("      A");
+            builder.Append(metric.ActionTemplateId);
+            builder.Append(' ');
+            builder.Append(GetActionRefName(metric.ActionTemplateId));
+            builder.Append(": calls=");
+            builder.Append(metric.Calls);
+            builder.Append(", selector=");
+            builder.Append(metric.Selector);
+            builder.Append(", range=");
+            builder.Append(metric.Range);
+            builder.Append(", rangeValue=");
+            builder.Append(metric.RangeValue);
+            builder.Append(", selectable=");
+            builder.Append(metric.SelectableCount);
+            builder.Append(", relationCandidates=");
+            builder.Append(metric.RelationCandidateCount);
+            builder.Append(", dropped=");
+            builder.Append(metric.Dropped);
+            builder.Append(", avgSelectable=");
+            builder.Append(metric.Calls == 0 ? "0.0" : (metric.SelectableCount / (double)metric.Calls).ToString("N1"));
+            builder.Append(", avgRelationCandidates=");
+            builder.Append(metric.Calls == 0 ? "0.0" : (metric.RelationCandidateCount / (double)metric.Calls).ToString("N1"));
+            builder.Append(", maxSelectable=");
+            builder.Append(metric.MaxSelectableCount);
+            builder.Append(", maxDropped=");
+            builder.Append(metric.MaxDropped);
+            builder.AppendLine();
+        }
+    }
+
+    private static void AppendRelationConditionTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, RelationConditionMetric> metrics)
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<RelationConditionMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.RelationFailCount.CompareTo(left.RelationFailCount));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            RelationConditionMetric metric = sorted[i];
+            builder.Append("      G");
+            builder.Append(metric.TemplateId);
+            builder.Append(' ');
+            builder.Append(GetGoalRefName(metric.TemplateId));
+            AppendRelationConditionMetric(builder, metric);
+        }
+    }
+
+    private static void AppendRelationConditionTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, ActionRelationConditionMetric> metrics)
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<ActionRelationConditionMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.RelationFailCount.CompareTo(left.RelationFailCount));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            ActionRelationConditionMetric metric = sorted[i];
+            builder.Append("      A");
+            builder.Append(metric.ActionTemplateId);
+            builder.Append(' ');
+            builder.Append(GetActionRefName(metric.ActionTemplateId));
+            builder.Append(": selector=");
+            builder.Append(metric.Selector);
+            builder.Append(", range=");
+            builder.Append(metric.Range);
+            builder.Append(", rangeValue=");
+            builder.Append(metric.RangeValue);
+            AppendRelationConditionMetric(builder, metric);
+        }
+    }
+
+    private static void AppendRelationConditionMetric(StringBuilder builder, RelationConditionMetric metric)
+    {
+        builder.Append(": calls=");
+        builder.Append(metric.Calls);
+        builder.Append(", relationConditions=");
+        builder.Append(metric.RelationConditionCount);
+        builder.Append(", relationPass=");
+        builder.Append(metric.RelationPassCount);
+        builder.Append(", relationFail=");
+        builder.Append(metric.RelationFailCount);
+        builder.Append(", fullTrue=");
+        builder.Append(metric.FullSuccessCount);
+        builder.Append(", fullFalse=");
+        builder.Append(metric.FullFailureCount);
+        builder.Append(", avgRelationConditions=");
+        builder.Append(metric.Calls == 0 ? "0.0" : (metric.RelationConditionCount / (double)metric.Calls).ToString("N1"));
+        builder.AppendLine();
+    }
+
+    private static void AppendResultCounts(StringBuilder builder, int successCount, int failureCount)
+    {
+        if (successCount <= 0 && failureCount <= 0)
+        {
+            return;
+        }
+
+        builder.Append(", true=");
+        builder.Append(successCount);
+        builder.Append(", false=");
+        builder.Append(failureCount);
+    }
+
+    private static void AppendPascalLabel(StringBuilder builder, string label)
+    {
+        if (label.Length == 0)
+        {
+            return;
+        }
+
+        builder.Append(char.ToUpperInvariant(label[0]));
+        if (label.Length > 1)
+        {
+            builder.Append(label.AsSpan(1));
+        }
+    }
+
+    private static string GetActionRefName(int actionTemplateId)
+    {
+        try
+        {
+            return PlanningAction.Instance.GetRefName(actionTemplateId);
+        }
+        catch
+        {
+            return "<unknown>";
+        }
+    }
+
+    private static string GetGoalRefName(int goalTemplateId)
+    {
+        try
+        {
+            return PlanningGoal.Instance.GetRefName(goalTemplateId);
+        }
+        catch
+        {
+            return "<unknown>";
+        }
+    }
+
+    private static string GetSensorName(int sensorType) =>
+        Enum.GetName(typeof(EPlanningStateSensorType), sensorType) ?? sensorType.ToString();
 
     private static void AppendMetric(StringBuilder builder, string name, string value)
     {
@@ -462,8 +1516,8 @@ internal static class CharacterActionPlanningDiagnostics
     private static void ClearMetrics()
     {
         ClearMetrics(ParallelStages);
-        ClearMetrics(PrimaryMetrics.Steps);
-        ClearMetrics(SecondaryMetrics.Steps);
+        PrimaryMetrics.Clear();
+        SecondaryMetrics.Clear();
         foreach (TargetLookupMetric metric in TargetLookupMetrics)
         {
             metric.Clear();
@@ -481,6 +1535,31 @@ internal static class CharacterActionPlanningDiagnostics
     private sealed class GoalMetrics
     {
         public readonly Metric[] Steps = CreateMetricArray<CharacterActionPlanningStep>();
+        public readonly Dictionary<int, ActionMetric> PrepareContextByAction = new(128);
+        public readonly Dictionary<int, ActionMetric> FilterTargetsByAction = new(128);
+        public readonly Dictionary<int, TemplateMetric> GoalTargetMatchByGoal = new(64);
+        public readonly Dictionary<int, ActionMetric> ActionTargetMatchByAction = new(128);
+        public readonly Dictionary<int, TemplateMetric> TargetConditionsByGoal = new(64);
+        public readonly Dictionary<int, ActionMetric> TargetConditionsByAction = new(128);
+        public readonly Dictionary<int, RelationPrefilterMetric> RelationPrefilterByAction = new(128);
+        public readonly Dictionary<int, RelationConditionMetric> RelationConditionsByGoal = new(64);
+        public readonly Dictionary<int, ActionRelationConditionMetric> RelationConditionsByAction = new(128);
+        public readonly Dictionary<int, SensorUsageMetric> TargetConditionSensors = new(16);
+
+        public void Clear()
+        {
+            ClearMetrics(Steps);
+            PrepareContextByAction.Clear();
+            FilterTargetsByAction.Clear();
+            GoalTargetMatchByGoal.Clear();
+            ActionTargetMatchByAction.Clear();
+            TargetConditionsByGoal.Clear();
+            TargetConditionsByAction.Clear();
+            RelationPrefilterByAction.Clear();
+            RelationConditionsByGoal.Clear();
+            RelationConditionsByAction.Clear();
+            TargetConditionSensors.Clear();
+        }
     }
 
     private sealed class Metric
@@ -492,6 +1571,8 @@ internal static class CharacterActionPlanningDiagnostics
         public long OutputCount;
         public int MaxInputCount;
         public int MaxOutputCount;
+        public int SuccessCount;
+        public int FailureCount;
 
         public void Clear()
         {
@@ -502,6 +1583,8 @@ internal static class CharacterActionPlanningDiagnostics
             OutputCount = 0;
             MaxInputCount = 0;
             MaxOutputCount = 0;
+            SuccessCount = 0;
+            FailureCount = 0;
         }
     }
 
@@ -520,6 +1603,246 @@ internal static class CharacterActionPlanningDiagnostics
             Fallbacks = 0;
             CandidateIds = 0;
             CharactersAdded = 0;
+        }
+    }
+
+    private sealed class ActionMetric
+    {
+        public readonly int ActionTemplateId;
+        public readonly EPlanningActionCharacterSelector Selector;
+        public readonly EPlanningActionCharacterSelectRange Range;
+        public readonly int RangeValue;
+        public int Calls;
+        public long Ticks;
+        public long MaxTicks;
+        public long InputCount;
+        public long OutputCount;
+        public int MaxInputCount;
+        public int MaxOutputCount;
+        public int SuccessCount;
+        public int FailureCount;
+
+        public ActionMetric(
+            int actionTemplateId,
+            EPlanningActionCharacterSelector selector,
+            EPlanningActionCharacterSelectRange range,
+            int rangeValue)
+        {
+            ActionTemplateId = actionTemplateId;
+            Selector = selector;
+            Range = range;
+            RangeValue = rangeValue;
+        }
+
+        public void Add(long ticks, int inputCount, int outputCount, bool? result)
+        {
+            Calls++;
+            Ticks += ticks;
+            if (ticks > MaxTicks)
+            {
+                MaxTicks = ticks;
+            }
+
+            if (inputCount > 0)
+            {
+                InputCount += inputCount;
+                if (inputCount > MaxInputCount)
+                {
+                    MaxInputCount = inputCount;
+                }
+            }
+
+            if (outputCount > 0)
+            {
+                OutputCount += outputCount;
+                if (outputCount > MaxOutputCount)
+                {
+                    MaxOutputCount = outputCount;
+                }
+            }
+
+            if (result.HasValue)
+            {
+                if (result.Value)
+                {
+                    SuccessCount++;
+                }
+                else
+                {
+                    FailureCount++;
+                }
+            }
+        }
+    }
+
+    private sealed class TemplateMetric
+    {
+        public readonly int TemplateId;
+        public int Calls;
+        public long Ticks;
+        public long MaxTicks;
+        public long InputCount;
+        public long OutputCount;
+        public int MaxInputCount;
+        public int MaxOutputCount;
+        public int SuccessCount;
+        public int FailureCount;
+
+        public TemplateMetric(int templateId)
+        {
+            TemplateId = templateId;
+        }
+
+        public void Add(long ticks, int inputCount, int outputCount, bool result)
+        {
+            Calls++;
+            Ticks += ticks;
+            if (ticks > MaxTicks)
+            {
+                MaxTicks = ticks;
+            }
+
+            if (inputCount > 0)
+            {
+                InputCount += inputCount;
+                if (inputCount > MaxInputCount)
+                {
+                    MaxInputCount = inputCount;
+                }
+            }
+
+            if (outputCount > 0)
+            {
+                OutputCount += outputCount;
+                if (outputCount > MaxOutputCount)
+                {
+                    MaxOutputCount = outputCount;
+                }
+            }
+
+            if (result)
+            {
+                SuccessCount++;
+            }
+            else
+            {
+                FailureCount++;
+            }
+        }
+    }
+
+    private sealed class RelationPrefilterMetric
+    {
+        public readonly int ActionTemplateId;
+        public readonly EPlanningActionCharacterSelector Selector;
+        public readonly EPlanningActionCharacterSelectRange Range;
+        public readonly int RangeValue;
+        public int Calls;
+        public long SelectableCount;
+        public long RelationCandidateCount;
+        public int MaxSelectableCount;
+        public int MaxDropped;
+
+        public long Dropped => SelectableCount - RelationCandidateCount;
+
+        public RelationPrefilterMetric(
+            int actionTemplateId,
+            EPlanningActionCharacterSelector selector,
+            EPlanningActionCharacterSelectRange range,
+            int rangeValue)
+        {
+            ActionTemplateId = actionTemplateId;
+            Selector = selector;
+            Range = range;
+            RangeValue = rangeValue;
+        }
+
+        public void Add(int selectableCount, int relationCandidateCount)
+        {
+            Calls++;
+            SelectableCount += selectableCount;
+            RelationCandidateCount += relationCandidateCount;
+            if (selectableCount > MaxSelectableCount)
+            {
+                MaxSelectableCount = selectableCount;
+            }
+
+            int dropped = selectableCount - relationCandidateCount;
+            if (dropped > MaxDropped)
+            {
+                MaxDropped = dropped;
+            }
+        }
+    }
+
+    private class RelationConditionMetric
+    {
+        public readonly int TemplateId;
+        public int Calls;
+        public long RelationConditionCount;
+        public int RelationPassCount;
+        public int RelationFailCount;
+        public int FullSuccessCount;
+        public int FullFailureCount;
+
+        public RelationConditionMetric(int templateId)
+        {
+            TemplateId = templateId;
+        }
+
+        public void Add(int relationConditionCount, bool relationConditionsPassed, bool fullResult)
+        {
+            Calls++;
+            RelationConditionCount += relationConditionCount;
+            if (relationConditionsPassed)
+            {
+                RelationPassCount++;
+            }
+            else
+            {
+                RelationFailCount++;
+            }
+
+            if (fullResult)
+            {
+                FullSuccessCount++;
+            }
+            else
+            {
+                FullFailureCount++;
+            }
+        }
+    }
+
+    private sealed class ActionRelationConditionMetric : RelationConditionMetric
+    {
+        public readonly int ActionTemplateId;
+        public readonly EPlanningActionCharacterSelector Selector;
+        public readonly EPlanningActionCharacterSelectRange Range;
+        public readonly int RangeValue;
+
+        public ActionRelationConditionMetric(
+            int actionTemplateId,
+            EPlanningActionCharacterSelector selector,
+            EPlanningActionCharacterSelectRange range,
+            int rangeValue)
+            : base(actionTemplateId)
+        {
+            ActionTemplateId = actionTemplateId;
+            Selector = selector;
+            Range = range;
+            RangeValue = rangeValue;
+        }
+    }
+
+    private sealed class SensorUsageMetric
+    {
+        public readonly int SensorType;
+        public int Count;
+
+        public SensorUsageMetric(int sensorType)
+        {
+            SensorType = sensorType;
         }
     }
 
