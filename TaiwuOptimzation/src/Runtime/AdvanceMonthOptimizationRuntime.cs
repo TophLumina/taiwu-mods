@@ -20,29 +20,35 @@ internal static class AdvanceMonthOptimizationRuntime
             long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
             CharacterActionTargetLookupCache.RebuildAndFreezeBeforeAdvanceMonth();
             CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
-            PeriAdvanceMonthProtectionCache.TryFreezeForPeriAdvanceMonth();
+            AdvanceMonthProtectionSnapshotCache.TryFreezeForAdvanceMonth();
         }
     }
 
     /// <summary>在原版主/副目标行动阶段前冻结关系候选快照，确保晚于 `CharacterRelationsUpdate`。</summary>
-    public static void PrepareRelationTargetCacheBeforeGoalActions()
+    public static void BeginUpdateCurrentGoalActionsOptimizationStage()
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
         {
             return;
         }
 
+        CharacterActionTargetMatcherStageCache.BeginUpdateCurrentGoalActionsStage();
         long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
         CharacterGoalTargetConditionPrefilter.FreezeBeforeAdvanceMonth();
         CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
     }
 
+    /// <summary>主/副目标行动阶段结束后释放只服务于该阶段的热路径缓存。</summary>
+    public static void EndUpdateCurrentGoalActionsOptimizationStage() =>
+        CharacterActionTargetMatcherStageCache.EndUpdateCurrentGoalActionsStage();
+
     /// <summary>过月结束后释放冻结快照，后续帧继续构建最新快照。</summary>
     public static void EndAdvanceMonthOptimizationScope()
     {
-        PeriAdvanceMonthProtectionCache.UnfreezePeriAdvanceMonth();
+        AdvanceMonthProtectionSnapshotCache.UnfreezeAfterAdvanceMonth();
         CharacterGoalTargetConditionPrefilter.UnfreezeAndInvalidate();
         CharacterActionTargetLookupCache.UnfreezeAndInvalidate();
+        CharacterActionTargetMatcherStageCache.EndUpdateCurrentGoalActionsStage();
         CharacterActionPlanningDiagnostics.EndAdvanceMonth();
     }
 
@@ -58,13 +64,13 @@ internal static class AdvanceMonthOptimizationRuntime
             return;
         }
 
-        if (!PeriAdvanceMonthProtectionCache.NeedsFrameBuild())
+        if (!AdvanceMonthProtectionSnapshotCache.NeedsFrameBuild())
         {
             return;
         }
 
         AdvanceMonthOptimizationFrameBudget frameBudget = AdvanceMonthOptimizationFrameBudget.Start();
-        PeriAdvanceMonthProtectionCache.TickBuildPeriAdvanceMonthProtection(in frameBudget);
+        AdvanceMonthProtectionSnapshotCache.TickBuildProtectionSnapshot(in frameBudget);
     }
 
     /// <summary>退出世界/切档时丢弃缓存，避免引用旧世界数据。</summary>
@@ -73,9 +79,10 @@ internal static class AdvanceMonthOptimizationRuntime
 
     private static void ResetRuntimeCaches()
     {
-        PeriAdvanceMonthProtectionCache.Reset();
+        AdvanceMonthProtectionSnapshotCache.Reset();
         CharacterActionTargetLookupCache.Reset();
         CharacterGoalTargetConditionPrefilter.UnfreezeAndInvalidate();
+        CharacterActionTargetMatcherStageCache.Reset();
     }
 
     private static bool IsWorldDataAvailable()

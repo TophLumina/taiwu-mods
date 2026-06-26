@@ -14,7 +14,7 @@ namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch]
 [HarmonyPriority(Priority.First)]
-internal static class CharacterGoalTargetConditionPrefilterGoalActionStagePatch
+internal static class UpdateCurrentGoalActionsOptimizationStagePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -29,8 +29,20 @@ internal static class CharacterGoalTargetConditionPrefilterGoalActionStagePatch
         if (actionType == typeof(UpdatePrimaryGoalAndActions) ||
             actionType == typeof(UpdateSecondaryGoalAndActions))
         {
-            AdvanceMonthOptimizationRuntime.PrepareRelationTargetCacheBeforeGoalActions();
+            AdvanceMonthOptimizationRuntime.BeginUpdateCurrentGoalActionsOptimizationStage();
         }
+    }
+
+    private static Exception? Finalizer(ICharacterParallelAction action, Exception? __exception)
+    {
+        Type actionType = action.GetType();
+        if (actionType == typeof(UpdatePrimaryGoalAndActions) ||
+            actionType == typeof(UpdateSecondaryGoalAndActions))
+        {
+            AdvanceMonthOptimizationRuntime.EndUpdateCurrentGoalActionsOptimizationStage();
+        }
+
+        return __exception;
     }
 }
 
@@ -45,7 +57,7 @@ internal static class CharacterGoalTargetConditionPrefilterChangeRelationTypePat
 
     // 关系类型改变后不能继续使用旧快照。
     private static void Postfix() =>
-        CharacterGoalTargetConditionPrefilter.InvalidateForRelationMutation();
+        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
 }
 
 [HarmonyPatch]
@@ -59,7 +71,7 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveRelationPatch
 
     // 删除关系后不能继续使用旧快照。
     private static void Postfix() =>
-        CharacterGoalTargetConditionPrefilter.InvalidateForRelationMutation();
+        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
 }
 
 [HarmonyPatch]
@@ -73,7 +85,7 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveAllGeneralRelat
 
     // 批量删除泛关系后不能继续使用旧快照。
     private static void Postfix() =>
-        CharacterGoalTargetConditionPrefilter.InvalidateForRelationMutation();
+        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
 }
 
 [HarmonyPatch]
@@ -87,5 +99,14 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveAllRelationsPat
 
     // 批量删除全部关系后不能继续使用旧快照。
     private static void Postfix() =>
+        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
+}
+
+internal static class UpdateCurrentGoalActionsCacheInvalidation
+{
+    public static void Invalidate()
+    {
         CharacterGoalTargetConditionPrefilter.InvalidateForRelationMutation();
+        CharacterActionTargetMatcherStageCache.InvalidateForRelationMutation();
+    }
 }

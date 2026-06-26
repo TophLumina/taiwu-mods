@@ -41,7 +41,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointPatch
 }
 
 [HarmonyPatch]
-internal static class PeriAdvanceMonthRelationCacheInvalidationPatch
+internal static class AdvanceMonthProtectionRelationInvalidationPatch
 {
     // 只监听会改变人物关系图的原版入口。
     private static IEnumerable<MethodBase> TargetMethods()
@@ -62,11 +62,11 @@ internal static class PeriAdvanceMonthRelationCacheInvalidationPatch
 
     // 只有关系变更涉及太吾/队友时才让 relation cache 失效。
     private static void Postfix(int charId, int relatedCharId) =>
-        PeriAdvanceMonthProtectionCache.MarkRelationDirtyIfTaiwuGroupRelated(charId, relatedCharId);
+        AdvanceMonthProtectionSnapshotCache.MarkRelationDirtyIfTaiwuGroupRelated(charId, relatedCharId);
 }
 
 [HarmonyPatch]
-internal static class PeriAdvanceMonthTaiwuGroupCacheInvalidationPatch
+internal static class AdvanceMonthProtectionTaiwuGroupInvalidationPatch
 {
     // 队友加入/离开会改变保护锚点，需要重建 group 和 relation cache。
     private static IEnumerable<MethodBase> TargetMethods()
@@ -84,12 +84,12 @@ internal static class PeriAdvanceMonthTaiwuGroupCacheInvalidationPatch
     // 不尝试增量修补，直接标记相关 cache dirty。
     private static void Postfix()
     {
-        PeriAdvanceMonthProtectionCache.MarkTaiwuGroupDirty();
+        AdvanceMonthProtectionSnapshotCache.MarkTaiwuGroupDirty();
     }
 }
 
 [HarmonyPatch]
-internal static class PeriAdvanceMonthTaiwuLocationCacheInvalidationPatch
+internal static class AdvanceMonthProtectionTaiwuLocationInvalidationPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -108,7 +108,7 @@ internal static class PeriAdvanceMonthTaiwuLocationCacheInvalidationPatch
         Location oldLocation = __instance.GetLocation();
         if (IsAreaChanged(oldLocation, location))
         {
-            PeriAdvanceMonthProtectionCache.MarkProtectedAreasDirty();
+            AdvanceMonthProtectionSnapshotCache.MarkProtectedAreasDirty();
         }
     }
 

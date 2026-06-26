@@ -29,7 +29,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     public override void OnModSettingUpdate()
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
-        PeriAdvanceMonthProtectionCache.MarkAllDirty();
+        AdvanceMonthProtectionSnapshotCache.MarkAllDirty();
         CharacterActionTargetLookupCache.Reset();
     }
 }

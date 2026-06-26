@@ -8,7 +8,7 @@ using GameData.Domains.Map;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class PeriAdvanceMonthProtectionCache
+internal static class AdvanceMonthProtectionSnapshotCache
 {
     private const int StateAreaCount = 135;
 
@@ -77,7 +77,7 @@ internal static class PeriAdvanceMonthProtectionCache
     }
 
     /// <summary>过月开始时冻结已就绪快照；未就绪时不强制构建，避免增加过月阻塞。</summary>
-    public static bool TryFreezeForPeriAdvanceMonth()
+    public static bool TryFreezeForAdvanceMonth()
     {
         lock (_syncRoot)
         {
@@ -96,7 +96,7 @@ internal static class PeriAdvanceMonthProtectionCache
     }
 
     /// <summary>过月结束后释放冻结快照；如月结中标记过脏，则恢复到 `Invalid` 等待帧构建。</summary>
-    public static void UnfreezePeriAdvanceMonth()
+    public static void UnfreezeAfterAdvanceMonth()
     {
         lock (_syncRoot)
         {
@@ -201,7 +201,7 @@ internal static class PeriAdvanceMonthProtectionCache
     /// <summary>在帧预算中推进一次保护快照构建。</summary>
     /// <param name="frameBudget">当前帧预算。</param>
     /// <returns>本帧执行的构建步骤数。</returns>
-    public static int TickBuildPeriAdvanceMonthProtection(in AdvanceMonthOptimizationFrameBudget frameBudget)
+    public static int TickBuildProtectionSnapshot(in AdvanceMonthOptimizationFrameBudget frameBudget)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled || !frameBudget.HasTimeRemaining())
         {

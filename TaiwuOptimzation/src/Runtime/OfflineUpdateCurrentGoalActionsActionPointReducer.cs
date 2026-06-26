@@ -68,7 +68,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
     /// <param name="character">待判断角色。</param>
     private static bool ShouldKeepOriginalActionPointGain(Character character)
     {
-        if (!PeriAdvanceMonthProtectionCache.TryGetSnapshot(out PeriAdvanceMonthProtectionCache.Snapshot protection))
+        if (!AdvanceMonthProtectionSnapshotCache.TryGetSnapshot(out AdvanceMonthProtectionSnapshotCache.Snapshot protection))
         {
             return true;
         }
@@ -110,7 +110,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
     /// <summary>判断角色是否位于通用保护区域。</summary>
     /// <param name="character">待判断角色。</param>
     /// <param name="protection">当前 protection cache 快照。</param>
-    private static bool IsInProtectedArea(Character character, PeriAdvanceMonthProtectionCache.Snapshot protection)
+    private static bool IsInProtectedArea(Character character, AdvanceMonthProtectionSnapshotCache.Snapshot protection)
     {
         Location location = character.GetLocation();
         return !location.IsValid() || protection.IsProtectedArea(location.AreaId);
@@ -119,7 +119,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
     /// <summary>判断角色当前目标是否直接指向太吾或队友。</summary>
     /// <param name="character">待判断角色。</param>
     /// <param name="protection">当前 protection cache 快照。</param>
-    private static bool HasActionTargetInTaiwuGroup(Character character, PeriAdvanceMonthProtectionCache.Snapshot protection)
+    private static bool HasActionTargetInTaiwuGroup(Character character, AdvanceMonthProtectionSnapshotCache.Snapshot protection)
     {
         ActionPlanningData actionPlanningData = character.ActionPlanningData;
         return protection.HasActionTargetInTaiwuGroup(actionPlanningData.GetCurrentAction(ActionPlanningData.ECurrentGoalType.Primary)) ||

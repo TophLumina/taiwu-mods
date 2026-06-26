@@ -27,10 +27,12 @@ internal static class CharacterActionTargetLookupCacheScopePatch
     {
         CharacterActionTargetLookupCache.EnterOfflineCurrentGoalActions(goalType);
         CharacterGoalTargetConditionPrefilter.EnterOfflineCurrentGoalActions();
+        CharacterActionTargetMatcherStageCache.EnterOfflineCurrentGoalActions();
     }
 
     private static Exception? Finalizer(Exception? __exception)
     {
+        CharacterActionTargetMatcherStageCache.LeaveOfflineCurrentGoalActions();
         CharacterGoalTargetConditionPrefilter.LeaveOfflineCurrentGoalActions();
         CharacterActionTargetLookupCache.LeaveOfflineCurrentGoalActions();
         return __exception;

@@ -487,6 +487,18 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
+    /// <summary>记录 `TargetMatcher` 阶段缓存命中。</summary>
+    public static void RecordTargetMatcherCacheHit(bool result) =>
+        RecordTargetMatcherCache(hit: true, miss: false, fallback: false, result);
+
+    /// <summary>记录 `TargetMatcher` 阶段缓存未命中并执行原版匹配。</summary>
+    public static void RecordTargetMatcherCacheMiss(bool result) =>
+        RecordTargetMatcherCache(hit: false, miss: true, fallback: false, result);
+
+    /// <summary>记录 `TargetMatcher` 阶段缓存未启用时的原版回退。</summary>
+    public static void RecordTargetMatcherCacheFallback(bool result) =>
+        RecordTargetMatcherCache(hit: false, miss: false, fallback: true, result);
+
     /// <summary>记录一次 `PrepareContext`，并归因到具体 `PlanningAction`。</summary>
     public static void EndPrepareContext(
         long startTicks,
@@ -1057,6 +1069,36 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
+    private static void RecordTargetMatcherCache(bool hit, bool miss, bool fallback, bool result)
+    {
+        if (!IsActive() || _goalScopeDepth <= 0 || _targetMatchScopeKind != CharacterTargetMatchScopeKind.Action)
+        {
+            return;
+        }
+
+        int actionTemplateId = _targetMatchActionTemplateId;
+        if (actionTemplateId < 0)
+        {
+            return;
+        }
+
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        lock (SyncRoot)
+        {
+            if (!metrics.TargetMatcherCacheByAction.TryGetValue(actionTemplateId, out TargetMatcherCacheMetric? metric))
+            {
+                metric = new TargetMatcherCacheMetric(
+                    actionTemplateId,
+                    _targetMatchSelector,
+                    _targetMatchRange,
+                    _targetMatchRangeValue);
+                metrics.TargetMatcherCacheByAction.Add(actionTemplateId, metric);
+            }
+
+            metric.Add(hit, miss, fallback, result);
+        }
+    }
+
     private static void LeaveGoalScope()
     {
         if (_goalScopeDepth > 0)
@@ -1141,6 +1183,7 @@ internal static class CharacterActionPlanningDiagnostics
         AppendRelationPrefilterTop(builder, "relationPrefilterByActionTop", metrics.RelationPrefilterByAction);
         AppendTemplateMetricTop(builder, "goalTargetMatchByGoalTop", metrics.GoalTargetMatchByGoal);
         AppendActionMetricTop(builder, "actionTargetMatchByActionTop", metrics.ActionTargetMatchByAction);
+        AppendTargetMatcherCacheTop(builder, "targetMatcherCacheByActionTop", metrics.TargetMatcherCacheByAction);
         AppendTemplateMetricTop(
             builder,
             "targetConditionsByGoalTop",
@@ -1511,6 +1554,55 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
+    private static void AppendTargetMatcherCacheTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, TargetMatcherCacheMetric> metrics)
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<TargetMatcherCacheMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.SavedCalls.CompareTo(left.SavedCalls));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            TargetMatcherCacheMetric metric = sorted[i];
+            builder.Append("      A");
+            builder.Append(metric.ActionTemplateId);
+            builder.Append(' ');
+            builder.Append(GetActionRefName(metric.ActionTemplateId));
+            builder.Append(": calls=");
+            builder.Append(metric.Calls);
+            builder.Append(", hits=");
+            builder.Append(metric.Hits);
+            builder.Append(", misses=");
+            builder.Append(metric.Misses);
+            builder.Append(", fallbacks=");
+            builder.Append(metric.Fallbacks);
+            builder.Append(", savedCalls=");
+            builder.Append(metric.SavedCalls);
+            builder.Append(", true=");
+            builder.Append(metric.TrueCount);
+            builder.Append(", false=");
+            builder.Append(metric.FalseCount);
+            builder.Append(", selector=");
+            builder.Append(metric.Selector);
+            builder.Append(", range=");
+            builder.Append(metric.Range);
+            builder.Append(", rangeValue=");
+            builder.Append(metric.RangeValue);
+            builder.AppendLine();
+        }
+    }
+
     private static void AppendRelationConditionTop(
         StringBuilder builder,
         string title,
@@ -1742,6 +1834,7 @@ internal static class CharacterActionPlanningDiagnostics
         public readonly Dictionary<int, ActionMetric> TargetConditionsByAction = new(128);
         public readonly Dictionary<int, RelationTargetPrefilterMetric> RelationTargetPrefilterByAction = new(128);
         public readonly Dictionary<int, RelationPrefilterMetric> RelationPrefilterByAction = new(128);
+        public readonly Dictionary<int, TargetMatcherCacheMetric> TargetMatcherCacheByAction = new(128);
         public readonly Dictionary<int, RelationConditionMetric> RelationConditionsByGoal = new(64);
         public readonly Dictionary<int, ActionRelationConditionMetric> RelationConditionsByAction = new(128);
         public readonly Dictionary<int, SensorUsageMetric> TargetConditionSensors = new(16);
@@ -1757,6 +1850,7 @@ internal static class CharacterActionPlanningDiagnostics
             TargetConditionsByAction.Clear();
             RelationTargetPrefilterByAction.Clear();
             RelationPrefilterByAction.Clear();
+            TargetMatcherCacheByAction.Clear();
             RelationConditionsByGoal.Clear();
             RelationConditionsByAction.Clear();
             TargetConditionSensors.Clear();
@@ -2045,6 +2139,62 @@ internal static class CharacterActionPlanningDiagnostics
             if (outputCount == 0)
             {
                 ZeroOutputCount++;
+            }
+        }
+    }
+
+    private sealed class TargetMatcherCacheMetric
+    {
+        public readonly int ActionTemplateId;
+        public readonly EPlanningActionCharacterSelector Selector;
+        public readonly EPlanningActionCharacterSelectRange Range;
+        public readonly int RangeValue;
+        public int Calls;
+        public int Hits;
+        public int Misses;
+        public int Fallbacks;
+        public int TrueCount;
+        public int FalseCount;
+
+        public int SavedCalls => Hits;
+
+        public TargetMatcherCacheMetric(
+            int actionTemplateId,
+            EPlanningActionCharacterSelector selector,
+            EPlanningActionCharacterSelectRange range,
+            int rangeValue)
+        {
+            ActionTemplateId = actionTemplateId;
+            Selector = selector;
+            Range = range;
+            RangeValue = rangeValue;
+        }
+
+        public void Add(bool hit, bool miss, bool fallback, bool result)
+        {
+            Calls++;
+            if (hit)
+            {
+                Hits++;
+            }
+
+            if (miss)
+            {
+                Misses++;
+            }
+
+            if (fallback)
+            {
+                Fallbacks++;
+            }
+
+            if (result)
+            {
+                TrueCount++;
+            }
+            else
+            {
+                FalseCount++;
             }
         }
     }
