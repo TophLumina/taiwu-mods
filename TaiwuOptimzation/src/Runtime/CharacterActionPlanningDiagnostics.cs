@@ -60,6 +60,15 @@ internal enum CharacterTargetMatchScopeKind
     Action,
 }
 
+internal enum CharacterRelationTargetPrefilterSkipReason
+{
+    OutOfScope,
+    EmptySource,
+    NoRelationRule,
+    UnsafeRule,
+    Exception,
+}
+
 internal readonly struct TargetMatchDiagnosticsState
 {
     public readonly long StartTicks;
@@ -147,6 +156,8 @@ internal static class CharacterActionPlanningDiagnostics
     private static readonly GoalMetrics PrimaryMetrics = new();
     private static readonly GoalMetrics SecondaryMetrics = new();
     private static readonly TargetLookupMetric[] TargetLookupMetrics = CreateTargetLookupMetricArray();
+    private static readonly SkipMetric[] RelationTargetPrefilterSkips = CreateSkipMetricArray();
+    private static readonly Dictionary<Type, ExceptionMetric> RelationTargetPrefilterExceptions = new(8);
 
     private static Session _current;
 
@@ -410,6 +421,69 @@ internal static class CharacterActionPlanningDiagnostics
             }
 
             metric.Add(selectableCount, relationCandidateCount);
+        }
+    }
+
+    /// <summary>记录关系目标反查表实际生效后的候选数量变化。</summary>
+    public static void RecordRelationTargetPrefilterApplied(
+        int actionTemplateId,
+        EPlanningActionCharacterSelector selector,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue,
+        int inputCount,
+        int outputCount)
+    {
+        if (!IsActive() || _goalScopeDepth <= 0 || actionTemplateId < 0)
+        {
+            return;
+        }
+
+        GoalMetrics metrics = _goalType == ActionPlanningData.ECurrentGoalType.Primary ? PrimaryMetrics : SecondaryMetrics;
+        lock (SyncRoot)
+        {
+            if (!metrics.RelationTargetPrefilterByAction.TryGetValue(actionTemplateId, out RelationTargetPrefilterMetric? metric))
+            {
+                metric = new RelationTargetPrefilterMetric(actionTemplateId, selector, range, rangeValue);
+                metrics.RelationTargetPrefilterByAction.Add(actionTemplateId, metric);
+            }
+
+            metric.Add(inputCount, outputCount);
+        }
+    }
+
+    /// <summary>记录关系目标反查表没有接管本次过滤的原因。</summary>
+    public static void RecordRelationTargetPrefilterSkipped(CharacterRelationTargetPrefilterSkipReason reason)
+    {
+        if (!IsActive() || _goalScopeDepth <= 0)
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            RelationTargetPrefilterSkips[(int)reason].Count++;
+        }
+    }
+
+    /// <summary>记录关系目标反查表异常类型，用于判断当前加速路径是否适合保留。</summary>
+    public static void RecordRelationTargetPrefilterException(Exception exception)
+    {
+        if (!IsActive() || _goalScopeDepth <= 0)
+        {
+            return;
+        }
+
+        Type exceptionType = exception.GetType();
+        lock (SyncRoot)
+        {
+            RelationTargetPrefilterSkips[(int)CharacterRelationTargetPrefilterSkipReason.Exception].Count++;
+            if (!RelationTargetPrefilterExceptions.TryGetValue(exceptionType, out ExceptionMetric? metric))
+            {
+                metric = new ExceptionMetric(exceptionType, exception.Message);
+                RelationTargetPrefilterExceptions.Add(exceptionType, metric);
+            }
+
+            metric.Count++;
         }
     }
 
@@ -996,6 +1070,8 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
+    public static bool IsRecording => IsActive();
+
     private static bool IsActive() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled && _current.StartTicks != 0;
 
@@ -1012,6 +1088,8 @@ internal static class CharacterActionPlanningDiagnostics
         AppendMetric(builder, "areas", _current.TargetLookupAreaCount);
         AppendMetric(builder, "states", _current.TargetLookupStateCount);
         AppendMetric(builder, "characterIds", _current.TargetLookupCharacterIdCount);
+        AppendRelationTargetPrefilterSkips(builder);
+        AppendRelationTargetPrefilterExceptions(builder);
 
         builder.AppendLine("  parallelStages:");
         AppendMetric(builder, nameof(CharacterActionPlanningParallelStage.UpdateCharacterMission), ParallelStages[(int)CharacterActionPlanningParallelStage.UpdateCharacterMission]);
@@ -1059,6 +1137,7 @@ internal static class CharacterActionPlanningDiagnostics
         AppendMetric(builder, nameof(CharacterActionPlanningStep.MatchTargetCharacterByConditions), metrics.Steps[(int)CharacterActionPlanningStep.MatchTargetCharacterByConditions]);
         AppendActionMetricTop(builder, "prepareContextByActionTop", metrics.PrepareContextByAction);
         AppendActionMetricTop(builder, "filterActionTargetsByActionTop", metrics.FilterTargetsByAction);
+        AppendRelationTargetPrefilterTop(builder, "actualRelationTargetPrefilterByActionTop", metrics.RelationTargetPrefilterByAction);
         AppendRelationPrefilterTop(builder, "relationPrefilterByActionTop", metrics.RelationPrefilterByAction);
         AppendTemplateMetricTop(builder, "goalTargetMatchByGoalTop", metrics.GoalTargetMatchByGoal);
         AppendActionMetricTop(builder, "actionTargetMatchByActionTop", metrics.ActionTargetMatchByAction);
@@ -1119,6 +1198,54 @@ internal static class CharacterActionPlanningDiagnostics
         builder.Append(", charactersAdded=");
         builder.Append(metric.CharactersAdded);
         builder.AppendLine();
+    }
+
+    private static void AppendRelationTargetPrefilterSkips(StringBuilder builder)
+    {
+        builder.AppendLine("  actualRelationTargetPrefilterSkips:");
+        AppendSkipMetric(builder, nameof(CharacterRelationTargetPrefilterSkipReason.OutOfScope), RelationTargetPrefilterSkips[(int)CharacterRelationTargetPrefilterSkipReason.OutOfScope]);
+        AppendSkipMetric(builder, nameof(CharacterRelationTargetPrefilterSkipReason.EmptySource), RelationTargetPrefilterSkips[(int)CharacterRelationTargetPrefilterSkipReason.EmptySource]);
+        AppendSkipMetric(builder, nameof(CharacterRelationTargetPrefilterSkipReason.NoRelationRule), RelationTargetPrefilterSkips[(int)CharacterRelationTargetPrefilterSkipReason.NoRelationRule]);
+        AppendSkipMetric(builder, nameof(CharacterRelationTargetPrefilterSkipReason.UnsafeRule), RelationTargetPrefilterSkips[(int)CharacterRelationTargetPrefilterSkipReason.UnsafeRule]);
+        AppendSkipMetric(builder, nameof(CharacterRelationTargetPrefilterSkipReason.Exception), RelationTargetPrefilterSkips[(int)CharacterRelationTargetPrefilterSkipReason.Exception]);
+    }
+
+    private static void AppendSkipMetric(StringBuilder builder, string name, SkipMetric metric)
+    {
+        builder.Append("    ");
+        builder.Append(name);
+        builder.Append(": ");
+        builder.Append(metric.Count);
+        builder.AppendLine();
+    }
+
+    private static void AppendRelationTargetPrefilterExceptions(StringBuilder builder)
+    {
+        if (RelationTargetPrefilterExceptions.Count == 0)
+        {
+            return;
+        }
+
+        List<ExceptionMetric> sorted = new(RelationTargetPrefilterExceptions.Values);
+        sorted.Sort(static (left, right) => right.Count.CompareTo(left.Count));
+
+        builder.AppendLine("  actualRelationTargetPrefilterExceptions:");
+        int count = Math.Min(8, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            ExceptionMetric metric = sorted[i];
+            builder.Append("    ");
+            builder.Append(metric.ExceptionType.FullName);
+            builder.Append(": count=");
+            builder.Append(metric.Count);
+            if (!string.IsNullOrEmpty(metric.FirstMessage))
+            {
+                builder.Append(", firstMessage=");
+                builder.Append(metric.FirstMessage.Replace('\r', ' ').Replace('\n', ' '));
+            }
+
+            builder.AppendLine();
+        }
     }
 
     private static void AppendActionMetricTop(
@@ -1331,6 +1458,59 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
+    private static void AppendRelationTargetPrefilterTop(
+        StringBuilder builder,
+        string title,
+        Dictionary<int, RelationTargetPrefilterMetric> metrics)
+    {
+        if (metrics.Count == 0)
+        {
+            return;
+        }
+
+        List<RelationTargetPrefilterMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Dropped.CompareTo(left.Dropped));
+
+        builder.Append("    ");
+        builder.Append(title);
+        builder.AppendLine(":");
+
+        int count = Math.Min(12, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            RelationTargetPrefilterMetric metric = sorted[i];
+            builder.Append("      A");
+            builder.Append(metric.ActionTemplateId);
+            builder.Append(' ');
+            builder.Append(GetActionRefName(metric.ActionTemplateId));
+            builder.Append(": calls=");
+            builder.Append(metric.Calls);
+            builder.Append(", selector=");
+            builder.Append(metric.Selector);
+            builder.Append(", range=");
+            builder.Append(metric.Range);
+            builder.Append(", rangeValue=");
+            builder.Append(metric.RangeValue);
+            builder.Append(", input=");
+            builder.Append(metric.InputCount);
+            builder.Append(", output=");
+            builder.Append(metric.OutputCount);
+            builder.Append(", dropped=");
+            builder.Append(metric.Dropped);
+            builder.Append(", zeroOutput=");
+            builder.Append(metric.ZeroOutputCount);
+            builder.Append(", avgInput=");
+            builder.Append(metric.Calls == 0 ? "0.0" : (metric.InputCount / (double)metric.Calls).ToString("N1"));
+            builder.Append(", avgOutput=");
+            builder.Append(metric.Calls == 0 ? "0.0" : (metric.OutputCount / (double)metric.Calls).ToString("N1"));
+            builder.Append(", maxInput=");
+            builder.Append(metric.MaxInputCount);
+            builder.Append(", maxDropped=");
+            builder.Append(metric.MaxDropped);
+            builder.AppendLine();
+        }
+    }
+
     private static void AppendRelationConditionTop(
         StringBuilder builder,
         string title,
@@ -1513,6 +1693,18 @@ internal static class CharacterActionPlanningDiagnostics
         return metrics;
     }
 
+    private static SkipMetric[] CreateSkipMetricArray()
+    {
+        Array values = Enum.GetValues(typeof(CharacterRelationTargetPrefilterSkipReason));
+        SkipMetric[] metrics = new SkipMetric[values.Length];
+        for (int i = 0; i < metrics.Length; i++)
+        {
+            metrics[i] = new SkipMetric();
+        }
+
+        return metrics;
+    }
+
     private static void ClearMetrics()
     {
         ClearMetrics(ParallelStages);
@@ -1522,6 +1714,13 @@ internal static class CharacterActionPlanningDiagnostics
         {
             metric.Clear();
         }
+
+        foreach (SkipMetric metric in RelationTargetPrefilterSkips)
+        {
+            metric.Clear();
+        }
+
+        RelationTargetPrefilterExceptions.Clear();
     }
 
     private static void ClearMetrics(Metric[] metrics)
@@ -1541,6 +1740,7 @@ internal static class CharacterActionPlanningDiagnostics
         public readonly Dictionary<int, ActionMetric> ActionTargetMatchByAction = new(128);
         public readonly Dictionary<int, TemplateMetric> TargetConditionsByGoal = new(64);
         public readonly Dictionary<int, ActionMetric> TargetConditionsByAction = new(128);
+        public readonly Dictionary<int, RelationTargetPrefilterMetric> RelationTargetPrefilterByAction = new(128);
         public readonly Dictionary<int, RelationPrefilterMetric> RelationPrefilterByAction = new(128);
         public readonly Dictionary<int, RelationConditionMetric> RelationConditionsByGoal = new(64);
         public readonly Dictionary<int, ActionRelationConditionMetric> RelationConditionsByAction = new(128);
@@ -1555,6 +1755,7 @@ internal static class CharacterActionPlanningDiagnostics
             ActionTargetMatchByAction.Clear();
             TargetConditionsByGoal.Clear();
             TargetConditionsByAction.Clear();
+            RelationTargetPrefilterByAction.Clear();
             RelationPrefilterByAction.Clear();
             RelationConditionsByGoal.Clear();
             RelationConditionsByAction.Clear();
@@ -1603,6 +1804,29 @@ internal static class CharacterActionPlanningDiagnostics
             Fallbacks = 0;
             CandidateIds = 0;
             CharactersAdded = 0;
+        }
+    }
+
+    private sealed class SkipMetric
+    {
+        public int Count;
+
+        public void Clear()
+        {
+            Count = 0;
+        }
+    }
+
+    private sealed class ExceptionMetric
+    {
+        public readonly Type ExceptionType;
+        public readonly string FirstMessage;
+        public int Count;
+
+        public ExceptionMetric(Type exceptionType, string firstMessage)
+        {
+            ExceptionType = exceptionType;
+            FirstMessage = firstMessage;
         }
     }
 
@@ -1771,6 +1995,56 @@ internal static class CharacterActionPlanningDiagnostics
             if (dropped > MaxDropped)
             {
                 MaxDropped = dropped;
+            }
+        }
+    }
+
+    private sealed class RelationTargetPrefilterMetric
+    {
+        public readonly int ActionTemplateId;
+        public readonly EPlanningActionCharacterSelector Selector;
+        public readonly EPlanningActionCharacterSelectRange Range;
+        public readonly int RangeValue;
+        public int Calls;
+        public long InputCount;
+        public long OutputCount;
+        public int MaxInputCount;
+        public int MaxDropped;
+        public int ZeroOutputCount;
+
+        public long Dropped => InputCount - OutputCount;
+
+        public RelationTargetPrefilterMetric(
+            int actionTemplateId,
+            EPlanningActionCharacterSelector selector,
+            EPlanningActionCharacterSelectRange range,
+            int rangeValue)
+        {
+            ActionTemplateId = actionTemplateId;
+            Selector = selector;
+            Range = range;
+            RangeValue = rangeValue;
+        }
+
+        public void Add(int inputCount, int outputCount)
+        {
+            Calls++;
+            InputCount += inputCount;
+            OutputCount += outputCount;
+            if (inputCount > MaxInputCount)
+            {
+                MaxInputCount = inputCount;
+            }
+
+            int dropped = inputCount - outputCount;
+            if (dropped > MaxDropped)
+            {
+                MaxDropped = dropped;
+            }
+
+            if (outputCount == 0)
+            {
+                ZeroOutputCount++;
             }
         }
     }

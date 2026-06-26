@@ -72,6 +72,13 @@ internal static class CharacterActionTargetLookupCache
         }
     }
 
+    /// <summary>返回当前冻结目标索引内的全部角色 id，供同一过月屏障内的关系候选索引复用。</summary>
+    public static int[] GetFrozenCharacterIdsForRelationTargetCache()
+    {
+        Snapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
+        return snapshot?.AllCharacterIds ?? Array.Empty<int>();
+    }
+
     /// <summary>过月结束后丢弃冻结快照；下一次过月前会重新全量生成。</summary>
     public static void UnfreezeAndInvalidate()
     {
@@ -226,6 +233,7 @@ internal static class CharacterActionTargetLookupCache
     {
         List<int>?[] areaBuilders = new List<int>?[AreaCount];
         Dictionary<int, int[]> blockCharacterIds = new(32768);
+        HashSet<int> allCharacterIds = new(8192);
         Location taiwuLocation = DomainManager.Taiwu.GetTaiwu().GetLocation();
         HashSet<int>? taiwuGroup = DomainManager.Taiwu.GetGroupCharIds().GetCollection();
         int totalCharacterIds = 0;
@@ -240,6 +248,10 @@ internal static class CharacterActionTargetLookupCache
                 blockCharacterIds[MakeBlockKey(block.AreaId, block.BlockId)] = blockIds;
                 List<int> areaBuilder = areaBuilders[block.AreaId] ??= new List<int>(128);
                 areaBuilder.AddRange(blockIds);
+                foreach (int characterId in blockIds)
+                {
+                    allCharacterIds.Add(characterId);
+                }
             }
         }
 
@@ -250,12 +262,15 @@ internal static class CharacterActionTargetLookupCache
         }
 
         Dictionary<sbyte, int[]> stateCharacterIds = BuildAllStateCharacterIds(areaCharacterIds);
+        int[] allCharacterIdArray = new int[allCharacterIds.Count];
+        allCharacterIds.CopyTo(allCharacterIdArray);
+
         CharacterActionPlanningDiagnostics.RecordTargetLookupSnapshotSize(
             blockCharacterIds.Count,
             areaCharacterIds.Length,
             stateCharacterIds.Count,
             totalCharacterIds);
-        return new Snapshot(areaCharacterIds, stateCharacterIds, blockCharacterIds);
+        return new Snapshot(areaCharacterIds, stateCharacterIds, blockCharacterIds, allCharacterIdArray);
     }
 
     private static int AddIndexedCharacters(CharacterPlanningAgent agent, List<Character> characters, int[] characterIds)
@@ -287,15 +302,18 @@ internal static class CharacterActionTargetLookupCache
 
         public int[][] AreaCharacterIds { get; }
         public Dictionary<sbyte, int[]> StateCharacterIds { get; }
+        public int[] AllCharacterIds { get; }
 
         public Snapshot(
             int[][] areaCharacterIds,
             Dictionary<sbyte, int[]> stateCharacterIds,
-            Dictionary<int, int[]> blockCharacterIds)
+            Dictionary<int, int[]> blockCharacterIds,
+            int[] allCharacterIds)
         {
             AreaCharacterIds = areaCharacterIds;
             StateCharacterIds = stateCharacterIds;
             _blockCharacterIds = blockCharacterIds;
+            AllCharacterIds = allCharacterIds;
         }
 
         public int[] GetBlockCharacterIds(short areaId, short blockId) =>

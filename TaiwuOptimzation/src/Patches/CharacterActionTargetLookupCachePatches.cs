@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using Config;
 using GameData.ActionPlanning.MonthlyAI;
+using GameData.ActionPlanning.MonthlyAI.Node;
 using GameData.Common;
 using GameData.Domains.Map;
 using HarmonyLib;
+using Redzen.Random;
 using TaiwuOptimization.Runtime;
 using Character = GameData.Domains.Character.Character;
 
@@ -21,11 +23,15 @@ internal static class CharacterActionTargetLookupCacheScopePatch
             new[] { typeof(DataContext), typeof(ActionPlanningData.ECurrentGoalType) });
 
     // 只在原版离线规划阶段启用候选查找索引；补全阶段仍走原版扫描。
-    private static void Prefix(ActionPlanningData.ECurrentGoalType goalType) =>
+    private static void Prefix(ActionPlanningData.ECurrentGoalType goalType)
+    {
         CharacterActionTargetLookupCache.EnterOfflineCurrentGoalActions(goalType);
+        CharacterGoalTargetConditionPrefilter.EnterOfflineCurrentGoalActions();
+    }
 
     private static Exception? Finalizer(Exception? __exception)
     {
+        CharacterGoalTargetConditionPrefilter.LeaveOfflineCurrentGoalActions();
         CharacterActionTargetLookupCache.LeaveOfflineCurrentGoalActions();
         return __exception;
     }
@@ -106,4 +112,63 @@ internal static class CharacterActionTargetLookupCacheSettlementPatch
         List<Character> characters,
         Location settlementLocation) =>
         !CharacterActionTargetLookupCache.TryAddCharactersInSettlementRange(__instance, characters, settlementLocation);
+}
+
+[HarmonyPatch]
+[HarmonyPriority(Priority.First)]
+internal static class CharacterGoalTargetConditionPrefilterFilterPatch
+{
+    private static readonly AccessTools.FieldRef<CharacterPlanningAgent, PlanningGoalNode> CurrentPlanningGoalRef =
+        AccessTools.FieldRefAccess<CharacterPlanningAgent, PlanningGoalNode>("_currPlanningGoal");
+
+    private static readonly AccessTools.FieldRef<CharacterPlanningAgent, PlanningActionNode> CurrentPlanningActionRef =
+        AccessTools.FieldRefAccess<CharacterPlanningAgent, PlanningActionNode>("_currPlanningAction");
+
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(CharacterPlanningAgent),
+            "FilterActionTargets",
+            new[]
+            {
+                typeof(IRandomSource),
+                typeof(IReadOnlyList<Character>),
+                typeof(ICollection<int>),
+                typeof(Predicate<Character>),
+                typeof(EPlanningActionCharacterSelector),
+            });
+
+    // 在原版 selector/predicate 过滤前缩小关系类目标候选；最终判断仍由原版逻辑完成。
+    private static void Prefix(
+        CharacterPlanningAgent __instance,
+        ref IReadOnlyList<Character> selectableCharacters,
+        out List<Character>? __state)
+    {
+        __state = null;
+        try
+        {
+            if (CharacterGoalTargetConditionPrefilter.TryPrefilterCandidates(
+                    __instance,
+                    CurrentPlanningGoalRef(__instance),
+                    CurrentPlanningActionRef(__instance),
+                    selectableCharacters,
+                    out IReadOnlyList<Character> filtered,
+                    out List<Character>? rentedList))
+            {
+                selectableCharacters = filtered;
+                __state = rentedList;
+            }
+        }
+        catch (Exception exception)
+        {
+            // 预过滤只是加速路径，失败时必须保持原版候选列表。
+            CharacterGoalTargetConditionPrefilter.RecordException(exception);
+            __state = null;
+        }
+    }
+
+    private static Exception? Finalizer(List<Character>? __state, Exception? __exception)
+    {
+        CharacterGoalTargetConditionPrefilter.ReturnCandidateList(__state);
+        return __exception;
+    }
 }

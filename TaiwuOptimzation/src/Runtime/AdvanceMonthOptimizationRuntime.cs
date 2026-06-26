@@ -24,10 +24,24 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
+    /// <summary>在原版主/副目标行动阶段前冻结关系候选快照，确保晚于 `CharacterRelationsUpdate`。</summary>
+    public static void PrepareRelationTargetCacheBeforeGoalActions()
+    {
+        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
+        {
+            return;
+        }
+
+        long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
+        CharacterGoalTargetConditionPrefilter.FreezeBeforeAdvanceMonth();
+        CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
+    }
+
     /// <summary>过月结束后释放冻结快照，后续帧继续构建最新快照。</summary>
     public static void EndAdvanceMonthOptimizationScope()
     {
         PeriAdvanceMonthProtectionCache.UnfreezePeriAdvanceMonth();
+        CharacterGoalTargetConditionPrefilter.UnfreezeAndInvalidate();
         CharacterActionTargetLookupCache.UnfreezeAndInvalidate();
         CharacterActionPlanningDiagnostics.EndAdvanceMonth();
     }
@@ -61,6 +75,7 @@ internal static class AdvanceMonthOptimizationRuntime
     {
         PeriAdvanceMonthProtectionCache.Reset();
         CharacterActionTargetLookupCache.Reset();
+        CharacterGoalTargetConditionPrefilter.UnfreezeAndInvalidate();
     }
 
     private static bool IsWorldDataAvailable()
