@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.Common;
+using GameData.Domains;
 using GameData.Domains.Character;
+using GameData.Domains.Map;
 using GameData.Domains.Taiwu;
 using HarmonyLib;
 using TaiwuOptimization.Runtime;
@@ -80,6 +82,40 @@ internal static class PeriAdvanceMonthTaiwuGroupCacheInvalidationPatch
     }
 
     // 不尝试增量修补，直接标记相关 cache dirty。
-    private static void Postfix() =>
+    private static void Postfix()
+    {
         PeriAdvanceMonthProtectionCache.MarkTaiwuGroupDirty();
+    }
+}
+
+[HarmonyPatch]
+internal static class PeriAdvanceMonthTaiwuLocationCacheInvalidationPatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(Character),
+            nameof(Character.SetLocation),
+            new[] { typeof(Location), typeof(DataContext) });
+
+    // 目标索引过月前全量重建；这里仅处理太吾跨 area 对行动点保护区域的影响。
+    private static void Prefix(Character __instance, Location location)
+    {
+        if (__instance.GetId() != DomainManager.Taiwu.GetTaiwuCharId())
+        {
+            return;
+        }
+
+        Location oldLocation = __instance.GetLocation();
+        if (IsAreaChanged(oldLocation, location))
+        {
+            PeriAdvanceMonthProtectionCache.MarkProtectedAreasDirty();
+        }
+    }
+
+    private static bool IsAreaChanged(Location oldLocation, Location newLocation)
+    {
+        bool oldValid = oldLocation.IsValid();
+        bool newValid = newLocation.IsValid();
+        return oldValid != newValid || oldValid && oldLocation.AreaId != newLocation.AreaId;
+    }
 }

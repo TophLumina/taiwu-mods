@@ -30,5 +30,6 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
         PeriAdvanceMonthProtectionCache.MarkAllDirty();
+        CharacterActionTargetLookupCache.Reset();
     }
 }

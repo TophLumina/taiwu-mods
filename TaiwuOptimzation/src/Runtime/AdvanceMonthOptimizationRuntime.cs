@@ -6,23 +6,27 @@ namespace TaiwuOptimization.Runtime;
 internal static class AdvanceMonthOptimizationRuntime
 {
     public static void Initialize() =>
-        PeriAdvanceMonthProtectionCache.Reset();
+        ResetRuntimeCaches();
 
     public static void Dispose() =>
-        PeriAdvanceMonthProtectionCache.Reset();
+        ResetRuntimeCaches();
 
-    /// <summary>过月开始时只冻结已完成的快照，绝不在这里同步补建。</summary>
+    /// <summary>过月开始时准备并冻结快照；目标索引会在 NPC 规划前同步全量刷新。</summary>
     public static void BeginAdvanceMonthOptimizationScope()
     {
         if (TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
         {
+            CharacterActionTargetLookupCache.RebuildAndFreezeBeforeAdvanceMonth();
             PeriAdvanceMonthProtectionCache.TryFreezeForPeriAdvanceMonth();
         }
     }
 
     /// <summary>过月结束后释放冻结快照，后续帧继续构建最新快照。</summary>
-    public static void EndAdvanceMonthOptimizationScope() =>
+    public static void EndAdvanceMonthOptimizationScope()
+    {
         PeriAdvanceMonthProtectionCache.UnfreezePeriAdvanceMonth();
+        CharacterActionTargetLookupCache.UnfreezeAndInvalidate();
+    }
 
     /// <summary>在游玩帧中按预算推进保护快照构建。</summary>
     /// <param name="context">当前后端数据上下文。</param>
@@ -31,8 +35,12 @@ internal static class AdvanceMonthOptimizationRuntime
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled ||
             !IsWorldDataAvailable() ||
             DomainManager.World.GetAdvancingMonthState() != 0 ||
-            DomainManager.Global.GetSavingWorld() ||
-            !PeriAdvanceMonthProtectionCache.NeedsFrameBuild())
+            DomainManager.Global.GetSavingWorld())
+        {
+            return;
+        }
+
+        if (!PeriAdvanceMonthProtectionCache.NeedsFrameBuild())
         {
             return;
         }
@@ -43,7 +51,13 @@ internal static class AdvanceMonthOptimizationRuntime
 
     /// <summary>退出世界/切档时丢弃缓存，避免引用旧世界数据。</summary>
     public static void LeaveWorld() =>
+        ResetRuntimeCaches();
+
+    private static void ResetRuntimeCaches()
+    {
         PeriAdvanceMonthProtectionCache.Reset();
+        CharacterActionTargetLookupCache.Reset();
+    }
 
     private static bool IsWorldDataAvailable()
     {
