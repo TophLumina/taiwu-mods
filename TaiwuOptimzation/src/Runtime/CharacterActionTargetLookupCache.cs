@@ -104,10 +104,18 @@ internal static class CharacterActionTargetLookupCache
     {
         if (!TryGetFrozenSnapshot(out Snapshot? snapshot))
         {
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SameBlock, false, 0, 0);
             return false;
         }
 
-        return AddIndexedCharacters(agent, characters, snapshot!.GetBlockCharacterIds(block.AreaId, block.BlockId));
+        int[] characterIds = snapshot!.GetBlockCharacterIds(block.AreaId, block.BlockId);
+        int added = AddIndexedCharacters(agent, characters, characterIds);
+        CharacterActionPlanningDiagnostics.RecordTargetLookup(
+            CharacterActionTargetLookupKind.SameBlock,
+            true,
+            characterIds.Length,
+            added);
+        return true;
     }
 
     /// <summary>尝试用冻结快照追加同一地区候选角色。</summary>
@@ -115,10 +123,18 @@ internal static class CharacterActionTargetLookupCache
     {
         if (!TryGetFrozenSnapshot(out Snapshot? snapshot) || areaId < 0 || areaId >= snapshot!.AreaCharacterIds.Length)
         {
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SameArea, false, 0, 0);
             return false;
         }
 
-        return AddIndexedCharacters(agent, characters, snapshot.AreaCharacterIds[areaId]);
+        int[] characterIds = snapshot.AreaCharacterIds[areaId];
+        int added = AddIndexedCharacters(agent, characters, characterIds);
+        CharacterActionPlanningDiagnostics.RecordTargetLookup(
+            CharacterActionTargetLookupKind.SameArea,
+            true,
+            characterIds.Length,
+            added);
+        return true;
     }
 
     /// <summary>尝试用冻结快照追加同一州域候选角色。</summary>
@@ -127,10 +143,17 @@ internal static class CharacterActionTargetLookupCache
         if (!TryGetFrozenSnapshot(out Snapshot? snapshot) ||
             !snapshot!.StateCharacterIds.TryGetValue(stateId, out int[]? characterIds))
         {
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SameState, false, 0, 0);
             return false;
         }
 
-        return AddIndexedCharacters(agent, characters, characterIds);
+        int added = AddIndexedCharacters(agent, characters, characterIds);
+        CharacterActionPlanningDiagnostics.RecordTargetLookup(
+            CharacterActionTargetLookupKind.SameState,
+            true,
+            characterIds.Length,
+            added);
+        return true;
     }
 
     /// <summary>尝试用冻结快照追加地块范围内候选角色。</summary>
@@ -142,17 +165,27 @@ internal static class CharacterActionTargetLookupCache
     {
         if (!TryGetFrozenSnapshot(out Snapshot? snapshot))
         {
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.BlockRange, false, 0, 0);
             return false;
         }
 
         List<MapBlockData> blocks = _blockRangeScratch ??= new List<MapBlockData>(64);
         blocks.Clear();
         DomainManager.Map.GetRealNeighborBlocks(location.AreaId, location.BlockId, blocks, steps, includeCenter: true);
+        int candidateIds = 0;
+        int beforeCount = characters.Count;
         foreach (MapBlockData block in blocks)
         {
-            AddIndexedCharacters(agent, characters, snapshot!.GetBlockCharacterIds(block.AreaId, block.BlockId));
+            int[] characterIds = snapshot!.GetBlockCharacterIds(block.AreaId, block.BlockId);
+            candidateIds += characterIds.Length;
+            AddIndexedCharacters(agent, characters, characterIds);
         }
 
+        CharacterActionPlanningDiagnostics.RecordTargetLookup(
+            CharacterActionTargetLookupKind.BlockRange,
+            true,
+            candidateIds,
+            characters.Count - beforeCount);
         blocks.Clear();
         return true;
     }
@@ -165,11 +198,18 @@ internal static class CharacterActionTargetLookupCache
     {
         if (!TryGetFrozenSnapshot(out Snapshot? snapshot))
         {
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SettlementRange, false, 0, 0);
             return false;
         }
 
         int[] characterIds = snapshot!.GetSettlementCharacterIds(settlementLocation);
-        return AddIndexedCharacters(agent, characters, characterIds);
+        int added = AddIndexedCharacters(agent, characters, characterIds);
+        CharacterActionPlanningDiagnostics.RecordTargetLookup(
+            CharacterActionTargetLookupKind.SettlementRange,
+            true,
+            characterIds.Length,
+            added);
+        return true;
     }
 
     private static bool IsEnabled() =>
@@ -195,6 +235,7 @@ internal static class CharacterActionTargetLookupCache
         Dictionary<int, int[]> blockCharacterIds = new(32768);
         Location taiwuLocation = DomainManager.Taiwu.GetTaiwu().GetLocation();
         HashSet<int>? taiwuGroup = DomainManager.Taiwu.GetGroupCharIds().GetCollection();
+        int totalCharacterIds = 0;
 
         for (short areaId = 0; areaId < AreaCount; areaId++)
         {
@@ -202,6 +243,7 @@ internal static class CharacterActionTargetLookupCache
             foreach (MapBlockData block in blocks)
             {
                 int[] blockIds = CollectBlockCharacters(block, taiwuLocation, taiwuGroup);
+                totalCharacterIds += blockIds.Length;
                 blockCharacterIds[MakeBlockKey(block.AreaId, block.BlockId)] = blockIds;
                 List<int> areaBuilder = areaBuilders[block.AreaId] ??= new List<int>(128);
                 areaBuilder.AddRange(blockIds);
@@ -214,12 +256,19 @@ internal static class CharacterActionTargetLookupCache
             areaCharacterIds[areaId] = areaBuilders[areaId]?.ToArray() ?? Array.Empty<int>();
         }
 
-        return new Snapshot(areaCharacterIds, BuildAllStateCharacterIds(areaCharacterIds), blockCharacterIds);
+        Dictionary<sbyte, int[]> stateCharacterIds = BuildAllStateCharacterIds(areaCharacterIds);
+        CharacterActionPlanningDiagnostics.RecordTargetLookupSnapshotSize(
+            blockCharacterIds.Count,
+            areaCharacterIds.Length,
+            stateCharacterIds.Count,
+            totalCharacterIds);
+        return new Snapshot(areaCharacterIds, stateCharacterIds, blockCharacterIds);
     }
 
-    private static bool AddIndexedCharacters(CharacterPlanningAgent agent, List<Character> characters, int[] characterIds)
+    private static int AddIndexedCharacters(CharacterPlanningAgent agent, List<Character> characters, int[] characterIds)
     {
         int selfId = agent.Object.GetId();
+        int beforeCount = characters.Count;
         characters.EnsureCapacity(characters.Count + characterIds.Length);
         foreach (int characterId in characterIds)
         {
@@ -234,7 +283,7 @@ internal static class CharacterActionTargetLookupCache
             }
         }
 
-        return true;
+        return characters.Count - beforeCount;
     }
 
     private sealed class Snapshot

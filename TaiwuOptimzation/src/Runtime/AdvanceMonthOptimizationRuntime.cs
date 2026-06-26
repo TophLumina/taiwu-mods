@@ -14,9 +14,12 @@ internal static class AdvanceMonthOptimizationRuntime
     /// <summary>过月开始时准备并冻结快照；目标索引会在 NPC 规划前同步全量刷新。</summary>
     public static void BeginAdvanceMonthOptimizationScope()
     {
+        CharacterActionPlanningDiagnostics.BeginAdvanceMonth();
         if (TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
         {
+            long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
             CharacterActionTargetLookupCache.RebuildAndFreezeBeforeAdvanceMonth();
+            CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
             PeriAdvanceMonthProtectionCache.TryFreezeForPeriAdvanceMonth();
         }
     }
@@ -26,6 +29,7 @@ internal static class AdvanceMonthOptimizationRuntime
     {
         PeriAdvanceMonthProtectionCache.UnfreezePeriAdvanceMonth();
         CharacterActionTargetLookupCache.UnfreezeAndInvalidate();
+        CharacterActionPlanningDiagnostics.EndAdvanceMonth();
     }
 
     /// <summary>在游玩帧中按预算推进保护快照构建。</summary>

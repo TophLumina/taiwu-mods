@@ -6,9 +6,9 @@ return {
 		[1] = "TaiwuOptimizationFront.dll",
 	},
 	Title = "[天幕心帷]过月性能优化",
-	Version = "0.3.0.0",
+	Version = "0.2.9.0",
 	Author = "man!",
-	Description = " [h1] 过月性能优化 [/h1]\n\n后期存档中，密闻 UpdateInformation 阶段通常可从秒级下降到百毫秒级；实测样本中，秘闻代谢相关阶段曾由约 1.5s 降至数十毫秒。具体收益取决于秘闻数量、人口规模和当前存档的实际瓶颈。\n\n当前主要优化改为热路径替换：为密闻传播、持有人计数和代谢清理建立反查表，并为 NPC 行动规划中的目标范围查询建立低维位置索引，减少原版反复全表/全区域扫描带来的过月耗时。\n\n存档优化可放大 working.db 复制块，并可选择取消本地世界存档压缩，以减少 SaveWorld 写盘阶段的耗时；取消压缩会增大 local.sav 体积。\n\n可选降低未受保护远区 NPC 的每月主/副目标行动点增长，以减少远区 NPC 行动循环压力。保护快照会在游玩帧中按预算构建；若过月时快照尚未就绪，则本次行动点削减会保守跳过。\n\n诊断项可输出密闻月结与 SaveWorld 写盘细分耗时，用于判断瓶颈在过月计算、密闻、domain 序列化、working.db 复制还是压缩写盘。\n\n[b]不修改存档结构；使用 Harmony Patch，可能与修改密闻月结、NPC 行动规划、NPC 月行动点或存档写入诊断相关方法的 mod 冲突。[/b]\n\n[spoiler]PS: 这版的方向从“延迟更多任务”转回“找原版热路径中的重复扫描”。目前密闻阶段收益高、风险低，也更接近不改变原版语义的优化方式。[/spoiler] ",
+	Description = "[h1] 过月性能优化 [/h1]\r\n\r\n当前版本重点是“等价热路径替换”：不延迟世界结算，不跳过原版逻辑，而是把原版过月中的重复全表/全区域扫描替换为反查表和目标索引。后期存档中可以在严格不影响原版结算结果的前提下，大幅压缩点击过月后的集中等待时间。\r\n\r\n本 Mod 现在不再使用跨帧延迟结算 / pending 队列 / sidecar 文件，也不接管、延迟或新增原版保存。\r\n\r\n[h3][b]不写入自定义存档数据，不改变原版世界结算屏障；可在已有存档中自由加入/取消本mod。[/b][/h3]\r\n\r\n[list] [h2]当前主要优化[/h2]\r\n[*] 密闻传播阶段 holder count 反查表\r\n[*] 密闻代谢/广播/删除阶段等价实现\r\n[*] 减少 UpdateInformation 中秘闻相关的重复扫描\r\n[*] NPC 主目标规划前生成地块/地区/州域/聚落候选目标索引，减少 CharacterActionPlanning 中的重复范围扫描\r\n[*] 可选放大 SaveWorld 中 working.db 的复制块，减少原版 4KB 小块循环开销\r\n[*] 可选取消存档压缩，以存档体积换保存速度\r\n[*] 可选输出密闻月结、NPC 规划和 SaveWorld 写盘细分诊断\r\n[/list]\r\n\r\n[list] [h2]严格等价说明[/h2]\r\n[*] 密闻优化与 NPC 目标索引只替换查找/计数路径，不跳过结算，不延迟结算。\r\n[*] NPC 目标索引不改变最终过滤、关系判断、随机选择、目标选择和行动执行。\r\n[*] NPC 目标索引当前只作用于主目标离线规划阶段；次要目标仍走原版。\r\n[*] 若优化入口发生异常，会尽量回退原版逻辑。\r\n[/list]\r\n\r\n[list] [h2]可选非等价项[/h2]\r\n[*] 可选降低未受保护远区 NPC 的主/副目标月行动点增长，默认关闭。\r\n[*] 原版每月各增长 40，上限 60；配置项可削减 0-20，默认 10。\r\n[*] 太吾、队友、直接关系角色、特殊/事件/旅行中角色、保护区域角色始终保留原版增长。\r\n[*] 可选额外保护太吾村居民和门派成员。\r\n[/list]\r\n\r\n[list] [h2]性能提升说明[/h2]\r\n[*] 密闻数量越多，密闻热路径替换收益越明显；后期样本中密闻代谢曾从约 3.5s 降至数十毫秒级。\r\n[*] NPC 主目标索引可显著减少 CharacterActionPlanning 中的重复区域扫描；对于原版平均快40-60%。\r\n[*] 存档 IO 优化收益取决于硬盘、存档体积、复制块档位和是否取消压缩。\r\n[*] 若当前存档瓶颈主要来自 NPC 行动执行、组织更新或其它 mod，收益会相对有限。\r\n[/list]\r\n\r\n[list] [h2]诊断日志[/h2]\r\n[*] 可选开启过月诊断日志，输出到 Logs/GameData_*.log。\r\n[*] 日志会包含 UpdateInformation 密闻细分、CharacterActionPlanning 相关耗时、SaveWorld 写盘细分、各 Domain.OnSaveWorld 耗时、working.db 复制块大小和压缩收尾耗时。\r\n[*] 测试时建议开启；正常游玩建议关闭。\r\n[/list]\r\n\r\n[b] 使用 Harmony Patch，可能与修改密闻月结、NPC 行动规划、NPC 月行动点或相同存档写入方法的 mod 冲突。[/b]\r\n\r\n[h2]重大更新#260626 P4[/h2]\r\n新增 NPC Planning / CharacterActionPlanning 加速：在月结 NPC 行动规划前同步生成地块/地区/州域/聚落候选目标索引，然后在主目标规划阶段替换原版重复范围扫描。\r\n\r\n上一个公开版本尚未包含 NPC planning 加速。本次更新后，密闻月结、NPC 主目标查找和存档 IO 三个主要热点都已纳入优化范围。\r\n\r\n该优化严格不改变原版 NPC 决策逻辑：最终候选过滤、关系判断、随机选择、目标选择和行动执行仍走原版；本 Mod 只把“查找候选人在哪里”这一步换成预先建好的索引。\r\n\r\n近期测试中，NPC planning 加速对 CharacterActionPlanning 占比较高的后期存档收益明显。配合密闻热路径替换，在严格不改变原版逻辑的前提下，可以进一步压缩集中在过月按钮后的等待时间。\r\n\r\n[h2]重大更新#260626 P3[/h2]\r\n新增 SaveWorld 存档 IO 优化：将原版 working.db 写入/读出存档时的 4KB 复制块放大到可配置档位，以减少大量小块循环带来的开销。\r\n\r\n当前支持 1/4/8/16MB 档位，默认 4MB；可选取消存档压缩，以更大的存档体积换取更快的保存速度。\r\n\r\nSaveWorld 诊断日志会额外输出数据库复制块大小、估算分块数、压缩收尾耗时和各 Domain.OnSaveWorld 耗时，方便比较不同设置在不同硬盘和存档体积下的实际收益。\r\n\r\n[h2]重大更新#260626 P2[/h2]\r\n移除跨帧延迟结算、pending 队列和 sidecar 机制，避免因延迟世界状态带来的兼容性和存档一致性风险。\r\n\r\n优化方向改为查找并替换原版过月热路径中的重复扫描：重点优化密闻传播、持有人计数和代谢清理阶段。\r\n\r\n新增 SaveWorld 写盘细分诊断，可判断保存耗时究竟来自 domain 序列化、working.db 复制、压缩收尾还是其他文件操作。\r\n\r\n实验性 NPC 行动点削减保留，但默认关闭；其保护快照仍在游玩帧中按预算构建，尽量不把额外计算压回过月按钮。\r\n\r\n[h2]重大更新#260626[/h2]\r\n重构保护区域与缓存逻辑：当前州域始终保护，可选统一保护相邻州域；实验性行动点调整使用同一套保护判断。\r\n\r\n新增实验性 NPC 月行动点调整：可降低未受保护远区 NPC 的每月行动点增长，以减少远区 NPC 行动循环压力；此项会改变远区 NPC 推进速度，默认关闭。\r\n\r\n新增运行时诊断日志，方便排查不同存档中的过月热点。\r\n\r\n[h2]兼容更新#260624[/h2]\r\n已修复退出至主界面时的红字报错。\r\n\r\n[spoiler]PS:根据我个人反编译出来的后端源码，螺舟把月结计算集中在 AdvanceMonth 里。各阶段内部虽然并行，但阶段之间仍是串行，而且 NPC 行动阶段需要每一位 NPC 执行自己的行动点循环。\r\n\r\n我最初尝试把部分远区计算延迟到过月后，但后续测试发现：与其冒着世界状态延迟和存档一致性风险，不如优先处理原版热路径里的重复扫描。\r\n\r\n现在的思路更朴素：密闻阶段用反查表替换重复全表扫描，NPC 主目标阶段用目标索引替换重复区域扫描，保存阶段减少小块 IO 和压缩成本。能等价替换的地方就替换，不能证明等价的地方就不碰。\r\n\r\n目前这些优化更接近“不改变原版语义”的理想方案，也更适合作为稳定版本长期维护。\r\n\r\n而且一个按钮就得让橡树化身守电脑前硬等这对吗？\r\n[/spoiler]\r\n",
 	Source = 0,
 	HasArchive = false,
 	NeedRestartWhenSettingChanged = false,
@@ -17,7 +17,7 @@ return {
 		[1] = "Compatible Mods",
 		[2] = "Optimizations",
 	},
-	GameVersion = "1.0.24.0",
+	GameVersion = "1.0.32.0",
 	DefaultSettings = {
 		[1] = {
 			SettingType = "Toggle",
@@ -63,7 +63,7 @@ return {
 			MinValue = 1,
 			MaxValue = 4,
 			StepSize = 1,
-			DefaultValue = 2,
+			DefaultValue = 4,
 		},
 		[6] = {
 			SettingType = "Toggle",
@@ -71,7 +71,7 @@ return {
 			DisplayName = "取消存档压缩",
 			Description = "开启后本地世界存档使用原版 NoCompression 模式，可能减少压缩流耗时，但会增大 local.sav 体积；默认关闭。",
 			GroupName = "存档优化",
-			DefaultValue = false,
+			DefaultValue = true,
 		},
 		[7] = {
 			SettingType = "Toggle",
@@ -156,6 +156,9 @@ return {
 		},
 		[10] = {
 			Timestamp = 1782288782,
+		},
+		[11] = {
+			Timestamp = 1782437664,
 		},
 	},
 	Cover = "c04bb314ab8daa46832bb42193ddebfb.jpg",
