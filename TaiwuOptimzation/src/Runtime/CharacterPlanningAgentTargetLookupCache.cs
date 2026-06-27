@@ -11,10 +11,26 @@ namespace TaiwuOptimization.Runtime;
 
 internal static class CharacterPlanningAgentTargetLookupCache
 {
+    private const int IncrementalLocationDeltaLimit = short.MaxValue;
+    private const int IncrementalAffectedBlockLimit = short.MaxValue;
+    private const int IncrementalAffectedAreaLimit = 128;
+
     private static readonly object SyncRoot = new();
 
     private static OfflineCurrentGoalActionTargetSnapshot? _frozenSnapshot;
     private static int _locationEpoch;
+    private static volatile bool _updateCurrentGoalActionsStageActive;
+    private static bool _collectSerialApplyAllLocationDeltas;
+    private static bool _serialApplyAllStageActive;
+    private static bool _forceRebuildAfterSerialApplyAll;
+    private static CharacterTargetLookupFullBuildReason _forceRebuildAfterSerialApplyAllReason =
+        CharacterTargetLookupFullBuildReason.SerialApplyAllForced;
+    private static readonly List<OfflineCurrentGoalActionLocationDelta> SerialApplyAllLocationDeltas = new(128);
+    private static readonly HashSet<int> SerialApplyAllAffectedBlockKeys = new();
+    private static readonly HashSet<short> SerialApplyAllAffectedAreaIds = new();
+    private static int _serialApplyAllRecordedDeltaCount;
+    private static int _serialApplyAllSavedDeltaCount;
+    private static int _serialApplyAllOverflowCount;
 
     [ThreadStatic]
     private static int _offlineCurrentGoalActionScopeDepth;
@@ -61,14 +77,17 @@ internal static class CharacterPlanningAgentTargetLookupCache
     {
         if (!IsEnabled())
         {
+            _updateCurrentGoalActionsStageActive = false;
             UnfreezeAndInvalidate();
             return;
         }
 
+        _updateCurrentGoalActionsStageActive = true;
         int locationEpoch = Volatile.Read(ref _locationEpoch);
         OfflineCurrentGoalActionTargetSnapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
         if (snapshot != null && snapshot.LocationEpoch == locationEpoch)
         {
+            PublishSerialApplyAllLocationDeltas(snapshot);
             return;
         }
 
@@ -78,16 +97,150 @@ internal static class CharacterPlanningAgentTargetLookupCache
             snapshot = Volatile.Read(ref _frozenSnapshot);
             if (snapshot == null || snapshot.LocationEpoch != locationEpoch)
             {
-                Volatile.Write(ref _frozenSnapshot, OfflineCurrentGoalActionTargetSnapshot.Build(locationEpoch));
+                Volatile.Write(
+                    ref _frozenSnapshot,
+                    BuildSnapshot(
+                        locationEpoch,
+                        snapshot == null
+                            ? CharacterTargetLookupFullBuildReason.InitialSnapshot
+                            : CharacterTargetLookupFullBuildReason.EpochMismatch));
+                SerialApplyAllLocationDeltas.Clear();
+                ResetSerialApplyAllDeltaStats();
+                _forceRebuildAfterSerialApplyAll = false;
+                _forceRebuildAfterSerialApplyAllReason =
+                    CharacterTargetLookupFullBuildReason.SerialApplyAllForced;
+            }
+            else
+            {
+                PublishSerialApplyAllLocationDeltas(snapshot);
             }
         }
     }
 
     /// <summary>角色位置变化只推进版本号；下一次规划阶段入口再决定是否重建索引。</summary>
-    public static void NotifyCharacterLocationChanged() =>
-        Interlocked.Increment(ref _locationEpoch);
+    /// <summary>离开原版 `UpdatePrimary/SecondaryGoalAndActions` 屏障。</summary>
+    public static void EndUpdateCurrentGoalActionsStage() =>
+        _updateCurrentGoalActionsStageActive = false;
+
+    /// <summary>角色位置变化：planning 屏障内只记录警告，屏障外才推进下轮索引版本。</summary>
+    public static void NotifyCharacterLocationChanged(int charId)
+    {
+        if (_updateCurrentGoalActionsStageActive && Volatile.Read(ref _frozenSnapshot) != null)
+        {
+            if (CharacterActionPlanningDiagnostics.IsRecording)
+            {
+                CharacterActionPlanningDiagnostics.RecordFrozenTargetLookupLocationChange(charId);
+            }
+
+            return;
+        }
+
+        IncrementLocationEpoch(
+            CharacterTargetLookupLocationEpochIncrementReason.LocationChangedWithoutLocation,
+            charId,
+            hasLocation: false,
+            default,
+            default);
+    }
 
     /// <summary>返回当前 planning 阶段共享快照；关系和物品预过滤在同一构建屏障内复用它。</summary>
+    /// <summary>进入串行 ApplyAll；primary 记录位置 delta，secondary 只关闭读取屏障。</summary>
+    public static void BeginSerialApplyAllDeltaRecording(bool collectDeltas)
+    {
+        _serialApplyAllStageActive = true;
+        _collectSerialApplyAllLocationDeltas = collectDeltas && Volatile.Read(ref _frozenSnapshot) != null;
+        if (_collectSerialApplyAllLocationDeltas)
+        {
+            SerialApplyAllLocationDeltas.Clear();
+            ResetSerialApplyAllDeltaStats();
+            _forceRebuildAfterSerialApplyAll = false;
+            _forceRebuildAfterSerialApplyAllReason =
+                CharacterTargetLookupFullBuildReason.SerialApplyAllForced;
+        }
+    }
+
+    /// <summary>离开串行 ApplyAll；delta 会在下一次 planning 入口统一发布。</summary>
+    public static void EndSerialApplyAllDeltaRecording()
+    {
+        if (_collectSerialApplyAllLocationDeltas)
+        {
+            CharacterActionPlanningDiagnostics.RecordTargetLookupPrimaryApplyAllDeltas(
+                _serialApplyAllRecordedDeltaCount,
+                _serialApplyAllSavedDeltaCount,
+                SerialApplyAllAffectedBlockKeys.Count,
+                SerialApplyAllAffectedAreaIds.Count,
+                _serialApplyAllOverflowCount);
+        }
+
+        _serialApplyAllStageActive = false;
+        _collectSerialApplyAllLocationDeltas = false;
+    }
+
+    /// <summary>记录角色位置变更；primary ApplyAll 内尽量收集局部 delta，其他时机推进全量 epoch。</summary>
+    public static void NotifyCharacterLocationChanged(int charId, Location oldLocation, Location newLocation)
+    {
+        if (oldLocation.AreaId == newLocation.AreaId && oldLocation.BlockId == newLocation.BlockId)
+        {
+            return;
+        }
+
+        if (_updateCurrentGoalActionsStageActive && Volatile.Read(ref _frozenSnapshot) != null)
+        {
+            if (CharacterActionPlanningDiagnostics.IsRecording)
+            {
+                CharacterActionPlanningDiagnostics.RecordFrozenTargetLookupLocationChange(charId);
+            }
+
+            return;
+        }
+
+        if (_collectSerialApplyAllLocationDeltas)
+        {
+            _serialApplyAllRecordedDeltaCount++;
+
+            if (!TryRecordSerialApplyAllAffectedLocation(oldLocation) ||
+                !TryRecordSerialApplyAllAffectedLocation(newLocation))
+            {
+                ForceSerialApplyAllFullRebuild(
+                    CharacterTargetLookupFullBuildReason.DeltaInvalidLocation,
+                    CharacterTargetLookupLocationEpochIncrementReason.DeltaInvalidLocation,
+                    charId,
+                    oldLocation,
+                    newLocation);
+                return;
+            }
+
+            if (_forceRebuildAfterSerialApplyAll)
+            {
+                return;
+            }
+
+            if (SerialApplyAllLocationDeltas.Count >= IncrementalLocationDeltaLimit)
+            {
+                _serialApplyAllOverflowCount++;
+                ForceSerialApplyAllFullRebuild(
+                    CharacterTargetLookupFullBuildReason.DeltaAffectedLimit,
+                    CharacterTargetLookupLocationEpochIncrementReason.DeltaLimit,
+                    charId,
+                    oldLocation,
+                    newLocation);
+                return;
+            }
+
+            SerialApplyAllLocationDeltas.Add(
+                new OfflineCurrentGoalActionLocationDelta(charId, oldLocation, newLocation));
+            _serialApplyAllSavedDeltaCount++;
+            return;
+        }
+
+        IncrementLocationEpoch(
+            CharacterTargetLookupLocationEpochIncrementReason.LocationChangedOutsideDeltaRecording,
+            charId,
+            hasLocation: true,
+            oldLocation,
+            newLocation);
+    }
+
     public static bool TryGetFrozenPlanningSnapshot(out OfflineCurrentGoalActionTargetSnapshot snapshot)
     {
         snapshot = Volatile.Read(ref _frozenSnapshot)!;
@@ -99,6 +252,14 @@ internal static class CharacterPlanningAgentTargetLookupCache
     {
         lock (SyncRoot)
         {
+            _updateCurrentGoalActionsStageActive = false;
+            _collectSerialApplyAllLocationDeltas = false;
+            _serialApplyAllStageActive = false;
+            _forceRebuildAfterSerialApplyAll = false;
+            _forceRebuildAfterSerialApplyAllReason =
+                CharacterTargetLookupFullBuildReason.SerialApplyAllForced;
+            SerialApplyAllLocationDeltas.Clear();
+            ResetSerialApplyAllDeltaStats();
             Volatile.Write(ref _frozenSnapshot, null);
         }
     }
@@ -108,6 +269,14 @@ internal static class CharacterPlanningAgentTargetLookupCache
     {
         lock (SyncRoot)
         {
+            _updateCurrentGoalActionsStageActive = false;
+            _collectSerialApplyAllLocationDeltas = false;
+            _serialApplyAllStageActive = false;
+            _forceRebuildAfterSerialApplyAll = false;
+            _forceRebuildAfterSerialApplyAllReason =
+                CharacterTargetLookupFullBuildReason.SerialApplyAllForced;
+            SerialApplyAllLocationDeltas.Clear();
+            ResetSerialApplyAllDeltaStats();
             Volatile.Write(ref _frozenSnapshot, null);
         }
 
@@ -234,6 +403,150 @@ internal static class CharacterPlanningAgentTargetLookupCache
     private static bool IsEnabled() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
         TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
+
+    private static void ResetSerialApplyAllDeltaStats()
+    {
+        _serialApplyAllRecordedDeltaCount = 0;
+        _serialApplyAllSavedDeltaCount = 0;
+        _serialApplyAllOverflowCount = 0;
+        SerialApplyAllAffectedBlockKeys.Clear();
+        SerialApplyAllAffectedAreaIds.Clear();
+    }
+
+    private static void RecordSerialApplyAllAffectedBlock(MapBlockData block)
+    {
+        SerialApplyAllAffectedAreaIds.Add(block.AreaId);
+        SerialApplyAllAffectedBlockKeys.Add(MakeBlockKey(block.AreaId, block.BlockId));
+    }
+
+    private static bool TryRecordSerialApplyAllAffectedLocation(Location location)
+    {
+        if (!location.IsValid())
+        {
+            return true;
+        }
+
+        if (!DomainManager.Map.TryGetBlock(location, out MapBlockData block))
+        {
+            return false;
+        }
+
+        RecordSerialApplyAllAffectedBlock(block);
+        return true;
+    }
+
+    private static int MakeBlockKey(short areaId, short blockId) =>
+        ((int)areaId << 16) | (ushort)blockId;
+
+    private static void ForceSerialApplyAllFullRebuild(
+        CharacterTargetLookupFullBuildReason fullBuildReason,
+        CharacterTargetLookupLocationEpochIncrementReason epochReason,
+        int charId,
+        Location oldLocation,
+        Location newLocation)
+    {
+        if (_forceRebuildAfterSerialApplyAll)
+        {
+            return;
+        }
+
+        SerialApplyAllLocationDeltas.Clear();
+        _forceRebuildAfterSerialApplyAll = true;
+        _forceRebuildAfterSerialApplyAllReason = fullBuildReason;
+        IncrementLocationEpoch(
+            epochReason,
+            charId,
+            hasLocation: true,
+            oldLocation,
+            newLocation);
+    }
+
+    private static void PublishSerialApplyAllLocationDeltas(OfflineCurrentGoalActionTargetSnapshot snapshot)
+    {
+        if (!_forceRebuildAfterSerialApplyAll && SerialApplyAllLocationDeltas.Count == 0)
+        {
+            CharacterActionPlanningDiagnostics.RecordTargetLookupDeltaPublishNoChange();
+            ResetSerialApplyAllDeltaStats();
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            snapshot = Volatile.Read(ref _frozenSnapshot) ?? snapshot;
+            int locationEpoch = Volatile.Read(ref _locationEpoch);
+            if (_forceRebuildAfterSerialApplyAll || snapshot.LocationEpoch != locationEpoch)
+            {
+                CharacterTargetLookupFullBuildReason reason = _forceRebuildAfterSerialApplyAll
+                    ? _forceRebuildAfterSerialApplyAllReason
+                    : CharacterTargetLookupFullBuildReason.EpochMismatch;
+                Volatile.Write(ref _frozenSnapshot, BuildSnapshot(locationEpoch, reason));
+            }
+            else if (SerialApplyAllLocationDeltas.Count > 0)
+            {
+                long deltaPublishStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupDeltaPublish();
+                Volatile.Write(
+                    ref _frozenSnapshot,
+                    snapshot.ApplyLocationDeltas(
+                        SerialApplyAllLocationDeltas,
+                        IncrementalAffectedBlockLimit,
+                        IncrementalAffectedAreaLimit,
+                        out OfflineCurrentGoalActionTargetDeltaApplyStats stats));
+                CharacterActionPlanningDiagnostics.EndTargetLookupDeltaPublish(deltaPublishStartTicks, stats);
+            }
+
+            SerialApplyAllLocationDeltas.Clear();
+            ResetSerialApplyAllDeltaStats();
+            _forceRebuildAfterSerialApplyAll = false;
+            _forceRebuildAfterSerialApplyAllReason =
+                CharacterTargetLookupFullBuildReason.SerialApplyAllForced;
+        }
+    }
+
+    private static OfflineCurrentGoalActionTargetSnapshot BuildSnapshot(
+        int locationEpoch,
+        CharacterTargetLookupFullBuildReason reason)
+    {
+        CharacterActionPlanningDiagnostics.RecordTargetLookupFullBuild(reason);
+        return OfflineCurrentGoalActionTargetSnapshot.Build(locationEpoch);
+    }
+
+    private static void IncrementLocationEpoch(
+        CharacterTargetLookupLocationEpochIncrementReason reason,
+        int charId,
+        bool hasLocation,
+        Location oldLocation,
+        Location newLocation)
+    {
+        CharacterActionPlanningDiagnostics.RecordTargetLookupLocationEpochIncrement(
+            reason,
+            GetRuntimeStage(),
+            charId,
+            hasLocation,
+            hasLocation ? oldLocation.AreaId : (short)0,
+            hasLocation ? oldLocation.BlockId : (short)0,
+            hasLocation ? newLocation.AreaId : (short)0,
+            hasLocation ? newLocation.BlockId : (short)0);
+        Interlocked.Increment(ref _locationEpoch);
+    }
+
+    private static CharacterTargetLookupRuntimeStage GetRuntimeStage()
+    {
+        if (_updateCurrentGoalActionsStageActive)
+        {
+            return CharacterTargetLookupRuntimeStage.FrozenRead;
+        }
+
+        if (_serialApplyAllStageActive)
+        {
+            return _collectSerialApplyAllLocationDeltas
+                ? CharacterTargetLookupRuntimeStage.PrimaryApplyAllDeltaRecording
+                : CharacterTargetLookupRuntimeStage.SecondaryApplyAllNoDeltaRecording;
+        }
+
+        return Volatile.Read(ref _frozenSnapshot) != null
+            ? CharacterTargetLookupRuntimeStage.FrozenSnapshotIdle
+            : CharacterTargetLookupRuntimeStage.None;
+    }
 
     private static bool TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot)
     {

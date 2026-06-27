@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using Config;
@@ -22,20 +21,13 @@ internal static class CharacterPlanningAgentTargetPrefilter
         302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 316,
     };
 
-    private static readonly int[] DirectRelationStates =
-    {
-        302, 303, 304, 312,
-    };
-
-    private static readonly int[] ReversedRelationStates =
-    {
-        304, 305, 306, 307, 308, 309, 310, 311, 312, 313,
-    };
-
     private static readonly HashSet<int> EmptyCandidateSet = new();
 
     private static Snapshot? _frozenSnapshot;
+    private static int _relationEpoch;
     private static volatile bool _isFrozen;
+    private static bool _collectSerialApplyAllRelationDeltas;
+    private static readonly List<RelationDelta> SerialApplyAllRelationDeltas = new(128);
 
     [ThreadStatic]
     private static int _offlineCurrentGoalActionScopeDepth;
@@ -65,8 +57,25 @@ internal static class CharacterPlanningAgentTargetPrefilter
                 return;
             }
 
-            Snapshot snapshot = BuildSnapshot(planningSnapshot.CharacterRecords);
-            Volatile.Write(ref _frozenSnapshot, snapshot);
+            int relationEpoch = Volatile.Read(ref _relationEpoch);
+            Snapshot? currentSnapshot = Volatile.Read(ref _frozenSnapshot);
+            if (currentSnapshot == null ||
+                currentSnapshot.RelationEpoch != relationEpoch ||
+                currentSnapshot.SourceLocationEpoch != planningSnapshot.LocationEpoch)
+            {
+                currentSnapshot = BuildSnapshot(
+                    planningSnapshot.CharacterRecords,
+                    relationEpoch,
+                    planningSnapshot.LocationEpoch);
+                Volatile.Write(ref _frozenSnapshot, currentSnapshot);
+                SerialApplyAllRelationDeltas.Clear();
+            }
+            else if (SerialApplyAllRelationDeltas.Count > 0)
+            {
+                currentSnapshot.ApplyRelationSupersetDeltas(SerialApplyAllRelationDeltas);
+                SerialApplyAllRelationDeltas.Clear();
+            }
+
             _isFrozen = true;
         }
         catch (Exception exception)
@@ -81,34 +90,46 @@ internal static class CharacterPlanningAgentTargetPrefilter
     {
         _isFrozen = false;
         Volatile.Write(ref _frozenSnapshot, null);
+        Volatile.Write(ref _relationEpoch, 0);
         _offlineCurrentGoalActionScopeDepth = 0;
         _offlineTargetConditionSnapshot = null;
         _candidateListPool?.Clear();
+        _collectSerialApplyAllRelationDeltas = false;
+        SerialApplyAllRelationDeltas.Clear();
     }
+
+    /// <summary>绂诲紑 worker planning 鍙闃舵锛涗繚鐣欏揩鐓т緵涓嬩竴闃舵鎸?epoch 鍒ゆ柇澶嶇敤銆?/summary>
+    public static void EndFrozenReadStage()
+    {
+        _isFrozen = false;
+        _offlineCurrentGoalActionScopeDepth = 0;
+        _offlineTargetConditionSnapshot = null;
+    }
+
+    /// <summary>进入串行 ApplyAll；primary 记录关系 delta，secondary 只关闭读取屏障。</summary>
+    public static void BeginSerialApplyAllDeltaRecording(bool collectDeltas)
+    {
+        _collectSerialApplyAllRelationDeltas = collectDeltas && Volatile.Read(ref _frozenSnapshot) != null;
+        if (_collectSerialApplyAllRelationDeltas)
+        {
+            SerialApplyAllRelationDeltas.Clear();
+        }
+    }
+
+    /// <summary>离开串行 ApplyAll；delta 会在下一次 planning 入口统一发布。</summary>
+    public static void EndSerialApplyAllDeltaRecording() =>
+        _collectSerialApplyAllRelationDeltas = false;
 
     /// <summary>批量关系变化后关闭本轮预过滤；单条关系变化使用 `InvalidateRelationMutation`。</summary>
     public static void InvalidateForRelationMutation()
     {
-        if (!_isFrozen)
-        {
-            return;
-        }
-
-        _isFrozen = false;
-        Volatile.Write(ref _frozenSnapshot, null);
-        _offlineTargetConditionSnapshot = null;
+        RecordFrozenRelationMutation();
     }
 
     /// <summary>单条关系变化只标记受影响的 actor/state，下一次命中时局部重建。</summary>
     public static void InvalidateRelationMutation(int charId, int relatedCharId)
     {
-        if (!_isFrozen)
-        {
-            return;
-        }
-
-        Snapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
-        snapshot?.InvalidateRelationMutation(charId, relatedCharId);
+        RecordRelationMutation(charId, relatedCharId);
     }
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 阶段。</summary>
@@ -263,7 +284,10 @@ internal static class CharacterPlanningAgentTargetPrefilter
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
         TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
-    private static Snapshot BuildSnapshot(OfflineCurrentGoalActionTargetRecord[] characterRecords)
+    private static Snapshot BuildSnapshot(
+        OfflineCurrentGoalActionTargetRecord[] characterRecords,
+        int relationEpoch,
+        int sourceLocationEpoch)
     {
         Dictionary<long, HashSet<int>> actorCandidateSets = new(characterRecords.Length * ActorRelativeStates.Length / 2);
         Dictionary<int, HashSet<int>> directRelationCandidateSets = new(characterRecords.Length);
@@ -291,7 +315,12 @@ internal static class CharacterPlanningAgentTargetPrefilter
                 belongAreaCandidateSets);
         }
 
-        return new Snapshot(actorCandidateSets, directRelationCandidateSets, globalCandidateSets);
+        return new Snapshot(
+            relationEpoch,
+            sourceLocationEpoch,
+            actorCandidateSets,
+            directRelationCandidateSets,
+            globalCandidateSets);
     }
 
     private static void BuildCharacterTargetGroups(
@@ -714,48 +743,106 @@ internal static class CharacterPlanningAgentTargetPrefilter
         }
     }
 
+    private static void RecordFrozenRelationMutation()
+    {
+        if (_collectSerialApplyAllRelationDeltas)
+        {
+            return;
+        }
+
+        if (_isFrozen)
+        {
+            if (CharacterActionPlanningDiagnostics.IsRecording)
+            {
+                CharacterActionPlanningDiagnostics.RecordFrozenTargetPrefilterRelationMutation();
+            }
+
+            return;
+        }
+
+        Interlocked.Increment(ref _relationEpoch);
+    }
+
+    private static void RecordRelationMutation(int charId, int relatedCharId)
+    {
+        if (_collectSerialApplyAllRelationDeltas)
+        {
+            SerialApplyAllRelationDeltas.Add(new RelationDelta(charId, relatedCharId));
+            return;
+        }
+
+        RecordFrozenRelationMutation();
+    }
+
     private static long MakeStateKey(int actorCharId, int stateTemplateId) =>
         ((long)actorCharId << 32) | (uint)stateTemplateId;
 
+    private readonly struct RelationDelta
+    {
+        public readonly int CharId;
+        public readonly int RelatedCharId;
+
+        public RelationDelta(int charId, int relatedCharId)
+        {
+            CharId = charId;
+            RelatedCharId = relatedCharId;
+        }
+    }
+
     private sealed class Snapshot
     {
-        private readonly ConcurrentDictionary<long, HashSet<int>> _actorCandidateSets;
-        private readonly ConcurrentDictionary<int, HashSet<int>> _directRelationCandidateSets;
+        private readonly Dictionary<long, HashSet<int>> _actorCandidateSets;
+        private readonly Dictionary<int, HashSet<int>> _directRelationCandidateSets;
         private readonly Dictionary<int, HashSet<int>> _globalCandidateSets;
-        private readonly ConcurrentDictionary<long, byte> _dirtyActorRelationStates = new();
-        private readonly ConcurrentDictionary<int, byte> _dirtyDirectRelationActors = new();
-        private readonly object _dirtyRelationStatesLock = new();
+
+        public int RelationEpoch { get; }
+        public int SourceLocationEpoch { get; }
 
         public Snapshot(
+            int relationEpoch,
+            int sourceLocationEpoch,
             Dictionary<long, HashSet<int>> actorCandidateSets,
             Dictionary<int, HashSet<int>> directRelationCandidateSets,
             Dictionary<int, HashSet<int>> globalCandidateSets)
         {
-            _actorCandidateSets = new ConcurrentDictionary<long, HashSet<int>>(actorCandidateSets);
-            _directRelationCandidateSets = new ConcurrentDictionary<int, HashSet<int>>(directRelationCandidateSets);
+            RelationEpoch = relationEpoch;
+            SourceLocationEpoch = sourceLocationEpoch;
+            _actorCandidateSets = actorCandidateSets;
+            _directRelationCandidateSets = directRelationCandidateSets;
             _globalCandidateSets = globalCandidateSets;
         }
 
-        public void InvalidateRelationMutation(int charId, int relatedCharId)
+        public void ApplyRelationSupersetDeltas(IReadOnlyList<RelationDelta> deltas)
         {
-            lock (_dirtyRelationStatesLock)
+            foreach (RelationDelta delta in deltas)
             {
-                if (charId >= 0)
+                AddRelationSuperset(delta.CharId, delta.RelatedCharId);
+            }
+        }
+
+        private void AddRelationSuperset(int actorCharId, int candidateCharId)
+        {
+            AddToSet(_directRelationCandidateSets, actorCharId, candidateCharId);
+            foreach (int stateTemplateId in ActorRelativeStates)
+            {
+                if (stateTemplateId is 314 or 316)
                 {
-                    _dirtyDirectRelationActors.TryAdd(charId, 0);
-                    MarkDirectRelationStatesDirty(charId);
+                    continue;
                 }
 
-                if (relatedCharId >= 0)
+                long stateKey = MakeStateKey(actorCharId, stateTemplateId);
+                if (!_actorCandidateSets.TryGetValue(stateKey, out HashSet<int>? candidateSet))
                 {
-                    MarkReversedRelationStatesDirty(relatedCharId);
+                    candidateSet = new HashSet<int>();
+                    _actorCandidateSets[stateKey] = candidateSet;
                 }
+
+                candidateSet.Add(candidateCharId);
             }
         }
 
         public HashSet<int> GetDirectRelationCandidateSet(int actorCharId)
         {
-            RebuildDirectRelationSetIfDirty(actorCharId);
             return _directRelationCandidateSets.TryGetValue(actorCharId, out HashSet<int>? relationSet)
                 ? relationSet
                 : EmptyCandidateSet;
@@ -764,7 +851,6 @@ internal static class CharacterPlanningAgentTargetPrefilter
         public HashSet<int> GetCandidateSet(int actorCharId, int stateTemplateId)
         {
             long stateKey = MakeStateKey(actorCharId, stateTemplateId);
-            RebuildIfDirty(actorCharId, stateTemplateId, stateKey);
 
             if (_actorCandidateSets.TryGetValue(stateKey, out HashSet<int>? actorSet))
             {
@@ -774,78 +860,6 @@ internal static class CharacterPlanningAgentTargetPrefilter
             return _globalCandidateSets.TryGetValue(stateTemplateId, out HashSet<int>? globalSet)
                 ? globalSet
                 : EmptyCandidateSet;
-        }
-
-        private void MarkDirectRelationStatesDirty(int actorCharId)
-        {
-            foreach (int stateTemplateId in DirectRelationStates)
-            {
-                _dirtyActorRelationStates.TryAdd(MakeStateKey(actorCharId, stateTemplateId), 0);
-            }
-        }
-
-        private void MarkReversedRelationStatesDirty(int actorCharId)
-        {
-            foreach (int stateTemplateId in ReversedRelationStates)
-            {
-                _dirtyActorRelationStates.TryAdd(MakeStateKey(actorCharId, stateTemplateId), 0);
-            }
-        }
-
-        private void RebuildIfDirty(int actorCharId, int stateTemplateId, long stateKey)
-        {
-            if (!_dirtyActorRelationStates.ContainsKey(stateKey))
-            {
-                return;
-            }
-
-            lock (_dirtyRelationStatesLock)
-            {
-                if (!_dirtyActorRelationStates.ContainsKey(stateKey))
-                {
-                    return;
-                }
-
-                HashSet<int> rebuiltSet = BuildRelationCandidateSet(actorCharId, stateTemplateId);
-                if (rebuiltSet.Count == 0)
-                {
-                    _actorCandidateSets.TryRemove(stateKey, out _);
-                }
-                else
-                {
-                    _actorCandidateSets[stateKey] = rebuiltSet;
-                }
-
-                _dirtyActorRelationStates.TryRemove(stateKey, out _);
-            }
-        }
-
-        private void RebuildDirectRelationSetIfDirty(int actorCharId)
-        {
-            if (!_dirtyDirectRelationActors.ContainsKey(actorCharId))
-            {
-                return;
-            }
-
-            lock (_dirtyRelationStatesLock)
-            {
-                if (!_dirtyDirectRelationActors.ContainsKey(actorCharId))
-                {
-                    return;
-                }
-
-                HashSet<int> rebuiltSet = BuildDirectRelationCandidateSet(actorCharId);
-                if (rebuiltSet.Count == 0)
-                {
-                    _directRelationCandidateSets.TryRemove(actorCharId, out _);
-                }
-                else
-                {
-                    _directRelationCandidateSets[actorCharId] = rebuiltSet;
-                }
-
-                _dirtyDirectRelationActors.TryRemove(actorCharId, out _);
-            }
         }
     }
 }

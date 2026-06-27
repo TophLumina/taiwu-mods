@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using Config;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.ActionPlanning.State;
@@ -77,6 +78,35 @@ internal enum CharacterTargetMatcherCacheRejectReason
     UnsupportedDisplayGender,
     UnsupportedMerchantType,
     UnsupportedSubCondition,
+}
+
+internal enum CharacterTargetLookupFullBuildReason
+{
+    InitialSnapshot,
+    EpochMismatch,
+    SerialApplyAllForced,
+    DeltaInvalidLocation,
+    DeltaAffectedLimit,
+    DeltaInvalidBlock,
+    DeltaInvalidArea,
+    DeltaInvalidSettlementRoot,
+}
+
+internal enum CharacterTargetLookupLocationEpochIncrementReason
+{
+    LocationChangedWithoutLocation,
+    LocationChangedOutsideDeltaRecording,
+    DeltaInvalidLocation,
+    DeltaLimit,
+}
+
+internal enum CharacterTargetLookupRuntimeStage
+{
+    None,
+    FrozenRead,
+    PrimaryApplyAllDeltaRecording,
+    SecondaryApplyAllNoDeltaRecording,
+    FrozenSnapshotIdle,
 }
 
 internal readonly struct TargetMatchDiagnosticsState
@@ -166,6 +196,9 @@ internal static class CharacterActionPlanningDiagnostics
     private static readonly GoalMetrics PrimaryMetrics = new();
     private static readonly GoalMetrics SecondaryMetrics = new();
     private static readonly TargetLookupMetric[] TargetLookupMetrics = CreateTargetLookupMetricArray();
+    private static readonly BuildReasonMetric[] TargetLookupFullBuildReasons = CreateBuildReasonMetricArray();
+    private static readonly LocationEpochIncrementMetric[,] TargetLookupLocationEpochIncrements =
+        CreateLocationEpochIncrementMetrics();
     private static readonly SkipMetric[] RelationTargetPrefilterSkips = CreateSkipMetricArray();
     private static readonly Dictionary<Type, ExceptionMetric> RelationTargetPrefilterExceptions = new(8);
 
@@ -253,6 +286,115 @@ internal static class CharacterActionPlanningDiagnostics
         {
             _current.TargetLookupBuildTicks += Stopwatch.GetTimestamp() - startTicks;
             _current.TargetLookupBuildCalls++;
+        }
+    }
+
+    public static void RecordTargetLookupFullBuild(CharacterTargetLookupFullBuildReason reason)
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            _current.TargetLookupFullBuildCalls++;
+            TargetLookupFullBuildReasons[(int)reason].Count++;
+        }
+    }
+
+    public static void RecordTargetLookupDeltaPublishNoChange()
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        Interlocked.Increment(ref _current.TargetLookupDeltaNoChangePublishes);
+    }
+
+    public static void RecordTargetLookupPrimaryApplyAllDeltas(
+        int recordedDeltaCount,
+        int savedDeltaCount,
+        int affectedBlockCount,
+        int affectedAreaCount,
+        int overflowCount)
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            _current.TargetLookupPrimaryApplyAllRecordedDeltas += recordedDeltaCount;
+            _current.TargetLookupPrimaryApplyAllSavedDeltas += savedDeltaCount;
+            _current.TargetLookupPrimaryApplyAllAffectedBlocks += affectedBlockCount;
+            _current.TargetLookupPrimaryApplyAllAffectedAreas += affectedAreaCount;
+            _current.TargetLookupPrimaryApplyAllOverflows += overflowCount;
+        }
+    }
+
+    public static long BeginTargetLookupDeltaPublish() =>
+        IsActive() ? Stopwatch.GetTimestamp() : 0;
+
+    public static void EndTargetLookupDeltaPublish(
+        long startTicks,
+        OfflineCurrentGoalActionTargetDeltaApplyStats stats)
+    {
+        if (startTicks == 0)
+        {
+            return;
+        }
+
+        lock (SyncRoot)
+        {
+            _current.TargetLookupDeltaPublishTicks += Stopwatch.GetTimestamp() - startTicks;
+            _current.TargetLookupDeltaPublishCalls++;
+            _current.TargetLookupDeltaPublishDeltas += stats.DeltaCount;
+            _current.TargetLookupDeltaAffectedBlocks += stats.AffectedBlockCount;
+            _current.TargetLookupDeltaAffectedAreas += stats.AffectedAreaCount;
+            _current.TargetLookupDeltaAffectedStates += stats.AffectedStateCount;
+            _current.TargetLookupDeltaAffectedSettlements += stats.AffectedSettlementCount;
+            if (stats.FullRebuild)
+            {
+                _current.TargetLookupFullBuildCalls++;
+                _current.TargetLookupDeltaFallbackRebuilds++;
+                TargetLookupFullBuildReasons[(int)GetFullBuildReason(stats.FallbackReason)].Count++;
+            }
+        }
+    }
+
+    public static void RecordTargetLookupLocationEpochIncrement(
+        CharacterTargetLookupLocationEpochIncrementReason reason,
+        CharacterTargetLookupRuntimeStage stage,
+        int charId,
+        bool hasLocation,
+        short oldAreaId,
+        short oldBlockId,
+        short newAreaId,
+        short newBlockId)
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        LocationEpochIncrementMetric metric = TargetLookupLocationEpochIncrements[(int)reason, (int)stage];
+        lock (SyncRoot)
+        {
+            metric.Count++;
+            if (_current.TargetLookupLocationEpochIncrementCount++ == 0)
+            {
+                _current.FirstTargetLookupLocationEpochIncrementReason = reason;
+                _current.FirstTargetLookupLocationEpochIncrementStage = stage;
+                _current.FirstTargetLookupLocationEpochIncrementCharId = charId;
+                _current.FirstTargetLookupLocationEpochIncrementHasLocation = hasLocation;
+                _current.FirstTargetLookupLocationEpochIncrementOldAreaId = oldAreaId;
+                _current.FirstTargetLookupLocationEpochIncrementOldBlockId = oldBlockId;
+                _current.FirstTargetLookupLocationEpochIncrementNewAreaId = newAreaId;
+                _current.FirstTargetLookupLocationEpochIncrementNewBlockId = newBlockId;
+            }
         }
     }
 
@@ -745,6 +887,42 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
+    /// <summary>记录位置索引冻结期间捕获到的 `SetLocation`；缓存仍按原版 planning 屏障视为有效。</summary>
+    public static void RecordFrozenTargetLookupLocationChange(int charId)
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        if (Interlocked.Increment(ref _current.FrozenTargetLookupLocationChangeWarnings) == 1)
+        {
+            Volatile.Write(ref _current.FirstFrozenTargetLookupLocationChangeCharId, charId);
+        }
+    }
+
+    /// <summary>记录目标预过滤快照冻结期间捕获到的关系变化；本轮仍按 planning 屏障快照处理。</summary>
+    public static void RecordFrozenTargetPrefilterRelationMutation()
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        Interlocked.Increment(ref _current.FrozenTargetPrefilterRelationMutationWarnings);
+    }
+
+    /// <summary>记录物品 holder 快照冻结期间捕获到的背包变化；本轮仍按 planning 屏障快照处理。</summary>
+    public static void RecordFrozenItemHolderPrefilterInventoryMutation()
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        Interlocked.Increment(ref _current.FrozenItemHolderPrefilterInventoryMutationWarnings);
+    }
+
     private static void EndGoalStep(
         ActionPlanningData.ECurrentGoalType goalType,
         CharacterActionPlanningStep step,
@@ -1155,10 +1333,66 @@ internal static class CharacterActionPlanningDiagnostics
 
         builder.AppendLine("  targetLookupBuild:");
         AppendMetric(builder, "elapsed", FormatMilliseconds(_current.TargetLookupBuildTicks) + ", calls=" + _current.TargetLookupBuildCalls);
+        AppendMetric(builder, "fullBuilds", _current.TargetLookupFullBuildCalls);
+        AppendMetric(builder, "fullBuildReasons", FormatFullBuildReasons());
+        AppendMetric(builder, "deltaNoChangePublishes", _current.TargetLookupDeltaNoChangePublishes);
+        AppendMetric(
+            builder,
+            "deltaPublish",
+            FormatMilliseconds(_current.TargetLookupDeltaPublishTicks) +
+            ", calls=" + _current.TargetLookupDeltaPublishCalls +
+            ", deltas=" + _current.TargetLookupDeltaPublishDeltas +
+            ", fallbackFullRebuilds=" + _current.TargetLookupDeltaFallbackRebuilds);
+        AppendMetric(
+            builder,
+            "deltaAffected",
+            "blocks=" + _current.TargetLookupDeltaAffectedBlocks +
+            ", areas=" + _current.TargetLookupDeltaAffectedAreas +
+            ", states=" + _current.TargetLookupDeltaAffectedStates +
+            ", settlements=" + _current.TargetLookupDeltaAffectedSettlements);
+        AppendMetric(
+            builder,
+            "primaryApplyAllDeltas",
+            "recordedDeltaCount=" + _current.TargetLookupPrimaryApplyAllRecordedDeltas +
+            ", savedDeltaCount=" + _current.TargetLookupPrimaryApplyAllSavedDeltas +
+            ", affectedBlockCount=" + _current.TargetLookupPrimaryApplyAllAffectedBlocks +
+            ", affectedAreaCount=" + _current.TargetLookupPrimaryApplyAllAffectedAreas +
+            ", overflowCount=" + _current.TargetLookupPrimaryApplyAllOverflows);
+        AppendMetric(builder, "locationEpochIncrements", FormatLocationEpochIncrements());
+        if (_current.TargetLookupLocationEpochIncrementCount > 0)
+        {
+            AppendMetric(
+                builder,
+                "firstLocationEpochIncrement",
+                FormatFirstLocationEpochIncrement());
+        }
         AppendMetric(builder, "blocks", _current.TargetLookupBlockCount);
         AppendMetric(builder, "areas", _current.TargetLookupAreaCount);
         AppendMetric(builder, "states", _current.TargetLookupStateCount);
         AppendMetric(builder, "characterIds", _current.TargetLookupCharacterIdCount);
+        if (_current.FrozenTargetLookupLocationChangeWarnings > 0)
+        {
+            AppendMetric(builder, "frozenLocationChangeWarnings", _current.FrozenTargetLookupLocationChangeWarnings);
+            AppendMetric(
+                builder,
+                "firstFrozenLocationChangeCharId",
+                _current.FirstFrozenTargetLookupLocationChangeCharId);
+        }
+        if (_current.FrozenTargetPrefilterRelationMutationWarnings > 0)
+        {
+            AppendMetric(
+                builder,
+                "frozenRelationMutationWarnings",
+                _current.FrozenTargetPrefilterRelationMutationWarnings);
+        }
+        if (_current.FrozenItemHolderPrefilterInventoryMutationWarnings > 0)
+        {
+            AppendMetric(
+                builder,
+                "frozenInventoryMutationWarnings",
+                _current.FrozenItemHolderPrefilterInventoryMutationWarnings);
+        }
+
         AppendRelationTargetPrefilterSkips(builder);
         AppendRelationTargetPrefilterExceptions(builder);
 
@@ -1822,6 +2056,111 @@ internal static class CharacterActionPlanningDiagnostics
     private static string GetSensorName(int sensorType) =>
         Enum.GetName(typeof(EPlanningStateSensorType), sensorType) ?? sensorType.ToString();
 
+    private static CharacterTargetLookupFullBuildReason GetFullBuildReason(
+        OfflineCurrentGoalActionTargetDeltaFallbackReason reason) =>
+        reason switch
+        {
+            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidLocation =>
+                CharacterTargetLookupFullBuildReason.DeltaInvalidLocation,
+            OfflineCurrentGoalActionTargetDeltaFallbackReason.AffectedLimit =>
+                CharacterTargetLookupFullBuildReason.DeltaAffectedLimit,
+            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidBlock =>
+                CharacterTargetLookupFullBuildReason.DeltaInvalidBlock,
+            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidArea =>
+                CharacterTargetLookupFullBuildReason.DeltaInvalidArea,
+            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidSettlementRoot =>
+                CharacterTargetLookupFullBuildReason.DeltaInvalidSettlementRoot,
+            _ => CharacterTargetLookupFullBuildReason.SerialApplyAllForced,
+        };
+
+    private static string FormatFullBuildReasons()
+    {
+        StringBuilder builder = new(128);
+        Array values = Enum.GetValues(typeof(CharacterTargetLookupFullBuildReason));
+        bool hasValue = false;
+        for (int i = 0; i < values.Length; i++)
+        {
+            int count = TargetLookupFullBuildReasons[i].Count;
+            if (count == 0)
+            {
+                continue;
+            }
+
+            if (hasValue)
+            {
+                builder.Append(", ");
+            }
+
+            builder.Append(values.GetValue(i));
+            builder.Append('=');
+            builder.Append(count);
+            hasValue = true;
+        }
+
+        return hasValue ? builder.ToString() : "none";
+    }
+
+    private static string FormatLocationEpochIncrements()
+    {
+        if (_current.TargetLookupLocationEpochIncrementCount <= 0)
+        {
+            return "none";
+        }
+
+        StringBuilder builder = new(256);
+        Array reasons = Enum.GetValues(typeof(CharacterTargetLookupLocationEpochIncrementReason));
+        Array stages = Enum.GetValues(typeof(CharacterTargetLookupRuntimeStage));
+        bool hasValue = false;
+        for (int reason = 0; reason < reasons.Length; reason++)
+        {
+            for (int stage = 0; stage < stages.Length; stage++)
+            {
+                int count = TargetLookupLocationEpochIncrements[reason, stage].Count;
+                if (count == 0)
+                {
+                    continue;
+                }
+
+                if (hasValue)
+                {
+                    builder.Append(", ");
+                }
+
+                builder.Append(reasons.GetValue(reason));
+                builder.Append('@');
+                builder.Append(stages.GetValue(stage));
+                builder.Append('=');
+                builder.Append(count);
+                hasValue = true;
+            }
+        }
+
+        return hasValue ? builder.ToString() : "none";
+    }
+
+    private static string FormatFirstLocationEpochIncrement()
+    {
+        StringBuilder builder = new(128);
+        builder.Append(_current.FirstTargetLookupLocationEpochIncrementReason);
+        builder.Append('@');
+        builder.Append(_current.FirstTargetLookupLocationEpochIncrementStage);
+        builder.Append(", charId=");
+        builder.Append(_current.FirstTargetLookupLocationEpochIncrementCharId);
+        if (_current.FirstTargetLookupLocationEpochIncrementHasLocation)
+        {
+            builder.Append(", old=");
+            builder.Append(_current.FirstTargetLookupLocationEpochIncrementOldAreaId);
+            builder.Append(':');
+            builder.Append(_current.FirstTargetLookupLocationEpochIncrementOldBlockId);
+            builder.Append(", new=");
+            builder.Append(_current.FirstTargetLookupLocationEpochIncrementNewAreaId);
+            builder.Append(':');
+            builder.Append(_current.FirstTargetLookupLocationEpochIncrementNewBlockId);
+        }
+
+        return builder.ToString();
+    }
+
     private static void AppendMetric(StringBuilder builder, string name, string value)
     {
         builder.Append("    ");
@@ -1867,6 +2206,47 @@ internal static class CharacterActionPlanningDiagnostics
         return metrics;
     }
 
+    private static BuildReasonMetric[] CreateBuildReasonMetricArray()
+    {
+        Array values = Enum.GetValues(typeof(CharacterTargetLookupFullBuildReason));
+        BuildReasonMetric[] metrics = new BuildReasonMetric[values.Length];
+        for (int i = 0; i < metrics.Length; i++)
+        {
+            metrics[i] = new BuildReasonMetric();
+        }
+
+        return metrics;
+    }
+
+    private static LocationEpochIncrementMetric[,] CreateLocationEpochIncrementMetrics()
+    {
+        int reasonCount = Enum.GetValues(typeof(CharacterTargetLookupLocationEpochIncrementReason)).Length;
+        int stageCount = Enum.GetValues(typeof(CharacterTargetLookupRuntimeStage)).Length;
+        LocationEpochIncrementMetric[,] metrics = new LocationEpochIncrementMetric[reasonCount, stageCount];
+        for (int reason = 0; reason < reasonCount; reason++)
+        {
+            for (int stage = 0; stage < stageCount; stage++)
+            {
+                metrics[reason, stage] = new LocationEpochIncrementMetric();
+            }
+        }
+
+        return metrics;
+    }
+
+    private static void ClearLocationEpochIncrementMetrics()
+    {
+        int reasonCount = TargetLookupLocationEpochIncrements.GetLength(0);
+        int stageCount = TargetLookupLocationEpochIncrements.GetLength(1);
+        for (int reason = 0; reason < reasonCount; reason++)
+        {
+            for (int stage = 0; stage < stageCount; stage++)
+            {
+                TargetLookupLocationEpochIncrements[reason, stage].Clear();
+            }
+        }
+    }
+
     private static SkipMetric[] CreateSkipMetricArray()
     {
         Array values = Enum.GetValues(typeof(CharacterRelationTargetPrefilterSkipReason));
@@ -1888,6 +2268,13 @@ internal static class CharacterActionPlanningDiagnostics
         {
             metric.Clear();
         }
+
+        foreach (BuildReasonMetric metric in TargetLookupFullBuildReasons)
+        {
+            metric.Clear();
+        }
+
+        ClearLocationEpochIncrementMetrics();
 
         foreach (SkipMetric metric in RelationTargetPrefilterSkips)
         {
@@ -1980,6 +2367,26 @@ internal static class CharacterActionPlanningDiagnostics
             Fallbacks = 0;
             CandidateIds = 0;
             CharactersAdded = 0;
+        }
+    }
+
+    private sealed class BuildReasonMetric
+    {
+        public int Count;
+
+        public void Clear()
+        {
+            Count = 0;
+        }
+    }
+
+    private sealed class LocationEpochIncrementMetric
+    {
+        public int Count;
+
+        public void Clear()
+        {
+            Count = 0;
         }
     }
 
@@ -2370,9 +2777,37 @@ internal static class CharacterActionPlanningDiagnostics
         public long StartTicks;
         public long TargetLookupBuildTicks;
         public int TargetLookupBuildCalls;
+        public int TargetLookupFullBuildCalls;
+        public int TargetLookupDeltaNoChangePublishes;
+        public long TargetLookupDeltaPublishTicks;
+        public int TargetLookupDeltaPublishCalls;
+        public int TargetLookupDeltaPublishDeltas;
+        public int TargetLookupDeltaAffectedBlocks;
+        public int TargetLookupDeltaAffectedAreas;
+        public int TargetLookupDeltaAffectedStates;
+        public int TargetLookupDeltaAffectedSettlements;
+        public int TargetLookupDeltaFallbackRebuilds;
+        public int TargetLookupPrimaryApplyAllRecordedDeltas;
+        public int TargetLookupPrimaryApplyAllSavedDeltas;
+        public int TargetLookupPrimaryApplyAllAffectedBlocks;
+        public int TargetLookupPrimaryApplyAllAffectedAreas;
+        public int TargetLookupPrimaryApplyAllOverflows;
+        public int TargetLookupLocationEpochIncrementCount;
+        public CharacterTargetLookupLocationEpochIncrementReason FirstTargetLookupLocationEpochIncrementReason;
+        public CharacterTargetLookupRuntimeStage FirstTargetLookupLocationEpochIncrementStage;
+        public int FirstTargetLookupLocationEpochIncrementCharId;
+        public bool FirstTargetLookupLocationEpochIncrementHasLocation;
+        public short FirstTargetLookupLocationEpochIncrementOldAreaId;
+        public short FirstTargetLookupLocationEpochIncrementOldBlockId;
+        public short FirstTargetLookupLocationEpochIncrementNewAreaId;
+        public short FirstTargetLookupLocationEpochIncrementNewBlockId;
         public int TargetLookupBlockCount;
         public int TargetLookupAreaCount;
         public int TargetLookupStateCount;
         public int TargetLookupCharacterIdCount;
+        public int FrozenTargetLookupLocationChangeWarnings;
+        public int FirstFrozenTargetLookupLocationChangeCharId;
+        public int FrozenTargetPrefilterRelationMutationWarnings;
+        public int FrozenItemHolderPrefilterInventoryMutationWarnings;
     }
 }

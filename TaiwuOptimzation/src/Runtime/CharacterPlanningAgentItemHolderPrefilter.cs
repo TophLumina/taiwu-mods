@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 using Config;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.ActionPlanning.MonthlyAI.Node;
@@ -12,6 +12,10 @@ namespace TaiwuOptimization.Runtime;
 internal static class CharacterPlanningAgentItemHolderPrefilter
 {
     private static Snapshot? _frozenSnapshot;
+    private static volatile bool _isFrozen;
+    private static int _inventoryEpoch;
+    private static bool _collectSerialApplyAllInventoryDeltas;
+    private static readonly List<ItemHolderDelta> SerialApplyAllInventoryDeltas = new(128);
 
     /// <summary>在 NPC 主/副目标行动阶段开始前冻结“可能持有者”索引。</summary>
     public static void FreezeBeforeUpdateCurrentGoalActions()
@@ -32,7 +36,26 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
                 return;
             }
 
-            _frozenSnapshot = BuildSnapshot(planningSnapshot.CharacterRecords);
+            int inventoryEpoch = Volatile.Read(ref _inventoryEpoch);
+            Snapshot? currentSnapshot = Volatile.Read(ref _frozenSnapshot);
+            if (currentSnapshot == null ||
+                currentSnapshot.InventoryEpoch != inventoryEpoch ||
+                currentSnapshot.SourceLocationEpoch != planningSnapshot.LocationEpoch)
+            {
+                currentSnapshot = BuildSnapshot(
+                    planningSnapshot.CharacterRecords,
+                    inventoryEpoch,
+                    planningSnapshot.LocationEpoch);
+                Volatile.Write(ref _frozenSnapshot, currentSnapshot);
+                SerialApplyAllInventoryDeltas.Clear();
+            }
+            else if (SerialApplyAllInventoryDeltas.Count > 0)
+            {
+                currentSnapshot.ApplyHolderDeltas(SerialApplyAllInventoryDeltas);
+                SerialApplyAllInventoryDeltas.Clear();
+            }
+
+            _isFrozen = true;
         }
         catch (Exception exception)
         {
@@ -42,54 +65,63 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
     }
 
     /// <summary>离开 NPC 行动阶段后释放冻结索引，避免旧世界状态被复用。</summary>
-    public static void Unfreeze() =>
+    public static void Unfreeze()
+    {
+        _isFrozen = false;
         _frozenSnapshot = null;
+        Volatile.Write(ref _inventoryEpoch, 0);
+        _collectSerialApplyAllInventoryDeltas = false;
+        SerialApplyAllInventoryDeltas.Clear();
+    }
+
+    public static void EndFrozenReadStage() =>
+        _isFrozen = false;
+
+    /// <summary>进入串行 ApplyAll；primary 记录新增持有人，secondary 只关闭读取屏障。</summary>
+    public static void BeginSerialApplyAllDeltaRecording(bool collectDeltas)
+    {
+        _collectSerialApplyAllInventoryDeltas = collectDeltas && _frozenSnapshot != null;
+        if (_collectSerialApplyAllInventoryDeltas)
+        {
+            SerialApplyAllInventoryDeltas.Clear();
+        }
+    }
+
+    /// <summary>离开串行 ApplyAll；delta 会在下一次 planning 入口统一发布。</summary>
+    public static void EndSerialApplyAllDeltaRecording() =>
+        _collectSerialApplyAllInventoryDeltas = false;
 
     /// <summary>世界切换或插件卸载时清理运行时状态。</summary>
     public static void Reset() =>
-        _frozenSnapshot = null;
+        Unfreeze();
 
     /// <summary>记录新增持有者；删除和转移源角色不从索引移除，以保证预过滤集合只会扩大。</summary>
     public static void AddPossibleHolder(int charId, ItemKey itemKey)
     {
-        if (charId < 0 || !itemKey.IsValid())
-        {
-            return;
-        }
-
-        _frozenSnapshot?.AddPossibleHolder(charId, itemKey.ItemType, itemKey.TemplateId);
+        RecordPossibleHolder(charId, itemKey.ItemType, itemKey.TemplateId);
     }
 
     /// <summary>角色背包发生难以定位的新增时，保守把当前背包全部并入“可能持有者”集合。</summary>
     public static void AddCurrentInventory(Character character)
     {
-        Snapshot? snapshot = _frozenSnapshot;
-        if (snapshot == null)
-        {
-            return;
-        }
-
         int charId = character.GetId();
-        if (charId < 0)
+        if (_collectSerialApplyAllInventoryDeltas)
         {
+            foreach (ItemKey itemKey in character.GetInventory().Items.Keys)
+            {
+                RecordPossibleHolder(charId, itemKey.ItemType, itemKey.TemplateId);
+            }
+
             return;
         }
 
-        foreach (ItemKey itemKey in character.GetInventory().Items.Keys)
-        {
-            snapshot.AddPossibleHolder(charId, itemKey.ItemType, itemKey.TemplateId);
-        }
+        RecordFrozenInventoryMutation();
     }
 
     /// <summary>记录离线创建出的新物品持有者。</summary>
     public static void AddPossibleHolder(int charId, sbyte itemType, short itemTemplateId)
     {
-        if (charId < 0 || itemType < 0 || itemTemplateId < 0)
-        {
-            return;
-        }
-
-        _frozenSnapshot?.AddPossibleHolder(charId, itemType, itemTemplateId);
+        RecordPossibleHolder(charId, itemType, itemTemplateId);
     }
 
     /// <summary>尝试为指定财富类道具行动创建持有者过滤器。</summary>
@@ -144,10 +176,13 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
         template.TemplateId == 27 &&
         template.CharacterSelector == EPlanningActionCharacterSelector.RequestTarget;
 
-    private static Snapshot BuildSnapshot(OfflineCurrentGoalActionTargetRecord[] characterRecords)
+    private static Snapshot BuildSnapshot(
+        OfflineCurrentGoalActionTargetRecord[] characterRecords,
+        int inventoryEpoch,
+        int sourceLocationEpoch)
     {
-        var holdersByItemTemplate = new ConcurrentDictionary<int, ConcurrentDictionary<int, byte>>();
-        var detoxMedicineHoldersByPoisonType = new ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>>();
+        var holdersByItemTemplate = new Dictionary<int, HashSet<int>>();
+        var detoxMedicineHoldersByPoisonType = new Dictionary<sbyte, HashSet<int>>();
         foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
         {
             foreach (ItemKey itemKey in record.Character.GetInventory().Items.Keys)
@@ -161,12 +196,16 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
             }
         }
 
-        return new Snapshot(holdersByItemTemplate, detoxMedicineHoldersByPoisonType);
+        return new Snapshot(
+            inventoryEpoch,
+            sourceLocationEpoch,
+            holdersByItemTemplate,
+            detoxMedicineHoldersByPoisonType);
     }
 
     private static void AddPossibleHolder(
-        ConcurrentDictionary<int, ConcurrentDictionary<int, byte>> holdersByItemTemplate,
-        ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> detoxMedicineHoldersByPoisonType,
+        Dictionary<int, HashSet<int>> holdersByItemTemplate,
+        Dictionary<sbyte, HashSet<int>> detoxMedicineHoldersByPoisonType,
         int charId,
         sbyte itemType,
         short itemTemplateId)
@@ -177,15 +216,12 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
         }
 
         int key = MakeItemTemplateKey(itemType, itemTemplateId);
-        ConcurrentDictionary<int, byte> holders = holdersByItemTemplate.GetOrAdd(
-            key,
-            static _ => new ConcurrentDictionary<int, byte>());
-        holders.TryAdd(charId, 0);
+        AddToSet(holdersByItemTemplate, key, charId);
         AddDetoxMedicineHolder(detoxMedicineHoldersByPoisonType, charId, itemType, itemTemplateId);
     }
 
     private static void AddDetoxMedicineHolder(
-        ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> detoxMedicineHoldersByPoisonType,
+        Dictionary<sbyte, HashSet<int>> detoxMedicineHoldersByPoisonType,
         int charId,
         sbyte itemType,
         short itemTemplateId)
@@ -207,14 +243,73 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
             return;
         }
 
-        ConcurrentDictionary<int, byte> holders = detoxMedicineHoldersByPoisonType.GetOrAdd(
-            poisonType,
-            static _ => new ConcurrentDictionary<int, byte>());
-        holders.TryAdd(charId, 0);
+        AddToSet(detoxMedicineHoldersByPoisonType, poisonType, charId);
+    }
+
+    private static void AddToSet<TKey>(Dictionary<TKey, HashSet<int>> map, TKey key, int charId)
+        where TKey : notnull
+    {
+        if (!map.TryGetValue(key, out HashSet<int>? holders))
+        {
+            holders = new HashSet<int>();
+            map[key] = holders;
+        }
+
+        holders.Add(charId);
     }
 
     private static int MakeItemTemplateKey(sbyte itemType, short itemTemplateId) =>
         ((itemType & 0xff) << 16) | (ushort)itemTemplateId;
+
+    private static void RecordPossibleHolder(int charId, sbyte itemType, short itemTemplateId)
+    {
+        if (itemType < 0 || itemTemplateId < 0)
+        {
+            return;
+        }
+
+        if (_collectSerialApplyAllInventoryDeltas)
+        {
+            SerialApplyAllInventoryDeltas.Add(new ItemHolderDelta(charId, itemType, itemTemplateId));
+            return;
+        }
+
+        RecordFrozenInventoryMutation();
+    }
+
+    private static void RecordFrozenInventoryMutation()
+    {
+        if (_collectSerialApplyAllInventoryDeltas)
+        {
+            return;
+        }
+
+        if (_isFrozen)
+        {
+            if (CharacterActionPlanningDiagnostics.IsRecording)
+            {
+                CharacterActionPlanningDiagnostics.RecordFrozenItemHolderPrefilterInventoryMutation();
+            }
+
+            return;
+        }
+
+        Interlocked.Increment(ref _inventoryEpoch);
+    }
+
+    internal readonly struct ItemHolderDelta
+    {
+        public readonly int CharId;
+        public readonly sbyte ItemType;
+        public readonly short ItemTemplateId;
+
+        public ItemHolderDelta(int charId, sbyte itemType, short itemTemplateId)
+        {
+            CharId = charId;
+            ItemType = itemType;
+            ItemTemplateId = itemTemplateId;
+        }
+    }
 
     internal readonly struct HolderFilter
     {
@@ -251,31 +346,43 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
 
     internal sealed class Snapshot
     {
-        private readonly ConcurrentDictionary<int, ConcurrentDictionary<int, byte>> _holdersByItemTemplate;
-        private readonly ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> _detoxMedicineHoldersByPoisonType;
+        private readonly Dictionary<int, HashSet<int>> _holdersByItemTemplate;
+        private readonly Dictionary<sbyte, HashSet<int>> _detoxMedicineHoldersByPoisonType;
+
+        public int InventoryEpoch { get; }
+        public int SourceLocationEpoch { get; }
 
         public Snapshot(
-            ConcurrentDictionary<int, ConcurrentDictionary<int, byte>> holdersByItemTemplate,
-            ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> detoxMedicineHoldersByPoisonType)
+            int inventoryEpoch,
+            int sourceLocationEpoch,
+            Dictionary<int, HashSet<int>> holdersByItemTemplate,
+            Dictionary<sbyte, HashSet<int>> detoxMedicineHoldersByPoisonType)
         {
+            InventoryEpoch = inventoryEpoch;
+            SourceLocationEpoch = sourceLocationEpoch;
             _holdersByItemTemplate = holdersByItemTemplate;
             _detoxMedicineHoldersByPoisonType = detoxMedicineHoldersByPoisonType;
         }
 
-        public void AddPossibleHolder(int charId, sbyte itemType, short itemTemplateId) =>
-            CharacterPlanningAgentItemHolderPrefilter.AddPossibleHolder(
-                _holdersByItemTemplate,
-                _detoxMedicineHoldersByPoisonType,
-                charId,
-                itemType,
-                itemTemplateId);
+        public void ApplyHolderDeltas(IReadOnlyList<ItemHolderDelta> deltas)
+        {
+            foreach (ItemHolderDelta delta in deltas)
+            {
+                AddPossibleHolder(
+                    _holdersByItemTemplate,
+                    _detoxMedicineHoldersByPoisonType,
+                    delta.CharId,
+                    delta.ItemType,
+                    delta.ItemTemplateId);
+            }
+        }
 
         public bool MayHoldItemTemplate(int itemTemplateKey, int charId) =>
-            _holdersByItemTemplate.TryGetValue(itemTemplateKey, out ConcurrentDictionary<int, byte>? holders) &&
-            holders.ContainsKey(charId);
+            _holdersByItemTemplate.TryGetValue(itemTemplateKey, out HashSet<int>? holders) &&
+            holders.Contains(charId);
 
         public bool MayHoldDetoxMedicine(sbyte poisonType, int charId) =>
-            _detoxMedicineHoldersByPoisonType.TryGetValue(poisonType, out ConcurrentDictionary<int, byte>? holders) &&
-            holders.ContainsKey(charId);
+            _detoxMedicineHoldersByPoisonType.TryGetValue(poisonType, out HashSet<int>? holders) &&
+            holders.Contains(charId);
     }
 }

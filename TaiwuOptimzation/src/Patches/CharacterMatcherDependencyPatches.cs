@@ -52,11 +52,18 @@ internal static class CharacterMatcherSetLocationPatch
             nameof(Character.SetLocation),
             new[] { typeof(Location), typeof(DataContext) });
 
-    // 第一版 matcher 白名单暂不缓存位置类 matcher，但保留版本入口供后续扩展。
-    private static void Postfix(Character __instance)
+    private static void Prefix(Character __instance, out Location __state) =>
+        __state = __instance.GetLocation();
+
+    // 位置变更会影响规划目标位置索引；primary ApplyAll 内只记录 delta。
+    private static void Postfix(Character __instance, Location __state)
     {
-        CharacterMatcherStageCache.InvalidateLocationTarget(__instance.GetId());
-        CharacterPlanningAgentTargetLookupCache.NotifyCharacterLocationChanged();
+        int charId = __instance.GetId();
+        CharacterMatcherStageCache.InvalidateLocationTarget(charId);
+        CharacterPlanningAgentTargetLookupCache.NotifyCharacterLocationChanged(
+            charId,
+            __state,
+            __instance.GetLocation());
     }
 }
 

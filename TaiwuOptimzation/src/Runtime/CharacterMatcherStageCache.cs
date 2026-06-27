@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Config;
@@ -10,10 +10,18 @@ namespace TaiwuOptimization.Runtime;
 
 internal static class CharacterMatcherStageCache
 {
-    private static readonly ConcurrentDictionary<TargetMatcherKey, bool> StageCache = new();
-    private static readonly ConcurrentDictionary<int, TargetVersionState> TargetVersions = new();
-
     private static volatile bool _stageActive;
+    private static int _stageVersion;
+    private static int _activeOfflineCurrentGoalActionScopes;
+    private static int _ageVersion;
+    private static int _relationVersion;
+    private static int _organizationVersion;
+    private static int _inventoryVersion;
+    private static int _equipmentVersion;
+    private static int _locationVersion;
+    private static int _externalRelationVersion;
+    private static int _kidnapperVersion;
+    private static int _leaderVersion;
     private static int _taiwuGroupVersion;
     private static int _crossAreaTravelVersion;
     private static int _adventureTaiwuVersion;
@@ -21,11 +29,17 @@ internal static class CharacterMatcherStageCache
     [ThreadStatic]
     private static int _offlineCurrentGoalActionScopeDepth;
 
+    [ThreadStatic]
+    private static Dictionary<TargetMatcherKey, bool>? _threadStageCache;
+
+    [ThreadStatic]
+    private static int _threadStageVersion;
+
     /// <summary>进入主/副目标行动规划阶段，清空上一阶段缓存并冻结本阶段读取语义。</summary>
     public static void BeginUpdateCurrentGoalActionsStage()
     {
-        StageCache.Clear();
-        TargetVersions.Clear();
+        Volatile.Write(ref _activeOfflineCurrentGoalActionScopes, 0);
+        Bump(ref _stageVersion);
         _stageActive = IsEnabled();
     }
 
@@ -33,8 +47,8 @@ internal static class CharacterMatcherStageCache
     public static void EndUpdateCurrentGoalActionsStage()
     {
         _stageActive = false;
-        StageCache.Clear();
-        TargetVersions.Clear();
+        Volatile.Write(ref _activeOfflineCurrentGoalActionScopes, 0);
+        Bump(ref _stageVersion);
     }
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 热路径。</summary>
@@ -42,6 +56,7 @@ internal static class CharacterMatcherStageCache
     {
         if (_stageActive)
         {
+            Interlocked.Increment(ref _activeOfflineCurrentGoalActionScopes);
             _offlineCurrentGoalActionScopeDepth++;
         }
     }
@@ -52,27 +67,27 @@ internal static class CharacterMatcherStageCache
         if (_offlineCurrentGoalActionScopeDepth > 0)
         {
             _offlineCurrentGoalActionScopeDepth--;
+            Interlocked.Decrement(ref _activeOfflineCurrentGoalActionScopes);
         }
     }
 
     /// <summary>目标角色发生无法分类的状态变化时，推进全部目标版本。</summary>
     public static void InvalidateTarget(int targetCharId)
     {
-        if (!_stageActive || targetCharId < 0)
+        if (!ShouldTrackVersionInvalidation() || targetCharId < 0)
         {
             return;
         }
 
-        TargetVersionState state = GetTargetVersionState(targetCharId);
-        Bump(ref state.Age);
-        Bump(ref state.Relation);
-        Bump(ref state.Organization);
-        Bump(ref state.Inventory);
-        Bump(ref state.Equipment);
-        Bump(ref state.Location);
-        Bump(ref state.ExternalRelation);
-        Bump(ref state.Kidnapper);
-        Bump(ref state.Leader);
+        Bump(ref _ageVersion);
+        Bump(ref _relationVersion);
+        Bump(ref _organizationVersion);
+        Bump(ref _inventoryVersion);
+        Bump(ref _equipmentVersion);
+        Bump(ref _locationVersion);
+        Bump(ref _externalRelationVersion);
+        Bump(ref _kidnapperVersion);
+        Bump(ref _leaderVersion);
     }
 
     /// <summary>双向关系变化会影响两名角色各自作为 target 时的 matcher 结果。</summary>
@@ -87,7 +102,7 @@ internal static class CharacterMatcherStageCache
 
     /// <summary>关系或好感变化只推进关系版本。</summary>
     public static void InvalidateRelationTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Relation));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _relationVersion));
 
     /// <summary>双向关系变化影响两名角色作为 target 的关系 matcher。</summary>
     public static void InvalidateRelationTargets(int firstCharId, int secondCharId)
@@ -101,32 +116,32 @@ internal static class CharacterMatcherStageCache
 
     /// <summary>组织身份变化只推进组织版本。</summary>
     public static void InvalidateOrganizationTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Organization));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _organizationVersion));
 
     /// <summary>背包变化只推进背包版本。</summary>
     public static void InvalidateInventoryTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Inventory));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _inventoryVersion));
 
     /// <summary>装备变化只推进装备版本。</summary>
     public static void InvalidateEquipmentTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Equipment));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _equipmentVersion));
 
     /// <summary>所在地变化只推进位置版本。</summary>
     public static void InvalidateLocationTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Location));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _locationVersion));
 
     public static void InvalidateExternalRelationTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.ExternalRelation));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _externalRelationVersion));
 
     public static void InvalidateKidnapperTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Kidnapper));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _kidnapperVersion));
 
     public static void InvalidateLeaderTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Leader));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _leaderVersion));
 
     public static void InvalidateCrossAreaTravel()
     {
-        if (_stageActive)
+        if (ShouldTrackVersionInvalidation())
         {
             Bump(ref _crossAreaTravelVersion);
         }
@@ -134,7 +149,7 @@ internal static class CharacterMatcherStageCache
 
     public static void InvalidateAdventureTaiwu()
     {
-        if (_stageActive)
+        if (ShouldTrackVersionInvalidation())
         {
             Bump(ref _adventureTaiwuVersion);
         }
@@ -142,12 +157,12 @@ internal static class CharacterMatcherStageCache
 
     /// <summary>年龄段变化只推进年龄版本。</summary>
     public static void InvalidateAgeTarget(int targetCharId) =>
-        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Age));
+        InvalidateTargetVersion(targetCharId, static () => Bump(ref _ageVersion));
 
     /// <summary>太吾队伍变化会影响所有 `NotInTaiwuGroup` matcher。</summary>
     public static void InvalidateTaiwuGroup()
     {
-        if (_stageActive)
+        if (ShouldTrackVersionInvalidation())
         {
             Bump(ref _taiwuGroupVersion);
         }
@@ -156,13 +171,12 @@ internal static class CharacterMatcherStageCache
     /// <summary>批量关系重写等无法精确定位时，清空本阶段 matcher 缓存但保留优化入口。</summary>
     public static void InvalidateAll()
     {
-        if (!_stageActive)
+        if (!ShouldTrackVersionInvalidation())
         {
             return;
         }
 
-        StageCache.Clear();
-        TargetVersions.Clear();
+        Bump(ref _stageVersion);
         Bump(ref _taiwuGroupVersion);
     }
 
@@ -170,9 +184,18 @@ internal static class CharacterMatcherStageCache
     public static void Reset()
     {
         _stageActive = false;
-        StageCache.Clear();
-        TargetVersions.Clear();
+        Volatile.Write(ref _activeOfflineCurrentGoalActionScopes, 0);
         _offlineCurrentGoalActionScopeDepth = 0;
+        Bump(ref _stageVersion);
+        _ageVersion = 0;
+        _relationVersion = 0;
+        _organizationVersion = 0;
+        _inventoryVersion = 0;
+        _equipmentVersion = 0;
+        _locationVersion = 0;
+        _externalRelationVersion = 0;
+        _kidnapperVersion = 0;
+        _leaderVersion = 0;
         _taiwuGroupVersion = 0;
         _crossAreaTravelVersion = 0;
         _adventureTaiwuVersion = 0;
@@ -218,16 +241,42 @@ internal static class CharacterMatcherStageCache
         int targetCharId = targetChar.GetId();
         TargetVersionSnapshot targetVersion = GetVersionSnapshot(targetCharId, dependencies);
         var key = new TargetMatcherKey(matcherItem, targetCharId, dependencies, targetVersion);
-        if (StageCache.TryGetValue(key, out bool cachedResult))
+        Dictionary<TargetMatcherKey, bool> cache = GetThreadStageCache();
+        if (cache.TryGetValue(key, out bool cachedResult))
         {
             CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheHit(cachedResult);
             return cachedResult;
         }
 
         bool result = CharacterMatcherHelper.Match(matcherItem, targetChar);
-        StageCache.TryAdd(key, result);
+        cache[key] = result;
         CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheMiss(result);
         return result;
+    }
+
+    private static Dictionary<TargetMatcherKey, bool> GetThreadStageCache()
+    {
+        int stageVersion = Volatile.Read(ref _stageVersion);
+        Dictionary<TargetMatcherKey, bool>? cache = _threadStageCache;
+        if (cache == null)
+        {
+            cache = new Dictionary<TargetMatcherKey, bool>(256);
+            _threadStageCache = cache;
+            _threadStageVersion = stageVersion;
+            return cache;
+        }
+
+        if (_threadStageVersion != stageVersion)
+        {
+            cache = cache.Count > 16384
+                ? new Dictionary<TargetMatcherKey, bool>(256)
+                : cache;
+            cache.Clear();
+            _threadStageCache = cache;
+            _threadStageVersion = stageVersion;
+        }
+
+        return cache;
     }
 
     private static bool IsEnabled() =>
@@ -317,58 +366,35 @@ internal static class CharacterMatcherStageCache
         return true;
     }
 
-    private static TargetVersionState GetTargetVersionState(int targetCharId) =>
-        TargetVersions.GetOrAdd(targetCharId, static _ => new TargetVersionState());
-
-    private static void InvalidateTargetVersion(int targetCharId, Action<TargetVersionState> invalidate)
+    private static void InvalidateTargetVersion(int targetCharId, Action invalidate)
     {
-        if (!_stageActive || targetCharId < 0)
+        if (!ShouldTrackVersionInvalidation() || targetCharId < 0)
         {
             return;
         }
 
-        invalidate(GetTargetVersionState(targetCharId));
+        invalidate();
     }
+
+    private static bool ShouldTrackVersionInvalidation() =>
+        _stageActive && Volatile.Read(ref _activeOfflineCurrentGoalActionScopes) > 0;
 
     private static TargetVersionSnapshot GetVersionSnapshot(
         int targetCharId,
         CharacterMatcherDependency dependencies)
     {
-        if (!TargetVersions.TryGetValue(targetCharId, out TargetVersionState? state))
-        {
-            return new TargetVersionSnapshot(
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                (dependencies & CharacterMatcherDependency.TaiwuGroup) != 0
-                    ? Volatile.Read(ref _taiwuGroupVersion)
-                    : 0,
-                (dependencies & CharacterMatcherDependency.CrossAreaTravel) != 0
-                    ? Volatile.Read(ref _crossAreaTravelVersion)
-                    : 0,
-                (dependencies & CharacterMatcherDependency.AdventureTaiwu) != 0
-                    ? Volatile.Read(ref _adventureTaiwuVersion)
-                    : 0);
-        }
-
         return new TargetVersionSnapshot(
-            (dependencies & CharacterMatcherDependency.Age) != 0 ? Volatile.Read(ref state.Age) : 0,
-            (dependencies & CharacterMatcherDependency.Relation) != 0 ? Volatile.Read(ref state.Relation) : 0,
-            (dependencies & CharacterMatcherDependency.Organization) != 0 ? Volatile.Read(ref state.Organization) : 0,
-            (dependencies & CharacterMatcherDependency.Inventory) != 0 ? Volatile.Read(ref state.Inventory) : 0,
-            (dependencies & CharacterMatcherDependency.Equipment) != 0 ? Volatile.Read(ref state.Equipment) : 0,
-            (dependencies & CharacterMatcherDependency.Location) != 0 ? Volatile.Read(ref state.Location) : 0,
+            (dependencies & CharacterMatcherDependency.Age) != 0 ? Volatile.Read(ref _ageVersion) : 0,
+            (dependencies & CharacterMatcherDependency.Relation) != 0 ? Volatile.Read(ref _relationVersion) : 0,
+            (dependencies & CharacterMatcherDependency.Organization) != 0 ? Volatile.Read(ref _organizationVersion) : 0,
+            (dependencies & CharacterMatcherDependency.Inventory) != 0 ? Volatile.Read(ref _inventoryVersion) : 0,
+            (dependencies & CharacterMatcherDependency.Equipment) != 0 ? Volatile.Read(ref _equipmentVersion) : 0,
+            (dependencies & CharacterMatcherDependency.Location) != 0 ? Volatile.Read(ref _locationVersion) : 0,
             (dependencies & CharacterMatcherDependency.ExternalRelation) != 0
-                ? Volatile.Read(ref state.ExternalRelation)
+                ? Volatile.Read(ref _externalRelationVersion)
                 : 0,
-            (dependencies & CharacterMatcherDependency.Kidnapper) != 0 ? Volatile.Read(ref state.Kidnapper) : 0,
-            (dependencies & CharacterMatcherDependency.Leader) != 0 ? Volatile.Read(ref state.Leader) : 0,
+            (dependencies & CharacterMatcherDependency.Kidnapper) != 0 ? Volatile.Read(ref _kidnapperVersion) : 0,
+            (dependencies & CharacterMatcherDependency.Leader) != 0 ? Volatile.Read(ref _leaderVersion) : 0,
             (dependencies & CharacterMatcherDependency.TaiwuGroup) != 0
                 ? Volatile.Read(ref _taiwuGroupVersion)
                 : 0,
@@ -405,19 +431,6 @@ internal static class CharacterMatcherStageCache
         Leader = 1 << 9,
         CrossAreaTravel = 1 << 10,
         AdventureTaiwu = 1 << 11,
-    }
-
-    private sealed class TargetVersionState
-    {
-        public int Age;
-        public int Relation;
-        public int Organization;
-        public int Inventory;
-        public int Equipment;
-        public int Location;
-        public int ExternalRelation;
-        public int Kidnapper;
-        public int Leader;
     }
 
     private readonly struct TargetVersionSnapshot : IEquatable<TargetVersionSnapshot>

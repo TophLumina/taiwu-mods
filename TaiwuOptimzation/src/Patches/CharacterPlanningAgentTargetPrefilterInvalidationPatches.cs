@@ -30,7 +30,8 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
         if (actionType == typeof(UpdatePrimaryGoalAndActions) ||
             actionType == typeof(UpdateSecondaryGoalAndActions))
         {
-            AdvanceMonthOptimizationRuntime.BeginUpdateCurrentGoalActionsOptimizationStage();
+            AdvanceMonthOptimizationRuntime.BeginUpdateCurrentGoalActionsOptimizationStage(
+                actionType == typeof(UpdatePrimaryGoalAndActions));
         }
     }
 
@@ -40,11 +41,27 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
         if (actionType == typeof(UpdatePrimaryGoalAndActions) ||
             actionType == typeof(UpdateSecondaryGoalAndActions))
         {
-            AdvanceMonthOptimizationRuntime.EndUpdateCurrentGoalActionsOptimizationStage();
+            AdvanceMonthOptimizationRuntime.FinishUpdateCurrentGoalActionsOptimizationStage();
         }
 
         return __exception;
     }
+}
+
+[HarmonyPatch]
+[HarmonyPriority(Priority.First)]
+internal static class UpdateCurrentGoalActionsApplyAllBoundaryPatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(ParallelModificationsRecorder),
+            nameof(ParallelModificationsRecorder.ApplyAll),
+            new[] { typeof(DataContext) });
+
+    // `WorkerThreadManager.Run` 在所有 worker planning 完成后立刻调用 ApplyAll。
+    // 这里关闭只读快照阶段，让 primary 写回产生的变更进入 epoch，供 secondary 前重建。
+    private static void Prefix() =>
+        AdvanceMonthOptimizationRuntime.EnterUpdateCurrentGoalActionsApplyAll();
 }
 
 [HarmonyPatch]
@@ -135,6 +152,7 @@ internal static class UpdateCurrentGoalActionsCacheInvalidation
     public static void InvalidateRelationMutation(int charId, int relatedCharId)
     {
         CharacterPlanningAgentTargetPrefilter.InvalidateRelationMutation(charId, relatedCharId);
+        CharacterPlanningAgentTargetPrefilter.InvalidateRelationMutation(relatedCharId, charId);
         CharacterMatcherStageCache.InvalidateRelationTargets(charId, relatedCharId);
     }
 
