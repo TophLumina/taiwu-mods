@@ -10,7 +10,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class CharacterPlanningAgentTargetPrefilter
+internal static class OfflineCurrentGoalActionTargetPrefilter
 {
     private const int HasCandidateSet = 1;
     private const int UnknownCandidateSet = 2;
@@ -49,7 +49,7 @@ internal static class CharacterPlanningAgentTargetPrefilter
 
         try
         {
-            if (!CharacterPlanningAgentTargetLookupCache.TryGetFrozenPlanningSnapshot(
+            if (!OfflineCurrentGoalActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
                     out OfflineCurrentGoalActionTargetSnapshot planningSnapshot) ||
                 planningSnapshot.CharacterRecords.Length == 0)
             {
@@ -173,19 +173,19 @@ internal static class CharacterPlanningAgentTargetPrefilter
         rentedList = null;
         if (!_isFrozen || _offlineCurrentGoalActionScopeDepth <= 0 || agent?.Object == null)
         {
-            RecordSkip(CharacterRelationTargetPrefilterSkipReason.OutOfScope);
+            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.OutOfScope);
             return false;
         }
 
         if (_offlineTargetConditionSnapshot == null)
         {
-            RecordSkip(CharacterRelationTargetPrefilterSkipReason.UnsafeRule);
+            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.UnsafeRule);
             return false;
         }
 
         if (source == null || source.Count <= 1)
         {
-            RecordSkip(CharacterRelationTargetPrefilterSkipReason.EmptySource);
+            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.EmptySource);
             return false;
         }
 
@@ -193,22 +193,22 @@ internal static class CharacterPlanningAgentTargetPrefilter
         if (!TryBuildGoalCandidateSet(actorCharId, currentGoal, out HashSet<int>? goalCandidates) ||
             !TryBuildActionCandidateSet(actorCharId, currentAction, out HashSet<int>? actionCandidates))
         {
-            RecordSkip(CharacterRelationTargetPrefilterSkipReason.UnsafeRule);
+            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.UnsafeRule);
             return false;
         }
 
         HashSet<int>? selectorRelationCandidates = TryGetSelectorRelationCandidateSet(actorCharId, currentAction);
-        bool hasInventoryFilter = CharacterPlanningAgentItemHolderPrefilter.TryCreateHolderFilter(
+        bool hasInventoryFilter = OfflineCurrentGoalActionItemHolderPrefilter.TryCreateHolderFilter(
             currentAction,
             actionArgs,
-            out CharacterPlanningAgentItemHolderPrefilter.HolderFilter inventoryFilter);
+            out OfflineCurrentGoalActionItemHolderPrefilter.HolderFilter inventoryFilter);
 
         if (goalCandidates == null &&
             actionCandidates == null &&
             selectorRelationCandidates == null &&
             !hasInventoryFilter)
         {
-            RecordSkip(CharacterRelationTargetPrefilterSkipReason.NoRelationRule);
+            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.NoRelationRule);
             return false;
         }
 
@@ -735,7 +735,7 @@ internal static class CharacterPlanningAgentTargetPrefilter
             outputCount);
     }
 
-    private static void RecordSkip(CharacterRelationTargetPrefilterSkipReason reason)
+    private static void RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason reason)
     {
         if (CharacterActionPlanningDiagnostics.IsRecording)
         {

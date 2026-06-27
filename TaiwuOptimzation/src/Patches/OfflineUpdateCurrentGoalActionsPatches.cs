@@ -85,7 +85,7 @@ internal static class AdvanceMonthProtectionTaiwuGroupInvalidationPatch
     private static void Postfix()
     {
         AdvanceMonthProtectionSnapshotCache.MarkTaiwuGroupDirty();
-        CharacterMatcherStageCache.InvalidateTaiwuGroup();
+        OfflineCurrentGoalActionMatcherCache.InvalidateTaiwuGroup();
     }
 }
 

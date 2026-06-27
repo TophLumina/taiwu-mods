@@ -8,7 +8,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class CharacterMatcherStageCache
+internal static class OfflineCurrentGoalActionMatcherCache
 {
     private static volatile bool _stageActive;
     private static int _stageVersion;
@@ -208,7 +208,7 @@ internal static class CharacterMatcherStageCache
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
             CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(
-                CharacterTargetMatcherCacheRejectReason.StageInactive,
+                OfflineCurrentGoalActionMatcherCacheRejectReason.StageInactive,
                 0,
                 fallbackResult);
             return fallbackResult;
@@ -218,7 +218,7 @@ internal static class CharacterMatcherStageCache
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
             CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(
-                CharacterTargetMatcherCacheRejectReason.OutsideOfflineCurrentGoalActions,
+                OfflineCurrentGoalActionMatcherCacheRejectReason.OutsideOfflineCurrentGoalActions,
                 0,
                 fallbackResult);
             return fallbackResult;
@@ -227,7 +227,7 @@ internal static class CharacterMatcherStageCache
         if (!TryAnalyzeDependencies(
                 matcherItem,
                 out CharacterMatcherDependency dependencies,
-                out CharacterTargetMatcherCacheRejectReason rejectReason,
+                out OfflineCurrentGoalActionMatcherCacheRejectReason rejectReason,
                 out int rejectDetail))
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
@@ -286,11 +286,11 @@ internal static class CharacterMatcherStageCache
     private static bool TryAnalyzeDependencies(
         CharacterMatcherItem matcherItem,
         out CharacterMatcherDependency dependencies,
-        out CharacterTargetMatcherCacheRejectReason rejectReason,
+        out OfflineCurrentGoalActionMatcherCacheRejectReason rejectReason,
         out int rejectDetail)
     {
         dependencies = CharacterMatcherDependency.None;
-        rejectReason = CharacterTargetMatcherCacheRejectReason.None;
+        rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.None;
         rejectDetail = 0;
 
         if (matcherItem.AgeType != ECharacterMatcherAgeType.NotRestricted)
@@ -302,7 +302,7 @@ internal static class CharacterMatcherStageCache
             ECharacterMatcherGenderType.DisplayFemale or
             ECharacterMatcherGenderType.DisplayMale)
         {
-            rejectReason = CharacterTargetMatcherCacheRejectReason.UnsupportedDisplayGender;
+            rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedDisplayGender;
             rejectDetail = (int)matcherItem.GenderType;
             return false;
         }
@@ -320,7 +320,7 @@ internal static class CharacterMatcherStageCache
 
         if (matcherItem.MerchantType >= 0)
         {
-            rejectReason = CharacterTargetMatcherCacheRejectReason.UnsupportedMerchantType;
+            rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedMerchantType;
             rejectDetail = matcherItem.MerchantType;
             return false;
         }
@@ -357,7 +357,7 @@ internal static class CharacterMatcherStageCache
                         CharacterMatcherDependency.AdventureTaiwu;
                     break;
                 default:
-                    rejectReason = CharacterTargetMatcherCacheRejectReason.UnsupportedSubCondition;
+                    rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedSubCondition;
                     rejectDetail = (int)subCondition;
                     return false;
             }

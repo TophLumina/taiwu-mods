@@ -24,8 +24,8 @@ internal static class CharacterMatcherSetFavorabilityPatch
     // FavorRange 和太吾关系类 matcher 依赖关系/好感版本。
     private static void Postfix(int charId, int relatedCharId)
     {
-        CharacterMatcherStageCache.InvalidateRelationTarget(charId);
-        CharacterMatcherStageCache.InvalidateRelationTarget(relatedCharId);
+        OfflineCurrentGoalActionMatcherCache.InvalidateRelationTarget(charId);
+        OfflineCurrentGoalActionMatcherCache.InvalidateRelationTarget(relatedCharId);
     }
 }
 
@@ -40,7 +40,7 @@ internal static class CharacterMatcherSetOrganizationInfoPatch
 
     // IdentityType、Organization 和 CanStroll 依赖组织版本。
     private static void Postfix(Character __instance) =>
-        CharacterMatcherStageCache.InvalidateOrganizationTarget(__instance.GetId());
+        OfflineCurrentGoalActionMatcherCache.InvalidateOrganizationTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
@@ -59,8 +59,8 @@ internal static class CharacterMatcherSetLocationPatch
     private static void Postfix(Character __instance, Location __state)
     {
         int charId = __instance.GetId();
-        CharacterMatcherStageCache.InvalidateLocationTarget(charId);
-        CharacterPlanningAgentTargetLookupCache.NotifyCharacterLocationChanged(
+        OfflineCurrentGoalActionMatcherCache.InvalidateLocationTarget(charId);
+        OfflineCurrentGoalActionTargetLookupCache.NotifyCharacterLocationChanged(
             charId,
             __state,
             __instance.GetLocation());
@@ -77,7 +77,7 @@ internal static class CharacterMatcherSetExternalRelationStatePatch
             new[] { typeof(ulong), typeof(DataContext) });
 
     private static void Postfix(Character __instance) =>
-        CharacterMatcherStageCache.InvalidateExternalRelationTarget(__instance.GetId());
+        OfflineCurrentGoalActionMatcherCache.InvalidateExternalRelationTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
@@ -90,7 +90,7 @@ internal static class CharacterMatcherSetKidnapperIdPatch
             new[] { typeof(int), typeof(DataContext) });
 
     private static void Postfix(Character __instance) =>
-        CharacterMatcherStageCache.InvalidateKidnapperTarget(__instance.GetId());
+        OfflineCurrentGoalActionMatcherCache.InvalidateKidnapperTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
@@ -103,7 +103,7 @@ internal static class CharacterMatcherSetLeaderIdPatch
             new[] { typeof(int), typeof(DataContext) });
 
     private static void Postfix(Character __instance) =>
-        CharacterMatcherStageCache.InvalidateLeaderTarget(__instance.GetId());
+        OfflineCurrentGoalActionMatcherCache.InvalidateLeaderTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
@@ -122,7 +122,7 @@ internal static class CharacterMatcherCrossAreaTravelPatch
     }
 
     private static void Postfix() =>
-        CharacterMatcherStageCache.InvalidateCrossAreaTravel();
+        OfflineCurrentGoalActionMatcherCache.InvalidateCrossAreaTravel();
 }
 
 [HarmonyPatch]
@@ -135,7 +135,7 @@ internal static class CharacterMatcherSetAdventureTaiwuPatch
             new[] { typeof(AdventureTaiwu), typeof(DataContext) });
 
     private static void Postfix() =>
-        CharacterMatcherStageCache.InvalidateAdventureTaiwu();
+        OfflineCurrentGoalActionMatcherCache.InvalidateAdventureTaiwu();
 }
 
 [HarmonyPatch]
@@ -149,7 +149,7 @@ internal static class CharacterMatcherSetInventoryPatch
 
     // 背包整体替换时推进背包版本。
     private static void Postfix(Character __instance) =>
-        CharacterMatcherStageCache.InvalidateInventoryTarget(__instance.GetId());
+        OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
@@ -163,7 +163,7 @@ internal static class CharacterMatcherSetEquipmentPatch
 
     // 装备整体替换时推进装备版本。
     private static void Postfix(Character __instance) =>
-        CharacterMatcherStageCache.InvalidateEquipmentTarget(__instance.GetId());
+        OfflineCurrentGoalActionMatcherCache.InvalidateEquipmentTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
@@ -177,5 +177,5 @@ internal static class CharacterMatcherSetCurrAgePatch
 
     // AgeType 依赖年龄段版本。
     private static void Postfix(Character __instance) =>
-        CharacterMatcherStageCache.InvalidateAgeTarget(__instance.GetId());
+        OfflineCurrentGoalActionMatcherCache.InvalidateAgeTarget(__instance.GetId());
 }

@@ -9,7 +9,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class CharacterPlanningAgentItemHolderPrefilter
+internal static class OfflineCurrentGoalActionItemHolderPrefilter
 {
     private static Snapshot? _frozenSnapshot;
     private static volatile bool _isFrozen;
@@ -28,7 +28,7 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
 
         try
         {
-            if (!CharacterPlanningAgentTargetLookupCache.TryGetFrozenPlanningSnapshot(
+            if (!OfflineCurrentGoalActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
                     out OfflineCurrentGoalActionTargetSnapshot planningSnapshot) ||
                 planningSnapshot.CharacterRecords.Length == 0)
             {
@@ -59,7 +59,7 @@ internal static class CharacterPlanningAgentItemHolderPrefilter
         }
         catch (Exception exception)
         {
-            CharacterPlanningAgentTargetPrefilter.RecordException(exception);
+            OfflineCurrentGoalActionTargetPrefilter.RecordException(exception);
             Unfreeze();
         }
     }

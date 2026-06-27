@@ -10,7 +10,7 @@ using Character = GameData.Domains.Character.Character;
 namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch(typeof(PlanningActionNode), nameof(PlanningActionNode.MatchTargetCharacter))]
-internal static class CharacterMatcherStageCachePatch
+internal static class OfflineCurrentGoalActionMatcherCachePatch
 {
     // 只替换 action 目标匹配中的 `CharacterMatcherItem.Match(targetChar)`，保留后续原版条件和 action impl。
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -20,8 +20,8 @@ internal static class CharacterMatcherStageCachePatch
             nameof(CharacterMatcherHelper.Match),
             new[] { typeof(CharacterMatcherItem), typeof(Character) });
         MethodInfo replacement = AccessTools.Method(
-            typeof(CharacterMatcherStageCache),
-            nameof(CharacterMatcherStageCache.Match),
+            typeof(OfflineCurrentGoalActionMatcherCache),
+            nameof(OfflineCurrentGoalActionMatcherCache.Match),
             new[] { typeof(CharacterMatcherItem), typeof(Character) });
 
         foreach (CodeInstruction instruction in instructions)

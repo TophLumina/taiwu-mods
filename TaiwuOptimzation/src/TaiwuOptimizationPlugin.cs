@@ -23,6 +23,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     {
         _harmony?.UnpatchSelf();
         _harmony = null;
+        CharacterActionPlannerGraphCache.Reset();
         AdvanceMonthOptimizationRuntime.Dispose();
     }
 
@@ -30,6 +31,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
         AdvanceMonthProtectionSnapshotCache.MarkAllDirty();
-        CharacterPlanningAgentTargetLookupCache.Reset();
+        OfflineCurrentGoalActionTargetLookupCache.Reset();
+        CharacterActionPlannerGraphCache.Reset();
     }
 }
