@@ -44,7 +44,7 @@ internal enum CharacterActionPlanningStep
     MatchTargetCharacterByConditions,
 }
 
-internal enum CharacterActionTargetLookupKind
+internal enum CharacterPlanningAgentTargetLookupKind
 {
     SameBlock,
     SameArea,
@@ -237,11 +237,11 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
-    /// <summary>开始记录 NPC 目标索引全量构建。</summary>
+    /// <summary>开始记录 NPC 行动规划目标快照构建。</summary>
     public static long BeginTargetLookupBuild() =>
         IsActive() ? Stopwatch.GetTimestamp() : 0;
 
-    /// <summary>结束 NPC 目标索引全量构建。</summary>
+    /// <summary>结束 NPC 行动规划目标快照构建。</summary>
     public static void EndTargetLookupBuild(long startTicks)
     {
         if (startTicks == 0)
@@ -718,7 +718,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     /// <summary>记录一次目标索引查询。</summary>
     public static void RecordTargetLookup(
-        CharacterActionTargetLookupKind kind,
+        CharacterPlanningAgentTargetLookupKind kind,
         bool hit,
         int candidateIds,
         int charactersAdded)
@@ -1174,11 +1174,11 @@ internal static class CharacterActionPlanningDiagnostics
         AppendGoalMetrics(builder, "secondaryGoalActions", SecondaryMetrics);
 
         builder.AppendLine("  targetLookupCalls:");
-        AppendTargetLookup(builder, nameof(CharacterActionTargetLookupKind.SameBlock), TargetLookupMetrics[(int)CharacterActionTargetLookupKind.SameBlock]);
-        AppendTargetLookup(builder, nameof(CharacterActionTargetLookupKind.SameArea), TargetLookupMetrics[(int)CharacterActionTargetLookupKind.SameArea]);
-        AppendTargetLookup(builder, nameof(CharacterActionTargetLookupKind.SameState), TargetLookupMetrics[(int)CharacterActionTargetLookupKind.SameState]);
-        AppendTargetLookup(builder, nameof(CharacterActionTargetLookupKind.BlockRange), TargetLookupMetrics[(int)CharacterActionTargetLookupKind.BlockRange]);
-        AppendTargetLookup(builder, nameof(CharacterActionTargetLookupKind.SettlementRange), TargetLookupMetrics[(int)CharacterActionTargetLookupKind.SettlementRange]);
+        AppendTargetLookup(builder, nameof(CharacterPlanningAgentTargetLookupKind.SameBlock), TargetLookupMetrics[(int)CharacterPlanningAgentTargetLookupKind.SameBlock]);
+        AppendTargetLookup(builder, nameof(CharacterPlanningAgentTargetLookupKind.SameArea), TargetLookupMetrics[(int)CharacterPlanningAgentTargetLookupKind.SameArea]);
+        AppendTargetLookup(builder, nameof(CharacterPlanningAgentTargetLookupKind.SameState), TargetLookupMetrics[(int)CharacterPlanningAgentTargetLookupKind.SameState]);
+        AppendTargetLookup(builder, nameof(CharacterPlanningAgentTargetLookupKind.BlockRange), TargetLookupMetrics[(int)CharacterPlanningAgentTargetLookupKind.BlockRange]);
+        AppendTargetLookup(builder, nameof(CharacterPlanningAgentTargetLookupKind.SettlementRange), TargetLookupMetrics[(int)CharacterPlanningAgentTargetLookupKind.SettlementRange]);
         return builder.ToString();
     }
 
@@ -1857,7 +1857,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static TargetLookupMetric[] CreateTargetLookupMetricArray()
     {
-        Array values = Enum.GetValues(typeof(CharacterActionTargetLookupKind));
+        Array values = Enum.GetValues(typeof(CharacterPlanningAgentTargetLookupKind));
         TargetLookupMetric[] metrics = new TargetLookupMetric[values.Length];
         for (int i = 0; i < metrics.Length; i++)
         {

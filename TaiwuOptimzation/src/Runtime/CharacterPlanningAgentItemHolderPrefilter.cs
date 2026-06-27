@@ -9,7 +9,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class CharacterInventoryTargetPrefilter
+internal static class CharacterPlanningAgentItemHolderPrefilter
 {
     private static Snapshot? _frozenSnapshot;
 
@@ -24,8 +24,8 @@ internal static class CharacterInventoryTargetPrefilter
 
         try
         {
-            if (!CharacterActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
-                    out CharacterActionPlanningSnapshot planningSnapshot) ||
+            if (!CharacterPlanningAgentTargetLookupCache.TryGetFrozenPlanningSnapshot(
+                    out OfflineCurrentGoalActionTargetSnapshot planningSnapshot) ||
                 planningSnapshot.CharacterRecords.Length == 0)
             {
                 Unfreeze();
@@ -36,7 +36,7 @@ internal static class CharacterInventoryTargetPrefilter
         }
         catch (Exception exception)
         {
-            CharacterGoalTargetConditionPrefilter.RecordException(exception);
+            CharacterPlanningAgentTargetPrefilter.RecordException(exception);
             Unfreeze();
         }
     }
@@ -130,7 +130,7 @@ internal static class CharacterInventoryTargetPrefilter
 
     private static bool IsEnabled() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.EnableCharacterActionTargetLookupCache;
+        TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
     private static bool IsSupportedItemDemandAction(PlanningActionItem template) =>
         template.TemplateId is 36 or 37 or 38 or 39 &&
@@ -144,11 +144,11 @@ internal static class CharacterInventoryTargetPrefilter
         template.TemplateId == 27 &&
         template.CharacterSelector == EPlanningActionCharacterSelector.RequestTarget;
 
-    private static Snapshot BuildSnapshot(CharacterActionPlanningCharacterRecord[] characterRecords)
+    private static Snapshot BuildSnapshot(OfflineCurrentGoalActionTargetRecord[] characterRecords)
     {
         var holdersByItemTemplate = new ConcurrentDictionary<int, ConcurrentDictionary<int, byte>>();
         var detoxMedicineHoldersByPoisonType = new ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>>();
-        foreach (CharacterActionPlanningCharacterRecord record in characterRecords)
+        foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
         {
             foreach (ItemKey itemKey in record.Character.GetInventory().Items.Keys)
             {
@@ -263,7 +263,7 @@ internal static class CharacterInventoryTargetPrefilter
         }
 
         public void AddPossibleHolder(int charId, sbyte itemType, short itemTemplateId) =>
-            CharacterInventoryTargetPrefilter.AddPossibleHolder(
+            CharacterPlanningAgentItemHolderPrefilter.AddPossibleHolder(
                 _holdersByItemTemplate,
                 _detoxMedicineHoldersByPoisonType,
                 charId,

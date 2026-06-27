@@ -9,7 +9,7 @@ internal static class TaiwuOptimizationSettings
     public static bool AdvanceMonthOptimizationEnabled = true;
     public static bool ProtectNeighborStatesForAdvanceMonthOptimization = true;
     public static int AdvanceMonthOptimizationFrameBudgetMs = 2;
-    public static bool EnableCharacterActionTargetLookupCache = true;
+    public static bool EnableCharacterActionPlanningOptimization = true;
     public static int SaveWorldDatabaseCopyBufferTier = 2;
     public static bool SaveWorldNoCompression = false;
 
@@ -29,7 +29,7 @@ internal static class TaiwuOptimizationSettings
         TryGet(modId, "AdvanceMonthOptimizationEnabled", ref AdvanceMonthOptimizationEnabled);
         TryGet(modId, "ProtectNeighborStatesForAdvanceMonthOptimization", ref ProtectNeighborStatesForAdvanceMonthOptimization);
         TryGet(modId, "AdvanceMonthOptimizationFrameBudgetMs", ref AdvanceMonthOptimizationFrameBudgetMs);
-        TryGet(modId, "EnableCharacterActionTargetLookupCache", ref EnableCharacterActionTargetLookupCache);
+        TryGet(modId, "EnableCharacterActionPlanningOptimization", ref EnableCharacterActionPlanningOptimization);
         TryGet(modId, "SaveWorldDatabaseCopyBufferTier", ref SaveWorldDatabaseCopyBufferTier);
         TryGet(modId, "SaveWorldNoCompression", ref SaveWorldNoCompression);
         TryGet(modId, "ReduceRemoteNpcOfflineCurrentGoalActionPointGain", ref ReduceRemoteNpcOfflineCurrentGoalActionPointGain);

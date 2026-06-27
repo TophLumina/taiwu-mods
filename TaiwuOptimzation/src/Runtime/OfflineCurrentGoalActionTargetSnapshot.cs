@@ -6,7 +6,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal sealed class CharacterActionPlanningSnapshot
+internal sealed class OfflineCurrentGoalActionTargetSnapshot
 {
     private const int AreaCount = 141;
 
@@ -18,15 +18,15 @@ internal sealed class CharacterActionPlanningSnapshot
     public int[][] AreaCharacterIds { get; }
     public Dictionary<sbyte, int[]> StateCharacterIds { get; }
     public int[] AllCharacterIds { get; }
-    public CharacterActionPlanningCharacterRecord[] CharacterRecords { get; }
+    public OfflineCurrentGoalActionTargetRecord[] CharacterRecords { get; }
 
-    private CharacterActionPlanningSnapshot(
+    private OfflineCurrentGoalActionTargetSnapshot(
         int locationEpoch,
         int[][] areaCharacterIds,
         Dictionary<sbyte, int[]> stateCharacterIds,
         Dictionary<int, int[]> blockCharacterIds,
         int[] allCharacterIds,
-        CharacterActionPlanningCharacterRecord[] characterRecords)
+        OfflineCurrentGoalActionTargetRecord[] characterRecords)
     {
         LocationEpoch = locationEpoch;
         AreaCharacterIds = areaCharacterIds;
@@ -37,7 +37,7 @@ internal sealed class CharacterActionPlanningSnapshot
     }
 
     /// <summary>在 NPC 规划屏障前一次性扫描角色位置，并产出后续子缓存共享的快照根。</summary>
-    public static CharacterActionPlanningSnapshot Build(int locationEpoch)
+    public static OfflineCurrentGoalActionTargetSnapshot Build(int locationEpoch)
     {
         List<int>?[] areaBuilders = new List<int>?[AreaCount];
         Dictionary<int, int[]> blockCharacterIds = new(32768);
@@ -72,14 +72,14 @@ internal sealed class CharacterActionPlanningSnapshot
         Dictionary<sbyte, int[]> stateCharacterIds = BuildAllStateCharacterIds(areaCharacterIds);
         int[] allCharacterIdArray = new int[allCharacterIds.Count];
         allCharacterIds.CopyTo(allCharacterIdArray);
-        CharacterActionPlanningCharacterRecord[] characterRecords = BuildCharacterRecords(allCharacterIdArray);
+        OfflineCurrentGoalActionTargetRecord[] characterRecords = BuildCharacterRecords(allCharacterIdArray);
 
         CharacterActionPlanningDiagnostics.RecordTargetLookupSnapshotSize(
             blockCharacterIds.Count,
             areaCharacterIds.Length,
             stateCharacterIds.Count,
             totalCharacterIds);
-        return new CharacterActionPlanningSnapshot(
+        return new OfflineCurrentGoalActionTargetSnapshot(
             locationEpoch,
             areaCharacterIds,
             stateCharacterIds,
@@ -117,14 +117,14 @@ internal sealed class CharacterActionPlanningSnapshot
         }
     }
 
-    private static CharacterActionPlanningCharacterRecord[] BuildCharacterRecords(int[] characterIds)
+    private static OfflineCurrentGoalActionTargetRecord[] BuildCharacterRecords(int[] characterIds)
     {
-        List<CharacterActionPlanningCharacterRecord> records = new(characterIds.Length);
+        List<OfflineCurrentGoalActionTargetRecord> records = new(characterIds.Length);
         foreach (int characterId in characterIds)
         {
             if (DomainManager.Character.TryGetElement_Objects(characterId, out Character character))
             {
-                records.Add(new CharacterActionPlanningCharacterRecord(characterId, character));
+                records.Add(new OfflineCurrentGoalActionTargetRecord(characterId, character));
             }
         }
 
@@ -213,12 +213,12 @@ internal sealed class CharacterActionPlanningSnapshot
         (areaId << 16) ^ (ushort)blockId;
 }
 
-internal readonly struct CharacterActionPlanningCharacterRecord
+internal readonly struct OfflineCurrentGoalActionTargetRecord
 {
     public readonly int CharId;
     public readonly Character Character;
 
-    public CharacterActionPlanningCharacterRecord(int charId, Character character)
+    public OfflineCurrentGoalActionTargetRecord(int charId, Character character)
     {
         CharId = charId;
         Character = character;

@@ -11,7 +11,7 @@ using Character = GameData.Domains.Character.Character;
 namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch]
-internal static class CharacterInventoryTargetPrefilterAddInventoryItemPatch
+internal static class CharacterPlanningAgentItemHolderPrefilterAddInventoryItemPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.GetDeclaredMethods(typeof(Character)).First(method =>
@@ -35,14 +35,14 @@ internal static class CharacterInventoryTargetPrefilterAddInventoryItemPatch
         if (__result)
         {
             int charId = __instance.GetId();
-            CharacterInventoryTargetPrefilter.AddPossibleHolder(charId, itemKey);
-            CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
+            CharacterPlanningAgentItemHolderPrefilter.AddPossibleHolder(charId, itemKey);
+            CharacterMatcherStageCache.InvalidateInventoryTarget(charId);
         }
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterInventoryTargetPrefilterOfflineCreateInventoryItemPatch
+internal static class CharacterPlanningAgentItemHolderPrefilterOfflineCreateInventoryItemPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -56,14 +56,14 @@ internal static class CharacterInventoryTargetPrefilterOfflineCreateInventoryIte
         if (amount > 0)
         {
             int charId = __instance.GetId();
-            CharacterInventoryTargetPrefilter.AddPossibleHolder(charId, itemType, templateId);
-            CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
+            CharacterPlanningAgentItemHolderPrefilter.AddPossibleHolder(charId, itemType, templateId);
+            CharacterMatcherStageCache.InvalidateInventoryTarget(charId);
         }
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterInventoryTargetPrefilterChangeEquipmentPatch
+internal static class CharacterPlanningAgentItemHolderPrefilterChangeEquipmentPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -74,15 +74,15 @@ internal static class CharacterInventoryTargetPrefilterChangeEquipmentPatch
     // 换装可能把装备放回背包；作为预过滤只允许扩大可能持有者集合。
     private static void Postfix(Character __instance)
     {
-        CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
+        CharacterPlanningAgentItemHolderPrefilter.AddCurrentInventory(__instance);
         int charId = __instance.GetId();
-        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
-        CharacterActionTargetMatcherStageCache.InvalidateEquipmentTarget(charId);
+        CharacterMatcherStageCache.InvalidateInventoryTarget(charId);
+        CharacterMatcherStageCache.InvalidateEquipmentTarget(charId);
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterInventoryTargetPrefilterSetInventoryPatch
+internal static class CharacterPlanningAgentItemHolderPrefilterSetInventoryPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -94,13 +94,13 @@ internal static class CharacterInventoryTargetPrefilterSetInventoryPatch
     private static void Postfix(Character __instance)
     {
         int charId = __instance.GetId();
-        CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
-        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
+        CharacterPlanningAgentItemHolderPrefilter.AddCurrentInventory(__instance);
+        CharacterMatcherStageCache.InvalidateInventoryTarget(charId);
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterInventoryTargetPrefilterChangeEquipmentArrayPatch
+internal static class CharacterPlanningAgentItemHolderPrefilterChangeEquipmentArrayPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -111,15 +111,15 @@ internal static class CharacterInventoryTargetPrefilterChangeEquipmentArrayPatch
     // 批量换装同样只做单调扩大，不从预过滤集合删除任何旧持有者。
     private static void Postfix(Character __instance)
     {
-        CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
+        CharacterPlanningAgentItemHolderPrefilter.AddCurrentInventory(__instance);
         int charId = __instance.GetId();
-        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
-        CharacterActionTargetMatcherStageCache.InvalidateEquipmentTarget(charId);
+        CharacterMatcherStageCache.InvalidateInventoryTarget(charId);
+        CharacterMatcherStageCache.InvalidateEquipmentTarget(charId);
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterInventoryTargetPrefilterAttachPoisonsPatch
+internal static class CharacterPlanningAgentItemHolderPrefilterAttachPoisonsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -130,13 +130,13 @@ internal static class CharacterInventoryTargetPrefilterAttachPoisonsPatch
     // 淬毒可能替换物品 key；合并当前背包可覆盖所有成功变化。
     private static void Postfix(Character __instance)
     {
-        CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
-        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(__instance.GetId());
+        CharacterPlanningAgentItemHolderPrefilter.AddCurrentInventory(__instance);
+        CharacterMatcherStageCache.InvalidateInventoryTarget(__instance.GetId());
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterInventoryTargetPrefilterOnDeathTransferWugKingsPatch
+internal static class CharacterPlanningAgentItemHolderPrefilterOnDeathTransferWugKingsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -147,7 +147,7 @@ internal static class CharacterInventoryTargetPrefilterOnDeathTransferWugKingsPa
     // 死亡蛊转移会直接写入背包；只扩展可能持有者集合。
     private static void Postfix(Character __instance)
     {
-        CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
-        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(__instance.GetId());
+        CharacterPlanningAgentItemHolderPrefilter.AddCurrentInventory(__instance);
+        CharacterMatcherStageCache.InvalidateInventoryTarget(__instance.GetId());
     }
 }

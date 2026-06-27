@@ -17,7 +17,7 @@ internal static class CharacterPlanningAgentSelectActionTargetPatch
 {
     private static bool Prepare() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.EnableCharacterActionTargetLookupCache;
+        TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -82,7 +82,7 @@ internal static class CharacterPlanningAgentSelectActionTargetGroupPatch
 {
     private static bool Prepare() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.EnableCharacterActionTargetLookupCache;
+        TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(

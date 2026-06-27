@@ -2,7 +2,7 @@ return {
 	AdvanceMonthOptimizationEnabled = true,
 	ProtectNeighborStatesForAdvanceMonthOptimization = true,
 	AdvanceMonthOptimizationFrameBudgetMs = 2,
-	EnableCharacterActionTargetLookupCache = true,
+	EnableCharacterActionPlanningOptimization = true,
 	SaveWorldDatabaseCopyBufferTier = 4,
 	SaveWorldNoCompression = true,
 	ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false,

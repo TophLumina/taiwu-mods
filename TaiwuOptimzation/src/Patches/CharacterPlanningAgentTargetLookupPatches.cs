@@ -14,7 +14,7 @@ using Character = GameData.Domains.Character.Character;
 namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch]
-internal static class CharacterActionTargetLookupCacheScopePatch
+internal static class CharacterPlanningAgentTargetLookupCacheScopePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -25,22 +25,22 @@ internal static class CharacterActionTargetLookupCacheScopePatch
     // 只在原版离线规划阶段启用候选查找索引；补全阶段仍走原版扫描。
     private static void Prefix(ActionPlanningData.ECurrentGoalType goalType)
     {
-        CharacterActionTargetLookupCache.EnterOfflineCurrentGoalActions(goalType);
-        CharacterGoalTargetConditionPrefilter.EnterOfflineCurrentGoalActions();
-        CharacterActionTargetMatcherStageCache.EnterOfflineCurrentGoalActions();
+        CharacterPlanningAgentTargetLookupCache.EnterOfflineCurrentGoalActions(goalType);
+        CharacterPlanningAgentTargetPrefilter.EnterOfflineCurrentGoalActions();
+        CharacterMatcherStageCache.EnterOfflineCurrentGoalActions();
     }
 
     private static Exception? Finalizer(Exception? __exception)
     {
-        CharacterActionTargetMatcherStageCache.LeaveOfflineCurrentGoalActions();
-        CharacterGoalTargetConditionPrefilter.LeaveOfflineCurrentGoalActions();
-        CharacterActionTargetLookupCache.LeaveOfflineCurrentGoalActions();
+        CharacterMatcherStageCache.LeaveOfflineCurrentGoalActions();
+        CharacterPlanningAgentTargetPrefilter.LeaveOfflineCurrentGoalActions();
+        CharacterPlanningAgentTargetLookupCache.LeaveOfflineCurrentGoalActions();
         return __exception;
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterActionTargetLookupCacheBlockPatch
+internal static class CharacterPlanningAgentTargetLookupCacheBlockPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -50,11 +50,11 @@ internal static class CharacterActionTargetLookupCacheBlockPatch
 
     // SameBlock 查询直接从地块索引追加候选；失败时回退原版。
     private static bool Prefix(CharacterPlanningAgent __instance, List<Character> characters, MapBlockData mapBlockData) =>
-        !CharacterActionTargetLookupCache.TryAddCharactersInBlock(__instance, characters, mapBlockData);
+        !CharacterPlanningAgentTargetLookupCache.TryAddCharactersInBlock(__instance, characters, mapBlockData);
 }
 
 [HarmonyPatch]
-internal static class CharacterActionTargetLookupCacheAreaPatch
+internal static class CharacterPlanningAgentTargetLookupCacheAreaPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -64,11 +64,11 @@ internal static class CharacterActionTargetLookupCacheAreaPatch
 
     // SameArea 查询避免反复扫描地区内所有地块。
     private static bool Prefix(CharacterPlanningAgent __instance, List<Character> characters, short areaId) =>
-        !CharacterActionTargetLookupCache.TryAddCharactersInArea(__instance, characters, areaId);
+        !CharacterPlanningAgentTargetLookupCache.TryAddCharactersInArea(__instance, characters, areaId);
 }
 
 [HarmonyPatch]
-internal static class CharacterActionTargetLookupCacheStatePatch
+internal static class CharacterPlanningAgentTargetLookupCacheStatePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -78,11 +78,11 @@ internal static class CharacterActionTargetLookupCacheStatePatch
 
     // SameState 查询通常最重，直接使用 state -> charIds 索引。
     private static bool Prefix(CharacterPlanningAgent __instance, List<Character> characters, sbyte stateId) =>
-        !CharacterActionTargetLookupCache.TryAddCharactersInState(__instance, characters, stateId);
+        !CharacterPlanningAgentTargetLookupCache.TryAddCharactersInState(__instance, characters, stateId);
 }
 
 [HarmonyPatch]
-internal static class CharacterActionTargetLookupCacheBlockRangePatch
+internal static class CharacterPlanningAgentTargetLookupCacheBlockRangePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -96,11 +96,11 @@ internal static class CharacterActionTargetLookupCacheBlockRangePatch
         List<Character> characters,
         Location location,
         int steps) =>
-        !CharacterActionTargetLookupCache.TryAddCharactersInBlockRange(__instance, characters, location, steps);
+        !CharacterPlanningAgentTargetLookupCache.TryAddCharactersInBlockRange(__instance, characters, location, steps);
 }
 
 [HarmonyPatch]
-internal static class CharacterActionTargetLookupCacheSettlementPatch
+internal static class CharacterPlanningAgentTargetLookupCacheSettlementPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -113,12 +113,12 @@ internal static class CharacterActionTargetLookupCacheSettlementPatch
         CharacterPlanningAgent __instance,
         List<Character> characters,
         Location settlementLocation) =>
-        !CharacterActionTargetLookupCache.TryAddCharactersInSettlementRange(__instance, characters, settlementLocation);
+        !CharacterPlanningAgentTargetLookupCache.TryAddCharactersInSettlementRange(__instance, characters, settlementLocation);
 }
 
 [HarmonyPatch]
 [HarmonyPriority(Priority.First)]
-internal static class CharacterGoalTargetConditionPrefilterFilterPatch
+internal static class CharacterPlanningAgentTargetPrefilterFilterPatch
 {
     private static readonly AccessTools.FieldRef<CharacterPlanningAgent, PlanningGoalNode> CurrentPlanningGoalRef =
         AccessTools.FieldRefAccess<CharacterPlanningAgent, PlanningGoalNode>("_currPlanningGoal");
@@ -151,7 +151,7 @@ internal static class CharacterGoalTargetConditionPrefilterFilterPatch
         __state = null;
         try
         {
-            if (CharacterGoalTargetConditionPrefilter.TryPrefilterCandidates(
+            if (CharacterPlanningAgentTargetPrefilter.TryPrefilterCandidates(
                     __instance,
                     CurrentPlanningGoalRef(__instance),
                     CurrentPlanningActionRef(__instance),
@@ -167,14 +167,14 @@ internal static class CharacterGoalTargetConditionPrefilterFilterPatch
         catch (Exception exception)
         {
             // 预过滤只是加速路径，失败时必须保持原版候选列表。
-            CharacterGoalTargetConditionPrefilter.RecordException(exception);
+            CharacterPlanningAgentTargetPrefilter.RecordException(exception);
             __state = null;
         }
     }
 
     private static Exception? Finalizer(List<Character>? __state, Exception? __exception)
     {
-        CharacterGoalTargetConditionPrefilter.ReturnCandidateList(__state);
+        CharacterPlanningAgentTargetPrefilter.ReturnCandidateList(__state);
         return __exception;
     }
 }

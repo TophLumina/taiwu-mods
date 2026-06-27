@@ -48,7 +48,7 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
 }
 
 [HarmonyPatch]
-internal static class CharacterGoalTargetConditionPrefilterAddRelationPatch
+internal static class CharacterPlanningAgentTargetPrefilterAddRelationPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -64,7 +64,7 @@ internal static class CharacterGoalTargetConditionPrefilterAddRelationPatch
 }
 
 [HarmonyPatch]
-internal static class CharacterGoalTargetConditionPrefilterChangeRelationTypePatch
+internal static class CharacterPlanningAgentTargetPrefilterChangeRelationTypePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -80,7 +80,7 @@ internal static class CharacterGoalTargetConditionPrefilterChangeRelationTypePat
 }
 
 [HarmonyPatch]
-internal static class CharacterGoalTargetConditionPrefilterRemoveRelationPatch
+internal static class CharacterPlanningAgentTargetPrefilterRemoveRelationPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -96,7 +96,7 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveRelationPatch
 }
 
 [HarmonyPatch]
-internal static class CharacterGoalTargetConditionPrefilterRemoveAllGeneralRelationsPatch
+internal static class CharacterPlanningAgentTargetPrefilterRemoveAllGeneralRelationsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -110,7 +110,7 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveAllGeneralRelat
 }
 
 [HarmonyPatch]
-internal static class CharacterGoalTargetConditionPrefilterRemoveAllRelationsPatch
+internal static class CharacterPlanningAgentTargetPrefilterRemoveAllRelationsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -127,26 +127,26 @@ internal static class UpdateCurrentGoalActionsCacheInvalidation
 {
     public static void InvalidateBidirectionalRelationMutation(int charId, int relatedCharId)
     {
-        CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(charId, relatedCharId);
-        CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(relatedCharId, charId);
-        CharacterActionTargetMatcherStageCache.InvalidateRelationTargets(charId, relatedCharId);
+        CharacterPlanningAgentTargetPrefilter.InvalidateRelationMutation(charId, relatedCharId);
+        CharacterPlanningAgentTargetPrefilter.InvalidateRelationMutation(relatedCharId, charId);
+        CharacterMatcherStageCache.InvalidateRelationTargets(charId, relatedCharId);
     }
 
     public static void InvalidateRelationMutation(int charId, int relatedCharId)
     {
-        CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(charId, relatedCharId);
-        CharacterActionTargetMatcherStageCache.InvalidateRelationTargets(charId, relatedCharId);
+        CharacterPlanningAgentTargetPrefilter.InvalidateRelationMutation(charId, relatedCharId);
+        CharacterMatcherStageCache.InvalidateRelationTargets(charId, relatedCharId);
     }
 
     public static void InvalidateRelationSet(int charId)
     {
-        CharacterGoalTargetConditionPrefilter.InvalidateForRelationMutation();
+        CharacterPlanningAgentTargetPrefilter.InvalidateForRelationMutation();
         if (charId == DomainManager.Taiwu.GetTaiwuCharId())
         {
-            CharacterActionTargetMatcherStageCache.InvalidateAll();
+            CharacterMatcherStageCache.InvalidateAll();
             return;
         }
 
-        CharacterActionTargetMatcherStageCache.InvalidateTarget(charId);
+        CharacterMatcherStageCache.InvalidateTarget(charId);
     }
 }

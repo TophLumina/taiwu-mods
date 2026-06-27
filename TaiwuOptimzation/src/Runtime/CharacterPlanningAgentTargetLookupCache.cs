@@ -9,18 +9,18 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class CharacterActionTargetLookupCache
+internal static class CharacterPlanningAgentTargetLookupCache
 {
     private static readonly object SyncRoot = new();
 
-    private static CharacterActionPlanningSnapshot? _frozenSnapshot;
+    private static OfflineCurrentGoalActionTargetSnapshot? _frozenSnapshot;
     private static int _locationEpoch;
 
     [ThreadStatic]
     private static int _offlineCurrentGoalActionScopeDepth;
 
     [ThreadStatic]
-    private static CharacterActionPlanningSnapshot? _offlineTargetLookupSnapshot;
+    private static OfflineCurrentGoalActionTargetSnapshot? _offlineTargetLookupSnapshot;
 
     [ThreadStatic]
     private static List<MapBlockData>? _blockRangeScratch;
@@ -66,7 +66,7 @@ internal static class CharacterActionTargetLookupCache
         }
 
         int locationEpoch = Volatile.Read(ref _locationEpoch);
-        CharacterActionPlanningSnapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
+        OfflineCurrentGoalActionTargetSnapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
         if (snapshot != null && snapshot.LocationEpoch == locationEpoch)
         {
             return;
@@ -78,7 +78,7 @@ internal static class CharacterActionTargetLookupCache
             snapshot = Volatile.Read(ref _frozenSnapshot);
             if (snapshot == null || snapshot.LocationEpoch != locationEpoch)
             {
-                Volatile.Write(ref _frozenSnapshot, CharacterActionPlanningSnapshot.Build(locationEpoch));
+                Volatile.Write(ref _frozenSnapshot, OfflineCurrentGoalActionTargetSnapshot.Build(locationEpoch));
             }
         }
     }
@@ -88,7 +88,7 @@ internal static class CharacterActionTargetLookupCache
         Interlocked.Increment(ref _locationEpoch);
 
     /// <summary>返回当前 planning 阶段共享快照；关系和物品预过滤在同一构建屏障内复用它。</summary>
-    public static bool TryGetFrozenPlanningSnapshot(out CharacterActionPlanningSnapshot snapshot)
+    public static bool TryGetFrozenPlanningSnapshot(out OfflineCurrentGoalActionTargetSnapshot snapshot)
     {
         snapshot = Volatile.Read(ref _frozenSnapshot)!;
         return snapshot != null;
@@ -119,16 +119,16 @@ internal static class CharacterActionTargetLookupCache
     /// <summary>尝试用冻结快照追加同一地块候选角色。</summary>
     public static bool TryAddCharactersInBlock(CharacterPlanningAgent agent, List<Character> characters, MapBlockData block)
     {
-        if (!TryGetFrozenSnapshot(out CharacterActionPlanningSnapshot? snapshot))
+        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SameBlock, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterPlanningAgentTargetLookupKind.SameBlock, false, 0, 0);
             return false;
         }
 
         int[] characterIds = snapshot!.GetBlockCharacterIds(block.AreaId, block.BlockId);
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            CharacterActionTargetLookupKind.SameBlock,
+            CharacterPlanningAgentTargetLookupKind.SameBlock,
             true,
             characterIds.Length,
             added);
@@ -138,18 +138,18 @@ internal static class CharacterActionTargetLookupCache
     /// <summary>尝试用冻结快照追加同一地区候选角色。</summary>
     public static bool TryAddCharactersInArea(CharacterPlanningAgent agent, List<Character> characters, short areaId)
     {
-        if (!TryGetFrozenSnapshot(out CharacterActionPlanningSnapshot? snapshot) ||
+        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot) ||
             areaId < 0 ||
             areaId >= snapshot!.AreaCharacterIds.Length)
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SameArea, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterPlanningAgentTargetLookupKind.SameArea, false, 0, 0);
             return false;
         }
 
         int[] characterIds = snapshot.AreaCharacterIds[areaId];
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            CharacterActionTargetLookupKind.SameArea,
+            CharacterPlanningAgentTargetLookupKind.SameArea,
             true,
             characterIds.Length,
             added);
@@ -159,16 +159,16 @@ internal static class CharacterActionTargetLookupCache
     /// <summary>尝试用冻结快照追加同一州域候选角色。</summary>
     public static bool TryAddCharactersInState(CharacterPlanningAgent agent, List<Character> characters, sbyte stateId)
     {
-        if (!TryGetFrozenSnapshot(out CharacterActionPlanningSnapshot? snapshot) ||
+        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot) ||
             !snapshot!.StateCharacterIds.TryGetValue(stateId, out int[]? characterIds))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SameState, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterPlanningAgentTargetLookupKind.SameState, false, 0, 0);
             return false;
         }
 
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            CharacterActionTargetLookupKind.SameState,
+            CharacterPlanningAgentTargetLookupKind.SameState,
             true,
             characterIds.Length,
             added);
@@ -182,9 +182,9 @@ internal static class CharacterActionTargetLookupCache
         Location location,
         int steps)
     {
-        if (!TryGetFrozenSnapshot(out CharacterActionPlanningSnapshot? snapshot))
+        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.BlockRange, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterPlanningAgentTargetLookupKind.BlockRange, false, 0, 0);
             return false;
         }
 
@@ -201,7 +201,7 @@ internal static class CharacterActionTargetLookupCache
         }
 
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            CharacterActionTargetLookupKind.BlockRange,
+            CharacterPlanningAgentTargetLookupKind.BlockRange,
             true,
             candidateIds,
             characters.Count - beforeCount);
@@ -215,16 +215,16 @@ internal static class CharacterActionTargetLookupCache
         List<Character> characters,
         Location settlementLocation)
     {
-        if (!TryGetFrozenSnapshot(out CharacterActionPlanningSnapshot? snapshot))
+        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterActionTargetLookupKind.SettlementRange, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(CharacterPlanningAgentTargetLookupKind.SettlementRange, false, 0, 0);
             return false;
         }
 
         int[] characterIds = snapshot!.GetSettlementCharacterIds(settlementLocation);
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            CharacterActionTargetLookupKind.SettlementRange,
+            CharacterPlanningAgentTargetLookupKind.SettlementRange,
             true,
             characterIds.Length,
             added);
@@ -233,9 +233,9 @@ internal static class CharacterActionTargetLookupCache
 
     private static bool IsEnabled() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.EnableCharacterActionTargetLookupCache;
+        TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
-    private static bool TryGetFrozenSnapshot(out CharacterActionPlanningSnapshot? snapshot)
+    private static bool TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot)
     {
         snapshot = null;
         if (_offlineCurrentGoalActionScopeDepth <= 0)

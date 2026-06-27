@@ -11,7 +11,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class CharacterGoalTargetConditionPrefilter
+internal static class CharacterPlanningAgentTargetPrefilter
 {
     private const int HasCandidateSet = 1;
     private const int UnknownCandidateSet = 2;
@@ -57,8 +57,8 @@ internal static class CharacterGoalTargetConditionPrefilter
 
         try
         {
-            if (!CharacterActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
-                    out CharacterActionPlanningSnapshot planningSnapshot) ||
+            if (!CharacterPlanningAgentTargetLookupCache.TryGetFrozenPlanningSnapshot(
+                    out OfflineCurrentGoalActionTargetSnapshot planningSnapshot) ||
                 planningSnapshot.CharacterRecords.Length == 0)
             {
                 UnfreezeAndInvalidate();
@@ -177,10 +177,10 @@ internal static class CharacterGoalTargetConditionPrefilter
         }
 
         HashSet<int>? selectorRelationCandidates = TryGetSelectorRelationCandidateSet(actorCharId, currentAction);
-        bool hasInventoryFilter = CharacterInventoryTargetPrefilter.TryCreateHolderFilter(
+        bool hasInventoryFilter = CharacterPlanningAgentItemHolderPrefilter.TryCreateHolderFilter(
             currentAction,
             actionArgs,
-            out CharacterInventoryTargetPrefilter.HolderFilter inventoryFilter);
+            out CharacterPlanningAgentItemHolderPrefilter.HolderFilter inventoryFilter);
 
         if (goalCandidates == null &&
             actionCandidates == null &&
@@ -261,9 +261,9 @@ internal static class CharacterGoalTargetConditionPrefilter
 
     private static bool IsEnabled() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.EnableCharacterActionTargetLookupCache;
+        TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
-    private static Snapshot BuildSnapshot(CharacterActionPlanningCharacterRecord[] characterRecords)
+    private static Snapshot BuildSnapshot(OfflineCurrentGoalActionTargetRecord[] characterRecords)
     {
         Dictionary<long, HashSet<int>> actorCandidateSets = new(characterRecords.Length * ActorRelativeStates.Length / 2);
         Dictionary<int, HashSet<int>> directRelationCandidateSets = new(characterRecords.Length);
@@ -273,7 +273,7 @@ internal static class CharacterGoalTargetConditionPrefilter
 
         BuildCharacterTargetGroups(characterRecords, globalCandidateSets, factionCandidateSets, belongAreaCandidateSets);
 
-        foreach (CharacterActionPlanningCharacterRecord record in characterRecords)
+        foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
         {
             int actorCharId = record.CharId;
             HashSet<int> directRelationSet = BuildDirectRelationCandidateSet(actorCharId);
@@ -295,7 +295,7 @@ internal static class CharacterGoalTargetConditionPrefilter
     }
 
     private static void BuildCharacterTargetGroups(
-        CharacterActionPlanningCharacterRecord[] characterRecords,
+        OfflineCurrentGoalActionTargetRecord[] characterRecords,
         Dictionary<int, HashSet<int>> globalCandidateSets,
         Dictionary<int, HashSet<int>> factionCandidateSets,
         Dictionary<short, HashSet<int>> belongAreaCandidateSets)
@@ -306,7 +306,7 @@ internal static class CharacterGoalTargetConditionPrefilter
             AddToSet(globalCandidateSets, 296, taiwuCharId);
         }
 
-        foreach (CharacterActionPlanningCharacterRecord record in characterRecords)
+        foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
         {
             int charId = record.CharId;
             Character character = record.Character;

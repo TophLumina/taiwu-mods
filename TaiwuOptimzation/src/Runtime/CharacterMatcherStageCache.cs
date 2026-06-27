@@ -8,7 +8,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class CharacterActionTargetMatcherStageCache
+internal static class CharacterMatcherStageCache
 {
     private static readonly ConcurrentDictionary<TargetMatcherKey, bool> StageCache = new();
     private static readonly ConcurrentDictionary<int, TargetVersionState> TargetVersions = new();
@@ -232,7 +232,7 @@ internal static class CharacterActionTargetMatcherStageCache
 
     private static bool IsEnabled() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.EnableCharacterActionTargetLookupCache;
+        TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
     private static bool TryAnalyzeDependencies(
         CharacterMatcherItem matcherItem,
