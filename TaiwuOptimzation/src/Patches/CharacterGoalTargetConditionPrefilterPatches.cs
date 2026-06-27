@@ -3,6 +3,7 @@ using System.Reflection;
 using GameData.ActionPlanning;
 using GameData.ActionPlanning.Interface;
 using GameData.Common;
+using GameData.Domains;
 using GameData.Domains.Character;
 using GameData.Domains.Character.Ai.ParallelAdvanceMonth;
 using GameData.Domains.Character.Ai.ParallelAdvanceMonth.Definition;
@@ -22,7 +23,7 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
             nameof(ParallelActionManager.Execute),
             new[] { typeof(DataMonitorManager), typeof(ICharacterParallelAction) });
 
-    // 原版 CharacterRelationsUpdate 位于 NPC 行动规划之前；快照必须在该屏障之后冻结。
+    // 原版 CharacterRelationsUpdate 位于 NPC 行动规划之前，快照必须在该屏障之后冻结。
     private static void Prefix(ICharacterParallelAction action)
     {
         Type actionType = action.GetType();
@@ -47,6 +48,22 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
 }
 
 [HarmonyPatch]
+internal static class CharacterGoalTargetConditionPrefilterAddRelationPatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(CharacterDomain),
+            nameof(CharacterDomain.AddRelation),
+            new[] { typeof(DataContext), typeof(int), typeof(int), typeof(ushort), typeof(int) });
+
+    // 新增关系只标记相关 actor/state dirty，不废弃整张预过滤快照。
+    private static void Postfix(
+        [HarmonyArgument(1)] int charId,
+        [HarmonyArgument(2)] int relatedCharId) =>
+        UpdateCurrentGoalActionsCacheInvalidation.InvalidateBidirectionalRelationMutation(charId, relatedCharId);
+}
+
+[HarmonyPatch]
 internal static class CharacterGoalTargetConditionPrefilterChangeRelationTypePatch
 {
     private static MethodBase TargetMethod() =>
@@ -55,9 +72,11 @@ internal static class CharacterGoalTargetConditionPrefilterChangeRelationTypePat
             nameof(CharacterDomain.ChangeRelationType),
             new[] { typeof(DataContext), typeof(int), typeof(int), typeof(ushort), typeof(ushort) });
 
-    // 关系类型改变后不能继续使用旧快照。
-    private static void Postfix() =>
-        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
+    // 单条关系变化只标记相关 actor/state dirty，不废弃整张预过滤快照。
+    private static void Postfix(
+        [HarmonyArgument(1)] int charId,
+        [HarmonyArgument(2)] int relatedCharId) =>
+        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationMutation(charId, relatedCharId);
 }
 
 [HarmonyPatch]
@@ -69,9 +88,11 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveRelationPatch
             nameof(CharacterDomain.RemoveRelation),
             new[] { typeof(DataContext), typeof(int), typeof(int) });
 
-    // 删除关系后不能继续使用旧快照。
-    private static void Postfix() =>
-        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
+    // 单条关系删除只标记相关 actor/state dirty，不废弃整张预过滤快照。
+    private static void Postfix(
+        [HarmonyArgument(1)] int charId,
+        [HarmonyArgument(2)] int relatedCharId) =>
+        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationMutation(charId, relatedCharId);
 }
 
 [HarmonyPatch]
@@ -83,9 +104,9 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveAllGeneralRelat
             nameof(CharacterDomain.RemoveAllGeneralRelations),
             new[] { typeof(DataContext), typeof(int) });
 
-    // 批量删除泛关系后不能继续使用旧快照。
-    private static void Postfix() =>
-        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
+    // 批量删除无法精确枚举全部反向受影响者，保守废弃预过滤快照。
+    private static void Postfix([HarmonyArgument(1)] int charId) =>
+        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationSet(charId);
 }
 
 [HarmonyPatch]
@@ -97,16 +118,35 @@ internal static class CharacterGoalTargetConditionPrefilterRemoveAllRelationsPat
             nameof(CharacterDomain.RemoveAllRelations),
             new[] { typeof(DataContext), typeof(int), typeof(bool) });
 
-    // 批量删除全部关系后不能继续使用旧快照。
-    private static void Postfix() =>
-        UpdateCurrentGoalActionsCacheInvalidation.Invalidate();
+    // 批量删除无法精确枚举全部反向受影响者，保守废弃预过滤快照。
+    private static void Postfix([HarmonyArgument(1)] int charId) =>
+        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationSet(charId);
 }
 
 internal static class UpdateCurrentGoalActionsCacheInvalidation
 {
-    public static void Invalidate()
+    public static void InvalidateBidirectionalRelationMutation(int charId, int relatedCharId)
+    {
+        CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(charId, relatedCharId);
+        CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(relatedCharId, charId);
+        CharacterActionTargetMatcherStageCache.InvalidateTargets(charId, relatedCharId);
+    }
+
+    public static void InvalidateRelationMutation(int charId, int relatedCharId)
+    {
+        CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(charId, relatedCharId);
+        CharacterActionTargetMatcherStageCache.InvalidateTargets(charId, relatedCharId);
+    }
+
+    public static void InvalidateRelationSet(int charId)
     {
         CharacterGoalTargetConditionPrefilter.InvalidateForRelationMutation();
-        CharacterActionTargetMatcherStageCache.InvalidateForRelationMutation();
+        if (charId == DomainManager.Taiwu.GetTaiwuCharId())
+        {
+            CharacterActionTargetMatcherStageCache.InvalidateAll();
+            return;
+        }
+
+        CharacterActionTargetMatcherStageCache.InvalidateTarget(charId);
     }
 }

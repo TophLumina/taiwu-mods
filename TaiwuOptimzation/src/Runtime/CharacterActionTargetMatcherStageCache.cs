@@ -10,6 +10,7 @@ namespace TaiwuOptimization.Runtime;
 internal static class CharacterActionTargetMatcherStageCache
 {
     private static readonly ConcurrentDictionary<TargetMatcherKey, bool> StageCache = new();
+    private static readonly ConcurrentDictionary<int, int> TargetVersions = new();
 
     private static volatile bool _stageActive;
 
@@ -20,6 +21,7 @@ internal static class CharacterActionTargetMatcherStageCache
     public static void BeginUpdateCurrentGoalActionsStage()
     {
         StageCache.Clear();
+        TargetVersions.Clear();
         _stageActive = IsEnabled();
     }
 
@@ -28,6 +30,7 @@ internal static class CharacterActionTargetMatcherStageCache
     {
         _stageActive = false;
         StageCache.Clear();
+        TargetVersions.Clear();
     }
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 热路径。</summary>
@@ -48,16 +51,40 @@ internal static class CharacterActionTargetMatcherStageCache
         }
     }
 
-    /// <summary>关系删除或类型变化后关闭本阶段缓存；新增关系按冻结语义留到下月生效。</summary>
-    public static void InvalidateForRelationMutation()
+    /// <summary>目标角色的 matcher 相关状态变化后，只推进该角色的缓存版本。</summary>
+    public static void InvalidateTarget(int targetCharId)
+    {
+        if (!_stageActive || targetCharId < 0)
+        {
+            return;
+        }
+
+        TargetVersions.AddOrUpdate(
+            targetCharId,
+            static _ => 1,
+            static (_, version) => version == int.MaxValue ? 1 : version + 1);
+    }
+
+    /// <summary>双向关系变化会影响两名角色各自作为 target 时的 matcher 结果。</summary>
+    public static void InvalidateTargets(int firstCharId, int secondCharId)
+    {
+        InvalidateTarget(firstCharId);
+        if (secondCharId != firstCharId)
+        {
+            InvalidateTarget(secondCharId);
+        }
+    }
+
+    /// <summary>批量关系重写等无法精确定位时，清空本阶段 matcher 缓存但保留优化入口。</summary>
+    public static void InvalidateAll()
     {
         if (!_stageActive)
         {
             return;
         }
 
-        _stageActive = false;
         StageCache.Clear();
+        TargetVersions.Clear();
     }
 
     /// <summary>清理全部运行时状态，供退出世界、切档或插件卸载时调用。</summary>
@@ -65,6 +92,7 @@ internal static class CharacterActionTargetMatcherStageCache
     {
         _stageActive = false;
         StageCache.Clear();
+        TargetVersions.Clear();
         _offlineCurrentGoalActionScopeDepth = 0;
     }
 
@@ -78,7 +106,9 @@ internal static class CharacterActionTargetMatcherStageCache
             return fallbackResult;
         }
 
-        var key = new TargetMatcherKey(matcherItem, targetChar.GetId());
+        int targetCharId = targetChar.GetId();
+        int targetVersion = TargetVersions.TryGetValue(targetCharId, out int version) ? version : 0;
+        var key = new TargetMatcherKey(matcherItem, targetCharId, targetVersion);
         if (StageCache.TryGetValue(key, out bool cachedResult))
         {
             CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheHit(cachedResult);
@@ -99,20 +129,24 @@ internal static class CharacterActionTargetMatcherStageCache
     {
         private readonly CharacterMatcherItem _matcherItem;
         private readonly int _targetCharId;
+        private readonly int _targetVersion;
 
-        public TargetMatcherKey(CharacterMatcherItem matcherItem, int targetCharId)
+        public TargetMatcherKey(CharacterMatcherItem matcherItem, int targetCharId, int targetVersion)
         {
             _matcherItem = matcherItem;
             _targetCharId = targetCharId;
+            _targetVersion = targetVersion;
         }
 
         public bool Equals(TargetMatcherKey other) =>
-            ReferenceEquals(_matcherItem, other._matcherItem) && _targetCharId == other._targetCharId;
+            ReferenceEquals(_matcherItem, other._matcherItem) &&
+            _targetCharId == other._targetCharId &&
+            _targetVersion == other._targetVersion;
 
         public override bool Equals(object? obj) =>
             obj is TargetMatcherKey other && Equals(other);
 
         public override int GetHashCode() =>
-            HashCode.Combine(RuntimeHelpers.GetHashCode(_matcherItem), _targetCharId);
+            HashCode.Combine(RuntimeHelpers.GetHashCode(_matcherItem), _targetCharId, _targetVersion);
     }
 }

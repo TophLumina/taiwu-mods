@@ -126,6 +126,9 @@ internal static class CharacterGoalTargetConditionPrefilterFilterPatch
     private static readonly AccessTools.FieldRef<CharacterPlanningAgent, PlanningActionNode> CurrentPlanningActionRef =
         AccessTools.FieldRefAccess<CharacterPlanningAgent, PlanningActionNode>("_currPlanningAction");
 
+    private static readonly AccessTools.FieldRef<CharacterPlanningAgent, ContextArgGroupHandle> ActionContextArgsRef =
+        AccessTools.FieldRefAccess<CharacterPlanningAgent, ContextArgGroupHandle>("_actionContextArgs");
+
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
             typeof(CharacterPlanningAgent),
@@ -152,6 +155,7 @@ internal static class CharacterGoalTargetConditionPrefilterFilterPatch
                     __instance,
                     CurrentPlanningGoalRef(__instance),
                     CurrentPlanningActionRef(__instance),
+                    ActionContextArgsRef(__instance),
                     selectableCharacters,
                     out IReadOnlyList<Character> filtered,
                     out List<Character>? rentedList))

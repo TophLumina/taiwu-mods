@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using Config;
@@ -19,6 +20,16 @@ internal static class CharacterGoalTargetConditionPrefilter
     private static readonly int[] ActorRelativeStates =
     {
         302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 316,
+    };
+
+    private static readonly int[] DirectRelationStates =
+    {
+        302, 303, 304, 312,
+    };
+
+    private static readonly int[] ReversedRelationStates =
+    {
+        304, 305, 306, 307, 308, 309, 310, 311, 312, 313,
     };
 
     private static readonly HashSet<int> EmptyCandidateSet = new();
@@ -74,7 +85,7 @@ internal static class CharacterGoalTargetConditionPrefilter
         _candidateListPool?.Clear();
     }
 
-    /// <summary>删除或改写关系后关闭本轮预过滤；新增关系保留到下月自然生效。</summary>
+    /// <summary>批量关系变化后关闭本轮预过滤；单条关系变化使用 `InvalidateRelationMutation`。</summary>
     public static void InvalidateForRelationMutation()
     {
         if (!_isFrozen)
@@ -85,6 +96,18 @@ internal static class CharacterGoalTargetConditionPrefilter
         _isFrozen = false;
         Volatile.Write(ref _frozenSnapshot, null);
         _offlineTargetConditionSnapshot = null;
+    }
+
+    /// <summary>单条关系变化只标记受影响的 actor/state，下一次命中时局部重建。</summary>
+    public static void InvalidateRelationMutation(int charId, int relatedCharId)
+    {
+        if (!_isFrozen)
+        {
+            return;
+        }
+
+        Snapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
+        snapshot?.InvalidateRelationMutation(charId, relatedCharId);
     }
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 阶段。</summary>
@@ -119,6 +142,7 @@ internal static class CharacterGoalTargetConditionPrefilter
         CharacterPlanningAgent agent,
         PlanningGoalNode? currentGoal,
         PlanningActionNode? currentAction,
+        ContextArgGroupHandle actionArgs,
         IReadOnlyList<Character>? source,
         out IReadOnlyList<Character> filtered,
         out List<Character>? rentedList)
@@ -151,7 +175,12 @@ internal static class CharacterGoalTargetConditionPrefilter
             return false;
         }
 
-        if (goalCandidates == null && actionCandidates == null)
+        bool hasInventoryFilter = CharacterInventoryTargetPrefilter.TryCreateHolderFilter(
+            currentAction,
+            actionArgs,
+            out CharacterInventoryTargetPrefilter.HolderFilter inventoryFilter);
+
+        if (goalCandidates == null && actionCandidates == null && !hasInventoryFilter)
         {
             RecordSkip(CharacterRelationTargetPrefilterSkipReason.NoRelationRule);
             return false;
@@ -167,7 +196,8 @@ internal static class CharacterGoalTargetConditionPrefilter
 
             int candidateCharId = character.GetId();
             if ((goalCandidates == null || goalCandidates.Contains(candidateCharId)) &&
-                (actionCandidates == null || actionCandidates.Contains(candidateCharId)))
+                (actionCandidates == null || actionCandidates.Contains(candidateCharId)) &&
+                (!hasInventoryFilter || inventoryFilter.MayHold(candidateCharId)))
             {
                 result.Add(character);
             }
@@ -651,20 +681,41 @@ internal static class CharacterGoalTargetConditionPrefilter
 
     private sealed class Snapshot
     {
-        private readonly Dictionary<long, HashSet<int>> _actorCandidateSets;
+        private readonly ConcurrentDictionary<long, HashSet<int>> _actorCandidateSets;
         private readonly Dictionary<int, HashSet<int>> _globalCandidateSets;
+        private readonly ConcurrentDictionary<long, byte> _dirtyActorRelationStates = new();
+        private readonly object _dirtyRelationStatesLock = new();
 
         public Snapshot(
             Dictionary<long, HashSet<int>> actorCandidateSets,
             Dictionary<int, HashSet<int>> globalCandidateSets)
         {
-            _actorCandidateSets = actorCandidateSets;
+            _actorCandidateSets = new ConcurrentDictionary<long, HashSet<int>>(actorCandidateSets);
             _globalCandidateSets = globalCandidateSets;
+        }
+
+        public void InvalidateRelationMutation(int charId, int relatedCharId)
+        {
+            lock (_dirtyRelationStatesLock)
+            {
+                if (charId >= 0)
+                {
+                    MarkDirectRelationStatesDirty(charId);
+                }
+
+                if (relatedCharId >= 0)
+                {
+                    MarkReversedRelationStatesDirty(relatedCharId);
+                }
+            }
         }
 
         public HashSet<int> GetCandidateSet(int actorCharId, int stateTemplateId)
         {
-            if (_actorCandidateSets.TryGetValue(MakeStateKey(actorCharId, stateTemplateId), out HashSet<int>? actorSet))
+            long stateKey = MakeStateKey(actorCharId, stateTemplateId);
+            RebuildIfDirty(actorCharId, stateTemplateId, stateKey);
+
+            if (_actorCandidateSets.TryGetValue(stateKey, out HashSet<int>? actorSet))
             {
                 return actorSet;
             }
@@ -672,6 +723,50 @@ internal static class CharacterGoalTargetConditionPrefilter
             return _globalCandidateSets.TryGetValue(stateTemplateId, out HashSet<int>? globalSet)
                 ? globalSet
                 : EmptyCandidateSet;
+        }
+
+        private void MarkDirectRelationStatesDirty(int actorCharId)
+        {
+            foreach (int stateTemplateId in DirectRelationStates)
+            {
+                _dirtyActorRelationStates.TryAdd(MakeStateKey(actorCharId, stateTemplateId), 0);
+            }
+        }
+
+        private void MarkReversedRelationStatesDirty(int actorCharId)
+        {
+            foreach (int stateTemplateId in ReversedRelationStates)
+            {
+                _dirtyActorRelationStates.TryAdd(MakeStateKey(actorCharId, stateTemplateId), 0);
+            }
+        }
+
+        private void RebuildIfDirty(int actorCharId, int stateTemplateId, long stateKey)
+        {
+            if (!_dirtyActorRelationStates.ContainsKey(stateKey))
+            {
+                return;
+            }
+
+            lock (_dirtyRelationStatesLock)
+            {
+                if (!_dirtyActorRelationStates.ContainsKey(stateKey))
+                {
+                    return;
+                }
+
+                HashSet<int> rebuiltSet = BuildRelationCandidateSet(actorCharId, stateTemplateId);
+                if (rebuiltSet.Count == 0)
+                {
+                    _actorCandidateSets.TryRemove(stateKey, out _);
+                }
+                else
+                {
+                    _actorCandidateSets[stateKey] = rebuiltSet;
+                }
+
+                _dirtyActorRelationStates.TryRemove(stateKey, out _);
+            }
         }
     }
 }

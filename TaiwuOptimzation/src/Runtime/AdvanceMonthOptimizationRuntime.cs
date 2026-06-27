@@ -34,18 +34,23 @@ internal static class AdvanceMonthOptimizationRuntime
 
         CharacterActionTargetMatcherStageCache.BeginUpdateCurrentGoalActionsStage();
         long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
+        CharacterInventoryTargetPrefilter.FreezeBeforeUpdateCurrentGoalActions();
         CharacterGoalTargetConditionPrefilter.FreezeBeforeAdvanceMonth();
         CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
     }
 
     /// <summary>主/副目标行动阶段结束后释放只服务于该阶段的热路径缓存。</summary>
-    public static void EndUpdateCurrentGoalActionsOptimizationStage() =>
+    public static void EndUpdateCurrentGoalActionsOptimizationStage()
+    {
+        CharacterInventoryTargetPrefilter.Unfreeze();
         CharacterActionTargetMatcherStageCache.EndUpdateCurrentGoalActionsStage();
+    }
 
     /// <summary>过月结束后释放冻结快照，后续帧继续构建最新快照。</summary>
     public static void EndAdvanceMonthOptimizationScope()
     {
         AdvanceMonthProtectionSnapshotCache.UnfreezeAfterAdvanceMonth();
+        CharacterInventoryTargetPrefilter.Unfreeze();
         CharacterGoalTargetConditionPrefilter.UnfreezeAndInvalidate();
         CharacterActionTargetLookupCache.UnfreezeAndInvalidate();
         CharacterActionTargetMatcherStageCache.EndUpdateCurrentGoalActionsStage();
@@ -81,6 +86,7 @@ internal static class AdvanceMonthOptimizationRuntime
     {
         AdvanceMonthProtectionSnapshotCache.Reset();
         CharacterActionTargetLookupCache.Reset();
+        CharacterInventoryTargetPrefilter.Reset();
         CharacterGoalTargetConditionPrefilter.UnfreezeAndInvalidate();
         CharacterActionTargetMatcherStageCache.Reset();
     }
