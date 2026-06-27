@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Reflection;
 using GameData.Common;
+using GameData.Domains.Adventure;
 using GameData.Domains.Character;
 using GameData.Domains.Item;
 using GameData.Domains.Map;
@@ -53,6 +55,77 @@ internal static class CharacterActionTargetMatcherSetLocationPatch
     // 第一版 matcher 白名单暂不缓存位置类 matcher，但保留版本入口供后续扩展。
     private static void Postfix(Character __instance) =>
         CharacterActionTargetMatcherStageCache.InvalidateLocationTarget(__instance.GetId());
+}
+
+[HarmonyPatch]
+internal static class CharacterActionTargetMatcherSetExternalRelationStatePatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(Character),
+            nameof(Character.SetExternalRelationState),
+            new[] { typeof(ulong), typeof(DataContext) });
+
+    private static void Postfix(Character __instance) =>
+        CharacterActionTargetMatcherStageCache.InvalidateExternalRelationTarget(__instance.GetId());
+}
+
+[HarmonyPatch]
+internal static class CharacterActionTargetMatcherSetKidnapperIdPatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(Character),
+            nameof(Character.SetKidnapperId),
+            new[] { typeof(int), typeof(DataContext) });
+
+    private static void Postfix(Character __instance) =>
+        CharacterActionTargetMatcherStageCache.InvalidateKidnapperTarget(__instance.GetId());
+}
+
+[HarmonyPatch]
+internal static class CharacterActionTargetMatcherSetLeaderIdPatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(Character),
+            nameof(Character.SetLeaderId),
+            new[] { typeof(int), typeof(DataContext) });
+
+    private static void Postfix(Character __instance) =>
+        CharacterActionTargetMatcherStageCache.InvalidateLeaderTarget(__instance.GetId());
+}
+
+[HarmonyPatch]
+internal static class CharacterActionTargetMatcherCrossAreaTravelPatch
+{
+    private static IEnumerable<MethodBase> TargetMethods()
+    {
+        yield return AccessTools.Method(
+            typeof(CharacterDomain),
+            nameof(CharacterDomain.SetCrossAreaTravelInfo),
+            new[] { typeof(DataContext), typeof(int), typeof(CrossAreaMoveInfo) });
+        yield return AccessTools.Method(
+            typeof(CharacterDomain),
+            nameof(CharacterDomain.RemoveCrossAreaTravelInfo),
+            new[] { typeof(DataContext), typeof(int) });
+    }
+
+    private static void Postfix() =>
+        CharacterActionTargetMatcherStageCache.InvalidateCrossAreaTravel();
+}
+
+[HarmonyPatch]
+internal static class CharacterActionTargetMatcherSetAdventureTaiwuPatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(AdventureDomain),
+            nameof(AdventureDomain.SetAdventureTaiwu),
+            new[] { typeof(AdventureTaiwu), typeof(DataContext) });
+
+    private static void Postfix() =>
+        CharacterActionTargetMatcherStageCache.InvalidateAdventureTaiwu();
 }
 
 [HarmonyPatch]

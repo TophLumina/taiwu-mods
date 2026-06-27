@@ -106,20 +106,26 @@ internal static class CharacterInventoryTargetPrefilter
         }
 
         PlanningActionItem template = action.Template;
-        if (!IsSupportedItemDemandAction(template))
+        if (IsSupportedItemDemandAction(template))
         {
-            return false;
+            sbyte itemType = args.ItemType;
+            short itemTemplateId = args.ItemTemplateId;
+            if (itemType < 0 || itemTemplateId < 0 || itemType == 3)
+            {
+                return false;
+            }
+
+            filter = HolderFilter.ForItemTemplate(snapshot, MakeItemTemplateKey(itemType, itemTemplateId));
+            return true;
         }
 
-        sbyte itemType = args.ItemType;
-        short itemTemplateId = args.ItemTemplateId;
-        if (itemType < 0 || itemTemplateId < 0 || itemType == 3)
+        if (IsSupportedDetoxMedicineDemandAction(template) && args.PoisonType >= 0)
         {
-            return false;
+            filter = HolderFilter.ForDetoxPoison(snapshot, args.PoisonType);
+            return true;
         }
 
-        filter = new HolderFilter(snapshot, MakeItemTemplateKey(itemType, itemTemplateId));
-        return true;
+        return false;
     }
 
     private static bool IsEnabled() =>
@@ -134,9 +140,14 @@ internal static class CharacterInventoryTargetPrefilter
             EPlanningActionCharacterSelector.ScamTarget or
             EPlanningActionCharacterSelector.RobTarget;
 
+    private static bool IsSupportedDetoxMedicineDemandAction(PlanningActionItem template) =>
+        template.TemplateId == 27 &&
+        template.CharacterSelector == EPlanningActionCharacterSelector.RequestTarget;
+
     private static Snapshot BuildSnapshot(int[] characterIds)
     {
         var holdersByItemTemplate = new ConcurrentDictionary<int, ConcurrentDictionary<int, byte>>();
+        var detoxMedicineHoldersByPoisonType = new ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>>();
         foreach (int charId in characterIds)
         {
             if (!DomainManager.Character.TryGetElement_Objects(charId, out Character character))
@@ -146,15 +157,21 @@ internal static class CharacterInventoryTargetPrefilter
 
             foreach (ItemKey itemKey in character.GetInventory().Items.Keys)
             {
-                AddPossibleHolder(holdersByItemTemplate, charId, itemKey.ItemType, itemKey.TemplateId);
+                AddPossibleHolder(
+                    holdersByItemTemplate,
+                    detoxMedicineHoldersByPoisonType,
+                    charId,
+                    itemKey.ItemType,
+                    itemKey.TemplateId);
             }
         }
 
-        return new Snapshot(holdersByItemTemplate);
+        return new Snapshot(holdersByItemTemplate, detoxMedicineHoldersByPoisonType);
     }
 
     private static void AddPossibleHolder(
         ConcurrentDictionary<int, ConcurrentDictionary<int, byte>> holdersByItemTemplate,
+        ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> detoxMedicineHoldersByPoisonType,
         int charId,
         sbyte itemType,
         short itemTemplateId)
@@ -169,6 +186,36 @@ internal static class CharacterInventoryTargetPrefilter
             key,
             static _ => new ConcurrentDictionary<int, byte>());
         holders.TryAdd(charId, 0);
+        AddDetoxMedicineHolder(detoxMedicineHoldersByPoisonType, charId, itemType, itemTemplateId);
+    }
+
+    private static void AddDetoxMedicineHolder(
+        ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> detoxMedicineHoldersByPoisonType,
+        int charId,
+        sbyte itemType,
+        short itemTemplateId)
+    {
+        if (itemType != 8 || itemTemplateId < 0)
+        {
+            return;
+        }
+
+        MedicineItem medicineItem = Config.Medicine.Instance[itemTemplateId];
+        if (medicineItem.EffectType != EMedicineEffectType.DetoxPoison)
+        {
+            return;
+        }
+
+        sbyte poisonType = medicineItem.EffectSubType.PoisonType();
+        if (poisonType < 0)
+        {
+            return;
+        }
+
+        ConcurrentDictionary<int, byte> holders = detoxMedicineHoldersByPoisonType.GetOrAdd(
+            poisonType,
+            static _ => new ConcurrentDictionary<int, byte>());
+        holders.TryAdd(charId, 0);
     }
 
     private static int MakeItemTemplateKey(sbyte itemType, short itemTemplateId) =>
@@ -177,37 +224,63 @@ internal static class CharacterInventoryTargetPrefilter
     internal readonly struct HolderFilter
     {
         private readonly Snapshot? _snapshot;
-        private readonly int _itemTemplateKey;
+        private readonly HolderFilterKind _kind;
+        private readonly int _key;
 
-        internal HolderFilter(Snapshot snapshot, int itemTemplateKey)
+        private HolderFilter(Snapshot snapshot, HolderFilterKind kind, int key)
         {
             _snapshot = snapshot;
-            _itemTemplateKey = itemTemplateKey;
+            _kind = kind;
+            _key = key;
         }
+
+        public static HolderFilter ForItemTemplate(Snapshot snapshot, int itemTemplateKey) =>
+            new(snapshot, HolderFilterKind.ItemTemplate, itemTemplateKey);
+
+        public static HolderFilter ForDetoxPoison(Snapshot snapshot, sbyte poisonType) =>
+            new(snapshot, HolderFilterKind.DetoxPoison, poisonType);
 
         /// <summary>查询角色是否可能持有目标物品；返回 true 不代表真实持有，仍需原版最终确认。</summary>
         public bool MayHold(int charId) =>
-            _snapshot == null || _snapshot.MayHold(_itemTemplateKey, charId);
+            _snapshot == null ||
+            (_kind == HolderFilterKind.ItemTemplate
+                ? _snapshot.MayHoldItemTemplate(_key, charId)
+                : _snapshot.MayHoldDetoxMedicine((sbyte)_key, charId));
+    }
+
+    private enum HolderFilterKind : byte
+    {
+        ItemTemplate,
+        DetoxPoison,
     }
 
     internal sealed class Snapshot
     {
         private readonly ConcurrentDictionary<int, ConcurrentDictionary<int, byte>> _holdersByItemTemplate;
+        private readonly ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> _detoxMedicineHoldersByPoisonType;
 
-        public Snapshot(ConcurrentDictionary<int, ConcurrentDictionary<int, byte>> holdersByItemTemplate)
+        public Snapshot(
+            ConcurrentDictionary<int, ConcurrentDictionary<int, byte>> holdersByItemTemplate,
+            ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>> detoxMedicineHoldersByPoisonType)
         {
             _holdersByItemTemplate = holdersByItemTemplate;
+            _detoxMedicineHoldersByPoisonType = detoxMedicineHoldersByPoisonType;
         }
 
         public void AddPossibleHolder(int charId, sbyte itemType, short itemTemplateId) =>
             CharacterInventoryTargetPrefilter.AddPossibleHolder(
                 _holdersByItemTemplate,
+                _detoxMedicineHoldersByPoisonType,
                 charId,
                 itemType,
                 itemTemplateId);
 
-        public bool MayHold(int itemTemplateKey, int charId) =>
+        public bool MayHoldItemTemplate(int itemTemplateKey, int charId) =>
             _holdersByItemTemplate.TryGetValue(itemTemplateKey, out ConcurrentDictionary<int, byte>? holders) &&
+            holders.ContainsKey(charId);
+
+        public bool MayHoldDetoxMedicine(sbyte poisonType, int charId) =>
+            _detoxMedicineHoldersByPoisonType.TryGetValue(poisonType, out ConcurrentDictionary<int, byte>? holders) &&
             holders.ContainsKey(charId);
     }
 }

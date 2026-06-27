@@ -175,12 +175,16 @@ internal static class CharacterGoalTargetConditionPrefilter
             return false;
         }
 
+        HashSet<int>? selectorRelationCandidates = TryGetSelectorRelationCandidateSet(actorCharId, currentAction);
         bool hasInventoryFilter = CharacterInventoryTargetPrefilter.TryCreateHolderFilter(
             currentAction,
             actionArgs,
             out CharacterInventoryTargetPrefilter.HolderFilter inventoryFilter);
 
-        if (goalCandidates == null && actionCandidates == null && !hasInventoryFilter)
+        if (goalCandidates == null &&
+            actionCandidates == null &&
+            selectorRelationCandidates == null &&
+            !hasInventoryFilter)
         {
             RecordSkip(CharacterRelationTargetPrefilterSkipReason.NoRelationRule);
             return false;
@@ -197,6 +201,7 @@ internal static class CharacterGoalTargetConditionPrefilter
             int candidateCharId = character.GetId();
             if ((goalCandidates == null || goalCandidates.Contains(candidateCharId)) &&
                 (actionCandidates == null || actionCandidates.Contains(candidateCharId)) &&
+                (selectorRelationCandidates == null || selectorRelationCandidates.Contains(candidateCharId)) &&
                 (!hasInventoryFilter || inventoryFilter.MayHold(candidateCharId)))
             {
                 result.Add(character);
@@ -207,6 +212,29 @@ internal static class CharacterGoalTargetConditionPrefilter
         rentedList = result;
         RecordApplied(currentAction, source.Count, result.Count);
         return true;
+    }
+
+    private static HashSet<int>? TryGetSelectorRelationCandidateSet(
+        int actorCharId,
+        PlanningActionNode? action)
+    {
+        if (action == null || _offlineTargetConditionSnapshot == null)
+        {
+            return null;
+        }
+
+        return action.Template.CharacterSelector switch
+        {
+            EPlanningActionCharacterSelector.RandomTarget or
+            EPlanningActionCharacterSelector.MaxPriorityTarget or
+            EPlanningActionCharacterSelector.RequestTarget or
+            EPlanningActionCharacterSelector.StealTarget or
+            EPlanningActionCharacterSelector.ScamTarget or
+            EPlanningActionCharacterSelector.RobTarget or
+            EPlanningActionCharacterSelector.CloseTarget =>
+                _offlineTargetConditionSnapshot.GetDirectRelationCandidateSet(actorCharId),
+            _ => null,
+        };
     }
 
     /// <summary>记录预过滤异常，避免异常路径在日志中不可见。</summary>
@@ -237,6 +265,7 @@ internal static class CharacterGoalTargetConditionPrefilter
     private static Snapshot BuildSnapshot(int[] characterIds)
     {
         Dictionary<long, HashSet<int>> actorCandidateSets = new(characterIds.Length * ActorRelativeStates.Length / 2);
+        Dictionary<int, HashSet<int>> directRelationCandidateSets = new(characterIds.Length);
         Dictionary<int, HashSet<int>> globalCandidateSets = new(8);
         Dictionary<int, HashSet<int>> factionCandidateSets = new();
         Dictionary<short, HashSet<int>> belongAreaCandidateSets = new();
@@ -245,6 +274,12 @@ internal static class CharacterGoalTargetConditionPrefilter
 
         foreach (int actorCharId in characterIds)
         {
+            HashSet<int> directRelationSet = BuildDirectRelationCandidateSet(actorCharId);
+            if (directRelationSet.Count != 0)
+            {
+                directRelationCandidateSets[actorCharId] = directRelationSet;
+            }
+
             BuildActorRelationCandidateSets(actorCandidateSets, actorCharId);
             BuildActorStaticCandidateSets(
                 actorCandidateSets,
@@ -253,7 +288,7 @@ internal static class CharacterGoalTargetConditionPrefilter
                 belongAreaCandidateSets);
         }
 
-        return new Snapshot(actorCandidateSets, globalCandidateSets);
+        return new Snapshot(actorCandidateSets, directRelationCandidateSets, globalCandidateSets);
     }
 
     private static void BuildCharacterTargetGroups(
@@ -594,6 +629,13 @@ internal static class CharacterGoalTargetConditionPrefilter
         return result;
     }
 
+    private static HashSet<int> BuildDirectRelationCandidateSet(int actorCharId)
+    {
+        HashSet<int> result = new();
+        DomainManager.Character.GetAllRelatedCharIds(actorCharId, result, includeGeneral: true);
+        return result;
+    }
+
     private static void AddDirectRelationMask(HashSet<int> target, int actorCharId, ushort relationMask)
     {
         for (int bitIndex = 0; bitIndex < 16; bitIndex++)
@@ -682,15 +724,19 @@ internal static class CharacterGoalTargetConditionPrefilter
     private sealed class Snapshot
     {
         private readonly ConcurrentDictionary<long, HashSet<int>> _actorCandidateSets;
+        private readonly ConcurrentDictionary<int, HashSet<int>> _directRelationCandidateSets;
         private readonly Dictionary<int, HashSet<int>> _globalCandidateSets;
         private readonly ConcurrentDictionary<long, byte> _dirtyActorRelationStates = new();
+        private readonly ConcurrentDictionary<int, byte> _dirtyDirectRelationActors = new();
         private readonly object _dirtyRelationStatesLock = new();
 
         public Snapshot(
             Dictionary<long, HashSet<int>> actorCandidateSets,
+            Dictionary<int, HashSet<int>> directRelationCandidateSets,
             Dictionary<int, HashSet<int>> globalCandidateSets)
         {
             _actorCandidateSets = new ConcurrentDictionary<long, HashSet<int>>(actorCandidateSets);
+            _directRelationCandidateSets = new ConcurrentDictionary<int, HashSet<int>>(directRelationCandidateSets);
             _globalCandidateSets = globalCandidateSets;
         }
 
@@ -700,6 +746,7 @@ internal static class CharacterGoalTargetConditionPrefilter
             {
                 if (charId >= 0)
                 {
+                    _dirtyDirectRelationActors.TryAdd(charId, 0);
                     MarkDirectRelationStatesDirty(charId);
                 }
 
@@ -708,6 +755,14 @@ internal static class CharacterGoalTargetConditionPrefilter
                     MarkReversedRelationStatesDirty(relatedCharId);
                 }
             }
+        }
+
+        public HashSet<int> GetDirectRelationCandidateSet(int actorCharId)
+        {
+            RebuildDirectRelationSetIfDirty(actorCharId);
+            return _directRelationCandidateSets.TryGetValue(actorCharId, out HashSet<int>? relationSet)
+                ? relationSet
+                : EmptyCandidateSet;
         }
 
         public HashSet<int> GetCandidateSet(int actorCharId, int stateTemplateId)
@@ -766,6 +821,34 @@ internal static class CharacterGoalTargetConditionPrefilter
                 }
 
                 _dirtyActorRelationStates.TryRemove(stateKey, out _);
+            }
+        }
+
+        private void RebuildDirectRelationSetIfDirty(int actorCharId)
+        {
+            if (!_dirtyDirectRelationActors.ContainsKey(actorCharId))
+            {
+                return;
+            }
+
+            lock (_dirtyRelationStatesLock)
+            {
+                if (!_dirtyDirectRelationActors.ContainsKey(actorCharId))
+                {
+                    return;
+                }
+
+                HashSet<int> rebuiltSet = BuildDirectRelationCandidateSet(actorCharId);
+                if (rebuiltSet.Count == 0)
+                {
+                    _directRelationCandidateSets.TryRemove(actorCharId, out _);
+                }
+                else
+                {
+                    _directRelationCandidateSets[actorCharId] = rebuiltSet;
+                }
+
+                _dirtyDirectRelationActors.TryRemove(actorCharId, out _);
             }
         }
     }

@@ -69,6 +69,16 @@ internal enum CharacterRelationTargetPrefilterSkipReason
     Exception,
 }
 
+internal enum CharacterTargetMatcherCacheRejectReason
+{
+    None,
+    StageInactive,
+    OutsideOfflineCurrentGoalActions,
+    UnsupportedDisplayGender,
+    UnsupportedMerchantType,
+    UnsupportedSubCondition,
+}
+
 internal readonly struct TargetMatchDiagnosticsState
 {
     public readonly long StartTicks;
@@ -489,15 +499,28 @@ internal static class CharacterActionPlanningDiagnostics
 
     /// <summary>记录 `TargetMatcher` 阶段缓存命中。</summary>
     public static void RecordTargetMatcherCacheHit(bool result) =>
-        RecordTargetMatcherCache(hit: true, miss: false, fallback: false, result);
+        RecordTargetMatcherCache(hit: true, miss: false, fallback: false, result: result);
 
     /// <summary>记录 `TargetMatcher` 阶段缓存未命中并执行原版匹配。</summary>
     public static void RecordTargetMatcherCacheMiss(bool result) =>
-        RecordTargetMatcherCache(hit: false, miss: true, fallback: false, result);
+        RecordTargetMatcherCache(hit: false, miss: true, fallback: false, result: result);
 
     /// <summary>记录 `TargetMatcher` 阶段缓存未启用时的原版回退。</summary>
     public static void RecordTargetMatcherCacheFallback(bool result) =>
-        RecordTargetMatcherCache(hit: false, miss: false, fallback: true, result);
+        RecordTargetMatcherCache(hit: false, miss: false, fallback: true, result: result);
+
+    /// <summary>记录 `TargetMatcher` 阶段缓存因安全边界而回退原版的原因。</summary>
+    public static void RecordTargetMatcherCacheFallback(
+        CharacterTargetMatcherCacheRejectReason rejectReason,
+        int rejectDetail,
+        bool result) =>
+        RecordTargetMatcherCache(
+            hit: false,
+            miss: false,
+            fallback: true,
+            result: result,
+            rejectReason: rejectReason,
+            rejectDetail: rejectDetail);
 
     /// <summary>记录一次 `PrepareContext`，并归因到具体 `PlanningAction`。</summary>
     public static void EndPrepareContext(
@@ -1069,7 +1092,13 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
-    private static void RecordTargetMatcherCache(bool hit, bool miss, bool fallback, bool result)
+    private static void RecordTargetMatcherCache(
+        bool hit,
+        bool miss,
+        bool fallback,
+        bool result,
+        CharacterTargetMatcherCacheRejectReason rejectReason = CharacterTargetMatcherCacheRejectReason.None,
+        int rejectDetail = 0)
     {
         if (!IsActive() || _goalScopeDepth <= 0 || _targetMatchScopeKind != CharacterTargetMatchScopeKind.Action)
         {
@@ -1095,7 +1124,7 @@ internal static class CharacterActionPlanningDiagnostics
                 metrics.TargetMatcherCacheByAction.Add(actionTemplateId, metric);
             }
 
-            metric.Add(hit, miss, fallback, result);
+            metric.Add(hit, miss, fallback, result, rejectReason, rejectDetail);
         }
     }
 
@@ -1593,6 +1622,7 @@ internal static class CharacterActionPlanningDiagnostics
             builder.Append(metric.TrueCount);
             builder.Append(", false=");
             builder.Append(metric.FalseCount);
+            AppendTargetMatcherFallbackReasons(builder, metric);
             builder.Append(", selector=");
             builder.Append(metric.Selector);
             builder.Append(", range=");
@@ -1600,6 +1630,58 @@ internal static class CharacterActionPlanningDiagnostics
             builder.Append(", rangeValue=");
             builder.Append(metric.RangeValue);
             builder.AppendLine();
+        }
+    }
+
+    private static void AppendTargetMatcherFallbackReasons(StringBuilder builder, TargetMatcherCacheMetric metric)
+    {
+        if (metric.FallbackReasonCounts.Count == 0)
+        {
+            return;
+        }
+
+        List<KeyValuePair<(CharacterTargetMatcherCacheRejectReason Reason, int Detail), int>> sorted =
+            new(metric.FallbackReasonCounts);
+        sorted.Sort(static (left, right) => right.Value.CompareTo(left.Value));
+
+        builder.Append(", fallbackReasons=");
+        int count = Math.Min(5, sorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            if (i > 0)
+            {
+                builder.Append('|');
+            }
+
+            KeyValuePair<(CharacterTargetMatcherCacheRejectReason Reason, int Detail), int> pair = sorted[i];
+            AppendTargetMatcherFallbackReason(builder, pair.Key.Reason, pair.Key.Detail);
+            builder.Append('=');
+            builder.Append(pair.Value);
+        }
+    }
+
+    private static void AppendTargetMatcherFallbackReason(
+        StringBuilder builder,
+        CharacterTargetMatcherCacheRejectReason reason,
+        int detail)
+    {
+        builder.Append(reason);
+        string? detailName = reason switch
+        {
+            CharacterTargetMatcherCacheRejectReason.UnsupportedDisplayGender =>
+                Enum.GetName(typeof(ECharacterMatcherGenderType), detail),
+            CharacterTargetMatcherCacheRejectReason.UnsupportedSubCondition =>
+                Enum.GetName(typeof(ECharacterMatcherSubCondition), detail),
+            CharacterTargetMatcherCacheRejectReason.UnsupportedMerchantType =>
+                detail.ToString(),
+            _ => null,
+        };
+
+        if (!string.IsNullOrEmpty(detailName))
+        {
+            builder.Append('(');
+            builder.Append(detailName);
+            builder.Append(')');
         }
     }
 
@@ -2155,6 +2237,7 @@ internal static class CharacterActionPlanningDiagnostics
         public int Fallbacks;
         public int TrueCount;
         public int FalseCount;
+        public readonly Dictionary<(CharacterTargetMatcherCacheRejectReason Reason, int Detail), int> FallbackReasonCounts = new(4);
 
         public int SavedCalls => Hits;
 
@@ -2170,7 +2253,13 @@ internal static class CharacterActionPlanningDiagnostics
             RangeValue = rangeValue;
         }
 
-        public void Add(bool hit, bool miss, bool fallback, bool result)
+        public void Add(
+            bool hit,
+            bool miss,
+            bool fallback,
+            bool result,
+            CharacterTargetMatcherCacheRejectReason rejectReason,
+            int rejectDetail)
         {
             Calls++;
             if (hit)
@@ -2186,6 +2275,12 @@ internal static class CharacterActionPlanningDiagnostics
             if (fallback)
             {
                 Fallbacks++;
+                if (rejectReason != CharacterTargetMatcherCacheRejectReason.None)
+                {
+                    var key = (rejectReason, rejectDetail);
+                    FallbackReasonCounts.TryGetValue(key, out int count);
+                    FallbackReasonCounts[key] = count + 1;
+                }
             }
 
             if (result)

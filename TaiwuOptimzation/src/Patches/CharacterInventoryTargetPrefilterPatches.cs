@@ -82,6 +82,24 @@ internal static class CharacterInventoryTargetPrefilterChangeEquipmentPatch
 }
 
 [HarmonyPatch]
+internal static class CharacterInventoryTargetPrefilterSetInventoryPatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(Character),
+            nameof(Character.SetInventory),
+            new[] { typeof(Inventory), typeof(DataContext) });
+
+    // 直接替换背包时，将当前背包并入“可能持有者”集合；预过滤表只扩张，不删除旧候选。
+    private static void Postfix(Character __instance)
+    {
+        int charId = __instance.GetId();
+        CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
+        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
+    }
+}
+
+[HarmonyPatch]
 internal static class CharacterInventoryTargetPrefilterChangeEquipmentArrayPatch
 {
     private static MethodBase TargetMethod() =>

@@ -15,6 +15,8 @@ internal static class CharacterActionTargetMatcherStageCache
 
     private static volatile bool _stageActive;
     private static int _taiwuGroupVersion;
+    private static int _crossAreaTravelVersion;
+    private static int _adventureTaiwuVersion;
 
     [ThreadStatic]
     private static int _offlineCurrentGoalActionScopeDepth;
@@ -68,6 +70,9 @@ internal static class CharacterActionTargetMatcherStageCache
         Bump(ref state.Inventory);
         Bump(ref state.Equipment);
         Bump(ref state.Location);
+        Bump(ref state.ExternalRelation);
+        Bump(ref state.Kidnapper);
+        Bump(ref state.Leader);
     }
 
     /// <summary>双向关系变化会影响两名角色各自作为 target 时的 matcher 结果。</summary>
@@ -110,6 +115,31 @@ internal static class CharacterActionTargetMatcherStageCache
     public static void InvalidateLocationTarget(int targetCharId) =>
         InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Location));
 
+    public static void InvalidateExternalRelationTarget(int targetCharId) =>
+        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.ExternalRelation));
+
+    public static void InvalidateKidnapperTarget(int targetCharId) =>
+        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Kidnapper));
+
+    public static void InvalidateLeaderTarget(int targetCharId) =>
+        InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Leader));
+
+    public static void InvalidateCrossAreaTravel()
+    {
+        if (_stageActive)
+        {
+            Bump(ref _crossAreaTravelVersion);
+        }
+    }
+
+    public static void InvalidateAdventureTaiwu()
+    {
+        if (_stageActive)
+        {
+            Bump(ref _adventureTaiwuVersion);
+        }
+    }
+
     /// <summary>年龄段变化只推进年龄版本。</summary>
     public static void InvalidateAgeTarget(int targetCharId) =>
         InvalidateTargetVersion(targetCharId, static state => Bump(ref state.Age));
@@ -144,22 +174,44 @@ internal static class CharacterActionTargetMatcherStageCache
         TargetVersions.Clear();
         _offlineCurrentGoalActionScopeDepth = 0;
         _taiwuGroupVersion = 0;
+        _crossAreaTravelVersion = 0;
+        _adventureTaiwuVersion = 0;
     }
 
     /// <summary>替换原版 `CharacterMatcherHelper.Match` 的阶段缓存入口。</summary>
     public static bool Match(CharacterMatcherItem matcherItem, Character targetChar)
     {
-        if (!_stageActive || _offlineCurrentGoalActionScopeDepth <= 0)
+        if (!_stageActive)
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
-            CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(fallbackResult);
+            CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(
+                CharacterTargetMatcherCacheRejectReason.StageInactive,
+                0,
+                fallbackResult);
             return fallbackResult;
         }
 
-        if (!TryAnalyzeDependencies(matcherItem, out CharacterMatcherDependency dependencies))
+        if (_offlineCurrentGoalActionScopeDepth <= 0)
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
-            CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(fallbackResult);
+            CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(
+                CharacterTargetMatcherCacheRejectReason.OutsideOfflineCurrentGoalActions,
+                0,
+                fallbackResult);
+            return fallbackResult;
+        }
+
+        if (!TryAnalyzeDependencies(
+                matcherItem,
+                out CharacterMatcherDependency dependencies,
+                out CharacterTargetMatcherCacheRejectReason rejectReason,
+                out int rejectDetail))
+        {
+            bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
+            CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(
+                rejectReason,
+                rejectDetail,
+                fallbackResult);
             return fallbackResult;
         }
 
@@ -184,9 +236,13 @@ internal static class CharacterActionTargetMatcherStageCache
 
     private static bool TryAnalyzeDependencies(
         CharacterMatcherItem matcherItem,
-        out CharacterMatcherDependency dependencies)
+        out CharacterMatcherDependency dependencies,
+        out CharacterTargetMatcherCacheRejectReason rejectReason,
+        out int rejectDetail)
     {
         dependencies = CharacterMatcherDependency.None;
+        rejectReason = CharacterTargetMatcherCacheRejectReason.None;
+        rejectDetail = 0;
 
         if (matcherItem.AgeType != ECharacterMatcherAgeType.NotRestricted)
         {
@@ -197,6 +253,8 @@ internal static class CharacterActionTargetMatcherStageCache
             ECharacterMatcherGenderType.DisplayFemale or
             ECharacterMatcherGenderType.DisplayMale)
         {
+            rejectReason = CharacterTargetMatcherCacheRejectReason.UnsupportedDisplayGender;
+            rejectDetail = (int)matcherItem.GenderType;
             return false;
         }
 
@@ -213,6 +271,8 @@ internal static class CharacterActionTargetMatcherStageCache
 
         if (matcherItem.MerchantType >= 0)
         {
+            rejectReason = CharacterTargetMatcherCacheRejectReason.UnsupportedMerchantType;
+            rejectDetail = matcherItem.MerchantType;
             return false;
         }
 
@@ -238,7 +298,18 @@ internal static class CharacterActionTargetMatcherStageCache
                 case ECharacterMatcherSubCondition.CanStroll:
                     dependencies |= CharacterMatcherDependency.Organization;
                     break;
+                case ECharacterMatcherSubCondition.CanBeLocated:
+                    dependencies |=
+                        CharacterMatcherDependency.Location |
+                        CharacterMatcherDependency.ExternalRelation |
+                        CharacterMatcherDependency.Kidnapper |
+                        CharacterMatcherDependency.Leader |
+                        CharacterMatcherDependency.CrossAreaTravel |
+                        CharacterMatcherDependency.AdventureTaiwu;
+                    break;
                 default:
+                    rejectReason = CharacterTargetMatcherCacheRejectReason.UnsupportedSubCondition;
+                    rejectDetail = (int)subCondition;
                     return false;
             }
         }
@@ -272,8 +343,17 @@ internal static class CharacterActionTargetMatcherStageCache
                 0,
                 0,
                 0,
+                0,
+                0,
+                0,
                 (dependencies & CharacterMatcherDependency.TaiwuGroup) != 0
                     ? Volatile.Read(ref _taiwuGroupVersion)
+                    : 0,
+                (dependencies & CharacterMatcherDependency.CrossAreaTravel) != 0
+                    ? Volatile.Read(ref _crossAreaTravelVersion)
+                    : 0,
+                (dependencies & CharacterMatcherDependency.AdventureTaiwu) != 0
+                    ? Volatile.Read(ref _adventureTaiwuVersion)
                     : 0);
         }
 
@@ -284,8 +364,19 @@ internal static class CharacterActionTargetMatcherStageCache
             (dependencies & CharacterMatcherDependency.Inventory) != 0 ? Volatile.Read(ref state.Inventory) : 0,
             (dependencies & CharacterMatcherDependency.Equipment) != 0 ? Volatile.Read(ref state.Equipment) : 0,
             (dependencies & CharacterMatcherDependency.Location) != 0 ? Volatile.Read(ref state.Location) : 0,
+            (dependencies & CharacterMatcherDependency.ExternalRelation) != 0
+                ? Volatile.Read(ref state.ExternalRelation)
+                : 0,
+            (dependencies & CharacterMatcherDependency.Kidnapper) != 0 ? Volatile.Read(ref state.Kidnapper) : 0,
+            (dependencies & CharacterMatcherDependency.Leader) != 0 ? Volatile.Read(ref state.Leader) : 0,
             (dependencies & CharacterMatcherDependency.TaiwuGroup) != 0
                 ? Volatile.Read(ref _taiwuGroupVersion)
+                : 0,
+            (dependencies & CharacterMatcherDependency.CrossAreaTravel) != 0
+                ? Volatile.Read(ref _crossAreaTravelVersion)
+                : 0,
+            (dependencies & CharacterMatcherDependency.AdventureTaiwu) != 0
+                ? Volatile.Read(ref _adventureTaiwuVersion)
                 : 0);
     }
 
@@ -309,6 +400,11 @@ internal static class CharacterActionTargetMatcherStageCache
         Equipment = 1 << 4,
         Location = 1 << 5,
         TaiwuGroup = 1 << 6,
+        ExternalRelation = 1 << 7,
+        Kidnapper = 1 << 8,
+        Leader = 1 << 9,
+        CrossAreaTravel = 1 << 10,
+        AdventureTaiwu = 1 << 11,
     }
 
     private sealed class TargetVersionState
@@ -319,6 +415,9 @@ internal static class CharacterActionTargetMatcherStageCache
         public int Inventory;
         public int Equipment;
         public int Location;
+        public int ExternalRelation;
+        public int Kidnapper;
+        public int Leader;
     }
 
     private readonly struct TargetVersionSnapshot : IEquatable<TargetVersionSnapshot>
@@ -329,7 +428,12 @@ internal static class CharacterActionTargetMatcherStageCache
         private readonly int _inventory;
         private readonly int _equipment;
         private readonly int _location;
+        private readonly int _externalRelation;
+        private readonly int _kidnapper;
+        private readonly int _leader;
         private readonly int _taiwuGroup;
+        private readonly int _crossAreaTravel;
+        private readonly int _adventureTaiwu;
 
         public TargetVersionSnapshot(
             int age,
@@ -338,7 +442,12 @@ internal static class CharacterActionTargetMatcherStageCache
             int inventory,
             int equipment,
             int location,
-            int taiwuGroup)
+            int externalRelation,
+            int kidnapper,
+            int leader,
+            int taiwuGroup,
+            int crossAreaTravel,
+            int adventureTaiwu)
         {
             _age = age;
             _relation = relation;
@@ -346,7 +455,12 @@ internal static class CharacterActionTargetMatcherStageCache
             _inventory = inventory;
             _equipment = equipment;
             _location = location;
+            _externalRelation = externalRelation;
+            _kidnapper = kidnapper;
+            _leader = leader;
             _taiwuGroup = taiwuGroup;
+            _crossAreaTravel = crossAreaTravel;
+            _adventureTaiwu = adventureTaiwu;
         }
 
         public bool Equals(TargetVersionSnapshot other) =>
@@ -356,7 +470,12 @@ internal static class CharacterActionTargetMatcherStageCache
             _inventory == other._inventory &&
             _equipment == other._equipment &&
             _location == other._location &&
-            _taiwuGroup == other._taiwuGroup;
+            _externalRelation == other._externalRelation &&
+            _kidnapper == other._kidnapper &&
+            _leader == other._leader &&
+            _taiwuGroup == other._taiwuGroup &&
+            _crossAreaTravel == other._crossAreaTravel &&
+            _adventureTaiwu == other._adventureTaiwu;
 
         public override bool Equals(object? obj) =>
             obj is TargetVersionSnapshot other && Equals(other);
@@ -370,7 +489,12 @@ internal static class CharacterActionTargetMatcherStageCache
             hashCode.Add(_inventory);
             hashCode.Add(_equipment);
             hashCode.Add(_location);
+            hashCode.Add(_externalRelation);
+            hashCode.Add(_kidnapper);
+            hashCode.Add(_leader);
             hashCode.Add(_taiwuGroup);
+            hashCode.Add(_crossAreaTravel);
+            hashCode.Add(_adventureTaiwu);
             return hashCode.ToHashCode();
         }
     }
