@@ -129,13 +129,13 @@ internal static class UpdateCurrentGoalActionsCacheInvalidation
     {
         CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(charId, relatedCharId);
         CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(relatedCharId, charId);
-        CharacterActionTargetMatcherStageCache.InvalidateTargets(charId, relatedCharId);
+        CharacterActionTargetMatcherStageCache.InvalidateRelationTargets(charId, relatedCharId);
     }
 
     public static void InvalidateRelationMutation(int charId, int relatedCharId)
     {
         CharacterGoalTargetConditionPrefilter.InvalidateRelationMutation(charId, relatedCharId);
-        CharacterActionTargetMatcherStageCache.InvalidateTargets(charId, relatedCharId);
+        CharacterActionTargetMatcherStageCache.InvalidateRelationTargets(charId, relatedCharId);
     }
 
     public static void InvalidateRelationSet(int charId)

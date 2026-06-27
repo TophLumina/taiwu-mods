@@ -36,7 +36,7 @@ internal static class CharacterInventoryTargetPrefilterAddInventoryItemPatch
         {
             int charId = __instance.GetId();
             CharacterInventoryTargetPrefilter.AddPossibleHolder(charId, itemKey);
-            CharacterActionTargetMatcherStageCache.InvalidateTarget(charId);
+            CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
         }
     }
 }
@@ -57,7 +57,7 @@ internal static class CharacterInventoryTargetPrefilterOfflineCreateInventoryIte
         {
             int charId = __instance.GetId();
             CharacterInventoryTargetPrefilter.AddPossibleHolder(charId, itemType, templateId);
-            CharacterActionTargetMatcherStageCache.InvalidateTarget(charId);
+            CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
         }
     }
 }
@@ -75,7 +75,9 @@ internal static class CharacterInventoryTargetPrefilterChangeEquipmentPatch
     private static void Postfix(Character __instance)
     {
         CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
-        CharacterActionTargetMatcherStageCache.InvalidateTarget(__instance.GetId());
+        int charId = __instance.GetId();
+        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
+        CharacterActionTargetMatcherStageCache.InvalidateEquipmentTarget(charId);
     }
 }
 
@@ -92,7 +94,9 @@ internal static class CharacterInventoryTargetPrefilterChangeEquipmentArrayPatch
     private static void Postfix(Character __instance)
     {
         CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
-        CharacterActionTargetMatcherStageCache.InvalidateTarget(__instance.GetId());
+        int charId = __instance.GetId();
+        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(charId);
+        CharacterActionTargetMatcherStageCache.InvalidateEquipmentTarget(charId);
     }
 }
 
@@ -109,7 +113,7 @@ internal static class CharacterInventoryTargetPrefilterAttachPoisonsPatch
     private static void Postfix(Character __instance)
     {
         CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
-        CharacterActionTargetMatcherStageCache.InvalidateTarget(__instance.GetId());
+        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(__instance.GetId());
     }
 }
 
@@ -126,6 +130,6 @@ internal static class CharacterInventoryTargetPrefilterOnDeathTransferWugKingsPa
     private static void Postfix(Character __instance)
     {
         CharacterInventoryTargetPrefilter.AddCurrentInventory(__instance);
-        CharacterActionTargetMatcherStageCache.InvalidateTarget(__instance.GetId());
+        CharacterActionTargetMatcherStageCache.InvalidateInventoryTarget(__instance.GetId());
     }
 }
