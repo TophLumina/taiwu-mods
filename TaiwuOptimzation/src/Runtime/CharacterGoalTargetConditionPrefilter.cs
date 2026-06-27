@@ -57,14 +57,15 @@ internal static class CharacterGoalTargetConditionPrefilter
 
         try
         {
-            int[] characterIds = CharacterActionTargetLookupCache.GetFrozenCharacterIdsForRelationTargetCache();
-            if (characterIds.Length == 0)
+            if (!CharacterActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
+                    out CharacterActionPlanningSnapshot planningSnapshot) ||
+                planningSnapshot.CharacterRecords.Length == 0)
             {
                 UnfreezeAndInvalidate();
                 return;
             }
 
-            Snapshot snapshot = BuildSnapshot(characterIds);
+            Snapshot snapshot = BuildSnapshot(planningSnapshot.CharacterRecords);
             Volatile.Write(ref _frozenSnapshot, snapshot);
             _isFrozen = true;
         }
@@ -262,18 +263,19 @@ internal static class CharacterGoalTargetConditionPrefilter
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
         TaiwuOptimizationSettings.EnableCharacterActionTargetLookupCache;
 
-    private static Snapshot BuildSnapshot(int[] characterIds)
+    private static Snapshot BuildSnapshot(CharacterActionPlanningCharacterRecord[] characterRecords)
     {
-        Dictionary<long, HashSet<int>> actorCandidateSets = new(characterIds.Length * ActorRelativeStates.Length / 2);
-        Dictionary<int, HashSet<int>> directRelationCandidateSets = new(characterIds.Length);
+        Dictionary<long, HashSet<int>> actorCandidateSets = new(characterRecords.Length * ActorRelativeStates.Length / 2);
+        Dictionary<int, HashSet<int>> directRelationCandidateSets = new(characterRecords.Length);
         Dictionary<int, HashSet<int>> globalCandidateSets = new(8);
         Dictionary<int, HashSet<int>> factionCandidateSets = new();
         Dictionary<short, HashSet<int>> belongAreaCandidateSets = new();
 
-        BuildCharacterTargetGroups(characterIds, globalCandidateSets, factionCandidateSets, belongAreaCandidateSets);
+        BuildCharacterTargetGroups(characterRecords, globalCandidateSets, factionCandidateSets, belongAreaCandidateSets);
 
-        foreach (int actorCharId in characterIds)
+        foreach (CharacterActionPlanningCharacterRecord record in characterRecords)
         {
+            int actorCharId = record.CharId;
             HashSet<int> directRelationSet = BuildDirectRelationCandidateSet(actorCharId);
             if (directRelationSet.Count != 0)
             {
@@ -283,7 +285,8 @@ internal static class CharacterGoalTargetConditionPrefilter
             BuildActorRelationCandidateSets(actorCandidateSets, actorCharId);
             BuildActorStaticCandidateSets(
                 actorCandidateSets,
-                actorCharId,
+                record.Character,
+                record.CharId,
                 factionCandidateSets,
                 belongAreaCandidateSets);
         }
@@ -292,7 +295,7 @@ internal static class CharacterGoalTargetConditionPrefilter
     }
 
     private static void BuildCharacterTargetGroups(
-        int[] characterIds,
+        CharacterActionPlanningCharacterRecord[] characterRecords,
         Dictionary<int, HashSet<int>> globalCandidateSets,
         Dictionary<int, HashSet<int>> factionCandidateSets,
         Dictionary<short, HashSet<int>> belongAreaCandidateSets)
@@ -303,13 +306,10 @@ internal static class CharacterGoalTargetConditionPrefilter
             AddToSet(globalCandidateSets, 296, taiwuCharId);
         }
 
-        foreach (int charId in characterIds)
+        foreach (CharacterActionPlanningCharacterRecord record in characterRecords)
         {
-            if (!DomainManager.Character.TryGetElement_Objects(charId, out Character character))
-            {
-                continue;
-            }
-
+            int charId = record.CharId;
+            Character character = record.Character;
             AddOrganizationCandidateSets(globalCandidateSets, character, charId);
 
             int factionId = character.GetFactionId();
@@ -387,15 +387,11 @@ internal static class CharacterGoalTargetConditionPrefilter
 
     private static void BuildActorStaticCandidateSets(
         Dictionary<long, HashSet<int>> actorCandidateSets,
+        Character actor,
         int actorCharId,
         Dictionary<int, HashSet<int>> factionCandidateSets,
         Dictionary<short, HashSet<int>> belongAreaCandidateSets)
     {
-        if (!DomainManager.Character.TryGetElement_Objects(actorCharId, out Character actor))
-        {
-            return;
-        }
-
         int factionId = actor.GetFactionId();
         if (factionId >= 0 && factionCandidateSets.TryGetValue(factionId, out HashSet<int>? factionSet))
         {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Config;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.ActionPlanning.MonthlyAI.Node;
-using GameData.Domains;
 using GameData.Domains.Item;
 using Character = GameData.Domains.Character.Character;
 
@@ -25,14 +24,15 @@ internal static class CharacterInventoryTargetPrefilter
 
         try
         {
-            int[] characterIds = CharacterActionTargetLookupCache.GetFrozenCharacterIdsForRelationTargetCache();
-            if (characterIds.Length == 0)
+            if (!CharacterActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
+                    out CharacterActionPlanningSnapshot planningSnapshot) ||
+                planningSnapshot.CharacterRecords.Length == 0)
             {
                 Unfreeze();
                 return;
             }
 
-            _frozenSnapshot = BuildSnapshot(characterIds);
+            _frozenSnapshot = BuildSnapshot(planningSnapshot.CharacterRecords);
         }
         catch (Exception exception)
         {
@@ -144,23 +144,18 @@ internal static class CharacterInventoryTargetPrefilter
         template.TemplateId == 27 &&
         template.CharacterSelector == EPlanningActionCharacterSelector.RequestTarget;
 
-    private static Snapshot BuildSnapshot(int[] characterIds)
+    private static Snapshot BuildSnapshot(CharacterActionPlanningCharacterRecord[] characterRecords)
     {
         var holdersByItemTemplate = new ConcurrentDictionary<int, ConcurrentDictionary<int, byte>>();
         var detoxMedicineHoldersByPoisonType = new ConcurrentDictionary<sbyte, ConcurrentDictionary<int, byte>>();
-        foreach (int charId in characterIds)
+        foreach (CharacterActionPlanningCharacterRecord record in characterRecords)
         {
-            if (!DomainManager.Character.TryGetElement_Objects(charId, out Character character))
-            {
-                continue;
-            }
-
-            foreach (ItemKey itemKey in character.GetInventory().Items.Keys)
+            foreach (ItemKey itemKey in record.Character.GetInventory().Items.Keys)
             {
                 AddPossibleHolder(
                     holdersByItemTemplate,
                     detoxMedicineHoldersByPoisonType,
-                    charId,
+                    record.CharId,
                     itemKey.ItemType,
                     itemKey.TemplateId);
             }

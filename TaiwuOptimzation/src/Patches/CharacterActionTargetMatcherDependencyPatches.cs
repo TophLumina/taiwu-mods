@@ -53,8 +53,11 @@ internal static class CharacterActionTargetMatcherSetLocationPatch
             new[] { typeof(Location), typeof(DataContext) });
 
     // 第一版 matcher 白名单暂不缓存位置类 matcher，但保留版本入口供后续扩展。
-    private static void Postfix(Character __instance) =>
+    private static void Postfix(Character __instance)
+    {
         CharacterActionTargetMatcherStageCache.InvalidateLocationTarget(__instance.GetId());
+        CharacterActionTargetLookupCache.NotifyCharacterLocationChanged();
+    }
 }
 
 [HarmonyPatch]

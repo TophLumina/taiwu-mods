@@ -17,9 +17,6 @@ internal static class AdvanceMonthOptimizationRuntime
         CharacterActionPlanningDiagnostics.BeginAdvanceMonth();
         if (TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
         {
-            long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
-            CharacterActionTargetLookupCache.RebuildAndFreezeBeforeAdvanceMonth();
-            CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
             AdvanceMonthProtectionSnapshotCache.TryFreezeForAdvanceMonth();
         }
     }
@@ -34,6 +31,7 @@ internal static class AdvanceMonthOptimizationRuntime
 
         CharacterActionTargetMatcherStageCache.BeginUpdateCurrentGoalActionsStage();
         long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
+        CharacterActionTargetLookupCache.EnsureFrozenBeforeUpdateCurrentGoalActions();
         CharacterInventoryTargetPrefilter.FreezeBeforeUpdateCurrentGoalActions();
         CharacterGoalTargetConditionPrefilter.FreezeBeforeAdvanceMonth();
         CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
