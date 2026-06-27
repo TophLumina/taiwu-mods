@@ -7,15 +7,19 @@ internal static class TaiwuOptimizationSettings
 {
     // 通用配置。
     public static bool AdvanceMonthOptimizationEnabled = true;
-    public static bool ProtectNeighborStatesForAdvanceMonthOptimization = true;
-    public static int AdvanceMonthOptimizationFrameBudgetMs = 2;
-    public static bool EnableCharacterActionPlanningOptimization = true;
-    public static int SaveWorldDatabaseCopyBufferTier = 2;
-    public static bool SaveWorldNoCompression = false;
 
-    // 实验性：远区 NPC 月行动点削减。
+    // 过月热路径缓存。
+    public static bool EnableCharacterActionPlanningOptimization = true;
+
+    // 存档优化。
+    public static int SaveWorldDatabaseCopyBufferTier = 4;
+    public static bool SaveWorldNoCompression = true;
+
+    // 可选非等价：远区 NPC 月行动点削减。
     public static bool ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false;
     public static int RemoteNpcOfflineCurrentGoalActionPointGainReduction = 10;
+    public static bool ProtectNeighborStatesForAdvanceMonthOptimization = true;
+    public static int AdvanceMonthOptimizationFrameBudgetMs = 2;
     public static bool ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true;
     public static bool ProtectSectMembersFromOfflineActionPointReduction = false;
 
@@ -27,13 +31,13 @@ internal static class TaiwuOptimizationSettings
     public static void Load(string modId)
     {
         TryGet(modId, "AdvanceMonthOptimizationEnabled", ref AdvanceMonthOptimizationEnabled);
-        TryGet(modId, "ProtectNeighborStatesForAdvanceMonthOptimization", ref ProtectNeighborStatesForAdvanceMonthOptimization);
-        TryGet(modId, "AdvanceMonthOptimizationFrameBudgetMs", ref AdvanceMonthOptimizationFrameBudgetMs);
         TryGet(modId, "EnableCharacterActionPlanningOptimization", ref EnableCharacterActionPlanningOptimization);
         TryGet(modId, "SaveWorldDatabaseCopyBufferTier", ref SaveWorldDatabaseCopyBufferTier);
         TryGet(modId, "SaveWorldNoCompression", ref SaveWorldNoCompression);
         TryGet(modId, "ReduceRemoteNpcOfflineCurrentGoalActionPointGain", ref ReduceRemoteNpcOfflineCurrentGoalActionPointGain);
         TryGet(modId, "RemoteNpcOfflineCurrentGoalActionPointGainReduction", ref RemoteNpcOfflineCurrentGoalActionPointGainReduction);
+        TryGet(modId, "ProtectNeighborStatesForAdvanceMonthOptimization", ref ProtectNeighborStatesForAdvanceMonthOptimization);
+        TryGet(modId, "AdvanceMonthOptimizationFrameBudgetMs", ref AdvanceMonthOptimizationFrameBudgetMs);
         TryGet(modId, "ProtectTaiwuVillageResidentsFromOfflineActionPointReduction", ref ProtectTaiwuVillageResidentsFromOfflineActionPointReduction);
         TryGet(modId, "ProtectSectMembersFromOfflineActionPointReduction", ref ProtectSectMembersFromOfflineActionPointReduction);
         TryGet(modId, "AdvanceMonthOptimizationDiagnosticsEnabled", ref AdvanceMonthOptimizationDiagnosticsEnabled);
