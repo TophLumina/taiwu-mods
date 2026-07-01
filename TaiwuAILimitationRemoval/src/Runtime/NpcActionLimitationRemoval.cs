@@ -190,6 +190,25 @@ internal static class NpcActionLimitationRemoval
         return IsLifeSkillCraftAction(actionTemplateId) || actionTemplateId == 59;
     }
 
+    public static bool CanTreatAsCurrentAvailabilityState(int stateTemplateId)
+    {
+        return CanTreatAsCurrentAvailability(stateTemplateId);
+    }
+
+    public static bool CanBypassNoneSensorForNode(
+        bool isGoalNode,
+        int actionTemplateId,
+        int stateTemplateId)
+    {
+        if (isGoalNode)
+        {
+            return IsLifeSkillCraftGoalState(stateTemplateId);
+        }
+
+        return IsLifeSkillCraftAction(actionTemplateId) && IsLifeSkillCraftAvailabilityState(stateTemplateId) ||
+               actionTemplateId == 59 && stateTemplateId == ReadingExpAvailabilityState;
+    }
+
     private static bool CanTreatAsCurrentAvailability(int stateTemplateId)
     {
         return IsLifeSkillCraftAvailabilityState(stateTemplateId) ||

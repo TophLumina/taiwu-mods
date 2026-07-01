@@ -29,7 +29,10 @@
     <Reference Include="GameData.Common" HintPath="$(GameBackendDir)\GameData.Common.dll" Private="false" />
     <Reference Include="GameData.Utilities" HintPath="$(GameBackendDir)\GameData.Utilities.dll" Private="false" />
     <Reference Include="GameData.ArchiveData" HintPath="$(GameBackendDir)\GameData.ArchiveData.dll" Private="false" />
+    <Reference Include="GameData.Serializer" HintPath="$(GameBackendDir)\GameData.Serializer.dll" Private="false" />
     <Reference Include="GameData.ActionPlanning" HintPath="$(GameBackendDir)\GameData.ActionPlanning.dll" Private="false" />
+    <Reference Include="GameData.ActionPlanning.ActionImpl" HintPath="$(GameBackendDir)\GameData.ActionPlanning.ActionImpl.dll" Private="false" />
+    <Reference Include="Redzen" HintPath="$(GameBackendDir)\Redzen.dll" Private="false" />
     <Reference Include="NLog" HintPath="$(GameBackendDir)\NLog.dll" Private="false" />
   </ItemGroup>
 

@@ -24,6 +24,15 @@ internal static class CharacterActionPlannerCheckNodeReachablePatch
     }
 }
 
+[HarmonyPatch(typeof(CharacterActionPlanner), nameof(CharacterActionPlanner.Initialize))]
+internal static class CharacterActionPlannerReachabilityDiagnosticsPatch
+{
+    private static void Postfix(CharacterActionPlanner __instance)
+    {
+        NpcActionReachabilityDiagnostics.LogPlannerOnce(__instance);
+    }
+}
+
 [HarmonyPatch(typeof(CharacterPlanningAgent), nameof(CharacterPlanningAgent.CalcCurrentState))]
 internal static class CharacterPlanningAgentCalcCurrentStatePatch
 {

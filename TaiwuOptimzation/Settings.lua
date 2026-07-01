@@ -8,6 +8,6 @@ return {
 	ProtectNeighborStatesForAdvanceMonthOptimization = true,
 	AdvanceMonthOptimizationFrameBudgetMs = 2,
 	ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true,
-	ProtectSectMembersFromOfflineActionPointReduction = false,
+	ProtectSectMembersFromOfflineActionPointReduction = true,
 	AdvanceMonthOptimizationDiagnosticsEnabled = false,
 }
