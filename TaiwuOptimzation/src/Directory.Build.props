@@ -3,9 +3,4 @@
     <BaseIntermediateOutputPath>obj\Backend\</BaseIntermediateOutputPath>
     <BaseOutputPath>bin\Backend\</BaseOutputPath>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'TaiwuOptimization.Frontend'">
-    <BaseIntermediateOutputPath>obj\Frontend\</BaseIntermediateOutputPath>
-    <BaseOutputPath>bin\Frontend\</BaseOutputPath>
-  </PropertyGroup>
 </Project>

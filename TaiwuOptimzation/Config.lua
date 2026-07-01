@@ -2,9 +2,6 @@ return {
 	BackendPlugins = {
 		[1] = "TaiwuOptimization.dll",
 	},
-	FrontendPlugins = {
-		[1] = "TaiwuOptimizationFront.dll",
-	},
 	Title = "[天幕心帷]过月性能优化",
 	Version = "0.2.9.0",
 	Author = "man!",
