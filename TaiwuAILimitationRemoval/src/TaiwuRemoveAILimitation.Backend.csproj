@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>TaiwuRemoveAILimitation</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <GameBackendDir>D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend</GameBackendDir>
+    <ModPluginDir>$(MSBuildProjectDirectory)\..\Plugins</ModPluginDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="TaiwuRemoveAILimitationPlugin.cs" />
+    <Compile Include="Runtime\**\*.cs" />
+    <Compile Include="Patches\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TaiwuModdingLib" HintPath="$(GameBackendDir)\TaiwuModdingLib.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(GameBackendDir)\0Harmony.dll" Private="false" />
+    <Reference Include="GameData" HintPath="$(GameBackendDir)\GameData.dll" Private="false" />
+    <Reference Include="GameData.Shared" HintPath="$(GameBackendDir)\GameData.Shared.dll" Private="false" />
+    <Reference Include="GameData.Common" HintPath="$(GameBackendDir)\GameData.Common.dll" Private="false" />
+    <Reference Include="GameData.Utilities" HintPath="$(GameBackendDir)\GameData.Utilities.dll" Private="false" />
+    <Reference Include="GameData.ArchiveData" HintPath="$(GameBackendDir)\GameData.ArchiveData.dll" Private="false" />
+    <Reference Include="GameData.ActionPlanning" HintPath="$(GameBackendDir)\GameData.ActionPlanning.dll" Private="false" />
+    <Reference Include="NLog" HintPath="$(GameBackendDir)\NLog.dll" Private="false" />
+  </ItemGroup>
+
+  <Target Name="CopyToModPlugins" AfterTargets="Build">
+    <MakeDir Directories="$(ModPluginDir)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModPluginDir)" />
+  </Target>
+</Project>

@@ -14,7 +14,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
 {
     private const int HasCandidateSet = 1;
     private const int UnknownCandidateSet = 2;
-    private const ushort FriendlyRelationMask = 32767;
+    private const ushort NonEnemyRelationMask = 32767;
 
     private static readonly int[] ActorRelativeStates =
     {
@@ -300,13 +300,14 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
         foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
         {
             int actorCharId = record.CharId;
-            HashSet<int> directRelationSet = BuildDirectRelationCandidateSet(actorCharId);
+            ActorRelationCandidateBuilder relationBuilder = new(actorCharId);
+            HashSet<int> directRelationSet = relationBuilder.BuildDirectRelationCandidateSet();
             if (directRelationSet.Count != 0)
             {
                 directRelationCandidateSets[actorCharId] = directRelationSet;
             }
 
-            BuildActorRelationCandidateSets(actorCandidateSets, actorCharId);
+            BuildActorRelationCandidateSets(actorCandidateSets, actorCharId, relationBuilder);
             BuildActorStaticCandidateSets(
                 actorCandidateSets,
                 record.Character,
@@ -397,7 +398,8 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
 
     private static void BuildActorRelationCandidateSets(
         Dictionary<long, HashSet<int>> actorCandidateSets,
-        int actorCharId)
+        int actorCharId,
+        ActorRelationCandidateBuilder relationBuilder)
     {
         foreach (int stateTemplateId in ActorRelativeStates)
         {
@@ -406,7 +408,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
                 continue;
             }
 
-            HashSet<int> candidateSet = BuildRelationCandidateSet(actorCharId, stateTemplateId);
+            HashSet<int> candidateSet = BuildRelationCandidateSet(relationBuilder, stateTemplateId);
             if (candidateSet.Count != 0)
             {
                 actorCandidateSets[MakeStateKey(actorCharId, stateTemplateId)] = candidateSet;
@@ -601,87 +603,128 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
         };
     }
 
-    private static HashSet<int> BuildRelationCandidateSet(int actorCharId, int stateTemplateId)
+    private static HashSet<int> BuildRelationCandidateSet(
+        ActorRelationCandidateBuilder relationBuilder,
+        int stateTemplateId)
     {
         HashSet<int> result = new();
         switch (stateTemplateId)
         {
             case 302:
-                AddDirectRelationMask(result, actorCharId, 16384);
+                relationBuilder.AddReversedRelationMask(result, 16384);
                 break;
             case 303:
-                AddDirectRelationMask(result, actorCharId, 32768);
+                relationBuilder.AddReversedRelationMask(result, 32768);
                 break;
             case 304:
-                AddDirectRelationMask(result, actorCharId, FriendlyRelationMask);
-                AddReversedRelationMask(result, actorCharId, FriendlyRelationMask);
+                relationBuilder.AddDirectRelationMask(result, NonEnemyRelationMask);
+                relationBuilder.AddReversedRelationMask(result, NonEnemyRelationMask);
                 break;
             case 305:
-                AddReversedRelationMask(result, actorCharId, 73);
+                relationBuilder.AddDirectRelationMask(result, 73);
                 break;
             case 306:
-                AddReversedRelationMask(result, actorCharId, 292);
+                relationBuilder.AddDirectRelationMask(result, 292);
                 break;
             case 307:
-                AddReversedRelationMask(result, actorCharId, 146);
+                relationBuilder.AddDirectRelationMask(result, 146);
                 break;
             case 308:
-                AddReversedRelationMask(result, actorCharId, 8192);
+                relationBuilder.AddDirectRelationMask(result, 8192);
                 break;
             case 309:
-                AddReversedRelationMask(result, actorCharId, 448);
+                relationBuilder.AddDirectRelationMask(result, 448);
                 break;
             case 310:
-                AddReversedRelationMask(result, actorCharId, 1024);
+                relationBuilder.AddDirectRelationMask(result, 1024);
                 break;
             case 311:
-                AddReversedRelationMask(result, actorCharId, 512);
+                relationBuilder.AddDirectRelationMask(result, 512);
                 break;
             case 312:
-                AddDirectRelationMask(result, actorCharId, 16384);
+                relationBuilder.AddDirectRelationMask(result, 16384);
                 if (result.Count != 0)
                 {
                     HashSet<int> reversed = new();
-                    AddReversedRelationMask(reversed, actorCharId, 16384);
+                    relationBuilder.AddReversedRelationMask(reversed, 16384);
                     result.IntersectWith(reversed);
                 }
                 break;
             case 313:
-                AddReversedRelationMask(result, actorCharId, 6144);
+                relationBuilder.AddDirectRelationMask(result, 6144);
                 break;
         }
 
         return result;
     }
 
-    private static HashSet<int> BuildDirectRelationCandidateSet(int actorCharId)
+    private sealed class ActorRelationCandidateBuilder
     {
-        HashSet<int> result = new();
-        DomainManager.Character.GetAllRelatedCharIds(actorCharId, result, includeGeneral: true);
-        return result;
-    }
+        private readonly int _actorCharId;
+        private readonly HashSet<int>?[] _directRelationSets = new HashSet<int>?[16];
+        private readonly HashSet<int>?[] _reversedRelationSets = new HashSet<int>?[16];
 
-    private static void AddDirectRelationMask(HashSet<int> target, int actorCharId, ushort relationMask)
-    {
-        for (int bitIndex = 0; bitIndex < 16; bitIndex++)
+        public ActorRelationCandidateBuilder(int actorCharId)
         {
-            ushort relationBit = (ushort)(1 << bitIndex);
-            if ((relationMask & relationBit) != 0)
+            _actorCharId = actorCharId;
+        }
+
+        public HashSet<int> BuildDirectRelationCandidateSet()
+        {
+            HashSet<int> result = new();
+            DomainManager.Character.GetAllRelatedCharIds(_actorCharId, result, includeGeneral: true);
+            return result;
+        }
+
+        public void AddDirectRelationMask(HashSet<int> target, ushort relationMask)
+        {
+            for (int bitIndex = 0; bitIndex < 16; bitIndex++)
             {
-                AddRelated(target, DomainManager.Character.GetRelatedCharIds(actorCharId, relationBit));
+                ushort relationBit = (ushort)(1 << bitIndex);
+                if ((relationMask & relationBit) != 0)
+                {
+                    AddRelated(target, GetDirectRelationSet(bitIndex, relationBit));
+                }
             }
         }
-    }
 
-    private static void AddReversedRelationMask(HashSet<int> target, int actorCharId, ushort relationMask)
-    {
-        for (int bitIndex = 0; bitIndex < 16; bitIndex++)
+        public void AddReversedRelationMask(HashSet<int> target, ushort relationMask)
         {
-            ushort relationBit = (ushort)(1 << bitIndex);
-            if ((relationMask & relationBit) != 0)
+            for (int bitIndex = 0; bitIndex < 16; bitIndex++)
             {
-                AddRelated(target, DomainManager.Character.GetReversedRelatedCharIds(actorCharId, relationBit).GetCollection());
+                ushort relationBit = (ushort)(1 << bitIndex);
+                if ((relationMask & relationBit) != 0)
+                {
+                    AddRelated(target, GetReversedRelationSet(bitIndex, relationBit));
+                }
             }
+        }
+
+        private HashSet<int> GetDirectRelationSet(int bitIndex, ushort relationBit)
+        {
+            HashSet<int>? relationSet = _directRelationSets[bitIndex];
+            if (relationSet != null)
+            {
+                return relationSet;
+            }
+
+            relationSet = DomainManager.Character.GetRelatedCharIds(_actorCharId, relationBit);
+            _directRelationSets[bitIndex] = relationSet;
+            return relationSet;
+        }
+
+        private HashSet<int> GetReversedRelationSet(int bitIndex, ushort relationBit)
+        {
+            HashSet<int>? relationSet = _reversedRelationSets[bitIndex];
+            if (relationSet != null)
+            {
+                return relationSet;
+            }
+
+            relationSet = new HashSet<int>(
+                DomainManager.Character.GetReversedRelatedCharIds(_actorCharId, relationBit).GetCollection());
+            _reversedRelationSets[bitIndex] = relationSet;
+            return relationSet;
         }
     }
 
