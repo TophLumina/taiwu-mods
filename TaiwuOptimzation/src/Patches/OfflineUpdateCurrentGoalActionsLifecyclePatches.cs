@@ -15,7 +15,7 @@ namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch]
 [HarmonyPriority(Priority.First)]
-internal static class UpdateCurrentGoalActionsOptimizationStagePatch
+internal static class OfflineUpdateCurrentGoalActionsOptimizationStagePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -23,14 +23,14 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
             nameof(ParallelActionManager.Execute),
             new[] { typeof(DataMonitorManager), typeof(ICharacterParallelAction) });
 
-    // 原版 CharacterRelationsUpdate 位于 NPC 行动规划之前，快照必须在该屏障之后冻结。
+    // 原版 `CharacterRelationsUpdate` 位于 NPC 行动规划之前，缓存必须在该屏障之后冻结。
     private static void Prefix(ICharacterParallelAction action)
     {
         Type actionType = action.GetType();
         if (actionType == typeof(UpdatePrimaryGoalAndActions) ||
             actionType == typeof(UpdateSecondaryGoalAndActions))
         {
-            AdvanceMonthOptimizationRuntime.BeginUpdateCurrentGoalActionsOptimizationStage(
+            AdvanceMonthOptimizationRuntime.BeginOfflineUpdateCurrentGoalActionsOptimizationStage(
                 actionType == typeof(UpdatePrimaryGoalAndActions));
         }
     }
@@ -41,7 +41,7 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
         if (actionType == typeof(UpdatePrimaryGoalAndActions) ||
             actionType == typeof(UpdateSecondaryGoalAndActions))
         {
-            AdvanceMonthOptimizationRuntime.FinishUpdateCurrentGoalActionsOptimizationStage();
+            AdvanceMonthOptimizationRuntime.FinishOfflineUpdateCurrentGoalActionsOptimizationStage();
         }
 
         return __exception;
@@ -50,7 +50,7 @@ internal static class UpdateCurrentGoalActionsOptimizationStagePatch
 
 [HarmonyPatch]
 [HarmonyPriority(Priority.First)]
-internal static class UpdateCurrentGoalActionsApplyAllBoundaryPatch
+internal static class OfflineUpdateCurrentGoalActionsApplyAllBoundaryPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -58,14 +58,13 @@ internal static class UpdateCurrentGoalActionsApplyAllBoundaryPatch
             nameof(ParallelModificationsRecorder.ApplyAll),
             new[] { typeof(DataContext) });
 
-    // `WorkerThreadManager.Run` 在所有 worker planning 完成后立刻调用 ApplyAll。
-    // 这里关闭只读快照阶段，让 primary 写回产生的变更进入 epoch，供 secondary 前重建。
+    // 所有 worker planning 结束后，原版会串行执行 `ApplyAll`；这里关闭只读屏障并开始记录写回 delta。
     private static void Prefix() =>
-        AdvanceMonthOptimizationRuntime.EnterUpdateCurrentGoalActionsApplyAll();
+        AdvanceMonthOptimizationRuntime.EnterOfflineUpdateCurrentGoalActionsApplyAll();
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetPrefilterAddRelationPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetPrefilterAddRelationPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -77,11 +76,11 @@ internal static class OfflineCurrentGoalActionTargetPrefilterAddRelationPatch
     private static void Postfix(
         [HarmonyArgument(1)] int charId,
         [HarmonyArgument(2)] int relatedCharId) =>
-        UpdateCurrentGoalActionsCacheInvalidation.InvalidateBidirectionalRelationMutation(charId, relatedCharId);
+        OfflineUpdateCurrentGoalActionsCacheInvalidation.InvalidateBidirectionalRelationMutation(charId, relatedCharId);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetPrefilterChangeRelationTypePatch
+internal static class OfflineUpdateCurrentGoalActionsTargetPrefilterChangeRelationTypePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -89,15 +88,15 @@ internal static class OfflineCurrentGoalActionTargetPrefilterChangeRelationTypeP
             nameof(CharacterDomain.ChangeRelationType),
             new[] { typeof(DataContext), typeof(int), typeof(int), typeof(ushort), typeof(ushort) });
 
-    // 单条关系变化只标记相关 actor/state dirty，不废弃整张预过滤快照。
+    // 单条关系类型变化只标记相关 actor/state dirty。
     private static void Postfix(
         [HarmonyArgument(1)] int charId,
         [HarmonyArgument(2)] int relatedCharId) =>
-        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationMutation(charId, relatedCharId);
+        OfflineUpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationMutation(charId, relatedCharId);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetPrefilterRemoveRelationPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetPrefilterRemoveRelationPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -105,15 +104,15 @@ internal static class OfflineCurrentGoalActionTargetPrefilterRemoveRelationPatch
             nameof(CharacterDomain.RemoveRelation),
             new[] { typeof(DataContext), typeof(int), typeof(int) });
 
-    // 单条关系删除只标记相关 actor/state dirty，不废弃整张预过滤快照。
+    // 单条关系删除只标记相关 actor/state dirty。
     private static void Postfix(
         [HarmonyArgument(1)] int charId,
         [HarmonyArgument(2)] int relatedCharId) =>
-        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationMutation(charId, relatedCharId);
+        OfflineUpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationMutation(charId, relatedCharId);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetPrefilterRemoveAllGeneralRelationsPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetPrefilterRemoveAllGeneralRelationsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -121,13 +120,13 @@ internal static class OfflineCurrentGoalActionTargetPrefilterRemoveAllGeneralRel
             nameof(CharacterDomain.RemoveAllGeneralRelations),
             new[] { typeof(DataContext), typeof(int) });
 
-    // 批量删除无法精确枚举全部反向受影响者，保守废弃预过滤快照。
+    // 批量删除无法精确枚举全部反向受影响者，保守废弃关系预过滤快照。
     private static void Postfix([HarmonyArgument(1)] int charId) =>
-        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationSet(charId);
+        OfflineUpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationSet(charId);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetPrefilterRemoveAllRelationsPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetPrefilterRemoveAllRelationsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -135,36 +134,36 @@ internal static class OfflineCurrentGoalActionTargetPrefilterRemoveAllRelationsP
             nameof(CharacterDomain.RemoveAllRelations),
             new[] { typeof(DataContext), typeof(int), typeof(bool) });
 
-    // 批量删除无法精确枚举全部反向受影响者，保守废弃预过滤快照。
+    // 批量删除无法精确枚举全部反向受影响者，保守废弃关系预过滤快照。
     private static void Postfix([HarmonyArgument(1)] int charId) =>
-        UpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationSet(charId);
+        OfflineUpdateCurrentGoalActionsCacheInvalidation.InvalidateRelationSet(charId);
 }
 
-internal static class UpdateCurrentGoalActionsCacheInvalidation
+internal static class OfflineUpdateCurrentGoalActionsCacheInvalidation
 {
     public static void InvalidateBidirectionalRelationMutation(int charId, int relatedCharId)
     {
-        OfflineCurrentGoalActionTargetPrefilter.InvalidateRelationMutation(charId, relatedCharId);
-        OfflineCurrentGoalActionTargetPrefilter.InvalidateRelationMutation(relatedCharId, charId);
-        OfflineCurrentGoalActionMatcherCache.InvalidateRelationTargets(charId, relatedCharId);
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.InvalidateRelationMutation(charId, relatedCharId);
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.InvalidateRelationMutation(relatedCharId, charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateRelationTargets(charId, relatedCharId);
     }
 
     public static void InvalidateRelationMutation(int charId, int relatedCharId)
     {
-        OfflineCurrentGoalActionTargetPrefilter.InvalidateRelationMutation(charId, relatedCharId);
-        OfflineCurrentGoalActionTargetPrefilter.InvalidateRelationMutation(relatedCharId, charId);
-        OfflineCurrentGoalActionMatcherCache.InvalidateRelationTargets(charId, relatedCharId);
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.InvalidateRelationMutation(charId, relatedCharId);
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.InvalidateRelationMutation(relatedCharId, charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateRelationTargets(charId, relatedCharId);
     }
 
     public static void InvalidateRelationSet(int charId)
     {
-        OfflineCurrentGoalActionTargetPrefilter.InvalidateForRelationMutation();
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.InvalidateForRelationMutation();
         if (charId == DomainManager.Taiwu.GetTaiwuCharId())
         {
-            OfflineCurrentGoalActionMatcherCache.InvalidateAll();
+            OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateAll();
             return;
         }
 
-        OfflineCurrentGoalActionMatcherCache.InvalidateTarget(charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateTarget(charId);
     }
 }

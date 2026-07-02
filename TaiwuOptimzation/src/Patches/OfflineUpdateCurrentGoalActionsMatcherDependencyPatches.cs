@@ -13,7 +13,7 @@ using Character = GameData.Domains.Character.Character;
 namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetFavorabilityPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetFavorabilityPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -21,16 +21,16 @@ internal static class CharacterMatcherSetFavorabilityPatch
             "SetFavorability",
             new[] { typeof(DataContext), typeof(int), typeof(int), typeof(short) });
 
-    // FavorRange 和太吾关系类 matcher 依赖关系/好感版本。
+    // FavorRange 与关系类 matcher 依赖关系/好感版本。
     private static void Postfix(int charId, int relatedCharId)
     {
-        OfflineCurrentGoalActionMatcherCache.InvalidateRelationTarget(charId);
-        OfflineCurrentGoalActionMatcherCache.InvalidateRelationTarget(relatedCharId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateRelationTarget(charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateRelationTarget(relatedCharId);
     }
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetOrganizationInfoPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetOrganizationInfoPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -38,13 +38,13 @@ internal static class CharacterMatcherSetOrganizationInfoPatch
             nameof(Character.SetOrganizationInfo),
             new[] { typeof(OrganizationInfo), typeof(DataContext) });
 
-    // IdentityType、Organization 和 CanStroll 依赖组织版本。
+    // IdentityType、Organization 与 CanStroll 依赖组织版本。
     private static void Postfix(Character __instance) =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateOrganizationTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateOrganizationTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetLocationPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetLocationPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -55,12 +55,12 @@ internal static class CharacterMatcherSetLocationPatch
     private static void Prefix(Character __instance, out Location __state) =>
         __state = __instance.GetLocation();
 
-    // 位置变更会影响规划目标位置索引；primary ApplyAll 内只记录 delta。
+    // 位置变更会影响 matcher 与目标位置索引；primary ApplyAll 内只记录 delta。
     private static void Postfix(Character __instance, Location __state)
     {
         int charId = __instance.GetId();
-        OfflineCurrentGoalActionMatcherCache.InvalidateLocationTarget(charId);
-        OfflineCurrentGoalActionTargetLookupCache.NotifyCharacterLocationChanged(
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateLocationTarget(charId);
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.NotifyCharacterLocationChanged(
             charId,
             __state,
             __instance.GetLocation());
@@ -68,7 +68,7 @@ internal static class CharacterMatcherSetLocationPatch
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetExternalRelationStatePatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetExternalRelationStatePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -77,11 +77,11 @@ internal static class CharacterMatcherSetExternalRelationStatePatch
             new[] { typeof(ulong), typeof(DataContext) });
 
     private static void Postfix(Character __instance) =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateExternalRelationTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateExternalRelationTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetKidnapperIdPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetKidnapperIdPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -90,11 +90,11 @@ internal static class CharacterMatcherSetKidnapperIdPatch
             new[] { typeof(int), typeof(DataContext) });
 
     private static void Postfix(Character __instance) =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateKidnapperTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateKidnapperTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetLeaderIdPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetLeaderIdPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -103,11 +103,11 @@ internal static class CharacterMatcherSetLeaderIdPatch
             new[] { typeof(int), typeof(DataContext) });
 
     private static void Postfix(Character __instance) =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateLeaderTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateLeaderTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherCrossAreaTravelPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherCrossAreaTravelPatch
 {
     private static IEnumerable<MethodBase> TargetMethods()
     {
@@ -122,11 +122,11 @@ internal static class CharacterMatcherCrossAreaTravelPatch
     }
 
     private static void Postfix() =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateCrossAreaTravel();
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateCrossAreaTravel();
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetAdventureTaiwuPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetAdventureTaiwuPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -135,11 +135,11 @@ internal static class CharacterMatcherSetAdventureTaiwuPatch
             new[] { typeof(AdventureTaiwu), typeof(DataContext) });
 
     private static void Postfix() =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateAdventureTaiwu();
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateAdventureTaiwu();
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetInventoryPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetInventoryPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -149,11 +149,11 @@ internal static class CharacterMatcherSetInventoryPatch
 
     // 背包整体替换时推进背包版本。
     private static void Postfix(Character __instance) =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetEquipmentPatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetEquipmentPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -163,11 +163,11 @@ internal static class CharacterMatcherSetEquipmentPatch
 
     // 装备整体替换时推进装备版本。
     private static void Postfix(Character __instance) =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateEquipmentTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateEquipmentTarget(__instance.GetId());
 }
 
 [HarmonyPatch]
-internal static class CharacterMatcherSetCurrAgePatch
+internal static class OfflineUpdateCurrentGoalActionsMatcherSetCurrAgePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -177,5 +177,5 @@ internal static class CharacterMatcherSetCurrAgePatch
 
     // AgeType 依赖年龄段版本。
     private static void Postfix(Character __instance) =>
-        OfflineCurrentGoalActionMatcherCache.InvalidateAgeTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateAgeTarget(__instance.GetId());
 }

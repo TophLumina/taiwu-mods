@@ -115,7 +115,7 @@ internal static class CharacterActionPlanningDiagnosticsLegendaryBookActionsPatc
 }
 
 [HarmonyPatch]
-internal static class CharacterActionPlanningDiagnosticsOfflineCurrentGoalActionsPatch
+internal static class CharacterActionPlanningDiagnosticsOfflineUpdateCurrentGoalActionsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -125,11 +125,11 @@ internal static class CharacterActionPlanningDiagnosticsOfflineCurrentGoalAction
 
     // 记录 primary/secondary 离线目标行动更新外层耗时。
     private static void Prefix(ActionPlanningData.ECurrentGoalType goalType, out long __state) =>
-        __state = CharacterActionPlanningDiagnostics.BeginOfflineCurrentGoalActions(goalType);
+        __state = CharacterActionPlanningDiagnostics.BeginOfflineUpdateCurrentGoalActions(goalType);
 
     private static Exception? Finalizer(ActionPlanningData.ECurrentGoalType goalType, long __state, Exception? __exception)
     {
-        CharacterActionPlanningDiagnostics.EndOfflineCurrentGoalActions(goalType, __state);
+        CharacterActionPlanningDiagnostics.EndOfflineUpdateCurrentGoalActions(goalType, __state);
         return __exception;
     }
 }

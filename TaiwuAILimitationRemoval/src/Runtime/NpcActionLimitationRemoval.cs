@@ -190,6 +190,12 @@ internal static class NpcActionLimitationRemoval
         return IsLifeSkillCraftAction(actionTemplateId) || actionTemplateId == 59;
     }
 
+    public static bool IsLoggedAction(int actionTemplateId)
+    {
+        return IsBypassedAction(actionTemplateId) ||
+               NpcHostileActionRangeExpansion.IsHostileActionWithExpandedRange(actionTemplateId);
+    }
+
     public static bool CanTreatAsCurrentAvailabilityState(int stateTemplateId)
     {
         return CanTreatAsCurrentAvailability(stateTemplateId);

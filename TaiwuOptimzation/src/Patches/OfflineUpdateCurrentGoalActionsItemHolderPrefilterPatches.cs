@@ -11,7 +11,7 @@ using Character = GameData.Domains.Character.Character;
 namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionItemHolderPrefilterAddInventoryItemPatch
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilterAddInventoryItemPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.GetDeclaredMethods(typeof(Character)).First(method =>
@@ -35,14 +35,14 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilterAddInventoryIte
         if (__result)
         {
             int charId = __instance.GetId();
-            OfflineCurrentGoalActionItemHolderPrefilter.AddPossibleHolder(charId, itemKey);
-            OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(charId);
+            OfflineUpdateCurrentGoalActionsItemHolderPrefilter.AddPossibleHolder(charId, itemKey);
+            OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(charId);
         }
     }
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionItemHolderPrefilterOfflineCreateInventoryItemPatch
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilterOfflineCreateInventoryItemPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -56,14 +56,14 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilterOfflineCreateIn
         if (amount > 0)
         {
             int charId = __instance.GetId();
-            OfflineCurrentGoalActionItemHolderPrefilter.AddPossibleHolder(charId, itemType, templateId);
-            OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(charId);
+            OfflineUpdateCurrentGoalActionsItemHolderPrefilter.AddPossibleHolder(charId, itemType, templateId);
+            OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(charId);
         }
     }
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionItemHolderPrefilterChangeEquipmentPatch
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilterChangeEquipmentPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -74,15 +74,15 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilterChangeEquipment
     // 换装可能把装备放回背包；作为预过滤只允许扩大可能持有者集合。
     private static void Postfix(Character __instance)
     {
-        OfflineCurrentGoalActionItemHolderPrefilter.AddCurrentInventory(__instance);
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.AddCurrentInventory(__instance);
         int charId = __instance.GetId();
-        OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(charId);
-        OfflineCurrentGoalActionMatcherCache.InvalidateEquipmentTarget(charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateEquipmentTarget(charId);
     }
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionItemHolderPrefilterSetInventoryPatch
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilterSetInventoryPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -94,13 +94,13 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilterSetInventoryPat
     private static void Postfix(Character __instance)
     {
         int charId = __instance.GetId();
-        OfflineCurrentGoalActionItemHolderPrefilter.AddCurrentInventory(__instance);
-        OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(charId);
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.AddCurrentInventory(__instance);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(charId);
     }
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionItemHolderPrefilterChangeEquipmentArrayPatch
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilterChangeEquipmentArrayPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -111,15 +111,15 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilterChangeEquipment
     // 批量换装同样只做单调扩大，不从预过滤集合删除任何旧持有者。
     private static void Postfix(Character __instance)
     {
-        OfflineCurrentGoalActionItemHolderPrefilter.AddCurrentInventory(__instance);
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.AddCurrentInventory(__instance);
         int charId = __instance.GetId();
-        OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(charId);
-        OfflineCurrentGoalActionMatcherCache.InvalidateEquipmentTarget(charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(charId);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateEquipmentTarget(charId);
     }
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionItemHolderPrefilterAttachPoisonsPatch
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilterAttachPoisonsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -130,13 +130,13 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilterAttachPoisonsPa
     // 淬毒可能替换物品 key；合并当前背包可覆盖所有成功变化。
     private static void Postfix(Character __instance)
     {
-        OfflineCurrentGoalActionItemHolderPrefilter.AddCurrentInventory(__instance);
-        OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.AddCurrentInventory(__instance);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(__instance.GetId());
     }
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionItemHolderPrefilterOnDeathTransferWugKingsPatch
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilterOnDeathTransferWugKingsPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -147,7 +147,7 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilterOnDeathTransfer
     // 死亡蛊转移会直接写入背包；只扩展可能持有者集合。
     private static void Postfix(Character __instance)
     {
-        OfflineCurrentGoalActionItemHolderPrefilter.AddCurrentInventory(__instance);
-        OfflineCurrentGoalActionMatcherCache.InvalidateInventoryTarget(__instance.GetId());
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.AddCurrentInventory(__instance);
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateInventoryTarget(__instance.GetId());
     }
 }

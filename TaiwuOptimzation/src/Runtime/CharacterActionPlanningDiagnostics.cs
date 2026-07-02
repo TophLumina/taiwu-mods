@@ -45,7 +45,7 @@ internal enum CharacterActionPlanningStep
     MatchTargetCharacterByConditions,
 }
 
-internal enum OfflineCurrentGoalActionTargetLookupKind
+internal enum OfflineUpdateCurrentGoalActionsTargetLookupKind
 {
     SameBlock,
     SameArea,
@@ -67,7 +67,7 @@ internal enum CharacterTargetMatchScopeKind
     Action,
 }
 
-internal enum OfflineCurrentGoalActionTargetPrefilterSkipReason
+internal enum OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason
 {
     OutOfScope,
     EmptySource,
@@ -76,17 +76,17 @@ internal enum OfflineCurrentGoalActionTargetPrefilterSkipReason
     Exception,
 }
 
-internal enum OfflineCurrentGoalActionMatcherCacheRejectReason
+internal enum OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason
 {
     None,
     StageInactive,
-    OutsideOfflineCurrentGoalActions,
+    OutsideOfflineUpdateCurrentGoalActions,
     UnsupportedDisplayGender,
     UnsupportedMerchantType,
     UnsupportedSubCondition,
 }
 
-internal enum OfflineCurrentGoalActionTargetLookupFullBuildReason
+internal enum OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason
 {
     InitialSnapshot,
     EpochMismatch,
@@ -98,7 +98,7 @@ internal enum OfflineCurrentGoalActionTargetLookupFullBuildReason
     DeltaInvalidSettlementRoot,
 }
 
-internal enum OfflineCurrentGoalActionLocationEpochIncrementReason
+internal enum OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason
 {
     LocationChangedWithoutLocation,
     LocationChangedOutsideDeltaRecording,
@@ -106,7 +106,7 @@ internal enum OfflineCurrentGoalActionLocationEpochIncrementReason
     DeltaLimit,
 }
 
-internal enum OfflineCurrentGoalActionTargetLookupRuntimeStage
+internal enum OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage
 {
     None,
     FrozenRead,
@@ -296,7 +296,7 @@ internal static class CharacterActionPlanningDiagnostics
         }
     }
 
-    public static void RecordTargetLookupFullBuild(OfflineCurrentGoalActionTargetLookupFullBuildReason reason)
+    public static void RecordTargetLookupFullBuild(OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason reason)
     {
         if (!IsActive())
         {
@@ -347,7 +347,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     public static void EndTargetLookupDeltaPublish(
         long startTicks,
-        OfflineCurrentGoalActionTargetDeltaApplyStats stats)
+        OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats stats)
     {
         if (startTicks == 0)
         {
@@ -373,8 +373,8 @@ internal static class CharacterActionPlanningDiagnostics
     }
 
     public static void RecordTargetLookupLocationEpochIncrement(
-        OfflineCurrentGoalActionLocationEpochIncrementReason reason,
-        OfflineCurrentGoalActionTargetLookupRuntimeStage stage,
+        OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason reason,
+        OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage stage,
         int charId,
         bool hasLocation,
         short oldAreaId,
@@ -423,7 +423,7 @@ internal static class CharacterActionPlanningDiagnostics
     }
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions`。</summary>
-    public static long BeginOfflineCurrentGoalActions(ActionPlanningData.ECurrentGoalType goalType)
+    public static long BeginOfflineUpdateCurrentGoalActions(ActionPlanningData.ECurrentGoalType goalType)
     {
         if (!IsActive())
         {
@@ -436,7 +436,7 @@ internal static class CharacterActionPlanningDiagnostics
     }
 
     /// <summary>离开原版 `OfflineUpdateCurrentGoalActions`。</summary>
-    public static void EndOfflineCurrentGoalActions(ActionPlanningData.ECurrentGoalType goalType, long startTicks)
+    public static void EndOfflineUpdateCurrentGoalActions(ActionPlanningData.ECurrentGoalType goalType, long startTicks)
     {
         EndGoalStep(goalType, CharacterActionPlanningStep.OfflineUpdateCurrentGoalActions, startTicks);
         LeaveGoalScope();
@@ -611,7 +611,7 @@ internal static class CharacterActionPlanningDiagnostics
     }
 
     /// <summary>记录关系目标反查表没有接管本次过滤的原因。</summary>
-    public static void RecordRelationTargetPrefilterSkipped(OfflineCurrentGoalActionTargetPrefilterSkipReason reason)
+    public static void RecordRelationTargetPrefilterSkipped(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason reason)
     {
         if (!IsActive() || _goalScopeDepth <= 0)
         {
@@ -635,7 +635,7 @@ internal static class CharacterActionPlanningDiagnostics
         Type exceptionType = exception.GetType();
         lock (SyncRoot)
         {
-            RelationTargetPrefilterSkips[(int)OfflineCurrentGoalActionTargetPrefilterSkipReason.Exception].Count++;
+            RelationTargetPrefilterSkips[(int)OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.Exception].Count++;
             if (!RelationTargetPrefilterExceptions.TryGetValue(exceptionType, out ExceptionMetric? metric))
             {
                 metric = new ExceptionMetric(exceptionType, exception.Message);
@@ -660,7 +660,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     /// <summary>记录 `TargetMatcher` 阶段缓存因安全边界而回退原版的原因。</summary>
     public static void RecordTargetMatcherCacheFallback(
-        OfflineCurrentGoalActionMatcherCacheRejectReason rejectReason,
+        OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason rejectReason,
         int rejectDetail,
         bool result) =>
         RecordTargetMatcherCache(
@@ -867,7 +867,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     /// <summary>记录一次目标索引查询。</summary>
     public static void RecordTargetLookup(
-        OfflineCurrentGoalActionTargetLookupKind kind,
+        OfflineUpdateCurrentGoalActionsTargetLookupKind kind,
         bool hit,
         int candidateIds,
         int charactersAdded)
@@ -1317,7 +1317,7 @@ internal static class CharacterActionPlanningDiagnostics
         bool miss,
         bool fallback,
         bool result,
-        OfflineCurrentGoalActionMatcherCacheRejectReason rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.None,
+        OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason rejectReason = OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.None,
         int rejectDetail = 0)
     {
         if (!IsActive() || _goalScopeDepth <= 0 || _targetMatchScopeKind != CharacterTargetMatchScopeKind.Action)
@@ -1476,11 +1476,11 @@ internal static class CharacterActionPlanningDiagnostics
         AppendGoalMetrics(builder, "secondaryGoalActions", SecondaryMetrics);
 
         builder.AppendLine("  targetLookupCalls:");
-        AppendTargetLookup(builder, nameof(OfflineCurrentGoalActionTargetLookupKind.SameBlock), TargetLookupMetrics[(int)OfflineCurrentGoalActionTargetLookupKind.SameBlock]);
-        AppendTargetLookup(builder, nameof(OfflineCurrentGoalActionTargetLookupKind.SameArea), TargetLookupMetrics[(int)OfflineCurrentGoalActionTargetLookupKind.SameArea]);
-        AppendTargetLookup(builder, nameof(OfflineCurrentGoalActionTargetLookupKind.SameState), TargetLookupMetrics[(int)OfflineCurrentGoalActionTargetLookupKind.SameState]);
-        AppendTargetLookup(builder, nameof(OfflineCurrentGoalActionTargetLookupKind.BlockRange), TargetLookupMetrics[(int)OfflineCurrentGoalActionTargetLookupKind.BlockRange]);
-        AppendTargetLookup(builder, nameof(OfflineCurrentGoalActionTargetLookupKind.SettlementRange), TargetLookupMetrics[(int)OfflineCurrentGoalActionTargetLookupKind.SettlementRange]);
+        AppendTargetLookup(builder, nameof(OfflineUpdateCurrentGoalActionsTargetLookupKind.SameBlock), TargetLookupMetrics[(int)OfflineUpdateCurrentGoalActionsTargetLookupKind.SameBlock]);
+        AppendTargetLookup(builder, nameof(OfflineUpdateCurrentGoalActionsTargetLookupKind.SameArea), TargetLookupMetrics[(int)OfflineUpdateCurrentGoalActionsTargetLookupKind.SameArea]);
+        AppendTargetLookup(builder, nameof(OfflineUpdateCurrentGoalActionsTargetLookupKind.SameState), TargetLookupMetrics[(int)OfflineUpdateCurrentGoalActionsTargetLookupKind.SameState]);
+        AppendTargetLookup(builder, nameof(OfflineUpdateCurrentGoalActionsTargetLookupKind.BlockRange), TargetLookupMetrics[(int)OfflineUpdateCurrentGoalActionsTargetLookupKind.BlockRange]);
+        AppendTargetLookup(builder, nameof(OfflineUpdateCurrentGoalActionsTargetLookupKind.SettlementRange), TargetLookupMetrics[(int)OfflineUpdateCurrentGoalActionsTargetLookupKind.SettlementRange]);
         return builder.ToString();
     }
 
@@ -1594,11 +1594,11 @@ internal static class CharacterActionPlanningDiagnostics
     private static void AppendRelationTargetPrefilterSkips(StringBuilder builder)
     {
         builder.AppendLine("  actualRelationTargetPrefilterSkips:");
-        AppendSkipMetric(builder, nameof(OfflineCurrentGoalActionTargetPrefilterSkipReason.OutOfScope), RelationTargetPrefilterSkips[(int)OfflineCurrentGoalActionTargetPrefilterSkipReason.OutOfScope]);
-        AppendSkipMetric(builder, nameof(OfflineCurrentGoalActionTargetPrefilterSkipReason.EmptySource), RelationTargetPrefilterSkips[(int)OfflineCurrentGoalActionTargetPrefilterSkipReason.EmptySource]);
-        AppendSkipMetric(builder, nameof(OfflineCurrentGoalActionTargetPrefilterSkipReason.NoRelationRule), RelationTargetPrefilterSkips[(int)OfflineCurrentGoalActionTargetPrefilterSkipReason.NoRelationRule]);
-        AppendSkipMetric(builder, nameof(OfflineCurrentGoalActionTargetPrefilterSkipReason.UnsafeRule), RelationTargetPrefilterSkips[(int)OfflineCurrentGoalActionTargetPrefilterSkipReason.UnsafeRule]);
-        AppendSkipMetric(builder, nameof(OfflineCurrentGoalActionTargetPrefilterSkipReason.Exception), RelationTargetPrefilterSkips[(int)OfflineCurrentGoalActionTargetPrefilterSkipReason.Exception]);
+        AppendSkipMetric(builder, nameof(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.OutOfScope), RelationTargetPrefilterSkips[(int)OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.OutOfScope]);
+        AppendSkipMetric(builder, nameof(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.EmptySource), RelationTargetPrefilterSkips[(int)OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.EmptySource]);
+        AppendSkipMetric(builder, nameof(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.NoRelationRule), RelationTargetPrefilterSkips[(int)OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.NoRelationRule]);
+        AppendSkipMetric(builder, nameof(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.UnsafeRule), RelationTargetPrefilterSkips[(int)OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.UnsafeRule]);
+        AppendSkipMetric(builder, nameof(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.Exception), RelationTargetPrefilterSkips[(int)OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.Exception]);
     }
 
     private static void AppendSkipMetric(StringBuilder builder, string name, SkipMetric metric)
@@ -1959,7 +1959,7 @@ internal static class CharacterActionPlanningDiagnostics
             return;
         }
 
-        List<KeyValuePair<(OfflineCurrentGoalActionMatcherCacheRejectReason Reason, int Detail), int>> sorted =
+        List<KeyValuePair<(OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason Reason, int Detail), int>> sorted =
             new(metric.FallbackReasonCounts);
         sorted.Sort(static (left, right) => right.Value.CompareTo(left.Value));
 
@@ -1972,7 +1972,7 @@ internal static class CharacterActionPlanningDiagnostics
                 builder.Append('|');
             }
 
-            KeyValuePair<(OfflineCurrentGoalActionMatcherCacheRejectReason Reason, int Detail), int> pair = sorted[i];
+            KeyValuePair<(OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason Reason, int Detail), int> pair = sorted[i];
             AppendTargetMatcherFallbackReason(builder, pair.Key.Reason, pair.Key.Detail);
             builder.Append('=');
             builder.Append(pair.Value);
@@ -1981,17 +1981,17 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static void AppendTargetMatcherFallbackReason(
         StringBuilder builder,
-        OfflineCurrentGoalActionMatcherCacheRejectReason reason,
+        OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason reason,
         int detail)
     {
         builder.Append(reason);
         string? detailName = reason switch
         {
-            OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedDisplayGender =>
+            OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedDisplayGender =>
                 Enum.GetName(typeof(ECharacterMatcherGenderType), detail),
-            OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedSubCondition =>
+            OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedSubCondition =>
                 Enum.GetName(typeof(ECharacterMatcherSubCondition), detail),
-            OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedMerchantType =>
+            OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedMerchantType =>
                 detail.ToString(),
             _ => null,
         };
@@ -2141,27 +2141,27 @@ internal static class CharacterActionPlanningDiagnostics
     private static string GetSensorName(int sensorType) =>
         Enum.GetName(typeof(EPlanningStateSensorType), sensorType) ?? sensorType.ToString();
 
-    private static OfflineCurrentGoalActionTargetLookupFullBuildReason GetFullBuildReason(
-        OfflineCurrentGoalActionTargetDeltaFallbackReason reason) =>
+    private static OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason GetFullBuildReason(
+        OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason reason) =>
         reason switch
         {
-            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidLocation =>
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.DeltaInvalidLocation,
-            OfflineCurrentGoalActionTargetDeltaFallbackReason.AffectedLimit =>
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.DeltaAffectedLimit,
-            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidBlock =>
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.DeltaInvalidBlock,
-            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidArea =>
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.DeltaInvalidArea,
-            OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidSettlementRoot =>
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.DeltaInvalidSettlementRoot,
-            _ => OfflineCurrentGoalActionTargetLookupFullBuildReason.SerialApplyAllForced,
+            OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidLocation =>
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.DeltaInvalidLocation,
+            OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.AffectedLimit =>
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.DeltaAffectedLimit,
+            OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidBlock =>
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.DeltaInvalidBlock,
+            OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidArea =>
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.DeltaInvalidArea,
+            OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidSettlementRoot =>
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.DeltaInvalidSettlementRoot,
+            _ => OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.SerialApplyAllForced,
         };
 
     private static string FormatFullBuildReasons()
     {
         StringBuilder builder = new(128);
-        Array values = Enum.GetValues(typeof(OfflineCurrentGoalActionTargetLookupFullBuildReason));
+        Array values = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason));
         bool hasValue = false;
         for (int i = 0; i < values.Length; i++)
         {
@@ -2193,8 +2193,8 @@ internal static class CharacterActionPlanningDiagnostics
         }
 
         StringBuilder builder = new(256);
-        Array reasons = Enum.GetValues(typeof(OfflineCurrentGoalActionLocationEpochIncrementReason));
-        Array stages = Enum.GetValues(typeof(OfflineCurrentGoalActionTargetLookupRuntimeStage));
+        Array reasons = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason));
+        Array stages = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage));
         bool hasValue = false;
         for (int reason = 0; reason < reasons.Length; reason++)
         {
@@ -2281,7 +2281,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static TargetLookupMetric[] CreateTargetLookupMetricArray()
     {
-        Array values = Enum.GetValues(typeof(OfflineCurrentGoalActionTargetLookupKind));
+        Array values = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupKind));
         TargetLookupMetric[] metrics = new TargetLookupMetric[values.Length];
         for (int i = 0; i < metrics.Length; i++)
         {
@@ -2305,7 +2305,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static BuildReasonMetric[] CreateBuildReasonMetricArray()
     {
-        Array values = Enum.GetValues(typeof(OfflineCurrentGoalActionTargetLookupFullBuildReason));
+        Array values = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason));
         BuildReasonMetric[] metrics = new BuildReasonMetric[values.Length];
         for (int i = 0; i < metrics.Length; i++)
         {
@@ -2317,8 +2317,8 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static LocationEpochIncrementMetric[,] CreateLocationEpochIncrementMetrics()
     {
-        int reasonCount = Enum.GetValues(typeof(OfflineCurrentGoalActionLocationEpochIncrementReason)).Length;
-        int stageCount = Enum.GetValues(typeof(OfflineCurrentGoalActionTargetLookupRuntimeStage)).Length;
+        int reasonCount = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason)).Length;
+        int stageCount = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage)).Length;
         LocationEpochIncrementMetric[,] metrics = new LocationEpochIncrementMetric[reasonCount, stageCount];
         for (int reason = 0; reason < reasonCount; reason++)
         {
@@ -2346,7 +2346,7 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static SkipMetric[] CreateSkipMetricArray()
     {
-        Array values = Enum.GetValues(typeof(OfflineCurrentGoalActionTargetPrefilterSkipReason));
+        Array values = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason));
         SkipMetric[] metrics = new SkipMetric[values.Length];
         for (int i = 0; i < metrics.Length; i++)
         {
@@ -2764,7 +2764,7 @@ internal static class CharacterActionPlanningDiagnostics
         public int Fallbacks;
         public int TrueCount;
         public int FalseCount;
-        public readonly Dictionary<(OfflineCurrentGoalActionMatcherCacheRejectReason Reason, int Detail), int> FallbackReasonCounts = new(4);
+        public readonly Dictionary<(OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason Reason, int Detail), int> FallbackReasonCounts = new(4);
 
         public int SavedCalls => Hits;
 
@@ -2785,7 +2785,7 @@ internal static class CharacterActionPlanningDiagnostics
             bool miss,
             bool fallback,
             bool result,
-            OfflineCurrentGoalActionMatcherCacheRejectReason rejectReason,
+            OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason rejectReason,
             int rejectDetail)
         {
             Calls++;
@@ -2802,7 +2802,7 @@ internal static class CharacterActionPlanningDiagnostics
             if (fallback)
             {
                 Fallbacks++;
-                if (rejectReason != OfflineCurrentGoalActionMatcherCacheRejectReason.None)
+                if (rejectReason != OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.None)
                 {
                     var key = (rejectReason, rejectDetail);
                     FallbackReasonCounts.TryGetValue(key, out int count);
@@ -2913,8 +2913,8 @@ internal static class CharacterActionPlanningDiagnostics
         public int TargetLookupPrimaryApplyAllAffectedAreas;
         public int TargetLookupPrimaryApplyAllOverflows;
         public int TargetLookupLocationEpochIncrementCount;
-        public OfflineCurrentGoalActionLocationEpochIncrementReason FirstTargetLookupLocationEpochIncrementReason;
-        public OfflineCurrentGoalActionTargetLookupRuntimeStage FirstTargetLookupLocationEpochIncrementStage;
+        public OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason FirstTargetLookupLocationEpochIncrementReason;
+        public OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage FirstTargetLookupLocationEpochIncrementStage;
         public int FirstTargetLookupLocationEpochIncrementCharId;
         public bool FirstTargetLookupLocationEpochIncrementHasLocation;
         public short FirstTargetLookupLocationEpochIncrementOldAreaId;

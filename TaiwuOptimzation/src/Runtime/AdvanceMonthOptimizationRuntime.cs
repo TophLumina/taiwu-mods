@@ -5,7 +5,7 @@ namespace TaiwuOptimization.Runtime;
 
 internal static class AdvanceMonthOptimizationRuntime
 {
-    private static UpdateCurrentGoalActionsOptimizationStage _updateCurrentGoalActionsStage;
+    private static OfflineUpdateCurrentGoalActionsOptimizationStage _offlineUpdateCurrentGoalActionsStage;
 
     public static void Initialize() =>
         ResetRuntimeCaches();
@@ -13,7 +13,7 @@ internal static class AdvanceMonthOptimizationRuntime
     public static void Dispose() =>
         ResetRuntimeCaches();
 
-    /// <summary>过月开始时准备并冻结快照；目标索引会在 NPC 规划前同步全量刷新。</summary>
+    /// <summary>过月开始时准备保护快照；NPC 目标索引会在规划前同步冻结。</summary>
     public static void BeginAdvanceMonthOptimizationScope()
     {
         CharacterActionPlanningDiagnostics.BeginAdvanceMonth();
@@ -23,89 +23,89 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
-    /// <summary>在原版主/副目标行动阶段前冻结关系候选快照，确保晚于 `CharacterRelationsUpdate`。</summary>
-    public static void BeginUpdateCurrentGoalActionsOptimizationStage(bool isPrimaryGoalActions)
+    /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 阶段前冻结只读缓存。</summary>
+    public static void BeginOfflineUpdateCurrentGoalActionsOptimizationStage(bool isPrimaryGoalActions)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
         {
             return;
         }
 
-        _updateCurrentGoalActionsStage = isPrimaryGoalActions
-            ? UpdateCurrentGoalActionsOptimizationStage.PrimaryPlanning
-            : UpdateCurrentGoalActionsOptimizationStage.SecondaryPlanning;
-        OfflineCurrentGoalActionMatcherCache.BeginUpdateCurrentGoalActionsStage();
+        _offlineUpdateCurrentGoalActionsStage = isPrimaryGoalActions
+            ? OfflineUpdateCurrentGoalActionsOptimizationStage.PrimaryPlanning
+            : OfflineUpdateCurrentGoalActionsOptimizationStage.SecondaryPlanning;
+        OfflineUpdateCurrentGoalActionsMatcherCache.BeginOfflineUpdateCurrentGoalActionsStage();
         long targetLookupBuildStartTicks = CharacterActionPlanningDiagnostics.BeginTargetLookupBuild();
-        OfflineCurrentGoalActionTargetLookupCache.EnsureFrozenBeforeUpdateCurrentGoalActions();
-        OfflineCurrentGoalActionItemHolderPrefilter.FreezeBeforeUpdateCurrentGoalActions();
-        OfflineCurrentGoalActionTargetPrefilter.FreezeBeforeAdvanceMonth();
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.EnsureFrozenBeforeUpdateCurrentGoalActions();
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.FreezeBeforeUpdateCurrentGoalActions();
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.FreezeBeforeAdvanceMonth();
         CharacterActionPlanningDiagnostics.EndTargetLookupBuild(targetLookupBuildStartTicks);
     }
 
-    /// <summary>主/副目标行动阶段结束后释放只服务于该阶段的热路径缓存。</summary>
-    public static void EnterUpdateCurrentGoalActionsApplyAll()
+    /// <summary>进入原版串行 `ApplyAll` 前结束 planning 只读阶段，并开始记录写回 delta。</summary>
+    public static void EnterOfflineUpdateCurrentGoalActionsApplyAll()
     {
-        if (_updateCurrentGoalActionsStage == UpdateCurrentGoalActionsOptimizationStage.PrimaryPlanning)
+        if (_offlineUpdateCurrentGoalActionsStage == OfflineUpdateCurrentGoalActionsOptimizationStage.PrimaryPlanning)
         {
-            EndUpdateCurrentGoalActionsReadStage();
-            OfflineCurrentGoalActionTargetLookupCache.BeginSerialApplyAllDeltaRecording(collectDeltas: true);
-            OfflineCurrentGoalActionItemHolderPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: true);
-            OfflineCurrentGoalActionTargetPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: true);
-            _updateCurrentGoalActionsStage = UpdateCurrentGoalActionsOptimizationStage.PrimaryApplyAll;
+            EndOfflineUpdateCurrentGoalActionsReadStage();
+            OfflineUpdateCurrentGoalActionsTargetLookupCache.BeginSerialApplyAllDeltaRecording(collectDeltas: true);
+            OfflineUpdateCurrentGoalActionsItemHolderPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: true);
+            OfflineUpdateCurrentGoalActionsTargetPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: true);
+            _offlineUpdateCurrentGoalActionsStage = OfflineUpdateCurrentGoalActionsOptimizationStage.PrimaryApplyAll;
             return;
         }
 
-        if (_updateCurrentGoalActionsStage == UpdateCurrentGoalActionsOptimizationStage.SecondaryPlanning)
+        if (_offlineUpdateCurrentGoalActionsStage == OfflineUpdateCurrentGoalActionsOptimizationStage.SecondaryPlanning)
         {
-            EndUpdateCurrentGoalActionsReadStage();
-            OfflineCurrentGoalActionTargetLookupCache.BeginSerialApplyAllDeltaRecording(collectDeltas: false);
-            OfflineCurrentGoalActionItemHolderPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: false);
-            OfflineCurrentGoalActionTargetPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: false);
-            _updateCurrentGoalActionsStage = UpdateCurrentGoalActionsOptimizationStage.SecondaryApplyAll;
+            EndOfflineUpdateCurrentGoalActionsReadStage();
+            OfflineUpdateCurrentGoalActionsTargetLookupCache.BeginSerialApplyAllDeltaRecording(collectDeltas: false);
+            OfflineUpdateCurrentGoalActionsItemHolderPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: false);
+            OfflineUpdateCurrentGoalActionsTargetPrefilter.BeginSerialApplyAllDeltaRecording(collectDeltas: false);
+            _offlineUpdateCurrentGoalActionsStage = OfflineUpdateCurrentGoalActionsOptimizationStage.SecondaryApplyAll;
         }
     }
 
-    public static void FinishUpdateCurrentGoalActionsOptimizationStage()
+    public static void FinishOfflineUpdateCurrentGoalActionsOptimizationStage()
     {
-        if (_updateCurrentGoalActionsStage is
-            UpdateCurrentGoalActionsOptimizationStage.PrimaryPlanning or
-            UpdateCurrentGoalActionsOptimizationStage.SecondaryPlanning)
+        if (_offlineUpdateCurrentGoalActionsStage is
+            OfflineUpdateCurrentGoalActionsOptimizationStage.PrimaryPlanning or
+            OfflineUpdateCurrentGoalActionsOptimizationStage.SecondaryPlanning)
         {
-            EndUpdateCurrentGoalActionsReadStage();
+            EndOfflineUpdateCurrentGoalActionsReadStage();
         }
 
-        if (_updateCurrentGoalActionsStage is
-            UpdateCurrentGoalActionsOptimizationStage.PrimaryApplyAll or
-            UpdateCurrentGoalActionsOptimizationStage.SecondaryApplyAll)
+        if (_offlineUpdateCurrentGoalActionsStage is
+            OfflineUpdateCurrentGoalActionsOptimizationStage.PrimaryApplyAll or
+            OfflineUpdateCurrentGoalActionsOptimizationStage.SecondaryApplyAll)
         {
-            OfflineCurrentGoalActionTargetLookupCache.EndSerialApplyAllDeltaRecording();
-            OfflineCurrentGoalActionItemHolderPrefilter.EndSerialApplyAllDeltaRecording();
-            OfflineCurrentGoalActionTargetPrefilter.EndSerialApplyAllDeltaRecording();
+            OfflineUpdateCurrentGoalActionsTargetLookupCache.EndSerialApplyAllDeltaRecording();
+            OfflineUpdateCurrentGoalActionsItemHolderPrefilter.EndSerialApplyAllDeltaRecording();
+            OfflineUpdateCurrentGoalActionsTargetPrefilter.EndSerialApplyAllDeltaRecording();
         }
 
-        _updateCurrentGoalActionsStage = UpdateCurrentGoalActionsOptimizationStage.None;
+        _offlineUpdateCurrentGoalActionsStage = OfflineUpdateCurrentGoalActionsOptimizationStage.None;
     }
 
-    public static void EndUpdateCurrentGoalActionsOptimizationStage() =>
-        FinishUpdateCurrentGoalActionsOptimizationStage();
+    public static void EndOfflineUpdateCurrentGoalActionsOptimizationStage() =>
+        FinishOfflineUpdateCurrentGoalActionsOptimizationStage();
 
-    private static void EndUpdateCurrentGoalActionsReadStage()
+    private static void EndOfflineUpdateCurrentGoalActionsReadStage()
     {
-        OfflineCurrentGoalActionTargetLookupCache.EndUpdateCurrentGoalActionsStage();
-        OfflineCurrentGoalActionItemHolderPrefilter.EndFrozenReadStage();
-        OfflineCurrentGoalActionTargetPrefilter.EndFrozenReadStage();
-        OfflineCurrentGoalActionMatcherCache.EndUpdateCurrentGoalActionsStage();
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.EndOfflineUpdateCurrentGoalActionsStage();
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.EndFrozenReadStage();
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.EndFrozenReadStage();
+        OfflineUpdateCurrentGoalActionsMatcherCache.EndOfflineUpdateCurrentGoalActionsStage();
     }
 
-    /// <summary>过月结束后释放冻结快照，后续帧继续构建最新快照。</summary>
+    /// <summary>过月结束后释放冻结快照，避免后续帧继续读取旧世界状态。</summary>
     public static void EndAdvanceMonthOptimizationScope()
     {
-        EndUpdateCurrentGoalActionsOptimizationStage();
+        EndOfflineUpdateCurrentGoalActionsOptimizationStage();
         AdvanceMonthProtectionSnapshotCache.UnfreezeAfterAdvanceMonth();
-        OfflineCurrentGoalActionItemHolderPrefilter.Unfreeze();
-        OfflineCurrentGoalActionTargetPrefilter.UnfreezeAndInvalidate();
-        OfflineCurrentGoalActionTargetLookupCache.UnfreezeAndInvalidate();
-        OfflineCurrentGoalActionMatcherCache.EndUpdateCurrentGoalActionsStage();
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.Unfreeze();
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.UnfreezeAndInvalidate();
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.UnfreezeAndInvalidate();
+        OfflineUpdateCurrentGoalActionsMatcherCache.EndOfflineUpdateCurrentGoalActionsStage();
         CharacterActionPlanningDiagnostics.EndAdvanceMonth();
     }
 
@@ -130,18 +130,18 @@ internal static class AdvanceMonthOptimizationRuntime
         AdvanceMonthProtectionSnapshotCache.TickBuildProtectionSnapshot(in frameBudget);
     }
 
-    /// <summary>退出世界/切档时丢弃缓存，避免引用旧世界数据。</summary>
+    /// <summary>退出世界或切档时丢弃缓存，避免引用旧世界数据。</summary>
     public static void LeaveWorld() =>
         ResetRuntimeCaches();
 
     private static void ResetRuntimeCaches()
     {
-        _updateCurrentGoalActionsStage = UpdateCurrentGoalActionsOptimizationStage.None;
+        _offlineUpdateCurrentGoalActionsStage = OfflineUpdateCurrentGoalActionsOptimizationStage.None;
         AdvanceMonthProtectionSnapshotCache.Reset();
-        OfflineCurrentGoalActionTargetLookupCache.Reset();
-        OfflineCurrentGoalActionItemHolderPrefilter.Reset();
-        OfflineCurrentGoalActionTargetPrefilter.UnfreezeAndInvalidate();
-        OfflineCurrentGoalActionMatcherCache.Reset();
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.Reset();
+        OfflineUpdateCurrentGoalActionsItemHolderPrefilter.Reset();
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.UnfreezeAndInvalidate();
+        OfflineUpdateCurrentGoalActionsMatcherCache.Reset();
     }
 
     private static bool IsWorldDataAvailable()
@@ -156,7 +156,7 @@ internal static class AdvanceMonthOptimizationRuntime
         }
     }
 
-    private enum UpdateCurrentGoalActionsOptimizationStage
+    private enum OfflineUpdateCurrentGoalActionsOptimizationStage
     {
         None,
         PrimaryPlanning,

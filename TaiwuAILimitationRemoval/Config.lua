@@ -26,13 +26,21 @@ return {
 		},
 		[2] = {
 			SettingType = "Toggle",
+			Key = "EnableHostileActionRangeExpansion",
+			DisplayName = "放宽敌对行动索敌范围",
+			Description = "开启后将原版 A89/A90/A91 攻击、A100 下毒、A101 暗害的目标范围从同地块放宽为周围 2 格。此项会提高 NPC 敌对行为出现概率，不属于严格等价原版行为。",
+			GroupName = "NPC行为解除限制",
+			DefaultValue = true,
+		},
+		[3] = {
+			SettingType = "Toggle",
 			Key = "EnableNpcActionLimitationRemovalLog",
 			DisplayName = "输出解除限制行为日志",
-			Description = "测试用，默认关闭。开启后会在后端 GameData_*.log 中输出白名单行为的可达性放行、action 创建成功/失败和实际执行完成情况。",
+			Description = "测试用，默认关闭。开启后会在后端 GameData_*.log 中输出白名单行为和敌对范围放宽行为的可达性放行、action 创建成功/失败和实际执行完成情况。",
 			GroupName = "诊断日志",
 			DefaultValue = false,
 		},
-		[3] = {
+		[4] = {
 			SettingType = "Toggle",
 			Key = "EnableNpcActionReachabilityDiagnostics",
 			DisplayName = "输出NPC行为可达性诊断",

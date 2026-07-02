@@ -10,7 +10,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class OfflineCurrentGoalActionTargetPrefilter
+internal static class OfflineUpdateCurrentGoalActionsTargetPrefilter
 {
     private const int HasCandidateSet = 1;
     private const int UnknownCandidateSet = 2;
@@ -30,7 +30,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
     private static readonly List<RelationDelta> SerialApplyAllRelationDeltas = new(128);
 
     [ThreadStatic]
-    private static int _offlineCurrentGoalActionScopeDepth;
+    private static int _offlineUpdateCurrentGoalActionsScopeDepth;
 
     [ThreadStatic]
     private static Snapshot? _offlineTargetConditionSnapshot;
@@ -49,8 +49,8 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
 
         try
         {
-            if (!OfflineCurrentGoalActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
-                    out OfflineCurrentGoalActionTargetSnapshot planningSnapshot) ||
+            if (!OfflineUpdateCurrentGoalActionsTargetLookupCache.TryGetFrozenPlanningSnapshot(
+                    out OfflineUpdateCurrentGoalActionsTargetSnapshot planningSnapshot) ||
                 planningSnapshot.CharacterRecords.Length == 0)
             {
                 UnfreezeAndInvalidate();
@@ -91,18 +91,18 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
         _isFrozen = false;
         Volatile.Write(ref _frozenSnapshot, null);
         Volatile.Write(ref _relationEpoch, 0);
-        _offlineCurrentGoalActionScopeDepth = 0;
+        _offlineUpdateCurrentGoalActionsScopeDepth = 0;
         _offlineTargetConditionSnapshot = null;
         _candidateListPool?.Clear();
         _collectSerialApplyAllRelationDeltas = false;
         SerialApplyAllRelationDeltas.Clear();
     }
 
-    /// <summary>绂诲紑 worker planning 鍙闃舵锛涗繚鐣欏揩鐓т緵涓嬩竴闃舵鎸?epoch 鍒ゆ柇澶嶇敤銆?/summary>
+    /// <summary>离开 worker planning 只读阶段；保留快照供下一阶段按 epoch 判断复用。</summary>
     public static void EndFrozenReadStage()
     {
         _isFrozen = false;
-        _offlineCurrentGoalActionScopeDepth = 0;
+        _offlineUpdateCurrentGoalActionsScopeDepth = 0;
         _offlineTargetConditionSnapshot = null;
     }
 
@@ -133,22 +133,22 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
     }
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 阶段。</summary>
-    public static void EnterOfflineCurrentGoalActions()
+    public static void EnterOfflineUpdateCurrentGoalActions()
     {
         if (_isFrozen)
         {
-            _offlineCurrentGoalActionScopeDepth++;
+            _offlineUpdateCurrentGoalActionsScopeDepth++;
             _offlineTargetConditionSnapshot = Volatile.Read(ref _frozenSnapshot);
         }
     }
 
     /// <summary>离开原版 `OfflineUpdateCurrentGoalActions` 阶段。</summary>
-    public static void LeaveOfflineCurrentGoalActions()
+    public static void LeaveOfflineUpdateCurrentGoalActions()
     {
-        if (_offlineCurrentGoalActionScopeDepth > 0)
+        if (_offlineUpdateCurrentGoalActionsScopeDepth > 0)
         {
-            _offlineCurrentGoalActionScopeDepth--;
-            if (_offlineCurrentGoalActionScopeDepth == 0)
+            _offlineUpdateCurrentGoalActionsScopeDepth--;
+            if (_offlineUpdateCurrentGoalActionsScopeDepth == 0)
             {
                 _offlineTargetConditionSnapshot = null;
             }
@@ -171,21 +171,21 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
     {
         filtered = source ?? Array.Empty<Character>();
         rentedList = null;
-        if (!_isFrozen || _offlineCurrentGoalActionScopeDepth <= 0 || agent?.Object == null)
+        if (!_isFrozen || _offlineUpdateCurrentGoalActionsScopeDepth <= 0 || agent?.Object == null)
         {
-            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.OutOfScope);
+            RecordSkip(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.OutOfScope);
             return false;
         }
 
         if (_offlineTargetConditionSnapshot == null)
         {
-            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.UnsafeRule);
+            RecordSkip(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.UnsafeRule);
             return false;
         }
 
         if (source == null || source.Count <= 1)
         {
-            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.EmptySource);
+            RecordSkip(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.EmptySource);
             return false;
         }
 
@@ -193,22 +193,22 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
         if (!TryBuildGoalCandidateSet(actorCharId, currentGoal, out HashSet<int>? goalCandidates) ||
             !TryBuildActionCandidateSet(actorCharId, currentAction, out HashSet<int>? actionCandidates))
         {
-            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.UnsafeRule);
+            RecordSkip(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.UnsafeRule);
             return false;
         }
 
         HashSet<int>? selectorRelationCandidates = TryGetSelectorRelationCandidateSet(actorCharId, currentAction);
-        bool hasInventoryFilter = OfflineCurrentGoalActionItemHolderPrefilter.TryCreateHolderFilter(
+        bool hasInventoryFilter = OfflineUpdateCurrentGoalActionsItemHolderPrefilter.TryCreateHolderFilter(
             currentAction,
             actionArgs,
-            out OfflineCurrentGoalActionItemHolderPrefilter.HolderFilter inventoryFilter);
+            out OfflineUpdateCurrentGoalActionsItemHolderPrefilter.HolderFilter inventoryFilter);
 
         if (goalCandidates == null &&
             actionCandidates == null &&
             selectorRelationCandidates == null &&
             !hasInventoryFilter)
         {
-            RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason.NoRelationRule);
+            RecordSkip(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason.NoRelationRule);
             return false;
         }
 
@@ -285,7 +285,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
         TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
     private static Snapshot BuildSnapshot(
-        OfflineCurrentGoalActionTargetRecord[] characterRecords,
+        OfflineUpdateCurrentGoalActionsTargetRecord[] characterRecords,
         int relationEpoch,
         int sourceLocationEpoch)
     {
@@ -297,7 +297,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
 
         BuildCharacterTargetGroups(characterRecords, globalCandidateSets, factionCandidateSets, belongAreaCandidateSets);
 
-        foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
+        foreach (OfflineUpdateCurrentGoalActionsTargetRecord record in characterRecords)
         {
             int actorCharId = record.CharId;
             ActorRelationCandidateBuilder relationBuilder = new(actorCharId);
@@ -325,7 +325,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
     }
 
     private static void BuildCharacterTargetGroups(
-        OfflineCurrentGoalActionTargetRecord[] characterRecords,
+        OfflineUpdateCurrentGoalActionsTargetRecord[] characterRecords,
         Dictionary<int, HashSet<int>> globalCandidateSets,
         Dictionary<int, HashSet<int>> factionCandidateSets,
         Dictionary<short, HashSet<int>> belongAreaCandidateSets)
@@ -336,7 +336,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
             AddToSet(globalCandidateSets, 296, taiwuCharId);
         }
 
-        foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
+        foreach (OfflineUpdateCurrentGoalActionsTargetRecord record in characterRecords)
         {
             int charId = record.CharId;
             Character character = record.Character;
@@ -778,7 +778,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilter
             outputCount);
     }
 
-    private static void RecordSkip(OfflineCurrentGoalActionTargetPrefilterSkipReason reason)
+    private static void RecordSkip(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason reason)
     {
         if (CharacterActionPlanningDiagnostics.IsRecording)
         {

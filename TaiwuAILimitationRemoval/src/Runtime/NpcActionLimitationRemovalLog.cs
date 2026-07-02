@@ -63,7 +63,7 @@ internal static class NpcActionLimitationRemovalLog
         NpcActionCreationLogState state,
         CharacterActionData? actionData)
     {
-        if (!Enabled || !NpcActionLimitationRemoval.IsBypassedAction(state.ActionTemplateId))
+        if (!Enabled || !NpcActionLimitationRemoval.IsLoggedAction(state.ActionTemplateId))
         {
             return;
         }
@@ -80,7 +80,7 @@ internal static class NpcActionLimitationRemovalLog
         CharacterActionData actionData,
         CharacterActionData? result)
     {
-        if (!Enabled || !NpcActionLimitationRemoval.IsBypassedAction(state.ActionTemplateId))
+        if (!Enabled || !NpcActionLimitationRemoval.IsLoggedAction(state.ActionTemplateId))
         {
             return;
         }

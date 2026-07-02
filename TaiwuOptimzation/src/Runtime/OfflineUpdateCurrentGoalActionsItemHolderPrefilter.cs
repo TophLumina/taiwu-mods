@@ -9,7 +9,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class OfflineCurrentGoalActionItemHolderPrefilter
+internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilter
 {
     private static Snapshot? _frozenSnapshot;
     private static volatile bool _isFrozen;
@@ -28,8 +28,8 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilter
 
         try
         {
-            if (!OfflineCurrentGoalActionTargetLookupCache.TryGetFrozenPlanningSnapshot(
-                    out OfflineCurrentGoalActionTargetSnapshot planningSnapshot) ||
+            if (!OfflineUpdateCurrentGoalActionsTargetLookupCache.TryGetFrozenPlanningSnapshot(
+                    out OfflineUpdateCurrentGoalActionsTargetSnapshot planningSnapshot) ||
                 planningSnapshot.CharacterRecords.Length == 0)
             {
                 Unfreeze();
@@ -59,7 +59,7 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilter
         }
         catch (Exception exception)
         {
-            OfflineCurrentGoalActionTargetPrefilter.RecordException(exception);
+            OfflineUpdateCurrentGoalActionsTargetPrefilter.RecordException(exception);
             Unfreeze();
         }
     }
@@ -177,13 +177,13 @@ internal static class OfflineCurrentGoalActionItemHolderPrefilter
         template.CharacterSelector == EPlanningActionCharacterSelector.RequestTarget;
 
     private static Snapshot BuildSnapshot(
-        OfflineCurrentGoalActionTargetRecord[] characterRecords,
+        OfflineUpdateCurrentGoalActionsTargetRecord[] characterRecords,
         int inventoryEpoch,
         int sourceLocationEpoch)
     {
         var holdersByItemTemplate = new Dictionary<int, HashSet<int>>();
         var detoxMedicineHoldersByPoisonType = new Dictionary<sbyte, HashSet<int>>();
-        foreach (OfflineCurrentGoalActionTargetRecord record in characterRecords)
+        foreach (OfflineUpdateCurrentGoalActionsTargetRecord record in characterRecords)
         {
             foreach (ItemKey itemKey in record.Character.GetInventory().Items.Keys)
             {

@@ -14,7 +14,7 @@ using Character = GameData.Domains.Character.Character;
 namespace TaiwuOptimization.Patches;
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetLookupCacheScopePatch
+internal static class OfflineUpdateCurrentGoalActionsTargetLookupCacheScopePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -25,22 +25,22 @@ internal static class OfflineCurrentGoalActionTargetLookupCacheScopePatch
     // 只在原版离线规划阶段启用候选查找索引；补全阶段仍走原版扫描。
     private static void Prefix(ActionPlanningData.ECurrentGoalType goalType)
     {
-        OfflineCurrentGoalActionTargetLookupCache.EnterOfflineCurrentGoalActions(goalType);
-        OfflineCurrentGoalActionTargetPrefilter.EnterOfflineCurrentGoalActions();
-        OfflineCurrentGoalActionMatcherCache.EnterOfflineCurrentGoalActions();
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.EnterOfflineUpdateCurrentGoalActions(goalType);
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.EnterOfflineUpdateCurrentGoalActions();
+        OfflineUpdateCurrentGoalActionsMatcherCache.EnterOfflineUpdateCurrentGoalActions();
     }
 
     private static Exception? Finalizer(Exception? __exception)
     {
-        OfflineCurrentGoalActionMatcherCache.LeaveOfflineCurrentGoalActions();
-        OfflineCurrentGoalActionTargetPrefilter.LeaveOfflineCurrentGoalActions();
-        OfflineCurrentGoalActionTargetLookupCache.LeaveOfflineCurrentGoalActions();
+        OfflineUpdateCurrentGoalActionsMatcherCache.LeaveOfflineUpdateCurrentGoalActions();
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.LeaveOfflineUpdateCurrentGoalActions();
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.LeaveOfflineUpdateCurrentGoalActions();
         return __exception;
     }
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetLookupCacheBlockPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetLookupCacheBlockPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -50,11 +50,11 @@ internal static class OfflineCurrentGoalActionTargetLookupCacheBlockPatch
 
     // SameBlock 查询直接从地块索引追加候选；失败时回退原版。
     private static bool Prefix(CharacterPlanningAgent __instance, List<Character> characters, MapBlockData mapBlockData) =>
-        !OfflineCurrentGoalActionTargetLookupCache.TryAddCharactersInBlock(__instance, characters, mapBlockData);
+        !OfflineUpdateCurrentGoalActionsTargetLookupCache.TryAddCharactersInBlock(__instance, characters, mapBlockData);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetLookupCacheAreaPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetLookupCacheAreaPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -64,11 +64,11 @@ internal static class OfflineCurrentGoalActionTargetLookupCacheAreaPatch
 
     // SameArea 查询避免反复扫描地区内所有地块。
     private static bool Prefix(CharacterPlanningAgent __instance, List<Character> characters, short areaId) =>
-        !OfflineCurrentGoalActionTargetLookupCache.TryAddCharactersInArea(__instance, characters, areaId);
+        !OfflineUpdateCurrentGoalActionsTargetLookupCache.TryAddCharactersInArea(__instance, characters, areaId);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetLookupCacheStatePatch
+internal static class OfflineUpdateCurrentGoalActionsTargetLookupCacheStatePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -78,11 +78,11 @@ internal static class OfflineCurrentGoalActionTargetLookupCacheStatePatch
 
     // SameState 查询通常最重，直接使用 state -> charIds 索引。
     private static bool Prefix(CharacterPlanningAgent __instance, List<Character> characters, sbyte stateId) =>
-        !OfflineCurrentGoalActionTargetLookupCache.TryAddCharactersInState(__instance, characters, stateId);
+        !OfflineUpdateCurrentGoalActionsTargetLookupCache.TryAddCharactersInState(__instance, characters, stateId);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetLookupCacheBlockRangePatch
+internal static class OfflineUpdateCurrentGoalActionsTargetLookupCacheBlockRangePatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -96,11 +96,11 @@ internal static class OfflineCurrentGoalActionTargetLookupCacheBlockRangePatch
         List<Character> characters,
         Location location,
         int steps) =>
-        !OfflineCurrentGoalActionTargetLookupCache.TryAddCharactersInBlockRange(__instance, characters, location, steps);
+        !OfflineUpdateCurrentGoalActionsTargetLookupCache.TryAddCharactersInBlockRange(__instance, characters, location, steps);
 }
 
 [HarmonyPatch]
-internal static class OfflineCurrentGoalActionTargetLookupCacheSettlementPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetLookupCacheSettlementPatch
 {
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -113,12 +113,12 @@ internal static class OfflineCurrentGoalActionTargetLookupCacheSettlementPatch
         CharacterPlanningAgent __instance,
         List<Character> characters,
         Location settlementLocation) =>
-        !OfflineCurrentGoalActionTargetLookupCache.TryAddCharactersInSettlementRange(__instance, characters, settlementLocation);
+        !OfflineUpdateCurrentGoalActionsTargetLookupCache.TryAddCharactersInSettlementRange(__instance, characters, settlementLocation);
 }
 
 [HarmonyPatch]
 [HarmonyPriority(Priority.First)]
-internal static class OfflineCurrentGoalActionTargetPrefilterFilterPatch
+internal static class OfflineUpdateCurrentGoalActionsTargetPrefilterFilterPatch
 {
     private static readonly AccessTools.FieldRef<CharacterPlanningAgent, PlanningGoalNode> CurrentPlanningGoalRef =
         AccessTools.FieldRefAccess<CharacterPlanningAgent, PlanningGoalNode>("_currPlanningGoal");
@@ -151,7 +151,7 @@ internal static class OfflineCurrentGoalActionTargetPrefilterFilterPatch
         __state = null;
         try
         {
-            if (OfflineCurrentGoalActionTargetPrefilter.TryPrefilterCandidates(
+            if (OfflineUpdateCurrentGoalActionsTargetPrefilter.TryPrefilterCandidates(
                     __instance,
                     CurrentPlanningGoalRef(__instance),
                     CurrentPlanningActionRef(__instance),
@@ -167,14 +167,14 @@ internal static class OfflineCurrentGoalActionTargetPrefilterFilterPatch
         catch (Exception exception)
         {
             // 预过滤只是加速路径，失败时必须保持原版候选列表。
-            OfflineCurrentGoalActionTargetPrefilter.RecordException(exception);
+            OfflineUpdateCurrentGoalActionsTargetPrefilter.RecordException(exception);
             __state = null;
         }
     }
 
     private static Exception? Finalizer(List<Character>? __state, Exception? __exception)
     {
-        OfflineCurrentGoalActionTargetPrefilter.ReturnCandidateList(__state);
+        OfflineUpdateCurrentGoalActionsTargetPrefilter.ReturnCandidateList(__state);
         return __exception;
     }
 }

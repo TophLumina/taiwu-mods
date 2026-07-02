@@ -25,7 +25,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointPatch
     private static void Prefix(
         Character __instance,
         ActionPlanningData.ECurrentGoalType goalType,
-        out OfflineUpdateCurrentGoalActionsActionPointReducer.OfflineCurrentGoalActionPointState __state)
+        out OfflineUpdateCurrentGoalActionsActionPointReducer.OfflineUpdateCurrentGoalActionsActionPointState __state)
     {
         __state = OfflineUpdateCurrentGoalActionsActionPointReducer.CaptureBeforeOfflineUpdateCurrentGoalActions(__instance, goalType);
     }
@@ -34,9 +34,9 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointPatch
     private static void Postfix(
         Character __instance,
         ActionPlanningData.ECurrentGoalType goalType,
-        OfflineUpdateCurrentGoalActionsActionPointReducer.OfflineCurrentGoalActionPointState __state)
+        OfflineUpdateCurrentGoalActionsActionPointReducer.OfflineUpdateCurrentGoalActionsActionPointState __state)
     {
-        OfflineUpdateCurrentGoalActionsActionPointReducer.ReduceOfflineCurrentGoalActionPointGainIfNeeded(__instance, goalType, __state);
+        OfflineUpdateCurrentGoalActionsActionPointReducer.ReduceOfflineUpdateCurrentGoalActionsActionPointGainIfNeeded(__instance, goalType, __state);
     }
 }
 
@@ -85,7 +85,7 @@ internal static class AdvanceMonthProtectionTaiwuGroupInvalidationPatch
     private static void Postfix()
     {
         AdvanceMonthProtectionSnapshotCache.MarkTaiwuGroupDirty();
-        OfflineCurrentGoalActionMatcherCache.InvalidateTaiwuGroup();
+        OfflineUpdateCurrentGoalActionsMatcherCache.InvalidateTaiwuGroup();
     }
 }
 

@@ -9,7 +9,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class OfflineCurrentGoalActionTargetLookupCache
+internal static class OfflineUpdateCurrentGoalActionsTargetLookupCache
 {
     private const int IncrementalLocationDeltaLimit = short.MaxValue;
     private const int IncrementalAffectedBlockLimit = short.MaxValue;
@@ -17,15 +17,15 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
 
     private static readonly object SyncRoot = new();
 
-    private static OfflineCurrentGoalActionTargetSnapshot? _frozenSnapshot;
+    private static OfflineUpdateCurrentGoalActionsTargetSnapshot? _frozenSnapshot;
     private static int _locationEpoch;
-    private static volatile bool _updateCurrentGoalActionsStageActive;
+    private static volatile bool _offlineUpdateCurrentGoalActionsStageActive;
     private static bool _collectSerialApplyAllLocationDeltas;
     private static bool _serialApplyAllStageActive;
     private static bool _forceRebuildAfterSerialApplyAll;
-    private static OfflineCurrentGoalActionTargetLookupFullBuildReason _forceRebuildAfterSerialApplyAllReason =
-        OfflineCurrentGoalActionTargetLookupFullBuildReason.SerialApplyAllForced;
-    private static readonly List<OfflineCurrentGoalActionLocationDelta> SerialApplyAllLocationDeltas = new(128);
+    private static OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason _forceRebuildAfterSerialApplyAllReason =
+        OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.SerialApplyAllForced;
+    private static readonly List<OfflineUpdateCurrentGoalActionsLocationDelta> SerialApplyAllLocationDeltas = new(128);
     private static readonly HashSet<int> SerialApplyAllAffectedBlockKeys = new();
     private static readonly HashSet<short> SerialApplyAllAffectedAreaIds = new();
     private static int _serialApplyAllRecordedDeltaCount;
@@ -33,17 +33,17 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
     private static int _serialApplyAllOverflowCount;
 
     [ThreadStatic]
-    private static int _offlineCurrentGoalActionScopeDepth;
+    private static int _offlineUpdateCurrentGoalActionsScopeDepth;
 
     [ThreadStatic]
-    private static OfflineCurrentGoalActionTargetSnapshot? _offlineTargetLookupSnapshot;
+    private static OfflineUpdateCurrentGoalActionsTargetSnapshot? _offlineTargetLookupSnapshot;
 
     [ThreadStatic]
     private static List<MapBlockData>? _blockRangeScratch;
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 阶段；主/副目标阶段共用同一份冻结索引。</summary>
     /// <param name="goalType">原版当前处理的目标类型。</param>
-    public static void EnterOfflineCurrentGoalActions(ActionPlanningData.ECurrentGoalType goalType)
+    public static void EnterOfflineUpdateCurrentGoalActions(ActionPlanningData.ECurrentGoalType goalType)
     {
         if (!IsEnabled())
         {
@@ -51,17 +51,17 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             return;
         }
 
-        _offlineCurrentGoalActionScopeDepth++;
+        _offlineUpdateCurrentGoalActionsScopeDepth++;
         _offlineTargetLookupSnapshot = Volatile.Read(ref _frozenSnapshot);
     }
 
     /// <summary>离开原版 `OfflineUpdateCurrentGoalActions` 阶段。</summary>
-    public static void LeaveOfflineCurrentGoalActions()
+    public static void LeaveOfflineUpdateCurrentGoalActions()
     {
-        if (_offlineCurrentGoalActionScopeDepth > 0)
+        if (_offlineUpdateCurrentGoalActionsScopeDepth > 0)
         {
-            _offlineCurrentGoalActionScopeDepth--;
-            if (_offlineCurrentGoalActionScopeDepth == 0)
+            _offlineUpdateCurrentGoalActionsScopeDepth--;
+            if (_offlineUpdateCurrentGoalActionsScopeDepth == 0)
             {
                 _offlineTargetLookupSnapshot = null;
             }
@@ -77,14 +77,14 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
     {
         if (!IsEnabled())
         {
-            _updateCurrentGoalActionsStageActive = false;
+            _offlineUpdateCurrentGoalActionsStageActive = false;
             UnfreezeAndInvalidate();
             return;
         }
 
-        _updateCurrentGoalActionsStageActive = true;
+        _offlineUpdateCurrentGoalActionsStageActive = true;
         int locationEpoch = Volatile.Read(ref _locationEpoch);
-        OfflineCurrentGoalActionTargetSnapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
+        OfflineUpdateCurrentGoalActionsTargetSnapshot? snapshot = Volatile.Read(ref _frozenSnapshot);
         if (snapshot != null && snapshot.LocationEpoch == locationEpoch)
         {
             PublishSerialApplyAllLocationDeltas(snapshot);
@@ -102,13 +102,13 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
                     BuildSnapshot(
                         locationEpoch,
                         snapshot == null
-                            ? OfflineCurrentGoalActionTargetLookupFullBuildReason.InitialSnapshot
-                            : OfflineCurrentGoalActionTargetLookupFullBuildReason.EpochMismatch));
+                            ? OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.InitialSnapshot
+                            : OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.EpochMismatch));
                 SerialApplyAllLocationDeltas.Clear();
                 ResetSerialApplyAllDeltaStats();
                 _forceRebuildAfterSerialApplyAll = false;
                 _forceRebuildAfterSerialApplyAllReason =
-                    OfflineCurrentGoalActionTargetLookupFullBuildReason.SerialApplyAllForced;
+                    OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.SerialApplyAllForced;
             }
             else
             {
@@ -119,13 +119,13 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
 
     /// <summary>角色位置变化只推进版本号；下一次规划阶段入口再决定是否重建索引。</summary>
     /// <summary>离开原版 `UpdatePrimary/SecondaryGoalAndActions` 屏障。</summary>
-    public static void EndUpdateCurrentGoalActionsStage() =>
-        _updateCurrentGoalActionsStageActive = false;
+    public static void EndOfflineUpdateCurrentGoalActionsStage() =>
+        _offlineUpdateCurrentGoalActionsStageActive = false;
 
     /// <summary>角色位置变化：planning 屏障内只记录警告，屏障外才推进下轮索引版本。</summary>
     public static void NotifyCharacterLocationChanged(int charId)
     {
-        if (_updateCurrentGoalActionsStageActive && Volatile.Read(ref _frozenSnapshot) != null)
+        if (_offlineUpdateCurrentGoalActionsStageActive && Volatile.Read(ref _frozenSnapshot) != null)
         {
             if (CharacterActionPlanningDiagnostics.IsRecording)
             {
@@ -136,7 +136,7 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
         }
 
         IncrementLocationEpoch(
-            OfflineCurrentGoalActionLocationEpochIncrementReason.LocationChangedWithoutLocation,
+            OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason.LocationChangedWithoutLocation,
             charId,
             hasLocation: false,
             default,
@@ -155,7 +155,7 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             ResetSerialApplyAllDeltaStats();
             _forceRebuildAfterSerialApplyAll = false;
             _forceRebuildAfterSerialApplyAllReason =
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.SerialApplyAllForced;
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.SerialApplyAllForced;
         }
     }
 
@@ -184,7 +184,7 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             return;
         }
 
-        if (_updateCurrentGoalActionsStageActive && Volatile.Read(ref _frozenSnapshot) != null)
+        if (_offlineUpdateCurrentGoalActionsStageActive && Volatile.Read(ref _frozenSnapshot) != null)
         {
             if (CharacterActionPlanningDiagnostics.IsRecording)
             {
@@ -202,8 +202,8 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
                 !TryRecordSerialApplyAllAffectedLocation(newLocation))
             {
                 ForceSerialApplyAllFullRebuild(
-                    OfflineCurrentGoalActionTargetLookupFullBuildReason.DeltaInvalidLocation,
-                    OfflineCurrentGoalActionLocationEpochIncrementReason.DeltaInvalidLocation,
+                    OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.DeltaInvalidLocation,
+                    OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason.DeltaInvalidLocation,
                     charId,
                     oldLocation,
                     newLocation);
@@ -219,8 +219,8 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             {
                 _serialApplyAllOverflowCount++;
                 ForceSerialApplyAllFullRebuild(
-                    OfflineCurrentGoalActionTargetLookupFullBuildReason.DeltaAffectedLimit,
-                    OfflineCurrentGoalActionLocationEpochIncrementReason.DeltaLimit,
+                    OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.DeltaAffectedLimit,
+                    OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason.DeltaLimit,
                     charId,
                     oldLocation,
                     newLocation);
@@ -228,20 +228,20 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             }
 
             SerialApplyAllLocationDeltas.Add(
-                new OfflineCurrentGoalActionLocationDelta(charId, oldLocation, newLocation));
+                new OfflineUpdateCurrentGoalActionsLocationDelta(charId, oldLocation, newLocation));
             _serialApplyAllSavedDeltaCount++;
             return;
         }
 
         IncrementLocationEpoch(
-            OfflineCurrentGoalActionLocationEpochIncrementReason.LocationChangedOutsideDeltaRecording,
+            OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason.LocationChangedOutsideDeltaRecording,
             charId,
             hasLocation: true,
             oldLocation,
             newLocation);
     }
 
-    public static bool TryGetFrozenPlanningSnapshot(out OfflineCurrentGoalActionTargetSnapshot snapshot)
+    public static bool TryGetFrozenPlanningSnapshot(out OfflineUpdateCurrentGoalActionsTargetSnapshot snapshot)
     {
         snapshot = Volatile.Read(ref _frozenSnapshot)!;
         return snapshot != null;
@@ -252,12 +252,12 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
     {
         lock (SyncRoot)
         {
-            _updateCurrentGoalActionsStageActive = false;
+            _offlineUpdateCurrentGoalActionsStageActive = false;
             _collectSerialApplyAllLocationDeltas = false;
             _serialApplyAllStageActive = false;
             _forceRebuildAfterSerialApplyAll = false;
             _forceRebuildAfterSerialApplyAllReason =
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.SerialApplyAllForced;
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.SerialApplyAllForced;
             SerialApplyAllLocationDeltas.Clear();
             ResetSerialApplyAllDeltaStats();
             Volatile.Write(ref _frozenSnapshot, null);
@@ -269,18 +269,18 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
     {
         lock (SyncRoot)
         {
-            _updateCurrentGoalActionsStageActive = false;
+            _offlineUpdateCurrentGoalActionsStageActive = false;
             _collectSerialApplyAllLocationDeltas = false;
             _serialApplyAllStageActive = false;
             _forceRebuildAfterSerialApplyAll = false;
             _forceRebuildAfterSerialApplyAllReason =
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.SerialApplyAllForced;
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.SerialApplyAllForced;
             SerialApplyAllLocationDeltas.Clear();
             ResetSerialApplyAllDeltaStats();
             Volatile.Write(ref _frozenSnapshot, null);
         }
 
-        _offlineCurrentGoalActionScopeDepth = 0;
+        _offlineUpdateCurrentGoalActionsScopeDepth = 0;
         _offlineTargetLookupSnapshot = null;
         Volatile.Write(ref _locationEpoch, 0);
     }
@@ -288,16 +288,16 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
     /// <summary>尝试用冻结快照追加同一地块候选角色。</summary>
     public static bool TryAddCharactersInBlock(CharacterPlanningAgent agent, List<Character> characters, MapBlockData block)
     {
-        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot))
+        if (!TryGetFrozenSnapshot(out OfflineUpdateCurrentGoalActionsTargetSnapshot? snapshot))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineCurrentGoalActionTargetLookupKind.SameBlock, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineUpdateCurrentGoalActionsTargetLookupKind.SameBlock, false, 0, 0);
             return false;
         }
 
         int[] characterIds = snapshot!.GetBlockCharacterIds(block.AreaId, block.BlockId);
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            OfflineCurrentGoalActionTargetLookupKind.SameBlock,
+            OfflineUpdateCurrentGoalActionsTargetLookupKind.SameBlock,
             true,
             characterIds.Length,
             added);
@@ -307,18 +307,18 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
     /// <summary>尝试用冻结快照追加同一地区候选角色。</summary>
     public static bool TryAddCharactersInArea(CharacterPlanningAgent agent, List<Character> characters, short areaId)
     {
-        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot) ||
+        if (!TryGetFrozenSnapshot(out OfflineUpdateCurrentGoalActionsTargetSnapshot? snapshot) ||
             areaId < 0 ||
             areaId >= snapshot!.AreaCharacterIds.Length)
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineCurrentGoalActionTargetLookupKind.SameArea, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineUpdateCurrentGoalActionsTargetLookupKind.SameArea, false, 0, 0);
             return false;
         }
 
         int[] characterIds = snapshot.AreaCharacterIds[areaId];
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            OfflineCurrentGoalActionTargetLookupKind.SameArea,
+            OfflineUpdateCurrentGoalActionsTargetLookupKind.SameArea,
             true,
             characterIds.Length,
             added);
@@ -328,16 +328,16 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
     /// <summary>尝试用冻结快照追加同一州域候选角色。</summary>
     public static bool TryAddCharactersInState(CharacterPlanningAgent agent, List<Character> characters, sbyte stateId)
     {
-        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot) ||
+        if (!TryGetFrozenSnapshot(out OfflineUpdateCurrentGoalActionsTargetSnapshot? snapshot) ||
             !snapshot!.StateCharacterIds.TryGetValue(stateId, out int[]? characterIds))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineCurrentGoalActionTargetLookupKind.SameState, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineUpdateCurrentGoalActionsTargetLookupKind.SameState, false, 0, 0);
             return false;
         }
 
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            OfflineCurrentGoalActionTargetLookupKind.SameState,
+            OfflineUpdateCurrentGoalActionsTargetLookupKind.SameState,
             true,
             characterIds.Length,
             added);
@@ -351,9 +351,9 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
         Location location,
         int steps)
     {
-        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot))
+        if (!TryGetFrozenSnapshot(out OfflineUpdateCurrentGoalActionsTargetSnapshot? snapshot))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineCurrentGoalActionTargetLookupKind.BlockRange, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineUpdateCurrentGoalActionsTargetLookupKind.BlockRange, false, 0, 0);
             return false;
         }
 
@@ -370,7 +370,7 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
         }
 
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            OfflineCurrentGoalActionTargetLookupKind.BlockRange,
+            OfflineUpdateCurrentGoalActionsTargetLookupKind.BlockRange,
             true,
             candidateIds,
             characters.Count - beforeCount);
@@ -384,16 +384,16 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
         List<Character> characters,
         Location settlementLocation)
     {
-        if (!TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot))
+        if (!TryGetFrozenSnapshot(out OfflineUpdateCurrentGoalActionsTargetSnapshot? snapshot))
         {
-            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineCurrentGoalActionTargetLookupKind.SettlementRange, false, 0, 0);
+            CharacterActionPlanningDiagnostics.RecordTargetLookup(OfflineUpdateCurrentGoalActionsTargetLookupKind.SettlementRange, false, 0, 0);
             return false;
         }
 
         int[] characterIds = snapshot!.GetSettlementCharacterIds(settlementLocation);
         int added = AddIndexedCharacters(agent, characters, characterIds);
         CharacterActionPlanningDiagnostics.RecordTargetLookup(
-            OfflineCurrentGoalActionTargetLookupKind.SettlementRange,
+            OfflineUpdateCurrentGoalActionsTargetLookupKind.SettlementRange,
             true,
             characterIds.Length,
             added);
@@ -439,8 +439,8 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
         ((int)areaId << 16) | (ushort)blockId;
 
     private static void ForceSerialApplyAllFullRebuild(
-        OfflineCurrentGoalActionTargetLookupFullBuildReason fullBuildReason,
-        OfflineCurrentGoalActionLocationEpochIncrementReason epochReason,
+        OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason fullBuildReason,
+        OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason epochReason,
         int charId,
         Location oldLocation,
         Location newLocation)
@@ -461,7 +461,7 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             newLocation);
     }
 
-    private static void PublishSerialApplyAllLocationDeltas(OfflineCurrentGoalActionTargetSnapshot snapshot)
+    private static void PublishSerialApplyAllLocationDeltas(OfflineUpdateCurrentGoalActionsTargetSnapshot snapshot)
     {
         if (!_forceRebuildAfterSerialApplyAll && SerialApplyAllLocationDeltas.Count == 0)
         {
@@ -476,9 +476,9 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             int locationEpoch = Volatile.Read(ref _locationEpoch);
             if (_forceRebuildAfterSerialApplyAll || snapshot.LocationEpoch != locationEpoch)
             {
-                OfflineCurrentGoalActionTargetLookupFullBuildReason reason = _forceRebuildAfterSerialApplyAll
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason reason = _forceRebuildAfterSerialApplyAll
                     ? _forceRebuildAfterSerialApplyAllReason
-                    : OfflineCurrentGoalActionTargetLookupFullBuildReason.EpochMismatch;
+                    : OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.EpochMismatch;
                 Volatile.Write(ref _frozenSnapshot, BuildSnapshot(locationEpoch, reason));
             }
             else if (SerialApplyAllLocationDeltas.Count > 0)
@@ -490,7 +490,7 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
                         SerialApplyAllLocationDeltas,
                         IncrementalAffectedBlockLimit,
                         IncrementalAffectedAreaLimit,
-                        out OfflineCurrentGoalActionTargetDeltaApplyStats stats));
+                        out OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats stats));
                 CharacterActionPlanningDiagnostics.EndTargetLookupDeltaPublish(deltaPublishStartTicks, stats);
             }
 
@@ -498,20 +498,20 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
             ResetSerialApplyAllDeltaStats();
             _forceRebuildAfterSerialApplyAll = false;
             _forceRebuildAfterSerialApplyAllReason =
-                OfflineCurrentGoalActionTargetLookupFullBuildReason.SerialApplyAllForced;
+                OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason.SerialApplyAllForced;
         }
     }
 
-    private static OfflineCurrentGoalActionTargetSnapshot BuildSnapshot(
+    private static OfflineUpdateCurrentGoalActionsTargetSnapshot BuildSnapshot(
         int locationEpoch,
-        OfflineCurrentGoalActionTargetLookupFullBuildReason reason)
+        OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason reason)
     {
         CharacterActionPlanningDiagnostics.RecordTargetLookupFullBuild(reason);
-        return OfflineCurrentGoalActionTargetSnapshot.Build(locationEpoch);
+        return OfflineUpdateCurrentGoalActionsTargetSnapshot.Build(locationEpoch);
     }
 
     private static void IncrementLocationEpoch(
-        OfflineCurrentGoalActionLocationEpochIncrementReason reason,
+        OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason reason,
         int charId,
         bool hasLocation,
         Location oldLocation,
@@ -529,29 +529,29 @@ internal static class OfflineCurrentGoalActionTargetLookupCache
         Interlocked.Increment(ref _locationEpoch);
     }
 
-    private static OfflineCurrentGoalActionTargetLookupRuntimeStage GetRuntimeStage()
+    private static OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage GetRuntimeStage()
     {
-        if (_updateCurrentGoalActionsStageActive)
+        if (_offlineUpdateCurrentGoalActionsStageActive)
         {
-            return OfflineCurrentGoalActionTargetLookupRuntimeStage.FrozenRead;
+            return OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage.FrozenRead;
         }
 
         if (_serialApplyAllStageActive)
         {
             return _collectSerialApplyAllLocationDeltas
-                ? OfflineCurrentGoalActionTargetLookupRuntimeStage.PrimaryApplyAllDeltaRecording
-                : OfflineCurrentGoalActionTargetLookupRuntimeStage.SecondaryApplyAllNoDeltaRecording;
+                ? OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage.PrimaryApplyAllDeltaRecording
+                : OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage.SecondaryApplyAllNoDeltaRecording;
         }
 
         return Volatile.Read(ref _frozenSnapshot) != null
-            ? OfflineCurrentGoalActionTargetLookupRuntimeStage.FrozenSnapshotIdle
-            : OfflineCurrentGoalActionTargetLookupRuntimeStage.None;
+            ? OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage.FrozenSnapshotIdle
+            : OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage.None;
     }
 
-    private static bool TryGetFrozenSnapshot(out OfflineCurrentGoalActionTargetSnapshot? snapshot)
+    private static bool TryGetFrozenSnapshot(out OfflineUpdateCurrentGoalActionsTargetSnapshot? snapshot)
     {
         snapshot = null;
-        if (_offlineCurrentGoalActionScopeDepth <= 0)
+        if (_offlineUpdateCurrentGoalActionsScopeDepth <= 0)
         {
             return false;
         }

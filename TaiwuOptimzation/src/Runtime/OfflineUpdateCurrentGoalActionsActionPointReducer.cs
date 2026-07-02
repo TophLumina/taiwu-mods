@@ -19,7 +19,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
     /// <summary>在原版 OfflineUpdateCurrentGoalActions 执行前记录行动点。</summary>
     /// <param name="character">正在更新目标行动点的角色。</param>
     /// <param name="goalType">Primary 或 Secondary goal。</param>
-    public static OfflineCurrentGoalActionPointState CaptureBeforeOfflineUpdateCurrentGoalActions(Character character, ActionPlanningData.ECurrentGoalType goalType)
+    public static OfflineUpdateCurrentGoalActionsActionPointState CaptureBeforeOfflineUpdateCurrentGoalActions(Character character, ActionPlanningData.ECurrentGoalType goalType)
     {
         if (!IsAdvanceMonthOptimizationEnabled())
         {
@@ -27,14 +27,14 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
         }
 
         int previousActionPoint = GetActionPoint(character.ActionPlanningData, goalType);
-        return new OfflineCurrentGoalActionPointState(previousActionPoint);
+        return new OfflineUpdateCurrentGoalActionsActionPointState(previousActionPoint);
     }
 
     /// <summary>在原版行动点增长后，按配置削减未受保护远区 NPC 的本月增长量。</summary>
     /// <param name="character">正在更新目标行动点的角色。</param>
     /// <param name="goalType">Primary 或 Secondary goal。</param>
     /// <param name="state">Prefix 捕获到的原行动点状态。</param>
-    public static void ReduceOfflineCurrentGoalActionPointGainIfNeeded(Character character, ActionPlanningData.ECurrentGoalType goalType, OfflineCurrentGoalActionPointState state)
+    public static void ReduceOfflineUpdateCurrentGoalActionsActionPointGainIfNeeded(Character character, ActionPlanningData.ECurrentGoalType goalType, OfflineUpdateCurrentGoalActionsActionPointState state)
     {
         if (!state.IsValid || !IsAdvanceMonthOptimizationEnabled() || ShouldKeepOriginalActionPointGain(character))
         {
@@ -152,7 +152,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
         }
     }
 
-    internal readonly struct OfflineCurrentGoalActionPointState
+    internal readonly struct OfflineUpdateCurrentGoalActionsActionPointState
     {
         // Prefix 是否成功捕获到有效状态。
         public readonly bool IsValid;
@@ -160,7 +160,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
         // 原版更新前的行动点。
         public readonly int PreviousActionPoint;
 
-        public OfflineCurrentGoalActionPointState(int previousActionPoint)
+        public OfflineUpdateCurrentGoalActionsActionPointState(int previousActionPoint)
         {
             IsValid = true;
             PreviousActionPoint = previousActionPoint;

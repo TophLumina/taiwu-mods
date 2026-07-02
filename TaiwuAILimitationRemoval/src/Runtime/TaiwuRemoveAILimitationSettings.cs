@@ -5,12 +5,14 @@ namespace TaiwuRemoveAILimitation.Runtime;
 internal static class TaiwuRemoveAILimitationSettings
 {
     public static bool EnableNpcActionLimitationRemoval = true;
+    public static bool EnableHostileActionRangeExpansion = true;
     public static bool EnableNpcActionLimitationRemovalLog = false;
     public static bool EnableNpcActionReachabilityDiagnostics = false;
 
     public static void Load(string modId)
     {
         TryGet(modId, "EnableNpcActionLimitationRemoval", ref EnableNpcActionLimitationRemoval);
+        TryGet(modId, "EnableHostileActionRangeExpansion", ref EnableHostileActionRangeExpansion);
         TryGet(modId, "EnableNpcActionLimitationRemovalLog", ref EnableNpcActionLimitationRemovalLog);
         TryGet(modId, "EnableNpcActionReachabilityDiagnostics", ref EnableNpcActionReachabilityDiagnostics);
     }

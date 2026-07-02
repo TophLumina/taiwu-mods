@@ -6,7 +6,7 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal sealed class OfflineCurrentGoalActionTargetSnapshot
+internal sealed class OfflineUpdateCurrentGoalActionsTargetSnapshot
 {
     private const int AreaCount = 141;
 
@@ -17,16 +17,16 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
     public int[][] AreaCharacterIds { get; }
     public Dictionary<sbyte, int[]> StateCharacterIds { get; }
     public int[] AllCharacterIds { get; }
-    public OfflineCurrentGoalActionTargetRecord[] CharacterRecords { get; }
+    public OfflineUpdateCurrentGoalActionsTargetRecord[] CharacterRecords { get; }
 
-    private OfflineCurrentGoalActionTargetSnapshot(
+    private OfflineUpdateCurrentGoalActionsTargetSnapshot(
         int locationEpoch,
         int[][] areaCharacterIds,
         Dictionary<sbyte, int[]> stateCharacterIds,
         Dictionary<int, int[]> blockCharacterIds,
         Dictionary<int, int[]> settlementCharacterIds,
         int[] allCharacterIds,
-        OfflineCurrentGoalActionTargetRecord[] characterRecords)
+        OfflineUpdateCurrentGoalActionsTargetRecord[] characterRecords)
     {
         LocationEpoch = locationEpoch;
         AreaCharacterIds = areaCharacterIds;
@@ -38,7 +38,7 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
     }
 
     /// <summary>在 NPC 规划屏障前一次性扫描角色位置，并产出后续子缓存共享的快照根。</summary>
-    public static OfflineCurrentGoalActionTargetSnapshot Build(int locationEpoch)
+    public static OfflineUpdateCurrentGoalActionsTargetSnapshot Build(int locationEpoch)
     {
         List<int>?[] areaBuilders = new List<int>?[AreaCount];
         Dictionary<int, int[]> blockCharacterIds = new(32768);
@@ -74,14 +74,14 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
         Dictionary<int, int[]> settlementCharacterIds = BuildSettlementCharacterIds(blockCharacterIds);
         int[] allCharacterIdArray = new int[allCharacterIds.Count];
         allCharacterIds.CopyTo(allCharacterIdArray);
-        OfflineCurrentGoalActionTargetRecord[] characterRecords = BuildCharacterRecords(allCharacterIdArray);
+        OfflineUpdateCurrentGoalActionsTargetRecord[] characterRecords = BuildCharacterRecords(allCharacterIdArray);
 
         CharacterActionPlanningDiagnostics.RecordTargetLookupSnapshotSize(
             blockCharacterIds.Count,
             areaCharacterIds.Length,
             stateCharacterIds.Count,
             totalCharacterIds);
-        return new OfflineCurrentGoalActionTargetSnapshot(
+        return new OfflineUpdateCurrentGoalActionsTargetSnapshot(
             locationEpoch,
             areaCharacterIds,
             stateCharacterIds,
@@ -95,15 +95,15 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
     /// <param name="deltas">串行 ApplyAll 中记录的角色位置变更。</param>
     /// <param name="affectedBlockLimit">超过此 block 数量时回退全量重建。</param>
     /// <param name="affectedAreaLimit">超过此 area 数量时回退全量重建。</param>
-    public OfflineCurrentGoalActionTargetSnapshot ApplyLocationDeltas(
-        IReadOnlyList<OfflineCurrentGoalActionLocationDelta> deltas,
+    public OfflineUpdateCurrentGoalActionsTargetSnapshot ApplyLocationDeltas(
+        IReadOnlyList<OfflineUpdateCurrentGoalActionsLocationDelta> deltas,
         int affectedBlockLimit,
         int affectedAreaLimit,
-        out OfflineCurrentGoalActionTargetDeltaApplyStats stats)
+        out OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats stats)
     {
         if (deltas.Count == 0)
         {
-            stats = OfflineCurrentGoalActionTargetDeltaApplyStats.Success(0, 0, 0, 0, 0);
+            stats = OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats.Success(0, 0, 0, 0, 0);
             return this;
         }
 
@@ -112,7 +112,7 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
         HashSet<sbyte> affectedStateIds = new();
         HashSet<int> affectedSettlementKeys = new();
         bool rebuildCharacterRecords = false;
-        foreach (OfflineCurrentGoalActionLocationDelta delta in deltas)
+        foreach (OfflineUpdateCurrentGoalActionsLocationDelta delta in deltas)
         {
             bool oldLocationValid = delta.OldLocation.IsValid();
             bool newLocationValid = delta.NewLocation.IsValid();
@@ -130,25 +130,25 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
                     affectedStateIds,
                     affectedSettlementKeys))
             {
-                stats = OfflineCurrentGoalActionTargetDeltaApplyStats.Fallback(
+                stats = OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats.Fallback(
                     deltas.Count,
                     affectedBlockKeys.Count,
                     affectedAreaIds.Count,
                     affectedStateIds.Count,
                     affectedSettlementKeys.Count,
-                    OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidLocation);
+                    OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidLocation);
                 return Build(LocationEpoch);
             }
 
             if (affectedBlockKeys.Count > affectedBlockLimit || affectedAreaIds.Count > affectedAreaLimit)
             {
-                stats = OfflineCurrentGoalActionTargetDeltaApplyStats.Fallback(
+                stats = OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats.Fallback(
                     deltas.Count,
                     affectedBlockKeys.Count,
                     affectedAreaIds.Count,
                     affectedStateIds.Count,
                     affectedSettlementKeys.Count,
-                    OfflineCurrentGoalActionTargetDeltaFallbackReason.AffectedLimit);
+                    OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.AffectedLimit);
                 return Build(LocationEpoch);
             }
         }
@@ -166,13 +166,13 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
             }
             else
             {
-                stats = OfflineCurrentGoalActionTargetDeltaApplyStats.Fallback(
+                stats = OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats.Fallback(
                     deltas.Count,
                     affectedBlockKeys.Count,
                     affectedAreaIds.Count,
                     affectedStateIds.Count,
                     affectedSettlementKeys.Count,
-                    OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidBlock);
+                    OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidBlock);
                 return Build(LocationEpoch);
             }
         }
@@ -182,13 +182,13 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
         {
             if (areaId < 0 || areaId >= AreaCount)
             {
-                stats = OfflineCurrentGoalActionTargetDeltaApplyStats.Fallback(
+                stats = OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats.Fallback(
                     deltas.Count,
                     affectedBlockKeys.Count,
                     affectedAreaIds.Count,
                     affectedStateIds.Count,
                     affectedSettlementKeys.Count,
-                    OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidArea);
+                    OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidArea);
                 return Build(LocationEpoch);
             }
 
@@ -213,32 +213,32 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
             }
             else
             {
-                stats = OfflineCurrentGoalActionTargetDeltaApplyStats.Fallback(
+                stats = OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats.Fallback(
                     deltas.Count,
                     affectedBlockKeys.Count,
                     affectedAreaIds.Count,
                     affectedStateIds.Count,
                     affectedSettlementKeys.Count,
-                    OfflineCurrentGoalActionTargetDeltaFallbackReason.InvalidSettlementRoot);
+                    OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.InvalidSettlementRoot);
                 return Build(LocationEpoch);
             }
         }
 
-        stats = OfflineCurrentGoalActionTargetDeltaApplyStats.Success(
+        stats = OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats.Success(
             deltas.Count,
             affectedBlockKeys.Count,
             affectedAreaIds.Count,
             affectedStateIds.Count,
             affectedSettlementKeys.Count);
         int[] allCharacterIds = AllCharacterIds;
-        OfflineCurrentGoalActionTargetRecord[] characterRecords = CharacterRecords;
+        OfflineUpdateCurrentGoalActionsTargetRecord[] characterRecords = CharacterRecords;
         if (rebuildCharacterRecords)
         {
             allCharacterIds = BuildAllCharacterIds(areaCharacterIds);
             characterRecords = BuildCharacterRecords(allCharacterIds);
         }
 
-        return new OfflineCurrentGoalActionTargetSnapshot(
+        return new OfflineUpdateCurrentGoalActionsTargetSnapshot(
             LocationEpoch,
             areaCharacterIds,
             stateCharacterIds,
@@ -260,14 +260,14 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
             ? characterIds
             : Array.Empty<int>();
 
-    private static OfflineCurrentGoalActionTargetRecord[] BuildCharacterRecords(int[] characterIds)
+    private static OfflineUpdateCurrentGoalActionsTargetRecord[] BuildCharacterRecords(int[] characterIds)
     {
-        List<OfflineCurrentGoalActionTargetRecord> records = new(characterIds.Length);
+        List<OfflineUpdateCurrentGoalActionsTargetRecord> records = new(characterIds.Length);
         foreach (int characterId in characterIds)
         {
             if (DomainManager.Character.TryGetElement_Objects(characterId, out Character character))
             {
-                records.Add(new OfflineCurrentGoalActionTargetRecord(characterId, character));
+                records.Add(new OfflineUpdateCurrentGoalActionsTargetRecord(characterId, character));
             }
         }
 
@@ -550,13 +550,13 @@ internal sealed class OfflineCurrentGoalActionTargetSnapshot
         (areaId << 16) ^ (ushort)blockId;
 }
 
-internal readonly struct OfflineCurrentGoalActionLocationDelta
+internal readonly struct OfflineUpdateCurrentGoalActionsLocationDelta
 {
     public readonly int CharId;
     public readonly Location OldLocation;
     public readonly Location NewLocation;
 
-    public OfflineCurrentGoalActionLocationDelta(int charId, Location oldLocation, Location newLocation)
+    public OfflineUpdateCurrentGoalActionsLocationDelta(int charId, Location oldLocation, Location newLocation)
     {
         CharId = charId;
         OldLocation = oldLocation;
@@ -564,7 +564,7 @@ internal readonly struct OfflineCurrentGoalActionLocationDelta
     }
 }
 
-internal enum OfflineCurrentGoalActionTargetDeltaFallbackReason
+internal enum OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason
 {
     None,
     InvalidLocation,
@@ -574,7 +574,7 @@ internal enum OfflineCurrentGoalActionTargetDeltaFallbackReason
     InvalidSettlementRoot,
 }
 
-internal readonly struct OfflineCurrentGoalActionTargetDeltaApplyStats
+internal readonly struct OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats
 {
     public readonly int DeltaCount;
     public readonly int AffectedBlockCount;
@@ -582,16 +582,16 @@ internal readonly struct OfflineCurrentGoalActionTargetDeltaApplyStats
     public readonly int AffectedStateCount;
     public readonly int AffectedSettlementCount;
     public readonly bool FullRebuild;
-    public readonly OfflineCurrentGoalActionTargetDeltaFallbackReason FallbackReason;
+    public readonly OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason FallbackReason;
 
-    private OfflineCurrentGoalActionTargetDeltaApplyStats(
+    private OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats(
         int deltaCount,
         int affectedBlockCount,
         int affectedAreaCount,
         int affectedStateCount,
         int affectedSettlementCount,
         bool fullRebuild,
-        OfflineCurrentGoalActionTargetDeltaFallbackReason fallbackReason)
+        OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason fallbackReason)
     {
         DeltaCount = deltaCount;
         AffectedBlockCount = affectedBlockCount;
@@ -602,7 +602,7 @@ internal readonly struct OfflineCurrentGoalActionTargetDeltaApplyStats
         FallbackReason = fallbackReason;
     }
 
-    public static OfflineCurrentGoalActionTargetDeltaApplyStats Success(
+    public static OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats Success(
         int deltaCount,
         int affectedBlockCount,
         int affectedAreaCount,
@@ -615,15 +615,15 @@ internal readonly struct OfflineCurrentGoalActionTargetDeltaApplyStats
             affectedStateCount,
             affectedSettlementCount,
             fullRebuild: false,
-            OfflineCurrentGoalActionTargetDeltaFallbackReason.None);
+            OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason.None);
 
-    public static OfflineCurrentGoalActionTargetDeltaApplyStats Fallback(
+    public static OfflineUpdateCurrentGoalActionsTargetDeltaApplyStats Fallback(
         int deltaCount,
         int affectedBlockCount,
         int affectedAreaCount,
         int affectedStateCount,
         int affectedSettlementCount,
-        OfflineCurrentGoalActionTargetDeltaFallbackReason reason) =>
+        OfflineUpdateCurrentGoalActionsTargetDeltaFallbackReason reason) =>
         new(
             deltaCount,
             affectedBlockCount,
@@ -634,12 +634,12 @@ internal readonly struct OfflineCurrentGoalActionTargetDeltaApplyStats
             reason);
 }
 
-internal readonly struct OfflineCurrentGoalActionTargetRecord
+internal readonly struct OfflineUpdateCurrentGoalActionsTargetRecord
 {
     public readonly int CharId;
     public readonly Character Character;
 
-    public OfflineCurrentGoalActionTargetRecord(int charId, Character character)
+    public OfflineUpdateCurrentGoalActionsTargetRecord(int charId, Character character)
     {
         CharId = charId;
         Character = character;

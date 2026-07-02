@@ -3,8 +3,18 @@ using GameData.ActionPlanning.MonthlyAI;
 using GameData.Domains.Character;
 using HarmonyLib;
 using TaiwuRemoveAILimitation.Runtime;
+using PlanningActionConfig = Config.PlanningAction;
 
 namespace TaiwuRemoveAILimitation.Patches;
+
+[HarmonyPatch(typeof(PlanningActionConfig), nameof(PlanningActionConfig.Init))]
+internal static class PlanningActionInitHostileActionRangeExpansionPatch
+{
+    private static void Postfix()
+    {
+        NpcHostileActionRangeExpansion.EnsureApplied();
+    }
+}
 
 [HarmonyPatch(typeof(CharacterActionPlanner), nameof(CharacterActionPlanner.CheckNodeReachable))]
 internal static class CharacterActionPlannerCheckNodeReachablePatch
@@ -27,6 +37,11 @@ internal static class CharacterActionPlannerCheckNodeReachablePatch
 [HarmonyPatch(typeof(CharacterActionPlanner), nameof(CharacterActionPlanner.Initialize))]
 internal static class CharacterActionPlannerReachabilityDiagnosticsPatch
 {
+    private static void Prefix()
+    {
+        NpcHostileActionRangeExpansion.EnsureApplied();
+    }
+
     private static void Postfix(CharacterActionPlanner __instance)
     {
         NpcActionReachabilityDiagnostics.LogPlannerOnce(__instance);

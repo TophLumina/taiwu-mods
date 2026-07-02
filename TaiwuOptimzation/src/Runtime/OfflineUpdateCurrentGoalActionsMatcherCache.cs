@@ -8,11 +8,11 @@ using Character = GameData.Domains.Character.Character;
 
 namespace TaiwuOptimization.Runtime;
 
-internal static class OfflineCurrentGoalActionMatcherCache
+internal static class OfflineUpdateCurrentGoalActionsMatcherCache
 {
     private static volatile bool _stageActive;
     private static int _stageVersion;
-    private static int _activeOfflineCurrentGoalActionScopes;
+    private static int _activeOfflineUpdateCurrentGoalActionsScopes;
     private static int _ageVersion;
     private static int _relationVersion;
     private static int _organizationVersion;
@@ -27,7 +27,7 @@ internal static class OfflineCurrentGoalActionMatcherCache
     private static int _adventureTaiwuVersion;
 
     [ThreadStatic]
-    private static int _offlineCurrentGoalActionScopeDepth;
+    private static int _offlineUpdateCurrentGoalActionsScopeDepth;
 
     [ThreadStatic]
     private static Dictionary<TargetMatcherKey, bool>? _threadStageCache;
@@ -36,38 +36,38 @@ internal static class OfflineCurrentGoalActionMatcherCache
     private static int _threadStageVersion;
 
     /// <summary>进入主/副目标行动规划阶段，清空上一阶段缓存并冻结本阶段读取语义。</summary>
-    public static void BeginUpdateCurrentGoalActionsStage()
+    public static void BeginOfflineUpdateCurrentGoalActionsStage()
     {
-        Volatile.Write(ref _activeOfflineCurrentGoalActionScopes, 0);
+        Volatile.Write(ref _activeOfflineUpdateCurrentGoalActionsScopes, 0);
         Bump(ref _stageVersion);
         _stageActive = IsEnabled();
     }
 
     /// <summary>离开主/副目标行动规划阶段，释放阶段缓存。</summary>
-    public static void EndUpdateCurrentGoalActionsStage()
+    public static void EndOfflineUpdateCurrentGoalActionsStage()
     {
         _stageActive = false;
-        Volatile.Write(ref _activeOfflineCurrentGoalActionScopes, 0);
+        Volatile.Write(ref _activeOfflineUpdateCurrentGoalActionsScopes, 0);
         Bump(ref _stageVersion);
     }
 
     /// <summary>进入原版 `OfflineUpdateCurrentGoalActions` 热路径。</summary>
-    public static void EnterOfflineCurrentGoalActions()
+    public static void EnterOfflineUpdateCurrentGoalActions()
     {
         if (_stageActive)
         {
-            Interlocked.Increment(ref _activeOfflineCurrentGoalActionScopes);
-            _offlineCurrentGoalActionScopeDepth++;
+            Interlocked.Increment(ref _activeOfflineUpdateCurrentGoalActionsScopes);
+            _offlineUpdateCurrentGoalActionsScopeDepth++;
         }
     }
 
     /// <summary>离开原版 `OfflineUpdateCurrentGoalActions` 热路径。</summary>
-    public static void LeaveOfflineCurrentGoalActions()
+    public static void LeaveOfflineUpdateCurrentGoalActions()
     {
-        if (_offlineCurrentGoalActionScopeDepth > 0)
+        if (_offlineUpdateCurrentGoalActionsScopeDepth > 0)
         {
-            _offlineCurrentGoalActionScopeDepth--;
-            Interlocked.Decrement(ref _activeOfflineCurrentGoalActionScopes);
+            _offlineUpdateCurrentGoalActionsScopeDepth--;
+            Interlocked.Decrement(ref _activeOfflineUpdateCurrentGoalActionsScopes);
         }
     }
 
@@ -184,8 +184,8 @@ internal static class OfflineCurrentGoalActionMatcherCache
     public static void Reset()
     {
         _stageActive = false;
-        Volatile.Write(ref _activeOfflineCurrentGoalActionScopes, 0);
-        _offlineCurrentGoalActionScopeDepth = 0;
+        Volatile.Write(ref _activeOfflineUpdateCurrentGoalActionsScopes, 0);
+        _offlineUpdateCurrentGoalActionsScopeDepth = 0;
         Bump(ref _stageVersion);
         _ageVersion = 0;
         _relationVersion = 0;
@@ -208,17 +208,17 @@ internal static class OfflineCurrentGoalActionMatcherCache
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
             CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(
-                OfflineCurrentGoalActionMatcherCacheRejectReason.StageInactive,
+                OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.StageInactive,
                 0,
                 fallbackResult);
             return fallbackResult;
         }
 
-        if (_offlineCurrentGoalActionScopeDepth <= 0)
+        if (_offlineUpdateCurrentGoalActionsScopeDepth <= 0)
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
             CharacterActionPlanningDiagnostics.RecordTargetMatcherCacheFallback(
-                OfflineCurrentGoalActionMatcherCacheRejectReason.OutsideOfflineCurrentGoalActions,
+                OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.OutsideOfflineUpdateCurrentGoalActions,
                 0,
                 fallbackResult);
             return fallbackResult;
@@ -226,8 +226,8 @@ internal static class OfflineCurrentGoalActionMatcherCache
 
         if (!TryAnalyzeDependencies(
                 matcherItem,
-                out CharacterMatcherDependency dependencies,
-                out OfflineCurrentGoalActionMatcherCacheRejectReason rejectReason,
+                out OfflineUpdateCurrentGoalActionsMatcherDependency dependencies,
+                out OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason rejectReason,
                 out int rejectDetail))
         {
             bool fallbackResult = CharacterMatcherHelper.Match(matcherItem, targetChar);
@@ -285,24 +285,24 @@ internal static class OfflineCurrentGoalActionMatcherCache
 
     private static bool TryAnalyzeDependencies(
         CharacterMatcherItem matcherItem,
-        out CharacterMatcherDependency dependencies,
-        out OfflineCurrentGoalActionMatcherCacheRejectReason rejectReason,
+        out OfflineUpdateCurrentGoalActionsMatcherDependency dependencies,
+        out OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason rejectReason,
         out int rejectDetail)
     {
-        dependencies = CharacterMatcherDependency.None;
-        rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.None;
+        dependencies = OfflineUpdateCurrentGoalActionsMatcherDependency.None;
+        rejectReason = OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.None;
         rejectDetail = 0;
 
         if (matcherItem.AgeType != ECharacterMatcherAgeType.NotRestricted)
         {
-            dependencies |= CharacterMatcherDependency.Age;
+            dependencies |= OfflineUpdateCurrentGoalActionsMatcherDependency.Age;
         }
 
         if (matcherItem.GenderType is
             ECharacterMatcherGenderType.DisplayFemale or
             ECharacterMatcherGenderType.DisplayMale)
         {
-            rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedDisplayGender;
+            rejectReason = OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedDisplayGender;
             rejectDetail = (int)matcherItem.GenderType;
             return false;
         }
@@ -310,17 +310,17 @@ internal static class OfflineCurrentGoalActionMatcherCache
         if (matcherItem.IdentityType != ECharacterMatcherIdentityType.NotRestricted ||
             matcherItem.Organization >= 0)
         {
-            dependencies |= CharacterMatcherDependency.Organization;
+            dependencies |= OfflineUpdateCurrentGoalActionsMatcherDependency.Organization;
         }
 
         if (matcherItem.FavorRange is { Length: 2 })
         {
-            dependencies |= CharacterMatcherDependency.Relation;
+            dependencies |= OfflineUpdateCurrentGoalActionsMatcherDependency.Relation;
         }
 
         if (matcherItem.MerchantType >= 0)
         {
-            rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedMerchantType;
+            rejectReason = OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedMerchantType;
             rejectDetail = matcherItem.MerchantType;
             return false;
         }
@@ -338,26 +338,26 @@ internal static class OfflineCurrentGoalActionMatcherCache
                 case ECharacterMatcherSubCondition.NotTaiwu:
                     break;
                 case ECharacterMatcherSubCondition.NotInTaiwuGroup:
-                    dependencies |= CharacterMatcherDependency.TaiwuGroup;
+                    dependencies |= OfflineUpdateCurrentGoalActionsMatcherDependency.TaiwuGroup;
                     break;
                 case ECharacterMatcherSubCondition.NotTaiwuFriendlyRelation:
                 case ECharacterMatcherSubCondition.NotTaiwuFamiliyRelation:
-                    dependencies |= CharacterMatcherDependency.Relation;
+                    dependencies |= OfflineUpdateCurrentGoalActionsMatcherDependency.Relation;
                     break;
                 case ECharacterMatcherSubCondition.CanStroll:
-                    dependencies |= CharacterMatcherDependency.Organization;
+                    dependencies |= OfflineUpdateCurrentGoalActionsMatcherDependency.Organization;
                     break;
                 case ECharacterMatcherSubCondition.CanBeLocated:
                     dependencies |=
-                        CharacterMatcherDependency.Location |
-                        CharacterMatcherDependency.ExternalRelation |
-                        CharacterMatcherDependency.Kidnapper |
-                        CharacterMatcherDependency.Leader |
-                        CharacterMatcherDependency.CrossAreaTravel |
-                        CharacterMatcherDependency.AdventureTaiwu;
+                        OfflineUpdateCurrentGoalActionsMatcherDependency.Location |
+                        OfflineUpdateCurrentGoalActionsMatcherDependency.ExternalRelation |
+                        OfflineUpdateCurrentGoalActionsMatcherDependency.Kidnapper |
+                        OfflineUpdateCurrentGoalActionsMatcherDependency.Leader |
+                        OfflineUpdateCurrentGoalActionsMatcherDependency.CrossAreaTravel |
+                        OfflineUpdateCurrentGoalActionsMatcherDependency.AdventureTaiwu;
                     break;
                 default:
-                    rejectReason = OfflineCurrentGoalActionMatcherCacheRejectReason.UnsupportedSubCondition;
+                    rejectReason = OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedSubCondition;
                     rejectDetail = (int)subCondition;
                     return false;
             }
@@ -377,31 +377,31 @@ internal static class OfflineCurrentGoalActionMatcherCache
     }
 
     private static bool ShouldTrackVersionInvalidation() =>
-        _stageActive && Volatile.Read(ref _activeOfflineCurrentGoalActionScopes) > 0;
+        _stageActive && Volatile.Read(ref _activeOfflineUpdateCurrentGoalActionsScopes) > 0;
 
     private static TargetVersionSnapshot GetVersionSnapshot(
         int targetCharId,
-        CharacterMatcherDependency dependencies)
+        OfflineUpdateCurrentGoalActionsMatcherDependency dependencies)
     {
         return new TargetVersionSnapshot(
-            (dependencies & CharacterMatcherDependency.Age) != 0 ? Volatile.Read(ref _ageVersion) : 0,
-            (dependencies & CharacterMatcherDependency.Relation) != 0 ? Volatile.Read(ref _relationVersion) : 0,
-            (dependencies & CharacterMatcherDependency.Organization) != 0 ? Volatile.Read(ref _organizationVersion) : 0,
-            (dependencies & CharacterMatcherDependency.Inventory) != 0 ? Volatile.Read(ref _inventoryVersion) : 0,
-            (dependencies & CharacterMatcherDependency.Equipment) != 0 ? Volatile.Read(ref _equipmentVersion) : 0,
-            (dependencies & CharacterMatcherDependency.Location) != 0 ? Volatile.Read(ref _locationVersion) : 0,
-            (dependencies & CharacterMatcherDependency.ExternalRelation) != 0
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Age) != 0 ? Volatile.Read(ref _ageVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Relation) != 0 ? Volatile.Read(ref _relationVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Organization) != 0 ? Volatile.Read(ref _organizationVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Inventory) != 0 ? Volatile.Read(ref _inventoryVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Equipment) != 0 ? Volatile.Read(ref _equipmentVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Location) != 0 ? Volatile.Read(ref _locationVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.ExternalRelation) != 0
                 ? Volatile.Read(ref _externalRelationVersion)
                 : 0,
-            (dependencies & CharacterMatcherDependency.Kidnapper) != 0 ? Volatile.Read(ref _kidnapperVersion) : 0,
-            (dependencies & CharacterMatcherDependency.Leader) != 0 ? Volatile.Read(ref _leaderVersion) : 0,
-            (dependencies & CharacterMatcherDependency.TaiwuGroup) != 0
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Kidnapper) != 0 ? Volatile.Read(ref _kidnapperVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.Leader) != 0 ? Volatile.Read(ref _leaderVersion) : 0,
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.TaiwuGroup) != 0
                 ? Volatile.Read(ref _taiwuGroupVersion)
                 : 0,
-            (dependencies & CharacterMatcherDependency.CrossAreaTravel) != 0
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.CrossAreaTravel) != 0
                 ? Volatile.Read(ref _crossAreaTravelVersion)
                 : 0,
-            (dependencies & CharacterMatcherDependency.AdventureTaiwu) != 0
+            (dependencies & OfflineUpdateCurrentGoalActionsMatcherDependency.AdventureTaiwu) != 0
                 ? Volatile.Read(ref _adventureTaiwuVersion)
                 : 0);
     }
@@ -416,7 +416,7 @@ internal static class OfflineCurrentGoalActionMatcherCache
     }
 
     [Flags]
-    private enum CharacterMatcherDependency
+    private enum OfflineUpdateCurrentGoalActionsMatcherDependency
     {
         None = 0,
         Age = 1 << 0,
@@ -516,13 +516,13 @@ internal static class OfflineCurrentGoalActionMatcherCache
     {
         private readonly CharacterMatcherItem _matcherItem;
         private readonly int _targetCharId;
-        private readonly CharacterMatcherDependency _dependencies;
+        private readonly OfflineUpdateCurrentGoalActionsMatcherDependency _dependencies;
         private readonly TargetVersionSnapshot _targetVersion;
 
         public TargetMatcherKey(
             CharacterMatcherItem matcherItem,
             int targetCharId,
-            CharacterMatcherDependency dependencies,
+            OfflineUpdateCurrentGoalActionsMatcherDependency dependencies,
             TargetVersionSnapshot targetVersion)
         {
             _matcherItem = matcherItem;
