@@ -12,6 +12,19 @@ public sealed class TaiwuRemoveAILimitationPlugin : TaiwuRemakePlugin
     public override void Initialize()
     {
         TaiwuRemoveAILimitationSettings.Load(ModIdStr);
+        TaiwuDiagnosticsExporter.Initialize(
+            "TaiwuRemoveAILimitation",
+            TaiwuRemoveAILimitationSettings.EnableTaiwuDiagnosticsServer,
+            TaiwuRemoveAILimitationSettings.AutoOpenTaiwuDiagnosticsDashboard,
+            TaiwuRemoveAILimitationSettings.TaiwuDiagnosticsPort);
+        TaiwuDiagnosticsExporter.Publish(
+            "mod.loaded",
+            new
+            {
+                mod = "TaiwuRemoveAILimitation",
+                diagnosticsCollectionEnabled = TaiwuRemoveAILimitationSettings.DiagnosticsCollectionEnabled,
+                diagnosticsLogToGameLog = TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog,
+            });
 
         _harmony = new Harmony("TaiwuRemoveAILimitation.NpcActionBypass");
         _harmony.PatchAll(typeof(TaiwuRemoveAILimitationPlugin).Assembly);
@@ -21,10 +34,16 @@ public sealed class TaiwuRemoveAILimitationPlugin : TaiwuRemakePlugin
     {
         _harmony?.UnpatchSelf();
         _harmony = null;
+        TaiwuDiagnosticsExporter.Dispose();
     }
 
     public override void OnModSettingUpdate()
     {
         TaiwuRemoveAILimitationSettings.Load(ModIdStr);
+        TaiwuDiagnosticsExporter.Initialize(
+            "TaiwuRemoveAILimitation",
+            TaiwuRemoveAILimitationSettings.EnableTaiwuDiagnosticsServer,
+            TaiwuRemoveAILimitationSettings.AutoOpenTaiwuDiagnosticsDashboard,
+            TaiwuRemoveAILimitationSettings.TaiwuDiagnosticsPort);
     }
 }

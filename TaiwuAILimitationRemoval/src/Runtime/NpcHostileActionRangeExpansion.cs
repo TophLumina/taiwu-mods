@@ -64,7 +64,21 @@ internal static class NpcHostileActionRangeExpansion
             _isApplied = true;
             if (NpcActionLimitationRemovalLog.Enabled)
             {
-                AdaptableLog.TagInfo(LogTag, "Hostile action range expanded: A89/A90/A91/A100/A101 -> BlockRange(2)");
+                const string message = "Hostile action range expanded: A89/A90/A91/A100/A101 -> BlockRange(2)";
+                TaiwuDiagnosticsExporter.Publish(
+                    "ai_limitation.hostile_range_expanded",
+                    new
+                    {
+                        actions = HostileActionTemplateIds,
+                        range = "BlockRange",
+                        rangeValue = ExpandedRangeValue,
+                        message,
+                    });
+
+                if (TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog)
+                {
+                    AdaptableLog.TagInfo(LogTag, message);
+                }
             }
         }
     }

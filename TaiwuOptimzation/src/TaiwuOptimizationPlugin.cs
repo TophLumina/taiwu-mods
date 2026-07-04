@@ -13,6 +13,19 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     public override void Initialize()
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
+        TaiwuDiagnosticsExporter.Initialize(
+            "TaiwuOptimization",
+            TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
+            TaiwuOptimizationSettings.AutoOpenTaiwuDiagnosticsDashboard,
+            TaiwuOptimizationSettings.TaiwuDiagnosticsPort);
+        TaiwuDiagnosticsExporter.Publish(
+            "mod.loaded",
+            new
+            {
+                mod = "TaiwuOptimization",
+                diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
+                diagnosticsLogToGameLog = TaiwuOptimizationSettings.DiagnosticsLogToGameLog,
+            });
         AdvanceMonthOptimizationRuntime.Initialize();
 
         _harmony = new Harmony("TaiwuOptimization.AdvanceMonthOptimization");
@@ -23,6 +36,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     {
         _harmony?.UnpatchSelf();
         _harmony = null;
+        TaiwuDiagnosticsExporter.Dispose();
         CharacterActionPlannerGraphCache.Reset();
         AdvanceMonthOptimizationRuntime.Dispose();
     }
@@ -30,6 +44,11 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     public override void OnModSettingUpdate()
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
+        TaiwuDiagnosticsExporter.Initialize(
+            "TaiwuOptimization",
+            TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
+            TaiwuOptimizationSettings.AutoOpenTaiwuDiagnosticsDashboard,
+            TaiwuOptimizationSettings.TaiwuDiagnosticsPort);
         AdvanceMonthProtectionSnapshotCache.MarkAllDirty();
         OfflineUpdateCurrentGoalActionsTargetLookupCache.Reset();
         CharacterActionPlannerGraphCache.Reset();

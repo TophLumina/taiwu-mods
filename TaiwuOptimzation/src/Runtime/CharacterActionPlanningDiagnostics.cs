@@ -238,7 +238,7 @@ internal static class CharacterActionPlanningDiagnostics
     /// <summary>开始记录一次过月中的 NPC 行动规划诊断。</summary>
     public static void BeginAdvanceMonth()
     {
-        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
+        if (!TaiwuOptimizationSettings.DiagnosticsCollectionEnabled)
         {
             return;
         }
@@ -267,9 +267,14 @@ internal static class CharacterActionPlanningDiagnostics
             }
 
             long totalTicks = Stopwatch.GetTimestamp() - _current.StartTicks;
-            if (Logger.IsInfoEnabled)
+            string legacyText = BuildMessage(totalTicks);
+            TaiwuDiagnosticsExporter.Publish(
+                "advance_month.character_action_planning",
+                BuildPayload(totalTicks, legacyText));
+
+            if (TaiwuOptimizationSettings.DiagnosticsLogToGameLog && Logger.IsInfoEnabled)
             {
-                Logger.Info(BuildMessage(totalTicks));
+                Logger.Info(legacyText);
             }
 
             _current = default;
@@ -1364,7 +1369,7 @@ internal static class CharacterActionPlanningDiagnostics
     public static bool IsRecording => IsActive();
 
     private static bool IsActive() =>
-        TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled && _current.StartTicks != 0;
+        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled && _current.StartTicks != 0;
 
     private static string BuildMessage(long totalTicks)
     {
@@ -1483,6 +1488,548 @@ internal static class CharacterActionPlanningDiagnostics
         AppendTargetLookup(builder, nameof(OfflineUpdateCurrentGoalActionsTargetLookupKind.SettlementRange), TargetLookupMetrics[(int)OfflineUpdateCurrentGoalActionsTargetLookupKind.SettlementRange]);
         return builder.ToString();
     }
+
+    private static object BuildPayload(long totalTicks, string legacyText)
+    {
+        CharacterActionPlannerGraphCache.BuildStats graphBuildStats =
+            CharacterActionPlannerGraphCache.GetBuildStats();
+
+        return new
+        {
+            elapsedMs = ToMilliseconds(totalTicks),
+            targetLookupBuild = new
+            {
+                elapsedMs = ToMilliseconds(_current.TargetLookupBuildTicks),
+                calls = _current.TargetLookupBuildCalls,
+                fullBuilds = _current.TargetLookupFullBuildCalls,
+                fullBuildReasons = BuildFullBuildReasonPayloads(),
+                deltaNoChangePublishes = _current.TargetLookupDeltaNoChangePublishes,
+                deltaPublish = new
+                {
+                    elapsedMs = ToMilliseconds(_current.TargetLookupDeltaPublishTicks),
+                    calls = _current.TargetLookupDeltaPublishCalls,
+                    deltas = _current.TargetLookupDeltaPublishDeltas,
+                    fallbackFullRebuilds = _current.TargetLookupDeltaFallbackRebuilds,
+                },
+                deltaAffected = new
+                {
+                    blocks = _current.TargetLookupDeltaAffectedBlocks,
+                    areas = _current.TargetLookupDeltaAffectedAreas,
+                    states = _current.TargetLookupDeltaAffectedStates,
+                    settlements = _current.TargetLookupDeltaAffectedSettlements,
+                },
+                primaryApplyAllDeltas = new
+                {
+                    recordedDeltaCount = _current.TargetLookupPrimaryApplyAllRecordedDeltas,
+                    savedDeltaCount = _current.TargetLookupPrimaryApplyAllSavedDeltas,
+                    affectedBlockCount = _current.TargetLookupPrimaryApplyAllAffectedBlocks,
+                    affectedAreaCount = _current.TargetLookupPrimaryApplyAllAffectedAreas,
+                    overflowCount = _current.TargetLookupPrimaryApplyAllOverflows,
+                },
+                locationEpochIncrements = BuildLocationEpochIncrementPayloads(),
+                firstLocationEpochIncrement = _current.TargetLookupLocationEpochIncrementCount > 0
+                    ? BuildFirstLocationEpochIncrementPayload()
+                    : null,
+                snapshot = new
+                {
+                    blocks = _current.TargetLookupBlockCount,
+                    areas = _current.TargetLookupAreaCount,
+                    states = _current.TargetLookupStateCount,
+                    characterIds = _current.TargetLookupCharacterIdCount,
+                },
+            },
+            warnings = new
+            {
+                frozenLocationChangeWarnings = _current.FrozenTargetLookupLocationChangeWarnings,
+                firstFrozenLocationChangeCharId = _current.FirstFrozenTargetLookupLocationChangeCharId,
+                frozenRelationMutationWarnings = _current.FrozenTargetPrefilterRelationMutationWarnings,
+                frozenInventoryMutationWarnings = _current.FrozenItemHolderPrefilterInventoryMutationWarnings,
+            },
+            relationTargetPrefilterSkips = BuildSkipPayloads(),
+            relationTargetPrefilterExceptions = BuildExceptionPayloads(),
+            planningGraphCache = new
+            {
+                build = new
+                {
+                    elapsedMs = ToMilliseconds(graphBuildStats.ElapsedTicks),
+                    calls = graphBuildStats.BuildCalls,
+                    successes = graphBuildStats.Successes,
+                    failures = graphBuildStats.Failures,
+                },
+                snapshot = new
+                {
+                    conditions = graphBuildStats.ConditionCount,
+                    effects = graphBuildStats.EffectCount,
+                    conditionEdges = graphBuildStats.ConditionEdgeCount,
+                    effectEdges = graphBuildStats.EffectEdgeCount,
+                },
+                lookups = BuildGraphCachePayloads(),
+            },
+            parallelStages = BuildParallelStagePayloads(),
+            primaryGoalActions = BuildGoalPayload(PrimaryMetrics),
+            secondaryGoalActions = BuildGoalPayload(SecondaryMetrics),
+            targetLookupCalls = BuildTargetLookupPayloads(),
+            legacyText,
+        };
+    }
+
+    private static object BuildGoalPayload(GoalMetrics metrics) =>
+        new
+        {
+            steps = BuildStepPayloads(metrics),
+            top = new
+            {
+                prepareContextByAction = BuildActionTop(metrics.PrepareContextByAction),
+                filterTargetsByAction = BuildActionTop(metrics.FilterTargetsByAction),
+                goalTargetMatchByGoal = BuildTemplateTop(metrics.GoalTargetMatchByGoal),
+                actionTargetMatchByAction = BuildActionTop(metrics.ActionTargetMatchByAction),
+                targetConditionsByGoal = BuildTemplateTop(metrics.TargetConditionsByGoal),
+                targetConditionsByAction = BuildActionTop(metrics.TargetConditionsByAction),
+                relationTargetPrefilterByAction = BuildRelationTargetPrefilterTop(metrics.RelationTargetPrefilterByAction),
+                relationPrefilterByAction = BuildRelationPrefilterTop(metrics.RelationPrefilterByAction),
+                targetMatcherCacheByAction = BuildCacheTop(metrics.TargetMatcherCacheByAction),
+                relationConditionsByGoal = BuildRelationConditionTop(metrics.RelationConditionsByGoal),
+                relationConditionsByAction = BuildActionRelationConditionTop(metrics.RelationConditionsByAction),
+                targetConditionSensors = BuildSensorTop(metrics.TargetConditionSensors),
+            },
+            topCounts = new
+            {
+                prepareContextByAction = metrics.PrepareContextByAction.Count,
+                filterTargetsByAction = metrics.FilterTargetsByAction.Count,
+                goalTargetMatchByGoal = metrics.GoalTargetMatchByGoal.Count,
+                actionTargetMatchByAction = metrics.ActionTargetMatchByAction.Count,
+                targetConditionsByGoal = metrics.TargetConditionsByGoal.Count,
+                targetConditionsByAction = metrics.TargetConditionsByAction.Count,
+                relationTargetPrefilterByAction = metrics.RelationTargetPrefilterByAction.Count,
+                relationPrefilterByAction = metrics.RelationPrefilterByAction.Count,
+                targetMatcherCacheByAction = metrics.TargetMatcherCacheByAction.Count,
+                relationConditionsByGoal = metrics.RelationConditionsByGoal.Count,
+                relationConditionsByAction = metrics.RelationConditionsByAction.Count,
+                targetConditionSensors = metrics.TargetConditionSensors.Count,
+            },
+        };
+
+    private static List<object> BuildParallelStagePayloads()
+    {
+        Array values = Enum.GetValues(typeof(CharacterActionPlanningParallelStage));
+        List<object> result = new(values.Length);
+        foreach (CharacterActionPlanningParallelStage value in values)
+        {
+            result.Add(MetricPayload(value.ToString(), ParallelStages[(int)value]));
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildStepPayloads(GoalMetrics metrics)
+    {
+        Array values = Enum.GetValues(typeof(CharacterActionPlanningStep));
+        List<object> result = new(values.Length);
+        foreach (CharacterActionPlanningStep value in values)
+        {
+            result.Add(MetricPayload(value.ToString(), metrics.Steps[(int)value]));
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildActionTop(Dictionary<int, ActionMetric> metrics)
+    {
+        List<ActionMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Ticks.CompareTo(left.Ticks));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            ActionMetric metric = sorted[i];
+            result.Add(new
+            {
+                actionTemplateId = metric.ActionTemplateId,
+                actionName = GetActionRefName(metric.ActionTemplateId),
+                selector = metric.Selector.ToString(),
+                range = metric.Range.ToString(),
+                metric.RangeValue,
+                calls = metric.Calls,
+                elapsedMs = ToMilliseconds(metric.Ticks),
+                maxMs = ToMilliseconds(metric.MaxTicks),
+                inputCount = metric.InputCount,
+                outputCount = metric.OutputCount,
+                maxInputCount = metric.MaxInputCount,
+                maxOutputCount = metric.MaxOutputCount,
+                successCount = metric.SuccessCount,
+                failureCount = metric.FailureCount,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildTemplateTop(Dictionary<int, TemplateMetric> metrics)
+    {
+        List<TemplateMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Ticks.CompareTo(left.Ticks));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            TemplateMetric metric = sorted[i];
+            result.Add(new
+            {
+                templateId = metric.TemplateId,
+                templateName = GetGoalRefName(metric.TemplateId),
+                calls = metric.Calls,
+                elapsedMs = ToMilliseconds(metric.Ticks),
+                maxMs = ToMilliseconds(metric.MaxTicks),
+                inputCount = metric.InputCount,
+                outputCount = metric.OutputCount,
+                maxInputCount = metric.MaxInputCount,
+                maxOutputCount = metric.MaxOutputCount,
+                successCount = metric.SuccessCount,
+                failureCount = metric.FailureCount,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildRelationTargetPrefilterTop(Dictionary<int, RelationTargetPrefilterMetric> metrics)
+    {
+        List<RelationTargetPrefilterMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Dropped.CompareTo(left.Dropped));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            RelationTargetPrefilterMetric metric = sorted[i];
+            result.Add(new
+            {
+                actionTemplateId = metric.ActionTemplateId,
+                actionName = GetActionRefName(metric.ActionTemplateId),
+                selector = metric.Selector.ToString(),
+                range = metric.Range.ToString(),
+                metric.RangeValue,
+                calls = metric.Calls,
+                inputCount = metric.InputCount,
+                outputCount = metric.OutputCount,
+                dropped = metric.Dropped,
+                zeroOutputCount = metric.ZeroOutputCount,
+                maxInputCount = metric.MaxInputCount,
+                maxDropped = metric.MaxDropped,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildRelationPrefilterTop(Dictionary<int, RelationPrefilterMetric> metrics)
+    {
+        List<RelationPrefilterMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Dropped.CompareTo(left.Dropped));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            RelationPrefilterMetric metric = sorted[i];
+            result.Add(new
+            {
+                actionTemplateId = metric.ActionTemplateId,
+                actionName = GetActionRefName(metric.ActionTemplateId),
+                selector = metric.Selector.ToString(),
+                range = metric.Range.ToString(),
+                metric.RangeValue,
+                calls = metric.Calls,
+                selectableCount = metric.SelectableCount,
+                relationCandidateCount = metric.RelationCandidateCount,
+                dropped = metric.Dropped,
+                maxSelectableCount = metric.MaxSelectableCount,
+                maxDropped = metric.MaxDropped,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildCacheTop(Dictionary<int, TargetMatcherCacheMetric> metrics)
+    {
+        List<TargetMatcherCacheMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.SavedCalls.CompareTo(left.SavedCalls));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            TargetMatcherCacheMetric metric = sorted[i];
+            result.Add(new
+            {
+                actionTemplateId = metric.ActionTemplateId,
+                actionName = GetActionRefName(metric.ActionTemplateId),
+                selector = metric.Selector.ToString(),
+                range = metric.Range.ToString(),
+                metric.RangeValue,
+                calls = metric.Calls,
+                hits = metric.Hits,
+                misses = metric.Misses,
+                fallbacks = metric.Fallbacks,
+                savedCalls = metric.SavedCalls,
+                hitRate = metric.Calls == 0 ? 0 : metric.Hits / (double)metric.Calls,
+                trueCount = metric.TrueCount,
+                falseCount = metric.FalseCount,
+                fallbackReasons = BuildMatcherFallbackReasonPayloads(metric),
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildMatcherFallbackReasonPayloads(TargetMatcherCacheMetric metric)
+    {
+        List<KeyValuePair<(OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason Reason, int Detail), int>> sorted =
+            new(metric.FallbackReasonCounts);
+        sorted.Sort(static (left, right) => right.Value.CompareTo(left.Value));
+        List<object> result = new(Math.Min(8, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 8; i++)
+        {
+            KeyValuePair<(OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason Reason, int Detail), int> pair = sorted[i];
+            result.Add(new
+            {
+                reason = pair.Key.Reason.ToString(),
+                detail = pair.Key.Detail,
+                detailName = GetMatcherFallbackDetailName(pair.Key.Reason, pair.Key.Detail),
+                count = pair.Value,
+            });
+        }
+
+        return result;
+    }
+
+    private static string? GetMatcherFallbackDetailName(
+        OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason reason,
+        int detail) =>
+        reason switch
+        {
+            OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedDisplayGender =>
+                Enum.GetName(typeof(ECharacterMatcherGenderType), detail),
+            OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedSubCondition =>
+                Enum.GetName(typeof(ECharacterMatcherSubCondition), detail),
+            OfflineUpdateCurrentGoalActionsMatcherCacheRejectReason.UnsupportedMerchantType =>
+                detail.ToString(),
+            _ => null,
+        };
+
+    private static List<object> BuildRelationConditionTop(Dictionary<int, RelationConditionMetric> metrics)
+    {
+        List<RelationConditionMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.RelationFailCount.CompareTo(left.RelationFailCount));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            RelationConditionMetric metric = sorted[i];
+            result.Add(new
+            {
+                templateId = metric.TemplateId,
+                templateName = GetGoalRefName(metric.TemplateId),
+                calls = metric.Calls,
+                relationConditionCount = metric.RelationConditionCount,
+                relationPassCount = metric.RelationPassCount,
+                relationFailCount = metric.RelationFailCount,
+                fullSuccessCount = metric.FullSuccessCount,
+                fullFailureCount = metric.FullFailureCount,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildActionRelationConditionTop(Dictionary<int, ActionRelationConditionMetric> metrics)
+    {
+        List<ActionRelationConditionMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.RelationFailCount.CompareTo(left.RelationFailCount));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            ActionRelationConditionMetric metric = sorted[i];
+            result.Add(new
+            {
+                actionTemplateId = metric.ActionTemplateId,
+                actionName = GetActionRefName(metric.ActionTemplateId),
+                selector = metric.Selector.ToString(),
+                range = metric.Range.ToString(),
+                metric.RangeValue,
+                calls = metric.Calls,
+                relationConditionCount = metric.RelationConditionCount,
+                relationPassCount = metric.RelationPassCount,
+                relationFailCount = metric.RelationFailCount,
+                fullSuccessCount = metric.FullSuccessCount,
+                fullFailureCount = metric.FullFailureCount,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildSensorTop(Dictionary<int, SensorUsageMetric> metrics)
+    {
+        List<SensorUsageMetric> sorted = new(metrics.Values);
+        sorted.Sort(static (left, right) => right.Count.CompareTo(left.Count));
+        List<object> result = new(Math.Min(16, sorted.Count));
+        for (int i = 0; i < sorted.Count && i < 16; i++)
+        {
+            SensorUsageMetric metric = sorted[i];
+            result.Add(new
+            {
+                sensorType = metric.SensorType,
+                sensorName = GetSensorName(metric.SensorType),
+                count = metric.Count,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildTargetLookupPayloads()
+    {
+        Array values = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupKind));
+        List<object> result = new(values.Length);
+        foreach (OfflineUpdateCurrentGoalActionsTargetLookupKind value in values)
+        {
+            TargetLookupMetric metric = TargetLookupMetrics[(int)value];
+            result.Add(new
+            {
+                name = value.ToString(),
+                calls = metric.Calls,
+                hits = metric.Hits,
+                fallbacks = metric.Fallbacks,
+                candidateIds = metric.CandidateIds,
+                charactersAdded = metric.CharactersAdded,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildGraphCachePayloads()
+    {
+        Array values = Enum.GetValues(typeof(CharacterActionPlannerGraphCacheLookupKind));
+        List<object> result = new(values.Length);
+        foreach (CharacterActionPlannerGraphCacheLookupKind value in values)
+        {
+            GraphCacheMetric metric = GraphCacheMetrics[(int)value];
+            result.Add(new
+            {
+                name = value.ToString(),
+                calls = metric.Calls,
+                hits = metric.Hits,
+                misses = metric.Misses,
+                fallbacks = metric.Fallbacks,
+                returnedNodes = metric.ReturnedNodes,
+            });
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildFullBuildReasonPayloads()
+    {
+        Array values = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason));
+        List<object> result = new(values.Length);
+        foreach (OfflineUpdateCurrentGoalActionsTargetLookupFullBuildReason value in values)
+        {
+            int count = TargetLookupFullBuildReasons[(int)value].Count;
+            if (count > 0)
+            {
+                result.Add(new
+                {
+                    reason = value.ToString(),
+                    count,
+                });
+            }
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildLocationEpochIncrementPayloads()
+    {
+        List<object> result = new();
+        Array reasons = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason));
+        Array stages = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage));
+        foreach (OfflineUpdateCurrentGoalActionsLocationEpochIncrementReason reason in reasons)
+        {
+            foreach (OfflineUpdateCurrentGoalActionsTargetLookupRuntimeStage stage in stages)
+            {
+                int count = TargetLookupLocationEpochIncrements[(int)reason, (int)stage].Count;
+                if (count > 0)
+                {
+                    result.Add(new
+                    {
+                        reason = reason.ToString(),
+                        stage = stage.ToString(),
+                        count,
+                    });
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private static object BuildFirstLocationEpochIncrementPayload() =>
+        new
+        {
+            reason = _current.FirstTargetLookupLocationEpochIncrementReason.ToString(),
+            stage = _current.FirstTargetLookupLocationEpochIncrementStage.ToString(),
+            charId = _current.FirstTargetLookupLocationEpochIncrementCharId,
+            hasLocation = _current.FirstTargetLookupLocationEpochIncrementHasLocation,
+            oldAreaId = _current.FirstTargetLookupLocationEpochIncrementOldAreaId,
+            oldBlockId = _current.FirstTargetLookupLocationEpochIncrementOldBlockId,
+            newAreaId = _current.FirstTargetLookupLocationEpochIncrementNewAreaId,
+            newBlockId = _current.FirstTargetLookupLocationEpochIncrementNewBlockId,
+        };
+
+    private static List<object> BuildSkipPayloads()
+    {
+        Array values = Enum.GetValues(typeof(OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason));
+        List<object> result = new(values.Length);
+        foreach (OfflineUpdateCurrentGoalActionsTargetPrefilterSkipReason value in values)
+        {
+            int count = RelationTargetPrefilterSkips[(int)value].Count;
+            if (count > 0)
+            {
+                result.Add(new
+                {
+                    reason = value.ToString(),
+                    count,
+                });
+            }
+        }
+
+        return result;
+    }
+
+    private static List<object> BuildExceptionPayloads()
+    {
+        List<object> result = new(RelationTargetPrefilterExceptions.Count);
+        foreach (ExceptionMetric metric in RelationTargetPrefilterExceptions.Values)
+        {
+            result.Add(new
+            {
+                exceptionType = metric.ExceptionType.FullName ?? metric.ExceptionType.Name,
+                firstMessage = metric.FirstMessage,
+                count = metric.Count,
+            });
+        }
+
+        return result;
+    }
+
+    private static object MetricPayload(string name, Metric metric) =>
+        new
+        {
+            name,
+            calls = metric.Calls,
+            elapsedMs = ToMilliseconds(metric.Ticks),
+            maxMs = ToMilliseconds(metric.MaxTicks),
+            inputCount = metric.InputCount,
+            outputCount = metric.OutputCount,
+            maxInputCount = metric.MaxInputCount,
+            maxOutputCount = metric.MaxOutputCount,
+            successCount = metric.SuccessCount,
+            failureCount = metric.FailureCount,
+        };
 
     private static void AppendGoalMetrics(StringBuilder builder, string title, GoalMetrics metrics)
     {
@@ -2266,6 +2813,9 @@ internal static class CharacterActionPlanningDiagnostics
 
     private static string FormatMilliseconds(long ticks) =>
         (ticks * 1000.0 / Stopwatch.Frequency).ToString("N3") + "ms";
+
+    private static double ToMilliseconds(long ticks) =>
+        ticks * 1000.0 / Stopwatch.Frequency;
 
     private static Metric[] CreateMetricArray<TEnum>() where TEnum : Enum
     {

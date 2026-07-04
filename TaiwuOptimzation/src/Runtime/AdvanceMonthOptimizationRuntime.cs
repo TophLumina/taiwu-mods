@@ -114,9 +114,11 @@ internal static class AdvanceMonthOptimizationRuntime
     public static void TickAdvanceMonthOptimization(DataContext context)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled ||
+            !TaiwuOptimizationSettings.EnableAdvanceMonthOptimizationFrameBudget ||
             !IsWorldDataAvailable() ||
             DomainManager.World.GetAdvancingMonthState() != 0 ||
-            DomainManager.Global.GetSavingWorld())
+            DomainManager.Global.GetSavingWorld() ||
+            IsCombatActive())
         {
             return;
         }
@@ -149,6 +151,18 @@ internal static class AdvanceMonthOptimizationRuntime
         try
         {
             return DomainManager.Taiwu.GetTaiwu() != null;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private static bool IsCombatActive()
+    {
+        try
+        {
+            return DomainManager.Combat.IsInCombat();
         }
         catch
         {

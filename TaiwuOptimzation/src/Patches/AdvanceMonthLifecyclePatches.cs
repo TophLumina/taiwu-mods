@@ -10,12 +10,30 @@ namespace TaiwuOptimization.Patches;
 internal static class AdvanceMonthLifecyclePatch
 {
     // 只冻结已经由游玩帧构建好的保护快照；未就绪则本月行动点实验项自动跳过。
-    private static void Prefix() =>
+    private static void Prefix()
+    {
+        TaiwuDiagnosticsExporter.Publish(
+            "advance_month.scope_begin",
+            new
+            {
+                diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
+                diagnosticsServerAvailable = TaiwuDiagnosticsExporter.IsAvailable,
+            });
         AdvanceMonthOptimizationRuntime.BeginAdvanceMonthOptimizationScope();
+    }
 
     // 过月结束后释放冻结快照，让月中帧继续构建下一次使用的快照。
-    private static void Finalizer() =>
+    private static void Finalizer()
+    {
         AdvanceMonthOptimizationRuntime.EndAdvanceMonthOptimizationScope();
+        TaiwuDiagnosticsExporter.Publish(
+            "advance_month.scope_end",
+            new
+            {
+                diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
+                diagnosticsServerAvailable = TaiwuDiagnosticsExporter.IsAvailable,
+            });
+    }
 }
 
 [HarmonyPatch(typeof(GlobalDomain), nameof(GlobalDomain.OnUpdate))]

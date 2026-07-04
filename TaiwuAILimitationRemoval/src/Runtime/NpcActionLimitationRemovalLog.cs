@@ -37,7 +37,7 @@ internal static class NpcActionLimitationRemovalLog
 {
     private const string LogTag = "TaiwuRemoveAILimitation";
 
-    public static bool Enabled => TaiwuRemoveAILimitationSettings.EnableNpcActionLimitationRemovalLog;
+    public static bool Enabled => TaiwuRemoveAILimitationSettings.DiagnosticsCollectionEnabled;
 
     public static void LogReachableBypass(INode<Character, StateKey> node)
     {
@@ -48,13 +48,41 @@ internal static class NpcActionLimitationRemovalLog
 
         if (node is PlanningActionNode actionNode)
         {
-            AdaptableLog.TagInfo(LogTag,
-                $"ReachableBypass action={FormatAction(actionNode.Template.TemplateId)}");
+            int actionTemplateId = actionNode.Template.TemplateId;
+            string message = $"ReachableBypass action={FormatAction(actionTemplateId)}";
+            TaiwuDiagnosticsExporter.Publish(
+                "ai_limitation.reachable_bypass",
+                new
+                {
+                    nodeType = "action",
+                    actionTemplateId,
+                    action = FormatAction(actionTemplateId),
+                    message,
+                });
+
+            if (TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog)
+            {
+                AdaptableLog.TagInfo(LogTag, message);
+            }
         }
         else if (node is PlanningGoalNode goalNode)
         {
-            AdaptableLog.TagInfo(LogTag,
-                $"ReachableBypass goal={FormatGoal(goalNode.Template.TemplateId)}");
+            int goalTemplateId = goalNode.Template.TemplateId;
+            string message = $"ReachableBypass goal={FormatGoal(goalTemplateId)}";
+            TaiwuDiagnosticsExporter.Publish(
+                "ai_limitation.reachable_bypass",
+                new
+                {
+                    nodeType = "goal",
+                    goalTemplateId,
+                    goal = FormatGoal(goalTemplateId),
+                    message,
+                });
+
+            if (TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog)
+            {
+                AdaptableLog.TagInfo(LogTag, message);
+            }
         }
     }
 
@@ -69,9 +97,26 @@ internal static class NpcActionLimitationRemovalLog
         }
 
         string result = actionData == null ? "failed" : "succeeded";
-        AdaptableLog.TagInfo(LogTag,
+        string message =
             $"CreateAction {result}: charId={FormatCharacterId(character)}, " +
-            $"actionId={state.ActionTemplateId}, goalId={state.GoalTemplateId}, state={state.GoalState}");
+            $"actionId={state.ActionTemplateId}, goalId={state.GoalTemplateId}, state={state.GoalState}";
+        TaiwuDiagnosticsExporter.Publish(
+            "ai_limitation.action_creation",
+            new
+            {
+                result,
+                charId = FormatCharacterId(character),
+                actionTemplateId = state.ActionTemplateId,
+                action = FormatAction(state.ActionTemplateId),
+                goalTemplateId = state.GoalTemplateId,
+                goalState = state.GoalState,
+                message,
+            });
+
+        if (TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog)
+        {
+            AdaptableLog.TagInfo(LogTag, message);
+        }
     }
 
     public static void LogActionExecution(
@@ -97,9 +142,29 @@ internal static class NpcActionLimitationRemovalLog
             : result == actionData
                 ? "same-action"
                 : $"next={FormatAction(result.ActionTemplateId)}";
-        AdaptableLog.TagInfo(LogTag,
+        string target = FormatTargets(actionData);
+        string message =
             $"ExecuteAction finished: char={FormatCharacter(character)}, " +
-            $"action={FormatAction(state.ActionTemplateId)}, target={FormatTargets(actionData)}, {next}");
+            $"action={FormatAction(state.ActionTemplateId)}, target={target}, {next}";
+        TaiwuDiagnosticsExporter.Publish(
+            "ai_limitation.action_execution",
+            new
+            {
+                result = "finished",
+                charId = FormatCharacterId(character),
+                character = FormatCharacter(character),
+                actionTemplateId = state.ActionTemplateId,
+                action = FormatAction(state.ActionTemplateId),
+                actionStateBefore = state.ActionState,
+                target,
+                next,
+                message,
+            });
+
+        if (TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog)
+        {
+            AdaptableLog.TagInfo(LogTag, message);
+        }
     }
 
     public static string FormatAction(int actionTemplateId)

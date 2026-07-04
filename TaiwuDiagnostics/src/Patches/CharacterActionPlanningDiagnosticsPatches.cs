@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using GameData.ActionPlanning;
@@ -11,12 +11,54 @@ using GameData.Domains.Character;
 using GameData.Domains.Character.Ai.ParallelAdvanceMonth;
 using GameData.Domains.Character.Ai.ParallelAdvanceMonth.Definition;
 using GameData.Domains.LegendaryBook;
+using GameData.Domains.World;
 using GameData.GameDataBridge;
 using HarmonyLib;
 using Redzen.Random;
-using TaiwuOptimization.Runtime;
+using TaiwuDiagnostics.Runtime;
 
-namespace TaiwuOptimization.Patches;
+namespace TaiwuDiagnostics.Patches;
+
+[HarmonyPatch]
+internal static class CharacterActionPlanningDiagnosticsAdvanceMonthExecutePatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(WorldDomain),
+            "AdvanceMonth_Execute",
+            new[] { typeof(DataContext), typeof(DataMonitorManager) });
+
+    private static void Prefix() =>
+        CharacterActionPlanningDiagnostics.BeginAdvanceMonthExecute();
+
+    private static Exception? Finalizer(Exception? __exception)
+    {
+        CharacterActionPlanningDiagnostics.EndAdvanceMonthExecute();
+        return __exception;
+    }
+}
+
+[HarmonyPatch]
+internal static class CharacterActionPlanningDiagnosticsAdvanceMonthStatePatch
+{
+    private static MethodBase TargetMethod() =>
+        AccessTools.Method(
+            typeof(WorldDomain),
+            "SetAndNotifyAdvancingMonthState",
+            new[] { typeof(DataContext), typeof(sbyte), typeof(DataMonitorManager) });
+
+    private static void Prefix(sbyte value)
+    {
+        if (value == 8)
+        {
+            CharacterActionPlanningDiagnostics.BeginCharacterActionPlanningStage();
+        }
+        else if (value == 11)
+        {
+            CharacterActionPlanningDiagnostics.EndCharacterActionPlanningStage();
+        }
+    }
+}
 
 [HarmonyPatch]
 internal static class CharacterActionPlanningDiagnosticsParallelActionPatch
@@ -27,61 +69,79 @@ internal static class CharacterActionPlanningDiagnosticsParallelActionPatch
             nameof(ParallelActionManager.Execute),
             new[] { typeof(DataMonitorManager), typeof(ICharacterParallelAction) });
 
-    // 记录原版 CharacterParallelAction 整段耗时，包含 worker 调度和结果补全。
+    // 璁板綍鍘熺増 CharacterParallelAction 鏁存鑰楁椂锛屽寘鍚?worker 璋冨害鍜岀粨鏋滆ˉ鍏ㄣ€?
     private static void Prefix(ICharacterParallelAction action, out State __state)
     {
-        if (TryGetStage(action, out __state))
+        Type type = action.GetType();
+        string actionTypeName = type.FullName ?? type.Name;
+        __state = new State(actionTypeName)
         {
-            __state.StartTicks = CharacterActionPlanningDiagnostics.BeginParallelStage(__state.Stage);
-            return;
-        }
+            ActionTypeStartTicks = CharacterActionPlanningDiagnostics.BeginParallelAction(actionTypeName),
+        };
 
-        __state = default;
+        if (TryGetStage(type, out CharacterActionPlanningParallelStage stage))
+        {
+            __state.HasStage = true;
+            __state.Stage = stage;
+            __state.StageStartTicks = CharacterActionPlanningDiagnostics.BeginParallelStage(stage);
+        }
     }
 
-    private static void Postfix(State __state) =>
-        CharacterActionPlanningDiagnostics.EndParallelStage(__state.Stage, __state.StartTicks);
-
-    private static bool TryGetStage(ICharacterParallelAction action, out State state)
+    private static void Postfix(State __state)
     {
-        Type type = action.GetType();
-        if (type == typeof(UpdateCharacterMission))
+        CharacterActionPlanningDiagnostics.EndParallelAction(__state.ActionTypeName, __state.ActionTypeStartTicks);
+        if (__state.HasStage)
         {
-            state = new State(CharacterActionPlanningParallelStage.UpdateCharacterMission);
+            CharacterActionPlanningDiagnostics.EndParallelStage(__state.Stage, __state.StageStartTicks);
+        }
+    }
+
+    private static bool TryGetStage(Type type, out CharacterActionPlanningParallelStage stage)
+    {
+        string typeName = type.Name;
+        if (type == typeof(UpdateCharacterMission) || typeName.Contains(nameof(UpdateCharacterMission), StringComparison.Ordinal))
+        {
+            stage = CharacterActionPlanningParallelStage.UpdateCharacterMission;
             return true;
         }
 
-        if (type == typeof(UpdateCharacterGoal))
+        if (type == typeof(UpdateCharacterGoal) || typeName.Contains(nameof(UpdateCharacterGoal), StringComparison.Ordinal))
         {
-            state = new State(CharacterActionPlanningParallelStage.UpdateCharacterGoal);
+            stage = CharacterActionPlanningParallelStage.UpdateCharacterGoal;
             return true;
         }
 
-        if (type == typeof(UpdatePrimaryGoalAndActions))
+        if (type == typeof(UpdatePrimaryGoalAndActions) || typeName.Contains(nameof(UpdatePrimaryGoalAndActions), StringComparison.Ordinal))
         {
-            state = new State(CharacterActionPlanningParallelStage.UpdatePrimaryGoalAndActions);
+            stage = CharacterActionPlanningParallelStage.UpdatePrimaryGoalAndActions;
             return true;
         }
 
-        if (type == typeof(UpdateSecondaryGoalAndActions))
+        if (type == typeof(UpdateSecondaryGoalAndActions) || typeName.Contains(nameof(UpdateSecondaryGoalAndActions), StringComparison.Ordinal))
         {
-            state = new State(CharacterActionPlanningParallelStage.UpdateSecondaryGoalAndActions);
+            stage = CharacterActionPlanningParallelStage.UpdateSecondaryGoalAndActions;
             return true;
         }
 
-        state = default;
+        stage = default;
         return false;
     }
 
     private struct State
     {
-        public readonly CharacterActionPlanningParallelStage Stage;
-        public long StartTicks;
+        public readonly string ActionTypeName;
+        public long ActionTypeStartTicks;
+        public bool HasStage;
+        public CharacterActionPlanningParallelStage Stage;
+        public long StageStartTicks;
 
-        public State(CharacterActionPlanningParallelStage stage)
+        public State(string actionTypeName)
         {
-            Stage = stage;
-            StartTicks = 0;
+            ActionTypeName = actionTypeName;
+            ActionTypeStartTicks = 0;
+            HasStage = false;
+            Stage = default;
+            StageStartTicks = 0;
         }
     }
 }
@@ -89,7 +149,7 @@ internal static class CharacterActionPlanningDiagnosticsParallelActionPatch
 [HarmonyPatch(typeof(CharacterDomain), nameof(CharacterDomain.UpdateInfectedCharacterActions))]
 internal static class CharacterActionPlanningDiagnosticsInfectedActionsPatch
 {
-    // 记录感染者特殊行动更新耗时。
+    // 璁板綍鎰熸煋鑰呯壒娈婅鍔ㄦ洿鏂拌€楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginParallelStage(
             CharacterActionPlanningParallelStage.UpdateInfectedCharacterActions);
@@ -103,7 +163,7 @@ internal static class CharacterActionPlanningDiagnosticsInfectedActionsPatch
 [HarmonyPatch(typeof(LegendaryBookDomain), nameof(LegendaryBookDomain.UpdateLegendaryBookOwnersActions))]
 internal static class CharacterActionPlanningDiagnosticsLegendaryBookActionsPatch
 {
-    // 记录奇书持有者特殊行动更新耗时。
+    // 璁板綍濂囦功鎸佹湁鑰呯壒娈婅鍔ㄦ洿鏂拌€楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginParallelStage(
             CharacterActionPlanningParallelStage.UpdateLegendaryBookOwnersActions);
@@ -123,7 +183,7 @@ internal static class CharacterActionPlanningDiagnosticsOfflineUpdateCurrentGoal
             "OfflineUpdateCurrentGoalActions",
             new[] { typeof(DataContext), typeof(ActionPlanningData.ECurrentGoalType) });
 
-    // 记录 primary/secondary 离线目标行动更新外层耗时。
+    // 璁板綍 primary/secondary 绂荤嚎鐩爣琛屽姩鏇存柊澶栧眰鑰楁椂銆?
     private static void Prefix(ActionPlanningData.ECurrentGoalType goalType, out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginOfflineUpdateCurrentGoalActions(goalType);
 
@@ -143,7 +203,7 @@ internal static class CharacterActionPlanningDiagnosticsComplementCurrentGoalAct
             "ComplementUpdateCurrentGoalActions",
             new[] { typeof(DataContext), typeof(ActionPlanningData.ECurrentGoalType) });
 
-    // 记录原版并行结果补全阶段内的行动执行耗时。
+    // 璁板綍鍘熺増骞惰缁撴灉琛ュ叏闃舵鍐呯殑琛屽姩鎵ц鑰楁椂銆?
     private static void Prefix(ActionPlanningData.ECurrentGoalType goalType, out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginComplementCurrentGoalActions(goalType);
 
@@ -163,7 +223,7 @@ internal static class CharacterActionPlanningDiagnosticsOfflineUpdateGoalPlanPat
             "OfflineUpdateGoalPlan",
             new[] { typeof(DataContext), typeof(CharacterGoalData) });
 
-    // 记录完整 pathfinder plan 生成耗时。
+    // 璁板綍瀹屾暣 pathfinder plan 鐢熸垚鑰楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -182,7 +242,7 @@ internal static class CharacterActionPlanningDiagnosticsReassessPlanPatch
             "ReassessPlan",
             new[] { typeof(DataContext), typeof(CharacterGoalData) });
 
-    // 记录已有 plan 复核耗时。
+    // 璁板綍宸叉湁 plan 澶嶆牳鑰楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -201,7 +261,7 @@ internal static class CharacterActionPlanningDiagnosticsOfflineCreateNextActionP
             "OfflineCreateNextAction",
             new[] { typeof(DataContext), typeof(CharacterGoalData) });
 
-    // 记录从 plan 中创建下一步 action 的耗时。
+    // 璁板綍浠?plan 涓垱寤轰笅涓€姝?action 鐨勮€楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -226,7 +286,7 @@ internal static class CharacterActionPlanningDiagnosticsExecuteActionPatch
                 typeof(CharacterActionData),
             });
 
-    // 记录月行动真正执行耗时。
+    // 璁板綍鏈堣鍔ㄧ湡姝ｆ墽琛岃€楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -239,7 +299,7 @@ internal static class CharacterActionPlanningDiagnosticsExecuteActionPatch
 [HarmonyPatch(typeof(CharacterPlanningAgent), nameof(CharacterPlanningAgent.CheckPrerequisites))]
 internal static class CharacterActionPlanningDiagnosticsCheckPrerequisitesPatch
 {
-    // 记录 planner 搜索时检查 action/goal 前置条件的耗时。
+    // 璁板綍 planner 鎼滅储鏃舵鏌?action/goal 鍓嶇疆鏉′欢鐨勮€楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -258,7 +318,7 @@ internal static class CharacterActionPlanningDiagnosticsGetCharactersInSelectRan
             "GetCharactersInSelectRange",
             new[] { typeof(EPlanningActionCharacterSelectRange), typeof(int) });
 
-    // 记录候选目标列表构造耗时和候选数量。
+    // 璁板綍鍊欓€夌洰鏍囧垪琛ㄦ瀯閫犺€楁椂鍜屽€欓€夋暟閲忋€?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -284,7 +344,7 @@ internal static class CharacterActionPlanningDiagnosticsFilterActionTargetsPatch
                 typeof(EPlanningActionCharacterSelector),
             });
 
-    // 记录候选目标经过关系、predicate、selector 过滤的耗时和输入/输出规模。
+    // 璁板綍鍊欓€夌洰鏍囩粡杩囧叧绯汇€乸redicate銆乻elector 杩囨护鐨勮€楁椂鍜岃緭鍏?杈撳嚭瑙勬ā銆?
     private static void Prefix(CharacterPlanningAgent __instance, out ActionTargetDiagnosticsState __state)
     {
         long startTicks = CharacterActionPlanningDiagnostics.BeginGoalStep();
@@ -330,7 +390,7 @@ internal static class CharacterActionPlanningDiagnosticsFilterActionTargetsPatch
 internal static class CharacterActionPlanningDiagnosticsPlannerPlanPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -338,7 +398,7 @@ internal static class CharacterActionPlanningDiagnosticsPlannerPlanPatch
             nameof(CharacterActionPlanner.Plan),
             new[] { typeof(DataContext), typeof(IAgent<Character, StateKey>), typeof(int) });
 
-    // 记录原版 `CharacterActionPlanner.Plan` 外层耗时，便于和 `OfflineUpdateGoalPlan` 区分初始化成本。
+    // 璁板綍鍘熺増 `CharacterActionPlanner.Plan` 澶栧眰鑰楁椂锛屼究浜庡拰 `OfflineUpdateGoalPlan` 鍖哄垎鍒濆鍖栨垚鏈€?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -355,7 +415,7 @@ internal static class CharacterActionPlanningDiagnosticsPlannerPlanPatch
 internal static class CharacterActionPlanningDiagnosticsPlannerReassessPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -363,7 +423,7 @@ internal static class CharacterActionPlanningDiagnosticsPlannerReassessPatch
             nameof(CharacterActionPlanner.ReassessPlan),
             new[] { typeof(DataContext), typeof(IAgent<Character, StateKey>), typeof(bool).MakeByRefType() });
 
-    // 记录原版 `CharacterActionPlanner.ReassessPlan` 外层耗时。
+    // 璁板綍鍘熺増 `CharacterActionPlanner.ReassessPlan` 澶栧眰鑰楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -380,7 +440,7 @@ internal static class CharacterActionPlanningDiagnosticsPlannerReassessPatch
 internal static class CharacterActionPlanningDiagnosticsWeightBasedFindPathPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod()
     {
@@ -400,7 +460,7 @@ internal static class CharacterActionPlanningDiagnosticsWeightBasedFindPathPatch
             });
     }
 
-    // 记录权重 pathfinder 一次完整寻路耗时。
+    // 璁板綍鏉冮噸 pathfinder 涓€娆″畬鏁村璺€楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -417,7 +477,7 @@ internal static class CharacterActionPlanningDiagnosticsWeightBasedFindPathPatch
 internal static class CharacterActionPlanningDiagnosticsWeightBasedFindPathRecursivePatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod()
     {
@@ -439,7 +499,7 @@ internal static class CharacterActionPlanningDiagnosticsWeightBasedFindPathRecur
             });
     }
 
-    // 记录递归搜索层的累计耗时；此项会包含子递归时间，主要看 calls/max 和量级。
+    // 璁板綍閫掑綊鎼滅储灞傜殑绱鑰楁椂锛涙椤逛細鍖呭惈瀛愰€掑綊鏃堕棿锛屼富瑕佺湅 calls/max 鍜岄噺绾с€?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -456,7 +516,7 @@ internal static class CharacterActionPlanningDiagnosticsWeightBasedFindPathRecur
 internal static class CharacterActionPlanningDiagnosticsUnsatisfiedStateCountPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod()
     {
@@ -474,7 +534,7 @@ internal static class CharacterActionPlanningDiagnosticsUnsatisfiedStateCountPat
             });
     }
 
-    // 记录 pathfinder 每次统计未满足状态条件的耗时。
+    // 璁板綍 pathfinder 姣忔缁熻鏈弧瓒崇姸鎬佹潯浠剁殑鑰楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -491,7 +551,7 @@ internal static class CharacterActionPlanningDiagnosticsUnsatisfiedStateCountPat
 internal static class CharacterActionPlanningDiagnosticsStateMemoryCheckConditionPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod()
     {
@@ -502,7 +562,7 @@ internal static class CharacterActionPlanningDiagnosticsStateMemoryCheckConditio
             new[] { typeof(IAgent<Character, StateKey>), typeof(StateConditionAndValue<StateKey>) });
     }
 
-    // 记录状态条件判定耗时；它会触发 `CalcCurrentState` 和传感器查询。
+    // 璁板綍鐘舵€佹潯浠跺垽瀹氳€楁椂锛涘畠浼氳Е鍙?`CalcCurrentState` 鍜屼紶鎰熷櫒鏌ヨ銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -519,7 +579,7 @@ internal static class CharacterActionPlanningDiagnosticsStateMemoryCheckConditio
 internal static class CharacterActionPlanningDiagnosticsPrepareContextPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -533,7 +593,7 @@ internal static class CharacterActionPlanningDiagnosticsPrepareContextPatch
                 typeof(INode<Character, StateKey>),
             });
 
-    // 记录进入下一行动节点前准备上下文、选择目标角色的耗时。
+    // 璁板綍杩涘叆涓嬩竴琛屽姩鑺傜偣鍓嶅噯澶囦笂涓嬫枃銆侀€夋嫨鐩爣瑙掕壊鐨勮€楁椂銆?
     private static void Prefix(INode<Character, StateKey> nextNode, out ActionTargetDiagnosticsState __state)
     {
         long startTicks = CharacterActionPlanningDiagnostics.BeginGoalStep();
@@ -560,7 +620,7 @@ internal static class CharacterActionPlanningDiagnosticsPrepareContextPatch
 internal static class CharacterActionPlanningDiagnosticsCalcCurrentStatePatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -568,7 +628,7 @@ internal static class CharacterActionPlanningDiagnosticsCalcCurrentStatePatch
             nameof(CharacterPlanningAgent.CalcCurrentState),
             new[] { typeof(IStateMemory<Character, StateKey>), typeof(StateKey) });
 
-    // 记录规划传感器实际计算状态值的耗时。
+    // 璁板綍瑙勫垝浼犳劅鍣ㄥ疄闄呰绠楃姸鎬佸€肩殑鑰楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -585,7 +645,7 @@ internal static class CharacterActionPlanningDiagnosticsCalcCurrentStatePatch
 internal static class CharacterActionPlanningDiagnosticsMatchTargetCharacterPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -593,7 +653,7 @@ internal static class CharacterActionPlanningDiagnosticsMatchTargetCharacterPatc
             "MatchTargetCharacter",
             new[] { typeof(Character) });
 
-    // 记录候选角色 predicate 中目标匹配的整体耗时。
+    // 璁板綍鍊欓€夎鑹?predicate 涓洰鏍囧尮閰嶇殑鏁翠綋鑰楁椂銆?
     private static void Prefix(out long __state) =>
         __state = CharacterActionPlanningDiagnostics.BeginGoalStep();
 
@@ -610,7 +670,7 @@ internal static class CharacterActionPlanningDiagnosticsMatchTargetCharacterPatc
 internal static class CharacterActionPlanningDiagnosticsMatchTargetCharacterByConditionsPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
@@ -624,7 +684,7 @@ internal static class CharacterActionPlanningDiagnosticsMatchTargetCharacterByCo
                 typeof(StateConditionAndValue<StateKey>[]),
             });
 
-    // 记录目标角色条件数组逐项匹配的耗时，并归因到当前 goal/action。
+    // 璁板綍鐩爣瑙掕壊鏉′欢鏁扮粍閫愰」鍖归厤鐨勮€楁椂锛屽苟褰掑洜鍒板綋鍓?goal/action銆?
     private static void Prefix(
         StateConditionAndValue<StateKey>[] conditions,
         out TargetConditionDiagnosticsState __state) =>
@@ -647,9 +707,9 @@ internal static class CharacterActionPlanningDiagnosticsMatchTargetCharacterByCo
 internal static class CharacterActionPlanningDiagnosticsGoalTargetMatchPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
-    // 记录 goal 目标角色匹配耗时，判断 goal 条件是否是候选过滤热点。
+    // 璁板綍 goal 鐩爣瑙掕壊鍖归厤鑰楁椂锛屽垽鏂?goal 鏉′欢鏄惁鏄€欓€夎繃婊ょ儹鐐广€?
     private static void Prefix(
         PlanningGoalNode __instance,
         DataContext context,
@@ -677,9 +737,9 @@ internal static class CharacterActionPlanningDiagnosticsGoalTargetMatchPatch
 internal static class CharacterActionPlanningDiagnosticsActionTargetMatchPatch
 {
     private static bool Prepare() =>
-        TaiwuOptimizationSettings.DiagnosticsCollectionEnabled;
+        TaiwuDiagnosticsSettings.CaptureAdvanceMonthPlanningDiagnostics;
 
-    // 记录 action 目标角色匹配耗时，包含 TargetMatcher、配置条件和实现委托。
+    // 璁板綍 action 鐩爣瑙掕壊鍖归厤鑰楁椂锛屽寘鍚?TargetMatcher銆侀厤缃潯浠跺拰瀹炵幇濮旀墭銆?
     private static void Prefix(PlanningActionNode __instance, out TargetMatchDiagnosticsState __state)
     {
         var template = __instance.Template;
@@ -696,6 +756,80 @@ internal static class CharacterActionPlanningDiagnosticsActionTargetMatchPatch
         Exception? __exception)
     {
         CharacterActionPlanningDiagnostics.EndActionTargetMatch(__state, __result);
+        return __exception;
+    }
+}
+
+[HarmonyPatch]
+internal static class CharacterActionPlanningDiagnosticsParallelActionInvocationPatch
+{
+    private static IEnumerable<MethodBase> TargetMethods()
+    {
+        Type actionInterface = typeof(ICharacterParallelAction);
+        foreach (Type type in actionInterface.Assembly.GetTypes())
+        {
+            if (type.IsAbstract || !actionInterface.IsAssignableFrom(type))
+            {
+                continue;
+            }
+
+            foreach (MethodInfo method in type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            {
+                if (method.DeclaringType == type && IsActionEntry(method.Name))
+                {
+                    yield return method;
+                }
+            }
+        }
+    }
+
+    private static void Prefix(
+        ICharacterParallelAction __instance,
+        MethodBase __originalMethod,
+        out ParallelActionInvocationState __state)
+    {
+        string actionTypeName = __instance.GetType().FullName ?? __instance.GetType().Name;
+        __state = CharacterActionPlanningDiagnostics.BeginParallelActionInvocation(
+            actionTypeName,
+            __originalMethod.Name);
+    }
+
+    private static Exception? Finalizer(ParallelActionInvocationState __state, Exception? __exception)
+    {
+        CharacterActionPlanningDiagnostics.EndParallelActionInvocation(__state);
+        return __exception;
+    }
+
+    private static bool IsActionEntry(string methodName) =>
+        methodName is
+            "Execute" or
+            "KidnappedExecute" or
+            "PrisonerExecute" or
+            "TaiwuExecute" or
+            "GearMateExecute" or
+            "InfectedExecute";
+}
+
+[HarmonyPatch]
+internal static class CharacterActionPlanningDiagnosticsPeriAdvanceMonthMethodPatch
+{
+    private static IEnumerable<MethodBase> TargetMethods()
+    {
+        foreach (MethodInfo method in typeof(Character).GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+        {
+            if (method.Name.StartsWith("PeriAdvanceMonth_", StringComparison.Ordinal))
+            {
+                yield return method;
+            }
+        }
+    }
+
+    private static void Prefix(MethodBase __originalMethod, out CharacterMonthlyMethodState __state) =>
+        __state = CharacterActionPlanningDiagnostics.BeginCharacterMonthlyMethod(__originalMethod.Name);
+
+    private static Exception? Finalizer(CharacterMonthlyMethodState __state, Exception? __exception)
+    {
+        CharacterActionPlanningDiagnostics.EndCharacterMonthlyMethod(__state);
         return __exception;
     }
 }
@@ -768,3 +902,5 @@ internal readonly struct ActionTargetDiagnosticsState
         RangeValue = rangeValue;
     }
 }
+
+

@@ -19,12 +19,22 @@ internal static class TaiwuOptimizationSettings
     public static bool ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false;
     public static int RemoteNpcOfflineCurrentGoalActionPointGainReduction = 10;
     public static bool ProtectNeighborStatesForAdvanceMonthOptimization = true;
+    public static bool EnableAdvanceMonthOptimizationFrameBudget = true;
     public static int AdvanceMonthOptimizationFrameBudgetMs = 2;
     public static bool ProtectTaiwuVillageResidentsFromOfflineActionPointReduction = true;
     public static bool ProtectSectMembersFromOfflineActionPointReduction = false;
 
     // 过月诊断日志，默认关闭。
     public static bool AdvanceMonthOptimizationDiagnosticsEnabled = false;
+    public static bool EnableTaiwuDiagnosticsServer = true;
+    public static bool AutoOpenTaiwuDiagnosticsDashboard = false;
+    public static int TaiwuDiagnosticsPort = 18580;
+    public static bool DiagnosticsLogToGameLog = false;
+    public static bool DiagnosticsSaveSnapshotOnSave = true;
+    public static int DiagnosticsSnapshotMaxCount = 5;
+
+    public static bool DiagnosticsCollectionEnabled =>
+        AdvanceMonthOptimizationDiagnosticsEnabled || TaiwuDiagnosticsExporter.IsAvailable;
 
     /// <summary>从游戏 mod 设置中读取配置，并限制到有效范围。</summary>
     /// <param name="modId">当前 mod id。</param>
@@ -37,14 +47,23 @@ internal static class TaiwuOptimizationSettings
         TryGet(modId, "ReduceRemoteNpcOfflineCurrentGoalActionPointGain", ref ReduceRemoteNpcOfflineCurrentGoalActionPointGain);
         TryGet(modId, "RemoteNpcOfflineCurrentGoalActionPointGainReduction", ref RemoteNpcOfflineCurrentGoalActionPointGainReduction);
         TryGet(modId, "ProtectNeighborStatesForAdvanceMonthOptimization", ref ProtectNeighborStatesForAdvanceMonthOptimization);
+        TryGet(modId, "EnableAdvanceMonthOptimizationFrameBudget", ref EnableAdvanceMonthOptimizationFrameBudget);
         TryGet(modId, "AdvanceMonthOptimizationFrameBudgetMs", ref AdvanceMonthOptimizationFrameBudgetMs);
         TryGet(modId, "ProtectTaiwuVillageResidentsFromOfflineActionPointReduction", ref ProtectTaiwuVillageResidentsFromOfflineActionPointReduction);
         TryGet(modId, "ProtectSectMembersFromOfflineActionPointReduction", ref ProtectSectMembersFromOfflineActionPointReduction);
         TryGet(modId, "AdvanceMonthOptimizationDiagnosticsEnabled", ref AdvanceMonthOptimizationDiagnosticsEnabled);
+        TryGet(modId, "EnableTaiwuDiagnosticsServer", ref EnableTaiwuDiagnosticsServer);
+        TryGet(modId, "AutoOpenTaiwuDiagnosticsDashboard", ref AutoOpenTaiwuDiagnosticsDashboard);
+        TryGet(modId, "TaiwuDiagnosticsPort", ref TaiwuDiagnosticsPort);
+        TryGet(modId, "DiagnosticsLogToGameLog", ref DiagnosticsLogToGameLog);
+        TryGet(modId, "DiagnosticsSaveSnapshotOnSave", ref DiagnosticsSaveSnapshotOnSave);
+        TryGet(modId, "DiagnosticsSnapshotMaxCount", ref DiagnosticsSnapshotMaxCount);
 
         AdvanceMonthOptimizationFrameBudgetMs = Math.Clamp(AdvanceMonthOptimizationFrameBudgetMs, 1, 4);
         SaveWorldDatabaseCopyBufferTier = SaveWorldArchiveOptimization.NormalizeCopyBufferTier(SaveWorldDatabaseCopyBufferTier);
         RemoteNpcOfflineCurrentGoalActionPointGainReduction = Math.Clamp(RemoteNpcOfflineCurrentGoalActionPointGainReduction, 0, 20);
+        TaiwuDiagnosticsPort = Math.Clamp(TaiwuDiagnosticsPort, 18580, 18595);
+        DiagnosticsSnapshotMaxCount = Math.Clamp(DiagnosticsSnapshotMaxCount, 1, 20);
     }
 
     /// <summary>读取 bool 设置；读取失败时保留默认值。</summary>

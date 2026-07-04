@@ -1,0 +1,24 @@
+[h1][天幕心帷]实时分析工具[/h1]
+
+这是一个随太吾后端启动的本地实时分析工具，用于查看其它 Mod 通过探针发送的结构化诊断数据。当前主要服务于过月性能优化、NPC 行动规划缓存、存档写入细节与 GameData 日志回看。
+
+[list]
+[*] 本地启动 HTTP 服务与网页面板，只监听 127.0.0.1。
+[*] 展示 SaveWorld 写盘拆解：ArchiveFile.Save、Domain.OnSaveWorld、working.db 复制、压缩收尾等。
+[*] 展示 AdvanceMonth / CharacterActionPlanning 探针：ParallelActionManager.Execute、ICharacterParallelAction、Character.PeriAdvanceMonth_* 等。
+[*] 展示 TaiwuOptimization 运行时缓存命中：OfflineUpdateCurrentGoalActionsMatcherCache、OfflineUpdateCurrentGoalActionsTargetLookupCache、relation / item holder prefilter、CharacterActionPlannerGraphCache。
+[*] 提供 Logs/GameData_*.log 转发页，用于回看原本写到游戏日志里的诊断文本。
+[*] 可保存存档快照副本，便于离线分析 SaveWorld 产物。
+[/list]
+
+[h2]端口说明[/h2]
+诊断工具和发送诊断事件的 Mod 必须使用同一个 TaiwuDiagnosticsPort。当前可选范围为 18580-18595，默认 18580。
+
+[h2]使用建议[/h2]
+[list]
+[*] 正常游玩时可只启用本工具和结构化诊断，不必把详细诊断文本写回 GameData 日志。
+[*] 如果网页只看到 diagnostics.server_ready，请确认发送数据的 Mod 已启用诊断采集，并且端口与本工具一致。
+[*] 本工具不写入游戏存档，不改变原版世界结算；存档快照副本只保存在诊断目录下。
+[/list]
+
+[b]本工具为本地分析与调试用途。若与其它本地服务端口冲突，请在 18580-18595 范围内为所有相关 Mod 选择同一个端口。[/b]

@@ -51,7 +51,16 @@ internal static class UpdateInformationDiagnostics
     /// <returns>诊断开启时返回起始 ticks，否则返回 0。</returns>
     public static long BeginUpdateInformation(InformationDomain domain)
     {
-        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled)
+        TaiwuDiagnosticsExporter.Publish(
+            "advance_month.update_information_probe",
+            new
+            {
+                diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
+                diagnosticsServerAvailable = TaiwuDiagnosticsExporter.IsAvailable,
+                legacyDiagnosticsEnabled = TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled,
+            });
+
+        if (!TaiwuOptimizationSettings.DiagnosticsCollectionEnabled)
         {
             return 0;
         }
@@ -82,9 +91,14 @@ internal static class UpdateInformationDiagnostics
         _current.FinalCharacterKnownSecretsCount = GetDictionaryCount(CharacterKnownSecretsField, domain);
         _current.FinalKnownSecretLinkCount = CountKnownSecretLinks(domain);
 
-        if (Logger.IsInfoEnabled)
+        string legacyText = BuildMessage(totalTicks, in _current);
+        TaiwuDiagnosticsExporter.Publish(
+            "advance_month.update_information",
+            BuildPayload(totalTicks, in _current, legacyText));
+
+        if (TaiwuOptimizationSettings.DiagnosticsLogToGameLog && Logger.IsInfoEnabled)
         {
-            Logger.Info(BuildMessage(totalTicks, in _current));
+            Logger.Info(legacyText);
         }
 
         _current = default;
@@ -95,7 +109,7 @@ internal static class UpdateInformationDiagnostics
     /// <returns>诊断开启时返回起始 ticks，否则返回 0。</returns>
     public static long BeginPhase()
     {
-        return TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled && _current.StartTicks != 0
+        return TaiwuOptimizationSettings.DiagnosticsCollectionEnabled && _current.StartTicks != 0
             ? Stopwatch.GetTimestamp()
             : 0;
     }
@@ -352,6 +366,112 @@ internal static class UpdateInformationDiagnostics
         return builder.ToString();
     }
 
+    private static object BuildPayload(long totalTicks, in Session session, string legacyText)
+    {
+        long measuredTicks =
+            session.MakeSettlementsInformationTicks +
+            session.PlanDisseminateSecretInformationTicks +
+            session.MetabolismSecretInformationTicks;
+        long otherTicks = totalTicks > measuredTicks ? totalTicks - measuredTicks : 0;
+        long holderScanUpperBound = session.InitialSecretInformationCount > 0 &&
+            session.InitialCharacterKnownSecretsCount > 0
+                ? (long)session.InitialSecretInformationCount * session.InitialCharacterKnownSecretsCount
+                : 0;
+
+        long metabolismMeasuredTicks =
+            session.MetabolismMakeSecretBroadcastTicks +
+            session.MetabolismDiscardSecretInformationTicks +
+            session.MetabolismRecordSecretInformationRemoveTicks +
+            session.MetabolismRecordSecretOccurenceRemoveTicks;
+        long metabolismResidualTicks = session.MetabolismSecretInformationTicks > metabolismMeasuredTicks
+            ? session.MetabolismSecretInformationTicks - metabolismMeasuredTicks
+            : 0;
+
+        return new
+        {
+            elapsedMs = ToMilliseconds(totalTicks),
+            total = new
+            {
+                elapsedMs = ToMilliseconds(totalTicks),
+                measuredMs = ToMilliseconds(measuredTicks),
+                otherMs = ToMilliseconds(otherTicks),
+            },
+            secretInformationData = new
+            {
+                secretInformation = CountDelta(session.InitialSecretInformationCount, session.FinalSecretInformationCount),
+                secretOccurence = CountDelta(session.InitialSecretOccurenceCount, session.FinalSecretOccurenceCount),
+                characterKnownSecrets = CountDelta(session.InitialCharacterKnownSecretsCount, session.FinalCharacterKnownSecretsCount),
+                knownSecretLinks = CountDelta(session.InitialKnownSecretLinkCount, session.FinalKnownSecretLinkCount),
+                holderScanUpperBound,
+            },
+            phases = new[]
+            {
+                PhasePayload("MakeSettlementsInformation", session.MakeSettlementsInformationCalls, session.MakeSettlementsInformationTicks),
+                PhasePayload("PlanDisseminateSecretInformation", session.PlanDisseminateSecretInformationCalls, session.PlanDisseminateSecretInformationTicks),
+                PhasePayload("MetabolismSecretInformation", session.MetabolismSecretInformationCalls, session.MetabolismSecretInformationTicks),
+            },
+            planDisseminateSecretInformation = new
+            {
+                maxMs = ToMilliseconds(session.MaxPlanDisseminateSecretInformationTicks),
+                maxCharId = session.MaxPlanDisseminateSecretInformationCharId,
+                slowCallsAtLeast5Ms = session.SlowPlanDisseminateSecretInformationCalls,
+            },
+            metabolismDetails = new
+            {
+                measuredMs = ToMilliseconds(metabolismMeasuredTicks),
+                residualMs = ToMilliseconds(metabolismResidualTicks),
+                steps = new[]
+                {
+                    PhasePayload("MakeSecretBroadcast", session.MetabolismMakeSecretBroadcastCalls, session.MetabolismMakeSecretBroadcastTicks),
+                    PhasePayload("DiscardSecretInformation", session.MetabolismDiscardSecretInformationCalls, session.MetabolismDiscardSecretInformationTicks),
+                    PhasePayload("RecordSecretInformationRemove", session.MetabolismRecordSecretInformationRemoveCalls, session.MetabolismRecordSecretInformationRemoveTicks),
+                    PhasePayload("RecordSecretOccurenceRemove", session.MetabolismRecordSecretOccurenceRemoveCalls, session.MetabolismRecordSecretOccurenceRemoveTicks),
+                    PhasePayload("RemoveElementSecretInformation", session.MetabolismRemoveElementSecretInformationCalls, session.MetabolismRemoveElementSecretInformationTicks),
+                    PhasePayload("RemoveElementSecretOccurence", session.MetabolismRemoveElementSecretOccurenceCalls, session.MetabolismRemoveElementSecretOccurenceTicks),
+                },
+            },
+            lookups = new[]
+            {
+                LookupPayload(
+                    "CalcSecretOccurenceHolderCount",
+                    session.CalcSecretOccurenceHolderCountCalls,
+                    session.CalcSecretOccurenceHolderCountTicks,
+                    session.CalcSecretOccurenceHolderCountMaxTicks),
+                LookupPayload(
+                    "CalcSecretInformationKnownCharacterCount",
+                    session.CalcSecretInformationKnownCharacterCountCalls,
+                    session.CalcSecretInformationKnownCharacterCountTicks,
+                    session.CalcSecretInformationKnownCharacterCountMaxTicks),
+            },
+            legacyText,
+        };
+    }
+
+    private static object PhasePayload(string name, int calls, long ticks) =>
+        new
+        {
+            name,
+            calls,
+            elapsedMs = ToMilliseconds(ticks),
+        };
+
+    private static object LookupPayload(string name, int calls, long ticks, long maxTicks) =>
+        new
+        {
+            name,
+            calls,
+            elapsedMs = ToMilliseconds(ticks),
+            maxMs = ToMilliseconds(maxTicks),
+        };
+
+    private static object CountDelta(int before, int after) =>
+        new
+        {
+            before,
+            after,
+            known = before >= 0 && after >= 0,
+        };
+
     private static void AppendPhase(StringBuilder builder, string name, int calls, long ticks)
     {
         AppendMetric(builder, name, FormatMilliseconds(ticks) + ", calls=" + calls);
@@ -364,6 +484,9 @@ internal static class UpdateInformationDiagnostics
 
     private static string FormatMilliseconds(long ticks) =>
         (ticks * 1000.0 / Stopwatch.Frequency).ToString("N3") + "ms";
+
+    private static double ToMilliseconds(long ticks) =>
+        ticks * 1000.0 / Stopwatch.Frequency;
 
     private static string FormatCountDelta(int before, int after)
     {

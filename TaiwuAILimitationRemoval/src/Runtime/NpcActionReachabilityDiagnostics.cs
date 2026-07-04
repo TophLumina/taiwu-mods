@@ -18,7 +18,7 @@ internal static class NpcActionReachabilityDiagnostics
     private const int MaxDetailLines = 160;
     private static int _logged;
 
-    public static bool Enabled => TaiwuRemoveAILimitationSettings.EnableNpcActionReachabilityDiagnostics;
+    public static bool Enabled => TaiwuRemoveAILimitationSettings.ReachabilityDiagnosticsCollectionEnabled;
 
     public static void LogPlannerOnce(CharacterActionPlanner planner)
     {
@@ -72,7 +72,15 @@ internal static class NpcActionReachabilityDiagnostics
             }
         }
 
-        AdaptableLog.TagInfo(LogTag, stats.ToLogString());
+        string summaryText = stats.ToLogString();
+        TaiwuDiagnosticsExporter.Publish(
+            "ai_limitation.reachability_summary",
+            stats.ToPayload(summaryText));
+
+        if (TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog)
+        {
+            AdaptableLog.TagInfo(LogTag, summaryText);
+        }
 
         if (details.Length > 0)
         {
@@ -81,7 +89,22 @@ internal static class NpcActionReachabilityDiagnostics
                 details.AppendLine($"... truncated detail lines: {detailCount - MaxDetailLines}");
             }
 
-            AdaptableLog.TagInfo(LogTag, "NPC action reachability diagnostics details\n" + details);
+            string detailText = details.ToString();
+            TaiwuDiagnosticsExporter.Publish(
+                "ai_limitation.reachability_detail",
+                new
+                {
+                    detailCount,
+                    maxDetailLines = MaxDetailLines,
+                    truncated = detailCount > MaxDetailLines,
+                    details = detailText,
+                    legacyText = "NPC action reachability diagnostics details\n" + detailText,
+                });
+
+            if (TaiwuRemoveAILimitationSettings.DiagnosticsLogToGameLog)
+            {
+                AdaptableLog.TagInfo(LogTag, "NPC action reachability diagnostics details\n" + detailText);
+            }
         }
     }
 
@@ -387,5 +410,34 @@ internal static class NpcActionReachabilityDiagnostics
                    $"blockedByNoneSensor={_actionOriginalBlockedByNoneSensor}, " +
                    $"blockedByMissingProducer={_actionOriginalBlockedByMissingProducer}";
         }
+
+        public object ToPayload(string legacyText) =>
+            new
+            {
+                goals = new
+                {
+                    total = _goalTotal,
+                    currentReachable = _goalCurrentReachable,
+                    originalReachable = _goalOriginalReachable,
+                    bypassReachable = _goalBypassReachable,
+                    reachableByBypass = _goalReachableByBypass,
+                    blockedByNoneSensor = _goalOriginalBlockedByNoneSensor,
+                    blockedByMissingProducer = _goalOriginalBlockedByMissingProducer,
+                },
+                actions = new
+                {
+                    total = _actionTotal,
+                    implemented = _actionImplemented,
+                    implementationPathMissing = _actionImplementationPathMissing,
+                    implementationNotLoaded = _actionImplementationNotLoaded,
+                    currentReachable = _actionCurrentReachable,
+                    originalReachable = _actionOriginalReachable,
+                    bypassReachable = _actionBypassReachable,
+                    reachableByBypass = _actionReachableByBypass,
+                    blockedByNoneSensor = _actionOriginalBlockedByNoneSensor,
+                    blockedByMissingProducer = _actionOriginalBlockedByMissingProducer,
+                },
+                legacyText,
+            };
     }
 }
