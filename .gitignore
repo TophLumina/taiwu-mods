@@ -6,3 +6,5 @@ player.log
 logs
 .vs
 note.md
+__pycache__
+data
