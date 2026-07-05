@@ -53,6 +53,12 @@ internal static class AdvanceMonthProtectionSnapshotCache
     /// <summary>尝试取得当前可用快照；快照未完成时返回 `false`，调用方应保持原版行为。</summary>
     public static bool TryGetSnapshot(out Snapshot snapshot)
     {
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
+        {
+            snapshot = null!;
+            return false;
+        }
+
         lock (_syncRoot)
         {
             if (_frozenSnapshot != null)
@@ -79,6 +85,11 @@ internal static class AdvanceMonthProtectionSnapshotCache
     /// <summary>过月开始时冻结已就绪快照；未就绪时不强制构建，避免增加过月阻塞。</summary>
     public static bool TryFreezeForAdvanceMonth()
     {
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
+        {
+            return false;
+        }
+
         lock (_syncRoot)
         {
             if (!IsSnapshotCurrent(_snapshot))
@@ -137,6 +148,11 @@ internal static class AdvanceMonthProtectionSnapshotCache
     /// <summary>设置改变后让全部保护数据失效。</summary>
     public static void MarkAllDirty()
     {
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
+        {
+            return;
+        }
+
         lock (_syncRoot)
         {
             _groupVersion++;
@@ -149,6 +165,11 @@ internal static class AdvanceMonthProtectionSnapshotCache
     /// <summary>太吾队伍变化会影响队伍本身和直接关系保护集合。</summary>
     public static void MarkTaiwuGroupDirty()
     {
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
+        {
+            return;
+        }
+
         lock (_syncRoot)
         {
             _groupVersion++;
@@ -160,6 +181,11 @@ internal static class AdvanceMonthProtectionSnapshotCache
     /// <summary>只在关系变化涉及太吾/队友时重建关系保护集合。</summary>
     public static void MarkRelationDirtyIfTaiwuGroupRelated(int charId, int relatedCharId)
     {
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
+        {
+            return;
+        }
+
         lock (_syncRoot)
         {
             if (IsCachedTaiwuGroupMember(charId) || IsCachedTaiwuGroupMember(relatedCharId))
@@ -173,6 +199,11 @@ internal static class AdvanceMonthProtectionSnapshotCache
     /// <summary>太吾位置变化后重建当前州域/相邻州域保护集合。</summary>
     public static void MarkProtectedAreasDirty()
     {
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
+        {
+            return;
+        }
+
         lock (_syncRoot)
         {
             _areaVersion++;
@@ -182,7 +213,7 @@ internal static class AdvanceMonthProtectionSnapshotCache
 
     public static bool NeedsFrameBuild()
     {
-        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
         {
             return false;
         }
@@ -203,7 +234,8 @@ internal static class AdvanceMonthProtectionSnapshotCache
     /// <returns>本帧执行的构建步骤数。</returns>
     public static int TickBuildProtectionSnapshot(in AdvanceMonthOptimizationFrameBudget frameBudget)
     {
-        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled || !frameBudget.HasTimeRemaining())
+        if (!TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled ||
+            !frameBudget.HasTimeRemaining())
         {
             return 0;
         }

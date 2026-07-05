@@ -60,9 +60,7 @@ internal static class OfflineUpdateCurrentGoalActionsActionPointReducer
 
     /// <summary>检查实验性行动点削减是否启用。</summary>
     private static bool IsAdvanceMonthOptimizationEnabled() =>
-        TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.ReduceRemoteNpcOfflineCurrentGoalActionPointGain &&
-        TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointGainReduction > 0;
+        TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled;
 
     /// <summary>判断角色是否应保留原版行动点增长。</summary>
     /// <param name="character">待判断角色。</param>

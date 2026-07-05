@@ -17,7 +17,7 @@ internal static class AdvanceMonthLifecyclePatch
             new
             {
                 diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
-                diagnosticsServerAvailable = TaiwuDiagnosticsExporter.IsAvailable,
+                diagnosticsExportEnabled = TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
             });
         AdvanceMonthOptimizationRuntime.BeginAdvanceMonthOptimizationScope();
     }
@@ -31,7 +31,7 @@ internal static class AdvanceMonthLifecyclePatch
             new
             {
                 diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
-                diagnosticsServerAvailable = TaiwuDiagnosticsExporter.IsAvailable,
+                diagnosticsExportEnabled = TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
             });
     }
 }

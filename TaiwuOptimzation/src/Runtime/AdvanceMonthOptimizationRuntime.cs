@@ -17,7 +17,7 @@ internal static class AdvanceMonthOptimizationRuntime
     public static void BeginAdvanceMonthOptimizationScope()
     {
         CharacterActionPlanningDiagnostics.BeginAdvanceMonth();
-        if (TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled)
+        if (TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled)
         {
             AdvanceMonthProtectionSnapshotCache.TryFreezeForAdvanceMonth();
         }
@@ -114,6 +114,7 @@ internal static class AdvanceMonthOptimizationRuntime
     public static void TickAdvanceMonthOptimization(DataContext context)
     {
         if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled ||
+            !TaiwuOptimizationSettings.RemoteNpcOfflineCurrentGoalActionPointReductionEnabled ||
             !TaiwuOptimizationSettings.EnableAdvanceMonthOptimizationFrameBudget ||
             !IsWorldDataAvailable() ||
             DomainManager.World.GetAdvancingMonthState() != 0 ||

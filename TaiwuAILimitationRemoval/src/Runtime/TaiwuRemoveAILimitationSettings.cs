@@ -14,10 +14,10 @@ internal static class TaiwuRemoveAILimitationSettings
     public static bool DiagnosticsLogToGameLog = false;
 
     public static bool DiagnosticsCollectionEnabled =>
-        EnableNpcActionLimitationRemovalLog || TaiwuDiagnosticsExporter.IsAvailable;
+        EnableNpcActionLimitationRemovalLog;
 
     public static bool ReachabilityDiagnosticsCollectionEnabled =>
-        EnableNpcActionReachabilityDiagnostics || TaiwuDiagnosticsExporter.IsAvailable;
+        EnableNpcActionReachabilityDiagnostics;
 
     public static void Load(string modId)
     {

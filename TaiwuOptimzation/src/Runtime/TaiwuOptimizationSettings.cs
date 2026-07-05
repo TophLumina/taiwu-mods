@@ -34,7 +34,12 @@ internal static class TaiwuOptimizationSettings
     public static int DiagnosticsSnapshotMaxCount = 5;
 
     public static bool DiagnosticsCollectionEnabled =>
-        AdvanceMonthOptimizationDiagnosticsEnabled || TaiwuDiagnosticsExporter.IsAvailable;
+        AdvanceMonthOptimizationDiagnosticsEnabled;
+
+    public static bool RemoteNpcOfflineCurrentGoalActionPointReductionEnabled =>
+        AdvanceMonthOptimizationEnabled &&
+        ReduceRemoteNpcOfflineCurrentGoalActionPointGain &&
+        RemoteNpcOfflineCurrentGoalActionPointGainReduction > 0;
 
     /// <summary>从游戏 mod 设置中读取配置，并限制到有效范围。</summary>
     /// <param name="modId">当前 mod id。</param>

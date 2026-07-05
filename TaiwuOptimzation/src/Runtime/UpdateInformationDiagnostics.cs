@@ -56,7 +56,7 @@ internal static class UpdateInformationDiagnostics
             new
             {
                 diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
-                diagnosticsServerAvailable = TaiwuDiagnosticsExporter.IsAvailable,
+                diagnosticsExportEnabled = TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
                 legacyDiagnosticsEnabled = TaiwuOptimizationSettings.AdvanceMonthOptimizationDiagnosticsEnabled,
             });
 
