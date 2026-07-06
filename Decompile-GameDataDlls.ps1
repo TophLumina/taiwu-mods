@@ -11,13 +11,13 @@ to its own output directory:
 This matches the current "backend decompiled" layout used by this workspace.
 
 .EXAMPLE
-.\tools\Decompile-GameDataDlls.ps1 `
+.Decompile-GameDataDlls.ps1 `
   -SourceDirs "D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend" `
   -OutputDir ".\backend decompiled" `
   -Clean
 
 .EXAMPLE
-.\tools\Decompile-GameDataDlls.ps1 `
+.Decompile-GameDataDlls.ps1 `
   -IlspyCmd "C:\Tools\ilspycmd.exe" `
   -SourceDirs ".\GameBackend", ".\ExtraBackendDlls"
 #>
@@ -164,6 +164,7 @@ foreach ($assembly in $assemblies) {
         --project `
         --nested-directories `
         --disable-updatecheck `
+        --use-varnames-from-pdb `
         --outputdir $assemblyOutputDir `
         $assembly.FullName
 

@@ -27,36 +27,12 @@ internal static class TaiwuDiagnosticsExporter
     private static bool _stopping;
     private static bool _initialized;
     private static bool _serverAvailable;
-    private static long _lastAvailabilityCheckTicks;
     private static int _port = 18580;
     private static int _consecutiveFailures;
     private static long _spoolSequence;
 
     public static bool IsAvailable
-    {
-        get
-        {
-            if (!_initialized)
-            {
-                return false;
-            }
-
-            if (_serverAvailable)
-            {
-                return true;
-            }
-
-            long now = Environment.TickCount64;
-            if (now - _lastAvailabilityCheckTicks < 2000)
-            {
-                return false;
-            }
-
-            _lastAvailabilityCheckTicks = now;
-            _serverAvailable = TaiwuDiagnosticsServerLauncher.IsHealthy(_port);
-            return _serverAvailable;
-        }
-    }
+        => _initialized && _serverAvailable;
 
     public static void Initialize(string modName, bool launchServer, bool autoOpenDashboard, int port)
     {
@@ -103,7 +79,7 @@ internal static class TaiwuDiagnosticsExporter
         }
         else
         {
-            _serverAvailable = TaiwuDiagnosticsServerLauncher.IsHealthy(port);
+            _serverAvailable = false;
         }
     }
 
