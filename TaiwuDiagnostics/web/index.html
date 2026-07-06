@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[天幕心帷]实时分析工具</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>[天幕心帷]实时分析工具</h1>
+      <p id="status">正在连接本地诊断服务...</p>
+    </div>
+    <div class="topbar-actions">
+      <button id="themeToggle" type="button">亮色</button>
+      <button id="refreshButton" type="button">刷新</button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="诊断视图">
+    <button class="tab active" data-view="saveDiagnostics" type="button">SaveWorld</button>
+    <button class="tab" data-view="advanceMonth" type="button">AdvanceMonth</button>
+    <button class="tab" data-view="planningActions" type="button">Action 调用</button>
+    <button class="tab" data-view="planningCaches" type="button">Cache 命中</button>
+    <button class="tab" data-view="gameLog" type="button">GameLog</button>
+    <button class="tab" data-view="probeEvents" type="button">探针事件</button>
+    <button class="tab" data-view="snapshots" type="button">存档快照</button>
+  </nav>
+
+  <aside id="pageOutline" class="page-outline" aria-label="当前视图大纲"></aside>
+
+  <main>
+    <section id="saveDiagnostics" class="view active">
+      <div class="metric-grid">
+        <section class="panel metric">
+          <h2>最新存档耗时</h2>
+          <div id="latestSaveElapsed" class="big-number">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>存档文件大小</h2>
+          <div id="latestSaveSize" class="big-number small">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>最慢 Domain</h2>
+          <div id="slowestDomain" class="compact-text">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>数据库复制</h2>
+          <div id="databaseCopy" class="compact-text">-</div>
+        </section>
+      </div>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>阶段耗时拆解</h2>
+          <span id="latestSaveTime" class="muted">-</span>
+        </header>
+        <div id="saveStageBreakdown" class="bar-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>Domain 保存耗时排行</h2>
+          <span id="domainCount" class="muted">-</span>
+        </header>
+        <div id="domainBreakdown" class="table-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <h2>最近存档事件</h2>
+        <div id="saveEventList" class="event-list"></div>
+      </section>
+    </section>
+
+    <section id="advanceMonth" class="view">
+      <div class="metric-grid">
+        <section class="panel metric">
+          <h2>CharacterActionPlanning</h2>
+          <div id="planningElapsed" class="big-number">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>CharacterActionPlanningStep</h2>
+          <div id="planningHotStep" class="compact-text">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>Optimization cache hitRate</h2>
+          <div id="planningCacheHitRate" class="big-number small">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>targetMatcherCacheByAction count</h2>
+          <div id="planningCacheKeys" class="big-number small">-</div>
+        </section>
+      </div>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>OfflineUpdateCurrentGoalActions steps</h2>
+          <span id="planningEventTime" class="muted">-</span>
+        </header>
+        <div id="planningStepBreakdown" class="bar-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <h2>AdvanceMonth probes</h2>
+        <div id="advanceMonthEvents" class="event-list"></div>
+      </section>
+    </section>
+
+    <section id="planningActions" class="view">
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>ParallelActionManager.Execute</h2>
+          <span class="muted">ICharacterParallelAction</span>
+        </header>
+        <div id="planningParallelActions" class="table-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>ICharacterParallelAction methods</h2>
+          <span class="muted">Execute / TaiwuExecute / PrisonerExecute</span>
+        </header>
+        <div id="planningParallelInvocations" class="table-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>Character.PeriAdvanceMonth_*</h2>
+          <span class="muted">Character monthly methods</span>
+        </header>
+        <div id="planningMonthlyMethods" class="table-list"></div>
+      </section>
+    </section>
+
+    <section id="planningCaches" class="view">
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>TaiwuOptimization diagnostics</h2>
+          <span class="muted">advance_month.character_action_planning / legacyText</span>
+        </header>
+        <div id="optimizationCacheOverview" class="table-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>PlanningAction cache by actionTemplateId</h2>
+          <span class="muted">relation / item holder / matcher</span>
+        </header>
+        <div id="planningActionHotspots" class="table-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>OfflineUpdateCurrentGoalActionsMatcherCache</h2>
+          <span class="muted">target matcher cache / fallback</span>
+        </header>
+        <div id="planningCacheBreakdown" class="table-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>OfflineUpdateCurrentGoalActionsTargetLookupCache</h2>
+          <span class="muted">SameBlock / SameArea / SameState / BlockRange / SettlementRange</span>
+        </header>
+        <div id="targetLookupCacheRows" class="table-list"></div>
+      </section>
+
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>CharacterActionPlannerGraphCache</h2>
+          <span class="muted">Condition / Effect</span>
+        </header>
+        <div id="planningGraphCacheRows" class="table-list"></div>
+      </section>
+    </section>
+
+    <section id="gameLog" class="view">
+      <section class="panel wide toolbar">
+        <label>
+          关键字
+          <input id="gameLogPattern" placeholder="留空显示最新 GameData 日志">
+        </label>
+        <label>
+          行数上限
+          <input id="gameLogLimit" type="number" min="20" max="2000" value="400">
+        </label>
+      </section>
+      <section class="panel wide">
+        <header class="panel-heading">
+          <h2>Logs/GameData_*.log</h2>
+          <span id="gameLogStatus" class="muted">-</span>
+        </header>
+        <div id="gameLogLines" class="log-lines"></div>
+      </section>
+    </section>
+
+    <section id="probeEvents" class="view">
+      <section class="panel wide toolbar">
+        <label>
+          事件类型
+          <input id="eventTypeFilter" placeholder="留空显示全部">
+        </label>
+        <label>
+          数量上限
+          <input id="eventLimit" type="number" min="1" max="2000" value="500">
+        </label>
+      </section>
+      <div class="metric-grid compact">
+        <section class="panel metric">
+          <h2>事件总数</h2>
+          <div id="totalEvents" class="big-number">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>最新事件</h2>
+          <div id="latestEvent" class="compact-text">-</div>
+        </section>
+        <section class="panel metric">
+          <h2>事件类型</h2>
+          <div id="eventTypeList" class="list"></div>
+        </section>
+        <section class="panel metric">
+          <h2>来源 Mod</h2>
+          <div id="modList" class="list"></div>
+        </section>
+      </div>
+      <section class="panel wide">
+        <h2>原始探针数据</h2>
+        <div id="rawEvents" class="event-list"></div>
+      </section>
+    </section>
+
+    <section id="snapshots" class="view">
+      <section class="panel wide">
+        <h2>存档快照副本</h2>
+        <div id="snapshotList" class="event-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

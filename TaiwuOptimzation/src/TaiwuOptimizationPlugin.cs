@@ -7,14 +7,28 @@ namespace TaiwuOptimization;
 [PluginConfig("TaiwuOptimization", "local", "0.1.0")]
 public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
 {
+    // 后端所有 patch 共用同一个 Harmony 实例，卸载时整体撤销。
     private Harmony? _harmony;
 
     public override void Initialize()
     {
-        DeferredAdvanceMonthSettings.Load(ModIdStr);
-        DeferredAdvanceMonthRuntime.Initialize();
+        TaiwuOptimizationSettings.Load(ModIdStr);
+        TaiwuDiagnosticsExporter.Initialize(
+            "TaiwuOptimization",
+            TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
+            TaiwuOptimizationSettings.AutoOpenTaiwuDiagnosticsDashboard,
+            TaiwuOptimizationSettings.TaiwuDiagnosticsPort);
+        TaiwuDiagnosticsExporter.Publish(
+            "mod.loaded",
+            new
+            {
+                mod = "TaiwuOptimization",
+                diagnosticsCollectionEnabled = TaiwuOptimizationSettings.DiagnosticsCollectionEnabled,
+                diagnosticsLogToGameLog = TaiwuOptimizationSettings.DiagnosticsLogToGameLog,
+            });
+        AdvanceMonthOptimizationRuntime.Initialize();
 
-        _harmony = new Harmony("TaiwuOptimization.DeferredAdvanceMonth");
+        _harmony = new Harmony("TaiwuOptimization.AdvanceMonthOptimization");
         _harmony.PatchAll(typeof(TaiwuOptimizationPlugin).Assembly);
     }
 
@@ -22,11 +36,21 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     {
         _harmony?.UnpatchSelf();
         _harmony = null;
-        DeferredAdvanceMonthRuntime.Dispose();
+        TaiwuDiagnosticsExporter.Dispose();
+        CharacterActionPlannerGraphCache.Reset();
+        AdvanceMonthOptimizationRuntime.Dispose();
     }
 
     public override void OnModSettingUpdate()
     {
-        DeferredAdvanceMonthSettings.Load(ModIdStr);
+        TaiwuOptimizationSettings.Load(ModIdStr);
+        TaiwuDiagnosticsExporter.Initialize(
+            "TaiwuOptimization",
+            TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
+            TaiwuOptimizationSettings.AutoOpenTaiwuDiagnosticsDashboard,
+            TaiwuOptimizationSettings.TaiwuDiagnosticsPort);
+        AdvanceMonthProtectionSnapshotCache.MarkAllDirty();
+        OfflineUpdateCurrentGoalActionsTargetLookupCache.Reset();
+        CharacterActionPlannerGraphCache.Reset();
     }
 }

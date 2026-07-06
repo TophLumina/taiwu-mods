@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyName>TaiwuOptimization</AssemblyName>
+    <AssemblyName>TaiwuDiagnostics</AssemblyName>
     <TargetFramework>net8.0</TargetFramework>
     <PlatformTarget>x64</PlatformTarget>
     <OutputType>Library</OutputType>
@@ -16,11 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="TaiwuOptimizationPlugin.cs" />
-    <Compile Include="..\..\TaiwuDiagnostics\ModBridge\TaiwuDiagnosticsBridge.cs" Link="Runtime\TaiwuDiagnosticsBridge.cs" />
+    <Compile Include="TaiwuDiagnosticsPlugin.cs" />
     <Compile Include="Runtime\**\*.cs" />
     <Compile Include="Patches\**\*.cs" />
-    <Compile Include="Bugfix\**\*.cs" />
+    <Compile Include="..\ModBridge\TaiwuDiagnosticsBridge.cs" Link="Runtime\TaiwuDiagnosticsBridge.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +31,6 @@
     <Reference Include="GameData.Utilities" HintPath="$(GameBackendDir)\GameData.Utilities.dll" Private="false" />
     <Reference Include="GameData.ArchiveData" HintPath="$(GameBackendDir)\GameData.ArchiveData.dll" Private="false" />
     <Reference Include="GameData.ActionPlanning" HintPath="$(GameBackendDir)\GameData.ActionPlanning.dll" Private="false" />
-    <Reference Include="GameData.SecretInformation" HintPath="$(GameBackendDir)\GameData.SecretInformation.dll" Private="false" />
-    <Reference Include="SQLite-net" HintPath="$(GameBackendDir)\SQLite-net.dll" Private="false" />
-    <Reference Include="NLog" HintPath="$(GameBackendDir)\NLog.dll" Private="false" />
     <Reference Include="Redzen" HintPath="$(GameBackendDir)\Redzen.dll" Private="false" />
   </ItemGroup>
 
