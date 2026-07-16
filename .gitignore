@@ -1,4 +1,5 @@
-backend decompiled
+backend_decompiled
+managed_decompiled
 bin
 obj
 backend-code-structure.md
