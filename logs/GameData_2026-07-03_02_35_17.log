@@ -1,0 +1,463 @@
+2026-07-03 02:35:17.0745|INFO|Main|AdaptableLog|AdaptableLog initialized.
+2026-07-03 02:35:17.0832|INFO|Main|AdaptableLog|ExternalDataBridge initialized.
+2026-07-03 02:35:17.1324|INFO|Main|GameData.Common.DataUpgradeManager|DataUpgradeManager initialized.
+2026-07-03 02:35:17.1915|INFO|Worker0|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker1|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker2|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker4|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker3|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker5|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker6|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker7|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker8|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker9|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker19|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker0|AdaptableLog|CharacterActionPlanner created.
+2026-07-03 02:35:17.1915|INFO|Worker22|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker11|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker12|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker13|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker14|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker15|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker16|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker17|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker18|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker10|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker20|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker21|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker23|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker24|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker25|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker26|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker27|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker28|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker29|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker30|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|Worker31|GameData.Common.WorkerThread.WorkerThreadManager|Worker thread started.
+2026-07-03 02:35:17.1915|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|ReadInterProcessMessages thread started.
+2026-07-03 02:35:17.1915|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|WriteInterProcessMessages thread started.
+2026-07-03 02:35:17.2663|INFO|Main|GameData.Steamworks.SteamManager|Verifying steam user successful! steam id 76561198177603869
+2026-07-03 02:35:17.2663|INFO|Main|GameData.Program|GameData module initialized.
+2026-07-03 02:35:17.3094|INFO|Main|GameData.GameDataBridge.GameDataBridge|Machine Frequency (Ticks/Second): 10000000
+2026-07-03 02:35:23.6899|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Incoming message: Initialize
+2026-07-03 02:35:23.6899|INFO|ReadInterProcessMessages|GameData.Domains.Global.GlobalDomain|Game Version: 1.0.46, Build Date: 202607012112125378
+2026-07-03 02:35:25.4713|INFO|ReadInterProcessMessages|AdaptableLog|CharacterActionPlanner initialized.
+2026-07-03 02:35:25.4713|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Transition: 0 -> 1
+2026-07-03 02:35:25.4855|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]过月性能优化 for GameData ...
+2026-07-03 02:35:25.4855|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from TaiwuOptimization.dll
+2026-07-03 02:35:26.0375|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [完全版]取消大太阴/洗髓经童子身限定 for GameData ...
+2026-07-03 02:35:26.0375|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from AlwaysVirgin.dll
+2026-07-03 02:35:26.0375|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]自动战斗策略 for GameData ...
+2026-07-03 02:35:26.0375|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from AutoCombatBackend.dll
+2026-07-03 02:35:26.0375|INFO|Main|AdaptableLog|Initialize 1_3741592756
+2026-07-03 02:35:26.2132|INFO|Main|AdaptableLog|OnModSettingUpdate 1_3741592756
+2026-07-03 02:35:26.2132|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]更好的搜索 for GameData ...
+2026-07-03 02:35:26.2132|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from BetterSearchBackend.dll
+2026-07-03 02:35:26.5226|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]拟真自动突破加强版 for GameData ...
+2026-07-03 02:35:26.5226|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from AutoBreakBackend.dll
+2026-07-03 02:35:26.5226|INFO|Main|AdaptableLog|Initialize 1_3467883114
+2026-07-03 02:35:26.5226|INFO|Main|自动突破|PreloadOrTools 执行，依赖目录=D:\SteamLibrary\steamapps\workshop\content\838350\3467883114\Plugins
+2026-07-03 02:35:26.5226|INFO|Main|自动突破|依赖 Google.Protobuf 已存在（Location=D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\Google.Protobuf.dll）
+2026-07-03 02:35:26.5226|INFO|Main|自动突破|依赖 Google.OrTools 已存在（Location=<空/字节加载>）
+2026-07-03 02:35:26.5226|INFO|Main|自动突破|已为 Google.OrTools 注册原生库解析器（目录=D:\SteamLibrary\steamapps\workshop\content\838350\3467883114\Plugins）
+2026-07-03 02:35:26.5302|INFO|Main|自动突破|自动突破设置 forceSuccessRate100=True, allGridVisible=True, timeout=0, useExactSolver=True, speedWarmStart=True, noInjuryBreak=False
+2026-07-03 02:35:26.8162|INFO|Main|自动突破|自动突破设置 forceSuccessRate100=True, allGridVisible=True, timeout=0, useExactSolver=True, speedWarmStart=True, noInjuryBreak=False
+2026-07-03 02:35:26.8162|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [天幕心帷]修改武器式 for GameData ...
+2026-07-03 02:35:26.8162|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from CustomWeaponBackend.dll
+2026-07-03 02:35:26.8162|INFO|Main|AdaptableLog|Initialize 1_3746604877
+2026-07-03 02:35:26.8576|INFO|Main|AdaptableLog|OnModSettingUpdate 1_3746604877
+2026-07-03 02:35:26.8576|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod myna12548的基础mod for GameData ...
+2026-07-03 02:35:26.8576|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from MynahBaseModBackend.dll
+2026-07-03 02:35:26.8807|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 食物加强 for GameData ...
+2026-07-03 02:35:26.8807|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from FoodEnhance.dll
+2026-07-03 02:35:26.8970|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 蛐蛐增强 for GameData ...
+2026-07-03 02:35:26.8970|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from QuQuSSR.dll
+2026-07-03 02:35:26.9147|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 解除婚配与同道数量限制 for GameData ...
+2026-07-03 02:35:26.9147|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from NoMarriageLimit.dll
+2026-07-03 02:35:26.9217|INFO|Main|AdaptableLog|[NoMarriageLimit] Initialized (enableNoMarriageLimit=True, enableNoCompanionLimit=True)
+2026-07-03 02:35:26.9217|INFO|Main|AdaptableLog|[NoMarriageLimit] Settings updated: enableNoMarriageLimit=True, enableNoCompanionLimit=True
+2026-07-03 02:35:26.9217|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 蛐蛐透视 for GameData ...
+2026-07-03 02:35:26.9217|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 自定义开局·点数无限 for GameData ...
+2026-07-03 02:35:26.9217|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 璇女峰拯救计划 for GameData ...
+2026-07-03 02:35:26.9217|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from XuanNvMemberUpgrade.dll
+2026-07-03 02:35:26.9217|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod [正式版V1.0天幕心帷]自定义村民招募 for GameData ...
+2026-07-03 02:35:26.9217|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from CustomRecruitment.dll
+2026-07-03 02:35:26.9480|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 猪猪编辑器 for GameData ...
+2026-07-03 02:35:26.9480|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from FeatureEditor.Backend.dll
+2026-07-03 02:35:27.0335|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 物品无重量 for GameData ...
+2026-07-03 02:35:27.0335|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from ItemWeight.dll
+2026-07-03 02:35:27.0483|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 捏人优化框架（新） for GameData ...
+2026-07-03 02:35:27.0483|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 天人道修改 for GameData ...
+2026-07-03 02:35:27.0483|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from SamsaraMod.dll
+2026-07-03 02:35:27.0615|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 【天幕心帷】激昂元鸡 for GameData ...
+2026-07-03 02:35:27.0615|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from BigCheckenCoop.dll
+2026-07-03 02:35:27.0615|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from HyperactivityChicken.dll
+2026-07-03 02:35:27.0615|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 具体春宵（重置版） for GameData ...
+2026-07-03 02:35:27.0615|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from JTCX.Backend.dll
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 不易变老/长生不老 for GameData ...
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from MoreYoung.dll
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 【招聘简历速览】派遣村民高亮最高属性 for GameData ...
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 出生特质无限制 for GameData ...
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 【天幕心帷】功法一格 for GameData ...
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from SkillOneGrid.dll
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 太吾迎娇(npc立绘) for GameData ...
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod 无忧传剑 for GameData ...
+2026-07-03 02:35:27.2357|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from TransferTaiwuMod.dll
+2026-07-03 02:35:27.2856|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod ~更多信息 v3.46~ for GameData ...
+2026-07-03 02:35:27.2856|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from MynahMoreInfoBackend.dll
+2026-07-03 02:35:27.2856|INFO|Main|GameData.Domains.Mod.ModDomain|Start loading mod Taiwu Diagnostics for GameData ...
+2026-07-03 02:35:27.2856|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading plugin from TaiwuDiagnostics.dll
+2026-07-03 02:35:27.4691|INFO|Main|AdaptableLog|AiNodeFactory.Register on GameData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null added 4 types
+2026-07-03 02:35:27.4691|INFO|Main|AdaptableLog|AiActionFactory.Register on GameData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null added 67 types
+2026-07-03 02:35:27.4691|INFO|Main|AdaptableLog|AiConditionFactory.Register on GameData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null added 127 types
+2026-07-03 02:35:33.2440|WARN|Main|AdaptableLog|Duplicate event 8327f785-a687-4e1e-9292-bd91f388852f detected.
+2026-07-03 02:35:33.7072|INFO|Main|AdaptableLog|ConchShip events init complete,can load mod events now
+2026-07-03 02:35:33.7072|INFO|Main|GameData.DLC.DlcManager|Start loading Dlc Events:
+2026-07-03 02:35:33.7072|INFO|Main|GameData.DLC.DlcManager|DLC: 3464590_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/YearOfSnakeCloth\1.0.0.0\Events
+2026-07-03 02:35:33.7072|INFO|Main|GameData.DLC.DlcManager|DLC: 4528730_184683593729, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/CricketPolymorph\1.0.43\Events
+2026-07-03 02:35:33.7072|INFO|Main|GameData.DLC.DlcManager|DLC: 2764960_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/HappyNewYear2024\1.0.0.0\Events
+2026-07-03 02:35:33.7190|INFO|Main|GameData.DLC.DlcManager|DLC: 2764950_133143986177, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/FiveLoong\1.0.31\Events
+2026-07-03 02:35:33.7998|INFO|Main|GameData.DLC.DlcManager|DLC: 2172690_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/GiftFromConchShip2\1.0.0.0\Events
+2026-07-03 02:35:33.7998|INFO|Main|GameData.DLC.DlcManager|DLC: 2241120_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/GiftFromConchShip1\1.0.0.0\Events
+2026-07-03 02:35:33.7998|INFO|Main|GameData.DLC.DlcManager|DLC: 4395170_1, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/HappyNewYear2026\1.0.0.0\Events
+2026-07-03 02:35:33.7998|INFO|Main|GameData.DLC.DlcManager|DLC: 4834450_287768313856, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/GreenHillsRemain\0.84.67.0\Events
+2026-07-03 02:35:33.8117|INFO|Main|GameData.DLC.DlcManager|DLC: 4834440_287768313856, Path: D:/SteamLibrary/steamapps/common/The Scroll Of Taiwu/The Scroll of Taiwu_Data/EightYears\0.84.67.0\Events
+2026-07-03 02:35:33.8117|INFO|Main|GameData.Domains.Mod.ModDomain| - Loading events from Taiwu_EventPackage_jutichunxiao.dll
+2026-07-03 02:35:33.8875|INFO|Main|GameData.GameDataBridge.GameDataBridge|Transition: 1 -> 2
+2026-07-03 02:35:33.9020|INFO|Main|AdaptableLog|CallMethod Load Config
+2026-07-03 02:35:33.9020|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Outgoing message: GameModuleInitialized
+2026-07-03 02:35:33.9020|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Transition: 2 -> 3
+2026-07-03 02:35:33.9214|INFO|Main|AdaptableLog|CallMethod Load Config
+2026-07-03 02:35:34.0097|INFO|Main|GameData.Domains.Global.GlobalDomain|Game Version: 1.0.46, Build Date: 202607012112125378
+2026-07-03 02:35:40.3573|INFO|Main|GameData.Domains.World.WorldDomain|WorldCreatingTime: 2026-07-03 [02:33]
+2026-07-03 02:35:40.3573|INFO|Main|GameData.Domains.World.WorldDomain|GameVersionCreating: 1.0.46
+2026-07-03 02:35:40.3576|INFO|Main|GameData.Domains.World.WorldDomain|GameVersionLastSaving: 1.0.46
+2026-07-03 02:35:40.3576|INFO|Main|GameData.Domains.World.WorldDomain|LoadWorld: 1123958996
+2026-07-03 02:35:40.7294|INFO|Main|GameData.Domains.World.WorldDomain|Currrent Population / World Standard Population: 6655/6038, Probability Adjustment of Creating Character: 100%
+2026-07-03 02:35:40.8767|INFO|Main|AdaptableLog|OnLoadedArchiveData
+2026-07-03 02:35:40.8767|INFO|Main|AdaptableLog|OnLoadedArchiveData
+2026-07-03 02:35:41.1506|INFO|Main|GameData.Domains.Global.GlobalDomain|LoadWorld: 802.4
+2026-07-03 02:35:41.1729|INFO|Main|GameData.Domains.Item.ItemDomain|Total unowned items: 0
+2026-07-03 02:35:41.1729|INFO|Main|GameData.Domains.Character.CharacterDomain|Clearing obsolete relations: 475312 => 475312
+2026-07-03 02:35:41.2877|INFO|Main|GameData.Domains.Global.GlobalDomain|FixAbnormalDomainArchiveData: 113.9
+2026-07-03 02:35:45.2188|INFO|Main|AdaptableLog|new Event triggered : 1505c7c2-8a55-4794-bd85-1c5aec7ea341, _triggeredEventList.Count = 1
+2026-07-03 02:35:45.2188|INFO|Main|AdaptableLog|new Event triggered : 914c2be7-efbd-40d3-8711-b39a353c4126, _triggeredEventList.Count = 2
+2026-07-03 02:35:45.2188|INFO|Main|AdaptableLog|new Event triggered : b94ec916-8c0d-431d-9928-dbaa812ef423, _triggeredEventList.Count = 3
+2026-07-03 02:35:45.2188|INFO|Main|AdaptableLog|new Event triggered : d08e7abb-23cf-495d-a2f2-8cb6a361d7e0, _triggeredEventList.Count = 4
+2026-07-03 02:35:45.3660|INFO|Main|AdaptableLog|914c2be7-efbd-40d3-8711-b39a353c4126 to event => 
+2026-07-03 02:35:45.3660|INFO|Main|AdaptableLog|b94ec916-8c0d-431d-9928-dbaa812ef423 to event => 
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 71299605-65e4-4f30-9c57-83aec3976a76, _triggeredEventList.Count = 2
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : efe7bcff-9473-4642-8fcb-926b515fadfb, _triggeredEventList.Count = 3
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : f6b9c251-40ee-4d2c-b6eb-ed5d773cc280, _triggeredEventList.Count = 4
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : dfbd3ae5-d3cb-41a7-b173-dba659030a53, _triggeredEventList.Count = 5
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 47b16801-a628-466a-92a3-1340ebd855f3, _triggeredEventList.Count = 6
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 01f62c25-6b53-4f2d-b8bf-17bc85de1ffe, _triggeredEventList.Count = 7
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : a930d7f8-2aa7-4ba1-9dac-c739e6e0d588, _triggeredEventList.Count = 8
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : ffb3be21-ac9d-4bee-9416-6d9ce36c2bf5, _triggeredEventList.Count = 9
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 45b767f3-3d09-4502-bc94-6492c69c2e30, _triggeredEventList.Count = 10
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 48988c0c-1507-405f-bd84-b694ca524728, _triggeredEventList.Count = 11
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 784bc662-1b0d-4635-974b-795c85a9b6cd, _triggeredEventList.Count = 12
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 479cab4a-177c-4eab-8ff3-eb355a816a49, _triggeredEventList.Count = 13
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : bfb51350-2d44-4cb5-a962-a9d39f3b7813, _triggeredEventList.Count = 14
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 5e1562f8-4ce6-44e8-9c64-88250bcf706a, _triggeredEventList.Count = 15
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 4387ea59-e4b6-4253-a597-0626bc2dbe57, _triggeredEventList.Count = 16
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : cfce0d18-d248-453a-bb0c-c99e35fa7eee, _triggeredEventList.Count = 17
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 6c74677a-b6a8-4e73-a360-0482714758c2, _triggeredEventList.Count = 18
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : f73b8df1-5006-4369-8646-e55f6b4e6b91, _triggeredEventList.Count = 19
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : d76d1356-5005-40cf-84a3-af4ecc0794be, _triggeredEventList.Count = 20
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 08021ce5-d120-422e-88ed-e642360438c7, _triggeredEventList.Count = 21
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 65ce1528-da27-4ae8-a393-b8727970b8ad, _triggeredEventList.Count = 22
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 27492a80-0dae-40d1-9854-fc2593f01980, _triggeredEventList.Count = 23
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 768c8640-3845-4f35-bc35-21824189cdbf, _triggeredEventList.Count = 24
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 97d86bd8-61e1-4fb2-bcfa-8f3674e13b88, _triggeredEventList.Count = 25
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : a48b5771-4629-44fd-b816-8f9ba7707b97, _triggeredEventList.Count = 26
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 5de04bdc-3947-4db6-b2cb-f990b26ed6f4, _triggeredEventList.Count = 27
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : de53aedc-cb90-4c28-913f-43effff06ac6, _triggeredEventList.Count = 28
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 1412d1b2-3b80-43f2-ba8a-e4a1eaf6dd99, _triggeredEventList.Count = 29
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : f6c1339f-b90e-4c58-8639-26ff79191e97, _triggeredEventList.Count = 30
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 4cb982fb-fccd-4564-9267-6f4df8507a76, _triggeredEventList.Count = 31
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 9fc6207e-dd11-4c40-99df-a8a3e5c59a54, _triggeredEventList.Count = 32
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 01aff125-4f66-4c38-9fb2-33870cdfe846, _triggeredEventList.Count = 33
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 3782a2bb-6c5a-4331-bb40-048a8b392c8f, _triggeredEventList.Count = 34
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 6719c936-74b0-4b70-ba84-a45e64e66e4d, _triggeredEventList.Count = 35
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : ea5b8a77-9015-42f5-9323-72496f35bea7, _triggeredEventList.Count = 36
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 78f7d7fc-8c19-49f7-a380-c211c49d8cb7, _triggeredEventList.Count = 37
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : f30b9925-12ed-4d62-b21b-e6d8e7ecaae8, _triggeredEventList.Count = 38
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 50fbbc23-ad40-4de3-882c-d638f24c87f8, _triggeredEventList.Count = 39
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 8bb5b4b3-c498-4609-a89f-fcd2860c16e3, _triggeredEventList.Count = 40
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : c07d2f7a-c25a-42eb-976e-9a0b43f74e3b, _triggeredEventList.Count = 41
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 942deff8-49fd-497b-9fbd-8567dede8dc6, _triggeredEventList.Count = 42
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : f02a649c-fdf3-4160-85bc-840f8410d69d, _triggeredEventList.Count = 43
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : e864306a-d431-481a-99fc-8216df16532a, _triggeredEventList.Count = 44
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 6baee519-6108-4f0f-a44d-bbd4a6d65a02, _triggeredEventList.Count = 45
+2026-07-03 02:35:45.3766|INFO|Main|AdaptableLog|new Event triggered : 42b7b9de-2b93-4495-b475-6a8ef66d3fb8, _triggeredEventList.Count = 46
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|71299605-65e4-4f30-9c57-83aec3976a76 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|efe7bcff-9473-4642-8fcb-926b515fadfb to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|f6b9c251-40ee-4d2c-b6eb-ed5d773cc280 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|dfbd3ae5-d3cb-41a7-b173-dba659030a53 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|47b16801-a628-466a-92a3-1340ebd855f3 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|01f62c25-6b53-4f2d-b8bf-17bc85de1ffe to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|a930d7f8-2aa7-4ba1-9dac-c739e6e0d588 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|ffb3be21-ac9d-4bee-9416-6d9ce36c2bf5 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|45b767f3-3d09-4502-bc94-6492c69c2e30 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|48988c0c-1507-405f-bd84-b694ca524728 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|784bc662-1b0d-4635-974b-795c85a9b6cd to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|479cab4a-177c-4eab-8ff3-eb355a816a49 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|bfb51350-2d44-4cb5-a962-a9d39f3b7813 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|5e1562f8-4ce6-44e8-9c64-88250bcf706a to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|4387ea59-e4b6-4253-a597-0626bc2dbe57 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|cfce0d18-d248-453a-bb0c-c99e35fa7eee to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|6c74677a-b6a8-4e73-a360-0482714758c2 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|f73b8df1-5006-4369-8646-e55f6b4e6b91 to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|d76d1356-5005-40cf-84a3-af4ecc0794be to event => 
+2026-07-03 02:35:46.7438|INFO|Main|AdaptableLog|08021ce5-d120-422e-88ed-e642360438c7 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|65ce1528-da27-4ae8-a393-b8727970b8ad to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|27492a80-0dae-40d1-9854-fc2593f01980 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|768c8640-3845-4f35-bc35-21824189cdbf to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|97d86bd8-61e1-4fb2-bcfa-8f3674e13b88 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|a48b5771-4629-44fd-b816-8f9ba7707b97 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|5de04bdc-3947-4db6-b2cb-f990b26ed6f4 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|de53aedc-cb90-4c28-913f-43effff06ac6 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|1412d1b2-3b80-43f2-ba8a-e4a1eaf6dd99 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|f6c1339f-b90e-4c58-8639-26ff79191e97 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|4cb982fb-fccd-4564-9267-6f4df8507a76 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|9fc6207e-dd11-4c40-99df-a8a3e5c59a54 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|01aff125-4f66-4c38-9fb2-33870cdfe846 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|3782a2bb-6c5a-4331-bb40-048a8b392c8f to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|6719c936-74b0-4b70-ba84-a45e64e66e4d to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|ea5b8a77-9015-42f5-9323-72496f35bea7 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|78f7d7fc-8c19-49f7-a380-c211c49d8cb7 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|f30b9925-12ed-4d62-b21b-e6d8e7ecaae8 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|50fbbc23-ad40-4de3-882c-d638f24c87f8 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|8bb5b4b3-c498-4609-a89f-fcd2860c16e3 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|c07d2f7a-c25a-42eb-976e-9a0b43f74e3b to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|942deff8-49fd-497b-9fbd-8567dede8dc6 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|f02a649c-fdf3-4160-85bc-840f8410d69d to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|e864306a-d431-481a-99fc-8216df16532a to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|6baee519-6108-4f0f-a44d-bbd4a6d65a02 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|42b7b9de-2b93-4495-b475-6a8ef66d3fb8 to event => 
+2026-07-03 02:35:46.7484|INFO|Main|AdaptableLog|1505c7c2-8a55-4794-bd85-1c5aec7ea341 to event => 
+2026-07-03 02:35:49.7750|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409044348928
+2026-07-03 02:35:49.8089|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: begin ------------------------------------------------------------
+2026-07-03 02:35:49.8112|INFO|Main|GameData.Domains.Character.CharacterDomain|Removing all temporary enemies with a total count of 6
+2026-07-03 02:35:49.8112|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409044348928
+2026-07-03 02:35:49.8112|INFO|Main|GameData.Domains.World.WorldDomain|New month begin: Year 1, Month 11 (10)
+2026-07-03 02:35:49.8112|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] PreAdvanceMonth: 5.9
+2026-07-03 02:35:49.9602|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateStatus: 131.2
+2026-07-03 02:35:50.1171|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] SelfImprovement: 154.5
+2026-07-03 02:35:50.4805|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterPreparation: 363.2
+2026-07-03 02:35:50.5933|INFO|Main|GameData.Domains.Character.CharacterDomain|[DistantMarriage] PassConditionCount=1971, PassSuccessRateCheckCount=45, FoundTargetCount=38
+2026-07-03 02:35:50.6226|INFO|Main|GameData.Domains.Character.CharacterDomain|Adore Relations In Marriage: 147/158
+2026-07-03 02:35:50.6240|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterRelationsUpdate: 143.3
+2026-07-03 02:35:50.6240|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterActionPlanning: 9.5
+2026-07-03 02:35:50.7041|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterFixedAction: 70.2
+2026-07-03 02:35:50.7821|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInformation: 77.2
+2026-07-03 02:35:50.8161|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInfectedCharacters: 0.2
+2026-07-03 02:35:50.8315|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateCharacterMovements: 15.3
+2026-07-03 02:35:50.8761|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 山寨, grade 0: 1
+2026-07-03 02:35:50.8761|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 市镇, grade 0: 1
+2026-07-03 02:35:51.1866|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateOrganizationMembers: 332.1
+2026-07-03 02:35:51.1866|WARN|Main|AdaptableLog|[Adventure]: AutoGenerateByConfig cost 11ms
+2026-07-03 02:35:51.2642|WARN|Main|AdaptableLog|get invalid vital data by type Heaven
+2026-07-03 02:35:51.2644|WARN|Main|AdaptableLog|get invalid vital data by type Earth
+2026-07-03 02:35:51.2644|WARN|Main|AdaptableLog|get invalid vital data by type Human
+2026-07-03 02:35:51.2644|INFO|Main|GameData.Domains.World.WorldDomain|Removing monthly event Config.MonthlyEventItem(470) at 0 of size 7 from a collection of size 7 and count 1
+2026-07-03 02:35:51.2644|INFO|Main|GameData.Domains.World.WorldDomain|CheckMonthlyEvents: 0 events detected.
+2026-07-03 02:35:51.8102|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: end --------------------------------------------------------------
+2026-07-03 02:35:51.8102|INFO|Main|GameData.Domains.World.WorldDomain|Advance Month Time Cost: 1469ms
+2026-07-03 02:35:51.8564|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409043963904
+2026-07-03 02:35:51.9215|INFO|Main|GameData.Domains.World.WorldDomain|Exit advancing month state and start saving world.
+2026-07-03 02:35:51.9215|INFO|Main|GameData.Domains.World.WorldDomain|Currrent Population / World Standard Population: 6659/6038, Probability Adjustment of Creating Character: 100%
+2026-07-03 02:35:51.9215|INFO|Main|GameData.Domains.Character.CharacterDomain|[[11]] Alive characters: 7243, dead characters: 654
+2026-07-03 02:35:51.9215|INFO|Main|GameData.Domains.Character.CharacterDomain|Non-intelligent characters: 31
+  7306: 336-鬼仆
+  7311: 341-妖乐师
+  7317: 347-毒手客
+  7322: 352-恶煞
+  7326: 356-疯魔
+  7336: 366-闻恶声
+  7368: 398-八门正徒
+  7490: 646-恶徒
+  7491: 647-恶徒
+  7492: 648-恶徒
+  7493: 649-恶徒
+  7494: 650-恶徒
+  7502: 848-未知门人
+  7503: 849-未知门人
+  7883: 377-年轻侠士
+  7884: 377-年轻侠士
+  7885: 377-年轻侠士
+  7886: 377-年轻侠士
+  7887: 377-年轻侠士
+  7888: 377-年轻侠士
+  7910: 1117-古兵残魂
+  7911: 1122-古将残魂
+  7899: 377-年轻侠士
+  7898: 377-年轻侠士
+  7897: 377-年轻侠士
+  7909: 377-年轻侠士
+  7908: 377-年轻侠士
+  7912: 1117-古兵残魂
+  7913: 1122-古将残魂
+  7914: 1117-古兵残魂
+  7915: 1122-古将残魂
+
+2026-07-03 02:35:51.9215|INFO|Main|AdaptableLog|EventArgBox newly created: 153 instances, 284 object collections.
+2026-07-03 02:35:51.9215|INFO|Main|GameData.Domains.Item.ItemDomain|Total unowned items: 0
+2026-07-03 02:35:52.1660|INFO|Main|GameData.Domains.Global.GlobalDomain|Total managed memory usage: 411.0MB
+2026-07-03 02:35:52.1835|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1409043931136
+2026-07-03 02:35:52.5927|INFO|Main|GameData.Domains.Global.GlobalDomain|SaveWorld: 408.7
+2026-07-03 02:35:55.1919|INFO|Main|AdaptableLog|new Event triggered : 1505c7c2-8a55-4794-bd85-1c5aec7ea341, _triggeredEventList.Count = 1
+2026-07-03 02:35:55.1919|INFO|Main|AdaptableLog|new Event triggered : 914c2be7-efbd-40d3-8711-b39a353c4126, _triggeredEventList.Count = 2
+2026-07-03 02:35:55.1919|INFO|Main|AdaptableLog|new Event triggered : b94ec916-8c0d-431d-9928-dbaa812ef423, _triggeredEventList.Count = 3
+2026-07-03 02:35:55.1919|INFO|Main|AdaptableLog|914c2be7-efbd-40d3-8711-b39a353c4126 to event => 
+2026-07-03 02:35:55.1919|INFO|Main|AdaptableLog|b94ec916-8c0d-431d-9928-dbaa812ef423 to event => 
+2026-07-03 02:35:55.1919|INFO|Main|AdaptableLog|1505c7c2-8a55-4794-bd85-1c5aec7ea341 to event => 
+2026-07-03 02:35:57.5940|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1408988733440
+2026-07-03 02:35:57.6273|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: begin ------------------------------------------------------------
+2026-07-03 02:35:57.6273|INFO|Main|GameData.Domains.Character.CharacterDomain|Removing all temporary enemies with a total count of 6
+2026-07-03 02:35:57.6273|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1408988733440
+2026-07-03 02:35:57.6273|INFO|Main|GameData.Domains.World.WorldDomain|New month begin: Year 1, Month 12 (11)
+2026-07-03 02:35:57.6273|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] PreAdvanceMonth: 1.6
+2026-07-03 02:35:57.7283|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateStatus: 94.2
+2026-07-03 02:35:57.8227|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] SelfImprovement: 93.8
+2026-07-03 02:35:58.1486|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterPreparation: 325.6
+2026-07-03 02:35:58.2428|INFO|Main|GameData.Domains.Character.CharacterDomain|[DistantMarriage] PassConditionCount=1865, PassSuccessRateCheckCount=60, FoundTargetCount=42
+2026-07-03 02:35:58.2520|INFO|Main|GameData.Domains.Character.CharacterDomain|Adore Relations In Marriage: 84/87
+2026-07-03 02:35:58.2520|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterRelationsUpdate: 103.5
+2026-07-03 02:35:58.2520|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterActionPlanning: 4.0
+2026-07-03 02:35:58.3184|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] CharacterFixedAction: 62.0
+2026-07-03 02:35:58.3538|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInformation: 35.2
+2026-07-03 02:35:58.3630|INFO|Main|GameData.Domains.Item.ItemDomain|Getting item of type 0(Weapon) and sub type 4 with grade 6
+2026-07-03 02:35:58.3630|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateInfectedCharacters: 0.0
+2026-07-03 02:35:58.3821|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateCharacterMovements: 12.2
+2026-07-03 02:35:58.4058|INFO|Main|AdaptableLog|[RecruitOrCreateLackingMembers]: Recruited Count for 市镇, grade 0: 1
+2026-07-03 02:35:58.6941|INFO|Main|GameData.Domains.Global.GlobalDomain|[AdvanceMonth_Execute] UpdateOrganizationMembers: 291.6
+2026-07-03 02:35:58.6941|WARN|Main|AdaptableLog|[Adventure]: AutoGenerateByConfig cost 6ms
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左俘虏
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上俘虏
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右俘虏
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得司仪
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右考官
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得左俘虏
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得上俘虏
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.TaiwuEvent.EventScriptRuntime|获得右俘虏
+2026-07-03 02:35:58.7357|WARN|Main|AdaptableLog|get invalid vital data by type Heaven
+2026-07-03 02:35:58.7357|WARN|Main|AdaptableLog|get invalid vital data by type Earth
+2026-07-03 02:35:58.7357|WARN|Main|AdaptableLog|get invalid vital data by type Human
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.Character.CharacterDomain|Removing dead characters: 0/654
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.World.WorldDomain|Removing monthly event Config.MonthlyEventItem(373) at 0 of size 3 from a collection of size 3 and count 1
+2026-07-03 02:35:58.7357|INFO|Main|GameData.Domains.World.WorldDomain|CheckMonthlyEvents: 0 events detected.
+2026-07-03 02:35:59.6280|INFO|Main|GameData.Domains.World.WorldDomain|AdvanceMonth: end --------------------------------------------------------------
+2026-07-03 02:35:59.6280|INFO|Main|GameData.Domains.World.WorldDomain|Advance Month Time Cost: 1117ms
+2026-07-03 02:35:59.6904|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1408988315648
+2026-07-03 02:35:59.7903|INFO|Main|GameData.Domains.World.WorldDomain|Exit advancing month state and start saving world.
+2026-07-03 02:35:59.7903|INFO|Main|GameData.Domains.World.WorldDomain|Currrent Population / World Standard Population: 6660/6038, Probability Adjustment of Creating Character: 100%
+2026-07-03 02:35:59.7903|INFO|Main|GameData.Domains.Character.CharacterDomain|[[12]] Alive characters: 7244, dead characters: 654
+2026-07-03 02:35:59.7903|INFO|Main|GameData.Domains.Character.CharacterDomain|Non-intelligent characters: 31
+  7306: 336-鬼仆
+  7311: 341-妖乐师
+  7317: 347-毒手客
+  7322: 352-恶煞
+  7326: 356-疯魔
+  7336: 366-闻恶声
+  7368: 398-八门正徒
+  7490: 646-恶徒
+  7491: 647-恶徒
+  7492: 648-恶徒
+  7493: 649-恶徒
+  7494: 650-恶徒
+  7502: 848-未知门人
+  7503: 849-未知门人
+  7883: 377-年轻侠士
+  7884: 377-年轻侠士
+  7885: 377-年轻侠士
+  7886: 377-年轻侠士
+  7887: 377-年轻侠士
+  7888: 377-年轻侠士
+  7921: 1117-古兵残魂
+  7920: 1122-古将残魂
+  7899: 377-年轻侠士
+  7898: 377-年轻侠士
+  7897: 377-年轻侠士
+  7909: 377-年轻侠士
+  7908: 377-年轻侠士
+  7919: 1117-古兵残魂
+  7918: 1122-古将残魂
+  7917: 1117-古兵残魂
+  7922: 1122-古将残魂
+
+2026-07-03 02:35:59.7956|INFO|Main|AdaptableLog|EventArgBox newly created: 5 instances, 2979 object collections.
+2026-07-03 02:35:59.7956|INFO|Main|GameData.Domains.Item.ItemDomain|Total unowned items: 0
+2026-07-03 02:35:59.9180|INFO|Main|GameData.Domains.Global.GlobalDomain|Total managed memory usage: 427.0MB
+2026-07-03 02:35:59.9352|INFO|Main|GameData.Domains.Global.GlobalDomain|Required Space: 1073741824 bytes.
+Available Space: 1408988315648
+2026-07-03 02:36:00.2183|INFO|Main|GameData.Domains.Global.GlobalDomain|SaveWorld: 282.9
+2026-07-03 02:36:01.7005|INFO|Main|AdaptableLog|new Event triggered : 1505c7c2-8a55-4794-bd85-1c5aec7ea341, _triggeredEventList.Count = 1
+2026-07-03 02:36:01.7005|INFO|Main|AdaptableLog|new Event triggered : 914c2be7-efbd-40d3-8711-b39a353c4126, _triggeredEventList.Count = 2
+2026-07-03 02:36:01.7005|INFO|Main|AdaptableLog|new Event triggered : b94ec916-8c0d-431d-9928-dbaa812ef423, _triggeredEventList.Count = 3
+2026-07-03 02:36:01.7005|INFO|Main|AdaptableLog|914c2be7-efbd-40d3-8711-b39a353c4126 to event => 
+2026-07-03 02:36:01.7005|INFO|Main|AdaptableLog|b94ec916-8c0d-431d-9928-dbaa812ef423 to event => 
+2026-07-03 02:36:01.7005|INFO|Main|AdaptableLog|1505c7c2-8a55-4794-bd85-1c5aec7ea341 to event => 
+2026-07-03 02:36:15.2379|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Incoming message: Disconnect
+2026-07-03 02:36:15.2379|INFO|ReadInterProcessMessages|GameData.GameDataBridge.GameDataBridge|ReadInterProcessMessages thread is about to exit.
+2026-07-03 02:36:15.2379|INFO|Main|GameData.Program|GameData module is about to exit.
+2026-07-03 02:36:15.2501|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|Outgoing message: Disconnect
+2026-07-03 02:36:15.2501|INFO|WriteInterProcessMessages|GameData.GameDataBridge.GameDataBridge|WriteInterProcessMessages thread is about to exit.

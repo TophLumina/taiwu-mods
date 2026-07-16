@@ -3,8 +3,5 @@ bin
 obj
 backend-code-structure.md
 player.log
-logs
-.vs
-note.md
-__pycache__
 data
+.vs
