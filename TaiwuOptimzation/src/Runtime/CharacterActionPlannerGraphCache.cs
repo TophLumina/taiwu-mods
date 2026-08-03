@@ -78,37 +78,6 @@ internal static class CharacterActionPlannerGraphCache
         return false;
     }
 
-    /// <summary>尝试读取 `StateEffect -> Node[]` 邻接表；当前主要用于保持原版公开接口一致。</summary>
-    public static bool TryGetEffectConnectedActions(
-        ActionPlanner<DataContext, CharacterStateMemory, Character, StateKey> planner,
-        StateEffect<StateKey> effect,
-        out IEnumerable<INode<Character, StateKey>> nodes)
-    {
-        nodes = Array.Empty<INode<Character, StateKey>>();
-        if (!TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization)
-        {
-            RecordEffectLookup(hit: false, miss: false, fallback: true, returnedNodeCount: 0);
-            return false;
-        }
-
-        Snapshot? snapshot = EnsureSnapshot(planner);
-        if (snapshot == null)
-        {
-            RecordEffectLookup(hit: false, miss: false, fallback: true, returnedNodeCount: 0);
-            return false;
-        }
-
-        if (snapshot.EffectConnectedNodes.TryGetValue(effect, out INode<Character, StateKey>[]? cached))
-        {
-            nodes = cached;
-            RecordEffectLookup(hit: true, miss: false, fallback: false, returnedNodeCount: cached.Length);
-            return true;
-        }
-
-        RecordEffectLookup(hit: false, miss: true, fallback: true, returnedNodeCount: 0);
-        return false;
-    }
-
     /// <summary>在主线程初始化后预热快照，避免第一个 worker 在热路径中构建。</summary>
     public static void WarmUp(CharacterActionPlanner planner)
     {
@@ -147,7 +116,6 @@ internal static class CharacterActionPlannerGraphCache
         int conditionCount = 0;
         int effectCount = 0;
         long conditionEdgeCount = 0;
-        long effectEdgeCount = 0;
 
         try
         {
@@ -185,33 +153,8 @@ internal static class CharacterActionPlannerGraphCache
                     : connected.ToArray();
             }
 
-            Dictionary<StateEffect<StateKey>, INode<Character, StateKey>[]> effectConnectedNodes =
-                new(effectToActionMap.Count);
-            foreach (StateEffect<StateKey> effect in effectToActionMap.Keys)
-            {
-                List<INode<Character, StateKey>> connected = new();
-                foreach (KeyValuePair<StateCondition<StateKey>, List<INode<Character, StateKey>>> pair in conditionToNodeMap)
-                {
-                    if (!effect.CanSatisfy(pair.Key))
-                    {
-                        continue;
-                    }
-
-                    List<INode<Character, StateKey>> nodes = pair.Value;
-                    for (int i = 0; i < nodes.Count; i++)
-                    {
-                        connected.Add(nodes[i]);
-                    }
-                }
-
-                effectEdgeCount += connected.Count;
-                effectConnectedNodes[effect] = connected.Count == 0
-                    ? Array.Empty<INode<Character, StateKey>>()
-                    : connected.ToArray();
-            }
-
             success = true;
-            return new Snapshot(conditionConnectedActions, effectConnectedNodes);
+            return new Snapshot(conditionConnectedActions);
         }
         finally
         {
@@ -220,8 +163,7 @@ internal static class CharacterActionPlannerGraphCache
                 success,
                 conditionCount,
                 effectCount,
-                conditionEdgeCount,
-                effectEdgeCount);
+                conditionEdgeCount);
         }
     }
 
@@ -235,23 +177,12 @@ internal static class CharacterActionPlannerGraphCache
             returnedNodeCount);
     }
 
-    private static void RecordEffectLookup(bool hit, bool miss, bool fallback, int returnedNodeCount)
-    {
-        CharacterActionPlanningDiagnostics.RecordGraphCacheLookup(
-            CharacterActionPlannerGraphCacheLookupKind.Effect,
-            hit,
-            miss,
-            fallback,
-            returnedNodeCount);
-    }
-
     private static void RecordBuild(
         long elapsedTicks,
         bool success,
         int conditionCount,
         int effectCount,
-        long conditionEdgeCount,
-        long effectEdgeCount)
+        long conditionEdgeCount)
     {
         _buildStats = new BuildStats(
             _buildStats.ElapsedTicks + elapsedTicks,
@@ -260,21 +191,16 @@ internal static class CharacterActionPlannerGraphCache
             _buildStats.Failures + (success ? 0 : 1),
             conditionCount,
             effectCount,
-            conditionEdgeCount,
-            effectEdgeCount);
+            conditionEdgeCount);
     }
 
     private sealed class Snapshot
     {
         public readonly Dictionary<StateCondition<StateKey>, INode<Character, StateKey>[]> ConditionConnectedActions;
-        public readonly Dictionary<StateEffect<StateKey>, INode<Character, StateKey>[]> EffectConnectedNodes;
 
-        public Snapshot(
-            Dictionary<StateCondition<StateKey>, INode<Character, StateKey>[]> conditionConnectedActions,
-            Dictionary<StateEffect<StateKey>, INode<Character, StateKey>[]> effectConnectedNodes)
+        public Snapshot(Dictionary<StateCondition<StateKey>, INode<Character, StateKey>[]> conditionConnectedActions)
         {
             ConditionConnectedActions = conditionConnectedActions;
-            EffectConnectedNodes = effectConnectedNodes;
         }
     }
 
@@ -287,7 +213,6 @@ internal static class CharacterActionPlannerGraphCache
         public readonly int ConditionCount;
         public readonly int EffectCount;
         public readonly long ConditionEdgeCount;
-        public readonly long EffectEdgeCount;
 
         public BuildStats(
             long elapsedTicks,
@@ -296,8 +221,7 @@ internal static class CharacterActionPlannerGraphCache
             int failures,
             int conditionCount,
             int effectCount,
-            long conditionEdgeCount,
-            long effectEdgeCount)
+            long conditionEdgeCount)
         {
             ElapsedTicks = elapsedTicks;
             BuildCalls = buildCalls;
@@ -306,7 +230,6 @@ internal static class CharacterActionPlannerGraphCache
             ConditionCount = conditionCount;
             EffectCount = effectCount;
             ConditionEdgeCount = conditionEdgeCount;
-            EffectEdgeCount = effectEdgeCount;
         }
     }
 }

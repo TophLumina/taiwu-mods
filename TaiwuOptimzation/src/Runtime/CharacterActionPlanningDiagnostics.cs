@@ -57,7 +57,6 @@ internal enum OfflineUpdateCurrentGoalActionsTargetLookupKind
 internal enum CharacterActionPlannerGraphCacheLookupKind
 {
     Condition,
-    Effect,
 }
 
 internal enum CharacterTargetMatchScopeKind
@@ -1458,17 +1457,11 @@ internal static class CharacterActionPlanningDiagnostics
             "snapshot",
             "conditions=" + graphBuildStats.ConditionCount +
             ", effects=" + graphBuildStats.EffectCount +
-            ", conditionEdges=" + graphBuildStats.ConditionEdgeCount +
-            ", effectEdges=" + graphBuildStats.EffectEdgeCount);
+            ", conditionEdges=" + graphBuildStats.ConditionEdgeCount);
         AppendGraphCache(
             builder,
             nameof(CharacterActionPlannerGraphCacheLookupKind.Condition),
             GraphCacheMetrics[(int)CharacterActionPlannerGraphCacheLookupKind.Condition]);
-        AppendGraphCache(
-            builder,
-            nameof(CharacterActionPlannerGraphCacheLookupKind.Effect),
-            GraphCacheMetrics[(int)CharacterActionPlannerGraphCacheLookupKind.Effect]);
-
         builder.AppendLine("  parallelStages:");
         AppendMetric(builder, nameof(CharacterActionPlanningParallelStage.UpdateCharacterMission), ParallelStages[(int)CharacterActionPlanningParallelStage.UpdateCharacterMission]);
         AppendMetric(builder, nameof(CharacterActionPlanningParallelStage.UpdateCharacterGoal), ParallelStages[(int)CharacterActionPlanningParallelStage.UpdateCharacterGoal]);
@@ -1561,7 +1554,6 @@ internal static class CharacterActionPlanningDiagnostics
                     conditions = graphBuildStats.ConditionCount,
                     effects = graphBuildStats.EffectCount,
                     conditionEdges = graphBuildStats.ConditionEdgeCount,
-                    effectEdges = graphBuildStats.EffectEdgeCount,
                 },
                 lookups = BuildGraphCachePayloads(),
             },

@@ -40,25 +40,10 @@ internal static class SecretInformationHolderCountCacheBeforeMetabolismPatch
             "MetabolismSecretInformation",
             new[] { typeof(DataContext) });
 
-    // 秘闻代谢会广播、删除、批量丢弃秘闻；第一版在这里回退原版。
+    // occurrence holder count 缓存只服务于传播规划；代谢阶段由新版原版常驻索引处理。
     [HarmonyPriority(Priority.First)]
     private static void Prefix() =>
         SecretInformationHolderCountCache.DeactivateBeforeMetabolismSecretInformation();
-}
-
-[HarmonyPatch]
-internal static class SecretInformationMetabolismOptimizerPatch
-{
-    private static MethodBase TargetMethod() =>
-        AccessTools.Method(
-            typeof(InformationDomain),
-            "MetabolismSecretInformation",
-            new[] { typeof(DataContext) });
-
-    // 用反查表替换原版秘闻代谢内的反复全表扫描；失败时放行原版。
-    [HarmonyPriority(Priority.Last)]
-    private static bool Prefix(InformationDomain __instance, DataContext context) =>
-        !SecretInformationMetabolismOptimizer.TryProcessMetabolismSecretInformation(__instance, context);
 }
 
 [HarmonyPatch]

@@ -79,7 +79,8 @@ internal static class SaveWorldParallelCompression
         };
 
     public static long GetDatabaseCopyBufferBytes() =>
-        TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled
+        TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
+        TaiwuOptimizationSettings.EnableSaveWorldParallelDeflate
             ? GetBlockSizeBytes()
             : OriginalCopyBufferBytes;
 }
