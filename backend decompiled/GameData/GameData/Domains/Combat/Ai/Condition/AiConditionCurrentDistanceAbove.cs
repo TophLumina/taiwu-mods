@@ -1,0 +1,19 @@
+using System.Collections.Generic;
+
+namespace GameData.Domains.Combat.Ai.Condition;
+
+[AiCondition(EAiConditionType.CurrentDistanceAbove)]
+public class AiConditionCurrentDistanceAbove : AiConditionCombatBase
+{
+	private readonly int _target;
+
+	public AiConditionCurrentDistanceAbove(IReadOnlyList<int> ints)
+	{
+		_target = ints[0];
+	}
+
+	public override bool Check(AiMemoryNew memory, CombatCharacter combatChar)
+	{
+		return DomainManager.Combat.GetCurrentDistance() > _target;
+	}
+}

@@ -1,0 +1,196 @@
+using System;
+using System.Collections.Generic;
+using Config.Common;
+using GameData.Domains.Character;
+
+namespace Config;
+
+[Serializable]
+public class NeiliType : ConfigData<NeiliTypeItem, sbyte>
+{
+	/// <summary>
+	/// 配置表定义Key
+	/// </summary>
+	public static class DefKey
+	{
+		/// <summary>
+		/// 金刚·金刚伏魔
+		/// </summary>
+		public const sbyte PureMetal = 0;
+
+		/// <summary>
+		/// 紫霞·紫气东来
+		/// </summary>
+		public const sbyte PureWood = 1;
+
+		/// <summary>
+		/// 玄阴·玄阴冰寒
+		/// </summary>
+		public const sbyte PureWater = 2;
+
+		/// <summary>
+		/// 纯阳·纯阳炽火
+		/// </summary>
+		public const sbyte PureFire = 3;
+
+		/// <summary>
+		/// 归元·归元化蕴
+		/// </summary>
+		public const sbyte PureEarth = 4;
+
+		/// <summary>
+		/// 混元·天人一体
+		/// </summary>
+		public const sbyte Mix = 5;
+
+		/// <summary>
+		/// 金刚·金沉则活
+		/// </summary>
+		public const sbyte PartialMetal0 = 6;
+	}
+
+	/// <summary>
+	/// 配置表快捷访问
+	/// </summary>
+	public static class DefValue
+	{
+		/// <summary>
+		/// 金刚·金刚伏魔
+		/// </summary>
+		public static NeiliTypeItem PureMetal => Instance[(sbyte)0];
+
+		/// <summary>
+		/// 紫霞·紫气东来
+		/// </summary>
+		public static NeiliTypeItem PureWood => Instance[(sbyte)1];
+
+		/// <summary>
+		/// 玄阴·玄阴冰寒
+		/// </summary>
+		public static NeiliTypeItem PureWater => Instance[(sbyte)2];
+
+		/// <summary>
+		/// 纯阳·纯阳炽火
+		/// </summary>
+		public static NeiliTypeItem PureFire => Instance[(sbyte)3];
+
+		/// <summary>
+		/// 归元·归元化蕴
+		/// </summary>
+		public static NeiliTypeItem PureEarth => Instance[(sbyte)4];
+
+		/// <summary>
+		/// 混元·天人一体
+		/// </summary>
+		public static NeiliTypeItem Mix => Instance[(sbyte)5];
+
+		/// <summary>
+		/// 金刚·金沉则活
+		/// </summary>
+		public static NeiliTypeItem PartialMetal0 => Instance[(sbyte)6];
+	}
+
+	/// <summary>
+	/// 配置表实例
+	/// </summary>
+	public static NeiliType Instance = new NeiliType();
+
+	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "NeiliTypeConditionText", "SimpleDesc", "EffectDesc", "LifeGateFeatures", "DeathGateFeatures", "TemplateId", "LinePos" };
+
+	internal override int ToInt(sbyte value)
+	{
+		return value;
+	}
+
+	internal override sbyte ToTemplateId(int value)
+	{
+		return (sbyte)value;
+	}
+
+	private void CreateItems0()
+	{
+		_dataArray.Add(new NeiliTypeItem(0, LocalStringManager.GetConfig("NeiliType_language", "Name_0"), LocalStringManager.GetConfig("NeiliType_language", "Desc_0"), 0, new sbyte[4] { 35, 20, 25, 20 }, new sbyte[6] { 30, -30, 0, 0, 0, 0 }, new sbyte[6], 3, showConflictingWorldState: false, new HitOrAvoidShorts(5, 2, 2, 3), new OuterAndInnerShorts(8, 2), new HitOrAvoidShorts(5, 2, 2, 3), new OuterAndInnerShorts(8, 2), new OuterAndInnerShorts(8, 2), 5, 8, 2, 5, 5, 8, 2, 5, new PoisonShorts(3, 2, 0, 0, 1, 2), 1, null, 0, new short[2] { 0, 173 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_0_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_0"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_0"), new short[1] { 450 }, new short[1] { 455 }, new sbyte[5] { 100, 0, 0, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(1, LocalStringManager.GetConfig("NeiliType_language", "Name_1"), LocalStringManager.GetConfig("NeiliType_language", "Desc_1"), 1, new sbyte[4] { 20, 35, 20, 25 }, new sbyte[6] { 0, 30, 0, 0, -30, 0 }, new sbyte[6], 0, showConflictingWorldState: false, new HitOrAvoidShorts(2, 3, 5, 2), new OuterAndInnerShorts(3, 7), new HitOrAvoidShorts(2, 3, 5, 2), new OuterAndInnerShorts(3, 7), new OuterAndInnerShorts(4, 6), 5, 2, 5, 8, 2, 5, 8, 5, new PoisonShorts(0, 3, 1, 0, 2, 2), 1, null, 0, new short[2] { 100, -134 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_1_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_1"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_1"), new short[1] { 451 }, new short[1] { 456 }, new sbyte[5] { 0, 100, 0, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(2, LocalStringManager.GetConfig("NeiliType_language", "Name_2"), LocalStringManager.GetConfig("NeiliType_language", "Desc_2"), 2, new sbyte[4] { 20, 25, 20, 35 }, new sbyte[6] { 0, 0, 30, -30, 0, 0 }, new sbyte[6], 4, showConflictingWorldState: false, new HitOrAvoidShorts(2, 2, 3, 5), new OuterAndInnerShorts(2, 8), new HitOrAvoidShorts(2, 2, 3, 5), new OuterAndInnerShorts(2, 8), new OuterAndInnerShorts(2, 8), 8, 5, 8, 2, 5, 5, 5, 2, new PoisonShorts(1, 0, 3, 2, 0, 2), 1, null, 0, new short[2] { 158, 55 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_2_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_2"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_2"), new short[1] { 452 }, new short[1] { 457 }, new sbyte[5] { 0, 0, 100, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(3, LocalStringManager.GetConfig("NeiliType_language", "Name_3"), LocalStringManager.GetConfig("NeiliType_language", "Desc_3"), 3, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6] { -30, 0, 0, 30, 0, 0 }, new sbyte[6], 2, showConflictingWorldState: false, new HitOrAvoidShorts(3, 3, 3, 3), new OuterAndInnerShorts(5, 5), new HitOrAvoidShorts(3, 3, 3, 3), new OuterAndInnerShorts(5, 5), new OuterAndInnerShorts(5, 5), 5, 5, 5, 5, 5, 5, 5, 5, new PoisonShorts(2, 1, 0, 3, 0, 2), 1, null, 0, new short[2] { -101, -135 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_3_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_3"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_3"), new short[1] { 453 }, new short[1] { 458 }, new sbyte[5] { 0, 0, 0, 100, 0 }));
+		_dataArray.Add(new NeiliTypeItem(4, LocalStringManager.GetConfig("NeiliType_language", "Name_4"), LocalStringManager.GetConfig("NeiliType_language", "Desc_4"), 4, new sbyte[4] { 25, 20, 35, 20 }, new sbyte[6] { 0, 0, -30, 0, 30, 0 }, new sbyte[6], 1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 5, 2, 2), new OuterAndInnerShorts(7, 3), new HitOrAvoidShorts(3, 5, 2, 2), new OuterAndInnerShorts(7, 3), new OuterAndInnerShorts(6, 4), 2, 5, 5, 5, 8, 2, 5, 8, new PoisonShorts(0, 0, 2, 1, 3, 2), 1, null, 0, new short[2] { -159, 54 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_4_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_4"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_4"), new short[1] { 454 }, new short[1] { 459 }, new sbyte[5] { 0, 0, 0, 0, 100 }));
+		_dataArray.Add(new NeiliTypeItem(5, LocalStringManager.GetConfig("NeiliType_language", "Name_5"), LocalStringManager.GetConfig("NeiliType_language", "Desc_5"), 5, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6], new sbyte[6] { -20, -20, -20, -20, -20, -20 }, -1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 3, 3, 3), new OuterAndInnerShorts(5, 5), new HitOrAvoidShorts(3, 3, 3, 3), new OuterAndInnerShorts(5, 5), new OuterAndInnerShorts(5, 5), 5, 5, 5, 5, 5, 5, 5, 5, new PoisonShorts(2, 2, 2, 2, 2, 2), 1, null, 0, new short[2] { 0, 2 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_5_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_5"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_5"), new short[1] { 449 }, new short[1] { 449 }, new sbyte[5] { 20, 20, 20, 20, 20 }));
+		_dataArray.Add(new NeiliTypeItem(6, LocalStringManager.GetConfig("NeiliType_language", "Name_6"), LocalStringManager.GetConfig("NeiliType_language", "Desc_6"), 0, new sbyte[4] { 35, 20, 25, 20 }, new sbyte[6] { 20, -20, 20, -20, 0, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(4, 2, 3, 3), new OuterAndInnerShorts(7, 3), new HitOrAvoidShorts(4, 2, 3, 3), new OuterAndInnerShorts(7, 3), new OuterAndInnerShorts(7, 3), 5, 7, 3, 5, 5, 7, 3, 5, new PoisonShorts(3, 1, 2, 0, 0, 2), 1, new short[2] { -383, 31 }, -1, new short[2] { 133, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_6_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_6"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_6"), new short[2] { 460, 462 }, new short[1] { 467 }, new sbyte[5] { 55, 0, 45, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(7, LocalStringManager.GetConfig("NeiliType_language", "Name_7"), LocalStringManager.GetConfig("NeiliType_language", "Desc_7"), 0, new sbyte[4] { 35, 20, 25, 20 }, new sbyte[6] { 20, -20, 0, 0, 0, 0 }, new sbyte[6], 3, showConflictingWorldState: false, new HitOrAvoidShorts(4, 2, 3, 3), new OuterAndInnerShorts(7, 3), new HitOrAvoidShorts(4, 2, 3, 3), new OuterAndInnerShorts(7, 3), new OuterAndInnerShorts(7, 3), 5, 7, 3, 5, 5, 7, 3, 5, new PoisonShorts(3, 1, 2, 0, 0, 2), 1, new short[2] { -383, 31 }, -1, new short[2] { 133, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_7_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_7"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_7"), new short[2] { 460, 462 }, new short[1] { 465 }, new sbyte[5] { 60, 0, 40, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(8, LocalStringManager.GetConfig("NeiliType_language", "Name_8"), LocalStringManager.GetConfig("NeiliType_language", "Desc_8"), 0, new sbyte[4] { 35, 20, 25, 20 }, new sbyte[6] { -30, 0, 0, 0, 0, 0 }, new sbyte[6], 0, showConflictingWorldState: true, new HitOrAvoidShorts(4, 1, 1, 2), new OuterAndInnerShorts(4, 2), new HitOrAvoidShorts(4, 1, 1, 2), new OuterAndInnerShorts(4, 2), new OuterAndInnerShorts(5, 3), 4, 7, 1, 4, 4, 7, 1, 4, new PoisonShorts(1, 1, 0, 0, 1, 1), 2, new short[2] { -425, -39 }, 0, new short[2] { 150, 100 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_8_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_8_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_8"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_8"), new short[1] { 465 }, new short[1] { 466 }, new sbyte[5] { 55, 45, 0, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(9, LocalStringManager.GetConfig("NeiliType_language", "Name_9"), LocalStringManager.GetConfig("NeiliType_language", "Desc_9"), 0, new sbyte[4] { 35, 20, 25, 20 }, new sbyte[6] { 0, -20, 0, 0, 0, 0 }, new sbyte[6], 1, showConflictingWorldState: true, new HitOrAvoidShorts(4, 1, 1, 2), new OuterAndInnerShorts(4, 2), new HitOrAvoidShorts(4, 1, 1, 2), new OuterAndInnerShorts(4, 2), new OuterAndInnerShorts(5, 3), 4, 7, 1, 4, 4, 7, 1, 4, new PoisonShorts(1, 1, 0, 0, 1, 1), 2, new short[2] { -425, -39 }, 0, new short[2] { 150, 100 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_9_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_9_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_9"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_9"), new short[1] { 465 }, new short[1] { 466 }, new sbyte[5] { 60, 40, 0, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(10, LocalStringManager.GetConfig("NeiliType_language", "Name_10"), LocalStringManager.GetConfig("NeiliType_language", "Desc_10"), 0, new sbyte[4] { 35, 20, 25, 20 }, new sbyte[6] { 20, -20, -20, 0, 20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(9, 1), new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(9, 1), new OuterAndInnerShorts(9, 1), 5, 9, 1, 5, 5, 9, 1, 5, new PoisonShorts(3, 1, 0, 0, 2, 2), 1, new short[2] { -135, 722 }, 252, new short[2] { -124, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_10_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_10"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_10"), new short[2] { 460, 464 }, new short[1] { 469 }, new sbyte[5] { 55, 0, 0, 0, 45 }));
+		_dataArray.Add(new NeiliTypeItem(11, LocalStringManager.GetConfig("NeiliType_language", "Name_11"), LocalStringManager.GetConfig("NeiliType_language", "Desc_11"), 0, new sbyte[4] { 35, 20, 25, 20 }, new sbyte[6] { 20, -20, 0, 0, 0, 0 }, new sbyte[6], 3, showConflictingWorldState: false, new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(9, 1), new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(9, 1), new OuterAndInnerShorts(9, 1), 5, 9, 1, 5, 5, 9, 1, 5, new PoisonShorts(3, 1, 0, 0, 2, 2), 1, new short[2] { -135, 722 }, 252, new short[2] { -124, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_11_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_11"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_11"), new short[2] { 460, 464 }, new short[1] { 465 }, new sbyte[5] { 60, 0, 0, 0, 40 }));
+		_dataArray.Add(new NeiliTypeItem(12, LocalStringManager.GetConfig("NeiliType_language", "Name_12"), LocalStringManager.GetConfig("NeiliType_language", "Desc_12"), 1, new sbyte[4] { 20, 35, 20, 25 }, new sbyte[6] { -20, 20, 0, 20, -20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 3, 4, 2), new OuterAndInnerShorts(4, 6), new HitOrAvoidShorts(3, 3, 4, 2), new OuterAndInnerShorts(4, 6), new OuterAndInnerShorts(5, 5), 5, 3, 5, 7, 3, 5, 7, 5, new PoisonShorts(0, 3, 0, 2, 1, 2), 1, new short[2] { -326, -653 }, 35, new short[2] { 0, -221 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_12_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_12"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_12"), new short[2] { 461, 463 }, new short[1] { 468 }, new sbyte[5] { 0, 55, 0, 45, 0 }));
+		_dataArray.Add(new NeiliTypeItem(13, LocalStringManager.GetConfig("NeiliType_language", "Name_13"), LocalStringManager.GetConfig("NeiliType_language", "Desc_13"), 1, new sbyte[4] { 20, 35, 20, 25 }, new sbyte[6] { 0, 20, 0, 0, -20, 0 }, new sbyte[6], 0, showConflictingWorldState: false, new HitOrAvoidShorts(3, 3, 4, 2), new OuterAndInnerShorts(4, 6), new HitOrAvoidShorts(3, 3, 4, 2), new OuterAndInnerShorts(4, 6), new OuterAndInnerShorts(5, 5), 5, 3, 5, 7, 3, 5, 7, 5, new PoisonShorts(0, 3, 0, 2, 1, 2), 1, new short[2] { -326, -653 }, 35, new short[2] { 0, -221 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_13_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_13"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_13"), new short[2] { 461, 463 }, new short[1] { 466 }, new sbyte[5] { 0, 60, 0, 40, 0 }));
+		_dataArray.Add(new NeiliTypeItem(14, LocalStringManager.GetConfig("NeiliType_language", "Name_14"), LocalStringManager.GetConfig("NeiliType_language", "Desc_14"), 1, new sbyte[4] { 20, 35, 20, 25 }, new sbyte[6] { 0, -30, 0, 0, 0, 0 }, new sbyte[6], 1, showConflictingWorldState: true, new HitOrAvoidShorts(1, 2, 4, 1), new OuterAndInnerShorts(2, 4), new HitOrAvoidShorts(1, 2, 4, 1), new OuterAndInnerShorts(2, 4), new OuterAndInnerShorts(3, 5), 4, 1, 4, 7, 1, 4, 7, 4, new PoisonShorts(0, 1, 1, 0, 1, 1), 2, new short[2] { 320, 305 }, 217, new short[2] { -78, -120 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_14_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_14_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_14"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_14"), new short[1] { 469 }, new short[1] { 466 }, new sbyte[5] { 0, 55, 0, 0, 45 }));
+		_dataArray.Add(new NeiliTypeItem(15, LocalStringManager.GetConfig("NeiliType_language", "Name_15"), LocalStringManager.GetConfig("NeiliType_language", "Desc_15"), 1, new sbyte[4] { 20, 35, 20, 25 }, new sbyte[6] { 0, 0, 0, 0, -20, 0 }, new sbyte[6], 4, showConflictingWorldState: true, new HitOrAvoidShorts(1, 2, 4, 1), new OuterAndInnerShorts(2, 4), new HitOrAvoidShorts(1, 2, 4, 1), new OuterAndInnerShorts(2, 4), new OuterAndInnerShorts(3, 5), 4, 1, 4, 7, 1, 4, 7, 4, new PoisonShorts(0, 1, 1, 0, 1, 1), 2, new short[2] { 320, 305 }, 217, new short[2] { -78, -120 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_15_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_15_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_15"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_15"), new short[1] { 469 }, new short[1] { 466 }, new sbyte[5] { 0, 60, 0, 0, 40 }));
+		_dataArray.Add(new NeiliTypeItem(16, LocalStringManager.GetConfig("NeiliType_language", "Name_16"), LocalStringManager.GetConfig("NeiliType_language", "Desc_16"), 1, new sbyte[4] { 20, 35, 20, 25 }, new sbyte[6] { 0, 20, 20, -20, -20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(2, 3, 4, 3), new OuterAndInnerShorts(2, 8), new HitOrAvoidShorts(2, 3, 4, 3), new OuterAndInnerShorts(2, 8), new OuterAndInnerShorts(3, 7), 5, 1, 5, 9, 1, 5, 9, 5, new PoisonShorts(0, 3, 2, 0, 1, 2), 1, new short[2] { 518, -509 }, 107, new short[2] { 210, -64 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_16_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_16"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_16"), new short[2] { 461, 462 }, new short[1] { 467 }, new sbyte[5] { 0, 55, 45, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(17, LocalStringManager.GetConfig("NeiliType_language", "Name_17"), LocalStringManager.GetConfig("NeiliType_language", "Desc_17"), 1, new sbyte[4] { 20, 35, 20, 25 }, new sbyte[6] { 0, 20, 0, 0, -20, 0 }, new sbyte[6], 0, showConflictingWorldState: false, new HitOrAvoidShorts(2, 3, 4, 3), new OuterAndInnerShorts(2, 8), new HitOrAvoidShorts(2, 3, 4, 3), new OuterAndInnerShorts(2, 8), new OuterAndInnerShorts(3, 7), 5, 1, 5, 9, 1, 5, 9, 5, new PoisonShorts(0, 3, 2, 0, 1, 2), 1, new short[2] { 518, -509 }, 107, new short[2] { 210, -64 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_17_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_17"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_17"), new short[2] { 461, 462 }, new short[1] { 466 }, new sbyte[5] { 0, 60, 40, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(18, LocalStringManager.GetConfig("NeiliType_language", "Name_18"), LocalStringManager.GetConfig("NeiliType_language", "Desc_18"), 2, new sbyte[4] { 20, 25, 20, 35 }, new sbyte[6] { 0, 20, 20, -20, -20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(2, 3, 3, 4), new OuterAndInnerShorts(3, 7), new HitOrAvoidShorts(2, 3, 3, 4), new OuterAndInnerShorts(3, 7), new OuterAndInnerShorts(3, 7), 7, 5, 7, 3, 5, 5, 5, 3, new PoisonShorts(0, 2, 3, 1, 0, 2), 1, new short[2] { 518, -509 }, 107, new short[2] { 210, -64 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_18_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_18"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_18"), new short[2] { 462, 461 }, new short[1] { 466 }, new sbyte[5] { 0, 45, 55, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(19, LocalStringManager.GetConfig("NeiliType_language", "Name_19"), LocalStringManager.GetConfig("NeiliType_language", "Desc_19"), 2, new sbyte[4] { 20, 25, 20, 35 }, new sbyte[6] { 0, 0, 20, -20, 0, 0 }, new sbyte[6], 4, showConflictingWorldState: false, new HitOrAvoidShorts(2, 3, 3, 4), new OuterAndInnerShorts(3, 7), new HitOrAvoidShorts(2, 3, 3, 4), new OuterAndInnerShorts(3, 7), new OuterAndInnerShorts(3, 7), 7, 5, 7, 3, 5, 5, 5, 3, new PoisonShorts(0, 2, 3, 1, 0, 2), 1, new short[2] { 518, -509 }, 107, new short[2] { 210, -64 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_19_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_19"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_19"), new short[2] { 462, 461 }, new short[1] { 467 }, new sbyte[5] { 0, 40, 60, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(20, LocalStringManager.GetConfig("NeiliType_language", "Name_20"), LocalStringManager.GetConfig("NeiliType_language", "Desc_20"), 2, new sbyte[4] { 20, 25, 20, 35 }, new sbyte[6] { 0, 0, -30, 0, 0, 0 }, new sbyte[6], 2, showConflictingWorldState: true, new HitOrAvoidShorts(1, 1, 2, 4), new OuterAndInnerShorts(2, 4), new HitOrAvoidShorts(1, 1, 2, 4), new OuterAndInnerShorts(2, 4), new OuterAndInnerShorts(3, 5), 7, 4, 7, 1, 4, 4, 4, 1, new PoisonShorts(1, 0, 1, 1, 0, 1), 2, new short[2] { -178, 399 }, -72, new short[2] { 120, -105 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_20_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_20_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_20"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_20"), new short[1] { 467 }, new short[1] { 468 }, new sbyte[5] { 0, 0, 55, 45, 0 }));
+		_dataArray.Add(new NeiliTypeItem(21, LocalStringManager.GetConfig("NeiliType_language", "Name_21"), LocalStringManager.GetConfig("NeiliType_language", "Desc_21"), 2, new sbyte[4] { 20, 25, 20, 35 }, new sbyte[6] { 0, 0, 0, -20, 0, 0 }, new sbyte[6], 3, showConflictingWorldState: true, new HitOrAvoidShorts(1, 1, 2, 4), new OuterAndInnerShorts(2, 4), new HitOrAvoidShorts(1, 1, 2, 4), new OuterAndInnerShorts(2, 4), new OuterAndInnerShorts(3, 5), 7, 4, 7, 1, 4, 4, 4, 1, new PoisonShorts(1, 0, 1, 1, 0, 1), 2, new short[2] { -178, 399 }, -72, new short[2] { 120, -105 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_21_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_21_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_21"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_21"), new short[1] { 467 }, new short[1] { 468 }, new sbyte[5] { 0, 0, 60, 40, 0 }));
+		_dataArray.Add(new NeiliTypeItem(22, LocalStringManager.GetConfig("NeiliType_language", "Name_22"), LocalStringManager.GetConfig("NeiliType_language", "Desc_22"), 2, new sbyte[4] { 20, 25, 20, 35 }, new sbyte[6] { 20, -20, 20, -20, 0, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 2, 3, 4), new OuterAndInnerShorts(1, 9), new HitOrAvoidShorts(3, 2, 3, 4), new OuterAndInnerShorts(1, 9), new OuterAndInnerShorts(1, 9), 9, 5, 9, 1, 5, 5, 5, 1, new PoisonShorts(2, 0, 3, 1, 0, 2), 1, new short[2] { -383, 31 }, -1, new short[2] { 133, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_22_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_22"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_22"), new short[2] { 462, 460 }, new short[1] { 465 }, new sbyte[5] { 45, 0, 55, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(23, LocalStringManager.GetConfig("NeiliType_language", "Name_23"), LocalStringManager.GetConfig("NeiliType_language", "Desc_23"), 2, new sbyte[4] { 20, 25, 20, 35 }, new sbyte[6] { 0, 0, 20, -20, 0, 0 }, new sbyte[6], 4, showConflictingWorldState: false, new HitOrAvoidShorts(3, 2, 3, 4), new OuterAndInnerShorts(1, 9), new HitOrAvoidShorts(3, 2, 3, 4), new OuterAndInnerShorts(1, 9), new OuterAndInnerShorts(1, 9), 9, 5, 9, 1, 5, 5, 5, 1, new PoisonShorts(2, 0, 3, 1, 0, 2), 1, new short[2] { -383, 31 }, -1, new short[2] { 133, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_23_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_23"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_23"), new short[2] { 462, 460 }, new short[1] { 467 }, new sbyte[5] { 40, 0, 60, 0, 0 }));
+		_dataArray.Add(new NeiliTypeItem(24, LocalStringManager.GetConfig("NeiliType_language", "Name_24"), LocalStringManager.GetConfig("NeiliType_language", "Desc_24"), 3, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6] { -20, 0, -20, 20, 20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(6, 4), new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(6, 4), new OuterAndInnerShorts(6, 4), 3, 7, 3, 7, 7, 3, 3, 7, new PoisonShorts(1, 0, 0, 3, 2, 2), 1, new short[2] { 290, -252 }, 142, new short[2] { -219, -65 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_24_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_24"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_24"), new short[2] { 463, 464 }, new short[1] { 469 }, new sbyte[5] { 0, 0, 0, 55, 45 }));
+		_dataArray.Add(new NeiliTypeItem(25, LocalStringManager.GetConfig("NeiliType_language", "Name_25"), LocalStringManager.GetConfig("NeiliType_language", "Desc_25"), 3, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6] { -20, 0, 0, 20, 0, 0 }, new sbyte[6], 2, showConflictingWorldState: false, new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(6, 4), new HitOrAvoidShorts(4, 3, 2, 3), new OuterAndInnerShorts(6, 4), new OuterAndInnerShorts(6, 4), 3, 7, 3, 7, 7, 3, 3, 7, new PoisonShorts(1, 0, 0, 3, 2, 2), 1, new short[2] { 290, -252 }, 142, new short[2] { -219, -65 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_25_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_25"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_25"), new short[2] { 463, 464 }, new short[1] { 468 }, new sbyte[5] { 0, 0, 0, 60, 40 }));
+		_dataArray.Add(new NeiliTypeItem(26, LocalStringManager.GetConfig("NeiliType_language", "Name_26"), LocalStringManager.GetConfig("NeiliType_language", "Desc_26"), 3, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6] { 0, 0, 0, -30, 0, 0 }, new sbyte[6], 3, showConflictingWorldState: true, new HitOrAvoidShorts(2, 2, 2, 2), new OuterAndInnerShorts(3, 3), new HitOrAvoidShorts(2, 2, 2, 2), new OuterAndInnerShorts(3, 3), new OuterAndInnerShorts(4, 4), 5, 5, 5, 5, 5, 5, 5, 5, new PoisonShorts(1, 1, 0, 1, 0, 1), 2, new short[2] { 378, -210 }, 145, new short[2] { -190, -30 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_26_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_26_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_26"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_26"), new short[1] { 465 }, new short[1] { 468 }, new sbyte[5] { 45, 0, 0, 55, 0 }));
+		_dataArray.Add(new NeiliTypeItem(27, LocalStringManager.GetConfig("NeiliType_language", "Name_27"), LocalStringManager.GetConfig("NeiliType_language", "Desc_27"), 3, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6] { -20, 0, 0, 0, 0, 0 }, new sbyte[6], 0, showConflictingWorldState: true, new HitOrAvoidShorts(2, 2, 2, 2), new OuterAndInnerShorts(3, 3), new HitOrAvoidShorts(2, 2, 2, 2), new OuterAndInnerShorts(3, 3), new OuterAndInnerShorts(4, 4), 5, 5, 5, 5, 5, 5, 5, 5, new PoisonShorts(1, 1, 0, 1, 0, 1), 2, new short[2] { 378, -210 }, 145, new short[2] { -190, -30 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_27_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_27_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_27"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_27"), new short[1] { 465 }, new short[1] { 468 }, new sbyte[5] { 40, 0, 0, 60, 0 }));
+		_dataArray.Add(new NeiliTypeItem(28, LocalStringManager.GetConfig("NeiliType_language", "Name_28"), LocalStringManager.GetConfig("NeiliType_language", "Desc_28"), 3, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6] { -20, 20, 0, 20, -20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 2, 4, 3), new OuterAndInnerShorts(4, 6), new HitOrAvoidShorts(3, 2, 4, 3), new OuterAndInnerShorts(4, 6), new OuterAndInnerShorts(4, 6), 7, 3, 7, 3, 3, 7, 7, 3, new PoisonShorts(1, 2, 0, 3, 0, 2), 1, new short[2] { -326, -653 }, 35, new short[2] { 0, -221 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_28_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_28"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_28"), new short[2] { 463, 461 }, new short[1] { 466 }, new sbyte[5] { 0, 45, 0, 55, 0 }));
+		_dataArray.Add(new NeiliTypeItem(29, LocalStringManager.GetConfig("NeiliType_language", "Name_29"), LocalStringManager.GetConfig("NeiliType_language", "Desc_29"), 3, new sbyte[4] { 25, 25, 25, 25 }, new sbyte[6] { -20, 0, 0, 20, 0, 0 }, new sbyte[6], 2, showConflictingWorldState: false, new HitOrAvoidShorts(3, 2, 4, 3), new OuterAndInnerShorts(4, 6), new HitOrAvoidShorts(3, 2, 4, 3), new OuterAndInnerShorts(4, 6), new OuterAndInnerShorts(4, 6), 7, 3, 7, 3, 3, 7, 7, 3, new PoisonShorts(1, 2, 0, 3, 0, 2), 1, new short[2] { -326, -653 }, 35, new short[2] { 0, -221 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_29_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_29"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_29"), new short[2] { 463, 461 }, new short[1] { 468 }, new sbyte[5] { 0, 40, 0, 60, 0 }));
+		_dataArray.Add(new NeiliTypeItem(30, LocalStringManager.GetConfig("NeiliType_language", "Name_30"), LocalStringManager.GetConfig("NeiliType_language", "Desc_30"), 4, new sbyte[4] { 25, 20, 35, 20 }, new sbyte[6] { 20, -20, -20, 0, 20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 4, 2, 3), new OuterAndInnerShorts(6, 4), new HitOrAvoidShorts(3, 4, 2, 3), new OuterAndInnerShorts(6, 4), new OuterAndInnerShorts(5, 5), 3, 5, 5, 5, 7, 3, 5, 7, new PoisonShorts(2, 0, 1, 0, 3, 2), 1, new short[2] { -135, 722 }, 252, new short[2] { -124, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_30_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_30"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_30"), new short[2] { 464, 460 }, new short[1] { 465 }, new sbyte[5] { 45, 0, 0, 0, 55 }));
+		_dataArray.Add(new NeiliTypeItem(31, LocalStringManager.GetConfig("NeiliType_language", "Name_31"), LocalStringManager.GetConfig("NeiliType_language", "Desc_31"), 4, new sbyte[4] { 25, 20, 35, 20 }, new sbyte[6] { 0, 0, -20, 0, 20, 0 }, new sbyte[6], 1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 4, 2, 3), new OuterAndInnerShorts(6, 4), new HitOrAvoidShorts(3, 4, 2, 3), new OuterAndInnerShorts(6, 4), new OuterAndInnerShorts(5, 5), 3, 5, 5, 5, 7, 3, 5, 7, new PoisonShorts(2, 0, 1, 0, 3, 2), 1, new short[2] { -135, 722 }, 252, new short[2] { -124, 193 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_31_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_31"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_31"), new short[2] { 464, 460 }, new short[1] { 469 }, new sbyte[5] { 40, 0, 0, 0, 60 }));
+		_dataArray.Add(new NeiliTypeItem(32, LocalStringManager.GetConfig("NeiliType_language", "Name_32"), LocalStringManager.GetConfig("NeiliType_language", "Desc_32"), 4, new sbyte[4] { 25, 20, 35, 20 }, new sbyte[6] { 0, 0, 0, 0, -30, 0 }, new sbyte[6], 4, showConflictingWorldState: true, new HitOrAvoidShorts(2, 4, 1, 1), new OuterAndInnerShorts(4, 2), new HitOrAvoidShorts(2, 4, 1, 1), new OuterAndInnerShorts(4, 2), new OuterAndInnerShorts(5, 3), 1, 4, 4, 4, 7, 1, 4, 7, new PoisonShorts(0, 0, 1, 1, 1, 1), 2, new short[2] { -91, -426 }, 72, new short[2] { -75, 167 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_32_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_32_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_32"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_32"), new short[1] { 467 }, new short[1] { 469 }, new sbyte[5] { 0, 0, 45, 0, 55 }));
+		_dataArray.Add(new NeiliTypeItem(33, LocalStringManager.GetConfig("NeiliType_language", "Name_33"), LocalStringManager.GetConfig("NeiliType_language", "Desc_33"), 4, new sbyte[4] { 25, 20, 35, 20 }, new sbyte[6] { 0, 0, -20, 0, 0, 0 }, new sbyte[6], 2, showConflictingWorldState: true, new HitOrAvoidShorts(2, 4, 1, 1), new OuterAndInnerShorts(4, 2), new HitOrAvoidShorts(2, 4, 1, 1), new OuterAndInnerShorts(4, 2), new OuterAndInnerShorts(5, 3), 1, 4, 4, 4, 7, 1, 4, 7, new PoisonShorts(0, 0, 1, 1, 1, 1), 2, new short[2] { -91, -426 }, 72, new short[2] { -75, 167 }, new List<string>
+		{
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_33_0"),
+			LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_33_1")
+		}, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_33"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_33"), new short[1] { 467 }, new short[1] { 469 }, new sbyte[5] { 0, 0, 40, 0, 60 }));
+		_dataArray.Add(new NeiliTypeItem(34, LocalStringManager.GetConfig("NeiliType_language", "Name_34"), LocalStringManager.GetConfig("NeiliType_language", "Desc_34"), 4, new sbyte[4] { 25, 20, 35, 20 }, new sbyte[6] { -20, 0, -20, 20, 20, 0 }, new sbyte[6], -1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 4, 3, 2), new OuterAndInnerShorts(8, 2), new HitOrAvoidShorts(3, 4, 3, 2), new OuterAndInnerShorts(8, 2), new OuterAndInnerShorts(7, 3), 1, 5, 5, 5, 9, 1, 5, 9, new PoisonShorts(0, 0, 1, 2, 3, 2), 1, new short[2] { 290, -252 }, 142, new short[2] { -219, -65 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_34_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_34"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_34"), new short[2] { 464, 463 }, new short[1] { 468 }, new sbyte[5] { 0, 0, 0, 45, 55 }));
+		_dataArray.Add(new NeiliTypeItem(35, LocalStringManager.GetConfig("NeiliType_language", "Name_35"), LocalStringManager.GetConfig("NeiliType_language", "Desc_35"), 4, new sbyte[4] { 25, 20, 35, 20 }, new sbyte[6] { 0, 0, -20, 0, 20, 0 }, new sbyte[6], 1, showConflictingWorldState: false, new HitOrAvoidShorts(3, 4, 3, 2), new OuterAndInnerShorts(8, 2), new HitOrAvoidShorts(3, 4, 3, 2), new OuterAndInnerShorts(8, 2), new OuterAndInnerShorts(7, 3), 1, 5, 5, 5, 9, 1, 5, 9, new PoisonShorts(0, 0, 1, 2, 3, 2), 1, new short[2] { 290, -252 }, 142, new short[2] { -219, -65 }, new List<string> { LocalStringManager.GetConfig("NeiliType_language", "NeiliTypeConditionText_35_0") }, LocalStringManager.GetConfig("NeiliType_language", "SimpleDesc_35"), LocalStringManager.GetConfig("NeiliType_language", "EffectDesc_35"), new short[2] { 464, 463 }, new short[1] { 469 }, new sbyte[5] { 0, 0, 0, 40, 60 }));
+	}
+
+	public override void Init()
+	{
+		base.Init();
+		_dataArray = new List<NeiliTypeItem>(36);
+		CreateItems0();
+	}
+}
