@@ -23,7 +23,10 @@ internal static class SaveWorldDiagnostics
     /// <summary>开始记录一次本地世界存档写入。</summary>
     /// <param name="archive">原版 ArchiveFileBase 实例。</param>
     /// <returns>诊断开启且目标是 LocalArchiveFile 时返回起始 ticks，否则返回 0。</returns>
-    public static long BeginArchiveSave(ArchiveFileBase archive, CompressionType compressionType)
+    public static long BeginArchiveSave(
+        ArchiveFileBase archive,
+        CompressionAlgorithm compressionAlgorithm,
+        CompressionType compressionType)
     {
         if (!TaiwuOptimizationSettings.DiagnosticsCollectionEnabled ||
             archive is not LocalArchiveFile)
@@ -35,8 +38,52 @@ internal static class SaveWorldDiagnostics
         _current = default;
         _current.StartTicks = Stopwatch.GetTimestamp();
         _current.ArchivePath = ArchivePathField?.GetValue(archive) as string ?? string.Empty;
+        _current.CompressionAlgorithm = compressionAlgorithm.ToString();
         _current.CompressionType = compressionType.ToString();
+        _current.CompressionMode = "Original";
         return _current.StartTicks;
+    }
+
+    public static void MarkParallelDeflateStarted(int workerCount, int blockSize)
+    {
+        if (_current.StartTicks == 0)
+        {
+            return;
+        }
+
+        _current.CompressionMode = "ParallelDeflate";
+        _current.ParallelWorkerCount = workerCount;
+        _current.ParallelBlockSize = blockSize;
+    }
+
+    public static void RecordParallelDeflate(
+        bool success,
+        int workerCount,
+        int blockSize,
+        int blockCount,
+        int peakPendingBlocks,
+        long inputBytes,
+        long outputBytes,
+        long workerCompressionTicks,
+        long workerWaitTicks,
+        long destinationWriteTicks)
+    {
+        if (_current.StartTicks == 0)
+        {
+            return;
+        }
+
+        _current.CompressionMode = "ParallelDeflate";
+        _current.ParallelCompressionSucceeded = success;
+        _current.ParallelWorkerCount = workerCount;
+        _current.ParallelBlockSize = blockSize;
+        _current.ParallelBlockCount = blockCount;
+        _current.ParallelPeakPendingBlocks = peakPendingBlocks;
+        _current.ParallelInputBytes = inputBytes;
+        _current.ParallelOutputBytes = outputBytes;
+        _current.ParallelWorkerCompressionTicks = workerCompressionTicks;
+        _current.ParallelWorkerWaitTicks = workerWaitTicks;
+        _current.ParallelDestinationWriteTicks = destinationWriteTicks;
     }
 
     /// <summary>结束一次本地世界存档写入，并输出聚合日志。</summary>
@@ -104,7 +151,6 @@ internal static class SaveWorldDiagnostics
         _current.CopyWorkingDbTicks += Stopwatch.GetTimestamp() - startTicks;
         _current.CopyWorkingDbBytes += Math.Max(length, 0);
         _current.CopyWorkingDbCalls++;
-        _current.CopyBufferBytes = SaveWorldArchiveOptimization.GetDatabaseCopyBufferBytes();
     }
 
     /// <summary>记录 DatabaseBridge.Disconnect 耗时。</summary>
@@ -237,13 +283,27 @@ internal static class SaveWorldDiagnostics
         AppendMetric(builder, "DatabaseBridge.Disconnect", FormatMilliseconds(session.DatabaseDisconnectTicks));
         AppendMetric(builder, "CopyWorkingDb", FormatMilliseconds(session.CopyWorkingDbTicks) +
             ", calls=" + session.CopyWorkingDbCalls +
-            ", bytes=" + FormatBytes(session.CopyWorkingDbBytes) +
-            ", bufferBytes=" + FormatBytes(session.CopyBufferBytes) +
-            ", estimatedChunks=" + EstimateChunks(session.CopyWorkingDbBytes, session.CopyBufferBytes));
+            ", bytes=" + FormatBytes(session.CopyWorkingDbBytes));
         AppendMetric(builder, "DatabaseBridge.Connect", FormatMilliseconds(session.DatabaseConnectTicks));
 
         builder.AppendLine("  compression:");
+        AppendMetric(builder, "CompressionAlgorithm", string.IsNullOrEmpty(session.CompressionAlgorithm) ? "unknown" : session.CompressionAlgorithm);
         AppendMetric(builder, "CompressionType", string.IsNullOrEmpty(session.CompressionType) ? "unknown" : session.CompressionType);
+        AppendMetric(builder, "CompressionMode", string.IsNullOrEmpty(session.CompressionMode) ? "unknown" : session.CompressionMode);
+        if (session.CompressionMode == "ParallelDeflate")
+        {
+            AppendMetric(builder, "ParallelSucceeded", session.ParallelCompressionSucceeded.ToString());
+            AppendMetric(builder, "ParallelWorkers", session.ParallelWorkerCount.ToString());
+            AppendMetric(builder, "ParallelBlockBytes", session.ParallelBlockSize.ToString());
+            AppendMetric(builder, "ParallelBlocks", session.ParallelBlockCount.ToString());
+            AppendMetric(builder, "ParallelPeakPending", session.ParallelPeakPendingBlocks.ToString());
+            AppendMetric(builder, "ParallelInputBytes", FormatBytes(session.ParallelInputBytes));
+            AppendMetric(builder, "ParallelOutputBytes", FormatBytes(session.ParallelOutputBytes));
+            AppendMetric(builder, "ParallelCompressionRatio", FormatRatio(session.ParallelOutputBytes, session.ParallelInputBytes));
+            AppendMetric(builder, "ParallelWorkerCompressionAggregate", FormatMilliseconds(session.ParallelWorkerCompressionTicks));
+            AppendMetric(builder, "ParallelWorkerWait", FormatMilliseconds(session.ParallelWorkerWaitTicks));
+            AppendMetric(builder, "ParallelDestinationWrite", FormatMilliseconds(session.ParallelDestinationWriteTicks));
+        }
         AppendMetric(builder, "EndCompression", FormatMilliseconds(session.EndCompressionTicks));
         AppendMetric(builder, "WriteCrcToEnd", FormatMilliseconds(session.WriteCrcTicks));
         return builder.ToString();
@@ -295,13 +355,24 @@ internal static class SaveWorldDiagnostics
                 copyWorkingDbMs = ToMilliseconds(session.CopyWorkingDbTicks),
                 copyWorkingDbCalls = session.CopyWorkingDbCalls,
                 copyWorkingDbBytes = session.CopyWorkingDbBytes,
-                copyBufferBytes = session.CopyBufferBytes,
-                estimatedChunks = EstimateChunks(session.CopyWorkingDbBytes, session.CopyBufferBytes),
                 connectMs = ToMilliseconds(session.DatabaseConnectTicks),
             },
             compression = new
             {
+                compressionAlgorithm = string.IsNullOrEmpty(session.CompressionAlgorithm) ? null : session.CompressionAlgorithm,
                 compressionType = string.IsNullOrEmpty(session.CompressionType) ? null : session.CompressionType,
+                compressionMode = string.IsNullOrEmpty(session.CompressionMode) ? null : session.CompressionMode,
+                parallelSucceeded = session.ParallelCompressionSucceeded,
+                parallelWorkerCount = session.ParallelWorkerCount,
+                parallelBlockSize = session.ParallelBlockSize,
+                parallelBlockCount = session.ParallelBlockCount,
+                parallelPeakPendingBlocks = session.ParallelPeakPendingBlocks,
+                parallelInputBytes = session.ParallelInputBytes,
+                parallelOutputBytes = session.ParallelOutputBytes,
+                parallelCompressionRatio = GetRatio(session.ParallelOutputBytes, session.ParallelInputBytes),
+                parallelWorkerCompressionAggregateMs = ToMilliseconds(session.ParallelWorkerCompressionTicks),
+                parallelWorkerWaitMs = ToMilliseconds(session.ParallelWorkerWaitTicks),
+                parallelDestinationWriteMs = ToMilliseconds(session.ParallelDestinationWriteTicks),
                 endCompressionMs = ToMilliseconds(session.EndCompressionTicks),
                 writeCrcMs = ToMilliseconds(session.WriteCrcTicks),
             },
@@ -317,7 +388,9 @@ internal static class SaveWorldDiagnostics
             elapsedMs = ToMilliseconds(totalTicks),
             archivePath = session.ArchivePath,
             fileSizeBytes = session.FinalFileSizeBytes,
+            compressionAlgorithm = session.CompressionAlgorithm,
             compressionType = session.CompressionType,
+            compressionMode = session.CompressionMode,
             domains = BuildDomainPayloads(),
         };
 
@@ -357,8 +430,11 @@ internal static class SaveWorldDiagnostics
     private static string FormatBytes(long bytes) =>
         bytes < 0 ? "unknown" : bytes.ToString();
 
-    private static long EstimateChunks(long bytes, long bufferBytes) =>
-        bytes <= 0 || bufferBytes <= 0 ? 0 : (bytes + bufferBytes - 1) / bufferBytes;
+    private static string FormatRatio(long outputBytes, long inputBytes) =>
+        inputBytes <= 0 ? "unknown" : GetRatio(outputBytes, inputBytes).ToString("N4");
+
+    private static double GetRatio(long outputBytes, long inputBytes) =>
+        inputBytes <= 0 ? 0 : (double)outputBytes / inputBytes;
 
     private static void AppendMetric(StringBuilder builder, string name, string value)
     {
@@ -380,12 +456,23 @@ internal static class SaveWorldDiagnostics
         public long DatabaseDisconnectTicks;
         public long CopyWorkingDbTicks;
         public long CopyWorkingDbBytes;
-        public long CopyBufferBytes;
         public int CopyWorkingDbCalls;
         public long DatabaseConnectTicks;
         public long EndCompressionTicks;
         public long WriteCrcTicks;
+        public string CompressionAlgorithm;
         public string CompressionType;
+        public string CompressionMode;
+        public bool ParallelCompressionSucceeded;
+        public int ParallelWorkerCount;
+        public int ParallelBlockSize;
+        public int ParallelBlockCount;
+        public int ParallelPeakPendingBlocks;
+        public long ParallelInputBytes;
+        public long ParallelOutputBytes;
+        public long ParallelWorkerCompressionTicks;
+        public long ParallelWorkerWaitTicks;
+        public long ParallelDestinationWriteTicks;
     }
 
     private struct DomainMetric

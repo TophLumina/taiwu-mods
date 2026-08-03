@@ -1,8 +1,8 @@
 return {
 	AdvanceMonthOptimizationEnabled = true,
 	EnableCharacterActionPlanningOptimization = true,
-	SaveWorldDatabaseCopyBufferTier = 4,
-	SaveWorldNoCompression = true,
+	EnableSaveWorldParallelDeflate = true,
+	SaveWorldBlockSizeTier = 3,
 	ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false,
 	RemoteNpcOfflineCurrentGoalActionPointGainReduction = 10,
 	ProtectNeighborStatesForAdvanceMonthOptimization = true,

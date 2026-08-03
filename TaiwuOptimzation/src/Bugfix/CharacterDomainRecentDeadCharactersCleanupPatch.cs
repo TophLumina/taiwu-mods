@@ -9,6 +9,7 @@ using GameData.Domains.Character;
 using GameData.Utilities;
 using HarmonyLib;
 using NLog;
+using SQLite;
 
 namespace TaiwuOptimization.Bugfix;
 
@@ -33,6 +34,10 @@ internal static class CharacterDomainRecentDeadCharactersCleanupPatch
             typeof(CharacterDomain),
             "RemoveElement_RecentDeadCharacters",
             new[] { typeof(IntPair), typeof(DataContext) });
+
+    /// <summary>当前游戏版本中 DatabaseBridge 的 working.db 连接是私有字段。</summary>
+    private static readonly FieldInfo LiteConnectionField =
+        AccessTools.Field(typeof(DatabaseBridge), "_liteConnection");
 
     /// <summary>
     /// 替换原版逐个调用 `LifeRecordDomain.Remove` 的清理流程；异常时回退原版逻辑。
@@ -131,7 +136,11 @@ internal static class CharacterDomainRecentDeadCharactersCleanupPatch
             return 0;
         }
 
-        var connection = DatabaseBridge.TmpConnection;
+        if (LiteConnectionField.GetValue(null) is not SQLiteConnection connection)
+        {
+            throw new InvalidOperationException("DatabaseBridge working database is not connected.");
+        }
+
         bool ownsTransaction = !connection.IsInTransaction;
         if (ownsTransaction)
         {

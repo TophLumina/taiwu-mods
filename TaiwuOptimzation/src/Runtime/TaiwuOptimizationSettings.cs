@@ -12,8 +12,8 @@ internal static class TaiwuOptimizationSettings
     public static bool EnableCharacterActionPlanningOptimization = true;
 
     // 存档优化。
-    public static int SaveWorldDatabaseCopyBufferTier = 4;
-    public static bool SaveWorldNoCompression = true;
+    public static bool EnableSaveWorldParallelDeflate = true;
+    public static int SaveWorldBlockSizeTier = 3;
 
     // 可选非等价：远区 NPC 月行动点削减。
     public static bool ReduceRemoteNpcOfflineCurrentGoalActionPointGain = false;
@@ -47,8 +47,8 @@ internal static class TaiwuOptimizationSettings
     {
         TryGet(modId, "AdvanceMonthOptimizationEnabled", ref AdvanceMonthOptimizationEnabled);
         TryGet(modId, "EnableCharacterActionPlanningOptimization", ref EnableCharacterActionPlanningOptimization);
-        TryGet(modId, "SaveWorldDatabaseCopyBufferTier", ref SaveWorldDatabaseCopyBufferTier);
-        TryGet(modId, "SaveWorldNoCompression", ref SaveWorldNoCompression);
+        TryGet(modId, "EnableSaveWorldParallelDeflate", ref EnableSaveWorldParallelDeflate);
+        TryGet(modId, "SaveWorldBlockSizeTier", ref SaveWorldBlockSizeTier);
         TryGet(modId, "ReduceRemoteNpcOfflineCurrentGoalActionPointGain", ref ReduceRemoteNpcOfflineCurrentGoalActionPointGain);
         TryGet(modId, "RemoteNpcOfflineCurrentGoalActionPointGainReduction", ref RemoteNpcOfflineCurrentGoalActionPointGainReduction);
         TryGet(modId, "ProtectNeighborStatesForAdvanceMonthOptimization", ref ProtectNeighborStatesForAdvanceMonthOptimization);
@@ -65,7 +65,8 @@ internal static class TaiwuOptimizationSettings
         TryGet(modId, "DiagnosticsSnapshotMaxCount", ref DiagnosticsSnapshotMaxCount);
 
         AdvanceMonthOptimizationFrameBudgetMs = Math.Clamp(AdvanceMonthOptimizationFrameBudgetMs, 1, 4);
-        SaveWorldDatabaseCopyBufferTier = SaveWorldArchiveOptimization.NormalizeCopyBufferTier(SaveWorldDatabaseCopyBufferTier);
+        SaveWorldBlockSizeTier =
+            SaveWorldParallelCompression.NormalizeBlockSizeTier(SaveWorldBlockSizeTier);
         RemoteNpcOfflineCurrentGoalActionPointGainReduction = Math.Clamp(RemoteNpcOfflineCurrentGoalActionPointGainReduction, 0, 20);
         TaiwuDiagnosticsPort = Math.Clamp(TaiwuDiagnosticsPort, 18580, 18595);
         DiagnosticsSnapshotMaxCount = Math.Clamp(DiagnosticsSnapshotMaxCount, 1, 20);
