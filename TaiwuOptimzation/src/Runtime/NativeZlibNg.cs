@@ -52,6 +52,7 @@ internal static class NativeZlibNg
     private const int ZFinish = 4;
     private const int ZDeflated = 8;
     private const int ZDefaultStrategy = 0;
+    private const int CompressionLevel = 2;
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private static readonly object Sync = new();
@@ -108,7 +109,7 @@ internal static class NativeZlibNg
         ParallelDeflateStream.SelfTest();
     }
 
-    public static CompressedBlock Compress(byte[] input, int inputLength, bool final, int level = 2)
+    public static CompressedBlock Compress(byte[] input, int inputLength, bool final)
     {
         if (_libraryHandle == IntPtr.Zero ||
             _deflateInit2 == null ||
@@ -122,7 +123,7 @@ internal static class NativeZlibNg
         ZngStream stream = default;
         int status = _deflateInit2(
             ref stream,
-            level,
+            CompressionLevel,
             ZDeflated,
             -15,
             8,

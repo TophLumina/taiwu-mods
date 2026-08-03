@@ -21,7 +21,7 @@ internal static class SaveWorldParallelCompression
 
     public static void Initialize(string modId) => NativeZlibNg.Initialize(modId);
 
-    public static bool BeginSave(
+    public static void BeginSave(
         ArchiveFileBase archive,
         string archivePath,
         ref CompressionAlgorithm algorithm)
@@ -32,13 +32,12 @@ internal static class SaveWorldParallelCompression
             archive is not LocalArchiveFile ||
             !string.Equals(Path.GetFileName(archivePath), LocalSaveName, StringComparison.OrdinalIgnoreCase))
         {
-            return false;
+            return;
         }
 
         // Keep the archive header and reader on the vanilla-compatible Deflate algorithm.
         algorithm = CompressionAlgorithm.Deflate;
         _useParallelDeflateForCurrentSave = NativeZlibNg.IsAvailable;
-        return _useParallelDeflateForCurrentSave;
     }
 
     public static void EndSave() => _useParallelDeflateForCurrentSave = false;

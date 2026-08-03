@@ -17,15 +17,11 @@ internal static class SaveWorldDiagnosticsArchiveFileSavePatch
     private static void Prefix(
         ArchiveFileBase __instance,
         ref CompressionAlgorithm algorithm,
-        ref CompressionType compressionType,
+        CompressionType compressionType,
         string ___Path,
         out long __state)
     {
-        if (SaveWorldParallelCompression.BeginSave(__instance, ___Path, ref algorithm))
-        {
-            compressionType = CompressionType.PrioritizeSpeed;
-        }
-
+        SaveWorldParallelCompression.BeginSave(__instance, ___Path, ref algorithm);
         __state = SaveWorldDiagnostics.BeginArchiveSave(__instance, algorithm, compressionType);
     }
 

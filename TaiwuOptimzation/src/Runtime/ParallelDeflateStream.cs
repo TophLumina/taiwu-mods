@@ -13,12 +13,10 @@ internal sealed class ParallelDeflateStream : Stream
 {
     public const int DefaultBlockSize = 4 * 1024 * 1024;
 
-    private const int DefaultCompressionLevel = 2;
-
     private readonly Stream _destination;
     private readonly int _blockSize;
     private readonly int _workerCount;
-    private readonly int _compressionLevel;
+    private readonly bool _collectMetrics;
     private readonly Queue<Task<CompressedBlock>> _pending = new();
 
     private byte[]? _currentBlock;
@@ -49,17 +47,7 @@ internal sealed class ParallelDeflateStream : Stream
     internal int BlockSize => _blockSize;
     internal int WorkerCount => _workerCount;
 
-    public ParallelDeflateStream(Stream destination, int workerCount)
-        : this(destination, workerCount, DefaultBlockSize, DefaultCompressionLevel)
-    {
-    }
-
     public ParallelDeflateStream(Stream destination, int workerCount, int blockSize)
-        : this(destination, workerCount, blockSize, DefaultCompressionLevel)
-    {
-    }
-
-    private ParallelDeflateStream(Stream destination, int workerCount, int blockSize, int compressionLevel)
     {
         ArgumentNullException.ThrowIfNull(destination);
         if (!destination.CanWrite)
@@ -75,7 +63,7 @@ internal sealed class ParallelDeflateStream : Stream
         _destination = destination;
         _blockSize = blockSize;
         _workerCount = Math.Clamp(workerCount, 1, Math.Max(1, Environment.ProcessorCount));
-        _compressionLevel = compressionLevel;
+        _collectMetrics = SaveWorldDiagnostics.IsCollecting;
         _currentBlock = ArrayPool<byte>.Shared.Rent(_blockSize);
     }
 
@@ -119,7 +107,10 @@ internal sealed class ParallelDeflateStream : Stream
                 buffer[..copyLength].CopyTo(currentBlock.AsSpan(_currentLength));
                 buffer = buffer[copyLength..];
                 _currentLength += copyLength;
-                _inputBytes += copyLength;
+                if (_collectMetrics)
+                {
+                    _inputBytes += copyLength;
+                }
 
                 if (_currentLength == _blockSize)
                 {
@@ -208,7 +199,7 @@ internal sealed class ParallelDeflateStream : Stream
     private static void VerifySelfTest(byte[] input, int flushOffset)
     {
         using MemoryStream compressed = new();
-        using (ParallelDeflateStream stream = new(compressed, 2, 65536, DefaultCompressionLevel))
+        using (ParallelDeflateStream stream = new(compressed, 2, 65536))
         {
             if (flushOffset < 0)
             {
@@ -256,16 +247,20 @@ internal sealed class ParallelDeflateStream : Stream
         {
             task = Task.Run(() =>
             {
-                long startTicks = Stopwatch.GetTimestamp();
+                long startTicks = _collectMetrics ? Stopwatch.GetTimestamp() : 0;
                 try
                 {
-                    return NativeZlibNg.Compress(input, inputLength, final, _compressionLevel);
+                    return NativeZlibNg.Compress(input, inputLength, final);
                 }
                 finally
                 {
-                    Interlocked.Add(
-                        ref _workerCompressionTicks,
-                        Stopwatch.GetTimestamp() - startTicks);
+                    if (_collectMetrics)
+                    {
+                        Interlocked.Add(
+                            ref _workerCompressionTicks,
+                            Stopwatch.GetTimestamp() - startTicks);
+                    }
+
                     ArrayPool<byte>.Shared.Return(input);
                 }
             });
@@ -277,8 +272,11 @@ internal sealed class ParallelDeflateStream : Stream
         }
 
         _pending.Enqueue(task);
-        _blockCount++;
-        _peakPendingBlocks = Math.Max(_peakPendingBlocks, _pending.Count);
+        if (_collectMetrics)
+        {
+            _blockCount++;
+            _peakPendingBlocks = Math.Max(_peakPendingBlocks, _pending.Count);
+        }
         if (!final && _pending.Count >= _workerCount)
         {
             DrainOne(write: true);
@@ -289,24 +287,30 @@ internal sealed class ParallelDeflateStream : Stream
     {
         Task<CompressedBlock> task = _pending.Dequeue();
         CompressedBlock result;
-        long waitStartTicks = Stopwatch.GetTimestamp();
+        long waitStartTicks = _collectMetrics ? Stopwatch.GetTimestamp() : 0;
         try
         {
             result = task.GetAwaiter().GetResult();
         }
         finally
         {
-            _workerWaitTicks += Stopwatch.GetTimestamp() - waitStartTicks;
+            if (_collectMetrics)
+            {
+                _workerWaitTicks += Stopwatch.GetTimestamp() - waitStartTicks;
+            }
         }
 
         try
         {
             if (write)
             {
-                long writeStartTicks = Stopwatch.GetTimestamp();
+                long writeStartTicks = _collectMetrics ? Stopwatch.GetTimestamp() : 0;
                 _destination.Write(result.Buffer, 0, result.Length);
-                _destinationWriteTicks += Stopwatch.GetTimestamp() - writeStartTicks;
-                _outputBytes += result.Length;
+                if (_collectMetrics)
+                {
+                    _destinationWriteTicks += Stopwatch.GetTimestamp() - writeStartTicks;
+                    _outputBytes += result.Length;
+                }
             }
         }
         finally
@@ -347,7 +351,7 @@ internal sealed class ParallelDeflateStream : Stream
 
     private void PublishMetrics(bool success)
     {
-        if (_metricsPublished)
+        if (!_collectMetrics || _metricsPublished)
         {
             return;
         }

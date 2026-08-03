@@ -20,6 +20,8 @@ internal static class SaveWorldDiagnostics
     // 当前 LocalArchiveFile.Save 的聚合状态；原版保存世界在主线程串行执行。
     private static Session _current;
 
+    public static bool IsCollecting => _current.StartTicks != 0;
+
     /// <summary>开始记录一次本地世界存档写入。</summary>
     /// <param name="archive">原版 ArchiveFileBase 实例。</param>
     /// <returns>诊断开启且目标是 LocalArchiveFile 时返回起始 ticks，否则返回 0。</returns>

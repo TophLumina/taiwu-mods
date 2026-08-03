@@ -220,6 +220,6 @@ return {
 			Timestamp = 1782437664,
 		},
 	},
-	Cover = "c04bb314ab8daa46832bb42193ddebfb.jpg",
-	WorkshopCover = "c04bb314ab8daa46832bb42193ddebfb.jpg",
+	Cover = "31d576dbd4cbe728d920bf514ceee9b5.jpg",
+	WorkshopCover = "31d576dbd4cbe728d920bf514ceee9b5.jpg",
 }
