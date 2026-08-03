@@ -1,0 +1,163 @@
+using System;
+using System.Collections.Generic;
+using Config.Common;
+using GameData.Domains.Character;
+
+namespace Config;
+
+[Serializable]
+public class EquipmentEffect : ConfigData<EquipmentEffectItem, short>
+{
+	/// <summary>
+	/// 配置表定义Key
+	/// </summary>
+	public static class DefKey
+	{
+		/// <summary>
+		/// 义父所制
+		/// </summary>
+		public const short MadeByAdoptiveFather = 54;
+
+		/// <summary>
+		/// 试炼
+		/// </summary>
+		public const short ZhujianTest = 55;
+
+		/// <summary>
+		/// 血褓
+		/// </summary>
+		public const short ProtagonistClothingEffect = 66;
+
+		/// <summary>
+		/// 破厄
+		/// </summary>
+		public const short ProtagonistAccessoryEffect = 67;
+	}
+
+	/// <summary>
+	/// 配置表快捷访问
+	/// </summary>
+	public static class DefValue
+	{
+		/// <summary>
+		/// 义父所制
+		/// </summary>
+		public static EquipmentEffectItem MadeByAdoptiveFather => Instance[(short)54];
+
+		/// <summary>
+		/// 试炼
+		/// </summary>
+		public static EquipmentEffectItem ZhujianTest => Instance[(short)55];
+
+		/// <summary>
+		/// 血褓
+		/// </summary>
+		public static EquipmentEffectItem ProtagonistClothingEffect => Instance[(short)66];
+
+		/// <summary>
+		/// 破厄
+		/// </summary>
+		public static EquipmentEffectItem ProtagonistAccessoryEffect => Instance[(short)67];
+	}
+
+	/// <summary>
+	/// 配置表实例
+	/// </summary>
+	public static EquipmentEffect Instance = new EquipmentEffect();
+
+	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "EffectClassName" };
+
+	internal override int ToInt(short value)
+	{
+		return value;
+	}
+
+	internal override short ToTemplateId(int value)
+	{
+		return (short)value;
+	}
+
+	private void CreateItems0()
+	{
+		_dataArray.Add(new EquipmentEffectItem(0, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_0"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_0"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoZhang"));
+		_dataArray.Add(new EquipmentEffectItem(1, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_1"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_1"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoJian"));
+		_dataArray.Add(new EquipmentEffectItem(2, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_2"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_2"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoDao"));
+		_dataArray.Add(new EquipmentEffectItem(3, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_3"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_3"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoDu"));
+		_dataArray.Add(new EquipmentEffectItem(4, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_4"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_4"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoChangBing"));
+		_dataArray.Add(new EquipmentEffectItem(5, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_5"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_5"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoRuanBing"));
+		_dataArray.Add(new EquipmentEffectItem(6, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_6"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_6"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoAnQi"));
+		_dataArray.Add(new EquipmentEffectItem(7, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_7"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_7"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoQiMen"));
+		_dataArray.Add(new EquipmentEffectItem(8, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_8"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_8"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceAvoid.PoMoYin"));
+		_dataArray.Add(new EquipmentEffectItem(9, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_9"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_9"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReducePenetrateResist.PoJin"));
+		_dataArray.Add(new EquipmentEffectItem(10, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_10"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_10"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReducePenetrateResist.PoMu"));
+		_dataArray.Add(new EquipmentEffectItem(11, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_11"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_11"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReducePenetrateResist.PoYu"));
+		_dataArray.Add(new EquipmentEffectItem(12, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_12"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_12"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReducePenetrateResist.PoJin2"));
+		_dataArray.Add(new EquipmentEffectItem(13, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_13"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_13"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 25, 0, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(14, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_14"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_14"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 25, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(15, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_15"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_15"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 50, -50, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(16, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_16"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_16"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), -50, 50, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(17, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_17"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_17"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.DuCi"));
+		_dataArray.Add(new EquipmentEffectItem(18, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_18"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_18"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, -25, null));
+		_dataArray.Add(new EquipmentEffectItem(19, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_19"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_19"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.BreakAddInjury.XueSha"));
+		_dataArray.Add(new EquipmentEffectItem(20, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_20"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_20"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.BreakAddInjury.QiSha"));
+		_dataArray.Add(new EquipmentEffectItem(21, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_21"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_21"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceBounceDamage.HuaXue"));
+		_dataArray.Add(new EquipmentEffectItem(22, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_22"), 1, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_22"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Weapon.ReduceBounceDamage.HuaQi"));
+		_dataArray.Add(new EquipmentEffectItem(23, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_23"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_23"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiZhang"));
+		_dataArray.Add(new EquipmentEffectItem(24, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_24"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_24"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiJian"));
+		_dataArray.Add(new EquipmentEffectItem(25, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_25"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_25"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiDao"));
+		_dataArray.Add(new EquipmentEffectItem(26, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_26"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_26"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiDu"));
+		_dataArray.Add(new EquipmentEffectItem(27, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_27"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_27"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiChangBing"));
+		_dataArray.Add(new EquipmentEffectItem(28, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_28"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_28"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiRuanBing"));
+		_dataArray.Add(new EquipmentEffectItem(29, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_29"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_29"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiAnQi"));
+		_dataArray.Add(new EquipmentEffectItem(30, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_30"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_30"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiQiMen"));
+		_dataArray.Add(new EquipmentEffectItem(31, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_31"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_31"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReduceHit.PiMoYin"));
+		_dataArray.Add(new EquipmentEffectItem(32, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_32"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_32"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReducePenetrate.PiJin"));
+		_dataArray.Add(new EquipmentEffectItem(33, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_33"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_33"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReducePenetrate.PiMu"));
+		_dataArray.Add(new EquipmentEffectItem(34, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_34"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_34"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReducePenetrate.PiYu"));
+		_dataArray.Add(new EquipmentEffectItem(35, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_35"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_35"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.ReducePenetrate.PiJin2"));
+		_dataArray.Add(new EquipmentEffectItem(36, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_36"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_36"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 25, 0, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(37, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_37"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_37"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 25, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(38, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_38"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_38"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 50, -50, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(39, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_39"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_39"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), -50, 50, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(40, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_40"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_40"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.DuCi"));
+		_dataArray.Add(new EquipmentEffectItem(41, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_41"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_41"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, -25, null));
+		_dataArray.Add(new EquipmentEffectItem(42, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_42"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_42"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.BreakReduceInjury.HuXue"));
+		_dataArray.Add(new EquipmentEffectItem(43, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_43"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_43"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.BreakReduceInjury.HuQi"));
+		_dataArray.Add(new EquipmentEffectItem(44, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_44"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_44"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.AddBounceDamage.ZhenXue"));
+		_dataArray.Add(new EquipmentEffectItem(45, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_45"), 2, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_45"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Armor.AddBounceDamage.ZhenQi"));
+		_dataArray.Add(new EquipmentEffectItem(46, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_46"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_46"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 25, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(47, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_47"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_47"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, -25, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(48, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_48"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_48"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 25, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(49, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_49"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_49"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 25, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(50, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_50"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_50"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 50, 50, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(51, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_51"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_51"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, -50, -50, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(52, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_52"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_52"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 50, -75, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(53, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_53"), 0, special: false, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_53"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, -50, 75, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(54, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_54"), 1, special: true, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_54"), new short[4] { 20, 20, 20, 20 }, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 100, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(55, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_55"), 1, special: true, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_55"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, -50, -50, -50, 100, null));
+		_dataArray.Add(new EquipmentEffectItem(56, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_56"), 2, special: true, isTotalPercent: true, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_56"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.RawCreate.YanXiaShenZhu"));
+		_dataArray.Add(new EquipmentEffectItem(57, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_57"), 1, special: true, isTotalPercent: true, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_57"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.RawCreate.ShanHeShenJie"));
+		_dataArray.Add(new EquipmentEffectItem(58, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_58"), 0, special: true, isTotalPercent: true, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_58"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.RawCreate.GuiYanLingZhuo"));
+		_dataArray.Add(new EquipmentEffectItem(59, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_59"), 1, special: true, isTotalPercent: true, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_59"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.RawCreate.XuanHuShenJie"));
+	}
+
+	private void CreateItems1()
+	{
+		_dataArray.Add(new EquipmentEffectItem(60, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_60"), 1, special: true, isTotalPercent: true, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_60"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.RawCreate.XianYuanShenJie"));
+		_dataArray.Add(new EquipmentEffectItem(61, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_61"), 0, special: true, isTotalPercent: true, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_61"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, -80, 100, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(62, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_62"), 2, special: true, isTotalPercent: true, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_62"), new short[4], new HitOrAvoidShorts(50, 50, 50, 50), new OuterAndInnerShorts(50, 50), new OuterAndInnerShorts(25, 25), 100, 100, 0, 0, 0, 0, 0, "EquipmentEffect.RawCreate.HunYuanShenZhu"));
+		_dataArray.Add(new EquipmentEffectItem(63, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_63"), 1, special: true, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_63"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 160, -80, 0, -80, 0, -200, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(64, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_64"), 2, special: true, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_64"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 160, -80, 0, -80, 0, -200, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(65, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_65"), 0, special: true, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_65"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 100, 0, 100, -200, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(66, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_66"), 2, special: true, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_66"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, null));
+		_dataArray.Add(new EquipmentEffectItem(67, LocalStringManager.GetConfig("EquipmentEffect_language", "Name_67"), 0, special: true, isTotalPercent: false, LocalStringManager.GetConfig("EquipmentEffect_language", "Desc_67"), new short[4], new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, "EquipmentEffect.Protagonist.PoE"));
+	}
+
+	public override void Init()
+	{
+		base.Init();
+		_dataArray = new List<EquipmentEffectItem>(68);
+		CreateItems0();
+		CreateItems1();
+	}
+}

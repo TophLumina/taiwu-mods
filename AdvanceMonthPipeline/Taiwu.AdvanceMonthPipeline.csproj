@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Taiwu.AdvanceMonthPipeline</AssemblyName>
+    <RootNamespace>Taiwu.AdvanceMonthPipeline</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Threading\WorkStealingThreadPool.cs" />
+    <Compile Include="DeterministicRandom.cs" />
+    <Compile Include="StageContracts.cs" />
+    <Compile Include="StageWorkerContext.cs" />
+    <Compile Include="SnapshotPipeline.cs" />
+  </ItemGroup>
+</Project>

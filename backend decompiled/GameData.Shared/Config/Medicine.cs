@@ -1,0 +1,2508 @@
+using System;
+using System.Collections.Generic;
+using Config.Common;
+
+namespace Config;
+
+[Serializable]
+public class Medicine : ConfigData<MedicineItem, short>
+{
+	/// <summary>
+	/// 配置表定义Key
+	/// </summary>
+	public static class DefKey
+	{
+		/// <summary>
+		/// 鸩羽酒
+		/// </summary>
+		public const short HotPoisonGrade0 = 0;
+
+		/// <summary>
+		/// 瞬毙丸
+		/// </summary>
+		public const short HotPoisonGrade1 = 1;
+
+		/// <summary>
+		/// 风雷夺魄丹
+		/// </summary>
+		public const short HotPoisonGrade2 = 2;
+
+		/// <summary>
+		/// 牵机药
+		/// </summary>
+		public const short HotPoisonGrade3 = 3;
+
+		/// <summary>
+		/// 百杀灭绝散
+		/// </summary>
+		public const short HotPoisonGrade4 = 4;
+
+		/// <summary>
+		/// 龙煞丹
+		/// </summary>
+		public const short HotPoisonGrade5 = 5;
+
+		/// <summary>
+		/// 唯我独尊丸
+		/// </summary>
+		public const short HotPoisonGrade6 = 6;
+
+		/// <summary>
+		/// 十死药
+		/// </summary>
+		public const short HotPoisonGrade7 = 7;
+
+		/// <summary>
+		/// 断肠散
+		/// </summary>
+		public const short HotPoisonGrade8 = 8;
+
+		/// <summary>
+		/// 截脉散
+		/// </summary>
+		public const short GloomyPoisonGrade0 = 9;
+
+		/// <summary>
+		/// 浊瘴粉
+		/// </summary>
+		public const short GloomyPoisonGrade1 = 10;
+
+		/// <summary>
+		/// 温柔乡
+		/// </summary>
+		public const short GloomyPoisonGrade2 = 11;
+
+		/// <summary>
+		/// 懈元酥
+		/// </summary>
+		public const short GloomyPoisonGrade3 = 12;
+
+		/// <summary>
+		/// 缚龙水
+		/// </summary>
+		public const short GloomyPoisonGrade4 = 13;
+
+		/// <summary>
+		/// 散功十华散
+		/// </summary>
+		public const short GloomyPoisonGrade5 = 14;
+
+		/// <summary>
+		/// 抱香死
+		/// </summary>
+		public const short GloomyPoisonGrade6 = 15;
+
+		/// <summary>
+		/// 玉绶化功散
+		/// </summary>
+		public const short GloomyPoisonGrade7 = 16;
+
+		/// <summary>
+		/// 邪窍香
+		/// </summary>
+		public const short GloomyPoisonGrade8 = 17;
+
+		/// <summary>
+		/// 恶寒粉
+		/// </summary>
+		public const short ColdPoisonGrade0 = 18;
+
+		/// <summary>
+		/// 寒血白丸
+		/// </summary>
+		public const short ColdPoisonGrade1 = 19;
+
+		/// <summary>
+		/// 陵阴散
+		/// </summary>
+		public const short ColdPoisonGrade2 = 20;
+
+		/// <summary>
+		/// 玲珑冰晶
+		/// </summary>
+		public const short ColdPoisonGrade3 = 21;
+
+		/// <summary>
+		/// 九阴散
+		/// </summary>
+		public const short ColdPoisonGrade4 = 22;
+
+		/// <summary>
+		/// 太阴五毒散
+		/// </summary>
+		public const short ColdPoisonGrade5 = 23;
+
+		/// <summary>
+		/// 七寒绝阳丹
+		/// </summary>
+		public const short ColdPoisonGrade6 = 24;
+
+		/// <summary>
+		/// 玄冥霜
+		/// </summary>
+		public const short ColdPoisonGrade7 = 25;
+
+		/// <summary>
+		/// 冰蚕寒魄丹
+		/// </summary>
+		public const short ColdPoisonGrade8 = 26;
+
+		/// <summary>
+		/// 鹤顶红
+		/// </summary>
+		public const short RedPoisonGrade0 = 27;
+
+		/// <summary>
+		/// 罗刹粉
+		/// </summary>
+		public const short RedPoisonGrade1 = 28;
+
+		/// <summary>
+		/// 升天红丸
+		/// </summary>
+		public const short RedPoisonGrade2 = 29;
+
+		/// <summary>
+		/// 炎溃散
+		/// </summary>
+		public const short RedPoisonGrade3 = 30;
+
+		/// <summary>
+		/// 泣血饮
+		/// </summary>
+		public const short RedPoisonGrade4 = 31;
+
+		/// <summary>
+		/// 火解金丹
+		/// </summary>
+		public const short RedPoisonGrade5 = 32;
+
+		/// <summary>
+		/// 龙雀丹
+		/// </summary>
+		public const short RedPoisonGrade6 = 33;
+
+		/// <summary>
+		/// 红玉血罗衣
+		/// </summary>
+		public const short RedPoisonGrade7 = 34;
+
+		/// <summary>
+		/// 血童药
+		/// </summary>
+		public const short RedPoisonGrade8 = 35;
+
+		/// <summary>
+		/// 化尸水
+		/// </summary>
+		public const short RottenPoisonGrade0 = 36;
+
+		/// <summary>
+		/// 腐身毒
+		/// </summary>
+		public const short RottenPoisonGrade1 = 37;
+
+		/// <summary>
+		/// 炼尸五瘟散
+		/// </summary>
+		public const short RottenPoisonGrade2 = 38;
+
+		/// <summary>
+		/// 蛇鬼消筋散
+		/// </summary>
+		public const short RottenPoisonGrade3 = 39;
+
+		/// <summary>
+		/// 化骨蚀髓粉
+		/// </summary>
+		public const short RottenPoisonGrade4 = 40;
+
+		/// <summary>
+		/// 鬼王丹
+		/// </summary>
+		public const short RottenPoisonGrade5 = 41;
+
+		/// <summary>
+		/// 化血败元水
+		/// </summary>
+		public const short RottenPoisonGrade6 = 42;
+
+		/// <summary>
+		/// 寸骨寸噬丹
+		/// </summary>
+		public const short RottenPoisonGrade7 = 43;
+
+		/// <summary>
+		/// 青蛛蛊丸
+		/// </summary>
+		public const short RottenPoisonGrade8 = 44;
+
+		/// <summary>
+		/// 心衰散
+		/// </summary>
+		public const short IllusoryPoisonGrade0 = 45;
+
+		/// <summary>
+		/// 销魂香丸
+		/// </summary>
+		public const short IllusoryPoisonGrade1 = 46;
+
+		/// <summary>
+		/// 欢喜丧魂香
+		/// </summary>
+		public const short IllusoryPoisonGrade2 = 47;
+
+		/// <summary>
+		/// 神竭粉
+		/// </summary>
+		public const short IllusoryPoisonGrade3 = 48;
+
+		/// <summary>
+		/// 蝴蝶迷仙香
+		/// </summary>
+		public const short IllusoryPoisonGrade4 = 49;
+
+		/// <summary>
+		/// 九痴散
+		/// </summary>
+		public const short IllusoryPoisonGrade5 = 50;
+
+		/// <summary>
+		/// 琳琅幻神丹
+		/// </summary>
+		public const short IllusoryPoisonGrade6 = 51;
+
+		/// <summary>
+		/// 醉生梦死
+		/// </summary>
+		public const short IllusoryPoisonGrade7 = 52;
+
+		/// <summary>
+		/// 千年魅
+		/// </summary>
+		public const short IllusoryPoisonGrade8 = 53;
+
+		/// <summary>
+		/// 止血散
+		/// </summary>
+		public const short OuterInjuryLow0 = 54;
+
+		/// <summary>
+		/// 大活血丹
+		/// </summary>
+		public const short OuterInjuryLow1 = 55;
+
+		/// <summary>
+		/// 九牛固命丹
+		/// </summary>
+		public const short OuterInjuryLow2 = 56;
+
+		/// <summary>
+		/// 天竺佛药
+		/// </summary>
+		public const short OuterInjuryLow3 = 57;
+
+		/// <summary>
+		/// 天王补心丹
+		/// </summary>
+		public const short OuterInjuryLow4 = 58;
+
+		/// <summary>
+		/// 金仙活命散
+		/// </summary>
+		public const short OuterInjuryLow5 = 59;
+
+		/// <summary>
+		/// 金创药
+		/// </summary>
+		public const short OuterInjuryHigh3 = 60;
+
+		/// <summary>
+		/// 续骨膏
+		/// </summary>
+		public const short OuterInjuryHigh4 = 61;
+
+		/// <summary>
+		/// 断续绵胶
+		/// </summary>
+		public const short OuterInjuryHigh5 = 62;
+
+		/// <summary>
+		/// 神木续命膏
+		/// </summary>
+		public const short OuterInjuryHigh6 = 63;
+
+		/// <summary>
+		/// 不死药
+		/// </summary>
+		public const short OuterInjuryHigh7 = 64;
+
+		/// <summary>
+		/// 九转芝王丹
+		/// </summary>
+		public const short OuterInjuryHigh8 = 65;
+
+		/// <summary>
+		/// 蛇胆活络丸
+		/// </summary>
+		public const short InnerInjuryLow0 = 66;
+
+		/// <summary>
+		/// 返气汤
+		/// </summary>
+		public const short InnerInjuryLow1 = 67;
+
+		/// <summary>
+		/// 大承气散
+		/// </summary>
+		public const short InnerInjuryLow2 = 68;
+
+		/// <summary>
+		/// 紫金乌丸
+		/// </summary>
+		public const short InnerInjuryLow3 = 69;
+
+		/// <summary>
+		/// 天仙调元散
+		/// </summary>
+		public const short InnerInjuryLow4 = 70;
+
+		/// <summary>
+		/// 紫玉王参散
+		/// </summary>
+		public const short InnerInjuryLow5 = 71;
+
+		/// <summary>
+		/// 人参顺气饮
+		/// </summary>
+		public const short InnerInjuryHigh3 = 72;
+
+		/// <summary>
+		/// 通络香丸
+		/// </summary>
+		public const short InnerInjuryHigh4 = 73;
+
+		/// <summary>
+		/// 子午生脉丸
+		/// </summary>
+		public const short InnerInjuryHigh5 = 74;
+
+		/// <summary>
+		/// 九香饮
+		/// </summary>
+		public const short InnerInjuryHigh6 = 75;
+
+		/// <summary>
+		/// 黑玉神髓丹
+		/// </summary>
+		public const short InnerInjuryHigh7 = 76;
+
+		/// <summary>
+		/// 霜璃雪参丸
+		/// </summary>
+		public const short InnerInjuryHigh8 = 77;
+
+		/// <summary>
+		/// 白鹿角
+		/// </summary>
+		public const short WhiteDeerHorn = 78;
+
+		/// <summary>
+		/// 师尊遗骨
+		/// </summary>
+		public const short RemainsOfTeacher = 79;
+
+		/// <summary>
+		/// 万化灵符
+		/// </summary>
+		public const short AllChangesAmulet = 80;
+
+		/// <summary>
+		/// 赤血王珠
+		/// </summary>
+		public const short RedBloodPearl = 81;
+
+		/// <summary>
+		/// 乌蛇愈气散
+		/// </summary>
+		public const short DisorderOfQiLow0 = 82;
+
+		/// <summary>
+		/// 通心乌丸
+		/// </summary>
+		public const short DisorderOfQiLow1 = 83;
+
+		/// <summary>
+		/// 九玄丹
+		/// </summary>
+		public const short DisorderOfQiLow2 = 84;
+
+		/// <summary>
+		/// 小还丹
+		/// </summary>
+		public const short DisorderOfQiLow3 = 85;
+
+		/// <summary>
+		/// 大还丹
+		/// </summary>
+		public const short DisorderOfQiLow4 = 86;
+
+		/// <summary>
+		/// 龙合造化丹
+		/// </summary>
+		public const short DisorderOfQiLow5 = 87;
+
+		/// <summary>
+		/// 蜂王露
+		/// </summary>
+		public const short DisorderOfQiHigh3 = 88;
+
+		/// <summary>
+		/// 血露甘丸
+		/// </summary>
+		public const short DisorderOfQiHigh4 = 89;
+
+		/// <summary>
+		/// 白云点霞丹
+		/// </summary>
+		public const short DisorderOfQiHigh5 = 90;
+
+		/// <summary>
+		/// 至宝还丹
+		/// </summary>
+		public const short DisorderOfQiHigh6 = 91;
+
+		/// <summary>
+		/// 玉骨霜心丹
+		/// </summary>
+		public const short DisorderOfQiHigh7 = 92;
+
+		/// <summary>
+		/// 天山雪莲露
+		/// </summary>
+		public const short DisorderOfQiHigh8 = 93;
+
+		/// <summary>
+		/// 珍珠润心散
+		/// </summary>
+		public const short HealthLow0 = 94;
+
+		/// <summary>
+		/// 清元散
+		/// </summary>
+		public const short HealthLow1 = 95;
+
+		/// <summary>
+		/// 武候行军散
+		/// </summary>
+		public const short HealthLow2 = 96;
+
+		/// <summary>
+		/// 玉枢玄晶散
+		/// </summary>
+		public const short HealthLow3 = 97;
+
+		/// <summary>
+		/// 大智香
+		/// </summary>
+		public const short HealthLow4 = 98;
+
+		/// <summary>
+		/// 墨千岁
+		/// </summary>
+		public const short HealthLow5 = 99;
+
+		/// <summary>
+		/// 雪蛤益生汤
+		/// </summary>
+		public const short HealthHigh3 = 100;
+
+		/// <summary>
+		/// 辟谷丹
+		/// </summary>
+		public const short HealthHigh4 = 101;
+
+		/// <summary>
+		/// 天珍延寿散
+		/// </summary>
+		public const short HealthHigh5 = 102;
+
+		/// <summary>
+		/// 十全大补丸
+		/// </summary>
+		public const short HealthHigh6 = 103;
+
+		/// <summary>
+		/// 返老还童丹
+		/// </summary>
+		public const short HealthHigh7 = 104;
+
+		/// <summary>
+		/// 千年首乌膏
+		/// </summary>
+		public const short HealthHigh8 = 105;
+
+		/// <summary>
+		/// 铅华散
+		/// </summary>
+		public const short StanceBreathLow0 = 106;
+
+		/// <summary>
+		/// 地灵丹
+		/// </summary>
+		public const short StanceBreathLow1 = 107;
+
+		/// <summary>
+		/// 纳元鬼骨茶
+		/// </summary>
+		public const short StanceBreathLow2 = 108;
+
+		/// <summary>
+		/// 八苦八难丹
+		/// </summary>
+		public const short StanceBreathLow3 = 109;
+
+		/// <summary>
+		/// 鬼月白丸
+		/// </summary>
+		public const short StanceBreathLow4 = 110;
+
+		/// <summary>
+		/// 银蟾乌膏
+		/// </summary>
+		public const short StanceBreathLow5 = 111;
+
+		/// <summary>
+		/// 朱果露
+		/// </summary>
+		public const short StanceBreathHigh3 = 112;
+
+		/// <summary>
+		/// 培元饮
+		/// </summary>
+		public const short StanceBreathHigh4 = 113;
+
+		/// <summary>
+		/// 八宝奇珍散
+		/// </summary>
+		public const short StanceBreathHigh5 = 114;
+
+		/// <summary>
+		/// 琼灵金胎散
+		/// </summary>
+		public const short StanceBreathHigh6 = 115;
+
+		/// <summary>
+		/// 仙方奇饮
+		/// </summary>
+		public const short StanceBreathHigh7 = 116;
+
+		/// <summary>
+		/// 荼冥仙华饮
+		/// </summary>
+		public const short StanceBreathHigh8 = 117;
+
+		/// <summary>
+		/// 玉屏风散
+		/// </summary>
+		public const short AvoidStrengthLow0 = 226;
+
+		/// <summary>
+		/// 灵草沉气丹
+		/// </summary>
+		public const short AvoidStrengthLow1 = 227;
+
+		/// <summary>
+		/// 秀玉珍茗
+		/// </summary>
+		public const short AvoidStrengthLow2 = 228;
+
+		/// <summary>
+		/// 施云散
+		/// </summary>
+		public const short AvoidStrengthLow3 = 229;
+
+		/// <summary>
+		/// 青阳仙露
+		/// </summary>
+		public const short AvoidStrengthLow4 = 230;
+
+		/// <summary>
+		/// 百宝龙涎露
+		/// </summary>
+		public const short AvoidStrengthLow5 = 231;
+
+		/// <summary>
+		/// 百合聚神丹
+		/// </summary>
+		public const short AvoidStrengthHigh3 = 232;
+
+		/// <summary>
+		/// 三花散雾香
+		/// </summary>
+		public const short AvoidStrengthHigh4 = 233;
+
+		/// <summary>
+		/// 万里蔽云丹
+		/// </summary>
+		public const short AvoidStrengthHigh5 = 234;
+
+		/// <summary>
+		/// 定魂琉璃丹
+		/// </summary>
+		public const short AvoidStrengthHigh6 = 235;
+
+		/// <summary>
+		/// 大释散
+		/// </summary>
+		public const short AvoidStrengthHigh7 = 236;
+
+		/// <summary>
+		/// 九色菩提露
+		/// </summary>
+		public const short AvoidStrengthHigh8 = 237;
+
+		/// <summary>
+		/// 萃黄丹
+		/// </summary>
+		public const short AvoidTechniqueLow0 = 238;
+
+		/// <summary>
+		/// 滋心丹
+		/// </summary>
+		public const short AvoidTechniqueLow1 = 239;
+
+		/// <summary>
+		/// 拨云宝丸
+		/// </summary>
+		public const short AvoidTechniqueLow2 = 240;
+
+		/// <summary>
+		/// 寸巧寸金丹
+		/// </summary>
+		public const short AvoidTechniqueLow3 = 241;
+
+		/// <summary>
+		/// 赤白丹
+		/// </summary>
+		public const short AvoidTechniqueLow4 = 242;
+
+		/// <summary>
+		/// 琥珀如意丹
+		/// </summary>
+		public const short AvoidTechniqueLow5 = 243;
+
+		/// <summary>
+		/// 万全香
+		/// </summary>
+		public const short AvoidTechniqueHigh3 = 244;
+
+		/// <summary>
+		/// 香罗散
+		/// </summary>
+		public const short AvoidTechniqueHigh4 = 245;
+
+		/// <summary>
+		/// 明镜丹
+		/// </summary>
+		public const short AvoidTechniqueHigh5 = 246;
+
+		/// <summary>
+		/// 八仙妙华丹
+		/// </summary>
+		public const short AvoidTechniqueHigh6 = 247;
+
+		/// <summary>
+		/// 苍龙卧海丹
+		/// </summary>
+		public const short AvoidTechniqueHigh7 = 248;
+
+		/// <summary>
+		/// 万应玲珑散
+		/// </summary>
+		public const short AvoidTechniqueHigh8 = 249;
+
+		/// <summary>
+		/// 银光散
+		/// </summary>
+		public const short AvoidSpeedLow0 = 250;
+
+		/// <summary>
+		/// 飞雾丹
+		/// </summary>
+		public const short AvoidSpeedLow1 = 251;
+
+		/// <summary>
+		/// 五光饮
+		/// </summary>
+		public const short AvoidSpeedLow2 = 252;
+
+		/// <summary>
+		/// 镜中花露
+		/// </summary>
+		public const short AvoidSpeedLow3 = 253;
+
+		/// <summary>
+		/// 青霜碧水丹
+		/// </summary>
+		public const short AvoidSpeedLow4 = 254;
+
+		/// <summary>
+		/// 万幻蝉露
+		/// </summary>
+		public const short AvoidSpeedLow5 = 255;
+
+		/// <summary>
+		/// 玉蓉清神露
+		/// </summary>
+		public const short AvoidSpeedHigh3 = 256;
+
+		/// <summary>
+		/// 莲华醉
+		/// </summary>
+		public const short AvoidSpeedHigh4 = 257;
+
+		/// <summary>
+		/// 百花逍遥散
+		/// </summary>
+		public const short AvoidSpeedHigh5 = 258;
+
+		/// <summary>
+		/// 无色丹
+		/// </summary>
+		public const short AvoidSpeedHigh6 = 259;
+
+		/// <summary>
+		/// 九灵仙茗
+		/// </summary>
+		public const short AvoidSpeedHigh7 = 260;
+
+		/// <summary>
+		/// 金蚕蜜饮
+		/// </summary>
+		public const short AvoidSpeedHigh8 = 261;
+
+		/// <summary>
+		/// 十转尘心
+		/// </summary>
+		public const short MortalHeart = 346;
+
+		/// <summary>
+		/// 活死药
+		/// </summary>
+		public const short WalkingDead = 387;
+
+		/// <summary>
+		/// 无命奇毒
+		/// </summary>
+		public const short LiaoWumingPoison = 388;
+
+		/// <summary>
+		/// 烈毒郁毒
+		/// </summary>
+		public const short HotGloomy = 389;
+
+		/// <summary>
+		/// 烈毒赤毒
+		/// </summary>
+		public const short HotRed = 390;
+
+		/// <summary>
+		/// 烈毒寒毒
+		/// </summary>
+		public const short HotCold = 391;
+
+		/// <summary>
+		/// 烈毒腐毒
+		/// </summary>
+		public const short HotRotten = 392;
+
+		/// <summary>
+		/// 烈毒幻毒
+		/// </summary>
+		public const short HotIllusory = 393;
+
+		/// <summary>
+		/// 郁毒赤毒
+		/// </summary>
+		public const short GloomyRed = 394;
+
+		/// <summary>
+		/// 郁毒寒毒
+		/// </summary>
+		public const short GloomyCold = 395;
+
+		/// <summary>
+		/// 郁毒腐毒
+		/// </summary>
+		public const short GloomyRotten = 396;
+
+		/// <summary>
+		/// 郁毒幻毒
+		/// </summary>
+		public const short GloomyIllusory = 397;
+
+		/// <summary>
+		/// 赤毒寒毒
+		/// </summary>
+		public const short RedCold = 398;
+
+		/// <summary>
+		/// 赤毒腐毒
+		/// </summary>
+		public const short RedRotten = 399;
+
+		/// <summary>
+		/// 赤毒幻毒
+		/// </summary>
+		public const short RedIllusory = 400;
+
+		/// <summary>
+		/// 寒毒腐毒
+		/// </summary>
+		public const short ColdRotten = 401;
+
+		/// <summary>
+		/// 寒毒幻毒
+		/// </summary>
+		public const short ColdIllusory = 402;
+
+		/// <summary>
+		/// 腐毒幻毒
+		/// </summary>
+		public const short RottenIllusory = 403;
+
+		/// <summary>
+		/// 裂皮碎骨
+		/// </summary>
+		public const short HotRedRotten = 404;
+
+		/// <summary>
+		/// 心残肉挫
+		/// </summary>
+		public const short HotRottenIllusory = 405;
+
+		/// <summary>
+		/// 骨错筋缠
+		/// </summary>
+		public const short HotRottenGloomy = 406;
+
+		/// <summary>
+		/// 肝肠寸断
+		/// </summary>
+		public const short HotRottenCold = 407;
+
+		/// <summary>
+		/// 血迷关窍
+		/// </summary>
+		public const short RedRottenIllusory = 408;
+
+		/// <summary>
+		/// 五脏败腐
+		/// </summary>
+		public const short RedRottenGloomy = 409;
+
+		/// <summary>
+		/// 坏血断肠
+		/// </summary>
+		public const short RedRottenCold = 410;
+
+		/// <summary>
+		/// 毒火焚心
+		/// </summary>
+		public const short HotRedIllusory = 411;
+
+		/// <summary>
+		/// 骨中烧疽
+		/// </summary>
+		public const short HotRedGloomy = 412;
+
+		/// <summary>
+		/// 血火阴杀
+		/// </summary>
+		public const short HotRedCold = 413;
+
+		/// <summary>
+		/// 摧心蚀元
+		/// </summary>
+		public const short GloomyColdIllusory = 414;
+
+		/// <summary>
+		/// 化骨封髓
+		/// </summary>
+		public const short RottenGloomyCold = 415;
+
+		/// <summary>
+		/// 寒锥锁脉
+		/// </summary>
+		public const short HotGloomyCold = 416;
+
+		/// <summary>
+		/// 锁血凝髓
+		/// </summary>
+		public const short RedGloomyCold = 417;
+
+		/// <summary>
+		/// 邪阴彻体
+		/// </summary>
+		public const short RottenColdIllusory = 418;
+
+		/// <summary>
+		/// 迷惧钻心
+		/// </summary>
+		public const short HotColdIllusory = 419;
+
+		/// <summary>
+		/// 剧恶深苦
+		/// </summary>
+		public const short RedColdIllusory = 420;
+
+		/// <summary>
+		/// 失魂鬼瘴
+		/// </summary>
+		public const short RottenGloomyIllusory = 421;
+
+		/// <summary>
+		/// 绝脉乱心
+		/// </summary>
+		public const short HotGloomyIllusory = 422;
+
+		/// <summary>
+		/// 封颅闭血
+		/// </summary>
+		public const short RedGloomyIllusory = 423;
+
+		/// <summary>
+		/// 天劫符箓
+		/// </summary>
+		public const short TianJieFuLu = 432;
+	}
+
+	/// <summary>
+	/// 配置表快捷访问
+	/// </summary>
+	public static class DefValue
+	{
+		/// <summary>
+		/// 鸩羽酒
+		/// </summary>
+		public static MedicineItem HotPoisonGrade0 => Instance[(short)0];
+
+		/// <summary>
+		/// 瞬毙丸
+		/// </summary>
+		public static MedicineItem HotPoisonGrade1 => Instance[(short)1];
+
+		/// <summary>
+		/// 风雷夺魄丹
+		/// </summary>
+		public static MedicineItem HotPoisonGrade2 => Instance[(short)2];
+
+		/// <summary>
+		/// 牵机药
+		/// </summary>
+		public static MedicineItem HotPoisonGrade3 => Instance[(short)3];
+
+		/// <summary>
+		/// 百杀灭绝散
+		/// </summary>
+		public static MedicineItem HotPoisonGrade4 => Instance[(short)4];
+
+		/// <summary>
+		/// 龙煞丹
+		/// </summary>
+		public static MedicineItem HotPoisonGrade5 => Instance[(short)5];
+
+		/// <summary>
+		/// 唯我独尊丸
+		/// </summary>
+		public static MedicineItem HotPoisonGrade6 => Instance[(short)6];
+
+		/// <summary>
+		/// 十死药
+		/// </summary>
+		public static MedicineItem HotPoisonGrade7 => Instance[(short)7];
+
+		/// <summary>
+		/// 断肠散
+		/// </summary>
+		public static MedicineItem HotPoisonGrade8 => Instance[(short)8];
+
+		/// <summary>
+		/// 截脉散
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade0 => Instance[(short)9];
+
+		/// <summary>
+		/// 浊瘴粉
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade1 => Instance[(short)10];
+
+		/// <summary>
+		/// 温柔乡
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade2 => Instance[(short)11];
+
+		/// <summary>
+		/// 懈元酥
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade3 => Instance[(short)12];
+
+		/// <summary>
+		/// 缚龙水
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade4 => Instance[(short)13];
+
+		/// <summary>
+		/// 散功十华散
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade5 => Instance[(short)14];
+
+		/// <summary>
+		/// 抱香死
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade6 => Instance[(short)15];
+
+		/// <summary>
+		/// 玉绶化功散
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade7 => Instance[(short)16];
+
+		/// <summary>
+		/// 邪窍香
+		/// </summary>
+		public static MedicineItem GloomyPoisonGrade8 => Instance[(short)17];
+
+		/// <summary>
+		/// 恶寒粉
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade0 => Instance[(short)18];
+
+		/// <summary>
+		/// 寒血白丸
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade1 => Instance[(short)19];
+
+		/// <summary>
+		/// 陵阴散
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade2 => Instance[(short)20];
+
+		/// <summary>
+		/// 玲珑冰晶
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade3 => Instance[(short)21];
+
+		/// <summary>
+		/// 九阴散
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade4 => Instance[(short)22];
+
+		/// <summary>
+		/// 太阴五毒散
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade5 => Instance[(short)23];
+
+		/// <summary>
+		/// 七寒绝阳丹
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade6 => Instance[(short)24];
+
+		/// <summary>
+		/// 玄冥霜
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade7 => Instance[(short)25];
+
+		/// <summary>
+		/// 冰蚕寒魄丹
+		/// </summary>
+		public static MedicineItem ColdPoisonGrade8 => Instance[(short)26];
+
+		/// <summary>
+		/// 鹤顶红
+		/// </summary>
+		public static MedicineItem RedPoisonGrade0 => Instance[(short)27];
+
+		/// <summary>
+		/// 罗刹粉
+		/// </summary>
+		public static MedicineItem RedPoisonGrade1 => Instance[(short)28];
+
+		/// <summary>
+		/// 升天红丸
+		/// </summary>
+		public static MedicineItem RedPoisonGrade2 => Instance[(short)29];
+
+		/// <summary>
+		/// 炎溃散
+		/// </summary>
+		public static MedicineItem RedPoisonGrade3 => Instance[(short)30];
+
+		/// <summary>
+		/// 泣血饮
+		/// </summary>
+		public static MedicineItem RedPoisonGrade4 => Instance[(short)31];
+
+		/// <summary>
+		/// 火解金丹
+		/// </summary>
+		public static MedicineItem RedPoisonGrade5 => Instance[(short)32];
+
+		/// <summary>
+		/// 龙雀丹
+		/// </summary>
+		public static MedicineItem RedPoisonGrade6 => Instance[(short)33];
+
+		/// <summary>
+		/// 红玉血罗衣
+		/// </summary>
+		public static MedicineItem RedPoisonGrade7 => Instance[(short)34];
+
+		/// <summary>
+		/// 血童药
+		/// </summary>
+		public static MedicineItem RedPoisonGrade8 => Instance[(short)35];
+
+		/// <summary>
+		/// 化尸水
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade0 => Instance[(short)36];
+
+		/// <summary>
+		/// 腐身毒
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade1 => Instance[(short)37];
+
+		/// <summary>
+		/// 炼尸五瘟散
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade2 => Instance[(short)38];
+
+		/// <summary>
+		/// 蛇鬼消筋散
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade3 => Instance[(short)39];
+
+		/// <summary>
+		/// 化骨蚀髓粉
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade4 => Instance[(short)40];
+
+		/// <summary>
+		/// 鬼王丹
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade5 => Instance[(short)41];
+
+		/// <summary>
+		/// 化血败元水
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade6 => Instance[(short)42];
+
+		/// <summary>
+		/// 寸骨寸噬丹
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade7 => Instance[(short)43];
+
+		/// <summary>
+		/// 青蛛蛊丸
+		/// </summary>
+		public static MedicineItem RottenPoisonGrade8 => Instance[(short)44];
+
+		/// <summary>
+		/// 心衰散
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade0 => Instance[(short)45];
+
+		/// <summary>
+		/// 销魂香丸
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade1 => Instance[(short)46];
+
+		/// <summary>
+		/// 欢喜丧魂香
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade2 => Instance[(short)47];
+
+		/// <summary>
+		/// 神竭粉
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade3 => Instance[(short)48];
+
+		/// <summary>
+		/// 蝴蝶迷仙香
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade4 => Instance[(short)49];
+
+		/// <summary>
+		/// 九痴散
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade5 => Instance[(short)50];
+
+		/// <summary>
+		/// 琳琅幻神丹
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade6 => Instance[(short)51];
+
+		/// <summary>
+		/// 醉生梦死
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade7 => Instance[(short)52];
+
+		/// <summary>
+		/// 千年魅
+		/// </summary>
+		public static MedicineItem IllusoryPoisonGrade8 => Instance[(short)53];
+
+		/// <summary>
+		/// 止血散
+		/// </summary>
+		public static MedicineItem OuterInjuryLow0 => Instance[(short)54];
+
+		/// <summary>
+		/// 大活血丹
+		/// </summary>
+		public static MedicineItem OuterInjuryLow1 => Instance[(short)55];
+
+		/// <summary>
+		/// 九牛固命丹
+		/// </summary>
+		public static MedicineItem OuterInjuryLow2 => Instance[(short)56];
+
+		/// <summary>
+		/// 天竺佛药
+		/// </summary>
+		public static MedicineItem OuterInjuryLow3 => Instance[(short)57];
+
+		/// <summary>
+		/// 天王补心丹
+		/// </summary>
+		public static MedicineItem OuterInjuryLow4 => Instance[(short)58];
+
+		/// <summary>
+		/// 金仙活命散
+		/// </summary>
+		public static MedicineItem OuterInjuryLow5 => Instance[(short)59];
+
+		/// <summary>
+		/// 金创药
+		/// </summary>
+		public static MedicineItem OuterInjuryHigh3 => Instance[(short)60];
+
+		/// <summary>
+		/// 续骨膏
+		/// </summary>
+		public static MedicineItem OuterInjuryHigh4 => Instance[(short)61];
+
+		/// <summary>
+		/// 断续绵胶
+		/// </summary>
+		public static MedicineItem OuterInjuryHigh5 => Instance[(short)62];
+
+		/// <summary>
+		/// 神木续命膏
+		/// </summary>
+		public static MedicineItem OuterInjuryHigh6 => Instance[(short)63];
+
+		/// <summary>
+		/// 不死药
+		/// </summary>
+		public static MedicineItem OuterInjuryHigh7 => Instance[(short)64];
+
+		/// <summary>
+		/// 九转芝王丹
+		/// </summary>
+		public static MedicineItem OuterInjuryHigh8 => Instance[(short)65];
+
+		/// <summary>
+		/// 蛇胆活络丸
+		/// </summary>
+		public static MedicineItem InnerInjuryLow0 => Instance[(short)66];
+
+		/// <summary>
+		/// 返气汤
+		/// </summary>
+		public static MedicineItem InnerInjuryLow1 => Instance[(short)67];
+
+		/// <summary>
+		/// 大承气散
+		/// </summary>
+		public static MedicineItem InnerInjuryLow2 => Instance[(short)68];
+
+		/// <summary>
+		/// 紫金乌丸
+		/// </summary>
+		public static MedicineItem InnerInjuryLow3 => Instance[(short)69];
+
+		/// <summary>
+		/// 天仙调元散
+		/// </summary>
+		public static MedicineItem InnerInjuryLow4 => Instance[(short)70];
+
+		/// <summary>
+		/// 紫玉王参散
+		/// </summary>
+		public static MedicineItem InnerInjuryLow5 => Instance[(short)71];
+
+		/// <summary>
+		/// 人参顺气饮
+		/// </summary>
+		public static MedicineItem InnerInjuryHigh3 => Instance[(short)72];
+
+		/// <summary>
+		/// 通络香丸
+		/// </summary>
+		public static MedicineItem InnerInjuryHigh4 => Instance[(short)73];
+
+		/// <summary>
+		/// 子午生脉丸
+		/// </summary>
+		public static MedicineItem InnerInjuryHigh5 => Instance[(short)74];
+
+		/// <summary>
+		/// 九香饮
+		/// </summary>
+		public static MedicineItem InnerInjuryHigh6 => Instance[(short)75];
+
+		/// <summary>
+		/// 黑玉神髓丹
+		/// </summary>
+		public static MedicineItem InnerInjuryHigh7 => Instance[(short)76];
+
+		/// <summary>
+		/// 霜璃雪参丸
+		/// </summary>
+		public static MedicineItem InnerInjuryHigh8 => Instance[(short)77];
+
+		/// <summary>
+		/// 白鹿角
+		/// </summary>
+		public static MedicineItem WhiteDeerHorn => Instance[(short)78];
+
+		/// <summary>
+		/// 师尊遗骨
+		/// </summary>
+		public static MedicineItem RemainsOfTeacher => Instance[(short)79];
+
+		/// <summary>
+		/// 万化灵符
+		/// </summary>
+		public static MedicineItem AllChangesAmulet => Instance[(short)80];
+
+		/// <summary>
+		/// 赤血王珠
+		/// </summary>
+		public static MedicineItem RedBloodPearl => Instance[(short)81];
+
+		/// <summary>
+		/// 乌蛇愈气散
+		/// </summary>
+		public static MedicineItem DisorderOfQiLow0 => Instance[(short)82];
+
+		/// <summary>
+		/// 通心乌丸
+		/// </summary>
+		public static MedicineItem DisorderOfQiLow1 => Instance[(short)83];
+
+		/// <summary>
+		/// 九玄丹
+		/// </summary>
+		public static MedicineItem DisorderOfQiLow2 => Instance[(short)84];
+
+		/// <summary>
+		/// 小还丹
+		/// </summary>
+		public static MedicineItem DisorderOfQiLow3 => Instance[(short)85];
+
+		/// <summary>
+		/// 大还丹
+		/// </summary>
+		public static MedicineItem DisorderOfQiLow4 => Instance[(short)86];
+
+		/// <summary>
+		/// 龙合造化丹
+		/// </summary>
+		public static MedicineItem DisorderOfQiLow5 => Instance[(short)87];
+
+		/// <summary>
+		/// 蜂王露
+		/// </summary>
+		public static MedicineItem DisorderOfQiHigh3 => Instance[(short)88];
+
+		/// <summary>
+		/// 血露甘丸
+		/// </summary>
+		public static MedicineItem DisorderOfQiHigh4 => Instance[(short)89];
+
+		/// <summary>
+		/// 白云点霞丹
+		/// </summary>
+		public static MedicineItem DisorderOfQiHigh5 => Instance[(short)90];
+
+		/// <summary>
+		/// 至宝还丹
+		/// </summary>
+		public static MedicineItem DisorderOfQiHigh6 => Instance[(short)91];
+
+		/// <summary>
+		/// 玉骨霜心丹
+		/// </summary>
+		public static MedicineItem DisorderOfQiHigh7 => Instance[(short)92];
+
+		/// <summary>
+		/// 天山雪莲露
+		/// </summary>
+		public static MedicineItem DisorderOfQiHigh8 => Instance[(short)93];
+
+		/// <summary>
+		/// 珍珠润心散
+		/// </summary>
+		public static MedicineItem HealthLow0 => Instance[(short)94];
+
+		/// <summary>
+		/// 清元散
+		/// </summary>
+		public static MedicineItem HealthLow1 => Instance[(short)95];
+
+		/// <summary>
+		/// 武候行军散
+		/// </summary>
+		public static MedicineItem HealthLow2 => Instance[(short)96];
+
+		/// <summary>
+		/// 玉枢玄晶散
+		/// </summary>
+		public static MedicineItem HealthLow3 => Instance[(short)97];
+
+		/// <summary>
+		/// 大智香
+		/// </summary>
+		public static MedicineItem HealthLow4 => Instance[(short)98];
+
+		/// <summary>
+		/// 墨千岁
+		/// </summary>
+		public static MedicineItem HealthLow5 => Instance[(short)99];
+
+		/// <summary>
+		/// 雪蛤益生汤
+		/// </summary>
+		public static MedicineItem HealthHigh3 => Instance[(short)100];
+
+		/// <summary>
+		/// 辟谷丹
+		/// </summary>
+		public static MedicineItem HealthHigh4 => Instance[(short)101];
+
+		/// <summary>
+		/// 天珍延寿散
+		/// </summary>
+		public static MedicineItem HealthHigh5 => Instance[(short)102];
+
+		/// <summary>
+		/// 十全大补丸
+		/// </summary>
+		public static MedicineItem HealthHigh6 => Instance[(short)103];
+
+		/// <summary>
+		/// 返老还童丹
+		/// </summary>
+		public static MedicineItem HealthHigh7 => Instance[(short)104];
+
+		/// <summary>
+		/// 千年首乌膏
+		/// </summary>
+		public static MedicineItem HealthHigh8 => Instance[(short)105];
+
+		/// <summary>
+		/// 铅华散
+		/// </summary>
+		public static MedicineItem StanceBreathLow0 => Instance[(short)106];
+
+		/// <summary>
+		/// 地灵丹
+		/// </summary>
+		public static MedicineItem StanceBreathLow1 => Instance[(short)107];
+
+		/// <summary>
+		/// 纳元鬼骨茶
+		/// </summary>
+		public static MedicineItem StanceBreathLow2 => Instance[(short)108];
+
+		/// <summary>
+		/// 八苦八难丹
+		/// </summary>
+		public static MedicineItem StanceBreathLow3 => Instance[(short)109];
+
+		/// <summary>
+		/// 鬼月白丸
+		/// </summary>
+		public static MedicineItem StanceBreathLow4 => Instance[(short)110];
+
+		/// <summary>
+		/// 银蟾乌膏
+		/// </summary>
+		public static MedicineItem StanceBreathLow5 => Instance[(short)111];
+
+		/// <summary>
+		/// 朱果露
+		/// </summary>
+		public static MedicineItem StanceBreathHigh3 => Instance[(short)112];
+
+		/// <summary>
+		/// 培元饮
+		/// </summary>
+		public static MedicineItem StanceBreathHigh4 => Instance[(short)113];
+
+		/// <summary>
+		/// 八宝奇珍散
+		/// </summary>
+		public static MedicineItem StanceBreathHigh5 => Instance[(short)114];
+
+		/// <summary>
+		/// 琼灵金胎散
+		/// </summary>
+		public static MedicineItem StanceBreathHigh6 => Instance[(short)115];
+
+		/// <summary>
+		/// 仙方奇饮
+		/// </summary>
+		public static MedicineItem StanceBreathHigh7 => Instance[(short)116];
+
+		/// <summary>
+		/// 荼冥仙华饮
+		/// </summary>
+		public static MedicineItem StanceBreathHigh8 => Instance[(short)117];
+
+		/// <summary>
+		/// 玉屏风散
+		/// </summary>
+		public static MedicineItem AvoidStrengthLow0 => Instance[(short)226];
+
+		/// <summary>
+		/// 灵草沉气丹
+		/// </summary>
+		public static MedicineItem AvoidStrengthLow1 => Instance[(short)227];
+
+		/// <summary>
+		/// 秀玉珍茗
+		/// </summary>
+		public static MedicineItem AvoidStrengthLow2 => Instance[(short)228];
+
+		/// <summary>
+		/// 施云散
+		/// </summary>
+		public static MedicineItem AvoidStrengthLow3 => Instance[(short)229];
+
+		/// <summary>
+		/// 青阳仙露
+		/// </summary>
+		public static MedicineItem AvoidStrengthLow4 => Instance[(short)230];
+
+		/// <summary>
+		/// 百宝龙涎露
+		/// </summary>
+		public static MedicineItem AvoidStrengthLow5 => Instance[(short)231];
+
+		/// <summary>
+		/// 百合聚神丹
+		/// </summary>
+		public static MedicineItem AvoidStrengthHigh3 => Instance[(short)232];
+
+		/// <summary>
+		/// 三花散雾香
+		/// </summary>
+		public static MedicineItem AvoidStrengthHigh4 => Instance[(short)233];
+
+		/// <summary>
+		/// 万里蔽云丹
+		/// </summary>
+		public static MedicineItem AvoidStrengthHigh5 => Instance[(short)234];
+
+		/// <summary>
+		/// 定魂琉璃丹
+		/// </summary>
+		public static MedicineItem AvoidStrengthHigh6 => Instance[(short)235];
+
+		/// <summary>
+		/// 大释散
+		/// </summary>
+		public static MedicineItem AvoidStrengthHigh7 => Instance[(short)236];
+
+		/// <summary>
+		/// 九色菩提露
+		/// </summary>
+		public static MedicineItem AvoidStrengthHigh8 => Instance[(short)237];
+
+		/// <summary>
+		/// 萃黄丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueLow0 => Instance[(short)238];
+
+		/// <summary>
+		/// 滋心丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueLow1 => Instance[(short)239];
+
+		/// <summary>
+		/// 拨云宝丸
+		/// </summary>
+		public static MedicineItem AvoidTechniqueLow2 => Instance[(short)240];
+
+		/// <summary>
+		/// 寸巧寸金丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueLow3 => Instance[(short)241];
+
+		/// <summary>
+		/// 赤白丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueLow4 => Instance[(short)242];
+
+		/// <summary>
+		/// 琥珀如意丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueLow5 => Instance[(short)243];
+
+		/// <summary>
+		/// 万全香
+		/// </summary>
+		public static MedicineItem AvoidTechniqueHigh3 => Instance[(short)244];
+
+		/// <summary>
+		/// 香罗散
+		/// </summary>
+		public static MedicineItem AvoidTechniqueHigh4 => Instance[(short)245];
+
+		/// <summary>
+		/// 明镜丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueHigh5 => Instance[(short)246];
+
+		/// <summary>
+		/// 八仙妙华丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueHigh6 => Instance[(short)247];
+
+		/// <summary>
+		/// 苍龙卧海丹
+		/// </summary>
+		public static MedicineItem AvoidTechniqueHigh7 => Instance[(short)248];
+
+		/// <summary>
+		/// 万应玲珑散
+		/// </summary>
+		public static MedicineItem AvoidTechniqueHigh8 => Instance[(short)249];
+
+		/// <summary>
+		/// 银光散
+		/// </summary>
+		public static MedicineItem AvoidSpeedLow0 => Instance[(short)250];
+
+		/// <summary>
+		/// 飞雾丹
+		/// </summary>
+		public static MedicineItem AvoidSpeedLow1 => Instance[(short)251];
+
+		/// <summary>
+		/// 五光饮
+		/// </summary>
+		public static MedicineItem AvoidSpeedLow2 => Instance[(short)252];
+
+		/// <summary>
+		/// 镜中花露
+		/// </summary>
+		public static MedicineItem AvoidSpeedLow3 => Instance[(short)253];
+
+		/// <summary>
+		/// 青霜碧水丹
+		/// </summary>
+		public static MedicineItem AvoidSpeedLow4 => Instance[(short)254];
+
+		/// <summary>
+		/// 万幻蝉露
+		/// </summary>
+		public static MedicineItem AvoidSpeedLow5 => Instance[(short)255];
+
+		/// <summary>
+		/// 玉蓉清神露
+		/// </summary>
+		public static MedicineItem AvoidSpeedHigh3 => Instance[(short)256];
+
+		/// <summary>
+		/// 莲华醉
+		/// </summary>
+		public static MedicineItem AvoidSpeedHigh4 => Instance[(short)257];
+
+		/// <summary>
+		/// 百花逍遥散
+		/// </summary>
+		public static MedicineItem AvoidSpeedHigh5 => Instance[(short)258];
+
+		/// <summary>
+		/// 无色丹
+		/// </summary>
+		public static MedicineItem AvoidSpeedHigh6 => Instance[(short)259];
+
+		/// <summary>
+		/// 九灵仙茗
+		/// </summary>
+		public static MedicineItem AvoidSpeedHigh7 => Instance[(short)260];
+
+		/// <summary>
+		/// 金蚕蜜饮
+		/// </summary>
+		public static MedicineItem AvoidSpeedHigh8 => Instance[(short)261];
+
+		/// <summary>
+		/// 十转尘心
+		/// </summary>
+		public static MedicineItem MortalHeart => Instance[(short)346];
+
+		/// <summary>
+		/// 活死药
+		/// </summary>
+		public static MedicineItem WalkingDead => Instance[(short)387];
+
+		/// <summary>
+		/// 无命奇毒
+		/// </summary>
+		public static MedicineItem LiaoWumingPoison => Instance[(short)388];
+
+		/// <summary>
+		/// 烈毒郁毒
+		/// </summary>
+		public static MedicineItem HotGloomy => Instance[(short)389];
+
+		/// <summary>
+		/// 烈毒赤毒
+		/// </summary>
+		public static MedicineItem HotRed => Instance[(short)390];
+
+		/// <summary>
+		/// 烈毒寒毒
+		/// </summary>
+		public static MedicineItem HotCold => Instance[(short)391];
+
+		/// <summary>
+		/// 烈毒腐毒
+		/// </summary>
+		public static MedicineItem HotRotten => Instance[(short)392];
+
+		/// <summary>
+		/// 烈毒幻毒
+		/// </summary>
+		public static MedicineItem HotIllusory => Instance[(short)393];
+
+		/// <summary>
+		/// 郁毒赤毒
+		/// </summary>
+		public static MedicineItem GloomyRed => Instance[(short)394];
+
+		/// <summary>
+		/// 郁毒寒毒
+		/// </summary>
+		public static MedicineItem GloomyCold => Instance[(short)395];
+
+		/// <summary>
+		/// 郁毒腐毒
+		/// </summary>
+		public static MedicineItem GloomyRotten => Instance[(short)396];
+
+		/// <summary>
+		/// 郁毒幻毒
+		/// </summary>
+		public static MedicineItem GloomyIllusory => Instance[(short)397];
+
+		/// <summary>
+		/// 赤毒寒毒
+		/// </summary>
+		public static MedicineItem RedCold => Instance[(short)398];
+
+		/// <summary>
+		/// 赤毒腐毒
+		/// </summary>
+		public static MedicineItem RedRotten => Instance[(short)399];
+
+		/// <summary>
+		/// 赤毒幻毒
+		/// </summary>
+		public static MedicineItem RedIllusory => Instance[(short)400];
+
+		/// <summary>
+		/// 寒毒腐毒
+		/// </summary>
+		public static MedicineItem ColdRotten => Instance[(short)401];
+
+		/// <summary>
+		/// 寒毒幻毒
+		/// </summary>
+		public static MedicineItem ColdIllusory => Instance[(short)402];
+
+		/// <summary>
+		/// 腐毒幻毒
+		/// </summary>
+		public static MedicineItem RottenIllusory => Instance[(short)403];
+
+		/// <summary>
+		/// 裂皮碎骨
+		/// </summary>
+		public static MedicineItem HotRedRotten => Instance[(short)404];
+
+		/// <summary>
+		/// 心残肉挫
+		/// </summary>
+		public static MedicineItem HotRottenIllusory => Instance[(short)405];
+
+		/// <summary>
+		/// 骨错筋缠
+		/// </summary>
+		public static MedicineItem HotRottenGloomy => Instance[(short)406];
+
+		/// <summary>
+		/// 肝肠寸断
+		/// </summary>
+		public static MedicineItem HotRottenCold => Instance[(short)407];
+
+		/// <summary>
+		/// 血迷关窍
+		/// </summary>
+		public static MedicineItem RedRottenIllusory => Instance[(short)408];
+
+		/// <summary>
+		/// 五脏败腐
+		/// </summary>
+		public static MedicineItem RedRottenGloomy => Instance[(short)409];
+
+		/// <summary>
+		/// 坏血断肠
+		/// </summary>
+		public static MedicineItem RedRottenCold => Instance[(short)410];
+
+		/// <summary>
+		/// 毒火焚心
+		/// </summary>
+		public static MedicineItem HotRedIllusory => Instance[(short)411];
+
+		/// <summary>
+		/// 骨中烧疽
+		/// </summary>
+		public static MedicineItem HotRedGloomy => Instance[(short)412];
+
+		/// <summary>
+		/// 血火阴杀
+		/// </summary>
+		public static MedicineItem HotRedCold => Instance[(short)413];
+
+		/// <summary>
+		/// 摧心蚀元
+		/// </summary>
+		public static MedicineItem GloomyColdIllusory => Instance[(short)414];
+
+		/// <summary>
+		/// 化骨封髓
+		/// </summary>
+		public static MedicineItem RottenGloomyCold => Instance[(short)415];
+
+		/// <summary>
+		/// 寒锥锁脉
+		/// </summary>
+		public static MedicineItem HotGloomyCold => Instance[(short)416];
+
+		/// <summary>
+		/// 锁血凝髓
+		/// </summary>
+		public static MedicineItem RedGloomyCold => Instance[(short)417];
+
+		/// <summary>
+		/// 邪阴彻体
+		/// </summary>
+		public static MedicineItem RottenColdIllusory => Instance[(short)418];
+
+		/// <summary>
+		/// 迷惧钻心
+		/// </summary>
+		public static MedicineItem HotColdIllusory => Instance[(short)419];
+
+		/// <summary>
+		/// 剧恶深苦
+		/// </summary>
+		public static MedicineItem RedColdIllusory => Instance[(short)420];
+
+		/// <summary>
+		/// 失魂鬼瘴
+		/// </summary>
+		public static MedicineItem RottenGloomyIllusory => Instance[(short)421];
+
+		/// <summary>
+		/// 绝脉乱心
+		/// </summary>
+		public static MedicineItem HotGloomyIllusory => Instance[(short)422];
+
+		/// <summary>
+		/// 封颅闭血
+		/// </summary>
+		public static MedicineItem RedGloomyIllusory => Instance[(short)423];
+
+		/// <summary>
+		/// 天劫符箓
+		/// </summary>
+		public static MedicineItem TianJieFuLu => Instance[(short)432];
+	}
+
+	/// <summary>
+	/// 配置表实例
+	/// </summary>
+	public static Medicine Instance = new Medicine();
+
+	private readonly HashSet<string> RequiredFields = new HashSet<string>
+	{
+		"Name", "ItemSubType", "GroupId", "Desc", "FunctionDesc", "SpecialEffectDesc", "SpecialEffectId", "ResourceType", "BreakBonusEffect", "TaskLock",
+		"CombatUseEffect", "CombatPrepareUseEffect", "TemplateId", "Grade", "Icon", "BaseWeight", "BaseHappinessChange", "DropRate", "SpecialEffectClass"
+	};
+
+	internal override int ToInt(short value)
+	{
+		return value;
+	}
+
+	internal override short ToTemplateId(int value)
+	{
+		return (short)value;
+	}
+
+	private void CreateItems0()
+	{
+		_dataArray.Add(new MedicineItem(0, LocalStringManager.GetConfig("Medicine_language", "Name_0"), 8, 801, 0, 0, "icon_Medicine_zhenyujiu", LocalStringManager.GetConfig("Medicine_language", "Desc_0"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_0"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_0"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 300, 3, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 1, 10, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(1, LocalStringManager.GetConfig("Medicine_language", "Name_1"), 8, 801, 1, 0, "icon_Medicine_shunbiwan", LocalStringManager.GetConfig("Medicine_language", "Desc_1"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_1"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_1"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 600, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 1, 20, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(2, LocalStringManager.GetConfig("Medicine_language", "Name_2"), 8, 801, 2, 0, "icon_Medicine_fengleiduopodan", LocalStringManager.GetConfig("Medicine_language", "Desc_2"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_2"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_2"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 900, 5, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 1, 30, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(3, LocalStringManager.GetConfig("Medicine_language", "Name_3"), 8, 801, 3, 0, "icon_Medicine_qianjiyao", LocalStringManager.GetConfig("Medicine_language", "Desc_3"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_3"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_3"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 1500, 6, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 2, 20, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(4, LocalStringManager.GetConfig("Medicine_language", "Name_4"), 8, 801, 4, 0, "icon_Medicine_baishamiejuesan", LocalStringManager.GetConfig("Medicine_language", "Desc_4"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_4"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_4"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 2100, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 2, 40, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(5, LocalStringManager.GetConfig("Medicine_language", "Name_5"), 8, 801, 5, 0, "icon_Medicine_longshadan", LocalStringManager.GetConfig("Medicine_language", "Desc_5"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_5"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_5"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 2700, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 2, 60, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(6, LocalStringManager.GetConfig("Medicine_language", "Name_6"), 8, 801, 6, 0, "icon_Medicine_weiwoduzunwan", LocalStringManager.GetConfig("Medicine_language", "Desc_6"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_6"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_6"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 3600, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 3, 40, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(7, LocalStringManager.GetConfig("Medicine_language", "Name_7"), 8, 801, 7, 0, "icon_Medicine_shisiyao", LocalStringManager.GetConfig("Medicine_language", "Desc_7"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_7"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_7"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 4500, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 3, 80, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(8, LocalStringManager.GetConfig("Medicine_language", "Name_8"), 8, 801, 8, 0, "icon_Medicine_duanchangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_8"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_8"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_8"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 5400, 8, allowRandomCreate: true, 5, isSpecial: false, 5, 36, canUseMultiple: true, 41, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonHotValue, 3, 120, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(9, LocalStringManager.GetConfig("Medicine_language", "Name_9"), 8, 801, 0, 9, "icon_Medicine_jiemaisan", LocalStringManager.GetConfig("Medicine_language", "Desc_9"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_9"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_9"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 300, 3, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 1, 10, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(10, LocalStringManager.GetConfig("Medicine_language", "Name_10"), 8, 801, 1, 9, "icon_Medicine_zhuozhangfen", LocalStringManager.GetConfig("Medicine_language", "Desc_10"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_10"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_10"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 600, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 1, 20, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(11, LocalStringManager.GetConfig("Medicine_language", "Name_11"), 8, 801, 2, 9, "icon_Medicine_wenrouxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_11"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_11"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_11"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 900, 5, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 1, 30, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(12, LocalStringManager.GetConfig("Medicine_language", "Name_12"), 8, 801, 3, 9, "icon_Medicine_xieyuansu", LocalStringManager.GetConfig("Medicine_language", "Desc_12"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_12"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_12"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 1500, 6, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 2, 20, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(13, LocalStringManager.GetConfig("Medicine_language", "Name_13"), 8, 801, 4, 9, "icon_Medicine_fulongshui", LocalStringManager.GetConfig("Medicine_language", "Desc_13"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_13"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_13"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 2100, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 2, 40, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(14, LocalStringManager.GetConfig("Medicine_language", "Name_14"), 8, 801, 5, 9, "icon_Medicine_sangongshihuasan", LocalStringManager.GetConfig("Medicine_language", "Desc_14"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_14"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_14"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 2700, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 2, 60, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(15, LocalStringManager.GetConfig("Medicine_language", "Name_15"), 8, 801, 6, 9, "icon_Medicine_baoxiangsi", LocalStringManager.GetConfig("Medicine_language", "Desc_15"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_15"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_15"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 3600, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 3, 40, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(16, LocalStringManager.GetConfig("Medicine_language", "Name_16"), 8, 801, 7, 9, "icon_Medicine_yushouhuagongsan", LocalStringManager.GetConfig("Medicine_language", "Desc_16"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_16"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_16"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 4500, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 3, 80, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(17, LocalStringManager.GetConfig("Medicine_language", "Name_17"), 8, 801, 8, 9, "icon_Medicine_xieqiaoxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_17"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_17"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_17"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 5400, 8, allowRandomCreate: true, 5, isSpecial: false, 5, 36, canUseMultiple: true, 42, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonGloomyValue, 3, 120, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(18, LocalStringManager.GetConfig("Medicine_language", "Name_18"), 8, 801, 0, 18, "icon_Medicine_ehanfen", LocalStringManager.GetConfig("Medicine_language", "Desc_18"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_18"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_18"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 300, 3, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 1, 10, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(19, LocalStringManager.GetConfig("Medicine_language", "Name_19"), 8, 801, 1, 18, "icon_Medicine_hanxuebaiwan", LocalStringManager.GetConfig("Medicine_language", "Desc_19"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_19"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_19"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 600, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 1, 20, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(20, LocalStringManager.GetConfig("Medicine_language", "Name_20"), 8, 801, 2, 18, "icon_Medicine_lingyinsan", LocalStringManager.GetConfig("Medicine_language", "Desc_20"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_20"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_20"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 900, 5, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 1, 30, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(21, LocalStringManager.GetConfig("Medicine_language", "Name_21"), 8, 801, 3, 18, "icon_Medicine_linglongbingjing", LocalStringManager.GetConfig("Medicine_language", "Desc_21"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_21"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_21"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 1500, 6, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 2, 20, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(22, LocalStringManager.GetConfig("Medicine_language", "Name_22"), 8, 801, 4, 18, "icon_Medicine_jiuyinsan", LocalStringManager.GetConfig("Medicine_language", "Desc_22"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_22"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_22"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 2100, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 2, 40, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(23, LocalStringManager.GetConfig("Medicine_language", "Name_23"), 8, 801, 5, 18, "icon_Medicine_taiyinwudusan", LocalStringManager.GetConfig("Medicine_language", "Desc_23"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_23"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_23"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 2700, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 2, 60, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(24, LocalStringManager.GetConfig("Medicine_language", "Name_24"), 8, 801, 6, 18, "icon_Medicine_qihanjueyangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_24"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_24"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_24"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 3600, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 3, 40, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(25, LocalStringManager.GetConfig("Medicine_language", "Name_25"), 8, 801, 7, 18, "icon_Medicine_xuanmingshuang", LocalStringManager.GetConfig("Medicine_language", "Desc_25"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_25"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_25"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 4500, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 3, 80, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(26, LocalStringManager.GetConfig("Medicine_language", "Name_26"), 8, 801, 8, 18, "icon_Medicine_bingcanhanpodan", LocalStringManager.GetConfig("Medicine_language", "Desc_26"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_26"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_26"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 5400, 8, allowRandomCreate: true, 5, isSpecial: false, 5, 36, canUseMultiple: true, 44, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonColdValue, 3, 120, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(27, LocalStringManager.GetConfig("Medicine_language", "Name_27"), 8, 801, 0, 27, "icon_Medicine_hedinghong", LocalStringManager.GetConfig("Medicine_language", "Desc_27"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_27"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_27"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 300, 3, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 1, 10, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(28, LocalStringManager.GetConfig("Medicine_language", "Name_28"), 8, 801, 1, 27, "icon_Medicine_luochafen", LocalStringManager.GetConfig("Medicine_language", "Desc_28"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_28"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_28"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 600, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 1, 20, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(29, LocalStringManager.GetConfig("Medicine_language", "Name_29"), 8, 801, 2, 27, "icon_Medicine_shengtianhongwan", LocalStringManager.GetConfig("Medicine_language", "Desc_29"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_29"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_29"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 900, 5, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 1, 30, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(30, LocalStringManager.GetConfig("Medicine_language", "Name_30"), 8, 801, 3, 27, "icon_Medicine_yankuisan", LocalStringManager.GetConfig("Medicine_language", "Desc_30"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_30"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_30"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 1500, 6, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 2, 20, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(31, LocalStringManager.GetConfig("Medicine_language", "Name_31"), 8, 801, 4, 27, "icon_Medicine_qixueyin", LocalStringManager.GetConfig("Medicine_language", "Desc_31"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_31"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_31"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 2100, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 2, 40, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(32, LocalStringManager.GetConfig("Medicine_language", "Name_32"), 8, 801, 5, 27, "icon_Medicine_huojiejindan", LocalStringManager.GetConfig("Medicine_language", "Desc_32"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_32"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_32"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 2700, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 2, 60, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(33, LocalStringManager.GetConfig("Medicine_language", "Name_33"), 8, 801, 6, 27, "icon_Medicine_longquedan", LocalStringManager.GetConfig("Medicine_language", "Desc_33"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_33"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_33"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 3600, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 3, 40, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(34, LocalStringManager.GetConfig("Medicine_language", "Name_34"), 8, 801, 7, 27, "icon_Medicine_hongyuxueluoyi", LocalStringManager.GetConfig("Medicine_language", "Desc_34"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_34"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_34"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 4500, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 3, 80, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(35, LocalStringManager.GetConfig("Medicine_language", "Name_35"), 8, 801, 8, 27, "icon_Medicine_xuetongyao", LocalStringManager.GetConfig("Medicine_language", "Desc_35"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_35"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_35"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 5400, 8, allowRandomCreate: true, 5, isSpecial: false, 5, 36, canUseMultiple: true, 43, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRedValue, 3, 120, 6, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(36, LocalStringManager.GetConfig("Medicine_language", "Name_36"), 8, 801, 0, 36, "icon_Medicine_huashishui", LocalStringManager.GetConfig("Medicine_language", "Desc_36"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_36"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_36"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 300, 3, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 1, 10, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(37, LocalStringManager.GetConfig("Medicine_language", "Name_37"), 8, 801, 1, 36, "icon_Medicine_fushendu", LocalStringManager.GetConfig("Medicine_language", "Desc_37"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_37"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_37"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 600, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 1, 20, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(38, LocalStringManager.GetConfig("Medicine_language", "Name_38"), 8, 801, 2, 36, "icon_Medicine_lianshiwuwensan", LocalStringManager.GetConfig("Medicine_language", "Desc_38"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_38"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_38"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 900, 5, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 1, 30, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(39, LocalStringManager.GetConfig("Medicine_language", "Name_39"), 8, 801, 3, 36, "icon_Medicine_sheguixiaojinsan", LocalStringManager.GetConfig("Medicine_language", "Desc_39"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_39"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_39"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 1500, 6, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 2, 20, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(40, LocalStringManager.GetConfig("Medicine_language", "Name_40"), 8, 801, 4, 36, "icon_Medicine_huagushisuifen", LocalStringManager.GetConfig("Medicine_language", "Desc_40"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_40"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_40"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 2100, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 2, 40, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(41, LocalStringManager.GetConfig("Medicine_language", "Name_41"), 8, 801, 5, 36, "icon_Medicine_guiwangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_41"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_41"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_41"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 2700, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 2, 60, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(42, LocalStringManager.GetConfig("Medicine_language", "Name_42"), 8, 801, 6, 36, "icon_Medicine_huaxuebaiyuanshui", LocalStringManager.GetConfig("Medicine_language", "Desc_42"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_42"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_42"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 3600, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 3, 40, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(43, LocalStringManager.GetConfig("Medicine_language", "Name_43"), 8, 801, 7, 36, "icon_Medicine_cungucunshidan", LocalStringManager.GetConfig("Medicine_language", "Desc_43"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_43"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_43"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 4500, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 3, 80, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(44, LocalStringManager.GetConfig("Medicine_language", "Name_44"), 8, 801, 8, 36, "icon_Medicine_qingzhuguwan", LocalStringManager.GetConfig("Medicine_language", "Desc_44"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_44"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_44"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 5400, 8, allowRandomCreate: true, 5, isSpecial: false, 5, 36, canUseMultiple: true, 45, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonRottenValue, 3, 120, 5, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(45, LocalStringManager.GetConfig("Medicine_language", "Name_45"), 8, 801, 0, 45, "icon_Medicine_xinshuaisan", LocalStringManager.GetConfig("Medicine_language", "Desc_45"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_45"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_45"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 300, 3, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 1, 10, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(46, LocalStringManager.GetConfig("Medicine_language", "Name_46"), 8, 801, 1, 45, "icon_Medicine_xiaohunxiangwan", LocalStringManager.GetConfig("Medicine_language", "Desc_46"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_46"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_46"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 600, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 1, 20, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(47, LocalStringManager.GetConfig("Medicine_language", "Name_47"), 8, 801, 2, 45, "icon_Medicine_huanxisanghunxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_47"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_47"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_47"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 900, 5, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 1, 30, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(48, LocalStringManager.GetConfig("Medicine_language", "Name_48"), 8, 801, 3, 45, "icon_Medicine_shenjiefen", LocalStringManager.GetConfig("Medicine_language", "Desc_48"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_48"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_48"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 1500, 6, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 2, 20, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(49, LocalStringManager.GetConfig("Medicine_language", "Name_49"), 8, 801, 4, 45, "icon_Medicine_hudiemixianxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_49"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_49"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_49"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 2100, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 2, 40, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(50, LocalStringManager.GetConfig("Medicine_language", "Name_50"), 8, 801, 5, 45, "icon_Medicine_jiuchisan", LocalStringManager.GetConfig("Medicine_language", "Desc_50"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_50"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_50"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 2700, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 2, 60, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(51, LocalStringManager.GetConfig("Medicine_language", "Name_51"), 8, 801, 6, 45, "icon_Medicine_linlanghuanshendan", LocalStringManager.GetConfig("Medicine_language", "Desc_51"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_51"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_51"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 3600, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 3, 40, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(52, LocalStringManager.GetConfig("Medicine_language", "Name_52"), 8, 801, 7, 45, "icon_Medicine_zuishengmengsi", LocalStringManager.GetConfig("Medicine_language", "Desc_52"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_52"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_52"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 4500, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 3, 80, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(53, LocalStringManager.GetConfig("Medicine_language", "Name_53"), 8, 801, 8, 45, "icon_Medicine_qiannianmei", LocalStringManager.GetConfig("Medicine_language", "Desc_53"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_53"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_53"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 5400, 8, allowRandomCreate: true, 5, isSpecial: false, 5, 36, canUseMultiple: true, 46, new List<int>(), 1, EMedicineEffectType.ApplyPoison, EMedicineEffectSubType.ApplyPoisonIllusoryValue, 3, 120, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 3, 60, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(54, LocalStringManager.GetConfig("Medicine_language", "Name_54"), 8, 800, 0, 54, "icon_Medicine_zhixuesan", LocalStringManager.GetConfig("Medicine_language", "Desc_54"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_54"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_54"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 16, new List<int>(), 1, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 3, 1, 0, 1, -1, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(55, LocalStringManager.GetConfig("Medicine_language", "Name_55"), 8, 800, 1, 54, "icon_Medicine_dahuoxuedan", LocalStringManager.GetConfig("Medicine_language", "Desc_55"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_55"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_55"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 16, new List<int>(), 1, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 3, 1, 0, 2, -1, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(56, LocalStringManager.GetConfig("Medicine_language", "Name_56"), 8, 800, 2, 54, "icon_Medicine_jiuniugumingdan", LocalStringManager.GetConfig("Medicine_language", "Desc_56"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_56"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_56"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 16, new List<int>(), 1, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 4, 1, 0, 1, -1, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(57, LocalStringManager.GetConfig("Medicine_language", "Name_57"), 8, 800, 3, 54, "icon_Medicine_tianzhufoyao", LocalStringManager.GetConfig("Medicine_language", "Desc_57"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_57"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_57"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 16, new List<int>(), 1, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 4, 1, 0, 2, -1, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(58, LocalStringManager.GetConfig("Medicine_language", "Name_58"), 8, 800, 4, 54, "icon_Medicine_tianwangbuxindan", LocalStringManager.GetConfig("Medicine_language", "Desc_58"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_58"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_58"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 16, new List<int>(), 1, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 5, 1, 0, 1, -1, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(59, LocalStringManager.GetConfig("Medicine_language", "Name_59"), 8, 800, 5, 54, "icon_Medicine_jinxianhuomingsan", LocalStringManager.GetConfig("Medicine_language", "Desc_59"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_59"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_59"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 16, new List<int>(), 1, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 5, 1, 0, 2, -1, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+	}
+
+	private void CreateItems1()
+	{
+		_dataArray.Add(new MedicineItem(60, LocalStringManager.GetConfig("Medicine_language", "Name_60"), 8, 800, 3, 60, "icon_Medicine_jinchuangyao", LocalStringManager.GetConfig("Medicine_language", "Desc_60"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_60"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_60"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: false, 16, new List<int>(), 0, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 3, 3, 0, 1, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(61, LocalStringManager.GetConfig("Medicine_language", "Name_61"), 8, 800, 4, 60, "icon_Medicine_xugugao", LocalStringManager.GetConfig("Medicine_language", "Desc_61"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_61"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_61"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: false, 16, new List<int>(), 0, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 4, 4, 0, 1, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(62, LocalStringManager.GetConfig("Medicine_language", "Name_62"), 8, 800, 5, 60, "icon_Medicine_duanxumianjiao", LocalStringManager.GetConfig("Medicine_language", "Desc_62"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_62"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_62"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: false, 16, new List<int>(), 0, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 5, 5, 0, 1, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(63, LocalStringManager.GetConfig("Medicine_language", "Name_63"), 8, 800, 6, 60, "icon_Medicine_shenmuxuminggao", LocalStringManager.GetConfig("Medicine_language", "Desc_63"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_63"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_63"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: false, 16, new List<int>(), 0, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 6, 6, 0, 1, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(64, LocalStringManager.GetConfig("Medicine_language", "Name_64"), 8, 800, 7, 60, "icon_Medicine_busiyao", LocalStringManager.GetConfig("Medicine_language", "Desc_64"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_64"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_64"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: false, 16, new List<int>(), 0, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 6, 6, 0, 2, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(65, LocalStringManager.GetConfig("Medicine_language", "Name_65"), 8, 800, 8, 60, "icon_Medicine_jiuzhuanzhiwangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_65"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_65"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_65"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: false, 16, new List<int>(), 0, EMedicineEffectType.RecoverOuterInjury, EMedicineEffectSubType.RandomRecoverOuterInjury, 6, 6, 0, 3, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(66, LocalStringManager.GetConfig("Medicine_language", "Name_66"), 8, 800, 0, 66, "icon_Medicine_shedanhuoluowan", LocalStringManager.GetConfig("Medicine_language", "Desc_66"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_66"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_66"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 17, new List<int>(), 1, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 3, 1, 0, 1, -1, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(67, LocalStringManager.GetConfig("Medicine_language", "Name_67"), 8, 800, 1, 66, "icon_Medicine_fanqitang", LocalStringManager.GetConfig("Medicine_language", "Desc_67"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_67"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_67"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 17, new List<int>(), 1, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 3, 1, 0, 2, -1, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(68, LocalStringManager.GetConfig("Medicine_language", "Name_68"), 8, 800, 2, 66, "icon_Medicine_dachengqisan", LocalStringManager.GetConfig("Medicine_language", "Desc_68"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_68"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_68"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 17, new List<int>(), 1, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 4, 1, 0, 1, -1, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(69, LocalStringManager.GetConfig("Medicine_language", "Name_69"), 8, 800, 3, 66, "icon_Medicine_zijinwuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_69"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_69"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_69"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 17, new List<int>(), 1, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 4, 1, 0, 2, -1, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(70, LocalStringManager.GetConfig("Medicine_language", "Name_70"), 8, 800, 4, 66, "icon_Medicine_tianxiandiaoyuansan", LocalStringManager.GetConfig("Medicine_language", "Desc_70"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_70"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_70"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 17, new List<int>(), 1, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 5, 1, 0, 1, -1, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(71, LocalStringManager.GetConfig("Medicine_language", "Name_71"), 8, 800, 5, 66, "icon_Medicine_ziyuwangcansan", LocalStringManager.GetConfig("Medicine_language", "Desc_71"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_71"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_71"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 17, new List<int>(), 1, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 5, 1, 0, 2, -1, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(72, LocalStringManager.GetConfig("Medicine_language", "Name_72"), 8, 800, 3, 72, "icon_Medicine_renshenshunqiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_72"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_72"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_72"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: false, 17, new List<int>(), 0, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 3, 3, 0, 1, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(73, LocalStringManager.GetConfig("Medicine_language", "Name_73"), 8, 800, 4, 72, "icon_Medicine_tongluoxiangwan", LocalStringManager.GetConfig("Medicine_language", "Desc_73"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_73"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_73"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: false, 17, new List<int>(), 0, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 4, 4, 0, 1, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(74, LocalStringManager.GetConfig("Medicine_language", "Name_74"), 8, 800, 5, 72, "icon_Medicine_ziwushengmaiwan", LocalStringManager.GetConfig("Medicine_language", "Desc_74"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_74"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_74"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: false, 17, new List<int>(), 0, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 5, 5, 0, 1, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(75, LocalStringManager.GetConfig("Medicine_language", "Name_75"), 8, 800, 6, 72, "icon_Medicine_jiuxiangyin", LocalStringManager.GetConfig("Medicine_language", "Desc_75"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_75"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_75"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: false, 17, new List<int>(), 0, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 6, 6, 0, 1, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(76, LocalStringManager.GetConfig("Medicine_language", "Name_76"), 8, 800, 7, 72, "icon_Medicine_heiyushensuidan", LocalStringManager.GetConfig("Medicine_language", "Desc_76"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_76"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_76"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: false, 17, new List<int>(), 0, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 6, 6, 0, 2, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(77, LocalStringManager.GetConfig("Medicine_language", "Name_77"), 8, 800, 8, 72, "icon_Medicine_shuanglixuecanwan", LocalStringManager.GetConfig("Medicine_language", "Desc_77"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_77"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_77"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: false, 17, new List<int>(), 0, EMedicineEffectType.RecoverInnerInjury, EMedicineEffectSubType.RandomRecoverInnerInjury, 6, 6, 0, 3, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(78, LocalStringManager.GetConfig("Medicine_language", "Name_78"), 8, 1207, 8, -1, "icon_Medicine_bailujiao", LocalStringManager.GetConfig("Medicine_language", "Desc_78"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_78"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_78"), -1, transferable: false, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 20, 20500, 6, 9, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 5, -1, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(79, LocalStringManager.GetConfig("Medicine_language", "Name_79"), 8, 1207, 8, -1, "icon_Medicine_shizunyigu", LocalStringManager.GetConfig("Medicine_language", "Desc_79"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_79"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_79"), -1, transferable: false, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 30, 20500, 6, 9, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 5, -1, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(80, LocalStringManager.GetConfig("Medicine_language", "Name_80"), 8, 1207, 8, -1, "icon_Medicine_wanhualingfu", LocalStringManager.GetConfig("Medicine_language", "Desc_80"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_80"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_80"), -1, transferable: false, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 20500, 6, 9, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 5, -1, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(81, LocalStringManager.GetConfig("Medicine_language", "Name_81"), 8, 1207, 8, -1, "icon_Medicine_chixiewangzhu", LocalStringManager.GetConfig("Medicine_language", "Desc_81"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_81"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_81"), -1, transferable: false, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 20, 20500, 6, 9, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 5, -1, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(82, LocalStringManager.GetConfig("Medicine_language", "Name_82"), 8, 800, 0, 82, "icon_Medicine_wusheyuqisan", LocalStringManager.GetConfig("Medicine_language", "Desc_82"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_82"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_82"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 1, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 1600, 0, 0, -1, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(83, LocalStringManager.GetConfig("Medicine_language", "Name_83"), 8, 800, 1, 82, "icon_Medicine_tongxinwuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_83"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_83"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_83"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 1, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 2000, 0, 0, -1, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(84, LocalStringManager.GetConfig("Medicine_language", "Name_84"), 8, 800, 2, 82, "icon_Medicine_jiuxuandan", LocalStringManager.GetConfig("Medicine_language", "Desc_84"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_84"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_84"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 1, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 2400, 0, 0, -1, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(85, LocalStringManager.GetConfig("Medicine_language", "Name_85"), 8, 800, 3, 82, "icon_Medicine_xiaohaidan", LocalStringManager.GetConfig("Medicine_language", "Desc_85"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_85"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_85"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 1, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 2800, 0, 0, -1, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(86, LocalStringManager.GetConfig("Medicine_language", "Name_86"), 8, 800, 4, 82, "icon_Medicine_dahaidan", LocalStringManager.GetConfig("Medicine_language", "Desc_86"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_86"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_86"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 1, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 3200, 0, 0, -1, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(87, LocalStringManager.GetConfig("Medicine_language", "Name_87"), 8, 800, 5, 82, "icon_Medicine_longhezaohuadan", LocalStringManager.GetConfig("Medicine_language", "Desc_87"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_87"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_87"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 1, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 3600, 0, 0, -1, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(88, LocalStringManager.GetConfig("Medicine_language", "Name_88"), 8, 800, 3, 88, "icon_Medicine_fengwanglu", LocalStringManager.GetConfig("Medicine_language", "Desc_88"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_88"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_88"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 0, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 2800, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(89, LocalStringManager.GetConfig("Medicine_language", "Name_89"), 8, 800, 4, 88, "icon_Medicine_xueluganwan", LocalStringManager.GetConfig("Medicine_language", "Desc_89"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_89"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_89"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 0, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 3200, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(90, LocalStringManager.GetConfig("Medicine_language", "Name_90"), 8, 800, 5, 88, "icon_Medicine_baiyundianxiadan", LocalStringManager.GetConfig("Medicine_language", "Desc_90"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_90"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_90"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 0, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 3600, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(91, LocalStringManager.GetConfig("Medicine_language", "Name_91"), 8, 800, 6, 88, "icon_Medicine_zhibaohaidan", LocalStringManager.GetConfig("Medicine_language", "Desc_91"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_91"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_91"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 0, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 4400, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(92, LocalStringManager.GetConfig("Medicine_language", "Name_92"), 8, 800, 7, 88, "icon_Medicine_yugushuangxindan", LocalStringManager.GetConfig("Medicine_language", "Desc_92"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_92"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_92"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 0, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 5600, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(93, LocalStringManager.GetConfig("Medicine_language", "Name_93"), 8, 800, 8, 88, "icon_Medicine_tianshanxuelianlu", LocalStringManager.GetConfig("Medicine_language", "Desc_93"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_93"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_93"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 19, new List<int>(), 0, EMedicineEffectType.ChangeDisorderOfQi, EMedicineEffectSubType.ChangeDisorderOfQiValue, 0, 7200, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(94, LocalStringManager.GetConfig("Medicine_language", "Name_94"), 8, 800, 0, 94, "icon_Medicine_zhenzhurunxinsan", LocalStringManager.GetConfig("Medicine_language", "Desc_94"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_94"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_94"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 1, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 20, 0, 0, -1, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(95, LocalStringManager.GetConfig("Medicine_language", "Name_95"), 8, 800, 1, 94, "icon_Medicine_qingyuansan", LocalStringManager.GetConfig("Medicine_language", "Desc_95"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_95"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_95"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 1, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 25, 0, 0, -1, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(96, LocalStringManager.GetConfig("Medicine_language", "Name_96"), 8, 800, 2, 94, "icon_Medicine_wuhouxingjunsan", LocalStringManager.GetConfig("Medicine_language", "Desc_96"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_96"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_96"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 1, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 30, 0, 0, -1, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(97, LocalStringManager.GetConfig("Medicine_language", "Name_97"), 8, 800, 3, 94, "icon_Medicine_yushuxuanjingsan", LocalStringManager.GetConfig("Medicine_language", "Desc_97"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_97"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_97"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 1, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 35, 0, 0, -1, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(98, LocalStringManager.GetConfig("Medicine_language", "Name_98"), 8, 800, 4, 94, "icon_Medicine_dazhixiang", LocalStringManager.GetConfig("Medicine_language", "Desc_98"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_98"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_98"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 1, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 40, 0, 0, -1, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(99, LocalStringManager.GetConfig("Medicine_language", "Name_99"), 8, 800, 5, 94, "icon_Medicine_moqiansui", LocalStringManager.GetConfig("Medicine_language", "Desc_99"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_99"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_99"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 1, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 45, 0, 0, -1, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(100, LocalStringManager.GetConfig("Medicine_language", "Name_100"), 8, 800, 3, 100, "icon_Medicine_xuehayishengtang", LocalStringManager.GetConfig("Medicine_language", "Desc_100"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_100"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_100"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 0, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 35, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(101, LocalStringManager.GetConfig("Medicine_language", "Name_101"), 8, 800, 4, 100, "icon_Medicine_bigudan", LocalStringManager.GetConfig("Medicine_language", "Desc_101"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_101"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_101"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 0, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 40, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(102, LocalStringManager.GetConfig("Medicine_language", "Name_102"), 8, 800, 5, 100, "icon_Medicine_tianzhenyanshousan", LocalStringManager.GetConfig("Medicine_language", "Desc_102"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_102"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_102"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 0, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 45, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(103, LocalStringManager.GetConfig("Medicine_language", "Name_103"), 8, 800, 6, 100, "icon_Medicine_shiquandabuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_103"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_103"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_103"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 0, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 55, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(104, LocalStringManager.GetConfig("Medicine_language", "Name_104"), 8, 800, 7, 100, "icon_Medicine_fanlaohuantongdan", LocalStringManager.GetConfig("Medicine_language", "Desc_104"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_104"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_104"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 0, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 70, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(105, LocalStringManager.GetConfig("Medicine_language", "Name_105"), 8, 800, 8, 100, "icon_Medicine_qiannianshouwugao", LocalStringManager.GetConfig("Medicine_language", "Desc_105"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_105"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_105"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 20, new List<int>(), 0, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 90, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(106, LocalStringManager.GetConfig("Medicine_language", "Name_106"), 8, 800, 0, 106, "icon_Medicine_qianhuasan", LocalStringManager.GetConfig("Medicine_language", "Desc_106"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_106"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_106"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(107, LocalStringManager.GetConfig("Medicine_language", "Name_107"), 8, 800, 1, 106, "icon_Medicine_dilingdan", LocalStringManager.GetConfig("Medicine_language", "Desc_107"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_107"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_107"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 25, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(108, LocalStringManager.GetConfig("Medicine_language", "Name_108"), 8, 800, 2, 106, "icon_Medicine_nayuanguigucha", LocalStringManager.GetConfig("Medicine_language", "Desc_108"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_108"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_108"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(109, LocalStringManager.GetConfig("Medicine_language", "Name_109"), 8, 800, 3, 106, "icon_Medicine_bakubanandan", LocalStringManager.GetConfig("Medicine_language", "Desc_109"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_109"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_109"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(110, LocalStringManager.GetConfig("Medicine_language", "Name_110"), 8, 800, 4, 106, "icon_Medicine_guiyuebaiwan", LocalStringManager.GetConfig("Medicine_language", "Desc_110"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_110"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_110"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 55, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(111, LocalStringManager.GetConfig("Medicine_language", "Name_111"), 8, 800, 5, 106, "icon_Medicine_yinchanwugao", LocalStringManager.GetConfig("Medicine_language", "Desc_111"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_111"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_111"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(112, LocalStringManager.GetConfig("Medicine_language", "Name_112"), 8, 800, 3, 112, "icon_Medicine_zhuguolu", LocalStringManager.GetConfig("Medicine_language", "Desc_112"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_112"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_112"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(113, LocalStringManager.GetConfig("Medicine_language", "Name_113"), 8, 800, 4, 112, "icon_Medicine_peiyuanyin", LocalStringManager.GetConfig("Medicine_language", "Desc_113"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_113"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_113"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(114, LocalStringManager.GetConfig("Medicine_language", "Name_114"), 8, 800, 5, 112, "icon_Medicine_babaoqizhensan", LocalStringManager.GetConfig("Medicine_language", "Desc_114"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_114"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_114"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(115, LocalStringManager.GetConfig("Medicine_language", "Name_115"), 8, 800, 6, 112, "icon_Medicine_qionglingjintaisan", LocalStringManager.GetConfig("Medicine_language", "Desc_115"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_115"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_115"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(116, LocalStringManager.GetConfig("Medicine_language", "Name_116"), 8, 800, 7, 112, "icon_Medicine_xianfangqiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_116"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_116"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_116"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 18, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(117, LocalStringManager.GetConfig("Medicine_language", "Name_117"), 8, 800, 8, 112, "icon_Medicine_tumingxianhuayin", LocalStringManager.GetConfig("Medicine_language", "Desc_117"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_117"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_117"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 25, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(118, LocalStringManager.GetConfig("Medicine_language", "Name_118"), 8, 800, 0, 118, "icon_Medicine_xihuangzhuangqidan", LocalStringManager.GetConfig("Medicine_language", "Desc_118"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_118"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_118"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(119, LocalStringManager.GetConfig("Medicine_language", "Name_119"), 8, 800, 1, 118, "icon_Medicine_peirandan", LocalStringManager.GetConfig("Medicine_language", "Desc_119"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_119"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_119"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+	}
+
+	private void CreateItems2()
+	{
+		_dataArray.Add(new MedicineItem(120, LocalStringManager.GetConfig("Medicine_language", "Name_120"), 8, 800, 2, 118, "icon_Medicine_qinghuangsanbaowan", LocalStringManager.GetConfig("Medicine_language", "Desc_120"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_120"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_120"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(121, LocalStringManager.GetConfig("Medicine_language", "Name_121"), 8, 800, 3, 118, "icon_Medicine_qingdidan", LocalStringManager.GetConfig("Medicine_language", "Desc_121"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_121"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_121"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(122, LocalStringManager.GetConfig("Medicine_language", "Name_122"), 8, 800, 4, 118, "icon_Medicine_longsuiyungongsan", LocalStringManager.GetConfig("Medicine_language", "Desc_122"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_122"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_122"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(123, LocalStringManager.GetConfig("Medicine_language", "Name_123"), 8, 800, 5, 118, "icon_Medicine_tiansheqixindan", LocalStringManager.GetConfig("Medicine_language", "Desc_123"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_123"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_123"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(124, LocalStringManager.GetConfig("Medicine_language", "Name_124"), 8, 800, 3, 124, "icon_Medicine_bishuangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_124"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_124"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_124"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(125, LocalStringManager.GetConfig("Medicine_language", "Name_125"), 8, 800, 4, 124, "icon_Medicine_cuiyindan", LocalStringManager.GetConfig("Medicine_language", "Desc_125"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_125"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_125"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(126, LocalStringManager.GetConfig("Medicine_language", "Name_126"), 8, 800, 5, 124, "icon_Medicine_bailianqigongsan", LocalStringManager.GetConfig("Medicine_language", "Desc_126"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_126"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_126"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(127, LocalStringManager.GetConfig("Medicine_language", "Name_127"), 8, 800, 6, 124, "icon_Medicine_luohanfumodan", LocalStringManager.GetConfig("Medicine_language", "Desc_127"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_127"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_127"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(128, LocalStringManager.GetConfig("Medicine_language", "Name_128"), 8, 800, 7, 124, "icon_Medicine_lingxiaoshenhesan", LocalStringManager.GetConfig("Medicine_language", "Desc_128"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_128"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_128"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(129, LocalStringManager.GetConfig("Medicine_language", "Name_129"), 8, 800, 8, 124, "icon_Medicine_foguangshelidan", LocalStringManager.GetConfig("Medicine_language", "Desc_129"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_129"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_129"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(130, LocalStringManager.GetConfig("Medicine_language", "Name_130"), 8, 800, 0, 130, "icon_Medicine_quduxiangwan", LocalStringManager.GetConfig("Medicine_language", "Desc_130"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_130"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_130"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 2, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 20, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(131, LocalStringManager.GetConfig("Medicine_language", "Name_131"), 8, 800, 1, 130, "icon_Medicine_wuxiangbiduyin", LocalStringManager.GetConfig("Medicine_language", "Desc_131"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_131"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_131"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 2, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 30, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(132, LocalStringManager.GetConfig("Medicine_language", "Name_132"), 8, 800, 2, 130, "icon_Medicine_huangpaodan", LocalStringManager.GetConfig("Medicine_language", "Desc_132"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_132"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_132"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 2, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 45, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(133, LocalStringManager.GetConfig("Medicine_language", "Name_133"), 8, 800, 3, 130, "icon_Medicine_huadutianjiang", LocalStringManager.GetConfig("Medicine_language", "Desc_133"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_133"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_133"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 3, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 60, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(134, LocalStringManager.GetConfig("Medicine_language", "Name_134"), 8, 800, 4, 130, "icon_Medicine_shangzunjindan", LocalStringManager.GetConfig("Medicine_language", "Desc_134"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_134"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_134"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 3, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 90, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(135, LocalStringManager.GetConfig("Medicine_language", "Name_135"), 8, 800, 5, 130, "icon_Medicine_jinmuhuanhundan", LocalStringManager.GetConfig("Medicine_language", "Desc_135"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_135"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_135"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 3, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 120, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(136, LocalStringManager.GetConfig("Medicine_language", "Name_136"), 8, 800, 3, 136, "icon_Medicine_xihuangsandugao", LocalStringManager.GetConfig("Medicine_language", "Desc_136"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_136"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_136"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 2, 50, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(137, LocalStringManager.GetConfig("Medicine_language", "Name_137"), 8, 800, 4, 136, "icon_Medicine_jindanwan", LocalStringManager.GetConfig("Medicine_language", "Desc_137"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_137"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_137"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 2, 70, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(138, LocalStringManager.GetConfig("Medicine_language", "Name_138"), 8, 800, 5, 136, "icon_Medicine_tiangangshijiesan", LocalStringManager.GetConfig("Medicine_language", "Desc_138"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_138"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_138"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 2, 100, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(139, LocalStringManager.GetConfig("Medicine_language", "Name_139"), 8, 800, 6, 136, "icon_Medicine_wulongzhenyuandan", LocalStringManager.GetConfig("Medicine_language", "Desc_139"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_139"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_139"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 3, 50, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(140, LocalStringManager.GetConfig("Medicine_language", "Name_140"), 8, 800, 7, 136, "icon_Medicine_huitianfanyuandan", LocalStringManager.GetConfig("Medicine_language", "Desc_140"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_140"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_140"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 3, 70, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(141, LocalStringManager.GetConfig("Medicine_language", "Name_141"), 8, 800, 8, 136, "icon_Medicine_tiansheshidudan", LocalStringManager.GetConfig("Medicine_language", "Desc_141"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_141"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_141"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonHotPercentage, 3, 100, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(142, LocalStringManager.GetConfig("Medicine_language", "Name_142"), 8, 800, 0, 142, "icon_Medicine_suhexiangwan", LocalStringManager.GetConfig("Medicine_language", "Desc_142"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_142"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_142"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 2, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 20, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(143, LocalStringManager.GetConfig("Medicine_language", "Name_143"), 8, 800, 1, 142, "icon_Medicine_liuyuntongmaisan", LocalStringManager.GetConfig("Medicine_language", "Desc_143"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_143"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_143"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 2, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 30, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(144, LocalStringManager.GetConfig("Medicine_language", "Name_144"), 8, 800, 2, 142, "icon_Medicine_anxixiang", LocalStringManager.GetConfig("Medicine_language", "Desc_144"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_144"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_144"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 2, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 45, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(145, LocalStringManager.GetConfig("Medicine_language", "Name_145"), 8, 800, 3, 142, "icon_Medicine_pihuijiangqiwan", LocalStringManager.GetConfig("Medicine_language", "Desc_145"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_145"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_145"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 3, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 60, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(146, LocalStringManager.GetConfig("Medicine_language", "Name_146"), 8, 800, 4, 142, "icon_Medicine_chengtiansan", LocalStringManager.GetConfig("Medicine_language", "Desc_146"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_146"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_146"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 3, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 90, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(147, LocalStringManager.GetConfig("Medicine_language", "Name_147"), 8, 800, 5, 142, "icon_Medicine_yaochitoushenxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_147"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_147"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_147"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 3, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 120, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(148, LocalStringManager.GetConfig("Medicine_language", "Name_148"), 8, 800, 3, 148, "icon_Medicine_baishezhengqisan", LocalStringManager.GetConfig("Medicine_language", "Desc_148"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_148"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_148"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 2, 50, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(149, LocalStringManager.GetConfig("Medicine_language", "Name_149"), 8, 800, 4, 148, "icon_Medicine_tongshengsan", LocalStringManager.GetConfig("Medicine_language", "Desc_149"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_149"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_149"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 2, 70, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(150, LocalStringManager.GetConfig("Medicine_language", "Name_150"), 8, 800, 5, 148, "icon_Medicine_hangqimiyao", LocalStringManager.GetConfig("Medicine_language", "Desc_150"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_150"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_150"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 2, 100, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(151, LocalStringManager.GetConfig("Medicine_language", "Name_151"), 8, 800, 6, 148, "icon_Medicine_sanzhenfamaiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_151"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_151"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_151"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 3, 50, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(152, LocalStringManager.GetConfig("Medicine_language", "Name_152"), 8, 800, 7, 148, "icon_Medicine_tianyuanyususan", LocalStringManager.GetConfig("Medicine_language", "Desc_152"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_152"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_152"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 3, 70, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(153, LocalStringManager.GetConfig("Medicine_language", "Name_153"), 8, 800, 8, 148, "icon_Medicine_hunyuancanwanglu", LocalStringManager.GetConfig("Medicine_language", "Desc_153"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_153"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_153"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonGloomyPercentage, 3, 100, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(154, LocalStringManager.GetConfig("Medicine_language", "Name_154"), 8, 800, 0, 154, "icon_Medicine_quhanbaihemi", LocalStringManager.GetConfig("Medicine_language", "Desc_154"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_154"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_154"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 2, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 20, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(155, LocalStringManager.GetConfig("Medicine_language", "Name_155"), 8, 800, 1, 154, "icon_Medicine_shengyangxianglu", LocalStringManager.GetConfig("Medicine_language", "Desc_155"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_155"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_155"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 2, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 30, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(156, LocalStringManager.GetConfig("Medicine_language", "Name_156"), 8, 800, 2, 154, "icon_Medicine_xuanhuangchiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_156"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_156"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_156"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 2, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 45, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(157, LocalStringManager.GetConfig("Medicine_language", "Name_157"), 8, 800, 3, 154, "icon_Medicine_jinwugao", LocalStringManager.GetConfig("Medicine_language", "Desc_157"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_157"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_157"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 3, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 60, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(158, LocalStringManager.GetConfig("Medicine_language", "Name_158"), 8, 800, 4, 154, "icon_Medicine_luohanjiukuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_158"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_158"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_158"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 3, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 90, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(159, LocalStringManager.GetConfig("Medicine_language", "Name_159"), 8, 800, 5, 154, "icon_Medicine_jiuzhuanhuanyangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_159"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_159"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_159"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 3, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 120, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(160, LocalStringManager.GetConfig("Medicine_language", "Name_160"), 8, 800, 3, 160, "icon_Medicine_wushejiaoxindan", LocalStringManager.GetConfig("Medicine_language", "Desc_160"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_160"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_160"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 2, 50, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(161, LocalStringManager.GetConfig("Medicine_language", "Name_161"), 8, 800, 4, 160, "icon_Medicine_hongsuisan", LocalStringManager.GetConfig("Medicine_language", "Desc_161"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_161"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_161"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 2, 70, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(162, LocalStringManager.GetConfig("Medicine_language", "Name_162"), 8, 800, 5, 160, "icon_Medicine_xuanheizhengyangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_162"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_162"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_162"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 2, 100, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(163, LocalStringManager.GetConfig("Medicine_language", "Name_163"), 8, 800, 6, 160, "icon_Medicine_longxuegao", LocalStringManager.GetConfig("Medicine_language", "Desc_163"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_163"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_163"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 3, 50, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(164, LocalStringManager.GetConfig("Medicine_language", "Name_164"), 8, 800, 7, 160, "icon_Medicine_xuexianzhudan", LocalStringManager.GetConfig("Medicine_language", "Desc_164"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_164"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_164"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 3, 70, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(165, LocalStringManager.GetConfig("Medicine_language", "Name_165"), 8, 800, 8, 160, "icon_Medicine_longhejiuyangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_165"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_165"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_165"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonColdPercentage, 3, 100, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(166, LocalStringManager.GetConfig("Medicine_language", "Name_166"), 8, 800, 0, 166, "icon_Medicine_ningxueqingdugao", LocalStringManager.GetConfig("Medicine_language", "Desc_166"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_166"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_166"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 2, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 20, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(167, LocalStringManager.GetConfig("Medicine_language", "Name_167"), 8, 800, 1, 166, "icon_Medicine_quyuziwan", LocalStringManager.GetConfig("Medicine_language", "Desc_167"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_167"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_167"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 2, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 30, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(168, LocalStringManager.GetConfig("Medicine_language", "Name_168"), 8, 800, 2, 166, "icon_Medicine_poxuedan", LocalStringManager.GetConfig("Medicine_language", "Desc_168"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_168"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_168"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 2, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 45, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(169, LocalStringManager.GetConfig("Medicine_language", "Name_169"), 8, 800, 3, 166, "icon_Medicine_liuhebaoxindan", LocalStringManager.GetConfig("Medicine_language", "Desc_169"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_169"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_169"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 3, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 60, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(170, LocalStringManager.GetConfig("Medicine_language", "Name_170"), 8, 800, 4, 166, "icon_Medicine_aowangpixuedan", LocalStringManager.GetConfig("Medicine_language", "Desc_170"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_170"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_170"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 3, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 90, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(171, LocalStringManager.GetConfig("Medicine_language", "Name_171"), 8, 800, 5, 166, "icon_Medicine_butianzaizaodan", LocalStringManager.GetConfig("Medicine_language", "Desc_171"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_171"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_171"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 3, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 120, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(172, LocalStringManager.GetConfig("Medicine_language", "Name_172"), 8, 800, 3, 172, "icon_Medicine_zizhupozhanggao", LocalStringManager.GetConfig("Medicine_language", "Desc_172"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_172"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_172"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 2, 50, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(173, LocalStringManager.GetConfig("Medicine_language", "Name_173"), 8, 800, 4, 172, "icon_Medicine_lengyuedan", LocalStringManager.GetConfig("Medicine_language", "Desc_173"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_173"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_173"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 2, 70, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(174, LocalStringManager.GetConfig("Medicine_language", "Name_174"), 8, 800, 5, 172, "icon_Medicine_yubaibingyin", LocalStringManager.GetConfig("Medicine_language", "Desc_174"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_174"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_174"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 2, 100, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(175, LocalStringManager.GetConfig("Medicine_language", "Name_175"), 8, 800, 6, 172, "icon_Medicine_jingxuefuxiegao", LocalStringManager.GetConfig("Medicine_language", "Desc_175"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_175"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_175"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 3, 50, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(176, LocalStringManager.GetConfig("Medicine_language", "Name_176"), 8, 800, 7, 172, "icon_Medicine_bingqingqilu", LocalStringManager.GetConfig("Medicine_language", "Desc_176"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_176"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_176"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 3, 70, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(177, LocalStringManager.GetConfig("Medicine_language", "Name_177"), 8, 800, 8, 172, "icon_Medicine_yufobixiesan", LocalStringManager.GetConfig("Medicine_language", "Desc_177"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_177"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_177"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRedPercentage, 3, 100, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(178, LocalStringManager.GetConfig("Medicine_language", "Name_178"), 8, 800, 0, 178, "icon_Medicine_furonghuadugao", LocalStringManager.GetConfig("Medicine_language", "Desc_178"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_178"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_178"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 2, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 20, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(179, LocalStringManager.GetConfig("Medicine_language", "Name_179"), 8, 800, 1, 178, "icon_Medicine_yulianganlu", LocalStringManager.GetConfig("Medicine_language", "Desc_179"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_179"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_179"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 2, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 30, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+	}
+
+	private void CreateItems3()
+	{
+		_dataArray.Add(new MedicineItem(180, LocalStringManager.GetConfig("Medicine_language", "Name_180"), 8, 800, 2, 178, "icon_Medicine_shengjihuacaiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_180"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_180"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_180"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 2, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 45, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(181, LocalStringManager.GetConfig("Medicine_language", "Name_181"), 8, 800, 3, 178, "icon_Medicine_guanyinqinglu", LocalStringManager.GetConfig("Medicine_language", "Desc_181"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_181"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_181"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 3, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 60, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(182, LocalStringManager.GetConfig("Medicine_language", "Name_182"), 8, 800, 4, 178, "icon_Medicine_feitianqinglu", LocalStringManager.GetConfig("Medicine_language", "Desc_182"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_182"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_182"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 3, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 90, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(183, LocalStringManager.GetConfig("Medicine_language", "Name_183"), 8, 800, 5, 178, "icon_Medicine_jincanpidudan", LocalStringManager.GetConfig("Medicine_language", "Desc_183"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_183"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_183"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 3, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 120, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(184, LocalStringManager.GetConfig("Medicine_language", "Name_184"), 8, 800, 3, 184, "icon_Medicine_qiandanxuanshui", LocalStringManager.GetConfig("Medicine_language", "Desc_184"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_184"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_184"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 2, 50, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(185, LocalStringManager.GetConfig("Medicine_language", "Name_185"), 8, 800, 4, 184, "icon_Medicine_chongjuesan", LocalStringManager.GetConfig("Medicine_language", "Desc_185"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_185"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_185"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 2, 70, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(186, LocalStringManager.GetConfig("Medicine_language", "Name_186"), 8, 800, 5, 184, "icon_Medicine_baiguizhuxian", LocalStringManager.GetConfig("Medicine_language", "Desc_186"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_186"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_186"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 2, 100, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(187, LocalStringManager.GetConfig("Medicine_language", "Name_187"), 8, 800, 6, 184, "icon_Medicine_shijiedan", LocalStringManager.GetConfig("Medicine_language", "Desc_187"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_187"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_187"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 3, 50, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(188, LocalStringManager.GetConfig("Medicine_language", "Name_188"), 8, 800, 7, 184, "icon_Medicine_duehuashengsan", LocalStringManager.GetConfig("Medicine_language", "Desc_188"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_188"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_188"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 3, 70, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(189, LocalStringManager.GetConfig("Medicine_language", "Name_189"), 8, 800, 8, 184, "icon_Medicine_baoyinchanwangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_189"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_189"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_189"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonRottenPercentage, 3, 100, 0, 0, 3, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(190, LocalStringManager.GetConfig("Medicine_language", "Name_190"), 8, 800, 0, 190, "icon_Medicine_dingjingxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_190"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_190"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_190"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 2, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 20, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(191, LocalStringManager.GetConfig("Medicine_language", "Name_191"), 8, 800, 1, 190, "icon_Medicine_xingshenlu", LocalStringManager.GetConfig("Medicine_language", "Desc_191"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_191"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_191"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 2, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 30, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(192, LocalStringManager.GetConfig("Medicine_language", "Name_192"), 8, 800, 2, 190, "icon_Medicine_jingmengsan", LocalStringManager.GetConfig("Medicine_language", "Desc_192"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_192"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_192"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 2, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 45, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(193, LocalStringManager.GetConfig("Medicine_language", "Name_193"), 8, 800, 3, 190, "icon_Medicine_xixinmingguangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_193"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_193"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_193"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 3, 25, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 60, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(194, LocalStringManager.GetConfig("Medicine_language", "Name_194"), 8, 800, 4, 190, "icon_Medicine_yingmenglongnuxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_194"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_194"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_194"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 3, 35, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 90, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(195, LocalStringManager.GetConfig("Medicine_language", "Name_195"), 8, 800, 5, 190, "icon_Medicine_linglongmenghuadan", LocalStringManager.GetConfig("Medicine_language", "Desc_195"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_195"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_195"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 1, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 3, 50, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 0, 0, 0, 0, 0, 0, 120, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(196, LocalStringManager.GetConfig("Medicine_language", "Name_196"), 8, 800, 3, 196, "icon_Medicine_zhenzhuningshendan", LocalStringManager.GetConfig("Medicine_language", "Desc_196"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_196"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_196"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 2, 50, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(197, LocalStringManager.GetConfig("Medicine_language", "Name_197"), 8, 800, 4, 196, "icon_Medicine_wuyousan", LocalStringManager.GetConfig("Medicine_language", "Desc_197"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_197"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_197"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 2, 70, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(198, LocalStringManager.GetConfig("Medicine_language", "Name_198"), 8, 800, 5, 196, "icon_Medicine_qiqingguixindan", LocalStringManager.GetConfig("Medicine_language", "Desc_198"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_198"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_198"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 2, 100, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(199, LocalStringManager.GetConfig("Medicine_language", "Name_199"), 8, 800, 6, 196, "icon_Medicine_kongmingyin", LocalStringManager.GetConfig("Medicine_language", "Desc_199"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_199"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_199"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 3, 50, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(200, LocalStringManager.GetConfig("Medicine_language", "Name_200"), 8, 800, 7, 196, "icon_Medicine_poxufanlinglu", LocalStringManager.GetConfig("Medicine_language", "Desc_200"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_200"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_200"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 3, 70, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(201, LocalStringManager.GetConfig("Medicine_language", "Name_201"), 8, 800, 8, 196, "icon_Medicine_shencaojuhundan", LocalStringManager.GetConfig("Medicine_language", "Desc_201"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_201"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_201"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 18, new List<int>(), 0, EMedicineEffectType.DetoxPoison, EMedicineEffectSubType.DetoxPoisonIllusoryPercentage, 3, 100, 0, 0, 4, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(202, LocalStringManager.GetConfig("Medicine_language", "Name_202"), 8, 800, 0, 202, "icon_Medicine_huqiandan", LocalStringManager.GetConfig("Medicine_language", "Desc_202"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_202"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_202"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(203, LocalStringManager.GetConfig("Medicine_language", "Name_203"), 8, 800, 1, 202, "icon_Medicine_longhudiedasan", LocalStringManager.GetConfig("Medicine_language", "Desc_203"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_203"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_203"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(204, LocalStringManager.GetConfig("Medicine_language", "Name_204"), 8, 800, 2, 202, "icon_Medicine_jiangujindaosan", LocalStringManager.GetConfig("Medicine_language", "Desc_204"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_204"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_204"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(205, LocalStringManager.GetConfig("Medicine_language", "Name_205"), 8, 800, 3, 202, "icon_Medicine_liantilingdan", LocalStringManager.GetConfig("Medicine_language", "Desc_205"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_205"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_205"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(206, LocalStringManager.GetConfig("Medicine_language", "Name_206"), 8, 800, 4, 202, "icon_Medicine_buhuaibaopiwan", LocalStringManager.GetConfig("Medicine_language", "Desc_206"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_206"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_206"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(207, LocalStringManager.GetConfig("Medicine_language", "Name_207"), 8, 800, 5, 202, "icon_Medicine_xueguilongjiadan", LocalStringManager.GetConfig("Medicine_language", "Desc_207"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_207"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_207"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(208, LocalStringManager.GetConfig("Medicine_language", "Name_208"), 8, 800, 3, 208, "icon_Medicine_tiegugao", LocalStringManager.GetConfig("Medicine_language", "Desc_208"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_208"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_208"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(209, LocalStringManager.GetConfig("Medicine_language", "Name_209"), 8, 800, 4, 208, "icon_Medicine_wuchuangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_209"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_209"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_209"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(210, LocalStringManager.GetConfig("Medicine_language", "Name_210"), 8, 800, 5, 208, "icon_Medicine_gujinsan", LocalStringManager.GetConfig("Medicine_language", "Desc_210"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_210"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_210"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(211, LocalStringManager.GetConfig("Medicine_language", "Name_211"), 8, 800, 6, 208, "icon_Medicine_dipopanshidan", LocalStringManager.GetConfig("Medicine_language", "Desc_211"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_211"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_211"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(212, LocalStringManager.GetConfig("Medicine_language", "Name_212"), 8, 800, 7, 208, "icon_Medicine_tianxinwusedan", LocalStringManager.GetConfig("Medicine_language", "Desc_212"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_212"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_212"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(213, LocalStringManager.GetConfig("Medicine_language", "Name_213"), 8, 800, 8, 208, "icon_Medicine_jinyuansan", LocalStringManager.GetConfig("Medicine_language", "Desc_213"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_213"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_213"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(214, LocalStringManager.GetConfig("Medicine_language", "Name_214"), 8, 800, 0, 214, "icon_Medicine_suxinneixiaosan", LocalStringManager.GetConfig("Medicine_language", "Desc_214"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_214"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_214"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(215, LocalStringManager.GetConfig("Medicine_language", "Name_215"), 8, 800, 1, 214, "icon_Medicine_zhengyuanxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_215"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_215"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_215"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(216, LocalStringManager.GetConfig("Medicine_language", "Name_216"), 8, 800, 2, 214, "icon_Medicine_xinxiangbaoyuandan", LocalStringManager.GetConfig("Medicine_language", "Desc_216"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_216"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_216"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(217, LocalStringManager.GetConfig("Medicine_language", "Name_217"), 8, 800, 3, 214, "icon_Medicine_yuanlinghuxinwan", LocalStringManager.GetConfig("Medicine_language", "Desc_217"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_217"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_217"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(218, LocalStringManager.GetConfig("Medicine_language", "Name_218"), 8, 800, 4, 214, "icon_Medicine_huanglongqionglu", LocalStringManager.GetConfig("Medicine_language", "Desc_218"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_218"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_218"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(219, LocalStringManager.GetConfig("Medicine_language", "Name_219"), 8, 800, 5, 214, "icon_Medicine_tianxiangtaiyidan", LocalStringManager.GetConfig("Medicine_language", "Desc_219"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_219"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_219"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(220, LocalStringManager.GetConfig("Medicine_language", "Name_220"), 8, 800, 3, 220, "icon_Medicine_yiyuandigaosan", LocalStringManager.GetConfig("Medicine_language", "Desc_220"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_220"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_220"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(221, LocalStringManager.GetConfig("Medicine_language", "Name_221"), 8, 800, 4, 220, "icon_Medicine_baoguangxiangwan", LocalStringManager.GetConfig("Medicine_language", "Desc_221"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_221"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_221"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(222, LocalStringManager.GetConfig("Medicine_language", "Name_222"), 8, 800, 5, 220, "icon_Medicine_yuzhuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_222"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_222"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_222"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(223, LocalStringManager.GetConfig("Medicine_language", "Name_223"), 8, 800, 6, 220, "icon_Medicine_yeguangyulu", LocalStringManager.GetConfig("Medicine_language", "Desc_223"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_223"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_223"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(224, LocalStringManager.GetConfig("Medicine_language", "Name_224"), 8, 800, 7, 220, "icon_Medicine_qixinghuyuangao", LocalStringManager.GetConfig("Medicine_language", "Desc_224"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_224"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_224"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(225, LocalStringManager.GetConfig("Medicine_language", "Name_225"), 8, 800, 8, 220, "icon_Medicine_yaochizhenyin", LocalStringManager.GetConfig("Medicine_language", "Desc_225"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_225"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_225"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 22, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(226, LocalStringManager.GetConfig("Medicine_language", "Name_226"), 8, 800, 0, 226, "icon_Medicine_yupingfengsan", LocalStringManager.GetConfig("Medicine_language", "Desc_226"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_226"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_226"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(227, LocalStringManager.GetConfig("Medicine_language", "Name_227"), 8, 800, 1, 226, "icon_Medicine_lingcaochenqidan", LocalStringManager.GetConfig("Medicine_language", "Desc_227"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_227"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_227"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(228, LocalStringManager.GetConfig("Medicine_language", "Name_228"), 8, 800, 2, 226, "icon_Medicine_xiuyuzhenming", LocalStringManager.GetConfig("Medicine_language", "Desc_228"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_228"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_228"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(229, LocalStringManager.GetConfig("Medicine_language", "Name_229"), 8, 800, 3, 226, "icon_Medicine_shiyunsan", LocalStringManager.GetConfig("Medicine_language", "Desc_229"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_229"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_229"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(230, LocalStringManager.GetConfig("Medicine_language", "Name_230"), 8, 800, 4, 226, "icon_Medicine_qingyangxianlu", LocalStringManager.GetConfig("Medicine_language", "Desc_230"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_230"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_230"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(231, LocalStringManager.GetConfig("Medicine_language", "Name_231"), 8, 800, 5, 226, "icon_Medicine_baibaolongxianlu", LocalStringManager.GetConfig("Medicine_language", "Desc_231"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_231"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_231"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(232, LocalStringManager.GetConfig("Medicine_language", "Name_232"), 8, 800, 3, 232, "icon_Medicine_baihejushendan", LocalStringManager.GetConfig("Medicine_language", "Desc_232"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_232"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_232"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(233, LocalStringManager.GetConfig("Medicine_language", "Name_233"), 8, 800, 4, 232, "icon_Medicine_sanhuasanwuxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_233"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_233"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_233"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(234, LocalStringManager.GetConfig("Medicine_language", "Name_234"), 8, 800, 5, 232, "icon_Medicine_wanlibiyundan", LocalStringManager.GetConfig("Medicine_language", "Desc_234"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_234"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_234"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(235, LocalStringManager.GetConfig("Medicine_language", "Name_235"), 8, 800, 6, 232, "icon_Medicine_dinghunliulidan", LocalStringManager.GetConfig("Medicine_language", "Desc_235"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_235"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_235"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(236, LocalStringManager.GetConfig("Medicine_language", "Name_236"), 8, 800, 7, 232, "icon_Medicine_dashisan", LocalStringManager.GetConfig("Medicine_language", "Desc_236"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_236"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_236"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(237, LocalStringManager.GetConfig("Medicine_language", "Name_237"), 8, 800, 8, 232, "icon_Medicine_jiuseputilu", LocalStringManager.GetConfig("Medicine_language", "Desc_237"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_237"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_237"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(238, LocalStringManager.GetConfig("Medicine_language", "Name_238"), 8, 800, 0, 238, "icon_Medicine_cuihuangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_238"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_238"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_238"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(239, LocalStringManager.GetConfig("Medicine_language", "Name_239"), 8, 800, 1, 238, "icon_Medicine_zixindan", LocalStringManager.GetConfig("Medicine_language", "Desc_239"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_239"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_239"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+	}
+
+	private void CreateItems4()
+	{
+		_dataArray.Add(new MedicineItem(240, LocalStringManager.GetConfig("Medicine_language", "Name_240"), 8, 800, 2, 238, "icon_Medicine_boyunbaowan", LocalStringManager.GetConfig("Medicine_language", "Desc_240"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_240"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_240"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(241, LocalStringManager.GetConfig("Medicine_language", "Name_241"), 8, 800, 3, 238, "icon_Medicine_cunqiaocunjindan", LocalStringManager.GetConfig("Medicine_language", "Desc_241"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_241"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_241"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(242, LocalStringManager.GetConfig("Medicine_language", "Name_242"), 8, 800, 4, 238, "icon_Medicine_chibaidan", LocalStringManager.GetConfig("Medicine_language", "Desc_242"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_242"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_242"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(243, LocalStringManager.GetConfig("Medicine_language", "Name_243"), 8, 800, 5, 238, "icon_Medicine_huporuyidan", LocalStringManager.GetConfig("Medicine_language", "Desc_243"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_243"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_243"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(244, LocalStringManager.GetConfig("Medicine_language", "Name_244"), 8, 800, 3, 244, "icon_Medicine_wanquanxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_244"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_244"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_244"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(245, LocalStringManager.GetConfig("Medicine_language", "Name_245"), 8, 800, 4, 244, "icon_Medicine_xiangluosan", LocalStringManager.GetConfig("Medicine_language", "Desc_245"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_245"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_245"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(246, LocalStringManager.GetConfig("Medicine_language", "Name_246"), 8, 800, 5, 244, "icon_Medicine_mingjingdan", LocalStringManager.GetConfig("Medicine_language", "Desc_246"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_246"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_246"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(247, LocalStringManager.GetConfig("Medicine_language", "Name_247"), 8, 800, 6, 244, "icon_Medicine_baxianmiaohuadan", LocalStringManager.GetConfig("Medicine_language", "Desc_247"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_247"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_247"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(248, LocalStringManager.GetConfig("Medicine_language", "Name_248"), 8, 800, 7, 244, "icon_Medicine_canglongwohaidan", LocalStringManager.GetConfig("Medicine_language", "Desc_248"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_248"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_248"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(249, LocalStringManager.GetConfig("Medicine_language", "Name_249"), 8, 800, 8, 244, "icon_Medicine_wanyinglinglongsan", LocalStringManager.GetConfig("Medicine_language", "Desc_249"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_249"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_249"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(250, LocalStringManager.GetConfig("Medicine_language", "Name_250"), 8, 800, 0, 250, "icon_Medicine_yinguangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_250"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_250"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_250"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(251, LocalStringManager.GetConfig("Medicine_language", "Name_251"), 8, 800, 1, 250, "icon_Medicine_feiwudan", LocalStringManager.GetConfig("Medicine_language", "Desc_251"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_251"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_251"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(252, LocalStringManager.GetConfig("Medicine_language", "Name_252"), 8, 800, 2, 250, "icon_Medicine_wuguangyin", LocalStringManager.GetConfig("Medicine_language", "Desc_252"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_252"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_252"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(253, LocalStringManager.GetConfig("Medicine_language", "Name_253"), 8, 800, 3, 250, "icon_Medicine_jingzhonghualu", LocalStringManager.GetConfig("Medicine_language", "Desc_253"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_253"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_253"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(254, LocalStringManager.GetConfig("Medicine_language", "Name_254"), 8, 800, 4, 250, "icon_Medicine_qingshuangbishuidan", LocalStringManager.GetConfig("Medicine_language", "Desc_254"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_254"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_254"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(255, LocalStringManager.GetConfig("Medicine_language", "Name_255"), 8, 800, 5, 250, "icon_Medicine_wanhuanchanlu", LocalStringManager.GetConfig("Medicine_language", "Desc_255"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_255"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_255"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(256, LocalStringManager.GetConfig("Medicine_language", "Name_256"), 8, 800, 3, 256, "icon_Medicine_yurongqingshenlu", LocalStringManager.GetConfig("Medicine_language", "Desc_256"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_256"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_256"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(257, LocalStringManager.GetConfig("Medicine_language", "Name_257"), 8, 800, 4, 256, "icon_Medicine_lianhuazui", LocalStringManager.GetConfig("Medicine_language", "Desc_257"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_257"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_257"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(258, LocalStringManager.GetConfig("Medicine_language", "Name_258"), 8, 800, 5, 256, "icon_Medicine_baihuaxiaoyaosan", LocalStringManager.GetConfig("Medicine_language", "Desc_258"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_258"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_258"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(259, LocalStringManager.GetConfig("Medicine_language", "Name_259"), 8, 800, 6, 256, "icon_Medicine_wusedan", LocalStringManager.GetConfig("Medicine_language", "Desc_259"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_259"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_259"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(260, LocalStringManager.GetConfig("Medicine_language", "Name_260"), 8, 800, 7, 256, "icon_Medicine_jiulingxianming", LocalStringManager.GetConfig("Medicine_language", "Desc_260"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_260"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_260"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(261, LocalStringManager.GetConfig("Medicine_language", "Name_261"), 8, 800, 8, 256, "icon_Medicine_jincanmiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_261"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_261"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_261"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 24, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(262, LocalStringManager.GetConfig("Medicine_language", "Name_262"), 8, 800, 0, 262, "icon_Medicine_chongxiansan", LocalStringManager.GetConfig("Medicine_language", "Desc_262"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_262"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_262"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(263, LocalStringManager.GetConfig("Medicine_language", "Name_263"), 8, 800, 1, 262, "icon_Medicine_xiaolongneizhuangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_263"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_263"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_263"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 25, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(264, LocalStringManager.GetConfig("Medicine_language", "Name_264"), 8, 800, 2, 262, "icon_Medicine_dihuangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_264"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_264"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_264"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(265, LocalStringManager.GetConfig("Medicine_language", "Name_265"), 8, 800, 3, 262, "icon_Medicine_baoxuexuandan", LocalStringManager.GetConfig("Medicine_language", "Desc_265"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_265"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_265"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(266, LocalStringManager.GetConfig("Medicine_language", "Name_266"), 8, 800, 4, 262, "icon_Medicine_yuanyidan", LocalStringManager.GetConfig("Medicine_language", "Desc_266"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_266"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_266"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 55, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(267, LocalStringManager.GetConfig("Medicine_language", "Name_267"), 8, 800, 5, 262, "icon_Medicine_bamangxuandanwan", LocalStringManager.GetConfig("Medicine_language", "Desc_267"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_267"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_267"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 70, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(268, LocalStringManager.GetConfig("Medicine_language", "Name_268"), 8, 800, 3, 268, "icon_Medicine_shexianghuichungao", LocalStringManager.GetConfig("Medicine_language", "Desc_268"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_268"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_268"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(269, LocalStringManager.GetConfig("Medicine_language", "Name_269"), 8, 800, 4, 268, "icon_Medicine_guandingxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_269"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_269"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_269"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 12, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(270, LocalStringManager.GetConfig("Medicine_language", "Name_270"), 8, 800, 5, 268, "icon_Medicine_diaoyingbaoshenlu", LocalStringManager.GetConfig("Medicine_language", "Desc_270"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_270"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_270"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(271, LocalStringManager.GetConfig("Medicine_language", "Name_271"), 8, 800, 6, 268, "icon_Medicine_jinluqiongyin", LocalStringManager.GetConfig("Medicine_language", "Desc_271"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_271"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_271"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(272, LocalStringManager.GetConfig("Medicine_language", "Name_272"), 8, 800, 7, 268, "icon_Medicine_xiantiansan", LocalStringManager.GetConfig("Medicine_language", "Desc_272"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_272"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_272"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 18, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(273, LocalStringManager.GetConfig("Medicine_language", "Name_273"), 8, 800, 8, 268, "icon_Medicine_jinmupantaolu", LocalStringManager.GetConfig("Medicine_language", "Desc_273"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_273"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_273"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 26, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(274, LocalStringManager.GetConfig("Medicine_language", "Name_274"), 8, 800, 0, 274, "icon_Medicine_yangxuetang", LocalStringManager.GetConfig("Medicine_language", "Desc_274"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_274"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_274"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(275, LocalStringManager.GetConfig("Medicine_language", "Name_275"), 8, 800, 1, 274, "icon_Medicine_zhuanggugao", LocalStringManager.GetConfig("Medicine_language", "Desc_275"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_275"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_275"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(276, LocalStringManager.GetConfig("Medicine_language", "Name_276"), 8, 800, 2, 274, "icon_Medicine_dalibaiduandan", LocalStringManager.GetConfig("Medicine_language", "Desc_276"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_276"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_276"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(277, LocalStringManager.GetConfig("Medicine_language", "Name_277"), 8, 800, 3, 274, "icon_Medicine_qianjinwan", LocalStringManager.GetConfig("Medicine_language", "Desc_277"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_277"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_277"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(278, LocalStringManager.GetConfig("Medicine_language", "Name_278"), 8, 800, 4, 274, "icon_Medicine_shengongzhuanglisan", LocalStringManager.GetConfig("Medicine_language", "Desc_278"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_278"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_278"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(279, LocalStringManager.GetConfig("Medicine_language", "Name_279"), 8, 800, 5, 274, "icon_Medicine_zhiwangqiyingsan", LocalStringManager.GetConfig("Medicine_language", "Desc_279"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_279"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_279"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(280, LocalStringManager.GetConfig("Medicine_language", "Name_280"), 8, 800, 3, 280, "icon_Medicine_hulishi", LocalStringManager.GetConfig("Medicine_language", "Desc_280"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_280"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_280"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(281, LocalStringManager.GetConfig("Medicine_language", "Name_281"), 8, 800, 4, 280, "icon_Medicine_shenglonghuohuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_281"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_281"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_281"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(282, LocalStringManager.GetConfig("Medicine_language", "Name_282"), 8, 800, 5, 280, "icon_Medicine_sankuidalidan", LocalStringManager.GetConfig("Medicine_language", "Desc_282"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_282"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_282"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(283, LocalStringManager.GetConfig("Medicine_language", "Name_283"), 8, 800, 6, 280, "icon_Medicine_sanshengboshisan", LocalStringManager.GetConfig("Medicine_language", "Desc_283"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_283"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_283"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(284, LocalStringManager.GetConfig("Medicine_language", "Name_284"), 8, 800, 7, 280, "icon_Medicine_shouwangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_284"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_284"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_284"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(285, LocalStringManager.GetConfig("Medicine_language", "Name_285"), 8, 800, 8, 280, "icon_Medicine_xueguitongtiandan", LocalStringManager.GetConfig("Medicine_language", "Desc_285"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_285"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_285"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(286, LocalStringManager.GetConfig("Medicine_language", "Name_286"), 8, 800, 0, 286, "icon_Medicine_renshenzhuangqidan", LocalStringManager.GetConfig("Medicine_language", "Desc_286"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_286"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_286"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(287, LocalStringManager.GetConfig("Medicine_language", "Name_287"), 8, 800, 1, 286, "icon_Medicine_qihetang", LocalStringManager.GetConfig("Medicine_language", "Desc_287"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_287"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_287"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 25, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(288, LocalStringManager.GetConfig("Medicine_language", "Name_288"), 8, 800, 2, 286, "icon_Medicine_shengqingjiangzhuoyin", LocalStringManager.GetConfig("Medicine_language", "Desc_288"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_288"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_288"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(289, LocalStringManager.GetConfig("Medicine_language", "Name_289"), 8, 800, 3, 286, "icon_Medicine_lingchixianglu", LocalStringManager.GetConfig("Medicine_language", "Desc_289"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_289"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_289"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(290, LocalStringManager.GetConfig("Medicine_language", "Name_290"), 8, 800, 4, 286, "icon_Medicine_xuantianbaoyin", LocalStringManager.GetConfig("Medicine_language", "Desc_290"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_290"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_290"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 55, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(291, LocalStringManager.GetConfig("Medicine_language", "Name_291"), 8, 800, 5, 286, "icon_Medicine_canxianxueyin", LocalStringManager.GetConfig("Medicine_language", "Desc_291"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_291"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_291"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 70, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(292, LocalStringManager.GetConfig("Medicine_language", "Name_292"), 8, 800, 3, 292, "icon_Medicine_suxintishensan", LocalStringManager.GetConfig("Medicine_language", "Desc_292"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_292"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_292"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(293, LocalStringManager.GetConfig("Medicine_language", "Name_293"), 8, 800, 4, 292, "icon_Medicine_touxinxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_293"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_293"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_293"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 12, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(294, LocalStringManager.GetConfig("Medicine_language", "Name_294"), 8, 800, 5, 292, "icon_Medicine_qianlongxiang", LocalStringManager.GetConfig("Medicine_language", "Desc_294"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_294"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_294"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(295, LocalStringManager.GetConfig("Medicine_language", "Name_295"), 8, 800, 6, 292, "icon_Medicine_liushenyuanqixiang", LocalStringManager.GetConfig("Medicine_language", "Desc_295"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_295"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_295"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(296, LocalStringManager.GetConfig("Medicine_language", "Name_296"), 8, 800, 7, 292, "icon_Medicine_shixiangjuyuandan", LocalStringManager.GetConfig("Medicine_language", "Desc_296"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_296"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_296"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 18, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(297, LocalStringManager.GetConfig("Medicine_language", "Name_297"), 8, 800, 8, 292, "icon_Medicine_tianxiangzuixianyin", LocalStringManager.GetConfig("Medicine_language", "Desc_297"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_297"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_297"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 28, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(298, LocalStringManager.GetConfig("Medicine_language", "Name_298"), 8, 800, 0, 298, "icon_Medicine_minghongmi", LocalStringManager.GetConfig("Medicine_language", "Desc_298"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_298"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_298"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(299, LocalStringManager.GetConfig("Medicine_language", "Name_299"), 8, 800, 1, 298, "icon_Medicine_qingbuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_299"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_299"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_299"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+	}
+
+	private void CreateItems5()
+	{
+		_dataArray.Add(new MedicineItem(300, LocalStringManager.GetConfig("Medicine_language", "Name_300"), 8, 800, 2, 298, "icon_Medicine_tianzhitang", LocalStringManager.GetConfig("Medicine_language", "Desc_300"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_300"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_300"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(301, LocalStringManager.GetConfig("Medicine_language", "Name_301"), 8, 800, 3, 298, "icon_Medicine_lingshantongqiaosan", LocalStringManager.GetConfig("Medicine_language", "Desc_301"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_301"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_301"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(302, LocalStringManager.GetConfig("Medicine_language", "Name_302"), 8, 800, 4, 298, "icon_Medicine_tianshuangbaiyuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_302"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_302"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_302"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(303, LocalStringManager.GetConfig("Medicine_language", "Name_303"), 8, 800, 5, 298, "icon_Medicine_wanmiaoxueliandan", LocalStringManager.GetConfig("Medicine_language", "Desc_303"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_303"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_303"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(304, LocalStringManager.GetConfig("Medicine_language", "Name_304"), 8, 800, 3, 304, "icon_Medicine_sanhuangyuqingsan", LocalStringManager.GetConfig("Medicine_language", "Desc_304"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_304"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_304"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(305, LocalStringManager.GetConfig("Medicine_language", "Name_305"), 8, 800, 4, 304, "icon_Medicine_xiancaoyin", LocalStringManager.GetConfig("Medicine_language", "Desc_305"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_305"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_305"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(306, LocalStringManager.GetConfig("Medicine_language", "Name_306"), 8, 800, 5, 304, "icon_Medicine_qixiubiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_306"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_306"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_306"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(307, LocalStringManager.GetConfig("Medicine_language", "Name_307"), 8, 800, 6, 304, "icon_Medicine_qibaocuiyuwan", LocalStringManager.GetConfig("Medicine_language", "Desc_307"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_307"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_307"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(308, LocalStringManager.GetConfig("Medicine_language", "Name_308"), 8, 800, 7, 304, "icon_Medicine_ziweiqingjindan", LocalStringManager.GetConfig("Medicine_language", "Desc_308"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_308"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_308"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(309, LocalStringManager.GetConfig("Medicine_language", "Name_309"), 8, 800, 8, 304, "icon_Medicine_longxianwujidan", LocalStringManager.GetConfig("Medicine_language", "Desc_309"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_309"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_309"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(310, LocalStringManager.GetConfig("Medicine_language", "Name_310"), 8, 800, 0, 310, "icon_Medicine_xuehagao", LocalStringManager.GetConfig("Medicine_language", "Desc_310"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_310"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_310"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(311, LocalStringManager.GetConfig("Medicine_language", "Name_311"), 8, 800, 1, 310, "icon_Medicine_xianhesan", LocalStringManager.GetConfig("Medicine_language", "Desc_311"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_311"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_311"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 25, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(312, LocalStringManager.GetConfig("Medicine_language", "Name_312"), 8, 800, 2, 310, "icon_Medicine_guzhendan", LocalStringManager.GetConfig("Medicine_language", "Desc_312"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_312"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_312"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(313, LocalStringManager.GetConfig("Medicine_language", "Name_313"), 8, 800, 3, 310, "icon_Medicine_baicaoqijiedan", LocalStringManager.GetConfig("Medicine_language", "Desc_313"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_313"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_313"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(314, LocalStringManager.GetConfig("Medicine_language", "Name_314"), 8, 800, 4, 310, "icon_Medicine_lingbaojintang", LocalStringManager.GetConfig("Medicine_language", "Desc_314"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_314"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_314"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 55, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(315, LocalStringManager.GetConfig("Medicine_language", "Name_315"), 8, 800, 5, 310, "icon_Medicine_shenguangshouwulu", LocalStringManager.GetConfig("Medicine_language", "Desc_315"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_315"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_315"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 70, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(316, LocalStringManager.GetConfig("Medicine_language", "Name_316"), 8, 800, 3, 316, "icon_Medicine_fuhusan", LocalStringManager.GetConfig("Medicine_language", "Desc_316"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_316"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_316"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(317, LocalStringManager.GetConfig("Medicine_language", "Name_317"), 8, 800, 4, 316, "icon_Medicine_wuzhuangyuantang", LocalStringManager.GetConfig("Medicine_language", "Desc_317"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_317"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_317"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 12, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(318, LocalStringManager.GetConfig("Medicine_language", "Name_318"), 8, 800, 5, 316, "icon_Medicine_jiantidabutang", LocalStringManager.GetConfig("Medicine_language", "Desc_318"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_318"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_318"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(319, LocalStringManager.GetConfig("Medicine_language", "Name_319"), 8, 800, 6, 316, "icon_Medicine_tianbaojiuwutang", LocalStringManager.GetConfig("Medicine_language", "Desc_319"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_319"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_319"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(320, LocalStringManager.GetConfig("Medicine_language", "Name_320"), 8, 800, 7, 316, "icon_Medicine_jinshangyuye", LocalStringManager.GetConfig("Medicine_language", "Desc_320"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_320"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_320"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 18, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(321, LocalStringManager.GetConfig("Medicine_language", "Name_321"), 8, 800, 8, 316, "icon_Medicine_doukoubulaowan", LocalStringManager.GetConfig("Medicine_language", "Desc_321"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_321"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_321"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 27, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(322, LocalStringManager.GetConfig("Medicine_language", "Name_322"), 8, 800, 0, 322, "icon_Medicine_zhuchesan", LocalStringManager.GetConfig("Medicine_language", "Desc_322"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_322"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_322"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(323, LocalStringManager.GetConfig("Medicine_language", "Name_323"), 8, 800, 1, 322, "icon_Medicine_baoxiadan", LocalStringManager.GetConfig("Medicine_language", "Desc_323"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_323"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_323"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(324, LocalStringManager.GetConfig("Medicine_language", "Name_324"), 8, 800, 2, 322, "icon_Medicine_feilaiyin", LocalStringManager.GetConfig("Medicine_language", "Desc_324"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_324"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_324"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(325, LocalStringManager.GetConfig("Medicine_language", "Name_325"), 8, 800, 3, 322, "icon_Medicine_sanxianzhuguangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_325"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_325"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_325"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(326, LocalStringManager.GetConfig("Medicine_language", "Name_326"), 8, 800, 4, 322, "icon_Medicine_wusehuaguanglu", LocalStringManager.GetConfig("Medicine_language", "Desc_326"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_326"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_326"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(327, LocalStringManager.GetConfig("Medicine_language", "Name_327"), 8, 800, 5, 322, "icon_Medicine_tumingxianlu", LocalStringManager.GetConfig("Medicine_language", "Desc_327"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_327"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_327"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(328, LocalStringManager.GetConfig("Medicine_language", "Name_328"), 8, 800, 3, 328, "icon_Medicine_dingfengdan", LocalStringManager.GetConfig("Medicine_language", "Desc_328"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_328"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_328"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(329, LocalStringManager.GetConfig("Medicine_language", "Name_329"), 8, 800, 4, 328, "icon_Medicine_shuiyuekongqingdan", LocalStringManager.GetConfig("Medicine_language", "Desc_329"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_329"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_329"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(330, LocalStringManager.GetConfig("Medicine_language", "Name_330"), 8, 800, 5, 328, "icon_Medicine_qisebaowan", LocalStringManager.GetConfig("Medicine_language", "Desc_330"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_330"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_330"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(331, LocalStringManager.GetConfig("Medicine_language", "Name_331"), 8, 800, 6, 328, "icon_Medicine_nichangqinglu", LocalStringManager.GetConfig("Medicine_language", "Desc_331"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_331"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_331"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(332, LocalStringManager.GetConfig("Medicine_language", "Name_332"), 8, 800, 7, 328, "icon_Medicine_qianlishenhangdan", LocalStringManager.GetConfig("Medicine_language", "Desc_332"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_332"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_332"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(333, LocalStringManager.GetConfig("Medicine_language", "Name_333"), 8, 800, 8, 328, "icon_Medicine_hanchanjiutuidan", LocalStringManager.GetConfig("Medicine_language", "Desc_333"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_333"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_333"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 23, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(334, LocalStringManager.GetConfig("Medicine_language", "Name_334"), 8, 800, 0, 334, "icon_Medicine_luliwan", LocalStringManager.GetConfig("Medicine_language", "Desc_334"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_334"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_334"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 150, 0, 1, 600, 3, allowRandomCreate: true, 50, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(335, LocalStringManager.GetConfig("Medicine_language", "Name_335"), 8, 800, 1, 334, "icon_Medicine_shengxunsan", LocalStringManager.GetConfig("Medicine_language", "Desc_335"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_335"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_335"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 300, 0, 2, 1200, 4, allowRandomCreate: true, 45, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(336, LocalStringManager.GetConfig("Medicine_language", "Name_336"), 8, 800, 2, 334, "icon_Medicine_dajiangjuntang", LocalStringManager.GetConfig("Medicine_language", "Desc_336"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_336"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_336"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 900, 0, 3, 1800, 5, allowRandomCreate: true, 40, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(337, LocalStringManager.GetConfig("Medicine_language", "Name_337"), 8, 800, 3, 334, "icon_Medicine_yechasan", LocalStringManager.GetConfig("Medicine_language", "Desc_337"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_337"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_337"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(338, LocalStringManager.GetConfig("Medicine_language", "Name_338"), 8, 800, 4, 334, "icon_Medicine_mingwangnuxiangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_338"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_338"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_338"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(339, LocalStringManager.GetConfig("Medicine_language", "Name_339"), 8, 800, 5, 334, "icon_Medicine_jinshengjianglongdan", LocalStringManager.GetConfig("Medicine_language", "Desc_339"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_339"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_339"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 1, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(340, LocalStringManager.GetConfig("Medicine_language", "Name_340"), 8, 800, 3, 340, "icon_Medicine_guichongwugao", LocalStringManager.GetConfig("Medicine_language", "Desc_340"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_340"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_340"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 2250, 1, 4, 3000, 6, allowRandomCreate: true, 35, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(341, LocalStringManager.GetConfig("Medicine_language", "Name_341"), 8, 800, 4, 340, "icon_Medicine_xueliandan", LocalStringManager.GetConfig("Medicine_language", "Desc_341"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_341"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_341"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 4650, 2, 5, 4200, 7, allowRandomCreate: true, 30, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(342, LocalStringManager.GetConfig("Medicine_language", "Name_342"), 8, 800, 5, 340, "icon_Medicine_qixingwukuangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_342"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_342"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_342"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 8400, 3, 6, 5400, 7, allowRandomCreate: true, 25, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(343, LocalStringManager.GetConfig("Medicine_language", "Name_343"), 8, 800, 6, 340, "icon_Medicine_bahuangsan", LocalStringManager.GetConfig("Medicine_language", "Desc_343"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_343"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_343"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: true, 20, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(344, LocalStringManager.GetConfig("Medicine_language", "Name_344"), 8, 800, 7, 340, "icon_Medicine_heixuefengmosan", LocalStringManager.GetConfig("Medicine_language", "Desc_344"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_344"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_344"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 21150, 5, 8, 9000, 8, allowRandomCreate: true, 15, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(345, LocalStringManager.GetConfig("Medicine_language", "Name_345"), 8, 800, 8, 340, "icon_Medicine_yuanlongdan", LocalStringManager.GetConfig("Medicine_language", "Desc_345"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_345"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_345"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 36, canUseMultiple: true, 21, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddPercentage, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 1, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(346, LocalStringManager.GetConfig("Medicine_language", "Name_346"), 8, 800, 8, -1, "icon_Medicine_shizhuanchenxin", LocalStringManager.GetConfig("Medicine_language", "Desc_346"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_346"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_346"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 30750, 6, 9, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 120, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(347, LocalStringManager.GetConfig("Medicine_language", "Name_347"), 8, 802, 0, -1, "icon_Medicine_chimuregu", LocalStringManager.GetConfig("Medicine_language", "Desc_347"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_347"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_347"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "CombatSkill.Wuxianjiao.WugEffect.RedEyeGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(348, LocalStringManager.GetConfig("Medicine_language", "Name_348"), 8, 802, 0, -1, "icon_Medicine_chimuregu", LocalStringManager.GetConfig("Medicine_language", "Desc_348"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_348"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_348"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, "CombatSkill.Wuxianjiao.WugEffect.RedEyeGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(349, LocalStringManager.GetConfig("Medicine_language", "Name_349"), 8, 802, 0, -1, "icon_Medicine_chimuregu", LocalStringManager.GetConfig("Medicine_language", "Desc_349"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_349"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_349"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, "CombatSkill.Wuxianjiao.WugEffect.RedEyeGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(350, LocalStringManager.GetConfig("Medicine_language", "Name_350"), 8, 802, 0, -1, "icon_Medicine_chimuregu", LocalStringManager.GetConfig("Medicine_language", "Desc_350"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_350"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_350"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, "CombatSkill.Wuxianjiao.WugEffect.RedEyeGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(351, LocalStringManager.GetConfig("Medicine_language", "Name_351"), 8, 802, 1, -1, "icon_Medicine_chimuchenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_351"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_351"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_351"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, "CombatSkill.Wuxianjiao.WugEffect.RedEyeGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(352, LocalStringManager.GetConfig("Medicine_language", "Name_352"), 8, 802, 1, -1, "icon_Medicine_chimeiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_352"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_352"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_352"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, "CombatSkill.Wuxianjiao.WugEffect.ForestSpiritGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(353, LocalStringManager.GetConfig("Medicine_language", "Name_353"), 8, 802, 1, -1, "icon_Medicine_chimeiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_353"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_353"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_353"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, "CombatSkill.Wuxianjiao.WugEffect.ForestSpiritGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(354, LocalStringManager.GetConfig("Medicine_language", "Name_354"), 8, 802, 1, -1, "icon_Medicine_chimeiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_354"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_354"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_354"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, "CombatSkill.Wuxianjiao.WugEffect.ForestSpiritGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(355, LocalStringManager.GetConfig("Medicine_language", "Name_355"), 8, 802, 1, -1, "icon_Medicine_chimeiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_355"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_355"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_355"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, "CombatSkill.Wuxianjiao.WugEffect.ForestSpiritGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(356, LocalStringManager.GetConfig("Medicine_language", "Name_356"), 8, 802, 2, -1, "icon_Medicine_chimeichenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_356"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_356"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_356"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, "CombatSkill.Wuxianjiao.WugEffect.ForestSpiritGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(357, LocalStringManager.GetConfig("Medicine_language", "Name_357"), 8, 802, 2, -1, "icon_Medicine_heixueregu", LocalStringManager.GetConfig("Medicine_language", "Desc_357"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_357"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_357"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, "CombatSkill.Wuxianjiao.WugEffect.BlackBloodGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(358, LocalStringManager.GetConfig("Medicine_language", "Name_358"), 8, 802, 2, -1, "icon_Medicine_heixueregu", LocalStringManager.GetConfig("Medicine_language", "Desc_358"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_358"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_358"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, "CombatSkill.Wuxianjiao.WugEffect.BlackBloodGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(359, LocalStringManager.GetConfig("Medicine_language", "Name_359"), 8, 802, 2, -1, "icon_Medicine_heixueregu", LocalStringManager.GetConfig("Medicine_language", "Desc_359"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_359"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_359"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, "CombatSkill.Wuxianjiao.WugEffect.BlackBloodGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+	}
+
+	private void CreateItems6()
+	{
+		_dataArray.Add(new MedicineItem(360, LocalStringManager.GetConfig("Medicine_language", "Name_360"), 8, 802, 2, -1, "icon_Medicine_heixueregu", LocalStringManager.GetConfig("Medicine_language", "Desc_360"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_360"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_360"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, "CombatSkill.Wuxianjiao.WugEffect.BlackBloodGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(361, LocalStringManager.GetConfig("Medicine_language", "Name_361"), 8, 802, 3, -1, "icon_Medicine_heixiechenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_361"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_361"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_361"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, "CombatSkill.Wuxianjiao.WugEffect.BlackBloodGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(362, LocalStringManager.GetConfig("Medicine_language", "Name_362"), 8, 802, 3, -1, "icon_Medicine_xinmoregu", LocalStringManager.GetConfig("Medicine_language", "Desc_362"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_362"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_362"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, "CombatSkill.Wuxianjiao.WugEffect.DevilInsideGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(363, LocalStringManager.GetConfig("Medicine_language", "Name_363"), 8, 802, 3, -1, "icon_Medicine_xinmoregu", LocalStringManager.GetConfig("Medicine_language", "Desc_363"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_363"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_363"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, "CombatSkill.Wuxianjiao.WugEffect.DevilInsideGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(364, LocalStringManager.GetConfig("Medicine_language", "Name_364"), 8, 802, 3, -1, "icon_Medicine_xinmoregu", LocalStringManager.GetConfig("Medicine_language", "Desc_364"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_364"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_364"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 2, "CombatSkill.Wuxianjiao.WugEffect.DevilInsideGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(365, LocalStringManager.GetConfig("Medicine_language", "Name_365"), 8, 802, 3, -1, "icon_Medicine_xinmoregu", LocalStringManager.GetConfig("Medicine_language", "Desc_365"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_365"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_365"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, "CombatSkill.Wuxianjiao.WugEffect.DevilInsideGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(366, LocalStringManager.GetConfig("Medicine_language", "Name_366"), 8, 802, 4, -1, "icon_Medicine_xinmochenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_366"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_366"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_366"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, "CombatSkill.Wuxianjiao.WugEffect.DevilInsideGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(367, LocalStringManager.GetConfig("Medicine_language", "Name_367"), 8, 802, 4, -1, "icon_Medicine_shichiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_367"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_367"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_367"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, "CombatSkill.Wuxianjiao.WugEffect.CorpseWormGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(368, LocalStringManager.GetConfig("Medicine_language", "Name_368"), 8, 802, 4, -1, "icon_Medicine_shichiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_368"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_368"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_368"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, "CombatSkill.Wuxianjiao.WugEffect.CorpseWormGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(369, LocalStringManager.GetConfig("Medicine_language", "Name_369"), 8, 802, 4, -1, "icon_Medicine_shichiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_369"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_369"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_369"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, "CombatSkill.Wuxianjiao.WugEffect.CorpseWormGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(370, LocalStringManager.GetConfig("Medicine_language", "Name_370"), 8, 802, 4, -1, "icon_Medicine_shichiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_370"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_370"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_370"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, "CombatSkill.Wuxianjiao.WugEffect.CorpseWormGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(371, LocalStringManager.GetConfig("Medicine_language", "Name_371"), 8, 802, 5, -1, "icon_Medicine_shichichenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_371"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_371"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_371"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, "CombatSkill.Wuxianjiao.WugEffect.CorpseWormGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(372, LocalStringManager.GetConfig("Medicine_language", "Name_372"), 8, 802, 5, -1, "icon_Medicine_bingcanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_372"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_372"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_372"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, "CombatSkill.Wuxianjiao.WugEffect.IceSilkwormGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(373, LocalStringManager.GetConfig("Medicine_language", "Name_373"), 8, 802, 5, -1, "icon_Medicine_bingcanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_373"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_373"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_373"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, "CombatSkill.Wuxianjiao.WugEffect.IceSilkwormGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(374, LocalStringManager.GetConfig("Medicine_language", "Name_374"), 8, 802, 5, -1, "icon_Medicine_bingcanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_374"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_374"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_374"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, "CombatSkill.Wuxianjiao.WugEffect.IceSilkwormGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(375, LocalStringManager.GetConfig("Medicine_language", "Name_375"), 8, 802, 5, -1, "icon_Medicine_bingcanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_375"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_375"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_375"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 3, "CombatSkill.Wuxianjiao.WugEffect.IceSilkwormGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(376, LocalStringManager.GetConfig("Medicine_language", "Name_376"), 8, 802, 6, -1, "icon_Medicine_bingcanchenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_376"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_376"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_376"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 4, "CombatSkill.Wuxianjiao.WugEffect.IceSilkwormGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(377, LocalStringManager.GetConfig("Medicine_language", "Name_377"), 8, 802, 6, -1, "icon_Medicine_jincanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_377"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_377"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_377"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, "CombatSkill.Wuxianjiao.WugEffect.GoldenSilkwormGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(378, LocalStringManager.GetConfig("Medicine_language", "Name_378"), 8, 802, 6, -1, "icon_Medicine_jincanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_378"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_378"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_378"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1, "CombatSkill.Wuxianjiao.WugEffect.GoldenSilkwormGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(379, LocalStringManager.GetConfig("Medicine_language", "Name_379"), 8, 802, 6, -1, "icon_Medicine_jincanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_379"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_379"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_379"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, "CombatSkill.Wuxianjiao.WugEffect.GoldenSilkwormGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(380, LocalStringManager.GetConfig("Medicine_language", "Name_380"), 8, 802, 6, -1, "icon_Medicine_jincanregu", LocalStringManager.GetConfig("Medicine_language", "Desc_380"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_380"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_380"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 3, "CombatSkill.Wuxianjiao.WugEffect.GoldenSilkwormGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(381, LocalStringManager.GetConfig("Medicine_language", "Name_381"), 8, 802, 7, -1, "icon_Medicine_jincanchenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_381"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_381"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_381"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4, "CombatSkill.Wuxianjiao.WugEffect.GoldenSilkwormGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(382, LocalStringManager.GetConfig("Medicine_language", "Name_382"), 8, 802, 7, -1, "icon_Medicine_qingsuiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_382"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_382"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_382"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, "CombatSkill.Wuxianjiao.WugEffect.AzureMarrowGrowingGood1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(383, LocalStringManager.GetConfig("Medicine_language", "Name_383"), 8, 802, 7, -1, "icon_Medicine_qingsuiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_383"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_383"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_383"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 30, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, "CombatSkill.Wuxianjiao.WugEffect.AzureMarrowGrowingGood2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(384, LocalStringManager.GetConfig("Medicine_language", "Name_384"), 8, 802, 7, -1, "icon_Medicine_qingsuiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_384"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_384"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_384"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2, "CombatSkill.Wuxianjiao.WugEffect.AzureMarrowGrowingBad1", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(385, LocalStringManager.GetConfig("Medicine_language", "Name_385"), 8, 802, 7, -1, "icon_Medicine_qingsuiregu", LocalStringManager.GetConfig("Medicine_language", "Desc_385"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_385"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_385"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 90, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, "CombatSkill.Wuxianjiao.WugEffect.AzureMarrowGrowingBad2", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(386, LocalStringManager.GetConfig("Medicine_language", "Name_386"), 8, 802, 8, -1, "icon_Medicine_qingsuichenggu", LocalStringManager.GetConfig("Medicine_language", "Desc_386"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_386"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_386"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 600, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 4, "CombatSkill.Wuxianjiao.WugEffect.AzureMarrowGrown", -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(387, LocalStringManager.GetConfig("Medicine_language", "Name_387"), 8, 800, 8, -1, "icon_Medicine_huosiyao", LocalStringManager.GetConfig("Medicine_language", "Desc_387"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_387"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_387"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 0, 0, 9, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 120, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(388, LocalStringManager.GetConfig("Medicine_language", "Name_388"), 8, 800, 8, -1, "icon_Medicine_wumingqidu", LocalStringManager.GetConfig("Medicine_language", "Desc_388"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_388"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_388"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: true, repairable: false, inheritable: true, 0, 10, 9600, 3, 9, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.RecoverHealth, EMedicineEffectSubType.RecoverHealthPercentage, 0, 100, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, 2, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: true, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(389, LocalStringManager.GetConfig("Medicine_language", "Name_389"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_389"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_389"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_389"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(390, LocalStringManager.GetConfig("Medicine_language", "Name_390"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_390"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_390"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_390"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(391, LocalStringManager.GetConfig("Medicine_language", "Name_391"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_391"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_391"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_391"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(392, LocalStringManager.GetConfig("Medicine_language", "Name_392"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_392"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_392"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_392"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(393, LocalStringManager.GetConfig("Medicine_language", "Name_393"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_393"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_393"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_393"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(394, LocalStringManager.GetConfig("Medicine_language", "Name_394"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_394"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_394"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_394"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(395, LocalStringManager.GetConfig("Medicine_language", "Name_395"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_395"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_395"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_395"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(396, LocalStringManager.GetConfig("Medicine_language", "Name_396"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_396"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_396"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_396"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(397, LocalStringManager.GetConfig("Medicine_language", "Name_397"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_397"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_397"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_397"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(398, LocalStringManager.GetConfig("Medicine_language", "Name_398"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_398"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_398"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_398"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(399, LocalStringManager.GetConfig("Medicine_language", "Name_399"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_399"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_399"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_399"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(400, LocalStringManager.GetConfig("Medicine_language", "Name_400"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_400"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_400"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_400"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(401, LocalStringManager.GetConfig("Medicine_language", "Name_401"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_401"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_401"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_401"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(402, LocalStringManager.GetConfig("Medicine_language", "Name_402"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_402"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_402"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_402"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(403, LocalStringManager.GetConfig("Medicine_language", "Name_403"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_403"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_403"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_403"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(404, LocalStringManager.GetConfig("Medicine_language", "Name_404"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_404"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_404"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_404"), 1642, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(405, LocalStringManager.GetConfig("Medicine_language", "Name_405"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_405"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_405"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_405"), 1643, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(406, LocalStringManager.GetConfig("Medicine_language", "Name_406"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_406"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_406"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_406"), 1644, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(407, LocalStringManager.GetConfig("Medicine_language", "Name_407"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_407"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_407"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_407"), 1645, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 12, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(408, LocalStringManager.GetConfig("Medicine_language", "Name_408"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_408"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_408"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_408"), 1646, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(409, LocalStringManager.GetConfig("Medicine_language", "Name_409"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_409"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_409"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_409"), 1647, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 12, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(410, LocalStringManager.GetConfig("Medicine_language", "Name_410"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_410"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_410"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_410"), 1648, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(411, LocalStringManager.GetConfig("Medicine_language", "Name_411"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_411"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_411"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_411"), 1649, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(412, LocalStringManager.GetConfig("Medicine_language", "Name_412"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_412"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_412"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_412"), 1650, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 12, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(413, LocalStringManager.GetConfig("Medicine_language", "Name_413"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_413"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_413"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_413"), 1651, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(414, LocalStringManager.GetConfig("Medicine_language", "Name_414"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_414"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_414"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_414"), 1652, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 36, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(415, LocalStringManager.GetConfig("Medicine_language", "Name_415"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_415"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_415"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_415"), 1653, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(416, LocalStringManager.GetConfig("Medicine_language", "Name_416"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_416"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_416"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_416"), 1654, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(417, LocalStringManager.GetConfig("Medicine_language", "Name_417"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_417"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_417"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_417"), 1655, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(418, LocalStringManager.GetConfig("Medicine_language", "Name_418"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_418"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_418"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_418"), 1656, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(419, LocalStringManager.GetConfig("Medicine_language", "Name_419"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_419"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_419"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_419"), 1657, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 12, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+	}
+
+	private void CreateItems7()
+	{
+		_dataArray.Add(new MedicineItem(420, LocalStringManager.GetConfig("Medicine_language", "Name_420"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_420"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_420"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_420"), 1658, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(421, LocalStringManager.GetConfig("Medicine_language", "Name_421"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_421"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_421"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_421"), 1659, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(422, LocalStringManager.GetConfig("Medicine_language", "Name_422"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_422"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_422"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_422"), 1660, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 3, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(423, LocalStringManager.GetConfig("Medicine_language", "Name_423"), 8, 803, 8, -1, null, LocalStringManager.GetConfig("Medicine_language", "Desc_423"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_423"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_423"), 1661, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 12, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(424, LocalStringManager.GetConfig("Medicine_language", "Name_424"), 8, 802, 8, -1, "icon_Medicine_chimuwanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_424"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_424"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_424"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, "CombatSkill.Wuxianjiao.WugEffect.RedEyeKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(425, LocalStringManager.GetConfig("Medicine_language", "Name_425"), 8, 802, 8, -1, "icon_Medicine_chimeiwanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_425"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_425"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_425"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, "CombatSkill.Wuxianjiao.WugEffect.ForestSpiritKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(426, LocalStringManager.GetConfig("Medicine_language", "Name_426"), 8, 802, 8, -1, "icon_Medicine_heixuewanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_426"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_426"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_426"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, "CombatSkill.Wuxianjiao.WugEffect.BlackBloodKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(427, LocalStringManager.GetConfig("Medicine_language", "Name_427"), 8, 802, 8, -1, "icon_Medicine_xinmowanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_427"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_427"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_427"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, "CombatSkill.Wuxianjiao.WugEffect.DevilInsideKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(428, LocalStringManager.GetConfig("Medicine_language", "Name_428"), 8, 802, 8, -1, "icon_Medicine_shichiwanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_428"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_428"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_428"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, "CombatSkill.Wuxianjiao.WugEffect.CorpseWormKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(429, LocalStringManager.GetConfig("Medicine_language", "Name_429"), 8, 802, 8, -1, "icon_Medicine_bingcanwanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_429"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_429"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_429"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, "CombatSkill.Wuxianjiao.WugEffect.IceSilkwormKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(430, LocalStringManager.GetConfig("Medicine_language", "Name_430"), 8, 802, 8, -1, "icon_Medicine_jincanwanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_430"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_430"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_430"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 5, "CombatSkill.Wuxianjiao.WugEffect.GoldenSilkwormKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(431, LocalStringManager.GetConfig("Medicine_language", "Name_431"), 8, 802, 8, -1, "icon_Medicine_qingsuiwanggu", LocalStringManager.GetConfig("Medicine_language", "Desc_431"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_431"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_431"), -1, transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 5600, 3, 6, 5400, 8, allowRandomCreate: true, 10, isSpecial: true, 5, 36, canUseMultiple: false, -1, new List<int>(), 90, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 5, "CombatSkill.Wuxianjiao.WugEffect.AzureMarrowKing", 3, 60, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(432, LocalStringManager.GetConfig("Medicine_language", "Name_432"), 8, 800, 8, -1, "icon_Misc_tianjiefulu", LocalStringManager.GetConfig("Medicine_language", "Desc_432"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_432"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_432"), -1, transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: false, 5, 36, canUseMultiple: true, -1, new List<int>(), 1, EMedicineEffectType.Invalid, EMedicineEffectSubType.PropertyAddValue, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, -1, -1, null, 2, -1, 60, 2, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: true, instantAffect: false, 10, 9, isVirtual: false));
+		_dataArray.Add(new MedicineItem(433, LocalStringManager.GetConfig("Medicine_language", "Name_433"), 8, 800, 0, -1, "icon_Medicine_waishang", LocalStringManager.GetConfig("Medicine_language", "Desc_433"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_433"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_433"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(434, LocalStringManager.GetConfig("Medicine_language", "Name_434"), 8, 800, 0, -1, "icon_Medicine_neishang", LocalStringManager.GetConfig("Medicine_language", "Desc_434"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_434"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_434"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: true, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(435, LocalStringManager.GetConfig("Medicine_language", "Name_435"), 8, 801, 0, -1, "icon_Medicine_liedu", LocalStringManager.GetConfig("Medicine_language", "Desc_435"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_435"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_435"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(436, LocalStringManager.GetConfig("Medicine_language", "Name_436"), 8, 801, 0, -1, "icon_Medicine_yudu", LocalStringManager.GetConfig("Medicine_language", "Desc_436"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_436"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_436"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(437, LocalStringManager.GetConfig("Medicine_language", "Name_437"), 8, 801, 0, -1, "icon_Medicine_chidu", LocalStringManager.GetConfig("Medicine_language", "Desc_437"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_437"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_437"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(438, LocalStringManager.GetConfig("Medicine_language", "Name_438"), 8, 801, 0, -1, "icon_Medicine_handu", LocalStringManager.GetConfig("Medicine_language", "Desc_438"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_438"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_438"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(439, LocalStringManager.GetConfig("Medicine_language", "Name_439"), 8, 801, 0, -1, "icon_Medicine_fudu", LocalStringManager.GetConfig("Medicine_language", "Desc_439"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_439"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_439"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+		_dataArray.Add(new MedicineItem(440, LocalStringManager.GetConfig("Medicine_language", "Name_440"), 8, 801, 0, -1, "icon_Medicine_huandu", LocalStringManager.GetConfig("Medicine_language", "Desc_440"), LocalStringManager.GetConfig("Medicine_language", "FunctionDesc_440"), LocalStringManager.GetConfig("Medicine_language", "SpecialEffectDesc_440"), -1, transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, 36, canUseMultiple: true, -1, new List<int>(), 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, null, -1, -1, 60, 0, 0, 0, 0, 0, 0, 0, hasNormalEatingEffect: false, instantAffect: false, 10, 9, isVirtual: true));
+	}
+
+	public override void Init()
+	{
+		base.Init();
+		_dataArray = new List<MedicineItem>(441);
+		CreateItems0();
+		CreateItems1();
+		CreateItems2();
+		CreateItems3();
+		CreateItems4();
+		CreateItems5();
+		CreateItems6();
+		CreateItems7();
+	}
+
+	public static int GetCharacterPropertyBonus(int key, ECharacterPropertyReferencedType property)
+	{
+		return Instance[key]?.GetCharacterPropertyBonusInt(property) ?? 0;
+	}
+
+	public static int GetCharacterPropertyBonus(short[] keys, ECharacterPropertyReferencedType property)
+	{
+		int sum = 0;
+		int i = 0;
+		for (int count = keys.Length; i < count; i++)
+		{
+			sum += Instance[keys[i]]?.GetCharacterPropertyBonusInt(property) ?? 0;
+		}
+		return sum;
+	}
+
+	public static int GetCharacterPropertyBonus(List<short> keys, ECharacterPropertyReferencedType property)
+	{
+		int sum = 0;
+		int i = 0;
+		for (int count = keys.Count; i < count; i++)
+		{
+			sum += Instance[keys[i]]?.GetCharacterPropertyBonusInt(property) ?? 0;
+		}
+		return sum;
+	}
+
+	public static int GetCharacterPropertyBonus(int[] keys, ECharacterPropertyReferencedType property)
+	{
+		int sum = 0;
+		int i = 0;
+		for (int count = keys.Length; i < count; i++)
+		{
+			sum += Instance[keys[i]]?.GetCharacterPropertyBonusInt(property) ?? 0;
+		}
+		return sum;
+	}
+
+	public static int GetCharacterPropertyBonus(List<int> keys, ECharacterPropertyReferencedType property)
+	{
+		int sum = 0;
+		int i = 0;
+		for (int count = keys.Count; i < count; i++)
+		{
+			sum += Instance[keys[i]]?.GetCharacterPropertyBonusInt(property) ?? 0;
+		}
+		return sum;
+	}
+}

@@ -1,7 +1,11 @@
-backend decompiled
+backend_decompiled
+managed_decompiled
 bin
 obj
 backend-code-structure.md
 player.log
-data
+logs
 .vs
+note.md
+__pycache__
+data

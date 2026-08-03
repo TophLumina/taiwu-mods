@@ -1,0 +1,160 @@
+using System;
+using System.Collections.Generic;
+using Config.Common;
+
+namespace Config;
+
+[Serializable]
+public class EventOptionTipsInfo : ConfigData<EventOptionTipsInfoItem, sbyte>
+{
+	/// <summary>
+	/// 配置表实例
+	/// </summary>
+	public static EventOptionTipsInfo Instance = new EventOptionTipsInfo();
+
+	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Title", "Desc", "TemplateId", "Guid" };
+
+	internal override int ToInt(sbyte value)
+	{
+		return value;
+	}
+
+	internal override sbyte ToTemplateId(int value)
+	{
+		return (sbyte)value;
+	}
+
+	private void CreateItems0()
+	{
+		_dataArray.Add(new EventOptionTipsInfoItem(0, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_0"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_0"), new List<string> { "b83f08bc-38fb-4510-9aa1-f1b3c88e0aed" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(1, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_1"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_1"), new List<string> { "28249f52-8580-4116-a945-e97754549334" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(2, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_2"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_2"), new List<string> { "545aaa89-568f-4d93-8404-0342c32e8cfe" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(3, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_3"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_3"), new List<string> { "02aa698d-8883-4c46-a0a7-a145f01aea16" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(4, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_4"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_4"), new List<string> { "99d2a9ec-d771-4025-acf5-3e1cd441a131" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(5, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_5"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_5"), new List<string> { "ca7d1404-1eef-426e-8244-e701f5d46179", "8907336d-e636-488d-a659-900ed617d1fc" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(6, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_6"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_6"), new List<string> { "2aa9a29a-0290-4df7-aa8e-8cdaea94a22d", "de774882-4c43-4bb8-b1a8-b141956d34e6" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(7, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_7"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_7"), new List<string> { "3e313ce1-daca-4d7e-9a64-70b45fbcce27" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(8, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_8"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_8"), new List<string> { "851deb6a-de66-4231-a9ce-fb51723739ea" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(9, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_9"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_9"), new List<string> { "ad358628-3687-41e8-9898-bcd7b6e67910" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(10, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_10"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_10"), new List<string> { "bba2883b-3408-45fd-abf1-b0ce7b366201" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(11, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_11"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_11"), new List<string> { "e9d8182a-c473-4dbc-b5c4-a5b7f62445a4" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(12, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_12"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_12"), new List<string> { "db8888fb-bda7-4e34-88bd-8d10c1d9d1d8" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(13, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_13"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_13"), new List<string> { "cd3ca28b-5ac1-4d42-a0d9-9a986ddca4b6" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(14, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_14"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_14"), new List<string> { "92b9bed2-fe66-4afc-81b3-531c13cd8887" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(15, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_15"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_15"), new List<string> { "e243fb2f-a058-445a-95e7-fa9366e50a2d" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(16, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_16"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_16"), new List<string> { "8ba68dca-6b4f-476a-a026-2cdf6e15300f" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(17, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_17"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_17"), new List<string> { "cee16df2-0bff-4eaa-ae56-f9e993cfa1d3" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(18, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_18"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_18"), new List<string> { "d9f58719-6ca5-4a03-aca1-fe8d009b28f2" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(19, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_19"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_19"), new List<string> { "a06d3076-faf4-45ac-b9cf-fff47f237ca8" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(20, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_20"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_20"), new List<string> { "f3cd1acd-9ab3-47f6-b4ed-d8436858d240" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(21, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_21"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_21"), new List<string> { "c2034105-5c76-4e00-8536-ef266af4497a" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(22, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_22"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_22"), new List<string> { "f0bc508b-f0bc-49af-b259-5bb9e82537f4" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(23, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_23"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_23"), new List<string> { "2db90ded-e897-4cd5-9b68-028045a73699" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(24, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_24"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_24"), new List<string> { "4f2df9f9-77db-4e77-9c7e-d8a199903643" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(25, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_25"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_25"), new List<string> { "ed0ebd9f-2b78-4d57-b0a8-4e3465a0a9a6" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(26, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_26"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_26"), new List<string> { "17189c1e-e6ca-4fec-970b-014351902ee4" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(27, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_27"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_27"), new List<string> { "6240cd43-e05b-4c43-a3c7-bc537a06c665" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(28, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_28"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_28"), new List<string> { "5c2a6ee4-6f7d-4ef4-9964-48dfc479bf56" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(29, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_29"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_29"), new List<string> { "bef0841b-fefd-4e20-b2fc-25696153a9ef" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(30, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_30"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_30"), new List<string> { "9f6cdf53-6664-45fd-9e08-342553142466" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(31, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_31"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_31"), new List<string> { "fe975917-a80d-4601-9e44-8b02d5ef4e70" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(32, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_32"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_32"), new List<string> { "1803031e-500e-4e0c-b751-beba5a194755" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(33, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_33"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_33"), new List<string> { "ebeef265-487b-450d-8b30-7992553eac31" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(34, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_34"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_34"), new List<string> { "b8e895b1-00e3-4f5f-8e78-3b82340a97d8" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(35, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_35"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_35"), new List<string> { "c130f027-3054-42e0-a822-1110d4d0ca97" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(36, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_36"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_36"), new List<string> { "1afc4f92-ec82-433a-bca2-1578edcbc9d5" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(37, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_37"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_37"), new List<string> { "8485fb14-e3e9-4a7c-b14e-d8b4d194c4d3" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(38, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_38"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_38"), new List<string> { "baca7ff7-bd45-4e4a-8d04-9ca3b351af83" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(39, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_39"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_39"), new List<string> { "a80d5623-3293-4ff7-85a7-503652de8596", "360e1b76-7edf-47e9-85ed-d923205fe1d8" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(40, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_40"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_40"), new List<string> { "ae23b819-8c1c-4dff-befb-5d0c62ff0962" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(41, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_41"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_41"), new List<string> { "3e5cdc83-4648-46ab-822f-99e5cbf5a75a" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(42, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_42"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_42"), new List<string> { "a0211104-e039-49ff-981f-7e878f0ca9bc" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(43, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_43"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_43"), new List<string> { "db0a85ca-426e-4577-9fea-48a2c8821312" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(44, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_44"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_44"), new List<string> { "84a0ec96-5374-4c82-bbb6-cb3a6fe4e85b" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(45, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_45"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_45"), new List<string> { "8c39e722-3940-4547-9fcc-a18ba3c2b035" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(46, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_46"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_46"), new List<string> { "d21bd2ce-c438-4b77-a6e5-eb48e7802d1f" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(47, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_47"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_47"), new List<string> { "fde106cd-88e5-4edc-9fd7-e844685a4ec2" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(48, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_48"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_48"), new List<string> { "16418099-6508-4416-9dfb-ab48064011a0" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(49, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_49"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_49"), new List<string> { "83d3927b-dc15-4238-bc84-572a80e6dbc3" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(50, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_50"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_50"), new List<string> { "18219ebc-1d0d-41f9-9b21-0bc58b63f911" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(51, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_51"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_51"), new List<string> { "8e94e7f9-4532-4762-9ea0-7c6af9c5f297" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(52, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_52"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_52"), new List<string> { "f4560d2f-a824-4722-9ea3-a8021a2167b2" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(53, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_53"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_53"), new List<string> { "c94ad014-80e9-48d3-acfa-b40e7d00b330" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(54, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_54"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_54"), new List<string> { "c1d57d6b-9347-452a-85fd-df19e0a65f2b" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(55, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_55"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_55"), new List<string> { "72ee5c31-5730-4a46-b0d4-ea6690573e29" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(56, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_56"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_56"), new List<string> { "c915dbc2-7bec-4643-993d-b9aa5073d90b" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(57, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_57"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_57"), new List<string> { "815777bd-1412-4ed3-9569-fd39147ffcef" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(58, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_58"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_58"), new List<string> { "e4189cda-fe14-4200-a7fc-d8927b930282" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(59, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_59"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_59"), new List<string> { "232efb3b-251c-45e9-824f-3461a739f75d" }));
+	}
+
+	private void CreateItems1()
+	{
+		_dataArray.Add(new EventOptionTipsInfoItem(60, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_60"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_60"), new List<string> { "b07acab7-edae-47be-a070-bf808f906990" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(61, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_61"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_61"), new List<string> { "32c8c82c-0a50-4266-bfcc-30584c3ead79" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(62, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_62"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_62"), new List<string> { "4ab58b95-ea2b-41eb-ad44-2c7867650413" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(63, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_63"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_63"), new List<string> { "d71fad67-d8a9-4c09-896b-709ac501e38f" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(64, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_64"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_64"), new List<string> { "476dfbe2-888e-46ad-9739-607ed8bead58" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(65, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_65"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_65"), new List<string> { "6dfdc03e-8354-4673-89f8-5950baba1dc1" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(66, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_66"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_66"), new List<string> { "63fba20b-af20-4acf-a3d4-8d141f723603" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(67, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_67"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_67"), new List<string> { "6c6feb27-bdff-4034-9b34-3f4c4ca9cca4" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(68, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_68"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_68"), new List<string> { "34008183-b660-4d37-8c6e-829f909b0740" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(69, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_69"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_69"), new List<string> { "ec748a64-2203-4a39-8c73-027ca7a8ffbb" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(70, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_70"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_70"), new List<string> { "47505f4f-a83a-4b04-be26-bfe68168bb6b" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(71, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_71"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_71"), new List<string> { "24955b46-54cf-4f5c-8219-8785b59daa8c" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(72, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_72"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_72"), new List<string> { "dddddfb1-1875-42d7-bc1c-71d50de926d9" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(73, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_73"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_73"), new List<string> { "58ef6bdf-64a0-46e5-bfbf-8d494c1962c9" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(74, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_74"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_74"), new List<string> { "445ba0fb-5613-458f-8d6c-7e2ef4b479ba" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(75, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_75"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_75"), new List<string> { "82431922-c9c8-41d9-b98b-3f469b7d302f" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(76, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_76"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_76"), new List<string> { "2e3f9ab3-1edf-4959-8293-c57803dc745f" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(77, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_77"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_77"), new List<string> { "1bfebfdb-54ad-42cf-8cca-77a0f860cc40" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(78, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_78"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_78"), new List<string> { "4a2474c4-7e69-4464-a44c-8b1de2a50e9c" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(79, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_79"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_79"), new List<string> { "6f4b56f5-6d60-4b2b-87b1-735402a75508" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(80, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_80"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_80"), new List<string> { "0dc5194c-bee0-4c29-a2e0-28596136275d" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(81, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_81"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_81"), new List<string> { "70ed5c6a-a615-404d-bcba-39c855eb2e38" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(82, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_82"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_82"), new List<string> { "ecf43809-ba5c-474a-90bb-b79f4b01970a" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(83, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_83"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_83"), new List<string> { "6c87bcdd-7fad-4f82-aacc-10295820db88" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(84, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_84"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_84"), new List<string> { "0269e8a7-3857-4fb5-99f4-68945a69daf4" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(85, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_85"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_85"), new List<string> { "9453eb35-bbff-4ff1-b2ff-e6b0626609a5" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(86, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_86"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_86"), new List<string> { "d7b341af-2633-4e18-8bde-81a3fa268790" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(87, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_87"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_87"), new List<string> { "8c10275e-7059-4751-8000-bbf3b0a7ad15" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(88, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_88"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_88"), new List<string> { "4885ea08-706b-4542-b903-a9bbb8a00f5c" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(89, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_89"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_89"), new List<string> { "b99161e5-43cc-4ffa-bfa4-d24c9fed5200" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(90, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_90"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_90"), new List<string> { "4531865f-fed9-4258-a525-2e2b764c967d" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(91, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_91"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_91"), new List<string> { "5a818082-0c33-4e02-abfc-135ae1f96728" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(92, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_92"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_92"), new List<string> { "63989f81-30b3-403b-946d-11e372207e6c" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(93, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_93"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_93"), new List<string> { "5b16cb9f-8c81-42ca-9bff-6a240032d0b7" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(94, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_94"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_94"), new List<string> { "3ba39e16-9853-4b26-9bb2-4d15958cdbe7" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(95, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_95"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_95"), new List<string> { "01089785-6545-435b-baea-2cf9a9856426" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(96, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_96"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_96"), new List<string> { "85476161-eb2b-45ed-9c1c-d3ffbbb076f7" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(97, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_97"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_97"), new List<string> { "c0b946c6-de04-4953-af90-bd4f92ce3938" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(98, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_98"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_98"), new List<string> { "ed5fff3b-770a-4d16-8577-56233ff750df" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(99, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_99"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_99"), new List<string> { "ad8dcb0b-cdb7-47af-95a4-45659c85e706" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(100, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_100"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_100"), new List<string> { "d711cdc2-5fe2-4f19-a8c9-fce8a2d9555f" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(101, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_101"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_101"), new List<string> { "c470b2f6-a2ab-468e-8d76-d44c861c6b93" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(102, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_102"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_102"), new List<string> { "537cfe1b-031a-46f3-84bb-da10ef548ebf" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(103, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_103"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_103"), new List<string> { "81f4a7b0-11ad-41b0-bb31-e47756317320" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(104, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_104"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_104"), new List<string> { "81f4a7b0-11ad-41b0-bb31-e47756317320" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(105, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_105"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_105"), new List<string> { "c3855629-071b-44b1-96f9-bf1c1fe9b1fc" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(106, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_106"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_106"), new List<string> { "4eb67109-e322-4019-971d-2bfb7eb30469" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(107, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_107"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_107"), new List<string> { "8602327d-b223-4758-ac76-f6d29bdf2555" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(108, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_108"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_108"), new List<string> { "0e173b97-3b81-4cc0-add0-53d635e02b8e" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(109, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_109"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_109"), new List<string> { "92466761-aab5-4304-bd51-70324c35a477" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(110, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_110"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_110"), new List<string> { "489cac2a-7ba5-4491-9a04-9cdfc2bc6c81" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(111, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_111"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_111"), new List<string> { "e00b25ae-009e-4d34-b99d-cf258df9cc01" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(112, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_112"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_112"), new List<string> { "c9bce5e0-6ca8-4bd8-bcdb-a1ac8f67c77a" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(113, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_113"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_113"), new List<string> { "c06b393e-5448-4ddc-9205-d697d9fcf086" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(114, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_114"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_114"), new List<string> { "2b68413a-23bb-4cc6-a6cc-6f0d42ec9c32" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(115, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_115"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_115"), new List<string> { "e19db710-0672-415e-b55e-35763c32503c" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(116, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_116"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_116"), new List<string> { "0d9998ec-286d-4a4a-a874-003421e2d090" }));
+		_dataArray.Add(new EventOptionTipsInfoItem(117, LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Title_117"), LocalStringManager.GetConfig("EventOptionTipsInfo_language", "Desc_117"), new List<string> { "92211893-432e-493b-bdd7-8ddd1a125200" }));
+	}
+
+	public override void Init()
+	{
+		base.Init();
+		_dataArray = new List<EventOptionTipsInfoItem>(118);
+		CreateItems0();
+		CreateItems1();
+	}
+}

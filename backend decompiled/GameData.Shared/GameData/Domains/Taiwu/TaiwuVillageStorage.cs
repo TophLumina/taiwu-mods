@@ -1,0 +1,159 @@
+using System;
+using GameData.Domains.Character;
+using GameData.Serializer;
+using GameData.Utilities;
+
+namespace GameData.Domains.Taiwu;
+
+/// <summary>
+/// 资源和行囊
+/// </summary>
+[Obsolete]
+[SerializableGameData(NoCopyConstructors = true)]
+public class TaiwuVillageStorage : ISerializableGameData
+{
+	/// <summary>
+	/// 资源
+	/// </summary>
+	[SerializableGameDataField]
+	public ResourceInts Resources;
+
+	/// <summary>
+	/// 道具.
+	/// 索引值可能为
+	/// <see cref="!:StockStorageType" />
+	/// <see cref="!:CraftStorageType" />
+	/// <see cref="!:MedicineStorageType" />
+	/// </summary>
+	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
+	public Inventory[] Inventories;
+
+	/// <summary>
+	/// 需要提交数据修改
+	/// </summary>
+	public bool NeedCommit;
+
+	/// <summary>
+	/// 构造函数
+	/// </summary>
+	public TaiwuVillageStorage()
+	{
+		Resources.Initialize();
+		Inventories = Array.Empty<Inventory>();
+	}
+
+	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
+	public bool IsSerializedSizeFixed()
+	{
+		return false;
+	}
+
+	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
+	public int GetSerializedSize()
+	{
+		int totalSize = 32;
+		if (Inventories != null)
+		{
+			totalSize += 2;
+			int elementsCount = Inventories.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				Inventory element = Inventories[i];
+				totalSize = ((element == null) ? (totalSize + 4) : (totalSize + (4 + element.GetSerializedSize())));
+			}
+		}
+		else
+		{
+			totalSize += 2;
+		}
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
+	}
+
+	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
+	public unsafe int Serialize(byte* pData)
+	{
+		byte* pCurrData = pData;
+		pCurrData += Resources.Serialize(pCurrData);
+		if (Inventories != null)
+		{
+			int elementsCount = Inventories.Length;
+			Tester.Assert(elementsCount <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount;
+			pCurrData += 2;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				Inventory element = Inventories[i];
+				if (element != null)
+				{
+					byte* intPtr = pCurrData;
+					pCurrData += 4;
+					int subDataSize = element.Serialize(pCurrData);
+					pCurrData += subDataSize;
+					Tester.Assert(subDataSize <= int.MaxValue);
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pCurrData = 0;
+					pCurrData += 4;
+				}
+			}
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
+		int totalSize = (int)(pCurrData - pData);
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
+	}
+
+	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
+	public unsafe int Deserialize(byte* pData)
+	{
+		byte* pCurrData = pData;
+		pCurrData += Resources.Deserialize(pCurrData);
+		ushort elementsCount = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (elementsCount > 0)
+		{
+			if (Inventories == null || Inventories.Length != elementsCount)
+			{
+				Inventories = new Inventory[elementsCount];
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					Inventory element = Inventories[i] ?? new Inventory();
+					pCurrData += element.Deserialize(pCurrData);
+					Inventories[i] = element;
+				}
+				else
+				{
+					Inventories[i] = null;
+				}
+			}
+		}
+		else
+		{
+			Inventories = null;
+		}
+		int totalSize = (int)(pCurrData - pData);
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
+	}
+}

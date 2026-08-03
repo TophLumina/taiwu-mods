@@ -13,6 +13,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     public override void Initialize()
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
+        SaveWorldParallelCompression.Initialize(ModIdStr);
         TaiwuDiagnosticsExporter.Initialize(
             "TaiwuOptimization",
             TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,
