@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
 using GameData.Domains.TaiwuEvent;
@@ -17,8 +18,6 @@ namespace TaiwuOptimization.Runtime;
 /// </summary>
 internal static class EventAssemblyPreloader
 {
-    private const int ReadWorkerCount = 4;
-
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private static readonly object SyncRoot = new();
 
@@ -74,8 +73,10 @@ internal static class EventAssemblyPreloader
                 }
 
                 int physicalCoreCount = PhysicalProcessorTopology.PhysicalCoreCount;
-                int loadWorkerCount = physicalCoreCount;
-                PreloadState state = new(assemblyPaths, ReadWorkerCount, loadWorkerCount);
+                PreloadState state = new(
+                    assemblyPaths,
+                    physicalCoreCount,
+                    physicalCoreCount);
                 _state = state;
                 state.Start();
             }
@@ -233,8 +234,15 @@ internal static class EventAssemblyPreloader
             }
         }
 
-        public void Start() =>
-            _ = Task.Run(Run);
+        public void Start()
+        {
+            Thread coordinator = new(Run)
+            {
+                IsBackground = true,
+                Name = "TaiwuOptimization event DLL preload coordinator",
+            };
+            coordinator.Start();
+        }
 
         public bool TryTake(string path, out Task<PreloadResult> preloadTask)
         {
@@ -300,19 +308,8 @@ internal static class EventAssemblyPreloader
         {
             try
             {
-                ParallelOptions readOptions = new()
-                {
-                    CancellationToken = _cancellation.Token,
-                    MaxDegreeOfParallelism = _readWorkerCount,
-                };
-                Parallel.ForEach(_entries, readOptions, ReadEntry);
-
-                ParallelOptions loadOptions = new()
-                {
-                    CancellationToken = _cancellation.Token,
-                    MaxDegreeOfParallelism = _loadWorkerCount,
-                };
-                Parallel.ForEach(_entries, loadOptions, LoadEntry);
+                RunDedicatedWorkers(_readWorkerCount, ReadEntry, "read");
+                RunDedicatedWorkers(_loadWorkerCount, LoadEntry, "load");
             }
             catch (OperationCanceledException) when (_cancellation.IsCancellationRequested)
             {
@@ -337,6 +334,73 @@ internal static class EventAssemblyPreloader
                 Volatile.Write(ref _finishedAt, Stopwatch.GetTimestamp());
                 _cancellation.Dispose();
             }
+        }
+
+        private void RunDedicatedWorkers(
+            int workerCount,
+            Action<Entry> action,
+            string stage)
+        {
+            int nextIndex = -1;
+            int startedCount = 0;
+            ExceptionDispatchInfo? failure = null;
+            CancellationToken cancellationToken = _cancellation.Token;
+            Thread[] workers = new Thread[workerCount];
+
+            try
+            {
+                for (int workerIndex = 0; workerIndex < workers.Length; workerIndex++)
+                {
+                    int workerNumber = workerIndex + 1;
+                    Thread worker = new(() =>
+                    {
+                        try
+                        {
+                            while (Volatile.Read(ref failure) == null)
+                            {
+                                cancellationToken.ThrowIfCancellationRequested();
+                                int index = Interlocked.Increment(ref nextIndex);
+                                if (index >= _entries.Length)
+                                {
+                                    return;
+                                }
+
+                                action(_entries[index]);
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            Interlocked.CompareExchange(
+                                ref failure,
+                                ExceptionDispatchInfo.Capture(exception),
+                                null);
+                        }
+                    })
+                    {
+                        IsBackground = true,
+                        Name = $"TaiwuOptimization event DLL {stage} {workerNumber}",
+                    };
+                    workers[workerIndex] = worker;
+                    worker.Start();
+                    startedCount++;
+                }
+            }
+            catch (Exception exception)
+            {
+                Interlocked.CompareExchange(
+                    ref failure,
+                    ExceptionDispatchInfo.Capture(exception),
+                    null);
+            }
+            finally
+            {
+                for (int workerIndex = 0; workerIndex < startedCount; workerIndex++)
+                {
+                    workers[workerIndex].Join();
+                }
+            }
+
+            failure?.Throw();
         }
 
         private void ReadEntry(Entry entry)
