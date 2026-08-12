@@ -784,25 +784,33 @@ public class OrganizationDomain : BaseGameDataDomain
 
 	public void ChangeGrade(DataContext context, GameData.Domains.Character.Character character, sbyte destGrade, bool destPrincipal)
 	{
+		ChangeGrade(context, character, destGrade, destPrincipal, autoCommitLifeRecord: true);
+	}
+
+	public void ChangeGrade(DataContext context, GameData.Domains.Character.Character character, sbyte destGrade, bool destPrincipal, bool autoCommitLifeRecord)
+	{
 		int charId = character.GetId();
 		OrganizationInfo oriOrgInfo = character.GetOrganizationInfo();
 		OrganizationInfo destOrgInfo = new OrganizationInfo(oriOrgInfo.OrgTemplateId, destGrade, destPrincipal, oriOrgInfo.SettlementId);
 		character.SetOrganizationInfo(destOrgInfo, context);
-		if (destGrade > oriOrgInfo.Grade || (destGrade == oriOrgInfo.Grade && destPrincipal && !oriOrgInfo.Principal))
+		if (autoCommitLifeRecord)
 		{
-			LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
-			Location location = character.GetLocation();
-			int currDate = DomainManager.World.GetCurrDate();
-			sbyte gender = character.GetGender();
-			lifeRecordCollection.AddChangeGrade(charId, currDate, location, destOrgInfo.OrgTemplateId, destGrade, destPrincipal, gender);
-		}
-		else if (destGrade < oriOrgInfo.Grade || (destGrade == oriOrgInfo.Grade && destPrincipal && !oriOrgInfo.Principal))
-		{
-			LifeRecordCollection lifeRecordCollection2 = DomainManager.LifeRecord.GetLifeRecordCollection();
-			Location location2 = character.GetLocation();
-			int currDate2 = DomainManager.World.GetCurrDate();
-			sbyte gender2 = character.GetGender();
-			lifeRecordCollection2.AddChangeGradeDrop(charId, currDate2, location2, destOrgInfo.OrgTemplateId, destGrade, destPrincipal, gender2);
+			if (destGrade > oriOrgInfo.Grade || (destGrade == oriOrgInfo.Grade && destPrincipal && !oriOrgInfo.Principal))
+			{
+				LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+				Location location = character.GetLocation();
+				int currDate = DomainManager.World.GetCurrDate();
+				sbyte gender = character.GetGender();
+				lifeRecordCollection.AddChangeGrade(charId, currDate, location, destOrgInfo.OrgTemplateId, destGrade, destPrincipal, gender);
+			}
+			else if (destGrade < oriOrgInfo.Grade || (destGrade == oriOrgInfo.Grade && destPrincipal && !oriOrgInfo.Principal))
+			{
+				LifeRecordCollection lifeRecordCollection2 = DomainManager.LifeRecord.GetLifeRecordCollection();
+				Location location2 = character.GetLocation();
+				int currDate2 = DomainManager.World.GetCurrDate();
+				sbyte gender2 = character.GetGender();
+				lifeRecordCollection2.AddChangeGradeDrop(charId, currDate2, location2, destOrgInfo.OrgTemplateId, destGrade, destPrincipal, gender2);
+			}
 		}
 		if (oriOrgInfo.SettlementId < 0)
 		{
@@ -922,44 +930,139 @@ public class OrganizationDomain : BaseGameDataDomain
 		}
 	}
 
+	public bool CheckSettlementGradeIsFull(GameData.Domains.Character.Character selfChar)
+	{
+		Settlement settlement = GetSettlementOrDefault(selfChar.GetOrganizationInfo().SettlementId);
+		if (settlement == null)
+		{
+			return true;
+		}
+		sbyte grade = selfChar.GetOrganizationInfo().Grade;
+		int expected = settlement.GetExpectedCoreMemberAmount(OrganizationMember.Instance[settlement.OrganizationConfig.Members[grade]]);
+		return settlement.GetMembers().GetMembers(grade).Count > expected * 2;
+	}
+
+	public sbyte GetChildGrade(IRandomSource random, sbyte[] grades, short settlementId)
+	{
+		if (grades == null || grades.Length <= 0)
+		{
+			return -1;
+		}
+		Settlement settlement = DomainManager.Organization.GetSettlementOrDefault(settlementId);
+		if (settlement == null)
+		{
+			return grades.GetRandom(random);
+		}
+		OrgMemberCollection members = settlement.GetMembers();
+		sbyte grade = grades[0];
+		for (int idx = 1; idx < grades.Length; idx++)
+		{
+			if (members.GetMembers(grade).Count * settlement.GetExpectedCoreMemberAmount(grades[idx]) > members.GetMembers(grades[idx]).Count * settlement.GetExpectedCoreMemberAmount(grade))
+			{
+				grade = grades[idx];
+			}
+		}
+		return grade;
+	}
+
+	public bool KeepJoinOrganizationDirection(GameData.Domains.Character.Character selfChar, GameData.Domains.Character.Character targetChar)
+	{
+		OrganizationInfo selfOrgInfo = selfChar.GetOrganizationInfo();
+		bool selfIsSectMember = Config.Organization.Instance[selfOrgInfo.OrgTemplateId].IsSect;
+		sbyte selfCharGrade = selfOrgInfo.Grade;
+		int selfAuthority = selfChar.GetResource(7);
+		OrganizationInfo targetOrgInfo = targetChar.GetOrganizationInfo();
+		bool targetIsSectMember = Config.Organization.Instance[targetOrgInfo.OrgTemplateId].IsSect;
+		sbyte targetCharGrade = targetOrgInfo.Grade;
+		int targetAuthority = targetChar.GetResource(7);
+		if (selfIsSectMember && !targetIsSectMember)
+		{
+			return true;
+		}
+		if (!selfIsSectMember && targetIsSectMember)
+		{
+			return false;
+		}
+		bool selfSectGradeFull = CheckSettlementGradeIsFull(selfChar);
+		bool targetSectGradeFull = CheckSettlementGradeIsFull(targetChar);
+		if (selfSectGradeFull && !targetSectGradeFull)
+		{
+			return true;
+		}
+		if (!selfSectGradeFull && targetSectGradeFull)
+		{
+			return false;
+		}
+		if (selfCharGrade > targetCharGrade)
+		{
+			return true;
+		}
+		if (selfCharGrade < targetCharGrade)
+		{
+			return false;
+		}
+		if (selfAuthority > targetAuthority)
+		{
+			return true;
+		}
+		if (selfAuthority < targetAuthority)
+		{
+			return false;
+		}
+		if (selfChar.GetId() < targetChar.GetId())
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public bool CanPerformDistantMarriage(GameData.Domains.Character.Character selfChar, GameData.Domains.Character.Character targetChar)
+	{
+		if (selfChar.GetOrganizationInfo().OrgTemplateId == 16 || targetChar.GetOrganizationInfo().OrgTemplateId == 16)
+		{
+			return true;
+		}
+		GameData.Domains.Character.Character far;
+		GameData.Domains.Character.Character near;
+		if (!KeepJoinOrganizationDirection(selfChar, targetChar))
+		{
+			GameData.Domains.Character.Character character = selfChar;
+			far = character;
+			near = targetChar;
+		}
+		else
+		{
+			GameData.Domains.Character.Character character = targetChar;
+			far = character;
+			near = selfChar;
+		}
+		if (CheckSettlementGradeIsFull(near))
+		{
+			return false;
+		}
+		sbyte grade = far.GetOrganizationInfo().Grade;
+		Settlement settlement = GetSettlementOrDefault(far.GetOrganizationInfo().SettlementId);
+		if (settlement == null)
+		{
+			return true;
+		}
+		int expected = settlement.GetExpectedCoreMemberAmount(OrganizationMember.Instance[settlement.OrganizationConfig.Members[grade]]);
+		foreach (int charId in settlement.GetMembers().GetMembers(grade))
+		{
+			if (DomainManager.Character.TryGetElement_Objects(charId, out var character2) && character2.GetOrganizationInfo().Principal && character2.GetAgeGroup() == 2 && --expected < 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void UpdateOrganizationAfterMarriage(DataContext context, GameData.Domains.Character.Character selfChar, GameData.Domains.Character.Character targetChar)
 	{
 		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
 		if (selfChar.GetId() != taiwuCharId && targetChar.GetId() != taiwuCharId)
 		{
-			OrganizationInfo selfOrgInfo = selfChar.GetOrganizationInfo();
-			bool selfIsSectMember = Config.Organization.Instance[selfOrgInfo.OrgTemplateId].IsSect;
-			sbyte selfCharGrade = selfOrgInfo.Grade;
-			int selfAuthority = selfChar.GetResource(7);
-			OrganizationInfo targetOrgInfo = targetChar.GetOrganizationInfo();
-			bool targetIsSectMember = Config.Organization.Instance[targetOrgInfo.OrgTemplateId].IsSect;
-			sbyte targetCharGrade = targetOrgInfo.Grade;
-			int targetAuthority = targetChar.GetResource(7);
-			if (selfIsSectMember && !targetIsSectMember)
-			{
-				DomainManager.Organization.JoinSpouseOrganization(context, targetChar, selfChar);
-			}
-			else if (!selfIsSectMember && targetIsSectMember)
-			{
-				DomainManager.Organization.JoinSpouseOrganization(context, selfChar, targetChar);
-			}
-			else if (selfCharGrade > targetCharGrade)
-			{
-				DomainManager.Organization.JoinSpouseOrganization(context, targetChar, selfChar);
-			}
-			else if (selfCharGrade < targetCharGrade)
-			{
-				DomainManager.Organization.JoinSpouseOrganization(context, selfChar, targetChar);
-			}
-			else if (selfAuthority > targetAuthority)
-			{
-				DomainManager.Organization.JoinSpouseOrganization(context, targetChar, selfChar);
-			}
-			else if (selfAuthority < targetAuthority)
-			{
-				DomainManager.Organization.JoinSpouseOrganization(context, selfChar, targetChar);
-			}
-			else if (selfChar.GetId() < targetChar.GetId())
+			if (KeepJoinOrganizationDirection(selfChar, targetChar))
 			{
 				DomainManager.Organization.JoinSpouseOrganization(context, targetChar, selfChar);
 			}
@@ -975,24 +1078,45 @@ public class OrganizationDomain : BaseGameDataDomain
 		OrganizationInfo selfOrgInfo = selfChar.GetOrganizationInfo();
 		OrganizationInfo spouseOrgInfo = spouseChar.GetOrganizationInfo();
 		OrganizationMemberItem spouseOrgMemberCfg = GetOrgMemberConfig(spouseOrgInfo);
-		if (!spouseOrgInfo.Principal || spouseOrgMemberCfg.ChildGrade < 0)
+		int num;
+		if (spouseOrgInfo.Principal)
 		{
-			Logger.AppendWarning($"Invalid marriage between {selfChar} x {spouseChar}: principal={spouseOrgInfo.Principal}, childGrade={spouseOrgMemberCfg.ChildGrade} >= 0");
+			if (spouseOrgMemberCfg != null)
+			{
+				sbyte[] childGrade = spouseOrgMemberCfg.ChildGrade;
+				if (childGrade != null)
+				{
+					num = ((childGrade.Length > 0) ? 1 : 0);
+					goto IL_0037;
+				}
+			}
+			num = 0;
+			goto IL_0037;
 		}
-		else if (selfOrgInfo.OrgTemplateId == spouseOrgInfo.OrgTemplateId && selfOrgInfo.SettlementId == spouseOrgInfo.SettlementId)
+		goto IL_0044;
+		IL_0044:
+		Logger.AppendWarning($"Invalid marriage between {selfChar} x {spouseChar}: principal={spouseOrgInfo.Principal}, childGrade={spouseOrgMemberCfg.ChildGrade} >= 0");
+		return;
+		IL_0037:
+		if (num != 0)
 		{
-			UpdateGradeAccordingToSpouse(context, selfChar, spouseChar);
+			if (selfOrgInfo.OrgTemplateId == spouseOrgInfo.OrgTemplateId && selfOrgInfo.SettlementId == spouseOrgInfo.SettlementId)
+			{
+				UpdateGradeAccordingToSpouse(context, selfChar, spouseChar);
+			}
+			else if (spouseOrgInfo.OrgTemplateId == 16)
+			{
+				OrganizationInfo selfNewOrgInfo = new OrganizationInfo(spouseOrgInfo.OrgTemplateId, 0, principal: true, spouseOrgInfo.SettlementId);
+				DomainManager.Organization.ChangeOrganization(context, selfChar, selfNewOrgInfo);
+			}
+			else
+			{
+				OrganizationInfo selfNewOrgInfo2 = new OrganizationInfo(spouseOrgInfo.OrgTemplateId, (sbyte)((!spouseOrgMemberCfg.RestrictPrincipalAmount || spouseOrgMemberCfg.DeputySpouseDowngrade >= 0) ? spouseOrgInfo.Grade : 0), spouseOrgMemberCfg.DeputySpouseDowngrade < 0, spouseOrgInfo.SettlementId);
+				DomainManager.Organization.ChangeOrganization(context, selfChar, selfNewOrgInfo2);
+			}
+			return;
 		}
-		else if (spouseOrgInfo.OrgTemplateId == 16)
-		{
-			OrganizationInfo selfNewOrgInfo = new OrganizationInfo(spouseOrgInfo.OrgTemplateId, 0, principal: true, spouseOrgInfo.SettlementId);
-			DomainManager.Organization.ChangeOrganization(context, selfChar, selfNewOrgInfo);
-		}
-		else
-		{
-			OrganizationInfo selfNewOrgInfo2 = new OrganizationInfo(spouseOrgInfo.OrgTemplateId, (sbyte)((!spouseOrgMemberCfg.RestrictPrincipalAmount || spouseOrgMemberCfg.DeputySpouseDowngrade >= 0) ? spouseOrgInfo.Grade : 0), spouseOrgMemberCfg.DeputySpouseDowngrade < 0, spouseOrgInfo.SettlementId);
-			DomainManager.Organization.ChangeOrganization(context, selfChar, selfNewOrgInfo2);
-		}
+		goto IL_0044;
 	}
 
 	public void UpdateGradeAccordingToSpouse(DataContext context, GameData.Domains.Character.Character selfChar, GameData.Domains.Character.Character spouseChar)
@@ -2509,7 +2633,7 @@ public class OrganizationDomain : BaseGameDataDomain
 			OrganizationMemberItem orgMemberCfg2 = GetOrgMemberConfig(orgTemplateId, grade);
 			if (orgMemberCfg2.RestrictPrincipalAmount && members.GetMembers(grade).Count >= orgMemberCfg2.Amount)
 			{
-				grade = Math.Max(0, orgMemberCfg2.ChildGrade);
+				grade = Math.Max(0, orgMemberCfg2.ChildGrade.GetRandom(random));
 			}
 			else if (orgMemberCfg2.Gender != -1 && orgMemberCfg2.Gender != inscribedChar.Gender)
 			{
@@ -2632,7 +2756,13 @@ public class OrganizationDomain : BaseGameDataDomain
 
 	private static void CreateSpouseAndChildren(DataContext context, SettlementMembersCreationInfo info)
 	{
-		if (info.CoreMemberConfig.ChildGrade < 0 || info.CoreChar.GetMonkType() != 0)
+		OrganizationMemberItem coreMemberConfig = info.CoreMemberConfig;
+		if (coreMemberConfig == null)
+		{
+			return;
+		}
+		sbyte[] childGrade = coreMemberConfig.ChildGrade;
+		if (childGrade == null || childGrade.Length <= 0 || info.CoreChar.GetMonkType() != 0)
 		{
 			return;
 		}
@@ -2778,7 +2908,7 @@ public class OrganizationDomain : BaseGameDataDomain
 			mother = info.CoreChar;
 			motherAge = info.CoreChar.GetCurrAge();
 		}
-		sbyte grade = info.CoreMemberConfig.ChildGrade;
+		sbyte grade = info.CoreMemberConfig.ChildGrade.GetRandom(context.Random);
 		short orgMemberId = Config.Organization.Instance[info.OrgTemplateId].Members[grade];
 		OrganizationMemberItem orgMemberConfig = OrganizationMember.Instance[orgMemberId];
 		sbyte orgMemberGender = orgMemberConfig.Gender;

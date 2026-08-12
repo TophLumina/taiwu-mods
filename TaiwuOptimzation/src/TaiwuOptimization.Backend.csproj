@@ -20,7 +20,6 @@
     <Compile Include="..\..\TaiwuDiagnostics\ModBridge\TaiwuDiagnosticsBridge.cs" Link="Runtime\TaiwuDiagnosticsBridge.cs" />
     <Compile Include="Runtime\**\*.cs" />
     <Compile Include="Patches\**\*.cs" />
-    <Compile Include="Bugfix\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -515,10 +515,20 @@ public class PrioritizedGoalCreation
 		{
 			return false;
 		}
-		if (orgMemberCfg.ChildGrade < 0 && (DomainManager.Character.GetAliveSpouse(selfChar.GetId()) >= 0 || DomainManager.Character.GetAliveChild(selfChar.GetId()) >= 0))
+		if (orgMemberCfg != null)
+		{
+			sbyte[] childGrade = orgMemberCfg.ChildGrade;
+			if (childGrade != null && childGrade.Length > 0)
+			{
+				goto IL_019c;
+			}
+		}
+		if (DomainManager.Character.GetAliveSpouse(selfChar.GetId()) >= 0 || DomainManager.Character.GetAliveChild(selfChar.GetId()) >= 0)
 		{
 			return false;
 		}
+		goto IL_019c;
+		IL_019c:
 		return selfChar.OfflineAddGoal(258, targetSectTemplateId);
 	}
 

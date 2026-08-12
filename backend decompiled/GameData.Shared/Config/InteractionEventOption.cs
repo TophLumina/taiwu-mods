@@ -719,6 +719,11 @@ public class InteractionEventOption : ConfigData<InteractionEventOptionItem, sho
 		public const short HairCutterForNPC = 139;
 
 		/// <summary>
+		/// 互动-打听秘闻
+		/// </summary>
+		public const short IdentityBuySecrets = 142;
+
+		/// <summary>
 		/// 互动-玄石火灰
 		/// </summary>
 		public const short FuyuFaith = 140;
@@ -1435,6 +1440,11 @@ public class InteractionEventOption : ConfigData<InteractionEventOptionItem, sho
 		public static InteractionEventOptionItem HairCutterForNPC => Instance[(short)139];
 
 		/// <summary>
+		/// 互动-打听秘闻
+		/// </summary>
+		public static InteractionEventOptionItem IdentityBuySecrets => Instance[(short)142];
+
+		/// <summary>
 		/// 互动-玄石火灰
 		/// </summary>
 		public static InteractionEventOptionItem FuyuFaith => Instance[(short)140];
@@ -1637,12 +1647,13 @@ public class InteractionEventOption : ConfigData<InteractionEventOptionItem, sho
 		_dataArray.Add(new InteractionEventOptionItem(139, "e00b25ae-009e-4d34-b99d-cf258df9cc01", -1, EInteractionEventOptionInteractionType.Identity, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_139"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: true, new sbyte[5], new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 30, 0, 0, new ResourceInts(0, 0, 0, 0, 300, 0, 0, 0), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49762f" }, new List<string> { "e00b25ae-009e-4d34-b99d-cf258df9cc01" }));
 		_dataArray.Add(new InteractionEventOptionItem(140, "aad3fa1c-5c6b-4f72-bd11-19644a2275bd", 140, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_140"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 100, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "45b767f3-3d09-4502-bc94-6492c69c2e30" }, new List<string> { "aad3fa1c-5c6b-4f72-bd11-19644a2275bd" }));
 		_dataArray.Add(new InteractionEventOptionItem(141, "0e173b97-3b81-4cc0-add0-53d635e02b8e", -1, EInteractionEventOptionInteractionType.Identity, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_141"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5], new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49762f" }, new List<string> { "0e173b97-3b81-4cc0-add0-53d635e02b8e" }));
+		_dataArray.Add(new InteractionEventOptionItem(142, "92466761-aab5-4304-bd51-70324c35a477", -1, EInteractionEventOptionInteractionType.Identity, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_142"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5], new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49762f" }, new List<string> { "92466761-aab5-4304-bd51-70324c35a477" }));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<InteractionEventOptionItem>(142);
+		_dataArray = new List<InteractionEventOptionItem>(143);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

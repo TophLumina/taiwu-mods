@@ -102,7 +102,7 @@ internal static class SecretInformationHolderCountCache
         _active = true;
     }
 
-    /// <summary>进入秘闻代谢前停用索引，保守地让广播和删除逻辑走原版扫描。</summary>
+    /// <summary>进入秘闻代谢前停用传播期聚合索引，之后完全使用新版原版的常驻索引。</summary>
     public static void DeactivateBeforeMetabolismSecretInformation()
     {
         _active = false;

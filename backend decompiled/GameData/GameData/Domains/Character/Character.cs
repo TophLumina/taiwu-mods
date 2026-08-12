@@ -4322,7 +4322,28 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	public bool OrgAndMonkTypeAllowMarriage()
 	{
-		return _monkType == 0 && OrganizationDomain.GetOrgMemberConfig(_organizationInfo).ChildGrade >= 0;
+		int result;
+		if (_monkType == 0)
+		{
+			OrganizationMemberItem orgMemberConfig = OrganizationDomain.GetOrgMemberConfig(_organizationInfo);
+			if (orgMemberConfig != null)
+			{
+				sbyte[] childGrade = orgMemberConfig.ChildGrade;
+				if (childGrade != null)
+				{
+					result = ((childGrade.Length > 0) ? 1 : 0);
+					goto IL_002e;
+				}
+			}
+			result = 0;
+		}
+		else
+		{
+			result = 0;
+		}
+		goto IL_002e;
+		IL_002e:
+		return (byte)result != 0;
 	}
 
 	public sbyte GetLegendaryBookOwnerState()
@@ -4348,7 +4369,8 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	public bool IsOwningBook()
 	{
-		return GetLegendaryBookOwnerState() == 0;
+		List<sbyte> charOwnedBookTypes = DomainManager.LegendaryBook.GetCharOwnedBookTypes(_id);
+		return charOwnedBookTypes != null && charOwnedBookTypes.Count > 0;
 	}
 
 	public bool IsEscapeCertainly()
@@ -4763,8 +4785,8 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public short CalcChangedHealth(short health, int delta)
 	{
 		short leftMaxHealth = GetLeftMaxHealth();
-		delta = CalcHealthDelta(delta);
-		return (short)((leftMaxHealth >= 0) ? ((short)Math.Clamp(health + delta, 0, leftMaxHealth)) : 0);
+		CValueModify modify = CalcHealthDelta(delta);
+		return (short)((leftMaxHealth >= 0) ? ((short)Math.Clamp(health * modify, 0, leftMaxHealth)) : 0);
 	}
 
 	public void ChangeHealth(DataContext context, int delta)
@@ -4845,28 +4867,22 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		return delta;
 	}
 
-	public int CalcHealthDelta(int delta)
+	public CValueModify CalcHealthDelta(int delta)
 	{
+		CValuePercentBonus bonus = 0;
 		if (delta > 0)
 		{
-			int percent = 100;
 			foreach (short id in _featureIds)
 			{
-				percent += CharacterFeature.Instance[id].HealthRecovery;
+				bonus += (CValuePercentBonus)CharacterFeature.Instance[id].HealthRecovery;
 			}
-			delta = delta * percent / 100;
 		}
 		else if (delta < 0)
 		{
-			int percent2 = 100 + DomainManager.SpecialEffect.GetModifyValue(_id, 54, EDataModifyType.AddPercent);
-			percent2 -= DomainManager.Building.GetBuildingBlockEffect(_location, EBuildingScaleEffect.HealthDecreaseReduction);
-			if (percent2 < 0)
-			{
-				percent2 = 0;
-			}
-			delta = delta * percent2 / 100;
+			bonus += (CValuePercentBonus)DomainManager.SpecialEffect.GetModifyValue(_id, 54, EDataModifyType.AddPercent);
+			bonus -= (CValuePercentBonus)DomainManager.Building.GetBuildingBlockEffect(_location, EBuildingScaleEffect.HealthDecreaseReduction);
 		}
-		return delta;
+		return new CValueModify(delta * bonus.StaySymbol());
 	}
 
 	public void AdjustLifespan(DataContext context)
@@ -11625,7 +11641,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		}
 	}
 
-	public void PeriAdvanceMonth_GearMateUpdateStatus(DataContext context)
+	public void PeriAdvanceMonth_SpecialGroupUpdateStatus(DataContext context)
 	{
 		PeriAdvanceMonthUpdateStatusModification mod = new PeriAdvanceMonthUpdateStatusModification(this);
 		OfflineUpdateEatingItemEffect(context, mod);

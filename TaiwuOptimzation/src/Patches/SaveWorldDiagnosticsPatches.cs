@@ -171,18 +171,24 @@ internal static class SaveWorldCopyBufferPatch
 
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
-        foreach (CodeInstruction instruction in instructions)
+        List<CodeInstruction> instructionList = new(instructions);
+        for (int index = 0; index < instructionList.Count - 1; index++)
         {
-            if (instruction.opcode == OpCodes.Ldc_I8 &&
-                instruction.operand is long value &&
-                value == SaveWorldParallelCompression.OriginalCopyBufferBytes)
+            CodeInstruction loadBufferSize = instructionList[index];
+            CodeInstruction convertToInt64 = instructionList[index + 1];
+            if (loadBufferSize.opcode == OpCodes.Ldc_I4 &&
+                loadBufferSize.operand is int value &&
+                value == SaveWorldParallelCompression.OriginalCopyBufferBytes &&
+                convertToInt64.opcode == OpCodes.Conv_I8)
             {
-                instruction.opcode = OpCodes.Call;
-                instruction.operand = CopyBufferGetter;
+                loadBufferSize.opcode = OpCodes.Call;
+                loadBufferSize.operand = CopyBufferGetter;
+                convertToInt64.opcode = OpCodes.Nop;
+                convertToInt64.operand = null;
             }
-
-            yield return instruction;
         }
+
+        return instructionList;
     }
 }
 

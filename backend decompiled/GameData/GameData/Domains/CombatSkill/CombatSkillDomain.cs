@@ -177,9 +177,14 @@ public class CombatSkillDomain : BaseGameDataDomain
 			return false;
 		}
 		bool isBrokenOut = CombatSkillStateHelper.IsBrokenOut(activationState);
-		if (isTaiwu && isBrokenOut && !DomainManager.Taiwu.UpdateBreakPlateSelectedPages(context, skillId, activationState))
+		if (isTaiwu)
 		{
-			return false;
+			CombatSkillDisplayData combatSkillDisplayData = GetCombatSkillDisplayDataOnce(DomainManager.Taiwu.GetTaiwuCharId(), skillId);
+			bool isLuohan = combatSkillDisplayData.LuohanId >= 0;
+			if (isBrokenOut && !isLuohan && !DomainManager.Taiwu.UpdateBreakPlateSelectedPages(context, skillId, activationState))
+			{
+				return false;
+			}
 		}
 		skill.SetActivationState(activationState, context);
 		sbyte currDir = CombatSkillStateHelper.GetCombatSkillDirection(activationState);

@@ -47,28 +47,3 @@ internal static class CharacterActionPlannerGraphCacheConditionPatch
         return true;
     }
 }
-
-[HarmonyPatch]
-internal static class CharacterActionPlannerGraphCacheEffectPatch
-{
-    private static MethodBase TargetMethod() =>
-        AccessTools.Method(
-            typeof(ActionPlanner<DataContext, CharacterStateMemory, Character, StateKey>),
-            nameof(ActionPlanner<DataContext, CharacterStateMemory, Character, StateKey>.GetEffectConnectedActions),
-            new[] { typeof(StateEffect<StateKey>) });
-
-    // 与 condition 邻接表同源，保持公开查询接口也能复用静态快照。
-    private static bool Prefix(
-        ActionPlanner<DataContext, CharacterStateMemory, Character, StateKey> __instance,
-        StateEffect<StateKey> effect,
-        ref IEnumerable<INode<Character, StateKey>> __result)
-    {
-        if (CharacterActionPlannerGraphCache.TryGetEffectConnectedActions(__instance, effect, out IEnumerable<INode<Character, StateKey>> nodes))
-        {
-            __result = nodes;
-            return false;
-        }
-
-        return true;
-    }
-}

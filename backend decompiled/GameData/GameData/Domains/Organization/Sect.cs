@@ -365,17 +365,12 @@ public class Sect : Settlement, ISerializableGameData
 		int currDate = DomainManager.World.GetCurrDate();
 		sbyte mapStateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(Location.AreaId);
 		OrganizationItem organizationCfg = Config.Organization.Instance[OrgTemplateId];
-		int worldPopulationFactor = DomainManager.World.GetWorldPopulationFactor();
 		for (sbyte grade = 8; grade >= 0; grade--)
 		{
 			OrganizationMemberItem orgMemberCfg = OrganizationMember.Instance[organizationCfg.Members[grade]];
 			OrganizationInfo orgInfo = new OrganizationInfo(OrgTemplateId, grade, principal: true, Id);
 			int principalAmount = GetPrincipalAmount(grade);
 			int expectedAmount = GetExpectedCoreMemberAmount(orgMemberCfg);
-			if (!orgMemberCfg.RestrictPrincipalAmount)
-			{
-				expectedAmount = expectedAmount * worldPopulationFactor / 100;
-			}
 			int recruitCount = expectedAmount - principalAmount;
 			if (recruitCount > 0)
 			{
@@ -445,14 +440,21 @@ public class Sect : Settlement, ISerializableGameData
 				{
 					continue;
 				}
-				if (orgMemberCfg.ChildGrade < 0)
+				if (orgMemberCfg != null)
 				{
-					RelatedCharacters relatedChars = DomainManager.Character.GetRelatedCharacters(member2);
-					if (relatedChars.HusbandsAndWives.GetCount() > 0 || relatedChars.AdoptiveChildren.GetCount() > 0 || relatedChars.BloodChildren.GetCount() > 0 || relatedChars.StepChildren.GetCount() > 0)
+					sbyte[] childGrade = orgMemberCfg.ChildGrade;
+					if (childGrade != null && childGrade.Length > 0)
 					{
-						continue;
+						goto IL_01f0;
 					}
 				}
+				RelatedCharacters relatedChars = DomainManager.Character.GetRelatedCharacters(member2);
+				if (relatedChars.HusbandsAndWives.GetCount() > 0 || relatedChars.AdoptiveChildren.GetCount() > 0 || relatedChars.BloodChildren.GetCount() > 0 || relatedChars.StepChildren.GetCount() > 0)
+				{
+					continue;
+				}
+				goto IL_01f0;
+				IL_01f0:
 				weightTable.Add((member2, (short)weight));
 			}
 		}

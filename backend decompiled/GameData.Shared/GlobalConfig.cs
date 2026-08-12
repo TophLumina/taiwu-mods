@@ -2298,7 +2298,7 @@ public class GlobalConfig : IConfigData
 	/// <summary>
 	/// 武林大会恶门派声誉区间
 	/// </summary>
-	public (int, int) MartialArtTournamentBadFameRange = (-1000, 25);
+	public (int, int) MartialArtTournamentBadFameRange = (-1000, -25);
 
 	/// <summary>
 	/// 资源价值
@@ -5849,7 +5849,7 @@ public class GlobalConfig : IConfigData
 		MartialArtTournamentCombatPowerValueDivider = 100;
 		MartialArtTournamentGoodFameRange = (25, 1000);
 		MartialArtTournamentNeutralFameRange = (-25, 25);
-		MartialArtTournamentBadFameRange = (-1000, 25);
+		MartialArtTournamentBadFameRange = (-1000, -25);
 	}
 
 	private void Init_PriceValue()

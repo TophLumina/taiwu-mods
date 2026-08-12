@@ -1011,10 +1011,7 @@ public class InformationDomain : BaseGameDataDomain
 
 	public ICollection<int> RequestShopSecretInformationIdList(DataContext dataContext, int charId)
 	{
-		HashSet<int> result = new HashSet<int>();
-		SecretInformationShopCharacterData shopData = DomainManager.Extra.AddOrGetSecretInformationShopCharacterData(dataContext, charId);
-		result.UnionWith(shopData.CollectedSecretInformationIds);
-		return result;
+		return DomainManager.Extra.AddOrGetSecretInformationShopCharacterData(dataContext, charId).CollectedSecretInformationIds.DistinctBy((int secretId) => QuerySecretInformation((SecretInformationId)secretId).OccurenceId).ToList();
 	}
 
 	[DomainMethod]
