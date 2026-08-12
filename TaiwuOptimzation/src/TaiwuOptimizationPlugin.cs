@@ -37,6 +37,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     {
         _harmony?.UnpatchSelf();
         _harmony = null;
+        MainMenuLoadDatabaseVacuum.Reset();
         TaiwuDiagnosticsExporter.Dispose();
         CharacterActionPlannerGraphCache.Reset();
         AdvanceMonthOptimizationRuntime.Dispose();
