@@ -200,10 +200,10 @@ public class TaiwuEventDomain : BaseGameDataDomain
 	[DomainData(DomainDataType.SingleValue, true, false, true, true)]
 	private bool _hideAllMapBlockCharacters;
 
-	[DomainData(DomainDataType.SingleValue, false, false, true, true)]
+	[DomainData(DomainDataType.SingleValue, true, false, true, true)]
 	private bool _hideAllTeammates;
 
-	[DomainData(DomainDataType.SingleValue, false, false, true, true, ArrayElementsCount = 3)]
+	[DomainData(DomainDataType.SingleValue, true, false, true, true, ArrayElementsCount = 3)]
 	private int[] _allCombatGroupChars;
 
 	[DomainData(DomainDataType.SingleValue, false, false, true, true)]
@@ -2312,7 +2312,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			status.Combat = (-1, -1);
 			status.Relation.Clear();
-			status.SpiritualDebt = DomainManager.Extra.GetAreaSpiritualDebt(GetTaiwuLocation().AreaId);
+			status.SpiritualDebt = DomainManager.Extra.GetAreaSpiritualDebt();
 			status.Teammate = (false, -1);
 			status.Profession.Clear();
 			foreach (ProfessionItem profession in (IEnumerable<ProfessionItem>)Profession.Instance)
@@ -2894,10 +2894,13 @@ public class TaiwuEventDomain : BaseGameDataDomain
 
 	private void EventLogCheckSpiritualDebt(EventLogCharacterData status, GameData.Domains.Character.Character character)
 	{
-		if (!ShouldEarlyReturn)
+		if (ShouldEarlyReturn)
 		{
-			short areaId = GetTaiwuLocation().AreaId;
-			AddDifferenceToResultCache(13, character.GetId(), status.SpiritualDebt, DomainManager.Extra.GetAreaSpiritualDebt(areaId), areaId);
+			return;
+		}
+		foreach (short areaId in DomainManager.Extra.GetAreaSpiritualDebt(createCopy: false).Keys.Concat(status.SpiritualDebt.Keys).Distinct().Order())
+		{
+			AddDifferenceToResultCache(13, character.GetId(), status.SpiritualDebt.GetValueOrDefault(areaId), DomainManager.Extra.GetAreaSpiritualDebt(areaId), areaId);
 		}
 	}
 
@@ -3142,12 +3145,14 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		if (DomainManager.Character.TryGetElement_Objects(charId, out var character) && character.GetCreatingType() == 1)
 		{
 			DomainManager.Character.TryCreateRelation(context, DomainManager.Taiwu.GetTaiwuCharId(), charId);
+			DomainManager.Extra.AddInteractedCharacter(context, charId);
 		}
 	}
 
 	[DomainMethod]
-	public bool JumpToInteractionEventOptionByInteractionId(int targetCharId, short targetTemplateId)
+	public bool JumpToInteractionEventOptionByInteractionId(DataContext context, int targetCharId, short targetTemplateId)
 	{
+		MeetTaiwu(context, targetCharId);
 		Dictionary<short, bool> dict = GetVisibleCharacterInteractionEventOptions(targetCharId).dict;
 		if (!dict.TryGetValue(targetTemplateId, out var canInteract))
 		{
@@ -5426,7 +5431,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 
 	public override void OnSaveWorld(ArchiveFileBase archive)
 	{
-		archive.WriteSingleValueUnmanaged((ushort)10);
+		archive.WriteSingleValueUnmanaged((ushort)12);
 		archive.WriteDomainDataMeta(0);
 		archive.WriteSingleValueCustom(_globalArgBox);
 		archive.WriteDomainDataMeta(1);
@@ -5435,12 +5440,16 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		archive.WriteSingleValueUnmanaged(_secretVillageOnFire);
 		archive.WriteDomainDataMeta(8);
 		archive.WriteSingleValueUnmanaged(_taiwuVillageShowShrine);
+		archive.WriteDomainDataMeta(9);
+		archive.WriteSingleValueUnmanaged(_hideAllTeammates);
 		archive.WriteDomainDataMeta(19);
 		archive.WriteSingleValueCustomList(_tempCreateItemList);
 		archive.WriteDomainDataMeta(21);
 		archive.WriteSingleValueUnmanagedList(_marriageLook1CharIdList);
 		archive.WriteDomainDataMeta(22);
 		archive.WriteSingleValueUnmanagedList(_marriageLook2CharIdList);
+		archive.WriteDomainDataMeta(23);
+		archive.WriteSingleValueUnmanagedArray(_allCombatGroupChars);
 		archive.WriteDomainDataMeta(26);
 		archive.WriteSingleValueCollectionUnmanagedKeyCustomValue(_handledOneShotEvents);
 		archive.WriteDomainDataMeta(27);
@@ -5477,6 +5486,9 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			case 8:
 				archive.ReadSingleValueUnmanaged(ref _taiwuVillageShowShrine);
 				continue;
+			case 9:
+				archive.ReadSingleValueUnmanaged(ref _hideAllTeammates);
+				continue;
 			case 19:
 				archive.ReadSingleValueCustomList(ref _tempCreateItemList);
 				continue;
@@ -5485,6 +5497,9 @@ public class TaiwuEventDomain : BaseGameDataDomain
 				continue;
 			case 22:
 				archive.ReadSingleValueUnmanagedList(ref _marriageLook2CharIdList);
+				continue;
+			case 23:
+				archive.ReadSingleValueUnmanagedArray(ref _allCombatGroupChars);
 				continue;
 			case 26:
 				archive.ReadSingleValueCollectionUnmanagedKeyCustomValue(_handledOneShotEvents);
@@ -6846,7 +6861,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetCharId2);
 				short targetTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetTemplateId);
-				bool returnValue8 = JumpToInteractionEventOptionByInteractionId(targetCharId2, targetTemplateId);
+				bool returnValue8 = JumpToInteractionEventOptionByInteractionId(context, targetCharId2, targetTemplateId);
 				return GameData.Serializer.Serializer.Serialize(returnValue8, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");

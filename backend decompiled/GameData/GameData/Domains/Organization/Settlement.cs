@@ -74,6 +74,10 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 
 	protected SortedList<long, int> _membersSortedByCombatPower = new SortedList<long, int>();
 
+	private const int NewGradeRatio = 3;
+
+	private const int OldGradeRatio = 4;
+
 	private SettlementLayeredTreasuries _treasuries;
 
 	private readonly Dictionary<ShortPair, List<short>> _supplyItems = new Dictionary<ShortPair, List<short>>();
@@ -304,7 +308,6 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 		OrganizationItem orgConfig = Config.Organization.Instance[OrgTemplateId];
 		List<int> potentialSuccessors = ObjectPool<List<int>>.Instance.Get();
 		LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
-		int worldPopulationFactor = DomainManager.World.GetWorldPopulationFactor();
 		if (orgConfig.Hereditary)
 		{
 			HashSet<int> handled = ObjectPool<HashSet<int>>.Instance.Get();
@@ -317,10 +320,6 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 				HashSet<int> gradeMembers = Members.GetMembers(grade);
 				int currAmount = ((orgMemberCfg.DeputySpouseDowngrade >= 0) ? GetPrincipalAmount(grade) : gradeMembers.Count);
 				int requiredAmount = GetExpectedCoreMemberAmount(orgMemberCfg);
-				if (!orgMemberCfg.RestrictPrincipalAmount)
-				{
-					requiredAmount = requiredAmount * worldPopulationFactor / 100;
-				}
 				foreach (int charId in lackingMembers)
 				{
 					if (orgMemberCfg.Amount > 0 && currAmount >= requiredAmount)
@@ -371,10 +370,6 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 				HashSet<int> gradeMembers2 = Members.GetMembers(grade2);
 				int currAmount2 = ((orgMemberCfg2.DeputySpouseDowngrade >= 0) ? GetPrincipalAmount(grade2) : gradeMembers2.Count);
 				int requiredAmount2 = GetExpectedCoreMemberAmount(orgMemberCfg2);
-				if (!orgMemberCfg2.RestrictPrincipalAmount)
-				{
-					requiredAmount2 = requiredAmount2 * worldPopulationFactor / 100;
-				}
 				if (currAmount2 < requiredAmount2)
 				{
 					int upgradeAmount = requiredAmount2 - currAmount2;
@@ -432,7 +427,6 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 		potentialSuccessors.Clear();
 		potentialSaintesses.Clear();
 		handled.Clear();
-		int worldPopulationFactor = DomainManager.World.GetWorldPopulationFactor();
 		GetWuxianPotentialSaintessesByHereditary(potentialSaintesses);
 		HashSet<int> lackingMembers = LackingCoreMembers.GetMembers(8);
 		OrganizationInfo orgInfo = new OrganizationInfo(OrgTemplateId, 8, principal: true, Id);
@@ -528,10 +522,6 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 			gradeMembers = Members.GetMembers(grade);
 			int currAmount = ((orgMemberCfg.DeputySpouseDowngrade >= 0) ? GetPrincipalAmount(grade) : gradeMembers.Count);
 			int requiredAmount = GetExpectedCoreMemberAmount(orgMemberCfg);
-			if (!orgMemberCfg.RestrictPrincipalAmount)
-			{
-				requiredAmount = requiredAmount * worldPopulationFactor / 100;
-			}
 			handled.Clear();
 			foreach (int charId3 in lackingMembers)
 			{
@@ -575,25 +565,38 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 
 	public int GetExpectedCoreMemberAmount(OrganizationMemberItem orgMemberCfg)
 	{
-		OrganizationItem orgCfg = Config.Organization.Instance[OrgTemplateId];
-		if (!orgCfg.IsSect || orgMemberCfg.RestrictPrincipalAmount)
+		if (orgMemberCfg.RestrictPrincipalAmount)
 		{
 			return orgMemberCfg.Amount;
 		}
-		sbyte sectMainStoryTaskStatus = DomainManager.Story.GetSectMainStoryTaskStatus(OrgTemplateId);
-		if (1 == 0)
+		sbyte b2;
+		if (Config.Organization.Instance[OrgTemplateId].IsSect)
 		{
+			sbyte sectMainStoryTaskStatus = DomainManager.Story.GetSectMainStoryTaskStatus(OrgTemplateId);
+			if (1 == 0)
+			{
+			}
+			sbyte b = sectMainStoryTaskStatus switch
+			{
+				1 => orgMemberCfg.UpAmount, 
+				2 => orgMemberCfg.DownAmount, 
+				_ => orgMemberCfg.Amount, 
+			};
+			if (1 == 0)
+			{
+			}
+			b2 = b;
 		}
-		sbyte result = sectMainStoryTaskStatus switch
+		else
 		{
-			1 => orgMemberCfg.UpAmount, 
-			2 => orgMemberCfg.DownAmount, 
-			_ => orgMemberCfg.Amount, 
-		};
-		if (1 == 0)
-		{
+			b2 = orgMemberCfg.Amount;
 		}
-		return result;
+		return b2 * DomainManager.World.GetWorldPopulationFactor() / 100;
+	}
+
+	public int GetExpectedCoreMemberAmount(int grade)
+	{
+		return GetExpectedCoreMemberAmount(OrganizationMember.Instance[Config.Organization.Instance[OrgTemplateId].Members[grade]]);
 	}
 
 	public int GetPrincipalAmount(sbyte grade)
@@ -902,6 +905,7 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 
 	public void UpdateInfluencePowers(DataContext context, Dictionary<int, (GameData.Domains.Character.Character character, short baseInfluencePower)> baseInfluencePowers, HashSet<int> relatedCharIds, bool updateTreasury)
 	{
+		OnUpdateInfluencePowers(context, baseInfluencePowers);
 		short mainMorality = ((this is CivilianSettlement cs) ? cs.UpdateMainMorality(context) : Config.Organization.Instance[OrgTemplateId].MainMorality);
 		sbyte mainBehaviorType = GameData.Domains.Character.BehaviorType.GetBehaviorType(mainMorality);
 		int normalInfluenceFactor;
@@ -964,6 +968,62 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 		if (skillsDataChanged)
 		{
 			DomainManager.Extra.SetProfessionData(context, professionData);
+		}
+	}
+
+	private void OnUpdateInfluencePowers(DataContext context, Dictionary<int, (GameData.Domains.Character.Character character, short baseInfluencePower)> _)
+	{
+		if (OrganizationConfig.IsSect)
+		{
+			AutoUpgrade(context);
+		}
+	}
+
+	private void AutoUpgrade(DataContext context)
+	{
+		BinaryHeap<GameData.Domains.Character.Character> heap = new BinaryHeap<GameData.Domains.Character.Character>((GameData.Domains.Character.Character y, GameData.Domains.Character.Character x) => x.GetCombatPower().CompareTo(y.GetCombatPower()), 64);
+		LifeRecordCollection liferecord = DomainManager.LifeRecord.GetLifeRecordCollection();
+		int date = DomainManager.World.GetCurrDate();
+		int cumPerson = 0;
+		int cumExpected = 0;
+		foreach (OrganizationMemberItem memberCfg in OrganizationConfig.Members.Select((short x) => OrganizationMember.Instance[x]).Reverse())
+		{
+			if (memberCfg.UpgradeLevel <= 0)
+			{
+				continue;
+			}
+			int newGrade = memberCfg.Grade + memberCfg.UpgradeLevel;
+			OrganizationMemberItem newCfg = OrganizationMember.Instance[OrganizationConfig.Members[newGrade]];
+			OrgMemberCollection members = GetMembers();
+			HashSet<int> oldGradePersons = members.GetMembers(memberCfg.Grade);
+			int oldExpected = GetExpectedCoreMemberAmount(memberCfg.Grade);
+			HashSet<int> newGradePersons = members.GetMembers(newCfg.Grade);
+			cumPerson += newGradePersons.Count;
+			cumExpected += GetExpectedCoreMemberAmount(newCfg.Grade);
+			int target = (cumPerson + oldGradePersons.Count) * 3 * cumExpected / (3 * cumExpected + 4 * oldExpected) - cumPerson;
+			if (target <= 0)
+			{
+				continue;
+			}
+			foreach (int charId in oldGradePersons)
+			{
+				if (DomainManager.Character.TryGetElement_Objects(charId, out var child) && child.GetAgeGroup() != 2 && (newCfg.Gender == -1 || newCfg.Gender == child.GetGender()))
+				{
+					heap.Push(child);
+					if (heap.Count > target)
+					{
+						heap.Pop();
+					}
+				}
+			}
+			while (heap.Count > 0)
+			{
+				GameData.Domains.Character.Character child2 = heap.Pop();
+				OrganizationInfo oldGrade = child2.GetOrganizationInfo();
+				DomainManager.Organization.ChangeGrade(context, child2, newCfg.Grade, destPrincipal: true, autoCommitLifeRecord: false);
+				liferecord.AddAutoChangeGrade(child2.GetId(), date, oldGrade.OrgTemplateId, oldGrade.Grade, oldGrade.Principal, child2.GetGender(), oldGrade.OrgTemplateId, newCfg.Grade, oldGrade.Principal, child2.GetGender());
+				cumPerson++;
+			}
 		}
 	}
 

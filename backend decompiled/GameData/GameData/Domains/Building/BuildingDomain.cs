@@ -12333,6 +12333,12 @@ public class BuildingDomain : BaseGameDataDomain
 		return (int)Math.Ceiling((float)needValue / (float)sumValue);
 	}
 
+	[DomainMethod]
+	public int GetOperationAddProgress(DataContext context, List<int> operatorList)
+	{
+		return GetOperationSumValue(operatorList);
+	}
+
 	public int GetOperationSumValue(List<int> operatorList)
 	{
 		int sumValue = 0;
@@ -16391,9 +16397,9 @@ public class BuildingDomain : BaseGameDataDomain
 		{
 		case 0:
 		{
-			int argsCount159 = operation.ArgsCount;
-			int num159 = argsCount159;
-			if (num159 == 3)
+			int argsCount162 = operation.ArgsCount;
+			int num162 = argsCount162;
+			if (num162 == 3)
 			{
 				BuildingBlockKey blockKey49 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey49);
@@ -16408,9 +16414,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 1:
 		{
-			int argsCount106 = operation.ArgsCount;
-			int num106 = argsCount106;
-			if (num106 == 2)
+			int argsCount109 = operation.ArgsCount;
+			int num109 = argsCount109;
+			if (num109 == 2)
 			{
 				BuildingBlockKey blockKey35 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey35);
@@ -16449,40 +16455,40 @@ public class BuildingDomain : BaseGameDataDomain
 			}
 		case 3:
 		{
-			int argsCount74 = operation.ArgsCount;
-			int num74 = argsCount74;
-			if (num74 == 1)
+			int argsCount77 = operation.ArgsCount;
+			int num77 = argsCount77;
+			if (num77 == 1)
 			{
 				BuildingBlockKey blockKey21 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey21);
-				BuildingEarningsData returnValue106 = GetBuildingEarningData(blockKey21);
-				return GameData.Serializer.Serializer.Serialize(returnValue106, returnDataPool);
+				BuildingEarningsData returnValue109 = GetBuildingEarningData(blockKey21);
+				return GameData.Serializer.Serializer.Serialize(returnValue109, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 4:
 		{
-			int argsCount122 = operation.ArgsCount;
-			int num122 = argsCount122;
-			if (num122 == 1)
+			int argsCount125 = operation.ArgsCount;
+			int num125 = argsCount125;
+			if (num125 == 1)
 			{
 				BuildingBlockKey blockKey39 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey39);
-				List<int> returnValue157 = GetBuildingOperatesData(blockKey39);
-				return GameData.Serializer.Serializer.Serialize(returnValue157, returnDataPool);
+				List<int> returnValue160 = GetBuildingOperatesData(blockKey39);
+				return GameData.Serializer.Serializer.Serialize(returnValue160, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 5:
 		{
-			int argsCount57 = operation.ArgsCount;
-			int num57 = argsCount57;
-			if (num57 == 1)
+			int argsCount60 = operation.ArgsCount;
+			int num60 = argsCount60;
+			if (num60 == 1)
 			{
 				BuildingBlockKey blockKey16 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey16);
-				int returnValue87 = GetBuildingBuildPeopleAttainments(blockKey16);
-				return GameData.Serializer.Serializer.Serialize(returnValue87, returnDataPool);
+				int returnValue90 = GetBuildingBuildPeopleAttainments(blockKey16);
+				return GameData.Serializer.Serializer.Serialize(returnValue90, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -16497,8 +16503,8 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref earningDataIndex3);
 				bool isPutInInventory3 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isPutInInventory3);
-				BuildingBlockKey returnValue40 = AcceptBuildingBlockCollectEarning(context, key5, earningDataIndex3, isPutInInventory3);
-				return GameData.Serializer.Serializer.Serialize(returnValue40, returnDataPool);
+				BuildingBlockKey returnValue43 = AcceptBuildingBlockCollectEarning(context, key5, earningDataIndex3, isPutInInventory3);
+				return GameData.Serializer.Serializer.Serialize(returnValue43, returnDataPool);
 			}
 			case 4:
 			{
@@ -16510,8 +16516,8 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isPutInInventory2);
 				bool isSetData2 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isSetData2);
-				BuildingBlockKey returnValue39 = AcceptBuildingBlockCollectEarning(context, key4, earningDataIndex2, isPutInInventory2, isSetData2);
-				return GameData.Serializer.Serializer.Serialize(returnValue39, returnDataPool);
+				BuildingBlockKey returnValue42 = AcceptBuildingBlockCollectEarning(context, key4, earningDataIndex2, isPutInInventory2, isSetData2);
+				return GameData.Serializer.Serializer.Serialize(returnValue42, returnDataPool);
 			}
 			case 5:
 			{
@@ -16525,17 +16531,17 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isSetData);
 				bool isCostMoney = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isCostMoney);
-				BuildingBlockKey returnValue38 = AcceptBuildingBlockCollectEarning(context, key3, earningDataIndex, isPutInInventory, isSetData, isCostMoney);
-				return GameData.Serializer.Serializer.Serialize(returnValue38, returnDataPool);
+				BuildingBlockKey returnValue41 = AcceptBuildingBlockCollectEarning(context, key3, earningDataIndex, isPutInInventory, isSetData, isCostMoney);
+				return GameData.Serializer.Serializer.Serialize(returnValue41, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 7:
 		{
-			int argsCount147 = operation.ArgsCount;
-			int num147 = argsCount147;
-			if (num147 == 2)
+			int argsCount150 = operation.ArgsCount;
+			int num150 = argsCount150;
+			if (num150 == 2)
 			{
 				BuildingBlockKey key30 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key30);
@@ -16555,8 +16561,8 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key28);
 				int earningDataIndex9 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref earningDataIndex9);
-				int returnValue165 = AcceptBuildingBlockRecruitPeople(context, key28, earningDataIndex9);
-				return GameData.Serializer.Serializer.Serialize(returnValue165, returnDataPool);
+				int returnValue168 = AcceptBuildingBlockRecruitPeople(context, key28, earningDataIndex9);
+				return GameData.Serializer.Serializer.Serialize(returnValue168, returnDataPool);
 			}
 			case 3:
 			{
@@ -16566,22 +16572,22 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref earningDataIndex8);
 				bool isSetData5 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isSetData5);
-				int returnValue164 = AcceptBuildingBlockRecruitPeople(context, key27, earningDataIndex8, isSetData5);
-				return GameData.Serializer.Serializer.Serialize(returnValue164, returnDataPool);
+				int returnValue167 = AcceptBuildingBlockRecruitPeople(context, key27, earningDataIndex8, isSetData5);
+				return GameData.Serializer.Serializer.Serialize(returnValue167, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 9:
 		{
-			int argsCount97 = operation.ArgsCount;
-			int num97 = argsCount97;
-			if (num97 == 1)
+			int argsCount100 = operation.ArgsCount;
+			int num100 = argsCount100;
+			if (num100 == 1)
 			{
 				BuildingBlockKey key14 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key14);
-				List<int> returnValue132 = AcceptBuildingBlockRecruitPeopleQuick(context, key14);
-				return GameData.Serializer.Serializer.Serialize(returnValue132, returnDataPool);
+				List<int> returnValue135 = AcceptBuildingBlockRecruitPeopleQuick(context, key14);
+				return GameData.Serializer.Serializer.Serialize(returnValue135, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -16613,9 +16619,9 @@ public class BuildingDomain : BaseGameDataDomain
 			}
 		case 11:
 		{
-			int argsCount45 = operation.ArgsCount;
-			int num45 = argsCount45;
-			if (num45 == 1)
+			int argsCount48 = operation.ArgsCount;
+			int num48 = argsCount48;
+			if (num48 == 1)
 			{
 				BuildingBlockKey key9 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key9);
@@ -16627,15 +16633,15 @@ public class BuildingDomain : BaseGameDataDomain
 		case 12:
 			if (operation.ArgsCount == 0)
 			{
-				List<ItemDisplayData> returnValue6 = QuickCollectShopItem(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue6, returnDataPool);
+				List<ItemDisplayData> returnValue9 = QuickCollectShopItem(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue9, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 13:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue173 = QuickCollectShopItemCount(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue173, returnDataPool);
+				int returnValue176 = QuickCollectShopItemCount(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue176, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 14:
@@ -16648,22 +16654,22 @@ public class BuildingDomain : BaseGameDataDomain
 		case 15:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue118 = QuickCollectShopSoldItemCount(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue118, returnDataPool);
+				int returnValue121 = QuickCollectShopSoldItemCount(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue121, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 16:
 			if (operation.ArgsCount == 0)
 			{
-				List<int> returnValue95 = QuickRecruitPeople(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue95, returnDataPool);
+				List<int> returnValue98 = QuickRecruitPeople(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue98, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 17:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue69 = QuickRecruitPeopleCount(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue69, returnDataPool);
+				int returnValue72 = QuickRecruitPeopleCount(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue72, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 18:
@@ -16676,15 +16682,15 @@ public class BuildingDomain : BaseGameDataDomain
 		case 19:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue183 = QuickCollectBuildingEarnCount(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue183, returnDataPool);
+				int returnValue186 = QuickCollectBuildingEarnCount(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue186, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 20:
 		{
-			int argsCount132 = operation.ArgsCount;
-			int num132 = argsCount132;
-			if (num132 == 3)
+			int argsCount135 = operation.ArgsCount;
+			int num135 = argsCount135;
+			if (num135 == 3)
 			{
 				BuildingBlockKey key29 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key29);
@@ -16699,9 +16705,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 21:
 		{
-			int argsCount116 = operation.ArgsCount;
-			int num116 = argsCount116;
-			if (num116 == 3)
+			int argsCount119 = operation.ArgsCount;
+			int num119 = argsCount119;
+			if (num119 == 3)
 			{
 				BuildingBlockKey key24 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key24);
@@ -16709,16 +16715,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey6);
 				ItemSourceType itemSourceType2 = ItemSourceType.Equipment;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemSourceType2);
-				(short, BuildingBlockData) returnValue153 = ChangeFixBook(context, key24, itemKey6, itemSourceType2);
-				return GameData.Serializer.Serializer.Serialize(returnValue153, returnDataPool);
+				(short, BuildingBlockData) returnValue156 = ChangeFixBook(context, key24, itemKey6, itemSourceType2);
+				return GameData.Serializer.Serializer.Serialize(returnValue156, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 22:
 		{
-			int argsCount102 = operation.ArgsCount;
-			int num102 = argsCount102;
-			if (num102 == 2)
+			int argsCount105 = operation.ArgsCount;
+			int num105 = argsCount105;
+			if (num105 == 2)
 			{
 				BuildingBlockKey key15 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key15);
@@ -16731,22 +16737,22 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 23:
 		{
-			int argsCount90 = operation.ArgsCount;
-			int num90 = argsCount90;
-			if (num90 == 1)
+			int argsCount93 = operation.ArgsCount;
+			int num93 = argsCount93;
+			if (num93 == 1)
 			{
 				BuildingBlockKey key12 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key12);
-				int returnValue117 = GetFixBookProgress(context, key12);
-				return GameData.Serializer.Serializer.Serialize(returnValue117, returnDataPool);
+				int returnValue120 = GetFixBookProgress(context, key12);
+				return GameData.Serializer.Serializer.Serialize(returnValue120, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 24:
 		{
-			int argsCount67 = operation.ArgsCount;
-			int num67 = argsCount67;
-			if (num67 == 1)
+			int argsCount70 = operation.ArgsCount;
+			int num70 = argsCount70;
+			if (num70 == 1)
 			{
 				sbyte state = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref state);
@@ -16757,9 +16763,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 25:
 		{
-			int argsCount51 = operation.ArgsCount;
-			int num51 = argsCount51;
-			if (num51 == 2)
+			int argsCount54 = operation.ArgsCount;
+			int num54 = argsCount54;
+			if (num54 == 2)
 			{
 				List<ItemKey> carryItems = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref carryItems);
@@ -16795,9 +16801,9 @@ public class BuildingDomain : BaseGameDataDomain
 			}
 		case 28:
 		{
-			int argsCount14 = operation.ArgsCount;
-			int num14 = argsCount14;
-			if (num14 == 3)
+			int argsCount17 = operation.ArgsCount;
+			int num17 = argsCount17;
+			if (num17 == 3)
 			{
 				short areaId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref areaId);
@@ -16805,16 +16811,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockId);
 				short buildingBlockIndex = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockIndex);
-				TaiwuShrineDisplayData returnValue22 = GetShrineDisplayData(context, areaId, blockId, buildingBlockIndex);
-				return GameData.Serializer.Serializer.Serialize(returnValue22, returnDataPool);
+				TaiwuShrineDisplayData returnValue25 = GetShrineDisplayData(context, areaId, blockId, buildingBlockIndex);
+				return GameData.Serializer.Serializer.Serialize(returnValue25, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 29:
 		{
-			int argsCount2 = operation.ArgsCount;
-			int num2 = argsCount2;
-			if (num2 == 2)
+			int argsCount5 = operation.ArgsCount;
+			int num5 = argsCount5;
+			if (num5 == 2)
 			{
 				int characterId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterId);
@@ -16827,9 +16833,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 30:
 		{
-			int argsCount148 = operation.ArgsCount;
-			int num148 = argsCount148;
-			if (num148 == 3)
+			int argsCount151 = operation.ArgsCount;
+			int num151 = argsCount151;
+			if (num151 == 3)
 			{
 				int index6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref index6);
@@ -16844,9 +16850,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 31:
 		{
-			int argsCount136 = operation.ArgsCount;
-			int num136 = argsCount136;
-			if (num136 == 2)
+			int argsCount139 = operation.ArgsCount;
+			int num139 = argsCount139;
+			if (num139 == 2)
 			{
 				int index5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref index5);
@@ -16860,36 +16866,36 @@ public class BuildingDomain : BaseGameDataDomain
 		case 32:
 			if (operation.ArgsCount == 0)
 			{
-				ItemDisplayData[] returnValue160 = GetCollectionCrickets(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue160, returnDataPool);
+				ItemDisplayData[] returnValue163 = GetCollectionCrickets(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue163, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 33:
 			if (operation.ArgsCount == 0)
 			{
-				ItemDisplayData[] returnValue152 = GetCollectionJars(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue152, returnDataPool);
+				ItemDisplayData[] returnValue155 = GetCollectionJars(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue155, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 34:
 			if (operation.ArgsCount == 0)
 			{
-				int[] returnValue139 = GetCollectionCricketRegen(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue139, returnDataPool);
+				int[] returnValue142 = GetCollectionCricketRegen(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue142, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 35:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue124 = GetAuthorityGain(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue124, returnDataPool);
+				int returnValue127 = GetAuthorityGain(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue127, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 36:
 		{
-			int argsCount83 = operation.ArgsCount;
-			int num83 = argsCount83;
-			if (num83 == 3)
+			int argsCount86 = operation.ArgsCount;
+			int num86 = argsCount86;
+			if (num86 == 3)
 			{
 				short buildingTemplateId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId4);
@@ -16897,81 +16903,81 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey24);
 				sbyte level = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref level);
-				(short, BuildingBlockData) returnValue112 = GmCmd_BuildImmediately(context, buildingTemplateId4, blockKey24, level);
-				return GameData.Serializer.Serializer.Serialize(returnValue112, returnDataPool);
+				(short, BuildingBlockData) returnValue115 = GmCmd_BuildImmediately(context, buildingTemplateId4, blockKey24, level);
+				return GameData.Serializer.Serializer.Serialize(returnValue115, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 37:
 		{
-			int argsCount71 = operation.ArgsCount;
-			int num71 = argsCount71;
-			if (num71 == 1)
+			int argsCount74 = operation.ArgsCount;
+			int num74 = argsCount74;
+			if (num74 == 1)
 			{
 				BuildingBlockKey blockKey20 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey20);
-				(short, BuildingBlockData) returnValue104 = GmCmd_RemoveBuildingImmediately(context, blockKey20);
-				return GameData.Serializer.Serializer.Serialize(returnValue104, returnDataPool);
+				(short, BuildingBlockData) returnValue107 = GmCmd_RemoveBuildingImmediately(context, blockKey20);
+				return GameData.Serializer.Serializer.Serialize(returnValue107, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 38:
 		{
-			int argsCount59 = operation.ArgsCount;
-			int num59 = argsCount59;
-			if (num59 == 1)
+			int argsCount62 = operation.ArgsCount;
+			int num62 = argsCount62;
+			if (num62 == 1)
 			{
 				StartMakeArguments startMakeArguments = default(StartMakeArguments);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref startMakeArguments);
-				MakeItemData returnValue89 = StartMakeItem(context, startMakeArguments);
-				return GameData.Serializer.Serializer.Serialize(returnValue89, returnDataPool);
+				MakeItemData returnValue92 = StartMakeItem(context, startMakeArguments);
+				return GameData.Serializer.Serializer.Serialize(returnValue92, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 39:
 		{
-			int argsCount48 = operation.ArgsCount;
-			int num48 = argsCount48;
-			if (num48 == 1)
+			int argsCount51 = operation.ArgsCount;
+			int num51 = argsCount51;
+			if (num51 == 1)
 			{
 				MakeConditionArguments makeConditionArguments = default(MakeConditionArguments);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref makeConditionArguments);
-				bool returnValue76 = CheckMakeCondition(makeConditionArguments);
-				return GameData.Serializer.Serializer.Serialize(returnValue76, returnDataPool);
+				bool returnValue79 = CheckMakeCondition(makeConditionArguments);
+				return GameData.Serializer.Serializer.Serialize(returnValue79, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 40:
 		{
-			int argsCount36 = operation.ArgsCount;
-			int num36 = argsCount36;
-			if (num36 == 1)
+			int argsCount39 = operation.ArgsCount;
+			int num39 = argsCount39;
+			if (num39 == 1)
 			{
 				BuildingBlockKey buildingBlockKey4 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey4);
-				List<ItemDisplayData> returnValue57 = GetMakeItems(context, buildingBlockKey4);
-				return GameData.Serializer.Serializer.Serialize(returnValue57, returnDataPool);
+				List<ItemDisplayData> returnValue60 = GetMakeItems(context, buildingBlockKey4);
+				return GameData.Serializer.Serializer.Serialize(returnValue60, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 41:
 		{
-			int argsCount28 = operation.ArgsCount;
-			int num28 = argsCount28;
-			if (num28 == 1)
+			int argsCount31 = operation.ArgsCount;
+			int num31 = argsCount31;
+			if (num31 == 1)
 			{
 				BuildingBlockKey buildingBlockKey3 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey3);
-				MakeItemData returnValue47 = GetMakingItemData(buildingBlockKey3);
-				return GameData.Serializer.Serializer.Serialize(returnValue47, returnDataPool);
+				MakeItemData returnValue50 = GetMakingItemData(buildingBlockKey3);
+				return GameData.Serializer.Serializer.Serialize(returnValue50, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 42:
 		{
-			int argsCount16 = operation.ArgsCount;
-			int num16 = argsCount16;
-			if (num16 == 4)
+			int argsCount19 = operation.ArgsCount;
+			int num19 = argsCount19;
+			if (num19 == 4)
 			{
 				int charId5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId5);
@@ -16981,16 +16987,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey3);
 				BuildingBlockKey buildingBlockKey = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey);
-				bool returnValue26 = CheckRepairConditionIsMeet(charId5, toolKey2, itemKey3, buildingBlockKey);
-				return GameData.Serializer.Serializer.Serialize(returnValue26, returnDataPool);
+				bool returnValue29 = CheckRepairConditionIsMeet(charId5, toolKey2, itemKey3, buildingBlockKey);
+				return GameData.Serializer.Serializer.Serialize(returnValue29, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 43:
 		{
-			int argsCount9 = operation.ArgsCount;
-			int num9 = argsCount9;
-			if (num9 == 5)
+			int argsCount12 = operation.ArgsCount;
+			int num12 = argsCount12;
+			if (num12 == 5)
 			{
 				int charId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId2);
@@ -17002,16 +17008,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poisons);
 				List<ItemDisplayData> condensePoisonItemList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref condensePoisonItemList);
-				(bool, ItemDisplayData) returnValue16 = AddItemPoison(context, charId2, tool, target, poisons, condensePoisonItemList);
-				return GameData.Serializer.Serializer.Serialize(returnValue16, returnDataPool);
+				(bool, ItemDisplayData) returnValue19 = AddItemPoison(context, charId2, tool, target, poisons, condensePoisonItemList);
+				return GameData.Serializer.Serializer.Serialize(returnValue19, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 44:
 		{
-			int argsCount161 = operation.ArgsCount;
-			int num161 = argsCount161;
-			if (num161 == 6)
+			int argsCount164 = operation.ArgsCount;
+			int num164 = argsCount164;
+			if (num164 == 6)
 			{
 				int charId25 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId25);
@@ -17025,16 +17031,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey27);
 				FullPoisonEffects tempPoisonEffects = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref tempPoisonEffects);
-				bool returnValue188 = CheckAddPoisonCondition(charId25, toolKey5, targetKey2, poisonKeys, buildingBlockKey27, tempPoisonEffects);
-				return GameData.Serializer.Serializer.Serialize(returnValue188, returnDataPool);
+				bool returnValue191 = CheckAddPoisonCondition(charId25, toolKey5, targetKey2, poisonKeys, buildingBlockKey27, tempPoisonEffects);
+				return GameData.Serializer.Serializer.Serialize(returnValue191, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 45:
 		{
-			int argsCount153 = operation.ArgsCount;
-			int num153 = argsCount153;
-			if (num153 == 5)
+			int argsCount156 = operation.ArgsCount;
+			int num156 = argsCount156;
+			if (num156 == 5)
 			{
 				int charId23 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId23);
@@ -17046,16 +17052,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref medicines);
 				bool isExtract2 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isExtract2);
-				(bool, List<ItemDisplayData>) returnValue181 = RemoveItemPoison(context, charId23, tool3, target4, medicines, isExtract2);
-				return GameData.Serializer.Serializer.Serialize(returnValue181, returnDataPool);
+				(bool, List<ItemDisplayData>) returnValue184 = RemoveItemPoison(context, charId23, tool3, target4, medicines, isExtract2);
+				return GameData.Serializer.Serializer.Serialize(returnValue184, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 46:
 		{
-			int argsCount142 = operation.ArgsCount;
-			int num142 = argsCount142;
-			if (num142 == 6)
+			int argsCount145 = operation.ArgsCount;
+			int num145 = argsCount145;
+			if (num145 == 6)
 			{
 				int charId22 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId22);
@@ -17069,16 +17075,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey25);
 				bool isExtract = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isExtract);
-				bool returnValue175 = CheckRemovePoisonCondition(charId22, toolKey4, targetKey, medicineKeys, buildingBlockKey25, isExtract);
-				return GameData.Serializer.Serializer.Serialize(returnValue175, returnDataPool);
+				bool returnValue178 = CheckRemovePoisonCondition(charId22, toolKey4, targetKey, medicineKeys, buildingBlockKey25, isExtract);
+				return GameData.Serializer.Serializer.Serialize(returnValue178, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 47:
 		{
-			int argsCount134 = operation.ArgsCount;
-			int num134 = argsCount134;
-			if (num134 == 3)
+			int argsCount137 = operation.ArgsCount;
+			int num137 = argsCount137;
+			if (num137 == 3)
 			{
 				BuildingBlockKey blockKey44 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey44);
@@ -17086,46 +17092,46 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId5);
 				int[] workers2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref workers2);
-				(short, BuildingBlockData) returnValue169 = Build(context, blockKey44, buildingTemplateId5, workers2);
-				return GameData.Serializer.Serializer.Serialize(returnValue169, returnDataPool);
+				(short, BuildingBlockData) returnValue172 = Build(context, blockKey44, buildingTemplateId5, workers2);
+				return GameData.Serializer.Serializer.Serialize(returnValue172, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 48:
 		{
-			int argsCount126 = operation.ArgsCount;
-			int num126 = argsCount126;
-			if (num126 == 2)
+			int argsCount129 = operation.ArgsCount;
+			int num129 = argsCount129;
+			if (num129 == 2)
 			{
 				BuildingBlockKey blockKey41 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey41);
 				int[] workers = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref workers);
-				(short, BuildingBlockData) returnValue161 = Remove(context, blockKey41, workers);
-				return GameData.Serializer.Serializer.Serialize(returnValue161, returnDataPool);
+				(short, BuildingBlockData) returnValue164 = Remove(context, blockKey41, workers);
+				return GameData.Serializer.Serializer.Serialize(returnValue164, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 49:
 		{
-			int argsCount119 = operation.ArgsCount;
-			int num119 = argsCount119;
-			if (num119 == 2)
+			int argsCount122 = operation.ArgsCount;
+			int num122 = argsCount122;
+			if (num122 == 2)
 			{
 				BuildingBlockKey blockKey38 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey38);
 				bool stop = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref stop);
-				(short, BuildingBlockData) returnValue155 = SetStopOperation(context, blockKey38, stop);
-				return GameData.Serializer.Serializer.Serialize(returnValue155, returnDataPool);
+				(short, BuildingBlockData) returnValue158 = SetStopOperation(context, blockKey38, stop);
+				return GameData.Serializer.Serializer.Serialize(returnValue158, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 50:
 		{
-			int argsCount110 = operation.ArgsCount;
-			int num110 = argsCount110;
-			if (num110 == 3)
+			int argsCount113 = operation.ArgsCount;
+			int num113 = argsCount113;
+			if (num113 == 3)
 			{
 				BuildingBlockKey blockKey36 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey36);
@@ -17140,22 +17146,22 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 51:
 		{
-			int argsCount104 = operation.ArgsCount;
-			int num104 = argsCount104;
-			if (num104 == 1)
+			int argsCount107 = operation.ArgsCount;
+			int num107 = argsCount107;
+			if (num107 == 1)
 			{
 				BuildingBlockKey blockKey34 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey34);
-				(short, BuildingBlockData) returnValue142 = Repair(context, blockKey34);
-				return GameData.Serializer.Serializer.Serialize(returnValue142, returnDataPool);
+				(short, BuildingBlockData) returnValue145 = Repair(context, blockKey34);
+				return GameData.Serializer.Serializer.Serialize(returnValue145, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 52:
 		{
-			int argsCount100 = operation.ArgsCount;
-			int num100 = argsCount100;
-			if (num100 == 3)
+			int argsCount103 = operation.ArgsCount;
+			int num103 = argsCount103;
+			if (num103 == 3)
 			{
 				List<IntPair> operateRecord = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operateRecord);
@@ -17170,9 +17176,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 53:
 		{
-			int argsCount92 = operation.ArgsCount;
-			int num92 = argsCount92;
-			if (num92 == 2)
+			int argsCount95 = operation.ArgsCount;
+			int num95 = argsCount95;
+			if (num95 == 2)
 			{
 				int charId18 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId18);
@@ -17185,24 +17191,24 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 54:
 		{
-			int argsCount86 = operation.ArgsCount;
-			int num86 = argsCount86;
-			if (num86 == 2)
+			int argsCount89 = operation.ArgsCount;
+			int num89 = argsCount89;
+			if (num89 == 2)
 			{
 				int charId17 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId17);
 				BuildingBlockKey buildingBlockKey18 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey18);
-				bool returnValue114 = RemoveFromResidence(context, charId17, buildingBlockKey18);
-				return GameData.Serializer.Serializer.Serialize(returnValue114, returnDataPool);
+				bool returnValue117 = RemoveFromResidence(context, charId17, buildingBlockKey18);
+				return GameData.Serializer.Serializer.Serialize(returnValue117, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 55:
 		{
-			int argsCount78 = operation.ArgsCount;
-			int num78 = argsCount78;
-			if (num78 == 3)
+			int argsCount81 = operation.ArgsCount;
+			int num81 = argsCount81;
+			if (num81 == 3)
 			{
 				int charId13 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId13);
@@ -17210,16 +17216,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey14);
 				sbyte index2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref index2);
-				bool returnValue108 = ReplaceCharacterInResidence(context, charId13, buildingBlockKey14, index2);
-				return GameData.Serializer.Serializer.Serialize(returnValue108, returnDataPool);
+				bool returnValue111 = ReplaceCharacterInResidence(context, charId13, buildingBlockKey14, index2);
+				return GameData.Serializer.Serializer.Serialize(returnValue111, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 56:
 		{
-			int argsCount68 = operation.ArgsCount;
-			int num68 = argsCount68;
-			if (num68 == 3)
+			int argsCount71 = operation.ArgsCount;
+			int num71 = argsCount71;
+			if (num71 == 3)
 			{
 				int charIdB = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charIdB);
@@ -17227,64 +17233,64 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey11);
 				sbyte index = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref index);
-				bool returnValue100 = ReplaceCharacterInComfortableHouse(context, charIdB, buildingBlockKey11, index);
-				return GameData.Serializer.Serializer.Serialize(returnValue100, returnDataPool);
+				bool returnValue103 = ReplaceCharacterInComfortableHouse(context, charIdB, buildingBlockKey11, index);
+				return GameData.Serializer.Serializer.Serialize(returnValue103, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 57:
 		{
-			int argsCount62 = operation.ArgsCount;
-			int num62 = argsCount62;
-			if (num62 == 2)
+			int argsCount65 = operation.ArgsCount;
+			int num65 = argsCount65;
+			if (num65 == 2)
 			{
 				int charId11 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId11);
 				BuildingBlockKey buildingBlockKey9 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey9);
-				bool returnValue92 = AddToComfortableHouse(context, charId11, buildingBlockKey9);
-				return GameData.Serializer.Serializer.Serialize(returnValue92, returnDataPool);
+				bool returnValue95 = AddToComfortableHouse(context, charId11, buildingBlockKey9);
+				return GameData.Serializer.Serializer.Serialize(returnValue95, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 58:
 		{
-			int argsCount53 = operation.ArgsCount;
-			int num53 = argsCount53;
-			if (num53 == 2)
+			int argsCount56 = operation.ArgsCount;
+			int num56 = argsCount56;
+			if (num56 == 2)
 			{
 				int charId10 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId10);
 				BuildingBlockKey buildingBlockKey7 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey7);
-				bool returnValue83 = RemoveFromComfortableHouse(context, charId10, buildingBlockKey7);
-				return GameData.Serializer.Serializer.Serialize(returnValue83, returnDataPool);
+				bool returnValue86 = RemoveFromComfortableHouse(context, charId10, buildingBlockKey7);
+				return GameData.Serializer.Serializer.Serialize(returnValue86, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 59:
 		{
-			int argsCount47 = operation.ArgsCount;
-			int num47 = argsCount47;
-			if (num47 == 1)
+			int argsCount50 = operation.ArgsCount;
+			int num50 = argsCount50;
+			if (num50 == 1)
 			{
 				BuildingBlockKey buildingBlockKey5 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey5);
-				CharacterList returnValue75 = QuickFillResidence(context, buildingBlockKey5);
-				return GameData.Serializer.Serializer.Serialize(returnValue75, returnDataPool);
+				CharacterList returnValue78 = QuickFillResidence(context, buildingBlockKey5);
+				return GameData.Serializer.Serializer.Serialize(returnValue78, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 60:
 		{
-			int argsCount40 = operation.ArgsCount;
-			int num40 = argsCount40;
-			if (num40 == 1)
+			int argsCount43 = operation.ArgsCount;
+			int num43 = argsCount43;
+			if (num43 == 1)
 			{
 				BuildingBlockKey key8 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key8);
-				CharacterList returnValue63 = GetCharsInResidence(context, key8);
-				return GameData.Serializer.Serializer.Serialize(returnValue63, returnDataPool);
+				CharacterList returnValue66 = GetCharsInResidence(context, key8);
+				return GameData.Serializer.Serializer.Serialize(returnValue66, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -17295,8 +17301,8 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 				BuildingBlockKey blockKey15 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey15);
-				List<CharacterList> returnValue62 = GetAllResidents(context, blockKey15);
-				return GameData.Serializer.Serializer.Serialize(returnValue62, returnDataPool);
+				List<CharacterList> returnValue65 = GetAllResidents(context, blockKey15);
+				return GameData.Serializer.Serializer.Serialize(returnValue65, returnDataPool);
 			}
 			case 2:
 			{
@@ -17304,44 +17310,44 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey14);
 				bool skipChild = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skipChild);
-				List<CharacterList> returnValue61 = GetAllResidents(context, blockKey14, skipChild);
-				return GameData.Serializer.Serializer.Serialize(returnValue61, returnDataPool);
+				List<CharacterList> returnValue64 = GetAllResidents(context, blockKey14, skipChild);
+				return GameData.Serializer.Serializer.Serialize(returnValue64, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 62:
 		{
-			int argsCount31 = operation.ArgsCount;
-			int num31 = argsCount31;
-			if (num31 == 1)
+			int argsCount34 = operation.ArgsCount;
+			int num34 = argsCount34;
+			if (num34 == 1)
 			{
 				BuildingBlockKey key6 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key6);
-				CharacterList returnValue51 = GetCharsInComfortableHouse(context, key6);
-				return GameData.Serializer.Serializer.Serialize(returnValue51, returnDataPool);
+				CharacterList returnValue54 = GetCharsInComfortableHouse(context, key6);
+				return GameData.Serializer.Serializer.Serialize(returnValue54, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 63:
 			if (operation.ArgsCount == 0)
 			{
-				CharacterList returnValue44 = GetHomeless(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue44, returnDataPool);
+				CharacterList returnValue47 = GetHomeless(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue47, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 64:
 			if (operation.ArgsCount == 0)
 			{
-				List<SamsaraPlatformCharDisplayData> returnValue28 = GetSamsaraPlatformCharList(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue28, returnDataPool);
+				List<SamsaraPlatformCharDisplayData> returnValue31 = GetSamsaraPlatformCharList(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue31, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 65:
 		{
-			int argsCount13 = operation.ArgsCount;
-			int num13 = argsCount13;
-			if (num13 == 2)
+			int argsCount16 = operation.ArgsCount;
+			int num16 = argsCount16;
+			if (num16 == 2)
 			{
 				sbyte destinyType2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref destinyType2);
@@ -17354,61 +17360,61 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 66:
 		{
-			int argsCount6 = operation.ArgsCount;
-			int num6 = argsCount6;
-			if (num6 == 1)
+			int argsCount9 = operation.ArgsCount;
+			int num9 = argsCount9;
+			if (num9 == 1)
 			{
 				sbyte destinyType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref destinyType);
-				CharacterDisplayData returnValue9 = SamsaraPlatformReborn(context, destinyType);
-				return GameData.Serializer.Serializer.Serialize(returnValue9, returnDataPool);
+				CharacterDisplayData returnValue12 = SamsaraPlatformReborn(context, destinyType);
+				return GameData.Serializer.Serializer.Serialize(returnValue12, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 67:
 		{
-			int argsCount = operation.ArgsCount;
-			int num = argsCount;
-			if (num == 1)
+			int argsCount4 = operation.ArgsCount;
+			int num4 = argsCount4;
+			if (num4 == 1)
 			{
 				Location location = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location);
-				BuildingAreaData returnValue2 = GetBuildingAreaData(location);
-				return GameData.Serializer.Serializer.Serialize(returnValue2, returnDataPool);
+				BuildingAreaData returnValue5 = GetBuildingAreaData(location);
+				return GameData.Serializer.Serializer.Serialize(returnValue5, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 68:
 		{
-			int argsCount156 = operation.ArgsCount;
-			int num156 = argsCount156;
-			if (num156 == 1)
+			int argsCount159 = operation.ArgsCount;
+			int num159 = argsCount159;
+			if (num159 == 1)
 			{
 				Location location9 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location9);
-				List<BuildingBlockData> returnValue184 = GetBuildingBlockList(location9);
-				return GameData.Serializer.Serializer.Serialize(returnValue184, returnDataPool);
+				List<BuildingBlockData> returnValue187 = GetBuildingBlockList(location9);
+				return GameData.Serializer.Serializer.Serialize(returnValue187, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 69:
 		{
-			int argsCount151 = operation.ArgsCount;
-			int num151 = argsCount151;
-			if (num151 == 1)
+			int argsCount154 = operation.ArgsCount;
+			int num154 = argsCount154;
+			if (num154 == 1)
 			{
 				BuildingBlockKey blockKey46 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey46);
-				BuildingBlockData returnValue179 = GetBuildingBlockData(blockKey46);
-				return GameData.Serializer.Serializer.Serialize(returnValue179, returnDataPool);
+				BuildingBlockData returnValue182 = GetBuildingBlockData(blockKey46);
+				return GameData.Serializer.Serializer.Serialize(returnValue182, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 70:
 		{
-			int argsCount144 = operation.ArgsCount;
-			int num144 = argsCount144;
-			if (num144 == 2)
+			int argsCount147 = operation.ArgsCount;
+			int num147 = argsCount147;
+			if (num147 == 2)
 			{
 				BuildingBlockKey blockKey45 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey45);
@@ -17421,39 +17427,39 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 71:
 		{
-			int argsCount139 = operation.ArgsCount;
-			int num139 = argsCount139;
-			if (num139 == 2)
+			int argsCount142 = operation.ArgsCount;
+			int num142 = argsCount142;
+			if (num142 == 2)
 			{
 				short areaId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref areaId2);
 				short blockId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockId2);
-				int returnValue172 = GetEmptyBlockCount(areaId2, blockId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue172, returnDataPool);
+				int returnValue175 = GetEmptyBlockCount(areaId2, blockId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue175, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 72:
 		{
-			int argsCount133 = operation.ArgsCount;
-			int num133 = argsCount133;
-			if (num133 == 2)
+			int argsCount136 = operation.ArgsCount;
+			int num136 = argsCount136;
+			if (num136 == 2)
 			{
 				int settlementId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref settlementId3);
 				short templateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId);
-				int returnValue167 = AddChicken(context, settlementId3, templateId);
-				return GameData.Serializer.Serializer.Serialize(returnValue167, returnDataPool);
+				int returnValue170 = AddChicken(context, settlementId3, templateId);
+				return GameData.Serializer.Serializer.Serialize(returnValue170, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 73:
 		{
-			int argsCount128 = operation.ArgsCount;
-			int num128 = argsCount128;
-			if (num128 == 1)
+			int argsCount131 = operation.ArgsCount;
+			int num131 = argsCount131;
+			if (num131 == 1)
 			{
 				int id6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id6);
@@ -17471,9 +17477,9 @@ public class BuildingDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 75:
 		{
-			int argsCount118 = operation.ArgsCount;
-			int num118 = argsCount118;
-			if (num118 == 2)
+			int argsCount121 = operation.ArgsCount;
+			int num121 = argsCount121;
+			if (num121 == 2)
 			{
 				int id5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id5);
@@ -17486,9 +17492,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 76:
 		{
-			int argsCount113 = operation.ArgsCount;
-			int num113 = argsCount113;
-			if (num113 == 2)
+			int argsCount116 = operation.ArgsCount;
+			int num116 = argsCount116;
+			if (num116 == 2)
 			{
 				int id4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id4);
@@ -17506,8 +17512,8 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 				int sourceSettlementId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref sourceSettlementId2);
-				List<int> returnValue149 = GetSettlementChickenList(sourceSettlementId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue149, returnDataPool);
+				List<int> returnValue152 = GetSettlementChickenList(sourceSettlementId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue152, returnDataPool);
 			}
 			case 2:
 			{
@@ -17515,22 +17521,22 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref sourceSettlementId);
 				bool ignoreFulong2 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref ignoreFulong2);
-				List<int> returnValue148 = GetSettlementChickenList(sourceSettlementId, ignoreFulong2);
-				return GameData.Serializer.Serializer.Serialize(returnValue148, returnDataPool);
+				List<int> returnValue151 = GetSettlementChickenList(sourceSettlementId, ignoreFulong2);
+				return GameData.Serializer.Serializer.Serialize(returnValue151, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 78:
 		{
-			int argsCount107 = operation.ArgsCount;
-			int num107 = argsCount107;
-			if (num107 == 1)
+			int argsCount110 = operation.ArgsCount;
+			int num110 = argsCount110;
+			if (num110 == 1)
 			{
 				int id3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id3);
-				Chicken returnValue144 = GetChickenData(id3);
-				return GameData.Serializer.Serializer.Serialize(returnValue144, returnDataPool);
+				Chicken returnValue147 = GetChickenData(id3);
+				return GameData.Serializer.Serializer.Serialize(returnValue147, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -17544,15 +17550,15 @@ public class BuildingDomain : BaseGameDataDomain
 		case 80:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue135 = IsHaveChickenKing(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue135, returnDataPool);
+				bool returnValue138 = IsHaveChickenKing(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue138, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 81:
 		{
-			int argsCount95 = operation.ArgsCount;
-			int num95 = argsCount95;
-			if (num95 == 1)
+			int argsCount98 = operation.ArgsCount;
+			int num98 = argsCount98;
+			if (num98 == 1)
 			{
 				BuildingBlockKey buildingBlockKey22 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey22);
@@ -17570,8 +17576,8 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockData2);
 				BuildingBlockKey blockKey27 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey27);
-				int returnValue126 = GetBuildingAttainment(blockData2, blockKey27);
-				return GameData.Serializer.Serializer.Serialize(returnValue126, returnDataPool);
+				int returnValue129 = GetBuildingAttainment(blockData2, blockKey27);
+				return GameData.Serializer.Serializer.Serialize(returnValue129, returnDataPool);
 			}
 			case 3:
 			{
@@ -17581,32 +17587,32 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey26);
 				bool isAverage = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAverage);
-				int returnValue125 = GetBuildingAttainment(blockData, blockKey26, isAverage);
-				return GameData.Serializer.Serializer.Serialize(returnValue125, returnDataPool);
+				int returnValue128 = GetBuildingAttainment(blockData, blockKey26, isAverage);
+				return GameData.Serializer.Serializer.Serialize(returnValue128, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 83:
 		{
-			int argsCount91 = operation.ArgsCount;
-			int num91 = argsCount91;
-			if (num91 == 2)
+			int argsCount94 = operation.ArgsCount;
+			int num94 = argsCount94;
+			if (num94 == 2)
 			{
 				BuildingBlockKey key13 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key13);
 				sbyte resourceType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref resourceType);
-				int returnValue120 = CalcResourceOutputCount(key13, resourceType);
-				return GameData.Serializer.Serializer.Serialize(returnValue120, returnDataPool);
+				int returnValue123 = CalcResourceOutputCount(key13, resourceType);
+				return GameData.Serializer.Serializer.Serialize(returnValue123, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 84:
 		{
-			int argsCount88 = operation.ArgsCount;
-			int num88 = argsCount88;
-			if (num88 == 2)
+			int argsCount91 = operation.ArgsCount;
+			int num91 = argsCount91;
+			if (num91 == 2)
 			{
 				List<int> charList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charList);
@@ -17619,22 +17625,22 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 85:
 		{
-			int argsCount82 = operation.ArgsCount;
-			int num82 = argsCount82;
-			if (num82 == 1)
+			int argsCount85 = operation.ArgsCount;
+			int num85 = argsCount85;
+			if (num85 == 1)
 			{
 				BuildingBlockKey blockKey23 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey23);
-				List<ItemDisplayData> returnValue111 = QuickCollectSingleShopItem(context, blockKey23);
-				return GameData.Serializer.Serializer.Serialize(returnValue111, returnDataPool);
+				List<ItemDisplayData> returnValue114 = QuickCollectSingleShopItem(context, blockKey23);
+				return GameData.Serializer.Serializer.Serialize(returnValue114, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 86:
 		{
-			int argsCount75 = operation.ArgsCount;
-			int num75 = argsCount75;
-			if (num75 == 1)
+			int argsCount78 = operation.ArgsCount;
+			int num78 = argsCount78;
+			if (num78 == 1)
 			{
 				BuildingBlockKey blockKey22 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey22);
@@ -17645,35 +17651,35 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 87:
 		{
-			int argsCount69 = operation.ArgsCount;
-			int num69 = argsCount69;
-			if (num69 == 1)
+			int argsCount72 = operation.ArgsCount;
+			int num72 = argsCount72;
+			if (num72 == 1)
 			{
 				BuildingBlockKey blockKey19 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey19);
-				List<int> returnValue103 = QuickRecruitSingleBuildingPeople(context, blockKey19);
-				return GameData.Serializer.Serializer.Serialize(returnValue103, returnDataPool);
+				List<int> returnValue106 = QuickRecruitSingleBuildingPeople(context, blockKey19);
+				return GameData.Serializer.Serializer.Serialize(returnValue106, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 88:
 		{
-			int argsCount65 = operation.ArgsCount;
-			int num65 = argsCount65;
-			if (num65 == 1)
+			int argsCount68 = operation.ArgsCount;
+			int num68 = argsCount68;
+			if (num68 == 1)
 			{
 				BuildingBlockKey buildingBlockKey10 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey10);
-				CharacterList returnValue97 = QuickFillComfortableHouse(context, buildingBlockKey10);
-				return GameData.Serializer.Serializer.Serialize(returnValue97, returnDataPool);
+				CharacterList returnValue100 = QuickFillComfortableHouse(context, buildingBlockKey10);
+				return GameData.Serializer.Serializer.Serialize(returnValue100, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 89:
 		{
-			int argsCount61 = operation.ArgsCount;
-			int num61 = argsCount61;
-			if (num61 == 1)
+			int argsCount64 = operation.ArgsCount;
+			int num64 = argsCount64;
+			if (num64 == 1)
 			{
 				BuildingBlockKey buildingBlockKey8 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey8);
@@ -17684,22 +17690,22 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 90:
 		{
-			int argsCount54 = operation.ArgsCount;
-			int num54 = argsCount54;
-			if (num54 == 1)
+			int argsCount57 = operation.ArgsCount;
+			int num57 = argsCount57;
+			if (num57 == 1)
 			{
 				List<int> charIdList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charIdList);
-				List<int> returnValue84 = SortedComfortableHousePeople(context, charIdList);
-				return GameData.Serializer.Serializer.Serialize(returnValue84, returnDataPool);
+				List<int> returnValue87 = SortedComfortableHousePeople(context, charIdList);
+				return GameData.Serializer.Serializer.Serialize(returnValue87, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 91:
 		{
-			int argsCount50 = operation.ArgsCount;
-			int num50 = argsCount50;
-			if (num50 == 8)
+			int argsCount53 = operation.ArgsCount;
+			int num53 = argsCount53;
+			if (num53 == 8)
 			{
 				short materialTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref materialTemplateId);
@@ -17717,51 +17723,51 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isPerfect);
 				bool isManual = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isManual);
-				MakeResult returnValue79 = GetMakeResult(materialTemplateId, toolKey3, buildingBlockKey6, lifeSkillType2, makeItemSubtypeIdList, makeItemSubTypeId, isPerfect, isManual);
-				return GameData.Serializer.Serializer.Serialize(returnValue79, returnDataPool);
+				MakeResult returnValue82 = GetMakeResult(materialTemplateId, toolKey3, buildingBlockKey6, lifeSkillType2, makeItemSubtypeIdList, makeItemSubTypeId, isPerfect, isManual);
+				return GameData.Serializer.Serializer.Serialize(returnValue82, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 92:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue72 = GetSutraReadingRoomBuffValue();
-				return GameData.Serializer.Serializer.Serialize(returnValue72, returnDataPool);
+				int returnValue75 = GetSutraReadingRoomBuffValue();
+				return GameData.Serializer.Serializer.Serialize(returnValue75, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 93:
 		{
-			int argsCount43 = operation.ArgsCount;
-			int num43 = argsCount43;
-			if (num43 == 2)
+			int argsCount46 = operation.ArgsCount;
+			int num46 = argsCount46;
+			if (num46 == 2)
 			{
-				short blockIndex6 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex6);
+				short blockIndex7 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex7);
 				bool isAutoWork = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAutoWork);
-				SetBuildingAutoWork(context, blockIndex6, isAutoWork);
+				SetBuildingAutoWork(context, blockIndex7, isAutoWork);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 94:
 		{
-			int argsCount37 = operation.ArgsCount;
-			int num37 = argsCount37;
-			if (num37 == 1)
+			int argsCount40 = operation.ArgsCount;
+			int num40 = argsCount40;
+			if (num40 == 1)
 			{
-				short blockIndex5 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex5);
-				bool returnValue59 = GetBuildingIsAutoWork(blockIndex5);
-				return GameData.Serializer.Serializer.Serialize(returnValue59, returnDataPool);
+				short blockIndex6 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex6);
+				bool returnValue62 = GetBuildingIsAutoWork(blockIndex6);
+				return GameData.Serializer.Serializer.Serialize(returnValue62, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 95:
 		{
-			int argsCount34 = operation.ArgsCount;
-			int num34 = argsCount34;
-			if (num34 == 3)
+			int argsCount37 = operation.ArgsCount;
+			int num37 = argsCount37;
+			if (num37 == 3)
 			{
 				BuildingBlockKey key7 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key7);
@@ -17776,59 +17782,59 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 96:
 		{
-			int argsCount29 = operation.ArgsCount;
-			int num29 = argsCount29;
-			if (num29 == 2)
+			int argsCount32 = operation.ArgsCount;
+			int num32 = argsCount32;
+			if (num32 == 2)
 			{
 				int charId8 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId8);
 				List<MultiplyOperation> operationList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operationList);
-				List<ItemDisplayData> returnValue48 = RepairItemList(context, charId8, operationList);
-				return GameData.Serializer.Serializer.Serialize(returnValue48, returnDataPool);
+				List<ItemDisplayData> returnValue51 = RepairItemList(context, charId8, operationList);
+				return GameData.Serializer.Serializer.Serialize(returnValue51, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 97:
 		{
-			int argsCount24 = operation.ArgsCount;
-			int num24 = argsCount24;
-			if (num24 == 2)
+			int argsCount27 = operation.ArgsCount;
+			int num27 = argsCount27;
+			if (num27 == 2)
 			{
-				short blockIndex2 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex2);
+				short blockIndex3 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex3);
 				bool isAutoSold = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAutoSold);
-				SetBuildingAutoSold(context, blockIndex2, isAutoSold);
+				SetBuildingAutoSold(context, blockIndex3, isAutoSold);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 98:
 		{
-			int argsCount18 = operation.ArgsCount;
-			int num18 = argsCount18;
-			if (num18 == 1)
+			int argsCount21 = operation.ArgsCount;
+			int num21 = argsCount21;
+			if (num21 == 1)
 			{
-				short blockIndex = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex);
-				bool returnValue30 = GetBuildingIsAutoSold(blockIndex);
-				return GameData.Serializer.Serializer.Serialize(returnValue30, returnDataPool);
+				short blockIndex2 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex2);
+				bool returnValue33 = GetBuildingIsAutoSold(blockIndex2);
+				return GameData.Serializer.Serializer.Serialize(returnValue33, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 99:
 			if (operation.ArgsCount == 0)
 			{
-				List<sbyte> returnValue25 = GetXiangshuIdInKungfuRoom();
-				return GameData.Serializer.Serializer.Serialize(returnValue25, returnDataPool);
+				List<sbyte> returnValue28 = GetXiangshuIdInKungfuRoom();
+				return GameData.Serializer.Serializer.Serialize(returnValue28, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 100:
 		{
-			int argsCount11 = operation.ArgsCount;
-			int num11 = argsCount11;
-			if (num11 == 4)
+			int argsCount14 = operation.ArgsCount;
+			int num14 = argsCount14;
+			if (num14 == 4)
 			{
 				int charId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId3);
@@ -17838,16 +17844,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey2);
 				sbyte toolSourceType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref toolSourceType);
-				ItemDisplayData returnValue19 = RepairItemOptional(context, charId3, toolKey, itemKey2, toolSourceType);
-				return GameData.Serializer.Serializer.Serialize(returnValue19, returnDataPool);
+				ItemDisplayData returnValue22 = RepairItemOptional(context, charId3, toolKey, itemKey2, toolSourceType);
+				return GameData.Serializer.Serializer.Serialize(returnValue22, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 101:
 		{
-			int argsCount7 = operation.ArgsCount;
-			int num7 = argsCount7;
-			if (num7 == 2)
+			int argsCount10 = operation.ArgsCount;
+			int num10 = argsCount10;
+			if (num10 == 2)
 			{
 				int id = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id);
@@ -17865,8 +17871,8 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 				Location location3 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location3);
-				List<Chicken> returnValue11 = GetSettlementChickenDataList(location3);
-				return GameData.Serializer.Serializer.Serialize(returnValue11, returnDataPool);
+				List<Chicken> returnValue14 = GetSettlementChickenDataList(location3);
+				return GameData.Serializer.Serializer.Serialize(returnValue14, returnDataPool);
 			}
 			case 2:
 			{
@@ -17874,17 +17880,17 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location2);
 				bool ignoreFulong = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref ignoreFulong);
-				List<Chicken> returnValue10 = GetSettlementChickenDataList(location2, ignoreFulong);
-				return GameData.Serializer.Serializer.Serialize(returnValue10, returnDataPool);
+				List<Chicken> returnValue13 = GetSettlementChickenDataList(location2, ignoreFulong);
+				return GameData.Serializer.Serializer.Serialize(returnValue13, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 103:
 		{
-			int argsCount4 = operation.ArgsCount;
-			int num4 = argsCount4;
-			if (num4 == 1)
+			int argsCount7 = operation.ArgsCount;
+			int num7 = argsCount7;
+			if (num7 == 1)
 			{
 				short weatherId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref weatherId);
@@ -17895,65 +17901,65 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 104:
 		{
-			int argsCount162 = operation.ArgsCount;
-			int num162 = argsCount162;
-			if (num162 == 1)
+			int argsCount2 = operation.ArgsCount;
+			int num2 = argsCount2;
+			if (num2 == 1)
 			{
-				short blockIndex10 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex10);
-				bool returnValue189 = GetComfortableIsAutoCheckIn(blockIndex10);
-				return GameData.Serializer.Serializer.Serialize(returnValue189, returnDataPool);
+				short blockIndex = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex);
+				bool returnValue2 = GetComfortableIsAutoCheckIn(blockIndex);
+				return GameData.Serializer.Serializer.Serialize(returnValue2, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 105:
 		{
-			int argsCount158 = operation.ArgsCount;
-			int num158 = argsCount158;
-			if (num158 == 1)
+			int argsCount161 = operation.ArgsCount;
+			int num161 = argsCount161;
+			if (num161 == 1)
 			{
-				short blockIndex9 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex9);
-				bool returnValue186 = GetResidenceIsAutoCheckIn(blockIndex9);
-				return GameData.Serializer.Serializer.Serialize(returnValue186, returnDataPool);
+				short blockIndex10 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex10);
+				bool returnValue189 = GetResidenceIsAutoCheckIn(blockIndex10);
+				return GameData.Serializer.Serializer.Serialize(returnValue189, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 106:
 		{
-			int argsCount154 = operation.ArgsCount;
-			int num154 = argsCount154;
-			if (num154 == 2)
+			int argsCount157 = operation.ArgsCount;
+			int num157 = argsCount157;
+			if (num157 == 2)
 			{
-				short blockIndex8 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex8);
+				short blockIndex9 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex9);
 				bool isAutoCheckIn2 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAutoCheckIn2);
-				SetComfortableAutoCheckIn(context, blockIndex8, isAutoCheckIn2);
+				SetComfortableAutoCheckIn(context, blockIndex9, isAutoCheckIn2);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 107:
 		{
-			int argsCount150 = operation.ArgsCount;
-			int num150 = argsCount150;
-			if (num150 == 2)
+			int argsCount153 = operation.ArgsCount;
+			int num153 = argsCount153;
+			if (num153 == 2)
 			{
-				short blockIndex7 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex7);
+				short blockIndex8 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex8);
 				bool isAutoCheckIn = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAutoCheckIn);
-				SetResidenceAutoCheckIn(context, blockIndex7, isAutoCheckIn);
+				SetResidenceAutoCheckIn(context, blockIndex8, isAutoCheckIn);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 108:
 		{
-			int argsCount145 = operation.ArgsCount;
-			int num145 = argsCount145;
-			if (num145 == 1)
+			int argsCount148 = operation.ArgsCount;
+			int num148 = argsCount148;
+			if (num148 == 1)
 			{
 				short buildingTemplateId6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId6);
@@ -17964,9 +17970,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 109:
 		{
-			int argsCount141 = operation.ArgsCount;
-			int num141 = argsCount141;
-			if (num141 == 2)
+			int argsCount144 = operation.ArgsCount;
+			int num144 = argsCount144;
+			if (num144 == 2)
 			{
 				int charId21 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId21);
@@ -17979,9 +17985,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 110:
 		{
-			int argsCount137 = operation.ArgsCount;
-			int num137 = argsCount137;
-			if (num137 == 3)
+			int argsCount140 = operation.ArgsCount;
+			int num140 = argsCount140;
+			if (num140 == 3)
 			{
 				ItemDisplayData tool2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref tool2);
@@ -17989,23 +17995,23 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref target3);
 				short weaveClothingTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref weaveClothingTemplateId);
-				ItemDisplayData returnValue171 = WeaveClothingItem(context, tool2, target3, weaveClothingTemplateId);
-				return GameData.Serializer.Serializer.Serialize(returnValue171, returnDataPool);
+				ItemDisplayData returnValue174 = WeaveClothingItem(context, tool2, target3, weaveClothingTemplateId);
+				return GameData.Serializer.Serializer.Serialize(returnValue174, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 111:
 			if (operation.ArgsCount == 0)
 			{
-				List<Chicken> returnValue168 = GmCmd_GetChickenData();
-				return GameData.Serializer.Serializer.Serialize(returnValue168, returnDataPool);
+				List<Chicken> returnValue171 = GmCmd_GetChickenData();
+				return GameData.Serializer.Serializer.Serialize(returnValue171, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 112:
 		{
-			int argsCount130 = operation.ArgsCount;
-			int num130 = argsCount130;
-			if (num130 == 4)
+			int argsCount133 = operation.ArgsCount;
+			int num133 = argsCount133;
+			if (num133 == 4)
 			{
 				List<int> soulCharIds2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref soulCharIds2);
@@ -18015,16 +18021,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref featureIds2);
 				int previewId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref previewId);
-				PossessionPreview returnValue166 = GetPossessionPreview(context, soulCharIds2, bodyCharId2, featureIds2, previewId);
-				return GameData.Serializer.Serializer.Serialize(returnValue166, returnDataPool);
+				PossessionPreview returnValue169 = GetPossessionPreview(context, soulCharIds2, bodyCharId2, featureIds2, previewId);
+				return GameData.Serializer.Serializer.Serialize(returnValue169, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 113:
 		{
-			int argsCount127 = operation.ArgsCount;
-			int num127 = argsCount127;
-			if (num127 == 3)
+			int argsCount130 = operation.ArgsCount;
+			int num130 = argsCount130;
+			if (num130 == 3)
 			{
 				List<int> soulCharIds = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref soulCharIds);
@@ -18032,16 +18038,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref bodyCharId);
 				List<short> featureIds = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref featureIds);
-				byte returnValue163 = TrySwapSoulCeremony(context, soulCharIds, bodyCharId, featureIds);
-				return GameData.Serializer.Serializer.Serialize(returnValue163, returnDataPool);
+				byte returnValue166 = TrySwapSoulCeremony(context, soulCharIds, bodyCharId, featureIds);
+				return GameData.Serializer.Serializer.Serialize(returnValue166, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 114:
 		{
-			int argsCount124 = operation.ArgsCount;
-			int num124 = argsCount124;
-			if (num124 == 2)
+			int argsCount127 = operation.ArgsCount;
+			int num127 = argsCount127;
+			if (num127 == 2)
 			{
 				ItemKey itemKey8 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey8);
@@ -18054,9 +18060,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 115:
 		{
-			int argsCount121 = operation.ArgsCount;
-			int num121 = argsCount121;
-			if (num121 == 2)
+			int argsCount124 = operation.ArgsCount;
+			int num124 = argsCount124;
+			if (num124 == 2)
 			{
 				ItemKey itemKey7 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey7);
@@ -18069,9 +18075,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 116:
 		{
-			int argsCount117 = operation.ArgsCount;
-			int num117 = argsCount117;
-			if (num117 == 1)
+			int argsCount120 = operation.ArgsCount;
+			int num120 = argsCount120;
+			if (num120 == 1)
 			{
 				AvatarData avatar = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref avatar);
@@ -18083,22 +18089,22 @@ public class BuildingDomain : BaseGameDataDomain
 		case 117:
 			if (operation.ArgsCount == 0)
 			{
-				List<int> returnValue151 = GetSwapSoulCeremonyBodyCharIdList();
-				return GameData.Serializer.Serializer.Serialize(returnValue151, returnDataPool);
+				List<int> returnValue154 = GetSwapSoulCeremonyBodyCharIdList();
+				return GameData.Serializer.Serializer.Serialize(returnValue154, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 118:
 		{
-			int argsCount111 = operation.ArgsCount;
-			int num111 = argsCount111;
-			if (num111 == 2)
+			int argsCount114 = operation.ArgsCount;
+			int num114 = argsCount114;
+			if (num114 == 2)
 			{
 				BuildingBlockKey blockKey37 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey37);
 				int[] managerCharacterIds = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref managerCharacterIds);
-				int[] returnValue146 = GetBuildingShopManagerAutoArrangeSorted(blockKey37, managerCharacterIds);
-				return GameData.Serializer.Serializer.Serialize(returnValue146, returnDataPool);
+				int[] returnValue149 = GetBuildingShopManagerAutoArrangeSorted(blockKey37, managerCharacterIds);
+				return GameData.Serializer.Serializer.Serialize(returnValue149, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -18137,9 +18143,9 @@ public class BuildingDomain : BaseGameDataDomain
 			}
 		case 121:
 		{
-			int argsCount105 = operation.ArgsCount;
-			int num105 = argsCount105;
-			if (num105 == 1)
+			int argsCount108 = operation.ArgsCount;
+			int num108 = argsCount108;
+			if (num108 == 1)
 			{
 				BuildingBlockKey key16 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key16);
@@ -18150,55 +18156,55 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 122:
 		{
-			int argsCount103 = operation.ArgsCount;
-			int num103 = argsCount103;
-			if (num103 == 1)
+			int argsCount106 = operation.ArgsCount;
+			int num106 = argsCount106;
+			if (num106 == 1)
 			{
 				BuildingBlockKey blockKey33 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey33);
-				BuildingManageYieldTipsData returnValue140 = GetShopManagementYieldTipsData(context, blockKey33);
-				return GameData.Serializer.Serializer.Serialize(returnValue140, returnDataPool);
+				BuildingManageYieldTipsData returnValue143 = GetShopManagementYieldTipsData(context, blockKey33);
+				return GameData.Serializer.Serializer.Serialize(returnValue143, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 123:
 		{
-			int argsCount101 = operation.ArgsCount;
-			int num101 = argsCount101;
-			if (num101 == 1)
+			int argsCount104 = operation.ArgsCount;
+			int num104 = argsCount104;
+			if (num104 == 1)
 			{
 				BuildingBlockKey blockKey32 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey32);
-				int returnValue137 = CalculateBuildingManageHarvestSuccessRate(blockKey32);
-				return GameData.Serializer.Serializer.Serialize(returnValue137, returnDataPool);
+				int returnValue140 = CalculateBuildingManageHarvestSuccessRate(blockKey32);
+				return GameData.Serializer.Serializer.Serialize(returnValue140, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 124:
 		{
-			int argsCount98 = operation.ArgsCount;
-			int num98 = argsCount98;
-			if (num98 == 1)
+			int argsCount101 = operation.ArgsCount;
+			int num101 = argsCount101;
+			if (num101 == 1)
 			{
 				BuildingBlockKey buildingBlockKey23 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey23);
-				ShopEventCollection returnValue133 = GetOrCreateShopEventCollection(buildingBlockKey23);
-				return GameData.Serializer.Serializer.Serialize(returnValue133, returnDataPool);
+				ShopEventCollection returnValue136 = GetOrCreateShopEventCollection(buildingBlockKey23);
+				return GameData.Serializer.Serializer.Serialize(returnValue136, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 125:
 			if (operation.ArgsCount == 0)
 			{
-				SamsaraPlatformRecordCollection returnValue128 = GetSamsaraPlatformRecord();
-				return GameData.Serializer.Serializer.Serialize(returnValue128, returnDataPool);
+				SamsaraPlatformRecordCollection returnValue131 = GetSamsaraPlatformRecord();
+				return GameData.Serializer.Serializer.Serialize(returnValue131, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 126:
 			if (operation.ArgsCount == 0)
 			{
-				List<SamsaraPlatformCharDisplayData> returnValue122 = GetSwapSoulCeremonySoulCharIdList(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue122, returnDataPool);
+				List<SamsaraPlatformCharDisplayData> returnValue125 = GetSwapSoulCeremonySoulCharIdList(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue125, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 127:
@@ -18217,9 +18223,9 @@ public class BuildingDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 129:
 		{
-			int argsCount85 = operation.ArgsCount;
-			int num85 = argsCount85;
-			if (num85 == 1)
+			int argsCount88 = operation.ArgsCount;
+			int num88 = argsCount88;
+			if (num88 == 1)
 			{
 				ItemSourceType sourceType4 = ItemSourceType.Equipment;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref sourceType4);
@@ -18230,9 +18236,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 130:
 		{
-			int argsCount80 = operation.ArgsCount;
-			int num80 = argsCount80;
-			if (num80 == 1)
+			int argsCount83 = operation.ArgsCount;
+			int num83 = argsCount83;
+			if (num83 == 1)
 			{
 				ItemSourceType sourceType3 = ItemSourceType.Equipment;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref sourceType3);
@@ -18243,24 +18249,24 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 131:
 		{
-			int argsCount77 = operation.ArgsCount;
-			int num77 = argsCount77;
-			if (num77 == 2)
+			int argsCount80 = operation.ArgsCount;
+			int num80 = argsCount80;
+			if (num80 == 2)
 			{
 				short itemSubType2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemSubType2);
 				ItemSourceType sourceType2 = ItemSourceType.Equipment;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref sourceType2);
-				List<ItemDisplayData> returnValue107 = GetCricketOrJarFromSourceStorage(context, itemSubType2, sourceType2);
-				return GameData.Serializer.Serializer.Serialize(returnValue107, returnDataPool);
+				List<ItemDisplayData> returnValue110 = GetCricketOrJarFromSourceStorage(context, itemSubType2, sourceType2);
+				return GameData.Serializer.Serializer.Serialize(returnValue110, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 132:
 		{
-			int argsCount72 = operation.ArgsCount;
-			int num72 = argsCount72;
-			if (num72 == 4)
+			int argsCount75 = operation.ArgsCount;
+			int num75 = argsCount75;
+			if (num75 == 4)
 			{
 				int collectionIndex = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref collectionIndex);
@@ -18278,117 +18284,117 @@ public class BuildingDomain : BaseGameDataDomain
 		case 133:
 			if (operation.ArgsCount == 0)
 			{
-				CricketCollectionBatchButtonStateDisplayData returnValue102 = GetBatchButtonEnableState(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue102, returnDataPool);
+				CricketCollectionBatchButtonStateDisplayData returnValue105 = GetBatchButtonEnableState(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue105, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 134:
 		{
-			int argsCount66 = operation.ArgsCount;
-			int num66 = argsCount66;
-			if (num66 == 1)
+			int argsCount69 = operation.ArgsCount;
+			int num69 = argsCount69;
+			if (num69 == 1)
 			{
 				BuildingBlockKey blockKey18 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey18);
-				int[] returnValue98 = CalculateBuildingManageHarvestSuccessRates(blockKey18);
-				return GameData.Serializer.Serializer.Serialize(returnValue98, returnDataPool);
+				int[] returnValue101 = CalculateBuildingManageHarvestSuccessRates(blockKey18);
+				return GameData.Serializer.Serializer.Serialize(returnValue101, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 135:
 		{
-			int argsCount63 = operation.ArgsCount;
-			int num63 = argsCount63;
-			if (num63 == 2)
+			int argsCount66 = operation.ArgsCount;
+			int num66 = argsCount66;
+			if (num66 == 2)
 			{
 				short orgMemberTemplateId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgMemberTemplateId3);
 				int chickenId5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref chickenId5);
-				bool returnValue94 = UnsetFulongChicken(context, orgMemberTemplateId3, chickenId5);
-				return GameData.Serializer.Serializer.Serialize(returnValue94, returnDataPool);
+				bool returnValue97 = UnsetFulongChicken(context, orgMemberTemplateId3, chickenId5);
+				return GameData.Serializer.Serializer.Serialize(returnValue97, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 136:
 		{
-			int argsCount60 = operation.ArgsCount;
-			int num60 = argsCount60;
-			if (num60 == 2)
+			int argsCount63 = operation.ArgsCount;
+			int num63 = argsCount63;
+			if (num63 == 2)
 			{
 				short orgMemberTemplateId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgMemberTemplateId2);
 				int chickenId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref chickenId4);
-				bool returnValue90 = SetFulongChicken(context, orgMemberTemplateId2, chickenId4);
-				return GameData.Serializer.Serializer.Serialize(returnValue90, returnDataPool);
+				bool returnValue93 = SetFulongChicken(context, orgMemberTemplateId2, chickenId4);
+				return GameData.Serializer.Serializer.Serialize(returnValue93, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 137:
 		{
-			int argsCount56 = operation.ArgsCount;
-			int num56 = argsCount56;
-			if (num56 == 1)
+			int argsCount59 = operation.ArgsCount;
+			int num59 = argsCount59;
+			if (num59 == 1)
 			{
 				List<int> idList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref idList);
-				List<Chicken> returnValue86 = GetChickenDataList(idList);
-				return GameData.Serializer.Serializer.Serialize(returnValue86, returnDataPool);
+				List<Chicken> returnValue89 = GetChickenDataList(idList);
+				return GameData.Serializer.Serializer.Serialize(returnValue89, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 138:
 		{
-			int argsCount52 = operation.ArgsCount;
-			int num52 = argsCount52;
-			if (num52 == 1)
+			int argsCount55 = operation.ArgsCount;
+			int num55 = argsCount55;
+			if (num55 == 1)
 			{
 				List<int> chickenIdList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref chickenIdList);
-				List<string> returnValue81 = GetChickenNicknameList(chickenIdList);
-				return GameData.Serializer.Serializer.Serialize(returnValue81, returnDataPool);
+				List<string> returnValue84 = GetChickenNicknameList(chickenIdList);
+				return GameData.Serializer.Serializer.Serialize(returnValue84, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 139:
 		{
-			int argsCount49 = operation.ArgsCount;
-			int num49 = argsCount49;
-			if (num49 == 1)
+			int argsCount52 = operation.ArgsCount;
+			int num52 = argsCount52;
+			if (num52 == 1)
 			{
 				Location location5 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location5);
-				List<int> returnValue78 = GetSettlementChickenIdList(location5);
-				return GameData.Serializer.Serializer.Serialize(returnValue78, returnDataPool);
+				List<int> returnValue81 = GetSettlementChickenIdList(location5);
+				return GameData.Serializer.Serializer.Serialize(returnValue81, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 140:
 		{
-			int argsCount46 = operation.ArgsCount;
-			int num46 = argsCount46;
-			if (num46 == 1)
+			int argsCount49 = operation.ArgsCount;
+			int num49 = argsCount49;
+			if (num49 == 1)
 			{
 				Location location4 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location4);
-				List<string> returnValue73 = GetChickensNicknameByLocation(location4);
-				return GameData.Serializer.Serializer.Serialize(returnValue73, returnDataPool);
+				List<string> returnValue76 = GetChickensNicknameByLocation(location4);
+				return GameData.Serializer.Serializer.Serialize(returnValue76, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 141:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue71 = AllChickenInTaiwuVillage(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue71, returnDataPool);
+				bool returnValue74 = AllChickenInTaiwuVillage(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue74, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 142:
 			if (operation.ArgsCount == 0)
 			{
-				List<bool> returnValue67 = GetVillagerRoleExtraEffectUnlockState();
-				return GameData.Serializer.Serializer.Serialize(returnValue67, returnDataPool);
+				List<bool> returnValue70 = GetVillagerRoleExtraEffectUnlockState();
+				return GameData.Serializer.Serializer.Serialize(returnValue70, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 143:
@@ -18396,24 +18402,24 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 			case 0:
 			{
-				bool returnValue66 = ClickChickenMap(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue66, returnDataPool);
+				bool returnValue69 = ClickChickenMap(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue69, returnDataPool);
 			}
 			case 1:
 			{
 				bool ignoreTask = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref ignoreTask);
-				bool returnValue65 = ClickChickenMap(context, ignoreTask);
-				return GameData.Serializer.Serializer.Serialize(returnValue65, returnDataPool);
+				bool returnValue68 = ClickChickenMap(context, ignoreTask);
+				return GameData.Serializer.Serializer.Serialize(returnValue68, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 144:
 		{
-			int argsCount38 = operation.ArgsCount;
-			int num38 = argsCount38;
-			if (num38 == 1)
+			int argsCount41 = operation.ArgsCount;
+			int num41 = argsCount41;
+			if (num41 == 1)
 			{
 				int chickenId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref chickenId);
@@ -18424,57 +18430,57 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 145:
 		{
-			int argsCount35 = operation.ArgsCount;
-			int num35 = argsCount35;
-			if (num35 == 2)
+			int argsCount38 = operation.ArgsCount;
+			int num38 = argsCount38;
+			if (num38 == 2)
 			{
-				int blockIndex4 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex4);
+				int blockIndex5 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex5);
 				BuildingResourceOutputSetting setting = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref setting);
-				SetBuildingResourceOutputSetting(context, blockIndex4, setting);
+				SetBuildingResourceOutputSetting(context, blockIndex5, setting);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 146:
 		{
-			int argsCount32 = operation.ArgsCount;
-			int num32 = argsCount32;
-			if (num32 == 1)
+			int argsCount35 = operation.ArgsCount;
+			int num35 = argsCount35;
+			if (num35 == 1)
 			{
-				int blockIndex3 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex3);
-				BuildingResourceOutputSetting returnValue52 = GetBuildingResourceOutputSetting(blockIndex3);
-				return GameData.Serializer.Serializer.Serialize(returnValue52, returnDataPool);
+				int blockIndex4 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockIndex4);
+				BuildingResourceOutputSetting returnValue55 = GetBuildingResourceOutputSetting(blockIndex4);
+				return GameData.Serializer.Serializer.Serialize(returnValue55, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 147:
 			if (operation.ArgsCount == 0)
 			{
-				BuildingExceptionData returnValue50 = GetBuildingExceptionData();
-				return GameData.Serializer.Serializer.Serialize(returnValue50, returnDataPool);
+				BuildingExceptionData returnValue53 = GetBuildingExceptionData();
+				return GameData.Serializer.Serializer.Serialize(returnValue53, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 148:
 		{
-			int argsCount26 = operation.ArgsCount;
-			int num26 = argsCount26;
-			if (num26 == 1)
+			int argsCount29 = operation.ArgsCount;
+			int num29 = argsCount29;
+			if (num29 == 1)
 			{
 				BuildingBlockKey blockKey12 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey12);
-				bool returnValue45 = AllDependBuildingAvailable(blockKey12);
-				return GameData.Serializer.Serializer.Serialize(returnValue45, returnDataPool);
+				bool returnValue48 = AllDependBuildingAvailable(blockKey12);
+				return GameData.Serializer.Serializer.Serialize(returnValue48, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 149:
 		{
-			int argsCount23 = operation.ArgsCount;
-			int num23 = argsCount23;
-			if (num23 == 4)
+			int argsCount26 = operation.ArgsCount;
+			int num26 = argsCount26;
+			if (num26 == 4)
 			{
 				BuildingBlockKey blockKey11 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey11);
@@ -18484,21 +18490,21 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref count);
 				int cost = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref cost);
-				int returnValue42 = PracticingCombatSkillInPracticeRoom(context, blockKey11, skillTemplateId, count, cost);
-				return GameData.Serializer.Serializer.Serialize(returnValue42, returnDataPool);
+				int returnValue45 = PracticingCombatSkillInPracticeRoom(context, blockKey11, skillTemplateId, count, cost);
+				return GameData.Serializer.Serializer.Serialize(returnValue45, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 150:
 		{
-			int argsCount20 = operation.ArgsCount;
-			int num20 = argsCount20;
-			if (num20 == 1)
+			int argsCount23 = operation.ArgsCount;
+			int num23 = argsCount23;
+			if (num23 == 1)
 			{
 				BuildingBlockKey blockKey10 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey10);
-				bool returnValue36 = HasShopManagerLeader(blockKey10);
-				return GameData.Serializer.Serializer.Serialize(returnValue36, returnDataPool);
+				bool returnValue39 = HasShopManagerLeader(blockKey10);
+				return GameData.Serializer.Serializer.Serialize(returnValue39, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -18509,8 +18515,8 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 				BuildingBlockKey blockKey9 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey9);
-				List<int> returnValue35 = QuickArrangeShopManager(context, blockKey9);
-				return GameData.Serializer.Serializer.Serialize(returnValue35, returnDataPool);
+				List<int> returnValue38 = QuickArrangeShopManager(context, blockKey9);
+				return GameData.Serializer.Serializer.Serialize(returnValue38, returnDataPool);
 			}
 			case 2:
 			{
@@ -18518,8 +18524,8 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey8);
 				bool onlyCheck = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref onlyCheck);
-				List<int> returnValue34 = QuickArrangeShopManager(context, blockKey8, onlyCheck);
-				return GameData.Serializer.Serializer.Serialize(returnValue34, returnDataPool);
+				List<int> returnValue37 = QuickArrangeShopManager(context, blockKey8, onlyCheck);
+				return GameData.Serializer.Serializer.Serialize(returnValue37, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -18535,8 +18541,8 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey6);
 				sbyte operationType4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operationType4);
-				List<int> returnValue32 = QuickArrangeBuildOperator(buildingTemplateId3, blockKey6, operationType4);
-				return GameData.Serializer.Serializer.Serialize(returnValue32, returnDataPool);
+				List<int> returnValue35 = QuickArrangeBuildOperator(buildingTemplateId3, blockKey6, operationType4);
+				return GameData.Serializer.Serializer.Serialize(returnValue35, returnDataPool);
 			}
 			case 4:
 			{
@@ -18548,30 +18554,30 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operationType3);
 				List<int> exceptCharList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref exceptCharList);
-				List<int> returnValue31 = QuickArrangeBuildOperator(buildingTemplateId2, blockKey5, operationType3, exceptCharList);
-				return GameData.Serializer.Serializer.Serialize(returnValue31, returnDataPool);
+				List<int> returnValue34 = QuickArrangeBuildOperator(buildingTemplateId2, blockKey5, operationType3, exceptCharList);
+				return GameData.Serializer.Serializer.Serialize(returnValue34, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 153:
 		{
-			int argsCount17 = operation.ArgsCount;
-			int num17 = argsCount17;
-			if (num17 == 1)
+			int argsCount20 = operation.ArgsCount;
+			int num20 = argsCount20;
+			if (num20 == 1)
 			{
 				BuildingBlockKey blockKey4 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey4);
-				bool returnValue27 = ShopBuildingCanTeach(blockKey4);
-				return GameData.Serializer.Serializer.Serialize(returnValue27, returnDataPool);
+				bool returnValue30 = ShopBuildingCanTeach(blockKey4);
+				return GameData.Serializer.Serializer.Serialize(returnValue30, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 154:
 		{
-			int argsCount15 = operation.ArgsCount;
-			int num15 = argsCount15;
-			if (num15 == 4)
+			int argsCount18 = operation.ArgsCount;
+			int num18 = argsCount18;
+			if (num18 == 4)
 			{
 				short buildingTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId);
@@ -18579,71 +18585,84 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey3);
 				sbyte operationType2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operationType2);
-				List<int> operatorList = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operatorList);
-				int returnValue23 = GetOperationLeftTime(context, buildingTemplateId, blockKey3, operationType2, operatorList);
-				return GameData.Serializer.Serializer.Serialize(returnValue23, returnDataPool);
+				List<int> operatorList2 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operatorList2);
+				int returnValue26 = GetOperationLeftTime(context, buildingTemplateId, blockKey3, operationType2, operatorList2);
+				return GameData.Serializer.Serializer.Serialize(returnValue26, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 155:
 		{
-			int argsCount12 = operation.ArgsCount;
-			int num12 = argsCount12;
-			if (num12 == 2)
+			int argsCount15 = operation.ArgsCount;
+			int num15 = argsCount15;
+			if (num15 == 2)
 			{
 				BuildingBlockKey blockKey2 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey2);
 				sbyte operationType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operationType);
-				int returnValue21 = GetBuildingOperationLeftTime(context, blockKey2, operationType);
-				return GameData.Serializer.Serializer.Serialize(returnValue21, returnDataPool);
+				int returnValue24 = GetBuildingOperationLeftTime(context, blockKey2, operationType);
+				return GameData.Serializer.Serializer.Serialize(returnValue24, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 156:
 		{
-			int argsCount10 = operation.ArgsCount;
-			int num10 = argsCount10;
-			if (num10 == 2)
+			int argsCount13 = operation.ArgsCount;
+			int num13 = argsCount13;
+			if (num13 == 2)
 			{
 				BuildingBlockKey blockKey = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey);
 				int memberId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref memberId);
-				ShopBuildingTeachBookData returnValue17 = GetShopBuildingTeachBookData(blockKey, memberId);
-				return GameData.Serializer.Serializer.Serialize(returnValue17, returnDataPool);
+				ShopBuildingTeachBookData returnValue20 = GetShopBuildingTeachBookData(blockKey, memberId);
+				return GameData.Serializer.Serializer.Serialize(returnValue20, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 157:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue12 = CalcExtraTaiwuGroupMaxCountByStrategyRoom();
-				return GameData.Serializer.Serializer.Serialize(returnValue12, returnDataPool);
+				int returnValue15 = CalcExtraTaiwuGroupMaxCountByStrategyRoom();
+				return GameData.Serializer.Serializer.Serialize(returnValue15, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 158:
 		{
-			int argsCount5 = operation.ArgsCount;
-			int num5 = argsCount5;
-			if (num5 == 1)
+			int argsCount8 = operation.ArgsCount;
+			int num8 = argsCount8;
+			if (num8 == 1)
 			{
 				ItemSourceType itemSourceType = ItemSourceType.Equipment;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemSourceType);
-				List<ItemDisplayData> returnValue7 = GetTaiwuCanFixBookItemDataList(itemSourceType);
-				return GameData.Serializer.Serializer.Serialize(returnValue7, returnDataPool);
+				List<ItemDisplayData> returnValue10 = GetTaiwuCanFixBookItemDataList(itemSourceType);
+				return GameData.Serializer.Serializer.Serialize(returnValue10, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 159:
 			if (operation.ArgsCount == 0)
 			{
-				(int, int, int) returnValue4 = GetResidenceInfo();
-				return GameData.Serializer.Serializer.Serialize(returnValue4, returnDataPool);
+				(int, int, int) returnValue7 = GetResidenceInfo();
+				return GameData.Serializer.Serializer.Serialize(returnValue7, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 160:
+		{
+			int argsCount3 = operation.ArgsCount;
+			int num3 = argsCount3;
+			if (num3 == 1)
+			{
+				EBuildingScaleEffect effectType = EBuildingScaleEffect.MigrateSpeedBonusFactor;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType);
+				int returnValue3 = GetTaiwuVillageResourceBlockEffect(context, effectType);
+				return GameData.Serializer.Serializer.Serialize(returnValue3, returnDataPool);
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 161:
 		{
 			int argsCount163 = operation.ArgsCount;
 			int num163 = argsCount163;
@@ -18651,83 +18670,70 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 				EBuildingScaleEffect effectType5 = EBuildingScaleEffect.MigrateSpeedBonusFactor;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType5);
-				int returnValue190 = GetTaiwuVillageResourceBlockEffect(context, effectType5);
+				int returnValue190 = GetTaiwuLocationResourceBlockEffect(context, effectType5);
 				return GameData.Serializer.Serializer.Serialize(returnValue190, returnDataPool);
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 161:
-		{
-			int argsCount160 = operation.ArgsCount;
-			int num160 = argsCount160;
-			if (num160 == 1)
-			{
-				EBuildingScaleEffect effectType4 = EBuildingScaleEffect.MigrateSpeedBonusFactor;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType4);
-				int returnValue187 = GetTaiwuLocationResourceBlockEffect(context, effectType4);
-				return GameData.Serializer.Serializer.Serialize(returnValue187, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 162:
 		{
-			int argsCount157 = operation.ArgsCount;
-			int num157 = argsCount157;
-			if (num157 == 1)
+			int argsCount160 = operation.ArgsCount;
+			int num160 = argsCount160;
+			if (num160 == 1)
 			{
 				short templateId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId2);
-				List<BuildingBlockData> returnValue185 = GetTaiwuVillageResourceBlockEffectInfo(templateId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue185, returnDataPool);
+				List<BuildingBlockData> returnValue188 = GetTaiwuVillageResourceBlockEffectInfo(templateId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue188, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 163:
 		{
-			int argsCount155 = operation.ArgsCount;
-			int num155 = argsCount155;
-			if (num155 == 1)
+			int argsCount158 = operation.ArgsCount;
+			int num158 = argsCount158;
+			if (num158 == 1)
 			{
 				BuildingBlockKey blockKey48 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey48);
-				bool returnValue182 = CanQuickArrangeShopManager(blockKey48);
-				return GameData.Serializer.Serializer.Serialize(returnValue182, returnDataPool);
+				bool returnValue185 = CanQuickArrangeShopManager(blockKey48);
+				return GameData.Serializer.Serializer.Serialize(returnValue185, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 164:
 		{
-			int argsCount152 = operation.ArgsCount;
-			int num152 = argsCount152;
-			if (num152 == 1)
+			int argsCount155 = operation.ArgsCount;
+			int num155 = argsCount155;
+			if (num155 == 1)
 			{
 				BuildingBlockKey blockKey47 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey47);
-				BuildingFormulaContextBridge returnValue180 = GetBuildingFormulaContextBridge(blockKey47);
-				return GameData.Serializer.Serializer.Serialize(returnValue180, returnDataPool);
+				BuildingFormulaContextBridge returnValue183 = GetBuildingFormulaContextBridge(blockKey47);
+				return GameData.Serializer.Serializer.Serialize(returnValue183, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 165:
 		{
-			int argsCount149 = operation.ArgsCount;
-			int num149 = argsCount149;
-			if (num149 == 2)
+			int argsCount152 = operation.ArgsCount;
+			int num152 = argsCount152;
+			if (num152 == 2)
 			{
 				BuildingBlockKey buildingBlockKey26 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey26);
 				sbyte skillType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType);
-				(int, bool) returnValue178 = GetBuildingEffectForMake(buildingBlockKey26, skillType);
-				return GameData.Serializer.Serializer.Serialize(returnValue178, returnDataPool);
+				(int, bool) returnValue181 = GetBuildingEffectForMake(buildingBlockKey26, skillType);
+				return GameData.Serializer.Serializer.Serialize(returnValue181, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 166:
 		{
-			int argsCount146 = operation.ArgsCount;
-			int num146 = argsCount146;
-			if (num146 == 3)
+			int argsCount149 = operation.ArgsCount;
+			int num149 = argsCount149;
+			if (num149 == 3)
 			{
 				int totalAttainment = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref totalAttainment);
@@ -18735,44 +18741,44 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId7);
 				int repeat2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref repeat2);
-				bool returnValue177 = GmCmd_BuildingCollectPerform(context, totalAttainment, buildingTemplateId7, repeat2);
-				return GameData.Serializer.Serializer.Serialize(returnValue177, returnDataPool);
+				bool returnValue180 = GmCmd_BuildingCollectPerform(context, totalAttainment, buildingTemplateId7, repeat2);
+				return GameData.Serializer.Serializer.Serialize(returnValue180, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 167:
 		{
-			int argsCount143 = operation.ArgsCount;
-			int num143 = argsCount143;
-			if (num143 == 2)
+			int argsCount146 = operation.ArgsCount;
+			int num146 = argsCount146;
+			if (num146 == 2)
 			{
 				sbyte grade = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref grade);
 				int repeat = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref repeat);
-				bool returnValue176 = GmCmd_BeatMinionPerform(context, grade, repeat);
-				return GameData.Serializer.Serializer.Serialize(returnValue176, returnDataPool);
+				bool returnValue179 = GmCmd_BeatMinionPerform(context, grade, repeat);
+				return GameData.Serializer.Serializer.Serialize(returnValue179, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 168:
 		{
-			int argsCount140 = operation.ArgsCount;
-			int num140 = argsCount140;
-			if (num140 == 1)
+			int argsCount143 = operation.ArgsCount;
+			int num143 = argsCount143;
+			if (num143 == 1)
 			{
 				int type2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type2);
-				int returnValue174 = GetStoreLocation(type2);
-				return GameData.Serializer.Serializer.Serialize(returnValue174, returnDataPool);
+				int returnValue177 = GetStoreLocation(type2);
+				return GameData.Serializer.Serializer.Serialize(returnValue177, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 169:
 		{
-			int argsCount138 = operation.ArgsCount;
-			int num138 = argsCount138;
-			if (num138 == 2)
+			int argsCount141 = operation.ArgsCount;
+			int num141 = argsCount141;
+			if (num141 == 2)
 			{
 				int type = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type);
@@ -18785,14 +18791,14 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 170:
 		{
-			int argsCount135 = operation.ArgsCount;
-			int num135 = argsCount135;
-			if (num135 == 1)
+			int argsCount138 = operation.ArgsCount;
+			int num138 = argsCount138;
+			if (num138 == 1)
 			{
 				BuildingBlockKey buildingBlockKey24 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey24);
-				List<CharacterDisplayData> returnValue170 = GetFeastTargetCharList(context, buildingBlockKey24);
-				return GameData.Serializer.Serializer.Serialize(returnValue170, returnDataPool);
+				List<CharacterDisplayData> returnValue173 = GetFeastTargetCharList(context, buildingBlockKey24);
+				return GameData.Serializer.Serializer.Serialize(returnValue173, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -18805,9 +18811,9 @@ public class BuildingDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 172:
 		{
-			int argsCount131 = operation.ArgsCount;
-			int num131 = argsCount131;
-			if (num131 == 1)
+			int argsCount134 = operation.ArgsCount;
+			int num134 = argsCount134;
+			if (num134 == 1)
 			{
 				BuildingBlockKey blockKey43 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey43);
@@ -18818,9 +18824,9 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 173:
 		{
-			int argsCount129 = operation.ArgsCount;
-			int num129 = argsCount129;
-			if (num129 == 1)
+			int argsCount132 = operation.ArgsCount;
+			int num132 = argsCount132;
+			if (num132 == 1)
 			{
 				BuildingBlockKey blockKey42 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey42);
@@ -18832,22 +18838,22 @@ public class BuildingDomain : BaseGameDataDomain
 		case 174:
 			if (operation.ArgsCount == 0)
 			{
-				TaiwuVillagerInfoTipsDisplayData returnValue162 = CalcTaiwuVillagerInfoDisplayData();
-				return GameData.Serializer.Serializer.Serialize(returnValue162, returnDataPool);
+				TaiwuVillagerInfoTipsDisplayData returnValue165 = CalcTaiwuVillagerInfoDisplayData();
+				return GameData.Serializer.Serializer.Serialize(returnValue165, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 175:
 		{
-			int argsCount125 = operation.ArgsCount;
-			int num125 = argsCount125;
-			if (num125 == 2)
+			int argsCount128 = operation.ArgsCount;
+			int num128 = argsCount128;
+			if (num128 == 2)
 			{
 				BuildingBlockKey blockKey40 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey40);
 				int charId20 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId20);
-				int returnValue159 = CalcTaiwuVillagerEfficiencyInBuilding(blockKey40, charId20);
-				return GameData.Serializer.Serializer.Serialize(returnValue159, returnDataPool);
+				int returnValue162 = CalcTaiwuVillagerEfficiencyInBuilding(blockKey40, charId20);
+				return GameData.Serializer.Serializer.Serialize(returnValue162, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -18875,42 +18881,42 @@ public class BuildingDomain : BaseGameDataDomain
 			}
 		case 177:
 		{
-			int argsCount123 = operation.ArgsCount;
-			int num123 = argsCount123;
-			if (num123 == 1)
+			int argsCount126 = operation.ArgsCount;
+			int num126 = argsCount126;
+			if (num126 == 1)
 			{
 				Location location8 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location8);
-				bool returnValue158 = AddLocationMark(context, location8);
-				return GameData.Serializer.Serializer.Serialize(returnValue158, returnDataPool);
+				bool returnValue161 = AddLocationMark(context, location8);
+				return GameData.Serializer.Serializer.Serialize(returnValue161, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 178:
 		{
-			int argsCount120 = operation.ArgsCount;
-			int num120 = argsCount120;
-			if (num120 == 1)
+			int argsCount123 = operation.ArgsCount;
+			int num123 = argsCount123;
+			if (num123 == 1)
 			{
 				Location location7 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location7);
-				bool returnValue156 = RemoveLocationMark(context, location7);
-				return GameData.Serializer.Serializer.Serialize(returnValue156, returnDataPool);
+				bool returnValue159 = RemoveLocationMark(context, location7);
+				return GameData.Serializer.Serializer.Serialize(returnValue159, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 179:
 			if (operation.ArgsCount == 0)
 			{
-				List<int> returnValue154 = RequestUnlockedWorkingVillagers();
-				return GameData.Serializer.Serializer.Serialize(returnValue154, returnDataPool);
+				List<int> returnValue157 = RequestUnlockedWorkingVillagers();
+				return GameData.Serializer.Serializer.Serialize(returnValue157, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 180:
 		{
-			int argsCount115 = operation.ArgsCount;
-			int num115 = argsCount115;
-			if (num115 == 2)
+			int argsCount118 = operation.ArgsCount;
+			int num118 = argsCount118;
+			if (num118 == 2)
 			{
 				BuildingBlockKey key23 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key23);
@@ -18923,54 +18929,54 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 181:
 		{
-			int argsCount114 = operation.ArgsCount;
-			int num114 = argsCount114;
-			if (num114 == 2)
+			int argsCount117 = operation.ArgsCount;
+			int num117 = argsCount117;
+			if (num117 == 2)
 			{
 				BuildingBlockKey key22 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key22);
 				int level2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref level2);
-				bool returnValue150 = UpgradeResourceBuilding(context, key22, level2);
-				return GameData.Serializer.Serializer.Serialize(returnValue150, returnDataPool);
+				bool returnValue153 = UpgradeResourceBuilding(context, key22, level2);
+				return GameData.Serializer.Serializer.Serialize(returnValue153, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 182:
 		{
-			int argsCount112 = operation.ArgsCount;
-			int num112 = argsCount112;
-			if (num112 == 2)
+			int argsCount115 = operation.ArgsCount;
+			int num115 = argsCount115;
+			if (num115 == 2)
 			{
 				BuildingBlockKey key21 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key21);
 				int levelSlotIndex = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref levelSlotIndex);
-				bool returnValue147 = UpgradeSlotBuilding(context, key21, levelSlotIndex);
-				return GameData.Serializer.Serializer.Serialize(returnValue147, returnDataPool);
+				bool returnValue150 = UpgradeSlotBuilding(context, key21, levelSlotIndex);
+				return GameData.Serializer.Serializer.Serialize(returnValue150, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 183:
 		{
-			int argsCount109 = operation.ArgsCount;
-			int num109 = argsCount109;
-			if (num109 == 2)
+			int argsCount112 = operation.ArgsCount;
+			int num112 = argsCount112;
+			if (num112 == 2)
 			{
 				BuildingBlockKey key20 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key20);
 				int index3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref index3);
-				bool returnValue145 = UnlockBuildingLevelSlot(context, key20, index3);
-				return GameData.Serializer.Serializer.Serialize(returnValue145, returnDataPool);
+				bool returnValue148 = UnlockBuildingLevelSlot(context, key20, index3);
+				return GameData.Serializer.Serializer.Serialize(returnValue148, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 184:
 		{
-			int argsCount108 = operation.ArgsCount;
-			int num108 = argsCount108;
-			if (num108 == 2)
+			int argsCount111 = operation.ArgsCount;
+			int num111 = argsCount111;
+			if (num111 == 2)
 			{
 				BuildingBlockKey key19 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key19);
@@ -18984,8 +18990,8 @@ public class BuildingDomain : BaseGameDataDomain
 		case 185:
 			if (operation.ArgsCount == 0)
 			{
-				PuppetPageDisplayData returnValue143 = GetPuppetPageDisplayData(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue143, returnDataPool);
+				PuppetPageDisplayData returnValue146 = GetPuppetPageDisplayData(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue146, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 186:
@@ -18998,47 +19004,47 @@ public class BuildingDomain : BaseGameDataDomain
 		case 187:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue141 = CalcQuickRepairAllBuildingCostMoney(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue141, returnDataPool);
+				int returnValue144 = CalcQuickRepairAllBuildingCostMoney(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue144, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 188:
 			if (operation.ArgsCount == 0)
 			{
-				BuildingFunctionData returnValue138 = GetBuildingFunctionData(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue138, returnDataPool);
+				BuildingFunctionData returnValue141 = GetBuildingFunctionData(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue141, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 189:
 			if (operation.ArgsCount == 0)
 			{
-				BuildingAreaData returnValue136 = GetTaiwuVillageBuildingAreaData();
-				return GameData.Serializer.Serializer.Serialize(returnValue136, returnDataPool);
+				BuildingAreaData returnValue139 = GetTaiwuVillageBuildingAreaData();
+				return GameData.Serializer.Serializer.Serialize(returnValue139, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 190:
 		{
-			int argsCount99 = operation.ArgsCount;
-			int num99 = argsCount99;
-			if (num99 == 1)
+			int argsCount102 = operation.ArgsCount;
+			int num102 = argsCount102;
+			if (num102 == 1)
 			{
 				bool getItem = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref getItem);
-				List<ItemDisplayData> returnValue134 = GetAllPawnShopItem(context, getItem);
-				return GameData.Serializer.Serializer.Serialize(returnValue134, returnDataPool);
+				List<ItemDisplayData> returnValue137 = GetAllPawnShopItem(context, getItem);
+				return GameData.Serializer.Serializer.Serialize(returnValue137, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 191:
 		{
-			int argsCount96 = operation.ArgsCount;
-			int num96 = argsCount96;
-			if (num96 == 1)
+			int argsCount99 = operation.ArgsCount;
+			int num99 = argsCount99;
+			if (num99 == 1)
 			{
 				BuildingBlockKey blockKey31 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey31);
-				TaiwuVillageBlockEffectInfo returnValue131 = GetTaiwuVillageBlockEffectInfo(context, blockKey31);
-				return GameData.Serializer.Serializer.Serialize(returnValue131, returnDataPool);
+				TaiwuVillageBlockEffectInfo returnValue134 = GetTaiwuVillageBlockEffectInfo(context, blockKey31);
+				return GameData.Serializer.Serializer.Serialize(returnValue134, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -19049,137 +19055,137 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 				BuildingBlockKey blockKey30 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey30);
-				BuildingShopData returnValue130 = GetTaiwuVillageShopData(context, blockKey30);
-				return GameData.Serializer.Serializer.Serialize(returnValue130, returnDataPool);
+				BuildingShopData returnValue133 = GetTaiwuVillageShopData(context, blockKey30);
+				return GameData.Serializer.Serializer.Serialize(returnValue133, returnDataPool);
 			}
 			case 2:
 			{
 				BuildingBlockKey blockKey29 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey29);
-				EBuildingScaleEffect effectType3 = EBuildingScaleEffect.MigrateSpeedBonusFactor;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType3);
-				BuildingShopData returnValue129 = GetTaiwuVillageShopData(context, blockKey29, effectType3);
-				return GameData.Serializer.Serializer.Serialize(returnValue129, returnDataPool);
+				EBuildingScaleEffect effectType4 = EBuildingScaleEffect.MigrateSpeedBonusFactor;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType4);
+				BuildingShopData returnValue132 = GetTaiwuVillageShopData(context, blockKey29, effectType4);
+				return GameData.Serializer.Serializer.Serialize(returnValue132, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 193:
 		{
-			int argsCount94 = operation.ArgsCount;
-			int num94 = argsCount94;
-			if (num94 == 1)
+			int argsCount97 = operation.ArgsCount;
+			int num97 = argsCount97;
+			if (num97 == 1)
 			{
 				BuildingBlockKey blockKey28 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey28);
-				BuildingEarningDisplayData returnValue127 = GetBuildingEarningDisplayData(context, blockKey28);
-				return GameData.Serializer.Serializer.Serialize(returnValue127, returnDataPool);
+				BuildingEarningDisplayData returnValue130 = GetBuildingEarningDisplayData(context, blockKey28);
+				return GameData.Serializer.Serializer.Serialize(returnValue130, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 194:
 		{
-			int argsCount93 = operation.ArgsCount;
-			int num93 = argsCount93;
-			if (num93 == 1)
+			int argsCount96 = operation.ArgsCount;
+			int num96 = argsCount96;
+			if (num96 == 1)
 			{
 				BuildingBlockKey blockKey25 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey25);
-				BuildingManageDisplayData returnValue123 = GetBuildingManageDisplayData(context, blockKey25);
-				return GameData.Serializer.Serializer.Serialize(returnValue123, returnDataPool);
+				BuildingManageDisplayData returnValue126 = GetBuildingManageDisplayData(context, blockKey25);
+				return GameData.Serializer.Serializer.Serialize(returnValue126, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 195:
 			if (operation.ArgsCount == 0)
 			{
-				List<short> returnValue121 = GetUnlockedFeastTypeList();
-				return GameData.Serializer.Serializer.Serialize(returnValue121, returnDataPool);
+				List<short> returnValue124 = GetUnlockedFeastTypeList();
+				return GameData.Serializer.Serializer.Serialize(returnValue124, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 196:
 			if (operation.ArgsCount == 0)
 			{
-				TransferableRecordDataBase returnValue119 = GetReversedSamsaraRecord(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue119, returnDataPool);
+				TransferableRecordDataBase returnValue122 = GetReversedSamsaraRecord(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue122, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 197:
 		{
-			int argsCount89 = operation.ArgsCount;
-			int num89 = argsCount89;
-			if (num89 == 1)
+			int argsCount92 = operation.ArgsCount;
+			int num92 = argsCount92;
+			if (num92 == 1)
 			{
 				BuildingBlockKey buildingBlockKey20 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey20);
-				CharacterSet returnValue116 = GetLockedComfortableHouseCharacters(buildingBlockKey20);
-				return GameData.Serializer.Serializer.Serialize(returnValue116, returnDataPool);
+				CharacterSet returnValue119 = GetLockedComfortableHouseCharacters(buildingBlockKey20);
+				return GameData.Serializer.Serializer.Serialize(returnValue119, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 198:
 		{
-			int argsCount87 = operation.ArgsCount;
-			int num87 = argsCount87;
-			if (num87 == 1)
+			int argsCount90 = operation.ArgsCount;
+			int num90 = argsCount90;
+			if (num90 == 1)
 			{
 				BuildingBlockKey buildingBlockKey19 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey19);
-				CharacterSet returnValue115 = GetLockedResidenceCharacters(buildingBlockKey19);
-				return GameData.Serializer.Serializer.Serialize(returnValue115, returnDataPool);
+				CharacterSet returnValue118 = GetLockedResidenceCharacters(buildingBlockKey19);
+				return GameData.Serializer.Serializer.Serialize(returnValue118, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 199:
 		{
-			int argsCount84 = operation.ArgsCount;
-			int num84 = argsCount84;
-			if (num84 == 2)
+			int argsCount87 = operation.ArgsCount;
+			int num87 = argsCount87;
+			if (num87 == 2)
 			{
 				BuildingBlockKey buildingBlockKey17 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey17);
 				int charId16 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId16);
-				bool returnValue113 = UnlockComfortableHouseCharacter(context, buildingBlockKey17, charId16);
-				return GameData.Serializer.Serializer.Serialize(returnValue113, returnDataPool);
+				bool returnValue116 = UnlockComfortableHouseCharacter(context, buildingBlockKey17, charId16);
+				return GameData.Serializer.Serializer.Serialize(returnValue116, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 200:
 		{
-			int argsCount81 = operation.ArgsCount;
-			int num81 = argsCount81;
-			if (num81 == 2)
+			int argsCount84 = operation.ArgsCount;
+			int num84 = argsCount84;
+			if (num84 == 2)
 			{
 				BuildingBlockKey buildingBlockKey16 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey16);
 				int charId15 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId15);
-				bool returnValue110 = LockComfortableHouseCharacter(context, buildingBlockKey16, charId15);
-				return GameData.Serializer.Serializer.Serialize(returnValue110, returnDataPool);
+				bool returnValue113 = LockComfortableHouseCharacter(context, buildingBlockKey16, charId15);
+				return GameData.Serializer.Serializer.Serialize(returnValue113, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 201:
 		{
-			int argsCount79 = operation.ArgsCount;
-			int num79 = argsCount79;
-			if (num79 == 2)
+			int argsCount82 = operation.ArgsCount;
+			int num82 = argsCount82;
+			if (num82 == 2)
 			{
 				BuildingBlockKey buildingBlockKey15 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey15);
 				int charId14 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId14);
-				bool returnValue109 = UnlockResidenceCharacter(context, buildingBlockKey15, charId14);
-				return GameData.Serializer.Serializer.Serialize(returnValue109, returnDataPool);
+				bool returnValue112 = UnlockResidenceCharacter(context, buildingBlockKey15, charId14);
+				return GameData.Serializer.Serializer.Serialize(returnValue112, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 202:
 		{
-			int argsCount76 = operation.ArgsCount;
-			int num76 = argsCount76;
-			if (num76 == 2)
+			int argsCount79 = operation.ArgsCount;
+			int num79 = argsCount79;
+			if (num79 == 2)
 			{
 				BuildingBlockKey buildingBlockKey13 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey13);
@@ -19192,24 +19198,24 @@ public class BuildingDomain : BaseGameDataDomain
 		}
 		case 203:
 		{
-			int argsCount73 = operation.ArgsCount;
-			int num73 = argsCount73;
-			if (num73 == 2)
+			int argsCount76 = operation.ArgsCount;
+			int num76 = argsCount76;
+			if (num76 == 2)
 			{
 				BuildingBlockKey buildingBlockKey12 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey12);
 				int charId12 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId12);
-				bool returnValue105 = LockResidenceCharacter(context, buildingBlockKey12, charId12);
-				return GameData.Serializer.Serializer.Serialize(returnValue105, returnDataPool);
+				bool returnValue108 = LockResidenceCharacter(context, buildingBlockKey12, charId12);
+				return GameData.Serializer.Serializer.Serialize(returnValue108, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 204:
 		{
-			int argsCount70 = operation.ArgsCount;
-			int num70 = argsCount70;
-			if (num70 == 1)
+			int argsCount73 = operation.ArgsCount;
+			int num73 = argsCount73;
+			if (num73 == 1)
 			{
 				short eventTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref eventTemplateId);
@@ -19221,96 +19227,96 @@ public class BuildingDomain : BaseGameDataDomain
 		case 205:
 			if (operation.ArgsCount == 0)
 			{
-				List<int> returnValue101 = GetLockedInComfortableHouseIds(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue101, returnDataPool);
+				List<int> returnValue104 = GetLockedInComfortableHouseIds(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue104, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 206:
 			if (operation.ArgsCount == 0)
 			{
-				List<int> returnValue99 = GetLockedInResidenceIds(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue99, returnDataPool);
+				List<int> returnValue102 = GetLockedInResidenceIds(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue102, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 207:
 		{
-			int argsCount64 = operation.ArgsCount;
-			int num64 = argsCount64;
-			if (num64 == 1)
+			int argsCount67 = operation.ArgsCount;
+			int num67 = argsCount67;
+			if (num67 == 1)
 			{
 				BuildingBlockKey blockKey17 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey17);
-				TransferableRecordDataBase returnValue96 = GetReversedBlockShopEvent(context, blockKey17);
-				return GameData.Serializer.Serializer.Serialize(returnValue96, returnDataPool);
+				TransferableRecordDataBase returnValue99 = GetReversedBlockShopEvent(context, blockKey17);
+				return GameData.Serializer.Serializer.Serialize(returnValue99, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 208:
 			if (operation.ArgsCount == 0)
 			{
-				List<ItemDisplayData> returnValue93 = PluckAllChickenFeathers(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue93, returnDataPool);
+				List<ItemDisplayData> returnValue96 = PluckAllChickenFeathers(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue96, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 209:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue91 = IsAllChickensCanPluck();
-				return GameData.Serializer.Serializer.Serialize(returnValue91, returnDataPool);
+				bool returnValue94 = IsAllChickensCanPluck();
+				return GameData.Serializer.Serializer.Serialize(returnValue94, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 210:
 		{
-			int argsCount58 = operation.ArgsCount;
-			int num58 = argsCount58;
-			if (num58 == 1)
+			int argsCount61 = operation.ArgsCount;
+			int num61 = argsCount61;
+			if (num61 == 1)
 			{
 				int characterId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterId4);
-				List<short> returnValue88 = GetCharacterChickenFeatures(characterId4);
-				return GameData.Serializer.Serializer.Serialize(returnValue88, returnDataPool);
+				List<short> returnValue91 = GetCharacterChickenFeatures(characterId4);
+				return GameData.Serializer.Serializer.Serialize(returnValue91, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 211:
 		{
-			int argsCount55 = operation.ArgsCount;
-			int num55 = argsCount55;
-			if (num55 == 1)
+			int argsCount58 = operation.ArgsCount;
+			int num58 = argsCount58;
+			if (num58 == 1)
 			{
 				sbyte personalityType3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref personalityType3);
-				List<Chicken> returnValue85 = GetChickensByPersonalityType(personalityType3);
-				return GameData.Serializer.Serializer.Serialize(returnValue85, returnDataPool);
+				List<Chicken> returnValue88 = GetChickensByPersonalityType(personalityType3);
+				return GameData.Serializer.Serializer.Serialize(returnValue88, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 212:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue82 = GetCurrentFeatherValue();
-				return GameData.Serializer.Serializer.Serialize(returnValue82, returnDataPool);
+				int returnValue85 = GetCurrentFeatherValue();
+				return GameData.Serializer.Serializer.Serialize(returnValue85, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 213:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue80 = CanCultivateFeather();
-				return GameData.Serializer.Serializer.Serialize(returnValue80, returnDataPool);
+				bool returnValue83 = CanCultivateFeather();
+				return GameData.Serializer.Serializer.Serialize(returnValue83, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 214:
 			if (operation.ArgsCount == 0)
 			{
-				ChickenPluckFeatherDisplayData returnValue77 = GetChickenPluckFeatherDisplayData();
-				return GameData.Serializer.Serializer.Serialize(returnValue77, returnDataPool);
+				ChickenPluckFeatherDisplayData returnValue80 = GetChickenPluckFeatherDisplayData();
+				return GameData.Serializer.Serializer.Serialize(returnValue80, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 215:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue74 = IsFeatherSystemUnlocked();
-				return GameData.Serializer.Serializer.Serialize(returnValue74, returnDataPool);
+				bool returnValue77 = IsFeatherSystemUnlocked();
+				return GameData.Serializer.Serializer.Serialize(returnValue77, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 216:
@@ -19322,37 +19328,37 @@ public class BuildingDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 217:
 		{
-			int argsCount44 = operation.ArgsCount;
-			int num44 = argsCount44;
-			if (num44 == 1)
+			int argsCount47 = operation.ArgsCount;
+			int num47 = argsCount47;
+			if (num47 == 1)
 			{
 				int chickenId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref chickenId3);
-				List<ItemDisplayData> returnValue70 = PluckChickenFeather(context, chickenId3);
-				return GameData.Serializer.Serializer.Serialize(returnValue70, returnDataPool);
+				List<ItemDisplayData> returnValue73 = PluckChickenFeather(context, chickenId3);
+				return GameData.Serializer.Serializer.Serialize(returnValue73, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 218:
 		{
-			int argsCount42 = operation.ArgsCount;
-			int num42 = argsCount42;
-			if (num42 == 2)
+			int argsCount45 = operation.ArgsCount;
+			int num45 = argsCount45;
+			if (num45 == 2)
 			{
 				int characterId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterId3);
 				sbyte personalityType2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref personalityType2);
-				bool returnValue68 = CanUseChickenFeather(context, characterId3, personalityType2);
-				return GameData.Serializer.Serializer.Serialize(returnValue68, returnDataPool);
+				bool returnValue71 = CanUseChickenFeather(context, characterId3, personalityType2);
+				return GameData.Serializer.Serializer.Serialize(returnValue71, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 219:
 		{
-			int argsCount41 = operation.ArgsCount;
-			int num41 = argsCount41;
-			if (num41 == 3)
+			int argsCount44 = operation.ArgsCount;
+			int num44 = argsCount44;
+			if (num44 == 3)
 			{
 				int characterId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterId2);
@@ -19360,36 +19366,36 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey4);
 				sbyte personalityType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref personalityType);
-				bool returnValue64 = UseChickenFeather(context, characterId2, itemKey4, personalityType);
-				return GameData.Serializer.Serializer.Serialize(returnValue64, returnDataPool);
+				bool returnValue67 = UseChickenFeather(context, characterId2, itemKey4, personalityType);
+				return GameData.Serializer.Serializer.Serialize(returnValue67, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 220:
 		{
-			int argsCount39 = operation.ArgsCount;
-			int num39 = argsCount39;
-			if (num39 == 1)
+			int argsCount42 = operation.ArgsCount;
+			int num42 = argsCount42;
+			if (num42 == 1)
 			{
 				int chickenId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref chickenId2);
-				bool returnValue60 = CanPluckFeatherInVillage(chickenId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue60, returnDataPool);
+				bool returnValue63 = CanPluckFeatherInVillage(chickenId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue63, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 221:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue58 = CultivateFeather(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue58, returnDataPool);
+				bool returnValue61 = CultivateFeather(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue61, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 222:
 			if (operation.ArgsCount == 0)
 			{
-				List<int> returnValue56 = GetCanPluckFeatherChickenIds();
-				return GameData.Serializer.Serializer.Serialize(returnValue56, returnDataPool);
+				List<int> returnValue59 = GetCanPluckFeatherChickenIds();
+				return GameData.Serializer.Serializer.Serialize(returnValue59, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 223:
@@ -19397,37 +19403,37 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 			case 0:
 			{
-				SamsaraPlatformBonusAttributes returnValue55 = GetSamsaraPlatformBonusAttributes();
-				return GameData.Serializer.Serializer.Serialize(returnValue55, returnDataPool);
+				SamsaraPlatformBonusAttributes returnValue58 = GetSamsaraPlatformBonusAttributes();
+				return GameData.Serializer.Serializer.Serialize(returnValue58, returnDataPool);
 			}
 			case 1:
 			{
 				int charId9 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId9);
-				SamsaraPlatformBonusAttributes returnValue54 = GetSamsaraPlatformBonusAttributes(charId9);
-				return GameData.Serializer.Serializer.Serialize(returnValue54, returnDataPool);
+				SamsaraPlatformBonusAttributes returnValue57 = GetSamsaraPlatformBonusAttributes(charId9);
+				return GameData.Serializer.Serializer.Serialize(returnValue57, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 224:
 		{
-			int argsCount33 = operation.ArgsCount;
-			int num33 = argsCount33;
-			if (num33 == 1)
+			int argsCount36 = operation.ArgsCount;
+			int num36 = argsCount36;
+			if (num36 == 1)
 			{
 				sbyte slot = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref slot);
-				SamsaraPlatformCharDisplayData returnValue53 = GetSamsaraPlatformCharDisplayData(context, slot);
-				return GameData.Serializer.Serializer.Serialize(returnValue53, returnDataPool);
+				SamsaraPlatformCharDisplayData returnValue56 = GetSamsaraPlatformCharDisplayData(context, slot);
+				return GameData.Serializer.Serializer.Serialize(returnValue56, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 225:
 		{
-			int argsCount30 = operation.ArgsCount;
-			int num30 = argsCount30;
-			if (num30 == 1)
+			int argsCount33 = operation.ArgsCount;
+			int num33 = argsCount33;
+			if (num33 == 1)
 			{
 				short orgMemberTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgMemberTemplateId);
@@ -19439,30 +19445,30 @@ public class BuildingDomain : BaseGameDataDomain
 		case 226:
 			if (operation.ArgsCount == 0)
 			{
-				CricketCollectionDisplayData returnValue49 = GetCricketCollectionDisplayData(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue49, returnDataPool);
+				CricketCollectionDisplayData returnValue52 = GetCricketCollectionDisplayData(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue52, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 227:
 		{
-			int argsCount27 = operation.ArgsCount;
-			int num27 = argsCount27;
-			if (num27 == 2)
+			int argsCount30 = operation.ArgsCount;
+			int num30 = argsCount30;
+			if (num30 == 2)
 			{
 				BuildingBlockKey blockKey13 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey13);
 				sbyte lifeSkillType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref lifeSkillType);
-				BuildingMakeDisplayData returnValue46 = GetBuildingMakeDisplayData(context, blockKey13, lifeSkillType);
-				return GameData.Serializer.Serializer.Serialize(returnValue46, returnDataPool);
+				BuildingMakeDisplayData returnValue49 = GetBuildingMakeDisplayData(context, blockKey13, lifeSkillType);
+				return GameData.Serializer.Serializer.Serialize(returnValue49, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 228:
 		{
-			int argsCount25 = operation.ArgsCount;
-			int num25 = argsCount25;
-			if (num25 == 5)
+			int argsCount28 = operation.ArgsCount;
+			int num28 = argsCount28;
+			if (num28 == 5)
 			{
 				int charId7 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId7);
@@ -19474,16 +19480,16 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref materialItemData);
 				BuildingBlockKey buildingBlockKey2 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey2);
-				bool returnValue43 = CheckRefineCondition(charId7, toolKeys, equipItemKey, materialItemData, buildingBlockKey2);
-				return GameData.Serializer.Serializer.Serialize(returnValue43, returnDataPool);
+				bool returnValue46 = CheckRefineCondition(charId7, toolKeys, equipItemKey, materialItemData, buildingBlockKey2);
+				return GameData.Serializer.Serializer.Serialize(returnValue46, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 229:
 		{
-			int argsCount22 = operation.ArgsCount;
-			int num22 = argsCount22;
-			if (num22 == 5)
+			int argsCount25 = operation.ArgsCount;
+			int num25 = argsCount25;
+			if (num25 == 5)
 			{
 				int charId6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId6);
@@ -19495,42 +19501,42 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref materialItemArray);
 				List<ItemSourceChange> changeList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref changeList);
-				ItemDisplayData returnValue41 = RefineItem(context, charId6, tools2, target2, materialItemArray, changeList);
-				return GameData.Serializer.Serializer.Serialize(returnValue41, returnDataPool);
+				ItemDisplayData returnValue44 = RefineItem(context, charId6, tools2, target2, materialItemArray, changeList);
+				return GameData.Serializer.Serializer.Serialize(returnValue44, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 230:
 		{
-			int argsCount21 = operation.ArgsCount;
-			int num21 = argsCount21;
-			if (num21 == 1)
+			int argsCount24 = operation.ArgsCount;
+			int num24 = argsCount24;
+			if (num24 == 1)
 			{
 				int artisanId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref artisanId);
-				CraftManDisplayData returnValue37 = GetCraftManDisplayDataForCharacter(context, artisanId);
-				return GameData.Serializer.Serializer.Serialize(returnValue37, returnDataPool);
+				CraftManDisplayData returnValue40 = GetCraftManDisplayDataForCharacter(context, artisanId);
+				return GameData.Serializer.Serializer.Serialize(returnValue40, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 231:
 		{
-			int argsCount19 = operation.ArgsCount;
-			int num19 = argsCount19;
-			if (num19 == 1)
+			int argsCount22 = operation.ArgsCount;
+			int num22 = argsCount22;
+			if (num22 == 1)
 			{
 				BuildingBlockKey blockKey7 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey7);
-				CraftManDisplayData returnValue33 = GetCraftManDisplayDataForBuilding(context, blockKey7);
-				return GameData.Serializer.Serializer.Serialize(returnValue33, returnDataPool);
+				CraftManDisplayData returnValue36 = GetCraftManDisplayDataForBuilding(context, blockKey7);
+				return GameData.Serializer.Serializer.Serialize(returnValue36, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 232:
 			if (operation.ArgsCount == 0)
 			{
-				TransferableRecordDataBase returnValue29 = GetTeaHorseCaravanEvent(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue29, returnDataPool);
+				TransferableRecordDataBase returnValue32 = GetTeaHorseCaravanEvent(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue32, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 233:
@@ -19543,8 +19549,8 @@ public class BuildingDomain : BaseGameDataDomain
 		case 234:
 			if (operation.ArgsCount == 0)
 			{
-				TeaHorseCaravanData returnValue24 = GetTeaHorseCaravanData(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue24, returnDataPool);
+				TeaHorseCaravanData returnValue27 = GetTeaHorseCaravanData(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue27, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 235:
@@ -19557,29 +19563,29 @@ public class BuildingDomain : BaseGameDataDomain
 		case 236:
 			if (operation.ArgsCount == 0)
 			{
-				TaiwuVillageBuildingDataForVillagerRole returnValue20 = GetTaiwuVillageBuildingDataForVillagerRole(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue20, returnDataPool);
+				TaiwuVillageBuildingDataForVillagerRole returnValue23 = GetTaiwuVillageBuildingDataForVillagerRole(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue23, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 237:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue18 = IsAnyChickensCanPluck();
-				return GameData.Serializer.Serializer.Serialize(returnValue18, returnDataPool);
+				bool returnValue21 = IsAnyChickensCanPluck();
+				return GameData.Serializer.Serializer.Serialize(returnValue21, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 238:
 		{
-			int argsCount8 = operation.ArgsCount;
-			int num8 = argsCount8;
-			if (num8 == 2)
+			int argsCount11 = operation.ArgsCount;
+			int num11 = argsCount11;
+			if (num11 == 2)
 			{
 				int id2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id2);
 				ItemKey itemKey = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey);
-				sbyte returnValue15 = FeedChicken(context, id2, itemKey);
-				return GameData.Serializer.Serializer.Serialize(returnValue15, returnDataPool);
+				sbyte returnValue18 = FeedChicken(context, id2, itemKey);
+				return GameData.Serializer.Serializer.Serialize(returnValue18, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -19590,21 +19596,21 @@ public class BuildingDomain : BaseGameDataDomain
 			{
 				short settlementId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref settlementId2);
-				EBuildingScaleEffect effectType2 = EBuildingScaleEffect.MigrateSpeedBonusFactor;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType2);
-				int returnValue14 = GetBuildingBlockEffect(settlementId2, effectType2);
-				return GameData.Serializer.Serializer.Serialize(returnValue14, returnDataPool);
+				EBuildingScaleEffect effectType3 = EBuildingScaleEffect.MigrateSpeedBonusFactor;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType3);
+				int returnValue17 = GetBuildingBlockEffect(settlementId2, effectType3);
+				return GameData.Serializer.Serializer.Serialize(returnValue17, returnDataPool);
 			}
 			case 3:
 			{
 				short settlementId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref settlementId);
-				EBuildingScaleEffect effectType = EBuildingScaleEffect.MigrateSpeedBonusFactor;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType);
+				EBuildingScaleEffect effectType2 = EBuildingScaleEffect.MigrateSpeedBonusFactor;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectType2);
 				int subType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref subType);
-				int returnValue13 = GetBuildingBlockEffect(settlementId, effectType, subType);
-				return GameData.Serializer.Serializer.Serialize(returnValue13, returnDataPool);
+				int returnValue16 = GetBuildingBlockEffect(settlementId, effectType2, subType);
+				return GameData.Serializer.Serializer.Serialize(returnValue16, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -19619,22 +19625,22 @@ public class BuildingDomain : BaseGameDataDomain
 		case 241:
 			if (operation.ArgsCount == 0)
 			{
-				List<short> returnValue8 = GetNewlyCreatedBuildingIndex(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue8, returnDataPool);
+				List<short> returnValue11 = GetNewlyCreatedBuildingIndex(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue11, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 242:
 			if (operation.ArgsCount == 0)
 			{
-				ResourceInts returnValue5 = GetQuickCollectResourceAmount(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue5, returnDataPool);
+				ResourceInts returnValue8 = GetQuickCollectResourceAmount(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue8, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 243:
 		{
-			int argsCount3 = operation.ArgsCount;
-			int num3 = argsCount3;
-			if (num3 == 3)
+			int argsCount6 = operation.ArgsCount;
+			int num6 = argsCount6;
+			if (num6 == 3)
 			{
 				int charId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId);
@@ -19642,18 +19648,31 @@ public class BuildingDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref tools);
 				ItemDisplayData[] equipments = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref equipments);
-				ItemDisplayData[] returnValue3 = RepairItemsOptional(context, charId, tools, equipments);
-				return GameData.Serializer.Serializer.Serialize(returnValue3, returnDataPool);
+				ItemDisplayData[] returnValue6 = RepairItemsOptional(context, charId, tools, equipments);
+				return GameData.Serializer.Serializer.Serialize(returnValue6, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 244:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue = AnyBuildingEarnCountMax(context);
+				bool returnValue4 = AnyBuildingEarnCountMax(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue4, returnDataPool);
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		case 245:
+		{
+			int argsCount = operation.ArgsCount;
+			int num = argsCount;
+			if (num == 1)
+			{
+				List<int> operatorList = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operatorList);
+				int returnValue = GetOperationAddProgress(context, operatorList);
 				return GameData.Serializer.Serializer.Serialize(returnValue, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
 		default:
 			throw new Exception($"Unsupported methodId {operation.MethodId}");
 		}

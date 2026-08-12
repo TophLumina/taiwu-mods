@@ -50,7 +50,7 @@ public class EventLogCharacterData
 
 	public (sbyte, int) Combat;
 
-	public int SpiritualDebt;
+	public Dictionary<short, int> SpiritualDebt;
 
 	public (bool, int) Teammate;
 

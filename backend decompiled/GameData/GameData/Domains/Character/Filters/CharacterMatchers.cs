@@ -335,7 +335,20 @@ public static class CharacterMatchers
 	{
 		OrganizationInfo orgInfo = character.GetOrganizationInfo();
 		OrganizationMemberItem orgMemberConfig = OrganizationDomain.GetOrgMemberConfig(orgInfo);
-		return orgMemberConfig.ChildGrade >= 0 && orgInfo.Principal;
+		int result;
+		if (orgMemberConfig != null)
+		{
+			sbyte[] childGrade = orgMemberConfig.ChildGrade;
+			if (childGrade != null && childGrade.Length > 0)
+			{
+				result = (orgInfo.Principal ? 1 : 0);
+				goto IL_002b;
+			}
+		}
+		result = 0;
+		goto IL_002b;
+		IL_002b:
+		return (byte)result != 0;
 	}
 
 	public static bool MatchCombatPowerRankInSect(Character character, int minRank, int maxRank)

@@ -87,10 +87,20 @@ public class JoinSectAction : ICharacterActionImpl, ISerializableGameData
 		{
 			return false;
 		}
-		if (orgMemberCfg.ChildGrade < 0 && (DomainManager.Character.GetAliveSpouse(selfChar.GetId()) >= 0 || DomainManager.Character.GetAliveChild(selfChar.GetId()) >= 0))
+		if (orgMemberCfg != null)
+		{
+			sbyte[] childGrade = orgMemberCfg.ChildGrade;
+			if (childGrade != null && childGrade.Length > 0)
+			{
+				goto IL_00b9;
+			}
+		}
+		if (DomainManager.Character.GetAliveSpouse(selfChar.GetId()) >= 0 || DomainManager.Character.GetAliveChild(selfChar.GetId()) >= 0)
 		{
 			return false;
 		}
+		goto IL_00b9;
+		IL_00b9:
 		int successRate = GetJoinOrgSuccessRate(context.Random, selfChar, targetOrgInfo);
 		if (!context.Random.CheckPercentProb(successRate))
 		{

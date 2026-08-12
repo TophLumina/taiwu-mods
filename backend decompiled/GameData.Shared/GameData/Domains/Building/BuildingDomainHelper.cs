@@ -564,6 +564,8 @@ public static class BuildingDomainHelper
 		public const ushort RepairItemsOptional = 243;
 
 		public const ushort AnyBuildingEarnCountMax = 244;
+
+		public const ushort GetOperationAddProgress = 245;
 	}
 
 	/// <summary>
@@ -873,10 +875,11 @@ public static class BuildingDomainHelper
 		{ "GetNewlyCreatedBuildingIndex", 241 },
 		{ "GetQuickCollectResourceAmount", 242 },
 		{ "RepairItemsOptional", 243 },
-		{ "AnyBuildingEarnCountMax", 244 }
+		{ "AnyBuildingEarnCountMax", 244 },
+		{ "GetOperationAddProgress", 245 }
 	};
 
-	public static readonly string[] MethodId2MethodName = new string[245]
+	public static readonly string[] MethodId2MethodName = new string[246]
 	{
 		"SetShopManager", "SetCollectBuildingResourceType", "ClearBuildingBlockEarningsData", "GetBuildingEarningData", "GetBuildingOperatesData", "GetBuildingBuildPeopleAttainments", "AcceptBuildingBlockCollectEarning", "AcceptBuildingBlockCollectEarningQuick", "AcceptBuildingBlockRecruitPeople", "AcceptBuildingBlockRecruitPeopleQuick",
 		"ShopBuildingSoldItemReceive", "ShopBuildingSoldItemReceiveQuick", "QuickCollectShopItem", "QuickCollectShopItemCount", "QuickCollectShopSoldItem", "QuickCollectShopSoldItemCount", "QuickRecruitPeople", "QuickRecruitPeopleCount", "QuickCollectBuildingEarn", "QuickCollectBuildingEarnCount",
@@ -902,6 +905,6 @@ public static class BuildingDomainHelper
 		"GetCharacterChickenFeatures", "GetChickensByPersonalityType", "GetCurrentFeatherValue", "CanCultivateFeather", "GetChickenPluckFeatherDisplayData", "IsFeatherSystemUnlocked", "UnlockFeatherSystem", "PluckChickenFeather", "CanUseChickenFeather", "UseChickenFeather",
 		"CanPluckFeatherInVillage", "CultivateFeather", "GetCanPluckFeatherChickenIds", "GetSamsaraPlatformBonusAttributes", "GetSamsaraPlatformCharDisplayData", "QuickAssignChicken", "GetCricketCollectionDisplayData", "GetBuildingMakeDisplayData", "CheckRefineCondition", "RefineItem",
 		"GetCraftManDisplayDataForCharacter", "GetCraftManDisplayDataForBuilding", "GetTeaHorseCaravanEvent", "TriggerCultivateFeatherEvent", "GetTeaHorseCaravanData", "QuickDiscardExchangeItem", "GetTaiwuVillageBuildingDataForVillagerRole", "IsAnyChickensCanPluck", "FeedChicken", "GetBuildingBlockEffect",
-		"ClearNewlyCreatedBuildingIndex", "GetNewlyCreatedBuildingIndex", "GetQuickCollectResourceAmount", "RepairItemsOptional", "AnyBuildingEarnCountMax"
+		"ClearNewlyCreatedBuildingIndex", "GetNewlyCreatedBuildingIndex", "GetQuickCollectResourceAmount", "RepairItemsOptional", "AnyBuildingEarnCountMax", "GetOperationAddProgress"
 	};
 }

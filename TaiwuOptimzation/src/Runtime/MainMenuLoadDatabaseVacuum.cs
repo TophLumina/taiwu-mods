@@ -155,6 +155,34 @@ internal static class MainMenuLoadDatabaseVacuum
                 return;
             }
 
+            Stopwatch preflightStopwatch = Stopwatch.StartNew();
+            VacuumPreflightResult preflight;
+            try
+            {
+                preflight = SqliteVacuumPreflight.Evaluate(databasePath);
+            }
+            catch (Exception exception)
+            {
+                Logger.Warn(
+                    exception,
+                    "TaiwuOptimization: main-menu-load SQLite VACUUM preflight failed; skipped compaction.");
+                return;
+            }
+
+            preflightStopwatch.Stop();
+            Logger.Info(
+                "TaiwuOptimization: main-menu-load SQLite VACUUM preflight completed in {0:F2}ms; " +
+                "estimated reclaim {1:F2} MiB, threshold {2:F2} MiB{3}; {4}.",
+                preflightStopwatch.Elapsed.TotalMilliseconds,
+                BytesToMiB(preflight.EstimatedReclaimableBytes),
+                BytesToMiB(preflight.ThresholdBytes),
+                preflight.UsedSecondSample ? ", second sample used" : string.Empty,
+                preflight.ShouldVacuum ? "starting VACUUM" : "skipped VACUUM");
+            if (!preflight.ShouldVacuum)
+            {
+                return;
+            }
+
             long lengthBefore = new FileInfo(databasePath).Length;
             if (!HasEnoughDiskSpace(databasePath, lengthBefore))
             {
@@ -220,6 +248,8 @@ internal static class MainMenuLoadDatabaseVacuum
     }
 
     private static double BytesToMiB(long bytes) => bytes / (1024.0 * 1024.0);
+
+    private static double BytesToMiB(double bytes) => bytes / (1024.0 * 1024.0);
 
     private readonly record struct PendingLoad(long RequestId, string ArchivePath);
 }

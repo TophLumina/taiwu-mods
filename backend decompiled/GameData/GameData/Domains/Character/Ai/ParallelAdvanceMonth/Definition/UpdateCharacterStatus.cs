@@ -30,6 +30,11 @@ public class UpdateCharacterStatus : CharacterParallelAction<UpdateCharacterStat
 
 	public void GearMateExecute(DataContext context, Character character)
 	{
-		character.PeriAdvanceMonth_GearMateUpdateStatus(context);
+		character.PeriAdvanceMonth_SpecialGroupUpdateStatus(context);
+	}
+
+	public void AnimalCharExecute(DataContext context, Character character)
+	{
+		character.PeriAdvanceMonth_SpecialGroupUpdateStatus(context);
 	}
 }

@@ -106611,765 +106611,6 @@ public static class Serializer
 		return 4;
 	}
 
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, string> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, string> item2 in item)
-		{
-			string element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + 2 * element.Length)));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, string> entry in item)
-		{
-			TKey elementId = entry.Key;
-			string element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				int subElementsCount = element2.Length;
-				int subContentSize = (*(int*)pData = 2 * subElementsCount);
-				pData += 4;
-				fixed (char* pChar = element2)
-				{
-					for (int i = 0; i < subElementsCount; i++)
-					{
-						((short*)pData)[i] = (short)pChar[i];
-					}
-				}
-				pData += subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, string> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subElementsCount = element?.Length ?? 0;
-				int subContentSize = 2 * subElementsCount;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize <= 0)
-				{
-					break;
-				}
-				fixed (char* pChar = element)
-				{
-					for (int i = 0; i < subElementsCount; i++)
-					{
-						((short*)pData2)[i] = (short)pChar[i];
-					}
-				}
-				pData2 += subContentSize;
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, string> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int subContentSize = *(int*)pCurrData;
-						pCurrData += 4;
-						if (subContentSize > 0)
-						{
-							item[elementId] = Encoding.Unicode.GetString(pCurrData, subContentSize);
-							pCurrData += subContentSize;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int subContentSize2 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (subContentSize2 > 0)
-			{
-				item.Add(elementId2, Encoding.Unicode.GetString(pCurrData2, subContentSize2));
-				pCurrData2 += subContentSize2;
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, GameStatRecordWrapper> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, GameStatRecordWrapper> item2 in item)
-		{
-			GameStatRecordWrapper element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, GameStatRecordWrapper> entry in item)
-		{
-			TKey elementId = entry.Key;
-			GameStatRecordWrapper element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, GameStatRecordWrapper> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, GameStatRecordWrapper> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							GameStatRecordWrapper element = new GameStatRecordWrapper();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				GameStatRecordWrapper element2 = new GameStatRecordWrapper();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, BigEventRecord> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, BigEventRecord> item2 in item)
-		{
-			BigEventRecord element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, BigEventRecord> entry in item)
-		{
-			TKey elementId = entry.Key;
-			BigEventRecord element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, BigEventRecord> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, BigEventRecord> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							BigEventRecord element = new BigEventRecord();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				BigEventRecord element2 = new BigEventRecord();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, sbyte> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int elementsCount = item.Count;
-		int dataSize = 4 + (sizeof(TKey) + 1) * elementsCount;
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, sbyte> entry in item)
-		{
-			TKey elementId = entry.Key;
-			sbyte element = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			*pData = (byte)element;
-			pData++;
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, sbyte> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				dataPool.Allocate(1 + sizeof(TKey) + 1, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*pData2 = (byte)element;
-				pData2++;
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, sbyte> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						sbyte element = (sbyte)(*pCurrData);
-						pCurrData++;
-						item[elementId] = element;
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			sbyte element2 = (sbyte)(*pCurrData2);
-			pCurrData2++;
-			item.Add(elementId2, element2);
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, PermanentMonthNotify> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, PermanentMonthNotify> item2 in item)
-		{
-			PermanentMonthNotify element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, PermanentMonthNotify> entry in item)
-		{
-			TKey elementId = entry.Key;
-			PermanentMonthNotify element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, PermanentMonthNotify> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, PermanentMonthNotify> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							PermanentMonthNotify element = new PermanentMonthNotify();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				PermanentMonthNotify element2 = new PermanentMonthNotify();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
 	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, CharacterSet> item, RawDataPool dataPool) where TKey : unmanaged
 	{
 		int dataSize = 4;
@@ -108625,6 +107866,163 @@ public static class Serializer
 			long element2 = *(long*)pCurrData2;
 			pCurrData2 += 8;
 			item.Add(elementId2, element2);
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, GameStatRecordWrapper> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, GameStatRecordWrapper> item2 in item)
+		{
+			GameStatRecordWrapper element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, GameStatRecordWrapper> entry in item)
+		{
+			TKey elementId = entry.Key;
+			GameStatRecordWrapper element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, GameStatRecordWrapper> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, GameStatRecordWrapper> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							GameStatRecordWrapper element = new GameStatRecordWrapper();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				GameStatRecordWrapper element2 = new GameStatRecordWrapper();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
 		}
 		return 4 + (int)(pCurrData2 - pData);
 	}
@@ -110269,6 +109667,124 @@ public static class Serializer
 			{
 				item.Add(elementId2, null);
 			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, sbyte> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int elementsCount = item.Count;
+		int dataSize = 4 + (sizeof(TKey) + 1) * elementsCount;
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, sbyte> entry in item)
+		{
+			TKey elementId = entry.Key;
+			sbyte element = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			*pData = (byte)element;
+			pData++;
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, sbyte> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				dataPool.Allocate(1 + sizeof(TKey) + 1, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*pData2 = (byte)element;
+				pData2++;
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, sbyte> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						sbyte element = (sbyte)(*pCurrData);
+						pCurrData++;
+						item[elementId] = element;
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			sbyte element2 = (sbyte)(*pCurrData2);
+			pCurrData2++;
+			item.Add(elementId2, element2);
 		}
 		return 4 + (int)(pCurrData2 - pData);
 	}
@@ -111983,6 +111499,490 @@ public static class Serializer
 			if (num3 > 0)
 			{
 				AdventureMajorEvent element2 = new AdventureMajorEvent();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, string> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, string> item2 in item)
+		{
+			string element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + 2 * element.Length)));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, string> entry in item)
+		{
+			TKey elementId = entry.Key;
+			string element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				int subElementsCount = element2.Length;
+				int subContentSize = (*(int*)pData = 2 * subElementsCount);
+				pData += 4;
+				fixed (char* pChar = element2)
+				{
+					for (int i = 0; i < subElementsCount; i++)
+					{
+						((short*)pData)[i] = (short)pChar[i];
+					}
+				}
+				pData += subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, string> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subElementsCount = element?.Length ?? 0;
+				int subContentSize = 2 * subElementsCount;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize <= 0)
+				{
+					break;
+				}
+				fixed (char* pChar = element)
+				{
+					for (int i = 0; i < subElementsCount; i++)
+					{
+						((short*)pData2)[i] = (short)pChar[i];
+					}
+				}
+				pData2 += subContentSize;
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, string> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int subContentSize = *(int*)pCurrData;
+						pCurrData += 4;
+						if (subContentSize > 0)
+						{
+							item[elementId] = Encoding.Unicode.GetString(pCurrData, subContentSize);
+							pCurrData += subContentSize;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int subContentSize2 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (subContentSize2 > 0)
+			{
+				item.Add(elementId2, Encoding.Unicode.GetString(pCurrData2, subContentSize2));
+				pCurrData2 += subContentSize2;
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, BigEventRecord> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, BigEventRecord> item2 in item)
+		{
+			BigEventRecord element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, BigEventRecord> entry in item)
+		{
+			TKey elementId = entry.Key;
+			BigEventRecord element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, BigEventRecord> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, BigEventRecord> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							BigEventRecord element = new BigEventRecord();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				BigEventRecord element2 = new BigEventRecord();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, PermanentMonthNotify> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, PermanentMonthNotify> item2 in item)
+		{
+			PermanentMonthNotify element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, PermanentMonthNotify> entry in item)
+		{
+			TKey elementId = entry.Key;
+			PermanentMonthNotify element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, PermanentMonthNotify> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, PermanentMonthNotify> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							PermanentMonthNotify element = new PermanentMonthNotify();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				PermanentMonthNotify element2 = new PermanentMonthNotify();
 				pCurrData2 += element2.Deserialize(pCurrData2);
 				item.Add(elementId2, element2);
 			}
@@ -116194,6 +116194,439 @@ public static class Serializer
 		return 4 + (int)(pCurrData2 - pData);
 	}
 
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiBreakBonusData> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SectEmeiBreakBonusData> item2 in item)
+		{
+			dataSize += sizeof(TKey) + item2.Value.GetSerializedSize();
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SectEmeiBreakBonusData> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SectEmeiBreakBonusData element = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			pData += element.Serialize(pData);
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiBreakBonusData> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				dataPool.Allocate(1 + sizeof(TKey) + element.GetSerializedSize(), &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				pData2 += element.Serialize(pData2);
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SectEmeiBreakBonusData> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						SectEmeiBreakBonusData element = default(SectEmeiBreakBonusData);
+						pCurrData += element.Deserialize(pCurrData);
+						item[elementId] = element;
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			SectEmeiBreakBonusData element2 = default(SectEmeiBreakBonusData);
+			pCurrData2 += element2.Deserialize(pCurrData2);
+			item.Add(elementId2, element2);
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SkillBreakBonusCollection> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SkillBreakBonusCollection> item2 in item)
+		{
+			SkillBreakBonusCollection element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SkillBreakBonusCollection> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SkillBreakBonusCollection element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SkillBreakBonusCollection> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SkillBreakBonusCollection> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							SkillBreakBonusCollection element = new SkillBreakBonusCollection();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				SkillBreakBonusCollection element2 = new SkillBreakBonusCollection();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiGuidanceData> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SectEmeiGuidanceData> item2 in item)
+		{
+			SectEmeiGuidanceData element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SectEmeiGuidanceData> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SectEmeiGuidanceData element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiGuidanceData> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SectEmeiGuidanceData> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							SectEmeiGuidanceData element = new SectEmeiGuidanceData();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				SectEmeiGuidanceData element2 = new SectEmeiGuidanceData();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
 	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, CrossAreaMoveInfo> item, RawDataPool dataPool) where TKey : unmanaged
 	{
 		int dataSize = 4;
@@ -116698,439 +117131,6 @@ public static class Serializer
 			DarkAshCounterData element2 = default(DarkAshCounterData);
 			pCurrData2 += element2.Deserialize(pCurrData2);
 			item.Add(elementId2, element2);
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiBreakBonusData> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, SectEmeiBreakBonusData> item2 in item)
-		{
-			dataSize += sizeof(TKey) + item2.Value.GetSerializedSize();
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, SectEmeiBreakBonusData> entry in item)
-		{
-			TKey elementId = entry.Key;
-			SectEmeiBreakBonusData element = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			pData += element.Serialize(pData);
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiBreakBonusData> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				dataPool.Allocate(1 + sizeof(TKey) + element.GetSerializedSize(), &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				pData2 += element.Serialize(pData2);
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SectEmeiBreakBonusData> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						SectEmeiBreakBonusData element = default(SectEmeiBreakBonusData);
-						pCurrData += element.Deserialize(pCurrData);
-						item[elementId] = element;
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			SectEmeiBreakBonusData element2 = default(SectEmeiBreakBonusData);
-			pCurrData2 += element2.Deserialize(pCurrData2);
-			item.Add(elementId2, element2);
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SkillBreakBonusCollection> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, SkillBreakBonusCollection> item2 in item)
-		{
-			SkillBreakBonusCollection element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, SkillBreakBonusCollection> entry in item)
-		{
-			TKey elementId = entry.Key;
-			SkillBreakBonusCollection element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SkillBreakBonusCollection> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SkillBreakBonusCollection> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							SkillBreakBonusCollection element = new SkillBreakBonusCollection();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				SkillBreakBonusCollection element2 = new SkillBreakBonusCollection();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiGuidanceData> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, SectEmeiGuidanceData> item2 in item)
-		{
-			SectEmeiGuidanceData element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, SectEmeiGuidanceData> entry in item)
-		{
-			TKey elementId = entry.Key;
-			SectEmeiGuidanceData element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SectEmeiGuidanceData> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SectEmeiGuidanceData> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							SectEmeiGuidanceData element = new SectEmeiGuidanceData();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				SectEmeiGuidanceData element2 = new SectEmeiGuidanceData();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
 		}
 		return 4 + (int)(pCurrData2 - pData);
 	}

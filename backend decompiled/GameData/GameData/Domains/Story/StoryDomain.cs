@@ -437,6 +437,21 @@ public class StoryDomain : BaseGameDataDomain
 		}
 	}
 
+	[DataUpgrader(Version = "1.0.74", Date = "2026/08/12")]
+	private void FixCombatGroupCharIds(DataContext context)
+	{
+		HashSet<int> groupCharIds = DomainManager.Taiwu.GetGroupCharIds().GetCollection();
+		List<int> specialGroup = DomainManager.Taiwu.GetTaiwuSpecialGroup();
+		for (int i = 0; i < 3; i++)
+		{
+			int charId = DomainManager.Taiwu.GetElement_CombatGroupCharIds(i);
+			if (!groupCharIds.Contains(charId) && !specialGroup.Contains(charId))
+			{
+				DomainManager.Taiwu.SetElement_CombatGroupCharIds(i, -1, context);
+			}
+		}
+	}
+
 	[DataUpgrader(Version = "1.0.10", Date = "2026/06/20")]
 	private void FixMainStoryTwelveImmortals(DataContext context)
 	{
@@ -5911,7 +5926,7 @@ public class StoryDomain : BaseGameDataDomain
 				if (DomainManager.Character.TryGetElement_Objects(selectCharId, out var character2))
 				{
 					DomainManager.Character.GroupMove(context, character2, settlement.GetLocation());
-					character2.ActiveExternalRelationState(context, 4uL);
+					character2.ActiveExternalRelationState(context, 64uL);
 				}
 			}
 			ObjectPool<List<int>>.Instance.Return(members);
@@ -5930,7 +5945,7 @@ public class StoryDomain : BaseGameDataDomain
 			if (DomainManager.Character.TryGetElement_Objects(charIdIntList.Items[k], out var character3))
 			{
 				DomainManager.Character.GroupMove(context, character3, settlement.GetLocation());
-				character3.ActiveExternalRelationState(context, 4uL);
+				character3.ActiveExternalRelationState(context, 64uL);
 			}
 		}
 		static bool HaveAliveMember(List<int> list)
@@ -5966,7 +5981,7 @@ public class StoryDomain : BaseGameDataDomain
 		{
 			if (DomainManager.Character.TryGetElement_Objects(charIdIntList.Items[i], out var character))
 			{
-				character.DeactivateExternalRelationState(context, 4uL);
+				character.DeactivateExternalRelationState(context, 64uL);
 			}
 		}
 	}

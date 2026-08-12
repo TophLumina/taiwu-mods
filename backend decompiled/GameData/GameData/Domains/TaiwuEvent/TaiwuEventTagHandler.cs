@@ -22,7 +22,7 @@ internal class TaiwuEventTagHandler
 
 	private static readonly Regex TagNameRegex = new Regex("<(?<TagName>(?!(/)?color|(/)?size|(/)?link)[a-z|A-Z]+)( +)?");
 
-	private static readonly Regex PairRegex = new Regex("(?<Name>(?!(/)?color|(/)?size|(/)?link)[a-z|A-Z]+)( +)?=( +)?(?<Value>[\\w]+)");
+	private static readonly Regex PairRegex = new Regex("(?<Name>(?!(/)?color|(/)?size|(/)?link)[a-z|A-Z]+)( +)?=( +)?(?<Value>\"[^\"]*\"|[\\w]+)");
 
 	private static Dictionary<string, string> _pairInfos = new Dictionary<string, string>();
 
@@ -151,7 +151,7 @@ internal class TaiwuEventTagHandler
 			{
 				if (match.Groups.Count >= 3)
 				{
-					_pairInfos.Add(match.Groups["Name"].Value, match.Groups["Value"].Value);
+					_pairInfos.Add(match.Groups["Name"].Value, TrimQuotationMarks(match.Groups["Value"].Value));
 				}
 			}
 			MatchCollection matchCollection2 = TagNameRegex.Matches(value);
@@ -210,6 +210,15 @@ internal class TaiwuEventTagHandler
 		_handlingEvent = null;
 		_pairInfos.Clear();
 		return result;
+	}
+
+	private static string TrimQuotationMarks(string value)
+	{
+		if (string.IsNullOrEmpty(value))
+		{
+			return value;
+		}
+		return value.Trim('"');
 	}
 
 	private static string DecodeCricketName()
@@ -323,7 +332,13 @@ internal class TaiwuEventTagHandler
 
 	private static string DecodeCharacter()
 	{
-		string characterKey = _pairInfos["key"];
+		string characterKey;
+		string attrKey;
+		string error = TryGetTagKeyAndValueStr("DecodeCharacter", out characterKey, out attrKey);
+		if (!string.IsNullOrEmpty(error))
+		{
+			return error;
+		}
 		GameData.Domains.Character.Character character = _argBox.GetCharacter(characterKey);
 		DeadCharacter deadCharacter = null;
 		int charId = -1;
@@ -344,7 +359,6 @@ internal class TaiwuEventTagHandler
 		}
 		sbyte gender = character?.GetGender() ?? deadCharacter.Gender;
 		AvatarData avatarData = ((character != null) ? character.GetAvatar() : deadCharacter.Avatar);
-		string attrKey = _pairInfos["str"];
 		switch (attrKey)
 		{
 		case "Name":

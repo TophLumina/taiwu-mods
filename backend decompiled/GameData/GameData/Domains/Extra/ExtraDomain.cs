@@ -2933,11 +2933,11 @@ public class ExtraDomain : BaseGameDataDomain
 		{
 			code |= 0x20;
 		}
-		if (taiwuChar.GetAgeGroup() != 2 || AgeGroup.GetAgeGroup(taiwuChar.GetActualAge()) != 2)
+		if (taiwuChar.GetAgeGroup() != 2 || AgeGroup.GetAgeGroup(taiwuChar.QualificationAge) != 2)
 		{
 			code |= 0x80;
 		}
-		if (character.GetAgeGroup() != 2 || AgeGroup.GetAgeGroup(character.GetActualAge()) != 2)
+		if (character.GetAgeGroup() != 2 || AgeGroup.GetAgeGroup(character.QualificationAge) != 2)
 		{
 			code |= 0x100;
 		}
@@ -10886,6 +10886,11 @@ public class ExtraDomain : BaseGameDataDomain
 	public int GetAreaSpiritualDebt(short areaId)
 	{
 		return _areaSpiritualDebt.GetValueOrDefault(areaId, 0);
+	}
+
+	public Dictionary<short, int> GetAreaSpiritualDebt(bool createCopy = true)
+	{
+		return createCopy ? new Dictionary<short, int>(_areaSpiritualDebt) : _areaSpiritualDebt;
 	}
 
 	public void SetAreaSpiritualDebt(DataContext context, short areaId, int value, bool getProfessionSeniority = true, bool addInstantNotification = true)

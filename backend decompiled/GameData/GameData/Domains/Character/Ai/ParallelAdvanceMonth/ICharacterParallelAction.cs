@@ -41,4 +41,8 @@ public interface ICharacterParallelAction
 	void GearMateExecute(DataContext context, Character character)
 	{
 	}
+
+	void AnimalCharExecute(DataContext context, Character character)
+	{
+	}
 }

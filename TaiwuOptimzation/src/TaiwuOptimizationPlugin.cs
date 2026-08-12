@@ -13,6 +13,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     public override void Initialize()
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
+        EventAssemblyPreloader.Initialize();
         SaveWorldParallelCompression.Initialize(ModIdStr);
         TaiwuDiagnosticsExporter.Initialize(
             "TaiwuOptimization",
@@ -35,6 +36,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
 
     public override void Dispose()
     {
+        EventAssemblyPreloader.Dispose();
         _harmony?.UnpatchSelf();
         _harmony = null;
         MainMenuLoadDatabaseVacuum.Reset();
@@ -46,6 +48,7 @@ public sealed class TaiwuOptimizationPlugin : TaiwuRemakePlugin
     public override void OnModSettingUpdate()
     {
         TaiwuOptimizationSettings.Load(ModIdStr);
+        EventAssemblyPreloader.UpdateEnabledState();
         TaiwuDiagnosticsExporter.Initialize(
             "TaiwuOptimization",
             TaiwuOptimizationSettings.EnableTaiwuDiagnosticsServer,

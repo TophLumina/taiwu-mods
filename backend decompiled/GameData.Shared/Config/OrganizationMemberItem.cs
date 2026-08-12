@@ -73,6 +73,12 @@ public class OrganizationMemberItem : ConfigItem<OrganizationMemberItem, short>
 	public readonly short SurnameId;
 
 	/// <summary>
+	/// 升品数
+	/// - 势力值更新时，Npc会借此升品。为0时表示不升品（默认值），为1表示势力值更新时，Npc会升1品。
+	/// </summary>
+	public readonly sbyte UpgradeLevel;
+
+	/// <summary>
 	/// 副职配偶降级
 	/// - 若大于等于 0, 表示配偶是副职. 副职配偶的级别会随着自身级别的变动而变动. 其数值表示自身死亡或离开团体后, 配偶会被降到什么级别.
 	/// </summary>
@@ -82,7 +88,7 @@ public class OrganizationMemberItem : ConfigItem<OrganizationMemberItem, short>
 	/// 子女级别
 	/// - 同时表示门派允许自身结婚
 	/// </summary>
-	public readonly sbyte ChildGrade;
+	public readonly sbyte[] ChildGrade;
 
 	/// <summary>
 	/// 兄弟级别
@@ -314,6 +320,7 @@ public class OrganizationMemberItem : ConfigItem<OrganizationMemberItem, short>
 	/// <param name="restrictPrincipalAmount">限制正职人数 - 对该阶级的正职人数的硬性限制</param>
 	/// <param name="gender">性别 - 0: 女, 1: 男, -1: 未知/不限制.</param>
 	/// <param name="surnameId">姓氏 - 对应表 NameCore_CN.SurName</param>
+	/// <param name="upgradeLevel">升品数 - 势力值更新时，Npc会借此升品。为0时表示不升品（默认值），为1表示势力值更新时，Npc会升1品。</param>
 	/// <param name="deputySpouseDowngrade">副职配偶降级 - 若大于等于 0, 表示配偶是副职. 副职配偶的级别会随着自身级别的变动而变动. 其数值表示自身死亡或离开团体后, 配偶会被降到什么级别.</param>
 	/// <param name="childGrade">子女级别 - 同时表示门派允许自身结婚</param>
 	/// <param name="brotherGrade">兄弟级别 - 兄弟以及恋人的级别</param>
@@ -353,7 +360,7 @@ public class OrganizationMemberItem : ConfigItem<OrganizationMemberItem, short>
 	/// <param name="dropResources">掉落资源 - 此字段自动生成, 实际配置字段为从 "食材" 到 "威望" 的 8 个字段，用于影响人物在战斗、较艺、促织决斗后掉落的额外的资源和威望。</param>
 	/// <param name="preferProfessions">人物倾向志向 - 对应身份人物在初次成年或者身份转变时可以获得的志向内容，配置方式为{志向，获得概率}</param>
 	/// <param name="craftTypes">匠人互动类型</param>
-	public OrganizationMemberItem(short templateId, string gradeName, sbyte organization, sbyte grade, sbyte[] potentialSuccessorGrades, sbyte amount, sbyte upAmount, sbyte downAmount, bool restrictPrincipalAmount, sbyte gender, short surnameId, sbyte deputySpouseDowngrade, sbyte childGrade, sbyte brotherGrade, sbyte teacherGrade, sbyte rejoinGrade, sbyte probOfBecomingMonk, byte monkType, string[] monasticTitleSuffixes, short neili, sbyte consummateLevel, short expPerMonth, int contributionPerMonth, sbyte apprenticeProbAdjust, List<short> favoriteClothingIds, List<short> hatedClothingIds, string[] spouseAnonymousTitles, bool canStroll, short minionGroupId, short[] initialAges, PresetEquipmentItemWithProb[] equipment, PresetEquipmentItem clothing, List<PresetInventoryItem> inventory, List<PresetOrgMemberCombatSkill> combatSkills, sbyte[] extraCombatSkillGrids, short[] resourcesAdjust, int resourceSatisfyingThreshold, int itemSatisfyingThreshold, int resourceIncomeRatio, int purchaseItemDiscount, int expectedWagerValue, short[] lifeSkillsAdjust, sbyte lifeSkillGradeLimit, short[] combatSkillsAdjust, short[] mainAttributesAdjust, List<sbyte> identityInteractConfig, short identityActiveAge, ResourceInts dropResources, IntPair[] preferProfessions, sbyte[] craftTypes)
+	public OrganizationMemberItem(short templateId, string gradeName, sbyte organization, sbyte grade, sbyte[] potentialSuccessorGrades, sbyte amount, sbyte upAmount, sbyte downAmount, bool restrictPrincipalAmount, sbyte gender, short surnameId, sbyte upgradeLevel, sbyte deputySpouseDowngrade, sbyte[] childGrade, sbyte brotherGrade, sbyte teacherGrade, sbyte rejoinGrade, sbyte probOfBecomingMonk, byte monkType, string[] monasticTitleSuffixes, short neili, sbyte consummateLevel, short expPerMonth, int contributionPerMonth, sbyte apprenticeProbAdjust, List<short> favoriteClothingIds, List<short> hatedClothingIds, string[] spouseAnonymousTitles, bool canStroll, short minionGroupId, short[] initialAges, PresetEquipmentItemWithProb[] equipment, PresetEquipmentItem clothing, List<PresetInventoryItem> inventory, List<PresetOrgMemberCombatSkill> combatSkills, sbyte[] extraCombatSkillGrids, short[] resourcesAdjust, int resourceSatisfyingThreshold, int itemSatisfyingThreshold, int resourceIncomeRatio, int purchaseItemDiscount, int expectedWagerValue, short[] lifeSkillsAdjust, sbyte lifeSkillGradeLimit, short[] combatSkillsAdjust, short[] mainAttributesAdjust, List<sbyte> identityInteractConfig, short identityActiveAge, ResourceInts dropResources, IntPair[] preferProfessions, sbyte[] craftTypes)
 	{
 		TemplateId = templateId;
 		GradeName = gradeName;
@@ -366,6 +373,7 @@ public class OrganizationMemberItem : ConfigItem<OrganizationMemberItem, short>
 		RestrictPrincipalAmount = restrictPrincipalAmount;
 		Gender = gender;
 		SurnameId = surnameId;
+		UpgradeLevel = upgradeLevel;
 		DeputySpouseDowngrade = deputySpouseDowngrade;
 		ChildGrade = childGrade;
 		BrotherGrade = brotherGrade;
@@ -423,8 +431,9 @@ public class OrganizationMemberItem : ConfigItem<OrganizationMemberItem, short>
 		RestrictPrincipalAmount = false;
 		Gender = -1;
 		SurnameId = -1;
+		UpgradeLevel = 0;
 		DeputySpouseDowngrade = -1;
-		ChildGrade = -1;
+		ChildGrade = new sbyte[0];
 		BrotherGrade = -1;
 		TeacherGrade = -1;
 		RejoinGrade = -1;
@@ -503,6 +512,7 @@ public class OrganizationMemberItem : ConfigItem<OrganizationMemberItem, short>
 		RestrictPrincipalAmount = other.RestrictPrincipalAmount;
 		Gender = other.Gender;
 		SurnameId = other.SurnameId;
+		UpgradeLevel = other.UpgradeLevel;
 		DeputySpouseDowngrade = other.DeputySpouseDowngrade;
 		ChildGrade = other.ChildGrade;
 		BrotherGrade = other.BrotherGrade;

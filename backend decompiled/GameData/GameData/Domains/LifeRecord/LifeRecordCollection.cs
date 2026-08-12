@@ -3478,6 +3478,14 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
+	public void AddAutoChangeGrade(int selfCharId, int date, sbyte orgTemplateId, sbyte orgGrade, bool orgPrincipal, sbyte gender, sbyte orgTemplateId1, sbyte orgGrade1, bool orgPrincipal1, sbyte gender1)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1414);
+		AppendOrgGrade(orgTemplateId, orgGrade, orgPrincipal, gender);
+		AppendOrgGrade(orgTemplateId1, orgGrade1, orgPrincipal1, gender1);
+		EndAddingRecord(beginOffset);
+	}
+
 	public void AddInsteadSectPunishElope(int selfCharId, int date, int charId, Location location)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 414);
@@ -10853,6 +10861,22 @@ public class LifeRecordCollection : WriteableRecordCollection
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 1411);
 		AppendCricket(colorId, partId, nameId);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddDecideToParticipateNewAdventure(int selfCharId, int date, Location location, int adventureCoreId)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1412);
+		AppendLocation(location);
+		AppendAdventure(adventureCoreId);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddLeaveNewAdventure(int selfCharId, int date, Location location, int adventureCoreId)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1413);
+		AppendLocation(location);
+		AppendAdventure(adventureCoreId);
 		EndAddingRecord(beginOffset);
 	}
 

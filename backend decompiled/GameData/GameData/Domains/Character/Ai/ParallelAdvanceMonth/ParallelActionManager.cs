@@ -4,6 +4,8 @@ using GameData.Common;
 using GameData.Common.WorkerThread;
 using GameData.Domains.Map;
 using GameData.Domains.Organization;
+using GameData.Domains.Taiwu.Profession;
+using GameData.Domains.Taiwu.Profession.SkillsData;
 using GameData.GameDataBridge;
 using GameData.Utilities;
 
@@ -149,11 +151,26 @@ public class ParallelActionManager
 				OfflineExecuteCharacterActionsInArea_KidnappedChars(context, charId, action);
 			}
 		}
-		Dictionary<int, GearMate>.KeyCollection gearMateIds = DomainManager.Extra.GetAllGearMateId();
-		foreach (int charId2 in gearMateIds)
+		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
+		ProfessionData profession = DomainManager.Extra.GetProfessionData(1);
+		HunterSkillsData skillsData = profession.GetSkillsData<HunterSkillsData>();
+		IReadOnlySet<int> specialGroup = DomainManager.Character.GetSpecialGroup(taiwuCharId);
+		if (skillsData != null && skillsData.AnimalCharIdToItemKey != null)
 		{
-			Character character2 = DomainManager.Character.GetElement_Objects(charId2);
-			action.GearMateExecute(context, character2);
+			foreach (int charId2 in specialGroup)
+			{
+				Character character2 = DomainManager.Character.GetElement_Objects(charId2);
+				if (skillsData.AnimalCharIdToItemKey.ContainsKey(charId2))
+				{
+					action.AnimalCharExecute(context, character2);
+				}
+			}
+		}
+		Dictionary<int, GearMate>.KeyCollection gearMateIds = DomainManager.Extra.GetAllGearMateId();
+		foreach (int charId3 in gearMateIds)
+		{
+			Character character3 = DomainManager.Character.GetElement_Objects(charId3);
+			action.GearMateExecute(context, character3);
 		}
 	}
 

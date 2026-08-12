@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Config;
 using GameData.Domains.Character.AvatarSystem;
 using GameData.Domains.Character.Display;
 using GameData.Serializer;
@@ -558,7 +559,16 @@ public class DeadCharacter : ISerializableGameData
 	{
 		if (MonkType == 0)
 		{
-			return OrganizationInfo.GetOrgMemberConfig().ChildGrade >= 0;
+			OrganizationMemberItem orgMemberConfig = OrganizationInfo.GetOrgMemberConfig();
+			if (orgMemberConfig != null)
+			{
+				sbyte[] childGrade = orgMemberConfig.ChildGrade;
+				if (childGrade != null)
+				{
+					return childGrade.Length > 0;
+				}
+			}
+			return false;
 		}
 		return false;
 	}

@@ -527,6 +527,34 @@ public class CharacterDomain : BaseGameDataDomain
 	[Obsolete]
 	public Location NoAgeIncreaseLocation => _noAgeIncreaseLocation;
 
+	[DataUpgrader(Version = "1.0.72", Date = "2026/08/10")]
+	private void FixAbnormalAlertnessData(DataContext context)
+	{
+		Character taiwuChar = DomainManager.Taiwu.GetTaiwu();
+		int taiwuCharId = taiwuChar.GetId();
+		foreach (KeyValuePair<RelationKey, RelatedCharacter> pair in _relations)
+		{
+			if (pair.Key.CharId != taiwuCharId && pair.Key.RelatedCharId != taiwuCharId)
+			{
+				continue;
+			}
+			int relatedCharId = ((pair.Key.CharId == taiwuCharId) ? pair.Key.RelatedCharId : pair.Key.CharId);
+			if (!IsCharacterAlive(relatedCharId))
+			{
+				continue;
+			}
+			Character npcChar = GetElement_Objects(relatedCharId);
+			if (npcChar.GetCreatingType() == 1 && DomainManager.Extra.GetIsInteractedCharacter(relatedCharId))
+			{
+				CharacterAlertnessData alertnessData = GetAlertnessData(context, relatedCharId, init: false);
+				if (alertnessData == null)
+				{
+					InitAlertnessData(context, npcChar, taiwuChar);
+				}
+			}
+		}
+	}
+
 	[DataUpgrader(Version = "0.84.54", Date = "2026/06/11")]
 	private void FixAbnormalCharacterProfessionData(DataContext context)
 	{
@@ -2821,7 +2849,16 @@ public class CharacterDomain : BaseGameDataDomain
 		{
 			return alertness;
 		}
-		return init ? InitAlertnessData(context, npcChar) : null;
+		if (init)
+		{
+			Character taiwuChar = DomainManager.Taiwu.GetTaiwu();
+			alertness = InitAlertnessData(context, npcChar, taiwuChar);
+		}
+		else
+		{
+			alertness = null;
+		}
+		return alertness;
 	}
 
 	public void SetAlertness(DataContext context, int charId, CharacterAlertnessData alertness)
@@ -2874,7 +2911,8 @@ public class CharacterDomain : BaseGameDataDomain
 		{
 			if (!TryGetElement_Alertness(charId, out var alertnessData))
 			{
-				alertnessData = InitAlertnessData(context, npcChar);
+				Character taiwuChar = DomainManager.Taiwu.GetTaiwu();
+				alertnessData = InitAlertnessData(context, npcChar, taiwuChar);
 			}
 			alertnessData.Value = CharacterAlertnessData.ClampValue(alertnessData.Value + delta);
 			SetAlertness(context, charId, alertnessData);
@@ -2890,9 +2928,8 @@ public class CharacterDomain : BaseGameDataDomain
 		return CharacterAlertnessData.ClampChangeValue(finalDelta);
 	}
 
-	private CharacterAlertnessData InitAlertnessData(DataContext context, Character npcChar)
+	private CharacterAlertnessData InitAlertnessData(DataContext context, Character npcChar, Character taiwuChar)
 	{
-		Character taiwuChar = DomainManager.Taiwu.GetTaiwu();
 		sbyte taiwuBehaviorType = taiwuChar.GetBehaviorType();
 		sbyte taiwuFameType = taiwuChar.GetFameType();
 		sbyte worldProgressLevel = DomainManager.World.GetXiangshuLevel();
@@ -3038,9 +3075,9 @@ public class CharacterDomain : BaseGameDataDomain
 			if (IsCharacterAlive(relatedCharId))
 			{
 				Character npcChar = GetElement_Objects(relatedCharId);
-				if (npcChar.GetCreatingType() == 1)
+				if (npcChar.GetCreatingType() == 1 && DomainManager.Extra.GetIsInteractedCharacter(relatedCharId))
 				{
-					InitAlertnessData(context, npcChar);
+					InitAlertnessData(context, npcChar, newTaiwuChar);
 				}
 			}
 		}
@@ -6197,29 +6234,34 @@ public class CharacterDomain : BaseGameDataDomain
 		short parentMemberId = orgConfig.Members[parentOrgInfo.Grade];
 		OrganizationMemberItem parentMemberConfig = OrganizationMember.Instance[parentMemberId];
 		OrganizationMemberItem orgMemberConfig;
-		if (parentMemberConfig.ChildGrade >= 0)
+		if (parentMemberConfig != null)
 		{
-			short orgMemberId = orgConfig.Members[parentMemberConfig.ChildGrade];
-			orgMemberConfig = OrganizationMember.Instance[orgMemberId];
-		}
-		else
-		{
-			orgMemberConfig = OrganizationMember.Instance[(short)0];
-			orgConfig = Config.Organization.Instance[(sbyte)0];
-			if (!isAbandoned)
+			sbyte[] grades = parentMemberConfig.ChildGrade;
+			if (grades != null && grades.Length > 0)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(77, 4);
-				defaultInterpolatedStringHandler.AppendLiteral("Main parent ");
-				defaultInterpolatedStringHandler.AppendFormatted(orgConfig.Name);
-				defaultInterpolatedStringHandler.AppendFormatted(parentMemberConfig.GradeName);
-				defaultInterpolatedStringHandler.AppendLiteral(" cannot have child but child is not abandoned (mother:");
-				defaultInterpolatedStringHandler.AppendFormatted(mother);
-				defaultInterpolatedStringHandler.AppendLiteral(", father:");
-				defaultInterpolatedStringHandler.AppendFormatted((object?)((father == null) ? ((ISerializableGameData)deadFather) : ((ISerializableGameData)father)), 0, (string?)null);
-				defaultInterpolatedStringHandler.AppendLiteral(").");
-				throw new Exception(defaultInterpolatedStringHandler.ToStringAndClear());
+				sbyte grade = DomainManager.Organization.GetChildGrade(context.Random, grades, parentOrgInfo.SettlementId);
+				short orgMemberId = orgConfig.Members[grade];
+				orgMemberConfig = OrganizationMember.Instance[orgMemberId];
+				goto IL_03dc;
 			}
 		}
+		orgMemberConfig = OrganizationMember.Instance[(short)0];
+		orgConfig = Config.Organization.Instance[(sbyte)0];
+		if (!isAbandoned)
+		{
+			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(77, 4);
+			defaultInterpolatedStringHandler.AppendLiteral("Main parent ");
+			defaultInterpolatedStringHandler.AppendFormatted(orgConfig.Name);
+			defaultInterpolatedStringHandler.AppendFormatted(parentMemberConfig.GradeName);
+			defaultInterpolatedStringHandler.AppendLiteral(" cannot have child but child is not abandoned (mother:");
+			defaultInterpolatedStringHandler.AppendFormatted(mother);
+			defaultInterpolatedStringHandler.AppendLiteral(", father:");
+			defaultInterpolatedStringHandler.AppendFormatted((object?)((father == null) ? ((ISerializableGameData)deadFather) : ((ISerializableGameData)father)), 0, (string?)null);
+			defaultInterpolatedStringHandler.AppendLiteral(").");
+			throw new Exception(defaultInterpolatedStringHandler.ToStringAndClear());
+		}
+		goto IL_03dc;
+		IL_03dc:
 		mod.AdoptedByKidnapper = false;
 		int kidnapperId = mother.GetKidnapperId();
 		if (kidnapperId >= 0 && kidnapperId != DomainManager.Taiwu.GetTaiwuCharId())
@@ -6230,17 +6272,25 @@ public class CharacterDomain : BaseGameDataDomain
 			{
 			case 0:
 			case 1:
-				if (isAbandoned && random.CheckPercentProb(50) && kidnapper.GetMonkType() == 0 && kidnapperOrgMemberCfg.ChildGrade >= 0)
+				if (isAbandoned && random.CheckPercentProb(50) && kidnapper.GetMonkType() == 0 && kidnapperOrgMemberCfg != null)
 				{
-					mod.AdoptedByKidnapper = true;
+					sbyte[] childGrade = kidnapperOrgMemberCfg.ChildGrade;
+					if (childGrade != null && childGrade.Length > 0)
+					{
+						mod.AdoptedByKidnapper = true;
+					}
 				}
 				mod.IsMotherFree = true;
 				mod.IsBabyFree = true;
 				break;
 			case 2:
-				if (isAbandoned && random.CheckPercentProb(50) && kidnapper.GetMonkType() == 0 && kidnapperOrgMemberCfg.ChildGrade >= 0)
+				if (isAbandoned && random.CheckPercentProb(50) && kidnapper.GetMonkType() == 0 && kidnapperOrgMemberCfg != null)
 				{
-					mod.AdoptedByKidnapper = true;
+					sbyte[] childGrade = kidnapperOrgMemberCfg.ChildGrade;
+					if (childGrade != null && childGrade.Length > 0)
+					{
+						mod.AdoptedByKidnapper = true;
+					}
 				}
 				mod.IsBabyFree = true;
 				break;
@@ -6264,9 +6314,9 @@ public class CharacterDomain : BaseGameDataDomain
 		{
 			sbyte gender = ((i > 0 && random.CheckPercentProb(25)) ? Gender.Flip(mainChildGender) : mainChildGender);
 			Location location = motherLocation;
-			sbyte grade = (sbyte)((orgMemberConfig.Gender < 0 || orgMemberConfig.Gender == gender) ? orgMemberConfig.Grade : 0);
+			sbyte grade2 = (sbyte)((orgMemberConfig.Gender < 0 || orgMemberConfig.Gender == gender) ? orgMemberConfig.Grade : 0);
 			short settlementId = (short)((parentOrgInfo.OrgTemplateId == orgConfig.TemplateId) ? parentOrgInfo.SettlementId : (-1));
-			OrganizationInfo orgInfo = new OrganizationInfo(orgConfig.TemplateId, grade, principal: true, settlementId);
+			OrganizationInfo orgInfo = new OrganizationInfo(orgConfig.TemplateId, grade2, principal: true, settlementId);
 			short charTemplateId = GenerateTemplateId(baseTemplateId, gender);
 			AvatarData currAvatar = avatar?.GenerateMultipleBirthChildAvatar(random, gender);
 			sbyte growingGrade = 8;
@@ -6748,8 +6798,7 @@ public class CharacterDomain : BaseGameDataDomain
 		int childCharId = adoptedChild.GetId();
 		if (adopterOrgInfo.SettlementId != adoptedChild.GetOrganizationInfo().SettlementId)
 		{
-			sbyte childGrade = OrganizationDomain.GetOrgMemberConfig(adopterOrgInfo).ChildGrade;
-			OrganizationInfo childOrgInfo = new OrganizationInfo(adopterOrgInfo.OrgTemplateId, childGrade, principal: true, adopterOrgInfo.SettlementId);
+			OrganizationInfo childOrgInfo = new OrganizationInfo(adopterOrgInfo.OrgTemplateId, DomainManager.Organization.GetChildGrade(context.Random, OrganizationDomain.GetOrgMemberConfig(adopterOrgInfo).ChildGrade, adopterOrgInfo.SettlementId), principal: true, adopterOrgInfo.SettlementId);
 			adoptedChild.SetOrganizationInfo(childOrgInfo, context);
 			DomainManager.Organization.JoinOrganization(context, adoptedChild, childOrgInfo, charIsCreating: true);
 		}
@@ -7375,8 +7424,9 @@ public class CharacterDomain : BaseGameDataDomain
 			if (1 == 0)
 			{
 			}
-			if (num < num2 * (plan.Item2 + plan.Item3 - plan.Item1))
+			if (num < num2 * (plan.Item2 - plan.Item1))
 			{
+				plan.Item1--;
 				character.AddDarkAsh(context, lifeRecordCollection);
 				if (checks.Contains(character.GetId()))
 				{
@@ -9738,7 +9788,7 @@ public class CharacterDomain : BaseGameDataDomain
 					ItemPowerInfo itemPowerInfo = DomainManager.Character.GetItemPowerInfo(charId, targetSlotItemKey);
 					for (sbyte attackType = 0; attackType < 4; attackType++)
 					{
-						finalDelta.DefHitAttribute.Items[attackType] = (short)(finalDelta.DefHitAttribute.Items[attackType] * (100 + armorAvoidFactors.Items[attackType]) / 100);
+						finalDelta.DefHitAttribute.Items[attackType] = finalDelta.DefHitAttribute.Items[attackType] * (100 + armorAvoidFactors.Items[attackType]) / 100;
 					}
 					finalDelta.DefPenetrability.Outer = finalDelta.DefPenetrability.Outer * (10000 + armorOuterResistFactor * itemPowerInfo.Power) / 10000;
 					finalDelta.DefPenetrability.Inner = finalDelta.DefPenetrability.Inner * (10000 + armorInnerResistFactor * itemPowerInfo.Power) / 10000;
@@ -11959,20 +12009,44 @@ public class CharacterDomain : BaseGameDataDomain
 			return false;
 		}
 		OrganizationInfo orgInfo = character.GetOrganizationInfo();
-		if (orgInfo.OrgTemplateId == 16 || orgInfo.OrgTemplateId == 0 || orgInfo.SettlementId < 0 || !orgInfo.Principal || OrganizationDomain.IsSect(orgInfo.OrgTemplateId) || character.GetOrganizationInfo().GetOrgMemberConfig().ChildGrade < 0)
+		int num;
+		if (orgInfo.OrgTemplateId != 16 && orgInfo.OrgTemplateId != 0 && orgInfo.SettlementId >= 0 && orgInfo.Principal && !OrganizationDomain.IsSect(orgInfo.OrgTemplateId))
 		{
-			return false;
+			OrganizationMemberItem orgMemberConfig = character.GetOrganizationInfo().GetOrgMemberConfig();
+			if (orgMemberConfig != null)
+			{
+				sbyte[] childGrade = orgMemberConfig.ChildGrade;
+				if (childGrade != null)
+				{
+					num = ((childGrade.Length > 0) ? 1 : 0);
+					goto IL_0078;
+				}
+			}
+			num = 0;
+			goto IL_0078;
 		}
-		if (!MapAreaData.IsRegularArea(character.GetLocation().AreaId))
+		goto IL_0082;
+		IL_0082:
+		return false;
+		IL_0078:
+		if (num != 0)
 		{
-			return false;
+			if (!MapAreaData.IsRegularArea(character.GetLocation().AreaId))
+			{
+				return false;
+			}
+			return GetAliveSpouse(character.GetId()) < 0 && character.GetMonkType() == 0 && !character.GetBisexual() && !character.IsInTaiwuGroup() && !DomainManager.Character.IsTemporaryIntelligentCharacter(character.GetId());
 		}
-		return GetAliveSpouse(character.GetId()) < 0 && character.GetMonkType() == 0 && !character.GetBisexual() && !character.IsInTaiwuGroup() && !DomainManager.Character.IsTemporaryIntelligentCharacter(character.GetId());
+		goto IL_0082;
 	}
 
 	private bool CanBeDistantMarriageTarget(Character selfChar, Character targetChar)
 	{
 		if (selfChar.GetGender() == targetChar.GetGender())
+		{
+			return false;
+		}
+		if (!DomainManager.Organization.CanPerformDistantMarriage(selfChar, targetChar))
 		{
 			return false;
 		}

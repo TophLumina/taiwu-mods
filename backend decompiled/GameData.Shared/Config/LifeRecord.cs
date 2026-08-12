@@ -2083,6 +2083,11 @@ public class LifeRecord : ConfigData<LifeRecordItem, short>
 		public const short ChangeGrade = 412;
 
 		/// <summary>
+		/// AutoChangeGrade
+		/// </summary>
+		public const short AutoChangeGrade = 1414;
+
+		/// <summary>
 		/// ExpelledByTaiwu
 		/// </summary>
 		public const short ExpelledByTaiwu = 413;
@@ -8994,6 +8999,11 @@ public class LifeRecord : ConfigData<LifeRecordItem, short>
 		public static LifeRecordItem ChangeGrade => Instance[(short)412];
 
 		/// <summary>
+		/// AutoChangeGrade
+		/// </summary>
+		public static LifeRecordItem AutoChangeGrade => Instance[(short)1414];
+
+		/// <summary>
 		/// ExpelledByTaiwu
 		/// </summary>
 		public static LifeRecordItem ExpelledByTaiwu => Instance[(short)413];
@@ -15354,12 +15364,13 @@ public class LifeRecord : ConfigData<LifeRecordItem, short>
 		_dataArray.Add(new LifeRecordItem(1411, LocalStringManager.GetConfig("LifeRecord_language", "Name_1411"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1411"), new string[6] { "Cricket", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Great));
 		_dataArray.Add(new LifeRecordItem(1412, LocalStringManager.GetConfig("LifeRecord_language", "Name_1412"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1412"), new string[6] { "Location", "Adventure", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
 		_dataArray.Add(new LifeRecordItem(1413, LocalStringManager.GetConfig("LifeRecord_language", "Name_1413"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1413"), new string[6] { "Location", "Adventure", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1414, LocalStringManager.GetConfig("LifeRecord_language", "Name_1414"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1414"), new string[6] { "OrgGrade", "OrgGrade", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 70, -1, ELifeRecordDisplayType.Relation));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<LifeRecordItem>(1414);
+		_dataArray = new List<LifeRecordItem>(1415);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

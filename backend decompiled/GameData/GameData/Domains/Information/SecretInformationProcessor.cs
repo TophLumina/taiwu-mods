@@ -2197,23 +2197,57 @@ public class SecretInformationProcessor
 	{
 		bool actorResult = false;
 		bool reactorResult = false;
+		int num;
 		if (actorId != -1)
 		{
 			OrganizationInfo actorSectInfo = GetSectInfoSafe(actorId);
 			if (actorSectInfo.OrgTemplateId != -1)
 			{
-				actorResult = OrganizationMember.Instance[Config.Organization.Instance[actorSectInfo.OrgTemplateId].Members[actorSectInfo.Grade]].ChildGrade < 0 || ConditionIsMonk(actorId);
+				OrganizationMemberItem organizationMemberItem = OrganizationMember.Instance[Config.Organization.Instance[actorSectInfo.OrgTemplateId].Members[actorSectInfo.Grade]];
+				if (organizationMemberItem != null)
+				{
+					sbyte[] childGrade = organizationMemberItem.ChildGrade;
+					if (childGrade != null && childGrade.Length > 0)
+					{
+						num = (ConditionIsMonk(actorId) ? 1 : 0);
+						goto IL_0076;
+					}
+				}
+				num = 1;
+				goto IL_0076;
 			}
 		}
+		goto IL_0078;
+		IL_0076:
+		actorResult = (byte)num != 0;
+		goto IL_0078;
+		IL_00f8:
+		return actorResult || reactorResult;
+		IL_0078:
+		int num2;
 		if (reactorId != -1 && reactorId != actorId)
 		{
 			OrganizationInfo reactorSectInfo = GetSectInfoSafe(reactorId);
 			if (reactorSectInfo.OrgTemplateId != -1)
 			{
-				reactorResult = OrganizationMember.Instance[Config.Organization.Instance[reactorSectInfo.OrgTemplateId].Members[reactorSectInfo.Grade]].ChildGrade < 0 || ConditionIsMonk(reactorId);
+				OrganizationMemberItem organizationMemberItem = OrganizationMember.Instance[Config.Organization.Instance[reactorSectInfo.OrgTemplateId].Members[reactorSectInfo.Grade]];
+				if (organizationMemberItem != null)
+				{
+					sbyte[] childGrade = organizationMemberItem.ChildGrade;
+					if (childGrade != null && childGrade.Length > 0)
+					{
+						num2 = (ConditionIsMonk(reactorId) ? 1 : 0);
+						goto IL_00f6;
+					}
+				}
+				num2 = 1;
+				goto IL_00f6;
 			}
 		}
-		return actorResult || reactorResult;
+		goto IL_00f8;
+		IL_00f6:
+		reactorResult = (byte)num2 != 0;
+		goto IL_00f8;
 	}
 
 	private bool ConditionIsPublished()

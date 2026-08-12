@@ -5856,7 +5856,7 @@ public static class EventHelper
 
 	public static sbyte GetCharacterChildGrade(GameData.Domains.Character.Character character)
 	{
-		return OrganizationDomain.GetOrgMemberConfig(character.GetOrganizationInfo()).ChildGrade;
+		return DomainManager.Organization.GetChildGrade(Domain.MainThreadDataContext.Random, OrganizationDomain.GetOrgMemberConfig(character.GetOrganizationInfo()).ChildGrade, character.GetOrganizationInfo().SettlementId);
 	}
 
 	public static void KillCharacter(int killerId, int victimId, EKillCharacterType killType)
@@ -14789,8 +14789,9 @@ public static class EventHelper
 	public static void SetHideAllTeammates(bool hideState)
 	{
 		int[] savedCombatCharIds = Domain.GetAllCombatGroupChars();
-		int i = 0;
-		for (int max = 3; i < max; i++)
+		HashSet<int> groupCharIds = DomainManager.Taiwu.GetGroupCharIds().GetCollection();
+		List<int> specialGroup = DomainManager.Taiwu.GetTaiwuSpecialGroup();
+		for (int i = 0; i < 3; i++)
 		{
 			if (hideState)
 			{
@@ -14800,7 +14801,7 @@ public static class EventHelper
 				continue;
 			}
 			int charId2 = savedCombatCharIds[i];
-			if (DomainManager.Taiwu.GetTaiwuCharId() == charId2 || !DomainManager.Character.IsCharacterAlive(charId2))
+			if (DomainManager.Taiwu.GetTaiwuCharId() == charId2 || !DomainManager.Character.IsCharacterAlive(charId2) || (!groupCharIds.Contains(charId2) && !specialGroup.Contains(charId2)))
 			{
 				charId2 = -1;
 			}
@@ -18781,26 +18782,26 @@ public static class EventHelper
 
 	public static bool AskForPrisonerVisible(GameData.Domains.Character.Character character)
 	{
-		OrganizationInfo organizationInfo = character.GetOrganizationInfo();
-		if (organizationInfo.SettlementId < 0)
-		{
-			return false;
-		}
-		Settlement settlement = DomainManager.Organization.GetSettlement(organizationInfo.SettlementId);
-		if (!(settlement is Sect sect))
-		{
-			return false;
-		}
 		if (DomainManager.Character.TryGetKidnappedCharacters(character.GetId(), out var kidnappedCharacterList))
 		{
+			int characterId = character.GetId();
 			foreach (KidnappedCharacter kidnappedCharacter in kidnappedCharacterList.GetCollection())
 			{
-				Tester.Assert(kidnappedCharacter.CharId != DomainManager.Taiwu.GetTaiwuCharId());
 				sbyte orgTemplateId = DomainManager.Organization.GetFugitiveBountySect(kidnappedCharacter.CharId);
-				if (orgTemplateId >= 0)
+				if (orgTemplateId < 0)
+				{
+					continue;
+				}
+				short settlementId = DomainManager.Organization.GetSettlementIdByOrgTemplateId(orgTemplateId);
+				if (settlementId < 0)
+				{
+					continue;
+				}
+				Settlement settlement = DomainManager.Organization.GetSettlement(settlementId);
+				if (settlement is Sect sect)
 				{
 					SettlementBounty bounty = sect.Prison.GetBounty(kidnappedCharacter.CharId);
-					if (bounty.CurrentHunterId == character.GetId())
+					if (bounty != null && bounty.CurrentHunterId == characterId)
 					{
 						return true;
 					}
@@ -30192,7 +30193,10 @@ public static class EventHelper
 	public static void SetPreviousTaiwuName(EventArgBox argBox)
 	{
 		List<int> ids = DomainManager.Taiwu.GetPreviousTaiwuIds();
-		argBox.Set("PreviousTaiwu", ids[ids.Count - 1]);
+		if (ids.Count > 0)
+		{
+			argBox.Set("PreviousTaiwu", ids[ids.Count - 1]);
+		}
 	}
 
 	public static bool TryGetPrologueAddedWug(out int wugAdded)
