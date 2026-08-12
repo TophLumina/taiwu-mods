@@ -1,0 +1,30 @@
+using System;
+
+namespace Config;
+
+[Serializable]
+public class AdventureBaseBranch : AdventureBranch
+{
+	/// 分支的Key, 用于游戏中选择分支时索引
+	public string BranchKey;
+
+	/// 该分支的福缘商店最大数量，实际游戏中会生成50%到100%
+	public short LuckStoreCount;
+
+	public byte PortA;
+
+	public byte PortB;
+
+	public AdventureBaseBranch(byte portA, byte portB, string branchKey, short luckStoreCount, short len, string globalEvent, int[] skillCfg, int[] terrainPersonalityCfg, int[] emptyBlockCfg, string[] eventCfg, int[] resRewardCfg, int[] itemRewardCfg, string[] bonusRewardCfg)
+		: base(len, globalEvent, skillCfg, terrainPersonalityCfg, emptyBlockCfg, eventCfg, resRewardCfg, itemRewardCfg, bonusRewardCfg)
+	{
+		BranchKey = branchKey;
+		LuckStoreCount = luckStoreCount;
+		PortA = portA;
+		PortB = portB;
+	}
+
+	public AdventureBaseBranch()
+	{
+	}
+}

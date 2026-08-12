@@ -1,0 +1,91 @@
+using GameData.Domains.Character.Relation;
+using GameData.Serializer;
+using GameData.Utilities;
+
+namespace GameData.Domains.Information.Secret.Attachment;
+
+[SerializableGameData(IsExtensible = true, NotForDisplayModule = true, NoCopyConstructors = true)]
+public class CharacterRelationshipSnapshot : ISerializableGameData
+{
+	public static class FieldIds
+	{
+		public const ushort RelatedCharacters = 0;
+
+		public const ushort Count = 1;
+
+		public static readonly string[] FieldId2FieldName = new string[1] { "RelatedCharacters" };
+	}
+
+	[SerializableGameDataField(FieldIndex = 0)]
+	public RelatedCharacters RelatedCharacters;
+
+	public bool IsSerializedSizeFixed()
+	{
+		return false;
+	}
+
+	public int GetSerializedSize()
+	{
+		int totalSize = 2;
+		totalSize = ((RelatedCharacters == null) ? (totalSize + 2) : (totalSize + (2 + RelatedCharacters.GetSerializedSize())));
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
+	}
+
+	public unsafe int Serialize(byte* pData)
+	{
+		byte* pCurrData = pData;
+		*(short*)pCurrData = 1;
+		pCurrData += 2;
+		if (RelatedCharacters != null)
+		{
+			byte* intPtr = pCurrData;
+			pCurrData += 2;
+			int fieldSize = RelatedCharacters.Serialize(pCurrData);
+			pCurrData += fieldSize;
+			Tester.Assert(fieldSize <= 65535);
+			*(ushort*)intPtr = (ushort)fieldSize;
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
+		int totalSize = (int)(pCurrData - pData);
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
+	}
+
+	public unsafe int Deserialize(byte* pData)
+	{
+		byte* pCurrData = pData;
+		ushort num = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (num > 0)
+		{
+			ushort num2 = *(ushort*)pCurrData;
+			pCurrData += 2;
+			if (num2 > 0)
+			{
+				RelatedCharacters = new RelatedCharacters();
+				pCurrData += RelatedCharacters.Deserialize(pCurrData);
+			}
+			else
+			{
+				RelatedCharacters = null;
+			}
+		}
+		int totalSize = (int)(pCurrData - pData);
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
+	}
+}

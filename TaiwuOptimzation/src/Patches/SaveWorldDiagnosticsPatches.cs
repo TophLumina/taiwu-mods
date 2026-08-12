@@ -14,16 +14,52 @@ namespace TaiwuOptimization.Patches;
 internal static class SaveWorldDiagnosticsArchiveFileSavePatch
 {
     // 以 ArchiveFileBase.Save 作为本地存档写盘诊断的总边界。
-    private static void Prefix(ArchiveFileBase __instance, ref CompressionType compressionType, out long __state)
+    private static void Prefix(
+        ArchiveFileBase __instance,
+        ref CompressionAlgorithm algorithm,
+        CompressionType compressionType,
+        string ___Path,
+        out long __state)
     {
-        compressionType = SaveWorldArchiveOptimization.GetCompressionType(__instance, compressionType);
-        __state = SaveWorldDiagnostics.BeginArchiveSave(__instance, compressionType);
+        SaveWorldParallelCompression.BeginSave(__instance, ___Path, ref algorithm);
+        __state = SaveWorldDiagnostics.BeginArchiveSave(__instance, algorithm, compressionType);
     }
 
     private static Exception? Finalizer(ArchiveFileBase __instance, long __state, Exception? __exception)
     {
-        SaveWorldDiagnostics.EndArchiveSave(__instance, __state, __exception);
+        try
+        {
+            SaveWorldDiagnostics.EndArchiveSave(__instance, __state, __exception);
+        }
+        finally
+        {
+            SaveWorldParallelCompression.EndSave();
+        }
+
         return __exception;
+    }
+}
+
+[HarmonyPatch(typeof(CompressionStreamFactory), nameof(CompressionStreamFactory.StartCompression))]
+internal static class SaveWorldParallelDeflateStreamPatch
+{
+    private static bool Prefix(
+        Stream stream,
+        CompressionAlgorithm algorithm,
+        ref Stream __result)
+    {
+        ParallelDeflateStream? parallelStream =
+            SaveWorldParallelCompression.TryCreateStream(stream, algorithm);
+        if (parallelStream == null)
+        {
+            return true;
+        }
+
+        __result = parallelStream;
+        SaveWorldDiagnostics.MarkParallelDeflateStarted(
+            parallelStream.WorkerCount,
+            parallelStream.BlockSize);
+        return false;
     }
 }
 
@@ -111,61 +147,42 @@ internal static class SaveWorldDiagnosticsDatabaseConnectPatch
 [HarmonyPatch(typeof(ArchiveFileBase), nameof(ArchiveFileBase.CopyFrom))]
 internal static class SaveWorldDiagnosticsCopyFromPatch
 {
-    private static readonly MethodInfo CopyBufferGetter =
-        AccessTools.Method(typeof(SaveWorldArchiveOptimization), nameof(SaveWorldArchiveOptimization.GetDatabaseCopyBufferBytes));
-
     // LocalArchiveFile.WriteContent 中此调用对应 working.db 复制。
     private static void Prefix(out long __state) =>
         __state = SaveWorldDiagnostics.BeginStep();
 
     private static void Postfix(long length, long __state) =>
         SaveWorldDiagnostics.EndCopyFrom(__state, length);
-
-    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) =>
-        SaveWorldCopyBufferTranspiler.ReplaceOriginalCopyBuffer(instructions, CopyBufferGetter);
 }
 
-[HarmonyPatch(typeof(ArchiveFileBase), nameof(ArchiveFileBase.CopyTo))]
-internal static class SaveWorldCopyToBufferPatch
+[HarmonyPatch]
+internal static class SaveWorldCopyBufferPatch
 {
     private static readonly MethodInfo CopyBufferGetter =
-        AccessTools.Method(typeof(SaveWorldArchiveOptimization), nameof(SaveWorldArchiveOptimization.GetDatabaseCopyBufferBytes));
+        AccessTools.Method(
+            typeof(SaveWorldParallelCompression),
+            nameof(SaveWorldParallelCompression.GetDatabaseCopyBufferBytes));
 
-    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) =>
-        SaveWorldCopyBufferTranspiler.ReplaceOriginalCopyBuffer(instructions, CopyBufferGetter);
-}
+    private static IEnumerable<MethodBase> TargetMethods()
+    {
+        yield return AccessTools.Method(typeof(ArchiveFileBase), nameof(ArchiveFileBase.CopyFrom));
+        yield return AccessTools.Method(typeof(ArchiveFileBase), nameof(ArchiveFileBase.CopyTo));
+    }
 
-internal static class SaveWorldCopyBufferTranspiler
-{
-    /// <summary>把原版 CopyFrom/CopyTo 中的 4KB 常量替换为配置的安全块大小。</summary>
-    public static IEnumerable<CodeInstruction> ReplaceOriginalCopyBuffer(
-        IEnumerable<CodeInstruction> instructions,
-        MethodInfo copyBufferGetter)
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         foreach (CodeInstruction instruction in instructions)
         {
-            if (IsOriginalCopyBufferConstant(instruction))
+            if (instruction.opcode == OpCodes.Ldc_I8 &&
+                instruction.operand is long value &&
+                value == SaveWorldParallelCompression.OriginalCopyBufferBytes)
             {
                 instruction.opcode = OpCodes.Call;
-                instruction.operand = copyBufferGetter;
+                instruction.operand = CopyBufferGetter;
             }
 
             yield return instruction;
         }
-    }
-
-    private static bool IsOriginalCopyBufferConstant(CodeInstruction instruction)
-    {
-        if (instruction.opcode == OpCodes.Ldc_I8 &&
-            instruction.operand is long longValue &&
-            longValue == SaveWorldArchiveOptimization.OriginalCopyBufferBytes)
-        {
-            return true;
-        }
-
-        return instruction.opcode == OpCodes.Ldc_I4 &&
-            instruction.operand is int intValue &&
-            intValue == SaveWorldArchiveOptimization.OriginalCopyBufferBytes;
     }
 }
 
