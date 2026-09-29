@@ -60,7 +60,7 @@ public class SuXinWuRan : BossNeigongBase
 	{
 		if (charId == base.CharacterId && power >= 100 && Config.CombatSkill.Instance[skillId].EquipType == 1)
 		{
-			if (base.CurrEnemyChar.GetDefeatMarkCollection().DieMarkList.Count == SharedConstValue.DefeatNeedDieMarkCount - 1 && !base.CurrEnemyChar.CheckHealthImmunity(context))
+			if (base.CurrEnemyChar.GetDefeatMarkCollection().DieMarkList.Count == SharedConstValue.DefeatNeedDieMarkCount - 1 && !base.CurrEnemyChar.CheckImmunityAndShowEffect(EMarkType.Health))
 			{
 				base.CurrEnemyChar.GetCharacter().SetHealth(0, context);
 			}

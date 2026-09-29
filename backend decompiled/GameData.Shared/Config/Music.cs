@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class Music : ConfigData<MusicItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Music Instance = new Music();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "MapBlock", "MapState", "TemporaryFeature", "Desc", "Evaluation", "TemplateId", "Icon" };

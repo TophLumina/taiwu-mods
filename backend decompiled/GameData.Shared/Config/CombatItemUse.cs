@@ -7,161 +7,68 @@ namespace Config;
 [Serializable]
 public class CombatItemUse : ConfigData<CombatItemUseItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 服食道具
-		/// </summary>
 		public const short EatItem = 0;
 
-		/// <summary>
-		/// 外敷药品
-		/// </summary>
 		public const short TopicalMedicine = 1;
 
-		/// <summary>
-		/// 使用相枢剑柄
-		/// </summary>
 		public const short UseXiangshuSword = 2;
 
-		/// <summary>
-		/// 修理道具准备
-		/// </summary>
 		public const short PrepareRepair = 3;
 
-		/// <summary>
-		/// 使用绳子准备
-		/// </summary>
 		public const short PrepareRope = 4;
 
-		/// <summary>
-		/// 使用绳子成功
-		/// </summary>
 		public const short UseRopeSuccess = 5;
 
-		/// <summary>
-		/// 使用绳子失败
-		/// </summary>
 		public const short UseRopeFail = 6;
 
-		/// <summary>
-		/// 伏虞剑准备
-		/// </summary>
 		public const short PrepareFuyuSword = 7;
 
-		/// <summary>
-		/// 伏虞剑攻击
-		/// </summary>
 		public const short UseFuyuSword = 8;
 
-		/// <summary>
-		/// 投掷毒药准备
-		/// </summary>
 		public const short PrepareThrowPoison = 9;
 
-		/// <summary>
-		/// 投掷毒药施展
-		/// </summary>
 		public const short UseThrowPoison = 10;
 
-		/// <summary>
-		/// 符箓道具准备
-		/// </summary>
 		public const short PrepareFulu = 11;
 
-		/// <summary>
-		/// 符箓道具灵文使用
-		/// </summary>
 		public const short UseFuluSpiritWords = 12;
 
-		/// <summary>
-		/// 符箓道具秘文使用
-		/// </summary>
 		public const short UseFuluMysteryWords = 13;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 服食道具
-		/// </summary>
 		public static CombatItemUseItem EatItem => Instance[(short)0];
 
-		/// <summary>
-		/// 外敷药品
-		/// </summary>
 		public static CombatItemUseItem TopicalMedicine => Instance[(short)1];
 
-		/// <summary>
-		/// 使用相枢剑柄
-		/// </summary>
 		public static CombatItemUseItem UseXiangshuSword => Instance[(short)2];
 
-		/// <summary>
-		/// 修理道具准备
-		/// </summary>
 		public static CombatItemUseItem PrepareRepair => Instance[(short)3];
 
-		/// <summary>
-		/// 使用绳子准备
-		/// </summary>
 		public static CombatItemUseItem PrepareRope => Instance[(short)4];
 
-		/// <summary>
-		/// 使用绳子成功
-		/// </summary>
 		public static CombatItemUseItem UseRopeSuccess => Instance[(short)5];
 
-		/// <summary>
-		/// 使用绳子失败
-		/// </summary>
 		public static CombatItemUseItem UseRopeFail => Instance[(short)6];
 
-		/// <summary>
-		/// 伏虞剑准备
-		/// </summary>
 		public static CombatItemUseItem PrepareFuyuSword => Instance[(short)7];
 
-		/// <summary>
-		/// 伏虞剑攻击
-		/// </summary>
 		public static CombatItemUseItem UseFuyuSword => Instance[(short)8];
 
-		/// <summary>
-		/// 投掷毒药准备
-		/// </summary>
 		public static CombatItemUseItem PrepareThrowPoison => Instance[(short)9];
 
-		/// <summary>
-		/// 投掷毒药施展
-		/// </summary>
 		public static CombatItemUseItem UseThrowPoison => Instance[(short)10];
 
-		/// <summary>
-		/// 符箓道具准备
-		/// </summary>
 		public static CombatItemUseItem PrepareFulu => Instance[(short)11];
 
-		/// <summary>
-		/// 符箓道具灵文使用
-		/// </summary>
 		public static CombatItemUseItem UseFuluSpiritWords => Instance[(short)12];
 
-		/// <summary>
-		/// 符箓道具秘文使用
-		/// </summary>
 		public static CombatItemUseItem UseFuluMysteryWords => Instance[(short)13];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CombatItemUse Instance = new CombatItemUse();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "Animation", "Particle", "Sound", "BeHitAnimation", "Distance" };

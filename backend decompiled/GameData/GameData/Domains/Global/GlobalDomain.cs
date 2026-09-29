@@ -107,8 +107,6 @@ public class GlobalDomain : BaseGameDataDomain
 
 	private SingleValueCollectionModificationCollection<short> _modificationsGameStats = SingleValueCollectionModificationCollection<short>.Create();
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	private void OnInitializedDomainData()
 	{
 		GlobalDataLoaded = false;
@@ -749,6 +747,7 @@ public class GlobalDomain : BaseGameDataDomain
 			item.Init();
 		});
 		RefNameMap.DoQueuedLoadRequests();
+		DynamicMapping.Initialize();
 		DomainManager.TaiwuEvent.ReloadAllPackageLanguages();
 		Equipping.InitFormulas();
 		CharacterActionPlanner.Instance.Initialize();

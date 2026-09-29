@@ -16,26 +16,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.ExchangeSystem;
 
-/// <summary>
-/// 对于引用类型字段, 构造函数中可以不创建对象, 保留默认的 null 值.
-/// 在进行反序列化时, 允许所有引用类型字段都为 null.
-/// 但是在序列化时, 要求所有是定长集合的引用字段都已经被创建, 且长度与定义一致. 集合中的引用类型元素若也为定长, 则也必须被创建; 变长的则可以为 null.
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true, NotRestrictCollectionSerializedSize = true)]
 public class ShopExchange : Exchange
 {
 	[SerializableGameDataField]
 	public bool IsGift;
 
-	/// <summary>
-	/// 商会好感
-	/// </summary>
 	[SerializableGameDataField]
 	public int CumulativeMoney;
 
-	/// <summary>
-	/// 商会交易数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantTradeArguments TradeArguments;
 
@@ -45,15 +34,9 @@ public class ShopExchange : Exchange
 	[SerializableGameDataField]
 	public CharacterDisplayData MerchantCharData;
 
-	/// <summary>
-	/// 原始商会超好感数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantOverFavorData MerchantOverFavorData;
 
-	/// <summary>
-	/// 物品变化数据的字典
-	/// </summary>
 	public readonly Dictionary<ItemSourceType, ItemSourceChange> ItemChangeDict = new Dictionary<ItemSourceType, ItemSourceChange>
 	{
 		{
@@ -148,9 +131,6 @@ public class ShopExchange : Exchange
 		}
 	}
 
-	/// <summary>
-	/// 恩义足够交易
-	/// </summary>
 	public bool DebtEnough => TradeArguments.OverFavorData.MerchantOverFavorLevelDataArray.All((MerchantOverFavorLevelData x) => (x?.BuyCount ?? 0) >= 0);
 
 	public int MinDebtLevel
@@ -185,16 +165,11 @@ public class ShopExchange : Exchange
 	{
 		if (!(content is ItemDisplayData itemData))
 		{
-			return content.Value;
+			return content.ExchangeValue;
 		}
 		return GetItemPrice(itemData, IsShopItem(content));
 	}
 
-	/// <summary>
-	/// 检查当前页是否显示
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public bool IsPageShow(int index)
 	{
 		if (IsGift)
@@ -216,11 +191,6 @@ public class ShopExchange : Exchange
 		return false;
 	}
 
-	/// <summary>
-	/// 获取基础偿还等级
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <returns></returns>
 	public static int GetBaseRepayLevel(ItemKey itemKey)
 	{
 		if (ItemTemplateHelper.GetBaseFavorabilityChange(itemKey.ItemType, itemKey.TemplateId) * 10 <= 0 && (itemKey.ItemType != 12 || itemKey.TemplateId != 380))
@@ -230,9 +200,6 @@ public class ShopExchange : Exchange
 		return ItemTemplateHelper.GetMerchantLevel(itemKey.ItemType, itemKey.TemplateId);
 	}
 
-	/// <summary>
-	/// 获取偿还的等级
-	/// </summary>
 	private int GetRepayLevel(ItemKey itemKey)
 	{
 		for (int i = Math.Min(GetBaseRepayLevel(itemKey), Math.Min(MaxDebtLevel, TradeArguments.OverFavorData.MerchantOverFavorLevelDataArray.Length - 1)); i >= 0; i--)
@@ -247,11 +214,6 @@ public class ShopExchange : Exchange
 		return -1;
 	}
 
-	/// <summary>
-	/// 获取超限购买次数的上限
-	/// </summary>
-	/// <param name="merchantLevel"></param>
-	/// <returns></returns>
 	public static short GetMaxBuyCount(int merchantLevel)
 	{
 		short maxBuyCount = GlobalConfig.Instance.MerchantOverFavorBuyCount[merchantLevel];
@@ -262,11 +224,6 @@ public class ShopExchange : Exchange
 		return maxBuyCount;
 	}
 
-	/// <summary>
-	/// 是否为七宝号印
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <returns></returns>
 	public static bool IsSealOfMerchant(ItemKey itemKey)
 	{
 		return itemKey.TemplateEquals(12, 380);
@@ -324,16 +281,13 @@ public class ShopExchange : Exchange
 		return false;
 	}
 
-	/// <summary>
-	/// 计算交易逻辑，在商店交易前调用，调用后必须直接settleTrade并弃用这个ShopExchange对象
-	/// </summary>
 	public void Deal()
 	{
 		ItemKey key;
 		int value;
 		foreach (ExchangeItem exchanged in ExchangeItemList)
 		{
-			_price = ((exchanged.Content is ItemDisplayData data) ? GetItemPrice(data, data.OwnerCharId != TaiwuCharId) : exchanged.Content.Value);
+			_price = ((exchanged.Content is ItemDisplayData data) ? GetItemPrice(data, data.OwnerCharId != TaiwuCharId) : exchanged.Content.ExchangeValue);
 			_isShopItem = IsShopItem(exchanged.Content);
 			_isBuyItem = IsBuyItem(exchanged.Content);
 			_isBuyBackItem = IsBuyBackItem(exchanged.Content);
@@ -397,20 +351,13 @@ public class ShopExchange : Exchange
 				(tradeArguments.MerchantBuyBackData ?? (tradeArguments.MerchantBuyBackData = new MerchantBuyBackData())).BuyInGoodsList.OfflineAdd(key6, count4);
 				if (!TradeArguments.MerchantBuyBackData.BuyInPrice.ContainsKey(key6))
 				{
-					TradeArguments.MerchantBuyBackData.BuyInPrice[key6] = Math.Abs(content.Value / content.Amount);
+					TradeArguments.MerchantBuyBackData.BuyInPrice[key6] = Math.Abs(content.ExchangeValue / content.Amount);
 				}
 			}
 		}
 		TradeArguments.ItemChangeList = ItemChangeDict.Values.ToList();
 	}
 
-	/// <summary>
-	/// 商会好感是否达到精纯限制
-	/// </summary>
-	/// <param name="merchantFavorability">原始好感，仅影响返回值</param>
-	/// <param name="worldProgressLimitedLevel">返回：好感等级阈值</param>
-	/// <param name="worldProgressLimitedFavor">返回：好感阈值</param>
-	/// <returns>原始好感是否达到限制</returns>
 	public static bool IsMerchantFavorabilityReachProgressLimit(int merchantFavorability, out int worldProgressLimitedLevel, out int worldProgressLimitedFavor)
 	{
 		sbyte worldProgress = ExternalDataBridge.Context.XiangshuProgress;
@@ -429,10 +376,6 @@ public class ShopExchange : Exchange
 		return merchantFavorability >= worldProgressLimitedFavor;
 	}
 
-	/// <summary>
-	/// 刷新恩义，返回需要显示恩义icon的最低等级
-	/// </summary>
-	/// <returns>需要显示恩义icon的最低等级</returns>
 	public int RefreshDebt()
 	{
 		if (IsGift)
@@ -511,10 +454,6 @@ public class ShopExchange : Exchange
 		}
 	}
 
-	/// <summary>
-	/// 刷新恩义，返回需要显示恩义icon的最低等级
-	/// </summary>
-	/// <returns>需要显示恩义icon的最低等级</returns>
 	public int RefreshGiftDebt()
 	{
 		int minLevel = MinDebtLevel;
@@ -622,9 +561,6 @@ public class ShopExchange : Exchange
 		return itemBasePrice + itemBasePrice * (itemData.PricePercent = percentValue) / 100;
 	}
 
-	/// <summary>
-	/// 获取物品基础价格
-	/// </summary>
 	public int GetItemBasePrice(ItemDisplayData itemData, bool isBuy)
 	{
 		if (IsAreaDebtShop)
@@ -666,11 +602,6 @@ public class ShopExchange : Exchange
 		return (int)(value * percentValue * (100 + (itemData.EquipmentEffectIds?.Sum((short x) => EquipmentEffect.Instance[x].ValueChange) ?? 0)) / 10000);
 	}
 
-	/// <summary>
-	/// 获取世界细节对价格的影响
-	/// </summary>
-	/// <param name="isBuy"></param>
-	/// <returns></returns>
 	public int GetWorldDetailPriceRate(bool isBuy)
 	{
 		if (!isBuy)
@@ -680,13 +611,9 @@ public class ShopExchange : Exchange
 		return 100;
 	}
 
-	/// <summary>
-	/// 检查是额外商品
-	/// </summary>
-	/// <returns></returns>
-	public bool CheckIsExtra(int id, out MerchantExtraGoodsData.ExtraGoodsType extraGoodsType)
+	public bool CheckIsExtra(int id, out MerchantExtraGoodsType extraGoodsType)
 	{
-		extraGoodsType = MerchantExtraGoodsData.ExtraGoodsType.None;
+		extraGoodsType = MerchantExtraGoodsType.None;
 		if (TradeArguments.OpenShopEventArguments.IsSettlementTreasury)
 		{
 			return false;
@@ -694,9 +621,6 @@ public class ShopExchange : Exchange
 		return ExtraGoodsData?.Check(id, out extraGoodsType) ?? false;
 	}
 
-	/// <summary>
-	/// 获取当前价格百分比，用的时候要除以100，注意结果可能为负值
-	/// </summary>
 	public int GetPricePercentValue(ITradeableContent itemData, bool isBuy)
 	{
 		if (IsAreaDebtShop)
@@ -777,13 +701,11 @@ public class ShopExchange : Exchange
 		return GetFavorability(val);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public override bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public override int GetSerializedSize()
 	{
 		int totalSize = 65;
@@ -813,7 +735,6 @@ public class ShopExchange : Exchange
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe override int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -961,7 +882,6 @@ public class ShopExchange : Exchange
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe override int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇大事件太吾数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class AdventureMajorEventTaiwu : ISerializableGameData
 {
@@ -28,54 +25,27 @@ public class AdventureMajorEventTaiwu : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "AdventureId", "Current", "CurrentMain", "UnlockedNodes", "VisitedNodes" };
 	}
 
-	/// <summary>
-	/// 当前所处的奇遇 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int AdventureId;
 
-	/// <summary>
-	/// 当前所在节点
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int Current;
 
-	/// <summary>
-	/// 当前主要节点
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int CurrentMain;
 
-	/// <summary>
-	/// 当前可访问的节点
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public List<int> UnlockedNodes = new List<int>();
 
-	/// <summary>
-	/// 当前已访问的节点
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public List<int> VisitedNodes = new List<int>();
 
-	/// <summary>
-	/// 当前是否进入了任意奇遇，奇遇运行时 ID 限制从 1 开始，因此默认值 0 也被视为未处于奇遇
-	/// </summary>
 	public bool InAdventure => AdventureId >= 1;
 
-	/// <summary>
-	/// 当前是否未进入任意奇遇
-	/// </summary>
 	public bool NotInAdventure => !InAdventure;
 
-	/// <summary>
-	/// 大事件数据
-	/// </summary>
 	public AdventureMajorEvent MajorEvent => ExternalDataBridge.Context.GetMajorEvent(AdventureId);
 
-	/// <summary>
-	/// 重置数据
-	/// </summary>
 	public void Reset()
 	{
 		AdventureId = 0;
@@ -84,16 +54,10 @@ public class AdventureMajorEventTaiwu : ISerializableGameData
 		VisitedNodes.Clear();
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AdventureMajorEventTaiwu()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AdventureMajorEventTaiwu(AdventureMajorEventTaiwu other)
 	{
 		AdventureId = other.AdventureId;
@@ -103,9 +67,6 @@ public class AdventureMajorEventTaiwu : ISerializableGameData
 		VisitedNodes = ((other.VisitedNodes == null) ? null : new List<int>(other.VisitedNodes));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AdventureMajorEventTaiwu other)
 	{
 		AdventureId = other.AdventureId;

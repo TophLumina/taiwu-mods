@@ -8,151 +8,64 @@ namespace Config;
 [Serializable]
 public class AiRelations : ConfigData<AiRelationsItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public const short StartEnemyRelation = 0;
 
-		/// <summary>
-		/// 化解仇怨
-		/// </summary>
 		public const short EndEnemyRelation = 1;
 
-		/// <summary>
-		/// 爱慕
-		/// </summary>
 		public const short StartAdoredRelation = 2;
 
-		/// <summary>
-		/// 表白
-		/// </summary>
 		public const short StartBoyOrGirlFriendRelation = 3;
 
-		/// <summary>
-		/// 分手
-		/// </summary>
 		public const short EndBoyOrGirlFriendRelation = 4;
 
-		/// <summary>
-		/// 求婚
-		/// </summary>
 		public const short StartHusbandOrWifeRelation = 5;
 
-		/// <summary>
-		/// 结为好友
-		/// </summary>
 		public const short StartFriendRelation = 6;
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public const short EndFriendRelation = 7;
 
-		/// <summary>
-		/// 义结金兰
-		/// </summary>
 		public const short StartSwornBrotherOrSisterRelation = 8;
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public const short EndSwornBrotherOrSisterRelation = 9;
 
-		/// <summary>
-		/// 拜认父母
-		/// </summary>
 		public const short GetAdoptedRelation = 10;
 
-		/// <summary>
-		/// 收养子女
-		/// </summary>
 		public const short AdoptingRelation = 11;
 
-		/// <summary>
-		/// 离婚
-		/// </summary>
 		public const short EndHusbandOrWifeRelation = 12;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public static AiRelationsItem StartEnemyRelation => Instance[(short)0];
 
-		/// <summary>
-		/// 化解仇怨
-		/// </summary>
 		public static AiRelationsItem EndEnemyRelation => Instance[(short)1];
 
-		/// <summary>
-		/// 爱慕
-		/// </summary>
 		public static AiRelationsItem StartAdoredRelation => Instance[(short)2];
 
-		/// <summary>
-		/// 表白
-		/// </summary>
 		public static AiRelationsItem StartBoyOrGirlFriendRelation => Instance[(short)3];
 
-		/// <summary>
-		/// 分手
-		/// </summary>
 		public static AiRelationsItem EndBoyOrGirlFriendRelation => Instance[(short)4];
 
-		/// <summary>
-		/// 求婚
-		/// </summary>
 		public static AiRelationsItem StartHusbandOrWifeRelation => Instance[(short)5];
 
-		/// <summary>
-		/// 结为好友
-		/// </summary>
 		public static AiRelationsItem StartFriendRelation => Instance[(short)6];
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public static AiRelationsItem EndFriendRelation => Instance[(short)7];
 
-		/// <summary>
-		/// 义结金兰
-		/// </summary>
 		public static AiRelationsItem StartSwornBrotherOrSisterRelation => Instance[(short)8];
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public static AiRelationsItem EndSwornBrotherOrSisterRelation => Instance[(short)9];
 
-		/// <summary>
-		/// 拜认父母
-		/// </summary>
 		public static AiRelationsItem GetAdoptedRelation => Instance[(short)10];
 
-		/// <summary>
-		/// 收养子女
-		/// </summary>
 		public static AiRelationsItem AdoptingRelation => Instance[(short)11];
 
-		/// <summary>
-		/// 离婚
-		/// </summary>
 		public static AiRelationsItem EndHusbandOrWifeRelation => Instance[(short)12];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AiRelations Instance = new AiRelations();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "PersonalityType" };

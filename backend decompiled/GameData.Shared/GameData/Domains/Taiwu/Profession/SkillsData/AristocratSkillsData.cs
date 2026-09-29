@@ -24,14 +24,12 @@ public class AristocratSkillsData : IProfessionSkillsData, ISerializableGameData
 	[SerializableGameDataField]
 	private List<int> _recommendedCharIds;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		_influencePowerBonus?.Clear();
 		_recommendedCharIds?.Clear();
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 		if (!(sourceData is ObsoleteAristocratSkillsData skillsData))
@@ -44,12 +42,6 @@ public class AristocratSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 离线设置对指定角色的势力值加成
-	/// </summary>
-	/// <param name="targetCharId">目标角色</param>
-	/// <param name="bonus"></param>
-	/// <returns></returns>
 	public short OfflineSetInfluencePowerBonus(int targetCharId, short bonus)
 	{
 		if (!_influencePowerBonus.TryGetValue(targetCharId, out var previousBonus))
@@ -65,11 +57,6 @@ public class AristocratSkillsData : IProfessionSkillsData, ISerializableGameData
 		return _influencePowerBonus.Remove(targetCharId);
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="targetCharId"></param>
-	/// <returns></returns>
 	public short GetPreviousInfluencePowerBonus(int targetCharId)
 	{
 		if (!_influencePowerBonus.TryGetValue(targetCharId, out var previousBonus))
@@ -106,40 +93,29 @@ public class AristocratSkillsData : IProfessionSkillsData, ISerializableGameData
 		return _influencePowerBonus.ContainsKey(charId);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AristocratSkillsData()
 	{
 		_influencePowerBonus = new Dictionary<int, short>();
 		_recommendedCharIds = new List<int>();
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AristocratSkillsData(AristocratSkillsData other)
 	{
 		_influencePowerBonus = ((other._influencePowerBonus == null) ? null : new Dictionary<int, short>(other._influencePowerBonus));
 		_recommendedCharIds = ((other._recommendedCharIds == null) ? null : new List<int>(other._recommendedCharIds));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AristocratSkillsData other)
 	{
 		_influencePowerBonus = ((other._influencePowerBonus == null) ? null : new Dictionary<int, short>(other._influencePowerBonus));
 		_recommendedCharIds = ((other._recommendedCharIds == null) ? null : new List<int>(other._recommendedCharIds));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -152,7 +128,6 @@ public class AristocratSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -184,7 +159,6 @@ public class AristocratSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

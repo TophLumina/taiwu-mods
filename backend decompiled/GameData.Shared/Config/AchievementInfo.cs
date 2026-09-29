@@ -7,2991 +7,1200 @@ namespace Config;
 [Serializable]
 public class AchievementInfo : ConfigData<AchievementInfoItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 真正的山猪
-		/// </summary>
 		public const short RealPig = 0;
 
-		/// <summary>
-		/// 初出茅庐
-		/// </summary>
 		public const short ChuChuMaoLu = 1;
 
-		/// <summary>
-		/// 桃源一梦
-		/// </summary>
 		public const short TaoYuanYiMeng = 2;
 
-		/// <summary>
-		/// 太吾复归
-		/// </summary>
 		public const short TaiWuFuGui = 3;
 
-		/// <summary>
-		/// 再续香火
-		/// </summary>
 		public const short ZaiXuXiangHuo = 4;
 
-		/// <summary>
-		/// 重开驿路
-		/// </summary>
 		public const short ChongKaiYiLu = 5;
 
-		/// <summary>
-		/// 神女还剑
-		/// </summary>
 		public const short ShenNvHuanJian = 6;
 
-		/// <summary>
-		/// 镇狱伏邪
-		/// </summary>
 		public const short ZhenYuFuXie = 7;
 
-		/// <summary>
-		/// 奇寒灵气
-		/// </summary>
 		public const short QiHanLingQi = 8;
 
-		/// <summary>
-		/// 七文五彩
-		/// </summary>
 		public const short QiWenWuCai = 9;
 
-		/// <summary>
-		/// 倾国绝世
-		/// </summary>
 		public const short QingGuoJueShi = 10;
 
-		/// <summary>
-		/// 龙胎化命
-		/// </summary>
 		public const short LongTaiHuaMing = 11;
 
-		/// <summary>
-		/// 溶尘化玉
-		/// </summary>
 		public const short RongChenHuaYu = 12;
 
-		/// <summary>
-		/// 八肱八趾
-		/// </summary>
 		public const short BaGongBaZhi = 13;
 
-		/// <summary>
-		/// 方天敕令
-		/// </summary>
 		public const short FangTianChiLing = 14;
 
-		/// <summary>
-		/// 九剑归一
-		/// </summary>
 		public const short JiuJianGuiYi = 15;
 
-		/// <summary>
-		/// 仙客奇书
-		/// </summary>
 		public const short XianKeQiShu = 16;
 
-		/// <summary>
-		/// 武林盟会
-		/// </summary>
 		public const short WuLinMengHui = 17;
 
-		/// <summary>
-		/// 爪牙伏诛
-		/// </summary>
 		public const short ZhaoYaFuZhu = 18;
 
-		/// <summary>
-		/// 出神之地
-		/// </summary>
 		public const short ChuShenZhiDi = 19;
 
-		/// <summary>
-		/// 返梦魂回
-		/// </summary>
 		public const short FanMengHunHui = 20;
 
-		/// <summary>
-		/// 神火金身
-		/// </summary>
 		public const short ShenHuoJinShen = 21;
 
-		/// <summary>
-		/// 七元万道
-		/// </summary>
 		public const short QiYuanWanDao = 22;
 
-		/// <summary>
-		/// 玄相真魔
-		/// </summary>
 		public const short XuanXiangZhenMo = 23;
 
-		/// <summary>
-		/// 英雄猴杰
-		/// </summary>
 		public const short YingXiongHouJie = 24;
 
-		/// <summary>
-		/// 阿牛同行
-		/// </summary>
 		public const short ANiuTongXing = 25;
 
-		/// <summary>
-		/// 小猫同行
-		/// </summary>
 		public const short XiaoMaoTongXing = 26;
 
-		/// <summary>
-		/// 郭彦同行
-		/// </summary>
 		public const short GuoYanTongXing = 27;
 
-		/// <summary>
-		/// 还月同行
-		/// </summary>
 		public const short HuanYueTongXing = 28;
 
-		/// <summary>
-		/// 巨蛇就擒
-		/// </summary>
 		public const short JuSheJiuQin = 29;
 
-		/// <summary>
-		/// 无名剑冢
-		/// </summary>
 		public const short WuMingJianZhong = 30;
 
-		/// <summary>
-		/// 太吾村覆灭
-		/// </summary>
 		public const short TaiWuCunFuMie = 31;
 
-		/// <summary>
-		/// 退魔辟邪
-		/// </summary>
 		public const short TuiMoBiXie = 32;
 
-		/// <summary>
-		/// 还剑之愿
-		/// </summary>
 		public const short HuanJianZhiYuan = 33;
 
-		/// <summary>
-		/// 除魔之誓
-		/// </summary>
 		public const short ChuMoZhiShi = 34;
 
-		/// <summary>
-		/// 囿于俗见
-		/// </summary>
 		public const short YouYuSuJian = 35;
 
-		/// <summary>
-		/// 苦寻圣人
-		/// </summary>
 		public const short KuXunShengRen = 36;
 
-		/// <summary>
-		/// 焚心之悲
-		/// </summary>
 		public const short FenXinZhiBei = 37;
 
-		/// <summary>
-		/// 舍身求道
-		/// </summary>
 		public const short SheShenQiuDao = 38;
 
-		/// <summary>
-		/// 无瑕之念
-		/// </summary>
 		public const short WuXiaZhiNian = 39;
 
-		/// <summary>
-		/// 百战不折
-		/// </summary>
 		public const short BaiZhanBuZhe = 40;
 
-		/// <summary>
-		/// 恩义难全
-		/// </summary>
 		public const short EnYiNanQuan = 41;
 
-		/// <summary>
-		/// 禅武之道
-		/// </summary>
 		public const short ChanWuZhiDao = 42;
 
-		/// <summary>
-		/// 禅武之道·续
-		/// </summary>
 		public const short ChanWuZhiDaoXu = 43;
 
-		/// <summary>
-		/// 隐世白猿
-		/// </summary>
 		public const short YinShiBaiYuan = 44;
 
-		/// <summary>
-		/// 隐世白猿·续
-		/// </summary>
 		public const short YinShiBaiYuanXu = 45;
 
-		/// <summary>
-		/// 玄鸮白鹿
-		/// </summary>
 		public const short XuanXiaoBaiLu = 46;
 
-		/// <summary>
-		/// 玄鸮白鹿·续
-		/// </summary>
 		public const short XuanXiaoBaiLuXu = 47;
 
-		/// <summary>
-		/// 龟蛇蟠扶
-		/// </summary>
 		public const short GuiShePanFu = 48;
 
-		/// <summary>
-		/// 龟蛇蟠扶·续
-		/// </summary>
 		public const short GuiShePanFuXu = 49;
 
-		/// <summary>
-		/// 石牢三魔
-		/// </summary>
 		public const short ShiLaoSanMo = 50;
 
-		/// <summary>
-		/// 石牢三魔·续
-		/// </summary>
 		public const short ShiLaoSanMoXu = 51;
 
-		/// <summary>
-		/// 文武双全
-		/// </summary>
 		public const short WenWuShuangQuan = 52;
 
-		/// <summary>
-		/// 文武双全·续
-		/// </summary>
 		public const short WenWuShuangQuanXu = 53;
 
-		/// <summary>
-		/// 青琅仙阁
-		/// </summary>
 		public const short QingLangXianGe = 54;
 
-		/// <summary>
-		/// 青琅仙阁·续
-		/// </summary>
 		public const short QingLangXianGeXu = 55;
 
-		/// <summary>
-		/// 镜水倒颠
-		/// </summary>
 		public const short JingShuiDaoDian = 56;
 
-		/// <summary>
-		/// 镜水倒颠·续
-		/// </summary>
 		public const short JingShuiDaoDianXu = 57;
 
-		/// <summary>
-		/// 铜生试剑
-		/// </summary>
 		public const short TongShengShiJian = 58;
 
-		/// <summary>
-		/// 铜生试剑·续
-		/// </summary>
 		public const short TongShengShiJianXu = 59;
 
-		/// <summary>
-		/// 奇毒绝方
-		/// </summary>
 		public const short QiDuJueFang = 60;
 
-		/// <summary>
-		/// 奇毒绝方·续
-		/// </summary>
 		public const short QiDuJueFangXu = 61;
 
-		/// <summary>
-		/// 真经无字
-		/// </summary>
 		public const short ZhenJingWuZi = 62;
 
-		/// <summary>
-		/// 真经无字·续
-		/// </summary>
 		public const short ZhenJingWuZiXu = 63;
 
-		/// <summary>
-		/// 五圣心毒
-		/// </summary>
 		public const short WuShengXinDu = 64;
 
-		/// <summary>
-		/// 五圣心毒·续
-		/// </summary>
 		public const short WuShengXinDuXu = 65;
 
-		/// <summary>
-		/// 善恶无生
-		/// </summary>
 		public const short ShanEWuSheng = 66;
 
-		/// <summary>
-		/// 善恶无生·续
-		/// </summary>
 		public const short ShanEWuShengXu = 67;
 
-		/// <summary>
-		/// 伏龙化羽
-		/// </summary>
 		public const short FuLongHuaYu = 68;
 
-		/// <summary>
-		/// 伏龙化羽·续
-		/// </summary>
 		public const short FuLongHuaYuXu = 69;
 
-		/// <summary>
-		/// 血冢遗姝
-		/// </summary>
 		public const short XueZhongYiShu = 70;
 
-		/// <summary>
-		/// 血冢遗姝·续
-		/// </summary>
 		public const short XueZhongYiShuXu = 71;
 
-		/// <summary>
-		/// 绘卷新篇
-		/// </summary>
 		public const short HuiJuanXinPian = 72;
 
-		/// <summary>
-		/// 前尘往事
-		/// </summary>
 		public const short QianChenWangShi = 73;
 
-		/// <summary>
-		/// 剑中记忆
-		/// </summary>
 		public const short JianZhongJiYi = 74;
 
-		/// <summary>
-		/// 再续前缘
-		/// </summary>
 		public const short ZaiXuQianYuan = 75;
 
-		/// <summary>
-		/// 玄狱之劫
-		/// </summary>
 		public const short XuanYuZhiJie = 76;
 
-		/// <summary>
-		/// 任其自然
-		/// </summary>
 		public const short RenQiZiRan = 77;
 
-		/// <summary>
-		/// 福泽绵长
-		/// </summary>
 		public const short FuZeMianChang = 78;
 
-		/// <summary>
-		/// 一脉相承
-		/// </summary>
 		public const short YiMaiXiangCheng = 79;
 
-		/// <summary>
-		/// 后继有人
-		/// </summary>
 		public const short HouJiYouRen = 80;
 
-		/// <summary>
-		/// 薪火相传
-		/// </summary>
 		public const short XinHuoXiangChuan = 81;
 
-		/// <summary>
-		/// 一世通天
-		/// </summary>
 		public const short YiShiTongTian = 82;
 
-		/// <summary>
-		/// 十世相承
-		/// </summary>
 		public const short ShiShiXiangCheng = 83;
 
-		/// <summary>
-		/// 重操旧业
-		/// </summary>
 		public const short ChongCaoJiuYe = 84;
 
-		/// <summary>
-		/// 伏虞护命
-		/// </summary>
 		public const short FuYuHuMing = 85;
 
-		/// <summary>
-		/// 有相皆痴苦
-		/// </summary>
 		public const short YouXiangJieChiKu = 86;
 
-		/// <summary>
-		/// 无人脱网罗
-		/// </summary>
 		public const short WuRenTuoWangLuo = 87;
 
-		/// <summary>
-		/// 恶贯满盈
-		/// </summary>
 		public const short EGuanManYing = 88;
 
-		/// <summary>
-		/// 名扬四海
-		/// </summary>
 		public const short MingYangSiHai = 89;
 
-		/// <summary>
-		/// 顺心而行
-		/// </summary>
 		public const short ShunXinErXing = 90;
 
-		/// <summary>
-		/// 违心之举
-		/// </summary>
 		public const short WeiXinZhiJu = 91;
 
-		/// <summary>
-		/// 笑口常开
-		/// </summary>
 		public const short XiaoKouChangKai = 92;
 
-		/// <summary>
-		/// 肝肠寸断
-		/// </summary>
 		public const short GanChangCunDuan = 93;
 
-		/// <summary>
-		/// 长生久视
-		/// </summary>
 		public const short ChangShengJiuShi = 94;
 
-		/// <summary>
-		/// 志同道合
-		/// </summary>
 		public const short ZhiTongDaoHe = 95;
 
-		/// <summary>
-		/// 连理同心
-		/// </summary>
 		public const short LianLiTongXin = 96;
 
-		/// <summary>
-		/// 呱呱坠地
-		/// </summary>
 		public const short GuGuZhuiDi = 97;
 
-		/// <summary>
-		/// 多子多福
-		/// </summary>
 		public const short DuoZiDuoFu = 98;
 
-		/// <summary>
-		/// 异胎降世
-		/// </summary>
 		public const short YiTaiJiangShi = 99;
 
-		/// <summary>
-		/// 远走高飞
-		/// </summary>
 		public const short YuanGaoFeiZou = 100;
 
-		/// <summary>
-		/// 金兰之契
-		/// </summary>
 		public const short JinLanZhiQi = 101;
 
-		/// <summary>
-		/// 飘零半生
-		/// </summary>
 		public const short PiaoLingBanSheng = 102;
 
-		/// <summary>
-		/// 三生石上
-		/// </summary>
 		public const short SanShengShiShang = 103;
 
-		/// <summary>
-		/// 倒反纲常
-		/// </summary>
 		public const short DaoFanGangChang = 104;
 
-		/// <summary>
-		/// 众星捧月
-		/// </summary>
 		public const short ZhongXingPengYue = 105;
 
-		/// <summary>
-		/// 众矢之的
-		/// </summary>
 		public const short ZhongShiZhiDi = 106;
 
-		/// <summary>
-		/// 使命必达
-		/// </summary>
 		public const short ShiMingBiDa = 107;
 
-		/// <summary>
-		/// 寸草不生
-		/// </summary>
 		public const short CunCaoBuSheng = 108;
 
-		/// <summary>
-		/// 爱恨交织
-		/// </summary>
 		public const short AiHenJiaoZhi = 109;
 
-		/// <summary>
-		/// 江湖百晓生
-		/// </summary>
 		public const short JiangHuBaiXiaoSheng = 110;
 
-		/// <summary>
-		/// 点到为止
-		/// </summary>
 		public const short DianDaoWeiZhi = 111;
 
-		/// <summary>
-		/// 身经百战
-		/// </summary>
 		public const short ShenJingBaiZhan = 112;
 
-		/// <summary>
-		/// 应对自如
-		/// </summary>
 		public const short YingDuiZiRu = 113;
 
-		/// <summary>
-		/// 不死不休
-		/// </summary>
 		public const short BuSiBuXiu = 114;
 
-		/// <summary>
-		/// 良言美意
-		/// </summary>
 		public const short LiangYanMeiYi = 115;
 
-		/// <summary>
-		/// 恶语伤人
-		/// </summary>
 		public const short EYuShangRen = 116;
 
-		/// <summary>
-		/// 五花八门
-		/// </summary>
 		public const short WuHuaBaMen = 117;
 
-		/// <summary>
-		/// 走为上计
-		/// </summary>
 		public const short ZouWeiShangJi = 118;
 
-		/// <summary>
-		/// 甘拜下风
-		/// </summary>
 		public const short GanBaiXiaFeng = 119;
 
-		/// <summary>
-		/// 五花大绑
-		/// </summary>
 		public const short WuHuaDaBang = 120;
 
-		/// <summary>
-		/// 伏虞救厄
-		/// </summary>
 		public const short FuYuJiuE = 121;
 
-		/// <summary>
-		/// 除魔卫道
-		/// </summary>
 		public const short ChuMoWeiDao = 122;
 
-		/// <summary>
-		/// 再造之恩
-		/// </summary>
 		public const short ZaiZaoZhiEn = 123;
 
-		/// <summary>
-		/// 仗义行侠
-		/// </summary>
 		public const short ZhangYiXingXia = 124;
 
-		/// <summary>
-		/// 逆我者亡
-		/// </summary>
 		public const short NiWoZheWang = 125;
 
-		/// <summary>
-		/// 降龙伏虎
-		/// </summary>
 		public const short XiangLongFuHu = 126;
 
-		/// <summary>
-		/// 辗转腾挪
-		/// </summary>
 		public const short ZhanZhuanTengNuo = 127;
 
-		/// <summary>
-		/// 不动如山
-		/// </summary>
 		public const short BuDongRuShan = 128;
 
-		/// <summary>
-		/// 变化莫测
-		/// </summary>
 		public const short BianHuaMoCe = 129;
 
-		/// <summary>
-		/// 齐心协力
-		/// </summary>
 		public const short QiXinXieLi = 130;
 
-		/// <summary>
-		/// 祸起萧墙
-		/// </summary>
 		public const short HuoQiXiaoQiang = 131;
 
-		/// <summary>
-		/// 他强由他强
-		/// </summary>
 		public const short TaQiangYouTaQiang = 132;
 
-		/// <summary>
-		/// 排山倒海
-		/// </summary>
 		public const short PaiShanDaoHai = 133;
 
-		/// <summary>
-		/// 洞金裂石
-		/// </summary>
 		public const short DongJinLieShi = 134;
 
-		/// <summary>
-		/// 踢星踏月
-		/// </summary>
 		public const short TiXingTaYue = 135;
 
-		/// <summary>
-		/// 飞花摘叶
-		/// </summary>
 		public const short FeiHuaZhaiYe = 136;
 
-		/// <summary>
-		/// 剑气纵横
-		/// </summary>
 		public const short JianQiZongHeng = 137;
 
-		/// <summary>
-		/// 劈波斩浪
-		/// </summary>
 		public const short PiBoZhanLang = 138;
 
-		/// <summary>
-		/// 寸长寸强
-		/// </summary>
 		public const short CunChangCunQiang = 139;
 
-		/// <summary>
-		/// 奇门异术
-		/// </summary>
 		public const short QiMenYiShu = 140;
 
-		/// <summary>
-		/// 势若游龙
-		/// </summary>
 		public const short ShiRuoYouLong = 141;
 
-		/// <summary>
-		/// 百步穿杨
-		/// </summary>
 		public const short BaiBuChuanYang = 142;
 
-		/// <summary>
-		/// 魔音贯耳
-		/// </summary>
 		public const short MoYinGuanEr = 143;
 
-		/// <summary>
-		/// 势不可挡
-		/// </summary>
 		public const short ShiBuKeDang = 144;
 
-		/// <summary>
-		/// 蹩脚功夫
-		/// </summary>
 		public const short BieJiaoGongFu = 145;
 
-		/// <summary>
-		/// 分筋错骨
-		/// </summary>
 		public const short FenJinCuoGu = 146;
 
-		/// <summary>
-		/// 身残志坚
-		/// </summary>
 		public const short ShenCanZhiJian = 147;
 
-		/// <summary>
-		/// 毒气攻心
-		/// </summary>
 		public const short DuQiGongXin = 148;
 
-		/// <summary>
-		/// 七彩玲珑心
-		/// </summary>
 		public const short QiCaiLingLongXin = 149;
 
-		/// <summary>
-		/// 气冲斗牛
-		/// </summary>
 		public const short QiChongDouNiu = 150;
 
-		/// <summary>
-		/// 气散功消
-		/// </summary>
 		public const short QiSanGongXiao = 151;
 
-		/// <summary>
-		/// 穷追猛打
-		/// </summary>
 		public const short QiongZhuiMengDa = 152;
 
-		/// <summary>
-		/// 心有所向
-		/// </summary>
 		public const short XinYouSuoXiang = 153;
 
-		/// <summary>
-		/// 志有所成
-		/// </summary>
 		public const short ZhiYouSuoCheng = 154;
 
-		/// <summary>
-		/// 山中高士
-		/// </summary>
 		public const short ShanZhongGaoShi = 155;
 
-		/// <summary>
-		/// 百兽之王
-		/// </summary>
 		public const short BaiShouZhiWang = 156;
 
-		/// <summary>
-		/// 巧夺天工
-		/// </summary>
 		public const short QiaoDuoTianGong = 157;
 
-		/// <summary>
-		/// 一呼百应
-		/// </summary>
 		public const short YiHuBaiYing = 158;
 
-		/// <summary>
-		/// 才高八斗
-		/// </summary>
 		public const short CaiGaoBaDou = 159;
 
-		/// <summary>
-		/// 道法自然
-		/// </summary>
 		public const short DaoFaZiRan = 160;
 
-		/// <summary>
-		/// 功德圆满
-		/// </summary>
 		public const short GongDeYuanMan = 161;
 
-		/// <summary>
-		/// 酒中豪杰
-		/// </summary>
 		public const short JiuZhongHaoJie = 162;
 
-		/// <summary>
-		/// 钟鸣鼎食
-		/// </summary>
 		public const short ZhongMingDingShi = 163;
 
-		/// <summary>
-		/// 游戏人间
-		/// </summary>
 		public const short YouXiRenJian = 164;
 
-		/// <summary>
-		/// 布衣自适
-		/// </summary>
 		public const short BuYiZiShi = 165;
 
-		/// <summary>
-		/// 行遍天涯
-		/// </summary>
 		public const short XingBianTianYa = 166;
 
-		/// <summary>
-		/// 明心见性
-		/// </summary>
 		public const short MingXinJianXing = 167;
 
-		/// <summary>
-		/// 妙手回春
-		/// </summary>
 		public const short MiaoShouHuiChun = 168;
 
-		/// <summary>
-		/// 化外逍遥
-		/// </summary>
 		public const short HuaWaiXiaoYao = 169;
 
-		/// <summary>
-		/// 挥金如土
-		/// </summary>
 		public const short HuiJinRuTu = 170;
 
-		/// <summary>
-		/// 风流雅士
-		/// </summary>
 		public const short FengLiuYaShi = 171;
 
-		/// <summary>
-		/// 万民来朝
-		/// </summary>
 		public const short WanMinLaiChao = 172;
 
-		/// <summary>
-		/// 诸业精通
-		/// </summary>
 		public const short ZhuYeJingTong = 173;
 
-		/// <summary>
-		/// 初窥门径
-		/// </summary>
 		public const short ChuKuiMenJing = 174;
 
-		/// <summary>
-		/// 术业专攻
-		/// </summary>
 		public const short ShuYeZhuanGong = 175;
 
-		/// <summary>
-		/// 音律大成
-		/// </summary>
 		public const short YinLvDaCheng = 176;
 
-		/// <summary>
-		/// 弈棋大成
-		/// </summary>
 		public const short YiQiDaCheng = 177;
 
-		/// <summary>
-		/// 诗书大成
-		/// </summary>
 		public const short ShiShuDaCheng = 178;
 
-		/// <summary>
-		/// 绘画大成
-		/// </summary>
 		public const short HuiHuaDaCheng = 179;
 
-		/// <summary>
-		/// 术数大成
-		/// </summary>
 		public const short ShuShuDaCheng = 180;
 
-		/// <summary>
-		/// 品鉴大成
-		/// </summary>
 		public const short PinJianDaCheng = 181;
 
-		/// <summary>
-		/// 锻造大成
-		/// </summary>
 		public const short DuanZaoDaCheng = 182;
 
-		/// <summary>
-		/// 制木大成
-		/// </summary>
 		public const short ZhiMuDaCheng = 183;
 
-		/// <summary>
-		/// 医术大成
-		/// </summary>
 		public const short YiShuDaCheng = 184;
 
-		/// <summary>
-		/// 毒术大成
-		/// </summary>
 		public const short DuShuDaCheng = 185;
 
-		/// <summary>
-		/// 织锦大成
-		/// </summary>
 		public const short ZhiJinDaCheng = 186;
 
-		/// <summary>
-		/// 巧匠大成
-		/// </summary>
 		public const short QiaoJiangDaCheng = 187;
 
-		/// <summary>
-		/// 道法大成
-		/// </summary>
 		public const short DaoFaDaCheng = 188;
 
-		/// <summary>
-		/// 佛学大成
-		/// </summary>
 		public const short FoXueDaCheng = 189;
 
-		/// <summary>
-		/// 厨艺大成
-		/// </summary>
 		public const short ChuYiDaCheng = 190;
 
-		/// <summary>
-		/// 杂学大成
-		/// </summary>
 		public const short ZaXueDaCheng = 191;
 
-		/// <summary>
-		/// 学究天人
-		/// </summary>
 		public const short XueJiuTianRen = 192;
 
-		/// <summary>
-		/// 技高一筹
-		/// </summary>
 		public const short JiGaoYiChou = 193;
 
-		/// <summary>
-		/// 舌灿莲花
-		/// </summary>
 		public const short SheCanLianHua = 194;
 
-		/// <summary>
-		/// 初学乍练
-		/// </summary>
 		public const short ChuXueZhaLian = 195;
 
-		/// <summary>
-		/// 尽得真传
-		/// </summary>
 		public const short JinDeZhenChuan = 196;
 
-		/// <summary>
-		/// 少林绝学
-		/// </summary>
 		public const short ShaoLinJueXue = 197;
 
-		/// <summary>
-		/// 峨眉绝学
-		/// </summary>
 		public const short EMeiJueXue = 198;
 
-		/// <summary>
-		/// 百花绝学
-		/// </summary>
 		public const short BaiHuaJueXue = 199;
 
-		/// <summary>
-		/// 武当绝学
-		/// </summary>
 		public const short WuDangJueXue = 200;
 
-		/// <summary>
-		/// 元山绝学
-		/// </summary>
 		public const short YuanShanJueXue = 201;
 
-		/// <summary>
-		/// 狮相绝学
-		/// </summary>
 		public const short ShiXiangJueXue = 202;
 
-		/// <summary>
-		/// 然山绝学
-		/// </summary>
 		public const short RanShanJueXue = 203;
 
-		/// <summary>
-		/// 璇女绝学
-		/// </summary>
 		public const short XuanNvJueXue = 204;
 
-		/// <summary>
-		/// 铸剑绝学
-		/// </summary>
 		public const short ZhuJianJueXue = 205;
 
-		/// <summary>
-		/// 空桑绝学
-		/// </summary>
 		public const short KongSangJueXue = 206;
 
-		/// <summary>
-		/// 金刚绝学
-		/// </summary>
 		public const short JinGangJueXue = 207;
 
-		/// <summary>
-		/// 五仙绝学
-		/// </summary>
 		public const short WuXianJueXue = 208;
 
-		/// <summary>
-		/// 界青绝学
-		/// </summary>
 		public const short JieQingJueXue = 209;
 
-		/// <summary>
-		/// 伏龙绝学
-		/// </summary>
 		public const short FuLongJueXue = 210;
 
-		/// <summary>
-		/// 血犼绝学
-		/// </summary>
 		public const short XueHaoJueXue = 211;
 
-		/// <summary>
-		/// 功参造化
-		/// </summary>
 		public const short GongCanZaoHua = 212;
 
-		/// <summary>
-		/// 少林盟誓
-		/// </summary>
 		public const short ShaoLinMengShi = 213;
 
-		/// <summary>
-		/// 峨眉盟誓
-		/// </summary>
 		public const short EMeiMengShi = 214;
 
-		/// <summary>
-		/// 百花盟誓
-		/// </summary>
 		public const short BaiHuaMengShi = 215;
 
-		/// <summary>
-		/// 武当盟誓
-		/// </summary>
 		public const short WuDangMengShi = 216;
 
-		/// <summary>
-		/// 元山盟誓
-		/// </summary>
 		public const short YuanShanMengShi = 217;
 
-		/// <summary>
-		/// 狮相盟誓
-		/// </summary>
 		public const short ShiXiangMengShi = 218;
 
-		/// <summary>
-		/// 然山盟誓
-		/// </summary>
 		public const short RanShanMengShi = 219;
 
-		/// <summary>
-		/// 璇女盟誓
-		/// </summary>
 		public const short XuanNvMengShi = 220;
 
-		/// <summary>
-		/// 铸剑盟誓
-		/// </summary>
 		public const short ZhuJianMengShi = 221;
 
-		/// <summary>
-		/// 空桑盟誓
-		/// </summary>
 		public const short KongSangMengShi = 222;
 
-		/// <summary>
-		/// 金刚盟誓
-		/// </summary>
 		public const short JinGangMengShi = 223;
 
-		/// <summary>
-		/// 五仙盟誓
-		/// </summary>
 		public const short WuXianMengShi = 224;
 
-		/// <summary>
-		/// 界青盟誓
-		/// </summary>
 		public const short JieQingMengShi = 225;
 
-		/// <summary>
-		/// 伏龙盟誓
-		/// </summary>
 		public const short FuLongMengShi = 226;
 
-		/// <summary>
-		/// 血犼盟誓
-		/// </summary>
 		public const short XueHaoMengShi = 227;
 
-		/// <summary>
-		/// 无坚不摧
-		/// </summary>
 		public const short WuJianBuCui = 228;
 
-		/// <summary>
-		/// 奔逸绝尘
-		/// </summary>
 		public const short BenYiJueChen = 229;
 
-		/// <summary>
-		/// 固若金汤
-		/// </summary>
 		public const short GuRuoJinTang = 230;
 
-		/// <summary>
-		/// 奇经八脉
-		/// </summary>
 		public const short QiJingBaMai = 231;
 
-		/// <summary>
-		/// 冲破玄关
-		/// </summary>
 		public const short ChongPoXuanGuan = 232;
 
-		/// <summary>
-		/// 走火入魔
-		/// </summary>
 		public const short ZouHuoRuMo = 233;
 
-		/// <summary>
-		/// 熟能生巧
-		/// </summary>
 		public const short ShuNengShengQiao = 234;
 
-		/// <summary>
-		/// 浑心无字
-		/// </summary>
 		public const short HunXinWuZi = 235;
 
-		/// <summary>
-		/// 白衣行化
-		/// </summary>
 		public const short BaiYiXingHua = 236;
 
-		/// <summary>
-		/// 大全千法
-		/// </summary>
 		public const short DaQuanQianFa = 237;
 
-		/// <summary>
-		/// 象龙演画
-		/// </summary>
 		public const short XiangLongYanHua = 238;
 
-		/// <summary>
-		/// 心观残笺
-		/// </summary>
 		public const short XinGuanCanJian = 239;
 
-		/// <summary>
-		/// 八埏至宝
-		/// </summary>
 		public const short BaYanZhiBao = 240;
 
-		/// <summary>
-		/// 化影奇功
-		/// </summary>
 		public const short HuaYingQiGong = 241;
 
-		/// <summary>
-		/// 无名神剑
-		/// </summary>
 		public const short WuMingShenJian = 242;
 
-		/// <summary>
-		/// 十杀魔罗
-		/// </summary>
 		public const short ShiShaMoLuo = 243;
 
-		/// <summary>
-		/// 一画开天
-		/// </summary>
 		public const short YiHuaKaiTian = 244;
 
-		/// <summary>
-		/// 无先玄元
-		/// </summary>
 		public const short WuXianXuanYuan = 245;
 
-		/// <summary>
-		/// 九似真藏
-		/// </summary>
 		public const short JiuSiZhenCang = 246;
 
-		/// <summary>
-		/// 天通神术
-		/// </summary>
 		public const short TianTongShenShu = 247;
 
-		/// <summary>
-		/// 神女绝音
-		/// </summary>
 		public const short ShenNvJueYin = 248;
 
-		/// <summary>
-		/// 十四奇书
-		/// </summary>
 		public const short ShiSiQiShu = 249;
 
-		/// <summary>
-		/// 地力充盈
-		/// </summary>
 		public const short DiLiChongYing = 250;
 
-		/// <summary>
-		/// 物华天宝
-		/// </summary>
 		public const short WuHuaTianBao = 251;
 
-		/// <summary>
-		/// 人丁兴旺
-		/// </summary>
 		public const short RenDingXingWang = 252;
 
-		/// <summary>
-		/// 各司其职
-		/// </summary>
 		public const short GeSiQiZhi = 253;
 
-		/// <summary>
-		/// 仓廪丰实
-		/// </summary>
 		public const short CangLinFengShi = 254;
 
-		/// <summary>
-		/// 鸡鸣千里
-		/// </summary>
 		public const short JiMingQianLi = 255;
 
-		/// <summary>
-		/// 设席开宴
-		/// </summary>
 		public const short SheXiKaiYan = 256;
 
-		/// <summary>
-		/// 宴请八方
-		/// </summary>
 		public const short YanQingBaFang = 257;
 
-		/// <summary>
-		/// 轮回往生
-		/// </summary>
 		public const short LunHuiWangSheng = 258;
 
-		/// <summary>
-		/// 六道轮回
-		/// </summary>
 		public const short LiuDaoLunHui = 259;
 
-		/// <summary>
-		/// 丝路复兴
-		/// </summary>
 		public const short SiLuFuXing = 260;
 
-		/// <summary>
-		/// 服牛帮上宾
-		/// </summary>
 		public const short FuNiuBangShangBin = 261;
 
-		/// <summary>
-		/// 书海阁上宾
-		/// </summary>
 		public const short ShuHaiGeShangBin = 262;
 
-		/// <summary>
-		/// 五湖上宾
-		/// </summary>
 		public const short WuHuShangBin = 263;
 
-		/// <summary>
-		/// 大武魁上宾
-		/// </summary>
 		public const short DaWuKuiShangBin = 264;
 
-		/// <summary>
-		/// 回春堂上宾
-		/// </summary>
 		public const short HuiChunTangShangBin = 265;
 
-		/// <summary>
-		/// 公输坊上宾
-		/// </summary>
 		public const short GongShuFangShangBin = 266;
 
-		/// <summary>
-		/// 奇货斋上宾
-		/// </summary>
 		public const short QiHuoZhaiShangBin = 267;
 
-		/// <summary>
-		/// 千锤百炼
-		/// </summary>
 		public const short QianChuiBaiLian = 268;
 
-		/// <summary>
-		/// 鬼斧神工
-		/// </summary>
 		public const short GuiFuShenGong = 269;
 
-		/// <summary>
-		/// 织霞成锦
-		/// </summary>
 		public const short ZhiXiaChengJin = 270;
 
-		/// <summary>
-		/// 连城之璧
-		/// </summary>
 		public const short LianChengZhiBi = 271;
 
-		/// <summary>
-		/// 炉火纯青
-		/// </summary>
 		public const short LuHuoChunQing = 272;
 
-		/// <summary>
-		/// 封喉断肠
-		/// </summary>
 		public const short FengHouDuanChang = 273;
 
-		/// <summary>
-		/// 烹龙炮凤
-		/// </summary>
 		public const short PengLongPaoFeng = 274;
 
-		/// <summary>
-		/// 驿路初通
-		/// </summary>
 		public const short YiLuChuTong = 275;
 
-		/// <summary>
-		/// 九州通衢
-		/// </summary>
 		public const short JiuZhouTongQu = 276;
 
-		/// <summary>
-		/// 恶丐窝
-		/// </summary>
 		public const short EGaiWo = 277;
 
-		/// <summary>
-		/// 贼人营寨
-		/// </summary>
 		public const short ZeiRenYingZhai = 278;
 
-		/// <summary>
-		/// 悍匪砦
-		/// </summary>
 		public const short HanFeiZhai = 279;
 
-		/// <summary>
-		/// 叛徒结伙
-		/// </summary>
 		public const short PanTuJieHuo = 280;
 
-		/// <summary>
-		/// 恶人谷
-		/// </summary>
 		public const short ERenGu = 281;
 
-		/// <summary>
-		/// 迷香阵
-		/// </summary>
 		public const short MiXiangZhen = 282;
 
-		/// <summary>
-		/// 乱葬岗
-		/// </summary>
 		public const short LuanZangGang = 283;
 
-		/// <summary>
-		/// 异士居
-		/// </summary>
 		public const short YiShiJu = 284;
 
-		/// <summary>
-		/// 邪人死地
-		/// </summary>
 		public const short XieRenSiDi = 285;
 
-		/// <summary>
-		/// 修罗场
-		/// </summary>
 		public const short XiuLuoChang = 286;
 
-		/// <summary>
-		/// 群魔乱舞
-		/// </summary>
 		public const short QunMoLuanWu = 287;
 
-		/// <summary>
-		/// 弃世绝境
-		/// </summary>
 		public const short QiShiJueJing = 288;
 
-		/// <summary>
-		/// 义士堂
-		/// </summary>
 		public const short YiShiTang = 289;
 
-		/// <summary>
-		/// 任侠会盟
-		/// </summary>
 		public const short RenXiaHuiMeng = 290;
 
-		/// <summary>
-		/// 世外秘境
-		/// </summary>
 		public const short ShiWaiMiJing = 291;
 
-		/// <summary>
-		/// 秋虫高鸣
-		/// </summary>
 		public const short QiuChongGaoMing = 292;
 
-		/// <summary>
-		/// 聊以饲鸡
-		/// </summary>
 		public const short LiaoYiSiJi = 293;
 
-		/// <summary>
-		/// 一鸣惊人
-		/// </summary>
 		public const short YiMingJingRen = 294;
 
-		/// <summary>
-		/// 虫王全谱
-		/// </summary>
 		public const short ChongWangQuanPu = 295;
 
-		/// <summary>
-		/// 斗虫之道
-		/// </summary>
 		public const short DouChongZhiDao = 296;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 真正的山猪
-		/// </summary>
 		public static AchievementInfoItem RealPig => Instance[(short)0];
 
-		/// <summary>
-		/// 初出茅庐
-		/// </summary>
 		public static AchievementInfoItem ChuChuMaoLu => Instance[(short)1];
 
-		/// <summary>
-		/// 桃源一梦
-		/// </summary>
 		public static AchievementInfoItem TaoYuanYiMeng => Instance[(short)2];
 
-		/// <summary>
-		/// 太吾复归
-		/// </summary>
 		public static AchievementInfoItem TaiWuFuGui => Instance[(short)3];
 
-		/// <summary>
-		/// 再续香火
-		/// </summary>
 		public static AchievementInfoItem ZaiXuXiangHuo => Instance[(short)4];
 
-		/// <summary>
-		/// 重开驿路
-		/// </summary>
 		public static AchievementInfoItem ChongKaiYiLu => Instance[(short)5];
 
-		/// <summary>
-		/// 神女还剑
-		/// </summary>
 		public static AchievementInfoItem ShenNvHuanJian => Instance[(short)6];
 
-		/// <summary>
-		/// 镇狱伏邪
-		/// </summary>
 		public static AchievementInfoItem ZhenYuFuXie => Instance[(short)7];
 
-		/// <summary>
-		/// 奇寒灵气
-		/// </summary>
 		public static AchievementInfoItem QiHanLingQi => Instance[(short)8];
 
-		/// <summary>
-		/// 七文五彩
-		/// </summary>
 		public static AchievementInfoItem QiWenWuCai => Instance[(short)9];
 
-		/// <summary>
-		/// 倾国绝世
-		/// </summary>
 		public static AchievementInfoItem QingGuoJueShi => Instance[(short)10];
 
-		/// <summary>
-		/// 龙胎化命
-		/// </summary>
 		public static AchievementInfoItem LongTaiHuaMing => Instance[(short)11];
 
-		/// <summary>
-		/// 溶尘化玉
-		/// </summary>
 		public static AchievementInfoItem RongChenHuaYu => Instance[(short)12];
 
-		/// <summary>
-		/// 八肱八趾
-		/// </summary>
 		public static AchievementInfoItem BaGongBaZhi => Instance[(short)13];
 
-		/// <summary>
-		/// 方天敕令
-		/// </summary>
 		public static AchievementInfoItem FangTianChiLing => Instance[(short)14];
 
-		/// <summary>
-		/// 九剑归一
-		/// </summary>
 		public static AchievementInfoItem JiuJianGuiYi => Instance[(short)15];
 
-		/// <summary>
-		/// 仙客奇书
-		/// </summary>
 		public static AchievementInfoItem XianKeQiShu => Instance[(short)16];
 
-		/// <summary>
-		/// 武林盟会
-		/// </summary>
 		public static AchievementInfoItem WuLinMengHui => Instance[(short)17];
 
-		/// <summary>
-		/// 爪牙伏诛
-		/// </summary>
 		public static AchievementInfoItem ZhaoYaFuZhu => Instance[(short)18];
 
-		/// <summary>
-		/// 出神之地
-		/// </summary>
 		public static AchievementInfoItem ChuShenZhiDi => Instance[(short)19];
 
-		/// <summary>
-		/// 返梦魂回
-		/// </summary>
 		public static AchievementInfoItem FanMengHunHui => Instance[(short)20];
 
-		/// <summary>
-		/// 神火金身
-		/// </summary>
 		public static AchievementInfoItem ShenHuoJinShen => Instance[(short)21];
 
-		/// <summary>
-		/// 七元万道
-		/// </summary>
 		public static AchievementInfoItem QiYuanWanDao => Instance[(short)22];
 
-		/// <summary>
-		/// 玄相真魔
-		/// </summary>
 		public static AchievementInfoItem XuanXiangZhenMo => Instance[(short)23];
 
-		/// <summary>
-		/// 英雄猴杰
-		/// </summary>
 		public static AchievementInfoItem YingXiongHouJie => Instance[(short)24];
 
-		/// <summary>
-		/// 阿牛同行
-		/// </summary>
 		public static AchievementInfoItem ANiuTongXing => Instance[(short)25];
 
-		/// <summary>
-		/// 小猫同行
-		/// </summary>
 		public static AchievementInfoItem XiaoMaoTongXing => Instance[(short)26];
 
-		/// <summary>
-		/// 郭彦同行
-		/// </summary>
 		public static AchievementInfoItem GuoYanTongXing => Instance[(short)27];
 
-		/// <summary>
-		/// 还月同行
-		/// </summary>
 		public static AchievementInfoItem HuanYueTongXing => Instance[(short)28];
 
-		/// <summary>
-		/// 巨蛇就擒
-		/// </summary>
 		public static AchievementInfoItem JuSheJiuQin => Instance[(short)29];
 
-		/// <summary>
-		/// 无名剑冢
-		/// </summary>
 		public static AchievementInfoItem WuMingJianZhong => Instance[(short)30];
 
-		/// <summary>
-		/// 太吾村覆灭
-		/// </summary>
 		public static AchievementInfoItem TaiWuCunFuMie => Instance[(short)31];
 
-		/// <summary>
-		/// 退魔辟邪
-		/// </summary>
 		public static AchievementInfoItem TuiMoBiXie => Instance[(short)32];
 
-		/// <summary>
-		/// 还剑之愿
-		/// </summary>
 		public static AchievementInfoItem HuanJianZhiYuan => Instance[(short)33];
 
-		/// <summary>
-		/// 除魔之誓
-		/// </summary>
 		public static AchievementInfoItem ChuMoZhiShi => Instance[(short)34];
 
-		/// <summary>
-		/// 囿于俗见
-		/// </summary>
 		public static AchievementInfoItem YouYuSuJian => Instance[(short)35];
 
-		/// <summary>
-		/// 苦寻圣人
-		/// </summary>
 		public static AchievementInfoItem KuXunShengRen => Instance[(short)36];
 
-		/// <summary>
-		/// 焚心之悲
-		/// </summary>
 		public static AchievementInfoItem FenXinZhiBei => Instance[(short)37];
 
-		/// <summary>
-		/// 舍身求道
-		/// </summary>
 		public static AchievementInfoItem SheShenQiuDao => Instance[(short)38];
 
-		/// <summary>
-		/// 无瑕之念
-		/// </summary>
 		public static AchievementInfoItem WuXiaZhiNian => Instance[(short)39];
 
-		/// <summary>
-		/// 百战不折
-		/// </summary>
 		public static AchievementInfoItem BaiZhanBuZhe => Instance[(short)40];
 
-		/// <summary>
-		/// 恩义难全
-		/// </summary>
 		public static AchievementInfoItem EnYiNanQuan => Instance[(short)41];
 
-		/// <summary>
-		/// 禅武之道
-		/// </summary>
 		public static AchievementInfoItem ChanWuZhiDao => Instance[(short)42];
 
-		/// <summary>
-		/// 禅武之道·续
-		/// </summary>
 		public static AchievementInfoItem ChanWuZhiDaoXu => Instance[(short)43];
 
-		/// <summary>
-		/// 隐世白猿
-		/// </summary>
 		public static AchievementInfoItem YinShiBaiYuan => Instance[(short)44];
 
-		/// <summary>
-		/// 隐世白猿·续
-		/// </summary>
 		public static AchievementInfoItem YinShiBaiYuanXu => Instance[(short)45];
 
-		/// <summary>
-		/// 玄鸮白鹿
-		/// </summary>
 		public static AchievementInfoItem XuanXiaoBaiLu => Instance[(short)46];
 
-		/// <summary>
-		/// 玄鸮白鹿·续
-		/// </summary>
 		public static AchievementInfoItem XuanXiaoBaiLuXu => Instance[(short)47];
 
-		/// <summary>
-		/// 龟蛇蟠扶
-		/// </summary>
 		public static AchievementInfoItem GuiShePanFu => Instance[(short)48];
 
-		/// <summary>
-		/// 龟蛇蟠扶·续
-		/// </summary>
 		public static AchievementInfoItem GuiShePanFuXu => Instance[(short)49];
 
-		/// <summary>
-		/// 石牢三魔
-		/// </summary>
 		public static AchievementInfoItem ShiLaoSanMo => Instance[(short)50];
 
-		/// <summary>
-		/// 石牢三魔·续
-		/// </summary>
 		public static AchievementInfoItem ShiLaoSanMoXu => Instance[(short)51];
 
-		/// <summary>
-		/// 文武双全
-		/// </summary>
 		public static AchievementInfoItem WenWuShuangQuan => Instance[(short)52];
 
-		/// <summary>
-		/// 文武双全·续
-		/// </summary>
 		public static AchievementInfoItem WenWuShuangQuanXu => Instance[(short)53];
 
-		/// <summary>
-		/// 青琅仙阁
-		/// </summary>
 		public static AchievementInfoItem QingLangXianGe => Instance[(short)54];
 
-		/// <summary>
-		/// 青琅仙阁·续
-		/// </summary>
 		public static AchievementInfoItem QingLangXianGeXu => Instance[(short)55];
 
-		/// <summary>
-		/// 镜水倒颠
-		/// </summary>
 		public static AchievementInfoItem JingShuiDaoDian => Instance[(short)56];
 
-		/// <summary>
-		/// 镜水倒颠·续
-		/// </summary>
 		public static AchievementInfoItem JingShuiDaoDianXu => Instance[(short)57];
 
-		/// <summary>
-		/// 铜生试剑
-		/// </summary>
 		public static AchievementInfoItem TongShengShiJian => Instance[(short)58];
 
-		/// <summary>
-		/// 铜生试剑·续
-		/// </summary>
 		public static AchievementInfoItem TongShengShiJianXu => Instance[(short)59];
 
-		/// <summary>
-		/// 奇毒绝方
-		/// </summary>
 		public static AchievementInfoItem QiDuJueFang => Instance[(short)60];
 
-		/// <summary>
-		/// 奇毒绝方·续
-		/// </summary>
 		public static AchievementInfoItem QiDuJueFangXu => Instance[(short)61];
 
-		/// <summary>
-		/// 真经无字
-		/// </summary>
 		public static AchievementInfoItem ZhenJingWuZi => Instance[(short)62];
 
-		/// <summary>
-		/// 真经无字·续
-		/// </summary>
 		public static AchievementInfoItem ZhenJingWuZiXu => Instance[(short)63];
 
-		/// <summary>
-		/// 五圣心毒
-		/// </summary>
 		public static AchievementInfoItem WuShengXinDu => Instance[(short)64];
 
-		/// <summary>
-		/// 五圣心毒·续
-		/// </summary>
 		public static AchievementInfoItem WuShengXinDuXu => Instance[(short)65];
 
-		/// <summary>
-		/// 善恶无生
-		/// </summary>
 		public static AchievementInfoItem ShanEWuSheng => Instance[(short)66];
 
-		/// <summary>
-		/// 善恶无生·续
-		/// </summary>
 		public static AchievementInfoItem ShanEWuShengXu => Instance[(short)67];
 
-		/// <summary>
-		/// 伏龙化羽
-		/// </summary>
 		public static AchievementInfoItem FuLongHuaYu => Instance[(short)68];
 
-		/// <summary>
-		/// 伏龙化羽·续
-		/// </summary>
 		public static AchievementInfoItem FuLongHuaYuXu => Instance[(short)69];
 
-		/// <summary>
-		/// 血冢遗姝
-		/// </summary>
 		public static AchievementInfoItem XueZhongYiShu => Instance[(short)70];
 
-		/// <summary>
-		/// 血冢遗姝·续
-		/// </summary>
 		public static AchievementInfoItem XueZhongYiShuXu => Instance[(short)71];
 
-		/// <summary>
-		/// 绘卷新篇
-		/// </summary>
 		public static AchievementInfoItem HuiJuanXinPian => Instance[(short)72];
 
-		/// <summary>
-		/// 前尘往事
-		/// </summary>
 		public static AchievementInfoItem QianChenWangShi => Instance[(short)73];
 
-		/// <summary>
-		/// 剑中记忆
-		/// </summary>
 		public static AchievementInfoItem JianZhongJiYi => Instance[(short)74];
 
-		/// <summary>
-		/// 再续前缘
-		/// </summary>
 		public static AchievementInfoItem ZaiXuQianYuan => Instance[(short)75];
 
-		/// <summary>
-		/// 玄狱之劫
-		/// </summary>
 		public static AchievementInfoItem XuanYuZhiJie => Instance[(short)76];
 
-		/// <summary>
-		/// 任其自然
-		/// </summary>
 		public static AchievementInfoItem RenQiZiRan => Instance[(short)77];
 
-		/// <summary>
-		/// 福泽绵长
-		/// </summary>
 		public static AchievementInfoItem FuZeMianChang => Instance[(short)78];
 
-		/// <summary>
-		/// 一脉相承
-		/// </summary>
 		public static AchievementInfoItem YiMaiXiangCheng => Instance[(short)79];
 
-		/// <summary>
-		/// 后继有人
-		/// </summary>
 		public static AchievementInfoItem HouJiYouRen => Instance[(short)80];
 
-		/// <summary>
-		/// 薪火相传
-		/// </summary>
 		public static AchievementInfoItem XinHuoXiangChuan => Instance[(short)81];
 
-		/// <summary>
-		/// 一世通天
-		/// </summary>
 		public static AchievementInfoItem YiShiTongTian => Instance[(short)82];
 
-		/// <summary>
-		/// 十世相承
-		/// </summary>
 		public static AchievementInfoItem ShiShiXiangCheng => Instance[(short)83];
 
-		/// <summary>
-		/// 重操旧业
-		/// </summary>
 		public static AchievementInfoItem ChongCaoJiuYe => Instance[(short)84];
 
-		/// <summary>
-		/// 伏虞护命
-		/// </summary>
 		public static AchievementInfoItem FuYuHuMing => Instance[(short)85];
 
-		/// <summary>
-		/// 有相皆痴苦
-		/// </summary>
 		public static AchievementInfoItem YouXiangJieChiKu => Instance[(short)86];
 
-		/// <summary>
-		/// 无人脱网罗
-		/// </summary>
 		public static AchievementInfoItem WuRenTuoWangLuo => Instance[(short)87];
 
-		/// <summary>
-		/// 恶贯满盈
-		/// </summary>
 		public static AchievementInfoItem EGuanManYing => Instance[(short)88];
 
-		/// <summary>
-		/// 名扬四海
-		/// </summary>
 		public static AchievementInfoItem MingYangSiHai => Instance[(short)89];
 
-		/// <summary>
-		/// 顺心而行
-		/// </summary>
 		public static AchievementInfoItem ShunXinErXing => Instance[(short)90];
 
-		/// <summary>
-		/// 违心之举
-		/// </summary>
 		public static AchievementInfoItem WeiXinZhiJu => Instance[(short)91];
 
-		/// <summary>
-		/// 笑口常开
-		/// </summary>
 		public static AchievementInfoItem XiaoKouChangKai => Instance[(short)92];
 
-		/// <summary>
-		/// 肝肠寸断
-		/// </summary>
 		public static AchievementInfoItem GanChangCunDuan => Instance[(short)93];
 
-		/// <summary>
-		/// 长生久视
-		/// </summary>
 		public static AchievementInfoItem ChangShengJiuShi => Instance[(short)94];
 
-		/// <summary>
-		/// 志同道合
-		/// </summary>
 		public static AchievementInfoItem ZhiTongDaoHe => Instance[(short)95];
 
-		/// <summary>
-		/// 连理同心
-		/// </summary>
 		public static AchievementInfoItem LianLiTongXin => Instance[(short)96];
 
-		/// <summary>
-		/// 呱呱坠地
-		/// </summary>
 		public static AchievementInfoItem GuGuZhuiDi => Instance[(short)97];
 
-		/// <summary>
-		/// 多子多福
-		/// </summary>
 		public static AchievementInfoItem DuoZiDuoFu => Instance[(short)98];
 
-		/// <summary>
-		/// 异胎降世
-		/// </summary>
 		public static AchievementInfoItem YiTaiJiangShi => Instance[(short)99];
 
-		/// <summary>
-		/// 远走高飞
-		/// </summary>
 		public static AchievementInfoItem YuanGaoFeiZou => Instance[(short)100];
 
-		/// <summary>
-		/// 金兰之契
-		/// </summary>
 		public static AchievementInfoItem JinLanZhiQi => Instance[(short)101];
 
-		/// <summary>
-		/// 飘零半生
-		/// </summary>
 		public static AchievementInfoItem PiaoLingBanSheng => Instance[(short)102];
 
-		/// <summary>
-		/// 三生石上
-		/// </summary>
 		public static AchievementInfoItem SanShengShiShang => Instance[(short)103];
 
-		/// <summary>
-		/// 倒反纲常
-		/// </summary>
 		public static AchievementInfoItem DaoFanGangChang => Instance[(short)104];
 
-		/// <summary>
-		/// 众星捧月
-		/// </summary>
 		public static AchievementInfoItem ZhongXingPengYue => Instance[(short)105];
 
-		/// <summary>
-		/// 众矢之的
-		/// </summary>
 		public static AchievementInfoItem ZhongShiZhiDi => Instance[(short)106];
 
-		/// <summary>
-		/// 使命必达
-		/// </summary>
 		public static AchievementInfoItem ShiMingBiDa => Instance[(short)107];
 
-		/// <summary>
-		/// 寸草不生
-		/// </summary>
 		public static AchievementInfoItem CunCaoBuSheng => Instance[(short)108];
 
-		/// <summary>
-		/// 爱恨交织
-		/// </summary>
 		public static AchievementInfoItem AiHenJiaoZhi => Instance[(short)109];
 
-		/// <summary>
-		/// 江湖百晓生
-		/// </summary>
 		public static AchievementInfoItem JiangHuBaiXiaoSheng => Instance[(short)110];
 
-		/// <summary>
-		/// 点到为止
-		/// </summary>
 		public static AchievementInfoItem DianDaoWeiZhi => Instance[(short)111];
 
-		/// <summary>
-		/// 身经百战
-		/// </summary>
 		public static AchievementInfoItem ShenJingBaiZhan => Instance[(short)112];
 
-		/// <summary>
-		/// 应对自如
-		/// </summary>
 		public static AchievementInfoItem YingDuiZiRu => Instance[(short)113];
 
-		/// <summary>
-		/// 不死不休
-		/// </summary>
 		public static AchievementInfoItem BuSiBuXiu => Instance[(short)114];
 
-		/// <summary>
-		/// 良言美意
-		/// </summary>
 		public static AchievementInfoItem LiangYanMeiYi => Instance[(short)115];
 
-		/// <summary>
-		/// 恶语伤人
-		/// </summary>
 		public static AchievementInfoItem EYuShangRen => Instance[(short)116];
 
-		/// <summary>
-		/// 五花八门
-		/// </summary>
 		public static AchievementInfoItem WuHuaBaMen => Instance[(short)117];
 
-		/// <summary>
-		/// 走为上计
-		/// </summary>
 		public static AchievementInfoItem ZouWeiShangJi => Instance[(short)118];
 
-		/// <summary>
-		/// 甘拜下风
-		/// </summary>
 		public static AchievementInfoItem GanBaiXiaFeng => Instance[(short)119];
 
-		/// <summary>
-		/// 五花大绑
-		/// </summary>
 		public static AchievementInfoItem WuHuaDaBang => Instance[(short)120];
 
-		/// <summary>
-		/// 伏虞救厄
-		/// </summary>
 		public static AchievementInfoItem FuYuJiuE => Instance[(short)121];
 
-		/// <summary>
-		/// 除魔卫道
-		/// </summary>
 		public static AchievementInfoItem ChuMoWeiDao => Instance[(short)122];
 
-		/// <summary>
-		/// 再造之恩
-		/// </summary>
 		public static AchievementInfoItem ZaiZaoZhiEn => Instance[(short)123];
 
-		/// <summary>
-		/// 仗义行侠
-		/// </summary>
 		public static AchievementInfoItem ZhangYiXingXia => Instance[(short)124];
 
-		/// <summary>
-		/// 逆我者亡
-		/// </summary>
 		public static AchievementInfoItem NiWoZheWang => Instance[(short)125];
 
-		/// <summary>
-		/// 降龙伏虎
-		/// </summary>
 		public static AchievementInfoItem XiangLongFuHu => Instance[(short)126];
 
-		/// <summary>
-		/// 辗转腾挪
-		/// </summary>
 		public static AchievementInfoItem ZhanZhuanTengNuo => Instance[(short)127];
 
-		/// <summary>
-		/// 不动如山
-		/// </summary>
 		public static AchievementInfoItem BuDongRuShan => Instance[(short)128];
 
-		/// <summary>
-		/// 变化莫测
-		/// </summary>
 		public static AchievementInfoItem BianHuaMoCe => Instance[(short)129];
 
-		/// <summary>
-		/// 齐心协力
-		/// </summary>
 		public static AchievementInfoItem QiXinXieLi => Instance[(short)130];
 
-		/// <summary>
-		/// 祸起萧墙
-		/// </summary>
 		public static AchievementInfoItem HuoQiXiaoQiang => Instance[(short)131];
 
-		/// <summary>
-		/// 他强由他强
-		/// </summary>
 		public static AchievementInfoItem TaQiangYouTaQiang => Instance[(short)132];
 
-		/// <summary>
-		/// 排山倒海
-		/// </summary>
 		public static AchievementInfoItem PaiShanDaoHai => Instance[(short)133];
 
-		/// <summary>
-		/// 洞金裂石
-		/// </summary>
 		public static AchievementInfoItem DongJinLieShi => Instance[(short)134];
 
-		/// <summary>
-		/// 踢星踏月
-		/// </summary>
 		public static AchievementInfoItem TiXingTaYue => Instance[(short)135];
 
-		/// <summary>
-		/// 飞花摘叶
-		/// </summary>
 		public static AchievementInfoItem FeiHuaZhaiYe => Instance[(short)136];
 
-		/// <summary>
-		/// 剑气纵横
-		/// </summary>
 		public static AchievementInfoItem JianQiZongHeng => Instance[(short)137];
 
-		/// <summary>
-		/// 劈波斩浪
-		/// </summary>
 		public static AchievementInfoItem PiBoZhanLang => Instance[(short)138];
 
-		/// <summary>
-		/// 寸长寸强
-		/// </summary>
 		public static AchievementInfoItem CunChangCunQiang => Instance[(short)139];
 
-		/// <summary>
-		/// 奇门异术
-		/// </summary>
 		public static AchievementInfoItem QiMenYiShu => Instance[(short)140];
 
-		/// <summary>
-		/// 势若游龙
-		/// </summary>
 		public static AchievementInfoItem ShiRuoYouLong => Instance[(short)141];
 
-		/// <summary>
-		/// 百步穿杨
-		/// </summary>
 		public static AchievementInfoItem BaiBuChuanYang => Instance[(short)142];
 
-		/// <summary>
-		/// 魔音贯耳
-		/// </summary>
 		public static AchievementInfoItem MoYinGuanEr => Instance[(short)143];
 
-		/// <summary>
-		/// 势不可挡
-		/// </summary>
 		public static AchievementInfoItem ShiBuKeDang => Instance[(short)144];
 
-		/// <summary>
-		/// 蹩脚功夫
-		/// </summary>
 		public static AchievementInfoItem BieJiaoGongFu => Instance[(short)145];
 
-		/// <summary>
-		/// 分筋错骨
-		/// </summary>
 		public static AchievementInfoItem FenJinCuoGu => Instance[(short)146];
 
-		/// <summary>
-		/// 身残志坚
-		/// </summary>
 		public static AchievementInfoItem ShenCanZhiJian => Instance[(short)147];
 
-		/// <summary>
-		/// 毒气攻心
-		/// </summary>
 		public static AchievementInfoItem DuQiGongXin => Instance[(short)148];
 
-		/// <summary>
-		/// 七彩玲珑心
-		/// </summary>
 		public static AchievementInfoItem QiCaiLingLongXin => Instance[(short)149];
 
-		/// <summary>
-		/// 气冲斗牛
-		/// </summary>
 		public static AchievementInfoItem QiChongDouNiu => Instance[(short)150];
 
-		/// <summary>
-		/// 气散功消
-		/// </summary>
 		public static AchievementInfoItem QiSanGongXiao => Instance[(short)151];
 
-		/// <summary>
-		/// 穷追猛打
-		/// </summary>
 		public static AchievementInfoItem QiongZhuiMengDa => Instance[(short)152];
 
-		/// <summary>
-		/// 心有所向
-		/// </summary>
 		public static AchievementInfoItem XinYouSuoXiang => Instance[(short)153];
 
-		/// <summary>
-		/// 志有所成
-		/// </summary>
 		public static AchievementInfoItem ZhiYouSuoCheng => Instance[(short)154];
 
-		/// <summary>
-		/// 山中高士
-		/// </summary>
 		public static AchievementInfoItem ShanZhongGaoShi => Instance[(short)155];
 
-		/// <summary>
-		/// 百兽之王
-		/// </summary>
 		public static AchievementInfoItem BaiShouZhiWang => Instance[(short)156];
 
-		/// <summary>
-		/// 巧夺天工
-		/// </summary>
 		public static AchievementInfoItem QiaoDuoTianGong => Instance[(short)157];
 
-		/// <summary>
-		/// 一呼百应
-		/// </summary>
 		public static AchievementInfoItem YiHuBaiYing => Instance[(short)158];
 
-		/// <summary>
-		/// 才高八斗
-		/// </summary>
 		public static AchievementInfoItem CaiGaoBaDou => Instance[(short)159];
 
-		/// <summary>
-		/// 道法自然
-		/// </summary>
 		public static AchievementInfoItem DaoFaZiRan => Instance[(short)160];
 
-		/// <summary>
-		/// 功德圆满
-		/// </summary>
 		public static AchievementInfoItem GongDeYuanMan => Instance[(short)161];
 
-		/// <summary>
-		/// 酒中豪杰
-		/// </summary>
 		public static AchievementInfoItem JiuZhongHaoJie => Instance[(short)162];
 
-		/// <summary>
-		/// 钟鸣鼎食
-		/// </summary>
 		public static AchievementInfoItem ZhongMingDingShi => Instance[(short)163];
 
-		/// <summary>
-		/// 游戏人间
-		/// </summary>
 		public static AchievementInfoItem YouXiRenJian => Instance[(short)164];
 
-		/// <summary>
-		/// 布衣自适
-		/// </summary>
 		public static AchievementInfoItem BuYiZiShi => Instance[(short)165];
 
-		/// <summary>
-		/// 行遍天涯
-		/// </summary>
 		public static AchievementInfoItem XingBianTianYa => Instance[(short)166];
 
-		/// <summary>
-		/// 明心见性
-		/// </summary>
 		public static AchievementInfoItem MingXinJianXing => Instance[(short)167];
 
-		/// <summary>
-		/// 妙手回春
-		/// </summary>
 		public static AchievementInfoItem MiaoShouHuiChun => Instance[(short)168];
 
-		/// <summary>
-		/// 化外逍遥
-		/// </summary>
 		public static AchievementInfoItem HuaWaiXiaoYao => Instance[(short)169];
 
-		/// <summary>
-		/// 挥金如土
-		/// </summary>
 		public static AchievementInfoItem HuiJinRuTu => Instance[(short)170];
 
-		/// <summary>
-		/// 风流雅士
-		/// </summary>
 		public static AchievementInfoItem FengLiuYaShi => Instance[(short)171];
 
-		/// <summary>
-		/// 万民来朝
-		/// </summary>
 		public static AchievementInfoItem WanMinLaiChao => Instance[(short)172];
 
-		/// <summary>
-		/// 诸业精通
-		/// </summary>
 		public static AchievementInfoItem ZhuYeJingTong => Instance[(short)173];
 
-		/// <summary>
-		/// 初窥门径
-		/// </summary>
 		public static AchievementInfoItem ChuKuiMenJing => Instance[(short)174];
 
-		/// <summary>
-		/// 术业专攻
-		/// </summary>
 		public static AchievementInfoItem ShuYeZhuanGong => Instance[(short)175];
 
-		/// <summary>
-		/// 音律大成
-		/// </summary>
 		public static AchievementInfoItem YinLvDaCheng => Instance[(short)176];
 
-		/// <summary>
-		/// 弈棋大成
-		/// </summary>
 		public static AchievementInfoItem YiQiDaCheng => Instance[(short)177];
 
-		/// <summary>
-		/// 诗书大成
-		/// </summary>
 		public static AchievementInfoItem ShiShuDaCheng => Instance[(short)178];
 
-		/// <summary>
-		/// 绘画大成
-		/// </summary>
 		public static AchievementInfoItem HuiHuaDaCheng => Instance[(short)179];
 
-		/// <summary>
-		/// 术数大成
-		/// </summary>
 		public static AchievementInfoItem ShuShuDaCheng => Instance[(short)180];
 
-		/// <summary>
-		/// 品鉴大成
-		/// </summary>
 		public static AchievementInfoItem PinJianDaCheng => Instance[(short)181];
 
-		/// <summary>
-		/// 锻造大成
-		/// </summary>
 		public static AchievementInfoItem DuanZaoDaCheng => Instance[(short)182];
 
-		/// <summary>
-		/// 制木大成
-		/// </summary>
 		public static AchievementInfoItem ZhiMuDaCheng => Instance[(short)183];
 
-		/// <summary>
-		/// 医术大成
-		/// </summary>
 		public static AchievementInfoItem YiShuDaCheng => Instance[(short)184];
 
-		/// <summary>
-		/// 毒术大成
-		/// </summary>
 		public static AchievementInfoItem DuShuDaCheng => Instance[(short)185];
 
-		/// <summary>
-		/// 织锦大成
-		/// </summary>
 		public static AchievementInfoItem ZhiJinDaCheng => Instance[(short)186];
 
-		/// <summary>
-		/// 巧匠大成
-		/// </summary>
 		public static AchievementInfoItem QiaoJiangDaCheng => Instance[(short)187];
 
-		/// <summary>
-		/// 道法大成
-		/// </summary>
 		public static AchievementInfoItem DaoFaDaCheng => Instance[(short)188];
 
-		/// <summary>
-		/// 佛学大成
-		/// </summary>
 		public static AchievementInfoItem FoXueDaCheng => Instance[(short)189];
 
-		/// <summary>
-		/// 厨艺大成
-		/// </summary>
 		public static AchievementInfoItem ChuYiDaCheng => Instance[(short)190];
 
-		/// <summary>
-		/// 杂学大成
-		/// </summary>
 		public static AchievementInfoItem ZaXueDaCheng => Instance[(short)191];
 
-		/// <summary>
-		/// 学究天人
-		/// </summary>
 		public static AchievementInfoItem XueJiuTianRen => Instance[(short)192];
 
-		/// <summary>
-		/// 技高一筹
-		/// </summary>
 		public static AchievementInfoItem JiGaoYiChou => Instance[(short)193];
 
-		/// <summary>
-		/// 舌灿莲花
-		/// </summary>
 		public static AchievementInfoItem SheCanLianHua => Instance[(short)194];
 
-		/// <summary>
-		/// 初学乍练
-		/// </summary>
 		public static AchievementInfoItem ChuXueZhaLian => Instance[(short)195];
 
-		/// <summary>
-		/// 尽得真传
-		/// </summary>
 		public static AchievementInfoItem JinDeZhenChuan => Instance[(short)196];
 
-		/// <summary>
-		/// 少林绝学
-		/// </summary>
 		public static AchievementInfoItem ShaoLinJueXue => Instance[(short)197];
 
-		/// <summary>
-		/// 峨眉绝学
-		/// </summary>
 		public static AchievementInfoItem EMeiJueXue => Instance[(short)198];
 
-		/// <summary>
-		/// 百花绝学
-		/// </summary>
 		public static AchievementInfoItem BaiHuaJueXue => Instance[(short)199];
 
-		/// <summary>
-		/// 武当绝学
-		/// </summary>
 		public static AchievementInfoItem WuDangJueXue => Instance[(short)200];
 
-		/// <summary>
-		/// 元山绝学
-		/// </summary>
 		public static AchievementInfoItem YuanShanJueXue => Instance[(short)201];
 
-		/// <summary>
-		/// 狮相绝学
-		/// </summary>
 		public static AchievementInfoItem ShiXiangJueXue => Instance[(short)202];
 
-		/// <summary>
-		/// 然山绝学
-		/// </summary>
 		public static AchievementInfoItem RanShanJueXue => Instance[(short)203];
 
-		/// <summary>
-		/// 璇女绝学
-		/// </summary>
 		public static AchievementInfoItem XuanNvJueXue => Instance[(short)204];
 
-		/// <summary>
-		/// 铸剑绝学
-		/// </summary>
 		public static AchievementInfoItem ZhuJianJueXue => Instance[(short)205];
 
-		/// <summary>
-		/// 空桑绝学
-		/// </summary>
 		public static AchievementInfoItem KongSangJueXue => Instance[(short)206];
 
-		/// <summary>
-		/// 金刚绝学
-		/// </summary>
 		public static AchievementInfoItem JinGangJueXue => Instance[(short)207];
 
-		/// <summary>
-		/// 五仙绝学
-		/// </summary>
 		public static AchievementInfoItem WuXianJueXue => Instance[(short)208];
 
-		/// <summary>
-		/// 界青绝学
-		/// </summary>
 		public static AchievementInfoItem JieQingJueXue => Instance[(short)209];
 
-		/// <summary>
-		/// 伏龙绝学
-		/// </summary>
 		public static AchievementInfoItem FuLongJueXue => Instance[(short)210];
 
-		/// <summary>
-		/// 血犼绝学
-		/// </summary>
 		public static AchievementInfoItem XueHaoJueXue => Instance[(short)211];
 
-		/// <summary>
-		/// 功参造化
-		/// </summary>
 		public static AchievementInfoItem GongCanZaoHua => Instance[(short)212];
 
-		/// <summary>
-		/// 少林盟誓
-		/// </summary>
 		public static AchievementInfoItem ShaoLinMengShi => Instance[(short)213];
 
-		/// <summary>
-		/// 峨眉盟誓
-		/// </summary>
 		public static AchievementInfoItem EMeiMengShi => Instance[(short)214];
 
-		/// <summary>
-		/// 百花盟誓
-		/// </summary>
 		public static AchievementInfoItem BaiHuaMengShi => Instance[(short)215];
 
-		/// <summary>
-		/// 武当盟誓
-		/// </summary>
 		public static AchievementInfoItem WuDangMengShi => Instance[(short)216];
 
-		/// <summary>
-		/// 元山盟誓
-		/// </summary>
 		public static AchievementInfoItem YuanShanMengShi => Instance[(short)217];
 
-		/// <summary>
-		/// 狮相盟誓
-		/// </summary>
 		public static AchievementInfoItem ShiXiangMengShi => Instance[(short)218];
 
-		/// <summary>
-		/// 然山盟誓
-		/// </summary>
 		public static AchievementInfoItem RanShanMengShi => Instance[(short)219];
 
-		/// <summary>
-		/// 璇女盟誓
-		/// </summary>
 		public static AchievementInfoItem XuanNvMengShi => Instance[(short)220];
 
-		/// <summary>
-		/// 铸剑盟誓
-		/// </summary>
 		public static AchievementInfoItem ZhuJianMengShi => Instance[(short)221];
 
-		/// <summary>
-		/// 空桑盟誓
-		/// </summary>
 		public static AchievementInfoItem KongSangMengShi => Instance[(short)222];
 
-		/// <summary>
-		/// 金刚盟誓
-		/// </summary>
 		public static AchievementInfoItem JinGangMengShi => Instance[(short)223];
 
-		/// <summary>
-		/// 五仙盟誓
-		/// </summary>
 		public static AchievementInfoItem WuXianMengShi => Instance[(short)224];
 
-		/// <summary>
-		/// 界青盟誓
-		/// </summary>
 		public static AchievementInfoItem JieQingMengShi => Instance[(short)225];
 
-		/// <summary>
-		/// 伏龙盟誓
-		/// </summary>
 		public static AchievementInfoItem FuLongMengShi => Instance[(short)226];
 
-		/// <summary>
-		/// 血犼盟誓
-		/// </summary>
 		public static AchievementInfoItem XueHaoMengShi => Instance[(short)227];
 
-		/// <summary>
-		/// 无坚不摧
-		/// </summary>
 		public static AchievementInfoItem WuJianBuCui => Instance[(short)228];
 
-		/// <summary>
-		/// 奔逸绝尘
-		/// </summary>
 		public static AchievementInfoItem BenYiJueChen => Instance[(short)229];
 
-		/// <summary>
-		/// 固若金汤
-		/// </summary>
 		public static AchievementInfoItem GuRuoJinTang => Instance[(short)230];
 
-		/// <summary>
-		/// 奇经八脉
-		/// </summary>
 		public static AchievementInfoItem QiJingBaMai => Instance[(short)231];
 
-		/// <summary>
-		/// 冲破玄关
-		/// </summary>
 		public static AchievementInfoItem ChongPoXuanGuan => Instance[(short)232];
 
-		/// <summary>
-		/// 走火入魔
-		/// </summary>
 		public static AchievementInfoItem ZouHuoRuMo => Instance[(short)233];
 
-		/// <summary>
-		/// 熟能生巧
-		/// </summary>
 		public static AchievementInfoItem ShuNengShengQiao => Instance[(short)234];
 
-		/// <summary>
-		/// 浑心无字
-		/// </summary>
 		public static AchievementInfoItem HunXinWuZi => Instance[(short)235];
 
-		/// <summary>
-		/// 白衣行化
-		/// </summary>
 		public static AchievementInfoItem BaiYiXingHua => Instance[(short)236];
 
-		/// <summary>
-		/// 大全千法
-		/// </summary>
 		public static AchievementInfoItem DaQuanQianFa => Instance[(short)237];
 
-		/// <summary>
-		/// 象龙演画
-		/// </summary>
 		public static AchievementInfoItem XiangLongYanHua => Instance[(short)238];
 
-		/// <summary>
-		/// 心观残笺
-		/// </summary>
 		public static AchievementInfoItem XinGuanCanJian => Instance[(short)239];
 
-		/// <summary>
-		/// 八埏至宝
-		/// </summary>
 		public static AchievementInfoItem BaYanZhiBao => Instance[(short)240];
 
-		/// <summary>
-		/// 化影奇功
-		/// </summary>
 		public static AchievementInfoItem HuaYingQiGong => Instance[(short)241];
 
-		/// <summary>
-		/// 无名神剑
-		/// </summary>
 		public static AchievementInfoItem WuMingShenJian => Instance[(short)242];
 
-		/// <summary>
-		/// 十杀魔罗
-		/// </summary>
 		public static AchievementInfoItem ShiShaMoLuo => Instance[(short)243];
 
-		/// <summary>
-		/// 一画开天
-		/// </summary>
 		public static AchievementInfoItem YiHuaKaiTian => Instance[(short)244];
 
-		/// <summary>
-		/// 无先玄元
-		/// </summary>
 		public static AchievementInfoItem WuXianXuanYuan => Instance[(short)245];
 
-		/// <summary>
-		/// 九似真藏
-		/// </summary>
 		public static AchievementInfoItem JiuSiZhenCang => Instance[(short)246];
 
-		/// <summary>
-		/// 天通神术
-		/// </summary>
 		public static AchievementInfoItem TianTongShenShu => Instance[(short)247];
 
-		/// <summary>
-		/// 神女绝音
-		/// </summary>
 		public static AchievementInfoItem ShenNvJueYin => Instance[(short)248];
 
-		/// <summary>
-		/// 十四奇书
-		/// </summary>
 		public static AchievementInfoItem ShiSiQiShu => Instance[(short)249];
 
-		/// <summary>
-		/// 地力充盈
-		/// </summary>
 		public static AchievementInfoItem DiLiChongYing => Instance[(short)250];
 
-		/// <summary>
-		/// 物华天宝
-		/// </summary>
 		public static AchievementInfoItem WuHuaTianBao => Instance[(short)251];
 
-		/// <summary>
-		/// 人丁兴旺
-		/// </summary>
 		public static AchievementInfoItem RenDingXingWang => Instance[(short)252];
 
-		/// <summary>
-		/// 各司其职
-		/// </summary>
 		public static AchievementInfoItem GeSiQiZhi => Instance[(short)253];
 
-		/// <summary>
-		/// 仓廪丰实
-		/// </summary>
 		public static AchievementInfoItem CangLinFengShi => Instance[(short)254];
 
-		/// <summary>
-		/// 鸡鸣千里
-		/// </summary>
 		public static AchievementInfoItem JiMingQianLi => Instance[(short)255];
 
-		/// <summary>
-		/// 设席开宴
-		/// </summary>
 		public static AchievementInfoItem SheXiKaiYan => Instance[(short)256];
 
-		/// <summary>
-		/// 宴请八方
-		/// </summary>
 		public static AchievementInfoItem YanQingBaFang => Instance[(short)257];
 
-		/// <summary>
-		/// 轮回往生
-		/// </summary>
 		public static AchievementInfoItem LunHuiWangSheng => Instance[(short)258];
 
-		/// <summary>
-		/// 六道轮回
-		/// </summary>
 		public static AchievementInfoItem LiuDaoLunHui => Instance[(short)259];
 
-		/// <summary>
-		/// 丝路复兴
-		/// </summary>
 		public static AchievementInfoItem SiLuFuXing => Instance[(short)260];
 
-		/// <summary>
-		/// 服牛帮上宾
-		/// </summary>
 		public static AchievementInfoItem FuNiuBangShangBin => Instance[(short)261];
 
-		/// <summary>
-		/// 书海阁上宾
-		/// </summary>
 		public static AchievementInfoItem ShuHaiGeShangBin => Instance[(short)262];
 
-		/// <summary>
-		/// 五湖上宾
-		/// </summary>
 		public static AchievementInfoItem WuHuShangBin => Instance[(short)263];
 
-		/// <summary>
-		/// 大武魁上宾
-		/// </summary>
 		public static AchievementInfoItem DaWuKuiShangBin => Instance[(short)264];
 
-		/// <summary>
-		/// 回春堂上宾
-		/// </summary>
 		public static AchievementInfoItem HuiChunTangShangBin => Instance[(short)265];
 
-		/// <summary>
-		/// 公输坊上宾
-		/// </summary>
 		public static AchievementInfoItem GongShuFangShangBin => Instance[(short)266];
 
-		/// <summary>
-		/// 奇货斋上宾
-		/// </summary>
 		public static AchievementInfoItem QiHuoZhaiShangBin => Instance[(short)267];
 
-		/// <summary>
-		/// 千锤百炼
-		/// </summary>
 		public static AchievementInfoItem QianChuiBaiLian => Instance[(short)268];
 
-		/// <summary>
-		/// 鬼斧神工
-		/// </summary>
 		public static AchievementInfoItem GuiFuShenGong => Instance[(short)269];
 
-		/// <summary>
-		/// 织霞成锦
-		/// </summary>
 		public static AchievementInfoItem ZhiXiaChengJin => Instance[(short)270];
 
-		/// <summary>
-		/// 连城之璧
-		/// </summary>
 		public static AchievementInfoItem LianChengZhiBi => Instance[(short)271];
 
-		/// <summary>
-		/// 炉火纯青
-		/// </summary>
 		public static AchievementInfoItem LuHuoChunQing => Instance[(short)272];
 
-		/// <summary>
-		/// 封喉断肠
-		/// </summary>
 		public static AchievementInfoItem FengHouDuanChang => Instance[(short)273];
 
-		/// <summary>
-		/// 烹龙炮凤
-		/// </summary>
 		public static AchievementInfoItem PengLongPaoFeng => Instance[(short)274];
 
-		/// <summary>
-		/// 驿路初通
-		/// </summary>
 		public static AchievementInfoItem YiLuChuTong => Instance[(short)275];
 
-		/// <summary>
-		/// 九州通衢
-		/// </summary>
 		public static AchievementInfoItem JiuZhouTongQu => Instance[(short)276];
 
-		/// <summary>
-		/// 恶丐窝
-		/// </summary>
 		public static AchievementInfoItem EGaiWo => Instance[(short)277];
 
-		/// <summary>
-		/// 贼人营寨
-		/// </summary>
 		public static AchievementInfoItem ZeiRenYingZhai => Instance[(short)278];
 
-		/// <summary>
-		/// 悍匪砦
-		/// </summary>
 		public static AchievementInfoItem HanFeiZhai => Instance[(short)279];
 
-		/// <summary>
-		/// 叛徒结伙
-		/// </summary>
 		public static AchievementInfoItem PanTuJieHuo => Instance[(short)280];
 
-		/// <summary>
-		/// 恶人谷
-		/// </summary>
 		public static AchievementInfoItem ERenGu => Instance[(short)281];
 
-		/// <summary>
-		/// 迷香阵
-		/// </summary>
 		public static AchievementInfoItem MiXiangZhen => Instance[(short)282];
 
-		/// <summary>
-		/// 乱葬岗
-		/// </summary>
 		public static AchievementInfoItem LuanZangGang => Instance[(short)283];
 
-		/// <summary>
-		/// 异士居
-		/// </summary>
 		public static AchievementInfoItem YiShiJu => Instance[(short)284];
 
-		/// <summary>
-		/// 邪人死地
-		/// </summary>
 		public static AchievementInfoItem XieRenSiDi => Instance[(short)285];
 
-		/// <summary>
-		/// 修罗场
-		/// </summary>
 		public static AchievementInfoItem XiuLuoChang => Instance[(short)286];
 
-		/// <summary>
-		/// 群魔乱舞
-		/// </summary>
 		public static AchievementInfoItem QunMoLuanWu => Instance[(short)287];
 
-		/// <summary>
-		/// 弃世绝境
-		/// </summary>
 		public static AchievementInfoItem QiShiJueJing => Instance[(short)288];
 
-		/// <summary>
-		/// 义士堂
-		/// </summary>
 		public static AchievementInfoItem YiShiTang => Instance[(short)289];
 
-		/// <summary>
-		/// 任侠会盟
-		/// </summary>
 		public static AchievementInfoItem RenXiaHuiMeng => Instance[(short)290];
 
-		/// <summary>
-		/// 世外秘境
-		/// </summary>
 		public static AchievementInfoItem ShiWaiMiJing => Instance[(short)291];
 
-		/// <summary>
-		/// 秋虫高鸣
-		/// </summary>
 		public static AchievementInfoItem QiuChongGaoMing => Instance[(short)292];
 
-		/// <summary>
-		/// 聊以饲鸡
-		/// </summary>
 		public static AchievementInfoItem LiaoYiSiJi => Instance[(short)293];
 
-		/// <summary>
-		/// 一鸣惊人
-		/// </summary>
 		public static AchievementInfoItem YiMingJingRen => Instance[(short)294];
 
-		/// <summary>
-		/// 虫王全谱
-		/// </summary>
 		public static AchievementInfoItem ChongWangQuanPu => Instance[(short)295];
 
-		/// <summary>
-		/// 斗虫之道
-		/// </summary>
 		public static AchievementInfoItem DouChongZhiDao => Instance[(short)296];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AchievementInfo Instance = new AchievementInfo();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "RequirementTypes", "RequirementStats", "TemplateId", "Icon", "IconSmall", "Type", "Level", "SteamName" };

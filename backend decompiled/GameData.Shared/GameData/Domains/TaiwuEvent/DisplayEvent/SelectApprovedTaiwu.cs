@@ -4,27 +4,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 选择支持太吾人物数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class SelectApprovedTaiwu : ISerializableGameData
 {
-	/// <summary>
-	/// 每个人对太吾的支持度
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, short> CharacterApprovingRate;
 
-	/// <summary>
-	/// 拥有王公授予官职的角色id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> DukeTitleCharIdList;
 
-	/// <summary>
-	/// 目标支持度
-	/// </summary>
 	[SerializableGameDataField]
 	public short TargetApprovingRate;
 
@@ -34,13 +22,11 @@ public class SelectApprovedTaiwu : ISerializableGameData
 		DukeTitleCharIdList = new List<int>();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -53,7 +39,6 @@ public class SelectApprovedTaiwu : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -85,7 +70,6 @@ public class SelectApprovedTaiwu : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

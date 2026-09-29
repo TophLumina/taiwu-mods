@@ -5,15 +5,9 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 产业公式与数据上下文的桥接，可用于自动获取公式参数进行计算.
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class BuildingFormulaContextBridge : ISerializableGameData, IFormulaContextBridge<EBuildingFormulaArgType>
 {
-	/// <summary>
-	/// 计算参数
-	/// </summary>
 	public delegate int CalcArgument(BuildingBlockKey blockKey, EBuildingFormulaArgType argType);
 
 	private BuildingBlockKey _blockKey;
@@ -24,14 +18,6 @@ public class BuildingFormulaContextBridge : ISerializableGameData, IFormulaConte
 
 	public BuildingBlockKey BlockKey => _blockKey;
 
-	/// <summary>
-	/// 初始化，设置当前正在计算的建筑的参数缓存.
-	/// 只有后端需要调用, 前端数据通过后端直接序列化得到.
-	/// </summary>
-	/// <param name="blockKey"></param>
-	/// <param name="configData">配置数据</param>
-	/// <param name="calcArgHandler">参数计算方法</param>
-	/// <param name="cacheAllArgs">是否直接缓存所有的参数</param>
 	public void Initialize(BuildingBlockKey blockKey, BuildingBlockItem configData, CalcArgument calcArgHandler, bool cacheAllArgs = false)
 	{
 		if (_argValues == null)
@@ -70,7 +56,6 @@ public class BuildingFormulaContextBridge : ISerializableGameData, IFormulaConte
 		}
 	}
 
-	/// <inheritdoc />
 	public int GetArgument(EBuildingFormulaArgType argType)
 	{
 		if (_argValues.TryGetValue(argType, out var value))
@@ -82,13 +67,11 @@ public class BuildingFormulaContextBridge : ISerializableGameData, IFormulaConte
 		return value;
 	}
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8 + SerializationHelper.DictionaryOfBasicTypePair.GetSerializedSize(_argValues);
@@ -99,7 +82,6 @@ public class BuildingFormulaContextBridge : ISerializableGameData, IFormulaConte
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(ulong*)pData = (ulong)_blockKey;
@@ -112,7 +94,6 @@ public class BuildingFormulaContextBridge : ISerializableGameData, IFormulaConte
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

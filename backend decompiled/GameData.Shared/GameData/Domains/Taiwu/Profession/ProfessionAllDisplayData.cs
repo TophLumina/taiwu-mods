@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession;
 
-/// <summary>
-/// 角色志向展示数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class ProfessionAllDisplayData : ISerializableGameData
 {
@@ -21,25 +18,17 @@ public class ProfessionAllDisplayData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "CurrProfessionId", "ProfessionDataList" };
 	}
 
-	/// <summary>
-	/// 当前志向
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrProfessionId;
 
-	/// <summary>
-	/// 所有志向
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ProfessionData> ProfessionDataList;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -63,7 +52,6 @@ public class ProfessionAllDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -109,7 +97,6 @@ public class ProfessionAllDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -6,31 +6,18 @@ namespace Config;
 [Serializable]
 public class TutorialFunctionTypeItem : ConfigItem<TutorialFunctionTypeItem, short>
 {
-	/// <summary>
-	/// 模板ID
-	/// </summary>
 	public readonly short TemplateId;
 
-	/// <summary>
-	/// 构造器 - constructor0
-	/// </summary>
-	/// <param name="templateId">模板ID</param>
 	public TutorialFunctionTypeItem(short templateId)
 	{
 		TemplateId = templateId;
 	}
 
-	/// <summary>
-	/// 默认构造器 - constructor1
-	/// </summary>
 	public TutorialFunctionTypeItem()
 	{
 		TemplateId = 0;
 	}
 
-	/// <summary>
-	/// 复制构造器 - constructor2
-	/// </summary>
 	public TutorialFunctionTypeItem(short templateId, TutorialFunctionTypeItem other)
 	{
 		TemplateId = templateId;
@@ -41,10 +28,6 @@ public class TutorialFunctionTypeItem : ConfigItem<TutorialFunctionTypeItem, sho
 		return TemplateId;
 	}
 
-	/// <summary>
-	/// 以指定Id生成ConfigData的副本
-	/// </summary>
-	/// <param name="templateId"></param>
 	public override TutorialFunctionTypeItem Duplicate(int templateId)
 	{
 		return new TutorialFunctionTypeItem((short)templateId, this);

@@ -7,201 +7,84 @@ namespace Config;
 [Serializable]
 public class CharacterDeathType : ConfigData<CharacterDeathTypeItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 未知原因
-		/// </summary>
 		public const short Unknown = 0;
 
-		/// <summary>
-		/// 寿终正寝
-		/// </summary>
 		public const short NaturalDeath = 1;
 
-		/// <summary>
-		/// 健康过低
-		/// </summary>
 		public const short LowHealth = 2;
 
-		/// <summary>
-		/// 秘密处决
-		/// </summary>
 		public const short ExecutedInPrivate = 3;
 
-		/// <summary>
-		/// 公开处决
-		/// </summary>
 		public const short ExecutedInPublic = 4;
 
-		/// <summary>
-		/// 外道巢穴
-		/// </summary>
 		public const short EnemyNest = 5;
 
-		/// <summary>
-		/// 天灾
-		/// </summary>
 		public const short Disaster = 6;
 
-		/// <summary>
-		/// 界青暗杀
-		/// </summary>
 		public const short AssassinationByJieqing = 7;
 
-		/// <summary>
-		/// 无影令
-		/// </summary>
 		public const short WuYingOwner = 8;
 
-		/// <summary>
-		/// 石牢了断
-		/// </summary>
 		public const short KilledInStoneRoom = 9;
 
-		/// <summary>
-		/// 相枢爪牙
-		/// </summary>
 		public const short XiangshuMinion = 10;
 
-		/// <summary>
-		/// 龙语茯
-		/// </summary>
 		public const short LongYufu = 11;
 
-		/// <summary>
-		/// 大岳瑶常
-		/// </summary>
 		public const short DayueYaochang = 12;
 
-		/// <summary>
-		/// 小大岳瑶常
-		/// </summary>
 		public const short JuniorDayueYaochang = 13;
 
-		/// <summary>
-		/// 姬穸
-		/// </summary>
 		public const short Jixi = 14;
 
-		/// <summary>
-		/// 保卫神木
-		/// </summary>
 		public const short ProtectHeavenlyTree = 15;
 
-		/// <summary>
-		/// 玄灰绝命
-		/// </summary>
 		public const short DarkAshKill = 16;
 
-		/// <summary>
-		/// 绝念泥丸
-		/// </summary>
 		public const short BecomeNoMindGuy = 17;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 未知原因
-		/// </summary>
 		public static CharacterDeathTypeItem Unknown => Instance[(short)0];
 
-		/// <summary>
-		/// 寿终正寝
-		/// </summary>
 		public static CharacterDeathTypeItem NaturalDeath => Instance[(short)1];
 
-		/// <summary>
-		/// 健康过低
-		/// </summary>
 		public static CharacterDeathTypeItem LowHealth => Instance[(short)2];
 
-		/// <summary>
-		/// 秘密处决
-		/// </summary>
 		public static CharacterDeathTypeItem ExecutedInPrivate => Instance[(short)3];
 
-		/// <summary>
-		/// 公开处决
-		/// </summary>
 		public static CharacterDeathTypeItem ExecutedInPublic => Instance[(short)4];
 
-		/// <summary>
-		/// 外道巢穴
-		/// </summary>
 		public static CharacterDeathTypeItem EnemyNest => Instance[(short)5];
 
-		/// <summary>
-		/// 天灾
-		/// </summary>
 		public static CharacterDeathTypeItem Disaster => Instance[(short)6];
 
-		/// <summary>
-		/// 界青暗杀
-		/// </summary>
 		public static CharacterDeathTypeItem AssassinationByJieqing => Instance[(short)7];
 
-		/// <summary>
-		/// 无影令
-		/// </summary>
 		public static CharacterDeathTypeItem WuYingOwner => Instance[(short)8];
 
-		/// <summary>
-		/// 石牢了断
-		/// </summary>
 		public static CharacterDeathTypeItem KilledInStoneRoom => Instance[(short)9];
 
-		/// <summary>
-		/// 相枢爪牙
-		/// </summary>
 		public static CharacterDeathTypeItem XiangshuMinion => Instance[(short)10];
 
-		/// <summary>
-		/// 龙语茯
-		/// </summary>
 		public static CharacterDeathTypeItem LongYufu => Instance[(short)11];
 
-		/// <summary>
-		/// 大岳瑶常
-		/// </summary>
 		public static CharacterDeathTypeItem DayueYaochang => Instance[(short)12];
 
-		/// <summary>
-		/// 小大岳瑶常
-		/// </summary>
 		public static CharacterDeathTypeItem JuniorDayueYaochang => Instance[(short)13];
 
-		/// <summary>
-		/// 姬穸
-		/// </summary>
 		public static CharacterDeathTypeItem Jixi => Instance[(short)14];
 
-		/// <summary>
-		/// 保卫神木
-		/// </summary>
 		public static CharacterDeathTypeItem ProtectHeavenlyTree => Instance[(short)15];
 
-		/// <summary>
-		/// 玄灰绝命
-		/// </summary>
 		public static CharacterDeathTypeItem DarkAshKill => Instance[(short)16];
 
-		/// <summary>
-		/// 绝念泥丸
-		/// </summary>
 		public static CharacterDeathTypeItem BecomeNoMindGuy => Instance[(short)17];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CharacterDeathType Instance = new CharacterDeathType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "DefaultLifeRecord", "DefaultMonthlyNotification", "TemplateId" };

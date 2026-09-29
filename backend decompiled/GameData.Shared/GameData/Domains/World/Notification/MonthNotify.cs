@@ -10,14 +10,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.World.Notification;
 
-/// <summary>
-/// 过月月报单月数据
-/// </summary>
-/// <summary>
-/// 对于引用类型字段, 构造函数中可以不创建对象, 保留默认的 null 值.
-/// 在进行反序列化时, 允许所有引用类型字段都为 null.
-/// 但是在序列化时, 要求所有是定长集合的引用字段都已经被创建, 且长度与定义一致. 集合中的引用类型元素若也为定长, 则也必须被创建; 变长的则可以为 null.
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class MonthNotify : ISerializableGameData
 {
@@ -217,39 +209,21 @@ public class MonthNotify : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int Date;
 
-	/// <summary>
-	/// 保存这份月报时的太吾Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuId;
 
-	/// <summary>
-	/// 过月通知
-	/// </summary>
 	[SerializableGameDataField]
 	public MonthlyNotificationCollection MonthlyNotificationCollection;
 
-	/// <summary>
-	/// 关联的角色名信息
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, NameAndLifeRelatedData> CharacterNames = new Dictionary<int, NameAndLifeRelatedData>();
 
-	/// <summary>
-	/// 关联角色显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, AvatarRelatedData> Avatars = new Dictionary<int, AvatarRelatedData>();
 
-	/// <summary>
-	/// 关联的蛟、龙名字相关显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, JiaoLoongNameRelatedData> JiaoLoongNames = new Dictionary<int, JiaoLoongNameRelatedData>();
 
@@ -403,10 +377,6 @@ public class MonthNotify : ISerializableGameData
 	[SerializableGameDataField]
 	public Dictionary<int, short> CurrFavor = new Dictionary<int, short>();
 
-	/// <summary>
-	/// 关系的变化
-	/// (角色A的Id, 角色B的Id) -&gt; RelationDisplayType.TemplateId的位运算
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public Dictionary<IntPair, int> RemovedRelation = new Dictionary<IntPair, int>();
@@ -423,179 +393,90 @@ public class MonthNotify : ISerializableGameData
 	[SerializableGameDataField]
 	public Dictionary<IntPair, int> AddedPassiveRelation = new Dictionary<IntPair, int>();
 
-	/// <summary>
-	/// 见闻
-	/// </summary>
 	[SerializableGameDataField]
 	public List<NormalInformation> Information = new List<NormalInformation>();
 
-	/// <summary>
-	/// 与太吾之间的关系快照，秘闻专用
-	/// 角色Id -&gt; 得分最高的关系RelationDisplayType.TemplateId
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, short> TaiwuRelations = new Dictionary<int, short>();
 
-	/// <summary>
-	/// 角色在秘闻排序中的得分
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> CharacterScore = new Dictionary<int, int>();
 
-	/// <summary>
-	/// 秘闻快照
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, SecretInformationSnapshot> SecretInformationSnapshots = new Dictionary<int, SecretInformationSnapshot>();
 
-	/// <summary>
-	/// 资源
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts Resources = new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int));
 
-	/// <summary>
-	/// 资源增长
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] ResourceDelta = new int[8];
 
-	/// <summary>
-	/// 可收获银钱
-	/// </summary>
 	[SerializableGameDataField]
 	public int GainMoney;
 
-	/// <summary>
-	/// 可收获威望
-	/// </summary>
 	[SerializableGameDataField]
 	public int GainAuthority;
 
-	/// <summary>
-	/// 可招揽人才
-	/// </summary>
 	[SerializableGameDataField]
 	public int GainVillager;
 
-	/// <summary>
-	/// 可收获物品
-	/// </summary>
 	[SerializableGameDataField]
 	public int GainItem;
 
-	/// <summary>
-	/// 可购买物品
-	/// </summary>
 	[SerializableGameDataField]
 	public int PawnShopItem;
 
-	/// <summary>
-	/// 人口
-	/// </summary>
 	[SerializableGameDataField]
 	public int VillagerCount;
 
-	/// <summary>
-	/// 幼年
-	/// </summary>
 	[SerializableGameDataField]
 	public int YouthCount;
 
-	/// <summary>
-	/// 空闲
-	/// </summary>
 	[SerializableGameDataField]
 	public int IdleCount;
 
-	/// <summary>
-	/// 经营
-	/// </summary>
 	[SerializableGameDataField]
 	public int ManagingCount;
 
-	/// <summary>
-	/// 派遣
-	/// </summary>
 	[SerializableGameDataField]
 	public int DispatchCount;
 
-	/// <summary>
-	/// 身份
-	/// </summary>
 	[SerializableGameDataField]
 	public int RoleCount;
 
-	/// <summary>
-	/// 居所
-	/// </summary>
 	[SerializableGameDataField]
 	public int HouseCapacity;
 
-	/// <summary>
-	/// 石屋
-	/// </summary>
 	[SerializableGameDataField]
 	public int StoneMax;
 
-	/// <summary>
-	/// 石屋
-	/// </summary>
 	[SerializableGameDataField]
 	public int StoneCurr;
 
-	/// <summary>
-	/// 负重上限
-	/// </summary>
 	[SerializableGameDataField]
 	public int WarehouseMax;
 
-	/// <summary>
-	/// 仓库负重
-	/// </summary>
 	[SerializableGameDataField]
 	public int WarehouseCurr;
 
-	/// <summary>
-	/// 文化
-	/// </summary>
 	[SerializableGameDataField]
 	public int CultureMax;
 
-	/// <summary>
-	/// 文化
-	/// </summary>
 	[SerializableGameDataField]
 	public int CultureCurr;
 
-	/// <summary>
-	/// 安定
-	/// </summary>
 	[SerializableGameDataField]
 	public int SafetyMax;
 
-	/// <summary>
-	/// 安定
-	/// </summary>
 	[SerializableGameDataField]
 	public int SafetyCurr;
 
-	/// <summary>
-	/// 建设空间
-	/// </summary>
 	[SerializableGameDataField]
 	public int BuildingCount;
 
-	/// <summary>
-	/// 建设空间
-	/// </summary>
 	[SerializableGameDataField]
 	public int BuildingCapacity;
 
-	/// <summary>
-	/// 村民身份相关记录
-	/// VillagerRoleActionRecordTemplateId -&gt; Value
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public Dictionary<short, int> VillagerRoleRecords = new Dictionary<short, int>();
@@ -605,13 +486,11 @@ public class MonthNotify : ISerializableGameData
 		Eaten.Initialize();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 424;
@@ -649,7 +528,6 @@ public class MonthNotify : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -956,7 +834,6 @@ public class MonthNotify : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

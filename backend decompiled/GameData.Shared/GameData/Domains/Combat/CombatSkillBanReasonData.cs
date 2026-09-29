@@ -8,56 +8,29 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 功法禁用原因 
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct CombatSkillBanReasonData : ISerializableGameData
 {
-	/// <summary>
-	/// 禁用原因类型，用于序列化传输
-	/// </summary>
 	[SerializableGameDataField]
 	private sbyte _internalType;
 
-	/// <summary>
-	/// 禁用原因参数，用于序列化传输
-	/// </summary>
 	[SerializableGameDataField]
 	private sbyte _internalParam0;
 
-	/// <summary>
-	/// 禁用原因参数，用于序列化传输
-	/// </summary>
 	[SerializableGameDataField]
 	private sbyte _internalParam1;
 
-	/// <summary>
-	/// 禁用原因参数，用于序列化传输
-	/// </summary>
 	[SerializableGameDataField]
 	private sbyte _internalParam2;
 
-	/// <summary>
-	/// 所需式
-	/// </summary>
 	[SerializableGameDataField]
 	public List<NeedTrick> CostTricks;
 
-	/// <summary>
-	/// 拥有式
-	/// </summary>
 	[SerializableGameDataField]
 	public List<NeedTrick> HasTricks;
 
-	/// <summary>
-	/// 禁用原因类型
-	/// </summary>
 	public ECombatSkillBanReasonType Type => (ECombatSkillBanReasonType)_internalType;
 
-	/// <summary>
-	/// 消耗脚力
-	/// </summary>
 	public int CostMobility
 	{
 		get
@@ -70,9 +43,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拥有脚力
-	/// </summary>
 	public int HasMobility
 	{
 		get
@@ -85,9 +55,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 消耗提气
-	/// </summary>
 	public int CostBreath
 	{
 		get
@@ -100,9 +67,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拥有提气
-	/// </summary>
 	public int HasBreath
 	{
 		get
@@ -115,9 +79,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 消耗架势
-	/// </summary>
 	public int CostStance
 	{
 		get
@@ -130,9 +91,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拥有架势
-	/// </summary>
 	public int HasStance
 	{
 		get
@@ -145,9 +103,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 消耗蛊引
-	/// </summary>
 	public int CostWug
 	{
 		get
@@ -160,9 +115,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拥有蛊引
-	/// </summary>
 	public int HasWug
 	{
 		get
@@ -175,9 +127,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 消耗真气类型
-	/// </summary>
 	public int CostNeiliAllocationType
 	{
 		get
@@ -190,9 +139,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 消耗真气值
-	/// </summary>
 	public int CostNeiliAllocationValue
 	{
 		get
@@ -205,9 +151,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拥有真气值
-	/// </summary>
 	public int HasNeiliAllocationValue
 	{
 		get
@@ -220,9 +163,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 基于类型的构造方法
-	/// </summary>
 	public CombatSkillBanReasonData(ECombatSkillBanReasonType type, ICombatSkillBridge combatSkill, ICombatCharacterBridge combatChar)
 	{
 		_internalType = (sbyte)type;
@@ -310,13 +250,11 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		HasTricks = new List<NeedTrick>(other.HasTricks);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -329,7 +267,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -381,7 +318,6 @@ public struct CombatSkillBanReasonData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

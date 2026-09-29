@@ -5,45 +5,24 @@ using GameData.Serializer;
 
 namespace GameData.Domains.LegendaryBook;
 
-/// <summary>
-/// 三尸奇书断执
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class LegendaryBookOwnerData : ISerializableGameData
 {
-	/// <summary>
-	/// 奇书
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, int> BookMap;
 
-	/// <summary>
-	/// 角色形象
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, CharacterDisplayData> CharacterDisplayDataMap;
 
-	/// <summary>
-	/// 角色心情
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, sbyte> CharacterHappinessMap;
 
-	/// <summary>
-	/// 角色属性
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, MainAttributes> CharacterAttributeMap;
 
-	/// <summary>
-	/// 当前健康值
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, short> CharacterHealthMap;
 
-	/// <summary>
-	/// 当前最大健康值
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, short> CharacterLeftMaxHealthMap;
 
@@ -57,13 +36,11 @@ public class LegendaryBookOwnerData : ISerializableGameData
 		CharacterLeftMaxHealthMap = new Dictionary<int, short>();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -80,7 +57,6 @@ public class LegendaryBookOwnerData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* num = pData + SerializationHelper.DictionaryOfBasicTypePair.Serialize(pData, ref BookMap);
@@ -96,7 +72,6 @@ public class LegendaryBookOwnerData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* num = pData + SerializationHelper.DictionaryOfBasicTypePair.Deserialize(pData, ref BookMap);

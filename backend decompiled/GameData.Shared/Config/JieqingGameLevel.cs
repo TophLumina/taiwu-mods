@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class JieqingGameLevel : ConfigData<JieqingGameLevelItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static JieqingGameLevel Instance = new JieqingGameLevel();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "SingPitch" };

@@ -7,121 +7,52 @@ namespace Config;
 [Serializable]
 public class VillagerRoleAutoAction : ConfigData<VillagerRoleAutoActionItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 农户_采集资源
-		/// </summary>
 		public const short FarmerAutoCollectResource = 0;
 
-		/// <summary>
-		/// 匠人_修理维护
-		/// </summary>
 		public const short CraftsmanRepairItems = 1;
 
-		/// <summary>
-		/// 匠人_巧手匠心
-		/// </summary>
 		public const short CraftsmanGetMaterial = 2;
 
-		/// <summary>
-		/// 匠人_点石成金
-		/// </summary>
 		public const short CraftsmanImproveMaterial = 3;
 
-		/// <summary>
-		/// 大夫_悬壶济世
-		/// </summary>
 		public const short DoctorCureOthers = 4;
 
-		/// <summary>
-		/// 商人_银钱运营
-		/// </summary>
 		public const short MerchantCollectMoney = 5;
 
-		/// <summary>
-		/// 文人_琴棋书画
-		/// </summary>
 		public const short LiteratiEntertainOthers = 6;
 
-		/// <summary>
-		/// 护冢_行侠仗义
-		/// </summary>
 		public const short SwordTombKeeperFightHeretics = 7;
 
-		/// <summary>
-		/// 使者_人情世故
-		/// </summary>
 		public const short VillageHeadBuildRelationships = 8;
 
-		/// <summary>
-		/// 使者_缘来如此
-		/// </summary>
 		public const short VillageChangeRelationships = 9;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 农户_采集资源
-		/// </summary>
 		public static VillagerRoleAutoActionItem FarmerAutoCollectResource => Instance[(short)0];
 
-		/// <summary>
-		/// 匠人_修理维护
-		/// </summary>
 		public static VillagerRoleAutoActionItem CraftsmanRepairItems => Instance[(short)1];
 
-		/// <summary>
-		/// 匠人_巧手匠心
-		/// </summary>
 		public static VillagerRoleAutoActionItem CraftsmanGetMaterial => Instance[(short)2];
 
-		/// <summary>
-		/// 匠人_点石成金
-		/// </summary>
 		public static VillagerRoleAutoActionItem CraftsmanImproveMaterial => Instance[(short)3];
 
-		/// <summary>
-		/// 大夫_悬壶济世
-		/// </summary>
 		public static VillagerRoleAutoActionItem DoctorCureOthers => Instance[(short)4];
 
-		/// <summary>
-		/// 商人_银钱运营
-		/// </summary>
 		public static VillagerRoleAutoActionItem MerchantCollectMoney => Instance[(short)5];
 
-		/// <summary>
-		/// 文人_琴棋书画
-		/// </summary>
 		public static VillagerRoleAutoActionItem LiteratiEntertainOthers => Instance[(short)6];
 
-		/// <summary>
-		/// 护冢_行侠仗义
-		/// </summary>
 		public static VillagerRoleAutoActionItem SwordTombKeeperFightHeretics => Instance[(short)7];
 
-		/// <summary>
-		/// 使者_人情世故
-		/// </summary>
 		public static VillagerRoleAutoActionItem VillageHeadBuildRelationships => Instance[(short)8];
 
-		/// <summary>
-		/// 使者_缘来如此
-		/// </summary>
 		public static VillagerRoleAutoActionItem VillageChangeRelationships => Instance[(short)9];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static VillagerRoleAutoAction Instance = new VillagerRoleAutoAction();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

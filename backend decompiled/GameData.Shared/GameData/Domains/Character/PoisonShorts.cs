@@ -5,23 +5,11 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 毒素的量
-/// </summary>
 [Serializable]
 public struct PoisonShorts : ISerializableGameData, ISerializable
 {
-	/// <summary>
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.Combat.PoisonType" />
-	/// </summary>
 	public unsafe fixed short Items[6];
 
-	/// <summary>
-	/// 直接通过 index 安全访问数据的接口.
-	/// 主要用于对性能要求不是特别严格的情况 (非过月逻辑中频繁调用或可能每帧多次调用的逻辑皆可)
-	/// </summary>
-	/// <param name="index">毒素类型<see cref="T:GameData.Domains.Combat.PoisonType" /></param>
 	public unsafe ref short this[int index]
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -35,12 +23,6 @@ public struct PoisonShorts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 PoisonType.Count == 6.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (short* items = Items)
@@ -50,10 +32,6 @@ public struct PoisonShorts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 从配置表构造对象
-	/// </summary>
-	/// <param name="poisons"></param>
 	public unsafe PoisonShorts(params int[] poisons)
 	{
 		for (int i = 0; i < 6; i++)
@@ -110,10 +88,6 @@ public struct PoisonShorts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 添加毒素量
-	/// </summary>
-	/// <param name="delta"></param>
 	public unsafe void Add(PoisonShorts delta)
 	{
 		for (int i = 0; i < 6; i++)
@@ -127,11 +101,6 @@ public struct PoisonShorts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 计算并返回两者的差值
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public unsafe PoisonShorts Subtract(PoisonShorts other)
 	{
 		PoisonShorts delta = default(PoisonShorts);
@@ -142,9 +111,6 @@ public struct PoisonShorts : ISerializableGameData, ISerializable
 		return delta;
 	}
 
-	/// <summary>
-	/// 获取倒转了正负号后的对象
-	/// </summary>
 	public unsafe PoisonShorts GetReversed()
 	{
 		PoisonShorts reversed = default(PoisonShorts);
@@ -155,10 +121,6 @@ public struct PoisonShorts : ISerializableGameData, ISerializable
 		return reversed;
 	}
 
-	/// <summary>
-	/// 是否含有非零值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool IsNonZero()
 	{
 		fixed (short* pItems = Items)
@@ -175,10 +137,6 @@ public struct PoisonShorts : ISerializableGameData, ISerializable
 		return false;
 	}
 
-	/// <summary>
-	/// 获取和
-	/// </summary>
-	/// <returns></returns>
 	public unsafe short Sum()
 	{
 		short sum = 0;

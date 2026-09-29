@@ -7,1371 +7,552 @@ namespace Config;
 [Serializable]
 public class SpecialEffect : ConfigData<SpecialEffectItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 赤目蛊降
-		/// </summary>
 		public const short WugRedEyeDirect = 469;
 
-		/// <summary>
-		/// 螭魅蛊降
-		/// </summary>
 		public const short WugForestSpiritDirect = 470;
 
-		/// <summary>
-		/// 黑血蛊降
-		/// </summary>
 		public const short WugBlackBloodDirect = 471;
 
-		/// <summary>
-		/// 心魔蛊降
-		/// </summary>
 		public const short WugDevilInsideDirect = 472;
 
-		/// <summary>
-		/// 九阴尸螭蛊
-		/// </summary>
 		public const short WugCorpseWormDirect = 473;
 
-		/// <summary>
-		/// 碧玉冰蚕蛊
-		/// </summary>
 		public const short WugIceSilkwormDirect = 474;
 
-		/// <summary>
-		/// 王蛊金蚕降
-		/// </summary>
 		public const short WugGoldenSilkwormDirect = 475;
 
-		/// <summary>
-		/// 百彩青髓蛊
-		/// </summary>
 		public const short WugAzureMarrowDirect = 476;
 
-		/// <summary>
-		/// 戳眼削耳功
-		/// </summary>
 		public const short ChuoYanXiaoErGongDirect = 575;
 
-		/// <summary>
-		/// 逆·赤目蛊降
-		/// </summary>
 		public const short WugRedEyeReverse = 1195;
 
-		/// <summary>
-		/// 逆·螭魅蛊降
-		/// </summary>
 		public const short WugForestSpiritReverse = 1196;
 
-		/// <summary>
-		/// 逆·黑血蛊降
-		/// </summary>
 		public const short WugBlackBloodReverse = 1197;
 
-		/// <summary>
-		/// 逆·心魔蛊降
-		/// </summary>
 		public const short WugDevilInsideReverse = 1198;
 
-		/// <summary>
-		/// 逆·九阴尸螭蛊
-		/// </summary>
 		public const short WugCorpseWormReverse = 1199;
 
-		/// <summary>
-		/// 逆·碧玉冰蚕蛊
-		/// </summary>
 		public const short WugIceSilkwormReverse = 1200;
 
-		/// <summary>
-		/// 逆·王蛊金蚕降
-		/// </summary>
 		public const short WugGoldenSilkwormReverse = 1201;
 
-		/// <summary>
-		/// 逆·百彩青髓蛊
-		/// </summary>
 		public const short WugAzureMarrowReverse = 1202;
 
-		/// <summary>
-		/// 逆·戳眼削耳功
-		/// </summary>
 		public const short ChuoYanXiaoErGongReverse = 1301;
 
-		/// <summary>
-		/// 逃脱中断
-		/// </summary>
 		public const short InterruptFlee = 1456;
 
-		/// <summary>
-		/// 治疗伤势
-		/// </summary>
 		public const short HealInjury = 1457;
 
-		/// <summary>
-		/// 疗伤药材不足
-		/// </summary>
 		public const short HealInjuryLackHerb = 1458;
 
-		/// <summary>
-		/// 驱除毒素
-		/// </summary>
 		public const short HealPoison = 1459;
 
-		/// <summary>
-		/// 驱毒药材不足
-		/// </summary>
 		public const short HealPoisonLackHerb = 1460;
 
-		/// <summary>
-		/// 内力冲克
-		/// </summary>
 		public const short NeiliCounter = 1462;
 
-		/// <summary>
-		/// 烈毒发作
-		/// </summary>
 		public const short PoisonEffect0 = 1466;
 
-		/// <summary>
-		/// 郁毒发作
-		/// </summary>
 		public const short PoisonEffect1 = 1467;
 
-		/// <summary>
-		/// 寒毒发作
-		/// </summary>
 		public const short PoisonEffect2 = 1468;
 
-		/// <summary>
-		/// 赤毒发作
-		/// </summary>
 		public const short PoisonEffect3 = 1469;
 
-		/// <summary>
-		/// 腐毒发作
-		/// </summary>
 		public const short PoisonEffect4 = 1470;
 
-		/// <summary>
-		/// 幻毒发作
-		/// </summary>
 		public const short PoisonEffect5 = 1471;
 
-		/// <summary>
-		/// 接招1
-		/// </summary>
 		public const short TestSkill0 = 1472;
 
-		/// <summary>
-		/// 接招2
-		/// </summary>
 		public const short TestSkill1 = 1473;
 
-		/// <summary>
-		/// 接招3
-		/// </summary>
 		public const short TestSkill2 = 1474;
 
-		/// <summary>
-		/// 接招4
-		/// </summary>
 		public const short TestSkill3 = 1475;
 
-		/// <summary>
-		/// 接招5
-		/// </summary>
 		public const short TestSkill4 = 1476;
 
-		/// <summary>
-		/// 接招6
-		/// </summary>
 		public const short TestSkill5 = 1477;
 
-		/// <summary>
-		/// 接招7
-		/// </summary>
 		public const short TestSkill6 = 1478;
 
-		/// <summary>
-		/// 接招8
-		/// </summary>
 		public const short TestSkill7 = 1479;
 
-		/// <summary>
-		/// 接招9
-		/// </summary>
 		public const short TestSkill8 = 1480;
 
-		/// <summary>
-		/// 接招10
-		/// </summary>
 		public const short TestSkillFinal = 1481;
 
-		/// <summary>
-		/// 实战修习
-		/// </summary>
 		public const short CastAddPracticeLevel = 1486;
 
-		/// <summary>
-		/// 内息紊乱受伤
-		/// </summary>
 		public const short QiDisorderInjury = 1487;
 
-		/// <summary>
-		/// 裂皮碎骨
-		/// </summary>
 		public const short MixPoisonEffect034 = 1642;
 
-		/// <summary>
-		/// 心残肉挫
-		/// </summary>
 		public const short MixPoisonEffect045 = 1643;
 
-		/// <summary>
-		/// 骨错筋缠
-		/// </summary>
 		public const short MixPoisonEffect014 = 1644;
 
-		/// <summary>
-		/// 肝肠寸断
-		/// </summary>
 		public const short MixPoisonEffect024 = 1645;
 
-		/// <summary>
-		/// 血迷关窍
-		/// </summary>
 		public const short MixPoisonEffect345 = 1646;
 
-		/// <summary>
-		/// 五脏败腐
-		/// </summary>
 		public const short MixPoisonEffect134 = 1647;
 
-		/// <summary>
-		/// 坏血断肠
-		/// </summary>
 		public const short MixPoisonEffect234 = 1648;
 
-		/// <summary>
-		/// 毒火焚心
-		/// </summary>
 		public const short MixPoisonEffect035 = 1649;
 
-		/// <summary>
-		/// 骨中烧疽
-		/// </summary>
 		public const short MixPoisonEffect013 = 1650;
 
-		/// <summary>
-		/// 血火阴杀
-		/// </summary>
 		public const short MixPoisonEffect023 = 1651;
 
-		/// <summary>
-		/// 摧心蚀元
-		/// </summary>
 		public const short MixPoisonEffect125 = 1652;
 
-		/// <summary>
-		/// 化骨封髓
-		/// </summary>
 		public const short MixPoisonEffect124 = 1653;
 
-		/// <summary>
-		/// 寒锥锁脉
-		/// </summary>
 		public const short MixPoisonEffect012 = 1654;
 
-		/// <summary>
-		/// 锁血凝髓
-		/// </summary>
 		public const short MixPoisonEffect123 = 1655;
 
-		/// <summary>
-		/// 邪阴彻体
-		/// </summary>
 		public const short MixPoisonEffect245 = 1656;
 
-		/// <summary>
-		/// 迷惧钻心
-		/// </summary>
 		public const short MixPoisonEffect025 = 1657;
 
-		/// <summary>
-		/// 剧恶深苦
-		/// </summary>
 		public const short MixPoisonEffect235 = 1658;
 
-		/// <summary>
-		/// 失魂鬼瘴
-		/// </summary>
 		public const short MixPoisonEffect145 = 1659;
 
-		/// <summary>
-		/// 绝脉乱心
-		/// </summary>
 		public const short MixPoisonEffect015 = 1660;
 
-		/// <summary>
-		/// 封颅闭血
-		/// </summary>
 		public const short MixPoisonEffect135 = 1661;
 
-		/// <summary>
-		/// 破敌强击
-		/// </summary>
 		public const short OverwhelmedStrike = 1662;
 
-		/// <summary>
-		/// 七轮感应法状态
-		/// </summary>
 		public const short QiLunGanYingFaDirectState = 1697;
 
-		/// <summary>
-		/// 逆·七轮感应法状态
-		/// </summary>
 		public const short QiLunGanYingFaReverseState = 1698;
 
-		/// <summary>
-		/// 内伤标记免疫
-		/// </summary>
 		public const short ImmunityInnerInjury = 1699;
 
-		/// <summary>
-		/// 外伤标记免疫
-		/// </summary>
 		public const short ImmunityOuterInjury = 1700;
 
-		/// <summary>
-		/// 失神标记免疫
-		/// </summary>
 		public const short ImmunityMind = 1701;
 
-		/// <summary>
-		/// 破绽标记免疫
-		/// </summary>
 		public const short ImmunityFlaw = 1702;
 
-		/// <summary>
-		/// 封穴标记免疫
-		/// </summary>
 		public const short ImmunityAcupoint = 1703;
 
-		/// <summary>
-		/// 重创标记免疫
-		/// </summary>
 		public const short ImmunityFatal = 1704;
 
-		/// <summary>
-		/// 必死标记免疫
-		/// </summary>
 		public const short ImmunityDie = 1705;
 
-		/// <summary>
-		/// 为敌种下王蛊
-		/// </summary>
 		public const short WugKingForEnemy = 1706;
 
-		/// <summary>
-		/// 为己种下王蛊
-		/// </summary>
 		public const short WugKingForMyself = 1707;
 
-		/// <summary>
-		/// 健康损害免疫
-		/// </summary>
 		public const short ImmunityHealth = 1708;
 
-		/// <summary>
-		/// 死气夺魂
-		/// </summary>
 		public const short SiQiDuoHun = 1712;
 
-		/// <summary>
-		/// 生命气造成反噬
-		/// </summary>
 		public const short LifeLinkFeatureMakeInjury = 1713;
 
-		/// <summary>
-		/// 生命气反噬
-		/// </summary>
 		public const short LifeLinkFeatureAcceptInjuryLive = 1714;
 
-		/// <summary>
-		/// 死命气反噬
-		/// </summary>
 		public const short LifeLinkFeatureAcceptInjuryDead = 1715;
 
-		/// <summary>
-		/// 接招无法施招
-		/// </summary>
 		public const short TestSkillBan = 1716;
 
-		/// <summary>
-		/// 落魂钟
-		/// </summary>
 		public const short SoulWitheringBell = 1717;
 
-		/// <summary>
-		/// 被化解获得蓄式
-		/// </summary>
 		public const short AvoidAddTrick = 1741;
 
-		/// <summary>
-		/// 法道
-		/// </summary>
 		public const short VitalDemonA = 1748;
 
-		/// <summary>
-		/// 法天
-		/// </summary>
 		public const short VitalDemonB = 1749;
 
-		/// <summary>
-		/// 法地
-		/// </summary>
 		public const short VitalDemonC = 1750;
 
-		/// <summary>
-		/// 伏魔法印
-		/// </summary>
 		public const short SectStoryMysteryShaolin = 1753;
 
-		/// <summary>
-		/// 随心无念
-		/// </summary>
 		public const short SectStoryMysteryEmei = 1754;
 
-		/// <summary>
-		/// 玄灵断脉
-		/// </summary>
 		public const short SectStoryMysteryBaihua = 1755;
 
-		/// <summary>
-		/// 两仪真元
-		/// </summary>
 		public const short SectStoryMysteryWudang = 1756;
 
-		/// <summary>
-		/// 镇山化气
-		/// </summary>
 		public const short SectStoryMysteryYuanshan = 1757;
 
-		/// <summary>
-		/// 碎骨飞狮
-		/// </summary>
 		public const short SectStoryMysteryShixiang = 1758;
 
-		/// <summary>
-		/// 大衍术咒
-		/// </summary>
 		public const short SectStoryMysteryRanshan = 1759;
 
-		/// <summary>
-		/// 幽神黯然
-		/// </summary>
 		public const short SectStoryMysteryXuannv = 1760;
 
-		/// <summary>
-		/// 欧祖试剑
-		/// </summary>
 		public const short SectStoryMysteryZhujian = 1761;
 
-		/// <summary>
-		/// 避厄泥丸
-		/// </summary>
 		public const short SectStoryMysteryKongsang = 1762;
 
-		/// <summary>
-		/// 密迹法印
-		/// </summary>
 		public const short SectStoryMysteryJingang = 1763;
 
-		/// <summary>
-		/// 蝶母银衣
-		/// </summary>
 		public const short SectStoryMysteryWuxian = 1764;
 
-		/// <summary>
-		/// 星罗气术
-		/// </summary>
 		public const short SectStoryMysteryJieqing = 1765;
 
-		/// <summary>
-		/// 化龙掌力
-		/// </summary>
 		public const short SectStoryMysteryFulong = 1766;
 
-		/// <summary>
-		/// 荒邪鬼气
-		/// </summary>
 		public const short SectStoryMysteryXuehou = 1767;
 
-		/// <summary>
-		/// 降魔金身
-		/// </summary>
 		public const short SectStoryMysteryShaolinSuper = 1768;
 
-		/// <summary>
-		/// 侠风义骨
-		/// </summary>
 		public const short SectStoryMysteryEmeiSuper = 1769;
 
-		/// <summary>
-		/// 化血还生
-		/// </summary>
 		public const short SectStoryMysteryBaihuaSuper = 1770;
 
-		/// <summary>
-		/// 玄神内观
-		/// </summary>
 		public const short SectStoryMysteryWudangSuper = 1771;
 
-		/// <summary>
-		/// 历苦修艰
-		/// </summary>
 		public const short SectStoryMysteryYuanshanSuper = 1772;
 
-		/// <summary>
-		/// 飞狮战阵
-		/// </summary>
 		public const short SectStoryMysteryShixiangSuper = 1773;
 
-		/// <summary>
-		/// 志在千里
-		/// </summary>
 		public const short SectStoryMysteryRanshanSuper = 1774;
 
-		/// <summary>
-		/// 冰辉月华
-		/// </summary>
 		public const short SectStoryMysteryXuannvSuper = 1775;
 
-		/// <summary>
-		/// 神工返铸
-		/// </summary>
 		public const short SectStoryMysteryZhujianSuper = 1776;
 
-		/// <summary>
-		/// 青囊傍身
-		/// </summary>
 		public const short SectStoryMysteryKongsangSuper = 1777;
 
-		/// <summary>
-		/// 轮转不灭
-		/// </summary>
 		public const short SectStoryMysteryJingangSuper = 1778;
 
-		/// <summary>
-		/// 百毒归巢
-		/// </summary>
 		public const short SectStoryMysteryWuxianSuper = 1779;
 
-		/// <summary>
-		/// 星命在身
-		/// </summary>
 		public const short SectStoryMysteryJieqingSuper = 1780;
 
-		/// <summary>
-		/// 百鸟朝凤
-		/// </summary>
 		public const short SectStoryMysteryFulongSuper = 1781;
 
-		/// <summary>
-		/// 邪魔入体
-		/// </summary>
 		public const short SectStoryMysteryXuehouSuper = 1782;
 
-		/// <summary>
-		/// 药毒兵器
-		/// </summary>
 		public const short MasteryWeaponHerb = 1784;
 
-		/// <summary>
-		/// 金铁兵器
-		/// </summary>
 		public const short MasteryWeaponMetal = 1785;
 
-		/// <summary>
-		/// 木材兵器
-		/// </summary>
 		public const short MasteryWeaponWood = 1786;
 
-		/// <summary>
-		/// 玉石兵器
-		/// </summary>
 		public const short MasteryWeaponJade = 1787;
 
-		/// <summary>
-		/// 织物兵器
-		/// </summary>
 		public const short MasteryWeaponFabric = 1788;
 
-		/// <summary>
-		/// 动物兵器
-		/// </summary>
 		public const short MasteryWeaponAnimal = 1789;
 
-		/// <summary>
-		/// 金铁魔音
-		/// </summary>
 		public const short MasterySoundMetal = 1790;
 
-		/// <summary>
-		/// 木材魔音
-		/// </summary>
 		public const short MasterySoundWood = 1791;
 
-		/// <summary>
-		/// 玉石魔音
-		/// </summary>
 		public const short MasterySoundJade = 1792;
 
-		/// <summary>
-		/// 金铁护具
-		/// </summary>
 		public const short MasteryArmorMetal = 1793;
 
-		/// <summary>
-		/// 木材护具
-		/// </summary>
 		public const short MasteryArmorWood = 1794;
 
-		/// <summary>
-		/// 玉石护具
-		/// </summary>
 		public const short MasteryArmorJade = 1795;
 
-		/// <summary>
-		/// 织物护具
-		/// </summary>
 		public const short MasteryArmorFabric = 1796;
 
-		/// <summary>
-		/// 动物护具
-		/// </summary>
 		public const short MasteryArmorAnimal = 1797;
 
-		/// <summary>
-		/// 武具折损
-		/// </summary>
 		public const short MasteryDurabilityToZero = 1798;
 
-		/// <summary>
-		/// 八热烁身
-		/// </summary>
 		public const short BaReCiFu = 1799;
 
-		/// <summary>
-		/// 八寒藏腑
-		/// </summary>
 		public const short BaHanCiFu = 1800;
 
-		/// <summary>
-		/// 无间蕴魂
-		/// </summary>
 		public const short WuJianCiFu = 1801;
 
-		/// <summary>
-		/// 天幕神主
-		/// </summary>
 		public const short TianMuShenZhu = 1829;
 
-		/// <summary>
-		/// 开明天兽
-		/// </summary>
 		public const short KaiMingTianShou = 1830;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 赤目蛊降
-		/// </summary>
 		public static SpecialEffectItem WugRedEyeDirect => Instance[(short)469];
 
-		/// <summary>
-		/// 螭魅蛊降
-		/// </summary>
 		public static SpecialEffectItem WugForestSpiritDirect => Instance[(short)470];
 
-		/// <summary>
-		/// 黑血蛊降
-		/// </summary>
 		public static SpecialEffectItem WugBlackBloodDirect => Instance[(short)471];
 
-		/// <summary>
-		/// 心魔蛊降
-		/// </summary>
 		public static SpecialEffectItem WugDevilInsideDirect => Instance[(short)472];
 
-		/// <summary>
-		/// 九阴尸螭蛊
-		/// </summary>
 		public static SpecialEffectItem WugCorpseWormDirect => Instance[(short)473];
 
-		/// <summary>
-		/// 碧玉冰蚕蛊
-		/// </summary>
 		public static SpecialEffectItem WugIceSilkwormDirect => Instance[(short)474];
 
-		/// <summary>
-		/// 王蛊金蚕降
-		/// </summary>
 		public static SpecialEffectItem WugGoldenSilkwormDirect => Instance[(short)475];
 
-		/// <summary>
-		/// 百彩青髓蛊
-		/// </summary>
 		public static SpecialEffectItem WugAzureMarrowDirect => Instance[(short)476];
 
-		/// <summary>
-		/// 戳眼削耳功
-		/// </summary>
 		public static SpecialEffectItem ChuoYanXiaoErGongDirect => Instance[(short)575];
 
-		/// <summary>
-		/// 逆·赤目蛊降
-		/// </summary>
 		public static SpecialEffectItem WugRedEyeReverse => Instance[(short)1195];
 
-		/// <summary>
-		/// 逆·螭魅蛊降
-		/// </summary>
 		public static SpecialEffectItem WugForestSpiritReverse => Instance[(short)1196];
 
-		/// <summary>
-		/// 逆·黑血蛊降
-		/// </summary>
 		public static SpecialEffectItem WugBlackBloodReverse => Instance[(short)1197];
 
-		/// <summary>
-		/// 逆·心魔蛊降
-		/// </summary>
 		public static SpecialEffectItem WugDevilInsideReverse => Instance[(short)1198];
 
-		/// <summary>
-		/// 逆·九阴尸螭蛊
-		/// </summary>
 		public static SpecialEffectItem WugCorpseWormReverse => Instance[(short)1199];
 
-		/// <summary>
-		/// 逆·碧玉冰蚕蛊
-		/// </summary>
 		public static SpecialEffectItem WugIceSilkwormReverse => Instance[(short)1200];
 
-		/// <summary>
-		/// 逆·王蛊金蚕降
-		/// </summary>
 		public static SpecialEffectItem WugGoldenSilkwormReverse => Instance[(short)1201];
 
-		/// <summary>
-		/// 逆·百彩青髓蛊
-		/// </summary>
 		public static SpecialEffectItem WugAzureMarrowReverse => Instance[(short)1202];
 
-		/// <summary>
-		/// 逆·戳眼削耳功
-		/// </summary>
 		public static SpecialEffectItem ChuoYanXiaoErGongReverse => Instance[(short)1301];
 
-		/// <summary>
-		/// 逃脱中断
-		/// </summary>
 		public static SpecialEffectItem InterruptFlee => Instance[(short)1456];
 
-		/// <summary>
-		/// 治疗伤势
-		/// </summary>
 		public static SpecialEffectItem HealInjury => Instance[(short)1457];
 
-		/// <summary>
-		/// 疗伤药材不足
-		/// </summary>
 		public static SpecialEffectItem HealInjuryLackHerb => Instance[(short)1458];
 
-		/// <summary>
-		/// 驱除毒素
-		/// </summary>
 		public static SpecialEffectItem HealPoison => Instance[(short)1459];
 
-		/// <summary>
-		/// 驱毒药材不足
-		/// </summary>
 		public static SpecialEffectItem HealPoisonLackHerb => Instance[(short)1460];
 
-		/// <summary>
-		/// 内力冲克
-		/// </summary>
 		public static SpecialEffectItem NeiliCounter => Instance[(short)1462];
 
-		/// <summary>
-		/// 烈毒发作
-		/// </summary>
 		public static SpecialEffectItem PoisonEffect0 => Instance[(short)1466];
 
-		/// <summary>
-		/// 郁毒发作
-		/// </summary>
 		public static SpecialEffectItem PoisonEffect1 => Instance[(short)1467];
 
-		/// <summary>
-		/// 寒毒发作
-		/// </summary>
 		public static SpecialEffectItem PoisonEffect2 => Instance[(short)1468];
 
-		/// <summary>
-		/// 赤毒发作
-		/// </summary>
 		public static SpecialEffectItem PoisonEffect3 => Instance[(short)1469];
 
-		/// <summary>
-		/// 腐毒发作
-		/// </summary>
 		public static SpecialEffectItem PoisonEffect4 => Instance[(short)1470];
 
-		/// <summary>
-		/// 幻毒发作
-		/// </summary>
 		public static SpecialEffectItem PoisonEffect5 => Instance[(short)1471];
 
-		/// <summary>
-		/// 接招1
-		/// </summary>
 		public static SpecialEffectItem TestSkill0 => Instance[(short)1472];
 
-		/// <summary>
-		/// 接招2
-		/// </summary>
 		public static SpecialEffectItem TestSkill1 => Instance[(short)1473];
 
-		/// <summary>
-		/// 接招3
-		/// </summary>
 		public static SpecialEffectItem TestSkill2 => Instance[(short)1474];
 
-		/// <summary>
-		/// 接招4
-		/// </summary>
 		public static SpecialEffectItem TestSkill3 => Instance[(short)1475];
 
-		/// <summary>
-		/// 接招5
-		/// </summary>
 		public static SpecialEffectItem TestSkill4 => Instance[(short)1476];
 
-		/// <summary>
-		/// 接招6
-		/// </summary>
 		public static SpecialEffectItem TestSkill5 => Instance[(short)1477];
 
-		/// <summary>
-		/// 接招7
-		/// </summary>
 		public static SpecialEffectItem TestSkill6 => Instance[(short)1478];
 
-		/// <summary>
-		/// 接招8
-		/// </summary>
 		public static SpecialEffectItem TestSkill7 => Instance[(short)1479];
 
-		/// <summary>
-		/// 接招9
-		/// </summary>
 		public static SpecialEffectItem TestSkill8 => Instance[(short)1480];
 
-		/// <summary>
-		/// 接招10
-		/// </summary>
 		public static SpecialEffectItem TestSkillFinal => Instance[(short)1481];
 
-		/// <summary>
-		/// 实战修习
-		/// </summary>
 		public static SpecialEffectItem CastAddPracticeLevel => Instance[(short)1486];
 
-		/// <summary>
-		/// 内息紊乱受伤
-		/// </summary>
 		public static SpecialEffectItem QiDisorderInjury => Instance[(short)1487];
 
-		/// <summary>
-		/// 裂皮碎骨
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect034 => Instance[(short)1642];
 
-		/// <summary>
-		/// 心残肉挫
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect045 => Instance[(short)1643];
 
-		/// <summary>
-		/// 骨错筋缠
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect014 => Instance[(short)1644];
 
-		/// <summary>
-		/// 肝肠寸断
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect024 => Instance[(short)1645];
 
-		/// <summary>
-		/// 血迷关窍
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect345 => Instance[(short)1646];
 
-		/// <summary>
-		/// 五脏败腐
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect134 => Instance[(short)1647];
 
-		/// <summary>
-		/// 坏血断肠
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect234 => Instance[(short)1648];
 
-		/// <summary>
-		/// 毒火焚心
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect035 => Instance[(short)1649];
 
-		/// <summary>
-		/// 骨中烧疽
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect013 => Instance[(short)1650];
 
-		/// <summary>
-		/// 血火阴杀
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect023 => Instance[(short)1651];
 
-		/// <summary>
-		/// 摧心蚀元
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect125 => Instance[(short)1652];
 
-		/// <summary>
-		/// 化骨封髓
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect124 => Instance[(short)1653];
 
-		/// <summary>
-		/// 寒锥锁脉
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect012 => Instance[(short)1654];
 
-		/// <summary>
-		/// 锁血凝髓
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect123 => Instance[(short)1655];
 
-		/// <summary>
-		/// 邪阴彻体
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect245 => Instance[(short)1656];
 
-		/// <summary>
-		/// 迷惧钻心
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect025 => Instance[(short)1657];
 
-		/// <summary>
-		/// 剧恶深苦
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect235 => Instance[(short)1658];
 
-		/// <summary>
-		/// 失魂鬼瘴
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect145 => Instance[(short)1659];
 
-		/// <summary>
-		/// 绝脉乱心
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect015 => Instance[(short)1660];
 
-		/// <summary>
-		/// 封颅闭血
-		/// </summary>
 		public static SpecialEffectItem MixPoisonEffect135 => Instance[(short)1661];
 
-		/// <summary>
-		/// 破敌强击
-		/// </summary>
 		public static SpecialEffectItem OverwhelmedStrike => Instance[(short)1662];
 
-		/// <summary>
-		/// 七轮感应法状态
-		/// </summary>
 		public static SpecialEffectItem QiLunGanYingFaDirectState => Instance[(short)1697];
 
-		/// <summary>
-		/// 逆·七轮感应法状态
-		/// </summary>
 		public static SpecialEffectItem QiLunGanYingFaReverseState => Instance[(short)1698];
 
-		/// <summary>
-		/// 内伤标记免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityInnerInjury => Instance[(short)1699];
 
-		/// <summary>
-		/// 外伤标记免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityOuterInjury => Instance[(short)1700];
 
-		/// <summary>
-		/// 失神标记免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityMind => Instance[(short)1701];
 
-		/// <summary>
-		/// 破绽标记免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityFlaw => Instance[(short)1702];
 
-		/// <summary>
-		/// 封穴标记免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityAcupoint => Instance[(short)1703];
 
-		/// <summary>
-		/// 重创标记免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityFatal => Instance[(short)1704];
 
-		/// <summary>
-		/// 必死标记免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityDie => Instance[(short)1705];
 
-		/// <summary>
-		/// 为敌种下王蛊
-		/// </summary>
 		public static SpecialEffectItem WugKingForEnemy => Instance[(short)1706];
 
-		/// <summary>
-		/// 为己种下王蛊
-		/// </summary>
 		public static SpecialEffectItem WugKingForMyself => Instance[(short)1707];
 
-		/// <summary>
-		/// 健康损害免疫
-		/// </summary>
 		public static SpecialEffectItem ImmunityHealth => Instance[(short)1708];
 
-		/// <summary>
-		/// 死气夺魂
-		/// </summary>
 		public static SpecialEffectItem SiQiDuoHun => Instance[(short)1712];
 
-		/// <summary>
-		/// 生命气造成反噬
-		/// </summary>
 		public static SpecialEffectItem LifeLinkFeatureMakeInjury => Instance[(short)1713];
 
-		/// <summary>
-		/// 生命气反噬
-		/// </summary>
 		public static SpecialEffectItem LifeLinkFeatureAcceptInjuryLive => Instance[(short)1714];
 
-		/// <summary>
-		/// 死命气反噬
-		/// </summary>
 		public static SpecialEffectItem LifeLinkFeatureAcceptInjuryDead => Instance[(short)1715];
 
-		/// <summary>
-		/// 接招无法施招
-		/// </summary>
 		public static SpecialEffectItem TestSkillBan => Instance[(short)1716];
 
-		/// <summary>
-		/// 落魂钟
-		/// </summary>
 		public static SpecialEffectItem SoulWitheringBell => Instance[(short)1717];
 
-		/// <summary>
-		/// 被化解获得蓄式
-		/// </summary>
 		public static SpecialEffectItem AvoidAddTrick => Instance[(short)1741];
 
-		/// <summary>
-		/// 法道
-		/// </summary>
 		public static SpecialEffectItem VitalDemonA => Instance[(short)1748];
 
-		/// <summary>
-		/// 法天
-		/// </summary>
 		public static SpecialEffectItem VitalDemonB => Instance[(short)1749];
 
-		/// <summary>
-		/// 法地
-		/// </summary>
 		public static SpecialEffectItem VitalDemonC => Instance[(short)1750];
 
-		/// <summary>
-		/// 伏魔法印
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryShaolin => Instance[(short)1753];
 
-		/// <summary>
-		/// 随心无念
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryEmei => Instance[(short)1754];
 
-		/// <summary>
-		/// 玄灵断脉
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryBaihua => Instance[(short)1755];
 
-		/// <summary>
-		/// 两仪真元
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryWudang => Instance[(short)1756];
 
-		/// <summary>
-		/// 镇山化气
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryYuanshan => Instance[(short)1757];
 
-		/// <summary>
-		/// 碎骨飞狮
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryShixiang => Instance[(short)1758];
 
-		/// <summary>
-		/// 大衍术咒
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryRanshan => Instance[(short)1759];
 
-		/// <summary>
-		/// 幽神黯然
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryXuannv => Instance[(short)1760];
 
-		/// <summary>
-		/// 欧祖试剑
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryZhujian => Instance[(short)1761];
 
-		/// <summary>
-		/// 避厄泥丸
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryKongsang => Instance[(short)1762];
 
-		/// <summary>
-		/// 密迹法印
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryJingang => Instance[(short)1763];
 
-		/// <summary>
-		/// 蝶母银衣
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryWuxian => Instance[(short)1764];
 
-		/// <summary>
-		/// 星罗气术
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryJieqing => Instance[(short)1765];
 
-		/// <summary>
-		/// 化龙掌力
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryFulong => Instance[(short)1766];
 
-		/// <summary>
-		/// 荒邪鬼气
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryXuehou => Instance[(short)1767];
 
-		/// <summary>
-		/// 降魔金身
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryShaolinSuper => Instance[(short)1768];
 
-		/// <summary>
-		/// 侠风义骨
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryEmeiSuper => Instance[(short)1769];
 
-		/// <summary>
-		/// 化血还生
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryBaihuaSuper => Instance[(short)1770];
 
-		/// <summary>
-		/// 玄神内观
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryWudangSuper => Instance[(short)1771];
 
-		/// <summary>
-		/// 历苦修艰
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryYuanshanSuper => Instance[(short)1772];
 
-		/// <summary>
-		/// 飞狮战阵
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryShixiangSuper => Instance[(short)1773];
 
-		/// <summary>
-		/// 志在千里
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryRanshanSuper => Instance[(short)1774];
 
-		/// <summary>
-		/// 冰辉月华
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryXuannvSuper => Instance[(short)1775];
 
-		/// <summary>
-		/// 神工返铸
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryZhujianSuper => Instance[(short)1776];
 
-		/// <summary>
-		/// 青囊傍身
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryKongsangSuper => Instance[(short)1777];
 
-		/// <summary>
-		/// 轮转不灭
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryJingangSuper => Instance[(short)1778];
 
-		/// <summary>
-		/// 百毒归巢
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryWuxianSuper => Instance[(short)1779];
 
-		/// <summary>
-		/// 星命在身
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryJieqingSuper => Instance[(short)1780];
 
-		/// <summary>
-		/// 百鸟朝凤
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryFulongSuper => Instance[(short)1781];
 
-		/// <summary>
-		/// 邪魔入体
-		/// </summary>
 		public static SpecialEffectItem SectStoryMysteryXuehouSuper => Instance[(short)1782];
 
-		/// <summary>
-		/// 药毒兵器
-		/// </summary>
 		public static SpecialEffectItem MasteryWeaponHerb => Instance[(short)1784];
 
-		/// <summary>
-		/// 金铁兵器
-		/// </summary>
 		public static SpecialEffectItem MasteryWeaponMetal => Instance[(short)1785];
 
-		/// <summary>
-		/// 木材兵器
-		/// </summary>
 		public static SpecialEffectItem MasteryWeaponWood => Instance[(short)1786];
 
-		/// <summary>
-		/// 玉石兵器
-		/// </summary>
 		public static SpecialEffectItem MasteryWeaponJade => Instance[(short)1787];
 
-		/// <summary>
-		/// 织物兵器
-		/// </summary>
 		public static SpecialEffectItem MasteryWeaponFabric => Instance[(short)1788];
 
-		/// <summary>
-		/// 动物兵器
-		/// </summary>
 		public static SpecialEffectItem MasteryWeaponAnimal => Instance[(short)1789];
 
-		/// <summary>
-		/// 金铁魔音
-		/// </summary>
 		public static SpecialEffectItem MasterySoundMetal => Instance[(short)1790];
 
-		/// <summary>
-		/// 木材魔音
-		/// </summary>
 		public static SpecialEffectItem MasterySoundWood => Instance[(short)1791];
 
-		/// <summary>
-		/// 玉石魔音
-		/// </summary>
 		public static SpecialEffectItem MasterySoundJade => Instance[(short)1792];
 
-		/// <summary>
-		/// 金铁护具
-		/// </summary>
 		public static SpecialEffectItem MasteryArmorMetal => Instance[(short)1793];
 
-		/// <summary>
-		/// 木材护具
-		/// </summary>
 		public static SpecialEffectItem MasteryArmorWood => Instance[(short)1794];
 
-		/// <summary>
-		/// 玉石护具
-		/// </summary>
 		public static SpecialEffectItem MasteryArmorJade => Instance[(short)1795];
 
-		/// <summary>
-		/// 织物护具
-		/// </summary>
 		public static SpecialEffectItem MasteryArmorFabric => Instance[(short)1796];
 
-		/// <summary>
-		/// 动物护具
-		/// </summary>
 		public static SpecialEffectItem MasteryArmorAnimal => Instance[(short)1797];
 
-		/// <summary>
-		/// 武具折损
-		/// </summary>
 		public static SpecialEffectItem MasteryDurabilityToZero => Instance[(short)1798];
 
-		/// <summary>
-		/// 八热烁身
-		/// </summary>
 		public static SpecialEffectItem BaReCiFu => Instance[(short)1799];
 
-		/// <summary>
-		/// 八寒藏腑
-		/// </summary>
 		public static SpecialEffectItem BaHanCiFu => Instance[(short)1800];
 
-		/// <summary>
-		/// 无间蕴魂
-		/// </summary>
 		public static SpecialEffectItem WuJianCiFu => Instance[(short)1801];
 
-		/// <summary>
-		/// 天幕神主
-		/// </summary>
 		public static SpecialEffectItem TianMuShenZhu => Instance[(short)1829];
 
-		/// <summary>
-		/// 开明天兽
-		/// </summary>
 		public static SpecialEffectItem KaiMingTianShou => Instance[(short)1830];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SpecialEffect Instance = new SpecialEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -2851,7 +2032,11 @@ public class SpecialEffect : ConfigData<SpecialEffectItem, short>
 
 	private void CreateItems9()
 	{
-		_dataArray.Add(new SpecialEffectItem(540, 0, 1, -1, 10, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[1] { 10 }, new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_540"), 682, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_540_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_540_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_540_0") }, new string[0], "CombatSkill.Jingangzong.Special.BuDongMingWangChu"));
+		_dataArray.Add(new SpecialEffectItem(540, 0, 1, -1, 10, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[1] { 10 }, new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_540"), 682, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_540_0") }, new string[2]
+		{
+			LocalStringManager.GetConfig("SpecialEffect_language", "Desc_540_0"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "Desc_540_1")
+		}, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_540_0") }, new string[0], "CombatSkill.Jingangzong.Special.BuDongMingWangChu"));
 		_dataArray.Add(new SpecialEffectItem(541, 0, 1, -1, 10, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_541"), 462, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_541_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_541_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_541_0") }, new string[0], "CombatSkill.Jieqingmen.Finger.WuXingXiaoQinNa"));
 		_dataArray.Add(new SpecialEffectItem(542, 0, 1, 4, 10, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[1] { 10 }, new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_542"), 463, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_542_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_542_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_542_0") }, new string[0], "CombatSkill.Jieqingmen.Finger.ZhaiXingShi"));
 		_dataArray.Add(new SpecialEffectItem(543, 0, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[1] { -1 }, new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_543"), 464, new string[2]
@@ -6182,12 +5367,44 @@ public class SpecialEffect : ConfigData<SpecialEffectItem, short>
 			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1835_0"),
 			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1835_1")
 		}, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1835_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_1835_0") }, new string[0], "CombatSkill.XiangShu.Neigong.Boss.ShengJieSiXian"));
+		_dataArray.Add(new SpecialEffectItem(1836, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1836"), -1, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1836_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1836_0") }, new string[0], new string[0], "CombatSkill.XiangShu.Neigong.Boss.QunXianDianKui"));
+		_dataArray.Add(new SpecialEffectItem(1837, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1837"), -1, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1837_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1837_0") }, new string[0], new string[0], "CombatSkill.XiangShu.Assist.JiuShouDuYuan"));
+		_dataArray.Add(new SpecialEffectItem(1838, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1838"), -1, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1838_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1838_0") }, new string[0], new string[0], "CombatSkill.XiangShu.Attack.TianDi.GenGuYinXun"));
+		_dataArray.Add(new SpecialEffectItem(1839, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[1] { -1 }, new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1839"), -1, new string[2]
+		{
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1839_0"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1839_1")
+		}, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1839_0") }, new string[0], new string[0], "CombatSkill.XiangShu.Attack.TianDi.WanShiShenJu"));
+		_dataArray.Add(new SpecialEffectItem(1840, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[1] { 200 }, 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1840"), 950, new string[2]
+		{
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1840_0"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1840_1")
+		}, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1840_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_1840_0") }, new string[0], "Animal.Loong.Neigong.GuanYueXingHong"));
+		_dataArray.Add(new SpecialEffectItem(1841, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1841"), 951, new string[2]
+		{
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1841_0"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1841_1")
+		}, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1841_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_1841_0") }, new string[0], "Animal.Loong.Neigong.XuanHaiELin"));
+		_dataArray.Add(new SpecialEffectItem(1842, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1842"), 952, new string[0], new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1842_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_1842_0") }, new string[0], "Animal.Loong.Neigong.CangKongWuLan"));
+		_dataArray.Add(new SpecialEffectItem(1843, 1, 1, -1, -1, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[0], new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1843"), 953, new string[2]
+		{
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1843_0"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1843_1")
+		}, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1843_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_1843_0") }, new string[0], "Animal.Loong.Neigong.YanHuoShenZhu"));
+		_dataArray.Add(new SpecialEffectItem(1844, 1, 1, -1, 10, -1, ESpecialEffectAiCostNeiliAllocationType.None, 0, new int[1] { 10 }, new int[0], 0, -1, -1, -1, ESpecialEffectRawCreateType.None, 0, showUsingItemButtonEffect: false, LocalStringManager.GetConfig("SpecialEffect_language", "Name_1844"), 954, new string[5]
+		{
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1844_0"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1844_1"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1844_2"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1844_3"),
+			LocalStringManager.GetConfig("SpecialEffect_language", "ShortDesc_1844_4")
+		}, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "Desc_1844_0") }, new string[1] { LocalStringManager.GetConfig("SpecialEffect_language", "DetailedDesc_1844_0") }, new string[0], "Animal.Loong.Neigong.ZhongTianZunZhang"));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<SpecialEffectItem>(1836);
+		_dataArray = new List<SpecialEffectItem>(1845);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

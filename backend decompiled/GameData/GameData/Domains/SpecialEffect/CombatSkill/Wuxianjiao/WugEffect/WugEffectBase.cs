@@ -124,7 +124,7 @@ public class WugEffectBase : SpecialEffectBase
 	{
 		if (charId == base.CharacterId && wugTemplateId == WugConfig.TemplateId)
 		{
-			DomainManager.SpecialEffect.Remove(context, Id);
+			RemoveSelf(context);
 		}
 	}
 

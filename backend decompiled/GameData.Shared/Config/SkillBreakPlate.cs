@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class SkillBreakPlate : ConfigData<SkillBreakPlateItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 演武
-		/// </summary>
 		public const sbyte Tutorial = 9;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 演武
-		/// </summary>
 		public static SkillBreakPlateItem Tutorial => Instance[(sbyte)9];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakPlate Instance = new SkillBreakPlate();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "PlateWidth", "PlateHeight", "CostExp", "TotalMaxPower", "BonusCount" };

@@ -10,23 +10,15 @@ public class ObsoleteAristocratSkillsData : IProfessionSkillsData, ISerializable
 {
 	public readonly Dictionary<int, short> _influencePowerBonus;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		_influencePowerBonus.Clear();
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 	}
 
-	/// <summary>
-	/// 离线设置对指定角色的势力值加成
-	/// </summary>
-	/// <param name="targetCharId">目标角色</param>
-	/// <param name="bonus"></param>
-	/// <returns></returns>
 	public short OfflineSetInfluencePowerBonus(int targetCharId, short bonus)
 	{
 		if (!_influencePowerBonus.TryGetValue(targetCharId, out var previousBonus))
@@ -42,11 +34,6 @@ public class ObsoleteAristocratSkillsData : IProfessionSkillsData, ISerializable
 		return _influencePowerBonus.Remove(targetCharId);
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="targetCharId"></param>
-	/// <returns></returns>
 	public short GetPreviousInfluencePowerBonus(int targetCharId)
 	{
 		if (!_influencePowerBonus.TryGetValue(targetCharId, out var previousBonus))
@@ -61,13 +48,11 @@ public class ObsoleteAristocratSkillsData : IProfessionSkillsData, ISerializable
 		_influencePowerBonus = new Dictionary<int, short>();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2 + _influencePowerBonus.Count * 6;
@@ -78,7 +63,6 @@ public class ObsoleteAristocratSkillsData : IProfessionSkillsData, ISerializable
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -99,7 +83,6 @@ public class ObsoleteAristocratSkillsData : IProfessionSkillsData, ISerializable
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

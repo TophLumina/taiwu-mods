@@ -5,9 +5,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 伤势自动治愈进度集合
-/// </summary>
 public class InjuryAutoHealCollection : ISerializableGameData
 {
 	public readonly List<short>[] OuterBodyPartList;
@@ -25,9 +22,6 @@ public class InjuryAutoHealCollection : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 同步伤势数（移除超出标记数的伤势恢复进度，补充少于标记数的伤势恢复进度）
-	/// </summary>
 	public void SyncInjuries(ref Injuries injuries)
 	{
 		for (sbyte bodyPart = 0; bodyPart < 7; bodyPart++)
@@ -58,12 +52,6 @@ public class InjuryAutoHealCollection : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 更新伤势恢复进度
-	/// </summary>
-	/// <param name="bodyPart2Deltas">各部位内外伤恢复数</param>
-	/// <param name="outerSpeed">外伤恢复速度</param>
-	/// <param name="innerSpeed">内伤恢复速度</param>
 	public bool UpdateProgress(Dictionary<sbyte, OuterAndInnerInts> bodyPart2Deltas, int outerSpeed, int innerSpeed)
 	{
 		bodyPart2Deltas.Clear();
@@ -80,13 +68,6 @@ public class InjuryAutoHealCollection : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 更新伤势恢复进度
-	/// </summary>
-	/// <param name="isInner">真值计算内伤，假值计算外伤</param>
-	/// <param name="bodyPart">伤势部位</param>
-	/// <param name="speed">伤势恢复速度</param>
-	/// <returns>因达到痊愈进度被移除的伤势数</returns>
 	private int UpdateProgress(bool isInner, sbyte bodyPart, int speed)
 	{
 		if (speed <= 0)

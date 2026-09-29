@@ -29,9 +29,8 @@ public class CharacterDisplayDataForLifeLink : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 3;
+		int totalSize = 11;
 		totalSize = ((ListData == null) ? (totalSize + 2) : (totalSize + (2 + ListData.GetSerializedSize())));
-		totalSize += NeiliPercent.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

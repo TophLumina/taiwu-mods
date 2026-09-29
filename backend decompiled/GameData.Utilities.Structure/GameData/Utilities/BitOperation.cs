@@ -66,14 +66,14 @@ public static class BitOperation
 		return (value & (ulong)(~((long)(2 ^ (count - 1)) << pos))) | (subUlong << pos);
 	}
 
-	public static byte GetSubUint(uint value, int pos, int count)
+	public static uint GetSubUint(uint value, int pos, int count)
 	{
-		return (byte)(value << 32 - pos - count >> 32 - count);
+		return value << 32 - pos - count >> 32 - count;
 	}
 
-	public static uint SetSubUint(uint value, int pos, int count, byte subByte)
+	public static uint SetSubUint(uint value, int pos, int count, uint subUint)
 	{
-		return (uint)((value & ~((2 ^ (count - 1)) << pos)) | (uint)(subByte << pos));
+		return (value & (uint)(~((2 ^ (count - 1)) << pos))) | (subUint << pos);
 	}
 
 	public static byte GetSubUshort(ushort value, int pos, int count)

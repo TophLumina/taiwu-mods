@@ -3,9 +3,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 某个类型建筑的招募角色信息
-/// </summary>
 [SerializableGameData(IsExtensible = true, NotRestrictCollectionSerializedSize = true)]
 public class BuildingRecruitCharacterData : ISerializableGameData
 {
@@ -24,40 +21,22 @@ public class BuildingRecruitCharacterData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "CharacterData", "BuildingBlockKey", "RecruitInfoIndex", "RecruitLevel" };
 	}
 
-	/// <summary>
-	/// 招募角色
-	/// </summary>
 	[SerializableGameDataField]
 	public RecruitCharacterData CharacterData;
 
-	/// <summary>
-	/// 建筑Block
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingBlockKey BuildingBlockKey;
 
-	/// <summary>
-	/// 索引
-	/// </summary>
 	[SerializableGameDataField]
 	public int RecruitInfoIndex;
 
-	/// <summary>
-	/// //招募的人才等级 first是等级，second是存在时间，超过三个月会消失
-	/// </summary>
 	[SerializableGameDataField]
 	public IntPair RecruitLevel;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public BuildingRecruitCharacterData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BuildingRecruitCharacterData(BuildingRecruitCharacterData other)
 	{
 		CharacterData = new RecruitCharacterData(other.CharacterData);
@@ -66,9 +45,6 @@ public class BuildingRecruitCharacterData : ISerializableGameData
 		RecruitLevel = other.RecruitLevel;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BuildingRecruitCharacterData other)
 	{
 		CharacterData = new RecruitCharacterData(other.CharacterData);
@@ -77,13 +53,11 @@ public class BuildingRecruitCharacterData : ISerializableGameData
 		RecruitLevel = other.RecruitLevel;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 22;
@@ -95,7 +69,6 @@ public class BuildingRecruitCharacterData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -127,7 +100,6 @@ public class BuildingRecruitCharacterData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

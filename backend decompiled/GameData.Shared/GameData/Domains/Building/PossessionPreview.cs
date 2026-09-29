@@ -6,14 +6,8 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 夺舍预览
-/// </summary>
 public class PossessionPreview : ISerializableGameData
 {
-	/// <summary>
-	/// 预期结果
-	/// </summary>
 	[SerializableGameDataField]
 	public byte Result;
 
@@ -74,16 +68,10 @@ public class PossessionPreview : ISerializableGameData
 	[SerializableGameDataField]
 	public CharacterSamsaraData CharacterSamsaraData;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public PossessionPreview()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public PossessionPreview(PossessionPreview other)
 	{
 		Result = other.Result;
@@ -108,9 +96,6 @@ public class PossessionPreview : ISerializableGameData
 		CharacterSamsaraData = new CharacterSamsaraData(other.CharacterSamsaraData);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(PossessionPreview other)
 	{
 		Result = other.Result;
@@ -135,13 +120,11 @@ public class PossessionPreview : ISerializableGameData
 		CharacterSamsaraData = new CharacterSamsaraData(other.CharacterSamsaraData);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 121;
@@ -154,7 +137,6 @@ public class PossessionPreview : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -227,7 +209,6 @@ public class PossessionPreview : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class CharacterPropertyDisplay : ConfigData<CharacterPropertyDisplayItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CharacterPropertyDisplay Instance = new CharacterPropertyDisplay();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "ShortName", "Desc", "TemplateId", "Type", "Icon", "TipsBigIcon", "TipsIcon", "PositiveColor", "NegativeColor" };

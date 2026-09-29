@@ -5,58 +5,31 @@ namespace GameData.Domains.CombatSkill;
 [SerializableGameData(NotForArchive = true)]
 public class CombatSkillBreakAvailableStepsDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 基础可用步数（结果）
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BaseAvailableSteps;
 
-	/// <summary>
-	/// 基础的基础可用步数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BaseBaseAvailableSteps;
 
-	/// <summary>
-	/// 产业加成
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BuildingBonus;
 
-	/// <summary>
-	/// 精纯加成
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ConsummateLevelBonus;
 
-	/// <summary>
-	/// NPC品级加成
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte InteractionGradeBonus;
 
-	/// <summary>
-	/// 奇遇加成
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte AdventureBonus;
 
-	/// <summary>
-	/// 门派支持率加成
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OrganizationBonus;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CombatSkillBreakAvailableStepsDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillBreakAvailableStepsDisplayData(CombatSkillBreakAvailableStepsDisplayData other)
 	{
 		BaseAvailableSteps = other.BaseAvailableSteps;
@@ -68,9 +41,6 @@ public class CombatSkillBreakAvailableStepsDisplayData : ISerializableGameData
 		OrganizationBonus = other.OrganizationBonus;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillBreakAvailableStepsDisplayData other)
 	{
 		BaseAvailableSteps = other.BaseAvailableSteps;
@@ -82,13 +52,11 @@ public class CombatSkillBreakAvailableStepsDisplayData : ISerializableGameData
 		OrganizationBonus = other.OrganizationBonus;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 7;
@@ -99,7 +67,6 @@ public class CombatSkillBreakAvailableStepsDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (byte)BaseAvailableSteps;
@@ -123,7 +90,6 @@ public class CombatSkillBreakAvailableStepsDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -6,51 +6,27 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Organization.Display;
 
-/// <summary>
-/// 定居点监牢显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class SettlementPrisonDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 定居点模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int OrgTemplateId;
 
-	/// <summary>
-	/// 地区恩义（定居点）或对太吾的支持度（门派），用以判定监牢准入条件是否满足
-	/// </summary>
 	[SerializableGameDataField]
 	public int DebtOrSupport;
 
-	/// <summary>
-	/// 额外护卫的角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData[] GuardianCharacterDisplayDataLow;
 
-	/// <summary>
-	/// 额外护卫的角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData[] GuardianCharacterDisplayDataMid;
 
-	/// <summary>
-	/// 额外护卫的角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData[] GuardianCharacterDisplayDataHigh;
 
-	/// <summary>
-	/// 人物数据，Key为charId
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, CharacterDisplayDataForSettlementPrisoner> PrisonerCharacterDisplayDataDict;
 
-	/// <summary>
-	/// 太吾石牢是否已满
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsStoneRoomFull;
 

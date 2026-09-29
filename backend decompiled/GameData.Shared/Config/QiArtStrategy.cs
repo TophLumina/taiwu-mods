@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class QiArtStrategy : ConfigData<QiArtStrategyItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 祛虚还实
-		/// </summary>
 		public const sbyte ConcentrationGainAccordingToStrategies = 39;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 祛虚还实
-		/// </summary>
 		public static QiArtStrategyItem ConcentrationGainAccordingToStrategies => Instance[(sbyte)39];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static QiArtStrategy Instance = new QiArtStrategy();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "Dialog", "TemplateId", "Icon", "ExtractGroup", "ExtractWeight" };

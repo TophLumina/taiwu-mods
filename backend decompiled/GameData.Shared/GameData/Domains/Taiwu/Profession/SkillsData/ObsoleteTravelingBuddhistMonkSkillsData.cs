@@ -5,38 +5,20 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 旅行僧相关数据
-/// </summary>
 [Obsolete]
 [SerializableGameData(NotForDisplayModule = true)]
 public class ObsoleteTravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializableGameData
 {
-	/// <summary>
-	/// 各个州域的寺庙是否被访问过
-	/// areaId -&gt; 是否访问过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] _stateTempleVisited;
 
-	/// <summary>
-	/// 各个州域的寺庙所在位置
-	/// areaId -&gt; 寺庙地点 blockId
-	/// </summary>
 	[SerializableGameDataField]
 	public Location[] _stateTempleLocation;
 
-	/// <summary>
-	/// 被访问的寺庙数量, 该数据只作为缓存, 不存档
-	/// </summary>
 	public int _visitedCount;
 
-	/// <summary>
-	/// 是否拜访完所有寺庙
-	/// </summary>
 	public bool HasVisitedAllTemple => _visitedCount >= 15;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		for (int i = 0; i < _stateTempleLocation.Length; i++)
@@ -45,23 +27,15 @@ public class ObsoleteTravelingBuddhistMonkSkillsData : IProfessionSkillsData, IS
 		}
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 	}
 
-	/// <summary>
-	/// 获取被访问的寺庙数量
-	/// </summary>
-	/// <returns></returns>
 	public int GetVisitedTempleCount()
 	{
 		return _visitedCount;
 	}
 
-	/// <summary>
-	/// 检查指定区域是否建立郭寺庙
-	/// </summary>
 	public bool StateHasTemple(sbyte stateId)
 	{
 		if (_stateTempleLocation.CheckIndex(stateId))
@@ -76,9 +50,6 @@ public class ObsoleteTravelingBuddhistMonkSkillsData : IProfessionSkillsData, IS
 		return _stateTempleLocation[stateId];
 	}
 
-	/// <summary>
-	/// 检查指定区域的寺庙是否被访问过
-	/// </summary>
 	public bool IsStateTempleVisited(sbyte stateId)
 	{
 		if (_stateTempleVisited.CheckIndex(stateId))
@@ -88,9 +59,6 @@ public class ObsoleteTravelingBuddhistMonkSkillsData : IProfessionSkillsData, IS
 		return false;
 	}
 
-	/// <summary>
-	/// 计算访问过的寺庙数量
-	/// </summary>
 	private void CalcVisitedTempleCount()
 	{
 		int count = 0;
@@ -111,13 +79,11 @@ public class ObsoleteTravelingBuddhistMonkSkillsData : IProfessionSkillsData, IS
 		_stateTempleVisited = new bool[15];
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -130,7 +96,6 @@ public class ObsoleteTravelingBuddhistMonkSkillsData : IProfessionSkillsData, IS
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -175,7 +140,6 @@ public class ObsoleteTravelingBuddhistMonkSkillsData : IProfessionSkillsData, IS
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

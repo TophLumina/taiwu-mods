@@ -165,10 +165,10 @@ public class ContestForLegendaryBookAction : ICharacterActionImpl, ISerializable
 					return false;
 				}
 				case 2:
-					DomainManager.Character.HandlePoisonAction(context, selfChar, targetChar, ItemKey.Invalid, -1);
+					DomainManager.Character.HandlePoisonAction(context, selfChar, targetChar, ItemKey.Invalid, actionData.Template);
 					return false;
 				case 3:
-					DomainManager.Character.HandlePlotHarmAction(context, selfChar, targetChar, ItemKey.Invalid, -1);
+					DomainManager.Character.HandlePlotHarmAction(context, selfChar, targetChar, ItemKey.Invalid, actionData.Template);
 					return false;
 				}
 			}

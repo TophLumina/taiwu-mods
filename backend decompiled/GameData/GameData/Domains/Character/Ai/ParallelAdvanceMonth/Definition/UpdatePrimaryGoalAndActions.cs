@@ -8,6 +8,8 @@ public class UpdatePrimaryGoalAndActions : CharacterParallelAction<UpdatePrimary
 
 	public int EndAreaId => 141;
 
+	public bool IsEnabled => !DomainManager.TaiwuEvent.GetHideAllMapBlockCharacters();
+
 	public void Execute(DataContext context, Character character)
 	{
 		character.PeriAdvanceMonth_UpdatePrimaryGoalAndActions(context);

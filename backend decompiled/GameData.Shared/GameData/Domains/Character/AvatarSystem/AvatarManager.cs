@@ -7,82 +7,40 @@ using Redzen.Random;
 
 namespace GameData.Domains.Character.AvatarSystem;
 
-/// <summary>
-/// 人物形象管理系统
-/// Mod要求记录：
-/// 1、要求所有奇数体型为男性，偶数体型为女性
-/// 2、奇数体型n和偶数体型n+1总是一一对应的体型关系
-/// 3、人物形象的资源大小被限制不能超过360*440
-/// </summary>
 public class AvatarManager
 {
 	public static AvatarManager Instance;
 
 	private List<AvatarGroup> _avatarGroupList;
 
-	/// <summary>
-	/// 皮肤的颜色权重配置
-	/// </summary>
 	public List<byte[]> SkinColorsWeight;
 
-	/// <summary>
-	/// 特征的颜色权重配置
-	/// </summary>
 	public List<byte[]> FeatureColorsWeight;
 
-	/// <summary>
-	/// 嘴唇的颜色权重配置
-	/// </summary>
 	public List<byte[]> LipColorsWeight;
 
-	/// <summary>
-	/// 衣服的颜色权重配置
-	/// </summary>
 	public List<byte[]> ClothColorsWeight;
 
-	/// <summary>
-	/// 眼睛的颜色权重配置
-	/// </summary>
 	public List<byte[]> EyeballColorsWeight;
 
-	/// <summary>
-	/// 毛发的颜色权重配置
-	/// </summary>
 	public List<byte[]> HairColorsWeight;
 
 	private bool _avatarReady;
 
 	public bool DisplayMode { get; private set; }
 
-	/// <summary>
-	/// 获取avatar系统是否准备完成
-	/// </summary>
-	/// <returns></returns>
 	public bool AvatarSystemReady => _avatarReady;
 
-	/// <summary>
-	/// 获取一个体型数据组
-	/// </summary>
-	/// <returns></returns>
 	public AvatarGroup GetAvatarGroup(int avatarId)
 	{
 		return _avatarGroupList.Find((AvatarGroup e) => e.Id == avatarId);
 	}
 
-	/// <summary>
-	/// 获取满足条件的全部体型数据组
-	/// </summary>
-	/// <param name="predicate"></param>
-	/// <returns></returns>
 	public List<AvatarGroup> GetAvatarGroupList(Predicate<AvatarGroup> predicate)
 	{
 		return _avatarGroupList.FindAll(predicate);
 	}
 
-	/// <summary>
-	/// 获取可用体型数量
-	/// </summary>
-	/// <returns></returns>
 	public int GetCanUseAvatarGroupCount()
 	{
 		int count = 0;
@@ -101,13 +59,6 @@ public class AvatarManager
 		return _avatarGroupList[_avatarGroupList.Count - 1].Id;
 	}
 
-	/// <summary>
-	/// 获取一个指定的最小资源对象
-	/// </summary>
-	/// <param name="avatarId"></param>
-	/// <param name="elemType"></param>
-	/// <param name="elemIds"></param>
-	/// <returns></returns>
 	public AvatarAsset GetAsset(int avatarId, EAvatarElementsType elemType, params short[] elemIds)
 	{
 		AvatarGroup group = _avatarGroupList.Find((AvatarGroup e) => e.Id == avatarId);
@@ -134,12 +85,6 @@ public class AvatarManager
 		return asset != null;
 	}
 
-	/// <summary>
-	/// 根据人物体型和性别获取对应的体型id
-	/// </summary>
-	/// <param name="bodyType"></param>
-	/// <param name="gender"></param>
-	/// <returns></returns>
 	public sbyte GetAvatarIdByBodyTypeAndGender(sbyte bodyType, sbyte gender)
 	{
 		sbyte id = 0;
@@ -162,20 +107,6 @@ public class AvatarManager
 		return id;
 	}
 
-	/// <summary>
-	/// 获取一个随机的Avatar形象数据
-	/// 不传入任何参数：全随机一个avatarData
-	/// 传入性别：随机指定性别的avatarData
-	/// 性别传入-1，同时传入父母：进行遗传算法造小人
-	/// 性别和父母同时传入：进行指定性别的遗传算法
-	/// </summary>
-	/// <param name="random">随机器</param>
-	/// <param name="gender">指定的性别</param>
-	/// <param name="transgender">异性相 (性征和性别相反)</param>
-	/// <param name="bodyType">指定的体型</param>
-	/// <param name="father">指定的父亲的形象</param>
-	/// <param name="mother">指定的母亲的形象</param>
-	/// <returns></returns>
 	public AvatarData GetRandomAvatar(IRandomSource random, sbyte gender = -1, bool transgender = false, sbyte bodyType = -1, AvatarData father = null, AvatarData mother = null)
 	{
 		if (gender == -1)
@@ -189,15 +120,6 @@ public class AvatarManager
 		return new AvatarInherit(father, mother, gender, bodyType, random).GetInheritAvatar();
 	}
 
-	/// <summary>
-	/// 产生一个指定基础魅力的AvatarData
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="gender"></param>
-	/// <param name="transgender">异性相 (性征和性别相反)</param>
-	/// <param name="bodyType"></param>
-	/// <param name="baseAttraction"></param>
-	/// <returns></returns>
 	public AvatarData GetRandomAvatar(IRandomSource random, sbyte gender, bool transgender, sbyte bodyType, short baseAttraction)
 	{
 		AvatarData totalRandomAvatar = GetTotalRandomAvatar(random, gender, transgender, bodyType);
@@ -205,11 +127,6 @@ public class AvatarManager
 		return totalRandomAvatar;
 	}
 
-	/// <summary>
-	/// 根据传入的avatarId获取一个幼儿时期的AvatarId
-	/// </summary>
-	/// <param name="avatarId"></param>
-	/// <returns></returns>
 	public byte GetChildAvatarIdByAvatarId(byte avatarId)
 	{
 		byte childAvatarHeadId = 6;
@@ -224,26 +141,12 @@ public class AvatarManager
 		return AvatarHead.Instance[childAvatarHeadId].AvatarId;
 	}
 
-	/// <summary>
-	/// 根据传入的avatarId获取一个幼儿时期的服装id
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="avatarId"></param>
-	/// <returns></returns>
 	public short GetRandomChildClothIdByAvatarId(IRandomSource random, byte avatarId)
 	{
 		byte childAvatarId = GetChildAvatarIdByAvatarId(avatarId);
 		return GetAvatarGroup(childAvatarId)?.GetRandomCloth(random, canCreateOnly: false) ?? 255;
 	}
 
-	/// <summary>
-	/// 产生一个全随机的AvatarData
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="gender"></param>
-	/// <param name="transgender">异性相 (性征和性别相反)</param>
-	/// <param name="bodyType"></param>
-	/// <returns></returns>
 	private AvatarData GetTotalRandomAvatar(IRandomSource random, sbyte gender, bool transgender, sbyte bodyType)
 	{
 		if (transgender)
@@ -294,10 +197,6 @@ public class AvatarManager
 		}
 	}
 
-	/// <summary>
-	/// 检查一个AvatarData,把超出范围的数据/无效的数据重新改成一个范围内的随机值.
-	/// 迁移前为纯前端逻辑.
-	/// </summary>
 	public void AvatarDataClamp(AvatarData avatarData)
 	{
 		IRandomSource random = ExternalDataBridge.Context.Random;
@@ -372,9 +271,6 @@ public class AvatarManager
 		return 1;
 	}
 
-	/// <summary>
-	/// 加载组织捏脸系统资源
-	/// </summary>
 	public void InitAvatarCore(bool displayMode, Action loadExternalAvatars = null, bool forceInit = false)
 	{
 		if (_avatarReady && !forceInit)

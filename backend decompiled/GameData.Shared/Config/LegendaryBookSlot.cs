@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class LegendaryBookSlot : ConfigData<LegendaryBookSlotItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LegendaryBookSlot Instance = new LegendaryBookSlot();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "ClassName" };

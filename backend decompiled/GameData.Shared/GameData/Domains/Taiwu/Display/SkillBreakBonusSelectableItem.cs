@@ -16,15 +16,9 @@ public class SkillBreakBonusSelectableItem : ISerializableGameData
 	[SerializableGameDataField]
 	public SkillBreakPlateBonus BonusData;
 
-	/// <summary>
-	/// 如果是道具类的玄机，存储对应来源物品
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData ItemDisplayData;
 
-	/// <summary>
-	/// 如果是人物类的玄机
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData CharacterDisplayData;
 

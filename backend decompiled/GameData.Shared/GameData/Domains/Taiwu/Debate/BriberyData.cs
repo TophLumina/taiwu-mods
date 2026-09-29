@@ -6,9 +6,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 贿赂数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class BriberyData : ISerializableGameData
 {

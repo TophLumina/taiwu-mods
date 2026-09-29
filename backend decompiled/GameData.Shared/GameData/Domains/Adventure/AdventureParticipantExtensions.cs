@@ -3,14 +3,8 @@ using GameData.Adventure;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇参与者拓展方法集
-/// </summary>
 public static class AdventureParticipantExtensions
 {
-	/// <summary>
-	/// 状态自动倒计时
-	/// </summary>
 	public static bool TickState(this IAdventureParticipant participant, int deltaTime)
 	{
 		IReadOnlyList<AdventureParameterData> parameters = participant.Parameters;

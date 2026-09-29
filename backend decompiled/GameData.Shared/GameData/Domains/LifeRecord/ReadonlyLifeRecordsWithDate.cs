@@ -3,50 +3,30 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LifeRecord;
 
-/// <summary>
-/// 只读的人物的经历的集合 + 调用获取接口时传入的人物和日期相关信息
-/// </summary>
 public class ReadonlyLifeRecordsWithDate : ISerializableGameData
 {
-	/// <summary>
-	/// 经历所属角色
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 开始日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int StartDate;
 
-	/// <summary>
-	/// 月份数
-	/// </summary>
 	[SerializableGameDataField]
 	public int MonthCount;
 
-	/// <summary>
-	/// 目前获取到的经历条数
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public ReadonlyLifeRecords Records;
 
-	/// <summary>
-	/// 只读的人物的经历的集合 + 人物经历总条数
-	/// </summary>
 	public ReadonlyLifeRecordsWithDate()
 	{
 		Records = new ReadonlyLifeRecords();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -58,7 +38,6 @@ public class ReadonlyLifeRecordsWithDate : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -90,7 +69,6 @@ public class ReadonlyLifeRecordsWithDate : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

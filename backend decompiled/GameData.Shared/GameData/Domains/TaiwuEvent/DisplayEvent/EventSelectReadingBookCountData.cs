@@ -7,25 +7,17 @@ namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 [SerializableGameData(NoCopyConstructors = true)]
 public class EventSelectReadingBookCountData : ISerializableGameData
 {
-	/// <summary>
-	/// 选择的书籍
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData SelectedBookData;
 
-	/// <summary>
-	/// 最大可读书籍次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxReadingBookCount;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -37,7 +29,6 @@ public class EventSelectReadingBookCountData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -65,7 +56,6 @@ public class EventSelectReadingBookCountData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

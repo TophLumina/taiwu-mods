@@ -5,39 +5,21 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 蛐蛐决斗赌注数据
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class CricketWagerData : ISerializableGameData
 {
-	/// <summary>
-	/// 赌注
-	/// </summary>
 	[SerializableGameDataField]
 	public Wager Wager;
 
-	/// <summary>
-	/// 蛐蛐列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> Crickets;
 
-	/// <summary>
-	/// 己方最小赌注值
-	/// </summary>
 	[SerializableGameDataField]
 	public long MinWagerValue;
 
-	/// <summary>
-	/// 预随机的展示蛐蛐索引
-	/// </summary>
 	[SerializableGameDataField]
 	public byte PreRandomizedShowCricketIndex;
 
-	/// <summary>
-	/// 是否需要显示的蛐蛐
-	/// </summary>
 	public bool IsShowCricket(int index)
 	{
 		if (PreRandomizedShowCricketIndex != byte.MaxValue)
@@ -47,20 +29,11 @@ public class CricketWagerData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
-	public CricketWagerData()
-	{
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 29;
@@ -85,7 +58,6 @@ public class CricketWagerData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -132,7 +104,6 @@ public class CricketWagerData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

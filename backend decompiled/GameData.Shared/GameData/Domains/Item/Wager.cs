@@ -7,23 +7,14 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 促织战斗赌注
-/// </summary>
 public record struct Wager : ISerializableGameData
 {
-	/// <summary>
-	/// 赌注品阶
-	/// </summary>
 	public sbyte Grade => CalcWagerGrade();
 
 	public static readonly sbyte[] ResourceRandomWeight = new sbyte[8] { 1, 1, 1, 1, 1, 1, 6, 1 };
 
 	public const sbyte ItemRandomWeight = 3;
 
-	/// <summary>
-	/// 立场类型对应押注比例范围
-	/// </summary>
 	public static readonly Vector2[] BehaviorValueRange = new Vector2[5]
 	{
 		new Vector2(0.9f, 1.1f),
@@ -33,34 +24,16 @@ public record struct Wager : ISerializableGameData
 		new Vector2(0.7f, 0.9f)
 	};
 
-	/// <summary>
-	/// 赌注类型
-	/// </summary>
 	public sbyte Type;
 
-	/// <summary>
-	/// 资源类型，仅当赌注类型为Resource时有效
-	/// </summary>
 	public sbyte WagerResourceType;
 
-	/// <summary>
-	/// 物品Key，仅当赌注类型为Item时有效
-	/// </summary>
 	public ItemKey ItemKey;
 
-	/// <summary>
-	/// 角色ID，仅当赌注类型为Character时有效
-	/// </summary>
 	public int CharId;
 
-	/// <summary>
-	/// 赌注数量，当赌注类型为Character时无效
-	/// </summary>
 	public int Count;
 
-	/// <summary>
-	/// 无效赌注
-	/// </summary>
 	public static readonly Wager Invalid = new Wager
 	{
 		Type = -1,
@@ -70,12 +43,6 @@ public record struct Wager : ISerializableGameData
 		Count = 0
 	};
 
-	/// <summary>
-	/// 创建资源类型赌注
-	/// </summary>
-	/// <param name="resourceType"></param>
-	/// <param name="count"></param>
-	/// <returns></returns>
 	public static Wager CreateResource(sbyte resourceType, int count)
 	{
 		return new Wager
@@ -88,12 +55,6 @@ public record struct Wager : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 创建道具类型赌注
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="count"></param>
-	/// <returns></returns>
 	public static Wager CreateItem(ItemKey itemKey, int count)
 	{
 		return new Wager
@@ -106,11 +67,6 @@ public record struct Wager : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 创建角色类型赌注
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public static Wager CreateChar(int charId)
 	{
 		return new Wager
@@ -123,11 +79,6 @@ public record struct Wager : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 创建历练类型赌注
-	/// </summary>
-	/// <param name="count"></param>
-	/// <returns></returns>
 	public static Wager CreateExp(int count)
 	{
 		return new Wager
@@ -140,10 +91,6 @@ public record struct Wager : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 计算赌注价格
-	/// 赌注类型为道具或角色时必须传入对应参数
-	/// </summary>
 	public long CalcWagerValue(int itemPrice = 0, sbyte fame = 0, short attraction = 0, short physiologicalAge = 0, sbyte displayGender = -1, sbyte charGrade = 0)
 	{
 		return Type switch
@@ -156,15 +103,6 @@ public record struct Wager : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 人物身价 = 与人物身份品级对应的血露的价值 * (100 + 名誉的绝对值 + 魅力 / 9) / 100
-	/// </summary>
-	/// <param name="fame"></param>
-	/// <param name="attraction"></param>
-	/// <param name="charGrade"></param>
-	/// <param name="displayGender"></param>
-	/// <param name="physiologicalAge"></param>
-	/// <returns></returns>
 	public static long CharacterValue(int fame, int attraction, int charGrade, int displayGender, int physiologicalAge)
 	{
 		short targetBloodDewKey = 9;
@@ -172,9 +110,6 @@ public record struct Wager : ISerializableGameData
 		return (long)Misc.Instance[targetBloodDewKey].BaseValue * (long)(100 + Math.Abs(fame) + attraction / 9) / 100;
 	}
 
-	/// <summary>
-	/// 计算赌注品阶，无有效品阶时返回 -1
-	/// </summary>
 	private sbyte CalcWagerGrade()
 	{
 		return Type switch

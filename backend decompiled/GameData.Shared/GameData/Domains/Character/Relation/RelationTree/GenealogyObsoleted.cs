@@ -5,77 +5,40 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Relation.RelationTree;
 
-/// <summary>
-/// 族谱
-/// </summary>
 [Obsolete]
 [SerializableGameData(NotForDisplayModule = true)]
 public class GenealogyObsoleted : ISerializableGameData
 {
-	/// <summary>
-	/// 核心角色
-	/// </summary>
 	[SerializableGameDataField]
 	public int CoreCharId;
 
-	/// <summary>
-	/// 血亲父亲
-	/// </summary>
 	[SerializableGameDataField]
 	public int BloodFatherId;
 
-	/// <summary>
-	/// 血亲母亲
-	/// </summary>
 	[SerializableGameDataField]
 	public int BloodMotherId;
 
-	/// <summary>
-	/// 祖父
-	/// </summary>
 	[SerializableGameDataField]
 	public int GrandfatherId;
 
-	/// <summary>
-	/// 祖母
-	/// </summary>
 	[SerializableGameDataField]
 	public int GrandmotherId;
 
-	/// <summary>
-	/// 外祖父
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaternalGrandfatherId;
 
-	/// <summary>
-	/// 外祖母
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaternalGrandmotherId;
 
-	/// <summary>
-	/// 血亲父母 + 继亲父母 + 义亲父母 (需要排序)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharIdAndRelation> Parents;
 
-	/// <summary>
-	/// 自己 + 血亲手足 + 继亲手足 + 义亲手足 (需要排序).
-	/// 关系为 Invalid 时表示核心角色自己.
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharIdAndRelation> BrothersAndSisters;
 
-	/// <summary>
-	/// 配偶及子女 (需要排序)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SpouseAndChildrenObsoleted> Spouses;
 
-	/// <summary>
-	/// 族谱
-	/// </summary>
 	public GenealogyObsoleted()
 	{
 		CoreCharId = -1;

@@ -6,37 +6,21 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 长途旅行路线
-/// 纯显示数据，不入存档
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public class TravelRouteDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 途经区域列表。含起点与终点
-	/// </summary>
 	[SerializableGameDataField]
 	public List<TravelRouteElement> AreaList = new List<TravelRouteElement>();
 
-	/// <summary>
-	/// 获取总消耗天数
-	/// </summary>
 	public short GetTotalTimeCost()
 	{
 		return (short)AreaList.Sum((TravelRouteElement x) => x.Cost);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TravelRouteDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TravelRouteDisplayData(TravelRouteDisplayData other)
 	{
 		if (other.AreaList != null)
@@ -55,9 +39,6 @@ public class TravelRouteDisplayData : ISerializableGameData
 		AreaList = null;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TravelRouteDisplayData other)
 	{
 		if (other.AreaList != null)

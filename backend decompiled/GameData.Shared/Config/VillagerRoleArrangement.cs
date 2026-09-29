@@ -7,181 +7,76 @@ namespace Config;
 [Serializable]
 public class VillagerRoleArrangement : ConfigData<VillagerRoleArrangementItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 举炊备膳
-		/// </summary>
 		public const short Cooking = 0;
 
-		/// <summary>
-		/// 资源采集
-		/// </summary>
 		public const short CollectResource = 1;
 
-		/// <summary>
-		/// 资源迁移
-		/// </summary>
 		public const short MigrateResource = 2;
 
-		/// <summary>
-		/// 精耕细作
-		/// </summary>
 		public const short IntensiveCultivation = 3;
 
-		/// <summary>
-		/// 制造物品
-		/// </summary>
 		public const short Making = 4;
 
-		/// <summary>
-		/// 制药炼毒
-		/// </summary>
 		public const short MakingMedicine = 5;
 
-		/// <summary>
-		/// 义诊扶危
-		/// </summary>
 		public const short Healing = 6;
 
-		/// <summary>
-		/// 养心调志
-		/// </summary>
 		public const short ReduceXiangshuInfection = 7;
 
-		/// <summary>
-		/// 外出经商
-		/// </summary>
 		public const short Peddling = 8;
 
-		/// <summary>
-		/// 商会联络
-		/// </summary>
 		public const short CommerceContacting = 9;
 
-		/// <summary>
-		/// 采茶取酒
-		/// </summary>
 		public const short MakingTeaWine = 10;
 
-		/// <summary>
-		/// 江湖游艺
-		/// </summary>
 		public const short Entertaining = 11;
 
-		/// <summary>
-		/// 江湖联络
-		/// </summary>
 		public const short JianghuContacting = 12;
 
-		/// <summary>
-		/// 看守剑冢
-		/// </summary>
 		public const short GuardingSwordTomb = 13;
 
-		/// <summary>
-		/// 挺身降魔
-		/// </summary>
 		public const short ResistXiangshuInfection = 14;
 
-		/// <summary>
-		/// 太吾使者
-		/// </summary>
 		public const short TaiwuEnvoy = 15;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 举炊备膳
-		/// </summary>
 		public static VillagerRoleArrangementItem Cooking => Instance[(short)0];
 
-		/// <summary>
-		/// 资源采集
-		/// </summary>
 		public static VillagerRoleArrangementItem CollectResource => Instance[(short)1];
 
-		/// <summary>
-		/// 资源迁移
-		/// </summary>
 		public static VillagerRoleArrangementItem MigrateResource => Instance[(short)2];
 
-		/// <summary>
-		/// 精耕细作
-		/// </summary>
 		public static VillagerRoleArrangementItem IntensiveCultivation => Instance[(short)3];
 
-		/// <summary>
-		/// 制造物品
-		/// </summary>
 		public static VillagerRoleArrangementItem Making => Instance[(short)4];
 
-		/// <summary>
-		/// 制药炼毒
-		/// </summary>
 		public static VillagerRoleArrangementItem MakingMedicine => Instance[(short)5];
 
-		/// <summary>
-		/// 义诊扶危
-		/// </summary>
 		public static VillagerRoleArrangementItem Healing => Instance[(short)6];
 
-		/// <summary>
-		/// 养心调志
-		/// </summary>
 		public static VillagerRoleArrangementItem ReduceXiangshuInfection => Instance[(short)7];
 
-		/// <summary>
-		/// 外出经商
-		/// </summary>
 		public static VillagerRoleArrangementItem Peddling => Instance[(short)8];
 
-		/// <summary>
-		/// 商会联络
-		/// </summary>
 		public static VillagerRoleArrangementItem CommerceContacting => Instance[(short)9];
 
-		/// <summary>
-		/// 采茶取酒
-		/// </summary>
 		public static VillagerRoleArrangementItem MakingTeaWine => Instance[(short)10];
 
-		/// <summary>
-		/// 江湖游艺
-		/// </summary>
 		public static VillagerRoleArrangementItem Entertaining => Instance[(short)11];
 
-		/// <summary>
-		/// 江湖联络
-		/// </summary>
 		public static VillagerRoleArrangementItem JianghuContacting => Instance[(short)12];
 
-		/// <summary>
-		/// 看守剑冢
-		/// </summary>
 		public static VillagerRoleArrangementItem GuardingSwordTomb => Instance[(short)13];
 
-		/// <summary>
-		/// 挺身降魔
-		/// </summary>
 		public static VillagerRoleArrangementItem ResistXiangshuInfection => Instance[(short)14];
 
-		/// <summary>
-		/// 太吾使者
-		/// </summary>
 		public static VillagerRoleArrangementItem TaiwuEnvoy => Instance[(short)15];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static VillagerRoleArrangement Instance = new VillagerRoleArrangement();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

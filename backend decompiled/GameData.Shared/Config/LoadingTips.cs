@@ -7,61 +7,28 @@ namespace Config;
 [Serializable]
 public class LoadingTips : ConfigData<LoadingTipsItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 诗句0
-		/// </summary>
 		public const int PoemBegin = 0;
 
-		/// <summary>
-		/// 诗句59
-		/// </summary>
 		public const int PoemEnd = 59;
 
-		/// <summary>
-		/// 提示0
-		/// </summary>
 		public const int CommonTipsBegin = 60;
 
-		/// <summary>
-		/// 提示31
-		/// </summary>
 		public const int CommonTipsEnd = 91;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 诗句0
-		/// </summary>
 		public static LoadingTipsItem PoemBegin => Instance[0];
 
-		/// <summary>
-		/// 诗句59
-		/// </summary>
 		public static LoadingTipsItem PoemEnd => Instance[59];
 
-		/// <summary>
-		/// 提示0
-		/// </summary>
 		public static LoadingTipsItem CommonTipsBegin => Instance[60];
 
-		/// <summary>
-		/// 提示31
-		/// </summary>
 		public static LoadingTipsItem CommonTipsEnd => Instance[91];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LoadingTips Instance = new LoadingTips();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Title", "Content", "TemplateId" };

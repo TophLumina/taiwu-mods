@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class DebateReference : ConfigData<DebateReferenceItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DebateReference Instance = new DebateReference();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "LifeSkillType", "SectType", "CombatSkillType", "TemplateId" };

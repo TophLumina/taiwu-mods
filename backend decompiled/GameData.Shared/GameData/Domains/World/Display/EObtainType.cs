@@ -1,9 +1,5 @@
 namespace GameData.Domains.World.Display;
 
-/// <summary>
-/// 各类获取弹窗
-/// 按标题颜色放在了一起
-/// </summary>
 public enum EObtainType : sbyte
 {
 	Item,

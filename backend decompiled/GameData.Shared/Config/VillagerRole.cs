@@ -7,91 +7,40 @@ namespace Config;
 [Serializable]
 public class VillagerRole : ConfigData<VillagerRoleItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 太吾村农户
-		/// </summary>
 		public const short Farmer = 0;
 
-		/// <summary>
-		/// 太吾村匠人
-		/// </summary>
 		public const short Craftsman = 1;
 
-		/// <summary>
-		/// 太吾村大夫
-		/// </summary>
 		public const short Doctor = 2;
 
-		/// <summary>
-		/// 太吾村商人
-		/// </summary>
 		public const short Merchant = 3;
 
-		/// <summary>
-		/// 太吾村文人
-		/// </summary>
 		public const short Literati = 4;
 
-		/// <summary>
-		/// 太吾村护冢
-		/// </summary>
 		public const short SwordTombKeeper = 5;
 
-		/// <summary>
-		/// 太吾村村长
-		/// </summary>
 		public const short VillageHead = 6;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 太吾村农户
-		/// </summary>
 		public static VillagerRoleItem Farmer => Instance[(short)0];
 
-		/// <summary>
-		/// 太吾村匠人
-		/// </summary>
 		public static VillagerRoleItem Craftsman => Instance[(short)1];
 
-		/// <summary>
-		/// 太吾村大夫
-		/// </summary>
 		public static VillagerRoleItem Doctor => Instance[(short)2];
 
-		/// <summary>
-		/// 太吾村商人
-		/// </summary>
 		public static VillagerRoleItem Merchant => Instance[(short)3];
 
-		/// <summary>
-		/// 太吾村文人
-		/// </summary>
 		public static VillagerRoleItem Literati => Instance[(short)4];
 
-		/// <summary>
-		/// 太吾村护冢
-		/// </summary>
 		public static VillagerRoleItem SwordTombKeeper => Instance[(short)5];
 
-		/// <summary>
-		/// 太吾村村长
-		/// </summary>
 		public static VillagerRoleItem VillageHead => Instance[(short)6];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static VillagerRole Instance = new VillagerRole();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

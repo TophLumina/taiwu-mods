@@ -7,451 +7,184 @@ namespace Config;
 [Serializable]
 public class TaiwuVillageStoragesRecord : ConfigData<TaiwuVillageStoragesRecordItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// TakeItem
-		/// </summary>
 		public const short TakeItem = 0;
 
-		/// <summary>
-		/// StorageItem
-		/// </summary>
 		public const short StorageItem = 1;
 
-		/// <summary>
-		/// StorageResources
-		/// </summary>
 		public const short StorageResources = 2;
 
-		/// <summary>
-		/// TakeResources
-		/// </summary>
 		public const short TakeResources = 3;
 
-		/// <summary>
-		/// GatherResources
-		/// </summary>
 		public const short GatherResources = 4;
 
-		/// <summary>
-		/// MigrateResources
-		/// </summary>
 		public const short MigrateResources = 5;
 
-		/// <summary>
-		/// CookingIngredient
-		/// </summary>
 		public const short CookingIngredient = 6;
 
-		/// <summary>
-		/// VillagerMakingItem
-		/// </summary>
 		public const short VillagerMakingItem = 7;
 
-		/// <summary>
-		/// VillagerRepairItem
-		/// </summary>
 		public const short VillagerRepairItem = 8;
 
-		/// <summary>
-		/// VillagerDisassembleItem0
-		/// </summary>
 		public const short VillagerDisassembleItem0 = 9;
 
-		/// <summary>
-		/// VillagerDisassembleItem1
-		/// </summary>
 		public const short VillagerDisassembleItem1 = 10;
 
-		/// <summary>
-		/// VillagerRefiningMedicine
-		/// </summary>
 		public const short VillagerRefiningMedicine = 11;
 
-		/// <summary>
-		/// VillagerDetoxify0
-		/// </summary>
 		public const short VillagerDetoxify0 = 12;
 
-		/// <summary>
-		/// VillagerDetoxify1
-		/// </summary>
 		public const short VillagerDetoxify1 = 13;
 
-		/// <summary>
-		/// VillagerEnvenomedItem
-		/// </summary>
 		public const short VillagerEnvenomedItem = 14;
 
-		/// <summary>
-		/// VillagerCure
-		/// </summary>
 		public const short VillagerCure = 15;
 
-		/// <summary>
-		/// VillagerSoldItem
-		/// </summary>
 		public const short VillagerSoldItem = 16;
 
-		/// <summary>
-		/// VillagerBuyItem
-		/// </summary>
 		public const short VillagerBuyItem = 17;
 
-		/// <summary>
-		/// OperatingBuilding
-		/// </summary>
 		public const short OperatingBuilding = 18;
 
-		/// <summary>
-		/// ClearRecord
-		/// </summary>
 		public const short ClearRecord = 19;
 
-		/// <summary>
-		/// EnvenomedItemOverload
-		/// </summary>
 		public const short EnvenomedItemOverload = 20;
 
-		/// <summary>
-		/// DetoxifyItemOverload
-		/// </summary>
 		public const short DetoxifyItemOverload = 21;
 
-		/// <summary>
-		/// GatherResourcesToTreasury
-		/// </summary>
 		public const short GatherResourcesToTreasury = 22;
 
-		/// <summary>
-		/// GatherResourcesToStockStorageGoodsShelf
-		/// </summary>
 		public const short GatherResourcesToStockStorageGoodsShelf = 23;
 
-		/// <summary>
-		/// GatherResourcesToFoodStorage
-		/// </summary>
 		public const short GatherResourcesToFoodStorage = 24;
 
-		/// <summary>
-		/// GatherResourcesToMedicineStorage
-		/// </summary>
 		public const short GatherResourcesToMedicineStorage = 25;
 
-		/// <summary>
-		/// GatherResourcesToCraftStorage
-		/// </summary>
 		public const short GatherResourcesToCraftStorage = 26;
 
-		/// <summary>
-		/// GatherResourcesToCraftStorageToDisassemble
-		/// </summary>
 		public const short GatherResourcesToCraftStorageToDisassemble = 27;
 
-		/// <summary>
-		/// LoseOverloadResources
-		/// </summary>
 		public const short LoseOverloadResources = 28;
 
-		/// <summary>
-		/// LoseOverloadWarehouseItems
-		/// </summary>
 		public const short LoseOverloadWarehouseItems = 29;
 
-		/// <summary>
-		/// VillagerGetRefineItem
-		/// </summary>
 		public const short VillagerGetRefineItem = 30;
 
-		/// <summary>
-		/// VillagerUpgradeRefineItem
-		/// </summary>
 		public const short VillagerUpgradeRefineItem = 31;
 
-		/// <summary>
-		/// VillagerEarnMoney
-		/// </summary>
 		public const short VillagerEarnMoney = 32;
 
-		/// <summary>
-		/// VillagerEnemyDrop
-		/// </summary>
 		public const short VillagerEnemyDropItem = 33;
 
-		/// <summary>
-		/// VillagerEnemyDropResources
-		/// </summary>
 		public const short VillagerEnemyDropResources = 34;
 
-		/// <summary>
-		/// VillagerMakeHarvest
-		/// </summary>
 		public const short VillagerMakeHarvest = 35;
 
-		/// <summary>
-		/// OutsiderMakeHarvest
-		/// </summary>
 		public const short OutsiderMakeHarvest = 36;
 
-		/// <summary>
-		/// VillagerMakeHarvest1
-		/// </summary>
 		public const short VillagerMakeHarvest1 = 37;
 
-		/// <summary>
-		/// OutsiderMakeHarvest1
-		/// </summary>
 		public const short OutsiderMakeHarvest1 = 38;
 
-		/// <summary>
-		/// VillagerMakeHarvest2
-		/// </summary>
 		public const short VillagerMakeHarvest2 = 39;
 
-		/// <summary>
-		/// OutsiderMakeHarvest2
-		/// </summary>
 		public const short OutsiderMakeHarvest2 = 40;
 
-		/// <summary>
-		/// VillagerUpgradeRefineItem1
-		/// </summary>
 		public const short VillagerUpgradeRefineItem1 = 41;
 
-		/// <summary>
-		/// VillagerDonateLegacy
-		/// </summary>
 		public const short VillagerDonateLegacy = 42;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// TakeItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem TakeItem => Instance[(short)0];
 
-		/// <summary>
-		/// StorageItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem StorageItem => Instance[(short)1];
 
-		/// <summary>
-		/// StorageResources
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem StorageResources => Instance[(short)2];
 
-		/// <summary>
-		/// TakeResources
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem TakeResources => Instance[(short)3];
 
-		/// <summary>
-		/// GatherResources
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem GatherResources => Instance[(short)4];
 
-		/// <summary>
-		/// MigrateResources
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem MigrateResources => Instance[(short)5];
 
-		/// <summary>
-		/// CookingIngredient
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem CookingIngredient => Instance[(short)6];
 
-		/// <summary>
-		/// VillagerMakingItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerMakingItem => Instance[(short)7];
 
-		/// <summary>
-		/// VillagerRepairItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerRepairItem => Instance[(short)8];
 
-		/// <summary>
-		/// VillagerDisassembleItem0
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerDisassembleItem0 => Instance[(short)9];
 
-		/// <summary>
-		/// VillagerDisassembleItem1
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerDisassembleItem1 => Instance[(short)10];
 
-		/// <summary>
-		/// VillagerRefiningMedicine
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerRefiningMedicine => Instance[(short)11];
 
-		/// <summary>
-		/// VillagerDetoxify0
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerDetoxify0 => Instance[(short)12];
 
-		/// <summary>
-		/// VillagerDetoxify1
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerDetoxify1 => Instance[(short)13];
 
-		/// <summary>
-		/// VillagerEnvenomedItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerEnvenomedItem => Instance[(short)14];
 
-		/// <summary>
-		/// VillagerCure
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerCure => Instance[(short)15];
 
-		/// <summary>
-		/// VillagerSoldItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerSoldItem => Instance[(short)16];
 
-		/// <summary>
-		/// VillagerBuyItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerBuyItem => Instance[(short)17];
 
-		/// <summary>
-		/// OperatingBuilding
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem OperatingBuilding => Instance[(short)18];
 
-		/// <summary>
-		/// ClearRecord
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem ClearRecord => Instance[(short)19];
 
-		/// <summary>
-		/// EnvenomedItemOverload
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem EnvenomedItemOverload => Instance[(short)20];
 
-		/// <summary>
-		/// DetoxifyItemOverload
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem DetoxifyItemOverload => Instance[(short)21];
 
-		/// <summary>
-		/// GatherResourcesToTreasury
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem GatherResourcesToTreasury => Instance[(short)22];
 
-		/// <summary>
-		/// GatherResourcesToStockStorageGoodsShelf
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem GatherResourcesToStockStorageGoodsShelf => Instance[(short)23];
 
-		/// <summary>
-		/// GatherResourcesToFoodStorage
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem GatherResourcesToFoodStorage => Instance[(short)24];
 
-		/// <summary>
-		/// GatherResourcesToMedicineStorage
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem GatherResourcesToMedicineStorage => Instance[(short)25];
 
-		/// <summary>
-		/// GatherResourcesToCraftStorage
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem GatherResourcesToCraftStorage => Instance[(short)26];
 
-		/// <summary>
-		/// GatherResourcesToCraftStorageToDisassemble
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem GatherResourcesToCraftStorageToDisassemble => Instance[(short)27];
 
-		/// <summary>
-		/// LoseOverloadResources
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem LoseOverloadResources => Instance[(short)28];
 
-		/// <summary>
-		/// LoseOverloadWarehouseItems
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem LoseOverloadWarehouseItems => Instance[(short)29];
 
-		/// <summary>
-		/// VillagerGetRefineItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerGetRefineItem => Instance[(short)30];
 
-		/// <summary>
-		/// VillagerUpgradeRefineItem
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerUpgradeRefineItem => Instance[(short)31];
 
-		/// <summary>
-		/// VillagerEarnMoney
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerEarnMoney => Instance[(short)32];
 
-		/// <summary>
-		/// VillagerEnemyDrop
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerEnemyDropItem => Instance[(short)33];
 
-		/// <summary>
-		/// VillagerEnemyDropResources
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerEnemyDropResources => Instance[(short)34];
 
-		/// <summary>
-		/// VillagerMakeHarvest
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerMakeHarvest => Instance[(short)35];
 
-		/// <summary>
-		/// OutsiderMakeHarvest
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem OutsiderMakeHarvest => Instance[(short)36];
 
-		/// <summary>
-		/// VillagerMakeHarvest1
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerMakeHarvest1 => Instance[(short)37];
 
-		/// <summary>
-		/// OutsiderMakeHarvest1
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem OutsiderMakeHarvest1 => Instance[(short)38];
 
-		/// <summary>
-		/// VillagerMakeHarvest2
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerMakeHarvest2 => Instance[(short)39];
 
-		/// <summary>
-		/// OutsiderMakeHarvest2
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem OutsiderMakeHarvest2 => Instance[(short)40];
 
-		/// <summary>
-		/// VillagerUpgradeRefineItem1
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerUpgradeRefineItem1 => Instance[(short)41];
 
-		/// <summary>
-		/// VillagerDonateLegacy
-		/// </summary>
 		public static TaiwuVillageStoragesRecordItem VillagerDonateLegacy => Instance[(short)42];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TaiwuVillageStoragesRecord Instance = new TaiwuVillageStoragesRecord();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId" };

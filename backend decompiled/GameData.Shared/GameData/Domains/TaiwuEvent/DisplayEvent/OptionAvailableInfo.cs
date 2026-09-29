@@ -3,34 +3,17 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 选项可用条件数据
-/// </summary>
 public struct OptionAvailableInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 选项可用条件的信息数据
-	/// 每条数据长度为
-	/// 各条数据是或的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public OptionAvailableInfoMinimumElement[] Data;
 
-	/// <summary>
-	/// 由选项可用条件判定的结果
-	/// </summary>
 	[SerializableGameDataField]
 	public bool PassState;
 
-	/// <summary>
-	/// 元素是否隐藏
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Hide;
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public OptionAvailableInfo(OptionAvailableInfo other)
 	{
 		OptionAvailableInfoMinimumElement[] item = other.Data;
@@ -44,9 +27,6 @@ public struct OptionAvailableInfo : ISerializableGameData
 		Hide = other.Hide;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(OptionAvailableInfo other)
 	{
 		OptionAvailableInfoMinimumElement[] item = other.Data;
@@ -60,13 +40,11 @@ public struct OptionAvailableInfo : ISerializableGameData
 		Hide = other.Hide;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -90,7 +68,6 @@ public struct OptionAvailableInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -124,7 +101,6 @@ public struct OptionAvailableInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

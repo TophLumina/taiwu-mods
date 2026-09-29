@@ -471,16 +471,8 @@ public class EventArgBox : ISerializableGameData, IVariantCollection<string>, IV
 			0
 		},
 		{
-			typeof(AdventureMapPoint),
-			1
-		},
-		{
 			typeof(ItemKey),
 			2
-		},
-		{
-			typeof(AdventureSiteData),
-			3
 		},
 		{
 			typeof(MapTemplateEnemyInfo),
@@ -1025,6 +1017,12 @@ public class EventArgBox : ISerializableGameData, IVariantCollection<string>, IV
 		return arg != null && ret;
 	}
 
+	public T GetOrDefault<T>(string key, T defaultValue = default(T)) where T : ISerializableGameData
+	{
+		T t;
+		return Get(key, out t) ? t : defaultValue;
+	}
+
 	public sbyte GetSbyte(string key)
 	{
 		if (_intBox == null || !_intBox.ContainsKey(key))
@@ -1437,14 +1435,8 @@ public class EventArgBox : ISerializableGameData, IVariantCollection<string>, IV
 		case 0:
 			obj = default(Location);
 			break;
-		case 1:
-			obj = new AdventureMapPoint();
-			break;
 		case 2:
 			obj = default(ItemKey);
-			break;
-		case 3:
-			obj = new AdventureSiteData();
 			break;
 		case 4:
 			obj = default(MapTemplateEnemyInfo);
@@ -1477,49 +1469,39 @@ public class EventArgBox : ISerializableGameData, IVariantCollection<string>, IV
 	{
 		if (!(obj is Location location))
 		{
-			if (!(obj is AdventureMapPoint adventureMapPoint))
+			if (!(obj is ItemKey itemKey))
 			{
-				if (!(obj is ItemKey itemKey))
+				if (!(obj is MapTemplateEnemyInfo mapRandomEnemyInfo))
 				{
-					if (!(obj is AdventureSiteData adventureSiteData))
+					if (!(obj is AvatarRelatedData avatarRelatedData))
 					{
-						if (!(obj is MapTemplateEnemyInfo mapRandomEnemyInfo))
+						if (!(obj is EventActorData eventActorData))
 						{
-							if (!(obj is AvatarRelatedData avatarRelatedData))
+							if (!(obj is AvatarData avatarData))
 							{
-								if (!(obj is EventActorData eventActorData))
+								if (!(obj is AdventureBlockIndexForSerialize) && !(obj is AdventureAction))
 								{
-									if (!(obj is AvatarData avatarData))
+									if (!(obj is BuildingBlockKey))
 									{
-										if (!(obj is AdventureBlockIndexForSerialize) && !(obj is AdventureAction))
+										if (obj is TreasureFindResult)
 										{
-											if (!(obj is BuildingBlockKey))
-											{
-												if (obj is TreasureFindResult)
-												{
-													return obj;
-												}
-												return null;
-											}
 											return obj;
 										}
-										return obj;
+										return null;
 									}
-									return new AvatarData(avatarData);
+									return obj;
 								}
-								return new EventActorData(eventActorData);
+								return obj;
 							}
-							return new AvatarRelatedData(avatarRelatedData);
+							return new AvatarData(avatarData);
 						}
-						return mapRandomEnemyInfo;
+						return new EventActorData(eventActorData);
 					}
-					return new AdventureSiteData(adventureSiteData);
+					return new AvatarRelatedData(avatarRelatedData);
 				}
-				return itemKey;
+				return mapRandomEnemyInfo;
 			}
-			AdventureMapPoint advMapPointTarget = new AdventureMapPoint();
-			advMapPointTarget.Assign(adventureMapPoint);
-			return advMapPointTarget;
+			return itemKey;
 		}
 		return location;
 	}

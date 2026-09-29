@@ -30,7 +30,7 @@ public class ShiZhuanChenXin : CombatSkillEffectBase
 
 	private unsafe void OnCharAboutToFall(DataContext context, CombatCharacter combatChar, ECombatCharAboutToFallType type)
 	{
-		if (combatChar == base.CombatChar && type == ECombatCharAboutToFallType.AddPhase && base.CombatChar.GetBossPhase() < 5 && DomainManager.Combat.IsCharacterFallen(base.CombatChar))
+		if (combatChar == base.CombatChar && type == ECombatCharAboutToFallType.AddPhase && base.CombatChar.GetBossPhase() < 5 && DomainManager.Combat.IsCharacterFallen(base.CombatChar) && !DomainManager.Combat.CombatConfig.SkipChangePhase)
 		{
 			DomainManager.Combat.Reset(context, base.CombatChar);
 			DomainManager.Combat.AddBossPhase(context, base.CombatChar, -1);

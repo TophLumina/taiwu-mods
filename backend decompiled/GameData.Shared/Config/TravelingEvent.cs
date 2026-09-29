@@ -8,1681 +8,676 @@ namespace Config;
 [Serializable]
 public class TravelingEvent : ConfigData<TravelingEventItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// JingjiMaterial
-		/// </summary>
 		public const short JingjiMaterial = 0;
 
-		/// <summary>
-		/// BashuMaterial
-		/// </summary>
 		public const short BashuMaterial = 1;
 
-		/// <summary>
-		/// GuangnanMaterial
-		/// </summary>
 		public const short GuangnanMaterial = 2;
 
-		/// <summary>
-		/// JingBeiMaterial
-		/// </summary>
 		public const short JingBeiMaterial = 3;
 
-		/// <summary>
-		/// ShanxiMaterial
-		/// </summary>
 		public const short ShanxiMaterial = 4;
 
-		/// <summary>
-		/// GuangdongMaterial
-		/// </summary>
 		public const short GuangdongMaterial = 5;
 
-		/// <summary>
-		/// ShandongMaterial
-		/// </summary>
 		public const short ShandongMaterial = 6;
 
-		/// <summary>
-		/// JingnanMaterial
-		/// </summary>
 		public const short JingnanMaterial = 7;
 
-		/// <summary>
-		/// FujianMaterial
-		/// </summary>
 		public const short FujianMaterial = 8;
 
-		/// <summary>
-		/// LiaodongMaterial
-		/// </summary>
 		public const short LiaodongMaterial = 9;
 
-		/// <summary>
-		/// XiyuMaterial
-		/// </summary>
 		public const short XiyuMaterial = 10;
 
-		/// <summary>
-		/// YunnanMaterial
-		/// </summary>
 		public const short YunnanMaterial = 11;
 
-		/// <summary>
-		/// HuainanMaterial
-		/// </summary>
 		public const short HuainanMaterial = 12;
 
-		/// <summary>
-		/// JiangnanMaterial
-		/// </summary>
 		public const short JiangnanMaterial = 13;
 
-		/// <summary>
-		/// JiangbeiMaterial
-		/// </summary>
 		public const short JiangbeiMaterial = 14;
 
-		/// <summary>
-		/// JingjiResource
-		/// </summary>
 		public const short JingjiResource = 15;
 
-		/// <summary>
-		/// BashuResource
-		/// </summary>
 		public const short BashuResource = 16;
 
-		/// <summary>
-		/// GuangnanResource
-		/// </summary>
 		public const short GuangnanResource = 17;
 
-		/// <summary>
-		/// JingBeiResource
-		/// </summary>
 		public const short JingBeiResource = 18;
 
-		/// <summary>
-		/// ShanxiResource
-		/// </summary>
 		public const short ShanxiResource = 19;
 
-		/// <summary>
-		/// GuangdongResource
-		/// </summary>
 		public const short GuangdongResource = 20;
 
-		/// <summary>
-		/// ShandongResource
-		/// </summary>
 		public const short ShandongResource = 21;
 
-		/// <summary>
-		/// JingnanResource
-		/// </summary>
 		public const short JingnanResource = 22;
 
-		/// <summary>
-		/// FujianResource
-		/// </summary>
 		public const short FujianResource = 23;
 
-		/// <summary>
-		/// LiaodongResource
-		/// </summary>
 		public const short LiaodongResource = 24;
 
-		/// <summary>
-		/// XiyuResource
-		/// </summary>
 		public const short XiyuResource = 25;
 
-		/// <summary>
-		/// YunnanResource
-		/// </summary>
 		public const short YunnanResource = 26;
 
-		/// <summary>
-		/// HuainanResource
-		/// </summary>
 		public const short HuainanResource = 27;
 
-		/// <summary>
-		/// JiangnanResource
-		/// </summary>
 		public const short JiangnanResource = 28;
 
-		/// <summary>
-		/// JiangbeiResource
-		/// </summary>
 		public const short JiangbeiResource = 29;
 
-		/// <summary>
-		/// JingjiFood
-		/// </summary>
 		public const short JingjiFood = 30;
 
-		/// <summary>
-		/// BashuFood
-		/// </summary>
 		public const short BashuFood = 31;
 
-		/// <summary>
-		/// GuangnanFood
-		/// </summary>
 		public const short GuangnanFood = 32;
 
-		/// <summary>
-		/// JingBeiFood
-		/// </summary>
 		public const short JingBeiFood = 33;
 
-		/// <summary>
-		/// ShanxiFood
-		/// </summary>
 		public const short ShanxiFood = 34;
 
-		/// <summary>
-		/// GuangdongFood
-		/// </summary>
 		public const short GuangdongFood = 35;
 
-		/// <summary>
-		/// ShandongFood
-		/// </summary>
 		public const short ShandongFood = 36;
 
-		/// <summary>
-		/// JingnanFood
-		/// </summary>
 		public const short JingnanFood = 37;
 
-		/// <summary>
-		/// FujianFood
-		/// </summary>
 		public const short FujianFood = 38;
 
-		/// <summary>
-		/// LiaodongFood
-		/// </summary>
 		public const short LiaodongFood = 39;
 
-		/// <summary>
-		/// XiyuFood
-		/// </summary>
 		public const short XiyuFood = 40;
 
-		/// <summary>
-		/// YunnanFood
-		/// </summary>
 		public const short YunnanFood = 41;
 
-		/// <summary>
-		/// HuainanFood
-		/// </summary>
 		public const short HuainanFood = 42;
 
-		/// <summary>
-		/// JiangnanFood
-		/// </summary>
 		public const short JiangnanFood = 43;
 
-		/// <summary>
-		/// JiangbeiFood
-		/// </summary>
 		public const short JiangbeiFood = 44;
 
-		/// <summary>
-		/// HealOuterInjury
-		/// </summary>
 		public const short HealOuterInjury = 45;
 
-		/// <summary>
-		/// HealInnerInjury
-		/// </summary>
 		public const short HealInnerInjury = 46;
 
-		/// <summary>
-		/// HealPoison
-		/// </summary>
 		public const short HealPoison = 47;
 
-		/// <summary>
-		/// HealDisorderOfQi
-		/// </summary>
 		public const short HealDisorderOfQi = 48;
 
-		/// <summary>
-		/// HealLifeSpan
-		/// </summary>
 		public const short HealLifeSpan = 49;
 
-		/// <summary>
-		/// FriendResource
-		/// </summary>
 		public const short FriendResource = 50;
 
-		/// <summary>
-		/// FriendFood
-		/// </summary>
 		public const short FriendFood = 51;
 
-		/// <summary>
-		/// FriendTeaWine
-		/// </summary>
 		public const short FriendTeaWine = 52;
 
-		/// <summary>
-		/// FriendMedicine
-		/// </summary>
 		public const short FriendMedicine = 53;
 
-		/// <summary>
-		/// FameResource
-		/// </summary>
 		public const short FameResource = 54;
 
-		/// <summary>
-		/// FameFood
-		/// </summary>
 		public const short FameFood = 55;
 
-		/// <summary>
-		/// FameTeaWine
-		/// </summary>
 		public const short FameTeaWine = 56;
 
-		/// <summary>
-		/// FameMedicine
-		/// </summary>
 		public const short FameMedicine = 57;
 
-		/// <summary>
-		/// RecoverStrength
-		/// </summary>
 		public const short RecoverStrength = 58;
 
-		/// <summary>
-		/// RecoverDexterity
-		/// </summary>
 		public const short RecoverDexterity = 59;
 
-		/// <summary>
-		/// RecoverConcentration
-		/// </summary>
 		public const short RecoverConcentration = 60;
 
-		/// <summary>
-		/// RecoverVitality
-		/// </summary>
 		public const short RecoverVitality = 61;
 
-		/// <summary>
-		/// RecoverEnergy
-		/// </summary>
 		public const short RecoverEnergy = 62;
 
-		/// <summary>
-		/// RecoverIntelligence
-		/// </summary>
 		public const short RecoverIntelligence = 63;
 
-		/// <summary>
-		/// AreaInteractGood
-		/// </summary>
 		public const short AreaInteractGood = 64;
 
-		/// <summary>
-		/// AreaInteractNormal
-		/// </summary>
 		public const short AreaInteractNormal = 65;
 
-		/// <summary>
-		/// AreaInteractBad
-		/// </summary>
 		public const short AreaInteractBad = 66;
 
-		/// <summary>
-		/// AreaInteractIgnored
-		/// </summary>
 		public const short AreaInteractIgnored = 67;
 
-		/// <summary>
-		/// JingjiAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short JingjiAreaSpiritualDebtSucceed = 68;
 
-		/// <summary>
-		/// BashuAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short BashuAreaSpiritualDebtSucceed = 69;
 
-		/// <summary>
-		/// GuangnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short GuangnanAreaSpiritualDebtSucceed = 70;
 
-		/// <summary>
-		/// JingBeiAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short JingBeiAreaSpiritualDebtSucceed = 71;
 
-		/// <summary>
-		/// ShanxiAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short ShanxiAreaSpiritualDebtSucceed = 72;
 
-		/// <summary>
-		/// GuangdongAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short GuangdongAreaSpiritualDebtSucceed = 73;
 
-		/// <summary>
-		/// ShandongAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short ShandongAreaSpiritualDebtSucceed = 74;
 
-		/// <summary>
-		/// JingnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short JingnanAreaSpiritualDebtSucceed = 75;
 
-		/// <summary>
-		/// FujianAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short FujianAreaSpiritualDebtSucceed = 76;
 
-		/// <summary>
-		/// LiaodongAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short LiaodongAreaSpiritualDebtSucceed = 77;
 
-		/// <summary>
-		/// XiyuAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short XiyuAreaSpiritualDebtSucceed = 78;
 
-		/// <summary>
-		/// YunnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short YunnanAreaSpiritualDebtSucceed = 79;
 
-		/// <summary>
-		/// HuainanAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short HuainanAreaSpiritualDebtSucceed = 80;
 
-		/// <summary>
-		/// JiangnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short JiangnanAreaSpiritualDebtSucceed = 81;
 
-		/// <summary>
-		/// JiangbeiAreaSpiritualDebtSucceed
-		/// </summary>
 		public const short JiangbeiAreaSpiritualDebtSucceed = 82;
 
-		/// <summary>
-		/// AreaSpiritualDebtIgnored
-		/// </summary>
 		public const short AreaSpiritualDebtIgnored = 83;
 
-		/// <summary>
-		/// TravelBattlePerfectWin
-		/// </summary>
 		public const short TravelBattlePerfectWin = 84;
 
-		/// <summary>
-		/// TravelBattleWin
-		/// </summary>
 		public const short TravelBattleWin = 85;
 
-		/// <summary>
-		/// TravelBattleLose
-		/// </summary>
 		public const short TravelBattleLose = 86;
 
-		/// <summary>
-		/// GroupMemberAccept
-		/// </summary>
 		public const short GroupMemberAccept = 87;
 
-		/// <summary>
-		/// GroupMemberRefuse
-		/// </summary>
 		public const short GroupMemberRefuse = 88;
 
-		/// <summary>
-		/// GroupMemberIgnored
-		/// </summary>
 		public const short GroupMemberIgnored = 89;
 
-		/// <summary>
-		/// ConsumeStrengthSucceed
-		/// </summary>
 		public const short ConsumeStrengthSucceed = 90;
 
-		/// <summary>
-		/// ConsumeDexteritySucceed
-		/// </summary>
 		public const short ConsumeDexteritySucceed = 91;
 
-		/// <summary>
-		/// ConsumeConcentrationSucceed
-		/// </summary>
 		public const short ConsumeConcentrationSucceed = 92;
 
-		/// <summary>
-		/// ConsumeVitalitySucceed
-		/// </summary>
 		public const short ConsumeVitalitySucceed = 93;
 
-		/// <summary>
-		/// ConsumeEnergySucceed
-		/// </summary>
 		public const short ConsumeEnergySucceed = 94;
 
-		/// <summary>
-		/// ConsumeIntelligenceSucceed
-		/// </summary>
 		public const short ConsumeIntelligenceSucceed = 95;
 
-		/// <summary>
-		/// NoConsumeMainAttribute
-		/// </summary>
 		public const short NoConsumeMainAttribute = 96;
 
-		/// <summary>
-		/// RoadBlockAndDetour
-		/// </summary>
 		public const short RoadBlockAndDetour = 97;
 
-		/// <summary>
-		/// RoadBlockAndIgnore
-		/// </summary>
 		public const short RoadBlockAndIgnore = 98;
 
-		/// <summary>
-		/// JingjiInteract
-		/// </summary>
 		public const short JingjiInteract = 99;
 
-		/// <summary>
-		/// BashuInteract
-		/// </summary>
 		public const short BashuInteract = 100;
 
-		/// <summary>
-		/// GuangnanInteract
-		/// </summary>
 		public const short GuangnanInteract = 101;
 
-		/// <summary>
-		/// JingBeiInteract
-		/// </summary>
 		public const short JingBeiInteract = 102;
 
-		/// <summary>
-		/// ShanxiInteract
-		/// </summary>
 		public const short ShanxiInteract = 103;
 
-		/// <summary>
-		/// GuangdongInteract
-		/// </summary>
 		public const short GuangdongInteract = 104;
 
-		/// <summary>
-		/// ShandongInteract
-		/// </summary>
 		public const short ShandongInteract = 105;
 
-		/// <summary>
-		/// JingnanInteract
-		/// </summary>
 		public const short JingnanInteract = 106;
 
-		/// <summary>
-		/// FujianInteract
-		/// </summary>
 		public const short FujianInteract = 107;
 
-		/// <summary>
-		/// LiaodongInteract
-		/// </summary>
 		public const short LiaodongInteract = 108;
 
-		/// <summary>
-		/// XiyuInteract
-		/// </summary>
 		public const short XiyuInteract = 109;
 
-		/// <summary>
-		/// YunnanInteract
-		/// </summary>
 		public const short YunnanInteract = 110;
 
-		/// <summary>
-		/// HuainanInteract
-		/// </summary>
 		public const short HuainanInteract = 111;
 
-		/// <summary>
-		/// JiangnanInteract
-		/// </summary>
 		public const short JiangnanInteract = 112;
 
-		/// <summary>
-		/// JiangbeiInteract
-		/// </summary>
 		public const short JiangbeiInteract = 113;
 
-		/// <summary>
-		/// JingjiAreaSpiritualDebt
-		/// </summary>
 		public const short JingjiAreaSpiritualDebt = 114;
 
-		/// <summary>
-		/// BashuAreaSpiritualDebt
-		/// </summary>
 		public const short BashuAreaSpiritualDebt = 115;
 
-		/// <summary>
-		/// GuangnanAreaSpiritualDebt
-		/// </summary>
 		public const short GuangnanAreaSpiritualDebt = 116;
 
-		/// <summary>
-		/// JingBeiAreaSpiritualDebt
-		/// </summary>
 		public const short JingBeiAreaSpiritualDebt = 117;
 
-		/// <summary>
-		/// ShanxiAreaSpiritualDebt
-		/// </summary>
 		public const short ShanxiAreaSpiritualDebt = 118;
 
-		/// <summary>
-		/// GuangdongAreaSpiritualDebt
-		/// </summary>
 		public const short GuangdongAreaSpiritualDebt = 119;
 
-		/// <summary>
-		/// ShandongAreaSpiritualDebt
-		/// </summary>
 		public const short ShandongAreaSpiritualDebt = 120;
 
-		/// <summary>
-		/// JingnanAreaSpiritualDebt
-		/// </summary>
 		public const short JingnanAreaSpiritualDebt = 121;
 
-		/// <summary>
-		/// FujianAreaSpiritualDebt
-		/// </summary>
 		public const short FujianAreaSpiritualDebt = 122;
 
-		/// <summary>
-		/// LiaodongAreaSpiritualDebt
-		/// </summary>
 		public const short LiaodongAreaSpiritualDebt = 123;
 
-		/// <summary>
-		/// XiyuAreaSpiritualDebt
-		/// </summary>
 		public const short XiyuAreaSpiritualDebt = 124;
 
-		/// <summary>
-		/// YunnanAreaSpiritualDebt
-		/// </summary>
 		public const short YunnanAreaSpiritualDebt = 125;
 
-		/// <summary>
-		/// HuainanAreaSpiritualDebt
-		/// </summary>
 		public const short HuainanAreaSpiritualDebt = 126;
 
-		/// <summary>
-		/// JiangnanAreaSpiritualDebt
-		/// </summary>
 		public const short JiangnanAreaSpiritualDebt = 127;
 
-		/// <summary>
-		/// JiangbeiAreaSpiritualDebt
-		/// </summary>
 		public const short JiangbeiAreaSpiritualDebt = 128;
 
-		/// <summary>
-		/// VisitShaolin
-		/// </summary>
 		public const short VisitShaolin = 129;
 
-		/// <summary>
-		/// VisitEmei
-		/// </summary>
 		public const short VisitEmei = 130;
 
-		/// <summary>
-		/// VisitBaihua
-		/// </summary>
 		public const short VisitBaihua = 131;
 
-		/// <summary>
-		/// VisitWudang
-		/// </summary>
 		public const short VisitWudang = 132;
 
-		/// <summary>
-		/// VisitYuanshan
-		/// </summary>
 		public const short VisitYuanshan = 133;
 
-		/// <summary>
-		/// VisitShixiang
-		/// </summary>
 		public const short VisitShixiang = 134;
 
-		/// <summary>
-		/// VisitRanshan
-		/// </summary>
 		public const short VisitRanshan = 135;
 
-		/// <summary>
-		/// VisitXuannv
-		/// </summary>
 		public const short VisitXuannv = 136;
 
-		/// <summary>
-		/// VisitZhujian
-		/// </summary>
 		public const short VisitZhujian = 137;
 
-		/// <summary>
-		/// VisitKongsang
-		/// </summary>
 		public const short VisitKongsang = 138;
 
-		/// <summary>
-		/// VisitJingang
-		/// </summary>
 		public const short VisitJingang = 139;
 
-		/// <summary>
-		/// VisitWuxian
-		/// </summary>
 		public const short VisitWuxian = 140;
 
-		/// <summary>
-		/// VisitJieqing
-		/// </summary>
 		public const short VisitJieqing = 141;
 
-		/// <summary>
-		/// VisitFulong
-		/// </summary>
 		public const short VisitFulong = 142;
 
-		/// <summary>
-		/// VisitXuehou
-		/// </summary>
 		public const short VisitXuehou = 143;
 
-		/// <summary>
-		/// EnemyAttack
-		/// </summary>
 		public const short EnemyAttack = 144;
 
-		/// <summary>
-		/// RighteousAttack
-		/// </summary>
 		public const short RighteousAttack = 145;
 
-		/// <summary>
-		/// XiangshuMinionAttack
-		/// </summary>
 		public const short XiangshuMinionAttack = 146;
 
-		/// <summary>
-		/// ShaolinAttack
-		/// </summary>
 		public const short ShaolinAttack = 147;
 
-		/// <summary>
-		/// EmeiAttack
-		/// </summary>
 		public const short EmeiAttack = 148;
 
-		/// <summary>
-		/// BaihuaAttack
-		/// </summary>
 		public const short BaihuaAttack = 149;
 
-		/// <summary>
-		/// WudangAttack
-		/// </summary>
 		public const short WudangAttack = 150;
 
-		/// <summary>
-		/// YuanshanAttack
-		/// </summary>
 		public const short YuanshanAttack = 151;
 
-		/// <summary>
-		/// JingangAttack
-		/// </summary>
 		public const short JingangAttack = 152;
 
-		/// <summary>
-		/// WuxianAttack
-		/// </summary>
 		public const short WuxianAttack = 153;
 
-		/// <summary>
-		/// JieqingAttack
-		/// </summary>
 		public const short JieqingAttack = 154;
 
-		/// <summary>
-		/// FulongAttack
-		/// </summary>
 		public const short FulongAttack = 155;
 
-		/// <summary>
-		/// XuehouAttack
-		/// </summary>
 		public const short XuehouAttack = 156;
 
-		/// <summary>
-		/// FriendGroupMember
-		/// </summary>
 		public const short FriendGroupMember = 157;
 
-		/// <summary>
-		/// FameGroupMember
-		/// </summary>
 		public const short FameGroupMember = 158;
 
-		/// <summary>
-		/// ConsumeStrength
-		/// </summary>
 		public const short ConsumeStrength = 159;
 
-		/// <summary>
-		/// ConsumeDexterity
-		/// </summary>
 		public const short ConsumeDexterity = 160;
 
-		/// <summary>
-		/// ConsumeConcentration
-		/// </summary>
 		public const short ConsumeConcentration = 161;
 
-		/// <summary>
-		/// ConsumeVitality
-		/// </summary>
 		public const short ConsumeVitality = 162;
 
-		/// <summary>
-		/// ConsumeEnergy
-		/// </summary>
 		public const short ConsumeEnergy = 163;
 
-		/// <summary>
-		/// ConsumeIntelligence
-		/// </summary>
 		public const short ConsumeIntelligence = 164;
 
-		/// <summary>
-		/// RoadBlock
-		/// </summary>
 		public const short RoadBlock = 165;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// JingjiMaterial
-		/// </summary>
 		public static TravelingEventItem JingjiMaterial => Instance[(short)0];
 
-		/// <summary>
-		/// BashuMaterial
-		/// </summary>
 		public static TravelingEventItem BashuMaterial => Instance[(short)1];
 
-		/// <summary>
-		/// GuangnanMaterial
-		/// </summary>
 		public static TravelingEventItem GuangnanMaterial => Instance[(short)2];
 
-		/// <summary>
-		/// JingBeiMaterial
-		/// </summary>
 		public static TravelingEventItem JingBeiMaterial => Instance[(short)3];
 
-		/// <summary>
-		/// ShanxiMaterial
-		/// </summary>
 		public static TravelingEventItem ShanxiMaterial => Instance[(short)4];
 
-		/// <summary>
-		/// GuangdongMaterial
-		/// </summary>
 		public static TravelingEventItem GuangdongMaterial => Instance[(short)5];
 
-		/// <summary>
-		/// ShandongMaterial
-		/// </summary>
 		public static TravelingEventItem ShandongMaterial => Instance[(short)6];
 
-		/// <summary>
-		/// JingnanMaterial
-		/// </summary>
 		public static TravelingEventItem JingnanMaterial => Instance[(short)7];
 
-		/// <summary>
-		/// FujianMaterial
-		/// </summary>
 		public static TravelingEventItem FujianMaterial => Instance[(short)8];
 
-		/// <summary>
-		/// LiaodongMaterial
-		/// </summary>
 		public static TravelingEventItem LiaodongMaterial => Instance[(short)9];
 
-		/// <summary>
-		/// XiyuMaterial
-		/// </summary>
 		public static TravelingEventItem XiyuMaterial => Instance[(short)10];
 
-		/// <summary>
-		/// YunnanMaterial
-		/// </summary>
 		public static TravelingEventItem YunnanMaterial => Instance[(short)11];
 
-		/// <summary>
-		/// HuainanMaterial
-		/// </summary>
 		public static TravelingEventItem HuainanMaterial => Instance[(short)12];
 
-		/// <summary>
-		/// JiangnanMaterial
-		/// </summary>
 		public static TravelingEventItem JiangnanMaterial => Instance[(short)13];
 
-		/// <summary>
-		/// JiangbeiMaterial
-		/// </summary>
 		public static TravelingEventItem JiangbeiMaterial => Instance[(short)14];
 
-		/// <summary>
-		/// JingjiResource
-		/// </summary>
 		public static TravelingEventItem JingjiResource => Instance[(short)15];
 
-		/// <summary>
-		/// BashuResource
-		/// </summary>
 		public static TravelingEventItem BashuResource => Instance[(short)16];
 
-		/// <summary>
-		/// GuangnanResource
-		/// </summary>
 		public static TravelingEventItem GuangnanResource => Instance[(short)17];
 
-		/// <summary>
-		/// JingBeiResource
-		/// </summary>
 		public static TravelingEventItem JingBeiResource => Instance[(short)18];
 
-		/// <summary>
-		/// ShanxiResource
-		/// </summary>
 		public static TravelingEventItem ShanxiResource => Instance[(short)19];
 
-		/// <summary>
-		/// GuangdongResource
-		/// </summary>
 		public static TravelingEventItem GuangdongResource => Instance[(short)20];
 
-		/// <summary>
-		/// ShandongResource
-		/// </summary>
 		public static TravelingEventItem ShandongResource => Instance[(short)21];
 
-		/// <summary>
-		/// JingnanResource
-		/// </summary>
 		public static TravelingEventItem JingnanResource => Instance[(short)22];
 
-		/// <summary>
-		/// FujianResource
-		/// </summary>
 		public static TravelingEventItem FujianResource => Instance[(short)23];
 
-		/// <summary>
-		/// LiaodongResource
-		/// </summary>
 		public static TravelingEventItem LiaodongResource => Instance[(short)24];
 
-		/// <summary>
-		/// XiyuResource
-		/// </summary>
 		public static TravelingEventItem XiyuResource => Instance[(short)25];
 
-		/// <summary>
-		/// YunnanResource
-		/// </summary>
 		public static TravelingEventItem YunnanResource => Instance[(short)26];
 
-		/// <summary>
-		/// HuainanResource
-		/// </summary>
 		public static TravelingEventItem HuainanResource => Instance[(short)27];
 
-		/// <summary>
-		/// JiangnanResource
-		/// </summary>
 		public static TravelingEventItem JiangnanResource => Instance[(short)28];
 
-		/// <summary>
-		/// JiangbeiResource
-		/// </summary>
 		public static TravelingEventItem JiangbeiResource => Instance[(short)29];
 
-		/// <summary>
-		/// JingjiFood
-		/// </summary>
 		public static TravelingEventItem JingjiFood => Instance[(short)30];
 
-		/// <summary>
-		/// BashuFood
-		/// </summary>
 		public static TravelingEventItem BashuFood => Instance[(short)31];
 
-		/// <summary>
-		/// GuangnanFood
-		/// </summary>
 		public static TravelingEventItem GuangnanFood => Instance[(short)32];
 
-		/// <summary>
-		/// JingBeiFood
-		/// </summary>
 		public static TravelingEventItem JingBeiFood => Instance[(short)33];
 
-		/// <summary>
-		/// ShanxiFood
-		/// </summary>
 		public static TravelingEventItem ShanxiFood => Instance[(short)34];
 
-		/// <summary>
-		/// GuangdongFood
-		/// </summary>
 		public static TravelingEventItem GuangdongFood => Instance[(short)35];
 
-		/// <summary>
-		/// ShandongFood
-		/// </summary>
 		public static TravelingEventItem ShandongFood => Instance[(short)36];
 
-		/// <summary>
-		/// JingnanFood
-		/// </summary>
 		public static TravelingEventItem JingnanFood => Instance[(short)37];
 
-		/// <summary>
-		/// FujianFood
-		/// </summary>
 		public static TravelingEventItem FujianFood => Instance[(short)38];
 
-		/// <summary>
-		/// LiaodongFood
-		/// </summary>
 		public static TravelingEventItem LiaodongFood => Instance[(short)39];
 
-		/// <summary>
-		/// XiyuFood
-		/// </summary>
 		public static TravelingEventItem XiyuFood => Instance[(short)40];
 
-		/// <summary>
-		/// YunnanFood
-		/// </summary>
 		public static TravelingEventItem YunnanFood => Instance[(short)41];
 
-		/// <summary>
-		/// HuainanFood
-		/// </summary>
 		public static TravelingEventItem HuainanFood => Instance[(short)42];
 
-		/// <summary>
-		/// JiangnanFood
-		/// </summary>
 		public static TravelingEventItem JiangnanFood => Instance[(short)43];
 
-		/// <summary>
-		/// JiangbeiFood
-		/// </summary>
 		public static TravelingEventItem JiangbeiFood => Instance[(short)44];
 
-		/// <summary>
-		/// HealOuterInjury
-		/// </summary>
 		public static TravelingEventItem HealOuterInjury => Instance[(short)45];
 
-		/// <summary>
-		/// HealInnerInjury
-		/// </summary>
 		public static TravelingEventItem HealInnerInjury => Instance[(short)46];
 
-		/// <summary>
-		/// HealPoison
-		/// </summary>
 		public static TravelingEventItem HealPoison => Instance[(short)47];
 
-		/// <summary>
-		/// HealDisorderOfQi
-		/// </summary>
 		public static TravelingEventItem HealDisorderOfQi => Instance[(short)48];
 
-		/// <summary>
-		/// HealLifeSpan
-		/// </summary>
 		public static TravelingEventItem HealLifeSpan => Instance[(short)49];
 
-		/// <summary>
-		/// FriendResource
-		/// </summary>
 		public static TravelingEventItem FriendResource => Instance[(short)50];
 
-		/// <summary>
-		/// FriendFood
-		/// </summary>
 		public static TravelingEventItem FriendFood => Instance[(short)51];
 
-		/// <summary>
-		/// FriendTeaWine
-		/// </summary>
 		public static TravelingEventItem FriendTeaWine => Instance[(short)52];
 
-		/// <summary>
-		/// FriendMedicine
-		/// </summary>
 		public static TravelingEventItem FriendMedicine => Instance[(short)53];
 
-		/// <summary>
-		/// FameResource
-		/// </summary>
 		public static TravelingEventItem FameResource => Instance[(short)54];
 
-		/// <summary>
-		/// FameFood
-		/// </summary>
 		public static TravelingEventItem FameFood => Instance[(short)55];
 
-		/// <summary>
-		/// FameTeaWine
-		/// </summary>
 		public static TravelingEventItem FameTeaWine => Instance[(short)56];
 
-		/// <summary>
-		/// FameMedicine
-		/// </summary>
 		public static TravelingEventItem FameMedicine => Instance[(short)57];
 
-		/// <summary>
-		/// RecoverStrength
-		/// </summary>
 		public static TravelingEventItem RecoverStrength => Instance[(short)58];
 
-		/// <summary>
-		/// RecoverDexterity
-		/// </summary>
 		public static TravelingEventItem RecoverDexterity => Instance[(short)59];
 
-		/// <summary>
-		/// RecoverConcentration
-		/// </summary>
 		public static TravelingEventItem RecoverConcentration => Instance[(short)60];
 
-		/// <summary>
-		/// RecoverVitality
-		/// </summary>
 		public static TravelingEventItem RecoverVitality => Instance[(short)61];
 
-		/// <summary>
-		/// RecoverEnergy
-		/// </summary>
 		public static TravelingEventItem RecoverEnergy => Instance[(short)62];
 
-		/// <summary>
-		/// RecoverIntelligence
-		/// </summary>
 		public static TravelingEventItem RecoverIntelligence => Instance[(short)63];
 
-		/// <summary>
-		/// AreaInteractGood
-		/// </summary>
 		public static TravelingEventItem AreaInteractGood => Instance[(short)64];
 
-		/// <summary>
-		/// AreaInteractNormal
-		/// </summary>
 		public static TravelingEventItem AreaInteractNormal => Instance[(short)65];
 
-		/// <summary>
-		/// AreaInteractBad
-		/// </summary>
 		public static TravelingEventItem AreaInteractBad => Instance[(short)66];
 
-		/// <summary>
-		/// AreaInteractIgnored
-		/// </summary>
 		public static TravelingEventItem AreaInteractIgnored => Instance[(short)67];
 
-		/// <summary>
-		/// JingjiAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem JingjiAreaSpiritualDebtSucceed => Instance[(short)68];
 
-		/// <summary>
-		/// BashuAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem BashuAreaSpiritualDebtSucceed => Instance[(short)69];
 
-		/// <summary>
-		/// GuangnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem GuangnanAreaSpiritualDebtSucceed => Instance[(short)70];
 
-		/// <summary>
-		/// JingBeiAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem JingBeiAreaSpiritualDebtSucceed => Instance[(short)71];
 
-		/// <summary>
-		/// ShanxiAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem ShanxiAreaSpiritualDebtSucceed => Instance[(short)72];
 
-		/// <summary>
-		/// GuangdongAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem GuangdongAreaSpiritualDebtSucceed => Instance[(short)73];
 
-		/// <summary>
-		/// ShandongAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem ShandongAreaSpiritualDebtSucceed => Instance[(short)74];
 
-		/// <summary>
-		/// JingnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem JingnanAreaSpiritualDebtSucceed => Instance[(short)75];
 
-		/// <summary>
-		/// FujianAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem FujianAreaSpiritualDebtSucceed => Instance[(short)76];
 
-		/// <summary>
-		/// LiaodongAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem LiaodongAreaSpiritualDebtSucceed => Instance[(short)77];
 
-		/// <summary>
-		/// XiyuAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem XiyuAreaSpiritualDebtSucceed => Instance[(short)78];
 
-		/// <summary>
-		/// YunnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem YunnanAreaSpiritualDebtSucceed => Instance[(short)79];
 
-		/// <summary>
-		/// HuainanAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem HuainanAreaSpiritualDebtSucceed => Instance[(short)80];
 
-		/// <summary>
-		/// JiangnanAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem JiangnanAreaSpiritualDebtSucceed => Instance[(short)81];
 
-		/// <summary>
-		/// JiangbeiAreaSpiritualDebtSucceed
-		/// </summary>
 		public static TravelingEventItem JiangbeiAreaSpiritualDebtSucceed => Instance[(short)82];
 
-		/// <summary>
-		/// AreaSpiritualDebtIgnored
-		/// </summary>
 		public static TravelingEventItem AreaSpiritualDebtIgnored => Instance[(short)83];
 
-		/// <summary>
-		/// TravelBattlePerfectWin
-		/// </summary>
 		public static TravelingEventItem TravelBattlePerfectWin => Instance[(short)84];
 
-		/// <summary>
-		/// TravelBattleWin
-		/// </summary>
 		public static TravelingEventItem TravelBattleWin => Instance[(short)85];
 
-		/// <summary>
-		/// TravelBattleLose
-		/// </summary>
 		public static TravelingEventItem TravelBattleLose => Instance[(short)86];
 
-		/// <summary>
-		/// GroupMemberAccept
-		/// </summary>
 		public static TravelingEventItem GroupMemberAccept => Instance[(short)87];
 
-		/// <summary>
-		/// GroupMemberRefuse
-		/// </summary>
 		public static TravelingEventItem GroupMemberRefuse => Instance[(short)88];
 
-		/// <summary>
-		/// GroupMemberIgnored
-		/// </summary>
 		public static TravelingEventItem GroupMemberIgnored => Instance[(short)89];
 
-		/// <summary>
-		/// ConsumeStrengthSucceed
-		/// </summary>
 		public static TravelingEventItem ConsumeStrengthSucceed => Instance[(short)90];
 
-		/// <summary>
-		/// ConsumeDexteritySucceed
-		/// </summary>
 		public static TravelingEventItem ConsumeDexteritySucceed => Instance[(short)91];
 
-		/// <summary>
-		/// ConsumeConcentrationSucceed
-		/// </summary>
 		public static TravelingEventItem ConsumeConcentrationSucceed => Instance[(short)92];
 
-		/// <summary>
-		/// ConsumeVitalitySucceed
-		/// </summary>
 		public static TravelingEventItem ConsumeVitalitySucceed => Instance[(short)93];
 
-		/// <summary>
-		/// ConsumeEnergySucceed
-		/// </summary>
 		public static TravelingEventItem ConsumeEnergySucceed => Instance[(short)94];
 
-		/// <summary>
-		/// ConsumeIntelligenceSucceed
-		/// </summary>
 		public static TravelingEventItem ConsumeIntelligenceSucceed => Instance[(short)95];
 
-		/// <summary>
-		/// NoConsumeMainAttribute
-		/// </summary>
 		public static TravelingEventItem NoConsumeMainAttribute => Instance[(short)96];
 
-		/// <summary>
-		/// RoadBlockAndDetour
-		/// </summary>
 		public static TravelingEventItem RoadBlockAndDetour => Instance[(short)97];
 
-		/// <summary>
-		/// RoadBlockAndIgnore
-		/// </summary>
 		public static TravelingEventItem RoadBlockAndIgnore => Instance[(short)98];
 
-		/// <summary>
-		/// JingjiInteract
-		/// </summary>
 		public static TravelingEventItem JingjiInteract => Instance[(short)99];
 
-		/// <summary>
-		/// BashuInteract
-		/// </summary>
 		public static TravelingEventItem BashuInteract => Instance[(short)100];
 
-		/// <summary>
-		/// GuangnanInteract
-		/// </summary>
 		public static TravelingEventItem GuangnanInteract => Instance[(short)101];
 
-		/// <summary>
-		/// JingBeiInteract
-		/// </summary>
 		public static TravelingEventItem JingBeiInteract => Instance[(short)102];
 
-		/// <summary>
-		/// ShanxiInteract
-		/// </summary>
 		public static TravelingEventItem ShanxiInteract => Instance[(short)103];
 
-		/// <summary>
-		/// GuangdongInteract
-		/// </summary>
 		public static TravelingEventItem GuangdongInteract => Instance[(short)104];
 
-		/// <summary>
-		/// ShandongInteract
-		/// </summary>
 		public static TravelingEventItem ShandongInteract => Instance[(short)105];
 
-		/// <summary>
-		/// JingnanInteract
-		/// </summary>
 		public static TravelingEventItem JingnanInteract => Instance[(short)106];
 
-		/// <summary>
-		/// FujianInteract
-		/// </summary>
 		public static TravelingEventItem FujianInteract => Instance[(short)107];
 
-		/// <summary>
-		/// LiaodongInteract
-		/// </summary>
 		public static TravelingEventItem LiaodongInteract => Instance[(short)108];
 
-		/// <summary>
-		/// XiyuInteract
-		/// </summary>
 		public static TravelingEventItem XiyuInteract => Instance[(short)109];
 
-		/// <summary>
-		/// YunnanInteract
-		/// </summary>
 		public static TravelingEventItem YunnanInteract => Instance[(short)110];
 
-		/// <summary>
-		/// HuainanInteract
-		/// </summary>
 		public static TravelingEventItem HuainanInteract => Instance[(short)111];
 
-		/// <summary>
-		/// JiangnanInteract
-		/// </summary>
 		public static TravelingEventItem JiangnanInteract => Instance[(short)112];
 
-		/// <summary>
-		/// JiangbeiInteract
-		/// </summary>
 		public static TravelingEventItem JiangbeiInteract => Instance[(short)113];
 
-		/// <summary>
-		/// JingjiAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem JingjiAreaSpiritualDebt => Instance[(short)114];
 
-		/// <summary>
-		/// BashuAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem BashuAreaSpiritualDebt => Instance[(short)115];
 
-		/// <summary>
-		/// GuangnanAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem GuangnanAreaSpiritualDebt => Instance[(short)116];
 
-		/// <summary>
-		/// JingBeiAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem JingBeiAreaSpiritualDebt => Instance[(short)117];
 
-		/// <summary>
-		/// ShanxiAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem ShanxiAreaSpiritualDebt => Instance[(short)118];
 
-		/// <summary>
-		/// GuangdongAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem GuangdongAreaSpiritualDebt => Instance[(short)119];
 
-		/// <summary>
-		/// ShandongAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem ShandongAreaSpiritualDebt => Instance[(short)120];
 
-		/// <summary>
-		/// JingnanAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem JingnanAreaSpiritualDebt => Instance[(short)121];
 
-		/// <summary>
-		/// FujianAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem FujianAreaSpiritualDebt => Instance[(short)122];
 
-		/// <summary>
-		/// LiaodongAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem LiaodongAreaSpiritualDebt => Instance[(short)123];
 
-		/// <summary>
-		/// XiyuAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem XiyuAreaSpiritualDebt => Instance[(short)124];
 
-		/// <summary>
-		/// YunnanAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem YunnanAreaSpiritualDebt => Instance[(short)125];
 
-		/// <summary>
-		/// HuainanAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem HuainanAreaSpiritualDebt => Instance[(short)126];
 
-		/// <summary>
-		/// JiangnanAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem JiangnanAreaSpiritualDebt => Instance[(short)127];
 
-		/// <summary>
-		/// JiangbeiAreaSpiritualDebt
-		/// </summary>
 		public static TravelingEventItem JiangbeiAreaSpiritualDebt => Instance[(short)128];
 
-		/// <summary>
-		/// VisitShaolin
-		/// </summary>
 		public static TravelingEventItem VisitShaolin => Instance[(short)129];
 
-		/// <summary>
-		/// VisitEmei
-		/// </summary>
 		public static TravelingEventItem VisitEmei => Instance[(short)130];
 
-		/// <summary>
-		/// VisitBaihua
-		/// </summary>
 		public static TravelingEventItem VisitBaihua => Instance[(short)131];
 
-		/// <summary>
-		/// VisitWudang
-		/// </summary>
 		public static TravelingEventItem VisitWudang => Instance[(short)132];
 
-		/// <summary>
-		/// VisitYuanshan
-		/// </summary>
 		public static TravelingEventItem VisitYuanshan => Instance[(short)133];
 
-		/// <summary>
-		/// VisitShixiang
-		/// </summary>
 		public static TravelingEventItem VisitShixiang => Instance[(short)134];
 
-		/// <summary>
-		/// VisitRanshan
-		/// </summary>
 		public static TravelingEventItem VisitRanshan => Instance[(short)135];
 
-		/// <summary>
-		/// VisitXuannv
-		/// </summary>
 		public static TravelingEventItem VisitXuannv => Instance[(short)136];
 
-		/// <summary>
-		/// VisitZhujian
-		/// </summary>
 		public static TravelingEventItem VisitZhujian => Instance[(short)137];
 
-		/// <summary>
-		/// VisitKongsang
-		/// </summary>
 		public static TravelingEventItem VisitKongsang => Instance[(short)138];
 
-		/// <summary>
-		/// VisitJingang
-		/// </summary>
 		public static TravelingEventItem VisitJingang => Instance[(short)139];
 
-		/// <summary>
-		/// VisitWuxian
-		/// </summary>
 		public static TravelingEventItem VisitWuxian => Instance[(short)140];
 
-		/// <summary>
-		/// VisitJieqing
-		/// </summary>
 		public static TravelingEventItem VisitJieqing => Instance[(short)141];
 
-		/// <summary>
-		/// VisitFulong
-		/// </summary>
 		public static TravelingEventItem VisitFulong => Instance[(short)142];
 
-		/// <summary>
-		/// VisitXuehou
-		/// </summary>
 		public static TravelingEventItem VisitXuehou => Instance[(short)143];
 
-		/// <summary>
-		/// EnemyAttack
-		/// </summary>
 		public static TravelingEventItem EnemyAttack => Instance[(short)144];
 
-		/// <summary>
-		/// RighteousAttack
-		/// </summary>
 		public static TravelingEventItem RighteousAttack => Instance[(short)145];
 
-		/// <summary>
-		/// XiangshuMinionAttack
-		/// </summary>
 		public static TravelingEventItem XiangshuMinionAttack => Instance[(short)146];
 
-		/// <summary>
-		/// ShaolinAttack
-		/// </summary>
 		public static TravelingEventItem ShaolinAttack => Instance[(short)147];
 
-		/// <summary>
-		/// EmeiAttack
-		/// </summary>
 		public static TravelingEventItem EmeiAttack => Instance[(short)148];
 
-		/// <summary>
-		/// BaihuaAttack
-		/// </summary>
 		public static TravelingEventItem BaihuaAttack => Instance[(short)149];
 
-		/// <summary>
-		/// WudangAttack
-		/// </summary>
 		public static TravelingEventItem WudangAttack => Instance[(short)150];
 
-		/// <summary>
-		/// YuanshanAttack
-		/// </summary>
 		public static TravelingEventItem YuanshanAttack => Instance[(short)151];
 
-		/// <summary>
-		/// JingangAttack
-		/// </summary>
 		public static TravelingEventItem JingangAttack => Instance[(short)152];
 
-		/// <summary>
-		/// WuxianAttack
-		/// </summary>
 		public static TravelingEventItem WuxianAttack => Instance[(short)153];
 
-		/// <summary>
-		/// JieqingAttack
-		/// </summary>
 		public static TravelingEventItem JieqingAttack => Instance[(short)154];
 
-		/// <summary>
-		/// FulongAttack
-		/// </summary>
 		public static TravelingEventItem FulongAttack => Instance[(short)155];
 
-		/// <summary>
-		/// XuehouAttack
-		/// </summary>
 		public static TravelingEventItem XuehouAttack => Instance[(short)156];
 
-		/// <summary>
-		/// FriendGroupMember
-		/// </summary>
 		public static TravelingEventItem FriendGroupMember => Instance[(short)157];
 
-		/// <summary>
-		/// FameGroupMember
-		/// </summary>
 		public static TravelingEventItem FameGroupMember => Instance[(short)158];
 
-		/// <summary>
-		/// ConsumeStrength
-		/// </summary>
 		public static TravelingEventItem ConsumeStrength => Instance[(short)159];
 
-		/// <summary>
-		/// ConsumeDexterity
-		/// </summary>
 		public static TravelingEventItem ConsumeDexterity => Instance[(short)160];
 
-		/// <summary>
-		/// ConsumeConcentration
-		/// </summary>
 		public static TravelingEventItem ConsumeConcentration => Instance[(short)161];
 
-		/// <summary>
-		/// ConsumeVitality
-		/// </summary>
 		public static TravelingEventItem ConsumeVitality => Instance[(short)162];
 
-		/// <summary>
-		/// ConsumeEnergy
-		/// </summary>
 		public static TravelingEventItem ConsumeEnergy => Instance[(short)163];
 
-		/// <summary>
-		/// ConsumeIntelligence
-		/// </summary>
 		public static TravelingEventItem ConsumeIntelligence => Instance[(short)164];
 
-		/// <summary>
-		/// RoadBlock
-		/// </summary>
 		public static TravelingEventItem RoadBlock => Instance[(short)165];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TravelingEvent Instance = new TravelingEvent();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

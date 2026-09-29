@@ -4,34 +4,18 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 一个村民工作需要显示的数据的壳，手写正反序列化代码
-/// 其中DisplayData会是实际的不同工作的不同类
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class VillagerRoleArrangementDisplayDataWrapper : ISerializableGameData
 {
-	/// <summary>
-	/// 对应工作id
-	/// </summary>
 	[SerializableGameDataField]
 	public int ArrangementTemplateId = -1;
 
-	/// <summary>
-	/// 显示用的位置信息，目前身份工作只有Area
-	/// </summary>
 	[SerializableGameDataField]
 	public short AreaId = -1;
 
-	/// <summary>
-	/// 显示数据用的 Id，ArrangementTemplateId 没有的情况也可以有这个
-	/// </summary>
 	[SerializableGameDataField]
 	public int ArrangementDataId = -1;
 
-	/// <summary>
-	/// 显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public IVillagerRoleArrangementDisplayData ArrangementData;
 
@@ -57,13 +41,11 @@ public class VillagerRoleArrangementDisplayDataWrapper : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -75,7 +57,6 @@ public class VillagerRoleArrangementDisplayDataWrapper : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -107,7 +88,6 @@ public class VillagerRoleArrangementDisplayDataWrapper : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

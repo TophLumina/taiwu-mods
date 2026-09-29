@@ -2,49 +2,29 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 多选的单个操作
-/// </summary>
 [SerializableGameData]
 public struct MultiplyOperation(ItemKey target, ItemKey tool, int count, sbyte targetItemSourceType, sbyte toolItemSourceType) : ISerializableGameData
 {
-	/// <summary>
-	/// 要操作的物品KEY
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey Target = target;
 
-	/// <summary>
-	/// 要操作的物品的数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int Count = count;
 
-	/// <summary>
-	/// 对应使用的工具KEY
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey Tool = tool;
 
-	/// <summary>
-	/// 目标物品的来源类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TargetItemSourceType = targetItemSourceType;
 
-	/// <summary>
-	/// 工具的来源类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ToolItemSourceType = toolItemSourceType;
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 22;
@@ -55,7 +35,6 @@ public struct MultiplyOperation(ItemKey target, ItemKey tool, int count, sbyte t
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -75,7 +54,6 @@ public struct MultiplyOperation(ItemKey target, ItemKey tool, int count, sbyte t
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

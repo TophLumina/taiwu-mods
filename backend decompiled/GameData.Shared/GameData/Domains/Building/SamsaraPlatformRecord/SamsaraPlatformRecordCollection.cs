@@ -5,19 +5,8 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building.SamsaraPlatformRecord;
 
-/// <summary>
-/// 轮回台记录集合
-/// </summary>
-/// <summary>
-/// 轮回台记录的集合
-/// </summary>
 public class SamsaraPlatformRecordCollection : WriteableRecordCollection
 {
-	/// <summary>
-	/// 获取所有轮回台的渲染信息
-	/// </summary>
-	/// <param name="renderInfos">调用者保证传入时此集合为空</param>
-	/// <param name="argumentCollection">传入时可以不为空</param>
 	public void GetRenderInfos(List<SamsaraPlatformRecordRenderInfo> renderInfos, ArgumentCollection argumentCollection)
 	{
 		int index = -1;
@@ -32,11 +21,6 @@ public class SamsaraPlatformRecordCollection : WriteableRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 获取指定位置上的记录类型（即轮回台模板ID）
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <returns></returns>
 	public unsafe short GetRecordType(int offset)
 	{
 		fixed (byte* pRawData = RawData)
@@ -53,12 +37,6 @@ public class SamsaraPlatformRecordCollection : WriteableRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 获取指定索引的轮回台记录的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="argumentCollection">实参集合</param>
-	/// <returns></returns>
 	public new unsafe SamsaraPlatformRecordRenderInfo GetRenderInfo(int offset, ArgumentCollection argumentCollection)
 	{
 		fixed (byte* pRawData = RawData)
@@ -93,12 +71,6 @@ public class SamsaraPlatformRecordCollection : WriteableRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 开始添加轮回台记录
-	/// </summary>
-	/// <param name="date">经历发生的日期</param>
-	/// <param name="recordType">过月通知类型</param>
-	/// <returns>当前过月通知的起始偏移</returns>
 	private unsafe int BeginAddingRecord(int date, short recordType)
 	{
 		int offset = Size;
@@ -114,10 +86,6 @@ public class SamsaraPlatformRecordCollection : WriteableRecordCollection
 		return offset;
 	}
 
-	/// <summary>
-	/// 添加轮回台记录 - 轮回成功
-	/// {0}通过{1}轮回至{2}，成为了此处{3}{4}的子女…
-	/// </summary>
 	public int AddSamsaraSuccess(int date, int charId, sbyte destinyType, short settlementId, sbyte orgTemplateId, sbyte orgGrade, bool orgPrincipal, sbyte gender, int charId1)
 	{
 		int beginOffset = BeginAddingRecord(date, 0);
@@ -130,10 +98,6 @@ public class SamsaraPlatformRecordCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加轮回台记录 - 轮回失败
-	/// {0}本应通过{1}投胎转世，却不知何故再三受阻，未能入得轮回……
-	/// </summary>
 	public int AddSamsaraFailed(int date, int charId, sbyte destinyType)
 	{
 		int beginOffset = BeginAddingRecord(date, 1);

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class PunishmentSeverity : ConfigData<PunishmentSeverityItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static PunishmentSeverity Instance = new PunishmentSeverity();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "EscapeActions", "Name", "PunishmentDesc", "NormalRecord", "ArrestedRecord", "TemplateId", "FameActionFactorInPunish", "NameColor" };

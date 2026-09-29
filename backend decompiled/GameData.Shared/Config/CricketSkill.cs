@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class CricketSkill : ConfigData<CricketSkillItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CricketSkill Instance = new CricketSkill();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "EffectCondition", "EffectDesc", "EffectTips", "TemplateId" };

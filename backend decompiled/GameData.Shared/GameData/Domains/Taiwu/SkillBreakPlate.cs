@@ -14,9 +14,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 功法突破盘
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlateGrid>, IEnumerable
 {
@@ -67,9 +64,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		};
 	}
 
-	/// <summary>
-	/// 相邻突破格查找表
-	/// </summary>
 	private readonly SkillBreakPlateAxial[] _neighborAxial = new SkillBreakPlateAxial[6]
 	{
 		(q: -1, r: 0),
@@ -80,114 +74,51 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		(q: 1, r: -1)
 	};
 
-	/// <summary>
-	/// 生成特殊格子的概率
-	/// </summary>
 	private const byte SpecialGridOdds = 37;
 
-	/// <summary>
-	/// 成功率随机范围
-	/// </summary>
 	private const byte SuccessRateRandomRange = 15;
 
-	/// <summary>
-	/// 默认格式化实现
-	/// </summary>
 	private static readonly ISkillBreakPlateFormatter DefaultFormatter = new SkillBreakPlateFormatterDefault();
 
-	/// <summary>
-	/// 索引缓存 0 号
-	/// </summary>
 	private static readonly List<SkillBreakPlateIndex> IndexesCache0 = new List<SkillBreakPlateIndex>();
 
-	/// <summary>
-	/// 索引缓存 1 号
-	/// </summary>
 	private static readonly List<SkillBreakPlateIndex> IndexesCache1 = new List<SkillBreakPlateIndex>();
 
-	/// <summary>
-	/// 索引缓存 2 号
-	/// </summary>
 	private static readonly List<SkillBreakPlateIndex> IndexesCache2 = new List<SkillBreakPlateIndex>();
 
-	/// <summary>
-	/// 特殊突破格生成权重
-	/// </summary>
 	private static List<(sbyte, short)> _specialGridTypeGenerateWeights;
 
-	/// <summary>
-	/// 特殊突破格转换权重
-	/// </summary>
 	private static List<(sbyte, short)> _specialGridTypeConvertWeights;
 
-	/// <summary>
-	/// 突破格数据
-	/// 坐标系为：
-	/// y+
-	/// ^
-	/// |
-	/// o ——&gt; x+
-	/// 自中心向外依次为 Center -&gt; (Border -&gt; Margin)[Edge]
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	private SkillBreakPlateGrid[] _grids;
 
-	/// <summary>
-	/// 内部状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	private sbyte _internalState;
 
-	/// <summary>
-	/// 额外天资数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	private int _stepExtraNormal;
 
-	/// <summary>
-	/// 突破路径
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 13)]
 	private List<SkillBreakPlateIndex> _selectPath;
 
-	/// <summary>
-	/// 加成数据
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 14)]
 	private Dictionary<SkillBreakPlateIndex, SkillBreakPlateBonus> _bonuses;
 
-	/// <summary>
-	/// 格子交换映射：Key -&gt; Value 表示 Key 位置的格子被 Value 位置的格子替换
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 15)]
 	private Dictionary<SkillBreakPlateIndex, SkillBreakPlateIndex> _gridSwaps;
 
-	/// <summary>
-	/// 奇书阴阳眼状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 17)]
 	public ELegendaryBookSlotState LegendaryBookState;
 
 	private GlobalConfig Global => GlobalConfig.Instance;
 
-	/// <summary>
-	/// 未走火入魔的天资数
-	/// </summary>
 	public int StepNormal => StepBase * (CValuePercentBonus)OutlineConfig.StepBonusNormal + _stepExtraNormal + (LegendaryBookState.ContainsYang() ? Global.LegendaryBookYangAddStepNormal : 0);
 
-	/// <summary>
-	/// 已走火入魔的天资数
-	/// </summary>
 	public int StepGoneMad => StepBase * (CValuePercentBonus)OutlineConfig.StepBonusGoneMad + (LegendaryBookState.ContainsYin() ? Global.LegendaryBookYinAddStepGoneMad : 0);
 
-	/// <summary>
-	/// 天资数上限
-	/// </summary>
 	public int StepTotal => StepNormal + StepGoneMad;
 
-	/// <summary>
-	/// 步数已耗尽
-	/// </summary>
 	public bool StepExhausted
 	{
 		get
@@ -200,55 +131,24 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 当前点是否有任意邻居
-	/// </summary>
 	public bool AnyNeighbors => GetNeighbors(Current).Any(MaybeSuccess);
 
-	/// <summary>
-	/// 突破盘状态
-	/// </summary>
 	public ESkillBreakPlateState State => (ESkillBreakPlateState)_internalState;
 
-	/// <summary>
-	/// 是否突破成功
-	/// </summary>
 	public bool Success => State == ESkillBreakPlateState.Success;
 
-	/// <summary>
-	/// 是否突破失败
-	/// </summary>
 	public bool Failed => State == ESkillBreakPlateState.Failed;
 
-	/// <summary>
-	/// 是否已结束
-	/// </summary>
 	public bool Finished => State != ESkillBreakPlateState.NotFinished;
 
-	/// <summary>
-	/// 增加的威力上限值
-	/// </summary>
-	/// <returns></returns>
 	public int AddMaxPower => GetIndexes().Where(IsSelectedPoint).Sum((Func<SkillBreakPlateIndex, int>)CalcAddMaxPower);
 
-	/// <summary>
-	/// 突破路径
-	/// </summary>
 	public IReadOnlyList<SkillBreakPlateIndex> SelectPath => _selectPath;
 
-	/// <summary>
-	/// 总纲类型，对应立场类型 <see cref="T:GameData.Domains.Character.BehaviorType" />
-	/// </summary>
 	public sbyte OutlineType => CombatSkillStateHelper.GetActiveOutlinePageType(SelectedPages);
 
-	/// <summary>
-	/// 总纲加成配置
-	/// </summary>
 	public SkillBreakOutlineEffectItem OutlineConfig => SkillBreakOutlineEffect.Instance[OutlineType];
 
-	/// <summary>
-	/// 填充过任意玄机
-	/// </summary>
 	public bool AnyBonus
 	{
 		get
@@ -262,78 +162,39 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 突破盘宽度
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public byte Width { get; private set; }
 
-	/// <summary>
-	/// 突破盘高度
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public byte Height { get; private set; }
 
-	/// <summary>
-	/// 基础天资数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public int StepBase { get; set; }
 
-	/// <summary>
-	/// 已使用天资数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public int StepCostedNormal { get; private set; }
 
-	/// <summary>
-	/// 已使用入魔数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public int StepCostedGoneMad { get; private set; }
 
-	/// <summary>
-	/// 当前位置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public SkillBreakPlateIndex Current { get; private set; }
 
-	/// <summary>
-	/// 基础成功率
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	public byte BaseSuccessRate { get; set; }
 
-	/// <summary>
-	/// 连接成功的次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	public int SuccessCount { get; set; }
 
-	/// <summary>
-	/// 连接失败的次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 11)]
 	public int FailedCount { get; set; }
 
-	/// <summary>
-	/// 选中的书页
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 12)]
 	public ushort SelectedPages { get; private set; }
 
-	/// <summary>
-	/// 交换次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 16)]
 	public int SwapCount { get; private set; }
 
-	/// <summary>
-	/// 索引某位置的突破格
-	/// </summary>
-	/// <param name="x">列数</param>
-	/// <param name="y">行数</param>
-	/// <exception cref="T:System.IndexOutOfRangeException"></exception>
 	public SkillBreakPlateGrid this[int x, int y]
 	{
 		get
@@ -354,10 +215,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 索引某位置的突破格
-	/// </summary>
-	/// <param name="index">位置</param>
 	public SkillBreakPlateGrid this[SkillBreakPlateIndex index]
 	{
 		get
@@ -370,17 +227,11 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 是否为突出行（列数为宽度）
-	/// </summary>
 	public static bool IsProtrusion(int y)
 	{
 		return y % 2 != 0;
 	}
 
-	/// <summary>
-	/// 初始化特殊突破格权重
-	/// </summary>
 	private static void InitializedWeights()
 	{
 		if (_specialGridTypeGenerateWeights != null && _specialGridTypeConvertWeights != null)
@@ -396,11 +247,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 随机一个突破格的类型（此实现假定所有未初始化的突破格数据都处于 IndexesCache，如有调整则应一并修改）
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	private static sbyte RandomGridType(IRandomSource random)
 	{
 		if (!random.CheckPercentProb(37))
@@ -410,21 +256,12 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return RandomSpecialGridType(random);
 	}
 
-	/// <summary>
-	/// 随机特殊突破格类型
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="byGenerate">使用生成时权重</param>
-	/// <returns></returns>
 	private static sbyte RandomSpecialGridType(IRandomSource random, bool byGenerate = true)
 	{
 		InitializedWeights();
 		return RandomUtils.GetRandomResult(byGenerate ? _specialGridTypeGenerateWeights : _specialGridTypeConvertWeights, random);
 	}
 
-	/// <summary>
-	/// 判定某个格子的威力
-	/// </summary>
 	private static short RandomGridPower(IRandomSource random, ref int power, ref int chance, int powerPerGrid)
 	{
 		short gridPower = 0;
@@ -440,12 +277,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return gridPower;
 	}
 
-	/// <summary>
-	/// 随机一个突破格的字段
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	private static SkillBreakPlateGrid RandomGridData(IRandomSource random, sbyte templateId)
 	{
 		sbyte successRateFix = (sbyte)random.Next(-15, 16);
@@ -454,25 +285,11 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return new SkillBreakPlateGrid(templateId, successRateFix, state);
 	}
 
-	/// <summary>
-	/// 基于配置构造
-	/// </summary>
 	public SkillBreakPlate(IRandomSource random, SkillBreakPlateItem config, ushort selectedPages, int success = 0, int failed = 0)
 		: this(random, config.PlateWidth, config.PlateHeight, selectedPages, config.BonusCount, config.TotalMaxPower, success, failed)
 	{
 	}
 
-	/// <summary>
-	/// 脱离配置构造（用于单元测试）
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="width">突破盘宽度</param>
-	/// <param name="height">突破盘高度</param>
-	/// <param name="selectedPages">选中的书页</param>
-	/// <param name="bonus">玄机格数量</param>
-	/// <param name="power">可分布的威力上限</param>
-	/// <param name="success">上次突破连接成功的格子数量</param>
-	/// <param name="failed">上次突破连接失败的格子数量</param>
 	public SkillBreakPlate(IRandomSource random, byte width, byte height, ushort selectedPages, int bonus = 0, int power = 0, int success = 0, int failed = 0)
 	{
 		Width = width;
@@ -485,9 +302,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		UpdateCanSelectGrids();
 	}
 
-	/// <summary>
-	/// 生成突破盘
-	/// </summary>
 	private void GenerateBreakGrids(IRandomSource random, int bonusCount, int power, int success, int failed)
 	{
 		_grids = new SkillBreakPlateGrid[Width * Height];
@@ -524,9 +338,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		GenerateBreakGridsPrev(random, success, failed);
 	}
 
-	/// <summary>
-	/// 生成突破盘 - 玄机格
-	/// </summary>
 	private void GenerateBreakGridsBonus(IRandomSource random, int bonusCount)
 	{
 		IndexesCache2.Clear();
@@ -552,9 +363,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 生成突破盘 - 如常、特殊格、分布威力上限
-	/// </summary>
 	private void GenerateBreakGridsPower(IRandomSource random, int power)
 	{
 		CValuePercent powerCenterPercent = MathUtils.Clamp(50 + OutlineConfig.PowerAddCenterRate, 0, 100);
@@ -577,9 +385,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 生成突破盘 - 完备、覆辙格替换如常格
-	/// </summary>
 	private void GenerateBreakGridsPrev(IRandomSource random, int lastSuccess, int lastFailed)
 	{
 		IndexesCache0.Clear();
@@ -609,14 +414,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 随机内外属性.
-	/// TODO: 该方法从 CRandom 中提取. 需要将CRandom提到通用库
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="anyInner">是否可随机为内</param>
-	/// <param name="anyOuter">是否可随机为外</param>
-	/// <returns>随机为内</returns>
 	public static bool RandomIsInner(IRandomSource random, bool anyInner, bool anyOuter)
 	{
 		if (anyOuter)
@@ -630,17 +427,11 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		return ToString(DefaultFormatter);
 	}
 
-	/// <summary>
-	/// 转换为字符串矩阵
-	/// </summary>
-	/// <param name="formatter"></param>
-	/// <returns></returns>
 	public string ToString(ISkillBreakPlateFormatter formatter)
 	{
 		StringBuilder builder = new StringBuilder();
@@ -667,9 +458,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return builder.ToString();
 	}
 
-	/// <summary>
-	/// 检查指定位置是否处于有效范围
-	/// </summary>
 	public bool CheckIndex(int x, int y)
 	{
 		if (x >= 0 && x < Width && y >= 0 && y < Height)
@@ -679,15 +467,11 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Taiwu.SkillBreakPlate.CheckIndex(System.Int32,System.Int32)" />
 	public bool CheckIndex(SkillBreakPlateIndex index)
 	{
 		return CheckIndex(index.X, index.Y);
 	}
 
-	/// <summary>
-	/// 当前能否选中某个突破格
-	/// </summary>
 	public bool CanSelectBreak(SkillBreakPlateIndex index)
 	{
 		if (!CheckIndex(index) || GetGridAt(index).State != ESkillBreakGridState.CanSelect)
@@ -701,23 +485,12 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 获取某位置的突破格（考虑交换）
-	/// </summary>
-	/// <param name="x">列数</param>
-	/// <param name="y">行数</param>
-	/// <returns></returns>
 	public SkillBreakPlateGrid GetGridAt(int x, int y)
 	{
 		SkillBreakPlateIndex index = (x: x, y: y);
 		return GetGridAt(index);
 	}
 
-	/// <summary>
-	/// 获取某位置的突破格（考虑交换）
-	/// </summary>
-	/// <param name="index">位置</param>
-	/// <returns></returns>
 	public SkillBreakPlateGrid GetGridAt(SkillBreakPlateIndex index)
 	{
 		if (_gridSwaps != null && _gridSwaps.TryGetValue(index, out var swappedIndex))
@@ -727,11 +500,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return this[index];
 	}
 
-	/// <summary>
-	/// 获取物理存储位置（考虑交换）
-	/// </summary>
-	/// <param name="logicalIndex">逻辑位置</param>
-	/// <returns>物理位置</returns>
 	private SkillBreakPlateIndex GetPhysicalIndex(SkillBreakPlateIndex logicalIndex)
 	{
 		if (_gridSwaps == null || !_gridSwaps.TryGetValue(logicalIndex, out var swappedIndex))
@@ -741,19 +509,11 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return swappedIndex;
 	}
 
-	/// <summary>
-	/// 获取某位置玄机格的填充数据
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public SkillBreakPlateBonus GetBonus(SkillBreakPlateIndex index)
 	{
 		return _bonuses?.GetOrDefault(index, SkillBreakPlateBonus.Invalid) ?? SkillBreakPlateBonus.Invalid;
 	}
 
-	/// <summary>
-	/// 获取所有玄机格加成效果
-	/// </summary>
 	public IEnumerable<SkillBreakPlateBonus> GetBonuses()
 	{
 		if (!Success)
@@ -763,19 +523,12 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return GetBonusesWithoutCheck();
 	}
 
-	/// <summary>
-	/// 获取所有玄机格加成效果，无论是否已完成突破
-	/// </summary>
 	public IEnumerable<SkillBreakPlateBonus> GetBonusesWithoutCheck()
 	{
 		IEnumerable<SkillBreakPlateBonus> enumerable = _bonuses?.Values;
 		return enumerable ?? Enumerable.Empty<SkillBreakPlateBonus>();
 	}
 
-	/// <summary>
-	/// 获取有效突破格索引
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerable<SkillBreakPlateIndex> GetIndexes()
 	{
 		for (int x = 0; x < Width; x++)
@@ -790,7 +543,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <inheritdoc />
 	public IEnumerator<SkillBreakPlateGrid> GetEnumerator()
 	{
 		for (int x = 0; x < Width; x++)
@@ -805,30 +557,17 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>Returns an enumerator that iterates through a collection.</summary>
-	/// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return GetEnumerator();
 	}
 
-	/// <summary>
-	/// 计算当前突破步数下每步消耗的历练值
-	/// </summary>
-	/// <param name="baseCostExp">基础消耗历练值</param>
-	/// <returns></returns>
 	[Obsolete("Use overload instead.")]
 	public int CalcCostExp(int baseCostExp)
 	{
 		return baseCostExp + baseCostExp * StepCostedGoneMad * 10 / 100;
 	}
 
-	/// <summary>
-	/// 计算当前突破步数下连接某突破格消耗的历练值
-	/// </summary>
-	/// <param name="baseCostExp">基础消耗历练值</param>
-	/// <param name="index">要连接的突破格位置</param>
-	/// <returns></returns>
 	public int CalcCostExp(int baseCostExp, SkillBreakPlateIndex index)
 	{
 		CValuePercentBonus bonus = 0;
@@ -851,17 +590,11 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return baseCostExp * bonus;
 	}
 
-	/// <summary>
-	/// 计算连接某个格子需要消耗的天资或入魔步数
-	/// </summary>
 	public byte CalcCostStep(SkillBreakPlateIndex index)
 	{
 		return GetGridAt(index).Template.CostBreakCount;
 	}
 
-	/// <summary>
-	/// 计算连接某个格子是否会作为走火入魔连接
-	/// </summary>
 	public bool CalcStepIsInGoneMad(SkillBreakPlateIndex index)
 	{
 		byte stepCost = CalcCostStep(index);
@@ -873,9 +606,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return false;
 	}
 
-	/// <summary>
-	/// 计算某个格子增加的威力上限值
-	/// </summary>
 	public int CalcAddMaxPower(SkillBreakPlateIndex index)
 	{
 		int value = CalcAddMaxPowerBase(index);
@@ -899,9 +629,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return value + successNeighborCount * GetGridAt(index).Template.SucceedNeighborAddMaxPower;
 	}
 
-	/// <summary>
-	/// 计算某个格子作为玄机格增加的威力上限值
-	/// </summary>
 	public int CalcAddMaxPowerAsBonus(SkillBreakPlateIndex index, int impactRange)
 	{
 		int total = 0;
@@ -933,9 +660,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return num * correctionFactor;
 	}
 
-	/// <summary>
-	/// 计算某个格子增加的威力上限值 - 基础值
-	/// </summary>
 	private int CalcAddMaxPowerBase(SkillBreakPlateIndex index)
 	{
 		SkillBreakPlateGrid grid = GetGridAt(index);
@@ -951,11 +675,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 计算指定突破格的成功率
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public short CalcSuccessRate(SkillBreakPlateIndex index)
 	{
 		SkillBreakPlateGrid grid = GetGridAt(index);
@@ -977,9 +696,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return (short)MathUtils.Clamp(successRate, 0, 100);
 	}
 
-	/// <summary>
-	/// 计算指定突破格的成功率 - 周边格相关修正系数
-	/// </summary>
 	private CValuePercentBonus CalcSuccessRateBonus(SkillBreakPlateIndex index)
 	{
 		int bonus = 0;
@@ -1004,12 +720,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return bonus + GetGridAt(index).Template.SucceedNeighborSuccessRateBonus * successNeighborCount;
 	}
 
-	/// <summary>
-	/// 计算两点间距离
-	/// </summary>
-	/// <param name="a"></param>
-	/// <param name="b"></param>
-	/// <returns></returns>
 	public int CalcDistance(SkillBreakPlateIndex a, SkillBreakPlateIndex b)
 	{
 		if (!CheckIndex(a) || !CheckIndex(b))
@@ -1019,11 +729,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return SkillBreakPlateAxial.Distance(a, b);
 	}
 
-	/// <summary>
-	/// 获取某个点的有效邻接点
-	/// </summary>
-	/// <param name="pos"></param>
-	/// <returns></returns>
 	private IEnumerable<SkillBreakPlateIndex> GetNeighbors(SkillBreakPlateIndex pos)
 	{
 		if (!CheckIndex(pos))
@@ -1033,9 +738,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return GetNeighborsGeneral(pos);
 	}
 
-	/// <summary>
-	/// 获取某个点的有效邻接点 - 起点
-	/// </summary>
 	private IEnumerable<SkillBreakPlateIndex> GetNeighborsByStart()
 	{
 		return (from pos in GetIndexes()
@@ -1043,9 +745,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 			select pos).SelectMany(GetNeighborsGeneral);
 	}
 
-	/// <summary>
-	/// 获取某个点的有效邻接点 - 通常
-	/// </summary>
 	private IEnumerable<SkillBreakPlateIndex> GetNeighborsGeneral(SkillBreakPlateIndex pos)
 	{
 		SkillBreakPlateGrid grid = GetGridAt(pos);
@@ -1072,12 +771,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 获取某个点指定距离内的其它有效点
-	/// </summary>
-	/// <param name="pos"></param>
-	/// <param name="distance"></param>
-	/// <returns></returns>
 	private IEnumerable<SkillBreakPlateIndex> GetPureNeighbors(SkillBreakPlateIndex pos, int distance = 1)
 	{
 		foreach (SkillBreakPlateIndex index in GetIndexes())
@@ -1089,30 +782,16 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 是否有可能成功
-	/// </summary>
 	private bool MaybeSuccess(SkillBreakPlateIndex index)
 	{
 		return CalcSuccessRate(index) > 0;
 	}
 
-	/// <summary>
-	/// 是否已选中的点
-	/// </summary>
-	/// <param name="pos"></param>
-	/// <returns></returns>
 	private bool IsSelectedPoint(SkillBreakPlateIndex pos)
 	{
 		return GetGridAt(pos).State == ESkillBreakGridState.Selected;
 	}
 
-	/// <summary>
-	/// 某位置是否为隐藏格
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	private bool IsOutPoint(int x, int y)
 	{
 		if (!IsProtrusion(y))
@@ -1122,12 +801,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return false;
 	}
 
-	/// <summary>
-	/// 某位置是否为起点
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	private bool IsStartPoint(int x, int y)
 	{
 		if (y != 0 && y != Height - 1)
@@ -1141,12 +814,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 某位置是否为终点
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	private bool IsEndPoint(int x, int y)
 	{
 		if (x == ((int)Width - ((!IsProtrusion(y)) ? 1 : 0)) / 2)
@@ -1156,12 +823,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return false;
 	}
 
-	/// <summary>
-	/// 某位置是否为边缘
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	private bool IsMarginPoint(int x, int y)
 	{
 		int depressionFix = ((!IsProtrusion(y)) ? 1 : 0);
@@ -1172,12 +833,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 某位置是否处于中心区域
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	private bool IsCenterArea(int x, int y)
 	{
 		int centerHeight = Height / 2 + Height % 2;
@@ -1196,9 +851,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return false;
 	}
 
-	/// <summary>
-	/// 指定位置是否可生成玄机格
-	/// </summary>
 	private bool IsBonusArea(SkillBreakPlateIndex index)
 	{
 		SkillBreakPlateIndex skillBreakPlateIndex = index;
@@ -1213,12 +865,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return false;
 	}
 
-	/// <summary>
-	/// 检查两个格子是否可以交换
-	/// </summary>
-	/// <param name="indexA">格子A的位置</param>
-	/// <param name="indexB">格子B的位置</param>
-	/// <returns>是否可以交换</returns>
 	public bool CanSwapGrid(SkillBreakPlateIndex indexA, SkillBreakPlateIndex indexB)
 	{
 		if (!CheckIndex(indexA) || !CheckIndex(indexB))
@@ -1242,9 +888,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 检查单个格子是否满足交换条件
-	/// </summary>
 	private bool CanSwapGridCheck(SkillBreakPlateIndex index, SkillBreakPlateGrid grid)
 	{
 		if (IsStartPoint(index.X, index.Y))
@@ -1266,12 +909,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 交换两个格子
-	/// </summary>
-	/// <param name="indexA">格子A的位置</param>
-	/// <param name="indexB">格子B的位置</param>
-	/// <returns>是否交换成功</returns>
 	public bool SwapGrid(SkillBreakPlateIndex indexA, SkillBreakPlateIndex indexB)
 	{
 		if (!CanSwapGrid(indexA, indexB))
@@ -1307,9 +944,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 揭示交换格子周围1圈的视野
-	/// </summary>
 	private void RevealVisibilityAroundSwappedGrids(SkillBreakPlateIndex indexA, SkillBreakPlateIndex indexB)
 	{
 		foreach (SkillBreakPlateIndex neighbor in GetPureNeighbors(indexA))
@@ -1328,9 +962,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 清空某位置的玄机格数据
-	/// </summary>
 	public bool ClearBonus(SkillBreakPlateIndex index)
 	{
 		if (!SetBonusCheck(index) || _bonuses == null || !_bonuses.ContainsKey(index))
@@ -1341,9 +972,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 设置某位置的玄机格数据
-	/// </summary>
 	public bool SetBonus(SkillBreakPlateIndex index, SkillBreakPlateBonus bonus)
 	{
 		if (!SetBonusCheck(index) || bonus.ShouldBeRemoved())
@@ -1365,9 +993,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 设置某位置的玄机格数据 - 校验该位置是否可设置玄机格
-	/// </summary>
 	private bool SetBonusCheck(SkillBreakPlateIndex index)
 	{
 		if (!CheckIndex(index))
@@ -1381,9 +1006,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return false;
 	}
 
-	/// <summary>
-	/// 重置所有关系类玄机的角色 ID，仅限梦回时调用
-	/// </summary>
 	public void ResetRelationBonuses()
 	{
 		if (_bonuses == null)
@@ -1398,9 +1020,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 选中下个突破格
-	/// </summary>
 	public bool SelectBreak(IRandomSource random, SkillBreakPlateIndex index, out bool selectInGoneMad)
 	{
 		selectInGoneMad = CalcStepIsInGoneMad(index);
@@ -1446,9 +1065,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// 选中下个突破格 - 结算特殊格效果
-	/// </summary>
 	private void SelectBreakSpecialEffect(IRandomSource random, SkillBreakPlateIndex index)
 	{
 		SkillBreakGridTypeItem config = GetGridAt(index).Template;
@@ -1505,9 +1121,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 选中下个突破格 - 结算特殊格效果 - 揭示隐藏格
-	/// </summary>
 	private void SelectBreakSpecialEffectShowInvisible(IRandomSource random, int showInvisibleCount)
 	{
 		IndexesCache0.Clear();
@@ -1524,9 +1137,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 更新当前点并记录路径
-	/// </summary>
 	private void UpdateCurrentAndRecordPath(SkillBreakPlateIndex index, bool success)
 	{
 		if (_selectPath == null)
@@ -1550,18 +1160,12 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		_selectPath.Add(index);
 	}
 
-	/// <summary>
-	/// 记录成功率与相关状态
-	/// </summary>
 	private void RecordSuccessRate(SkillBreakPlateIndex index, short successRate, bool inGoneMad)
 	{
 		this[GetPhysicalIndex(index)].RecordedSuccessRate = successRate;
 		this[GetPhysicalIndex(index)].RecordedStepIsGoneMad = inGoneMad;
 	}
 
-	/// <summary>
-	/// 更新可选位置
-	/// </summary>
 	private void UpdateCanSelectGrids()
 	{
 		ClearAllCanSelectGrids();
@@ -1575,9 +1179,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 清空所有可选中状态
-	/// </summary>
 	private void ClearAllCanSelectGrids()
 	{
 		foreach (SkillBreakPlateIndex index in GetIndexes())
@@ -1589,9 +1190,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 更新突破盘状态
-	/// </summary>
 	private void UpdateState()
 	{
 		if (IsEndPoint(Current.X, Current.Y))
@@ -1608,9 +1206,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		}
 	}
 
-	/// <summary>
-	/// 更新选中的书页
-	/// </summary>
 	public bool UpdateSelectedPages(ushort selectedPages)
 	{
 		if (OutlineType != CombatSkillStateHelper.GetActiveOutlinePageType(SelectedPages))
@@ -1621,9 +1216,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		return true;
 	}
 
-	/// <summary>
-	/// GM 使用的设置当前格接口
-	/// </summary>
 	public void SelectBreakWithoutCheck(SkillBreakPlateIndex index)
 	{
 		Current = index;
@@ -1634,16 +1226,10 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		UpdateState();
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SkillBreakPlate()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SkillBreakPlate(SkillBreakPlate other)
 	{
 		SkillBreakPlateGrid[] item = other._grids;
@@ -1672,9 +1258,6 @@ public class SkillBreakPlate : ISerializableGameData, IEnumerable<SkillBreakPlat
 		LegendaryBookState = other.LegendaryBookState;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SkillBreakPlate other)
 	{
 		SkillBreakPlateGrid[] item = other._grids;

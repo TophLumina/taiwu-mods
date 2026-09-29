@@ -33,6 +33,6 @@ public class AutoCollectEffectBase : SpecialEffectBase
 	private void OnCombatSettlement(DataContext context, sbyte combatStatus)
 	{
 		BeforeRemove(context);
-		DomainManager.SpecialEffect.Remove(context, Id);
+		RemoveSelf(context);
 	}
 }

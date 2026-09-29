@@ -23,46 +23,25 @@ public class JieqingGameChessData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "CoordinateX", "CoordinateY", "ChessIsFlipped", "ChessRotationState", "ChessTemplateId" };
 	}
 
-	/// <summary>
-	/// 左上角在棋盘中的坐标X
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public byte CoordinateX { get; set; }
 
-	/// <summary>
-	/// 左上角在棋盘中的坐标Y
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public byte CoordinateY { get; set; }
 
-	/// <summary>
-	/// 是否镜像
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public bool ChessIsFlipped { get; set; }
 
-	/// <summary>
-	/// 七巧板旋转状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public sbyte ChessRotationState { get; set; }
 
-	/// <summary>
-	/// 七巧板id
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public short ChessTemplateId { get; set; } = -1;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public JieqingGameChessData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public JieqingGameChessData(JieqingGameChessData other)
 	{
 		CoordinateX = other.CoordinateX;
@@ -72,9 +51,6 @@ public class JieqingGameChessData : ISerializableGameData
 		ChessTemplateId = other.ChessTemplateId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(JieqingGameChessData other)
 	{
 		CoordinateX = other.CoordinateX;

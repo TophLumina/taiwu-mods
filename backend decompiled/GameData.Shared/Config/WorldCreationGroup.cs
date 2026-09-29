@@ -7,61 +7,28 @@ namespace Config;
 [Serializable]
 public class WorldCreationGroup : ConfigData<WorldCreationGroupItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 身难
-		/// </summary>
 		public const sbyte Obstacle = 0;
 
-		/// <summary>
-		/// 机缘
-		/// </summary>
 		public const sbyte Income = 1;
 
-		/// <summary>
-		/// 修持
-		/// </summary>
 		public const sbyte Growth = 2;
 
-		/// <summary>
-		/// 通常
-		/// </summary>
 		public const sbyte Regular = 3;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 身难
-		/// </summary>
 		public static WorldCreationGroupItem Obstacle => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 机缘
-		/// </summary>
 		public static WorldCreationGroupItem Income => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 修持
-		/// </summary>
 		public static WorldCreationGroupItem Growth => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 通常
-		/// </summary>
 		public static WorldCreationGroupItem Regular => Instance[(sbyte)3];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static WorldCreationGroup Instance = new WorldCreationGroup();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "WorldCreations", "TemplateId", "Image" };

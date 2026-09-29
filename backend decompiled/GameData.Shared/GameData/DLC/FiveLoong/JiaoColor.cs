@@ -1,8 +1,5 @@
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 蛟的纯色类型
-/// </summary>
 public class JiaoColor
 {
 	public const int White = 1;

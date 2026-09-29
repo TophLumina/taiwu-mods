@@ -3,49 +3,29 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 挖掘期望结果
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct TreasureExpectResult : ISerializableGameData
 {
-	/// <summary>
-	/// 最高品级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MaxGrade;
 
-	/// <summary>
-	/// 获取概率
-	/// </summary>
 	[SerializableGameDataField]
 	public int Chance;
 
-	/// <summary>
-	/// 数据坐标
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 当前地格存在心材
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AnyMaterial;
 
-	/// <summary>
-	/// 当前地格存在普通道具（排除龙鳞，蛟卵）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AnyNormalItem;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 11;
@@ -56,7 +36,6 @@ public struct TreasureExpectResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -77,7 +56,6 @@ public struct TreasureExpectResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

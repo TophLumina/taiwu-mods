@@ -13,149 +13,75 @@ namespace GameData.Domains.Building;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class CraftManDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 产物数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ProductionPool ProductionPool;
 
-	/// <summary>
-	/// 订单数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ArtisanOrder ArtisanOrder;
 
-	/// <summary>
-	/// 有可选物品子类型，茶酒、食物不可选子类型
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> CanProduceItemSubType;
 
-	/// <summary>
-	/// 可以工作的成年人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> AvailableWorker;
 
-	/// <summary>
-	/// 可以当学徒的未成年人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> AvailableChildren;
 
-	/// <summary>
-	/// 村民身份显示数据，主事+学徒
-	/// </summary>
 	[SerializableGameDataField]
 	public List<VillagerRoleCharacterDisplayData> VillagerRoleDataList;
 
-	/// <summary>
-	/// 人物显示数据，主事+学徒
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> CharacterDataList;
 
-	/// <summary>
-	/// 工作效率，主事+学徒
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> VillagerEfficiencyList;
 
-	/// <summary>
-	/// 学徒研习数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ShopBuildingTeachBookData> TeachBookDataList;
 
-	/// <summary>
-	/// 解锁的村民列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> UnlockedWorkingVillagerList;
 
-	/// <summary>
-	/// 过月时学徒研习增加的资质
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> ShopManagerUpgradeQualificationDict;
 
-	/// <summary>
-	/// 经营者列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> ShopManagerList;
 
-	/// <summary>
-	/// 产业地图的所有数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<BuildingBlockData> BlockList;
 
-	/// <summary>
-	/// 行囊道具，不含身上装备，含资源
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> InventoryItemList;
 
-	/// <summary>
-	/// 仓库道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> WarehouseItemList;
 
-	/// <summary>
-	/// 公库道具，含资源
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> TreasuryItemList;
 
-	/// <summary>
-	/// 太吾能否使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransferItemToWarehouse;
 
-	/// <summary>
-	/// 匠人人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData ArtisanCharData;
 
-	/// <summary>
-	/// 匠人技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts ArtisanLifeSkillAttainments;
 
-	/// <summary>
-	/// 匠人技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts ArtisanLifeSkillQualifications;
 
-	/// <summary>
-	/// 匠人的进度
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillInts ArtisanOrderProgressDeltas;
 
-	/// <summary>
-	/// 订购者人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData SubscriberCharData;
 
-	/// <summary>
-	/// 匠人的消耗银钱的立场影响
-	/// </summary>
 	[SerializableGameDataField]
 	public int ArtisanCostMoneyBehaviorEffect;
 
-	/// <summary>
-	/// 获取匠人代制的基础价格
-	/// </summary>
-	/// <param name="isIntercept"></param>
-	/// <returns></returns>
 	public int GetBasePrice(bool isIntercept)
 	{
 		bool isDebateWon = ArtisanOrder?.IsDebateWon ?? false;
@@ -171,11 +97,6 @@ public class CraftManDisplayData : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 获取匠人代制的最终价格
-	/// </summary>
-	/// <param name="isIntercept"></param>
-	/// <returns></returns>
 	public int GetFinalPrice(bool isIntercept)
 	{
 		int basePrice = GetBasePrice(isIntercept);
@@ -195,7 +116,7 @@ public class CraftManDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 5;
+		int totalSize = 133;
 		totalSize = ((ProductionPool == null) ? (totalSize + 2) : (totalSize + (2 + ProductionPool.GetSerializedSize())));
 		totalSize = ((ArtisanOrder == null) ? (totalSize + 2) : (totalSize + (2 + ArtisanOrder.GetSerializedSize())));
 		totalSize = ((CanProduceItemSubType == null) ? (totalSize + 2) : (totalSize + (2 + 2 * CanProduceItemSubType.Count)));
@@ -299,9 +220,6 @@ public class CraftManDisplayData : ISerializableGameData
 			totalSize += 2;
 		}
 		totalSize = ((ArtisanCharData == null) ? (totalSize + 2) : (totalSize + (2 + ArtisanCharData.GetSerializedSize())));
-		totalSize += ArtisanLifeSkillAttainments.GetSerializedSize();
-		totalSize += ArtisanLifeSkillQualifications.GetSerializedSize();
-		totalSize += ArtisanOrderProgressDeltas.GetSerializedSize();
 		totalSize = ((SubscriberCharData == null) ? (totalSize + 2) : (totalSize + (2 + SubscriberCharData.GetSerializedSize())));
 		if (totalSize > 4)
 		{

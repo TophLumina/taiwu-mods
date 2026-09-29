@@ -7,1601 +7,644 @@ namespace Config;
 [Serializable]
 public class StatInfo : ConfigData<StatInfoItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 山猪数量
-		/// </summary>
 		public const short CookingBeast1Count = 0;
 
-		/// <summary>
-		/// 当前爱慕太吾人数
-		/// </summary>
 		public const short TaiwuLoverCount = 1;
 
-		/// <summary>
-		/// 当前仇恨太吾人数
-		/// </summary>
 		public const short TaiwuHaterCount = 2;
 
-		/// <summary>
-		/// 当前爱慕且仇恨太吾人数
-		/// </summary>
 		public const short TaiwuHateAndLoveCount = 3;
 
-		/// <summary>
-		/// 持有秘闻数量
-		/// </summary>
 		public const short SecretCount = 4;
 
-		/// <summary>
-		/// 较艺胜利次数
-		/// </summary>
 		public const short DebateWinCount = 5;
 
-		/// <summary>
-		/// 满级仓库数量
-		/// </summary>
 		public const short MaxLevelWarehouseCount = 6;
 
-		/// <summary>
-		/// 解锁宴席数量
-		/// </summary>
 		public const short UnlockedFeastCount = 7;
 
-		/// <summary>
-		/// 突破成功次数
-		/// </summary>
 		public const short SkillBreakSuccessAmount = 8;
 
-		/// <summary>
-		/// 突破走火入魔次数
-		/// </summary>
 		public const short SkillBreakGoMadAmount = 9;
 
-		/// <summary>
-		/// 授予村民身份次数
-		/// </summary>
 		public const short VillagerAssignRole = 10;
 
-		/// <summary>
-		/// 梳头修面失败次数
-		/// </summary>
 		public const short CharacterShaveAvatarFail = 11;
 
-		/// <summary>
-		/// 收养元鸡数量
-		/// </summary>
 		public const short TransferChickenCount = 12;
 
-		/// <summary>
-		/// 捕捉促织数量
-		/// </summary>
 		public const short CatchCricketCount = 13;
 
-		/// <summary>
-		/// 捕捉呆物数量
-		/// </summary>
 		public const short CatchCricketTrashCount = 14;
 
-		/// <summary>
-		/// 捕捉异品促织王数量
-		/// </summary>
 		public const short CatchCricketKingCount = 15;
 
-		/// <summary>
-		/// 开启玄狱模式
-		/// </summary>
 		public const short OpenChallengeMode = 16;
 
-		/// <summary>
-		/// 服牛帮好感满级
-		/// </summary>
 		public const short MerchantFoodsMaxFavor = 17;
 
-		/// <summary>
-		/// 文山书海阁好感满级
-		/// </summary>
 		public const short MerchantBooksMaxFavor = 18;
 
-		/// <summary>
-		/// 五湖商会好感满级
-		/// </summary>
 		public const short MerchantMaterialsMaxFavor = 19;
 
-		/// <summary>
-		/// 大武魁商号好感满级
-		/// </summary>
 		public const short MerchantEquipmentsMaxFavor = 20;
 
-		/// <summary>
-		/// 回春堂好感满级
-		/// </summary>
 		public const short MerchantMedicinesMaxFavor = 21;
 
-		/// <summary>
-		/// 公输坊好感满级
-		/// </summary>
 		public const short MerchantConstructionsMaxFavor = 22;
 
-		/// <summary>
-		/// 奇货斋好感满级
-		/// </summary>
 		public const short MerchantAccessoriesMaxFavor = 23;
 
-		/// <summary>
-		/// 制造出神一品金铁装备
-		/// </summary>
 		public const short MakeGradeHighestMetalEquipment = 24;
 
-		/// <summary>
-		/// 制造出神一品木材装备
-		/// </summary>
 		public const short MakeGradeHighestWoodEquipment = 25;
 
-		/// <summary>
-		/// 制造出神一品织物装备
-		/// </summary>
 		public const short MakeGradeHighestFabricEquipment = 26;
 
-		/// <summary>
-		/// 制造出神一品玉石装备
-		/// </summary>
 		public const short MakeGradeHighestJadeEquipment = 27;
 
-		/// <summary>
-		/// 制造出神一品丹药
-		/// </summary>
 		public const short MakeGradeHighestMedicine = 28;
 
-		/// <summary>
-		/// 制造出神一品毒药
-		/// </summary>
 		public const short MakeGradeHighestPoison = 29;
 
-		/// <summary>
-		/// 制造出神一品菜肴
-		/// </summary>
 		public const short MakeGradeHighestFood = 30;
 
-		/// <summary>
-		/// 主线进度
-		/// </summary>
 		public const short MainStoryProgress = 58;
 
-		/// <summary>
-		/// 上次传剑遗惠点数
-		/// </summary>
 		public const short LegacyPoint = 47;
 
-		/// <summary>
-		/// 上次传剑遗惠卡片数
-		/// </summary>
 		public const short LegacyCard = 48;
 
-		/// <summary>
-		/// 上次传剑使用亲族
-		/// </summary>
 		public const short PassingLegacyToFamily = 49;
 
-		/// <summary>
-		/// 上次传剑使用不相识者
-		/// </summary>
 		public const short PassingLegacyToUnfamiliar = 50;
 
-		/// <summary>
-		/// 上次传剑使用同道
-		/// </summary>
 		public const short PassingLegacyToTeammate = 51;
 
-		/// <summary>
-		/// 传剑次数
-		/// </summary>
 		public const short PassingLegacyCount = 52;
 
-		/// <summary>
-		/// 上次传剑使用老太吾
-		/// </summary>
 		public const short PassingLegacyToOldTaiwu = 53;
 
-		/// <summary>
-		/// 轮回台往生人数
-		/// </summary>
 		public const short SamsaraPlatformUsed = 54;
 
-		/// <summary>
-		/// 轮回台等级
-		/// </summary>
 		public const short SamsaraPlatformLevel = 55;
 
-		/// <summary>
-		/// 茶马帮等级
-		/// </summary>
 		public const short TeaHorseCaravanLevel = 56;
 
-		/// <summary>
-		/// 主动开通驿站数
-		/// </summary>
 		public const short StationOpened = 57;
 
-		/// <summary>
-		/// 太吾旅程开启
-		/// </summary>
 		public const short TaiwuJourneyStarted = 59;
 
-		/// <summary>
-		/// 铭刻人物至剑柄
-		/// </summary>
 		public const short InscribedToSword = 60;
 
-		/// <summary>
-		/// 铭刻人物参与演化
-		/// </summary>
 		public const short InscribedCharacterEvolved = 61;
 
-		/// <summary>
-		/// 解锁志向技能
-		/// </summary>
 		public const short ProfessionSkillUnlocked = 62;
 
-		/// <summary>
-		/// 任一志向全技能解锁
-		/// </summary>
 		public const short AnyProfessionAllSkillUnlocked = 63;
 
-		/// <summary>
-		/// 山人全技能解锁
-		/// </summary>
 		public const short SavageAllSkillUnlocked = 64;
 
-		/// <summary>
-		/// 猎户全技能解锁
-		/// </summary>
 		public const short HunterAllSkillUnlocked = 65;
 
-		/// <summary>
-		/// 匠人全技能解锁
-		/// </summary>
 		public const short CraftAllSkillUnlocked = 66;
 
-		/// <summary>
-		/// 武师全技能解锁
-		/// </summary>
 		public const short MartialArtistAllSkillUnlocked = 67;
 
-		/// <summary>
-		/// 才俊全技能解锁
-		/// </summary>
 		public const short LiteratiAllSkillUnlocked = 68;
 
-		/// <summary>
-		/// 道长全技能解锁
-		/// </summary>
 		public const short TaoistMonkAllSkillUnlocked = 69;
 
-		/// <summary>
-		/// 高僧全技能解锁
-		/// </summary>
 		public const short BuddhistMonkAllSkillUnlocked = 70;
 
-		/// <summary>
-		/// 豪客全技能解锁
-		/// </summary>
 		public const short WineTasterAllSkillUnlocked = 71;
 
-		/// <summary>
-		/// 名门全技能解锁
-		/// </summary>
 		public const short AristocratAllSkillUnlocked = 72;
 
-		/// <summary>
-		/// 乞丐全技能解锁
-		/// </summary>
 		public const short BeggarAllSkillUnlocked = 73;
 
-		/// <summary>
-		/// 平民全技能解锁
-		/// </summary>
 		public const short CivilianAllSkillUnlocked = 74;
 
-		/// <summary>
-		/// 旅人全技能解锁
-		/// </summary>
 		public const short TravelerAllSkillUnlocked = 75;
 
-		/// <summary>
-		/// 云游僧全技能解锁
-		/// </summary>
 		public const short TravelingBuddhistMonkAllSkillUnlocked = 76;
 
-		/// <summary>
-		/// 大夫全技能解锁
-		/// </summary>
 		public const short DoctorAllSkillUnlocked = 77;
 
-		/// <summary>
-		/// 云游道全技能解锁
-		/// </summary>
 		public const short TravelingTaoistMonkAllSkillUnlocked = 78;
 
-		/// <summary>
-		/// 富商全技能解锁
-		/// </summary>
 		public const short CapitalistAllSkillUnlocked = 79;
 
-		/// <summary>
-		/// 贵客全技能解锁
-		/// </summary>
 		public const short TeaTasterAllSkillUnlocked = 80;
 
-		/// <summary>
-		/// 王公全技能解锁
-		/// </summary>
 		public const short DukeAllSkillUnlocked = 81;
 
-		/// <summary>
-		/// 全部志向全技能解锁
-		/// </summary>
 		public const short AllProfessionAllSkillUnlocked = 82;
 
-		/// <summary>
-		/// 摧破真气达标
-		/// </summary>
 		public const short NeiliAllocationAttackAchieved = 83;
 
-		/// <summary>
-		/// 轻灵真气达标
-		/// </summary>
 		public const short NeiliAllocationAgilityAchieved = 84;
 
-		/// <summary>
-		/// 护体真气达标
-		/// </summary>
 		public const short NeiliAllocationDefenseAchieved = 85;
 
-		/// <summary>
-		/// 奇窍真气达标
-		/// </summary>
 		public const short NeiliAllocationAssistanceAchieved = 86;
 
-		/// <summary>
-		/// 普通自然资源等级达标
-		/// </summary>
 		public const short NormalResourceMaxLevelAchieved = 87;
 
-		/// <summary>
-		/// 稀有自然资源等级达标
-		/// </summary>
 		public const short RareResourceMaxLevelAchieved = 88;
 
-		/// <summary>
-		/// 促织决斗胜利
-		/// </summary>
 		public const short CricketCombatWon = 89;
 
-		/// <summary>
-		/// 选择立场相合选项
-		/// </summary>
 		public const short SelectOptionMatchBehavior = 90;
 
-		/// <summary>
-		/// 选择立场相悖选项
-		/// </summary>
 		public const short SelectOptionContradictoryBehavior = 91;
 
-		/// <summary>
-		/// 少林盟誓
-		/// </summary>
 		public const short ShaolinApprovingRateMax = 92;
 
-		/// <summary>
-		/// 峨眉盟誓
-		/// </summary>
 		public const short EmeiApprovingRateMax = 93;
 
-		/// <summary>
-		/// 百花盟誓
-		/// </summary>
 		public const short BaihuaApprovingRateMax = 94;
 
-		/// <summary>
-		/// 武当盟誓
-		/// </summary>
 		public const short WudangApprovingRateMax = 95;
 
-		/// <summary>
-		/// 元山盟誓
-		/// </summary>
 		public const short YuanshanApprovingRateMax = 96;
 
-		/// <summary>
-		/// 狮相盟誓
-		/// </summary>
 		public const short ShixiangApprovingRateMax = 97;
 
-		/// <summary>
-		/// 然山盟誓
-		/// </summary>
 		public const short RanshanApprovingRateMax = 98;
 
-		/// <summary>
-		/// 璇女盟誓
-		/// </summary>
 		public const short XuannvApprovingRateMax = 99;
 
-		/// <summary>
-		/// 铸剑盟誓
-		/// </summary>
 		public const short ZhujianApprovingRateMax = 100;
 
-		/// <summary>
-		/// 空桑盟誓
-		/// </summary>
 		public const short KongsangApprovingRateMax = 101;
 
-		/// <summary>
-		/// 金刚盟誓
-		/// </summary>
 		public const short JingangApprovingRateMax = 102;
 
-		/// <summary>
-		/// 五仙盟誓
-		/// </summary>
 		public const short WuxianApprovingRateMax = 103;
 
-		/// <summary>
-		/// 界青盟誓
-		/// </summary>
 		public const short JieqingApprovingRateMax = 104;
 
-		/// <summary>
-		/// 伏龙盟誓
-		/// </summary>
 		public const short FulongApprovingRateMax = 105;
 
-		/// <summary>
-		/// 血犼盟誓
-		/// </summary>
 		public const short XuehouApprovingRateMax = 106;
 
-		/// <summary>
-		/// 太吾村民数量
-		/// </summary>
 		public const short TaiwuVillagerAmount = 107;
 
-		/// <summary>
-		/// 击败破冢化身次数
-		/// </summary>
 		public const short CombatWinEscapeXiangshuAvatar = 108;
 
-		/// <summary>
-		/// 切磋胜利次数
-		/// </summary>
 		public const short CombatWinPlay = 109;
 
-		/// <summary>
-		/// 恶斗胜利次数
-		/// </summary>
 		public const short CombatWinBeat = 110;
 
-		/// <summary>
-		/// 接招胜利次数
-		/// </summary>
 		public const short CombatWinTest = 111;
 
-		/// <summary>
-		/// 死斗胜利次数
-		/// </summary>
 		public const short CombatWinDie = 112;
 
-		/// <summary>
-		/// 五花八门
-		/// </summary>
 		public const short CombatWinEnemySixMarkType = 113;
 
-		/// <summary>
-		/// 走为上计
-		/// </summary>
 		public const short CombatFlee = 114;
 
-		/// <summary>
-		/// 甘拜下风
-		/// </summary>
 		public const short CombatSurrender = 115;
 
-		/// <summary>
-		/// 五花大绑
-		/// </summary>
 		public const short CombatKidnap = 116;
 
-		/// <summary>
-		/// 救治失心人次数
-		/// </summary>
 		public const short CombatUseFuyuSword = 117;
 
-		/// <summary>
-		/// 击败爪牙次数
-		/// </summary>
 		public const short CombatWinXiangshuMinion = 118;
 
-		/// <summary>
-		/// 击败外道次数
-		/// </summary>
 		public const short CombatWinHeretic = 119;
 
-		/// <summary>
-		/// 击败任侠次数
-		/// </summary>
 		public const short CombatWinRighteous = 120;
 
-		/// <summary>
-		/// 击败动物次数
-		/// </summary>
 		public const short CombatWinAnimal = 121;
 
-		/// <summary>
-		/// 躲避摧破次数
-		/// </summary>
 		public const short CombatAvoidAttackSkillByEscape = 122;
 
-		/// <summary>
-		/// 防御摧破次数
-		/// </summary>
 		public const short CombatAvoidAttackSkillByDefend = 123;
 
-		/// <summary>
-		/// 变招攻击次数
-		/// </summary>
 		public const short CombatChangeTrickAttack = 124;
 
-		/// <summary>
-		/// 同道指令刷新次数
-		/// </summary>
 		public const short CombatTeammateCommandSkipCd = 125;
 
-		/// <summary>
-		/// 负面指令出现次数
-		/// </summary>
 		public const short CombatTeammateCommandNegative = 126;
 
-		/// <summary>
-		/// 越阶胜利次数
-		/// </summary>
 		public const short CombatWinMoreConsummate = 127;
 
-		/// <summary>
-		/// 拳掌施展次数
-		/// </summary>
 		public const short CombatCastSkillFistAndPalm = 128;
 
-		/// <summary>
-		/// 指法施展次数
-		/// </summary>
 		public const short CombatCastSkillFinger = 129;
 
-		/// <summary>
-		/// 腿法施展次数
-		/// </summary>
 		public const short CombatCastSkillLeg = 130;
 
-		/// <summary>
-		/// 暗器施展次数
-		/// </summary>
 		public const short CombatCastSkillThrow = 131;
 
-		/// <summary>
-		/// 剑法施展次数
-		/// </summary>
 		public const short CombatCastSkillSword = 132;
 
-		/// <summary>
-		/// 刀法施展次数
-		/// </summary>
 		public const short CombatCastSkillBlade = 133;
 
-		/// <summary>
-		/// 长兵施展次数
-		/// </summary>
 		public const short CombatCastSkillPolearm = 134;
 
-		/// <summary>
-		/// 奇门施展次数
-		/// </summary>
 		public const short CombatCastSkillSpecial = 135;
 
-		/// <summary>
-		/// 软兵施展次数
-		/// </summary>
 		public const short CombatCastSkillWhip = 136;
 
-		/// <summary>
-		/// 御射施展次数
-		/// </summary>
 		public const short CombatCastSkillControllableShot = 137;
 
-		/// <summary>
-		/// 乐器施展次数
-		/// </summary>
 		public const short CombatCastSkillCombatMusic = 138;
 
-		/// <summary>
-		/// 十成摧破次数
-		/// </summary>
 		public const short CombatCastSkillPowerFull = 139;
 
-		/// <summary>
-		/// 零成摧破次数
-		/// </summary>
 		public const short CombatCastSkillPowerZero = 140;
 
-		/// <summary>
-		/// 分筋错骨
-		/// </summary>
 		public const short CombatBrokenEnemy = 141;
 
-		/// <summary>
-		/// 身残志坚
-		/// </summary>
 		public const short CombatBrokenSelf = 142;
 
-		/// <summary>
-		/// 敌人混毒发作次数
-		/// </summary>
 		public const short CombatMixPoisonAffect = 143;
 
-		/// <summary>
-		/// 气冲斗牛
-		/// </summary>
 		public const short CombatNeiliAllocationBulge = 144;
 
-		/// <summary>
-		/// 气散功消
-		/// </summary>
 		public const short CombatNeiliAllocationScatter = 145;
 
-		/// <summary>
-		/// 累积造成重创标记数量
-		/// </summary>
 		public const short CombatMakeFatalMark = 146;
 
-		/// <summary>
-		/// 熟能生巧
-		/// </summary>
 		public const short CombatSkillProficiency999 = 147;
 
-		/// <summary>
-		/// 战胜全部剑冢化身
-		/// </summary>
 		public const short DefeatAllXiangshuAvatar = 148;
 
-		/// <summary>
-		/// 将阿牛邀为同道
-		/// </summary>
 		public const short JoinGroupStoryStrongMan = 173;
 
-		/// <summary>
-		/// 将徐小猫邀为同道
-		/// </summary>
 		public const short JoinGroupStoryLittleUrchin = 174;
 
-		/// <summary>
-		/// 将郭彦邀为同道
-		/// </summary>
 		public const short JoinGroupStoryBigWig = 175;
 
-		/// <summary>
-		/// 将司徒还月邀为同道
-		/// </summary>
 		public const short JoinGroupStoryHuanyue = 176;
 
-		/// <summary>
-		/// 与他人结为同道
-		/// </summary>
 		public const short MakeFriends = 221;
 
-		/// <summary>
-		/// 与他人结为夫妻
-		/// </summary>
 		public const short BeMarried = 222;
 
-		/// <summary>
-		/// 与他人结义
-		/// </summary>
 		public const short SwornBrotherhood = 225;
 
-		/// <summary>
-		/// 拜认他人为义亲
-		/// </summary>
 		public const short RecognizeAdoptive = 226;
 
-		/// <summary>
-		/// 入魔类型
-		/// </summary>
 		public const short InfectionType = 229;
 
-		/// <summary>
-		/// 名誉
-		/// </summary>
 		public const short Fame = 230;
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public const short Happiness = 231;
 
-		/// <summary>
-		/// 年龄
-		/// </summary>
 		public const short Age = 232;
 
-		/// <summary>
-		/// 一胎数量
-		/// </summary>
 		public const short OneBirthChildCount = 233;
 
-		/// <summary>
-		/// 与前世配偶结婚
-		/// </summary>
 		public const short MarryLastLifeSpouse = 234;
 
-		/// <summary>
-		/// 转世为自己孩子的孩子
-		/// </summary>
 		public const short ReincarnateAsGrandChild = 235;
 
-		/// <summary>
-		/// 委托暗杀暗主
-		/// </summary>
 		public const short AssassinateJieqingLeader = 236;
 
-		/// <summary>
-		/// 身中毒素种数
-		/// </summary>
 		public const short PoisonTypeCount = 237;
 
-		/// <summary>
-		/// 读完技艺书籍数量
-		/// </summary>
 		public const short FinishLifeSkillBookCount = 238;
 
-		/// <summary>
-		/// 读完任意类型技艺书籍
-		/// </summary>
 		public const short FinishLifeSkillBookTypeAny = 239;
 
-		/// <summary>
-		/// 读完音律书籍数量
-		/// </summary>
 		public const short FinishLifeSkillBookTypeMusic = 240;
 
-		/// <summary>
-		/// 读完武学书籍数量
-		/// </summary>
 		public const short FinishCombatSkillBookCount = 256;
 
-		/// <summary>
-		/// 读完任意门派武学书籍
-		/// </summary>
 		public const short FinishCombatSkillBookSectAny = 257;
 
-		/// <summary>
-		/// 读完少林派武学书籍数量
-		/// </summary>
 		public const short FinishCombatSkillBookSectShaolin = 258;
 
-		/// <summary>
-		/// 拥有浑心无字
-		/// </summary>
 		public const short OwnLegendaryBookNeigong = 273;
 
-		/// <summary>
-		/// 拥有奇书数量
-		/// </summary>
 		public const short OwnLegendaryBookCount = 287;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 山猪数量
-		/// </summary>
 		public static StatInfoItem CookingBeast1Count => Instance[(short)0];
 
-		/// <summary>
-		/// 当前爱慕太吾人数
-		/// </summary>
 		public static StatInfoItem TaiwuLoverCount => Instance[(short)1];
 
-		/// <summary>
-		/// 当前仇恨太吾人数
-		/// </summary>
 		public static StatInfoItem TaiwuHaterCount => Instance[(short)2];
 
-		/// <summary>
-		/// 当前爱慕且仇恨太吾人数
-		/// </summary>
 		public static StatInfoItem TaiwuHateAndLoveCount => Instance[(short)3];
 
-		/// <summary>
-		/// 持有秘闻数量
-		/// </summary>
 		public static StatInfoItem SecretCount => Instance[(short)4];
 
-		/// <summary>
-		/// 较艺胜利次数
-		/// </summary>
 		public static StatInfoItem DebateWinCount => Instance[(short)5];
 
-		/// <summary>
-		/// 满级仓库数量
-		/// </summary>
 		public static StatInfoItem MaxLevelWarehouseCount => Instance[(short)6];
 
-		/// <summary>
-		/// 解锁宴席数量
-		/// </summary>
 		public static StatInfoItem UnlockedFeastCount => Instance[(short)7];
 
-		/// <summary>
-		/// 突破成功次数
-		/// </summary>
 		public static StatInfoItem SkillBreakSuccessAmount => Instance[(short)8];
 
-		/// <summary>
-		/// 突破走火入魔次数
-		/// </summary>
 		public static StatInfoItem SkillBreakGoMadAmount => Instance[(short)9];
 
-		/// <summary>
-		/// 授予村民身份次数
-		/// </summary>
 		public static StatInfoItem VillagerAssignRole => Instance[(short)10];
 
-		/// <summary>
-		/// 梳头修面失败次数
-		/// </summary>
 		public static StatInfoItem CharacterShaveAvatarFail => Instance[(short)11];
 
-		/// <summary>
-		/// 收养元鸡数量
-		/// </summary>
 		public static StatInfoItem TransferChickenCount => Instance[(short)12];
 
-		/// <summary>
-		/// 捕捉促织数量
-		/// </summary>
 		public static StatInfoItem CatchCricketCount => Instance[(short)13];
 
-		/// <summary>
-		/// 捕捉呆物数量
-		/// </summary>
 		public static StatInfoItem CatchCricketTrashCount => Instance[(short)14];
 
-		/// <summary>
-		/// 捕捉异品促织王数量
-		/// </summary>
 		public static StatInfoItem CatchCricketKingCount => Instance[(short)15];
 
-		/// <summary>
-		/// 开启玄狱模式
-		/// </summary>
 		public static StatInfoItem OpenChallengeMode => Instance[(short)16];
 
-		/// <summary>
-		/// 服牛帮好感满级
-		/// </summary>
 		public static StatInfoItem MerchantFoodsMaxFavor => Instance[(short)17];
 
-		/// <summary>
-		/// 文山书海阁好感满级
-		/// </summary>
 		public static StatInfoItem MerchantBooksMaxFavor => Instance[(short)18];
 
-		/// <summary>
-		/// 五湖商会好感满级
-		/// </summary>
 		public static StatInfoItem MerchantMaterialsMaxFavor => Instance[(short)19];
 
-		/// <summary>
-		/// 大武魁商号好感满级
-		/// </summary>
 		public static StatInfoItem MerchantEquipmentsMaxFavor => Instance[(short)20];
 
-		/// <summary>
-		/// 回春堂好感满级
-		/// </summary>
 		public static StatInfoItem MerchantMedicinesMaxFavor => Instance[(short)21];
 
-		/// <summary>
-		/// 公输坊好感满级
-		/// </summary>
 		public static StatInfoItem MerchantConstructionsMaxFavor => Instance[(short)22];
 
-		/// <summary>
-		/// 奇货斋好感满级
-		/// </summary>
 		public static StatInfoItem MerchantAccessoriesMaxFavor => Instance[(short)23];
 
-		/// <summary>
-		/// 制造出神一品金铁装备
-		/// </summary>
 		public static StatInfoItem MakeGradeHighestMetalEquipment => Instance[(short)24];
 
-		/// <summary>
-		/// 制造出神一品木材装备
-		/// </summary>
 		public static StatInfoItem MakeGradeHighestWoodEquipment => Instance[(short)25];
 
-		/// <summary>
-		/// 制造出神一品织物装备
-		/// </summary>
 		public static StatInfoItem MakeGradeHighestFabricEquipment => Instance[(short)26];
 
-		/// <summary>
-		/// 制造出神一品玉石装备
-		/// </summary>
 		public static StatInfoItem MakeGradeHighestJadeEquipment => Instance[(short)27];
 
-		/// <summary>
-		/// 制造出神一品丹药
-		/// </summary>
 		public static StatInfoItem MakeGradeHighestMedicine => Instance[(short)28];
 
-		/// <summary>
-		/// 制造出神一品毒药
-		/// </summary>
 		public static StatInfoItem MakeGradeHighestPoison => Instance[(short)29];
 
-		/// <summary>
-		/// 制造出神一品菜肴
-		/// </summary>
 		public static StatInfoItem MakeGradeHighestFood => Instance[(short)30];
 
-		/// <summary>
-		/// 主线进度
-		/// </summary>
 		public static StatInfoItem MainStoryProgress => Instance[(short)58];
 
-		/// <summary>
-		/// 上次传剑遗惠点数
-		/// </summary>
 		public static StatInfoItem LegacyPoint => Instance[(short)47];
 
-		/// <summary>
-		/// 上次传剑遗惠卡片数
-		/// </summary>
 		public static StatInfoItem LegacyCard => Instance[(short)48];
 
-		/// <summary>
-		/// 上次传剑使用亲族
-		/// </summary>
 		public static StatInfoItem PassingLegacyToFamily => Instance[(short)49];
 
-		/// <summary>
-		/// 上次传剑使用不相识者
-		/// </summary>
 		public static StatInfoItem PassingLegacyToUnfamiliar => Instance[(short)50];
 
-		/// <summary>
-		/// 上次传剑使用同道
-		/// </summary>
 		public static StatInfoItem PassingLegacyToTeammate => Instance[(short)51];
 
-		/// <summary>
-		/// 传剑次数
-		/// </summary>
 		public static StatInfoItem PassingLegacyCount => Instance[(short)52];
 
-		/// <summary>
-		/// 上次传剑使用老太吾
-		/// </summary>
 		public static StatInfoItem PassingLegacyToOldTaiwu => Instance[(short)53];
 
-		/// <summary>
-		/// 轮回台往生人数
-		/// </summary>
 		public static StatInfoItem SamsaraPlatformUsed => Instance[(short)54];
 
-		/// <summary>
-		/// 轮回台等级
-		/// </summary>
 		public static StatInfoItem SamsaraPlatformLevel => Instance[(short)55];
 
-		/// <summary>
-		/// 茶马帮等级
-		/// </summary>
 		public static StatInfoItem TeaHorseCaravanLevel => Instance[(short)56];
 
-		/// <summary>
-		/// 主动开通驿站数
-		/// </summary>
 		public static StatInfoItem StationOpened => Instance[(short)57];
 
-		/// <summary>
-		/// 太吾旅程开启
-		/// </summary>
 		public static StatInfoItem TaiwuJourneyStarted => Instance[(short)59];
 
-		/// <summary>
-		/// 铭刻人物至剑柄
-		/// </summary>
 		public static StatInfoItem InscribedToSword => Instance[(short)60];
 
-		/// <summary>
-		/// 铭刻人物参与演化
-		/// </summary>
 		public static StatInfoItem InscribedCharacterEvolved => Instance[(short)61];
 
-		/// <summary>
-		/// 解锁志向技能
-		/// </summary>
 		public static StatInfoItem ProfessionSkillUnlocked => Instance[(short)62];
 
-		/// <summary>
-		/// 任一志向全技能解锁
-		/// </summary>
 		public static StatInfoItem AnyProfessionAllSkillUnlocked => Instance[(short)63];
 
-		/// <summary>
-		/// 山人全技能解锁
-		/// </summary>
 		public static StatInfoItem SavageAllSkillUnlocked => Instance[(short)64];
 
-		/// <summary>
-		/// 猎户全技能解锁
-		/// </summary>
 		public static StatInfoItem HunterAllSkillUnlocked => Instance[(short)65];
 
-		/// <summary>
-		/// 匠人全技能解锁
-		/// </summary>
 		public static StatInfoItem CraftAllSkillUnlocked => Instance[(short)66];
 
-		/// <summary>
-		/// 武师全技能解锁
-		/// </summary>
 		public static StatInfoItem MartialArtistAllSkillUnlocked => Instance[(short)67];
 
-		/// <summary>
-		/// 才俊全技能解锁
-		/// </summary>
 		public static StatInfoItem LiteratiAllSkillUnlocked => Instance[(short)68];
 
-		/// <summary>
-		/// 道长全技能解锁
-		/// </summary>
 		public static StatInfoItem TaoistMonkAllSkillUnlocked => Instance[(short)69];
 
-		/// <summary>
-		/// 高僧全技能解锁
-		/// </summary>
 		public static StatInfoItem BuddhistMonkAllSkillUnlocked => Instance[(short)70];
 
-		/// <summary>
-		/// 豪客全技能解锁
-		/// </summary>
 		public static StatInfoItem WineTasterAllSkillUnlocked => Instance[(short)71];
 
-		/// <summary>
-		/// 名门全技能解锁
-		/// </summary>
 		public static StatInfoItem AristocratAllSkillUnlocked => Instance[(short)72];
 
-		/// <summary>
-		/// 乞丐全技能解锁
-		/// </summary>
 		public static StatInfoItem BeggarAllSkillUnlocked => Instance[(short)73];
 
-		/// <summary>
-		/// 平民全技能解锁
-		/// </summary>
 		public static StatInfoItem CivilianAllSkillUnlocked => Instance[(short)74];
 
-		/// <summary>
-		/// 旅人全技能解锁
-		/// </summary>
 		public static StatInfoItem TravelerAllSkillUnlocked => Instance[(short)75];
 
-		/// <summary>
-		/// 云游僧全技能解锁
-		/// </summary>
 		public static StatInfoItem TravelingBuddhistMonkAllSkillUnlocked => Instance[(short)76];
 
-		/// <summary>
-		/// 大夫全技能解锁
-		/// </summary>
 		public static StatInfoItem DoctorAllSkillUnlocked => Instance[(short)77];
 
-		/// <summary>
-		/// 云游道全技能解锁
-		/// </summary>
 		public static StatInfoItem TravelingTaoistMonkAllSkillUnlocked => Instance[(short)78];
 
-		/// <summary>
-		/// 富商全技能解锁
-		/// </summary>
 		public static StatInfoItem CapitalistAllSkillUnlocked => Instance[(short)79];
 
-		/// <summary>
-		/// 贵客全技能解锁
-		/// </summary>
 		public static StatInfoItem TeaTasterAllSkillUnlocked => Instance[(short)80];
 
-		/// <summary>
-		/// 王公全技能解锁
-		/// </summary>
 		public static StatInfoItem DukeAllSkillUnlocked => Instance[(short)81];
 
-		/// <summary>
-		/// 全部志向全技能解锁
-		/// </summary>
 		public static StatInfoItem AllProfessionAllSkillUnlocked => Instance[(short)82];
 
-		/// <summary>
-		/// 摧破真气达标
-		/// </summary>
 		public static StatInfoItem NeiliAllocationAttackAchieved => Instance[(short)83];
 
-		/// <summary>
-		/// 轻灵真气达标
-		/// </summary>
 		public static StatInfoItem NeiliAllocationAgilityAchieved => Instance[(short)84];
 
-		/// <summary>
-		/// 护体真气达标
-		/// </summary>
 		public static StatInfoItem NeiliAllocationDefenseAchieved => Instance[(short)85];
 
-		/// <summary>
-		/// 奇窍真气达标
-		/// </summary>
 		public static StatInfoItem NeiliAllocationAssistanceAchieved => Instance[(short)86];
 
-		/// <summary>
-		/// 普通自然资源等级达标
-		/// </summary>
 		public static StatInfoItem NormalResourceMaxLevelAchieved => Instance[(short)87];
 
-		/// <summary>
-		/// 稀有自然资源等级达标
-		/// </summary>
 		public static StatInfoItem RareResourceMaxLevelAchieved => Instance[(short)88];
 
-		/// <summary>
-		/// 促织决斗胜利
-		/// </summary>
 		public static StatInfoItem CricketCombatWon => Instance[(short)89];
 
-		/// <summary>
-		/// 选择立场相合选项
-		/// </summary>
 		public static StatInfoItem SelectOptionMatchBehavior => Instance[(short)90];
 
-		/// <summary>
-		/// 选择立场相悖选项
-		/// </summary>
 		public static StatInfoItem SelectOptionContradictoryBehavior => Instance[(short)91];
 
-		/// <summary>
-		/// 少林盟誓
-		/// </summary>
 		public static StatInfoItem ShaolinApprovingRateMax => Instance[(short)92];
 
-		/// <summary>
-		/// 峨眉盟誓
-		/// </summary>
 		public static StatInfoItem EmeiApprovingRateMax => Instance[(short)93];
 
-		/// <summary>
-		/// 百花盟誓
-		/// </summary>
 		public static StatInfoItem BaihuaApprovingRateMax => Instance[(short)94];
 
-		/// <summary>
-		/// 武当盟誓
-		/// </summary>
 		public static StatInfoItem WudangApprovingRateMax => Instance[(short)95];
 
-		/// <summary>
-		/// 元山盟誓
-		/// </summary>
 		public static StatInfoItem YuanshanApprovingRateMax => Instance[(short)96];
 
-		/// <summary>
-		/// 狮相盟誓
-		/// </summary>
 		public static StatInfoItem ShixiangApprovingRateMax => Instance[(short)97];
 
-		/// <summary>
-		/// 然山盟誓
-		/// </summary>
 		public static StatInfoItem RanshanApprovingRateMax => Instance[(short)98];
 
-		/// <summary>
-		/// 璇女盟誓
-		/// </summary>
 		public static StatInfoItem XuannvApprovingRateMax => Instance[(short)99];
 
-		/// <summary>
-		/// 铸剑盟誓
-		/// </summary>
 		public static StatInfoItem ZhujianApprovingRateMax => Instance[(short)100];
 
-		/// <summary>
-		/// 空桑盟誓
-		/// </summary>
 		public static StatInfoItem KongsangApprovingRateMax => Instance[(short)101];
 
-		/// <summary>
-		/// 金刚盟誓
-		/// </summary>
 		public static StatInfoItem JingangApprovingRateMax => Instance[(short)102];
 
-		/// <summary>
-		/// 五仙盟誓
-		/// </summary>
 		public static StatInfoItem WuxianApprovingRateMax => Instance[(short)103];
 
-		/// <summary>
-		/// 界青盟誓
-		/// </summary>
 		public static StatInfoItem JieqingApprovingRateMax => Instance[(short)104];
 
-		/// <summary>
-		/// 伏龙盟誓
-		/// </summary>
 		public static StatInfoItem FulongApprovingRateMax => Instance[(short)105];
 
-		/// <summary>
-		/// 血犼盟誓
-		/// </summary>
 		public static StatInfoItem XuehouApprovingRateMax => Instance[(short)106];
 
-		/// <summary>
-		/// 太吾村民数量
-		/// </summary>
 		public static StatInfoItem TaiwuVillagerAmount => Instance[(short)107];
 
-		/// <summary>
-		/// 击败破冢化身次数
-		/// </summary>
 		public static StatInfoItem CombatWinEscapeXiangshuAvatar => Instance[(short)108];
 
-		/// <summary>
-		/// 切磋胜利次数
-		/// </summary>
 		public static StatInfoItem CombatWinPlay => Instance[(short)109];
 
-		/// <summary>
-		/// 恶斗胜利次数
-		/// </summary>
 		public static StatInfoItem CombatWinBeat => Instance[(short)110];
 
-		/// <summary>
-		/// 接招胜利次数
-		/// </summary>
 		public static StatInfoItem CombatWinTest => Instance[(short)111];
 
-		/// <summary>
-		/// 死斗胜利次数
-		/// </summary>
 		public static StatInfoItem CombatWinDie => Instance[(short)112];
 
-		/// <summary>
-		/// 五花八门
-		/// </summary>
 		public static StatInfoItem CombatWinEnemySixMarkType => Instance[(short)113];
 
-		/// <summary>
-		/// 走为上计
-		/// </summary>
 		public static StatInfoItem CombatFlee => Instance[(short)114];
 
-		/// <summary>
-		/// 甘拜下风
-		/// </summary>
 		public static StatInfoItem CombatSurrender => Instance[(short)115];
 
-		/// <summary>
-		/// 五花大绑
-		/// </summary>
 		public static StatInfoItem CombatKidnap => Instance[(short)116];
 
-		/// <summary>
-		/// 救治失心人次数
-		/// </summary>
 		public static StatInfoItem CombatUseFuyuSword => Instance[(short)117];
 
-		/// <summary>
-		/// 击败爪牙次数
-		/// </summary>
 		public static StatInfoItem CombatWinXiangshuMinion => Instance[(short)118];
 
-		/// <summary>
-		/// 击败外道次数
-		/// </summary>
 		public static StatInfoItem CombatWinHeretic => Instance[(short)119];
 
-		/// <summary>
-		/// 击败任侠次数
-		/// </summary>
 		public static StatInfoItem CombatWinRighteous => Instance[(short)120];
 
-		/// <summary>
-		/// 击败动物次数
-		/// </summary>
 		public static StatInfoItem CombatWinAnimal => Instance[(short)121];
 
-		/// <summary>
-		/// 躲避摧破次数
-		/// </summary>
 		public static StatInfoItem CombatAvoidAttackSkillByEscape => Instance[(short)122];
 
-		/// <summary>
-		/// 防御摧破次数
-		/// </summary>
 		public static StatInfoItem CombatAvoidAttackSkillByDefend => Instance[(short)123];
 
-		/// <summary>
-		/// 变招攻击次数
-		/// </summary>
 		public static StatInfoItem CombatChangeTrickAttack => Instance[(short)124];
 
-		/// <summary>
-		/// 同道指令刷新次数
-		/// </summary>
 		public static StatInfoItem CombatTeammateCommandSkipCd => Instance[(short)125];
 
-		/// <summary>
-		/// 负面指令出现次数
-		/// </summary>
 		public static StatInfoItem CombatTeammateCommandNegative => Instance[(short)126];
 
-		/// <summary>
-		/// 越阶胜利次数
-		/// </summary>
 		public static StatInfoItem CombatWinMoreConsummate => Instance[(short)127];
 
-		/// <summary>
-		/// 拳掌施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillFistAndPalm => Instance[(short)128];
 
-		/// <summary>
-		/// 指法施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillFinger => Instance[(short)129];
 
-		/// <summary>
-		/// 腿法施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillLeg => Instance[(short)130];
 
-		/// <summary>
-		/// 暗器施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillThrow => Instance[(short)131];
 
-		/// <summary>
-		/// 剑法施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillSword => Instance[(short)132];
 
-		/// <summary>
-		/// 刀法施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillBlade => Instance[(short)133];
 
-		/// <summary>
-		/// 长兵施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillPolearm => Instance[(short)134];
 
-		/// <summary>
-		/// 奇门施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillSpecial => Instance[(short)135];
 
-		/// <summary>
-		/// 软兵施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillWhip => Instance[(short)136];
 
-		/// <summary>
-		/// 御射施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillControllableShot => Instance[(short)137];
 
-		/// <summary>
-		/// 乐器施展次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillCombatMusic => Instance[(short)138];
 
-		/// <summary>
-		/// 十成摧破次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillPowerFull => Instance[(short)139];
 
-		/// <summary>
-		/// 零成摧破次数
-		/// </summary>
 		public static StatInfoItem CombatCastSkillPowerZero => Instance[(short)140];
 
-		/// <summary>
-		/// 分筋错骨
-		/// </summary>
 		public static StatInfoItem CombatBrokenEnemy => Instance[(short)141];
 
-		/// <summary>
-		/// 身残志坚
-		/// </summary>
 		public static StatInfoItem CombatBrokenSelf => Instance[(short)142];
 
-		/// <summary>
-		/// 敌人混毒发作次数
-		/// </summary>
 		public static StatInfoItem CombatMixPoisonAffect => Instance[(short)143];
 
-		/// <summary>
-		/// 气冲斗牛
-		/// </summary>
 		public static StatInfoItem CombatNeiliAllocationBulge => Instance[(short)144];
 
-		/// <summary>
-		/// 气散功消
-		/// </summary>
 		public static StatInfoItem CombatNeiliAllocationScatter => Instance[(short)145];
 
-		/// <summary>
-		/// 累积造成重创标记数量
-		/// </summary>
 		public static StatInfoItem CombatMakeFatalMark => Instance[(short)146];
 
-		/// <summary>
-		/// 熟能生巧
-		/// </summary>
 		public static StatInfoItem CombatSkillProficiency999 => Instance[(short)147];
 
-		/// <summary>
-		/// 战胜全部剑冢化身
-		/// </summary>
 		public static StatInfoItem DefeatAllXiangshuAvatar => Instance[(short)148];
 
-		/// <summary>
-		/// 将阿牛邀为同道
-		/// </summary>
 		public static StatInfoItem JoinGroupStoryStrongMan => Instance[(short)173];
 
-		/// <summary>
-		/// 将徐小猫邀为同道
-		/// </summary>
 		public static StatInfoItem JoinGroupStoryLittleUrchin => Instance[(short)174];
 
-		/// <summary>
-		/// 将郭彦邀为同道
-		/// </summary>
 		public static StatInfoItem JoinGroupStoryBigWig => Instance[(short)175];
 
-		/// <summary>
-		/// 将司徒还月邀为同道
-		/// </summary>
 		public static StatInfoItem JoinGroupStoryHuanyue => Instance[(short)176];
 
-		/// <summary>
-		/// 与他人结为同道
-		/// </summary>
 		public static StatInfoItem MakeFriends => Instance[(short)221];
 
-		/// <summary>
-		/// 与他人结为夫妻
-		/// </summary>
 		public static StatInfoItem BeMarried => Instance[(short)222];
 
-		/// <summary>
-		/// 与他人结义
-		/// </summary>
 		public static StatInfoItem SwornBrotherhood => Instance[(short)225];
 
-		/// <summary>
-		/// 拜认他人为义亲
-		/// </summary>
 		public static StatInfoItem RecognizeAdoptive => Instance[(short)226];
 
-		/// <summary>
-		/// 入魔类型
-		/// </summary>
 		public static StatInfoItem InfectionType => Instance[(short)229];
 
-		/// <summary>
-		/// 名誉
-		/// </summary>
 		public static StatInfoItem Fame => Instance[(short)230];
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public static StatInfoItem Happiness => Instance[(short)231];
 
-		/// <summary>
-		/// 年龄
-		/// </summary>
 		public static StatInfoItem Age => Instance[(short)232];
 
-		/// <summary>
-		/// 一胎数量
-		/// </summary>
 		public static StatInfoItem OneBirthChildCount => Instance[(short)233];
 
-		/// <summary>
-		/// 与前世配偶结婚
-		/// </summary>
 		public static StatInfoItem MarryLastLifeSpouse => Instance[(short)234];
 
-		/// <summary>
-		/// 转世为自己孩子的孩子
-		/// </summary>
 		public static StatInfoItem ReincarnateAsGrandChild => Instance[(short)235];
 
-		/// <summary>
-		/// 委托暗杀暗主
-		/// </summary>
 		public static StatInfoItem AssassinateJieqingLeader => Instance[(short)236];
 
-		/// <summary>
-		/// 身中毒素种数
-		/// </summary>
 		public static StatInfoItem PoisonTypeCount => Instance[(short)237];
 
-		/// <summary>
-		/// 读完技艺书籍数量
-		/// </summary>
 		public static StatInfoItem FinishLifeSkillBookCount => Instance[(short)238];
 
-		/// <summary>
-		/// 读完任意类型技艺书籍
-		/// </summary>
 		public static StatInfoItem FinishLifeSkillBookTypeAny => Instance[(short)239];
 
-		/// <summary>
-		/// 读完音律书籍数量
-		/// </summary>
 		public static StatInfoItem FinishLifeSkillBookTypeMusic => Instance[(short)240];
 
-		/// <summary>
-		/// 读完武学书籍数量
-		/// </summary>
 		public static StatInfoItem FinishCombatSkillBookCount => Instance[(short)256];
 
-		/// <summary>
-		/// 读完任意门派武学书籍
-		/// </summary>
 		public static StatInfoItem FinishCombatSkillBookSectAny => Instance[(short)257];
 
-		/// <summary>
-		/// 读完少林派武学书籍数量
-		/// </summary>
 		public static StatInfoItem FinishCombatSkillBookSectShaolin => Instance[(short)258];
 
-		/// <summary>
-		/// 拥有浑心无字
-		/// </summary>
 		public static StatInfoItem OwnLegendaryBookNeigong => Instance[(short)273];
 
-		/// <summary>
-		/// 拥有奇书数量
-		/// </summary>
 		public static StatInfoItem OwnLegendaryBookCount => Instance[(short)287];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static StatInfo Instance = new StatInfo();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "AchievementTemplateId", "TemplateId", "SteamName" };

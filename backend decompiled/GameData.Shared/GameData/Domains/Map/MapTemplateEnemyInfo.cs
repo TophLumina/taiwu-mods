@@ -4,45 +4,24 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地图上没有实际对象的模板敌人的数据。由于敌人不会跨区域移动，因此无需记录其所在的区域Id
-/// </summary>
 [Serializable]
 public struct MapTemplateEnemyInfo : ISerializableGameData, IEquatable<MapTemplateEnemyInfo>
 {
-	/// <summary>
-	/// 随机敌人在角色表中的模板Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 随机敌人的当前位置，用于从奇遇索引其创建的外道的位置
-	/// </summary>
 	[SerializableGameDataField]
 	public short BlockId;
 
-	/// <summary>
-	/// 生成该随机敌人的奇遇的位置，用于在状态发生改变时索引并通知相应的奇遇
-	/// </summary>
 	[SerializableGameDataField]
 	public short SourceAdventureBlockId;
 
-	/// <summary>
-	/// 生成该随机敌人的持续时间，负数为永恒存在，正数每月减少，到0则消失
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Duration;
 
-	/// <summary>
-	/// 来源类型 <see cref="F:GameData.Domains.Map.MapTemplateEnemyInfo.SourceType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte SourceType;
 
-	/// <summary>
-	/// 无效的模板敌人数据
-	/// </summary>
 	public static readonly MapTemplateEnemyInfo Invalid = new MapTemplateEnemyInfo(-1, -1, -1, -1);
 
 	public static sbyte DefaultDuration(int taiwuConsummateLevel)
@@ -50,10 +29,6 @@ public struct MapTemplateEnemyInfo : ISerializableGameData, IEquatable<MapTempla
 		return (sbyte)Math.Clamp(taiwuConsummateLevel * GlobalConfig.Instance.GeneratedXiangshuMinionDurationFactor / 100 / 2, 1, 12);
 	}
 
-	/// <summary>
-	/// 模板敌人数据是否有效
-	/// </summary>
-	/// <returns></returns>
 	public bool IsValid()
 	{
 		if (TemplateId >= 0)
@@ -126,13 +101,11 @@ public struct MapTemplateEnemyInfo : ISerializableGameData, IEquatable<MapTempla
 		return HashCode.Combine(TemplateId, BlockId, SourceAdventureBlockId, Duration, SourceType);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -143,7 +116,6 @@ public struct MapTemplateEnemyInfo : ISerializableGameData, IEquatable<MapTempla
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = TemplateId;
@@ -163,7 +135,6 @@ public struct MapTemplateEnemyInfo : ISerializableGameData, IEquatable<MapTempla
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

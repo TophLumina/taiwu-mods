@@ -52,6 +52,10 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 
 	private bool TeammateAfterMainChar => _commandConfig.PosOffset < 0;
 
+	private CombatCharacter BackChar => TeammateBeforeMainChar ? CombatChar : _teammateChar;
+
+	private CombatCharacter ForeChar => TeammateBeforeMainChar ? _teammateChar : CombatChar;
+
 	public CombatCharacterStateTeammateCommand(CombatDomain combatDomain, CombatCharacter combatChar)
 		: base(combatDomain, combatChar, CombatCharacterStateType.TeammateCommand)
 	{
@@ -60,6 +64,12 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 
 	public override void OnEnter()
 	{
+		_teammateChar = CombatChar.ActingTeammateCommandChar;
+		if (_teammateChar.ExecutingTeammateCommandImplement == ETeammateCommandImplement.AddChickenPoint)
+		{
+			CombatChar.StateMachine.TranslateState(CombatCharacterStateType.AddChickenPoint);
+			return;
+		}
 		OnEnterInitFields();
 		DataContext context = _teammateChar.GetDataContext();
 		if (Preparing)
@@ -127,7 +137,6 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 
 	private void OnEnterInitFields()
 	{
-		_teammateChar = CombatChar.ActingTeammateCommandChar;
 		_commandType = _teammateChar.GetExecutingTeammateCommand();
 		_commandConfig = TeammateCommand.Instance[_commandType];
 		_commandImplement = _commandConfig.Implement;
@@ -139,7 +148,8 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 		_applyLogicEffectFrame = 0;
 		_teammateFallBackFrame = 0;
 		_clearCmdFrame = 0;
-		_stateLeftFrame = (Preparing ? AnimDataCollection.GetDurationFrame(_commandConfig.BackCharEnterAni) : 48);
+		string backCharEnterFullAni = BackChar.GetWrappedFullAnimationName(_commandConfig.BackCharEnterAni);
+		_stateLeftFrame = (Preparing ? AnimDataCollection.GetDurationFrame(backCharEnterFullAni) : 48);
 		if (NeedPostfixAnis.Contains(_foreCharAni))
 		{
 			CombatWeaponData weaponData = (TeammateBeforeMainChar ? _teammateChar : CombatChar).GetWeaponData();
@@ -149,11 +159,11 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 		{
 			if (Preparing || _commandConfig.ForeCharAniUseHit)
 			{
-				_foreCharAniStartFrame = AnimDataCollection.GetEventFrame(_commandConfig.BackCharEnterAni, "hit");
+				_foreCharAniStartFrame = AnimDataCollection.GetEventFrame(backCharEnterFullAni, "hit");
 			}
 			if (!string.IsNullOrEmpty(_foreCharAni) && !NeedPrepare)
 			{
-				_teammateFallBackFrame = AnimDataCollection.GetEventFrame(_commandConfig.BackCharEnterAni, "move", 1);
+				_teammateFallBackFrame = AnimDataCollection.GetEventFrame(backCharEnterFullAni, "move", 1);
 			}
 		}
 	}
@@ -185,7 +195,8 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 			_teammateChar.SpecialAnimationLoop = null;
 			_teammateChar.SetAnimationToPlayOnce(_commandConfig.ForeCharAni3, context);
 			_teammateFallBackFrame = 1;
-			_stateLeftFrame = (_clearCmdFrame = AnimDataCollection.GetDurationFrame(_commandConfig.ForeCharAni3));
+			string animationFullName = ForeChar.GetWrappedFullAnimationName(_commandConfig.ForeCharAni3);
+			_stateLeftFrame = (_clearCmdFrame = AnimDataCollection.GetDurationFrame(animationFullName));
 		}
 		else
 		{
@@ -197,9 +208,9 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 
 	private void OnEnterNoPrepare(DataContext context)
 	{
-		if (_commandImplement.IsPushOrPull())
+		if (_commandImplement.IsMove())
 		{
-			OnEnterPushOrPull(context);
+			OnEnterMove(context);
 		}
 		else if (_commandConfig.Type == ETeammateCommandType.Negative)
 		{
@@ -215,12 +226,14 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 		}
 	}
 
-	private void OnEnterPushOrPull(DataContext context)
+	private void OnEnterMove(DataContext context)
 	{
 		_teammateChar.SetAnimationToPlayOnce(_commandConfig.BackCharEnterAni, context);
 		_teammateChar.SetParticleToPlay(_commandConfig.BackCharParticle, context);
-		_applyLogicEffectFrame = _foreCharAniStartFrame + AnimDataCollection.GetEventFrame(_foreCharAni, "act0");
-		_stateLeftFrame = AnimDataCollection.GetDurationFrame(_commandConfig.BackCharEnterAni);
+		string foreCharAniFullName = ForeChar.GetWrappedFullAnimationName(_foreCharAni);
+		_applyLogicEffectFrame = _foreCharAniStartFrame + AnimDataCollection.GetEventFrame(foreCharAniFullName, "act0");
+		string backCharEnterFullAni = _teammateChar.GetWrappedFullAnimationName(_commandConfig.BackCharEnterAni);
+		_stateLeftFrame = AnimDataCollection.GetDurationFrame(backCharEnterFullAni);
 		string sound = _commandConfig.BackCharEnterSound;
 		if (_teammateChar.AnimalConfig?.TeammateCommandBackCharEnterSound != null)
 		{
@@ -238,8 +251,9 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 	{
 		_teammateChar.SetAnimationToPlayOnce(_commandConfig.BackCharEnterAni, context);
 		_teammateChar.SetParticleToPlay(_commandConfig.BackCharParticle, context);
-		_applyLogicEffectFrame = AnimDataCollection.GetEventFrame(_commandConfig.BackCharEnterAni, "act0");
-		_stateLeftFrame = AnimDataCollection.GetDurationFrame(_commandConfig.BackCharEnterAni);
+		string backCharEnterAniFullName = BackChar.GetWrappedFullAnimationName(_commandConfig.BackCharEnterAni);
+		_applyLogicEffectFrame = AnimDataCollection.GetEventFrame(backCharEnterAniFullName, "act0");
+		_stateLeftFrame = AnimDataCollection.GetDurationFrame(backCharEnterAniFullName);
 		_teammateChar.SetSkillSoundToPlay(_commandConfig.BackCharEnterSound, context);
 	}
 
@@ -251,7 +265,7 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 		_foreCharParticle = _teammateChar.GetNormalAttackParticle(trickType);
 		_foreCharSound = _teammateChar.GetNormalAttackSound(trickType);
 		_foreCharAniStartFrame = 34;
-		string foreCharAniFull = _teammateChar.GetNormalAttackAnimationFull(_foreCharAni);
+		string foreCharAniFull = _teammateChar.GetWrappedFullAnimationName(_foreCharAni);
 		_applyLogicEffectFrame = _foreCharAniStartFrame + AnimDataCollection.GetEventFrame(foreCharAniFull, "act0");
 		_teammateFallBackFrame = 34 + AnimDataCollection.GetDurationFrame(foreCharAniFull);
 		_stateLeftFrame = (_clearCmdFrame = _teammateFallBackFrame + 48);
@@ -389,6 +403,12 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 			break;
 		case ETeammateCommandImplement.AddPowerUntilCast:
 			ApplyAddPowerUntilCast(context);
+			break;
+		case ETeammateCommandImplement.SilenceRandomSkill:
+			ApplySilenceRandomSkill(context);
+			break;
+		case ETeammateCommandImplement.GotoTargetDistance:
+			ApplyGotoTargetDistance(context);
 			break;
 		}
 	}
@@ -829,6 +849,34 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 		CombatChar.ApplyAddPowerUntilCast(context, _commandConfig.IntArg);
 	}
 
+	private void ApplySilenceRandomSkill(DataContext context)
+	{
+		int silenceOdds = _commandConfig.IntArg;
+		int silenceFrame = _commandConfig.SubIntArg;
+		CombatCharacter enemyChar = DomainManager.Combat.GetCombatCharacter(!CombatChar.IsAlly);
+		int silenceCount = 0;
+		foreach (short banableSkillId in enemyChar.GetBanableSkillIds(-1, -1))
+		{
+			if (DomainManager.Combat.SilenceSkill(context, enemyChar, banableSkillId, silenceFrame, silenceOdds))
+			{
+				silenceCount++;
+				if (silenceCount >= 9)
+				{
+					break;
+				}
+			}
+		}
+	}
+
+	private void ApplyGotoTargetDistance(DataContext context)
+	{
+		short targetDistance = CombatChar.GetTargetDistance();
+		if (targetDistance >= 0)
+		{
+			DomainManager.Combat.ChangeDistance(context, CombatChar, targetDistance - DomainManager.Combat.GetCurrentDistance(), isForced: false, canStop: false);
+		}
+	}
+
 	private void OnForeCharAniStart()
 	{
 		DataContext context = CombatChar.GetDataContext();
@@ -897,8 +945,7 @@ public class CombatCharacterStateTeammateCommand : CombatCharacterStateBase
 
 	private void OnStateLeft()
 	{
-		ETeammateCommandImplement commandImplement = _commandImplement;
-		if ((uint)(commandImplement - 2) <= 1u)
+		if (_commandImplement.IsMove())
 		{
 			_teammateChar.ClearTeammateCommand(_teammateChar.GetDataContext());
 		}

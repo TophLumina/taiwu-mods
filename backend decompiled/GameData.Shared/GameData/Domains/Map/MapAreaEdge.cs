@@ -4,9 +4,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 区域边缘类型
-/// </summary>
 public static class MapAreaEdge
 {
 	public const sbyte Left = 0;
@@ -19,9 +16,6 @@ public static class MapAreaEdge
 
 	public const sbyte Count = 4;
 
-	/// <summary>
-	/// 获取与指定边相对的边
-	/// </summary>
 	public static sbyte GetOppositeEdge(sbyte edgeType)
 	{
 		return edgeType switch
@@ -34,9 +28,6 @@ public static class MapAreaEdge
 		};
 	}
 
-	/// <summary>
-	/// 获取2个区域入口所在边
-	/// </summary>
 	public static sbyte GetEnterEdge(sbyte[] fromPos, sbyte[] toPos)
 	{
 		if (fromPos[0] == toPos[0])
@@ -50,9 +41,6 @@ public static class MapAreaEdge
 		return (fromPos[0] >= toPos[0]) ? ((sbyte)1) : ((sbyte)0);
 	}
 
-	/// <summary>
-	/// 获取与指定地块最近的边
-	/// </summary>
 	public static sbyte[] GetNearestEdges(short blockId, byte areaSize)
 	{
 		ByteCoordinate pos = ByteCoordinate.IndexToCoordinate(blockId, areaSize);
@@ -75,9 +63,6 @@ public static class MapAreaEdge
 		};
 	}
 
-	/// <summary>
-	/// 获取指定边上的一个随机位置
-	/// </summary>
 	public static ByteCoordinate GetRandomEdgeCoord(sbyte edgeType, byte areaSize, IRandomSource random)
 	{
 		return edgeType switch

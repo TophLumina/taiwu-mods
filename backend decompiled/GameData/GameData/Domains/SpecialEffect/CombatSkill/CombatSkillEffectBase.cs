@@ -78,11 +78,6 @@ public class CombatSkillEffectBase : SpecialEffectBase
 	{
 	}
 
-	protected void RemoveSelf(DataContext context)
-	{
-		DomainManager.SpecialEffect.Remove(context, Id);
-	}
-
 	protected void ReduceEffectCount(int removeCount = 1)
 	{
 		DataContext context = DomainManager.Combat.Context;

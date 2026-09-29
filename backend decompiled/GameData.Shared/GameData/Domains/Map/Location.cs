@@ -4,31 +4,16 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地图位置
-/// </summary>
 [Serializable]
 [SerializableGameData]
 public struct Location(short areaId, short blockId) : ISerializableGameData, IEquatable<Location>
 {
-	/// <summary>
-	/// 无效的地图位置
-	/// </summary>
 	public static readonly Location Invalid = new Location(-1, -1);
 
-	/// <summary>
-	/// 区域索引, 小于 0 表示无效值.
-	/// </summary>
 	public short AreaId = areaId;
 
-	/// <summary>
-	/// 地块索引, 小于 0 表示无效值.
-	/// </summary>
 	public short BlockId = blockId;
 
-	/// <summary>
-	/// 获取坐标间曼哈顿距离，不可比较时返回 int.MaxValue
-	/// </summary>
 	public int GetManhattanDistanceToPos(Location other)
 	{
 		if (!IsValid() || !other.IsValid() || AreaId != other.AreaId)
@@ -65,10 +50,6 @@ public struct Location(short areaId, short blockId) : ISerializableGameData, IEq
 		return 4;
 	}
 
-	/// <summary>
-	/// 检查地图位置是否有效
-	/// </summary>
-	/// <returns></returns>
 	public bool IsValid()
 	{
 		if (AreaId >= 0)

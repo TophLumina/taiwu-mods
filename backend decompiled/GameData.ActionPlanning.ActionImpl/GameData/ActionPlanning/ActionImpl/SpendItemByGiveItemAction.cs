@@ -1,4 +1,3 @@
-using GameData.ActionPlanning.ActionImpl.Helper;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.Common;
 using GameData.Domains;
@@ -44,17 +43,16 @@ public class SpendItemByGiveItemAction : ICharacterActionImpl, ISerializableGame
 			return false;
 		}
 		sbyte targetBestGrade = actionData.TargetChar.GetInteractionGrade();
-		ItemKey itemKey = ActionHelper.SelectSpareableItem(context, character, targetBestGrade, allowUsed: true);
-		if (!itemKey.IsValid())
+		ItemBase selectedItem = character.SelectSpareableItem(context, targetBestGrade, allowUsed: true);
+		if (selectedItem == null)
 		{
 			return false;
 		}
-		ItemBase selectedItem = DomainManager.Item.GetBaseItem(itemKey);
 		if (selectedItem.GetCurrDurability() < selectedItem.GetMaxDurability())
 		{
 			return false;
 		}
-		TargetItem = itemKey;
+		TargetItem = selectedItem.GetItemKey();
 		Amount = 1;
 		return true;
 	}

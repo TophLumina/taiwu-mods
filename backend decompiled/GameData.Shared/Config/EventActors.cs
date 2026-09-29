@@ -7,3681 +7,1476 @@ namespace Config;
 [Serializable]
 public class EventActors : ConfigData<EventActorsItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 恶人谷少年
-		/// </summary>
 		public const short NestBoy = 0;
 
-		/// <summary>
-		/// 恶人谷少女
-		/// </summary>
 		public const short NestGirl = 1;
 
-		/// <summary>
-		/// 恶人谷幼童
-		/// </summary>
 		public const short NestChild = 2;
 
-		/// <summary>
-		/// 恶人谷女子
-		/// </summary>
 		public const short NestWoman = 3;
 
-		/// <summary>
-		/// 迷香阵妻子
-		/// </summary>
 		public const short LostWife = 4;
 
-		/// <summary>
-		/// 迷香阵孩子1
-		/// </summary>
 		public const short LostChildMine = 5;
 
-		/// <summary>
-		/// 迷香阵丈夫
-		/// </summary>
 		public const short LostHusband = 6;
 
-		/// <summary>
-		/// 迷香阵婆婆
-		/// </summary>
 		public const short LostHusMom = 7;
 
-		/// <summary>
-		/// 迷香阵孩子2
-		/// </summary>
 		public const short LostChildHis = 8;
 
-		/// <summary>
-		/// 迷香阵路人1
-		/// </summary>
 		public const short PassByMan = 9;
 
-		/// <summary>
-		/// 迷香阵路人2
-		/// </summary>
 		public const short PassByWoman = 10;
 
-		/// <summary>
-		/// 邪人死地援兵1
-		/// </summary>
 		public const short HelperShaolin = 11;
 
-		/// <summary>
-		/// 邪人死地援兵2
-		/// </summary>
 		public const short HelperEmei = 12;
 
-		/// <summary>
-		/// 邪人死地援兵3
-		/// </summary>
 		public const short HelperBaihua = 13;
 
-		/// <summary>
-		/// 邪人死地援兵4
-		/// </summary>
 		public const short HelperWudang = 14;
 
-		/// <summary>
-		/// 邪人死地援兵5
-		/// </summary>
 		public const short HelperYuanshan = 15;
 
-		/// <summary>
-		/// 邪人死地援兵6
-		/// </summary>
 		public const short HelperShixiang = 16;
 
-		/// <summary>
-		/// 邪人死地援兵7
-		/// </summary>
 		public const short HelperRanshan = 17;
 
-		/// <summary>
-		/// 邪人死地援兵8
-		/// </summary>
 		public const short HelperXuannv = 18;
 
-		/// <summary>
-		/// 邪人死地援兵9
-		/// </summary>
 		public const short HelperZhujian = 19;
 
-		/// <summary>
-		/// 邪人死地援兵10
-		/// </summary>
 		public const short HelperKongsang = 20;
 
-		/// <summary>
-		/// 邪人死地援兵11
-		/// </summary>
 		public const short HelperJingang = 21;
 
-		/// <summary>
-		/// 邪人死地援兵12
-		/// </summary>
 		public const short HelperWuxian = 22;
 
-		/// <summary>
-		/// 邪人死地援兵13
-		/// </summary>
 		public const short HelperJieqing = 23;
 
-		/// <summary>
-		/// 邪人死地援兵14
-		/// </summary>
 		public const short HelperFulong = 24;
 
-		/// <summary>
-		/// 邪人死地援兵15
-		/// </summary>
 		public const short HelperXuehou = 25;
 
-		/// <summary>
-		/// 邪窍花误服毒的路人
-		/// </summary>
 		public const short PoisonPassBy = 26;
 
-		/// <summary>
-		/// 人面曼陀罗公主
-		/// </summary>
 		public const short PoisonPrincess = 27;
 
-		/// <summary>
-		/// 人面曼陀罗老者
-		/// </summary>
 		public const short PoisonOld = 28;
 
-		/// <summary>
-		/// 人面曼陀罗病人
-		/// </summary>
 		public const short PoisonSick = 29;
 
-		/// <summary>
-		/// 人面曼陀罗樵夫
-		/// </summary>
 		public const short PoisonCutter = 30;
 
-		/// <summary>
-		/// 人面曼陀罗少年
-		/// </summary>
 		public const short PoisonBoy = 31;
 
-		/// <summary>
-		/// 招亲通用仆从
-		/// </summary>
 		public const short MarriageServant = 32;
 
-		/// <summary>
-		/// 招亲京城长辈1
-		/// </summary>
 		public const short MarriageOldMan = 33;
 
-		/// <summary>
-		/// 招亲京城长辈2
-		/// </summary>
 		public const short MarriageOldWoman = 34;
 
-		/// <summary>
-		/// 招亲京城族弟
-		/// </summary>
 		public const short MarriageBrother = 35;
 
-		/// <summary>
-		/// 招亲京城族妹
-		/// </summary>
 		public const short MarriageSister = 36;
 
-		/// <summary>
-		/// 招亲京城恶仆
-		/// </summary>
 		public const short MarriageEServant = 37;
 
-		/// <summary>
-		/// 招亲成都翠娥
-		/// </summary>
 		public const short MarriageCuiE = 38;
 
-		/// <summary>
-		/// 招亲辽阳牧民
-		/// </summary>
 		public const short MarriageHerdsman = 39;
 
-		/// <summary>
-		/// 招亲大理引路人
-		/// </summary>
 		public const short MarriageGuide = 40;
 
-		/// <summary>
-		/// 招亲福州家主
-		/// </summary>
 		public const short MarriageFamilyHolder = 41;
 
-		/// <summary>
-		/// 招亲福州巫者
-		/// </summary>
 		public const short MarriageWizard = 42;
 
-		/// <summary>
-		/// 招亲福州盗物之人
-		/// </summary>
 		public const short MarriageStoler = 43;
 
-		/// <summary>
-		/// 招亲福州恩人
-		/// </summary>
 		public const short MarriageGoodPerson = 44;
 
-		/// <summary>
-		/// 招亲福州仇敌
-		/// </summary>
 		public const short MarriageBadPerson = 45;
 
-		/// <summary>
-		/// 招亲福州妇人
-		/// </summary>
 		public const short MarriageWoman = 46;
 
-		/// <summary>
-		/// 招亲福州孩童
-		/// </summary>
 		public const short MarriageChild = 47;
 
-		/// <summary>
-		/// 招亲寿春长辈
-		/// </summary>
 		public const short MarriageHunterOld = 48;
 
-		/// <summary>
-		/// 招亲扬州贵人
-		/// </summary>
 		public const short MarriageNobleWoman = 49;
 
-		/// <summary>
-		/// 招亲青州老者
-		/// </summary>
 		public const short MarriageMoonOld = 50;
 
-		/// <summary>
-		/// 招亲青州算命先生
-		/// </summary>
 		public const short MarriageTeller = 51;
 
-		/// <summary>
-		/// 招亲青州红娘1
-		/// </summary>
 		public const short MarriageMakerLow = 52;
 
-		/// <summary>
-		/// 招亲青州红娘2
-		/// </summary>
 		public const short MarriageMakerMiddle = 53;
 
-		/// <summary>
-		/// 招亲青州红娘3
-		/// </summary>
 		public const short MarriageMakerHigh = 54;
 
-		/// <summary>
-		/// 招亲秦州骆驼商队
-		/// </summary>
 		public const short MarriageCambel = 55;
 
-		/// <summary>
-		/// 招亲江陵管家
-		/// </summary>
 		public const short MarriageEvenKeeper = 56;
 
-		/// <summary>
-		/// 招亲江陵家仆1
-		/// </summary>
 		public const short MarriageJustKeeper = 57;
 
-		/// <summary>
-		/// 招亲江陵家仆2
-		/// </summary>
 		public const short MarriageKindKeeper = 58;
 
-		/// <summary>
-		/// 招亲江陵家仆3
-		/// </summary>
 		public const short MarriageRebelKeeper = 59;
 
-		/// <summary>
-		/// 招亲江陵家仆4
-		/// </summary>
 		public const short MarriageGoisticKeeper = 60;
 
-		/// <summary>
-		/// 招亲桂州当地人
-		/// </summary>
 		public const short MarriageLocal = 61;
 
-		/// <summary>
-		/// 拜访引导弟子少林
-		/// </summary>
 		public const short SectGuideShaolin = 62;
 
-		/// <summary>
-		/// 拜访引导弟子峨眉
-		/// </summary>
 		public const short SectGuideEmei = 63;
 
-		/// <summary>
-		/// 拜访引导弟子百花
-		/// </summary>
 		public const short SectGuideBaihua = 64;
 
-		/// <summary>
-		/// 拜访引导弟子武当
-		/// </summary>
 		public const short SectGuideWudang = 65;
 
-		/// <summary>
-		/// 拜访引导弟子元山
-		/// </summary>
 		public const short SectGuideYuanshan = 66;
 
-		/// <summary>
-		/// 拜访引导弟子狮相
-		/// </summary>
 		public const short SectGuideShixiang = 67;
 
-		/// <summary>
-		/// 拜访引导弟子然山
-		/// </summary>
 		public const short SectGuideRanshan = 68;
 
-		/// <summary>
-		/// 拜访引导弟子璇女
-		/// </summary>
 		public const short SectGuideXuannv = 69;
 
-		/// <summary>
-		/// 拜访引导弟子铸剑
-		/// </summary>
 		public const short SectGuideZhujian = 70;
 
-		/// <summary>
-		/// 拜访引导弟子空桑
-		/// </summary>
 		public const short SectGuideKongsang = 71;
 
-		/// <summary>
-		/// 拜访引导弟子金刚
-		/// </summary>
 		public const short SectGuideJingang = 72;
 
-		/// <summary>
-		/// 拜访引导弟子五仙
-		/// </summary>
 		public const short SectGuideWuxian = 73;
 
-		/// <summary>
-		/// 拜访引导弟子界青
-		/// </summary>
 		public const short SectGuideJieqing = 74;
 
-		/// <summary>
-		/// 拜访引导弟子伏龙
-		/// </summary>
 		public const short SectGuideFulong = 75;
 
-		/// <summary>
-		/// 拜访引导弟子血犼
-		/// </summary>
 		public const short SectGuideXuehou = 76;
 
-		/// <summary>
-		/// 建筑引导弟子铸剑
-		/// </summary>
 		public const short BuildingGuideZhujian = 77;
 
-		/// <summary>
-		/// 女版招亲婢女
-		/// </summary>
 		public const short MarriageMaid = 78;
 
-		/// <summary>
-		/// 江湖人士
-		/// </summary>
 		public const short JianghuActor = 79;
 
-		/// <summary>
-		/// 文山书海阁演员
-		/// </summary>
 		public const short BookShopActor = 80;
 
-		/// <summary>
-		/// 大武魁商号演员
-		/// </summary>
 		public const short WeaponShopActor = 81;
 
-		/// <summary>
-		/// 奇货斋演员
-		/// </summary>
 		public const short AccessoryShopActor = 82;
 
-		/// <summary>
-		/// 公输坊演员
-		/// </summary>
 		public const short ConstructionShopActor = 83;
 
-		/// <summary>
-		/// 五湖商会演员
-		/// </summary>
 		public const short MaterialShopActor = 84;
 
-		/// <summary>
-		/// 服牛帮演员
-		/// </summary>
 		public const short FoodShopActor = 85;
 
-		/// <summary>
-		/// 促织大会接引人
-		/// </summary>
 		public const short CricketConferenceGuide = 86;
 
-		/// <summary>
-		/// 促织商人
-		/// </summary>
 		public const short CricketBusinessman = 87;
 
-		/// <summary>
-		/// 促织主持人
-		/// </summary>
 		public const short CricketOldMan = 88;
 
-		/// <summary>
-		/// 任侠会盟弟子少林
-		/// </summary>
 		public const short SectSickShaolin = 89;
 
-		/// <summary>
-		/// 任侠会盟弟子峨眉
-		/// </summary>
 		public const short SectSickEmei = 90;
 
-		/// <summary>
-		/// 任侠会盟弟子百花
-		/// </summary>
 		public const short SectSickBaihua = 91;
 
-		/// <summary>
-		/// 任侠会盟弟子武当
-		/// </summary>
 		public const short SectSickWudang = 92;
 
-		/// <summary>
-		/// 任侠会盟弟子元山
-		/// </summary>
 		public const short SectSickYuanshan = 93;
 
-		/// <summary>
-		/// 任侠会盟弟子狮相
-		/// </summary>
 		public const short SectSickShixiang = 94;
 
-		/// <summary>
-		/// 任侠会盟弟子然山
-		/// </summary>
 		public const short SectSickRanshan = 95;
 
-		/// <summary>
-		/// 任侠会盟弟子璇女
-		/// </summary>
 		public const short SectSickXuannv = 96;
 
-		/// <summary>
-		/// 任侠会盟弟子铸剑
-		/// </summary>
 		public const short SectSickZhujian = 97;
 
-		/// <summary>
-		/// 任侠会盟弟子空桑
-		/// </summary>
 		public const short SectSickKongsang = 98;
 
-		/// <summary>
-		/// 任侠会盟弟子金刚
-		/// </summary>
 		public const short SectSickJingang = 99;
 
-		/// <summary>
-		/// 任侠会盟弟子五仙
-		/// </summary>
 		public const short SectSickWuxian = 100;
 
-		/// <summary>
-		/// 任侠会盟弟子界青
-		/// </summary>
 		public const short SectSickJieqing = 101;
 
-		/// <summary>
-		/// 任侠会盟弟子伏龙
-		/// </summary>
 		public const short SectSickFulong = 102;
 
-		/// <summary>
-		/// 任侠会盟弟子血犼
-		/// </summary>
 		public const short SectSickXuehou = 103;
 
-		/// <summary>
-		/// 乞丐
-		/// </summary>
 		public const short Beggar = 104;
 
-		/// <summary>
-		/// 空桑主线高阶弟子
-		/// </summary>
 		public const short SectMainStoryKongsang = 105;
 
-		/// <summary>
-		/// 璇女主线搭话弟子
-		/// </summary>
 		public const short SectMainStoryXuannv = 106;
 
-		/// <summary>
-		/// 少林主线老和尚
-		/// </summary>
 		public const short SectMainStoryShaolin0 = 107;
 
-		/// <summary>
-		/// 少林主线小和尚
-		/// </summary>
 		public const short SectMainStoryShaolin1 = 108;
 
-		/// <summary>
-		/// 少林升级互动长老
-		/// </summary>
 		public const short SectMainStoryShaolin3 = 328;
 
-		/// <summary>
-		/// 血犼主线扬州路人
-		/// </summary>
 		public const short SectMainStoryXuehou0 = 109;
 
-		/// <summary>
-		/// 血犼主线小山猪
-		/// </summary>
 		public const short SectMainStoryXuehou1 = 110;
 
-		/// <summary>
-		/// 武当主线樵夫
-		/// </summary>
 		public const short SectMainStoryWudang1 = 111;
 
-		/// <summary>
-		/// 武当主线老翁1
-		/// </summary>
 		public const short SectMainStoryWudang2 = 112;
 
-		/// <summary>
-		/// 武当主线少女
-		/// </summary>
 		public const short SectMainStoryWudang3 = 113;
 
-		/// <summary>
-		/// 武当主线隐士
-		/// </summary>
 		public const short SectMainStoryWudang4 = 114;
 
-		/// <summary>
-		/// 武当主线孩童
-		/// </summary>
 		public const short SectMainStoryWudang5 = 115;
 
-		/// <summary>
-		/// 武当主线老农
-		/// </summary>
 		public const short SectMainStoryWudang6 = 116;
 
-		/// <summary>
-		/// 武当主线老翁2
-		/// </summary>
 		public const short SectMainStoryWudang7 = 117;
 
-		/// <summary>
-		/// 武当主线妇人
-		/// </summary>
 		public const short SectMainStoryWudang8 = 118;
 
-		/// <summary>
-		/// 武当主线道人
-		/// </summary>
 		public const short SectMainStoryWudang9 = 119;
 
-		/// <summary>
-		/// 武当主线老翁3
-		/// </summary>
 		public const short SectMainStoryWudang10 = 120;
 
-		/// <summary>
-		/// 血犼主线村民1
-		/// </summary>
 		public const short SectMainStoryXuehou2 = 121;
 
-		/// <summary>
-		/// 血犼主线村民2
-		/// </summary>
 		public const short SectMainStoryXuehou3 = 122;
 
-		/// <summary>
-		/// 血犼主线村民3
-		/// </summary>
 		public const short SectMainStoryXuehou4 = 123;
 
-		/// <summary>
-		/// 然山主线三宗祖师
-		/// </summary>
 		public const short SectMainStoryRanshan = 124;
 
-		/// <summary>
-		/// 武当主线云游道士
-		/// </summary>
 		public const short SectMainStoryWudang11 = 125;
 
-		/// <summary>
-		/// 狮相门主线农夫
-		/// </summary>
 		public const short SectMainStoryShixiang1 = 126;
 
-		/// <summary>
-		/// 狮相门主线妇人
-		/// </summary>
 		public const short SectMainStoryShixiang2 = 127;
 
-		/// <summary>
-		/// 空桑代理掌门
-		/// </summary>
 		public const short SectMainStoryKongsangActingHead = 128;
 
-		/// <summary>
-		/// 少林修塔和尚
-		/// </summary>
 		public const short SectMainStoryShaolin2 = 129;
 
-		/// <summary>
-		/// 狮相主线文人
-		/// </summary>
 		public const short SectMainStoryShixiang3 = 130;
 
-		/// <summary>
-		/// 狮相主线叛徒
-		/// </summary>
 		public const short SectMainStoryShixiang4 = 131;
 
-		/// <summary>
-		/// 狮相主线异族高手
-		/// </summary>
 		public const short SectMainStoryShixiang5 = 132;
 
-		/// <summary>
-		/// 武当主线城主
-		/// </summary>
 		public const short SectMainStoryWudangChengzhu = 133;
 
-		/// <summary>
-		/// 武当主线旅者
-		/// </summary>
 		public const short SectMainStoryWudangTraveller = 134;
 
-		/// <summary>
-		/// 武当主线酒徒
-		/// </summary>
 		public const short SectMainStoryWudangDrunkard = 135;
 
-		/// <summary>
-		/// 武当主线小道长
-		/// </summary>
 		public const short SectMainStoryWudangLittleTaoistMonk = 136;
 
-		/// <summary>
-		/// 武当主线武当鸭
-		/// </summary>
 		public const short SectMainStoryWudangDuck = 137;
 
-		/// <summary>
-		/// 璇女主线过路神医
-		/// </summary>
 		public const short SectMainStoryXuannv1 = 138;
 
-		/// <summary>
-		/// 璇女主线青鸾家仆
-		/// </summary>
 		public const short SectMainStoryXuannv2 = 139;
 
-		/// <summary>
-		/// 峨眉主线弟子甲
-		/// </summary>
 		public const short SectMainStoryEmei0 = 140;
 
-		/// <summary>
-		/// 峨眉主线弟子乙
-		/// </summary>
 		public const short SectMainStoryEmei1 = 141;
 
-		/// <summary>
-		/// 峨眉主线弟子丙
-		/// </summary>
 		public const short SectMainStoryEmei2 = 142;
 
-		/// <summary>
-		/// 峨眉主线弟子丁
-		/// </summary>
 		public const short SectMainStoryEmei3 = 143;
 
-		/// <summary>
-		/// 峨眉主线弟子戊
-		/// </summary>
 		public const short SectMainStoryEmei4 = 144;
 
-		/// <summary>
-		/// 峨眉主线弟子己
-		/// </summary>
 		public const short SectMainStoryEmei5 = 145;
 
-		/// <summary>
-		/// 峨眉主线弟子庚
-		/// </summary>
 		public const short SectMainStoryEmei6 = 146;
 
-		/// <summary>
-		/// 峨眉主线弟子辛
-		/// </summary>
 		public const short SectMainStoryEmei7 = 147;
 
-		/// <summary>
-		/// 璇女主线天女虚影
-		/// </summary>
 		public const short SectMainStoryXuannvShadowOfMirror = 148;
 
-		/// <summary>
-		/// 峨眉白猿黑影
-		/// </summary>
 		public const short SectMainStoryEmeiGibbonShadow = 149;
 
-		/// <summary>
-		/// 峨眉长老假扮黑衣人
-		/// </summary>
 		public const short SectMainStoryEmeiShadows = 150;
 
-		/// <summary>
-		/// 璇女主线女童
-		/// </summary>
 		public const short SectMainStoryXuannvGirl = 151;
 
-		/// <summary>
-		/// 梦回巨大黑影
-		/// </summary>
 		public const short CrossArchiveShadow = 152;
 
-		/// <summary>
-		/// 梦回神秘匠人
-		/// </summary>
 		public const short CrossArchiveArchitect = 153;
 
-		/// <summary>
-		/// 豢龙氏哥哥
-		/// </summary>
 		public const short DLCLoongKeeperBrother = 154;
 
-		/// <summary>
-		/// 豢龙氏妹妹
-		/// </summary>
 		public const short DLCLoongKeeperSister = 155;
 
-		/// <summary>
-		/// 雾中少女
-		/// </summary>
 		public const short SectMainStoryWuxianGirlInMist = 156;
 
-		/// <summary>
-		/// 金刚主线昆仑山居民
-		/// </summary>
 		public const short SectMainStoryJingangResident = 157;
 
-		/// <summary>
-		/// 金刚主线驱邪村民
-		/// </summary>
 		public const short SectMainStoryJingangExorcist = 158;
 
-		/// <summary>
-		/// 金刚鬼影僧人
-		/// </summary>
 		public const short SectMainStoryJingangGhost = 159;
 
-		/// <summary>
-		/// 金刚高僧魂灵
-		/// </summary>
 		public const short SectMainStoryJingangSoul = 160;
 
-		/// <summary>
-		/// 五仙主线婆婆
-		/// </summary>
 		public const short SectMainStoryWuxianGrandma = 161;
 
-		/// <summary>
-		/// 五仙主线苗妇
-		/// </summary>
 		public const short SectMainStoryWuxianLady = 162;
 
-		/// <summary>
-		/// 五仙主线少女
-		/// </summary>
 		public const short SectMainStoryWuxianTeenager = 163;
 
-		/// <summary>
-		/// 五仙主线青年
-		/// </summary>
 		public const short SectMainStoryWuxianYouth = 164;
 
-		/// <summary>
-		/// 五仙主线老者
-		/// </summary>
 		public const short SectMainStoryWuxianPoisonOld = 165;
 
-		/// <summary>
-		/// 然山主线山下弟子
-		/// </summary>
 		public const short SectMainStoryRanshan0 = 166;
 
-		/// <summary>
-		/// 然山主线山下小童1
-		/// </summary>
 		public const short SectMainStoryRanshan1 = 167;
 
-		/// <summary>
-		/// 然山主线山下小童2
-		/// </summary>
 		public const short SectMainStoryRanshan2 = 168;
 
-		/// <summary>
-		/// 然山主线山下小童3
-		/// </summary>
 		public const short SectMainStoryRanshan3 = 169;
 
-		/// <summary>
-		/// 然山主线上山弟子
-		/// </summary>
 		public const short SectMainStoryRanshan4 = 170;
 
-		/// <summary>
-		/// 然山主线奇遇弟子
-		/// </summary>
 		public const short SectMainStoryRanshan5 = 171;
 
-		/// <summary>
-		/// 然山主线雾中弟子1
-		/// </summary>
 		public const short SectMainStoryRanshan6 = 172;
 
-		/// <summary>
-		/// 然山主线雾中弟子2
-		/// </summary>
 		public const short SectMainStoryRanshan7 = 173;
 
-		/// <summary>
-		/// 然山主线雾中小童
-		/// </summary>
 		public const short SectMainStoryRanshan8 = 174;
 
-		/// <summary>
-		/// 然山主线雾中弟子3
-		/// </summary>
 		public const short SectMainStoryRanshan9 = 175;
 
-		/// <summary>
-		/// 然山主线雾中船夫
-		/// </summary>
 		public const short SectMainStoryRanshan10 = 176;
 
-		/// <summary>
-		/// 百花主线村中守卫0
-		/// </summary>
 		public const short SectMainStoryBaihuaGuard0 = 177;
 
-		/// <summary>
-		/// 百花主线村中守卫1
-		/// </summary>
 		public const short SectMainStoryBaihuaGuard1 = 178;
 
-		/// <summary>
-		/// 百花主线冯青剪影
-		/// </summary>
 		public const short SectMainStoryBaihuaShadowFengqing = 179;
 
-		/// <summary>
-		/// 百花主线焕心剪影
-		/// </summary>
 		public const short SectMainStoryBaihuaShadowHuanxin = 180;
 
-		/// <summary>
-		/// 百花主线相枢剪影
-		/// </summary>
 		public const short SectMainStoryBaihuaShadowXiangshu = 181;
 
-		/// <summary>
-		/// 百花主线无名之人男剪影
-		/// </summary>
 		public const short SectMainStoryBaihuaShadowAnonymMale = 182;
 
-		/// <summary>
-		/// 百花主线无名之人女剪影
-		/// </summary>
 		public const short SectMainStoryBaihuaShadowAnonymFemale = 183;
 
-		/// <summary>
-		/// 百花主线冯青
-		/// </summary>
 		public const short SectMainStoryBaihuaFengqing = 184;
 
-		/// <summary>
-		/// 百花主线无名之人男解脱
-		/// </summary>
 		public const short SectMainStoryBaihuaAnonymMaleRelieved = 185;
 
-		/// <summary>
-		/// 百花主线无名之人女解脱
-		/// </summary>
 		public const short SectMainStoryBaihuaAnonymFemaleRelieved = 186;
 
-		/// <summary>
-		/// 百花主线无名之人男
-		/// </summary>
 		public const short SectMainStoryAnonymMale = 187;
 
-		/// <summary>
-		/// 百花主线无名之人女
-		/// </summary>
 		public const short SectMainStoryAnonymFemale = 188;
 
-		/// <summary>
-		/// 然山主线通用莽汉
-		/// </summary>
 		public const short SectMainStoryRanshan11 = 189;
 
-		/// <summary>
-		/// 然山主线通用妇人
-		/// </summary>
 		public const short SectMainStoryRanshan12 = 190;
 
-		/// <summary>
-		/// 然山主线通用文人
-		/// </summary>
 		public const short SectMainStoryRanshan13 = 191;
 
-		/// <summary>
-		/// 然山主线通用商人
-		/// </summary>
 		public const short SectMainStoryRanshan14 = 192;
 
-		/// <summary>
-		/// 然山主线通用手艺人
-		/// </summary>
 		public const short SectMainStoryRanshan15 = 193;
 
-		/// <summary>
-		/// 然山主线雾中老者
-		/// </summary>
 		public const short SectMainStoryRanshan16 = 194;
 
-		/// <summary>
-		/// 然山主线华居线老书生
-		/// </summary>
 		public const short SectMainStoryRanshan17 = 195;
 
-		/// <summary>
-		/// 然山主线玄质线师姐
-		/// </summary>
 		public const short SectMainStoryRanshan18 = 196;
 
-		/// <summary>
-		/// 然山主线迎娇线少女
-		/// </summary>
 		public const short SectMainStoryRanshan19 = 197;
 
-		/// <summary>
-		/// 然山主线迎娇线书生
-		/// </summary>
 		public const short SectMainStoryRanshan20 = 198;
 
-		/// <summary>
-		/// 然山主线迎娇线妇人
-		/// </summary>
 		public const short SectMainStoryRanshan21 = 199;
 
-		/// <summary>
-		/// 然山主线迎娇线男子
-		/// </summary>
 		public const short SectMainStoryRanshan22 = 200;
 
-		/// <summary>
-		/// 然山迎娇线幻觉少女
-		/// </summary>
 		public const short SectMainStoryRanshan23 = 201;
 
-		/// <summary>
-		/// 然山迎娇线幻觉少年
-		/// </summary>
 		public const short SectMainStoryRanshan24 = 202;
 
-		/// <summary>
-		/// 然山主线丑陋妇人
-		/// </summary>
 		public const short SectMainStoryRanshan25 = 203;
 
-		/// <summary>
-		/// 伏龙主线伏龙使者
-		/// </summary>
 		public const short SectMainStoryFulongUsher = 204;
 
-		/// <summary>
-		/// 伏龙主线蒙面女子
-		/// </summary>
 		public const short SectMainStoryFulongMaskedWoman = 205;
 
-		/// <summary>
-		/// 伏龙主线琉璃本体
-		/// </summary>
 		public const short SectMainStoryFulongLazuliForm = 206;
 
-		/// <summary>
-		/// 芦花鸡
-		/// </summary>
 		public const short ChickenClever0 = 207;
 
-		/// <summary>
-		/// 麻鸡
-		/// </summary>
 		public const short ChickenClever1 = 208;
 
-		/// <summary>
-		/// 雉鸡
-		/// </summary>
 		public const short ChickenClever2 = 209;
 
-		/// <summary>
-		/// 竹鸡
-		/// </summary>
 		public const short ChickenClever3 = 210;
 
-		/// <summary>
-		/// 黑羽鸡
-		/// </summary>
 		public const short ChickenClever4 = 211;
 
-		/// <summary>
-		/// 鹑尾
-		/// </summary>
 		public const short ChickenClever5 = 212;
 
-		/// <summary>
-		/// 马鸡
-		/// </summary>
 		public const short ChickenClever6 = 213;
 
-		/// <summary>
-		/// 赤足鸡
-		/// </summary>
 		public const short ChickenClever7 = 214;
 
-		/// <summary>
-		/// 窗禽
-		/// </summary>
 		public const short ChickenClever8 = 215;
 
-		/// <summary>
-		/// 元宝鸡
-		/// </summary>
 		public const short ChickenLucky0 = 216;
 
-		/// <summary>
-		/// 丹鸡
-		/// </summary>
 		public const short ChickenLucky1 = 217;
 
-		/// <summary>
-		/// 虢国鸡
-		/// </summary>
 		public const short ChickenLucky2 = 218;
 
-		/// <summary>
-		/// 祝祝
-		/// </summary>
 		public const short ChickenLucky3 = 219;
 
-		/// <summary>
-		/// 长尾鸡
-		/// </summary>
 		public const short ChickenLucky4 = 220;
 
-		/// <summary>
-		/// 银锦鸡
-		/// </summary>
 		public const short ChickenLucky5 = 221;
 
-		/// <summary>
-		/// 金锦鸡
-		/// </summary>
 		public const short ChickenLucky6 = 222;
 
-		/// <summary>
-		/// 琅琊鸡
-		/// </summary>
 		public const short ChickenLucky7 = 223;
 
-		/// <summary>
-		/// 碧鸡
-		/// </summary>
 		public const short ChickenLucky8 = 224;
 
-		/// <summary>
-		/// 梅林鸡
-		/// </summary>
 		public const short ChickenPerceptive0 = 225;
 
-		/// <summary>
-		/// 孙枝鸡
-		/// </summary>
 		public const short ChickenPerceptive1 = 226;
 
-		/// <summary>
-		/// 会稽公
-		/// </summary>
 		public const short ChickenPerceptive2 = 227;
 
-		/// <summary>
-		/// 五黑鸡
-		/// </summary>
 		public const short ChickenPerceptive3 = 228;
 
-		/// <summary>
-		/// 桃源鸡
-		/// </summary>
 		public const short ChickenPerceptive4 = 229;
 
-		/// <summary>
-		/// 胡须鸡
-		/// </summary>
 		public const short ChickenPerceptive5 = 230;
 
-		/// <summary>
-		/// 鹿苑鸡
-		/// </summary>
 		public const short ChickenPerceptive6 = 231;
 
-		/// <summary>
-		/// 峨眉黑鸡
-		/// </summary>
 		public const short ChickenPerceptive7 = 232;
 
-		/// <summary>
-		/// 烛夜
-		/// </summary>
 		public const short ChickenPerceptive8 = 233;
 
-		/// <summary>
-		/// 怀乡鸡
-		/// </summary>
 		public const short ChickenFirm0 = 234;
 
-		/// <summary>
-		/// 五灰鸡
-		/// </summary>
 		public const short ChickenFirm1 = 235;
 
-		/// <summary>
-		/// 茶花鸡
-		/// </summary>
 		public const short ChickenFirm2 = 236;
 
-		/// <summary>
-		/// 固始鸡
-		/// </summary>
 		public const short ChickenFirm3 = 237;
 
-		/// <summary>
-		/// 乌骨鸡
-		/// </summary>
 		public const short ChickenFirm4 = 238;
 
-		/// <summary>
-		/// 约瓦鸡
-		/// </summary>
 		public const short ChickenFirm5 = 239;
 
-		/// <summary>
-		/// 静宁鸡
-		/// </summary>
 		public const short ChickenFirm6 = 240;
 
-		/// <summary>
-		/// 黑凤鸡
-		/// </summary>
 		public const short ChickenFirm7 = 241;
 
-		/// <summary>
-		/// 长鸣都尉
-		/// </summary>
 		public const short ChickenFirm8 = 242;
 
-		/// <summary>
-		/// 略阳鸡
-		/// </summary>
 		public const short ChickenCalm0 = 243;
 
-		/// <summary>
-		/// 安南鸡
-		/// </summary>
 		public const short ChickenCalm1 = 244;
 
-		/// <summary>
-		/// 花尾
-		/// </summary>
 		public const short ChickenCalm2 = 245;
 
-		/// <summary>
-		/// 文昌鸡
-		/// </summary>
 		public const short ChickenCalm3 = 246;
 
-		/// <summary>
-		/// 雪鸡
-		/// </summary>
 		public const short ChickenCalm4 = 247;
 
-		/// <summary>
-		/// 白头黑鸡
-		/// </summary>
 		public const short ChickenCalm5 = 248;
 
-		/// <summary>
-		/// 六指鸡
-		/// </summary>
 		public const short ChickenCalm6 = 249;
 
-		/// <summary>
-		/// 五色鸡
-		/// </summary>
 		public const short ChickenCalm7 = 250;
 
-		/// <summary>
-		/// 七彩雉
-		/// </summary>
 		public const short ChickenCalm8 = 251;
 
-		/// <summary>
-		/// 封川鸡
-		/// </summary>
 		public const short ChickenEnthusiastic0 = 252;
 
-		/// <summary>
-		/// 海陵鸡
-		/// </summary>
 		public const short ChickenEnthusiastic1 = 253;
 
-		/// <summary>
-		/// 上谷鸡
-		/// </summary>
 		public const short ChickenEnthusiastic2 = 254;
 
-		/// <summary>
-		/// 宁都鸡
-		/// </summary>
 		public const short ChickenEnthusiastic3 = 255;
 
-		/// <summary>
-		/// 青州鸡
-		/// </summary>
 		public const short ChickenEnthusiastic4 = 256;
 
-		/// <summary>
-		/// 黔香鸡
-		/// </summary>
 		public const short ChickenEnthusiastic5 = 257;
 
-		/// <summary>
-		/// 招财鸡
-		/// </summary>
 		public const short ChickenEnthusiastic6 = 258;
 
-		/// <summary>
-		/// 越王鸡
-		/// </summary>
 		public const short ChickenEnthusiastic7 = 259;
 
-		/// <summary>
-		/// 金羽银耳
-		/// </summary>
 		public const short ChickenEnthusiastic8 = 260;
 
-		/// <summary>
-		/// 建宁鸡
-		/// </summary>
 		public const short ChickenBrave0 = 261;
 
-		/// <summary>
-		/// 云松鸡
-		/// </summary>
 		public const short ChickenBrave1 = 262;
 
-		/// <summary>
-		/// 突厥雀
-		/// </summary>
 		public const short ChickenBrave2 = 263;
 
-		/// <summary>
-		/// 九真鸡
-		/// </summary>
 		public const short ChickenBrave3 = 264;
 
-		/// <summary>
-		/// 长安鸡
-		/// </summary>
 		public const short ChickenBrave4 = 265;
 
-		/// <summary>
-		/// 昆仑鸡
-		/// </summary>
 		public const short ChickenBrave5 = 266;
 
-		/// <summary>
-		/// 金足鸡
-		/// </summary>
 		public const short ChickenBrave6 = 267;
 
-		/// <summary>
-		/// 鹖鸡
-		/// </summary>
 		public const short ChickenBrave7 = 268;
 
-		/// <summary>
-		/// 鶤鸡
-		/// </summary>
 		public const short ChickenBrave8 = 269;
 
-		/// <summary>
-		/// 太吾村民
-		/// </summary>
 		public const short TaiWuVillager = 270;
 
-		/// <summary>
-		/// 铜生头颅
-		/// </summary>
 		public const short HeadOfTongsheng = 271;
 
-		/// <summary>
-		/// 欧冶子
-		/// </summary>
 		public const short Ouyezi = 272;
 
-		/// <summary>
-		/// 天帝黑影
-		/// </summary>
 		public const short ShadowOfHeavenlyLord = 273;
 
-		/// <summary>
-		/// 铸剑弟子男
-		/// </summary>
 		public const short SectMainStoryZhujian1 = 274;
 
-		/// <summary>
-		/// 铸剑弟子女
-		/// </summary>
 		public const short SectMainStoryZhujian2 = 275;
 
-		/// <summary>
-		/// 老玄鸿匠
-		/// </summary>
 		public const short SectMainStoryZhujian3 = 276;
 
-		/// <summary>
-		/// 老百辟匠
-		/// </summary>
 		public const short SectMainStoryZhujian4 = 277;
 
-		/// <summary>
-		/// 老青君匠
-		/// </summary>
 		public const short SectMainStoryZhujian5 = 278;
 
-		/// <summary>
-		/// 古代匠人
-		/// </summary>
 		public const short SectMainStoryZhujian6 = 279;
 
-		/// <summary>
-		/// 通用门派弟子1
-		/// </summary>
 		public const short GeneralShaolinMember = 280;
 
-		/// <summary>
-		/// 通用门派弟子2
-		/// </summary>
 		public const short GeneralEmeiMember = 281;
 
-		/// <summary>
-		/// 通用门派弟子3
-		/// </summary>
 		public const short GeneraBaihuaMember = 282;
 
-		/// <summary>
-		/// 通用门派弟子4
-		/// </summary>
 		public const short GeneralWudangMember = 283;
 
-		/// <summary>
-		/// 通用门派弟子5
-		/// </summary>
 		public const short GeneralYuanshanMember = 284;
 
-		/// <summary>
-		/// 通用门派弟子6
-		/// </summary>
 		public const short GeneralShixiangMember = 285;
 
-		/// <summary>
-		/// 通用门派弟子7
-		/// </summary>
 		public const short GeneralRanshanMember = 286;
 
-		/// <summary>
-		/// 通用门派弟子8
-		/// </summary>
 		public const short GeneralXuannvMember = 287;
 
-		/// <summary>
-		/// 通用门派弟子9
-		/// </summary>
 		public const short GeneralZhujianMember = 288;
 
-		/// <summary>
-		/// 通用门派弟子10
-		/// </summary>
 		public const short GeneralKongsangMember = 289;
 
-		/// <summary>
-		/// 通用门派弟子11
-		/// </summary>
 		public const short GeneralJingangMember = 290;
 
-		/// <summary>
-		/// 通用门派弟子12
-		/// </summary>
 		public const short GeneralWuxianMember = 291;
 
-		/// <summary>
-		/// 通用门派弟子13
-		/// </summary>
 		public const short GeneralJieqingMember = 292;
 
-		/// <summary>
-		/// 通用门派弟子14
-		/// </summary>
 		public const short GeneralFulongMember = 293;
 
-		/// <summary>
-		/// 通用门派弟子15
-		/// </summary>
 		public const short GeneralXuehouMember = 294;
 
-		/// <summary>
-		/// 峨眉鹫鸟
-		/// </summary>
 		public const short RemakeEmeiJefferyi = 295;
 
-		/// <summary>
-		/// 元山路人1
-		/// </summary>
 		public const short SectMainStoryYuanshan1 = 296;
 
-		/// <summary>
-		/// 元山路人2
-		/// </summary>
 		public const short SectMainStoryYuanshan2 = 297;
 
-		/// <summary>
-		/// 元山路人3
-		/// </summary>
 		public const short SectMainStoryYuanshan3 = 298;
 
-		/// <summary>
-		/// 元山弟子1
-		/// </summary>
 		public const short SectMainStoryYuanshan4 = 299;
 
-		/// <summary>
-		/// 元山弟子2
-		/// </summary>
 		public const short SectMainStoryYuanshan5 = 300;
 
-		/// <summary>
-		/// 元山弟子3
-		/// </summary>
 		public const short SectMainStoryYuanshan6 = 301;
 
-		/// <summary>
-		/// 元山少女
-		/// </summary>
 		public const short SectMainStoryYuanshan7 = 302;
 
-		/// <summary>
-		/// 元山男子
-		/// </summary>
 		public const short SectMainStoryYuanshan8 = 303;
 
-		/// <summary>
-		/// 元山寨民
-		/// </summary>
 		public const short SectMainStoryYuanshan9 = 304;
 
-		/// <summary>
-		/// 元山侠士
-		/// </summary>
 		public const short SectMainStoryYuanshan10 = 305;
 
-		/// <summary>
-		/// 元山大夫
-		/// </summary>
 		public const short SectMainStoryYuanshan11 = 306;
 
-		/// <summary>
-		/// 元山长老幻影
-		/// </summary>
 		public const short SectMainStoryYuanshan12 = 307;
 
-		/// <summary>
-		/// 元山失心人
-		/// </summary>
 		public const short SectMainStoryYuanshan13 = 308;
 
-		/// <summary>
-		/// 元山隐退前辈
-		/// </summary>
 		public const short SectMainStoryYuanshan14 = 309;
 
-		/// <summary>
-		/// 元山第七代太吾男
-		/// </summary>
 		public const short SectMainStoryYuanshanSeven0 = 310;
 
-		/// <summary>
-		/// 元山第七代太吾女
-		/// </summary>
 		public const short SectMainStoryYuanshanSeven1 = 311;
 
-		/// <summary>
-		/// 武当主线婴孩
-		/// </summary>
 		public const short SectMainStoryWudangBaby = 312;
 
-		/// <summary>
-		/// 苒心毒蛊仙
-		/// </summary>
 		public const short SectMainStoryWuxianGuxian = 313;
 
-		/// <summary>
-		/// 店小二
-		/// </summary>
 		public const short SectMainStoryXuehouDianxiaoer = 314;
 
-		/// <summary>
-		/// 狮相主线飞狮堂旧部1
-		/// </summary>
 		public const short SectMainStoryShixiangFeishi1 = 315;
 
-		/// <summary>
-		/// 狮相主线飞狮堂旧部2
-		/// </summary>
 		public const short SectMainStoryShixiangFeishi2 = 316;
 
-		/// <summary>
-		/// 狮相主线飞狮堂旧部3
-		/// </summary>
 		public const short SectMainStoryShixiangFeishi3 = 317;
 
-		/// <summary>
-		/// 说书人
-		/// </summary>
 		public const short SectMainStoryYuanshanShuoshuren = 318;
 
-		/// <summary>
-		/// 然山主线然山魂灵1
-		/// </summary>
 		public const short SectMainStoryRanshanGhost1 = 319;
 
-		/// <summary>
-		/// 然山主线然山魂灵2
-		/// </summary>
 		public const short SectMainStoryRanshanGhost2 = 320;
 
-		/// <summary>
-		/// 然山主线然山魂灵3
-		/// </summary>
 		public const short SectMainStoryRanshanGhost3 = 321;
 
-		/// <summary>
-		/// 信使
-		/// </summary>
 		public const short Messenger = 322;
 
-		/// <summary>
-		/// 徐仙公人形
-		/// </summary>
 		public const short MainStoryHumanImmortalXu = 323;
 
-		/// <summary>
-		/// 神火化世剪影
-		/// </summary>
 		public const short MainStoryPureFireShadow = 324;
 
-		/// <summary>
-		/// 黑焰焚尘剪影
-		/// </summary>
 		public const short MainStoryEvilShadow = 325;
 
-		/// <summary>
-		/// 小铁匠剪影
-		/// </summary>
 		public const short MainStoryBlackSmithShadow = 326;
 
-		/// <summary>
-		/// 主线仙公寻仙方士
-		/// </summary>
 		public const short MainStoryAlchemist = 327;
 
-		/// <summary>
-		/// 主线邪魔线盘古
-		/// </summary>
 		public const short MainStoryPangu = 329;
 
-		/// <summary>
-		/// 主线邪魔线天帝
-		/// </summary>
 		public const short MainStoryTiandi = 330;
 
-		/// <summary>
-		/// 主线邪魔线伏羲0
-		/// </summary>
 		public const short MainStoryFuxi0 = 331;
 
-		/// <summary>
-		/// 主线邪魔线伏羲1
-		/// </summary>
 		public const short MainStoryFuxi1 = 332;
 
-		/// <summary>
-		/// 主线邪魔线女娲0
-		/// </summary>
 		public const short MainStoryNvwa0 = 333;
 
-		/// <summary>
-		/// 主线邪魔线女娲1
-		/// </summary>
 		public const short MainStoryNvwa1 = 334;
 
-		/// <summary>
-		/// 主线邪魔线相枢
-		/// </summary>
 		public const short MainStoryXiangshu = 335;
 
-		/// <summary>
-		/// 主线神火线大岳巨剑
-		/// </summary>
 		public const short MainStoryDivineflameDayueSword = 336;
 
-		/// <summary>
-		/// 主线神火线龙魂
-		/// </summary>
 		public const short MainStoryDivineflameLonghun = 337;
 
-		/// <summary>
-		/// 主线神火线雪山女神
-		/// </summary>
 		public const short MainStoryDivineflameXueshannvshen = 338;
 
-		/// <summary>
-		/// 主线神火线雪女青绫
-		/// </summary>
 		public const short MainStoryDivineflameXuenvQingling = 339;
 
-		/// <summary>
-		/// 主线神火线丑狐
-		/// </summary>
 		public const short MainStoryDivineflameChouhu = 340;
 
-		/// <summary>
-		/// 主线神火线都斋父
-		/// </summary>
 		public const short MainStoryDivineflameDuzhaifu = 341;
 
-		/// <summary>
-		/// 主线神火线建木灵
-		/// </summary>
 		public const short MainStoryDivineflameJianmuling = 342;
 
-		/// <summary>
-		/// 主线神火线圣人
-		/// </summary>
 		public const short MainStoryDivineflameShengren = 343;
 
-		/// <summary>
-		/// 主线神火线皇顾伯
-		/// </summary>
 		public const short MainStoryDivineflameHuanggubo = 344;
 
-		/// <summary>
-		/// 主线神火线皇顾伯女子形态
-		/// </summary>
 		public const short MainStoryDivineflameHuanggubonvzixingtai = 345;
 
-		/// <summary>
-		/// 主线神火线莫女小鸟
-		/// </summary>
 		public const short MainStoryDivineflameMonvxiaoniao = 346;
 
-		/// <summary>
-		/// 界青主线自戕老者
-		/// </summary>
 		public const short SectMainStoryJieqingOldman = 347;
 
-		/// <summary>
-		/// 界青主线白大善人
-		/// </summary>
 		public const short SectMainStoryJieqingBai = 348;
 
-		/// <summary>
-		/// 界青主线界青门人1
-		/// </summary>
 		public const short SectMainStoryJieqing1 = 349;
 
-		/// <summary>
-		/// 界青主线界青门人2
-		/// </summary>
 		public const short SectMainStoryJieqing2 = 350;
 
-		/// <summary>
-		/// 界青主线界青门人3
-		/// </summary>
 		public const short SectMainStoryJieqing3 = 351;
 
-		/// <summary>
-		/// 界青主线界青门人4
-		/// </summary>
 		public const short SectMainStoryJieqing4 = 352;
 
-		/// <summary>
-		/// 界青主线武当弟子1
-		/// </summary>
 		public const short SectMainStoryJieqingWudang1 = 353;
 
-		/// <summary>
-		/// 界青主线武当弟子2
-		/// </summary>
 		public const short SectMainStoryJieqingWudang2 = 354;
 
-		/// <summary>
-		/// 界青代理暗主
-		/// </summary>
 		public const short JieqingActingHead = 355;
 
-		/// <summary>
-		/// 主线神火线蚩尤
-		/// </summary>
 		public const short MainStoryDivineflameChiyou = 356;
 
-		/// <summary>
-		/// 主线后续江湖隐士
-		/// </summary>
 		public const short MainStoryJianghuHermit = 363;
 
-		/// <summary>
-		/// 主线后续心念化身
-		/// </summary>
 		public const short MainStoryMindAvatar = 364;
 
-		/// <summary>
-		/// 主线后续小道童
-		/// </summary>
 		public const short MainStoryLittleTaoist = 365;
 
-		/// <summary>
-		/// 主线神火线雏鸟金凰儿
-		/// </summary>
 		public const short MainStoryDivineflameChuniaojinhuanger = 366;
 
-		/// <summary>
-		/// 峨眉主线江湖侠客
-		/// </summary>
 		public const short SectMainStoryEmeiXiake1 = 367;
 
-		/// <summary>
-		/// 峨眉主线巴蜀侠客
-		/// </summary>
 		public const short SectMainStoryEmeiXiake2 = 368;
 
-		/// <summary>
-		/// 峨眉主线代理掌门
-		/// </summary>
 		public const short SectMainStoryEmeiActingHead = 369;
 
-		/// <summary>
-		/// 峨眉主线出逃弟子
-		/// </summary>
 		public const short SectMainStoryEmeiEscapeMember = 370;
 
-		/// <summary>
-		/// 峨眉主线嬉闹孩童
-		/// </summary>
 		public const short SectMainStoryEmeiPlayingKid = 371;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 恶人谷少年
-		/// </summary>
 		public static EventActorsItem NestBoy => Instance[(short)0];
 
-		/// <summary>
-		/// 恶人谷少女
-		/// </summary>
 		public static EventActorsItem NestGirl => Instance[(short)1];
 
-		/// <summary>
-		/// 恶人谷幼童
-		/// </summary>
 		public static EventActorsItem NestChild => Instance[(short)2];
 
-		/// <summary>
-		/// 恶人谷女子
-		/// </summary>
 		public static EventActorsItem NestWoman => Instance[(short)3];
 
-		/// <summary>
-		/// 迷香阵妻子
-		/// </summary>
 		public static EventActorsItem LostWife => Instance[(short)4];
 
-		/// <summary>
-		/// 迷香阵孩子1
-		/// </summary>
 		public static EventActorsItem LostChildMine => Instance[(short)5];
 
-		/// <summary>
-		/// 迷香阵丈夫
-		/// </summary>
 		public static EventActorsItem LostHusband => Instance[(short)6];
 
-		/// <summary>
-		/// 迷香阵婆婆
-		/// </summary>
 		public static EventActorsItem LostHusMom => Instance[(short)7];
 
-		/// <summary>
-		/// 迷香阵孩子2
-		/// </summary>
 		public static EventActorsItem LostChildHis => Instance[(short)8];
 
-		/// <summary>
-		/// 迷香阵路人1
-		/// </summary>
 		public static EventActorsItem PassByMan => Instance[(short)9];
 
-		/// <summary>
-		/// 迷香阵路人2
-		/// </summary>
 		public static EventActorsItem PassByWoman => Instance[(short)10];
 
-		/// <summary>
-		/// 邪人死地援兵1
-		/// </summary>
 		public static EventActorsItem HelperShaolin => Instance[(short)11];
 
-		/// <summary>
-		/// 邪人死地援兵2
-		/// </summary>
 		public static EventActorsItem HelperEmei => Instance[(short)12];
 
-		/// <summary>
-		/// 邪人死地援兵3
-		/// </summary>
 		public static EventActorsItem HelperBaihua => Instance[(short)13];
 
-		/// <summary>
-		/// 邪人死地援兵4
-		/// </summary>
 		public static EventActorsItem HelperWudang => Instance[(short)14];
 
-		/// <summary>
-		/// 邪人死地援兵5
-		/// </summary>
 		public static EventActorsItem HelperYuanshan => Instance[(short)15];
 
-		/// <summary>
-		/// 邪人死地援兵6
-		/// </summary>
 		public static EventActorsItem HelperShixiang => Instance[(short)16];
 
-		/// <summary>
-		/// 邪人死地援兵7
-		/// </summary>
 		public static EventActorsItem HelperRanshan => Instance[(short)17];
 
-		/// <summary>
-		/// 邪人死地援兵8
-		/// </summary>
 		public static EventActorsItem HelperXuannv => Instance[(short)18];
 
-		/// <summary>
-		/// 邪人死地援兵9
-		/// </summary>
 		public static EventActorsItem HelperZhujian => Instance[(short)19];
 
-		/// <summary>
-		/// 邪人死地援兵10
-		/// </summary>
 		public static EventActorsItem HelperKongsang => Instance[(short)20];
 
-		/// <summary>
-		/// 邪人死地援兵11
-		/// </summary>
 		public static EventActorsItem HelperJingang => Instance[(short)21];
 
-		/// <summary>
-		/// 邪人死地援兵12
-		/// </summary>
 		public static EventActorsItem HelperWuxian => Instance[(short)22];
 
-		/// <summary>
-		/// 邪人死地援兵13
-		/// </summary>
 		public static EventActorsItem HelperJieqing => Instance[(short)23];
 
-		/// <summary>
-		/// 邪人死地援兵14
-		/// </summary>
 		public static EventActorsItem HelperFulong => Instance[(short)24];
 
-		/// <summary>
-		/// 邪人死地援兵15
-		/// </summary>
 		public static EventActorsItem HelperXuehou => Instance[(short)25];
 
-		/// <summary>
-		/// 邪窍花误服毒的路人
-		/// </summary>
 		public static EventActorsItem PoisonPassBy => Instance[(short)26];
 
-		/// <summary>
-		/// 人面曼陀罗公主
-		/// </summary>
 		public static EventActorsItem PoisonPrincess => Instance[(short)27];
 
-		/// <summary>
-		/// 人面曼陀罗老者
-		/// </summary>
 		public static EventActorsItem PoisonOld => Instance[(short)28];
 
-		/// <summary>
-		/// 人面曼陀罗病人
-		/// </summary>
 		public static EventActorsItem PoisonSick => Instance[(short)29];
 
-		/// <summary>
-		/// 人面曼陀罗樵夫
-		/// </summary>
 		public static EventActorsItem PoisonCutter => Instance[(short)30];
 
-		/// <summary>
-		/// 人面曼陀罗少年
-		/// </summary>
 		public static EventActorsItem PoisonBoy => Instance[(short)31];
 
-		/// <summary>
-		/// 招亲通用仆从
-		/// </summary>
 		public static EventActorsItem MarriageServant => Instance[(short)32];
 
-		/// <summary>
-		/// 招亲京城长辈1
-		/// </summary>
 		public static EventActorsItem MarriageOldMan => Instance[(short)33];
 
-		/// <summary>
-		/// 招亲京城长辈2
-		/// </summary>
 		public static EventActorsItem MarriageOldWoman => Instance[(short)34];
 
-		/// <summary>
-		/// 招亲京城族弟
-		/// </summary>
 		public static EventActorsItem MarriageBrother => Instance[(short)35];
 
-		/// <summary>
-		/// 招亲京城族妹
-		/// </summary>
 		public static EventActorsItem MarriageSister => Instance[(short)36];
 
-		/// <summary>
-		/// 招亲京城恶仆
-		/// </summary>
 		public static EventActorsItem MarriageEServant => Instance[(short)37];
 
-		/// <summary>
-		/// 招亲成都翠娥
-		/// </summary>
 		public static EventActorsItem MarriageCuiE => Instance[(short)38];
 
-		/// <summary>
-		/// 招亲辽阳牧民
-		/// </summary>
 		public static EventActorsItem MarriageHerdsman => Instance[(short)39];
 
-		/// <summary>
-		/// 招亲大理引路人
-		/// </summary>
 		public static EventActorsItem MarriageGuide => Instance[(short)40];
 
-		/// <summary>
-		/// 招亲福州家主
-		/// </summary>
 		public static EventActorsItem MarriageFamilyHolder => Instance[(short)41];
 
-		/// <summary>
-		/// 招亲福州巫者
-		/// </summary>
 		public static EventActorsItem MarriageWizard => Instance[(short)42];
 
-		/// <summary>
-		/// 招亲福州盗物之人
-		/// </summary>
 		public static EventActorsItem MarriageStoler => Instance[(short)43];
 
-		/// <summary>
-		/// 招亲福州恩人
-		/// </summary>
 		public static EventActorsItem MarriageGoodPerson => Instance[(short)44];
 
-		/// <summary>
-		/// 招亲福州仇敌
-		/// </summary>
 		public static EventActorsItem MarriageBadPerson => Instance[(short)45];
 
-		/// <summary>
-		/// 招亲福州妇人
-		/// </summary>
 		public static EventActorsItem MarriageWoman => Instance[(short)46];
 
-		/// <summary>
-		/// 招亲福州孩童
-		/// </summary>
 		public static EventActorsItem MarriageChild => Instance[(short)47];
 
-		/// <summary>
-		/// 招亲寿春长辈
-		/// </summary>
 		public static EventActorsItem MarriageHunterOld => Instance[(short)48];
 
-		/// <summary>
-		/// 招亲扬州贵人
-		/// </summary>
 		public static EventActorsItem MarriageNobleWoman => Instance[(short)49];
 
-		/// <summary>
-		/// 招亲青州老者
-		/// </summary>
 		public static EventActorsItem MarriageMoonOld => Instance[(short)50];
 
-		/// <summary>
-		/// 招亲青州算命先生
-		/// </summary>
 		public static EventActorsItem MarriageTeller => Instance[(short)51];
 
-		/// <summary>
-		/// 招亲青州红娘1
-		/// </summary>
 		public static EventActorsItem MarriageMakerLow => Instance[(short)52];
 
-		/// <summary>
-		/// 招亲青州红娘2
-		/// </summary>
 		public static EventActorsItem MarriageMakerMiddle => Instance[(short)53];
 
-		/// <summary>
-		/// 招亲青州红娘3
-		/// </summary>
 		public static EventActorsItem MarriageMakerHigh => Instance[(short)54];
 
-		/// <summary>
-		/// 招亲秦州骆驼商队
-		/// </summary>
 		public static EventActorsItem MarriageCambel => Instance[(short)55];
 
-		/// <summary>
-		/// 招亲江陵管家
-		/// </summary>
 		public static EventActorsItem MarriageEvenKeeper => Instance[(short)56];
 
-		/// <summary>
-		/// 招亲江陵家仆1
-		/// </summary>
 		public static EventActorsItem MarriageJustKeeper => Instance[(short)57];
 
-		/// <summary>
-		/// 招亲江陵家仆2
-		/// </summary>
 		public static EventActorsItem MarriageKindKeeper => Instance[(short)58];
 
-		/// <summary>
-		/// 招亲江陵家仆3
-		/// </summary>
 		public static EventActorsItem MarriageRebelKeeper => Instance[(short)59];
 
-		/// <summary>
-		/// 招亲江陵家仆4
-		/// </summary>
 		public static EventActorsItem MarriageGoisticKeeper => Instance[(short)60];
 
-		/// <summary>
-		/// 招亲桂州当地人
-		/// </summary>
 		public static EventActorsItem MarriageLocal => Instance[(short)61];
 
-		/// <summary>
-		/// 拜访引导弟子少林
-		/// </summary>
 		public static EventActorsItem SectGuideShaolin => Instance[(short)62];
 
-		/// <summary>
-		/// 拜访引导弟子峨眉
-		/// </summary>
 		public static EventActorsItem SectGuideEmei => Instance[(short)63];
 
-		/// <summary>
-		/// 拜访引导弟子百花
-		/// </summary>
 		public static EventActorsItem SectGuideBaihua => Instance[(short)64];
 
-		/// <summary>
-		/// 拜访引导弟子武当
-		/// </summary>
 		public static EventActorsItem SectGuideWudang => Instance[(short)65];
 
-		/// <summary>
-		/// 拜访引导弟子元山
-		/// </summary>
 		public static EventActorsItem SectGuideYuanshan => Instance[(short)66];
 
-		/// <summary>
-		/// 拜访引导弟子狮相
-		/// </summary>
 		public static EventActorsItem SectGuideShixiang => Instance[(short)67];
 
-		/// <summary>
-		/// 拜访引导弟子然山
-		/// </summary>
 		public static EventActorsItem SectGuideRanshan => Instance[(short)68];
 
-		/// <summary>
-		/// 拜访引导弟子璇女
-		/// </summary>
 		public static EventActorsItem SectGuideXuannv => Instance[(short)69];
 
-		/// <summary>
-		/// 拜访引导弟子铸剑
-		/// </summary>
 		public static EventActorsItem SectGuideZhujian => Instance[(short)70];
 
-		/// <summary>
-		/// 拜访引导弟子空桑
-		/// </summary>
 		public static EventActorsItem SectGuideKongsang => Instance[(short)71];
 
-		/// <summary>
-		/// 拜访引导弟子金刚
-		/// </summary>
 		public static EventActorsItem SectGuideJingang => Instance[(short)72];
 
-		/// <summary>
-		/// 拜访引导弟子五仙
-		/// </summary>
 		public static EventActorsItem SectGuideWuxian => Instance[(short)73];
 
-		/// <summary>
-		/// 拜访引导弟子界青
-		/// </summary>
 		public static EventActorsItem SectGuideJieqing => Instance[(short)74];
 
-		/// <summary>
-		/// 拜访引导弟子伏龙
-		/// </summary>
 		public static EventActorsItem SectGuideFulong => Instance[(short)75];
 
-		/// <summary>
-		/// 拜访引导弟子血犼
-		/// </summary>
 		public static EventActorsItem SectGuideXuehou => Instance[(short)76];
 
-		/// <summary>
-		/// 建筑引导弟子铸剑
-		/// </summary>
 		public static EventActorsItem BuildingGuideZhujian => Instance[(short)77];
 
-		/// <summary>
-		/// 女版招亲婢女
-		/// </summary>
 		public static EventActorsItem MarriageMaid => Instance[(short)78];
 
-		/// <summary>
-		/// 江湖人士
-		/// </summary>
 		public static EventActorsItem JianghuActor => Instance[(short)79];
 
-		/// <summary>
-		/// 文山书海阁演员
-		/// </summary>
 		public static EventActorsItem BookShopActor => Instance[(short)80];
 
-		/// <summary>
-		/// 大武魁商号演员
-		/// </summary>
 		public static EventActorsItem WeaponShopActor => Instance[(short)81];
 
-		/// <summary>
-		/// 奇货斋演员
-		/// </summary>
 		public static EventActorsItem AccessoryShopActor => Instance[(short)82];
 
-		/// <summary>
-		/// 公输坊演员
-		/// </summary>
 		public static EventActorsItem ConstructionShopActor => Instance[(short)83];
 
-		/// <summary>
-		/// 五湖商会演员
-		/// </summary>
 		public static EventActorsItem MaterialShopActor => Instance[(short)84];
 
-		/// <summary>
-		/// 服牛帮演员
-		/// </summary>
 		public static EventActorsItem FoodShopActor => Instance[(short)85];
 
-		/// <summary>
-		/// 促织大会接引人
-		/// </summary>
 		public static EventActorsItem CricketConferenceGuide => Instance[(short)86];
 
-		/// <summary>
-		/// 促织商人
-		/// </summary>
 		public static EventActorsItem CricketBusinessman => Instance[(short)87];
 
-		/// <summary>
-		/// 促织主持人
-		/// </summary>
 		public static EventActorsItem CricketOldMan => Instance[(short)88];
 
-		/// <summary>
-		/// 任侠会盟弟子少林
-		/// </summary>
 		public static EventActorsItem SectSickShaolin => Instance[(short)89];
 
-		/// <summary>
-		/// 任侠会盟弟子峨眉
-		/// </summary>
 		public static EventActorsItem SectSickEmei => Instance[(short)90];
 
-		/// <summary>
-		/// 任侠会盟弟子百花
-		/// </summary>
 		public static EventActorsItem SectSickBaihua => Instance[(short)91];
 
-		/// <summary>
-		/// 任侠会盟弟子武当
-		/// </summary>
 		public static EventActorsItem SectSickWudang => Instance[(short)92];
 
-		/// <summary>
-		/// 任侠会盟弟子元山
-		/// </summary>
 		public static EventActorsItem SectSickYuanshan => Instance[(short)93];
 
-		/// <summary>
-		/// 任侠会盟弟子狮相
-		/// </summary>
 		public static EventActorsItem SectSickShixiang => Instance[(short)94];
 
-		/// <summary>
-		/// 任侠会盟弟子然山
-		/// </summary>
 		public static EventActorsItem SectSickRanshan => Instance[(short)95];
 
-		/// <summary>
-		/// 任侠会盟弟子璇女
-		/// </summary>
 		public static EventActorsItem SectSickXuannv => Instance[(short)96];
 
-		/// <summary>
-		/// 任侠会盟弟子铸剑
-		/// </summary>
 		public static EventActorsItem SectSickZhujian => Instance[(short)97];
 
-		/// <summary>
-		/// 任侠会盟弟子空桑
-		/// </summary>
 		public static EventActorsItem SectSickKongsang => Instance[(short)98];
 
-		/// <summary>
-		/// 任侠会盟弟子金刚
-		/// </summary>
 		public static EventActorsItem SectSickJingang => Instance[(short)99];
 
-		/// <summary>
-		/// 任侠会盟弟子五仙
-		/// </summary>
 		public static EventActorsItem SectSickWuxian => Instance[(short)100];
 
-		/// <summary>
-		/// 任侠会盟弟子界青
-		/// </summary>
 		public static EventActorsItem SectSickJieqing => Instance[(short)101];
 
-		/// <summary>
-		/// 任侠会盟弟子伏龙
-		/// </summary>
 		public static EventActorsItem SectSickFulong => Instance[(short)102];
 
-		/// <summary>
-		/// 任侠会盟弟子血犼
-		/// </summary>
 		public static EventActorsItem SectSickXuehou => Instance[(short)103];
 
-		/// <summary>
-		/// 乞丐
-		/// </summary>
 		public static EventActorsItem Beggar => Instance[(short)104];
 
-		/// <summary>
-		/// 空桑主线高阶弟子
-		/// </summary>
 		public static EventActorsItem SectMainStoryKongsang => Instance[(short)105];
 
-		/// <summary>
-		/// 璇女主线搭话弟子
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuannv => Instance[(short)106];
 
-		/// <summary>
-		/// 少林主线老和尚
-		/// </summary>
 		public static EventActorsItem SectMainStoryShaolin0 => Instance[(short)107];
 
-		/// <summary>
-		/// 少林主线小和尚
-		/// </summary>
 		public static EventActorsItem SectMainStoryShaolin1 => Instance[(short)108];
 
-		/// <summary>
-		/// 少林升级互动长老
-		/// </summary>
 		public static EventActorsItem SectMainStoryShaolin3 => Instance[(short)328];
 
-		/// <summary>
-		/// 血犼主线扬州路人
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuehou0 => Instance[(short)109];
 
-		/// <summary>
-		/// 血犼主线小山猪
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuehou1 => Instance[(short)110];
 
-		/// <summary>
-		/// 武当主线樵夫
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang1 => Instance[(short)111];
 
-		/// <summary>
-		/// 武当主线老翁1
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang2 => Instance[(short)112];
 
-		/// <summary>
-		/// 武当主线少女
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang3 => Instance[(short)113];
 
-		/// <summary>
-		/// 武当主线隐士
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang4 => Instance[(short)114];
 
-		/// <summary>
-		/// 武当主线孩童
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang5 => Instance[(short)115];
 
-		/// <summary>
-		/// 武当主线老农
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang6 => Instance[(short)116];
 
-		/// <summary>
-		/// 武当主线老翁2
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang7 => Instance[(short)117];
 
-		/// <summary>
-		/// 武当主线妇人
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang8 => Instance[(short)118];
 
-		/// <summary>
-		/// 武当主线道人
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang9 => Instance[(short)119];
 
-		/// <summary>
-		/// 武当主线老翁3
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang10 => Instance[(short)120];
 
-		/// <summary>
-		/// 血犼主线村民1
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuehou2 => Instance[(short)121];
 
-		/// <summary>
-		/// 血犼主线村民2
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuehou3 => Instance[(short)122];
 
-		/// <summary>
-		/// 血犼主线村民3
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuehou4 => Instance[(short)123];
 
-		/// <summary>
-		/// 然山主线三宗祖师
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan => Instance[(short)124];
 
-		/// <summary>
-		/// 武当主线云游道士
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudang11 => Instance[(short)125];
 
-		/// <summary>
-		/// 狮相门主线农夫
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiang1 => Instance[(short)126];
 
-		/// <summary>
-		/// 狮相门主线妇人
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiang2 => Instance[(short)127];
 
-		/// <summary>
-		/// 空桑代理掌门
-		/// </summary>
 		public static EventActorsItem SectMainStoryKongsangActingHead => Instance[(short)128];
 
-		/// <summary>
-		/// 少林修塔和尚
-		/// </summary>
 		public static EventActorsItem SectMainStoryShaolin2 => Instance[(short)129];
 
-		/// <summary>
-		/// 狮相主线文人
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiang3 => Instance[(short)130];
 
-		/// <summary>
-		/// 狮相主线叛徒
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiang4 => Instance[(short)131];
 
-		/// <summary>
-		/// 狮相主线异族高手
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiang5 => Instance[(short)132];
 
-		/// <summary>
-		/// 武当主线城主
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudangChengzhu => Instance[(short)133];
 
-		/// <summary>
-		/// 武当主线旅者
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudangTraveller => Instance[(short)134];
 
-		/// <summary>
-		/// 武当主线酒徒
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudangDrunkard => Instance[(short)135];
 
-		/// <summary>
-		/// 武当主线小道长
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudangLittleTaoistMonk => Instance[(short)136];
 
-		/// <summary>
-		/// 武当主线武当鸭
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudangDuck => Instance[(short)137];
 
-		/// <summary>
-		/// 璇女主线过路神医
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuannv1 => Instance[(short)138];
 
-		/// <summary>
-		/// 璇女主线青鸾家仆
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuannv2 => Instance[(short)139];
 
-		/// <summary>
-		/// 峨眉主线弟子甲
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei0 => Instance[(short)140];
 
-		/// <summary>
-		/// 峨眉主线弟子乙
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei1 => Instance[(short)141];
 
-		/// <summary>
-		/// 峨眉主线弟子丙
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei2 => Instance[(short)142];
 
-		/// <summary>
-		/// 峨眉主线弟子丁
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei3 => Instance[(short)143];
 
-		/// <summary>
-		/// 峨眉主线弟子戊
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei4 => Instance[(short)144];
 
-		/// <summary>
-		/// 峨眉主线弟子己
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei5 => Instance[(short)145];
 
-		/// <summary>
-		/// 峨眉主线弟子庚
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei6 => Instance[(short)146];
 
-		/// <summary>
-		/// 峨眉主线弟子辛
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmei7 => Instance[(short)147];
 
-		/// <summary>
-		/// 璇女主线天女虚影
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuannvShadowOfMirror => Instance[(short)148];
 
-		/// <summary>
-		/// 峨眉白猿黑影
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmeiGibbonShadow => Instance[(short)149];
 
-		/// <summary>
-		/// 峨眉长老假扮黑衣人
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmeiShadows => Instance[(short)150];
 
-		/// <summary>
-		/// 璇女主线女童
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuannvGirl => Instance[(short)151];
 
-		/// <summary>
-		/// 梦回巨大黑影
-		/// </summary>
 		public static EventActorsItem CrossArchiveShadow => Instance[(short)152];
 
-		/// <summary>
-		/// 梦回神秘匠人
-		/// </summary>
 		public static EventActorsItem CrossArchiveArchitect => Instance[(short)153];
 
-		/// <summary>
-		/// 豢龙氏哥哥
-		/// </summary>
 		public static EventActorsItem DLCLoongKeeperBrother => Instance[(short)154];
 
-		/// <summary>
-		/// 豢龙氏妹妹
-		/// </summary>
 		public static EventActorsItem DLCLoongKeeperSister => Instance[(short)155];
 
-		/// <summary>
-		/// 雾中少女
-		/// </summary>
 		public static EventActorsItem SectMainStoryWuxianGirlInMist => Instance[(short)156];
 
-		/// <summary>
-		/// 金刚主线昆仑山居民
-		/// </summary>
 		public static EventActorsItem SectMainStoryJingangResident => Instance[(short)157];
 
-		/// <summary>
-		/// 金刚主线驱邪村民
-		/// </summary>
 		public static EventActorsItem SectMainStoryJingangExorcist => Instance[(short)158];
 
-		/// <summary>
-		/// 金刚鬼影僧人
-		/// </summary>
 		public static EventActorsItem SectMainStoryJingangGhost => Instance[(short)159];
 
-		/// <summary>
-		/// 金刚高僧魂灵
-		/// </summary>
 		public static EventActorsItem SectMainStoryJingangSoul => Instance[(short)160];
 
-		/// <summary>
-		/// 五仙主线婆婆
-		/// </summary>
 		public static EventActorsItem SectMainStoryWuxianGrandma => Instance[(short)161];
 
-		/// <summary>
-		/// 五仙主线苗妇
-		/// </summary>
 		public static EventActorsItem SectMainStoryWuxianLady => Instance[(short)162];
 
-		/// <summary>
-		/// 五仙主线少女
-		/// </summary>
 		public static EventActorsItem SectMainStoryWuxianTeenager => Instance[(short)163];
 
-		/// <summary>
-		/// 五仙主线青年
-		/// </summary>
 		public static EventActorsItem SectMainStoryWuxianYouth => Instance[(short)164];
 
-		/// <summary>
-		/// 五仙主线老者
-		/// </summary>
 		public static EventActorsItem SectMainStoryWuxianPoisonOld => Instance[(short)165];
 
-		/// <summary>
-		/// 然山主线山下弟子
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan0 => Instance[(short)166];
 
-		/// <summary>
-		/// 然山主线山下小童1
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan1 => Instance[(short)167];
 
-		/// <summary>
-		/// 然山主线山下小童2
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan2 => Instance[(short)168];
 
-		/// <summary>
-		/// 然山主线山下小童3
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan3 => Instance[(short)169];
 
-		/// <summary>
-		/// 然山主线上山弟子
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan4 => Instance[(short)170];
 
-		/// <summary>
-		/// 然山主线奇遇弟子
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan5 => Instance[(short)171];
 
-		/// <summary>
-		/// 然山主线雾中弟子1
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan6 => Instance[(short)172];
 
-		/// <summary>
-		/// 然山主线雾中弟子2
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan7 => Instance[(short)173];
 
-		/// <summary>
-		/// 然山主线雾中小童
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan8 => Instance[(short)174];
 
-		/// <summary>
-		/// 然山主线雾中弟子3
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan9 => Instance[(short)175];
 
-		/// <summary>
-		/// 然山主线雾中船夫
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan10 => Instance[(short)176];
 
-		/// <summary>
-		/// 百花主线村中守卫0
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaGuard0 => Instance[(short)177];
 
-		/// <summary>
-		/// 百花主线村中守卫1
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaGuard1 => Instance[(short)178];
 
-		/// <summary>
-		/// 百花主线冯青剪影
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaShadowFengqing => Instance[(short)179];
 
-		/// <summary>
-		/// 百花主线焕心剪影
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaShadowHuanxin => Instance[(short)180];
 
-		/// <summary>
-		/// 百花主线相枢剪影
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaShadowXiangshu => Instance[(short)181];
 
-		/// <summary>
-		/// 百花主线无名之人男剪影
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaShadowAnonymMale => Instance[(short)182];
 
-		/// <summary>
-		/// 百花主线无名之人女剪影
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaShadowAnonymFemale => Instance[(short)183];
 
-		/// <summary>
-		/// 百花主线冯青
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaFengqing => Instance[(short)184];
 
-		/// <summary>
-		/// 百花主线无名之人男解脱
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaAnonymMaleRelieved => Instance[(short)185];
 
-		/// <summary>
-		/// 百花主线无名之人女解脱
-		/// </summary>
 		public static EventActorsItem SectMainStoryBaihuaAnonymFemaleRelieved => Instance[(short)186];
 
-		/// <summary>
-		/// 百花主线无名之人男
-		/// </summary>
 		public static EventActorsItem SectMainStoryAnonymMale => Instance[(short)187];
 
-		/// <summary>
-		/// 百花主线无名之人女
-		/// </summary>
 		public static EventActorsItem SectMainStoryAnonymFemale => Instance[(short)188];
 
-		/// <summary>
-		/// 然山主线通用莽汉
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan11 => Instance[(short)189];
 
-		/// <summary>
-		/// 然山主线通用妇人
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan12 => Instance[(short)190];
 
-		/// <summary>
-		/// 然山主线通用文人
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan13 => Instance[(short)191];
 
-		/// <summary>
-		/// 然山主线通用商人
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan14 => Instance[(short)192];
 
-		/// <summary>
-		/// 然山主线通用手艺人
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan15 => Instance[(short)193];
 
-		/// <summary>
-		/// 然山主线雾中老者
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan16 => Instance[(short)194];
 
-		/// <summary>
-		/// 然山主线华居线老书生
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan17 => Instance[(short)195];
 
-		/// <summary>
-		/// 然山主线玄质线师姐
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan18 => Instance[(short)196];
 
-		/// <summary>
-		/// 然山主线迎娇线少女
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan19 => Instance[(short)197];
 
-		/// <summary>
-		/// 然山主线迎娇线书生
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan20 => Instance[(short)198];
 
-		/// <summary>
-		/// 然山主线迎娇线妇人
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan21 => Instance[(short)199];
 
-		/// <summary>
-		/// 然山主线迎娇线男子
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan22 => Instance[(short)200];
 
-		/// <summary>
-		/// 然山迎娇线幻觉少女
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan23 => Instance[(short)201];
 
-		/// <summary>
-		/// 然山迎娇线幻觉少年
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan24 => Instance[(short)202];
 
-		/// <summary>
-		/// 然山主线丑陋妇人
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshan25 => Instance[(short)203];
 
-		/// <summary>
-		/// 伏龙主线伏龙使者
-		/// </summary>
 		public static EventActorsItem SectMainStoryFulongUsher => Instance[(short)204];
 
-		/// <summary>
-		/// 伏龙主线蒙面女子
-		/// </summary>
 		public static EventActorsItem SectMainStoryFulongMaskedWoman => Instance[(short)205];
 
-		/// <summary>
-		/// 伏龙主线琉璃本体
-		/// </summary>
 		public static EventActorsItem SectMainStoryFulongLazuliForm => Instance[(short)206];
 
-		/// <summary>
-		/// 芦花鸡
-		/// </summary>
 		public static EventActorsItem ChickenClever0 => Instance[(short)207];
 
-		/// <summary>
-		/// 麻鸡
-		/// </summary>
 		public static EventActorsItem ChickenClever1 => Instance[(short)208];
 
-		/// <summary>
-		/// 雉鸡
-		/// </summary>
 		public static EventActorsItem ChickenClever2 => Instance[(short)209];
 
-		/// <summary>
-		/// 竹鸡
-		/// </summary>
 		public static EventActorsItem ChickenClever3 => Instance[(short)210];
 
-		/// <summary>
-		/// 黑羽鸡
-		/// </summary>
 		public static EventActorsItem ChickenClever4 => Instance[(short)211];
 
-		/// <summary>
-		/// 鹑尾
-		/// </summary>
 		public static EventActorsItem ChickenClever5 => Instance[(short)212];
 
-		/// <summary>
-		/// 马鸡
-		/// </summary>
 		public static EventActorsItem ChickenClever6 => Instance[(short)213];
 
-		/// <summary>
-		/// 赤足鸡
-		/// </summary>
 		public static EventActorsItem ChickenClever7 => Instance[(short)214];
 
-		/// <summary>
-		/// 窗禽
-		/// </summary>
 		public static EventActorsItem ChickenClever8 => Instance[(short)215];
 
-		/// <summary>
-		/// 元宝鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky0 => Instance[(short)216];
 
-		/// <summary>
-		/// 丹鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky1 => Instance[(short)217];
 
-		/// <summary>
-		/// 虢国鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky2 => Instance[(short)218];
 
-		/// <summary>
-		/// 祝祝
-		/// </summary>
 		public static EventActorsItem ChickenLucky3 => Instance[(short)219];
 
-		/// <summary>
-		/// 长尾鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky4 => Instance[(short)220];
 
-		/// <summary>
-		/// 银锦鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky5 => Instance[(short)221];
 
-		/// <summary>
-		/// 金锦鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky6 => Instance[(short)222];
 
-		/// <summary>
-		/// 琅琊鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky7 => Instance[(short)223];
 
-		/// <summary>
-		/// 碧鸡
-		/// </summary>
 		public static EventActorsItem ChickenLucky8 => Instance[(short)224];
 
-		/// <summary>
-		/// 梅林鸡
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive0 => Instance[(short)225];
 
-		/// <summary>
-		/// 孙枝鸡
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive1 => Instance[(short)226];
 
-		/// <summary>
-		/// 会稽公
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive2 => Instance[(short)227];
 
-		/// <summary>
-		/// 五黑鸡
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive3 => Instance[(short)228];
 
-		/// <summary>
-		/// 桃源鸡
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive4 => Instance[(short)229];
 
-		/// <summary>
-		/// 胡须鸡
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive5 => Instance[(short)230];
 
-		/// <summary>
-		/// 鹿苑鸡
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive6 => Instance[(short)231];
 
-		/// <summary>
-		/// 峨眉黑鸡
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive7 => Instance[(short)232];
 
-		/// <summary>
-		/// 烛夜
-		/// </summary>
 		public static EventActorsItem ChickenPerceptive8 => Instance[(short)233];
 
-		/// <summary>
-		/// 怀乡鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm0 => Instance[(short)234];
 
-		/// <summary>
-		/// 五灰鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm1 => Instance[(short)235];
 
-		/// <summary>
-		/// 茶花鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm2 => Instance[(short)236];
 
-		/// <summary>
-		/// 固始鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm3 => Instance[(short)237];
 
-		/// <summary>
-		/// 乌骨鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm4 => Instance[(short)238];
 
-		/// <summary>
-		/// 约瓦鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm5 => Instance[(short)239];
 
-		/// <summary>
-		/// 静宁鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm6 => Instance[(short)240];
 
-		/// <summary>
-		/// 黑凤鸡
-		/// </summary>
 		public static EventActorsItem ChickenFirm7 => Instance[(short)241];
 
-		/// <summary>
-		/// 长鸣都尉
-		/// </summary>
 		public static EventActorsItem ChickenFirm8 => Instance[(short)242];
 
-		/// <summary>
-		/// 略阳鸡
-		/// </summary>
 		public static EventActorsItem ChickenCalm0 => Instance[(short)243];
 
-		/// <summary>
-		/// 安南鸡
-		/// </summary>
 		public static EventActorsItem ChickenCalm1 => Instance[(short)244];
 
-		/// <summary>
-		/// 花尾
-		/// </summary>
 		public static EventActorsItem ChickenCalm2 => Instance[(short)245];
 
-		/// <summary>
-		/// 文昌鸡
-		/// </summary>
 		public static EventActorsItem ChickenCalm3 => Instance[(short)246];
 
-		/// <summary>
-		/// 雪鸡
-		/// </summary>
 		public static EventActorsItem ChickenCalm4 => Instance[(short)247];
 
-		/// <summary>
-		/// 白头黑鸡
-		/// </summary>
 		public static EventActorsItem ChickenCalm5 => Instance[(short)248];
 
-		/// <summary>
-		/// 六指鸡
-		/// </summary>
 		public static EventActorsItem ChickenCalm6 => Instance[(short)249];
 
-		/// <summary>
-		/// 五色鸡
-		/// </summary>
 		public static EventActorsItem ChickenCalm7 => Instance[(short)250];
 
-		/// <summary>
-		/// 七彩雉
-		/// </summary>
 		public static EventActorsItem ChickenCalm8 => Instance[(short)251];
 
-		/// <summary>
-		/// 封川鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic0 => Instance[(short)252];
 
-		/// <summary>
-		/// 海陵鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic1 => Instance[(short)253];
 
-		/// <summary>
-		/// 上谷鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic2 => Instance[(short)254];
 
-		/// <summary>
-		/// 宁都鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic3 => Instance[(short)255];
 
-		/// <summary>
-		/// 青州鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic4 => Instance[(short)256];
 
-		/// <summary>
-		/// 黔香鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic5 => Instance[(short)257];
 
-		/// <summary>
-		/// 招财鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic6 => Instance[(short)258];
 
-		/// <summary>
-		/// 越王鸡
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic7 => Instance[(short)259];
 
-		/// <summary>
-		/// 金羽银耳
-		/// </summary>
 		public static EventActorsItem ChickenEnthusiastic8 => Instance[(short)260];
 
-		/// <summary>
-		/// 建宁鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave0 => Instance[(short)261];
 
-		/// <summary>
-		/// 云松鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave1 => Instance[(short)262];
 
-		/// <summary>
-		/// 突厥雀
-		/// </summary>
 		public static EventActorsItem ChickenBrave2 => Instance[(short)263];
 
-		/// <summary>
-		/// 九真鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave3 => Instance[(short)264];
 
-		/// <summary>
-		/// 长安鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave4 => Instance[(short)265];
 
-		/// <summary>
-		/// 昆仑鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave5 => Instance[(short)266];
 
-		/// <summary>
-		/// 金足鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave6 => Instance[(short)267];
 
-		/// <summary>
-		/// 鹖鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave7 => Instance[(short)268];
 
-		/// <summary>
-		/// 鶤鸡
-		/// </summary>
 		public static EventActorsItem ChickenBrave8 => Instance[(short)269];
 
-		/// <summary>
-		/// 太吾村民
-		/// </summary>
 		public static EventActorsItem TaiWuVillager => Instance[(short)270];
 
-		/// <summary>
-		/// 铜生头颅
-		/// </summary>
 		public static EventActorsItem HeadOfTongsheng => Instance[(short)271];
 
-		/// <summary>
-		/// 欧冶子
-		/// </summary>
 		public static EventActorsItem Ouyezi => Instance[(short)272];
 
-		/// <summary>
-		/// 天帝黑影
-		/// </summary>
 		public static EventActorsItem ShadowOfHeavenlyLord => Instance[(short)273];
 
-		/// <summary>
-		/// 铸剑弟子男
-		/// </summary>
 		public static EventActorsItem SectMainStoryZhujian1 => Instance[(short)274];
 
-		/// <summary>
-		/// 铸剑弟子女
-		/// </summary>
 		public static EventActorsItem SectMainStoryZhujian2 => Instance[(short)275];
 
-		/// <summary>
-		/// 老玄鸿匠
-		/// </summary>
 		public static EventActorsItem SectMainStoryZhujian3 => Instance[(short)276];
 
-		/// <summary>
-		/// 老百辟匠
-		/// </summary>
 		public static EventActorsItem SectMainStoryZhujian4 => Instance[(short)277];
 
-		/// <summary>
-		/// 老青君匠
-		/// </summary>
 		public static EventActorsItem SectMainStoryZhujian5 => Instance[(short)278];
 
-		/// <summary>
-		/// 古代匠人
-		/// </summary>
 		public static EventActorsItem SectMainStoryZhujian6 => Instance[(short)279];
 
-		/// <summary>
-		/// 通用门派弟子1
-		/// </summary>
 		public static EventActorsItem GeneralShaolinMember => Instance[(short)280];
 
-		/// <summary>
-		/// 通用门派弟子2
-		/// </summary>
 		public static EventActorsItem GeneralEmeiMember => Instance[(short)281];
 
-		/// <summary>
-		/// 通用门派弟子3
-		/// </summary>
 		public static EventActorsItem GeneraBaihuaMember => Instance[(short)282];
 
-		/// <summary>
-		/// 通用门派弟子4
-		/// </summary>
 		public static EventActorsItem GeneralWudangMember => Instance[(short)283];
 
-		/// <summary>
-		/// 通用门派弟子5
-		/// </summary>
 		public static EventActorsItem GeneralYuanshanMember => Instance[(short)284];
 
-		/// <summary>
-		/// 通用门派弟子6
-		/// </summary>
 		public static EventActorsItem GeneralShixiangMember => Instance[(short)285];
 
-		/// <summary>
-		/// 通用门派弟子7
-		/// </summary>
 		public static EventActorsItem GeneralRanshanMember => Instance[(short)286];
 
-		/// <summary>
-		/// 通用门派弟子8
-		/// </summary>
 		public static EventActorsItem GeneralXuannvMember => Instance[(short)287];
 
-		/// <summary>
-		/// 通用门派弟子9
-		/// </summary>
 		public static EventActorsItem GeneralZhujianMember => Instance[(short)288];
 
-		/// <summary>
-		/// 通用门派弟子10
-		/// </summary>
 		public static EventActorsItem GeneralKongsangMember => Instance[(short)289];
 
-		/// <summary>
-		/// 通用门派弟子11
-		/// </summary>
 		public static EventActorsItem GeneralJingangMember => Instance[(short)290];
 
-		/// <summary>
-		/// 通用门派弟子12
-		/// </summary>
 		public static EventActorsItem GeneralWuxianMember => Instance[(short)291];
 
-		/// <summary>
-		/// 通用门派弟子13
-		/// </summary>
 		public static EventActorsItem GeneralJieqingMember => Instance[(short)292];
 
-		/// <summary>
-		/// 通用门派弟子14
-		/// </summary>
 		public static EventActorsItem GeneralFulongMember => Instance[(short)293];
 
-		/// <summary>
-		/// 通用门派弟子15
-		/// </summary>
 		public static EventActorsItem GeneralXuehouMember => Instance[(short)294];
 
-		/// <summary>
-		/// 峨眉鹫鸟
-		/// </summary>
 		public static EventActorsItem RemakeEmeiJefferyi => Instance[(short)295];
 
-		/// <summary>
-		/// 元山路人1
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan1 => Instance[(short)296];
 
-		/// <summary>
-		/// 元山路人2
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan2 => Instance[(short)297];
 
-		/// <summary>
-		/// 元山路人3
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan3 => Instance[(short)298];
 
-		/// <summary>
-		/// 元山弟子1
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan4 => Instance[(short)299];
 
-		/// <summary>
-		/// 元山弟子2
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan5 => Instance[(short)300];
 
-		/// <summary>
-		/// 元山弟子3
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan6 => Instance[(short)301];
 
-		/// <summary>
-		/// 元山少女
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan7 => Instance[(short)302];
 
-		/// <summary>
-		/// 元山男子
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan8 => Instance[(short)303];
 
-		/// <summary>
-		/// 元山寨民
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan9 => Instance[(short)304];
 
-		/// <summary>
-		/// 元山侠士
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan10 => Instance[(short)305];
 
-		/// <summary>
-		/// 元山大夫
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan11 => Instance[(short)306];
 
-		/// <summary>
-		/// 元山长老幻影
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan12 => Instance[(short)307];
 
-		/// <summary>
-		/// 元山失心人
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan13 => Instance[(short)308];
 
-		/// <summary>
-		/// 元山隐退前辈
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshan14 => Instance[(short)309];
 
-		/// <summary>
-		/// 元山第七代太吾男
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshanSeven0 => Instance[(short)310];
 
-		/// <summary>
-		/// 元山第七代太吾女
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshanSeven1 => Instance[(short)311];
 
-		/// <summary>
-		/// 武当主线婴孩
-		/// </summary>
 		public static EventActorsItem SectMainStoryWudangBaby => Instance[(short)312];
 
-		/// <summary>
-		/// 苒心毒蛊仙
-		/// </summary>
 		public static EventActorsItem SectMainStoryWuxianGuxian => Instance[(short)313];
 
-		/// <summary>
-		/// 店小二
-		/// </summary>
 		public static EventActorsItem SectMainStoryXuehouDianxiaoer => Instance[(short)314];
 
-		/// <summary>
-		/// 狮相主线飞狮堂旧部1
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiangFeishi1 => Instance[(short)315];
 
-		/// <summary>
-		/// 狮相主线飞狮堂旧部2
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiangFeishi2 => Instance[(short)316];
 
-		/// <summary>
-		/// 狮相主线飞狮堂旧部3
-		/// </summary>
 		public static EventActorsItem SectMainStoryShixiangFeishi3 => Instance[(short)317];
 
-		/// <summary>
-		/// 说书人
-		/// </summary>
 		public static EventActorsItem SectMainStoryYuanshanShuoshuren => Instance[(short)318];
 
-		/// <summary>
-		/// 然山主线然山魂灵1
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshanGhost1 => Instance[(short)319];
 
-		/// <summary>
-		/// 然山主线然山魂灵2
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshanGhost2 => Instance[(short)320];
 
-		/// <summary>
-		/// 然山主线然山魂灵3
-		/// </summary>
 		public static EventActorsItem SectMainStoryRanshanGhost3 => Instance[(short)321];
 
-		/// <summary>
-		/// 信使
-		/// </summary>
 		public static EventActorsItem Messenger => Instance[(short)322];
 
-		/// <summary>
-		/// 徐仙公人形
-		/// </summary>
 		public static EventActorsItem MainStoryHumanImmortalXu => Instance[(short)323];
 
-		/// <summary>
-		/// 神火化世剪影
-		/// </summary>
 		public static EventActorsItem MainStoryPureFireShadow => Instance[(short)324];
 
-		/// <summary>
-		/// 黑焰焚尘剪影
-		/// </summary>
 		public static EventActorsItem MainStoryEvilShadow => Instance[(short)325];
 
-		/// <summary>
-		/// 小铁匠剪影
-		/// </summary>
 		public static EventActorsItem MainStoryBlackSmithShadow => Instance[(short)326];
 
-		/// <summary>
-		/// 主线仙公寻仙方士
-		/// </summary>
 		public static EventActorsItem MainStoryAlchemist => Instance[(short)327];
 
-		/// <summary>
-		/// 主线邪魔线盘古
-		/// </summary>
 		public static EventActorsItem MainStoryPangu => Instance[(short)329];
 
-		/// <summary>
-		/// 主线邪魔线天帝
-		/// </summary>
 		public static EventActorsItem MainStoryTiandi => Instance[(short)330];
 
-		/// <summary>
-		/// 主线邪魔线伏羲0
-		/// </summary>
 		public static EventActorsItem MainStoryFuxi0 => Instance[(short)331];
 
-		/// <summary>
-		/// 主线邪魔线伏羲1
-		/// </summary>
 		public static EventActorsItem MainStoryFuxi1 => Instance[(short)332];
 
-		/// <summary>
-		/// 主线邪魔线女娲0
-		/// </summary>
 		public static EventActorsItem MainStoryNvwa0 => Instance[(short)333];
 
-		/// <summary>
-		/// 主线邪魔线女娲1
-		/// </summary>
 		public static EventActorsItem MainStoryNvwa1 => Instance[(short)334];
 
-		/// <summary>
-		/// 主线邪魔线相枢
-		/// </summary>
 		public static EventActorsItem MainStoryXiangshu => Instance[(short)335];
 
-		/// <summary>
-		/// 主线神火线大岳巨剑
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameDayueSword => Instance[(short)336];
 
-		/// <summary>
-		/// 主线神火线龙魂
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameLonghun => Instance[(short)337];
 
-		/// <summary>
-		/// 主线神火线雪山女神
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameXueshannvshen => Instance[(short)338];
 
-		/// <summary>
-		/// 主线神火线雪女青绫
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameXuenvQingling => Instance[(short)339];
 
-		/// <summary>
-		/// 主线神火线丑狐
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameChouhu => Instance[(short)340];
 
-		/// <summary>
-		/// 主线神火线都斋父
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameDuzhaifu => Instance[(short)341];
 
-		/// <summary>
-		/// 主线神火线建木灵
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameJianmuling => Instance[(short)342];
 
-		/// <summary>
-		/// 主线神火线圣人
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameShengren => Instance[(short)343];
 
-		/// <summary>
-		/// 主线神火线皇顾伯
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameHuanggubo => Instance[(short)344];
 
-		/// <summary>
-		/// 主线神火线皇顾伯女子形态
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameHuanggubonvzixingtai => Instance[(short)345];
 
-		/// <summary>
-		/// 主线神火线莫女小鸟
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameMonvxiaoniao => Instance[(short)346];
 
-		/// <summary>
-		/// 界青主线自戕老者
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqingOldman => Instance[(short)347];
 
-		/// <summary>
-		/// 界青主线白大善人
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqingBai => Instance[(short)348];
 
-		/// <summary>
-		/// 界青主线界青门人1
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqing1 => Instance[(short)349];
 
-		/// <summary>
-		/// 界青主线界青门人2
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqing2 => Instance[(short)350];
 
-		/// <summary>
-		/// 界青主线界青门人3
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqing3 => Instance[(short)351];
 
-		/// <summary>
-		/// 界青主线界青门人4
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqing4 => Instance[(short)352];
 
-		/// <summary>
-		/// 界青主线武当弟子1
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqingWudang1 => Instance[(short)353];
 
-		/// <summary>
-		/// 界青主线武当弟子2
-		/// </summary>
 		public static EventActorsItem SectMainStoryJieqingWudang2 => Instance[(short)354];
 
-		/// <summary>
-		/// 界青代理暗主
-		/// </summary>
 		public static EventActorsItem JieqingActingHead => Instance[(short)355];
 
-		/// <summary>
-		/// 主线神火线蚩尤
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameChiyou => Instance[(short)356];
 
-		/// <summary>
-		/// 主线后续江湖隐士
-		/// </summary>
 		public static EventActorsItem MainStoryJianghuHermit => Instance[(short)363];
 
-		/// <summary>
-		/// 主线后续心念化身
-		/// </summary>
 		public static EventActorsItem MainStoryMindAvatar => Instance[(short)364];
 
-		/// <summary>
-		/// 主线后续小道童
-		/// </summary>
 		public static EventActorsItem MainStoryLittleTaoist => Instance[(short)365];
 
-		/// <summary>
-		/// 主线神火线雏鸟金凰儿
-		/// </summary>
 		public static EventActorsItem MainStoryDivineflameChuniaojinhuanger => Instance[(short)366];
 
-		/// <summary>
-		/// 峨眉主线江湖侠客
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmeiXiake1 => Instance[(short)367];
 
-		/// <summary>
-		/// 峨眉主线巴蜀侠客
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmeiXiake2 => Instance[(short)368];
 
-		/// <summary>
-		/// 峨眉主线代理掌门
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmeiActingHead => Instance[(short)369];
 
-		/// <summary>
-		/// 峨眉主线出逃弟子
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmeiEscapeMember => Instance[(short)370];
 
-		/// <summary>
-		/// 峨眉主线嬉闹孩童
-		/// </summary>
 		public static EventActorsItem SectMainStoryEmeiPlayingKid => Instance[(short)371];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventActors Instance = new EventActors();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Clothing", "TemplateId", "Texture", "SpineName", "SpineSkinName" };

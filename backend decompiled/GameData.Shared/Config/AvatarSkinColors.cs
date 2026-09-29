@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class AvatarSkinColors : ConfigData<AvatarSkinColorsItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 皮肤颜色_1
-		/// </summary>
 		public const byte MostWhite = 0;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 皮肤颜色_1
-		/// </summary>
 		public static AvatarSkinColorsItem MostWhite => Instance[(byte)0];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AvatarSkinColors Instance = new AvatarSkinColors();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayDesc", "TemplateId", "ColorHex" };

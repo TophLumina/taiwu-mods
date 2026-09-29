@@ -71,7 +71,7 @@ public abstract class BreakBodyEffectBase : SpecialEffectBase
 		if (allHealed)
 		{
 			CharObj.RemoveFeature(context, FeatureId);
-			DomainManager.SpecialEffect.Remove(context, Id);
+			RemoveSelf(context);
 		}
 	}
 

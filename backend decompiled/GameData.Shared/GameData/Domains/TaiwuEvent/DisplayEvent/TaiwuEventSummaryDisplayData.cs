@@ -4,20 +4,11 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 太吾事件简要显示数据
-/// </summary>
 public class TaiwuEventSummaryDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 事件的Guid
-	/// </summary>
 	[SerializableGameDataField]
 	public string EventGuid;
 
-	/// <summary>
-	/// 事件的主要交互角色Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharacterId;
 

@@ -55,78 +55,6 @@ public class ActionHelper
 		return randomOrDefault;
 	}
 
-	public static ItemKey SelectSpareableItem(DataContext context, Character character, sbyte targetGrade, bool allowUsed)
-	{
-		int currBestGrade = 9;
-		IReadOnlyDictionary<ItemKey, int> taiwuGiftItems = DomainManager.Extra.GetTaiwuGiftItems(character.GetId());
-		List<(ItemBase, int)> selectableItems = context.AdvanceMonthRelatedData.ItemsWithAmount.Occupy();
-		int villagerIdealClothing = ((character.GetOrganizationInfo().OrgTemplateId == 16) ? character.GetIdealClothingTemplateId() : (-1));
-		int keepClothingCount = ((villagerIdealClothing >= 0 && character.GetEquipment().Exist((ItemKey e) => e.IsValid() && e.ItemType == 3 && e.TemplateId == villagerIdealClothing)) ? 1 : 0);
-		foreach (var (itemKey2, amount) in character.GetInventory().Items)
-		{
-			if (!ItemTemplateHelper.IsTransferable(itemKey2.ItemType, itemKey2.TemplateId) || ItemTemplateHelper.GetBaseValue(itemKey2.ItemType, itemKey2.TemplateId) <= 0 || (taiwuGiftItems.TryGetValue(itemKey2, out var giftAmount) && giftAmount >= amount))
-			{
-				continue;
-			}
-			ItemBase baseItem = DomainManager.Item.GetBaseItem(itemKey2);
-			if ((!allowUsed && baseItem.GetCurrDurability() < baseItem.GetMaxDurability()) || character.TryDetectAttachedPoisons(itemKey2))
-			{
-				continue;
-			}
-			if (itemKey2.ItemType == 10)
-			{
-				if (baseItem.GetItemSubType() == 1001)
-				{
-					(int, byte) readingInfo = character.GetCombatSkillBookCurrReadingInfo((SkillBook)baseItem);
-					if (readingInfo.Item1 < 0 || readingInfo.Item2 < 6)
-					{
-						continue;
-					}
-				}
-				else
-				{
-					(int, byte) readingInfo2 = character.GetLifeSkillBookCurrReadingInfo((SkillBook)baseItem);
-					if (readingInfo2.Item1 < 0 || readingInfo2.Item2 < 5)
-					{
-						continue;
-					}
-				}
-			}
-			else if (itemKey2.ItemType == 3 && keepClothingCount > 0)
-			{
-				keepClothingCount--;
-				continue;
-			}
-			if (itemKey2.ItemType == 12 && itemKey2.TemplateId == 267)
-			{
-				continue;
-			}
-			sbyte grade = baseItem.GetGrade();
-			if (grade == currBestGrade)
-			{
-				selectableItems.Add((baseItem, amount));
-			}
-			else if (currBestGrade < targetGrade)
-			{
-				if (grade >= currBestGrade && grade <= targetGrade)
-				{
-					currBestGrade = grade;
-					selectableItems.Clear();
-					selectableItems.Add((baseItem, amount));
-				}
-			}
-			else if (currBestGrade > targetGrade && grade < currBestGrade)
-			{
-				currBestGrade = grade;
-				selectableItems.Clear();
-				selectableItems.Add((baseItem, amount));
-			}
-		}
-		ItemKey result = ((selectableItems.Count == 0) ? ItemKey.Invalid : selectableItems.GetRandom(context.Random).Item1.GetItemKey());
-		context.AdvanceMonthRelatedData.ItemsWithAmount.Release(ref selectableItems);
-		return result;
-	}
-
 	public static int GetTargetGraveId(DataContext context, Character character, Predicate<Grave> graveFilter, sbyte restrictActionType)
 	{
 		Location location = character.GetLocation();
@@ -159,5 +87,97 @@ public class ActionHelper
 		int randomOrDefault = targets.GetRandomOrDefault(context.Random, -1);
 		context.AdvanceMonthRelatedData.TargetCharIdList.Release(ref targets);
 		return randomOrDefault;
+	}
+
+	public static bool HasIncreaseInventoryLoadItem(Character character, Inventory inventory)
+	{
+		foreach (var (itemKey2, _) in inventory.Items)
+		{
+			switch (itemKey2.ItemType)
+			{
+			case 4:
+			{
+				Carrier item2 = DomainManager.Item.GetElement_Carriers(itemKey2.Id);
+				if (!item2.IsDurabilityRunningOut())
+				{
+					sbyte equipmentType2 = item2.GetEquipmentType();
+					short worstValue2 = character.GetWorstInventoryLoadBonusInEquipment(equipmentType2);
+					if (item2.GetEquipmentCombatPowerValueFactor() > worstValue2)
+					{
+						return true;
+					}
+				}
+				break;
+			}
+			case 2:
+			{
+				Accessory item = DomainManager.Item.GetElement_Accessories(itemKey2.Id);
+				if (!item.IsDurabilityRunningOut())
+				{
+					sbyte equipmentType = item.GetEquipmentType();
+					short worstValue = character.GetWorstInventoryLoadBonusInEquipment(equipmentType);
+					if (item.GetEquipmentCombatPowerValueFactor() > worstValue)
+					{
+						return true;
+					}
+				}
+				break;
+			}
+			}
+		}
+		return false;
+	}
+
+	public static ItemKey SelectIncreaseInventoryLoadItem(Character character, Inventory inventory)
+	{
+		ItemKey selectedItemKey = ItemKey.Invalid;
+		int bestScore = int.MinValue;
+		foreach (var (itemKey2, _) in inventory.Items)
+		{
+			switch (itemKey2.ItemType)
+			{
+			case 4:
+			{
+				Carrier item2 = DomainManager.Item.GetElement_Carriers(itemKey2.Id);
+				if (item2.IsDurabilityRunningOut())
+				{
+					break;
+				}
+				sbyte equipmentType2 = item2.GetEquipmentType();
+				short worstValue2 = character.GetWorstInventoryLoadBonusInEquipment(equipmentType2);
+				if (item2.GetEquipmentCombatPowerValueFactor() > worstValue2)
+				{
+					int score2 = Equipping.CalcEquipmentScore(itemKey2, -1).score;
+					if (score2 > bestScore)
+					{
+						bestScore = score2;
+						selectedItemKey = itemKey2;
+					}
+				}
+				break;
+			}
+			case 2:
+			{
+				Accessory item = DomainManager.Item.GetElement_Accessories(itemKey2.Id);
+				if (item.IsDurabilityRunningOut())
+				{
+					break;
+				}
+				sbyte equipmentType = item.GetEquipmentType();
+				short worstValue = character.GetWorstInventoryLoadBonusInEquipment(equipmentType);
+				if (item.GetEquipmentCombatPowerValueFactor() > worstValue)
+				{
+					int score = Equipping.CalcEquipmentScore(itemKey2, -1).score;
+					if (score > bestScore)
+					{
+						bestScore = score;
+						selectedItemKey = itemKey2;
+					}
+				}
+				break;
+			}
+			}
+		}
+		return selectedItemKey;
 	}
 }

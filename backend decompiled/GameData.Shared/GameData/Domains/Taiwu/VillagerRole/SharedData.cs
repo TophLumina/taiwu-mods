@@ -29,9 +29,6 @@ public class SharedData
 
 	private static readonly IReadOnlyList<VillagerRoleActionType> FarmerActionTypeList = new List<VillagerRoleActionType> { VillagerRoleActionType.CookFood };
 
-	/// <summary>
-	/// 仓库页签对应的行为类型列表
-	/// </summary>
 	public static readonly IReadOnlyDictionary<TaiwuVillageStorageType, IReadOnlyList<VillagerRoleActionType>> ActionDict = new Dictionary<TaiwuVillageStorageType, IReadOnlyList<VillagerRoleActionType>> { 
 	{
 		TaiwuVillageStorageType.Stock,
@@ -164,9 +161,6 @@ public class SharedData
 		VillagerRoleStorageType.CraftStorageToDisassemble
 	};
 
-	/// <summary>
-	/// 行为类型对应的存储类型列表
-	/// </summary>
 	public static readonly IReadOnlyDictionary<VillagerRoleActionType, IReadOnlyList<VillagerRoleStorageType>> StorageDict = new Dictionary<VillagerRoleActionType, IReadOnlyList<VillagerRoleStorageType>>
 	{
 		{
@@ -219,9 +213,6 @@ public class SharedData
 		}
 	};
 
-	/// <summary>
-	/// 行为类型对应的默认存储类型
-	/// </summary>
 	public static readonly IReadOnlyDictionary<VillagerRoleActionType, VillagerRoleStorageType> StorageDefaultDict = new Dictionary<VillagerRoleActionType, VillagerRoleStorageType>
 	{
 		{

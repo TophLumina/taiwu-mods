@@ -5,38 +5,21 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 功法持续效果集合
-/// </summary>
 public class SkillEffectCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 效果集合。(功法ID, 是否正练) -&gt; 当前层数
-	/// </summary>
 	public Dictionary<SkillEffectKey, short> EffectDict;
 
-	/// <summary>
-	/// 效果描述集合。(功法ID, 是否正练) -&gt; 描述数据
-	/// </summary>
 	public Dictionary<SkillEffectKey, CombatSkillEffectDescriptionDisplayData> EffectDescriptionDict;
 
-	/// <summary>
-	/// 层数上限集合。仅后端特效使用，非序列化数据
-	/// </summary>
 	public readonly Dictionary<SkillEffectKey, short> MaxEffectCountDict = new Dictionary<SkillEffectKey, short>();
 
-	/// <summary>
-	/// 是否在归零时自动删除。仅后端特效使用，非序列化数据
-	/// </summary>
 	public readonly Dictionary<SkillEffectKey, bool> AutoRemoveOnNoCountDict = new Dictionary<SkillEffectKey, bool>();
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -60,7 +43,6 @@ public class SkillEffectCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -107,7 +89,6 @@ public class SkillEffectCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

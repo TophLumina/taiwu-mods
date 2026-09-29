@@ -4,61 +4,35 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Global;
 
-/// <summary>
-/// 前后端共享的全局设置项目
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class SharedGlobalSettings : ISerializableGameData
 {
-	/// <summary>
-	/// 语言
-	/// </summary>
 	[SerializableGameDataField]
 	public string Language;
 
-	/// <summary>
-	/// 自动触发地图拾取物（不包含事件）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoTriggerMapNormalPickup;
 
-	/// <summary>
-	/// 自动拾取详细设置
-	/// </summary>
 	[SerializableGameDataField]
 	public MapPickupAutoTriggerSetting NormalMapPickupAutoTriggerSetting;
 
-	/// <summary>
-	/// 自动驱灭相关设置
-	/// </summary>
 	[SerializableGameDataField]
 	public int AutoWipeOut;
 
-	/// <summary>
-	/// 绕开外道袭击
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AvoidHereticAttackBlocks;
 
-	/// <summary>
-	/// 绕开失心人
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AvoidInfectedCharacterBlocks;
 
-	/// <summary>
-	/// 优先已解锁旅行路线
-	/// </summary>
 	[SerializableGameDataField]
 	public bool PreferUnlockedTravelRoute;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -71,7 +45,6 @@ public class SharedGlobalSettings : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -127,7 +100,6 @@ public class SharedGlobalSettings : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -175,21 +147,11 @@ public class SharedGlobalSettings : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 获取指定类型自动驱灭是否开启
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public bool IsTypeAutoWipeOutOn(int index)
 	{
 		return (AutoWipeOut & (1 << index)) != 0;
 	}
 
-	/// <summary>
-	/// 获取指定类型自动驱灭是否开启
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public bool IsTypeAutoWipeOutOn(WipeOutType type)
 	{
 		return IsTypeAutoWipeOutOn((int)type);

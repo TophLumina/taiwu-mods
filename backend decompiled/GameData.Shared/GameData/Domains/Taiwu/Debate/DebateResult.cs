@@ -6,95 +6,48 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 较艺结果
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class DebateResult : ISerializableGameData
 {
-	/// <summary>
-	/// 是否太吾胜利
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwuWin;
 
-	/// <summary>
-	/// 历练
-	/// </summary>
 	[SerializableGameDataField]
 	public IntPair Exp = new IntPair(0, 0);
 
-	/// <summary>
-	/// 威望
-	/// </summary>
 	[SerializableGameDataField]
 	public IntPair Authority = new IntPair(0, 0);
 
-	/// <summary>
-	/// 实战研读
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowReadingEvent;
 
-	/// <summary>
-	/// 实战领悟
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowReadingEvent2;
 
-	/// <summary>
-	/// 实战周天
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowLoopingEvent;
 
-	/// <summary>
-	/// 天人感应
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowLoopingEvent2;
 
-	/// <summary>
-	/// 通用评价表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> Evaluations = new List<short>();
 
-	/// <summary>
-	/// 太吾观众评价表
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> TaiwuComments = new Dictionary<short, int>();
 
-	/// <summary>
-	/// npc观众评价表
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> NpcComments = new Dictionary<short, int>();
 
-	/// <summary>
-	/// 初始好感表
-	/// 角色Id -&gt; 较艺前对太吾的好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, IntPair> Favorability = new Dictionary<int, IntPair>();
 
-	/// <summary>
-	/// 心情变化表
-	/// 角色Id -&gt; (较艺前心情，较艺后心情)
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, IntPair> Happiness = new Dictionary<int, IntPair>();
 
-	/// <summary>
-	/// 角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, CharacterDisplayData> CharacterDisplayDataMap = new Dictionary<int, CharacterDisplayData>();
 
-	/// <summary>
-	/// 地区恩义
-	/// </summary>
 	[SerializableGameDataField]
 	public IntPair AreaSpiritualDebt;
 

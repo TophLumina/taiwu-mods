@@ -357,6 +357,9 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 	private SpecialEffectList _causedInjuryChangeToOldOdds;
 
 	[CollectionObjectField(false, true, false, false, false)]
+	private SpecialEffectList _acceptInjuryChangeToOldOdds;
+
+	[CollectionObjectField(false, true, false, false, false)]
 	private SpecialEffectList _causedMindChangeToInfiniteOdds;
 
 	[CollectionObjectField(false, true, false, false, false)]
@@ -1051,9 +1054,9 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 
 	public const int FixedSize = 4;
 
-	public const int DynamicCount = 344;
+	public const int DynamicCount = 345;
 
-	private static readonly ushort[] ArchiveFieldIds = new ushort[345]
+	private static readonly ushort[] ArchiveFieldIds = new ushort[346]
 	{
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
 		10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -1089,7 +1092,7 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 		310, 311, 312, 313, 314, 315, 316, 317, 318, 319,
 		320, 321, 322, 323, 324, 325, 326, 327, 328, 329,
 		330, 331, 332, 333, 334, 335, 336, 337, 338, 339,
-		340, 341, 342, 343, 344
+		340, 341, 342, 343, 344, 345
 	};
 
 	private static readonly int[] FixedArchiveFieldSizes = new int[1] { 4 };
@@ -1781,6 +1784,12 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 				_causedInjuryChangeToOldOdds = new SpecialEffectList();
 			}
 			return _causedInjuryChangeToOldOdds;
+		case 345:
+			if (_acceptInjuryChangeToOldOdds == null && createIfNull)
+			{
+				_acceptInjuryChangeToOldOdds = new SpecialEffectList();
+			}
+			return _acceptInjuryChangeToOldOdds;
 		case 336:
 			if (_causedMindChangeToInfiniteOdds == null && createIfNull)
 			{
@@ -3514,6 +3523,9 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 			return;
 		case 335:
 			SetCausedInjuryChangeToOldOdds(effectList, context);
+			return;
+		case 345:
+			SetAcceptInjuryChangeToOldOdds(effectList, context);
 			return;
 		case 336:
 			SetCausedMindChangeToInfiniteOdds(effectList, context);
@@ -8007,6 +8019,17 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 		SetModifiedAndInvalidateInfluencedCache(344, context);
 	}
 
+	public SpecialEffectList GetAcceptInjuryChangeToOldOdds()
+	{
+		return _acceptInjuryChangeToOldOdds;
+	}
+
+	public void SetAcceptInjuryChangeToOldOdds(SpecialEffectList acceptInjuryChangeToOldOdds, DataContext context)
+	{
+		_acceptInjuryChangeToOldOdds = acceptInjuryChangeToOldOdds;
+		SetModifiedAndInvalidateInfluencedCache(345, context);
+	}
+
 	public AffectedData()
 	{
 		_maxStrength = new SpecialEffectList();
@@ -8353,6 +8376,7 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 		_defenderCriticalOdds = new SpecialEffectList();
 		_mixPoisonCanAffectCount = new SpecialEffectList();
 		_castCostNeiliAllocationIsAbsorb = new SpecialEffectList();
+		_acceptInjuryChangeToOldOdds = new SpecialEffectList();
 	}
 
 	public bool IsSerializedSizeFixed()
@@ -8419,7 +8443,7 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 
 	public override int GetSerializedSizeWithoutHeader()
 	{
-		int totalSize = 1380;
+		int totalSize = 1384;
 		int dataSize = _maxStrength.GetSerializedSize();
 		totalSize += dataSize;
 		int dataSize2 = _maxDexterity.GetSerializedSize();
@@ -9107,7 +9131,9 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 		int dataSize343 = _mixPoisonCanAffectCount.GetSerializedSize();
 		totalSize += dataSize343;
 		int dataSize344 = _castCostNeiliAllocationIsAbsorb.GetSerializedSize();
-		return totalSize + dataSize344;
+		totalSize += dataSize344;
+		int dataSize345 = _acceptInjuryChangeToOldOdds.GetSerializedSize();
+		return totalSize + dataSize345;
 	}
 
 	public unsafe override int SerializeWithoutHeader(byte* pData)
@@ -12211,6 +12237,15 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 			throw new Exception($"Size of field {"_castCostNeiliAllocationIsAbsorb"} must be less than {4096}KB");
 		}
 		*(int*)pBegin344 = fieldSize344;
+		byte* pBegin345 = pCurrData;
+		pCurrData += 4;
+		pCurrData += _acceptInjuryChangeToOldOdds.Serialize(pCurrData);
+		int fieldSize345 = (int)(pCurrData - pBegin345 - 4);
+		if (fieldSize345 > 4194304)
+		{
+			throw new Exception($"Size of field {"_acceptInjuryChangeToOldOdds"} must be less than {4096}KB");
+		}
+		*(int*)pBegin345 = fieldSize345;
 		return (int)(pCurrData - pData);
 	}
 
@@ -13600,6 +13635,10 @@ public class AffectedData : BaseGameDataObject, ISerializableGameData
 			case 344:
 				pCurrData += 4;
 				pCurrData += _castCostNeiliAllocationIsAbsorb.Deserialize(pCurrData);
+				continue;
+			case 345:
+				pCurrData += 4;
+				pCurrData += _acceptInjuryChangeToOldOdds.Deserialize(pCurrData);
 				continue;
 			}
 			if (fieldIndex < fixedFieldSizes.Length)

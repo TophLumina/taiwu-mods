@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Organization;
 
-/// <summary>
-/// 定居点公库
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class SettlementLayeredTreasuries : ISerializableGameData
 {
@@ -28,33 +25,18 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "SettlementTreasuries", "AlertTime", "ResupplyTotalValue", "CurrentTotalValue", "SupplyLevelAddOn" };
 	}
 
-	/// <summary>
-	/// 三层公库
-	/// </summary>
 	[SerializableGameDataField]
 	public SettlementTreasury[] SettlementTreasuries = InitTreasuries();
 
-	/// <summary>
-	/// 戒严倒计时
-	/// </summary>
 	[SerializableGameDataField]
 	public byte AlertTime;
 
-	/// <summary>
-	/// 上次补充资源道具的总价值
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResupplyTotalValue;
 
-	/// <summary>
-	/// 当前库房总价值
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrentTotalValue;
 
-	/// <summary>
-	/// 库房额外规模等级
-	/// </summary>
 	[SerializableGameDataField]
 	public int SupplyLevelAddOn;
 
@@ -72,12 +54,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		return treasuries;
 	}
 
-	/// <summary>
-	/// 按层级获取库房数据
-	/// </summary>
-	/// <param name="layer"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public SettlementTreasury GetTreasury(SettlementTreasuryLayers layer)
 	{
 		return layer switch
@@ -89,21 +65,11 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 按层级获取库房数据
-	/// </summary>
-	/// <param name="layerIndex"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public SettlementTreasury GetTreasury(sbyte layerIndex)
 	{
 		return SettlementTreasuries[layerIndex];
 	}
 
-	/// <summary>
-	/// 计算总体的资源匮乏情况
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetTreasuryResourceStatus()
 	{
 		if (ResupplyTotalValue == 0)
@@ -122,12 +88,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 尝试移除守卫
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="layerIndex"></param>
-	/// <returns></returns>
 	public bool TryRemoveGuard(int charId, out sbyte layerIndex)
 	{
 		layerIndex = -1;
@@ -143,10 +103,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取所有守卫的id
-	/// </summary>
-	/// <param name="ids"></param>
 	public void GetGuardIds(HashSet<int> ids)
 	{
 		SettlementTreasury[] settlementTreasuries = SettlementTreasuries;
@@ -159,9 +115,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取所有守卫的id
-	/// </summary>
 	public IEnumerable<int> GetGuardIds()
 	{
 		SettlementTreasury[] settlementTreasuries = SettlementTreasuries;
@@ -174,11 +127,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 参数id是否是该库房的守卫
-	/// </summary>
-	/// <param name="id"></param>
-	/// <returns></returns>
 	public bool IsGuard(int id)
 	{
 		SettlementTreasury[] settlementTreasuries = SettlementTreasuries;
@@ -192,11 +140,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 参数id的守卫等级
-	/// </summary>
-	/// <param name="id"></param>
-	/// <returns>0=不守卫，1=初级,..,3=高级</returns>
 	public byte GuardLevel(int id)
 	{
 		for (byte i = 3; i != 0; i--)
@@ -209,13 +152,11 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		return 0;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 15;
@@ -240,7 +181,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -292,7 +232,6 @@ public class SettlementLayeredTreasuries : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

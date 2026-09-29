@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法突破快照
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class CombatSkillBreakSnapshot : ISerializableGameData
 {
@@ -29,52 +26,28 @@ public class CombatSkillBreakSnapshot : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[6] { "BreakPlate", "LastClearTime", "LastForceBreakoutStepsCount", "LuohanId", "LuohanState", "DefaultState" };
 	}
 
-	/// <summary>
-	/// 突破盘
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public SkillBreakPlate BreakPlate;
 
-	/// <summary>
-	/// 上次重修时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int LastClearTime;
 
-	/// <summary>
-	/// 上次强行突破次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int LastForceBreakoutStepsCount;
 
-	/// <summary>
-	/// 佛像突破
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public sbyte LuohanId = -1;
 
-	/// <summary>
-	/// 佛像突破书页激活状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public ushort LuohanState;
 
-	/// <summary>
-	/// 未突破前激活状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public ushort DefaultState;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CombatSkillBreakSnapshot()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillBreakSnapshot(CombatSkillBreakSnapshot other)
 	{
 		BreakPlate = new SkillBreakPlate(other.BreakPlate);
@@ -85,9 +58,6 @@ public class CombatSkillBreakSnapshot : ISerializableGameData
 		DefaultState = other.DefaultState;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillBreakSnapshot other)
 	{
 		BreakPlate = new SkillBreakPlate(other.BreakPlate);
@@ -98,13 +68,11 @@ public class CombatSkillBreakSnapshot : ISerializableGameData
 		DefaultState = other.DefaultState;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 15;
@@ -116,7 +84,6 @@ public class CombatSkillBreakSnapshot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -154,7 +121,6 @@ public class CombatSkillBreakSnapshot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

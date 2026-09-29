@@ -5,29 +5,14 @@ namespace Config;
 [Serializable]
 public class AdventurePersonalityContentWeights
 {
-	/// <summary>
-	/// 空格权重
-	/// </summary>
 	public short EmptyBlockWeight;
 
-	/// <summary>
-	/// (事件Id, 权重)
-	/// </summary>
 	public (string eventGuid, short weight)[] EventWeights;
 
-	/// <summary>
-	/// (资源类型Id, 获得数量, 权重)
-	/// </summary>
 	public (byte resId, short amount, short weight)[] NormalResWeights;
 
-	/// <summary>
-	/// (物品类型, 物品TemplateId, 物品数量, 物品权重)
-	/// </summary>
 	public (byte itemType, short templateId, short amount, short weight)[] SpecialResWeights;
 
-	/// <summary>
-	/// (增益类型，增益量，权重)
-	/// </summary>
 	public (string, short)[] BonusWeights;
 
 	public readonly short[] ContentTypeWeights = new short[5];

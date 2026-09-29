@@ -7,131 +7,56 @@ namespace Config;
 [Serializable]
 public class EventScriptType : ConfigData<EventScriptTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 全局脚本
-		/// </summary>
 		public const sbyte GlobalScript = 0;
 
-		/// <summary>
-		/// 事件页脚本
-		/// </summary>
 		public const sbyte EventEnterScript = 1;
 
-		/// <summary>
-		/// 事件页条件
-		/// </summary>
 		public const sbyte EventConditionList = 2;
 
-		/// <summary>
-		/// 选项脚本
-		/// </summary>
 		public const sbyte OptionScript = 3;
 
-		/// <summary>
-		/// 选项可用条件
-		/// </summary>
 		public const sbyte OptionAvailableConditionList = 4;
 
-		/// <summary>
-		/// 选项可见条件
-		/// </summary>
 		public const sbyte OptionVisibleConditionList = 5;
 
-		/// <summary>
-		/// 新版奇遇触发条件
-		/// </summary>
 		public const sbyte AdventureRemakeTriggerCondition = 6;
 
-		/// <summary>
-		/// 新版奇遇过月脚本
-		/// </summary>
 		public const sbyte AdventureRemakeAdvanceMonth = 7;
 
-		/// <summary>
-		/// 大事件激活时脚本
-		/// </summary>
 		public const sbyte OnMajorEventActive = 8;
 
-		/// <summary>
-		/// 大事件移除时脚本
-		/// </summary>
 		public const sbyte OnMajorEventRemove = 9;
 
-		/// <summary>
-		/// 奇遇修复脚本
-		/// </summary>
 		public const sbyte FixAbnormalAction = 10;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 全局脚本
-		/// </summary>
 		public static EventScriptTypeItem GlobalScript => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 事件页脚本
-		/// </summary>
 		public static EventScriptTypeItem EventEnterScript => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 事件页条件
-		/// </summary>
 		public static EventScriptTypeItem EventConditionList => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 选项脚本
-		/// </summary>
 		public static EventScriptTypeItem OptionScript => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 选项可用条件
-		/// </summary>
 		public static EventScriptTypeItem OptionAvailableConditionList => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 选项可见条件
-		/// </summary>
 		public static EventScriptTypeItem OptionVisibleConditionList => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 新版奇遇触发条件
-		/// </summary>
 		public static EventScriptTypeItem AdventureRemakeTriggerCondition => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 新版奇遇过月脚本
-		/// </summary>
 		public static EventScriptTypeItem AdventureRemakeAdvanceMonth => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 大事件激活时脚本
-		/// </summary>
 		public static EventScriptTypeItem OnMajorEventActive => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 大事件移除时脚本
-		/// </summary>
 		public static EventScriptTypeItem OnMajorEventRemove => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 奇遇修复脚本
-		/// </summary>
 		public static EventScriptTypeItem FixAbnormalAction => Instance[(sbyte)10];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventScriptType Instance = new EventScriptType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "TemplateId", "Source" };

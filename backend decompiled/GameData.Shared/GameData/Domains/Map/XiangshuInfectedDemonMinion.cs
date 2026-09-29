@@ -10,13 +10,11 @@ public struct XiangshuInfectedDemonMinion(short areaId, MapTemplateEnemyInfo ene
 	[SerializableGameDataField]
 	public MapTemplateEnemyInfo EnemyInfo = enemyInfo;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -27,7 +25,6 @@ public struct XiangshuInfectedDemonMinion(short areaId, MapTemplateEnemyInfo ene
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -42,7 +39,6 @@ public struct XiangshuInfectedDemonMinion(short areaId, MapTemplateEnemyInfo ene
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

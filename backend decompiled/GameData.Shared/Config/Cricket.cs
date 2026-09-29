@@ -7,111 +7,48 @@ namespace Config;
 [Serializable]
 public class Cricket : ConfigData<CricketItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 九品促织
-		/// </summary>
 		public const short Cricket0 = 0;
 
-		/// <summary>
-		/// 八品促织
-		/// </summary>
 		public const short Cricket1 = 1;
 
-		/// <summary>
-		/// 七品促织
-		/// </summary>
 		public const short Cricket2 = 2;
 
-		/// <summary>
-		/// 六品促织
-		/// </summary>
 		public const short Cricket3 = 3;
 
-		/// <summary>
-		/// 五品促织
-		/// </summary>
 		public const short Cricket4 = 4;
 
-		/// <summary>
-		/// 四品促织
-		/// </summary>
 		public const short Cricket5 = 5;
 
-		/// <summary>
-		/// 三品促织
-		/// </summary>
 		public const short Cricket6 = 6;
 
-		/// <summary>
-		/// 二品促织
-		/// </summary>
 		public const short Cricket7 = 7;
 
-		/// <summary>
-		/// 一品促织
-		/// </summary>
 		public const short Cricket8 = 8;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 九品促织
-		/// </summary>
 		public static CricketItem Cricket0 => Instance[(short)0];
 
-		/// <summary>
-		/// 八品促织
-		/// </summary>
 		public static CricketItem Cricket1 => Instance[(short)1];
 
-		/// <summary>
-		/// 七品促织
-		/// </summary>
 		public static CricketItem Cricket2 => Instance[(short)2];
 
-		/// <summary>
-		/// 六品促织
-		/// </summary>
 		public static CricketItem Cricket3 => Instance[(short)3];
 
-		/// <summary>
-		/// 五品促织
-		/// </summary>
 		public static CricketItem Cricket4 => Instance[(short)4];
 
-		/// <summary>
-		/// 四品促织
-		/// </summary>
 		public static CricketItem Cricket5 => Instance[(short)5];
 
-		/// <summary>
-		/// 三品促织
-		/// </summary>
 		public static CricketItem Cricket6 => Instance[(short)6];
 
-		/// <summary>
-		/// 二品促织
-		/// </summary>
 		public static CricketItem Cricket7 => Instance[(short)7];
 
-		/// <summary>
-		/// 一品促织
-		/// </summary>
 		public static CricketItem Cricket8 => Instance[(short)8];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Cricket Instance = new Cricket();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "ItemSubType", "GroupId", "Desc", "ResourceType", "TaskLock", "TemplateId", "Grade", "Icon" };

@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 地区主线 - 铸剑 - 贼人数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SectStoryThiefData : ISerializableGameData
 {
@@ -27,39 +24,21 @@ public class SectStoryThiefData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "CatchThiefTimes", "AreaId", "ThiefBlockIds", "ThiefTriggered", "RealThiefIndex" };
 	}
 
-	/// <summary>
-	/// 捕捉贼人次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int CatchThiefTimes;
 
-	/// <summary>
-	/// 贼人所在地区
-	/// </summary>
 	[SerializableGameDataField]
 	public short AreaId;
 
-	/// <summary>
-	/// 贼人所在地格
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> ThiefBlockIds;
 
-	/// <summary>
-	/// 贼人是否已触发
-	/// </summary>
 	[SerializableGameDataField]
 	public List<bool> ThiefTriggered;
 
-	/// <summary>
-	/// 真贼人所在地格索引
-	/// </summary>
 	[SerializableGameDataField]
 	public int RealThiefIndex;
 
-	/// <summary>
-	/// 所有贼人均已触发
-	/// </summary>
 	public bool AllIsTriggered()
 	{
 		bool allIsTriggered = true;
@@ -70,16 +49,10 @@ public class SectStoryThiefData : ISerializableGameData
 		return allIsTriggered;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectStoryThiefData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectStoryThiefData(SectStoryThiefData other)
 	{
 		CatchThiefTimes = other.CatchThiefTimes;
@@ -89,9 +62,6 @@ public class SectStoryThiefData : ISerializableGameData
 		RealThiefIndex = other.RealThiefIndex;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectStoryThiefData other)
 	{
 		CatchThiefTimes = other.CatchThiefTimes;
@@ -101,13 +71,11 @@ public class SectStoryThiefData : ISerializableGameData
 		RealThiefIndex = other.RealThiefIndex;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -120,7 +88,6 @@ public class SectStoryThiefData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -174,7 +141,6 @@ public class SectStoryThiefData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

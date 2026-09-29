@@ -86,6 +86,19 @@ public class WorldFunctions
 		return EventActorDataHelper.CreateActor(runtime.Context.Random, actorTemplateId);
 	}
 
+	[EventFunction(940)]
+	private static void SetEventActor(EventScriptRuntime runtime, string key, bool isLeft)
+	{
+		if (isLeft)
+		{
+			runtime.ArgBox.SetLeftActorKey(key);
+		}
+		else
+		{
+			runtime.ArgBox.SetActorKey(key);
+		}
+	}
+
 	[EventFunction(114)]
 	private static int GetIntelligentCharacterByFilter(EventScriptRuntime runtime, short characterFilterRuleId, short areaTemplateId, sbyte searchRangeType, bool createNew)
 	{
@@ -150,6 +163,26 @@ public class WorldFunctions
 			return character.GetId();
 		}
 		return DomainManager.Character.GetOrCreateFixedCharacterByTemplateId(runtime.Context, characterTemplateId).GetId();
+	}
+
+	[EventFunction(902)]
+	private static void ConvertFixedCharacter(EventScriptRuntime runtime, GameData.Domains.Character.Character character, bool recreateAttributesAndQualifications)
+	{
+		short characterTemplateId = character.GetTemplateId();
+		if (!DomainManager.Character.TryGetConvertedFixedCharacterByTemplateId(characterTemplateId, out var _))
+		{
+			GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+			Location location = taiwu.GetValidLocation();
+			DomainManager.Character.ConvertFixedCharacter(runtime.Context, character, location, recreateAttributesAndQualifications);
+		}
+	}
+
+	[EventFunction(943)]
+	private static void ConvertRandomEnemy(EventScriptRuntime runtime, GameData.Domains.Character.Character character)
+	{
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Location location = taiwu.GetValidLocation();
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.ConvertRandomEnemy(character, location);
 	}
 
 	[EventFunction(100)]

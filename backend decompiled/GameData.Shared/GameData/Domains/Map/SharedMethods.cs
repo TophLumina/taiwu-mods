@@ -3,14 +3,8 @@ using Config;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// map数据域 - 数据模块和表现模块共用的方法
-/// </summary>
 public static class SharedMethods
 {
-	/// <summary>
-	/// 获取指定州域中的区域列表  stateId为州域id （ stateID = templateId -1）
-	/// </summary>
 	public static void GetAreaListInState(sbyte stateId, List<short> areaList)
 	{
 		if (stateId >= 0)
@@ -28,9 +22,6 @@ public static class SharedMethods
 		}
 	}
 
-	/// <summary>
-	/// 获取指定州域中的常规区域列表
-	/// </summary>
 	public static void GetRegularAreaListInState(sbyte stateId, List<short> areaList)
 	{
 		if (stateId >= 0)
@@ -44,9 +35,6 @@ public static class SharedMethods
 		}
 	}
 
-	/// <summary>
-	/// 获取指定州域中的毁坏区域列表  stateId为州域id ( stateID = templateId - 1 )
-	/// </summary>
 	public static void GetBrokenAreaListInState(sbyte stateId, List<short> areaList)
 	{
 		if (stateId >= 0)
@@ -59,9 +47,6 @@ public static class SharedMethods
 		}
 	}
 
-	/// <summary>
-	/// 获取指定州域中的所有常规地区 ID
-	/// </summary>
 	public static IEnumerable<short> GetRegularAreaIdsInState(sbyte stateId)
 	{
 		if (stateId >= 0)
@@ -74,12 +59,6 @@ public static class SharedMethods
 		}
 	}
 
-	/// <summary>
-	/// 获取地区被侵蚀时应展示的样式
-	/// 理论上-1 == 未被侵蚀，但此处未判定侵蚀效果是否存在，因此不会返回-1
-	/// </summary>
-	/// <param name="areaTemplateId"></param>
-	/// <returns></returns>
 	public static sbyte GetAreaStyle(short areaTemplateId)
 	{
 		uint x = ExternalDataBridge.Context.WorldId;

@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class AvatarHairColors : ConfigData<AvatarHairColorsItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 毛发颜色_43
-		/// </summary>
 		public const byte White = 42;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 毛发颜色_43
-		/// </summary>
 		public static AvatarHairColorsItem White => Instance[(byte)42];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AvatarHairColors Instance = new AvatarHairColors();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayDesc", "TemplateId", "ColorHex" };

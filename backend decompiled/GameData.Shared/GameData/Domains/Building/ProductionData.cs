@@ -3,21 +3,12 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 产物信息
-/// </summary>
 [AutoGenerateSerializableGameData]
 public struct ProductionData(int weight, bool canProduce) : ISerializableGameData
 {
-	/// <summary>
-	/// 权重
-	/// </summary>
 	[SerializableGameDataField]
 	public int Weight = weight;
 
-	/// <summary>
-	/// 能否制造
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanProduce = canProduce;
 

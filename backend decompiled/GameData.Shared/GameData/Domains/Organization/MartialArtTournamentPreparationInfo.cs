@@ -3,42 +3,23 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Organization;
 
-/// <summary>
-/// 比武大会筹备信息
-/// </summary>
 public struct MartialArtTournamentPreparationInfo : IComparable<MartialArtTournamentPreparationInfo>, ISerializableGameData
 {
-	/// <summary>
-	/// 定居点ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short SettlementId;
 
-	/// <summary>
-	/// 综合得分
-	/// </summary>
 	[SerializableGameDataField]
 	public int TotalScore;
 
-	/// <summary>
-	/// 实力筹备力量
-	/// </summary>
 	[SerializableGameDataField]
 	public int CombatPowerPreparation;
 
-	/// <summary>
-	/// 威望筹备力量
-	/// </summary>
 	[SerializableGameDataField]
 	public int AuthorityPreparation;
 
-	/// <summary>
-	/// 资源筹备力量
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResourcePreparation;
 
-	/// <inheritdoc />
 	public int CompareTo(MartialArtTournamentPreparationInfo other)
 	{
 		if (TotalScore != other.TotalScore)

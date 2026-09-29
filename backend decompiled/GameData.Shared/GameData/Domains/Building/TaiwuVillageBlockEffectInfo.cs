@@ -8,33 +8,18 @@ namespace GameData.Domains.Building;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class TaiwuVillageBlockEffectInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 同类地格
-	/// </summary>
 	[SerializableGameDataField]
 	public List<BuildingBlockData> BlockDataList = new List<BuildingBlockData>();
 
-	/// <summary>
-	/// 同类地格
-	/// </summary>
 	[SerializableGameDataField]
 	public List<BuildingBlockKey> BlockKeyList = new List<BuildingBlockKey>();
 
-	/// <summary>
-	///  同类地格等级
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> LevelList = new List<int>();
 
-	/// <summary>
-	/// 等级排名
-	/// </summary>
 	[SerializableGameDataField]
 	public int BlockRanking;
 
-	/// <summary>
-	/// 计算指定建筑相关公式所需要的上下文
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingFormulaContextBridge FormulaContextBridge;
 
@@ -58,7 +43,7 @@ public class TaiwuVillageBlockEffectInfo : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize = ((BlockKeyList == null) ? (totalSize + 2) : (totalSize + (2 + default(BuildingBlockKey).GetSerializedSize() * BlockKeyList.Count)));
+		totalSize = ((BlockKeyList == null) ? (totalSize + 2) : (totalSize + (2 + 8 * BlockKeyList.Count)));
 		totalSize = ((LevelList == null) ? (totalSize + 2) : (totalSize + (2 + 4 * LevelList.Count)));
 		totalSize = ((FormulaContextBridge == null) ? (totalSize + 2) : (totalSize + (2 + FormulaContextBridge.GetSerializedSize())));
 		if (totalSize > 4)

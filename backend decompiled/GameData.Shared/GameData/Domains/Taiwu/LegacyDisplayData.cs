@@ -10,69 +10,36 @@ namespace GameData.Domains.Taiwu;
 [AutoGenerateSerializableGameData(NotForArchive = true, NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class LegacyDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 同道数据，可在此读取同道特性
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData OldTaiwuChar;
 
-	/// <summary>
-	/// 同道数据，可在此读取同道特性
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData InheritChar;
 
-	/// <summary>
-	/// 太吾世代计数
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuGenerationsCount;
 
-	/// <summary>
-	/// 当前遗惠点数
-	/// </summary>
 	[SerializableGameDataField]
 	public int LegacyPoint;
 
-	/// <summary>
-	/// 建筑生平遗惠加成
-	/// </summary>
 	[SerializableGameDataField]
 	public int LegacyPointBonusFactor;
 
-	/// <summary>
-	/// 记录每种遗惠点数类型已获得的点数
-	/// </summary>
 	[SerializableGameDataField]
-	public Dictionary<short, short> LegacyPointDict;
+	public Dictionary<short, int> LegacyPointDict;
 
-	/// <summary>
-	/// 记录每种遗惠点数类型的获得次数
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, short> LegacyPointTimesDict;
 
-	/// <summary>
-	/// 可选遗惠列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> AvailableLegacyList;
 
-	/// <summary>
-	/// 世界进度
-	/// </summary>
 	[SerializableGameDataField]
 	public WorldCreationInfo WorldCreationInfo;
 
-	/// <summary>
-	/// 玄狱模式
-	/// </summary>
 	[SerializableGameDataField]
 	public ChallengeModeData ChallengeModeData;
 
-	/// <summary>
-	/// 地区主线 - 界青 - 星运值
-	/// </summary>
 	[SerializableGameDataField]
 	public int SectJieqingExtraLegacyPoints;
 
@@ -83,17 +50,17 @@ public class LegacyDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 16;
+		int totalSize = 36;
 		totalSize = ((OldTaiwuChar == null) ? (totalSize + 2) : (totalSize + (2 + OldTaiwuChar.GetSerializedSize())));
 		totalSize = ((InheritChar == null) ? (totalSize + 2) : (totalSize + (2 + InheritChar.GetSerializedSize())));
 		totalSize += 4;
 		if (LegacyPointDict != null)
 		{
-			foreach (KeyValuePair<short, short> item in LegacyPointDict)
+			foreach (KeyValuePair<short, int> item in LegacyPointDict)
 			{
 				_ = item;
 				totalSize += 2;
-				totalSize += 2;
+				totalSize += 4;
 			}
 		}
 		totalSize += 4;
@@ -107,7 +74,6 @@ public class LegacyDisplayData : ISerializableGameData
 			}
 		}
 		totalSize = ((AvailableLegacyList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * AvailableLegacyList.Count)));
-		totalSize += WorldCreationInfo.GetSerializedSize();
 		totalSize = ((ChallengeModeData == null) ? (totalSize + 2) : (totalSize + (2 + ChallengeModeData.GetSerializedSize())));
 		if (totalSize > 4)
 		{
@@ -157,12 +123,12 @@ public class LegacyDisplayData : ISerializableGameData
 		{
 			*(int*)pCurrData = LegacyPointDict.Count;
 			pCurrData += 4;
-			foreach (KeyValuePair<short, short> pair in LegacyPointDict)
+			foreach (KeyValuePair<short, int> pair in LegacyPointDict)
 			{
 				*(short*)pCurrData = pair.Key;
 				pCurrData += 2;
-				*(short*)pCurrData = pair.Value;
-				pCurrData += 2;
+				*(int*)pCurrData = pair.Value;
+				pCurrData += 4;
 			}
 		}
 		else
@@ -266,7 +232,7 @@ public class LegacyDisplayData : ISerializableGameData
 		{
 			if (LegacyPointDict == null)
 			{
-				LegacyPointDict = new Dictionary<short, short>();
+				LegacyPointDict = new Dictionary<short, int>();
 			}
 			else
 			{
@@ -276,8 +242,8 @@ public class LegacyDisplayData : ISerializableGameData
 			{
 				short key = *(short*)pCurrData;
 				pCurrData += 2;
-				short value = *(short*)pCurrData;
-				pCurrData += 2;
+				int value = *(int*)pCurrData;
+				pCurrData += 4;
 				LegacyPointDict.Add(key, value);
 			}
 		}

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class JieqingGamePeace : ConfigData<JieqingGamePeaceItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static JieqingGamePeace Instance = new JieqingGamePeace();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "Name", "Color", "Width", "Height", "Shape", "ArtResourceIndex" };

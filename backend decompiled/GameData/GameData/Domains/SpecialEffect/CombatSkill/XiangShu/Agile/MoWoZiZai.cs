@@ -24,7 +24,7 @@ public class MoWoZiZai : AgileSkillBase
 		AffectDatas.Add(new AffectedDataKey(base.CharacterId, 145, -1), EDataModifyType.Add);
 		AffectDatas.Add(new AffectedDataKey(base.CharacterId, 146, -1), EDataModifyType.Add);
 		AffectDatas.Add(new AffectedDataKey(-1, 244, -1), EDataModifyType.Custom);
-		short aiTargetDist = base.CombatChar.AiController.GetTargetDistance();
+		short aiTargetDist = base.CombatChar.GetTargetDistance();
 		if (aiTargetDist >= 0)
 		{
 			DomainManager.Combat.ChangeDistance(context, base.CombatChar, aiTargetDist - DomainManager.Combat.GetCurrentDistance(), isForced: false, canStop: false);

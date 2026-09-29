@@ -7,172 +7,88 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物伤病的全部显示数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 [SerializableGameData(NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class CharacterInjuryDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 人物伤病数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Injuries Injuries;
 
-	/// <summary>
-	/// 强健数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CompleteDamageStepDisplayData CompleteDamageStepDisplayData;
 
-	/// <summary>
-	/// 身体残缺数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<bool> AllBodyPartExists;
 
-	/// <summary>
-	/// 人物中毒数据
-	/// </summary>
 	[SerializableGameDataField]
 	public PoisonInts Poisons;
 
-	/// <summary>
-	/// 人物毒抗数据
-	/// </summary>
 	[SerializableGameDataField]
 	public PoisonInts PoisonResists;
 
-	/// <summary>
-	/// 是否免疫
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] IsImmune;
 
-	/// <summary>
-	/// 是否先天免疫
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] IsBornImmune;
 
-	/// <summary>
-	/// 内息紊乱当前值
-	/// </summary>
 	[SerializableGameDataField]
 	public short DisorderOfQi;
 
-	/// <summary>
-	/// 内息紊乱变化值
-	/// </summary>
 	[SerializableGameDataField]
 	public short ChangeOfQiDisorder;
 
-	/// <summary>
-	/// 调息对内息紊乱的影响
-	/// </summary>
 	[SerializableGameDataField]
 	public short RecoveryOfQiDisorderChangeQiDisorderValue;
 
-	/// <summary>
-	/// 产业对内息紊乱的影响
-	/// </summary>
 	[SerializableGameDataField]
 	public short BuildingChangeQiDisorderValue;
 
-	/// <summary>
-	/// 服食对内息紊乱的影响
-	/// </summary>
 	[SerializableGameDataField]
 	public short EatItemChangeQiDisorderValue;
 
-	/// <summary>
-	/// 特性对内息紊乱的影响
-	/// </summary>
 	[SerializableGameDataField]
 	public short FeatureChangeQiDisorderValue;
 
-	/// <summary>
-	/// 当前健康
-	/// </summary>
 	[SerializableGameDataField]
 	public short Health;
 
-	/// <summary>
-	/// 剩余最大健康
-	/// </summary>
 	[SerializableGameDataField]
 	public short LeftMaxHealth;
 
-	/// <summary>
-	/// 健康变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short HealthRecovery;
 
-	/// <summary>
-	/// 内息对健康的变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short DisorderOfQiChangeHealthValue;
 
-	/// <summary>
-	/// 伤势对对健康的变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short InjuryChangeHealthValue;
 
-	/// <summary>
-	/// 毒素对健康的变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short PoisonChangeHealthValue;
 
-	/// <summary>
-	/// 产业对健康的变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short BuildingChangeHealthValue;
 
-	/// <summary>
-	/// 服食对健康的变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short EatItemChangeHealthValue;
 
-	/// <summary>
-	/// 特性对健康的变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short FeatureChangeHealthValue;
 
-	/// <summary>
-	/// 特效系统对健康的变动
-	/// </summary>
 	[SerializableGameDataField]
 	public short SpecialEffectChangeHealthValue;
 
-	/// <summary>
-	/// 战斗中出现的健康标记
-	/// </summary>
 	[SerializableGameDataField]
 	public short HealthCombatMark;
 
-	/// <summary>
-	/// 最大可服食数量
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CanEatingMaxCount;
 
-	/// <summary>
-	/// 已服食物品数据
-	/// </summary>
 	[SerializableGameDataField]
 	public EatingItems EatingItems;
 
-	/// <summary>
-	/// 已服食物品的显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData[] EatingItemDisplayDataArray;
 
@@ -185,45 +101,24 @@ public class CharacterInjuryDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public MainAttributes MainAttributeRecoveries;
 
-	/// <summary>
-	/// 当前内力
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrNeili;
 
-	/// <summary>
-	/// 最大内力
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxNeili;
 
-	/// <summary>
-	/// CharacterId
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharacterId;
 
-	/// <summary>
-	/// CharacterTemplateId
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 战斗中角色的参战前部分数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatCharacterDisplayData CombatCharacterDisplayData;
 
-	/// <summary>
-	/// 行囊的药品数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int InventoryMedicineItemCount;
 
-	/// <summary>
-	/// 剩余可服食数量
-	/// </summary>
 	public int AvailableEatingSlotsCount => EatingItems.GetAvailableEatingSlotsCount(CanEatingMaxCount);
 
 	public bool IsSerializedSizeFixed()
@@ -233,15 +128,10 @@ public class CharacterInjuryDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 53;
-		totalSize += Injuries.GetSerializedSize();
-		totalSize = ((CompleteDamageStepDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CompleteDamageStepDisplayData.GetSerializedSize())));
+		int totalSize = 697;
 		totalSize = ((AllBodyPartExists == null) ? (totalSize + 2) : (totalSize + (2 + AllBodyPartExists.Count)));
-		totalSize += Poisons.GetSerializedSize();
-		totalSize += PoisonResists.GetSerializedSize();
 		totalSize = ((IsImmune == null) ? (totalSize + 2) : (totalSize + (2 + IsImmune.Length)));
 		totalSize = ((IsBornImmune == null) ? (totalSize + 2) : (totalSize + (2 + IsBornImmune.Length)));
-		totalSize += EatingItems.GetSerializedSize();
 		if (EatingItemDisplayDataArray != null)
 		{
 			totalSize += 2;
@@ -254,9 +144,6 @@ public class CharacterInjuryDisplayData : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize += CurMainAttributes.GetSerializedSize();
-		totalSize += MaxMainAttributes.GetSerializedSize();
-		totalSize += MainAttributeRecoveries.GetSerializedSize();
 		totalSize = ((CombatCharacterDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CombatCharacterDisplayData.GetSerializedSize())));
 		if (totalSize > 4)
 		{

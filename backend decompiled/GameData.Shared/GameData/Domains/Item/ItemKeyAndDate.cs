@@ -3,54 +3,56 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 物品索引以及日期
-/// </summary>
-public struct ItemKeyAndDate : ISerializableGameData, IEquatable<ItemKeyAndDate>, IComparable<ItemKeyAndDate>
+[SerializableGameData(NoCopyConstructors = true)]
+public struct ItemKeyAndDate(int date, ItemKey itemKey) : ISerializableGameData, IEquatable<ItemKeyAndDate>, IComparable<ItemKeyAndDate>
 {
-	/// <summary>
-	/// 日期
-	/// </summary>
-	public int Date;
+	[SerializableGameDataField]
+	public int Date = date;
 
-	/// <summary>
-	/// 物品索引
-	/// </summary>
-	public ItemKey ItemKey;
-
-	/// <summary>
-	/// 物品索引以及日期
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="date"></param>
-	public ItemKeyAndDate(int date, ItemKey itemKey)
-	{
-		Date = date;
-		ItemKey = itemKey;
-	}
+	[SerializableGameDataField]
+	public ItemKey ItemKey = itemKey;
 
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	public unsafe int GetSerializedSize()
+	public int GetSerializedSize()
 	{
-		return 4 + sizeof(ItemKey);
+		int totalSize = 12;
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
 	}
 
 	public unsafe int Serialize(byte* pData)
 	{
-		*(int*)pData = Date;
-		*(ItemKey*)(pData + 4) = ItemKey;
-		return 4 + sizeof(ItemKey);
+		byte* pCurrData = pData;
+		*(int*)pCurrData = Date;
+		pCurrData += 4;
+		pCurrData += ItemKey.Serialize(pCurrData);
+		int totalSize = (int)(pCurrData - pData);
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
 	}
 
 	public unsafe int Deserialize(byte* pData)
 	{
-		Date = *(int*)pData;
-		ItemKey = *(ItemKey*)(pData + 4);
-		return 4 + sizeof(ItemKey);
+		byte* pCurrData = pData;
+		Date = *(int*)pCurrData;
+		pCurrData += 4;
+		pCurrData += ItemKey.Deserialize(pCurrData);
+		int totalSize = (int)(pCurrData - pData);
+		if (totalSize > 4)
+		{
+			return (totalSize + 3) / 4 * 4;
+		}
+		return totalSize;
 	}
 
 	public bool Equals(ItemKeyAndDate other)

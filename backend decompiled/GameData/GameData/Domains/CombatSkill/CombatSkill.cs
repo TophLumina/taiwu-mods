@@ -345,29 +345,41 @@ public class CombatSkill : BaseGameDataObject, ICombatSkillBridge, ISerializable
 		{
 			direction = (sbyte)DomainManager.SpecialEffect.ModifyData(_id.CharId, _id.SkillTemplateId, 209, direction);
 		}
-		if (_direction != -2 && direction != _direction)
+		if (_direction == direction)
 		{
-			CombatSkillItem configData = Config.CombatSkill.Instance[_id.SkillTemplateId];
-			int effectId = ((direction == 0) ? configData.DirectEffectID : configData.ReverseEffectID);
-			if (Config.SpecialEffect.Instance[effectId].EffectActiveType == 3)
+			return direction;
+		}
+		if (_direction == -2)
+		{
+			bool flag = (uint)direction <= 1u;
+			bool needEffect = flag;
+			bool hasEffect = _specialEffectId >= 0;
+			if (hasEffect == needEffect)
 			{
-				if (_id.CharId == DomainManager.Taiwu.GetTaiwuCharId())
-				{
-					DataContext context = DataContextManager.GetCurrentThreadDataContext();
-					if (_specialEffectId >= 0)
-					{
-						DomainManager.SpecialEffect.Remove(context, _specialEffectId);
-					}
-					if (direction >= 0)
-					{
-						DomainManager.SpecialEffect.Add(context, _id.CharId, _id.SkillTemplateId, 3, direction);
-					}
-				}
-				else
-				{
-					DomainManager.SpecialEffect.AddBrokenEffectChangedDuringAdvance(_specialEffectId, _id.CharId, _id.SkillTemplateId);
-				}
+				return direction;
 			}
+		}
+		CombatSkillItem configData = Config.CombatSkill.Instance[_id.SkillTemplateId];
+		int effectId = ((direction == 0) ? configData.DirectEffectID : configData.ReverseEffectID);
+		if (Config.SpecialEffect.Instance[effectId].EffectActiveType != 3)
+		{
+			return direction;
+		}
+		if (_id.CharId == DomainManager.Taiwu.GetTaiwuCharId())
+		{
+			DataContext context = DataContextManager.GetCurrentThreadDataContext();
+			if (_specialEffectId >= 0)
+			{
+				DomainManager.SpecialEffect.Remove(context, _specialEffectId);
+			}
+			if (direction >= 0)
+			{
+				DomainManager.SpecialEffect.Add(context, _id.CharId, _id.SkillTemplateId, 3, direction);
+			}
+		}
+		else
+		{
+			DomainManager.SpecialEffect.AddBrokenEffectChangedDuringAdvance(_specialEffectId, _id.CharId, _id.SkillTemplateId);
 		}
 		return direction;
 	}
@@ -579,10 +591,8 @@ public class CombatSkill : BaseGameDataObject, ICombatSkillBridge, ISerializable
 		{
 			add += breakBonuse.CalcAddPower(Template.EquipType);
 		}
-		List<short> featuresIds = character.GetFeatureIds();
-		for (int i = 0; i < featuresIds.Count; i++)
+		foreach (short featureId in character.GetValidFeatureIds())
 		{
-			short featureId = featuresIds[i];
 			CharacterFeatureItem featureCfg = CharacterFeature.Instance[featureId];
 			add += featureCfg.CombatSkillPowerBonuses[Template.EquipType];
 			List<FeatureAddSkillPower> combatSkillTypePowerBonuses = featureCfg.CombatSkillTypePowerBonuses;
@@ -599,9 +609,9 @@ public class CombatSkill : BaseGameDataObject, ICombatSkillBridge, ISerializable
 			}
 		}
 		ItemKey[] equipment = character.GetEquipment();
-		for (int i2 = 8; i2 <= 10; i2++)
+		for (int i = 8; i <= 10; i++)
 		{
-			ItemKey itemKey = equipment[i2];
+			ItemKey itemKey = equipment[i];
 			if (itemKey.IsValid() && itemKey.ItemType == 2)
 			{
 				AccessoryItem accessoryItem = Config.Accessory.Instance[itemKey.TemplateId];

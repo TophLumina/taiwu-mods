@@ -2,7 +2,7 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.ExchangeSystem;
 
-[SerializeAs(typeof(byte))]
+[SerializeTo(typeof(byte))]
 public enum ETargetType : byte
 {
 	GoodNpc,

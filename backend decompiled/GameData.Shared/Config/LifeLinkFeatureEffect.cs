@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class LifeLinkFeatureEffect : ConfigData<LifeLinkFeatureEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LifeLinkFeatureEffect Instance = new LifeLinkFeatureEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "FeatureId", "TemplateId", "FiveElements", "CriticalProbPercent" };

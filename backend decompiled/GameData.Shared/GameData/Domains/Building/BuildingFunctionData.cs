@@ -8,57 +8,30 @@ namespace GameData.Domains.Building;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class BuildingFunctionData : ISerializableGameData
 {
-	/// <summary>
-	/// 蛟池是否开启
-	/// </summary>
 	[SerializableGameDataField]
 	public bool JiaoPoolOpen;
 
-	/// <summary>
-	/// 太吾当前在太吾村
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AtTaiwuVillage;
 
-	/// <summary>
-	/// 当前能否进行仓库存取
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransfer;
 
-	/// <summary>
-	/// 练功房中紫竹化身的id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> XiangshuIdInKungfuRoom;
 
-	/// <summary>
-	/// 练功房中可以练习的功法：太吾村练功房可以练所有学会的，门派只能练学会中属于当前门派的
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> CanPracticeSkills;
 
-	/// <summary>
-	/// 太吾当前位置的定居点模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public short OrganizationTemplateIdOfTaiwuLocation;
 
-	/// <summary>
-	/// 金刚地主特殊互动按钮-化魂阁
-	/// </summary>
 	[SerializableGameDataField]
 	public bool JingangFunctionOpen;
 
-	/// <summary>
-	/// 金刚地主互动按钮-高僧灵魂
-	/// </summary>
 	[SerializableGameDataField]
 	public bool JingangMonkSoul;
 
-	/// <summary>
-	/// 伏龙特殊互动 身份和鸡
-	/// </summary>
 	[SerializableGameDataField]
 	public bool FulongFunctionOpen;
 

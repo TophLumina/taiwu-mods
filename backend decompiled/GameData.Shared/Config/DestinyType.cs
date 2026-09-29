@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class DestinyType : ConfigData<DestinyTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DestinyType Instance = new DestinyType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

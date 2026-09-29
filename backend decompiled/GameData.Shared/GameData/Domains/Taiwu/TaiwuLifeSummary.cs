@@ -48,18 +48,11 @@ public class TaiwuLifeSummary : ISerializableGameData
 		_taiwuCharId = taiwuCharId;
 	}
 
-	/// <summary>
-	/// 传剑时记录太吾各项数据
-	/// </summary>
 	public void Archive(AbridgedCharacter abridgedCharacter)
 	{
 		_abridgedCharacter = abridgedCharacter;
 	}
 
-	/// <summary>
-	/// 记录一条数据
-	/// </summary>
-	/// <param name="templateId"></param>
 	public void Record(int templateId)
 	{
 		if (_summaryValues.TryGetValue(templateId, out var value))
@@ -72,11 +65,6 @@ public class TaiwuLifeSummary : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 记录多条数据
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="value"></param>
 	public void Record(int templateId, int value)
 	{
 		if (_summaryValues.TryGetValue(templateId, out var prevValue))
@@ -89,40 +77,21 @@ public class TaiwuLifeSummary : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 直接设置一条数据
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="value"></param>
 	public void Set(int templateId, int value)
 	{
 		_summaryValues[templateId] = value;
 	}
 
-	/// <summary>
-	/// 获取数据
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public int Get(int templateId)
 	{
 		return _summaryValues.GetValueOrDefault(templateId, 0);
 	}
 
-	/// <summary>
-	/// 是否有指定值
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public bool Contains(int templateId)
 	{
 		return _summaryValues.ContainsKey(templateId);
 	}
 
-	/// <summary>
-	/// 添加一条成就
-	/// </summary>
-	/// <param name="templateId"></param>
 	public void RecordAchievement(int templateId)
 	{
 		if (!_achievements.Contains(templateId))
@@ -136,16 +105,10 @@ public class TaiwuLifeSummary : ISerializableGameData
 		return _achievements;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TaiwuLifeSummary()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TaiwuLifeSummary(TaiwuLifeSummary other)
 	{
 		_taiwuCharId = other._taiwuCharId;
@@ -154,9 +117,6 @@ public class TaiwuLifeSummary : ISerializableGameData
 		_abridgedCharacter = new AbridgedCharacter(other._abridgedCharacter);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TaiwuLifeSummary other)
 	{
 		_taiwuCharId = other._taiwuCharId;
@@ -165,13 +125,11 @@ public class TaiwuLifeSummary : ISerializableGameData
 		_abridgedCharacter = new AbridgedCharacter(other._abridgedCharacter);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -185,7 +143,6 @@ public class TaiwuLifeSummary : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -233,7 +190,6 @@ public class TaiwuLifeSummary : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

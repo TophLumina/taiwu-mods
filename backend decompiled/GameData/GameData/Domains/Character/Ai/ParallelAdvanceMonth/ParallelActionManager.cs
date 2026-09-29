@@ -202,17 +202,28 @@ public class ParallelActionManager
 		DomainManager.Adventure.CollectAllCharactersInAdventure(charIdSet);
 		foreach (int charId2 in charIdSet)
 		{
-			if (!DomainManager.Character.TryGetElement_Objects(charId2, out var character2) || !character2.IsActiveExternalRelationState(188uL) || character2.GetKidnapperId() >= 0 || character2.GetLeaderId() == taiwuCharId)
+			if (!DomainManager.Character.TryGetElement_Objects(charId2, out var character2) || !character2.IsActiveExternalRelationState(188uL) || character2.GetKidnapperId() >= 0 || character2.GetLeaderId() == taiwuCharId || character2.IsInBlockCharSet())
 			{
 				continue;
 			}
-			Location location = character2.GetLocation();
-			if (location.IsValid())
+			if (character2.GetLeaderId() == charId2)
 			{
-				MapBlockData block = DomainManager.Map.GetBlock(location);
-				if ((block.CharacterSet != null && block.CharacterSet.Contains(charId2)) || (block.InfectedCharacterSet != null && block.InfectedCharacterSet.Contains(charId2)))
+				HashSet<int> groupCharSet = DomainManager.Character.GetGroup(charId2).GetCollection();
+				foreach (int groupCharId in groupCharSet)
 				{
-					continue;
+					if (groupCharId == charId2)
+					{
+						continue;
+					}
+					Character groupChar = DomainManager.Character.GetElement_Objects(groupCharId);
+					if (character2.IsActiveExternalRelationState(188uL) && !charIdSet.Contains(groupCharId) && !character2.IsInBlockCharSet())
+					{
+						action.HiddenExecute(context, groupChar);
+						if (groupChar.IsActiveExternalRelationState(2uL))
+						{
+							OfflineExecuteCharacterActionsInArea_KidnappedChars(context, groupCharId, action);
+						}
+					}
 				}
 			}
 			action.HiddenExecute(context, character2);

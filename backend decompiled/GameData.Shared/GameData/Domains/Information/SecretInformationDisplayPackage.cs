@@ -6,31 +6,19 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 秘闻显示数据包
-/// <para>避免了第二次获取人物数据的步骤, 同时减少了直接把该数据内置在 <see cref="T:GameData.Domains.Information.SecretInformationDisplayData" /> 中产生的冗余</para>
-/// </summary>
 public class SecretInformationDisplayPackage : ISerializableGameData
 {
-	/// <summary>
-	/// 所属秘闻显示对象
-	/// </summary>
 	[SerializableGameDataField]
 	public readonly List<SecretInformationDisplayData> SecretInformationDisplayDataList = new List<SecretInformationDisplayData>();
 
-	/// <summary>
-	/// 本包秘闻显示对象所需的角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public readonly IDictionary<int, CharacterDisplayData> CharacterData = new Dictionary<int, CharacterDisplayData>();
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -69,7 +57,6 @@ public class SecretInformationDisplayPackage : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -130,7 +117,6 @@ public class SecretInformationDisplayPackage : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

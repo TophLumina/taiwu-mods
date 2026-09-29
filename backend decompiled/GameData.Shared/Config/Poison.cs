@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class Poison : ConfigData<PoisonItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Poison Instance = new Poison();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "ShortName", "Desc", "ProduceType", "TemplateId", "FontColor", "Icon", "TipsIcon" };

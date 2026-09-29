@@ -4,9 +4,6 @@ namespace GameData.Domains.Story;
 
 public static class StoryDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort SectMainStoryTaskStatus = 0;
@@ -38,11 +35,12 @@ public static class StoryDomainHelper
 		public const ushort SectEmeiGuidance = 13;
 
 		public const ushort SectEmeiGuidanceData = 14;
+
+		public const ushort TaiwuAsXiangshuEntered = 15;
+
+		public const ushort TaiwuAsXiangshuTowerFinalLayerEntered = 16;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort GetSectMainStoryActiveStatus = 0;
@@ -156,16 +154,28 @@ public static class StoryDomainHelper
 		public const ushort UpdateSectEmeiGuidanceData = 54;
 
 		public const ushort OnClickEmeiGuidance = 55;
+
+		public const ushort GetXiangshuShadowId = 56;
+
+		public const ushort GetTaiwuAsXiangshuTowerDisplayData = 57;
+
+		public const ushort EnterTaiwuAsXiangshuTowerFinalLayer = 58;
+
+		public const ushort GmCmd_GenerateTaiwuAsXiangshuCharacters = 59;
+
+		public const ushort ClearTaiwuAsXiangshuTowerPendingPerformance = 60;
+
+		public const ushort MarkTaiwuAsXiangshuTowerTiandiDefeatPerformancePlayed = 61;
+
+		public const ushort MarkTaiwuAsXiangshuTowerDemonHeartObtainedPerformancePlayed = 62;
+
+		public const ushort SuppressionTwelveImmortal = 63;
+
+		public const ushort IsTwelveImmortalsBeSuppression = 64;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
-	public const ushort DataCount = 15;
+	public const ushort DataCount = 17;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "SectMainStoryTaskStatus", 0 },
@@ -182,27 +192,19 @@ public static class StoryDomainHelper
 		{ "DivineFlameData", 11 },
 		{ "TwelveImmortalsStatuses", 12 },
 		{ "SectEmeiGuidance", 13 },
-		{ "SectEmeiGuidanceData", 14 }
+		{ "SectEmeiGuidanceData", 14 },
+		{ "TaiwuAsXiangshuEntered", 15 },
+		{ "TaiwuAsXiangshuTowerFinalLayerEntered", 16 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
-	public static readonly string[] DataId2FieldName = new string[15]
+	public static readonly string[] DataId2FieldName = new string[17]
 	{
 		"SectMainStoryTaskStatus", "Wordless", "SectEmeiBreakBonusData", "SectEmeiSkillBreakBonus", "SectEmeiBreakBonusTemplateIds", "ThreeVitalsReplaceTeammateRecord", "ThreeVitalsReplaceTeammateRecordNew", "SectMainStoryCombatTimesShaolin", "AdvanceXiangshuAvatarIds", "IronPlateData",
-		"NoMindGuyUsed", "DivineFlameData", "TwelveImmortalsStatuses", "SectEmeiGuidance", "SectEmeiGuidanceData"
+		"NoMindGuyUsed", "DivineFlameData", "TwelveImmortalsStatuses", "SectEmeiGuidance", "SectEmeiGuidanceData", "TaiwuAsXiangshuEntered", "TaiwuAsXiangshuTowerFinalLayerEntered"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
-	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[15][];
+	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[17][];
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId = new Dictionary<string, ushort>
 	{
 		{ "GetSectMainStoryActiveStatus", 0 },
@@ -260,16 +262,26 @@ public static class StoryDomainHelper
 		{ "GetDivineFlameSelectTargetLocationList", 52 },
 		{ "GetDivineFlameDisplayData", 53 },
 		{ "UpdateSectEmeiGuidanceData", 54 },
-		{ "OnClickEmeiGuidance", 55 }
+		{ "OnClickEmeiGuidance", 55 },
+		{ "GetXiangshuShadowId", 56 },
+		{ "GetTaiwuAsXiangshuTowerDisplayData", 57 },
+		{ "EnterTaiwuAsXiangshuTowerFinalLayer", 58 },
+		{ "GmCmd_GenerateTaiwuAsXiangshuCharacters", 59 },
+		{ "ClearTaiwuAsXiangshuTowerPendingPerformance", 60 },
+		{ "MarkTaiwuAsXiangshuTowerTiandiDefeatPerformancePlayed", 61 },
+		{ "MarkTaiwuAsXiangshuTowerDemonHeartObtainedPerformancePlayed", 62 },
+		{ "SuppressionTwelveImmortal", 63 },
+		{ "IsTwelveImmortalsBeSuppression", 64 }
 	};
 
-	public static readonly string[] MethodId2MethodName = new string[56]
+	public static readonly string[] MethodId2MethodName = new string[65]
 	{
 		"GetSectMainStoryActiveStatus", "SetSectMainStoryActiveStatus", "NotifySectStoryActivated", "GetBaihuaLifeLinkNeiliType", "GetSectBaihuaLifeLinkDisplayData", "SetLifeLinkCharacter", "ShaolinInterruptDemonSlayerTrial", "ShaolinRegenerateRestricts", "ShaolinQueryRestrictsAreSatisfied", "ShaolinStartDemonSlayerTrial",
 		"ShaolinGenerateTemporaryDemon", "ShaolinClearTemporaryDemon", "CreateMirrorCharacter", "GetDefendHeavenlyTreeDisplayData", "DefendHeavenlyTreeFeed", "TryTriggerThiefCatch", "CatchThief", "GetSectZhujianGearMateAttributeDisplayData", "GetSectZhujianGearMateSkillDisplayData", "GetGearMateBreakoutDisplayData",
 		"GetSectZhujianGearMateFeatureDisplayData", "GetSectZhujianGearMateConsummateDisplayData", "JingangMonkSoulBtnShow", "GetCurAreaValidCharactersForTripodVessel", "ApplyKongsangSpecialInteract", "GetEmeiBreakBonusCollection", "AddEmeiSkillBreakBonus", "GmCmd_SectEmeiAddSkillBreakBonus", "GetEmeiBreakBonusDisplayData", "GetSectEmeiSpecialBreakDisplayData",
 		"EmeiTransferBonusProgress", "RemoveEmeiSkillBreakBonus", "GmCmd_SectEmeiClearSkillBreakBonus", "GetSectMainStoryTriggerConditions", "DriveWugKing", "RefiningWugKing", "DropPoisonsToWugJug", "GetWugKingDriveStatuses", "GetThreeVitalsReplaceTeammateRecord", "ThreeVitalsReplaceTeammateRecordRemove",
 		"ThreeVitalsReplaceTeammateRecordSet", "DefendHeavenlyTreeClearEnemy", "GmCmd_ClearIronPlateCooldown", "GetIronPlateCombatCharId", "GetIronPlateOptionCharIdList", "SetIconPlateFollowingCharId", "GmCmd_SetIconPlateIsUnlocked", "GmCmd_ClearDivineFlameCooldown", "GmCmd_SetDivineFlameIsUnlocked", "UseDivineFlame",
-		"GetDivineFlameSelectTargetCharIdList", "CheckDivineFlameTarget", "GetDivineFlameSelectTargetLocationList", "GetDivineFlameDisplayData", "UpdateSectEmeiGuidanceData", "OnClickEmeiGuidance"
+		"GetDivineFlameSelectTargetCharIdList", "CheckDivineFlameTarget", "GetDivineFlameSelectTargetLocationList", "GetDivineFlameDisplayData", "UpdateSectEmeiGuidanceData", "OnClickEmeiGuidance", "GetXiangshuShadowId", "GetTaiwuAsXiangshuTowerDisplayData", "EnterTaiwuAsXiangshuTowerFinalLayer", "GmCmd_GenerateTaiwuAsXiangshuCharacters",
+		"ClearTaiwuAsXiangshuTowerPendingPerformance", "MarkTaiwuAsXiangshuTowerTiandiDefeatPerformancePlayed", "MarkTaiwuAsXiangshuTowerDemonHeartObtainedPerformancePlayed", "SuppressionTwelveImmortal", "IsTwelveImmortalsBeSuppression"
 	};
 }

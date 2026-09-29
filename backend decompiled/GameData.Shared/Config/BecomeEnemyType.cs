@@ -7,121 +7,52 @@ namespace Config;
 [Serializable]
 public class BecomeEnemyType : ConfigData<BecomeEnemyTypeItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 未知原因
-		/// </summary>
 		public const short Unknown = 0;
 
-		/// <summary>
-		/// 劫持
-		/// </summary>
 		public const short Kidnap = 1;
 
-		/// <summary>
-		/// 表白失败
-		/// </summary>
 		public const short ConfessLoveFail = 2;
 
-		/// <summary>
-		/// 分手
-		/// </summary>
 		public const short Breakup = 3;
 
-		/// <summary>
-		/// 求婚失败
-		/// </summary>
 		public const short ProposeFail = 4;
 
-		/// <summary>
-		/// 秘闻公开
-		/// </summary>
 		public const short SecretInformationBroadcast = 5;
 
-		/// <summary>
-		/// 魑魅蛊
-		/// </summary>
 		public const short WugForestSpirit = 6;
 
-		/// <summary>
-		/// 出手袭击
-		/// </summary>
 		public const short Attack = 7;
 
-		/// <summary>
-		/// 逐出太吾村
-		/// </summary>
 		public const short ExpelVillager = 8;
 
-		/// <summary>
-		/// 情难自禁
-		/// </summary>
 		public const short Rape = 9;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 未知原因
-		/// </summary>
 		public static BecomeEnemyTypeItem Unknown => Instance[(short)0];
 
-		/// <summary>
-		/// 劫持
-		/// </summary>
 		public static BecomeEnemyTypeItem Kidnap => Instance[(short)1];
 
-		/// <summary>
-		/// 表白失败
-		/// </summary>
 		public static BecomeEnemyTypeItem ConfessLoveFail => Instance[(short)2];
 
-		/// <summary>
-		/// 分手
-		/// </summary>
 		public static BecomeEnemyTypeItem Breakup => Instance[(short)3];
 
-		/// <summary>
-		/// 求婚失败
-		/// </summary>
 		public static BecomeEnemyTypeItem ProposeFail => Instance[(short)4];
 
-		/// <summary>
-		/// 秘闻公开
-		/// </summary>
 		public static BecomeEnemyTypeItem SecretInformationBroadcast => Instance[(short)5];
 
-		/// <summary>
-		/// 魑魅蛊
-		/// </summary>
 		public static BecomeEnemyTypeItem WugForestSpirit => Instance[(short)6];
 
-		/// <summary>
-		/// 出手袭击
-		/// </summary>
 		public static BecomeEnemyTypeItem Attack => Instance[(short)7];
 
-		/// <summary>
-		/// 逐出太吾村
-		/// </summary>
 		public static BecomeEnemyTypeItem ExpelVillager => Instance[(short)8];
 
-		/// <summary>
-		/// 情难自禁
-		/// </summary>
 		public static BecomeEnemyTypeItem Rape => Instance[(short)9];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static BecomeEnemyType Instance = new BecomeEnemyType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "DefaultLifeRecord", "DefaultMonthlyNotification", "TemplateId" };

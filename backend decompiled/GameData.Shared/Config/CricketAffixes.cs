@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class CricketAffixes : ConfigData<CricketAffixesItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CricketAffixes Instance = new CricketAffixes();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Weights" };

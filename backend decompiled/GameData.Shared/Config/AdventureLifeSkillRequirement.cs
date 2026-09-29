@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AdventureLifeSkillRequirement : ConfigData<AdventureLifeSkillRequirementItem, byte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureLifeSkillRequirement Instance = new AdventureLifeSkillRequirement();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "RequiredValue" };

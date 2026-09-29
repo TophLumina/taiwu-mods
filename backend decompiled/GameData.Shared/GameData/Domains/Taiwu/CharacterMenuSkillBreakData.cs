@@ -4,55 +4,32 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 角色菜单技艺页面数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class CharacterMenuSkillBreakData : ISerializableGameData
 {
-	/// <summary>
-	/// 已学功法id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public int BaseCostExp;
 
-	/// <summary>
-	/// 功法资质
-	/// </summary>
 	[SerializableGameDataField]
 	public bool WudangUpgradeInteractionUnlocked;
 
-	/// <summary>
-	/// 功法显示信息
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillDisplayDataCharacterMenuListItem SkillDisplayDataSimple;
 
-	/// <summary>
-	/// 当前资质
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrQualification;
 
-	/// <summary>
-	/// 需要资质
-	/// </summary>
 	[SerializableGameDataField]
 	public int RequireQualification;
 
-	/// <summary>
-	/// 是否为战斗技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsCombatSkillQualification;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 14;
@@ -64,7 +41,6 @@ public class CharacterMenuSkillBreakData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -100,7 +76,6 @@ public class CharacterMenuSkillBreakData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

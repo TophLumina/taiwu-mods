@@ -7,111 +7,48 @@ namespace Config;
 [Serializable]
 public class RanshanGiveupLegendaryBook : ConfigData<RanshanGiveupLegendaryBookItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 华居等级一
-		/// </summary>
 		public const byte HuajuLevel1 = 0;
 
-		/// <summary>
-		/// 华居等级二
-		/// </summary>
 		public const byte HuajuLevel2 = 1;
 
-		/// <summary>
-		/// 华居等级三
-		/// </summary>
 		public const byte HuajuLevel3 = 2;
 
-		/// <summary>
-		/// 玄质等级一
-		/// </summary>
 		public const byte XuanzhiLevel1 = 3;
 
-		/// <summary>
-		/// 玄质等级二
-		/// </summary>
 		public const byte XuanzhiLevel2 = 4;
 
-		/// <summary>
-		/// 玄质等级三
-		/// </summary>
 		public const byte XuanzhiLevel3 = 5;
 
-		/// <summary>
-		/// 迎娇等级一
-		/// </summary>
 		public const byte YingjiaoLevel1 = 6;
 
-		/// <summary>
-		/// 迎娇等级二
-		/// </summary>
 		public const byte YingjiaoLevel2 = 7;
 
-		/// <summary>
-		/// 迎娇等级三
-		/// </summary>
 		public const byte YingjiaoLevel3 = 8;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 华居等级一
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem HuajuLevel1 => Instance[(byte)0];
 
-		/// <summary>
-		/// 华居等级二
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem HuajuLevel2 => Instance[(byte)1];
 
-		/// <summary>
-		/// 华居等级三
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem HuajuLevel3 => Instance[(byte)2];
 
-		/// <summary>
-		/// 玄质等级一
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem XuanzhiLevel1 => Instance[(byte)3];
 
-		/// <summary>
-		/// 玄质等级二
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem XuanzhiLevel2 => Instance[(byte)4];
 
-		/// <summary>
-		/// 玄质等级三
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem XuanzhiLevel3 => Instance[(byte)5];
 
-		/// <summary>
-		/// 迎娇等级一
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem YingjiaoLevel1 => Instance[(byte)6];
 
-		/// <summary>
-		/// 迎娇等级二
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem YingjiaoLevel2 => Instance[(byte)7];
 
-		/// <summary>
-		/// 迎娇等级三
-		/// </summary>
 		public static RanshanGiveupLegendaryBookItem YingjiaoLevel3 => Instance[(byte)8];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static RanshanGiveupLegendaryBook Instance = new RanshanGiveupLegendaryBook();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "ResourceType", "TemplateId", "FollowDuration", "ResponseCycle", "MoodChange", "JudgeAttribute" };

@@ -9,421 +9,172 @@ namespace Config;
 [Serializable]
 public class MapArea : ConfigData<MapAreaItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 深谷·出生
-		/// </summary>
 		public const short Born = 0;
 
-		/// <summary>
-		/// 京城
-		/// </summary>
 		public const short MainCityBegin = 1;
 
-		/// <summary>
-		/// 成都
-		/// </summary>
 		public const short Chengdu = 2;
 
-		/// <summary>
-		/// 桂州
-		/// </summary>
 		public const short Guizhou = 3;
 
-		/// <summary>
-		/// 襄阳
-		/// </summary>
 		public const short Xiangyang = 4;
 
-		/// <summary>
-		/// 太原
-		/// </summary>
 		public const short taiyuan = 5;
 
-		/// <summary>
-		/// 广州
-		/// </summary>
 		public const short Guangzhou = 6;
 
-		/// <summary>
-		/// 青州
-		/// </summary>
 		public const short qingzhou = 7;
 
-		/// <summary>
-		/// 江陵
-		/// </summary>
 		public const short Jiangling = 8;
 
-		/// <summary>
-		/// 福州
-		/// </summary>
 		public const short fuzhou = 9;
 
-		/// <summary>
-		/// 辽阳
-		/// </summary>
 		public const short liaoyang = 10;
 
-		/// <summary>
-		/// 秦州
-		/// </summary>
 		public const short qinzhou = 11;
 
-		/// <summary>
-		/// 大理
-		/// </summary>
 		public const short dali = 12;
 
-		/// <summary>
-		/// 寿春
-		/// </summary>
 		public const short shouchun = 13;
 
-		/// <summary>
-		/// 杭州
-		/// </summary>
 		public const short hangzhou = 14;
 
-		/// <summary>
-		/// 扬州
-		/// </summary>
 		public const short MainCityEnd = 15;
 
-		/// <summary>
-		/// 白鹿泽
-		/// </summary>
 		public const short WhiteDeerLake = 18;
 
-		/// <summary>
-		/// 莲花山
-		/// </summary>
 		public const short LotusMountain = 21;
 
-		/// <summary>
-		/// 璇女峰
-		/// </summary>
 		public const short XuannvPeak = 23;
 
-		/// <summary>
-		/// 空桑山
-		/// </summary>
 		public const short KongsangMountain = 25;
 
-		/// <summary>
-		/// 昆仑山
-		/// </summary>
 		public const short KunlunMountain = 26;
 
-		/// <summary>
-		/// 黑水
-		/// </summary>
 		public const short Blackwater = 27;
 
-		/// <summary>
-		/// 赤明岛
-		/// </summary>
 		public const short Chimingdao = 29;
 
-		/// <summary>
-		/// 洛阳
-		/// </summary>
 		public const short ThirdAreaBegin = 31;
 
-		/// <summary>
-		/// 漓水
-		/// </summary>
 		public const short Lishui = 47;
 
-		/// <summary>
-		/// 猫儿山
-		/// </summary>
 		public const short MaoerMountain = 49;
 
-		/// <summary>
-		/// 南海
-		/// </summary>
 		public const short Nanhai = 66;
 
-		/// <summary>
-		/// 惠州
-		/// </summary>
 		public const short Huizhou = 67;
 
-		/// <summary>
-		/// 罗浮山
-		/// </summary>
 		public const short LuofuMountain = 68;
 
-		/// <summary>
-		/// 梅州
-		/// </summary>
 		public const short MeizhouCity = 69;
 
-		/// <summary>
-		/// 潮州
-		/// </summary>
 		public const short Chaozhou = 70;
 
-		/// <summary>
-		/// 南岭
-		/// </summary>
 		public const short Nanling = 71;
 
-		/// <summary>
-		/// 白云山
-		/// </summary>
 		public const short WhiteCloudMountain = 72;
 
-		/// <summary>
-		/// 柴山
-		/// </summary>
 		public const short LingshanDao = 79;
 
-		/// <summary>
-		/// 湘水
-		/// </summary>
 		public const short Xiangshui = 83;
 
-		/// <summary>
-		/// 洞庭湖
-		/// </summary>
 		public const short DongtingLake = 84;
 
-		/// <summary>
-		/// 深谷·引导
-		/// </summary>
 		public const short Guide = 136;
 
-		/// <summary>
-		/// 隐秘小村
-		/// </summary>
 		public const short SecretVilliage = 137;
 
-		/// <summary>
-		/// 过去的太吾村
-		/// </summary>
 		public const short PastTaiwuVillage = 138;
 
-		/// <summary>
-		/// 真柴山
-		/// </summary>
 		public const short Chaishan = 139;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 深谷·出生
-		/// </summary>
 		public static MapAreaItem Born => Instance[(short)0];
 
-		/// <summary>
-		/// 京城
-		/// </summary>
 		public static MapAreaItem MainCityBegin => Instance[(short)1];
 
-		/// <summary>
-		/// 成都
-		/// </summary>
 		public static MapAreaItem Chengdu => Instance[(short)2];
 
-		/// <summary>
-		/// 桂州
-		/// </summary>
 		public static MapAreaItem Guizhou => Instance[(short)3];
 
-		/// <summary>
-		/// 襄阳
-		/// </summary>
 		public static MapAreaItem Xiangyang => Instance[(short)4];
 
-		/// <summary>
-		/// 太原
-		/// </summary>
 		public static MapAreaItem taiyuan => Instance[(short)5];
 
-		/// <summary>
-		/// 广州
-		/// </summary>
 		public static MapAreaItem Guangzhou => Instance[(short)6];
 
-		/// <summary>
-		/// 青州
-		/// </summary>
 		public static MapAreaItem qingzhou => Instance[(short)7];
 
-		/// <summary>
-		/// 江陵
-		/// </summary>
 		public static MapAreaItem Jiangling => Instance[(short)8];
 
-		/// <summary>
-		/// 福州
-		/// </summary>
 		public static MapAreaItem fuzhou => Instance[(short)9];
 
-		/// <summary>
-		/// 辽阳
-		/// </summary>
 		public static MapAreaItem liaoyang => Instance[(short)10];
 
-		/// <summary>
-		/// 秦州
-		/// </summary>
 		public static MapAreaItem qinzhou => Instance[(short)11];
 
-		/// <summary>
-		/// 大理
-		/// </summary>
 		public static MapAreaItem dali => Instance[(short)12];
 
-		/// <summary>
-		/// 寿春
-		/// </summary>
 		public static MapAreaItem shouchun => Instance[(short)13];
 
-		/// <summary>
-		/// 杭州
-		/// </summary>
 		public static MapAreaItem hangzhou => Instance[(short)14];
 
-		/// <summary>
-		/// 扬州
-		/// </summary>
 		public static MapAreaItem MainCityEnd => Instance[(short)15];
 
-		/// <summary>
-		/// 白鹿泽
-		/// </summary>
 		public static MapAreaItem WhiteDeerLake => Instance[(short)18];
 
-		/// <summary>
-		/// 莲花山
-		/// </summary>
 		public static MapAreaItem LotusMountain => Instance[(short)21];
 
-		/// <summary>
-		/// 璇女峰
-		/// </summary>
 		public static MapAreaItem XuannvPeak => Instance[(short)23];
 
-		/// <summary>
-		/// 空桑山
-		/// </summary>
 		public static MapAreaItem KongsangMountain => Instance[(short)25];
 
-		/// <summary>
-		/// 昆仑山
-		/// </summary>
 		public static MapAreaItem KunlunMountain => Instance[(short)26];
 
-		/// <summary>
-		/// 黑水
-		/// </summary>
 		public static MapAreaItem Blackwater => Instance[(short)27];
 
-		/// <summary>
-		/// 赤明岛
-		/// </summary>
 		public static MapAreaItem Chimingdao => Instance[(short)29];
 
-		/// <summary>
-		/// 洛阳
-		/// </summary>
 		public static MapAreaItem ThirdAreaBegin => Instance[(short)31];
 
-		/// <summary>
-		/// 漓水
-		/// </summary>
 		public static MapAreaItem Lishui => Instance[(short)47];
 
-		/// <summary>
-		/// 猫儿山
-		/// </summary>
 		public static MapAreaItem MaoerMountain => Instance[(short)49];
 
-		/// <summary>
-		/// 南海
-		/// </summary>
 		public static MapAreaItem Nanhai => Instance[(short)66];
 
-		/// <summary>
-		/// 惠州
-		/// </summary>
 		public static MapAreaItem Huizhou => Instance[(short)67];
 
-		/// <summary>
-		/// 罗浮山
-		/// </summary>
 		public static MapAreaItem LuofuMountain => Instance[(short)68];
 
-		/// <summary>
-		/// 梅州
-		/// </summary>
 		public static MapAreaItem MeizhouCity => Instance[(short)69];
 
-		/// <summary>
-		/// 潮州
-		/// </summary>
 		public static MapAreaItem Chaozhou => Instance[(short)70];
 
-		/// <summary>
-		/// 南岭
-		/// </summary>
 		public static MapAreaItem Nanling => Instance[(short)71];
 
-		/// <summary>
-		/// 白云山
-		/// </summary>
 		public static MapAreaItem WhiteCloudMountain => Instance[(short)72];
 
-		/// <summary>
-		/// 柴山
-		/// </summary>
 		public static MapAreaItem LingshanDao => Instance[(short)79];
 
-		/// <summary>
-		/// 湘水
-		/// </summary>
 		public static MapAreaItem Xiangshui => Instance[(short)83];
 
-		/// <summary>
-		/// 洞庭湖
-		/// </summary>
 		public static MapAreaItem DongtingLake => Instance[(short)84];
 
-		/// <summary>
-		/// 深谷·引导
-		/// </summary>
 		public static MapAreaItem Guide => Instance[(short)136];
 
-		/// <summary>
-		/// 隐秘小村
-		/// </summary>
 		public static MapAreaItem SecretVilliage => Instance[(short)137];
 
-		/// <summary>
-		/// 过去的太吾村
-		/// </summary>
 		public static MapAreaItem PastTaiwuVillage => Instance[(short)138];
 
-		/// <summary>
-		/// 真柴山
-		/// </summary>
 		public static MapAreaItem Chaishan => Instance[(short)139];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MapArea Instance = new MapArea();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

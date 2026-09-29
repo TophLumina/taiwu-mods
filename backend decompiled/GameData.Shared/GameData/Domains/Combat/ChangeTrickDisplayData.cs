@@ -2,43 +2,26 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 变招显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct ChangeTrickDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 可以进行变招
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanChangeTrick;
 
-	/// <summary>
-	/// 消耗变招次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostCount;
 
-	/// <summary>
-	/// 变招倍率
-	/// </summary>
 	[SerializableGameDataField]
 	public short AddHitRate;
 
-	/// <summary>
-	/// 招架值消耗倍率
-	/// </summary>
 	[SerializableGameDataField]
 	public short AddBreakBlock;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -49,7 +32,6 @@ public struct ChangeTrickDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (CanChangeTrick ? ((byte)1) : ((byte)0));
@@ -67,7 +49,6 @@ public struct ChangeTrickDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

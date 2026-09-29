@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class MiniGameYuanshan : ConfigData<MiniGameYuanshanItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 感应程度4
-		/// </summary>
 		public const byte Max = 3;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 感应程度4
-		/// </summary>
 		public static MiniGameYuanshanItem Max => Instance[(byte)3];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MiniGameYuanshan Instance = new MiniGameYuanshan();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "TemplateId", "SwapCount", "SwapDuration", "GreyIcon", "Effect", "EnableEffect" };

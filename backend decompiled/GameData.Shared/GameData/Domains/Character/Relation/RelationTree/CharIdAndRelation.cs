@@ -2,33 +2,12 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Relation.RelationTree;
 
-/// <summary>
-/// 角色 ID 和角色关系
-/// </summary>
 [SerializableGameData(NotForDisplayModule = true)]
-public struct CharIdAndRelation : ISerializableGameData
+public struct CharIdAndRelation(int charId, ushort relationType) : ISerializableGameData
 {
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
-	public int CharId;
+	public int CharId = charId;
 
-	/// <summary>
-	/// 角色关系.
-	/// <see cref="T:GameData.Domains.Character.Relation.RelationType" />
-	/// </summary>
-	public ushort RelationType;
-
-	/// <summary>
-	/// 角色 ID 和角色关系
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="relationType"></param>
-	public CharIdAndRelation(int charId, ushort relationType)
-	{
-		CharId = charId;
-		RelationType = relationType;
-	}
+	public ushort RelationType = relationType;
 
 	public bool IsSerializedSizeFixed()
 	{

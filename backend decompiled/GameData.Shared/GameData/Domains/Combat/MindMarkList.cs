@@ -4,48 +4,31 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 心神标记列表
-/// </summary>
 [SerializableGameData]
 public class MindMarkList : ISerializableGameData
 {
-	/// <summary>
-	/// (总时间，剩余时间)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CountdownData> MarkList = new List<CountdownData>();
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public MindMarkList()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public MindMarkList(MindMarkList other)
 	{
 		MarkList = ((other.MarkList == null) ? null : new List<CountdownData>(other.MarkList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(MindMarkList other)
 	{
 		MarkList = ((other.MarkList == null) ? null : new List<CountdownData>(other.MarkList));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -57,7 +40,6 @@ public class MindMarkList : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -85,7 +67,6 @@ public class MindMarkList : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -7,171 +7,72 @@ namespace Config;
 [Serializable]
 public class TeammateBubble : ConfigData<TeammateBubbleItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 动物
-		/// </summary>
 		public const short WildAnimal = 155;
 
-		/// <summary>
-		/// 失散坐骑
-		/// </summary>
 		public const short FedAnimal = 156;
 
-		/// <summary>
-		/// 亲属
-		/// </summary>
 		public const short Family = 158;
 
-		/// <summary>
-		/// 好友
-		/// </summary>
 		public const short Friend = 159;
 
-		/// <summary>
-		/// 仇敌
-		/// </summary>
 		public const short Enemy = 160;
 
-		/// <summary>
-		/// 秘闻行为人
-		/// </summary>
 		public const short Actor = 161;
 
-		/// <summary>
-		/// 秘闻接受者
-		/// </summary>
 		public const short Reactor = 162;
 
-		/// <summary>
-		/// 相枢入邪人
-		/// </summary>
 		public const short PartlyInfected = 163;
 
-		/// <summary>
-		/// 相枢入魔人
-		/// </summary>
 		public const short CompletelyInfected = 164;
 
-		/// <summary>
-		/// 奇书执迷人
-		/// </summary>
 		public const short LegendaryBookShocked = 165;
 
-		/// <summary>
-		/// 奇书堕魔
-		/// </summary>
 		public const short LegendaryBookInsane = 166;
 
-		/// <summary>
-		/// 非仇敌坟墓
-		/// </summary>
 		public const short NonEnemyGrave = 167;
 
-		/// <summary>
-		/// 门派领袖
-		/// </summary>
 		public const short Leader = 168;
 
-		/// <summary>
-		/// 毁坏地区
-		/// </summary>
 		public const short BrokenArea = 187;
 
-		/// <summary>
-		/// 伏龙剧情火区
-		/// </summary>
 		public const short FulongFlame = 188;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 动物
-		/// </summary>
 		public static TeammateBubbleItem WildAnimal => Instance[(short)155];
 
-		/// <summary>
-		/// 失散坐骑
-		/// </summary>
 		public static TeammateBubbleItem FedAnimal => Instance[(short)156];
 
-		/// <summary>
-		/// 亲属
-		/// </summary>
 		public static TeammateBubbleItem Family => Instance[(short)158];
 
-		/// <summary>
-		/// 好友
-		/// </summary>
 		public static TeammateBubbleItem Friend => Instance[(short)159];
 
-		/// <summary>
-		/// 仇敌
-		/// </summary>
 		public static TeammateBubbleItem Enemy => Instance[(short)160];
 
-		/// <summary>
-		/// 秘闻行为人
-		/// </summary>
 		public static TeammateBubbleItem Actor => Instance[(short)161];
 
-		/// <summary>
-		/// 秘闻接受者
-		/// </summary>
 		public static TeammateBubbleItem Reactor => Instance[(short)162];
 
-		/// <summary>
-		/// 相枢入邪人
-		/// </summary>
 		public static TeammateBubbleItem PartlyInfected => Instance[(short)163];
 
-		/// <summary>
-		/// 相枢入魔人
-		/// </summary>
 		public static TeammateBubbleItem CompletelyInfected => Instance[(short)164];
 
-		/// <summary>
-		/// 奇书执迷人
-		/// </summary>
 		public static TeammateBubbleItem LegendaryBookShocked => Instance[(short)165];
 
-		/// <summary>
-		/// 奇书堕魔
-		/// </summary>
 		public static TeammateBubbleItem LegendaryBookInsane => Instance[(short)166];
 
-		/// <summary>
-		/// 非仇敌坟墓
-		/// </summary>
 		public static TeammateBubbleItem NonEnemyGrave => Instance[(short)167];
 
-		/// <summary>
-		/// 门派领袖
-		/// </summary>
 		public static TeammateBubbleItem Leader => Instance[(short)168];
 
-		/// <summary>
-		/// 毁坏地区
-		/// </summary>
 		public static TeammateBubbleItem BrokenArea => Instance[(short)187];
 
-		/// <summary>
-		/// 伏龙剧情火区
-		/// </summary>
 		public static TeammateBubbleItem FulongFlame => Instance[(short)188];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TeammateBubble Instance = new TeammateBubble();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

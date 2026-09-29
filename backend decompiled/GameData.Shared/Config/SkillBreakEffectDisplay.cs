@@ -7,481 +7,196 @@ namespace Config;
 [Serializable]
 public class SkillBreakEffectDisplay : ConfigData<SkillBreakEffectDisplayItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 提气消耗
-		/// </summary>
 		public const sbyte CostBreath = 0;
 
-		/// <summary>
-		/// 架势消耗
-		/// </summary>
 		public const sbyte CostStance = 1;
 
-		/// <summary>
-		/// 技艺发挥-音律
-		/// </summary>
 		public const sbyte AttainmentMusic = 2;
 
-		/// <summary>
-		/// 技艺发挥-弈棋
-		/// </summary>
 		public const sbyte AttainmentChess = 3;
 
-		/// <summary>
-		/// 技艺发挥-诗书
-		/// </summary>
 		public const sbyte AttainmentPoem = 4;
 
-		/// <summary>
-		/// 技艺发挥-绘画
-		/// </summary>
 		public const sbyte AttainmentPainting = 5;
 
-		/// <summary>
-		/// 技艺发挥-术数
-		/// </summary>
 		public const sbyte AttainmentMath = 6;
 
-		/// <summary>
-		/// 技艺发挥-品鉴
-		/// </summary>
 		public const sbyte AttainmentAppraisal = 7;
 
-		/// <summary>
-		/// 技艺发挥-锻造
-		/// </summary>
 		public const sbyte AttainmentForging = 8;
 
-		/// <summary>
-		/// 技艺发挥-制木
-		/// </summary>
 		public const sbyte AttainmentWoodworking = 9;
 
-		/// <summary>
-		/// 技艺发挥-医术
-		/// </summary>
 		public const sbyte AttainmentMedicine = 10;
 
-		/// <summary>
-		/// 技艺发挥-毒术
-		/// </summary>
 		public const sbyte AttainmentToxicology = 11;
 
-		/// <summary>
-		/// 技艺发挥-织锦
-		/// </summary>
 		public const sbyte AttainmentWeaving = 12;
 
-		/// <summary>
-		/// 技艺发挥-巧匠
-		/// </summary>
 		public const sbyte AttainmentJade = 13;
 
-		/// <summary>
-		/// 技艺发挥-道法
-		/// </summary>
 		public const sbyte AttainmentTaoism = 14;
 
-		/// <summary>
-		/// 技艺发挥-佛学
-		/// </summary>
 		public const sbyte AttainmentBuddhism = 15;
 
-		/// <summary>
-		/// 技艺发挥-厨艺
-		/// </summary>
 		public const sbyte AttainmentCooking = 16;
 
-		/// <summary>
-		/// 技艺发挥-杂学
-		/// </summary>
 		public const sbyte AttainmentEclectic = 17;
 
-		/// <summary>
-		/// 外伤阈值-头颈
-		/// </summary>
 		public const sbyte OuterInjuryStepHead = 18;
 
-		/// <summary>
-		/// 外伤阈值-胸背
-		/// </summary>
 		public const sbyte OuterInjuryStepChest = 19;
 
-		/// <summary>
-		/// 外伤阈值-腰腹
-		/// </summary>
 		public const sbyte OuterInjuryStepBelly = 20;
 
-		/// <summary>
-		/// 外伤阈值-左臂
-		/// </summary>
 		public const sbyte OuterInjuryStepLeftHand = 21;
 
-		/// <summary>
-		/// 外伤阈值-右臂
-		/// </summary>
 		public const sbyte OuterInjuryStepRightHand = 22;
 
-		/// <summary>
-		/// 外伤阈值-左腿
-		/// </summary>
 		public const sbyte OuterInjuryStepLeftLeg = 23;
 
-		/// <summary>
-		/// 外伤阈值-右腿
-		/// </summary>
 		public const sbyte OuterInjuryStepRightLeg = 24;
 
-		/// <summary>
-		/// 内伤阈值-头颈
-		/// </summary>
 		public const sbyte InnerInjuryStepHead = 25;
 
-		/// <summary>
-		/// 内伤阈值-胸背
-		/// </summary>
 		public const sbyte InnerInjuryStepChest = 26;
 
-		/// <summary>
-		/// 内伤阈值-腰腹
-		/// </summary>
 		public const sbyte InnerInjuryStepBelly = 27;
 
-		/// <summary>
-		/// 内伤阈值-左臂
-		/// </summary>
 		public const sbyte InnerInjuryStepLeftHand = 28;
 
-		/// <summary>
-		/// 内伤阈值-右臂
-		/// </summary>
 		public const sbyte InnerInjuryStepRightHand = 29;
 
-		/// <summary>
-		/// 内伤阈值-左腿
-		/// </summary>
 		public const sbyte InnerInjuryStepLeftLeg = 30;
 
-		/// <summary>
-		/// 内伤阈值-右腿
-		/// </summary>
 		public const sbyte InnerInjuryStepRightLeg = 31;
 
-		/// <summary>
-		/// 重创阈值
-		/// </summary>
 		public const sbyte FatalStep = 32;
 
-		/// <summary>
-		/// 失神阈值
-		/// </summary>
 		public const sbyte MindStep = 33;
 
-		/// <summary>
-		/// 已装备摧破威力上限
-		/// </summary>
 		public const sbyte EquippedPowerAttack = 34;
 
-		/// <summary>
-		/// 已装备轻灵威力上限
-		/// </summary>
 		public const sbyte EquippedPowerAgile = 35;
 
-		/// <summary>
-		/// 已装备护体威力上限
-		/// </summary>
 		public const sbyte EquippedPowerDefense = 36;
 
-		/// <summary>
-		/// 已装备奇窍威力上限
-		/// </summary>
 		public const sbyte EquippedPowerAssist = 37;
 
-		/// <summary>
-		/// 攻击范围前
-		/// </summary>
 		public const sbyte AttackRangeForward = 38;
 
-		/// <summary>
-		/// 攻击范围后
-		/// </summary>
 		public const sbyte AttackRangeBackward = 39;
 
-		/// <summary>
-		/// 造成伤害
-		/// </summary>
 		public const sbyte MakeDirectDamage = 40;
 
-		/// <summary>
-		/// 移动间隔影响
-		/// </summary>
 		public const sbyte MoveCdBonus = 41;
 
-		/// <summary>
-		/// 加快破绽消退的速度
-		/// </summary>
 		public const sbyte FlawRecoverSpeed = 42;
 
-		/// <summary>
-		/// 加快封穴消退的速度
-		/// </summary>
 		public const sbyte AcupointRecoverSpeed = 43;
 
-		/// <summary>
-		/// 被封概率变化
-		/// </summary>
 		public const sbyte SilenceRate = 44;
 
-		/// <summary>
-		/// 被封时间变化
-		/// </summary>
 		public const sbyte SilenceFrame = 45;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 提气消耗
-		/// </summary>
 		public static SkillBreakEffectDisplayItem CostBreath => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 架势消耗
-		/// </summary>
 		public static SkillBreakEffectDisplayItem CostStance => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 技艺发挥-音律
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentMusic => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 技艺发挥-弈棋
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentChess => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 技艺发挥-诗书
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentPoem => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 技艺发挥-绘画
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentPainting => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 技艺发挥-术数
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentMath => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 技艺发挥-品鉴
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentAppraisal => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 技艺发挥-锻造
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentForging => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 技艺发挥-制木
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentWoodworking => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 技艺发挥-医术
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentMedicine => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 技艺发挥-毒术
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentToxicology => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 技艺发挥-织锦
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentWeaving => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 技艺发挥-巧匠
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentJade => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 技艺发挥-道法
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentTaoism => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 技艺发挥-佛学
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentBuddhism => Instance[(sbyte)15];
 
-		/// <summary>
-		/// 技艺发挥-厨艺
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentCooking => Instance[(sbyte)16];
 
-		/// <summary>
-		/// 技艺发挥-杂学
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttainmentEclectic => Instance[(sbyte)17];
 
-		/// <summary>
-		/// 外伤阈值-头颈
-		/// </summary>
 		public static SkillBreakEffectDisplayItem OuterInjuryStepHead => Instance[(sbyte)18];
 
-		/// <summary>
-		/// 外伤阈值-胸背
-		/// </summary>
 		public static SkillBreakEffectDisplayItem OuterInjuryStepChest => Instance[(sbyte)19];
 
-		/// <summary>
-		/// 外伤阈值-腰腹
-		/// </summary>
 		public static SkillBreakEffectDisplayItem OuterInjuryStepBelly => Instance[(sbyte)20];
 
-		/// <summary>
-		/// 外伤阈值-左臂
-		/// </summary>
 		public static SkillBreakEffectDisplayItem OuterInjuryStepLeftHand => Instance[(sbyte)21];
 
-		/// <summary>
-		/// 外伤阈值-右臂
-		/// </summary>
 		public static SkillBreakEffectDisplayItem OuterInjuryStepRightHand => Instance[(sbyte)22];
 
-		/// <summary>
-		/// 外伤阈值-左腿
-		/// </summary>
 		public static SkillBreakEffectDisplayItem OuterInjuryStepLeftLeg => Instance[(sbyte)23];
 
-		/// <summary>
-		/// 外伤阈值-右腿
-		/// </summary>
 		public static SkillBreakEffectDisplayItem OuterInjuryStepRightLeg => Instance[(sbyte)24];
 
-		/// <summary>
-		/// 内伤阈值-头颈
-		/// </summary>
 		public static SkillBreakEffectDisplayItem InnerInjuryStepHead => Instance[(sbyte)25];
 
-		/// <summary>
-		/// 内伤阈值-胸背
-		/// </summary>
 		public static SkillBreakEffectDisplayItem InnerInjuryStepChest => Instance[(sbyte)26];
 
-		/// <summary>
-		/// 内伤阈值-腰腹
-		/// </summary>
 		public static SkillBreakEffectDisplayItem InnerInjuryStepBelly => Instance[(sbyte)27];
 
-		/// <summary>
-		/// 内伤阈值-左臂
-		/// </summary>
 		public static SkillBreakEffectDisplayItem InnerInjuryStepLeftHand => Instance[(sbyte)28];
 
-		/// <summary>
-		/// 内伤阈值-右臂
-		/// </summary>
 		public static SkillBreakEffectDisplayItem InnerInjuryStepRightHand => Instance[(sbyte)29];
 
-		/// <summary>
-		/// 内伤阈值-左腿
-		/// </summary>
 		public static SkillBreakEffectDisplayItem InnerInjuryStepLeftLeg => Instance[(sbyte)30];
 
-		/// <summary>
-		/// 内伤阈值-右腿
-		/// </summary>
 		public static SkillBreakEffectDisplayItem InnerInjuryStepRightLeg => Instance[(sbyte)31];
 
-		/// <summary>
-		/// 重创阈值
-		/// </summary>
 		public static SkillBreakEffectDisplayItem FatalStep => Instance[(sbyte)32];
 
-		/// <summary>
-		/// 失神阈值
-		/// </summary>
 		public static SkillBreakEffectDisplayItem MindStep => Instance[(sbyte)33];
 
-		/// <summary>
-		/// 已装备摧破威力上限
-		/// </summary>
 		public static SkillBreakEffectDisplayItem EquippedPowerAttack => Instance[(sbyte)34];
 
-		/// <summary>
-		/// 已装备轻灵威力上限
-		/// </summary>
 		public static SkillBreakEffectDisplayItem EquippedPowerAgile => Instance[(sbyte)35];
 
-		/// <summary>
-		/// 已装备护体威力上限
-		/// </summary>
 		public static SkillBreakEffectDisplayItem EquippedPowerDefense => Instance[(sbyte)36];
 
-		/// <summary>
-		/// 已装备奇窍威力上限
-		/// </summary>
 		public static SkillBreakEffectDisplayItem EquippedPowerAssist => Instance[(sbyte)37];
 
-		/// <summary>
-		/// 攻击范围前
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttackRangeForward => Instance[(sbyte)38];
 
-		/// <summary>
-		/// 攻击范围后
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AttackRangeBackward => Instance[(sbyte)39];
 
-		/// <summary>
-		/// 造成伤害
-		/// </summary>
 		public static SkillBreakEffectDisplayItem MakeDirectDamage => Instance[(sbyte)40];
 
-		/// <summary>
-		/// 移动间隔影响
-		/// </summary>
 		public static SkillBreakEffectDisplayItem MoveCdBonus => Instance[(sbyte)41];
 
-		/// <summary>
-		/// 加快破绽消退的速度
-		/// </summary>
 		public static SkillBreakEffectDisplayItem FlawRecoverSpeed => Instance[(sbyte)42];
 
-		/// <summary>
-		/// 加快封穴消退的速度
-		/// </summary>
 		public static SkillBreakEffectDisplayItem AcupointRecoverSpeed => Instance[(sbyte)43];
 
-		/// <summary>
-		/// 被封概率变化
-		/// </summary>
 		public static SkillBreakEffectDisplayItem SilenceRate => Instance[(sbyte)44];
 
-		/// <summary>
-		/// 被封时间变化
-		/// </summary>
 		public static SkillBreakEffectDisplayItem SilenceFrame => Instance[(sbyte)45];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakEffectDisplay Instance = new SkillBreakEffectDisplay();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "ShortName", "TemplateId", "Icon", "BigIcon", "IsPercent" };

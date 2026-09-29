@@ -9,516 +9,261 @@ using GameData.Utilities;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法显示数据。用于向前端返回显示所需数据，使前端不必监听功法数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSkill
 {
-	/// <summary>
-	/// 人物ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 功法模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 修习等级
-	/// </summary>
 	[Obsolete("This field is deprecated in favour of the new combat skill.")]
 	public sbyte PracticeLevel;
 
-	/// <summary>
-	/// 研读状态
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort ReadingState;
 
-	/// <summary>
-	/// 激活状态
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort ActivationState;
 
-	/// <summary>
-	/// 生效状态
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanAffect;
 
-	/// <summary>
-	/// 冲突状态
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Conflicting;
 
-	/// <summary>
-	/// 占用格数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte GridCount;
 
-	/// <summary>
-	/// 威力
-	/// </summary>
 	[SerializableGameDataField]
 	public short Power;
 
-	/// <summary>
-	/// 威力上限
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaxPower;
 
-	/// <summary>
-	/// 发挥威力
-	/// </summary>
 	[SerializableGameDataField]
 	public short RequirementsPower;
 
-	/// <summary>
-	/// 使用需求
-	/// </summary>
 	[SerializableGameDataField]
 	public List<(int type, int required, int actual)> Requirements;
 
-	/// <summary>
-	/// 突破格属性加成
-	/// </summary>
 	[SerializableGameDataField]
 	public List<(short id, short bonus, bool isExtra)> BreakAddProperty;
 
-	/// <summary>
-	/// 真气属性加成，propertyId 强转为 <see cref="T:ECharacterPropertyReferencedType" /> 使用
-	/// </summary>
 	[SerializableGameDataField]
 	public List<(short propertyId, int bonus)> NeiliAllocationAddProperty;
 
-	/// <summary>
-	/// 当前突破盘索引
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BreakPlateIndex;
 
-	/// <summary>
-	/// 特效类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte EffectType;
 
-	/// <summary>
-	/// 是否精解
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Mastered;
 
-	/// <summary>
-	/// 是否为预览精解数据
-	/// </summary>
 	[SerializableGameDataField]
 	public bool PreviewMastered;
 
-	/// <summary>
-	/// 是否废除
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Revoked;
 
-	/// <summary>
-	/// 跳跃阈值，负数为不可设置，未设置时此处会返回默认值
-	/// </summary>
 	[SerializableGameDataField]
 	public short JumpThreshold;
 
-	/// <summary>
-	/// 基础内功比例
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BaseInnerRatio;
 
-	/// <summary>
-	/// 内功比例变化范围
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte InnerRatioChangeRange;
 
-	/// <summary>
-	/// 当前内功比例
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CurrInnerRatio;
 
-	/// <summary>
-	/// 期望内功比例
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ExpectInnerRatio;
 
-	/// <summary>
-	/// 参悟新法所需历练
-	/// </summary>
 	[SerializableGameDataField]
 	public int NewUnderstandingNeedExp;
 
-	/// <summary>
-	/// 已经突破成功
-	/// </summary>
 	[SerializableGameDataField]
 	public bool BreakSuccess;
 
-	/// <summary>
-	/// 特效描述数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillEffectDescriptionDisplayData EffectDescription;
 
-	/// <summary>
-	/// 伤害阈值加成数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillDamageStepBonusDisplayData DamageStepBonus;
 
-	/// <summary>
-	/// 各部位伤害阈值（强健）是否是当前生效的
-	/// 索引0~6对应BodyPartType 7个部位，索引7对应重创，索引8对应失神
-	/// </summary>
 	[SerializableGameDataField]
 	public List<bool> BodyPartDamageStepActive;
 
-	/// <summary>
-	/// 玄机品级
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> BreakBonusGrades;
 
-	/// <summary>
-	/// 功法是否装配中。
-	/// 太吾的所有预设里包含都算；npc只有当前装配才算。
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInAnyEquipPlans;
 
-	/// <summary>
-	/// 是否包含峨眉独创心法
-	/// </summary>
+	[SerializableGameDataField]
+	public bool IsInCurrentEquipPlan;
+
 	[SerializableGameDataField]
 	public bool HasSectEmeiSkillBreakBonus;
 
-	/// <summary>
-	/// 罗汉偶像Id
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LuohanId;
 
-	/// <summary>
-	/// 当前功法在奇书中占用的槽位对应的 LegendaryBookSlot TemplateId 列表。
-	/// 为空表示该功法未放入奇书。
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LegendaryBookSlotIds;
 
-	/// <summary>
-	/// 可获得的最大内力值
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaxObtainableNeili;
 
-	/// <summary>
-	/// 已获得的内力值
-	/// </summary>
 	[SerializableGameDataField]
 	public short ObtainedNeili;
 
-	/// <summary>
-	/// 专用功法格数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] SpecificGrids = new sbyte[4];
 
-	/// <summary>
-	/// 万用格数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte GenericGrid;
 
-	/// <summary>
-	/// 施展时最小攻击距离加成
-	/// </summary>
 	[SerializableGameDataField]
 	public short AddAttackDistanceForward;
 
-	/// <summary>
-	/// 施展时最大攻击距离加成
-	/// </summary>
 	[SerializableGameDataField]
 	public short AddAttackDistanceBackward;
 
-	/// <summary>
-	/// 力道命中
-	/// </summary>
 	[SerializableGameDataField]
 	public int HitValueStrength;
 
-	/// <summary>
-	/// 精妙命中
-	/// </summary>
 	[SerializableGameDataField]
 	public int HitValueTechnique;
 
-	/// <summary>
-	/// 迅疾命中
-	/// </summary>
 	[SerializableGameDataField]
 	public int HitValueSpeed;
 
-	/// <summary>
-	/// 心神命中
-	/// </summary>
 	[SerializableGameDataField]
 	public int HitValueMind;
 
-	/// <summary>
-	/// 破体
-	/// </summary>
 	[SerializableGameDataField]
 	public int PenetrateValueOuter;
 
-	/// <summary>
-	/// 破气
-	/// </summary>
 	[SerializableGameDataField]
 	public int PenetrateValueInner;
 
-	/// <summary>
-	/// 含有毒素
-	/// </summary>
 	[SerializableGameDataField]
 	public PoisonsAndLevels Poisons;
 
-	/// <summary>
-	/// 成数分布
-	/// </summary>
 	[SerializableGameDataField]
 	public HitOrAvoidInts HitDistribution;
 
-	/// <summary>
-	/// 攻击部位权重
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> BodyPartWeights;
 
-	/// <summary>
-	/// 发挥十成威力次数，太吾专属数据
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FullPowerCastTimes;
 
-	/// <summary>
-	/// 功法是否被收藏，太吾专属数据
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsFavorite;
 
-	/// <summary>
-	/// 蓄力移动速度
-	/// </summary>
 	[SerializableGameDataField]
 	public int JumpSpeed;
 
-	/// <summary>
-	/// 移动速度加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public short AddMoveSpeed;
 
-	/// <summary>
-	/// 移动速度百分比加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public short AddPercentMoveSpeed;
 
-	/// <summary>
-	/// 力道加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddHitStrength;
 
-	/// <summary>
-	/// 精妙加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddHitTechnique;
 
-	/// <summary>
-	/// 迅疾加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddHitSpeed;
 
-	/// <summary>
-	/// 动心加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddHitMind;
 
-	/// <summary>
-	/// 御气加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddInnerDef;
 
-	/// <summary>
-	/// 御体加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddOuterDef;
 
-	/// <summary>
-	/// 卸力加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddAvoidStrength;
 
-	/// <summary>
-	/// 拆招加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddAvoidTechnique;
 
-	/// <summary>
-	/// 闪避加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddAvoidSpeed;
 
-	/// <summary>
-	/// 守心加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddAvoidMind;
 
-	/// <summary>
-	/// 外伤反震威力
-	/// </summary>
 	[SerializableGameDataField]
 	public int BouncePowerOuter;
 
-	/// <summary>
-	/// 内伤反震威力
-	/// </summary>
 	[SerializableGameDataField]
 	public int BouncePowerInner;
 
-	/// <summary>
-	/// 反震距离
-	/// </summary>
 	[SerializableGameDataField]
 	public short BounceDistance;
 
-	/// <summary>
-	/// 反击威力
-	/// </summary>
 	[SerializableGameDataField]
 	public int FightbackPower;
 
-	/// <summary>
-	/// 持续时间
-	/// </summary>
 	[SerializableGameDataField]
 	public short EffectDuration;
 
-	/// <summary>
-	/// 施展消耗移动力
-	/// </summary>
 	[SerializableGameDataField]
 	public short CostMobility;
 
-	/// <summary>
-	/// 施展消耗移动力字体类型。0-战斗外、1-够、2-不够
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostMobilityFontType;
 
-	/// <summary>
-	/// 施展消耗式
-	/// </summary>
 	[SerializableGameDataField]
 	public List<NeedTrick> CostTricks;
 
-	/// <summary>
-	/// 施展消耗式字体类型。0-战斗外、1-够、2-不够
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> CostTricksFontType;
 
-	/// <summary>
-	/// 施展消耗提气
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostBreath;
 
-	/// <summary>
-	/// 施展消耗提气字体类型。0-战斗外、1-够、2-不够
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostBreathFontType;
 
-	/// <summary>
-	/// 施展消耗架势
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostStance;
 
-	/// <summary>
-	/// 施展消耗架势字体类型。0-战斗外、1-够、2-不够
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostStanceFontType;
 
-	/// <summary>
-	/// 施展消耗真气(类型, 真气值)
-	/// </summary>
 	[SerializableGameDataField]
 	public (sbyte, sbyte) CostNeiliAllocation;
 
-	/// <summary>
-	/// 施展消耗真气字体类型。0-战斗外、1-够、2-不够
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostNeiliAllocationFontType;
 
-	/// <summary>
-	/// 施展消耗武器耐久字体类型。0-战斗外、1-够、2-不够
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostWeaponDurabilityFontType;
 
-	/// <summary>
-	/// 施展消耗蛊引字体类型。0-战斗外、1-够、2-不够
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CostWugFontType;
 
-	/// <summary>
-	/// 实际五行转移目标，太吾需要考虑周天策略等，下同
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FiveElementDestTypeWhileLooping;
 
-	/// <summary>
-	/// 实际五行转移类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FiveElementTransferTypeWhileLooping;
 
-	/// <summary>
-	/// 功法效果数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillEffectData> EffectData;
 
@@ -588,16 +333,10 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 
 	private CombatSkillItem SkillConfig => Config.CombatSkill.Instance[TemplateId];
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CombatSkillDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillDisplayData(CombatSkillDisplayData other)
 	{
 		CharId = other.CharId;
@@ -630,6 +369,7 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 		BodyPartDamageStepActive = ((other.BodyPartDamageStepActive == null) ? null : new List<bool>(other.BodyPartDamageStepActive));
 		BreakBonusGrades = ((other.BreakBonusGrades == null) ? null : new List<sbyte>(other.BreakBonusGrades));
 		IsInAnyEquipPlans = other.IsInAnyEquipPlans;
+		IsInCurrentEquipPlan = other.IsInCurrentEquipPlan;
 		HasSectEmeiSkillBreakBonus = other.HasSectEmeiSkillBreakBonus;
 		LuohanId = other.LuohanId;
 		LegendaryBookSlotIds = ((other.LegendaryBookSlotIds == null) ? null : new List<short>(other.LegendaryBookSlotIds));
@@ -691,9 +431,6 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 		EffectData = ((other.EffectData == null) ? null : new List<CombatSkillEffectData>(other.EffectData));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillDisplayData other)
 	{
 		CharId = other.CharId;
@@ -726,6 +463,7 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 		BodyPartDamageStepActive = ((other.BodyPartDamageStepActive == null) ? null : new List<bool>(other.BodyPartDamageStepActive));
 		BreakBonusGrades = ((other.BreakBonusGrades == null) ? null : new List<sbyte>(other.BreakBonusGrades));
 		IsInAnyEquipPlans = other.IsInAnyEquipPlans;
+		IsInCurrentEquipPlan = other.IsInCurrentEquipPlan;
 		HasSectEmeiSkillBreakBonus = other.HasSectEmeiSkillBreakBonus;
 		LuohanId = other.LuohanId;
 		LegendaryBookSlotIds = ((other.LegendaryBookSlotIds == null) ? null : new List<short>(other.LegendaryBookSlotIds));
@@ -787,16 +525,14 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 		EffectData = ((other.EffectData == null) ? null : new List<CombatSkillEffectData>(other.EffectData));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
-		int totalSize = 201;
+		int totalSize = 202;
 		if (Requirements != null)
 		{
 			totalSize += 2;
@@ -855,7 +591,6 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -993,6 +728,8 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 			pCurrData += 2;
 		}
 		*pCurrData = (IsInAnyEquipPlans ? ((byte)1) : ((byte)0));
+		pCurrData++;
+		*pCurrData = (IsInCurrentEquipPlan ? ((byte)1) : ((byte)0));
 		pCurrData++;
 		*pCurrData = (HasSectEmeiSkillBreakBonus ? ((byte)1) : ((byte)0));
 		pCurrData++;
@@ -1193,7 +930,6 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -1354,6 +1090,8 @@ public class CombatSkillDisplayData : ISerializableGameData, IFilterableCombatSk
 			BreakBonusGrades?.Clear();
 		}
 		IsInAnyEquipPlans = *pCurrData != 0;
+		pCurrData++;
+		IsInCurrentEquipPlan = *pCurrData != 0;
 		pCurrData++;
 		HasSectEmeiSkillBreakBonus = *pCurrData != 0;
 		pCurrData++;

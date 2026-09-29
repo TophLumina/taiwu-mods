@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class MapRoute : ConfigData<MapRouteItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MapRoute Instance = new MapRoute();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "InternalName", "FromId", "ToId", "PathLoc", "Path", "ExtraFromId", "ExtraToId" };

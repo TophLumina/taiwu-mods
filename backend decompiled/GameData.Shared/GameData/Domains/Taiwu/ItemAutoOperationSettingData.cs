@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 太吾自动处理物品的设置，存档数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class ItemAutoOperationSettingData : ISerializableGameData
 {
@@ -27,33 +24,18 @@ public class ItemAutoOperationSettingData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "DiscardGroup", "DisassembleGroup", "DisassembleWhenDiscard", "DiscardWhenDisassemble", "DisassembleToolGrade" };
 	}
 
-	/// <summary>
-	/// 丢弃设置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public ItemAutoOperationSettingGroup DiscardGroup;
 
-	/// <summary>
-	/// 拆解设置，注意拆解有额外的几项设置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public ItemAutoOperationSettingGroup DisassembleGroup;
 
-	/// <summary>
-	/// 丢弃前尝试拆解物品
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public bool DisassembleWhenDiscard;
 
-	/// <summary>
-	/// 丢弃无法拆解的物品
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public bool DiscardWhenDisassemble;
 
-	/// <summary>
-	/// 使用工具的品级
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public sbyte DisassembleToolGrade;
 
@@ -78,16 +60,10 @@ public class ItemAutoOperationSettingData : ISerializableGameData
 		DisassembleGroup.Init(EItemAutoOperationType.Disassemble);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ItemAutoOperationSettingData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ItemAutoOperationSettingData(ItemAutoOperationSettingData other)
 	{
 		DiscardGroup = new ItemAutoOperationSettingGroup(other.DiscardGroup);
@@ -97,9 +73,6 @@ public class ItemAutoOperationSettingData : ISerializableGameData
 		DisassembleToolGrade = other.DisassembleToolGrade;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ItemAutoOperationSettingData other)
 	{
 		DiscardGroup = new ItemAutoOperationSettingGroup(other.DiscardGroup);

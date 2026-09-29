@@ -3,15 +3,9 @@ using Config.Common;
 
 namespace Config;
 
-/// <summary>
-/// 所有配置数据类的集合
-/// </summary>
 public static class ConfigCollection
 {
-	/// <summary>
-	/// 所有配置数据类的集合
-	/// </summary>
-	public static readonly IConfigData[] Items = new IConfigData[309]
+	public static readonly IConfigData[] Items = new IConfigData[312]
 	{
 		LocalSurnames.Instance,
 		LocalNames.Instance,
@@ -116,6 +110,7 @@ public static class ConfigCollection
 		DemonSlayerTrialRestrict.Instance,
 		DestinyType.Instance,
 		DevelopmentTeam.Instance,
+		DlcEventArgKey.Instance,
 		EncyclopediaTipLink.Instance,
 		EnemyNest.Instance,
 		EquipmentEffect.Instance,
@@ -276,12 +271,14 @@ public static class ConfigCollection
 		SkillBreakPlate.Instance,
 		SkillBreakPlateGridBonusType.Instance,
 		SkillGradeData.Instance,
+		SmarterChicken.Instance,
 		SolarTerm.Instance,
 		SortItem.Instance,
 		SpecialEffect.Instance,
 		SpecialEffectDataField.Instance,
 		StatInfo.Instance,
 		StoryScroll.Instance,
+		SuccessorOfXiangshu.Instance,
 		SwordTomb.Instance,
 		TaiwuBeHuntedEvent.Instance,
 		TaiwuLifeSummaryGroup.Instance,
@@ -324,9 +321,6 @@ public static class ConfigCollection
 		GlobalConfig.Instance
 	};
 
-	/// <summary>
-	/// 配置数据名称表
-	/// </summary>
 	public static readonly Dictionary<string, IConfigData> NameMap = new Dictionary<string, IConfigData>
 	{
 		{
@@ -740,6 +734,10 @@ public static class ConfigCollection
 		{
 			"DevelopmentTeam",
 			DevelopmentTeam.Instance
+		},
+		{
+			"DlcEventArgKey",
+			DlcEventArgKey.Instance
 		},
 		{
 			"EncyclopediaTipLink",
@@ -1382,6 +1380,10 @@ public static class ConfigCollection
 			SkillGradeData.Instance
 		},
 		{
+			"SmarterChicken",
+			SmarterChicken.Instance
+		},
+		{
 			"SolarTerm",
 			SolarTerm.Instance
 		},
@@ -1404,6 +1406,10 @@ public static class ConfigCollection
 		{
 			"StoryScroll",
 			StoryScroll.Instance
+		},
+		{
+			"SuccessorOfXiangshu",
+			SuccessorOfXiangshu.Instance
 		},
 		{
 			"SwordTomb",

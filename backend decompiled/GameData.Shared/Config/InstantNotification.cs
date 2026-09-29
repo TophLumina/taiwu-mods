@@ -7,3371 +7,1360 @@ namespace Config;
 [Serializable]
 public class InstantNotification : ConfigData<InstantNotificationItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// BuildingUpgradingCompleted
-		/// </summary>
 		public const short BuildingUpgradingCompleted = 0;
 
-		/// <summary>
-		/// BuildingDemolitionCompleted
-		/// </summary>
 		public const short BuildingDemolitionCompleted = 1;
 
-		/// <summary>
-		/// BuildingCraftingCompleted
-		/// </summary>
 		public const short BuildingCraftingCompleted = 2;
 
-		/// <summary>
-		/// BuildingConstructionCompleted
-		/// </summary>
 		public const short BuildingConstructionCompleted = 3;
 
-		/// <summary>
-		/// BuildingProductGenerated
-		/// </summary>
 		public const short BuildingProductGenerated = 4;
 
-		/// <summary>
-		/// BuildingDamaged
-		/// </summary>
 		public const short BuildingDamaged = 5;
 
-		/// <summary>
-		/// BuildingRuined
-		/// </summary>
 		public const short BuildingRuined = 6;
 
-		/// <summary>
-		/// BeginBuildingConstruction
-		/// </summary>
 		public const short BeginBuildingConstruction = 7;
 
-		/// <summary>
-		/// BeginBuildingUpgrading
-		/// </summary>
 		public const short BeginBuildingUpgrading = 8;
 
-		/// <summary>
-		/// BeginBuildingDemolition
-		/// </summary>
 		public const short BeginBuildingDemolition = 9;
 
-		/// <summary>
-		/// CancelBuildingDemolition
-		/// </summary>
 		public const short CancelBuildingDemolition = 10;
 
-		/// <summary>
-		/// CandidateArrived
-		/// </summary>
 		public const short CandidateArrived = 11;
 
-		/// <summary>
-		/// CandidateLeaved
-		/// </summary>
 		public const short CandidateLeaved = 12;
 
-		/// <summary>
-		/// JoinTaiwuVillage
-		/// </summary>
 		public const short JoinTaiwuVillage = 13;
 
-		/// <summary>
-		/// LeaveTaiwuVillage
-		/// </summary>
 		public const short LeaveTaiwuVillage = 14;
 
-		/// <summary>
-		/// WarehouseItemLost
-		/// </summary>
 		public const short WarehouseItemLost = 15;
 
-		/// <summary>
-		/// BuildingLoseAuthority
-		/// </summary>
 		public const short BuildingLoseAuthority = 16;
 
-		/// <summary>
-		/// DiscoverRelay
-		/// </summary>
 		public const short DiscoverRelay = 17;
 
-		/// <summary>
-		/// WalkThroughAbyss
-		/// </summary>
 		public const short WalkThroughAbyss = 18;
 
-		/// <summary>
-		/// BeginAdventure
-		/// </summary>
 		public const short BeginAdventure = 19;
 
-		/// <summary>
-		/// NaturalDisasterEncountered
-		/// </summary>
 		public const short NaturalDisasterEncountered = 20;
 
-		/// <summary>
-		/// JoinGroup
-		/// </summary>
 		public const short JoinGroup = 21;
 
-		/// <summary>
-		/// LeaveGroup
-		/// </summary>
 		public const short LeaveGroup = 22;
 
-		/// <summary>
-		/// BehaviorTypeChanged
-		/// </summary>
 		public const short BehaviorTypeChanged = 23;
 
-		/// <summary>
-		/// SectInheritedApprovingReceived
-		/// </summary>
 		public const short SectInheritedApprovingReceived = 292;
 
-		/// <summary>
-		/// InheritedApprovingRateReceived
-		/// </summary>
 		public const short InheritedApprovingRateReceived = 24;
 
-		/// <summary>
-		/// FameIncreased
-		/// </summary>
 		public const short FameIncreased = 25;
 
-		/// <summary>
-		/// FameDecreased
-		/// </summary>
 		public const short FameDecreased = 26;
 
-		/// <summary>
-		/// HappinessIncreased
-		/// </summary>
 		public const short HappinessIncreased = 27;
 
-		/// <summary>
-		/// HappinessDecreased
-		/// </summary>
 		public const short HappinessDecreased = 28;
 
-		/// <summary>
-		/// FavorabilityIncreased
-		/// </summary>
 		public const short FavorabilityIncreased = 29;
 
-		/// <summary>
-		/// FavorabilityDecreased
-		/// </summary>
 		public const short FavorabilityDecreased = 30;
 
-		/// <summary>
-		/// FavorabilityIncreasedAcrossLevels
-		/// </summary>
 		public const short FavorabilityIncreasedAcrossLevels = 31;
 
-		/// <summary>
-		/// FavorabilityDecreasedAcrossLevels
-		/// </summary>
 		public const short FavorabilityDecreasedAcrossLevels = 32;
 
-		/// <summary>
-		/// LovingItemRevealed
-		/// </summary>
 		public const short LovingItemRevealed = 33;
 
-		/// <summary>
-		/// HatingItemRevealed
-		/// </summary>
 		public const short HatingItemRevealed = 34;
 
-		/// <summary>
-		/// LovingItemRevealedNothing
-		/// </summary>
 		public const short LovingItemRevealedNothing = 35;
 
-		/// <summary>
-		/// HatingItemRevealedNothing
-		/// </summary>
 		public const short HatingItemRevealedNothing = 36;
 
-		/// <summary>
-		/// EatBloodDew
-		/// </summary>
 		public const short EatBloodDew = 37;
 
-		/// <summary>
-		/// CombatSkillLearned
-		/// </summary>
 		public const short CombatSkillLearned = 38;
 
-		/// <summary>
-		/// HealthIncreased
-		/// </summary>
 		public const short HealthIncreased = 39;
 
-		/// <summary>
-		/// HealthDecreased
-		/// </summary>
 		public const short HealthDecreased = 40;
 
-		/// <summary>
-		/// XiangshuInfectionIncreased
-		/// </summary>
 		public const short XiangshuInfectionIncreased = 41;
 
-		/// <summary>
-		/// XiangshuInfectionDecreased
-		/// </summary>
 		public const short XiangshuInfectionDecreased = 42;
 
-		/// <summary>
-		/// XiangshuPartlyInfected
-		/// </summary>
 		public const short XiangshuPartlyInfected = 43;
 
-		/// <summary>
-		/// XiangshuCompletelyInfected
-		/// </summary>
 		public const short XiangshuCompletelyInfected = 44;
 
-		/// <summary>
-		/// MainAttributeRecovered
-		/// </summary>
 		public const short MainAttributeRecovered = 45;
 
-		/// <summary>
-		/// MainAttributeConsumed
-		/// </summary>
 		public const short MainAttributeConsumed = 46;
 
-		/// <summary>
-		/// DisorderOfQiIncreased
-		/// </summary>
 		public const short DisorderOfQiIncreased = 47;
 
-		/// <summary>
-		/// DisorderOfQiDecreased
-		/// </summary>
 		public const short DisorderOfQiDecreased = 48;
 
-		/// <summary>
-		/// InjuryIncreased
-		/// </summary>
 		public const short InjuryIncreased = 49;
 
-		/// <summary>
-		/// InjuryDecreased
-		/// </summary>
 		public const short InjuryDecreased = 50;
 
-		/// <summary>
-		/// PoisonIncreased
-		/// </summary>
 		public const short PoisonIncreased = 51;
 
-		/// <summary>
-		/// PoisonDecreased
-		/// </summary>
 		public const short PoisonDecreased = 52;
 
-		/// <summary>
-		/// ExpIncreased
-		/// </summary>
 		public const short ExpIncreased = 53;
 
-		/// <summary>
-		/// ExpDecreased
-		/// </summary>
 		public const short ExpDecreased = 54;
 
-		/// <summary>
-		/// ResourceIncreased
-		/// </summary>
 		public const short ResourceIncreased = 55;
 
-		/// <summary>
-		/// ResourceDecreased
-		/// </summary>
 		public const short ResourceDecreased = 56;
 
-		/// <summary>
-		/// GetItem
-		/// </summary>
 		public const short GetItem = 57;
 
-		/// <summary>
-		/// LoseItem
-		/// </summary>
 		public const short LoseItem = 58;
 
-		/// <summary>
-		/// CharacterGrownUp
-		/// </summary>
 		public const short CharacterGrownUp = 59;
 
-		/// <summary>
-		/// CharacterDead
-		/// </summary>
 		public const short CharacterDead = 60;
 
-		/// <summary>
-		/// CricketDead
-		/// </summary>
 		public const short CricketDead = 61;
 
-		/// <summary>
-		/// FamilyDied
-		/// </summary>
 		public const short FamilyDied = 62;
 
-		/// <summary>
-		/// EnemyDied
-		/// </summary>
 		public const short EnemyDied = 63;
 
-		/// <summary>
-		/// EnemyLucky
-		/// </summary>
 		public const short EnemyLucky = 64;
 
-		/// <summary>
-		/// EnemyUnlucky
-		/// </summary>
 		public const short EnemyUnlucky = 65;
 
-		/// <summary>
-		/// EnemyLoseInLifeSkill
-		/// </summary>
 		public const short EnemyLoseInLifeSkill = 66;
 
-		/// <summary>
-		/// EnemyLoseInCombat
-		/// </summary>
 		public const short EnemyLoseInCombat = 67;
 
-		/// <summary>
-		/// EnemyGreatLoseInCombat
-		/// </summary>
 		public const short EnemyGreatLoseInCombat = 68;
 
-		/// <summary>
-		/// FamilyMiscarriage
-		/// </summary>
 		public const short FamilyMiscarriage = 69;
 
-		/// <summary>
-		/// AbandonExposed
-		/// </summary>
 		public const short AbandonExposed = 70;
 
-		/// <summary>
-		/// AbandonAcknowledged
-		/// </summary>
 		public const short AbandonAcknowledged = 71;
 
-		/// <summary>
-		/// FamilyAbandon
-		/// </summary>
 		public const short FamilyAbandon = 72;
 
-		/// <summary>
-		/// SelfImmoralLove
-		/// </summary>
 		public const short SelfImmoralLove = 73;
 
-		/// <summary>
-		/// FamilyHaveKid
-		/// </summary>
 		public const short FamilyHaveKid = 74;
 
-		/// <summary>
-		/// HaveKid
-		/// </summary>
 		public const short HaveKid = 75;
 
-		/// <summary>
-		/// FamilyImmoralKid
-		/// </summary>
 		public const short FamilyImmoralKid = 76;
 
-		/// <summary>
-		/// ReligiousFamilyHaveKid
-		/// </summary>
 		public const short ReligiousFamilyHaveKid = 77;
 
-		/// <summary>
-		/// FamilyInLove
-		/// </summary>
 		public const short FamilyInLove = 78;
 
-		/// <summary>
-		/// FamilyImmoralLove
-		/// </summary>
 		public const short FamilyImmoralLove = 79;
 
-		/// <summary>
-		/// ReligiousFamilyInLove
-		/// </summary>
 		public const short ReligiousFamilyInLove = 80;
 
-		/// <summary>
-		/// FamilyMarried
-		/// </summary>
 		public const short FamilyMarried = 81;
 
-		/// <summary>
-		/// FamilyImmoralMarriage
-		/// </summary>
 		public const short FamilyImmoralMarriage = 82;
 
-		/// <summary>
-		/// FamilyBeFriendWithEnemy
-		/// </summary>
 		public const short FamilyBeFriendWithEnemy = 83;
 
-		/// <summary>
-		/// FamilyJieyiWithEnemy
-		/// </summary>
 		public const short FamilyJieyiWithEnemy = 84;
 
-		/// <summary>
-		/// FamilyAdoptedMaleEnemy
-		/// </summary>
 		public const short FamilyAdoptedMaleEnemy = 85;
 
-		/// <summary>
-		/// FamilyAdoptedFemaleEnemy
-		/// </summary>
 		public const short FamilyAdoptedFemaleEnemy = 86;
 
-		/// <summary>
-		/// FamilyAdoptedByMaleEnemy
-		/// </summary>
 		public const short FamilyAdoptedByMaleEnemy = 87;
 
-		/// <summary>
-		/// FamilyAdoptedByFemaleEnemy
-		/// </summary>
 		public const short FamilyAdoptedByFemaleEnemy = 88;
 
-		/// <summary>
-		/// FamilyEndedImmoralLove
-		/// </summary>
 		public const short FamilyEndedImmoralLove = 89;
 
-		/// <summary>
-		/// FamilyEndedFriendshipWithEnemy
-		/// </summary>
 		public const short FamilyEndedFriendshipWithEnemy = 90;
 
-		/// <summary>
-		/// FamilyEndedJieyiWithEnemy
-		/// </summary>
 		public const short FamilyEndedJieyiWithEnemy = 91;
 
-		/// <summary>
-		/// LoverHaveSex
-		/// </summary>
 		public const short LoverHaveSex = 92;
 
-		/// <summary>
-		/// TaiwuVillageIdleCount
-		/// </summary>
 		public const short TaiwuVillageIdleCount = 93;
 
-		/// <summary>
-		/// ProfessionSeniorityIncrease
-		/// </summary>
 		public const short ProfessionSeniorityIncrease = 94;
 
-		/// <summary>
-		/// ProfessionUnlockSkill
-		/// </summary>
 		public const short ProfessionUnlockSkill = 95;
 
-		/// <summary>
-		/// ProfessionSkillHasCoolDown
-		/// </summary>
 		public const short ProfessionSkillHasCoolDown = 96;
 
-		/// <summary>
-		/// ProfessionSkillEffectIsEnd
-		/// </summary>
 		public const short ProfessionSkillEffectIsEnd = 97;
 
-		/// <summary>
-		/// ProfessionHunterSkill0
-		/// </summary>
 		public const short ProfessionHunterSkill0 = 98;
 
-		/// <summary>
-		/// ProfessionMartialArtistSkill2
-		/// </summary>
 		public const short ProfessionMartialArtistSkill2 = 99;
 
-		/// <summary>
-		/// ProfessionLiteratiSkill2
-		/// </summary>
 		public const short ProfessionLiteratiSkill2 = 100;
 
-		/// <summary>
-		/// ProfessionCivilianSkill1
-		/// </summary>
 		public const short ProfessionCivilianSkill1 = 101;
 
-		/// <summary>
-		/// ProfessionCivilianSkill2
-		/// </summary>
 		public const short ProfessionCivilianSkill2 = 102;
 
-		/// <summary>
-		/// ProfessionDoctorSkill1
-		/// </summary>
 		public const short ProfessionDoctorSkill1 = 103;
 
-		/// <summary>
-		/// ProfessionMonkBreakFoodRule
-		/// </summary>
 		public const short ProfessionMonkBreakFoodRule = 104;
 
-		/// <summary>
-		/// ProfessionMonkBreakLoveRule
-		/// </summary>
 		public const short ProfessionMonkBreakLoveRule = 105;
 
-		/// <summary>
-		/// ProfessionHunterSkill0None
-		/// </summary>
 		public const short ProfessionHunterSkill0None = 106;
 
-		/// <summary>
-		/// SettlementStoryGoodEnd
-		/// </summary>
 		public const short SettlementStoryGoodEnd = 107;
 
-		/// <summary>
-		/// SettlementStoryBadEnd
-		/// </summary>
 		public const short SettlementStoryBadEnd = 108;
 
-		/// <summary>
-		/// ReadInCombat
-		/// </summary>
 		public const short ReadInCombat = 109;
 
-		/// <summary>
-		/// ReadInLifeSkillCombat
-		/// </summary>
 		public const short ReadInLifeSkillCombat = 110;
 
-		/// <summary>
-		/// ReadInCombatNoChance
-		/// </summary>
 		public const short ReadInCombatNoChance = 111;
 
-		/// <summary>
-		/// ReadInLifeSkillCombatNoChance
-		/// </summary>
 		public const short ReadInLifeSkillCombatNoChance = 112;
 
-		/// <summary>
-		/// BookRepairSuccess
-		/// </summary>
 		public const short BookRepairSuccess = 113;
 
-		/// <summary>
-		/// ReincarnationArchitectureReincarnationEnd
-		/// </summary>
 		public const short ReincarnationArchitectureReincarnationEnd = 114;
 
-		/// <summary>
-		/// TheNestOfRegulationDies
-		/// </summary>
 		public const short TheNestOfRegulationDies = 115;
 
-		/// <summary>
-		/// XuannvBlockMusicTranscribe
-		/// </summary>
 		public const short XuannvBlockMusicTranscribe = 116;
 
-		/// <summary>
-		/// XuannvStateMusicTranscribe
-		/// </summary>
 		public const short XuannvStateMusicTranscribe = 117;
 
-		/// <summary>
-		/// DuChuangYiGeReady
-		/// </summary>
 		public const short DuChuangYiGeReady = 118;
 
-		/// <summary>
-		/// CultureDecline
-		/// </summary>
 		public const short CultureDecline = 119;
 
-		/// <summary>
-		/// ThunderPowerGrow
-		/// </summary>
 		public const short ThunderPowerGrow = 120;
 
-		/// <summary>
-		/// FloodPowerGrow
-		/// </summary>
 		public const short FloodPowerGrow = 121;
 
-		/// <summary>
-		/// BlazePowerGrow
-		/// </summary>
 		public const short BlazePowerGrow = 122;
 
-		/// <summary>
-		/// StormPowerGrow
-		/// </summary>
 		public const short StormPowerGrow = 123;
 
-		/// <summary>
-		/// SandPowerGrow
-		/// </summary>
 		public const short SandPowerGrow = 124;
 
-		/// <summary>
-		/// ThunderPowerDecline
-		/// </summary>
 		public const short ThunderPowerDecline = 125;
 
-		/// <summary>
-		/// FloodPowerDecline
-		/// </summary>
 		public const short FloodPowerDecline = 126;
 
-		/// <summary>
-		/// BlazePowerDecline
-		/// </summary>
 		public const short BlazePowerDecline = 127;
 
-		/// <summary>
-		/// StormPowerDecline
-		/// </summary>
 		public const short StormPowerDecline = 128;
 
-		/// <summary>
-		/// SandPowerDecline
-		/// </summary>
 		public const short SandPowerDecline = 129;
 
-		/// <summary>
-		/// JiaoAbilityUp
-		/// </summary>
 		public const short JiaoAbilityUp = 130;
 
-		/// <summary>
-		/// JiaoAbilityDown
-		/// </summary>
 		public const short JiaoAbilityDown = 131;
 
-		/// <summary>
-		/// JiaoGiftAbilityUp
-		/// </summary>
 		public const short JiaoGiftAbilityUp = 132;
 
-		/// <summary>
-		/// JiaoGiftAbilityDown
-		/// </summary>
 		public const short JiaoGiftAbilityDown = 133;
 
-		/// <summary>
-		/// JiaoAbilityUpPercent
-		/// </summary>
 		public const short JiaoAbilityUpPercent = 134;
 
-		/// <summary>
-		/// JiaoAbilityDownPercent
-		/// </summary>
 		public const short JiaoAbilityDownPercent = 135;
 
-		/// <summary>
-		/// JiaoAbilityUpFloat
-		/// </summary>
 		public const short JiaoAbilityUpFloat = 136;
 
-		/// <summary>
-		/// JiaoAbilityDownFloat
-		/// </summary>
 		public const short JiaoAbilityDownFloat = 137;
 
-		/// <summary>
-		/// WugKingEscape
-		/// </summary>
 		public const short WugKingEscape = 138;
 
-		/// <summary>
-		/// WugKingParasitiferDead
-		/// </summary>
 		public const short WugKingParasitiferDead = 139;
 
-		/// <summary>
-		/// WugKingDead
-		/// </summary>
 		public const short WugKingDead = 140;
 
-		/// <summary>
-		/// WugKingDeadSpecial
-		/// </summary>
 		public const short WugKingDeadSpecial = 141;
 
-		/// <summary>
-		/// KnowMonkSecret
-		/// </summary>
 		public const short KnowMonkSecret = 142;
 
-		/// <summary>
-		/// GraceIncreased
-		/// </summary>
 		public const short GraceIncreased = 143;
 
-		/// <summary>
-		/// WugKingEscape1
-		/// </summary>
 		public const short WugKingEscape1 = 144;
 
-		/// <summary>
-		/// WugKingEscape2
-		/// </summary>
 		public const short WugKingEscape2 = 145;
 
-		/// <summary>
-		/// QiArtInCombatNoChance
-		/// </summary>
 		public const short QiArtInCombatNoChance = 146;
 
-		/// <summary>
-		/// QiArtInLifeSkillCombatNoChance
-		/// </summary>
 		public const short QiArtInLifeSkillCombatNoChance = 147;
 
-		/// <summary>
-		/// SectStoryBaihuaToAnimal
-		/// </summary>
 		public const short SectStoryBaihuaToAnimal = 148;
 
-		/// <summary>
-		/// SectStoryBaihuaToHuman
-		/// </summary>
 		public const short SectStoryBaihuaToHuman = 149;
 
-		/// <summary>
-		/// MechanismOfDetonation
-		/// </summary>
 		public const short MechanismOfDetonation = 150;
 
-		/// <summary>
-		/// ProfessionSeniorityIncrease1
-		/// </summary>
 		public const short ProfessionSeniorityIncrease1 = 151;
 
-		/// <summary>
-		/// BlockResourceRecovery
-		/// </summary>
 		public const short BlockResourceRecovery = 152;
 
-		/// <summary>
-		/// ShenTreeGrow
-		/// </summary>
 		public const short ShenTreeGrow = 153;
 
-		/// <summary>
-		/// BeastUpgrade
-		/// </summary>
 		public const short BeastUpgrade = 154;
 
-		/// <summary>
-		/// BeastDowngrade
-		/// </summary>
 		public const short BeastDowngrade = 155;
 
-		/// <summary>
-		/// GatherCompanions
-		/// </summary>
 		public const short GatherCompanions = 156;
 
-		/// <summary>
-		/// DisseminateSecretInformation
-		/// </summary>
 		public const short DisseminateSecretInformation = 157;
 
-		/// <summary>
-		/// DisseminateInformation
-		/// </summary>
 		public const short DisseminateInformation = 158;
 
-		/// <summary>
-		/// RecommendFellowUp
-		/// </summary>
 		public const short RecommendFellowUp = 159;
 
-		/// <summary>
-		/// RecommendFellowDown
-		/// </summary>
 		public const short RecommendFellowDown = 160;
 
-		/// <summary>
-		/// ComradePropertyUp
-		/// </summary>
 		public const short ComradePropertyUp = 161;
 
-		/// <summary>
-		/// ComradeCombatSkillUp
-		/// </summary>
 		public const short ComradeCombatSkillUp = 162;
 
-		/// <summary>
-		/// ComradeLifeSkillUp
-		/// </summary>
 		public const short ComradeLifeSkillUp = 163;
 
-		/// <summary>
-		/// ComradeFeatureUp
-		/// </summary>
 		public const short ComradeFeatureUp = 164;
 
-		/// <summary>
-		/// ReleasePrisoners
-		/// </summary>
 		public const short ReleasePrisoners = 165;
 
-		/// <summary>
-		/// DriveAwayPeople
-		/// </summary>
 		public const short DriveAwayPeople = 166;
 
-		/// <summary>
-		/// QuenchHatred
-		/// </summary>
 		public const short QuenchHatred = 167;
 
-		/// <summary>
-		/// VisitTemple
-		/// </summary>
 		public const short VisitTemple = 168;
 
-		/// <summary>
-		/// DrinkTeaRecharge
-		/// </summary>
 		public const short DrinkTeaRecharge = 169;
 
-		/// <summary>
-		/// ReleaseSouls
-		/// </summary>
 		public const short ReleaseSouls = 170;
 
-		/// <summary>
-		/// SectPunishmentWarrantRelieved
-		/// </summary>
 		public const short SectPunishmentWarrantRelieved = 171;
 
-		/// <summary>
-		/// SectPunishmentCharacterFeatureRelieved
-		/// </summary>
 		public const short SectPunishmentCharacterFeatureRelieved = 172;
 
-		/// <summary>
-		/// ResignationPosition
-		/// </summary>
 		public const short ResignationPosition = 173;
 
-		/// <summary>
-		/// Legacy
-		/// </summary>
 		public const short Legacy = 174;
 
-		/// <summary>
-		/// CultureUp
-		/// </summary>
 		public const short CultureUp = 175;
 
-		/// <summary>
-		/// SecurityUp
-		/// </summary>
 		public const short SecurityUp = 176;
 
-		/// <summary>
-		/// CultureDown
-		/// </summary>
 		public const short CultureDown = 177;
 
-		/// <summary>
-		/// SecurityDown
-		/// </summary>
 		public const short SecurityDown = 178;
 
-		/// <summary>
-		/// MapPickupsResource
-		/// </summary>
 		public const short MapPickupsResource = 179;
 
-		/// <summary>
-		/// MapPickupsFoodIngredients
-		/// </summary>
 		public const short MapPickupsFoodIngredients = 180;
 
-		/// <summary>
-		/// MapPickupsMaterials
-		/// </summary>
 		public const short MapPickupsMaterials = 181;
 
-		/// <summary>
-		/// MapPickupsHerbal0
-		/// </summary>
 		public const short MapPickupsHerbal0 = 182;
 
-		/// <summary>
-		/// MapPickupsHerbal1
-		/// </summary>
 		public const short MapPickupsHerbal1 = 183;
 
-		/// <summary>
-		/// MapPickupsPoison
-		/// </summary>
 		public const short MapPickupsPoison = 184;
 
-		/// <summary>
-		/// MapPickupsInjuryMedicine
-		/// </summary>
 		public const short MapPickupsInjuryMedicine = 185;
 
-		/// <summary>
-		/// MapPickupsAntidote
-		/// </summary>
 		public const short MapPickupsAntidote = 186;
 
-		/// <summary>
-		/// MapPickupsGainMedicine
-		/// </summary>
 		public const short MapPickupsGainMedicine = 187;
 
-		/// <summary>
-		/// MapPickupsFruit
-		/// </summary>
 		public const short MapPickupsFruit = 188;
 
-		/// <summary>
-		/// MapPickupsChickenDishes
-		/// </summary>
 		public const short MapPickupsChickenDishes = 189;
 
-		/// <summary>
-		/// MapPickupsMeatDishes
-		/// </summary>
 		public const short MapPickupsMeatDishes = 190;
 
-		/// <summary>
-		/// MapPickupsVegetarianDishes
-		/// </summary>
 		public const short MapPickupsVegetarianDishes = 191;
 
-		/// <summary>
-		/// MapPickupsSeafoodDishes
-		/// </summary>
 		public const short MapPickupsSeafoodDishes = 192;
 
-		/// <summary>
-		/// MapPickupsWine
-		/// </summary>
 		public const short MapPickupsWine = 193;
 
-		/// <summary>
-		/// MapPickupsTea
-		/// </summary>
 		public const short MapPickupsTea = 194;
 
-		/// <summary>
-		/// MapPickupsTool
-		/// </summary>
 		public const short MapPickupsTool = 195;
 
-		/// <summary>
-		/// MapPickupsAccessory
-		/// </summary>
 		public const short MapPickupsAccessory = 196;
 
-		/// <summary>
-		/// MapPickupsPoisonCream
-		/// </summary>
 		public const short MapPickupsPoisonCream = 197;
 
-		/// <summary>
-		/// MapPickupsHarrier
-		/// </summary>
 		public const short MapPickupsHarrier = 198;
 
-		/// <summary>
-		/// MapPickupsToken
-		/// </summary>
 		public const short MapPickupsToken = 199;
 
-		/// <summary>
-		/// MapPickupsNeedleBox
-		/// </summary>
 		public const short MapPickupsNeedleBox = 200;
 
-		/// <summary>
-		/// MapPickupsThorn
-		/// </summary>
 		public const short MapPickupsThorn = 201;
 
-		/// <summary>
-		/// MapPickupsHiddenWeapon
-		/// </summary>
 		public const short MapPickupsHiddenWeapon = 202;
 
-		/// <summary>
-		/// MapPickupsFlute
-		/// </summary>
 		public const short MapPickupsFlute = 203;
 
-		/// <summary>
-		/// MapPickupsGloves
-		/// </summary>
 		public const short MapPickupsGloves = 204;
 
-		/// <summary>
-		/// MapPickupsFurGloves
-		/// </summary>
 		public const short MapPickupsFurGloves = 205;
 
-		/// <summary>
-		/// MapPickupsPestle
-		/// </summary>
 		public const short MapPickupsPestle = 206;
 
-		/// <summary>
-		/// MapPickupsSword
-		/// </summary>
 		public const short MapPickupsSword = 207;
 
-		/// <summary>
-		/// MapPickupsBlade
-		/// </summary>
 		public const short MapPickupsBlade = 208;
 
-		/// <summary>
-		/// MapPickupsPolearm
-		/// </summary>
 		public const short MapPickupsPolearm = 209;
 
-		/// <summary>
-		/// MapPickupQin
-		/// </summary>
 		public const short MapPickupQin = 210;
 
-		/// <summary>
-		/// MapPickupsWhisk
-		/// </summary>
 		public const short MapPickupsWhisk = 211;
 
-		/// <summary>
-		/// MapPickupsWhip
-		/// </summary>
 		public const short MapPickupsWhip = 212;
 
-		/// <summary>
-		/// MapPickupsCrest
-		/// </summary>
 		public const short MapPickupsCrest = 213;
 
-		/// <summary>
-		/// MapPickupsShoes
-		/// </summary>
 		public const short MapPickupsShoes = 214;
 
-		/// <summary>
-		/// MapPickupsArmor
-		/// </summary>
 		public const short MapPickupsArmor = 215;
 
-		/// <summary>
-		/// MapPickupsArmGuard
-		/// </summary>
 		public const short MapPickupsArmGuard = 216;
 
-		/// <summary>
-		/// MapPickupsCarDrop
-		/// </summary>
 		public const short MapPickupsCarDrop = 217;
 
-		/// <summary>
-		/// MapPickupsExp
-		/// </summary>
 		public const short MapPickupsExp = 218;
 
-		/// <summary>
-		/// MapPickupsReading
-		/// </summary>
 		public const short MapPickupsReading = 219;
 
-		/// <summary>
-		/// MapPickupsQiArt
-		/// </summary>
 		public const short MapPickupsQiArt = 220;
 
-		/// <summary>
-		/// MapPickupsMorale
-		/// </summary>
 		public const short MapPickupsMorale = 221;
 
-		/// <summary>
-		/// MapPickupsProperty
-		/// </summary>
 		public const short MapPickupsProperty = 222;
 
-		/// <summary>
-		/// MapPickupsEnemyEscape
-		/// </summary>
 		public const short MapPickupsEnemyEscape = 223;
 
-		/// <summary>
-		/// BuildingExp
-		/// </summary>
 		public const short BuildingExp = 224;
 
-		/// <summary>
-		/// WalkThroughDestroyBlock
-		/// </summary>
 		public const short WalkThroughDestroyBlock = 225;
 
-		/// <summary>
-		/// WalkThroughErosionBlock
-		/// </summary>
 		public const short WalkThroughErosionBlock = 226;
 
-		/// <summary>
-		/// ComradePropertyUpNew
-		/// </summary>
 		public const short ComradePropertyUpNew = 227;
 
-		/// <summary>
-		/// ComradeCombatSkillUpNew
-		/// </summary>
 		public const short ComradeCombatSkillUpNew = 228;
 
-		/// <summary>
-		/// ComradeLifeSkillUpNew
-		/// </summary>
 		public const short ComradeLifeSkillUpNew = 229;
 
-		/// <summary>
-		/// ComradePropertyUpNew1
-		/// </summary>
 		public const short ComradePropertyUpNew1 = 230;
 
-		/// <summary>
-		/// ComradeCombatSkillUpNew1
-		/// </summary>
 		public const short ComradeCombatSkillUpNew1 = 231;
 
-		/// <summary>
-		/// ComradeLifeSkillUpNew1
-		/// </summary>
 		public const short ComradeLifeSkillUpNew1 = 232;
 
-		/// <summary>
-		/// CharacterEscape
-		/// </summary>
 		public const short CharacterEscape = 233;
 
-		/// <summary>
-		/// GraceUp
-		/// </summary>
 		public const short GraceUp = 234;
 
-		/// <summary>
-		/// GraceDown
-		/// </summary>
 		public const short GraceDown = 235;
 
-		/// <summary>
-		/// ExpelEnemy
-		/// </summary>
 		public const short ExpelEnemy = 236;
 
-		/// <summary>
-		/// ExpelRighteous
-		/// </summary>
 		public const short ExpelRighteous = 237;
 
-		/// <summary>
-		/// ExpelXiangshuMinion
-		/// </summary>
 		public const short ExpelXiangshuMinion = 238;
 
-		/// <summary>
-		/// ExpelBeast
-		/// </summary>
 		public const short ExpelBeast = 239;
 
-		/// <summary>
-		/// MapPickupsPoisonCorrected
-		/// </summary>
 		public const short MapPickupsPoisonCorrected = 240;
 
-		/// <summary>
-		/// MapPickupsInjuryMedicineCorrected
-		/// </summary>
 		public const short MapPickupsInjuryMedicineCorrected = 241;
 
-		/// <summary>
-		/// MapPickupsAntidoteCorrected
-		/// </summary>
 		public const short MapPickupsAntidoteCorrected = 242;
 
-		/// <summary>
-		/// MapPickupsGainMedicineCorrected
-		/// </summary>
 		public const short MapPickupsGainMedicineCorrected = 243;
 
-		/// <summary>
-		/// MapPickupsResourceUpdate
-		/// </summary>
 		public const short MapPickupsResourceUpdate = 244;
 
-		/// <summary>
-		/// MapPickupsExpUpdate
-		/// </summary>
 		public const short MapPickupsExpUpdate = 245;
 
-		/// <summary>
-		/// MapPickupsMoraleUpdate
-		/// </summary>
 		public const short MapPickupsMoraleUpdate = 246;
 
-		/// <summary>
-		/// MapPickupsItemUpdate
-		/// </summary>
 		public const short MapPickupsItemUpdate = 247;
 
-		/// <summary>
-		/// MapPickupsReadingUpdate
-		/// </summary>
 		public const short MapPickupsReadingUpdate = 248;
 
-		/// <summary>
-		/// MapPickupsQiArtUpdate
-		/// </summary>
 		public const short MapPickupsQiArtUpdate = 249;
 
-		/// <summary>
-		/// MakeItemOutsideSettlement
-		/// </summary>
 		public const short MakeItemOutsideSettlement = 250;
 
-		/// <summary>
-		/// GainFuyuFaith1
-		/// </summary>
 		public const short GainFuyuFaith1 = 251;
 
-		/// <summary>
-		/// GainFuyuFaith2
-		/// </summary>
 		public const short GainFuyuFaith2 = 252;
 
-		/// <summary>
-		/// GainFuyuFaith3
-		/// </summary>
 		public const short GainFuyuFaith3 = 253;
 
-		/// <summary>
-		/// MapPickupsMedicineUpdate
-		/// </summary>
 		public const short MapPickupsMedicineUpdate = 254;
 
-		/// <summary>
-		/// JixiKillTemplateEnemy
-		/// </summary>
 		public const short JixiKillTemplateEnemy = 255;
 
-		/// <summary>
-		/// NeiliRecovery
-		/// </summary>
 		public const short NeiliRecovery = 256;
 
-		/// <summary>
-		/// AdventureRedeem
-		/// </summary>
 		public const short AdventureRedeem = 257;
 
-		/// <summary>
-		/// AdventureCharacterFollow
-		/// </summary>
 		public const short AdventureCharacterFollow = 258;
 
-		/// <summary>
-		/// AdventureStopFollow
-		/// </summary>
 		public const short AdventureStopFollow = 259;
 
-		/// <summary>
-		/// AdventureAttendBanquet
-		/// </summary>
 		public const short AdventureAttendBanquet = 260;
 
-		/// <summary>
-		/// AdventureKillHeretics
-		/// </summary>
 		public const short AdventureKillHeretics = 261;
 
-		/// <summary>
-		/// AdventureBecomeEnemy
-		/// </summary>
 		public const short AdventureBecomeEnemy = 262;
 
-		/// <summary>
-		/// AdventureMusicStart
-		/// </summary>
 		public const short AdventureMusicStart = 263;
 
-		/// <summary>
-		/// AdventureChessStart
-		/// </summary>
 		public const short AdventureChessStart = 264;
 
-		/// <summary>
-		/// AdventurePoemStart
-		/// </summary>
 		public const short AdventurePoemStart = 265;
 
-		/// <summary>
-		/// AdventurePaintStart
-		/// </summary>
 		public const short AdventurePaintStart = 266;
 
-		/// <summary>
-		/// AdventureGiveUpRedeem
-		/// </summary>
 		public const short AdventureGiveUpRedeem = 267;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffMetal
-		/// </summary>
 		public const short AdventureXRSDElementStoneBuffMetal = 268;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffWood
-		/// </summary>
 		public const short AdventureXRSDElementStoneBuffWood = 269;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffWater
-		/// </summary>
 		public const short AdventureXRSDElementStoneBuffWater = 270;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffFire
-		/// </summary>
 		public const short AdventureXRSDElementStoneBuffFire = 271;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffEarth
-		/// </summary>
 		public const short AdventureXRSDElementStoneBuffEarth = 272;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffMetal0
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffMetal0 = 273;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWood0
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffWood0 = 274;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWater0
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffWater0 = 275;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffFire0
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffFire0 = 276;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffEarth0
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffEarth0 = 277;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffMetal1
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffMetal1 = 278;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWood1
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffWood1 = 279;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWater1
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffWater1 = 280;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffFire1
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffFire1 = 281;
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffEarth1
-		/// </summary>
 		public const short AdventureXRSDElementStoneDeBuffEarth1 = 282;
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeMetal
-		/// </summary>
 		public const short AdventureXRSDNeiliChangeMetal = 285;
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeWood
-		/// </summary>
 		public const short AdventureXRSDNeiliChangeWood = 286;
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeWater
-		/// </summary>
 		public const short AdventureXRSDNeiliChangeWater = 287;
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeFire
-		/// </summary>
 		public const short AdventureXRSDNeiliChangeFire = 288;
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeEarth
-		/// </summary>
 		public const short AdventureXRSDNeiliChangeEarth = 289;
 
-		/// <summary>
-		/// AdventureCharacterDie
-		/// </summary>
 		public const short AdventureCharacterDie = 283;
 
-		/// <summary>
-		/// AdventureCharacterDie0
-		/// </summary>
 		public const short AdventureCharacterDie0 = 284;
 
-		/// <summary>
-		/// AlertnessUp
-		/// </summary>
 		public const short AlertnessUp = 290;
 
-		/// <summary>
-		/// AlertnessDown
-		/// </summary>
 		public const short AlertnessDown = 291;
 
-		/// <summary>
-		/// CricketHPUp
-		/// </summary>
 		public const short CricketHPUp = 293;
 
-		/// <summary>
-		/// CricketSPUp
-		/// </summary>
 		public const short CricketSPUp = 294;
 
-		/// <summary>
-		/// CricketVigorUp
-		/// </summary>
 		public const short CricketVigorUp = 295;
 
-		/// <summary>
-		/// CricketStrengthUp
-		/// </summary>
 		public const short CricketStrengthUp = 296;
 
-		/// <summary>
-		/// CricketBiteUp
-		/// </summary>
 		public const short CricketBiteUp = 297;
 
-		/// <summary>
-		/// CricketDeadlinessUp
-		/// </summary>
 		public const short CricketDeadlinessUp = 298;
 
-		/// <summary>
-		/// CricketDamageUp
-		/// </summary>
 		public const short CricketDamageUp = 299;
 
-		/// <summary>
-		/// CricketCrippleUp
-		/// </summary>
 		public const short CricketCrippleUp = 300;
 
-		/// <summary>
-		/// CricketDefenceUp
-		/// </summary>
 		public const short CricketDefenceUp = 301;
 
-		/// <summary>
-		/// CricketDamageReduceUp
-		/// </summary>
 		public const short CricketDamageReduceUp = 302;
 
-		/// <summary>
-		/// CricketCounterUp
-		/// </summary>
 		public const short CricketCounterUp = 303;
 
-		/// <summary>
-		/// CricketDurabilityUp
-		/// </summary>
 		public const short CricketDurabilityUp = 304;
 
-		/// <summary>
-		/// BlastTrap
-		/// </summary>
 		public const short BlastTrap = 305;
 
-		/// <summary>
-		/// ShootTrap
-		/// </summary>
 		public const short ShootTrap = 306;
 
-		/// <summary>
-		/// GasTrap
-		/// </summary>
 		public const short GasTrap = 307;
 
-		/// <summary>
-		/// ScreamTrap
-		/// </summary>
 		public const short ScreamTrap = 308;
 
-		/// <summary>
-		/// MistTrap
-		/// </summary>
 		public const short MistTrap = 309;
 
-		/// <summary>
-		/// AutoOperationDiscard
-		/// </summary>
 		public const short AutoOperationDiscard = 310;
 
-		/// <summary>
-		/// AutoOperationDisassemble
-		/// </summary>
 		public const short AutoOperationDisassemble = 311;
 
-		/// <summary>
-		/// PrepareEscape
-		/// </summary>
 		public const short PrepareEscape = 312;
 
-		/// <summary>
-		/// MonvGood
-		/// </summary>
 		public const short MonvGood = 313;
 
-		/// <summary>
-		/// MonvBad
-		/// </summary>
 		public const short MonvBad = 314;
 
-		/// <summary>
-		/// DayueYaochangGood
-		/// </summary>
 		public const short DayueYaochangGood = 315;
 
-		/// <summary>
-		/// DayueYaochangBad
-		/// </summary>
 		public const short DayueYaochangBad = 316;
 
-		/// <summary>
-		/// JiuhanGood
-		/// </summary>
 		public const short JiuhanGood = 317;
 
-		/// <summary>
-		/// JiuhanBad
-		/// </summary>
 		public const short JiuhanBad = 318;
 
-		/// <summary>
-		/// JinHuangerGood
-		/// </summary>
 		public const short JinHuangerGood = 319;
 
-		/// <summary>
-		/// JinHuangerBad
-		/// </summary>
 		public const short JinHuangerBad = 320;
 
-		/// <summary>
-		/// YiyihouGood
-		/// </summary>
 		public const short YiyihouGood = 321;
 
-		/// <summary>
-		/// YiyihouBad
-		/// </summary>
 		public const short YiyihouBad = 322;
 
-		/// <summary>
-		/// WeiQiGood
-		/// </summary>
 		public const short WeiQiGood = 323;
 
-		/// <summary>
-		/// WeiQiBad
-		/// </summary>
 		public const short WeiQiBad = 324;
 
-		/// <summary>
-		/// YixiangGood
-		/// </summary>
 		public const short YixiangGood = 325;
 
-		/// <summary>
-		/// YixiangBad
-		/// </summary>
 		public const short YixiangBad = 326;
 
-		/// <summary>
-		/// XuefengGood
-		/// </summary>
 		public const short XuefengGood = 327;
 
-		/// <summary>
-		/// XuefengBad
-		/// </summary>
 		public const short XuefengBad = 328;
 
-		/// <summary>
-		/// ShufangGood
-		/// </summary>
 		public const short ShufangGood = 329;
 
-		/// <summary>
-		/// ShufangBad
-		/// </summary>
 		public const short ShufangBad = 330;
 
-		/// <summary>
-		/// JinHuangerGoodFailed
-		/// </summary>
 		public const short JinHuangerGoodFailed = 331;
 
-		/// <summary>
-		/// JinHuangerBadFailed
-		/// </summary>
 		public const short JinHuangerBadFailed = 332;
 
-		/// <summary>
-		/// WeiQiGoodStart
-		/// </summary>
 		public const short WeiQiGoodStart = 333;
 
-		/// <summary>
-		/// WeiQiBadStart
-		/// </summary>
 		public const short WeiQiBadStart = 334;
+
+		public const short TaiwuAsXiangshuSkill0 = 335;
+
+		public const short TaiwuAsXiangshuSkill1 = 336;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// BuildingUpgradingCompleted
-		/// </summary>
 		public static InstantNotificationItem BuildingUpgradingCompleted => Instance[(short)0];
 
-		/// <summary>
-		/// BuildingDemolitionCompleted
-		/// </summary>
 		public static InstantNotificationItem BuildingDemolitionCompleted => Instance[(short)1];
 
-		/// <summary>
-		/// BuildingCraftingCompleted
-		/// </summary>
 		public static InstantNotificationItem BuildingCraftingCompleted => Instance[(short)2];
 
-		/// <summary>
-		/// BuildingConstructionCompleted
-		/// </summary>
 		public static InstantNotificationItem BuildingConstructionCompleted => Instance[(short)3];
 
-		/// <summary>
-		/// BuildingProductGenerated
-		/// </summary>
 		public static InstantNotificationItem BuildingProductGenerated => Instance[(short)4];
 
-		/// <summary>
-		/// BuildingDamaged
-		/// </summary>
 		public static InstantNotificationItem BuildingDamaged => Instance[(short)5];
 
-		/// <summary>
-		/// BuildingRuined
-		/// </summary>
 		public static InstantNotificationItem BuildingRuined => Instance[(short)6];
 
-		/// <summary>
-		/// BeginBuildingConstruction
-		/// </summary>
 		public static InstantNotificationItem BeginBuildingConstruction => Instance[(short)7];
 
-		/// <summary>
-		/// BeginBuildingUpgrading
-		/// </summary>
 		public static InstantNotificationItem BeginBuildingUpgrading => Instance[(short)8];
 
-		/// <summary>
-		/// BeginBuildingDemolition
-		/// </summary>
 		public static InstantNotificationItem BeginBuildingDemolition => Instance[(short)9];
 
-		/// <summary>
-		/// CancelBuildingDemolition
-		/// </summary>
 		public static InstantNotificationItem CancelBuildingDemolition => Instance[(short)10];
 
-		/// <summary>
-		/// CandidateArrived
-		/// </summary>
 		public static InstantNotificationItem CandidateArrived => Instance[(short)11];
 
-		/// <summary>
-		/// CandidateLeaved
-		/// </summary>
 		public static InstantNotificationItem CandidateLeaved => Instance[(short)12];
 
-		/// <summary>
-		/// JoinTaiwuVillage
-		/// </summary>
 		public static InstantNotificationItem JoinTaiwuVillage => Instance[(short)13];
 
-		/// <summary>
-		/// LeaveTaiwuVillage
-		/// </summary>
 		public static InstantNotificationItem LeaveTaiwuVillage => Instance[(short)14];
 
-		/// <summary>
-		/// WarehouseItemLost
-		/// </summary>
 		public static InstantNotificationItem WarehouseItemLost => Instance[(short)15];
 
-		/// <summary>
-		/// BuildingLoseAuthority
-		/// </summary>
 		public static InstantNotificationItem BuildingLoseAuthority => Instance[(short)16];
 
-		/// <summary>
-		/// DiscoverRelay
-		/// </summary>
 		public static InstantNotificationItem DiscoverRelay => Instance[(short)17];
 
-		/// <summary>
-		/// WalkThroughAbyss
-		/// </summary>
 		public static InstantNotificationItem WalkThroughAbyss => Instance[(short)18];
 
-		/// <summary>
-		/// BeginAdventure
-		/// </summary>
 		public static InstantNotificationItem BeginAdventure => Instance[(short)19];
 
-		/// <summary>
-		/// NaturalDisasterEncountered
-		/// </summary>
 		public static InstantNotificationItem NaturalDisasterEncountered => Instance[(short)20];
 
-		/// <summary>
-		/// JoinGroup
-		/// </summary>
 		public static InstantNotificationItem JoinGroup => Instance[(short)21];
 
-		/// <summary>
-		/// LeaveGroup
-		/// </summary>
 		public static InstantNotificationItem LeaveGroup => Instance[(short)22];
 
-		/// <summary>
-		/// BehaviorTypeChanged
-		/// </summary>
 		public static InstantNotificationItem BehaviorTypeChanged => Instance[(short)23];
 
-		/// <summary>
-		/// SectInheritedApprovingReceived
-		/// </summary>
 		public static InstantNotificationItem SectInheritedApprovingReceived => Instance[(short)292];
 
-		/// <summary>
-		/// InheritedApprovingRateReceived
-		/// </summary>
 		public static InstantNotificationItem InheritedApprovingRateReceived => Instance[(short)24];
 
-		/// <summary>
-		/// FameIncreased
-		/// </summary>
 		public static InstantNotificationItem FameIncreased => Instance[(short)25];
 
-		/// <summary>
-		/// FameDecreased
-		/// </summary>
 		public static InstantNotificationItem FameDecreased => Instance[(short)26];
 
-		/// <summary>
-		/// HappinessIncreased
-		/// </summary>
 		public static InstantNotificationItem HappinessIncreased => Instance[(short)27];
 
-		/// <summary>
-		/// HappinessDecreased
-		/// </summary>
 		public static InstantNotificationItem HappinessDecreased => Instance[(short)28];
 
-		/// <summary>
-		/// FavorabilityIncreased
-		/// </summary>
 		public static InstantNotificationItem FavorabilityIncreased => Instance[(short)29];
 
-		/// <summary>
-		/// FavorabilityDecreased
-		/// </summary>
 		public static InstantNotificationItem FavorabilityDecreased => Instance[(short)30];
 
-		/// <summary>
-		/// FavorabilityIncreasedAcrossLevels
-		/// </summary>
 		public static InstantNotificationItem FavorabilityIncreasedAcrossLevels => Instance[(short)31];
 
-		/// <summary>
-		/// FavorabilityDecreasedAcrossLevels
-		/// </summary>
 		public static InstantNotificationItem FavorabilityDecreasedAcrossLevels => Instance[(short)32];
 
-		/// <summary>
-		/// LovingItemRevealed
-		/// </summary>
 		public static InstantNotificationItem LovingItemRevealed => Instance[(short)33];
 
-		/// <summary>
-		/// HatingItemRevealed
-		/// </summary>
 		public static InstantNotificationItem HatingItemRevealed => Instance[(short)34];
 
-		/// <summary>
-		/// LovingItemRevealedNothing
-		/// </summary>
 		public static InstantNotificationItem LovingItemRevealedNothing => Instance[(short)35];
 
-		/// <summary>
-		/// HatingItemRevealedNothing
-		/// </summary>
 		public static InstantNotificationItem HatingItemRevealedNothing => Instance[(short)36];
 
-		/// <summary>
-		/// EatBloodDew
-		/// </summary>
 		public static InstantNotificationItem EatBloodDew => Instance[(short)37];
 
-		/// <summary>
-		/// CombatSkillLearned
-		/// </summary>
 		public static InstantNotificationItem CombatSkillLearned => Instance[(short)38];
 
-		/// <summary>
-		/// HealthIncreased
-		/// </summary>
 		public static InstantNotificationItem HealthIncreased => Instance[(short)39];
 
-		/// <summary>
-		/// HealthDecreased
-		/// </summary>
 		public static InstantNotificationItem HealthDecreased => Instance[(short)40];
 
-		/// <summary>
-		/// XiangshuInfectionIncreased
-		/// </summary>
 		public static InstantNotificationItem XiangshuInfectionIncreased => Instance[(short)41];
 
-		/// <summary>
-		/// XiangshuInfectionDecreased
-		/// </summary>
 		public static InstantNotificationItem XiangshuInfectionDecreased => Instance[(short)42];
 
-		/// <summary>
-		/// XiangshuPartlyInfected
-		/// </summary>
 		public static InstantNotificationItem XiangshuPartlyInfected => Instance[(short)43];
 
-		/// <summary>
-		/// XiangshuCompletelyInfected
-		/// </summary>
 		public static InstantNotificationItem XiangshuCompletelyInfected => Instance[(short)44];
 
-		/// <summary>
-		/// MainAttributeRecovered
-		/// </summary>
 		public static InstantNotificationItem MainAttributeRecovered => Instance[(short)45];
 
-		/// <summary>
-		/// MainAttributeConsumed
-		/// </summary>
 		public static InstantNotificationItem MainAttributeConsumed => Instance[(short)46];
 
-		/// <summary>
-		/// DisorderOfQiIncreased
-		/// </summary>
 		public static InstantNotificationItem DisorderOfQiIncreased => Instance[(short)47];
 
-		/// <summary>
-		/// DisorderOfQiDecreased
-		/// </summary>
 		public static InstantNotificationItem DisorderOfQiDecreased => Instance[(short)48];
 
-		/// <summary>
-		/// InjuryIncreased
-		/// </summary>
 		public static InstantNotificationItem InjuryIncreased => Instance[(short)49];
 
-		/// <summary>
-		/// InjuryDecreased
-		/// </summary>
 		public static InstantNotificationItem InjuryDecreased => Instance[(short)50];
 
-		/// <summary>
-		/// PoisonIncreased
-		/// </summary>
 		public static InstantNotificationItem PoisonIncreased => Instance[(short)51];
 
-		/// <summary>
-		/// PoisonDecreased
-		/// </summary>
 		public static InstantNotificationItem PoisonDecreased => Instance[(short)52];
 
-		/// <summary>
-		/// ExpIncreased
-		/// </summary>
 		public static InstantNotificationItem ExpIncreased => Instance[(short)53];
 
-		/// <summary>
-		/// ExpDecreased
-		/// </summary>
 		public static InstantNotificationItem ExpDecreased => Instance[(short)54];
 
-		/// <summary>
-		/// ResourceIncreased
-		/// </summary>
 		public static InstantNotificationItem ResourceIncreased => Instance[(short)55];
 
-		/// <summary>
-		/// ResourceDecreased
-		/// </summary>
 		public static InstantNotificationItem ResourceDecreased => Instance[(short)56];
 
-		/// <summary>
-		/// GetItem
-		/// </summary>
 		public static InstantNotificationItem GetItem => Instance[(short)57];
 
-		/// <summary>
-		/// LoseItem
-		/// </summary>
 		public static InstantNotificationItem LoseItem => Instance[(short)58];
 
-		/// <summary>
-		/// CharacterGrownUp
-		/// </summary>
 		public static InstantNotificationItem CharacterGrownUp => Instance[(short)59];
 
-		/// <summary>
-		/// CharacterDead
-		/// </summary>
 		public static InstantNotificationItem CharacterDead => Instance[(short)60];
 
-		/// <summary>
-		/// CricketDead
-		/// </summary>
 		public static InstantNotificationItem CricketDead => Instance[(short)61];
 
-		/// <summary>
-		/// FamilyDied
-		/// </summary>
 		public static InstantNotificationItem FamilyDied => Instance[(short)62];
 
-		/// <summary>
-		/// EnemyDied
-		/// </summary>
 		public static InstantNotificationItem EnemyDied => Instance[(short)63];
 
-		/// <summary>
-		/// EnemyLucky
-		/// </summary>
 		public static InstantNotificationItem EnemyLucky => Instance[(short)64];
 
-		/// <summary>
-		/// EnemyUnlucky
-		/// </summary>
 		public static InstantNotificationItem EnemyUnlucky => Instance[(short)65];
 
-		/// <summary>
-		/// EnemyLoseInLifeSkill
-		/// </summary>
 		public static InstantNotificationItem EnemyLoseInLifeSkill => Instance[(short)66];
 
-		/// <summary>
-		/// EnemyLoseInCombat
-		/// </summary>
 		public static InstantNotificationItem EnemyLoseInCombat => Instance[(short)67];
 
-		/// <summary>
-		/// EnemyGreatLoseInCombat
-		/// </summary>
 		public static InstantNotificationItem EnemyGreatLoseInCombat => Instance[(short)68];
 
-		/// <summary>
-		/// FamilyMiscarriage
-		/// </summary>
 		public static InstantNotificationItem FamilyMiscarriage => Instance[(short)69];
 
-		/// <summary>
-		/// AbandonExposed
-		/// </summary>
 		public static InstantNotificationItem AbandonExposed => Instance[(short)70];
 
-		/// <summary>
-		/// AbandonAcknowledged
-		/// </summary>
 		public static InstantNotificationItem AbandonAcknowledged => Instance[(short)71];
 
-		/// <summary>
-		/// FamilyAbandon
-		/// </summary>
 		public static InstantNotificationItem FamilyAbandon => Instance[(short)72];
 
-		/// <summary>
-		/// SelfImmoralLove
-		/// </summary>
 		public static InstantNotificationItem SelfImmoralLove => Instance[(short)73];
 
-		/// <summary>
-		/// FamilyHaveKid
-		/// </summary>
 		public static InstantNotificationItem FamilyHaveKid => Instance[(short)74];
 
-		/// <summary>
-		/// HaveKid
-		/// </summary>
 		public static InstantNotificationItem HaveKid => Instance[(short)75];
 
-		/// <summary>
-		/// FamilyImmoralKid
-		/// </summary>
 		public static InstantNotificationItem FamilyImmoralKid => Instance[(short)76];
 
-		/// <summary>
-		/// ReligiousFamilyHaveKid
-		/// </summary>
 		public static InstantNotificationItem ReligiousFamilyHaveKid => Instance[(short)77];
 
-		/// <summary>
-		/// FamilyInLove
-		/// </summary>
 		public static InstantNotificationItem FamilyInLove => Instance[(short)78];
 
-		/// <summary>
-		/// FamilyImmoralLove
-		/// </summary>
 		public static InstantNotificationItem FamilyImmoralLove => Instance[(short)79];
 
-		/// <summary>
-		/// ReligiousFamilyInLove
-		/// </summary>
 		public static InstantNotificationItem ReligiousFamilyInLove => Instance[(short)80];
 
-		/// <summary>
-		/// FamilyMarried
-		/// </summary>
 		public static InstantNotificationItem FamilyMarried => Instance[(short)81];
 
-		/// <summary>
-		/// FamilyImmoralMarriage
-		/// </summary>
 		public static InstantNotificationItem FamilyImmoralMarriage => Instance[(short)82];
 
-		/// <summary>
-		/// FamilyBeFriendWithEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyBeFriendWithEnemy => Instance[(short)83];
 
-		/// <summary>
-		/// FamilyJieyiWithEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyJieyiWithEnemy => Instance[(short)84];
 
-		/// <summary>
-		/// FamilyAdoptedMaleEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyAdoptedMaleEnemy => Instance[(short)85];
 
-		/// <summary>
-		/// FamilyAdoptedFemaleEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyAdoptedFemaleEnemy => Instance[(short)86];
 
-		/// <summary>
-		/// FamilyAdoptedByMaleEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyAdoptedByMaleEnemy => Instance[(short)87];
 
-		/// <summary>
-		/// FamilyAdoptedByFemaleEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyAdoptedByFemaleEnemy => Instance[(short)88];
 
-		/// <summary>
-		/// FamilyEndedImmoralLove
-		/// </summary>
 		public static InstantNotificationItem FamilyEndedImmoralLove => Instance[(short)89];
 
-		/// <summary>
-		/// FamilyEndedFriendshipWithEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyEndedFriendshipWithEnemy => Instance[(short)90];
 
-		/// <summary>
-		/// FamilyEndedJieyiWithEnemy
-		/// </summary>
 		public static InstantNotificationItem FamilyEndedJieyiWithEnemy => Instance[(short)91];
 
-		/// <summary>
-		/// LoverHaveSex
-		/// </summary>
 		public static InstantNotificationItem LoverHaveSex => Instance[(short)92];
 
-		/// <summary>
-		/// TaiwuVillageIdleCount
-		/// </summary>
 		public static InstantNotificationItem TaiwuVillageIdleCount => Instance[(short)93];
 
-		/// <summary>
-		/// ProfessionSeniorityIncrease
-		/// </summary>
 		public static InstantNotificationItem ProfessionSeniorityIncrease => Instance[(short)94];
 
-		/// <summary>
-		/// ProfessionUnlockSkill
-		/// </summary>
 		public static InstantNotificationItem ProfessionUnlockSkill => Instance[(short)95];
 
-		/// <summary>
-		/// ProfessionSkillHasCoolDown
-		/// </summary>
 		public static InstantNotificationItem ProfessionSkillHasCoolDown => Instance[(short)96];
 
-		/// <summary>
-		/// ProfessionSkillEffectIsEnd
-		/// </summary>
 		public static InstantNotificationItem ProfessionSkillEffectIsEnd => Instance[(short)97];
 
-		/// <summary>
-		/// ProfessionHunterSkill0
-		/// </summary>
 		public static InstantNotificationItem ProfessionHunterSkill0 => Instance[(short)98];
 
-		/// <summary>
-		/// ProfessionMartialArtistSkill2
-		/// </summary>
 		public static InstantNotificationItem ProfessionMartialArtistSkill2 => Instance[(short)99];
 
-		/// <summary>
-		/// ProfessionLiteratiSkill2
-		/// </summary>
 		public static InstantNotificationItem ProfessionLiteratiSkill2 => Instance[(short)100];
 
-		/// <summary>
-		/// ProfessionCivilianSkill1
-		/// </summary>
 		public static InstantNotificationItem ProfessionCivilianSkill1 => Instance[(short)101];
 
-		/// <summary>
-		/// ProfessionCivilianSkill2
-		/// </summary>
 		public static InstantNotificationItem ProfessionCivilianSkill2 => Instance[(short)102];
 
-		/// <summary>
-		/// ProfessionDoctorSkill1
-		/// </summary>
 		public static InstantNotificationItem ProfessionDoctorSkill1 => Instance[(short)103];
 
-		/// <summary>
-		/// ProfessionMonkBreakFoodRule
-		/// </summary>
 		public static InstantNotificationItem ProfessionMonkBreakFoodRule => Instance[(short)104];
 
-		/// <summary>
-		/// ProfessionMonkBreakLoveRule
-		/// </summary>
 		public static InstantNotificationItem ProfessionMonkBreakLoveRule => Instance[(short)105];
 
-		/// <summary>
-		/// ProfessionHunterSkill0None
-		/// </summary>
 		public static InstantNotificationItem ProfessionHunterSkill0None => Instance[(short)106];
 
-		/// <summary>
-		/// SettlementStoryGoodEnd
-		/// </summary>
 		public static InstantNotificationItem SettlementStoryGoodEnd => Instance[(short)107];
 
-		/// <summary>
-		/// SettlementStoryBadEnd
-		/// </summary>
 		public static InstantNotificationItem SettlementStoryBadEnd => Instance[(short)108];
 
-		/// <summary>
-		/// ReadInCombat
-		/// </summary>
 		public static InstantNotificationItem ReadInCombat => Instance[(short)109];
 
-		/// <summary>
-		/// ReadInLifeSkillCombat
-		/// </summary>
 		public static InstantNotificationItem ReadInLifeSkillCombat => Instance[(short)110];
 
-		/// <summary>
-		/// ReadInCombatNoChance
-		/// </summary>
 		public static InstantNotificationItem ReadInCombatNoChance => Instance[(short)111];
 
-		/// <summary>
-		/// ReadInLifeSkillCombatNoChance
-		/// </summary>
 		public static InstantNotificationItem ReadInLifeSkillCombatNoChance => Instance[(short)112];
 
-		/// <summary>
-		/// BookRepairSuccess
-		/// </summary>
 		public static InstantNotificationItem BookRepairSuccess => Instance[(short)113];
 
-		/// <summary>
-		/// ReincarnationArchitectureReincarnationEnd
-		/// </summary>
 		public static InstantNotificationItem ReincarnationArchitectureReincarnationEnd => Instance[(short)114];
 
-		/// <summary>
-		/// TheNestOfRegulationDies
-		/// </summary>
 		public static InstantNotificationItem TheNestOfRegulationDies => Instance[(short)115];
 
-		/// <summary>
-		/// XuannvBlockMusicTranscribe
-		/// </summary>
 		public static InstantNotificationItem XuannvBlockMusicTranscribe => Instance[(short)116];
 
-		/// <summary>
-		/// XuannvStateMusicTranscribe
-		/// </summary>
 		public static InstantNotificationItem XuannvStateMusicTranscribe => Instance[(short)117];
 
-		/// <summary>
-		/// DuChuangYiGeReady
-		/// </summary>
 		public static InstantNotificationItem DuChuangYiGeReady => Instance[(short)118];
 
-		/// <summary>
-		/// CultureDecline
-		/// </summary>
 		public static InstantNotificationItem CultureDecline => Instance[(short)119];
 
-		/// <summary>
-		/// ThunderPowerGrow
-		/// </summary>
 		public static InstantNotificationItem ThunderPowerGrow => Instance[(short)120];
 
-		/// <summary>
-		/// FloodPowerGrow
-		/// </summary>
 		public static InstantNotificationItem FloodPowerGrow => Instance[(short)121];
 
-		/// <summary>
-		/// BlazePowerGrow
-		/// </summary>
 		public static InstantNotificationItem BlazePowerGrow => Instance[(short)122];
 
-		/// <summary>
-		/// StormPowerGrow
-		/// </summary>
 		public static InstantNotificationItem StormPowerGrow => Instance[(short)123];
 
-		/// <summary>
-		/// SandPowerGrow
-		/// </summary>
 		public static InstantNotificationItem SandPowerGrow => Instance[(short)124];
 
-		/// <summary>
-		/// ThunderPowerDecline
-		/// </summary>
 		public static InstantNotificationItem ThunderPowerDecline => Instance[(short)125];
 
-		/// <summary>
-		/// FloodPowerDecline
-		/// </summary>
 		public static InstantNotificationItem FloodPowerDecline => Instance[(short)126];
 
-		/// <summary>
-		/// BlazePowerDecline
-		/// </summary>
 		public static InstantNotificationItem BlazePowerDecline => Instance[(short)127];
 
-		/// <summary>
-		/// StormPowerDecline
-		/// </summary>
 		public static InstantNotificationItem StormPowerDecline => Instance[(short)128];
 
-		/// <summary>
-		/// SandPowerDecline
-		/// </summary>
 		public static InstantNotificationItem SandPowerDecline => Instance[(short)129];
 
-		/// <summary>
-		/// JiaoAbilityUp
-		/// </summary>
 		public static InstantNotificationItem JiaoAbilityUp => Instance[(short)130];
 
-		/// <summary>
-		/// JiaoAbilityDown
-		/// </summary>
 		public static InstantNotificationItem JiaoAbilityDown => Instance[(short)131];
 
-		/// <summary>
-		/// JiaoGiftAbilityUp
-		/// </summary>
 		public static InstantNotificationItem JiaoGiftAbilityUp => Instance[(short)132];
 
-		/// <summary>
-		/// JiaoGiftAbilityDown
-		/// </summary>
 		public static InstantNotificationItem JiaoGiftAbilityDown => Instance[(short)133];
 
-		/// <summary>
-		/// JiaoAbilityUpPercent
-		/// </summary>
 		public static InstantNotificationItem JiaoAbilityUpPercent => Instance[(short)134];
 
-		/// <summary>
-		/// JiaoAbilityDownPercent
-		/// </summary>
 		public static InstantNotificationItem JiaoAbilityDownPercent => Instance[(short)135];
 
-		/// <summary>
-		/// JiaoAbilityUpFloat
-		/// </summary>
 		public static InstantNotificationItem JiaoAbilityUpFloat => Instance[(short)136];
 
-		/// <summary>
-		/// JiaoAbilityDownFloat
-		/// </summary>
 		public static InstantNotificationItem JiaoAbilityDownFloat => Instance[(short)137];
 
-		/// <summary>
-		/// WugKingEscape
-		/// </summary>
 		public static InstantNotificationItem WugKingEscape => Instance[(short)138];
 
-		/// <summary>
-		/// WugKingParasitiferDead
-		/// </summary>
 		public static InstantNotificationItem WugKingParasitiferDead => Instance[(short)139];
 
-		/// <summary>
-		/// WugKingDead
-		/// </summary>
 		public static InstantNotificationItem WugKingDead => Instance[(short)140];
 
-		/// <summary>
-		/// WugKingDeadSpecial
-		/// </summary>
 		public static InstantNotificationItem WugKingDeadSpecial => Instance[(short)141];
 
-		/// <summary>
-		/// KnowMonkSecret
-		/// </summary>
 		public static InstantNotificationItem KnowMonkSecret => Instance[(short)142];
 
-		/// <summary>
-		/// GraceIncreased
-		/// </summary>
 		public static InstantNotificationItem GraceIncreased => Instance[(short)143];
 
-		/// <summary>
-		/// WugKingEscape1
-		/// </summary>
 		public static InstantNotificationItem WugKingEscape1 => Instance[(short)144];
 
-		/// <summary>
-		/// WugKingEscape2
-		/// </summary>
 		public static InstantNotificationItem WugKingEscape2 => Instance[(short)145];
 
-		/// <summary>
-		/// QiArtInCombatNoChance
-		/// </summary>
 		public static InstantNotificationItem QiArtInCombatNoChance => Instance[(short)146];
 
-		/// <summary>
-		/// QiArtInLifeSkillCombatNoChance
-		/// </summary>
 		public static InstantNotificationItem QiArtInLifeSkillCombatNoChance => Instance[(short)147];
 
-		/// <summary>
-		/// SectStoryBaihuaToAnimal
-		/// </summary>
 		public static InstantNotificationItem SectStoryBaihuaToAnimal => Instance[(short)148];
 
-		/// <summary>
-		/// SectStoryBaihuaToHuman
-		/// </summary>
 		public static InstantNotificationItem SectStoryBaihuaToHuman => Instance[(short)149];
 
-		/// <summary>
-		/// MechanismOfDetonation
-		/// </summary>
 		public static InstantNotificationItem MechanismOfDetonation => Instance[(short)150];
 
-		/// <summary>
-		/// ProfessionSeniorityIncrease1
-		/// </summary>
 		public static InstantNotificationItem ProfessionSeniorityIncrease1 => Instance[(short)151];
 
-		/// <summary>
-		/// BlockResourceRecovery
-		/// </summary>
 		public static InstantNotificationItem BlockResourceRecovery => Instance[(short)152];
 
-		/// <summary>
-		/// ShenTreeGrow
-		/// </summary>
 		public static InstantNotificationItem ShenTreeGrow => Instance[(short)153];
 
-		/// <summary>
-		/// BeastUpgrade
-		/// </summary>
 		public static InstantNotificationItem BeastUpgrade => Instance[(short)154];
 
-		/// <summary>
-		/// BeastDowngrade
-		/// </summary>
 		public static InstantNotificationItem BeastDowngrade => Instance[(short)155];
 
-		/// <summary>
-		/// GatherCompanions
-		/// </summary>
 		public static InstantNotificationItem GatherCompanions => Instance[(short)156];
 
-		/// <summary>
-		/// DisseminateSecretInformation
-		/// </summary>
 		public static InstantNotificationItem DisseminateSecretInformation => Instance[(short)157];
 
-		/// <summary>
-		/// DisseminateInformation
-		/// </summary>
 		public static InstantNotificationItem DisseminateInformation => Instance[(short)158];
 
-		/// <summary>
-		/// RecommendFellowUp
-		/// </summary>
 		public static InstantNotificationItem RecommendFellowUp => Instance[(short)159];
 
-		/// <summary>
-		/// RecommendFellowDown
-		/// </summary>
 		public static InstantNotificationItem RecommendFellowDown => Instance[(short)160];
 
-		/// <summary>
-		/// ComradePropertyUp
-		/// </summary>
 		public static InstantNotificationItem ComradePropertyUp => Instance[(short)161];
 
-		/// <summary>
-		/// ComradeCombatSkillUp
-		/// </summary>
 		public static InstantNotificationItem ComradeCombatSkillUp => Instance[(short)162];
 
-		/// <summary>
-		/// ComradeLifeSkillUp
-		/// </summary>
 		public static InstantNotificationItem ComradeLifeSkillUp => Instance[(short)163];
 
-		/// <summary>
-		/// ComradeFeatureUp
-		/// </summary>
 		public static InstantNotificationItem ComradeFeatureUp => Instance[(short)164];
 
-		/// <summary>
-		/// ReleasePrisoners
-		/// </summary>
 		public static InstantNotificationItem ReleasePrisoners => Instance[(short)165];
 
-		/// <summary>
-		/// DriveAwayPeople
-		/// </summary>
 		public static InstantNotificationItem DriveAwayPeople => Instance[(short)166];
 
-		/// <summary>
-		/// QuenchHatred
-		/// </summary>
 		public static InstantNotificationItem QuenchHatred => Instance[(short)167];
 
-		/// <summary>
-		/// VisitTemple
-		/// </summary>
 		public static InstantNotificationItem VisitTemple => Instance[(short)168];
 
-		/// <summary>
-		/// DrinkTeaRecharge
-		/// </summary>
 		public static InstantNotificationItem DrinkTeaRecharge => Instance[(short)169];
 
-		/// <summary>
-		/// ReleaseSouls
-		/// </summary>
 		public static InstantNotificationItem ReleaseSouls => Instance[(short)170];
 
-		/// <summary>
-		/// SectPunishmentWarrantRelieved
-		/// </summary>
 		public static InstantNotificationItem SectPunishmentWarrantRelieved => Instance[(short)171];
 
-		/// <summary>
-		/// SectPunishmentCharacterFeatureRelieved
-		/// </summary>
 		public static InstantNotificationItem SectPunishmentCharacterFeatureRelieved => Instance[(short)172];
 
-		/// <summary>
-		/// ResignationPosition
-		/// </summary>
 		public static InstantNotificationItem ResignationPosition => Instance[(short)173];
 
-		/// <summary>
-		/// Legacy
-		/// </summary>
 		public static InstantNotificationItem Legacy => Instance[(short)174];
 
-		/// <summary>
-		/// CultureUp
-		/// </summary>
 		public static InstantNotificationItem CultureUp => Instance[(short)175];
 
-		/// <summary>
-		/// SecurityUp
-		/// </summary>
 		public static InstantNotificationItem SecurityUp => Instance[(short)176];
 
-		/// <summary>
-		/// CultureDown
-		/// </summary>
 		public static InstantNotificationItem CultureDown => Instance[(short)177];
 
-		/// <summary>
-		/// SecurityDown
-		/// </summary>
 		public static InstantNotificationItem SecurityDown => Instance[(short)178];
 
-		/// <summary>
-		/// MapPickupsResource
-		/// </summary>
 		public static InstantNotificationItem MapPickupsResource => Instance[(short)179];
 
-		/// <summary>
-		/// MapPickupsFoodIngredients
-		/// </summary>
 		public static InstantNotificationItem MapPickupsFoodIngredients => Instance[(short)180];
 
-		/// <summary>
-		/// MapPickupsMaterials
-		/// </summary>
 		public static InstantNotificationItem MapPickupsMaterials => Instance[(short)181];
 
-		/// <summary>
-		/// MapPickupsHerbal0
-		/// </summary>
 		public static InstantNotificationItem MapPickupsHerbal0 => Instance[(short)182];
 
-		/// <summary>
-		/// MapPickupsHerbal1
-		/// </summary>
 		public static InstantNotificationItem MapPickupsHerbal1 => Instance[(short)183];
 
-		/// <summary>
-		/// MapPickupsPoison
-		/// </summary>
 		public static InstantNotificationItem MapPickupsPoison => Instance[(short)184];
 
-		/// <summary>
-		/// MapPickupsInjuryMedicine
-		/// </summary>
 		public static InstantNotificationItem MapPickupsInjuryMedicine => Instance[(short)185];
 
-		/// <summary>
-		/// MapPickupsAntidote
-		/// </summary>
 		public static InstantNotificationItem MapPickupsAntidote => Instance[(short)186];
 
-		/// <summary>
-		/// MapPickupsGainMedicine
-		/// </summary>
 		public static InstantNotificationItem MapPickupsGainMedicine => Instance[(short)187];
 
-		/// <summary>
-		/// MapPickupsFruit
-		/// </summary>
 		public static InstantNotificationItem MapPickupsFruit => Instance[(short)188];
 
-		/// <summary>
-		/// MapPickupsChickenDishes
-		/// </summary>
 		public static InstantNotificationItem MapPickupsChickenDishes => Instance[(short)189];
 
-		/// <summary>
-		/// MapPickupsMeatDishes
-		/// </summary>
 		public static InstantNotificationItem MapPickupsMeatDishes => Instance[(short)190];
 
-		/// <summary>
-		/// MapPickupsVegetarianDishes
-		/// </summary>
 		public static InstantNotificationItem MapPickupsVegetarianDishes => Instance[(short)191];
 
-		/// <summary>
-		/// MapPickupsSeafoodDishes
-		/// </summary>
 		public static InstantNotificationItem MapPickupsSeafoodDishes => Instance[(short)192];
 
-		/// <summary>
-		/// MapPickupsWine
-		/// </summary>
 		public static InstantNotificationItem MapPickupsWine => Instance[(short)193];
 
-		/// <summary>
-		/// MapPickupsTea
-		/// </summary>
 		public static InstantNotificationItem MapPickupsTea => Instance[(short)194];
 
-		/// <summary>
-		/// MapPickupsTool
-		/// </summary>
 		public static InstantNotificationItem MapPickupsTool => Instance[(short)195];
 
-		/// <summary>
-		/// MapPickupsAccessory
-		/// </summary>
 		public static InstantNotificationItem MapPickupsAccessory => Instance[(short)196];
 
-		/// <summary>
-		/// MapPickupsPoisonCream
-		/// </summary>
 		public static InstantNotificationItem MapPickupsPoisonCream => Instance[(short)197];
 
-		/// <summary>
-		/// MapPickupsHarrier
-		/// </summary>
 		public static InstantNotificationItem MapPickupsHarrier => Instance[(short)198];
 
-		/// <summary>
-		/// MapPickupsToken
-		/// </summary>
 		public static InstantNotificationItem MapPickupsToken => Instance[(short)199];
 
-		/// <summary>
-		/// MapPickupsNeedleBox
-		/// </summary>
 		public static InstantNotificationItem MapPickupsNeedleBox => Instance[(short)200];
 
-		/// <summary>
-		/// MapPickupsThorn
-		/// </summary>
 		public static InstantNotificationItem MapPickupsThorn => Instance[(short)201];
 
-		/// <summary>
-		/// MapPickupsHiddenWeapon
-		/// </summary>
 		public static InstantNotificationItem MapPickupsHiddenWeapon => Instance[(short)202];
 
-		/// <summary>
-		/// MapPickupsFlute
-		/// </summary>
 		public static InstantNotificationItem MapPickupsFlute => Instance[(short)203];
 
-		/// <summary>
-		/// MapPickupsGloves
-		/// </summary>
 		public static InstantNotificationItem MapPickupsGloves => Instance[(short)204];
 
-		/// <summary>
-		/// MapPickupsFurGloves
-		/// </summary>
 		public static InstantNotificationItem MapPickupsFurGloves => Instance[(short)205];
 
-		/// <summary>
-		/// MapPickupsPestle
-		/// </summary>
 		public static InstantNotificationItem MapPickupsPestle => Instance[(short)206];
 
-		/// <summary>
-		/// MapPickupsSword
-		/// </summary>
 		public static InstantNotificationItem MapPickupsSword => Instance[(short)207];
 
-		/// <summary>
-		/// MapPickupsBlade
-		/// </summary>
 		public static InstantNotificationItem MapPickupsBlade => Instance[(short)208];
 
-		/// <summary>
-		/// MapPickupsPolearm
-		/// </summary>
 		public static InstantNotificationItem MapPickupsPolearm => Instance[(short)209];
 
-		/// <summary>
-		/// MapPickupQin
-		/// </summary>
 		public static InstantNotificationItem MapPickupQin => Instance[(short)210];
 
-		/// <summary>
-		/// MapPickupsWhisk
-		/// </summary>
 		public static InstantNotificationItem MapPickupsWhisk => Instance[(short)211];
 
-		/// <summary>
-		/// MapPickupsWhip
-		/// </summary>
 		public static InstantNotificationItem MapPickupsWhip => Instance[(short)212];
 
-		/// <summary>
-		/// MapPickupsCrest
-		/// </summary>
 		public static InstantNotificationItem MapPickupsCrest => Instance[(short)213];
 
-		/// <summary>
-		/// MapPickupsShoes
-		/// </summary>
 		public static InstantNotificationItem MapPickupsShoes => Instance[(short)214];
 
-		/// <summary>
-		/// MapPickupsArmor
-		/// </summary>
 		public static InstantNotificationItem MapPickupsArmor => Instance[(short)215];
 
-		/// <summary>
-		/// MapPickupsArmGuard
-		/// </summary>
 		public static InstantNotificationItem MapPickupsArmGuard => Instance[(short)216];
 
-		/// <summary>
-		/// MapPickupsCarDrop
-		/// </summary>
 		public static InstantNotificationItem MapPickupsCarDrop => Instance[(short)217];
 
-		/// <summary>
-		/// MapPickupsExp
-		/// </summary>
 		public static InstantNotificationItem MapPickupsExp => Instance[(short)218];
 
-		/// <summary>
-		/// MapPickupsReading
-		/// </summary>
 		public static InstantNotificationItem MapPickupsReading => Instance[(short)219];
 
-		/// <summary>
-		/// MapPickupsQiArt
-		/// </summary>
 		public static InstantNotificationItem MapPickupsQiArt => Instance[(short)220];
 
-		/// <summary>
-		/// MapPickupsMorale
-		/// </summary>
 		public static InstantNotificationItem MapPickupsMorale => Instance[(short)221];
 
-		/// <summary>
-		/// MapPickupsProperty
-		/// </summary>
 		public static InstantNotificationItem MapPickupsProperty => Instance[(short)222];
 
-		/// <summary>
-		/// MapPickupsEnemyEscape
-		/// </summary>
 		public static InstantNotificationItem MapPickupsEnemyEscape => Instance[(short)223];
 
-		/// <summary>
-		/// BuildingExp
-		/// </summary>
 		public static InstantNotificationItem BuildingExp => Instance[(short)224];
 
-		/// <summary>
-		/// WalkThroughDestroyBlock
-		/// </summary>
 		public static InstantNotificationItem WalkThroughDestroyBlock => Instance[(short)225];
 
-		/// <summary>
-		/// WalkThroughErosionBlock
-		/// </summary>
 		public static InstantNotificationItem WalkThroughErosionBlock => Instance[(short)226];
 
-		/// <summary>
-		/// ComradePropertyUpNew
-		/// </summary>
 		public static InstantNotificationItem ComradePropertyUpNew => Instance[(short)227];
 
-		/// <summary>
-		/// ComradeCombatSkillUpNew
-		/// </summary>
 		public static InstantNotificationItem ComradeCombatSkillUpNew => Instance[(short)228];
 
-		/// <summary>
-		/// ComradeLifeSkillUpNew
-		/// </summary>
 		public static InstantNotificationItem ComradeLifeSkillUpNew => Instance[(short)229];
 
-		/// <summary>
-		/// ComradePropertyUpNew1
-		/// </summary>
 		public static InstantNotificationItem ComradePropertyUpNew1 => Instance[(short)230];
 
-		/// <summary>
-		/// ComradeCombatSkillUpNew1
-		/// </summary>
 		public static InstantNotificationItem ComradeCombatSkillUpNew1 => Instance[(short)231];
 
-		/// <summary>
-		/// ComradeLifeSkillUpNew1
-		/// </summary>
 		public static InstantNotificationItem ComradeLifeSkillUpNew1 => Instance[(short)232];
 
-		/// <summary>
-		/// CharacterEscape
-		/// </summary>
 		public static InstantNotificationItem CharacterEscape => Instance[(short)233];
 
-		/// <summary>
-		/// GraceUp
-		/// </summary>
 		public static InstantNotificationItem GraceUp => Instance[(short)234];
 
-		/// <summary>
-		/// GraceDown
-		/// </summary>
 		public static InstantNotificationItem GraceDown => Instance[(short)235];
 
-		/// <summary>
-		/// ExpelEnemy
-		/// </summary>
 		public static InstantNotificationItem ExpelEnemy => Instance[(short)236];
 
-		/// <summary>
-		/// ExpelRighteous
-		/// </summary>
 		public static InstantNotificationItem ExpelRighteous => Instance[(short)237];
 
-		/// <summary>
-		/// ExpelXiangshuMinion
-		/// </summary>
 		public static InstantNotificationItem ExpelXiangshuMinion => Instance[(short)238];
 
-		/// <summary>
-		/// ExpelBeast
-		/// </summary>
 		public static InstantNotificationItem ExpelBeast => Instance[(short)239];
 
-		/// <summary>
-		/// MapPickupsPoisonCorrected
-		/// </summary>
 		public static InstantNotificationItem MapPickupsPoisonCorrected => Instance[(short)240];
 
-		/// <summary>
-		/// MapPickupsInjuryMedicineCorrected
-		/// </summary>
 		public static InstantNotificationItem MapPickupsInjuryMedicineCorrected => Instance[(short)241];
 
-		/// <summary>
-		/// MapPickupsAntidoteCorrected
-		/// </summary>
 		public static InstantNotificationItem MapPickupsAntidoteCorrected => Instance[(short)242];
 
-		/// <summary>
-		/// MapPickupsGainMedicineCorrected
-		/// </summary>
 		public static InstantNotificationItem MapPickupsGainMedicineCorrected => Instance[(short)243];
 
-		/// <summary>
-		/// MapPickupsResourceUpdate
-		/// </summary>
 		public static InstantNotificationItem MapPickupsResourceUpdate => Instance[(short)244];
 
-		/// <summary>
-		/// MapPickupsExpUpdate
-		/// </summary>
 		public static InstantNotificationItem MapPickupsExpUpdate => Instance[(short)245];
 
-		/// <summary>
-		/// MapPickupsMoraleUpdate
-		/// </summary>
 		public static InstantNotificationItem MapPickupsMoraleUpdate => Instance[(short)246];
 
-		/// <summary>
-		/// MapPickupsItemUpdate
-		/// </summary>
 		public static InstantNotificationItem MapPickupsItemUpdate => Instance[(short)247];
 
-		/// <summary>
-		/// MapPickupsReadingUpdate
-		/// </summary>
 		public static InstantNotificationItem MapPickupsReadingUpdate => Instance[(short)248];
 
-		/// <summary>
-		/// MapPickupsQiArtUpdate
-		/// </summary>
 		public static InstantNotificationItem MapPickupsQiArtUpdate => Instance[(short)249];
 
-		/// <summary>
-		/// MakeItemOutsideSettlement
-		/// </summary>
 		public static InstantNotificationItem MakeItemOutsideSettlement => Instance[(short)250];
 
-		/// <summary>
-		/// GainFuyuFaith1
-		/// </summary>
 		public static InstantNotificationItem GainFuyuFaith1 => Instance[(short)251];
 
-		/// <summary>
-		/// GainFuyuFaith2
-		/// </summary>
 		public static InstantNotificationItem GainFuyuFaith2 => Instance[(short)252];
 
-		/// <summary>
-		/// GainFuyuFaith3
-		/// </summary>
 		public static InstantNotificationItem GainFuyuFaith3 => Instance[(short)253];
 
-		/// <summary>
-		/// MapPickupsMedicineUpdate
-		/// </summary>
 		public static InstantNotificationItem MapPickupsMedicineUpdate => Instance[(short)254];
 
-		/// <summary>
-		/// JixiKillTemplateEnemy
-		/// </summary>
 		public static InstantNotificationItem JixiKillTemplateEnemy => Instance[(short)255];
 
-		/// <summary>
-		/// NeiliRecovery
-		/// </summary>
 		public static InstantNotificationItem NeiliRecovery => Instance[(short)256];
 
-		/// <summary>
-		/// AdventureRedeem
-		/// </summary>
 		public static InstantNotificationItem AdventureRedeem => Instance[(short)257];
 
-		/// <summary>
-		/// AdventureCharacterFollow
-		/// </summary>
 		public static InstantNotificationItem AdventureCharacterFollow => Instance[(short)258];
 
-		/// <summary>
-		/// AdventureStopFollow
-		/// </summary>
 		public static InstantNotificationItem AdventureStopFollow => Instance[(short)259];
 
-		/// <summary>
-		/// AdventureAttendBanquet
-		/// </summary>
 		public static InstantNotificationItem AdventureAttendBanquet => Instance[(short)260];
 
-		/// <summary>
-		/// AdventureKillHeretics
-		/// </summary>
 		public static InstantNotificationItem AdventureKillHeretics => Instance[(short)261];
 
-		/// <summary>
-		/// AdventureBecomeEnemy
-		/// </summary>
 		public static InstantNotificationItem AdventureBecomeEnemy => Instance[(short)262];
 
-		/// <summary>
-		/// AdventureMusicStart
-		/// </summary>
 		public static InstantNotificationItem AdventureMusicStart => Instance[(short)263];
 
-		/// <summary>
-		/// AdventureChessStart
-		/// </summary>
 		public static InstantNotificationItem AdventureChessStart => Instance[(short)264];
 
-		/// <summary>
-		/// AdventurePoemStart
-		/// </summary>
 		public static InstantNotificationItem AdventurePoemStart => Instance[(short)265];
 
-		/// <summary>
-		/// AdventurePaintStart
-		/// </summary>
 		public static InstantNotificationItem AdventurePaintStart => Instance[(short)266];
 
-		/// <summary>
-		/// AdventureGiveUpRedeem
-		/// </summary>
 		public static InstantNotificationItem AdventureGiveUpRedeem => Instance[(short)267];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffMetal
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneBuffMetal => Instance[(short)268];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffWood
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneBuffWood => Instance[(short)269];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffWater
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneBuffWater => Instance[(short)270];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffFire
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneBuffFire => Instance[(short)271];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneBuffEarth
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneBuffEarth => Instance[(short)272];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffMetal0
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffMetal0 => Instance[(short)273];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWood0
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffWood0 => Instance[(short)274];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWater0
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffWater0 => Instance[(short)275];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffFire0
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffFire0 => Instance[(short)276];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffEarth0
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffEarth0 => Instance[(short)277];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffMetal1
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffMetal1 => Instance[(short)278];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWood1
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffWood1 => Instance[(short)279];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffWater1
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffWater1 => Instance[(short)280];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffFire1
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffFire1 => Instance[(short)281];
 
-		/// <summary>
-		/// AdventureXRSDElementStoneDeBuffEarth1
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDElementStoneDeBuffEarth1 => Instance[(short)282];
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeMetal
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDNeiliChangeMetal => Instance[(short)285];
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeWood
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDNeiliChangeWood => Instance[(short)286];
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeWater
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDNeiliChangeWater => Instance[(short)287];
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeFire
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDNeiliChangeFire => Instance[(short)288];
 
-		/// <summary>
-		/// AdventureXRSDNeiliChangeEarth
-		/// </summary>
 		public static InstantNotificationItem AdventureXRSDNeiliChangeEarth => Instance[(short)289];
 
-		/// <summary>
-		/// AdventureCharacterDie
-		/// </summary>
 		public static InstantNotificationItem AdventureCharacterDie => Instance[(short)283];
 
-		/// <summary>
-		/// AdventureCharacterDie0
-		/// </summary>
 		public static InstantNotificationItem AdventureCharacterDie0 => Instance[(short)284];
 
-		/// <summary>
-		/// AlertnessUp
-		/// </summary>
 		public static InstantNotificationItem AlertnessUp => Instance[(short)290];
 
-		/// <summary>
-		/// AlertnessDown
-		/// </summary>
 		public static InstantNotificationItem AlertnessDown => Instance[(short)291];
 
-		/// <summary>
-		/// CricketHPUp
-		/// </summary>
 		public static InstantNotificationItem CricketHPUp => Instance[(short)293];
 
-		/// <summary>
-		/// CricketSPUp
-		/// </summary>
 		public static InstantNotificationItem CricketSPUp => Instance[(short)294];
 
-		/// <summary>
-		/// CricketVigorUp
-		/// </summary>
 		public static InstantNotificationItem CricketVigorUp => Instance[(short)295];
 
-		/// <summary>
-		/// CricketStrengthUp
-		/// </summary>
 		public static InstantNotificationItem CricketStrengthUp => Instance[(short)296];
 
-		/// <summary>
-		/// CricketBiteUp
-		/// </summary>
 		public static InstantNotificationItem CricketBiteUp => Instance[(short)297];
 
-		/// <summary>
-		/// CricketDeadlinessUp
-		/// </summary>
 		public static InstantNotificationItem CricketDeadlinessUp => Instance[(short)298];
 
-		/// <summary>
-		/// CricketDamageUp
-		/// </summary>
 		public static InstantNotificationItem CricketDamageUp => Instance[(short)299];
 
-		/// <summary>
-		/// CricketCrippleUp
-		/// </summary>
 		public static InstantNotificationItem CricketCrippleUp => Instance[(short)300];
 
-		/// <summary>
-		/// CricketDefenceUp
-		/// </summary>
 		public static InstantNotificationItem CricketDefenceUp => Instance[(short)301];
 
-		/// <summary>
-		/// CricketDamageReduceUp
-		/// </summary>
 		public static InstantNotificationItem CricketDamageReduceUp => Instance[(short)302];
 
-		/// <summary>
-		/// CricketCounterUp
-		/// </summary>
 		public static InstantNotificationItem CricketCounterUp => Instance[(short)303];
 
-		/// <summary>
-		/// CricketDurabilityUp
-		/// </summary>
 		public static InstantNotificationItem CricketDurabilityUp => Instance[(short)304];
 
-		/// <summary>
-		/// BlastTrap
-		/// </summary>
 		public static InstantNotificationItem BlastTrap => Instance[(short)305];
 
-		/// <summary>
-		/// ShootTrap
-		/// </summary>
 		public static InstantNotificationItem ShootTrap => Instance[(short)306];
 
-		/// <summary>
-		/// GasTrap
-		/// </summary>
 		public static InstantNotificationItem GasTrap => Instance[(short)307];
 
-		/// <summary>
-		/// ScreamTrap
-		/// </summary>
 		public static InstantNotificationItem ScreamTrap => Instance[(short)308];
 
-		/// <summary>
-		/// MistTrap
-		/// </summary>
 		public static InstantNotificationItem MistTrap => Instance[(short)309];
 
-		/// <summary>
-		/// AutoOperationDiscard
-		/// </summary>
 		public static InstantNotificationItem AutoOperationDiscard => Instance[(short)310];
 
-		/// <summary>
-		/// AutoOperationDisassemble
-		/// </summary>
 		public static InstantNotificationItem AutoOperationDisassemble => Instance[(short)311];
 
-		/// <summary>
-		/// PrepareEscape
-		/// </summary>
 		public static InstantNotificationItem PrepareEscape => Instance[(short)312];
 
-		/// <summary>
-		/// MonvGood
-		/// </summary>
 		public static InstantNotificationItem MonvGood => Instance[(short)313];
 
-		/// <summary>
-		/// MonvBad
-		/// </summary>
 		public static InstantNotificationItem MonvBad => Instance[(short)314];
 
-		/// <summary>
-		/// DayueYaochangGood
-		/// </summary>
 		public static InstantNotificationItem DayueYaochangGood => Instance[(short)315];
 
-		/// <summary>
-		/// DayueYaochangBad
-		/// </summary>
 		public static InstantNotificationItem DayueYaochangBad => Instance[(short)316];
 
-		/// <summary>
-		/// JiuhanGood
-		/// </summary>
 		public static InstantNotificationItem JiuhanGood => Instance[(short)317];
 
-		/// <summary>
-		/// JiuhanBad
-		/// </summary>
 		public static InstantNotificationItem JiuhanBad => Instance[(short)318];
 
-		/// <summary>
-		/// JinHuangerGood
-		/// </summary>
 		public static InstantNotificationItem JinHuangerGood => Instance[(short)319];
 
-		/// <summary>
-		/// JinHuangerBad
-		/// </summary>
 		public static InstantNotificationItem JinHuangerBad => Instance[(short)320];
 
-		/// <summary>
-		/// YiyihouGood
-		/// </summary>
 		public static InstantNotificationItem YiyihouGood => Instance[(short)321];
 
-		/// <summary>
-		/// YiyihouBad
-		/// </summary>
 		public static InstantNotificationItem YiyihouBad => Instance[(short)322];
 
-		/// <summary>
-		/// WeiQiGood
-		/// </summary>
 		public static InstantNotificationItem WeiQiGood => Instance[(short)323];
 
-		/// <summary>
-		/// WeiQiBad
-		/// </summary>
 		public static InstantNotificationItem WeiQiBad => Instance[(short)324];
 
-		/// <summary>
-		/// YixiangGood
-		/// </summary>
 		public static InstantNotificationItem YixiangGood => Instance[(short)325];
 
-		/// <summary>
-		/// YixiangBad
-		/// </summary>
 		public static InstantNotificationItem YixiangBad => Instance[(short)326];
 
-		/// <summary>
-		/// XuefengGood
-		/// </summary>
 		public static InstantNotificationItem XuefengGood => Instance[(short)327];
 
-		/// <summary>
-		/// XuefengBad
-		/// </summary>
 		public static InstantNotificationItem XuefengBad => Instance[(short)328];
 
-		/// <summary>
-		/// ShufangGood
-		/// </summary>
 		public static InstantNotificationItem ShufangGood => Instance[(short)329];
 
-		/// <summary>
-		/// ShufangBad
-		/// </summary>
 		public static InstantNotificationItem ShufangBad => Instance[(short)330];
 
-		/// <summary>
-		/// JinHuangerGoodFailed
-		/// </summary>
 		public static InstantNotificationItem JinHuangerGoodFailed => Instance[(short)331];
 
-		/// <summary>
-		/// JinHuangerBadFailed
-		/// </summary>
 		public static InstantNotificationItem JinHuangerBadFailed => Instance[(short)332];
 
-		/// <summary>
-		/// WeiQiGoodStart
-		/// </summary>
 		public static InstantNotificationItem WeiQiGoodStart => Instance[(short)333];
 
-		/// <summary>
-		/// WeiQiBadStart
-		/// </summary>
 		public static InstantNotificationItem WeiQiBadStart => Instance[(short)334];
+
+		public static InstantNotificationItem TaiwuAsXiangshuSkill0 => Instance[(short)335];
+
+		public static InstantNotificationItem TaiwuAsXiangshuSkill1 => Instance[(short)336];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static InstantNotification Instance = new InstantNotification();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "SimpleDesc", "Desc", "TemplateId", "Type", "MergeableParameters" };
@@ -3743,12 +1732,14 @@ public class InstantNotification : ConfigData<InstantNotificationItem, short>
 		_dataArray.Add(new InstantNotificationItem(332, EInstantNotificationType.DuringMonth, LocalStringManager.GetConfig("InstantNotification_language", "Name_332"), 0, LocalStringManager.GetConfig("InstantNotification_language", "SimpleDesc_332"), LocalStringManager.GetConfig("InstantNotification_language", "Desc_332"), allowByEventFunction: false, new string[4] { "", "", "", "" }, null));
 		_dataArray.Add(new InstantNotificationItem(333, EInstantNotificationType.DuringMonth, LocalStringManager.GetConfig("InstantNotification_language", "Name_333"), 0, LocalStringManager.GetConfig("InstantNotification_language", "SimpleDesc_333"), LocalStringManager.GetConfig("InstantNotification_language", "Desc_333"), allowByEventFunction: false, new string[4] { "Character", "", "", "" }, null));
 		_dataArray.Add(new InstantNotificationItem(334, EInstantNotificationType.DuringMonth, LocalStringManager.GetConfig("InstantNotification_language", "Name_334"), 0, LocalStringManager.GetConfig("InstantNotification_language", "SimpleDesc_334"), LocalStringManager.GetConfig("InstantNotification_language", "Desc_334"), allowByEventFunction: false, new string[4] { "Character", "", "", "" }, null));
+		_dataArray.Add(new InstantNotificationItem(335, EInstantNotificationType.Team, LocalStringManager.GetConfig("InstantNotification_language", "Name_335"), 0, LocalStringManager.GetConfig("InstantNotification_language", "SimpleDesc_335"), LocalStringManager.GetConfig("InstantNotification_language", "Desc_335"), allowByEventFunction: false, new string[4] { "Character", "", "", "" }, new List<sbyte> { 0 }));
+		_dataArray.Add(new InstantNotificationItem(336, EInstantNotificationType.Team, LocalStringManager.GetConfig("InstantNotification_language", "Name_336"), 0, LocalStringManager.GetConfig("InstantNotification_language", "SimpleDesc_336"), LocalStringManager.GetConfig("InstantNotification_language", "Desc_336"), allowByEventFunction: false, new string[4] { "Character", "", "", "" }, new List<sbyte> { 0 }));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<InstantNotificationItem>(335);
+		_dataArray = new List<InstantNotificationItem>(337);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

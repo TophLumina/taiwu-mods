@@ -11,9 +11,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Global;
 
-/// <summary>
-/// (载入界面用到的) 世界信息
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class WorldInfo : ISerializableGameData
 {
@@ -89,245 +86,134 @@ public class WorldInfo : ISerializableGameData
 
 		public const ushort MapAreaTemplateId = 34;
 
-		public const ushort Count = 35;
+		public const ushort TotalTaiwuLifeSummaryInfoEx = 35;
 
-		public static readonly string[] FieldId2FieldName = new string[35]
+		public const ushort DreamBackCount = 36;
+
+		public const ushort Count = 37;
+
+		public static readonly string[] FieldId2FieldName = new string[37]
 		{
 			"CurrDate", "TaiwuGenerationsCount", "SavingTimestamp", "TaiwuSurname", "TaiwuGivenName", "Gender", "AvatarRelatedData", "MapStateName", "MapAreaName", "CharacterLifespanType",
 			"CombatDifficulty", "ReadingDifficulty", "BreakoutDifficulty", "LoopingDifficulty", "HereticsAmountType", "BossInvasionSpeedType", "WorldResourceAmountType", "AllowRandomTaiwuHeir", "RestrictOptionsBehaviorType", "StateTaskStatuses",
 			"XiangshuAvatarTaskStatuses", "MainStoryLineProgress", "BeatRanChenZi", "ModIds", "WorldPopulationType", "EnemyPracticeLevel", "GameVersionInfo", "FavorabilityChange", "DlcIds", "ProfessionUpgrade",
-			"LootYield", "TotalTaiwuLifeSummaryInfo", "WorldFunctionStatuses", "MapStateTemplateId", "MapAreaTemplateId"
+			"LootYield", "TotalTaiwuLifeSummaryInfo", "WorldFunctionStatuses", "MapStateTemplateId", "MapAreaTemplateId", "TotalTaiwuLifeSummaryInfoEx", "DreamBackCount"
 		};
 	}
 
-	/// <summary>
-	/// 当前游戏日期 (从第一年一月开始经过的月份数)
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrDate;
 
-	/// <summary>
-	/// 太吾世代
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuGenerationsCount;
 
-	/// <summary>
-	/// 存档时间 (UTC)
-	/// </summary>
+	[SerializableGameDataField]
+	public int DreamBackCount;
+
 	[SerializableGameDataField]
 	public long SavingTimestamp;
 
-	/// <summary>
-	/// 太吾姓氏
-	/// </summary>
 	[SerializableGameDataField]
 	public string TaiwuSurname;
 
-	/// <summary>
-	/// 太吾名字
-	/// </summary>
 	[SerializableGameDataField]
 	public string TaiwuGivenName;
 
-	/// <summary>
-	/// 太吾性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 太吾外貌
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
-	/// <summary>
-	/// 太吾所在地 - 洲
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public string MapStateName;
 
-	/// <summary>
-	/// 太吾所在地 - 地区
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public string MapAreaName;
 
-	/// <summary>
-	/// 角色寿命类型.
-	/// <see cref="T:GameData.Domains.World.CharacterLifespanType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CharacterLifespanType;
 
-	/// <summary>
-	/// 战斗难度.
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CombatDifficulty;
 
-	/// <summary>
-	/// 研读难度
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ReadingDifficulty;
 
-	/// <summary>
-	/// 突破难度
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BreakoutDifficulty;
 
-	/// <summary>
-	/// 周天难度
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte LoopingDifficulty;
 
-	/// <summary>
-	/// 敌人的修习
-	/// <see cref="F:Config.WorldCreation.DefKey.EnemyPracticeLevel" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte EnemyPracticeLevel;
 
-	/// <summary>
-	/// 人情的变化
-	/// <see cref="F:Config.WorldCreation.DefKey.FavorabilityChange" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte FavorabilityChange;
 
-	/// <summary>
-	/// 志向的成长
-	/// <see cref="F:Config.WorldCreation.DefKey.ProfessionUpgrade" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ProfessionUpgrade;
 
-	/// <summary>
-	/// 战利品产出
-	/// <see cref="F:Config.WorldCreation.DefKey.LootYield" />
-	/// </summary>
 	[SerializableGameDataField]
 	public short LootYield;
 
-	/// <summary>
-	/// 地图上的外道数量的类型.
-	/// <see cref="T:GameData.Domains.World.HereticsAmountType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte HereticsAmountType;
 
-	/// <summary>
-	/// 侵袭的速度类型.
-	/// <see cref="T:GameData.Domains.World.BossInvasionSpeedType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BossInvasionSpeedType;
 
-	/// <summary>
-	/// 世界的资源数量类型.
-	/// <see cref="T:GameData.Domains.World.WorldResourceAmountType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte WorldResourceAmountType;
 
-	/// <summary>
-	/// 世界的人口数量类型.
-	/// <see cref="T:GameData.Domains.World.WorldPopulationType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte WorldPopulationType;
 
-	/// <summary>
-	/// 是否允许随机太吾继承人
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AllowRandomTaiwuHeir;
 
-	/// <summary>
-	/// 是否只允许选择符合立场的选项
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RestrictOptionsBehaviorType;
 
-	/// <summary>
-	/// 十五个州的任务状态.
-	/// stateId -&gt; StateTaskStatus.
-	/// <see cref="T:GameData.Domains.World.StateTaskStatus" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] StateTaskStatuses;
 
-	/// <summary>
-	/// 相枢化身的任务状态.
-	/// xiangshuAvatarId -&gt; XiangshuAvatarTaskStatus.
-	/// </summary>
 	[SerializableGameDataField]
 	public XiangshuAvatarTaskStatus[] XiangshuAvatarTaskStatuses;
 
-	/// <summary>
-	/// 主线进度.
-	/// <see cref="T:GameData.Domains.World.MainStoryLineProgress" />
-	/// </summary>
 	[SerializableGameDataField]
 	public short MainStoryLineProgress;
 
-	/// <summary>
-	/// 是否打败了染尘子
-	/// </summary>
 	[SerializableGameDataField]
 	public bool BeatRanChenZi;
 
-	/// <summary>
-	/// 当前生效的 mod 列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ModId> ModIds;
 
-	/// <summary>
-	/// 当前生效的 dlc 列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<DlcId> DlcIds;
 
-	/// <summary>
-	/// 游戏版本信息
-	/// </summary>
 	[SerializableGameDataField]
 	public GameVersionInfo GameVersionInfo;
 
-	/// <summary>
-	/// 各代太吾数据统计相关信息
-	/// </summary>
+	[Obsolete("已废弃, 请使用 TotalTaiwuLifeSummaryInfoEx")]
 	[SerializableGameDataField]
 	public TotalTaiwuLifeSummaryInfo TotalTaiwuLifeSummaryInfo;
 
-	/// <summary>
-	/// 功能状态
-	/// </summary>
 	[SerializableGameDataField]
 	public ulong WorldFunctionStatuses;
 
-	/// <summary>
-	/// 太吾所在地 - 洲模版Id
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MapStateTemplateId;
 
-	/// <summary>
-	/// 太吾所在地 - 地区模版Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short MapAreaTemplateId;
+
+	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
+	public TotalTaiwuLifeSummaryInfo TotalTaiwuLifeSummaryInfoEx;
 
 	public WorldInfo()
 	{
@@ -340,19 +226,16 @@ public class WorldInfo : ISerializableGameData
 		LootYield = 1;
 		WorldPopulationType = 1;
 		GameVersionInfo = null;
-		TotalTaiwuLifeSummaryInfo = null;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
-		int totalSize = 49;
+		int totalSize = 53;
 		totalSize = ((TaiwuSurname == null) ? (totalSize + 2) : (totalSize + (2 + 2 * TaiwuSurname.Length)));
 		totalSize = ((TaiwuGivenName == null) ? (totalSize + 2) : (totalSize + (2 + 2 * TaiwuGivenName.Length)));
 		totalSize = ((AvatarRelatedData == null) ? (totalSize + 2) : (totalSize + (2 + AvatarRelatedData.GetSerializedSize())));
@@ -364,6 +247,7 @@ public class WorldInfo : ISerializableGameData
 		totalSize = ((GameVersionInfo == null) ? (totalSize + 2) : (totalSize + (2 + GameVersionInfo.GetSerializedSize())));
 		totalSize = ((DlcIds == null) ? (totalSize + 2) : (totalSize + (2 + 16 * DlcIds.Count)));
 		totalSize = ((TotalTaiwuLifeSummaryInfo == null) ? (totalSize + 2) : (totalSize + (2 + TotalTaiwuLifeSummaryInfo.GetSerializedSize())));
+		totalSize = ((TotalTaiwuLifeSummaryInfoEx == null) ? (totalSize + 4) : (totalSize + (4 + TotalTaiwuLifeSummaryInfoEx.GetSerializedSize())));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -371,11 +255,10 @@ public class WorldInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
-		*(short*)pCurrData = 35;
+		*(short*)pCurrData = 37;
 		pCurrData += 2;
 		*(int*)pCurrData = CurrDate;
 		pCurrData += 4;
@@ -612,6 +495,22 @@ public class WorldInfo : ISerializableGameData
 		pCurrData++;
 		*(short*)pCurrData = MapAreaTemplateId;
 		pCurrData += 2;
+		if (TotalTaiwuLifeSummaryInfoEx != null)
+		{
+			byte* intPtr4 = pCurrData;
+			pCurrData += 4;
+			int fieldSize4 = TotalTaiwuLifeSummaryInfoEx.Serialize(pCurrData);
+			pCurrData += fieldSize4;
+			Tester.Assert(fieldSize4 <= int.MaxValue);
+			*(int*)intPtr4 = fieldSize4;
+		}
+		else
+		{
+			*(int*)pCurrData = 0;
+			pCurrData += 4;
+		}
+		*(int*)pCurrData = DreamBackCount;
+		pCurrData += 4;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -620,7 +519,6 @@ public class WorldInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -951,6 +849,28 @@ public class WorldInfo : ISerializableGameData
 		{
 			MapAreaTemplateId = *(short*)pCurrData;
 			pCurrData += 2;
+		}
+		if (fieldCount > 35)
+		{
+			int num4 = *(int*)pCurrData;
+			pCurrData += 4;
+			if (num4 > 0)
+			{
+				if (TotalTaiwuLifeSummaryInfoEx == null)
+				{
+					TotalTaiwuLifeSummaryInfoEx = new TotalTaiwuLifeSummaryInfo();
+				}
+				pCurrData += TotalTaiwuLifeSummaryInfoEx.Deserialize(pCurrData);
+			}
+			else
+			{
+				TotalTaiwuLifeSummaryInfoEx = null;
+			}
+		}
+		if (fieldCount > 36)
+		{
+			DreamBackCount = *(int*)pCurrData;
+			pCurrData += 4;
 		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)

@@ -2,43 +2,26 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 功法伤害阈值加成显示数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public struct CombatSkillDamageStepBonusDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 外伤伤势阈值加成系数
-	/// </summary>
 	[SerializableGameDataField]
 	public int OuterInjuryStepBonus;
 
-	/// <summary>
-	/// 内伤伤势阈值加成系数
-	/// </summary>
 	[SerializableGameDataField]
 	public int InnerInjuryStepBonus;
 
-	/// <summary>
-	/// 重创阈值加成系数
-	/// </summary>
 	[SerializableGameDataField]
 	public int FatalStepBonus;
 
-	/// <summary>
-	/// 失神阈值加成系数
-	/// </summary>
 	[SerializableGameDataField]
 	public int MindStepBonus;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 16;
@@ -49,7 +32,6 @@ public struct CombatSkillDamageStepBonusDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = OuterInjuryStepBonus;
@@ -67,7 +49,6 @@ public struct CombatSkillDamageStepBonusDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

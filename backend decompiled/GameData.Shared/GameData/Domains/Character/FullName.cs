@@ -6,76 +6,37 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 随机姓名.
-/// 其中的大部分字段都和其他字段共用了内存, 因此不要直接获取.
-/// </summary>
 [Serializable]
 [StructLayout(LayoutKind.Explicit)]
 public struct FullName : ISerializableGameData, IEquatable<FullName>
 {
-	/// <summary>
-	/// [通用字段] 命名类型.
-	/// <see cref="T:GameData.Domains.Character.FullNameType" />
-	/// </summary>
 	[FieldOffset(8)]
 	public sbyte Type;
 
-	/// <summary>
-	/// [通用字段] 自定义姓 ID
-	/// </summary>
 	[FieldOffset(0)]
 	public int CustomSurnameId;
 
-	/// <summary>
-	/// [通用字段] 自定义名 ID
-	/// </summary>
 	[FieldOffset(4)]
 	public int CustomGivenNameId;
 
-	/// <summary>
-	/// [汉族字段] 姓 ID
-	/// </summary>
 	[FieldOffset(0)]
 	public short SurnameId;
 
-	/// <summary>
-	/// [汉族字段] 名字组 ID
-	/// </summary>
 	[FieldOffset(4)]
 	public short GivenNameGroupId;
 
-	/// <summary>
-	/// [汉族字段] 名字中的尾字 ID
-	/// </summary>
 	[FieldOffset(6)]
 	public short GivenNameSuffixId;
 
-	/// <summary>
-	/// [汉族字段] 名字类型.
-	/// 0: 不使用中字, 散字作为尾字库.
-	/// 1: 使用中字, 散字作为尾字库.
-	/// 2: 使用中字, 连字作为尾字库.
-	/// </summary>
 	[FieldOffset(9)]
 	public sbyte GivenNameType;
 
-	/// <summary>
-	/// [藏族字段] 前名 ID
-	/// </summary>
 	[FieldOffset(0)]
 	public short ZangPrefixId;
 
-	/// <summary>
-	/// [藏族字段] 后名 ID.
-	/// 小于 0 表示后名不存在.
-	/// </summary>
 	[FieldOffset(2)]
 	public short ZangSuffixId;
 
-	/// <summary>
-	/// 创建汉族名字
-	/// </summary>
 	public FullName(int customSurnameId, int customGivenNameId, short surnameId, short givenNameGroupId, short givenNameSuffixId, sbyte givenNameType)
 	{
 		Type = 1;
@@ -111,9 +72,6 @@ public struct FullName : ISerializableGameData, IEquatable<FullName>
 		}
 	}
 
-	/// <summary>
-	/// 创建藏族名字
-	/// </summary>
 	public FullName(int customNameId, short zangPrefixId, short zangSuffixId)
 	{
 		Type = 2;
@@ -216,13 +174,6 @@ public struct FullName : ISerializableGameData, IEquatable<FullName>
 		return 10;
 	}
 
-	/// <summary>
-	/// 获取随机姓名的字串表示.
-	/// 返回的姓或名为 null 表示不存在对应值. 藏族姓名的姓永远为 null, 其他为 null 的情况表示名字数据有错.
-	/// </summary>
-	/// <param name="gender"></param>
-	/// <param name="customTexts">自定义文本集合</param>
-	/// <returns>姓, 名</returns>
 	public (string, string) GetName(sbyte gender, IReadOnlyDictionary<int, string> customTexts)
 	{
 		if ((Type & 0x10) != 0)
@@ -308,14 +259,6 @@ public struct FullName : ISerializableGameData, IEquatable<FullName>
 		return (((((CustomSurnameId * 397) ^ CustomGivenNameId) * 397) ^ Type.GetHashCode()) * 397) ^ GivenNameType.GetHashCode();
 	}
 
-	/// <summary>
-	/// 获取汉族名字的尾字
-	/// </summary>
-	/// <param name="group"></param>
-	/// <param name="suffixId"></param>
-	/// <param name="gender"></param>
-	/// <param name="unattached">尾字类型. true: 散字, false: 连字.</param>
-	/// <returns></returns>
 	private static string GetSuffixName(HanNameItem group, short suffixId, sbyte gender, bool unattached)
 	{
 		string[] genderNames;

@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 需要显示的化解信息
-/// </summary>
 public struct ShowAvoidData : ISerializableGameData
 {
 	public sbyte HitType;

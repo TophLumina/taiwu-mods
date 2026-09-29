@@ -8,133 +8,70 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物持有界面的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 [SerializableGameData(NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class CharacterItemsDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 物品喜爱和厌恶信息
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterLoveAndHateItemInfo CharacterLoveAndHateItemInfo;
 
-	/// <summary>
-	/// 人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData CharacterDisplayData;
 
-	/// <summary>
-	/// 太吾的人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData TaiwuCharacterDisplayData;
 
-	/// <summary>
-	/// 资源
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts Resources;
 
-	/// <summary>
-	/// 技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 当前主属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes CurMainAttributes;
 
-	/// <summary>
-	/// 当前内力
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrNeili;
 
-	/// <summary>
-	/// 最大内力
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxNeili;
 
-	/// <summary>
-	/// 历练
-	/// </summary>
 	[SerializableGameDataField]
 	public int Exp;
 
-	/// <summary>
-	/// 当前负重
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurLoad;
 
-	/// <summary>
-	/// 最大负重
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxLoad;
 
 	[SerializableGameDataField]
 	public int MoveTimeCostPercent;
 
-	/// <summary>
-	/// 当前人物可以借出给太吾的最高价值
-	/// </summary>
 	[SerializableGameDataField]
 	public long MaxWorthCanBeLentToTaiwu;
 
-	/// <summary>
-	/// 验毒银针的数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int NeedleAmount;
 
-	/// <summary>
-	/// 行囊物品显示数据，包括资源和装备栏
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> InventoryItems;
 
-	/// <summary>
-	/// 服食栏
-	/// </summary>
 	[SerializableGameDataField]
 	public EatingItems EatingItems;
 
-	/// <summary>
-	/// 最大可服食数量
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CanEatingMaxCount;
 
-	/// <summary>
-	/// 徒手工具
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey EmptyToolKey;
 
-	/// <summary>
-	/// 主线神火数据
-	/// </summary>
 	[SerializableGameDataField]
 	public DivineFlameData DivineFlameData;
 
-	/// <summary>
-	/// 主线神火的目标条件是否满足
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] DivineFlameTargetState;
 
-	/// <summary>
-	/// 神火线-剑柄目标角色-卫起效果
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData DivineFlameTargetCharacter;
 
@@ -145,13 +82,9 @@ public class CharacterItemsDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 37;
-		totalSize = ((CharacterLoveAndHateItemInfo == null) ? (totalSize + 2) : (totalSize + (2 + CharacterLoveAndHateItemInfo.GetSerializedSize())));
+		int totalSize = 233;
 		totalSize = ((CharacterDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CharacterDisplayData.GetSerializedSize())));
 		totalSize = ((TaiwuCharacterDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + TaiwuCharacterDisplayData.GetSerializedSize())));
-		totalSize += Resources.GetSerializedSize();
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize += CurMainAttributes.GetSerializedSize();
 		if (InventoryItems != null)
 		{
 			totalSize += 2;
@@ -164,8 +97,6 @@ public class CharacterItemsDisplayData : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize += EatingItems.GetSerializedSize();
-		totalSize += EmptyToolKey.GetSerializedSize();
 		totalSize = ((DivineFlameData == null) ? (totalSize + 2) : (totalSize + (2 + DivineFlameData.GetSerializedSize())));
 		totalSize = ((DivineFlameTargetState == null) ? (totalSize + 2) : (totalSize + (2 + DivineFlameTargetState.Length)));
 		totalSize = ((DivineFlameTargetCharacter == null) ? (totalSize + 2) : (totalSize + (2 + DivineFlameTargetCharacter.GetSerializedSize())));

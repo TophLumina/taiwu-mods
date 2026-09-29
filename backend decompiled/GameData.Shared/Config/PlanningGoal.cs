@@ -9,491 +9,208 @@ namespace Config;
 [Serializable]
 public class PlanningGoal : ConfigData<PlanningGoalItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 需要延长寿命
-		/// </summary>
 		public const int IncreaseMaxHealth = 225;
 
-		/// <summary>
-		/// 需要恢复健康
-		/// </summary>
 		public const int IncreaseHealth = 227;
 
-		/// <summary>
-		/// 需要治疗伤势
-		/// </summary>
 		public const int HealInjury = 228;
 
-		/// <summary>
-		/// 需要驱除毒素
-		/// </summary>
 		public const int HealPoison = 229;
 
-		/// <summary>
-		/// 需要调理内息
-		/// </summary>
 		public const int RestoreDisorderOfQi = 230;
 
-		/// <summary>
-		/// 需要杀灭蛊虫
-		/// </summary>
 		public const int KillWug = 231;
 
-		/// <summary>
-		/// 需要恢复心情
-		/// </summary>
 		public const int IncreaseHappiness = 232;
 
-		/// <summary>
-		/// 需要恢复内力
-		/// </summary>
 		public const int IncreaseNeili = 233;
 
-		/// <summary>
-		/// 需要恢复属性
-		/// </summary>
 		public const int RecoverMainAttribute = 234;
 
-		/// <summary>
-		/// 需要获取历练
-		/// </summary>
 		public const int GainExp = 235;
 
-		/// <summary>
-		/// 需要获取资源
-		/// </summary>
 		public const int GainResource = 236;
 
-		/// <summary>
-		/// 需要花费资源
-		/// </summary>
 		public const int SpendResource = 237;
 
-		/// <summary>
-		/// 需要获得道具
-		/// </summary>
 		public const int GainItem = 238;
 
-		/// <summary>
-		/// 需要花费道具
-		/// </summary>
 		public const int SpendItem = 239;
 
-		/// <summary>
-		/// 需要修理道具
-		/// </summary>
 		public const int RepairItem = 240;
 
-		/// <summary>
-		/// 需要道具淬毒
-		/// </summary>
 		public const int AddPoisonToItem = 241;
 
-		/// <summary>
-		/// 需要学习武学
-		/// </summary>
 		public const int LearnCombatSkill = 242;
 
-		/// <summary>
-		/// 需要学习技艺
-		/// </summary>
 		public const int LearnLifeSkill = 243;
 
-		/// <summary>
-		/// 需要请教研读
-		/// </summary>
 		public const int AskForHelpOnReading = 244;
 
-		/// <summary>
-		/// 需要请教突破
-		/// </summary>
 		public const int AskForHelpOnBreakout = 245;
 
-		/// <summary>
-		/// 需要武学造诣
-		/// </summary>
 		public const int IncreaseCombatSkillAttainment = 246;
 
-		/// <summary>
-		/// 需要技艺造诣
-		/// </summary>
 		public const int IncreaseLifeSkillAttainment = 247;
 
-		/// <summary>
-		/// 需要结成关系
-		/// </summary>
+		public const int IncreaseInventoryLoad = 248;
+
 		public const int AddRelationOnce = 249;
 
-		/// <summary>
-		/// 需要解除关系
-		/// </summary>
 		public const int EndRelationOnce = 250;
 
-		/// <summary>
-		/// 持续结成关系
-		/// </summary>
 		public const int AddRelation = 251;
 
-		/// <summary>
-		/// 持续解除关系
-		/// </summary>
 		public const int EndRelation = 252;
 
-		/// <summary>
-		/// 春宵一刻-指定目标
-		/// </summary>
 		public const int MakeLove = 272;
 
-		/// <summary>
-		/// 似曾相识
-		/// </summary>
 		public const int DejaVu = 253;
 
-		/// <summary>
-		/// 受邀赴约
-		/// </summary>
 		public const int Appointment = 254;
 
-		/// <summary>
-		/// 守卫公库
-		/// </summary>
 		public const int GuardTreasury = 255;
 
-		/// <summary>
-		/// 抓捕逃犯
-		/// </summary>
 		public const int HuntFugitive = 256;
 
-		/// <summary>
-		/// 畏罪潜逃
-		/// </summary>
 		public const int EscapeFromPrison = 257;
 
-		/// <summary>
-		/// 寻求庇护
-		/// </summary>
 		public const int SeekAsylum = 258;
 
-		/// <summary>
-		/// 押送囚犯
-		/// </summary>
 		public const int EscortPrisoner = 259;
 
-		/// <summary>
-		/// 村民身份
-		/// </summary>
 		public const int VillagerRoleArrangement = 260;
 
-		/// <summary>
-		/// 拜师学艺
-		/// </summary>
 		public const int JoinOrganization = 261;
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public const int ProtectFriendOrFamily = 262;
 
-		/// <summary>
-		/// 解救亲友
-		/// </summary>
 		public const int RescueFriendOrFamily = 263;
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public const int MournForTheDead = 264;
 
-		/// <summary>
-		/// 寻找宝藏
-		/// </summary>
 		public const int FindTreasure = 265;
 
-		/// <summary>
-		/// 天材地宝
-		/// </summary>
 		public const int FindSpecialMaterial = 266;
 
-		/// <summary>
-		/// 奇书争夺
-		/// </summary>
 		public const int ContestForLegendaryBook = 267;
 
-		/// <summary>
-		/// 寻仇报复
-		/// </summary>
 		public const int GetRevenge = 274;
 
-		/// <summary>
-		/// 收养弃婴
-		/// </summary>
 		public const int AdoptInfant = 268;
 
-		/// <summary>
-		/// 治疗死气
-		/// </summary>
 		public const int SectStoryBaihuaToCureManic = 269;
 
-		/// <summary>
-		/// 消灭敌人
-		/// </summary>
 		public const int SectStoryShixiangToFightEnemy = 270;
 
-		/// <summary>
-		/// 追杀太吾
-		/// </summary>
 		public const int HuntTaiwu = 271;
+
+		public const int ReturnHome = 275;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 需要延长寿命
-		/// </summary>
 		public static PlanningGoalItem IncreaseMaxHealth => Instance[225];
 
-		/// <summary>
-		/// 需要恢复健康
-		/// </summary>
 		public static PlanningGoalItem IncreaseHealth => Instance[227];
 
-		/// <summary>
-		/// 需要治疗伤势
-		/// </summary>
 		public static PlanningGoalItem HealInjury => Instance[228];
 
-		/// <summary>
-		/// 需要驱除毒素
-		/// </summary>
 		public static PlanningGoalItem HealPoison => Instance[229];
 
-		/// <summary>
-		/// 需要调理内息
-		/// </summary>
 		public static PlanningGoalItem RestoreDisorderOfQi => Instance[230];
 
-		/// <summary>
-		/// 需要杀灭蛊虫
-		/// </summary>
 		public static PlanningGoalItem KillWug => Instance[231];
 
-		/// <summary>
-		/// 需要恢复心情
-		/// </summary>
 		public static PlanningGoalItem IncreaseHappiness => Instance[232];
 
-		/// <summary>
-		/// 需要恢复内力
-		/// </summary>
 		public static PlanningGoalItem IncreaseNeili => Instance[233];
 
-		/// <summary>
-		/// 需要恢复属性
-		/// </summary>
 		public static PlanningGoalItem RecoverMainAttribute => Instance[234];
 
-		/// <summary>
-		/// 需要获取历练
-		/// </summary>
 		public static PlanningGoalItem GainExp => Instance[235];
 
-		/// <summary>
-		/// 需要获取资源
-		/// </summary>
 		public static PlanningGoalItem GainResource => Instance[236];
 
-		/// <summary>
-		/// 需要花费资源
-		/// </summary>
 		public static PlanningGoalItem SpendResource => Instance[237];
 
-		/// <summary>
-		/// 需要获得道具
-		/// </summary>
 		public static PlanningGoalItem GainItem => Instance[238];
 
-		/// <summary>
-		/// 需要花费道具
-		/// </summary>
 		public static PlanningGoalItem SpendItem => Instance[239];
 
-		/// <summary>
-		/// 需要修理道具
-		/// </summary>
 		public static PlanningGoalItem RepairItem => Instance[240];
 
-		/// <summary>
-		/// 需要道具淬毒
-		/// </summary>
 		public static PlanningGoalItem AddPoisonToItem => Instance[241];
 
-		/// <summary>
-		/// 需要学习武学
-		/// </summary>
 		public static PlanningGoalItem LearnCombatSkill => Instance[242];
 
-		/// <summary>
-		/// 需要学习技艺
-		/// </summary>
 		public static PlanningGoalItem LearnLifeSkill => Instance[243];
 
-		/// <summary>
-		/// 需要请教研读
-		/// </summary>
 		public static PlanningGoalItem AskForHelpOnReading => Instance[244];
 
-		/// <summary>
-		/// 需要请教突破
-		/// </summary>
 		public static PlanningGoalItem AskForHelpOnBreakout => Instance[245];
 
-		/// <summary>
-		/// 需要武学造诣
-		/// </summary>
 		public static PlanningGoalItem IncreaseCombatSkillAttainment => Instance[246];
 
-		/// <summary>
-		/// 需要技艺造诣
-		/// </summary>
 		public static PlanningGoalItem IncreaseLifeSkillAttainment => Instance[247];
 
-		/// <summary>
-		/// 需要结成关系
-		/// </summary>
+		public static PlanningGoalItem IncreaseInventoryLoad => Instance[248];
+
 		public static PlanningGoalItem AddRelationOnce => Instance[249];
 
-		/// <summary>
-		/// 需要解除关系
-		/// </summary>
 		public static PlanningGoalItem EndRelationOnce => Instance[250];
 
-		/// <summary>
-		/// 持续结成关系
-		/// </summary>
 		public static PlanningGoalItem AddRelation => Instance[251];
 
-		/// <summary>
-		/// 持续解除关系
-		/// </summary>
 		public static PlanningGoalItem EndRelation => Instance[252];
 
-		/// <summary>
-		/// 春宵一刻-指定目标
-		/// </summary>
 		public static PlanningGoalItem MakeLove => Instance[272];
 
-		/// <summary>
-		/// 似曾相识
-		/// </summary>
 		public static PlanningGoalItem DejaVu => Instance[253];
 
-		/// <summary>
-		/// 受邀赴约
-		/// </summary>
 		public static PlanningGoalItem Appointment => Instance[254];
 
-		/// <summary>
-		/// 守卫公库
-		/// </summary>
 		public static PlanningGoalItem GuardTreasury => Instance[255];
 
-		/// <summary>
-		/// 抓捕逃犯
-		/// </summary>
 		public static PlanningGoalItem HuntFugitive => Instance[256];
 
-		/// <summary>
-		/// 畏罪潜逃
-		/// </summary>
 		public static PlanningGoalItem EscapeFromPrison => Instance[257];
 
-		/// <summary>
-		/// 寻求庇护
-		/// </summary>
 		public static PlanningGoalItem SeekAsylum => Instance[258];
 
-		/// <summary>
-		/// 押送囚犯
-		/// </summary>
 		public static PlanningGoalItem EscortPrisoner => Instance[259];
 
-		/// <summary>
-		/// 村民身份
-		/// </summary>
 		public static PlanningGoalItem VillagerRoleArrangement => Instance[260];
 
-		/// <summary>
-		/// 拜师学艺
-		/// </summary>
 		public static PlanningGoalItem JoinOrganization => Instance[261];
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public static PlanningGoalItem ProtectFriendOrFamily => Instance[262];
 
-		/// <summary>
-		/// 解救亲友
-		/// </summary>
 		public static PlanningGoalItem RescueFriendOrFamily => Instance[263];
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public static PlanningGoalItem MournForTheDead => Instance[264];
 
-		/// <summary>
-		/// 寻找宝藏
-		/// </summary>
 		public static PlanningGoalItem FindTreasure => Instance[265];
 
-		/// <summary>
-		/// 天材地宝
-		/// </summary>
 		public static PlanningGoalItem FindSpecialMaterial => Instance[266];
 
-		/// <summary>
-		/// 奇书争夺
-		/// </summary>
 		public static PlanningGoalItem ContestForLegendaryBook => Instance[267];
 
-		/// <summary>
-		/// 寻仇报复
-		/// </summary>
 		public static PlanningGoalItem GetRevenge => Instance[274];
 
-		/// <summary>
-		/// 收养弃婴
-		/// </summary>
 		public static PlanningGoalItem AdoptInfant => Instance[268];
 
-		/// <summary>
-		/// 治疗死气
-		/// </summary>
 		public static PlanningGoalItem SectStoryBaihuaToCureManic => Instance[269];
 
-		/// <summary>
-		/// 消灭敌人
-		/// </summary>
 		public static PlanningGoalItem SectStoryShixiangToFightEnemy => Instance[270];
 
-		/// <summary>
-		/// 追杀太吾
-		/// </summary>
 		public static PlanningGoalItem HuntTaiwu => Instance[271];
+
+		public static PlanningGoalItem ReturnHome => Instance[275];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static PlanningGoal Instance = new PlanningGoal();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -2233,7 +1950,7 @@ public class PlanningGoal : ConfigData<PlanningGoalItem, int>
 		_dataArray.Add(new PlanningGoalItem(264, LocalStringManager.GetConfig("PlanningGoal_language", "Name_264"), hideInUI: false, 6, 0, new short[5] { 70, 60, 80, 40, 50 }, isPrioritizedGoal: true, 1, new int[0], new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[1]
 		{
 			new StateConditionAndValue<StateKey>(432, ">=", 0, 433)
-		}, new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new sbyte[1] { 13 }, null, overwrite: true, "MournForTheDead", recreateEveryMonth: false));
+		}, new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new sbyte[1] { 21 }, null, overwrite: true, "MournForTheDead", recreateEveryMonth: false));
 		_dataArray.Add(new PlanningGoalItem(265, LocalStringManager.GetConfig("PlanningGoal_language", "Name_265"), hideInUI: false, 9, 0, new short[5] { 40, 50, 70, 80, 60 }, isPrioritizedGoal: true, 1, new int[0], new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[1]
 		{
 			new StateConditionAndValue<StateKey>(482)
@@ -2280,12 +1997,16 @@ public class PlanningGoal : ConfigData<PlanningGoalItem, int>
 		{
 			new StateConditionAndValue<StateKey>(612)
 		}, new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new sbyte[1] { 13 }, null, overwrite: false, "GetRevenge", recreateEveryMonth: false));
+		_dataArray.Add(new PlanningGoalItem(275, LocalStringManager.GetConfig("PlanningGoal_language", "Name_275"), hideInUI: false, -1, 10, new short[5], isPrioritizedGoal: true, 1, new int[0], new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[1]
+		{
+			new StateConditionAndValue<StateKey>(615)
+		}, new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new StateConditionAndValue<StateKey>[0], new sbyte[1] { 15 }, null, overwrite: true, "ReturnHome", recreateEveryMonth: true));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<PlanningGoalItem>(275);
+		_dataArray = new List<PlanningGoalItem>(276);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

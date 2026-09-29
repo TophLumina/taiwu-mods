@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class HotKeyDisplay : ConfigData<HotKeyDisplayItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static HotKeyDisplay Instance = new HotKeyDisplay();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayText", "TemplateId", "Type" };
@@ -251,12 +248,16 @@ public class HotKeyDisplay : ConfigData<HotKeyDisplayItem, short>
 			new HotkeyIndex(1, 5),
 			new HotkeyIndex(1, 3)
 		}));
+		_dataArray.Add(new HotKeyDisplayItem(52, EHotKeyDisplayType.EndTurn, LocalStringManager.GetConfig("HotKeyDisplay_language", "DisplayText_52"), new List<HotkeyIndex>
+		{
+			new HotkeyIndex(1, 2)
+		}));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<HotKeyDisplayItem>(52);
+		_dataArray = new List<HotKeyDisplayItem>(53);
 		CreateItems0();
 	}
 }

@@ -3,44 +3,23 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-///
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class GearMateRepairCount : ISerializableGameData
 {
-	/// <summary>
-	/// 疗伤次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OuterInjuryHealingCount;
 
-	/// <summary>
-	/// 复元次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte InnerInjuryHealingCount;
 
-	/// <summary>
-	/// 驱毒次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte DetoxCount;
 
-	/// <summary>
-	/// 调息次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BreathingCount;
 
-	/// <summary>
-	/// 基础次数
-	/// </summary>
 	public const sbyte BaseCount = 1;
 
-	/// <summary>
-	/// 次数上限
-	/// </summary>
 	public const sbyte MaxCount = 99;
 
 	public GearMateRepairCount()
@@ -51,19 +30,11 @@ public class GearMateRepairCount : ISerializableGameData
 		BreathingCount = 0;
 	}
 
-	/// <summary>
-	/// 将某个使用次数限定在有效范围内
-	/// </summary>
-	/// <param name="count"></param>
-	/// <returns></returns>
 	private static sbyte ClampCount(int count)
 	{
 		return (sbyte)Math.Clamp(count, 0, 99);
 	}
 
-	/// <summary>
-	/// 减去已使用次数
-	/// </summary>
 	public GearMateRepairCount Sub(GearMateRepairCount other)
 	{
 		return new GearMateRepairCount
@@ -75,12 +46,6 @@ public class GearMateRepairCount : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="count"></param>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public void Set(sbyte type, int count)
 	{
 		switch (type)
@@ -110,12 +75,6 @@ public class GearMateRepairCount : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取某个使用次数
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public sbyte Get(sbyte type)
 	{
 		return type switch
@@ -128,13 +87,11 @@ public class GearMateRepairCount : ISerializableGameData
 		};
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -145,7 +102,6 @@ public class GearMateRepairCount : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (byte)OuterInjuryHealingCount;
@@ -163,7 +119,6 @@ public class GearMateRepairCount : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

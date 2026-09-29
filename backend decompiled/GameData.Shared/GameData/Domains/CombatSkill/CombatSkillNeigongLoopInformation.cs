@@ -5,46 +5,28 @@ using GameData.Utilities;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 内功周天数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class CombatSkillNeigongLoopInformation : ISerializableGameData
 {
-	/// <summary>
-	/// 辅助内功
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> ReferenceSkillList;
 
-	/// <summary>
-	/// 额外内力
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList ExtraNeiliAllocationProgress;
 
 	[SerializableGameDataField]
 	public List<QiArtStrategyDisplayData> TaiwuQiArtStrategyList;
 
-	/// <summary>
-	/// 获取的内力最小，最大值
-	/// </summary>
 	[SerializableGameDataField]
 	public (int, int) ExtraNeiliTotalRange;
 
 	[SerializableGameDataField]
 	public IntList ExtraNeiliAllocationTotal;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CombatSkillNeigongLoopInformation()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillNeigongLoopInformation(CombatSkillNeigongLoopInformation other)
 	{
 		ReferenceSkillList = ((other.ReferenceSkillList == null) ? null : new List<short>(other.ReferenceSkillList));
@@ -67,9 +49,6 @@ public class CombatSkillNeigongLoopInformation : ISerializableGameData
 		ExtraNeiliAllocationTotal = new IntList(other.ExtraNeiliAllocationTotal);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillNeigongLoopInformation other)
 	{
 		ReferenceSkillList = ((other.ReferenceSkillList == null) ? null : new List<short>(other.ReferenceSkillList));
@@ -92,13 +71,11 @@ public class CombatSkillNeigongLoopInformation : ISerializableGameData
 		ExtraNeiliAllocationTotal = new IntList(other.ExtraNeiliAllocationTotal);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -113,7 +90,6 @@ public class CombatSkillNeigongLoopInformation : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -165,7 +141,6 @@ public class CombatSkillNeigongLoopInformation : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

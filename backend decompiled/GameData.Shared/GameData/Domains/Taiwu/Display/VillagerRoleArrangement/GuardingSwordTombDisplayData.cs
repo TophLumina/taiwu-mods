@@ -2,63 +2,35 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 
-/// <summary>
-/// 看守剑冢
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class GuardingSwordTombDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 正在看守哪个剑冢
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte SwordTombId;
 
-	/// <summary>
-	/// 剑冢中的化身状态，0:平静如常;1:隐有异动;2:破冢而出
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte EscapeState;
 
-	/// <summary>
-	/// 见闻收集成功率
-	/// </summary>
 	[SerializableGameDataField]
 	public int InformationGatheringSuccessRate;
 
-	/// <summary>
-	/// 受伤几率
-	/// </summary>
 	[SerializableGameDataField]
 	public int InjuryProbability;
 
-	/// <summary>
-	/// 特性几率 A
-	/// <see cref="F:Config.VillagerRoleFormula.DefKey.SwordTombKeeperWorkFeatureOddWhenInformationCollect" />
-	/// </summary>
 	[SerializableGameDataField]
 	public int FeatureGainRateA;
 
-	/// <summary>
-	/// 特性几率 B
-	/// <see cref="F:Config.VillagerRoleFormula.DefKey.SwordTombKeeperWorkFeatureOddWhenBeAttacked" />
-	/// </summary>
 	[SerializableGameDataField]
 	public int FeatureGainRateB;
 
-	/// <summary>
-	/// 降低入魔值变化
-	/// </summary>
 	[SerializableGameDataField]
 	public int InfectionDecreaseRate;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 22;
@@ -69,7 +41,6 @@ public class GuardingSwordTombDisplayData : IVillagerRoleArrangementDisplayData,
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (byte)SwordTombId;
@@ -93,7 +64,6 @@ public class GuardingSwordTombDisplayData : IVillagerRoleArrangementDisplayData,
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

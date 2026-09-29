@@ -7,69 +7,36 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 后端开始制造的参数
-/// </summary>
 [AutoGenerateSerializableGameData]
 public struct StartMakeArguments : ISerializableGameData
 {
-	/// <summary>
-	/// 执行制造操作的角色ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 制造时所在的产业地块的Key
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingBlockKey BuildingBlockKey;
 
-	/// <summary>
-	/// 所用工具的Key
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData Tool;
 
-	/// <summary>
-	/// 所用材料的Key
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData Material;
 
-	/// <summary>
-	/// 制造的物品类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemType;
 
-	/// <summary>
-	/// 制造的物品模板ID列表，数量就是制造次数
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> ItemList;
 
-	/// <summary>
-	/// 制造的一级分类模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short MakeItemSubTypeId;
 
-	/// <summary>
-	/// 制造投入的资源份数，用于生成装备数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts ResourceCount;
 
-	/// <summary>
-	/// 制造所需的资源
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts NeedResource;
 
-	/// <summary>
-	/// 精益求精的目标装备特效
-	/// </summary>
 	[SerializableGameDataField]
 	public short EquipmentEffectId;
 
@@ -80,13 +47,10 @@ public struct StartMakeArguments : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 9;
-		totalSize += BuildingBlockKey.GetSerializedSize();
+		int totalSize = 81;
 		totalSize = ((Tool == null) ? (totalSize + 2) : (totalSize + (2 + Tool.GetSerializedSize())));
 		totalSize = ((Material == null) ? (totalSize + 2) : (totalSize + (2 + Material.GetSerializedSize())));
 		totalSize = ((ItemList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * ItemList.Count)));
-		totalSize += ResourceCount.GetSerializedSize();
-		totalSize += NeedResource.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

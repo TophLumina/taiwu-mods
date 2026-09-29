@@ -8,591 +8,240 @@ namespace Config;
 [Serializable]
 public class Accessory : ConfigData<AccessoryItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 布口袋
-		/// </summary>
 		public const short Pocket = 90;
 
-		/// <summary>
-		/// 传家宝-降龙玄铁戒
-		/// </summary>
 		public const short Heirloom0 = 225;
 
-		/// <summary>
-		/// 传家宝-玄离金册
-		/// </summary>
 		public const short Heirloom1 = 226;
 
-		/// <summary>
-		/// 传家宝-昊天塔
-		/// </summary>
 		public const short Heirloom2 = 227;
 
-		/// <summary>
-		/// 传家宝-羲和印
-		/// </summary>
 		public const short Heirloom3 = 228;
 
-		/// <summary>
-		/// 传家宝-娲皇图
-		/// </summary>
 		public const short Heirloom4 = 229;
 
-		/// <summary>
-		/// 传家宝-紫皇香炉
-		/// </summary>
 		public const short Heirloom5 = 230;
 
-		/// <summary>
-		/// 传家宝-涅槃珠
-		/// </summary>
 		public const short Heirloom6 = 231;
 
-		/// <summary>
-		/// 传家宝-万法荼糜
-		/// </summary>
 		public const short Heirloom7 = 232;
 
-		/// <summary>
-		/// 传家宝-雷鼓灵旗
-		/// </summary>
 		public const short Heirloom8 = 233;
 
-		/// <summary>
-		/// 传家宝-万象云光帕
-		/// </summary>
 		public const short Heirloom9 = 234;
 
-		/// <summary>
-		/// 传家宝-乾坤叉袋
-		/// </summary>
 		public const short Heirloom10 = 235;
 
-		/// <summary>
-		/// 传家宝-开天珠
-		/// </summary>
 		public const short Heirloom11 = 236;
 
-		/// <summary>
-		/// 传家宝-上尊金身
-		/// </summary>
 		public const short Heirloom12 = 237;
 
-		/// <summary>
-		/// 传家宝-神照镜
-		/// </summary>
 		public const short Heirloom13 = 238;
 
-		/// <summary>
-		/// 传家宝-太真华扃
-		/// </summary>
 		public const short Heirloom14 = 239;
 
-		/// <summary>
-		/// 传家宝-三辰旗
-		/// </summary>
 		public const short Heirloom15 = 240;
 
-		/// <summary>
-		/// 传家宝-九乌眼
-		/// </summary>
 		public const short Heirloom16 = 241;
 
-		/// <summary>
-		/// 传家宝-千均印
-		/// </summary>
 		public const short Heirloom17 = 242;
 
-		/// <summary>
-		/// 传家宝-物华天宝
-		/// </summary>
 		public const short Heirloom18 = 243;
 
-		/// <summary>
-		/// 传家宝-太始天元册
-		/// </summary>
 		public const short Heirloom19 = 244;
 
-		/// <summary>
-		/// 传家宝-冰心玉壶
-		/// </summary>
 		public const short Heirloom20 = 245;
 
-		/// <summary>
-		/// 传家宝-聚宝盆
-		/// </summary>
 		public const short Heirloom21 = 246;
 
-		/// <summary>
-		/// 传家宝-九色胭脂壶
-		/// </summary>
 		public const short Heirloom22 = 247;
 
-		/// <summary>
-		/// 传家宝-昆仑玉册
-		/// </summary>
 		public const short Heirloom23 = 248;
 
-		/// <summary>
-		/// 传家宝-四海匣
-		/// </summary>
 		public const short Heirloom24 = 249;
 
-		/// <summary>
-		/// 少林门派宝物
-		/// </summary>
 		public const short SectMainStoryShaolinWellWornShoe = 268;
 
-		/// <summary>
-		/// 峨眉门派宝物
-		/// </summary>
 		public const short SectMainStoryEmeiPearl = 269;
 
-		/// <summary>
-		/// 百花门派宝物
-		/// </summary>
 		public const short SectMainStoryBaihuaNeedle = 270;
 
-		/// <summary>
-		/// 武当门派宝物
-		/// </summary>
 		public const short SectMainStoryWudangQi = 271;
 
-		/// <summary>
-		/// 元山门派宝物
-		/// </summary>
 		public const short SectMainStoryYuanshanBone = 272;
 
-		/// <summary>
-		/// 狮相门派宝物
-		/// </summary>
 		public const short SectMainStoryShixiangDrum = 273;
 
-		/// <summary>
-		/// 然山门派宝物
-		/// </summary>
 		public const short SectMainStoryRanshanMark = 274;
 
-		/// <summary>
-		/// 璇女门派宝物
-		/// </summary>
 		public const short SectMainStoryXuannvMirror = 275;
 
-		/// <summary>
-		/// 铸剑门派宝物
-		/// </summary>
 		public const short SectMainStoryZhujianWhetstone = 276;
 
-		/// <summary>
-		/// 空桑门派宝物
-		/// </summary>
 		public const short SectMainStoryKongsangCrystal = 277;
 
-		/// <summary>
-		/// 金刚门派宝物
-		/// </summary>
 		public const short SectMainStoryJingangSkull = 278;
 
-		/// <summary>
-		/// 五仙门派宝物
-		/// </summary>
 		public const short SectMainStoryWuxianCodex = 279;
 
-		/// <summary>
-		/// 界青门派宝物
-		/// </summary>
 		public const short SectMainStoryJieQingDebris = 280;
 
-		/// <summary>
-		/// 伏龙门派宝物
-		/// </summary>
 		public const short SectMainStoryFulongFlame = 281;
 
-		/// <summary>
-		/// 血犼门派宝物
-		/// </summary>
 		public const short SectMainStoryXuehouCredential = 282;
 
-		/// <summary>
-		/// 少林玄字装备
-		/// </summary>
 		public const short SectMainStoryShaolinBowl = 283;
 
-		/// <summary>
-		/// 峨眉玄字装备
-		/// </summary>
 		public const short SectMainStoryEmeiTablet = 284;
 
-		/// <summary>
-		/// 百花玄字装备
-		/// </summary>
 		public const short SectMainStoryBaihuaFlute = 285;
 
-		/// <summary>
-		/// 武当玄字装备
-		/// </summary>
 		public const short SectMainStoryWudangScale = 286;
 
-		/// <summary>
-		/// 元山玄字装备
-		/// </summary>
 		public const short SectMainStoryYuanshanStele = 287;
 
-		/// <summary>
-		/// 狮相玄字装备
-		/// </summary>
 		public const short SectMainStoryShixiangFlag = 288;
 
-		/// <summary>
-		/// 然山玄字装备
-		/// </summary>
 		public const short SectMainStoryRanshanStamp = 289;
 
-		/// <summary>
-		/// 璇女玄字装备
-		/// </summary>
 		public const short SectMainStoryXuannvEarrings = 290;
 
-		/// <summary>
-		/// 铸剑玄字装备
-		/// </summary>
 		public const short SectMainStoryZhujianJadeBasin = 291;
 
-		/// <summary>
-		/// 空桑玄字装备
-		/// </summary>
 		public const short SectMainStoryKongsangSlip = 292;
 
-		/// <summary>
-		/// 金刚玄字装备
-		/// </summary>
 		public const short SectMainStoryJingangNeckless = 293;
 
-		/// <summary>
-		/// 五仙玄字装备
-		/// </summary>
 		public const short SectMainStoryWuxianButterfly = 294;
 
-		/// <summary>
-		/// 界青玄字装备
-		/// </summary>
 		public const short SectMainStoryJieQingObsidian = 295;
 
-		/// <summary>
-		/// 伏龙玄字装备
-		/// </summary>
 		public const short SectMainStoryFulongFeather = 296;
 
-		/// <summary>
-		/// 血犼玄字装备
-		/// </summary>
 		public const short SectMainStoryXuehouPendant = 297;
 
-		/// <summary>
-		/// 贼人营寨奖励
-		/// </summary>
 		public const short ThiefRing = 298;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 布口袋
-		/// </summary>
 		public static AccessoryItem Pocket => Instance[(short)90];
 
-		/// <summary>
-		/// 传家宝-降龙玄铁戒
-		/// </summary>
 		public static AccessoryItem Heirloom0 => Instance[(short)225];
 
-		/// <summary>
-		/// 传家宝-玄离金册
-		/// </summary>
 		public static AccessoryItem Heirloom1 => Instance[(short)226];
 
-		/// <summary>
-		/// 传家宝-昊天塔
-		/// </summary>
 		public static AccessoryItem Heirloom2 => Instance[(short)227];
 
-		/// <summary>
-		/// 传家宝-羲和印
-		/// </summary>
 		public static AccessoryItem Heirloom3 => Instance[(short)228];
 
-		/// <summary>
-		/// 传家宝-娲皇图
-		/// </summary>
 		public static AccessoryItem Heirloom4 => Instance[(short)229];
 
-		/// <summary>
-		/// 传家宝-紫皇香炉
-		/// </summary>
 		public static AccessoryItem Heirloom5 => Instance[(short)230];
 
-		/// <summary>
-		/// 传家宝-涅槃珠
-		/// </summary>
 		public static AccessoryItem Heirloom6 => Instance[(short)231];
 
-		/// <summary>
-		/// 传家宝-万法荼糜
-		/// </summary>
 		public static AccessoryItem Heirloom7 => Instance[(short)232];
 
-		/// <summary>
-		/// 传家宝-雷鼓灵旗
-		/// </summary>
 		public static AccessoryItem Heirloom8 => Instance[(short)233];
 
-		/// <summary>
-		/// 传家宝-万象云光帕
-		/// </summary>
 		public static AccessoryItem Heirloom9 => Instance[(short)234];
 
-		/// <summary>
-		/// 传家宝-乾坤叉袋
-		/// </summary>
 		public static AccessoryItem Heirloom10 => Instance[(short)235];
 
-		/// <summary>
-		/// 传家宝-开天珠
-		/// </summary>
 		public static AccessoryItem Heirloom11 => Instance[(short)236];
 
-		/// <summary>
-		/// 传家宝-上尊金身
-		/// </summary>
 		public static AccessoryItem Heirloom12 => Instance[(short)237];
 
-		/// <summary>
-		/// 传家宝-神照镜
-		/// </summary>
 		public static AccessoryItem Heirloom13 => Instance[(short)238];
 
-		/// <summary>
-		/// 传家宝-太真华扃
-		/// </summary>
 		public static AccessoryItem Heirloom14 => Instance[(short)239];
 
-		/// <summary>
-		/// 传家宝-三辰旗
-		/// </summary>
 		public static AccessoryItem Heirloom15 => Instance[(short)240];
 
-		/// <summary>
-		/// 传家宝-九乌眼
-		/// </summary>
 		public static AccessoryItem Heirloom16 => Instance[(short)241];
 
-		/// <summary>
-		/// 传家宝-千均印
-		/// </summary>
 		public static AccessoryItem Heirloom17 => Instance[(short)242];
 
-		/// <summary>
-		/// 传家宝-物华天宝
-		/// </summary>
 		public static AccessoryItem Heirloom18 => Instance[(short)243];
 
-		/// <summary>
-		/// 传家宝-太始天元册
-		/// </summary>
 		public static AccessoryItem Heirloom19 => Instance[(short)244];
 
-		/// <summary>
-		/// 传家宝-冰心玉壶
-		/// </summary>
 		public static AccessoryItem Heirloom20 => Instance[(short)245];
 
-		/// <summary>
-		/// 传家宝-聚宝盆
-		/// </summary>
 		public static AccessoryItem Heirloom21 => Instance[(short)246];
 
-		/// <summary>
-		/// 传家宝-九色胭脂壶
-		/// </summary>
 		public static AccessoryItem Heirloom22 => Instance[(short)247];
 
-		/// <summary>
-		/// 传家宝-昆仑玉册
-		/// </summary>
 		public static AccessoryItem Heirloom23 => Instance[(short)248];
 
-		/// <summary>
-		/// 传家宝-四海匣
-		/// </summary>
 		public static AccessoryItem Heirloom24 => Instance[(short)249];
 
-		/// <summary>
-		/// 少林门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryShaolinWellWornShoe => Instance[(short)268];
 
-		/// <summary>
-		/// 峨眉门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryEmeiPearl => Instance[(short)269];
 
-		/// <summary>
-		/// 百花门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryBaihuaNeedle => Instance[(short)270];
 
-		/// <summary>
-		/// 武当门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryWudangQi => Instance[(short)271];
 
-		/// <summary>
-		/// 元山门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryYuanshanBone => Instance[(short)272];
 
-		/// <summary>
-		/// 狮相门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryShixiangDrum => Instance[(short)273];
 
-		/// <summary>
-		/// 然山门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryRanshanMark => Instance[(short)274];
 
-		/// <summary>
-		/// 璇女门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryXuannvMirror => Instance[(short)275];
 
-		/// <summary>
-		/// 铸剑门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryZhujianWhetstone => Instance[(short)276];
 
-		/// <summary>
-		/// 空桑门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryKongsangCrystal => Instance[(short)277];
 
-		/// <summary>
-		/// 金刚门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryJingangSkull => Instance[(short)278];
 
-		/// <summary>
-		/// 五仙门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryWuxianCodex => Instance[(short)279];
 
-		/// <summary>
-		/// 界青门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryJieQingDebris => Instance[(short)280];
 
-		/// <summary>
-		/// 伏龙门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryFulongFlame => Instance[(short)281];
 
-		/// <summary>
-		/// 血犼门派宝物
-		/// </summary>
 		public static AccessoryItem SectMainStoryXuehouCredential => Instance[(short)282];
 
-		/// <summary>
-		/// 少林玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryShaolinBowl => Instance[(short)283];
 
-		/// <summary>
-		/// 峨眉玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryEmeiTablet => Instance[(short)284];
 
-		/// <summary>
-		/// 百花玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryBaihuaFlute => Instance[(short)285];
 
-		/// <summary>
-		/// 武当玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryWudangScale => Instance[(short)286];
 
-		/// <summary>
-		/// 元山玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryYuanshanStele => Instance[(short)287];
 
-		/// <summary>
-		/// 狮相玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryShixiangFlag => Instance[(short)288];
 
-		/// <summary>
-		/// 然山玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryRanshanStamp => Instance[(short)289];
 
-		/// <summary>
-		/// 璇女玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryXuannvEarrings => Instance[(short)290];
 
-		/// <summary>
-		/// 铸剑玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryZhujianJadeBasin => Instance[(short)291];
 
-		/// <summary>
-		/// 空桑玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryKongsangSlip => Instance[(short)292];
 
-		/// <summary>
-		/// 金刚玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryJingangNeckless => Instance[(short)293];
 
-		/// <summary>
-		/// 五仙玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryWuxianButterfly => Instance[(short)294];
 
-		/// <summary>
-		/// 界青玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryJieQingObsidian => Instance[(short)295];
 
-		/// <summary>
-		/// 伏龙玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryFulongFeather => Instance[(short)296];
 
-		/// <summary>
-		/// 血犼玄字装备
-		/// </summary>
 		public static AccessoryItem SectMainStoryXuehouPendant => Instance[(short)297];
 
-		/// <summary>
-		/// 贼人营寨奖励
-		/// </summary>
 		public static AccessoryItem ThiefRing => Instance[(short)298];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Accessory Instance = new Accessory();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -879,24 +528,24 @@ public class Accessory : ConfigData<AccessoryItem, short>
 		_dataArray.Add(new AccessoryItem(247, LocalStringManager.GetConfig("Accessory_language", "Name_247"), 2, 200, 8, -1, "icon_Accessory_jiuseyanzhihu", LocalStringManager.GetConfig("Accessory_language", "Desc_247"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_247"), transferable: true, stackable: false, wagerable: true, refinable: true, poisonable: true, repairable: true, inheritable: true, detachable: true, 30, 20, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 3, -1, -1, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 90, 90, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, -1, 0, 50));
 		_dataArray.Add(new AccessoryItem(248, LocalStringManager.GetConfig("Accessory_language", "Name_248"), 2, 200, 8, -1, "icon_Accessory_kunlunyuce", LocalStringManager.GetConfig("Accessory_language", "Desc_248"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_248"), transferable: true, stackable: false, wagerable: true, refinable: true, poisonable: true, repairable: true, inheritable: true, detachable: true, 30, 30, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 3, -1, -1, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 90, 90, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 50));
 		_dataArray.Add(new AccessoryItem(249, LocalStringManager.GetConfig("Accessory_language", "Name_249"), 2, 200, 8, -1, "icon_Accessory_sihaixia", LocalStringManager.GetConfig("Accessory_language", "Desc_249"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_249"), transferable: true, stackable: false, wagerable: true, refinable: true, poisonable: true, repairable: true, inheritable: true, detachable: true, 30, 40, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 3, -1, -1, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 90, 90, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, -1, 0, 50));
-		_dataArray.Add(new AccessoryItem(250, LocalStringManager.GetConfig("Accessory_language", "Name_250"), 2, 200, 8, -1, "icon_Accessory_zuoluluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_250"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_250"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 266, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(251, LocalStringManager.GetConfig("Accessory_language", "Name_251"), 2, 200, 8, -1, "icon_Accessory_huanxiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_251"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_251"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 267, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(252, LocalStringManager.GetConfig("Accessory_language", "Name_252"), 2, 200, 8, -1, "icon_Accessory_juboluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_252"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_252"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 268, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(253, LocalStringManager.GetConfig("Accessory_language", "Name_253"), 2, 200, 8, -1, "icon_Accessory_tuotaluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_253"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_253"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 269, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(254, LocalStringManager.GetConfig("Accessory_language", "Name_254"), 2, 200, 8, -1, "icon_Accessory_jingzuoluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_254"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_254"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 270, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(255, LocalStringManager.GetConfig("Accessory_language", "Name_255"), 2, 200, 8, -1, "icon_Accessory_guojiangluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_255"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_255"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 271, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(256, LocalStringManager.GetConfig("Accessory_language", "Name_256"), 2, 200, 8, -1, "icon_Accessory_qixiangluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_256"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_256"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 272, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(257, LocalStringManager.GetConfig("Accessory_language", "Name_257"), 2, 200, 8, -1, "icon_Accessory_xiaoshiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_257"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_257"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 273, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(258, LocalStringManager.GetConfig("Accessory_language", "Name_258"), 2, 200, 8, -1, "icon_Accessory_kaixinluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_258"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_258"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 274, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(259, LocalStringManager.GetConfig("Accessory_language", "Name_259"), 2, 200, 8, -1, "icon_Accessory_tanshouluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_259"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_259"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 275, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(260, LocalStringManager.GetConfig("Accessory_language", "Name_260"), 2, 200, 8, -1, "icon_Accessory_chensiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_260"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_260"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 276, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(261, LocalStringManager.GetConfig("Accessory_language", "Name_261"), 2, 200, 8, -1, "icon_Accessory_waerluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_261"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_261"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 277, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(262, LocalStringManager.GetConfig("Accessory_language", "Name_262"), 2, 200, 8, -1, "icon_Accessory_budailuohan", LocalStringManager.GetConfig("Accessory_language", "Desc_262"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_262"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 278, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(263, LocalStringManager.GetConfig("Accessory_language", "Name_263"), 2, 200, 8, -1, "icon_Accessory_bajiaoluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_263"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_263"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 279, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(264, LocalStringManager.GetConfig("Accessory_language", "Name_264"), 2, 200, 8, -1, "icon_Accessory_changmeiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_264"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_264"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 280, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(265, LocalStringManager.GetConfig("Accessory_language", "Name_265"), 2, 200, 8, -1, "icon_Accessory_kanmenluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_265"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_265"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 281, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(266, LocalStringManager.GetConfig("Accessory_language", "Name_266"), 2, 200, 8, -1, "icon_Accessory_xianglongluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_266"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_266"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 282, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
-		_dataArray.Add(new AccessoryItem(267, LocalStringManager.GetConfig("Accessory_language", "Name_267"), 2, 200, 8, -1, "icon_Accessory_fuhuluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_267"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_267"), transferable: false, stackable: false, wagerable: true, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 283, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(250, LocalStringManager.GetConfig("Accessory_language", "Name_250"), 2, 200, 8, -1, "icon_Accessory_zuoluluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_250"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_250"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 266, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(251, LocalStringManager.GetConfig("Accessory_language", "Name_251"), 2, 200, 8, -1, "icon_Accessory_huanxiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_251"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_251"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 267, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(252, LocalStringManager.GetConfig("Accessory_language", "Name_252"), 2, 200, 8, -1, "icon_Accessory_juboluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_252"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_252"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 268, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(253, LocalStringManager.GetConfig("Accessory_language", "Name_253"), 2, 200, 8, -1, "icon_Accessory_tuotaluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_253"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_253"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 269, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(254, LocalStringManager.GetConfig("Accessory_language", "Name_254"), 2, 200, 8, -1, "icon_Accessory_jingzuoluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_254"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_254"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 270, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(255, LocalStringManager.GetConfig("Accessory_language", "Name_255"), 2, 200, 8, -1, "icon_Accessory_guojiangluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_255"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_255"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 271, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(256, LocalStringManager.GetConfig("Accessory_language", "Name_256"), 2, 200, 8, -1, "icon_Accessory_qixiangluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_256"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_256"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 272, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(257, LocalStringManager.GetConfig("Accessory_language", "Name_257"), 2, 200, 8, -1, "icon_Accessory_xiaoshiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_257"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_257"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 273, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(258, LocalStringManager.GetConfig("Accessory_language", "Name_258"), 2, 200, 8, -1, "icon_Accessory_kaixinluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_258"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_258"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 274, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(259, LocalStringManager.GetConfig("Accessory_language", "Name_259"), 2, 200, 8, -1, "icon_Accessory_tanshouluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_259"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_259"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 275, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(260, LocalStringManager.GetConfig("Accessory_language", "Name_260"), 2, 200, 8, -1, "icon_Accessory_chensiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_260"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_260"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 276, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(261, LocalStringManager.GetConfig("Accessory_language", "Name_261"), 2, 200, 8, -1, "icon_Accessory_waerluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_261"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_261"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 277, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(262, LocalStringManager.GetConfig("Accessory_language", "Name_262"), 2, 200, 8, -1, "icon_Accessory_budailuohan", LocalStringManager.GetConfig("Accessory_language", "Desc_262"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_262"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 278, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(263, LocalStringManager.GetConfig("Accessory_language", "Name_263"), 2, 200, 8, -1, "icon_Accessory_bajiaoluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_263"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_263"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 279, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(264, LocalStringManager.GetConfig("Accessory_language", "Name_264"), 2, 200, 8, -1, "icon_Accessory_changmeiluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_264"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_264"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 280, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(265, LocalStringManager.GetConfig("Accessory_language", "Name_265"), 2, 200, 8, -1, "icon_Accessory_kanmenluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_265"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_265"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 281, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(266, LocalStringManager.GetConfig("Accessory_language", "Name_266"), 2, 200, 8, -1, "icon_Accessory_xianglongluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_266"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_266"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 282, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
+		_dataArray.Add(new AccessoryItem(267, LocalStringManager.GetConfig("Accessory_language", "Name_267"), 2, 200, 8, -1, "icon_Accessory_fuhuluohan", LocalStringManager.GetConfig("Accessory_language", "Desc_267"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_267"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 100, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 283, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 30, 10, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 10, 100));
 		_dataArray.Add(new AccessoryItem(268, LocalStringManager.GetConfig("Accessory_language", "Name_268"), 2, 200, 8, 268, "icon_Accessory_canposenglv", LocalStringManager.GetConfig("Accessory_language", "Desc_268"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_268"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 60, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 4, -1, 284, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 100));
 		_dataArray.Add(new AccessoryItem(269, LocalStringManager.GetConfig("Accessory_language", "Name_269"), 2, 200, 8, 268, "icon_Accessory_yaoxianzhu", LocalStringManager.GetConfig("Accessory_language", "Desc_269"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_269"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 20, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 3, -1, 285, new List<int> { 60 }, 6, -1, -1, new List<PropertyAndValue>(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 100));
 		_dataArray.Add(new AccessoryItem(270, LocalStringManager.GetConfig("Accessory_language", "Name_270"), 2, 200, 8, 268, "icon_Accessory_mingchuangxinzhen", LocalStringManager.GetConfig("Accessory_language", "Desc_270"), LocalStringManager.GetConfig("Accessory_language", "FunctionDesc_270"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: true, repairable: true, inheritable: true, detachable: true, 40, 10, 61500, 6, 18, 10800, 8, allowRandomCreate: false, allowRawCreate: false, 0, isSpecial: true, 2, -1, 286, new List<int>(), 6, -1, -1, new List<PropertyAndValue>(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 100));

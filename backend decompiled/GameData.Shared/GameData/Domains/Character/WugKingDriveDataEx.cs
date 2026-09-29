@@ -2,10 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 王蛊驱动数据（新版）
-/// 记录某个王蛊的驱动状态和驱动时间
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class WugKingDriveDataEx : ISerializableGameData
 {
@@ -20,15 +16,9 @@ public class WugKingDriveDataEx : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "DriveType", "StartDate" };
 	}
 
-	/// <summary>
-	/// 驱动类型（None/Positive/Negative）
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte DriveType;
 
-	/// <summary>
-	/// 驱动开始日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int StartDate;
 
@@ -44,13 +34,11 @@ public class WugKingDriveDataEx : ISerializableGameData
 		StartDate = startDate;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 7;
@@ -61,7 +49,6 @@ public class WugKingDriveDataEx : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 2;
@@ -77,7 +64,6 @@ public class WugKingDriveDataEx : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

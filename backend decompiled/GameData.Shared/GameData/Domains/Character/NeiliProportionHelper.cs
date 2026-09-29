@@ -3,17 +3,8 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 五行比例相关辅助方法
-/// </summary>
 public static class NeiliProportionHelper
 {
-	/// <summary>
-	/// 获取五行对应的内力类型
-	/// </summary>
-	/// <param name="proportionOfFiveElements"></param>
-	/// <param name="birthMonth"></param>
-	/// <returns></returns>
 	public static sbyte GetNeiliType(this NeiliProportionOfFiveElements proportionOfFiveElements, sbyte birthMonth)
 	{
 		SpanList<(sbyte, sbyte)> sortedElements = stackalloc(sbyte, sbyte)[5];

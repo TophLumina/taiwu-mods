@@ -80,7 +80,10 @@ public class Grave : BaseGameDataObject, ISerializableGameData
 				item.RemoveOwner(ItemOwnerType.CharacterInventory, _id);
 				item.SetOwner(ItemOwnerType.Grave, _id);
 			}
-			PutEquipmentIntoInventory(character.GetEquipment(), _inventory);
+			if (!character.IsBoss())
+			{
+				PutEquipmentIntoInventory(character.GetEquipment(), _inventory);
+			}
 		}
 		else
 		{
@@ -154,6 +157,12 @@ public class Grave : BaseGameDataObject, ISerializableGameData
 				DomainManager.Item.RemoveItem(context, itemKey);
 			}
 		}
+	}
+
+	public override string ToString()
+	{
+		DeadCharacter deadChar = DomainManager.Character.TryGetDeadCharacter(_id);
+		return (deadChar == null) ? _id.ToString() : $"{deadChar}({_id})";
 	}
 
 	public int GetId()

@@ -3,27 +3,15 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 建筑的异常数据集合
-/// </summary>
 public class BuildingExceptionData : ISerializableGameData
 {
-	/// <summary>
-	/// 建筑异常信息的集合，每月计算
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<BuildingBlockKey, BuildingExceptionItem> BuildingExceptionDict = new Dictionary<BuildingBlockKey, BuildingExceptionItem>();
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public BuildingExceptionData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BuildingExceptionData(BuildingExceptionData other)
 	{
 		if (other.BuildingExceptionDict != null)
@@ -42,9 +30,6 @@ public class BuildingExceptionData : ISerializableGameData
 		BuildingExceptionDict = null;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BuildingExceptionData other)
 	{
 		if (other.BuildingExceptionDict != null)
@@ -63,13 +48,11 @@ public class BuildingExceptionData : ISerializableGameData
 		BuildingExceptionDict = null;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -81,7 +64,6 @@ public class BuildingExceptionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		int totalSize = (int)(pData + SerializationHelper.DictionaryOfCustomTypePair.Serialize(pData, ref BuildingExceptionDict) - pData);
@@ -92,7 +74,6 @@ public class BuildingExceptionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		int totalSize = (int)(pData + SerializationHelper.DictionaryOfCustomTypePair.Deserialize(pData, ref BuildingExceptionDict) - pData);

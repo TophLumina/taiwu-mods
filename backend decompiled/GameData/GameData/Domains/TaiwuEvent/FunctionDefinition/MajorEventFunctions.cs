@@ -157,6 +157,12 @@ public class MajorEventFunctions
 		ObjectPool<List<int>>.Instance.Return(removeMajorEventIds);
 	}
 
+	[EventFunction(927)]
+	private static void RemoveAllAdventureByCoreId(EventScriptRuntime runtime, int coreId)
+	{
+		DomainManager.Adventure.RemoveAnyInWorld(runtime.Context, coreId);
+	}
+
 	[EventFunction(606)]
 	private static void MajorEventSetAtmosphere(EventScriptRuntime runtime, int atmosphereType)
 	{

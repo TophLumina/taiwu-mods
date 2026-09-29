@@ -4,22 +4,11 @@ using GameData.Utilities;
 
 namespace GameData.DLC;
 
-/// <summary>
-/// 包装Dlc列表，用于前后端传输需要读取的Mod数据
-/// </summary>
 public struct DlcInfoList : ISerializableGameData
 {
-	/// <summary>
-	///
-	/// </summary>
 	[SerializableGameDataField]
 	public List<DlcInfo> Items;
 
-	/// <summary>
-	/// 创建对象, 并创建内部集合.
-	/// 使用 new 创建对象时, 无法同时创建内部集合.
-	/// </summary>
-	/// <returns></returns>
 	public static DlcInfoList Create()
 	{
 		DlcInfoList obj = default(DlcInfoList);
@@ -27,9 +16,6 @@ public struct DlcInfoList : ISerializableGameData
 		return obj;
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DlcInfoList(DlcInfoList other)
 	{
 		if (other.Items != null)
@@ -48,9 +34,6 @@ public struct DlcInfoList : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DlcInfoList other)
 	{
 		if (other.Items != null)
@@ -69,13 +52,11 @@ public struct DlcInfoList : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -100,7 +81,6 @@ public struct DlcInfoList : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -142,7 +122,6 @@ public struct DlcInfoList : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

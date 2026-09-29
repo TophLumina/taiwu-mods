@@ -166,9 +166,16 @@ public interface ICharacterActionImpl : ISerializableGameData
 			{
 				character.ChangeExp(context, template.ExpChange);
 			}
-			if (!hasTarget && template.HappinessChange != 0)
+			if (!hasTarget)
 			{
-				character.ChangeHappiness(context, template.HappinessChange);
+				if (template.HappinessChange != 0)
+				{
+					character.ChangeHappiness(context, template.HappinessChange);
+				}
+				if (template.XiangshuInfectionChange != 0)
+				{
+					character.ChangeXiangshuInfection(context, template.XiangshuInfectionChange);
+				}
 			}
 		}
 		if (!hasTarget)
@@ -184,6 +191,10 @@ public interface ICharacterActionImpl : ISerializableGameData
 			if (template.HappinessChange != 0)
 			{
 				targetChar.ChangeHappiness(context, template.HappinessChange);
+			}
+			if (template.XiangshuInfectionChange != 0)
+			{
+				character.ChangeXiangshuInfection(context, template.XiangshuInfectionChange);
 			}
 		}
 	}

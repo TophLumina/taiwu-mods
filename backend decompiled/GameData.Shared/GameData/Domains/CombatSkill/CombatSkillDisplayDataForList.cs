@@ -7,9 +7,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法列表显示数据。只保证列表显示时排序、筛选和技能卡显示可正常使用
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class CombatSkillDisplayDataForList : ISerializableGameData
 {
@@ -18,6 +15,9 @@ public class CombatSkillDisplayDataForList : ISerializableGameData
 
 	[SerializableGameDataField]
 	public bool IsInAnyEquipPlans;
+
+	[SerializableGameDataField]
+	public bool IsInCurrentEquipPlan;
 
 	[SerializableGameDataField]
 	public bool BreakSuccess;
@@ -58,6 +58,9 @@ public class CombatSkillDisplayDataForList : ISerializableGameData
 	[SerializableGameDataField]
 	public int CombatSkillProficiency;
 
+	[SerializableGameDataField]
+	public bool IsFavorite;
+
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
@@ -65,10 +68,9 @@ public class CombatSkillDisplayDataForList : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 24;
+		int totalSize = 42;
 		totalSize = ((BreakBonusGrades == null) ? (totalSize + 2) : (totalSize + (2 + BreakBonusGrades.Count)));
-		totalSize += HitDistribution.GetSerializedSize();
-		totalSize = ((CostTricks == null) ? (totalSize + 2) : (totalSize + (2 + default(NeedTrick).GetSerializedSize() * CostTricks.Count)));
+		totalSize = ((CostTricks == null) ? (totalSize + 2) : (totalSize + (2 + 4 * CostTricks.Count)));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -82,6 +84,8 @@ public class CombatSkillDisplayDataForList : ISerializableGameData
 		*(int*)pCurrData = CharId;
 		pCurrData += 4;
 		*pCurrData = (IsInAnyEquipPlans ? ((byte)1) : ((byte)0));
+		pCurrData++;
+		*pCurrData = (IsInCurrentEquipPlan ? ((byte)1) : ((byte)0));
 		pCurrData++;
 		*pCurrData = (BreakSuccess ? ((byte)1) : ((byte)0));
 		pCurrData++;
@@ -137,6 +141,8 @@ public class CombatSkillDisplayDataForList : ISerializableGameData
 		pCurrData++;
 		*(int*)pCurrData = CombatSkillProficiency;
 		pCurrData += 4;
+		*pCurrData = (IsFavorite ? ((byte)1) : ((byte)0));
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -151,6 +157,8 @@ public class CombatSkillDisplayDataForList : ISerializableGameData
 		CharId = *(int*)pCurrData;
 		pCurrData += 4;
 		IsInAnyEquipPlans = *pCurrData != 0;
+		pCurrData++;
+		IsInCurrentEquipPlan = *pCurrData != 0;
 		pCurrData++;
 		BreakSuccess = *pCurrData != 0;
 		pCurrData++;
@@ -219,6 +227,8 @@ public class CombatSkillDisplayDataForList : ISerializableGameData
 		pCurrData++;
 		CombatSkillProficiency = *(int*)pCurrData;
 		pCurrData += 4;
+		IsFavorite = *pCurrData != 0;
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

@@ -6,9 +6,6 @@ using GameData.Serializer;
 
 namespace GameData.Utilities;
 
-/// <summary>
-/// 用于适配序列化的道具列表
-/// </summary>
 [SerializableGameData(NotForDisplayModule = true)]
 public class ItemList : ISerializableGameData, IList<ItemKey>, ICollection<ItemKey>, IEnumerable<ItemKey>, IEnumerable, IReadOnlyList<ItemKey>, IReadOnlyCollection<ItemKey>
 {
@@ -102,36 +99,25 @@ public class ItemList : ISerializableGameData, IList<ItemKey>, ICollection<ItemK
 		InternalList.RemoveAt(index);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ItemList()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ItemList(ItemList other)
 	{
 		_internalList = ((other._internalList == null) ? null : new List<ItemKey>(other._internalList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ItemList other)
 	{
 		_internalList = ((other._internalList == null) ? null : new List<ItemKey>(other._internalList));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -143,7 +129,6 @@ public class ItemList : ISerializableGameData, IList<ItemKey>, ICollection<ItemK
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -171,7 +156,6 @@ public class ItemList : ISerializableGameData, IList<ItemKey>, ICollection<ItemK
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

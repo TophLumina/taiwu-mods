@@ -8,9 +8,9 @@ public class HeavenlyEmperorHelper
 {
 	private readonly IHeavenlyEmperorHandler _handler;
 
-	private static SkillEffectKey AcceptDamageEffectKey => new SkillEffectKey(937, isDirect: true);
+	public static SkillEffectKey AcceptDamageEffectKey => new SkillEffectKey(937, isDirect: true);
 
-	private static SkillEffectKey MakeDamageEffectKey => new SkillEffectKey(939, isDirect: true);
+	public static SkillEffectKey MakeDamageEffectKey => new SkillEffectKey(939, isDirect: true);
 
 	public int AcceptDamageEffectCount => GetEffectCount(AcceptDamageEffectKey);
 

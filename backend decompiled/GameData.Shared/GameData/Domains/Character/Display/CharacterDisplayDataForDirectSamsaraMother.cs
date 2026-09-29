@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 了悟轮回人物显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class CharacterDisplayDataForDirectSamsaraMother : ISerializableGameData
 {

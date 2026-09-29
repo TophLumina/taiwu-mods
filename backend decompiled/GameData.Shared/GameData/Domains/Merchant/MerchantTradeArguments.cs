@@ -7,58 +7,30 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 商店交易的参数
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class MerchantTradeArguments : ISerializableGameData
 {
-	/// <summary>
-	/// 交易额来源
-	/// <para>K: 交易额的来源物品，V: 交易额值（正值表示玩家收入）</para>
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<ItemKey, long> TradeMoneySources;
 
-	/// <summary>
-	/// 在商店消费的金额，只为正值，用于计算商会好感
-	/// </summary>
 	[SerializableGameDataField]
 	public long BuyMoney;
 
-	/// <summary>
-	/// 商店出售金额，只为正值
-	/// </summary>
 	[SerializableGameDataField]
 	public long SoldMoney;
 
-	/// <summary>
-	/// 物品变化数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemSourceChange> ItemChangeList;
 
-	/// <summary>
-	/// 商会的超好感数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantOverFavorData OverFavorData;
 
-	/// <summary>
-	/// 商店打开参数
-	/// </summary>
 	[SerializableGameDataField]
 	public OpenShopEventArguments OpenShopEventArguments;
 
-	/// <summary>
-	/// 商店内容数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantData MerchantData;
 
-	/// <summary>
-	/// 商店回购数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantBuyBackData MerchantBuyBackData;
 
@@ -69,7 +41,7 @@ public class MerchantTradeArguments : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 16;
+		int totalSize = 28;
 		totalSize += 4;
 		if (TradeMoneySources != null)
 		{
@@ -92,7 +64,6 @@ public class MerchantTradeArguments : ISerializableGameData
 			totalSize += 2;
 		}
 		totalSize = ((OverFavorData == null) ? (totalSize + 2) : (totalSize + (2 + OverFavorData.GetSerializedSize())));
-		totalSize = ((OpenShopEventArguments == null) ? (totalSize + 2) : (totalSize + (2 + OpenShopEventArguments.GetSerializedSize())));
 		totalSize = ((MerchantData == null) ? (totalSize + 2) : (totalSize + (2 + MerchantData.GetSerializedSize())));
 		totalSize = ((MerchantBuyBackData == null) ? (totalSize + 2) : (totalSize + (2 + MerchantBuyBackData.GetSerializedSize())));
 		if (totalSize > 4)

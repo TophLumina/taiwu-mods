@@ -49,6 +49,7 @@ public class CharacterActionPlanner : ActionPlanner<DataContext, CharacterStateM
 
 	public void Initialize()
 	{
+		_prioritizedGoals.Clear();
 		_goalNodes.Clear();
 		foreach (PlanningGoalItem goalTemplate in (IEnumerable<PlanningGoalItem>)PlanningGoal.Instance)
 		{
@@ -216,23 +217,30 @@ public class CharacterActionPlanner : ActionPlanner<DataContext, CharacterStateM
 			return;
 		}
 		Type type = (string.IsNullOrEmpty(implNamespace) ? assembly.GetType(action.Template.ImplementationPath) : assembly.GetType(implNamespace + "." + action.Template.ImplementationPath));
-		if (type == null || !type.IsAssignableTo(typeof(ICharacterActionImpl)))
+		if (type == null)
 		{
-			return;
+			AdaptableLog.TagWarning("LoadActionImplementation", "Cannot find implementation " + action.Template.ImplementationPath);
 		}
-		MethodInfo checkLifeRecords = type.GetMethod("CheckLifeRecords", (BindingFlags)(-1));
-		_checkLifeRecordArgs[0] = action.Template;
-		if (checkLifeRecords != null)
+		else
 		{
-			object obj = checkLifeRecords.Invoke(null, _checkLifeRecordArgs);
-			if (!(obj is bool) || !(bool)obj)
+			if (!type.IsAssignableTo(typeof(ICharacterActionImpl)))
 			{
-				string refName = PlanningAction.Instance.GetRefName(action.Template.TemplateId);
-				AdaptableLog.Warning("Invalid life record args configured for action " + refName);
 				return;
 			}
+			MethodInfo checkLifeRecords = type.GetMethod("CheckLifeRecords", (BindingFlags)(-1));
+			_checkLifeRecordArgs[0] = action.Template;
+			if (checkLifeRecords != null)
+			{
+				object obj = checkLifeRecords.Invoke(null, _checkLifeRecordArgs);
+				if (!(obj is bool) || !(bool)obj)
+				{
+					string refName = PlanningAction.Instance.GetRefName(action.Template.TemplateId);
+					AdaptableLog.TagWarning("LoadActionImplementation", "Invalid life record args configured for action " + refName);
+					return;
+				}
+			}
+			action.SetImplementation(type);
 		}
-		action.SetImplementation(type);
 	}
 
 	public ISensor<IStateMemory<GameData.Domains.Character.Character, StateKey>, GameData.Domains.Character.Character, StateKey> GetSensor(EPlanningStateSensorType sensorType)

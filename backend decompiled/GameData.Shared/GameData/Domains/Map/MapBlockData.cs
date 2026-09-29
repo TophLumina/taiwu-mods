@@ -10,143 +10,69 @@ using Redzen.Random;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地块数据
-/// </summary>
 public class MapBlockData : ISerializableGameData
 {
-	/// <summary>
-	/// 所属区域ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short AreaId;
 
-	/// <summary>
-	/// 在本地区（Area）的位置索引
-	/// </summary>
 	[SerializableGameDataField]
 	public short BlockId;
 
-	/// <summary>
-	/// 模板数据ID[MapBlock]
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 在本区域所属地块的地块Id位置索引
-	/// </summary>
 	[SerializableGameDataField]
 	public short BelongBlockId;
 
-	/// <summary>
-	/// 本地块为虚地块时，所属根地块的ID，非虚地块为-1
-	/// </summary>
 	[SerializableGameDataField]
 	public short RootBlockId;
 
-	/// <summary>
-	/// 是否可见
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Visible;
 
-	/// <summary>
-	/// 地块上的人物集合, 可能为 null
-	/// </summary>
 	[SerializableGameDataField]
 	public HashSet<int> CharacterSet;
 
-	/// <summary>
-	/// 地块上的入魔人集合，可能为 null
-	/// </summary>
 	[SerializableGameDataField]
 	public HashSet<int> InfectedCharacterSet;
 
-	/// <summary>
-	/// 地块上的 特殊 人物集合, 可能为 null
-	/// </summary>
 	[SerializableGameDataField]
 	public HashSet<int> FixedCharacterSet;
 
-	/// <summary>
-	/// 地块上的坟墓集合, 可能为 null
-	/// </summary>
 	[SerializableGameDataField]
 	public HashSet<int> GraveSet;
 
-	/// <summary>
-	/// 地块上无实例的模板敌人列表, 可能为 null
-	/// </summary>
 	[SerializableGameDataField]
 	public List<MapTemplateEnemyInfo> TemplateEnemyList;
 
-	/// <summary>
-	/// 地块上的有实例的敌人列表
-	/// </summary>
 	[SerializableGameDataField]
 	public HashSet<int> EnemyCharacterSet;
 
-	/// <summary>
-	/// 当前戾气值
-	/// </summary>
 	[SerializableGameDataField]
 	public short Malice;
 
-	/// <summary>
-	/// 是否被破坏
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Destroyed;
 
-	/// <summary>
-	/// 资源上限
-	/// </summary>
 	[SerializableGameDataField]
 	public MaterialResources MaxResources;
 
-	/// <summary>
-	/// 当前资源
-	/// </summary>
 	[SerializableGameDataField]
 	public MaterialResources CurrResources;
 
-	/// <summary>
-	/// 地块上的道具集合, 可能为 null.
-	/// (损毁日期, ItemKey) -&gt; 数量.
-	/// </summary>
 	[SerializableGameDataField]
 	public SortedList<ItemKeyAndDate, int> Items;
 
-	/// <summary>
-	/// 本地对象池, 归还时必须清空其中的数据
-	/// </summary>
 	private static readonly LocalObjectPool<HashSet<int>> IntHashSetPool = new LocalObjectPool<HashSet<int>>(6144, 30720);
 
-	/// <summary>
-	/// 本地对象池, 归还时必须清空其中的数据
-	/// </summary>
 	private static readonly LocalObjectPool<List<MapTemplateEnemyInfo>> RandomEnemyListPool = new LocalObjectPool<List<MapTemplateEnemyInfo>>(3072, 15360);
 
-	/// <summary>
-	/// 本地对象池, 归还时必须清空其中的数据.
-	/// 可能在子线程修改因此改为了现成安全的对象池.
-	/// </summary>
 	private static readonly ObjectPool<SortedList<ItemKeyAndDate, int>> ItemCollectionPool = new ObjectPool<SortedList<ItemKeyAndDate, int>>(3072, 15360);
 
-	/// <summary>
-	/// 从属于本地块的虚地块列表
-	/// </summary>
 	public List<MapBlockData> GroupBlockList;
 
-	/// <summary>
-	/// 地格最大道具数量
-	/// </summary>
 	public const int MaxBlockItemCount = 500;
 
-	/// <summary>
-	/// 显示毁坏效果
-	/// </summary>
 	public bool ShowDestroyed
 	{
 		get
@@ -159,14 +85,8 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 通行消耗
-	/// </summary>
 	public sbyte MoveCost => GetConfig()?.MoveCost ?? (-1);
 
-	/// <summary>
-	/// 通行消耗行动力
-	/// </summary>
 	public int MoveCostActionPoint
 	{
 		get
@@ -187,15 +107,25 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 地块大类
-	/// </summary>
 	public EMapBlockType BlockType => GetConfig()?.Type ?? EMapBlockType.Invalid;
 
-	/// <summary>
-	/// 地块细类
-	/// </summary>
 	public EMapBlockSubType BlockSubType => GetConfig()?.SubType ?? EMapBlockSubType.Invalid;
+
+	public bool IsSingleBlock
+	{
+		get
+		{
+			if (RootBlockId < 0)
+			{
+				List<MapBlockData> groupBlockList = GroupBlockList;
+				if (groupBlockList == null || groupBlockList.Count <= 0)
+				{
+					return GetConfig()?.Size == 1;
+				}
+			}
+			return false;
+		}
+	}
 
 	public MapBlockData(short areaId, short blockId, short templateId)
 	{
@@ -207,11 +137,6 @@ public class MapBlockData : ISerializableGameData
 		Visible = false;
 	}
 
-	/// <summary>
-	/// 简单复制，只有基本数据，不包含集合数据
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public static MapBlockData SimpleClone(MapBlockData other)
 	{
 		return new MapBlockData
@@ -593,9 +518,6 @@ public class MapBlockData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 使地格毁坏
-	/// </summary>
 	public void MakeDestroyed(List<ItemKey> destroyedUniqueItems)
 	{
 		if (GetConfig().Size <= 1)
@@ -606,30 +528,20 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 结束毁坏状态 - 重置资源
-	/// </summary>
 	public void StopDestroyedByInitResources(IRandomSource random)
 	{
 		Destroyed = false;
 		InitResources(random);
 	}
 
-	/// <summary>
-	/// 结束毁坏状态 - 恢复资源
-	/// </summary>
 	public void StopDestroyedByRecover()
 	{
-		if (Destroyed && CurrResources.GetSum() > MaxResources.GetSum() / 2)
+		if (Destroyed && CurrResources.GetSum() >= MaxResources.GetSum() / 2)
 		{
 			Destroyed = false;
 		}
 	}
 
-	/// <summary>
-	/// 添加角色
-	/// </summary>
-	/// <param name="charId"></param>
 	public void AddCharacter(int charId)
 	{
 		if (CharacterSet == null)
@@ -639,11 +551,6 @@ public class MapBlockData : ISerializableGameData
 		CharacterSet.Add(charId);
 	}
 
-	/// <summary>
-	/// 移除角色
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns>是否找到并移除了指定项</returns>
 	public bool RemoveCharacter(int charId)
 	{
 		if (CharacterSet != null && CharacterSet.Remove(charId))
@@ -658,10 +565,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 添加入魔角色
-	/// </summary>
-	/// <param name="charId"></param>
 	public void AddInfectedCharacter(int charId)
 	{
 		if (InfectedCharacterSet == null)
@@ -671,11 +574,6 @@ public class MapBlockData : ISerializableGameData
 		InfectedCharacterSet.Add(charId);
 	}
 
-	/// <summary>
-	/// 移除入魔角色
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public bool RemoveInfectedCharacter(int charId)
 	{
 		if (InfectedCharacterSet != null && InfectedCharacterSet.Remove(charId))
@@ -690,10 +588,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 添加特殊角色
-	/// </summary>
-	/// <param name="charId"></param>
 	public void AddFixedCharacter(int charId)
 	{
 		if (FixedCharacterSet == null)
@@ -703,11 +597,6 @@ public class MapBlockData : ISerializableGameData
 		FixedCharacterSet.Add(charId);
 	}
 
-	/// <summary>
-	/// 移除特殊角色
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns>是否找到并移除了指定项</returns>
 	public bool RemoveFixedCharacter(int charId)
 	{
 		if (FixedCharacterSet != null && FixedCharacterSet.Remove(charId))
@@ -722,10 +611,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 添加实例敌人角色
-	/// </summary>
-	/// <param name="charId"></param>
 	public void AddEnemyCharacter(int charId)
 	{
 		if (EnemyCharacterSet == null)
@@ -735,11 +620,6 @@ public class MapBlockData : ISerializableGameData
 		EnemyCharacterSet.Add(charId);
 	}
 
-	/// <summary>
-	/// 移除实例敌人角色
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns>是否找到并移除了指定项</returns>
 	public bool RemoveEnemyCharacter(int charId)
 	{
 		if (EnemyCharacterSet != null && EnemyCharacterSet.Remove(charId))
@@ -754,10 +634,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 添加坟墓
-	/// </summary>
-	/// <param name="charId"></param>
 	public void AddGrave(int charId)
 	{
 		if (GraveSet == null)
@@ -767,11 +643,6 @@ public class MapBlockData : ISerializableGameData
 		GraveSet.Add(charId);
 	}
 
-	/// <summary>
-	/// 移除坟墓
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns>是否找到并移除了指定项</returns>
 	public bool RemoveGrave(int charId)
 	{
 		if (GraveSet != null && GraveSet.Remove(charId))
@@ -786,9 +657,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 存在指定的无实例模板敌人
-	/// </summary>
 	public bool AnyTemplateEnemy(short templateId)
 	{
 		if (TemplateEnemyList == null)
@@ -805,9 +673,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 存在范围内的无实例模板敌人
-	/// </summary>
 	public bool AnyTemplateEnemy(short templateIdMin, short templateIdMax)
 	{
 		if (TemplateEnemyList == null)
@@ -824,9 +689,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 添加无实例的模板敌人
-	/// </summary>
 	public void AddTemplateEnemy(MapTemplateEnemyInfo mapTemplateEnemyInfo)
 	{
 		if (TemplateEnemyList == null)
@@ -836,11 +698,6 @@ public class MapBlockData : ISerializableGameData
 		TemplateEnemyList.Add(mapTemplateEnemyInfo);
 	}
 
-	/// <summary>
-	/// 移除随机敌人
-	/// </summary>
-	/// <param name="templateEnemyInfo"></param>
-	/// <returns>是否找到并移除了指定项</returns>
 	public bool RemoveTemplateEnemy(MapTemplateEnemyInfo templateEnemyInfo)
 	{
 		if (TemplateEnemyList != null && TemplateEnemyList.Remove(templateEnemyInfo))
@@ -855,10 +712,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 全体随机敌人持续时间-=1
-	/// </summary>
-	/// <returns>TemplateEnemyList是否发生了改变</returns>
 	public bool CountDown()
 	{
 		if (TemplateEnemyList == null)
@@ -887,11 +740,6 @@ public class MapBlockData : ISerializableGameData
 		return modified;
 	}
 
-	/// <summary>
-	/// 添加单个物品. 需要调用者修改该道具的持有者状态.
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="amount"></param>
 	public void AddItem(ItemKey itemKey, int amount)
 	{
 		if (Items == null)
@@ -910,10 +758,6 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 移除地块道具. 需要调用者修改该道具的持有者状态.
-	/// </summary>
-	/// <param name="itemKeyAndDate"></param>
 	public void RemoveItem(ItemKeyAndDate itemKeyAndDate)
 	{
 		if (Items != null)
@@ -927,11 +771,6 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 从地格移除指定数量的某种物品. 需要调用者修改该道具的持有者状态.
-	/// </summary>
-	/// <param name="itemKeyAndDate"></param>
-	/// <param name="count"></param>
 	public void RemoveItemByCount(ItemKeyAndDate itemKeyAndDate, int count)
 	{
 		if (Items[itemKeyAndDate] <= count)
@@ -969,13 +808,6 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 地块物品损毁.
-	/// 损毁的物品不直接删除, 而是放入传入的集合中.
-	/// </summary>
-	/// <param name="currDate">截至日期. 摧毁日期超过该数字的道具不会被摧毁.</param>
-	/// <param name="destroyedUniqueItems"></param>
-	/// <returns>是否修改了此对象</returns>
 	private bool DestroyItemsByDate(int currDate, List<ItemKey> destroyedUniqueItems)
 	{
 		if (Items == null || Items.Count <= 0)
@@ -1022,36 +854,17 @@ public class MapBlockData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 地块物品摧毁.
-	/// 以当前游戏中的日期为截至时间, 摧毁该时间以及该时间之前的物品.
-	/// 损毁的物品不直接删除, 而是放入传入的集合中.
-	/// </summary>
-	/// <param name="destroyedUniqueItems"></param>
-	/// <returns></returns>
 	public bool DestroyItems(List<ItemKey> destroyedUniqueItems)
 	{
 		int currDate = ExternalDataBridge.Context.CurrDate;
 		return DestroyItemsByDate(currDate, destroyedUniqueItems);
 	}
 
-	/// <summary>
-	/// 地块物品损毁.
-	/// 无视日期.
-	/// 损毁的物品不直接删除, 而是放入传入的集合中.
-	/// </summary>
-	/// <returns>是否修改了此对象</returns>
 	public bool DestroyItemsDirect(List<ItemKey> destroyedUniqueItems)
 	{
 		return DestroyItemsByDate(2147483646, destroyedUniqueItems);
 	}
 
-	/// <summary>
-	/// 获取物品的损毁日期 (假如从指定日期开始变为无主的话)
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="date"></param>
-	/// <returns></returns>
 	public static int GetDestroyedDate(ItemKey itemKey, int date)
 	{
 		short preserveDuration = ItemTemplateHelper.GetPreservationDuration(itemKey.ItemType, itemKey.TemplateId);
@@ -1062,9 +875,6 @@ public class MapBlockData : ISerializableGameData
 		return date + preserveDuration;
 	}
 
-	/// <summary>
-	/// 获取配置表
-	/// </summary>
 	public MapBlockItem GetConfig()
 	{
 		if (RootBlockId >= 0)
@@ -1079,27 +889,17 @@ public class MapBlockData : ISerializableGameData
 		return ResourceCollection.Instance[GetConfig().ResourceCollectionType];
 	}
 
-	/// <summary>
-	/// 获取位置
-	/// </summary>
-	/// <returns>地块的位置</returns>
 	public Location GetLocation()
 	{
 		return new Location(AreaId, BlockId);
 	}
 
-	/// <summary>
-	/// 获取坐标
-	/// </summary>
 	public ByteCoordinate GetBlockPos()
 	{
 		byte mapSize = ExternalDataBridge.Context.GetAreaSize(AreaId);
 		return ByteCoordinate.IndexToCoordinate(BlockId, mapSize);
 	}
 
-	/// <summary>
-	/// 是否主城门派或城镇关寨
-	/// </summary>
 	public bool IsCityTown()
 	{
 		if (BlockType != EMapBlockType.City && BlockType != EMapBlockType.Sect)
@@ -1109,28 +909,16 @@ public class MapBlockData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 村庄
-	/// </summary>
-	/// <returns></returns>
 	public bool IsVillage()
 	{
 		return BlockSubType == EMapBlockSubType.Village;
 	}
 
-	/// <summary>
-	/// 太吾村
-	/// </summary>
-	/// <returns></returns>
 	public bool IsTaiwuCun()
 	{
 		return BlockSubType == EMapBlockSubType.TaiwuCun;
 	}
 
-	/// <summary>
-	/// 是否未开化地形
-	/// </summary>
-	/// <returns></returns>
 	public bool IsNonDeveloped()
 	{
 		EMapBlockType t = BlockType;
@@ -1141,17 +929,20 @@ public class MapBlockData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 是否可以通行
-	/// </summary>
 	public bool IsPassable()
 	{
 		return MoveCost >= 0;
 	}
 
-	/// <summary>
-	/// 是否可以被替换成别的地块类型
-	/// </summary>
+	public bool CanBeFarmerMigrateTarget(sbyte resourceType)
+	{
+		if (IsPassable() && !Destroyed && IsSingleBlock)
+		{
+			return CurrResources[resourceType] >= GlobalConfig.Instance.VillagerRoleFarmerMigrateMinResource;
+		}
+		return false;
+	}
+
 	public bool CanChangeBlockType()
 	{
 		if (TemplateId != 126 && RootBlockId == -1)
@@ -1161,11 +952,6 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否可以采集指定类型的资源
-	/// </summary>
-	/// <param name="resourceType"></param>
-	/// <returns></returns>
 	public bool CanCollectResource(sbyte resourceType)
 	{
 		if (GetConfig().ResourceCollectionType >= 0)
@@ -1175,20 +961,11 @@ public class MapBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取当前地块的最大戾气值
-	/// </summary>
-	/// <returns></returns>
 	public short GetMaxMalice()
 	{
 		return GetConfig().MaxMalice;
 	}
 
-	/// <summary>
-	/// 动物生成的基础概率。
-	/// 当前资源总数 /
-	/// </summary>
-	/// <returns></returns>
 	public int GetAnimalBaseSpawnRate()
 	{
 		int sum = CurrResources.GetSum();
@@ -1196,9 +973,6 @@ public class MapBlockData : ISerializableGameData
 		return sum * 10 / totalMaxRes;
 	}
 
-	/// <summary>
-	/// 获取地块所属组的根地块，如果不属于任何组则返回自身
-	/// </summary>
 	public MapBlockData GetRootBlock()
 	{
 		if (RootBlockId >= 0)
@@ -1208,9 +982,6 @@ public class MapBlockData : ISerializableGameData
 		return this;
 	}
 
-	/// <summary>
-	/// 获取指定坐标距离该地块(组)的曼哈顿距离
-	/// </summary>
 	public byte GetManhattanDistanceToPos(byte x, byte y)
 	{
 		if (RootBlockId >= 0)
@@ -1233,20 +1004,12 @@ public class MapBlockData : ISerializableGameData
 		return (byte)minManhattan;
 	}
 
-	/// <summary>
-	/// 计算此地格与某位置的距离，不检查根地块
-	/// </summary>
 	public byte GetManhattanDistanceToPosWithoutRoot(byte x, byte y)
 	{
 		ByteCoordinate targetByteCoordinate = new ByteCoordinate(x, y);
 		return (byte)GetBlockPos().GetManhattanDistance(targetByteCoordinate);
 	}
 
-	/// <summary>
-	/// 获取采集到道具的几率
-	/// </summary>
-	/// <param name="resourceType"></param>
-	/// <returns></returns>
 	public unsafe int GetCollectItemChance(sbyte resourceType)
 	{
 		if (MaxResources.Items[resourceType] <= 0)
@@ -1256,17 +1019,11 @@ public class MapBlockData : ISerializableGameData
 		return CurrResources.Items[resourceType] * 100 / MaxResources.Items[resourceType] - 25;
 	}
 
-	/// <summary>
-	/// 计算在该地格采集资源的收获量
-	/// </summary>
 	public unsafe int GetCollectResourceAmount(sbyte resourceType)
 	{
 		return CurrResources.Items[resourceType] * GlobalConfig.Instance.CollectResourcePercent / 100 * GameData.Domains.World.SharedMethods.GetGainResourcePercent(2) / 100;
 	}
 
-	/// <summary>
-	/// 获得该地格在大地格中的索引
-	/// </summary>
 	public int GetBlockIndexInBigBlock(byte areaSize)
 	{
 		MapBlockItem configData = GetConfig();
@@ -1327,9 +1084,6 @@ public class MapBlockData : ISerializableGameData
 		return $"MapBlockData({AreaId},{BlockId})";
 	}
 
-	/// <summary>
-	/// 初始化资源
-	/// </summary>
 	public unsafe void InitResources(IRandomSource random)
 	{
 		MapBlockItem configData = GetConfig();
@@ -1353,9 +1107,6 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 转换为指定类型的地块
-	/// </summary>
 	public void ChangeTemplateId(short newPresetId, bool checkCanChange = true)
 	{
 		if (!checkCanChange || CanChangeBlockType())
@@ -1366,9 +1117,6 @@ public class MapBlockData : ISerializableGameData
 		throw new Exception($"{BlockSubType} can not change PresetId!");
 	}
 
-	/// <summary>
-	/// 转换为某地块的从属虚地块
-	/// </summary>
 	public void SetToSizeBlock(MapBlockData groupRoot)
 	{
 		if (groupRoot != null)
@@ -1386,12 +1134,6 @@ public class MapBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取采集道具的模板ID
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="resourceType"></param>
-	/// <returns></returns>
 	public short GetCollectItemTemplateId(IRandomSource random, sbyte resourceType)
 	{
 		ResourceCollectionItem collectionConfig = GetResourceCollectionConfig();
@@ -1416,9 +1158,6 @@ public class MapBlockData : ISerializableGameData
 		return itemList[random.Next(0, itemList.Count)];
 	}
 
-	/// <summary>
-	/// 获取所属组地块中距离目标坐标最近的一个地块
-	/// </summary>
 	public MapBlockData GetNearestBlockToTarget(ByteCoordinate pos)
 	{
 		if (RootBlockId >= 0)
@@ -1443,17 +1182,11 @@ public class MapBlockData : ISerializableGameData
 		return target;
 	}
 
-	/// <summary>
-	/// 计算寻宝成功率(用指定的物品数目)
-	/// </summary>
 	public int CalcFindTreasureChanceByItemsCount(sbyte luck, int itemsCount)
 	{
 		return itemsCount * (100 + luck * 3) / 100;
 	}
 
-	/// <summary>
-	/// 计算寻宝成功率
-	/// </summary>
 	public int CalcFindTreasureChance(sbyte luck)
 	{
 		if (Items != null)

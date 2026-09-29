@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 然山地区主线 - 三尸角色的额外数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SectStoryThreeCorpsesCharacter : ISerializableGameData
 {
@@ -51,106 +48,51 @@ public class SectStoryThreeCorpsesCharacter : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 三尸角色的角色Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 三尸角色的角色模板Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 是否是好结局
-	/// 坏结局会使得角色在剧情结束后不会出现
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsGoodEnd;
 
-	/// <summary>
-	/// 亲密事件进度
-	/// 进度满会暂时在地图上消失
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Progress;
 
-	/// <summary>
-	/// 当前目标
-	/// 没有目标会使其出现在太吾村周围
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Target;
 
-	/// <summary>
-	/// 当前目标的拥有者
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetOwner;
 
-	/// <summary>
-	/// 跟随结束日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int EndDate;
 
-	/// <summary>
-	/// 下次尝试行动的日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int NextDate;
 
-	/// <summary>
-	/// 选择的档次
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Notch;
 
-	/// <summary>
-	/// 奇书列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> LegendaryBooks;
 
-	/// <summary>
-	/// 是否升过级
-	/// 未升级可存2本书，升级后可存4本书
-	/// 当前版本不存在该功能，留下接口等待地区主线升级剧情后使用
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsUpgraded;
 
-	/// <summary>
-	/// 是否跟随太吾
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsAroundTaiwu;
 
-	/// <summary>
-	/// 初见太吾的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuId;
 
-	/// <summary>
-	/// 传剑事件是否触发过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool PassLegacyEventTriggered;
 
-	/// <summary>
-	/// 传剑事件是否触发过
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> GiveUpCount;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="templateId"></param>
 	public SectStoryThreeCorpsesCharacter(int id, short templateId, int taiwuId)
 	{
 		Id = id;
@@ -170,16 +112,10 @@ public class SectStoryThreeCorpsesCharacter : ISerializableGameData
 		GiveUpCount = new Dictionary<int, int>();
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectStoryThreeCorpsesCharacter()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectStoryThreeCorpsesCharacter(SectStoryThreeCorpsesCharacter other)
 	{
 		TemplateId = other.TemplateId;
@@ -199,9 +135,6 @@ public class SectStoryThreeCorpsesCharacter : ISerializableGameData
 		GiveUpCount = ((other.GiveUpCount == null) ? null : new Dictionary<int, int>(other.GiveUpCount));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectStoryThreeCorpsesCharacter other)
 	{
 		TemplateId = other.TemplateId;
@@ -221,13 +154,11 @@ public class SectStoryThreeCorpsesCharacter : ISerializableGameData
 		GiveUpCount = ((other.GiveUpCount == null) ? null : new Dictionary<int, int>(other.GiveUpCount));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 31;
@@ -240,7 +171,6 @@ public class SectStoryThreeCorpsesCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -298,7 +228,6 @@ public class SectStoryThreeCorpsesCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

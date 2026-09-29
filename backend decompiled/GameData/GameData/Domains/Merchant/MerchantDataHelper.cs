@@ -7,6 +7,8 @@ using GameData.Common;
 using GameData.Domains.Character;
 using GameData.Domains.Extra;
 using GameData.Domains.Item;
+using GameData.Domains.Map;
+using GameData.Domains.Organization;
 using GameData.Domains.TaiwuEvent.EventHelper;
 using GameData.Domains.World;
 using GameData.Utilities;
@@ -34,8 +36,8 @@ public static class MerchantDataHelper
 			}
 		}
 		extraGoodsData.Clear();
-		sbyte seasonTemplateId = (false ? ((sbyte)context.Random.Next(Season.Instance.Count)) : EventHelper.GetCurrSeason());
-		extraGoodsData.SeasonTemplateId = seasonTemplateId;
+		extraGoodsData.SeasonTemplateId = GetSeasonTemplateId(context);
+		GetSolarTermTemplateIdList(context, character, ref extraGoodsData.SolarTermTemplateIdList);
 		sbyte maxGoodsLevel = Math.Min(level, 6);
 		sbyte minGoodsLevel = data.GroupConfig.Level;
 		for (sbyte goodsLevel = minGoodsLevel; goodsLevel <= maxGoodsLevel; goodsLevel++)
@@ -45,6 +47,49 @@ public static class MerchantDataHelper
 		if (!isSpecialExtraGoodsData)
 		{
 			DomainManager.Extra.SetMerchantExtraGoods(context, id, extraGoodsData);
+		}
+	}
+
+	private static sbyte GetSeasonTemplateId(DataContext context)
+	{
+		return false ? ((sbyte)context.Random.Next(Season.Instance.Count)) : EventHelper.GetCurrSeason();
+	}
+
+	private static void GetSolarTermTemplateIdList(DataContext context, GameData.Domains.Character.Character character, ref List<sbyte> solarList)
+	{
+		if (character == null)
+		{
+			return;
+		}
+		if (solarList == null)
+		{
+			solarList = new List<sbyte>();
+		}
+		solarList.Clear();
+		Location location = character.GetValidLocation();
+		if (!location.IsValid())
+		{
+			return;
+		}
+		sbyte month = DomainManager.World.GetCurrMonthInYear();
+		Settlement settlement = DomainManager.Organization.GetSettlementOrDefault(character.GetOrganizationInfo().SettlementId);
+		MapDomain map = DomainManager.Map;
+		Location obj = settlement?.GetLocation() ?? DomainManager.Taiwu.GetTaiwu().GetValidLocation();
+		MapAreaData settlementArea = map.GetAreaByAreaId(obj.AreaId);
+		sbyte settlementStateTemplateId = MapArea.Instance[settlementArea.GetTemplateId()].StateID;
+		foreach (SolarTermItem solarTermConfig in SolarTerm.Instance.Where((SolarTermItem s) => s.Month == month))
+		{
+			if (solarTermConfig.GoodsStateList.Any((sbyte s) => s == settlementStateTemplateId))
+			{
+				MapAreaData area = DomainManager.Map.GetAreaByAreaId(location.AreaId);
+				sbyte stateTemplateId = MapArea.Instance[area.GetTemplateId()].StateID;
+				int stateIndex = solarTermConfig.GoodsStateList.IndexOf(stateTemplateId);
+				int rate = GlobalConfig.Instance.SolarTermGoodsRate.GetOrDefault(stateIndex);
+				if (context.Random.CheckPercentProb(rate))
+				{
+					solarList.Add(solarTermConfig.TemplateId);
+				}
+			}
 		}
 	}
 
@@ -59,19 +104,20 @@ public static class MerchantDataHelper
 		}
 		foreach (MerchantExtraGoodsItem merchantExtraGoodsItem in extraGoodsData.SeasonExtraGoods)
 		{
-			Inventory goodsList = data.GetGoodsList(merchantExtraGoodsItem.Index);
-			foreach (var (itemKey2, amount) in goodsList.Items)
-			{
-				if (itemKey2.Id == merchantExtraGoodsItem.Id)
-				{
-					DomainManager.Item.RemoveItem(context, itemKey2);
-					goodsList.OfflineRemove(itemKey2, amount);
-					data.PriceChangeData.Remove(itemKey2);
-				}
-			}
+			ClearExtraGoods(merchantExtraGoodsItem);
 		}
 		extraGoodsData.SeasonExtraGoods.Clear();
-		extraGoodsData.SeasonTemplateId = EventHelper.GetCurrSeason();
+		for (int i = 0; i < extraGoodsData.SolarTermTemplateIdList.Count; i++)
+		{
+			List<MerchantExtraGoodsItem> list = extraGoodsData.GetSolarTermExtraGoods(i);
+			foreach (MerchantExtraGoodsItem merchantExtraGoodsItem2 in list)
+			{
+				ClearExtraGoods(merchantExtraGoodsItem2);
+			}
+			list.Clear();
+		}
+		extraGoodsData.SeasonTemplateId = GetSeasonTemplateId(context);
+		GetSolarTermTemplateIdList(context, character, ref extraGoodsData.SolarTermTemplateIdList);
 		sbyte maxGoodsLevel = Math.Min(data.MerchantConfig.Level, 6);
 		sbyte minGoodsLevel = data.GroupConfig.Level;
 		for (sbyte goodsLevel = minGoodsLevel; goodsLevel <= maxGoodsLevel; goodsLevel++)
@@ -81,6 +127,19 @@ public static class MerchantDataHelper
 		if (!isSpecialExtraGoodsData)
 		{
 			DomainManager.Extra.SetMerchantExtraGoods(context, id, extraGoodsData);
+		}
+		void ClearExtraGoods(MerchantExtraGoodsItem extraGoodsItem)
+		{
+			Inventory goodsList = data.GetGoodsList(extraGoodsItem.Index);
+			foreach (var (itemKey2, amount) in goodsList.Items)
+			{
+				if (itemKey2.Id == extraGoodsItem.Id)
+				{
+					DomainManager.Item.RemoveItem(context, itemKey2);
+					goodsList.OfflineRemove(itemKey2, amount);
+					data.PriceChangeData.Remove(itemKey2);
+				}
+			}
 		}
 	}
 
@@ -93,6 +152,13 @@ public static class MerchantDataHelper
 		if (createConfig == null)
 		{
 			return;
+		}
+		int count = ctx.Random.Next(GlobalConfig.Instance.SolarTermGoodsCountMin, GlobalConfig.Instance.SolarTermGoodsCountMax + 1);
+		for (int i = 0; i < merchantExtraGoods.SolarTermTemplateIdList.Count; i++)
+		{
+			sbyte templateId = merchantExtraGoods.SolarTermTemplateIdList[i];
+			List<MerchantExtraGoodsItem> list = merchantExtraGoods.GetSolarTermExtraGoods(i);
+			CreateSolarGoods(templateId, list, count);
 		}
 		sbyte seasonTemplateId = merchantExtraGoods.SeasonTemplateId;
 		if (1 == 0)
@@ -158,10 +224,10 @@ public static class MerchantDataHelper
 			});
 		}
 		ObjectPool<List<ItemKey>>.Instance.Return(professionKeyList);
-		List<ItemKey> CreateItem(IList<PresetItemTemplateIdGroup> pool, int count, bool priceEffectByBehaviour = true, bool unique = false)
+		List<ItemKey> CreateItem(IList<PresetItemTemplateIdGroup> pool, int num, bool priceEffectByBehaviour = true, bool unique = false)
 		{
 			List<ItemKey> keyList = ObjectPool<List<ItemKey>>.Instance.Get();
-			for (int i = 0; i < count; i++)
+			for (int j = 0; j < num; j++)
 			{
 				int presetId = ctx.Random.Next(0, pool.Count);
 				PresetItemTemplateIdGroup preset = pool[presetId];
@@ -174,7 +240,7 @@ public static class MerchantDataHelper
 					{
 						data.PriceChangeData[itemKey] = MerchantData.CalculateCharacterBehaviourDiscount(ctx.Random, character?.GetBehaviorType() ?? 0);
 					}
-					for (int j = 0; j < preset.GroupLength; j++)
+					for (int k = 0; k < preset.GroupLength; k++)
 					{
 						keyList.Add(itemKey);
 					}
@@ -182,7 +248,7 @@ public static class MerchantDataHelper
 				else
 				{
 					ItemKey firstUniqueKey = ItemKey.Invalid;
-					for (int k = 0; k < preset.GroupLength; k++)
+					for (int l = 0; l < preset.GroupLength; l++)
 					{
 						ItemKey itemKey2;
 						if (unique)
@@ -233,9 +299,9 @@ public static class MerchantDataHelper
 				ChallengeModeData challengeModeData = DomainManager.World.GetChallengeModeData();
 				challengeModeData.ApplyMerchantItemsCreateRate(pool, ctx.Random);
 				short rate = goodsRate[index];
-				int count = ((rate >= 0) ? (rate * ctx.Random.Next(100, 150) / 100) : ((ctx.Random.Next(100) < -rate) ? 1 : 0));
-				count = Math.Min(count, pool.Count);
-				List<ItemKey> keyList = CreateItem(pool, count, priceEffectByBehaviour: true, isExtra);
+				int count2 = ((rate >= 0) ? (rate * ctx.Random.Next(100, 150) / 100) : ((ctx.Random.Next(100) < -rate) ? 1 : 0));
+				count2 = Math.Min(count2, pool.Count);
+				List<ItemKey> keyList = CreateItem(pool, count2, priceEffectByBehaviour: true, isExtra);
 				if (isExtra)
 				{
 					foreach (ItemKey key3 in keyList)
@@ -248,6 +314,40 @@ public static class MerchantDataHelper
 					}
 				}
 				ObjectPool<List<ItemKey>>.Instance.Return(keyList);
+			}
+		}
+		void CreateSolarGoods(sbyte solarTemplateId, List<MerchantExtraGoodsItem> extraItems, int num, bool priceEffectByBehaviour = true)
+		{
+			SolarTermItem solarConfig = SolarTerm.Instance[solarTemplateId];
+			ItemKey firstUniqueKey = ItemKey.Invalid;
+			for (int j = 0; j < num; j++)
+			{
+				ItemBase itemBase = DomainManager.Item.CreateUniqueStackableItem(ctx, 12, solarConfig.Goods);
+				byte newState = ModificationStateHelper.Activate(0, 8);
+				itemBase.SetModificationState(newState, ctx);
+				ItemKey itemKey = itemBase.GetItemKey();
+				if (priceEffectByBehaviour)
+				{
+					if (data.PriceChangeData.TryGetValue(firstUniqueKey, out var price))
+					{
+						data.PriceChangeData[itemKey] = price;
+					}
+					else if (!firstUniqueKey.IsValid())
+					{
+						data.PriceChangeData[itemKey] = MerchantData.CalculateCharacterBehaviourDiscount(ctx.Random, character?.GetBehaviorType() ?? 0);
+						if (!firstUniqueKey.IsValid())
+						{
+							firstUniqueKey = itemKey;
+						}
+					}
+				}
+				extraItems.Add(new MerchantExtraGoodsItem
+				{
+					Id = itemKey.Id,
+					Index = level
+				});
+				goods.OfflineAdd(itemKey, 1);
+				DomainManager.Item.SetOwner(itemKey, itemOwnerType, ownerId);
 			}
 		}
 	}
@@ -282,6 +382,11 @@ public static class MerchantDataHelper
 		{
 			AssignOrAddRange(ref extraGoodsData.NormalExtraGoods, newExtraGoodsData.NormalExtraGoods);
 			AssignOrAddRange(ref extraGoodsData.SeasonExtraGoods, newExtraGoodsData.SeasonExtraGoods);
+			for (int i = 0; i < extraGoodsData.SolarTermTemplateIdList.Count; i++)
+			{
+				List<MerchantExtraGoodsItem> old = extraGoodsData.GetSolarTermExtraGoods(i);
+				AssignOrAddRange(ref old, newExtraGoodsData.GetSolarTermExtraGoods(i));
+			}
 			AssignOrAddRange(ref extraGoodsData.CapitalistSkillExtraGoods, newExtraGoodsData.CapitalistSkillExtraGoods);
 		}
 		return extraGoodsData ?? newExtraGoodsData;

@@ -5,9 +5,6 @@ using GameData.Serializer;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 五方神龙 - 蛟的数据结构
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class Jiao : ISerializableGameData
 {
@@ -73,155 +70,78 @@ public class Jiao : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 蛟从卵开始使用的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 物品Key
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey Key;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Gender;
 
-	/// <summary>
-	/// 驯服度
-	/// </summary>
 	[SerializableGameDataField]
 	public int TamePoint;
 
-	/// <summary>
-	/// 蛟卵孵化后生成的蛟在Jiao配置表中的模板Id
-	/// 蛟卵、未成年的杂物蛟、成年的代步蛟都使用jiao表中同一个模板Id的值
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 养育方针Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short NurturanceTemplateId;
 
-	/// <summary>
-	/// 可繁育
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanBreed;
 
-	/// <summary>
-	/// 当前的成长阶段
-	/// 蛋 -&gt; 杂物 -&gt; 代步
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte GrowthStage;
 
-	/// <summary>
-	/// 进化为代步所需要的剩余月数
-	/// </summary>
 	[SerializableGameDataField]
 	public int EvolveRemainingMonth;
 
-	/// <summary>
-	/// 体长
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) Height;
 
-	/// <summary>
-	/// 体重
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) Weight;
 
-	/// <summary>
-	/// 寿命
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) LifeSpan;
 
-	/// <summary>
-	/// 父亲Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int FatherId;
 
-	/// <summary>
-	/// 母亲Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int MotherId;
 
-	/// <summary>
-	/// 激进培育次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int AggressiveTimes;
 
-	/// <summary>
-	/// 保守培育次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int NegativeTimes;
 
-	/// <summary>
-	/// 上次培育是否激进
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LastChoiceIsAggressive;
 
-	/// <summary>
-	/// 上一次随机到的进化结果
-	/// </summary>
 	[SerializableGameDataField]
 	public short LastEvolutionResult;
 
-	/// <summary>
-	/// 当前随机进化方向时使用的种子
-	/// </summary>
 	[SerializableGameDataField]
 	public int RandomSeed;
 
-	/// <summary>
-	/// 安抚冷却
-	/// </summary>
 	[SerializableGameDataField]
 	public int PettingCoolDown;
 
-	/// <summary>
-	/// 代数
-	/// </summary>
 	[SerializableGameDataField]
 	public int Generation;
 
-	/// <summary>
-	/// 下一成长阶段
-	/// </summary>
 	[SerializableGameDataField]
 	public int NextPeriod;
 
-	/// <summary>
-	/// 名字字符串的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int NameId;
 
-	/// <summary>
-	/// 立场
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Behavior;
 
-	/// <summary>
-	/// 属性
-	/// </summary>
 	[SerializableGameDataField]
 	public JiaoProperty Properties;
 
@@ -338,9 +258,6 @@ public class Jiao : ISerializableGameData
 		NextPeriod = jiao.NextPeriod;
 	}
 
-	/// <summary>
-	/// 重设成长值
-	/// </summary>
 	public void ResetGrowth()
 	{
 		EvolveRemainingMonth = JiaoNurturance.Instance[NurturanceTemplateId].NurturanceCostMonth;
@@ -351,19 +268,11 @@ public class Jiao : ISerializableGameData
 		LifeSpan = (Inherited: LifeSpan.Inherited, Fostered: 0);
 	}
 
-	/// <summary>
-	/// 获取名称
-	/// </summary>
-	/// <returns></returns>
 	public string GetNameText()
 	{
 		return GetNameRelatedData().GetName();
 	}
 
-	/// <summary>
-	/// 获取名称相关数据
-	/// </summary>
-	/// <returns></returns>
 	public JiaoLoongNameRelatedData GetNameRelatedData()
 	{
 		return new JiaoLoongNameRelatedData
@@ -375,12 +284,6 @@ public class Jiao : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 获取蛟的表现属性
-	/// 返回Math.Min(配置值+遗传值+成长值 / 100, 最大值）
-	/// </summary>
-	/// <param name="propertyTemplateId"></param>
-	/// <returns></returns>
 	public int GetPresentProperty(short propertyTemplateId)
 	{
 		JiaoItem config = Config.Jiao.Instance[TemplateId];
@@ -393,9 +296,6 @@ public class Jiao : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public Jiao(Jiao other)
 	{
 		Key = other.Key;
@@ -425,9 +325,6 @@ public class Jiao : ISerializableGameData
 		NextPeriod = other.NextPeriod;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(Jiao other)
 	{
 		Key = other.Key;
@@ -457,13 +354,11 @@ public class Jiao : ISerializableGameData
 		NextPeriod = other.NextPeriod;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 165;
@@ -474,7 +369,6 @@ public class Jiao : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -533,7 +427,6 @@ public class Jiao : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

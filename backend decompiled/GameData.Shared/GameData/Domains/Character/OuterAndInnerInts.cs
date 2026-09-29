@@ -3,30 +3,15 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 内外值
-/// </summary>
 [Serializable]
 public struct OuterAndInnerInts : ISerializableGameData
 {
-	/// <summary>
-	/// 外值
-	/// </summary>
 	public int Outer;
 
-	/// <summary>
-	/// 内值
-	/// </summary>
 	public int Inner;
 
-	/// <summary>
-	/// 零值
-	/// </summary>
 	public static OuterAndInnerInts Zero => new OuterAndInnerInts(0, 0);
 
-	/// <summary>
-	/// 是否有值
-	/// </summary>
 	public bool IsNonZero
 	{
 		get
@@ -39,9 +24,6 @@ public struct OuterAndInnerInts : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 内外总值
-	/// </summary>
 	public int Sum => Outer + Inner;
 
 	public OuterAndInnerInts(int outer, int inner)

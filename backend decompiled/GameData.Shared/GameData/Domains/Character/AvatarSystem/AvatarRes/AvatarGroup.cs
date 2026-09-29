@@ -6,18 +6,12 @@ using Redzen.Random;
 
 namespace GameData.Domains.Character.AvatarSystem.AvatarRes;
 
-/// <summary>
-/// 体型资源组
-/// </summary>
 public class AvatarGroup
 {
 	public byte Id;
 
 	public bool HasAsset;
 
-	/// <summary>
-	/// 经过系统检查后对可用性赋值，不可用的avatar在初始化时输出告知用户，并且后续不可被调用
-	/// </summary>
 	public bool AvatarAvailable;
 
 	public List<BodyRes> BodyRes;
@@ -54,9 +48,6 @@ public class AvatarGroup
 
 	public List<AvatarAsset> Wrinkle3Res;
 
-	/// <summary>
-	/// 最差的一个负向特征，关系到角色是否可以进入丑化特征逻辑分支
-	/// </summary>
 	public AvatarAsset WorstFeature2;
 
 	public const short ObsoletedFeatureId = 6;
@@ -140,10 +131,6 @@ public class AvatarGroup
 		return hairCell;
 	}
 
-	/// <summary>
-	/// 向该体型添加一个资源
-	/// </summary>
-	/// <param name="asset"></param>
 	public void Add(AvatarAsset asset)
 	{
 		if (asset == null)
@@ -353,9 +340,6 @@ public class AvatarGroup
 		}
 	}
 
-	/// <summary>
-	/// 把全部眼睛资源最大化组合为所有可用组合
-	/// </summary>
 	public void ConstructEyesGroup()
 	{
 		EyesGroup = new List<EyeRes>();
@@ -395,9 +379,6 @@ public class AvatarGroup
 		}
 	}
 
-	/// <summary>
-	/// 资源排序，按照id从小到大排序
-	/// </summary>
 	public void Sort()
 	{
 		BodyRes.Sort((BodyRes l, BodyRes r) => l.Id - r.Id);
@@ -434,12 +415,6 @@ public class AvatarGroup
 		return random.Next(min, max);
 	}
 
-	/// <summary>
-	/// 获取一个指定类型的资源
-	/// </summary>
-	/// <param name="elemType"></param>
-	/// <param name="ids"></param>
-	/// <returns></returns>
 	public AvatarAsset Get(EAvatarElementsType elemType, params short[] ids)
 	{
 		AvatarAsset finalAsset = null;
@@ -532,11 +507,6 @@ public class AvatarGroup
 		}
 	}
 
-	/// <summary>
-	/// 获取指定类型的资源数量
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public int GetTypeCount(EAvatarElementsType type)
 	{
 		int count = 0;
@@ -591,25 +561,11 @@ public class AvatarGroup
 		return count;
 	}
 
-	/// <summary>
-	/// 获取N号衣服部件的数量
-	/// </summary>
-	/// <param name="clothId"></param>
-	/// <returns></returns>
 	public int GetClothNPartCount(int clothId)
 	{
 		return BodyRes.Find((BodyRes e) => e.Id == clothId)?.ClothParts.Count ?? 0;
 	}
 
-	/// <summary>
-	/// 用该组人物资源进行一次随机形象生成
-	/// </summary>
-	/// <param name="random">随机器</param>
-	/// <param name="randColor">是否随机颜色</param>
-	/// <param name="randCloth">是否随机衣服</param>
-	/// <param name="canCreateOnly">是否仅允许使用创建角色可用的资源</param>
-	/// <param name="canNaked">是否可以裸体</param>
-	/// <returns></returns>
 	public (AvatarData avatar, short clothId) GetRandomAvatar(IRandomSource random, bool randColor = true, bool randCloth = false, bool canCreateOnly = false, bool canNaked = false)
 	{
 		AvatarData avatarData = new AvatarData();
@@ -709,11 +665,6 @@ public class AvatarGroup
 		return (avatar: avatarData, clothId: clothId);
 	}
 
-	/// <summary>
-	/// 获取一个随机的头型
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public short GetRandomHead(IRandomSource random)
 	{
 		List<AvatarAsset> availableHeadAssetList = new List<AvatarAsset>();
@@ -729,13 +680,6 @@ public class AvatarGroup
 		return availableHeadAssetList.GetRandom(random)?.Id ?? 0;
 	}
 
-	/// <summary>
-	/// 获取一个随机的衣服
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="canCreateOnly">是否仅从创建人物时的可用资源中随机</param>
-	/// <param name="canNaked">是否可以裸体</param>
-	/// <returns></returns>
 	public short GetRandomCloth(IRandomSource random, bool canCreateOnly, bool canNaked = false)
 	{
 		return BodyRes.FindAll(delegate(BodyRes e)
@@ -757,12 +701,6 @@ public class AvatarGroup
 		}).GetRandom(random)?.Id ?? 0;
 	}
 
-	/// <summary>
-	/// 获取一个随机的衣服部件
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="clothId"></param>
-	/// <returns></returns>
 	public byte GetRandomClothPart(IRandomSource random, int clothId)
 	{
 		BodyRes bodyRes = BodyRes.Find((BodyRes e) => e.Id == clothId);
@@ -773,21 +711,11 @@ public class AvatarGroup
 		return 0;
 	}
 
-	/// <summary>
-	/// 获取一个随机的嘴巴
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public short GetRandomMouth(IRandomSource random)
 	{
 		return MouthRes.GetRandom(random)?.Id ?? 0;
 	}
 
-	/// <summary>
-	/// 获取一个随机的眼睛组合和随机的眉毛id
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public (short mainId, short leftId, short rightId, short eyebrowId) GetRandomEyes(IRandomSource random)
 	{
 		short mainId = 0;
@@ -805,21 +733,11 @@ public class AvatarGroup
 		return (mainId: mainId, leftId: leftId, rightId: rightId, eyebrowId: eyebrowId);
 	}
 
-	/// <summary>
-	/// 获取一个随机的鼻子
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public short GetRandomNose(IRandomSource random)
 	{
 		return NoseRes.GetRandom(random)?.Id ?? 0;
 	}
 
-	/// <summary>
-	/// 获取一组随机的胡子组合
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public (short id1, short id2) GetRandomBeards(IRandomSource random)
 	{
 		short id1 = 1;
@@ -873,42 +791,21 @@ public class AvatarGroup
 		return AvatarManager.Instance.GetAvatarGroup(Id - 1);
 	}
 
-	/// <summary>
-	/// 获取一组随机的头发组合
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public (short frontId, short backId) GetRandomHairs(IRandomSource random)
 	{
 		return GetRandomHairsWithCondition(random, null);
 	}
 
-	/// <summary>
-	/// 获取一组随机非光头组合
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public (short frontId, short backId) GetRandomHairsNoSkinHead(IRandomSource random)
 	{
 		return GetRandomHairsWithCondition(random, (HairRes res) => res.Id != Hair1Res[0].Id && res.Id != Hair2Res[0].Id);
 	}
 
-	/// <summary>
-	/// 获取光头组合
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public (short frontId, short backId) GetHairsSkinHead(IRandomSource random)
 	{
 		return (frontId: Hair1Res[0].Id, backId: Hair2Res[0].Id);
 	}
 
-	/// <summary>
-	/// 获取一组随机的头发组合，并对魅力变化方向做出要求
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="condition"></param>
-	/// <returns></returns>
 	public (short frontId, short backId) GetRandomHairsWithCondition(IRandomSource random, Predicate<HairRes> condition)
 	{
 		List<HairRes> selectableHairResList = new List<HairRes>();
@@ -938,12 +835,6 @@ public class AvatarGroup
 		return (frontId: frontHairId, backId: backHairId);
 	}
 
-	/// <summary>
-	/// 创建人物的时候是否没有头发
-	/// </summary>
-	/// <param name="frontId"></param>
-	/// <param name="backId"></param>
-	/// <returns></returns>
 	public bool IsHairless(short frontId, short backId)
 	{
 		if (frontId == Hair1Res[0].Id)
@@ -953,12 +844,6 @@ public class AvatarGroup
 		return false;
 	}
 
-	/// <summary>
-	/// 创建人物的时候是否没有胡子
-	/// </summary>
-	/// <param name="beard1Id"></param>
-	/// <param name="beard2Id"></param>
-	/// <returns></returns>
 	public bool IsBeardless(short beard1Id, short beard2Id)
 	{
 		if (beard1Id == Beard1Res[0].Id)
@@ -968,11 +853,6 @@ public class AvatarGroup
 		return false;
 	}
 
-	/// <summary>
-	/// 获取随机的特征和皱纹组合
-	/// </summary>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public (short feature1Id, short feature2Id, short wrinkle1Id, short wrinkle2Id, short wrinkle3Id) GetRandomMaskElems(IRandomSource random)
 	{
 		short feature1Id = 1;
@@ -1010,11 +890,6 @@ public class AvatarGroup
 		return feature1Res;
 	}
 
-	/// <summary>
-	/// 正向特征和负向特征的原特征6废弃，同7
-	/// </summary>
-	/// <param name="featureId"></param>
-	/// <returns></returns>
 	public static short GetUsefulFeatureId(short featureId)
 	{
 		if (featureId == 6)

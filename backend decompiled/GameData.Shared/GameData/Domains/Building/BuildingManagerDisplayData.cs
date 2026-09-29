@@ -8,33 +8,18 @@ namespace GameData.Domains.Building;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class BuildingManagerDisplayData : ISerializableGameData
 {
-	/// <summary>
-	///             角色
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData CharacterDisplayData;
 
-	/// <summary>
-	/// 是主事
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsLeader;
 
-	/// <summary>
-	/// 主事身份匹配，服众
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LeaderRoleMatch;
 
-	/// <summary>
-	/// 传授品级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LeaderTeachGrade;
 
-	/// <summary>
-	/// 剩余潜力
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LeftPotentialCount;
 

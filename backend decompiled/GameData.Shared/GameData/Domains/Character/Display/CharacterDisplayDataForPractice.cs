@@ -38,6 +38,9 @@ public class CharacterDisplayDataForPractice : ISerializableGameData
 	[SerializableGameDataField]
 	public List<sbyte> LuohanAccessories;
 
+	[SerializableGameDataField]
+	public List<short> EquippedCombatSkills;
+
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
@@ -45,13 +48,10 @@ public class CharacterDisplayDataForPractice : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 12;
-		totalSize += CombatSkillAttainments.GetSerializedSize();
-		totalSize += CombatSkillQualifications.GetSerializedSize();
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize += LifeSkillQualifications.GetSerializedSize();
+		int totalSize = 132;
 		totalSize = ((LearnedCombatSkills == null) ? (totalSize + 2) : (totalSize + (2 + 2 * LearnedCombatSkills.Count)));
 		totalSize = ((LuohanAccessories == null) ? (totalSize + 2) : (totalSize + (2 + LuohanAccessories.Count)));
+		totalSize = ((EquippedCombatSkills == null) ? (totalSize + 2) : (totalSize + (2 + 2 * EquippedCombatSkills.Count)));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -101,6 +101,23 @@ public class CharacterDisplayDataForPractice : ISerializableGameData
 			{
 				*pCurrData = (byte)LuohanAccessories[j];
 				pCurrData++;
+			}
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
+		if (EquippedCombatSkills != null)
+		{
+			int elementsCount3 = EquippedCombatSkills.Count;
+			Tester.Assert(elementsCount3 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount3;
+			pCurrData += 2;
+			for (int k = 0; k < elementsCount3; k++)
+			{
+				*(short*)pCurrData = EquippedCombatSkills[k];
+				pCurrData += 2;
 			}
 		}
 		else
@@ -176,6 +193,29 @@ public class CharacterDisplayDataForPractice : ISerializableGameData
 		else
 		{
 			LuohanAccessories?.Clear();
+		}
+		ushort elementsCount3 = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (elementsCount3 > 0)
+		{
+			if (EquippedCombatSkills == null)
+			{
+				EquippedCombatSkills = new List<short>();
+			}
+			else
+			{
+				EquippedCombatSkills.Clear();
+			}
+			for (int k = 0; k < elementsCount3; k++)
+			{
+				short element3 = *(short*)pCurrData;
+				pCurrData += 2;
+				EquippedCombatSkills.Add(element3);
+			}
+		}
+		else
+		{
+			EquippedCombatSkills?.Clear();
 		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)

@@ -1,8 +1,5 @@
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 角色作为目标的类型
-/// </summary>
 public class PlayerTargetType
 {
 	public const short Self = 1;

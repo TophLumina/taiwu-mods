@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 某个类型建筑的招募角色信息
-/// </summary>
 [SerializableGameData(IsExtensible = true, NotRestrictCollectionSerializedSize = true)]
 public class BuildingRecruitData : ISerializableGameData
 {
@@ -21,28 +18,16 @@ public class BuildingRecruitData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "CharacterDataList", "BuildingTemplateId" };
 	}
 
-	/// <summary>
-	/// 招募角色
-	/// </summary>
 	[SerializableGameDataField]
 	public List<BuildingRecruitCharacterData> CharacterDataList;
 
-	/// <summary>
-	/// 建筑类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short BuildingTemplateId;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public BuildingRecruitData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BuildingRecruitData(BuildingRecruitData other)
 	{
 		if (other.CharacterDataList != null)
@@ -62,9 +47,6 @@ public class BuildingRecruitData : ISerializableGameData
 		BuildingTemplateId = other.BuildingTemplateId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BuildingRecruitData other)
 	{
 		if (other.CharacterDataList != null)
@@ -84,13 +66,11 @@ public class BuildingRecruitData : ISerializableGameData
 		BuildingTemplateId = other.BuildingTemplateId;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -115,7 +95,6 @@ public class BuildingRecruitData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -161,7 +140,6 @@ public class BuildingRecruitData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

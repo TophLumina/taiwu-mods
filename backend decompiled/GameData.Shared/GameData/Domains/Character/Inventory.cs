@@ -8,31 +8,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 人物行囊内的物品集合.
-/// 由于是单值数据, 所以总长不能超过 64KB, 因而最大可容纳的不同物品数量约为 5.4K.
-/// </summary>
 public class Inventory : ISerializableGameData
 {
-	/// <summary>
-	/// ItemKey -&gt; amount
-	/// </summary>
 	[SerializableGameDataField]
 	public readonly Dictionary<ItemKey, int> Items;
 
-	/// <summary>
-	/// 是否需要提交数据，非序列化
-	/// </summary>
 	public bool NeedCommit;
 
-	/// <summary>
-	/// 空字典
-	/// </summary>
 	public static readonly IReadOnlyDictionary<ItemKey, int> Empty = new Dictionary<ItemKey, int>();
 
-	/// <summary>
-	/// 行囊所有物品的总数量
-	/// </summary>
 	public int InventoryItemTotalCount => Items.Sum((KeyValuePair<ItemKey, int> i) => i.Value);
 
 	public Inventory()
@@ -81,12 +65,6 @@ public class Inventory : ISerializableGameData
 		return (int)(pCurrData - pData);
 	}
 
-	/// <summary>
-	/// 向行囊添加物品.
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="amount"></param>
 	public void OfflineAdd(ItemKey itemKey, int amount)
 	{
 		Tester.Assert(amount > 0);
@@ -115,13 +93,6 @@ public class Inventory : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 用于兼容假数据的版本.
-	/// ***此处仅用于旧逻辑兼容, 新逻辑假数据应避免使用Inventory存储, 如果必要ID应为 -1.***
-	/// <see cref="M:GameData.Domains.Character.Inventory.OfflineAdd(GameData.Domains.Item.ItemKey,System.Int32)" />
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="amount"></param>
 	public void OfflineAddUncheck(ItemKey itemKey, int amount)
 	{
 		Tester.Assert(amount > 0);
@@ -135,11 +106,6 @@ public class Inventory : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 向行囊添加物品.对太吾和其交互对象操作复数物品时用此方法，因为有淬毒系统
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="keyList"></param>
 	public void OfflineAdd(List<ItemKey> keyList)
 	{
 		Tester.Assert(keyList != null);
@@ -150,11 +116,6 @@ public class Inventory : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 向行囊添加物品.对太吾和其交互对象操作复数物品时用此方法，因为有淬毒系统
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="dict"></param>
 	public void OfflineAdd(Dictionary<ItemKey, int> dict)
 	{
 		Tester.Assert(dict != null);
@@ -165,24 +126,12 @@ public class Inventory : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 向行囊添加物品.对太吾和其交互对象操作复数物品时用此方法，因为有淬毒系统
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="inventory"></param>
 	public void OfflineAdd(Inventory inventory)
 	{
 		Tester.Assert(inventory != null);
 		OfflineAdd(inventory.Items);
 	}
 
-	/// <summary>
-	/// 离线从行囊移出物品，不涉及研读书籍、鉴定状态处理。默认应该调用 <see cref="!:Character.RemoveInventoryItem" />
-	/// 移出后物品仍然存在. 如果想彻底删除物品, 需要调用物品数据域的相关方法.
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="amount"></param>
 	public void OfflineRemove(ItemKey itemKey, int amount)
 	{
 		Tester.Assert(amount > 0);
@@ -200,22 +149,11 @@ public class Inventory : ISerializableGameData
 		throw new Exception($"Item amount cannot be negative after removing: {itemKey}, {amount}");
 	}
 
-	/// <summary>
-	/// 离线从行囊移出物品，不涉及研读书籍、鉴定状态处理。默认应该调用 <see cref="!:Character.RemoveInventoryItem" />
-	/// 移出后物品仍然存在. 如果想彻底删除物品, 需要调用物品数据域的相关方法.
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="itemKey"></param>
 	public void OfflineRemove(ItemKey itemKey)
 	{
 		Items.Remove(itemKey);
 	}
 
-	/// <summary>
-	/// 离线从行囊移出物品，不涉及研读书籍、鉴定状态处理。对太吾和其交互对象操作复数物品时用此方法，因为有淬毒系统
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="keyList"></param>
 	public void OfflineRemove(List<ItemKey> keyList)
 	{
 		Tester.Assert(keyList != null);
@@ -226,11 +164,6 @@ public class Inventory : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 离线从行囊移出物品，不涉及研读书籍、鉴定状态处理。对太吾和其交互对象操作复数物品时用此方法，因为有淬毒系统
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="dict"></param>
 	public void OfflineRemove(Dictionary<ItemKey, int> dict)
 	{
 		Tester.Assert(dict != null);
@@ -241,34 +174,18 @@ public class Inventory : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 离线从行囊移出物品，不涉及研读书籍、鉴定状态处理。对太吾和其交互对象操作复数物品时用此方法，因为有淬毒系统
-	/// *** 如果是已注册游戏数据, 修改之后一定要调用相关数据状态更新方法. ***
-	/// </summary>
-	/// <param name="inventory"></param>
 	public void OfflineRemove(Inventory inventory)
 	{
 		Tester.Assert(inventory != null);
 		OfflineRemove(inventory.Items);
 	}
 
-	/// <summary>
-	/// 查询行囊道具数量
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <returns></returns>
 	public int GetInventoryItemCount(ItemKey itemKey)
 	{
 		Items.TryGetValue(itemKey, out var count);
 		return count;
 	}
 
-	/// <summary>
-	/// 查询行囊道具数量
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplateId"></param>
-	/// <returns></returns>
 	public int GetInventoryItemCount(sbyte itemType, short itemTemplateId)
 	{
 		Tester.Assert(itemTemplateId >= 0);
@@ -283,11 +200,6 @@ public class Inventory : ISerializableGameData
 		return count;
 	}
 
-	/// <summary>
-	/// 查询某类型行囊道具数量
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <returns></returns>
 	public int GetInventoryItemTypeCount(sbyte itemType)
 	{
 		int count = 0;
@@ -301,9 +213,6 @@ public class Inventory : ISerializableGameData
 		return count;
 	}
 
-	/// <summary>
-	/// 获取行囊中指定类型道具索引
-	/// </summary>
 	public ItemKey GetInventoryItemKey(sbyte itemType, short itemTemplateId = -1)
 	{
 		Tester.Assert(itemTemplateId >= 0);
@@ -317,9 +226,6 @@ public class Inventory : ISerializableGameData
 		return ItemKey.Invalid;
 	}
 
-	/// <summary>
-	/// 获取行囊中指定类型道具索引
-	/// </summary>
 	public ItemKey GetInventoryItemKeyByItemType(short itemType)
 	{
 		Tester.Assert(itemType >= 0);
@@ -333,9 +239,6 @@ public class Inventory : ISerializableGameData
 		return ItemKey.Invalid;
 	}
 
-	/// <summary>
-	/// 获取行囊中指定类型道具索引
-	/// </summary>
 	public ItemKey GetInventoryItemKeyByItemSubType(short itemSubType)
 	{
 		Tester.Assert(itemSubType >= 0);
@@ -349,9 +252,6 @@ public class Inventory : ISerializableGameData
 		return ItemKey.Invalid;
 	}
 
-	/// <summary>
-	/// 获取行囊中指定类型的全部道具索引
-	/// </summary>
 	public void GetInventoryItemKeyList(sbyte itemType, short itemTemplateId, List<ItemKey> resultList)
 	{
 		Tester.Assert(itemTemplateId >= 0);
@@ -365,15 +265,6 @@ public class Inventory : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 行囊中是否有指定分组的道具
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="groupId"></param>
-	/// <param name="minGrade"></param>
-	/// <param name="maxGrade"></param>
-	/// <param name="resultList"></param>
-	/// <returns></returns>
 	public bool HasItemInGroup(sbyte itemType, short groupId, sbyte minGrade = 0, sbyte maxGrade = 8, List<ItemKey> resultList = null)
 	{
 		bool hasItem = false;
@@ -398,15 +289,6 @@ public class Inventory : ISerializableGameData
 		return hasItem;
 	}
 
-	/// <summary>
-	/// 行囊中是否有同组道具
-	/// 优先获取更高级的道具.
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="minGradeOffset"></param>
-	/// <param name="resultList"></param>
-	/// <returns></returns>
 	public bool HasItemInSameGroup(sbyte itemType, short templateId, int minGradeOffset = -9, List<ItemKey> resultList = null)
 	{
 		Tester.Assert(minGradeOffset <= 0);
@@ -419,15 +301,6 @@ public class Inventory : ISerializableGameData
 		return HasItemInGroup(itemType, groupId, requiredMinGrade, 8, resultList);
 	}
 
-	/// <summary>
-	/// 获取行囊中指定分组的道具
-	/// 优先获取更高级的道具.
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="groupId"></param>
-	/// <param name="minGrade"></param>
-	/// <param name="maxGrade"></param>
-	/// <returns></returns>
 	public ItemKey GetItemInGroup(sbyte itemType, short groupId, sbyte minGrade, sbyte maxGrade)
 	{
 		ItemKey currItemKey = ItemKey.Invalid;
@@ -451,14 +324,6 @@ public class Inventory : ISerializableGameData
 		return currItemKey;
 	}
 
-	/// <summary>
-	/// 获取行囊中与指定道具同分组的道具
-	/// 优先获取更高级的道具.
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="minGradeOffset"></param>
-	/// <returns></returns>
 	public ItemKey GetItemInSameGroup(sbyte itemType, short templateId, int minGradeOffset = -9)
 	{
 		Tester.Assert(minGradeOffset <= 0);
@@ -472,11 +337,6 @@ public class Inventory : ISerializableGameData
 		return GetItemInGroup(itemType, groupId, requiredMinGrade, expectedGrade);
 	}
 
-	/// <summary>
-	/// 是否有指定类型药物
-	/// </summary>
-	/// <param name="effectType"></param>
-	/// <returns></returns>
 	public bool ContainsMedicine(EMedicineEffectType effectType)
 	{
 		foreach (ItemKey itemKey in Items.Keys)
@@ -489,11 +349,6 @@ public class Inventory : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否包含恢复主要属性的道具
-	/// </summary>
-	/// <param name="attributeType"></param>
-	/// <returns></returns>
 	public bool ContainsMainAttributeRegenItem(sbyte attributeType)
 	{
 		foreach (ItemKey itemKey in Items.Keys)
@@ -506,11 +361,6 @@ public class Inventory : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否包含指定类型的道具
-	/// </summary>
-	/// <param name="itemType"><see cref="T:GameData.Domains.Item.ItemType" /></param>
-	/// <returns></returns>
 	public bool ContainsItemType(sbyte itemType)
 	{
 		foreach (ItemKey key in Items.Keys)
@@ -523,11 +373,6 @@ public class Inventory : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否包含指定子类型的道具
-	/// </summary>
-	/// <param name="itemSubType"><see cref="T:GameData.Domains.Item.ItemSubType" /></param>
-	/// <returns></returns>
 	public bool ContainsItemSubType(short itemSubType)
 	{
 		foreach (ItemKey itemKey in Items.Keys)
@@ -540,9 +385,6 @@ public class Inventory : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否包含指定道具
-	/// </summary>
 	public bool Contains(int itemId)
 	{
 		foreach (ItemKey key in Items.Keys)

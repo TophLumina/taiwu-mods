@@ -6,51 +6,27 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Organization.Display;
 
-/// <summary>
-/// 门派功法树预览相关显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class OrganizationCombatSkillsDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 门派预设id 
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OrganizationTemplateId;
 
-	/// <summary>
-	/// 门派对太吾的支持度
-	/// </summary>
 	[SerializableGameDataField]
 	public short ApprovingRate;
 
-	/// <summary>
-	/// 门派对太吾的支持度（包含超过支持度上限的部分）
-	/// </summary>
 	[SerializableGameDataField]
 	public short ApprovingRateTotal;
 
-	/// <summary>
-	/// 门派对太吾支持度上限
-	/// </summary>
 	[SerializableGameDataField]
 	public short ApprovingRateUpperLimit;
 
-	/// <summary>
-	/// 门派对太吾支持度上限加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public short ApprovingRateUpperLimitBonus;
 
-	/// <summary>
-	/// 本门派已习得和已大成的功法列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillDisplayData> LearnedSkills;
 
-	/// <summary>
-	/// 剩余持续时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int Duration;
 

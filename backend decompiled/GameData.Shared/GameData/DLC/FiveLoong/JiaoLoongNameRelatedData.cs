@@ -4,39 +4,20 @@ using GameData.Serializer;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 蛟龙姓名关联信息
-/// </summary>
 public struct JiaoLoongNameRelatedData : ISerializableGameData
 {
-	/// <summary>
-	/// 对应的物品类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemType;
 
-	/// <summary>
-	/// 对应的道具模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short ItemTemplateId;
 
-	/// <summary>
-	/// 对应的角色模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short CharTemplateId;
 
-	/// <summary>
-	/// 名字自定义字符串的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int NameId;
 
-	/// <summary>
-	/// 获取名称
-	/// </summary>
-	/// <returns></returns>
 	public string GetName()
 	{
 		if (NameId >= 0 && ExternalDataBridge.Context.CustomTexts.TryGetValue(NameId, out var text))
@@ -55,13 +36,11 @@ public struct JiaoLoongNameRelatedData : ISerializableGameData
 		return ItemTemplateHelper.GetName(ItemType, ItemTemplateId);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 9;
@@ -72,7 +51,6 @@ public struct JiaoLoongNameRelatedData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (byte)ItemType;
@@ -90,7 +68,6 @@ public struct JiaoLoongNameRelatedData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -8,1291 +8,548 @@ namespace Config;
 [Serializable]
 public class EventArgument : ConfigData<EventArgumentItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// Dynamic
-		/// </summary>
 		public const int Dynamic = 0;
 
-		/// <summary>
-		/// Integer
-		/// </summary>
 		public const int Integer = 1;
 
-		/// <summary>
-		/// Float
-		/// </summary>
 		public const int Float = 2;
 
-		/// <summary>
-		/// Bool
-		/// </summary>
 		public const int Bool = 3;
 
-		/// <summary>
-		/// String
-		/// </summary>
 		public const int String = 4;
 
-		/// <summary>
-		/// Condition
-		/// </summary>
 		public const int Condition = 72;
 
-		/// <summary>
-		/// Event
-		/// </summary>
 		public const int Event = 5;
 
-		/// <summary>
-		/// GlobalScript
-		/// </summary>
 		public const int GlobalScript = 48;
 
-		/// <summary>
-		/// Character
-		/// </summary>
 		public const int Character = 6;
 
-		/// <summary>
-		/// Item
-		/// </summary>
 		public const int Item = 7;
 
-		/// <summary>
-		/// ItemList
-		/// </summary>
 		public const int ItemList = 85;
 
-		/// <summary>
-		/// ItemTemplate
-		/// </summary>
 		public const int ItemTemplate = 8;
 
-		/// <summary>
-		/// ItemTemplateList
-		/// </summary>
 		public const int ItemTemplateList = 78;
 
-		/// <summary>
-		/// MapBlock
-		/// </summary>
 		public const int MapBlock = 9;
 
-		/// <summary>
-		/// MapBlockTemplate
-		/// </summary>
 		public const int MapBlockTemplate = 105;
 
-		/// <summary>
-		/// Settlement
-		/// </summary>
 		public const int Settlement = 10;
 
-		/// <summary>
-		/// SettlementType
-		/// </summary>
 		public const int SettlementType = 59;
 
-		/// <summary>
-		/// Sect
-		/// </summary>
 		public const int Sect = 11;
 
-		/// <summary>
-		/// SectFunctionStatusType
-		/// </summary>
 		public const int SectFunctionStatusType = 67;
 
-		/// <summary>
-		/// MapArea
-		/// </summary>
 		public const int MapArea = 12;
 
-		/// <summary>
-		/// MapState
-		/// </summary>
 		public const int MapState = 47;
 
-		/// <summary>
-		/// MapBlockMatcher
-		/// </summary>
 		public const int MapBlockMatcher = 58;
 
-		/// <summary>
-		/// Grade
-		/// </summary>
 		public const int Grade = 13;
 
-		/// <summary>
-		/// BodyPartType
-		/// </summary>
 		public const int BodyPartType = 14;
 
-		/// <summary>
-		/// PoisonType
-		/// </summary>
 		public const int PoisonType = 15;
 
-		/// <summary>
-		/// WugType
-		/// </summary>
 		public const int WugType = 16;
 
-		/// <summary>
-		/// BehaviorType
-		/// </summary>
 		public const int BehaviorType = 17;
 
-		/// <summary>
-		/// PersonalityType
-		/// </summary>
 		public const int PersonalityType = 18;
 
-		/// <summary>
-		/// MainAttributeType
-		/// </summary>
 		public const int MainAttributeType = 19;
 
-		/// <summary>
-		/// FavorabilityType
-		/// </summary>
 		public const int FavorabilityType = 53;
 
-		/// <summary>
-		/// CharacterPropertyReferenced
-		/// </summary>
 		public const int CharacterPropertyReferenced = 96;
 
-		/// <summary>
-		/// CharacterPropertyModifyType
-		/// </summary>
 		public const int CharacterPropertyModifyType = 97;
 
-		/// <summary>
-		/// Gender
-		/// </summary>
 		public const int Gender = 20;
 
-		/// <summary>
-		/// ResourceType
-		/// </summary>
 		public const int ResourceType = 21;
 
-		/// <summary>
-		/// ItemType
-		/// </summary>
 		public const int ItemType = 22;
 
-		/// <summary>
-		/// ItemSubType
-		/// </summary>
 		public const int ItemSubType = 23;
 
-		/// <summary>
-		/// CombatSkillType
-		/// </summary>
 		public const int CombatSkillType = 24;
 
-		/// <summary>
-		/// LifeSkillType
-		/// </summary>
 		public const int LifeSkillType = 25;
 
-		/// <summary>
-		/// LifeSkill
-		/// </summary>
 		public const int LifeSkill = 51;
 
-		/// <summary>
-		/// EquipmentSlot
-		/// </summary>
 		public const int EquipmentSlot = 26;
 
-		/// <summary>
-		/// CombatSkillEquipType
-		/// </summary>
 		public const int CombatSkillEquipType = 27;
 
-		/// <summary>
-		/// FiveElementsType
-		/// </summary>
 		public const int FiveElementsType = 28;
 
-		/// <summary>
-		/// CharacterFeature
-		/// </summary>
 		public const int CharacterFeature = 29;
 
-		/// <summary>
-		/// LegacyPoint
-		/// </summary>
 		public const int LegacyPoint = 30;
 
-		/// <summary>
-		/// CharacterDeathType
-		/// </summary>
 		public const int CharacterDeathType = 31;
 
-		/// <summary>
-		/// CharacterMatcher
-		/// </summary>
 		public const int CharacterMatcher = 60;
 
-		/// <summary>
-		/// MainStoryLineProgress
-		/// </summary>
 		public const int MainStoryLineProgress = 32;
 
-		/// <summary>
-		/// WorldFunctionType
-		/// </summary>
 		public const int WorldFunctionType = 33;
 
-		/// <summary>
-		/// CricketPartsTemplate
-		/// </summary>
 		public const int CricketPartsTemplate = 34;
 
-		/// <summary>
-		/// CombatSkillTemplate
-		/// </summary>
 		public const int CombatSkillTemplate = 35;
 
-		/// <summary>
-		/// LifeSkillTemplate
-		/// </summary>
 		public const int LifeSkillTemplate = 36;
 
-		/// <summary>
-		/// MerchantType
-		/// </summary>
 		public const int MerchantType = 37;
 
-		/// <summary>
-		/// TaskInfo
-		/// </summary>
 		public const int TaskInfo = 38;
 
-		/// <summary>
-		/// TaskChain
-		/// </summary>
 		public const int TaskChain = 39;
 
-		/// <summary>
-		/// AdventureTemplate
-		/// </summary>
 		public const int AdventureTemplate = 40;
 
-		/// <summary>
-		/// ConditionOperator
-		/// </summary>
 		public const int ConditionOperator = 41;
 
-		/// <summary>
-		/// CombatConfig
-		/// </summary>
 		public const int CombatConfig = 42;
 
-		/// <summary>
-		/// CombatResultType
-		/// </summary>
 		public const int CombatResultType = 43;
 
-		/// <summary>
-		/// CombatType
-		/// </summary>
 		public const int CombatType = 84;
 
-		/// <summary>
-		/// EventActorTemplate
-		/// </summary>
 		public const int EventActorTemplate = 44;
 
-		/// <summary>
-		/// EnemyCharacterTemplate
-		/// </summary>
 		public const int EnemyCharacterTemplate = 45;
 
-		/// <summary>
-		/// FixedCharacterTemplate
-		/// </summary>
 		public const int FixedCharacterTemplate = 46;
 
-		/// <summary>
-		/// CharacterSearchRange
-		/// </summary>
 		public const int CharacterSearchRange = 49;
 
-		/// <summary>
-		/// CharacterFilterRules
-		/// </summary>
 		public const int CharacterFilterRules = 50;
 
-		/// <summary>
-		/// Profession
-		/// </summary>
 		public const int Profession = 52;
 
-		/// <summary>
-		/// ProfessionSkill
-		/// </summary>
 		public const int ProfessionSkill = 107;
 
-		/// <summary>
-		/// MonthlyActions
-		/// </summary>
 		public const int MonthlyActions = 54;
 
-		/// <summary>
-		/// BuildingBlockTemplate
-		/// </summary>
 		public const int BuildingBlockTemplate = 55;
 
-		/// <summary>
-		/// MerchantTemplate
-		/// </summary>
 		public const int MerchantTemplate = 56;
 
-		/// <summary>
-		/// AgeGroup
-		/// </summary>
 		public const int AgeGroup = 57;
 
-		/// <summary>
-		/// WorldFavorability
-		/// </summary>
 		public const int WorldFavorability = 63;
 
-		/// <summary>
-		/// AdventureRemakeElementCoreId
-		/// </summary>
 		public const int AdventureRemakeElementCoreId = 61;
 
-		/// <summary>
-		/// AdventureRemakeElementTag
-		/// </summary>
 		public const int AdventureRemakeElementTag = 62;
 
-		/// <summary>
-		/// EnemyNestTemplate
-		/// </summary>
 		public const int EnemyNestTemplate = 64;
 
-		/// <summary>
-		/// AdventureRemakeBlockRangeType
-		/// </summary>
 		public const int AdventureRemakeBlockRangeType = 65;
 
-		/// <summary>
-		/// AdventureRemakeViewType
-		/// </summary>
 		public const int AdventureRemakeViewType = 66;
 
-		/// <summary>
-		/// StateTaskStatus
-		/// </summary>
 		public const int StateTaskStatus = 68;
 
-		/// <summary>
-		/// CharacterTemplate
-		/// </summary>
 		public const int CharacterTemplate = 69;
 
-		/// <summary>
-		/// NpcCombatResultType
-		/// </summary>
 		public const int NpcCombatResultType = 70;
 
-		/// <summary>
-		/// MajorEventTemplate
-		/// </summary>
 		public const int MajorEventTemplate = 71;
 
-		/// <summary>
-		/// TagArrayMatchType
-		/// </summary>
 		public const int TagArrayMatchType = 73;
 
-		/// <summary>
-		/// RandomEnemyCharacterTemplate
-		/// </summary>
 		public const int RandomEnemyCharacterTemplate = 74;
 
-		/// <summary>
-		/// RandomEnemyTemplate
-		/// </summary>
 		public const int RandomEnemyTemplate = 75;
 
-		/// <summary>
-		/// NeiliAllocationType
-		/// </summary>
 		public const int NeiliAllocationType = 76;
 
-		/// <summary>
-		/// EventCommonOptionType
-		/// </summary>
 		public const int EventCommonOptionType = 77;
 
-		/// <summary>
-		/// EquipmentEffect
-		/// </summary>
 		public const int EquipmentEffect = 79;
 
-		/// <summary>
-		/// InstantNotificationTemplate
-		/// </summary>
 		public const int InstantNotificationTemplate = 80;
 
-		/// <summary>
-		/// AdventureRemakeTemplate
-		/// </summary>
 		public const int AdventureRemakeTemplate = 81;
 
-		/// <summary>
-		/// AdventureElement
-		/// </summary>
 		public const int AdventureElement = 82;
 
-		/// <summary>
-		/// HarmfulActionPhase
-		/// </summary>
 		public const int HarmfulActionPhase = 83;
 
-		/// <summary>
-		/// CutsceneTemplate
-		/// </summary>
 		public const int CutsceneTemplate = 86;
 
-		/// <summary>
-		/// CgTextureTemplate
-		/// </summary>
 		public const int CgTextureTemplate = 101;
 
-		/// <summary>
-		/// AdventureBlockIndex
-		/// </summary>
 		public const int AdventureBlockIndex = 87;
 
-		/// <summary>
-		/// RelationType
-		/// </summary>
 		public const int RelationType = 88;
 
-		/// <summary>
-		/// OneWayRelationType
-		/// </summary>
 		public const int OneWayRelationType = 127;
 
-		/// <summary>
-		/// SectMainStoryEventArgKey
-		/// </summary>
 		public const int SectMainStoryEventArgKey = 89;
 
-		/// <summary>
-		/// InteractionEventOption
-		/// </summary>
 		public const int InteractionEventOption = 90;
 
-		/// <summary>
-		/// LanguageKey
-		/// </summary>
 		public const int LanguageKey = 91;
 
-		/// <summary>
-		/// NormalInformation
-		/// </summary>
 		public const int NormalInformation = 92;
 
-		/// <summary>
-		/// MonthlyEventTemplate
-		/// </summary>
 		public const int MonthlyEventTemplate = 93;
 
-		/// <summary>
-		/// MonthlyNotificationTemplate
-		/// </summary>
 		public const int MonthlyNotificationTemplate = 94;
 
-		/// <summary>
-		/// GraveLevel
-		/// </summary>
 		public const int GraveLevel = 95;
 
-		/// <summary>
-		/// NormalInformationData
-		/// </summary>
 		public const int NormalInformationData = 98;
 
-		/// <summary>
-		/// InformationType
-		/// </summary>
 		public const int InformationType = 99;
 
-		/// <summary>
-		/// TutorialVideoTemplate
-		/// </summary>
 		public const int TutorialVideoTemplate = 100;
 
-		/// <summary>
-		/// InventoryItemOperationType
-		/// </summary>
 		public const int InventoryItemOperationType = 102;
 
-		/// <summary>
-		/// TutorialFunctionType
-		/// </summary>
 		public const int TutorialFunctionType = 103;
 
-		/// <summary>
-		/// TutorialChapter
-		/// </summary>
 		public const int TutorialChapter = 104;
 
-		/// <summary>
-		/// EventActionKey
-		/// </summary>
 		public const int EventActionKey = 106;
 
-		/// <summary>
-		/// EventTriggerParameter
-		/// </summary>
 		public const int EventTriggerParameter = 108;
 
-		/// <summary>
-		/// SectGoodness
-		/// </summary>
 		public const int SectGoodness = 111;
 
-		/// <summary>
-		/// GuidingChapter
-		/// </summary>
 		public const int GuidingChapter = 112;
 
-		/// <summary>
-		/// GuidingChapterState
-		/// </summary>
 		public const int GuidingChapterState = 113;
 
-		/// <summary>
-		/// GuidingChapterTrigger
-		/// </summary>
 		public const int GuidingChapterTrigger = 114;
 
-		/// <summary>
-		/// TaiwuLifeSummaryType
-		/// </summary>
 		public const int TaiwuLifeSummaryType = 115;
 
-		/// <summary>
-		/// StatInfo
-		/// </summary>
 		public const int StatInfo = 116;
 
-		/// <summary>
-		/// XiangshuAvatarId
-		/// </summary>
 		public const int XiangshuAvatarId = 118;
 
-		/// <summary>
-		/// JuniorXiangshuTaskStatus
-		/// </summary>
 		public const int JuniorXiangshuTaskStatus = 119;
 
-		/// <summary>
-		/// XiangshuAvatarDisplayStatus
-		/// </summary>
 		public const int XiangshuAvatarDisplayStatus = 120;
 
-		/// <summary>
-		/// SwordTombInformationType
-		/// </summary>
 		public const int SwordTombInformationType = 121;
 
-		/// <summary>
-		/// EventSelectCharacterRange
-		/// </summary>
 		public const int EventSelectCharacterRange = 122;
 
-		/// <summary>
-		/// Weather
-		/// </summary>
 		public const int Weather = 123;
 
-		/// <summary>
-		/// CharacterTitle
-		/// </summary>
 		public const int CharacterTitle = 124;
 
-		/// <summary>
-		/// Fame
-		/// </summary>
 		public const int Fame = 125;
 
-		/// <summary>
-		/// Clothing
-		/// </summary>
 		public const int Clothing = 126;
 
-		/// <summary>
-		/// TwelveImmortals
-		/// </summary>
 		public const int TwelveImmortals = 128;
 
-		/// <summary>
-		/// AssisterDefeatTwelveImmortalsProgress
-		/// </summary>
 		public const int AssisterDefeatTwelveImmortalsProgress = 129;
+
+		public const int ChickenTemplate = 130;
+
+		public const int DlcTemplate = 131;
+
+		public const int DlcEventArgKey = 132;
+
+		public const int TwelveImmortalsStatus = 133;
+
+		public const int TwelveImmortalsCharacterTemplate = 134;
+
+		public const int ThreeRealmsPowerCharacterTemplate = 135;
+
+		public const int NewFunctionUnlockTemplate = 136;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// Dynamic
-		/// </summary>
 		public static EventArgumentItem Dynamic => Instance[0];
 
-		/// <summary>
-		/// Integer
-		/// </summary>
 		public static EventArgumentItem Integer => Instance[1];
 
-		/// <summary>
-		/// Float
-		/// </summary>
 		public static EventArgumentItem Float => Instance[2];
 
-		/// <summary>
-		/// Bool
-		/// </summary>
 		public static EventArgumentItem Bool => Instance[3];
 
-		/// <summary>
-		/// String
-		/// </summary>
 		public static EventArgumentItem String => Instance[4];
 
-		/// <summary>
-		/// Condition
-		/// </summary>
 		public static EventArgumentItem Condition => Instance[72];
 
-		/// <summary>
-		/// Event
-		/// </summary>
 		public static EventArgumentItem Event => Instance[5];
 
-		/// <summary>
-		/// GlobalScript
-		/// </summary>
 		public static EventArgumentItem GlobalScript => Instance[48];
 
-		/// <summary>
-		/// Character
-		/// </summary>
 		public static EventArgumentItem Character => Instance[6];
 
-		/// <summary>
-		/// Item
-		/// </summary>
 		public static EventArgumentItem Item => Instance[7];
 
-		/// <summary>
-		/// ItemList
-		/// </summary>
 		public static EventArgumentItem ItemList => Instance[85];
 
-		/// <summary>
-		/// ItemTemplate
-		/// </summary>
 		public static EventArgumentItem ItemTemplate => Instance[8];
 
-		/// <summary>
-		/// ItemTemplateList
-		/// </summary>
 		public static EventArgumentItem ItemTemplateList => Instance[78];
 
-		/// <summary>
-		/// MapBlock
-		/// </summary>
 		public static EventArgumentItem MapBlock => Instance[9];
 
-		/// <summary>
-		/// MapBlockTemplate
-		/// </summary>
 		public static EventArgumentItem MapBlockTemplate => Instance[105];
 
-		/// <summary>
-		/// Settlement
-		/// </summary>
 		public static EventArgumentItem Settlement => Instance[10];
 
-		/// <summary>
-		/// SettlementType
-		/// </summary>
 		public static EventArgumentItem SettlementType => Instance[59];
 
-		/// <summary>
-		/// Sect
-		/// </summary>
 		public static EventArgumentItem Sect => Instance[11];
 
-		/// <summary>
-		/// SectFunctionStatusType
-		/// </summary>
 		public static EventArgumentItem SectFunctionStatusType => Instance[67];
 
-		/// <summary>
-		/// MapArea
-		/// </summary>
 		public static EventArgumentItem MapArea => Instance[12];
 
-		/// <summary>
-		/// MapState
-		/// </summary>
 		public static EventArgumentItem MapState => Instance[47];
 
-		/// <summary>
-		/// MapBlockMatcher
-		/// </summary>
 		public static EventArgumentItem MapBlockMatcher => Instance[58];
 
-		/// <summary>
-		/// Grade
-		/// </summary>
 		public static EventArgumentItem Grade => Instance[13];
 
-		/// <summary>
-		/// BodyPartType
-		/// </summary>
 		public static EventArgumentItem BodyPartType => Instance[14];
 
-		/// <summary>
-		/// PoisonType
-		/// </summary>
 		public static EventArgumentItem PoisonType => Instance[15];
 
-		/// <summary>
-		/// WugType
-		/// </summary>
 		public static EventArgumentItem WugType => Instance[16];
 
-		/// <summary>
-		/// BehaviorType
-		/// </summary>
 		public static EventArgumentItem BehaviorType => Instance[17];
 
-		/// <summary>
-		/// PersonalityType
-		/// </summary>
 		public static EventArgumentItem PersonalityType => Instance[18];
 
-		/// <summary>
-		/// MainAttributeType
-		/// </summary>
 		public static EventArgumentItem MainAttributeType => Instance[19];
 
-		/// <summary>
-		/// FavorabilityType
-		/// </summary>
 		public static EventArgumentItem FavorabilityType => Instance[53];
 
-		/// <summary>
-		/// CharacterPropertyReferenced
-		/// </summary>
 		public static EventArgumentItem CharacterPropertyReferenced => Instance[96];
 
-		/// <summary>
-		/// CharacterPropertyModifyType
-		/// </summary>
 		public static EventArgumentItem CharacterPropertyModifyType => Instance[97];
 
-		/// <summary>
-		/// Gender
-		/// </summary>
 		public static EventArgumentItem Gender => Instance[20];
 
-		/// <summary>
-		/// ResourceType
-		/// </summary>
 		public static EventArgumentItem ResourceType => Instance[21];
 
-		/// <summary>
-		/// ItemType
-		/// </summary>
 		public static EventArgumentItem ItemType => Instance[22];
 
-		/// <summary>
-		/// ItemSubType
-		/// </summary>
 		public static EventArgumentItem ItemSubType => Instance[23];
 
-		/// <summary>
-		/// CombatSkillType
-		/// </summary>
 		public static EventArgumentItem CombatSkillType => Instance[24];
 
-		/// <summary>
-		/// LifeSkillType
-		/// </summary>
 		public static EventArgumentItem LifeSkillType => Instance[25];
 
-		/// <summary>
-		/// LifeSkill
-		/// </summary>
 		public static EventArgumentItem LifeSkill => Instance[51];
 
-		/// <summary>
-		/// EquipmentSlot
-		/// </summary>
 		public static EventArgumentItem EquipmentSlot => Instance[26];
 
-		/// <summary>
-		/// CombatSkillEquipType
-		/// </summary>
 		public static EventArgumentItem CombatSkillEquipType => Instance[27];
 
-		/// <summary>
-		/// FiveElementsType
-		/// </summary>
 		public static EventArgumentItem FiveElementsType => Instance[28];
 
-		/// <summary>
-		/// CharacterFeature
-		/// </summary>
 		public static EventArgumentItem CharacterFeature => Instance[29];
 
-		/// <summary>
-		/// LegacyPoint
-		/// </summary>
 		public static EventArgumentItem LegacyPoint => Instance[30];
 
-		/// <summary>
-		/// CharacterDeathType
-		/// </summary>
 		public static EventArgumentItem CharacterDeathType => Instance[31];
 
-		/// <summary>
-		/// CharacterMatcher
-		/// </summary>
 		public static EventArgumentItem CharacterMatcher => Instance[60];
 
-		/// <summary>
-		/// MainStoryLineProgress
-		/// </summary>
 		public static EventArgumentItem MainStoryLineProgress => Instance[32];
 
-		/// <summary>
-		/// WorldFunctionType
-		/// </summary>
 		public static EventArgumentItem WorldFunctionType => Instance[33];
 
-		/// <summary>
-		/// CricketPartsTemplate
-		/// </summary>
 		public static EventArgumentItem CricketPartsTemplate => Instance[34];
 
-		/// <summary>
-		/// CombatSkillTemplate
-		/// </summary>
 		public static EventArgumentItem CombatSkillTemplate => Instance[35];
 
-		/// <summary>
-		/// LifeSkillTemplate
-		/// </summary>
 		public static EventArgumentItem LifeSkillTemplate => Instance[36];
 
-		/// <summary>
-		/// MerchantType
-		/// </summary>
 		public static EventArgumentItem MerchantType => Instance[37];
 
-		/// <summary>
-		/// TaskInfo
-		/// </summary>
 		public static EventArgumentItem TaskInfo => Instance[38];
 
-		/// <summary>
-		/// TaskChain
-		/// </summary>
 		public static EventArgumentItem TaskChain => Instance[39];
 
-		/// <summary>
-		/// AdventureTemplate
-		/// </summary>
 		public static EventArgumentItem AdventureTemplate => Instance[40];
 
-		/// <summary>
-		/// ConditionOperator
-		/// </summary>
 		public static EventArgumentItem ConditionOperator => Instance[41];
 
-		/// <summary>
-		/// CombatConfig
-		/// </summary>
 		public static EventArgumentItem CombatConfig => Instance[42];
 
-		/// <summary>
-		/// CombatResultType
-		/// </summary>
 		public static EventArgumentItem CombatResultType => Instance[43];
 
-		/// <summary>
-		/// CombatType
-		/// </summary>
 		public static EventArgumentItem CombatType => Instance[84];
 
-		/// <summary>
-		/// EventActorTemplate
-		/// </summary>
 		public static EventArgumentItem EventActorTemplate => Instance[44];
 
-		/// <summary>
-		/// EnemyCharacterTemplate
-		/// </summary>
 		public static EventArgumentItem EnemyCharacterTemplate => Instance[45];
 
-		/// <summary>
-		/// FixedCharacterTemplate
-		/// </summary>
 		public static EventArgumentItem FixedCharacterTemplate => Instance[46];
 
-		/// <summary>
-		/// CharacterSearchRange
-		/// </summary>
 		public static EventArgumentItem CharacterSearchRange => Instance[49];
 
-		/// <summary>
-		/// CharacterFilterRules
-		/// </summary>
 		public static EventArgumentItem CharacterFilterRules => Instance[50];
 
-		/// <summary>
-		/// Profession
-		/// </summary>
 		public static EventArgumentItem Profession => Instance[52];
 
-		/// <summary>
-		/// ProfessionSkill
-		/// </summary>
 		public static EventArgumentItem ProfessionSkill => Instance[107];
 
-		/// <summary>
-		/// MonthlyActions
-		/// </summary>
 		public static EventArgumentItem MonthlyActions => Instance[54];
 
-		/// <summary>
-		/// BuildingBlockTemplate
-		/// </summary>
 		public static EventArgumentItem BuildingBlockTemplate => Instance[55];
 
-		/// <summary>
-		/// MerchantTemplate
-		/// </summary>
 		public static EventArgumentItem MerchantTemplate => Instance[56];
 
-		/// <summary>
-		/// AgeGroup
-		/// </summary>
 		public static EventArgumentItem AgeGroup => Instance[57];
 
-		/// <summary>
-		/// WorldFavorability
-		/// </summary>
 		public static EventArgumentItem WorldFavorability => Instance[63];
 
-		/// <summary>
-		/// AdventureRemakeElementCoreId
-		/// </summary>
 		public static EventArgumentItem AdventureRemakeElementCoreId => Instance[61];
 
-		/// <summary>
-		/// AdventureRemakeElementTag
-		/// </summary>
 		public static EventArgumentItem AdventureRemakeElementTag => Instance[62];
 
-		/// <summary>
-		/// EnemyNestTemplate
-		/// </summary>
 		public static EventArgumentItem EnemyNestTemplate => Instance[64];
 
-		/// <summary>
-		/// AdventureRemakeBlockRangeType
-		/// </summary>
 		public static EventArgumentItem AdventureRemakeBlockRangeType => Instance[65];
 
-		/// <summary>
-		/// AdventureRemakeViewType
-		/// </summary>
 		public static EventArgumentItem AdventureRemakeViewType => Instance[66];
 
-		/// <summary>
-		/// StateTaskStatus
-		/// </summary>
 		public static EventArgumentItem StateTaskStatus => Instance[68];
 
-		/// <summary>
-		/// CharacterTemplate
-		/// </summary>
 		public static EventArgumentItem CharacterTemplate => Instance[69];
 
-		/// <summary>
-		/// NpcCombatResultType
-		/// </summary>
 		public static EventArgumentItem NpcCombatResultType => Instance[70];
 
-		/// <summary>
-		/// MajorEventTemplate
-		/// </summary>
 		public static EventArgumentItem MajorEventTemplate => Instance[71];
 
-		/// <summary>
-		/// TagArrayMatchType
-		/// </summary>
 		public static EventArgumentItem TagArrayMatchType => Instance[73];
 
-		/// <summary>
-		/// RandomEnemyCharacterTemplate
-		/// </summary>
 		public static EventArgumentItem RandomEnemyCharacterTemplate => Instance[74];
 
-		/// <summary>
-		/// RandomEnemyTemplate
-		/// </summary>
 		public static EventArgumentItem RandomEnemyTemplate => Instance[75];
 
-		/// <summary>
-		/// NeiliAllocationType
-		/// </summary>
 		public static EventArgumentItem NeiliAllocationType => Instance[76];
 
-		/// <summary>
-		/// EventCommonOptionType
-		/// </summary>
 		public static EventArgumentItem EventCommonOptionType => Instance[77];
 
-		/// <summary>
-		/// EquipmentEffect
-		/// </summary>
 		public static EventArgumentItem EquipmentEffect => Instance[79];
 
-		/// <summary>
-		/// InstantNotificationTemplate
-		/// </summary>
 		public static EventArgumentItem InstantNotificationTemplate => Instance[80];
 
-		/// <summary>
-		/// AdventureRemakeTemplate
-		/// </summary>
 		public static EventArgumentItem AdventureRemakeTemplate => Instance[81];
 
-		/// <summary>
-		/// AdventureElement
-		/// </summary>
 		public static EventArgumentItem AdventureElement => Instance[82];
 
-		/// <summary>
-		/// HarmfulActionPhase
-		/// </summary>
 		public static EventArgumentItem HarmfulActionPhase => Instance[83];
 
-		/// <summary>
-		/// CutsceneTemplate
-		/// </summary>
 		public static EventArgumentItem CutsceneTemplate => Instance[86];
 
-		/// <summary>
-		/// CgTextureTemplate
-		/// </summary>
 		public static EventArgumentItem CgTextureTemplate => Instance[101];
 
-		/// <summary>
-		/// AdventureBlockIndex
-		/// </summary>
 		public static EventArgumentItem AdventureBlockIndex => Instance[87];
 
-		/// <summary>
-		/// RelationType
-		/// </summary>
 		public static EventArgumentItem RelationType => Instance[88];
 
-		/// <summary>
-		/// OneWayRelationType
-		/// </summary>
 		public static EventArgumentItem OneWayRelationType => Instance[127];
 
-		/// <summary>
-		/// SectMainStoryEventArgKey
-		/// </summary>
 		public static EventArgumentItem SectMainStoryEventArgKey => Instance[89];
 
-		/// <summary>
-		/// InteractionEventOption
-		/// </summary>
 		public static EventArgumentItem InteractionEventOption => Instance[90];
 
-		/// <summary>
-		/// LanguageKey
-		/// </summary>
 		public static EventArgumentItem LanguageKey => Instance[91];
 
-		/// <summary>
-		/// NormalInformation
-		/// </summary>
 		public static EventArgumentItem NormalInformation => Instance[92];
 
-		/// <summary>
-		/// MonthlyEventTemplate
-		/// </summary>
 		public static EventArgumentItem MonthlyEventTemplate => Instance[93];
 
-		/// <summary>
-		/// MonthlyNotificationTemplate
-		/// </summary>
 		public static EventArgumentItem MonthlyNotificationTemplate => Instance[94];
 
-		/// <summary>
-		/// GraveLevel
-		/// </summary>
 		public static EventArgumentItem GraveLevel => Instance[95];
 
-		/// <summary>
-		/// NormalInformationData
-		/// </summary>
 		public static EventArgumentItem NormalInformationData => Instance[98];
 
-		/// <summary>
-		/// InformationType
-		/// </summary>
 		public static EventArgumentItem InformationType => Instance[99];
 
-		/// <summary>
-		/// TutorialVideoTemplate
-		/// </summary>
 		public static EventArgumentItem TutorialVideoTemplate => Instance[100];
 
-		/// <summary>
-		/// InventoryItemOperationType
-		/// </summary>
 		public static EventArgumentItem InventoryItemOperationType => Instance[102];
 
-		/// <summary>
-		/// TutorialFunctionType
-		/// </summary>
 		public static EventArgumentItem TutorialFunctionType => Instance[103];
 
-		/// <summary>
-		/// TutorialChapter
-		/// </summary>
 		public static EventArgumentItem TutorialChapter => Instance[104];
 
-		/// <summary>
-		/// EventActionKey
-		/// </summary>
 		public static EventArgumentItem EventActionKey => Instance[106];
 
-		/// <summary>
-		/// EventTriggerParameter
-		/// </summary>
 		public static EventArgumentItem EventTriggerParameter => Instance[108];
 
-		/// <summary>
-		/// SectGoodness
-		/// </summary>
 		public static EventArgumentItem SectGoodness => Instance[111];
 
-		/// <summary>
-		/// GuidingChapter
-		/// </summary>
 		public static EventArgumentItem GuidingChapter => Instance[112];
 
-		/// <summary>
-		/// GuidingChapterState
-		/// </summary>
 		public static EventArgumentItem GuidingChapterState => Instance[113];
 
-		/// <summary>
-		/// GuidingChapterTrigger
-		/// </summary>
 		public static EventArgumentItem GuidingChapterTrigger => Instance[114];
 
-		/// <summary>
-		/// TaiwuLifeSummaryType
-		/// </summary>
 		public static EventArgumentItem TaiwuLifeSummaryType => Instance[115];
 
-		/// <summary>
-		/// StatInfo
-		/// </summary>
 		public static EventArgumentItem StatInfo => Instance[116];
 
-		/// <summary>
-		/// XiangshuAvatarId
-		/// </summary>
 		public static EventArgumentItem XiangshuAvatarId => Instance[118];
 
-		/// <summary>
-		/// JuniorXiangshuTaskStatus
-		/// </summary>
 		public static EventArgumentItem JuniorXiangshuTaskStatus => Instance[119];
 
-		/// <summary>
-		/// XiangshuAvatarDisplayStatus
-		/// </summary>
 		public static EventArgumentItem XiangshuAvatarDisplayStatus => Instance[120];
 
-		/// <summary>
-		/// SwordTombInformationType
-		/// </summary>
 		public static EventArgumentItem SwordTombInformationType => Instance[121];
 
-		/// <summary>
-		/// EventSelectCharacterRange
-		/// </summary>
 		public static EventArgumentItem EventSelectCharacterRange => Instance[122];
 
-		/// <summary>
-		/// Weather
-		/// </summary>
 		public static EventArgumentItem Weather => Instance[123];
 
-		/// <summary>
-		/// CharacterTitle
-		/// </summary>
 		public static EventArgumentItem CharacterTitle => Instance[124];
 
-		/// <summary>
-		/// Fame
-		/// </summary>
 		public static EventArgumentItem Fame => Instance[125];
 
-		/// <summary>
-		/// Clothing
-		/// </summary>
 		public static EventArgumentItem Clothing => Instance[126];
 
-		/// <summary>
-		/// TwelveImmortals
-		/// </summary>
 		public static EventArgumentItem TwelveImmortals => Instance[128];
 
-		/// <summary>
-		/// AssisterDefeatTwelveImmortalsProgress
-		/// </summary>
 		public static EventArgumentItem AssisterDefeatTwelveImmortalsProgress => Instance[129];
+
+		public static EventArgumentItem ChickenTemplate => Instance[130];
+
+		public static EventArgumentItem DlcTemplate => Instance[131];
+
+		public static EventArgumentItem DlcEventArgKey => Instance[132];
+
+		public static EventArgumentItem TwelveImmortalsStatus => Instance[133];
+
+		public static EventArgumentItem TwelveImmortalsCharacterTemplate => Instance[134];
+
+		public static EventArgumentItem ThreeRealmsPowerCharacterTemplate => Instance[135];
+
+		public static EventArgumentItem NewFunctionUnlockTemplate => Instance[136];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventArgument Instance = new EventArgument();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "CustomEnumText", "TemplateId", "DefaultValue", "ConfigTable" };
@@ -1731,12 +988,29 @@ public class EventArgument : ConfigData<EventArgumentItem, int>
 			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_129_4"),
 			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_129_5")
 		}, new int[6] { 0, 1, 2, 3, 4, 5 }, new IntPair(0, 0)));
+		_dataArray.Add(new EventArgumentItem(130, EEventArgumentType.Enum, LocalStringManager.GetConfig("EventArgument_language", "Name_130"), LocalStringManager.GetConfig("EventArgument_language", "Desc_130"), null, isExpression: false, allowSwitchingExpression: true, "Chicken", new string[0], new int[0], new IntPair(0, 0)));
+		_dataArray.Add(new EventArgumentItem(131, EEventArgumentType.Enum, LocalStringManager.GetConfig("EventArgument_language", "Name_131"), LocalStringManager.GetConfig("EventArgument_language", "Desc_131"), null, isExpression: false, allowSwitchingExpression: true, "ImplementedDlc", new string[0], new int[0], new IntPair(0, 0)));
+		_dataArray.Add(new EventArgumentItem(132, EEventArgumentType.Enum, LocalStringManager.GetConfig("EventArgument_language", "Name_132"), LocalStringManager.GetConfig("EventArgument_language", "Desc_132"), null, isExpression: false, allowSwitchingExpression: true, "DlcEventArgKey", new string[0], new int[0], new IntPair(0, 0)));
+		_dataArray.Add(new EventArgumentItem(133, EEventArgumentType.Enum, LocalStringManager.GetConfig("EventArgument_language", "Name_133"), LocalStringManager.GetConfig("EventArgument_language", "Desc_133"), null, isExpression: false, allowSwitchingExpression: true, null, new string[3]
+		{
+			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_133_0"),
+			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_133_1"),
+			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_133_2")
+		}, new int[3] { 0, 1, 2 }, new IntPair(0, 0)));
+		_dataArray.Add(new EventArgumentItem(134, EEventArgumentType.Enum, LocalStringManager.GetConfig("EventArgument_language", "Name_134"), LocalStringManager.GetConfig("EventArgument_language", "Desc_134"), null, isExpression: false, allowSwitchingExpression: true, "Character", new string[0], new int[0], new IntPair(1075, 1086)));
+		_dataArray.Add(new EventArgumentItem(135, EEventArgumentType.Enum, LocalStringManager.GetConfig("EventArgument_language", "Name_135"), LocalStringManager.GetConfig("EventArgument_language", "Desc_135"), null, isExpression: false, allowSwitchingExpression: true, "Character", new string[3]
+		{
+			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_135_0"),
+			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_135_1"),
+			LocalStringManager.GetConfig("EventArgument_language", "CustomEnumText_135_2")
+		}, new int[3] { 913, 916, 914 }, new IntPair(0, 0)));
+		_dataArray.Add(new EventArgumentItem(136, EEventArgumentType.Enum, LocalStringManager.GetConfig("EventArgument_language", "Name_136"), LocalStringManager.GetConfig("EventArgument_language", "Desc_136"), null, isExpression: false, allowSwitchingExpression: true, "NewFunctionUnlock", new string[0], new int[0], new IntPair(0, 0)));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<EventArgumentItem>(130);
+		_dataArray = new List<EventArgumentItem>(137);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

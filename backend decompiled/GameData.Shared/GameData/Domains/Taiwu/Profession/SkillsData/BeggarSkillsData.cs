@@ -9,9 +9,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 乞丐相关数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class BeggarSkillsData : IProfessionSkillsData, ISerializableGameData
 {
@@ -30,48 +27,28 @@ public class BeggarSkillsData : IProfessionSkillsData, ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "LookingForCharName", "AlreadyFoundCharacters", "ForbiddenLocations", "EatenItems" };
 	}
 
-	/// <summary>
-	/// 正在寻找的角色姓名
-	/// </summary>
 	[SerializableGameDataField]
 	public string LookingForCharName;
 
-	/// <summary>
-	/// 已经被找到过的角色ID集合
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet AlreadyFoundCharacters;
 
-	/// <summary>
-	/// 乞丐2技能芜行俚语禁止的地块，过月后需要清除
-	/// </summary>
 	[SerializableGameDataField]
 	public List<Location> ForbiddenLocations;
 
-	/// <summary>
-	/// 乞丐4技能服食的物品ItemKey列表
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public List<ItemKey> EatenItems;
 
-	/// <summary>
-	/// 找到更多活着的角色
-	/// </summary>
 	public bool FoundMoreAlive;
 
-	/// <summary>
-	/// 找到更多死亡的角色
-	/// </summary>
 	public bool FoundMoreDead;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		ClearData();
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 		if (sourceData is ObsoleteBeggarSkillsData skillsData)
@@ -87,9 +64,6 @@ public class BeggarSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 清除数据
-	/// </summary>
 	public void ClearData()
 	{
 		LookingForCharName = null;
@@ -114,20 +88,11 @@ public class BeggarSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
-	public BeggarSkillsData()
-	{
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -142,7 +107,6 @@ public class BeggarSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -211,7 +175,6 @@ public class BeggarSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

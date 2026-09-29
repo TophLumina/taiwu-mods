@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 角色ID与名称相关数据的封装结构体
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct CharNameRelatedData(int charId, NameRelatedData nameData) : ISerializableGameData
 {
@@ -14,13 +11,11 @@ public struct CharNameRelatedData(int charId, NameRelatedData nameData) : ISeria
 	[SerializableGameDataField]
 	public NameRelatedData NameData = nameData;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 36;
@@ -31,7 +26,6 @@ public struct CharNameRelatedData(int charId, NameRelatedData nameData) : ISeria
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -46,7 +40,6 @@ public struct CharNameRelatedData(int charId, NameRelatedData nameData) : ISeria
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

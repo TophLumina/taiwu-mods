@@ -6,49 +6,29 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 乞丐相关数据
-/// </summary>
 [Obsolete]
 [SerializableGameData(NotForDisplayModule = true)]
 public class ObsoleteBeggarSkillsData : IProfessionSkillsData, ISerializableGameData
 {
-	/// <summary>
-	/// 正在寻找的角色姓名
-	/// </summary>
 	[SerializableGameDataField]
 	public string LookingForCharName;
 
-	/// <summary>
-	/// 已经被找到过的角色ID集合
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet AlreadyFoundCharacters;
 
-	/// <summary>
-	/// 找到更多活着的角色
-	/// </summary>
 	public bool FoundMoreAlive;
 
-	/// <summary>
-	/// 找到更多死亡的角色
-	/// </summary>
 	public bool FoundMoreDead;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		ClearData();
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 	}
 
-	/// <summary>
-	/// 清除数据
-	/// </summary>
 	public void ClearData()
 	{
 		LookingForCharName = null;
@@ -57,13 +37,11 @@ public class ObsoleteBeggarSkillsData : IProfessionSkillsData, ISerializableGame
 		FoundMoreAlive = false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -76,7 +54,6 @@ public class ObsoleteBeggarSkillsData : IProfessionSkillsData, ISerializableGame
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -111,7 +88,6 @@ public class ObsoleteBeggarSkillsData : IProfessionSkillsData, ISerializableGame
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

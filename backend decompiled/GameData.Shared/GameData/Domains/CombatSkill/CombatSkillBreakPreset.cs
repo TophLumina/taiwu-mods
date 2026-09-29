@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法突破预设
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class CombatSkillBreakPreset : ISerializableGameData
 {
@@ -21,22 +18,12 @@ public class CombatSkillBreakPreset : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "CurrentIndex", "Presets" };
 	}
 
-	/// <summary>
-	/// 当前突破预设索引
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int CurrentIndex;
 
-	/// <summary>
-	/// 突破预设
-	/// 索引与 <see cref="F:GameData.Domains.CombatSkill.CombatSkillBreakPreset.CurrentIndex" /> 相同时值无效
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public List<CombatSkillBreakSnapshot> Presets;
 
-	/// <summary>
-	/// 是否有任意完成突破的突破盘
-	/// </summary>
 	public bool AnySuccess
 	{
 		get
@@ -57,16 +44,10 @@ public class CombatSkillBreakPreset : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CombatSkillBreakPreset()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillBreakPreset(CombatSkillBreakPreset other)
 	{
 		CurrentIndex = other.CurrentIndex;
@@ -86,9 +67,6 @@ public class CombatSkillBreakPreset : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillBreakPreset other)
 	{
 		CurrentIndex = other.CurrentIndex;
@@ -108,13 +86,11 @@ public class CombatSkillBreakPreset : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -139,7 +115,6 @@ public class CombatSkillBreakPreset : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -185,7 +160,6 @@ public class CombatSkillBreakPreset : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -8,79 +8,43 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 太吾的批量操作界面数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 [SerializableGameData(NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class TaiwuItemMultiplyOperationDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 太吾的人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData CharacterDisplayData;
 
-	/// <summary>
-	/// 当前行囊负重
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurInventoryLoad;
 
-	/// <summary>
-	/// 最大行囊负重
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxInventoryLoad;
 
 	[SerializableGameDataField]
 	public int MoveTimeCostPercent;
 
-	/// <summary>
-	/// 当前仓库负重
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurWarehouseLoad;
 
-	/// <summary>
-	/// 最大仓库负重
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxWarehouseLoad;
 
-	/// <summary>
-	/// 行囊物品显示数据，包括资源和装备栏
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> InventoryItems;
 
-	/// <summary>
-	/// 私库物品显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> WarehouseItems;
 
-	/// <summary>
-	/// 公库物品显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> TreasuryItems;
 
-	/// <summary>
-	/// 货仓物品显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> StockItems;
 
-	/// <summary>
-	/// 徒手工具
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey EmptyToolKey;
 
-	/// <summary>
-	/// 太吾能否使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransferItemToWarehouse;
 
@@ -91,7 +55,7 @@ public class TaiwuItemMultiplyOperationDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 21;
+		int totalSize = 29;
 		totalSize = ((CharacterDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CharacterDisplayData.GetSerializedSize())));
 		if (InventoryItems != null)
 		{
@@ -141,7 +105,6 @@ public class TaiwuItemMultiplyOperationDisplayData : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize += EmptyToolKey.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

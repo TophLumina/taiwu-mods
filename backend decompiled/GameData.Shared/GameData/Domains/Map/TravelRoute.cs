@@ -4,24 +4,12 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 长途旅行路线
-/// </summary>
 public class TravelRoute : ISerializableGameData
 {
-	/// <summary>
-	/// 途经世界坐标列表。不包括起点和终点
-	/// </summary>
 	public readonly List<ByteCoordinate> PosList = new List<ByteCoordinate>();
 
-	/// <summary>
-	/// 途经区域列表。不含起点
-	/// </summary>
 	public readonly List<short> AreaList = new List<short>();
 
-	/// <summary>
-	/// 消耗天数列表。元素数量与途径区域相同，表示到达该区域所需花费的时间
-	/// </summary>
 	public readonly List<short> CostList = new List<short>();
 
 	public TravelRoute()
@@ -38,9 +26,6 @@ public class TravelRoute : ISerializableGameData
 		CostList.AddRange(other.CostList);
 	}
 
-	/// <summary>
-	/// 获取总消耗天数
-	/// </summary>
 	public short GetTotalTimeCost()
 	{
 		int totalTimeCost = 0;

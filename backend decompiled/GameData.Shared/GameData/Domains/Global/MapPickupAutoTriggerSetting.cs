@@ -3,27 +3,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Global;
 
-/// <summary>
-/// 自动拾取设置
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class MapPickupAutoTriggerSetting : ISerializableGameData
 {
-	/// <summary>
-	/// 是否拾取包含敌人的
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IncludeXiangshuMinion;
 
-	/// <summary>
-	/// 对于道具，只拾取这个品级以上的
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MinGrade;
 
-	/// <summary>
-	/// 只拾取哪些类型
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] PickupTypes = new bool[14];
 
@@ -62,13 +50,11 @@ public class MapPickupAutoTriggerSetting : ISerializableGameData
 		return mask;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -80,7 +66,6 @@ public class MapPickupAutoTriggerSetting : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -113,7 +98,6 @@ public class MapPickupAutoTriggerSetting : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -7,1391 +7,560 @@ namespace Config;
 [Serializable]
 public class SecretInformationEffect : ConfigData<SecretInformationEffectItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 人物死亡
-		/// </summary>
 		public const short Die = 0;
 
-		/// <summary>
-		/// 公开杀害
-		/// </summary>
 		public const short KillInPublic = 1;
 
-		/// <summary>
-		/// 公开关押
-		/// </summary>
 		public const short KidnapInPublic = 2;
 
-		/// <summary>
-		/// 惩戒杀害
-		/// </summary>
 		public const short KillForPunishment = 3;
 
-		/// <summary>
-		/// 惩戒关押
-		/// </summary>
 		public const short KidnapForPunishment = 4;
 
-		/// <summary>
-		/// 天降资源
-		/// </summary>
 		public const short UnexpectedResourceGain = 5;
 
-		/// <summary>
-		/// 天降财宝
-		/// </summary>
 		public const short UnexpectedItemGain = 6;
 
-		/// <summary>
-		/// 天赐秘籍
-		/// </summary>
 		public const short UnexpectedSkillBookGain = 7;
 
-		/// <summary>
-		/// 天助疗愈
-		/// </summary>
 		public const short UnexpectedCure = 8;
 
-		/// <summary>
-		/// 天损资源
-		/// </summary>
 		public const short UnexpectedResourceLose = 9;
 
-		/// <summary>
-		/// 天损财宝
-		/// </summary>
 		public const short UnexpectedItemLose = 10;
 
-		/// <summary>
-		/// 天损秘籍
-		/// </summary>
 		public const short UnexpectedSkillBookLose = 11;
 
-		/// <summary>
-		/// 天降灾刑
-		/// </summary>
 		public const short UnexpectedHarm = 12;
 
-		/// <summary>
-		/// 较艺胜利
-		/// </summary>
 		public const short LifeSkillBattleWin = 13;
 
-		/// <summary>
-		/// 促织战胜
-		/// </summary>
 		public const short CricketBattleWin = 14;
 
-		/// <summary>
-		/// 战斗大胜
-		/// </summary>
 		public const short MajorVictoryInCombat = 15;
 
-		/// <summary>
-		/// 战斗胜利
-		/// </summary>
 		public const short MinorVictoryInCombat = 16;
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public const short Mourn = 17;
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public const short OfferProtection = 18;
 
-		/// <summary>
-		/// 痛失骨肉
-		/// </summary>
 		public const short LoseFetus = 19;
 
-		/// <summary>
-		/// 痛失骨肉2
-		/// </summary>
 		public const short LoseFetus2 = 20;
 
-		/// <summary>
-		/// 生下孩子
-		/// </summary>
 		public const short GiveBirthToChild = 21;
 
-		/// <summary>
-		/// 生下孩子2
-		/// </summary>
 		public const short GiveBirthToChild2 = 22;
 
-		/// <summary>
-		/// 遗弃孩子
-		/// </summary>
 		public const short AbandonChild = 23;
 
-		/// <summary>
-		/// 释放俘虏
-		/// </summary>
 		public const short ReleaseKidnappedCharacter = 24;
 
-		/// <summary>
-		/// 解救俘虏
-		/// </summary>
 		public const short RescueKidnappedCharacter = 25;
 
-		/// <summary>
-		/// 逃脱关押
-		/// </summary>
 		public const short KidnappedCharacterEscaped = 26;
 
-		/// <summary>
-		/// 研读失败
-		/// </summary>
 		public const short ReadBookFail = 27;
 
-		/// <summary>
-		/// 突破失败
-		/// </summary>
 		public const short BreakoutFail = 28;
 
-		/// <summary>
-		/// 遗失宝物
-		/// </summary>
 		public const short LoseOverloadingItem = 29;
 
-		/// <summary>
-		/// 化解仇怨
-		/// </summary>
 		public const short SeverEnemy = 30;
 
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public const short BecomeEnemy = 31;
 
-		/// <summary>
-		/// 结为好友
-		/// </summary>
 		public const short BecomeFriend = 32;
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public const short SeverFriend = 33;
 
-		/// <summary>
-		/// 两情相悦
-		/// </summary>
 		public const short BecomeLover = 34;
 
-		/// <summary>
-		/// 恋人分手
-		/// </summary>
 		public const short BreakupWithLover = 35;
 
-		/// <summary>
-		/// 共结连理
-		/// </summary>
 		public const short BecomeHusbandAndWife = 36;
 
-		/// <summary>
-		/// 义结金兰
-		/// </summary>
 		public const short BecomeSwornBrothersAndSisters = 37;
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public const short SeverSwornBrothersAndSisters = 38;
 
-		/// <summary>
-		/// 拜认义亲
-		/// </summary>
 		public const short GetAdopted = 39;
 
-		/// <summary>
-		/// 收养子女
-		/// </summary>
 		public const short AdoptChild = 40;
 
-		/// <summary>
-		/// 赠送资源
-		/// </summary>
 		public const short GivingResource = 41;
 
-		/// <summary>
-		/// 赠送道具
-		/// </summary>
 		public const short GiveItem = 42;
 
-		/// <summary>
-		/// 修建坟墓
-		/// </summary>
 		public const short BuildGrave = 43;
 
-		/// <summary>
-		/// 施医赠药
-		/// </summary>
 		public const short Cure = 44;
 
-		/// <summary>
-		/// 修补道具
-		/// </summary>
 		public const short RepairItem = 45;
 
-		/// <summary>
-		/// 指点技艺
-		/// </summary>
 		public const short InstructOnLifeSkill = 46;
 
-		/// <summary>
-		/// 指点武学
-		/// </summary>
 		public const short InstructOnCombatSkill = 47;
 
-		/// <summary>
-		/// 同意疗伤
-		/// </summary>
 		public const short AcceptRequestHealInjury = 48;
 
-		/// <summary>
-		/// 同意驱毒
-		/// </summary>
 		public const short AcceptRequestDetoxPoison = 49;
 
-		/// <summary>
-		/// 同意续命
-		/// </summary>
 		public const short AcceptRequestIncreaseHealth = 50;
 
-		/// <summary>
-		/// 同意调息
-		/// </summary>
 		public const short AcceptRequestRestoreDisorderOfQi = 51;
 
-		/// <summary>
-		/// 同意补内
-		/// </summary>
 		public const short AcceptRequestIncreaseNeili = 52;
 
-		/// <summary>
-		/// 同意灭蛊
-		/// </summary>
 		public const short AcceptRequestKillWug = 53;
 
-		/// <summary>
-		/// 同意乞食
-		/// </summary>
 		public const short AcceptRequestFood = 54;
 
-		/// <summary>
-		/// 同意茶酒
-		/// </summary>
 		public const short AcceptRequestTeaWine = 55;
 
-		/// <summary>
-		/// 同意资源
-		/// </summary>
 		public const short AcceptRequestResource = 56;
 
-		/// <summary>
-		/// 同意道具
-		/// </summary>
 		public const short AcceptRequestItem = 57;
 
-		/// <summary>
-		/// 同意对饮
-		/// </summary>
 		public const short AcceptRequestDrinking = 58;
 
-		/// <summary>
-		/// 同意施舍
-		/// </summary>
 		public const short AcceptRequestGivingMoney = 59;
 
-		/// <summary>
-		/// 同意研读
-		/// </summary>
 		public const short AcceptRequestInstructionOnReading = 60;
 
-		/// <summary>
-		/// 同意突破
-		/// </summary>
 		public const short AcceptRequestInstructionOnBreakout = 61;
 
-		/// <summary>
-		/// 同意修理
-		/// </summary>
 		public const short AcceptRequestRepairItem = 62;
 
-		/// <summary>
-		/// 同意淬毒
-		/// </summary>
 		public const short AcceptRequestAddPoisonToItem = 63;
 
-		/// <summary>
-		/// 同意技艺
-		/// </summary>
 		public const short AcceptRequestInstructionOnLifeSkill = 64;
 
-		/// <summary>
-		/// 同意武学
-		/// </summary>
 		public const short AcceptRequestInstructionOnCombatSkill = 65;
 
-		/// <summary>
-		/// 梳头成功
-		/// </summary>
 		public const short RehaircutSuccess = 66;
 
-		/// <summary>
-		/// 梳头失误
-		/// </summary>
 		public const short RehaircutIncompleted = 67;
 
-		/// <summary>
-		/// 梳头失败
-		/// </summary>
 		public const short RehaircutFail = 68;
 
-		/// <summary>
-		/// 拒绝疗伤
-		/// </summary>
 		public const short RefuseRequestHealInjury = 69;
 
-		/// <summary>
-		/// 拒绝驱毒
-		/// </summary>
 		public const short RefuseRequestDetoxPoison = 70;
 
-		/// <summary>
-		/// 拒绝续命
-		/// </summary>
 		public const short RefuseRequestIncreaseHealth = 71;
 
-		/// <summary>
-		/// 拒绝调息
-		/// </summary>
 		public const short RefuseRequestRestoreDisorderOfQi = 72;
 
-		/// <summary>
-		/// 拒绝补内
-		/// </summary>
 		public const short RefuseRequestIncreaseNeili = 73;
 
-		/// <summary>
-		/// 拒绝灭蛊
-		/// </summary>
 		public const short RefuseRequestKillWug = 74;
 
-		/// <summary>
-		/// 拒绝乞食
-		/// </summary>
 		public const short RefuseRequestFood = 75;
 
-		/// <summary>
-		/// 拒绝茶酒
-		/// </summary>
 		public const short RefuseRequestTeaWine = 76;
 
-		/// <summary>
-		/// 拒绝资源
-		/// </summary>
 		public const short RefuseRequestResource = 77;
 
-		/// <summary>
-		/// 拒绝道具
-		/// </summary>
 		public const short RefuseRequestItem = 78;
 
-		/// <summary>
-		/// 拒绝对饮
-		/// </summary>
 		public const short RefuseRequestDrinking = 79;
 
-		/// <summary>
-		/// 拒绝施舍
-		/// </summary>
 		public const short RefuseRequestGivingMoney = 80;
 
-		/// <summary>
-		/// 拒绝研读
-		/// </summary>
 		public const short RefuseRequestInstructionOnReading = 81;
 
-		/// <summary>
-		/// 拒绝突破
-		/// </summary>
 		public const short RefuseRequestInstructionOnBreakout = 82;
 
-		/// <summary>
-		/// 拒绝修理
-		/// </summary>
 		public const short RefuseRequestRepairItem = 83;
 
-		/// <summary>
-		/// 拒绝淬毒
-		/// </summary>
 		public const short RefuseRequestAddPoisonToItem = 84;
 
-		/// <summary>
-		/// 拒绝技艺
-		/// </summary>
 		public const short RefuseRequestInstructionOnLifeSkill = 85;
 
-		/// <summary>
-		/// 拒绝武学
-		/// </summary>
 		public const short RefuseRequestInstructionOnCombatSkill = 86;
 
-		/// <summary>
-		/// 盗掘资源
-		/// </summary>
 		public const short RobGraveResource = 87;
 
-		/// <summary>
-		/// 窃取资源
-		/// </summary>
 		public const short StealResource = 88;
 
-		/// <summary>
-		/// 骗取资源
-		/// </summary>
 		public const short ScamResource = 89;
 
-		/// <summary>
-		/// 夺取资源
-		/// </summary>
 		public const short RobResource = 90;
 
-		/// <summary>
-		/// 盗掘道具
-		/// </summary>
 		public const short RobGraveItem = 91;
 
-		/// <summary>
-		/// 窃取道具
-		/// </summary>
 		public const short StealItem = 92;
 
-		/// <summary>
-		/// 骗取道具
-		/// </summary>
 		public const short ScamItem = 93;
 
-		/// <summary>
-		/// 夺取道具
-		/// </summary>
 		public const short RobItem = 94;
 
-		/// <summary>
-		/// 秘密杀害
-		/// </summary>
 		public const short KillInPrivate = 95;
 
-		/// <summary>
-		/// 秘密关押
-		/// </summary>
 		public const short KidnapInPrivate = 96;
 
-		/// <summary>
-		/// 毒害他人
-		/// </summary>
 		public const short PoisonEnemy = 97;
 
-		/// <summary>
-		/// 损伤他人
-		/// </summary>
 		public const short PlotHarmEnemy = 98;
 
-		/// <summary>
-		/// 窃取技艺
-		/// </summary>
 		public const short StealLifeSkill = 99;
 
-		/// <summary>
-		/// 骗取技艺
-		/// </summary>
 		public const short ScamLifeSkill = 100;
 
-		/// <summary>
-		/// 窃取武学
-		/// </summary>
 		public const short StealCombatSkill = 101;
 
-		/// <summary>
-		/// 骗取武学
-		/// </summary>
 		public const short ScamCombatSkill = 102;
 
-		/// <summary>
-		/// 道具淬毒
-		/// </summary>
 		public const short AddPoisonToItem = 103;
 
-		/// <summary>
-		/// 饮食破戒
-		/// </summary>
 		public const short MonkBreakRule = 104;
 
-		/// <summary>
-		/// 非法春宵
-		/// </summary>
 		public const short MakeLoveIllegal = 105;
 
-		/// <summary>
-		/// 情难自禁
-		/// </summary>
 		public const short Rape = 106;
 
-		/// <summary>
-		/// 痛失骨肉父亲不可知
-		/// </summary>
 		public const short LoseFetusFatherUnknown = 107;
 
-		/// <summary>
-		/// 生下孩子父亲不可知
-		/// </summary>
 		public const short GiveBirthToChildFatherUnknown = 108;
 
-		/// <summary>
-		/// 与人约会
-		/// </summary>
 		public const short DatingWithCrush = 109;
 
-		/// <summary>
-		/// 迫使不语
-		/// </summary>
 		public const short ForcingSilence = 110;
 
-		/// <summary>
-		/// 寻回子女
-		/// </summary>
 		public const short RetrieveChild = 111;
 
-		/// <summary>
-		/// 解读经文1
-		/// </summary>
 		public const short SolveScripture1 = 112;
 
-		/// <summary>
-		/// 解读经文2
-		/// </summary>
 		public const short SolveScripture2 = 113;
 
-		/// <summary>
-		/// 解读经文3
-		/// </summary>
 		public const short SolveScripture3 = 114;
 
-		/// <summary>
-		/// 解读经文4
-		/// </summary>
 		public const short SolveScripture4 = 115;
 
-		/// <summary>
-		/// 公开越狱
-		/// </summary>
 		public const short PrisonBreak = 116;
 
-		/// <summary>
-		/// 身怀六甲
-		/// </summary>
 		public const short Pregnant = 117;
 
-		/// <summary>
-		/// 身怀六甲父亲未知
-		/// </summary>
 		public const short PregnantWithoutFather = 118;
 
-		/// <summary>
-		/// 人物入魔
-		/// </summary>
 		public const short XiangshuType0 = 119;
 
-		/// <summary>
-		/// 人物入邪
-		/// </summary>
 		public const short XiangshuType1 = 120;
 
-		/// <summary>
-		/// 人物出家
-		/// </summary>
 		public const short BecomeMonk = 121;
 
-		/// <summary>
-		/// 人物离婚
-		/// </summary>
 		public const short Divorce = 122;
 
-		/// <summary>
-		/// 拜为师父
-		/// </summary>
 		public const short BecomeMaster = 123;
 
-		/// <summary>
-		/// 收为徒弟
-		/// </summary>
 		public const short BecomeApprentice = 124;
 
-		/// <summary>
-		/// 加入门派
-		/// </summary>
 		public const short JoinOrganization = 125;
 
-		/// <summary>
-		/// 获得奇书
-		/// </summary>
 		public const short GainQiBook = 126;
 
-		/// <summary>
-		/// 丢失奇书
-		/// </summary>
 		public const short LostQiBook = 127;
 
-		/// <summary>
-		/// 乞讨银钱
-		/// </summary>
 		public const short BegMoney = 128;
 
-		/// <summary>
-		/// 人物入狱
-		/// </summary>
 		public const short Imprisoned = 129;
 
-		/// <summary>
-		/// 人物出狱
-		/// </summary>
 		public const short ReleasedPrison = 130;
 
-		/// <summary>
-		/// 求取俘虏
-		/// </summary>
 		public const short BegPrisoner = 131;
 
-		/// <summary>
-		/// 偷窃俘虏
-		/// </summary>
 		public const short StealPrisoner = 132;
 
-		/// <summary>
-		/// 唬骗俘虏
-		/// </summary>
 		public const short ScamPrisoner = 133;
 
-		/// <summary>
-		/// 夺取俘虏
-		/// </summary>
 		public const short RobPrisoner = 134;
 
-		/// <summary>
-		/// 断绝父母
-		/// </summary>
 		public const short SeverGetAdopted = 135;
 
-		/// <summary>
-		/// 断绝子女
-		/// </summary>
 		public const short SeverAdoptChild = 136;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 人物死亡
-		/// </summary>
 		public static SecretInformationEffectItem Die => Instance[(short)0];
 
-		/// <summary>
-		/// 公开杀害
-		/// </summary>
 		public static SecretInformationEffectItem KillInPublic => Instance[(short)1];
 
-		/// <summary>
-		/// 公开关押
-		/// </summary>
 		public static SecretInformationEffectItem KidnapInPublic => Instance[(short)2];
 
-		/// <summary>
-		/// 惩戒杀害
-		/// </summary>
 		public static SecretInformationEffectItem KillForPunishment => Instance[(short)3];
 
-		/// <summary>
-		/// 惩戒关押
-		/// </summary>
 		public static SecretInformationEffectItem KidnapForPunishment => Instance[(short)4];
 
-		/// <summary>
-		/// 天降资源
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedResourceGain => Instance[(short)5];
 
-		/// <summary>
-		/// 天降财宝
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedItemGain => Instance[(short)6];
 
-		/// <summary>
-		/// 天赐秘籍
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedSkillBookGain => Instance[(short)7];
 
-		/// <summary>
-		/// 天助疗愈
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedCure => Instance[(short)8];
 
-		/// <summary>
-		/// 天损资源
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedResourceLose => Instance[(short)9];
 
-		/// <summary>
-		/// 天损财宝
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedItemLose => Instance[(short)10];
 
-		/// <summary>
-		/// 天损秘籍
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedSkillBookLose => Instance[(short)11];
 
-		/// <summary>
-		/// 天降灾刑
-		/// </summary>
 		public static SecretInformationEffectItem UnexpectedHarm => Instance[(short)12];
 
-		/// <summary>
-		/// 较艺胜利
-		/// </summary>
 		public static SecretInformationEffectItem LifeSkillBattleWin => Instance[(short)13];
 
-		/// <summary>
-		/// 促织战胜
-		/// </summary>
 		public static SecretInformationEffectItem CricketBattleWin => Instance[(short)14];
 
-		/// <summary>
-		/// 战斗大胜
-		/// </summary>
 		public static SecretInformationEffectItem MajorVictoryInCombat => Instance[(short)15];
 
-		/// <summary>
-		/// 战斗胜利
-		/// </summary>
 		public static SecretInformationEffectItem MinorVictoryInCombat => Instance[(short)16];
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public static SecretInformationEffectItem Mourn => Instance[(short)17];
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public static SecretInformationEffectItem OfferProtection => Instance[(short)18];
 
-		/// <summary>
-		/// 痛失骨肉
-		/// </summary>
 		public static SecretInformationEffectItem LoseFetus => Instance[(short)19];
 
-		/// <summary>
-		/// 痛失骨肉2
-		/// </summary>
 		public static SecretInformationEffectItem LoseFetus2 => Instance[(short)20];
 
-		/// <summary>
-		/// 生下孩子
-		/// </summary>
 		public static SecretInformationEffectItem GiveBirthToChild => Instance[(short)21];
 
-		/// <summary>
-		/// 生下孩子2
-		/// </summary>
 		public static SecretInformationEffectItem GiveBirthToChild2 => Instance[(short)22];
 
-		/// <summary>
-		/// 遗弃孩子
-		/// </summary>
 		public static SecretInformationEffectItem AbandonChild => Instance[(short)23];
 
-		/// <summary>
-		/// 释放俘虏
-		/// </summary>
 		public static SecretInformationEffectItem ReleaseKidnappedCharacter => Instance[(short)24];
 
-		/// <summary>
-		/// 解救俘虏
-		/// </summary>
 		public static SecretInformationEffectItem RescueKidnappedCharacter => Instance[(short)25];
 
-		/// <summary>
-		/// 逃脱关押
-		/// </summary>
 		public static SecretInformationEffectItem KidnappedCharacterEscaped => Instance[(short)26];
 
-		/// <summary>
-		/// 研读失败
-		/// </summary>
 		public static SecretInformationEffectItem ReadBookFail => Instance[(short)27];
 
-		/// <summary>
-		/// 突破失败
-		/// </summary>
 		public static SecretInformationEffectItem BreakoutFail => Instance[(short)28];
 
-		/// <summary>
-		/// 遗失宝物
-		/// </summary>
 		public static SecretInformationEffectItem LoseOverloadingItem => Instance[(short)29];
 
-		/// <summary>
-		/// 化解仇怨
-		/// </summary>
 		public static SecretInformationEffectItem SeverEnemy => Instance[(short)30];
 
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public static SecretInformationEffectItem BecomeEnemy => Instance[(short)31];
 
-		/// <summary>
-		/// 结为好友
-		/// </summary>
 		public static SecretInformationEffectItem BecomeFriend => Instance[(short)32];
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public static SecretInformationEffectItem SeverFriend => Instance[(short)33];
 
-		/// <summary>
-		/// 两情相悦
-		/// </summary>
 		public static SecretInformationEffectItem BecomeLover => Instance[(short)34];
 
-		/// <summary>
-		/// 恋人分手
-		/// </summary>
 		public static SecretInformationEffectItem BreakupWithLover => Instance[(short)35];
 
-		/// <summary>
-		/// 共结连理
-		/// </summary>
 		public static SecretInformationEffectItem BecomeHusbandAndWife => Instance[(short)36];
 
-		/// <summary>
-		/// 义结金兰
-		/// </summary>
 		public static SecretInformationEffectItem BecomeSwornBrothersAndSisters => Instance[(short)37];
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public static SecretInformationEffectItem SeverSwornBrothersAndSisters => Instance[(short)38];
 
-		/// <summary>
-		/// 拜认义亲
-		/// </summary>
 		public static SecretInformationEffectItem GetAdopted => Instance[(short)39];
 
-		/// <summary>
-		/// 收养子女
-		/// </summary>
 		public static SecretInformationEffectItem AdoptChild => Instance[(short)40];
 
-		/// <summary>
-		/// 赠送资源
-		/// </summary>
 		public static SecretInformationEffectItem GivingResource => Instance[(short)41];
 
-		/// <summary>
-		/// 赠送道具
-		/// </summary>
 		public static SecretInformationEffectItem GiveItem => Instance[(short)42];
 
-		/// <summary>
-		/// 修建坟墓
-		/// </summary>
 		public static SecretInformationEffectItem BuildGrave => Instance[(short)43];
 
-		/// <summary>
-		/// 施医赠药
-		/// </summary>
 		public static SecretInformationEffectItem Cure => Instance[(short)44];
 
-		/// <summary>
-		/// 修补道具
-		/// </summary>
 		public static SecretInformationEffectItem RepairItem => Instance[(short)45];
 
-		/// <summary>
-		/// 指点技艺
-		/// </summary>
 		public static SecretInformationEffectItem InstructOnLifeSkill => Instance[(short)46];
 
-		/// <summary>
-		/// 指点武学
-		/// </summary>
 		public static SecretInformationEffectItem InstructOnCombatSkill => Instance[(short)47];
 
-		/// <summary>
-		/// 同意疗伤
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestHealInjury => Instance[(short)48];
 
-		/// <summary>
-		/// 同意驱毒
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestDetoxPoison => Instance[(short)49];
 
-		/// <summary>
-		/// 同意续命
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestIncreaseHealth => Instance[(short)50];
 
-		/// <summary>
-		/// 同意调息
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestRestoreDisorderOfQi => Instance[(short)51];
 
-		/// <summary>
-		/// 同意补内
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestIncreaseNeili => Instance[(short)52];
 
-		/// <summary>
-		/// 同意灭蛊
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestKillWug => Instance[(short)53];
 
-		/// <summary>
-		/// 同意乞食
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestFood => Instance[(short)54];
 
-		/// <summary>
-		/// 同意茶酒
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestTeaWine => Instance[(short)55];
 
-		/// <summary>
-		/// 同意资源
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestResource => Instance[(short)56];
 
-		/// <summary>
-		/// 同意道具
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestItem => Instance[(short)57];
 
-		/// <summary>
-		/// 同意对饮
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestDrinking => Instance[(short)58];
 
-		/// <summary>
-		/// 同意施舍
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestGivingMoney => Instance[(short)59];
 
-		/// <summary>
-		/// 同意研读
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestInstructionOnReading => Instance[(short)60];
 
-		/// <summary>
-		/// 同意突破
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestInstructionOnBreakout => Instance[(short)61];
 
-		/// <summary>
-		/// 同意修理
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestRepairItem => Instance[(short)62];
 
-		/// <summary>
-		/// 同意淬毒
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestAddPoisonToItem => Instance[(short)63];
 
-		/// <summary>
-		/// 同意技艺
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestInstructionOnLifeSkill => Instance[(short)64];
 
-		/// <summary>
-		/// 同意武学
-		/// </summary>
 		public static SecretInformationEffectItem AcceptRequestInstructionOnCombatSkill => Instance[(short)65];
 
-		/// <summary>
-		/// 梳头成功
-		/// </summary>
 		public static SecretInformationEffectItem RehaircutSuccess => Instance[(short)66];
 
-		/// <summary>
-		/// 梳头失误
-		/// </summary>
 		public static SecretInformationEffectItem RehaircutIncompleted => Instance[(short)67];
 
-		/// <summary>
-		/// 梳头失败
-		/// </summary>
 		public static SecretInformationEffectItem RehaircutFail => Instance[(short)68];
 
-		/// <summary>
-		/// 拒绝疗伤
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestHealInjury => Instance[(short)69];
 
-		/// <summary>
-		/// 拒绝驱毒
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestDetoxPoison => Instance[(short)70];
 
-		/// <summary>
-		/// 拒绝续命
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestIncreaseHealth => Instance[(short)71];
 
-		/// <summary>
-		/// 拒绝调息
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestRestoreDisorderOfQi => Instance[(short)72];
 
-		/// <summary>
-		/// 拒绝补内
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestIncreaseNeili => Instance[(short)73];
 
-		/// <summary>
-		/// 拒绝灭蛊
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestKillWug => Instance[(short)74];
 
-		/// <summary>
-		/// 拒绝乞食
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestFood => Instance[(short)75];
 
-		/// <summary>
-		/// 拒绝茶酒
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestTeaWine => Instance[(short)76];
 
-		/// <summary>
-		/// 拒绝资源
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestResource => Instance[(short)77];
 
-		/// <summary>
-		/// 拒绝道具
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestItem => Instance[(short)78];
 
-		/// <summary>
-		/// 拒绝对饮
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestDrinking => Instance[(short)79];
 
-		/// <summary>
-		/// 拒绝施舍
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestGivingMoney => Instance[(short)80];
 
-		/// <summary>
-		/// 拒绝研读
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestInstructionOnReading => Instance[(short)81];
 
-		/// <summary>
-		/// 拒绝突破
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestInstructionOnBreakout => Instance[(short)82];
 
-		/// <summary>
-		/// 拒绝修理
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestRepairItem => Instance[(short)83];
 
-		/// <summary>
-		/// 拒绝淬毒
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestAddPoisonToItem => Instance[(short)84];
 
-		/// <summary>
-		/// 拒绝技艺
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestInstructionOnLifeSkill => Instance[(short)85];
 
-		/// <summary>
-		/// 拒绝武学
-		/// </summary>
 		public static SecretInformationEffectItem RefuseRequestInstructionOnCombatSkill => Instance[(short)86];
 
-		/// <summary>
-		/// 盗掘资源
-		/// </summary>
 		public static SecretInformationEffectItem RobGraveResource => Instance[(short)87];
 
-		/// <summary>
-		/// 窃取资源
-		/// </summary>
 		public static SecretInformationEffectItem StealResource => Instance[(short)88];
 
-		/// <summary>
-		/// 骗取资源
-		/// </summary>
 		public static SecretInformationEffectItem ScamResource => Instance[(short)89];
 
-		/// <summary>
-		/// 夺取资源
-		/// </summary>
 		public static SecretInformationEffectItem RobResource => Instance[(short)90];
 
-		/// <summary>
-		/// 盗掘道具
-		/// </summary>
 		public static SecretInformationEffectItem RobGraveItem => Instance[(short)91];
 
-		/// <summary>
-		/// 窃取道具
-		/// </summary>
 		public static SecretInformationEffectItem StealItem => Instance[(short)92];
 
-		/// <summary>
-		/// 骗取道具
-		/// </summary>
 		public static SecretInformationEffectItem ScamItem => Instance[(short)93];
 
-		/// <summary>
-		/// 夺取道具
-		/// </summary>
 		public static SecretInformationEffectItem RobItem => Instance[(short)94];
 
-		/// <summary>
-		/// 秘密杀害
-		/// </summary>
 		public static SecretInformationEffectItem KillInPrivate => Instance[(short)95];
 
-		/// <summary>
-		/// 秘密关押
-		/// </summary>
 		public static SecretInformationEffectItem KidnapInPrivate => Instance[(short)96];
 
-		/// <summary>
-		/// 毒害他人
-		/// </summary>
 		public static SecretInformationEffectItem PoisonEnemy => Instance[(short)97];
 
-		/// <summary>
-		/// 损伤他人
-		/// </summary>
 		public static SecretInformationEffectItem PlotHarmEnemy => Instance[(short)98];
 
-		/// <summary>
-		/// 窃取技艺
-		/// </summary>
 		public static SecretInformationEffectItem StealLifeSkill => Instance[(short)99];
 
-		/// <summary>
-		/// 骗取技艺
-		/// </summary>
 		public static SecretInformationEffectItem ScamLifeSkill => Instance[(short)100];
 
-		/// <summary>
-		/// 窃取武学
-		/// </summary>
 		public static SecretInformationEffectItem StealCombatSkill => Instance[(short)101];
 
-		/// <summary>
-		/// 骗取武学
-		/// </summary>
 		public static SecretInformationEffectItem ScamCombatSkill => Instance[(short)102];
 
-		/// <summary>
-		/// 道具淬毒
-		/// </summary>
 		public static SecretInformationEffectItem AddPoisonToItem => Instance[(short)103];
 
-		/// <summary>
-		/// 饮食破戒
-		/// </summary>
 		public static SecretInformationEffectItem MonkBreakRule => Instance[(short)104];
 
-		/// <summary>
-		/// 非法春宵
-		/// </summary>
 		public static SecretInformationEffectItem MakeLoveIllegal => Instance[(short)105];
 
-		/// <summary>
-		/// 情难自禁
-		/// </summary>
 		public static SecretInformationEffectItem Rape => Instance[(short)106];
 
-		/// <summary>
-		/// 痛失骨肉父亲不可知
-		/// </summary>
 		public static SecretInformationEffectItem LoseFetusFatherUnknown => Instance[(short)107];
 
-		/// <summary>
-		/// 生下孩子父亲不可知
-		/// </summary>
 		public static SecretInformationEffectItem GiveBirthToChildFatherUnknown => Instance[(short)108];
 
-		/// <summary>
-		/// 与人约会
-		/// </summary>
 		public static SecretInformationEffectItem DatingWithCrush => Instance[(short)109];
 
-		/// <summary>
-		/// 迫使不语
-		/// </summary>
 		public static SecretInformationEffectItem ForcingSilence => Instance[(short)110];
 
-		/// <summary>
-		/// 寻回子女
-		/// </summary>
 		public static SecretInformationEffectItem RetrieveChild => Instance[(short)111];
 
-		/// <summary>
-		/// 解读经文1
-		/// </summary>
 		public static SecretInformationEffectItem SolveScripture1 => Instance[(short)112];
 
-		/// <summary>
-		/// 解读经文2
-		/// </summary>
 		public static SecretInformationEffectItem SolveScripture2 => Instance[(short)113];
 
-		/// <summary>
-		/// 解读经文3
-		/// </summary>
 		public static SecretInformationEffectItem SolveScripture3 => Instance[(short)114];
 
-		/// <summary>
-		/// 解读经文4
-		/// </summary>
 		public static SecretInformationEffectItem SolveScripture4 => Instance[(short)115];
 
-		/// <summary>
-		/// 公开越狱
-		/// </summary>
 		public static SecretInformationEffectItem PrisonBreak => Instance[(short)116];
 
-		/// <summary>
-		/// 身怀六甲
-		/// </summary>
 		public static SecretInformationEffectItem Pregnant => Instance[(short)117];
 
-		/// <summary>
-		/// 身怀六甲父亲未知
-		/// </summary>
 		public static SecretInformationEffectItem PregnantWithoutFather => Instance[(short)118];
 
-		/// <summary>
-		/// 人物入魔
-		/// </summary>
 		public static SecretInformationEffectItem XiangshuType0 => Instance[(short)119];
 
-		/// <summary>
-		/// 人物入邪
-		/// </summary>
 		public static SecretInformationEffectItem XiangshuType1 => Instance[(short)120];
 
-		/// <summary>
-		/// 人物出家
-		/// </summary>
 		public static SecretInformationEffectItem BecomeMonk => Instance[(short)121];
 
-		/// <summary>
-		/// 人物离婚
-		/// </summary>
 		public static SecretInformationEffectItem Divorce => Instance[(short)122];
 
-		/// <summary>
-		/// 拜为师父
-		/// </summary>
 		public static SecretInformationEffectItem BecomeMaster => Instance[(short)123];
 
-		/// <summary>
-		/// 收为徒弟
-		/// </summary>
 		public static SecretInformationEffectItem BecomeApprentice => Instance[(short)124];
 
-		/// <summary>
-		/// 加入门派
-		/// </summary>
 		public static SecretInformationEffectItem JoinOrganization => Instance[(short)125];
 
-		/// <summary>
-		/// 获得奇书
-		/// </summary>
 		public static SecretInformationEffectItem GainQiBook => Instance[(short)126];
 
-		/// <summary>
-		/// 丢失奇书
-		/// </summary>
 		public static SecretInformationEffectItem LostQiBook => Instance[(short)127];
 
-		/// <summary>
-		/// 乞讨银钱
-		/// </summary>
 		public static SecretInformationEffectItem BegMoney => Instance[(short)128];
 
-		/// <summary>
-		/// 人物入狱
-		/// </summary>
 		public static SecretInformationEffectItem Imprisoned => Instance[(short)129];
 
-		/// <summary>
-		/// 人物出狱
-		/// </summary>
 		public static SecretInformationEffectItem ReleasedPrison => Instance[(short)130];
 
-		/// <summary>
-		/// 求取俘虏
-		/// </summary>
 		public static SecretInformationEffectItem BegPrisoner => Instance[(short)131];
 
-		/// <summary>
-		/// 偷窃俘虏
-		/// </summary>
 		public static SecretInformationEffectItem StealPrisoner => Instance[(short)132];
 
-		/// <summary>
-		/// 唬骗俘虏
-		/// </summary>
 		public static SecretInformationEffectItem ScamPrisoner => Instance[(short)133];
 
-		/// <summary>
-		/// 夺取俘虏
-		/// </summary>
 		public static SecretInformationEffectItem RobPrisoner => Instance[(short)134];
 
-		/// <summary>
-		/// 断绝父母
-		/// </summary>
 		public static SecretInformationEffectItem SeverGetAdopted => Instance[(short)135];
 
-		/// <summary>
-		/// 断绝子女
-		/// </summary>
 		public static SecretInformationEffectItem SeverAdoptChild => Instance[(short)136];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationEffect Instance = new SecretInformationEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

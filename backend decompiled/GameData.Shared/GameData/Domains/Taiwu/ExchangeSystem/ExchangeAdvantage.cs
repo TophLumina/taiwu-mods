@@ -16,93 +16,48 @@ namespace GameData.Domains.Taiwu.ExchangeSystem;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class ExchangeAdvantage : ISerializableGameData
 {
-	/// <summary>
-	/// 交换类型
-	/// </summary>
 	[SerializableGameDataField]
 	public EExchangeType ExchangeType = EExchangeType.Invalid;
 
-	/// <summary>
-	/// Npc定居点信息，对库房，定居点信息会显示为守卫的信息
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo NpcOrganization;
 
-	/// <summary>
-	/// 对方id，用于计算秘闻
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetCharId = -1;
 
-	/// <summary>
-	/// Npc对太吾好感等级
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetBaseValue;
 
-	/// <summary>
-	/// Npc对太吾好感等级
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetFavorType;
 
-	/// <summary>
-	/// Npc对太吾戒心等级
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetAlertLevel;
 
-	/// <summary>
-	/// Npc立场
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetBehaviorType;
 
-	/// <summary>
-	/// 太吾立场
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuBehaviorType;
 
-	/// <summary>
-	/// 太吾名誉
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuFameType;
 
-	/// <summary>
-	/// 库房匮乏
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetLackResourceValue;
 
-	/// <summary>
-	/// Npc类型
-	/// </summary>
 	[SerializableGameDataField]
 	public ETargetType TargetType;
 
-	/// <summary>
-	/// 额外优势值，由外部直接计算
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetExtraValue;
 
-	/// <summary>
-	/// 喜爱物品子类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short LovingItemSubType = -1;
 
-	/// <summary>
-	/// 厌恶物品子类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short HatingItemSubType = -1;
 
-	/// <summary>
-	/// 关联人物
-	/// </summary>
 	[SerializableGameDataField]
 	public RelatedCharacters RelatedCharIds;
 
@@ -120,69 +75,34 @@ public class ExchangeAdvantage : ISerializableGameData
 		LanguageKey.LK_Num_9
 	};
 
-	/// <summary>
-	/// 秘闻优势值
-	/// </summary>
 	[SerializableGameDataField]
 	public int SecretValue;
 
-	/// <summary>
-	/// 秘闻id
-	/// </summary>
 	[SerializableGameDataField]
 	public int SecretId;
 
-	/// <summary>
-	/// 支持度
-	/// </summary>
 	[SerializableGameDataField]
 	public int ApprovingValue;
 
-	/// <summary>
-	/// 提供支持度的Npc
-	/// </summary>
 	[SerializableGameDataField]
 	public int ApprovingCharId;
 
-	/// <summary>
-	/// 提供的地区恩义
-	/// </summary>
 	[SerializableGameDataField]
 	public int DebtUsed;
 
-	/// <summary>
-	/// 使用此地区的恩义
-	/// </summary>
 	[SerializableGameDataField]
 	public int TradeAreaId;
 
-	/// <summary>
-	/// 最大可消耗地区恩义
-	/// </summary>
 	[SerializableGameDataField]
 	public int DebtMax;
 
-	/// <summary>
-	/// 任务Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] TaskId;
 
-	/// <summary>
-	/// 任务提供的太吾优势值，非负
-	/// 需要根据任务列表与物品列表重算
-	/// </summary>
 	public int TaiwuTaskEffect;
 
-	/// <summary>
-	/// 任务提供的Npc优势值，非负
-	/// 需要根据任务列表与物品列表重算
-	/// </summary>
 	public int TargetTaskEffect;
 
-	/// <summary>
-	/// 任务字典，前端直接计算
-	/// </summary>
 	public Dictionary<int, int> TaskDict = new Dictionary<int, int>();
 
 	public bool Enabled
@@ -198,9 +118,6 @@ public class ExchangeAdvantage : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取太吾id的简便调用，用于计算秘闻
-	/// </summary>
 	public int TaiwuCharId => ExternalDataBridge.Context.TaiwuCharId;
 
 	public int FavorValue
@@ -320,14 +237,8 @@ public class ExchangeAdvantage : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 展示用，基础值
-	/// </summary>
 	public int RawTargetAdvantage => Math.Max(0, TargetBaseValue + FavorValue + AlertValue + BehaviorValue + FameValue + TargetExtraValue + GlobalConfig.Instance.ExchangeGradeOverProgress[OverGrade] + TargetTaskEffect + ChallengeValue + TargetLackResourceValue);
 
-	/// <summary>
-	/// 计算用，最终值
-	/// </summary>
 	public int TargetAdvantage
 	{
 		get
@@ -340,9 +251,6 @@ public class ExchangeAdvantage : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 敝帚自珍加成
-	/// </summary>
 	public int ChallengeValue
 	{
 		get
@@ -360,10 +268,6 @@ public class ExchangeAdvantage : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 超世界进度导致的Npc优势增加index
-	/// 仅对Npc生效！（TAIWU-76728）
-	/// </summary>
 	public int OverGrade
 	{
 		get
@@ -376,14 +280,8 @@ public class ExchangeAdvantage : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 使用恩义带来的优势
-	/// </summary>
 	public int DebtValue => DebtUsed / GlobalConfig.Instance.ExchangeDebtUnit;
 
-	/// <summary>
-	/// 太吾自身优势
-	/// </summary>
 	public int TaiwuAdvantage
 	{
 		get
@@ -396,18 +294,10 @@ public class ExchangeAdvantage : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 防止手动序列化报错
-	/// </summary>
 	public ExchangeAdvantage()
 	{
 	}
 
-	/// <summary>
-	/// 初始化太吾部分，不应调用
-	/// </summary>
-	/// <param name="taiwuBehaviorType"></param>
-	/// <param name="taiwuFameType"></param>
 	private ExchangeAdvantage(int taiwuBehaviorType, int taiwuFameType, int tradeAreaId, int debtMax)
 	{
 		TaiwuBehaviorType = taiwuBehaviorType;
@@ -418,16 +308,6 @@ public class ExchangeAdvantage : ISerializableGameData
 		ApprovingCharId = -1;
 	}
 
-	/// <summary>
-	/// 人物交换
-	/// </summary>
-	/// <param name="npcOrganization"></param>
-	/// <param name="targetFavorType"></param>
-	/// <param name="targetAlertLevel"></param>
-	/// <param name="targetBehaviorType"></param>
-	/// <param name="targetFameType"></param>
-	/// <param name="taiwuBehaviorType"></param>
-	/// <param name="taiwuFameType"></param>
 	public ExchangeAdvantage(int taiwuBehaviorType, int taiwuFameType, int tradeAreaId, int debtMax, int targetCharId, OrganizationInfo npcOrganization, RelatedCharacters relatedCharIds, int targetFavorType, int targetAlertLevel, int targetBehaviorType, int targetFameType, CharacterLoveAndHateItemInfo info = null)
 		: this(taiwuBehaviorType, taiwuFameType, tradeAreaId, debtMax)
 	{
@@ -495,15 +375,6 @@ public class ExchangeAdvantage : ISerializableGameData
 			select x.TemplateId).ToArray();
 	}
 
-	/// <summary>
-	/// 库房交换
-	/// </summary>
-	/// <param name="taiwuBehaviorType"></param>
-	/// <param name="taiwuFameType"></param>
-	/// <param name="tradeAreaId"></param>
-	/// <param name="debtMax"></param>
-	/// <param name="npcOrganization"></param>
-	/// <param name="isLackResource"></param>
 	public ExchangeAdvantage(int taiwuBehaviorType, int taiwuFameType, int tradeAreaId, int debtMax, OrganizationInfo npcOrganization, bool isLackResource)
 		: this(taiwuBehaviorType, taiwuFameType, tradeAreaId, debtMax)
 	{
@@ -648,24 +519,11 @@ public class ExchangeAdvantage : ISerializableGameData
 		}).Sum();
 	}
 
-	/// <summary>
-	/// 检查任务条件是否满足
-	/// </summary>
-	/// <param name="cfg"></param>
-	/// <param name="item"></param>
-	/// <returns></returns>
 	public bool ConditionMeet(ExchangeTaskItem cfg, ExchangeItem item)
 	{
 		return ConditionMeet(cfg, item.Content, item.Count > 0);
 	}
 
-	/// <summary>
-	/// 检查任务条件是否满足
-	/// </summary>
-	/// <param name="cfg"></param>
-	/// <param name="item"></param>
-	/// <param name="count"></param>
-	/// <returns></returns>
 	public bool ConditionMeet(ExchangeTaskItem cfg, ITradeableContent item, bool isForTaiwu)
 	{
 		IItemConfig itemCfg = item.RealKey.GetConfig();
@@ -684,11 +542,6 @@ public class ExchangeAdvantage : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 计算秘闻的优势值
-	/// </summary>
-	/// <param name="secretLevel"></param>
-	/// <returns></returns>
 	public int CalcSecretAdvantage(SecretInformationDisplayData secretInformationDisplayData)
 	{
 		short? num = secretInformationDisplayData?.SecretInformationTemplateId;
@@ -726,8 +579,7 @@ public class ExchangeAdvantage : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 70;
-		totalSize += NpcOrganization.GetSerializedSize();
+		int totalSize = 78;
 		totalSize = ((RelatedCharIds == null) ? (totalSize + 2) : (totalSize + (2 + RelatedCharIds.GetSerializedSize())));
 		totalSize = ((TaskId == null) ? (totalSize + 2) : (totalSize + (2 + 4 * TaskId.Length)));
 		if (totalSize > 4)

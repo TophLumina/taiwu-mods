@@ -7,101 +7,44 @@ namespace Config;
 [Serializable]
 public class LegacyPointType : ConfigData<LegacyPointTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 结缘
-		/// </summary>
 		public const sbyte Relation = 0;
 
-		/// <summary>
-		/// 战斗
-		/// </summary>
 		public const sbyte Combat = 1;
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public const sbyte LifeSkill = 2;
 
-		/// <summary>
-		/// 武学
-		/// </summary>
 		public const sbyte CombatSkill = 3;
 
-		/// <summary>
-		/// 产业
-		/// </summary>
 		public const sbyte Building = 4;
 
-		/// <summary>
-		/// 游历
-		/// </summary>
 		public const sbyte Journey = 5;
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public const sbyte SwordTomb = 6;
 
-		/// <summary>
-		/// 志向
-		/// </summary>
 		public const sbyte Profession = 7;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 结缘
-		/// </summary>
 		public static LegacyPointTypeItem Relation => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 战斗
-		/// </summary>
 		public static LegacyPointTypeItem Combat => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public static LegacyPointTypeItem LifeSkill => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 武学
-		/// </summary>
 		public static LegacyPointTypeItem CombatSkill => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 产业
-		/// </summary>
 		public static LegacyPointTypeItem Building => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 游历
-		/// </summary>
 		public static LegacyPointTypeItem Journey => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public static LegacyPointTypeItem SwordTomb => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 志向
-		/// </summary>
 		public static LegacyPointTypeItem Profession => Instance[(sbyte)7];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LegacyPointType Instance = new LegacyPointType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Group", "TemplateId" };

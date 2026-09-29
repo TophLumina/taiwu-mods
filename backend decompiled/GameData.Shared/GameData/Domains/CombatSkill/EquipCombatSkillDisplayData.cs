@@ -5,65 +5,30 @@ using GameData.Utilities;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法显示数据。用于向前端返回显示所需数据，使前端不必监听功法数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class EquipCombatSkillDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 功法数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillDisplayDataCharacterMenuListItem> CombatSkillDisplayDatas;
 
-	/// <summary>
-	/// 当前预设 ID.
-	/// 功法方案只是一个记录, 并不代表角色在切换方案或读档时仍然拥有这些功法. 读档时并不会根据功法方案的数据改变角色功法.
-	/// 当预设 ID 变化时，根据当前的装配情况保存旧预设的功法配置信息.
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrentPlanId;
 
-	/// <summary>
-	/// 锁定功法装备配置.
-	/// 锁定后过月AI逻辑不再会改变该角色的功法配置
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsCombatSkillLocked;
 
-	/// <summary>
-	/// 当前功法装备预设列表
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillEquipment CurrentEquipPlan;
 
-	/// <summary>
-	/// 各类功法万用格分配个数
-	/// </summary>
 	[SerializableGameDataField]
 	public byte[] GenericGridAllocation;
 
-	/// <summary>
-	/// 预设总数
-	/// </summary>
 	[SerializableGameDataField]
 	public int PlanCount;
 
-	/// <summary>
-	/// 当前战斗功法排序方案
-	/// </summary>
 	[SerializableGameDataField]
 	public ShortList CombatSkillOrderPlan;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
-	public EquipCombatSkillDisplayData()
-	{
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
@@ -96,7 +61,6 @@ public class EquipCombatSkillDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -178,7 +142,6 @@ public class EquipCombatSkillDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

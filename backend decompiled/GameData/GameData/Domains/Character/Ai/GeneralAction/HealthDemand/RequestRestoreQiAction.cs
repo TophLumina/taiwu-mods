@@ -48,7 +48,7 @@ public class RequestRestoreQiAction : IGeneralAction
 			selfChar.AddEatingItem(context, ItemUsed);
 			selfChar.ChangeHappiness(context, baseItem.GetHappinessChange());
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, baseItem.GetFavorabilityChange() * 5);
-			lifeRecordCollection.AddRequestHealDisorderOfQiSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+			lifeRecordCollection.AddRequestHealDisorderOfQiItemSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			SecretInformationCollection secretInformationCollection = DomainManager.Information.GetSecretInformationCollection();
 			int secretInfoOffset = secretInformationCollection.AddAcceptRequestRestoreDisorderOfQi(targetCharId, selfCharId);
 			DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
@@ -57,7 +57,7 @@ public class RequestRestoreQiAction : IGeneralAction
 		{
 			selfChar.ChangeHappiness(context, -3);
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, -6000);
-			lifeRecordCollection.AddRequestHealDisorderOfQiFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+			lifeRecordCollection.AddRequestHealDisorderOfQiItemFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			SecretInformationCollection secretInformationCollection2 = DomainManager.Information.GetSecretInformationCollection();
 			int secretInfoOffset2 = secretInformationCollection2.AddRefuseRequestRestoreDisorderOfQi(targetCharId, selfCharId);
 			DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);

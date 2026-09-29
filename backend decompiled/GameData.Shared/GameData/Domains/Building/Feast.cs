@@ -7,9 +7,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 宴堂数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class Feast : ISerializableGameData
 {
@@ -34,53 +31,27 @@ public class Feast : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[7] { "BuildingBlockKey", "Dish", "DishDurability", "Gift", "GiftCount", "AutoRefill", "TargetType" };
 	}
 
-	/// <summary>
-	/// 产业建筑Key
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public BuildingBlockKey BuildingBlockKey;
 
-	/// <summary>
-	/// 菜肴
-	/// index -&gt; itemKey
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public Dictionary<int, ItemKey> Dish;
 
-	/// <summary>
-	/// 菜肴剩余可用次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public Dictionary<int, int> DishDurability;
 
-	/// <summary>
-	/// 回礼
-	/// index -&gt; itemKey
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public Dictionary<int, ItemKey> Gift;
 
-	/// <summary>
-	/// 礼物数量
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public Dictionary<int, int> GiftCount;
 
-	/// <summary>
-	/// 自动上菜
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public bool AutoRefill;
 
-	/// <summary>
-	/// 目标主题
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public short TargetType;
 
-	/// <summary>
-	/// 菜肴已满
-	/// </summary>
 	public bool IsFull => GetInUseDishSlotCount() >= GlobalConfig.Instance.FeastCount;
 
 	public Feast()
@@ -105,11 +76,6 @@ public class Feast : ISerializableGameData
 		TargetType = -1;
 	}
 
-	/// <summary>
-	/// 获取菜肴
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public ItemKey GetDish(int index)
 	{
 		if (!Dish.TryGetValue(index, out var dish))
@@ -119,11 +85,6 @@ public class Feast : ISerializableGameData
 		return dish;
 	}
 
-	/// <summary>
-	/// 获取礼物
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public ItemKey GetGift(int index)
 	{
 		if (!Gift.TryGetValue(index, out var gift))
@@ -133,10 +94,6 @@ public class Feast : ISerializableGameData
 		return gift;
 	}
 
-	/// <summary>
-	/// 获取可食用的菜肴数
-	/// </summary>
-	/// <returns></returns>
 	public int GetInUseDishSlotCount()
 	{
 		int res = 0;
@@ -150,10 +107,6 @@ public class Feast : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 获取可放置菜肴的位置
-	/// </summary>
-	/// <returns></returns>
 	public int GetAvailableDishSlot()
 	{
 		for (int i = 0; i < GlobalConfig.Instance.FeastCount; i++)
@@ -166,20 +119,11 @@ public class Feast : ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 菜肴是否已经被吃过
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public bool IsDishEaten(int index)
 	{
 		return DishDurability[index] != GlobalConfig.Instance.FeastDurability;
 	}
 
-	/// <summary>
-	/// 获取未领取的礼物占的格子数
-	/// </summary>
-	/// <returns></returns>
 	public int GetInUseGiftSlotCount()
 	{
 		int res = 0;
@@ -193,10 +137,6 @@ public class Feast : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 未领取的礼物已满
-	/// </summary>
-	/// <returns></returns>
 	public bool InUseGiftMax()
 	{
 		bool res = Gift.Values.Count != 0;
@@ -210,10 +150,6 @@ public class Feast : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 是否应该停止自动入住并且驱逐所有已有角色
-	/// </summary>
-	/// <returns></returns>
 	public bool CheckAvoidAutoCheckIn()
 	{
 		if (AutoRefill)
@@ -223,10 +159,6 @@ public class Feast : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取宴会类型
-	/// </summary>
-	/// <returns>宴会模版Id</returns>
 	public short GetFeastType()
 	{
 		int count = GlobalConfig.Instance.FeastCount;
@@ -377,12 +309,6 @@ public class Feast : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 获取一个物品对应的食物类型
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <param name="typeList"></param>
-	/// <returns></returns>
 	public static List<EFoodFoodType> GetFoodTypeList(ItemKey itemKey, List<EFoodFoodType> typeList = null)
 	{
 		if (typeList == null)
@@ -408,9 +334,6 @@ public class Feast : ISerializableGameData
 		return typeList;
 	}
 
-	/// <summary>
-	/// 根据需求类型获取食物类型
-	/// </summary>
 	public static EFoodFoodType GetFoodType(EFeastRequirementType requirementType)
 	{
 		return requirementType switch
@@ -437,8 +360,7 @@ public class Feast : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 5;
-		totalSize += BuildingBlockKey.GetSerializedSize();
+		int totalSize = 13;
 		totalSize += 4;
 		if (Dish != null)
 		{

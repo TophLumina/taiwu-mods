@@ -8,37 +8,16 @@ using MoonSharp.Interpreter;
 
 namespace GameData.Domains.Character.AvatarSystem;
 
-/// <summary>
-/// 从 StreamingAssets 加载 AvatarData 的工具.
-/// 数据格式为 lua: 文件以 `return { ... }` 形式存在, 顶层 key 对应 AvatarData 字段名.
-/// 加载结果会按相对路径缓存.
-/// </summary>
 public static class AvatarDataLoader
 {
-	/// <summary>
-	/// StreamingAssets 根目录名
-	/// </summary>
 	private const string StreamingAssetsFolder = "StreamingAssets";
 
-	/// <summary>
-	/// AvatarData 资源在 StreamingAssets 下的固定根目录.
-	/// AvatarDataPath 字段填写的是相对于此目录的路径.
-	/// </summary>
 	private const string AvatarDataRootFolder = "CharacterAvatarData";
 
-	/// <summary>
-	/// 已加载的 AvatarData 缓存, key 为相对路径
-	/// </summary>
 	private static readonly ConcurrentDictionary<string, AvatarData> Cache = new ConcurrentDictionary<string, AvatarData>();
 
-	/// <summary>
-	/// 用于解析 lua 的 Script 实例(数据文件只含纯数据, 没有副作用代码)
-	/// </summary>
 	private static readonly Script LuaScript = new Script(CoreModules.Preset_HardSandbox);
 
-	/// <summary>
-	/// 反射缓存: AvatarData 所有可序列化字段(包含 private)
-	/// </summary>
 	private static readonly FieldInfo[] AvatarFields = BuildAvatarFieldInfos();
 
 	private static FieldInfo[] BuildAvatarFieldInfos()
@@ -59,13 +38,6 @@ public static class AvatarDataLoader
 		return list.ToArray();
 	}
 
-	/// <summary>
-	/// 按 AvatarDataPath 加载 AvatarData.
-	/// AvatarDataPath 是相对于 StreamingAssets/CharacterAvatarData 目录的路径(带扩展名).
-	/// 同一路径只读取并解析一次.
-	/// </summary>
-	/// <param name="relativePath">相对于 StreamingAssets/CharacterAvatarData 目录的路径.</param>
-	/// <returns>加载成功返回 AvatarData 实例; 加载失败返回 null.</returns>
 	public static AvatarData Load(string relativePath)
 	{
 		if (string.IsNullOrEmpty(relativePath))
@@ -92,10 +64,6 @@ public static class AvatarDataLoader
 		return avatar;
 	}
 
-	/// <summary>
-	/// 解析一段 lua 文本为 AvatarData.
-	/// 期望的格式为 `return { FieldName = value, ... }`.
-	/// </summary>
 	private static AvatarData Parse(string luaContent)
 	{
 		DynValue root;
@@ -156,9 +124,6 @@ public static class AvatarDataLoader
 		}
 	}
 
-	/// <summary>
-	/// 清空缓存(主要用于编辑器/测试场景)
-	/// </summary>
 	public static void ClearCache()
 	{
 		Cache.Clear();

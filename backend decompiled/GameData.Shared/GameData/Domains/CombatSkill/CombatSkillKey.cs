@@ -4,29 +4,14 @@ using GameData.Serializer;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法的索引
-/// </summary>
 public struct CombatSkillKey : ISerializableGameData, IEquatable<CombatSkillKey>
 {
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
 	public int CharId;
 
-	/// <summary>
-	/// 功法模板 ID
-	/// </summary>
 	public short SkillTemplateId;
 
-	/// <summary>
-	/// 无效功法索引
-	/// </summary>
 	public static CombatSkillKey Invalid => new CombatSkillKey(-1, -1);
 
-	/// <summary>
-	/// 是否有效
-	/// </summary>
 	public bool IsValid
 	{
 		get
@@ -39,12 +24,6 @@ public struct CombatSkillKey : ISerializableGameData, IEquatable<CombatSkillKey>
 		}
 	}
 
-	/// <summary>
-	/// 是否匹配指定角色的指定功法
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="skillId"></param>
-	/// <returns></returns>
 	public bool IsMatch(int charId, short skillId)
 	{
 		if (CharId == charId)
@@ -54,11 +33,6 @@ public struct CombatSkillKey : ISerializableGameData, IEquatable<CombatSkillKey>
 		return false;
 	}
 
-	/// <summary>
-	/// 功法的索引
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="skillTemplateId"></param>
 	public CombatSkillKey(int charId, short skillTemplateId)
 	{
 		CharId = charId;

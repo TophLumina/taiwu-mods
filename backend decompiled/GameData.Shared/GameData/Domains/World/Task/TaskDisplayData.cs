@@ -39,9 +39,6 @@ public struct TaskDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public int FinishedDate;
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TaskDisplayData(TaskDisplayData other)
 	{
 		InnerTaskData = other.InnerTaskData;
@@ -62,9 +59,6 @@ public struct TaskDisplayData : ISerializableGameData
 		FinishedDate = other.FinishedDate;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TaskDisplayData other)
 	{
 		InnerTaskData = other.InnerTaskData;
@@ -85,13 +79,11 @@ public struct TaskDisplayData : ISerializableGameData
 		FinishedDate = other.FinishedDate;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 32;
@@ -119,7 +111,6 @@ public struct TaskDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -211,7 +202,6 @@ public struct TaskDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

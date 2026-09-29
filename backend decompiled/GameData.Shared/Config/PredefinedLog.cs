@@ -4,545 +4,227 @@ using Config.Common;
 
 namespace Config;
 
-/// <inheritdoc cref="T:Config.PredefinedLog" />
 [Serializable]
 public class PredefinedLog : ConfigData<PredefinedLogItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 秘闻被迫抹除
-		/// </summary>
 		public const short SecretInformationForcedToBeErased = 0;
 
-		/// <summary>
-		/// 加载Mod配置失败
-		/// </summary>
 		public const short LoadModConfigFail = 1;
 
-		/// <summary>
-		/// 加载Mod配置无Mod名
-		/// </summary>
 		public const short LoadModConfigFailWithoutName = 2;
 
-		/// <summary>
-		/// 加载Mod设置失败
-		/// </summary>
 		public const short LoadModSettingsFail = 3;
 
-		/// <summary>
-		/// 加载Mod全局设置失败
-		/// </summary>
 		public const short LoadModSystemSettingsFail = 4;
 
-		/// <summary>
-		/// 战斗行为剩余帧为负
-		/// </summary>
 		public const short CombatFrameConfigNegative = 5;
 
-		/// <summary>
-		/// 志向动画运行时异常
-		/// </summary>
 		public const short ProfessionSkillAnimationRuntimeException = 6;
 
-		/// <summary>
-		/// 功法特效运行时异常
-		/// </summary>
 		public const short CombatSpecialEffectRuntimeException = 7;
 
-		/// <summary>
-		/// 战斗运行时异常
-		/// </summary>
 		public const short CombatRuntimeException = 8;
 
-		/// <summary>
-		/// 视频格式不支持异常
-		/// </summary>
 		public const short VideoFormatUnSupportedException = 9;
 
-		/// <summary>
-		/// 读取到不存在的任务Id
-		/// </summary>
 		public const short TaskTemplateIdNotExist = 10;
 
-		/// <summary>
-		/// 地图运行时异常
-		/// </summary>
 		public const short MapRuntimeException = 11;
 
-		/// <summary>
-		/// 角色运行时异常
-		/// </summary>
 		public const short CharacterRuntimeException = 12;
 
-		/// <summary>
-		/// 功法运行时异常
-		/// </summary>
 		public const short CombatSkillRuntimeException = 13;
 
-		/// <summary>
-		/// 通信运行时异常
-		/// </summary>
 		public const short NetRuntimeException = 14;
 
-		/// <summary>
-		/// 较艺操作过期
-		/// </summary>
 		public const short LifeSkillCombatOperationExpired = 15;
 
-		/// <summary>
-		/// 梦回存档世界不匹配
-		/// </summary>
 		public const short DreamBackWorldNotMatch = 16;
 
-		/// <summary>
-		/// 化龙界面元素刷新异常
-		/// </summary>
 		public const short JiaoChangeloongRefreshIndexException = 17;
 
-		/// <summary>
-		/// 通用界面元素刷新异常
-		/// </summary>
 		public const short GeneralRefreshIndexException = 18;
 
-		/// <summary>
-		/// 世界运行时异常
-		/// </summary>
 		public const short WorldRuntimeException = 19;
 
-		/// <summary>
-		/// 道具重复
-		/// </summary>
 		public const short DuplicatedItemDetected = 20;
 
-		/// <summary>
-		/// 道具未被持有
-		/// </summary>
 		public const short UnownedItemDetected = 21;
 
-		/// <summary>
-		/// 事件切换未进入
-		/// </summary>
 		public const short EventChangedWithNotEntering = 22;
 
-		/// <summary>
-		/// 战斗 Ai 加载异常
-		/// </summary>
 		public const short CombatAiLoadException = 23;
 
-		/// <summary>
-		/// Mod 配置丢失异常
-		/// </summary>
 		public const short ModConfigNotFoundException = 24;
 
-		/// <summary>
-		/// 参数值不能为空
-		/// </summary>
 		public const short ValueCanNotBeEmpty = 25;
 
-		/// <summary>
-		/// 配置表找不到此参数
-		/// </summary>
 		public const short ValueNotFoundInConfigTable = 26;
 
-		/// <summary>
-		/// 找不到事件
-		/// </summary>
 		public const short EventNotFoundInAnyEventGroup = 27;
 
-		/// <summary>
-		/// 无效的枚举
-		/// </summary>
 		public const short InvalidEnumIndex = 28;
 
-		/// <summary>
-		/// Lua脚本执行异常
-		/// </summary>
 		public const short LuaScriptingException = 29;
 
-		/// <summary>
-		/// 元鸡缓存异常1
-		/// </summary>
 		public const short CacheCorruptedNoChickenInSettlement = 30;
 
-		/// <summary>
-		/// 元鸡缓存异常2
-		/// </summary>
 		public const short CacheCorruptedSetSettlementHasNoChicken = 31;
 
-		/// <summary>
-		/// 元鸡缓存异常3
-		/// </summary>
 		public const short CacheCorruptedRemoveNonExistsChicken = 32;
 
-		/// <summary>
-		/// 未知的通缉惩罚
-		/// </summary>
 		public const short UnknownPunishmentType = 33;
 
-		/// <summary>
-		/// 获取非存活角色的显示年龄
-		/// </summary>
 		public const short GetNotAliveDisplayingAge = 34;
 
-		/// <summary>
-		/// 配置设置解析失败
-		/// </summary>
 		public const short ConfigurationParseFailed = 35;
 
-		/// <summary>
-		/// 奇遇元素解析失败
-		/// </summary>
 		public const short AdventureElementNotFind = 36;
 
-		/// <summary>
-		/// 大事件模板解析失败
-		/// </summary>
 		public const short AdventureMajorEventNotFind = 37;
 
-		/// <summary>
-		/// 奇遇模板解析失败
-		/// </summary>
 		public const short AdventureNotFind = 38;
 
-		/// <summary>
-		/// 奇遇事件队列溢出
-		/// </summary>
 		public const short AdventureEventOverflow = 39;
 
-		/// <summary>
-		/// 奇遇生成失败
-		/// </summary>
 		public const short AdventureGenerateFailed = 40;
 
-		/// <summary>
-		/// 额外赌注生成失败
-		/// </summary>
 		public const short CricketExtraWagerGenerateFailed = 41;
 
-		/// <summary>
-		/// 升灵状态转变失败
-		/// </summary>
 		public const short PolymorphStateChangeFailed = 42;
 
-		/// <summary>
-		/// 加载存档异常
-		/// </summary>
 		public const short LoadArchiveDataFailed = 43;
 
-		/// <summary>
-		/// 保存备份存档失败
-		/// </summary>
 		public const short TransferToOldFailed = 44;
 
-		/// <summary>
-		/// NPC目标创建失败
-		/// </summary>
 		public const short CharacterGoalCreationFailed = 45;
 
-		/// <summary>
-		/// NPC行为规划失败
-		/// </summary>
 		public const short CharacterActionPlanningFailed = 46;
 
-		/// <summary>
-		/// NPC行为执行失败
-		/// </summary>
 		public const short CharacterActionExecutionFailed = 47;
 
-		/// <summary>
-		/// 通知类文本参数异常
-		/// </summary>
 		public const short GameMessageRenderError = 48;
 
-		/// <summary>
-		/// 通信数据序列化数据过长
-		/// </summary>
 		public const short SerializedSizeExceedLimit = 49;
 
-		/// <summary>
-		/// 道具堆叠异常1
-		/// </summary>
 		public const short InvalidItemStacking1 = 50;
 
-		/// <summary>
-		/// 道具堆叠异常2
-		/// </summary>
 		public const short InvalidItemStacking2 = 51;
+
+		public const short FrontendDebateError = 52;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 秘闻被迫抹除
-		/// </summary>
 		public static PredefinedLogItem SecretInformationForcedToBeErased => Instance[(short)0];
 
-		/// <summary>
-		/// 加载Mod配置失败
-		/// </summary>
 		public static PredefinedLogItem LoadModConfigFail => Instance[(short)1];
 
-		/// <summary>
-		/// 加载Mod配置无Mod名
-		/// </summary>
 		public static PredefinedLogItem LoadModConfigFailWithoutName => Instance[(short)2];
 
-		/// <summary>
-		/// 加载Mod设置失败
-		/// </summary>
 		public static PredefinedLogItem LoadModSettingsFail => Instance[(short)3];
 
-		/// <summary>
-		/// 加载Mod全局设置失败
-		/// </summary>
 		public static PredefinedLogItem LoadModSystemSettingsFail => Instance[(short)4];
 
-		/// <summary>
-		/// 战斗行为剩余帧为负
-		/// </summary>
 		public static PredefinedLogItem CombatFrameConfigNegative => Instance[(short)5];
 
-		/// <summary>
-		/// 志向动画运行时异常
-		/// </summary>
 		public static PredefinedLogItem ProfessionSkillAnimationRuntimeException => Instance[(short)6];
 
-		/// <summary>
-		/// 功法特效运行时异常
-		/// </summary>
 		public static PredefinedLogItem CombatSpecialEffectRuntimeException => Instance[(short)7];
 
-		/// <summary>
-		/// 战斗运行时异常
-		/// </summary>
 		public static PredefinedLogItem CombatRuntimeException => Instance[(short)8];
 
-		/// <summary>
-		/// 视频格式不支持异常
-		/// </summary>
 		public static PredefinedLogItem VideoFormatUnSupportedException => Instance[(short)9];
 
-		/// <summary>
-		/// 读取到不存在的任务Id
-		/// </summary>
 		public static PredefinedLogItem TaskTemplateIdNotExist => Instance[(short)10];
 
-		/// <summary>
-		/// 地图运行时异常
-		/// </summary>
 		public static PredefinedLogItem MapRuntimeException => Instance[(short)11];
 
-		/// <summary>
-		/// 角色运行时异常
-		/// </summary>
 		public static PredefinedLogItem CharacterRuntimeException => Instance[(short)12];
 
-		/// <summary>
-		/// 功法运行时异常
-		/// </summary>
 		public static PredefinedLogItem CombatSkillRuntimeException => Instance[(short)13];
 
-		/// <summary>
-		/// 通信运行时异常
-		/// </summary>
 		public static PredefinedLogItem NetRuntimeException => Instance[(short)14];
 
-		/// <summary>
-		/// 较艺操作过期
-		/// </summary>
 		public static PredefinedLogItem LifeSkillCombatOperationExpired => Instance[(short)15];
 
-		/// <summary>
-		/// 梦回存档世界不匹配
-		/// </summary>
 		public static PredefinedLogItem DreamBackWorldNotMatch => Instance[(short)16];
 
-		/// <summary>
-		/// 化龙界面元素刷新异常
-		/// </summary>
 		public static PredefinedLogItem JiaoChangeloongRefreshIndexException => Instance[(short)17];
 
-		/// <summary>
-		/// 通用界面元素刷新异常
-		/// </summary>
 		public static PredefinedLogItem GeneralRefreshIndexException => Instance[(short)18];
 
-		/// <summary>
-		/// 世界运行时异常
-		/// </summary>
 		public static PredefinedLogItem WorldRuntimeException => Instance[(short)19];
 
-		/// <summary>
-		/// 道具重复
-		/// </summary>
 		public static PredefinedLogItem DuplicatedItemDetected => Instance[(short)20];
 
-		/// <summary>
-		/// 道具未被持有
-		/// </summary>
 		public static PredefinedLogItem UnownedItemDetected => Instance[(short)21];
 
-		/// <summary>
-		/// 事件切换未进入
-		/// </summary>
 		public static PredefinedLogItem EventChangedWithNotEntering => Instance[(short)22];
 
-		/// <summary>
-		/// 战斗 Ai 加载异常
-		/// </summary>
 		public static PredefinedLogItem CombatAiLoadException => Instance[(short)23];
 
-		/// <summary>
-		/// Mod 配置丢失异常
-		/// </summary>
 		public static PredefinedLogItem ModConfigNotFoundException => Instance[(short)24];
 
-		/// <summary>
-		/// 参数值不能为空
-		/// </summary>
 		public static PredefinedLogItem ValueCanNotBeEmpty => Instance[(short)25];
 
-		/// <summary>
-		/// 配置表找不到此参数
-		/// </summary>
 		public static PredefinedLogItem ValueNotFoundInConfigTable => Instance[(short)26];
 
-		/// <summary>
-		/// 找不到事件
-		/// </summary>
 		public static PredefinedLogItem EventNotFoundInAnyEventGroup => Instance[(short)27];
 
-		/// <summary>
-		/// 无效的枚举
-		/// </summary>
 		public static PredefinedLogItem InvalidEnumIndex => Instance[(short)28];
 
-		/// <summary>
-		/// Lua脚本执行异常
-		/// </summary>
 		public static PredefinedLogItem LuaScriptingException => Instance[(short)29];
 
-		/// <summary>
-		/// 元鸡缓存异常1
-		/// </summary>
 		public static PredefinedLogItem CacheCorruptedNoChickenInSettlement => Instance[(short)30];
 
-		/// <summary>
-		/// 元鸡缓存异常2
-		/// </summary>
 		public static PredefinedLogItem CacheCorruptedSetSettlementHasNoChicken => Instance[(short)31];
 
-		/// <summary>
-		/// 元鸡缓存异常3
-		/// </summary>
 		public static PredefinedLogItem CacheCorruptedRemoveNonExistsChicken => Instance[(short)32];
 
-		/// <summary>
-		/// 未知的通缉惩罚
-		/// </summary>
 		public static PredefinedLogItem UnknownPunishmentType => Instance[(short)33];
 
-		/// <summary>
-		/// 获取非存活角色的显示年龄
-		/// </summary>
 		public static PredefinedLogItem GetNotAliveDisplayingAge => Instance[(short)34];
 
-		/// <summary>
-		/// 配置设置解析失败
-		/// </summary>
 		public static PredefinedLogItem ConfigurationParseFailed => Instance[(short)35];
 
-		/// <summary>
-		/// 奇遇元素解析失败
-		/// </summary>
 		public static PredefinedLogItem AdventureElementNotFind => Instance[(short)36];
 
-		/// <summary>
-		/// 大事件模板解析失败
-		/// </summary>
 		public static PredefinedLogItem AdventureMajorEventNotFind => Instance[(short)37];
 
-		/// <summary>
-		/// 奇遇模板解析失败
-		/// </summary>
 		public static PredefinedLogItem AdventureNotFind => Instance[(short)38];
 
-		/// <summary>
-		/// 奇遇事件队列溢出
-		/// </summary>
 		public static PredefinedLogItem AdventureEventOverflow => Instance[(short)39];
 
-		/// <summary>
-		/// 奇遇生成失败
-		/// </summary>
 		public static PredefinedLogItem AdventureGenerateFailed => Instance[(short)40];
 
-		/// <summary>
-		/// 额外赌注生成失败
-		/// </summary>
 		public static PredefinedLogItem CricketExtraWagerGenerateFailed => Instance[(short)41];
 
-		/// <summary>
-		/// 升灵状态转变失败
-		/// </summary>
 		public static PredefinedLogItem PolymorphStateChangeFailed => Instance[(short)42];
 
-		/// <summary>
-		/// 加载存档异常
-		/// </summary>
 		public static PredefinedLogItem LoadArchiveDataFailed => Instance[(short)43];
 
-		/// <summary>
-		/// 保存备份存档失败
-		/// </summary>
 		public static PredefinedLogItem TransferToOldFailed => Instance[(short)44];
 
-		/// <summary>
-		/// NPC目标创建失败
-		/// </summary>
 		public static PredefinedLogItem CharacterGoalCreationFailed => Instance[(short)45];
 
-		/// <summary>
-		/// NPC行为规划失败
-		/// </summary>
 		public static PredefinedLogItem CharacterActionPlanningFailed => Instance[(short)46];
 
-		/// <summary>
-		/// NPC行为执行失败
-		/// </summary>
 		public static PredefinedLogItem CharacterActionExecutionFailed => Instance[(short)47];
 
-		/// <summary>
-		/// 通知类文本参数异常
-		/// </summary>
 		public static PredefinedLogItem GameMessageRenderError => Instance[(short)48];
 
-		/// <summary>
-		/// 通信数据序列化数据过长
-		/// </summary>
 		public static PredefinedLogItem SerializedSizeExceedLimit => Instance[(short)49];
 
-		/// <summary>
-		/// 道具堆叠异常1
-		/// </summary>
 		public static PredefinedLogItem InvalidItemStacking1 => Instance[(short)50];
 
-		/// <summary>
-		/// 道具堆叠异常2
-		/// </summary>
 		public static PredefinedLogItem InvalidItemStacking2 => Instance[(short)51];
+
+		public static PredefinedLogItem FrontendDebateError => Instance[(short)52];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static PredefinedLog Instance = new PredefinedLog();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Info", "TemplateId" };
@@ -611,50 +293,36 @@ public class PredefinedLog : ConfigData<PredefinedLogItem, short>
 		_dataArray.Add(new PredefinedLogItem(49, LocalStringManager.GetConfig("PredefinedLog_language", "Name_49"), LocalStringManager.GetConfig("PredefinedLog_language", "Info_49"), debugOnly: true));
 		_dataArray.Add(new PredefinedLogItem(50, LocalStringManager.GetConfig("PredefinedLog_language", "Name_50"), LocalStringManager.GetConfig("PredefinedLog_language", "Info_50"), debugOnly: false));
 		_dataArray.Add(new PredefinedLogItem(51, LocalStringManager.GetConfig("PredefinedLog_language", "Name_51"), LocalStringManager.GetConfig("PredefinedLog_language", "Info_51"), debugOnly: false));
+		_dataArray.Add(new PredefinedLogItem(52, LocalStringManager.GetConfig("PredefinedLog_language", "Name_52"), LocalStringManager.GetConfig("PredefinedLog_language", "Info_52"), debugOnly: false));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<PredefinedLogItem>(52);
+		_dataArray = new List<PredefinedLogItem>(53);
 		CreateItems0();
 	}
 
-	/// <summary>
-	/// 打印预设黄字警告
-	/// </summary>
 	public static void Show(short predefinedLogId)
 	{
 		Instance[predefinedLogId].Log();
 	}
 
-	/// <summary>
-	/// 打印预设黄字警告
-	/// </summary>
 	public static void Show(short predefinedLogId, object arg0)
 	{
 		Instance[predefinedLogId].Log(arg0);
 	}
 
-	/// <summary>
-	/// 打印预设黄字警告
-	/// </summary>
 	public static void Show(short predefinedLogId, object arg0, object arg1)
 	{
 		Instance[predefinedLogId].Log(arg0, arg1);
 	}
 
-	/// <summary>
-	/// 打印预设黄字警告
-	/// </summary>
 	public static void Show(short predefinedLogId, object arg0, object arg1, object arg2)
 	{
 		Instance[predefinedLogId].Log(arg0, arg1, arg2);
 	}
 
-	/// <summary>
-	/// 打印预设黄字警告
-	/// </summary>
 	public static void Show(short predefinedLogId, params object[] parameters)
 	{
 		Instance[predefinedLogId].Log(parameters);

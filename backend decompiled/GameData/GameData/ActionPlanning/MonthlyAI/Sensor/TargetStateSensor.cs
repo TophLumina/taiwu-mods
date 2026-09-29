@@ -49,7 +49,7 @@ public class TargetStateSensor : ISensor<IStateMemory<Character, StateKey>, Char
 			result = (targetChar.IsCompletelyInfected() ? 1 : 0);
 			break;
 		case 106:
-			result = ((selfChar.GetKidnapperId() >= 0) ? 1 : 0);
+			result = ((targetChar.GetKidnapperId() >= 0) ? 1 : 0);
 			break;
 		case 94:
 			result = ((args.BodyPartType >= 0 && args.InjuryType >= 0) ? targetChar.GetInjuries().Get(args.BodyPartType, args.InjuryType == 1) : int.MinValue);
@@ -162,7 +162,7 @@ public class TargetStateSensor : ISensor<IStateMemory<Character, StateKey>, Char
 		case 223:
 		case 224:
 		case 225:
-			result = targetChar.GetLifeSkillAttainment(stateKey.Offset(212));
+			result = targetChar.GetCombatSkillAttainment(stateKey.Offset(212));
 			break;
 		case 247:
 			result = ((args.LifeSkillType >= 0) ? targetChar.GetLifeSkillAttainment(args.LifeSkillType) : int.MinValue);
@@ -183,7 +183,7 @@ public class TargetStateSensor : ISensor<IStateMemory<Character, StateKey>, Char
 		case 261:
 		case 262:
 		case 263:
-			result = targetChar.GetCombatSkillAttainment(stateKey.Offset(248));
+			result = targetChar.GetLifeSkillAttainment(stateKey.Offset(248));
 			break;
 		case 264:
 			result = (LifeSkillType.CraftingTypes.Contains(args.LifeSkillType) ? targetChar.GetLifeSkillAttainment(args.LifeSkillType) : int.MinValue);

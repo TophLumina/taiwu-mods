@@ -8,7 +8,7 @@ namespace GameData.Domains.SpecialEffect.CombatSkill.Shixiangmen.FistAndPalm;
 
 public class DaShenWeiZhang : CombatSkillEffectBase
 {
-	private const int AddPowerPercent = 20;
+	private const int AddPowerPercent = 50;
 
 	private const int SilenceFrame = 3000;
 
@@ -43,7 +43,7 @@ public class DaShenWeiZhang : CombatSkillEffectBase
 			short enemySkillId = (base.IsDirect ? enemyChar.GetAffectingDefendSkillId() : enemyChar.GetAffectingMoveSkillId());
 			if (DomainManager.CombatSkill.TryGetElement_CombatSkills(new CombatSkillKey(enemyChar.GetId(), enemySkillId), out var enemySkill))
 			{
-				_addPower = enemySkill.GetPower() * 20 / 100;
+				_addPower = enemySkill.GetPower() * 50 / 100;
 				AppendAffectedData(context, base.CharacterId, 199, EDataModifyType.AddPercent, base.SkillTemplateId);
 				ShowSpecialEffectTips(0);
 			}

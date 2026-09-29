@@ -7,961 +7,392 @@ namespace Config;
 [Serializable]
 public class Information : ConfigData<InformationItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 空桑主线昌盛
-		/// </summary>
 		public const short KongsangProsperous = 55;
 
-		/// <summary>
-		/// 空桑主线衰落
-		/// </summary>
 		public const short KongsangFailing = 56;
 
-		/// <summary>
-		/// 血犼主线昌盛
-		/// </summary>
 		public const short XuehouProsperous = 57;
 
-		/// <summary>
-		/// 血犼主线衰落
-		/// </summary>
 		public const short XuehouFailing = 58;
 
-		/// <summary>
-		/// 少林主线昌盛
-		/// </summary>
 		public const short ShaolinProsperous = 59;
 
-		/// <summary>
-		/// 少林主线衰落
-		/// </summary>
 		public const short ShaolinFailing = 60;
 
-		/// <summary>
-		/// 武当主线昌盛
-		/// </summary>
 		public const short WudangProsperous = 61;
 
-		/// <summary>
-		/// 武当主线衰落
-		/// </summary>
 		public const short WudangFailing = 62;
 
-		/// <summary>
-		/// 璇女主线昌盛
-		/// </summary>
 		public const short XuannvProsperous = 63;
 
-		/// <summary>
-		/// 璇女主线衰落
-		/// </summary>
 		public const short XuannvFailing = 64;
 
-		/// <summary>
-		/// 元山主线昌盛
-		/// </summary>
 		public const short YuanshanProsperous = 65;
 
-		/// <summary>
-		/// 元山主线衰落
-		/// </summary>
 		public const short YuanshanFailing = 66;
 
-		/// <summary>
-		/// 狮相门主线昌盛
-		/// </summary>
 		public const short ShixiangProsperous = 67;
 
-		/// <summary>
-		/// 狮相门主线衰落
-		/// </summary>
 		public const short ShixiangFailing = 68;
 
-		/// <summary>
-		/// 五仙主线昌盛
-		/// </summary>
 		public const short WuxianProsperous = 69;
 
-		/// <summary>
-		/// 五仙主线衰落0
-		/// </summary>
 		public const short WuxianFailing0 = 70;
 
-		/// <summary>
-		/// 五仙主线衰落1
-		/// </summary>
 		public const short WuxianFailing1 = 71;
 
-		/// <summary>
-		/// 峨眉主线衰落
-		/// </summary>
 		public const short EmeiFailing = 72;
 
-		/// <summary>
-		/// 峨眉主线昌盛
-		/// </summary>
 		public const short EmeiProsperous = 73;
 
-		/// <summary>
-		/// 界青主线衰落
-		/// </summary>
 		public const short JieqingFailing = 74;
 
-		/// <summary>
-		/// 界青主线昌盛
-		/// </summary>
 		public const short JieqingProsperous = 75;
 
-		/// <summary>
-		/// 然山主线昌盛
-		/// </summary>
 		public const short RanshanProsperous = 76;
 
-		/// <summary>
-		/// 然山主线衰落
-		/// </summary>
 		public const short RanshanFailing = 77;
 
-		/// <summary>
-		/// 金刚主线昌盛
-		/// </summary>
 		public const short JingangProsperous = 78;
 
-		/// <summary>
-		/// 金刚主线衰落
-		/// </summary>
 		public const short JingangFailing = 79;
 
-		/// <summary>
-		/// 莫女衣见闻人
-		/// </summary>
 		public const short SwordTombMonvFake = 80;
 
-		/// <summary>
-		/// 伏邪铁见闻人
-		/// </summary>
 		public const short SwordTomDayueYaochangFake = 81;
 
-		/// <summary>
-		/// 大玄凝见闻人
-		/// </summary>
 		public const short SwordTombJiuhanFake = 82;
 
-		/// <summary>
-		/// 凤凰茧见闻人
-		/// </summary>
 		public const short SwordTombJinHuangerFake = 83;
 
-		/// <summary>
-		/// 焚神炼见闻人
-		/// </summary>
 		public const short SwordTombYiYihouFake = 84;
 
-		/// <summary>
-		/// 解龙魄见闻人
-		/// </summary>
 		public const short SwordTombWeiQiFake = 85;
 
-		/// <summary>
-		/// 溶尘隐见闻人
-		/// </summary>
 		public const short SwordTombYixiangFake = 86;
 
-		/// <summary>
-		/// 囚魔木见闻人
-		/// </summary>
 		public const short SwordTombXuefengFake = 87;
 
-		/// <summary>
-		/// 鬼神霞见闻人
-		/// </summary>
 		public const short SwordTombShuFangFake = 88;
 
-		/// <summary>
-		/// 莫女衣见闻天
-		/// </summary>
 		public const short SwordTombMonvReal = 89;
 
-		/// <summary>
-		/// 伏邪铁见闻天
-		/// </summary>
 		public const short SwordTomDayueYaochangReal = 90;
 
-		/// <summary>
-		/// 大玄凝见闻天
-		/// </summary>
 		public const short SwordTombJiuhanReal = 91;
 
-		/// <summary>
-		/// 凤凰茧见闻天
-		/// </summary>
 		public const short SwordTombJinHuangerReal = 92;
 
-		/// <summary>
-		/// 焚神炼见闻天
-		/// </summary>
 		public const short SwordTombYiYihouReal = 93;
 
-		/// <summary>
-		/// 解龙魄见闻天
-		/// </summary>
 		public const short SwordTombWeiQiReal = 94;
 
-		/// <summary>
-		/// 溶尘隐见闻天
-		/// </summary>
 		public const short SwordTombYixiangReal = 95;
 
-		/// <summary>
-		/// 囚魔木见闻天
-		/// </summary>
 		public const short SwordTombXuefengReal = 96;
 
-		/// <summary>
-		/// 鬼神霞见闻天
-		/// </summary>
 		public const short SwordTombShuFangReal = 97;
 
-		/// <summary>
-		/// 莫女衣见闻普通
-		/// </summary>
 		public const short SwordTombMonvRealPermanent = 98;
 
-		/// <summary>
-		/// 伏邪铁见闻普通
-		/// </summary>
 		public const short SwordTomDayueYaochangRealPermanent = 99;
 
-		/// <summary>
-		/// 大玄凝见闻普通
-		/// </summary>
 		public const short SwordTombJiuhanRealPermanent = 100;
 
-		/// <summary>
-		/// 凤凰茧见闻普通
-		/// </summary>
 		public const short SwordTombJinHuangerRealPermanent = 101;
 
-		/// <summary>
-		/// 焚神炼见闻普通
-		/// </summary>
 		public const short SwordTombYiYihouRealPermanent = 102;
 
-		/// <summary>
-		/// 解龙魄见闻普通
-		/// </summary>
 		public const short SwordTombWeiQiRealPermanent = 103;
 
-		/// <summary>
-		/// 溶尘隐见闻普通
-		/// </summary>
 		public const short SwordTombYixiangRealPermanent = 104;
 
-		/// <summary>
-		/// 囚魔木见闻普通
-		/// </summary>
 		public const short SwordTombXuefengRealPermanent = 105;
 
-		/// <summary>
-		/// 鬼神霞见闻普通
-		/// </summary>
 		public const short SwordTombShuFangRealPermanent = 106;
 
-		/// <summary>
-		/// 百花主线昌盛
-		/// </summary>
 		public const short BaihuaProsperous = 107;
 
-		/// <summary>
-		/// 百花主线衰落
-		/// </summary>
 		public const short BaihuaFailing = 108;
 
-		/// <summary>
-		/// 伏龙主线昌盛
-		/// </summary>
 		public const short FulongProsperous = 109;
 
-		/// <summary>
-		/// 伏龙主线衰落
-		/// </summary>
 		public const short FulongFailing = 110;
 
-		/// <summary>
-		/// 莫女衣见闻地
-		/// </summary>
 		public const short SwordTombMonvSwordTombKeeper = 111;
 
-		/// <summary>
-		/// 伏邪铁见闻地
-		/// </summary>
 		public const short SwordTomDayueYaochangSwordTombKeeper = 112;
 
-		/// <summary>
-		/// 大玄凝见闻地
-		/// </summary>
 		public const short SwordTombJiuhanSwordTombKeeper = 113;
 
-		/// <summary>
-		/// 凤凰茧见闻地
-		/// </summary>
 		public const short SwordTombJinHuangerSwordTombKeeper = 114;
 
-		/// <summary>
-		/// 焚神炼见闻地
-		/// </summary>
 		public const short SwordTombYiYihouSwordTombKeeper = 115;
 
-		/// <summary>
-		/// 解龙魄见闻地
-		/// </summary>
 		public const short SwordTombWeiQiSwordTombKeeper = 116;
 
-		/// <summary>
-		/// 溶尘隐见闻地
-		/// </summary>
 		public const short SwordTombYixiangSwordTombKeeper = 117;
 
-		/// <summary>
-		/// 囚魔木见闻地
-		/// </summary>
 		public const short SwordTombXuefengSwordTombKeeper = 118;
 
-		/// <summary>
-		/// 鬼神霞见闻地
-		/// </summary>
 		public const short SwordTombShuFangSwordTombKeeper = 119;
 
-		/// <summary>
-		/// 铸剑主线昌盛
-		/// </summary>
 		public const short ZhujianProsperous = 120;
 
-		/// <summary>
-		/// 铸剑主线衰落
-		/// </summary>
 		public const short ZhujianFailing = 121;
 
-		/// <summary>
-		/// 山人志向见闻
-		/// </summary>
 		public const short SavageProfession = 122;
 
-		/// <summary>
-		/// 猎户志向见闻
-		/// </summary>
 		public const short HunterProfession = 123;
 
-		/// <summary>
-		/// 匠人志向见闻
-		/// </summary>
 		public const short CraftProfession = 124;
 
-		/// <summary>
-		/// 武师志向见闻
-		/// </summary>
 		public const short MartialArtistProfession = 125;
 
-		/// <summary>
-		/// 才俊志向见闻
-		/// </summary>
 		public const short LiteratiProfession = 126;
 
-		/// <summary>
-		/// 道长志向见闻
-		/// </summary>
 		public const short TaoistMonkProfession = 127;
 
-		/// <summary>
-		/// 高僧志向见闻
-		/// </summary>
 		public const short BuddhistMonkProfession = 128;
 
-		/// <summary>
-		/// 豪客志向见闻
-		/// </summary>
 		public const short WineTasterProfession = 129;
 
-		/// <summary>
-		/// 名门志向见闻
-		/// </summary>
 		public const short AristocratProfession = 130;
 
-		/// <summary>
-		/// 乞丐志向见闻
-		/// </summary>
 		public const short BeggarProfession = 131;
 
-		/// <summary>
-		/// 平民志向见闻
-		/// </summary>
 		public const short CivilianProfession = 132;
 
-		/// <summary>
-		/// 旅人志向见闻
-		/// </summary>
 		public const short TravelerProfession = 133;
 
-		/// <summary>
-		/// 云游僧志向见闻
-		/// </summary>
 		public const short TravelingBuddhistMonkProfession = 134;
 
-		/// <summary>
-		/// 大夫志向见闻
-		/// </summary>
 		public const short DoctorProfession = 135;
 
-		/// <summary>
-		/// 云游道志向见闻
-		/// </summary>
 		public const short TravelingTaoistMonkProfession = 136;
 
-		/// <summary>
-		/// 富商志向见闻
-		/// </summary>
 		public const short CapitalistProfession = 137;
 
-		/// <summary>
-		/// 贵客志向见闻
-		/// </summary>
 		public const short TeaTasterProfession = 138;
 
-		/// <summary>
-		/// 王公志向见闻
-		/// </summary>
 		public const short DukeProfession = 139;
 
-		/// <summary>
-		/// 莫女衣见闻废弃
-		/// </summary>
 		public const short SwordTombMonvMonk = 140;
 
-		/// <summary>
-		/// 伏邪铁见闻废弃
-		/// </summary>
 		public const short SwordTomDayueYaochangMonk = 141;
 
-		/// <summary>
-		/// 大玄凝见闻废弃
-		/// </summary>
 		public const short SwordTombJiuhanMonk = 142;
 
-		/// <summary>
-		/// 凤凰茧见闻废弃
-		/// </summary>
 		public const short SwordTombJinHuangerMonk = 143;
 
-		/// <summary>
-		/// 焚神炼见闻废弃
-		/// </summary>
 		public const short SwordTombYiYihouMonk = 144;
 
-		/// <summary>
-		/// 解龙魄见闻废弃
-		/// </summary>
 		public const short SwordTombWeiQiMonk = 145;
 
-		/// <summary>
-		/// 溶尘隐见闻废弃
-		/// </summary>
 		public const short SwordTombYixiangMonk = 146;
 
-		/// <summary>
-		/// 囚魔木见闻废弃
-		/// </summary>
 		public const short SwordTombXuefengMonk = 147;
 
-		/// <summary>
-		/// 鬼神霞见闻废弃
-		/// </summary>
 		public const short SwordTombShuFangMonk = 148;
+
+		public const short XiangshuProfession = 149;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 空桑主线昌盛
-		/// </summary>
 		public static InformationItem KongsangProsperous => Instance[(short)55];
 
-		/// <summary>
-		/// 空桑主线衰落
-		/// </summary>
 		public static InformationItem KongsangFailing => Instance[(short)56];
 
-		/// <summary>
-		/// 血犼主线昌盛
-		/// </summary>
 		public static InformationItem XuehouProsperous => Instance[(short)57];
 
-		/// <summary>
-		/// 血犼主线衰落
-		/// </summary>
 		public static InformationItem XuehouFailing => Instance[(short)58];
 
-		/// <summary>
-		/// 少林主线昌盛
-		/// </summary>
 		public static InformationItem ShaolinProsperous => Instance[(short)59];
 
-		/// <summary>
-		/// 少林主线衰落
-		/// </summary>
 		public static InformationItem ShaolinFailing => Instance[(short)60];
 
-		/// <summary>
-		/// 武当主线昌盛
-		/// </summary>
 		public static InformationItem WudangProsperous => Instance[(short)61];
 
-		/// <summary>
-		/// 武当主线衰落
-		/// </summary>
 		public static InformationItem WudangFailing => Instance[(short)62];
 
-		/// <summary>
-		/// 璇女主线昌盛
-		/// </summary>
 		public static InformationItem XuannvProsperous => Instance[(short)63];
 
-		/// <summary>
-		/// 璇女主线衰落
-		/// </summary>
 		public static InformationItem XuannvFailing => Instance[(short)64];
 
-		/// <summary>
-		/// 元山主线昌盛
-		/// </summary>
 		public static InformationItem YuanshanProsperous => Instance[(short)65];
 
-		/// <summary>
-		/// 元山主线衰落
-		/// </summary>
 		public static InformationItem YuanshanFailing => Instance[(short)66];
 
-		/// <summary>
-		/// 狮相门主线昌盛
-		/// </summary>
 		public static InformationItem ShixiangProsperous => Instance[(short)67];
 
-		/// <summary>
-		/// 狮相门主线衰落
-		/// </summary>
 		public static InformationItem ShixiangFailing => Instance[(short)68];
 
-		/// <summary>
-		/// 五仙主线昌盛
-		/// </summary>
 		public static InformationItem WuxianProsperous => Instance[(short)69];
 
-		/// <summary>
-		/// 五仙主线衰落0
-		/// </summary>
 		public static InformationItem WuxianFailing0 => Instance[(short)70];
 
-		/// <summary>
-		/// 五仙主线衰落1
-		/// </summary>
 		public static InformationItem WuxianFailing1 => Instance[(short)71];
 
-		/// <summary>
-		/// 峨眉主线衰落
-		/// </summary>
 		public static InformationItem EmeiFailing => Instance[(short)72];
 
-		/// <summary>
-		/// 峨眉主线昌盛
-		/// </summary>
 		public static InformationItem EmeiProsperous => Instance[(short)73];
 
-		/// <summary>
-		/// 界青主线衰落
-		/// </summary>
 		public static InformationItem JieqingFailing => Instance[(short)74];
 
-		/// <summary>
-		/// 界青主线昌盛
-		/// </summary>
 		public static InformationItem JieqingProsperous => Instance[(short)75];
 
-		/// <summary>
-		/// 然山主线昌盛
-		/// </summary>
 		public static InformationItem RanshanProsperous => Instance[(short)76];
 
-		/// <summary>
-		/// 然山主线衰落
-		/// </summary>
 		public static InformationItem RanshanFailing => Instance[(short)77];
 
-		/// <summary>
-		/// 金刚主线昌盛
-		/// </summary>
 		public static InformationItem JingangProsperous => Instance[(short)78];
 
-		/// <summary>
-		/// 金刚主线衰落
-		/// </summary>
 		public static InformationItem JingangFailing => Instance[(short)79];
 
-		/// <summary>
-		/// 莫女衣见闻人
-		/// </summary>
 		public static InformationItem SwordTombMonvFake => Instance[(short)80];
 
-		/// <summary>
-		/// 伏邪铁见闻人
-		/// </summary>
 		public static InformationItem SwordTomDayueYaochangFake => Instance[(short)81];
 
-		/// <summary>
-		/// 大玄凝见闻人
-		/// </summary>
 		public static InformationItem SwordTombJiuhanFake => Instance[(short)82];
 
-		/// <summary>
-		/// 凤凰茧见闻人
-		/// </summary>
 		public static InformationItem SwordTombJinHuangerFake => Instance[(short)83];
 
-		/// <summary>
-		/// 焚神炼见闻人
-		/// </summary>
 		public static InformationItem SwordTombYiYihouFake => Instance[(short)84];
 
-		/// <summary>
-		/// 解龙魄见闻人
-		/// </summary>
 		public static InformationItem SwordTombWeiQiFake => Instance[(short)85];
 
-		/// <summary>
-		/// 溶尘隐见闻人
-		/// </summary>
 		public static InformationItem SwordTombYixiangFake => Instance[(short)86];
 
-		/// <summary>
-		/// 囚魔木见闻人
-		/// </summary>
 		public static InformationItem SwordTombXuefengFake => Instance[(short)87];
 
-		/// <summary>
-		/// 鬼神霞见闻人
-		/// </summary>
 		public static InformationItem SwordTombShuFangFake => Instance[(short)88];
 
-		/// <summary>
-		/// 莫女衣见闻天
-		/// </summary>
 		public static InformationItem SwordTombMonvReal => Instance[(short)89];
 
-		/// <summary>
-		/// 伏邪铁见闻天
-		/// </summary>
 		public static InformationItem SwordTomDayueYaochangReal => Instance[(short)90];
 
-		/// <summary>
-		/// 大玄凝见闻天
-		/// </summary>
 		public static InformationItem SwordTombJiuhanReal => Instance[(short)91];
 
-		/// <summary>
-		/// 凤凰茧见闻天
-		/// </summary>
 		public static InformationItem SwordTombJinHuangerReal => Instance[(short)92];
 
-		/// <summary>
-		/// 焚神炼见闻天
-		/// </summary>
 		public static InformationItem SwordTombYiYihouReal => Instance[(short)93];
 
-		/// <summary>
-		/// 解龙魄见闻天
-		/// </summary>
 		public static InformationItem SwordTombWeiQiReal => Instance[(short)94];
 
-		/// <summary>
-		/// 溶尘隐见闻天
-		/// </summary>
 		public static InformationItem SwordTombYixiangReal => Instance[(short)95];
 
-		/// <summary>
-		/// 囚魔木见闻天
-		/// </summary>
 		public static InformationItem SwordTombXuefengReal => Instance[(short)96];
 
-		/// <summary>
-		/// 鬼神霞见闻天
-		/// </summary>
 		public static InformationItem SwordTombShuFangReal => Instance[(short)97];
 
-		/// <summary>
-		/// 莫女衣见闻普通
-		/// </summary>
 		public static InformationItem SwordTombMonvRealPermanent => Instance[(short)98];
 
-		/// <summary>
-		/// 伏邪铁见闻普通
-		/// </summary>
 		public static InformationItem SwordTomDayueYaochangRealPermanent => Instance[(short)99];
 
-		/// <summary>
-		/// 大玄凝见闻普通
-		/// </summary>
 		public static InformationItem SwordTombJiuhanRealPermanent => Instance[(short)100];
 
-		/// <summary>
-		/// 凤凰茧见闻普通
-		/// </summary>
 		public static InformationItem SwordTombJinHuangerRealPermanent => Instance[(short)101];
 
-		/// <summary>
-		/// 焚神炼见闻普通
-		/// </summary>
 		public static InformationItem SwordTombYiYihouRealPermanent => Instance[(short)102];
 
-		/// <summary>
-		/// 解龙魄见闻普通
-		/// </summary>
 		public static InformationItem SwordTombWeiQiRealPermanent => Instance[(short)103];
 
-		/// <summary>
-		/// 溶尘隐见闻普通
-		/// </summary>
 		public static InformationItem SwordTombYixiangRealPermanent => Instance[(short)104];
 
-		/// <summary>
-		/// 囚魔木见闻普通
-		/// </summary>
 		public static InformationItem SwordTombXuefengRealPermanent => Instance[(short)105];
 
-		/// <summary>
-		/// 鬼神霞见闻普通
-		/// </summary>
 		public static InformationItem SwordTombShuFangRealPermanent => Instance[(short)106];
 
-		/// <summary>
-		/// 百花主线昌盛
-		/// </summary>
 		public static InformationItem BaihuaProsperous => Instance[(short)107];
 
-		/// <summary>
-		/// 百花主线衰落
-		/// </summary>
 		public static InformationItem BaihuaFailing => Instance[(short)108];
 
-		/// <summary>
-		/// 伏龙主线昌盛
-		/// </summary>
 		public static InformationItem FulongProsperous => Instance[(short)109];
 
-		/// <summary>
-		/// 伏龙主线衰落
-		/// </summary>
 		public static InformationItem FulongFailing => Instance[(short)110];
 
-		/// <summary>
-		/// 莫女衣见闻地
-		/// </summary>
 		public static InformationItem SwordTombMonvSwordTombKeeper => Instance[(short)111];
 
-		/// <summary>
-		/// 伏邪铁见闻地
-		/// </summary>
 		public static InformationItem SwordTomDayueYaochangSwordTombKeeper => Instance[(short)112];
 
-		/// <summary>
-		/// 大玄凝见闻地
-		/// </summary>
 		public static InformationItem SwordTombJiuhanSwordTombKeeper => Instance[(short)113];
 
-		/// <summary>
-		/// 凤凰茧见闻地
-		/// </summary>
 		public static InformationItem SwordTombJinHuangerSwordTombKeeper => Instance[(short)114];
 
-		/// <summary>
-		/// 焚神炼见闻地
-		/// </summary>
 		public static InformationItem SwordTombYiYihouSwordTombKeeper => Instance[(short)115];
 
-		/// <summary>
-		/// 解龙魄见闻地
-		/// </summary>
 		public static InformationItem SwordTombWeiQiSwordTombKeeper => Instance[(short)116];
 
-		/// <summary>
-		/// 溶尘隐见闻地
-		/// </summary>
 		public static InformationItem SwordTombYixiangSwordTombKeeper => Instance[(short)117];
 
-		/// <summary>
-		/// 囚魔木见闻地
-		/// </summary>
 		public static InformationItem SwordTombXuefengSwordTombKeeper => Instance[(short)118];
 
-		/// <summary>
-		/// 鬼神霞见闻地
-		/// </summary>
 		public static InformationItem SwordTombShuFangSwordTombKeeper => Instance[(short)119];
 
-		/// <summary>
-		/// 铸剑主线昌盛
-		/// </summary>
 		public static InformationItem ZhujianProsperous => Instance[(short)120];
 
-		/// <summary>
-		/// 铸剑主线衰落
-		/// </summary>
 		public static InformationItem ZhujianFailing => Instance[(short)121];
 
-		/// <summary>
-		/// 山人志向见闻
-		/// </summary>
 		public static InformationItem SavageProfession => Instance[(short)122];
 
-		/// <summary>
-		/// 猎户志向见闻
-		/// </summary>
 		public static InformationItem HunterProfession => Instance[(short)123];
 
-		/// <summary>
-		/// 匠人志向见闻
-		/// </summary>
 		public static InformationItem CraftProfession => Instance[(short)124];
 
-		/// <summary>
-		/// 武师志向见闻
-		/// </summary>
 		public static InformationItem MartialArtistProfession => Instance[(short)125];
 
-		/// <summary>
-		/// 才俊志向见闻
-		/// </summary>
 		public static InformationItem LiteratiProfession => Instance[(short)126];
 
-		/// <summary>
-		/// 道长志向见闻
-		/// </summary>
 		public static InformationItem TaoistMonkProfession => Instance[(short)127];
 
-		/// <summary>
-		/// 高僧志向见闻
-		/// </summary>
 		public static InformationItem BuddhistMonkProfession => Instance[(short)128];
 
-		/// <summary>
-		/// 豪客志向见闻
-		/// </summary>
 		public static InformationItem WineTasterProfession => Instance[(short)129];
 
-		/// <summary>
-		/// 名门志向见闻
-		/// </summary>
 		public static InformationItem AristocratProfession => Instance[(short)130];
 
-		/// <summary>
-		/// 乞丐志向见闻
-		/// </summary>
 		public static InformationItem BeggarProfession => Instance[(short)131];
 
-		/// <summary>
-		/// 平民志向见闻
-		/// </summary>
 		public static InformationItem CivilianProfession => Instance[(short)132];
 
-		/// <summary>
-		/// 旅人志向见闻
-		/// </summary>
 		public static InformationItem TravelerProfession => Instance[(short)133];
 
-		/// <summary>
-		/// 云游僧志向见闻
-		/// </summary>
 		public static InformationItem TravelingBuddhistMonkProfession => Instance[(short)134];
 
-		/// <summary>
-		/// 大夫志向见闻
-		/// </summary>
 		public static InformationItem DoctorProfession => Instance[(short)135];
 
-		/// <summary>
-		/// 云游道志向见闻
-		/// </summary>
 		public static InformationItem TravelingTaoistMonkProfession => Instance[(short)136];
 
-		/// <summary>
-		/// 富商志向见闻
-		/// </summary>
 		public static InformationItem CapitalistProfession => Instance[(short)137];
 
-		/// <summary>
-		/// 贵客志向见闻
-		/// </summary>
 		public static InformationItem TeaTasterProfession => Instance[(short)138];
 
-		/// <summary>
-		/// 王公志向见闻
-		/// </summary>
 		public static InformationItem DukeProfession => Instance[(short)139];
 
-		/// <summary>
-		/// 莫女衣见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombMonvMonk => Instance[(short)140];
 
-		/// <summary>
-		/// 伏邪铁见闻废弃
-		/// </summary>
 		public static InformationItem SwordTomDayueYaochangMonk => Instance[(short)141];
 
-		/// <summary>
-		/// 大玄凝见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombJiuhanMonk => Instance[(short)142];
 
-		/// <summary>
-		/// 凤凰茧见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombJinHuangerMonk => Instance[(short)143];
 
-		/// <summary>
-		/// 焚神炼见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombYiYihouMonk => Instance[(short)144];
 
-		/// <summary>
-		/// 解龙魄见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombWeiQiMonk => Instance[(short)145];
 
-		/// <summary>
-		/// 溶尘隐见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombYixiangMonk => Instance[(short)146];
 
-		/// <summary>
-		/// 囚魔木见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombXuefengMonk => Instance[(short)147];
 
-		/// <summary>
-		/// 鬼神霞见闻废弃
-		/// </summary>
 		public static InformationItem SwordTombShuFangMonk => Instance[(short)148];
+
+		public static InformationItem XiangshuProfession => Instance[(short)149];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Information Instance = new Information();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "InfoIds", "Type", "TransformId", "TemplateId", "BaseGainRate", "ExtraGainRate" };
@@ -1135,12 +566,13 @@ public class Information : ConfigData<InformationItem, short>
 		_dataArray.Add(new InformationItem(146, new short[9] { -1, -1, -1, -1, 586, -1, -1, -1, -1 }, isGeneral: false, 5, new sbyte[9], new sbyte[9], 1, usedCountWithMax: false, new short[3] { 450, 150, 0 }, 0, new short[3], new short[3], new short[3], new short[3], 200, -1, isNeedShowLevel: false, new short[3], 8, 1));
 		_dataArray.Add(new InformationItem(147, new short[9] { -1, -1, -1, -1, 587, -1, -1, -1, -1 }, isGeneral: false, 5, new sbyte[9], new sbyte[9], 1, usedCountWithMax: false, new short[3] { 450, 150, 0 }, 0, new short[3], new short[3], new short[3], new short[3], 200, -1, isNeedShowLevel: false, new short[3], 8, 1));
 		_dataArray.Add(new InformationItem(148, new short[9] { -1, -1, -1, -1, 588, -1, -1, -1, -1 }, isGeneral: false, 5, new sbyte[9], new sbyte[9], 1, usedCountWithMax: false, new short[3] { 450, 150, 0 }, 0, new short[3], new short[3], new short[3], new short[3], 200, -1, isNeedShowLevel: false, new short[3], 8, 1));
+		_dataArray.Add(new InformationItem(149, new short[9] { -1, -1, -1, -1, -1, -1, -1, -1, 589 }, isGeneral: false, 6, new sbyte[9], new sbyte[9], 1, usedCountWithMax: false, new short[3] { 450, 150, 0 }, 0, new short[3], new short[3], new short[3], new short[3], 200, -1, isNeedShowLevel: false, new short[3], 8, 1));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<InformationItem>(149);
+		_dataArray = new List<InformationItem>(150);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class CatchThiefPlace : ConfigData<CatchThiefPlaceItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CatchThiefPlace Instance = new CatchThiefPlace();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "Rate", "LevelWeights", "Icon", "CatchAniBack" };

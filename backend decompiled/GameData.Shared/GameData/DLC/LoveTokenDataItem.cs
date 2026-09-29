@@ -1,45 +1,26 @@
+using System;
 using GameData.Serializer;
 
 namespace GameData.DLC;
 
-/// <summary>
-/// 定情信物的数据
-/// </summary>
+[Obsolete]
 public class LoveTokenDataItem : ISerializableGameData
 {
-	/// <summary>
-	/// 太吾ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuCharId;
 
-	/// <summary>
-	/// 恋人ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int LoverCharId;
 
-	/// <summary>
-	/// 定情时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int BecomeLoverTime;
 
-	/// <summary>
-	/// 当前持有者ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurHolderCharId;
 
-	/// <summary>
-	/// 是否为太吾送的
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwuPresent;
 
-	/// <summary>
-	/// 是否有效
-	/// </summary>
 	public bool IsValid
 	{
 		get
@@ -88,13 +69,11 @@ public class LoveTokenDataItem : ISerializableGameData
 		IsTaiwuPresent = other.IsTaiwuPresent;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 17;
@@ -105,7 +84,6 @@ public class LoveTokenDataItem : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = TaiwuCharId;
@@ -125,7 +103,6 @@ public class LoveTokenDataItem : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

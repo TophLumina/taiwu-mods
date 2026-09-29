@@ -8,2131 +8,856 @@ namespace Config;
 [Serializable]
 public class ShopEvent : ConfigData<ShopEventItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 堤堰成功
-		/// </summary>
 		public const short CollectResourceSuccess0 = 0;
 
-		/// <summary>
-		/// 矿井成功
-		/// </summary>
 		public const short CollectResourceSuccess1 = 1;
 
-		/// <summary>
-		/// 树农成功
-		/// </summary>
 		public const short CollectResourceSuccess2 = 2;
 
-		/// <summary>
-		/// 石碑成功
-		/// </summary>
 		public const short CollectResourceSuccess3 = 3;
 
-		/// <summary>
-		/// 药农成功
-		/// </summary>
 		public const short CollectResourceSuccess4 = 4;
 
-		/// <summary>
-		/// 泥渠成功
-		/// </summary>
 		public const short CollectResourceSuccess5 = 5;
 
-		/// <summary>
-		/// 花农成功
-		/// </summary>
 		public const short CollectResourceSuccess6 = 6;
 
-		/// <summary>
-		/// 宝井成功
-		/// </summary>
 		public const short CollectResourceSuccess7 = 7;
 
-		/// <summary>
-		/// 筒车成功
-		/// </summary>
 		public const short CollectResourceSuccess8 = 8;
 
-		/// <summary>
-		/// 牧场成功
-		/// </summary>
 		public const short CollectResourceSuccess9 = 9;
 
-		/// <summary>
-		/// 琉璃索成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess0 = 10;
 
-		/// <summary>
-		/// 火爆堆成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess1 = 11;
 
-		/// <summary>
-		/// 护林墙成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess2 = 12;
 
-		/// <summary>
-		/// 悬空栈成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess3 = 13;
 
-		/// <summary>
-		/// 引涧渠成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess4 = 14;
 
-		/// <summary>
-		/// 饵食牢成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess5 = 15;
 
-		/// <summary>
-		/// 云篷成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess6 = 16;
 
-		/// <summary>
-		/// 福人居成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess7 = 17;
 
-		/// <summary>
-		/// 秘陵成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess8 = 18;
 
-		/// <summary>
-		/// 冰夷像成功
-		/// </summary>
 		public const short CollectBetterResourceSuccess9 = 19;
 
-		/// <summary>
-		/// 堤堰失败
-		/// </summary>
 		public const short CollectResourceFail0 = 20;
 
-		/// <summary>
-		/// 矿井失败
-		/// </summary>
 		public const short CollectResourceFail1 = 21;
 
-		/// <summary>
-		/// 树农失败
-		/// </summary>
 		public const short CollectResourceFail2 = 22;
 
-		/// <summary>
-		/// 石碑失败
-		/// </summary>
 		public const short CollectResourceFail3 = 23;
 
-		/// <summary>
-		/// 药农失败
-		/// </summary>
 		public const short CollectResourceFail4 = 24;
 
-		/// <summary>
-		/// 泥渠失败
-		/// </summary>
 		public const short CollectResourceFail5 = 25;
 
-		/// <summary>
-		/// 花农失败
-		/// </summary>
 		public const short CollectResourceFail6 = 26;
 
-		/// <summary>
-		/// 宝井失败
-		/// </summary>
 		public const short CollectResourceFail7 = 27;
 
-		/// <summary>
-		/// 筒车失败
-		/// </summary>
 		public const short CollectResourceFail8 = 28;
 
-		/// <summary>
-		/// 牧场失败
-		/// </summary>
 		public const short CollectResourceFail9 = 29;
 
-		/// <summary>
-		/// 琉璃索失败
-		/// </summary>
 		public const short CollectBetterResourceFail0 = 30;
 
-		/// <summary>
-		/// 火爆堆失败
-		/// </summary>
 		public const short CollectBetterResourceFail1 = 31;
 
-		/// <summary>
-		/// 护林墙失败
-		/// </summary>
 		public const short CollectBetterResourceFail2 = 32;
 
-		/// <summary>
-		/// 悬空栈失败
-		/// </summary>
 		public const short CollectBetterResourceFail3 = 33;
 
-		/// <summary>
-		/// 引涧渠失败
-		/// </summary>
 		public const short CollectBetterResourceFail4 = 34;
 
-		/// <summary>
-		/// 饵食牢失败
-		/// </summary>
 		public const short CollectBetterResourceFail5 = 35;
 
-		/// <summary>
-		/// 云篷失败
-		/// </summary>
 		public const short CollectBetterResourceFail6 = 36;
 
-		/// <summary>
-		/// 福人居失败
-		/// </summary>
 		public const short CollectBetterResourceFail7 = 37;
 
-		/// <summary>
-		/// 秘陵失败
-		/// </summary>
 		public const short CollectBetterResourceFail8 = 38;
 
-		/// <summary>
-		/// 冰夷像失败
-		/// </summary>
 		public const short CollectBetterResourceFail9 = 39;
 
-		/// <summary>
-		/// 镖局成功
-		/// </summary>
 		public const short ManageCombatSkillBuildingSuccess0 = 40;
 
-		/// <summary>
-		/// 炼神峰成功
-		/// </summary>
 		public const short ManageCombatSkillBuildingSuccess1 = 41;
 
-		/// <summary>
-		/// 知客亭成功
-		/// </summary>
 		public const short ManageCombatSkillBuildingSuccess2 = 42;
 
-		/// <summary>
-		/// 镖局失败
-		/// </summary>
 		public const short ManageCombatSkillBuildingFail0 = 43;
 
-		/// <summary>
-		/// 炼神峰失败
-		/// </summary>
 		public const short ManageCombatSkillBuildingFail1 = 44;
 
-		/// <summary>
-		/// 知客亭失败
-		/// </summary>
 		public const short ManageCombatSkillBuildingFail2 = 45;
 
-		/// <summary>
-		/// 乐坊成功
-		/// </summary>
 		public const short ManageMusicBuildingSuccess0 = 46;
 
-		/// <summary>
-		/// 知音阁成功
-		/// </summary>
 		public const short ManageMusicBuildingSuccess1 = 47;
 
-		/// <summary>
-		/// 百戏园成功
-		/// </summary>
 		public const short ManageMusicBuildingSuccess2 = 48;
 
-		/// <summary>
-		/// 乐坊失败
-		/// </summary>
 		public const short ManageMusicBuildingFail0 = 49;
 
-		/// <summary>
-		/// 知音阁失败
-		/// </summary>
 		public const short ManageMusicBuildingFail1 = 50;
 
-		/// <summary>
-		/// 百戏园失败
-		/// </summary>
 		public const short ManageMusicBuildingFail2 = 51;
 
-		/// <summary>
-		/// 棋馆成功
-		/// </summary>
 		public const short ManageChessBuildingSuccess0 = 52;
 
-		/// <summary>
-		/// 斗弈台成功
-		/// </summary>
 		public const short ManageChessBuildingSuccess1 = 53;
 
-		/// <summary>
-		/// 石谱园成功
-		/// </summary>
 		public const short ManageChessBuildingSuccess2 = 54;
 
-		/// <summary>
-		/// 棋馆失败
-		/// </summary>
 		public const short ManageChessBuildingFail0 = 55;
 
-		/// <summary>
-		/// 斗弈台失败
-		/// </summary>
 		public const short ManageChessBuildingFail1 = 56;
 
-		/// <summary>
-		/// 石谱园失败
-		/// </summary>
 		public const short ManageChessBuildingFail2 = 57;
 
-		/// <summary>
-		/// 书铺成功
-		/// </summary>
 		public const short ManagePoemBuildingSuccess0 = 58;
 
-		/// <summary>
-		/// 书院成功
-		/// </summary>
 		public const short ManagePoemBuildingSuccess1 = 59;
 
-		/// <summary>
-		/// 翰苑成功
-		/// </summary>
 		public const short ManagePoemBuildingSuccess2 = 60;
 
-		/// <summary>
-		/// 书铺失败
-		/// </summary>
 		public const short ManagePoemBuildingFail0 = 61;
 
-		/// <summary>
-		/// 书院失败
-		/// </summary>
 		public const short ManagePoemBuildingFail1 = 62;
 
-		/// <summary>
-		/// 翰苑失败
-		/// </summary>
 		public const short ManagePoemBuildingFail2 = 63;
 
-		/// <summary>
-		/// 画铺成功
-		/// </summary>
 		public const short ManagePaintingBuildingSuccess0 = 64;
 
-		/// <summary>
-		/// 丹青馆成功
-		/// </summary>
 		public const short ManagePaintingBuildingSuccess1 = 65;
 
-		/// <summary>
-		/// 流光园成功
-		/// </summary>
 		public const short ManagePaintingBuildingSuccess2 = 66;
 
-		/// <summary>
-		/// 画铺失败
-		/// </summary>
 		public const short ManagePaintingBuildingFail0 = 67;
 
-		/// <summary>
-		/// 丹青馆失败
-		/// </summary>
 		public const short ManagePaintingBuildingFail1 = 68;
 
-		/// <summary>
-		/// 流光园失败
-		/// </summary>
 		public const short ManagePaintingBuildingFail2 = 69;
 
-		/// <summary>
-		/// 占卜馆成功
-		/// </summary>
 		public const short ManageMathBuildingSuccess0 = 70;
 
-		/// <summary>
-		/// 方士馆成功
-		/// </summary>
 		public const short ManageMathBuildingSuccess1 = 71;
 
-		/// <summary>
-		/// 祭天高台成功
-		/// </summary>
 		public const short ManageMathBuildingSuccess2 = 72;
 
-		/// <summary>
-		/// 占卜馆失败
-		/// </summary>
 		public const short ManageMathBuildingFail0 = 73;
 
-		/// <summary>
-		/// 方士馆失败
-		/// </summary>
 		public const short ManageMathBuildingFail1 = 74;
 
-		/// <summary>
-		/// 祭天高台失败
-		/// </summary>
 		public const short ManageMathBuildingFail2 = 75;
 
-		/// <summary>
-		/// 茶馆成功
-		/// </summary>
 		public const short ManageAppraisalBuildingSuccess0 = 76;
 
-		/// <summary>
-		/// 酒肆成功
-		/// </summary>
 		public const short ManageAppraisalBuildingSuccess1 = 77;
 
-		/// <summary>
-		/// 闻香苑成功
-		/// </summary>
 		public const short ManageAppraisalBuildingSuccess2 = 78;
 
-		/// <summary>
-		/// 四海府成功
-		/// </summary>
 		public const short ManageAppraisalBuildingSuccess3 = 79;
 
-		/// <summary>
-		/// 茶园成功
-		/// </summary>
 		public const short ManageAppraisalBuildingSuccess4 = 80;
 
-		/// <summary>
-		/// 蒸酒坊成功
-		/// </summary>
 		public const short ManageAppraisalBuildingSuccess5 = 81;
 
-		/// <summary>
-		/// 茶馆失败
-		/// </summary>
 		public const short ManageAppraisalBuildingFail0 = 82;
 
-		/// <summary>
-		/// 酒肆失败
-		/// </summary>
 		public const short ManageAppraisalBuildingFail1 = 83;
 
-		/// <summary>
-		/// 闻香苑失败
-		/// </summary>
 		public const short ManageAppraisalBuildingFail2 = 84;
 
-		/// <summary>
-		/// 四海府失败
-		/// </summary>
 		public const short ManageAppraisalBuildingFail3 = 85;
 
-		/// <summary>
-		/// 茶园失败
-		/// </summary>
 		public const short ManageAppraisalBuildingFail4 = 86;
 
-		/// <summary>
-		/// 蒸酒坊失败
-		/// </summary>
 		public const short ManageAppraisalBuildingFail5 = 87;
 
-		/// <summary>
-		/// 铁匠铺成功
-		/// </summary>
 		public const short ManageForgingBuildingSuccess0 = 88;
 
-		/// <summary>
-		/// 锻冶坊成功
-		/// </summary>
 		public const short ManageForgingBuildingSuccess1 = 89;
 
-		/// <summary>
-		/// 金铺成功
-		/// </summary>
 		public const short ManageForgingBuildingSuccess2 = 90;
 
-		/// <summary>
-		/// 淘洗池成功
-		/// </summary>
 		public const short ManageForgingBuildingSuccess3 = 91;
 
-		/// <summary>
-		/// 精炼室成功
-		/// </summary>
 		public const short ManageForgingBuildingSuccess4 = 92;
 
-		/// <summary>
-		/// 铁匠铺失败
-		/// </summary>
 		public const short ManageForgingBuildingFail0 = 93;
 
-		/// <summary>
-		/// 锻冶坊失败
-		/// </summary>
 		public const short ManageForgingBuildingFail1 = 94;
 
-		/// <summary>
-		/// 金铺失败
-		/// </summary>
 		public const short ManageForgingBuildingFail2 = 95;
 
-		/// <summary>
-		/// 淘洗池失败
-		/// </summary>
 		public const short ManageForgingBuildingFail3 = 96;
 
-		/// <summary>
-		/// 精炼室失败
-		/// </summary>
 		public const short ManageForgingBuildingFail4 = 97;
 
-		/// <summary>
-		/// 木工铺成功
-		/// </summary>
 		public const short ManageWoodworkingBuildingSuccess0 = 98;
 
-		/// <summary>
-		/// 制木坊成功
-		/// </summary>
 		public const short ManageWoodworkingBuildingSuccess1 = 99;
 
-		/// <summary>
-		/// 营造坊成功
-		/// </summary>
 		public const short ManageWoodworkingBuildingSuccess2 = 100;
 
-		/// <summary>
-		/// 伐木场成功
-		/// </summary>
 		public const short ManageWoodworkingBuildingSuccess3 = 101;
 
-		/// <summary>
-		/// 林场成功
-		/// </summary>
 		public const short ManageWoodworkingBuildingSuccess4 = 102;
 
-		/// <summary>
-		/// 木工铺失败
-		/// </summary>
 		public const short ManageWoodworkingBuildingFail0 = 103;
 
-		/// <summary>
-		/// 制木坊失败
-		/// </summary>
 		public const short ManageWoodworkingBuildingFail1 = 104;
 
-		/// <summary>
-		/// 营造坊失败
-		/// </summary>
 		public const short ManageWoodworkingBuildingFail2 = 105;
 
-		/// <summary>
-		/// 伐木场失败
-		/// </summary>
 		public const short ManageWoodworkingBuildingFail3 = 106;
 
-		/// <summary>
-		/// 林场失败
-		/// </summary>
 		public const short ManageWoodworkingBuildingFail4 = 107;
 
-		/// <summary>
-		/// 熟药铺成功
-		/// </summary>
 		public const short ManageMedicineBuildingSuccess0 = 108;
 
-		/// <summary>
-		/// 药师馆成功
-		/// </summary>
 		public const short ManageMedicineBuildingSuccess1 = 109;
 
-		/// <summary>
-		/// 病坊成功
-		/// </summary>
 		public const short ManageMedicineBuildingSuccess2 = 110;
 
-		/// <summary>
-		/// 药圃成功
-		/// </summary>
 		public const short ManageMedicineBuildingSuccess3 = 111;
 
-		/// <summary>
-		/// 养药室成功
-		/// </summary>
 		public const short ManageMedicineBuildingSuccess4 = 112;
 
-		/// <summary>
-		/// 熟药铺失败
-		/// </summary>
 		public const short ManageMedicineBuildingFail0 = 113;
 
-		/// <summary>
-		/// 药师馆失败
-		/// </summary>
 		public const short ManageMedicineBuildingFail1 = 114;
 
-		/// <summary>
-		/// 病坊失败
-		/// </summary>
 		public const short ManageMedicineBuildingFail2 = 115;
 
-		/// <summary>
-		/// 药圃失败
-		/// </summary>
 		public const short ManageMedicineBuildingFail3 = 116;
 
-		/// <summary>
-		/// 养药室失败
-		/// </summary>
 		public const short ManageMedicineBuildingFail4 = 117;
 
-		/// <summary>
-		/// 毒市成功
-		/// </summary>
 		public const short ManageToxicologyBuildingSuccess0 = 118;
 
-		/// <summary>
-		/// 暗牢成功
-		/// </summary>
 		public const short ManageToxicologyBuildingSuccess1 = 119;
 
-		/// <summary>
-		/// 密医成功
-		/// </summary>
 		public const short ManageToxicologyBuildingSuccess2 = 120;
 
-		/// <summary>
-		/// 炼瘴池成功
-		/// </summary>
 		public const short ManageToxicologyBuildingSuccess3 = 121;
 
-		/// <summary>
-		/// 废人窟成功
-		/// </summary>
 		public const short ManageToxicologyBuildingSuccess4 = 122;
 
-		/// <summary>
-		/// 毒市失败
-		/// </summary>
 		public const short ManageToxicologyBuildingFail0 = 123;
 
-		/// <summary>
-		/// 暗牢失败
-		/// </summary>
 		public const short ManageToxicologyBuildingFail1 = 124;
 
-		/// <summary>
-		/// 密医失败
-		/// </summary>
 		public const short ManageToxicologyBuildingFail2 = 125;
 
-		/// <summary>
-		/// 炼瘴池失败
-		/// </summary>
 		public const short ManageToxicologyBuildingFail3 = 126;
 
-		/// <summary>
-		/// 废人窟失败
-		/// </summary>
 		public const short ManageToxicologyBuildingFail4 = 127;
 
-		/// <summary>
-		/// 布庄成功
-		/// </summary>
 		public const short ManageWeavingBuildingSuccess0 = 128;
 
-		/// <summary>
-		/// 织造坊成功
-		/// </summary>
 		public const short ManageWeavingBuildingSuccess1 = 129;
 
-		/// <summary>
-		/// 锦绣阁成功
-		/// </summary>
 		public const short ManageWeavingBuildingSuccess2 = 130;
 
-		/// <summary>
-		/// 百花瀑成功
-		/// </summary>
 		public const short ManageWeavingBuildingSuccess3 = 131;
 
-		/// <summary>
-		/// 奇珍园成功
-		/// </summary>
 		public const short ManageWeavingBuildingSuccess4 = 132;
 
-		/// <summary>
-		/// 布庄失败
-		/// </summary>
 		public const short ManageWeavingBuildingFail0 = 133;
 
-		/// <summary>
-		/// 织造坊失败
-		/// </summary>
 		public const short ManageWeavingBuildingFail1 = 134;
 
-		/// <summary>
-		/// 锦绣阁失败
-		/// </summary>
 		public const short ManageWeavingBuildingFail2 = 135;
 
-		/// <summary>
-		/// 百花瀑失败
-		/// </summary>
 		public const short ManageWeavingBuildingFail3 = 136;
 
-		/// <summary>
-		/// 奇珍园失败
-		/// </summary>
 		public const short ManageWeavingBuildingFail4 = 137;
 
-		/// <summary>
-		/// 珠宝铺成功
-		/// </summary>
 		public const short ManageJadeBuildingSuccess0 = 138;
 
-		/// <summary>
-		/// 毛石坊成功
-		/// </summary>
 		public const short ManageJadeBuildingSuccess1 = 139;
 
-		/// <summary>
-		/// 琳琅阁成功
-		/// </summary>
 		public const short ManageJadeBuildingSuccess2 = 140;
 
-		/// <summary>
-		/// 浣宝池成功
-		/// </summary>
 		public const short ManageJadeBuildingSuccess3 = 141;
 
-		/// <summary>
-		/// 金刚解玉台成功
-		/// </summary>
 		public const short ManageJadeBuildingSuccess4 = 142;
 
-		/// <summary>
-		/// 珠宝铺失败
-		/// </summary>
 		public const short ManageJadeBuildingFail0 = 143;
 
-		/// <summary>
-		/// 毛石坊失败
-		/// </summary>
 		public const short ManageJadeBuildingFail1 = 144;
 
-		/// <summary>
-		/// 琳琅阁失败
-		/// </summary>
 		public const short ManageJadeBuildingFail2 = 145;
 
-		/// <summary>
-		/// 浣宝池失败
-		/// </summary>
 		public const short ManageJadeBuildingFail3 = 146;
 
-		/// <summary>
-		/// 金刚解玉台失败
-		/// </summary>
 		public const short ManageJadeBuildingFail4 = 147;
 
-		/// <summary>
-		/// 法事道场成功
-		/// </summary>
 		public const short ManageTaoismBuildingSuccess0 = 148;
 
-		/// <summary>
-		/// 道观成功
-		/// </summary>
 		public const short ManageTaoismBuildingSuccess1 = 149;
 
-		/// <summary>
-		/// 三清殿成功
-		/// </summary>
 		public const short ManageTaoismBuildingSuccess2 = 150;
 
-		/// <summary>
-		/// 法事道场失败
-		/// </summary>
 		public const short ManageTaoismBuildingFail0 = 151;
 
-		/// <summary>
-		/// 道观失败
-		/// </summary>
 		public const short ManageTaoismBuildingFail1 = 152;
 
-		/// <summary>
-		/// 三清殿失败
-		/// </summary>
 		public const short ManageTaoismBuildingFail2 = 153;
 
-		/// <summary>
-		/// 寺院成功
-		/// </summary>
 		public const short ManageBuddhismBuildingSuccess0 = 154;
 
-		/// <summary>
-		/// 佛塔成功
-		/// </summary>
 		public const short ManageBuddhismBuildingSuccess1 = 155;
 
-		/// <summary>
-		/// 法堂成功
-		/// </summary>
 		public const short ManageBuddhismBuildingSuccess2 = 156;
 
-		/// <summary>
-		/// 寺院失败
-		/// </summary>
 		public const short ManageBuddhismBuildingFail0 = 157;
 
-		/// <summary>
-		/// 佛塔失败
-		/// </summary>
 		public const short ManageBuddhismBuildingFail1 = 158;
 
-		/// <summary>
-		/// 法堂失败
-		/// </summary>
 		public const short ManageBuddhismBuildingFail2 = 159;
 
-		/// <summary>
-		/// 酒楼成功
-		/// </summary>
 		public const short ManageCookingBuildingSuccess0 = 160;
 
-		/// <summary>
-		/// 百家宴成功
-		/// </summary>
 		public const short ManageCookingBuildingSuccess1 = 161;
 
-		/// <summary>
-		/// 争妍阁成功
-		/// </summary>
 		public const short ManageCookingBuildingSuccess2 = 162;
 
-		/// <summary>
-		/// 四季园成功
-		/// </summary>
 		public const short ManageCookingBuildingSuccess3 = 163;
 
-		/// <summary>
-		/// 天成乡成功
-		/// </summary>
 		public const short ManageCookingBuildingSuccess4 = 164;
 
-		/// <summary>
-		/// 酒楼失败
-		/// </summary>
 		public const short ManageCookingBuildingFail0 = 165;
 
-		/// <summary>
-		/// 百家宴失败
-		/// </summary>
 		public const short ManageCookingBuildingFail1 = 166;
 
-		/// <summary>
-		/// 争妍阁失败
-		/// </summary>
 		public const short ManageCookingBuildingFail2 = 167;
 
-		/// <summary>
-		/// 四季园失败
-		/// </summary>
 		public const short ManageCookingBuildingFail3 = 168;
 
-		/// <summary>
-		/// 天成乡失败
-		/// </summary>
 		public const short ManageCookingBuildingFail4 = 169;
 
-		/// <summary>
-		/// 市集成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess0 = 170;
 
-		/// <summary>
-		/// 赌坊成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess1 = 171;
 
-		/// <summary>
-		/// 青楼成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess2 = 172;
 
-		/// <summary>
-		/// 花舫成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess3 = 173;
 
-		/// <summary>
-		/// 勾栏瓦舍成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess4 = 174;
 
-		/// <summary>
-		/// 游园成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess5 = 175;
 
-		/// <summary>
-		/// 当铺成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess6 = 176;
 
-		/// <summary>
-		/// 贤士馆成功
-		/// </summary>
 		public const short ManageEclecticBuildingSuccess7 = 177;
 
-		/// <summary>
-		/// 市集失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail0 = 178;
 
-		/// <summary>
-		/// 赌坊失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail1 = 179;
 
-		/// <summary>
-		/// 青楼失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail2 = 180;
 
-		/// <summary>
-		/// 花舫失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail3 = 181;
 
-		/// <summary>
-		/// 勾栏瓦舍失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail4 = 182;
 
-		/// <summary>
-		/// 游园失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail5 = 183;
 
-		/// <summary>
-		/// 当铺失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail6 = 184;
 
-		/// <summary>
-		/// 贤士馆失败
-		/// </summary>
 		public const short ManageEclecticBuildingFail7 = 185;
 
-		/// <summary>
-		/// 成功学得技艺
-		/// </summary>
 		public const short LearnLifeSkillSuccess = 186;
 
-		/// <summary>
-		/// 成功学得功法
-		/// </summary>
 		public const short LearnCombatSkillSuccess = 187;
 
-		/// <summary>
-		/// 未学得技艺但加了资质
-		/// </summary>
 		public const short LearnLifeSkillFail = 188;
 
-		/// <summary>
-		/// 未学得功法但加了资质
-		/// </summary>
 		public const short LearnCombatSkillFail = 189;
 
-		/// <summary>
-		/// 因经营技艺资质提升
-		/// </summary>
 		public const short ManageLifeSkillAbilityUp = 190;
 
-		/// <summary>
-		/// 因经营功法资质提升
-		/// </summary>
 		public const short ManageCombatSkillAbilityUp = 191;
 
-		/// <summary>
-		/// 保底资质加成-技艺
-		/// </summary>
 		public const short BaseDevelopLifeSkill = 192;
 
-		/// <summary>
-		/// 保底资质加成-武学
-		/// </summary>
 		public const short BaseDevelopCombatSkill = 193;
 
-		/// <summary>
-		/// 七元影响资质加成-技艺
-		/// </summary>
 		public const short PersonalityDevelopLifeSkill = 194;
 
-		/// <summary>
-		/// 七元影响资质加成-武学
-		/// </summary>
 		public const short PersonalityDevelopCombatSkill = 195;
 
-		/// <summary>
-		/// 领袖指导资质加成-技艺
-		/// </summary>
 		public const short LeaderDevelopLifeSkill = 196;
 
-		/// <summary>
-		/// 领袖指导资质加成-武学
-		/// </summary>
 		public const short LeaderDevelopCombatSkill = 197;
 
-		/// <summary>
-		/// 研习读书-技艺
-		/// </summary>
 		public const short LearnLifeSkill = 198;
 
-		/// <summary>
-		/// 研习读书-武学
-		/// </summary>
 		public const short LearnCombatSkill = 199;
 
-		/// <summary>
-		/// 经营完成获得报酬
-		/// </summary>
 		public const short SalaryReceived = 200;
 
-		/// <summary>
-		/// 低心情村民服用了物品
-		/// </summary>
 		public const short Banquet_1 = 201;
 
-		/// <summary>
-		/// 低心情村民服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_2 = 202;
 
-		/// <summary>
-		/// 低心情村民在宴席上服用了物品
-		/// </summary>
 		public const short Banquet_3 = 203;
 
-		/// <summary>
-		/// 低心情村民在宴席上服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_4 = 204;
 
-		/// <summary>
-		/// 村民服用了物品
-		/// </summary>
 		public const short Banquet_5 = 205;
 
-		/// <summary>
-		/// 村民服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_6 = 206;
 
-		/// <summary>
-		/// 村民在宴席上服用了物品
-		/// </summary>
 		public const short Banquet_7 = 207;
 
-		/// <summary>
-		/// 村民在宴席上服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_8 = 208;
 
-		/// <summary>
-		/// 宴堂没有可食用物品
-		/// </summary>
 		public const short Banquet_9 = 209;
 
-		/// <summary>
-		/// 村民已经吃不下
-		/// </summary>
 		public const short Banquet_10 = 210;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 堤堰成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess0 => Instance[(short)0];
 
-		/// <summary>
-		/// 矿井成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess1 => Instance[(short)1];
 
-		/// <summary>
-		/// 树农成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess2 => Instance[(short)2];
 
-		/// <summary>
-		/// 石碑成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess3 => Instance[(short)3];
 
-		/// <summary>
-		/// 药农成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess4 => Instance[(short)4];
 
-		/// <summary>
-		/// 泥渠成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess5 => Instance[(short)5];
 
-		/// <summary>
-		/// 花农成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess6 => Instance[(short)6];
 
-		/// <summary>
-		/// 宝井成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess7 => Instance[(short)7];
 
-		/// <summary>
-		/// 筒车成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess8 => Instance[(short)8];
 
-		/// <summary>
-		/// 牧场成功
-		/// </summary>
 		public static ShopEventItem CollectResourceSuccess9 => Instance[(short)9];
 
-		/// <summary>
-		/// 琉璃索成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess0 => Instance[(short)10];
 
-		/// <summary>
-		/// 火爆堆成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess1 => Instance[(short)11];
 
-		/// <summary>
-		/// 护林墙成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess2 => Instance[(short)12];
 
-		/// <summary>
-		/// 悬空栈成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess3 => Instance[(short)13];
 
-		/// <summary>
-		/// 引涧渠成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess4 => Instance[(short)14];
 
-		/// <summary>
-		/// 饵食牢成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess5 => Instance[(short)15];
 
-		/// <summary>
-		/// 云篷成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess6 => Instance[(short)16];
 
-		/// <summary>
-		/// 福人居成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess7 => Instance[(short)17];
 
-		/// <summary>
-		/// 秘陵成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess8 => Instance[(short)18];
 
-		/// <summary>
-		/// 冰夷像成功
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceSuccess9 => Instance[(short)19];
 
-		/// <summary>
-		/// 堤堰失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail0 => Instance[(short)20];
 
-		/// <summary>
-		/// 矿井失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail1 => Instance[(short)21];
 
-		/// <summary>
-		/// 树农失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail2 => Instance[(short)22];
 
-		/// <summary>
-		/// 石碑失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail3 => Instance[(short)23];
 
-		/// <summary>
-		/// 药农失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail4 => Instance[(short)24];
 
-		/// <summary>
-		/// 泥渠失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail5 => Instance[(short)25];
 
-		/// <summary>
-		/// 花农失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail6 => Instance[(short)26];
 
-		/// <summary>
-		/// 宝井失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail7 => Instance[(short)27];
 
-		/// <summary>
-		/// 筒车失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail8 => Instance[(short)28];
 
-		/// <summary>
-		/// 牧场失败
-		/// </summary>
 		public static ShopEventItem CollectResourceFail9 => Instance[(short)29];
 
-		/// <summary>
-		/// 琉璃索失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail0 => Instance[(short)30];
 
-		/// <summary>
-		/// 火爆堆失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail1 => Instance[(short)31];
 
-		/// <summary>
-		/// 护林墙失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail2 => Instance[(short)32];
 
-		/// <summary>
-		/// 悬空栈失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail3 => Instance[(short)33];
 
-		/// <summary>
-		/// 引涧渠失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail4 => Instance[(short)34];
 
-		/// <summary>
-		/// 饵食牢失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail5 => Instance[(short)35];
 
-		/// <summary>
-		/// 云篷失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail6 => Instance[(short)36];
 
-		/// <summary>
-		/// 福人居失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail7 => Instance[(short)37];
 
-		/// <summary>
-		/// 秘陵失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail8 => Instance[(short)38];
 
-		/// <summary>
-		/// 冰夷像失败
-		/// </summary>
 		public static ShopEventItem CollectBetterResourceFail9 => Instance[(short)39];
 
-		/// <summary>
-		/// 镖局成功
-		/// </summary>
 		public static ShopEventItem ManageCombatSkillBuildingSuccess0 => Instance[(short)40];
 
-		/// <summary>
-		/// 炼神峰成功
-		/// </summary>
 		public static ShopEventItem ManageCombatSkillBuildingSuccess1 => Instance[(short)41];
 
-		/// <summary>
-		/// 知客亭成功
-		/// </summary>
 		public static ShopEventItem ManageCombatSkillBuildingSuccess2 => Instance[(short)42];
 
-		/// <summary>
-		/// 镖局失败
-		/// </summary>
 		public static ShopEventItem ManageCombatSkillBuildingFail0 => Instance[(short)43];
 
-		/// <summary>
-		/// 炼神峰失败
-		/// </summary>
 		public static ShopEventItem ManageCombatSkillBuildingFail1 => Instance[(short)44];
 
-		/// <summary>
-		/// 知客亭失败
-		/// </summary>
 		public static ShopEventItem ManageCombatSkillBuildingFail2 => Instance[(short)45];
 
-		/// <summary>
-		/// 乐坊成功
-		/// </summary>
 		public static ShopEventItem ManageMusicBuildingSuccess0 => Instance[(short)46];
 
-		/// <summary>
-		/// 知音阁成功
-		/// </summary>
 		public static ShopEventItem ManageMusicBuildingSuccess1 => Instance[(short)47];
 
-		/// <summary>
-		/// 百戏园成功
-		/// </summary>
 		public static ShopEventItem ManageMusicBuildingSuccess2 => Instance[(short)48];
 
-		/// <summary>
-		/// 乐坊失败
-		/// </summary>
 		public static ShopEventItem ManageMusicBuildingFail0 => Instance[(short)49];
 
-		/// <summary>
-		/// 知音阁失败
-		/// </summary>
 		public static ShopEventItem ManageMusicBuildingFail1 => Instance[(short)50];
 
-		/// <summary>
-		/// 百戏园失败
-		/// </summary>
 		public static ShopEventItem ManageMusicBuildingFail2 => Instance[(short)51];
 
-		/// <summary>
-		/// 棋馆成功
-		/// </summary>
 		public static ShopEventItem ManageChessBuildingSuccess0 => Instance[(short)52];
 
-		/// <summary>
-		/// 斗弈台成功
-		/// </summary>
 		public static ShopEventItem ManageChessBuildingSuccess1 => Instance[(short)53];
 
-		/// <summary>
-		/// 石谱园成功
-		/// </summary>
 		public static ShopEventItem ManageChessBuildingSuccess2 => Instance[(short)54];
 
-		/// <summary>
-		/// 棋馆失败
-		/// </summary>
 		public static ShopEventItem ManageChessBuildingFail0 => Instance[(short)55];
 
-		/// <summary>
-		/// 斗弈台失败
-		/// </summary>
 		public static ShopEventItem ManageChessBuildingFail1 => Instance[(short)56];
 
-		/// <summary>
-		/// 石谱园失败
-		/// </summary>
 		public static ShopEventItem ManageChessBuildingFail2 => Instance[(short)57];
 
-		/// <summary>
-		/// 书铺成功
-		/// </summary>
 		public static ShopEventItem ManagePoemBuildingSuccess0 => Instance[(short)58];
 
-		/// <summary>
-		/// 书院成功
-		/// </summary>
 		public static ShopEventItem ManagePoemBuildingSuccess1 => Instance[(short)59];
 
-		/// <summary>
-		/// 翰苑成功
-		/// </summary>
 		public static ShopEventItem ManagePoemBuildingSuccess2 => Instance[(short)60];
 
-		/// <summary>
-		/// 书铺失败
-		/// </summary>
 		public static ShopEventItem ManagePoemBuildingFail0 => Instance[(short)61];
 
-		/// <summary>
-		/// 书院失败
-		/// </summary>
 		public static ShopEventItem ManagePoemBuildingFail1 => Instance[(short)62];
 
-		/// <summary>
-		/// 翰苑失败
-		/// </summary>
 		public static ShopEventItem ManagePoemBuildingFail2 => Instance[(short)63];
 
-		/// <summary>
-		/// 画铺成功
-		/// </summary>
 		public static ShopEventItem ManagePaintingBuildingSuccess0 => Instance[(short)64];
 
-		/// <summary>
-		/// 丹青馆成功
-		/// </summary>
 		public static ShopEventItem ManagePaintingBuildingSuccess1 => Instance[(short)65];
 
-		/// <summary>
-		/// 流光园成功
-		/// </summary>
 		public static ShopEventItem ManagePaintingBuildingSuccess2 => Instance[(short)66];
 
-		/// <summary>
-		/// 画铺失败
-		/// </summary>
 		public static ShopEventItem ManagePaintingBuildingFail0 => Instance[(short)67];
 
-		/// <summary>
-		/// 丹青馆失败
-		/// </summary>
 		public static ShopEventItem ManagePaintingBuildingFail1 => Instance[(short)68];
 
-		/// <summary>
-		/// 流光园失败
-		/// </summary>
 		public static ShopEventItem ManagePaintingBuildingFail2 => Instance[(short)69];
 
-		/// <summary>
-		/// 占卜馆成功
-		/// </summary>
 		public static ShopEventItem ManageMathBuildingSuccess0 => Instance[(short)70];
 
-		/// <summary>
-		/// 方士馆成功
-		/// </summary>
 		public static ShopEventItem ManageMathBuildingSuccess1 => Instance[(short)71];
 
-		/// <summary>
-		/// 祭天高台成功
-		/// </summary>
 		public static ShopEventItem ManageMathBuildingSuccess2 => Instance[(short)72];
 
-		/// <summary>
-		/// 占卜馆失败
-		/// </summary>
 		public static ShopEventItem ManageMathBuildingFail0 => Instance[(short)73];
 
-		/// <summary>
-		/// 方士馆失败
-		/// </summary>
 		public static ShopEventItem ManageMathBuildingFail1 => Instance[(short)74];
 
-		/// <summary>
-		/// 祭天高台失败
-		/// </summary>
 		public static ShopEventItem ManageMathBuildingFail2 => Instance[(short)75];
 
-		/// <summary>
-		/// 茶馆成功
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingSuccess0 => Instance[(short)76];
 
-		/// <summary>
-		/// 酒肆成功
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingSuccess1 => Instance[(short)77];
 
-		/// <summary>
-		/// 闻香苑成功
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingSuccess2 => Instance[(short)78];
 
-		/// <summary>
-		/// 四海府成功
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingSuccess3 => Instance[(short)79];
 
-		/// <summary>
-		/// 茶园成功
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingSuccess4 => Instance[(short)80];
 
-		/// <summary>
-		/// 蒸酒坊成功
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingSuccess5 => Instance[(short)81];
 
-		/// <summary>
-		/// 茶馆失败
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingFail0 => Instance[(short)82];
 
-		/// <summary>
-		/// 酒肆失败
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingFail1 => Instance[(short)83];
 
-		/// <summary>
-		/// 闻香苑失败
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingFail2 => Instance[(short)84];
 
-		/// <summary>
-		/// 四海府失败
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingFail3 => Instance[(short)85];
 
-		/// <summary>
-		/// 茶园失败
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingFail4 => Instance[(short)86];
 
-		/// <summary>
-		/// 蒸酒坊失败
-		/// </summary>
 		public static ShopEventItem ManageAppraisalBuildingFail5 => Instance[(short)87];
 
-		/// <summary>
-		/// 铁匠铺成功
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingSuccess0 => Instance[(short)88];
 
-		/// <summary>
-		/// 锻冶坊成功
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingSuccess1 => Instance[(short)89];
 
-		/// <summary>
-		/// 金铺成功
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingSuccess2 => Instance[(short)90];
 
-		/// <summary>
-		/// 淘洗池成功
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingSuccess3 => Instance[(short)91];
 
-		/// <summary>
-		/// 精炼室成功
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingSuccess4 => Instance[(short)92];
 
-		/// <summary>
-		/// 铁匠铺失败
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingFail0 => Instance[(short)93];
 
-		/// <summary>
-		/// 锻冶坊失败
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingFail1 => Instance[(short)94];
 
-		/// <summary>
-		/// 金铺失败
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingFail2 => Instance[(short)95];
 
-		/// <summary>
-		/// 淘洗池失败
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingFail3 => Instance[(short)96];
 
-		/// <summary>
-		/// 精炼室失败
-		/// </summary>
 		public static ShopEventItem ManageForgingBuildingFail4 => Instance[(short)97];
 
-		/// <summary>
-		/// 木工铺成功
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingSuccess0 => Instance[(short)98];
 
-		/// <summary>
-		/// 制木坊成功
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingSuccess1 => Instance[(short)99];
 
-		/// <summary>
-		/// 营造坊成功
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingSuccess2 => Instance[(short)100];
 
-		/// <summary>
-		/// 伐木场成功
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingSuccess3 => Instance[(short)101];
 
-		/// <summary>
-		/// 林场成功
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingSuccess4 => Instance[(short)102];
 
-		/// <summary>
-		/// 木工铺失败
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingFail0 => Instance[(short)103];
 
-		/// <summary>
-		/// 制木坊失败
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingFail1 => Instance[(short)104];
 
-		/// <summary>
-		/// 营造坊失败
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingFail2 => Instance[(short)105];
 
-		/// <summary>
-		/// 伐木场失败
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingFail3 => Instance[(short)106];
 
-		/// <summary>
-		/// 林场失败
-		/// </summary>
 		public static ShopEventItem ManageWoodworkingBuildingFail4 => Instance[(short)107];
 
-		/// <summary>
-		/// 熟药铺成功
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingSuccess0 => Instance[(short)108];
 
-		/// <summary>
-		/// 药师馆成功
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingSuccess1 => Instance[(short)109];
 
-		/// <summary>
-		/// 病坊成功
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingSuccess2 => Instance[(short)110];
 
-		/// <summary>
-		/// 药圃成功
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingSuccess3 => Instance[(short)111];
 
-		/// <summary>
-		/// 养药室成功
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingSuccess4 => Instance[(short)112];
 
-		/// <summary>
-		/// 熟药铺失败
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingFail0 => Instance[(short)113];
 
-		/// <summary>
-		/// 药师馆失败
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingFail1 => Instance[(short)114];
 
-		/// <summary>
-		/// 病坊失败
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingFail2 => Instance[(short)115];
 
-		/// <summary>
-		/// 药圃失败
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingFail3 => Instance[(short)116];
 
-		/// <summary>
-		/// 养药室失败
-		/// </summary>
 		public static ShopEventItem ManageMedicineBuildingFail4 => Instance[(short)117];
 
-		/// <summary>
-		/// 毒市成功
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingSuccess0 => Instance[(short)118];
 
-		/// <summary>
-		/// 暗牢成功
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingSuccess1 => Instance[(short)119];
 
-		/// <summary>
-		/// 密医成功
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingSuccess2 => Instance[(short)120];
 
-		/// <summary>
-		/// 炼瘴池成功
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingSuccess3 => Instance[(short)121];
 
-		/// <summary>
-		/// 废人窟成功
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingSuccess4 => Instance[(short)122];
 
-		/// <summary>
-		/// 毒市失败
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingFail0 => Instance[(short)123];
 
-		/// <summary>
-		/// 暗牢失败
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingFail1 => Instance[(short)124];
 
-		/// <summary>
-		/// 密医失败
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingFail2 => Instance[(short)125];
 
-		/// <summary>
-		/// 炼瘴池失败
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingFail3 => Instance[(short)126];
 
-		/// <summary>
-		/// 废人窟失败
-		/// </summary>
 		public static ShopEventItem ManageToxicologyBuildingFail4 => Instance[(short)127];
 
-		/// <summary>
-		/// 布庄成功
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingSuccess0 => Instance[(short)128];
 
-		/// <summary>
-		/// 织造坊成功
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingSuccess1 => Instance[(short)129];
 
-		/// <summary>
-		/// 锦绣阁成功
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingSuccess2 => Instance[(short)130];
 
-		/// <summary>
-		/// 百花瀑成功
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingSuccess3 => Instance[(short)131];
 
-		/// <summary>
-		/// 奇珍园成功
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingSuccess4 => Instance[(short)132];
 
-		/// <summary>
-		/// 布庄失败
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingFail0 => Instance[(short)133];
 
-		/// <summary>
-		/// 织造坊失败
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingFail1 => Instance[(short)134];
 
-		/// <summary>
-		/// 锦绣阁失败
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingFail2 => Instance[(short)135];
 
-		/// <summary>
-		/// 百花瀑失败
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingFail3 => Instance[(short)136];
 
-		/// <summary>
-		/// 奇珍园失败
-		/// </summary>
 		public static ShopEventItem ManageWeavingBuildingFail4 => Instance[(short)137];
 
-		/// <summary>
-		/// 珠宝铺成功
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingSuccess0 => Instance[(short)138];
 
-		/// <summary>
-		/// 毛石坊成功
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingSuccess1 => Instance[(short)139];
 
-		/// <summary>
-		/// 琳琅阁成功
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingSuccess2 => Instance[(short)140];
 
-		/// <summary>
-		/// 浣宝池成功
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingSuccess3 => Instance[(short)141];
 
-		/// <summary>
-		/// 金刚解玉台成功
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingSuccess4 => Instance[(short)142];
 
-		/// <summary>
-		/// 珠宝铺失败
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingFail0 => Instance[(short)143];
 
-		/// <summary>
-		/// 毛石坊失败
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingFail1 => Instance[(short)144];
 
-		/// <summary>
-		/// 琳琅阁失败
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingFail2 => Instance[(short)145];
 
-		/// <summary>
-		/// 浣宝池失败
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingFail3 => Instance[(short)146];
 
-		/// <summary>
-		/// 金刚解玉台失败
-		/// </summary>
 		public static ShopEventItem ManageJadeBuildingFail4 => Instance[(short)147];
 
-		/// <summary>
-		/// 法事道场成功
-		/// </summary>
 		public static ShopEventItem ManageTaoismBuildingSuccess0 => Instance[(short)148];
 
-		/// <summary>
-		/// 道观成功
-		/// </summary>
 		public static ShopEventItem ManageTaoismBuildingSuccess1 => Instance[(short)149];
 
-		/// <summary>
-		/// 三清殿成功
-		/// </summary>
 		public static ShopEventItem ManageTaoismBuildingSuccess2 => Instance[(short)150];
 
-		/// <summary>
-		/// 法事道场失败
-		/// </summary>
 		public static ShopEventItem ManageTaoismBuildingFail0 => Instance[(short)151];
 
-		/// <summary>
-		/// 道观失败
-		/// </summary>
 		public static ShopEventItem ManageTaoismBuildingFail1 => Instance[(short)152];
 
-		/// <summary>
-		/// 三清殿失败
-		/// </summary>
 		public static ShopEventItem ManageTaoismBuildingFail2 => Instance[(short)153];
 
-		/// <summary>
-		/// 寺院成功
-		/// </summary>
 		public static ShopEventItem ManageBuddhismBuildingSuccess0 => Instance[(short)154];
 
-		/// <summary>
-		/// 佛塔成功
-		/// </summary>
 		public static ShopEventItem ManageBuddhismBuildingSuccess1 => Instance[(short)155];
 
-		/// <summary>
-		/// 法堂成功
-		/// </summary>
 		public static ShopEventItem ManageBuddhismBuildingSuccess2 => Instance[(short)156];
 
-		/// <summary>
-		/// 寺院失败
-		/// </summary>
 		public static ShopEventItem ManageBuddhismBuildingFail0 => Instance[(short)157];
 
-		/// <summary>
-		/// 佛塔失败
-		/// </summary>
 		public static ShopEventItem ManageBuddhismBuildingFail1 => Instance[(short)158];
 
-		/// <summary>
-		/// 法堂失败
-		/// </summary>
 		public static ShopEventItem ManageBuddhismBuildingFail2 => Instance[(short)159];
 
-		/// <summary>
-		/// 酒楼成功
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingSuccess0 => Instance[(short)160];
 
-		/// <summary>
-		/// 百家宴成功
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingSuccess1 => Instance[(short)161];
 
-		/// <summary>
-		/// 争妍阁成功
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingSuccess2 => Instance[(short)162];
 
-		/// <summary>
-		/// 四季园成功
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingSuccess3 => Instance[(short)163];
 
-		/// <summary>
-		/// 天成乡成功
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingSuccess4 => Instance[(short)164];
 
-		/// <summary>
-		/// 酒楼失败
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingFail0 => Instance[(short)165];
 
-		/// <summary>
-		/// 百家宴失败
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingFail1 => Instance[(short)166];
 
-		/// <summary>
-		/// 争妍阁失败
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingFail2 => Instance[(short)167];
 
-		/// <summary>
-		/// 四季园失败
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingFail3 => Instance[(short)168];
 
-		/// <summary>
-		/// 天成乡失败
-		/// </summary>
 		public static ShopEventItem ManageCookingBuildingFail4 => Instance[(short)169];
 
-		/// <summary>
-		/// 市集成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess0 => Instance[(short)170];
 
-		/// <summary>
-		/// 赌坊成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess1 => Instance[(short)171];
 
-		/// <summary>
-		/// 青楼成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess2 => Instance[(short)172];
 
-		/// <summary>
-		/// 花舫成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess3 => Instance[(short)173];
 
-		/// <summary>
-		/// 勾栏瓦舍成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess4 => Instance[(short)174];
 
-		/// <summary>
-		/// 游园成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess5 => Instance[(short)175];
 
-		/// <summary>
-		/// 当铺成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess6 => Instance[(short)176];
 
-		/// <summary>
-		/// 贤士馆成功
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingSuccess7 => Instance[(short)177];
 
-		/// <summary>
-		/// 市集失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail0 => Instance[(short)178];
 
-		/// <summary>
-		/// 赌坊失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail1 => Instance[(short)179];
 
-		/// <summary>
-		/// 青楼失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail2 => Instance[(short)180];
 
-		/// <summary>
-		/// 花舫失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail3 => Instance[(short)181];
 
-		/// <summary>
-		/// 勾栏瓦舍失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail4 => Instance[(short)182];
 
-		/// <summary>
-		/// 游园失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail5 => Instance[(short)183];
 
-		/// <summary>
-		/// 当铺失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail6 => Instance[(short)184];
 
-		/// <summary>
-		/// 贤士馆失败
-		/// </summary>
 		public static ShopEventItem ManageEclecticBuildingFail7 => Instance[(short)185];
 
-		/// <summary>
-		/// 成功学得技艺
-		/// </summary>
 		public static ShopEventItem LearnLifeSkillSuccess => Instance[(short)186];
 
-		/// <summary>
-		/// 成功学得功法
-		/// </summary>
 		public static ShopEventItem LearnCombatSkillSuccess => Instance[(short)187];
 
-		/// <summary>
-		/// 未学得技艺但加了资质
-		/// </summary>
 		public static ShopEventItem LearnLifeSkillFail => Instance[(short)188];
 
-		/// <summary>
-		/// 未学得功法但加了资质
-		/// </summary>
 		public static ShopEventItem LearnCombatSkillFail => Instance[(short)189];
 
-		/// <summary>
-		/// 因经营技艺资质提升
-		/// </summary>
 		public static ShopEventItem ManageLifeSkillAbilityUp => Instance[(short)190];
 
-		/// <summary>
-		/// 因经营功法资质提升
-		/// </summary>
 		public static ShopEventItem ManageCombatSkillAbilityUp => Instance[(short)191];
 
-		/// <summary>
-		/// 保底资质加成-技艺
-		/// </summary>
 		public static ShopEventItem BaseDevelopLifeSkill => Instance[(short)192];
 
-		/// <summary>
-		/// 保底资质加成-武学
-		/// </summary>
 		public static ShopEventItem BaseDevelopCombatSkill => Instance[(short)193];
 
-		/// <summary>
-		/// 七元影响资质加成-技艺
-		/// </summary>
 		public static ShopEventItem PersonalityDevelopLifeSkill => Instance[(short)194];
 
-		/// <summary>
-		/// 七元影响资质加成-武学
-		/// </summary>
 		public static ShopEventItem PersonalityDevelopCombatSkill => Instance[(short)195];
 
-		/// <summary>
-		/// 领袖指导资质加成-技艺
-		/// </summary>
 		public static ShopEventItem LeaderDevelopLifeSkill => Instance[(short)196];
 
-		/// <summary>
-		/// 领袖指导资质加成-武学
-		/// </summary>
 		public static ShopEventItem LeaderDevelopCombatSkill => Instance[(short)197];
 
-		/// <summary>
-		/// 研习读书-技艺
-		/// </summary>
 		public static ShopEventItem LearnLifeSkill => Instance[(short)198];
 
-		/// <summary>
-		/// 研习读书-武学
-		/// </summary>
 		public static ShopEventItem LearnCombatSkill => Instance[(short)199];
 
-		/// <summary>
-		/// 经营完成获得报酬
-		/// </summary>
 		public static ShopEventItem SalaryReceived => Instance[(short)200];
 
-		/// <summary>
-		/// 低心情村民服用了物品
-		/// </summary>
 		public static ShopEventItem Banquet_1 => Instance[(short)201];
 
-		/// <summary>
-		/// 低心情村民服用了喜爱的物品
-		/// </summary>
 		public static ShopEventItem Banquet_2 => Instance[(short)202];
 
-		/// <summary>
-		/// 低心情村民在宴席上服用了物品
-		/// </summary>
 		public static ShopEventItem Banquet_3 => Instance[(short)203];
 
-		/// <summary>
-		/// 低心情村民在宴席上服用了喜爱的物品
-		/// </summary>
 		public static ShopEventItem Banquet_4 => Instance[(short)204];
 
-		/// <summary>
-		/// 村民服用了物品
-		/// </summary>
 		public static ShopEventItem Banquet_5 => Instance[(short)205];
 
-		/// <summary>
-		/// 村民服用了喜爱的物品
-		/// </summary>
 		public static ShopEventItem Banquet_6 => Instance[(short)206];
 
-		/// <summary>
-		/// 村民在宴席上服用了物品
-		/// </summary>
 		public static ShopEventItem Banquet_7 => Instance[(short)207];
 
-		/// <summary>
-		/// 村民在宴席上服用了喜爱的物品
-		/// </summary>
 		public static ShopEventItem Banquet_8 => Instance[(short)208];
 
-		/// <summary>
-		/// 宴堂没有可食用物品
-		/// </summary>
 		public static ShopEventItem Banquet_9 => Instance[(short)209];
 
-		/// <summary>
-		/// 村民已经吃不下
-		/// </summary>
 		public static ShopEventItem Banquet_10 => Instance[(short)210];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ShopEvent Instance = new ShopEvent();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "ResourceList", "ResourceGoods", "ItemList", "BuildingCore", "ExchangeResourceGoods", "CharacterPropertyFix", "TemplateId" };

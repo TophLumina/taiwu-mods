@@ -158,6 +158,10 @@ public class CombatCharacterStatePrepareSkill : CombatCharacterStateBase
 				CombatChar.SetNeedUseSkillId(CombatChar.GetDataContext(), -1);
 			}
 		}
+		if (CombatChar.NeedUseGoldenWire)
+		{
+			CombatChar.StateMachine.TranslateState(CombatCharacterStateType.UseGoldenWire);
+		}
 		if (CombatChar.NeedNormalAttack)
 		{
 			CombatChar.StateMachine.TranslateState(CombatCharacterStateType.PrepareAttack);

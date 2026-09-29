@@ -20,37 +20,18 @@ public class CharacterTableDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarData;
 
-	/// <summary>
-	/// 是否应该显示在列表里
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsDisplayData;
 
-	/// <summary>
-	/// 列表元素需要的数据, int型
-	/// (int)CharacterTableElementType -&gt; int
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> ElementIntData;
 
-	/// <summary>
-	/// 列表元素需要的数据, OrganizationInfo型
-	/// (int)CharacterTableElementType -&gt; int
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, OrganizationInfo> ElementOrgData;
 
-	/// <summary>
-	/// 列表元素需要的数据, CharacterTableLocationData
-	/// (int)CharacterTableElementType -&gt; CharacterTableLocationData
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, CharacterTableLocationData> ElementLocationData;
 
-	/// <summary>
-	/// 列表元素需要的数据, CharacterTableWorkData
-	/// (int)CharacterTableElementType -&gt; CharacterTableWorkData
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, CharacterTableWorkData> ElementWorkData;
 
@@ -117,8 +98,7 @@ public class CharacterTableDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 6;
-		totalSize += NameData.GetSerializedSize();
+		int totalSize = 38;
 		totalSize = ((AvatarData == null) ? (totalSize + 2) : (totalSize + (2 + AvatarData.GetSerializedSize())));
 		totalSize += 4;
 		if (ElementIntData != null)

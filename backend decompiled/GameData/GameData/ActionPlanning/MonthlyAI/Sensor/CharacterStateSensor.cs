@@ -130,6 +130,9 @@ public class CharacterStateSensor : CharacterStateSensorBase
 		case 600:
 			result = (selfChar.GetMonkType() != 0).ToInt();
 			break;
+		case 615:
+			result = selfChar.IsOnHomeSettlement().ToInt();
+			break;
 		default:
 			throw new ActionPlanningException($"Unimplemented planning state: {stateKey}");
 		}

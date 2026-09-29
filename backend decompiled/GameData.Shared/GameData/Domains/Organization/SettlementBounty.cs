@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Organization;
 
-/// <summary>
-/// 定居点赏金
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SettlementBounty : ISerializableGameData
 {
@@ -29,63 +26,33 @@ public class SettlementBounty : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[7] { "CharId", "BountyAmount", "PunishmentType", "PunishmentSeverity", "ExpireDate", "RequiredConsummateLevel", "CurrentHunterId" };
 	}
 
-	/// <summary>
-	/// 悬赏角色 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 悬赏金额
-	/// </summary>
 	[SerializableGameDataField]
 	public int BountyAmount;
 
-	/// <summary>
-	/// 惩罚类型 (犯罪条目)
-	/// </summary>
 	[SerializableGameDataField]
 	public short PunishmentType;
 
-	/// <summary>
-	/// 惩罚力度
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte PunishmentSeverity;
 
-	/// <summary>
-	/// 过期时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int ExpireDate;
 
-	/// <summary>
-	/// 此前失败的捕快的精纯
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte RequiredConsummateLevel = -1;
 
-	/// <summary>
-	/// 正在追捕该逃犯的角色
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrentHunterId = -1;
 
-	/// <summary>
-	/// 捕获增加的名誉层数
-	/// </summary>
 	public short CaptorFameActionMultiplier => (short)(PunishmentSeverity * 10);
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SettlementBounty()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SettlementBounty(SettlementBounty other)
 	{
 		CharId = other.CharId;
@@ -97,9 +64,6 @@ public class SettlementBounty : ISerializableGameData
 		CurrentHunterId = other.CurrentHunterId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SettlementBounty other)
 	{
 		CharId = other.CharId;
@@ -111,13 +75,11 @@ public class SettlementBounty : ISerializableGameData
 		CurrentHunterId = other.CurrentHunterId;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 22;
@@ -128,7 +90,6 @@ public class SettlementBounty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 7;
@@ -154,7 +115,6 @@ public class SettlementBounty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

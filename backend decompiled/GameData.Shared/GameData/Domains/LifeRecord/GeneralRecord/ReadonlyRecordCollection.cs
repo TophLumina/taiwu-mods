@@ -7,37 +7,16 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LifeRecord.GeneralRecord;
 
-/// <summary>
-/// 只读的通用记录的集合.
-/// 每个记录数据必定包含一个记录类型, 以及一个变长的参数列表. 之后会根据类型和参数列表生成对应的文本以供展示.
-/// 记录数据的第一字节固定为该记录的长度 (包括长度数据自身). 因此记录的长度不能超过 255 字节.
-///
-/// 前端渲染流程:
-/// - 调用 GetRenderInfos 获取经历渲染信息, 主体数据放在 RenderInfo 中, 实参放在 ArgumentCollection 中.
-/// - 对于前端可以独立渲染的实参, 直接渲染后放入 RenderedArgumentCollection.
-/// - 前端无法独立渲染的实参, 调用一系列批量获取渲染相关数据的后端接口, 获取渲染相关数据. 获取到数据并渲染后放入 RenderedArgumentCollection.
-/// - 结合 RenderInfo 和 RenderedArgumentCollection 中的数据, 渲染出最终文本, 显示到界面上.
-/// </summary>
 [SerializableGameData(NotForDisplayModule = true)]
 public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGameData
 {
-	/// <summary>
-	/// 包含的记录的条数
-	/// </summary>
 	public int Count { get; set; }
 
-	/// <summary>
-	/// 只读的通用记录的集合
-	/// </summary>
 	public ReadonlyRecordCollection()
 	{
 		Count = 0;
 	}
 
-	/// <summary>
-	/// 只读的通用记录的集合
-	/// </summary>
-	/// <param name="initialCapacity">原始数据容器的初始容量</param>
 	public ReadonlyRecordCollection(int initialCapacity)
 		: base(initialCapacity)
 	{
@@ -72,30 +51,17 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (int)(pCurrData - pData);
 	}
 
-	/// <summary>
-	/// 清空数据
-	/// </summary>
 	public new void Clear()
 	{
 		Size = 0;
 		Count = 0;
 	}
 
-	/// <summary>
-	/// 获取序列化后的元数据的固定长度.
-	/// 元数据必须定长, 且不能超过 64KB.
-	/// </summary>
-	/// <returns></returns>
 	public new ushort GetSerializedFixedSizeOfMetadata()
 	{
 		return 8;
 	}
 
-	/// <summary>
-	/// 序列化元数据
-	/// </summary>
-	/// <param name="pData">生成的数据不包含元数据长度</param>
-	/// <returns>序列化后的数据长度</returns>
 	public new unsafe int SerializeMetadata(byte* pData)
 	{
 		*(int*)pData = Size;
@@ -103,11 +69,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return 8;
 	}
 
-	/// <summary>
-	/// 反序列化并应用元数据
-	/// </summary>
-	/// <param name="pData">此内存中不包含元数据长度</param>
-	/// <returns>实际读取的字节数</returns>
 	public new unsafe int DeserializeMetadata(byte* pData)
 	{
 		Size = *(int*)pData;
@@ -116,12 +77,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return 8;
 	}
 
-	/// <summary>
-	/// 传入当前的记录索引和数据偏移, 获取下一条的索引和数据偏移
-	/// </summary>
-	/// <param name="index">当前记录的索引. 开始遍历时, 传入 -1.</param>
-	/// <param name="offset">当前记录的数据偏移. 开始遍历时, 传入 -1.</param>
-	/// <returns>是否存在下一条记录</returns>
 	public bool Next(ref int index, ref int offset)
 	{
 		if (index < 0)
@@ -143,11 +98,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return true;
 	}
 
-	/// <summary>
-	/// 传入当前记录的数据偏移, 获取下一条的数据偏移
-	/// </summary>
-	/// <param name="offset">当前记录的数据偏移. 开始遍历时, 传入 -1.</param>
-	/// <returns>返回值大于等于 0 表示存在下一条记录, 小于 0 表示不存在.</returns>
 	public int Next(int offset)
 	{
 		if (offset < 0)
@@ -181,22 +131,11 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return offset;
 	}
 
-	/// <summary>
-	/// 获取当前记录的大小
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <returns></returns>
 	public int GetRecordSize(int offset)
 	{
 		return RawData[offset];
 	}
 
-	/// <summary>
-	/// 获取所有记录的渲染信息.
-	/// 各个派生类需要各自实现自己的此方法, 参数也会各不相同.
-	/// </summary>
-	/// <param name="renderInfos">调用者保证传入时此集合为空</param>
-	/// <param name="argumentCollection">传入时可以不为空</param>
 	public void GetRenderInfos(List<RenderInfo> renderInfos, ArgumentCollection argumentCollection)
 	{
 		int index = -1;
@@ -211,27 +150,11 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		}
 	}
 
-	/// <summary>
-	/// 获取指定索引的记录的渲染信息.
-	/// 各个派生类需要各自实现自己的此方法, 返回值也会各不相同.
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="argumentCollection">实参集合</param>
-	/// <returns></returns>
 	public RenderInfo GetRenderInfo(int offset, ArgumentCollection argumentCollection)
 	{
 		throw new NotImplementedException();
 	}
 
-	/// <summary>
-	/// 从指定位置读取实参数据, 并存入实参集合, 返回该实参的索引
-	/// 修改时应当同步修改这个接口：
-	/// ReadArgumentAndGetIndex(sbyte paramType, byte** ppData, TransferableArgumentCollection argumentCollection)
-	/// </summary>
-	/// <param name="paramType"></param>
-	/// <param name="ppData"></param>
-	/// <param name="argumentCollection"></param>
-	/// <returns></returns>
 	protected unsafe static int ReadArgumentAndGetIndex(sbyte paramType, byte** ppData, ArgumentCollection argumentCollection)
 	{
 		switch (paramType)
@@ -493,15 +416,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		}
 	}
 
-	/// <summary>
-	/// 从指定位置读取实参数据, 并存入实参集合, 返回该实参的索引
-	/// 此处的代码应与这个同名函数一致（或许应该弃用同名实现 or 提个接口）
-	/// ReadArgumentAndGetIndex(sbyte paramType, byte** ppData, ArgumentCollection argumentCollection)
-	/// </summary>
-	/// <param name="paramType"></param>
-	/// <param name="ppData"></param>
-	/// <param name="argumentCollection"></param>
-	/// <returns></returns>
 	protected unsafe static int ReadArgumentAndGetIndex(sbyte paramType, byte** ppData, TransferableArgumentCollection argumentCollection)
 	{
 		switch (paramType)
@@ -763,9 +677,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		}
 	}
 
-	/// <summary>
-	/// 从指定位置读取角色数据
-	/// </summary>
 	private unsafe static int ReadCharacter(byte** ppData)
 	{
 		int result = *(int*)(*ppData);
@@ -773,9 +684,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取地点数据
-	/// </summary>
 	private unsafe static Location ReadLocation(byte** ppData)
 	{
 		short areaId = *(short*)(*ppData);
@@ -784,9 +692,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return new Location(areaId, blockId);
 	}
 
-	/// <summary>
-	/// 从指定位置读取物品数据
-	/// </summary>
 	private unsafe static (sbyte itemType, short itemTemplateId) ReadItem(byte** ppData)
 	{
 		byte item = *(*ppData);
@@ -795,9 +700,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (itemType: (sbyte)item, itemTemplateId: itemTemplateId);
 	}
 
-	/// <summary>
-	/// 从指定位置读取功法数据
-	/// </summary>
 	private unsafe static short ReadCombatSkill(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -805,9 +707,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取资源数据
-	/// </summary>
 	private unsafe static sbyte ReadResource(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -815,9 +714,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取定居点数据
-	/// </summary>
 	private unsafe static short ReadSettlement(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -825,9 +721,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取团体级别数据
-	/// </summary>
 	private unsafe static (sbyte orgTemplateId, sbyte orgGrade, bool orgPrincipal, sbyte gender) ReadOrgGrade(byte** ppData)
 	{
 		byte item = *(*ppData);
@@ -838,9 +731,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (orgTemplateId: (sbyte)item, orgGrade: orgGrade, orgPrincipal: orgPrincipal, gender: gender);
 	}
 
-	/// <summary>
-	/// 从指定位置读取产业建筑数据
-	/// </summary>
 	private unsafe static short ReadBuilding(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -848,9 +738,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取剑冢数据
-	/// </summary>
 	private unsafe static sbyte ReadSwordTomb(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -858,9 +745,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取紫竹化身数据
-	/// </summary>
 	private unsafe static sbyte ReadJuniorXiangshu(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -868,9 +752,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取奇遇数据
-	/// </summary>
 	private unsafe static int ReadAdventure(byte** ppData)
 	{
 		int result = *(int*)(*ppData);
@@ -878,9 +759,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取角色立场数据
-	/// </summary>
 	private unsafe static sbyte ReadBehaviorType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -888,9 +766,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取好感类型数据
-	/// </summary>
 	private unsafe static sbyte ReadFavorabilityType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -898,9 +773,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取促织数据
-	/// </summary>
 	private unsafe static (short colorId, short partId, int nameId) ReadCricket(byte** ppData)
 	{
 		short item = *(short*)(*ppData);
@@ -910,9 +782,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (colorId: item, partId: partId, nameId: nameId);
 	}
 
-	/// <summary>
-	/// 从指定位置读取物品子类数据
-	/// </summary>
 	private unsafe static short ReadItemSubType(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -920,9 +789,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取鸡数据
-	/// </summary>
 	private unsafe static short ReadChicken(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -930,9 +796,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取角色属性引用类型数据
-	/// </summary>
 	private unsafe static short ReadCharacterPropertyReferencedType(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -940,9 +803,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取身体部位类型数据
-	/// </summary>
 	private unsafe static sbyte ReadBodyPartType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -950,9 +810,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取伤势类型数据
-	/// </summary>
 	private unsafe static sbyte ReadInjuryType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -960,9 +817,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取毒素类型数据
-	/// </summary>
 	private unsafe static sbyte ReadPoisonType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -970,9 +824,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取角色模板数据
-	/// </summary>
 	private unsafe static short ReadCharacterTemplate(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -980,9 +831,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取角色特性数据
-	/// </summary>
 	private unsafe static short ReadFeature(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -990,9 +838,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取整型数值
-	/// </summary>
 	private unsafe static int ReadInteger(byte** ppData)
 	{
 		int result = *(int*)(*ppData);
@@ -1000,9 +845,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取技艺模板数据
-	/// </summary>
 	private unsafe static short ReadLifeSkill(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -1010,9 +852,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取商会类型
-	/// </summary>
 	private unsafe static sbyte ReadMerchantType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -1020,9 +859,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取物品Key
-	/// </summary>
 	private unsafe static ulong ReadItemKey(byte** ppData)
 	{
 		long result = *(long*)(*ppData);
@@ -1030,9 +866,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (ulong)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取战斗类型
-	/// </summary>
 	private unsafe static sbyte ReadCombatType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -1040,9 +873,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取技艺类型
-	/// </summary>
 	private unsafe static sbyte ReadLifeSkillType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -1050,9 +880,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取功法类型
-	/// </summary>
 	private unsafe static sbyte ReadCombatSkillType(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -1060,9 +887,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取见闻
-	/// </summary>
 	private unsafe static short ReadInformation(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -1070,9 +894,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取秘闻模板
-	/// </summary>
 	private unsafe static short ReadSecretInformationTemplate(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -1080,9 +901,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取惩罚类型
-	/// </summary>
 	private unsafe static short ReadPunishmentType(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -1090,9 +908,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取角色称号
-	/// </summary>
 	private unsafe static short ReadCharacterTitle(byte** ppData)
 	{
 		short result = *(short*)(*ppData);
@@ -1100,9 +915,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取浮点数
-	/// </summary>
 	private unsafe static float ReadFloat(byte** ppData)
 	{
 		float result = *(float*)(*ppData);
@@ -1110,9 +922,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取月份
-	/// </summary>
 	private unsafe static sbyte ReadMonth(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -1120,9 +929,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取 Int
-	/// </summary>
 	private unsafe static int ReadInt(byte** ppData)
 	{
 		int result = *(int*)(*ppData);
@@ -1130,11 +936,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取 SByte
-	/// </summary>
-	/// <param name="ppData"></param>
-	/// <returns></returns>
 	private unsafe static sbyte ReadSByte(byte** ppData)
 	{
 		byte result = *(*ppData);
@@ -1142,12 +943,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (sbyte)result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取非托管类型
-	/// </summary>
-	/// <param name="ppData"></param>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	private unsafe static T ReadGeneric<T>(byte** ppData) where T : unmanaged
 	{
 		T result = *(T*)(*ppData);
@@ -1155,11 +950,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return result;
 	}
 
-	/// <summary>
-	/// 从指定位置读取文本
-	/// </summary>
-	/// <param name="ppData"></param>
-	/// <returns></returns>
 	private unsafe static string ReadText(byte** ppData)
 	{
 		string val;
@@ -1168,11 +958,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return val;
 	}
 
-	/// <summary>
-	/// 从指定位置读取秘闻实例
-	/// </summary>
-	/// <param name="ppData"></param>
-	/// <returns></returns>
 	public unsafe static (short templateId, int id) ReadSecretInformation(byte** ppData)
 	{
 		short item = *(short*)(*ppData);
@@ -1181,12 +966,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return (templateId: item, id: id);
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// </summary>
-	/// <param name="data">要渲染的数据</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public void ReadData(TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		int index = -1;
@@ -1214,25 +993,11 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		data.StartDate = date;
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// </summary>
-	/// <param name="data">要渲染的数据，需保证Record为空</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public void ReadDataWithNormalOrder(TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		ReadDataWithNormalOrder(data, getParameters, ReadRenderInfo);
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// "WithNormalOrder"指的是，读取数据的顺序正常（顺序存储），而读取结果也正常（逆序存储）
-	/// </summary>
-	/// <param name="data">要渲染的数据，需保证Record为空</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <param name="readRenderInfo">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public void ReadDataWithNormalOrder(TransferableRecordDataBase data, Func<int, string[]> getParameters, Func<int, TransferableRecordDataBase, Func<int, string[]>, TransferableRecord> readRenderInfo)
 	{
 		int index = -1;
@@ -1268,13 +1033,6 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		data.Record.Reverse();
 	}
 
-	/// <summary>
-	/// 获取指定索引的经历的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="data">实参集合</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public unsafe TransferableRecord ReadRenderInfo(int offset, TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		fixed (byte* pRawData = RawData)
@@ -1305,24 +1063,11 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		}
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// </summary>
-	/// <param name="data">要渲染的数据，需保证Record为空</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public void ReadTaiwuVillageDataWithNormalOrder(TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		ReadDataWithNormalOrder(data, getParameters, ReadTaiwuVillageRenderInfo);
 	}
 
-	/// <summary>
-	/// 获取指定索引的经历的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="data">实参集合</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public unsafe TransferableRecord ReadTaiwuVillageRenderInfo(int offset, TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		fixed (byte* pRawData = RawData)
@@ -1358,24 +1103,11 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		}
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// </summary>
-	/// <param name="data">要渲染的数据，需保证Record为空</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public void ReadOrganizationRecordDataWithNormalOrder(TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		ReadDataWithNormalOrder(data, getParameters, ReadOrganizationRecordRenderInfo);
 	}
 
-	/// <summary>
-	/// 获取指定索引的经历的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="data">实参集合</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public unsafe TransferableRecord ReadOrganizationRecordRenderInfo(int offset, TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		fixed (byte* pRawData = RawData)
@@ -1411,24 +1143,11 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		}
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// </summary>
-	/// <param name="data">要渲染的数据，需保证Record为空</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public void ReadTeaHorseEventWithNormalOrder(TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		ReadDataWithNormalOrder(data, getParameters, ReadTeaHorseEventRenderInfo);
 	}
 
-	/// <summary>
-	/// 获取指定索引的经历的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="data">实参集合</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public unsafe TransferableRecord ReadTeaHorseEventRenderInfo(int offset, TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		fixed (byte* pRawData = RawData)
@@ -1461,24 +1180,11 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		}
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// </summary>
-	/// <param name="data">要渲染的数据，需保证Record为空</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public void ReadTeammateBubbleWithNormalOrder(TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		ReadDataWithNormalOrder(data, getParameters, ReadTeammateBubbleRenderInfo);
 	}
 
-	/// <summary>
-	/// 获取指定索引的经历的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="data">实参集合</param>
-	/// <param name="getParameters">获取参数信息的函数，需注意：null == 出错，Array.Empty == 无参</param>
-	/// <returns></returns>
 	public unsafe TransferableRecord ReadTeammateBubbleRenderInfo(int offset, TransferableRecordDataBase data, Func<int, string[]> getParameters)
 	{
 		fixed (byte* pRawData = RawData)
@@ -1536,18 +1242,10 @@ public class ReadonlyRecordCollection : RawDataBlock, IBinary, ISerializableGame
 		return offset;
 	}
 
-	/// <summary>
-	/// 将指定位置的一条记录的全部参数填充到事件参数盒子
-	/// </summary>
-	/// <param name="offset">记录所在位置</param>
-	/// <param name="eventArgBox">需要填充的事件参数盒子</param>
 	public virtual void FillEventArgBox(int offset, IVariantCollection<string> eventArgBox)
 	{
 	}
 
-	/// <summary>
-	/// 读取一个参数并将其填充到事件参数盒子
-	/// </summary>
 	protected unsafe void ReadArgumentToEventArgBox(string keyPrefix, int argIndex, sbyte paramType, byte** ppData, IVariantCollection<string> argBox)
 	{
 		string argKey = $"{keyPrefix}{argIndex}";

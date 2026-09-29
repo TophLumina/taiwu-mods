@@ -7,9 +7,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 周天与读书的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class ReadAndLoopDisplayData : ISerializableGameData
 {
@@ -68,14 +65,8 @@ public class ReadAndLoopDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 12;
-		totalSize += BookKey.GetSerializedSize();
-		totalSize += MainAttributes.GetSerializedSize();
+		int totalSize = 56;
 		totalSize = ((Durabilities == null) ? (totalSize + 2) : (totalSize + (2 + 4 * Durabilities.Count)));
-		for (int i = 0; i < 3; i++)
-		{
-			totalSize += ReferenceBook[i].GetSerializedSize();
-		}
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

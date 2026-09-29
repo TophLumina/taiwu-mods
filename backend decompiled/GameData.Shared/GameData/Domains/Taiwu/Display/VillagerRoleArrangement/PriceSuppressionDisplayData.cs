@@ -3,37 +3,23 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 
-/// <summary>
-/// 抑制物价
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class PriceSuppressionDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 指定物品
-	/// </summary>
 	[SerializableGameDataField]
 	public TemplateKey SuppressionItem;
 
-	/// <summary>
-	/// 价格下降速率
-	/// </summary>
 	[SerializableGameDataField]
 	public int PriceDropRate;
 
-	/// <summary>
-	/// 最小价格是原来的多少倍
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxPriceTimes;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 11;
@@ -44,7 +30,6 @@ public class PriceSuppressionDisplayData : IVillagerRoleArrangementDisplayData, 
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -61,7 +46,6 @@ public class PriceSuppressionDisplayData : IVillagerRoleArrangementDisplayData, 
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

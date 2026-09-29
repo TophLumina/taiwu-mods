@@ -6,23 +6,11 @@ using Redzen.Random;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 各种技艺类型对应的值
-/// </summary>
 [Serializable]
 public struct LifeSkillShorts : ISerializableGameData, ISerializable
 {
-	/// <summary>
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.Character.LifeSkillType" />
-	/// </summary>
 	public unsafe fixed short Items[16];
 
-	/// <summary>
-	/// 直接通过 index 安全访问数据的接口.
-	/// 主要用于对性能要求不是特别严格的情况 (非过月逻辑中频繁调用或可能每帧多次调用的逻辑皆可)
-	/// </summary>
-	/// <param name="index">技艺类型<see cref="T:GameData.Domains.Character.LifeSkillType" /></param>
 	public unsafe ref short this[int index]
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -36,44 +24,21 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 获取某一项，性能详见<see cref="P:GameData.Domains.Character.LifeSkillShorts.Item(System.Int32)" />
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public short Get(int index)
 	{
 		return this[index];
 	}
 
-	/// <summary>
-	/// 设置某一项，性能详见<see cref="P:GameData.Domains.Character.LifeSkillShorts.Item(System.Int32)" />
-	/// </summary>
-	/// <param name="index"></param>
-	/// <param name="value"></param>
-	/// <returns></returns>
 	public short Set(int index, short value)
 	{
 		return this[index] = value;
 	}
 
-	/// <summary>
-	/// 改变某一项，性能详见<see cref="P:GameData.Domains.Character.LifeSkillShorts.Item(System.Int32)" />
-	/// </summary>
-	/// <param name="index"></param>
-	/// <param name="delta"></param>
-	/// <returns></returns>
 	public short Change(int index, short delta)
 	{
 		return this[index] += delta;
 	}
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 LifeSkillType.Count == 16.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (short* items = Items)
@@ -85,10 +50,6 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 从配置表构造对象
-	/// </summary>
-	/// <param name="values"></param>
 	public unsafe LifeSkillShorts(params short[] values)
 	{
 		for (int i = 0; i < 16; i++)
@@ -153,10 +114,6 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 计算所有值的总和
-	/// </summary>
-	/// <returns></returns>
 	public unsafe int GetSum()
 	{
 		int sum = 0;
@@ -167,11 +124,6 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		return sum;
 	}
 
-	/// <summary>
-	/// 计算并返回两者的差值
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public unsafe LifeSkillShorts Subtract(ref LifeSkillShorts other)
 	{
 		LifeSkillShorts delta = default(LifeSkillShorts);
@@ -182,9 +134,6 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		return delta;
 	}
 
-	/// <summary>
-	/// 获取倒转了正负号后的对象
-	/// </summary>
 	public unsafe LifeSkillShorts GetReversed()
 	{
 		LifeSkillShorts reversed = default(LifeSkillShorts);
@@ -195,9 +144,6 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		return reversed;
 	}
 
-	/// <summary>
-	/// 获取最大值
-	/// </summary>
 	public unsafe short GetMaxLifeSkillValue()
 	{
 		short max = short.MinValue;
@@ -211,10 +157,6 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		return max;
 	}
 
-	/// <summary>
-	/// 获取最大值的类型,如有相同值则返回首个
-	/// </summary>
-	/// <returns></returns>
 	public unsafe sbyte GetMaxLifeSkillType()
 	{
 		short max = Items[0];
@@ -230,9 +172,6 @@ public struct LifeSkillShorts : ISerializableGameData, ISerializable
 		return type;
 	}
 
-	/// <summary>
-	/// 获取最大值的类型,如有相同值则随机一个
-	/// </summary>
 	public unsafe sbyte GetMaxLifeSkillType(IRandomSource random)
 	{
 		short max = short.MinValue;

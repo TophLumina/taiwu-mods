@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class TrickType : ConfigData<TrickTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TrickType Instance = new TrickType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "ChineseName", "Icon", "FontColor", "BackIcon", "BigBackIcon", "AvoidBackIcon", "AvoidBigBackIcon" };

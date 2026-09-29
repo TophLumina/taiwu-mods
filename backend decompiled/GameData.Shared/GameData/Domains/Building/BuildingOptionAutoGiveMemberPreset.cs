@@ -4,81 +4,32 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 建筑自动指派预设
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class BuildingOptionAutoGiveMemberPreset : ISerializableGameData
 {
-	/// <summary>
-	/// 影响范围组成
-	/// </summary>
 	[Flags]
 	public enum InfluenceRangeFlag
 	{
-		/// <summary>
-		/// 领袖
-		/// </summary>
 		Leader = 1,
-		/// <summary>
-		/// 成员
-		/// </summary>
 		Member = 2
 	}
 
-	/// <summary>
-	/// 选取规则
-	/// </summary>
 	public enum PickRule
 	{
-		/// <summary>
-		/// 收益优先
-		/// </summary>
 		ManageFirst,
-		/// <summary>
-		/// 资质优先
-		/// </summary>
 		QualificationFirst,
-		/// <summary>
-		/// 研读优先
-		/// </summary>
 		ReadingFirst,
-		/// <summary>
-		/// （学徒）资质最高优先
-		/// 需注意，这个按钮是新加的，前端按钮摆放顺序是0312而不是0123
-		/// </summary>
 		QualificationMax
 	}
 
-	/// <summary>
-	/// 身份规则
-	/// </summary>
 	[Flags]
 	public enum RoleRule : sbyte
 	{
-		/// <summary>
-		/// 无规则
-		/// </summary>
 		None = 0,
-		/// <summary>
-		/// 仅符合身份
-		/// </summary>
 		OnlyRole = 1,
-		/// <summary>
-		/// 允许孩童
-		/// </summary>
 		AllowChild = 2,
-		/// <summary>
-		/// 排除身份
-		/// </summary>
 		NotAllowRole = 4,
-		/// <summary>
-		/// 允许潜力已尽
-		/// </summary>
 		AllowNoPotential = 8,
-		/// <summary>
-		/// 允许无可研读
-		/// </summary>
 		AllowNoReadableBook = 0x10
 	}
 
@@ -105,51 +56,27 @@ public class BuildingOptionAutoGiveMemberPreset : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[8] { "InfluenceRange", "PickRuleForLeader", "PickRuleForMember", "Amount", "RoleRuleForLeader", "RoleRuleForMember", "LockCharForLeader", "LockCharForMember" };
 	}
 
-	/// <summary>
-	/// 影响范围
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public sbyte InfluenceRange = 3;
 
-	/// <summary>
-	/// 领袖规则
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public sbyte PickRuleForLeader;
 
-	/// <summary>
-	/// 组员规则
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public sbyte PickRuleForMember;
 
-	/// <summary>
-	/// 自动指派成员的数量
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public int Amount = 6;
 
-	/// <summary>
-	/// 领袖的身份限制规则
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public sbyte RoleRuleForLeader;
 
-	/// <summary>
-	/// 组员的身份限制规则
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public sbyte RoleRuleForMember = 30;
 
-	/// <summary>
-	/// 领袖的锁定人物，默认锁定
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public bool LockCharForLeader = true;
 
-	/// <summary>
-	/// 组员的锁定人物，默认锁定
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public bool LockCharForMember = true;
 
@@ -187,16 +114,10 @@ public class BuildingOptionAutoGiveMemberPreset : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public BuildingOptionAutoGiveMemberPreset()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BuildingOptionAutoGiveMemberPreset(BuildingOptionAutoGiveMemberPreset other)
 	{
 		InfluenceRange = other.InfluenceRange;
@@ -209,9 +130,6 @@ public class BuildingOptionAutoGiveMemberPreset : ISerializableGameData
 		LockCharForMember = other.LockCharForMember;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BuildingOptionAutoGiveMemberPreset other)
 	{
 		InfluenceRange = other.InfluenceRange;

@@ -7,32 +7,17 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 商队旅行路线
-/// </summary>
 [Serializable]
 public class CaravanPath : ISerializableGameData
 {
-	/// <summary>
-	/// 每次移动前进天数
-	/// </summary>
 	public const int CostDaysPerMove = 15;
 
-	/// <summary>
-	/// 途经地块列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<Location> FullPath = new List<Location>();
 
-	/// <summary>
-	/// 每一次移动后所在地址索引。对应FullPath的索引，为-1时表示位于区域之间的虚空中
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> MoveNodes = new List<int>();
 
-	/// <summary>
-	/// 下次移动等待时间
-	/// </summary>
 	[SerializableGameDataField]
 	public short MoveWaitDays;
 
@@ -40,9 +25,6 @@ public class CaravanPath : ISerializableGameData
 	{
 	}
 
-	/// <summary>
-	/// 获取当前所在地块，位于虚空时返回路线中的下一个地块
-	/// </summary>
 	public Location GetCurrLocation()
 	{
 		int nodeIndex;
@@ -52,10 +34,6 @@ public class CaravanPath : ISerializableGameData
 		return FullPath[MoveNodes[nodeIndex]];
 	}
 
-	/// <summary>
-	/// 获取下一个地块，位于虚空时返回当前地块
-	/// </summary>
-	/// <returns></returns>
 	public Location GetNextLocation()
 	{
 		Location location = GetCurrLocation();
@@ -67,10 +45,6 @@ public class CaravanPath : ISerializableGameData
 		return FullPath[nextIndex];
 	}
 
-	/// <summary>
-	/// 获取上一个地块，位于虚空时返回当前地块
-	/// </summary>
-	/// <returns></returns>
 	public Location GetLastLocation()
 	{
 		Location location = GetCurrLocation();
@@ -82,28 +56,16 @@ public class CaravanPath : ISerializableGameData
 		return FullPath[lastIndex];
 	}
 
-	/// <summary>
-	/// 获取终点地块
-	/// </summary>
-	/// <returns></returns>
 	public Location GetDestLocation()
 	{
 		return FullPath.Last();
 	}
 
-	/// <summary>
-	/// 获取起点地块
-	/// </summary>
-	/// <returns></returns>
 	public Location GetSrcLocation()
 	{
 		return FullPath.First();
 	}
 
-	/// <summary>
-	/// 获取商队在当前地区的剩余路径，包括当前位置
-	/// </summary>
-	/// <returns></returns>
 	public CaravanPath GetRemainCaravanPathInCurrentArea()
 	{
 		CaravanPath path = new CaravanPath();

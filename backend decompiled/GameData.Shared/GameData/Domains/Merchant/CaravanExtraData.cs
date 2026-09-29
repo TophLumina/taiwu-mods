@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 商队的额外数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class CaravanExtraData : ISerializableGameData
 {
@@ -32,51 +29,26 @@ public class CaravanExtraData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[7] { "IncomeCriticalRate", "IncomeBonus", "IncomeCriticalResult", "RobbedRate", "State", "IsInvested", "SettlementIdList" };
 	}
 
-	/// <summary>
-	/// 收益增幅的初始值
-	/// </summary>
 	public const short InitialIncomeBonus = 1000;
 
-	/// <summary>
-	/// 收益暴击率，千分制
-	/// </summary>
 	[SerializableGameDataField]
 	public short IncomeCriticalRate;
 
-	/// <summary>
-	/// 收益增幅，千分制，初始1000
-	/// </summary>
 	[SerializableGameDataField]
 	public short IncomeBonus = 1000;
 
-	/// <summary>
-	/// 收益暴击倍率，百分制
-	/// </summary>
 	[SerializableGameDataField]
 	public short IncomeCriticalResult;
 
-	/// <summary>
-	/// 被抢劫概率，千分制
-	/// </summary>
 	[SerializableGameDataField]
 	public short RobbedRate;
 
-	/// <summary>
-	/// 当前状态
-	/// <see cref="T:GameData.Domains.Merchant.CaravanState" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte State;
 
-	/// <summary>
-	/// 是否被太吾投资
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInvested;
 
-	/// <summary>
-	/// 待经过的定居点列表，不重复，经过就从列表移除
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> SettlementIdList;
 
@@ -95,16 +67,10 @@ public class CaravanExtraData : ISerializableGameData
 		return $"收益比例{IncomeBonus}‰，暴击概率{IncomeCriticalRate}‰，暴击倍率{IncomeCriticalResult}‰，遇劫概率{RobbedRate}‰，{investStr}，当前状态{stateStr}";
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CaravanExtraData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CaravanExtraData(CaravanExtraData other)
 	{
 		IncomeCriticalRate = other.IncomeCriticalRate;
@@ -116,9 +82,6 @@ public class CaravanExtraData : ISerializableGameData
 		SettlementIdList = ((other.SettlementIdList == null) ? null : new List<short>(other.SettlementIdList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CaravanExtraData other)
 	{
 		IncomeCriticalRate = other.IncomeCriticalRate;
@@ -130,13 +93,11 @@ public class CaravanExtraData : ISerializableGameData
 		SettlementIdList = ((other.SettlementIdList == null) ? null : new List<short>(other.SettlementIdList));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -148,7 +109,6 @@ public class CaravanExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -191,7 +151,6 @@ public class CaravanExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

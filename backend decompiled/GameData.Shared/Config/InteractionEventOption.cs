@@ -8,1451 +8,612 @@ namespace Config;
 [Serializable]
 public class InteractionEventOption : ConfigData<InteractionEventOptionItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 交谈-见闻闲谈
-		/// </summary>
 		public const short TalkByNormalInformation = 0;
 
-		/// <summary>
-		/// 交谈-使用秘闻
-		/// </summary>
 		public const short TalkBySecretInformation = 1;
 
-		/// <summary>
-		/// 交谈-打探秘闻
-		/// </summary>
 		public const short AskForSecretInformation = 2;
 
-		/// <summary>
-		/// 交谈-赞颂夸奖
-		/// </summary>
 		public const short Praise = 3;
 
-		/// <summary>
-		/// 交谈-羞辱指责
-		/// </summary>
 		public const short Sneer = 4;
 
-		/// <summary>
-		/// 交谈-邀约聚会
-		/// </summary>
 		public const short Invitation = 5;
 
-		/// <summary>
-		/// 交谈-赠送礼物
-		/// </summary>
 		public const short SendGift = 6;
 
-		/// <summary>
-		/// 比试-促织决斗
-		/// </summary>
 		public const short CriketCombatInteract = 7;
 
-		/// <summary>
-		/// 比试-较艺比试
-		/// </summary>
 		public const short LifeSkillCombatInteract = 8;
 
-		/// <summary>
-		/// 比试-切磋武功
-		/// </summary>
 		public const short CombatInteract = 9;
 
-		/// <summary>
-		/// 比试-发起挑战
-		/// </summary>
 		public const short CombatInteractChallenge = 10;
 
-		/// <summary>
-		/// 修习-请教技艺1
-		/// </summary>
 		public const short ConsultLifeSkill1 = 11;
 
-		/// <summary>
-		/// 修习-请教技艺2
-		/// </summary>
 		public const short ConsultLifeSkill2 = 12;
 
-		/// <summary>
-		/// 修习-请教技艺3
-		/// </summary>
 		public const short ConsultLifeSkill3 = 13;
 
-		/// <summary>
-		/// 修习-请教功法1
-		/// </summary>
 		public const short ConsultCombatSkill1 = 14;
 
-		/// <summary>
-		/// 修习-请教功法2
-		/// </summary>
 		public const short ConsultCombatSkill2 = 15;
 
-		/// <summary>
-		/// 修习-请教功法3
-		/// </summary>
 		public const short ConsultCombatSkill3 = 16;
 
-		/// <summary>
-		/// 修习-偷师技艺
-		/// </summary>
 		public const short StealLifeSkill = 17;
 
-		/// <summary>
-		/// 修习-偷师功法
-		/// </summary>
 		public const short StealCombatSkill = 18;
 
-		/// <summary>
-		/// 修习-唬骗技艺
-		/// </summary>
 		public const short ScamLifeSkill = 19;
 
-		/// <summary>
-		/// 修习-唬骗功法
-		/// </summary>
 		public const short ScamCombatSkill = 20;
 
-		/// <summary>
-		/// 修习-交换藏书
-		/// </summary>
 		public const short ExchangeSkillBook = 21;
 
-		/// <summary>
-		/// 亲近-邀为同道1
-		/// </summary>
 		public const short AskForTeammate1 = 22;
 
-		/// <summary>
-		/// 亲近-邀为同道2
-		/// </summary>
 		public const short AskForTeammate2 = 23;
 
-		/// <summary>
-		/// 亲近-邀请回村
-		/// </summary>
 		public const short AskForTaiwuVillager = 24;
 
-		/// <summary>
-		/// 亲近-获取支持
-		/// </summary>
 		public const short AskForSupport = 25;
 
-		/// <summary>
-		/// 亲近-拜为义父
-		/// </summary>
 		public const short BecomeAdoptiveFather = 26;
 
-		/// <summary>
-		/// 亲近-拜为义母
-		/// </summary>
 		public const short BecomeAdoptiveMother = 27;
 
-		/// <summary>
-		/// 亲近-收为义子
-		/// </summary>
 		public const short BecomeAdoptiveSon = 28;
 
-		/// <summary>
-		/// 亲近-收为义女
-		/// </summary>
 		public const short BecomeAdoptiveDaughter = 29;
 
-		/// <summary>
-		/// 亲近-知心而交
-		/// </summary>
 		public const short BecomeFriend = 30;
 
-		/// <summary>
-		/// 亲近-倾述爱意
-		/// </summary>
 		public const short BecomeLover = 31;
 
-		/// <summary>
-		/// 亲近-共结连理1
-		/// </summary>
 		public const short BecomeCouple1 = 32;
 
-		/// <summary>
-		/// 亲近-共结连理2
-		/// </summary>
 		public const short BecomeCouple2 = 33;
 
-		/// <summary>
-		/// 亲近-背恩绝情
-		/// </summary>
 		public const short BreakUp = 34;
 
-		/// <summary>
-		/// 亲近-义结金兰
-		/// </summary>
 		public const short BecomeSwornFriend = 35;
 
-		/// <summary>
-		/// 亲近-割袍断义
-		/// </summary>
 		public const short SeverFriendship = 36;
 
-		/// <summary>
-		/// 亲近-推朋荐友
-		/// </summary>
 		public const short RecommendFriend = 37;
 
-		/// <summary>
-		/// 亲近-挑拨离间
-		/// </summary>
 		public const short RecommendEnemy = 38;
 
-		/// <summary>
-		/// 亲近-调停恩怨
-		/// </summary>
 		public const short PersuadeResentment = 39;
 
-		/// <summary>
-		/// 亲近-男媒女妁
-		/// </summary>
 		public const short Matchmaker = 40;
 
-		/// <summary>
-		/// 敌对-唬骗道具
-		/// </summary>
 		public const short ScamItem = 41;
 
-		/// <summary>
-		/// 敌对-唬骗见闻
-		/// </summary>
 		public const short ScamNormalInformation = 42;
 
-		/// <summary>
-		/// 敌对-唬骗秘闻
-		/// </summary>
 		public const short ScamSecretInformation = 43;
 
-		/// <summary>
-		/// 敌对-窃取道具
-		/// </summary>
 		public const short StealItem = 44;
 
-		/// <summary>
-		/// 敌对-夺取道具
-		/// </summary>
 		public const short RobItem = 45;
 
-		/// <summary>
-		/// 敌对-施以毒害
-		/// </summary>
 		public const short Poison = 46;
 
-		/// <summary>
-		/// 敌对-暗中损伤
-		/// </summary>
 		public const short Damage = 47;
 
-		/// <summary>
-		/// 敌对-出手袭击
-		/// </summary>
 		public const short Attack = 48;
 
-		/// <summary>
-		/// 奇书-发起挑战
-		/// </summary>
 		public const short LegendaryBookChallenge = 49;
 
-		/// <summary>
-		/// 奇书-斩妖除魔
-		/// </summary>
 		public const short LegendaryBookKillXiangshu = 50;
 
-		/// <summary>
-		/// 奇书-诚恳求取
-		/// </summary>
 		public const short LegendaryBookBeg = 51;
 
-		/// <summary>
-		/// 奇书-提出交换
-		/// </summary>
 		public const short LegendaryBookExchange = 52;
 
-		/// <summary>
-		/// 互动-收养元鸡
-		/// </summary>
 		public const short IdentityAdoptChicken = 53;
 
-		/// <summary>
-		/// 互动-举办招亲
-		/// </summary>
 		public const short IdentityMatchmaker = 54;
 
-		/// <summary>
-		/// 互动-茶酒会友
-		/// </summary>
 		public const short IdentityWineTeaAndFriend = 55;
 
-		/// <summary>
-		/// 互动-城镇集会
-		/// </summary>
 		public const short HoldTownMarket = 56;
 
-		/// <summary>
-		/// 互动-浏览货物
-		/// </summary>
 		public const short IdentityBrowseGoods = 57;
 
-		/// <summary>
-		/// 互动-疗伤驱毒
-		/// </summary>
 		public const short IdentityDoctorHeal = 58;
 
-		/// <summary>
-		/// 互动-修补物品
-		/// </summary>
 		public const short IdentityRepairMan = 59;
 
-		/// <summary>
-		/// 互动-采买鲜果
-		/// </summary>
 		public const short IdentityFarmer = 141;
 
-		/// <summary>
-		/// 互动-梳头修面
-		/// </summary>
 		public const short IdentityHairCutter = 60;
 
-		/// <summary>
-		/// 互动-施舍银钱
-		/// </summary>
 		public const short IdentityMoneyCharity = 61;
 
-		/// <summary>
-		/// 互动-荐送弟子
-		/// </summary>
 		public const short IntimateInteractionRecommendPupil = 62;
 
-		/// <summary>
-		/// 互动-求取弟子
-		/// </summary>
 		public const short IntimateInteractionDemandPupil = 63;
 
-		/// <summary>
-		/// 互动-面壁阅经
-		/// </summary>
 		public const short SpiritualDebtInteractionShaolin = 64;
 
-		/// <summary>
-		/// 互动-天府规略
-		/// </summary>
 		public const short SpiritualDebtInteractionEmei = 65;
 
-		/// <summary>
-		/// 互动-起死回生
-		/// </summary>
 		public const short SpiritualDebtInteractionBaihua = 66;
 
-		/// <summary>
-		/// 互动-七星调元
-		/// </summary>
 		public const short SpiritualDebtInteractionWudang = 67;
 
-		/// <summary>
-		/// 互动-石牢静坐
-		/// </summary>
 		public const short SpiritualDebtInteractionYuanshan = 68;
 
-		/// <summary>
-		/// 互动-散播威名
-		/// </summary>
 		public const short SpiritualDebtInteractionShixiang = 69;
 
-		/// <summary>
-		/// 互动-王禅典籍
-		/// </summary>
 		public const short SpiritualDebtInteractionRanshan = 70;
 
-		/// <summary>
-		/// 互动-玉镜沉思
-		/// </summary>
 		public const short SpiritualDebtInteractionXuannv = 71;
 
-		/// <summary>
-		/// 互动-欧冶古具
-		/// </summary>
 		public const short SpiritualDebtInteractionZhujian = 72;
 
-		/// <summary>
-		/// 互动-铸剑试炼
-		/// </summary>
 		public const short SpiritualDebtInteractionZhujian2 = 73;
 
-		/// <summary>
-		/// 互动-秘药延寿
-		/// </summary>
 		public const short SpiritualDebtInteractionKongsang = 74;
 
-		/// <summary>
-		/// 互动-搜集贡品
-		/// </summary>
 		public const short SpiritualDebtInteractionJingang = 75;
 
-		/// <summary>
-		/// 互动-五圣秘浴
-		/// </summary>
 		public const short SpiritualDebtInteractionWuxian = 76;
 
-		/// <summary>
-		/// 互动-委托暗杀
-		/// </summary>
 		public const short SpiritualDebtInteractionJieqing = 77;
 
-		/// <summary>
-		/// 互动-龙岛忠仆
-		/// </summary>
 		public const short SpiritualDebtInteractionFulong = 78;
 
-		/// <summary>
-		/// 互动-血池秘法
-		/// </summary>
 		public const short SpiritualDebtInteractionXuehou = 79;
 
-		/// <summary>
-		/// 互动-州府条例
-		/// </summary>
 		public const short CityPunishmentSeverityCustomize = 80;
 
-		/// <summary>
-		/// 互动-重金诊疗
-		/// </summary>
 		public const short DoctorExpensiveHeal = 81;
 
-		/// <summary>
-		/// 互动-看诊施药
-		/// </summary>
 		public const short ProfessionDoctorSkill0 = 82;
 
-		/// <summary>
-		/// 互动-金针渡命
-		/// </summary>
 		public const short ProfessionDoctorSkill3 = 83;
 
-		/// <summary>
-		/// 互动-封侯拜相
-		/// </summary>
 		public const short ProfessionDukeSkill1 = 84;
 
-		/// <summary>
-		/// 互动-评水品茗
-		/// </summary>
 		public const short ProfessionTeaTasterSkill0 = 85;
 
-		/// <summary>
-		/// 互动-慧眼识珠
-		/// </summary>
 		public const short ProfessionCapitalistSkill0 = 86;
 
-		/// <summary>
-		/// 互动-占卜吉凶
-		/// </summary>
 		public const short ProfessionTravelingTaoistMonkSkill1 = 87;
 
-		/// <summary>
-		/// 互动-易天改命
-		/// </summary>
 		public const short ProfessionTravelingTaoistMonkSkill2 = 88;
 
-		/// <summary>
-		/// 互动-导恶向善
-		/// </summary>
 		public const short ProfessionTravelingBuddhistMonkSkill1 = 89;
 
-		/// <summary>
-		/// 互动-退隐江湖
-		/// </summary>
 		public const short ProfessionCivilianSkill2 = 90;
 
-		/// <summary>
-		/// 互动-扶助保荐
-		/// </summary>
 		public const short ProfessionAristocratSkill0 = 91;
 
-		/// <summary>
-		/// 互动-拼豪斗酒
-		/// </summary>
 		public const short ProfessionWineTasterSkill0 = 92;
 
-		/// <summary>
-		/// 互动-传法度人
-		/// </summary>
 		public const short ProfessionBuddhistMonkSkill1 = 93;
 
-		/// <summary>
-		/// 互动-驱邪法事
-		/// </summary>
 		public const short ProfessionTaoistMonkSkill1 = 94;
 
-		/// <summary>
-		/// 互动-代笔改名
-		/// </summary>
 		public const short ProfessionLiteratiSkill0 = 95;
 
-		/// <summary>
-		/// 特殊-武林大会
-		/// </summary>
 		public const short Wulin = 96;
 
-		/// <summary>
-		/// 特殊-归还雕像
-		/// </summary>
 		public const short ShaolinStatueReturn = 97;
 
-		/// <summary>
-		/// 特殊-塔林崩塌
-		/// </summary>
 		public const short ShaolinCollapse = 98;
 
-		/// <summary>
-		/// 特殊-狮相谣言
-		/// </summary>
 		public const short ShixiangRumour = 99;
 
-		/// <summary>
-		/// 特殊-狮相闹剧
-		/// </summary>
 		public const short Shixiangnaoju = 100;
 
-		/// <summary>
-		/// 特殊-峨眉凶案
-		/// </summary>
 		public const short EMeiMurder = 101;
 
-		/// <summary>
-		/// 特殊-隐居长老
-		/// </summary>
 		public const short EMeiElder = 102;
 
-		/// <summary>
-		/// 特殊-正宗之忧
-		/// </summary>
 		public const short EMeiAuthentic = 103;
 
-		/// <summary>
-		/// 特殊-送还婴儿
-		/// </summary>
 		public const short ReturnInfant = 104;
 
-		/// <summary>
-		/// 特殊-杀人夺心
-		/// </summary>
 		public const short BaihuaInteract1 = 105;
 
-		/// <summary>
-		/// 特殊-毁人神智
-		/// </summary>
 		public const short BaihuaInteract2 = 106;
 
-		/// <summary>
-		/// 特殊-打听神秘人之事-城镇人物
-		/// </summary>
 		public const short XuannuInteract1 = 107;
 
-		/// <summary>
-		/// 特殊-打听神秘人之事-璇女门派人物
-		/// </summary>
 		public const short XuannuInteract2 = 108;
 
-		/// <summary>
-		/// 特殊-询问《孤鸾镜水谣》
-		/// </summary>
 		public const short XuannuInteract3 = 109;
 
-		/// <summary>
-		/// 特殊-论及“情”字
-		/// </summary>
 		public const short XuannuInteract4 = 110;
 
-		/// <summary>
-		/// 俘虏互动-劝说
-		/// </summary>
 		public const short PersuadePrisoner = 111;
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者1
-		/// </summary>
 		public const short MourningTomb1 = 112;
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者2
-		/// </summary>
 		public const short MourningTomb2 = 113;
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者3
-		/// </summary>
 		public const short MourningTomb3 = 114;
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者4
-		/// </summary>
 		public const short MourningTomb4 = 115;
 
-		/// <summary>
-		/// 坟墓互动修葺坟墓1
-		/// </summary>
 		public const short UpgradingTomb1 = 116;
 
-		/// <summary>
-		/// 坟墓互动修葺坟墓2
-		/// </summary>
 		public const short UpgradingTomb2 = 117;
 
-		/// <summary>
-		/// 坟墓互动修葺坟墓3
-		/// </summary>
 		public const short UpgradingTomb3 = 118;
 
-		/// <summary>
-		/// 坟墓互动摸金倒斗
-		/// </summary>
 		public const short StealingTomb = 119;
 
-		/// <summary>
-		/// 特殊-解蛊之法
-		/// </summary>
 		public const short WuxianInteract1 = 120;
 
-		/// <summary>
-		/// 特殊-下蛊之事
-		/// </summary>
 		public const short WuxianInteract2 = 121;
 
-		/// <summary>
-		/// 敌对-捉拿罪犯
-		/// </summary>
 		public const short ArrestPrison = 122;
 
-		/// <summary>
-		/// 互动-索要囚犯
-		/// </summary>
 		public const short AskForPrison = 123;
 
-		/// <summary>
-		/// 互动-真龙降世
-		/// </summary>
 		public const short SectMainStoryFulong1 = 124;
 
-		/// <summary>
-		/// 互动-神龙降世
-		/// </summary>
 		public const short LongDlc = 125;
 
-		/// <summary>
-		/// 互动-志向经验
-		/// </summary>
 		public const short AskForProfessionExp = 126;
 
-		/// <summary>
-		/// 交谈-打探见闻
-		/// </summary>
 		public const short AskForInformation = 127;
 
-		/// <summary>
-		/// 互动-推恩施义
-		/// </summary>
 		public const short ExtendFavor = 128;
 
-		/// <summary>
-		/// 互动-牵线搭桥
-		/// </summary>
 		public const short MakeLineAndBridge = 129;
 
-		/// <summary>
-		/// 互动-安定文化
-		/// </summary>
 		public const short SafetyAndCulture = 130;
 
-		/// <summary>
-		/// 互动-诗画怡情
-		/// </summary>
 		public const short PoemAndImage = 131;
 
-		/// <summary>
-		/// 互动-商会赞誉
-		/// </summary>
 		public const short MerchantPraise = 132;
 
-		/// <summary>
-		/// 互动-调理土地
-		/// </summary>
 		public const short FixLandResource = 133;
 
-		/// <summary>
-		/// 互动-市井百态
-		/// </summary>
 		public const short TalkChangeBehaType = 134;
 
-		/// <summary>
-		/// 互动-兑换工具
-		/// </summary>
 		public const short GiveExchangeTool = 135;
 
-		/// <summary>
-		/// 互动-剥夺星运
-		/// </summary>
 		public const short TakeStarFortune = 136;
 
-		/// <summary>
-		/// 互动-开悟天资
-		/// </summary>
 		public const short InsightfulTalent = 137;
 
-		/// <summary>
-		/// 互动-开悟入魔
-		/// </summary>
 		public const short Infected = 138;
 
-		/// <summary>
-		/// 互动-为NPC梳头修面
-		/// </summary>
 		public const short HairCutterForNPC = 139;
 
-		/// <summary>
-		/// 互动-打听秘闻
-		/// </summary>
 		public const short IdentityBuySecrets = 142;
 
-		/// <summary>
-		/// 互动-玄石火灰
-		/// </summary>
 		public const short FuyuFaith = 140;
+
+		public const short LoongRename = 143;
+
+		public const short LoongPolymorphBack = 144;
+
+		public const short ExchangeItem = 145;
+
+		public const short ChickenRename = 146;
+
+		public const short ChickenChat = 147;
+
+		public const short ChickenInviteGroup = 148;
+
+		public const short ChickenPolymorphBack = 149;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 交谈-见闻闲谈
-		/// </summary>
 		public static InteractionEventOptionItem TalkByNormalInformation => Instance[(short)0];
 
-		/// <summary>
-		/// 交谈-使用秘闻
-		/// </summary>
 		public static InteractionEventOptionItem TalkBySecretInformation => Instance[(short)1];
 
-		/// <summary>
-		/// 交谈-打探秘闻
-		/// </summary>
 		public static InteractionEventOptionItem AskForSecretInformation => Instance[(short)2];
 
-		/// <summary>
-		/// 交谈-赞颂夸奖
-		/// </summary>
 		public static InteractionEventOptionItem Praise => Instance[(short)3];
 
-		/// <summary>
-		/// 交谈-羞辱指责
-		/// </summary>
 		public static InteractionEventOptionItem Sneer => Instance[(short)4];
 
-		/// <summary>
-		/// 交谈-邀约聚会
-		/// </summary>
 		public static InteractionEventOptionItem Invitation => Instance[(short)5];
 
-		/// <summary>
-		/// 交谈-赠送礼物
-		/// </summary>
 		public static InteractionEventOptionItem SendGift => Instance[(short)6];
 
-		/// <summary>
-		/// 比试-促织决斗
-		/// </summary>
 		public static InteractionEventOptionItem CriketCombatInteract => Instance[(short)7];
 
-		/// <summary>
-		/// 比试-较艺比试
-		/// </summary>
 		public static InteractionEventOptionItem LifeSkillCombatInteract => Instance[(short)8];
 
-		/// <summary>
-		/// 比试-切磋武功
-		/// </summary>
 		public static InteractionEventOptionItem CombatInteract => Instance[(short)9];
 
-		/// <summary>
-		/// 比试-发起挑战
-		/// </summary>
 		public static InteractionEventOptionItem CombatInteractChallenge => Instance[(short)10];
 
-		/// <summary>
-		/// 修习-请教技艺1
-		/// </summary>
 		public static InteractionEventOptionItem ConsultLifeSkill1 => Instance[(short)11];
 
-		/// <summary>
-		/// 修习-请教技艺2
-		/// </summary>
 		public static InteractionEventOptionItem ConsultLifeSkill2 => Instance[(short)12];
 
-		/// <summary>
-		/// 修习-请教技艺3
-		/// </summary>
 		public static InteractionEventOptionItem ConsultLifeSkill3 => Instance[(short)13];
 
-		/// <summary>
-		/// 修习-请教功法1
-		/// </summary>
 		public static InteractionEventOptionItem ConsultCombatSkill1 => Instance[(short)14];
 
-		/// <summary>
-		/// 修习-请教功法2
-		/// </summary>
 		public static InteractionEventOptionItem ConsultCombatSkill2 => Instance[(short)15];
 
-		/// <summary>
-		/// 修习-请教功法3
-		/// </summary>
 		public static InteractionEventOptionItem ConsultCombatSkill3 => Instance[(short)16];
 
-		/// <summary>
-		/// 修习-偷师技艺
-		/// </summary>
 		public static InteractionEventOptionItem StealLifeSkill => Instance[(short)17];
 
-		/// <summary>
-		/// 修习-偷师功法
-		/// </summary>
 		public static InteractionEventOptionItem StealCombatSkill => Instance[(short)18];
 
-		/// <summary>
-		/// 修习-唬骗技艺
-		/// </summary>
 		public static InteractionEventOptionItem ScamLifeSkill => Instance[(short)19];
 
-		/// <summary>
-		/// 修习-唬骗功法
-		/// </summary>
 		public static InteractionEventOptionItem ScamCombatSkill => Instance[(short)20];
 
-		/// <summary>
-		/// 修习-交换藏书
-		/// </summary>
 		public static InteractionEventOptionItem ExchangeSkillBook => Instance[(short)21];
 
-		/// <summary>
-		/// 亲近-邀为同道1
-		/// </summary>
 		public static InteractionEventOptionItem AskForTeammate1 => Instance[(short)22];
 
-		/// <summary>
-		/// 亲近-邀为同道2
-		/// </summary>
 		public static InteractionEventOptionItem AskForTeammate2 => Instance[(short)23];
 
-		/// <summary>
-		/// 亲近-邀请回村
-		/// </summary>
 		public static InteractionEventOptionItem AskForTaiwuVillager => Instance[(short)24];
 
-		/// <summary>
-		/// 亲近-获取支持
-		/// </summary>
 		public static InteractionEventOptionItem AskForSupport => Instance[(short)25];
 
-		/// <summary>
-		/// 亲近-拜为义父
-		/// </summary>
 		public static InteractionEventOptionItem BecomeAdoptiveFather => Instance[(short)26];
 
-		/// <summary>
-		/// 亲近-拜为义母
-		/// </summary>
 		public static InteractionEventOptionItem BecomeAdoptiveMother => Instance[(short)27];
 
-		/// <summary>
-		/// 亲近-收为义子
-		/// </summary>
 		public static InteractionEventOptionItem BecomeAdoptiveSon => Instance[(short)28];
 
-		/// <summary>
-		/// 亲近-收为义女
-		/// </summary>
 		public static InteractionEventOptionItem BecomeAdoptiveDaughter => Instance[(short)29];
 
-		/// <summary>
-		/// 亲近-知心而交
-		/// </summary>
 		public static InteractionEventOptionItem BecomeFriend => Instance[(short)30];
 
-		/// <summary>
-		/// 亲近-倾述爱意
-		/// </summary>
 		public static InteractionEventOptionItem BecomeLover => Instance[(short)31];
 
-		/// <summary>
-		/// 亲近-共结连理1
-		/// </summary>
 		public static InteractionEventOptionItem BecomeCouple1 => Instance[(short)32];
 
-		/// <summary>
-		/// 亲近-共结连理2
-		/// </summary>
 		public static InteractionEventOptionItem BecomeCouple2 => Instance[(short)33];
 
-		/// <summary>
-		/// 亲近-背恩绝情
-		/// </summary>
 		public static InteractionEventOptionItem BreakUp => Instance[(short)34];
 
-		/// <summary>
-		/// 亲近-义结金兰
-		/// </summary>
 		public static InteractionEventOptionItem BecomeSwornFriend => Instance[(short)35];
 
-		/// <summary>
-		/// 亲近-割袍断义
-		/// </summary>
 		public static InteractionEventOptionItem SeverFriendship => Instance[(short)36];
 
-		/// <summary>
-		/// 亲近-推朋荐友
-		/// </summary>
 		public static InteractionEventOptionItem RecommendFriend => Instance[(short)37];
 
-		/// <summary>
-		/// 亲近-挑拨离间
-		/// </summary>
 		public static InteractionEventOptionItem RecommendEnemy => Instance[(short)38];
 
-		/// <summary>
-		/// 亲近-调停恩怨
-		/// </summary>
 		public static InteractionEventOptionItem PersuadeResentment => Instance[(short)39];
 
-		/// <summary>
-		/// 亲近-男媒女妁
-		/// </summary>
 		public static InteractionEventOptionItem Matchmaker => Instance[(short)40];
 
-		/// <summary>
-		/// 敌对-唬骗道具
-		/// </summary>
 		public static InteractionEventOptionItem ScamItem => Instance[(short)41];
 
-		/// <summary>
-		/// 敌对-唬骗见闻
-		/// </summary>
 		public static InteractionEventOptionItem ScamNormalInformation => Instance[(short)42];
 
-		/// <summary>
-		/// 敌对-唬骗秘闻
-		/// </summary>
 		public static InteractionEventOptionItem ScamSecretInformation => Instance[(short)43];
 
-		/// <summary>
-		/// 敌对-窃取道具
-		/// </summary>
 		public static InteractionEventOptionItem StealItem => Instance[(short)44];
 
-		/// <summary>
-		/// 敌对-夺取道具
-		/// </summary>
 		public static InteractionEventOptionItem RobItem => Instance[(short)45];
 
-		/// <summary>
-		/// 敌对-施以毒害
-		/// </summary>
 		public static InteractionEventOptionItem Poison => Instance[(short)46];
 
-		/// <summary>
-		/// 敌对-暗中损伤
-		/// </summary>
 		public static InteractionEventOptionItem Damage => Instance[(short)47];
 
-		/// <summary>
-		/// 敌对-出手袭击
-		/// </summary>
 		public static InteractionEventOptionItem Attack => Instance[(short)48];
 
-		/// <summary>
-		/// 奇书-发起挑战
-		/// </summary>
 		public static InteractionEventOptionItem LegendaryBookChallenge => Instance[(short)49];
 
-		/// <summary>
-		/// 奇书-斩妖除魔
-		/// </summary>
 		public static InteractionEventOptionItem LegendaryBookKillXiangshu => Instance[(short)50];
 
-		/// <summary>
-		/// 奇书-诚恳求取
-		/// </summary>
 		public static InteractionEventOptionItem LegendaryBookBeg => Instance[(short)51];
 
-		/// <summary>
-		/// 奇书-提出交换
-		/// </summary>
 		public static InteractionEventOptionItem LegendaryBookExchange => Instance[(short)52];
 
-		/// <summary>
-		/// 互动-收养元鸡
-		/// </summary>
 		public static InteractionEventOptionItem IdentityAdoptChicken => Instance[(short)53];
 
-		/// <summary>
-		/// 互动-举办招亲
-		/// </summary>
 		public static InteractionEventOptionItem IdentityMatchmaker => Instance[(short)54];
 
-		/// <summary>
-		/// 互动-茶酒会友
-		/// </summary>
 		public static InteractionEventOptionItem IdentityWineTeaAndFriend => Instance[(short)55];
 
-		/// <summary>
-		/// 互动-城镇集会
-		/// </summary>
 		public static InteractionEventOptionItem HoldTownMarket => Instance[(short)56];
 
-		/// <summary>
-		/// 互动-浏览货物
-		/// </summary>
 		public static InteractionEventOptionItem IdentityBrowseGoods => Instance[(short)57];
 
-		/// <summary>
-		/// 互动-疗伤驱毒
-		/// </summary>
 		public static InteractionEventOptionItem IdentityDoctorHeal => Instance[(short)58];
 
-		/// <summary>
-		/// 互动-修补物品
-		/// </summary>
 		public static InteractionEventOptionItem IdentityRepairMan => Instance[(short)59];
 
-		/// <summary>
-		/// 互动-采买鲜果
-		/// </summary>
 		public static InteractionEventOptionItem IdentityFarmer => Instance[(short)141];
 
-		/// <summary>
-		/// 互动-梳头修面
-		/// </summary>
 		public static InteractionEventOptionItem IdentityHairCutter => Instance[(short)60];
 
-		/// <summary>
-		/// 互动-施舍银钱
-		/// </summary>
 		public static InteractionEventOptionItem IdentityMoneyCharity => Instance[(short)61];
 
-		/// <summary>
-		/// 互动-荐送弟子
-		/// </summary>
 		public static InteractionEventOptionItem IntimateInteractionRecommendPupil => Instance[(short)62];
 
-		/// <summary>
-		/// 互动-求取弟子
-		/// </summary>
 		public static InteractionEventOptionItem IntimateInteractionDemandPupil => Instance[(short)63];
 
-		/// <summary>
-		/// 互动-面壁阅经
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionShaolin => Instance[(short)64];
 
-		/// <summary>
-		/// 互动-天府规略
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionEmei => Instance[(short)65];
 
-		/// <summary>
-		/// 互动-起死回生
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionBaihua => Instance[(short)66];
 
-		/// <summary>
-		/// 互动-七星调元
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionWudang => Instance[(short)67];
 
-		/// <summary>
-		/// 互动-石牢静坐
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionYuanshan => Instance[(short)68];
 
-		/// <summary>
-		/// 互动-散播威名
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionShixiang => Instance[(short)69];
 
-		/// <summary>
-		/// 互动-王禅典籍
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionRanshan => Instance[(short)70];
 
-		/// <summary>
-		/// 互动-玉镜沉思
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionXuannv => Instance[(short)71];
 
-		/// <summary>
-		/// 互动-欧冶古具
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionZhujian => Instance[(short)72];
 
-		/// <summary>
-		/// 互动-铸剑试炼
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionZhujian2 => Instance[(short)73];
 
-		/// <summary>
-		/// 互动-秘药延寿
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionKongsang => Instance[(short)74];
 
-		/// <summary>
-		/// 互动-搜集贡品
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionJingang => Instance[(short)75];
 
-		/// <summary>
-		/// 互动-五圣秘浴
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionWuxian => Instance[(short)76];
 
-		/// <summary>
-		/// 互动-委托暗杀
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionJieqing => Instance[(short)77];
 
-		/// <summary>
-		/// 互动-龙岛忠仆
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionFulong => Instance[(short)78];
 
-		/// <summary>
-		/// 互动-血池秘法
-		/// </summary>
 		public static InteractionEventOptionItem SpiritualDebtInteractionXuehou => Instance[(short)79];
 
-		/// <summary>
-		/// 互动-州府条例
-		/// </summary>
 		public static InteractionEventOptionItem CityPunishmentSeverityCustomize => Instance[(short)80];
 
-		/// <summary>
-		/// 互动-重金诊疗
-		/// </summary>
 		public static InteractionEventOptionItem DoctorExpensiveHeal => Instance[(short)81];
 
-		/// <summary>
-		/// 互动-看诊施药
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionDoctorSkill0 => Instance[(short)82];
 
-		/// <summary>
-		/// 互动-金针渡命
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionDoctorSkill3 => Instance[(short)83];
 
-		/// <summary>
-		/// 互动-封侯拜相
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionDukeSkill1 => Instance[(short)84];
 
-		/// <summary>
-		/// 互动-评水品茗
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionTeaTasterSkill0 => Instance[(short)85];
 
-		/// <summary>
-		/// 互动-慧眼识珠
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionCapitalistSkill0 => Instance[(short)86];
 
-		/// <summary>
-		/// 互动-占卜吉凶
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionTravelingTaoistMonkSkill1 => Instance[(short)87];
 
-		/// <summary>
-		/// 互动-易天改命
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionTravelingTaoistMonkSkill2 => Instance[(short)88];
 
-		/// <summary>
-		/// 互动-导恶向善
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionTravelingBuddhistMonkSkill1 => Instance[(short)89];
 
-		/// <summary>
-		/// 互动-退隐江湖
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionCivilianSkill2 => Instance[(short)90];
 
-		/// <summary>
-		/// 互动-扶助保荐
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionAristocratSkill0 => Instance[(short)91];
 
-		/// <summary>
-		/// 互动-拼豪斗酒
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionWineTasterSkill0 => Instance[(short)92];
 
-		/// <summary>
-		/// 互动-传法度人
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionBuddhistMonkSkill1 => Instance[(short)93];
 
-		/// <summary>
-		/// 互动-驱邪法事
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionTaoistMonkSkill1 => Instance[(short)94];
 
-		/// <summary>
-		/// 互动-代笔改名
-		/// </summary>
 		public static InteractionEventOptionItem ProfessionLiteratiSkill0 => Instance[(short)95];
 
-		/// <summary>
-		/// 特殊-武林大会
-		/// </summary>
 		public static InteractionEventOptionItem Wulin => Instance[(short)96];
 
-		/// <summary>
-		/// 特殊-归还雕像
-		/// </summary>
 		public static InteractionEventOptionItem ShaolinStatueReturn => Instance[(short)97];
 
-		/// <summary>
-		/// 特殊-塔林崩塌
-		/// </summary>
 		public static InteractionEventOptionItem ShaolinCollapse => Instance[(short)98];
 
-		/// <summary>
-		/// 特殊-狮相谣言
-		/// </summary>
 		public static InteractionEventOptionItem ShixiangRumour => Instance[(short)99];
 
-		/// <summary>
-		/// 特殊-狮相闹剧
-		/// </summary>
 		public static InteractionEventOptionItem Shixiangnaoju => Instance[(short)100];
 
-		/// <summary>
-		/// 特殊-峨眉凶案
-		/// </summary>
 		public static InteractionEventOptionItem EMeiMurder => Instance[(short)101];
 
-		/// <summary>
-		/// 特殊-隐居长老
-		/// </summary>
 		public static InteractionEventOptionItem EMeiElder => Instance[(short)102];
 
-		/// <summary>
-		/// 特殊-正宗之忧
-		/// </summary>
 		public static InteractionEventOptionItem EMeiAuthentic => Instance[(short)103];
 
-		/// <summary>
-		/// 特殊-送还婴儿
-		/// </summary>
 		public static InteractionEventOptionItem ReturnInfant => Instance[(short)104];
 
-		/// <summary>
-		/// 特殊-杀人夺心
-		/// </summary>
 		public static InteractionEventOptionItem BaihuaInteract1 => Instance[(short)105];
 
-		/// <summary>
-		/// 特殊-毁人神智
-		/// </summary>
 		public static InteractionEventOptionItem BaihuaInteract2 => Instance[(short)106];
 
-		/// <summary>
-		/// 特殊-打听神秘人之事-城镇人物
-		/// </summary>
 		public static InteractionEventOptionItem XuannuInteract1 => Instance[(short)107];
 
-		/// <summary>
-		/// 特殊-打听神秘人之事-璇女门派人物
-		/// </summary>
 		public static InteractionEventOptionItem XuannuInteract2 => Instance[(short)108];
 
-		/// <summary>
-		/// 特殊-询问《孤鸾镜水谣》
-		/// </summary>
 		public static InteractionEventOptionItem XuannuInteract3 => Instance[(short)109];
 
-		/// <summary>
-		/// 特殊-论及“情”字
-		/// </summary>
 		public static InteractionEventOptionItem XuannuInteract4 => Instance[(short)110];
 
-		/// <summary>
-		/// 俘虏互动-劝说
-		/// </summary>
 		public static InteractionEventOptionItem PersuadePrisoner => Instance[(short)111];
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者1
-		/// </summary>
 		public static InteractionEventOptionItem MourningTomb1 => Instance[(short)112];
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者2
-		/// </summary>
 		public static InteractionEventOptionItem MourningTomb2 => Instance[(short)113];
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者3
-		/// </summary>
 		public static InteractionEventOptionItem MourningTomb3 => Instance[(short)114];
 
-		/// <summary>
-		/// 坟墓互动祭拜逝者4
-		/// </summary>
 		public static InteractionEventOptionItem MourningTomb4 => Instance[(short)115];
 
-		/// <summary>
-		/// 坟墓互动修葺坟墓1
-		/// </summary>
 		public static InteractionEventOptionItem UpgradingTomb1 => Instance[(short)116];
 
-		/// <summary>
-		/// 坟墓互动修葺坟墓2
-		/// </summary>
 		public static InteractionEventOptionItem UpgradingTomb2 => Instance[(short)117];
 
-		/// <summary>
-		/// 坟墓互动修葺坟墓3
-		/// </summary>
 		public static InteractionEventOptionItem UpgradingTomb3 => Instance[(short)118];
 
-		/// <summary>
-		/// 坟墓互动摸金倒斗
-		/// </summary>
 		public static InteractionEventOptionItem StealingTomb => Instance[(short)119];
 
-		/// <summary>
-		/// 特殊-解蛊之法
-		/// </summary>
 		public static InteractionEventOptionItem WuxianInteract1 => Instance[(short)120];
 
-		/// <summary>
-		/// 特殊-下蛊之事
-		/// </summary>
 		public static InteractionEventOptionItem WuxianInteract2 => Instance[(short)121];
 
-		/// <summary>
-		/// 敌对-捉拿罪犯
-		/// </summary>
 		public static InteractionEventOptionItem ArrestPrison => Instance[(short)122];
 
-		/// <summary>
-		/// 互动-索要囚犯
-		/// </summary>
 		public static InteractionEventOptionItem AskForPrison => Instance[(short)123];
 
-		/// <summary>
-		/// 互动-真龙降世
-		/// </summary>
 		public static InteractionEventOptionItem SectMainStoryFulong1 => Instance[(short)124];
 
-		/// <summary>
-		/// 互动-神龙降世
-		/// </summary>
 		public static InteractionEventOptionItem LongDlc => Instance[(short)125];
 
-		/// <summary>
-		/// 互动-志向经验
-		/// </summary>
 		public static InteractionEventOptionItem AskForProfessionExp => Instance[(short)126];
 
-		/// <summary>
-		/// 交谈-打探见闻
-		/// </summary>
 		public static InteractionEventOptionItem AskForInformation => Instance[(short)127];
 
-		/// <summary>
-		/// 互动-推恩施义
-		/// </summary>
 		public static InteractionEventOptionItem ExtendFavor => Instance[(short)128];
 
-		/// <summary>
-		/// 互动-牵线搭桥
-		/// </summary>
 		public static InteractionEventOptionItem MakeLineAndBridge => Instance[(short)129];
 
-		/// <summary>
-		/// 互动-安定文化
-		/// </summary>
 		public static InteractionEventOptionItem SafetyAndCulture => Instance[(short)130];
 
-		/// <summary>
-		/// 互动-诗画怡情
-		/// </summary>
 		public static InteractionEventOptionItem PoemAndImage => Instance[(short)131];
 
-		/// <summary>
-		/// 互动-商会赞誉
-		/// </summary>
 		public static InteractionEventOptionItem MerchantPraise => Instance[(short)132];
 
-		/// <summary>
-		/// 互动-调理土地
-		/// </summary>
 		public static InteractionEventOptionItem FixLandResource => Instance[(short)133];
 
-		/// <summary>
-		/// 互动-市井百态
-		/// </summary>
 		public static InteractionEventOptionItem TalkChangeBehaType => Instance[(short)134];
 
-		/// <summary>
-		/// 互动-兑换工具
-		/// </summary>
 		public static InteractionEventOptionItem GiveExchangeTool => Instance[(short)135];
 
-		/// <summary>
-		/// 互动-剥夺星运
-		/// </summary>
 		public static InteractionEventOptionItem TakeStarFortune => Instance[(short)136];
 
-		/// <summary>
-		/// 互动-开悟天资
-		/// </summary>
 		public static InteractionEventOptionItem InsightfulTalent => Instance[(short)137];
 
-		/// <summary>
-		/// 互动-开悟入魔
-		/// </summary>
 		public static InteractionEventOptionItem Infected => Instance[(short)138];
 
-		/// <summary>
-		/// 互动-为NPC梳头修面
-		/// </summary>
 		public static InteractionEventOptionItem HairCutterForNPC => Instance[(short)139];
 
-		/// <summary>
-		/// 互动-打听秘闻
-		/// </summary>
 		public static InteractionEventOptionItem IdentityBuySecrets => Instance[(short)142];
 
-		/// <summary>
-		/// 互动-玄石火灰
-		/// </summary>
 		public static InteractionEventOptionItem FuyuFaith => Instance[(short)140];
+
+		public static InteractionEventOptionItem LoongRename => Instance[(short)143];
+
+		public static InteractionEventOptionItem LoongPolymorphBack => Instance[(short)144];
+
+		public static InteractionEventOptionItem ExchangeItem => Instance[(short)145];
+
+		public static InteractionEventOptionItem ChickenRename => Instance[(short)146];
+
+		public static InteractionEventOptionItem ChickenChat => Instance[(short)147];
+
+		public static InteractionEventOptionItem ChickenInviteGroup => Instance[(short)148];
+
+		public static InteractionEventOptionItem ChickenPolymorphBack => Instance[(short)149];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static InteractionEventOption Instance = new InteractionEventOption();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -1648,12 +809,19 @@ public class InteractionEventOption : ConfigData<InteractionEventOptionItem, sho
 		_dataArray.Add(new InteractionEventOptionItem(140, "aad3fa1c-5c6b-4f72-bd11-19644a2275bd", 140, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_140"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 100, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "45b767f3-3d09-4502-bc94-6492c69c2e30" }, new List<string> { "aad3fa1c-5c6b-4f72-bd11-19644a2275bd" }));
 		_dataArray.Add(new InteractionEventOptionItem(141, "0e173b97-3b81-4cc0-add0-53d635e02b8e", -1, EInteractionEventOptionInteractionType.Identity, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_141"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5], new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49762f" }, new List<string> { "0e173b97-3b81-4cc0-add0-53d635e02b8e" }));
 		_dataArray.Add(new InteractionEventOptionItem(142, "92466761-aab5-4304-bd51-70324c35a477", -1, EInteractionEventOptionInteractionType.Identity, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_142"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5], new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49762f" }, new List<string> { "92466761-aab5-4304-bd51-70324c35a477" }));
+		_dataArray.Add(new InteractionEventOptionItem(143, "3c4d756c-0276-4ecc-86c8-e31aca54175b", -1, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_143"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49762f" }, new List<string> { "3c4d756c-0276-4ecc-86c8-e31aca54175b" }));
+		_dataArray.Add(new InteractionEventOptionItem(144, "f6aebc59-3f5d-42d7-836b-f9979688c345", -1, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_144"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49763f" }, new List<string> { "f6aebc59-3f5d-42d7-836b-f9979688c345" }));
+		_dataArray.Add(new InteractionEventOptionItem(145, "c9bce5e0-6ca8-4bd8-bcdb-a1ac8f67c77a", -1, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_145"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49764f" }, new List<string> { "c9bce5e0-6ca8-4bd8-bcdb-a1ac8f67c77a" }));
+		_dataArray.Add(new InteractionEventOptionItem(146, "7a9108a8-3ad3-43b3-8162-b9d174de26e5", -1, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_146"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49765f" }, new List<string> { "7a9108a8-3ad3-43b3-8162-b9d174de26e5" }));
+		_dataArray.Add(new InteractionEventOptionItem(147, "119bc9d6-ee79-4c6b-b3fa-1c2a3ba201a1", -1, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_147"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49765f" }, new List<string> { "119bc9d6-ee79-4c6b-b3fa-1c2a3ba201a1" }));
+		_dataArray.Add(new InteractionEventOptionItem(148, "612faaa9-09a3-4a56-8742-d8122087c2b1", -1, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_148"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49765f" }, new List<string> { "612faaa9-09a3-4a56-8742-d8122087c2b1" }));
+		_dataArray.Add(new InteractionEventOptionItem(149, "2ae7db95-0763-4ec6-bbb5-babba79f4a11", -1, EInteractionEventOptionInteractionType.Special, LocalStringManager.GetConfig("InteractionEventOption_language", "Name_149"), EInteractionEventOptionTaiwuGroupStatus.Invalid, oncePerMonth: false, new sbyte[5] { -6, -6, -6, -6, -6 }, new sbyte[5] { 6, 6, 6, 6, 6 }, null, null, -1, 0, 0, 0, new ResourceInts(default(int), default(int), default(int), default(int), default(int), default(int), default(int), default(int)), new MainAttributes(default(short), default(short), default(short), default(short), default(short), default(short)), -1, -1, null, null, EInteractionEventOptionCompareConsummate.Invalid, null, null, ableAffectionate: false, ableNormalMarried: false, ableMonkMarried: false, -1, -1, ableChicken: false, EInteractionEventOptionAbleXiangshu.Invalid, EInteractionEventOptionIdentityAbility.Invalid, taiwuSecretInformation: false, -1, EInteractionEventOptionOrganizationSupport.Invalid, -1, teammateNumber: false, -1, -1, -1, -1, -1, -1, oneAdult: false, -1, -1, new List<short>(), new List<short>(), new List<short>(), ableOnOrganizationBlock: false, ableZhujian: false, ableJoinSect: false, ableReturnInfant: false, new List<string> { "fb38f657-6ed0-41e4-a0c2-c82afb49765f" }, new List<string> { "2ae7db95-0763-4ec6-bbb5-babba79f4a11" }));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<InteractionEventOptionItem>(143);
+		_dataArray = new List<InteractionEventOptionItem>(150);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

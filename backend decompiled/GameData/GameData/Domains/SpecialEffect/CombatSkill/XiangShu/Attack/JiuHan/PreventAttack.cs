@@ -64,7 +64,7 @@ public class PreventAttack : CombatSkillEffectBase
 
 	public override int GetModifyValue(AffectedDataKey dataKey, int currModifyValue)
 	{
-		if (!dataKey.IsNormalAttack || base.EffectCount <= 0)
+		if (!dataKey.IsNormalAttack || base.EffectCount <= 0 || !base.IsCurrent)
 		{
 			return 0;
 		}

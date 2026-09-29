@@ -42,16 +42,10 @@ public class TotalTaiwuLifeSummaryInfo : ISerializableGameData
 	[SerializableGameDataField(FieldIndex = 4)]
 	public List<short> TotalTaiwuTitleIds;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TotalTaiwuLifeSummaryInfo()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TotalTaiwuLifeSummaryInfo(TotalTaiwuLifeSummaryInfo other)
 	{
 		if (other.TotalTaiwuLifeSummaries != null)
@@ -87,9 +81,6 @@ public class TotalTaiwuLifeSummaryInfo : ISerializableGameData
 		TotalTaiwuTitleIds = ((other.TotalTaiwuTitleIds == null) ? null : new List<short>(other.TotalTaiwuTitleIds));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TotalTaiwuLifeSummaryInfo other)
 	{
 		if (other.TotalTaiwuLifeSummaries != null)

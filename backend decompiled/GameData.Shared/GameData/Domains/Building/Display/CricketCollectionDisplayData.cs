@@ -50,7 +50,7 @@ public class CricketCollectionDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 9;
+		int totalSize = 17;
 		if (Items != null)
 		{
 			totalSize += 2;
@@ -88,7 +88,6 @@ public class CricketCollectionDisplayData : ISerializableGameData
 			totalSize += 2;
 		}
 		totalSize = ((CollectionCricketRegen == null) ? (totalSize + 2) : (totalSize + (2 + 4 * CollectionCricketRegen.Length)));
-		totalSize = ((BatchModeButtonStateData == null) ? (totalSize + 2) : (totalSize + (2 + BatchModeButtonStateData.GetSerializedSize())));
 		totalSize += 4;
 		if (AliveCrickets != null)
 		{

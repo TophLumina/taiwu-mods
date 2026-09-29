@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameData.Domains.Adventure;
 using GameData.Domains.Character.Display;
 using GameData.Domains.Organization.Display;
 using GameData.Serializer;
@@ -7,119 +8,73 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 区域显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public struct AreaDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 区域是否被解锁
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsUnlocked;
 
-	/// <summary>
-	/// 区域已毁坏
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsBroken;
 
-	/// <summary>
-	/// 是否有流窜的野兽
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AnyFleeBeast;
 
-	/// <summary>
-	/// 门派校武
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HasSectExam;
 
-	/// <summary>
-	/// 相枢爪牙等级, 仅毁坏区域有效
-	/// </summary>
 	[SerializableGameDataField]
 	public int BrokenLevel;
 
-	/// <summary>
-	/// 地区状态数值 <see cref="T:Config.MapLegend" />
-	/// 负数 = 只显示图标
-	/// 0 = 不显示图标
-	/// 正数 = 显示图标与数值
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> States;
 
-	/// <summary>
-	/// 活跃的紫竹化身模板 ID
-	/// </summary>
 	[SerializableGameDataField]
-	public List<short> PurpleBambooTemplateIds;
+	public NameAndAvatarWithFavor[] PurpleBamboos;
 
-	/// <summary>
-	/// 神龙状态（序列化使用的字段）
-	/// </summary>
+	[SerializableGameDataField]
+	public NameAndAvatar[] SpecialNpc;
+
 	[SerializableGameDataField]
 	public byte _loongStatusInternal;
 
-	/// <summary>
-	/// 是否含有铸剑地主的特色商会分部
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HasSectZhujianSpecialMerchant;
 
-	/// <summary>
-	/// 是否建造了星台
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HasBuiltExtraLegacyPointBuilding;
 
-	/// <summary>
-	/// 可获取星运的角色数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int ExtraLegacyPointCharacterCount;
 
-	/// <summary>
-	/// 所有激活的奇遇或大事件 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> AllActivatedAdventureOrMajorEventCoreIds;
 
-	/// <summary>
-	/// 定居点信息
-	/// </summary>
 	[SerializableGameDataField]
 	public SettlementDisplayData[] SettlementDisplayData;
 
-	/// <summary>
-	/// 可迁移地格数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] MigratableBlocks;
 
-	/// <summary>
-	/// 十二邪仙id
-	/// </summary>
 	[SerializableGameDataField]
 	public NameAndAvatar TwelveImmortal;
 
-	/// <summary>
-	/// 是否有活跃的神龙
-	/// </summary>
+	[SerializableGameDataField]
+	public NameAndAvatar TaiwuAsXiangshuLongYufu;
+
+	[SerializableGameDataField]
+	public NameAndAvatar TaiwuAsXiangshuZiWuxiao;
+
+	[SerializableGameDataField]
+	public NameAndAvatar TaiwuAsXiangshuRanchenzi;
+
+	[SerializableGameDataField]
+	public AdventureNameAndDurationDisplayData[] AdventureNameAndDuration;
+
 	public bool AnyLoong => LoongStatus.Any();
 
-	/// <summary>
-	/// 神龙状态
-	/// 通过 <see cref="T:GameData.Domains.CombatSkill.FiveElementsType" /> 作为索引访问，真值标识该地区存在对应五行神龙
-	/// </summary>
 	public BoolArray8 LoongStatus => _loongStatusInternal;
 
-	/// <summary>
-	/// 奇遇数量
-	/// </summary>
 	public int AdventureCount => GetAdventureCount();
 
 	public bool AnyFleeLoongson => GetBoolState(7);
@@ -132,9 +87,6 @@ public struct AreaDisplayData : ISerializableGameData
 
 	public int LegendaryCount => GetState(2);
 
-	/// <summary>
-	/// 获取奇遇与大事件数量
-	/// </summary>
 	public int GetAdventureCount()
 	{
 		return AllActivatedAdventureOrMajorEventCoreIds?.Count ?? 0;
@@ -163,14 +115,37 @@ public struct AreaDisplayData : ISerializableGameData
 	{
 		int totalSize = 15;
 		totalSize = ((States == null) ? (totalSize + 2) : (totalSize + (2 + 4 * States.Count)));
-		totalSize = ((PurpleBambooTemplateIds == null) ? (totalSize + 2) : (totalSize + (2 + 2 * PurpleBambooTemplateIds.Count)));
+		if (PurpleBamboos != null)
+		{
+			totalSize += 2;
+			for (int i = 0; i < PurpleBamboos.Length; i++)
+			{
+				totalSize += PurpleBamboos[i].GetSerializedSize();
+			}
+		}
+		else
+		{
+			totalSize += 2;
+		}
+		if (SpecialNpc != null)
+		{
+			totalSize += 2;
+			for (int j = 0; j < SpecialNpc.Length; j++)
+			{
+				totalSize += SpecialNpc[j].GetSerializedSize();
+			}
+		}
+		else
+		{
+			totalSize += 2;
+		}
 		totalSize = ((AllActivatedAdventureOrMajorEventCoreIds == null) ? (totalSize + 2) : (totalSize + (2 + 4 * AllActivatedAdventureOrMajorEventCoreIds.Count)));
 		if (SettlementDisplayData != null)
 		{
 			totalSize += 2;
-			for (int i = 0; i < SettlementDisplayData.Length; i++)
+			for (int k = 0; k < SettlementDisplayData.Length; k++)
 			{
-				totalSize += SettlementDisplayData[i].GetSerializedSize();
+				totalSize += SettlementDisplayData[k].GetSerializedSize();
 			}
 		}
 		else
@@ -179,6 +154,21 @@ public struct AreaDisplayData : ISerializableGameData
 		}
 		totalSize = ((MigratableBlocks == null) ? (totalSize + 2) : (totalSize + (2 + 4 * MigratableBlocks.Length)));
 		totalSize += TwelveImmortal.GetSerializedSize();
+		totalSize += TaiwuAsXiangshuLongYufu.GetSerializedSize();
+		totalSize += TaiwuAsXiangshuZiWuxiao.GetSerializedSize();
+		totalSize += TaiwuAsXiangshuRanchenzi.GetSerializedSize();
+		if (AdventureNameAndDuration != null)
+		{
+			totalSize += 2;
+			for (int l = 0; l < AdventureNameAndDuration.Length; l++)
+			{
+				totalSize = ((AdventureNameAndDuration[l] == null) ? (totalSize + 2) : (totalSize + (2 + AdventureNameAndDuration[l].GetSerializedSize())));
+			}
+		}
+		else
+		{
+			totalSize += 2;
+		}
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -216,16 +206,35 @@ public struct AreaDisplayData : ISerializableGameData
 			*(short*)pCurrData = 0;
 			pCurrData += 2;
 		}
-		if (PurpleBambooTemplateIds != null)
+		if (PurpleBamboos != null)
 		{
-			int elementsCount2 = PurpleBambooTemplateIds.Count;
+			int elementsCount2 = PurpleBamboos.Length;
 			Tester.Assert(elementsCount2 <= 65535);
 			*(ushort*)pCurrData = (ushort)elementsCount2;
 			pCurrData += 2;
 			for (int j = 0; j < elementsCount2; j++)
 			{
-				*(short*)pCurrData = PurpleBambooTemplateIds[j];
-				pCurrData += 2;
+				int fieldSize = PurpleBamboos[j].Serialize(pCurrData);
+				pCurrData += fieldSize;
+				Tester.Assert(fieldSize <= 65535);
+			}
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
+		if (SpecialNpc != null)
+		{
+			int elementsCount3 = SpecialNpc.Length;
+			Tester.Assert(elementsCount3 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount3;
+			pCurrData += 2;
+			for (int k = 0; k < elementsCount3; k++)
+			{
+				int fieldSize2 = SpecialNpc[k].Serialize(pCurrData);
+				pCurrData += fieldSize2;
+				Tester.Assert(fieldSize2 <= 65535);
 			}
 		}
 		else
@@ -243,13 +252,13 @@ public struct AreaDisplayData : ISerializableGameData
 		pCurrData += 4;
 		if (AllActivatedAdventureOrMajorEventCoreIds != null)
 		{
-			int elementsCount3 = AllActivatedAdventureOrMajorEventCoreIds.Count;
-			Tester.Assert(elementsCount3 <= 65535);
-			*(ushort*)pCurrData = (ushort)elementsCount3;
+			int elementsCount4 = AllActivatedAdventureOrMajorEventCoreIds.Count;
+			Tester.Assert(elementsCount4 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount4;
 			pCurrData += 2;
-			for (int k = 0; k < elementsCount3; k++)
+			for (int l = 0; l < elementsCount4; l++)
 			{
-				*(int*)pCurrData = AllActivatedAdventureOrMajorEventCoreIds[k];
+				*(int*)pCurrData = AllActivatedAdventureOrMajorEventCoreIds[l];
 				pCurrData += 4;
 			}
 		}
@@ -260,15 +269,15 @@ public struct AreaDisplayData : ISerializableGameData
 		}
 		if (SettlementDisplayData != null)
 		{
-			int elementsCount4 = SettlementDisplayData.Length;
-			Tester.Assert(elementsCount4 <= 65535);
-			*(ushort*)pCurrData = (ushort)elementsCount4;
+			int elementsCount5 = SettlementDisplayData.Length;
+			Tester.Assert(elementsCount5 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount5;
 			pCurrData += 2;
-			for (int l = 0; l < elementsCount4; l++)
+			for (int m = 0; m < elementsCount5; m++)
 			{
-				int fieldSize = SettlementDisplayData[l].Serialize(pCurrData);
-				pCurrData += fieldSize;
-				Tester.Assert(fieldSize <= 65535);
+				int fieldSize3 = SettlementDisplayData[m].Serialize(pCurrData);
+				pCurrData += fieldSize3;
+				Tester.Assert(fieldSize3 <= 65535);
 			}
 		}
 		else
@@ -278,13 +287,13 @@ public struct AreaDisplayData : ISerializableGameData
 		}
 		if (MigratableBlocks != null)
 		{
-			int elementsCount5 = MigratableBlocks.Length;
-			Tester.Assert(elementsCount5 <= 65535);
-			*(ushort*)pCurrData = (ushort)elementsCount5;
+			int elementsCount6 = MigratableBlocks.Length;
+			Tester.Assert(elementsCount6 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount6;
 			pCurrData += 2;
-			for (int m = 0; m < elementsCount5; m++)
+			for (int n = 0; n < elementsCount6; n++)
 			{
-				*(int*)pCurrData = MigratableBlocks[m];
+				*(int*)pCurrData = MigratableBlocks[n];
 				pCurrData += 4;
 			}
 		}
@@ -293,9 +302,47 @@ public struct AreaDisplayData : ISerializableGameData
 			*(short*)pCurrData = 0;
 			pCurrData += 2;
 		}
-		int fieldSize2 = TwelveImmortal.Serialize(pCurrData);
-		pCurrData += fieldSize2;
-		Tester.Assert(fieldSize2 <= 65535);
+		int fieldSize4 = TwelveImmortal.Serialize(pCurrData);
+		pCurrData += fieldSize4;
+		Tester.Assert(fieldSize4 <= 65535);
+		int fieldSize5 = TaiwuAsXiangshuLongYufu.Serialize(pCurrData);
+		pCurrData += fieldSize5;
+		Tester.Assert(fieldSize5 <= 65535);
+		int fieldSize6 = TaiwuAsXiangshuZiWuxiao.Serialize(pCurrData);
+		pCurrData += fieldSize6;
+		Tester.Assert(fieldSize6 <= 65535);
+		int fieldSize7 = TaiwuAsXiangshuRanchenzi.Serialize(pCurrData);
+		pCurrData += fieldSize7;
+		Tester.Assert(fieldSize7 <= 65535);
+		if (AdventureNameAndDuration != null)
+		{
+			int elementsCount7 = AdventureNameAndDuration.Length;
+			Tester.Assert(elementsCount7 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount7;
+			pCurrData += 2;
+			for (int num = 0; num < elementsCount7; num++)
+			{
+				if (AdventureNameAndDuration[num] != null)
+				{
+					byte* intPtr = pCurrData;
+					pCurrData += 2;
+					int fieldSize8 = AdventureNameAndDuration[num].Serialize(pCurrData);
+					pCurrData += fieldSize8;
+					Tester.Assert(fieldSize8 <= 65535);
+					*(ushort*)intPtr = (ushort)fieldSize8;
+				}
+				else
+				{
+					*(short*)pCurrData = 0;
+					pCurrData += 2;
+				}
+			}
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -344,24 +391,37 @@ public struct AreaDisplayData : ISerializableGameData
 		pCurrData += 2;
 		if (elementsCount2 > 0)
 		{
-			if (PurpleBambooTemplateIds == null)
+			if (PurpleBamboos == null || PurpleBamboos.Length != elementsCount2)
 			{
-				PurpleBambooTemplateIds = new List<short>();
-			}
-			else
-			{
-				PurpleBambooTemplateIds.Clear();
+				PurpleBamboos = new NameAndAvatarWithFavor[elementsCount2];
 			}
 			for (int j = 0; j < elementsCount2; j++)
 			{
-				short element2 = *(short*)pCurrData;
-				pCurrData += 2;
-				PurpleBambooTemplateIds.Add(element2);
+				PurpleBamboos[j] = default(NameAndAvatarWithFavor);
+				pCurrData += PurpleBamboos[j].Deserialize(pCurrData);
 			}
 		}
 		else
 		{
-			PurpleBambooTemplateIds?.Clear();
+			PurpleBamboos = null;
+		}
+		ushort elementsCount3 = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (elementsCount3 > 0)
+		{
+			if (SpecialNpc == null || SpecialNpc.Length != elementsCount3)
+			{
+				SpecialNpc = new NameAndAvatar[elementsCount3];
+			}
+			for (int k = 0; k < elementsCount3; k++)
+			{
+				SpecialNpc[k] = default(NameAndAvatar);
+				pCurrData += SpecialNpc[k].Deserialize(pCurrData);
+			}
+		}
+		else
+		{
+			SpecialNpc = null;
 		}
 		_loongStatusInternal = *pCurrData;
 		pCurrData++;
@@ -371,9 +431,9 @@ public struct AreaDisplayData : ISerializableGameData
 		pCurrData++;
 		ExtraLegacyPointCharacterCount = *(int*)pCurrData;
 		pCurrData += 4;
-		ushort elementsCount3 = *(ushort*)pCurrData;
+		ushort elementsCount4 = *(ushort*)pCurrData;
 		pCurrData += 2;
-		if (elementsCount3 > 0)
+		if (elementsCount4 > 0)
 		{
 			if (AllActivatedAdventureOrMajorEventCoreIds == null)
 			{
@@ -383,46 +443,46 @@ public struct AreaDisplayData : ISerializableGameData
 			{
 				AllActivatedAdventureOrMajorEventCoreIds.Clear();
 			}
-			for (int k = 0; k < elementsCount3; k++)
+			for (int l = 0; l < elementsCount4; l++)
 			{
-				int element3 = *(int*)pCurrData;
+				int element2 = *(int*)pCurrData;
 				pCurrData += 4;
-				AllActivatedAdventureOrMajorEventCoreIds.Add(element3);
+				AllActivatedAdventureOrMajorEventCoreIds.Add(element2);
 			}
 		}
 		else
 		{
 			AllActivatedAdventureOrMajorEventCoreIds?.Clear();
 		}
-		ushort elementsCount4 = *(ushort*)pCurrData;
+		ushort elementsCount5 = *(ushort*)pCurrData;
 		pCurrData += 2;
-		if (elementsCount4 > 0)
+		if (elementsCount5 > 0)
 		{
-			if (SettlementDisplayData == null || SettlementDisplayData.Length != elementsCount4)
+			if (SettlementDisplayData == null || SettlementDisplayData.Length != elementsCount5)
 			{
-				SettlementDisplayData = new SettlementDisplayData[elementsCount4];
+				SettlementDisplayData = new SettlementDisplayData[elementsCount5];
 			}
-			for (int l = 0; l < elementsCount4; l++)
+			for (int m = 0; m < elementsCount5; m++)
 			{
-				SettlementDisplayData[l] = default(SettlementDisplayData);
-				pCurrData += SettlementDisplayData[l].Deserialize(pCurrData);
+				SettlementDisplayData[m] = default(SettlementDisplayData);
+				pCurrData += SettlementDisplayData[m].Deserialize(pCurrData);
 			}
 		}
 		else
 		{
 			SettlementDisplayData = null;
 		}
-		ushort elementsCount5 = *(ushort*)pCurrData;
+		ushort elementsCount6 = *(ushort*)pCurrData;
 		pCurrData += 2;
-		if (elementsCount5 > 0)
+		if (elementsCount6 > 0)
 		{
-			if (MigratableBlocks == null || MigratableBlocks.Length != elementsCount5)
+			if (MigratableBlocks == null || MigratableBlocks.Length != elementsCount6)
 			{
-				MigratableBlocks = new int[elementsCount5];
+				MigratableBlocks = new int[elementsCount6];
 			}
-			for (int m = 0; m < elementsCount5; m++)
+			for (int n = 0; n < elementsCount6; n++)
 			{
-				MigratableBlocks[m] = *(int*)pCurrData;
+				MigratableBlocks[n] = *(int*)pCurrData;
 				pCurrData += 4;
 			}
 		}
@@ -431,6 +491,36 @@ public struct AreaDisplayData : ISerializableGameData
 			MigratableBlocks = null;
 		}
 		pCurrData += TwelveImmortal.Deserialize(pCurrData);
+		pCurrData += TaiwuAsXiangshuLongYufu.Deserialize(pCurrData);
+		pCurrData += TaiwuAsXiangshuZiWuxiao.Deserialize(pCurrData);
+		pCurrData += TaiwuAsXiangshuRanchenzi.Deserialize(pCurrData);
+		ushort elementsCount7 = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (elementsCount7 > 0)
+		{
+			if (AdventureNameAndDuration == null || AdventureNameAndDuration.Length != elementsCount7)
+			{
+				AdventureNameAndDuration = new AdventureNameAndDurationDisplayData[elementsCount7];
+			}
+			for (int num = 0; num < elementsCount7; num++)
+			{
+				ushort num2 = *(ushort*)pCurrData;
+				pCurrData += 2;
+				if (num2 > 0)
+				{
+					AdventureNameAndDuration[num] = new AdventureNameAndDurationDisplayData();
+					pCurrData += AdventureNameAndDuration[num].Deserialize(pCurrData);
+				}
+				else
+				{
+					AdventureNameAndDuration[num] = null;
+				}
+			}
+		}
+		else
+		{
+			AdventureNameAndDuration = null;
+		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

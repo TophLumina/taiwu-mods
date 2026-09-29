@@ -889,19 +889,29 @@ public static class CollectionUtils
 		}
 	}
 
-	public static void AddUnique<T>(this IList<T> list, T element)
+	public static void AddRepeat<T>(this IList<T> list, T element, int count)
 	{
-		if (list == null)
-		{
-			throw new ArgumentNullException("list");
-		}
-		if (!list.Contains(element))
+		for (int i = 0; i < count; i++)
 		{
 			list.Add(element);
 		}
 	}
 
-	public static void AddUniqueRange<T>(this IList<T> list, IEnumerable<T> elements)
+	public static bool AddUnique<T>(this IList<T> list, T element)
+	{
+		if (list == null)
+		{
+			throw new ArgumentNullException("list");
+		}
+		if (list.Contains(element))
+		{
+			return false;
+		}
+		list.Add(element);
+		return true;
+	}
+
+	public static bool AddUniqueRange<T>(this IList<T> list, IEnumerable<T> elements)
 	{
 		if (list == null)
 		{
@@ -915,10 +925,36 @@ public static class CollectionUtils
 		{
 			throw new ArgumentException("Cannot add a unique range to itself.", "elements");
 		}
+		bool anyChanged = false;
 		foreach (T element in elements)
 		{
-			list.AddUnique(element);
+			anyChanged = list.AddUnique(element) || anyChanged;
 		}
+		return anyChanged;
+	}
+
+	public static IntList RemoveDuplicates(this IntList list)
+	{
+		List<int> items = list.Items;
+		if (items == null || items.Count <= 1)
+		{
+			return list;
+		}
+		List<int> distinctItems = new List<int>(list.Items.Count);
+		HashSet<int> seenItems = new HashSet<int>(list.Items.Count);
+		foreach (int item in list.Items)
+		{
+			if (seenItems.Add(item))
+			{
+				distinctItems.Add(item);
+			}
+		}
+		if (distinctItems.Count == list.Items.Count)
+		{
+			return list;
+		}
+		list.Items = distinctItems;
+		return list;
 	}
 
 	public static TValue GetOrNew<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) where TValue : class, new()

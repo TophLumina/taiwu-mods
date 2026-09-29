@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 角色的属性加成
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public struct CharacterPropertyBonus : ISerializableGameData
 {
@@ -21,21 +18,12 @@ public struct CharacterPropertyBonus : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "AddValue", "AddPercent" };
 	}
 
-	/// <summary>
-	/// 加法变化 (A类)
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddValue;
 
-	/// <summary>
-	/// 累加百分比变化（B类）
-	/// </summary>
 	[SerializableGameDataField]
 	public int AddPercent;
 
-	/// <summary>
-	/// 是否为空值
-	/// </summary>
 	public bool IsZero
 	{
 		get
@@ -48,27 +36,16 @@ public struct CharacterPropertyBonus : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 隐式转换为影响值
-	/// </summary>
 	public static implicit operator CValueModify(CharacterPropertyBonus bonus)
 	{
 		return new CValueModify(bonus.AddValue, bonus.AddPercent);
 	}
 
-	/// <summary>
-	/// 乘法
-	/// </summary>
 	public static int operator *(int value, CharacterPropertyBonus bonus)
 	{
 		return value * (CValueModify)bonus;
 	}
 
-	/// <summary>
-	/// 添加加成
-	/// </summary>
-	/// <param name="bonusType"></param>
-	/// <param name="bonusValue"></param>
 	public void AddBonus(EDataModifyType bonusType, int bonusValue)
 	{
 		switch (bonusType)
@@ -85,11 +62,6 @@ public struct CharacterPropertyBonus : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取加成值
-	/// </summary>
-	/// <param name="bonusType"></param>
-	/// <returns></returns>
 	public int GetBonus(EDataModifyType bonusType)
 	{
 		return bonusType switch
@@ -100,13 +72,11 @@ public struct CharacterPropertyBonus : ISerializableGameData
 		};
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -117,7 +87,6 @@ public struct CharacterPropertyBonus : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 2;
@@ -133,7 +102,6 @@ public struct CharacterPropertyBonus : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

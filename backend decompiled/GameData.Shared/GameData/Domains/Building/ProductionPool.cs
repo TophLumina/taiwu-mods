@@ -9,9 +9,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 产物池
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class ProductionPool : ISerializableGameData
 {
@@ -33,9 +30,6 @@ public class ProductionPool : ISerializableGameData
 		CookAddOn = cookAddOn;
 	}
 
-	/// <summary>
-	/// 获取创建订单的价格
-	/// </summary>
 	public int GetCreateOrderPrice(out int favor)
 	{
 		int price = 0;
@@ -57,9 +51,6 @@ public class ProductionPool : ISerializableGameData
 		return price * GameData.Domains.Extra.SharedConstValue.ArtisanOrderPricePercent / 100;
 	}
 
-	/// <summary>
-	/// 获取截取订单的价格
-	/// </summary>
 	public int GetInterceptOrderPrice(bool isDebateWon, out int favor)
 	{
 		int createOrderPrice = GetCreateOrderPrice(out favor);
@@ -67,11 +58,6 @@ public class ProductionPool : ISerializableGameData
 		return createOrderPrice * percent / 100;
 	}
 
-	/// <summary>
-	/// 获取产物权重
-	/// </summary>
-	/// <param name="production"></param>
-	/// <returns></returns>
 	public int GetProductionWeight(Production production)
 	{
 		if (!Productions.TryGetValue(production, out var data))
@@ -81,11 +67,6 @@ public class ProductionPool : ISerializableGameData
 		return data.Weight;
 	}
 
-	/// <summary>
-	/// 一个引子能否被投入
-	/// </summary>
-	/// <param name="key"></param>
-	/// <returns></returns>
 	public bool CanMaterialBeAdded(ItemKey key)
 	{
 		if (key.ItemType != 5)
@@ -125,14 +106,6 @@ public class ProductionPool : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="targetGrade"></param>
-	/// <param name="itemType"></param>
-	/// <param name="baseTemplateId"></param>
-	/// <param name="finalTemplateId"></param>
-	/// <returns></returns>
 	public static bool TryGetProductionTemplateId(sbyte targetGrade, sbyte itemType, short baseTemplateId, out short finalTemplateId)
 	{
 		short baseGroupId = ItemTemplateHelper.GetGroupId(itemType, baseTemplateId);

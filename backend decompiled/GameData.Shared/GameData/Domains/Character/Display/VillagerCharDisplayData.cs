@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 同道显示数据。用于同道界面获取所有显示所需数据，避免监听
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NotForArchive = true, NoCopyConstructors = true)]
 public class VillagerCharDisplayData : ISerializableGameData, IVillagerSelectCharacterData, ISelectCharacterData
 {
@@ -20,9 +17,6 @@ public class VillagerCharDisplayData : ISerializableGameData, IVillagerSelectCha
 	[SerializableGameDataField]
 	public short RoleTemplateId;
 
-	/// <summary>
-	/// 标记
-	/// </summary>
 	[SerializableGameDataField]
 	public byte Flags;
 
@@ -143,15 +137,9 @@ public class VillagerCharDisplayData : ISerializableGameData, IVillagerSelectCha
 	[SerializableGameDataField]
 	public sbyte CombatSkillGrowthType;
 
-	/// <summary>
-	/// 武学造诣，村长信息需要
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillAttainments;
 
-	/// <summary>
-	/// 技艺造诣，村长信息需要
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
@@ -194,27 +182,15 @@ public class VillagerCharDisplayData : ISerializableGameData, IVillagerSelectCha
 	[SerializableGameDataField]
 	public sbyte ConsummateLevel;
 
-	/// <summary>
-	/// 此人为特殊同道
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSpecialGroupMember;
 
-	/// <summary>
-	/// 此人为同道
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsCompanion;
 
-	/// <summary>
-	/// 与太吾互动过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInteractedWithTaiwu;
 
-	/// <summary>
-	/// 形象数据
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
@@ -239,13 +215,11 @@ public class VillagerCharDisplayData : ISerializableGameData, IVillagerSelectCha
 
 	int IVillagerSelectCharacterData.RoleTemplateId => RoleTemplateId;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 392;
@@ -260,7 +234,6 @@ public class VillagerCharDisplayData : ISerializableGameData, IVillagerSelectCha
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -408,7 +381,6 @@ public class VillagerCharDisplayData : ISerializableGameData, IVillagerSelectCha
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

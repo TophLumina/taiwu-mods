@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Config;
 using Config.ConfigCells;
+using GameData.DLC;
 using GameData.Domains.Adventure;
 using GameData.Domains.Building;
 using GameData.Domains.Character;
@@ -56,6 +57,7 @@ public static class TaskConditionChecker
 			ETaskConditionType.CharacterIsTaiwuForJixi => CheckCharacterIsTaiwuForJixi(condition), 
 			ETaskConditionType.SectArgBoxValueRange => CheckSectArgBoxValueRange(condition), 
 			ETaskConditionType.SectArgBoxKeyExists => CheckSectArgBoxKeyExists(condition), 
+			ETaskConditionType.DlcArgBoxKeyExists => CheckDlcArgBoxKeyExists(condition), 
 			ETaskConditionType.CharacterInTaiwuGroup => CheckCharacterInTaiwuGroup(condition), 
 			ETaskConditionType.CorpseCharacterGoodEnd => CheckCorpseCharacterGoodEnd(condition), 
 			ETaskConditionType.NonStoryHeavenlyTreeExists => CheckNonStoryHeavenlyTreeExists(condition), 
@@ -134,7 +136,7 @@ public static class TaskConditionChecker
 
 	private static bool CheckAdventureVisibleInArea(short areaId, int adventureCoreId)
 	{
-		if (areaId < 0)
+		if (areaId < 1)
 		{
 			return false;
 		}
@@ -388,6 +390,19 @@ public static class TaskConditionChecker
 	public static bool CheckSectArgBoxKeyExists(TaskConditionItem condition)
 	{
 		EventArgBox argBox = DomainManager.Extra.GetSectMainStoryEventArgBox(condition.Organization);
+		return argBox.Contains<bool>(condition.ArgBoxKey) || argBox.Contains<int>(condition.ArgBoxKey) || argBox.Contains<string>(condition.ArgBoxKey);
+	}
+
+	public static bool CheckDlcArgBoxKeyExists(TaskConditionItem condition)
+	{
+		if (!DlcManager.IsDlcInstalled(condition.DlcAppId))
+		{
+			return false;
+		}
+		if (!DomainManager.Extra.TryGetDlcArgBox(condition.DlcAppId, out var argBox))
+		{
+			return false;
+		}
 		return argBox.Contains<bool>(condition.ArgBoxKey) || argBox.Contains<int>(condition.ArgBoxKey) || argBox.Contains<string>(condition.ArgBoxKey);
 	}
 

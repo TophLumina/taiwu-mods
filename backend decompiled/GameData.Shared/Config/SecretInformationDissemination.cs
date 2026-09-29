@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SecretInformationDissemination : ConfigData<SecretInformationDisseminationItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationDissemination Instance = new SecretInformationDissemination();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>();

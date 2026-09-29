@@ -4,22 +4,11 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Mod;
 
-/// <summary>
-/// 包装Mod列表，用于前后端传输需要读取的Mod数据
-/// </summary>
 public struct ModInfoList : ISerializableGameData
 {
-	/// <summary>
-	///
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ModInfo> Items;
 
-	/// <summary>
-	/// 创建对象, 并创建内部集合.
-	/// 使用 new 创建对象时, 无法同时创建内部集合.
-	/// </summary>
-	/// <returns></returns>
 	public static ModInfoList Create()
 	{
 		ModInfoList obj = default(ModInfoList);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -228,9 +229,17 @@ public class OrganizationDomain : BaseGameDataDomain
 
 	private SingleValueCollectionModificationCollection<short> _modificationsCityPunishmentSeverityCustomizeDict = SingleValueCollectionModificationCollection<short>.Create();
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	public bool PauseUpdateInfluencePower => DomainManager.Organization.GetCurrTournamentState() != EMartialArtTournamentState.WaitTrigger;
+
+	[DataUpgrader(Version = "1.0.78", Date = "2026/08/26")]
+	private void RemoveInvalidItem(DataContext context)
+	{
+		foreach (Inventory inventory in from treasury in _settlements.Values.SelectMany((Settlement x) => x.Treasuries.SettlementTreasuries)
+			select treasury.Inventory)
+		{
+			DomainManager.Item.RemoveInvalidItemInInventory(inventory);
+		}
+	}
 
 	private void OnInitializedDomainData()
 	{
@@ -364,9 +373,9 @@ public class OrganizationDomain : BaseGameDataDomain
 		for (count = 0; count < value.Count; count++)
 		{
 			MartialArtTournamentPreparationInfo info = value[count];
-			sortedByCombatPower[count] = ((long)info.CombatPowerPreparation << 32) | info.SettlementId;
-			sortedByAuthority[count] = ((long)info.AuthorityPreparation << 32) | info.SettlementId;
-			sortedByResource[count] = ((long)info.ResourcePreparation << 32) | info.SettlementId;
+			sortedByCombatPower[count] = ((long)info.CombatPowerPreparation << 32) | (ushort)info.SettlementId;
+			sortedByAuthority[count] = ((long)info.AuthorityPreparation << 32) | (ushort)info.SettlementId;
+			sortedByResource[count] = ((long)info.ResourcePreparation << 32) | (ushort)info.SettlementId;
 		}
 		CollectionUtils.Sort(sortedByCombatPower, count);
 		CollectionUtils.Sort(sortedByAuthority, count);
@@ -517,6 +526,7 @@ public class OrganizationDomain : BaseGameDataDomain
 		return _settlements[settlementId];
 	}
 
+	[return: MaybeNull]
 	public Settlement GetSettlementOrDefault(short settlementId)
 	{
 		return _settlements.GetValueOrDefault(settlementId);
@@ -3339,12 +3349,15 @@ public class OrganizationDomain : BaseGameDataDomain
 		foreach (int charId in gradeMembers)
 		{
 			GameData.Domains.Character.Character character = DomainManager.Character.GetElement_Objects(charId);
-			if (character.GetFactionId() >= 0 || !character.IsInteractableAsIntelligentCharacter() || !character.GetLocation().IsValid())
+			if (character.GetFactionId() >= 0 || charId == leaderId || !character.IsInteractableAsIntelligentCharacter() || !character.GetLocation().IsValid())
 			{
 				continue;
 			}
 			sbyte behaviorType = character.GetBehaviorType();
-			RelatedCharacter relation = DomainManager.Character.GetRelation(charId, leaderId);
+			if (!DomainManager.Character.TryGetRelation(charId, leaderId, out var relation))
+			{
+				continue;
+			}
 			ushort relationType = relation.RelationType;
 			sbyte favorabilityType = FavorabilityType.GetFavorabilityType(relation.Favorability);
 			sbyte priorityType = FactionLeaderPriorityType.GetFactionLeaderPriorityType(relationType);
@@ -3386,7 +3399,10 @@ public class OrganizationDomain : BaseGameDataDomain
 		foreach (GameData.Domains.Character.Character factionLeader in factionLeaders)
 		{
 			int leaderId = factionLeader.GetId();
-			RelatedCharacter relation = DomainManager.Character.GetRelation(charId, leaderId);
+			if (!DomainManager.Character.TryGetRelation(charId, leaderId, out var relation))
+			{
+				continue;
+			}
 			ushort relationType = relation.RelationType;
 			sbyte favorabilityType = FavorabilityType.GetFavorabilityType(relation.Favorability);
 			sbyte priorityType = FactionLeaderPriorityType.GetFactionLeaderPriorityType(relationType);
@@ -4546,7 +4562,7 @@ public class OrganizationDomain : BaseGameDataDomain
 			PunishmentTypeItem punishment = PunishmentType.Instance[effectCfg.TaiwuBounty];
 			if (punishment != null)
 			{
-				sect.AddBounty(context, DomainManager.Taiwu.GetTaiwu(), punishment.Severity, effectCfg.TaiwuBounty);
+				sect.AddBounty(context, DomainManager.Taiwu.GetTaiwu(), -1, effectCfg.TaiwuBounty);
 			}
 		}
 		if (effectCfg.AlterTime > 0)

@@ -10,9 +10,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 选择道具弹窗数据,FilterList的Count就是要选择物品的总数量，即使是相同的物品，也会每个物品占一个SelectItemFilter元素
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class EventSelectItemData : ISerializableGameData
 {
@@ -94,39 +91,21 @@ public class EventSelectItemData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 所有可以被选择的物品显示数据列表
-	/// </summary>
 	[SerializableGameDataField(SerializationHandler = "TradeableContentListSerializationHandler")]
 	public List<ITradeableContent> CanSelectItemList = new List<ITradeableContent>();
 
-	/// <summary>
-	/// 对选择物品的类别要求（1把武器，1个食物）之类的组合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SelectItemFilter> FilterList = new List<SelectItemFilter>();
 
-	/// <summary>
-	/// 对筛选规则列表使用或者运算，一旦使用或者运算，则只要筛选规则列表中任意一条满足条件，整体选择过程即判定为通过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool FilterWithOrOperate;
 
-	/// <summary>
-	/// 最少选择数量；为-1时，规则与之前相同
-	/// </summary>
 	[SerializableGameDataField]
 	public int MinSelectAmount = -1;
 
-	/// <summary>
-	/// 槽位模式
-	/// </summary>
 	[SerializableGameDataField]
 	public bool SlotMode;
 
-	/// <summary>
-	/// 物品操作类型，参考前端的<see cref="T:GameData.Domains.Item.ItemOperationType.EItemOperationType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemOperationType = 2;
 
@@ -138,78 +117,38 @@ public class EventSelectItemData : ISerializableGameData
 		HatingItemSubType = -1
 	};
 
-	/// <summary>
-	/// 确认按钮置灰时的tips文本key，不传则没有tips
-	/// </summary>
 	[SerializableGameDataField]
 	public string ConfirmDisableTips;
 
-	/// <summary>
-	/// 控制ItemSortAndFilter中的筛选类型，不传是全部显示
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> VisibleItemFilterTypes;
 
-	/// <summary>
-	/// 特殊的选择道具奖励模式。必须是单选，在此模式下，前端点击一个道具格子时，自动把数量拉满。
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSelectingItemReward;
 
-	/// <summary>
-	/// 可拿取的资源总价值，小于0时无效
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResourceMaxValue = -1;
 
-	/// <summary>
-	/// 不显示来源Toggle
-	/// Note:据反馈，后端的基本都是不需要显示物品来源的
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HideSourceToggle = true;
 
-	/// <summary>
-	/// 单行选择模式
-	/// </summary>
 	[SerializableGameDataField]
 	public bool SingleRowMode;
 
-	/// <summary>
-	/// 只有引用相同才视为同一物品（如 选择遗物，同一个Realkey可能有多行）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CheckSameByReferenceOnly;
 
-	/// <summary>
-	/// 选择物品界面标题
-	/// </summary>
 	[SerializableGameDataField]
 	public int ItemTitleKey = -1;
 
-	/// <summary>
-	/// 选择物品界面 选择区域标题
-	/// </summary>
 	[SerializableGameDataField]
 	public int ItemSelectedTitleKey = -1;
 
-	/// <summary>
-	/// 选择物品界面 已选Toggle标题
-	/// </summary>
 	[SerializableGameDataField]
 	public int ItemSelectedToggleKey = -1;
 
-	/// <summary>
-	/// 物品选择完毕后的操作函数，可以在这个函数里进行自定义额外逻辑处理.
-	/// 该字段只在后端使用.
-	/// </summary>
 	public Action OnSelectFinish;
 
-	/// <summary>
-	/// 是否是一个有效的选择结果
-	/// </summary>
-	/// <param name="selectResult"></param>
-	/// <returns></returns>
 	public bool IsAvailableSelectResult(List<ItemKey> selectResult)
 	{
 		if (selectResult == null)
@@ -284,13 +223,11 @@ public class EventSelectItemData : ISerializableGameData
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 47;
@@ -317,7 +254,6 @@ public class EventSelectItemData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -410,7 +346,6 @@ public class EventSelectItemData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

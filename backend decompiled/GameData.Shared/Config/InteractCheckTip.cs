@@ -7,391 +7,160 @@ namespace Config;
 [Serializable]
 public class InteractCheckTip : ConfigData<InteractCheckTipItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 互动-敌对-唬骗-辨认目标
-		/// </summary>
 		public const short ScamActionRecognizeTarget = 0;
 
-		/// <summary>
-		/// 互动-敌对-唬骗-隐藏潜伏
-		/// </summary>
 		public const short ScamActionStayHidden = 1;
 
-		/// <summary>
-		/// 互动-敌对-唬骗-判断时机
-		/// </summary>
 		public const short ScamActionWaitForGoodTiming = 2;
 
-		/// <summary>
-		/// 互动-敌对-唬骗-逃跑
-		/// </summary>
 		public const short ScamActionOnTheWay = 3;
 
-		/// <summary>
-		/// 互动-敌对-窃取-辨认目标
-		/// </summary>
 		public const short StealActionRecognizeTarget = 4;
 
-		/// <summary>
-		/// 互动-敌对-窃取-隐藏潜伏
-		/// </summary>
 		public const short StealActionStayHidden = 5;
 
-		/// <summary>
-		/// 互动-敌对-窃取-判断时机
-		/// </summary>
 		public const short StealActionWaitForGoodTiming = 6;
 
-		/// <summary>
-		/// 互动-敌对-窃取-果断行动
-		/// </summary>
 		public const short StealActionTakeAction = 7;
 
-		/// <summary>
-		/// 互动-敌对-窃取-逃跑
-		/// </summary>
 		public const short StealActionOnTheWay = 8;
 
-		/// <summary>
-		/// 互动-敌对-抢夺-辨认目标
-		/// </summary>
 		public const short RobActionRecognizeTarget = 9;
 
-		/// <summary>
-		/// 互动-敌对-抢夺-隐藏潜伏
-		/// </summary>
 		public const short RobActionStayHidden = 10;
 
-		/// <summary>
-		/// 互动-敌对-抢夺-判断时机
-		/// </summary>
 		public const short RobActionWaitForGoodTiming = 11;
 
-		/// <summary>
-		/// 互动-敌对-抢夺-果断行动
-		/// </summary>
 		public const short RobActionTakeAction = 12;
 
-		/// <summary>
-		/// 互动-敌对-抢夺-逃跑
-		/// </summary>
 		public const short RobActionOneTheWay = 13;
 
-		/// <summary>
-		/// 互动-敌对-毒害-辨认目标
-		/// </summary>
 		public const short PoisonActionRecognizeTarget = 14;
 
-		/// <summary>
-		/// 互动-敌对-毒害-隐藏潜伏
-		/// </summary>
 		public const short PoisonActionStayHidden = 15;
 
-		/// <summary>
-		/// 互动-敌对-毒害-判断时机
-		/// </summary>
 		public const short PoisonActionWaitForGoodTiming = 16;
 
-		/// <summary>
-		/// 互动-敌对-毒害-果断行动
-		/// </summary>
 		public const short PoisonActionTakeAction = 17;
 
-		/// <summary>
-		/// 互动-敌对-毒害-逃跑
-		/// </summary>
 		public const short PoisonActionOneTheWay = 18;
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-辨认目标
-		/// </summary>
 		public const short PlotHarmActionRecognizeTarget = 19;
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-隐藏潜伏
-		/// </summary>
 		public const short PlotHarmActionStayHidden = 20;
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-判断时机
-		/// </summary>
 		public const short PlotHarmActionWaitForGoodTiming = 21;
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-果断行动
-		/// </summary>
 		public const short PlotHarmActionTakeAction = 22;
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-逃跑
-		/// </summary>
 		public const short PlotHarmActionOneTheWay = 23;
 
-		/// <summary>
-		/// 互动-亲近-倾诉爱意-爱慕因素
-		/// </summary>
 		public const short ConfessionLovePureFactor = 24;
 
-		/// <summary>
-		/// 互动-亲近-倾诉爱意-世俗因素
-		/// </summary>
 		public const short ConfessionLoveSecularFactor = 25;
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-辨认目标
-		/// </summary>
 		public const short StealLifeSkillActionRecognizeTarget = 26;
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-隐藏潜伏
-		/// </summary>
 		public const short StealLifeSkillActionStayHidden = 27;
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-判断时机
-		/// </summary>
 		public const short StealLifeSkillActionWaitForGoodTiming = 28;
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-果断行动
-		/// </summary>
 		public const short StealLifeSkillActionTakeAction = 29;
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-逃跑
-		/// </summary>
 		public const short StealLifeSkillActionOnTheWay = 30;
 
-		/// <summary>
-		/// 互动-修习-偷师功法-辨认目标
-		/// </summary>
 		public const short StealCombatSkillActionRecognizeTarget = 31;
 
-		/// <summary>
-		/// 互动-修习-偷师功法-隐藏潜伏
-		/// </summary>
 		public const short StealCombatSkillActionStayHidden = 32;
 
-		/// <summary>
-		/// 互动-修习-偷师功法-判断时机
-		/// </summary>
 		public const short StealCombatSkillActionWaitForGoodTiming = 33;
 
-		/// <summary>
-		/// 互动-修习-偷师功法-果断行动
-		/// </summary>
 		public const short StealCombatSkillActionTakeAction = 34;
 
-		/// <summary>
-		/// 互动-修习-偷师功法-逃跑
-		/// </summary>
 		public const short StealCombatSkillActionOnTheWay = 35;
 
-		/// <summary>
-		/// 互动-敌对-唬骗-果断行动
-		/// </summary>
 		public const short ScamActionTakeAction = 36;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 互动-敌对-唬骗-辨认目标
-		/// </summary>
 		public static InteractCheckTipItem ScamActionRecognizeTarget => Instance[(short)0];
 
-		/// <summary>
-		/// 互动-敌对-唬骗-隐藏潜伏
-		/// </summary>
 		public static InteractCheckTipItem ScamActionStayHidden => Instance[(short)1];
 
-		/// <summary>
-		/// 互动-敌对-唬骗-判断时机
-		/// </summary>
 		public static InteractCheckTipItem ScamActionWaitForGoodTiming => Instance[(short)2];
 
-		/// <summary>
-		/// 互动-敌对-唬骗-逃跑
-		/// </summary>
 		public static InteractCheckTipItem ScamActionOnTheWay => Instance[(short)3];
 
-		/// <summary>
-		/// 互动-敌对-窃取-辨认目标
-		/// </summary>
 		public static InteractCheckTipItem StealActionRecognizeTarget => Instance[(short)4];
 
-		/// <summary>
-		/// 互动-敌对-窃取-隐藏潜伏
-		/// </summary>
 		public static InteractCheckTipItem StealActionStayHidden => Instance[(short)5];
 
-		/// <summary>
-		/// 互动-敌对-窃取-判断时机
-		/// </summary>
 		public static InteractCheckTipItem StealActionWaitForGoodTiming => Instance[(short)6];
 
-		/// <summary>
-		/// 互动-敌对-窃取-果断行动
-		/// </summary>
 		public static InteractCheckTipItem StealActionTakeAction => Instance[(short)7];
 
-		/// <summary>
-		/// 互动-敌对-窃取-逃跑
-		/// </summary>
 		public static InteractCheckTipItem StealActionOnTheWay => Instance[(short)8];
 
-		/// <summary>
-		/// 互动-敌对-抢夺-辨认目标
-		/// </summary>
 		public static InteractCheckTipItem RobActionRecognizeTarget => Instance[(short)9];
 
-		/// <summary>
-		/// 互动-敌对-抢夺-隐藏潜伏
-		/// </summary>
 		public static InteractCheckTipItem RobActionStayHidden => Instance[(short)10];
 
-		/// <summary>
-		/// 互动-敌对-抢夺-判断时机
-		/// </summary>
 		public static InteractCheckTipItem RobActionWaitForGoodTiming => Instance[(short)11];
 
-		/// <summary>
-		/// 互动-敌对-抢夺-果断行动
-		/// </summary>
 		public static InteractCheckTipItem RobActionTakeAction => Instance[(short)12];
 
-		/// <summary>
-		/// 互动-敌对-抢夺-逃跑
-		/// </summary>
 		public static InteractCheckTipItem RobActionOneTheWay => Instance[(short)13];
 
-		/// <summary>
-		/// 互动-敌对-毒害-辨认目标
-		/// </summary>
 		public static InteractCheckTipItem PoisonActionRecognizeTarget => Instance[(short)14];
 
-		/// <summary>
-		/// 互动-敌对-毒害-隐藏潜伏
-		/// </summary>
 		public static InteractCheckTipItem PoisonActionStayHidden => Instance[(short)15];
 
-		/// <summary>
-		/// 互动-敌对-毒害-判断时机
-		/// </summary>
 		public static InteractCheckTipItem PoisonActionWaitForGoodTiming => Instance[(short)16];
 
-		/// <summary>
-		/// 互动-敌对-毒害-果断行动
-		/// </summary>
 		public static InteractCheckTipItem PoisonActionTakeAction => Instance[(short)17];
 
-		/// <summary>
-		/// 互动-敌对-毒害-逃跑
-		/// </summary>
 		public static InteractCheckTipItem PoisonActionOneTheWay => Instance[(short)18];
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-辨认目标
-		/// </summary>
 		public static InteractCheckTipItem PlotHarmActionRecognizeTarget => Instance[(short)19];
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-隐藏潜伏
-		/// </summary>
 		public static InteractCheckTipItem PlotHarmActionStayHidden => Instance[(short)20];
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-判断时机
-		/// </summary>
 		public static InteractCheckTipItem PlotHarmActionWaitForGoodTiming => Instance[(short)21];
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-果断行动
-		/// </summary>
 		public static InteractCheckTipItem PlotHarmActionTakeAction => Instance[(short)22];
 
-		/// <summary>
-		/// 互动-敌对-暗中损害-逃跑
-		/// </summary>
 		public static InteractCheckTipItem PlotHarmActionOneTheWay => Instance[(short)23];
 
-		/// <summary>
-		/// 互动-亲近-倾诉爱意-爱慕因素
-		/// </summary>
 		public static InteractCheckTipItem ConfessionLovePureFactor => Instance[(short)24];
 
-		/// <summary>
-		/// 互动-亲近-倾诉爱意-世俗因素
-		/// </summary>
 		public static InteractCheckTipItem ConfessionLoveSecularFactor => Instance[(short)25];
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-辨认目标
-		/// </summary>
 		public static InteractCheckTipItem StealLifeSkillActionRecognizeTarget => Instance[(short)26];
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-隐藏潜伏
-		/// </summary>
 		public static InteractCheckTipItem StealLifeSkillActionStayHidden => Instance[(short)27];
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-判断时机
-		/// </summary>
 		public static InteractCheckTipItem StealLifeSkillActionWaitForGoodTiming => Instance[(short)28];
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-果断行动
-		/// </summary>
 		public static InteractCheckTipItem StealLifeSkillActionTakeAction => Instance[(short)29];
 
-		/// <summary>
-		/// 互动-修习-偷师技艺-逃跑
-		/// </summary>
 		public static InteractCheckTipItem StealLifeSkillActionOnTheWay => Instance[(short)30];
 
-		/// <summary>
-		/// 互动-修习-偷师功法-辨认目标
-		/// </summary>
 		public static InteractCheckTipItem StealCombatSkillActionRecognizeTarget => Instance[(short)31];
 
-		/// <summary>
-		/// 互动-修习-偷师功法-隐藏潜伏
-		/// </summary>
 		public static InteractCheckTipItem StealCombatSkillActionStayHidden => Instance[(short)32];
 
-		/// <summary>
-		/// 互动-修习-偷师功法-判断时机
-		/// </summary>
 		public static InteractCheckTipItem StealCombatSkillActionWaitForGoodTiming => Instance[(short)33];
 
-		/// <summary>
-		/// 互动-修习-偷师功法-果断行动
-		/// </summary>
 		public static InteractCheckTipItem StealCombatSkillActionTakeAction => Instance[(short)34];
 
-		/// <summary>
-		/// 互动-修习-偷师功法-逃跑
-		/// </summary>
 		public static InteractCheckTipItem StealCombatSkillActionOnTheWay => Instance[(short)35];
 
-		/// <summary>
-		/// 互动-敌对-唬骗-果断行动
-		/// </summary>
 		public static InteractCheckTipItem ScamActionTakeAction => Instance[(short)36];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static InteractCheckTip Instance = new InteractCheckTip();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

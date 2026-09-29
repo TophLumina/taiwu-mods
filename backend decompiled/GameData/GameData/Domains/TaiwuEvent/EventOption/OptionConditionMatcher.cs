@@ -476,14 +476,7 @@ public static class OptionConditionMatcher
 
 	public static bool CharacterHasNormalHealth(GameData.Domains.Character.Character arg0)
 	{
-		foreach (short featureId in arg0.GetFeatureIds())
-		{
-			if (CharacterFeature.Instance[featureId].IgnoreHealthMark)
-			{
-				return false;
-			}
-		}
-		return true;
+		return !arg0.GetImmunityMask().IsImmune(EMarkType.Health);
 	}
 
 	public static bool CharacterOnOrganizationBlock(GameData.Domains.Character.Character arg0)

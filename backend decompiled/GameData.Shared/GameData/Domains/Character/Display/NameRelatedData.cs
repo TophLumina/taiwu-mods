@@ -4,70 +4,36 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 角色姓名法号相关数据 (前端生成姓名法号所需要的数据)
-/// </summary>
 [SerializableGameData]
 public struct NameRelatedData : ISerializableGameData
 {
-	/// <summary>
-	/// 角色模板 ID.
-	/// 小于 0 表示无法找到角色相关信息.
-	/// </summary>
 	[SerializableGameDataField]
 	public short CharTemplateId;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 出家类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte MonkType;
 
-	/// <summary>
-	/// 随机姓名
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
-	/// <summary>
-	/// 团体模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OrgTemplateId;
 
-	/// <summary>
-	/// 团体级别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OrgGrade;
 
-	/// <summary>
-	/// 法号
-	/// </summary>
 	[SerializableGameDataField]
 	public MonasticTitle MonasticTitle;
 
-	/// <summary>
-	/// 自定义显示名 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CustomDisplayNameId;
 
-	/// <summary>
-	/// 昵称。现在关注者才配有。
-	/// </summary>
 	[SerializableGameDataField]
 	public int NickNameId;
 
-	/// <summary>
-	/// ExtraNameText对应的模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public int ExtraNameTextTemplateId;
 
@@ -108,12 +74,6 @@ public struct NameRelatedData : ISerializableGameData
 		return GetMonasticTitleOrDisplayNameDetailed(isTaiwu, ignoreNickName: false);
 	}
 
-	/// <summary>
-	/// 获取角色的法号或姓名
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <param name="ignoreNickName">是否忽略昵称</param>
-	/// <returns></returns>
 	public (string surname, string givenName) GetMonasticTitleOrDisplayNameDetailed(bool isTaiwu, bool ignoreNickName)
 	{
 		string nickName = GetNickName();
@@ -153,10 +113,6 @@ public struct NameRelatedData : ISerializableGameData
 		return null;
 	}
 
-	/// <summary>
-	/// 获取角色的真实姓名
-	/// </summary>
-	/// <returns>真实姓氏，真实名称</returns>
 	public (string surname, string givenName) GetRealName()
 	{
 		if (CharTemplateId < 0)
@@ -177,12 +133,6 @@ public struct NameRelatedData : ISerializableGameData
 		return GetDisplayNameDetailed(isTaiwu, ignoreNickName: false);
 	}
 
-	/// <summary>
-	/// 获取角色的显示名
-	/// </summary>
-	/// <param name="isTaiwu">是否为太吾</param>
-	/// <param name="ignoreNickName"></param>
-	/// <returns>显示姓氏，显示名称</returns>
 	public (string surname, string givenName) GetDisplayNameDetailed(bool isTaiwu, bool ignoreNickName)
 	{
 		if (CharTemplateId < 0)
@@ -223,11 +173,6 @@ public struct NameRelatedData : ISerializableGameData
 		return (surname: surname, givenName: givenName);
 	}
 
-	/// <summary>
-	/// 获取角色的道号
-	/// </summary>
-	/// <param name="isTaiwu">是否为太吾</param>
-	/// <returns>道号字符串文本</returns>
 	public string GetMonasticTitle(bool isTaiwu)
 	{
 		if (MonkType == 0)
@@ -260,9 +205,6 @@ public struct NameRelatedData : ISerializableGameData
 		return obj + titleSuffixCfg.Content;
 	}
 
-	/// <summary>
-	/// 当前设置是否显示太吾姓氏
-	/// </summary>
 	private bool ShowTaiwuSurname()
 	{
 		if (ExternalDataBridge.Context.HideTaiwuOriginalSurname)
@@ -272,21 +214,16 @@ public struct NameRelatedData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 自定义文本集合
-	/// </summary>
 	private IReadOnlyDictionary<int, string> GetCustomTexts()
 	{
 		return ExternalDataBridge.Context.CustomTexts;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 32;
@@ -297,7 +234,6 @@ public struct NameRelatedData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -327,7 +263,6 @@ public struct NameRelatedData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

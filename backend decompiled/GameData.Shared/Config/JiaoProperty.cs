@@ -7,151 +7,64 @@ namespace Config;
 [Serializable]
 public class JiaoProperty : ConfigData<JiaoPropertyItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 基础旅行时间减少
-		/// </summary>
 		public const short TravelTimeReduction = 0;
 
-		/// <summary>
-		/// 基础最大行囊负重加成
-		/// </summary>
 		public const short BaseMaxInventoryLoadBonus = 1;
 
-		/// <summary>
-		/// 基础掉落率加成
-		/// </summary>
 		public const short BaseDropRateBonus = 2;
 
-		/// <summary>
-		/// 基础降伏机率加成
-		/// </summary>
 		public const short BaseCaptureRateBonus = 3;
 
-		/// <summary>
-		/// 基础最大劫持软上限加成
-		/// </summary>
 		public const short BaseMaxKidnapSlotCountBonus = 4;
 
-		/// <summary>
-		/// 探索的奖励
-		/// </summary>
 		public const short ExploreBonusRate = 5;
 
-		/// <summary>
-		/// 价值
-		/// </summary>
 		public const short BaseValue = 6;
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public const short BaseHappinessChange = 7;
 
-		/// <summary>
-		/// 好感
-		/// </summary>
 		public const short BaseFavorabilityChange = 8;
 
-		/// <summary>
-		/// 体长
-		/// </summary>
 		public const short JiaoLength = 9;
 
-		/// <summary>
-		/// 体重
-		/// </summary>
 		public const short JiaoWeight = 10;
 
-		/// <summary>
-		/// 寿命
-		/// </summary>
 		public const short JiaoLongevity = 11;
 
-		/// <summary>
-		/// 价格
-		/// </summary>
 		public const short BasePrice = 12;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 基础旅行时间减少
-		/// </summary>
 		public static JiaoPropertyItem TravelTimeReduction => Instance[(short)0];
 
-		/// <summary>
-		/// 基础最大行囊负重加成
-		/// </summary>
 		public static JiaoPropertyItem BaseMaxInventoryLoadBonus => Instance[(short)1];
 
-		/// <summary>
-		/// 基础掉落率加成
-		/// </summary>
 		public static JiaoPropertyItem BaseDropRateBonus => Instance[(short)2];
 
-		/// <summary>
-		/// 基础降伏机率加成
-		/// </summary>
 		public static JiaoPropertyItem BaseCaptureRateBonus => Instance[(short)3];
 
-		/// <summary>
-		/// 基础最大劫持软上限加成
-		/// </summary>
 		public static JiaoPropertyItem BaseMaxKidnapSlotCountBonus => Instance[(short)4];
 
-		/// <summary>
-		/// 探索的奖励
-		/// </summary>
 		public static JiaoPropertyItem ExploreBonusRate => Instance[(short)5];
 
-		/// <summary>
-		/// 价值
-		/// </summary>
 		public static JiaoPropertyItem BaseValue => Instance[(short)6];
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public static JiaoPropertyItem BaseHappinessChange => Instance[(short)7];
 
-		/// <summary>
-		/// 好感
-		/// </summary>
 		public static JiaoPropertyItem BaseFavorabilityChange => Instance[(short)8];
 
-		/// <summary>
-		/// 体长
-		/// </summary>
 		public static JiaoPropertyItem JiaoLength => Instance[(short)9];
 
-		/// <summary>
-		/// 体重
-		/// </summary>
 		public static JiaoPropertyItem JiaoWeight => Instance[(short)10];
 
-		/// <summary>
-		/// 寿命
-		/// </summary>
 		public static JiaoPropertyItem JiaoLongevity => Instance[(short)11];
 
-		/// <summary>
-		/// 价格
-		/// </summary>
 		public static JiaoPropertyItem BasePrice => Instance[(short)12];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static JiaoProperty Instance = new JiaoProperty();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "EventDescUp", "EventDescDown", "JiaoRecordTemplateId", "JiaoNurturanceTemplateId", "TemplateId", "TipsIcon", "SpecialDescTitle", "SpecialDesc" };

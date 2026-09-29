@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class WugKing : ConfigData<WugKingItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static WugKing Instance = new WugKing();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

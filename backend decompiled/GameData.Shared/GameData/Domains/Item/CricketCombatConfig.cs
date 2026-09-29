@@ -2,27 +2,15 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 蛐蛐决斗配置
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct CricketCombatConfig : ISerializableGameData
 {
-	/// <summary>
-	/// 仅限未受伤的蛐蛐
-	/// </summary>
 	[SerializableGameDataField]
 	public bool OnlyNoInjury = false;
 
-	/// <summary>
-	/// 最低品级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MinGrade = 0;
 
-	/// <summary>
-	/// 最高品级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MaxGrade = 8;
 
@@ -37,13 +25,11 @@ public struct CricketCombatConfig : ISerializableGameData
 		return result;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 3;
@@ -54,7 +40,6 @@ public struct CricketCombatConfig : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (OnlyNoInjury ? ((byte)1) : ((byte)0));
@@ -70,7 +55,6 @@ public struct CricketCombatConfig : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

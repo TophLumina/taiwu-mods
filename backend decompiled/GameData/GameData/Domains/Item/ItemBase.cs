@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Config;
 using GameData.Common;
+using GameData.Domains.World.Task;
 using GameData.Utilities;
 using Redzen.Random;
 
@@ -182,6 +184,16 @@ public abstract class ItemBase : BaseGameDataObject, IItemData
 	public bool IsDurabilityRunningOut()
 	{
 		return GetMaxDurability() != 0 && GetCurrDurability() <= 0;
+	}
+
+	public bool IsTaskLocked()
+	{
+		List<int> taskLockList = GetTaskLock();
+		if (taskLockList == null || taskLockList.Count <= 0)
+		{
+			return false;
+		}
+		return DomainManager.World.GetSortedTaskList().Any((TaskDisplayData task) => (task.InnerTaskData.TaskStatus & 6) == 0 && taskLockList.Contains(task.InnerTaskData.TaskChainId));
 	}
 
 	public void ResetOwner()

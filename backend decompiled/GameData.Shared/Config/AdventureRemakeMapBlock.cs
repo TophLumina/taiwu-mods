@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AdventureRemakeMapBlock : ConfigData<AdventureRemakeMapBlockItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureRemakeMapBlock Instance = new AdventureRemakeMapBlock();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "CircleCount" };

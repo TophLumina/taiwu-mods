@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class MinionGroup : ConfigData<MinionGroupItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MinionGroup Instance = new MinionGroup();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Minions", "TemplateId" };

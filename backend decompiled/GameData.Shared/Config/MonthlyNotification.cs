@@ -7,4741 +7,1908 @@ namespace Config;
 [Serializable]
 public class MonthlyNotification : ConfigData<MonthlyNotificationItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// SolarTerm0
-		/// </summary>
 		public const short SolarTerm0 = 0;
 
-		/// <summary>
-		/// SolarTerm1
-		/// </summary>
 		public const short SolarTerm1 = 1;
 
-		/// <summary>
-		/// SolarTerm2
-		/// </summary>
 		public const short SolarTerm2 = 2;
 
-		/// <summary>
-		/// SolarTerm3
-		/// </summary>
 		public const short SolarTerm3 = 3;
 
-		/// <summary>
-		/// SolarTerm4
-		/// </summary>
 		public const short SolarTerm4 = 4;
 
-		/// <summary>
-		/// SolarTerm5
-		/// </summary>
 		public const short SolarTerm5 = 5;
 
-		/// <summary>
-		/// SolarTerm6
-		/// </summary>
 		public const short SolarTerm6 = 6;
 
-		/// <summary>
-		/// SolarTerm7
-		/// </summary>
 		public const short SolarTerm7 = 7;
 
-		/// <summary>
-		/// SolarTerm8
-		/// </summary>
 		public const short SolarTerm8 = 8;
 
-		/// <summary>
-		/// SolarTerm9
-		/// </summary>
 		public const short SolarTerm9 = 9;
 
-		/// <summary>
-		/// SolarTerm10
-		/// </summary>
 		public const short SolarTerm10 = 10;
 
-		/// <summary>
-		/// SolarTerm11
-		/// </summary>
 		public const short SolarTerm11 = 11;
 
-		/// <summary>
-		/// GraveDestroyed
-		/// </summary>
 		public const short GraveDestroyed = 12;
 
-		/// <summary>
-		/// IncomeFromNest
-		/// </summary>
 		public const short IncomeFromNest = 13;
 
-		/// <summary>
-		/// LoseItemCausedByWarehouseFull
-		/// </summary>
 		public const short LoseItemCausedByWarehouseFull = 14;
 
-		/// <summary>
-		/// Assassinated
-		/// </summary>
 		public const short Assassinated = 15;
 
-		/// <summary>
-		/// AssassinatedDueToKillerToken
-		/// </summary>
 		public const short AssassinatedDueToKillerToken = 16;
 
-		/// <summary>
-		/// Die
-		/// </summary>
 		public const short Die = 17;
 
-		/// <summary>
-		/// InfectXiangshuPartially
-		/// </summary>
 		public const short InfectXiangshuPartially = 18;
 
-		/// <summary>
-		/// InfectXiangshuCompletely
-		/// </summary>
 		public const short InfectXiangshuCompletely = 19;
 
-		/// <summary>
-		/// CreateHatredInPrison
-		/// </summary>
 		public const short CreateHatredByPrison = 20;
 
-		/// <summary>
-		/// EscapeFromPrison
-		/// </summary>
 		public const short EscapeFromPrison = 21;
 
-		/// <summary>
-		/// CricketEndLife
-		/// </summary>
 		public const short CricketEndLife = 22;
 
-		/// <summary>
-		/// LoseResourceCausedByInventoryFull
-		/// </summary>
 		public const short LoseResourceCausedByInventoryFull = 23;
 
-		/// <summary>
-		/// LoseItemCausedByInventoryFull
-		/// </summary>
 		public const short LoseItemCausedByInventoryFull = 24;
 
-		/// <summary>
-		/// CreateHatred
-		/// </summary>
 		public const short CreateHatred = 25;
 
-		/// <summary>
-		/// DecreaseHatred
-		/// </summary>
 		public const short DecreaseHatred = 26;
 
-		/// <summary>
-		/// ConfessLoveAndSucceed
-		/// </summary>
 		public const short ConfessLoveAndSucceed = 27;
 
-		/// <summary>
-		/// SeverLove
-		/// </summary>
 		public const short SeverLove = 28;
 
-		/// <summary>
-		/// Marriage
-		/// </summary>
 		public const short Marriage = 29;
 
-		/// <summary>
-		/// BecomeFriend
-		/// </summary>
 		public const short BecomeFriend = 30;
 
-		/// <summary>
-		/// DecreaseFriendship
-		/// </summary>
 		public const short DecreaseFriendship = 31;
 
-		/// <summary>
-		/// BecomeSwornBrotherOrSister
-		/// </summary>
 		public const short BecomeSwornBrotherOrSister = 32;
 
-		/// <summary>
-		/// SeverFriendship
-		/// </summary>
 		public const short SeverFriendship = 33;
 
-		/// <summary>
-		/// AdoptBoy
-		/// </summary>
 		public const short AdoptBoy = 34;
 
-		/// <summary>
-		/// AdoptGirl
-		/// </summary>
 		public const short AdoptGirl = 35;
 
-		/// <summary>
-		/// RecognizeFather
-		/// </summary>
 		public const short RecognizeFather = 36;
 
-		/// <summary>
-		/// RecognizeMother
-		/// </summary>
 		public const short RecognizeMother = 37;
 
-		/// <summary>
-		/// MakeLove
-		/// </summary>
 		public const short MakeLove = 38;
 
-		/// <summary>
-		/// RapeFailure
-		/// </summary>
 		public const short RapeFailure = 39;
 
-		/// <summary>
-		/// MotherGiveBirthToBoy
-		/// </summary>
 		public const short MotherGiveBirthToBoy = 40;
 
-		/// <summary>
-		/// MotherGiveBirthToGirl
-		/// </summary>
 		public const short MotherGiveBirthToGirl = 41;
 
-		/// <summary>
-		/// FatherGetBoy
-		/// </summary>
 		public const short FatherGetBoy = 42;
 
-		/// <summary>
-		/// FatherGetGirl
-		/// </summary>
 		public const short FatherGetGirl = 43;
 
-		/// <summary>
-		/// GiveBirthToCricket
-		/// </summary>
 		public const short GiveBirthToCricket = 44;
 
-		/// <summary>
-		/// MotherLoseFetus
-		/// </summary>
 		public const short MotherLoseFetus = 45;
 
-		/// <summary>
-		/// GoToJoinOrganization
-		/// </summary>
 		public const short GoToJoinOrganization = 46;
 
-		/// <summary>
-		/// JoinOrganization
-		/// </summary>
 		public const short JoinOrganization = 47;
 
-		/// <summary>
-		/// GoToAppointment
-		/// </summary>
 		public const short GoToAppointment = 48;
 
-		/// <summary>
-		/// WaitingForAppointment
-		/// </summary>
 		public const short WaitingForAppointment = 49;
 
-		/// <summary>
-		/// AppointmentExpired
-		/// </summary>
 		public const short AppointmentExpired = 50;
 
-		/// <summary>
-		/// AppointmentCancelled
-		/// </summary>
 		public const short AppointmentCancelled = 51;
 
-		/// <summary>
-		/// GoToRescue
-		/// </summary>
 		public const short GoToRescue = 52;
 
-		/// <summary>
-		/// RescuePrisoner
-		/// </summary>
 		public const short RescuePrisoner = 53;
 
-		/// <summary>
-		/// ReleasePrisoner
-		/// </summary>
 		public const short ReleasePrisoner = 54;
 
-		/// <summary>
-		/// Disappear
-		/// </summary>
 		public const short Disappear = 55;
 
-		/// <summary>
-		/// GoToRevenge
-		/// </summary>
 		public const short GoToRevenge = 56;
 
-		/// <summary>
-		/// GoToProtect
-		/// </summary>
 		public const short GoToProtect = 57;
 
-		/// <summary>
-		/// ProtectRelativeOrFriend
-		/// </summary>
 		public const short ProtectRelativeOrFriend = 58;
 
-		/// <summary>
-		/// SectUpgrade
-		/// </summary>
 		public const short SectUpgrade = 59;
 
-		/// <summary>
-		/// CivilianSettlementUpgrade
-		/// </summary>
 		public const short CivilianSettlementUpgrade = 60;
 
-		/// <summary>
-		/// FactionUpgrade
-		/// </summary>
 		public const short FactionUpgrade = 61;
 
-		/// <summary>
-		/// StealResourceFailure
-		/// </summary>
 		public const short StealResourceFailure = 62;
 
-		/// <summary>
-		/// StealResourceSuccess
-		/// </summary>
 		public const short StealResourceSuccess = 63;
 
-		/// <summary>
-		/// CheatResourceFailure
-		/// </summary>
 		public const short CheatResourceFailure = 64;
 
-		/// <summary>
-		/// RobResourceFailure
-		/// </summary>
 		public const short RobResourceFailure = 65;
 
-		/// <summary>
-		/// DigResource
-		/// </summary>
 		public const short DigResource = 66;
 
-		/// <summary>
-		/// StealItemFailure
-		/// </summary>
 		public const short StealItemFailure = 67;
 
-		/// <summary>
-		/// StealItemSuccess
-		/// </summary>
 		public const short StealItemSuccess = 68;
 
-		/// <summary>
-		/// CheatItemFailure
-		/// </summary>
 		public const short CheatItemFailure = 69;
 
-		/// <summary>
-		/// RobItemFailure
-		/// </summary>
 		public const short RobItemFailure = 70;
 
-		/// <summary>
-		/// DigItem
-		/// </summary>
 		public const short DigItem = 71;
 
-		/// <summary>
-		/// StealLifeSkillFailure
-		/// </summary>
 		public const short StealLifeSkillFailure = 72;
 
-		/// <summary>
-		/// StealLifeSkillSuccess
-		/// </summary>
 		public const short StealLifeSkillSuccess = 73;
 
-		/// <summary>
-		/// CheatLifeSkillFailure
-		/// </summary>
 		public const short CheatLifeSkillFailure = 74;
 
-		/// <summary>
-		/// StealCombatSkillFailure
-		/// </summary>
 		public const short StealCombatSkillFailure = 75;
 
-		/// <summary>
-		/// StealCombatSkillSuccess
-		/// </summary>
 		public const short StealCombatSkillSuccess = 76;
 
-		/// <summary>
-		/// CheatCombatSkillFailure
-		/// </summary>
 		public const short CheatCombatSkillFailure = 77;
 
-		/// <summary>
-		/// GivePresentResource
-		/// </summary>
 		public const short GivePresentResource = 78;
 
-		/// <summary>
-		/// GivePresentItem
-		/// </summary>
 		public const short GivePresentItem = 79;
 
-		/// <summary>
-		/// TeachLifeSkillSuccess
-		/// </summary>
 		public const short TeachLifeSkillSuccess = 80;
 
-		/// <summary>
-		/// TeachLifeSkillFailure
-		/// </summary>
 		public const short TeachLifeSkillFailure = 81;
 
-		/// <summary>
-		/// TeachCombatSkillSuccess
-		/// </summary>
 		public const short TeachCombatSkillSuccess = 82;
 
-		/// <summary>
-		/// TeachCombatSkillFailure
-		/// </summary>
 		public const short TeachCombatSkillFailure = 83;
 
-		/// <summary>
-		/// AmuseOthersByMusic
-		/// </summary>
 		public const short AmuseOthersByMusic = 84;
 
-		/// <summary>
-		/// AmuseOthersByChess
-		/// </summary>
 		public const short AmuseOthersByChess = 85;
 
-		/// <summary>
-		/// AmuseOthersByPoem
-		/// </summary>
 		public const short AmuseOthersByPoem = 86;
 
-		/// <summary>
-		/// AmuseOthersByPainting
-		/// </summary>
 		public const short AmuseOthersByPainting = 87;
 
-		/// <summary>
-		/// MakeFamousItem
-		/// </summary>
 		public const short MakeFamousItem = 88;
 
-		/// <summary>
-		/// EnlightenedByDaoism
-		/// </summary>
 		public const short EnlightenedByDaoism = 89;
 
-		/// <summary>
-		/// EnlightenedByBuddhism
-		/// </summary>
 		public const short EnlightenedByBuddhism = 90;
 
-		/// <summary>
-		/// PractiseDivination
-		/// </summary>
 		public const short PractiseDivination = 91;
 
-		/// <summary>
-		/// UnexpectedlyGetRareItem
-		/// </summary>
 		public const short UnexpectedlyGetRareItem = 92;
 
-		/// <summary>
-		/// UnexpectedlyGetResource
-		/// </summary>
 		public const short UnexpectedlyGetResource = 93;
 
-		/// <summary>
-		/// UnexpectedlyGetCombatSkill
-		/// </summary>
 		public const short UnexpectedlyGetCombatSkill = 94;
 
-		/// <summary>
-		/// UnexpectedlyGetLifeSkill
-		/// </summary>
 		public const short UnexpectedlyGetLifeSkill = 95;
 
-		/// <summary>
-		/// UnexpectedlyGetHealth
-		/// </summary>
 		public const short UnexpectedlyGetHealth = 96;
 
-		/// <summary>
-		/// UnexpectedlyHealOuterInjury
-		/// </summary>
 		public const short UnexpectedlyHealOuterInjury = 97;
 
-		/// <summary>
-		/// UnexpectedlyHealInneInjury
-		/// </summary>
 		public const short UnexpectedlyHealInnerInjury = 98;
 
-		/// <summary>
-		/// UnexpectedlyHealPoison
-		/// </summary>
 		public const short UnexpectedlyHealPoison = 99;
 
-		/// <summary>
-		/// UnexpectedlyHealQi
-		/// </summary>
 		public const short UnexpectedlyHealQi = 100;
 
-		/// <summary>
-		/// UnexpectedlyLoseRareItem
-		/// </summary>
 		public const short UnexpectedlyLoseRareItem = 101;
 
-		/// <summary>
-		/// UnexpectedlyLoseResource
-		/// </summary>
 		public const short UnexpectedlyLoseResource = 102;
 
-		/// <summary>
-		/// UnexpectedlyLoseCombatSkill
-		/// </summary>
 		public const short UnexpectedlyLoseCombatSkill = 103;
 
-		/// <summary>
-		/// UnexpectedlyLoseLifeSkill
-		/// </summary>
 		public const short UnexpectedlyLoseLifeSkill = 104;
 
-		/// <summary>
-		/// UnexpectedlyLoseHealth
-		/// </summary>
 		public const short UnexpectedlyLoseHealth = 105;
 
-		/// <summary>
-		/// UnexpectedlySufferOuterInjury
-		/// </summary>
 		public const short UnexpectedlySufferOuterInjury = 106;
 
-		/// <summary>
-		/// UnexpectedlySufferInneInjury
-		/// </summary>
 		public const short UnexpectedlySufferInneInjury = 107;
 
-		/// <summary>
-		/// UnexpectedlySufferPoison
-		/// </summary>
 		public const short UnexpectedlySufferPoison = 108;
 
-		/// <summary>
-		/// UnexpectedlySufferDisorderOfQi
-		/// </summary>
 		public const short UnexpectedlySufferDisorderOfQi = 109;
 
-		/// <summary>
-		/// BuildingResourceIncreased
-		/// </summary>
 		public const short BuildingResourceIncreased = 110;
 
-		/// <summary>
-		/// BuildingResourceSpread
-		/// </summary>
 		public const short BuildingResourceSpread = 111;
 
-		/// <summary>
-		/// BuildingDamaged
-		/// </summary>
 		public const short BuildingDamaged = 112;
 
-		/// <summary>
-		/// BuildingRuined
-		/// </summary>
 		public const short BuildingRuined = 113;
 
-		/// <summary>
-		/// BuildingConstructionCompleted
-		/// </summary>
 		public const short BuildingConstructionCompleted = 114;
 
-		/// <summary>
-		/// BuildingUpgradingCompleted
-		/// </summary>
 		public const short BuildingUpgradingCompleted = 115;
 
-		/// <summary>
-		/// BuildingDemolitionCompleted
-		/// </summary>
 		public const short BuildingDemolitionCompleted = 116;
 
-		/// <summary>
-		/// BuildingIncome
-		/// </summary>
 		public const short BuildingIncome = 117;
 
-		/// <summary>
-		/// DispatchInPlace
-		/// </summary>
 		public const short DispatchInPlace = 118;
 
-		/// <summary>
-		/// FindViciousBeggarsNest
-		/// </summary>
 		public const short FindViciousBeggarsNest = 119;
 
-		/// <summary>
-		/// FindThievesCamp
-		/// </summary>
 		public const short FindThievesCamp = 120;
 
-		/// <summary>
-		/// FindBanditsStronghold
-		/// </summary>
 		public const short FindBanditsStronghold = 121;
 
-		/// <summary>
-		/// FindTraitorsGang
-		/// </summary>
 		public const short FindTraitorsGang = 122;
 
-		/// <summary>
-		/// FindVillainsValley
-		/// </summary>
 		public const short FindVillainsValley = 123;
 
-		/// <summary>
-		/// FindMixiangzhen
-		/// </summary>
 		public const short FindMixiangzhen = 124;
 
-		/// <summary>
-		/// FindMassGrave
-		/// </summary>
 		public const short FindMassGrave = 125;
 
-		/// <summary>
-		/// FindHereticHome
-		/// </summary>
 		public const short FindHereticHome = 126;
 
-		/// <summary>
-		/// KidnappedByHeresy
-		/// </summary>
 		public const short KidnappedByHeresy = 127;
 
-		/// <summary>
-		/// KidnappedByHeart
-		/// </summary>
 		public const short KidnappedByHeart = 128;
 
-		/// <summary>
-		/// KidnappedBySoumoulou
-		/// </summary>
 		public const short KidnappedBySoumoulou = 129;
 
-		/// <summary>
-		/// KidnappedByWorldWeary
-		/// </summary>
 		public const short KidnappedByWorldWeary = 130;
 
-		/// <summary>
-		/// MarketAppeared
-		/// </summary>
 		public const short MarketAppeared = 131;
 
-		/// <summary>
-		/// TownCombatAppeared
-		/// </summary>
 		public const short TownCombatAppeared = 132;
 
-		/// <summary>
-		/// CricketsAppeared
-		/// </summary>
 		public const short CricketsAppeared = 133;
 
-		/// <summary>
-		/// StartCricketContest
-		/// </summary>
 		public const short StartCricketContest = 134;
 
-		/// <summary>
-		/// LifeCompetitionAppeared
-		/// </summary>
 		public const short LifeCompetitionAppeared = 135;
 
-		/// <summary>
-		/// StartSectJuniorContest
-		/// </summary>
 		public const short StartSectJuniorContest = 136;
 
-		/// <summary>
-		/// StartSectIntermediateContest
-		/// </summary>
 		public const short StartSectIntermediateContest = 137;
 
-		/// <summary>
-		/// StartSectSeniorContest
-		/// </summary>
 		public const short StartSectSeniorContest = 138;
 
-		/// <summary>
-		/// JoustForSpouse
-		/// </summary>
 		public const short JoustForSpouse = 139;
 
-		/// <summary>
-		/// MarryNotice
-		/// </summary>
 		public const short MarryNotice = 140;
 
-		/// <summary>
-		/// XiangshuAvatarAppeared
-		/// </summary>
 		public const short XiangshuAvatarAppeared = 141;
 
-		/// <summary>
-		/// MonvBringDisaster
-		/// </summary>
 		public const short MonvBringDisaster = 142;
 
-		/// <summary>
-		/// DayueYaochangBringDisaster
-		/// </summary>
 		public const short DayueYaochangBringDisaster = 143;
 
-		/// <summary>
-		/// JiuhanvBringDisaster
-		/// </summary>
 		public const short JiuhanvBringDisaster = 144;
 
-		/// <summary>
-		/// JinHuangervBringDisaster
-		/// </summary>
 		public const short JinHuangervBringDisaster = 145;
 
-		/// <summary>
-		/// YiYihouvBringDisaster
-		/// </summary>
 		public const short YiYihouvBringDisaster = 146;
 
-		/// <summary>
-		/// WeiQivBringDisaster
-		/// </summary>
 		public const short WeiQivBringDisaster = 147;
 
-		/// <summary>
-		/// YixiangvBringDisaster
-		/// </summary>
 		public const short YixiangvBringDisaster = 148;
 
-		/// <summary>
-		/// XuefengBringDisaster
-		/// </summary>
 		public const short XuefengBringDisaster = 149;
 
-		/// <summary>
-		/// ShuFangvBringDisaster
-		/// </summary>
 		public const short ShuFangvBringDisaster = 150;
 
-		/// <summary>
-		/// MonvSaveSuffering
-		/// </summary>
 		public const short MonvSaveSuffering = 151;
 
-		/// <summary>
-		/// DayueYaochangSaveSuffering
-		/// </summary>
 		public const short DayueYaochangSaveSuffering = 152;
 
-		/// <summary>
-		/// JiuhanvSaveSuffering
-		/// </summary>
 		public const short JiuhanvSaveSuffering = 153;
 
-		/// <summary>
-		/// JinHuangervSaveSuffering
-		/// </summary>
 		public const short JinHuangervSaveSuffering = 154;
 
-		/// <summary>
-		/// YiYihouvSaveSuffering
-		/// </summary>
 		public const short YiYihouvSaveSuffering = 155;
 
-		/// <summary>
-		/// WeiQivSaveSuffering
-		/// </summary>
 		public const short WeiQivSaveSuffering = 156;
 
-		/// <summary>
-		/// YixiangvSaveSuffering
-		/// </summary>
 		public const short YixiangvSaveSuffering = 157;
 
-		/// <summary>
-		/// XuefengSaveSuffering
-		/// </summary>
 		public const short XuefengSaveSuffering = 158;
 
-		/// <summary>
-		/// ShuFangvSaveSuffering
-		/// </summary>
 		public const short ShuFangvSaveSuffering = 159;
 
-		/// <summary>
-		/// CivilianDisappear
-		/// </summary>
 		public const short CivilianDisappear = 160;
 
-		/// <summary>
-		/// MerchantGoTravelling
-		/// </summary>
 		public const short MerchantGoTravelling = 161;
 
-		/// <summary>
-		/// ChickenEscaped
-		/// </summary>
 		public const short ChickenEscaped = 162;
 
-		/// <summary>
-		/// NaturalDisasterOccurred
-		/// </summary>
 		public const short NaturalDisasterOccurred = 163;
 
-		/// <summary>
-		/// Reincarnation
-		/// </summary>
 		public const short Reincarnation = 164;
 
-		/// <summary>
-		/// AccumulatedSkillPowerLost
-		/// </summary>
 		public const short AccumulatedSkillPowerLost = 165;
 
-		/// <summary>
-		/// TaiwuVillageDestructed
-		/// </summary>
 		public const short TaiwuVillageDestructed = 166;
 
-		/// <summary>
-		/// RebirthAsJuniorXiangshu
-		/// </summary>
 		public const short RebirthAsJuniorXiangshu = 167;
 
-		/// <summary>
-		/// LegendaryBookAppeared
-		/// </summary>
 		public const short LegendaryBookAppeared = 168;
 
-		/// <summary>
-		/// WulinConferenceWithoutParticipant
-		/// </summary>
 		public const short WulinConferenceWithoutParticipant = 169;
 
-		/// <summary>
-		/// WulinConferenceInPreparing
-		/// </summary>
 		public const short WulinConferenceInPreparing = 170;
 
-		/// <summary>
-		/// WulinConferenceInProgress
-		/// </summary>
 		public const short WulinConferenceInProgress = 171;
 
-		/// <summary>
-		/// XiangshuKilling
-		/// </summary>
 		public const short XiangshuKilling = 172;
 
-		/// <summary>
-		/// MonthlyNormalInformation
-		/// </summary>
 		public const short MonthlyNormalInformation = 173;
 
-		/// <summary>
-		/// MonthlySecretInformation
-		/// </summary>
 		public const short MonthlySecretInformation = 174;
 
-		/// <summary>
-		/// SecretInformationWillExpire
-		/// </summary>
 		public const short SecretInformationWillExpire = 175;
 
-		/// <summary>
-		/// SecretInformationExpired
-		/// </summary>
 		public const short SecretInformationExpired = 176;
 
-		/// <summary>
-		/// YirenAppearInTaiwuArea
-		/// </summary>
 		public const short YirenAppearInTaiwuArea = 177;
 
-		/// <summary>
-		/// WesternMerchantBackAfterLong
-		/// </summary>
 		public const short WesternMerchantBackAfterLong = 178;
 
-		/// <summary>
-		/// WesternMerchantLoseContact
-		/// </summary>
 		public const short WesternMerchantLoseContact = 179;
 
-		/// <summary>
-		/// WesternMerchantBackSucceed
-		/// </summary>
 		public const short WesternMerchantBackSucceed = 180;
 
-		/// <summary>
-		/// GainAuthority
-		/// </summary>
 		public const short GainAuthority = 181;
 
-		/// <summary>
-		/// FemaleJoustForSpouseReady
-		/// </summary>
 		public const short FemaleJoustForSpouseReady = 182;
 
-		/// <summary>
-		/// StartSectNormalCompetition
-		/// </summary>
 		public const short StartSectNormalCompetition = 183;
 
-		/// <summary>
-		/// EscapeWithForeverLover
-		/// </summary>
 		public const short EscapeWithForeverLover = 184;
 
-		/// <summary>
-		/// DisasterAndPreciousMaterial
-		/// </summary>
 		public const short DisasterAndPreciousMaterial = 185;
 
-		/// <summary>
-		/// HeroesDefendMorality
-		/// </summary>
 		public const short HeroesDefendMorality = 186;
 
-		/// <summary>
-		/// IncomeFromNestViciousBeggars
-		/// </summary>
 		public const short IncomeFromNestViciousBeggars = 187;
 
-		/// <summary>
-		/// IncomeFromNestThievesCamp
-		/// </summary>
 		public const short IncomeFromNestThievesCamp = 188;
 
-		/// <summary>
-		/// IncomeFromNestBanditsStronghold
-		/// </summary>
 		public const short IncomeFromNestBanditsStronghold = 189;
 
-		/// <summary>
-		/// IncomeFromNestVillainsValley
-		/// </summary>
 		public const short IncomeFromNestVillainsValley = 190;
 
-		/// <summary>
-		/// IncomeFromNestRighteousLow
-		/// </summary>
 		public const short IncomeFromNestRighteousLow = 191;
 
-		/// <summary>
-		/// IncomeFromNestRighteousMiddle
-		/// </summary>
 		public const short IncomeFromNestRighteousMiddle = 192;
 
-		/// <summary>
-		/// BuildingWorkerDie
-		/// </summary>
 		public const short BuildingWorkerDie = 193;
 
-		/// <summary>
-		/// StoneHouseInfectedKidnapped
-		/// </summary>
 		public const short StoneHouseInfectedKidnapped = 194;
 
-		/// <summary>
-		/// WesternMerchanLost
-		/// </summary>
 		public const short WesternMerchanLost = 195;
 
-		/// <summary>
-		/// WesternMerchanFindMirage
-		/// </summary>
 		public const short WesternMerchanFindMirage = 196;
 
-		/// <summary>
-		/// WesternMerchanFindBigfoot
-		/// </summary>
 		public const short WesternMerchanFindBigfoot = 197;
 
-		/// <summary>
-		/// WesternMerchanFindPlant
-		/// </summary>
 		public const short WesternMerchanFindPlant = 198;
 
-		/// <summary>
-		/// WesternMerchanFindAnimal
-		/// </summary>
 		public const short WesternMerchanFindAnimal = 199;
 
-		/// <summary>
-		/// WesternMerchanGetInformation
-		/// </summary>
 		public const short WesternMerchanGetInformation = 200;
 
-		/// <summary>
-		/// WesternMerchanFindSettlement
-		/// </summary>
 		public const short WesternMerchanFindSettlement = 201;
 
-		/// <summary>
-		/// WesternMerchanFindWeather
-		/// </summary>
 		public const short WesternMerchanFindWeather = 202;
 
-		/// <summary>
-		/// WesternMerchanFindWreckage
-		/// </summary>
 		public const short WesternMerchanFindWreckage = 203;
 
-		/// <summary>
-		/// WesternMerchanHelpPasserby
-		/// </summary>
 		public const short WesternMerchanHelpPasserby = 204;
 
-		/// <summary>
-		/// WesternMerchanGetHelp
-		/// </summary>
 		public const short WesternMerchanGetHelp = 205;
 
-		/// <summary>
-		/// WesternMerchanFindVenison
-		/// </summary>
 		public const short WesternMerchanFindVenison = 206;
 
-		/// <summary>
-		/// WesternMerchanFindFruit
-		/// </summary>
 		public const short WesternMerchanFindFruit = 207;
 
-		/// <summary>
-		/// WesternMerchanFindVillage
-		/// </summary>
 		public const short WesternMerchanFindVillage = 208;
 
-		/// <summary>
-		/// WesternMerchanMeetMerchan
-		/// </summary>
 		public const short WesternMerchanMeetMerchan = 209;
 
-		/// <summary>
-		/// WesternMerchanMeetTheif
-		/// </summary>
 		public const short WesternMerchanMeetTheif = 210;
 
-		/// <summary>
-		/// WesternMerchanGoodsDamage
-		/// </summary>
 		public const short WesternMerchanGoodsDamage = 211;
 
-		/// <summary>
-		/// WesternMerchanUnacclimatized
-		/// </summary>
 		public const short WesternMerchanUnacclimatized = 212;
 
-		/// <summary>
-		/// WesternMerchanLackReplenishment
-		/// </summary>
 		public const short WesternMerchanLackReplenishment = 213;
 
-		/// <summary>
-		/// AboutToDie
-		/// </summary>
 		public const short AboutToDie = 214;
 
-		/// <summary>
-		/// EnemyNestDemise
-		/// </summary>
 		public const short EnemyNestDemise = 215;
 
-		/// <summary>
-		/// SecretInformationBroadcast
-		/// </summary>
 		public const short SecretInformationBroadcast = 216;
 
-		/// <summary>
-		/// ReadingEvent
-		/// </summary>
 		public const short ReadingEvent = 217;
 
-		/// <summary>
-		/// EnemyNestGrow
-		/// </summary>
 		public const short EnemyNestGrow = 218;
 
-		/// <summary>
-		/// RandomEnemyGrow
-		/// </summary>
 		public const short RandomEnemyGrow = 219;
 
-		/// <summary>
-		/// RandomEnemyDecay
-		/// </summary>
 		public const short RandomEnemyDecay = 220;
 
-		/// <summary>
-		/// XiangshuGetStrengthened
-		/// </summary>
 		public const short XiangshuGetStrengthened = 221;
 
-		/// <summary>
-		/// LegendaryBookShocked
-		/// </summary>
 		public const short LegendaryBookShocked = 222;
 
-		/// <summary>
-		/// LegendaryBookInsane
-		/// </summary>
 		public const short LegendaryBookInsane = 223;
 
-		/// <summary>
-		/// LegendaryBookConsumed
-		/// </summary>
 		public const short LegendaryBookConsumed = 224;
 
-		/// <summary>
-		/// LegendaryBookLost
-		/// </summary>
 		public const short LegendaryBookLost = 225;
 
-		/// <summary>
-		/// FightForNewLegendaryBook
-		/// </summary>
 		public const short FightForNewLegendaryBook = 226;
 
-		/// <summary>
-		/// FightForLegendaryBookAbandoned
-		/// </summary>
 		public const short FightForLegendaryBookAbandoned = 227;
 
-		/// <summary>
-		/// FightForLegendaryBookOwnerDie
-		/// </summary>
 		public const short FightForLegendaryBookOwnerDie = 228;
 
-		/// <summary>
-		/// FightForLegendaryBookOwnerConsumed
-		/// </summary>
 		public const short FightForLegendaryBookOwnerConsumed = 229;
 
-		/// <summary>
-		/// LegendaryBookAppear
-		/// </summary>
 		public const short LegendaryBookAppear = 230;
 
-		/// <summary>
-		/// ChallengeForLegendaryBook
-		/// </summary>
 		public const short ChallengeForLegendaryBook = 231;
 
-		/// <summary>
-		/// RobLegendaryBook
-		/// </summary>
 		public const short RobLegendaryBook = 232;
 
-		/// <summary>
-		/// VillagerLeftForLegendaryBook
-		/// </summary>
 		public const short VillagerLeftForLegendaryBook = 233;
 
-		/// <summary>
-		/// HappyBirthday
-		/// </summary>
 		public const short HappyBirthday = 234;
 
-		/// <summary>
-		/// PoisonMakeLoss
-		/// </summary>
 		public const short PoisonMakeLoss = 235;
 
-		/// <summary>
-		/// RottenPoisonDiffuse
-		/// </summary>
 		public const short RottenPoisonDiffuse = 236;
 
-		/// <summary>
-		/// PoisonDestroyFace
-		/// </summary>
 		public const short PoisonDestroyFace = 237;
 
-		/// <summary>
-		/// IllusoryPoisonDiffuse
-		/// </summary>
 		public const short IllusoryPoisonDiffuse = 238;
 
-		/// <summary>
-		/// PoisonDisturbMindAttckSuccess
-		/// </summary>
 		public const short PoisonDisturbMindAttckSuccess = 239;
 
-		/// <summary>
-		/// PoisonDisturbMindEmpoisonSuccess
-		/// </summary>
 		public const short PoisonDisturbMindEmpoisonSuccess = 240;
 
-		/// <summary>
-		/// PoisonDisturbMindSneakAttckSuccess
-		/// </summary>
 		public const short PoisonDisturbMindSneakAttckSuccess = 241;
 
-		/// <summary>
-		/// PoisonDisturbMindRapeSuccess
-		/// </summary>
 		public const short PoisonDisturbMindRapeSuccess = 242;
 
-		/// <summary>
-		/// PoisonDisturbMindAttckFalse
-		/// </summary>
 		public const short PoisonDisturbMindAttckFalse = 243;
 
-		/// <summary>
-		/// PoisonDisturbMindEmpoisonFalse
-		/// </summary>
 		public const short PoisonDisturbMindEmpoisonFalse = 244;
 
-		/// <summary>
-		/// PoisonDisturbMindSneakAttckFalse
-		/// </summary>
 		public const short PoisonDisturbMindSneakAttckFalse = 245;
 
-		/// <summary>
-		/// PoisonDisturbMindRapeFalse
-		/// </summary>
 		public const short PoisonDisturbMindRapeFalse = 246;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiKillsPeople
-		/// </summary>
 		public const short SectMainStoryXuehouJixiKillsPeople = 247;
 
-		/// <summary>
-		/// SectMainStoryYuanshanAbsorbInfectedPeople
-		/// </summary>
 		public const short SectMainStoryYuanshanAbsorbInfectedPeople = 248;
 
-		/// <summary>
-		/// SectMainStoryShixiangAdventure
-		/// </summary>
 		public const short SectMainStoryShixiangAdventure = 249;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiGone
-		/// </summary>
 		public const short SectMainStoryXuehouJixiGone = 250;
 
-		/// <summary>
-		/// WulinConferenceWinner
-		/// </summary>
 		public const short WulinConferenceWinner = 251;
 
-		/// <summary>
-		/// SectMainStoryEmeiInfighting
-		/// </summary>
 		public const short SectMainStoryEmeiInfighting = 252;
 
-		/// <summary>
-		/// SectMainStoryWhiteGibbonReturns
-		/// </summary>
 		public const short SectMainStoryWhiteGibbonReturns = 253;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiGoneAgain
-		/// </summary>
 		public const short SectMainStoryXuehouJixiGoneAgain = 254;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiRescue
-		/// </summary>
 		public const short SectMainStoryXuehouJixiRescue = 255;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiGoneFinal
-		/// </summary>
 		public const short SectMainStoryXuehouJixiGoneFinal = 256;
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselCures
-		/// </summary>
 		public const short SectMainStoryKongsangTripodVesselCures = 257;
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselDetoxifies
-		/// </summary>
 		public const short SectMainStoryKongsangTripodVesselDetoxifies = 258;
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselRemovesQiDisorder
-		/// </summary>
 		public const short SectMainStoryKongsangTripodVesselRemovesQiDisorder = 259;
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselRestoresHealth
-		/// </summary>
 		public const short SectMainStoryKongsangTripodVesselRestoresHealth = 260;
 
-		/// <summary>
-		/// ReincarnationNewWithLocation
-		/// </summary>
 		public const short ReincarnationNewWithLocation = 261;
 
-		/// <summary>
-		/// SectMainStoryWudangVillagersInjured
-		/// </summary>
 		public const short SectMainStoryWudangVillagersInjured = 262;
 
-		/// <summary>
-		/// SectMainStoryWudangVillagerCasualty
-		/// </summary>
 		public const short SectMainStoryWudangVillagerCasualty = 263;
 
-		/// <summary>
-		/// KillHereticRandomEnemy
-		/// </summary>
 		public const short KillHereticRandomEnemy = 264;
 
-		/// <summary>
-		/// DefeatedByHereticRandomEnemy
-		/// </summary>
 		public const short DefeatedByHereticRandomEnemy = 265;
 
-		/// <summary>
-		/// KillRighteousRandomEnemy
-		/// </summary>
 		public const short KillRighteousRandomEnemy = 266;
 
-		/// <summary>
-		/// DefeatedByRighteousRandomEnemy
-		/// </summary>
 		public const short DefeatedByRighteousRandomEnemy = 267;
 
-		/// <summary>
-		/// KillAnimal
-		/// </summary>
 		public const short KillAnimal = 268;
 
-		/// <summary>
-		/// DefeatedByAnimal
-		/// </summary>
 		public const short DefeatedByAnimal = 269;
 
-		/// <summary>
-		/// DieFromEnemyNest
-		/// </summary>
 		public const short DieFromEnemyNest = 270;
 
-		/// <summary>
-		/// Dummy0
-		/// </summary>
 		public const short Dummy0 = 271;
 
-		/// <summary>
-		/// Dummy1
-		/// </summary>
 		public const short Dummy1 = 272;
 
-		/// <summary>
-		/// Dummy2
-		/// </summary>
 		public const short Dummy2 = 273;
 
-		/// <summary>
-		/// MiscarriageAndReincarnation
-		/// </summary>
 		public const short MiscarriageAndReincarnation = 274;
 
-		/// <summary>
-		/// MiscarriageAndReincarnationMotherDies
-		/// </summary>
 		public const short MiscarriageAndReincarnationMotherDies = 275;
 
-		/// <summary>
-		/// MiscarriageAndReincarnationMotherKilled
-		/// </summary>
 		public const short MiscarriageAndReincarnationMotherKilled = 276;
 
-		/// <summary>
-		/// SectMainStoryEmeiShiReturns
-		/// </summary>
 		public const short SectMainStoryEmeiShiReturns = 277;
 
-		/// <summary>
-		/// SectMainStoryEmeiDoomOfEmei
-		/// </summary>
 		public const short SectMainStoryEmeiDoomOfEmei = 278;
 
-		/// <summary>
-		/// EscapeFromEnemyNest
-		/// </summary>
 		public const short EscapeFromEnemyNest = 279;
 
-		/// <summary>
-		/// SavedFromEnemyNest
-		/// </summary>
 		public const short SavedFromEnemyNest = 280;
 
-		/// <summary>
-		/// CultureDecline
-		/// </summary>
 		public const short CultureDecline = 281;
 
-		/// <summary>
-		/// FiveLoongArise
-		/// </summary>
 		public const short FiveLoongArise = 282;
 
-		/// <summary>
-		/// JiaoPoolAccident
-		/// </summary>
 		public const short JiaoPoolAccident = 283;
 
-		/// <summary>
-		/// JiaoGoHome
-		/// </summary>
 		public const short JiaoGoHome = 284;
 
-		/// <summary>
-		/// JiaoBrokeThroughTheShell
-		/// </summary>
 		public const short JiaoBrokeThroughTheShell = 285;
 
-		/// <summary>
-		/// JiaoHasReachedAnAdultAge
-		/// </summary>
 		public const short JiaoHasReachedAnAdultAge = 286;
 
-		/// <summary>
-		/// DLCLoongRidingEffectQiuniu
-		/// </summary>
 		public const short DLCLoongRidingEffectQiuniu = 287;
 
-		/// <summary>
-		/// DLCLoongRidingEffectYazi
-		/// </summary>
 		public const short DLCLoongRidingEffectYazi = 288;
 
-		/// <summary>
-		/// DLCLoongRidingEffectChaofeng
-		/// </summary>
 		public const short DLCLoongRidingEffectChaofeng = 289;
 
-		/// <summary>
-		/// DLCLoongRidingEffectPulao
-		/// </summary>
 		public const short DLCLoongRidingEffectPulao = 290;
 
-		/// <summary>
-		/// DLCLoongRidingEffectSuanni
-		/// </summary>
 		public const short DLCLoongRidingEffectSuanni = 291;
 
-		/// <summary>
-		/// DLCLoongRidingEffectBaxia
-		/// </summary>
 		public const short DLCLoongRidingEffectBaxia = 292;
 
-		/// <summary>
-		/// DLCLoongRidingEffectBian
-		/// </summary>
 		public const short DLCLoongRidingEffectBian = 293;
 
-		/// <summary>
-		/// DLCLoongRidingEffectFuxi
-		/// </summary>
 		public const short DLCLoongRidingEffectFuxi = 294;
 
-		/// <summary>
-		/// DLCLoongRidingEffectChiwen
-		/// </summary>
 		public const short DLCLoongRidingEffectChiwen = 295;
 
-		/// <summary>
-		/// JiaoLayEggs
-		/// </summary>
 		public const short JiaoLayEggs = 296;
 
-		/// <summary>
-		/// JiaoTamingPointsLow
-		/// </summary>
 		public const short JiaoTamingPointsLow = 297;
 
-		/// <summary>
-		/// DieFromAge
-		/// </summary>
 		public const short DieFromAge = 298;
 
-		/// <summary>
-		/// DieFromPoorHealth
-		/// </summary>
 		public const short DieFromPoorHealth = 299;
 
-		/// <summary>
-		/// KilledInPubilc
-		/// </summary>
 		public const short KilledInPubilc = 300;
 
-		/// <summary>
-		/// SectMainStoryJingangHaunted
-		/// </summary>
 		public const short SectMainStoryJingangHaunted = 301;
 
-		/// <summary>
-		/// SectMainStoryJingangFollowedByGhost
-		/// </summary>
 		public const short SectMainStoryJingangFollowedByGhost = 302;
 
-		/// <summary>
-		/// SectMainStoryJingangWrongdoing
-		/// </summary>
 		public const short SectMainStoryJingangWrongdoing = 303;
 
-		/// <summary>
-		/// SectMainStoryJingangPray
-		/// </summary>
 		public const short SectMainStoryJingangPray = 304;
 
-		/// <summary>
-		/// SectMainStoryJingangFameDistribution
-		/// </summary>
 		public const short SectMainStoryJingangFameDistribution = 305;
 
-		/// <summary>
-		/// WugKingParasitiferDead
-		/// </summary>
 		public const short WugKingParasitiferDead = 306;
 
-		/// <summary>
-		/// WugKingDead
-		/// </summary>
 		public const short WugKingDead = 307;
 
-		/// <summary>
-		/// WugKingDeadSpecial
-		/// </summary>
 		public const short WugKingDeadSpecial = 308;
 
-		/// <summary>
-		/// SectMainStoryJingangFamousFakeMonk
-		/// </summary>
 		public const short SectMainStoryJingangFamousFakeMonk = 309;
 
-		/// <summary>
-		/// SectMainStoryJingangRockFleshed
-		/// </summary>
 		public const short SectMainStoryJingangRockFleshed = 310;
 
-		/// <summary>
-		/// SectMainStoryWuxianParanoiaAppeared
-		/// </summary>
 		public const short SectMainStoryWuxianParanoiaAppeared = 311;
 
-		/// <summary>
-		/// SectMainStoryJingangVillagerFlee
-		/// </summary>
 		public const short SectMainStoryJingangVillagerFlee = 312;
 
-		/// <summary>
-		/// SectMainStoryRanshanSanZongBiWu
-		/// </summary>
 		public const short SectMainStoryRanshanSanZongBiWu = 313;
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessHuaJu
-		/// </summary>
 		public const short GiveUpLegendaryBookSuccessHuaJu = 314;
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessXuanZhi
-		/// </summary>
 		public const short GiveUpLegendaryBookSuccessXuanZhi = 315;
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessYingJiao
-		/// </summary>
 		public const short GiveUpLegendaryBookSuccessYingJiao = 316;
 
-		/// <summary>
-		/// GiveUpLegendaryBookFailureHuaJu
-		/// </summary>
 		public const short GiveUpLegendaryBookFailureHuaJu = 317;
 
-		/// <summary>
-		/// GiveUpLegendaryBookFailureXuanZhi
-		/// </summary>
 		public const short GiveUpLegendaryBookFailureXuanZhi = 318;
 
-		/// <summary>
-		/// GiveUpLegendaryBookFailureYingJiao
-		/// </summary>
 		public const short GiveUpLegendaryBookFailureYingJiao = 319;
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseBookHuaJu
-		/// </summary>
 		public const short GiveUpLegendaryBookLoseBookHuaJu = 320;
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseBookXuanZhi
-		/// </summary>
 		public const short GiveUpLegendaryBookLoseBookXuanZhi = 321;
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseBookYingJiao
-		/// </summary>
 		public const short GiveUpLegendaryBookLoseBookYingJiao = 322;
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseTargetHuaJu
-		/// </summary>
 		public const short GiveUpLegendaryBookLoseTargetHuaJu = 323;
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseTargetXuanZhi
-		/// </summary>
 		public const short GiveUpLegendaryBookLoseTargetXuanZhi = 324;
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseTargetYingJiao
-		/// </summary>
 		public const short GiveUpLegendaryBookLoseTargetYingJiao = 325;
 
-		/// <summary>
-		/// LifeLinkHealing
-		/// </summary>
 		public const short LifeLinkHealing = 326;
 
-		/// <summary>
-		/// LifeLinkDamage
-		/// </summary>
 		public const short LifeLinkDamage = 327;
 
-		/// <summary>
-		/// SectMainStoryBaIhuaLeukoKills
-		/// </summary>
 		public const short SectMainStoryBaihuaLeukoKills = 328;
 
-		/// <summary>
-		/// SectMainStoryBaIhuaMelanoKills
-		/// </summary>
 		public const short SectMainStoryBaihuaMelanoKills = 329;
 
-		/// <summary>
-		/// SectMainStoryBaIhuaLeukoHelps
-		/// </summary>
 		public const short SectMainStoryBaihuaLeukoHelps = 330;
 
-		/// <summary>
-		/// SectMainStoryBaIhuaMelanoHelps
-		/// </summary>
 		public const short SectMainStoryBaihuaMelanoHelps = 331;
 
-		/// <summary>
-		/// SectMainStoryBaIhuaManicLow
-		/// </summary>
 		public const short SectMainStoryBaihuaManicLow = 332;
 
-		/// <summary>
-		/// SectMainStoryBaIhuaManicHigh
-		/// </summary>
 		public const short SectMainStoryBaihuaManicHigh = 333;
 
-		/// <summary>
-		/// LoopingEvent
-		/// </summary>
 		public const short LoopingEvent = 334;
 
-		/// <summary>
-		/// FiveElementsChange
-		/// </summary>
 		public const short FiveElementsChange = 335;
 
-		/// <summary>
-		/// ResourcesCollectionCompleted
-		/// </summary>
 		public const short ResourcesCollectionCompleted = 336;
 
-		/// <summary>
-		/// SectMainStoryFulongSacrifice
-		/// </summary>
 		public const short SectMainStoryFulongSacrifice = 337;
 
-		/// <summary>
-		/// SectMainStoryFulongFeatherDrop
-		/// </summary>
 		public const short SectMainStoryFulongFeatherDrop = 338;
 
-		/// <summary>
-		/// MarketComing
-		/// </summary>
 		public const short MarketComing = 339;
 
-		/// <summary>
-		/// TownCombatComing
-		/// </summary>
 		public const short TownCombatComing = 340;
 
-		/// <summary>
-		/// CricketContestComing
-		/// </summary>
 		public const short CricketContestComing = 341;
 
-		/// <summary>
-		/// LifeCompetitionComing
-		/// </summary>
 		public const short LifeCompetitionComing = 342;
 
-		/// <summary>
-		/// SectNormalCompetitionComing
-		/// </summary>
 		public const short SectNormalCompetitionComing = 343;
 
-		/// <summary>
-		/// JoustForSpouseComing
-		/// </summary>
 		public const short JoustForSpouseComing = 344;
 
-		/// <summary>
-		/// DyingNotice
-		/// </summary>
 		public const short DyingNotice = 345;
 
-		/// <summary>
-		/// InjuredNotice
-		/// </summary>
 		public const short InjuredNotice = 346;
 
-		/// <summary>
-		/// TrappedNotice
-		/// </summary>
 		public const short TrappedNotice = 347;
 
-		/// <summary>
-		/// SectMainStoryFulongFightSucceed
-		/// </summary>
 		public const short SectMainStoryFulongFightSucceed = 348;
 
-		/// <summary>
-		/// SectMainStoryFulongFightFail
-		/// </summary>
 		public const short SectMainStoryFulongFightFail = 349;
 
-		/// <summary>
-		/// SectMainStoryFulongFamilyFightFail
-		/// </summary>
 		public const short SectMainStoryFulongFamilyFightFail = 350;
 
-		/// <summary>
-		/// SectMainStoryFulongRobbery
-		/// </summary>
 		public const short SectMainStoryFulongRobbery = 351;
 
-		/// <summary>
-		/// SectMainStoryFulongFamilyRobbery
-		/// </summary>
 		public const short SectMainStoryFulongFamilyRobbery = 352;
 
-		/// <summary>
-		/// DeliverInPrison0
-		/// </summary>
 		public const short DeliverInPrison0 = 353;
 
-		/// <summary>
-		/// DeliverInPrison1
-		/// </summary>
 		public const short DeliverInPrison1 = 354;
 
-		/// <summary>
-		/// DieInPrison
-		/// </summary>
 		public const short DieInPrison = 355;
 
-		/// <summary>
-		/// AssassinatedInPrison
-		/// </summary>
 		public const short AssassinatedInPrison = 356;
 
-		/// <summary>
-		/// AssassinatedDueToKillerTokenInPrison
-		/// </summary>
 		public const short AssassinatedDueToKillerTokenInPrison = 357;
 
-		/// <summary>
-		/// ImprisonAndAbandonBaby0
-		/// </summary>
 		public const short ImprisonAndAbandonBaby0 = 358;
 
-		/// <summary>
-		/// ImprisonAndAbandonBaby1
-		/// </summary>
 		public const short ImprisonAndAbandonBaby1 = 359;
 
-		/// <summary>
-		/// ResourceMigration
-		/// </summary>
 		public const short ResourceMigration = 360;
 
-		/// <summary>
-		/// ChickenSecretInformation
-		/// </summary>
 		public const short ChickenSecretInformation = 361;
 
-		/// <summary>
-		/// XiangshuNormalInformation
-		/// </summary>
 		public const short XiangshuNormalInformation = 362;
 
-		/// <summary>
-		/// SectMainStoryFulongFireVanishes
-		/// </summary>
 		public const short SectMainStoryFulongFireVanishes = 363;
 
-		/// <summary>
-		/// SectMainStoryFulongLooting
-		/// </summary>
 		public const short SectMainStoryFulongLooting = 364;
 
-		/// <summary>
-		/// SectMainStoryWudangTreesGrow
-		/// </summary>
 		public const short SectMainStoryWudangTreesGrow = 365;
 
-		/// <summary>
-		/// SectMainStoryZhujianSwordTestCeremony
-		/// </summary>
 		public const short SectMainStoryZhujianSwordTestCeremony = 366;
 
-		/// <summary>
-		/// InvestedCaravanMove
-		/// </summary>
 		public const short InvestedCaravanMove = 367;
 
-		/// <summary>
-		/// InvestedCaravanPassSettlement
-		/// </summary>
 		public const short InvestedCaravanPassSettlement = 368;
 
-		/// <summary>
-		/// InvestedCaravanPassLowCultureSettlement
-		/// </summary>
 		public const short InvestedCaravanPassLowCultureSettlement = 369;
 
-		/// <summary>
-		/// InvestedCaravanPassHighCultureSettlement
-		/// </summary>
 		public const short InvestedCaravanPassHighCultureSettlement = 370;
 
-		/// <summary>
-		/// InvestedCaravanPassLowSafetySettlement
-		/// </summary>
 		public const short InvestedCaravanPassLowSafetySettlement = 371;
 
-		/// <summary>
-		/// InvestedCaravanPassHighSafetySettlement
-		/// </summary>
 		public const short InvestedCaravanPassHighSafetySettlement = 372;
 
-		/// <summary>
-		/// InvestedCaravanPassLowSafetyLowCultureSettlement
-		/// </summary>
 		public const short InvestedCaravanPassLowSafetyLowCultureSettlement = 373;
 
-		/// <summary>
-		/// InvestedCaravanPassLowSafetyHighCultureSettlement
-		/// </summary>
 		public const short InvestedCaravanPassLowSafetyHighCultureSettlement = 374;
 
-		/// <summary>
-		/// InvestedCaravanPassHighSafetyLowCultureSettlement
-		/// </summary>
 		public const short InvestedCaravanPassHighSafetyLowCultureSettlement = 375;
 
-		/// <summary>
-		/// InvestedCaravanPassHighSafetyHighCultureSettlement
-		/// </summary>
 		public const short InvestedCaravanPassHighSafetyHighCultureSettlement = 376;
 
-		/// <summary>
-		/// InvestedCaravanArrive
-		/// </summary>
 		public const short InvestedCaravanArrive = 377;
 
-		/// <summary>
-		/// InvestedCaravanIsRobbed
-		/// </summary>
 		public const short InvestedCaravanIsRobbed = 378;
 
-		/// <summary>
-		/// InvestedCaravanIsRobbedAndFailed
-		/// </summary>
 		public const short InvestedCaravanIsRobbedAndFailed = 379;
 
-		/// <summary>
-		/// BuildingUpgradingHolded
-		/// </summary>
 		public const short BuildingUpgradingHolded = 380;
 
-		/// <summary>
-		/// PunishmentLost0
-		/// </summary>
 		public const short PunishmentLost0 = 381;
 
-		/// <summary>
-		/// PunishmentLost1
-		/// </summary>
 		public const short PunishmentLost1 = 382;
 
-		/// <summary>
-		/// OutsiderMakeHarvest
-		/// </summary>
 		public const short OutsiderMakeHarvest = 383;
 
-		/// <summary>
-		/// TaiwuVillageCraftObjectsFinished
-		/// </summary>
 		public const short TaiwuVillageCraftObjectsFinished = 384;
 
-		/// <summary>
-		/// OutsiderMakeHarvest1
-		/// </summary>
 		public const short OutsiderMakeHarvest1 = 385;
 
-		/// <summary>
-		/// TaiwuVillagerDied
-		/// </summary>
 		public const short TaiwuVillagerDied = 386;
 
-		/// <summary>
-		/// SectMainStoryRemakeEmeiHomocideCase
-		/// </summary>
 		public const short SectMainStoryRemakeEmeiHomocideCase = 387;
 
-		/// <summary>
-		/// SectMainStoryRemakeEmeiRumor
-		/// </summary>
 		public const short SectMainStoryRemakeEmeiRumor = 388;
 
-		/// <summary>
-		/// DieNotice
-		/// </summary>
 		public const short DieNotice = 389;
 
-		/// <summary>
-		/// WantedNotice
-		/// </summary>
 		public const short WantedNotice = 390;
 
-		/// <summary>
-		/// SectMainStoryYuanshanJuemo
-		/// </summary>
 		public const short SectMainStoryYuanshanJuemo = 391;
 
-		/// <summary>
-		/// CoreMaterialIncome
-		/// </summary>
 		public const short CoreMaterialIncome = 392;
 
-		/// <summary>
-		/// FamilyGetInfected
-		/// </summary>
 		public const short FamilyGetInfected = 393;
 
-		/// <summary>
-		/// FamilyDieByInfected
-		/// </summary>
 		public const short FamilyDieByInfected = 394;
 
-		/// <summary>
-		/// FocusedGetInfected
-		/// </summary>
 		public const short FocusedGetInfected = 395;
 
-		/// <summary>
-		/// FocusedDieByInfected
-		/// </summary>
 		public const short FocusedDieByInfected = 396;
 
-		/// <summary>
-		/// NormalVillagersInjured
-		/// </summary>
 		public const short NormalVillagersInjured = 397;
 
-		/// <summary>
-		/// NormalVillagerCasualty
-		/// </summary>
 		public const short NormalVillagerCasualty = 398;
 
-		/// <summary>
-		/// NormalTreesGrow
-		/// </summary>
 		public const short NormalTreesGrow = 399;
 
-		/// <summary>
-		/// VillagerCraftFinished0
-		/// </summary>
 		public const short VillagerCraftFinished0 = 400;
 
-		/// <summary>
-		/// VillagerCraftFinished1
-		/// </summary>
 		public const short VillagerCraftFinished1 = 401;
 
-		/// <summary>
-		/// VillagerCraftFinished2
-		/// </summary>
 		public const short VillagerCraftFinished2 = 402;
 
-		/// <summary>
-		/// VillagerCraftFinished3
-		/// </summary>
 		public const short VillagerCraftFinished3 = 403;
 
-		/// <summary>
-		/// NpcCraftFinished0
-		/// </summary>
 		public const short NpcCraftFinished0 = 404;
 
-		/// <summary>
-		/// NpcCraftFinished1
-		/// </summary>
 		public const short NpcCraftFinished1 = 405;
 
-		/// <summary>
-		/// NpcCraftFinished2
-		/// </summary>
 		public const short NpcCraftFinished2 = 406;
 
-		/// <summary>
-		/// NpcCraftFinished3
-		/// </summary>
 		public const short NpcCraftFinished3 = 407;
 
-		/// <summary>
-		/// NpcLongDistanceMarriage0
-		/// </summary>
 		public const short NpcLongDistanceMarriage0 = 408;
 
-		/// <summary>
-		/// NpcLongDistanceMarriage1
-		/// </summary>
 		public const short NpcLongDistanceMarriage1 = 409;
 
-		/// <summary>
-		/// NpcLongDistanceMarriage2
-		/// </summary>
 		public const short NpcLongDistanceMarriage2 = 410;
 
-		/// <summary>
-		/// WithoutFood
-		/// </summary>
 		public const short WithoutFood = 411;
 
-		/// <summary>
-		/// Escape0
-		/// </summary>
 		public const short Escape0 = 412;
 
-		/// <summary>
-		/// Escape1
-		/// </summary>
 		public const short Escape1 = 413;
 
-		/// <summary>
-		/// EscapeFailed
-		/// </summary>
 		public const short EscapeFailed = 438;
 
-		/// <summary>
-		/// FirstGetInfected0
-		/// </summary>
 		public const short FirstGetInfected0 = 414;
 
-		/// <summary>
-		/// FirstGetInfected1
-		/// </summary>
 		public const short FirstGetInfected1 = 415;
 
-		/// <summary>
-		/// YuanshanSpiritCrisis
-		/// </summary>
 		public const short YuanshanSpiritCrisis = 416;
 
-		/// <summary>
-		/// YuanshanDemonCrisis
-		/// </summary>
 		public const short YuanshanDemonCrisis = 417;
 
-		/// <summary>
-		/// PlotPoisonedEnemyEscaped
-		/// </summary>
 		public const short PlotPoisonedEnemyEscaped = 418;
 
-		/// <summary>
-		/// PlotHarmEnemyEscaped
-		/// </summary>
 		public const short PlotHarmEnemyEscaped = 419;
 
-		/// <summary>
-		/// GoingToAppointment
-		/// </summary>
 		public const short GoingToAppointment = 420;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainPeople
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainPeople = 421;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainFail
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainFail = 422;
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransferFiveElements
-		/// </summary>
 		public const short SectMainStoryXuehouTaiwuTransferFiveElements = 423;
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransferFiveElementsFail
-		/// </summary>
 		public const short SectMainStoryXuehouTaiwuTransferFiveElementsFail = 424;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeili
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainNeili = 425;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainNeiliFail = 426;
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransFiveElements
-		/// </summary>
 		public const short SectMainStoryXuehouTaiwuTransFiveElements = 427;
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransFiveElementsFail
-		/// </summary>
 		public const short SectMainStoryXuehouTaiwuTransFiveElementsFail = 428;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail1
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainNeiliFail1 = 429;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail2
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainNeiliFail2 = 430;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail3
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainNeiliFail3 = 431;
 
-		/// <summary>
-		/// ChallengeModeAdvanceMonthWorsenInjuryOuter
-		/// </summary>
 		public const short ChallengeModeAdvanceMonthWorsenInjuryOuter = 432;
 
-		/// <summary>
-		/// ChallengeModeAdvanceMonthWorsenInjuryInner
-		/// </summary>
 		public const short ChallengeModeAdvanceMonthWorsenInjuryInner = 433;
 
-		/// <summary>
-		/// ChallengeModeAdvanceMonthWorsenPoison
-		/// </summary>
 		public const short ChallengeModeAdvanceMonthWorsenPoison = 434;
 
-		/// <summary>
-		/// ChickenFullyFledged
-		/// </summary>
 		public const short ChickenFullyFledged = 435;
 
-		/// <summary>
-		/// CostResourceNotEnough
-		/// </summary>
 		public const short CostResourceNotEnough = 436;
 
-		/// <summary>
-		/// CostResourceNotEnoughResult
-		/// </summary>
 		public const short CostResourceNotEnoughResult = 437;
 
-		/// <summary>
-		/// CricketGrowUp
-		/// </summary>
 		public const short CricketGrowUp = 439;
 
-		/// <summary>
-		/// KillRighteousRandomEnemyVillager
-		/// </summary>
 		public const short KillRighteousRandomEnemyVillager = 440;
 
-		/// <summary>
-		/// DefeatedByRighteousRandomEnemyVillager
-		/// </summary>
 		public const short DefeatedByRighteousRandomEnemyVillager = 441;
 
-		/// <summary>
-		/// KillHereticRandomEnemyVillager
-		/// </summary>
 		public const short KillHereticRandomEnemyVillager = 442;
 
-		/// <summary>
-		/// DefeatedByHereticRandomEnemyVillager
-		/// </summary>
 		public const short DefeatedByHereticRandomEnemyVillager = 443;
 
-		/// <summary>
-		/// KillAnimalVillager
-		/// </summary>
 		public const short KillAnimalVillager = 444;
 
-		/// <summary>
-		/// DefeatedByAnimalVillager
-		/// </summary>
 		public const short DefeatedByAnimalVillager = 445;
 
-		/// <summary>
-		/// DieFromEnemyNestVillager
-		/// </summary>
 		public const short DieFromEnemyNestVillager = 446;
 
-		/// <summary>
-		/// EscapeFromEnemyNestVillager
-		/// </summary>
 		public const short EscapeFromEnemyNestVillager = 447;
 
-		/// <summary>
-		/// SavedFromEnemyNestVillager
-		/// </summary>
 		public const short SavedFromEnemyNestVillager = 448;
 
-		/// <summary>
-		/// InfectedKidnapedCharacterEscape
-		/// </summary>
 		public const short InfectedKidnapedCharacterEscape = 449;
 
-		/// <summary>
-		/// OwningBookKidnapedCharacterEscape
-		/// </summary>
 		public const short OwningBookKidnapedCharacterEscape = 450;
 
-		/// <summary>
-		/// SectMainStoryEmeiStrangerAttack
-		/// </summary>
 		public const short SectMainStoryEmeiStrangerAttack = 451;
 
-		/// <summary>
-		/// SectMainStoryEmeiInsaneMember
-		/// </summary>
 		public const short SectMainStoryEmeiInsaneMember = 452;
 
-		/// <summary>
-		/// SectMainStoryEmeiRumors
-		/// </summary>
 		public const short SectMainStoryEmeiRumors = 453;
 
-		/// <summary>
-		/// SectMainStoryEmeiReputation
-		/// </summary>
 		public const short SectMainStoryEmeiReputation = 454;
 
-		/// <summary>
-		/// SectMainStoryEmeiSecretBook
-		/// </summary>
 		public const short SectMainStoryEmeiSecretBook = 455;
 
-		/// <summary>
-		/// SectMainStoryJieqingUpgradeXingYun
-		/// </summary>
 		public const short SectMainStoryJieqingUpgradeXingYun = 456;
 
-		/// <summary>
-		/// MainStoryImmortalWuFanKe
-		/// </summary>
 		public const short MainStoryImmortalWuFanKe = 457;
 
-		/// <summary>
-		/// MainStoryImmortalDianFanMo
-		/// </summary>
 		public const short MainStoryImmortalDianFanMo = 458;
 
-		/// <summary>
-		/// AdventureCapitalCity
-		/// </summary>
 		public const short AdventureCapitalCity = 459;
 
-		/// <summary>
-		/// SmallMarketAppeared
-		/// </summary>
 		public const short SmallMarketAppeared = 460;
 
-		/// <summary>
-		/// AdventureJieqi
-		/// </summary>
 		public const short AdventureJieqi = 461;
 
-		/// <summary>
-		/// AdventureTeaParty
-		/// </summary>
 		public const short AdventureTeaParty = 462;
 
-		/// <summary>
-		/// AdventureWineParty
-		/// </summary>
 		public const short AdventureWineParty = 463;
 
-		/// <summary>
-		/// AdventureMartialHall
-		/// </summary>
 		public const short AdventureMartialHall = 464;
 
-		/// <summary>
-		/// AdventureMissionReward
-		/// </summary>
 		public const short AdventureMissionReward = 465;
 
-		/// <summary>
-		/// AdventureWorldSecretRealm
-		/// </summary>
 		public const short AdventureWorldSecretRealm = 466;
 
-		/// <summary>
-		/// AdventureJieqiComing
-		/// </summary>
 		public const short AdventureJieqiComing = 467;
 
-		/// <summary>
-		/// BehaviorTypeAction1
-		/// </summary>
 		public const short BehaviorTypeAction1 = 468;
 
-		/// <summary>
-		/// BehaviorTypeAction2
-		/// </summary>
 		public const short BehaviorTypeAction2 = 469;
 
-		/// <summary>
-		/// NewMarketAppeared
-		/// </summary>
 		public const short NewMarketAppeared = 470;
 
-		/// <summary>
-		/// PreciousMaterial
-		/// </summary>
 		public const short PreciousMaterial = 471;
+
+		public const short DLCChickenFeatherGift = 472;
+
+		public const short TaiwuAsXiangshuLittleMonkGiftNoti = 473;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// SolarTerm0
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm0 => Instance[(short)0];
 
-		/// <summary>
-		/// SolarTerm1
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm1 => Instance[(short)1];
 
-		/// <summary>
-		/// SolarTerm2
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm2 => Instance[(short)2];
 
-		/// <summary>
-		/// SolarTerm3
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm3 => Instance[(short)3];
 
-		/// <summary>
-		/// SolarTerm4
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm4 => Instance[(short)4];
 
-		/// <summary>
-		/// SolarTerm5
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm5 => Instance[(short)5];
 
-		/// <summary>
-		/// SolarTerm6
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm6 => Instance[(short)6];
 
-		/// <summary>
-		/// SolarTerm7
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm7 => Instance[(short)7];
 
-		/// <summary>
-		/// SolarTerm8
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm8 => Instance[(short)8];
 
-		/// <summary>
-		/// SolarTerm9
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm9 => Instance[(short)9];
 
-		/// <summary>
-		/// SolarTerm10
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm10 => Instance[(short)10];
 
-		/// <summary>
-		/// SolarTerm11
-		/// </summary>
 		public static MonthlyNotificationItem SolarTerm11 => Instance[(short)11];
 
-		/// <summary>
-		/// GraveDestroyed
-		/// </summary>
 		public static MonthlyNotificationItem GraveDestroyed => Instance[(short)12];
 
-		/// <summary>
-		/// IncomeFromNest
-		/// </summary>
 		public static MonthlyNotificationItem IncomeFromNest => Instance[(short)13];
 
-		/// <summary>
-		/// LoseItemCausedByWarehouseFull
-		/// </summary>
 		public static MonthlyNotificationItem LoseItemCausedByWarehouseFull => Instance[(short)14];
 
-		/// <summary>
-		/// Assassinated
-		/// </summary>
 		public static MonthlyNotificationItem Assassinated => Instance[(short)15];
 
-		/// <summary>
-		/// AssassinatedDueToKillerToken
-		/// </summary>
 		public static MonthlyNotificationItem AssassinatedDueToKillerToken => Instance[(short)16];
 
-		/// <summary>
-		/// Die
-		/// </summary>
 		public static MonthlyNotificationItem Die => Instance[(short)17];
 
-		/// <summary>
-		/// InfectXiangshuPartially
-		/// </summary>
 		public static MonthlyNotificationItem InfectXiangshuPartially => Instance[(short)18];
 
-		/// <summary>
-		/// InfectXiangshuCompletely
-		/// </summary>
 		public static MonthlyNotificationItem InfectXiangshuCompletely => Instance[(short)19];
 
-		/// <summary>
-		/// CreateHatredInPrison
-		/// </summary>
 		public static MonthlyNotificationItem CreateHatredByPrison => Instance[(short)20];
 
-		/// <summary>
-		/// EscapeFromPrison
-		/// </summary>
 		public static MonthlyNotificationItem EscapeFromPrison => Instance[(short)21];
 
-		/// <summary>
-		/// CricketEndLife
-		/// </summary>
 		public static MonthlyNotificationItem CricketEndLife => Instance[(short)22];
 
-		/// <summary>
-		/// LoseResourceCausedByInventoryFull
-		/// </summary>
 		public static MonthlyNotificationItem LoseResourceCausedByInventoryFull => Instance[(short)23];
 
-		/// <summary>
-		/// LoseItemCausedByInventoryFull
-		/// </summary>
 		public static MonthlyNotificationItem LoseItemCausedByInventoryFull => Instance[(short)24];
 
-		/// <summary>
-		/// CreateHatred
-		/// </summary>
 		public static MonthlyNotificationItem CreateHatred => Instance[(short)25];
 
-		/// <summary>
-		/// DecreaseHatred
-		/// </summary>
 		public static MonthlyNotificationItem DecreaseHatred => Instance[(short)26];
 
-		/// <summary>
-		/// ConfessLoveAndSucceed
-		/// </summary>
 		public static MonthlyNotificationItem ConfessLoveAndSucceed => Instance[(short)27];
 
-		/// <summary>
-		/// SeverLove
-		/// </summary>
 		public static MonthlyNotificationItem SeverLove => Instance[(short)28];
 
-		/// <summary>
-		/// Marriage
-		/// </summary>
 		public static MonthlyNotificationItem Marriage => Instance[(short)29];
 
-		/// <summary>
-		/// BecomeFriend
-		/// </summary>
 		public static MonthlyNotificationItem BecomeFriend => Instance[(short)30];
 
-		/// <summary>
-		/// DecreaseFriendship
-		/// </summary>
 		public static MonthlyNotificationItem DecreaseFriendship => Instance[(short)31];
 
-		/// <summary>
-		/// BecomeSwornBrotherOrSister
-		/// </summary>
 		public static MonthlyNotificationItem BecomeSwornBrotherOrSister => Instance[(short)32];
 
-		/// <summary>
-		/// SeverFriendship
-		/// </summary>
 		public static MonthlyNotificationItem SeverFriendship => Instance[(short)33];
 
-		/// <summary>
-		/// AdoptBoy
-		/// </summary>
 		public static MonthlyNotificationItem AdoptBoy => Instance[(short)34];
 
-		/// <summary>
-		/// AdoptGirl
-		/// </summary>
 		public static MonthlyNotificationItem AdoptGirl => Instance[(short)35];
 
-		/// <summary>
-		/// RecognizeFather
-		/// </summary>
 		public static MonthlyNotificationItem RecognizeFather => Instance[(short)36];
 
-		/// <summary>
-		/// RecognizeMother
-		/// </summary>
 		public static MonthlyNotificationItem RecognizeMother => Instance[(short)37];
 
-		/// <summary>
-		/// MakeLove
-		/// </summary>
 		public static MonthlyNotificationItem MakeLove => Instance[(short)38];
 
-		/// <summary>
-		/// RapeFailure
-		/// </summary>
 		public static MonthlyNotificationItem RapeFailure => Instance[(short)39];
 
-		/// <summary>
-		/// MotherGiveBirthToBoy
-		/// </summary>
 		public static MonthlyNotificationItem MotherGiveBirthToBoy => Instance[(short)40];
 
-		/// <summary>
-		/// MotherGiveBirthToGirl
-		/// </summary>
 		public static MonthlyNotificationItem MotherGiveBirthToGirl => Instance[(short)41];
 
-		/// <summary>
-		/// FatherGetBoy
-		/// </summary>
 		public static MonthlyNotificationItem FatherGetBoy => Instance[(short)42];
 
-		/// <summary>
-		/// FatherGetGirl
-		/// </summary>
 		public static MonthlyNotificationItem FatherGetGirl => Instance[(short)43];
 
-		/// <summary>
-		/// GiveBirthToCricket
-		/// </summary>
 		public static MonthlyNotificationItem GiveBirthToCricket => Instance[(short)44];
 
-		/// <summary>
-		/// MotherLoseFetus
-		/// </summary>
 		public static MonthlyNotificationItem MotherLoseFetus => Instance[(short)45];
 
-		/// <summary>
-		/// GoToJoinOrganization
-		/// </summary>
 		public static MonthlyNotificationItem GoToJoinOrganization => Instance[(short)46];
 
-		/// <summary>
-		/// JoinOrganization
-		/// </summary>
 		public static MonthlyNotificationItem JoinOrganization => Instance[(short)47];
 
-		/// <summary>
-		/// GoToAppointment
-		/// </summary>
 		public static MonthlyNotificationItem GoToAppointment => Instance[(short)48];
 
-		/// <summary>
-		/// WaitingForAppointment
-		/// </summary>
 		public static MonthlyNotificationItem WaitingForAppointment => Instance[(short)49];
 
-		/// <summary>
-		/// AppointmentExpired
-		/// </summary>
 		public static MonthlyNotificationItem AppointmentExpired => Instance[(short)50];
 
-		/// <summary>
-		/// AppointmentCancelled
-		/// </summary>
 		public static MonthlyNotificationItem AppointmentCancelled => Instance[(short)51];
 
-		/// <summary>
-		/// GoToRescue
-		/// </summary>
 		public static MonthlyNotificationItem GoToRescue => Instance[(short)52];
 
-		/// <summary>
-		/// RescuePrisoner
-		/// </summary>
 		public static MonthlyNotificationItem RescuePrisoner => Instance[(short)53];
 
-		/// <summary>
-		/// ReleasePrisoner
-		/// </summary>
 		public static MonthlyNotificationItem ReleasePrisoner => Instance[(short)54];
 
-		/// <summary>
-		/// Disappear
-		/// </summary>
 		public static MonthlyNotificationItem Disappear => Instance[(short)55];
 
-		/// <summary>
-		/// GoToRevenge
-		/// </summary>
 		public static MonthlyNotificationItem GoToRevenge => Instance[(short)56];
 
-		/// <summary>
-		/// GoToProtect
-		/// </summary>
 		public static MonthlyNotificationItem GoToProtect => Instance[(short)57];
 
-		/// <summary>
-		/// ProtectRelativeOrFriend
-		/// </summary>
 		public static MonthlyNotificationItem ProtectRelativeOrFriend => Instance[(short)58];
 
-		/// <summary>
-		/// SectUpgrade
-		/// </summary>
 		public static MonthlyNotificationItem SectUpgrade => Instance[(short)59];
 
-		/// <summary>
-		/// CivilianSettlementUpgrade
-		/// </summary>
 		public static MonthlyNotificationItem CivilianSettlementUpgrade => Instance[(short)60];
 
-		/// <summary>
-		/// FactionUpgrade
-		/// </summary>
 		public static MonthlyNotificationItem FactionUpgrade => Instance[(short)61];
 
-		/// <summary>
-		/// StealResourceFailure
-		/// </summary>
 		public static MonthlyNotificationItem StealResourceFailure => Instance[(short)62];
 
-		/// <summary>
-		/// StealResourceSuccess
-		/// </summary>
 		public static MonthlyNotificationItem StealResourceSuccess => Instance[(short)63];
 
-		/// <summary>
-		/// CheatResourceFailure
-		/// </summary>
 		public static MonthlyNotificationItem CheatResourceFailure => Instance[(short)64];
 
-		/// <summary>
-		/// RobResourceFailure
-		/// </summary>
 		public static MonthlyNotificationItem RobResourceFailure => Instance[(short)65];
 
-		/// <summary>
-		/// DigResource
-		/// </summary>
 		public static MonthlyNotificationItem DigResource => Instance[(short)66];
 
-		/// <summary>
-		/// StealItemFailure
-		/// </summary>
 		public static MonthlyNotificationItem StealItemFailure => Instance[(short)67];
 
-		/// <summary>
-		/// StealItemSuccess
-		/// </summary>
 		public static MonthlyNotificationItem StealItemSuccess => Instance[(short)68];
 
-		/// <summary>
-		/// CheatItemFailure
-		/// </summary>
 		public static MonthlyNotificationItem CheatItemFailure => Instance[(short)69];
 
-		/// <summary>
-		/// RobItemFailure
-		/// </summary>
 		public static MonthlyNotificationItem RobItemFailure => Instance[(short)70];
 
-		/// <summary>
-		/// DigItem
-		/// </summary>
 		public static MonthlyNotificationItem DigItem => Instance[(short)71];
 
-		/// <summary>
-		/// StealLifeSkillFailure
-		/// </summary>
 		public static MonthlyNotificationItem StealLifeSkillFailure => Instance[(short)72];
 
-		/// <summary>
-		/// StealLifeSkillSuccess
-		/// </summary>
 		public static MonthlyNotificationItem StealLifeSkillSuccess => Instance[(short)73];
 
-		/// <summary>
-		/// CheatLifeSkillFailure
-		/// </summary>
 		public static MonthlyNotificationItem CheatLifeSkillFailure => Instance[(short)74];
 
-		/// <summary>
-		/// StealCombatSkillFailure
-		/// </summary>
 		public static MonthlyNotificationItem StealCombatSkillFailure => Instance[(short)75];
 
-		/// <summary>
-		/// StealCombatSkillSuccess
-		/// </summary>
 		public static MonthlyNotificationItem StealCombatSkillSuccess => Instance[(short)76];
 
-		/// <summary>
-		/// CheatCombatSkillFailure
-		/// </summary>
 		public static MonthlyNotificationItem CheatCombatSkillFailure => Instance[(short)77];
 
-		/// <summary>
-		/// GivePresentResource
-		/// </summary>
 		public static MonthlyNotificationItem GivePresentResource => Instance[(short)78];
 
-		/// <summary>
-		/// GivePresentItem
-		/// </summary>
 		public static MonthlyNotificationItem GivePresentItem => Instance[(short)79];
 
-		/// <summary>
-		/// TeachLifeSkillSuccess
-		/// </summary>
 		public static MonthlyNotificationItem TeachLifeSkillSuccess => Instance[(short)80];
 
-		/// <summary>
-		/// TeachLifeSkillFailure
-		/// </summary>
 		public static MonthlyNotificationItem TeachLifeSkillFailure => Instance[(short)81];
 
-		/// <summary>
-		/// TeachCombatSkillSuccess
-		/// </summary>
 		public static MonthlyNotificationItem TeachCombatSkillSuccess => Instance[(short)82];
 
-		/// <summary>
-		/// TeachCombatSkillFailure
-		/// </summary>
 		public static MonthlyNotificationItem TeachCombatSkillFailure => Instance[(short)83];
 
-		/// <summary>
-		/// AmuseOthersByMusic
-		/// </summary>
 		public static MonthlyNotificationItem AmuseOthersByMusic => Instance[(short)84];
 
-		/// <summary>
-		/// AmuseOthersByChess
-		/// </summary>
 		public static MonthlyNotificationItem AmuseOthersByChess => Instance[(short)85];
 
-		/// <summary>
-		/// AmuseOthersByPoem
-		/// </summary>
 		public static MonthlyNotificationItem AmuseOthersByPoem => Instance[(short)86];
 
-		/// <summary>
-		/// AmuseOthersByPainting
-		/// </summary>
 		public static MonthlyNotificationItem AmuseOthersByPainting => Instance[(short)87];
 
-		/// <summary>
-		/// MakeFamousItem
-		/// </summary>
 		public static MonthlyNotificationItem MakeFamousItem => Instance[(short)88];
 
-		/// <summary>
-		/// EnlightenedByDaoism
-		/// </summary>
 		public static MonthlyNotificationItem EnlightenedByDaoism => Instance[(short)89];
 
-		/// <summary>
-		/// EnlightenedByBuddhism
-		/// </summary>
 		public static MonthlyNotificationItem EnlightenedByBuddhism => Instance[(short)90];
 
-		/// <summary>
-		/// PractiseDivination
-		/// </summary>
 		public static MonthlyNotificationItem PractiseDivination => Instance[(short)91];
 
-		/// <summary>
-		/// UnexpectedlyGetRareItem
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyGetRareItem => Instance[(short)92];
 
-		/// <summary>
-		/// UnexpectedlyGetResource
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyGetResource => Instance[(short)93];
 
-		/// <summary>
-		/// UnexpectedlyGetCombatSkill
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyGetCombatSkill => Instance[(short)94];
 
-		/// <summary>
-		/// UnexpectedlyGetLifeSkill
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyGetLifeSkill => Instance[(short)95];
 
-		/// <summary>
-		/// UnexpectedlyGetHealth
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyGetHealth => Instance[(short)96];
 
-		/// <summary>
-		/// UnexpectedlyHealOuterInjury
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyHealOuterInjury => Instance[(short)97];
 
-		/// <summary>
-		/// UnexpectedlyHealInneInjury
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyHealInnerInjury => Instance[(short)98];
 
-		/// <summary>
-		/// UnexpectedlyHealPoison
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyHealPoison => Instance[(short)99];
 
-		/// <summary>
-		/// UnexpectedlyHealQi
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyHealQi => Instance[(short)100];
 
-		/// <summary>
-		/// UnexpectedlyLoseRareItem
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyLoseRareItem => Instance[(short)101];
 
-		/// <summary>
-		/// UnexpectedlyLoseResource
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyLoseResource => Instance[(short)102];
 
-		/// <summary>
-		/// UnexpectedlyLoseCombatSkill
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyLoseCombatSkill => Instance[(short)103];
 
-		/// <summary>
-		/// UnexpectedlyLoseLifeSkill
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyLoseLifeSkill => Instance[(short)104];
 
-		/// <summary>
-		/// UnexpectedlyLoseHealth
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlyLoseHealth => Instance[(short)105];
 
-		/// <summary>
-		/// UnexpectedlySufferOuterInjury
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlySufferOuterInjury => Instance[(short)106];
 
-		/// <summary>
-		/// UnexpectedlySufferInneInjury
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlySufferInneInjury => Instance[(short)107];
 
-		/// <summary>
-		/// UnexpectedlySufferPoison
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlySufferPoison => Instance[(short)108];
 
-		/// <summary>
-		/// UnexpectedlySufferDisorderOfQi
-		/// </summary>
 		public static MonthlyNotificationItem UnexpectedlySufferDisorderOfQi => Instance[(short)109];
 
-		/// <summary>
-		/// BuildingResourceIncreased
-		/// </summary>
 		public static MonthlyNotificationItem BuildingResourceIncreased => Instance[(short)110];
 
-		/// <summary>
-		/// BuildingResourceSpread
-		/// </summary>
 		public static MonthlyNotificationItem BuildingResourceSpread => Instance[(short)111];
 
-		/// <summary>
-		/// BuildingDamaged
-		/// </summary>
 		public static MonthlyNotificationItem BuildingDamaged => Instance[(short)112];
 
-		/// <summary>
-		/// BuildingRuined
-		/// </summary>
 		public static MonthlyNotificationItem BuildingRuined => Instance[(short)113];
 
-		/// <summary>
-		/// BuildingConstructionCompleted
-		/// </summary>
 		public static MonthlyNotificationItem BuildingConstructionCompleted => Instance[(short)114];
 
-		/// <summary>
-		/// BuildingUpgradingCompleted
-		/// </summary>
 		public static MonthlyNotificationItem BuildingUpgradingCompleted => Instance[(short)115];
 
-		/// <summary>
-		/// BuildingDemolitionCompleted
-		/// </summary>
 		public static MonthlyNotificationItem BuildingDemolitionCompleted => Instance[(short)116];
 
-		/// <summary>
-		/// BuildingIncome
-		/// </summary>
 		public static MonthlyNotificationItem BuildingIncome => Instance[(short)117];
 
-		/// <summary>
-		/// DispatchInPlace
-		/// </summary>
 		public static MonthlyNotificationItem DispatchInPlace => Instance[(short)118];
 
-		/// <summary>
-		/// FindViciousBeggarsNest
-		/// </summary>
 		public static MonthlyNotificationItem FindViciousBeggarsNest => Instance[(short)119];
 
-		/// <summary>
-		/// FindThievesCamp
-		/// </summary>
 		public static MonthlyNotificationItem FindThievesCamp => Instance[(short)120];
 
-		/// <summary>
-		/// FindBanditsStronghold
-		/// </summary>
 		public static MonthlyNotificationItem FindBanditsStronghold => Instance[(short)121];
 
-		/// <summary>
-		/// FindTraitorsGang
-		/// </summary>
 		public static MonthlyNotificationItem FindTraitorsGang => Instance[(short)122];
 
-		/// <summary>
-		/// FindVillainsValley
-		/// </summary>
 		public static MonthlyNotificationItem FindVillainsValley => Instance[(short)123];
 
-		/// <summary>
-		/// FindMixiangzhen
-		/// </summary>
 		public static MonthlyNotificationItem FindMixiangzhen => Instance[(short)124];
 
-		/// <summary>
-		/// FindMassGrave
-		/// </summary>
 		public static MonthlyNotificationItem FindMassGrave => Instance[(short)125];
 
-		/// <summary>
-		/// FindHereticHome
-		/// </summary>
 		public static MonthlyNotificationItem FindHereticHome => Instance[(short)126];
 
-		/// <summary>
-		/// KidnappedByHeresy
-		/// </summary>
 		public static MonthlyNotificationItem KidnappedByHeresy => Instance[(short)127];
 
-		/// <summary>
-		/// KidnappedByHeart
-		/// </summary>
 		public static MonthlyNotificationItem KidnappedByHeart => Instance[(short)128];
 
-		/// <summary>
-		/// KidnappedBySoumoulou
-		/// </summary>
 		public static MonthlyNotificationItem KidnappedBySoumoulou => Instance[(short)129];
 
-		/// <summary>
-		/// KidnappedByWorldWeary
-		/// </summary>
 		public static MonthlyNotificationItem KidnappedByWorldWeary => Instance[(short)130];
 
-		/// <summary>
-		/// MarketAppeared
-		/// </summary>
 		public static MonthlyNotificationItem MarketAppeared => Instance[(short)131];
 
-		/// <summary>
-		/// TownCombatAppeared
-		/// </summary>
 		public static MonthlyNotificationItem TownCombatAppeared => Instance[(short)132];
 
-		/// <summary>
-		/// CricketsAppeared
-		/// </summary>
 		public static MonthlyNotificationItem CricketsAppeared => Instance[(short)133];
 
-		/// <summary>
-		/// StartCricketContest
-		/// </summary>
 		public static MonthlyNotificationItem StartCricketContest => Instance[(short)134];
 
-		/// <summary>
-		/// LifeCompetitionAppeared
-		/// </summary>
 		public static MonthlyNotificationItem LifeCompetitionAppeared => Instance[(short)135];
 
-		/// <summary>
-		/// StartSectJuniorContest
-		/// </summary>
 		public static MonthlyNotificationItem StartSectJuniorContest => Instance[(short)136];
 
-		/// <summary>
-		/// StartSectIntermediateContest
-		/// </summary>
 		public static MonthlyNotificationItem StartSectIntermediateContest => Instance[(short)137];
 
-		/// <summary>
-		/// StartSectSeniorContest
-		/// </summary>
 		public static MonthlyNotificationItem StartSectSeniorContest => Instance[(short)138];
 
-		/// <summary>
-		/// JoustForSpouse
-		/// </summary>
 		public static MonthlyNotificationItem JoustForSpouse => Instance[(short)139];
 
-		/// <summary>
-		/// MarryNotice
-		/// </summary>
 		public static MonthlyNotificationItem MarryNotice => Instance[(short)140];
 
-		/// <summary>
-		/// XiangshuAvatarAppeared
-		/// </summary>
 		public static MonthlyNotificationItem XiangshuAvatarAppeared => Instance[(short)141];
 
-		/// <summary>
-		/// MonvBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem MonvBringDisaster => Instance[(short)142];
 
-		/// <summary>
-		/// DayueYaochangBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem DayueYaochangBringDisaster => Instance[(short)143];
 
-		/// <summary>
-		/// JiuhanvBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem JiuhanvBringDisaster => Instance[(short)144];
 
-		/// <summary>
-		/// JinHuangervBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem JinHuangervBringDisaster => Instance[(short)145];
 
-		/// <summary>
-		/// YiYihouvBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem YiYihouvBringDisaster => Instance[(short)146];
 
-		/// <summary>
-		/// WeiQivBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem WeiQivBringDisaster => Instance[(short)147];
 
-		/// <summary>
-		/// YixiangvBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem YixiangvBringDisaster => Instance[(short)148];
 
-		/// <summary>
-		/// XuefengBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem XuefengBringDisaster => Instance[(short)149];
 
-		/// <summary>
-		/// ShuFangvBringDisaster
-		/// </summary>
 		public static MonthlyNotificationItem ShuFangvBringDisaster => Instance[(short)150];
 
-		/// <summary>
-		/// MonvSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem MonvSaveSuffering => Instance[(short)151];
 
-		/// <summary>
-		/// DayueYaochangSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem DayueYaochangSaveSuffering => Instance[(short)152];
 
-		/// <summary>
-		/// JiuhanvSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem JiuhanvSaveSuffering => Instance[(short)153];
 
-		/// <summary>
-		/// JinHuangervSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem JinHuangervSaveSuffering => Instance[(short)154];
 
-		/// <summary>
-		/// YiYihouvSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem YiYihouvSaveSuffering => Instance[(short)155];
 
-		/// <summary>
-		/// WeiQivSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem WeiQivSaveSuffering => Instance[(short)156];
 
-		/// <summary>
-		/// YixiangvSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem YixiangvSaveSuffering => Instance[(short)157];
 
-		/// <summary>
-		/// XuefengSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem XuefengSaveSuffering => Instance[(short)158];
 
-		/// <summary>
-		/// ShuFangvSaveSuffering
-		/// </summary>
 		public static MonthlyNotificationItem ShuFangvSaveSuffering => Instance[(short)159];
 
-		/// <summary>
-		/// CivilianDisappear
-		/// </summary>
 		public static MonthlyNotificationItem CivilianDisappear => Instance[(short)160];
 
-		/// <summary>
-		/// MerchantGoTravelling
-		/// </summary>
 		public static MonthlyNotificationItem MerchantGoTravelling => Instance[(short)161];
 
-		/// <summary>
-		/// ChickenEscaped
-		/// </summary>
 		public static MonthlyNotificationItem ChickenEscaped => Instance[(short)162];
 
-		/// <summary>
-		/// NaturalDisasterOccurred
-		/// </summary>
 		public static MonthlyNotificationItem NaturalDisasterOccurred => Instance[(short)163];
 
-		/// <summary>
-		/// Reincarnation
-		/// </summary>
 		public static MonthlyNotificationItem Reincarnation => Instance[(short)164];
 
-		/// <summary>
-		/// AccumulatedSkillPowerLost
-		/// </summary>
 		public static MonthlyNotificationItem AccumulatedSkillPowerLost => Instance[(short)165];
 
-		/// <summary>
-		/// TaiwuVillageDestructed
-		/// </summary>
 		public static MonthlyNotificationItem TaiwuVillageDestructed => Instance[(short)166];
 
-		/// <summary>
-		/// RebirthAsJuniorXiangshu
-		/// </summary>
 		public static MonthlyNotificationItem RebirthAsJuniorXiangshu => Instance[(short)167];
 
-		/// <summary>
-		/// LegendaryBookAppeared
-		/// </summary>
 		public static MonthlyNotificationItem LegendaryBookAppeared => Instance[(short)168];
 
-		/// <summary>
-		/// WulinConferenceWithoutParticipant
-		/// </summary>
 		public static MonthlyNotificationItem WulinConferenceWithoutParticipant => Instance[(short)169];
 
-		/// <summary>
-		/// WulinConferenceInPreparing
-		/// </summary>
 		public static MonthlyNotificationItem WulinConferenceInPreparing => Instance[(short)170];
 
-		/// <summary>
-		/// WulinConferenceInProgress
-		/// </summary>
 		public static MonthlyNotificationItem WulinConferenceInProgress => Instance[(short)171];
 
-		/// <summary>
-		/// XiangshuKilling
-		/// </summary>
 		public static MonthlyNotificationItem XiangshuKilling => Instance[(short)172];
 
-		/// <summary>
-		/// MonthlyNormalInformation
-		/// </summary>
 		public static MonthlyNotificationItem MonthlyNormalInformation => Instance[(short)173];
 
-		/// <summary>
-		/// MonthlySecretInformation
-		/// </summary>
 		public static MonthlyNotificationItem MonthlySecretInformation => Instance[(short)174];
 
-		/// <summary>
-		/// SecretInformationWillExpire
-		/// </summary>
 		public static MonthlyNotificationItem SecretInformationWillExpire => Instance[(short)175];
 
-		/// <summary>
-		/// SecretInformationExpired
-		/// </summary>
 		public static MonthlyNotificationItem SecretInformationExpired => Instance[(short)176];
 
-		/// <summary>
-		/// YirenAppearInTaiwuArea
-		/// </summary>
 		public static MonthlyNotificationItem YirenAppearInTaiwuArea => Instance[(short)177];
 
-		/// <summary>
-		/// WesternMerchantBackAfterLong
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchantBackAfterLong => Instance[(short)178];
 
-		/// <summary>
-		/// WesternMerchantLoseContact
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchantLoseContact => Instance[(short)179];
 
-		/// <summary>
-		/// WesternMerchantBackSucceed
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchantBackSucceed => Instance[(short)180];
 
-		/// <summary>
-		/// GainAuthority
-		/// </summary>
 		public static MonthlyNotificationItem GainAuthority => Instance[(short)181];
 
-		/// <summary>
-		/// FemaleJoustForSpouseReady
-		/// </summary>
 		public static MonthlyNotificationItem FemaleJoustForSpouseReady => Instance[(short)182];
 
-		/// <summary>
-		/// StartSectNormalCompetition
-		/// </summary>
 		public static MonthlyNotificationItem StartSectNormalCompetition => Instance[(short)183];
 
-		/// <summary>
-		/// EscapeWithForeverLover
-		/// </summary>
 		public static MonthlyNotificationItem EscapeWithForeverLover => Instance[(short)184];
 
-		/// <summary>
-		/// DisasterAndPreciousMaterial
-		/// </summary>
 		public static MonthlyNotificationItem DisasterAndPreciousMaterial => Instance[(short)185];
 
-		/// <summary>
-		/// HeroesDefendMorality
-		/// </summary>
 		public static MonthlyNotificationItem HeroesDefendMorality => Instance[(short)186];
 
-		/// <summary>
-		/// IncomeFromNestViciousBeggars
-		/// </summary>
 		public static MonthlyNotificationItem IncomeFromNestViciousBeggars => Instance[(short)187];
 
-		/// <summary>
-		/// IncomeFromNestThievesCamp
-		/// </summary>
 		public static MonthlyNotificationItem IncomeFromNestThievesCamp => Instance[(short)188];
 
-		/// <summary>
-		/// IncomeFromNestBanditsStronghold
-		/// </summary>
 		public static MonthlyNotificationItem IncomeFromNestBanditsStronghold => Instance[(short)189];
 
-		/// <summary>
-		/// IncomeFromNestVillainsValley
-		/// </summary>
 		public static MonthlyNotificationItem IncomeFromNestVillainsValley => Instance[(short)190];
 
-		/// <summary>
-		/// IncomeFromNestRighteousLow
-		/// </summary>
 		public static MonthlyNotificationItem IncomeFromNestRighteousLow => Instance[(short)191];
 
-		/// <summary>
-		/// IncomeFromNestRighteousMiddle
-		/// </summary>
 		public static MonthlyNotificationItem IncomeFromNestRighteousMiddle => Instance[(short)192];
 
-		/// <summary>
-		/// BuildingWorkerDie
-		/// </summary>
 		public static MonthlyNotificationItem BuildingWorkerDie => Instance[(short)193];
 
-		/// <summary>
-		/// StoneHouseInfectedKidnapped
-		/// </summary>
 		public static MonthlyNotificationItem StoneHouseInfectedKidnapped => Instance[(short)194];
 
-		/// <summary>
-		/// WesternMerchanLost
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanLost => Instance[(short)195];
 
-		/// <summary>
-		/// WesternMerchanFindMirage
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindMirage => Instance[(short)196];
 
-		/// <summary>
-		/// WesternMerchanFindBigfoot
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindBigfoot => Instance[(short)197];
 
-		/// <summary>
-		/// WesternMerchanFindPlant
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindPlant => Instance[(short)198];
 
-		/// <summary>
-		/// WesternMerchanFindAnimal
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindAnimal => Instance[(short)199];
 
-		/// <summary>
-		/// WesternMerchanGetInformation
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanGetInformation => Instance[(short)200];
 
-		/// <summary>
-		/// WesternMerchanFindSettlement
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindSettlement => Instance[(short)201];
 
-		/// <summary>
-		/// WesternMerchanFindWeather
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindWeather => Instance[(short)202];
 
-		/// <summary>
-		/// WesternMerchanFindWreckage
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindWreckage => Instance[(short)203];
 
-		/// <summary>
-		/// WesternMerchanHelpPasserby
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanHelpPasserby => Instance[(short)204];
 
-		/// <summary>
-		/// WesternMerchanGetHelp
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanGetHelp => Instance[(short)205];
 
-		/// <summary>
-		/// WesternMerchanFindVenison
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindVenison => Instance[(short)206];
 
-		/// <summary>
-		/// WesternMerchanFindFruit
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindFruit => Instance[(short)207];
 
-		/// <summary>
-		/// WesternMerchanFindVillage
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanFindVillage => Instance[(short)208];
 
-		/// <summary>
-		/// WesternMerchanMeetMerchan
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanMeetMerchan => Instance[(short)209];
 
-		/// <summary>
-		/// WesternMerchanMeetTheif
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanMeetTheif => Instance[(short)210];
 
-		/// <summary>
-		/// WesternMerchanGoodsDamage
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanGoodsDamage => Instance[(short)211];
 
-		/// <summary>
-		/// WesternMerchanUnacclimatized
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanUnacclimatized => Instance[(short)212];
 
-		/// <summary>
-		/// WesternMerchanLackReplenishment
-		/// </summary>
 		public static MonthlyNotificationItem WesternMerchanLackReplenishment => Instance[(short)213];
 
-		/// <summary>
-		/// AboutToDie
-		/// </summary>
 		public static MonthlyNotificationItem AboutToDie => Instance[(short)214];
 
-		/// <summary>
-		/// EnemyNestDemise
-		/// </summary>
 		public static MonthlyNotificationItem EnemyNestDemise => Instance[(short)215];
 
-		/// <summary>
-		/// SecretInformationBroadcast
-		/// </summary>
 		public static MonthlyNotificationItem SecretInformationBroadcast => Instance[(short)216];
 
-		/// <summary>
-		/// ReadingEvent
-		/// </summary>
 		public static MonthlyNotificationItem ReadingEvent => Instance[(short)217];
 
-		/// <summary>
-		/// EnemyNestGrow
-		/// </summary>
 		public static MonthlyNotificationItem EnemyNestGrow => Instance[(short)218];
 
-		/// <summary>
-		/// RandomEnemyGrow
-		/// </summary>
 		public static MonthlyNotificationItem RandomEnemyGrow => Instance[(short)219];
 
-		/// <summary>
-		/// RandomEnemyDecay
-		/// </summary>
 		public static MonthlyNotificationItem RandomEnemyDecay => Instance[(short)220];
 
-		/// <summary>
-		/// XiangshuGetStrengthened
-		/// </summary>
 		public static MonthlyNotificationItem XiangshuGetStrengthened => Instance[(short)221];
 
-		/// <summary>
-		/// LegendaryBookShocked
-		/// </summary>
 		public static MonthlyNotificationItem LegendaryBookShocked => Instance[(short)222];
 
-		/// <summary>
-		/// LegendaryBookInsane
-		/// </summary>
 		public static MonthlyNotificationItem LegendaryBookInsane => Instance[(short)223];
 
-		/// <summary>
-		/// LegendaryBookConsumed
-		/// </summary>
 		public static MonthlyNotificationItem LegendaryBookConsumed => Instance[(short)224];
 
-		/// <summary>
-		/// LegendaryBookLost
-		/// </summary>
 		public static MonthlyNotificationItem LegendaryBookLost => Instance[(short)225];
 
-		/// <summary>
-		/// FightForNewLegendaryBook
-		/// </summary>
 		public static MonthlyNotificationItem FightForNewLegendaryBook => Instance[(short)226];
 
-		/// <summary>
-		/// FightForLegendaryBookAbandoned
-		/// </summary>
 		public static MonthlyNotificationItem FightForLegendaryBookAbandoned => Instance[(short)227];
 
-		/// <summary>
-		/// FightForLegendaryBookOwnerDie
-		/// </summary>
 		public static MonthlyNotificationItem FightForLegendaryBookOwnerDie => Instance[(short)228];
 
-		/// <summary>
-		/// FightForLegendaryBookOwnerConsumed
-		/// </summary>
 		public static MonthlyNotificationItem FightForLegendaryBookOwnerConsumed => Instance[(short)229];
 
-		/// <summary>
-		/// LegendaryBookAppear
-		/// </summary>
 		public static MonthlyNotificationItem LegendaryBookAppear => Instance[(short)230];
 
-		/// <summary>
-		/// ChallengeForLegendaryBook
-		/// </summary>
 		public static MonthlyNotificationItem ChallengeForLegendaryBook => Instance[(short)231];
 
-		/// <summary>
-		/// RobLegendaryBook
-		/// </summary>
 		public static MonthlyNotificationItem RobLegendaryBook => Instance[(short)232];
 
-		/// <summary>
-		/// VillagerLeftForLegendaryBook
-		/// </summary>
 		public static MonthlyNotificationItem VillagerLeftForLegendaryBook => Instance[(short)233];
 
-		/// <summary>
-		/// HappyBirthday
-		/// </summary>
 		public static MonthlyNotificationItem HappyBirthday => Instance[(short)234];
 
-		/// <summary>
-		/// PoisonMakeLoss
-		/// </summary>
 		public static MonthlyNotificationItem PoisonMakeLoss => Instance[(short)235];
 
-		/// <summary>
-		/// RottenPoisonDiffuse
-		/// </summary>
 		public static MonthlyNotificationItem RottenPoisonDiffuse => Instance[(short)236];
 
-		/// <summary>
-		/// PoisonDestroyFace
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDestroyFace => Instance[(short)237];
 
-		/// <summary>
-		/// IllusoryPoisonDiffuse
-		/// </summary>
 		public static MonthlyNotificationItem IllusoryPoisonDiffuse => Instance[(short)238];
 
-		/// <summary>
-		/// PoisonDisturbMindAttckSuccess
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindAttckSuccess => Instance[(short)239];
 
-		/// <summary>
-		/// PoisonDisturbMindEmpoisonSuccess
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindEmpoisonSuccess => Instance[(short)240];
 
-		/// <summary>
-		/// PoisonDisturbMindSneakAttckSuccess
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindSneakAttckSuccess => Instance[(short)241];
 
-		/// <summary>
-		/// PoisonDisturbMindRapeSuccess
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindRapeSuccess => Instance[(short)242];
 
-		/// <summary>
-		/// PoisonDisturbMindAttckFalse
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindAttckFalse => Instance[(short)243];
 
-		/// <summary>
-		/// PoisonDisturbMindEmpoisonFalse
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindEmpoisonFalse => Instance[(short)244];
 
-		/// <summary>
-		/// PoisonDisturbMindSneakAttckFalse
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindSneakAttckFalse => Instance[(short)245];
 
-		/// <summary>
-		/// PoisonDisturbMindRapeFalse
-		/// </summary>
 		public static MonthlyNotificationItem PoisonDisturbMindRapeFalse => Instance[(short)246];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiKillsPeople
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiKillsPeople => Instance[(short)247];
 
-		/// <summary>
-		/// SectMainStoryYuanshanAbsorbInfectedPeople
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryYuanshanAbsorbInfectedPeople => Instance[(short)248];
 
-		/// <summary>
-		/// SectMainStoryShixiangAdventure
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryShixiangAdventure => Instance[(short)249];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiGone
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiGone => Instance[(short)250];
 
-		/// <summary>
-		/// WulinConferenceWinner
-		/// </summary>
 		public static MonthlyNotificationItem WulinConferenceWinner => Instance[(short)251];
 
-		/// <summary>
-		/// SectMainStoryEmeiInfighting
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiInfighting => Instance[(short)252];
 
-		/// <summary>
-		/// SectMainStoryWhiteGibbonReturns
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryWhiteGibbonReturns => Instance[(short)253];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiGoneAgain
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiGoneAgain => Instance[(short)254];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiRescue
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiRescue => Instance[(short)255];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiGoneFinal
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiGoneFinal => Instance[(short)256];
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselCures
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryKongsangTripodVesselCures => Instance[(short)257];
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselDetoxifies
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryKongsangTripodVesselDetoxifies => Instance[(short)258];
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselRemovesQiDisorder
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryKongsangTripodVesselRemovesQiDisorder => Instance[(short)259];
 
-		/// <summary>
-		/// SectMainStoryKongsangTripodVesselRestoresHealth
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryKongsangTripodVesselRestoresHealth => Instance[(short)260];
 
-		/// <summary>
-		/// ReincarnationNewWithLocation
-		/// </summary>
 		public static MonthlyNotificationItem ReincarnationNewWithLocation => Instance[(short)261];
 
-		/// <summary>
-		/// SectMainStoryWudangVillagersInjured
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryWudangVillagersInjured => Instance[(short)262];
 
-		/// <summary>
-		/// SectMainStoryWudangVillagerCasualty
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryWudangVillagerCasualty => Instance[(short)263];
 
-		/// <summary>
-		/// KillHereticRandomEnemy
-		/// </summary>
 		public static MonthlyNotificationItem KillHereticRandomEnemy => Instance[(short)264];
 
-		/// <summary>
-		/// DefeatedByHereticRandomEnemy
-		/// </summary>
 		public static MonthlyNotificationItem DefeatedByHereticRandomEnemy => Instance[(short)265];
 
-		/// <summary>
-		/// KillRighteousRandomEnemy
-		/// </summary>
 		public static MonthlyNotificationItem KillRighteousRandomEnemy => Instance[(short)266];
 
-		/// <summary>
-		/// DefeatedByRighteousRandomEnemy
-		/// </summary>
 		public static MonthlyNotificationItem DefeatedByRighteousRandomEnemy => Instance[(short)267];
 
-		/// <summary>
-		/// KillAnimal
-		/// </summary>
 		public static MonthlyNotificationItem KillAnimal => Instance[(short)268];
 
-		/// <summary>
-		/// DefeatedByAnimal
-		/// </summary>
 		public static MonthlyNotificationItem DefeatedByAnimal => Instance[(short)269];
 
-		/// <summary>
-		/// DieFromEnemyNest
-		/// </summary>
 		public static MonthlyNotificationItem DieFromEnemyNest => Instance[(short)270];
 
-		/// <summary>
-		/// Dummy0
-		/// </summary>
 		public static MonthlyNotificationItem Dummy0 => Instance[(short)271];
 
-		/// <summary>
-		/// Dummy1
-		/// </summary>
 		public static MonthlyNotificationItem Dummy1 => Instance[(short)272];
 
-		/// <summary>
-		/// Dummy2
-		/// </summary>
 		public static MonthlyNotificationItem Dummy2 => Instance[(short)273];
 
-		/// <summary>
-		/// MiscarriageAndReincarnation
-		/// </summary>
 		public static MonthlyNotificationItem MiscarriageAndReincarnation => Instance[(short)274];
 
-		/// <summary>
-		/// MiscarriageAndReincarnationMotherDies
-		/// </summary>
 		public static MonthlyNotificationItem MiscarriageAndReincarnationMotherDies => Instance[(short)275];
 
-		/// <summary>
-		/// MiscarriageAndReincarnationMotherKilled
-		/// </summary>
 		public static MonthlyNotificationItem MiscarriageAndReincarnationMotherKilled => Instance[(short)276];
 
-		/// <summary>
-		/// SectMainStoryEmeiShiReturns
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiShiReturns => Instance[(short)277];
 
-		/// <summary>
-		/// SectMainStoryEmeiDoomOfEmei
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiDoomOfEmei => Instance[(short)278];
 
-		/// <summary>
-		/// EscapeFromEnemyNest
-		/// </summary>
 		public static MonthlyNotificationItem EscapeFromEnemyNest => Instance[(short)279];
 
-		/// <summary>
-		/// SavedFromEnemyNest
-		/// </summary>
 		public static MonthlyNotificationItem SavedFromEnemyNest => Instance[(short)280];
 
-		/// <summary>
-		/// CultureDecline
-		/// </summary>
 		public static MonthlyNotificationItem CultureDecline => Instance[(short)281];
 
-		/// <summary>
-		/// FiveLoongArise
-		/// </summary>
 		public static MonthlyNotificationItem FiveLoongArise => Instance[(short)282];
 
-		/// <summary>
-		/// JiaoPoolAccident
-		/// </summary>
 		public static MonthlyNotificationItem JiaoPoolAccident => Instance[(short)283];
 
-		/// <summary>
-		/// JiaoGoHome
-		/// </summary>
 		public static MonthlyNotificationItem JiaoGoHome => Instance[(short)284];
 
-		/// <summary>
-		/// JiaoBrokeThroughTheShell
-		/// </summary>
 		public static MonthlyNotificationItem JiaoBrokeThroughTheShell => Instance[(short)285];
 
-		/// <summary>
-		/// JiaoHasReachedAnAdultAge
-		/// </summary>
 		public static MonthlyNotificationItem JiaoHasReachedAnAdultAge => Instance[(short)286];
 
-		/// <summary>
-		/// DLCLoongRidingEffectQiuniu
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectQiuniu => Instance[(short)287];
 
-		/// <summary>
-		/// DLCLoongRidingEffectYazi
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectYazi => Instance[(short)288];
 
-		/// <summary>
-		/// DLCLoongRidingEffectChaofeng
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectChaofeng => Instance[(short)289];
 
-		/// <summary>
-		/// DLCLoongRidingEffectPulao
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectPulao => Instance[(short)290];
 
-		/// <summary>
-		/// DLCLoongRidingEffectSuanni
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectSuanni => Instance[(short)291];
 
-		/// <summary>
-		/// DLCLoongRidingEffectBaxia
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectBaxia => Instance[(short)292];
 
-		/// <summary>
-		/// DLCLoongRidingEffectBian
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectBian => Instance[(short)293];
 
-		/// <summary>
-		/// DLCLoongRidingEffectFuxi
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectFuxi => Instance[(short)294];
 
-		/// <summary>
-		/// DLCLoongRidingEffectChiwen
-		/// </summary>
 		public static MonthlyNotificationItem DLCLoongRidingEffectChiwen => Instance[(short)295];
 
-		/// <summary>
-		/// JiaoLayEggs
-		/// </summary>
 		public static MonthlyNotificationItem JiaoLayEggs => Instance[(short)296];
 
-		/// <summary>
-		/// JiaoTamingPointsLow
-		/// </summary>
 		public static MonthlyNotificationItem JiaoTamingPointsLow => Instance[(short)297];
 
-		/// <summary>
-		/// DieFromAge
-		/// </summary>
 		public static MonthlyNotificationItem DieFromAge => Instance[(short)298];
 
-		/// <summary>
-		/// DieFromPoorHealth
-		/// </summary>
 		public static MonthlyNotificationItem DieFromPoorHealth => Instance[(short)299];
 
-		/// <summary>
-		/// KilledInPubilc
-		/// </summary>
 		public static MonthlyNotificationItem KilledInPubilc => Instance[(short)300];
 
-		/// <summary>
-		/// SectMainStoryJingangHaunted
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangHaunted => Instance[(short)301];
 
-		/// <summary>
-		/// SectMainStoryJingangFollowedByGhost
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangFollowedByGhost => Instance[(short)302];
 
-		/// <summary>
-		/// SectMainStoryJingangWrongdoing
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangWrongdoing => Instance[(short)303];
 
-		/// <summary>
-		/// SectMainStoryJingangPray
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangPray => Instance[(short)304];
 
-		/// <summary>
-		/// SectMainStoryJingangFameDistribution
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangFameDistribution => Instance[(short)305];
 
-		/// <summary>
-		/// WugKingParasitiferDead
-		/// </summary>
 		public static MonthlyNotificationItem WugKingParasitiferDead => Instance[(short)306];
 
-		/// <summary>
-		/// WugKingDead
-		/// </summary>
 		public static MonthlyNotificationItem WugKingDead => Instance[(short)307];
 
-		/// <summary>
-		/// WugKingDeadSpecial
-		/// </summary>
 		public static MonthlyNotificationItem WugKingDeadSpecial => Instance[(short)308];
 
-		/// <summary>
-		/// SectMainStoryJingangFamousFakeMonk
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangFamousFakeMonk => Instance[(short)309];
 
-		/// <summary>
-		/// SectMainStoryJingangRockFleshed
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangRockFleshed => Instance[(short)310];
 
-		/// <summary>
-		/// SectMainStoryWuxianParanoiaAppeared
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryWuxianParanoiaAppeared => Instance[(short)311];
 
-		/// <summary>
-		/// SectMainStoryJingangVillagerFlee
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJingangVillagerFlee => Instance[(short)312];
 
-		/// <summary>
-		/// SectMainStoryRanshanSanZongBiWu
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryRanshanSanZongBiWu => Instance[(short)313];
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessHuaJu
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookSuccessHuaJu => Instance[(short)314];
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessXuanZhi
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookSuccessXuanZhi => Instance[(short)315];
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessYingJiao
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookSuccessYingJiao => Instance[(short)316];
 
-		/// <summary>
-		/// GiveUpLegendaryBookFailureHuaJu
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookFailureHuaJu => Instance[(short)317];
 
-		/// <summary>
-		/// GiveUpLegendaryBookFailureXuanZhi
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookFailureXuanZhi => Instance[(short)318];
 
-		/// <summary>
-		/// GiveUpLegendaryBookFailureYingJiao
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookFailureYingJiao => Instance[(short)319];
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseBookHuaJu
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookLoseBookHuaJu => Instance[(short)320];
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseBookXuanZhi
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookLoseBookXuanZhi => Instance[(short)321];
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseBookYingJiao
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookLoseBookYingJiao => Instance[(short)322];
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseTargetHuaJu
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookLoseTargetHuaJu => Instance[(short)323];
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseTargetXuanZhi
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookLoseTargetXuanZhi => Instance[(short)324];
 
-		/// <summary>
-		/// GiveUpLegendaryBookLoseTargetYingJiao
-		/// </summary>
 		public static MonthlyNotificationItem GiveUpLegendaryBookLoseTargetYingJiao => Instance[(short)325];
 
-		/// <summary>
-		/// LifeLinkHealing
-		/// </summary>
 		public static MonthlyNotificationItem LifeLinkHealing => Instance[(short)326];
 
-		/// <summary>
-		/// LifeLinkDamage
-		/// </summary>
 		public static MonthlyNotificationItem LifeLinkDamage => Instance[(short)327];
 
-		/// <summary>
-		/// SectMainStoryBaIhuaLeukoKills
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryBaihuaLeukoKills => Instance[(short)328];
 
-		/// <summary>
-		/// SectMainStoryBaIhuaMelanoKills
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryBaihuaMelanoKills => Instance[(short)329];
 
-		/// <summary>
-		/// SectMainStoryBaIhuaLeukoHelps
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryBaihuaLeukoHelps => Instance[(short)330];
 
-		/// <summary>
-		/// SectMainStoryBaIhuaMelanoHelps
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryBaihuaMelanoHelps => Instance[(short)331];
 
-		/// <summary>
-		/// SectMainStoryBaIhuaManicLow
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryBaihuaManicLow => Instance[(short)332];
 
-		/// <summary>
-		/// SectMainStoryBaIhuaManicHigh
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryBaihuaManicHigh => Instance[(short)333];
 
-		/// <summary>
-		/// LoopingEvent
-		/// </summary>
 		public static MonthlyNotificationItem LoopingEvent => Instance[(short)334];
 
-		/// <summary>
-		/// FiveElementsChange
-		/// </summary>
 		public static MonthlyNotificationItem FiveElementsChange => Instance[(short)335];
 
-		/// <summary>
-		/// ResourcesCollectionCompleted
-		/// </summary>
 		public static MonthlyNotificationItem ResourcesCollectionCompleted => Instance[(short)336];
 
-		/// <summary>
-		/// SectMainStoryFulongSacrifice
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongSacrifice => Instance[(short)337];
 
-		/// <summary>
-		/// SectMainStoryFulongFeatherDrop
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongFeatherDrop => Instance[(short)338];
 
-		/// <summary>
-		/// MarketComing
-		/// </summary>
 		public static MonthlyNotificationItem MarketComing => Instance[(short)339];
 
-		/// <summary>
-		/// TownCombatComing
-		/// </summary>
 		public static MonthlyNotificationItem TownCombatComing => Instance[(short)340];
 
-		/// <summary>
-		/// CricketContestComing
-		/// </summary>
 		public static MonthlyNotificationItem CricketContestComing => Instance[(short)341];
 
-		/// <summary>
-		/// LifeCompetitionComing
-		/// </summary>
 		public static MonthlyNotificationItem LifeCompetitionComing => Instance[(short)342];
 
-		/// <summary>
-		/// SectNormalCompetitionComing
-		/// </summary>
 		public static MonthlyNotificationItem SectNormalCompetitionComing => Instance[(short)343];
 
-		/// <summary>
-		/// JoustForSpouseComing
-		/// </summary>
 		public static MonthlyNotificationItem JoustForSpouseComing => Instance[(short)344];
 
-		/// <summary>
-		/// DyingNotice
-		/// </summary>
 		public static MonthlyNotificationItem DyingNotice => Instance[(short)345];
 
-		/// <summary>
-		/// InjuredNotice
-		/// </summary>
 		public static MonthlyNotificationItem InjuredNotice => Instance[(short)346];
 
-		/// <summary>
-		/// TrappedNotice
-		/// </summary>
 		public static MonthlyNotificationItem TrappedNotice => Instance[(short)347];
 
-		/// <summary>
-		/// SectMainStoryFulongFightSucceed
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongFightSucceed => Instance[(short)348];
 
-		/// <summary>
-		/// SectMainStoryFulongFightFail
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongFightFail => Instance[(short)349];
 
-		/// <summary>
-		/// SectMainStoryFulongFamilyFightFail
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongFamilyFightFail => Instance[(short)350];
 
-		/// <summary>
-		/// SectMainStoryFulongRobbery
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongRobbery => Instance[(short)351];
 
-		/// <summary>
-		/// SectMainStoryFulongFamilyRobbery
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongFamilyRobbery => Instance[(short)352];
 
-		/// <summary>
-		/// DeliverInPrison0
-		/// </summary>
 		public static MonthlyNotificationItem DeliverInPrison0 => Instance[(short)353];
 
-		/// <summary>
-		/// DeliverInPrison1
-		/// </summary>
 		public static MonthlyNotificationItem DeliverInPrison1 => Instance[(short)354];
 
-		/// <summary>
-		/// DieInPrison
-		/// </summary>
 		public static MonthlyNotificationItem DieInPrison => Instance[(short)355];
 
-		/// <summary>
-		/// AssassinatedInPrison
-		/// </summary>
 		public static MonthlyNotificationItem AssassinatedInPrison => Instance[(short)356];
 
-		/// <summary>
-		/// AssassinatedDueToKillerTokenInPrison
-		/// </summary>
 		public static MonthlyNotificationItem AssassinatedDueToKillerTokenInPrison => Instance[(short)357];
 
-		/// <summary>
-		/// ImprisonAndAbandonBaby0
-		/// </summary>
 		public static MonthlyNotificationItem ImprisonAndAbandonBaby0 => Instance[(short)358];
 
-		/// <summary>
-		/// ImprisonAndAbandonBaby1
-		/// </summary>
 		public static MonthlyNotificationItem ImprisonAndAbandonBaby1 => Instance[(short)359];
 
-		/// <summary>
-		/// ResourceMigration
-		/// </summary>
 		public static MonthlyNotificationItem ResourceMigration => Instance[(short)360];
 
-		/// <summary>
-		/// ChickenSecretInformation
-		/// </summary>
 		public static MonthlyNotificationItem ChickenSecretInformation => Instance[(short)361];
 
-		/// <summary>
-		/// XiangshuNormalInformation
-		/// </summary>
 		public static MonthlyNotificationItem XiangshuNormalInformation => Instance[(short)362];
 
-		/// <summary>
-		/// SectMainStoryFulongFireVanishes
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongFireVanishes => Instance[(short)363];
 
-		/// <summary>
-		/// SectMainStoryFulongLooting
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryFulongLooting => Instance[(short)364];
 
-		/// <summary>
-		/// SectMainStoryWudangTreesGrow
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryWudangTreesGrow => Instance[(short)365];
 
-		/// <summary>
-		/// SectMainStoryZhujianSwordTestCeremony
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryZhujianSwordTestCeremony => Instance[(short)366];
 
-		/// <summary>
-		/// InvestedCaravanMove
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanMove => Instance[(short)367];
 
-		/// <summary>
-		/// InvestedCaravanPassSettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassSettlement => Instance[(short)368];
 
-		/// <summary>
-		/// InvestedCaravanPassLowCultureSettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassLowCultureSettlement => Instance[(short)369];
 
-		/// <summary>
-		/// InvestedCaravanPassHighCultureSettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassHighCultureSettlement => Instance[(short)370];
 
-		/// <summary>
-		/// InvestedCaravanPassLowSafetySettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassLowSafetySettlement => Instance[(short)371];
 
-		/// <summary>
-		/// InvestedCaravanPassHighSafetySettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassHighSafetySettlement => Instance[(short)372];
 
-		/// <summary>
-		/// InvestedCaravanPassLowSafetyLowCultureSettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassLowSafetyLowCultureSettlement => Instance[(short)373];
 
-		/// <summary>
-		/// InvestedCaravanPassLowSafetyHighCultureSettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassLowSafetyHighCultureSettlement => Instance[(short)374];
 
-		/// <summary>
-		/// InvestedCaravanPassHighSafetyLowCultureSettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassHighSafetyLowCultureSettlement => Instance[(short)375];
 
-		/// <summary>
-		/// InvestedCaravanPassHighSafetyHighCultureSettlement
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanPassHighSafetyHighCultureSettlement => Instance[(short)376];
 
-		/// <summary>
-		/// InvestedCaravanArrive
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanArrive => Instance[(short)377];
 
-		/// <summary>
-		/// InvestedCaravanIsRobbed
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanIsRobbed => Instance[(short)378];
 
-		/// <summary>
-		/// InvestedCaravanIsRobbedAndFailed
-		/// </summary>
 		public static MonthlyNotificationItem InvestedCaravanIsRobbedAndFailed => Instance[(short)379];
 
-		/// <summary>
-		/// BuildingUpgradingHolded
-		/// </summary>
 		public static MonthlyNotificationItem BuildingUpgradingHolded => Instance[(short)380];
 
-		/// <summary>
-		/// PunishmentLost0
-		/// </summary>
 		public static MonthlyNotificationItem PunishmentLost0 => Instance[(short)381];
 
-		/// <summary>
-		/// PunishmentLost1
-		/// </summary>
 		public static MonthlyNotificationItem PunishmentLost1 => Instance[(short)382];
 
-		/// <summary>
-		/// OutsiderMakeHarvest
-		/// </summary>
 		public static MonthlyNotificationItem OutsiderMakeHarvest => Instance[(short)383];
 
-		/// <summary>
-		/// TaiwuVillageCraftObjectsFinished
-		/// </summary>
 		public static MonthlyNotificationItem TaiwuVillageCraftObjectsFinished => Instance[(short)384];
 
-		/// <summary>
-		/// OutsiderMakeHarvest1
-		/// </summary>
 		public static MonthlyNotificationItem OutsiderMakeHarvest1 => Instance[(short)385];
 
-		/// <summary>
-		/// TaiwuVillagerDied
-		/// </summary>
 		public static MonthlyNotificationItem TaiwuVillagerDied => Instance[(short)386];
 
-		/// <summary>
-		/// SectMainStoryRemakeEmeiHomocideCase
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryRemakeEmeiHomocideCase => Instance[(short)387];
 
-		/// <summary>
-		/// SectMainStoryRemakeEmeiRumor
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryRemakeEmeiRumor => Instance[(short)388];
 
-		/// <summary>
-		/// DieNotice
-		/// </summary>
 		public static MonthlyNotificationItem DieNotice => Instance[(short)389];
 
-		/// <summary>
-		/// WantedNotice
-		/// </summary>
 		public static MonthlyNotificationItem WantedNotice => Instance[(short)390];
 
-		/// <summary>
-		/// SectMainStoryYuanshanJuemo
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryYuanshanJuemo => Instance[(short)391];
 
-		/// <summary>
-		/// CoreMaterialIncome
-		/// </summary>
 		public static MonthlyNotificationItem CoreMaterialIncome => Instance[(short)392];
 
-		/// <summary>
-		/// FamilyGetInfected
-		/// </summary>
 		public static MonthlyNotificationItem FamilyGetInfected => Instance[(short)393];
 
-		/// <summary>
-		/// FamilyDieByInfected
-		/// </summary>
 		public static MonthlyNotificationItem FamilyDieByInfected => Instance[(short)394];
 
-		/// <summary>
-		/// FocusedGetInfected
-		/// </summary>
 		public static MonthlyNotificationItem FocusedGetInfected => Instance[(short)395];
 
-		/// <summary>
-		/// FocusedDieByInfected
-		/// </summary>
 		public static MonthlyNotificationItem FocusedDieByInfected => Instance[(short)396];
 
-		/// <summary>
-		/// NormalVillagersInjured
-		/// </summary>
 		public static MonthlyNotificationItem NormalVillagersInjured => Instance[(short)397];
 
-		/// <summary>
-		/// NormalVillagerCasualty
-		/// </summary>
 		public static MonthlyNotificationItem NormalVillagerCasualty => Instance[(short)398];
 
-		/// <summary>
-		/// NormalTreesGrow
-		/// </summary>
 		public static MonthlyNotificationItem NormalTreesGrow => Instance[(short)399];
 
-		/// <summary>
-		/// VillagerCraftFinished0
-		/// </summary>
 		public static MonthlyNotificationItem VillagerCraftFinished0 => Instance[(short)400];
 
-		/// <summary>
-		/// VillagerCraftFinished1
-		/// </summary>
 		public static MonthlyNotificationItem VillagerCraftFinished1 => Instance[(short)401];
 
-		/// <summary>
-		/// VillagerCraftFinished2
-		/// </summary>
 		public static MonthlyNotificationItem VillagerCraftFinished2 => Instance[(short)402];
 
-		/// <summary>
-		/// VillagerCraftFinished3
-		/// </summary>
 		public static MonthlyNotificationItem VillagerCraftFinished3 => Instance[(short)403];
 
-		/// <summary>
-		/// NpcCraftFinished0
-		/// </summary>
 		public static MonthlyNotificationItem NpcCraftFinished0 => Instance[(short)404];
 
-		/// <summary>
-		/// NpcCraftFinished1
-		/// </summary>
 		public static MonthlyNotificationItem NpcCraftFinished1 => Instance[(short)405];
 
-		/// <summary>
-		/// NpcCraftFinished2
-		/// </summary>
 		public static MonthlyNotificationItem NpcCraftFinished2 => Instance[(short)406];
 
-		/// <summary>
-		/// NpcCraftFinished3
-		/// </summary>
 		public static MonthlyNotificationItem NpcCraftFinished3 => Instance[(short)407];
 
-		/// <summary>
-		/// NpcLongDistanceMarriage0
-		/// </summary>
 		public static MonthlyNotificationItem NpcLongDistanceMarriage0 => Instance[(short)408];
 
-		/// <summary>
-		/// NpcLongDistanceMarriage1
-		/// </summary>
 		public static MonthlyNotificationItem NpcLongDistanceMarriage1 => Instance[(short)409];
 
-		/// <summary>
-		/// NpcLongDistanceMarriage2
-		/// </summary>
 		public static MonthlyNotificationItem NpcLongDistanceMarriage2 => Instance[(short)410];
 
-		/// <summary>
-		/// WithoutFood
-		/// </summary>
 		public static MonthlyNotificationItem WithoutFood => Instance[(short)411];
 
-		/// <summary>
-		/// Escape0
-		/// </summary>
 		public static MonthlyNotificationItem Escape0 => Instance[(short)412];
 
-		/// <summary>
-		/// Escape1
-		/// </summary>
 		public static MonthlyNotificationItem Escape1 => Instance[(short)413];
 
-		/// <summary>
-		/// EscapeFailed
-		/// </summary>
 		public static MonthlyNotificationItem EscapeFailed => Instance[(short)438];
 
-		/// <summary>
-		/// FirstGetInfected0
-		/// </summary>
 		public static MonthlyNotificationItem FirstGetInfected0 => Instance[(short)414];
 
-		/// <summary>
-		/// FirstGetInfected1
-		/// </summary>
 		public static MonthlyNotificationItem FirstGetInfected1 => Instance[(short)415];
 
-		/// <summary>
-		/// YuanshanSpiritCrisis
-		/// </summary>
 		public static MonthlyNotificationItem YuanshanSpiritCrisis => Instance[(short)416];
 
-		/// <summary>
-		/// YuanshanDemonCrisis
-		/// </summary>
 		public static MonthlyNotificationItem YuanshanDemonCrisis => Instance[(short)417];
 
-		/// <summary>
-		/// PlotPoisonedEnemyEscaped
-		/// </summary>
 		public static MonthlyNotificationItem PlotPoisonedEnemyEscaped => Instance[(short)418];
 
-		/// <summary>
-		/// PlotHarmEnemyEscaped
-		/// </summary>
 		public static MonthlyNotificationItem PlotHarmEnemyEscaped => Instance[(short)419];
 
-		/// <summary>
-		/// GoingToAppointment
-		/// </summary>
 		public static MonthlyNotificationItem GoingToAppointment => Instance[(short)420];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainPeople
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiDrainPeople => Instance[(short)421];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainFail
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiDrainFail => Instance[(short)422];
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransferFiveElements
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouTaiwuTransferFiveElements => Instance[(short)423];
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransferFiveElementsFail
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouTaiwuTransferFiveElementsFail => Instance[(short)424];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeili
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiDrainNeili => Instance[(short)425];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiDrainNeiliFail => Instance[(short)426];
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransFiveElements
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouTaiwuTransFiveElements => Instance[(short)427];
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransFiveElementsFail
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouTaiwuTransFiveElementsFail => Instance[(short)428];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail1
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiDrainNeiliFail1 => Instance[(short)429];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail2
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiDrainNeiliFail2 => Instance[(short)430];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeiliFail3
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryXuehouJixiDrainNeiliFail3 => Instance[(short)431];
 
-		/// <summary>
-		/// ChallengeModeAdvanceMonthWorsenInjuryOuter
-		/// </summary>
 		public static MonthlyNotificationItem ChallengeModeAdvanceMonthWorsenInjuryOuter => Instance[(short)432];
 
-		/// <summary>
-		/// ChallengeModeAdvanceMonthWorsenInjuryInner
-		/// </summary>
 		public static MonthlyNotificationItem ChallengeModeAdvanceMonthWorsenInjuryInner => Instance[(short)433];
 
-		/// <summary>
-		/// ChallengeModeAdvanceMonthWorsenPoison
-		/// </summary>
 		public static MonthlyNotificationItem ChallengeModeAdvanceMonthWorsenPoison => Instance[(short)434];
 
-		/// <summary>
-		/// ChickenFullyFledged
-		/// </summary>
 		public static MonthlyNotificationItem ChickenFullyFledged => Instance[(short)435];
 
-		/// <summary>
-		/// CostResourceNotEnough
-		/// </summary>
 		public static MonthlyNotificationItem CostResourceNotEnough => Instance[(short)436];
 
-		/// <summary>
-		/// CostResourceNotEnoughResult
-		/// </summary>
 		public static MonthlyNotificationItem CostResourceNotEnoughResult => Instance[(short)437];
 
-		/// <summary>
-		/// CricketGrowUp
-		/// </summary>
 		public static MonthlyNotificationItem CricketGrowUp => Instance[(short)439];
 
-		/// <summary>
-		/// KillRighteousRandomEnemyVillager
-		/// </summary>
 		public static MonthlyNotificationItem KillRighteousRandomEnemyVillager => Instance[(short)440];
 
-		/// <summary>
-		/// DefeatedByRighteousRandomEnemyVillager
-		/// </summary>
 		public static MonthlyNotificationItem DefeatedByRighteousRandomEnemyVillager => Instance[(short)441];
 
-		/// <summary>
-		/// KillHereticRandomEnemyVillager
-		/// </summary>
 		public static MonthlyNotificationItem KillHereticRandomEnemyVillager => Instance[(short)442];
 
-		/// <summary>
-		/// DefeatedByHereticRandomEnemyVillager
-		/// </summary>
 		public static MonthlyNotificationItem DefeatedByHereticRandomEnemyVillager => Instance[(short)443];
 
-		/// <summary>
-		/// KillAnimalVillager
-		/// </summary>
 		public static MonthlyNotificationItem KillAnimalVillager => Instance[(short)444];
 
-		/// <summary>
-		/// DefeatedByAnimalVillager
-		/// </summary>
 		public static MonthlyNotificationItem DefeatedByAnimalVillager => Instance[(short)445];
 
-		/// <summary>
-		/// DieFromEnemyNestVillager
-		/// </summary>
 		public static MonthlyNotificationItem DieFromEnemyNestVillager => Instance[(short)446];
 
-		/// <summary>
-		/// EscapeFromEnemyNestVillager
-		/// </summary>
 		public static MonthlyNotificationItem EscapeFromEnemyNestVillager => Instance[(short)447];
 
-		/// <summary>
-		/// SavedFromEnemyNestVillager
-		/// </summary>
 		public static MonthlyNotificationItem SavedFromEnemyNestVillager => Instance[(short)448];
 
-		/// <summary>
-		/// InfectedKidnapedCharacterEscape
-		/// </summary>
 		public static MonthlyNotificationItem InfectedKidnapedCharacterEscape => Instance[(short)449];
 
-		/// <summary>
-		/// OwningBookKidnapedCharacterEscape
-		/// </summary>
 		public static MonthlyNotificationItem OwningBookKidnapedCharacterEscape => Instance[(short)450];
 
-		/// <summary>
-		/// SectMainStoryEmeiStrangerAttack
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiStrangerAttack => Instance[(short)451];
 
-		/// <summary>
-		/// SectMainStoryEmeiInsaneMember
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiInsaneMember => Instance[(short)452];
 
-		/// <summary>
-		/// SectMainStoryEmeiRumors
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiRumors => Instance[(short)453];
 
-		/// <summary>
-		/// SectMainStoryEmeiReputation
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiReputation => Instance[(short)454];
 
-		/// <summary>
-		/// SectMainStoryEmeiSecretBook
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryEmeiSecretBook => Instance[(short)455];
 
-		/// <summary>
-		/// SectMainStoryJieqingUpgradeXingYun
-		/// </summary>
 		public static MonthlyNotificationItem SectMainStoryJieqingUpgradeXingYun => Instance[(short)456];
 
-		/// <summary>
-		/// MainStoryImmortalWuFanKe
-		/// </summary>
 		public static MonthlyNotificationItem MainStoryImmortalWuFanKe => Instance[(short)457];
 
-		/// <summary>
-		/// MainStoryImmortalDianFanMo
-		/// </summary>
 		public static MonthlyNotificationItem MainStoryImmortalDianFanMo => Instance[(short)458];
 
-		/// <summary>
-		/// AdventureCapitalCity
-		/// </summary>
 		public static MonthlyNotificationItem AdventureCapitalCity => Instance[(short)459];
 
-		/// <summary>
-		/// SmallMarketAppeared
-		/// </summary>
 		public static MonthlyNotificationItem SmallMarketAppeared => Instance[(short)460];
 
-		/// <summary>
-		/// AdventureJieqi
-		/// </summary>
 		public static MonthlyNotificationItem AdventureJieqi => Instance[(short)461];
 
-		/// <summary>
-		/// AdventureTeaParty
-		/// </summary>
 		public static MonthlyNotificationItem AdventureTeaParty => Instance[(short)462];
 
-		/// <summary>
-		/// AdventureWineParty
-		/// </summary>
 		public static MonthlyNotificationItem AdventureWineParty => Instance[(short)463];
 
-		/// <summary>
-		/// AdventureMartialHall
-		/// </summary>
 		public static MonthlyNotificationItem AdventureMartialHall => Instance[(short)464];
 
-		/// <summary>
-		/// AdventureMissionReward
-		/// </summary>
 		public static MonthlyNotificationItem AdventureMissionReward => Instance[(short)465];
 
-		/// <summary>
-		/// AdventureWorldSecretRealm
-		/// </summary>
 		public static MonthlyNotificationItem AdventureWorldSecretRealm => Instance[(short)466];
 
-		/// <summary>
-		/// AdventureJieqiComing
-		/// </summary>
 		public static MonthlyNotificationItem AdventureJieqiComing => Instance[(short)467];
 
-		/// <summary>
-		/// BehaviorTypeAction1
-		/// </summary>
 		public static MonthlyNotificationItem BehaviorTypeAction1 => Instance[(short)468];
 
-		/// <summary>
-		/// BehaviorTypeAction2
-		/// </summary>
 		public static MonthlyNotificationItem BehaviorTypeAction2 => Instance[(short)469];
 
-		/// <summary>
-		/// NewMarketAppeared
-		/// </summary>
 		public static MonthlyNotificationItem NewMarketAppeared => Instance[(short)470];
 
-		/// <summary>
-		/// PreciousMaterial
-		/// </summary>
 		public static MonthlyNotificationItem PreciousMaterial => Instance[(short)471];
+
+		public static MonthlyNotificationItem DLCChickenFeatherGift => Instance[(short)472];
+
+		public static MonthlyNotificationItem TaiwuAsXiangshuLittleMonkGiftNoti => Instance[(short)473];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MonthlyNotification Instance = new MonthlyNotification();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "SortingGroup", "MergeDesc", "TemplateId", "Icon", "MergeableParameters", "ValueCheckParameters", "FirstPageBg" };
@@ -5258,12 +2425,14 @@ public class MonthlyNotification : ConfigData<MonthlyNotificationItem, short>
 		_dataArray.Add(new MonthlyNotificationItem(469, LocalStringManager.GetConfig("MonthlyNotification_language", "Name_469"), "sp_monthnotify_8_18", LocalStringManager.GetConfig("MonthlyNotification_language", "Desc_469"), new string[6] { "Character", "Character", "Location", "", "", "" }, null, EMonthlyNotificationSectionType.Biography, 0, 210, null, -1, LocalStringManager.GetConfig("MonthlyNotification_language", "MergeDesc_469"), 0, 0, canFirstPage: false, null, allowByEventFunction: false));
 		_dataArray.Add(new MonthlyNotificationItem(470, LocalStringManager.GetConfig("MonthlyNotification_language", "Name_470"), "sp_monthnotify_13_0", LocalStringManager.GetConfig("MonthlyNotification_language", "Desc_470"), new string[6] { "Location", "Adventure", "", "", "", "" }, null, EMonthlyNotificationSectionType.Worldwide, 0, 152, null, -1, LocalStringManager.GetConfig("MonthlyNotification_language", "MergeDesc_470"), 0, 65, canFirstPage: true, "ui9_tex_month_notify_bg_0_3_2", allowByEventFunction: false));
 		_dataArray.Add(new MonthlyNotificationItem(471, LocalStringManager.GetConfig("MonthlyNotification_language", "Name_471"), "sp_monthnotify_17_14", LocalStringManager.GetConfig("MonthlyNotification_language", "Desc_471"), new string[6] { "Location", "", "", "", "", "" }, null, EMonthlyNotificationSectionType.Worldwide, 0, 36, null, -1, LocalStringManager.GetConfig("MonthlyNotification_language", "MergeDesc_471"), 0, 65, canFirstPage: false, null, allowByEventFunction: false));
+		_dataArray.Add(new MonthlyNotificationItem(472, LocalStringManager.GetConfig("MonthlyNotification_language", "Name_472"), "sp_monthnotify_22_81", LocalStringManager.GetConfig("MonthlyNotification_language", "Desc_472"), new string[6] { "Character", "Item", "", "", "", "" }, null, EMonthlyNotificationSectionType.Biography, 1, 212, null, -1, LocalStringManager.GetConfig("MonthlyNotification_language", "MergeDesc_472"), 0, 12, canFirstPage: false, null, allowByEventFunction: false));
+		_dataArray.Add(new MonthlyNotificationItem(473, LocalStringManager.GetConfig("MonthlyNotification_language", "Name_473"), "sp_monthnotify_22_82", LocalStringManager.GetConfig("MonthlyNotification_language", "Desc_473"), new string[6] { "", "", "", "", "", "" }, null, EMonthlyNotificationSectionType.Biography, 0, 213, null, -1, LocalStringManager.GetConfig("MonthlyNotification_language", "MergeDesc_473"), 0, 80, canFirstPage: false, null, allowByEventFunction: true));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<MonthlyNotificationItem>(472);
+		_dataArray = new List<MonthlyNotificationItem>(474);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

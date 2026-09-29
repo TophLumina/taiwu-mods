@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class CricketPlace : ConfigData<CricketPlaceItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CricketPlace Instance = new CricketPlace();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "UselessItemList", "TemplateId", "Icon", "CatchAniBack", "CatchAni" };

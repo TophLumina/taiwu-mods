@@ -23,7 +23,7 @@ public class AttackAction : ICharacterActionImpl, ISerializableGameData
 	public void PostExecute(DataContext context, Character character, CharacterActionData actionData)
 	{
 		Character targetChar = actionData.TargetChar;
-		DomainManager.Character.HandleAttackAction(context, character, targetChar);
+		DomainManager.Character.HandleAttackAction(context, character, targetChar, actionData.Template);
 	}
 
 	public bool IsSerializedSizeFixed()

@@ -10,24 +10,15 @@ public class DefeatMarksCountOutOfCombatData : ISerializableGameData
 	[SerializableGameDataField]
 	public Dictionary<short, int> DefeatMarksDict = new Dictionary<short, int>();
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public DefeatMarksCountOutOfCombatData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DefeatMarksCountOutOfCombatData(DefeatMarksCountOutOfCombatData other)
 	{
 		DefeatMarksDict = ((other.DefeatMarksDict == null) ? null : new Dictionary<short, int>(other.DefeatMarksDict));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DefeatMarksCountOutOfCombatData other)
 	{
 		DefeatMarksDict = ((other.DefeatMarksDict == null) ? null : new Dictionary<short, int>(other.DefeatMarksDict));

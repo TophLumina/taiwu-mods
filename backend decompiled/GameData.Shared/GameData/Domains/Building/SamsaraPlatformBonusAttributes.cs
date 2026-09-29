@@ -4,27 +4,15 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 轮回台数据，不确定会不会被合并为存档数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 public struct SamsaraPlatformBonusAttributes : ISerializableGameData
 {
-	/// <summary>
-	/// 轮回台提供的主属性加成
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes MainAttributes;
 
-	/// <summary>
-	/// 轮回台提供的功法资质加成
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillShorts;
 
-	/// <summary>
-	/// 轮回台提供的技艺资质加成
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillShorts;
 
@@ -40,10 +28,7 @@ public struct SamsaraPlatformBonusAttributes : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 0;
-		totalSize += MainAttributes.GetSerializedSize();
-		totalSize += CombatSkillShorts.GetSerializedSize();
-		totalSize += LifeSkillShorts.GetSerializedSize();
+		int totalSize = 72;
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

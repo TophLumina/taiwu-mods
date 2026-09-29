@@ -8,105 +8,54 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 商店界面的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true, NotRestrictCollectionSerializedSize = true)]
 public class ShopDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 交换数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ShopExchange Exchange;
 
-	/// <summary>
-	/// 太吾行囊的所有物品列表，包括身上装备和资源
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuInventoryItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾仓库的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuWarehouseItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾公库的所有物品列表，包括资源
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuTreasuryItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾货仓的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuStockItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾人物显示数据，用于计算物品是否被锁定
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public CharacterDisplayData TaiwuDisplayData;
 
-	/// <summary>
-	/// 目标人物template id, 默认-1
-	/// </summary>
 	[SerializableGameDataField]
 	public short CharacterTemplateId = -1;
 
-	/// <summary>
-	/// 太吾能否使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransferItemToWarehouse;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayData0;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayData1;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayData2;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayData3;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayData4;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayData5;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayData6;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> BuyBackDisplayData;
 

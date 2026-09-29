@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AvatarFeatureColors : ConfigData<AvatarFeatureColorsItem, byte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AvatarFeatureColors Instance = new AvatarFeatureColors();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayDesc", "TemplateId", "ColorHex" };

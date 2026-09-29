@@ -4,32 +4,16 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Global;
 
-/// <summary>
-/// </summary>
 public class GameStatRecordInt : IGameStatRecord, ISerializableGameData
 {
-	/// <summary>
-	/// 实际存储在本地存档的值
-	/// </summary>
 	[SerializableGameDataField]
 	private int _value;
 
-	/// <summary>
-	/// 将本地存档的值转换为统计需要的int值
-	/// </summary>
-	/// <returns></returns>
 	public int GetStat()
 	{
 		return _value;
 	}
 
-	/// <summary>
-	/// 将value存入
-	/// </summary>
-	/// <param name="value"></param>
-	/// <param name="setType"></param>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public bool SetStat<T>(T value, EStatInfoSetType setType)
 	{
 		if (!(value is int case1))
@@ -78,21 +62,11 @@ public class GameStatRecordInt : IGameStatRecord, ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 查询实际存储在本地的值中是否存在一个特定的值
-	/// </summary>
-	/// <param name="value"></param>
-	/// <returns></returns>
 	public bool Contains(int value)
 	{
 		return (_value & value) == value;
 	}
 
-	/// <summary>
-	/// 查询两个存储是否共有一个特定的值
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool Overlaps<T>(T other)
 	{
 		if (other is GameStatRecordInt value)
@@ -102,39 +76,26 @@ public class GameStatRecordInt : IGameStatRecord, ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
 	public GameStatRecordInt()
 	{
 		_value = 0;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="other"></param>
 	public GameStatRecordInt(GameStatRecordInt other)
 	{
 		_value = other._value;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="other"></param>
 	public void Assign(GameStatRecordInt other)
 	{
 		_value = other._value;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -145,7 +106,6 @@ public class GameStatRecordInt : IGameStatRecord, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = _value;
@@ -157,7 +117,6 @@ public class GameStatRecordInt : IGameStatRecord, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

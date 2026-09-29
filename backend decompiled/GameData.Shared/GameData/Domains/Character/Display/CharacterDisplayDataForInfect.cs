@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 元山特殊互动，选择太吾及其常规同道、俘虏
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class CharacterDisplayDataForInfect : ISerializableGameData
 {

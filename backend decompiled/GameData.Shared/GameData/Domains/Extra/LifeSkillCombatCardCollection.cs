@@ -5,27 +5,13 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 较艺的卡牌数据
-/// </summary>
 public struct LifeSkillCombatCardCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 卡牌ID-&gt;卡牌数量
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, int> CardDict;
 
-	/// <summary>
-	/// 卡牌的总数量
-	/// </summary>
 	public int CountSum => CardDict?.Sum((KeyValuePair<sbyte, int> d) => d.Value) ?? 0;
 
-	/// <summary>
-	/// 获取某一个等级的卡牌总数
-	/// </summary>
-	/// <param name="level"></param>
-	/// <returns></returns>
 	public int GetLevelCountSum(int level)
 	{
 		return CardDict?.Sum((KeyValuePair<sbyte, int> d) => (LifeSkillCombatEffect.Instance[d.Key].Level == level) ? d.Value : 0) ?? 0;
@@ -39,13 +25,11 @@ public struct LifeSkillCombatCardCollection : ISerializableGameData
 		};
 	}
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -57,7 +41,6 @@ public struct LifeSkillCombatCardCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -87,7 +70,6 @@ public struct LifeSkillCombatCardCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

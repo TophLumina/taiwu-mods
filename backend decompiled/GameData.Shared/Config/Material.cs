@@ -9,2951 +9,1184 @@ namespace Config;
 [Serializable]
 public class Material : ConfigData<MaterialItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 白榆木
-		/// </summary>
 		public const short WoodOuter1 = 0;
 
-		/// <summary>
-		/// 铁梨木
-		/// </summary>
 		public const short WoodOuter2 = 1;
 
-		/// <summary>
-		/// 栖凤梧桐
-		/// </summary>
 		public const short WoodOuter3 = 2;
 
-		/// <summary>
-		/// 宝塔血榉
-		/// </summary>
 		public const short WoodOuter4 = 3;
 
-		/// <summary>
-		/// 天香红木
-		/// </summary>
 		public const short WoodOuter5 = 4;
 
-		/// <summary>
-		/// 千结黄花梨
-		/// </summary>
 		public const short WoodOuter6 = 5;
 
-		/// <summary>
-		/// 乌金紫檀
-		/// </summary>
 		public const short WoodOuter7 = 6;
 
-		/// <summary>
-		/// 孟宗竹
-		/// </summary>
 		public const short WoodInner1 = 7;
 
-		/// <summary>
-		/// 地脉乌藤
-		/// </summary>
 		public const short WoodInner2 = 8;
 
-		/// <summary>
-		/// 青菩提枝
-		/// </summary>
 		public const short WoodInner3 = 9;
 
-		/// <summary>
-		/// 龙盘根
-		/// </summary>
 		public const short WoodInner4 = 10;
 
-		/// <summary>
-		/// 百千节结木
-		/// </summary>
 		public const short WoodInner5 = 11;
 
-		/// <summary>
-		/// 活桃木
-		/// </summary>
 		public const short WoodInner6 = 12;
 
-		/// <summary>
-		/// 九曲紫竹
-		/// </summary>
 		public const short WoodInner7 = 13;
 
-		/// <summary>
-		/// 镔铁
-		/// </summary>
 		public const short MetalOuter1 = 14;
 
-		/// <summary>
-		/// 玉钢
-		/// </summary>
 		public const short MetalOuter2 = 15;
 
-		/// <summary>
-		/// 百岳精铁
-		/// </summary>
 		public const short MetalOuter3 = 16;
 
-		/// <summary>
-		/// 乌金
-		/// </summary>
 		public const short MetalOuter4 = 17;
 
-		/// <summary>
-		/// 天外寒铁
-		/// </summary>
 		public const short MetalOuter5 = 18;
 
-		/// <summary>
-		/// 五色神铁
-		/// </summary>
 		public const short MetalOuter6 = 19;
 
-		/// <summary>
-		/// 玄铁
-		/// </summary>
 		public const short MetalOuter7 = 20;
 
-		/// <summary>
-		/// 元铜
-		/// </summary>
 		public const short MetalInner1 = 21;
 
-		/// <summary>
-		/// 镜银
-		/// </summary>
 		public const short MetalInner2 = 22;
 
-		/// <summary>
-		/// 紫金
-		/// </summary>
 		public const short MetalInner3 = 23;
 
-		/// <summary>
-		/// 如意宝铜
-		/// </summary>
 		public const short MetalInner4 = 24;
 
-		/// <summary>
-		/// 狮子金
-		/// </summary>
 		public const short MetalInner5 = 25;
 
-		/// <summary>
-		/// 十二彩霞银
-		/// </summary>
 		public const short MetalInner6 = 26;
 
-		/// <summary>
-		/// 蝉壳精金
-		/// </summary>
 		public const short MetalInner7 = 27;
 
-		/// <summary>
-		/// 黑玛瑙
-		/// </summary>
 		public const short JadeOuter1 = 28;
 
-		/// <summary>
-		/// 红宝石
-		/// </summary>
 		public const short JadeOuter2 = 29;
 
-		/// <summary>
-		/// 青金石
-		/// </summary>
 		public const short JadeOuter3 = 30;
 
-		/// <summary>
-		/// 鬼纹猫眼
-		/// </summary>
 		public const short JadeOuter4 = 31;
 
-		/// <summary>
-		/// 辟邪金刚石
-		/// </summary>
 		public const short JadeOuter5 = 32;
 
-		/// <summary>
-		/// 青霄神石
-		/// </summary>
 		public const short JadeOuter6 = 33;
 
-		/// <summary>
-		/// 神照石
-		/// </summary>
 		public const short JadeOuter7 = 34;
 
-		/// <summary>
-		/// 水玉
-		/// </summary>
 		public const short JadeInner1 = 35;
 
-		/// <summary>
-		/// 翡翠
-		/// </summary>
 		public const short JadeInner2 = 36;
 
-		/// <summary>
-		/// 羊脂白玉
-		/// </summary>
 		public const short JadeInner3 = 37;
 
-		/// <summary>
-		/// 五色琉璃
-		/// </summary>
 		public const short JadeInner4 = 38;
 
-		/// <summary>
-		/// 龙血墨玉
-		/// </summary>
 		public const short JadeInner5 = 39;
 
-		/// <summary>
-		/// 寒玉
-		/// </summary>
 		public const short JadeInner6 = 40;
 
-		/// <summary>
-		/// 昆仑活玉
-		/// </summary>
 		public const short JadeInner7 = 41;
 
-		/// <summary>
-		/// 虎衣
-		/// </summary>
 		public const short FabricOuter1 = 42;
 
-		/// <summary>
-		/// 紫貂衣
-		/// </summary>
 		public const short FabricOuter2 = 43;
 
-		/// <summary>
-		/// 白蟒鳞
-		/// </summary>
 		public const short FabricOuter3 = 44;
 
-		/// <summary>
-		/// 狐仙衣
-		/// </summary>
 		public const short FabricOuter4 = 45;
 
-		/// <summary>
-		/// 鸾凤羽
-		/// </summary>
 		public const short FabricOuter5 = 46;
 
-		/// <summary>
-		/// 龙背金筋
-		/// </summary>
 		public const short FabricOuter6 = 47;
 
-		/// <summary>
-		/// 金缕蝉衣
-		/// </summary>
 		public const short FabricOuter7 = 48;
 
-		/// <summary>
-		/// 秀文黄麻
-		/// </summary>
 		public const short FabricInner1 = 49;
 
-		/// <summary>
-		/// 锦棉丝
-		/// </summary>
 		public const short FabricInner2 = 50;
 
-		/// <summary>
-		/// 百花百草丝
-		/// </summary>
 		public const short FabricInner3 = 51;
 
-		/// <summary>
-		/// 玄金软丝
-		/// </summary>
 		public const short FabricInner4 = 52;
 
-		/// <summary>
-		/// 冰蚕银丝
-		/// </summary>
 		public const short FabricInner5 = 53;
 
-		/// <summary>
-		/// 血露丝
-		/// </summary>
 		public const short FabricInner6 = 54;
 
-		/// <summary>
-		/// 天蚕丝
-		/// </summary>
 		public const short FabricInner7 = 55;
 
-		/// <summary>
-		/// 鸡蛋
-		/// </summary>
 		public const short CookingBird0 = 56;
 
-		/// <summary>
-		/// 云英鸡
-		/// </summary>
 		public const short CookingBird1 = 57;
 
-		/// <summary>
-		/// 绍兴麻鸭
-		/// </summary>
 		public const short CookingBird2 = 58;
 
-		/// <summary>
-		/// 雁鹅
-		/// </summary>
 		public const short CookingBird3 = 59;
 
-		/// <summary>
-		/// 乌骨鸡
-		/// </summary>
 		public const short CookingBird4 = 60;
 
-		/// <summary>
-		/// 玲珑鹌鹑
-		/// </summary>
 		public const short CookingBird5 = 61;
 
-		/// <summary>
-		/// 蓝孔雀
-		/// </summary>
 		public const short CookingBird6 = 62;
 
-		/// <summary>
-		/// 野兔
-		/// </summary>
 		public const short CookingBeast0 = 63;
 
-		/// <summary>
-		/// 山猪
-		/// </summary>
 		public const short CookingBeast1 = 64;
 
-		/// <summary>
-		/// 东山羊
-		/// </summary>
 		public const short CookingBeast2 = 65;
 
-		/// <summary>
-		/// 百花锦蛇
-		/// </summary>
 		public const short CookingBeast3 = 66;
 
-		/// <summary>
-		/// 梅花鹿
-		/// </summary>
 		public const short CookingBeast4 = 67;
 
-		/// <summary>
-		/// 象拔
-		/// </summary>
 		public const short CookingBeast5 = 68;
 
-		/// <summary>
-		/// 黑熊
-		/// </summary>
 		public const short CookingBeast6 = 69;
 
-		/// <summary>
-		/// 小麦
-		/// </summary>
 		public const short CookingVegetarian0 = 70;
 
-		/// <summary>
-		/// 大豆
-		/// </summary>
 		public const short CookingVegetarian1 = 71;
 
-		/// <summary>
-		/// 香菇
-		/// </summary>
 		public const short CookingVegetarian2 = 72;
 
-		/// <summary>
-		/// 玉芦笋
-		/// </summary>
 		public const short CookingVegetarian3 = 73;
 
-		/// <summary>
-		/// 贡莲
-		/// </summary>
 		public const short CookingVegetarian4 = 74;
 
-		/// <summary>
-		/// 银杏子
-		/// </summary>
 		public const short CookingVegetarian5 = 75;
 
-		/// <summary>
-		/// 猴头菇
-		/// </summary>
 		public const short CookingVegetarian6 = 76;
 
-		/// <summary>
-		/// 草鱼
-		/// </summary>
 		public const short CookingFish0 = 77;
 
-		/// <summary>
-		/// 青虾
-		/// </summary>
 		public const short CookingFish1 = 78;
 
-		/// <summary>
-		/// 岩鲤
-		/// </summary>
 		public const short CookingFish2 = 79;
 
-		/// <summary>
-		/// 赤蟹
-		/// </summary>
 		public const short CookingFish3 = 80;
 
-		/// <summary>
-		/// 四鳃鲈
-		/// </summary>
 		public const short CookingFish4 = 81;
 
-		/// <summary>
-		/// 两头网鲍
-		/// </summary>
 		public const short CookingFish5 = 82;
 
-		/// <summary>
-		/// 鲟鳇鱼
-		/// </summary>
 		public const short CookingFish6 = 83;
 
-		/// <summary>
-		/// 接骨草
-		/// </summary>
 		public const short MedicineOuterInjury1 = 140;
 
-		/// <summary>
-		/// 伏地延胡索
-		/// </summary>
 		public const short MedicineOuterInjury3 = 141;
 
-		/// <summary>
-		/// 神木血竭
-		/// </summary>
 		public const short MedicineOuterInjury5 = 142;
 
-		/// <summary>
-		/// 千年活灵芝
-		/// </summary>
 		public const short MedicineOuterInjury7 = 143;
 
-		/// <summary>
-		/// 紫珠草
-		/// </summary>
 		public const short MedicinePoisonRed1 = 144;
 
-		/// <summary>
-		/// 雪山九牛草
-		/// </summary>
 		public const short MedicinePoisonRed3 = 145;
 
-		/// <summary>
-		/// 白犀牛角
-		/// </summary>
 		public const short MedicinePoisonRed5 = 146;
 
-		/// <summary>
-		/// 玉佛露
-		/// </summary>
 		public const short MedicinePoisonRed7 = 147;
 
-		/// <summary>
-		/// 千年健
-		/// </summary>
 		public const short MedicinePenetrateResistOfOuter1 = 148;
 
-		/// <summary>
-		/// 紫花蛇舌草
-		/// </summary>
 		public const short MedicinePenetrateResistOfOuter3 = 149;
 
-		/// <summary>
-		/// 灵龟板
-		/// </summary>
 		public const short MedicinePenetrateResistOfOuter5 = 150;
 
-		/// <summary>
-		/// 女娲石
-		/// </summary>
 		public const short MedicinePenetrateResistOfOuter7 = 151;
 
-		/// <summary>
-		/// 虎骨
-		/// </summary>
 		public const short MedicineStrength1 = 152;
 
-		/// <summary>
-		/// 宿龙草
-		/// </summary>
 		public const short MedicineStrength3 = 153;
 
-		/// <summary>
-		/// 老猿骨
-		/// </summary>
 		public const short MedicineStrength5 = 154;
 
-		/// <summary>
-		/// 赤腹血龟
-		/// </summary>
 		public const short MedicineStrength7 = 155;
 
-		/// <summary>
-		/// 人参
-		/// </summary>
 		public const short MedicineInnerInjury1 = 156;
 
-		/// <summary>
-		/// 紫青降香
-		/// </summary>
 		public const short MedicineInnerInjury3 = 157;
 
-		/// <summary>
-		/// 黑玉沉香
-		/// </summary>
 		public const short MedicineInnerInjury5 = 158;
 
-		/// <summary>
-		/// 千年雪参
-		/// </summary>
 		public const short MedicineInnerInjury7 = 159;
 
-		/// <summary>
-		/// 青蛇胆
-		/// </summary>
 		public const short MedicinePoisonGloomy1 = 160;
 
-		/// <summary>
-		/// 金斑乌药
-		/// </summary>
 		public const short MedicinePoisonGloomy3 = 161;
 
-		/// <summary>
-		/// 玉蟾酥
-		/// </summary>
 		public const short MedicinePoisonGloomy5 = 162;
 
-		/// <summary>
-		/// 紫玉王参
-		/// </summary>
 		public const short MedicinePoisonGloomy7 = 163;
 
-		/// <summary>
-		/// 苏合香
-		/// </summary>
 		public const short MedicinePenetrateResistOfInner1 = 164;
 
-		/// <summary>
-		/// 夜雾石
-		/// </summary>
 		public const short MedicinePenetrateResistOfInner3 = 165;
 
-		/// <summary>
-		/// 灯心檀香
-		/// </summary>
 		public const short MedicinePenetrateResistOfInner5 = 166;
 
-		/// <summary>
-		/// 瑶池兰
-		/// </summary>
 		public const short MedicinePenetrateResistOfInner7 = 167;
 
-		/// <summary>
-		/// 素馨花
-		/// </summary>
 		public const short MedicineRecoverOfBreath1 = 168;
 
-		/// <summary>
-		/// 安魂香
-		/// </summary>
 		public const short MedicineRecoverOfBreath3 = 169;
 
-		/// <summary>
-		/// 黄龙木香
-		/// </summary>
 		public const short MedicineRecoverOfBreath5 = 170;
 
-		/// <summary>
-		/// 天香琼玉石
-		/// </summary>
 		public const short MedicineRecoverOfBreath7 = 171;
 
-		/// <summary>
-		/// 红蜂蜜
-		/// </summary>
 		public const short MedicineDisorderOfQi1 = 172;
 
-		/// <summary>
-		/// 玉鹿血
-		/// </summary>
 		public const short MedicineDisorderOfQi3 = 173;
 
-		/// <summary>
-		/// 白额灵蛇胆
-		/// </summary>
 		public const short MedicineDisorderOfQi5 = 174;
 
-		/// <summary>
-		/// 天山雪莲
-		/// </summary>
 		public const short MedicineDisorderOfQi7 = 175;
 
-		/// <summary>
-		/// 乌蛇骨
-		/// </summary>
 		public const short MedicinePoisonCold1 = 176;
 
-		/// <summary>
-		/// 红罗丁香
-		/// </summary>
 		public const short MedicinePoisonCold3 = 177;
 
-		/// <summary>
-		/// 百年乌头
-		/// </summary>
 		public const short MedicinePoisonCold5 = 178;
 
-		/// <summary>
-		/// 龙合血露
-		/// </summary>
 		public const short MedicinePoisonCold7 = 179;
 
-		/// <summary>
-		/// 长生百合
-		/// </summary>
 		public const short MedicineAvoidRateStr1 = 180;
 
-		/// <summary>
-		/// 奇香灵脂
-		/// </summary>
 		public const short MedicineAvoidRateStr3 = 181;
 
-		/// <summary>
-		/// 金翅鹏鸟血
-		/// </summary>
 		public const short MedicineAvoidRateStr5 = 182;
 
-		/// <summary>
-		/// 九色玉菩提
-		/// </summary>
 		public const short MedicineAvoidRateStr7 = 183;
 
-		/// <summary>
-		/// 绵黄芪
-		/// </summary>
 		public const short MedicineHitRateTechnique1 = 184;
 
-		/// <summary>
-		/// 翡翠芝
-		/// </summary>
 		public const short MedicineHitRateTechnique3 = 185;
 
-		/// <summary>
-		/// 天青水玉
-		/// </summary>
 		public const short MedicineHitRateTechnique5 = 186;
 
-		/// <summary>
-		/// 龙涎石乳
-		/// </summary>
 		public const short MedicineHitRateTechnique7 = 187;
 
-		/// <summary>
-		/// 雪蛤
-		/// </summary>
 		public const short MedicineHealth1 = 188;
 
-		/// <summary>
-		/// 灵芝草
-		/// </summary>
 		public const short MedicineHealth3 = 189;
 
-		/// <summary>
-		/// 铁皮石斛
-		/// </summary>
 		public const short MedicineHealth5 = 190;
 
-		/// <summary>
-		/// 人形何首乌
-		/// </summary>
 		public const short MedicineHealth7 = 191;
 
-		/// <summary>
-		/// 珍珠母
-		/// </summary>
 		public const short MedicinePoisonIllusory1 = 192;
 
-		/// <summary>
-		/// 朱心茯神
-		/// </summary>
 		public const short MedicinePoisonIllusory3 = 193;
 
-		/// <summary>
-		/// 龙脑冰片
-		/// </summary>
 		public const short MedicinePoisonIllusory5 = 194;
 
-		/// <summary>
-		/// 墨天麻
-		/// </summary>
 		public const short MedicinePoisonIllusory7 = 195;
 
-		/// <summary>
-		/// 满天香
-		/// </summary>
 		public const short MedicineAvoidRateTech1 = 196;
 
-		/// <summary>
-		/// 醒魂花
-		/// </summary>
 		public const short MedicineAvoidRateTech3 = 197;
 
-		/// <summary>
-		/// 苍龙骨
-		/// </summary>
 		public const short MedicineAvoidRateTech5 = 198;
 
-		/// <summary>
-		/// 玲珑珊瑚
-		/// </summary>
 		public const short MedicineAvoidRateTech7 = 199;
 
-		/// <summary>
-		/// 野仙姜
-		/// </summary>
 		public const short MedicineRecoverOfStance1 = 200;
 
-		/// <summary>
-		/// 鹿茸
-		/// </summary>
 		public const short MedicineRecoverOfStance3 = 201;
 
-		/// <summary>
-		/// 血燕窝
-		/// </summary>
 		public const short MedicineRecoverOfStance5 = 202;
 
-		/// <summary>
-		/// 琥珀豆蔻
-		/// </summary>
 		public const short MedicineRecoverOfStance7 = 203;
 
-		/// <summary>
-		/// 朱果
-		/// </summary>
 		public const short MedicineRecoverOtherA1 = 204;
 
-		/// <summary>
-		/// 幽胎草
-		/// </summary>
 		public const short MedicineRecoverOtherA3 = 205;
 
-		/// <summary>
-		/// 玉露琼浆
-		/// </summary>
 		public const short MedicineRecoverOtherA5 = 206;
 
-		/// <summary>
-		/// 荼冥花
-		/// </summary>
 		public const short MedicineRecoverOtherA7 = 207;
 
-		/// <summary>
-		/// 铅丹
-		/// </summary>
 		public const short MedicinePoisonRotten1 = 208;
 
-		/// <summary>
-		/// 百虫鬼箭
-		/// </summary>
 		public const short MedicinePoisonRotten3 = 209;
 
-		/// <summary>
-		/// 阎王鬼臼
-		/// </summary>
 		public const short MedicinePoisonRotten5 = 210;
 
-		/// <summary>
-		/// 乌背银蟾
-		/// </summary>
 		public const short MedicinePoisonRotten7 = 211;
 
-		/// <summary>
-		/// 醉芙蓉
-		/// </summary>
 		public const short MedicineAvoidRateSpeed1 = 212;
 
-		/// <summary>
-		/// 天竺佛座
-		/// </summary>
 		public const short MedicineAvoidRateSpeed3 = 213;
 
-		/// <summary>
-		/// 青鸾血
-		/// </summary>
 		public const short MedicineAvoidRateSpeed5 = 214;
 
-		/// <summary>
-		/// 金蚕
-		/// </summary>
 		public const short MedicineAvoidRateSpeed7 = 215;
 
-		/// <summary>
-		/// 碎银慈石
-		/// </summary>
 		public const short MedicineHitRateSpeed1 = 216;
 
-		/// <summary>
-		/// 空青石
-		/// </summary>
 		public const short MedicineHitRateSpeed3 = 217;
 
-		/// <summary>
-		/// 玛瑙清露
-		/// </summary>
 		public const short MedicineHitRateSpeed5 = 218;
 
-		/// <summary>
-		/// 炽羽寒蝉
-		/// </summary>
 		public const short MedicineHitRateSpeed7 = 219;
 
-		/// <summary>
-		/// 九节菖蒲
-		/// </summary>
 		public const short MedicineRecoverAttackA1 = 220;
 
-		/// <summary>
-		/// 银线虫草
-		/// </summary>
 		public const short MedicineRecoverAttackA3 = 221;
 
-		/// <summary>
-		/// 雪熊金胆
-		/// </summary>
 		public const short MedicineRecoverAttackA5 = 222;
 
-		/// <summary>
-		/// 舍利子
-		/// </summary>
 		public const short MedicineRecoverAttackA7 = 223;
 
-		/// <summary>
-		/// 犀黄
-		/// </summary>
 		public const short MedicinePoisonHot1 = 224;
 
-		/// <summary>
-		/// 黑熊胆
-		/// </summary>
 		public const short MedicinePoisonHot3 = 225;
 
-		/// <summary>
-		/// 青花龙葵
-		/// </summary>
 		public const short MedicinePoisonHot5 = 226;
 
-		/// <summary>
-		/// 天蛇蜕
-		/// </summary>
 		public const short MedicinePoisonHot7 = 227;
 
-		/// <summary>
-		/// 麝香
-		/// </summary>
 		public const short MedicineRecoverOtherB1 = 228;
 
-		/// <summary>
-		/// 金香附
-		/// </summary>
 		public const short MedicineRecoverOtherB3 = 229;
 
-		/// <summary>
-		/// 花甲茯苓
-		/// </summary>
 		public const short MedicineRecoverOtherB5 = 230;
 
-		/// <summary>
-		/// 金母蟠桃
-		/// </summary>
 		public const short MedicineRecoverOtherB7 = 231;
 
-		/// <summary>
-		/// 寄鬼虫
-		/// </summary>
 		public const short MedicineRecoverAttackB1 = 232;
 
-		/// <summary>
-		/// 梧桐血蛇
-		/// </summary>
 		public const short MedicineRecoverAttackB3 = 233;
 
-		/// <summary>
-		/// 金披蜥蜴
-		/// </summary>
 		public const short MedicineRecoverAttackB5 = 234;
 
-		/// <summary>
-		/// 巴蟒玄胆
-		/// </summary>
 		public const short MedicineRecoverAttackB7 = 235;
 
-		/// <summary>
-		/// 鸩羽
-		/// </summary>
 		public const short PoisonHot1 = 236;
 
-		/// <summary>
-		/// 雷公藤
-		/// </summary>
 		public const short PoisonHot2 = 237;
 
-		/// <summary>
-		/// 牵机草
-		/// </summary>
 		public const short PoisonHot3 = 238;
 
-		/// <summary>
-		/// 五煞落魂草
-		/// </summary>
 		public const short PoisonHot4 = 239;
 
-		/// <summary>
-		/// 杏黄蛛
-		/// </summary>
 		public const short PoisonHot5 = 240;
 
-		/// <summary>
-		/// 金蛇
-		/// </summary>
 		public const short PoisonHot6 = 241;
 
-		/// <summary>
-		/// 断肠草
-		/// </summary>
 		public const short PoisonHot7 = 242;
 
-		/// <summary>
-		/// 草乌头
-		/// </summary>
 		public const short PoisonGloomy1 = 243;
 
-		/// <summary>
-		/// 相思子
-		/// </summary>
 		public const short PoisonGloomy2 = 244;
 
-		/// <summary>
-		/// 紫蜈蜂
-		/// </summary>
 		public const short PoisonGloomy3 = 245;
 
-		/// <summary>
-		/// 鬼母杜鹃
-		/// </summary>
 		public const short PoisonGloomy4 = 246;
 
-		/// <summary>
-		/// 百眼蜈蚣
-		/// </summary>
 		public const short PoisonGloomy5 = 247;
 
-		/// <summary>
-		/// 七彩玉纱娘
-		/// </summary>
 		public const short PoisonGloomy6 = 248;
 
-		/// <summary>
-		/// 邪窍花
-		/// </summary>
 		public const short PoisonGloomy7 = 249;
 
-		/// <summary>
-		/// 冽霜草
-		/// </summary>
 		public const short PoisonCold1 = 250;
 
-		/// <summary>
-		/// 白蛇胆
-		/// </summary>
 		public const short PoisonCold2 = 251;
 
-		/// <summary>
-		/// 玄阴石
-		/// </summary>
 		public const short PoisonCold3 = 252;
 
-		/// <summary>
-		/// 寒玉蟾蜍
-		/// </summary>
 		public const short PoisonCold4 = 253;
 
-		/// <summary>
-		/// 玄冰琵琶蝎
-		/// </summary>
 		public const short PoisonCold5 = 254;
 
-		/// <summary>
-		/// 青蛟胆
-		/// </summary>
 		public const short PoisonCold6 = 255;
 
-		/// <summary>
-		/// 千年冰蚕
-		/// </summary>
 		public const short PoisonCold7 = 256;
 
-		/// <summary>
-		/// 红信石
-		/// </summary>
 		public const short PoisonRed1 = 257;
 
-		/// <summary>
-		/// 见血封喉
-		/// </summary>
 		public const short PoisonRed2 = 258;
 
-		/// <summary>
-		/// 一品红
-		/// </summary>
 		public const short PoisonRed3 = 259;
 
-		/// <summary>
-		/// 赤血斑蝎
-		/// </summary>
 		public const short PoisonRed4 = 260;
 
-		/// <summary>
-		/// 孔雀胆
-		/// </summary>
 		public const short PoisonRed5 = 261;
 
-		/// <summary>
-		/// 凤凰木
-		/// </summary>
 		public const short PoisonRed6 = 262;
 
-		/// <summary>
-		/// 血蟾
-		/// </summary>
 		public const short PoisonRed7 = 263;
 
-		/// <summary>
-		/// 腐尸虫
-		/// </summary>
 		public const short PoisonRotten1 = 264;
 
-		/// <summary>
-		/// 腹蛇涎
-		/// </summary>
 		public const short PoisonRotten2 = 265;
 
-		/// <summary>
-		/// 散瘟草
-		/// </summary>
 		public const short PoisonRotten3 = 266;
 
-		/// <summary>
-		/// 玄尸水
-		/// </summary>
 		public const short PoisonRotten4 = 267;
 
-		/// <summary>
-		/// 烂髓鬼虫
-		/// </summary>
 		public const short PoisonRotten5 = 268;
 
-		/// <summary>
-		/// 黑水冥蛇骨
-		/// </summary>
 		public const short PoisonRotten6 = 269;
 
-		/// <summary>
-		/// 千年青蛛
-		/// </summary>
 		public const short PoisonRotten7 = 270;
 
-		/// <summary>
-		/// 夹竹桃
-		/// </summary>
 		public const short PoisonIllusory1 = 271;
 
-		/// <summary>
-		/// 彼岸花
-		/// </summary>
 		public const short PoisonIllusory2 = 272;
 
-		/// <summary>
-		/// 缚魂丝
-		/// </summary>
 		public const short PoisonIllusory3 = 273;
 
-		/// <summary>
-		/// 金怠花
-		/// </summary>
 		public const short PoisonIllusory4 = 274;
 
-		/// <summary>
-		/// 烟煴紫瘴
-		/// </summary>
 		public const short PoisonIllusory5 = 275;
 
-		/// <summary>
-		/// 无寐兰
-		/// </summary>
 		public const short PoisonIllusory6 = 276;
 
-		/// <summary>
-		/// 人面曼陀罗
-		/// </summary>
 		public const short PoisonIllusory7 = 277;
 
-		/// <summary>
-		/// 白蛟卵
-		/// </summary>
 		public const short JiaoWhiteEgg = 278;
 
-		/// <summary>
-		/// 黑蛟卵
-		/// </summary>
 		public const short JiaoBlackEgg = 279;
 
-		/// <summary>
-		/// 青蛟卵
-		/// </summary>
 		public const short JiaoGreenEgg = 280;
 
-		/// <summary>
-		/// 赤蛟卵
-		/// </summary>
 		public const short JiaoRedEgg = 281;
 
-		/// <summary>
-		/// 黄蛟卵
-		/// </summary>
 		public const short JiaoYellowEgg = 282;
 
-		/// <summary>
-		/// 白黑蛟卵
-		/// </summary>
 		public const short JiaoWBEgg = 283;
 
-		/// <summary>
-		/// 白青蛟卵
-		/// </summary>
 		public const short JiaoWGEgg = 284;
 
-		/// <summary>
-		/// 白赤蛟卵
-		/// </summary>
 		public const short JiaoWREgg = 285;
 
-		/// <summary>
-		/// 白黄蛟卵
-		/// </summary>
 		public const short JiaoWYEgg = 286;
 
-		/// <summary>
-		/// 黑青蛟卵
-		/// </summary>
 		public const short JiaoBGEgg = 287;
 
-		/// <summary>
-		/// 黑赤蛟卵
-		/// </summary>
 		public const short JiaoBREgg = 288;
 
-		/// <summary>
-		/// 黑黄蛟卵
-		/// </summary>
 		public const short JiaoBYEgg = 289;
 
-		/// <summary>
-		/// 青赤蛟卵
-		/// </summary>
 		public const short JiaoGREgg = 290;
 
-		/// <summary>
-		/// 青黄蛟卵
-		/// </summary>
 		public const short JiaoGYEgg = 291;
 
-		/// <summary>
-		/// 赤黄蛟卵
-		/// </summary>
 		public const short JiaoRYEgg = 292;
 
-		/// <summary>
-		/// 白黑青蛟卵
-		/// </summary>
 		public const short JiaoWBGEgg = 293;
 
-		/// <summary>
-		/// 白黑赤蛟卵
-		/// </summary>
 		public const short JiaoWBREgg = 294;
 
-		/// <summary>
-		/// 白黑黄蛟卵
-		/// </summary>
 		public const short JiaoWBYEgg = 295;
 
-		/// <summary>
-		/// 白青赤蛟卵
-		/// </summary>
 		public const short JiaoWGREgg = 296;
 
-		/// <summary>
-		/// 白青黄蛟卵
-		/// </summary>
 		public const short JiaoWGYEgg = 297;
 
-		/// <summary>
-		/// 白赤黄蛟卵
-		/// </summary>
 		public const short JiaoWRYEgg = 298;
 
-		/// <summary>
-		/// 黑青赤蛟卵
-		/// </summary>
 		public const short JiaoBGREgg = 299;
 
-		/// <summary>
-		/// 黑青黄蛟卵
-		/// </summary>
 		public const short JiaoBGYEgg = 300;
 
-		/// <summary>
-		/// 黑赤黄蛟卵
-		/// </summary>
 		public const short JiaoBRYEgg = 301;
 
-		/// <summary>
-		/// 青赤黄蛟卵
-		/// </summary>
 		public const short JiaoGRYEgg = 302;
 
-		/// <summary>
-		/// 白黑青赤蛟卵
-		/// </summary>
 		public const short JiaoWBGREgg = 303;
 
-		/// <summary>
-		/// 白黑青黄蛟卵
-		/// </summary>
 		public const short JiaoWBGYEgg = 304;
 
-		/// <summary>
-		/// 白黑赤黄蛟卵
-		/// </summary>
 		public const short JiaoWBRYEgg = 305;
 
-		/// <summary>
-		/// 白青赤黄蛟卵
-		/// </summary>
 		public const short JiaoWGRYEgg = 306;
 
-		/// <summary>
-		/// 黑青赤黄蛟卵
-		/// </summary>
 		public const short JiaoBGRYEgg = 307;
 
-		/// <summary>
-		/// 白青赤黄黑蛟卵
-		/// </summary>
 		public const short JiaoWGRYBEgg = 308;
 
-		/// <summary>
-		/// 白幼蛟
-		/// </summary>
 		public const short JiaoWhite = 309;
 
-		/// <summary>
-		/// 黑幼蛟
-		/// </summary>
 		public const short JiaoBlack = 310;
 
-		/// <summary>
-		/// 青幼蛟
-		/// </summary>
 		public const short JiaoGreen = 311;
 
-		/// <summary>
-		/// 赤幼蛟
-		/// </summary>
 		public const short JiaoRed = 312;
 
-		/// <summary>
-		/// 黄幼蛟
-		/// </summary>
 		public const short JiaoYellow = 313;
 
-		/// <summary>
-		/// 白黑幼蛟
-		/// </summary>
 		public const short JiaoWB = 314;
 
-		/// <summary>
-		/// 白青幼蛟
-		/// </summary>
 		public const short JiaoWG = 315;
 
-		/// <summary>
-		/// 白赤幼蛟
-		/// </summary>
 		public const short JiaoWR = 316;
 
-		/// <summary>
-		/// 白黄幼蛟
-		/// </summary>
 		public const short JiaoWY = 317;
 
-		/// <summary>
-		/// 黑青幼蛟
-		/// </summary>
 		public const short JiaoBG = 318;
 
-		/// <summary>
-		/// 黑赤幼蛟
-		/// </summary>
 		public const short JiaoBR = 319;
 
-		/// <summary>
-		/// 黑黄幼蛟
-		/// </summary>
 		public const short JiaoBY = 320;
 
-		/// <summary>
-		/// 青赤幼蛟
-		/// </summary>
 		public const short JiaoGR = 321;
 
-		/// <summary>
-		/// 青黄幼蛟
-		/// </summary>
 		public const short JiaoGY = 322;
 
-		/// <summary>
-		/// 赤黄幼蛟
-		/// </summary>
 		public const short JiaoRY = 323;
 
-		/// <summary>
-		/// 白黑青幼蛟
-		/// </summary>
 		public const short JiaoWBG = 324;
 
-		/// <summary>
-		/// 白黑赤幼蛟
-		/// </summary>
 		public const short JiaoWBR = 325;
 
-		/// <summary>
-		/// 白黑黄幼蛟
-		/// </summary>
 		public const short JiaoWBY = 326;
 
-		/// <summary>
-		/// 白青赤幼蛟
-		/// </summary>
 		public const short JiaoWGR = 327;
 
-		/// <summary>
-		/// 白青黄幼蛟
-		/// </summary>
 		public const short JiaoWGY = 328;
 
-		/// <summary>
-		/// 白赤黄幼蛟
-		/// </summary>
 		public const short JiaoWRY = 329;
 
-		/// <summary>
-		/// 黑青赤幼蛟
-		/// </summary>
 		public const short JiaoBGR = 330;
 
-		/// <summary>
-		/// 黑青黄幼蛟
-		/// </summary>
 		public const short JiaoBGY = 331;
 
-		/// <summary>
-		/// 黑赤黄幼蛟
-		/// </summary>
 		public const short JiaoBRY = 332;
 
-		/// <summary>
-		/// 青赤黄幼蛟
-		/// </summary>
 		public const short JiaoGRY = 333;
 
-		/// <summary>
-		/// 白黑青赤幼蛟
-		/// </summary>
 		public const short JiaoWBGR = 334;
 
-		/// <summary>
-		/// 白黑青黄幼蛟
-		/// </summary>
 		public const short JiaoWBGY = 335;
 
-		/// <summary>
-		/// 白黑赤黄幼蛟
-		/// </summary>
 		public const short JiaoWBRY = 336;
 
-		/// <summary>
-		/// 白青赤黄幼蛟
-		/// </summary>
 		public const short JiaoWGRY = 337;
 
-		/// <summary>
-		/// 黑青赤黄幼蛟
-		/// </summary>
 		public const short JiaoBGRY = 338;
 
-		/// <summary>
-		/// 白青赤黄黑幼蛟
-		/// </summary>
 		public const short JiaoWGRYB = 339;
 
-		/// <summary>
-		/// 青竹片
-		/// </summary>
 		public const short GreenBambooPiece = 340;
 
-		/// <summary>
-		/// 百鸟彩羽
-		/// </summary>
 		public const short SectStoryFulongFeathers = 342;
 
-		/// <summary>
-		/// 冷静元鸡羽
-		/// </summary>
 		public const short CalmFeathers = 343;
 
-		/// <summary>
-		/// 聪颖元鸡羽
-		/// </summary>
 		public const short CleverFeathers = 344;
 
-		/// <summary>
-		/// 热情元鸡羽
-		/// </summary>
 		public const short EnthusiasticFeathers = 345;
 
-		/// <summary>
-		/// 勇壮元鸡羽
-		/// </summary>
 		public const short BraveFeathers = 346;
 
-		/// <summary>
-		/// 坚毅元鸡羽
-		/// </summary>
 		public const short FirmFeathers = 347;
 
-		/// <summary>
-		/// 福缘元鸡羽
-		/// </summary>
 		public const short LuckyFeathers = 348;
 
-		/// <summary>
-		/// 合道元鸡羽
-		/// </summary>
 		public const short PerceptiveFeathers = 349;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 白榆木
-		/// </summary>
 		public static MaterialItem WoodOuter1 => Instance[(short)0];
 
-		/// <summary>
-		/// 铁梨木
-		/// </summary>
 		public static MaterialItem WoodOuter2 => Instance[(short)1];
 
-		/// <summary>
-		/// 栖凤梧桐
-		/// </summary>
 		public static MaterialItem WoodOuter3 => Instance[(short)2];
 
-		/// <summary>
-		/// 宝塔血榉
-		/// </summary>
 		public static MaterialItem WoodOuter4 => Instance[(short)3];
 
-		/// <summary>
-		/// 天香红木
-		/// </summary>
 		public static MaterialItem WoodOuter5 => Instance[(short)4];
 
-		/// <summary>
-		/// 千结黄花梨
-		/// </summary>
 		public static MaterialItem WoodOuter6 => Instance[(short)5];
 
-		/// <summary>
-		/// 乌金紫檀
-		/// </summary>
 		public static MaterialItem WoodOuter7 => Instance[(short)6];
 
-		/// <summary>
-		/// 孟宗竹
-		/// </summary>
 		public static MaterialItem WoodInner1 => Instance[(short)7];
 
-		/// <summary>
-		/// 地脉乌藤
-		/// </summary>
 		public static MaterialItem WoodInner2 => Instance[(short)8];
 
-		/// <summary>
-		/// 青菩提枝
-		/// </summary>
 		public static MaterialItem WoodInner3 => Instance[(short)9];
 
-		/// <summary>
-		/// 龙盘根
-		/// </summary>
 		public static MaterialItem WoodInner4 => Instance[(short)10];
 
-		/// <summary>
-		/// 百千节结木
-		/// </summary>
 		public static MaterialItem WoodInner5 => Instance[(short)11];
 
-		/// <summary>
-		/// 活桃木
-		/// </summary>
 		public static MaterialItem WoodInner6 => Instance[(short)12];
 
-		/// <summary>
-		/// 九曲紫竹
-		/// </summary>
 		public static MaterialItem WoodInner7 => Instance[(short)13];
 
-		/// <summary>
-		/// 镔铁
-		/// </summary>
 		public static MaterialItem MetalOuter1 => Instance[(short)14];
 
-		/// <summary>
-		/// 玉钢
-		/// </summary>
 		public static MaterialItem MetalOuter2 => Instance[(short)15];
 
-		/// <summary>
-		/// 百岳精铁
-		/// </summary>
 		public static MaterialItem MetalOuter3 => Instance[(short)16];
 
-		/// <summary>
-		/// 乌金
-		/// </summary>
 		public static MaterialItem MetalOuter4 => Instance[(short)17];
 
-		/// <summary>
-		/// 天外寒铁
-		/// </summary>
 		public static MaterialItem MetalOuter5 => Instance[(short)18];
 
-		/// <summary>
-		/// 五色神铁
-		/// </summary>
 		public static MaterialItem MetalOuter6 => Instance[(short)19];
 
-		/// <summary>
-		/// 玄铁
-		/// </summary>
 		public static MaterialItem MetalOuter7 => Instance[(short)20];
 
-		/// <summary>
-		/// 元铜
-		/// </summary>
 		public static MaterialItem MetalInner1 => Instance[(short)21];
 
-		/// <summary>
-		/// 镜银
-		/// </summary>
 		public static MaterialItem MetalInner2 => Instance[(short)22];
 
-		/// <summary>
-		/// 紫金
-		/// </summary>
 		public static MaterialItem MetalInner3 => Instance[(short)23];
 
-		/// <summary>
-		/// 如意宝铜
-		/// </summary>
 		public static MaterialItem MetalInner4 => Instance[(short)24];
 
-		/// <summary>
-		/// 狮子金
-		/// </summary>
 		public static MaterialItem MetalInner5 => Instance[(short)25];
 
-		/// <summary>
-		/// 十二彩霞银
-		/// </summary>
 		public static MaterialItem MetalInner6 => Instance[(short)26];
 
-		/// <summary>
-		/// 蝉壳精金
-		/// </summary>
 		public static MaterialItem MetalInner7 => Instance[(short)27];
 
-		/// <summary>
-		/// 黑玛瑙
-		/// </summary>
 		public static MaterialItem JadeOuter1 => Instance[(short)28];
 
-		/// <summary>
-		/// 红宝石
-		/// </summary>
 		public static MaterialItem JadeOuter2 => Instance[(short)29];
 
-		/// <summary>
-		/// 青金石
-		/// </summary>
 		public static MaterialItem JadeOuter3 => Instance[(short)30];
 
-		/// <summary>
-		/// 鬼纹猫眼
-		/// </summary>
 		public static MaterialItem JadeOuter4 => Instance[(short)31];
 
-		/// <summary>
-		/// 辟邪金刚石
-		/// </summary>
 		public static MaterialItem JadeOuter5 => Instance[(short)32];
 
-		/// <summary>
-		/// 青霄神石
-		/// </summary>
 		public static MaterialItem JadeOuter6 => Instance[(short)33];
 
-		/// <summary>
-		/// 神照石
-		/// </summary>
 		public static MaterialItem JadeOuter7 => Instance[(short)34];
 
-		/// <summary>
-		/// 水玉
-		/// </summary>
 		public static MaterialItem JadeInner1 => Instance[(short)35];
 
-		/// <summary>
-		/// 翡翠
-		/// </summary>
 		public static MaterialItem JadeInner2 => Instance[(short)36];
 
-		/// <summary>
-		/// 羊脂白玉
-		/// </summary>
 		public static MaterialItem JadeInner3 => Instance[(short)37];
 
-		/// <summary>
-		/// 五色琉璃
-		/// </summary>
 		public static MaterialItem JadeInner4 => Instance[(short)38];
 
-		/// <summary>
-		/// 龙血墨玉
-		/// </summary>
 		public static MaterialItem JadeInner5 => Instance[(short)39];
 
-		/// <summary>
-		/// 寒玉
-		/// </summary>
 		public static MaterialItem JadeInner6 => Instance[(short)40];
 
-		/// <summary>
-		/// 昆仑活玉
-		/// </summary>
 		public static MaterialItem JadeInner7 => Instance[(short)41];
 
-		/// <summary>
-		/// 虎衣
-		/// </summary>
 		public static MaterialItem FabricOuter1 => Instance[(short)42];
 
-		/// <summary>
-		/// 紫貂衣
-		/// </summary>
 		public static MaterialItem FabricOuter2 => Instance[(short)43];
 
-		/// <summary>
-		/// 白蟒鳞
-		/// </summary>
 		public static MaterialItem FabricOuter3 => Instance[(short)44];
 
-		/// <summary>
-		/// 狐仙衣
-		/// </summary>
 		public static MaterialItem FabricOuter4 => Instance[(short)45];
 
-		/// <summary>
-		/// 鸾凤羽
-		/// </summary>
 		public static MaterialItem FabricOuter5 => Instance[(short)46];
 
-		/// <summary>
-		/// 龙背金筋
-		/// </summary>
 		public static MaterialItem FabricOuter6 => Instance[(short)47];
 
-		/// <summary>
-		/// 金缕蝉衣
-		/// </summary>
 		public static MaterialItem FabricOuter7 => Instance[(short)48];
 
-		/// <summary>
-		/// 秀文黄麻
-		/// </summary>
 		public static MaterialItem FabricInner1 => Instance[(short)49];
 
-		/// <summary>
-		/// 锦棉丝
-		/// </summary>
 		public static MaterialItem FabricInner2 => Instance[(short)50];
 
-		/// <summary>
-		/// 百花百草丝
-		/// </summary>
 		public static MaterialItem FabricInner3 => Instance[(short)51];
 
-		/// <summary>
-		/// 玄金软丝
-		/// </summary>
 		public static MaterialItem FabricInner4 => Instance[(short)52];
 
-		/// <summary>
-		/// 冰蚕银丝
-		/// </summary>
 		public static MaterialItem FabricInner5 => Instance[(short)53];
 
-		/// <summary>
-		/// 血露丝
-		/// </summary>
 		public static MaterialItem FabricInner6 => Instance[(short)54];
 
-		/// <summary>
-		/// 天蚕丝
-		/// </summary>
 		public static MaterialItem FabricInner7 => Instance[(short)55];
 
-		/// <summary>
-		/// 鸡蛋
-		/// </summary>
 		public static MaterialItem CookingBird0 => Instance[(short)56];
 
-		/// <summary>
-		/// 云英鸡
-		/// </summary>
 		public static MaterialItem CookingBird1 => Instance[(short)57];
 
-		/// <summary>
-		/// 绍兴麻鸭
-		/// </summary>
 		public static MaterialItem CookingBird2 => Instance[(short)58];
 
-		/// <summary>
-		/// 雁鹅
-		/// </summary>
 		public static MaterialItem CookingBird3 => Instance[(short)59];
 
-		/// <summary>
-		/// 乌骨鸡
-		/// </summary>
 		public static MaterialItem CookingBird4 => Instance[(short)60];
 
-		/// <summary>
-		/// 玲珑鹌鹑
-		/// </summary>
 		public static MaterialItem CookingBird5 => Instance[(short)61];
 
-		/// <summary>
-		/// 蓝孔雀
-		/// </summary>
 		public static MaterialItem CookingBird6 => Instance[(short)62];
 
-		/// <summary>
-		/// 野兔
-		/// </summary>
 		public static MaterialItem CookingBeast0 => Instance[(short)63];
 
-		/// <summary>
-		/// 山猪
-		/// </summary>
 		public static MaterialItem CookingBeast1 => Instance[(short)64];
 
-		/// <summary>
-		/// 东山羊
-		/// </summary>
 		public static MaterialItem CookingBeast2 => Instance[(short)65];
 
-		/// <summary>
-		/// 百花锦蛇
-		/// </summary>
 		public static MaterialItem CookingBeast3 => Instance[(short)66];
 
-		/// <summary>
-		/// 梅花鹿
-		/// </summary>
 		public static MaterialItem CookingBeast4 => Instance[(short)67];
 
-		/// <summary>
-		/// 象拔
-		/// </summary>
 		public static MaterialItem CookingBeast5 => Instance[(short)68];
 
-		/// <summary>
-		/// 黑熊
-		/// </summary>
 		public static MaterialItem CookingBeast6 => Instance[(short)69];
 
-		/// <summary>
-		/// 小麦
-		/// </summary>
 		public static MaterialItem CookingVegetarian0 => Instance[(short)70];
 
-		/// <summary>
-		/// 大豆
-		/// </summary>
 		public static MaterialItem CookingVegetarian1 => Instance[(short)71];
 
-		/// <summary>
-		/// 香菇
-		/// </summary>
 		public static MaterialItem CookingVegetarian2 => Instance[(short)72];
 
-		/// <summary>
-		/// 玉芦笋
-		/// </summary>
 		public static MaterialItem CookingVegetarian3 => Instance[(short)73];
 
-		/// <summary>
-		/// 贡莲
-		/// </summary>
 		public static MaterialItem CookingVegetarian4 => Instance[(short)74];
 
-		/// <summary>
-		/// 银杏子
-		/// </summary>
 		public static MaterialItem CookingVegetarian5 => Instance[(short)75];
 
-		/// <summary>
-		/// 猴头菇
-		/// </summary>
 		public static MaterialItem CookingVegetarian6 => Instance[(short)76];
 
-		/// <summary>
-		/// 草鱼
-		/// </summary>
 		public static MaterialItem CookingFish0 => Instance[(short)77];
 
-		/// <summary>
-		/// 青虾
-		/// </summary>
 		public static MaterialItem CookingFish1 => Instance[(short)78];
 
-		/// <summary>
-		/// 岩鲤
-		/// </summary>
 		public static MaterialItem CookingFish2 => Instance[(short)79];
 
-		/// <summary>
-		/// 赤蟹
-		/// </summary>
 		public static MaterialItem CookingFish3 => Instance[(short)80];
 
-		/// <summary>
-		/// 四鳃鲈
-		/// </summary>
 		public static MaterialItem CookingFish4 => Instance[(short)81];
 
-		/// <summary>
-		/// 两头网鲍
-		/// </summary>
 		public static MaterialItem CookingFish5 => Instance[(short)82];
 
-		/// <summary>
-		/// 鲟鳇鱼
-		/// </summary>
 		public static MaterialItem CookingFish6 => Instance[(short)83];
 
-		/// <summary>
-		/// 接骨草
-		/// </summary>
 		public static MaterialItem MedicineOuterInjury1 => Instance[(short)140];
 
-		/// <summary>
-		/// 伏地延胡索
-		/// </summary>
 		public static MaterialItem MedicineOuterInjury3 => Instance[(short)141];
 
-		/// <summary>
-		/// 神木血竭
-		/// </summary>
 		public static MaterialItem MedicineOuterInjury5 => Instance[(short)142];
 
-		/// <summary>
-		/// 千年活灵芝
-		/// </summary>
 		public static MaterialItem MedicineOuterInjury7 => Instance[(short)143];
 
-		/// <summary>
-		/// 紫珠草
-		/// </summary>
 		public static MaterialItem MedicinePoisonRed1 => Instance[(short)144];
 
-		/// <summary>
-		/// 雪山九牛草
-		/// </summary>
 		public static MaterialItem MedicinePoisonRed3 => Instance[(short)145];
 
-		/// <summary>
-		/// 白犀牛角
-		/// </summary>
 		public static MaterialItem MedicinePoisonRed5 => Instance[(short)146];
 
-		/// <summary>
-		/// 玉佛露
-		/// </summary>
 		public static MaterialItem MedicinePoisonRed7 => Instance[(short)147];
 
-		/// <summary>
-		/// 千年健
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfOuter1 => Instance[(short)148];
 
-		/// <summary>
-		/// 紫花蛇舌草
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfOuter3 => Instance[(short)149];
 
-		/// <summary>
-		/// 灵龟板
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfOuter5 => Instance[(short)150];
 
-		/// <summary>
-		/// 女娲石
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfOuter7 => Instance[(short)151];
 
-		/// <summary>
-		/// 虎骨
-		/// </summary>
 		public static MaterialItem MedicineStrength1 => Instance[(short)152];
 
-		/// <summary>
-		/// 宿龙草
-		/// </summary>
 		public static MaterialItem MedicineStrength3 => Instance[(short)153];
 
-		/// <summary>
-		/// 老猿骨
-		/// </summary>
 		public static MaterialItem MedicineStrength5 => Instance[(short)154];
 
-		/// <summary>
-		/// 赤腹血龟
-		/// </summary>
 		public static MaterialItem MedicineStrength7 => Instance[(short)155];
 
-		/// <summary>
-		/// 人参
-		/// </summary>
 		public static MaterialItem MedicineInnerInjury1 => Instance[(short)156];
 
-		/// <summary>
-		/// 紫青降香
-		/// </summary>
 		public static MaterialItem MedicineInnerInjury3 => Instance[(short)157];
 
-		/// <summary>
-		/// 黑玉沉香
-		/// </summary>
 		public static MaterialItem MedicineInnerInjury5 => Instance[(short)158];
 
-		/// <summary>
-		/// 千年雪参
-		/// </summary>
 		public static MaterialItem MedicineInnerInjury7 => Instance[(short)159];
 
-		/// <summary>
-		/// 青蛇胆
-		/// </summary>
 		public static MaterialItem MedicinePoisonGloomy1 => Instance[(short)160];
 
-		/// <summary>
-		/// 金斑乌药
-		/// </summary>
 		public static MaterialItem MedicinePoisonGloomy3 => Instance[(short)161];
 
-		/// <summary>
-		/// 玉蟾酥
-		/// </summary>
 		public static MaterialItem MedicinePoisonGloomy5 => Instance[(short)162];
 
-		/// <summary>
-		/// 紫玉王参
-		/// </summary>
 		public static MaterialItem MedicinePoisonGloomy7 => Instance[(short)163];
 
-		/// <summary>
-		/// 苏合香
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfInner1 => Instance[(short)164];
 
-		/// <summary>
-		/// 夜雾石
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfInner3 => Instance[(short)165];
 
-		/// <summary>
-		/// 灯心檀香
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfInner5 => Instance[(short)166];
 
-		/// <summary>
-		/// 瑶池兰
-		/// </summary>
 		public static MaterialItem MedicinePenetrateResistOfInner7 => Instance[(short)167];
 
-		/// <summary>
-		/// 素馨花
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfBreath1 => Instance[(short)168];
 
-		/// <summary>
-		/// 安魂香
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfBreath3 => Instance[(short)169];
 
-		/// <summary>
-		/// 黄龙木香
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfBreath5 => Instance[(short)170];
 
-		/// <summary>
-		/// 天香琼玉石
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfBreath7 => Instance[(short)171];
 
-		/// <summary>
-		/// 红蜂蜜
-		/// </summary>
 		public static MaterialItem MedicineDisorderOfQi1 => Instance[(short)172];
 
-		/// <summary>
-		/// 玉鹿血
-		/// </summary>
 		public static MaterialItem MedicineDisorderOfQi3 => Instance[(short)173];
 
-		/// <summary>
-		/// 白额灵蛇胆
-		/// </summary>
 		public static MaterialItem MedicineDisorderOfQi5 => Instance[(short)174];
 
-		/// <summary>
-		/// 天山雪莲
-		/// </summary>
 		public static MaterialItem MedicineDisorderOfQi7 => Instance[(short)175];
 
-		/// <summary>
-		/// 乌蛇骨
-		/// </summary>
 		public static MaterialItem MedicinePoisonCold1 => Instance[(short)176];
 
-		/// <summary>
-		/// 红罗丁香
-		/// </summary>
 		public static MaterialItem MedicinePoisonCold3 => Instance[(short)177];
 
-		/// <summary>
-		/// 百年乌头
-		/// </summary>
 		public static MaterialItem MedicinePoisonCold5 => Instance[(short)178];
 
-		/// <summary>
-		/// 龙合血露
-		/// </summary>
 		public static MaterialItem MedicinePoisonCold7 => Instance[(short)179];
 
-		/// <summary>
-		/// 长生百合
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateStr1 => Instance[(short)180];
 
-		/// <summary>
-		/// 奇香灵脂
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateStr3 => Instance[(short)181];
 
-		/// <summary>
-		/// 金翅鹏鸟血
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateStr5 => Instance[(short)182];
 
-		/// <summary>
-		/// 九色玉菩提
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateStr7 => Instance[(short)183];
 
-		/// <summary>
-		/// 绵黄芪
-		/// </summary>
 		public static MaterialItem MedicineHitRateTechnique1 => Instance[(short)184];
 
-		/// <summary>
-		/// 翡翠芝
-		/// </summary>
 		public static MaterialItem MedicineHitRateTechnique3 => Instance[(short)185];
 
-		/// <summary>
-		/// 天青水玉
-		/// </summary>
 		public static MaterialItem MedicineHitRateTechnique5 => Instance[(short)186];
 
-		/// <summary>
-		/// 龙涎石乳
-		/// </summary>
 		public static MaterialItem MedicineHitRateTechnique7 => Instance[(short)187];
 
-		/// <summary>
-		/// 雪蛤
-		/// </summary>
 		public static MaterialItem MedicineHealth1 => Instance[(short)188];
 
-		/// <summary>
-		/// 灵芝草
-		/// </summary>
 		public static MaterialItem MedicineHealth3 => Instance[(short)189];
 
-		/// <summary>
-		/// 铁皮石斛
-		/// </summary>
 		public static MaterialItem MedicineHealth5 => Instance[(short)190];
 
-		/// <summary>
-		/// 人形何首乌
-		/// </summary>
 		public static MaterialItem MedicineHealth7 => Instance[(short)191];
 
-		/// <summary>
-		/// 珍珠母
-		/// </summary>
 		public static MaterialItem MedicinePoisonIllusory1 => Instance[(short)192];
 
-		/// <summary>
-		/// 朱心茯神
-		/// </summary>
 		public static MaterialItem MedicinePoisonIllusory3 => Instance[(short)193];
 
-		/// <summary>
-		/// 龙脑冰片
-		/// </summary>
 		public static MaterialItem MedicinePoisonIllusory5 => Instance[(short)194];
 
-		/// <summary>
-		/// 墨天麻
-		/// </summary>
 		public static MaterialItem MedicinePoisonIllusory7 => Instance[(short)195];
 
-		/// <summary>
-		/// 满天香
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateTech1 => Instance[(short)196];
 
-		/// <summary>
-		/// 醒魂花
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateTech3 => Instance[(short)197];
 
-		/// <summary>
-		/// 苍龙骨
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateTech5 => Instance[(short)198];
 
-		/// <summary>
-		/// 玲珑珊瑚
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateTech7 => Instance[(short)199];
 
-		/// <summary>
-		/// 野仙姜
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfStance1 => Instance[(short)200];
 
-		/// <summary>
-		/// 鹿茸
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfStance3 => Instance[(short)201];
 
-		/// <summary>
-		/// 血燕窝
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfStance5 => Instance[(short)202];
 
-		/// <summary>
-		/// 琥珀豆蔻
-		/// </summary>
 		public static MaterialItem MedicineRecoverOfStance7 => Instance[(short)203];
 
-		/// <summary>
-		/// 朱果
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherA1 => Instance[(short)204];
 
-		/// <summary>
-		/// 幽胎草
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherA3 => Instance[(short)205];
 
-		/// <summary>
-		/// 玉露琼浆
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherA5 => Instance[(short)206];
 
-		/// <summary>
-		/// 荼冥花
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherA7 => Instance[(short)207];
 
-		/// <summary>
-		/// 铅丹
-		/// </summary>
 		public static MaterialItem MedicinePoisonRotten1 => Instance[(short)208];
 
-		/// <summary>
-		/// 百虫鬼箭
-		/// </summary>
 		public static MaterialItem MedicinePoisonRotten3 => Instance[(short)209];
 
-		/// <summary>
-		/// 阎王鬼臼
-		/// </summary>
 		public static MaterialItem MedicinePoisonRotten5 => Instance[(short)210];
 
-		/// <summary>
-		/// 乌背银蟾
-		/// </summary>
 		public static MaterialItem MedicinePoisonRotten7 => Instance[(short)211];
 
-		/// <summary>
-		/// 醉芙蓉
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateSpeed1 => Instance[(short)212];
 
-		/// <summary>
-		/// 天竺佛座
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateSpeed3 => Instance[(short)213];
 
-		/// <summary>
-		/// 青鸾血
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateSpeed5 => Instance[(short)214];
 
-		/// <summary>
-		/// 金蚕
-		/// </summary>
 		public static MaterialItem MedicineAvoidRateSpeed7 => Instance[(short)215];
 
-		/// <summary>
-		/// 碎银慈石
-		/// </summary>
 		public static MaterialItem MedicineHitRateSpeed1 => Instance[(short)216];
 
-		/// <summary>
-		/// 空青石
-		/// </summary>
 		public static MaterialItem MedicineHitRateSpeed3 => Instance[(short)217];
 
-		/// <summary>
-		/// 玛瑙清露
-		/// </summary>
 		public static MaterialItem MedicineHitRateSpeed5 => Instance[(short)218];
 
-		/// <summary>
-		/// 炽羽寒蝉
-		/// </summary>
 		public static MaterialItem MedicineHitRateSpeed7 => Instance[(short)219];
 
-		/// <summary>
-		/// 九节菖蒲
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackA1 => Instance[(short)220];
 
-		/// <summary>
-		/// 银线虫草
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackA3 => Instance[(short)221];
 
-		/// <summary>
-		/// 雪熊金胆
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackA5 => Instance[(short)222];
 
-		/// <summary>
-		/// 舍利子
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackA7 => Instance[(short)223];
 
-		/// <summary>
-		/// 犀黄
-		/// </summary>
 		public static MaterialItem MedicinePoisonHot1 => Instance[(short)224];
 
-		/// <summary>
-		/// 黑熊胆
-		/// </summary>
 		public static MaterialItem MedicinePoisonHot3 => Instance[(short)225];
 
-		/// <summary>
-		/// 青花龙葵
-		/// </summary>
 		public static MaterialItem MedicinePoisonHot5 => Instance[(short)226];
 
-		/// <summary>
-		/// 天蛇蜕
-		/// </summary>
 		public static MaterialItem MedicinePoisonHot7 => Instance[(short)227];
 
-		/// <summary>
-		/// 麝香
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherB1 => Instance[(short)228];
 
-		/// <summary>
-		/// 金香附
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherB3 => Instance[(short)229];
 
-		/// <summary>
-		/// 花甲茯苓
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherB5 => Instance[(short)230];
 
-		/// <summary>
-		/// 金母蟠桃
-		/// </summary>
 		public static MaterialItem MedicineRecoverOtherB7 => Instance[(short)231];
 
-		/// <summary>
-		/// 寄鬼虫
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackB1 => Instance[(short)232];
 
-		/// <summary>
-		/// 梧桐血蛇
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackB3 => Instance[(short)233];
 
-		/// <summary>
-		/// 金披蜥蜴
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackB5 => Instance[(short)234];
 
-		/// <summary>
-		/// 巴蟒玄胆
-		/// </summary>
 		public static MaterialItem MedicineRecoverAttackB7 => Instance[(short)235];
 
-		/// <summary>
-		/// 鸩羽
-		/// </summary>
 		public static MaterialItem PoisonHot1 => Instance[(short)236];
 
-		/// <summary>
-		/// 雷公藤
-		/// </summary>
 		public static MaterialItem PoisonHot2 => Instance[(short)237];
 
-		/// <summary>
-		/// 牵机草
-		/// </summary>
 		public static MaterialItem PoisonHot3 => Instance[(short)238];
 
-		/// <summary>
-		/// 五煞落魂草
-		/// </summary>
 		public static MaterialItem PoisonHot4 => Instance[(short)239];
 
-		/// <summary>
-		/// 杏黄蛛
-		/// </summary>
 		public static MaterialItem PoisonHot5 => Instance[(short)240];
 
-		/// <summary>
-		/// 金蛇
-		/// </summary>
 		public static MaterialItem PoisonHot6 => Instance[(short)241];
 
-		/// <summary>
-		/// 断肠草
-		/// </summary>
 		public static MaterialItem PoisonHot7 => Instance[(short)242];
 
-		/// <summary>
-		/// 草乌头
-		/// </summary>
 		public static MaterialItem PoisonGloomy1 => Instance[(short)243];
 
-		/// <summary>
-		/// 相思子
-		/// </summary>
 		public static MaterialItem PoisonGloomy2 => Instance[(short)244];
 
-		/// <summary>
-		/// 紫蜈蜂
-		/// </summary>
 		public static MaterialItem PoisonGloomy3 => Instance[(short)245];
 
-		/// <summary>
-		/// 鬼母杜鹃
-		/// </summary>
 		public static MaterialItem PoisonGloomy4 => Instance[(short)246];
 
-		/// <summary>
-		/// 百眼蜈蚣
-		/// </summary>
 		public static MaterialItem PoisonGloomy5 => Instance[(short)247];
 
-		/// <summary>
-		/// 七彩玉纱娘
-		/// </summary>
 		public static MaterialItem PoisonGloomy6 => Instance[(short)248];
 
-		/// <summary>
-		/// 邪窍花
-		/// </summary>
 		public static MaterialItem PoisonGloomy7 => Instance[(short)249];
 
-		/// <summary>
-		/// 冽霜草
-		/// </summary>
 		public static MaterialItem PoisonCold1 => Instance[(short)250];
 
-		/// <summary>
-		/// 白蛇胆
-		/// </summary>
 		public static MaterialItem PoisonCold2 => Instance[(short)251];
 
-		/// <summary>
-		/// 玄阴石
-		/// </summary>
 		public static MaterialItem PoisonCold3 => Instance[(short)252];
 
-		/// <summary>
-		/// 寒玉蟾蜍
-		/// </summary>
 		public static MaterialItem PoisonCold4 => Instance[(short)253];
 
-		/// <summary>
-		/// 玄冰琵琶蝎
-		/// </summary>
 		public static MaterialItem PoisonCold5 => Instance[(short)254];
 
-		/// <summary>
-		/// 青蛟胆
-		/// </summary>
 		public static MaterialItem PoisonCold6 => Instance[(short)255];
 
-		/// <summary>
-		/// 千年冰蚕
-		/// </summary>
 		public static MaterialItem PoisonCold7 => Instance[(short)256];
 
-		/// <summary>
-		/// 红信石
-		/// </summary>
 		public static MaterialItem PoisonRed1 => Instance[(short)257];
 
-		/// <summary>
-		/// 见血封喉
-		/// </summary>
 		public static MaterialItem PoisonRed2 => Instance[(short)258];
 
-		/// <summary>
-		/// 一品红
-		/// </summary>
 		public static MaterialItem PoisonRed3 => Instance[(short)259];
 
-		/// <summary>
-		/// 赤血斑蝎
-		/// </summary>
 		public static MaterialItem PoisonRed4 => Instance[(short)260];
 
-		/// <summary>
-		/// 孔雀胆
-		/// </summary>
 		public static MaterialItem PoisonRed5 => Instance[(short)261];
 
-		/// <summary>
-		/// 凤凰木
-		/// </summary>
 		public static MaterialItem PoisonRed6 => Instance[(short)262];
 
-		/// <summary>
-		/// 血蟾
-		/// </summary>
 		public static MaterialItem PoisonRed7 => Instance[(short)263];
 
-		/// <summary>
-		/// 腐尸虫
-		/// </summary>
 		public static MaterialItem PoisonRotten1 => Instance[(short)264];
 
-		/// <summary>
-		/// 腹蛇涎
-		/// </summary>
 		public static MaterialItem PoisonRotten2 => Instance[(short)265];
 
-		/// <summary>
-		/// 散瘟草
-		/// </summary>
 		public static MaterialItem PoisonRotten3 => Instance[(short)266];
 
-		/// <summary>
-		/// 玄尸水
-		/// </summary>
 		public static MaterialItem PoisonRotten4 => Instance[(short)267];
 
-		/// <summary>
-		/// 烂髓鬼虫
-		/// </summary>
 		public static MaterialItem PoisonRotten5 => Instance[(short)268];
 
-		/// <summary>
-		/// 黑水冥蛇骨
-		/// </summary>
 		public static MaterialItem PoisonRotten6 => Instance[(short)269];
 
-		/// <summary>
-		/// 千年青蛛
-		/// </summary>
 		public static MaterialItem PoisonRotten7 => Instance[(short)270];
 
-		/// <summary>
-		/// 夹竹桃
-		/// </summary>
 		public static MaterialItem PoisonIllusory1 => Instance[(short)271];
 
-		/// <summary>
-		/// 彼岸花
-		/// </summary>
 		public static MaterialItem PoisonIllusory2 => Instance[(short)272];
 
-		/// <summary>
-		/// 缚魂丝
-		/// </summary>
 		public static MaterialItem PoisonIllusory3 => Instance[(short)273];
 
-		/// <summary>
-		/// 金怠花
-		/// </summary>
 		public static MaterialItem PoisonIllusory4 => Instance[(short)274];
 
-		/// <summary>
-		/// 烟煴紫瘴
-		/// </summary>
 		public static MaterialItem PoisonIllusory5 => Instance[(short)275];
 
-		/// <summary>
-		/// 无寐兰
-		/// </summary>
 		public static MaterialItem PoisonIllusory6 => Instance[(short)276];
 
-		/// <summary>
-		/// 人面曼陀罗
-		/// </summary>
 		public static MaterialItem PoisonIllusory7 => Instance[(short)277];
 
-		/// <summary>
-		/// 白蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWhiteEgg => Instance[(short)278];
 
-		/// <summary>
-		/// 黑蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBlackEgg => Instance[(short)279];
 
-		/// <summary>
-		/// 青蛟卵
-		/// </summary>
 		public static MaterialItem JiaoGreenEgg => Instance[(short)280];
 
-		/// <summary>
-		/// 赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoRedEgg => Instance[(short)281];
 
-		/// <summary>
-		/// 黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoYellowEgg => Instance[(short)282];
 
-		/// <summary>
-		/// 白黑蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWBEgg => Instance[(short)283];
 
-		/// <summary>
-		/// 白青蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWGEgg => Instance[(short)284];
 
-		/// <summary>
-		/// 白赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWREgg => Instance[(short)285];
 
-		/// <summary>
-		/// 白黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWYEgg => Instance[(short)286];
 
-		/// <summary>
-		/// 黑青蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBGEgg => Instance[(short)287];
 
-		/// <summary>
-		/// 黑赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBREgg => Instance[(short)288];
 
-		/// <summary>
-		/// 黑黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBYEgg => Instance[(short)289];
 
-		/// <summary>
-		/// 青赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoGREgg => Instance[(short)290];
 
-		/// <summary>
-		/// 青黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoGYEgg => Instance[(short)291];
 
-		/// <summary>
-		/// 赤黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoRYEgg => Instance[(short)292];
 
-		/// <summary>
-		/// 白黑青蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWBGEgg => Instance[(short)293];
 
-		/// <summary>
-		/// 白黑赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWBREgg => Instance[(short)294];
 
-		/// <summary>
-		/// 白黑黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWBYEgg => Instance[(short)295];
 
-		/// <summary>
-		/// 白青赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWGREgg => Instance[(short)296];
 
-		/// <summary>
-		/// 白青黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWGYEgg => Instance[(short)297];
 
-		/// <summary>
-		/// 白赤黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWRYEgg => Instance[(short)298];
 
-		/// <summary>
-		/// 黑青赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBGREgg => Instance[(short)299];
 
-		/// <summary>
-		/// 黑青黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBGYEgg => Instance[(short)300];
 
-		/// <summary>
-		/// 黑赤黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBRYEgg => Instance[(short)301];
 
-		/// <summary>
-		/// 青赤黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoGRYEgg => Instance[(short)302];
 
-		/// <summary>
-		/// 白黑青赤蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWBGREgg => Instance[(short)303];
 
-		/// <summary>
-		/// 白黑青黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWBGYEgg => Instance[(short)304];
 
-		/// <summary>
-		/// 白黑赤黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWBRYEgg => Instance[(short)305];
 
-		/// <summary>
-		/// 白青赤黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWGRYEgg => Instance[(short)306];
 
-		/// <summary>
-		/// 黑青赤黄蛟卵
-		/// </summary>
 		public static MaterialItem JiaoBGRYEgg => Instance[(short)307];
 
-		/// <summary>
-		/// 白青赤黄黑蛟卵
-		/// </summary>
 		public static MaterialItem JiaoWGRYBEgg => Instance[(short)308];
 
-		/// <summary>
-		/// 白幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWhite => Instance[(short)309];
 
-		/// <summary>
-		/// 黑幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBlack => Instance[(short)310];
 
-		/// <summary>
-		/// 青幼蛟
-		/// </summary>
 		public static MaterialItem JiaoGreen => Instance[(short)311];
 
-		/// <summary>
-		/// 赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoRed => Instance[(short)312];
 
-		/// <summary>
-		/// 黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoYellow => Instance[(short)313];
 
-		/// <summary>
-		/// 白黑幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWB => Instance[(short)314];
 
-		/// <summary>
-		/// 白青幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWG => Instance[(short)315];
 
-		/// <summary>
-		/// 白赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWR => Instance[(short)316];
 
-		/// <summary>
-		/// 白黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWY => Instance[(short)317];
 
-		/// <summary>
-		/// 黑青幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBG => Instance[(short)318];
 
-		/// <summary>
-		/// 黑赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBR => Instance[(short)319];
 
-		/// <summary>
-		/// 黑黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBY => Instance[(short)320];
 
-		/// <summary>
-		/// 青赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoGR => Instance[(short)321];
 
-		/// <summary>
-		/// 青黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoGY => Instance[(short)322];
 
-		/// <summary>
-		/// 赤黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoRY => Instance[(short)323];
 
-		/// <summary>
-		/// 白黑青幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWBG => Instance[(short)324];
 
-		/// <summary>
-		/// 白黑赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWBR => Instance[(short)325];
 
-		/// <summary>
-		/// 白黑黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWBY => Instance[(short)326];
 
-		/// <summary>
-		/// 白青赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWGR => Instance[(short)327];
 
-		/// <summary>
-		/// 白青黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWGY => Instance[(short)328];
 
-		/// <summary>
-		/// 白赤黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWRY => Instance[(short)329];
 
-		/// <summary>
-		/// 黑青赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBGR => Instance[(short)330];
 
-		/// <summary>
-		/// 黑青黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBGY => Instance[(short)331];
 
-		/// <summary>
-		/// 黑赤黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBRY => Instance[(short)332];
 
-		/// <summary>
-		/// 青赤黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoGRY => Instance[(short)333];
 
-		/// <summary>
-		/// 白黑青赤幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWBGR => Instance[(short)334];
 
-		/// <summary>
-		/// 白黑青黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWBGY => Instance[(short)335];
 
-		/// <summary>
-		/// 白黑赤黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWBRY => Instance[(short)336];
 
-		/// <summary>
-		/// 白青赤黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWGRY => Instance[(short)337];
 
-		/// <summary>
-		/// 黑青赤黄幼蛟
-		/// </summary>
 		public static MaterialItem JiaoBGRY => Instance[(short)338];
 
-		/// <summary>
-		/// 白青赤黄黑幼蛟
-		/// </summary>
 		public static MaterialItem JiaoWGRYB => Instance[(short)339];
 
-		/// <summary>
-		/// 青竹片
-		/// </summary>
 		public static MaterialItem GreenBambooPiece => Instance[(short)340];
 
-		/// <summary>
-		/// 百鸟彩羽
-		/// </summary>
 		public static MaterialItem SectStoryFulongFeathers => Instance[(short)342];
 
-		/// <summary>
-		/// 冷静元鸡羽
-		/// </summary>
 		public static MaterialItem CalmFeathers => Instance[(short)343];
 
-		/// <summary>
-		/// 聪颖元鸡羽
-		/// </summary>
 		public static MaterialItem CleverFeathers => Instance[(short)344];
 
-		/// <summary>
-		/// 热情元鸡羽
-		/// </summary>
 		public static MaterialItem EnthusiasticFeathers => Instance[(short)345];
 
-		/// <summary>
-		/// 勇壮元鸡羽
-		/// </summary>
 		public static MaterialItem BraveFeathers => Instance[(short)346];
 
-		/// <summary>
-		/// 坚毅元鸡羽
-		/// </summary>
 		public static MaterialItem FirmFeathers => Instance[(short)347];
 
-		/// <summary>
-		/// 福缘元鸡羽
-		/// </summary>
 		public static MaterialItem LuckyFeathers => Instance[(short)348];
 
-		/// <summary>
-		/// 合道元鸡羽
-		/// </summary>
 		public static MaterialItem PerceptiveFeathers => Instance[(short)349];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Material Instance = new Material();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -3350,43 +1583,43 @@ public class Material : ConfigData<MaterialItem, short>
 		_dataArray.Add(new MaterialItem(140, LocalStringManager.GetConfig("Material_language", "Name_140"), 5, 505, 1, 140, "icon_Material_jiegucao", LocalStringManager.GetConfig("Material_language", "Desc_140"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_140"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 158, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(141, LocalStringManager.GetConfig("Material_language", "Name_141"), 5, 505, 3, 140, "icon_Material_fudiyanhusuo", LocalStringManager.GetConfig("Material_language", "Desc_141"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_141"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 158, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(142, LocalStringManager.GetConfig("Material_language", "Name_142"), 5, 505, 5, 140, "icon_Material_shenmuxuejie", LocalStringManager.GetConfig("Material_language", "Desc_142"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_142"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 158, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(143, LocalStringManager.GetConfig("Material_language", "Name_143"), 5, 505, 7, 140, "icon_Material_qiannianhuolingzhi", LocalStringManager.GetConfig("Material_language", "Desc_143"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_143"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 158, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(143, LocalStringManager.GetConfig("Material_language", "Name_143"), 5, 505, 7, 140, "icon_Material_qiannianhuolingzhi", LocalStringManager.GetConfig("Material_language", "Desc_143"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_143"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 158, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(144, LocalStringManager.GetConfig("Material_language", "Name_144"), 5, 505, 1, 144, "icon_Material_zizhucao", LocalStringManager.GetConfig("Material_language", "Desc_144"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_144"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 159, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(145, LocalStringManager.GetConfig("Material_language", "Name_145"), 5, 505, 3, 144, "icon_Material_xueshanjiuniucao", LocalStringManager.GetConfig("Material_language", "Desc_145"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_145"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 159, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(146, LocalStringManager.GetConfig("Material_language", "Name_146"), 5, 505, 5, 144, "icon_Material_baixiniujiao", LocalStringManager.GetConfig("Material_language", "Desc_146"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_146"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 159, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(147, LocalStringManager.GetConfig("Material_language", "Name_147"), 5, 505, 7, 144, "icon_Material_yufolu", LocalStringManager.GetConfig("Material_language", "Desc_147"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_147"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 159, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(147, LocalStringManager.GetConfig("Material_language", "Name_147"), 5, 505, 7, 144, "icon_Material_yufolu", LocalStringManager.GetConfig("Material_language", "Desc_147"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_147"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 159, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(148, LocalStringManager.GetConfig("Material_language", "Name_148"), 5, 505, 1, 148, "icon_Material_qiannianjian", LocalStringManager.GetConfig("Material_language", "Desc_148"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_148"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 160, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(149, LocalStringManager.GetConfig("Material_language", "Name_149"), 5, 505, 3, 148, "icon_Material_zihuasheshecao", LocalStringManager.GetConfig("Material_language", "Desc_149"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_149"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 160, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(150, LocalStringManager.GetConfig("Material_language", "Name_150"), 5, 505, 5, 148, "icon_Material_lingguiban", LocalStringManager.GetConfig("Material_language", "Desc_150"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_150"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 160, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(151, LocalStringManager.GetConfig("Material_language", "Name_151"), 5, 505, 7, 148, "icon_Material_nuwashi", LocalStringManager.GetConfig("Material_language", "Desc_151"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_151"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 160, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(151, LocalStringManager.GetConfig("Material_language", "Name_151"), 5, 505, 7, 148, "icon_Material_nuwashi", LocalStringManager.GetConfig("Material_language", "Desc_151"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_151"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 160, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(152, LocalStringManager.GetConfig("Material_language", "Name_152"), 5, 505, 1, 152, "icon_Material_hugu", LocalStringManager.GetConfig("Material_language", "Desc_152"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_152"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 161, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(153, LocalStringManager.GetConfig("Material_language", "Name_153"), 5, 505, 3, 152, "icon_Material_xiulongcao", LocalStringManager.GetConfig("Material_language", "Desc_153"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_153"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 161, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(154, LocalStringManager.GetConfig("Material_language", "Name_154"), 5, 505, 5, 152, "icon_Material_laoyuangu", LocalStringManager.GetConfig("Material_language", "Desc_154"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_154"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 161, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(155, LocalStringManager.GetConfig("Material_language", "Name_155"), 5, 505, 7, 152, "icon_Material_chifuxuegui", LocalStringManager.GetConfig("Material_language", "Desc_155"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_155"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 161, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(155, LocalStringManager.GetConfig("Material_language", "Name_155"), 5, 505, 7, 152, "icon_Material_chifuxuegui", LocalStringManager.GetConfig("Material_language", "Desc_155"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_155"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 161, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(156, LocalStringManager.GetConfig("Material_language", "Name_156"), 5, 505, 1, 156, "icon_Material_renshen", LocalStringManager.GetConfig("Material_language", "Desc_156"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_156"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 162, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(157, LocalStringManager.GetConfig("Material_language", "Name_157"), 5, 505, 3, 156, "icon_Material_ziqingjiangxiang", LocalStringManager.GetConfig("Material_language", "Desc_157"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_157"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 162, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(158, LocalStringManager.GetConfig("Material_language", "Name_158"), 5, 505, 5, 156, "icon_Material_heiyuchenxiang", LocalStringManager.GetConfig("Material_language", "Desc_158"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_158"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 162, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(159, LocalStringManager.GetConfig("Material_language", "Name_159"), 5, 505, 7, 156, "icon_Material_qiannianxuecan", LocalStringManager.GetConfig("Material_language", "Desc_159"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_159"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 162, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(159, LocalStringManager.GetConfig("Material_language", "Name_159"), 5, 505, 7, 156, "icon_Material_qiannianxuecan", LocalStringManager.GetConfig("Material_language", "Desc_159"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_159"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 162, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(160, LocalStringManager.GetConfig("Material_language", "Name_160"), 5, 505, 1, 160, "icon_Material_qingshedan", LocalStringManager.GetConfig("Material_language", "Desc_160"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_160"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 163, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(161, LocalStringManager.GetConfig("Material_language", "Name_161"), 5, 505, 3, 160, "icon_Material_jinbanwuyao", LocalStringManager.GetConfig("Material_language", "Desc_161"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_161"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 163, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(162, LocalStringManager.GetConfig("Material_language", "Name_162"), 5, 505, 5, 160, "icon_Material_yuchansu", LocalStringManager.GetConfig("Material_language", "Desc_162"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_162"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 163, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(163, LocalStringManager.GetConfig("Material_language", "Name_163"), 5, 505, 7, 160, "icon_Material_ziyuwangcan", LocalStringManager.GetConfig("Material_language", "Desc_163"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_163"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 163, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(163, LocalStringManager.GetConfig("Material_language", "Name_163"), 5, 505, 7, 160, "icon_Material_ziyuwangcan", LocalStringManager.GetConfig("Material_language", "Desc_163"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_163"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 163, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(164, LocalStringManager.GetConfig("Material_language", "Name_164"), 5, 505, 1, 164, "icon_Material_suhexiang", LocalStringManager.GetConfig("Material_language", "Desc_164"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_164"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 164, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(165, LocalStringManager.GetConfig("Material_language", "Name_165"), 5, 505, 3, 164, "icon_Material_yewushi", LocalStringManager.GetConfig("Material_language", "Desc_165"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_165"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 164, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(166, LocalStringManager.GetConfig("Material_language", "Name_166"), 5, 505, 5, 164, "icon_Material_dengxintanxiang", LocalStringManager.GetConfig("Material_language", "Desc_166"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_166"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 164, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(167, LocalStringManager.GetConfig("Material_language", "Name_167"), 5, 505, 7, 164, "icon_Material_yaochilan", LocalStringManager.GetConfig("Material_language", "Desc_167"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_167"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 164, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(167, LocalStringManager.GetConfig("Material_language", "Name_167"), 5, 505, 7, 164, "icon_Material_yaochilan", LocalStringManager.GetConfig("Material_language", "Desc_167"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_167"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 164, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(168, LocalStringManager.GetConfig("Material_language", "Name_168"), 5, 505, 1, 168, "icon_Material_suxinhua", LocalStringManager.GetConfig("Material_language", "Desc_168"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_168"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 165, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(169, LocalStringManager.GetConfig("Material_language", "Name_169"), 5, 505, 3, 168, "icon_Material_anhunxiang", LocalStringManager.GetConfig("Material_language", "Desc_169"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_169"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 165, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(170, LocalStringManager.GetConfig("Material_language", "Name_170"), 5, 505, 5, 168, "icon_Material_huanglongmuxiang", LocalStringManager.GetConfig("Material_language", "Desc_170"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_170"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 165, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(171, LocalStringManager.GetConfig("Material_language", "Name_171"), 5, 505, 7, 168, "icon_Material_tianxiangqiongyushi", LocalStringManager.GetConfig("Material_language", "Desc_171"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_171"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 165, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(171, LocalStringManager.GetConfig("Material_language", "Name_171"), 5, 505, 7, 168, "icon_Material_tianxiangqiongyushi", LocalStringManager.GetConfig("Material_language", "Desc_171"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_171"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 165, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(172, LocalStringManager.GetConfig("Material_language", "Name_172"), 5, 505, 1, 172, "icon_Material_hongfengmi", LocalStringManager.GetConfig("Material_language", "Desc_172"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_172"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 166, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(173, LocalStringManager.GetConfig("Material_language", "Name_173"), 5, 505, 3, 172, "icon_Material_yuluxue", LocalStringManager.GetConfig("Material_language", "Desc_173"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_173"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 166, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(174, LocalStringManager.GetConfig("Material_language", "Name_174"), 5, 505, 5, 172, "icon_Material_baielingshedan", LocalStringManager.GetConfig("Material_language", "Desc_174"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_174"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 30, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 166, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(175, LocalStringManager.GetConfig("Material_language", "Name_175"), 5, 505, 7, 172, "icon_Material_tianshanxuelian", LocalStringManager.GetConfig("Material_language", "Desc_175"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_175"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 166, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(175, LocalStringManager.GetConfig("Material_language", "Name_175"), 5, 505, 7, 172, "icon_Material_tianshanxuelian", LocalStringManager.GetConfig("Material_language", "Desc_175"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_175"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 166, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(176, LocalStringManager.GetConfig("Material_language", "Name_176"), 5, 505, 1, 176, "icon_Material_wushegu", LocalStringManager.GetConfig("Material_language", "Desc_176"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_176"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 167, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(177, LocalStringManager.GetConfig("Material_language", "Name_177"), 5, 505, 3, 176, "icon_Material_hongluodingxiang", LocalStringManager.GetConfig("Material_language", "Desc_177"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_177"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 167, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(178, LocalStringManager.GetConfig("Material_language", "Name_178"), 5, 505, 5, 176, "icon_Material_bainianwutou", LocalStringManager.GetConfig("Material_language", "Desc_178"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_178"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 167, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(179, LocalStringManager.GetConfig("Material_language", "Name_179"), 5, 505, 7, 176, "icon_Material_longhexuelu", LocalStringManager.GetConfig("Material_language", "Desc_179"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_179"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 167, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(179, LocalStringManager.GetConfig("Material_language", "Name_179"), 5, 505, 7, 176, "icon_Material_longhexuelu", LocalStringManager.GetConfig("Material_language", "Desc_179"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_179"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 167, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 	}
 
 	private void CreateItems3()
@@ -3394,59 +1627,59 @@ public class Material : ConfigData<MaterialItem, short>
 		_dataArray.Add(new MaterialItem(180, LocalStringManager.GetConfig("Material_language", "Name_180"), 5, 505, 1, 180, "icon_Material_changshengbaihe", LocalStringManager.GetConfig("Material_language", "Desc_180"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_180"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 168, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(181, LocalStringManager.GetConfig("Material_language", "Name_181"), 5, 505, 3, 180, "icon_Material_qixianglingzhi", LocalStringManager.GetConfig("Material_language", "Desc_181"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_181"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 168, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(182, LocalStringManager.GetConfig("Material_language", "Name_182"), 5, 505, 5, 180, "icon_Material_jinchipengniaoxue", LocalStringManager.GetConfig("Material_language", "Desc_182"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_182"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 168, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(183, LocalStringManager.GetConfig("Material_language", "Name_183"), 5, 505, 7, 180, "icon_Material_jiuseyuputi", LocalStringManager.GetConfig("Material_language", "Desc_183"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_183"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 168, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(183, LocalStringManager.GetConfig("Material_language", "Name_183"), 5, 505, 7, 180, "icon_Material_jiuseyuputi", LocalStringManager.GetConfig("Material_language", "Desc_183"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_183"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 168, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(184, LocalStringManager.GetConfig("Material_language", "Name_184"), 5, 505, 1, 184, "icon_Material_mianhuangqi", LocalStringManager.GetConfig("Material_language", "Desc_184"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_184"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 169, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(185, LocalStringManager.GetConfig("Material_language", "Name_185"), 5, 505, 3, 184, "icon_Material_feicuizhi", LocalStringManager.GetConfig("Material_language", "Desc_185"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_185"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 169, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(186, LocalStringManager.GetConfig("Material_language", "Name_186"), 5, 505, 5, 184, "icon_Material_tianqingshuiyu", LocalStringManager.GetConfig("Material_language", "Desc_186"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_186"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 169, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(187, LocalStringManager.GetConfig("Material_language", "Name_187"), 5, 505, 7, 184, "icon_Material_longxianshiru", LocalStringManager.GetConfig("Material_language", "Desc_187"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_187"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 169, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 200, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(187, LocalStringManager.GetConfig("Material_language", "Name_187"), 5, 505, 7, 184, "icon_Material_longxianshiru", LocalStringManager.GetConfig("Material_language", "Desc_187"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_187"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 169, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 200, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(188, LocalStringManager.GetConfig("Material_language", "Name_188"), 5, 505, 1, 188, "icon_Material_xueha", LocalStringManager.GetConfig("Material_language", "Desc_188"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_188"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 170, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(189, LocalStringManager.GetConfig("Material_language", "Name_189"), 5, 505, 3, 188, "icon_Material_lingzhicao", LocalStringManager.GetConfig("Material_language", "Desc_189"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_189"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 170, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(190, LocalStringManager.GetConfig("Material_language", "Name_190"), 5, 505, 5, 188, "icon_Material_tiepishihu", LocalStringManager.GetConfig("Material_language", "Desc_190"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_190"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 170, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(191, LocalStringManager.GetConfig("Material_language", "Name_191"), 5, 505, 7, 188, "icon_Material_renxingheshouwu", LocalStringManager.GetConfig("Material_language", "Desc_191"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_191"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 170, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(191, LocalStringManager.GetConfig("Material_language", "Name_191"), 5, 505, 7, 188, "icon_Material_renxingheshouwu", LocalStringManager.GetConfig("Material_language", "Desc_191"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_191"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 170, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 6, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(192, LocalStringManager.GetConfig("Material_language", "Name_192"), 5, 505, 1, 192, "icon_Material_zhenzhumu", LocalStringManager.GetConfig("Material_language", "Desc_192"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_192"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 171, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(193, LocalStringManager.GetConfig("Material_language", "Name_193"), 5, 505, 3, 192, "icon_Material_zhuxinfushen", LocalStringManager.GetConfig("Material_language", "Desc_193"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_193"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 171, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(194, LocalStringManager.GetConfig("Material_language", "Name_194"), 5, 505, 5, 192, "icon_Material_longnaobingpian", LocalStringManager.GetConfig("Material_language", "Desc_194"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_194"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 171, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(195, LocalStringManager.GetConfig("Material_language", "Name_195"), 5, 505, 7, 192, "icon_Material_motianma", LocalStringManager.GetConfig("Material_language", "Desc_195"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_195"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 171, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(195, LocalStringManager.GetConfig("Material_language", "Name_195"), 5, 505, 7, 192, "icon_Material_motianma", LocalStringManager.GetConfig("Material_language", "Desc_195"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_195"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 171, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 4, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(196, LocalStringManager.GetConfig("Material_language", "Name_196"), 5, 505, 1, 196, "icon_Material_mantianxiang", LocalStringManager.GetConfig("Material_language", "Desc_196"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_196"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 172, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(197, LocalStringManager.GetConfig("Material_language", "Name_197"), 5, 505, 3, 196, "icon_Material_xinghunhua", LocalStringManager.GetConfig("Material_language", "Desc_197"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_197"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 172, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(198, LocalStringManager.GetConfig("Material_language", "Name_198"), 5, 505, 5, 196, "icon_Material_canglonggu", LocalStringManager.GetConfig("Material_language", "Desc_198"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_198"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 172, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(199, LocalStringManager.GetConfig("Material_language", "Name_199"), 5, 505, 7, 196, "icon_Material_linglongshanhu", LocalStringManager.GetConfig("Material_language", "Desc_199"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_199"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 172, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(199, LocalStringManager.GetConfig("Material_language", "Name_199"), 5, 505, 7, 196, "icon_Material_linglongshanhu", LocalStringManager.GetConfig("Material_language", "Desc_199"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_199"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 172, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(200, LocalStringManager.GetConfig("Material_language", "Name_200"), 5, 505, 1, 200, "icon_Material_yexianjiang", LocalStringManager.GetConfig("Material_language", "Desc_200"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_200"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 173, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(201, LocalStringManager.GetConfig("Material_language", "Name_201"), 5, 505, 3, 200, "icon_Material_lurong", LocalStringManager.GetConfig("Material_language", "Desc_201"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_201"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 173, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(202, LocalStringManager.GetConfig("Material_language", "Name_202"), 5, 505, 5, 200, "icon_Material_xueyanwo", LocalStringManager.GetConfig("Material_language", "Desc_202"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_202"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 173, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(203, LocalStringManager.GetConfig("Material_language", "Name_203"), 5, 505, 7, 200, "icon_Material_hupodoukou", LocalStringManager.GetConfig("Material_language", "Desc_203"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_203"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 173, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(203, LocalStringManager.GetConfig("Material_language", "Name_203"), 5, 505, 7, 200, "icon_Material_hupodoukou", LocalStringManager.GetConfig("Material_language", "Desc_203"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_203"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 173, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(204, LocalStringManager.GetConfig("Material_language", "Name_204"), 5, 505, 1, 204, "icon_Material_zhuguo", LocalStringManager.GetConfig("Material_language", "Desc_204"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_204"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 174, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(205, LocalStringManager.GetConfig("Material_language", "Name_205"), 5, 505, 3, 204, "icon_Material_youtaicao", LocalStringManager.GetConfig("Material_language", "Desc_205"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_205"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 174, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(206, LocalStringManager.GetConfig("Material_language", "Name_206"), 5, 505, 5, 204, "icon_Material_yuluqiongjiang", LocalStringManager.GetConfig("Material_language", "Desc_206"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_206"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 174, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(207, LocalStringManager.GetConfig("Material_language", "Name_207"), 5, 505, 7, 204, "icon_Material_tuminghua", LocalStringManager.GetConfig("Material_language", "Desc_207"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_207"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 174, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(207, LocalStringManager.GetConfig("Material_language", "Name_207"), 5, 505, 7, 204, "icon_Material_tuminghua", LocalStringManager.GetConfig("Material_language", "Desc_207"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_207"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 174, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(208, LocalStringManager.GetConfig("Material_language", "Name_208"), 5, 505, 1, 208, "icon_Material_qiandan", LocalStringManager.GetConfig("Material_language", "Desc_208"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_208"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 175, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(209, LocalStringManager.GetConfig("Material_language", "Name_209"), 5, 505, 3, 208, "icon_Material_baichongguijian", LocalStringManager.GetConfig("Material_language", "Desc_209"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_209"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 175, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(210, LocalStringManager.GetConfig("Material_language", "Name_210"), 5, 505, 5, 208, "icon_Material_yanwangguijiu", LocalStringManager.GetConfig("Material_language", "Desc_210"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_210"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 175, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(211, LocalStringManager.GetConfig("Material_language", "Name_211"), 5, 505, 7, 208, "icon_Material_wubeiyinchan", LocalStringManager.GetConfig("Material_language", "Desc_211"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_211"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 175, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(211, LocalStringManager.GetConfig("Material_language", "Name_211"), 5, 505, 7, 208, "icon_Material_wubeiyinchan", LocalStringManager.GetConfig("Material_language", "Desc_211"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_211"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 175, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(212, LocalStringManager.GetConfig("Material_language", "Name_212"), 5, 505, 1, 212, "icon_Material_zuifurong", LocalStringManager.GetConfig("Material_language", "Desc_212"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_212"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 176, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(213, LocalStringManager.GetConfig("Material_language", "Name_213"), 5, 505, 3, 212, "icon_Material_tianzhufozuo", LocalStringManager.GetConfig("Material_language", "Desc_213"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_213"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 176, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(214, LocalStringManager.GetConfig("Material_language", "Name_214"), 5, 505, 5, 212, "icon_Material_qingluanxue", LocalStringManager.GetConfig("Material_language", "Desc_214"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_214"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 176, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(215, LocalStringManager.GetConfig("Material_language", "Name_215"), 5, 505, 7, 212, "icon_Material_jincan", LocalStringManager.GetConfig("Material_language", "Desc_215"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_215"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 176, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(215, LocalStringManager.GetConfig("Material_language", "Name_215"), 5, 505, 7, 212, "icon_Material_jincan", LocalStringManager.GetConfig("Material_language", "Desc_215"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_215"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 176, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(216, LocalStringManager.GetConfig("Material_language", "Name_216"), 5, 505, 1, 216, "icon_Material_suiyincishi", LocalStringManager.GetConfig("Material_language", "Desc_216"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_216"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 177, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(217, LocalStringManager.GetConfig("Material_language", "Name_217"), 5, 505, 3, 216, "icon_Material_kongqingshi", LocalStringManager.GetConfig("Material_language", "Desc_217"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_217"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 177, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(218, LocalStringManager.GetConfig("Material_language", "Name_218"), 5, 505, 5, 216, "icon_Material_manaoqinglu", LocalStringManager.GetConfig("Material_language", "Desc_218"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_218"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 177, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(219, LocalStringManager.GetConfig("Material_language", "Name_219"), 5, 505, 7, 216, "icon_Material_chiyuhanchan", LocalStringManager.GetConfig("Material_language", "Desc_219"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_219"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 177, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 200, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(219, LocalStringManager.GetConfig("Material_language", "Name_219"), 5, 505, 7, 216, "icon_Material_chiyuhanchan", LocalStringManager.GetConfig("Material_language", "Desc_219"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_219"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 177, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 200, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(220, LocalStringManager.GetConfig("Material_language", "Name_220"), 5, 505, 1, 220, "icon_Material_jiujiechangpu", LocalStringManager.GetConfig("Material_language", "Desc_220"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_220"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 178, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(221, LocalStringManager.GetConfig("Material_language", "Name_221"), 5, 505, 3, 220, "icon_Material_yinxianchongcao", LocalStringManager.GetConfig("Material_language", "Desc_221"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_221"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 178, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(222, LocalStringManager.GetConfig("Material_language", "Name_222"), 5, 505, 5, 220, "icon_Material_xuexiongjindan", LocalStringManager.GetConfig("Material_language", "Desc_222"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_222"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 20, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 178, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(223, LocalStringManager.GetConfig("Material_language", "Name_223"), 5, 505, 7, 220, "icon_Material_shelizi", LocalStringManager.GetConfig("Material_language", "Desc_223"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_223"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 178, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 100, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(223, LocalStringManager.GetConfig("Material_language", "Name_223"), 5, 505, 7, 220, "icon_Material_shelizi", LocalStringManager.GetConfig("Material_language", "Desc_223"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_223"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 178, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 100, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(224, LocalStringManager.GetConfig("Material_language", "Name_224"), 5, 505, 1, 224, "icon_Material_xihuang", LocalStringManager.GetConfig("Material_language", "Desc_224"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_224"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 179, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(225, LocalStringManager.GetConfig("Material_language", "Name_225"), 5, 505, 3, 224, "icon_Material_heixiongdan", LocalStringManager.GetConfig("Material_language", "Desc_225"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_225"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 179, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(226, LocalStringManager.GetConfig("Material_language", "Name_226"), 5, 505, 5, 224, "icon_Material_qinghualongkui", LocalStringManager.GetConfig("Material_language", "Desc_226"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_226"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 179, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(227, LocalStringManager.GetConfig("Material_language", "Name_227"), 5, 505, 7, 224, "icon_Material_tianshetui", LocalStringManager.GetConfig("Material_language", "Desc_227"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_227"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 179, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(227, LocalStringManager.GetConfig("Material_language", "Name_227"), 5, 505, 7, 224, "icon_Material_tianshetui", LocalStringManager.GetConfig("Material_language", "Desc_227"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_227"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 179, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(228, LocalStringManager.GetConfig("Material_language", "Name_228"), 5, 505, 1, 228, "icon_Material_shexiang", LocalStringManager.GetConfig("Material_language", "Desc_228"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_228"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 180, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(229, LocalStringManager.GetConfig("Material_language", "Name_229"), 5, 505, 3, 228, "icon_Material_jinxiangfu", LocalStringManager.GetConfig("Material_language", "Desc_229"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_229"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 180, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(230, LocalStringManager.GetConfig("Material_language", "Name_230"), 5, 505, 5, 228, "icon_Material_huajiafuling", LocalStringManager.GetConfig("Material_language", "Desc_230"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_230"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 180, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(231, LocalStringManager.GetConfig("Material_language", "Name_231"), 5, 505, 7, 228, "icon_Material_jinmupantao", LocalStringManager.GetConfig("Material_language", "Desc_231"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_231"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 180, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(231, LocalStringManager.GetConfig("Material_language", "Name_231"), 5, 505, 7, 228, "icon_Material_jinmupantao", LocalStringManager.GetConfig("Material_language", "Desc_231"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_231"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yin, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 180, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(232, LocalStringManager.GetConfig("Material_language", "Name_232"), 5, 505, 1, 232, "icon_Material_jiguichong", LocalStringManager.GetConfig("Material_language", "Desc_232"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_232"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 100, 0, 2, 1200, 4, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 8, 30, 5, new List<short> { 181, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(233, LocalStringManager.GetConfig("Material_language", "Name_233"), 5, 505, 3, 232, "icon_Material_wutongxueshe", LocalStringManager.GetConfig("Material_language", "Desc_233"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_233"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 750, 0, 4, 3000, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 8, 100, 20, new List<short> { 181, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(234, LocalStringManager.GetConfig("Material_language", "Name_234"), 5, 505, 5, 232, "icon_Material_jinpixiyi", LocalStringManager.GetConfig("Material_language", "Desc_234"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_234"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 2800, 2, 6, 5400, 7, allowRandomCreate: true, 20, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 300, 8, 210, 80, new List<short> { 181, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(235, LocalStringManager.GetConfig("Material_language", "Name_235"), 5, 505, 7, 232, "icon_Material_bamangxuandan", LocalStringManager.GetConfig("Material_language", "Desc_235"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_235"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 30, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 181, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(235, LocalStringManager.GetConfig("Material_language", "Name_235"), 5, 505, 7, 232, "icon_Material_bamangxuandan", LocalStringManager.GetConfig("Material_language", "Desc_235"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_235"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 30, 7050, 4, 8, 9000, 8, allowRandomCreate: true, 10, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 500, 8, 360, 320, new List<short> { 181, 2 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 3, 2, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(236, LocalStringManager.GetConfig("Material_language", "Name_236"), 5, 506, 1, 236, "icon_Material_zhenyu", LocalStringManager.GetConfig("Material_language", "Desc_236"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_236"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 200, 0, 2, 600, 3, allowRandomCreate: true, 40, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 25, 9, 30, 5, new List<short> { 152, 3 }, new PoisonsAndLevels(5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Poison, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(237, LocalStringManager.GetConfig("Material_language", "Name_237"), 5, 506, 2, 236, "icon_Material_leigongteng", LocalStringManager.GetConfig("Material_language", "Desc_237"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_237"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 600, 0, 3, 1200, 4, allowRandomCreate: true, 35, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 50, 9, 60, 10, new List<short> { 152, 3 }, new PoisonsAndLevels(10, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Poison, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(238, LocalStringManager.GetConfig("Material_language", "Name_238"), 5, 506, 3, 236, "icon_Material_qianjicao", LocalStringManager.GetConfig("Material_language", "Desc_238"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_238"), transferable: true, stackable: true, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 1500, 0, 4, 1800, 5, allowRandomCreate: true, 30, isSpecial: false, 5, 12, EMaterialProperty.Yang, -1, new List<int>(), -1, 100, 9, 100, 20, new List<short> { 152, 3 }, new PoisonsAndLevels(15, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Poison, EMaterialFilterHardness.Invalid));
@@ -4485,7 +2718,7 @@ public class Material : ConfigData<MaterialItem, short>
 		}, 3, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Jiao, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(340, LocalStringManager.GetConfig("Material_language", "Name_340"), 5, 501, 0, -1, "icon_Material_qingzhupian", LocalStringManager.GetConfig("Material_language", "Desc_340"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_340"), transferable: true, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 1, -1, EMaterialProperty.Invalid, -1, new List<int>(), -1, 0, 7, 0, 10, new List<short> { 0 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(341, LocalStringManager.GetConfig("Material_language", "Name_341"), 5, 505, 8, -1, "icon_Material_dizhaoyufuhua", LocalStringManager.GetConfig("Material_language", "Desc_341"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_341"), transferable: false, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 0, 0, 0, 0, 0, 0, allowRandomCreate: true, 0, isSpecial: true, 5, -1, EMaterialProperty.Invalid, -1, new List<int>(), -1, 0, 8, 450, 30000, new List<short> { 1 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
-		_dataArray.Add(new MaterialItem(342, LocalStringManager.GetConfig("Material_language", "Name_342"), 5, 504, 7, -1, "icon_Material_bainiaocaiyu", LocalStringManager.GetConfig("Material_language", "Desc_342"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_342"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, -1, 0, 15, 0, 0, 50, 8, allowRandomCreate: false, 0, isSpecial: true, 4, -1, EMaterialProperty.Invalid, -1, new List<int>(), -1, 0, 10, 30, 30, new List<short> { 182 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
+		_dataArray.Add(new MaterialItem(342, LocalStringManager.GetConfig("Material_language", "Name_342"), 5, 504, 7, -1, "icon_Material_bainiaocaiyu", LocalStringManager.GetConfig("Material_language", "Desc_342"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_342"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, -1, 0, 15, 0, 0, 50, 8, allowRandomCreate: false, 0, isSpecial: true, 4, -1, EMaterialProperty.Invalid, -1, new List<int> { 47 }, -1, 0, 10, 30, 30, new List<short> { 182 }, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Invalid, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(343, LocalStringManager.GetConfig("Material_language", "Name_343"), 5, 504, 6, -1, "icon_Material_lengjingyuanjiyu", LocalStringManager.GetConfig("Material_language", "Desc_343"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_343"), transferable: true, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: false, 0, isSpecial: true, 4, -1, EMaterialProperty.Invalid, -1, new List<int>(), 8, 0, 10, 360, 0, new List<short>(), new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Feather, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(344, LocalStringManager.GetConfig("Material_language", "Name_344"), 5, 504, 6, -1, "icon_Material_congyingyuanjiyu", LocalStringManager.GetConfig("Material_language", "Desc_344"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_344"), transferable: true, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: false, 0, isSpecial: true, 4, -1, EMaterialProperty.Invalid, -1, new List<int>(), 12, 0, 10, 360, 0, new List<short>(), new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Feather, EMaterialFilterHardness.Invalid));
 		_dataArray.Add(new MaterialItem(345, LocalStringManager.GetConfig("Material_language", "Name_345"), 5, 504, 6, -1, "icon_Material_reqingyuanjiyu", LocalStringManager.GetConfig("Material_language", "Desc_345"), LocalStringManager.GetConfig("Material_language", "FunctionDesc_345"), transferable: true, stackable: true, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, 0, 10, 13800, 4, 7, 7200, 8, allowRandomCreate: false, 0, isSpecial: true, 4, -1, EMaterialProperty.Invalid, -1, new List<int>(), 11, 0, 10, 360, 0, new List<short>(), new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PresetInventoryItem>(), 0, 1, 0, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, primaryRecoverAllInjuries: false, EMedicineEffectType.Invalid, EMedicineEffectSubType.Invalid, 0, 0, 0, secondaryRecoverAllInjuries: false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 60, EMaterialFilterType.Feather, EMaterialFilterHardness.Invalid));

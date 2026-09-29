@@ -4,27 +4,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 物品选择时单类物品需求
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public struct SelectItemFilter : ISerializableGameData
 {
-	/// <summary>
-	/// 筛选规则配置ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short FilterTemplateId;
 
-	/// <summary>
-	/// 筛选接口委托Id
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort DisplayDataFilterId;
 
-	/// <summary>
-	/// 选择完毕后存入EventArgBox的key，如果有多个选择，会依次序递增排列
-	/// </summary>
 	[SerializableGameDataField]
 	public string Key;
 

@@ -4,58 +4,32 @@ using GameData.Utilities;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法 效果描述 显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
-public struct CombatSkillEffectDescriptionDisplayData : ISerializableGameData
+public struct CombatSkillEffectDescriptionDisplayData(CombatSkillEffectDescriptionDisplayData other) : ISerializableGameData
 {
-	/// <summary>
-	/// 无效值
-	/// </summary>
 	public static readonly CombatSkillEffectDescriptionDisplayData Invalid = new CombatSkillEffectDescriptionDisplayData
 	{
 		EffectId = -1,
 		AffectRequirePower = null
 	};
 
-	/// <summary>
-	/// 特效 ID, 用于获取原始描述
-	/// </summary>
 	[SerializableGameDataField]
-	public int EffectId;
+	public int EffectId = other.EffectId;
 
-	/// <summary>
-	/// 生效所需成数
-	/// </summary>
 	[SerializableGameDataField]
-	public List<int> AffectRequirePower;
+	public List<int> AffectRequirePower = ((other.AffectRequirePower != null) ? new List<int>(other.AffectRequirePower) : null);
 
-	/// <summary>
-	/// 深拷贝构造
-	/// </summary>
-	public CombatSkillEffectDescriptionDisplayData(CombatSkillEffectDescriptionDisplayData other)
-	{
-		EffectId = other.EffectId;
-		AffectRequirePower = ((other.AffectRequirePower != null) ? new List<int>(other.AffectRequirePower) : null);
-	}
-
-	/// <summary>
-	/// 深拷贝赋值
-	/// </summary>
 	public void Assign(CombatSkillEffectDescriptionDisplayData other)
 	{
 		EffectId = other.EffectId;
 		AffectRequirePower = ((other.AffectRequirePower != null) ? new List<int>(other.AffectRequirePower) : null);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -67,7 +41,6 @@ public struct CombatSkillEffectDescriptionDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -98,7 +71,6 @@ public struct CombatSkillEffectDescriptionDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

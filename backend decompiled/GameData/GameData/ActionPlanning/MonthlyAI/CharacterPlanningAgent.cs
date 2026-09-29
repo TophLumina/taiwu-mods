@@ -74,14 +74,15 @@ public class CharacterPlanningAgent : IAgent<GameData.Domains.Character.Characte
 		Plan.Clear();
 	}
 
-	public GameData.Domains.Character.Character SelectActionTarget(DataContext context, PlanningGoalNode goal, PlanningActionNode action, ContextArgGroupHandle args)
+	public GameData.Domains.Character.Character SelectActionTarget(DataContext context, PlanningGoalNode goal, PlanningActionNode action, ContextArgGroupHandle args, bool allowMovement)
 	{
 		PlanningActionItem actionItem = action.Template;
 		_taiwuPrioritizedChance = actionItem.SelectTaiwuChance;
 		_currPlanningAction = action;
 		_currPlanningGoal = goal;
 		_actionContextArgs = args;
-		GameData.Domains.Character.Character result = SelectActionTarget(context, _actionTargetCharMatcher, actionItem.CharacterSelector, actionItem.CharacterSelectRange, actionItem.SelectRangeValue);
+		EPlanningActionCharacterSelectRange range = (allowMovement ? actionItem.CharacterSelectRange : RestrictRangeForNoMovementCharacter(actionItem.CharacterSelectRange));
+		GameData.Domains.Character.Character result = SelectActionTarget(context, _actionTargetCharMatcher, actionItem.CharacterSelector, range, actionItem.SelectRangeValue);
 		_currPlanningGoal = null;
 		_currPlanningAction = null;
 		_actionContextArgs = default(ContextArgGroupHandle);
@@ -104,6 +105,11 @@ public class CharacterPlanningAgent : IAgent<GameData.Domains.Character.Characte
 		_currPlanningAction = null;
 		_actionContextArgs = default(ContextArgGroupHandle);
 		_taiwuPrioritizedChance = 0;
+	}
+
+	private EPlanningActionCharacterSelectRange RestrictRangeForNoMovementCharacter(EPlanningActionCharacterSelectRange range)
+	{
+		return (range > EPlanningActionCharacterSelectRange.SameBlock) ? EPlanningActionCharacterSelectRange.SameBlock : range;
 	}
 
 	private bool MatchTargetCharacter(GameData.Domains.Character.Character character)
@@ -140,7 +146,7 @@ public class CharacterPlanningAgent : IAgent<GameData.Domains.Character.Characte
 				return false;
 			}
 			expectedValue = (condition.ConditionType.IsPercent() ? (expectedValue * condition.Value / 100) : (expectedValue + condition.Value));
-			if (StateConditionHelper.Check(condition.ConditionType, value, expectedValue))
+			if (!StateConditionHelper.Check(condition.ConditionType, value, expectedValue))
 			{
 				return false;
 			}
@@ -592,9 +598,14 @@ public class CharacterPlanningAgent : IAgent<GameData.Domains.Character.Characte
 	{
 		if (nextNode is PlanningActionNode action && action.Template.CharacterSelector != EPlanningActionCharacterSelector.None)
 		{
-			PlanningGoalNode goalNode = ((destNode is CharacterGoalData goalData) ? goalData.TemplateNode : (destNode as PlanningGoalNode));
 			CharacterStateMemory characterStateMemory = (CharacterStateMemory)stateMemory;
-			characterStateMemory.TargetChar = SelectActionTarget(Context, goalNode, action, characterStateMemory.Args);
+			if (destNode is CharacterGoalData { TemplateNode: var goalNode } goalData)
+			{
+				characterStateMemory.TargetChar = SelectActionTarget(Context, goalNode, action, characterStateMemory.Args, goalData.State == CharacterGoalData.EGoalState.Primary);
+				return;
+			}
+			PlanningGoalNode goalNode2 = destNode as PlanningGoalNode;
+			characterStateMemory.TargetChar = SelectActionTarget(Context, goalNode2, action, characterStateMemory.Args, allowMovement: true);
 		}
 	}
 

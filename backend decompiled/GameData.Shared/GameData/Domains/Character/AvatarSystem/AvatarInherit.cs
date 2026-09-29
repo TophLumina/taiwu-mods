@@ -126,10 +126,6 @@ public class AvatarInherit
 		return avatarData;
 	}
 
-	/// <summary>
-	/// 获取遗传状态位码
-	/// </summary>
-	/// <returns>0-发生突变 1-从父亲处遗传 2-从母亲处遗传</returns>
 	private int GetInheritCode()
 	{
 		int inheritRandValue = _customRandom.Next(10000);
@@ -156,10 +152,6 @@ public class AvatarInherit
 		return 0;
 	}
 
-	/// <summary>
-	/// 肤色的遗传
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritColorSkin(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -173,10 +165,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眼睛id的遗传
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyesId(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -199,10 +187,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眼睛高度的遗传
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyesHeight(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -224,10 +208,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眼睛间距参数
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyesDistance(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -249,10 +229,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眼睛旋转角度
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyesRotate(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -269,10 +245,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眼睛缩放
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyesScale(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -289,10 +261,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眉毛高度坐标
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyebrowsHeight(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -309,10 +277,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眉毛间距参数
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyebrowsDistance(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -334,10 +298,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眉毛旋转角度
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyebrowsRotate(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -354,10 +314,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眉毛缩放
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyebrowsScale(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -374,10 +330,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眉毛样式id
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyebrowsId(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -394,10 +346,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眉毛颜色
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyebrowsColor(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -414,10 +362,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 眼珠颜色
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritEyeballsColor(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -434,10 +378,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 鼻子样式id
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritNoseId(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -454,10 +394,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 鼻子高度
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritNoseHeight(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -479,10 +415,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 鼻子缩放
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritNoseScale(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -499,10 +431,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 嘴巴id
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritMouthId(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -519,10 +447,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 嘴巴高度
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritMouthHeight(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -544,10 +468,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 嘴巴缩放
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritMouthScale(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -564,10 +484,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 嘴巴颜色
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritMouthColor(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -584,10 +500,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 胡须颜色
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritBeardColor(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -617,10 +529,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 上嘴唇胡须样式id
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritBeard1Id(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -637,10 +545,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 下嘴唇胡须样式id
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritBeard2Id(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -657,10 +561,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 特征1id
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritFeature1Id(AvatarData avatarData)
 	{
 		AvatarAsset fatherFeature1Asset = null;
@@ -708,10 +608,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 特征2id
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritFeature2Id(AvatarData avatarData)
 	{
 		AvatarAsset fatherFeature2Asset = null;
@@ -759,10 +655,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 特征1颜色
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritFeature1Color(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -779,10 +671,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 特征2颜色
-	/// </summary>
-	/// <param name="avatarData"></param>
 	private void InheritFeature2Color(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();
@@ -799,9 +687,6 @@ public class AvatarInherit
 		}
 	}
 
-	/// <summary>
-	/// 头型Id的遗传
-	/// </summary>
 	private void InheritHeadId(AvatarData avatarData)
 	{
 		int inheritCode = GetInheritCode();

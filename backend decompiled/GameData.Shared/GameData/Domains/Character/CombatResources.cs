@@ -3,11 +3,8 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 战斗资源
-/// </summary>
 [SerializableGameData(NotForArchive = true, IsExtensible = true)]
-public struct CombatResources : ISerializableGameData
+public struct CombatResources(CombatResources other) : ISerializableGameData
 {
 	private static class FieldIds
 	{
@@ -24,54 +21,22 @@ public struct CombatResources : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "HealingCount", "DetoxCount", "BreathingCount", "RecoverCount" };
 	}
 
-	/// <summary>
-	/// 疗伤次数
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte HealingCount;
+	public sbyte HealingCount = other.HealingCount;
 
-	/// <summary>
-	/// 驱毒次数
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte DetoxCount;
+	public sbyte DetoxCount = other.DetoxCount;
 
-	/// <summary>
-	/// 调息次数
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte BreathingCount;
+	public sbyte BreathingCount = other.BreathingCount;
 
-	/// <summary>
-	/// 复元次数
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte RecoverCount;
+	public sbyte RecoverCount = other.RecoverCount;
 
-	/// <summary>
-	/// 基础次数
-	/// </summary>
 	public const sbyte BaseCount = 1;
 
-	/// <summary>
-	/// 次数上限
-	/// </summary>
 	public const sbyte MaxCount = 99;
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
-	public CombatResources(CombatResources other)
-	{
-		HealingCount = other.HealingCount;
-		DetoxCount = other.DetoxCount;
-		BreathingCount = other.BreathingCount;
-		RecoverCount = other.RecoverCount;
-	}
-
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatResources other)
 	{
 		HealingCount = other.HealingCount;
@@ -80,13 +45,11 @@ public struct CombatResources : ISerializableGameData
 		RecoverCount = other.RecoverCount;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -97,7 +60,6 @@ public struct CombatResources : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 4;
@@ -117,7 +79,6 @@ public struct CombatResources : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -151,19 +112,11 @@ public struct CombatResources : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 将某个使用次数限定在有效范围内
-	/// </summary>
-	/// <param name="count"></param>
-	/// <returns></returns>
 	private static sbyte ClampCount(int count)
 	{
 		return (sbyte)Math.Clamp(count, 0, 99);
 	}
 
-	/// <summary>
-	/// 减去已使用次数
-	/// </summary>
 	public CombatResources Sub(CombatResources used)
 	{
 		return new CombatResources
@@ -175,12 +128,6 @@ public struct CombatResources : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 获取某个使用次数
-	/// </summary>
-	/// <param name="healType"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public sbyte Get(EHealActionType healType)
 	{
 		return healType switch
@@ -193,13 +140,6 @@ public struct CombatResources : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 设置某个使用次数
-	/// </summary>
-	/// <param name="healType"></param>
-	/// <param name="count"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public void Set(EHealActionType healType, int count)
 	{
 		switch (healType)
@@ -229,12 +169,6 @@ public struct CombatResources : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 变化某个使用次数
-	/// </summary>
-	/// <param name="healType"></param>
-	/// <param name="delta">正值为增加次数，负值为减少次数</param>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public void Change(EHealActionType healType, int delta)
 	{
 		Set(healType, Get(healType) + delta);

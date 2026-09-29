@@ -28,7 +28,7 @@ public class UnyieldingFallenOnce : AutoCollectEffectBase
 	{
 		if (charId == base.CharacterId)
 		{
-			DomainManager.SpecialEffect.Remove(context, Id);
+			RemoveSelf(context);
 		}
 	}
 

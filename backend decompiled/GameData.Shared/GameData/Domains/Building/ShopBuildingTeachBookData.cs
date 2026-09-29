@@ -7,31 +7,18 @@ namespace GameData.Domains.Building;
 [SerializableGameData]
 public class ShopBuildingTeachBookData : ISerializableGameData
 {
-	/// <summary>
-	/// 结果
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TeachBookResult;
 
 	[SerializableGameDataField]
 	public List<(short skillBookTemplateId, byte pageId, sbyte pageDirect)> TeachBookInfo;
 
-	/// <summary>
-	/// 主事能教多少书，不论学徒有没读过
-	/// </summary>
 	[SerializableGameDataField]
 	public int LeaderCanTeachBookCount;
 
-	/// <summary>
-	/// 学徒已学多少书
-	/// </summary>
 	[SerializableGameDataField]
 	public int MemberLearnedBookCount;
 
-	/// <summary>
-	/// 外部使用的默认创建
-	/// </summary>
-	/// <returns></returns>
 	public static ShopBuildingTeachBookData CreateDefault()
 	{
 		return new ShopBuildingTeachBookData
@@ -41,16 +28,10 @@ public class ShopBuildingTeachBookData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ShopBuildingTeachBookData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ShopBuildingTeachBookData(ShopBuildingTeachBookData other)
 	{
 		TeachBookResult = other.TeachBookResult;
@@ -59,9 +40,6 @@ public class ShopBuildingTeachBookData : ISerializableGameData
 		MemberLearnedBookCount = other.MemberLearnedBookCount;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ShopBuildingTeachBookData other)
 	{
 		TeachBookResult = other.TeachBookResult;
@@ -70,13 +48,11 @@ public class ShopBuildingTeachBookData : ISerializableGameData
 		MemberLearnedBookCount = other.MemberLearnedBookCount;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 9;
@@ -101,7 +77,6 @@ public class ShopBuildingTeachBookData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -136,7 +111,6 @@ public class ShopBuildingTeachBookData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

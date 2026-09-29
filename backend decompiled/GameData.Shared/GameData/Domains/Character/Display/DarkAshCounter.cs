@@ -4,50 +4,26 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 玄灰显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public struct DarkAshCounter : ISerializableGameData
 {
-	/// <summary>
-	/// 倒计时 - 基础特性
-	/// </summary>
 	[SerializableGameDataField]
 	public int Tips1;
 
-	/// <summary>
-	/// 倒计时 - 精纯特性
-	/// </summary>
 	[SerializableGameDataField]
 	public int Tips2;
 
-	/// <summary>
-	/// 倒计时 - 心念特性
-	/// </summary>
 	[SerializableGameDataField]
 	public int Tips3;
 
-	/// <summary>
-	/// 倒计时 - 剩余寿命
-	/// </summary>
 	public int Total => Tips1 + Tips2 + Tips3;
 
-	/// <summary>
-	/// 精纯与心念用完的情况
-	/// </summary>
-	/// <param name="total"></param>
 	public DarkAshCounter(int expiredDate, int currDate)
 	{
 		Tips1 = Math.Max(expiredDate - currDate, 0);
 		Tips2 = (Tips3 = 0);
 	}
 
-	/// <summary>
-	/// 仍有精纯和心念的情况
-	/// </summary>
-	/// <param name="total"></param>
-	/// <param name="data"></param>
 	public DarkAshCounter(int expiredDate, int currDate, DarkAshCounterData data)
 	{
 		Tips3 = Math.Max(data.ExpiredDate3 - currDate, 0);

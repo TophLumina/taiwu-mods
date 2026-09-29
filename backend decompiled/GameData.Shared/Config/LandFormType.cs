@@ -7,81 +7,36 @@ namespace Config;
 [Serializable]
 public class LandFormType : ConfigData<LandFormTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 平原
-		/// </summary>
 		public const sbyte Flatlands = 0;
 
-		/// <summary>
-		/// 山岳
-		/// </summary>
 		public const sbyte Mountain = 1;
 
-		/// <summary>
-		/// 森林
-		/// </summary>
 		public const sbyte Forest = 2;
 
-		/// <summary>
-		/// 湖泽
-		/// </summary>
 		public const sbyte Lake = 3;
 
-		/// <summary>
-		/// 海滨
-		/// </summary>
 		public const sbyte Coast = 4;
 
-		/// <summary>
-		/// 雪山
-		/// </summary>
 		public const sbyte SnowMountain = 5;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 平原
-		/// </summary>
 		public static LandFormTypeItem Flatlands => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 山岳
-		/// </summary>
 		public static LandFormTypeItem Mountain => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 森林
-		/// </summary>
 		public static LandFormTypeItem Forest => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 湖泽
-		/// </summary>
 		public static LandFormTypeItem Lake => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 海滨
-		/// </summary>
 		public static LandFormTypeItem Coast => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 雪山
-		/// </summary>
 		public static LandFormTypeItem SnowMountain => Instance[(sbyte)5];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LandFormType Instance = new LandFormType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId" };

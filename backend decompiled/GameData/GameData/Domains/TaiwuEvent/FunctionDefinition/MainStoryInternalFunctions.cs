@@ -20,6 +20,7 @@ using GameData.Domains.Taiwu.Profession;
 using GameData.Domains.TaiwuEvent.Enum;
 using GameData.Domains.TaiwuEvent.EventHelper;
 using GameData.Domains.World;
+using GameData.Domains.World.MonthlyEvent;
 using GameData.GameDataBridge;
 using GameData.Utilities;
 using Redzen.Random;
@@ -110,6 +111,24 @@ public class MainStoryInternalFunctions
 		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.ActivateSwordTombAdventure(mapBlock.GetLocation(), (sbyte)remainingMonth);
 	}
 
+	[EventFunction(945)]
+	private static void StartUnlockTaiwuStation(EventScriptRuntime runtime, string afterEvent)
+	{
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.StartUnlockTaiwuStation(runtime.ArgBox, afterEvent);
+	}
+
+	[EventFunction(951)]
+	private static void AddTaiwuVillageStoneClaimed(EventScriptRuntime runtime)
+	{
+		short taiwuVillageAreaId = DomainManager.Taiwu.GetTaiwuVillageLocation().AreaId;
+		sbyte taiwuVillageStateId = DomainManager.Map.GetStateTemplateIdByAreaId(taiwuVillageAreaId);
+		sbyte taiwuVillageSectOrgTemplateId = MapState.Instance[taiwuVillageStateId].SectID;
+		Settlement settlement = DomainManager.Organization.GetSettlementByOrgTemplateId(taiwuVillageSectOrgTemplateId);
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		MonthlyEventCollection monthlyEventCollection = DomainManager.World.GetMonthlyEventCollection();
+		monthlyEventCollection.AddTaiwuVillageStoneClaimed(taiwu.GetId(), settlement.GetId(), settlement.GetId(), 1);
+	}
+
 	[EventFunction(615)]
 	private static void ActivateRemainingSwordTombs(int remainingMonth)
 	{
@@ -181,7 +200,7 @@ public class MainStoryInternalFunctions
 		SpanList<(int, int)> topK = span;
 		foreach (AdventureElement victimElement in potentialVictims)
 		{
-			if (!DomainManager.Taiwu.IsCricketPolymorphCharacter(victimElement.CharacterId) && DomainManager.Character.TryGetElement_Objects(victimElement.CharacterId, out var character) && character.GetCreatingType() == 1)
+			if (DomainManager.Character.TryGetElement_Objects(victimElement.CharacterId, out var character) && character.GetCreatingType() == 1 && character.Template.CanBeTaiwu && !character.GetFeatureIds().Contains(733))
 			{
 				topK.TryInsertTopK<int>(killCount, victimElement.CharacterId, character.GetCombatPower());
 			}
@@ -574,7 +593,13 @@ public class MainStoryInternalFunctions
 	[EventFunction(727)]
 	private static void CreateAllSwordTombAdventure()
 	{
-		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.CreateAllSwordTombAdventure();
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.CreateAllSwordTombAdventure(includeFirst: false);
+	}
+
+	[EventFunction(933)]
+	private static void CreateEightSwordTombAdventure()
+	{
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.CreateAllSwordTombAdventure(includeFirst: true);
 	}
 
 	[EventFunction(735)]

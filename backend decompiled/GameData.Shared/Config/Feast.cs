@@ -7,121 +7,52 @@ namespace Config;
 [Serializable]
 public class Feast : ConfigData<FeastItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 无
-		/// </summary>
 		public const short None = 0;
 
-		/// <summary>
-		/// 百果宴
-		/// </summary>
 		public const short Fruit = 1;
 
-		/// <summary>
-		/// 素斋宴
-		/// </summary>
 		public const short Vegetable = 2;
 
-		/// <summary>
-		/// 飞禽宴
-		/// </summary>
 		public const short WhiteMeat = 3;
 
-		/// <summary>
-		/// 走兽宴
-		/// </summary>
 		public const short RedMeat = 4;
 
-		/// <summary>
-		/// 水产宴
-		/// </summary>
 		public const short SeaFood = 5;
 
-		/// <summary>
-		/// 文人雅集
-		/// </summary>
 		public const short Tea = 6;
 
-		/// <summary>
-		/// 曲水流觞
-		/// </summary>
 		public const short Wine = 7;
 
-		/// <summary>
-		/// 三合宴
-		/// </summary>
 		public const short Mixed = 8;
 
-		/// <summary>
-		/// 洪福宴
-		/// </summary>
 		public const short HighestMixed = 9;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 无
-		/// </summary>
 		public static FeastItem None => Instance[(short)0];
 
-		/// <summary>
-		/// 百果宴
-		/// </summary>
 		public static FeastItem Fruit => Instance[(short)1];
 
-		/// <summary>
-		/// 素斋宴
-		/// </summary>
 		public static FeastItem Vegetable => Instance[(short)2];
 
-		/// <summary>
-		/// 飞禽宴
-		/// </summary>
 		public static FeastItem WhiteMeat => Instance[(short)3];
 
-		/// <summary>
-		/// 走兽宴
-		/// </summary>
 		public static FeastItem RedMeat => Instance[(short)4];
 
-		/// <summary>
-		/// 水产宴
-		/// </summary>
 		public static FeastItem SeaFood => Instance[(short)5];
 
-		/// <summary>
-		/// 文人雅集
-		/// </summary>
 		public static FeastItem Tea => Instance[(short)6];
 
-		/// <summary>
-		/// 曲水流觞
-		/// </summary>
 		public static FeastItem Wine => Instance[(short)7];
 
-		/// <summary>
-		/// 三合宴
-		/// </summary>
 		public static FeastItem Mixed => Instance[(short)8];
 
-		/// <summary>
-		/// 洪福宴
-		/// </summary>
 		public static FeastItem HighestMixed => Instance[(short)9];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Feast Instance = new Feast();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "ConditionDesc", "EffectDesc", "RequirementType", "TemplateId", "Icon", "RequirementData" };

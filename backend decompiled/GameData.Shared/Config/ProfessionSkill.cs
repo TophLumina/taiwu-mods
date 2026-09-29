@@ -7,741 +7,316 @@ namespace Config;
 [Serializable]
 public class ProfessionSkill : ConfigData<ProfessionSkillItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 山人技能0
-		/// </summary>
 		public const int SavageSkill0 = 0;
 
-		/// <summary>
-		/// 山人技能1
-		/// </summary>
 		public const int SavageSkill1 = 1;
 
-		/// <summary>
-		/// 山人技能2
-		/// </summary>
 		public const int SavageSkill2 = 2;
 
-		/// <summary>
-		/// 山人技能3
-		/// </summary>
 		public const int SavageSkill3 = 3;
 
-		/// <summary>
-		/// 猎户技能0
-		/// </summary>
 		public const int HunterSkill0 = 4;
 
-		/// <summary>
-		/// 猎户技能1
-		/// </summary>
 		public const int HunterSkill1 = 5;
 
-		/// <summary>
-		/// 猎户技能2
-		/// </summary>
 		public const int HunterSkill2 = 6;
 
-		/// <summary>
-		/// 猎户技能3
-		/// </summary>
 		public const int HunterSkill3 = 7;
 
-		/// <summary>
-		/// 匠人技能0
-		/// </summary>
 		public const int CraftSkill0 = 8;
 
-		/// <summary>
-		/// 匠人技能1
-		/// </summary>
 		public const int CraftSkill1 = 9;
 
-		/// <summary>
-		/// 匠人技能2
-		/// </summary>
 		public const int CraftSkill2 = 10;
 
-		/// <summary>
-		/// 匠人技能3
-		/// </summary>
 		public const int CraftSkill3 = 11;
 
-		/// <summary>
-		/// 武师技能0
-		/// </summary>
 		public const int MartialArtistSkill0 = 12;
 
-		/// <summary>
-		/// 武师技能1
-		/// </summary>
 		public const int MartialArtistSkill1 = 13;
 
-		/// <summary>
-		/// 武师技能2
-		/// </summary>
 		public const int MartialArtistSkill2 = 14;
 
-		/// <summary>
-		/// 武师技能3
-		/// </summary>
 		public const int MartialArtistSkill3 = 15;
 
-		/// <summary>
-		/// 才俊技能0
-		/// </summary>
 		public const int LiteratiSkill0 = 16;
 
-		/// <summary>
-		/// 才俊技能1
-		/// </summary>
 		public const int LiteratiSkill1 = 17;
 
-		/// <summary>
-		/// 才俊技能2
-		/// </summary>
 		public const int LiteratiSkill2 = 18;
 
-		/// <summary>
-		/// 才俊技能3
-		/// </summary>
 		public const int LiteratiSkill3 = 19;
 
-		/// <summary>
-		/// 道长技能0
-		/// </summary>
 		public const int TaoistMonkSkill0 = 20;
 
-		/// <summary>
-		/// 道长技能1
-		/// </summary>
 		public const int TaoistMonkSkill1 = 21;
 
-		/// <summary>
-		/// 道长技能2
-		/// </summary>
 		public const int TaoistMonkSkill2 = 22;
 
-		/// <summary>
-		/// 道长技能3
-		/// </summary>
 		public const int TaoistMonkSkill3 = 23;
 
-		/// <summary>
-		/// 高僧技能0
-		/// </summary>
 		public const int BuddhistMonkSkill0 = 24;
 
-		/// <summary>
-		/// 高僧技能1
-		/// </summary>
 		public const int BuddhistMonkSkill1 = 25;
 
-		/// <summary>
-		/// 高僧技能2
-		/// </summary>
 		public const int BuddhistMonkSkill2 = 26;
 
-		/// <summary>
-		/// 高僧技能3
-		/// </summary>
 		public const int BuddhistMonkSkill3 = 27;
 
-		/// <summary>
-		/// 豪客技能0
-		/// </summary>
 		public const int WineTasterSkill0 = 28;
 
-		/// <summary>
-		/// 豪客技能1
-		/// </summary>
 		public const int WineTasterSkill1 = 29;
 
-		/// <summary>
-		/// 豪客技能2
-		/// </summary>
 		public const int WineTasterSkill2 = 30;
 
-		/// <summary>
-		/// 豪客技能3
-		/// </summary>
 		public const int WineTasterSkill3 = 31;
 
-		/// <summary>
-		/// 名门技能0
-		/// </summary>
 		public const int AristocratSkill0 = 32;
 
-		/// <summary>
-		/// 名门技能1
-		/// </summary>
 		public const int AristocratSkill1 = 33;
 
-		/// <summary>
-		/// 名门技能2
-		/// </summary>
 		public const int AristocratSkill2 = 34;
 
-		/// <summary>
-		/// 名门技能3
-		/// </summary>
 		public const int AristocratSkill3 = 35;
 
-		/// <summary>
-		/// 乞丐技能0
-		/// </summary>
 		public const int BeggarSkill0 = 36;
 
-		/// <summary>
-		/// 乞丐技能1
-		/// </summary>
 		public const int BeggarSkill1 = 37;
 
-		/// <summary>
-		/// 乞丐技能2
-		/// </summary>
 		public const int BeggarSkill2 = 38;
 
-		/// <summary>
-		/// 乞丐技能3
-		/// </summary>
 		public const int BeggarSkill3 = 39;
 
-		/// <summary>
-		/// 平民技能0
-		/// </summary>
 		public const int CivilianSkill0 = 40;
 
-		/// <summary>
-		/// 平民技能1
-		/// </summary>
 		public const int CivilianSkill1 = 41;
 
-		/// <summary>
-		/// 平民技能2
-		/// </summary>
 		public const int CivilianSkill2 = 42;
 
-		/// <summary>
-		/// 平民技能3
-		/// </summary>
 		public const int CivilianSkill3 = 43;
 
-		/// <summary>
-		/// 旅人技能0
-		/// </summary>
 		public const int TravelerSkill0 = 44;
 
-		/// <summary>
-		/// 旅人技能1
-		/// </summary>
 		public const int TravelerSkill1 = 45;
 
-		/// <summary>
-		/// 旅人技能2
-		/// </summary>
 		public const int TravelerSkill2 = 46;
 
-		/// <summary>
-		/// 旅人技能3
-		/// </summary>
 		public const int TravelerSkill3 = 47;
 
-		/// <summary>
-		/// 云游僧技能0
-		/// </summary>
 		public const int TravelingBuddhistMonkSkill0 = 48;
 
-		/// <summary>
-		/// 云游僧技能1
-		/// </summary>
 		public const int TravelingBuddhistMonkSkill1 = 49;
 
-		/// <summary>
-		/// 云游僧技能2
-		/// </summary>
 		public const int TravelingBuddhistMonkSkill2 = 50;
 
-		/// <summary>
-		/// 云游僧技能3
-		/// </summary>
 		public const int TravelingBuddhistMonkSkill3 = 51;
 
-		/// <summary>
-		/// 大夫技能0
-		/// </summary>
 		public const int DoctorSkill0 = 52;
 
-		/// <summary>
-		/// 大夫技能1
-		/// </summary>
 		public const int DoctorSkill1 = 53;
 
-		/// <summary>
-		/// 大夫技能2
-		/// </summary>
 		public const int DoctorSkill2 = 54;
 
-		/// <summary>
-		/// 大夫技能3
-		/// </summary>
 		public const int DoctorSkill3 = 55;
 
-		/// <summary>
-		/// 云游道技能0
-		/// </summary>
 		public const int TravelingTaoistMonkSkill0 = 56;
 
-		/// <summary>
-		/// 云游道技能1
-		/// </summary>
 		public const int TravelingTaoistMonkSkill1 = 57;
 
-		/// <summary>
-		/// 云游道技能2
-		/// </summary>
 		public const int TravelingTaoistMonkSkill2 = 58;
 
-		/// <summary>
-		/// 云游道技能3
-		/// </summary>
 		public const int TravelingTaoistMonkSkill3 = 59;
 
-		/// <summary>
-		/// 富商技能0
-		/// </summary>
 		public const int CapitalistSkill0 = 60;
 
-		/// <summary>
-		/// 富商技能1
-		/// </summary>
 		public const int CapitalistSkill1 = 61;
 
-		/// <summary>
-		/// 富商技能2
-		/// </summary>
 		public const int CapitalistSkill2 = 62;
 
-		/// <summary>
-		/// 富商技能3
-		/// </summary>
 		public const int CapitalistSkill3 = 63;
 
-		/// <summary>
-		/// 贵客技能0
-		/// </summary>
 		public const int TeaTasterSkill0 = 64;
 
-		/// <summary>
-		/// 贵客技能1
-		/// </summary>
 		public const int TeaTasterSkill1 = 65;
 
-		/// <summary>
-		/// 贵客技能2
-		/// </summary>
 		public const int TeaTasterSkill2 = 66;
 
-		/// <summary>
-		/// 贵客技能3
-		/// </summary>
 		public const int TeaTasterSkill3 = 67;
 
-		/// <summary>
-		/// 王公技能0
-		/// </summary>
 		public const int DukeSkill0 = 68;
 
-		/// <summary>
-		/// 王公技能1
-		/// </summary>
 		public const int DukeSkill1 = 69;
 
-		/// <summary>
-		/// 王公技能2
-		/// </summary>
 		public const int DukeSkill2 = 70;
 
-		/// <summary>
-		/// 王公技能3
-		/// </summary>
 		public const int DukeSkill3 = 71;
+
+		public const int XiangshuSkill0 = 72;
+
+		public const int XiangshuSkill1 = 73;
+
+		public const int XiangshuSkill2 = 74;
+
+		public const int XiangshuSkill3 = 75;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 山人技能0
-		/// </summary>
 		public static ProfessionSkillItem SavageSkill0 => Instance[0];
 
-		/// <summary>
-		/// 山人技能1
-		/// </summary>
 		public static ProfessionSkillItem SavageSkill1 => Instance[1];
 
-		/// <summary>
-		/// 山人技能2
-		/// </summary>
 		public static ProfessionSkillItem SavageSkill2 => Instance[2];
 
-		/// <summary>
-		/// 山人技能3
-		/// </summary>
 		public static ProfessionSkillItem SavageSkill3 => Instance[3];
 
-		/// <summary>
-		/// 猎户技能0
-		/// </summary>
 		public static ProfessionSkillItem HunterSkill0 => Instance[4];
 
-		/// <summary>
-		/// 猎户技能1
-		/// </summary>
 		public static ProfessionSkillItem HunterSkill1 => Instance[5];
 
-		/// <summary>
-		/// 猎户技能2
-		/// </summary>
 		public static ProfessionSkillItem HunterSkill2 => Instance[6];
 
-		/// <summary>
-		/// 猎户技能3
-		/// </summary>
 		public static ProfessionSkillItem HunterSkill3 => Instance[7];
 
-		/// <summary>
-		/// 匠人技能0
-		/// </summary>
 		public static ProfessionSkillItem CraftSkill0 => Instance[8];
 
-		/// <summary>
-		/// 匠人技能1
-		/// </summary>
 		public static ProfessionSkillItem CraftSkill1 => Instance[9];
 
-		/// <summary>
-		/// 匠人技能2
-		/// </summary>
 		public static ProfessionSkillItem CraftSkill2 => Instance[10];
 
-		/// <summary>
-		/// 匠人技能3
-		/// </summary>
 		public static ProfessionSkillItem CraftSkill3 => Instance[11];
 
-		/// <summary>
-		/// 武师技能0
-		/// </summary>
 		public static ProfessionSkillItem MartialArtistSkill0 => Instance[12];
 
-		/// <summary>
-		/// 武师技能1
-		/// </summary>
 		public static ProfessionSkillItem MartialArtistSkill1 => Instance[13];
 
-		/// <summary>
-		/// 武师技能2
-		/// </summary>
 		public static ProfessionSkillItem MartialArtistSkill2 => Instance[14];
 
-		/// <summary>
-		/// 武师技能3
-		/// </summary>
 		public static ProfessionSkillItem MartialArtistSkill3 => Instance[15];
 
-		/// <summary>
-		/// 才俊技能0
-		/// </summary>
 		public static ProfessionSkillItem LiteratiSkill0 => Instance[16];
 
-		/// <summary>
-		/// 才俊技能1
-		/// </summary>
 		public static ProfessionSkillItem LiteratiSkill1 => Instance[17];
 
-		/// <summary>
-		/// 才俊技能2
-		/// </summary>
 		public static ProfessionSkillItem LiteratiSkill2 => Instance[18];
 
-		/// <summary>
-		/// 才俊技能3
-		/// </summary>
 		public static ProfessionSkillItem LiteratiSkill3 => Instance[19];
 
-		/// <summary>
-		/// 道长技能0
-		/// </summary>
 		public static ProfessionSkillItem TaoistMonkSkill0 => Instance[20];
 
-		/// <summary>
-		/// 道长技能1
-		/// </summary>
 		public static ProfessionSkillItem TaoistMonkSkill1 => Instance[21];
 
-		/// <summary>
-		/// 道长技能2
-		/// </summary>
 		public static ProfessionSkillItem TaoistMonkSkill2 => Instance[22];
 
-		/// <summary>
-		/// 道长技能3
-		/// </summary>
 		public static ProfessionSkillItem TaoistMonkSkill3 => Instance[23];
 
-		/// <summary>
-		/// 高僧技能0
-		/// </summary>
 		public static ProfessionSkillItem BuddhistMonkSkill0 => Instance[24];
 
-		/// <summary>
-		/// 高僧技能1
-		/// </summary>
 		public static ProfessionSkillItem BuddhistMonkSkill1 => Instance[25];
 
-		/// <summary>
-		/// 高僧技能2
-		/// </summary>
 		public static ProfessionSkillItem BuddhistMonkSkill2 => Instance[26];
 
-		/// <summary>
-		/// 高僧技能3
-		/// </summary>
 		public static ProfessionSkillItem BuddhistMonkSkill3 => Instance[27];
 
-		/// <summary>
-		/// 豪客技能0
-		/// </summary>
 		public static ProfessionSkillItem WineTasterSkill0 => Instance[28];
 
-		/// <summary>
-		/// 豪客技能1
-		/// </summary>
 		public static ProfessionSkillItem WineTasterSkill1 => Instance[29];
 
-		/// <summary>
-		/// 豪客技能2
-		/// </summary>
 		public static ProfessionSkillItem WineTasterSkill2 => Instance[30];
 
-		/// <summary>
-		/// 豪客技能3
-		/// </summary>
 		public static ProfessionSkillItem WineTasterSkill3 => Instance[31];
 
-		/// <summary>
-		/// 名门技能0
-		/// </summary>
 		public static ProfessionSkillItem AristocratSkill0 => Instance[32];
 
-		/// <summary>
-		/// 名门技能1
-		/// </summary>
 		public static ProfessionSkillItem AristocratSkill1 => Instance[33];
 
-		/// <summary>
-		/// 名门技能2
-		/// </summary>
 		public static ProfessionSkillItem AristocratSkill2 => Instance[34];
 
-		/// <summary>
-		/// 名门技能3
-		/// </summary>
 		public static ProfessionSkillItem AristocratSkill3 => Instance[35];
 
-		/// <summary>
-		/// 乞丐技能0
-		/// </summary>
 		public static ProfessionSkillItem BeggarSkill0 => Instance[36];
 
-		/// <summary>
-		/// 乞丐技能1
-		/// </summary>
 		public static ProfessionSkillItem BeggarSkill1 => Instance[37];
 
-		/// <summary>
-		/// 乞丐技能2
-		/// </summary>
 		public static ProfessionSkillItem BeggarSkill2 => Instance[38];
 
-		/// <summary>
-		/// 乞丐技能3
-		/// </summary>
 		public static ProfessionSkillItem BeggarSkill3 => Instance[39];
 
-		/// <summary>
-		/// 平民技能0
-		/// </summary>
 		public static ProfessionSkillItem CivilianSkill0 => Instance[40];
 
-		/// <summary>
-		/// 平民技能1
-		/// </summary>
 		public static ProfessionSkillItem CivilianSkill1 => Instance[41];
 
-		/// <summary>
-		/// 平民技能2
-		/// </summary>
 		public static ProfessionSkillItem CivilianSkill2 => Instance[42];
 
-		/// <summary>
-		/// 平民技能3
-		/// </summary>
 		public static ProfessionSkillItem CivilianSkill3 => Instance[43];
 
-		/// <summary>
-		/// 旅人技能0
-		/// </summary>
 		public static ProfessionSkillItem TravelerSkill0 => Instance[44];
 
-		/// <summary>
-		/// 旅人技能1
-		/// </summary>
 		public static ProfessionSkillItem TravelerSkill1 => Instance[45];
 
-		/// <summary>
-		/// 旅人技能2
-		/// </summary>
 		public static ProfessionSkillItem TravelerSkill2 => Instance[46];
 
-		/// <summary>
-		/// 旅人技能3
-		/// </summary>
 		public static ProfessionSkillItem TravelerSkill3 => Instance[47];
 
-		/// <summary>
-		/// 云游僧技能0
-		/// </summary>
 		public static ProfessionSkillItem TravelingBuddhistMonkSkill0 => Instance[48];
 
-		/// <summary>
-		/// 云游僧技能1
-		/// </summary>
 		public static ProfessionSkillItem TravelingBuddhistMonkSkill1 => Instance[49];
 
-		/// <summary>
-		/// 云游僧技能2
-		/// </summary>
 		public static ProfessionSkillItem TravelingBuddhistMonkSkill2 => Instance[50];
 
-		/// <summary>
-		/// 云游僧技能3
-		/// </summary>
 		public static ProfessionSkillItem TravelingBuddhistMonkSkill3 => Instance[51];
 
-		/// <summary>
-		/// 大夫技能0
-		/// </summary>
 		public static ProfessionSkillItem DoctorSkill0 => Instance[52];
 
-		/// <summary>
-		/// 大夫技能1
-		/// </summary>
 		public static ProfessionSkillItem DoctorSkill1 => Instance[53];
 
-		/// <summary>
-		/// 大夫技能2
-		/// </summary>
 		public static ProfessionSkillItem DoctorSkill2 => Instance[54];
 
-		/// <summary>
-		/// 大夫技能3
-		/// </summary>
 		public static ProfessionSkillItem DoctorSkill3 => Instance[55];
 
-		/// <summary>
-		/// 云游道技能0
-		/// </summary>
 		public static ProfessionSkillItem TravelingTaoistMonkSkill0 => Instance[56];
 
-		/// <summary>
-		/// 云游道技能1
-		/// </summary>
 		public static ProfessionSkillItem TravelingTaoistMonkSkill1 => Instance[57];
 
-		/// <summary>
-		/// 云游道技能2
-		/// </summary>
 		public static ProfessionSkillItem TravelingTaoistMonkSkill2 => Instance[58];
 
-		/// <summary>
-		/// 云游道技能3
-		/// </summary>
 		public static ProfessionSkillItem TravelingTaoistMonkSkill3 => Instance[59];
 
-		/// <summary>
-		/// 富商技能0
-		/// </summary>
 		public static ProfessionSkillItem CapitalistSkill0 => Instance[60];
 
-		/// <summary>
-		/// 富商技能1
-		/// </summary>
 		public static ProfessionSkillItem CapitalistSkill1 => Instance[61];
 
-		/// <summary>
-		/// 富商技能2
-		/// </summary>
 		public static ProfessionSkillItem CapitalistSkill2 => Instance[62];
 
-		/// <summary>
-		/// 富商技能3
-		/// </summary>
 		public static ProfessionSkillItem CapitalistSkill3 => Instance[63];
 
-		/// <summary>
-		/// 贵客技能0
-		/// </summary>
 		public static ProfessionSkillItem TeaTasterSkill0 => Instance[64];
 
-		/// <summary>
-		/// 贵客技能1
-		/// </summary>
 		public static ProfessionSkillItem TeaTasterSkill1 => Instance[65];
 
-		/// <summary>
-		/// 贵客技能2
-		/// </summary>
 		public static ProfessionSkillItem TeaTasterSkill2 => Instance[66];
 
-		/// <summary>
-		/// 贵客技能3
-		/// </summary>
 		public static ProfessionSkillItem TeaTasterSkill3 => Instance[67];
 
-		/// <summary>
-		/// 王公技能0
-		/// </summary>
 		public static ProfessionSkillItem DukeSkill0 => Instance[68];
 
-		/// <summary>
-		/// 王公技能1
-		/// </summary>
 		public static ProfessionSkillItem DukeSkill1 => Instance[69];
 
-		/// <summary>
-		/// 王公技能2
-		/// </summary>
 		public static ProfessionSkillItem DukeSkill2 => Instance[70];
 
-		/// <summary>
-		/// 王公技能3
-		/// </summary>
 		public static ProfessionSkillItem DukeSkill3 => Instance[71];
+
+		public static ProfessionSkillItem XiangshuSkill0 => Instance[72];
+
+		public static ProfessionSkillItem XiangshuSkill1 => Instance[73];
+
+		public static ProfessionSkillItem XiangshuSkill2 => Instance[74];
+
+		public static ProfessionSkillItem XiangshuSkill3 => Instance[75];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ProfessionSkill Instance = new ProfessionSkill();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -909,12 +484,16 @@ public class ProfessionSkill : ConfigData<ProfessionSkillItem, int>
 		{
 			new ResourceInfo(7, 5000)
 		}, 0, LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockDesc_71"), LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockExplain_71")));
+		_dataArray.Add(new ProfessionSkillItem(72, LocalStringManager.GetConfig("ProfessionSkill_language", "Name_72"), instant: true, 18, "ui9_icon_profession_skill_18_0", "ui9_icon_profession_skill_big_18_0", LocalStringManager.GetConfig("ProfessionSkill_language", "Desc_72"), LocalStringManager.GetConfig("ProfessionSkill_language", "FunctionalDesc_72"), 1, -1, EProfessionSkillTriggerType.Active, ignoreCanExecuteSkill: false, EProfessionSkillType.Active, 3, 10, costTimeWhenFinished: false, 5, 0, 0, 10000, new List<ResourceInfo>(), 0, LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockDesc_72"), LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockExplain_72")));
+		_dataArray.Add(new ProfessionSkillItem(73, LocalStringManager.GetConfig("ProfessionSkill_language", "Name_73"), instant: true, 18, "ui9_icon_profession_skill_18_1", "ui9_icon_profession_skill_big_18_1", LocalStringManager.GetConfig("ProfessionSkill_language", "Desc_73"), LocalStringManager.GetConfig("ProfessionSkill_language", "FunctionalDesc_73"), 2, -1, EProfessionSkillTriggerType.Active, ignoreCanExecuteSkill: false, EProfessionSkillType.Active, 3, 15, costTimeWhenFinished: false, 20, 0, 0, 20000, new List<ResourceInfo>(), 0, LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockDesc_73"), LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockExplain_73")));
+		_dataArray.Add(new ProfessionSkillItem(74, LocalStringManager.GetConfig("ProfessionSkill_language", "Name_74"), instant: true, 18, "ui9_icon_profession_skill_18_2", "ui9_icon_profession_skill_big_18_2", LocalStringManager.GetConfig("ProfessionSkill_language", "Desc_74"), LocalStringManager.GetConfig("ProfessionSkill_language", "FunctionalDesc_74"), 3, -1, EProfessionSkillTriggerType.Active, ignoreCanExecuteSkill: false, EProfessionSkillType.Active, 3, 20, costTimeWhenFinished: false, 50, 0, 0, 30000, new List<ResourceInfo>(), 0, LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockDesc_74"), LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockExplain_74")));
+		_dataArray.Add(new ProfessionSkillItem(75, LocalStringManager.GetConfig("ProfessionSkill_language", "Name_75"), instant: false, 18, "ui9_icon_profession_skill_18_3", "ui9_icon_profession_skill_big_18_3", LocalStringManager.GetConfig("ProfessionSkill_language", "Desc_75"), LocalStringManager.GetConfig("ProfessionSkill_language", "FunctionalDesc_75"), 4, -1, EProfessionSkillTriggerType.Passive, ignoreCanExecuteSkill: false, EProfessionSkillType.Passive, 1, 0, costTimeWhenFinished: false, 100, 0, 0, 0, new List<ResourceInfo>(), 0, LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockDesc_75"), LocalStringManager.GetConfig("ProfessionSkill_language", "SkillUnlockExplain_75")));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<ProfessionSkillItem>(72);
+		_dataArray = new List<ProfessionSkillItem>(76);
 		CreateItems0();
 		CreateItems1();
 	}

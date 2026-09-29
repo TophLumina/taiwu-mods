@@ -8,9 +8,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 商店界面的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true, NotRestrictCollectionSerializedSize = true)]
 public class TreasuryData : ISerializableGameData
 {
@@ -20,45 +17,24 @@ public class TreasuryData : ISerializableGameData
 	[SerializableGameDataField]
 	public int DebtOrSupport;
 
-	/// <summary>
-	/// 库房数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<SettlementTreasury> Treasuries;
 
-	/// <summary>
-	/// 库房显示数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> SettlementTreasuryDisplayDataListLow;
 
-	/// <summary>
-	/// 库房显示数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> SettlementTreasuryDisplayDataListMid;
 
-	/// <summary>
-	/// 库房显示数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> SettlementTreasuryDisplayDataListHigh;
 
-	/// <summary>
-	/// 守卫数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData SettlementGuardDisplayDataListLow;
 
-	/// <summary>
-	/// 守卫数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData SettlementGuardDisplayDataListMid;
 
-	/// <summary>
-	/// 守卫数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData SettlementGuardDisplayDataListHigh;
 

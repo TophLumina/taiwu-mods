@@ -4,9 +4,6 @@ namespace GameData.Domains.Extra;
 
 public static class ExtraDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort ExchangedSpecialWeaponList = 0;
@@ -426,9 +423,6 @@ public static class ExtraDomainHelper
 		public const ushort SectXuannvPlayerIsPlaying = 207;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort SetCombatSkillOrderPlan = 0;
@@ -912,16 +906,14 @@ public static class ExtraDomainHelper
 		public const ushort GmCmd_GetSectMainStoryArgBoxInt = 239;
 
 		public const ushort GmCmd_SetSectMainStoryArgBoxBool = 240;
+
+		public const ushort HasXiangshuSkill0AffectTarget = 241;
+
+		public const ushort HasXiangshuSkill1AffectTarget = 242;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
 	public const ushort DataCount = 208;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "ExchangedSpecialWeaponList", 0 },
@@ -1134,10 +1126,6 @@ public static class ExtraDomainHelper
 		{ "SectXuannvPlayerIsPlaying", 207 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
 	public static readonly string[] DataId2FieldName = new string[208]
 	{
 		"ExchangedSpecialWeaponList", "CaravanStayDays", "MerchantCharToType", "StationInited", "StoneRoomCharList", "CombatSkillOrderPlans", "AutoWorkBlockIndexList", "AutoSoldBlockIndexList", "SecretInformationBroadcastNotifyList", "XiangshuIdInKungfuPracticeRoom",
@@ -1163,14 +1151,8 @@ public static class ExtraDomainHelper
 		"SectJieqingNpcExtraLegacyPoints", "MainUiCustomButtonList", "CustomMapBlockCharInfoList", "CustomMapBlockCharButtonList", "TaiwuVisitedAreas", "JixiData", "SectXuannvFavoriteMusicList", "SectXuannvPlayerIsPlaying"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
 	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[208][];
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId = new Dictionary<string, ushort>
 	{
 		{ "SetCombatSkillOrderPlan", 0 },
@@ -1413,10 +1395,12 @@ public static class ExtraDomainHelper
 		{ "GmCmd_SetSectMainStoryArgBoxInt", 237 },
 		{ "GmCmd_GetSectMainStoryArgBoxBool", 238 },
 		{ "GmCmd_GetSectMainStoryArgBoxInt", 239 },
-		{ "GmCmd_SetSectMainStoryArgBoxBool", 240 }
+		{ "GmCmd_SetSectMainStoryArgBoxBool", 240 },
+		{ "HasXiangshuSkill0AffectTarget", 241 },
+		{ "HasXiangshuSkill1AffectTarget", 242 }
 	};
 
-	public static readonly string[] MethodId2MethodName = new string[241]
+	public static readonly string[] MethodId2MethodName = new string[243]
 	{
 		"SetCombatSkillOrderPlan", "AddLocationMark", "RemoveLocationMark", "AddReadingEventBookId", "RemoveReadingEventBookId", "GetAllLifeSkillCombatUsedCard", "GetAllLifeSkillCombatCard", "SetLifeSkillCombatUsedCard", "GetCharacterLifeSkillCombatUsedCard", "GetLifeSkillCombatUsedCard",
 		"GetAllLifeSkillCombatNewCard", "SetLifeSkillCombatCardNotNew", "GetCharTeammateCommands", "SetLegendaryBookWeaponSlot", "SetLegendaryBookSkillSlot", "UnlockLegendaryBookBreakPlate", "UnlockLegendaryBookBonus", "EnterUnlockBreakPlateCombat", "ExecuteActiveProfessionSkill", "IsProfessionalSkillUnlocked",
@@ -1442,6 +1426,6 @@ public static class ExtraDomainHelper
 		"RemoveSectExtraLegacyBuilding", "BuildExtraLegacyBuilding", "GetCharacterExtraLegacyPointWorth", "GetExtraLegacyPointCharacterCountOnBlock", "GetSectExtraLegacyBuildingCounts", "SaveMainUiCustomButtons", "SetMapBlockCharCustomInfoList", "SetMapBlockCharCustomButtonList", "GetAreaCharacterJieQingSignAmount", "CheckLocationHasBeggerSkill1",
 		"SetJixiDrainNeili", "SetJixiTarget", "TaiwuTransferNeiliAllocToJixi", "JixiTransferNeiliAllocToTaiwu", "SetJixiDrainType", "GetJixiSpecialInteractDisplayData", "InitJixiSpecialInteractData", "JixiRescueTaiwu", "GetCharacterExtraLegacyPointWorthCalculated", "GetSectRanshanThreeCorpsesData",
 		"SetTaiwuTransformFiveElementsTarget", "SetTaiwuTargetFiveElementsType", "GetSectYuanshanThreeVitalsData", "RequestAllRecruitCharacterData", "GetTipLegendaryBookDisplayData", "GetSectMembersWorthExtraLegacyPoint", "GetCharacterExtraLegacyPointWorthForMapBlock", "GmCmd_SetSectMainStoryArgBoxInt", "GmCmd_GetSectMainStoryArgBoxBool", "GmCmd_GetSectMainStoryArgBoxInt",
-		"GmCmd_SetSectMainStoryArgBoxBool"
+		"GmCmd_SetSectMainStoryArgBoxBool", "HasXiangshuSkill0AffectTarget", "HasXiangshuSkill1AffectTarget"
 	};
 }

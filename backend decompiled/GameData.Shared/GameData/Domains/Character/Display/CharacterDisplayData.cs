@@ -5,339 +5,176 @@ using GameData.Domains.Merchant;
 using GameData.Domains.Taiwu.Profession;
 using GameData.Serializer;
 using GameData.Utilities;
+using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物显示数据。用于向前端返回显示所需数据，使前端不必监听人物数据
-/// </summary>
-[SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
+[AutoGenerateSerializableGameData(NotForArchive = true, NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class CharacterDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharacterId;
 
-	/// <summary>
-	/// 角色模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 角色创建类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CreatingType;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 姓名数据
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
-	/// <summary>
-	/// 出家类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte MonkType;
 
-	/// <summary>
-	/// 法号
-	/// </summary>
 	[SerializableGameDataField]
 	public MonasticTitle MonasticTitle;
 
-	/// <summary>
-	/// 形象数据
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
-	/// <summary>
-	/// 生理年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short PhysiologicalAge;
 
-	/// <summary>
-	/// 当前年龄
-	/// </summary>
 	[Obsolete("Unless necessary, use PhysiologicalAge instead.")]
 	[SerializableGameDataField]
 	public short CurrAge;
 
-	/// <summary>
-	/// 真实年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short ActualAge;
 
-	/// <summary>
-	/// 团体数据
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrgInfo;
 
-	/// <summary>
-	/// 立场
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BehaviorType;
 
-	/// <summary>
-	/// 名誉
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FameType;
 
-	/// <summary>
-	/// 对太吾的好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public short FavorabilityToTaiwu;
 
-	/// <summary>
-	/// 是否已经支持太吾
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsApproveTaiwu;
 
-	/// <summary>
-	/// 对太吾的支持度
-	/// </summary>
 	[SerializableGameDataField]
 	public short ApproveTaiwu;
 
-	/// <summary>
-	/// 团队影响力
-	/// </summary>
 	[SerializableGameDataField]
 	public short InfluencePower;
 
-	/// <summary>
-	/// 团队贡献度
-	/// 对死人数据，重用此字段以保存坟墓耐久
-	/// </summary>
 	[SerializableGameDataField]
 	public int Contribution;
 
-	/// <summary>
-	/// 每月团队贡献度
-	/// 对死人数据，重用此字段以保存死亡日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int ContributionPerMonth;
 
-	/// <summary>
-	/// 角色的称号列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> TitleIds;
 
-	/// <summary>
-	/// 是否已入魔
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CompletelyInfected;
 
-	/// <summary>
-	/// 可用的关押
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ValidKidnapSlotCount;
 
-	/// <summary>
-	/// 存活状态：0：活着，1：死亡，2：死亡并消除数据
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte AliveState;
 
-	/// <summary>
-	/// 当前位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 出生日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int BirthDate;
 
-	/// <summary>
-	/// 外部关联状态位
-	/// </summary>
 	[SerializableGameDataField]
 	public ulong ExternalRelationState;
 
-	/// <summary>
-	/// 奇书状态
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LegendaryBookOwnerState;
 
-	/// <summary>
-	/// 拥有的奇书，可能为null
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> LegendaryBooks;
 
-	/// <summary>
-	/// 自定义显示名
-	/// </summary>
 	[SerializableGameDataField]
 	public int CustomDisplayNameId;
 
-	/// <summary>
-	/// 获取库房守卫信息
-	/// </summary>
+	[SerializableGameDataField]
+	public bool IsXiangshuInfectedDemon;
+
 	[SerializableGameDataField]
 	public byte SettlementTreasuryGuardInfo;
 
-	/// <summary>
-	/// 悬赏的犯罪程度
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BountyPunishmentSeverity;
 
-	/// <summary>
-	/// 发出悬赏的门派
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BountyOrgTemplate;
 
-	/// <summary>
-	/// 是否不能说话
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanNotSpeak;
 
-	/// <summary>
-	/// 太吾是否关注了此人
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsFollowedByTaiwu;
 
-	/// <summary>
-	/// 昵称。现在关注者才配有。
-	/// </summary>
 	[SerializableGameDataField]
 	public int NickNameId;
 
-	/// <summary>
-	/// ExtraNameText对应的模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public int ExtraNameTextTemplateId;
 
-	/// <summary>
-	/// 理想门派
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte IdealSect;
 
-	/// <summary>
-	/// 当前位置所属团体
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CurrOrgTemplate;
 
-	/// <summary>
-	/// 玄灰保护状态
-	/// </summary>
 	[SerializableGameDataField]
 	public uint DarkAshProtector;
 
-	/// <summary>
-	/// 玄灰倒计时
-	/// </summary>
 	[SerializableGameDataField]
 	public DarkAshCounter DarkAshCounter;
 
-	/// <summary>
-	/// 继承人的显示信息
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData OrganizationMemberPotentialSuccessor;
 
-	/// <summary>
-	/// 与太吾的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationToTaiwu;
 
-	/// <summary>
-	/// 太吾与之的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationFromTaiwu;
 
-	/// <summary>
-	/// 魅力
-	/// </summary>
 	[SerializableGameDataField]
 	public short Charm;
 
-	/// <summary>
-	/// 健康
-	/// </summary>
 	[SerializableGameDataField]
 	public short Health;
 
-	/// <summary>
-	/// 剩余最大健康
-	/// </summary>
 	[SerializableGameDataField]
 	public short LeftMaxHealth;
 
-	/// <summary>
-	/// 健康状态标志位：bit0=外伤，bit1=内伤，bit2=毒，bit3=内息紊乱
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte HealthStateFlags;
 
-	/// <summary>
-	/// 心情
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Happiness;
 
-	/// <summary>
-	/// 商人类别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MerchantTemplateId;
 
-	/// <summary>
-	/// 是否与太吾同一派系
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSameFactionWithTaiwu;
 
-	/// <summary>
-	/// 地区主线 - 界青 - 星运点数
-	/// </summary>
 	[SerializableGameDataField]
 	public int FortuneExtraLegacyPointWorth;
 
-	/// <summary>
-	/// 七元，活人才有意义
-	/// </summary>
 	[SerializableGameDataField]
 	public Personalities Personalities;
 
-	/// <summary>
-	/// 特性勋章 (攻防智星级) 汇总值
-	/// </summary>
 	[SerializableGameDataField]
 	public int AttackMedal;
 
@@ -347,85 +184,45 @@ public class CharacterDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public int WisdomMedal;
 
-	/// <summary>
-	/// 轮回次数
-	/// </summary>
 	[SerializableGameDataField]
 	public short SamsaraCount;
 
-	/// <summary>
-	/// 角色的特性列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> FeatureIds;
 
-	/// <summary>
-	/// 年龄影响因素
-	/// </summary>
 	[SerializableGameDataField]
 	public byte AgeAffector;
 
-	/// <summary>
-	/// 精纯
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ConsummateLevel;
 
-	/// <summary>
-	/// 戒心数据
-	/// </summary>
 	[SerializableGameDataField]
 	public int Alertness;
 
-	/// <summary>
-	/// 商人从属商会类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MerchantType;
 
-	/// <summary>
-	/// 商人经验数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantExpData MerchantExpData;
 
-	/// <summary>
-	/// 当前志向
-	/// </summary>
 	[SerializableGameDataField]
 	public ProfessionData CurrentProfession;
 
-	/// <summary>
-	/// 是否为搜索到的Npc
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSearchedCharacter;
 
-	/// <summary>
-	/// 可见互动的可用情况字典，通常为空，按需赋值
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, bool> VisibleCharacterInteractionEventOptionDict;
 
-	/// <summary>
-	/// 相枢化身类型
-	/// 0：Normal，1：XiangshuAvatar，2：XiangshuCore，3：PurpleBambooAvatar，4：WoodenXiangshuAvatar
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte XiangshuType;
 
-	/// <summary>
-	/// 无交互数据原因
-	/// -1: 未计算
-	/// 计算方法：(data.VisibleCharacterInteractionEventOptionDict, data.NoInteractionReason) = DomainManager.TaiwuEvent.GetVisibleCharacterInteractionEventOptions(data.CharacterId)
-	/// 由于这个字段不是必须的，一切请求这个字段的界面必须额外进行一次赋值调用
-	/// </summary>
 	[SerializableGameDataField]
 	public int NoInteractionReason = -1;
 
-	/// <summary>
-	/// 坟墓耐久，直接重用Contribution
-	/// </summary>
+	[SerializableGameDataField]
+	public bool ShowGraveInfoInFollowingMode;
+
 	public int GraveDuration
 	{
 		get
@@ -438,9 +235,6 @@ public class CharacterDisplayData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 死亡日期，直接重用ContributionPerMonth
-	/// </summary>
 	public int DeathDate
 	{
 		get
@@ -453,31 +247,20 @@ public class CharacterDisplayData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 是否是库房守卫
-	/// </summary>
 	public bool IsSettlementTreasuryGuard => SettlementTreasuryGuardLevel != 0;
 
-	/// <summary>
-	/// 获取库房守卫等级
-	/// </summary>
 	public byte SettlementTreasuryGuardLevel => (byte)(SettlementTreasuryGuardInfo & 3);
 
-	/// <summary>
-	/// 获取库房守卫是否工作
-	/// </summary>
 	public bool SettlementTreasuryGuardWorking => (SettlementTreasuryGuardInfo & 4) != 0;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
-		int totalSize = 162;
+		int totalSize = 166;
 		totalSize = ((AvatarRelatedData == null) ? (totalSize + 2) : (totalSize + (2 + AvatarRelatedData.GetSerializedSize())));
 		totalSize = ((TitleIds == null) ? (totalSize + 2) : (totalSize + (2 + 2 * TitleIds.Count)));
 		totalSize = ((LegendaryBooks == null) ? (totalSize + 2) : (totalSize + (2 + LegendaryBooks.Count)));
@@ -485,7 +268,16 @@ public class CharacterDisplayData : ISerializableGameData
 		totalSize = ((FeatureIds == null) ? (totalSize + 2) : (totalSize + (2 + 2 * FeatureIds.Count)));
 		totalSize = ((MerchantExpData == null) ? (totalSize + 2) : (totalSize + (2 + MerchantExpData.GetSerializedSize())));
 		totalSize = ((CurrentProfession == null) ? (totalSize + 2) : (totalSize + (2 + CurrentProfession.GetSerializedSize())));
-		totalSize += SerializationHelper.DictionaryOfBasicTypePair.GetSerializedSize(VisibleCharacterInteractionEventOptionDict);
+		totalSize += 4;
+		if (VisibleCharacterInteractionEventOptionDict != null)
+		{
+			foreach (KeyValuePair<short, bool> item in VisibleCharacterInteractionEventOptionDict)
+			{
+				_ = item;
+				totalSize += 2;
+				totalSize++;
+			}
+		}
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -493,7 +285,6 @@ public class CharacterDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -554,9 +345,9 @@ public class CharacterDisplayData : ISerializableGameData
 			pCurrData += 2;
 			for (int i = 0; i < elementsCount; i++)
 			{
-				((short*)pCurrData)[i] = TitleIds[i];
+				*(short*)pCurrData = TitleIds[i];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount;
 		}
 		else
 		{
@@ -584,9 +375,9 @@ public class CharacterDisplayData : ISerializableGameData
 			pCurrData += 2;
 			for (int j = 0; j < elementsCount2; j++)
 			{
-				pCurrData[j] = (byte)LegendaryBooks[j];
+				*pCurrData = (byte)LegendaryBooks[j];
+				pCurrData++;
 			}
-			pCurrData += elementsCount2;
 		}
 		else
 		{
@@ -595,6 +386,8 @@ public class CharacterDisplayData : ISerializableGameData
 		}
 		*(int*)pCurrData = CustomDisplayNameId;
 		pCurrData += 4;
+		*pCurrData = (IsXiangshuInfectedDemon ? ((byte)1) : ((byte)0));
+		pCurrData++;
 		*pCurrData = SettlementTreasuryGuardInfo;
 		pCurrData++;
 		*pCurrData = (byte)BountyPunishmentSeverity;
@@ -667,9 +460,9 @@ public class CharacterDisplayData : ISerializableGameData
 			pCurrData += 2;
 			for (int k = 0; k < elementsCount3; k++)
 			{
-				((short*)pCurrData)[k] = FeatureIds[k];
+				*(short*)pCurrData = FeatureIds[k];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount3;
 		}
 		else
 		{
@@ -714,11 +507,29 @@ public class CharacterDisplayData : ISerializableGameData
 		}
 		*pCurrData = (IsSearchedCharacter ? ((byte)1) : ((byte)0));
 		pCurrData++;
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Serialize(pCurrData, ref VisibleCharacterInteractionEventOptionDict);
+		if (VisibleCharacterInteractionEventOptionDict != null)
+		{
+			*(int*)pCurrData = VisibleCharacterInteractionEventOptionDict.Count;
+			pCurrData += 4;
+			foreach (KeyValuePair<short, bool> pair in VisibleCharacterInteractionEventOptionDict)
+			{
+				*(short*)pCurrData = pair.Key;
+				pCurrData += 2;
+				*pCurrData = (pair.Value ? ((byte)1) : ((byte)0));
+				pCurrData++;
+			}
+		}
+		else
+		{
+			*(int*)pCurrData = 0;
+			pCurrData += 4;
+		}
 		*pCurrData = (byte)XiangshuType;
 		pCurrData++;
 		*(int*)pCurrData = NoInteractionReason;
 		pCurrData += 4;
+		*pCurrData = (ShowGraveInfoInFollowingMode ? ((byte)1) : ((byte)0));
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -727,7 +538,6 @@ public class CharacterDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -747,10 +557,7 @@ public class CharacterDisplayData : ISerializableGameData
 		pCurrData += 2;
 		if (num > 0)
 		{
-			if (AvatarRelatedData == null)
-			{
-				AvatarRelatedData = new AvatarRelatedData();
-			}
+			AvatarRelatedData = new AvatarRelatedData();
 			pCurrData += AvatarRelatedData.Deserialize(pCurrData);
 		}
 		else
@@ -786,7 +593,7 @@ public class CharacterDisplayData : ISerializableGameData
 		{
 			if (TitleIds == null)
 			{
-				TitleIds = new List<short>(elementsCount);
+				TitleIds = new List<short>();
 			}
 			else
 			{
@@ -794,9 +601,10 @@ public class CharacterDisplayData : ISerializableGameData
 			}
 			for (int i = 0; i < elementsCount; i++)
 			{
-				TitleIds.Add(((short*)pCurrData)[i]);
+				short element = *(short*)pCurrData;
+				pCurrData += 2;
+				TitleIds.Add(element);
 			}
-			pCurrData += 2 * elementsCount;
 		}
 		else
 		{
@@ -821,7 +629,7 @@ public class CharacterDisplayData : ISerializableGameData
 		{
 			if (LegendaryBooks == null)
 			{
-				LegendaryBooks = new List<sbyte>(elementsCount2);
+				LegendaryBooks = new List<sbyte>();
 			}
 			else
 			{
@@ -829,9 +637,10 @@ public class CharacterDisplayData : ISerializableGameData
 			}
 			for (int j = 0; j < elementsCount2; j++)
 			{
-				LegendaryBooks.Add((sbyte)pCurrData[j]);
+				sbyte element2 = (sbyte)(*pCurrData);
+				pCurrData++;
+				LegendaryBooks.Add(element2);
 			}
-			pCurrData += (int)elementsCount2;
 		}
 		else
 		{
@@ -839,6 +648,8 @@ public class CharacterDisplayData : ISerializableGameData
 		}
 		CustomDisplayNameId = *(int*)pCurrData;
 		pCurrData += 4;
+		IsXiangshuInfectedDemon = *pCurrData != 0;
+		pCurrData++;
 		SettlementTreasuryGuardInfo = *pCurrData;
 		pCurrData++;
 		BountyPunishmentSeverity = (sbyte)(*pCurrData);
@@ -864,10 +675,7 @@ public class CharacterDisplayData : ISerializableGameData
 		pCurrData += 2;
 		if (num2 > 0)
 		{
-			if (OrganizationMemberPotentialSuccessor == null)
-			{
-				OrganizationMemberPotentialSuccessor = new CharacterDisplayData();
-			}
+			OrganizationMemberPotentialSuccessor = new CharacterDisplayData();
 			pCurrData += OrganizationMemberPotentialSuccessor.Deserialize(pCurrData);
 		}
 		else
@@ -909,7 +717,7 @@ public class CharacterDisplayData : ISerializableGameData
 		{
 			if (FeatureIds == null)
 			{
-				FeatureIds = new List<short>(elementsCount3);
+				FeatureIds = new List<short>();
 			}
 			else
 			{
@@ -917,9 +725,10 @@ public class CharacterDisplayData : ISerializableGameData
 			}
 			for (int k = 0; k < elementsCount3; k++)
 			{
-				FeatureIds.Add(((short*)pCurrData)[k]);
+				short element3 = *(short*)pCurrData;
+				pCurrData += 2;
+				FeatureIds.Add(element3);
 			}
-			pCurrData += 2 * elementsCount3;
 		}
 		else
 		{
@@ -937,10 +746,7 @@ public class CharacterDisplayData : ISerializableGameData
 		pCurrData += 2;
 		if (num3 > 0)
 		{
-			if (MerchantExpData == null)
-			{
-				MerchantExpData = new MerchantExpData();
-			}
+			MerchantExpData = new MerchantExpData();
 			pCurrData += MerchantExpData.Deserialize(pCurrData);
 		}
 		else
@@ -951,10 +757,7 @@ public class CharacterDisplayData : ISerializableGameData
 		pCurrData += 2;
 		if (num4 > 0)
 		{
-			if (CurrentProfession == null)
-			{
-				CurrentProfession = new ProfessionData();
-			}
+			CurrentProfession = new ProfessionData();
 			pCurrData += CurrentProfession.Deserialize(pCurrData);
 		}
 		else
@@ -963,11 +766,37 @@ public class CharacterDisplayData : ISerializableGameData
 		}
 		IsSearchedCharacter = *pCurrData != 0;
 		pCurrData++;
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Deserialize(pCurrData, ref VisibleCharacterInteractionEventOptionDict);
+		int VisibleCharacterInteractionEventOptionDictElementsCount = *(int*)pCurrData;
+		pCurrData += 4;
+		if (VisibleCharacterInteractionEventOptionDictElementsCount > 0)
+		{
+			if (VisibleCharacterInteractionEventOptionDict == null)
+			{
+				VisibleCharacterInteractionEventOptionDict = new Dictionary<short, bool>();
+			}
+			else
+			{
+				VisibleCharacterInteractionEventOptionDict.Clear();
+			}
+			for (int l = 0; l < VisibleCharacterInteractionEventOptionDictElementsCount; l++)
+			{
+				short key = *(short*)pCurrData;
+				pCurrData += 2;
+				bool value = *pCurrData != 0;
+				pCurrData++;
+				VisibleCharacterInteractionEventOptionDict.Add(key, value);
+			}
+		}
+		else
+		{
+			VisibleCharacterInteractionEventOptionDict?.Clear();
+		}
 		XiangshuType = (sbyte)(*pCurrData);
 		pCurrData++;
 		NoInteractionReason = *(int*)pCurrData;
 		pCurrData += 4;
+		ShowGraveInfoInFollowingMode = *pCurrData != 0;
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

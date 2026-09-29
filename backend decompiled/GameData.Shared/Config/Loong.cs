@@ -7,71 +7,32 @@ namespace Config;
 [Serializable]
 public class Loong : ConfigData<LoongItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 白龙
-		/// </summary>
 		public const short While = 0;
 
-		/// <summary>
-		/// 黑龙
-		/// </summary>
 		public const short Black = 1;
 
-		/// <summary>
-		/// 青龙
-		/// </summary>
 		public const short Green = 2;
 
-		/// <summary>
-		/// 赤龙
-		/// </summary>
 		public const short Red = 3;
 
-		/// <summary>
-		/// 黄龙
-		/// </summary>
 		public const short Yellow = 4;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 白龙
-		/// </summary>
 		public static LoongItem While => Instance[(short)0];
 
-		/// <summary>
-		/// 黑龙
-		/// </summary>
 		public static LoongItem Black => Instance[(short)1];
 
-		/// <summary>
-		/// 青龙
-		/// </summary>
 		public static LoongItem Green => Instance[(short)2];
 
-		/// <summary>
-		/// 赤龙
-		/// </summary>
 		public static LoongItem Red => Instance[(short)3];
 
-		/// <summary>
-		/// 黄龙
-		/// </summary>
 		public static LoongItem Yellow => Instance[(short)4];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Loong Instance = new Loong();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

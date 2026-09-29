@@ -4,38 +4,23 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 代表一个身份下身份管理界面需要显示的数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class VillagerRoleTipsDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 对应身份id
-	/// </summary>
 	[SerializableGameDataField]
 	public short RoleTemplateId;
 
-	/// <summary>
-	/// 需求的建筑类型，对应EBuildingBlockClass
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> RelatedBuildingClassList;
 
-	/// <summary>
-	/// 具体建筑的加成列表
-	/// first是建筑BuildingBlock的id，second是加成值
-	/// </summary>
 	[SerializableGameDataField]
 	public List<IntPair> DetailList;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -48,7 +33,6 @@ public class VillagerRoleTipsDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -95,7 +79,6 @@ public class VillagerRoleTipsDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

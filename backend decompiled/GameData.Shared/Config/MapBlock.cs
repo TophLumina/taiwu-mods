@@ -7,981 +7,396 @@ namespace Config;
 [Serializable]
 public class MapBlock : ConfigData<MapBlockItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 太吾村
-		/// </summary>
 		public const short Taiwucun = 0;
 
-		/// <summary>
-		/// 京城
-		/// </summary>
 		public const short Jingcheng = 1;
 
-		/// <summary>
-		/// 成都
-		/// </summary>
 		public const short Chengdu = 2;
 
-		/// <summary>
-		/// 桂州
-		/// </summary>
 		public const short Guizhou = 3;
 
-		/// <summary>
-		/// 襄阳
-		/// </summary>
 		public const short Xiangyang = 4;
 
-		/// <summary>
-		/// 太原
-		/// </summary>
 		public const short Taiyuan = 5;
 
-		/// <summary>
-		/// 广州
-		/// </summary>
 		public const short Guangzhou = 6;
 
-		/// <summary>
-		/// 青州
-		/// </summary>
 		public const short Qingzhou = 7;
 
-		/// <summary>
-		/// 江陵
-		/// </summary>
 		public const short Jiangling = 8;
 
-		/// <summary>
-		/// 福州
-		/// </summary>
 		public const short Fuzhou = 9;
 
-		/// <summary>
-		/// 辽阳
-		/// </summary>
 		public const short Liaoyang = 10;
 
-		/// <summary>
-		/// 秦州
-		/// </summary>
 		public const short Qinzhou = 11;
 
-		/// <summary>
-		/// 大理
-		/// </summary>
 		public const short Dali = 12;
 
-		/// <summary>
-		/// 寿春
-		/// </summary>
 		public const short Shouchun = 13;
 
-		/// <summary>
-		/// 杭州
-		/// </summary>
 		public const short Hangzhou = 14;
 
-		/// <summary>
-		/// 扬州
-		/// </summary>
 		public const short Yangzhou = 15;
 
-		/// <summary>
-		/// 隐秘小村
-		/// </summary>
 		public const short SecretVilliage = 16;
 
-		/// <summary>
-		/// 竹庐1
-		/// </summary>
 		public const short BambooHouse1 = 17;
 
-		/// <summary>
-		/// 竹庐2
-		/// </summary>
 		public const short BambooHouse2 = 18;
 
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public const short Shaolin = 19;
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public const short Emei = 20;
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public const short Baihua = 21;
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public const short Wudang = 22;
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public const short Yuanshan = 23;
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public const short Shixiang = 24;
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public const short Ranshan = 25;
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public const short Xuannv = 26;
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public const short Zhujian = 27;
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public const short Kongsang = 28;
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public const short Jingang = 29;
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public const short Wuxian = 30;
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public const short Jieqing = 31;
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public const short Fulong = 32;
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public const short Xuehou = 33;
 
-		/// <summary>
-		/// 村庄
-		/// </summary>
 		public const short Village = 34;
 
-		/// <summary>
-		/// 市镇
-		/// </summary>
 		public const short Town = 35;
 
-		/// <summary>
-		/// 关寨
-		/// </summary>
 		public const short Stockade = 36;
 
-		/// <summary>
-		/// 驿站
-		/// </summary>
 		public const short Station = 37;
 
-		/// <summary>
-		/// 废弃驿站
-		/// </summary>
 		public const short BrokenStation = 38;
 
-		/// <summary>
-		/// 农田1
-		/// </summary>
 		public const short Farmland1 = 39;
 
-		/// <summary>
-		/// 园林1
-		/// </summary>
 		public const short Gardens1 = 42;
 
-		/// <summary>
-		/// 石林1
-		/// </summary>
 		public const short StoneForest1 = 45;
 
-		/// <summary>
-		/// 桑园1
-		/// </summary>
 		public const short MulberryField1 = 48;
 
-		/// <summary>
-		/// 药园1
-		/// </summary>
 		public const short HerbalGarden1 = 51;
 
-		/// <summary>
-		/// 玉山1
-		/// </summary>
 		public const short JadeMountain1 = 54;
 
-		/// <summary>
-		/// 山岳1
-		/// </summary>
 		public const short Mountain1 = 57;
 
-		/// <summary>
-		/// 山脉1
-		/// </summary>
 		public const short BigMountain1 = 60;
 
-		/// <summary>
-		/// 峡谷1
-		/// </summary>
 		public const short Canyon1 = 63;
 
-		/// <summary>
-		/// 天险1
-		/// </summary>
 		public const short BigCanyon1 = 66;
 
-		/// <summary>
-		/// 天险3
-		/// </summary>
 		public const short TianXian3 = 68;
 
-		/// <summary>
-		/// 丘陵1
-		/// </summary>
 		public const short Hill1 = 69;
 
-		/// <summary>
-		/// 高地1
-		/// </summary>
 		public const short BigHill1 = 72;
 
-		/// <summary>
-		/// 原野1
-		/// </summary>
 		public const short Field1 = 75;
 
-		/// <summary>
-		/// 平原1
-		/// </summary>
 		public const short BigField1 = 78;
 
-		/// <summary>
-		/// 林地1
-		/// </summary>
 		public const short Woodland1 = 81;
 
-		/// <summary>
-		/// 森林1
-		/// </summary>
 		public const short BigWoodland1 = 84;
 
-		/// <summary>
-		/// 河滩1
-		/// </summary>
 		public const short RiverBeach1 = 87;
 
-		/// <summary>
-		/// 河谷1
-		/// </summary>
 		public const short HeGu1 = 90;
 
-		/// <summary>
-		/// 河谷3
-		/// </summary>
 		public const short HeGu3 = 92;
 
-		/// <summary>
-		/// 湖泊
-		/// </summary>
 		public const short Lake1 = 93;
 
-		/// <summary>
-		/// 密林1
-		/// </summary>
 		public const short Jungle1 = 94;
 
-		/// <summary>
-		/// 洞穴1
-		/// </summary>
 		public const short Cave1 = 97;
 
-		/// <summary>
-		/// 沼泽1
-		/// </summary>
 		public const short Swamp1 = 100;
 
-		/// <summary>
-		/// 桃源1
-		/// </summary>
 		public const short TaoYuan1 = 103;
 
-		/// <summary>
-		/// 溪谷1
-		/// </summary>
 		public const short Valley1 = 106;
 
-		/// <summary>
-		/// 荒野1
-		/// </summary>
 		public const short Wild1 = 109;
 
-		/// <summary>
-		/// 毁坏地块1
-		/// </summary>
 		public const short Ruin1 = 118;
 
-		/// <summary>
-		/// 毁坏地块2
-		/// </summary>
 		public const short Ruin2 = 119;
 
-		/// <summary>
-		/// 毁坏地块3
-		/// </summary>
 		public const short Ruin3 = 120;
 
-		/// <summary>
-		/// 毁坏地块4
-		/// </summary>
 		public const short Ruin4 = 121;
 
-		/// <summary>
-		/// 毁坏地块5
-		/// </summary>
 		public const short Ruin5 = 122;
 
-		/// <summary>
-		/// 毁坏地块6
-		/// </summary>
 		public const short Ruin6 = 123;
 
-		/// <summary>
-		/// 暗渊
-		/// </summary>
 		public const short Abyss = 124;
 
-		/// <summary>
-		/// 阻挡
-		/// </summary>
 		public const short Block = 125;
 
-		/// <summary>
-		/// 镂空
-		/// </summary>
 		public const short None = 126;
 
-		/// <summary>
-		/// 莫女衣
-		/// </summary>
 		public const short SwordTombMonv = 128;
 
-		/// <summary>
-		/// 伏邪铁
-		/// </summary>
 		public const short SwordTombDayueYaochang = 129;
 
-		/// <summary>
-		/// 大玄凝
-		/// </summary>
 		public const short SwordTombJiuhan = 130;
 
-		/// <summary>
-		/// 凤凰茧
-		/// </summary>
 		public const short SwordTombJinHuanger = 131;
 
-		/// <summary>
-		/// 焚神炼
-		/// </summary>
 		public const short SwordTombYiYihou = 132;
 
-		/// <summary>
-		/// 解龙魄
-		/// </summary>
 		public const short SwordTombWeiQi = 133;
 
-		/// <summary>
-		/// 溶尘隐
-		/// </summary>
 		public const short SwordTombYixiang = 134;
 
-		/// <summary>
-		/// 囚魔木
-		/// </summary>
 		public const short SwordTombXuefeng = 135;
 
-		/// <summary>
-		/// 鬼神霞
-		/// </summary>
 		public const short SwordTombShuFang = 136;
 
-		/// <summary>
-		/// 雷泽
-		/// </summary>
 		public const short LoongWhiteBlock = 137;
 
-		/// <summary>
-		/// 洪泽
-		/// </summary>
 		public const short LoongBlackBlock = 138;
 
-		/// <summary>
-		/// 风泽
-		/// </summary>
 		public const short LoongGreenBlock = 139;
 
-		/// <summary>
-		/// 炎泽
-		/// </summary>
 		public const short LoongRedBlock = 140;
 
-		/// <summary>
-		/// 沙泽
-		/// </summary>
 		public const short LoongYellowBlock = 141;
 
-		/// <summary>
-		/// 毁坏地块大1
-		/// </summary>
 		public const short RuinBig1 = 142;
 
-		/// <summary>
-		/// 毁坏地块大2
-		/// </summary>
 		public const short RuinBig2 = 143;
 
-		/// <summary>
-		/// 毁坏地块大3
-		/// </summary>
 		public const short RuinBig3 = 144;
 
-		/// <summary>
-		/// 毁坏地块大4
-		/// </summary>
 		public const short RuinBig4 = 145;
 
-		/// <summary>
-		/// 毁坏地块大5
-		/// </summary>
 		public const short RuinBig5 = 146;
 
-		/// <summary>
-		/// 毁坏地块大6
-		/// </summary>
 		public const short RuinBig6 = 147;
 
-		/// <summary>
-		/// 柴山神炉
-		/// </summary>
 		public const short ChaishanFurnace = 148;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 太吾村
-		/// </summary>
 		public static MapBlockItem Taiwucun => Instance[(short)0];
 
-		/// <summary>
-		/// 京城
-		/// </summary>
 		public static MapBlockItem Jingcheng => Instance[(short)1];
 
-		/// <summary>
-		/// 成都
-		/// </summary>
 		public static MapBlockItem Chengdu => Instance[(short)2];
 
-		/// <summary>
-		/// 桂州
-		/// </summary>
 		public static MapBlockItem Guizhou => Instance[(short)3];
 
-		/// <summary>
-		/// 襄阳
-		/// </summary>
 		public static MapBlockItem Xiangyang => Instance[(short)4];
 
-		/// <summary>
-		/// 太原
-		/// </summary>
 		public static MapBlockItem Taiyuan => Instance[(short)5];
 
-		/// <summary>
-		/// 广州
-		/// </summary>
 		public static MapBlockItem Guangzhou => Instance[(short)6];
 
-		/// <summary>
-		/// 青州
-		/// </summary>
 		public static MapBlockItem Qingzhou => Instance[(short)7];
 
-		/// <summary>
-		/// 江陵
-		/// </summary>
 		public static MapBlockItem Jiangling => Instance[(short)8];
 
-		/// <summary>
-		/// 福州
-		/// </summary>
 		public static MapBlockItem Fuzhou => Instance[(short)9];
 
-		/// <summary>
-		/// 辽阳
-		/// </summary>
 		public static MapBlockItem Liaoyang => Instance[(short)10];
 
-		/// <summary>
-		/// 秦州
-		/// </summary>
 		public static MapBlockItem Qinzhou => Instance[(short)11];
 
-		/// <summary>
-		/// 大理
-		/// </summary>
 		public static MapBlockItem Dali => Instance[(short)12];
 
-		/// <summary>
-		/// 寿春
-		/// </summary>
 		public static MapBlockItem Shouchun => Instance[(short)13];
 
-		/// <summary>
-		/// 杭州
-		/// </summary>
 		public static MapBlockItem Hangzhou => Instance[(short)14];
 
-		/// <summary>
-		/// 扬州
-		/// </summary>
 		public static MapBlockItem Yangzhou => Instance[(short)15];
 
-		/// <summary>
-		/// 隐秘小村
-		/// </summary>
 		public static MapBlockItem SecretVilliage => Instance[(short)16];
 
-		/// <summary>
-		/// 竹庐1
-		/// </summary>
 		public static MapBlockItem BambooHouse1 => Instance[(short)17];
 
-		/// <summary>
-		/// 竹庐2
-		/// </summary>
 		public static MapBlockItem BambooHouse2 => Instance[(short)18];
 
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public static MapBlockItem Shaolin => Instance[(short)19];
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public static MapBlockItem Emei => Instance[(short)20];
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public static MapBlockItem Baihua => Instance[(short)21];
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public static MapBlockItem Wudang => Instance[(short)22];
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public static MapBlockItem Yuanshan => Instance[(short)23];
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public static MapBlockItem Shixiang => Instance[(short)24];
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public static MapBlockItem Ranshan => Instance[(short)25];
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public static MapBlockItem Xuannv => Instance[(short)26];
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public static MapBlockItem Zhujian => Instance[(short)27];
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public static MapBlockItem Kongsang => Instance[(short)28];
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public static MapBlockItem Jingang => Instance[(short)29];
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public static MapBlockItem Wuxian => Instance[(short)30];
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public static MapBlockItem Jieqing => Instance[(short)31];
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public static MapBlockItem Fulong => Instance[(short)32];
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public static MapBlockItem Xuehou => Instance[(short)33];
 
-		/// <summary>
-		/// 村庄
-		/// </summary>
 		public static MapBlockItem Village => Instance[(short)34];
 
-		/// <summary>
-		/// 市镇
-		/// </summary>
 		public static MapBlockItem Town => Instance[(short)35];
 
-		/// <summary>
-		/// 关寨
-		/// </summary>
 		public static MapBlockItem Stockade => Instance[(short)36];
 
-		/// <summary>
-		/// 驿站
-		/// </summary>
 		public static MapBlockItem Station => Instance[(short)37];
 
-		/// <summary>
-		/// 废弃驿站
-		/// </summary>
 		public static MapBlockItem BrokenStation => Instance[(short)38];
 
-		/// <summary>
-		/// 农田1
-		/// </summary>
 		public static MapBlockItem Farmland1 => Instance[(short)39];
 
-		/// <summary>
-		/// 园林1
-		/// </summary>
 		public static MapBlockItem Gardens1 => Instance[(short)42];
 
-		/// <summary>
-		/// 石林1
-		/// </summary>
 		public static MapBlockItem StoneForest1 => Instance[(short)45];
 
-		/// <summary>
-		/// 桑园1
-		/// </summary>
 		public static MapBlockItem MulberryField1 => Instance[(short)48];
 
-		/// <summary>
-		/// 药园1
-		/// </summary>
 		public static MapBlockItem HerbalGarden1 => Instance[(short)51];
 
-		/// <summary>
-		/// 玉山1
-		/// </summary>
 		public static MapBlockItem JadeMountain1 => Instance[(short)54];
 
-		/// <summary>
-		/// 山岳1
-		/// </summary>
 		public static MapBlockItem Mountain1 => Instance[(short)57];
 
-		/// <summary>
-		/// 山脉1
-		/// </summary>
 		public static MapBlockItem BigMountain1 => Instance[(short)60];
 
-		/// <summary>
-		/// 峡谷1
-		/// </summary>
 		public static MapBlockItem Canyon1 => Instance[(short)63];
 
-		/// <summary>
-		/// 天险1
-		/// </summary>
 		public static MapBlockItem BigCanyon1 => Instance[(short)66];
 
-		/// <summary>
-		/// 天险3
-		/// </summary>
 		public static MapBlockItem TianXian3 => Instance[(short)68];
 
-		/// <summary>
-		/// 丘陵1
-		/// </summary>
 		public static MapBlockItem Hill1 => Instance[(short)69];
 
-		/// <summary>
-		/// 高地1
-		/// </summary>
 		public static MapBlockItem BigHill1 => Instance[(short)72];
 
-		/// <summary>
-		/// 原野1
-		/// </summary>
 		public static MapBlockItem Field1 => Instance[(short)75];
 
-		/// <summary>
-		/// 平原1
-		/// </summary>
 		public static MapBlockItem BigField1 => Instance[(short)78];
 
-		/// <summary>
-		/// 林地1
-		/// </summary>
 		public static MapBlockItem Woodland1 => Instance[(short)81];
 
-		/// <summary>
-		/// 森林1
-		/// </summary>
 		public static MapBlockItem BigWoodland1 => Instance[(short)84];
 
-		/// <summary>
-		/// 河滩1
-		/// </summary>
 		public static MapBlockItem RiverBeach1 => Instance[(short)87];
 
-		/// <summary>
-		/// 河谷1
-		/// </summary>
 		public static MapBlockItem HeGu1 => Instance[(short)90];
 
-		/// <summary>
-		/// 河谷3
-		/// </summary>
 		public static MapBlockItem HeGu3 => Instance[(short)92];
 
-		/// <summary>
-		/// 湖泊
-		/// </summary>
 		public static MapBlockItem Lake1 => Instance[(short)93];
 
-		/// <summary>
-		/// 密林1
-		/// </summary>
 		public static MapBlockItem Jungle1 => Instance[(short)94];
 
-		/// <summary>
-		/// 洞穴1
-		/// </summary>
 		public static MapBlockItem Cave1 => Instance[(short)97];
 
-		/// <summary>
-		/// 沼泽1
-		/// </summary>
 		public static MapBlockItem Swamp1 => Instance[(short)100];
 
-		/// <summary>
-		/// 桃源1
-		/// </summary>
 		public static MapBlockItem TaoYuan1 => Instance[(short)103];
 
-		/// <summary>
-		/// 溪谷1
-		/// </summary>
 		public static MapBlockItem Valley1 => Instance[(short)106];
 
-		/// <summary>
-		/// 荒野1
-		/// </summary>
 		public static MapBlockItem Wild1 => Instance[(short)109];
 
-		/// <summary>
-		/// 毁坏地块1
-		/// </summary>
 		public static MapBlockItem Ruin1 => Instance[(short)118];
 
-		/// <summary>
-		/// 毁坏地块2
-		/// </summary>
 		public static MapBlockItem Ruin2 => Instance[(short)119];
 
-		/// <summary>
-		/// 毁坏地块3
-		/// </summary>
 		public static MapBlockItem Ruin3 => Instance[(short)120];
 
-		/// <summary>
-		/// 毁坏地块4
-		/// </summary>
 		public static MapBlockItem Ruin4 => Instance[(short)121];
 
-		/// <summary>
-		/// 毁坏地块5
-		/// </summary>
 		public static MapBlockItem Ruin5 => Instance[(short)122];
 
-		/// <summary>
-		/// 毁坏地块6
-		/// </summary>
 		public static MapBlockItem Ruin6 => Instance[(short)123];
 
-		/// <summary>
-		/// 暗渊
-		/// </summary>
 		public static MapBlockItem Abyss => Instance[(short)124];
 
-		/// <summary>
-		/// 阻挡
-		/// </summary>
 		public static MapBlockItem Block => Instance[(short)125];
 
-		/// <summary>
-		/// 镂空
-		/// </summary>
 		public static MapBlockItem None => Instance[(short)126];
 
-		/// <summary>
-		/// 莫女衣
-		/// </summary>
 		public static MapBlockItem SwordTombMonv => Instance[(short)128];
 
-		/// <summary>
-		/// 伏邪铁
-		/// </summary>
 		public static MapBlockItem SwordTombDayueYaochang => Instance[(short)129];
 
-		/// <summary>
-		/// 大玄凝
-		/// </summary>
 		public static MapBlockItem SwordTombJiuhan => Instance[(short)130];
 
-		/// <summary>
-		/// 凤凰茧
-		/// </summary>
 		public static MapBlockItem SwordTombJinHuanger => Instance[(short)131];
 
-		/// <summary>
-		/// 焚神炼
-		/// </summary>
 		public static MapBlockItem SwordTombYiYihou => Instance[(short)132];
 
-		/// <summary>
-		/// 解龙魄
-		/// </summary>
 		public static MapBlockItem SwordTombWeiQi => Instance[(short)133];
 
-		/// <summary>
-		/// 溶尘隐
-		/// </summary>
 		public static MapBlockItem SwordTombYixiang => Instance[(short)134];
 
-		/// <summary>
-		/// 囚魔木
-		/// </summary>
 		public static MapBlockItem SwordTombXuefeng => Instance[(short)135];
 
-		/// <summary>
-		/// 鬼神霞
-		/// </summary>
 		public static MapBlockItem SwordTombShuFang => Instance[(short)136];
 
-		/// <summary>
-		/// 雷泽
-		/// </summary>
 		public static MapBlockItem LoongWhiteBlock => Instance[(short)137];
 
-		/// <summary>
-		/// 洪泽
-		/// </summary>
 		public static MapBlockItem LoongBlackBlock => Instance[(short)138];
 
-		/// <summary>
-		/// 风泽
-		/// </summary>
 		public static MapBlockItem LoongGreenBlock => Instance[(short)139];
 
-		/// <summary>
-		/// 炎泽
-		/// </summary>
 		public static MapBlockItem LoongRedBlock => Instance[(short)140];
 
-		/// <summary>
-		/// 沙泽
-		/// </summary>
 		public static MapBlockItem LoongYellowBlock => Instance[(short)141];
 
-		/// <summary>
-		/// 毁坏地块大1
-		/// </summary>
 		public static MapBlockItem RuinBig1 => Instance[(short)142];
 
-		/// <summary>
-		/// 毁坏地块大2
-		/// </summary>
 		public static MapBlockItem RuinBig2 => Instance[(short)143];
 
-		/// <summary>
-		/// 毁坏地块大3
-		/// </summary>
 		public static MapBlockItem RuinBig3 => Instance[(short)144];
 
-		/// <summary>
-		/// 毁坏地块大4
-		/// </summary>
 		public static MapBlockItem RuinBig4 => Instance[(short)145];
 
-		/// <summary>
-		/// 毁坏地块大5
-		/// </summary>
 		public static MapBlockItem RuinBig5 => Instance[(short)146];
 
-		/// <summary>
-		/// 毁坏地块大6
-		/// </summary>
 		public static MapBlockItem RuinBig6 => Instance[(short)147];
 
-		/// <summary>
-		/// 柴山神炉
-		/// </summary>
 		public static MapBlockItem ChaishanFurnace => Instance[(short)148];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MapBlock Instance = new MapBlock();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -1528,12 +943,12 @@ public class MapBlock : ConfigData<MapBlockItem, short>
 		_dataArray.Add(new MapBlockItem(139, EMapBlockType.Wild, EMapBlockSubType.DLCLoong, LocalStringManager.GetConfig("MapBlock_language", "Name_139"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_139"), LocalStringManager.GetConfig("MapBlock_language", "Desc_139"), 1, 0, 1, 5, 5, freeStepIgnorePathCost: true, showTips: true, "wild_fiveloong", new int[1] { 3 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[1] { 3 }, miniSceneHaveDirection: false, miniSceneHaveWinter: false, "wild_fiveloong_3", eventBackgroundWinter: false, new string[2] { "Justiselong_feng/eff_wulong_mu_xiao1", "Justiselong_feng/eff_wulong_mu_xiao2" }, ignoreDestroyed: true, taiwuEventChangedBlock: false, -1, new List<sbyte> { 1 }, new short[6] { 90, 300, 0, 90, 0, 150 }, 21, 0, new string[0], null, new string[2] { "Ambience_map_dragon_mu_big", "Ambience_map_dragon_mu_small" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_fiveloong_4_3", 0, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 3));
 		_dataArray.Add(new MapBlockItem(140, EMapBlockType.Wild, EMapBlockSubType.DLCLoong, LocalStringManager.GetConfig("MapBlock_language", "Name_140"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_140"), LocalStringManager.GetConfig("MapBlock_language", "Desc_140"), 1, 0, 1, 5, 5, freeStepIgnorePathCost: true, showTips: true, "wild_fiveloong", new int[1] { 4 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[1] { 4 }, miniSceneHaveDirection: false, miniSceneHaveWinter: false, "wild_fiveloong_4", eventBackgroundWinter: false, new string[1] { "Justiselong_huo/eff_wulong_huo_xiao1" }, ignoreDestroyed: true, taiwuEventChangedBlock: false, -1, new List<sbyte> { 0 }, new short[6] { 300, 90, 0, 0, 90, 150 }, 22, 0, new string[0], null, new string[2] { "Ambience_map_dragon_huo_big", "Ambience_map_dragon_huo_small" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_fiveloong_4_2", 0, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 3));
 		_dataArray.Add(new MapBlockItem(141, EMapBlockType.Wild, EMapBlockSubType.DLCLoong, LocalStringManager.GetConfig("MapBlock_language", "Name_141"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_141"), LocalStringManager.GetConfig("MapBlock_language", "Desc_141"), 1, 0, 1, 5, 5, freeStepIgnorePathCost: true, showTips: true, "wild_fiveloong", new int[1] { 5 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[1] { 5 }, miniSceneHaveDirection: false, miniSceneHaveWinter: false, "wild_fiveloong_5", eventBackgroundWinter: false, new string[1] { "Justiselong_sha/eff_wulong_tu_xiao1" }, ignoreDestroyed: true, taiwuEventChangedBlock: false, -1, new List<sbyte> { 4 }, new short[6] { 90, 0, 90, 0, 300, 150 }, 23, 0, new string[0], null, new string[2] { "Ambience_map_dragon_tu_big", "Ambience_map_dragon_tu_small" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_fiveloong_4_4", 0, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 3));
-		_dataArray.Add(new MapBlockItem(142, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_142"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_142"), LocalStringManager.GetConfig("MapBlock_language", "Desc_142"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 118, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_0", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
-		_dataArray.Add(new MapBlockItem(143, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_143"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_143"), LocalStringManager.GetConfig("MapBlock_language", "Desc_143"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 119, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_0", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
-		_dataArray.Add(new MapBlockItem(144, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_144"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_144"), LocalStringManager.GetConfig("MapBlock_language", "Desc_144"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 120, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_0", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
-		_dataArray.Add(new MapBlockItem(145, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_145"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_145"), LocalStringManager.GetConfig("MapBlock_language", "Desc_145"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 121, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_1", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
-		_dataArray.Add(new MapBlockItem(146, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_146"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_146"), LocalStringManager.GetConfig("MapBlock_language", "Desc_146"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 122, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_1", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
-		_dataArray.Add(new MapBlockItem(147, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_147"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_147"), LocalStringManager.GetConfig("MapBlock_language", "Desc_147"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 123, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_1", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
+		_dataArray.Add(new MapBlockItem(142, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_142"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_142"), LocalStringManager.GetConfig("MapBlock_language", "Desc_142"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: true, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 118, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_0", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
+		_dataArray.Add(new MapBlockItem(143, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_143"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_143"), LocalStringManager.GetConfig("MapBlock_language", "Desc_143"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: true, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 119, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_0", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
+		_dataArray.Add(new MapBlockItem(144, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_144"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_144"), LocalStringManager.GetConfig("MapBlock_language", "Desc_144"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: true, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 120, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_0", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
+		_dataArray.Add(new MapBlockItem(145, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_145"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_145"), LocalStringManager.GetConfig("MapBlock_language", "Desc_145"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: true, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 121, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_1", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
+		_dataArray.Add(new MapBlockItem(146, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_146"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_146"), LocalStringManager.GetConfig("MapBlock_language", "Desc_146"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: true, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 122, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_1", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
+		_dataArray.Add(new MapBlockItem(147, EMapBlockType.Bad, EMapBlockSubType.Ruin, LocalStringManager.GetConfig("MapBlock_language", "Name_147"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_147"), LocalStringManager.GetConfig("MapBlock_language", "Desc_147"), 2, 0, 1, 2, 90, freeStepIgnorePathCost: true, showTips: true, "bad_ruinland_big", new int[2] { 0, 1 }, blockHasDirection: false, blockHasSeason: false, blockHasFix: true, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, "bad_ruinland", eventBackgroundWinter: false, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, 123, new List<sbyte>(), new short[6], -1, 300, new string[0], null, new string[1] { "Ambience_map_4" }, -1, -1, -1, -1, null, new List<short>(), new List<short>(), -1, new List<(short, short)> { (1, 100) }, "tex_mapblockevent_bad_ruin_1", 32, -1, canGenerate: false, "ui9_tex_character_menu_equip_test", 25));
 		_dataArray.Add(new MapBlockItem(148, EMapBlockType.Bad, EMapBlockSubType.Wild, LocalStringManager.GetConfig("MapBlock_language", "Name_148"), LocalStringManager.GetConfig("MapBlock_language", "AdventureEditorName_148"), LocalStringManager.GetConfig("MapBlock_language", "Desc_148"), 3, 0, 1, 1, 1, freeStepIgnorePathCost: true, showTips: true, "bad_chaishanfurnace", new int[0], blockHasDirection: false, blockHasSeason: false, blockHasFix: false, new int[0], miniSceneHaveDirection: false, miniSceneHaveWinter: false, null, eventBackgroundWinter: true, new string[0], ignoreDestroyed: false, taiwuEventChangedBlock: false, -1, new List<sbyte>(), new short[6], -1, -1, new string[9]
 		{
 			LocalStringManager.GetConfig("MapBlock_language", "BlockNames_148_0"),

@@ -116,7 +116,7 @@ public class JiuXingJinGuangZhou : CombatSkillEffectBase
 	private void DoReduceHealth(DataContext context)
 	{
 		CombatCharacter enemyChar = base.CurrEnemyChar;
-		if (!enemyChar.HasInfectedFeature(ECharacterFeatureInfectedType.NotInfected) && !enemyChar.CheckHealthImmunity(context))
+		if (!enemyChar.HasInfectedFeature(ECharacterFeatureInfectedType.NotInfected) && !enemyChar.CheckImmunityAndShowEffect(EMarkType.Health))
 		{
 			enemyChar.GetCharacter().ChangeHealth(context, -36);
 			ShowSpecialEffectTips(0);

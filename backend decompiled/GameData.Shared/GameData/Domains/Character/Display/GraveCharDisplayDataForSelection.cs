@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 选择角色用的坟墓数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class GraveCharDisplayDataForSelection : ISerializableGameData, ISelectCharacterData
 {
@@ -37,38 +34,23 @@ public class GraveCharDisplayDataForSelection : ISerializableGameData, ISelectCh
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 人物数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayDataForGeneralScrollList Data;
 
 	[SerializableGameDataField]
 	public int DeadAt;
 
-	/// <summary>
-	/// ISelectCharacterData接口
-	/// </summary>
 	int ISelectCharacterData.CharacterId => Data?.CharacterId ?? (-1);
 
-	/// <summary>
-	/// ISelectCharacterData接口
-	/// </summary>
 	CharacterDisplayDataForGeneralScrollList ISelectCharacterData.GetGeneralScrollListData()
 	{
 		return Data;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public GraveCharDisplayDataForSelection()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public GraveCharDisplayDataForSelection(GraveCharDisplayDataForSelection other)
 	{
 		Id = other.Id;
@@ -84,9 +66,6 @@ public class GraveCharDisplayDataForSelection : ISerializableGameData, ISelectCh
 		DeadAt = other.DeadAt;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(GraveCharDisplayDataForSelection other)
 	{
 		Id = other.Id;
@@ -102,13 +81,11 @@ public class GraveCharDisplayDataForSelection : ISerializableGameData, ISelectCh
 		DeadAt = other.DeadAt;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 54;
@@ -120,7 +97,6 @@ public class GraveCharDisplayDataForSelection : ISerializableGameData, ISelectCh
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -164,7 +140,6 @@ public class GraveCharDisplayDataForSelection : ISerializableGameData, ISelectCh
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -317,7 +317,7 @@ public class CombatCharacterStatePrepareUseItem : CombatCharacterStateBase
 			int addedPoison = poisons.Items[type] - lastPoisons.Items[type];
 			if (addedPoison > 0)
 			{
-				Events.RaiseAddPoison(context, -1, CombatChar.GetId(), type, 0, addedPoison, -1, canBounce: false);
+				Events.RaiseAddPoison(context, CombatChar.GetId(), CombatChar.GetId(), type, 0, addedPoison, -1, canBounce: false);
 			}
 		}
 		CombatChar.SetInjuries(context, CombatChar.GetCharacter().GetInjuries());

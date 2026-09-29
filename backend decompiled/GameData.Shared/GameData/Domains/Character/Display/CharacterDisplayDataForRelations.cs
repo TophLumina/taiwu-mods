@@ -5,55 +5,30 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 关系界面用角色显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class CharacterDisplayDataForRelations : ISerializableGameData
 {
-	/// <summary>
-	/// 主体数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayDataForGeneralScrollList Main;
 
-	/// <summary>
-	/// 生死状态
-	/// <see cref="T:GameData.Domains.Character.LifeState" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeState;
 
-	/// <summary>
-	/// 所在地
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 关系类型
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationType;
 
-	/// <summary>
-	/// 死亡日期
-	/// </summary>
 	[SerializableGameDataField]
-	public int DeathDate;
+	public int DeathDate = -1;
 
 	public int CharacterId => Main?.CharacterId ?? (-1);
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterDisplayDataForRelations()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterDisplayDataForRelations(CharacterDisplayDataForRelations other)
 	{
 		Main = new CharacterDisplayDataForGeneralScrollList(other.Main);
@@ -63,9 +38,6 @@ public class CharacterDisplayDataForRelations : ISerializableGameData
 		DeathDate = other.DeathDate;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterDisplayDataForRelations other)
 	{
 		Main = new CharacterDisplayDataForGeneralScrollList(other.Main);
@@ -82,9 +54,8 @@ public class CharacterDisplayDataForRelations : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 7;
+		int totalSize = 11;
 		totalSize = ((Main == null) ? (totalSize + 2) : (totalSize + (2 + Main.GetSerializedSize())));
-		totalSize += Location.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

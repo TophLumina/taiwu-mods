@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class UpdateLog : ConfigData<UpdateLogItem, byte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static UpdateLog Instance = new UpdateLog();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

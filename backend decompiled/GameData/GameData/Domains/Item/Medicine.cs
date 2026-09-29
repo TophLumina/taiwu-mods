@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Config;
 using GameData.Common;
+using GameData.Domains.Character;
 using GameData.Serializer;
 using Redzen.Random;
 
@@ -707,6 +708,6 @@ public class Medicine : ItemBase, ISerializableGameData
 
 	public static short GetDeltaWugDuration(sbyte medicineGrade)
 	{
-		return (short)(-(medicineGrade + 1) * 12);
+		return EatingItems.GetDeltaWugDuration(medicineGrade);
 	}
 }

@@ -4,40 +4,21 @@ using Config.Common;
 namespace Config;
 
 [Serializable]
-public class BehaviorTypeItem : ConfigItem<BehaviorTypeItem, short>
+public class BehaviorTypeItem : ConfigItem<BehaviorTypeItem, sbyte>
 {
-	/// <summary>
-	/// 模板ID
-	/// </summary>
-	public readonly short TemplateId;
+	public readonly sbyte TemplateId;
 
 	public readonly string Name;
 
 	public readonly string Desc;
 
-	/// <summary>
-	/// 交换藏书
-	/// - 私传功法的时候所需的好感度等级
-	/// </summary>
 	public readonly sbyte ExchangeBook;
 
 	public readonly string Icon;
 
-	/// <summary>
-	/// 倒戈提示文字
-	/// </summary>
 	public readonly string[] BetrayTips;
 
-	/// <summary>
-	/// 构造器 - constructor0
-	/// </summary>
-	/// <param name="templateId">模板ID</param>
-	/// <param name="name"></param>
-	/// <param name="desc"></param>
-	/// <param name="exchangeBook">交换藏书 - 私传功法的时候所需的好感度等级</param>
-	/// <param name="icon"></param>
-	/// <param name="betrayTips">倒戈提示文字</param>
-	public BehaviorTypeItem(short templateId, string name, string desc, sbyte exchangeBook, string icon, string[] betrayTips)
+	public BehaviorTypeItem(sbyte templateId, string name, string desc, sbyte exchangeBook, string icon, string[] betrayTips)
 	{
 		TemplateId = templateId;
 		Name = name;
@@ -47,9 +28,6 @@ public class BehaviorTypeItem : ConfigItem<BehaviorTypeItem, short>
 		BetrayTips = betrayTips;
 	}
 
-	/// <summary>
-	/// 默认构造器 - constructor1
-	/// </summary>
 	public BehaviorTypeItem()
 	{
 		TemplateId = 0;
@@ -60,10 +38,7 @@ public class BehaviorTypeItem : ConfigItem<BehaviorTypeItem, short>
 		BetrayTips = null;
 	}
 
-	/// <summary>
-	/// 复制构造器 - constructor2
-	/// </summary>
-	public BehaviorTypeItem(short templateId, BehaviorTypeItem other)
+	public BehaviorTypeItem(sbyte templateId, BehaviorTypeItem other)
 	{
 		TemplateId = templateId;
 		Name = other.Name;
@@ -78,12 +53,8 @@ public class BehaviorTypeItem : ConfigItem<BehaviorTypeItem, short>
 		return TemplateId;
 	}
 
-	/// <summary>
-	/// 以指定Id生成ConfigData的副本
-	/// </summary>
-	/// <param name="templateId"></param>
 	public override BehaviorTypeItem Duplicate(int templateId)
 	{
-		return new BehaviorTypeItem((short)templateId, this);
+		return new BehaviorTypeItem((sbyte)templateId, this);
 	}
 }

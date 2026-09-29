@@ -4,65 +4,34 @@ using GameData.Utilities;
 
 namespace GameData.ActionPlanning.MonthlyAI;
 
-/// <summary>
-/// 人物任务(目标集合)相关数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class CharacterMissionDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 任务模板ID <see cref="F:Config.CharacterMissionItem.TemplateId" />
-	/// </summary>
 	[SerializableGameDataField]
 	public int MissionTemplateId = -1;
 
-	/// <summary>
-	/// 完成时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int EndDate = int.MinValue;
 
-	/// <summary>
-	/// 剩余时间 根据 currDate、CharacterMissionData.EndDate和配置表里的KeepDuration
-	/// </summary>
 	[SerializableGameDataField]
 	public int RemainMonth = int.MinValue;
 
-	/// <summary>
-	/// 剩余保留时间 根据 currDate和CharacterGoalData.CreateDate和配置表里的Duration
-	/// </summary>
 	[SerializableGameDataField]
 	public int RemainLingeringMonth = int.MinValue;
 
-	/// <summary>
-	/// 目标列表.
-	/// 只包含需要寻路的目标，任务开始时目标已完成的情况无需添加数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterGoalDisplayData> Goals = new List<CharacterGoalDisplayData>();
 
-	/// <summary>
-	/// 任务已完成
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsComplete;
 
-	/// <summary>
-	/// 是否已超时
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTimeout;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterMissionDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterMissionDisplayData(CharacterMissionDisplayData other)
 	{
 		MissionTemplateId = other.MissionTemplateId;
@@ -87,9 +56,6 @@ public class CharacterMissionDisplayData : ISerializableGameData
 		IsTimeout = other.IsTimeout;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterMissionDisplayData other)
 	{
 		MissionTemplateId = other.MissionTemplateId;
@@ -114,13 +80,11 @@ public class CharacterMissionDisplayData : ISerializableGameData
 		IsTimeout = other.IsTimeout;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 18;
@@ -145,7 +109,6 @@ public class CharacterMissionDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -199,7 +162,6 @@ public class CharacterMissionDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

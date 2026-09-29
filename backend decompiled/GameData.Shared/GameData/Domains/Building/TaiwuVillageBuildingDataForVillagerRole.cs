@@ -6,33 +6,18 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 建筑管理界面的显示数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class TaiwuVillageBuildingDataForVillagerRole : ISerializableGameData
 {
-	/// <summary>
-	/// 太吾已学功法
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LearnedCombatSkillItems;
 
-	/// <summary>
-	/// 太吾已学技艺
-	/// </summary>
 	[SerializableGameDataField]
 	public List<LifeSkillItem> LearnedLifeSkillItems;
 
-	/// <summary>
-	/// 可以使用的建筑心材
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> CanUseBuildingCore;
 
-	/// <summary>
-	/// 太吾在野外时行囊里的建筑心材
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> CannotUseInventoryBuildingCore;
 
@@ -48,20 +33,11 @@ public class TaiwuVillageBuildingDataForVillagerRole : ISerializableGameData
 	[SerializableGameDataField]
 	public List<BuildingBlockData> BlockList;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
-	public TaiwuVillageBuildingDataForVillagerRole()
-	{
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -116,7 +92,6 @@ public class TaiwuVillageBuildingDataForVillagerRole : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -256,7 +231,6 @@ public class TaiwuVillageBuildingDataForVillagerRole : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

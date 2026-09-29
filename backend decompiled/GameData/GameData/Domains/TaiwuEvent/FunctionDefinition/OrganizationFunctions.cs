@@ -65,8 +65,10 @@ public class OrganizationFunctions
 		if (!DomainManager.Character.IsTemporaryIntelligentCharacter(charId))
 		{
 			DomainManager.Character.TryCreateRelation(runtime.Context, charId, DomainManager.Taiwu.GetTaiwuCharId());
-			SectCharacter sectChar = DomainManager.Organization.GetElement_SectCharacters(charId);
-			sectChar.SetApprovedTaiwu(runtime.Context, approved);
+			if (DomainManager.Organization.TryGetElement_SectCharacters(charId, out var sectChar))
+			{
+				sectChar.SetApprovedTaiwu(runtime.Context, approved);
+			}
 		}
 	}
 

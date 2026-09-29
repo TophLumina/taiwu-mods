@@ -4,9 +4,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 动物
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class Animal : ISerializableGameData
 {
@@ -29,43 +26,21 @@ public class Animal : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[6] { "Id", "ItemKey", "CharacterTemplateId", "Location", "Type", "NoAccident" };
 	}
 
-	/// <summary>
-	/// Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// ItemKey
-	/// 若是野生动物则为Invalid
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey ItemKey;
 
-	/// <summary>
-	/// 角色配置表的模板Id，用于前端显示和战斗
-	/// </summary>
 	[SerializableGameDataField]
 	public short CharacterTemplateId;
 
-	/// <summary>
-	/// 位置
-	/// 可能为Invalid，如已被抓回去的蛟
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 动物类型
-	/// 用于在战斗结束后进行判断
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Type;
 
-	/// <summary>
-	/// 是否免于意外，仅与太吾（玩家）产生交互
-	/// 如数量超出地格上限的随机抹杀、地格毁灭导致的抹杀、被路过npc杀死等等
-	/// </summary>
 	[SerializableGameDataField]
 	public bool NoAccident;
 
@@ -79,11 +54,6 @@ public class Animal : ISerializableGameData
 		NoAccident = false;
 	}
 
-	/// <summary>
-	/// 生成普通的野生动物、龙
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="templateId"></param>
 	public Animal(int id, short templateId)
 	{
 		Id = id;
@@ -94,13 +64,6 @@ public class Animal : ISerializableGameData
 		NoAccident = false;
 	}
 
-	/// <summary>
-	/// 生成逃跑的代步、幼蛟
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="itemKey"></param>
-	/// <param name="templateId"></param>
-	/// <param name="type"></param>
 	public Animal(int id, ItemKey itemKey, short templateId, sbyte type)
 	{
 		Id = id;
@@ -111,13 +74,11 @@ public class Animal : ISerializableGameData
 		NoAccident = true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 22;
@@ -128,7 +89,6 @@ public class Animal : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -152,7 +112,6 @@ public class Animal : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

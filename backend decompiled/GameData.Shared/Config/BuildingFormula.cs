@@ -7,161 +7,68 @@ namespace Config;
 [Serializable]
 public class BuildingFormula : ConfigData<BuildingFormulaItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 凤凰台效果公式
-		/// </summary>
 		public const int PhoenixPlatformEffect = 0;
 
-		/// <summary>
-		/// 方略室效果公式
-		/// </summary>
 		public const int StrategyRoomEffect = 1;
 
-		/// <summary>
-		/// 藏书阁效果公式
-		/// </summary>
 		public const int BookCollectionRoomEffect = 2;
 
-		/// <summary>
-		/// 画影轩效果公式
-		/// </summary>
 		public const int MakeupRoomEffect = 3;
 
-		/// <summary>
-		/// 生灭两星幡效果公式
-		/// </summary>
 		public const int BirthDeathStreamerEffect = 4;
 
-		/// <summary>
-		/// 阅经阁效果公式
-		/// </summary>
 		public const int SutraReadingRoomEffect = 5;
 
-		/// <summary>
-		/// 丹房效果公式
-		/// </summary>
 		public const int LifeElixirRoomEffect = 6;
 
-		/// <summary>
-		/// 太吾氏祠堂效果公式
-		/// </summary>
 		public const int TaiwuShrineEffect = 7;
 
-		/// <summary>
-		/// 普通功法研读类效果公式
-		/// </summary>
 		public const int CombatSkillReadingEffect = 8;
 
-		/// <summary>
-		/// 技艺研读类效果公式
-		/// </summary>
 		public const int LifeSkillReadingEffect = 9;
 
-		/// <summary>
-		/// 非太吾村资源生成规模
-		/// </summary>
 		public const int NonTaiwuVillageResourceInitLevel = 10;
 
-		/// <summary>
-		/// 太吾村资源生成规模
-		/// </summary>
 		public const int TaiwuVillageResourceInitLevel = 11;
 
-		/// <summary>
-		/// 盛世集录额外资源规模
-		/// </summary>
 		public const int ProtagonistConstructionExtraLevel = 45;
 
-		/// <summary>
-		/// 无用资源生成规模
-		/// </summary>
 		public const int UselessResourceInitLevel = 12;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 凤凰台效果公式
-		/// </summary>
 		public static BuildingFormulaItem PhoenixPlatformEffect => Instance[0];
 
-		/// <summary>
-		/// 方略室效果公式
-		/// </summary>
 		public static BuildingFormulaItem StrategyRoomEffect => Instance[1];
 
-		/// <summary>
-		/// 藏书阁效果公式
-		/// </summary>
 		public static BuildingFormulaItem BookCollectionRoomEffect => Instance[2];
 
-		/// <summary>
-		/// 画影轩效果公式
-		/// </summary>
 		public static BuildingFormulaItem MakeupRoomEffect => Instance[3];
 
-		/// <summary>
-		/// 生灭两星幡效果公式
-		/// </summary>
 		public static BuildingFormulaItem BirthDeathStreamerEffect => Instance[4];
 
-		/// <summary>
-		/// 阅经阁效果公式
-		/// </summary>
 		public static BuildingFormulaItem SutraReadingRoomEffect => Instance[5];
 
-		/// <summary>
-		/// 丹房效果公式
-		/// </summary>
 		public static BuildingFormulaItem LifeElixirRoomEffect => Instance[6];
 
-		/// <summary>
-		/// 太吾氏祠堂效果公式
-		/// </summary>
 		public static BuildingFormulaItem TaiwuShrineEffect => Instance[7];
 
-		/// <summary>
-		/// 普通功法研读类效果公式
-		/// </summary>
 		public static BuildingFormulaItem CombatSkillReadingEffect => Instance[8];
 
-		/// <summary>
-		/// 技艺研读类效果公式
-		/// </summary>
 		public static BuildingFormulaItem LifeSkillReadingEffect => Instance[9];
 
-		/// <summary>
-		/// 非太吾村资源生成规模
-		/// </summary>
 		public static BuildingFormulaItem NonTaiwuVillageResourceInitLevel => Instance[10];
 
-		/// <summary>
-		/// 太吾村资源生成规模
-		/// </summary>
 		public static BuildingFormulaItem TaiwuVillageResourceInitLevel => Instance[11];
 
-		/// <summary>
-		/// 盛世集录额外资源规模
-		/// </summary>
 		public static BuildingFormulaItem ProtagonistConstructionExtraLevel => Instance[45];
 
-		/// <summary>
-		/// 无用资源生成规模
-		/// </summary>
 		public static BuildingFormulaItem UselessResourceInitLevel => Instance[12];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static BuildingFormula Instance = new BuildingFormula();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Arguments", "TemplateId" };

@@ -109,7 +109,7 @@ public class GuiGuXueHaiTang : CombatSkillEffectBase
 			affectChar.AddDieMark(context, SkillKey, 1);
 			ShowSpecialEffectTips(0);
 			ReduceEffectCount();
-			if (affectChar.GetDefeatMarkCollection().DieMarkList.Count == GameData.Domains.Combat.SharedConstValue.DefeatNeedDieMarkCount && !affectChar.CheckHealthImmunity(context))
+			if (affectChar.GetDefeatMarkCollection().DieMarkList.Count == GameData.Domains.Combat.SharedConstValue.DefeatNeedDieMarkCount && !affectChar.CheckImmunityAndShowEffect(EMarkType.Health))
 			{
 				GameData.Domains.Character.Character character = affectChar.GetCharacter();
 				DomainManager.SpecialEffect.AddAddMaxHealthEffect(context, character.GetId(), -character.GetLeftMaxHealth());

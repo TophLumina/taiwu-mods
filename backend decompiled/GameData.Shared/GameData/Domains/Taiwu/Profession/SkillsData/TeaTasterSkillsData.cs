@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 贵客志向技能数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class TeaTasterSkillsData : IProfessionSkillsData, ISerializableGameData
 {
@@ -19,63 +16,44 @@ public class TeaTasterSkillsData : IProfessionSkillsData, ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "VillagersLastLearnSkillDate", "ActionPointGained" };
 	}
 
-	/// <summary>
-	/// 村民上次通过书院习得技艺的时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int VillagersLastLearnSkillDate;
 
-	/// <summary>
-	/// 当月通过饮茶获取的额外行动力
-	/// </summary>
 	[SerializableGameDataField]
 	public int ActionPointGained;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		VillagersLastLearnSkillDate = 0;
 		ActionPointGained = 0;
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 		Assign(sourceData as TeaTasterSkillsData);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TeaTasterSkillsData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TeaTasterSkillsData(TeaTasterSkillsData other)
 	{
 		VillagersLastLearnSkillDate = other.VillagersLastLearnSkillDate;
 		ActionPointGained = other.ActionPointGained;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TeaTasterSkillsData other)
 	{
 		VillagersLastLearnSkillDate = other.VillagersLastLearnSkillDate;
 		ActionPointGained = other.ActionPointGained;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -86,7 +64,6 @@ public class TeaTasterSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 2;
@@ -102,7 +79,6 @@ public class TeaTasterSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

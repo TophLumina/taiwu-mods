@@ -7,91 +7,40 @@ namespace Config;
 [Serializable]
 public class SkillBreakGridType : ConfigData<SkillBreakGridTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 起
-		/// </summary>
 		public const sbyte StartPoint = 0;
 
-		/// <summary>
-		/// 终
-		/// </summary>
 		public const sbyte EndPoint = 1;
 
-		/// <summary>
-		/// 总纲
-		/// </summary>
 		public const sbyte Bonus = 2;
 
-		/// <summary>
-		/// 如常
-		/// </summary>
 		public const sbyte Normal = 3;
 
-		/// <summary>
-		/// 诀窍
-		/// </summary>
 		public const sbyte Portal = 21;
 
-		/// <summary>
-		/// 完备
-		/// </summary>
 		public const sbyte PrevGood = 22;
 
-		/// <summary>
-		/// 覆辙
-		/// </summary>
 		public const sbyte PrevBad = 23;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 起
-		/// </summary>
 		public static SkillBreakGridTypeItem StartPoint => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 终
-		/// </summary>
 		public static SkillBreakGridTypeItem EndPoint => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 总纲
-		/// </summary>
 		public static SkillBreakGridTypeItem Bonus => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 如常
-		/// </summary>
 		public static SkillBreakGridTypeItem Normal => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 诀窍
-		/// </summary>
 		public static SkillBreakGridTypeItem Portal => Instance[(sbyte)21];
 
-		/// <summary>
-		/// 完备
-		/// </summary>
 		public static SkillBreakGridTypeItem PrevGood => Instance[(sbyte)22];
 
-		/// <summary>
-		/// 覆辙
-		/// </summary>
 		public static SkillBreakGridTypeItem PrevBad => Instance[(sbyte)23];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakGridType Instance = new SkillBreakGridType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Type", "FontColor" };

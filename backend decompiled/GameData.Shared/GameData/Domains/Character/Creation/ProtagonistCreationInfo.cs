@@ -9,108 +9,55 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Creation;
 
-/// <summary>
-/// 进入新世界时的主角创建信息
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class ProtagonistCreationInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 姓
-	/// </summary>
 	[SerializableGameDataField]
 	public string Surname;
 
-	/// <summary>
-	/// 名
-	/// </summary>
 	[SerializableGameDataField]
 	public string GivenName;
 
-	/// <summary>
-	/// 处世立场 (道德)
-	/// </summary>
 	[SerializableGameDataField]
 	public short Morality;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short Age;
 
-	/// <summary>
-	/// 出生月份
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BirthMonth;
 
-	/// <summary>
-	/// 形象
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarData Avatar;
 
-	/// <summary>
-	/// 衣装
-	/// </summary>
 	[SerializableGameDataField]
 	public short ClothingTemplateId;
 
-	/// <summary>
-	/// 主角特性
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> ProtagonistFeatureIds;
 
-	/// <summary>
-	/// 自选道具
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, DataList<TemplateKey>> ProtagonistCustomItems;
 
-	/// <summary>
-	/// 玄狱难度信息
-	/// </summary>
 	[SerializableGameDataField]
 	public ChallengeModeInfo ChallengeModeInfo = new ChallengeModeInfo();
 
-	/// <summary>
-	/// 太吾村所在洲
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TaiwuVillageStateTemplateId;
 
-	/// <summary>
-	/// 使用的铭刻人物.
-	/// 为 null 表示未使用.
-	/// </summary>
 	[SerializableGameDataField]
 	public InscribedCharacter InscribedChar;
 
-	/// <summary>
-	/// 自定义人物预设
-	/// 为 null 表示未使用
-	/// </summary>
 	[SerializableGameDataField]
 	public CustomProtagonistPresetItem CustomPreset;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ProtagonistCreationInfo()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ProtagonistCreationInfo(ProtagonistCreationInfo other)
 	{
 		Surname = other.Surname;
@@ -142,9 +89,6 @@ public class ProtagonistCreationInfo : ISerializableGameData
 		CustomPreset = new CustomProtagonistPresetItem(other.CustomPreset);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ProtagonistCreationInfo other)
 	{
 		Surname = other.Surname;
@@ -176,13 +120,11 @@ public class ProtagonistCreationInfo : ISerializableGameData
 		CustomPreset = new CustomProtagonistPresetItem(other.CustomPreset);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 11;
@@ -200,7 +142,6 @@ public class ProtagonistCreationInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -325,7 +266,6 @@ public class ProtagonistCreationInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

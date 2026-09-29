@@ -3,7 +3,6 @@ using GameData.ActionPlanning.MonthlyAI;
 using GameData.Common;
 using GameData.Domains;
 using GameData.Domains.Character;
-using GameData.Domains.Character.Ai;
 using GameData.Domains.Item;
 using GameData.Domains.Organization;
 using GameData.Serializer;
@@ -38,10 +37,6 @@ public class WealthDemandTakeTreasuryItemAction : ICharacterActionImpl, ISeriali
 		{
 			return false;
 		}
-		if (!context.Random.CheckPercentProb(AiHelper.GeneralActionConstants.TakeFromTreasuryChance[character.GetBehaviorType()]))
-		{
-			return false;
-		}
 		OrganizationInfo orgInfo = character.GetOrganizationInfo();
 		Settlement settlement = DomainManager.Organization.GetSettlement(orgInfo.SettlementId);
 		SettlementTreasury treasury = settlement.GetTreasury(orgInfo.Grade);
@@ -60,7 +55,7 @@ public class WealthDemandTakeTreasuryItemAction : ICharacterActionImpl, ISeriali
 		return true;
 	}
 
-	bool ICharacterActionImpl.CheckValid(Character character, CharacterActionData actionData)
+	public bool CheckValid(Character character, CharacterActionData actionData)
 	{
 		OrganizationInfo orgInfo = character.GetOrganizationInfo();
 		if (orgInfo.SettlementId < 0)
@@ -82,7 +77,7 @@ public class WealthDemandTakeTreasuryItemAction : ICharacterActionImpl, ISeriali
 		return memberContribution >= worth;
 	}
 
-	void ICharacterActionImpl.PostExecute(DataContext context, Character character, CharacterActionData actionData)
+	public void PostExecute(DataContext context, Character character, CharacterActionData actionData)
 	{
 		short settlementId = character.GetOrganizationInfo().SettlementId;
 		DomainManager.Organization.GetSettlement(settlementId).TakeItemFromTreasury(context, character, TargetItem, Amount);

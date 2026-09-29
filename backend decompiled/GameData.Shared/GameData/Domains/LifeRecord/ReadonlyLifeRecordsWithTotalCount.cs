@@ -3,26 +3,14 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LifeRecord;
 
-/// <summary>
-/// 只读的人物的经历的集合 + 人物经历总条数
-/// </summary>
 public class ReadonlyLifeRecordsWithTotalCount : ISerializableGameData
 {
-	/// <summary>
-	/// 人物经历总条数
-	/// </summary>
 	[SerializableGameDataField]
 	public int TotalCount;
 
-	/// <summary>
-	/// 目前获取到的经历条数
-	/// </summary>
 	[SerializableGameDataField]
 	public ReadonlyLifeRecords Records;
 
-	/// <summary>
-	/// 只读的人物的经历的集合 + 人物经历总条数
-	/// </summary>
 	public ReadonlyLifeRecordsWithTotalCount()
 	{
 		Records = new ReadonlyLifeRecords();

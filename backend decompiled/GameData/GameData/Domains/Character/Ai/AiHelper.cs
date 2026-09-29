@@ -347,8 +347,10 @@ public static class AiHelper
 
 		public const sbyte EnemyAttackTaiwuCoolDown = 3;
 
+		[Obsolete]
 		public static readonly sbyte[] TakeFromTreasuryChance = new sbyte[5] { 40, 50, 60, 70, 80 };
 
+		[Obsolete]
 		public static readonly sbyte[] StoreInTreasuryChance = new sbyte[5] { 80, 70, 60, 50, 40 };
 
 		public const int BeggingTargetMinimumMoney = 500;
@@ -812,19 +814,6 @@ public static class AiHelper
 		public const string AdventureParameterAppearType = "ConchShipPresetKey_AppearType";
 
 		public const string AdventureParameterPrevOwnerId = "ConchShipPresetKey_PrevOwnerId";
-	}
-
-	public static class MixedPoisonHarmfulActionType
-	{
-		public const sbyte Attack = 0;
-
-		public const sbyte Poison = 1;
-
-		public const sbyte PlotHarm = 2;
-
-		public const sbyte Rape = 3;
-
-		public const int Count = 4;
 	}
 
 	public static class PrioritizedActionConstants

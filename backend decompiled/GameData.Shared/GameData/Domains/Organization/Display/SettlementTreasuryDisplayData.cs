@@ -5,110 +5,59 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Organization.Display;
 
-/// <summary>
-/// 定居点库房显示数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public struct SettlementTreasuryDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 定居点库房数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public SettlementTreasury SettlementTreasury;
 
-	/// <summary>
-	/// 定居点库房资源级别
-	/// </summary>
 	[SerializableGameDataField]
 	public int SupplyLevel;
 
-	/// <summary>
-	/// 地区恩义（定居点）或对太吾的支持度（门派），用以判定监牢准入条件是否满足
-	/// </summary>
 	[SerializableGameDataField]
 	public int DebtOrSupport;
 
-	/// <summary>
-	/// 额外护卫的角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData[] GuardianCharacterDisplayDataLow;
 
-	/// <summary>
-	/// 额外护卫的角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData[] GuardianCharacterDisplayDataMid;
 
-	/// <summary>
-	/// 额外护卫的角色数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData[] GuardianCharacterDisplayDataHigh;
 
-	/// <summary>
-	/// 定居点模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int OrgTemplateId;
 
-	/// <summary>
-	/// 门派支线结局
-	/// <see cref="T:GameData.Domains.World.StateTaskStatus" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte SectStoryEnding;
 
-	/// <summary>
-	/// 门派武林大会结果，true表示胜利
-	/// </summary>
 	[SerializableGameDataField]
 	public bool MartialArtTournamentResult;
 
-	/// <summary>
-	/// 可补充的物品数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Inventory SupplyItems;
 
-	/// <summary>
-	/// 每个品级可补充的物品次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] SupplyCounts;
 
-	/// <summary>
-	/// 戒严倒计时
-	/// </summary>
 	[SerializableGameDataField]
 	public byte AlertTime;
 
-	/// <summary>
-	/// 势力更新倒计时
-	/// </summary>
 	[SerializableGameDataField]
 	public byte InfluenceRefreshTime;
 
-	/// <summary>
-	/// 库房资源状态
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ResourceStatus;
 
-	/// <summary>
-	/// 势力更新倒计时
-	/// </summary>
 	[SerializableGameDataField]
 	public SettlementNameRelatedData SettlementNameRelatedData;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 21;
@@ -164,7 +113,6 @@ public struct SettlementTreasuryDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -328,7 +276,6 @@ public struct SettlementTreasuryDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

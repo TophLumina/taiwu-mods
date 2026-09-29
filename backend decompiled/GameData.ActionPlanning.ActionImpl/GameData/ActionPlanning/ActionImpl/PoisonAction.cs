@@ -1,3 +1,4 @@
+using System;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.Common;
 using GameData.Domains;
@@ -26,6 +27,7 @@ public class PoisonAction : ICharacterActionImpl, ISerializableGameData
 	[SerializableGameDataField(FieldIndex = 0)]
 	private ItemKey _poisonItem = ItemKey.Invalid;
 
+	[Obsolete]
 	[SerializableGameDataField(FieldIndex = 1)]
 	private sbyte _actionPhase = -1;
 
@@ -50,7 +52,7 @@ public class PoisonAction : ICharacterActionImpl, ISerializableGameData
 	public void PostExecute(DataContext context, Character character, CharacterActionData actionData)
 	{
 		Character targetChar = actionData.TargetChar;
-		DomainManager.Character.HandlePoisonAction(context, character, targetChar, _poisonItem, _actionPhase);
+		DomainManager.Character.HandlePoisonAction(context, character, targetChar, _poisonItem, actionData.Template);
 	}
 
 	public bool IsSerializedSizeFixed()

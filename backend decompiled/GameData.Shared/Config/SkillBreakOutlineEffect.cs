@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SkillBreakOutlineEffect : ConfigData<SkillBreakOutlineEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakOutlineEffect Instance = new SkillBreakOutlineEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "DescShort", "TemplateId" };

@@ -5,50 +5,29 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 资源和行囊
-/// </summary>
 [Obsolete]
 [SerializableGameData(NoCopyConstructors = true)]
 public class TaiwuVillageStorage : ISerializableGameData
 {
-	/// <summary>
-	/// 资源
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts Resources;
 
-	/// <summary>
-	/// 道具.
-	/// 索引值可能为
-	/// <see cref="!:StockStorageType" />
-	/// <see cref="!:CraftStorageType" />
-	/// <see cref="!:MedicineStorageType" />
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public Inventory[] Inventories;
 
-	/// <summary>
-	/// 需要提交数据修改
-	/// </summary>
 	public bool NeedCommit;
 
-	/// <summary>
-	/// 构造函数
-	/// </summary>
 	public TaiwuVillageStorage()
 	{
 		Resources.Initialize();
 		Inventories = Array.Empty<Inventory>();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 32;
@@ -73,7 +52,6 @@ public class TaiwuVillageStorage : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -116,7 +94,6 @@ public class TaiwuVillageStorage : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

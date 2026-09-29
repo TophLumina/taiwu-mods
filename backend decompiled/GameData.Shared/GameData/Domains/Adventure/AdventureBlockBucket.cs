@@ -4,18 +4,12 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇地格缓存桶
-/// </summary>
 public class AdventureBlockBucket
 {
 	private readonly int _size;
 
 	private readonly int _bucketSize;
 
-	/// <summary>
-	/// 此处 BoolArray16 对应 <see cref="F:GameData.Adventure.AdventureBlockIndex.SubBlockCount" />
-	/// </summary>
 	private BoolArray16[][] _buckets;
 
 	private readonly AdventureBlockData[][][] _blockCores;

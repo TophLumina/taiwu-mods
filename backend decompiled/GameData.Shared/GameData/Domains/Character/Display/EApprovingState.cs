@@ -2,7 +2,7 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Display;
 
-[SerializeAs(typeof(byte))]
+[SerializeTo(typeof(byte))]
 public enum EApprovingState : byte
 {
 	None,

@@ -82,4 +82,9 @@ public struct IntPair(int first, int second) : ISerializableGameData, IComparabl
 	{
 		return (First * 397) ^ Second;
 	}
+
+	public override string ToString()
+	{
+		return $"({First}, {Second})";
+	}
 }

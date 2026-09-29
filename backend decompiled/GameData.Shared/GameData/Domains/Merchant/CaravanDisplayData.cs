@@ -6,9 +6,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 用于在地图上显示商队图标的数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public class CaravanDisplayData : ISerializableGameData
 {
@@ -38,16 +35,10 @@ public class CaravanDisplayData : ISerializableGameData
 		return $"商队 ID{CaravanId}，{ExtraData?.ToString() ?? string.Empty}";
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CaravanDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CaravanDisplayData(CaravanDisplayData other)
 	{
 		CaravanId = other.CaravanId;
@@ -59,9 +50,6 @@ public class CaravanDisplayData : ISerializableGameData
 		SettlementDisplayDataList = ((other.SettlementDisplayDataList == null) ? null : new List<SettlementDisplayData>(other.SettlementDisplayDataList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CaravanDisplayData other)
 	{
 		CaravanId = other.CaravanId;

@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 太吾村民的公库需求数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class VillagerTreasuryNeed : ISerializableGameData
 {
@@ -20,42 +17,28 @@ public class VillagerTreasuryNeed : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[1] { "PersonalNeeds" };
 	}
 
-	/// <summary>
-	/// 需求等待时间
-	/// </summary>
 	[SerializableGameDataField]
 	public List<PersonalNeed> PersonalNeeds;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public VillagerTreasuryNeed()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public VillagerTreasuryNeed(VillagerTreasuryNeed other)
 	{
 		PersonalNeeds = ((other.PersonalNeeds == null) ? null : new List<PersonalNeed>(other.PersonalNeeds));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(VillagerTreasuryNeed other)
 	{
 		PersonalNeeds = ((other.PersonalNeeds == null) ? null : new List<PersonalNeed>(other.PersonalNeeds));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -67,7 +50,6 @@ public class VillagerTreasuryNeed : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -97,7 +79,6 @@ public class VillagerTreasuryNeed : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

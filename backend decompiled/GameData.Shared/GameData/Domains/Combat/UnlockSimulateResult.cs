@@ -6,27 +6,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 解封模拟结果
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class UnlockSimulateResult : ISerializableGameData
 {
-	/// <summary>
-	/// 可生铸的功法效果
-	/// </summary>
 	[SerializableGameDataField]
 	private List<int> _rawCreateEffects;
 
-	/// <summary>
-	/// 受阻碍的可生铸功法效果
-	/// </summary>
 	[SerializableGameDataField]
 	private List<int> _blockedRawCreateEffects;
 
-	/// <summary>
-	/// 是否有生铸效果且所有生铸效果均无法触发
-	/// </summary>
 	public bool AllBlocked
 	{
 		get
@@ -41,9 +29,6 @@ public class UnlockSimulateResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 所有可生铸的功法效果
-	/// </summary>
 	public IEnumerable<int> AllRawCreateEffects
 	{
 		get
@@ -66,14 +51,8 @@ public class UnlockSimulateResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 受阻碍的生铸功法效果
-	/// </summary>
 	public IReadOnlyList<int> BlockedRawCreateEffects => _blockedRawCreateEffects;
 
-	/// <summary>
-	/// 所有可生铸的功法效果数量
-	/// </summary>
 	public int AllRawCreateEffectsCount
 	{
 		get
@@ -89,11 +68,6 @@ public class UnlockSimulateResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 基于指定序列构建数据
-	/// </summary>
-	/// <param name="rawCreateEffects"></param>
-	/// <param name="blockedChecker">判定是否受阻碍</param>
 	public UnlockSimulateResult(IEnumerable<int> rawCreateEffects, Func<int, bool> blockedChecker)
 	{
 		_rawCreateEffects = new List<int>(rawCreateEffects);
@@ -101,38 +75,27 @@ public class UnlockSimulateResult : ISerializableGameData
 		_rawCreateEffects.RemoveAll(_blockedRawCreateEffects.Contains);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public UnlockSimulateResult()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public UnlockSimulateResult(UnlockSimulateResult other)
 	{
 		_rawCreateEffects = ((other._rawCreateEffects == null) ? null : new List<int>(other._rawCreateEffects));
 		_blockedRawCreateEffects = ((other._blockedRawCreateEffects == null) ? null : new List<int>(other._blockedRawCreateEffects));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(UnlockSimulateResult other)
 	{
 		_rawCreateEffects = ((other._rawCreateEffects == null) ? null : new List<int>(other._rawCreateEffects));
 		_blockedRawCreateEffects = ((other._blockedRawCreateEffects == null) ? null : new List<int>(other._blockedRawCreateEffects));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -145,7 +108,6 @@ public class UnlockSimulateResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -191,7 +153,6 @@ public class UnlockSimulateResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

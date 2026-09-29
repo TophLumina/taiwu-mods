@@ -1,5 +1,4 @@
 using System;
-using GameData.ActionPlanning.ActionImpl.Helper;
 using GameData.ActionPlanning.MonthlyAI;
 using GameData.Common;
 using GameData.Domains;
@@ -39,13 +38,13 @@ public class SpendItemBySellItemAction : ICharacterActionImpl, ISerializableGame
 		{
 			return false;
 		}
-		ItemKey selectedItem = ActionHelper.SelectSpareableItem(context, character, 0, allowUsed: true);
-		if (selectedItem == ItemKey.Invalid)
+		ItemBase selectedItem = character.SelectSpareableItem(context, 0, allowUsed: true);
+		if (selectedItem == null)
 		{
 			return false;
 		}
-		TargetItem = selectedItem;
-		Amount = Math.Max(1, character.GetInventory().Items[selectedItem] / 2);
+		TargetItem = selectedItem.GetItemKey();
+		Amount = Math.Max(1, character.GetInventory().Items[TargetItem] / 2);
 		return true;
 	}
 
@@ -60,7 +59,7 @@ public class SpendItemBySellItemAction : ICharacterActionImpl, ISerializableGame
 
 	void ICharacterActionImpl.PostExecute(DataContext context, Character character, CharacterActionData actionData)
 	{
-		int price = DomainManager.Item.GetPrice(TargetItem);
+		int price = DomainManager.Item.GetValue(TargetItem);
 		int moneyGain = Amount * price / 5;
 		character.RemoveInventoryItem(context, TargetItem, Amount, deleteItem: true);
 		character.ChangeResource(context, 6, moneyGain);

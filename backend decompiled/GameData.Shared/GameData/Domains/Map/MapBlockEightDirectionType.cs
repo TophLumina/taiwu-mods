@@ -3,10 +3,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地格八方向特效类型
-/// 与地格特效资源对应
-/// </summary>
 public class MapBlockEightDirectionType
 {
 	public const sbyte LeftUpDown = 0;
@@ -35,14 +31,6 @@ public class MapBlockEightDirectionType
 
 	public const sbyte AllDirection = 15;
 
-	/// <summary>
-	/// 一个地格是否在指定区域
-	/// </summary>
-	/// <param name="blocks"></param>
-	/// <param name="areaSize"></param>
-	/// <param name="coordinateX"></param>
-	/// <param name="coordinateY"></param>
-	/// <returns></returns>
 	public static bool IsBlockInArea(Dictionary<short, int> blocks, byte areaSize, int coordinateX, int coordinateY)
 	{
 		if (coordinateX >= 0 && coordinateY >= 0)
@@ -52,7 +40,6 @@ public class MapBlockEightDirectionType
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Map.MapBlockEightDirectionType.IsBlockInArea(System.Collections.Generic.Dictionary{System.Int16,System.Int32},System.Byte,System.Int32,System.Int32)" />
 	public static bool IsBlockInArea(Dictionary<short, short> blocks, byte areaSize, int coordinateX, int coordinateY, short settlementBlockId)
 	{
 		if (coordinateX >= 0 && coordinateY >= 0 && blocks.TryGetValue(ByteCoordinate.CoordinateToIndex(new ByteCoordinate((byte)coordinateX, (byte)coordinateY), areaSize), out var id))
@@ -62,7 +49,6 @@ public class MapBlockEightDirectionType
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Map.MapBlockEightDirectionType.IsBlockInArea(System.Collections.Generic.Dictionary{System.Int16,System.Int32},System.Byte,System.Int32,System.Int32)" />
 	public static bool IsBlockInArea(HashSet<short> blocks, byte areaSize, int coordinateX, int coordinateY)
 	{
 		if (coordinateX >= 0 && coordinateY >= 0)
@@ -72,13 +58,6 @@ public class MapBlockEightDirectionType
 		return false;
 	}
 
-	/// <summary>
-	/// 获取四方向类型
-	/// </summary>
-	/// <param name="blocks"></param>
-	/// <param name="areaSize"></param>
-	/// <param name="blockId"></param>
-	/// <returns></returns>
 	public static sbyte GetDirectionType(Dictionary<short, int> blocks, byte areaSize, short blockId)
 	{
 		ByteCoordinate blockPos = ByteCoordinate.IndexToCoordinate(blockId, areaSize);
@@ -102,13 +81,6 @@ public class MapBlockEightDirectionType
 		return res;
 	}
 
-	/// <summary>
-	/// 获取四方向类型
-	/// </summary>
-	/// <param name="blocks"></param>
-	/// <param name="areaSize"></param>
-	/// <param name="blockId"></param>
-	/// <returns></returns>
 	public static sbyte GetDirectionType(HashSet<short> blocks, byte areaSize, short blockId)
 	{
 		ByteCoordinate blockPos = ByteCoordinate.IndexToCoordinate(blockId, areaSize);
@@ -132,13 +104,6 @@ public class MapBlockEightDirectionType
 		return res;
 	}
 
-	/// <summary>
-	/// 获取四方向类型
-	/// </summary>
-	/// <param name="blocks"></param>
-	/// <param name="areaSize"></param>
-	/// <param name="blockId"></param>
-	/// <returns></returns>
 	public static sbyte GetDirectionType(Dictionary<short, short> blocks, byte areaSize, short blockId)
 	{
 		ByteCoordinate blockPos = ByteCoordinate.IndexToCoordinate(blockId, areaSize);

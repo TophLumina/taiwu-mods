@@ -34,7 +34,7 @@ public class RobItemAction : IGeneralAction
 			KidnappedCharacterList kidnappedCharacterList = DomainManager.Character.GetKidnappedCharacters(targetChar.GetId());
 			return kidnappedCharacterList.GetCollection().Count((KidnappedCharacter k) => k.CharId == TargetItem.Id) > 0;
 		}
-		return targetChar.GetInventory().Items.ContainsKey(TargetItem) || targetChar.GetEquipment().Contains(TargetItem);
+		return targetChar.GetInventory().Items.ContainsKey(TargetItem) || (targetChar.GetEquipment().Contains(TargetItem) && !ItemDomain.GetForceNotTransferable(targetChar.GetId(), TargetItem));
 	}
 
 	public void ApplyInitialChangesForTaiwu(DataContext context, Character selfChar, Character targetChar)

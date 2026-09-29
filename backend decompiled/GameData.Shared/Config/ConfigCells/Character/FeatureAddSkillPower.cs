@@ -1,8 +1,5 @@
 namespace Config.ConfigCells.Character;
 
-/// <summary>
-/// 特性增加功法威力
-/// </summary>
 public class FeatureAddSkillPower
 {
 	public sbyte CombatSkillType { get; }

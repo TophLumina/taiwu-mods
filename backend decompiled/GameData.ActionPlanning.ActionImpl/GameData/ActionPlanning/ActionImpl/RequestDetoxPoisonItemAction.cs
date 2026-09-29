@@ -132,7 +132,7 @@ public class RequestDetoxPoisonItemAction : ICharacterActionImpl, ISerializableG
 			character.AddEatingItem(context, ItemUsed);
 			character.ChangeHappiness(context, baseItem.GetHappinessChange());
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, actionData.TargetChar, baseItem.GetFavorabilityChange() * 5);
-			lifeRecordCollection.AddRequestDetoxPoisonSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
+			lifeRecordCollection.AddRequestDetoxPoisonItemSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
 			int secretInfoOffset = secretInformationCollection.AddAcceptRequestDetoxPoison(targetCharId, selfCharId);
 			DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
 		}
@@ -140,7 +140,7 @@ public class RequestDetoxPoisonItemAction : ICharacterActionImpl, ISerializableG
 		{
 			character.ChangeHappiness(context, -3);
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, actionData.TargetChar, -6000);
-			lifeRecordCollection.AddRequestDetoxPoisonFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
+			lifeRecordCollection.AddRequestDetoxPoisonItemFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
 			int secretInfoOffset2 = secretInformationCollection.AddRefuseRequestDetoxPoison(targetCharId, selfCharId);
 			DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);
 		}

@@ -48,8 +48,6 @@ public class CombatSkillDomain : BaseGameDataDomain
 
 	public readonly ObjectCollectionHelperData HelperDataCombatSkills;
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	private void OnInitializedDomainData()
 	{
 	}
@@ -62,7 +60,7 @@ public class CombatSkillDomain : BaseGameDataDomain
 			List<PropertyAndValue> addPropertyList = Config.CombatSkill.Instance[skillId].PropertyAddList;
 			if (addPropertyList != null && addPropertyList.Count > 0)
 			{
-				short[] addValueList = new short[161];
+				short[] addValueList = new short[167];
 				Array.Clear(addValueList, 0, addValueList.Length);
 				foreach (PropertyAndValue addProperty in addPropertyList)
 				{
@@ -859,6 +857,7 @@ public class CombatSkillDomain : BaseGameDataDomain
 		bool isTaiwu = charId == DomainManager.Taiwu.GetTaiwuCharId();
 		int prof;
 		int combatSkillProficiency = (DomainManager.Extra.TryGetElement_CombatSkillProficiencies(skillKey, out prof) ? prof : 0);
+		VoidValue value;
 		CombatSkillDisplayDataForList data = new CombatSkillDisplayDataForList
 		{
 			CharId = charId,
@@ -869,12 +868,14 @@ public class CombatSkillDomain : BaseGameDataDomain
 			CombatSkillProficiency = combatSkillProficiency,
 			BreakSuccess = GetBreakSuccess(charId, skillTemplateId),
 			IsInAnyEquipPlans = IsCombatSkillInAnyEquipPlan(skillTemplateId, character, isTaiwu),
+			IsInCurrentEquipPlan = IsCombatSkillInCurrentEquipPlan(skillTemplateId, character),
 			EmeiBonus1 = -1,
 			EmeiBonus2 = -1,
 			LuohanId = (sbyte)(isTaiwu ? DomainManager.Taiwu.GetCombatSkillLuohanId(skillTemplateId) : ((character != null && character.IsGearMate) ? (DomainManager.Extra.GetGearMateById(charId).LuohanBreakDict?.GetValueOrDefault<short, sbyte>(skillTemplateId, -1) ?? (-1)) : (-1))),
 			HitDistribution = skill.GetHitDistribution(),
 			CostTricks = new List<NeedTrick>(),
-			Revoked = skill.GetRevoked()
+			Revoked = skill.GetRevoked(),
+			IsFavorite = DomainManager.Taiwu.TryGetElement_FavoriteCombatSkills(skillTemplateId, out value)
 		};
 		GetCombatSkillCostTrick(skill, data.CostTricks);
 		if (DomainManager.Story.TryGetElement_SectEmeiBreakBonusTemplateIds(skillTemplateId, out var templateIds) && templateIds.Items != null)
@@ -1156,6 +1157,7 @@ public class CombatSkillDomain : BaseGameDataDomain
 		data.DamageStepBonus = (skillExist ? skill.CalcStepBonusDisplayData() : default(CombatSkillDamageStepBonusDisplayData));
 		data.BodyPartDamageStepActive = CalcBodyPartDamageStepActive(charId, skillTemplateId);
 		data.IsInAnyEquipPlans = IsCombatSkillInAnyEquipPlan(skillTemplateId, character, isTaiwu);
+		data.IsInCurrentEquipPlan = IsCombatSkillInCurrentEquipPlan(skillTemplateId, character);
 		data.HasSectEmeiSkillBreakBonus = DomainManager.Story.TryGetEmeiExtraBonusCollection(skillTemplateId, out var _);
 		data.LuohanId = (sbyte)(isTaiwu ? DomainManager.Taiwu.GetCombatSkillLuohanId(skillTemplateId) : ((!character.IsGearMate) ? (-1) : (DomainManager.Extra.GetGearMateById(charId).LuohanBreakDict?.GetValueOrDefault<short, sbyte>(skillTemplateId, -1) ?? (-1))));
 		data.IsFavorite = isFavorite;
@@ -1254,6 +1256,7 @@ public class CombatSkillDomain : BaseGameDataDomain
 		data.IsFavorite = isFavorite;
 		data.CombatSkillProficiency = (DomainManager.Extra.TryGetElement_CombatSkillProficiencies(skillKey, out var prof) ? prof : 0);
 		data.IsInAnyEquipPlans = IsCombatSkillInAnyEquipPlan(skillTemplateId, character, isTaiwu);
+		data.IsInCurrentEquipPlan = IsCombatSkillInCurrentEquipPlan(skillTemplateId, character);
 		data.HasSectEmeiSkillBreakBonus = DomainManager.Story.TryGetEmeiExtraBonusCollection(skillTemplateId, out var _);
 		if (skillExist)
 		{
@@ -1293,6 +1296,11 @@ public class CombatSkillDomain : BaseGameDataDomain
 		}
 		short[] equippedCombatSkills = character.GetEquippedCombatSkills();
 		return Enumerable.Contains(equippedCombatSkills, skillTemplateId);
+	}
+
+	private static bool IsCombatSkillInCurrentEquipPlan(short skillTemplateId, GameData.Domains.Character.Character character)
+	{
+		return character.GetCombatSkillEquipment().IsCombatSkillEquipped(skillTemplateId);
 	}
 
 	private List<CombatSkillDisplayData> CalcCombatSkillDisplayDataList(int charId, IEnumerable<short> skillTemplateIdList)

@@ -57,13 +57,13 @@ public class TakeRevengeAction : ICharacterActionImpl, ISerializableGameData
 		switch (DomainManager.Character.SelectHarmfulActionType(context, selfChar, targetChar))
 		{
 		case 0:
-			DomainManager.Character.HandleAttackAction(context, selfChar, targetChar);
+			DomainManager.Character.HandleAttackAction(context, selfChar, targetChar, actionData.Template);
 			break;
 		case 1:
-			DomainManager.Character.HandlePoisonAction(context, selfChar, targetChar, ItemKey.Invalid, -1);
+			DomainManager.Character.HandlePoisonAction(context, selfChar, targetChar, ItemKey.Invalid, actionData.Template);
 			break;
 		case 2:
-			DomainManager.Character.HandlePlotHarmAction(context, selfChar, targetChar, ItemKey.Invalid, -1);
+			DomainManager.Character.HandlePlotHarmAction(context, selfChar, targetChar, ItemKey.Invalid, actionData.Template);
 			break;
 		default:
 			return false;

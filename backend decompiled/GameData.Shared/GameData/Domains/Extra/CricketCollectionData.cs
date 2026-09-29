@@ -3,9 +3,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 促织陈列数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class CricketCollectionData : ISerializableGameData
 {
@@ -22,35 +19,17 @@ public class CricketCollectionData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "Cricket", "CricketJar", "CricketRegen" };
 	}
 
-	/// <summary>
-	/// 陈列界面中陈列蛐蛐的最大个数
-	/// </summary>
 	public const int CricketCollectionCapacity = 17;
 
-	/// <summary>
-	/// 陈列促织
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey Cricket;
 
-	/// <summary>
-	/// 陈列促织罐
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey CricketJar;
 
-	/// <summary>
-	/// 陈列促织恢复进度列表
-	/// </summary>
 	[SerializableGameDataField]
 	public int CricketRegen;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="crickets"></param>
-	/// <param name="cricketJar"></param>
-	/// <param name="cricketRegen"></param>
 	public CricketCollectionData(ItemKey crickets, ItemKey cricketJar, int cricketRegen)
 	{
 		Cricket = crickets;
@@ -58,16 +37,10 @@ public class CricketCollectionData : ISerializableGameData
 		CricketRegen = cricketRegen;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CricketCollectionData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CricketCollectionData(CricketCollectionData other)
 	{
 		Cricket = other.Cricket;
@@ -75,9 +48,6 @@ public class CricketCollectionData : ISerializableGameData
 		CricketRegen = other.CricketRegen;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CricketCollectionData other)
 	{
 		Cricket = other.Cricket;
@@ -85,13 +55,11 @@ public class CricketCollectionData : ISerializableGameData
 		CricketRegen = other.CricketRegen;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 22;
@@ -102,7 +70,6 @@ public class CricketCollectionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -120,7 +87,6 @@ public class CricketCollectionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

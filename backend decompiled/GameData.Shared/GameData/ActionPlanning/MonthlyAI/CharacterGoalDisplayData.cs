@@ -4,58 +4,31 @@ using GameData.Utilities;
 
 namespace GameData.ActionPlanning.MonthlyAI;
 
-/// <summary>
-/// 角色目标数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class CharacterGoalDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 目标模板ID. <see cref="T:Config.PlanningGoal" />
-	/// </summary>
 	[SerializableGameDataField]
 	public int GoalTemplateId;
 
-	/// <summary>
-	/// 创建时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int CreateDate;
 
-	/// <summary>
-	/// 优先级变化量 配置表BasePriority + PriorityDelta
-	/// </summary>
 	[SerializableGameDataField]
 	public int Priority;
 
-	/// <summary>
-	/// 是否已完成
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Finished;
 
-	/// <summary>
-	/// 剩余时间 根据 currDate、CharacterMissionData.EndDate和配置表里的KeepDuration
-	/// </summary>
 	[SerializableGameDataField]
 	public int RemainMonth = int.MinValue;
 
-	/// <summary>
-	/// 目标参数展示文本，由后端根据 PlanningGoal.Parameters 与 ContextArgs 格式化
-	/// </summary>
 	[SerializableGameDataField]
 	public string ParameterContent;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterGoalDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterGoalDisplayData(CharacterGoalDisplayData other)
 	{
 		GoalTemplateId = other.GoalTemplateId;
@@ -66,9 +39,6 @@ public class CharacterGoalDisplayData : ISerializableGameData
 		ParameterContent = other.ParameterContent;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterGoalDisplayData other)
 	{
 		GoalTemplateId = other.GoalTemplateId;
@@ -79,13 +49,11 @@ public class CharacterGoalDisplayData : ISerializableGameData
 		ParameterContent = other.ParameterContent;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 17;
@@ -97,7 +65,6 @@ public class CharacterGoalDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -139,7 +106,6 @@ public class CharacterGoalDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

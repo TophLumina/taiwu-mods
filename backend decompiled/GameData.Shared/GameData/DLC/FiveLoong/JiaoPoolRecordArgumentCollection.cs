@@ -5,31 +5,16 @@ using GameData.Utilities;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 蛟池养成日志参数集合
-/// </summary>
 public class JiaoPoolRecordArgumentCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 蛟idList
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> JiaoIdList;
 
-	/// <summary>
-	/// 蛟名字List
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> JiaoNameList;
 
-	/// <summary>
-	/// 蛟名字字典
-	/// </summary>
 	public Dictionary<int, string> JiaoNameMap;
 
-	/// <summary>
-	/// 转化名字为字典
-	/// </summary>
 	public void InitMap()
 	{
 		if (JiaoNameMap == null)
@@ -44,13 +29,11 @@ public class JiaoPoolRecordArgumentCollection : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -76,7 +59,6 @@ public class JiaoPoolRecordArgumentCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -141,7 +123,6 @@ public class JiaoPoolRecordArgumentCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

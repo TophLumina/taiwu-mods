@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Config;
 using Config.ConfigCells;
@@ -13,19 +14,10 @@ using Redzen.Random;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 模板数据相关辅助方法
-/// </summary>
 public static class ItemTemplateHelper
 {
-	/// <summary>
-	/// 道具品级比较
-	/// </summary>
 	public static IComparer<ItemKey> ItemGradeComparer = Comparer<ItemKey>.Create(CompareItemByGrade);
 
-	/// <summary>
-	/// 获得模板数据所有 Keys
-	/// </summary>
 	public static IList<int> GetTemplateDataAllKeys(sbyte itemType)
 	{
 		return itemType switch
@@ -47,12 +39,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 检测指定模板是否可用
-	/// </summary>
-	/// <param name="itemType">物品类型</param>
-	/// <param name="templateId">对应物品类型下的模板ID</param>
-	/// <returns>该物品配置是否存在</returns>
 	public static bool CheckTemplateValid(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -74,9 +60,28 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品名
-	/// </summary>
+	[return: MaybeNull]
+	public static string GetNameOrDefault(sbyte itemType, short templateId)
+	{
+		return itemType switch
+		{
+			0 => Weapon.Instance.GetItemOrDefault(templateId)?.Name, 
+			1 => Armor.Instance.GetItemOrDefault(templateId)?.Name, 
+			2 => Accessory.Instance.GetItemOrDefault(templateId)?.Name, 
+			3 => Clothing.Instance.GetItemOrDefault(templateId)?.Name, 
+			4 => Carrier.Instance.GetItemOrDefault(templateId)?.Name, 
+			5 => Material.Instance.GetItemOrDefault(templateId)?.Name, 
+			6 => CraftTool.Instance.GetItemOrDefault(templateId)?.Name, 
+			7 => Food.Instance.GetItemOrDefault(templateId)?.Name, 
+			8 => Medicine.Instance.GetItemOrDefault(templateId)?.Name, 
+			9 => TeaWine.Instance.GetItemOrDefault(templateId)?.Name, 
+			10 => SkillBook.Instance.GetItemOrDefault(templateId)?.Name, 
+			11 => Cricket.Instance.GetItemOrDefault(templateId)?.Name, 
+			12 => Misc.Instance.GetItemOrDefault(templateId)?.Name, 
+			_ => null, 
+		};
+	}
+
 	public static string GetName(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -98,9 +103,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品在战斗中使用时的效果
-	/// </summary>
 	public static short GetItemCombatUseEffect(sbyte itemType, short itemTemplateId)
 	{
 		return itemType switch
@@ -111,9 +113,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品在战斗准备阶段使用时的效果
-	/// </summary>
 	public static short GetItemCombatPrepareEffect(sbyte itemType, short itemTemplateId)
 	{
 		return itemType switch
@@ -124,9 +123,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品子类
-	/// </summary>
 	public static short GetItemSubType(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -148,9 +144,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品品级
-	/// </summary>
 	public static sbyte GetGrade(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -172,9 +165,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取道具玄机效果引用
-	/// </summary>
 	public static sbyte GetBreakBonusEffect(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -189,9 +179,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取促织品级
-	/// </summary>
 	public static sbyte GetCricketGrade(short colorId, short partId)
 	{
 		if (partId > 0)
@@ -202,13 +189,6 @@ public static class ItemTemplateHelper
 		return CricketParts.Instance[colorId].Level;
 	}
 
-	/// <summary>
-	/// 获取所属分组
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.Exception"></exception>
 	public static short GetGroupId(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -230,9 +210,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品图标
-	/// </summary>
 	public static string GetIcon(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -254,9 +231,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品描述
-	/// </summary>
 	public static string GetDesc(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -278,9 +252,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品功能描述
-	/// </summary>
 	public static string GetFunctionDesc(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -302,12 +273,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 道具是否允许交易.
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool AllowTrade(sbyte itemType, short templateId)
 	{
 		if (IsMiscResource(itemType, templateId))
@@ -325,12 +290,6 @@ public static class ItemTemplateHelper
 		return true;
 	}
 
-	/// <summary>
-	/// 获取物品是否可让渡
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsTransferable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -352,12 +311,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品是否可堆叠
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsStackable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -379,12 +332,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品是否可押注
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsWagerable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -406,12 +353,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品是否可精制
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsRefinable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -433,12 +374,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品是否可下毒
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsPoisonable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -460,12 +395,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品是否可修理 (同时控制是否会在耐久耗尽时自动销毁)
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsRepairable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -487,12 +416,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品是否可继承（梦回时跨存档继承）
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsInheritable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -514,18 +437,11 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Item.ItemTemplateHelper.CanUseMultiple(System.SByte,System.Int16)" />
 	public static bool CanUseMultiple(ItemKey itemKey)
 	{
 		return CanUseMultiple(itemKey.ItemType, itemKey.TemplateId);
 	}
 
-	/// <summary>
-	/// 获取物品是否可复数使用
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool CanUseMultiple(sbyte itemType, short templateId)
 	{
 		if (itemType == 8)
@@ -535,9 +451,6 @@ public static class ItemTemplateHelper
 		return true;
 	}
 
-	/// <summary>
-	/// 获取物品的基础重量
-	/// </summary>
 	public static int GetBaseWeight(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -559,9 +472,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品的基础价值
-	/// </summary>
 	public static int GetBaseValue(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -583,9 +493,15 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品让渡后的心情变化
-	/// </summary>
+	public static int GetContribution(sbyte itemType, short templateId)
+	{
+		if (itemType == 12)
+		{
+			return Misc.Instance[templateId].Contribution;
+		}
+		return 0;
+	}
+
 	public static sbyte GetBaseHappinessChange(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -607,9 +523,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品让渡后的好感变化
-	/// </summary>
 	public static int GetBaseFavorabilityChange(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -631,9 +544,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品的掉落率
-	/// </summary>
 	public static sbyte GetDropRate(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -655,9 +565,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品的材质 (对应的资源类型)
-	/// </summary>
 	public static sbyte GetResourceType(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -679,9 +586,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取无主物品的可保存时间
-	/// </summary>
 	public static short GetPreservationDuration(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -703,9 +607,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品的最大耐久
-	/// </summary>
 	public static short GetBaseMaxDurability(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -727,12 +628,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品的礼物等级
-	/// </summary>
-	/// <param name="itemType">物品类型</param>
-	/// <param name="templateId">物品模板id</param>
-	/// <returns>物品的礼物品级</returns>
 	public static sbyte GetGiftLevel(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -754,9 +649,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 从指定道具组中获取预期品级的道具
-	/// </summary>
 	public static short GetTemplateIdInGroup(sbyte itemType, short groupBeginId, sbyte expectedGrade)
 	{
 		short templateId = groupBeginId;
@@ -775,9 +667,6 @@ public static class ItemTemplateHelper
 		return templateId;
 	}
 
-	/// <summary>
-	/// 获取物品的商店等级
-	/// </summary>
 	public static sbyte GetMerchantLevel(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -799,9 +688,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 判断是否为特殊道具
-	/// </summary>
 	public static bool IsSpecial(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -823,9 +709,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取装备类型
-	/// </summary>
 	public static int GetEquipmentType(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -839,10 +722,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取装备是否可从装备栏中卸下
-	/// 通常的使用方式为：itemData.UsingType != ItemDisplayData.ItemUsingType.Equiped || ItemTemplateHelper.IsDetachable(itemData.Key.ItemType, itemData.Key.TemplateId)
-	/// </summary>
 	public static bool IsDetachable(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -856,14 +735,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获得计算制造材料后该装备的基础属性百分比
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="itemType"></param>
-	/// <param name="equipmentBonusType"></param>
-	/// <param name="materialResources"></param>
-	/// <returns></returns>
 	public unsafe static int GetMaterialResourceBonusValuePercentage(sbyte itemType, short templateId, sbyte equipmentBonusType, MaterialResources materialResources)
 	{
 		short makeItemSubType = GetEquipmentMakeItemSubType(itemType, templateId);
@@ -896,11 +767,6 @@ public static class ItemTemplateHelper
 		return 70 + 30 * resources.Items[resourceType] / maxResources.Items[resourceType];
 	}
 
-	/// <summary>
-	/// 获取一个装备的基础战力值（乘GlobalConfig.EquipmentSlotCombatPower对应项之后除以100为真实战力）
-	/// </summary>
-	/// <param name="equipment"></param>
-	/// <returns>配置表中Grade字段的数值乘其对应的EquipmentCombatPowerValueFactor</returns>
 	public static int GetBaseCombatPowerValue(sbyte itemType, short templateId)
 	{
 		switch (itemType)
@@ -935,9 +801,6 @@ public static class ItemTemplateHelper
 		}
 	}
 
-	/// <summary>
-	/// 获取指定装备的制造物品子类 <see cref="T:Config.MakeItemSubTypeItem" />
-	/// </summary>
 	public static short GetEquipmentMakeItemSubType(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -951,9 +814,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取物品的制造物品子类 <see cref="T:Config.MakeItemSubTypeItem" />
-	/// </summary>
 	public static short GetMakeItemSubType(sbyte itemType, short templateId)
 	{
 		if (ItemType.IsEquipmentItemType(itemType))
@@ -985,13 +845,6 @@ public static class ItemTemplateHelper
 		return -1;
 	}
 
-	/// <summary>
-	/// 指定道具是否可以预定.
-	/// 除了该条件以外还需判断技艺类型 <see cref="M:GameData.Domains.Item.ItemTemplateHelper.GetCraftRequiredLifeSkillType(System.SByte,System.Int16)" />
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool CanMakeArtisanOrder(sbyte itemType, short templateId)
 	{
 		if (IsSpecial(itemType, templateId))
@@ -1014,10 +867,6 @@ public static class ItemTemplateHelper
 		}
 	}
 
-	/// <summary>
-	/// 获取打造, 修理, 精制时需要的技艺类型
-	/// </summary>
-	/// <returns><see cref="T:GameData.Domains.Character.LifeSkillType" /></returns>
 	public static sbyte GetCraftRequiredLifeSkillType(sbyte itemType, short templateId)
 	{
 		switch (itemType)
@@ -1062,9 +911,6 @@ public static class ItemTemplateHelper
 		}
 	}
 
-	/// <summary>
-	/// 获取修理需要的造诣值
-	/// </summary>
 	public static short GetRepairRequiredAttainment(sbyte itemType, short templateId, short currDurability)
 	{
 		sbyte grade = GetGrade(itemType, templateId);
@@ -1072,10 +918,6 @@ public static class ItemTemplateHelper
 		return Convert.ToInt16((float)GlobalConfig.Instance.RepairAttainments[grade] * refactor);
 	}
 
-	/// <summary>
-	/// 获取修理需要的资源
-	/// </summary>
-	/// <returns></returns>
 	public unsafe static ResourceInts GetRepairNeedResources(MaterialResources materialResources, ItemKey itemKey, short curDurability)
 	{
 		ResourceInts needResources = default(ResourceInts);
@@ -1093,47 +935,27 @@ public static class ItemTemplateHelper
 		return needResources;
 	}
 
-	/// <summary>
-	/// 获取修理时需要的金钱
-	/// </summary>
 	public static int GetRepairNeedResourceCount(MaterialResources materialResources, ItemKey itemKey, short curDurability)
 	{
 		return GetRepairNeedResources(materialResources, itemKey, curDurability).GetSum() * 5;
 	}
 
-	/// <summary>
-	/// 获取淬毒（毒术）或解毒（医术）需要的造诣
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static short GetPoisonRequiredAttainment(sbyte itemType, short templateId)
 	{
 		sbyte grade = GetGrade(itemType, templateId);
 		return GlobalConfig.Instance.PoisonAttainments[grade];
 	}
 
-	/// <summary>
-	/// 获取打造, 修理, 精制时需要的资源类型
-	/// </summary>
-	/// <returns><see cref="T:GameData.Domains.Character.ResourceType" /></returns>
 	public static sbyte GetCraftRequiredResourceType(sbyte itemType, short templateId)
 	{
 		return GetResourceType(itemType, templateId);
 	}
 
-	/// <summary>
-	/// 获取制造、精制时材料需要的资源数量
-	/// </summary>
 	public static short GetCraftMaterialRequiredResourceAmount(short templateId)
 	{
 		return Material.Instance[templateId].RequiredResourceAmount;
 	}
 
-	/// <summary>
-	/// 获取精制时需要的造诣值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe static LifeSkillShorts GetRefineRequiredAttainment(short[] materialTemplateIds)
 	{
 		LifeSkillShorts needLifeSkill = default(LifeSkillShorts);
@@ -1146,10 +968,6 @@ public static class ItemTemplateHelper
 		return needLifeSkill;
 	}
 
-	/// <summary>
-	/// 获取精制时需要的资源
-	/// </summary>
-	/// <returns></returns>
 	public unsafe static ResourceInts GetRefineRequiredResources(short[] oldMaterialTemplateIds, short[] materialTemplateIds)
 	{
 		ResourceInts needResources = default(ResourceInts);
@@ -1175,10 +993,6 @@ public static class ItemTemplateHelper
 		return needResources;
 	}
 
-	/// <summary>
-	/// 获取拆解时获取同级道具的概率
-	/// </summary>
-	/// <returns></returns>
 	public static int GetDisassembleSameGradeRate(sbyte grade)
 	{
 		return grade switch
@@ -1189,9 +1003,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取指定物品是否可进行生铸
-	/// </summary>
 	public static bool GetAllowRawCreate(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -1203,9 +1014,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取指定物品可生铸的新物品模板 ID
-	/// </summary>
 	public static IEnumerable<short> GetRawCreateDestinations(sbyte itemType, short sourceTemplateId)
 	{
 		short itemSubType = GetItemSubType(itemType, sourceTemplateId);
@@ -1242,13 +1050,6 @@ public static class ItemTemplateHelper
 		}
 	}
 
-	/// <summary>
-	/// 获取生铸需要的精制材料
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="oldTemplateId"></param>
-	/// <param name="newTemplateId"></param>
-	/// <returns></returns>
 	public static short GetRawCreateMaterial(sbyte itemType, short oldTemplateId, short newTemplateId)
 	{
 		if (!ItemType.IsEquipmentItemType(itemType))
@@ -1277,14 +1078,6 @@ public static class ItemTemplateHelper
 		return -1;
 	}
 
-	/// <summary>
-	/// 获取拆解获得的原料，不含装备上已经精制的
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="randomSource"></param>
-	/// <param name="sameGradeRate"></param>
-	/// <returns></returns>
 	public static short GetDisassemblyMaterial(sbyte itemType, short templateId, IRandomSource randomSource, int sameGradeRate)
 	{
 		short result = -1;
@@ -1318,12 +1111,6 @@ public static class ItemTemplateHelper
 		return result;
 	}
 
-	/// <summary>
-	/// 获取所有拆解可能获得的原料，用于前端显示，不含装备上已经精制的
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static List<short> GetAllDisassemblyMaterial(sbyte itemType, short templateId)
 	{
 		List<short> materialIdList = null;
@@ -1356,13 +1143,6 @@ public static class ItemTemplateHelper
 		return materialIdList;
 	}
 
-	/// <summary>
-	/// 获得使用指定资源的指定品级的制造工具。
-	/// </summary>
-	/// <param name="resourceType"></param>
-	/// <param name="grade"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.Exception"></exception>
 	public static CraftToolItem GetGradeCraftTool(sbyte resourceType, sbyte grade)
 	{
 		return resourceType switch
@@ -1377,24 +1157,11 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取制造药品（医术）时材料的计算品级
-	/// </summary>
-	/// <param name="isManual">是否手动选择子分类</param>
-	/// <param name="isMain">是否选择主方</param>
-	/// <param name="grade">材料原始级别</param>
-	/// <returns></returns>
 	public static sbyte GetMakeHerbMaterialTempGrade(bool isManual, bool isMain, sbyte grade)
 	{
 		return GameData.Domains.Building.SharedMethods.GetHerbMaterialTempGrade(grade, isManual, isMain);
 	}
 
-	/// <summary>
-	/// 获取物品是否可以拆解
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplate"></param>
-	/// <returns></returns>
 	public static bool GetCanDisassemble(sbyte itemType, short itemTemplate)
 	{
 		if (!IsTransferable(itemType, itemTemplate))
@@ -1428,14 +1195,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 获取拆解可获得的资源
-	/// </summary>
-	/// <param name="materialResources"></param>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="amount"></param>
-	/// <returns></returns>
 	public unsafe static ResourceInts GetDisassembleResources(MaterialResources materialResources, sbyte itemType, short templateId, int amount)
 	{
 		ResourceInts needResources = default(ResourceInts);
@@ -1468,22 +1227,12 @@ public static class ItemTemplateHelper
 		return needResources;
 	}
 
-	/// <summary>
-	/// 获取拆解所需的造诣
-	/// </summary>
-	/// <returns></returns>
 	public static short GetDisassembleRequiredAttainment(sbyte itemType, short itemTemplate)
 	{
 		sbyte grade = GetGrade(itemType, itemTemplate);
 		return GlobalConfig.Instance.DisassembleAttainments[grade];
 	}
 
-	/// <summary>
-	/// 获取药品的毒类型
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplate"></param>
-	/// <returns></returns>
 	public static sbyte GetMedicineItemPoisonType(sbyte itemType, short itemTemplate)
 	{
 		if (itemType != 8)
@@ -1497,12 +1246,6 @@ public static class ItemTemplateHelper
 		return Medicine.Instance[itemTemplate].PoisonType;
 	}
 
-	/// <summary>
-	/// 判断指定物品是否为纯可堆叠物品 (物品可堆叠, 且没有激活任何变动类型).
-	/// 纯可堆叠物品没有自己独有的物品对象.
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <returns></returns>
 	public static bool IsPureStackable(ItemKey itemKey)
 	{
 		if (IsStackable(itemKey.ItemType, itemKey.TemplateId))
@@ -1512,31 +1255,16 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 通过技能书的模板 ID 获取对应的技艺的模板 ID
-	/// </summary>
-	/// <param name="skillBookTemplateId"></param>
-	/// <returns></returns>
 	public static short GetLifeSkillTemplateIdFromSkillBook(int skillBookTemplateId)
 	{
 		return SkillBook.Instance[skillBookTemplateId].LifeSkillTemplateId;
 	}
 
-	/// <summary>
-	/// 通过技能书的模板 ID 获取对应的功法的模板 ID
-	/// </summary>
-	/// <param name="skillBookTemplateId"></param>
-	/// <returns></returns>
 	public static short GetCombatSkillTemplateIdFromSkillBook(int skillBookTemplateId)
 	{
 		return SkillBook.Instance[skillBookTemplateId].CombatSkillTemplateId;
 	}
 
-	/// <summary>
-	/// 根据衣服的表现 Id 获取衣服的模板 Id
-	/// </summary>
-	/// <param name="displayId"></param>
-	/// <returns></returns>
 	public static short GetClothingTemplateIdByDisplayId(byte displayId)
 	{
 		foreach (ClothingItem item in (IEnumerable<ClothingItem>)Clothing.Instance)
@@ -1563,20 +1291,11 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 创建不支持的物品类型异常
-	/// </summary>
 	public static Exception CreateItemTypeException(sbyte itemType)
 	{
 		return new Exception($"Unsupported ItemType: {itemType}");
 	}
 
-	/// <summary>
-	/// 检测是否为神木种子，包括剧情神木种子和普通神木种子
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplate"></param>
-	/// <returns></returns>
 	public static bool CheckIsHeavenlyTreeSeeds(sbyte itemType, short itemTemplate)
 	{
 		bool flag = itemType == 12;
@@ -1620,12 +1339,6 @@ public static class ItemTemplateHelper
 		return flag;
 	}
 
-	/// <summary>
-	/// 检测是否为普通神木种子
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplate"></param>
-	/// <returns></returns>
 	public static bool CheckIsHeavenlyNormalTreeSeeds(sbyte itemType, short itemTemplate)
 	{
 		if (itemType == 12)
@@ -1639,12 +1352,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 检测是否为孤鸾镜水谣
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplate"></param>
-	/// <returns></returns>
 	public static bool CheckIsSectMainStoryItemXuannvNotes(sbyte itemType, short itemTemplate)
 	{
 		if (itemType == 12)
@@ -1654,9 +1361,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 检测是否为五仙的蛊仙
-	/// </summary>
 	public static bool CheckIsSectMainStoryItemWuxianWugFairy(sbyte itemType, short itemTemplate)
 	{
 		if (itemType == 12)
@@ -1666,9 +1370,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 检测是否为神鸡图
-	/// </summary>
 	public static bool CheckIsSectMainStoryFulongChickenMap(sbyte itemType, short itemTemplate)
 	{
 		if (itemType == 12)
@@ -1678,12 +1379,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否为残损巨剑
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplate"></param>
-	/// <returns></returns>
 	public static bool CheckIsDamageHugeSword(sbyte itemType, short itemTemplate)
 	{
 		if (itemType == 12)
@@ -1693,9 +1388,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 检测是否为元山地主的化念珠
-	/// </summary>
 	public static bool CheckIsSectMainStoryItemYuanshanRosary(sbyte itemType, short itemTemplate)
 	{
 		if (itemType == 12)
@@ -1705,12 +1397,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 检查是否为界青主线道具
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplate"></param>
-	/// <returns></returns>
 	public static bool CheckIsSectMainStoryItemJieQingStars(sbyte itemType, short itemTemplate)
 	{
 		if (itemType == 12)
@@ -1720,12 +1406,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 道具是否可投喂
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsFeedingAble(sbyte itemType, short templateId)
 	{
 		if (itemType == 5)
@@ -1735,12 +1415,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否可以喂食代步
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool CanFeedCarrier(sbyte itemType, short templateId)
 	{
 		if (itemType == 4)
@@ -1756,12 +1430,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否有代步驯服度
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool HasCarrierTame(sbyte itemType, short templateId)
 	{
 		if (itemType == 4)
@@ -1771,12 +1439,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是不是蛟卵
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsJiaoEgg(sbyte itemType, short templateId)
 	{
 		if (itemType == 5)
@@ -1790,12 +1452,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是不是幼蛟
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsJiaoChild(sbyte itemType, short templateId)
 	{
 		if (itemType == 5)
@@ -1809,10 +1465,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是不是蛟代步
-	/// </summary>
-	/// <returns></returns>
 	public static bool IsJiaoCarrier(sbyte itemType, short templateId)
 	{
 		if (itemType == 4)
@@ -1826,10 +1478,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是不是蛟
-	/// </summary>
-	/// <returns></returns>
 	public static bool IsJiao(sbyte itemType, short templateId)
 	{
 		if (!IsJiaoEgg(itemType, templateId) && !IsJiaoChild(itemType, templateId))
@@ -1839,12 +1487,6 @@ public static class ItemTemplateHelper
 		return true;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsJiaoLoong(sbyte itemType, short templateId)
 	{
 		if (itemType == 4)
@@ -1858,9 +1500,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否为徒手工具
-	/// </summary>
 	public static bool IsEmptyTool(sbyte itemType, short templateId)
 	{
 		if (itemType == 6)
@@ -1874,9 +1513,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否是资源道具
-	/// </summary>
 	public static bool IsMiscResource(sbyte itemType, short templateId)
 	{
 		if (itemType == 12)
@@ -1890,9 +1526,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 获取资源道具的资源类型
-	/// </summary>
 	public static sbyte GetMiscResourceType(sbyte itemType, short templateId)
 	{
 		if (itemType == 12)
@@ -1913,9 +1546,6 @@ public static class ItemTemplateHelper
 		return -1;
 	}
 
-	/// <summary>
-	/// 资源道具是否可以交换（精挑细选），银钱不能筛选，威望不能操作
-	/// </summary>
 	public static bool MiscResourceCanChoosy(sbyte itemType, short templateId)
 	{
 		if (!IsMiscResource(itemType, templateId))
@@ -1930,9 +1560,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 资源道具是否可以交换，威望不能操作
-	/// </summary>
 	public static bool MiscResourceCanExchange(sbyte itemType, short templateId)
 	{
 		if (!IsMiscResource(itemType, templateId))
@@ -1942,13 +1569,6 @@ public static class ItemTemplateHelper
 		return GetMiscResourceType(itemType, templateId) != 7;
 	}
 
-	/// <summary>
-	/// 药品是否为奇方
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="makeItemSybTypeTemplateId"></param>
-	/// <returns></returns>
 	public static bool MedicineIsOdd(sbyte itemType, short templateId, out short makeItemSybTypeTemplateId)
 	{
 		makeItemSybTypeTemplateId = -1;
@@ -1970,13 +1590,6 @@ public static class ItemTemplateHelper
 		return makeItemSubTypeConfig.IsOdd;
 	}
 
-	/// <summary>
-	/// 检查药品是否能够经过大夫技能合成
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="targetTemplateId"></param>
-	/// <returns></returns>
 	public static bool CanMedicineUpgrade(sbyte itemType, short templateId, out short targetTemplateId)
 	{
 		targetTemplateId = -1;
@@ -2017,12 +1630,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 获取可服食道具的持续时间
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static short GetEatableItemDuration(sbyte itemType, short templateId)
 	{
 		return itemType switch
@@ -2036,13 +1643,6 @@ public static class ItemTemplateHelper
 		};
 	}
 
-	/// <summary>
-	/// 指定道具是否为蛊
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="includeKing"></param>
-	/// <returns></returns>
 	public static bool IsWug(sbyte itemType, short templateId, bool includeKing)
 	{
 		if (itemType == 8 && Medicine.Instance[templateId].WugType != -1)
@@ -2056,10 +1656,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 比较道具品级
-	/// </summary>
-	/// <returns></returns>
 	public static int CompareItemByGrade(ItemKey itemKeyA, ItemKey itemKeyB)
 	{
 		sbyte gradeA = GetGrade(itemKeyA.ItemType, itemKeyA.TemplateId);
@@ -2067,12 +1663,6 @@ public static class ItemTemplateHelper
 		return gradeA.CompareTo(gradeB);
 	}
 
-	/// <summary>
-	/// 是否是天劫符箓
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool IsTianJieFuLu(sbyte itemType, short templateId)
 	{
 		if (itemType == 12)
@@ -2082,21 +1672,11 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 获取天劫符箓单位
-	/// </summary>
-	/// <returns></returns>
 	public static int GetTianJieFuLuCountUnit()
 	{
 		return 9;
 	}
 
-	/// <summary>
-	/// 获取物品单位
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static int GetItemCountUnit(sbyte itemType, short templateId)
 	{
 		if (!IsMiscResource(itemType, templateId))
@@ -2110,21 +1690,11 @@ public static class ItemTemplateHelper
 		return GetResourceCountUnit();
 	}
 
-	/// <summary>
-	/// 获取资源物品的单位
-	/// </summary>
-	/// <returns></returns>
 	public static int GetResourceCountUnit()
 	{
 		return 10;
 	}
 
-	/// <summary>
-	/// 可触发通用事件 - 操作行囊物品 <see cref="F:Config.EventTriggerType.DefKey.OperateInventoryItem" />
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static bool CanTriggerCommonEvent(sbyte itemType, short templateId)
 	{
 		if (itemType == 12)
@@ -2134,10 +1704,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否是感谢信
-	/// </summary>
-	/// <returns></returns>
 	public static bool IsThanksLetter(sbyte itemType, short templateId)
 	{
 		bool flag = itemType == 12;
@@ -2149,15 +1715,6 @@ public static class ItemTemplateHelper
 		return flag;
 	}
 
-	/// <summary>
-	/// 物品是否符合槽位类型
-	/// Note: 动物装备永远不符合任意槽位类型
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <param name="slot"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public static bool IsItemMeetSlot(sbyte itemType, short templateId, sbyte slot)
 	{
 		short itemSubType = GetItemSubType(itemType, templateId);
@@ -2196,13 +1753,13 @@ public static class ItemTemplateHelper
 		case 11:
 			return itemSubType == 400;
 		case 12:
-			if ((uint)(itemSubType - 401) <= 3u)
+			if ((uint)(itemSubType - 401) <= 4u)
 			{
 				return true;
 			}
 			return false;
 		case 13:
-			if ((uint)(itemSubType - 402) <= 2u)
+			if ((uint)(itemSubType - 402) <= 3u)
 			{
 				return true;
 			}
@@ -2212,14 +1769,6 @@ public static class ItemTemplateHelper
 		}
 	}
 
-	/// <summary>
-	/// 目标物品是否匹配物品筛选规则配置表的筛选项
-	/// 物品筛选规则配置表的解析函数
-	/// </summary>
-	/// <param name="itemType">物品类型</param>
-	/// <param name="templateId">对应物品类型下的模板ID</param>
-	/// <param name="rule"></param>
-	/// <returns></returns>
 	public static bool MatchItemFilterRule(sbyte itemType, short templateId, ItemFilterRulesItem rule)
 	{
 		if (rule == null)
@@ -2260,10 +1809,6 @@ public static class ItemTemplateHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 获取机关人成长进度
-	/// 书籍提供2 * (品级 + 1)的资质，其余物品提供5 * 2^物品品级的进度值
-	/// </summary>
 	public static int GetGearMateUpgradeProgress(sbyte itemType, short templateId)
 	{
 		sbyte grade = GetGrade(itemType, templateId);
@@ -2279,12 +1824,6 @@ public static class ItemTemplateHelper
 		return value * 5;
 	}
 
-	/// <summary>
-	/// 获取物品在战斗中的最大投掷距离，-1表示不能投掷
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static sbyte GetMaxUseDistance(sbyte itemType, short templateId)
 	{
 		return itemType switch

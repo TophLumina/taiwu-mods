@@ -6,22 +6,13 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 建筑自动指派预设
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class BuildingOptionAutoAddSoldItemPreset : ISerializableGameData
 {
 	public enum EGradeOrder : sbyte
 	{
 		Invalid,
-		/// <summary>
-		/// 优先高品级
-		/// </summary>
 		High,
-		/// <summary>
-		/// 优先低品级
-		/// </summary>
 		Low
 	}
 
@@ -29,13 +20,7 @@ public class BuildingOptionAutoAddSoldItemPreset : ISerializableGameData
 	public enum EPropertyOrder : sbyte
 	{
 		Invalid = 0,
-		/// <summary>
-		/// 价值最高
-		/// </summary>
 		MaxValue = 1,
-		/// <summary>
-		/// 数量最多
-		/// </summary>
 		MaxAmount = 2
 	}
 
@@ -56,48 +41,27 @@ public class BuildingOptionAutoAddSoldItemPreset : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "ItemTypeList", "MinGrade", "MaxGrade", "GradeOrder", "PropertyOrder" };
 	}
 
-	/// <summary>
-	/// 物品类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public List<sbyte> ItemTypeList;
 
-	/// <summary>
-	/// 最小品级
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public sbyte MinGrade;
 
-	/// <summary>
-	/// 最大品级
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public sbyte MaxGrade = 8;
 
-	/// <summary>
-	/// 优先品级
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public sbyte GradeOrder = 1;
 
-	/// <summary>
-	/// 优先属性
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public sbyte PropertyOrder = 3;
 
 	public EPropertyOrder PropertyOrderEnum => (EPropertyOrder)PropertyOrder;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public BuildingOptionAutoAddSoldItemPreset()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BuildingOptionAutoAddSoldItemPreset(BuildingOptionAutoAddSoldItemPreset other)
 	{
 		ItemTypeList = ((other.ItemTypeList == null) ? null : new List<sbyte>(other.ItemTypeList));
@@ -107,9 +71,6 @@ public class BuildingOptionAutoAddSoldItemPreset : ISerializableGameData
 		PropertyOrder = other.PropertyOrder;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BuildingOptionAutoAddSoldItemPreset other)
 	{
 		ItemTypeList = ((other.ItemTypeList == null) ? null : new List<sbyte>(other.ItemTypeList));

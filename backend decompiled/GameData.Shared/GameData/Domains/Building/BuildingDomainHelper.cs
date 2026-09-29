@@ -4,9 +4,6 @@ namespace GameData.Domains.Building;
 
 public static class BuildingDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort BuildingAreas = 0;
@@ -68,11 +65,12 @@ public static class BuildingDomainHelper
 		public const ushort NewlyCreatedBuildingIndexes = 28;
 
 		public const ushort MakeItemDataDict = 29;
+
+		public const ushort SmarterChickens = 30;
+
+		public const ushort EscapedChickenIds = 31;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort SetShopManager = 0;
@@ -566,16 +564,28 @@ public static class BuildingDomainHelper
 		public const ushort AnyBuildingEarnCountMax = 244;
 
 		public const ushort GetOperationAddProgress = 245;
+
+		public const ushort IsXiangshuTowerUnlocked = 246;
+
+		public const ushort CricketCollectionRemoveToSource = 247;
+
+		public const ushort GetCombatChickenPreset = 248;
+
+		public const ushort SetCombatChickenPreset = 249;
+
+		public const ushort GetChickenPolymorphDisplayData = 250;
+
+		public const ushort TriggerChickenPolymorphEvent = 251;
+
+		public const ushort GmCmd_GenerateSmarterChicken = 252;
+
+		public const ushort GetAllowChickenInCombat = 253;
+
+		public const ushort SetAllowChickenInCombat = 254;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
-	public const ushort DataCount = 30;
+	public const ushort DataCount = 32;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "BuildingAreas", 0 },
@@ -607,28 +617,21 @@ public static class BuildingDomainHelper
 		{ "FeatherValue", 26 },
 		{ "TeaHorseCaravanEventCollection", 27 },
 		{ "NewlyCreatedBuildingIndexes", 28 },
-		{ "MakeItemDataDict", 29 }
+		{ "MakeItemDataDict", 29 },
+		{ "SmarterChickens", 30 },
+		{ "EscapedChickenIds", 31 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
-	public static readonly string[] DataId2FieldName = new string[30]
+	public static readonly string[] DataId2FieldName = new string[32]
 	{
 		"BuildingAreas", "BuildingBlocks", "TaiwuBuildingAreas", "CollectBuildingResourceType", "BuildingOperatorDict", "CustomBuildingName", "NewCompleteOperationBuildings", "Chicken", "MakeItemDict", "Residences",
 		"ComfortableHouses", "Homeless", "SamsaraPlatformAddMainAttributes", "SamsaraPlatformAddCombatSkillQualifications", "SamsaraPlatformAddLifeSkillQualifications", "SamsaraPlatformSlots", "SamsaraPlatformBornDict", "CollectBuildingEarningsData", "ShopManagerDict", "TeaHorseCaravanData",
-		"ShrineBuyTimes", "LocationMarkHashSet", "ComfortableHousesAutoCheckInType", "LockedResidences", "LockedComfortableHouses", "ShopManagerUpgradeQualificationDict", "FeatherValue", "TeaHorseCaravanEventCollection", "NewlyCreatedBuildingIndexes", "MakeItemDataDict"
+		"ShrineBuyTimes", "LocationMarkHashSet", "ComfortableHousesAutoCheckInType", "LockedResidences", "LockedComfortableHouses", "ShopManagerUpgradeQualificationDict", "FeatherValue", "TeaHorseCaravanEventCollection", "NewlyCreatedBuildingIndexes", "MakeItemDataDict",
+		"SmarterChickens", "EscapedChickenIds"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
-	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[30][];
+	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[32][];
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId = new Dictionary<string, ushort>
 	{
 		{ "SetShopManager", 0 },
@@ -876,10 +879,19 @@ public static class BuildingDomainHelper
 		{ "GetQuickCollectResourceAmount", 242 },
 		{ "RepairItemsOptional", 243 },
 		{ "AnyBuildingEarnCountMax", 244 },
-		{ "GetOperationAddProgress", 245 }
+		{ "GetOperationAddProgress", 245 },
+		{ "IsXiangshuTowerUnlocked", 246 },
+		{ "CricketCollectionRemoveToSource", 247 },
+		{ "GetCombatChickenPreset", 248 },
+		{ "SetCombatChickenPreset", 249 },
+		{ "GetChickenPolymorphDisplayData", 250 },
+		{ "TriggerChickenPolymorphEvent", 251 },
+		{ "GmCmd_GenerateSmarterChicken", 252 },
+		{ "GetAllowChickenInCombat", 253 },
+		{ "SetAllowChickenInCombat", 254 }
 	};
 
-	public static readonly string[] MethodId2MethodName = new string[246]
+	public static readonly string[] MethodId2MethodName = new string[255]
 	{
 		"SetShopManager", "SetCollectBuildingResourceType", "ClearBuildingBlockEarningsData", "GetBuildingEarningData", "GetBuildingOperatesData", "GetBuildingBuildPeopleAttainments", "AcceptBuildingBlockCollectEarning", "AcceptBuildingBlockCollectEarningQuick", "AcceptBuildingBlockRecruitPeople", "AcceptBuildingBlockRecruitPeopleQuick",
 		"ShopBuildingSoldItemReceive", "ShopBuildingSoldItemReceiveQuick", "QuickCollectShopItem", "QuickCollectShopItemCount", "QuickCollectShopSoldItem", "QuickCollectShopSoldItemCount", "QuickRecruitPeople", "QuickRecruitPeopleCount", "QuickCollectBuildingEarn", "QuickCollectBuildingEarnCount",
@@ -905,6 +917,7 @@ public static class BuildingDomainHelper
 		"GetCharacterChickenFeatures", "GetChickensByPersonalityType", "GetCurrentFeatherValue", "CanCultivateFeather", "GetChickenPluckFeatherDisplayData", "IsFeatherSystemUnlocked", "UnlockFeatherSystem", "PluckChickenFeather", "CanUseChickenFeather", "UseChickenFeather",
 		"CanPluckFeatherInVillage", "CultivateFeather", "GetCanPluckFeatherChickenIds", "GetSamsaraPlatformBonusAttributes", "GetSamsaraPlatformCharDisplayData", "QuickAssignChicken", "GetCricketCollectionDisplayData", "GetBuildingMakeDisplayData", "CheckRefineCondition", "RefineItem",
 		"GetCraftManDisplayDataForCharacter", "GetCraftManDisplayDataForBuilding", "GetTeaHorseCaravanEvent", "TriggerCultivateFeatherEvent", "GetTeaHorseCaravanData", "QuickDiscardExchangeItem", "GetTaiwuVillageBuildingDataForVillagerRole", "IsAnyChickensCanPluck", "FeedChicken", "GetBuildingBlockEffect",
-		"ClearNewlyCreatedBuildingIndex", "GetNewlyCreatedBuildingIndex", "GetQuickCollectResourceAmount", "RepairItemsOptional", "AnyBuildingEarnCountMax", "GetOperationAddProgress"
+		"ClearNewlyCreatedBuildingIndex", "GetNewlyCreatedBuildingIndex", "GetQuickCollectResourceAmount", "RepairItemsOptional", "AnyBuildingEarnCountMax", "GetOperationAddProgress", "IsXiangshuTowerUnlocked", "CricketCollectionRemoveToSource", "GetCombatChickenPreset", "SetCombatChickenPreset",
+		"GetChickenPolymorphDisplayData", "TriggerChickenPolymorphEvent", "GmCmd_GenerateSmarterChicken", "GetAllowChickenInCombat", "SetAllowChickenInCombat"
 	};
 }

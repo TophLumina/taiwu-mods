@@ -3,6 +3,7 @@ using CompDevLib.Interpreter;
 using CompDevLib.Interpreter.Parse;
 using Config;
 using Config.EventConfig;
+using GameData.DLC;
 using GameData.Domains.Character;
 using GameData.Domains.Item;
 using GameData.Domains.Map;
@@ -275,9 +276,7 @@ public class BasicFunctions
 	[EventFunction(13)]
 	private static ValueInfo EventTransition(EventScriptRuntime runtime, ASTNode[] parameters)
 	{
-		ScriptExecutionInstance current = runtime.Current;
-		current.NextEvent = parameters[0].GetStringValue(runtime.Evaluator);
-		current.ExitScript();
+		runtime.ToEvent(parameters[0].GetStringValue(runtime.Evaluator));
 		return ValueInfo.Void;
 	}
 
@@ -359,6 +358,41 @@ public class BasicFunctions
 		Evaluator evaluator = runtime.Evaluator;
 		string key = parameters[0].GetStringValue(evaluator);
 		EventArgBox argBox = DomainManager.TaiwuEvent.GetGlobalEventArgumentBox();
+		return argBox.SelectValue(evaluator, key);
+	}
+
+	[EventFunction(903)]
+	private static ValueInfo SaveDlcValue(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		byte templateId = (byte)parameters[0].GetIntValue(evaluator);
+		ImplementedDlcItem config = ImplementedDlc.Instance[templateId];
+		string key = parameters[1].GetStringValue(evaluator);
+		ValueInfo valueInfo = parameters[2].Evaluate(evaluator);
+		EventArgBox argBox = DomainManager.Extra.GetOrCreateDlcArgBox(config.AppId, runtime.Context);
+		SaveValueToArgBox(evaluator, key, valueInfo, argBox);
+		DomainManager.Extra.SetDlcArgBox(config.AppId, argBox, runtime.Context);
+		return ValueInfo.Void;
+	}
+
+	[EventFunction(919)]
+	private static ValueInfo CheckDlcInstalled(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		byte templateId = (byte)parameters[0].GetIntValue(evaluator);
+		ImplementedDlcItem config = ImplementedDlc.Instance[templateId];
+		bool installed = DlcManager.IsDlcInstalled(config.AppId);
+		return runtime.Evaluator.PushEvaluationResult(installed);
+	}
+
+	[EventFunction(904)]
+	private static ValueInfo ReadDlcValue(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		byte templateId = (byte)parameters[0].GetIntValue(evaluator);
+		ImplementedDlcItem config = ImplementedDlc.Instance[templateId];
+		string key = parameters[1].GetStringValue(evaluator);
+		EventArgBox argBox = DomainManager.Extra.GetOrCreateDlcArgBox(config.AppId, runtime.Context);
 		return argBox.SelectValue(evaluator, key);
 	}
 

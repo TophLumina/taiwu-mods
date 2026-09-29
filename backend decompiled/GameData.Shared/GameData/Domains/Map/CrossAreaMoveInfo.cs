@@ -2,14 +2,8 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 跨区域旅行相关信息
-/// </summary>
 public class CrossAreaMoveInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 无效值
-	/// </summary>
 	public const int Invalid = -1;
 
 	public short FromAreaId;
@@ -26,34 +20,16 @@ public class CrossAreaMoveInfo : ISerializableGameData
 
 	public TravelRoute Route;
 
-	/// <summary>
-	/// 旅途进行中
-	/// </summary>
 	public bool Traveling => ToAreaId >= 0;
 
-	/// <summary>
-	/// 当前旅途索引
-	/// </summary>
 	public int RouteIndex => ParseRouteIndex();
 
-	/// <summary>
-	/// 当前途径地区
-	/// </summary>
 	public short CurrentAreaId => ParseAreaId();
 
-	/// <summary>
-	/// 上个途径地区
-	/// </summary>
 	public short LastAreaId => ParseLastAreaId();
 
-	/// <summary>
-	/// 下个途径地区
-	/// </summary>
 	public short NextAreaId => ParseNextAreaId();
 
-	/// <summary>
-	/// 到达下个区域所需要额外消耗的时间
-	/// </summary>
 	public int NextCostDays => ParseNextCostDays();
 
 	public CrossAreaMoveInfo()
@@ -62,9 +38,6 @@ public class CrossAreaMoveInfo : ISerializableGameData
 		Route = new TravelRoute();
 	}
 
-	/// <summary>
-	/// 根据当前已消耗时间转换旅途索引
-	/// </summary>
 	public int ParseRouteIndex()
 	{
 		if (!Traveling)
@@ -85,9 +58,6 @@ public class CrossAreaMoveInfo : ISerializableGameData
 		return index;
 	}
 
-	/// <summary>
-	/// 根据已消耗时间转换当前途径地区
-	/// </summary>
 	public short ParseAreaId()
 	{
 		if (!Traveling)
@@ -102,9 +72,6 @@ public class CrossAreaMoveInfo : ISerializableGameData
 		return FromAreaId;
 	}
 
-	/// <summary>
-	/// 根据已消耗时间转换上个途径地区
-	/// </summary>
 	public short ParseLastAreaId()
 	{
 		if (!Traveling)
@@ -119,9 +86,6 @@ public class CrossAreaMoveInfo : ISerializableGameData
 		return FromAreaId;
 	}
 
-	/// <summary>
-	/// 根据已消耗时间转换下个途径地区
-	/// </summary>
 	public short ParseNextAreaId()
 	{
 		if (!Traveling)
@@ -136,9 +100,6 @@ public class CrossAreaMoveInfo : ISerializableGameData
 		return ToAreaId;
 	}
 
-	/// <summary>
-	/// 转换到达下个区域所需要额外消耗的时间
-	/// </summary>
 	public int ParseNextCostDays()
 	{
 		if (!Traveling || CurrentAreaId == ToAreaId)

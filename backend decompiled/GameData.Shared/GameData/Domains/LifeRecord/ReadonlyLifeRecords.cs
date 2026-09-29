@@ -7,19 +7,8 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LifeRecord;
 
-/// <summary>
-/// 只读的人物的经历的集合.
-/// 用于接收并展示档案模块返回的经历.
-/// 单条经历数据格式: size (uint8_t), date (int32_t), record_type (int16_t), optional arguments.
-/// </summary>
 public class ReadonlyLifeRecords : ReadonlyRecordCollection
 {
-	/// <summary>
-	/// 获得经历的子集
-	/// </summary>
-	/// <param name="startDate">经历的起始时间</param>
-	/// <param name="monthCount">总共几个月的经历</param>
-	/// <param name="readonlyLifeRecords"></param>
 	public unsafe void GetPartialLifeRecords(int startDate, int monthCount, ref ReadonlyLifeRecords readonlyLifeRecords)
 	{
 		if (readonlyLifeRecords == null)
@@ -61,11 +50,6 @@ public class ReadonlyLifeRecords : ReadonlyRecordCollection
 		readonlyLifeRecords.Size = size;
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息
-	/// </summary>
-	/// <param name="renderInfos">调用者保证传入时此集合为空</param>
-	/// <param name="argumentCollection">传入时可以不为空</param>
 	public void GetRenderInfos(List<LifeRecordRenderInfo> renderInfos, ArgumentCollection argumentCollection)
 	{
 		int index = -1;
@@ -80,13 +64,6 @@ public class ReadonlyLifeRecords : ReadonlyRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 获取指定时间范围内的经历的渲染信息
-	/// </summary>
-	/// <param name="renderInfos">调用者保证传入时此集合为空</param>
-	/// <param name="argumentCollection">传入时可以不为空</param>
-	/// <param name="startDate">需要渲染的经历的起始时间</param>
-	/// <param name="monthCount">需要渲染总共几个月的经历</param>
 	public (int, int[]) GetRenderInfosOfDates(List<LifeRecordRenderInfo> renderInfos, ArgumentCollection argumentCollection, int startDate, int monthCount)
 	{
 		int index = -1;
@@ -171,13 +148,6 @@ public class ReadonlyLifeRecords : ReadonlyRecordCollection
 		return (averageScore, monthScores);
 	}
 
-	/// <summary>
-	/// 计算得分
-	/// 需注意，修改这个函数时应同步修改<see cref="T:GameData.Domains.LifeRecord.TransferableRecord" />中的GetCalculatedLifeRecordScore
-	/// </summary>
-	/// <param name="renderInfo"></param>
-	/// <param name="argumentCollection"></param>
-	/// <returns></returns>
 	private int GetCalculatedLifeRecordScore(LifeRecordRenderInfo renderInfo, ArgumentCollection argumentCollection)
 	{
 		switch (renderInfo.RecordType)
@@ -225,12 +195,6 @@ public class ReadonlyLifeRecords : ReadonlyRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 获取指定索引的经历的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="argumentCollection">实参集合</param>
-	/// <returns></returns>
 	public new unsafe LifeRecordRenderInfo GetRenderInfo(int offset, ArgumentCollection argumentCollection)
 	{
 		fixed (byte* pRawData = RawData)
@@ -263,12 +227,6 @@ public class ReadonlyLifeRecords : ReadonlyRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 获取梦回经历中的太吾相关角色
-	/// 若经历会触发梦回事件，则第一个参数类型必为角色
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <returns>角色id, 经历模板Id</returns>
 	public unsafe (int, short) GetDreamBackRelatedCharacterId(int offset)
 	{
 		fixed (byte* pRawData = RawData)
@@ -286,12 +244,6 @@ public class ReadonlyLifeRecords : ReadonlyRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 获取指定经历的参数.
-	/// 如果指定经历为非来源经历, 则从第一个关联经历处获取参数.
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	private static string[] GetParameters(LifeRecordItem config)
 	{
 		if (config.IsSourceRecord)
@@ -302,9 +254,6 @@ public class ReadonlyLifeRecords : ReadonlyRecordCollection
 		return Config.LifeRecord.Instance[relatedTemplateId].Parameters;
 	}
 
-	/// <summary>
-	/// 获取所有经历的渲染信息 - 新版
-	/// </summary>
 	public TransferableLifeRecordData IntoData()
 	{
 		TransferableLifeRecordData data = new TransferableLifeRecordData();

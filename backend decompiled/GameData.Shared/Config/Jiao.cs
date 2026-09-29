@@ -7,421 +7,172 @@ namespace Config;
 [Serializable]
 public class Jiao : ConfigData<JiaoItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 白蛟
-		/// </summary>
 		public const short JiaoWhite = 0;
 
-		/// <summary>
-		/// 黑蛟
-		/// </summary>
 		public const short JiaoBlack = 1;
 
-		/// <summary>
-		/// 青蛟
-		/// </summary>
 		public const short JiaoGreen = 2;
 
-		/// <summary>
-		/// 赤蛟
-		/// </summary>
 		public const short JiaoRed = 3;
 
-		/// <summary>
-		/// 黄蛟
-		/// </summary>
 		public const short JiaoYellow = 4;
 
-		/// <summary>
-		/// 白黑蛟
-		/// </summary>
 		public const short JiaoWB = 5;
 
-		/// <summary>
-		/// 白青蛟
-		/// </summary>
 		public const short JiaoWG = 6;
 
-		/// <summary>
-		/// 白赤蛟
-		/// </summary>
 		public const short JiaoWR = 7;
 
-		/// <summary>
-		/// 白黄蛟
-		/// </summary>
 		public const short JiaoWY = 8;
 
-		/// <summary>
-		/// 黑青蛟
-		/// </summary>
 		public const short JiaoBG = 9;
 
-		/// <summary>
-		/// 黑赤蛟
-		/// </summary>
 		public const short JiaoBR = 10;
 
-		/// <summary>
-		/// 黑黄蛟
-		/// </summary>
 		public const short JiaoBY = 11;
 
-		/// <summary>
-		/// 青赤蛟
-		/// </summary>
 		public const short JiaoGR = 12;
 
-		/// <summary>
-		/// 青黄蛟
-		/// </summary>
 		public const short JiaoGY = 13;
 
-		/// <summary>
-		/// 赤黄蛟
-		/// </summary>
 		public const short JiaoRY = 14;
 
-		/// <summary>
-		/// 白黑青蛟
-		/// </summary>
 		public const short JiaoWBG = 15;
 
-		/// <summary>
-		/// 白黑赤蛟
-		/// </summary>
 		public const short JiaoWBR = 16;
 
-		/// <summary>
-		/// 白黑黄蛟
-		/// </summary>
 		public const short JiaoWBY = 17;
 
-		/// <summary>
-		/// 白青赤蛟
-		/// </summary>
 		public const short JiaoWGR = 18;
 
-		/// <summary>
-		/// 白青黄蛟
-		/// </summary>
 		public const short JiaoWGY = 19;
 
-		/// <summary>
-		/// 白赤黄蛟
-		/// </summary>
 		public const short JiaoWRY = 20;
 
-		/// <summary>
-		/// 黑青赤蛟
-		/// </summary>
 		public const short JiaoBGR = 21;
 
-		/// <summary>
-		/// 黑青黄蛟
-		/// </summary>
 		public const short JiaoBGY = 22;
 
-		/// <summary>
-		/// 黑赤黄蛟
-		/// </summary>
 		public const short JiaoBRY = 23;
 
-		/// <summary>
-		/// 青赤黄蛟
-		/// </summary>
 		public const short JiaoGRY = 24;
 
-		/// <summary>
-		/// 白黑青赤蛟
-		/// </summary>
 		public const short JiaoWBGR = 25;
 
-		/// <summary>
-		/// 白黑青黄蛟
-		/// </summary>
 		public const short JiaoWBGY = 26;
 
-		/// <summary>
-		/// 白黑赤黄蛟
-		/// </summary>
 		public const short JiaoWBRY = 27;
 
-		/// <summary>
-		/// 白青赤黄蛟
-		/// </summary>
 		public const short JiaoWGRY = 28;
 
-		/// <summary>
-		/// 黑青赤黄蛟
-		/// </summary>
 		public const short JiaoBGRY = 29;
 
-		/// <summary>
-		/// 白青赤黄黑蛟
-		/// </summary>
 		public const short JiaoWGRYB = 30;
 
-		/// <summary>
-		/// 囚牛
-		/// </summary>
 		public const short Qiuniu = 31;
 
-		/// <summary>
-		/// 睚眦
-		/// </summary>
 		public const short Yazi = 32;
 
-		/// <summary>
-		/// 嘲风
-		/// </summary>
 		public const short Chaofeng = 33;
 
-		/// <summary>
-		/// 蒲牢
-		/// </summary>
 		public const short Pulao = 34;
 
-		/// <summary>
-		/// 狻猊
-		/// </summary>
 		public const short Suanni = 35;
 
-		/// <summary>
-		/// 霸下
-		/// </summary>
 		public const short Baxia = 36;
 
-		/// <summary>
-		/// 狴犴
-		/// </summary>
 		public const short Bian = 37;
 
-		/// <summary>
-		/// 负屃
-		/// </summary>
 		public const short Fuxi = 38;
 
-		/// <summary>
-		/// 螭吻
-		/// </summary>
 		public const short Chiwen = 39;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 白蛟
-		/// </summary>
 		public static JiaoItem JiaoWhite => Instance[(short)0];
 
-		/// <summary>
-		/// 黑蛟
-		/// </summary>
 		public static JiaoItem JiaoBlack => Instance[(short)1];
 
-		/// <summary>
-		/// 青蛟
-		/// </summary>
 		public static JiaoItem JiaoGreen => Instance[(short)2];
 
-		/// <summary>
-		/// 赤蛟
-		/// </summary>
 		public static JiaoItem JiaoRed => Instance[(short)3];
 
-		/// <summary>
-		/// 黄蛟
-		/// </summary>
 		public static JiaoItem JiaoYellow => Instance[(short)4];
 
-		/// <summary>
-		/// 白黑蛟
-		/// </summary>
 		public static JiaoItem JiaoWB => Instance[(short)5];
 
-		/// <summary>
-		/// 白青蛟
-		/// </summary>
 		public static JiaoItem JiaoWG => Instance[(short)6];
 
-		/// <summary>
-		/// 白赤蛟
-		/// </summary>
 		public static JiaoItem JiaoWR => Instance[(short)7];
 
-		/// <summary>
-		/// 白黄蛟
-		/// </summary>
 		public static JiaoItem JiaoWY => Instance[(short)8];
 
-		/// <summary>
-		/// 黑青蛟
-		/// </summary>
 		public static JiaoItem JiaoBG => Instance[(short)9];
 
-		/// <summary>
-		/// 黑赤蛟
-		/// </summary>
 		public static JiaoItem JiaoBR => Instance[(short)10];
 
-		/// <summary>
-		/// 黑黄蛟
-		/// </summary>
 		public static JiaoItem JiaoBY => Instance[(short)11];
 
-		/// <summary>
-		/// 青赤蛟
-		/// </summary>
 		public static JiaoItem JiaoGR => Instance[(short)12];
 
-		/// <summary>
-		/// 青黄蛟
-		/// </summary>
 		public static JiaoItem JiaoGY => Instance[(short)13];
 
-		/// <summary>
-		/// 赤黄蛟
-		/// </summary>
 		public static JiaoItem JiaoRY => Instance[(short)14];
 
-		/// <summary>
-		/// 白黑青蛟
-		/// </summary>
 		public static JiaoItem JiaoWBG => Instance[(short)15];
 
-		/// <summary>
-		/// 白黑赤蛟
-		/// </summary>
 		public static JiaoItem JiaoWBR => Instance[(short)16];
 
-		/// <summary>
-		/// 白黑黄蛟
-		/// </summary>
 		public static JiaoItem JiaoWBY => Instance[(short)17];
 
-		/// <summary>
-		/// 白青赤蛟
-		/// </summary>
 		public static JiaoItem JiaoWGR => Instance[(short)18];
 
-		/// <summary>
-		/// 白青黄蛟
-		/// </summary>
 		public static JiaoItem JiaoWGY => Instance[(short)19];
 
-		/// <summary>
-		/// 白赤黄蛟
-		/// </summary>
 		public static JiaoItem JiaoWRY => Instance[(short)20];
 
-		/// <summary>
-		/// 黑青赤蛟
-		/// </summary>
 		public static JiaoItem JiaoBGR => Instance[(short)21];
 
-		/// <summary>
-		/// 黑青黄蛟
-		/// </summary>
 		public static JiaoItem JiaoBGY => Instance[(short)22];
 
-		/// <summary>
-		/// 黑赤黄蛟
-		/// </summary>
 		public static JiaoItem JiaoBRY => Instance[(short)23];
 
-		/// <summary>
-		/// 青赤黄蛟
-		/// </summary>
 		public static JiaoItem JiaoGRY => Instance[(short)24];
 
-		/// <summary>
-		/// 白黑青赤蛟
-		/// </summary>
 		public static JiaoItem JiaoWBGR => Instance[(short)25];
 
-		/// <summary>
-		/// 白黑青黄蛟
-		/// </summary>
 		public static JiaoItem JiaoWBGY => Instance[(short)26];
 
-		/// <summary>
-		/// 白黑赤黄蛟
-		/// </summary>
 		public static JiaoItem JiaoWBRY => Instance[(short)27];
 
-		/// <summary>
-		/// 白青赤黄蛟
-		/// </summary>
 		public static JiaoItem JiaoWGRY => Instance[(short)28];
 
-		/// <summary>
-		/// 黑青赤黄蛟
-		/// </summary>
 		public static JiaoItem JiaoBGRY => Instance[(short)29];
 
-		/// <summary>
-		/// 白青赤黄黑蛟
-		/// </summary>
 		public static JiaoItem JiaoWGRYB => Instance[(short)30];
 
-		/// <summary>
-		/// 囚牛
-		/// </summary>
 		public static JiaoItem Qiuniu => Instance[(short)31];
 
-		/// <summary>
-		/// 睚眦
-		/// </summary>
 		public static JiaoItem Yazi => Instance[(short)32];
 
-		/// <summary>
-		/// 嘲风
-		/// </summary>
 		public static JiaoItem Chaofeng => Instance[(short)33];
 
-		/// <summary>
-		/// 蒲牢
-		/// </summary>
 		public static JiaoItem Pulao => Instance[(short)34];
 
-		/// <summary>
-		/// 狻猊
-		/// </summary>
 		public static JiaoItem Suanni => Instance[(short)35];
 
-		/// <summary>
-		/// 霸下
-		/// </summary>
 		public static JiaoItem Baxia => Instance[(short)36];
 
-		/// <summary>
-		/// 狴犴
-		/// </summary>
 		public static JiaoItem Bian => Instance[(short)37];
 
-		/// <summary>
-		/// 负屃
-		/// </summary>
 		public static JiaoItem Fuxi => Instance[(short)38];
 
-		/// <summary>
-		/// 螭吻
-		/// </summary>
 		public static JiaoItem Chiwen => Instance[(short)39];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Jiao Instance = new Jiao();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "AdvantageProperty", "IndexOfCharacterTemplate", "IndexOfCarrierTemplate", "IndexOfAnimalTemplate", "EggMaterial", "TeenagerMaterial", "TemplateId", "ShadowImage", "BellowSound" };

@@ -3,9 +3,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.TaiwuEvent.EventOption;
 
-/// <summary>
-/// 事件的bool 值设置
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class EventBoolStateInfo : ISerializableGameData
 {
@@ -22,34 +19,19 @@ public class EventBoolStateInfo : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "EventBoolStateTemplateId", "BoolState", "RemoveBeforeNextEvent" };
 	}
 
-	/// <summary>
-	/// 配置表EventBoolState 模板id
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public short EventBoolStateTemplateId;
 
-	/// <summary>
-	/// 设置值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public bool BoolState;
 
-	/// <summary>
-	/// 是否只生效一次
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public bool RemoveBeforeNextEvent;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public EventBoolStateInfo()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public EventBoolStateInfo(EventBoolStateInfo other)
 	{
 		EventBoolStateTemplateId = other.EventBoolStateTemplateId;
@@ -57,9 +39,6 @@ public class EventBoolStateInfo : ISerializableGameData
 		RemoveBeforeNextEvent = other.RemoveBeforeNextEvent;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(EventBoolStateInfo other)
 	{
 		EventBoolStateTemplateId = other.EventBoolStateTemplateId;

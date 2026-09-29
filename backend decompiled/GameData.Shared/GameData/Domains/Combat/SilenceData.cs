@@ -5,40 +5,22 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 封禁数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class SilenceData : ISerializableGameData
 {
-	/// <summary>
-	/// 封禁中的功法
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, CountdownData> CombatSkill = new Dictionary<short, CountdownData>();
 
-	/// <summary>
-	/// 封禁中的兵器键
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemKey> WeaponKeys = new List<ItemKey>();
 
-	/// <summary>
-	/// 封禁中的兵器帧
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CountdownData> WeaponFrames = new List<CountdownData>();
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SilenceData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SilenceData(SilenceData other)
 	{
 		CombatSkill = ((other.CombatSkill == null) ? null : new Dictionary<short, CountdownData>(other.CombatSkill));
@@ -46,9 +28,6 @@ public class SilenceData : ISerializableGameData
 		WeaponFrames = ((other.WeaponFrames == null) ? null : new List<CountdownData>(other.WeaponFrames));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SilenceData other)
 	{
 		CombatSkill = ((other.CombatSkill == null) ? null : new Dictionary<short, CountdownData>(other.CombatSkill));
@@ -56,13 +35,11 @@ public class SilenceData : ISerializableGameData
 		WeaponFrames = ((other.WeaponFrames == null) ? null : new List<CountdownData>(other.WeaponFrames));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -76,7 +53,6 @@ public class SilenceData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -121,7 +97,6 @@ public class SilenceData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

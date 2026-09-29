@@ -5,165 +5,84 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 用于完整Tips界面的角色显示数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class CharacterDisplayDataForTooltip : ISerializableGameData
 {
-	/// <summary>
-	///             人物实例 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 人物模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 创建类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CreatingType;
 
-	/// <summary>
-	/// 组织
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrganizationInfo;
 
-	/// <summary>
-	/// 年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short Age;
 
-	/// <summary>
-	/// 姓名
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
-	/// <summary>
-	/// 出家状态
-	/// </summary>
 	[SerializableGameDataField]
 	public byte MonkType;
 
-	/// <summary>
-	/// 法号
-	/// </summary>
 	[SerializableGameDataField]
 	public MonasticTitle MonasticTitle;
 
-	/// <summary>
-	/// 自定义显示名
-	/// </summary>
 	[SerializableGameDataField]
 	public int CustomDisplayNameId;
 
-	/// <summary>
-	/// 魅力
-	/// </summary>
 	[SerializableGameDataField]
 	public short Attraction;
 
-	/// <summary>
-	/// 外貌
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
-	/// <summary>
-	/// 行为类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BehaviorType;
 
-	/// <summary>
-	/// 主属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes MainAttributes;
 
-	/// <summary>
-	/// 特性列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> FeatureIds;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 异性相
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Transgender;
 
-	/// <summary>
-	/// 武学资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillQualifications;
 
-	/// <summary>
-	/// 武学资质成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CombatSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillQualifications;
 
-	/// <summary>
-	/// 技艺资质成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 计算出的七元，通常仅显示用
-	/// </summary>
 	[SerializableGameDataField]
 	public Personalities Personalities;
 
-	/// <summary>
-	/// 队友指令组
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> TeammateCommands;
 
-	/// <summary>
-	/// 昵称id
-	/// </summary>
 	[SerializableGameDataField]
 	public int NickNameId;
 
-	/// <summary>
-	/// 技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 对太吾好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public short FavorabilityToTaiwu;
 
-	/// <summary>
-	/// 是否和太吾实际交互过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInteractedCharacter;
 
@@ -217,13 +136,11 @@ public class CharacterDisplayDataForTooltip : ISerializableGameData
 		return nameRelatedData;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 162;
@@ -237,7 +154,6 @@ public class CharacterDisplayDataForTooltip : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -335,7 +251,6 @@ public class CharacterDisplayDataForTooltip : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

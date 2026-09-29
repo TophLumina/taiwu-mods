@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物Avatar显示相关数据
-/// </summary>
 [Serializable]
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, IsExtensible = true)]
 public class AvatarRelatedData : ISerializableGameData
@@ -27,40 +24,22 @@ public class AvatarRelatedData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "AvatarData", "DisplayAge", "ClothingDisplayId", "HasNewGoods" };
 	}
 
-	/// <summary>
-	/// Avatar数据
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarData AvatarData;
 
-	/// <summary>
-	/// Avatar表现年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short DisplayAge;
 
-	/// <summary>
-	/// 衣装显示id
-	/// </summary>
 	[SerializableGameDataField]
 	public short ClothingDisplayId;
 
-	/// <summary>
-	/// 是否有新进货物
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HasNewGoods;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AvatarRelatedData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AvatarRelatedData(AvatarRelatedData other)
 	{
 		AvatarData = new AvatarData(other.AvatarData);
@@ -69,9 +48,6 @@ public class AvatarRelatedData : ISerializableGameData
 		HasNewGoods = other.HasNewGoods;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AvatarRelatedData other)
 	{
 		AvatarData = new AvatarData(other.AvatarData);
@@ -80,13 +56,11 @@ public class AvatarRelatedData : ISerializableGameData
 		HasNewGoods = other.HasNewGoods;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 7;
@@ -98,7 +72,6 @@ public class AvatarRelatedData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -132,7 +105,6 @@ public class AvatarRelatedData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -2,34 +2,16 @@ using System.Collections.Generic;
 
 namespace GameData.Domains.Story.SectMainStory;
 
-/// <summary>
-/// 峨眉指点武学类型
-/// </summary>
 public static class EmeiGuidanceCombatSkillType
 {
-	/// <summary>
-	/// 内功
-	/// </summary>
 	public const int Inner = 0;
 
-	/// <summary>
-	/// 拳掌
-	/// </summary>
 	public const int FistAndPalm = 1;
 
-	/// <summary>
-	/// 指法
-	/// </summary>
 	public const int Finger = 2;
 
-	/// <summary>
-	/// 剑法
-	/// </summary>
 	public const int Sword = 3;
 
-	/// <summary>
-	/// 奇门
-	/// </summary>
 	public const int Special = 4;
 
 	public const int Count = 5;

@@ -3,9 +3,6 @@ using GameData.Serializer;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 五方神龙 - 龙的数据结构
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class ChildrenOfLoong : ISerializableGameData
 {
@@ -32,51 +29,27 @@ public class ChildrenOfLoong : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[8] { "Key", "NameId", "Behavior", "Properties", "Id", "JiaoTemplateId", "LoongTemplateId", "Gender" };
 	}
 
-	/// <summary>
-	/// 蛟从卵开始使用的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 物品Key
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey Key;
 
-	/// <summary>
-	/// 名字字符串的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int NameId;
 
-	/// <summary>
-	/// 立场
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Behavior;
 
-	/// <summary>
-	/// 属性
-	/// </summary>
 	[SerializableGameDataField]
 	public JiaoProperty Properties;
 
-	/// <summary>
-	/// 化龙前蛟的模板Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short JiaoTemplateId;
 
-	/// <summary>
-	/// 龙的模板Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short LoongTemplateId;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Gender;
 
@@ -130,19 +103,11 @@ public class ChildrenOfLoong : ISerializableGameData
 		Gender = childOfLoong.Gender;
 	}
 
-	/// <summary>
-	/// 获取名称
-	/// </summary>
-	/// <returns></returns>
 	public string GetNameText()
 	{
 		return GetNameRelatedData().GetName();
 	}
 
-	/// <summary>
-	/// 获取名称相关数据
-	/// </summary>
-	/// <returns></returns>
 	public JiaoLoongNameRelatedData GetNameRelatedData()
 	{
 		return new JiaoLoongNameRelatedData
@@ -154,9 +119,6 @@ public class ChildrenOfLoong : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ChildrenOfLoong(ChildrenOfLoong other)
 	{
 		Key = other.Key;
@@ -169,9 +131,6 @@ public class ChildrenOfLoong : ISerializableGameData
 		Gender = other.Gender;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ChildrenOfLoong other)
 	{
 		Key = other.Key;
@@ -184,13 +143,11 @@ public class ChildrenOfLoong : ISerializableGameData
 		Gender = other.Gender;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 96;
@@ -201,7 +158,6 @@ public class ChildrenOfLoong : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -229,7 +185,6 @@ public class ChildrenOfLoong : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

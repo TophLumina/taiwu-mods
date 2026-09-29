@@ -55,8 +55,6 @@ public class LifeRecordDomain : BaseGameDataDomain
 
 	private static readonly DataInfluence[][] CacheInfluences = new DataInfluence[1][];
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	private void OnInitializedDomainData()
 	{
 	}
@@ -428,8 +426,21 @@ public class LifeRecordDomain : BaseGameDataDomain
 		return data;
 	}
 
+	public int GetLastRecordDate(int charId)
+	{
+		GameData.Domains.Character.Character element;
+		TransferableLifeRecordData data = (DomainManager.Character.TryGetElement_Objects(charId, out element) ? ParseQuery(QueryLast(charId, 1)).IntoData() : ParseQuery(QueryDead(charId)).IntoData());
+		List<TransferableRecord> record = data.Record;
+		return (record != null && record.Count > 0) ? data.EndDate : DomainManager.World.GetCurrDate();
+	}
+
 	[DomainMethod]
 	public TransferableLifeRecordData GetReversedRecord(DataContext context, int charId, int startCount, int readCount, bool isDreamBack = false)
+	{
+		return GetReversedRecordImpl(charId, startCount, readCount, isDreamBack);
+	}
+
+	public TransferableLifeRecordData GetReversedRecordImpl(int charId, int startCount, int readCount, bool isDreamBack = false)
 	{
 		TransferableLifeRecordData data;
 		if (!isDreamBack)
@@ -470,15 +481,13 @@ public class LifeRecordDomain : BaseGameDataDomain
 			obj = (characterDisplayDataForDreamBackRelations.Item2 ? (item.Main.BirthDate, true) : (0, false));
 		}
 		(int, bool) birthDate = obj;
-		ref int item2 = ref birthDate.Item1;
-		int num = item2;
 		List<NameAndLifeRelatedData> list2;
 		if (!isDreamBack)
 		{
 			CharacterDomain character2 = DomainManager.Character;
-			int num2 = 1;
-			List<int> list = new List<int>(num2);
-			CollectionsMarshal.SetCount(list, num2);
+			int num = 1;
+			List<int> list = new List<int>(num);
+			CollectionsMarshal.SetCount(list, num);
 			Span<int> span = CollectionsMarshal.AsSpan(list);
 			int index = 0;
 			span[index] = charId;
@@ -491,13 +500,20 @@ public class LifeRecordDomain : BaseGameDataDomain
 			List<int> list3 = new List<int>(index);
 			CollectionsMarshal.SetCount(list3, index);
 			Span<int> span2 = CollectionsMarshal.AsSpan(list3);
-			int num2 = 0;
-			span2[num2] = charId;
+			int num = 0;
+			span2[num] = charId;
 			list2 = extra.GetNameAndLifeRelatedDataListForDreamBack(list3);
 		}
 		short charTemplateId = list2[0].NameRelatedData.CharTemplateId;
+		ref int item2 = ref birthDate.Item1;
+		int num2 = item2;
 		bool flag = ((charTemplateId < 968 || charTemplateId > 1011) ? true : false);
-		item2 = num + ((!flag) ? 192 : 0);
+		item2 = num2 + ((!flag) ? 192 : 0);
+		CharacterItem itemOrDefault = Config.Character.Instance.GetItemOrDefault(charTemplateId);
+		if (itemOrDefault != null && itemOrDefault.ConvertToIntelligent)
+		{
+			birthDate.Item2 = false;
+		}
 		if (birthDate.Item2)
 		{
 			if (birthDate.Item1 != data.StartDate)

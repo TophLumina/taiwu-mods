@@ -7,241 +7,100 @@ namespace Config;
 [Serializable]
 public class CricketPolymorphEvent : ConfigData<CricketPolymorphEventItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 呆物
-		/// </summary>
 		public const short Trash = 0;
 
-		/// <summary>
-		/// 绣花针
-		/// </summary>
 		public const short XiuHuaZhen = 1;
 
-		/// <summary>
-		/// 两头枪
-		/// </summary>
 		public const short LiangTouQiang = 2;
 
-		/// <summary>
-		/// 吹铃
-		/// </summary>
 		public const short ChuiLing = 3;
 
-		/// <summary>
-		/// 跑马黄
-		/// </summary>
 		public const short PaoMaHuang = 4;
 
-		/// <summary>
-		/// 玉锄头
-		/// </summary>
 		public const short YuChuTou = 5;
 
-		/// <summary>
-		/// 披袍轩甲
-		/// </summary>
 		public const short PiPaoXuanJia = 6;
 
-		/// <summary>
-		/// 反生名
-		/// </summary>
 		public const short FanShengMing = 7;
 
-		/// <summary>
-		/// 朱砂额
-		/// </summary>
 		public const short ZhuShaE = 8;
 
-		/// <summary>
-		/// 头陀
-		/// </summary>
 		public const short TouTuo = 9;
 
-		/// <summary>
-		/// 铁弹子
-		/// </summary>
 		public const short TieDanZi = 10;
 
-		/// <summary>
-		/// 赤须
-		/// </summary>
 		public const short ChiXu = 11;
 
-		/// <summary>
-		/// 玉尾
-		/// </summary>
 		public const short YuWei = 12;
 
-		/// <summary>
-		/// 油纸灯
-		/// </summary>
 		public const short YouZhiDeng = 13;
 
-		/// <summary>
-		/// 真三色
-		/// </summary>
 		public const short ZhenSanSe = 14;
 
-		/// <summary>
-		/// 草三段
-		/// </summary>
 		public const short CaoSanDuan = 15;
 
-		/// <summary>
-		/// 真紫黄
-		/// </summary>
 		public const short ZhenZiHuang = 16;
 
-		/// <summary>
-		/// 梅花翅
-		/// </summary>
 		public const short MeiHuaChi = 17;
 
-		/// <summary>
-		/// 天蓝青
-		/// </summary>
 		public const short TianLanQing = 18;
 
-		/// <summary>
-		/// 三段锦
-		/// </summary>
 		public const short SanDuanJin = 19;
 
-		/// <summary>
-		/// 三太子
-		/// </summary>
 		public const short SanTaiZi = 20;
 
-		/// <summary>
-		/// 八败
-		/// </summary>
 		public const short BaBai = 21;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 呆物
-		/// </summary>
 		public static CricketPolymorphEventItem Trash => Instance[(short)0];
 
-		/// <summary>
-		/// 绣花针
-		/// </summary>
 		public static CricketPolymorphEventItem XiuHuaZhen => Instance[(short)1];
 
-		/// <summary>
-		/// 两头枪
-		/// </summary>
 		public static CricketPolymorphEventItem LiangTouQiang => Instance[(short)2];
 
-		/// <summary>
-		/// 吹铃
-		/// </summary>
 		public static CricketPolymorphEventItem ChuiLing => Instance[(short)3];
 
-		/// <summary>
-		/// 跑马黄
-		/// </summary>
 		public static CricketPolymorphEventItem PaoMaHuang => Instance[(short)4];
 
-		/// <summary>
-		/// 玉锄头
-		/// </summary>
 		public static CricketPolymorphEventItem YuChuTou => Instance[(short)5];
 
-		/// <summary>
-		/// 披袍轩甲
-		/// </summary>
 		public static CricketPolymorphEventItem PiPaoXuanJia => Instance[(short)6];
 
-		/// <summary>
-		/// 反生名
-		/// </summary>
 		public static CricketPolymorphEventItem FanShengMing => Instance[(short)7];
 
-		/// <summary>
-		/// 朱砂额
-		/// </summary>
 		public static CricketPolymorphEventItem ZhuShaE => Instance[(short)8];
 
-		/// <summary>
-		/// 头陀
-		/// </summary>
 		public static CricketPolymorphEventItem TouTuo => Instance[(short)9];
 
-		/// <summary>
-		/// 铁弹子
-		/// </summary>
 		public static CricketPolymorphEventItem TieDanZi => Instance[(short)10];
 
-		/// <summary>
-		/// 赤须
-		/// </summary>
 		public static CricketPolymorphEventItem ChiXu => Instance[(short)11];
 
-		/// <summary>
-		/// 玉尾
-		/// </summary>
 		public static CricketPolymorphEventItem YuWei => Instance[(short)12];
 
-		/// <summary>
-		/// 油纸灯
-		/// </summary>
 		public static CricketPolymorphEventItem YouZhiDeng => Instance[(short)13];
 
-		/// <summary>
-		/// 真三色
-		/// </summary>
 		public static CricketPolymorphEventItem ZhenSanSe => Instance[(short)14];
 
-		/// <summary>
-		/// 草三段
-		/// </summary>
 		public static CricketPolymorphEventItem CaoSanDuan => Instance[(short)15];
 
-		/// <summary>
-		/// 真紫黄
-		/// </summary>
 		public static CricketPolymorphEventItem ZhenZiHuang => Instance[(short)16];
 
-		/// <summary>
-		/// 梅花翅
-		/// </summary>
 		public static CricketPolymorphEventItem MeiHuaChi => Instance[(short)17];
 
-		/// <summary>
-		/// 天蓝青
-		/// </summary>
 		public static CricketPolymorphEventItem TianLanQing => Instance[(short)18];
 
-		/// <summary>
-		/// 三段锦
-		/// </summary>
 		public static CricketPolymorphEventItem SanDuanJin => Instance[(short)19];
 
-		/// <summary>
-		/// 三太子
-		/// </summary>
 		public static CricketPolymorphEventItem SanTaiZi => Instance[(short)20];
 
-		/// <summary>
-		/// 八败
-		/// </summary>
 		public static CricketPolymorphEventItem BaBai => Instance[(short)21];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CricketPolymorphEvent Instance = new CricketPolymorphEvent();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

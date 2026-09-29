@@ -31,7 +31,7 @@ public class CharacterDisplayDataForGuard : ISerializableGameData
 	public int GetSerializedSize()
 	{
 		int totalSize = 7;
-		totalSize = ((Guards == null) ? (totalSize + 2) : (totalSize + (2 + new NameRelatedData().GetSerializedSize() * Guards.Count)));
+		totalSize = ((Guards == null) ? (totalSize + 2) : (totalSize + (2 + 32 * Guards.Count)));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

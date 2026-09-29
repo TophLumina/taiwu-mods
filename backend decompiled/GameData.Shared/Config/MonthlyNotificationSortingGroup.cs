@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class MonthlyNotificationSortingGroup : ConfigData<MonthlyNotificationSortingGroupItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MonthlyNotificationSortingGroup Instance = new MonthlyNotificationSortingGroup();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId" };
@@ -250,12 +247,14 @@ public class MonthlyNotificationSortingGroup : ConfigData<MonthlyNotificationSor
 		_dataArray.Add(new MonthlyNotificationSortingGroupItem(209, LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Name_209"), LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Desc_209"), 1321, onTop: true, hidden: false, 0u));
 		_dataArray.Add(new MonthlyNotificationSortingGroupItem(210, LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Name_210"), LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Desc_210"), 300, onTop: true, hidden: true, 0u));
 		_dataArray.Add(new MonthlyNotificationSortingGroupItem(211, LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Name_211"), LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Desc_211"), 300, onTop: true, hidden: true, 0u));
+		_dataArray.Add(new MonthlyNotificationSortingGroupItem(212, LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Name_212"), LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Desc_212"), 150, onTop: true, hidden: true, 0u));
+		_dataArray.Add(new MonthlyNotificationSortingGroupItem(213, LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Name_213"), LocalStringManager.GetConfig("MonthlyNotificationSortingGroup_language", "Desc_213"), 1000, onTop: true, hidden: true, 0u));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<MonthlyNotificationSortingGroupItem>(212);
+		_dataArray = new List<MonthlyNotificationSortingGroupItem>(214);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

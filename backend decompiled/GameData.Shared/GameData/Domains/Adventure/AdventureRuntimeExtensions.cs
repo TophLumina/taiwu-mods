@@ -2,14 +2,8 @@ using GameData.Adventure;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇运行时拓展方法集
-/// </summary>
 public static class AdventureRuntimeExtensions
 {
-	/// <summary>
-	/// 是否参与人物
-	/// </summary>
 	public static bool ContainsCharacter(this IAdventureRuntime runtime, int charId)
 	{
 		if (!runtime.IsTemporaryCharacter(charId))
@@ -19,12 +13,9 @@ public static class AdventureRuntimeExtensions
 		return true;
 	}
 
-	/// <summary>
-	/// 召集参与人物
-	/// </summary>
 	public static bool CallCharacters(this IAdventureRuntime runtime, IAdventureContextBridge context)
 	{
-		if (runtime.StatusType.IsActive())
+		if (runtime.StatusType == EAdventureStatusType.Entered)
 		{
 			return false;
 		}
@@ -56,9 +47,6 @@ public static class AdventureRuntimeExtensions
 		return true;
 	}
 
-	/// <summary>
-	/// 检测是否未满足拉人条件需要自动移除，如满足拉人条件则会进入就绪状态
-	/// </summary>
 	public static bool AutoCheckSatisfied(this IAdventureRuntime runtime, IAdventureContextBridge context)
 	{
 		if (runtime.StatusType.IsActive())
@@ -86,9 +74,6 @@ public static class AdventureRuntimeExtensions
 		return true;
 	}
 
-	/// <summary>
-	/// 离线进入隐藏状态，需要调用方 Set
-	/// </summary>
 	public static bool OfflineHide(this IAdventureRuntime runtime, IAdventureContextBridge context)
 	{
 		EAdventureStatusType statusType = runtime.StatusType;
@@ -101,9 +86,6 @@ public static class AdventureRuntimeExtensions
 		return true;
 	}
 
-	/// <summary>
-	/// 离线结束隐藏状态，需要调用方 Set
-	/// </summary>
 	public static bool OfflineUnhide(this IAdventureRuntime runtime, IAdventureContextBridge context)
 	{
 		if (runtime.StatusType != EAdventureStatusType.Hide)

@@ -98,7 +98,7 @@ public class ItemFunctions
 		sbyte outlineType = GameData.Domains.Character.BehaviorType.GetBehaviorType(morality);
 		foreach (CombatSkillItem combatSkill in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
 		{
-			if (combatSkill.Grade == grade && combatSkill.SectId == sectId)
+			if (combatSkill.Grade == grade && combatSkill.SectId == sectId && combatSkill.BookId >= 0)
 			{
 				short bookTemplateId = combatSkill.BookId;
 				ItemKey directBook = DomainManager.Item.CreateSkillBook(context, bookTemplateId, 5, -1, outlineType, 100);

@@ -103,12 +103,12 @@ public class WealthDemandRequestItemAction : ICharacterActionImpl, ISerializable
 		return true;
 	}
 
-	bool ICharacterActionImpl.CheckValid(Character character, CharacterActionData actionData)
+	public bool CheckValid(Character character, CharacterActionData actionData)
 	{
 		return actionData.TargetChar.GetInventory().Items.ContainsKey(TargetItem);
 	}
 
-	void ICharacterActionImpl.PostExecuteForTaiwuTarget(DataContext context, Character character, CharacterActionData actionData)
+	public void PostExecuteForTaiwuTarget(DataContext context, Character character, CharacterActionData actionData)
 	{
 		Character targetChar = actionData.TargetChar;
 		int selfCharId = character.GetId();
@@ -118,7 +118,7 @@ public class WealthDemandRequestItemAction : ICharacterActionImpl, ISerializable
 		CharacterDomain.AddLockMovementCharSet(selfCharId);
 	}
 
-	void ICharacterActionImpl.PostExecute(DataContext context, Character character, CharacterActionData actionData)
+	public void PostExecute(DataContext context, Character character, CharacterActionData actionData)
 	{
 		Character targetChar = actionData.TargetChar;
 		int selfCharId = character.GetId();

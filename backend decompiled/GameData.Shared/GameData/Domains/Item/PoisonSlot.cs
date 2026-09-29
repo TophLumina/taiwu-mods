@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 淬毒槽位
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class PoisonSlot : ISerializableGameData
 {
@@ -23,31 +20,16 @@ public class PoisonSlot : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "MedicineTemplateId", "CondensedMedicineTemplateIdList" };
 	}
 
-	/// <summary>
-	/// 最大毒物数量，基本1，凝炼2，总计3
-	/// </summary>
 	public static readonly int MaxMedicineCount = 3;
 
-	/// <summary>
-	/// 药毒物品模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short MedicineTemplateId = -1;
 
-	/// <summary>
-	/// 凝炼的毒物模板ID列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> CondensedMedicineTemplateIdList;
 
-	/// <summary>
-	/// 最大凝炼毒物数量
-	/// </summary>
 	public static int MaxCondensedMedicineCount => MaxMedicineCount - 1;
 
-	/// <summary>
-	/// 是否存在凝炼材料
-	/// </summary>
 	public bool IsCondensed
 	{
 		get
@@ -65,24 +47,12 @@ public class PoisonSlot : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 当前药毒物品数量
-	/// </summary>
 	public int CurrentMedicineCount => (IsValid ? 1 : 0) + (CondensedMedicineTemplateIdList?.Count ?? 0);
 
-	/// <summary>
-	/// 药毒物品数量已达上限
-	/// </summary>
 	public bool MedicineCountIsMax => CurrentMedicineCount == MaxMedicineCount;
 
-	/// <summary>
-	/// 是否有效
-	/// </summary>
 	public bool IsValid => MedicineTemplateId >= 0;
 
-	/// <summary>
-	/// 药毒物品配置
-	/// </summary>
 	public MedicineItem MedicineConfig
 	{
 		get
@@ -95,9 +65,6 @@ public class PoisonSlot : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 是否为毒物，解毒时可能是解药
-	/// </summary>
 	public bool IsAddPoison
 	{
 		get
@@ -111,9 +78,6 @@ public class PoisonSlot : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取毒素的量和等级
-	/// </summary>
 	public unsafe PoisonsAndLevels GetPoisonsAndLevels()
 	{
 		PoisonsAndLevels poisons = default(PoisonsAndLevels);
@@ -126,9 +90,6 @@ public class PoisonSlot : ISerializableGameData
 		return poisons;
 	}
 
-	/// <summary>
-	/// 获取毒素的量
-	/// </summary>
 	public short GetPoisonValue()
 	{
 		if (IsValid && IsAddPoison)
@@ -148,9 +109,6 @@ public class PoisonSlot : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 淬毒
-	/// </summary>
 	public void SetPoison(short materialTemplateId, IReadOnlyList<short> condensedMedicineTemplateIdList)
 	{
 		MedicineTemplateId = materialTemplateId;
@@ -182,9 +140,6 @@ public class PoisonSlot : ISerializableGameData
 		CondensedMedicineTemplateIdList.AddRange(condensedMedicineTemplateIdList);
 	}
 
-	/// <summary>
-	/// 是否与目标毒物是相同毒素类型
-	/// </summary>
 	public bool IsSameType(short templateId)
 	{
 		if (IsValid && templateId >= 0)
@@ -196,10 +151,6 @@ public class PoisonSlot : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取毒素类型
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetPoisonType()
 	{
 		if (MedicineTemplateId < 0)
@@ -209,10 +160,6 @@ public class PoisonSlot : ISerializableGameData
 		return MedicineConfig.PoisonType;
 	}
 
-	/// <summary>
-	/// 获取全部毒物的模板ID
-	/// </summary>
-	/// <returns></returns>
 	public List<short> GetAllMedicineTemplateId(bool includeCondensed = false)
 	{
 		if (!IsValid)
@@ -228,18 +175,12 @@ public class PoisonSlot : ISerializableGameData
 		return list;
 	}
 
-	/// <summary>
-	/// 重置为空数据
-	/// </summary>
 	public void Clear()
 	{
 		MedicineTemplateId = -1;
 		CondensedMedicineTemplateIdList?.Clear();
 	}
 
-	/// <summary>
-	/// 比较值是否相同
-	/// </summary>
 	public bool SameOf(PoisonSlot other)
 	{
 		if (this == other)
@@ -278,38 +219,27 @@ public class PoisonSlot : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public PoisonSlot()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public PoisonSlot(PoisonSlot other)
 	{
 		MedicineTemplateId = other.MedicineTemplateId;
 		CondensedMedicineTemplateIdList = ((other.CondensedMedicineTemplateIdList == null) ? null : new List<short>(other.CondensedMedicineTemplateIdList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(PoisonSlot other)
 	{
 		MedicineTemplateId = other.MedicineTemplateId;
 		CondensedMedicineTemplateIdList = ((other.CondensedMedicineTemplateIdList == null) ? null : new List<short>(other.CondensedMedicineTemplateIdList));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -321,7 +251,6 @@ public class PoisonSlot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -354,7 +283,6 @@ public class PoisonSlot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class MysteryEffect : ConfigData<MysteryEffectItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MysteryEffect Instance = new MysteryEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "BonusValues", "BonusEffects", "TemplateId" };

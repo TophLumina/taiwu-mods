@@ -9,75 +9,39 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地图显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class MapBlockCharacterList : ISerializableGameData
 {
-	/// <summary>
-	/// 特殊Npc，可能包含神树
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> SpecialCharacters;
 
-	/// <summary>
-	/// 正常Npc
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> NormalCharacters;
 
-	/// <summary>
-	/// 感染Npc
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> InfectedCharacters;
 
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> EnemyCharacters;
 
-	/// <summary>
-	/// 随机敌人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<MapTemplateEnemyInfo> RandomEnemies;
 
-	/// <summary>
-	/// 动物敌人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<Animal> Animals;
 
-	/// <summary>
-	/// 商人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CaravanDisplayData> Caravans;
 
-	/// <summary>
-	/// 坟墓
-	/// </summary>
 	[SerializableGameDataField]
 	public List<GraveDisplayData> Graves;
 
-	/// <summary>
-	/// 守卫数据
-	/// 没有数据则不显示图标
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, bool> HasGuardInfo;
 
-	/// <summary>
-	/// 已交互的Npc的数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet InteractedCharSet;
 
-	/// <summary>
-	/// 获取Npc
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public CharacterDisplayData FindChar(int charId)
 	{
 		IEnumerable<CharacterDisplayData> specialCharacters = SpecialCharacters;
@@ -146,7 +110,7 @@ public class MapBlockCharacterList : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize = ((RandomEnemies == null) ? (totalSize + 2) : (totalSize + (2 + default(MapTemplateEnemyInfo).GetSerializedSize() * RandomEnemies.Count)));
+		totalSize = ((RandomEnemies == null) ? (totalSize + 2) : (totalSize + (2 + 8 * RandomEnemies.Count)));
 		if (Animals != null)
 		{
 			totalSize += 2;
@@ -171,15 +135,7 @@ public class MapBlockCharacterList : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		if (Graves != null)
-		{
-			GraveDisplayData GravesElement = new GraveDisplayData();
-			totalSize += 2 + GravesElement.GetSerializedSize() * Graves.Count;
-		}
-		else
-		{
-			totalSize += 2;
-		}
+		totalSize = ((Graves == null) ? (totalSize + 2) : (totalSize + (2 + 52 * Graves.Count)));
 		totalSize += 4;
 		if (HasGuardInfo != null)
 		{

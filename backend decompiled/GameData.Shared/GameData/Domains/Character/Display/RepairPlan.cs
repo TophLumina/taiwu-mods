@@ -15,64 +15,30 @@ namespace GameData.Domains.Character.Display;
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true, NotForArchive = true)]
 public class RepairPlan : ISerializableGameData
 {
-	/// <summary>
-	/// 工具耐久损耗，损耗值会记录在SpecialArg中
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 17)]
 	public ItemDisplayData[] CostDurabilityPage1 = new ItemDisplayData[17];
 
-	/// <summary>
-	/// 工具耐久损耗，损耗值会记录在SpecialArg中
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 17)]
 	public ItemDisplayData[] CostDurabilityPage2 = new ItemDisplayData[17];
 
-	/// <summary>
-	/// 工具耐久损耗，损耗值会记录在SpecialArg中
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 17)]
 	public ItemDisplayData[] CostDurabilityPageAll = new ItemDisplayData[17];
 
-	/// <summary>
-	/// 单次修复工具耐久损耗，损耗值会记录在SpecialArg中
-	/// 正常
-	/// 正 = 损耗值
-	/// 0 = 无损耗
-	/// Invalid
-	/// 0 = 无法修复
-	/// -1 = 资源不足
-	/// -2 = 造诣不足
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 17)]
 	public ItemDisplayData[] CostDurabilityDetail = new ItemDisplayData[17];
 
-	/// <summary>
-	/// 资源消耗
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 17)]
 	public ResourceInts[] CostResources = new ResourceInts[17];
 
-	/// <summary>
-	/// 全部修复资源消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts CostResourcesPage1;
 
-	/// <summary>
-	/// 全部修复资源消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts CostResourcesPage2;
 
-	/// <summary>
-	/// 全部修复资源消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts CostResourcesPageAll;
 
-	/// <summary>
-	/// 装备
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 17)]
 	public ItemDisplayData[] EquipItems = new ItemDisplayData[17];
 
@@ -80,11 +46,6 @@ public class RepairPlan : ISerializableGameData
 
 	private static readonly sbyte[] AuxSlots = new sbyte[4] { 11, 14, 15, 16 };
 
-	/// <summary>
-	/// 修复顺序
-	/// 在按RepairPlan修复时候必须按此顺序进行遍历，否则可能红字
-	/// （也就是，按递增顺序遍历）
-	/// </summary>
 	private static readonly sbyte[] AllRepairableSlots = new sbyte[14]
 	{
 		0, 1, 2, 3, 5, 6, 7, 8, 9, 10,
@@ -184,7 +145,7 @@ public class RepairPlan : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 0;
+		int totalSize = 640;
 		for (int i = 0; i < 17; i++)
 		{
 			totalSize = ((CostDurabilityPage1[i] == null) ? (totalSize + 2) : (totalSize + (2 + CostDurabilityPage1[i].GetSerializedSize())));
@@ -203,14 +164,7 @@ public class RepairPlan : ISerializableGameData
 		}
 		for (int m = 0; m < 17; m++)
 		{
-			totalSize += CostResources[m].GetSerializedSize();
-		}
-		totalSize += CostResourcesPage1.GetSerializedSize();
-		totalSize += CostResourcesPage2.GetSerializedSize();
-		totalSize += CostResourcesPageAll.GetSerializedSize();
-		for (int n = 0; n < 17; n++)
-		{
-			totalSize = ((EquipItems[n] == null) ? (totalSize + 2) : (totalSize + (2 + EquipItems[n].GetSerializedSize())));
+			totalSize = ((EquipItems[m] == null) ? (totalSize + 2) : (totalSize + (2 + EquipItems[m].GetSerializedSize())));
 		}
 		if (totalSize > 4)
 		{

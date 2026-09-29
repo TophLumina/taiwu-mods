@@ -8,71 +8,32 @@ namespace Config;
 [Serializable]
 public class DebateNodeEffect : ConfigData<DebateNodeEffectItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 快人快语
-		/// </summary>
 		public const short Just = 0;
 
-		/// <summary>
-		/// 好言安慰
-		/// </summary>
 		public const short Kind = 1;
 
-		/// <summary>
-		/// 旁敲侧击
-		/// </summary>
 		public const short Even = 2;
 
-		/// <summary>
-		/// 乱言怪语
-		/// </summary>
 		public const short Rebel = 3;
 
-		/// <summary>
-		/// 声威袭人
-		/// </summary>
 		public const short Egoistic = 4;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 快人快语
-		/// </summary>
 		public static DebateNodeEffectItem Just => Instance[(short)0];
 
-		/// <summary>
-		/// 好言安慰
-		/// </summary>
 		public static DebateNodeEffectItem Kind => Instance[(short)1];
 
-		/// <summary>
-		/// 旁敲侧击
-		/// </summary>
 		public static DebateNodeEffectItem Even => Instance[(short)2];
 
-		/// <summary>
-		/// 乱言怪语
-		/// </summary>
 		public static DebateNodeEffectItem Rebel => Instance[(short)3];
 
-		/// <summary>
-		/// 声威袭人
-		/// </summary>
 		public static DebateNodeEffectItem Egoistic => Instance[(short)4];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DebateNodeEffect Instance = new DebateNodeEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

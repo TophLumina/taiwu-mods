@@ -27,7 +27,6 @@ public class CombatCharacterStateMachine
 		RegisterState(new CombatCharacterStateIdle(combatDomain, combatChar));
 		RegisterState(new CombatCharacterStateSelectChangeTrick(combatDomain, combatChar));
 		RegisterState(new CombatCharacterStatePrepareAttack(combatDomain, combatChar));
-		RegisterState(new CombatCharacterStateBreakAttack(combatDomain, combatChar));
 		RegisterState(new CombatCharacterStateUnlockAttack(combatDomain, combatChar));
 		RegisterState(new CombatCharacterStateRawCreate(combatDomain, combatChar));
 		RegisterState(new CombatCharacterStatePrepareUnlockAttack(combatDomain, combatChar));
@@ -45,6 +44,9 @@ public class CombatCharacterStateMachine
 		RegisterState(new CombatCharacterStateAnimalAttack(combatDomain, combatChar));
 		RegisterState(new CombatCharacterStateJumpMove(combatDomain, combatChar));
 		RegisterState(new CombatCharacterStateSpecialShow(combatDomain, combatChar));
+		RegisterState(new CombatCharacterStateUseGoldenWire(combatDomain, combatChar));
+		RegisterState(new CombatCharacterStateSmarterChicken(combatDomain, combatChar));
+		RegisterState(new CombatCharacterStateAddChickenPoint(combatDomain, combatChar));
 	}
 
 	public void OnUpdate()
@@ -153,6 +155,14 @@ public class CombatCharacterStateMachine
 		{
 			return CombatCharacterStateType.RawCreate;
 		}
+		if (_combatChar.NeedUseGoldenWire)
+		{
+			return CombatCharacterStateType.UseGoldenWire;
+		}
+		if (_combatChar.GetCombatReserveData().Type == ECombatReserveType.SmarterChicken)
+		{
+			return CombatCharacterStateType.SmarterChicken;
+		}
 		if (_combatChar.NeedUnlockAttack)
 		{
 			return CombatCharacterStateType.UnlockAttack;
@@ -160,10 +170,6 @@ public class CombatCharacterStateMachine
 		if (_combatChar.GetCombatReserveData().NeedUnlockWeaponIndex >= 0)
 		{
 			return CombatCharacterStateType.PrepareUnlockAttack;
-		}
-		if (_combatChar.NeedBreakAttack)
-		{
-			return CombatCharacterStateType.BreakAttack;
 		}
 		if (_combatChar.NeedNormalAttack)
 		{

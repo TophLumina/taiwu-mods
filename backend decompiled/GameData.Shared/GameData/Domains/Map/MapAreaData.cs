@@ -6,132 +6,59 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地图区域数据
-/// </summary>
 public class MapAreaData : ISerializableGameData
 {
-	/// <summary>
-	/// 常规区域个数
-	/// </summary>
 	public const int RegularAreasCount = 45;
 
-	/// <summary>
-	/// 废弃区域个数
-	/// </summary>
 	public const int BrokenAreasCount = 90;
 
-	/// <summary>
-	/// 世界区域个数 (常规 + 废弃)
-	/// </summary>
 	public const int WorldAreasCount = 135;
 
-	/// <summary>
-	/// 特殊区域个数
-	/// </summary>
 	public const int SpecialAreasCount = 6;
 
-	/// <summary>
-	/// 所有区域个数（世界 + 特殊）
-	/// </summary>
 	public const int TotalAreasCount = 141;
 
-	/// <summary>
-	/// 每个州域废弃区域个数
-	/// </summary>
 	public const int BrokenAreasPerState = 6;
 
-	/// <summary>
-	/// 深谷区域索引
-	/// </summary>
 	public const short BornAreaId = 135;
 
-	/// <summary>
-	/// 引导区域索引
-	/// </summary>
 	public const short GuideAreaId = 136;
 
-	/// <summary>
-	/// 隐秘小村区域索引
-	/// </summary>
 	public const short SecretVillageAreaId = 137;
 
-	/// <summary>
-	/// 毁坏（演出用）区域索引
-	/// </summary>
 	public const short BrokenPerformAreaId = 138;
 
-	/// <summary>
-	/// 过去的太吾村，复制的太吾村地图数据
-	/// </summary>
 	public const short PastTaiwuVillageAreaId = 139;
 
-	/// <summary>
-	/// 柴山
-	/// </summary>
 	public const short ChaishanAreaId = 140;
 
-	/// <summary>
-	/// 区域内最大的定居点数量
-	/// </summary>
 	public const int MaxSettlementsCount = 3;
 
-	/// <summary>
-	/// 区域模板ID [MapArea]
-	/// </summary>
 	[SerializableGameDataField]
 	private short _templateId;
 
-	/// <summary>
-	/// 在世界地图区域列表中的索引【0-44:真实世界数据数组位置索引 45-深谷 46-新手引导地图】
-	/// </summary>
 	[SerializableGameDataField]
 	private short _areaIndex;
 
-	/// <summary>
-	/// 定居点信息集合
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 3)]
 	public SettlementInfo[] SettlementInfos;
 
-	/// <summary>
-	/// 驿站的地块索引.
-	/// 小于 0 表示此区域无驿站.
-	/// </summary>
 	[SerializableGameDataField]
 	public short StationBlockId;
 
-	/// <summary>
-	/// 区域是否已被发现
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Discovered;
 
-	/// <summary>
-	/// 驿站是否已开通
-	/// </summary>
 	[SerializableGameDataField]
 	public bool StationUnlocked;
 
-	/// <summary>
-	/// 恩义值
-	/// </summary>
 	[Obsolete("Use DomainManager.Extra._spiritualDebt instead")]
 	[SerializableGameDataField]
 	public short SpiritualDebt;
 
-	/// <summary>
-	/// 相邻区域集合
-	/// 仅在游戏开始时初始化一次
-	/// </summary>
 	[SerializableGameDataField]
 	public HashSet<short> NeighborAreas;
 
-	/// <summary>
-	/// 是否属于常规地区
-	/// </summary>
-	/// <param name="areaId"></param>
-	/// <returns></returns>
 	public static bool IsRegularArea(short areaId)
 	{
 		if (areaId < 45)
@@ -141,9 +68,6 @@ public class MapAreaData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否属于完整地区（常规 + 特殊）
-	/// </summary>
 	public static bool IsNormalArea(short areaId)
 	{
 		if (areaId >= 45)
@@ -153,9 +77,6 @@ public class MapAreaData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 是否属于毁坏地区
-	/// </summary>
 	public static bool IsBrokenArea(short areaId)
 	{
 		if (areaId >= 45)
@@ -171,9 +92,6 @@ public class MapAreaData : ISerializableGameData
 		NeighborAreas = new HashSet<short>();
 	}
 
-	/// <summary>
-	/// 设置模板和实例 ID, 以及其他数据的默认值
-	/// </summary>
 	public void Init(short templateId, short areaIndex)
 	{
 		_templateId = templateId;
@@ -338,10 +256,6 @@ public class MapAreaData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 获取区域模板 ID
-	/// </summary>
-	/// <returns></returns>
 	public short GetTemplateId()
 	{
 		return _templateId;
@@ -352,19 +266,11 @@ public class MapAreaData : ISerializableGameData
 		return _areaIndex;
 	}
 
-	/// <summary>
-	/// 获取区域配置
-	/// </summary>
 	public MapAreaItem GetConfig()
 	{
 		return MapArea.Instance[_templateId];
 	}
 
-	/// <summary>
-	/// 获取指定地块索引的定居点信息.
-	/// 大地块的附属地块必须传入所属地块索引.
-	/// </summary>
-	/// <returns>定居点信息索引, 小于 0 表示该地块不为定居点</returns>
 	public int GetSettlementIndex(short blockId)
 	{
 		int i = 0;

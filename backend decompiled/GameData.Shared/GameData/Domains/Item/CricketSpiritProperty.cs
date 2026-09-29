@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 促织灵性属性加成
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class CricketSpiritProperty : ISerializableGameData
 {
@@ -22,15 +19,9 @@ public class CricketSpiritProperty : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "PropertyAddValues", "GrowthCount" };
 	}
 
-	/// <summary>
-	/// 属性成长值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public Dictionary<ECricketCombatPropertyType, int> PropertyAddValues;
 
-	/// <summary>
-	/// 已成长次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int GrowthCount;
 
@@ -49,38 +40,27 @@ public class CricketSpiritProperty : ISerializableGameData
 		return core;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CricketSpiritProperty()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CricketSpiritProperty(CricketSpiritProperty other)
 	{
 		PropertyAddValues = ((other.PropertyAddValues == null) ? null : new Dictionary<ECricketCombatPropertyType, int>(other.PropertyAddValues));
 		GrowthCount = other.GrowthCount;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CricketSpiritProperty other)
 	{
 		PropertyAddValues = ((other.PropertyAddValues == null) ? null : new Dictionary<ECricketCombatPropertyType, int>(other.PropertyAddValues));
 		GrowthCount = other.GrowthCount;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -92,7 +72,6 @@ public class CricketSpiritProperty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 2;
@@ -107,7 +86,6 @@ public class CricketSpiritProperty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地格筛选查找数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class MapBlockFindData : ISerializableGameData
 {
@@ -28,9 +25,6 @@ public class MapBlockFindData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "MultiSelectData", "SingleSelectData", "SingleSliderData", "RangeSliderData", "ToggleSliderData" };
 	}
 
-	/// <summary>
-	/// 方案数量上限
-	/// </summary>
 	public const int PresetCount = 10;
 
 	[SerializableGameDataField(FieldIndex = 0)]
@@ -48,9 +42,6 @@ public class MapBlockFindData : ISerializableGameData
 	[SerializableGameDataField(FieldIndex = 4)]
 	public Dictionary<EFilterItemKey, ToggleSliderValue> ToggleSliderData;
 
-	/// <summary>
-	/// 获取控件数据数量
-	/// </summary>
 	public int TotalDataCount => MultiSelectData.Count + SingleSelectData.Count + SingleSliderData.Count + RangeSliderData.Count + ToggleSliderData.Count;
 
 	public MapBlockFindData()
@@ -62,9 +53,6 @@ public class MapBlockFindData : ISerializableGameData
 		ToggleSliderData = new Dictionary<EFilterItemKey, ToggleSliderValue>();
 	}
 
-	/// <summary>
-	/// 清空所有筛选数据
-	/// </summary>
 	public void Clear()
 	{
 		MultiSelectData.Clear();

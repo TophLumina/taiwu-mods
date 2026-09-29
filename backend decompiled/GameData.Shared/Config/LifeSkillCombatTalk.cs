@@ -7,221 +7,92 @@ namespace Config;
 [Serializable]
 public class LifeSkillCombatTalk : ConfigData<LifeSkillCombatTalkItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 准备阶段开场白
-		/// </summary>
 		public const short Prepare_Prologue = 0;
 
-		/// <summary>
-		/// 准备阶段禁选
-		/// </summary>
 		public const short Prepare_Ban = 1;
 
-		/// <summary>
-		/// 准备阶段探明
-		/// </summary>
 		public const short Prepare_Verify = 2;
 
-		/// <summary>
-		/// 准备阶段让选
-		/// </summary>
 		public const short Prepare_Give_Away = 3;
 
-		/// <summary>
-		/// 准备阶段秘闻成功
-		/// </summary>
 		public const short Prepare_Secret_Succeeded = 4;
 
-		/// <summary>
-		/// 准备阶段利诱成功
-		/// </summary>
 		public const short Prepare_Tempt_Succeeded = 5;
 
-		/// <summary>
-		/// 准备阶段秘闻失败
-		/// </summary>
 		public const short Prepare_Secret_Failed = 6;
 
-		/// <summary>
-		/// 准备阶段利诱失败
-		/// </summary>
 		public const short Prepare_Tempt_Failed = 7;
 
-		/// <summary>
-		/// 准备阶段AI秘闻
-		/// </summary>
 		public const short Prepare_Ai_Secret = 8;
 
-		/// <summary>
-		/// 准备阶段AI利诱
-		/// </summary>
 		public const short Prepare_Ai_Tempt = 9;
 
-		/// <summary>
-		/// 准备阶段主题决定
-		/// </summary>
 		public const short Prepare_Decide_Theme = 10;
 
-		/// <summary>
-		/// 开场白
-		/// </summary>
 		public const short Combat_Prologue = 11;
 
-		/// <summary>
-		/// 放置论点
-		/// </summary>
 		public const short Combat_CreateUnit = 12;
 
-		/// <summary>
-		/// 论点冲突胜利
-		/// </summary>
 		public const short Combat_Conflict_Win = 13;
 
-		/// <summary>
-		/// 论点冲突失败
-		/// </summary>
 		public const short Combat_Conflict_Lose = 14;
 
-		/// <summary>
-		/// 认输
-		/// </summary>
 		public const short Combat_Give_In = 15;
 
-		/// <summary>
-		/// 迫使认输
-		/// </summary>
 		public const short Combat_Force_Give_In = 16;
 
-		/// <summary>
-		/// 拒绝迫使认输
-		/// </summary>
 		public const short Combat_Refuse_Force_Give_In = 17;
 
-		/// <summary>
-		/// 正常战败
-		/// </summary>
 		public const short Combat_Failed = 18;
 
-		/// <summary>
-		/// 胜利
-		/// </summary>
 		public const short Combat_Succeeded = 19;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 准备阶段开场白
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Prologue => Instance[(short)0];
 
-		/// <summary>
-		/// 准备阶段禁选
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Ban => Instance[(short)1];
 
-		/// <summary>
-		/// 准备阶段探明
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Verify => Instance[(short)2];
 
-		/// <summary>
-		/// 准备阶段让选
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Give_Away => Instance[(short)3];
 
-		/// <summary>
-		/// 准备阶段秘闻成功
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Secret_Succeeded => Instance[(short)4];
 
-		/// <summary>
-		/// 准备阶段利诱成功
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Tempt_Succeeded => Instance[(short)5];
 
-		/// <summary>
-		/// 准备阶段秘闻失败
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Secret_Failed => Instance[(short)6];
 
-		/// <summary>
-		/// 准备阶段利诱失败
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Tempt_Failed => Instance[(short)7];
 
-		/// <summary>
-		/// 准备阶段AI秘闻
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Ai_Secret => Instance[(short)8];
 
-		/// <summary>
-		/// 准备阶段AI利诱
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Ai_Tempt => Instance[(short)9];
 
-		/// <summary>
-		/// 准备阶段主题决定
-		/// </summary>
 		public static LifeSkillCombatTalkItem Prepare_Decide_Theme => Instance[(short)10];
 
-		/// <summary>
-		/// 开场白
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Prologue => Instance[(short)11];
 
-		/// <summary>
-		/// 放置论点
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_CreateUnit => Instance[(short)12];
 
-		/// <summary>
-		/// 论点冲突胜利
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Conflict_Win => Instance[(short)13];
 
-		/// <summary>
-		/// 论点冲突失败
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Conflict_Lose => Instance[(short)14];
 
-		/// <summary>
-		/// 认输
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Give_In => Instance[(short)15];
 
-		/// <summary>
-		/// 迫使认输
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Force_Give_In => Instance[(short)16];
 
-		/// <summary>
-		/// 拒绝迫使认输
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Refuse_Force_Give_In => Instance[(short)17];
 
-		/// <summary>
-		/// 正常战败
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Failed => Instance[(short)18];
 
-		/// <summary>
-		/// 胜利
-		/// </summary>
 		public static LifeSkillCombatTalkItem Combat_Succeeded => Instance[(short)19];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LifeSkillCombatTalk Instance = new LifeSkillCombatTalk();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "NormalContent", "JustContent", "KindContent", "EvenContent", "RebelContent", "EgoisticContent", "TemplateId" };

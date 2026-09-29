@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AdventureGenerateCondition : ConfigData<AdventureGenerateConditionItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureGenerateCondition Instance = new AdventureGenerateCondition();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TargetId", "EnterMonthList", "IncludeTypes", "ActiveNotification", "PrepareNotification", "TemplateId", "StateWeights", "AreaWeights" };

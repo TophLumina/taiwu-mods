@@ -7,331 +7,136 @@ namespace Config;
 [Serializable]
 public class AvatarExtraParts : ConfigData<AvatarExtraPartsItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 1号体型_面纱_1
-		/// </summary>
 		public const short Avatar_1_Veil_1 = 0;
 
-		/// <summary>
-		/// 2号体型_面纱_1
-		/// </summary>
 		public const short Avatar_2_Veil_1 = 1;
 
-		/// <summary>
-		/// 3号体型_面纱_1
-		/// </summary>
 		public const short Avatar_3_Veil_1 = 2;
 
-		/// <summary>
-		/// 4号体型_面纱_1
-		/// </summary>
 		public const short Avatar_4_Veil_1 = 3;
 
-		/// <summary>
-		/// 5号体型_面纱_1
-		/// </summary>
 		public const short Avatar_5_Veil_1 = 4;
 
-		/// <summary>
-		/// 6号体型_面纱_1
-		/// </summary>
 		public const short Avatar_6_Veil_1 = 5;
 
-		/// <summary>
-		/// 1号体型_面具_1
-		/// </summary>
 		public const short AvatarMask_0 = 6;
 
-		/// <summary>
-		/// 6号体型_面具_3
-		/// </summary>
 		public const short AvatarMask_Count = 23;
 
-		/// <summary>
-		/// 1号体型_羞红_1
-		/// </summary>
 		public const short Avatar_1_Blush_1 = 24;
 
-		/// <summary>
-		/// 2号体型_羞红_1
-		/// </summary>
 		public const short Avatar_2_Blush_1 = 25;
 
-		/// <summary>
-		/// 3号体型_羞红_1
-		/// </summary>
 		public const short Avatar_3_Blush_1 = 26;
 
-		/// <summary>
-		/// 4号体型_羞红_1
-		/// </summary>
 		public const short Avatar_4_Blush_1 = 27;
 
-		/// <summary>
-		/// 5号体型_羞红_1
-		/// </summary>
 		public const short Avatar_5_Blush_1 = 28;
 
-		/// <summary>
-		/// 6号体型_羞红_1
-		/// </summary>
 		public const short Avatar_6_Blush_1 = 29;
 
-		/// <summary>
-		/// 1号体型_鸭头_1
-		/// </summary>
 		public const short avatar_1_clothpart_31_1 = 30;
 
-		/// <summary>
-		/// 2号体型_鸭头_1
-		/// </summary>
 		public const short avatar_2_clothpart_31_1 = 31;
 
-		/// <summary>
-		/// 3号体型_鸭头_1
-		/// </summary>
 		public const short avatar_3_clothpart_31_1 = 32;
 
-		/// <summary>
-		/// 4号体型_鸭头_1
-		/// </summary>
 		public const short avatar_4_clothpart_31_1 = 33;
 
-		/// <summary>
-		/// 5号体型_鸭头_1
-		/// </summary>
 		public const short avatar_5_clothpart_31_1 = 34;
 
-		/// <summary>
-		/// 6号体型_鸭头_1
-		/// </summary>
 		public const short avatar_6_clothpart_31_1 = 35;
 
-		/// <summary>
-		/// 1号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_1_JieqingMask_1 = 36;
 
-		/// <summary>
-		/// 2号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_2_JieqingMask_1 = 37;
 
-		/// <summary>
-		/// 3号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_3_JieqingMask_1 = 38;
 
-		/// <summary>
-		/// 4号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_4_JieqingMask_1 = 39;
 
-		/// <summary>
-		/// 5号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_5_JieqingMask_1 = 40;
 
-		/// <summary>
-		/// 6号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_6_JieqingMask_1 = 41;
 
-		/// <summary>
-		/// 251号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_251_JieqingMask_1 = 42;
 
-		/// <summary>
-		/// 252号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_252_JieqingMask_1 = 43;
 
-		/// <summary>
-		/// 253号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_253_JieqingMask_1 = 44;
 
-		/// <summary>
-		/// 254号体型_界青面具_1
-		/// </summary>
 		public const short Avatar_254_JieqingMask_1 = 45;
 
-		/// <summary>
-		/// 1号体型_玄灰标记_1
-		/// </summary>
 		public const short Avatar_1_DashAsh_1 = 46;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 1号体型_面纱_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_1_Veil_1 => Instance[(short)0];
 
-		/// <summary>
-		/// 2号体型_面纱_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_2_Veil_1 => Instance[(short)1];
 
-		/// <summary>
-		/// 3号体型_面纱_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_3_Veil_1 => Instance[(short)2];
 
-		/// <summary>
-		/// 4号体型_面纱_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_4_Veil_1 => Instance[(short)3];
 
-		/// <summary>
-		/// 5号体型_面纱_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_5_Veil_1 => Instance[(short)4];
 
-		/// <summary>
-		/// 6号体型_面纱_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_6_Veil_1 => Instance[(short)5];
 
-		/// <summary>
-		/// 1号体型_面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem AvatarMask_0 => Instance[(short)6];
 
-		/// <summary>
-		/// 6号体型_面具_3
-		/// </summary>
 		public static AvatarExtraPartsItem AvatarMask_Count => Instance[(short)23];
 
-		/// <summary>
-		/// 1号体型_羞红_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_1_Blush_1 => Instance[(short)24];
 
-		/// <summary>
-		/// 2号体型_羞红_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_2_Blush_1 => Instance[(short)25];
 
-		/// <summary>
-		/// 3号体型_羞红_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_3_Blush_1 => Instance[(short)26];
 
-		/// <summary>
-		/// 4号体型_羞红_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_4_Blush_1 => Instance[(short)27];
 
-		/// <summary>
-		/// 5号体型_羞红_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_5_Blush_1 => Instance[(short)28];
 
-		/// <summary>
-		/// 6号体型_羞红_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_6_Blush_1 => Instance[(short)29];
 
-		/// <summary>
-		/// 1号体型_鸭头_1
-		/// </summary>
 		public static AvatarExtraPartsItem avatar_1_clothpart_31_1 => Instance[(short)30];
 
-		/// <summary>
-		/// 2号体型_鸭头_1
-		/// </summary>
 		public static AvatarExtraPartsItem avatar_2_clothpart_31_1 => Instance[(short)31];
 
-		/// <summary>
-		/// 3号体型_鸭头_1
-		/// </summary>
 		public static AvatarExtraPartsItem avatar_3_clothpart_31_1 => Instance[(short)32];
 
-		/// <summary>
-		/// 4号体型_鸭头_1
-		/// </summary>
 		public static AvatarExtraPartsItem avatar_4_clothpart_31_1 => Instance[(short)33];
 
-		/// <summary>
-		/// 5号体型_鸭头_1
-		/// </summary>
 		public static AvatarExtraPartsItem avatar_5_clothpart_31_1 => Instance[(short)34];
 
-		/// <summary>
-		/// 6号体型_鸭头_1
-		/// </summary>
 		public static AvatarExtraPartsItem avatar_6_clothpart_31_1 => Instance[(short)35];
 
-		/// <summary>
-		/// 1号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_1_JieqingMask_1 => Instance[(short)36];
 
-		/// <summary>
-		/// 2号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_2_JieqingMask_1 => Instance[(short)37];
 
-		/// <summary>
-		/// 3号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_3_JieqingMask_1 => Instance[(short)38];
 
-		/// <summary>
-		/// 4号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_4_JieqingMask_1 => Instance[(short)39];
 
-		/// <summary>
-		/// 5号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_5_JieqingMask_1 => Instance[(short)40];
 
-		/// <summary>
-		/// 6号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_6_JieqingMask_1 => Instance[(short)41];
 
-		/// <summary>
-		/// 251号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_251_JieqingMask_1 => Instance[(short)42];
 
-		/// <summary>
-		/// 252号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_252_JieqingMask_1 => Instance[(short)43];
 
-		/// <summary>
-		/// 253号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_253_JieqingMask_1 => Instance[(short)44];
 
-		/// <summary>
-		/// 254号体型_界青面具_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_254_JieqingMask_1 => Instance[(short)45];
 
-		/// <summary>
-		/// 1号体型_玄灰标记_1
-		/// </summary>
 		public static AvatarExtraPartsItem Avatar_1_DashAsh_1 => Instance[(short)46];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AvatarExtraParts Instance = new AvatarExtraParts();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "AvatarId", "Type", "Name", "PositionFollow", "LayerFollow", "LayerOffset", "ColorFollow", "ScaleFollow", "DynamicDuckHead" };

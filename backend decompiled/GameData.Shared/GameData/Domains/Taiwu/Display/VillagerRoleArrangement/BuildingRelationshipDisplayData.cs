@@ -2,44 +2,26 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 
-/// <summary>
-/// 联络感情
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class BuildingRelationshipDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 好感度变化
-	/// </summary>
 	[SerializableGameDataField]
 	public int RelationshipChange;
 
-	/// <summary>
-	/// 当前工作设置的是提升还是降低好感度
-	/// </summary>
-	/// <returns></returns>
 	[SerializableGameDataField]
 	public bool IsIncreaseRelationship;
 
-	/// <summary>
-	/// 影响人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int AffectedPeopleCount;
 
-	/// <summary>
-	/// 秘闻获取概率，文人才有
-	/// </summary>
 	[SerializableGameDataField]
 	public int SecretInformationGainChange;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 13;
@@ -50,7 +32,6 @@ public class BuildingRelationshipDisplayData : IVillagerRoleArrangementDisplayDa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = RelationshipChange;
@@ -68,7 +49,6 @@ public class BuildingRelationshipDisplayData : IVillagerRoleArrangementDisplayDa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

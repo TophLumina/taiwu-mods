@@ -7,201 +7,84 @@ namespace Config;
 [Serializable]
 public class AdventureType : ConfigData<AdventureTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 未分类
-		/// </summary>
 		public const sbyte None = 0;
 
-		/// <summary>
-		/// 剧情奇遇
-		/// </summary>
 		public const sbyte MainStoryLine = 1;
 
-		/// <summary>
-		/// 地区主线
-		/// </summary>
 		public const sbyte SectMainStoryLine = 2;
 
-		/// <summary>
-		/// 互动奇遇
-		/// </summary>
 		public const sbyte Interaction = 3;
 
-		/// <summary>
-		/// 外道巢穴
-		/// </summary>
 		public const sbyte HereticStronghold = 4;
 
-		/// <summary>
-		/// 义士据点
-		/// </summary>
 		public const sbyte RighteousStronghold = 5;
 
-		/// <summary>
-		/// 四季奇遇
-		/// </summary>
 		public const sbyte SeasonalEvent = 6;
 
-		/// <summary>
-		/// 男版招亲
-		/// </summary>
 		public const sbyte ContestForBride = 7;
 
-		/// <summary>
-		/// 女版招亲
-		/// </summary>
 		public const sbyte ContestForGroom = 8;
 
-		/// <summary>
-		/// 天材地宝食材
-		/// </summary>
 		public const sbyte MaterialResourceFood = 9;
 
-		/// <summary>
-		/// 天材地宝木材
-		/// </summary>
 		public const sbyte MaterialResourceWood = 10;
 
-		/// <summary>
-		/// 天材地宝金铁
-		/// </summary>
 		public const sbyte MaterialResourceMetal = 11;
 
-		/// <summary>
-		/// 天材地宝玉石
-		/// </summary>
 		public const sbyte MaterialRresourceJade = 12;
 
-		/// <summary>
-		/// 天材地宝织物
-		/// </summary>
 		public const sbyte MaterialResourceFabric = 13;
 
-		/// <summary>
-		/// 天材地宝药材
-		/// </summary>
 		public const sbyte MaterialResourceHerb = 14;
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public const sbyte SwordTomb = 15;
 
-		/// <summary>
-		/// 恋爱DLC奇遇
-		/// </summary>
 		public const sbyte InteractionOfLove = 16;
 
-		/// <summary>
-		/// 奇书宝典
-		/// </summary>
 		public const sbyte LegendaryBook = 17;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 未分类
-		/// </summary>
 		public static AdventureTypeItem None => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 剧情奇遇
-		/// </summary>
 		public static AdventureTypeItem MainStoryLine => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 地区主线
-		/// </summary>
 		public static AdventureTypeItem SectMainStoryLine => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 互动奇遇
-		/// </summary>
 		public static AdventureTypeItem Interaction => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 外道巢穴
-		/// </summary>
 		public static AdventureTypeItem HereticStronghold => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 义士据点
-		/// </summary>
 		public static AdventureTypeItem RighteousStronghold => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 四季奇遇
-		/// </summary>
 		public static AdventureTypeItem SeasonalEvent => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 男版招亲
-		/// </summary>
 		public static AdventureTypeItem ContestForBride => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 女版招亲
-		/// </summary>
 		public static AdventureTypeItem ContestForGroom => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 天材地宝食材
-		/// </summary>
 		public static AdventureTypeItem MaterialResourceFood => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 天材地宝木材
-		/// </summary>
 		public static AdventureTypeItem MaterialResourceWood => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 天材地宝金铁
-		/// </summary>
 		public static AdventureTypeItem MaterialResourceMetal => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 天材地宝玉石
-		/// </summary>
 		public static AdventureTypeItem MaterialRresourceJade => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 天材地宝织物
-		/// </summary>
 		public static AdventureTypeItem MaterialResourceFabric => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 天材地宝药材
-		/// </summary>
 		public static AdventureTypeItem MaterialResourceHerb => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public static AdventureTypeItem SwordTomb => Instance[(sbyte)15];
 
-		/// <summary>
-		/// 恋爱DLC奇遇
-		/// </summary>
 		public static AdventureTypeItem InteractionOfLove => Instance[(sbyte)16];
 
-		/// <summary>
-		/// 奇书宝典
-		/// </summary>
 		public static AdventureTypeItem LegendaryBook => Instance[(sbyte)17];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureType Instance = new AdventureType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayName", "TemplateId", "ColorName" };

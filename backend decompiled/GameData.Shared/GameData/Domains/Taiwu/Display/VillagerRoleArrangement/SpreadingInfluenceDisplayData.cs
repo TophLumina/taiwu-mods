@@ -2,43 +2,26 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 
-/// <summary>
-/// 传播影响
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class SpreadingInfluenceDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 文化或安定变化量
-	/// </summary>
 	[SerializableGameDataField]
 	public int SafetyOrCultureChange;
 
-	/// <summary>
-	/// 工作设置是需要升高还是降低文化或安定
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsIncreaseSafetyOrCulture;
 
-	/// <summary>
-	/// 威望获取量
-	/// </summary>
 	[SerializableGameDataField]
 	public int AuthorityGain;
 
-	/// <summary>
-	/// 讨伐外道或集结外道的概率。文人的工作中不用填此数据，护冢独有。
-	/// </summary>
 	[SerializableGameDataField]
 	public int GatherOrBattleEnemyProbability;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 13;
@@ -49,7 +32,6 @@ public class SpreadingInfluenceDisplayData : IVillagerRoleArrangementDisplayData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = SafetyOrCultureChange;
@@ -67,7 +49,6 @@ public class SpreadingInfluenceDisplayData : IVillagerRoleArrangementDisplayData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

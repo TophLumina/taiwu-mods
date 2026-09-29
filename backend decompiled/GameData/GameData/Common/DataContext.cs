@@ -96,23 +96,13 @@ public class DataContext : IAdventureContextBridge
 		_randomSourceBackup = null;
 	}
 
-	public void CallCharacterByAdventure(Location location, GameData.Domains.Character.Character character)
-	{
-		if (character.GetAgeGroup() != 0)
-		{
-			DomainManager.Character.LeaveGroup(this, character);
-		}
-		DomainManager.Character.GroupMove(this, character, location);
-		DomainManager.Character.HideCharacterOnMap(this, character, 4uL);
-	}
-
 	void IAdventureContextBridge.ReleaseCalledCharacters(IEnumerable<int> calledCharacters)
 	{
 		foreach (int charId in calledCharacters)
 		{
 			if (DomainManager.Character.TryGetElement_Objects(charId, out var character))
 			{
-				DomainManager.Character.UnhideCharacterOnMap(this, character, 4uL);
+				DomainManager.Character.ReleaseCharacterByAdventure(this, character);
 			}
 		}
 	}
@@ -168,6 +158,7 @@ public class DataContext : IAdventureContextBridge
 	{
 		calledCharacters.Clear();
 		GameData.Domains.Character.Filters.CharacterFilterRules.ToPredicates(filterKey.FilterRuleTemplateId, Predicates, location);
+		Predicates.Add(DomainManager.Character.CallCharacterByAdventureNotInCooldown);
 		switch (filterKey.SearchRangeType)
 		{
 		case 0:
@@ -192,13 +183,13 @@ public class DataContext : IAdventureContextBridge
 			GameData.Domains.Character.Character character = FoundCharacters[i];
 			int charId = character.GetId();
 			calledCharacters.Add(charId);
-			CallCharacterByAdventure(location, character);
+			DomainManager.Character.CallCharacterByAdventure(this, location, character);
 		}
 		Predicates.Clear();
 		FoundCharacters.Clear();
 	}
 
-	int IAdventureContextBridge.GenerateTemporaryCharacter(short templateId)
+	int IAdventureContextBridge.GenerateTemporaryCharacter(short templateId, Location location)
 	{
 		CharacterItem config = Config.Character.Instance[templateId];
 		byte creatingType = config.CreatingType;
@@ -218,8 +209,11 @@ public class DataContext : IAdventureContextBridge
 		if (character2 != null)
 		{
 			DomainManager.Character.CompleteCreatingCharacter(character2.GetId());
+			character2.SetLocation(location, this);
+			character2.ActiveExternalRelationState(this, 4uL);
+			return character2.GetId();
 		}
-		return character2?.GetId() ?? (-1);
+		return -1;
 	}
 
 	int IAdventureContextBridge.GenerateTemporaryCharacter(CharacterFilterKey filterKey, Location location)

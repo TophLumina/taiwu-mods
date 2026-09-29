@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class ConsummateLevel : ConfigData<ConsummateLevelItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ConsummateLevel Instance = new ConsummateLevel();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Grade", "MaxNeiliAllocation" };

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AiNode : ConfigData<AiNodeItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AiNode Instance = new AiNode();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Type", "IsAction" };

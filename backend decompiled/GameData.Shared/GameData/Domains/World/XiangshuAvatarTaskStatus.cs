@@ -2,43 +2,16 @@ using GameData.Serializer;
 
 namespace GameData.Domains.World;
 
-/// <summary>
-/// 相枢化身的任务状态
-/// </summary>
-public struct XiangshuAvatarTaskStatus : ISerializableGameData
+public struct XiangshuAvatarTaskStatus(sbyte swordTombStatus, sbyte juniorXiangshuTaskStatus, int juniorXiangshuCharId) : ISerializableGameData
 {
-	/// <summary>
-	/// 剑冢攻克状态
-	/// <see cref="T:GameData.Domains.World.SwordTombStatus" />
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte SwordTombStatus;
+	public sbyte SwordTombStatus = swordTombStatus;
 
-	/// <summary>
-	/// 紫竹化身的任务状态.
-	/// <see cref="T:GameData.Domains.World.JuniorXiangshuTaskStatus" />
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte JuniorXiangshuTaskStatus;
+	public sbyte JuniorXiangshuTaskStatus = juniorXiangshuTaskStatus;
 
-	/// <summary>
-	/// 紫竹化身对应的角色ID
-	/// </summary>
 	[SerializableGameDataField]
-	public int JuniorXiangshuCharId;
-
-	/// <summary>
-	/// 相枢化身的状态
-	/// </summary>
-	/// <param name="swordTombStatus"></param>
-	/// <param name="juniorXiangshuTaskStatus"></param>
-	/// <param name="juniorXiangshuCharId"></param>
-	public XiangshuAvatarTaskStatus(sbyte swordTombStatus, sbyte juniorXiangshuTaskStatus, int juniorXiangshuCharId)
-	{
-		SwordTombStatus = swordTombStatus;
-		JuniorXiangshuTaskStatus = juniorXiangshuTaskStatus;
-		JuniorXiangshuCharId = juniorXiangshuCharId;
-	}
+	public int JuniorXiangshuCharId = juniorXiangshuCharId;
 
 	public bool IsSerializedSizeFixed()
 	{

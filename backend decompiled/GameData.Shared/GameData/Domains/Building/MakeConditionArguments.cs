@@ -4,9 +4,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 后端检查制造条件的接口参数
-/// </summary>
 public struct MakeConditionArguments : ISerializableGameData
 {
 	[SerializableGameDataField]
@@ -21,55 +18,32 @@ public struct MakeConditionArguments : ISerializableGameData
 	[SerializableGameDataField]
 	public ItemKey MaterialKey;
 
-	/// <summary>
-	/// 制造次数
-	/// </summary>
 	[SerializableGameDataField]
 	public short MakeCount;
 
-	/// <summary>
-	/// 资源份数，不是资源本身
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts ResourceCount;
 
-	/// <summary>
-	/// 一级分类，用于检查药品是否为主方
-	/// </summary>
 	[SerializableGameDataField]
 	public short MakeItemTypeId;
 
-	/// <summary>
-	/// 二级分类，制造的实际配置
-	/// </summary>
 	[SerializableGameDataField]
 	public short MakeItemSubTypeId;
 
-	/// <summary>
-	/// 是否手动选择二级分类，如果是会增加造诣要求
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsManual;
 
-	/// <summary>
-	/// 是否精益求精
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsPerfect;
 
-	/// <summary>
-	/// 指定食物产物
-	/// </summary>
 	[SerializableGameDataField]
 	public short ManulFoodTemplateId;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 70;
@@ -80,7 +54,6 @@ public struct MakeConditionArguments : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -110,7 +83,6 @@ public struct MakeConditionArguments : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

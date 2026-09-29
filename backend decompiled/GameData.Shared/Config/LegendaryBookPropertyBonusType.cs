@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class LegendaryBookPropertyBonusType : ConfigData<LegendaryBookPropertyBonusTypeItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LegendaryBookPropertyBonusType Instance = new LegendaryBookPropertyBonusType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "PropertyBonusList", "TemplateId" };

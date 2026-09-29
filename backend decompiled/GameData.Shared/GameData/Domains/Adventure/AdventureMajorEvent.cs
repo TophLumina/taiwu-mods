@@ -9,9 +9,6 @@ using Google.Protobuf.Collections;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇大事件运行时数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvider, ISerializableGameData
 {
@@ -38,91 +35,48 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		public static readonly string[] FieldId2FieldName = new string[8] { "Id", "CoreId", "MapLocation", "AutoDeleteDate", "InternalStatusType", "CalledCharacters", "TemporaryCharacters", "ParameterValues" };
 	}
 
-	/// <summary>
-	/// 奇遇实例 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int Id;
 
-	/// <summary>
-	/// 奇遇库 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int CoreId;
 
-	/// <summary>
-	/// 奇遇中心点在大地图上的位置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public Location MapLocation;
 
-	/// <summary>
-	/// 自动消亡时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	private int _autoDeleteDate = -1;
 
-	/// <summary>
-	/// 用于序列化的状态类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	private byte _internalStatusType;
 
-	/// <summary>
-	/// 参与的所有人物 ID
-	/// 此处索引与 <see cref="P:GameData.Adventure.AdventureMajorEventData.Characters" /> 逐一对应
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	private List<IntList> _calledCharacters;
 
-	/// <summary>
-	/// 创建的临时人物 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	private List<int> _temporaryCharacters;
 
-	/// <summary>
-	/// 变量值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	private Dictionary<AdventureParameterKey, AdventureParameterValue> _parameterValues;
 
-	/// <summary>
-	/// 正在筛选角色的元素
-	/// </summary>
 	private static readonly Dictionary<CharacterFilterKey, List<int>> FilterGroupIndexes = new Dictionary<CharacterFilterKey, List<int>>();
 
-	/// <summary>
-	/// 核心数据
-	/// </summary>
 	public AdventureMajorEventData Core => ExternalDataBridge.Context.AdventureCore.GetAdventureMajorEventData(CoreId);
 
-	/// <summary>
-	/// 状态类型
-	/// </summary>
 	public EAdventureStatusType StatusType => (EAdventureStatusType)_internalStatusType;
 
-	/// <inheritdoc />
 	public int RemainMonths => CalcRemainMonths(ExternalDataBridge.Context.CurrDate);
 
-	/// <inheritdoc />
 	int IAdventureRuntime.Id => Id;
 
-	/// <inheritdoc />
 	int IAdventureRuntime.CoreId => CoreId;
 
-	/// <inheritdoc />
 	Location IAdventureRuntime.MapLocation => MapLocation;
 
-	/// <inheritdoc />
 	bool IAdventureRuntime.Satisfied => AllSatisfied();
 
-	/// <inheritdoc />
 	IReadOnlyList<AdventureParameterData> IAdventureParameterProvider.Parameters => Core.Parameters;
 
-	/// <summary>
-	/// 所有临时人物
-	/// </summary>
 	public IReadOnlyList<int> TemporaryCharacters
 	{
 		get
@@ -135,9 +89,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		}
 	}
 
-	/// <summary>
-	/// 应当保留
-	/// </summary>
 	public bool ShouldStay
 	{
 		get
@@ -150,15 +101,11 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		}
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		return $"{Core.Name}({Id})";
 	}
 
-	/// <summary>
-	/// 计算剩余持续时间，负数为无限
-	/// </summary>
 	public int CalcRemainMonths(int currDate)
 	{
 		if (_autoDeleteDate < 0)
@@ -168,9 +115,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return Math.Max(_autoDeleteDate - currDate, 0);
 	}
 
-	/// <summary>
-	/// 构造方法
-	/// </summary>
 	public AdventureMajorEvent(int id, int coreId, Location location)
 	{
 		Id = id;
@@ -178,13 +122,11 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		MapLocation = location;
 	}
 
-	/// <inheritdoc />
 	public AdventureParameterValue? GetParameterOrNull(AdventureParameterKey key)
 	{
 		return _parameterValues?.GetOrNull(key);
 	}
 
-	/// <inheritdoc />
 	public void SetParameter(AdventureParameterKey key, AdventureParameterValue value)
 	{
 		if (_parameterValues == null)
@@ -194,15 +136,11 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		_parameterValues[key] = value;
 	}
 
-	/// <inheritdoc />
 	public void RemoveParameter(AdventureParameterKey key)
 	{
 		_parameterValues?.Remove(key);
 	}
 
-	/// <summary>
-	/// 设置状态类型
-	/// </summary>
 	public void SetStatusType(IAdventureContextBridge context, EAdventureStatusType statusType)
 	{
 		EAdventureStatusType statusType2 = StatusType;
@@ -218,9 +156,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		}
 	}
 
-	/// <summary>
-	/// 设置自动消亡时间
-	/// </summary>
 	public void SetAutoDeleteDate(uint stayMonths)
 	{
 		if (stayMonths == 0)
@@ -233,9 +168,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		}
 	}
 
-	/// <summary>
-	/// 初始化状态类型
-	/// </summary>
 	public bool InitStatusType(IAdventureContextBridge context)
 	{
 		bool num = AllSatisfied();
@@ -246,10 +178,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return num;
 	}
 
-	/// <summary>
-	/// 是否所有条件均已满足
-	/// </summary>
-	/// <returns></returns>
 	private bool AllSatisfied()
 	{
 		RepeatedField<AdventureCharacterGroup> characters = Core.Characters;
@@ -267,13 +195,11 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return true;
 	}
 
-	/// <inheritdoc />
 	public bool IsTemporaryCharacter(int charId)
 	{
 		return _temporaryCharacters?.Contains(charId) ?? false;
 	}
 
-	/// <inheritdoc />
 	public bool IsCalledCharacter(int charId)
 	{
 		List<IntList> calledCharacters = _calledCharacters;
@@ -292,9 +218,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return false;
 	}
 
-	/// <summary>
-	/// 获取所有拉取到的智能人物
-	/// </summary>
 	public void CollectCharacters(ICollection<int> characters)
 	{
 		List<IntList> calledCharacters = _calledCharacters;
@@ -316,25 +239,16 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		}
 	}
 
-	/// <summary>
-	/// 查询指定组已拉取的人物
-	/// </summary>
 	public IReadOnlyList<int> QueryCalledCharacters(int index)
 	{
 		return _calledCharacters?.GetOrDefault(index).Items;
 	}
 
-	/// <summary>
-	/// 将临时角色标记为拉取到的角色
-	/// </summary>
 	public bool MarkTemporaryCharacterAsCalled(int charId)
 	{
 		return _temporaryCharacters?.Remove(charId) ?? false;
 	}
 
-	/// <summary>
-	/// 解绑已拉取的角色
-	/// </summary>
 	public EAdventureUnbindType DynamicUnbindCharacter(IAdventureContextBridge context, int charId)
 	{
 		List<IntList> calledCharacters = _calledCharacters;
@@ -375,9 +289,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return EAdventureUnbindType.Called;
 	}
 
-	/// <summary>
-	/// 抓取指定批次的人物
-	/// </summary>
 	bool IAdventureRuntime.CallCharacters(IAdventureContextBridge context, EAdventureCharacterType type)
 	{
 		RepeatedField<AdventureCharacterGroup> characters = Core.Characters;
@@ -452,9 +363,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return allSatisfied;
 	}
 
-	/// <summary>
-	/// 太吾首次进入奇遇，生成临时角色
-	/// </summary>
 	public bool GenerateCharacters(IAdventureContextBridge context)
 	{
 		if ((int)StatusType >= 2)
@@ -494,9 +402,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return true;
 	}
 
-	/// <summary>
-	/// 回收所有数据
-	/// </summary>
 	public void ReleaseData(IAdventureContextBridge context)
 	{
 		List<IntList> calledCharacters = _calledCharacters;
@@ -521,16 +426,10 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AdventureMajorEvent()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AdventureMajorEvent(AdventureMajorEvent other)
 	{
 		Id = other.Id;
@@ -556,9 +455,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		_parameterValues = ((other._parameterValues == null) ? null : new Dictionary<AdventureParameterKey, AdventureParameterValue>(other._parameterValues));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AdventureMajorEvent other)
 	{
 		Id = other.Id;
@@ -584,13 +480,11 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		_parameterValues = ((other._parameterValues == null) ? null : new Dictionary<AdventureParameterKey, AdventureParameterValue>(other._parameterValues));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 19;
@@ -616,7 +510,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -675,7 +568,6 @@ public class AdventureMajorEvent : IAdventureRuntime, IAdventureParameterProvide
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

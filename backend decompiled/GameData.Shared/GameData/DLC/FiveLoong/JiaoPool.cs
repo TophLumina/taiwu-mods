@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 蛟池 数据结构
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class JiaoPool : ISerializableGameData
 {
@@ -27,33 +24,18 @@ public class JiaoPool : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "Jiaos", "NextPeriod", "IsDisabled", "BlockStyle", "IsBabysitting" };
 	}
 
-	/// <summary>
-	/// 蛟池内的蛟
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> Jiaos;
 
-	/// <summary>
-	/// 已养育的时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int NextPeriod;
 
-	/// <summary>
-	/// 是否手动暂停
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsDisabled;
 
-	/// <summary>
-	/// 蛟池地格样式
-	/// </summary>
 	[SerializableGameDataField]
 	public short BlockStyle;
 
-	/// <summary>
-	/// 是否养育托管
-	/// </summary>
 	[SerializableGameDataField]
 	public bool isBabysitting;
 
@@ -65,13 +47,11 @@ public class JiaoPool : ISerializableGameData
 		BlockStyle = -1;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -83,7 +63,6 @@ public class JiaoPool : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -122,7 +101,6 @@ public class JiaoPool : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

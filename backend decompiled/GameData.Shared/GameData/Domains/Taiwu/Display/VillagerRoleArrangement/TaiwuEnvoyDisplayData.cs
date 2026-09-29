@@ -3,21 +3,12 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 
-/// <summary>
-/// 使者显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class TaiwuEnvoyDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 可修改的超常条例数目
-	/// </summary>
 	[SerializableGameDataField]
 	public int SpecialRuleCount;
 
-	/// <summary>
-	/// 威望消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public int MonthlyAuthorityCost;
 

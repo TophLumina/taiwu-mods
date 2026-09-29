@@ -7,145 +7,73 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 一个有身份的村民的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class VillagerRoleCharacterDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 什么身份
-	/// </summary>
 	[SerializableGameDataField]
 	public short RoleTemplateId;
 
-	/// <summary>
-	/// 身份派遣工作
-	/// </summary>
 	[SerializableGameDataField]
 	public VillagerRoleArrangementDisplayDataWrapper ArrangementDisplayData;
 
-	/// <summary>
-	/// 标记
-	/// </summary>
 	[SerializableGameDataField]
 	public byte Flags;
 
-	/// <summary>
-	/// 存活状态：0：活着，1：死亡，2：死亡并消除数据
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte AliveState;
 
-	/// <summary>
-	/// 年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short Age;
 
-	/// <summary>
-	/// 七元赋性
-	/// </summary>
 	[SerializableGameDataField]
 	public Personalities Personalities;
 
-	/// <summary>
-	/// 武学造诣，村长信息需要
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillAttainments;
 
-	/// <summary>
-	/// 技艺造诣，村长信息需要
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 武学资质，村长信息需要
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillQualifications;
 
-	/// <summary>
-	/// 技艺资质，村长信息需要
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillQualifications;
 
-	/// <summary>
-	/// 名称数据
-	/// </summary>
 	[SerializableGameDataField]
 	public NameRelatedData Name;
 
-	/// <summary>
-	/// 外貌
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData Avatar;
 
-	/// <summary>
-	/// 在经营建筑中的相应读书的最高品级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ReadBookMaxGrade;
 
-	/// <summary>
-	/// 拥有的身份是否适合经营建筑类型
-	/// </summary>
 	[SerializableGameDataField]
 	public bool MatchVillagerRole;
 
-	/// <summary>
-	/// 是否被锁定派遣
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AssignLocked;
 
-	/// <summary>
-	/// 剩余潜力次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LeftPotentialCount;
 
-	/// <summary>
-	/// 关联物品
-	/// </summary>
 	[SerializableGameDataField]
 	public TemplateKey ItemTemplateKey = TemplateKey.Invalid;
 
-	/// <summary>
-	/// 基础工作
-	/// </summary>
 	[SerializableGameDataField]
 	public VillagerWorkData VillagerWorkData;
 
-	/// <summary>
-	/// 农户采集资源
-	/// </summary>
 	[SerializableGameDataField]
 	public int CollectResourceAmount;
 
-	/// <summary>
-	/// 标记 · 当前在村
-	/// </summary>
 	public const byte FlagInVillage = 1;
 
-	/// <summary>
-	/// 标记 · 遗漏走失
-	/// </summary>
 	public const byte FlagInMissing = 2;
 
-	/// <summary>
-	/// 标记 · 是否首领
-	/// </summary>
 	public const byte FlagIsLeader = 4;
 
 	public bool IsSerializedSizeFixed()
@@ -155,17 +83,9 @@ public class VillagerRoleCharacterDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 18;
+		int totalSize = 201;
 		totalSize = ((ArrangementDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + ArrangementDisplayData.GetSerializedSize())));
-		totalSize += Personalities.GetSerializedSize();
-		totalSize += CombatSkillAttainments.GetSerializedSize();
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize += CombatSkillQualifications.GetSerializedSize();
-		totalSize += LifeSkillQualifications.GetSerializedSize();
-		totalSize += Name.GetSerializedSize();
 		totalSize = ((Avatar == null) ? (totalSize + 2) : (totalSize + (2 + Avatar.GetSerializedSize())));
-		totalSize += ItemTemplateKey.GetSerializedSize();
-		totalSize = ((VillagerWorkData == null) ? (totalSize + 2) : (totalSize + (2 + VillagerWorkData.GetSerializedSize())));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

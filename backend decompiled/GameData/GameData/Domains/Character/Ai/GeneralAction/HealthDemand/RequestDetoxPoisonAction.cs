@@ -53,7 +53,7 @@ public class RequestDetoxPoisonAction : IGeneralAction
 			selfChar.AddEatingItem(context, ItemUsed);
 			selfChar.ChangeHappiness(context, baseItem.GetHappinessChange());
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, baseItem.GetFavorabilityChange() * 5);
-			lifeRecordCollection.AddRequestDetoxPoisonSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
+			lifeRecordCollection.AddRequestDetoxPoisonItemSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
 			int secretInfoOffset = secretInformationCollection.AddAcceptRequestDetoxPoison(targetCharId, selfCharId);
 			SecretInformationId secretInfoId = DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
 		}
@@ -61,7 +61,7 @@ public class RequestDetoxPoisonAction : IGeneralAction
 		{
 			selfChar.ChangeHappiness(context, -3);
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, -6000);
-			lifeRecordCollection.AddRequestDetoxPoisonFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
+			lifeRecordCollection.AddRequestDetoxPoisonItemFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId, PoisonType);
 			int secretInfoOffset2 = secretInformationCollection.AddRefuseRequestDetoxPoison(targetCharId, selfCharId);
 			SecretInformationId secretInfoId2 = DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);
 		}

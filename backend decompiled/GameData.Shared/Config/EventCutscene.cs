@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class EventCutscene : ConfigData<EventCutsceneItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventCutscene Instance = new EventCutscene();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "ResourceFormat", "CommandPanelOffset" };

@@ -7,75 +7,39 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 商会信息的商队内容
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class MerchantInfoCaravanData : ISerializableGameData
 {
-	/// <summary>
-	/// 商队ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CaravanId;
 
-	/// <summary>
-	/// 商店的模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short MerchantTemplateId;
 
-	/// <summary>
-	/// 当前地区的模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrentAreaTemplateId;
 
-	/// <summary>
-	/// 目标地区的模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TargetAreaTemplateId;
 
-	/// <summary>
-	/// 出发地区的模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short StartAreaTemplateId;
 
-	/// <summary>
-	/// 剩余定居点的地块数据列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SettlementDisplayData> RemainSettlementInfoList;
 
-	/// <summary>
-	/// 剩余路径点的数量，一个点需要一个月
-	/// </summary>
 	[SerializableGameDataField]
 	public int RemainNodeCount;
 
-	/// <summary>
-	/// 额外数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CaravanExtraData ExtraData;
 
-	/// <summary>
-	/// 是否位于毁坏地块
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInBrokenArea;
 
-	/// <summary>
-	/// 完整路线
-	/// </summary>
 	[SerializableGameDataField]
 	public CaravanPath CaravanPath;
 
-	/// <summary>
-	/// 能否投资
-	/// </summary>
 	public bool CanInvest
 	{
 		get
@@ -92,15 +56,8 @@ public class MerchantInfoCaravanData : ISerializableGameData
 
 	public MerchantItem MerchantConfig => Config.Merchant.Instance[MerchantTemplateId];
 
-	/// <summary>
-	/// 路线剩余定居点数量
-	/// </summary>
 	public int RemainSettlementCount => RemainSettlementInfoList?.Count ?? 0;
 
-	/// <summary>
-	/// 获取投资收入
-	/// </summary>
-	/// <returns></returns>
 	public int GetInvestIncome()
 	{
 		if (!ExtraData.IsInvested)

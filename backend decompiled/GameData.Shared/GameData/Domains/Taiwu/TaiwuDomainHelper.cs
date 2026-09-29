@@ -4,9 +4,6 @@ namespace GameData.Domains.Taiwu;
 
 public static class TaiwuDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort TaiwuCharId = 0;
@@ -246,11 +243,12 @@ public static class TaiwuDomainHelper
 		public const ushort SpecifyClothingTemplateId = 117;
 
 		public const ushort SelectedLifeSkillStrategyPlanIndex = 118;
+
+		public const ushort FarmerAutoWorkConfig = 119;
+
+		public const ushort LegacyPointDictNew = 120;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort GetAllVisitedSettlements = 0;
@@ -830,16 +828,16 @@ public static class TaiwuDomainHelper
 		public const ushort GetCricketPlanData = 287;
 
 		public const ushort GetPreviewReadingEfficiency = 288;
+
+		public const ushort RequestShortCutOperationLevelData = 289;
+
+		public const ushort GetFarmerMigrateWorkStatus = 290;
+
+		public const ushort SetFarmerMigrateWorkStatus = 291;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
-	public const ushort DataCount = 119;
+	public const ushort DataCount = 121;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "TaiwuCharId", 0 },
@@ -960,14 +958,12 @@ public static class TaiwuDomainHelper
 		{ "CombatSkillBreakPresets", 115 },
 		{ "CombatSkillConflicts", 116 },
 		{ "SpecifyClothingTemplateId", 117 },
-		{ "SelectedLifeSkillStrategyPlanIndex", 118 }
+		{ "SelectedLifeSkillStrategyPlanIndex", 118 },
+		{ "FarmerAutoWorkConfig", 119 },
+		{ "LegacyPointDictNew", 120 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
-	public static readonly string[] DataId2FieldName = new string[119]
+	public static readonly string[] DataId2FieldName = new string[121]
 	{
 		"TaiwuCharId", "TaiwuGenerationsCount", "CricketLuckPoint", "PreviousTaiwuIds", "NeedToEscape", "ReceivedItems", "ReceivedCharacters", "WarehouseMaxLoad", "WarehouseCurrLoad", "BuildingSpaceLimit",
 		"BuildingSpaceCurr", "BuildingSpaceExtraAdd", "ProsperousConstruction", "CombatSkills", "LifeSkills", "CombatSkillPlans", "CurrCombatSkillPlanId", "CurrLifeSkillAttainmentPanelPlanIndex", "TeachTaiwuLifeSkillDict", "TeachTaiwuCombatSkillDict",
@@ -980,17 +976,12 @@ public static class TaiwuDomainHelper
 		"LegacyPointTimesDict", "VillagerSkillLegacyPointDict", "ManualChangeEquipGroupCharIds", "GroupCharacterEquipmentRecord", "FavoriteCombatSkills", "ShouldExpandPracticePanel", "ConsummateLevelOnNeiliPage", "CombatResultSelectAllItem", "Treasury", "Stock",
 		"Trough", "Warehouse", "TaiwuVillageStoragesRecordCollection", "LuohanBreak", "NextBreakoutStepBaseBonus", "NextBreakoutSuccessRateBonus", "LockedItemSet", "LifeSkillStrategyPlans", "CricketBettingAutoBet", "CricketPreset",
 		"UnlockScrollList", "VillagerWorkLocationCount", "CanCollectDangerousResource", "PrevTaiwuLifeSummaries", "CurrTaiwuLifeSummary", "CricketPolymorphs", "CricketRoomData", "MainOperationOrder", "HideSkeletonEquipSlots", "SelectedBottomShortcut",
-		"WeaponInnerRatiosById", "WeaponInnerRatiosByTemplateId", "ItemAutoOperationSettingData", "UnlockedDebateStrategyList", "CombatSkillBreakPlates", "CombatSkillBreakPresets", "CombatSkillConflicts", "SpecifyClothingTemplateId", "SelectedLifeSkillStrategyPlanIndex"
+		"WeaponInnerRatiosById", "WeaponInnerRatiosByTemplateId", "ItemAutoOperationSettingData", "UnlockedDebateStrategyList", "CombatSkillBreakPlates", "CombatSkillBreakPresets", "CombatSkillConflicts", "SpecifyClothingTemplateId", "SelectedLifeSkillStrategyPlanIndex", "FarmerAutoWorkConfig",
+		"LegacyPointDictNew"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
-	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[119][];
+	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[121][];
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId = new Dictionary<string, ushort>
 	{
 		{ "GetAllVisitedSettlements", 0 },
@@ -1281,10 +1272,13 @@ public static class TaiwuDomainHelper
 		{ "GetRepairPlan", 285 },
 		{ "SetCricketPolymorphPlan", 286 },
 		{ "GetCricketPlanData", 287 },
-		{ "GetPreviewReadingEfficiency", 288 }
+		{ "GetPreviewReadingEfficiency", 288 },
+		{ "RequestShortCutOperationLevelData", 289 },
+		{ "GetFarmerMigrateWorkStatus", 290 },
+		{ "SetFarmerMigrateWorkStatus", 291 }
 	};
 
-	public static readonly string[] MethodId2MethodName = new string[289]
+	public static readonly string[] MethodId2MethodName = new string[292]
 	{
 		"GetAllVisitedSettlements", "SetVillagerCollectResourceWork", "SetVillagerCollectTributeWork", "SetVillagerKeepGraveWork", "SetVillagerIdleWork", "StopVillagerWork", "StopVillagerCollectResourceWork", "GetCollectResourceWorkDataList", "ExpelVillager", "GetVillagerStatusDisplayDataList",
 		"GetAllVillagersStatus", "GetAllVillagersAvailableForWork", "CalcResourceChangeByVillageWork", "CalcResourceChangeByBuildingEarn", "CalcResourceChangeByBuildingMaintain", "GetAllWarehouseItems", "GetWarehouseItemsBySubType", "SwitchEquipmentPlan", "GmCmd_AddResource", "GmCmd_AddLegacyPoint",
@@ -1314,6 +1308,7 @@ public static class TaiwuDomainHelper
 		"PutMaterialToCricketRoom", "TakeMaterialFromCricketRoom", "ChangeLegacyPointWhilePassingLegacy", "GetVillagersForWorkDisplayData", "RequestFollowingCharacter", "FeedingCricket", "CricketRoomPolymorphReturn", "CricketRoomWishingCricket", "GmCmd_GenerateCricketWishing", "CricketWishingCricketReturnLuckPoint",
 		"GetTaiwuLifeSummaryDisplayData", "GetTotalTaiwuLifeSummaryInfo", "SetMainOperationOrder", "RequestMainOperationOrder", "RemoveHideSkeletonEquipSlot", "AddHideSkeletonEquipSlot", "RequestTaiwuEquipWithoutHideForSkeleton", "RequestTaiwuNeiliProportionDisplayData", "SetActiveShortCut", "RequestActiveShortCut",
 		"RecordLifeSummary", "TaiwuInventoryHasItem", "GetWineTasterBonusPercentage", "HasSectItem", "ChangeCombatSkillBreakPlate", "GetCombatSkillBreakPreset", "AddCricketPlan", "CloneCricketPlan", "DeleteCricketPlan", "GetCricketPlanCount",
-		"GetVillagerListClassArray", "GetVillagerClassesDict", "GetTreasuryItemNeededCharDict", "TransferItemInventory", "SetSelectedLifeSkillStrategyPlanIndex", "GetRepairPlan", "SetCricketPolymorphPlan", "GetCricketPlanData", "GetPreviewReadingEfficiency"
+		"GetVillagerListClassArray", "GetVillagerClassesDict", "GetTreasuryItemNeededCharDict", "TransferItemInventory", "SetSelectedLifeSkillStrategyPlanIndex", "GetRepairPlan", "SetCricketPolymorphPlan", "GetCricketPlanData", "GetPreviewReadingEfficiency", "RequestShortCutOperationLevelData",
+		"GetFarmerMigrateWorkStatus", "SetFarmerMigrateWorkStatus"
 	};
 }

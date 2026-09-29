@@ -4,34 +4,18 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 研读进度数据结构体
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public struct ReadProgressData : ISerializableGameData
 {
-	/// <summary>
-	/// 技能模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 每页研读进度（100表示完成）
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] ReadingProgress;
 
-	/// <summary>
-	/// 每页正逆练类型（仅功法书有效）
-	/// 正练: CombatSkillDirection.Direct, 逆练: CombatSkillDirection.Reverse
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] PageType;
 
-	/// <summary>
-	/// 是否已突破（仅功法书有效）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsBrokenOut;
 

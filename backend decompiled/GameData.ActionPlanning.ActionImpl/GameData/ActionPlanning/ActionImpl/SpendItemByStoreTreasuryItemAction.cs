@@ -3,7 +3,6 @@ using GameData.ActionPlanning.MonthlyAI;
 using GameData.Common;
 using GameData.Domains;
 using GameData.Domains.Character;
-using GameData.Domains.Character.Ai;
 using GameData.Domains.Item;
 using GameData.Serializer;
 using GameData.Utilities;
@@ -33,17 +32,16 @@ public class SpendItemByStoreTreasuryItemAction : ICharacterActionImpl, ISeriali
 
 	bool ICharacterActionImpl.OfflineInitActionData(DataContext context, Character character, ContextArgGroupHandle argGroup, CharacterActionData actionData)
 	{
-		bool allowSell = character.IsInRegularSettlementRange();
-		ItemKey selectedItem = ActionHelper.SelectSpareableItem(context, character, 0, allowSell);
-		if (selectedItem == ItemKey.Invalid)
+		ItemBase selectedItem = character.SelectSpareableItem(context, 0, allowUsed: true);
+		if (selectedItem == null)
 		{
 			return false;
 		}
-		if (ActionHelper.CanInteractTreasury(character) || !context.Random.CheckPercentProb(AiHelper.GeneralActionConstants.StoreInTreasuryChance[character.GetBehaviorType()]))
+		if (!ActionHelper.CanInteractTreasury(character))
 		{
 			return false;
 		}
-		TargetItem = selectedItem;
+		TargetItem = selectedItem.GetItemKey();
 		Amount = 1;
 		return true;
 	}

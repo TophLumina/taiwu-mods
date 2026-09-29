@@ -7,171 +7,72 @@ namespace Config;
 [Serializable]
 public class TaiwuBeHuntedEvent : ConfigData<TaiwuBeHuntedEventItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public const short Shaolin = 0;
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public const short Emei = 1;
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public const short Baihua = 2;
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public const short Wudang = 3;
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public const short Yuanshan = 4;
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public const short Shixiang = 5;
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public const short Ranshan = 6;
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public const short Xuannv = 7;
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public const short Zhujian = 8;
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public const short Kongsang = 9;
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public const short Jingang = 10;
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public const short Wuxian = 11;
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public const short Jieqing = 12;
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public const short Fulong = 13;
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public const short Xuehou = 14;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Shaolin => Instance[(short)0];
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Emei => Instance[(short)1];
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Baihua => Instance[(short)2];
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Wudang => Instance[(short)3];
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Yuanshan => Instance[(short)4];
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Shixiang => Instance[(short)5];
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Ranshan => Instance[(short)6];
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Xuannv => Instance[(short)7];
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Zhujian => Instance[(short)8];
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Kongsang => Instance[(short)9];
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Jingang => Instance[(short)10];
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Wuxian => Instance[(short)11];
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Jieqing => Instance[(short)12];
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Fulong => Instance[(short)13];
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public static TaiwuBeHuntedEventItem Xuehou => Instance[(short)14];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TaiwuBeHuntedEvent Instance = new TaiwuBeHuntedEvent();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

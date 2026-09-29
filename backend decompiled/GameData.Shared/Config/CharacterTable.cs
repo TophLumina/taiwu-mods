@@ -7,141 +7,60 @@ namespace Config;
 [Serializable]
 public class CharacterTable : ConfigData<CharacterTableItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 状态
-		/// </summary>
 		public const short GeneralProperty = 0;
 
-		/// <summary>
-		/// 属性
-		/// </summary>
 		public const short MainAndAttackProperty = 1;
 
-		/// <summary>
-		/// 命中
-		/// </summary>
 		public const short HitProperty = 2;
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public const short LifeSkill = 3;
 
-		/// <summary>
-		/// 武学
-		/// </summary>
 		public const short CombatSkill = 4;
 
-		/// <summary>
-		/// 赋性
-		/// </summary>
 		public const short Personality = 5;
 
-		/// <summary>
-		/// 持有
-		/// </summary>
 		public const short ItemAndResource = 6;
 
-		/// <summary>
-		/// 指令
-		/// </summary>
 		public const short Command = 7;
 
-		/// <summary>
-		/// 奇书争夺者
-		/// </summary>
 		public const short LegendBookCompetitors = 8;
 
-		/// <summary>
-		/// 入魔堕魔者
-		/// </summary>
 		public const short LegendBookFallen = 9;
 
-		/// <summary>
-		/// 村民
-		/// </summary>
 		public const short Villager = 10;
 
-		/// <summary>
-		/// 拿取
-		/// </summary>
 		public const short VillagerNeed = 11;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 状态
-		/// </summary>
 		public static CharacterTableItem GeneralProperty => Instance[(short)0];
 
-		/// <summary>
-		/// 属性
-		/// </summary>
 		public static CharacterTableItem MainAndAttackProperty => Instance[(short)1];
 
-		/// <summary>
-		/// 命中
-		/// </summary>
 		public static CharacterTableItem HitProperty => Instance[(short)2];
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public static CharacterTableItem LifeSkill => Instance[(short)3];
 
-		/// <summary>
-		/// 武学
-		/// </summary>
 		public static CharacterTableItem CombatSkill => Instance[(short)4];
 
-		/// <summary>
-		/// 赋性
-		/// </summary>
 		public static CharacterTableItem Personality => Instance[(short)5];
 
-		/// <summary>
-		/// 持有
-		/// </summary>
 		public static CharacterTableItem ItemAndResource => Instance[(short)6];
 
-		/// <summary>
-		/// 指令
-		/// </summary>
 		public static CharacterTableItem Command => Instance[(short)7];
 
-		/// <summary>
-		/// 奇书争夺者
-		/// </summary>
 		public static CharacterTableItem LegendBookCompetitors => Instance[(short)8];
 
-		/// <summary>
-		/// 入魔堕魔者
-		/// </summary>
 		public static CharacterTableItem LegendBookFallen => Instance[(short)9];
 
-		/// <summary>
-		/// 村民
-		/// </summary>
 		public static CharacterTableItem Villager => Instance[(short)10];
 
-		/// <summary>
-		/// 拿取
-		/// </summary>
 		public static CharacterTableItem VillagerNeed => Instance[(short)11];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CharacterTable Instance = new CharacterTable();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Title", "Elements", "TemplateId", "Width" };

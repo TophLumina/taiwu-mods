@@ -7,241 +7,100 @@ namespace Config;
 [Serializable]
 public class DebateRecord : ConfigData<DebateRecordItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 恢复资源
-		/// </summary>
 		public const short RoundStart = 0;
 
-		/// <summary>
-		/// 放置论点
-		/// </summary>
 		public const short MakeMove = 1;
 
-		/// <summary>
-		/// 被消除结论
-		/// </summary>
 		public const short PawnReduceGamePoint = 2;
 
-		/// <summary>
-		/// 获得策略
-		/// </summary>
 		public const short ShuffleCardGain = 3;
 
-		/// <summary>
-		/// 失去策略
-		/// </summary>
 		public const short ShuffleCardLose = 4;
 
-		/// <summary>
-		/// 重拾策略
-		/// </summary>
 		public const short ResetStrategy = 5;
 
-		/// <summary>
-		/// 受观众评价
-		/// </summary>
 		public const short Comment = 6;
 
-		/// <summary>
-		/// 快人快语1
-		/// </summary>
 		public const short NodeEffectJustSpecial = 8;
 
-		/// <summary>
-		/// 旁敲侧击
-		/// </summary>
 		public const short NodeEffectEvenSpecial = 10;
 
-		/// <summary>
-		/// 压力消除结论
-		/// </summary>
 		public const short PressureReduceGamePoint = 13;
 
-		/// <summary>
-		/// 压力降低论据恢复
-		/// </summary>
 		public const short PressureNoBasesRecover = 14;
 
-		/// <summary>
-		/// 压力降低策略点恢复
-		/// </summary>
 		public const short PressureNoStrategyRecover = 15;
 
-		/// <summary>
-		/// 压力放置论点失败
-		/// </summary>
 		public const short PressureUseBases = 16;
 
-		/// <summary>
-		/// 压力使用策略失败
-		/// </summary>
 		public const short PressureUseStrategy = 17;
 
-		/// <summary>
-		/// 敌人使用策略
-		/// </summary>
 		public const short NpcUseStrategy = 18;
 
-		/// <summary>
-		/// 玩家使用触发策略
-		/// </summary>
 		public const short TaiwuUseTriggerStrategy = 19;
 
-		/// <summary>
-		/// 引经据典-触发
-		/// </summary>
 		public const short StrategyPoem3 = 28;
 
-		/// <summary>
-		/// 医者仁心-即时0
-		/// </summary>
 		public const short StrategyMedicine2Instant = 45;
 
-		/// <summary>
-		/// 医者仁心-即时1
-		/// </summary>
 		public const short StrategyMedicine2Special = 46;
 
-		/// <summary>
-		/// 琢磨琢磨-即时1
-		/// </summary>
 		public const short StrategyJade1Special = 54;
 
-		/// <summary>
-		/// 珠光宝气-触发
-		/// </summary>
 		public const short StrategyJade2 = 55;
 
-		/// <summary>
-		/// 阿弥陀佛-触发
-		/// </summary>
 		public const short StrategyBuddhism3 = 62;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 恢复资源
-		/// </summary>
 		public static DebateRecordItem RoundStart => Instance[(short)0];
 
-		/// <summary>
-		/// 放置论点
-		/// </summary>
 		public static DebateRecordItem MakeMove => Instance[(short)1];
 
-		/// <summary>
-		/// 被消除结论
-		/// </summary>
 		public static DebateRecordItem PawnReduceGamePoint => Instance[(short)2];
 
-		/// <summary>
-		/// 获得策略
-		/// </summary>
 		public static DebateRecordItem ShuffleCardGain => Instance[(short)3];
 
-		/// <summary>
-		/// 失去策略
-		/// </summary>
 		public static DebateRecordItem ShuffleCardLose => Instance[(short)4];
 
-		/// <summary>
-		/// 重拾策略
-		/// </summary>
 		public static DebateRecordItem ResetStrategy => Instance[(short)5];
 
-		/// <summary>
-		/// 受观众评价
-		/// </summary>
 		public static DebateRecordItem Comment => Instance[(short)6];
 
-		/// <summary>
-		/// 快人快语1
-		/// </summary>
 		public static DebateRecordItem NodeEffectJustSpecial => Instance[(short)8];
 
-		/// <summary>
-		/// 旁敲侧击
-		/// </summary>
 		public static DebateRecordItem NodeEffectEvenSpecial => Instance[(short)10];
 
-		/// <summary>
-		/// 压力消除结论
-		/// </summary>
 		public static DebateRecordItem PressureReduceGamePoint => Instance[(short)13];
 
-		/// <summary>
-		/// 压力降低论据恢复
-		/// </summary>
 		public static DebateRecordItem PressureNoBasesRecover => Instance[(short)14];
 
-		/// <summary>
-		/// 压力降低策略点恢复
-		/// </summary>
 		public static DebateRecordItem PressureNoStrategyRecover => Instance[(short)15];
 
-		/// <summary>
-		/// 压力放置论点失败
-		/// </summary>
 		public static DebateRecordItem PressureUseBases => Instance[(short)16];
 
-		/// <summary>
-		/// 压力使用策略失败
-		/// </summary>
 		public static DebateRecordItem PressureUseStrategy => Instance[(short)17];
 
-		/// <summary>
-		/// 敌人使用策略
-		/// </summary>
 		public static DebateRecordItem NpcUseStrategy => Instance[(short)18];
 
-		/// <summary>
-		/// 玩家使用触发策略
-		/// </summary>
 		public static DebateRecordItem TaiwuUseTriggerStrategy => Instance[(short)19];
 
-		/// <summary>
-		/// 引经据典-触发
-		/// </summary>
 		public static DebateRecordItem StrategyPoem3 => Instance[(short)28];
 
-		/// <summary>
-		/// 医者仁心-即时0
-		/// </summary>
 		public static DebateRecordItem StrategyMedicine2Instant => Instance[(short)45];
 
-		/// <summary>
-		/// 医者仁心-即时1
-		/// </summary>
 		public static DebateRecordItem StrategyMedicine2Special => Instance[(short)46];
 
-		/// <summary>
-		/// 琢磨琢磨-即时1
-		/// </summary>
 		public static DebateRecordItem StrategyJade1Special => Instance[(short)54];
 
-		/// <summary>
-		/// 珠光宝气-触发
-		/// </summary>
 		public static DebateRecordItem StrategyJade2 => Instance[(short)55];
 
-		/// <summary>
-		/// 阿弥陀佛-触发
-		/// </summary>
 		public static DebateRecordItem StrategyBuddhism3 => Instance[(short)62];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DebateRecord Instance = new DebateRecord();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "Parameters", "TemplateId" };

@@ -10,11 +10,11 @@ namespace GameData.Domains.SpecialEffect.CombatSkill.Common.Attack;
 
 public class ChangePowerByEquipType : CombatSkillEffectBase
 {
+	private const sbyte ChangePowerUnitDirect = 2;
+
+	private const sbyte ChangePowerUnitReverse = 3;
+
 	protected sbyte AffectEquipType;
-
-	protected virtual sbyte ChangePowerUnitDirect => 2;
-
-	protected virtual sbyte ChangePowerUnitReverse => 2;
 
 	protected ChangePowerByEquipType()
 	{
@@ -41,7 +41,7 @@ public class ChangePowerByEquipType : CombatSkillEffectBase
 		{
 			return;
 		}
-		sbyte unit = (base.IsDirect ? ChangePowerUnitDirect : ChangePowerUnitReverse);
+		sbyte unit = (sbyte)(base.IsDirect ? 2 : 3);
 		int powerChangeValue = power / 10 * (base.IsDirect ? unit : (-unit));
 		if (powerChangeValue != 0)
 		{

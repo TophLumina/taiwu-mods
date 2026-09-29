@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Config;
 using GameData.Domains.Character;
 using GameData.Domains.Extra;
@@ -237,5 +238,24 @@ public class SectMainStoryInternalFunctions
 	private static void SetDivineFlameIsUnlocked(EventScriptRuntime runtime, bool isUnlocked)
 	{
 		DomainManager.Story.SetDivineFlameIsUnlocked(runtime.Context, isUnlocked);
+	}
+
+	[EventFunction(938)]
+	public static int GetMainStoryEndingLine(EventScriptRuntime runtime)
+	{
+		return GameData.Domains.TaiwuEvent.EventHelper.EventHelper.GetMainStoryEndingLine();
+	}
+
+	[EventFunction(900)]
+	private static string GetChickenDisplayName(EventScriptRuntime runtime, short chickenTemplateId)
+	{
+		string displayName = Chicken.Instance[chickenTemplateId].Name;
+		int chickenId = DomainManager.Building.GetChickenByTemplateId(chickenTemplateId);
+		if (chickenId < 0)
+		{
+			return displayName;
+		}
+		List<string> nicknames = DomainManager.Building.GetChickenNicknameList(new List<int> { chickenId });
+		return (nicknames.Count > 0 && !string.IsNullOrEmpty(nicknames[0])) ? nicknames[0] : displayName;
 	}
 }

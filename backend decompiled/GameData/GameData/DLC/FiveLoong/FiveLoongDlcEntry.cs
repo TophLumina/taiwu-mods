@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Config;
 using GameData.Common;
+using GameData.DLC.TameLoong;
 using GameData.DomainEvents;
 using GameData.Domains;
 using GameData.Domains.Building;
@@ -77,13 +78,15 @@ public class FiveLoongDlcEntry : IDlcEntry, ISerializableGameData
 
 	private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+	public static bool IsDlcEnabled => IsForcingEnabled() || (IsMainStoryLineProgressMeetLoongDlc() && IsTaiwuVillageLevelMeetFiveLoongDlc());
+
 	public static IReadOnlyDictionary<short, short> CarrierToJiaoTemplate => _carrierToJiaoTemplate;
 
 	private void PostAdvanceMonth_Main(DataContext context)
 	{
 		DomainManager.Extra.ClearTempData();
 		UpdateMaxTaiwuVillageLevel();
-		if (IsMainStoryLineProgressMeetLoongDlc() && IsTaiwuVillageLevelMeetFiveLoongDlc())
+		if (IsDlcEnabled)
 		{
 			EventArgBox loongDlcArgBox = DomainManager.Extra.GetOrCreateDlcArgBox(2764950uL, context);
 			bool fiveLoongDlcBeginMonthlyEventTriggered = false;
@@ -93,21 +96,24 @@ public class FiveLoongDlcEntry : IDlcEntry, ISerializableGameData
 				monthlyEventCollection.AddFiveLoongLetterFromTaiwuVillage();
 			}
 		}
-		static bool IsMainStoryLineProgressMeetLoongDlc()
-		{
-			return DomainManager.World.GetDefeatSwordTombCount() >= 4 && DomainManager.World.GetWorldFunctionsStatus(4);
-		}
-		static bool IsTaiwuVillageLevelMeetFiveLoongDlc()
-		{
-			Location taiwuVillageLocation = DomainManager.Taiwu.GetTaiwuVillageLocation();
-			BuildingAreaData taiwuBuildingAreaData = DomainManager.Building.GetBuildingAreaData(taiwuVillageLocation);
-			BuildingBlockKey buildingKey = BuildingDomain.FindBuildingKey(taiwuVillageLocation, taiwuBuildingAreaData, 44);
-			if (!buildingKey.IsInvalid && DomainManager.Building.TryGetElement_BuildingBlocks(buildingKey, out var buildingBlockData) && buildingBlockData.CalcUnlockedLevelCount() >= 6)
-			{
-				return true;
-			}
-			return false;
-		}
+	}
+
+	private static bool IsForcingEnabled()
+	{
+		return DlcManager.IsDlcInstalled(ImplementedDlc.DefValue.TaiwuAsXiangshu.AppId) && DomainManager.Extra.PagodaofTheFallenEntered();
+	}
+
+	private static bool IsMainStoryLineProgressMeetLoongDlc()
+	{
+		return DomainManager.World.GetDefeatSwordTombCount() >= 4 && DomainManager.World.GetWorldFunctionsStatus(4);
+	}
+
+	private static bool IsTaiwuVillageLevelMeetFiveLoongDlc()
+	{
+		Location taiwuVillageLocation = DomainManager.Taiwu.GetTaiwuVillageLocation();
+		BuildingBlockKey buildingKey = BuildingDomain.FindBuildingKey(taiwuVillageLocation, DomainManager.Building.GetBuildingAreaData(taiwuVillageLocation), 44);
+		BuildingBlockData buildingBlockData;
+		return !buildingKey.IsInvalid && DomainManager.Building.TryGetElement_BuildingBlocks(buildingKey, out buildingBlockData) && buildingBlockData.CalcUnlockedLevelCount() >= 6;
 	}
 
 	public void PostAdvanceMonth_JiaoPool(DataContext context)
@@ -667,7 +673,7 @@ public class FiveLoongDlcEntry : IDlcEntry, ISerializableGameData
 		{
 			if (!lifeSkillItem.IsPageRead(pageId))
 			{
-				DomainManager.Taiwu.ReadSkillBookPageAndSetComplete(context, selectedBook, pageId);
+				DomainManager.Taiwu.ReadSkillBookPageAndSetComplete(context, selectedBook, pageId, addSeniority: true);
 				int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
 				int currDate = DomainManager.World.GetCurrDate();
 				Location location = taiwu.GetLocation();
@@ -796,9 +802,16 @@ public class FiveLoongDlcEntry : IDlcEntry, ISerializableGameData
 				loongInfo.LoongCurrentLocation = new Location(loongInfo.LoongCurrentLocation.AreaId, randomBlockId);
 				DomainManager.Extra.CreateAnimalByCharacterTemplateId(context, loongInfo.CharacterTemplateId, loongInfo.LoongCurrentLocation);
 			}
-			else if (loongInfo.DisappearDate + 108 <= DomainManager.World.GetCurrDate() && loongInfo.IsDisappear && !TryCreateOrReAppearFiveLoong(context, isStrict: true, loongInfo.CharacterTemplateId))
+			else if (TameLoongEntry.IsLoongFree(loongId))
 			{
-				TryCreateOrReAppearFiveLoong(context, isStrict: false, loongInfo.CharacterTemplateId);
+				if (loongInfo.DisappearDate + 108 <= DomainManager.World.GetCurrDate() && loongInfo.IsDisappear && !TryCreateOrReAppearFiveLoong(context, isStrict: true, loongInfo.CharacterTemplateId))
+				{
+					TryCreateOrReAppearFiveLoong(context, isStrict: false, loongInfo.CharacterTemplateId);
+				}
+			}
+			else
+			{
+				loongInfo.DisappearDate = DomainManager.World.GetCurrDate();
 			}
 			if (DomainManager.Extra.TryGetAnimalAreaDataByAreaId(loongLocation.AreaId, out var animalAreaData))
 			{
@@ -1356,6 +1369,7 @@ public class FiveLoongDlcEntry : IDlcEntry, ISerializableGameData
 				TryCreateOrReAppearFiveLoong(context, isStrict: false, loongCfg.CharTemplateId);
 			}
 		}
+		TameLoongEntry.DefeatAppearedFiveLoongByTaiwuCarriers(context);
 	}
 
 	public static int DefeatFiveLoong(DataContext context, short characterTemplateId)

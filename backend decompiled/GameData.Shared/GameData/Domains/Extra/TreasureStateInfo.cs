@@ -3,40 +3,20 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 宝藏州域分布信息
-/// </summary>
 [Serializable]
-public struct TreasureStateInfo : ISerializableGameData, IEquatable<TreasureStateInfo>
+public struct TreasureStateInfo(sbyte mapState, sbyte amount) : ISerializableGameData, IEquatable<TreasureStateInfo>
 {
-	/// <summary>
-	/// 州域 ID
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte MapState;
+	public sbyte MapState = mapState;
 
-	/// <summary>
-	/// 心材数量
-	/// </summary>
 	[SerializableGameDataField]
-	public sbyte Amount;
+	public sbyte Amount = amount;
 
-	/// <summary>
-	/// 从配置表构建的方法
-	/// </summary>
-	public TreasureStateInfo(sbyte mapState, sbyte amount)
-	{
-		MapState = mapState;
-		Amount = amount;
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -47,7 +27,6 @@ public struct TreasureStateInfo : ISerializableGameData, IEquatable<TreasureStat
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (byte)MapState;
@@ -61,7 +40,6 @@ public struct TreasureStateInfo : ISerializableGameData, IEquatable<TreasureStat
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -77,7 +55,6 @@ public struct TreasureStateInfo : ISerializableGameData, IEquatable<TreasureStat
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public bool Equals(TreasureStateInfo other)
 	{
 		if (MapState == other.MapState)
@@ -87,7 +64,6 @@ public struct TreasureStateInfo : ISerializableGameData, IEquatable<TreasureStat
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override bool Equals(object obj)
 	{
 		if (obj is TreasureStateInfo other)
@@ -97,7 +73,6 @@ public struct TreasureStateInfo : ISerializableGameData, IEquatable<TreasureStat
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override int GetHashCode()
 	{
 		return (MapState.GetHashCode() * 397) ^ Amount.GetHashCode();

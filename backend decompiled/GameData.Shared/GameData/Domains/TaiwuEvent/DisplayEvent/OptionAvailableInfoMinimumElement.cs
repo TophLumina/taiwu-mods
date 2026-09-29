@@ -6,34 +6,18 @@ namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
 public struct OptionAvailableInfoMinimumElement : ISerializableGameData
 {
-	/// <summary>
-	/// 对应的条件Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short ConditionId;
 
-	/// <summary>
-	/// 格式化条件文本时要使用的参数数组
-	/// </summary>
 	[SerializableGameDataField]
 	public string[] FormatArgs;
 
-	/// <summary>
-	/// 元素是否满足条件
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Pass;
 
-	/// <summary>
-	/// 元素是否隐藏
-	/// 某些选项元素可能需要根据条件的结果来显示或隐藏
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Hide;
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public OptionAvailableInfoMinimumElement(OptionAvailableInfoMinimumElement other)
 	{
 		ConditionId = other.ConditionId;
@@ -48,9 +32,6 @@ public struct OptionAvailableInfoMinimumElement : ISerializableGameData
 		Hide = other.Hide;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(OptionAvailableInfoMinimumElement other)
 	{
 		ConditionId = other.ConditionId;
@@ -65,13 +46,11 @@ public struct OptionAvailableInfoMinimumElement : ISerializableGameData
 		Hide = other.Hide;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -96,7 +75,6 @@ public struct OptionAvailableInfoMinimumElement : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -150,7 +128,6 @@ public struct OptionAvailableInfoMinimumElement : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

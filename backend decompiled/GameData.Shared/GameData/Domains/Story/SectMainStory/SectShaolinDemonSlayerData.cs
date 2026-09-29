@@ -6,76 +6,36 @@ using Redzen.Random;
 
 namespace GameData.Domains.Story.SectMainStory;
 
-/// <summary>
-/// 少林诛魔试炼数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SectShaolinDemonSlayerData : ISerializableGameData
 {
-	/// <summary>
-	/// 每级挑战的魔头数
-	/// </summary>
 	public const int DemonPerLevel = 2;
 
-	/// <summary>
-	/// 最大约束数
-	/// </summary>
 	public const int MaxRestrictCount = 3;
 
-	/// <summary>
-	/// 约束索引缓存
-	/// </summary>
 	private static readonly List<int> RestrictCacheIndexes = new List<int>();
 
-	/// <summary>
-	/// 约束权重缓存
-	/// </summary>
 	private static readonly List<short> RestrictCacheWeights = new List<short>();
 
-	/// <summary>
-	/// 约束组缓存
-	/// </summary>
 	private static readonly HashSet<int> RestrictCacheGroups = new HashSet<int>();
 
-	/// <summary>
-	/// 正在挑战的约束特效
-	/// 仅限后端使用
-	/// </summary>
 	public List<object> TrialingRestrictEffects;
 
-	/// <summary>
-	/// 魔头击败标识，转换为 BoolArray32 使用，索引为 DemonSlayerTrial 表的 TemplateId
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	private uint _demonFlags0;
 
-	/// <summary>
-	/// 正在挑战的魔头顺序，每两个为一组
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	private List<int> _trialingDemons;
 
-	/// <summary>
-	/// 当前挑战级别
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	private int _trialingLevel;
 
-	/// <summary>
-	/// 各魔头的约束条件
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	private List<IntList> _trailingRestricts;
 
-	/// <summary>
-	/// 重新生成约束条件的剩余次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	private List<int> _trailingRegenerateRestrictCount;
 
-	/// <summary>
-	/// 是否处于试炼状态（已初始化魔头，且存在待挑战的魔头）
-	/// </summary>
 	public bool Trialing
 	{
 		get
@@ -89,9 +49,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 当前挑战的关卡配置
-	/// </summary>
 	public DemonSlayerTrialLevelItem TrialingLevel
 	{
 		get
@@ -105,9 +62,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 生成一组随机的约束条件
-	/// </summary>
 	public static IntList GenerateRestricts(IRandomSource random, int demonId, int totalPower)
 	{
 		IntList result = IntList.Create();
@@ -147,9 +101,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return result;
 	}
 
-	/// <summary>
-	/// 获取当前关卡重新生成约束条件的剩余次数
-	/// </summary>
 	public int GetRegenerateRestrictCount()
 	{
 		if (!Trialing)
@@ -159,9 +110,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return _trailingRegenerateRestrictCount[_trialingLevel];
 	}
 
-	/// <summary>
-	/// 获取正在挑战的魔头
-	/// </summary>
 	public DemonSlayerTrialItem GetTrialingDemon(int index)
 	{
 		bool flag = ((index < 0 || index >= 2) ? true : false);
@@ -174,9 +122,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return DemonSlayerTrial.Instance[templateId];
 	}
 
-	/// <summary>
-	/// 获取正在挑战的魔头约束
-	/// </summary>
 	public IEnumerable<DemonSlayerTrialRestrictItem> GetTrialingRestricts(int index)
 	{
 		bool flag = ((index < 0 || index >= 2) ? true : false);
@@ -197,9 +142,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 指定魔头是否在任意挑战中被击败过
-	/// </summary>
 	public bool IsDemonDefeated(int templateId)
 	{
 		if (templateId < 0 || templateId >= DemonSlayerTrial.Instance.Count)
@@ -210,9 +152,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return ((BoolArray32)_demonFlags0)[templateId];
 	}
 
-	/// <summary>
-	/// 生成一轮新的挑战
-	/// </summary>
 	public bool GenerateDemons(IRandomSource random)
 	{
 		if (Trialing)
@@ -254,9 +193,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 清空挑战数据
-	/// </summary>
 	public bool ClearDemons()
 	{
 		List<int> trialingDemons = _trialingDemons;
@@ -279,9 +215,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 重新生成当前关卡的约束条件
-	/// </summary>
 	public bool ReGenerateRestricts(IRandomSource random)
 	{
 		if (GetRegenerateRestrictCount() <= 0)
@@ -298,9 +231,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 结算奖励后前往下一关
-	/// </summary>
 	public bool ToNextLevel()
 	{
 		if (!Trialing)
@@ -315,9 +245,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 标记指定魔头已被击败
-	/// </summary>
 	public bool MarkDemonAsDefeated(int templateId)
 	{
 		if (templateId < 0 || templateId >= DemonSlayerTrial.Instance.Count)
@@ -331,16 +258,10 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectShaolinDemonSlayerData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectShaolinDemonSlayerData(SectShaolinDemonSlayerData other)
 	{
 		_demonFlags0 = other._demonFlags0;
@@ -363,9 +284,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		_trailingRegenerateRestrictCount = ((other._trailingRegenerateRestrictCount == null) ? null : new List<int>(other._trailingRegenerateRestrictCount));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectShaolinDemonSlayerData other)
 	{
 		_demonFlags0 = other._demonFlags0;
@@ -388,13 +306,11 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		_trailingRegenerateRestrictCount = ((other._trailingRegenerateRestrictCount == null) ? null : new List<int>(other._trailingRegenerateRestrictCount));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -420,7 +336,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -488,7 +403,6 @@ public class SectShaolinDemonSlayerData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

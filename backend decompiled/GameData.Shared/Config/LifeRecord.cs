@@ -7,13841 +7,5624 @@ namespace Config;
 [Serializable]
 public class LifeRecord : ConfigData<LifeRecordItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// Die
-		/// </summary>
 		public const short Die = 0;
 
-		/// <summary>
-		/// XiangshuPartiallyInfected
-		/// </summary>
 		public const short XiangshuPartiallyInfected = 1;
 
-		/// <summary>
-		/// XiangshuCompletelyInfected
-		/// </summary>
 		public const short XiangshuCompletelyInfected = 2;
 
-		/// <summary>
-		/// MotherLoseFetus
-		/// </summary>
 		public const short MotherLoseFetus = 3;
 
-		/// <summary>
-		/// FatherLoseFetus
-		/// </summary>
 		public const short FatherLoseFetus = 4;
 
-		/// <summary>
-		/// AbandonChild
-		/// </summary>
 		public const short AbandonChild = 5;
 
-		/// <summary>
-		/// ChildGetAbandoned
-		/// </summary>
 		public const short ChildGetAbandoned = 6;
 
-		/// <summary>
-		/// GiveBirthToCricket
-		/// </summary>
 		public const short GiveBirthToCricket = 7;
 
-		/// <summary>
-		/// GiveBirthToBoy
-		/// </summary>
 		public const short GiveBirthToBoy = 8;
 
-		/// <summary>
-		/// GiveBirthToGirl
-		/// </summary>
 		public const short GiveBirthToGirl = 9;
 
-		/// <summary>
-		/// BecomeFatherToNewBornBoy
-		/// </summary>
 		public const short BecomeFatherToNewBornBoy = 10;
 
-		/// <summary>
-		/// BecomeFatherToNewBornGirl
-		/// </summary>
 		public const short BecomeFatherToNewBornGirl = 11;
 
-		/// <summary>
-		/// BuildGrave
-		/// </summary>
 		public const short BuildGrave = 12;
 
-		/// <summary>
-		/// MonkBreakRule
-		/// </summary>
 		public const short MonkBreakRule = 13;
 
-		/// <summary>
-		/// KidnappedCharacterEscaped
-		/// </summary>
 		public const short KidnappedCharacterEscaped = 14;
 
-		/// <summary>
-		/// EscapeFromKidnapping
-		/// </summary>
 		public const short EscapeFromKidnapping = 15;
 
-		/// <summary>
-		/// ReadBookSucceed
-		/// </summary>
 		public const short ReadBookSucceed = 16;
 
-		/// <summary>
-		/// ReadBookFail
-		/// </summary>
 		public const short ReadBookFail = 17;
 
-		/// <summary>
-		/// BreakoutSucceed
-		/// </summary>
 		public const short BreakoutSucceed = 18;
 
-		/// <summary>
-		/// BreakoutFail
-		/// </summary>
 		public const short BreakoutFail = 19;
 
-		/// <summary>
-		/// LearnCombatSkill
-		/// </summary>
 		public const short LearnCombatSkill = 20;
 
-		/// <summary>
-		/// LearnLifeSkill
-		/// </summary>
 		public const short LearnLifeSkill = 21;
 
-		/// <summary>
-		/// RepairItem
-		/// </summary>
 		public const short RepairItem = 22;
 
-		/// <summary>
-		/// AddPoisonToItem
-		/// </summary>
 		public const short AddPoisonToItem = 23;
 
-		/// <summary>
-		/// LoseOverloadingResource
-		/// </summary>
 		public const short LoseOverloadingResource = 24;
 
-		/// <summary>
-		/// LoseOverloadingItem
-		/// </summary>
 		public const short LoseOverloadingItem = 25;
 
-		/// <summary>
-		/// MakeEnemy
-		/// </summary>
 		public const short MakeEnemy = 26;
 
-		/// <summary>
-		/// SeverEnemy
-		/// </summary>
 		public const short SeverEnemy = 27;
 
-		/// <summary>
-		/// BeMadeEnemy
-		/// </summary>
 		public const short BeMadeEnemy = 28;
 
-		/// <summary>
-		/// SeveredEnemy
-		/// </summary>
 		public const short SeveredEnemy = 29;
 
-		/// <summary>
-		/// Adore
-		/// </summary>
 		public const short Adore = 30;
 
-		/// <summary>
-		/// LoveAtFirstSight
-		/// </summary>
 		public const short LoveAtFirstSight = 31;
 
-		/// <summary>
-		/// ConfessLoveSucceed
-		/// </summary>
 		public const short ConfessLoveSucceed = 32;
 
-		/// <summary>
-		/// ConfessLoveFail
-		/// </summary>
 		public const short ConfessLoveFail = 33;
 
-		/// <summary>
-		/// AcceptConfessLove
-		/// </summary>
 		public const short AcceptConfessLove = 34;
 
-		/// <summary>
-		/// RefuseConfessLove
-		/// </summary>
 		public const short RefuseConfessLove = 35;
 
-		/// <summary>
-		/// BreakupMutually
-		/// </summary>
 		public const short BreakupMutually = 36;
 
-		/// <summary>
-		/// DumpLover
-		/// </summary>
 		public const short DumpLover = 37;
 
-		/// <summary>
-		/// GetDumppedByLover
-		/// </summary>
 		public const short GetDumppedByLover = 38;
 
-		/// <summary>
-		/// ProposeMarriageSucceed
-		/// </summary>
 		public const short ProposeMarriageSucceed = 39;
 
-		/// <summary>
-		/// ProposeMarriageFail
-		/// </summary>
 		public const short ProposeMarriageFail = 40;
 
-		/// <summary>
-		/// RefuseMarriageProposal
-		/// </summary>
 		public const short RefuseMarriageProposal = 41;
 
-		/// <summary>
-		/// BecomeFriend
-		/// </summary>
 		public const short BecomeFriend = 42;
 
-		/// <summary>
-		/// SeverFriendship
-		/// </summary>
 		public const short SeverFriendship = 43;
 
-		/// <summary>
-		/// BecomeSwornBrotherOrSister
-		/// </summary>
 		public const short BecomeSwornBrotherOrSister = 44;
 
-		/// <summary>
-		/// SeverSwornBrotherhood
-		/// </summary>
 		public const short SeverSwornBrotherhood = 45;
 
-		/// <summary>
-		/// GetAdoptedByFather
-		/// </summary>
 		public const short GetAdoptedByFather = 46;
 
-		/// <summary>
-		/// GetAdoptedByMother
-		/// </summary>
 		public const short GetAdoptedByMother = 47;
 
-		/// <summary>
-		/// AdoptSon
-		/// </summary>
 		public const short AdoptSon = 48;
 
-		/// <summary>
-		/// AdoptDaughter
-		/// </summary>
 		public const short AdoptDaughter = 49;
 
-		/// <summary>
-		/// CreateFaction
-		/// </summary>
 		public const short CreateFaction = 50;
 
-		/// <summary>
-		/// JoinFaction
-		/// </summary>
 		public const short JoinFaction = 51;
 
-		/// <summary>
-		/// LeaveFaction
-		/// </summary>
 		public const short LeaveFaction = 52;
 
-		/// <summary>
-		/// FactionRecruitSucceed
-		/// </summary>
 		public const short FactionRecruitSucceed = 53;
 
-		/// <summary>
-		/// FactionRecruitFail
-		/// </summary>
 		public const short FactionRecruitFail = 54;
 
-		/// <summary>
-		/// AgreeToJoinFaction
-		/// </summary>
 		public const short AgreeToJoinFaction = 55;
 
-		/// <summary>
-		/// RefuseToJoinFaction
-		/// </summary>
 		public const short RefuseToJoinFaction = 56;
 
-		/// <summary>
-		/// DecideToJoinSect
-		/// </summary>
 		public const short DecideToJoinSect = 57;
 
-		/// <summary>
-		/// DecideToFullfillAppointment
-		/// </summary>
 		public const short DecideToFullfillAppointment = 58;
 
-		/// <summary>
-		/// DecideToProtect
-		/// </summary>
 		public const short DecideToProtect = 59;
 
-		/// <summary>
-		/// DecideToRescue
-		/// </summary>
 		public const short DecideToRescue = 60;
 
-		/// <summary>
-		/// DecideToMourn
-		/// </summary>
 		public const short DecideToMourn = 61;
 
-		/// <summary>
-		/// DecideToVisit
-		/// </summary>
 		public const short DecideToVisit = 62;
 
-		/// <summary>
-		/// DecideToFindLostItem
-		/// </summary>
 		public const short DecideToFindLostItem = 63;
 
-		/// <summary>
-		/// DecideToFindSpecialMaterial
-		/// </summary>
 		public const short DecideToFindSpecialMaterial = 64;
 
-		/// <summary>
-		/// DecideToRevenge
-		/// </summary>
 		public const short DecideToRevenge = 65;
 
-		/// <summary>
-		/// DecideToParticipateAdventure
-		/// </summary>
 		public const short DecideToParticipateAdventure = 66;
 
-		/// <summary>
-		/// JoinSectFail
-		/// </summary>
 		public const short JoinSectFail = 67;
 
-		/// <summary>
-		/// JoinSectSucceed
-		/// </summary>
 		public const short JoinSectSucceed = 68;
 
-		/// <summary>
-		/// CanNoLongerFullFillAppointment
-		/// </summary>
 		public const short CanNoLongerFullFillAppointment = 69;
 
-		/// <summary>
-		/// WaitForAppointment
-		/// </summary>
 		public const short WaitForAppointment = 70;
 
-		/// <summary>
-		/// FullFillAppointment
-		/// </summary>
 		public const short FullFillAppointment = 71;
 
-		/// <summary>
-		/// FinishProtection
-		/// </summary>
 		public const short FinishProtection = 72;
 
-		/// <summary>
-		/// OfferProtection
-		/// </summary>
 		public const short OfferProtection = 73;
 
-		/// <summary>
-		/// FinishRescue
-		/// </summary>
 		public const short FinishRescue = 74;
 
-		/// <summary>
-		/// FinishMourning
-		/// </summary>
 		public const short FinishMourning = 75;
 
-		/// <summary>
-		/// MaintainGrave
-		/// </summary>
 		public const short MaintainGrave = 76;
 
-		/// <summary>
-		/// UpgradeGrave
-		/// </summary>
 		public const short UpgradeGrave = 77;
 
-		/// <summary>
-		/// FinishVisit
-		/// </summary>
 		public const short FinishVisit = 78;
 
-		/// <summary>
-		/// FinishFIndingLostItem
-		/// </summary>
 		public const short FinishFIndingLostItem = 79;
 
-		/// <summary>
-		/// FinishFIndingSpecialMaterial
-		/// </summary>
 		public const short FinishFIndingSpecialMaterial = 80;
 
-		/// <summary>
-		/// FindLostItemSucceed
-		/// </summary>
 		public const short FindLostItemSucceed = 81;
 
-		/// <summary>
-		/// FindLostItemFail
-		/// </summary>
 		public const short FindLostItemFail = 82;
 
-		/// <summary>
-		/// FindSpecialMaterialSucceed
-		/// </summary>
 		public const short FindSpecialMaterialSucceed = 83;
 
-		/// <summary>
-		/// FinishTakingRevenge
-		/// </summary>
 		public const short FinishTakingRevenge = 84;
 
-		/// <summary>
-		/// MajorVictoryInCombat
-		/// </summary>
 		public const short MajorVictoryInCombat = 85;
 
-		/// <summary>
-		/// MajorFailureInCombat
-		/// </summary>
 		public const short MajorFailureInCombat = 86;
 
-		/// <summary>
-		/// VictoryInCombat
-		/// </summary>
 		public const short VictoryInCombat = 87;
 
-		/// <summary>
-		/// FailureInCombat
-		/// </summary>
 		public const short FailureInCombat = 88;
 
-		/// <summary>
-		/// EnemyEscape
-		/// </summary>
 		public const short EnemyEscape = 89;
 
-		/// <summary>
-		/// LoseAndEscape
-		/// </summary>
 		public const short LoseAndEscape = 90;
 
-		/// <summary>
-		/// KillInPublic
-		/// </summary>
 		public const short KillInPublic = 91;
 
-		/// <summary>
-		/// KillInPrivate
-		/// </summary>
 		public const short KillInPrivate = 92;
 
-		/// <summary>
-		/// KidnapInPublic
-		/// </summary>
 		public const short KidnapInPublic = 93;
 
-		/// <summary>
-		/// KidnapInPrivate
-		/// </summary>
 		public const short KidnapInPrivate = 94;
 
-		/// <summary>
-		/// ReleaseLoser
-		/// </summary>
 		public const short ReleaseLoser = 95;
 
-		/// <summary>
-		/// GetKidnappedInPublic
-		/// </summary>
 		public const short GetKidnappedInPublic = 96;
 
-		/// <summary>
-		/// GetKidnappedInPrivate
-		/// </summary>
 		public const short GetKidnappedInPrivate = 97;
 
-		/// <summary>
-		/// GetReleasedByWinner
-		/// </summary>
 		public const short GetReleasedByWinner = 98;
 
-		/// <summary>
-		/// AgreeToProtect
-		/// </summary>
 		public const short AgreeToProtect = 99;
 
-		/// <summary>
-		/// RefuseToProtect
-		/// </summary>
 		public const short RefuseToProtect = 100;
 
-		/// <summary>
-		/// FinishAdventure
-		/// </summary>
 		public const short FinishAdventure = 101;
 
-		/// <summary>
-		/// RequestHealOuterInjurySucceed
-		/// </summary>
-		public const short RequestHealOuterInjurySucceed = 102;
+		public const short RequestHealOuterInjuryItemSucceed = 102;
 
-		/// <summary>
-		/// RequestHealInnerInjurySucceed
-		/// </summary>
-		public const short RequestHealInnerInjurySucceed = 103;
+		public const short RequestHealInnerInjuryItemSucceed = 103;
 
-		/// <summary>
-		/// RequestDetoxPoisonSucceed
-		/// </summary>
-		public const short RequestDetoxPoisonSucceed = 104;
+		public const short RequestDetoxPoisonItemSucceed = 104;
 
-		/// <summary>
-		/// RequestHealthSucceed
-		/// </summary>
-		public const short RequestHealthSucceed = 105;
+		public const short RequestHealthItemSucceed = 105;
 
-		/// <summary>
-		/// RequestHealDisorderOfQiSucceed
-		/// </summary>
-		public const short RequestHealDisorderOfQiSucceed = 106;
+		public const short RequestHealDisorderOfQiItemSucceed = 106;
 
-		/// <summary>
-		/// RequestNeiliSucceed
-		/// </summary>
 		public const short RequestNeiliSucceed = 107;
 
-		/// <summary>
-		/// RequestKillWugSucceed
-		/// </summary>
 		public const short RequestKillWugSucceed = 108;
 
-		/// <summary>
-		/// RequestFoodSucceed
-		/// </summary>
 		public const short RequestFoodSucceed = 109;
 
-		/// <summary>
-		/// RequestTeaWineSucceed
-		/// </summary>
 		public const short RequestTeaWineSucceed = 110;
 
-		/// <summary>
-		/// RequestResourceSucceed
-		/// </summary>
 		public const short RequestResourceSucceed = 111;
 
-		/// <summary>
-		/// RequestItemSucceed
-		/// </summary>
 		public const short RequestItemSucceed = 112;
 
-		/// <summary>
-		/// RequestRepairItemSucceed
-		/// </summary>
 		public const short RequestRepairItemSucceed = 113;
 
-		/// <summary>
-		/// RequestAddPoisonToItemSucceed
-		/// </summary>
 		public const short RequestAddPoisonToItemSucceed = 114;
 
-		/// <summary>
-		/// RequestInstructionOnLifeSkillSucceed
-		/// </summary>
 		public const short RequestInstructionOnLifeSkillSucceed = 115;
 
-		/// <summary>
-		/// RequestInstructionOnCombatSkillSucceed
-		/// </summary>
 		public const short RequestInstructionOnCombatSkillSucceed = 116;
 
-		/// <summary>
-		/// RequestInstructionOnLifeSkillFailToLearn
-		/// </summary>
 		public const short RequestInstructionOnLifeSkillFailToLearn = 117;
 
-		/// <summary>
-		/// RequestInstructionOnCombatSkillFailToLearn
-		/// </summary>
 		public const short RequestInstructionOnCombatSkillFailToLearn = 118;
 
-		/// <summary>
-		/// RequestInstructionOnReadingSucceed
-		/// </summary>
 		public const short RequestInstructionOnReadingSucceed = 119;
 
-		/// <summary>
-		/// RequestInstructionOnBreakoutSucceed
-		/// </summary>
 		public const short RequestInstructionOnBreakoutSucceed = 120;
 
-		/// <summary>
-		/// RequestHealOuterInjuryFail
-		/// </summary>
-		public const short RequestHealOuterInjuryFail = 121;
+		public const short RequestHealOuterInjuryItemFail = 121;
 
-		/// <summary>
-		/// RequestHealInnerInjuryFail
-		/// </summary>
-		public const short RequestHealInnerInjuryFail = 122;
+		public const short RequestHealInnerInjuryItemFail = 122;
 
-		/// <summary>
-		/// RequestDetoxPoisonFail
-		/// </summary>
-		public const short RequestDetoxPoisonFail = 123;
+		public const short RequestDetoxPoisonItemFail = 123;
 
-		/// <summary>
-		/// RequestHealthFail
-		/// </summary>
-		public const short RequestHealthFail = 124;
+		public const short RequestHealthItemFail = 124;
 
-		/// <summary>
-		/// RequestHealDisorderOfQiFail
-		/// </summary>
-		public const short RequestHealDisorderOfQiFail = 125;
+		public const short RequestHealDisorderOfQiItemFail = 125;
 
-		/// <summary>
-		/// RequestNeiliFail
-		/// </summary>
 		public const short RequestNeiliFail = 126;
 
-		/// <summary>
-		/// RequestKillWugFail
-		/// </summary>
 		public const short RequestKillWugFail = 127;
 
-		/// <summary>
-		/// RequestFoodFail
-		/// </summary>
 		public const short RequestFoodFail = 128;
 
-		/// <summary>
-		/// RequestTeaWineFail
-		/// </summary>
 		public const short RequestTeaWineFail = 129;
 
-		/// <summary>
-		/// RequestResourceFail
-		/// </summary>
 		public const short RequestResourceFail = 130;
 
-		/// <summary>
-		/// RequestItemFail
-		/// </summary>
 		public const short RequestItemFail = 131;
 
-		/// <summary>
-		/// RequestRepairItemFail
-		/// </summary>
 		public const short RequestRepairItemFail = 132;
 
-		/// <summary>
-		/// RequestAddPoisonToItemFail
-		/// </summary>
 		public const short RequestAddPoisonToItemFail = 133;
 
-		/// <summary>
-		/// RequestInstructionOnLifeSkillFail
-		/// </summary>
 		public const short RequestInstructionOnLifeSkillFail = 134;
 
-		/// <summary>
-		/// RequestInstructionOnCombatSkillFail
-		/// </summary>
 		public const short RequestInstructionOnCombatSkillFail = 135;
 
-		/// <summary>
-		/// RequestInstructionOnReadingFail
-		/// </summary>
 		public const short RequestInstructionOnReadingFail = 136;
 
-		/// <summary>
-		/// RequestInstructionOnBreakoutFail
-		/// </summary>
 		public const short RequestInstructionOnBreakoutFail = 137;
 
-		/// <summary>
-		/// AcceptRequestHealOuterInjury
-		/// </summary>
-		public const short AcceptRequestHealOuterInjury = 138;
+		public const short AcceptRequestHealOuterInjuryItem = 138;
 
-		/// <summary>
-		/// AcceptRequestHealInnerInjury
-		/// </summary>
-		public const short AcceptRequestHealInnerInjury = 139;
+		public const short AcceptRequestHealInnerInjuryItem = 139;
 
-		/// <summary>
-		/// AcceptRequestDetoxPoison
-		/// </summary>
-		public const short AcceptRequestDetoxPoison = 140;
+		public const short AcceptRequestDetoxPoisonItem = 140;
 
-		/// <summary>
-		/// AcceptRequestHealth
-		/// </summary>
-		public const short AcceptRequestHealth = 141;
+		public const short AcceptRequestHealthItem = 141;
 
-		/// <summary>
-		/// AcceptRequestHealDisorderOfQi
-		/// </summary>
-		public const short AcceptRequestHealDisorderOfQi = 142;
+		public const short AcceptRequestHealDisorderOfQiItem = 142;
 
-		/// <summary>
-		/// AcceptRequestNeili
-		/// </summary>
 		public const short AcceptRequestNeili = 143;
 
-		/// <summary>
-		/// AcceptRequestKillWug
-		/// </summary>
 		public const short AcceptRequestKillWug = 144;
 
-		/// <summary>
-		/// AcceptRequestFood
-		/// </summary>
 		public const short AcceptRequestFood = 145;
 
-		/// <summary>
-		/// AcceptRequestTeaWine
-		/// </summary>
 		public const short AcceptRequestTeaWine = 146;
 
-		/// <summary>
-		/// AcceptRequestResource
-		/// </summary>
 		public const short AcceptRequestResource = 147;
 
-		/// <summary>
-		/// AcceptRequestItem
-		/// </summary>
 		public const short AcceptRequestItem = 148;
 
-		/// <summary>
-		/// AcceptRequestRepairItem
-		/// </summary>
 		public const short AcceptRequestRepairItem = 149;
 
-		/// <summary>
-		/// AcceptRequestAddPoisonToItem
-		/// </summary>
 		public const short AcceptRequestAddPoisonToItem = 150;
 
-		/// <summary>
-		/// AcceptRequestInstructionOnLifeSkill
-		/// </summary>
 		public const short AcceptRequestInstructionOnLifeSkill = 151;
 
-		/// <summary>
-		/// AcceptRequestInstructionOnCombatSkill
-		/// </summary>
 		public const short AcceptRequestInstructionOnCombatSkill = 152;
 
-		/// <summary>
-		/// AcceptRequestInstructionOnLifeSkillButFail
-		/// </summary>
 		public const short AcceptRequestInstructionOnLifeSkillButFail = 153;
 
-		/// <summary>
-		/// AcceptRequestInstructionOnCombatSkillButFail
-		/// </summary>
 		public const short AcceptRequestInstructionOnCombatSkillButFail = 154;
 
-		/// <summary>
-		/// AcceptRequestInstructionOnReading
-		/// </summary>
 		public const short AcceptRequestInstructionOnReading = 155;
 
-		/// <summary>
-		/// AcceptRequestInstructionOnBreakout
-		/// </summary>
 		public const short AcceptRequestInstructionOnBreakout = 156;
 
-		/// <summary>
-		/// RefuseRequestHealOuterInjury
-		/// </summary>
-		public const short RefuseRequestHealOuterInjury = 157;
+		public const short RefuseRequestHealOuterInjuryItem = 157;
 
-		/// <summary>
-		/// RefuseRequestHealInnerInjury
-		/// </summary>
-		public const short RefuseRequestHealInnerInjury = 158;
+		public const short RefuseRequestHealInnerInjuryItem = 158;
 
-		/// <summary>
-		/// RefuseRequestDetoxPoison
-		/// </summary>
-		public const short RefuseRequestDetoxPoison = 159;
+		public const short RefuseRequestDetoxPoisonItem = 159;
 
-		/// <summary>
-		/// RefuseRequestHealth
-		/// </summary>
-		public const short RefuseRequestHealth = 160;
+		public const short RefuseRequestHealthItem = 160;
 
-		/// <summary>
-		/// RefuseRequestHealDisorderOfQi
-		/// </summary>
-		public const short RefuseRequestHealDisorderOfQi = 161;
+		public const short RefuseRequestHealDisorderOfQiItem = 161;
 
-		/// <summary>
-		/// RefuseRequestNeili
-		/// </summary>
 		public const short RefuseRequestNeili = 162;
 
-		/// <summary>
-		/// RefuseRequestKillWug
-		/// </summary>
 		public const short RefuseRequestKillWug = 163;
 
-		/// <summary>
-		/// RefuseRequestFood
-		/// </summary>
 		public const short RefuseRequestFood = 164;
 
-		/// <summary>
-		/// RefuseRequestTeaWine
-		/// </summary>
 		public const short RefuseRequestTeaWine = 165;
 
-		/// <summary>
-		/// RefuseRequestResource
-		/// </summary>
 		public const short RefuseRequestResource = 166;
 
-		/// <summary>
-		/// RefuseRequestItem
-		/// </summary>
 		public const short RefuseRequestItem = 167;
 
-		/// <summary>
-		/// RefuseRequestRepairItem
-		/// </summary>
 		public const short RefuseRequestRepairItem = 168;
 
-		/// <summary>
-		/// RefuseRequestAddPoisonToItem
-		/// </summary>
 		public const short RefuseRequestAddPoisonToItem = 169;
 
-		/// <summary>
-		/// RefuseRequestInstructionOnLifeSkill
-		/// </summary>
 		public const short RefuseRequestInstructionOnLifeSkill = 170;
 
-		/// <summary>
-		/// RefuseRequestInstructionOnCombatSkill
-		/// </summary>
 		public const short RefuseRequestInstructionOnCombatSkill = 171;
 
-		/// <summary>
-		/// RefuseRequestInstructionOnReading
-		/// </summary>
 		public const short RefuseRequestInstructionOnReading = 172;
 
-		/// <summary>
-		/// RefuseRequestInstructionOnBreakout
-		/// </summary>
 		public const short RefuseRequestInstructionOnBreakout = 173;
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail1
-		/// </summary>
 		public const short RescueKidnappedCharacterSecretlyFail1 = 174;
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail2
-		/// </summary>
 		public const short RescueKidnappedCharacterSecretlyFail2 = 175;
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail3
-		/// </summary>
 		public const short RescueKidnappedCharacterSecretlyFail3 = 176;
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail4
-		/// </summary>
 		public const short RescueKidnappedCharacterSecretlyFail4 = 177;
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlySucceed
-		/// </summary>
 		public const short RescueKidnappedCharacterSecretlySucceed = 178;
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlySucceedAndEscaped
-		/// </summary>
 		public const short RescueKidnappedCharacterSecretlySucceedAndEscaped = 179;
 
-		/// <summary>
-		/// KidnappedCharacterGetRescuedSecretly
-		/// </summary>
 		public const short KidnappedCharacterGetRescuedSecretly = 180;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail1
-		/// </summary>
 		public const short RescueKidnappedCharacterWithWitFail1 = 181;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail2
-		/// </summary>
 		public const short RescueKidnappedCharacterWithWitFail2 = 182;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail3
-		/// </summary>
 		public const short RescueKidnappedCharacterWithWitFail3 = 183;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail4
-		/// </summary>
 		public const short RescueKidnappedCharacterWithWitFail4 = 184;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitSucceed
-		/// </summary>
 		public const short RescueKidnappedCharacterWithWitSucceed = 185;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitSucceedAndEscaped
-		/// </summary>
 		public const short RescueKidnappedCharacterWithWitSucceedAndEscaped = 186;
 
-		/// <summary>
-		/// KidnappedCharacterGetRescuedWithWit
-		/// </summary>
 		public const short KidnappedCharacterGetRescuedWithWit = 187;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail1
-		/// </summary>
 		public const short RescueKidnappedCharacterWithForceFail1 = 188;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail2
-		/// </summary>
 		public const short RescueKidnappedCharacterWithForceFail2 = 189;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail3
-		/// </summary>
 		public const short RescueKidnappedCharacterWithForceFail3 = 190;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail4
-		/// </summary>
 		public const short RescueKidnappedCharacterWithForceFail4 = 191;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceSucceed
-		/// </summary>
 		public const short RescueKidnappedCharacterWithForceSucceed = 192;
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceSucceedAndEscaped
-		/// </summary>
 		public const short RescueKidnappedCharacterWithForceSucceedAndEscaped = 193;
 
-		/// <summary>
-		/// KidnappedCharacterGetRescuedWithForce
-		/// </summary>
 		public const short KidnappedCharacterGetRescuedWithForce = 194;
 
-		/// <summary>
-		/// PoisonEnemyFail1
-		/// </summary>
 		public const short PoisonEnemyFail1 = 195;
 
-		/// <summary>
-		/// PoisonEnemyFail2
-		/// </summary>
 		public const short PoisonEnemyFail2 = 196;
 
-		/// <summary>
-		/// PoisonEnemyFail3
-		/// </summary>
 		public const short PoisonEnemyFail3 = 197;
 
-		/// <summary>
-		/// PoisonEnemyFail4
-		/// </summary>
 		public const short PoisonEnemyFail4 = 198;
 
-		/// <summary>
-		/// PoisonEnemySucceed
-		/// </summary>
 		public const short PoisonEnemySucceed = 199;
 
-		/// <summary>
-		/// PoisonEnemySucceedAndEscaped
-		/// </summary>
 		public const short PoisonEnemySucceedAndEscaped = 200;
 
-		/// <summary>
-		/// GetPoisonedByEnemySucceed
-		/// </summary>
 		public const short GetPoisonedByEnemySucceed = 201;
 
-		/// <summary>
-		/// PlotHarmEnemyFail1
-		/// </summary>
 		public const short PlotHarmEnemyFail1 = 202;
 
-		/// <summary>
-		/// PlotHarmEnemyFail2
-		/// </summary>
 		public const short PlotHarmEnemyFail2 = 203;
 
-		/// <summary>
-		/// PlotHarmEnemyFail3
-		/// </summary>
 		public const short PlotHarmEnemyFail3 = 204;
 
-		/// <summary>
-		/// PlotHarmEnemyFail4
-		/// </summary>
 		public const short PlotHarmEnemyFail4 = 205;
 
-		/// <summary>
-		/// PlotHarmEnemySucceed
-		/// </summary>
 		public const short PlotHarmEnemySucceed = 206;
 
-		/// <summary>
-		/// PlotHarmEnemySucceedAndEscaped
-		/// </summary>
 		public const short PlotHarmEnemySucceedAndEscaped = 207;
 
-		/// <summary>
-		/// GetPlottedAgainstSucceed
-		/// </summary>
 		public const short GetPlottedAgainstSucceed = 208;
 
-		/// <summary>
-		/// StealResourceFail1
-		/// </summary>
 		public const short StealResourceFail1 = 209;
 
-		/// <summary>
-		/// StealResourceFail2
-		/// </summary>
 		public const short StealResourceFail2 = 210;
 
-		/// <summary>
-		/// StealResourceFail3
-		/// </summary>
 		public const short StealResourceFail3 = 211;
 
-		/// <summary>
-		/// StealResourceFail4
-		/// </summary>
 		public const short StealResourceFail4 = 212;
 
-		/// <summary>
-		/// StealResourceSucceed
-		/// </summary>
 		public const short StealResourceSucceed = 213;
 
-		/// <summary>
-		/// StealResourceSucceedAndEscaped
-		/// </summary>
 		public const short StealResourceSucceedAndEscaped = 214;
 
-		/// <summary>
-		/// StealResourceFailAndBeatenUp
-		/// </summary>
 		public const short StealResourceFailAndBeatenUp = 215;
 
-		/// <summary>
-		/// ResourceGetStolenSucceed
-		/// </summary>
 		public const short ResourceGetStolenSucceed = 216;
 
-		/// <summary>
-		/// BeatUpResourceStealer
-		/// </summary>
 		public const short BeatUpResourceStealer = 217;
 
-		/// <summary>
-		/// ScamResourceFail1
-		/// </summary>
 		public const short ScamResourceFail1 = 218;
 
-		/// <summary>
-		/// ScamResourceFail2
-		/// </summary>
 		public const short ScamResourceFail2 = 219;
 
-		/// <summary>
-		/// ScamResourceFail3
-		/// </summary>
 		public const short ScamResourceFail3 = 220;
 
-		/// <summary>
-		/// ScamResourceFail4
-		/// </summary>
 		public const short ScamResourceFail4 = 221;
 
-		/// <summary>
-		/// ScamResourceSucceed
-		/// </summary>
 		public const short ScamResourceSucceed = 222;
 
-		/// <summary>
-		/// ScamResourceSucceedAndEscaped
-		/// </summary>
 		public const short ScamResourceSucceedAndEscaped = 223;
 
-		/// <summary>
-		/// ScamResourceFailAndBeatenUp
-		/// </summary>
 		public const short ScamResourceFailAndBeatenUp = 224;
 
-		/// <summary>
-		/// ResourceGetScammedSucceed
-		/// </summary>
 		public const short ResourceGetScammedSucceed = 225;
 
-		/// <summary>
-		/// BeatUpResourceScammer
-		/// </summary>
 		public const short BeatUpResourceScammer = 226;
 
-		/// <summary>
-		/// RobResourceFail1
-		/// </summary>
 		public const short RobResourceFail1 = 227;
 
-		/// <summary>
-		/// RobResourceFail2
-		/// </summary>
 		public const short RobResourceFail2 = 228;
 
-		/// <summary>
-		/// RobResourceFail3
-		/// </summary>
 		public const short RobResourceFail3 = 229;
 
-		/// <summary>
-		/// RobResourceFail4
-		/// </summary>
 		public const short RobResourceFail4 = 230;
 
-		/// <summary>
-		/// RobResourceSucceed
-		/// </summary>
 		public const short RobResourceSucceed = 231;
 
-		/// <summary>
-		/// RobResourceSucceedAndEscaped
-		/// </summary>
 		public const short RobResourceSucceedAndEscaped = 232;
 
-		/// <summary>
-		/// RobResourceFailAndBeatenUp
-		/// </summary>
 		public const short RobResourceFailAndBeatenUp = 233;
 
-		/// <summary>
-		/// ResourceGetRobbedSucceed
-		/// </summary>
 		public const short ResourceGetRobbedSucceed = 234;
 
-		/// <summary>
-		/// BeatUpResourceRobber
-		/// </summary>
 		public const short BeatUpResourceRobber = 235;
 
-		/// <summary>
-		/// StealItemFail1
-		/// </summary>
 		public const short StealItemFail1 = 236;
 
-		/// <summary>
-		/// StealItemFail2
-		/// </summary>
 		public const short StealItemFail2 = 237;
 
-		/// <summary>
-		/// StealItemFail3
-		/// </summary>
 		public const short StealItemFail3 = 238;
 
-		/// <summary>
-		/// StealItemFail4
-		/// </summary>
 		public const short StealItemFail4 = 239;
 
-		/// <summary>
-		/// StealItemSucceed
-		/// </summary>
 		public const short StealItemSucceed = 240;
 
-		/// <summary>
-		/// StealItemSucceedAndEscaped
-		/// </summary>
 		public const short StealItemSucceedAndEscaped = 241;
 
-		/// <summary>
-		/// StealItemSucceedAndBeatenUp
-		/// </summary>
 		public const short StealItemSucceedAndBeatenUp = 242;
 
-		/// <summary>
-		/// ItemGetStolenSucceed
-		/// </summary>
 		public const short ItemGetStolenSucceed = 243;
 
-		/// <summary>
-		/// BeatUpItemStealer
-		/// </summary>
 		public const short BeatUpItemStealer = 244;
 
-		/// <summary>
-		/// ScamItemFail1
-		/// </summary>
 		public const short ScamItemFail1 = 245;
 
-		/// <summary>
-		/// ScamItemFail2
-		/// </summary>
 		public const short ScamItemFail2 = 246;
 
-		/// <summary>
-		/// ScamItemFail3
-		/// </summary>
 		public const short ScamItemFail3 = 247;
 
-		/// <summary>
-		/// ScamItemFail4
-		/// </summary>
 		public const short ScamItemFail4 = 248;
 
-		/// <summary>
-		/// ScamItemSucceed
-		/// </summary>
 		public const short ScamItemSucceed = 249;
 
-		/// <summary>
-		/// ScamItemSucceedAndEscaped
-		/// </summary>
 		public const short ScamItemSucceedAndEscaped = 250;
 
-		/// <summary>
-		/// ScamItemFailAndBeatenUp
-		/// </summary>
 		public const short ScamItemFailAndBeatenUp = 251;
 
-		/// <summary>
-		/// ItemGetScammedSucceed
-		/// </summary>
 		public const short ItemGetScammedSucceed = 252;
 
-		/// <summary>
-		/// BeatUpItemScammer
-		/// </summary>
 		public const short BeatUpItemScammer = 253;
 
-		/// <summary>
-		/// RobItemFail1
-		/// </summary>
 		public const short RobItemFail1 = 254;
 
-		/// <summary>
-		/// RobItemFail2
-		/// </summary>
 		public const short RobItemFail2 = 255;
 
-		/// <summary>
-		/// RobItemFail3
-		/// </summary>
 		public const short RobItemFail3 = 256;
 
-		/// <summary>
-		/// RobItemFail4
-		/// </summary>
 		public const short RobItemFail4 = 257;
 
-		/// <summary>
-		/// RobItemSucceed
-		/// </summary>
 		public const short RobItemSucceed = 258;
 
-		/// <summary>
-		/// RobItemSucceedAndEscaped
-		/// </summary>
 		public const short RobItemSucceedAndEscaped = 259;
 
-		/// <summary>
-		/// RobItemFailAndBeatenUp
-		/// </summary>
 		public const short RobItemFailAndBeatenUp = 260;
 
-		/// <summary>
-		/// ItemGetRobbedSucceed
-		/// </summary>
 		public const short ItemGetRobbedSucceed = 261;
 
-		/// <summary>
-		/// BeatUpItemRobber
-		/// </summary>
 		public const short BeatUpItemRobber = 262;
 
-		/// <summary>
-		/// RobResourceFromGraveSucceed
-		/// </summary>
 		public const short RobResourceFromGraveSucceed = 263;
 
-		/// <summary>
-		/// RobResourceFromGraveFail
-		/// </summary>
 		public const short RobResourceFromGraveFail = 264;
 
-		/// <summary>
-		/// RobItemFromGraveSucceed
-		/// </summary>
 		public const short RobItemFromGraveSucceed = 265;
 
-		/// <summary>
-		/// RobItemFromGraveFail
-		/// </summary>
 		public const short RobItemFromGraveFail = 266;
 
-		/// <summary>
-		/// StealLifeSkillFail1
-		/// </summary>
 		public const short StealLifeSkillFail1 = 267;
 
-		/// <summary>
-		/// StealLifeSkillFail2
-		/// </summary>
 		public const short StealLifeSkillFail2 = 268;
 
-		/// <summary>
-		/// StealLifeSkillFail3
-		/// </summary>
 		public const short StealLifeSkillFail3 = 269;
 
-		/// <summary>
-		/// StealLifeSkillFail4
-		/// </summary>
 		public const short StealLifeSkillFail4 = 270;
 
-		/// <summary>
-		/// StealLifeSkillSucceed
-		/// </summary>
 		public const short StealLifeSkillSucceed = 271;
 
-		/// <summary>
-		/// StealLifeSkillSucceedAndEscaped
-		/// </summary>
 		public const short StealLifeSkillSucceedAndEscaped = 272;
 
-		/// <summary>
-		/// LifeSkillGetStolenSucceed
-		/// </summary>
 		public const short LifeSkillGetStolenSucceed = 273;
 
-		/// <summary>
-		/// ScamLifeSkillFail1
-		/// </summary>
 		public const short ScamLifeSkillFail1 = 274;
 
-		/// <summary>
-		/// ScamLifeSkillFail2
-		/// </summary>
 		public const short ScamLifeSkillFail2 = 275;
 
-		/// <summary>
-		/// ScamLifeSkillFail3
-		/// </summary>
 		public const short ScamLifeSkillFail3 = 276;
 
-		/// <summary>
-		/// ScamLifeSkillFail4
-		/// </summary>
 		public const short ScamLifeSkillFail4 = 277;
 
-		/// <summary>
-		/// ScamLifeSkillSucceed
-		/// </summary>
 		public const short ScamLifeSkillSucceed = 278;
 
-		/// <summary>
-		/// ScamLifeSkillSucceedAndEscaped
-		/// </summary>
 		public const short ScamLifeSkillSucceedAndEscaped = 279;
 
-		/// <summary>
-		/// LifeSkillGetScammedSucceed
-		/// </summary>
 		public const short LifeSkillGetScammedSucceed = 280;
 
-		/// <summary>
-		/// StealCombatSkillFail1
-		/// </summary>
 		public const short StealCombatSkillFail1 = 281;
 
-		/// <summary>
-		/// StealCombatSkillFail2
-		/// </summary>
 		public const short StealCombatSkillFail2 = 282;
 
-		/// <summary>
-		/// StealCombatSkillFail3
-		/// </summary>
 		public const short StealCombatSkillFail3 = 283;
 
-		/// <summary>
-		/// StealCombatSkillFail4
-		/// </summary>
 		public const short StealCombatSkillFail4 = 284;
 
-		/// <summary>
-		/// StealCombatSkillSucceed
-		/// </summary>
 		public const short StealCombatSkillSucceed = 285;
 
-		/// <summary>
-		/// StealCombatSkillSucceedAndEscaped
-		/// </summary>
 		public const short StealCombatSkillSucceedAndEscaped = 286;
 
-		/// <summary>
-		/// CombatSkillGetStolenSucceed
-		/// </summary>
 		public const short CombatSkillGetStolenSucceed = 287;
 
-		/// <summary>
-		/// ScamCombatSkillFail1
-		/// </summary>
 		public const short ScamCombatSkillFail1 = 288;
 
-		/// <summary>
-		/// ScamCombatSkillFail2
-		/// </summary>
 		public const short ScamCombatSkillFail2 = 289;
 
-		/// <summary>
-		/// ScamCombatSkillFail3
-		/// </summary>
 		public const short ScamCombatSkillFail3 = 290;
 
-		/// <summary>
-		/// ScamCombatSkillFail4
-		/// </summary>
 		public const short ScamCombatSkillFail4 = 291;
 
-		/// <summary>
-		/// ScamCombatSkillSucceed
-		/// </summary>
 		public const short ScamCombatSkillSucceed = 292;
 
-		/// <summary>
-		/// ScamCombatSkillSucceedAndEscaped
-		/// </summary>
 		public const short ScamCombatSkillSucceedAndEscaped = 293;
 
-		/// <summary>
-		/// CombatSkillGetScammedSucceed
-		/// </summary>
 		public const short CombatSkillGetScammedSucceed = 294;
 
-		/// <summary>
-		/// LifeSkillBattleWin
-		/// </summary>
 		public const short LifeSkillBattleWin = 295;
 
-		/// <summary>
-		/// LifeSkillBattleLose
-		/// </summary>
 		public const short LifeSkillBattleLose = 296;
 
-		/// <summary>
-		/// ExchangeResource
-		/// </summary>
 		public const short ExchangeResource = 297;
 
-		/// <summary>
-		/// GiveResource
-		/// </summary>
 		public const short GiveResource = 298;
 
-		/// <summary>
-		/// PurchaseItem
-		/// </summary>
 		public const short PurchaseItem = 299;
 
-		/// <summary>
-		/// SellItem
-		/// </summary>
 		public const short SellItem = 300;
 
-		/// <summary>
-		/// GiveItem
-		/// </summary>
 		public const short GiveItem = 301;
 
-		/// <summary>
-		/// GivePoisonousItem
-		/// </summary>
 		public const short GivePoisonousItem = 302;
 
-		/// <summary>
-		/// GetResourceAsGift
-		/// </summary>
 		public const short GetResourceAsGift = 303;
 
-		/// <summary>
-		/// GetItemAsGift
-		/// </summary>
 		public const short GetItemAsGift = 304;
 
-		/// <summary>
-		/// RefusePoisonousGift
-		/// </summary>
 		public const short RefusePoisonousGift = 305;
 
-		/// <summary>
-		/// InstructLifeSkill
-		/// </summary>
 		public const short InstructLifeSkill = 306;
 
-		/// <summary>
-		/// InstructCombatSkill
-		/// </summary>
 		public const short InstructCombatSkill = 307;
 
-		/// <summary>
-		/// LearnLifeSkillWithInstructionSucceed
-		/// </summary>
 		public const short LearnLifeSkillWithInstructionSucceed = 308;
 
-		/// <summary>
-		/// LearnLifeSkillWithInstructionFail
-		/// </summary>
 		public const short LearnLifeSkillWithInstructionFail = 309;
 
-		/// <summary>
-		/// LearnCombatSkillWithInstructionSucceed
-		/// </summary>
 		public const short LearnCombatSkillWithInstructionSucceed = 310;
 
-		/// <summary>
-		/// LearnCombatSkillWithInstructionFail
-		/// </summary>
 		public const short LearnCombatSkillWithInstructionFail = 311;
 
-		/// <summary>
-		/// InviteToDrinkSucceed
-		/// </summary>
 		public const short InviteToDrinkSucceed = 312;
 
-		/// <summary>
-		/// InviteToDrinkFail
-		/// </summary>
 		public const short InviteToDrinkFail = 313;
 
-		/// <summary>
-		/// SellSucceed
-		/// </summary>
 		public const short SellSucceed = 314;
 
-		/// <summary>
-		/// SellFail
-		/// </summary>
 		public const short SellFail = 315;
 
-		/// <summary>
-		/// CureSucceed
-		/// </summary>
 		public const short CureSucceed = 316;
 
-		/// <summary>
-		/// RepairItemSucceed
-		/// </summary>
 		public const short RepairItemSucceed = 317;
 
-		/// <summary>
-		/// BarbSucceed
-		/// </summary>
 		public const short BarbSucceed = 318;
 
-		/// <summary>
-		/// BarbMistake
-		/// </summary>
 		public const short BarbMistake = 319;
 
-		/// <summary>
-		/// BarbFail
-		/// </summary>
 		public const short BarbFail = 320;
 
-		/// <summary>
-		/// AskForMoneySucceed
-		/// </summary>
 		public const short AskForMoneySucceed = 321;
 
-		/// <summary>
-		/// AskForMoneyFail
-		/// </summary>
 		public const short AskForMoneyFail = 322;
 
-		/// <summary>
-		/// EntertainWithMusic
-		/// </summary>
 		public const short EntertainWithMusic = 323;
 
-		/// <summary>
-		/// EntertainWithChess
-		/// </summary>
 		public const short EntertainWithChess = 324;
 
-		/// <summary>
-		/// EntertainWithPoem
-		/// </summary>
 		public const short EntertainWithPoem = 325;
 
-		/// <summary>
-		/// EntertainWithPainting
-		/// </summary>
 		public const short EntertainWithPainting = 326;
 
-		/// <summary>
-		/// AcceptInviteToDrink
-		/// </summary>
 		public const short AcceptInviteToDrink = 327;
 
-		/// <summary>
-		/// RefuseInviteToDrink
-		/// </summary>
 		public const short RefuseInviteToDrink = 328;
 
-		/// <summary>
-		/// AcceptSell
-		/// </summary>
 		public const short AcceptSell = 329;
 
-		/// <summary>
-		/// RefuseSell
-		/// </summary>
 		public const short RefuseSell = 330;
 
-		/// <summary>
-		/// AcceptCure
-		/// </summary>
 		public const short AcceptCure = 331;
 
-		/// <summary>
-		/// AcceptRepairItem
-		/// </summary>
 		public const short AcceptRepairItem = 332;
 
-		/// <summary>
-		/// GetBarbSucceed
-		/// </summary>
 		public const short GetBarbSucceed = 333;
 
-		/// <summary>
-		/// GetBarbMistake
-		/// </summary>
 		public const short GetBarbMistake = 334;
 
-		/// <summary>
-		/// GetBarbFail
-		/// </summary>
 		public const short GetBarbFail = 335;
 
-		/// <summary>
-		/// AcceptAskForMoney
-		/// </summary>
 		public const short AcceptAskForMoney = 336;
 
-		/// <summary>
-		/// RefuseAskForMoney
-		/// </summary>
 		public const short RefuseAskForMoney = 337;
 
-		/// <summary>
-		/// AcceptEntertainWithMusic
-		/// </summary>
 		public const short AcceptEntertainWithMusic = 338;
 
-		/// <summary>
-		/// AcceptEntertainWithChess
-		/// </summary>
 		public const short AcceptEntertainWithChess = 339;
 
-		/// <summary>
-		/// AcceptEntertainWithPoem
-		/// </summary>
 		public const short AcceptEntertainWithPoem = 340;
 
-		/// <summary>
-		/// AcceptEntertainWithPainting
-		/// </summary>
 		public const short AcceptEntertainWithPainting = 341;
 
-		/// <summary>
-		/// MakeItem
-		/// </summary>
 		public const short MakeItem = 342;
 
-		/// <summary>
-		/// TaoismAwakeningSucceed
-		/// </summary>
 		public const short TaoismAwakeningSucceed = 343;
 
-		/// <summary>
-		/// TaoismAwakeningFail
-		/// </summary>
 		public const short TaoismAwakeningFail = 344;
 
-		/// <summary>
-		/// BuddismAwakeningSucceed
-		/// </summary>
 		public const short BuddismAwakeningSucceed = 345;
 
-		/// <summary>
-		/// BuddismAwakeningFail
-		/// </summary>
 		public const short BuddismAwakeningFail = 346;
 
-		/// <summary>
-		/// TaoismGetAwakenedSucceed
-		/// </summary>
 		public const short TaoismGetAwakenedSucceed = 347;
 
-		/// <summary>
-		/// TaoismGetAwakenedFail
-		/// </summary>
 		public const short TaoismGetAwakenedFail = 348;
 
-		/// <summary>
-		/// BuddismGetAwakenedSucceed
-		/// </summary>
 		public const short BuddismGetAwakenedSucceed = 349;
 
-		/// <summary>
-		/// BuddismGetAwakenedFail
-		/// </summary>
 		public const short BuddismGetAwakenedFail = 350;
 
-		/// <summary>
-		/// CollectTeaWineSucceed
-		/// </summary>
 		public const short CollectTeaWineSucceed = 351;
 
-		/// <summary>
-		/// CollectTeaWineFail
-		/// </summary>
 		public const short CollectTeaWineFail = 352;
 
-		/// <summary>
-		/// DivinationSucceed
-		/// </summary>
 		public const short DivinationSucceed = 353;
 
-		/// <summary>
-		/// DivinationFail
-		/// </summary>
 		public const short DivinationFail = 354;
 
-		/// <summary>
-		/// CricketBattleWin
-		/// </summary>
 		public const short CricketBattleWin = 355;
 
-		/// <summary>
-		/// CricketBattleLose
-		/// </summary>
 		public const short CricketBattleLose = 356;
 
-		/// <summary>
-		/// MakeLoveLegal
-		/// </summary>
 		public const short MakeLoveLegal = 1401;
 
-		/// <summary>
-		/// MakeLoveIllegal
-		/// </summary>
 		public const short MakeLoveIllegal = 357;
 
-		/// <summary>
-		/// RapeFail
-		/// </summary>
 		public const short RapeFail = 358;
 
-		/// <summary>
-		/// RapeSucceed
-		/// </summary>
 		public const short RapeSucceed = 359;
 
-		/// <summary>
-		/// ReleaseKidnappedCharacter
-		/// </summary>
 		public const short ReleaseKidnappedCharacter = 360;
 
-		/// <summary>
-		/// GetRapedFail
-		/// </summary>
 		public const short GetRapedFail = 361;
 
-		/// <summary>
-		/// GetRapedSucceed
-		/// </summary>
 		public const short GetRapedSucceed = 362;
 
-		/// <summary>
-		/// GetReleasedByKidnapper
-		/// </summary>
 		public const short GetReleasedByKidnapper = 363;
 
-		/// <summary>
-		/// MerchantGetNewProduct
-		/// </summary>
 		public const short MerchantGetNewProduct = 364;
 
-		/// <summary>
-		/// UnexpectedResourceGain
-		/// </summary>
 		public const short UnexpectedResourceGain = 365;
 
-		/// <summary>
-		/// UnexpectedItemGain
-		/// </summary>
 		public const short UnexpectedItemGain = 366;
 
-		/// <summary>
-		/// UnexpectedSkillBookGain
-		/// </summary>
 		public const short UnexpectedSkillBookGain = 367;
 
-		/// <summary>
-		/// UnexpectedHealthCure
-		/// </summary>
 		public const short UnexpectedHealthCure = 368;
 
-		/// <summary>
-		/// UnexpectedOuterInjuryCure
-		/// </summary>
 		public const short UnexpectedOuterInjuryCure = 369;
 
-		/// <summary>
-		/// UnexpectedInnerInjuryCure
-		/// </summary>
 		public const short UnexpectedInnerInjuryCure = 370;
 
-		/// <summary>
-		/// UnexpectedPoisonCure
-		/// </summary>
 		public const short UnexpectedPoisonCure = 371;
 
-		/// <summary>
-		/// UnexpectedDisorderOfQiCure
-		/// </summary>
 		public const short UnexpectedDisorderOfQiCure = 372;
 
-		/// <summary>
-		/// UnexpectedResourceLose
-		/// </summary>
 		public const short UnexpectedResourceLose = 373;
 
-		/// <summary>
-		/// UnexpectedItemLose
-		/// </summary>
 		public const short UnexpectedItemLose = 374;
 
-		/// <summary>
-		/// UnexpectedSkillBookLose
-		/// </summary>
 		public const short UnexpectedSkillBookLose = 375;
 
-		/// <summary>
-		/// UnexpectedInjure
-		/// </summary>
 		public const short UnexpectedHealthHarm = 376;
 
-		/// <summary>
-		/// UnexpectedOuterInjuryHarm
-		/// </summary>
 		public const short UnexpectedOuterInjuryHarm = 377;
 
-		/// <summary>
-		/// UnexpectedInnerInjuryHarm
-		/// </summary>
 		public const short UnexpectedInnerInjuryHarm = 378;
 
-		/// <summary>
-		/// UnexpectedPoisonHarm
-		/// </summary>
 		public const short UnexpectedPoisonHarm = 379;
 
-		/// <summary>
-		/// UnexpectedDisorderOfQiHarm
-		/// </summary>
 		public const short UnexpectedDisorderOfQiHarm = 380;
 
-		/// <summary>
-		/// KillHereticRandomEnemy
-		/// </summary>
 		public const short KillHereticRandomEnemy = 381;
 
-		/// <summary>
-		/// KillRighteousRandomEnemy
-		/// </summary>
 		public const short KillRighteousRandomEnemy = 382;
 
-		/// <summary>
-		/// DefeatedByHereticRandomEnemy
-		/// </summary>
 		public const short DefeatedByHereticRandomEnemy = 383;
 
-		/// <summary>
-		/// DefeatedByRighteousRandomEnemy
-		/// </summary>
 		public const short DefeatedByRighteousRandomEnemy = 384;
 
-		/// <summary>
-		/// MonvBad
-		/// </summary>
 		public const short MonvBad = 385;
 
-		/// <summary>
-		/// DayueYaochangBad
-		/// </summary>
 		public const short DayueYaochangBad = 386;
 
-		/// <summary>
-		/// JinHuangerBad
-		/// </summary>
 		public const short JinHuangerBad = 387;
 
-		/// <summary>
-		/// YiyihouBad
-		/// </summary>
 		public const short YiyihouBad = 388;
 
-		/// <summary>
-		/// WeiQiBad
-		/// </summary>
 		public const short WeiQiBad = 389;
 
-		/// <summary>
-		/// YixiangBad
-		/// </summary>
 		public const short YixiangBad = 390;
 
-		/// <summary>
-		/// ShufangBad
-		/// </summary>
 		public const short ShufangBad = 391;
 
-		/// <summary>
-		/// JixiBad
-		/// </summary>
 		public const short JixiBad = 392;
 
-		/// <summary>
-		/// MonvGood
-		/// </summary>
 		public const short MonvGood = 393;
 
-		/// <summary>
-		/// DayueYaochangGood
-		/// </summary>
 		public const short DayueYaochangGood = 394;
 
-		/// <summary>
-		/// JinHuangerGood
-		/// </summary>
 		public const short JinHuangerGood = 395;
 
-		/// <summary>
-		/// YiyihouGood
-		/// </summary>
 		public const short YiyihouGood = 396;
 
-		/// <summary>
-		/// WeiQiGood
-		/// </summary>
 		public const short WeiQiGood = 397;
 
-		/// <summary>
-		/// YixiangGood
-		/// </summary>
 		public const short YixiangGood = 398;
 
-		/// <summary>
-		/// XuefengGood
-		/// </summary>
 		public const short XuefengGood = 399;
 
-		/// <summary>
-		/// ShufangGood
-		/// </summary>
 		public const short ShufangGood = 400;
 
-		/// <summary>
-		/// PregnantWithSamsara0
-		/// </summary>
 		public const short PregnantWithSamsara0 = 401;
 
-		/// <summary>
-		/// PregnantWithSamsara1
-		/// </summary>
 		public const short PregnantWithSamsara1 = 402;
 
-		/// <summary>
-		/// PregnantWithSamsara2
-		/// </summary>
 		public const short PregnantWithSamsara2 = 403;
 
-		/// <summary>
-		/// PregnantWithSamsara3
-		/// </summary>
 		public const short PregnantWithSamsara3 = 404;
 
-		/// <summary>
-		/// PregnantWithSamsara4
-		/// </summary>
 		public const short PregnantWithSamsara4 = 405;
 
-		/// <summary>
-		/// PregnantWithSamsara5
-		/// </summary>
 		public const short PregnantWithSamsara5 = 406;
 
-		/// <summary>
-		/// GainAuthority
-		/// </summary>
 		public const short GainAuthority = 407;
 
-		/// <summary>
-		/// SectPunishNormal
-		/// </summary>
 		public const short SectPunishNormal = 408;
 
-		/// <summary>
-		/// SectPunishElope
-		/// </summary>
 		public const short SectPunishElope = 409;
 
-		/// <summary>
-		/// ExpelVillager
-		/// </summary>
 		public const short ExpelVillager = 410;
 
-		/// <summary>
-		/// SavedFromInfection
-		/// </summary>
 		public const short SavedFromInfection = 411;
 
-		/// <summary>
-		/// ChangeGrade
-		/// </summary>
 		public const short ChangeGrade = 412;
 
-		/// <summary>
-		/// AutoChangeGrade
-		/// </summary>
 		public const short AutoChangeGrade = 1414;
 
-		/// <summary>
-		/// ExpelledByTaiwu
-		/// </summary>
 		public const short ExpelledByTaiwu = 413;
 
-		/// <summary>
-		/// InsteadSectPunishElope
-		/// </summary>
 		public const short InsteadSectPunishElope = 414;
 
-		/// <summary>
-		/// AvoidSectPunishElope
-		/// </summary>
 		public const short AvoidSectPunishElope = 415;
 
-		/// <summary>
-		/// JoinJoustForSpouse
-		/// </summary>
 		public const short JoinJoustForSpouse = 416;
 
-		/// <summary>
-		/// GetHusbandByJoustForSpouse
-		/// </summary>
 		public const short GetHusbandByJoustForSpouse = 417;
 
-		/// <summary>
-		/// GetWifeByJoustForSpouse
-		/// </summary>
 		public const short GetWifeByJoustForSpouse = 418;
 
-		/// <summary>
-		/// NoHusbandByJoustForSpouse
-		/// </summary>
 		public const short NoHusbandByJoustForSpouse = 419;
 
-		/// <summary>
-		/// SectCompetitionBeWinner
-		/// </summary>
 		public const short SectCompetitionBeWinner = 420;
 
-		/// <summary>
-		/// SectCompetitionBeParticipant
-		/// </summary>
 		public const short SectCompetitionBeParticipant = 421;
 
-		/// <summary>
-		/// SectCompetitionBeHost
-		/// </summary>
 		public const short SectCompetitionBeHost = 422;
 
-		/// <summary>
-		/// WulinConferenceBeParticipant
-		/// </summary>
 		public const short WulinConferenceBeParticipant = 423;
 
-		/// <summary>
-		/// WulinConferenceBeWinner
-		/// </summary>
 		public const short WulinConferenceBeWinner = 424;
 
-		/// <summary>
-		/// WulinConferenceBeWinnerButTaiwu
-		/// </summary>
 		public const short WulinConferenceBeWinnerButTaiwu = 425;
 
-		/// <summary>
-		/// WulinConferenceBeHost
-		/// </summary>
 		public const short WulinConferenceBeHost = 426;
 
-		/// <summary>
-		/// WulinConferenceBeKilledByYufu
-		/// </summary>
 		public const short WulinConferenceBeKilledByYufu = 427;
 
-		/// <summary>
-		/// WulinConferenceDonation
-		/// </summary>
 		public const short WulinConferenceDonation = 428;
 
-		/// <summary>
-		/// BeAttackedAndDieByWuYingLing
-		/// </summary>
 		public const short BeAttackedAndDieByWuYingLing = 429;
 
-		/// <summary>
-		/// NaturalDisasterGiveDeath
-		/// </summary>
 		public const short NaturalDisasterGiveDeath = 430;
 
-		/// <summary>
-		/// NaturalDisasterHappen
-		/// </summary>
 		public const short NaturalDisasterHappen = 431;
 
-		/// <summary>
-		/// NaturalDisasterButSurvive
-		/// </summary>
 		public const short NaturalDisasterButSurvive = 432;
 
-		/// <summary>
-		/// NormalInformationChangeLovingItemSubType
-		/// </summary>
 		public const short NormalInformationChangeLovingItemSubType = 433;
 
-		/// <summary>
-		/// NormalInformationChangeHatingItemSubType
-		/// </summary>
 		public const short NormalInformationChangeHatingItemSubType = 434;
 
-		/// <summary>
-		/// NormalInformationChangeIdealSect
-		/// </summary>
 		public const short NormalInformationChangeIdealSect = 435;
 
-		/// <summary>
-		/// NormalInformationChangeBaseMorality
-		/// </summary>
 		public const short NormalInformationChangeBaseMorality = 436;
 
-		/// <summary>
-		/// NormalInformationChangeLifeSkillTypeInterest
-		/// </summary>
 		public const short NormalInformationChangeLifeSkillTypeInterest = 437;
 
-		/// <summary>
-		/// RobGraveEncounterSkeleton
-		/// </summary>
 		public const short RobGraveEncounterSkeleton = 438;
 
-		/// <summary>
-		/// RobGraveFailed
-		/// </summary>
 		public const short RobGraveFailed = 439;
 
-		/// <summary>
-		/// SectPunishLevelLowest
-		/// </summary>
 		public const short SectPunishLevelLowest = 440;
 
-		/// <summary>
-		/// PrincipalSectPunishLevelMiddle
-		/// </summary>
 		public const short PrincipalSectPunishLevelMiddle = 441;
 
-		/// <summary>
-		/// PrincipalSectPunishLevelHighest
-		/// </summary>
 		public const short PrincipalSectPunishLevelHighest = 442;
 
-		/// <summary>
-		/// NonPrincipalSectPunishLevelLowest
-		/// </summary>
 		public const short NonPrincipalSectPunishLevelLowest = 443;
 
-		/// <summary>
-		/// NonPrincipalSectPunishLevelHighest
-		/// </summary>
 		public const short NonPrincipalSectPunishLevelHighest = 444;
 
-		/// <summary>
-		/// BecomeSwornSiblingByThreatened
-		/// </summary>
 		public const short BecomeSwornSiblingByThreatened = 445;
 
-		/// <summary>
-		/// MarriedByThreatened
-		/// </summary>
 		public const short MarriedByThreatened = 446;
 
-		/// <summary>
-		/// GetAdoptedFatherByThreatened
-		/// </summary>
 		public const short GetAdoptedFatherByThreatened = 447;
 
-		/// <summary>
-		/// GetAdoptedMotherByThreatened
-		/// </summary>
 		public const short GetAdoptedMotherByThreatened = 448;
 
-		/// <summary>
-		/// GetAdoptedSonByThreatened
-		/// </summary>
 		public const short GetAdoptedSonByThreatened = 449;
 
-		/// <summary>
-		/// GetAdoptedDaughterByThreatened
-		/// </summary>
 		public const short GetAdoptedDaughterByThreatened = 450;
 
-		/// <summary>
-		/// AddMentorByThreatened
-		/// </summary>
 		public const short AddMentorByThreatened = 451;
 
-		/// <summary>
-		/// SeverSwornSiblingByThreatened
-		/// </summary>
 		public const short SeverSwornSiblingByThreatened = 452;
 
-		/// <summary>
-		/// DivorceByThreatened
-		/// </summary>
 		public const short DivorceByThreatened = 453;
 
-		/// <summary>
-		/// SeverMentorByThreatened
-		/// </summary>
 		public const short SeverMentorByThreatened = 454;
 
-		/// <summary>
-		/// SeverAdoptiveFatherByThreatened
-		/// </summary>
 		public const short SeverAdoptiveFatherByThreatened = 455;
 
-		/// <summary>
-		/// SeverAdoptiveMotherByThreatened
-		/// </summary>
 		public const short SeverAdoptiveMotherByThreatened = 456;
 
-		/// <summary>
-		/// SeverAdoptiveSonByThreatened
-		/// </summary>
 		public const short SeverAdoptiveSonByThreatened = 457;
 
-		/// <summary>
-		/// SeverAdoptiveDaughterByThreatened
-		/// </summary>
 		public const short SeverAdoptiveDaughterByThreatened = 458;
 
-		/// <summary>
-		/// GetThreatenedAdoptiveFather
-		/// </summary>
 		public const short GetThreatenedAdoptiveFather = 459;
 
-		/// <summary>
-		/// GetThreatenedAdoptiveMother
-		/// </summary>
 		public const short GetThreatenedAdoptiveMother = 460;
 
-		/// <summary>
-		/// GetThreatenedAdoptiveSon
-		/// </summary>
 		public const short GetThreatenedAdoptiveSon = 461;
 
-		/// <summary>
-		/// GetThreatenedAdoptiveDaughter
-		/// </summary>
 		public const short GetThreatenedAdoptiveDaughter = 462;
 
-		/// <summary>
-		/// ApproveTaiwuByThreatened
-		/// </summary>
 		public const short ApproveTaiwuByThreatened = 463;
 
-		/// <summary>
-		/// FourSeasonsAdventureBeParticipant
-		/// </summary>
 		public const short FourSeasonsAdventureBeParticipant = 464;
 
-		/// <summary>
-		/// FourSeasonsAdventureBeWinner
-		/// </summary>
 		public const short FourSeasonsAdventureBeWinner = 465;
 
-		/// <summary>
-		/// EndAdored
-		/// </summary>
 		public const short EndAdored = 466;
 
-		/// <summary>
-		/// GetMentor
-		/// </summary>
 		public const short GetMentor = 467;
 
-		/// <summary>
-		/// GetMentee
-		/// </summary>
 		public const short GetMentee = 468;
 
-		/// <summary>
-		/// SeverAdoptiveParent
-		/// </summary>
 		public const short SeverAdoptiveParent = 469;
 
-		/// <summary>
-		/// SeverAdoptiveChild
-		/// </summary>
 		public const short SeverAdoptiveChild = 470;
 
-		/// <summary>
-		/// SeverMentor
-		/// </summary>
 		public const short SeverMentor = 471;
 
-		/// <summary>
-		/// SeverMentee
-		/// </summary>
 		public const short SeverMentee = 472;
 
-		/// <summary>
-		/// Divorce
-		/// </summary>
 		public const short Divorce = 473;
 
-		/// <summary>
-		/// ThreatenSucceed
-		/// </summary>
 		public const short ThreatenSucceed = 474;
 
-		/// <summary>
-		/// AdmonishSucceed
-		/// </summary>
 		public const short AdmonishSucceed = 475;
 
-		/// <summary>
-		/// ChangeBehaviorTypeByAdmonishedGood
-		/// </summary>
 		public const short ChangeBehaviorTypeByAdmonishedGood = 476;
 
-		/// <summary>
-		/// ReduceDebtByAdmonished
-		/// </summary>
 		public const short ReduceDebtByAdmonished = 477;
 
-		/// <summary>
-		/// ReduceDebtByThreatened
-		/// </summary>
 		public const short ReduceDebtByThreatened = 478;
 
-		/// <summary>
-		/// ChangeBehaviorTypeByAdmonishedBad
-		/// </summary>
 		public const short ChangeBehaviorTypeByAdmonishedBad = 479;
 
-		/// <summary>
-		/// GainLegendaryBook
-		/// </summary>
 		public const short GainLegendaryBook = 480;
 
-		/// <summary>
-		/// BoostedByLegendaryBooks
-		/// </summary>
 		public const short BoostedByLegendaryBooks = 481;
 
-		/// <summary>
-		/// ActCrazy
-		/// </summary>
 		public const short ActCrazy = 482;
 
-		/// <summary>
-		/// LegendaryBookShocked
-		/// </summary>
 		public const short LegendaryBookShocked = 483;
 
-		/// <summary>
-		/// LegendaryBookInsane
-		/// </summary>
 		public const short LegendaryBookInsane = 484;
 
-		/// <summary>
-		/// LegendaryBookConsumed
-		/// </summary>
 		public const short LegendaryBookConsumed = 485;
 
-		/// <summary>
-		/// DecideToContestForLegendaryBook
-		/// </summary>
 		public const short DecideToContestForLegendaryBook = 486;
 
-		/// <summary>
-		/// FinishContestForLegendaryBook
-		/// </summary>
 		public const short FinishContestForLegendaryBook = 487;
 
-		/// <summary>
-		/// LegendaryBookChallengeWin
-		/// </summary>
 		public const short LegendaryBookChallengeWin = 488;
 
-		/// <summary>
-		/// LegendaryBookChallengeLose
-		/// </summary>
 		public const short LegendaryBookChallengeLose = 489;
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeWin
-		/// </summary>
 		public const short AcceptLegendaryBookChallengeWin = 490;
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeLose
-		/// </summary>
 		public const short AcceptLegendaryBookChallengeLose = 491;
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeEscape
-		/// </summary>
 		public const short AcceptLegendaryBookChallengeEscape = 492;
 
-		/// <summary>
-		/// LegendaryBookChallengeEscaped
-		/// </summary>
 		public const short LegendaryBookChallengeEscaped = 493;
 
-		/// <summary>
-		/// LegendaryBookChallengeSelfEscaped
-		/// </summary>
 		public const short LegendaryBookChallengeSelfEscaped = 494;
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeEnemyEscaped
-		/// </summary>
 		public const short AcceptLegendaryBookChallengeEnemyEscaped = 495;
 
-		/// <summary>
-		/// RefuseRequestLegendaryBookChallenge
-		/// </summary>
 		public const short RefuseRequestLegendaryBookChallenge = 496;
 
-		/// <summary>
-		/// RequestLegendaryBookChallengeFail
-		/// </summary>
 		public const short RequestLegendaryBookChallengeFail = 497;
 
-		/// <summary>
-		/// AcceptRequestLegendaryBook
-		/// </summary>
 		public const short AcceptRequestLegendaryBook = 498;
 
-		/// <summary>
-		/// RequestLegendaryBookSucceed
-		/// </summary>
 		public const short RequestLegendaryBookSucceed = 499;
 
-		/// <summary>
-		/// RequestLegendaryBookFail
-		/// </summary>
 		public const short RequestLegendaryBookFail = 500;
 
-		/// <summary>
-		/// RefuseRequestLegendaryBook
-		/// </summary>
 		public const short RefuseRequestLegendaryBook = 501;
 
-		/// <summary>
-		/// AcceptRequestExchangeLegendaryBook
-		/// </summary>
 		public const short AcceptRequestExchangeLegendaryBook = 502;
 
-		/// <summary>
-		/// RequestExchangeLegendaryBookSucceed
-		/// </summary>
 		public const short RequestExchangeLegendaryBookSucceed = 503;
 
-		/// <summary>
-		/// RefuseRequestExchangeLegendaryBook
-		/// </summary>
 		public const short RefuseRequestExchangeLegendaryBook = 504;
 
-		/// <summary>
-		/// RequestExchangeLegendaryBookFail
-		/// </summary>
 		public const short RequestExchangeLegendaryBookFail = 505;
 
-		/// <summary>
-		/// GiveLegendaryBookFail
-		/// </summary>
 		public const short GiveLegendaryBookFail = 506;
 
-		/// <summary>
-		/// RefuseGiveLegendaryBook
-		/// </summary>
 		public const short RefuseGiveLegendaryBook = 507;
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneJust
-		/// </summary>
 		public const short DefeatLegendaryBookInsaneJust = 508;
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneKind
-		/// </summary>
 		public const short DefeatLegendaryBookInsaneKind = 509;
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneEven
-		/// </summary>
 		public const short DefeatLegendaryBookInsaneEven = 510;
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneRebel
-		/// </summary>
 		public const short DefeatLegendaryBookInsaneRebel = 511;
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneEgoistic
-		/// </summary>
 		public const short DefeatLegendaryBookInsaneEgoistic = 512;
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedJust
-		/// </summary>
 		public const short LegendaryBookInsaneDefeatedJust = 513;
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedKind
-		/// </summary>
 		public const short LegendaryBookInsaneDefeatedKind = 514;
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedEven
-		/// </summary>
 		public const short LegendaryBookInsaneDefeatedEven = 515;
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedRebel
-		/// </summary>
 		public const short LegendaryBookInsaneDefeatedRebel = 516;
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedEgoistic
-		/// </summary>
 		public const short LegendaryBookInsaneDefeatedEgoistic = 517;
 
-		/// <summary>
-		/// ShockedInsaneEscaped
-		/// </summary>
 		public const short ShockedInsaneEscaped = 518;
 
-		/// <summary>
-		/// ReleaseShockedInsane
-		/// </summary>
 		public const short ReleaseShockedInsane = 519;
 
-		/// <summary>
-		/// UnderAttackEscaped
-		/// </summary>
 		public const short UnderAttackEscaped = 520;
 
-		/// <summary>
-		/// ReleaseUnderAttack
-		/// </summary>
 		public const short ReleaseUnderAttack = 521;
 
-		/// <summary>
-		/// DefeatConsumed
-		/// </summary>
 		public const short DefeatConsumed = 522;
 
-		/// <summary>
-		/// BeDefetedByConsumed
-		/// </summary>
 		public const short BeDefetedByConsumed = 523;
 
-		/// <summary>
-		/// AcceptRequestExchangeLegendaryBookByExp
-		/// </summary>
 		public const short AcceptRequestExchangeLegendaryBookByExp = 524;
 
-		/// <summary>
-		/// RequestExchangeLegendaryBookSucceedByExp
-		/// </summary>
 		public const short RequestExchangeLegendaryBookSucceedByExp = 525;
 
-		/// <summary>
-		/// ResignPositionToStudyLegendaryBook
-		/// </summary>
 		public const short ResignPositionToStudyLegendaryBook = 526;
 
-		/// <summary>
-		/// SoundOutLoverMind
-		/// </summary>
 		public const short SoundOutLoverMind = 527;
 
-		/// <summary>
-		/// SoundOutMind
-		/// </summary>
 		public const short SoundOutMind = 528;
 
-		/// <summary>
-		/// RedeemMindSucceed
-		/// </summary>
 		public const short RedeemMindSucceed = 529;
 
-		/// <summary>
-		/// RedeemMindFail
-		/// </summary>
 		public const short RedeemMindFail = 530;
 
-		/// <summary>
-		/// AcceptRedeemMind
-		/// </summary>
 		public const short AcceptRedeemMind = 531;
 
-		/// <summary>
-		/// RefuseRedeemMind
-		/// </summary>
 		public const short RefuseRedeemMind = 532;
 
-		/// <summary>
-		/// FirstDateWithLover
-		/// </summary>
 		public const short FirstDateWithLover = 533;
 
-		/// <summary>
-		/// FirstDateWithTaiwu
-		/// </summary>
 		public const short FirstDateWithTaiwu = 534;
 
-		/// <summary>
-		/// SelectLoverToken
-		/// </summary>
 		public const short SelectLoverToken = 535;
 
-		/// <summary>
-		/// SelectLoverToken2
-		/// </summary>
 		public const short SelectLoverToken2 = 536;
 
-		/// <summary>
-		/// DateWithLover
-		/// </summary>
 		public const short DateWithLover = 537;
 
-		/// <summary>
-		/// DateWithLover2
-		/// </summary>
 		public const short DateWithLover2 = 538;
 
-		/// <summary>
-		/// TillDeathDoUsPart
-		/// </summary>
 		public const short TillDeathDoUsPart = 539;
 
-		/// <summary>
-		/// CelebrateBirthday
-		/// </summary>
 		public const short CelebrateBirthday = 540;
 
-		/// <summary>
-		/// CelebrateSelfBirthday
-		/// </summary>
 		public const short CelebrateSelfBirthday = 541;
 
-		/// <summary>
-		/// CelebrateAnniversary
-		/// </summary>
 		public const short CelebrateAnniversary = 542;
 
-		/// <summary>
-		/// BeCaughtCheating
-		/// </summary>
 		public const short BeCaughtCheating = 543;
 
-		/// <summary>
-		/// CaughtCheating
-		/// </summary>
 		public const short CaughtCheating = 544;
 
-		/// <summary>
-		/// PregnancyWithWife
-		/// </summary>
 		public const short PregnancyWithWife = 545;
 
-		/// <summary>
-		/// PregnancyWithHusband
-		/// </summary>
 		public const short PregnancyWithHusband = 546;
 
-		/// <summary>
-		/// TeaTasting
-		/// </summary>
 		public const short TeaTasting = 547;
 
-		/// <summary>
-		/// TeaTastingLifeSkillBattleWin
-		/// </summary>
 		public const short TeaTastingLifeSkillBattleWin = 548;
 
-		/// <summary>
-		/// TeaTastingLifeSkillBattleLose
-		/// </summary>
 		public const short TeaTastingLifeSkillBattleLose = 549;
 
-		/// <summary>
-		/// TeaTastingDisorderOfQi
-		/// </summary>
 		public const short TeaTastingDisorderOfQi = 550;
 
-		/// <summary>
-		/// WineTasting
-		/// </summary>
 		public const short WineTasting = 551;
 
-		/// <summary>
-		/// WineTastingLifeSkillBattleWin
-		/// </summary>
 		public const short WineTastingLifeSkillBattleWin = 552;
 
-		/// <summary>
-		/// WineTastingLifeSkillBattleLose
-		/// </summary>
 		public const short WineTastingLifeSkillBattleLose = 553;
 
-		/// <summary>
-		/// WineTastingDisorderOfQi
-		/// </summary>
 		public const short WineTastingDisorderOfQi = 554;
 
-		/// <summary>
-		/// FirstNameChanged
-		/// </summary>
 		public const short FirstNameChanged = 555;
 
-		/// <summary>
-		/// LifeSkillModel
-		/// </summary>
 		public const short LifeSkillModel = 556;
 
-		/// <summary>
-		/// CombatSkillModel
-		/// </summary>
 		public const short CombatSkillModel = 557;
 
-		/// <summary>
-		/// PromoteReputation
-		/// </summary>
 		public const short PromoteReputation = 558;
 
-		/// <summary>
-		/// ReputationPromoted
-		/// </summary>
 		public const short ReputationPromoted = 559;
 
-		/// <summary>
-		/// CapabilityCultivated
-		/// </summary>
 		public const short CapabilityCultivated = 560;
 
-		/// <summary>
-		/// BroughtToTaiwuByBeggars
-		/// </summary>
 		public const short BroughtToTaiwuByBeggars = 561;
 
-		/// <summary>
-		/// CivilianSkillSeverEnemy
-		/// </summary>
 		public const short DiscardRevengeForCivilianSkill = 562;
 
-		/// <summary>
-		/// CivilianSkillDissolveResentment
-		/// </summary>
 		public const short CivilianSkillDissolveResentment = 563;
 
-		/// <summary>
-		/// PersuadeWithdrawlFromOrganization
-		/// </summary>
 		public const short PersuadeWithdrawlFromOrganization = 564;
 
-		/// <summary>
-		/// WithdrawlFromOrganization
-		/// </summary>
 		public const short WithdrawlFromOrganization = 565;
 
-		/// <summary>
-		/// FreeMedicalConsultation
-		/// </summary>
 		public const short FreeMedicalConsultation = 566;
 
-		/// <summary>
-		/// OfferTreasures
-		/// </summary>
 		public const short OfferTreasures = 567;
 
-		/// <summary>
-		/// ReceiveOfferedTreasures
-		/// </summary>
 		public const short ReceiveOfferedTreasures = 568;
 
-		/// <summary>
-		/// ForcefulPurchase
-		/// </summary>
 		public const short ForcefulPurchase = 569;
 
-		/// <summary>
-		/// ForcefulSale
-		/// </summary>
 		public const short ForcefulSale = 570;
 
-		/// <summary>
-		/// BegForMoney
-		/// </summary>
 		public const short BegForMoney = 571;
 
-		/// <summary>
-		/// AbsurdlyForceToLeave
-		/// </summary>
 		public const short AbsurdlyForceToLeave = 572;
 
-		/// <summary>
-		/// AbsurdlyForcedToLeave
-		/// </summary>
 		public const short AbsurdlyForcedToLeave = 573;
 
-		/// <summary>
-		/// DiagnoseWithMedicine
-		/// </summary>
 		public const short DiagnoseWithMedicine = 574;
 
-		/// <summary>
-		/// DiagnosedWithMedicine
-		/// </summary>
 		public const short DiagnosedWithMedicine = 575;
 
-		/// <summary>
-		/// DiagnoseWithWrongMedicine
-		/// </summary>
 		public const short DiagnoseWithNonMedicine = 576;
 
-		/// <summary>
-		/// DiagnosedWithWrongMedicine
-		/// </summary>
 		public const short DiagnosedWithWrongMedicine = 577;
 
-		/// <summary>
-		/// ExtendLifeSpan
-		/// </summary>
 		public const short ExtendLifeSpan = 578;
 
-		/// <summary>
-		/// LifeSpanExtended
-		/// </summary>
 		public const short LifeSpanExtended = 579;
 
-		/// <summary>
-		/// PersuadeToBecomeMonk
-		/// </summary>
 		public const short PersuadeToBecomeMonk = 580;
 
-		/// <summary>
-		/// BecomeMonkPersuaded
-		/// </summary>
 		public const short BecomeMonkPersuaded = 581;
 
-		/// <summary>
-		/// FailToPersuadeToBecomeMonk
-		/// </summary>
 		public const short FailToPersuadeToBecomeMonk = 582;
 
-		/// <summary>
-		/// ExpiateDeadSouls
-		/// </summary>
 		public const short ExpiateDeadSouls = 583;
 
-		/// <summary>
-		/// ExociseXiangshuInfectionVictoryInCombat
-		/// </summary>
 		public const short ExociseXiangshuInfectionVictoryInCombat = 584;
 
-		/// <summary>
-		/// BecomeExociseXiangshuInfectionVictoryInCombat
-		/// </summary>
 		public const short BecomeExociseXiangshuInfectionVictoryInCombat = 585;
 
-		/// <summary>
-		/// ExociseXiangshuInfectionVictoryInCombatDefeated
-		/// </summary>
 		public const short ExociseXiangshuInfectionVictoryInCombatDefeated = 586;
 
-		/// <summary>
-		/// TribulationSucceeded
-		/// </summary>
 		public const short TribulationSucceeded = 587;
 
-		/// <summary>
-		/// TribulationFailed
-		/// </summary>
 		public const short TribulationFailed = 588;
 
-		/// <summary>
-		/// TribulationCanceled
-		/// </summary>
 		public const short TribulationCanceled = 589;
 
-		/// <summary>
-		/// TribulationContinued
-		/// </summary>
 		public const short TribulationContinued = 590;
 
-		/// <summary>
-		/// GuidingEvilToGoodSucceed
-		/// </summary>
 		public const short GuidingEvilToGoodSucceed = 591;
 
-		/// <summary>
-		/// BecomeGuidingEvilToGoodSucceed
-		/// </summary>
 		public const short GuidingEvilGoodSucceed = 592;
 
-		/// <summary>
-		/// GuidingEvilToGoodFail
-		/// </summary>
 		public const short GuidingEvilToGoodFail = 593;
 
-		/// <summary>
-		/// VisitBuddhismTemples
-		/// </summary>
 		public const short VisitBuddhismTemples = 594;
 
-		/// <summary>
-		/// EpiphanyThruVisitTemples
-		/// </summary>
 		public const short EpiphanyThruVisitTemples = 595;
 
-		/// <summary>
-		/// EpiphanyThruVisitTemplesCombatSkill
-		/// </summary>
 		public const short EpiphanyThruVisitTemplesCombatSkill = 596;
 
-		/// <summary>
-		/// EpiphanyThruVisitTemplesLifeSkill
-		/// </summary>
 		public const short EpiphanyThruVisitTemplesLifeSkill = 597;
 
-		/// <summary>
-		/// EpiphanyThruVisitTemplesExperience
-		/// </summary>
 		public const short EpiphanyThruVisitTemplesExperience = 598;
 
-		/// <summary>
-		/// DivineUnexpectedGain
-		/// </summary>
 		public const short DivineUnexpectedGain = 599;
 
-		/// <summary>
-		/// DivineUnexpectedHarm
-		/// </summary>
 		public const short DivineUnexpectedHarm = 600;
 
-		/// <summary>
-		/// ExchangeFates
-		/// </summary>
 		public const short ExchangeFates = 601;
 
-		/// <summary>
-		/// BecomeExchangeFates
-		/// </summary>
 		public const short BecomeExchangeFates = 602;
 
-		/// <summary>
-		/// ImmortalityGained
-		/// </summary>
 		public const short ImmortalityGained = 603;
 
-		/// <summary>
-		/// ImmortalityLost
-		/// </summary>
 		public const short ImmortalityLost = 604;
 
-		/// <summary>
-		/// ImmortalityRegained
-		/// </summary>
 		public const short ImmortalityRegained = 605;
 
-		/// <summary>
-		/// TaiwuReincarnation
-		/// </summary>
 		public const short TaiwuReincarnation = 606;
 
-		/// <summary>
-		/// TaiwuReincarnationPregnancy
-		/// </summary>
 		public const short TaiwuReincarnationPregnancy = 607;
 
-		/// <summary>
-		/// MixPoisonHotRedRotten
-		/// </summary>
 		public const short MixPoisonHotRedRotten = 608;
 
-		/// <summary>
-		/// MixPoisonHotRottenIllusory
-		/// </summary>
 		public const short MixPoisonHotRottenIllusory = 609;
 
-		/// <summary>
-		/// MixPoisonHotRottenGloomy
-		/// </summary>
 		public const short MixPoisonHotRottenGloomy = 610;
 
-		/// <summary>
-		/// MixPoisonHotRottenCold
-		/// </summary>
 		public const short MixPoisonHotRottenCold = 611;
 
-		/// <summary>
-		/// MixPoisonRedRottenIllusory
-		/// </summary>
 		public const short MixPoisonRedRottenIllusory = 612;
 
-		/// <summary>
-		/// MixPoisonRedRottenGloomy
-		/// </summary>
 		public const short MixPoisonRedRottenGloomy = 613;
 
-		/// <summary>
-		/// MixPoisonRedRottenCold
-		/// </summary>
 		public const short MixPoisonRedRottenCold = 614;
 
-		/// <summary>
-		/// MixPoisonHotRedIllusory
-		/// </summary>
 		public const short MixPoisonHotRedIllusory = 615;
 
-		/// <summary>
-		/// MixPoisonHotRedGloomy
-		/// </summary>
 		public const short MixPoisonHotRedGloomy = 616;
 
-		/// <summary>
-		/// MixPoisonHotRedCold
-		/// </summary>
 		public const short MixPoisonHotRedCold = 617;
 
-		/// <summary>
-		/// MixPoisonGloomyColdIllusory
-		/// </summary>
 		public const short MixPoisonGloomyColdIllusory = 618;
 
-		/// <summary>
-		/// MixPoisonRottenGloomyCold
-		/// </summary>
 		public const short MixPoisonRottenGloomyCold = 619;
 
-		/// <summary>
-		/// MixPoisonHotGloomyCold
-		/// </summary>
 		public const short MixPoisonHotGloomyCold = 620;
 
-		/// <summary>
-		/// MixPoisonRedGloomyCold
-		/// </summary>
 		public const short MixPoisonRedGloomyCold = 621;
 
-		/// <summary>
-		/// MixPoisonRottenColdIllusory
-		/// </summary>
 		public const short MixPoisonRottenColdIllusory = 622;
 
-		/// <summary>
-		/// MixPoisonHotColdIllusory
-		/// </summary>
 		public const short MixPoisonHotColdIllusory = 623;
 
-		/// <summary>
-		/// MixPoisonRedColdIllusory
-		/// </summary>
 		public const short MixPoisonRedColdIllusory = 624;
 
-		/// <summary>
-		/// MixPoisonRottenGloomyIllusory
-		/// </summary>
 		public const short MixPoisonRottenGloomyIllusory = 625;
 
-		/// <summary>
-		/// MixPoisonHotGloomyIllusory
-		/// </summary>
 		public const short MixPoisonHotGloomyIllusory = 626;
 
-		/// <summary>
-		/// MixPoisonRedGloomyIllusory
-		/// </summary>
 		public const short MixPoisonRedGloomyIllusory = 627;
 
-		/// <summary>
-		/// DiggingXiangshuMinionCombatLost
-		/// </summary>
 		public const short DiggingXiangshuMinionCombatLost = 628;
 
-		/// <summary>
-		/// DiggingXiangshuMinionCombatWon
-		/// </summary>
 		public const short DiggingXiangshuMinionCombatWon = 629;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiKills
-		/// </summary>
 		public const short SectMainStoryXuehouJixiKills = 630;
 
-		/// <summary>
-		/// SectMainStoryWudangTreasure
-		/// </summary>
 		public const short SectMainStoryWudangTreasure = 631;
 
-		/// <summary>
-		/// SectMainStoryXuannvJoinOrg
-		/// </summary>
 		public const short SectMainStoryXuannvJoinOrg = 632;
 
-		/// <summary>
-		/// SectMainStoryYuanshanGetAbsorbed
-		/// </summary>
 		public const short SectMainStoryYuanshanGetAbsorbed = 633;
 
-		/// <summary>
-		/// SectMainStoryYuanshanResistSucceed
-		/// </summary>
 		public const short SectMainStoryYuanshanResistSucceed = 634;
 
-		/// <summary>
-		/// SectMainStoryYuanshanResistOrdinary
-		/// </summary>
 		public const short SectMainStoryYuanshanResistOrdinary = 635;
 
-		/// <summary>
-		/// SectMainStoryYuanshanResistFailed
-		/// </summary>
 		public const short SectMainStoryYuanshanResistFailed = 636;
 
-		/// <summary>
-		/// SectMainStoryXuehouZombieKills
-		/// </summary>
 		public const short SectMainStoryXuehouZombieKills = 637;
 
-		/// <summary>
-		/// SectMainStoryShixiangSkillEnemy
-		/// </summary>
 		public const short SectMainStoryShixiangSkillEnemy = 638;
 
-		/// <summary>
-		/// SectMainStoryWuxianMethysis0
-		/// </summary>
 		public const short SectMainStoryWuxianMethysis0 = 639;
 
-		/// <summary>
-		/// SectMainStoryWuxianPoison
-		/// </summary>
 		public const short SectMainStoryWuxianPoison = 640;
 
-		/// <summary>
-		/// SectMainStoryWuxianAssault
-		/// </summary>
 		public const short SectMainStoryWuxianAssault = 641;
 
-		/// <summary>
-		/// SectMainStoryWuxianMethysis1
-		/// </summary>
 		public const short SectMainStoryWuxianMethysis1 = 642;
 
-		/// <summary>
-		/// SectMainStoryEmeiInfighting
-		/// </summary>
 		public const short SectMainStoryEmeiInfighting = 643;
 
-		/// <summary>
-		/// SectMainStoryJieqingAssassin
-		/// </summary>
 		public const short SectMainStoryJieqingAssassin = 644;
 
-		/// <summary>
-		/// WulinConferencePraiseAndGifts
-		/// </summary>
 		public const short WulinConferencePraiseAndGifts = 645;
 
-		/// <summary>
-		/// NormalInformationChangeIdealSectNegative
-		/// </summary>
 		public const short NormalInformationChangeIdealSectNegative = 646;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiRescueTaiwu
-		/// </summary>
 		public const short SectMainStoryXuehouJixiRescueTaiwu = 647;
 
-		/// <summary>
-		/// SectMainStoryRanshanThreeFactionCompetetion
-		/// </summary>
 		public const short SectMainStoryRanshanJoinThreeFactionCompetetion = 648;
 
-		/// <summary>
-		/// SectMainStoryRanshanThreeFactionCompetetionWin
-		/// </summary>
 		public const short SectMainStoryRanshanThreeFactionCompetetionWin = 649;
 
-		/// <summary>
-		/// SectMainStoryRanshanThreeFactionCompetetionLose
-		/// </summary>
 		public const short SectMainStoryRanshanThreeFactionCompetetionLose = 650;
 
-		/// <summary>
-		/// GainExpByStroll
-		/// </summary>
 		public const short GainExpByStroll = 651;
 
-		/// <summary>
-		/// GainExpByReadingOldBook
-		/// </summary>
 		public const short GainExpByReadingOldBook = 652;
 
-		/// <summary>
-		/// PunishedAlongsideSpouse
-		/// </summary>
 		public const short PunishedAlongsideSpouse = 653;
 
-		/// <summary>
-		/// DecideToAdoptFoundling
-		/// </summary>
 		public const short DecideToAdoptFoundling = 654;
 
-		/// <summary>
-		/// AdoptFoundlingFail
-		/// </summary>
 		public const short AdoptFoundlingFail = 655;
 
-		/// <summary>
-		/// AdoptFoundlingSucceed
-		/// </summary>
 		public const short AdoptFoundlingSucceed = 656;
 
-		/// <summary>
-		/// FoundlingBeAdopted
-		/// </summary>
 		public const short FoundlingGetAdopted = 657;
 
-		/// <summary>
-		/// ClaimFoundlingSucceed
-		/// </summary>
 		public const short ClaimFoundlingSucceed = 658;
 
-		/// <summary>
-		/// FoundlingGetClaimed
-		/// </summary>
 		public const short FoundlingGetClaimed = 659;
 
-		/// <summary>
-		/// SectMainStoryWudangVillagerKilled
-		/// </summary>
 		public const short SectMainStoryWudangVillagerKilled = 660;
 
-		/// <summary>
-		/// SectMainStoryShixiangFallIll
-		/// </summary>
 		public const short SectMainStoryShixiangFallIll = 661;
 
-		/// <summary>
-		/// KillAnimal
-		/// </summary>
 		public const short KillAnimal = 662;
 
-		/// <summary>
-		/// DefeatedByAnimal
-		/// </summary>
 		public const short DefeatedByAnimal = 663;
 
-		/// <summary>
-		/// EnterEnemyNest
-		/// </summary>
 		public const short EnterEnemyNest = 664;
 
-		/// <summary>
-		/// DieFromEnemyNest
-		/// </summary>
 		public const short DieFromEnemyNest = 665;
 
-		/// <summary>
-		/// EscapeFromEnemyNest
-		/// </summary>
 		public const short EscapeFromEnemyNest = 666;
 
-		/// <summary>
-		/// GetSecretSpreadInVeryHighProbability
-		/// </summary>
 		public const short GetSecretSpreadInVeryHighProbability = 667;
 
-		/// <summary>
-		/// GetSecretSpreadInHighProbability
-		/// </summary>
 		public const short GetSecretSpreadInHighProbability = 668;
 
-		/// <summary>
-		/// GetSecretSpreadInLowProbability
-		/// </summary>
 		public const short GetSecretSpreadInLowProbability = 669;
 
-		/// <summary>
-		/// GetSecretSpreadInVeryLowProbability
-		/// </summary>
 		public const short GetSecretSpreadInVeryLowProbability = 670;
 
-		/// <summary>
-		/// SpreadSecretFail
-		/// </summary>
 		public const short SpreadSecretFail = 671;
 
-		/// <summary>
-		/// SpreadSecretSuccess
-		/// </summary>
 		public const short SpreadSecretSuccess = 672;
 
-		/// <summary>
-		/// HeardSecretSpreadInVeryHighProbability
-		/// </summary>
 		public const short HeardSecretSpreadInVeryHighProbability = 673;
 
-		/// <summary>
-		/// HeardSecretSpreadInHighProbability
-		/// </summary>
 		public const short HeardSecretSpreadInHighProbability = 674;
 
-		/// <summary>
-		/// HeardSecretSpreadInLowProbability
-		/// </summary>
 		public const short HeardSecretSpreadInLowProbability = 675;
 
-		/// <summary>
-		/// HeardSecretSpreadInVeryLowProbability
-		/// </summary>
 		public const short HeardSecretSpreadInVeryLowProbability = 676;
 
-		/// <summary>
-		/// RequestKeepSecretFail
-		/// </summary>
 		public const short RequestKeepSecretFail = 677;
 
-		/// <summary>
-		/// RequestKeepSecretSuccess
-		/// </summary>
 		public const short RequestKeepSecretSuccess = 678;
 
-		/// <summary>
-		/// BeRequestedToKeepSecret
-		/// </summary>
 		public const short BeRequestedToKeepSecret = 679;
 
-		/// <summary>
-		/// ThreadNeedleMatchFail
-		/// </summary>
 		public const short ThreadNeedleMatchFail = 680;
 
-		/// <summary>
-		/// ThreadNeedleSeparateFail
-		/// </summary>
 		public const short ThreadNeedleSeparateFail = 681;
 
-		/// <summary>
-		/// ThreadNeedleMatchSuccess
-		/// </summary>
 		public const short ThreadNeedleMatchSuccess = 682;
 
-		/// <summary>
-		/// ThreadNeedleSeparateSuccess
-		/// </summary>
 		public const short ThreadNeedleSeparateSuccess = 683;
 
-		/// <summary>
-		/// ThreadNeedleBeMatched0
-		/// </summary>
 		public const short ThreadNeedleBeMatched1 = 684;
 
-		/// <summary>
-		/// ThreadNeedleBeSeparated0
-		/// </summary>
 		public const short ThreadNeedleBeSeparated1 = 685;
 
-		/// <summary>
-		/// ThreadNeedleBeMatched1
-		/// </summary>
 		public const short ThreadNeedleBeMatched2 = 686;
 
-		/// <summary>
-		/// ThreadNeedleBeSeparated1
-		/// </summary>
 		public const short ThreadNeedleBeSeparated2 = 687;
 
-		/// <summary>
-		/// SpreadSecretKnown
-		/// </summary>
 		public const short SpreadSecretKnown = 688;
 
-		/// <summary>
-		/// SectMainStoryXuannvBirthOfMirrorCreatedImposture
-		/// </summary>
 		public const short SectMainStoryXuannvBirthOfMirrorCreatedImposture = 689;
 
-		/// <summary>
-		/// EscapeFromEnemyNestBySelf
-		/// </summary>
 		public const short EscapeFromEnemyNestBySelf = 690;
 
-		/// <summary>
-		/// SaveFromInfection
-		/// </summary>
 		public const short SaveFromInfection = 691;
 
-		/// <summary>
-		/// SaveFromEnemyNest
-		/// </summary>
 		public const short SaveFromEnemyNest = 692;
 
-		/// <summary>
-		/// SaveFromEnemyNestFailed
-		/// </summary>
 		public const short SaveFromEnemyNestFailed = 693;
 
-		/// <summary>
-		/// TameCarrierSucceed
-		/// </summary>
 		public const short TameCarrierSucceed = 694;
 
-		/// <summary>
-		/// TameCarrierFail
-		/// </summary>
 		public const short TameCarrierFail = 695;
 
-		/// <summary>
-		/// ReleaseCarrier
-		/// </summary>
 		public const short ReleaseCarrier = 696;
 
-		/// <summary>
-		/// DLCLoongRidingEffectQiuniuAudience
-		/// </summary>
 		public const short DLCLoongRidingEffectQiuniuAudience = 697;
 
-		/// <summary>
-		/// DLCLoongRidingEffectQiuniu
-		/// </summary>
 		public const short DLCLoongRidingEffectQiuniu = 698;
 
-		/// <summary>
-		/// DLCLoongRidingEffectYazi
-		/// </summary>
 		public const short DLCLoongRidingEffectYazi = 699;
 
-		/// <summary>
-		/// DLCLoongRidingEffectChaofeng
-		/// </summary>
 		public const short DLCLoongRidingEffectChaofeng = 700;
 
-		/// <summary>
-		/// DLCLoongRidingEffectPulao
-		/// </summary>
 		public const short DLCLoongRidingEffectPulao = 701;
 
-		/// <summary>
-		/// DLCLoongRidingEffectSuanni
-		/// </summary>
 		public const short DLCLoongRidingEffectSuanni = 702;
 
-		/// <summary>
-		/// DLCLoongRidingEffectBaxia
-		/// </summary>
 		public const short DLCLoongRidingEffectBaxia = 703;
 
-		/// <summary>
-		/// DLCLoongRidingEffectBian
-		/// </summary>
 		public const short DLCLoongRidingEffectBian = 704;
 
-		/// <summary>
-		/// DLCLoongRidingEffectFuxi
-		/// </summary>
 		public const short DLCLoongRidingEffectFuxi = 705;
 
-		/// <summary>
-		/// DLCLoongRidingEffectChiwen
-		/// </summary>
 		public const short DLCLoongRidingEffectChiwen = 706;
 
-		/// <summary>
-		/// DefeatLoong
-		/// </summary>
 		public const short DefeatLoong = 707;
 
-		/// <summary>
-		/// DefeatedByLoong
-		/// </summary>
 		public const short DefeatedByLoong = 708;
 
-		/// <summary>
-		/// DLCLoongRidingEffectYazi2
-		/// </summary>
 		public const short DLCLoongRidingEffectYazi2 = 709;
 
-		/// <summary>
-		/// DieFromAge
-		/// </summary>
 		public const short DieFromAge = 710;
 
-		/// <summary>
-		/// DieFromPoorHealth
-		/// </summary>
 		public const short DieFromPoorHealth = 711;
 
-		/// <summary>
-		/// KilledInPublic
-		/// </summary>
 		public const short KilledInPublic = 712;
 
-		/// <summary>
-		/// KilledInPrivate
-		/// </summary>
 		public const short KilledInPrivate = 713;
 
-		/// <summary>
-		/// KilledAfterXiangshuInfected
-		/// </summary>
 		public const short KilledAfterXiangshuInfected = 714;
 
-		/// <summary>
-		/// Assassinated
-		/// </summary>
 		public const short Assassinated = 715;
 
-		/// <summary>
-		/// KilledByXiangshu
-		/// </summary>
 		public const short KilledByXiangshu = 716;
 
-		/// <summary>
-		/// PurchaseItem1
-		/// </summary>
 		public const short PurchaseItem1 = 717;
 
-		/// <summary>
-		/// SellItem1
-		/// </summary>
 		public const short SellItem1 = 718;
 
-		/// <summary>
-		/// CleanBodyReincarnationSuccess
-		/// </summary>
 		public const short CleanBodyReincarnationSuccess = 719;
 
-		/// <summary>
-		/// CleanBodyReincarnationFail
-		/// </summary>
 		public const short CleanBodyReincarnationFail = 720;
 
-		/// <summary>
-		/// EvilBodyReincarnationSuccess
-		/// </summary>
 		public const short EvilBodyReincarnationSuccess = 721;
 
-		/// <summary>
-		/// EvilBodyReincarnationFail
-		/// </summary>
 		public const short EvilBodyReincarnationFail = 722;
 
-		/// <summary>
-		/// WugKingForestSpiritBecomeEnemy
-		/// </summary>
 		public const short WugKingForestSpiritBecomeEnemy = 723;
 
-		/// <summary>
-		/// SecretMakeEnemy
-		/// </summary>
 		public const short SecretMakeEnemy = 724;
 
-		/// <summary>
-		/// SecretBeMadeEnemy
-		/// </summary>
 		public const short SecretBeMadeEnemy = 725;
 
-		/// <summary>
-		/// CleanBodyDefeatAnimal
-		/// </summary>
 		public const short CleanBodyDefeatAnimal = 726;
 
-		/// <summary>
-		/// EvilBodyDefeatAnimal
-		/// </summary>
 		public const short EvilBodyDefeatAnimal = 727;
 
-		/// <summary>
-		/// CleanBodyDefeatHereticRandomEnemy
-		/// </summary>
 		public const short CleanBodyDefeatHereticRandomEnemy = 728;
 
-		/// <summary>
-		/// EvilBodyDefeatHereticRandomEnemy
-		/// </summary>
 		public const short EvilBodyDefeatHereticRandomEnemy = 729;
 
-		/// <summary>
-		/// CleanBodyDefeatRighteousRandomEnemy
-		/// </summary>
 		public const short CleanBodyDefeatRighteousRandomEnemy = 730;
 
-		/// <summary>
-		/// EvilBodyDefeatRighteousRandomEnemy
-		/// </summary>
 		public const short EvilBodyDefeatRighteousRandomEnemy = 731;
 
-		/// <summary>
-		/// WuxianParanoiaAdded
-		/// </summary>
 		public const short WuxianParanoiaAdded = 732;
 
-		/// <summary>
-		/// WuxianParanoiaAttack
-		/// </summary>
 		public const short WuxianParanoiaAttack = 733;
 
-		/// <summary>
-		/// WuxianParanoiaErased
-		/// </summary>
 		public const short WuxianParanoiaErased = 734;
 
-		/// <summary>
-		/// WugKingRedEyeLoseItem
-		/// </summary>
 		public const short WugKingRedEyeLoseItem = 735;
 
-		/// <summary>
-		/// WugForestSpiritReduceFavorability
-		/// </summary>
 		public const short WugForestSpiritReduceFavorability = 736;
 
-		/// <summary>
-		/// WugKingForestSpiritBeBecomeEnemy
-		/// </summary>
 		public const short WugKingForestSpiritBeBecomeEnemy = 737;
 
-		/// <summary>
-		/// WugKingBlackBloodChangeDisorderOfQi
-		/// </summary>
 		public const short WugKingBlackBloodChangeDisorderOfQi = 738;
 
-		/// <summary>
-		/// WugDevilInsideXiangshuInfection
-		/// </summary>
 		public const short WugDevilInsideXiangshuInfection = 739;
 
-		/// <summary>
-		/// WugCorpseWormChangeHealth
-		/// </summary>
 		public const short WugCorpseWormChangeHealth = 740;
 
-		/// <summary>
-		/// WugKingIceSilkwormLoseNeili
-		/// </summary>
 		public const short WugKingIceSilkwormLoseNeili = 741;
 
-		/// <summary>
-		/// WugKingGoldenSilkwormEatGrownWug
-		/// </summary>
 		public const short WugKingGoldenSilkwormEatGrownWug = 742;
 
-		/// <summary>
-		/// WugAzureMarrowAddPoison
-		/// </summary>
 		public const short WugAzureMarrowAddPoison = 743;
 
-		/// <summary>
-		/// WugAzureMarrowAddWug
-		/// </summary>
 		public const short WugAzureMarrowAddWug = 744;
 
-		/// <summary>
-		/// WugAzureMarrowBeAddWug
-		/// </summary>
 		public const short WugAzureMarrowBeAddWug = 745;
 
-		/// <summary>
-		/// WuxianParanoiaErased2
-		/// </summary>
 		public const short WuxianParanoiaErased2 = 746;
 
-		/// <summary>
-		/// WuxianDecreasedMood
-		/// </summary>
 		public const short WuxianDecreasedMood = 747;
 
-		/// <summary>
-		/// WuxianDecreasedFavorability
-		/// </summary>
 		public const short WuxianDecreasedFavorability = 748;
 
-		/// <summary>
-		/// WuxianQiDecline
-		/// </summary>
 		public const short WuxianQiDecline = 749;
 
-		/// <summary>
-		/// WuxianPoisoning
-		/// </summary>
 		public const short WuxianPoisoning = 750;
 
-		/// <summary>
-		/// WuxianLoseItem
-		/// </summary>
 		public const short WuxianLoseItem = 751;
 
-		/// <summary>
-		/// WugDevilInsideChangeHappiness
-		/// </summary>
 		public const short WugDevilInsideChangeHappiness = 752;
 
-		/// <summary>
-		/// WugRedEyeChangeToGrown
-		/// </summary>
 		public const short WugRedEyeChangeToGrown = 753;
 
-		/// <summary>
-		/// WugForestSpiritChangeToGrown
-		/// </summary>
 		public const short WugForestSpiritChangeToGrown = 754;
 
-		/// <summary>
-		/// WugBlackBloodChangeToGrown
-		/// </summary>
 		public const short WugBlackBloodChangeToGrown = 755;
 
-		/// <summary>
-		/// WugDevilInsideChangeToGrown
-		/// </summary>
 		public const short WugDevilInsideChangeToGrown = 756;
 
-		/// <summary>
-		/// WugCorpseWormChangeToGrown
-		/// </summary>
 		public const short WugCorpseWormChangeToGrown = 757;
 
-		/// <summary>
-		/// WugCorpseWormBeChangeToGrown
-		/// </summary>
 		public const short WugCorpseWormBeChangeToGrown = 758;
 
-		/// <summary>
-		/// WugIceSilkwormChangeToGrown
-		/// </summary>
 		public const short WugIceSilkwormChangeToGrown = 759;
 
-		/// <summary>
-		/// WugGoldenSilkwormChangeToGrown
-		/// </summary>
 		public const short WugGoldenSilkwormChangeToGrown = 760;
 
-		/// <summary>
-		/// WugAzureMarrowChangeToGrown
-		/// </summary>
 		public const short WugAzureMarrowChangeToGrown = 761;
 
-		/// <summary>
-		/// WugAzureMarrowBeChangeToGrown
-		/// </summary>
 		public const short WugAzureMarrowBeChangeToGrown = 762;
 
-		/// <summary>
-		/// ManageLearnLifeSkillSuccess
-		/// </summary>
 		public const short ManageLearnLifeSkillSuccess = 763;
 
-		/// <summary>
-		/// ManageLearnCombatSkillSuccess
-		/// </summary>
 		public const short ManageLearnCombatSkillSuccess = 764;
 
-		/// <summary>
-		/// ManageLearnLifeSkillFail
-		/// </summary>
 		public const short ManageLearnLifeSkillFail = 765;
 
-		/// <summary>
-		/// ManageLearnCombatSkillFail
-		/// </summary>
 		public const short ManageLearnCombatSkillFail = 766;
 
-		/// <summary>
-		/// ManageLifeSkillAbilityUp
-		/// </summary>
 		public const short ManageLifeSkillAbilityUp = 767;
 
-		/// <summary>
-		/// ManageCombatSkillAbilityUp
-		/// </summary>
 		public const short ManageCombatSkillAbilityUp = 768;
 
-		/// <summary>
-		/// SmallVillagerXiangshuCompletelyInfected
-		/// </summary>
 		public const short SmallVillagerXiangshuCompletelyInfected = 769;
 
-		/// <summary>
-		/// SmallVillagerSavedFromInfection
-		/// </summary>
 		public const short SmallVillagerSavedFromInfection = 770;
 
-		/// <summary>
-		/// SmallVillagerSaveFromInfection
-		/// </summary>
 		public const short SmallVillagerSaveFromInfection = 771;
 
-		/// <summary>
-		/// StorageResourceToTreasury
-		/// </summary>
 		public const short StorageResourceToTreasury = 772;
 
-		/// <summary>
-		/// StorageItemToTreasury
-		/// </summary>
 		public const short StorageItemToTreasury = 773;
 
-		/// <summary>
-		/// TakeResourceFromTreasury
-		/// </summary>
 		public const short TakeResourceFromTreasury = 774;
 
-		/// <summary>
-		/// TakeItemFromTreasury
-		/// </summary>
 		public const short TakeItemFromTreasury = 775;
 
-		/// <summary>
-		/// TaiwuStorageResourceToTreasury
-		/// </summary>
 		public const short TaiwuStorageResourceToTreasury = 776;
 
-		/// <summary>
-		/// TaiwuStorageItemToTreasury
-		/// </summary>
 		public const short TaiwuStorageItemToTreasury = 777;
 
-		/// <summary>
-		/// TaiwuTakeResourceFromTreasury
-		/// </summary>
 		public const short TaiwuTakeResourceFromTreasury = 778;
 
-		/// <summary>
-		/// TaiwuTakeItemFromTreasury
-		/// </summary>
 		public const short TaiwuTakeItemFromTreasury = 779;
 
-		/// <summary>
-		/// DecideToGuardTreasury
-		/// </summary>
 		public const short DecideToGuardTreasury = 780;
 
-		/// <summary>
-		/// FinishGuardingTreasury
-		/// </summary>
 		public const short FinishGuardingTreasury = 781;
 
-		/// <summary>
-		/// IntrudeTreasuryCancelSupportMakeEnemy
-		/// </summary>
 		public const short IntrudeTreasuryCancelSupportMakeEnemy = 782;
 
-		/// <summary>
-		/// IntrudeTreasuryBeCancelSupportMakeEnemy
-		/// </summary>
 		public const short IntrudeTreasuryBeCancelSupportMakeEnemy = 783;
 
-		/// <summary>
-		/// IntrudeTreasuryCancelSupport
-		/// </summary>
 		public const short IntrudeTreasuryCancelSupport = 784;
 
-		/// <summary>
-		/// IntrudeTreasuryBeCancelSupport
-		/// </summary>
 		public const short IntrudeTreasuryBeCancelSupport = 785;
 
-		/// <summary>
-		/// IntrudeTreasuryMakeEnemyOthers
-		/// </summary>
 		public const short IntrudeTreasuryMakeEnemyOthers = 786;
 
-		/// <summary>
-		/// IntrudeTreasuryBeMakeEnemyOthers
-		/// </summary>
 		public const short IntrudeTreasuryBeMakeEnemyOthers = 787;
 
-		/// <summary>
-		/// IntrudeTreasuryLostMorale
-		/// </summary>
 		public const short IntrudeTreasuryLostMorale = 788;
 
-		/// <summary>
-		/// IntrudeTreasuryBeLostMorale
-		/// </summary>
 		public const short IntrudeTreasuryBeLostMorale = 789;
 
-		/// <summary>
-		/// IntrudeTreasuryBeLostMorale2
-		/// </summary>
 		public const short IntrudeTreasuryBeLostMorale2 = 790;
 
-		/// <summary>
-		/// PlunderTreasuryCancelSupportMakeEnemy
-		/// </summary>
 		public const short PlunderTreasuryCancelSupportMakeEnemy = 791;
 
-		/// <summary>
-		/// PlunderTreasuryBeCancelSupportMakeEnemy
-		/// </summary>
 		public const short PlunderTreasuryBeCancelSupportMakeEnemy = 792;
 
-		/// <summary>
-		/// PlunderTreasuryCancelSupport
-		/// </summary>
 		public const short PlunderTreasuryCancelSupport = 793;
 
-		/// <summary>
-		/// PlunderTreasuryBeCancelSupport
-		/// </summary>
 		public const short PlunderTreasuryBeCancelSupport = 794;
 
-		/// <summary>
-		/// PlunderTreasuryMakeEnemyOthers
-		/// </summary>
 		public const short PlunderTreasuryMakeEnemyOthers = 795;
 
-		/// <summary>
-		/// PlunderTreasuryBeMakeEnemyOthers
-		/// </summary>
 		public const short PlunderTreasuryBeMakeEnemyOthers = 796;
 
-		/// <summary>
-		/// PlunderTreasuryLostMorale
-		/// </summary>
 		public const short PlunderTreasuryLostMorale = 797;
 
-		/// <summary>
-		/// PlunderTreasuryBeLostMorale
-		/// </summary>
 		public const short PlunderTreasuryBeLostMorale = 798;
 
-		/// <summary>
-		/// PlunderTreasuryBeLostMorale2
-		/// </summary>
 		public const short PlunderTreasuryBeLostMorale2 = 799;
 
-		/// <summary>
-		/// DonateTreasuryProvideSupport
-		/// </summary>
 		public const short DonateTreasuryProvideSupport = 800;
 
-		/// <summary>
-		/// DonateTreasuryBeProvideSupport
-		/// </summary>
 		public const short DonateTreasuryBeProvideSupport = 801;
 
-		/// <summary>
-		/// DonateTreasuryGetMorale
-		/// </summary>
 		public const short DonateTreasuryGetMorale = 802;
 
-		/// <summary>
-		/// DonateTreasuryBeGetMorale
-		/// </summary>
 		public const short DonateTreasuryBeGetMorale = 803;
 
-		/// <summary>
-		/// DonateTreasuryGetMorale2
-		/// </summary>
 		public const short DonateTreasuryGetMorale2 = 804;
 
-		/// <summary>
-		/// TreasuryDistributeResource
-		/// </summary>
 		public const short TreasuryDistributeResource = 805;
 
-		/// <summary>
-		/// TreasuryDistributeItem
-		/// </summary>
 		public const short TreasuryDistributeItem = 806;
 
-		/// <summary>
-		/// PoisonEnemyFail12
-		/// </summary>
 		public const short PoisonEnemyFail12 = 807;
 
-		/// <summary>
-		/// PoisonEnemyFail22
-		/// </summary>
 		public const short PoisonEnemyFail22 = 808;
 
-		/// <summary>
-		/// PoisonEnemyFail32
-		/// </summary>
 		public const short PoisonEnemyFail32 = 809;
 
-		/// <summary>
-		/// PoisonEnemyFail42
-		/// </summary>
 		public const short PoisonEnemyFail42 = 810;
 
-		/// <summary>
-		/// PoisonEnemySucceed2
-		/// </summary>
 		public const short PoisonEnemySucceed2 = 811;
 
-		/// <summary>
-		/// PoisonEnemySucceedAndEscaped2
-		/// </summary>
 		public const short PoisonEnemySucceedAndEscaped2 = 812;
 
-		/// <summary>
-		/// GetPoisonedByEnemySucceed2
-		/// </summary>
 		public const short GetPoisonedByEnemySucceed2 = 813;
 
-		/// <summary>
-		/// PlotHarmEnemyFail12
-		/// </summary>
 		public const short PlotHarmEnemyFail12 = 814;
 
-		/// <summary>
-		/// PlotHarmEnemyFail22
-		/// </summary>
 		public const short PlotHarmEnemyFail22 = 815;
 
-		/// <summary>
-		/// PlotHarmEnemyFail32
-		/// </summary>
 		public const short PlotHarmEnemyFail32 = 816;
 
-		/// <summary>
-		/// PlotHarmEnemyFail42
-		/// </summary>
 		public const short PlotHarmEnemyFail42 = 817;
 
-		/// <summary>
-		/// PlotHarmEnemySucceed2
-		/// </summary>
 		public const short PlotHarmEnemySucceed2 = 818;
 
-		/// <summary>
-		/// PlotHarmEnemySucceedAndEscaped2
-		/// </summary>
 		public const short PlotHarmEnemySucceedAndEscaped2 = 819;
 
-		/// <summary>
-		/// GetPlottedAgainstSucceed2
-		/// </summary>
 		public const short GetPlottedAgainstSucceed2 = 820;
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaLow
-		/// </summary>
 		public const short SectMainStoryBaihuaManiaLow = 821;
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaHigh
-		/// </summary>
 		public const short SectMainStoryBaihuaManiaHigh = 822;
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaAttack
-		/// </summary>
 		public const short SectMainStoryBaihuaManiaAttack = 823;
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaAttacked
-		/// </summary>
 		public const short SectMainStoryBaihuaManiaAttacked = 824;
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaCure
-		/// </summary>
 		public const short SectMainStoryBaihuaManiaCure = 825;
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaCured
-		/// </summary>
 		public const short SectMainStoryBaihuaManiaCured = 826;
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessHuaJu
-		/// </summary>
 		public const short GiveUpLegendaryBookSuccessHuaJu = 827;
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessXuanZhi
-		/// </summary>
 		public const short GiveUpLegendaryBookSuccessXuanZhi = 828;
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessYingJiao
-		/// </summary>
 		public const short GiveUpLegendaryBookSuccessYingJiao = 829;
 
-		/// <summary>
-		/// SecretMakeEnemy2
-		/// </summary>
 		public const short SecretMakeEnemy2 = 830;
 
-		/// <summary>
-		/// SecretBeMadeEnemy2
-		/// </summary>
 		public const short SecretBeMadeEnemy2 = 831;
 
-		/// <summary>
-		/// DecideToHuntFugitive
-		/// </summary>
 		public const short DecideToHuntFugitive = 832;
 
-		/// <summary>
-		/// FinishHuntFugitive
-		/// </summary>
 		public const short FinishHuntFugitive = 833;
 
-		/// <summary>
-		/// DecideToEscapePunishment
-		/// </summary>
 		public const short DecideToEscapePunishment = 834;
 
-		/// <summary>
-		/// FinishEscapePunishment
-		/// </summary>
 		public const short FinishEscapePunishment = 835;
 
-		/// <summary>
-		/// DecideToSeekAsylum
-		/// </summary>
 		public const short DecideToSeekAsylum = 836;
 
-		/// <summary>
-		/// FinishSeekAsylum
-		/// </summary>
 		public const short FinishSeekAsylum = 837;
 
-		/// <summary>
-		/// SeekAsylumSuccess
-		/// </summary>
 		public const short SeekAsylumSuccess = 838;
 
-		/// <summary>
-		/// DecideToEscortPrisoner
-		/// </summary>
 		public const short DecideToEscortPrisoner = 839;
 
-		/// <summary>
-		/// EscortPrisonerSucceed
-		/// </summary>
 		public const short EscortPrisonerSucceed = 840;
 
-		/// <summary>
-		/// ImprisonedShaoLin
-		/// </summary>
 		public const short ImprisonedShaoLin = 841;
 
-		/// <summary>
-		/// ImprisonedEmei1
-		/// </summary>
 		public const short ImprisonedEmei1 = 842;
 
-		/// <summary>
-		/// ImprisonedEmei2
-		/// </summary>
 		public const short ImprisonedEmei2 = 843;
 
-		/// <summary>
-		/// ImprisonedBaihua
-		/// </summary>
 		public const short ImprisonedBaihua = 844;
 
-		/// <summary>
-		/// ImprisonedWudang
-		/// </summary>
 		public const short ImprisonedWudang = 845;
 
-		/// <summary>
-		/// ImprisonedYuanshan
-		/// </summary>
 		public const short ImprisonedYuanshan = 846;
 
-		/// <summary>
-		/// ImprisonedShingXiang
-		/// </summary>
 		public const short ImprisonedShingXiang = 847;
 
-		/// <summary>
-		/// ImprisonedRanShan
-		/// </summary>
 		public const short ImprisonedRanShan = 848;
 
-		/// <summary>
-		/// ImprisonedXuanNv
-		/// </summary>
 		public const short ImprisonedXuanNv = 849;
 
-		/// <summary>
-		/// ImprisonedZhuJian
-		/// </summary>
 		public const short ImprisonedZhuJian = 850;
 
-		/// <summary>
-		/// ImprisonedKongSang
-		/// </summary>
 		public const short ImprisonedKongSang = 851;
 
-		/// <summary>
-		/// ImprisonedJinGang
-		/// </summary>
 		public const short ImprisonedJinGang = 852;
 
-		/// <summary>
-		/// ImprisonedWuXian
-		/// </summary>
 		public const short ImprisonedWuXian = 853;
 
-		/// <summary>
-		/// ImprisonedJieQing1
-		/// </summary>
 		public const short ImprisonedJieQing1 = 854;
 
-		/// <summary>
-		/// ImprisonedJieQing2
-		/// </summary>
 		public const short ImprisonedJieQing2 = 855;
 
-		/// <summary>
-		/// ImprisonedFuLong
-		/// </summary>
 		public const short ImprisonedFuLong = 856;
 
-		/// <summary>
-		/// ImprisonedXueHou
-		/// </summary>
 		public const short ImprisonedXueHou = 857;
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportMakeEnemyNpc
-		/// </summary>
 		public const short IntrudePrisonCancelSupportMakeEnemyNpc = 858;
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportMakeEnemyTaiwu
-		/// </summary>
 		public const short IntrudePrisonCancelSupportMakeEnemyTaiwu = 859;
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportNpc
-		/// </summary>
 		public const short IntrudePrisonCancelSupportNpc = 860;
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportTaiwu
-		/// </summary>
 		public const short IntrudePrisonCancelSupportTaiwu = 861;
 
-		/// <summary>
-		/// IntrudePrisonMakeEnemyOthersNpc
-		/// </summary>
 		public const short IntrudePrisonMakeEnemyOthersNpc = 862;
 
-		/// <summary>
-		/// IntrudePrisonMakeEnemyOthersTaiwu
-		/// </summary>
 		public const short IntrudePrisonMakeEnemyOthersTaiwu = 863;
 
-		/// <summary>
-		/// RequestTheReleaseOfTheCriminalNpc
-		/// </summary>
 		public const short RequestTheReleaseOfTheCriminalNpc = 864;
 
-		/// <summary>
-		/// RequestTheReleaseOfTheCriminalTaiwu
-		/// </summary>
 		public const short RequestTheReleaseOfTheCriminalTaiwu = 865;
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityNpc
-		/// </summary>
 		public const short ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityNpc = 866;
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityTaiwu
-		/// </summary>
 		public const short ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityTaiwu = 867;
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedIncreaseFavorabilityNpc
-		/// </summary>
 		public const short ImprisonedXiangshuInfectedIncreaseFavorabilityNpc = 868;
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedIncreaseFavorabilityTaiwu
-		/// </summary>
 		public const short ImprisonedXiangshuInfectedIncreaseFavorabilityTaiwu = 869;
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedNpc
-		/// </summary>
 		public const short ImprisonedXiangshuInfectedNpc = 870;
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedTaiwu
-		/// </summary>
 		public const short ImprisonedXiangshuInfectedTaiwu = 871;
 
-		/// <summary>
-		/// RobbedFromPrisonNpc
-		/// </summary>
 		public const short RobbedFromPrisonNpc = 872;
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportMakeEnemyNpc
-		/// </summary>
 		public const short PrisonBreakIntrudePrisonCancelSupportMakeEnemyNpc = 873;
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu
-		/// </summary>
 		public const short PrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu = 874;
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportNpc
-		/// </summary>
 		public const short PrisonBreakIntrudePrisonCancelSupportNpc = 875;
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportTaiwu
-		/// </summary>
 		public const short PrisonBreakIntrudePrisonCancelSupportTaiwu = 876;
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonMakeEnemyOthersNpc
-		/// </summary>
 		public const short PrisonBreakIntrudePrisonMakeEnemyOthersNpc = 877;
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonMakeEnemyOthersTaiwu
-		/// </summary>
 		public const short PrisonBreakIntrudePrisonMakeEnemyOthersTaiwu = 878;
 
-		/// <summary>
-		/// ResistArrestIntrudePrisonCancelSupportMakeEnemyNpc
-		/// </summary>
 		public const short ResistArrestIntrudePrisonCancelSupportMakeEnemyNpc = 879;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu = 880;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportNpc
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonCancelSupportNpc = 881;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwu
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwu = 882;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpc
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpc = 883;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwu
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwu = 884;
 
-		/// <summary>
-		/// ArrestFailedCaptor
-		/// </summary>
 		public const short ArrestFailedCaptor = 885;
 
-		/// <summary>
-		/// ArrestFailedCriminal
-		/// </summary>
 		public const short ArrestFailedCriminal = 886;
 
-		/// <summary>
-		/// ResistArresEngageInBattleTaiwu
-		/// </summary>
 		public const short ResistArresEngageInBattleTaiwu = 887;
 
-		/// <summary>
-		/// ArrestedSuccessfullyCaptor
-		/// </summary>
 		public const short ArrestedSuccessfullyCaptor = 888;
 
-		/// <summary>
-		/// ArrestedSuccessfullyCriminal
-		/// </summary>
 		public const short ArrestedSuccessfullyCriminal = 889;
 
-		/// <summary>
-		/// ReceiveCriminalsCaptor
-		/// </summary>
 		public const short ReceiveCriminalsCaptor = 890;
 
-		/// <summary>
-		/// ReceiveCriminalsTaiwu
-		/// </summary>
 		public const short ReceiveCriminalsTaiwu = 891;
 
-		/// <summary>
-		/// ReceiveCriminalsCriminal
-		/// </summary>
 		public const short ReceiveCriminalsCriminal = 892;
 
-		/// <summary>
-		/// BuyHandOverTheCriminalCaptor
-		/// </summary>
 		public const short BuyHandOverTheCriminalCaptor = 893;
 
-		/// <summary>
-		/// BuyHandOverTheCriminalTaiwu
-		/// </summary>
 		public const short BuyHandOverTheCriminalTaiwu = 894;
 
-		/// <summary>
-		/// LifeSkillBattleHandOverTheCriminalCaptor
-		/// </summary>
 		public const short LifeSkillBattleHandOverTheCriminalCaptor = 895;
 
-		/// <summary>
-		/// LifeSkillBattleHandOverTheCriminalTaiwu
-		/// </summary>
 		public const short LifeSkillBattleHandOverTheCriminalTaiwu = 896;
 
-		/// <summary>
-		/// LifeSkillBattleLoseHandOverTheCriminalCaptor
-		/// </summary>
 		public const short LifeSkillBattleLoseHandOverTheCriminalCaptor = 897;
 
-		/// <summary>
-		/// LifeSkillBattleLoseHandOverTheCriminalTaiwu
-		/// </summary>
 		public const short LifeSkillBattleLoseHandOverTheCriminalTaiwu = 898;
 
-		/// <summary>
-		/// VictoryInCombatHandOverTheCriminalCaptor
-		/// </summary>
 		public const short VictoryInCombatHandOverTheCriminalCaptor = 899;
 
-		/// <summary>
-		/// VictoryInCombatHandOverTheCriminalTaiwu
-		/// </summary>
 		public const short VictoryInCombatHandOverTheCriminalTaiwu = 900;
 
-		/// <summary>
-		/// FailureInCombatHandOverTheCriminalCaptor
-		/// </summary>
 		public const short FailureInCombatHandOverTheCriminalCaptor = 901;
 
-		/// <summary>
-		/// FailureInCombatHandOverTheCriminalTaiwu
-		/// </summary>
 		public const short FailureInCombatHandOverTheCriminalTaiwu = 902;
 
-		/// <summary>
-		/// SectMainStoryFulongFightSucceed
-		/// </summary>
 		public const short SectMainStoryFulongFightSucceed = 903;
 
-		/// <summary>
-		/// SectMainStoryFulongFightFail
-		/// </summary>
 		public const short SectMainStoryFulongFightFail = 904;
 
-		/// <summary>
-		/// SectMainStoryFulongRobbery
-		/// </summary>
 		public const short SectMainStoryFulongRobbery = 905;
 
-		/// <summary>
-		/// SectMainStoryFulongRobberKilledByTaiwu
-		/// </summary>
 		public const short SectMainStoryFulongRobberKilledByTaiwu = 906;
 
-		/// <summary>
-		/// SectMainStoryFulongProtect
-		/// </summary>
 		public const short SectMainStoryFulongProtect = 907;
 
-		/// <summary>
-		/// HonestSectPunishLevel1
-		/// </summary>
 		public const short HonestSectPunishLevel1 = 908;
 
-		/// <summary>
-		/// HonestSectPunishLevel2
-		/// </summary>
 		public const short HonestSectPunishLevel2 = 909;
 
-		/// <summary>
-		/// HonestSectPunishLevel3
-		/// </summary>
 		public const short HonestSectPunishLevel3 = 910;
 
-		/// <summary>
-		/// HonestSectPunishLevel4
-		/// </summary>
 		public const short HonestSectPunishLevel4 = 911;
 
-		/// <summary>
-		/// HonestSectPunishLevel5
-		/// </summary>
 		public const short HonestSectPunishLevel5 = 912;
 
-		/// <summary>
-		/// HonestSectPunishTogetherWithSpouseLevel5
-		/// </summary>
 		public const short HonestSectPunishTogetherWithSpouseLevel5 = 913;
 
-		/// <summary>
-		/// ArrestedSectPunishLevel1
-		/// </summary>
 		public const short ArrestedSectPunishLevel1 = 914;
 
-		/// <summary>
-		/// ArrestedSectPunishLevel2
-		/// </summary>
 		public const short ArrestedSectPunishLevel2 = 915;
 
-		/// <summary>
-		/// ArrestedSectPunishLevel3
-		/// </summary>
 		public const short ArrestedSectPunishLevel3 = 916;
 
-		/// <summary>
-		/// ArrestedSectPunishLevel4
-		/// </summary>
 		public const short ArrestedSectPunishLevel4 = 917;
 
-		/// <summary>
-		/// ArrestedSectPunishLevel5
-		/// </summary>
 		public const short ArrestedSectPunishLevel5 = 918;
 
-		/// <summary>
-		/// ArrestedSectPunishTogetherWithSpouseLevel5
-		/// </summary>
 		public const short ArrestedSectPunishTogetherWithSpouseLevel5 = 919;
 
-		/// <summary>
-		/// BeImplicatedSectPunishLevel5
-		/// </summary>
 		public const short BeImplicatedSectPunishLevel5 = 920;
 
-		/// <summary>
-		/// BeReleasedUponCompletionOfASentence
-		/// </summary>
 		public const short BeReleasedUponCompletionOfASentence = 921;
 
-		/// <summary>
-		/// PrisonBreak
-		/// </summary>
 		public const short PrisonBreak = 922;
 
-		/// <summary>
-		/// SendingToPrison1Taiwu
-		/// </summary>
 		public const short SendingToPrison1Taiwu = 923;
 
-		/// <summary>
-		/// SendingToPrison2Taiwu
-		/// </summary>
 		public const short SendingToPrison2Taiwu = 924;
 
-		/// <summary>
-		/// SendingToPrisonCriminal
-		/// </summary>
 		public const short SendingToPrisonCriminal = 925;
 
-		/// <summary>
-		/// SentToPrisonTaiwu
-		/// </summary>
 		public const short SentToPrisonTaiwu = 926;
 
-		/// <summary>
-		/// SentToPrisonCriminal
-		/// </summary>
 		public const short SentToPrisonCriminal = 927;
 
-		/// <summary>
-		/// CatchCriminalsWinTaiwu
-		/// </summary>
 		public const short CatchCriminalsWinTaiwu = 928;
 
-		/// <summary>
-		/// CatchCriminalsWinCriminal
-		/// </summary>
 		public const short CatchCriminalsWinCriminal = 929;
 
-		/// <summary>
-		/// CatchCriminalsFailedTaiwu
-		/// </summary>
 		public const short CatchCriminalsFailedTaiwu = 930;
 
-		/// <summary>
-		/// CatchCriminalsFailedCriminal
-		/// </summary>
 		public const short CatchCriminalsFailedCriminal = 931;
 
-		/// <summary>
-		/// BuyHandOverTheCriminalCaptorByExp
-		/// </summary>
 		public const short BuyHandOverTheCriminalCaptorByExp = 932;
 
-		/// <summary>
-		/// BuyHandOverTheCriminalTaiwuByExp
-		/// </summary>
 		public const short BuyHandOverTheCriminalTaiwuByExp = 933;
 
-		/// <summary>
-		/// SendingToPrison1TaiwuByExp
-		/// </summary>
 		public const short SendingToPrison1TaiwuByExp = 934;
 
-		/// <summary>
-		/// VillagerMigrateResources
-		/// </summary>
 		public const short VillagerMigrateResources = 935;
 
-		/// <summary>
-		/// VillagerCookingIngredient
-		/// </summary>
 		public const short VillagerCookingIngredient = 936;
 
-		/// <summary>
-		/// VillagerMakingItem
-		/// </summary>
 		public const short VillagerMakingItem = 937;
 
-		/// <summary>
-		/// VillagerRepairItem0
-		/// </summary>
 		public const short VillagerRepairItem0 = 938;
 
-		/// <summary>
-		/// VillagerRepairItem1
-		/// </summary>
 		public const short VillagerRepairItem1 = 939;
 
-		/// <summary>
-		/// VillagerDisassembleItem0
-		/// </summary>
 		public const short VillagerDisassembleItem0 = 940;
 
-		/// <summary>
-		/// VillagerDisassembleItem1
-		/// </summary>
 		public const short VillagerDisassembleItem1 = 941;
 
-		/// <summary>
-		/// VillagerRefiningMedicine
-		/// </summary>
 		public const short VillagerRefiningMedicine = 942;
 
-		/// <summary>
-		/// VillagerDetoxify0
-		/// </summary>
 		public const short VillagerDetoxify0 = 943;
 
-		/// <summary>
-		/// VillagerDetoxify1
-		/// </summary>
 		public const short VillagerDetoxify1 = 944;
 
-		/// <summary>
-		/// VillagerEnvenomedItem
-		/// </summary>
 		public const short VillagerEnvenomedItem = 945;
 
-		/// <summary>
-		/// VillagerSoldItem
-		/// </summary>
 		public const short VillagerSoldItem = 946;
 
-		/// <summary>
-		/// VillagerBuyItem
-		/// </summary>
 		public const short VillagerBuyItem = 947;
 
-		/// <summary>
-		/// VillagerSeverEnemy
-		/// </summary>
 		public const short VillagerSeverEnemy = 948;
 
-		/// <summary>
-		/// VillagerEmotionUp
-		/// </summary>
 		public const short VillagerEmotionUp = 949;
 
-		/// <summary>
-		/// VillagerMakeFriends
-		/// </summary>
 		public const short VillagerMakeFriends = 950;
 
-		/// <summary>
-		/// VillagerGetMarried
-		/// </summary>
 		public const short VillagerGetMarried = 951;
 
-		/// <summary>
-		/// VillagerBecomeBrothers
-		/// </summary>
 		public const short VillagerBecomeBrothers = 952;
 
-		/// <summary>
-		/// VillagerAdopt
-		/// </summary>
 		public const short VillagerAdopt = 953;
 
-		/// <summary>
-		/// VillagerTreatment0
-		/// </summary>
 		public const short VillagerTreatment0 = 954;
 
-		/// <summary>
-		/// VillagerTreatment1
-		/// </summary>
 		public const short VillagerTreatment1 = 955;
 
-		/// <summary>
-		/// VillagerBeTreatment0
-		/// </summary>
 		public const short VillagerBeTreatment0 = 956;
 
-		/// <summary>
-		/// VillagerBeTreatment1
-		/// </summary>
 		public const short VillagerBeTreatment1 = 957;
 
-		/// <summary>
-		/// XiangshuInfectedPrisonTaiwuVillage
-		/// </summary>
 		public const short XiangshuInfectedPrisonTaiwuVillage = 958;
 
-		/// <summary>
-		/// XiangshuInfectedPrisonSettlement
-		/// </summary>
 		public const short XiangshuInfectedPrisonSettlement = 959;
 
-		/// <summary>
-		/// VillagerBeRepairItem1
-		/// </summary>
 		public const short VillagerBeRepairItem1 = 960;
 
-		/// <summary>
-		/// TaiwuVillagerTakeItem
-		/// </summary>
 		public const short TaiwuVillagerTakeItem = 961;
 
-		/// <summary>
-		/// TaiwuVillagerStorageItem
-		/// </summary>
 		public const short TaiwuVillagerStorageItem = 962;
 
-		/// <summary>
-		/// TaiwuVillagerStorageResources
-		/// </summary>
 		public const short TaiwuVillagerStorageResources = 963;
 
-		/// <summary>
-		/// TaiwuVillagerTakeResources
-		/// </summary>
 		public const short TaiwuVillagerTakeResources = 964;
 
-		/// <summary>
-		/// LiteratiEntertainingUp
-		/// </summary>
 		public const short LiteratiEntertainingUp = 965;
 
-		/// <summary>
-		/// LiteratiEntertainingDown
-		/// </summary>
 		public const short LiteratiEntertainingDown = 966;
 
-		/// <summary>
-		/// LiteratiBuildingRelationshipUp
-		/// </summary>
 		public const short LiteratiBuildingRelationshipUp = 967;
 
-		/// <summary>
-		/// LiteratiBuildingRelationshipDown
-		/// </summary>
 		public const short LiteratiBuildingRelationshipDown = 968;
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceUp
-		/// </summary>
 		public const short LiteratiSpreadingInfluenceUp = 969;
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceDown
-		/// </summary>
 		public const short LiteratiSpreadingInfluenceDown = 970;
 
-		/// <summary>
-		/// SwordTombKeeperBuildingRelationshipUp
-		/// </summary>
 		public const short SwordTombKeeperBuildingRelationshipUp = 971;
 
-		/// <summary>
-		/// SwordTombKeeperBuildingRelationshipDown
-		/// </summary>
 		public const short SwordTombKeeperBuildingRelationshipDown = 972;
 
-		/// <summary>
-		/// SwordTombKeeperSpreadingInfluenceUp
-		/// </summary>
 		public const short SwordTombKeeperSpreadingInfluenceUp = 973;
 
-		/// <summary>
-		/// SwordTombKeeperSpreadingInfluenceDown
-		/// </summary>
 		public const short SwordTombKeeperSpreadingInfluenceDown = 974;
 
-		/// <summary>
-		/// InquireSwordTomb
-		/// </summary>
 		public const short InquireSwordTomb = 975;
 
-		/// <summary>
-		/// GuardingSwordTomb
-		/// </summary>
 		public const short GuardingSwordTomb = 976;
 
-		/// <summary>
-		/// VillagerPrioritizedActions
-		/// </summary>
 		public const short VillagerPrioritizedActions = 977;
 
-		/// <summary>
-		/// VillagerPrioritizedActionsStop
-		/// </summary>
 		public const short VillagerPrioritizedActionsStop = 978;
 
-		/// <summary>
-		/// EnvenomedItemOverload
-		/// </summary>
 		public const short EnvenomedItemOverload = 979;
 
-		/// <summary>
-		/// DetoxifyItemOverload
-		/// </summary>
 		public const short DetoxifyItemOverload = 980;
 
-		/// <summary>
-		/// VillagerEnvenomedItemOverload
-		/// </summary>
 		public const short VillagerEnvenomedItemOverload = 981;
 
-		/// <summary>
-		/// VillagerDetoxifyItemOverload
-		/// </summary>
 		public const short VillagerDetoxifyItemOverload = 982;
 
-		/// <summary>
-		/// VillagerCookingIngredientFailed0
-		/// </summary>
 		public const short VillagerCookingIngredientFailed0 = 983;
 
-		/// <summary>
-		/// VillagerCookingIngredientFailed1
-		/// </summary>
 		public const short VillagerCookingIngredientFailed1 = 984;
 
-		/// <summary>
-		/// VillagerMakingItemFailed0
-		/// </summary>
 		public const short VillagerMakingItemFailed0 = 985;
 
-		/// <summary>
-		/// VillagerMakingItemFailed1
-		/// </summary>
 		public const short VillagerMakingItemFailed1 = 986;
 
-		/// <summary>
-		/// VillagerRepairFailed
-		/// </summary>
 		public const short VillagerRepairFailed = 987;
 
-		/// <summary>
-		/// VillagerDisassembleItemFailed
-		/// </summary>
 		public const short VillagerDisassembleItemFailed = 988;
 
-		/// <summary>
-		/// VillagerRefiningMedicineFailed0
-		/// </summary>
 		public const short VillagerRefiningMedicineFailed0 = 989;
 
-		/// <summary>
-		/// VillagerRefiningMedicineFailed1
-		/// </summary>
 		public const short VillagerRefiningMedicineFailed1 = 990;
 
-		/// <summary>
-		/// VillagerAddPoisonToItemFailed
-		/// </summary>
 		public const short VillagerAddPoisonToItemFailed = 991;
 
-		/// <summary>
-		/// VillagerDetoxItemFailed
-		/// </summary>
 		public const short VillagerDetoxItemFailed = 992;
 
-		/// <summary>
-		/// VillagerDistanceFailed0
-		/// </summary>
 		public const short VillagerDistanceFailed0 = 993;
 
-		/// <summary>
-		/// VillagerDistanceFailed1
-		/// </summary>
 		public const short VillagerDistanceFailed1 = 994;
 
-		/// <summary>
-		/// VillagerDistanceFailed2
-		/// </summary>
 		public const short VillagerDistanceFailed2 = 995;
 
-		/// <summary>
-		/// VillagerAttainmentsFailed
-		/// </summary>
 		public const short VillagerAttainmentsFailed = 996;
 
-		/// <summary>
-		/// TaiwuPunishmentTongyong
-		/// </summary>
 		public const short TaiwuPunishmentTongyong = 997;
 
-		/// <summary>
-		/// TaiwuPunishmentShaolin
-		/// </summary>
 		public const short TaiwuPunishmentShaolin = 998;
 
-		/// <summary>
-		/// TaiwuPunishmentEmei
-		/// </summary>
 		public const short TaiwuPunishmentEmei = 999;
 
-		/// <summary>
-		/// TaiwuPunishmentBaihua
-		/// </summary>
 		public const short TaiwuPunishmentBaihua = 1000;
 
-		/// <summary>
-		/// TaiwuPunishmentWudang
-		/// </summary>
 		public const short TaiwuPunishmentWudang = 1001;
 
-		/// <summary>
-		/// TaiwuPunishmentYuanshan
-		/// </summary>
 		public const short TaiwuPunishmentYuanshan = 1002;
 
-		/// <summary>
-		/// TaiwuPunishmentShingXiang
-		/// </summary>
 		public const short TaiwuPunishmentShingXiang = 1003;
 
-		/// <summary>
-		/// TaiwuPunishmentRanShan
-		/// </summary>
 		public const short TaiwuPunishmentRanShan = 1004;
 
-		/// <summary>
-		/// TaiwuPunishmentXuanNv
-		/// </summary>
 		public const short TaiwuPunishmentXuanNv = 1005;
 
-		/// <summary>
-		/// TaiwuPunishmentZhuJian
-		/// </summary>
 		public const short TaiwuPunishmentZhuJian = 1006;
 
-		/// <summary>
-		/// TaiwuPunishmentKongSang
-		/// </summary>
 		public const short TaiwuPunishmentKongSang = 1007;
 
-		/// <summary>
-		/// TaiwuPunishmentJinGang
-		/// </summary>
 		public const short TaiwuPunishmentJinGang = 1008;
 
-		/// <summary>
-		/// TaiwuPunishmentWuXian
-		/// </summary>
 		public const short TaiwuPunishmentWuXian = 1009;
 
-		/// <summary>
-		/// TaiwuPunishmentJieQing
-		/// </summary>
 		public const short TaiwuPunishmentJieQing = 1010;
 
-		/// <summary>
-		/// TaiwuPunishmentFuLong
-		/// </summary>
 		public const short TaiwuPunishmentFuLong = 1011;
 
-		/// <summary>
-		/// TaiwuPunishmentXueHou
-		/// </summary>
 		public const short TaiwuPunishmentXueHou = 1012;
 
-		/// <summary>
-		/// SectPunishLevel5Expel
-		/// </summary>
 		public const short SectPunishLevel5Expel = 1013;
 
-		/// <summary>
-		/// BeImplicatedSectPunishLevel5New
-		/// </summary>
 		public const short BeImplicatedSectPunishLevel5New = 1014;
 
-		/// <summary>
-		/// BeImplicatedSectPunishLevel5Expel
-		/// </summary>
 		public const short BeImplicatedSectPunishLevel5Expel = 1015;
 
-		/// <summary>
-		/// ResistArrestIntrudePrisonCancelSupportMakeEnemyNpcGuard
-		/// </summary>
 		public const short ResistArrestIntrudePrisonCancelSupportMakeEnemyNpcGuard = 1016;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwuWanted
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwuWanted = 1017;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportNpcGuard
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonCancelSupportNpcGuard = 1018;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwuWanted
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwuWanted = 1019;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpcGuard
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpcGuard = 1020;
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwuWanted
-		/// </summary>
 		public const short ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwuWanted = 1021;
 
-		/// <summary>
-		/// CivilianSkillForgive
-		/// </summary>
 		public const short ForgiveForCivilianSkill = 1022;
 
-		/// <summary>
-		/// BeggarEatSomeoneFood
-		/// </summary>
 		public const short BeggarEatSomeoneFood = 1023;
 
-		/// <summary>
-		/// SomeoneFoodEatedByBeggar
-		/// </summary>
 		public const short SomeoneFoodEatedByBeggar = 1024;
 
-		/// <summary>
-		/// AristocratReleasePrisoner
-		/// </summary>
 		public const short AristocratReleasePrisoner = 1025;
 
-		/// <summary>
-		/// PrisonerBeReleaseByAristocrat
-		/// </summary>
 		public const short PrisonerBeReleaseByAristocrat = 1026;
 
-		/// <summary>
-		/// JieQingPunishmentAssassinSetOut
-		/// </summary>
 		public const short JieQingPunishmentAssassinSetOut = 1027;
 
-		/// <summary>
-		/// JieQingPunishmentAssassinSucceed
-		/// </summary>
 		public const short JieQingPunishmentAssassinSucceed = 1028;
 
-		/// <summary>
-		/// JieQingPunishmentAssassinBeSucceed
-		/// </summary>
 		public const short JieQingPunishmentAssassinBeSucceed = 1029;
 
-		/// <summary>
-		/// JieQingPunishmentAssassinFailed
-		/// </summary>
 		public const short JieQingPunishmentAssassinFailed = 1030;
 
-		/// <summary>
-		/// JieQingPunishmentAssassinBeFailed
-		/// </summary>
 		public const short JieQingPunishmentAssassinBeFailed = 1031;
 
-		/// <summary>
-		/// JieQingPunishmentAssassinGiveUp
-		/// </summary>
 		public const short JieQingPunishmentAssassinGiveUp = 1032;
 
-		/// <summary>
-		/// ExociseXiangshuInfectionVictoryInCombatDie
-		/// </summary>
 		public const short ExociseXiangshuInfectionVictoryInCombatDie = 1033;
 
-		/// <summary>
-		/// BecomeExociseXiangshuInfectionVictoryInCombatDie
-		/// </summary>
 		public const short BecomeExociseXiangshuInfectionVictoryInCombatDie = 1034;
 
-		/// <summary>
-		/// ArrestFailedTaiwu
-		/// </summary>
 		public const short ArrestFailedTaiwu = 1035;
 
-		/// <summary>
-		/// ArrestedSuccessfullyTaiwu
-		/// </summary>
 		public const short ArrestedSuccessfullyTaiwu = 1036;
 
-		/// <summary>
-		/// LifeSkillBattleLoseAndTheArrestFailedCaptor
-		/// </summary>
 		public const short LifeSkillBattleLoseAndTheArrestFailedCaptor = 1037;
 
-		/// <summary>
-		/// LifeSkillBattleWinAndAvoidArrestTaiwu
-		/// </summary>
 		public const short LifeSkillBattleWinAndAvoidArrestTaiwu = 1038;
 
-		/// <summary>
-		/// LifeSkillBattleWinAndSuccessfulArrestCaptor
-		/// </summary>
 		public const short LifeSkillBattleWinAndSuccessfulArrestCaptor = 1039;
 
-		/// <summary>
-		/// LifeSkillBattleLoseAndWasArrestedTaiwu
-		/// </summary>
 		public const short LifeSkillBattleLoseAndWasArrestedTaiwu = 1040;
 
-		/// <summary>
-		/// FailedArrestForBriberyCaptorByAuthority
-		/// </summary>
 		public const short FailedArrestForBriberyCaptorByAuthority = 1041;
 
-		/// <summary>
-		/// BribeSucceededInAvoidingArrestTaiwuByAuthority
-		/// </summary>
 		public const short BribeSucceededInAvoidingArrestTaiwuByAuthority = 1042;
 
-		/// <summary>
-		/// FailedArrestForBriberyCaptorByExp
-		/// </summary>
 		public const short FailedArrestForBriberyCaptorByExp = 1043;
 
-		/// <summary>
-		/// BribeSucceededInAvoidingArrestTaiwuByExp
-		/// </summary>
 		public const short BribeSucceededInAvoidingArrestTaiwuByExp = 1044;
 
-		/// <summary>
-		/// FailedArrestForBriberyCaptorByMoney
-		/// </summary>
 		public const short FailedArrestForBriberyCaptorByMoney = 1045;
 
-		/// <summary>
-		/// BribeSucceededInAvoidingArrestTaiwuByMoney
-		/// </summary>
 		public const short BribeSucceededInAvoidingArrestTaiwuByMoney = 1046;
 
-		/// <summary>
-		/// SubmitToCaptureMeeklyTaiwu
-		/// </summary>
 		public const short SubmitToCaptureMeeklyTaiwu = 1047;
 
-		/// <summary>
-		/// SubmitToCaptureMeeklyCaptor
-		/// </summary>
 		public const short SubmitToCaptureMeeklyCaptor = 1048;
 
-		/// <summary>
-		/// NormalInformationChangeProfession
-		/// </summary>
 		public const short NormalInformationChangeProfession = 1049;
 
-		/// <summary>
-		/// FeedTheAnimal
-		/// </summary>
 		public const short FeedTheAnimal = 1050;
 
-		/// <summary>
-		/// ProfessionDoctorLifeTransition
-		/// </summary>
 		public const short ProfessionDoctorLifeTransition = 1051;
 
-		/// <summary>
-		/// ProfessionDoctorLifeTransitionTaiwu
-		/// </summary>
 		public const short ProfessionDoctorLifeTransitionTaiwu = 1052;
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByExp
-		/// </summary>
 		public const short CombatSkillKeyPointComprehensionByExp = 1053;
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByItems
-		/// </summary>
 		public const short CombatSkillKeyPointComprehensionByItems = 1054;
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByLoveRelationship
-		/// </summary>
 		public const short CombatSkillKeyPointComprehensionByLoveRelationship = 1055;
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByHatredRelationship
-		/// </summary>
 		public const short CombatSkillKeyPointComprehensionByHatredRelationship = 1056;
 
-		/// <summary>
-		/// SpiritualDebtKongsangPoisoned
-		/// </summary>
 		public const short SpiritualDebtKongsangPoisoned = 1057;
 
-		/// <summary>
-		/// MartialArtistSkill3NPCItemDropCaseA
-		/// </summary>
 		public const short MartialArtistSkill3NPCItemDropCaseA = 1058;
 
-		/// <summary>
-		/// MartialArtistSkill3NPCItemDropCaseB
-		/// </summary>
 		public const short MartialArtistSkill3NPCItemDropCaseB = 1059;
 
-		/// <summary>
-		/// SectPunishElopeSucceedJust
-		/// </summary>
 		public const short SectPunishElopeSucceedJust = 1060;
 
-		/// <summary>
-		/// SectPunishElopeSucceedKind
-		/// </summary>
 		public const short SectPunishElopeSucceedKind = 1061;
 
-		/// <summary>
-		/// SectPunishElopeSucceedEven
-		/// </summary>
 		public const short SectPunishElopeSucceedEven = 1062;
 
-		/// <summary>
-		/// SectPunishElopeSucceed
-		/// </summary>
 		public const short SectPunishElopeSucceed = 1063;
 
-		/// <summary>
-		/// VillagerGetRefineItem
-		/// </summary>
 		public const short VillagerGetRefineItem = 1064;
 
-		/// <summary>
-		/// VillagerUpgradeRefineItem
-		/// </summary>
 		public const short VillagerUpgradeRefineItem = 1065;
 
-		/// <summary>
-		/// VillagerTreatmentTaiwu
-		/// </summary>
 		public const short VillagerTreatmentTaiwu = 1066;
 
-		/// <summary>
-		/// VillagerReduceXiangshuInfect
-		/// </summary>
 		public const short VillagerReduceXiangshuInfect = 1067;
 
-		/// <summary>
-		/// VillagerEarnMoney
-		/// </summary>
 		public const short VillagerEarnMoney = 1068;
 
-		/// <summary>
-		/// VillagerBeEarnedMoney
-		/// </summary>
 		public const short VillagerBeEarnedMoney = 1069;
 
-		/// <summary>
-		/// VillagerBeSoldItem
-		/// </summary>
 		public const short VillagerBeSoldItem = 1070;
 
-		/// <summary>
-		/// VillagerBePurchasedItem
-		/// </summary>
 		public const short VillagerBePurchasedItem = 1071;
 
-		/// <summary>
-		/// VillagerGetMerchantFavorability
-		/// </summary>
 		public const short VillagerGetMerchantFavorability = 1072;
 
-		/// <summary>
-		/// VillagerGetMerchantFavorabilityTaiwu
-		/// </summary>
 		public const short VillagerGetMerchantFavorabilityTaiwu = 1073;
 
-		/// <summary>
-		/// LiteratiBeEntertainedUp
-		/// </summary>
 		public const short LiteratiBeEntertainedUp = 1074;
 
-		/// <summary>
-		/// LiteratiBeEntertainedDown
-		/// </summary>
 		public const short LiteratiBeEntertainedDown = 1075;
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceCultureUp
-		/// </summary>
 		public const short LiteratiSpreadingInfluenceCultureUp = 1076;
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceCultureDown
-		/// </summary>
 		public const short LiteratiSpreadingInfluenceCultureDown = 1077;
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceSafetyUp
-		/// </summary>
 		public const short LiteratiSpreadingInfluenceSafetyUp = 1078;
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceSafetyDown
-		/// </summary>
 		public const short LiteratiSpreadingInfluenceSafetyDown = 1079;
 
-		/// <summary>
-		/// LiteratiConnectRelationshipUp
-		/// </summary>
 		public const short LiteratiConnectRelationshipUp = 1080;
 
-		/// <summary>
-		/// LiteratiConnectRelationshipDown
-		/// </summary>
 		public const short LiteratiConnectRelationshipDown = 1081;
 
-		/// <summary>
-		/// LiteratiConnectRelationshipUpTaiwu
-		/// </summary>
 		public const short LiteratiConnectRelationshipUpTaiwu = 1082;
 
-		/// <summary>
-		/// LiteratiConnectRelationshipDownTaiwu
-		/// </summary>
 		public const short LiteratiConnectRelationshipDownTaiwu = 1083;
 
-		/// <summary>
-		/// LiteratiBeConnectedRelationshipUp
-		/// </summary>
 		public const short LiteratiBeConnectedRelationshipUp = 1084;
 
-		/// <summary>
-		/// LiteratiBeConnectedRelationshipDown
-		/// </summary>
 		public const short LiteratiBeConnectedRelationshipDown = 1085;
 
-		/// <summary>
-		/// GuardingSwordTombXiangshuInfectUp
-		/// </summary>
 		public const short GuardingSwordTombXiangshuInfectUp = 1086;
 
-		/// <summary>
-		/// GuardingSwordTombSucceed
-		/// </summary>
 		public const short GuardingSwordTombSucceed = 1087;
 
-		/// <summary>
-		/// VillagerMakeEnemy
-		/// </summary>
 		public const short VillagerMakeEnemy = 1088;
 
-		/// <summary>
-		/// VillagerConfessLoveSucceed
-		/// </summary>
 		public const short VillagerConfessLoveSucceed = 1089;
 
-		/// <summary>
-		/// OrderProduct
-		/// </summary>
 		public const short OrderProduct = 1090;
 
-		/// <summary>
-		/// ReceiveProduct
-		/// </summary>
 		public const short ReceiveProduct = 1091;
 
-		/// <summary>
-		/// BeOrderProduct
-		/// </summary>
 		public const short BeOrderProduct = 1092;
 
-		/// <summary>
-		/// BeReceiveProduct
-		/// </summary>
 		public const short BeReceiveProduct = 1093;
 
-		/// <summary>
-		/// CaptureOrder
-		/// </summary>
 		public const short CaptureOrder = 1094;
 
-		/// <summary>
-		/// BeCaptureOrder
-		/// </summary>
 		public const short BeCaptureOrder = 1095;
 
-		/// <summary>
-		/// CaptureOrderIntermediator
-		/// </summary>
 		public const short CaptureOrderIntermediator = 1096;
 
-		/// <summary>
-		/// OrderProductForOthers
-		/// </summary>
 		public const short OrderProductForOthers = 1097;
 
-		/// <summary>
-		/// BeOrderProductForOthers
-		/// </summary>
 		public const short BeOrderProductForOthers = 1098;
 
-		/// <summary>
-		/// DeliveredOrderProduct
-		/// </summary>
 		public const short DeliveredOrderProduct = 1099;
 
-		/// <summary>
-		/// BeDeliveredOrderProduct
-		/// </summary>
 		public const short BeDeliveredOrderProduct = 1100;
 
-		/// <summary>
-		/// AcquisitionDiscard
-		/// </summary>
 		public const short AcquisitionDiscard = 1101;
 
-		/// <summary>
-		/// ShopBuildingBaseDevelopLifeSkill
-		/// </summary>
 		public const short ShopBuildingBaseDevelopLifeSkill = 1102;
 
-		/// <summary>
-		/// ShopBuildingBaseDevelopCombatSkill
-		/// </summary>
 		public const short ShopBuildingBaseDevelopCombatSkill = 1103;
 
-		/// <summary>
-		/// ShopBuildingPersonalityDevelopLifeSkill
-		/// </summary>
 		public const short ShopBuildingPersonalityDevelopLifeSkill = 1104;
 
-		/// <summary>
-		/// ShopBuildingPersonalityDevelopCombatSkill
-		/// </summary>
 		public const short ShopBuildingPersonalityDevelopCombatSkill = 1105;
 
-		/// <summary>
-		/// ShopBuildingLeaderDevelopLifeSkill
-		/// </summary>
 		public const short ShopBuildingLeaderDevelopLifeSkill = 1106;
 
-		/// <summary>
-		/// ShopBuildingLeaderDevelopCombatSkill
-		/// </summary>
 		public const short ShopBuildingLeaderDevelopCombatSkill = 1107;
 
-		/// <summary>
-		/// ShopBuildingLearnLifeSkill
-		/// </summary>
 		public const short ShopBuildingLearnLifeSkill = 1108;
 
-		/// <summary>
-		/// ShopBuildingLearnCombatSkill
-		/// </summary>
 		public const short ShopBuildingLearnCombatSkill = 1109;
 
-		/// <summary>
-		/// JoinTaiwuVillageAfterTaiwuVillageStoneClaimed
-		/// </summary>
 		public const short JoinTaiwuVillageAfterTaiwuVillageStoneClaimed = 1110;
 
-		/// <summary>
-		/// TaiwuVillagerFinishedReading
-		/// </summary>
 		public const short TaiwuVillagerFinishedReading = 1111;
 
-		/// <summary>
-		/// TaiwuVillagerSalaryReceived
-		/// </summary>
 		public const short TaiwuVillagerSalaryReceived = 1112;
 
-		/// <summary>
-		/// ChangeGradeDrop
-		/// </summary>
 		public const short ChangeGradeDrop = 1113;
 
-		/// <summary>
-		/// FarmerCollectMaterial
-		/// </summary>
 		public const short FarmerCollectMaterial = 1114;
 
-		/// <summary>
-		/// JoinOrganization
-		/// </summary>
 		public const short JoinOrganization = 1115;
 
-		/// <summary>
-		/// BreakAwayOrganization
-		/// </summary>
 		public const short BreakAwayOrganization = 1116;
 
-		/// <summary>
-		/// ChangeOrganization
-		/// </summary>
 		public const short ChangeOrganization = 1117;
 
-		/// <summary>
-		/// VillagerFavorabilityUp
-		/// </summary>
 		public const short VillagerFavorabilityUp = 1118;
 
-		/// <summary>
-		/// VillagerFavorabilityDown
-		/// </summary>
 		public const short VillagerFavorabilityDown = 1119;
 
-		/// <summary>
-		/// VillagerFavorabilityUpPerson
-		/// </summary>
 		public const short VillagerFavorabilityUpPerson = 1120;
 
-		/// <summary>
-		/// VillagerFavorabilityDownPersonB
-		/// </summary>
 		public const short VillagerFavorabilityDownPerson = 1121;
 
-		/// <summary>
-		/// TeamUpProtection
-		/// </summary>
 		public const short TeamUpProtection = 1122;
 
-		/// <summary>
-		/// TeamUpRescue
-		/// </summary>
 		public const short TeamUpRescue = 1123;
 
-		/// <summary>
-		/// TeamUpMourn
-		/// </summary>
 		public const short TeamUpMourn = 1124;
 
-		/// <summary>
-		/// TeamUpVisitFriendOrFamily
-		/// </summary>
 		public const short TeamUpVisitFriendOrFamily = 1125;
 
-		/// <summary>
-		/// TeamUpFindTreasure
-		/// </summary>
 		public const short TeamUpFindTreasure = 1126;
 
-		/// <summary>
-		/// TeamUpFindSpecialMaterial
-		/// </summary>
 		public const short TeamUpFindSpecialMaterial = 1127;
 
-		/// <summary>
-		/// TeamUpTakeRevenge
-		/// </summary>
 		public const short TeamUpTakeRevenge = 1128;
 
-		/// <summary>
-		/// TeamUpContestForLegendaryBook
-		/// </summary>
 		public const short TeamUpContestForLegendaryBook = 1129;
 
-		/// <summary>
-		/// TeamUpEscapeFromPrison
-		/// </summary>
 		public const short TeamUpEscapeFromPrison = 1130;
 
-		/// <summary>
-		/// TeamUpSeekAsylum
-		/// </summary>
 		public const short TeamUpSeekAsylum = 1131;
 
-		/// <summary>
-		/// GetInfected
-		/// </summary>
 		public const short GetInfected = 1132;
 
-		/// <summary>
-		/// DieByInfected
-		/// </summary>
 		public const short DieByInfected = 1133;
 
-		/// <summary>
-		/// InheritLegacy
-		/// </summary>
 		public const short InheritLegacy = 1134;
 
-		/// <summary>
-		/// 低心情宾客服用了物品
-		/// </summary>
 		public const short Banquet_1 = 1135;
 
-		/// <summary>
-		/// 低心情宾客服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_2 = 1136;
 
-		/// <summary>
-		/// 低心情宾客在宴席上服用了物品
-		/// </summary>
 		public const short Banquet_3 = 1137;
 
-		/// <summary>
-		/// 低心情宾客在宴席上服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_4 = 1138;
 
-		/// <summary>
-		/// 宾客服用了物品
-		/// </summary>
 		public const short Banquet_5 = 1139;
 
-		/// <summary>
-		/// 宾客服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_6 = 1140;
 
-		/// <summary>
-		/// 宾客在宴席上服用了物品
-		/// </summary>
 		public const short Banquet_7 = 1141;
 
-		/// <summary>
-		/// 宾客在宴席上服用了喜爱的物品
-		/// </summary>
 		public const short Banquet_8 = 1142;
 
-		/// <summary>
-		/// 宴堂没有可食用物品
-		/// </summary>
 		public const short Banquet_9 = 1143;
 
-		/// <summary>
-		/// 宾客已经吃不下
-		/// </summary>
 		public const short Banquet_10 = 1144;
 
-		/// <summary>
-		/// SectMainStoryWudangInjured
-		/// </summary>
 		public const short SectMainStoryWudangInjured = 1145;
 
-		/// <summary>
-		/// ExtendDarkAshTime
-		/// </summary>
 		public const short ExtendDarkAshTime = 1146;
 
-		/// <summary>
-		/// AdoreInMarriage
-		/// </summary>
 		public const short AdoreInMarriage = 1147;
 
-		/// <summary>
-		/// SameAreaDistantMarriage
-		/// </summary>
 		public const short SameAreaDistantMarriage = 1148;
 
-		/// <summary>
-		/// SameStateDistantMarriage
-		/// </summary>
 		public const short SameStateDistantMarriage = 1149;
 
-		/// <summary>
-		/// DifferentStateDistantMarriage
-		/// </summary>
 		public const short DifferentStateDistantMarriage = 1150;
 
-		/// <summary>
-		/// GoToOuterWorlds
-		/// </summary>
 		public const short GoToOuterWorlds = 1151;
 
-		/// <summary>
-		/// BackFromOuterWorlds
-		/// </summary>
 		public const short BackFromOuterWorlds = 1152;
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeili
-		/// </summary>
 		public const short SectMainStoryXuehouJixiDrainNeili = 1153;
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransferFiveElements
-		/// </summary>
 		public const short SectMainStoryXuehouTaiwuTransferFiveElements = 1154;
 
-		/// <summary>
-		/// AlertnessUpBySecretInformation
-		/// </summary>
 		public const short AlertnessUpBySecretInformation = 1155;
 
-		/// <summary>
-		/// AlertnessDownBySecretInformation
-		/// </summary>
 		public const short AlertnessDownBySecretInformation = 1156;
 
-		/// <summary>
-		/// ConsummateLevelIncreased
-		/// </summary>
 		public const short ConsummateLevelIncreased = 1157;
 
-		/// <summary>
-		/// CombatSkillQualificationGrowthGuaranteed
-		/// </summary>
 		public const short CombatSkillQualificationGrowthGuaranteed = 1158;
 
-		/// <summary>
-		/// CombatSkillQualificationGrowthPersonality
-		/// </summary>
 		public const short CombatSkillQualificationGrowthPersonality = 1159;
 
-		/// <summary>
-		/// CombatSkillQualificationGrowthMentor
-		/// </summary>
 		public const short CombatSkillQualificationGrowthMentor = 1160;
 
-		/// <summary>
-		/// LifeSkillQualificationGrowthGuaranteed
-		/// </summary>
 		public const short LifeSkillQualificationGrowthGuaranteed = 1161;
 
-		/// <summary>
-		/// LifeSkillQualificationGrowthPersonality
-		/// </summary>
 		public const short LifeSkillQualificationGrowthPersonality = 1162;
 
-		/// <summary>
-		/// LifeSkillQualificationGrowthMentor
-		/// </summary>
 		public const short LifeSkillQualificationGrowthMentor = 1163;
 
-		/// <summary>
-		/// IdentityActionHelpCivilians
-		/// </summary>
 		public const short IdentityActionHelpCivilians = 1164;
 
-		/// <summary>
-		/// IdentityActionHelpCiviliansTarget
-		/// </summary>
 		public const short IdentityActionHelpCiviliansTarget = 1205;
 
-		/// <summary>
-		/// IdentityActionFightHeretics
-		/// </summary>
 		public const short IdentityActionFightHeretics = 1165;
 
-		/// <summary>
-		/// IdentityActionFightHereticsTarget
-		/// </summary>
 		public const short IdentityActionFightHereticsTarget = 1206;
 
-		/// <summary>
-		/// IdentityActionShaolin0
-		/// </summary>
 		public const short IdentityActionShaolin0 = 1166;
 
-		/// <summary>
-		/// IdentityActionShaolin0Target
-		/// </summary>
 		public const short IdentityActionShaolin0Target = 1207;
 
-		/// <summary>
-		/// IdentityActionShaolin1
-		/// </summary>
 		public const short IdentityActionShaolin1 = 1167;
 
-		/// <summary>
-		/// IdentityActionShaolin2
-		/// </summary>
 		public const short IdentityActionShaolin2 = 1168;
 
-		/// <summary>
-		/// IdentityActionShaolin2Target
-		/// </summary>
 		public const short IdentityActionShaolin2Target = 1208;
 
-		/// <summary>
-		/// IdentityActionShaolin3
-		/// </summary>
 		public const short IdentityActionShaolin3 = 1169;
 
-		/// <summary>
-		/// IdentityActionShaolin4
-		/// </summary>
 		public const short IdentityActionShaolin4 = 1170;
 
-		/// <summary>
-		/// IdentityActionShaolin4Target
-		/// </summary>
 		public const short IdentityActionShaolin4Target = 1375;
 
-		/// <summary>
-		/// IdentityActionShaolin5
-		/// </summary>
 		public const short IdentityActionShaolin5 = 1171;
 
-		/// <summary>
-		/// IdentityActionShaolin5Target
-		/// </summary>
 		public const short IdentityActionShaolin5Target = 1376;
 
-		/// <summary>
-		/// IdentityActionShaolin6
-		/// </summary>
 		public const short IdentityActionShaolin6 = 1172;
 
-		/// <summary>
-		/// IdentityActionEmei0
-		/// </summary>
 		public const short IdentityActionEmei0 = 1173;
 
-		/// <summary>
-		/// IdentityActionEmei0Target
-		/// </summary>
 		public const short IdentityActionEmei0Target = 1380;
 
-		/// <summary>
-		/// IdentityActionEmei1
-		/// </summary>
 		public const short IdentityActionEmei1 = 1174;
 
-		/// <summary>
-		/// IdentityActionEmei4
-		/// </summary>
 		public const short IdentityActionEmei4 = 1175;
 
-		/// <summary>
-		/// IdentityActionEmei4Target
-		/// </summary>
 		public const short IdentityActionEmei4Target = 1209;
 
-		/// <summary>
-		/// IdentityActionEmei5
-		/// </summary>
 		public const short IdentityActionEmei5 = 1176;
 
-		/// <summary>
-		/// IdentityActionEmei6
-		/// </summary>
 		public const short IdentityActionEmei6 = 1177;
 
-		/// <summary>
-		/// IdentityActionEmei6Target
-		/// </summary>
 		public const short IdentityActionEmei6Target = 1210;
 
-		/// <summary>
-		/// IdentityActionBaihua0
-		/// </summary>
 		public const short IdentityActionBaihua0 = 1178;
 
-		/// <summary>
-		/// IdentityActionBaihua0Target
-		/// </summary>
 		public const short IdentityActionBaihua0Target = 1211;
 
-		/// <summary>
-		/// IdentityActionBaihua1
-		/// </summary>
 		public const short IdentityActionBaihua1 = 1179;
 
-		/// <summary>
-		/// IdentityActionBaihua2
-		/// </summary>
 		public const short IdentityActionBaihua2 = 1180;
 
-		/// <summary>
-		/// IdentityActionBaihua3
-		/// </summary>
 		public const short IdentityActionBaihua3 = 1181;
 
-		/// <summary>
-		/// IdentityActionBaihua3Target
-		/// </summary>
 		public const short IdentityActionBaihua3Target = 1212;
 
-		/// <summary>
-		/// IdentityActionBaihua5
-		/// </summary>
 		public const short IdentityActionBaihua5 = 1183;
 
-		/// <summary>
-		/// IdentityActionBaihua5Target
-		/// </summary>
 		public const short IdentityActionBaihua5Target = 1213;
 
-		/// <summary>
-		/// IdentityActionWudang5
-		/// </summary>
 		public const short IdentityActionWudang5 = 1188;
 
-		/// <summary>
-		/// IdentityActionYuanshan1
-		/// </summary>
 		public const short IdentityActionYuanshan1 = 1191;
 
-		/// <summary>
-		/// IdentityActionYuanshan1Target
-		/// </summary>
 		public const short IdentityActionYuanshan1Target = 1218;
 
-		/// <summary>
-		/// IdentityActionYuanshan2
-		/// </summary>
-		public const short IdentityActionYuanshan2 = 1192;
-
-		/// <summary>
-		/// IdentityActionYuanshan3
-		/// </summary>
 		public const short IdentityActionYuanshan3 = 1193;
 
-		/// <summary>
-		/// IdentityActionYuanshan3Target
-		/// </summary>
 		public const short IdentityActionYuanshan3Target = 1219;
 
-		/// <summary>
-		/// IdentityActionYuanshan5
-		/// </summary>
-		public const short IdentityActionYuanshan5 = 1194;
-
-		/// <summary>
-		/// IdentityActionYuanshan5Target
-		/// </summary>
-		public const short IdentityActionYuanshan5Target = 1220;
-
-		/// <summary>
-		/// IdentityActionYuanshan6
-		/// </summary>
 		public const short IdentityActionYuanshan6 = 1195;
 
-		/// <summary>
-		/// IdentityActionYuanshan6Target
-		/// </summary>
 		public const short IdentityActionYuanshan6Target = 1384;
 
-		/// <summary>
-		/// IdentityActionShixiang0
-		/// </summary>
 		public const short IdentityActionShixiang0 = 1196;
 
-		/// <summary>
-		/// IdentityActionShixiang1
-		/// </summary>
 		public const short IdentityActionShixiang1 = 1197;
 
-		/// <summary>
-		/// IdentityActionShixiang2
-		/// </summary>
 		public const short IdentityActionShixiang2 = 1198;
 
-		/// <summary>
-		/// IdentityActionShixiang3
-		/// </summary>
 		public const short IdentityActionShixiang3 = 1199;
 
-		/// <summary>
-		/// IdentityActionShixiang4
-		/// </summary>
 		public const short IdentityActionShixiang4 = 1200;
 
-		/// <summary>
-		/// IdentityActionShixiang5
-		/// </summary>
 		public const short IdentityActionShixiang5 = 1201;
 
-		/// <summary>
-		/// IdentityActionShixiang5Target
-		/// </summary>
 		public const short IdentityActionShixiang5Target = 1221;
 
-		/// <summary>
-		/// IdentityActionShixiang6
-		/// </summary>
 		public const short IdentityActionShixiang6 = 1202;
 
-		/// <summary>
-		/// IdentityActionShixiang6Target
-		/// </summary>
 		public const short IdentityActionShixiang6Target = 1222;
 
-		/// <summary>
-		/// IdentityActionShixiang7
-		/// </summary>
 		public const short IdentityActionShixiang7 = 1203;
 
-		/// <summary>
-		/// IdentityActionShixiang7Target
-		/// </summary>
 		public const short IdentityActionShixiang7Target = 1223;
 
-		/// <summary>
-		/// IdentityActionShixiang8
-		/// </summary>
 		public const short IdentityActionShixiang8 = 1204;
 
-		/// <summary>
-		/// IdentityActionShixiang8Target
-		/// </summary>
 		public const short IdentityActionShixiang8Target = 1224;
 
-		/// <summary>
-		/// IdentityActionRanShan1
-		/// </summary>
 		public const short IdentityActionRanShan1 = 1225;
 
-		/// <summary>
-		/// IdentityActionRanShan1Target
-		/// </summary>
 		public const short IdentityActionRanShan1Target = 1226;
 
-		/// <summary>
-		/// IdentityActionRanShan2
-		/// </summary>
 		public const short IdentityActionRanShan2 = 1227;
 
-		/// <summary>
-		/// IdentityActionRanShan2Target
-		/// </summary>
 		public const short IdentityActionRanShan2Target = 1228;
 
-		/// <summary>
-		/// IdentityActionRanShan3
-		/// </summary>
 		public const short IdentityActionRanShan3 = 1229;
 
-		/// <summary>
-		/// IdentityActionRanShan4
-		/// </summary>
 		public const short IdentityActionRanShan4 = 1230;
 
-		/// <summary>
-		/// IdentityActionRanShan5
-		/// </summary>
 		public const short IdentityActionRanShan5 = 1231;
 
-		/// <summary>
-		/// IdentityActionRanShan6
-		/// </summary>
 		public const short IdentityActionRanShan6 = 1232;
 
-		/// <summary>
-		/// IdentityActionRanShan7
-		/// </summary>
 		public const short IdentityActionRanShan7 = 1233;
 
-		/// <summary>
-		/// IdentityActionRanShan7Target
-		/// </summary>
 		public const short IdentityActionRanShan7Target = 1234;
 
-		/// <summary>
-		/// IdentityActionRanShan8
-		/// </summary>
 		public const short IdentityActionRanShan8 = 1235;
 
-		/// <summary>
-		/// IdentityActionRanShan8Target
-		/// </summary>
 		public const short IdentityActionRanShan8Target = 1236;
 
-		/// <summary>
-		/// IdentityActionXuanNv1
-		/// </summary>
 		public const short IdentityActionXuanNv1 = 1237;
 
-		/// <summary>
-		/// IdentityActionXuanNv1Target
-		/// </summary>
 		public const short IdentityActionXuanNv1Target = 1238;
 
-		/// <summary>
-		/// IdentityActionXuanNv2
-		/// </summary>
 		public const short IdentityActionXuanNv2 = 1239;
 
-		/// <summary>
-		/// IdentityActionXuanNv2Target
-		/// </summary>
 		public const short IdentityActionXuanNv2Target = 1388;
 
-		/// <summary>
-		/// IdentityActionXuanNv3
-		/// </summary>
 		public const short IdentityActionXuanNv3 = 1240;
 
-		/// <summary>
-		/// IdentityActionXuanNv3Audience
-		/// </summary>
 		public const short IdentityActionXuanNv3Audience = 1389;
 
-		/// <summary>
-		/// IdentityActionXuanNv4
-		/// </summary>
 		public const short IdentityActionXuanNv4 = 1241;
 
-		/// <summary>
-		/// IdentityActionXuanNv4Target
-		/// </summary>
 		public const short IdentityActionXuanNv4Target = 1242;
 
-		/// <summary>
-		/// IdentityActionXuanNv5
-		/// </summary>
 		public const short IdentityActionXuanNv5 = 1243;
 
-		/// <summary>
-		/// IdentityActionXuanNv5Target
-		/// </summary>
 		public const short IdentityActionXuanNv5Target = 1244;
 
-		/// <summary>
-		/// IdentityActionXuanNv6
-		/// </summary>
 		public const short IdentityActionXuanNv6 = 1245;
 
-		/// <summary>
-		/// IdentityActionXuanNv7
-		/// </summary>
 		public const short IdentityActionXuanNv7 = 1246;
 
-		/// <summary>
-		/// IdentityActionZhuJian1
-		/// </summary>
 		public const short IdentityActionZhuJian1 = 1247;
 
-		/// <summary>
-		/// IdentityActionZhuJian1Target
-		/// </summary>
 		public const short IdentityActionZhuJian1Target = 1248;
 
-		/// <summary>
-		/// IdentityActionZhuJian2
-		/// </summary>
 		public const short IdentityActionZhuJian2 = 1249;
 
-		/// <summary>
-		/// IdentityActionZhuJian3
-		/// </summary>
 		public const short IdentityActionZhuJian3 = 1250;
 
-		/// <summary>
-		/// IdentityActionZhuJian4
-		/// </summary>
 		public const short IdentityActionZhuJian4 = 1251;
 
-		/// <summary>
-		/// IdentityActionZhuJian5
-		/// </summary>
 		public const short IdentityActionZhuJian5 = 1252;
 
-		/// <summary>
-		/// IdentityActionZhuJian8
-		/// </summary>
 		public const short IdentityActionZhuJian8 = 1377;
 
-		/// <summary>
-		/// IdentityActionKongSang1
-		/// </summary>
 		public const short IdentityActionKongSang1 = 1256;
 
-		/// <summary>
-		/// IdentityActionKongSang1Target
-		/// </summary>
 		public const short IdentityActionKongSang1Target = 1257;
 
-		/// <summary>
-		/// IdentityActionKongSang2
-		/// </summary>
 		public const short IdentityActionKongSang2 = 1258;
 
-		/// <summary>
-		/// IdentityActionKongSang3
-		/// </summary>
 		public const short IdentityActionKongSang3 = 1259;
 
-		/// <summary>
-		/// IdentityActionKongSang4A
-		/// </summary>
 		public const short IdentityActionKongSang4A = 1260;
 
-		/// <summary>
-		/// IdentityActionKongSang4B
-		/// </summary>
 		public const short IdentityActionKongSang4B = 1261;
 
-		/// <summary>
-		/// IdentityActionKongSang5A
-		/// </summary>
 		public const short IdentityActionKongSang5A = 1262;
 
-		/// <summary>
-		/// IdentityActionKongSang5B
-		/// </summary>
 		public const short IdentityActionKongSang5B = 1263;
 
-		/// <summary>
-		/// IdentityActionKongSang6
-		/// </summary>
 		public const short IdentityActionKongSang6 = 1264;
 
-		/// <summary>
-		/// IdentityActionKongSang6Target
-		/// </summary>
 		public const short IdentityActionKongSang6Target = 1265;
 
-		/// <summary>
-		/// IdentityActionKongSang7
-		/// </summary>
 		public const short IdentityActionKongSang7 = 1266;
 
-		/// <summary>
-		/// IdentityActionKongSang7Target
-		/// </summary>
 		public const short IdentityActionKongSang7Target = 1267;
 
-		/// <summary>
-		/// IdentityActionKongSang8A
-		/// </summary>
 		public const short IdentityActionKongSang8A = 1268;
 
-		/// <summary>
-		/// IdentityActionKongSang8ATarget
-		/// </summary>
 		public const short IdentityActionKongSang8ATarget = 1390;
 
-		/// <summary>
-		/// IdentityActionKongSang8B
-		/// </summary>
 		public const short IdentityActionKongSang8B = 1269;
 
-		/// <summary>
-		/// IdentityActionKongSang9A
-		/// </summary>
 		public const short IdentityActionKongSang9A = 1270;
 
-		/// <summary>
-		/// IdentityActionKongSang9ATarget
-		/// </summary>
 		public const short IdentityActionKongSang9ATarget = 1391;
 
-		/// <summary>
-		/// IdentityActionKongSang9B
-		/// </summary>
 		public const short IdentityActionKongSang9B = 1271;
 
-		/// <summary>
-		/// IdentityActionKongSang10
-		/// </summary>
 		public const short IdentityActionKongSang10 = 1272;
 
-		/// <summary>
-		/// IdentityActionKongSang10Target
-		/// </summary>
 		public const short IdentityActionKongSang10Target = 1273;
 
-		/// <summary>
-		/// IdentityActionJingGangZong2Steal
-		/// </summary>
 		public const short IdentityActionJingGangZong2Steal = 1277;
 
-		/// <summary>
-		/// IdentityActionJingGangZong2Rob
-		/// </summary>
 		public const short IdentityActionJingGangZong2Rob = 1278;
 
-		/// <summary>
-		/// IdentityActionJingGangZong2Scam
-		/// </summary>
 		public const short IdentityActionJingGangZong2Scam = 1279;
 
-		/// <summary>
-		/// IdentityActionJingGangZong3
-		/// </summary>
 		public const short IdentityActionJingGangZong3 = 1280;
 
-		/// <summary>
-		/// IdentityActionJingGangZong4
-		/// </summary>
 		public const short IdentityActionJingGangZong4 = 1281;
 
-		/// <summary>
-		/// IdentityActionJingGangZong4Target
-		/// </summary>
 		public const short IdentityActionJingGangZong4Target = 1282;
 
-		/// <summary>
-		/// IdentityActionJingGangZong5
-		/// </summary>
 		public const short IdentityActionJingGangZong5 = 1283;
 
-		/// <summary>
-		/// IdentityActionJingGangZong5Target
-		/// </summary>
 		public const short IdentityActionJingGangZong5Target = 1284;
 
-		/// <summary>
-		/// IdentityActionJingGangZong6
-		/// </summary>
 		public const short IdentityActionJingGangZong6 = 1285;
 
-		/// <summary>
-		/// IdentityActionJingGangZong6Target
-		/// </summary>
 		public const short IdentityActionJingGangZong6Target = 1286;
 
-		/// <summary>
-		/// IdentityActionJingGangZong7
-		/// </summary>
 		public const short IdentityActionJingGangZong7 = 1287;
 
-		/// <summary>
-		/// IdentityActionWuXian1
-		/// </summary>
 		public const short IdentityActionWuXian1 = 1288;
 
-		/// <summary>
-		/// IdentityActionWuXian2
-		/// </summary>
 		public const short IdentityActionWuXian2 = 1289;
 
-		/// <summary>
-		/// IdentityActionWuXian2Target
-		/// </summary>
 		public const short IdentityActionWuXian2Target = 1290;
 
-		/// <summary>
-		/// IdentityActionWuXian3
-		/// </summary>
 		public const short IdentityActionWuXian3 = 1291;
 
-		/// <summary>
-		/// IdentityActionWuXian3Target
-		/// </summary>
 		public const short IdentityActionWuXian3Target = 1292;
 
-		/// <summary>
-		/// IdentityActionWuXian4
-		/// </summary>
 		public const short IdentityActionWuXian4 = 1293;
 
-		/// <summary>
-		/// IdentityActionWuXian4Target
-		/// </summary>
 		public const short IdentityActionWuXian4Target = 1378;
 
-		/// <summary>
-		/// IdentityActionWuXian5
-		/// </summary>
 		public const short IdentityActionWuXian5 = 1294;
 
-		/// <summary>
-		/// IdentityActionWuXian6
-		/// </summary>
 		public const short IdentityActionWuXian6 = 1295;
 
-		/// <summary>
-		/// IdentityActionJieQing1A
-		/// </summary>
 		public const short IdentityActionJieQing1A = 1296;
 
-		/// <summary>
-		/// IdentityActionJieQing1B
-		/// </summary>
 		public const short IdentityActionJieQing1B = 1297;
 
-		/// <summary>
-		/// IdentityActionJieQing2
-		/// </summary>
 		public const short IdentityActionJieQing2 = 1298;
 
-		/// <summary>
-		/// IdentityActionJieQing2Target
-		/// </summary>
 		public const short IdentityActionJieQing2Target = 1392;
 
-		/// <summary>
-		/// IdentityActionJieQing3
-		/// </summary>
 		public const short IdentityActionJieQing3 = 1299;
 
-		/// <summary>
-		/// IdentityActionJieQing4
-		/// </summary>
 		public const short IdentityActionJieQing4 = 1300;
 
-		/// <summary>
-		/// IdentityActionJieQing5
-		/// </summary>
 		public const short IdentityActionJieQing5 = 1301;
 
-		/// <summary>
-		/// IdentityActionJieQing6A
-		/// </summary>
 		public const short IdentityActionJieQing6A = 1302;
 
-		/// <summary>
-		/// IdentityActionJieQing6B
-		/// </summary>
 		public const short IdentityActionJieQing6B = 1303;
 
-		/// <summary>
-		/// IdentityActionJieQing7
-		/// </summary>
 		public const short IdentityActionJieQing7 = 1304;
 
-		/// <summary>
-		/// IdentityActionJieQing7Target
-		/// </summary>
 		public const short IdentityActionJieQing7Target = 1381;
 
-		/// <summary>
-		/// IdentityActionJieQing8
-		/// </summary>
 		public const short IdentityActionJieQing8 = 1305;
 
-		/// <summary>
-		/// IdentityActionFuLong2
-		/// </summary>
 		public const short IdentityActionFuLong2 = 1308;
 
-		/// <summary>
-		/// IdentityActionFuLong6
-		/// </summary>
 		public const short IdentityActionFuLong6 = 1314;
 
-		/// <summary>
-		/// IdentityActionXveHou2StealA
-		/// </summary>
 		public const short IdentityActionXveHou2StealA = 1317;
 
-		/// <summary>
-		/// IdentityActionXveHou2StealB
-		/// </summary>
 		public const short IdentityActionXveHou2StealB = 1318;
 
-		/// <summary>
-		/// IdentityActionXveHou3RobA
-		/// </summary>
 		public const short IdentityActionXveHou3RobA = 1319;
 
-		/// <summary>
-		/// IdentityActionXveHou3RobB
-		/// </summary>
 		public const short IdentityActionXveHou3RobB = 1320;
 
-		/// <summary>
-		/// IdentityActionXveHou4ScamA
-		/// </summary>
 		public const short IdentityActionXveHou4ScamA = 1321;
 
-		/// <summary>
-		/// IdentityActionXveHou4ScamB
-		/// </summary>
 		public const short IdentityActionXveHou4ScamB = 1322;
 
-		/// <summary>
-		/// IdentityActionXveHou5
-		/// </summary>
 		public const short IdentityActionXveHou5 = 1323;
 
-		/// <summary>
-		/// IdentityActionXveHou6
-		/// </summary>
 		public const short IdentityActionXveHou6 = 1324;
 
-		/// <summary>
-		/// IdentityActionXveHou7
-		/// </summary>
 		public const short IdentityActionXveHou7 = 1325;
 
-		/// <summary>
-		/// IdentityActionXveHou7Target
-		/// </summary>
 		public const short IdentityActionXveHou7Target = 1326;
 
-		/// <summary>
-		/// IdentityActionChengZhen1
-		/// </summary>
 		public const short IdentityActionChengZhen1 = 1330;
 
-		/// <summary>
-		/// IdentityActionChengZhen1TargetA
-		/// </summary>
 		public const short IdentityActionChengZhen1TargetA = 1331;
 
-		/// <summary>
-		/// IdentityActionChengZhen1TargetB
-		/// </summary>
 		public const short IdentityActionChengZhen1TargetB = 1332;
 
-		/// <summary>
-		/// IdentityActionChengZhen2
-		/// </summary>
 		public const short IdentityActionChengZhen2 = 1333;
 
-		/// <summary>
-		/// IdentityActionChengZhen2TargetA
-		/// </summary>
 		public const short IdentityActionChengZhen2TargetA = 1334;
 
-		/// <summary>
-		/// IdentityActionChengZhen2TargetB
-		/// </summary>
 		public const short IdentityActionChengZhen2TargetB = 1335;
 
-		/// <summary>
-		/// IdentityActionChengZhen3
-		/// </summary>
 		public const short IdentityActionChengZhen3 = 1336;
 
-		/// <summary>
-		/// IdentityActionChengZhen4
-		/// </summary>
 		public const short IdentityActionChengZhen4 = 1337;
 
-		/// <summary>
-		/// IdentityActionChengZhen5
-		/// </summary>
 		public const short IdentityActionChengZhen5 = 1338;
 
-		/// <summary>
-		/// IdentityActionChengZhen6
-		/// </summary>
 		public const short IdentityActionChengZhen6 = 1339;
 
-		/// <summary>
-		/// IdentityActionChengZhen6Target
-		/// </summary>
 		public const short IdentityActionChengZhen6Target = 1340;
 
-		/// <summary>
-		/// IdentityActionChengZhen7
-		/// </summary>
 		public const short IdentityActionChengZhen7 = 1341;
 
-		/// <summary>
-		/// IdentityActionChengZhen7Target
-		/// </summary>
 		public const short IdentityActionChengZhen7Target = 1342;
 
-		/// <summary>
-		/// IdentityActionChengZhen8
-		/// </summary>
 		public const short IdentityActionChengZhen8 = 1343;
 
-		/// <summary>
-		/// IdentityActionChengZhen8Target
-		/// </summary>
 		public const short IdentityActionChengZhen8Target = 1344;
 
-		/// <summary>
-		/// IdentityActionChengZhen9
-		/// </summary>
 		public const short IdentityActionChengZhen9 = 1345;
 
-		/// <summary>
-		/// IdentityActionChengZhen9Target
-		/// </summary>
 		public const short IdentityActionChengZhen9Target = 1346;
 
-		/// <summary>
-		/// IdentityActionChengZhen10
-		/// </summary>
 		public const short IdentityActionChengZhen10 = 1347;
 
-		/// <summary>
-		/// IdentityActionChengZhen10TargetA
-		/// </summary>
 		public const short IdentityActionChengZhen10TargetA = 1348;
 
-		/// <summary>
-		/// IdentityActionChengZhen10TargetB
-		/// </summary>
 		public const short IdentityActionChengZhen10TargetB = 1349;
 
-		/// <summary>
-		/// IdentityActionChengZhen11
-		/// </summary>
 		public const short IdentityActionChengZhen11 = 1350;
 
-		/// <summary>
-		/// IdentityActionChengZhen12
-		/// </summary>
 		public const short IdentityActionChengZhen12 = 1351;
 
-		/// <summary>
-		/// IdentityActionChengZhen13
-		/// </summary>
 		public const short IdentityActionChengZhen13 = 1352;
 
-		/// <summary>
-		/// IdentityActionChengZhen13Target
-		/// </summary>
 		public const short IdentityActionChengZhen13Target = 1353;
 
-		/// <summary>
-		/// IdentityActionChengZhen14
-		/// </summary>
 		public const short IdentityActionChengZhen14 = 1354;
 
-		/// <summary>
-		/// IdentityActionChengZhen15
-		/// </summary>
 		public const short IdentityActionChengZhen15 = 1355;
 
-		/// <summary>
-		/// IdentityActionChengZhen16
-		/// </summary>
 		public const short IdentityActionChengZhen16 = 1356;
 
-		/// <summary>
-		/// IdentityActionChengZhen16Target
-		/// </summary>
 		public const short IdentityActionChengZhen16Target = 1357;
 
-		/// <summary>
-		/// IdentityActionChengZhen17
-		/// </summary>
 		public const short IdentityActionChengZhen17 = 1358;
 
-		/// <summary>
-		/// IdentityActionChengZhen18
-		/// </summary>
 		public const short IdentityActionChengZhen18 = 1359;
 
-		/// <summary>
-		/// IdentityActionChengZhen19
-		/// </summary>
 		public const short IdentityActionChengZhen19 = 1360;
 
-		/// <summary>
-		/// IdentityActionChengZhen20
-		/// </summary>
 		public const short IdentityActionChengZhen20 = 1361;
 
-		/// <summary>
-		/// IdentityActionChengZhen21
-		/// </summary>
 		public const short IdentityActionChengZhen21 = 1362;
 
-		/// <summary>
-		/// IdentityActionChengZhen22
-		/// </summary>
 		public const short IdentityActionChengZhen22 = 1363;
 
-		/// <summary>
-		/// BehaviorTypeAction1
-		/// </summary>
 		public const short BehaviorTypeAction1 = 1364;
 
-		/// <summary>
-		/// BehaviorTypeAction1Target
-		/// </summary>
 		public const short BehaviorTypeAction1Target = 1402;
 
-		/// <summary>
-		/// BehaviorTypeAction2
-		/// </summary>
 		public const short BehaviorTypeAction2 = 1365;
 
-		/// <summary>
-		/// BehaviorTypeAction2Target
-		/// </summary>
 		public const short BehaviorTypeAction2Target = 1403;
 
-		/// <summary>
-		/// BehaviorTypeAction3
-		/// </summary>
 		public const short BehaviorTypeAction3 = 1366;
 
-		/// <summary>
-		/// BehaviorTypeAction4
-		/// </summary>
 		public const short BehaviorTypeAction4 = 1367;
 
-		/// <summary>
-		/// BehaviorTypeAction5
-		/// </summary>
 		public const short BehaviorTypeAction5 = 1368;
 
-		/// <summary>
-		/// BehaviorTypeAction6
-		/// </summary>
 		public const short BehaviorTypeAction6 = 1369;
 
-		/// <summary>
-		/// CherryPickResource
-		/// </summary>
 		public const short CherryPickResource = 1370;
 
-		/// <summary>
-		/// BuddistMeditate
-		/// </summary>
-		public const short BuddistMeditate = 1371;
-
-		/// <summary>
-		/// TaoistMeditate
-		/// </summary>
-		public const short TaoistMeditate = 1372;
-
-		/// <summary>
-		/// IdentityActionCaptureCricket1
-		/// </summary>
 		public const short IdentityActionCaptureCricket1 = 1373;
 
-		/// <summary>
-		/// DLCLoongRidingEffectBaxia02
-		/// </summary>
 		public const short DLCLoongRidingEffectBaxia02 = 1374;
 
-		/// <summary>
-		/// WeiQiBadOther
-		/// </summary>
 		public const short WeiQiBadOther = 1386;
 
-		/// <summary>
-		/// WeiQiGoodOther
-		/// </summary>
 		public const short WeiQiGoodOther = 1387;
 
-		/// <summary>
-		/// TwelveImmortalsEffectAdored
-		/// </summary>
 		public const short TwelveImmortalsEffectAdored = 1393;
 
-		/// <summary>
-		/// TwelveImmortalsEffectEnemy
-		/// </summary>
 		public const short TwelveImmortalsEffectEnemy = 1394;
 
-		/// <summary>
-		/// TwelveImmortalsEffectSuxia
-		/// </summary>
 		public const short TwelveImmortalsEffectSuxia = 1395;
 
-		/// <summary>
-		/// TwelveImmortalsEffectBecomeMoTian
-		/// </summary>
 		public const short TwelveImmortalsEffectBecomeMoTian = 1396;
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackByMoTian
-		/// </summary>
 		public const short TwelveImmortalsEffectBeAttackByMoTian = 1397;
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackByJiao
-		/// </summary>
 		public const short TwelveImmortalsEffectBeAttackByJiao = 1398;
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackByMirror
-		/// </summary>
 		public const short TwelveImmortalsEffectBeAttackByMirror = 1399;
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackBySkeletonDemon
-		/// </summary>
 		public const short TwelveImmortalsEffectBeAttackBySkeletonDemon = 1400;
 
-		/// <summary>
-		/// DemonHeirRevenge
-		/// </summary>
 		public const short DemonHeirRevenge = 1404;
 
-		/// <summary>
-		/// DefeatDemonHeir
-		/// </summary>
 		public const short DefeatDemonHeir = 1405;
 
-		/// <summary>
-		/// BeDefetedByDemonHeir
-		/// </summary>
 		public const short BeDefetedByDemonHeir = 1406;
 
-		/// <summary>
-		/// DemonHeirDefeatTaiwu
-		/// </summary>
 		public const short DemonHeirDefeatTaiwu = 1407;
 
-		/// <summary>
-		/// DemonHeirRebirth1
-		/// </summary>
 		public const short DemonHeirRebirth1 = 1408;
 
-		/// <summary>
-		/// DemonHeirRebirth2
-		/// </summary>
 		public const short DemonHeirRebirth2 = 1409;
 
-		/// <summary>
-		/// DLCCricketTurnToCricketForm
-		/// </summary>
 		public const short DLCCricketTurnToCricketForm = 1410;
 
-		/// <summary>
-		/// DLCCricketRetranmogrifyToHuman
-		/// </summary>
 		public const short DLCCricketRetranmogrifyToHuman = 1411;
 
-		/// <summary>
-		/// DecideToParticipateNewAdventure
-		/// </summary>
 		public const short DecideToParticipateNewAdventure = 1412;
 
-		/// <summary>
-		/// LeaveNewAdventure
-		/// </summary>
 		public const short LeaveNewAdventure = 1413;
+
+		public const short DLCChickenRetranmogrifyToHuman = 1415;
+
+		public const short DLCChickenTurnToChickenForm = 1416;
+
+		public const short DLCLoongRetranmogrifyToHuman = 1417;
+
+		public const short DLCLoongTurnToLoongForm = 1418;
+
+		public const short XiangshuSkill0NPCEvilCase = 1419;
+
+		public const short XiangshuSkill0TaiwuEvilCase = 1420;
+
+		public const short XiangshuSkill1NPCEvilCorruption = 1421;
+
+		public const short XiangshuSkill1TaiwuEvilCorruption = 1422;
+
+		public const short XiangshuSkill0NPCItemDropCase = 1423;
+
+		public const short XiangshuSkill2TaiwuItemDropCase = 1424;
+
+		public const short RequestHealInjurySucceedByRes = 1425;
+
+		public const short RequestDetoxPoisonSucceedByRes = 1426;
+
+		public const short RequestHealthSucceedByRes = 1427;
+
+		public const short RequestHealDisorderOfQiSucceedByRes = 1428;
+
+		public const short RequestHealInjuryFailByRes = 1429;
+
+		public const short RequestDetoxPoisonFailByRes = 1430;
+
+		public const short RequestHealthFailByRes = 1431;
+
+		public const short RequestHealDisorderOfQiFailByRes = 1432;
+
+		public const short AcceptRequestHealInjuryByRes = 1433;
+
+		public const short AcceptRequestDetoxPoisonByRes = 1434;
+
+		public const short AcceptRequestHealthByRes = 1435;
+
+		public const short AcceptRequestHealDisorderOfQiByRes = 1436;
+
+		public const short RefuseRequestHealInjuryByRes = 1437;
+
+		public const short RefuseRequestDetoxPoisonByRes = 1438;
+
+		public const short RefuseRequestHealthByRes = 1439;
+
+		public const short RefuseRequestHealDisorderOfQiByRes = 1440;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// Die
-		/// </summary>
 		public static LifeRecordItem Die => Instance[(short)0];
 
-		/// <summary>
-		/// XiangshuPartiallyInfected
-		/// </summary>
 		public static LifeRecordItem XiangshuPartiallyInfected => Instance[(short)1];
 
-		/// <summary>
-		/// XiangshuCompletelyInfected
-		/// </summary>
 		public static LifeRecordItem XiangshuCompletelyInfected => Instance[(short)2];
 
-		/// <summary>
-		/// MotherLoseFetus
-		/// </summary>
 		public static LifeRecordItem MotherLoseFetus => Instance[(short)3];
 
-		/// <summary>
-		/// FatherLoseFetus
-		/// </summary>
 		public static LifeRecordItem FatherLoseFetus => Instance[(short)4];
 
-		/// <summary>
-		/// AbandonChild
-		/// </summary>
 		public static LifeRecordItem AbandonChild => Instance[(short)5];
 
-		/// <summary>
-		/// ChildGetAbandoned
-		/// </summary>
 		public static LifeRecordItem ChildGetAbandoned => Instance[(short)6];
 
-		/// <summary>
-		/// GiveBirthToCricket
-		/// </summary>
 		public static LifeRecordItem GiveBirthToCricket => Instance[(short)7];
 
-		/// <summary>
-		/// GiveBirthToBoy
-		/// </summary>
 		public static LifeRecordItem GiveBirthToBoy => Instance[(short)8];
 
-		/// <summary>
-		/// GiveBirthToGirl
-		/// </summary>
 		public static LifeRecordItem GiveBirthToGirl => Instance[(short)9];
 
-		/// <summary>
-		/// BecomeFatherToNewBornBoy
-		/// </summary>
 		public static LifeRecordItem BecomeFatherToNewBornBoy => Instance[(short)10];
 
-		/// <summary>
-		/// BecomeFatherToNewBornGirl
-		/// </summary>
 		public static LifeRecordItem BecomeFatherToNewBornGirl => Instance[(short)11];
 
-		/// <summary>
-		/// BuildGrave
-		/// </summary>
 		public static LifeRecordItem BuildGrave => Instance[(short)12];
 
-		/// <summary>
-		/// MonkBreakRule
-		/// </summary>
 		public static LifeRecordItem MonkBreakRule => Instance[(short)13];
 
-		/// <summary>
-		/// KidnappedCharacterEscaped
-		/// </summary>
 		public static LifeRecordItem KidnappedCharacterEscaped => Instance[(short)14];
 
-		/// <summary>
-		/// EscapeFromKidnapping
-		/// </summary>
 		public static LifeRecordItem EscapeFromKidnapping => Instance[(short)15];
 
-		/// <summary>
-		/// ReadBookSucceed
-		/// </summary>
 		public static LifeRecordItem ReadBookSucceed => Instance[(short)16];
 
-		/// <summary>
-		/// ReadBookFail
-		/// </summary>
 		public static LifeRecordItem ReadBookFail => Instance[(short)17];
 
-		/// <summary>
-		/// BreakoutSucceed
-		/// </summary>
 		public static LifeRecordItem BreakoutSucceed => Instance[(short)18];
 
-		/// <summary>
-		/// BreakoutFail
-		/// </summary>
 		public static LifeRecordItem BreakoutFail => Instance[(short)19];
 
-		/// <summary>
-		/// LearnCombatSkill
-		/// </summary>
 		public static LifeRecordItem LearnCombatSkill => Instance[(short)20];
 
-		/// <summary>
-		/// LearnLifeSkill
-		/// </summary>
 		public static LifeRecordItem LearnLifeSkill => Instance[(short)21];
 
-		/// <summary>
-		/// RepairItem
-		/// </summary>
 		public static LifeRecordItem RepairItem => Instance[(short)22];
 
-		/// <summary>
-		/// AddPoisonToItem
-		/// </summary>
 		public static LifeRecordItem AddPoisonToItem => Instance[(short)23];
 
-		/// <summary>
-		/// LoseOverloadingResource
-		/// </summary>
 		public static LifeRecordItem LoseOverloadingResource => Instance[(short)24];
 
-		/// <summary>
-		/// LoseOverloadingItem
-		/// </summary>
 		public static LifeRecordItem LoseOverloadingItem => Instance[(short)25];
 
-		/// <summary>
-		/// MakeEnemy
-		/// </summary>
 		public static LifeRecordItem MakeEnemy => Instance[(short)26];
 
-		/// <summary>
-		/// SeverEnemy
-		/// </summary>
 		public static LifeRecordItem SeverEnemy => Instance[(short)27];
 
-		/// <summary>
-		/// BeMadeEnemy
-		/// </summary>
 		public static LifeRecordItem BeMadeEnemy => Instance[(short)28];
 
-		/// <summary>
-		/// SeveredEnemy
-		/// </summary>
 		public static LifeRecordItem SeveredEnemy => Instance[(short)29];
 
-		/// <summary>
-		/// Adore
-		/// </summary>
 		public static LifeRecordItem Adore => Instance[(short)30];
 
-		/// <summary>
-		/// LoveAtFirstSight
-		/// </summary>
 		public static LifeRecordItem LoveAtFirstSight => Instance[(short)31];
 
-		/// <summary>
-		/// ConfessLoveSucceed
-		/// </summary>
 		public static LifeRecordItem ConfessLoveSucceed => Instance[(short)32];
 
-		/// <summary>
-		/// ConfessLoveFail
-		/// </summary>
 		public static LifeRecordItem ConfessLoveFail => Instance[(short)33];
 
-		/// <summary>
-		/// AcceptConfessLove
-		/// </summary>
 		public static LifeRecordItem AcceptConfessLove => Instance[(short)34];
 
-		/// <summary>
-		/// RefuseConfessLove
-		/// </summary>
 		public static LifeRecordItem RefuseConfessLove => Instance[(short)35];
 
-		/// <summary>
-		/// BreakupMutually
-		/// </summary>
 		public static LifeRecordItem BreakupMutually => Instance[(short)36];
 
-		/// <summary>
-		/// DumpLover
-		/// </summary>
 		public static LifeRecordItem DumpLover => Instance[(short)37];
 
-		/// <summary>
-		/// GetDumppedByLover
-		/// </summary>
 		public static LifeRecordItem GetDumppedByLover => Instance[(short)38];
 
-		/// <summary>
-		/// ProposeMarriageSucceed
-		/// </summary>
 		public static LifeRecordItem ProposeMarriageSucceed => Instance[(short)39];
 
-		/// <summary>
-		/// ProposeMarriageFail
-		/// </summary>
 		public static LifeRecordItem ProposeMarriageFail => Instance[(short)40];
 
-		/// <summary>
-		/// RefuseMarriageProposal
-		/// </summary>
 		public static LifeRecordItem RefuseMarriageProposal => Instance[(short)41];
 
-		/// <summary>
-		/// BecomeFriend
-		/// </summary>
 		public static LifeRecordItem BecomeFriend => Instance[(short)42];
 
-		/// <summary>
-		/// SeverFriendship
-		/// </summary>
 		public static LifeRecordItem SeverFriendship => Instance[(short)43];
 
-		/// <summary>
-		/// BecomeSwornBrotherOrSister
-		/// </summary>
 		public static LifeRecordItem BecomeSwornBrotherOrSister => Instance[(short)44];
 
-		/// <summary>
-		/// SeverSwornBrotherhood
-		/// </summary>
 		public static LifeRecordItem SeverSwornBrotherhood => Instance[(short)45];
 
-		/// <summary>
-		/// GetAdoptedByFather
-		/// </summary>
 		public static LifeRecordItem GetAdoptedByFather => Instance[(short)46];
 
-		/// <summary>
-		/// GetAdoptedByMother
-		/// </summary>
 		public static LifeRecordItem GetAdoptedByMother => Instance[(short)47];
 
-		/// <summary>
-		/// AdoptSon
-		/// </summary>
 		public static LifeRecordItem AdoptSon => Instance[(short)48];
 
-		/// <summary>
-		/// AdoptDaughter
-		/// </summary>
 		public static LifeRecordItem AdoptDaughter => Instance[(short)49];
 
-		/// <summary>
-		/// CreateFaction
-		/// </summary>
 		public static LifeRecordItem CreateFaction => Instance[(short)50];
 
-		/// <summary>
-		/// JoinFaction
-		/// </summary>
 		public static LifeRecordItem JoinFaction => Instance[(short)51];
 
-		/// <summary>
-		/// LeaveFaction
-		/// </summary>
 		public static LifeRecordItem LeaveFaction => Instance[(short)52];
 
-		/// <summary>
-		/// FactionRecruitSucceed
-		/// </summary>
 		public static LifeRecordItem FactionRecruitSucceed => Instance[(short)53];
 
-		/// <summary>
-		/// FactionRecruitFail
-		/// </summary>
 		public static LifeRecordItem FactionRecruitFail => Instance[(short)54];
 
-		/// <summary>
-		/// AgreeToJoinFaction
-		/// </summary>
 		public static LifeRecordItem AgreeToJoinFaction => Instance[(short)55];
 
-		/// <summary>
-		/// RefuseToJoinFaction
-		/// </summary>
 		public static LifeRecordItem RefuseToJoinFaction => Instance[(short)56];
 
-		/// <summary>
-		/// DecideToJoinSect
-		/// </summary>
 		public static LifeRecordItem DecideToJoinSect => Instance[(short)57];
 
-		/// <summary>
-		/// DecideToFullfillAppointment
-		/// </summary>
 		public static LifeRecordItem DecideToFullfillAppointment => Instance[(short)58];
 
-		/// <summary>
-		/// DecideToProtect
-		/// </summary>
 		public static LifeRecordItem DecideToProtect => Instance[(short)59];
 
-		/// <summary>
-		/// DecideToRescue
-		/// </summary>
 		public static LifeRecordItem DecideToRescue => Instance[(short)60];
 
-		/// <summary>
-		/// DecideToMourn
-		/// </summary>
 		public static LifeRecordItem DecideToMourn => Instance[(short)61];
 
-		/// <summary>
-		/// DecideToVisit
-		/// </summary>
 		public static LifeRecordItem DecideToVisit => Instance[(short)62];
 
-		/// <summary>
-		/// DecideToFindLostItem
-		/// </summary>
 		public static LifeRecordItem DecideToFindLostItem => Instance[(short)63];
 
-		/// <summary>
-		/// DecideToFindSpecialMaterial
-		/// </summary>
 		public static LifeRecordItem DecideToFindSpecialMaterial => Instance[(short)64];
 
-		/// <summary>
-		/// DecideToRevenge
-		/// </summary>
 		public static LifeRecordItem DecideToRevenge => Instance[(short)65];
 
-		/// <summary>
-		/// DecideToParticipateAdventure
-		/// </summary>
 		public static LifeRecordItem DecideToParticipateAdventure => Instance[(short)66];
 
-		/// <summary>
-		/// JoinSectFail
-		/// </summary>
 		public static LifeRecordItem JoinSectFail => Instance[(short)67];
 
-		/// <summary>
-		/// JoinSectSucceed
-		/// </summary>
 		public static LifeRecordItem JoinSectSucceed => Instance[(short)68];
 
-		/// <summary>
-		/// CanNoLongerFullFillAppointment
-		/// </summary>
 		public static LifeRecordItem CanNoLongerFullFillAppointment => Instance[(short)69];
 
-		/// <summary>
-		/// WaitForAppointment
-		/// </summary>
 		public static LifeRecordItem WaitForAppointment => Instance[(short)70];
 
-		/// <summary>
-		/// FullFillAppointment
-		/// </summary>
 		public static LifeRecordItem FullFillAppointment => Instance[(short)71];
 
-		/// <summary>
-		/// FinishProtection
-		/// </summary>
 		public static LifeRecordItem FinishProtection => Instance[(short)72];
 
-		/// <summary>
-		/// OfferProtection
-		/// </summary>
 		public static LifeRecordItem OfferProtection => Instance[(short)73];
 
-		/// <summary>
-		/// FinishRescue
-		/// </summary>
 		public static LifeRecordItem FinishRescue => Instance[(short)74];
 
-		/// <summary>
-		/// FinishMourning
-		/// </summary>
 		public static LifeRecordItem FinishMourning => Instance[(short)75];
 
-		/// <summary>
-		/// MaintainGrave
-		/// </summary>
 		public static LifeRecordItem MaintainGrave => Instance[(short)76];
 
-		/// <summary>
-		/// UpgradeGrave
-		/// </summary>
 		public static LifeRecordItem UpgradeGrave => Instance[(short)77];
 
-		/// <summary>
-		/// FinishVisit
-		/// </summary>
 		public static LifeRecordItem FinishVisit => Instance[(short)78];
 
-		/// <summary>
-		/// FinishFIndingLostItem
-		/// </summary>
 		public static LifeRecordItem FinishFIndingLostItem => Instance[(short)79];
 
-		/// <summary>
-		/// FinishFIndingSpecialMaterial
-		/// </summary>
 		public static LifeRecordItem FinishFIndingSpecialMaterial => Instance[(short)80];
 
-		/// <summary>
-		/// FindLostItemSucceed
-		/// </summary>
 		public static LifeRecordItem FindLostItemSucceed => Instance[(short)81];
 
-		/// <summary>
-		/// FindLostItemFail
-		/// </summary>
 		public static LifeRecordItem FindLostItemFail => Instance[(short)82];
 
-		/// <summary>
-		/// FindSpecialMaterialSucceed
-		/// </summary>
 		public static LifeRecordItem FindSpecialMaterialSucceed => Instance[(short)83];
 
-		/// <summary>
-		/// FinishTakingRevenge
-		/// </summary>
 		public static LifeRecordItem FinishTakingRevenge => Instance[(short)84];
 
-		/// <summary>
-		/// MajorVictoryInCombat
-		/// </summary>
 		public static LifeRecordItem MajorVictoryInCombat => Instance[(short)85];
 
-		/// <summary>
-		/// MajorFailureInCombat
-		/// </summary>
 		public static LifeRecordItem MajorFailureInCombat => Instance[(short)86];
 
-		/// <summary>
-		/// VictoryInCombat
-		/// </summary>
 		public static LifeRecordItem VictoryInCombat => Instance[(short)87];
 
-		/// <summary>
-		/// FailureInCombat
-		/// </summary>
 		public static LifeRecordItem FailureInCombat => Instance[(short)88];
 
-		/// <summary>
-		/// EnemyEscape
-		/// </summary>
 		public static LifeRecordItem EnemyEscape => Instance[(short)89];
 
-		/// <summary>
-		/// LoseAndEscape
-		/// </summary>
 		public static LifeRecordItem LoseAndEscape => Instance[(short)90];
 
-		/// <summary>
-		/// KillInPublic
-		/// </summary>
 		public static LifeRecordItem KillInPublic => Instance[(short)91];
 
-		/// <summary>
-		/// KillInPrivate
-		/// </summary>
 		public static LifeRecordItem KillInPrivate => Instance[(short)92];
 
-		/// <summary>
-		/// KidnapInPublic
-		/// </summary>
 		public static LifeRecordItem KidnapInPublic => Instance[(short)93];
 
-		/// <summary>
-		/// KidnapInPrivate
-		/// </summary>
 		public static LifeRecordItem KidnapInPrivate => Instance[(short)94];
 
-		/// <summary>
-		/// ReleaseLoser
-		/// </summary>
 		public static LifeRecordItem ReleaseLoser => Instance[(short)95];
 
-		/// <summary>
-		/// GetKidnappedInPublic
-		/// </summary>
 		public static LifeRecordItem GetKidnappedInPublic => Instance[(short)96];
 
-		/// <summary>
-		/// GetKidnappedInPrivate
-		/// </summary>
 		public static LifeRecordItem GetKidnappedInPrivate => Instance[(short)97];
 
-		/// <summary>
-		/// GetReleasedByWinner
-		/// </summary>
 		public static LifeRecordItem GetReleasedByWinner => Instance[(short)98];
 
-		/// <summary>
-		/// AgreeToProtect
-		/// </summary>
 		public static LifeRecordItem AgreeToProtect => Instance[(short)99];
 
-		/// <summary>
-		/// RefuseToProtect
-		/// </summary>
 		public static LifeRecordItem RefuseToProtect => Instance[(short)100];
 
-		/// <summary>
-		/// FinishAdventure
-		/// </summary>
 		public static LifeRecordItem FinishAdventure => Instance[(short)101];
 
-		/// <summary>
-		/// RequestHealOuterInjurySucceed
-		/// </summary>
-		public static LifeRecordItem RequestHealOuterInjurySucceed => Instance[(short)102];
+		public static LifeRecordItem RequestHealOuterInjuryItemSucceed => Instance[(short)102];
 
-		/// <summary>
-		/// RequestHealInnerInjurySucceed
-		/// </summary>
-		public static LifeRecordItem RequestHealInnerInjurySucceed => Instance[(short)103];
+		public static LifeRecordItem RequestHealInnerInjuryItemSucceed => Instance[(short)103];
 
-		/// <summary>
-		/// RequestDetoxPoisonSucceed
-		/// </summary>
-		public static LifeRecordItem RequestDetoxPoisonSucceed => Instance[(short)104];
+		public static LifeRecordItem RequestDetoxPoisonItemSucceed => Instance[(short)104];
 
-		/// <summary>
-		/// RequestHealthSucceed
-		/// </summary>
-		public static LifeRecordItem RequestHealthSucceed => Instance[(short)105];
+		public static LifeRecordItem RequestHealthItemSucceed => Instance[(short)105];
 
-		/// <summary>
-		/// RequestHealDisorderOfQiSucceed
-		/// </summary>
-		public static LifeRecordItem RequestHealDisorderOfQiSucceed => Instance[(short)106];
+		public static LifeRecordItem RequestHealDisorderOfQiItemSucceed => Instance[(short)106];
 
-		/// <summary>
-		/// RequestNeiliSucceed
-		/// </summary>
 		public static LifeRecordItem RequestNeiliSucceed => Instance[(short)107];
 
-		/// <summary>
-		/// RequestKillWugSucceed
-		/// </summary>
 		public static LifeRecordItem RequestKillWugSucceed => Instance[(short)108];
 
-		/// <summary>
-		/// RequestFoodSucceed
-		/// </summary>
 		public static LifeRecordItem RequestFoodSucceed => Instance[(short)109];
 
-		/// <summary>
-		/// RequestTeaWineSucceed
-		/// </summary>
 		public static LifeRecordItem RequestTeaWineSucceed => Instance[(short)110];
 
-		/// <summary>
-		/// RequestResourceSucceed
-		/// </summary>
 		public static LifeRecordItem RequestResourceSucceed => Instance[(short)111];
 
-		/// <summary>
-		/// RequestItemSucceed
-		/// </summary>
 		public static LifeRecordItem RequestItemSucceed => Instance[(short)112];
 
-		/// <summary>
-		/// RequestRepairItemSucceed
-		/// </summary>
 		public static LifeRecordItem RequestRepairItemSucceed => Instance[(short)113];
 
-		/// <summary>
-		/// RequestAddPoisonToItemSucceed
-		/// </summary>
 		public static LifeRecordItem RequestAddPoisonToItemSucceed => Instance[(short)114];
 
-		/// <summary>
-		/// RequestInstructionOnLifeSkillSucceed
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnLifeSkillSucceed => Instance[(short)115];
 
-		/// <summary>
-		/// RequestInstructionOnCombatSkillSucceed
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnCombatSkillSucceed => Instance[(short)116];
 
-		/// <summary>
-		/// RequestInstructionOnLifeSkillFailToLearn
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnLifeSkillFailToLearn => Instance[(short)117];
 
-		/// <summary>
-		/// RequestInstructionOnCombatSkillFailToLearn
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnCombatSkillFailToLearn => Instance[(short)118];
 
-		/// <summary>
-		/// RequestInstructionOnReadingSucceed
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnReadingSucceed => Instance[(short)119];
 
-		/// <summary>
-		/// RequestInstructionOnBreakoutSucceed
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnBreakoutSucceed => Instance[(short)120];
 
-		/// <summary>
-		/// RequestHealOuterInjuryFail
-		/// </summary>
-		public static LifeRecordItem RequestHealOuterInjuryFail => Instance[(short)121];
+		public static LifeRecordItem RequestHealOuterInjuryItemFail => Instance[(short)121];
 
-		/// <summary>
-		/// RequestHealInnerInjuryFail
-		/// </summary>
-		public static LifeRecordItem RequestHealInnerInjuryFail => Instance[(short)122];
+		public static LifeRecordItem RequestHealInnerInjuryItemFail => Instance[(short)122];
 
-		/// <summary>
-		/// RequestDetoxPoisonFail
-		/// </summary>
-		public static LifeRecordItem RequestDetoxPoisonFail => Instance[(short)123];
+		public static LifeRecordItem RequestDetoxPoisonItemFail => Instance[(short)123];
 
-		/// <summary>
-		/// RequestHealthFail
-		/// </summary>
-		public static LifeRecordItem RequestHealthFail => Instance[(short)124];
+		public static LifeRecordItem RequestHealthItemFail => Instance[(short)124];
 
-		/// <summary>
-		/// RequestHealDisorderOfQiFail
-		/// </summary>
-		public static LifeRecordItem RequestHealDisorderOfQiFail => Instance[(short)125];
+		public static LifeRecordItem RequestHealDisorderOfQiItemFail => Instance[(short)125];
 
-		/// <summary>
-		/// RequestNeiliFail
-		/// </summary>
 		public static LifeRecordItem RequestNeiliFail => Instance[(short)126];
 
-		/// <summary>
-		/// RequestKillWugFail
-		/// </summary>
 		public static LifeRecordItem RequestKillWugFail => Instance[(short)127];
 
-		/// <summary>
-		/// RequestFoodFail
-		/// </summary>
 		public static LifeRecordItem RequestFoodFail => Instance[(short)128];
 
-		/// <summary>
-		/// RequestTeaWineFail
-		/// </summary>
 		public static LifeRecordItem RequestTeaWineFail => Instance[(short)129];
 
-		/// <summary>
-		/// RequestResourceFail
-		/// </summary>
 		public static LifeRecordItem RequestResourceFail => Instance[(short)130];
 
-		/// <summary>
-		/// RequestItemFail
-		/// </summary>
 		public static LifeRecordItem RequestItemFail => Instance[(short)131];
 
-		/// <summary>
-		/// RequestRepairItemFail
-		/// </summary>
 		public static LifeRecordItem RequestRepairItemFail => Instance[(short)132];
 
-		/// <summary>
-		/// RequestAddPoisonToItemFail
-		/// </summary>
 		public static LifeRecordItem RequestAddPoisonToItemFail => Instance[(short)133];
 
-		/// <summary>
-		/// RequestInstructionOnLifeSkillFail
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnLifeSkillFail => Instance[(short)134];
 
-		/// <summary>
-		/// RequestInstructionOnCombatSkillFail
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnCombatSkillFail => Instance[(short)135];
 
-		/// <summary>
-		/// RequestInstructionOnReadingFail
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnReadingFail => Instance[(short)136];
 
-		/// <summary>
-		/// RequestInstructionOnBreakoutFail
-		/// </summary>
 		public static LifeRecordItem RequestInstructionOnBreakoutFail => Instance[(short)137];
 
-		/// <summary>
-		/// AcceptRequestHealOuterInjury
-		/// </summary>
-		public static LifeRecordItem AcceptRequestHealOuterInjury => Instance[(short)138];
+		public static LifeRecordItem AcceptRequestHealOuterInjuryItem => Instance[(short)138];
 
-		/// <summary>
-		/// AcceptRequestHealInnerInjury
-		/// </summary>
-		public static LifeRecordItem AcceptRequestHealInnerInjury => Instance[(short)139];
+		public static LifeRecordItem AcceptRequestHealInnerInjuryItem => Instance[(short)139];
 
-		/// <summary>
-		/// AcceptRequestDetoxPoison
-		/// </summary>
-		public static LifeRecordItem AcceptRequestDetoxPoison => Instance[(short)140];
+		public static LifeRecordItem AcceptRequestDetoxPoisonItem => Instance[(short)140];
 
-		/// <summary>
-		/// AcceptRequestHealth
-		/// </summary>
-		public static LifeRecordItem AcceptRequestHealth => Instance[(short)141];
+		public static LifeRecordItem AcceptRequestHealthItem => Instance[(short)141];
 
-		/// <summary>
-		/// AcceptRequestHealDisorderOfQi
-		/// </summary>
-		public static LifeRecordItem AcceptRequestHealDisorderOfQi => Instance[(short)142];
+		public static LifeRecordItem AcceptRequestHealDisorderOfQiItem => Instance[(short)142];
 
-		/// <summary>
-		/// AcceptRequestNeili
-		/// </summary>
 		public static LifeRecordItem AcceptRequestNeili => Instance[(short)143];
 
-		/// <summary>
-		/// AcceptRequestKillWug
-		/// </summary>
 		public static LifeRecordItem AcceptRequestKillWug => Instance[(short)144];
 
-		/// <summary>
-		/// AcceptRequestFood
-		/// </summary>
 		public static LifeRecordItem AcceptRequestFood => Instance[(short)145];
 
-		/// <summary>
-		/// AcceptRequestTeaWine
-		/// </summary>
 		public static LifeRecordItem AcceptRequestTeaWine => Instance[(short)146];
 
-		/// <summary>
-		/// AcceptRequestResource
-		/// </summary>
 		public static LifeRecordItem AcceptRequestResource => Instance[(short)147];
 
-		/// <summary>
-		/// AcceptRequestItem
-		/// </summary>
 		public static LifeRecordItem AcceptRequestItem => Instance[(short)148];
 
-		/// <summary>
-		/// AcceptRequestRepairItem
-		/// </summary>
 		public static LifeRecordItem AcceptRequestRepairItem => Instance[(short)149];
 
-		/// <summary>
-		/// AcceptRequestAddPoisonToItem
-		/// </summary>
 		public static LifeRecordItem AcceptRequestAddPoisonToItem => Instance[(short)150];
 
-		/// <summary>
-		/// AcceptRequestInstructionOnLifeSkill
-		/// </summary>
 		public static LifeRecordItem AcceptRequestInstructionOnLifeSkill => Instance[(short)151];
 
-		/// <summary>
-		/// AcceptRequestInstructionOnCombatSkill
-		/// </summary>
 		public static LifeRecordItem AcceptRequestInstructionOnCombatSkill => Instance[(short)152];
 
-		/// <summary>
-		/// AcceptRequestInstructionOnLifeSkillButFail
-		/// </summary>
 		public static LifeRecordItem AcceptRequestInstructionOnLifeSkillButFail => Instance[(short)153];
 
-		/// <summary>
-		/// AcceptRequestInstructionOnCombatSkillButFail
-		/// </summary>
 		public static LifeRecordItem AcceptRequestInstructionOnCombatSkillButFail => Instance[(short)154];
 
-		/// <summary>
-		/// AcceptRequestInstructionOnReading
-		/// </summary>
 		public static LifeRecordItem AcceptRequestInstructionOnReading => Instance[(short)155];
 
-		/// <summary>
-		/// AcceptRequestInstructionOnBreakout
-		/// </summary>
 		public static LifeRecordItem AcceptRequestInstructionOnBreakout => Instance[(short)156];
 
-		/// <summary>
-		/// RefuseRequestHealOuterInjury
-		/// </summary>
-		public static LifeRecordItem RefuseRequestHealOuterInjury => Instance[(short)157];
+		public static LifeRecordItem RefuseRequestHealOuterInjuryItem => Instance[(short)157];
 
-		/// <summary>
-		/// RefuseRequestHealInnerInjury
-		/// </summary>
-		public static LifeRecordItem RefuseRequestHealInnerInjury => Instance[(short)158];
+		public static LifeRecordItem RefuseRequestHealInnerInjuryItem => Instance[(short)158];
 
-		/// <summary>
-		/// RefuseRequestDetoxPoison
-		/// </summary>
-		public static LifeRecordItem RefuseRequestDetoxPoison => Instance[(short)159];
+		public static LifeRecordItem RefuseRequestDetoxPoisonItem => Instance[(short)159];
 
-		/// <summary>
-		/// RefuseRequestHealth
-		/// </summary>
-		public static LifeRecordItem RefuseRequestHealth => Instance[(short)160];
+		public static LifeRecordItem RefuseRequestHealthItem => Instance[(short)160];
 
-		/// <summary>
-		/// RefuseRequestHealDisorderOfQi
-		/// </summary>
-		public static LifeRecordItem RefuseRequestHealDisorderOfQi => Instance[(short)161];
+		public static LifeRecordItem RefuseRequestHealDisorderOfQiItem => Instance[(short)161];
 
-		/// <summary>
-		/// RefuseRequestNeili
-		/// </summary>
 		public static LifeRecordItem RefuseRequestNeili => Instance[(short)162];
 
-		/// <summary>
-		/// RefuseRequestKillWug
-		/// </summary>
 		public static LifeRecordItem RefuseRequestKillWug => Instance[(short)163];
 
-		/// <summary>
-		/// RefuseRequestFood
-		/// </summary>
 		public static LifeRecordItem RefuseRequestFood => Instance[(short)164];
 
-		/// <summary>
-		/// RefuseRequestTeaWine
-		/// </summary>
 		public static LifeRecordItem RefuseRequestTeaWine => Instance[(short)165];
 
-		/// <summary>
-		/// RefuseRequestResource
-		/// </summary>
 		public static LifeRecordItem RefuseRequestResource => Instance[(short)166];
 
-		/// <summary>
-		/// RefuseRequestItem
-		/// </summary>
 		public static LifeRecordItem RefuseRequestItem => Instance[(short)167];
 
-		/// <summary>
-		/// RefuseRequestRepairItem
-		/// </summary>
 		public static LifeRecordItem RefuseRequestRepairItem => Instance[(short)168];
 
-		/// <summary>
-		/// RefuseRequestAddPoisonToItem
-		/// </summary>
 		public static LifeRecordItem RefuseRequestAddPoisonToItem => Instance[(short)169];
 
-		/// <summary>
-		/// RefuseRequestInstructionOnLifeSkill
-		/// </summary>
 		public static LifeRecordItem RefuseRequestInstructionOnLifeSkill => Instance[(short)170];
 
-		/// <summary>
-		/// RefuseRequestInstructionOnCombatSkill
-		/// </summary>
 		public static LifeRecordItem RefuseRequestInstructionOnCombatSkill => Instance[(short)171];
 
-		/// <summary>
-		/// RefuseRequestInstructionOnReading
-		/// </summary>
 		public static LifeRecordItem RefuseRequestInstructionOnReading => Instance[(short)172];
 
-		/// <summary>
-		/// RefuseRequestInstructionOnBreakout
-		/// </summary>
 		public static LifeRecordItem RefuseRequestInstructionOnBreakout => Instance[(short)173];
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail1
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterSecretlyFail1 => Instance[(short)174];
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail2
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterSecretlyFail2 => Instance[(short)175];
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail3
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterSecretlyFail3 => Instance[(short)176];
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlyFail4
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterSecretlyFail4 => Instance[(short)177];
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlySucceed
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterSecretlySucceed => Instance[(short)178];
 
-		/// <summary>
-		/// RescueKidnappedCharacterSecretlySucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterSecretlySucceedAndEscaped => Instance[(short)179];
 
-		/// <summary>
-		/// KidnappedCharacterGetRescuedSecretly
-		/// </summary>
 		public static LifeRecordItem KidnappedCharacterGetRescuedSecretly => Instance[(short)180];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail1
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithWitFail1 => Instance[(short)181];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail2
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithWitFail2 => Instance[(short)182];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail3
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithWitFail3 => Instance[(short)183];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitFail4
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithWitFail4 => Instance[(short)184];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitSucceed
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithWitSucceed => Instance[(short)185];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithWitSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithWitSucceedAndEscaped => Instance[(short)186];
 
-		/// <summary>
-		/// KidnappedCharacterGetRescuedWithWit
-		/// </summary>
 		public static LifeRecordItem KidnappedCharacterGetRescuedWithWit => Instance[(short)187];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail1
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithForceFail1 => Instance[(short)188];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail2
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithForceFail2 => Instance[(short)189];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail3
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithForceFail3 => Instance[(short)190];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceFail4
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithForceFail4 => Instance[(short)191];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceSucceed
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithForceSucceed => Instance[(short)192];
 
-		/// <summary>
-		/// RescueKidnappedCharacterWithForceSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem RescueKidnappedCharacterWithForceSucceedAndEscaped => Instance[(short)193];
 
-		/// <summary>
-		/// KidnappedCharacterGetRescuedWithForce
-		/// </summary>
 		public static LifeRecordItem KidnappedCharacterGetRescuedWithForce => Instance[(short)194];
 
-		/// <summary>
-		/// PoisonEnemyFail1
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail1 => Instance[(short)195];
 
-		/// <summary>
-		/// PoisonEnemyFail2
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail2 => Instance[(short)196];
 
-		/// <summary>
-		/// PoisonEnemyFail3
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail3 => Instance[(short)197];
 
-		/// <summary>
-		/// PoisonEnemyFail4
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail4 => Instance[(short)198];
 
-		/// <summary>
-		/// PoisonEnemySucceed
-		/// </summary>
 		public static LifeRecordItem PoisonEnemySucceed => Instance[(short)199];
 
-		/// <summary>
-		/// PoisonEnemySucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem PoisonEnemySucceedAndEscaped => Instance[(short)200];
 
-		/// <summary>
-		/// GetPoisonedByEnemySucceed
-		/// </summary>
 		public static LifeRecordItem GetPoisonedByEnemySucceed => Instance[(short)201];
 
-		/// <summary>
-		/// PlotHarmEnemyFail1
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail1 => Instance[(short)202];
 
-		/// <summary>
-		/// PlotHarmEnemyFail2
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail2 => Instance[(short)203];
 
-		/// <summary>
-		/// PlotHarmEnemyFail3
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail3 => Instance[(short)204];
 
-		/// <summary>
-		/// PlotHarmEnemyFail4
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail4 => Instance[(short)205];
 
-		/// <summary>
-		/// PlotHarmEnemySucceed
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemySucceed => Instance[(short)206];
 
-		/// <summary>
-		/// PlotHarmEnemySucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemySucceedAndEscaped => Instance[(short)207];
 
-		/// <summary>
-		/// GetPlottedAgainstSucceed
-		/// </summary>
 		public static LifeRecordItem GetPlottedAgainstSucceed => Instance[(short)208];
 
-		/// <summary>
-		/// StealResourceFail1
-		/// </summary>
 		public static LifeRecordItem StealResourceFail1 => Instance[(short)209];
 
-		/// <summary>
-		/// StealResourceFail2
-		/// </summary>
 		public static LifeRecordItem StealResourceFail2 => Instance[(short)210];
 
-		/// <summary>
-		/// StealResourceFail3
-		/// </summary>
 		public static LifeRecordItem StealResourceFail3 => Instance[(short)211];
 
-		/// <summary>
-		/// StealResourceFail4
-		/// </summary>
 		public static LifeRecordItem StealResourceFail4 => Instance[(short)212];
 
-		/// <summary>
-		/// StealResourceSucceed
-		/// </summary>
 		public static LifeRecordItem StealResourceSucceed => Instance[(short)213];
 
-		/// <summary>
-		/// StealResourceSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem StealResourceSucceedAndEscaped => Instance[(short)214];
 
-		/// <summary>
-		/// StealResourceFailAndBeatenUp
-		/// </summary>
 		public static LifeRecordItem StealResourceFailAndBeatenUp => Instance[(short)215];
 
-		/// <summary>
-		/// ResourceGetStolenSucceed
-		/// </summary>
 		public static LifeRecordItem ResourceGetStolenSucceed => Instance[(short)216];
 
-		/// <summary>
-		/// BeatUpResourceStealer
-		/// </summary>
 		public static LifeRecordItem BeatUpResourceStealer => Instance[(short)217];
 
-		/// <summary>
-		/// ScamResourceFail1
-		/// </summary>
 		public static LifeRecordItem ScamResourceFail1 => Instance[(short)218];
 
-		/// <summary>
-		/// ScamResourceFail2
-		/// </summary>
 		public static LifeRecordItem ScamResourceFail2 => Instance[(short)219];
 
-		/// <summary>
-		/// ScamResourceFail3
-		/// </summary>
 		public static LifeRecordItem ScamResourceFail3 => Instance[(short)220];
 
-		/// <summary>
-		/// ScamResourceFail4
-		/// </summary>
 		public static LifeRecordItem ScamResourceFail4 => Instance[(short)221];
 
-		/// <summary>
-		/// ScamResourceSucceed
-		/// </summary>
 		public static LifeRecordItem ScamResourceSucceed => Instance[(short)222];
 
-		/// <summary>
-		/// ScamResourceSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem ScamResourceSucceedAndEscaped => Instance[(short)223];
 
-		/// <summary>
-		/// ScamResourceFailAndBeatenUp
-		/// </summary>
 		public static LifeRecordItem ScamResourceFailAndBeatenUp => Instance[(short)224];
 
-		/// <summary>
-		/// ResourceGetScammedSucceed
-		/// </summary>
 		public static LifeRecordItem ResourceGetScammedSucceed => Instance[(short)225];
 
-		/// <summary>
-		/// BeatUpResourceScammer
-		/// </summary>
 		public static LifeRecordItem BeatUpResourceScammer => Instance[(short)226];
 
-		/// <summary>
-		/// RobResourceFail1
-		/// </summary>
 		public static LifeRecordItem RobResourceFail1 => Instance[(short)227];
 
-		/// <summary>
-		/// RobResourceFail2
-		/// </summary>
 		public static LifeRecordItem RobResourceFail2 => Instance[(short)228];
 
-		/// <summary>
-		/// RobResourceFail3
-		/// </summary>
 		public static LifeRecordItem RobResourceFail3 => Instance[(short)229];
 
-		/// <summary>
-		/// RobResourceFail4
-		/// </summary>
 		public static LifeRecordItem RobResourceFail4 => Instance[(short)230];
 
-		/// <summary>
-		/// RobResourceSucceed
-		/// </summary>
 		public static LifeRecordItem RobResourceSucceed => Instance[(short)231];
 
-		/// <summary>
-		/// RobResourceSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem RobResourceSucceedAndEscaped => Instance[(short)232];
 
-		/// <summary>
-		/// RobResourceFailAndBeatenUp
-		/// </summary>
 		public static LifeRecordItem RobResourceFailAndBeatenUp => Instance[(short)233];
 
-		/// <summary>
-		/// ResourceGetRobbedSucceed
-		/// </summary>
 		public static LifeRecordItem ResourceGetRobbedSucceed => Instance[(short)234];
 
-		/// <summary>
-		/// BeatUpResourceRobber
-		/// </summary>
 		public static LifeRecordItem BeatUpResourceRobber => Instance[(short)235];
 
-		/// <summary>
-		/// StealItemFail1
-		/// </summary>
 		public static LifeRecordItem StealItemFail1 => Instance[(short)236];
 
-		/// <summary>
-		/// StealItemFail2
-		/// </summary>
 		public static LifeRecordItem StealItemFail2 => Instance[(short)237];
 
-		/// <summary>
-		/// StealItemFail3
-		/// </summary>
 		public static LifeRecordItem StealItemFail3 => Instance[(short)238];
 
-		/// <summary>
-		/// StealItemFail4
-		/// </summary>
 		public static LifeRecordItem StealItemFail4 => Instance[(short)239];
 
-		/// <summary>
-		/// StealItemSucceed
-		/// </summary>
 		public static LifeRecordItem StealItemSucceed => Instance[(short)240];
 
-		/// <summary>
-		/// StealItemSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem StealItemSucceedAndEscaped => Instance[(short)241];
 
-		/// <summary>
-		/// StealItemSucceedAndBeatenUp
-		/// </summary>
 		public static LifeRecordItem StealItemSucceedAndBeatenUp => Instance[(short)242];
 
-		/// <summary>
-		/// ItemGetStolenSucceed
-		/// </summary>
 		public static LifeRecordItem ItemGetStolenSucceed => Instance[(short)243];
 
-		/// <summary>
-		/// BeatUpItemStealer
-		/// </summary>
 		public static LifeRecordItem BeatUpItemStealer => Instance[(short)244];
 
-		/// <summary>
-		/// ScamItemFail1
-		/// </summary>
 		public static LifeRecordItem ScamItemFail1 => Instance[(short)245];
 
-		/// <summary>
-		/// ScamItemFail2
-		/// </summary>
 		public static LifeRecordItem ScamItemFail2 => Instance[(short)246];
 
-		/// <summary>
-		/// ScamItemFail3
-		/// </summary>
 		public static LifeRecordItem ScamItemFail3 => Instance[(short)247];
 
-		/// <summary>
-		/// ScamItemFail4
-		/// </summary>
 		public static LifeRecordItem ScamItemFail4 => Instance[(short)248];
 
-		/// <summary>
-		/// ScamItemSucceed
-		/// </summary>
 		public static LifeRecordItem ScamItemSucceed => Instance[(short)249];
 
-		/// <summary>
-		/// ScamItemSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem ScamItemSucceedAndEscaped => Instance[(short)250];
 
-		/// <summary>
-		/// ScamItemFailAndBeatenUp
-		/// </summary>
 		public static LifeRecordItem ScamItemFailAndBeatenUp => Instance[(short)251];
 
-		/// <summary>
-		/// ItemGetScammedSucceed
-		/// </summary>
 		public static LifeRecordItem ItemGetScammedSucceed => Instance[(short)252];
 
-		/// <summary>
-		/// BeatUpItemScammer
-		/// </summary>
 		public static LifeRecordItem BeatUpItemScammer => Instance[(short)253];
 
-		/// <summary>
-		/// RobItemFail1
-		/// </summary>
 		public static LifeRecordItem RobItemFail1 => Instance[(short)254];
 
-		/// <summary>
-		/// RobItemFail2
-		/// </summary>
 		public static LifeRecordItem RobItemFail2 => Instance[(short)255];
 
-		/// <summary>
-		/// RobItemFail3
-		/// </summary>
 		public static LifeRecordItem RobItemFail3 => Instance[(short)256];
 
-		/// <summary>
-		/// RobItemFail4
-		/// </summary>
 		public static LifeRecordItem RobItemFail4 => Instance[(short)257];
 
-		/// <summary>
-		/// RobItemSucceed
-		/// </summary>
 		public static LifeRecordItem RobItemSucceed => Instance[(short)258];
 
-		/// <summary>
-		/// RobItemSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem RobItemSucceedAndEscaped => Instance[(short)259];
 
-		/// <summary>
-		/// RobItemFailAndBeatenUp
-		/// </summary>
 		public static LifeRecordItem RobItemFailAndBeatenUp => Instance[(short)260];
 
-		/// <summary>
-		/// ItemGetRobbedSucceed
-		/// </summary>
 		public static LifeRecordItem ItemGetRobbedSucceed => Instance[(short)261];
 
-		/// <summary>
-		/// BeatUpItemRobber
-		/// </summary>
 		public static LifeRecordItem BeatUpItemRobber => Instance[(short)262];
 
-		/// <summary>
-		/// RobResourceFromGraveSucceed
-		/// </summary>
 		public static LifeRecordItem RobResourceFromGraveSucceed => Instance[(short)263];
 
-		/// <summary>
-		/// RobResourceFromGraveFail
-		/// </summary>
 		public static LifeRecordItem RobResourceFromGraveFail => Instance[(short)264];
 
-		/// <summary>
-		/// RobItemFromGraveSucceed
-		/// </summary>
 		public static LifeRecordItem RobItemFromGraveSucceed => Instance[(short)265];
 
-		/// <summary>
-		/// RobItemFromGraveFail
-		/// </summary>
 		public static LifeRecordItem RobItemFromGraveFail => Instance[(short)266];
 
-		/// <summary>
-		/// StealLifeSkillFail1
-		/// </summary>
 		public static LifeRecordItem StealLifeSkillFail1 => Instance[(short)267];
 
-		/// <summary>
-		/// StealLifeSkillFail2
-		/// </summary>
 		public static LifeRecordItem StealLifeSkillFail2 => Instance[(short)268];
 
-		/// <summary>
-		/// StealLifeSkillFail3
-		/// </summary>
 		public static LifeRecordItem StealLifeSkillFail3 => Instance[(short)269];
 
-		/// <summary>
-		/// StealLifeSkillFail4
-		/// </summary>
 		public static LifeRecordItem StealLifeSkillFail4 => Instance[(short)270];
 
-		/// <summary>
-		/// StealLifeSkillSucceed
-		/// </summary>
 		public static LifeRecordItem StealLifeSkillSucceed => Instance[(short)271];
 
-		/// <summary>
-		/// StealLifeSkillSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem StealLifeSkillSucceedAndEscaped => Instance[(short)272];
 
-		/// <summary>
-		/// LifeSkillGetStolenSucceed
-		/// </summary>
 		public static LifeRecordItem LifeSkillGetStolenSucceed => Instance[(short)273];
 
-		/// <summary>
-		/// ScamLifeSkillFail1
-		/// </summary>
 		public static LifeRecordItem ScamLifeSkillFail1 => Instance[(short)274];
 
-		/// <summary>
-		/// ScamLifeSkillFail2
-		/// </summary>
 		public static LifeRecordItem ScamLifeSkillFail2 => Instance[(short)275];
 
-		/// <summary>
-		/// ScamLifeSkillFail3
-		/// </summary>
 		public static LifeRecordItem ScamLifeSkillFail3 => Instance[(short)276];
 
-		/// <summary>
-		/// ScamLifeSkillFail4
-		/// </summary>
 		public static LifeRecordItem ScamLifeSkillFail4 => Instance[(short)277];
 
-		/// <summary>
-		/// ScamLifeSkillSucceed
-		/// </summary>
 		public static LifeRecordItem ScamLifeSkillSucceed => Instance[(short)278];
 
-		/// <summary>
-		/// ScamLifeSkillSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem ScamLifeSkillSucceedAndEscaped => Instance[(short)279];
 
-		/// <summary>
-		/// LifeSkillGetScammedSucceed
-		/// </summary>
 		public static LifeRecordItem LifeSkillGetScammedSucceed => Instance[(short)280];
 
-		/// <summary>
-		/// StealCombatSkillFail1
-		/// </summary>
 		public static LifeRecordItem StealCombatSkillFail1 => Instance[(short)281];
 
-		/// <summary>
-		/// StealCombatSkillFail2
-		/// </summary>
 		public static LifeRecordItem StealCombatSkillFail2 => Instance[(short)282];
 
-		/// <summary>
-		/// StealCombatSkillFail3
-		/// </summary>
 		public static LifeRecordItem StealCombatSkillFail3 => Instance[(short)283];
 
-		/// <summary>
-		/// StealCombatSkillFail4
-		/// </summary>
 		public static LifeRecordItem StealCombatSkillFail4 => Instance[(short)284];
 
-		/// <summary>
-		/// StealCombatSkillSucceed
-		/// </summary>
 		public static LifeRecordItem StealCombatSkillSucceed => Instance[(short)285];
 
-		/// <summary>
-		/// StealCombatSkillSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem StealCombatSkillSucceedAndEscaped => Instance[(short)286];
 
-		/// <summary>
-		/// CombatSkillGetStolenSucceed
-		/// </summary>
 		public static LifeRecordItem CombatSkillGetStolenSucceed => Instance[(short)287];
 
-		/// <summary>
-		/// ScamCombatSkillFail1
-		/// </summary>
 		public static LifeRecordItem ScamCombatSkillFail1 => Instance[(short)288];
 
-		/// <summary>
-		/// ScamCombatSkillFail2
-		/// </summary>
 		public static LifeRecordItem ScamCombatSkillFail2 => Instance[(short)289];
 
-		/// <summary>
-		/// ScamCombatSkillFail3
-		/// </summary>
 		public static LifeRecordItem ScamCombatSkillFail3 => Instance[(short)290];
 
-		/// <summary>
-		/// ScamCombatSkillFail4
-		/// </summary>
 		public static LifeRecordItem ScamCombatSkillFail4 => Instance[(short)291];
 
-		/// <summary>
-		/// ScamCombatSkillSucceed
-		/// </summary>
 		public static LifeRecordItem ScamCombatSkillSucceed => Instance[(short)292];
 
-		/// <summary>
-		/// ScamCombatSkillSucceedAndEscaped
-		/// </summary>
 		public static LifeRecordItem ScamCombatSkillSucceedAndEscaped => Instance[(short)293];
 
-		/// <summary>
-		/// CombatSkillGetScammedSucceed
-		/// </summary>
 		public static LifeRecordItem CombatSkillGetScammedSucceed => Instance[(short)294];
 
-		/// <summary>
-		/// LifeSkillBattleWin
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleWin => Instance[(short)295];
 
-		/// <summary>
-		/// LifeSkillBattleLose
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleLose => Instance[(short)296];
 
-		/// <summary>
-		/// ExchangeResource
-		/// </summary>
 		public static LifeRecordItem ExchangeResource => Instance[(short)297];
 
-		/// <summary>
-		/// GiveResource
-		/// </summary>
 		public static LifeRecordItem GiveResource => Instance[(short)298];
 
-		/// <summary>
-		/// PurchaseItem
-		/// </summary>
 		public static LifeRecordItem PurchaseItem => Instance[(short)299];
 
-		/// <summary>
-		/// SellItem
-		/// </summary>
 		public static LifeRecordItem SellItem => Instance[(short)300];
 
-		/// <summary>
-		/// GiveItem
-		/// </summary>
 		public static LifeRecordItem GiveItem => Instance[(short)301];
 
-		/// <summary>
-		/// GivePoisonousItem
-		/// </summary>
 		public static LifeRecordItem GivePoisonousItem => Instance[(short)302];
 
-		/// <summary>
-		/// GetResourceAsGift
-		/// </summary>
 		public static LifeRecordItem GetResourceAsGift => Instance[(short)303];
 
-		/// <summary>
-		/// GetItemAsGift
-		/// </summary>
 		public static LifeRecordItem GetItemAsGift => Instance[(short)304];
 
-		/// <summary>
-		/// RefusePoisonousGift
-		/// </summary>
 		public static LifeRecordItem RefusePoisonousGift => Instance[(short)305];
 
-		/// <summary>
-		/// InstructLifeSkill
-		/// </summary>
 		public static LifeRecordItem InstructLifeSkill => Instance[(short)306];
 
-		/// <summary>
-		/// InstructCombatSkill
-		/// </summary>
 		public static LifeRecordItem InstructCombatSkill => Instance[(short)307];
 
-		/// <summary>
-		/// LearnLifeSkillWithInstructionSucceed
-		/// </summary>
 		public static LifeRecordItem LearnLifeSkillWithInstructionSucceed => Instance[(short)308];
 
-		/// <summary>
-		/// LearnLifeSkillWithInstructionFail
-		/// </summary>
 		public static LifeRecordItem LearnLifeSkillWithInstructionFail => Instance[(short)309];
 
-		/// <summary>
-		/// LearnCombatSkillWithInstructionSucceed
-		/// </summary>
 		public static LifeRecordItem LearnCombatSkillWithInstructionSucceed => Instance[(short)310];
 
-		/// <summary>
-		/// LearnCombatSkillWithInstructionFail
-		/// </summary>
 		public static LifeRecordItem LearnCombatSkillWithInstructionFail => Instance[(short)311];
 
-		/// <summary>
-		/// InviteToDrinkSucceed
-		/// </summary>
 		public static LifeRecordItem InviteToDrinkSucceed => Instance[(short)312];
 
-		/// <summary>
-		/// InviteToDrinkFail
-		/// </summary>
 		public static LifeRecordItem InviteToDrinkFail => Instance[(short)313];
 
-		/// <summary>
-		/// SellSucceed
-		/// </summary>
 		public static LifeRecordItem SellSucceed => Instance[(short)314];
 
-		/// <summary>
-		/// SellFail
-		/// </summary>
 		public static LifeRecordItem SellFail => Instance[(short)315];
 
-		/// <summary>
-		/// CureSucceed
-		/// </summary>
 		public static LifeRecordItem CureSucceed => Instance[(short)316];
 
-		/// <summary>
-		/// RepairItemSucceed
-		/// </summary>
 		public static LifeRecordItem RepairItemSucceed => Instance[(short)317];
 
-		/// <summary>
-		/// BarbSucceed
-		/// </summary>
 		public static LifeRecordItem BarbSucceed => Instance[(short)318];
 
-		/// <summary>
-		/// BarbMistake
-		/// </summary>
 		public static LifeRecordItem BarbMistake => Instance[(short)319];
 
-		/// <summary>
-		/// BarbFail
-		/// </summary>
 		public static LifeRecordItem BarbFail => Instance[(short)320];
 
-		/// <summary>
-		/// AskForMoneySucceed
-		/// </summary>
 		public static LifeRecordItem AskForMoneySucceed => Instance[(short)321];
 
-		/// <summary>
-		/// AskForMoneyFail
-		/// </summary>
 		public static LifeRecordItem AskForMoneyFail => Instance[(short)322];
 
-		/// <summary>
-		/// EntertainWithMusic
-		/// </summary>
 		public static LifeRecordItem EntertainWithMusic => Instance[(short)323];
 
-		/// <summary>
-		/// EntertainWithChess
-		/// </summary>
 		public static LifeRecordItem EntertainWithChess => Instance[(short)324];
 
-		/// <summary>
-		/// EntertainWithPoem
-		/// </summary>
 		public static LifeRecordItem EntertainWithPoem => Instance[(short)325];
 
-		/// <summary>
-		/// EntertainWithPainting
-		/// </summary>
 		public static LifeRecordItem EntertainWithPainting => Instance[(short)326];
 
-		/// <summary>
-		/// AcceptInviteToDrink
-		/// </summary>
 		public static LifeRecordItem AcceptInviteToDrink => Instance[(short)327];
 
-		/// <summary>
-		/// RefuseInviteToDrink
-		/// </summary>
 		public static LifeRecordItem RefuseInviteToDrink => Instance[(short)328];
 
-		/// <summary>
-		/// AcceptSell
-		/// </summary>
 		public static LifeRecordItem AcceptSell => Instance[(short)329];
 
-		/// <summary>
-		/// RefuseSell
-		/// </summary>
 		public static LifeRecordItem RefuseSell => Instance[(short)330];
 
-		/// <summary>
-		/// AcceptCure
-		/// </summary>
 		public static LifeRecordItem AcceptCure => Instance[(short)331];
 
-		/// <summary>
-		/// AcceptRepairItem
-		/// </summary>
 		public static LifeRecordItem AcceptRepairItem => Instance[(short)332];
 
-		/// <summary>
-		/// GetBarbSucceed
-		/// </summary>
 		public static LifeRecordItem GetBarbSucceed => Instance[(short)333];
 
-		/// <summary>
-		/// GetBarbMistake
-		/// </summary>
 		public static LifeRecordItem GetBarbMistake => Instance[(short)334];
 
-		/// <summary>
-		/// GetBarbFail
-		/// </summary>
 		public static LifeRecordItem GetBarbFail => Instance[(short)335];
 
-		/// <summary>
-		/// AcceptAskForMoney
-		/// </summary>
 		public static LifeRecordItem AcceptAskForMoney => Instance[(short)336];
 
-		/// <summary>
-		/// RefuseAskForMoney
-		/// </summary>
 		public static LifeRecordItem RefuseAskForMoney => Instance[(short)337];
 
-		/// <summary>
-		/// AcceptEntertainWithMusic
-		/// </summary>
 		public static LifeRecordItem AcceptEntertainWithMusic => Instance[(short)338];
 
-		/// <summary>
-		/// AcceptEntertainWithChess
-		/// </summary>
 		public static LifeRecordItem AcceptEntertainWithChess => Instance[(short)339];
 
-		/// <summary>
-		/// AcceptEntertainWithPoem
-		/// </summary>
 		public static LifeRecordItem AcceptEntertainWithPoem => Instance[(short)340];
 
-		/// <summary>
-		/// AcceptEntertainWithPainting
-		/// </summary>
 		public static LifeRecordItem AcceptEntertainWithPainting => Instance[(short)341];
 
-		/// <summary>
-		/// MakeItem
-		/// </summary>
 		public static LifeRecordItem MakeItem => Instance[(short)342];
 
-		/// <summary>
-		/// TaoismAwakeningSucceed
-		/// </summary>
 		public static LifeRecordItem TaoismAwakeningSucceed => Instance[(short)343];
 
-		/// <summary>
-		/// TaoismAwakeningFail
-		/// </summary>
 		public static LifeRecordItem TaoismAwakeningFail => Instance[(short)344];
 
-		/// <summary>
-		/// BuddismAwakeningSucceed
-		/// </summary>
 		public static LifeRecordItem BuddismAwakeningSucceed => Instance[(short)345];
 
-		/// <summary>
-		/// BuddismAwakeningFail
-		/// </summary>
 		public static LifeRecordItem BuddismAwakeningFail => Instance[(short)346];
 
-		/// <summary>
-		/// TaoismGetAwakenedSucceed
-		/// </summary>
 		public static LifeRecordItem TaoismGetAwakenedSucceed => Instance[(short)347];
 
-		/// <summary>
-		/// TaoismGetAwakenedFail
-		/// </summary>
 		public static LifeRecordItem TaoismGetAwakenedFail => Instance[(short)348];
 
-		/// <summary>
-		/// BuddismGetAwakenedSucceed
-		/// </summary>
 		public static LifeRecordItem BuddismGetAwakenedSucceed => Instance[(short)349];
 
-		/// <summary>
-		/// BuddismGetAwakenedFail
-		/// </summary>
 		public static LifeRecordItem BuddismGetAwakenedFail => Instance[(short)350];
 
-		/// <summary>
-		/// CollectTeaWineSucceed
-		/// </summary>
 		public static LifeRecordItem CollectTeaWineSucceed => Instance[(short)351];
 
-		/// <summary>
-		/// CollectTeaWineFail
-		/// </summary>
 		public static LifeRecordItem CollectTeaWineFail => Instance[(short)352];
 
-		/// <summary>
-		/// DivinationSucceed
-		/// </summary>
 		public static LifeRecordItem DivinationSucceed => Instance[(short)353];
 
-		/// <summary>
-		/// DivinationFail
-		/// </summary>
 		public static LifeRecordItem DivinationFail => Instance[(short)354];
 
-		/// <summary>
-		/// CricketBattleWin
-		/// </summary>
 		public static LifeRecordItem CricketBattleWin => Instance[(short)355];
 
-		/// <summary>
-		/// CricketBattleLose
-		/// </summary>
 		public static LifeRecordItem CricketBattleLose => Instance[(short)356];
 
-		/// <summary>
-		/// MakeLoveLegal
-		/// </summary>
 		public static LifeRecordItem MakeLoveLegal => Instance[(short)1401];
 
-		/// <summary>
-		/// MakeLoveIllegal
-		/// </summary>
 		public static LifeRecordItem MakeLoveIllegal => Instance[(short)357];
 
-		/// <summary>
-		/// RapeFail
-		/// </summary>
 		public static LifeRecordItem RapeFail => Instance[(short)358];
 
-		/// <summary>
-		/// RapeSucceed
-		/// </summary>
 		public static LifeRecordItem RapeSucceed => Instance[(short)359];
 
-		/// <summary>
-		/// ReleaseKidnappedCharacter
-		/// </summary>
 		public static LifeRecordItem ReleaseKidnappedCharacter => Instance[(short)360];
 
-		/// <summary>
-		/// GetRapedFail
-		/// </summary>
 		public static LifeRecordItem GetRapedFail => Instance[(short)361];
 
-		/// <summary>
-		/// GetRapedSucceed
-		/// </summary>
 		public static LifeRecordItem GetRapedSucceed => Instance[(short)362];
 
-		/// <summary>
-		/// GetReleasedByKidnapper
-		/// </summary>
 		public static LifeRecordItem GetReleasedByKidnapper => Instance[(short)363];
 
-		/// <summary>
-		/// MerchantGetNewProduct
-		/// </summary>
 		public static LifeRecordItem MerchantGetNewProduct => Instance[(short)364];
 
-		/// <summary>
-		/// UnexpectedResourceGain
-		/// </summary>
 		public static LifeRecordItem UnexpectedResourceGain => Instance[(short)365];
 
-		/// <summary>
-		/// UnexpectedItemGain
-		/// </summary>
 		public static LifeRecordItem UnexpectedItemGain => Instance[(short)366];
 
-		/// <summary>
-		/// UnexpectedSkillBookGain
-		/// </summary>
 		public static LifeRecordItem UnexpectedSkillBookGain => Instance[(short)367];
 
-		/// <summary>
-		/// UnexpectedHealthCure
-		/// </summary>
 		public static LifeRecordItem UnexpectedHealthCure => Instance[(short)368];
 
-		/// <summary>
-		/// UnexpectedOuterInjuryCure
-		/// </summary>
 		public static LifeRecordItem UnexpectedOuterInjuryCure => Instance[(short)369];
 
-		/// <summary>
-		/// UnexpectedInnerInjuryCure
-		/// </summary>
 		public static LifeRecordItem UnexpectedInnerInjuryCure => Instance[(short)370];
 
-		/// <summary>
-		/// UnexpectedPoisonCure
-		/// </summary>
 		public static LifeRecordItem UnexpectedPoisonCure => Instance[(short)371];
 
-		/// <summary>
-		/// UnexpectedDisorderOfQiCure
-		/// </summary>
 		public static LifeRecordItem UnexpectedDisorderOfQiCure => Instance[(short)372];
 
-		/// <summary>
-		/// UnexpectedResourceLose
-		/// </summary>
 		public static LifeRecordItem UnexpectedResourceLose => Instance[(short)373];
 
-		/// <summary>
-		/// UnexpectedItemLose
-		/// </summary>
 		public static LifeRecordItem UnexpectedItemLose => Instance[(short)374];
 
-		/// <summary>
-		/// UnexpectedSkillBookLose
-		/// </summary>
 		public static LifeRecordItem UnexpectedSkillBookLose => Instance[(short)375];
 
-		/// <summary>
-		/// UnexpectedInjure
-		/// </summary>
 		public static LifeRecordItem UnexpectedHealthHarm => Instance[(short)376];
 
-		/// <summary>
-		/// UnexpectedOuterInjuryHarm
-		/// </summary>
 		public static LifeRecordItem UnexpectedOuterInjuryHarm => Instance[(short)377];
 
-		/// <summary>
-		/// UnexpectedInnerInjuryHarm
-		/// </summary>
 		public static LifeRecordItem UnexpectedInnerInjuryHarm => Instance[(short)378];
 
-		/// <summary>
-		/// UnexpectedPoisonHarm
-		/// </summary>
 		public static LifeRecordItem UnexpectedPoisonHarm => Instance[(short)379];
 
-		/// <summary>
-		/// UnexpectedDisorderOfQiHarm
-		/// </summary>
 		public static LifeRecordItem UnexpectedDisorderOfQiHarm => Instance[(short)380];
 
-		/// <summary>
-		/// KillHereticRandomEnemy
-		/// </summary>
 		public static LifeRecordItem KillHereticRandomEnemy => Instance[(short)381];
 
-		/// <summary>
-		/// KillRighteousRandomEnemy
-		/// </summary>
 		public static LifeRecordItem KillRighteousRandomEnemy => Instance[(short)382];
 
-		/// <summary>
-		/// DefeatedByHereticRandomEnemy
-		/// </summary>
 		public static LifeRecordItem DefeatedByHereticRandomEnemy => Instance[(short)383];
 
-		/// <summary>
-		/// DefeatedByRighteousRandomEnemy
-		/// </summary>
 		public static LifeRecordItem DefeatedByRighteousRandomEnemy => Instance[(short)384];
 
-		/// <summary>
-		/// MonvBad
-		/// </summary>
 		public static LifeRecordItem MonvBad => Instance[(short)385];
 
-		/// <summary>
-		/// DayueYaochangBad
-		/// </summary>
 		public static LifeRecordItem DayueYaochangBad => Instance[(short)386];
 
-		/// <summary>
-		/// JinHuangerBad
-		/// </summary>
 		public static LifeRecordItem JinHuangerBad => Instance[(short)387];
 
-		/// <summary>
-		/// YiyihouBad
-		/// </summary>
 		public static LifeRecordItem YiyihouBad => Instance[(short)388];
 
-		/// <summary>
-		/// WeiQiBad
-		/// </summary>
 		public static LifeRecordItem WeiQiBad => Instance[(short)389];
 
-		/// <summary>
-		/// YixiangBad
-		/// </summary>
 		public static LifeRecordItem YixiangBad => Instance[(short)390];
 
-		/// <summary>
-		/// ShufangBad
-		/// </summary>
 		public static LifeRecordItem ShufangBad => Instance[(short)391];
 
-		/// <summary>
-		/// JixiBad
-		/// </summary>
 		public static LifeRecordItem JixiBad => Instance[(short)392];
 
-		/// <summary>
-		/// MonvGood
-		/// </summary>
 		public static LifeRecordItem MonvGood => Instance[(short)393];
 
-		/// <summary>
-		/// DayueYaochangGood
-		/// </summary>
 		public static LifeRecordItem DayueYaochangGood => Instance[(short)394];
 
-		/// <summary>
-		/// JinHuangerGood
-		/// </summary>
 		public static LifeRecordItem JinHuangerGood => Instance[(short)395];
 
-		/// <summary>
-		/// YiyihouGood
-		/// </summary>
 		public static LifeRecordItem YiyihouGood => Instance[(short)396];
 
-		/// <summary>
-		/// WeiQiGood
-		/// </summary>
 		public static LifeRecordItem WeiQiGood => Instance[(short)397];
 
-		/// <summary>
-		/// YixiangGood
-		/// </summary>
 		public static LifeRecordItem YixiangGood => Instance[(short)398];
 
-		/// <summary>
-		/// XuefengGood
-		/// </summary>
 		public static LifeRecordItem XuefengGood => Instance[(short)399];
 
-		/// <summary>
-		/// ShufangGood
-		/// </summary>
 		public static LifeRecordItem ShufangGood => Instance[(short)400];
 
-		/// <summary>
-		/// PregnantWithSamsara0
-		/// </summary>
 		public static LifeRecordItem PregnantWithSamsara0 => Instance[(short)401];
 
-		/// <summary>
-		/// PregnantWithSamsara1
-		/// </summary>
 		public static LifeRecordItem PregnantWithSamsara1 => Instance[(short)402];
 
-		/// <summary>
-		/// PregnantWithSamsara2
-		/// </summary>
 		public static LifeRecordItem PregnantWithSamsara2 => Instance[(short)403];
 
-		/// <summary>
-		/// PregnantWithSamsara3
-		/// </summary>
 		public static LifeRecordItem PregnantWithSamsara3 => Instance[(short)404];
 
-		/// <summary>
-		/// PregnantWithSamsara4
-		/// </summary>
 		public static LifeRecordItem PregnantWithSamsara4 => Instance[(short)405];
 
-		/// <summary>
-		/// PregnantWithSamsara5
-		/// </summary>
 		public static LifeRecordItem PregnantWithSamsara5 => Instance[(short)406];
 
-		/// <summary>
-		/// GainAuthority
-		/// </summary>
 		public static LifeRecordItem GainAuthority => Instance[(short)407];
 
-		/// <summary>
-		/// SectPunishNormal
-		/// </summary>
 		public static LifeRecordItem SectPunishNormal => Instance[(short)408];
 
-		/// <summary>
-		/// SectPunishElope
-		/// </summary>
 		public static LifeRecordItem SectPunishElope => Instance[(short)409];
 
-		/// <summary>
-		/// ExpelVillager
-		/// </summary>
 		public static LifeRecordItem ExpelVillager => Instance[(short)410];
 
-		/// <summary>
-		/// SavedFromInfection
-		/// </summary>
 		public static LifeRecordItem SavedFromInfection => Instance[(short)411];
 
-		/// <summary>
-		/// ChangeGrade
-		/// </summary>
 		public static LifeRecordItem ChangeGrade => Instance[(short)412];
 
-		/// <summary>
-		/// AutoChangeGrade
-		/// </summary>
 		public static LifeRecordItem AutoChangeGrade => Instance[(short)1414];
 
-		/// <summary>
-		/// ExpelledByTaiwu
-		/// </summary>
 		public static LifeRecordItem ExpelledByTaiwu => Instance[(short)413];
 
-		/// <summary>
-		/// InsteadSectPunishElope
-		/// </summary>
 		public static LifeRecordItem InsteadSectPunishElope => Instance[(short)414];
 
-		/// <summary>
-		/// AvoidSectPunishElope
-		/// </summary>
 		public static LifeRecordItem AvoidSectPunishElope => Instance[(short)415];
 
-		/// <summary>
-		/// JoinJoustForSpouse
-		/// </summary>
 		public static LifeRecordItem JoinJoustForSpouse => Instance[(short)416];
 
-		/// <summary>
-		/// GetHusbandByJoustForSpouse
-		/// </summary>
 		public static LifeRecordItem GetHusbandByJoustForSpouse => Instance[(short)417];
 
-		/// <summary>
-		/// GetWifeByJoustForSpouse
-		/// </summary>
 		public static LifeRecordItem GetWifeByJoustForSpouse => Instance[(short)418];
 
-		/// <summary>
-		/// NoHusbandByJoustForSpouse
-		/// </summary>
 		public static LifeRecordItem NoHusbandByJoustForSpouse => Instance[(short)419];
 
-		/// <summary>
-		/// SectCompetitionBeWinner
-		/// </summary>
 		public static LifeRecordItem SectCompetitionBeWinner => Instance[(short)420];
 
-		/// <summary>
-		/// SectCompetitionBeParticipant
-		/// </summary>
 		public static LifeRecordItem SectCompetitionBeParticipant => Instance[(short)421];
 
-		/// <summary>
-		/// SectCompetitionBeHost
-		/// </summary>
 		public static LifeRecordItem SectCompetitionBeHost => Instance[(short)422];
 
-		/// <summary>
-		/// WulinConferenceBeParticipant
-		/// </summary>
 		public static LifeRecordItem WulinConferenceBeParticipant => Instance[(short)423];
 
-		/// <summary>
-		/// WulinConferenceBeWinner
-		/// </summary>
 		public static LifeRecordItem WulinConferenceBeWinner => Instance[(short)424];
 
-		/// <summary>
-		/// WulinConferenceBeWinnerButTaiwu
-		/// </summary>
 		public static LifeRecordItem WulinConferenceBeWinnerButTaiwu => Instance[(short)425];
 
-		/// <summary>
-		/// WulinConferenceBeHost
-		/// </summary>
 		public static LifeRecordItem WulinConferenceBeHost => Instance[(short)426];
 
-		/// <summary>
-		/// WulinConferenceBeKilledByYufu
-		/// </summary>
 		public static LifeRecordItem WulinConferenceBeKilledByYufu => Instance[(short)427];
 
-		/// <summary>
-		/// WulinConferenceDonation
-		/// </summary>
 		public static LifeRecordItem WulinConferenceDonation => Instance[(short)428];
 
-		/// <summary>
-		/// BeAttackedAndDieByWuYingLing
-		/// </summary>
 		public static LifeRecordItem BeAttackedAndDieByWuYingLing => Instance[(short)429];
 
-		/// <summary>
-		/// NaturalDisasterGiveDeath
-		/// </summary>
 		public static LifeRecordItem NaturalDisasterGiveDeath => Instance[(short)430];
 
-		/// <summary>
-		/// NaturalDisasterHappen
-		/// </summary>
 		public static LifeRecordItem NaturalDisasterHappen => Instance[(short)431];
 
-		/// <summary>
-		/// NaturalDisasterButSurvive
-		/// </summary>
 		public static LifeRecordItem NaturalDisasterButSurvive => Instance[(short)432];
 
-		/// <summary>
-		/// NormalInformationChangeLovingItemSubType
-		/// </summary>
 		public static LifeRecordItem NormalInformationChangeLovingItemSubType => Instance[(short)433];
 
-		/// <summary>
-		/// NormalInformationChangeHatingItemSubType
-		/// </summary>
 		public static LifeRecordItem NormalInformationChangeHatingItemSubType => Instance[(short)434];
 
-		/// <summary>
-		/// NormalInformationChangeIdealSect
-		/// </summary>
 		public static LifeRecordItem NormalInformationChangeIdealSect => Instance[(short)435];
 
-		/// <summary>
-		/// NormalInformationChangeBaseMorality
-		/// </summary>
 		public static LifeRecordItem NormalInformationChangeBaseMorality => Instance[(short)436];
 
-		/// <summary>
-		/// NormalInformationChangeLifeSkillTypeInterest
-		/// </summary>
 		public static LifeRecordItem NormalInformationChangeLifeSkillTypeInterest => Instance[(short)437];
 
-		/// <summary>
-		/// RobGraveEncounterSkeleton
-		/// </summary>
 		public static LifeRecordItem RobGraveEncounterSkeleton => Instance[(short)438];
 
-		/// <summary>
-		/// RobGraveFailed
-		/// </summary>
 		public static LifeRecordItem RobGraveFailed => Instance[(short)439];
 
-		/// <summary>
-		/// SectPunishLevelLowest
-		/// </summary>
 		public static LifeRecordItem SectPunishLevelLowest => Instance[(short)440];
 
-		/// <summary>
-		/// PrincipalSectPunishLevelMiddle
-		/// </summary>
 		public static LifeRecordItem PrincipalSectPunishLevelMiddle => Instance[(short)441];
 
-		/// <summary>
-		/// PrincipalSectPunishLevelHighest
-		/// </summary>
 		public static LifeRecordItem PrincipalSectPunishLevelHighest => Instance[(short)442];
 
-		/// <summary>
-		/// NonPrincipalSectPunishLevelLowest
-		/// </summary>
 		public static LifeRecordItem NonPrincipalSectPunishLevelLowest => Instance[(short)443];
 
-		/// <summary>
-		/// NonPrincipalSectPunishLevelHighest
-		/// </summary>
 		public static LifeRecordItem NonPrincipalSectPunishLevelHighest => Instance[(short)444];
 
-		/// <summary>
-		/// BecomeSwornSiblingByThreatened
-		/// </summary>
 		public static LifeRecordItem BecomeSwornSiblingByThreatened => Instance[(short)445];
 
-		/// <summary>
-		/// MarriedByThreatened
-		/// </summary>
 		public static LifeRecordItem MarriedByThreatened => Instance[(short)446];
 
-		/// <summary>
-		/// GetAdoptedFatherByThreatened
-		/// </summary>
 		public static LifeRecordItem GetAdoptedFatherByThreatened => Instance[(short)447];
 
-		/// <summary>
-		/// GetAdoptedMotherByThreatened
-		/// </summary>
 		public static LifeRecordItem GetAdoptedMotherByThreatened => Instance[(short)448];
 
-		/// <summary>
-		/// GetAdoptedSonByThreatened
-		/// </summary>
 		public static LifeRecordItem GetAdoptedSonByThreatened => Instance[(short)449];
 
-		/// <summary>
-		/// GetAdoptedDaughterByThreatened
-		/// </summary>
 		public static LifeRecordItem GetAdoptedDaughterByThreatened => Instance[(short)450];
 
-		/// <summary>
-		/// AddMentorByThreatened
-		/// </summary>
 		public static LifeRecordItem AddMentorByThreatened => Instance[(short)451];
 
-		/// <summary>
-		/// SeverSwornSiblingByThreatened
-		/// </summary>
 		public static LifeRecordItem SeverSwornSiblingByThreatened => Instance[(short)452];
 
-		/// <summary>
-		/// DivorceByThreatened
-		/// </summary>
 		public static LifeRecordItem DivorceByThreatened => Instance[(short)453];
 
-		/// <summary>
-		/// SeverMentorByThreatened
-		/// </summary>
 		public static LifeRecordItem SeverMentorByThreatened => Instance[(short)454];
 
-		/// <summary>
-		/// SeverAdoptiveFatherByThreatened
-		/// </summary>
 		public static LifeRecordItem SeverAdoptiveFatherByThreatened => Instance[(short)455];
 
-		/// <summary>
-		/// SeverAdoptiveMotherByThreatened
-		/// </summary>
 		public static LifeRecordItem SeverAdoptiveMotherByThreatened => Instance[(short)456];
 
-		/// <summary>
-		/// SeverAdoptiveSonByThreatened
-		/// </summary>
 		public static LifeRecordItem SeverAdoptiveSonByThreatened => Instance[(short)457];
 
-		/// <summary>
-		/// SeverAdoptiveDaughterByThreatened
-		/// </summary>
 		public static LifeRecordItem SeverAdoptiveDaughterByThreatened => Instance[(short)458];
 
-		/// <summary>
-		/// GetThreatenedAdoptiveFather
-		/// </summary>
 		public static LifeRecordItem GetThreatenedAdoptiveFather => Instance[(short)459];
 
-		/// <summary>
-		/// GetThreatenedAdoptiveMother
-		/// </summary>
 		public static LifeRecordItem GetThreatenedAdoptiveMother => Instance[(short)460];
 
-		/// <summary>
-		/// GetThreatenedAdoptiveSon
-		/// </summary>
 		public static LifeRecordItem GetThreatenedAdoptiveSon => Instance[(short)461];
 
-		/// <summary>
-		/// GetThreatenedAdoptiveDaughter
-		/// </summary>
 		public static LifeRecordItem GetThreatenedAdoptiveDaughter => Instance[(short)462];
 
-		/// <summary>
-		/// ApproveTaiwuByThreatened
-		/// </summary>
 		public static LifeRecordItem ApproveTaiwuByThreatened => Instance[(short)463];
 
-		/// <summary>
-		/// FourSeasonsAdventureBeParticipant
-		/// </summary>
 		public static LifeRecordItem FourSeasonsAdventureBeParticipant => Instance[(short)464];
 
-		/// <summary>
-		/// FourSeasonsAdventureBeWinner
-		/// </summary>
 		public static LifeRecordItem FourSeasonsAdventureBeWinner => Instance[(short)465];
 
-		/// <summary>
-		/// EndAdored
-		/// </summary>
 		public static LifeRecordItem EndAdored => Instance[(short)466];
 
-		/// <summary>
-		/// GetMentor
-		/// </summary>
 		public static LifeRecordItem GetMentor => Instance[(short)467];
 
-		/// <summary>
-		/// GetMentee
-		/// </summary>
 		public static LifeRecordItem GetMentee => Instance[(short)468];
 
-		/// <summary>
-		/// SeverAdoptiveParent
-		/// </summary>
 		public static LifeRecordItem SeverAdoptiveParent => Instance[(short)469];
 
-		/// <summary>
-		/// SeverAdoptiveChild
-		/// </summary>
 		public static LifeRecordItem SeverAdoptiveChild => Instance[(short)470];
 
-		/// <summary>
-		/// SeverMentor
-		/// </summary>
 		public static LifeRecordItem SeverMentor => Instance[(short)471];
 
-		/// <summary>
-		/// SeverMentee
-		/// </summary>
 		public static LifeRecordItem SeverMentee => Instance[(short)472];
 
-		/// <summary>
-		/// Divorce
-		/// </summary>
 		public static LifeRecordItem Divorce => Instance[(short)473];
 
-		/// <summary>
-		/// ThreatenSucceed
-		/// </summary>
 		public static LifeRecordItem ThreatenSucceed => Instance[(short)474];
 
-		/// <summary>
-		/// AdmonishSucceed
-		/// </summary>
 		public static LifeRecordItem AdmonishSucceed => Instance[(short)475];
 
-		/// <summary>
-		/// ChangeBehaviorTypeByAdmonishedGood
-		/// </summary>
 		public static LifeRecordItem ChangeBehaviorTypeByAdmonishedGood => Instance[(short)476];
 
-		/// <summary>
-		/// ReduceDebtByAdmonished
-		/// </summary>
 		public static LifeRecordItem ReduceDebtByAdmonished => Instance[(short)477];
 
-		/// <summary>
-		/// ReduceDebtByThreatened
-		/// </summary>
 		public static LifeRecordItem ReduceDebtByThreatened => Instance[(short)478];
 
-		/// <summary>
-		/// ChangeBehaviorTypeByAdmonishedBad
-		/// </summary>
 		public static LifeRecordItem ChangeBehaviorTypeByAdmonishedBad => Instance[(short)479];
 
-		/// <summary>
-		/// GainLegendaryBook
-		/// </summary>
 		public static LifeRecordItem GainLegendaryBook => Instance[(short)480];
 
-		/// <summary>
-		/// BoostedByLegendaryBooks
-		/// </summary>
 		public static LifeRecordItem BoostedByLegendaryBooks => Instance[(short)481];
 
-		/// <summary>
-		/// ActCrazy
-		/// </summary>
 		public static LifeRecordItem ActCrazy => Instance[(short)482];
 
-		/// <summary>
-		/// LegendaryBookShocked
-		/// </summary>
 		public static LifeRecordItem LegendaryBookShocked => Instance[(short)483];
 
-		/// <summary>
-		/// LegendaryBookInsane
-		/// </summary>
 		public static LifeRecordItem LegendaryBookInsane => Instance[(short)484];
 
-		/// <summary>
-		/// LegendaryBookConsumed
-		/// </summary>
 		public static LifeRecordItem LegendaryBookConsumed => Instance[(short)485];
 
-		/// <summary>
-		/// DecideToContestForLegendaryBook
-		/// </summary>
 		public static LifeRecordItem DecideToContestForLegendaryBook => Instance[(short)486];
 
-		/// <summary>
-		/// FinishContestForLegendaryBook
-		/// </summary>
 		public static LifeRecordItem FinishContestForLegendaryBook => Instance[(short)487];
 
-		/// <summary>
-		/// LegendaryBookChallengeWin
-		/// </summary>
 		public static LifeRecordItem LegendaryBookChallengeWin => Instance[(short)488];
 
-		/// <summary>
-		/// LegendaryBookChallengeLose
-		/// </summary>
 		public static LifeRecordItem LegendaryBookChallengeLose => Instance[(short)489];
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeWin
-		/// </summary>
 		public static LifeRecordItem AcceptLegendaryBookChallengeWin => Instance[(short)490];
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeLose
-		/// </summary>
 		public static LifeRecordItem AcceptLegendaryBookChallengeLose => Instance[(short)491];
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeEscape
-		/// </summary>
 		public static LifeRecordItem AcceptLegendaryBookChallengeEscape => Instance[(short)492];
 
-		/// <summary>
-		/// LegendaryBookChallengeEscaped
-		/// </summary>
 		public static LifeRecordItem LegendaryBookChallengeEscaped => Instance[(short)493];
 
-		/// <summary>
-		/// LegendaryBookChallengeSelfEscaped
-		/// </summary>
 		public static LifeRecordItem LegendaryBookChallengeSelfEscaped => Instance[(short)494];
 
-		/// <summary>
-		/// AcceptLegendaryBookChallengeEnemyEscaped
-		/// </summary>
 		public static LifeRecordItem AcceptLegendaryBookChallengeEnemyEscaped => Instance[(short)495];
 
-		/// <summary>
-		/// RefuseRequestLegendaryBookChallenge
-		/// </summary>
 		public static LifeRecordItem RefuseRequestLegendaryBookChallenge => Instance[(short)496];
 
-		/// <summary>
-		/// RequestLegendaryBookChallengeFail
-		/// </summary>
 		public static LifeRecordItem RequestLegendaryBookChallengeFail => Instance[(short)497];
 
-		/// <summary>
-		/// AcceptRequestLegendaryBook
-		/// </summary>
 		public static LifeRecordItem AcceptRequestLegendaryBook => Instance[(short)498];
 
-		/// <summary>
-		/// RequestLegendaryBookSucceed
-		/// </summary>
 		public static LifeRecordItem RequestLegendaryBookSucceed => Instance[(short)499];
 
-		/// <summary>
-		/// RequestLegendaryBookFail
-		/// </summary>
 		public static LifeRecordItem RequestLegendaryBookFail => Instance[(short)500];
 
-		/// <summary>
-		/// RefuseRequestLegendaryBook
-		/// </summary>
 		public static LifeRecordItem RefuseRequestLegendaryBook => Instance[(short)501];
 
-		/// <summary>
-		/// AcceptRequestExchangeLegendaryBook
-		/// </summary>
 		public static LifeRecordItem AcceptRequestExchangeLegendaryBook => Instance[(short)502];
 
-		/// <summary>
-		/// RequestExchangeLegendaryBookSucceed
-		/// </summary>
 		public static LifeRecordItem RequestExchangeLegendaryBookSucceed => Instance[(short)503];
 
-		/// <summary>
-		/// RefuseRequestExchangeLegendaryBook
-		/// </summary>
 		public static LifeRecordItem RefuseRequestExchangeLegendaryBook => Instance[(short)504];
 
-		/// <summary>
-		/// RequestExchangeLegendaryBookFail
-		/// </summary>
 		public static LifeRecordItem RequestExchangeLegendaryBookFail => Instance[(short)505];
 
-		/// <summary>
-		/// GiveLegendaryBookFail
-		/// </summary>
 		public static LifeRecordItem GiveLegendaryBookFail => Instance[(short)506];
 
-		/// <summary>
-		/// RefuseGiveLegendaryBook
-		/// </summary>
 		public static LifeRecordItem RefuseGiveLegendaryBook => Instance[(short)507];
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneJust
-		/// </summary>
 		public static LifeRecordItem DefeatLegendaryBookInsaneJust => Instance[(short)508];
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneKind
-		/// </summary>
 		public static LifeRecordItem DefeatLegendaryBookInsaneKind => Instance[(short)509];
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneEven
-		/// </summary>
 		public static LifeRecordItem DefeatLegendaryBookInsaneEven => Instance[(short)510];
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneRebel
-		/// </summary>
 		public static LifeRecordItem DefeatLegendaryBookInsaneRebel => Instance[(short)511];
 
-		/// <summary>
-		/// DefeatLegendaryBookInsaneEgoistic
-		/// </summary>
 		public static LifeRecordItem DefeatLegendaryBookInsaneEgoistic => Instance[(short)512];
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedJust
-		/// </summary>
 		public static LifeRecordItem LegendaryBookInsaneDefeatedJust => Instance[(short)513];
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedKind
-		/// </summary>
 		public static LifeRecordItem LegendaryBookInsaneDefeatedKind => Instance[(short)514];
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedEven
-		/// </summary>
 		public static LifeRecordItem LegendaryBookInsaneDefeatedEven => Instance[(short)515];
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedRebel
-		/// </summary>
 		public static LifeRecordItem LegendaryBookInsaneDefeatedRebel => Instance[(short)516];
 
-		/// <summary>
-		/// LegendaryBookInsaneDefeatedEgoistic
-		/// </summary>
 		public static LifeRecordItem LegendaryBookInsaneDefeatedEgoistic => Instance[(short)517];
 
-		/// <summary>
-		/// ShockedInsaneEscaped
-		/// </summary>
 		public static LifeRecordItem ShockedInsaneEscaped => Instance[(short)518];
 
-		/// <summary>
-		/// ReleaseShockedInsane
-		/// </summary>
 		public static LifeRecordItem ReleaseShockedInsane => Instance[(short)519];
 
-		/// <summary>
-		/// UnderAttackEscaped
-		/// </summary>
 		public static LifeRecordItem UnderAttackEscaped => Instance[(short)520];
 
-		/// <summary>
-		/// ReleaseUnderAttack
-		/// </summary>
 		public static LifeRecordItem ReleaseUnderAttack => Instance[(short)521];
 
-		/// <summary>
-		/// DefeatConsumed
-		/// </summary>
 		public static LifeRecordItem DefeatConsumed => Instance[(short)522];
 
-		/// <summary>
-		/// BeDefetedByConsumed
-		/// </summary>
 		public static LifeRecordItem BeDefetedByConsumed => Instance[(short)523];
 
-		/// <summary>
-		/// AcceptRequestExchangeLegendaryBookByExp
-		/// </summary>
 		public static LifeRecordItem AcceptRequestExchangeLegendaryBookByExp => Instance[(short)524];
 
-		/// <summary>
-		/// RequestExchangeLegendaryBookSucceedByExp
-		/// </summary>
 		public static LifeRecordItem RequestExchangeLegendaryBookSucceedByExp => Instance[(short)525];
 
-		/// <summary>
-		/// ResignPositionToStudyLegendaryBook
-		/// </summary>
 		public static LifeRecordItem ResignPositionToStudyLegendaryBook => Instance[(short)526];
 
-		/// <summary>
-		/// SoundOutLoverMind
-		/// </summary>
 		public static LifeRecordItem SoundOutLoverMind => Instance[(short)527];
 
-		/// <summary>
-		/// SoundOutMind
-		/// </summary>
 		public static LifeRecordItem SoundOutMind => Instance[(short)528];
 
-		/// <summary>
-		/// RedeemMindSucceed
-		/// </summary>
 		public static LifeRecordItem RedeemMindSucceed => Instance[(short)529];
 
-		/// <summary>
-		/// RedeemMindFail
-		/// </summary>
 		public static LifeRecordItem RedeemMindFail => Instance[(short)530];
 
-		/// <summary>
-		/// AcceptRedeemMind
-		/// </summary>
 		public static LifeRecordItem AcceptRedeemMind => Instance[(short)531];
 
-		/// <summary>
-		/// RefuseRedeemMind
-		/// </summary>
 		public static LifeRecordItem RefuseRedeemMind => Instance[(short)532];
 
-		/// <summary>
-		/// FirstDateWithLover
-		/// </summary>
 		public static LifeRecordItem FirstDateWithLover => Instance[(short)533];
 
-		/// <summary>
-		/// FirstDateWithTaiwu
-		/// </summary>
 		public static LifeRecordItem FirstDateWithTaiwu => Instance[(short)534];
 
-		/// <summary>
-		/// SelectLoverToken
-		/// </summary>
 		public static LifeRecordItem SelectLoverToken => Instance[(short)535];
 
-		/// <summary>
-		/// SelectLoverToken2
-		/// </summary>
 		public static LifeRecordItem SelectLoverToken2 => Instance[(short)536];
 
-		/// <summary>
-		/// DateWithLover
-		/// </summary>
 		public static LifeRecordItem DateWithLover => Instance[(short)537];
 
-		/// <summary>
-		/// DateWithLover2
-		/// </summary>
 		public static LifeRecordItem DateWithLover2 => Instance[(short)538];
 
-		/// <summary>
-		/// TillDeathDoUsPart
-		/// </summary>
 		public static LifeRecordItem TillDeathDoUsPart => Instance[(short)539];
 
-		/// <summary>
-		/// CelebrateBirthday
-		/// </summary>
 		public static LifeRecordItem CelebrateBirthday => Instance[(short)540];
 
-		/// <summary>
-		/// CelebrateSelfBirthday
-		/// </summary>
 		public static LifeRecordItem CelebrateSelfBirthday => Instance[(short)541];
 
-		/// <summary>
-		/// CelebrateAnniversary
-		/// </summary>
 		public static LifeRecordItem CelebrateAnniversary => Instance[(short)542];
 
-		/// <summary>
-		/// BeCaughtCheating
-		/// </summary>
 		public static LifeRecordItem BeCaughtCheating => Instance[(short)543];
 
-		/// <summary>
-		/// CaughtCheating
-		/// </summary>
 		public static LifeRecordItem CaughtCheating => Instance[(short)544];
 
-		/// <summary>
-		/// PregnancyWithWife
-		/// </summary>
 		public static LifeRecordItem PregnancyWithWife => Instance[(short)545];
 
-		/// <summary>
-		/// PregnancyWithHusband
-		/// </summary>
 		public static LifeRecordItem PregnancyWithHusband => Instance[(short)546];
 
-		/// <summary>
-		/// TeaTasting
-		/// </summary>
 		public static LifeRecordItem TeaTasting => Instance[(short)547];
 
-		/// <summary>
-		/// TeaTastingLifeSkillBattleWin
-		/// </summary>
 		public static LifeRecordItem TeaTastingLifeSkillBattleWin => Instance[(short)548];
 
-		/// <summary>
-		/// TeaTastingLifeSkillBattleLose
-		/// </summary>
 		public static LifeRecordItem TeaTastingLifeSkillBattleLose => Instance[(short)549];
 
-		/// <summary>
-		/// TeaTastingDisorderOfQi
-		/// </summary>
 		public static LifeRecordItem TeaTastingDisorderOfQi => Instance[(short)550];
 
-		/// <summary>
-		/// WineTasting
-		/// </summary>
 		public static LifeRecordItem WineTasting => Instance[(short)551];
 
-		/// <summary>
-		/// WineTastingLifeSkillBattleWin
-		/// </summary>
 		public static LifeRecordItem WineTastingLifeSkillBattleWin => Instance[(short)552];
 
-		/// <summary>
-		/// WineTastingLifeSkillBattleLose
-		/// </summary>
 		public static LifeRecordItem WineTastingLifeSkillBattleLose => Instance[(short)553];
 
-		/// <summary>
-		/// WineTastingDisorderOfQi
-		/// </summary>
 		public static LifeRecordItem WineTastingDisorderOfQi => Instance[(short)554];
 
-		/// <summary>
-		/// FirstNameChanged
-		/// </summary>
 		public static LifeRecordItem FirstNameChanged => Instance[(short)555];
 
-		/// <summary>
-		/// LifeSkillModel
-		/// </summary>
 		public static LifeRecordItem LifeSkillModel => Instance[(short)556];
 
-		/// <summary>
-		/// CombatSkillModel
-		/// </summary>
 		public static LifeRecordItem CombatSkillModel => Instance[(short)557];
 
-		/// <summary>
-		/// PromoteReputation
-		/// </summary>
 		public static LifeRecordItem PromoteReputation => Instance[(short)558];
 
-		/// <summary>
-		/// ReputationPromoted
-		/// </summary>
 		public static LifeRecordItem ReputationPromoted => Instance[(short)559];
 
-		/// <summary>
-		/// CapabilityCultivated
-		/// </summary>
 		public static LifeRecordItem CapabilityCultivated => Instance[(short)560];
 
-		/// <summary>
-		/// BroughtToTaiwuByBeggars
-		/// </summary>
 		public static LifeRecordItem BroughtToTaiwuByBeggars => Instance[(short)561];
 
-		/// <summary>
-		/// CivilianSkillSeverEnemy
-		/// </summary>
 		public static LifeRecordItem DiscardRevengeForCivilianSkill => Instance[(short)562];
 
-		/// <summary>
-		/// CivilianSkillDissolveResentment
-		/// </summary>
 		public static LifeRecordItem CivilianSkillDissolveResentment => Instance[(short)563];
 
-		/// <summary>
-		/// PersuadeWithdrawlFromOrganization
-		/// </summary>
 		public static LifeRecordItem PersuadeWithdrawlFromOrganization => Instance[(short)564];
 
-		/// <summary>
-		/// WithdrawlFromOrganization
-		/// </summary>
 		public static LifeRecordItem WithdrawlFromOrganization => Instance[(short)565];
 
-		/// <summary>
-		/// FreeMedicalConsultation
-		/// </summary>
 		public static LifeRecordItem FreeMedicalConsultation => Instance[(short)566];
 
-		/// <summary>
-		/// OfferTreasures
-		/// </summary>
 		public static LifeRecordItem OfferTreasures => Instance[(short)567];
 
-		/// <summary>
-		/// ReceiveOfferedTreasures
-		/// </summary>
 		public static LifeRecordItem ReceiveOfferedTreasures => Instance[(short)568];
 
-		/// <summary>
-		/// ForcefulPurchase
-		/// </summary>
 		public static LifeRecordItem ForcefulPurchase => Instance[(short)569];
 
-		/// <summary>
-		/// ForcefulSale
-		/// </summary>
 		public static LifeRecordItem ForcefulSale => Instance[(short)570];
 
-		/// <summary>
-		/// BegForMoney
-		/// </summary>
 		public static LifeRecordItem BegForMoney => Instance[(short)571];
 
-		/// <summary>
-		/// AbsurdlyForceToLeave
-		/// </summary>
 		public static LifeRecordItem AbsurdlyForceToLeave => Instance[(short)572];
 
-		/// <summary>
-		/// AbsurdlyForcedToLeave
-		/// </summary>
 		public static LifeRecordItem AbsurdlyForcedToLeave => Instance[(short)573];
 
-		/// <summary>
-		/// DiagnoseWithMedicine
-		/// </summary>
 		public static LifeRecordItem DiagnoseWithMedicine => Instance[(short)574];
 
-		/// <summary>
-		/// DiagnosedWithMedicine
-		/// </summary>
 		public static LifeRecordItem DiagnosedWithMedicine => Instance[(short)575];
 
-		/// <summary>
-		/// DiagnoseWithWrongMedicine
-		/// </summary>
 		public static LifeRecordItem DiagnoseWithNonMedicine => Instance[(short)576];
 
-		/// <summary>
-		/// DiagnosedWithWrongMedicine
-		/// </summary>
 		public static LifeRecordItem DiagnosedWithWrongMedicine => Instance[(short)577];
 
-		/// <summary>
-		/// ExtendLifeSpan
-		/// </summary>
 		public static LifeRecordItem ExtendLifeSpan => Instance[(short)578];
 
-		/// <summary>
-		/// LifeSpanExtended
-		/// </summary>
 		public static LifeRecordItem LifeSpanExtended => Instance[(short)579];
 
-		/// <summary>
-		/// PersuadeToBecomeMonk
-		/// </summary>
 		public static LifeRecordItem PersuadeToBecomeMonk => Instance[(short)580];
 
-		/// <summary>
-		/// BecomeMonkPersuaded
-		/// </summary>
 		public static LifeRecordItem BecomeMonkPersuaded => Instance[(short)581];
 
-		/// <summary>
-		/// FailToPersuadeToBecomeMonk
-		/// </summary>
 		public static LifeRecordItem FailToPersuadeToBecomeMonk => Instance[(short)582];
 
-		/// <summary>
-		/// ExpiateDeadSouls
-		/// </summary>
 		public static LifeRecordItem ExpiateDeadSouls => Instance[(short)583];
 
-		/// <summary>
-		/// ExociseXiangshuInfectionVictoryInCombat
-		/// </summary>
 		public static LifeRecordItem ExociseXiangshuInfectionVictoryInCombat => Instance[(short)584];
 
-		/// <summary>
-		/// BecomeExociseXiangshuInfectionVictoryInCombat
-		/// </summary>
 		public static LifeRecordItem BecomeExociseXiangshuInfectionVictoryInCombat => Instance[(short)585];
 
-		/// <summary>
-		/// ExociseXiangshuInfectionVictoryInCombatDefeated
-		/// </summary>
 		public static LifeRecordItem ExociseXiangshuInfectionVictoryInCombatDefeated => Instance[(short)586];
 
-		/// <summary>
-		/// TribulationSucceeded
-		/// </summary>
 		public static LifeRecordItem TribulationSucceeded => Instance[(short)587];
 
-		/// <summary>
-		/// TribulationFailed
-		/// </summary>
 		public static LifeRecordItem TribulationFailed => Instance[(short)588];
 
-		/// <summary>
-		/// TribulationCanceled
-		/// </summary>
 		public static LifeRecordItem TribulationCanceled => Instance[(short)589];
 
-		/// <summary>
-		/// TribulationContinued
-		/// </summary>
 		public static LifeRecordItem TribulationContinued => Instance[(short)590];
 
-		/// <summary>
-		/// GuidingEvilToGoodSucceed
-		/// </summary>
 		public static LifeRecordItem GuidingEvilToGoodSucceed => Instance[(short)591];
 
-		/// <summary>
-		/// BecomeGuidingEvilToGoodSucceed
-		/// </summary>
 		public static LifeRecordItem GuidingEvilGoodSucceed => Instance[(short)592];
 
-		/// <summary>
-		/// GuidingEvilToGoodFail
-		/// </summary>
 		public static LifeRecordItem GuidingEvilToGoodFail => Instance[(short)593];
 
-		/// <summary>
-		/// VisitBuddhismTemples
-		/// </summary>
 		public static LifeRecordItem VisitBuddhismTemples => Instance[(short)594];
 
-		/// <summary>
-		/// EpiphanyThruVisitTemples
-		/// </summary>
 		public static LifeRecordItem EpiphanyThruVisitTemples => Instance[(short)595];
 
-		/// <summary>
-		/// EpiphanyThruVisitTemplesCombatSkill
-		/// </summary>
 		public static LifeRecordItem EpiphanyThruVisitTemplesCombatSkill => Instance[(short)596];
 
-		/// <summary>
-		/// EpiphanyThruVisitTemplesLifeSkill
-		/// </summary>
 		public static LifeRecordItem EpiphanyThruVisitTemplesLifeSkill => Instance[(short)597];
 
-		/// <summary>
-		/// EpiphanyThruVisitTemplesExperience
-		/// </summary>
 		public static LifeRecordItem EpiphanyThruVisitTemplesExperience => Instance[(short)598];
 
-		/// <summary>
-		/// DivineUnexpectedGain
-		/// </summary>
 		public static LifeRecordItem DivineUnexpectedGain => Instance[(short)599];
 
-		/// <summary>
-		/// DivineUnexpectedHarm
-		/// </summary>
 		public static LifeRecordItem DivineUnexpectedHarm => Instance[(short)600];
 
-		/// <summary>
-		/// ExchangeFates
-		/// </summary>
 		public static LifeRecordItem ExchangeFates => Instance[(short)601];
 
-		/// <summary>
-		/// BecomeExchangeFates
-		/// </summary>
 		public static LifeRecordItem BecomeExchangeFates => Instance[(short)602];
 
-		/// <summary>
-		/// ImmortalityGained
-		/// </summary>
 		public static LifeRecordItem ImmortalityGained => Instance[(short)603];
 
-		/// <summary>
-		/// ImmortalityLost
-		/// </summary>
 		public static LifeRecordItem ImmortalityLost => Instance[(short)604];
 
-		/// <summary>
-		/// ImmortalityRegained
-		/// </summary>
 		public static LifeRecordItem ImmortalityRegained => Instance[(short)605];
 
-		/// <summary>
-		/// TaiwuReincarnation
-		/// </summary>
 		public static LifeRecordItem TaiwuReincarnation => Instance[(short)606];
 
-		/// <summary>
-		/// TaiwuReincarnationPregnancy
-		/// </summary>
 		public static LifeRecordItem TaiwuReincarnationPregnancy => Instance[(short)607];
 
-		/// <summary>
-		/// MixPoisonHotRedRotten
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotRedRotten => Instance[(short)608];
 
-		/// <summary>
-		/// MixPoisonHotRottenIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotRottenIllusory => Instance[(short)609];
 
-		/// <summary>
-		/// MixPoisonHotRottenGloomy
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotRottenGloomy => Instance[(short)610];
 
-		/// <summary>
-		/// MixPoisonHotRottenCold
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotRottenCold => Instance[(short)611];
 
-		/// <summary>
-		/// MixPoisonRedRottenIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonRedRottenIllusory => Instance[(short)612];
 
-		/// <summary>
-		/// MixPoisonRedRottenGloomy
-		/// </summary>
 		public static LifeRecordItem MixPoisonRedRottenGloomy => Instance[(short)613];
 
-		/// <summary>
-		/// MixPoisonRedRottenCold
-		/// </summary>
 		public static LifeRecordItem MixPoisonRedRottenCold => Instance[(short)614];
 
-		/// <summary>
-		/// MixPoisonHotRedIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotRedIllusory => Instance[(short)615];
 
-		/// <summary>
-		/// MixPoisonHotRedGloomy
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotRedGloomy => Instance[(short)616];
 
-		/// <summary>
-		/// MixPoisonHotRedCold
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotRedCold => Instance[(short)617];
 
-		/// <summary>
-		/// MixPoisonGloomyColdIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonGloomyColdIllusory => Instance[(short)618];
 
-		/// <summary>
-		/// MixPoisonRottenGloomyCold
-		/// </summary>
 		public static LifeRecordItem MixPoisonRottenGloomyCold => Instance[(short)619];
 
-		/// <summary>
-		/// MixPoisonHotGloomyCold
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotGloomyCold => Instance[(short)620];
 
-		/// <summary>
-		/// MixPoisonRedGloomyCold
-		/// </summary>
 		public static LifeRecordItem MixPoisonRedGloomyCold => Instance[(short)621];
 
-		/// <summary>
-		/// MixPoisonRottenColdIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonRottenColdIllusory => Instance[(short)622];
 
-		/// <summary>
-		/// MixPoisonHotColdIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotColdIllusory => Instance[(short)623];
 
-		/// <summary>
-		/// MixPoisonRedColdIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonRedColdIllusory => Instance[(short)624];
 
-		/// <summary>
-		/// MixPoisonRottenGloomyIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonRottenGloomyIllusory => Instance[(short)625];
 
-		/// <summary>
-		/// MixPoisonHotGloomyIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonHotGloomyIllusory => Instance[(short)626];
 
-		/// <summary>
-		/// MixPoisonRedGloomyIllusory
-		/// </summary>
 		public static LifeRecordItem MixPoisonRedGloomyIllusory => Instance[(short)627];
 
-		/// <summary>
-		/// DiggingXiangshuMinionCombatLost
-		/// </summary>
 		public static LifeRecordItem DiggingXiangshuMinionCombatLost => Instance[(short)628];
 
-		/// <summary>
-		/// DiggingXiangshuMinionCombatWon
-		/// </summary>
 		public static LifeRecordItem DiggingXiangshuMinionCombatWon => Instance[(short)629];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiKills
-		/// </summary>
 		public static LifeRecordItem SectMainStoryXuehouJixiKills => Instance[(short)630];
 
-		/// <summary>
-		/// SectMainStoryWudangTreasure
-		/// </summary>
 		public static LifeRecordItem SectMainStoryWudangTreasure => Instance[(short)631];
 
-		/// <summary>
-		/// SectMainStoryXuannvJoinOrg
-		/// </summary>
 		public static LifeRecordItem SectMainStoryXuannvJoinOrg => Instance[(short)632];
 
-		/// <summary>
-		/// SectMainStoryYuanshanGetAbsorbed
-		/// </summary>
 		public static LifeRecordItem SectMainStoryYuanshanGetAbsorbed => Instance[(short)633];
 
-		/// <summary>
-		/// SectMainStoryYuanshanResistSucceed
-		/// </summary>
 		public static LifeRecordItem SectMainStoryYuanshanResistSucceed => Instance[(short)634];
 
-		/// <summary>
-		/// SectMainStoryYuanshanResistOrdinary
-		/// </summary>
 		public static LifeRecordItem SectMainStoryYuanshanResistOrdinary => Instance[(short)635];
 
-		/// <summary>
-		/// SectMainStoryYuanshanResistFailed
-		/// </summary>
 		public static LifeRecordItem SectMainStoryYuanshanResistFailed => Instance[(short)636];
 
-		/// <summary>
-		/// SectMainStoryXuehouZombieKills
-		/// </summary>
 		public static LifeRecordItem SectMainStoryXuehouZombieKills => Instance[(short)637];
 
-		/// <summary>
-		/// SectMainStoryShixiangSkillEnemy
-		/// </summary>
 		public static LifeRecordItem SectMainStoryShixiangSkillEnemy => Instance[(short)638];
 
-		/// <summary>
-		/// SectMainStoryWuxianMethysis0
-		/// </summary>
 		public static LifeRecordItem SectMainStoryWuxianMethysis0 => Instance[(short)639];
 
-		/// <summary>
-		/// SectMainStoryWuxianPoison
-		/// </summary>
 		public static LifeRecordItem SectMainStoryWuxianPoison => Instance[(short)640];
 
-		/// <summary>
-		/// SectMainStoryWuxianAssault
-		/// </summary>
 		public static LifeRecordItem SectMainStoryWuxianAssault => Instance[(short)641];
 
-		/// <summary>
-		/// SectMainStoryWuxianMethysis1
-		/// </summary>
 		public static LifeRecordItem SectMainStoryWuxianMethysis1 => Instance[(short)642];
 
-		/// <summary>
-		/// SectMainStoryEmeiInfighting
-		/// </summary>
 		public static LifeRecordItem SectMainStoryEmeiInfighting => Instance[(short)643];
 
-		/// <summary>
-		/// SectMainStoryJieqingAssassin
-		/// </summary>
 		public static LifeRecordItem SectMainStoryJieqingAssassin => Instance[(short)644];
 
-		/// <summary>
-		/// WulinConferencePraiseAndGifts
-		/// </summary>
 		public static LifeRecordItem WulinConferencePraiseAndGifts => Instance[(short)645];
 
-		/// <summary>
-		/// NormalInformationChangeIdealSectNegative
-		/// </summary>
 		public static LifeRecordItem NormalInformationChangeIdealSectNegative => Instance[(short)646];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiRescueTaiwu
-		/// </summary>
 		public static LifeRecordItem SectMainStoryXuehouJixiRescueTaiwu => Instance[(short)647];
 
-		/// <summary>
-		/// SectMainStoryRanshanThreeFactionCompetetion
-		/// </summary>
 		public static LifeRecordItem SectMainStoryRanshanJoinThreeFactionCompetetion => Instance[(short)648];
 
-		/// <summary>
-		/// SectMainStoryRanshanThreeFactionCompetetionWin
-		/// </summary>
 		public static LifeRecordItem SectMainStoryRanshanThreeFactionCompetetionWin => Instance[(short)649];
 
-		/// <summary>
-		/// SectMainStoryRanshanThreeFactionCompetetionLose
-		/// </summary>
 		public static LifeRecordItem SectMainStoryRanshanThreeFactionCompetetionLose => Instance[(short)650];
 
-		/// <summary>
-		/// GainExpByStroll
-		/// </summary>
 		public static LifeRecordItem GainExpByStroll => Instance[(short)651];
 
-		/// <summary>
-		/// GainExpByReadingOldBook
-		/// </summary>
 		public static LifeRecordItem GainExpByReadingOldBook => Instance[(short)652];
 
-		/// <summary>
-		/// PunishedAlongsideSpouse
-		/// </summary>
 		public static LifeRecordItem PunishedAlongsideSpouse => Instance[(short)653];
 
-		/// <summary>
-		/// DecideToAdoptFoundling
-		/// </summary>
 		public static LifeRecordItem DecideToAdoptFoundling => Instance[(short)654];
 
-		/// <summary>
-		/// AdoptFoundlingFail
-		/// </summary>
 		public static LifeRecordItem AdoptFoundlingFail => Instance[(short)655];
 
-		/// <summary>
-		/// AdoptFoundlingSucceed
-		/// </summary>
 		public static LifeRecordItem AdoptFoundlingSucceed => Instance[(short)656];
 
-		/// <summary>
-		/// FoundlingBeAdopted
-		/// </summary>
 		public static LifeRecordItem FoundlingGetAdopted => Instance[(short)657];
 
-		/// <summary>
-		/// ClaimFoundlingSucceed
-		/// </summary>
 		public static LifeRecordItem ClaimFoundlingSucceed => Instance[(short)658];
 
-		/// <summary>
-		/// FoundlingGetClaimed
-		/// </summary>
 		public static LifeRecordItem FoundlingGetClaimed => Instance[(short)659];
 
-		/// <summary>
-		/// SectMainStoryWudangVillagerKilled
-		/// </summary>
 		public static LifeRecordItem SectMainStoryWudangVillagerKilled => Instance[(short)660];
 
-		/// <summary>
-		/// SectMainStoryShixiangFallIll
-		/// </summary>
 		public static LifeRecordItem SectMainStoryShixiangFallIll => Instance[(short)661];
 
-		/// <summary>
-		/// KillAnimal
-		/// </summary>
 		public static LifeRecordItem KillAnimal => Instance[(short)662];
 
-		/// <summary>
-		/// DefeatedByAnimal
-		/// </summary>
 		public static LifeRecordItem DefeatedByAnimal => Instance[(short)663];
 
-		/// <summary>
-		/// EnterEnemyNest
-		/// </summary>
 		public static LifeRecordItem EnterEnemyNest => Instance[(short)664];
 
-		/// <summary>
-		/// DieFromEnemyNest
-		/// </summary>
 		public static LifeRecordItem DieFromEnemyNest => Instance[(short)665];
 
-		/// <summary>
-		/// EscapeFromEnemyNest
-		/// </summary>
 		public static LifeRecordItem EscapeFromEnemyNest => Instance[(short)666];
 
-		/// <summary>
-		/// GetSecretSpreadInVeryHighProbability
-		/// </summary>
 		public static LifeRecordItem GetSecretSpreadInVeryHighProbability => Instance[(short)667];
 
-		/// <summary>
-		/// GetSecretSpreadInHighProbability
-		/// </summary>
 		public static LifeRecordItem GetSecretSpreadInHighProbability => Instance[(short)668];
 
-		/// <summary>
-		/// GetSecretSpreadInLowProbability
-		/// </summary>
 		public static LifeRecordItem GetSecretSpreadInLowProbability => Instance[(short)669];
 
-		/// <summary>
-		/// GetSecretSpreadInVeryLowProbability
-		/// </summary>
 		public static LifeRecordItem GetSecretSpreadInVeryLowProbability => Instance[(short)670];
 
-		/// <summary>
-		/// SpreadSecretFail
-		/// </summary>
 		public static LifeRecordItem SpreadSecretFail => Instance[(short)671];
 
-		/// <summary>
-		/// SpreadSecretSuccess
-		/// </summary>
 		public static LifeRecordItem SpreadSecretSuccess => Instance[(short)672];
 
-		/// <summary>
-		/// HeardSecretSpreadInVeryHighProbability
-		/// </summary>
 		public static LifeRecordItem HeardSecretSpreadInVeryHighProbability => Instance[(short)673];
 
-		/// <summary>
-		/// HeardSecretSpreadInHighProbability
-		/// </summary>
 		public static LifeRecordItem HeardSecretSpreadInHighProbability => Instance[(short)674];
 
-		/// <summary>
-		/// HeardSecretSpreadInLowProbability
-		/// </summary>
 		public static LifeRecordItem HeardSecretSpreadInLowProbability => Instance[(short)675];
 
-		/// <summary>
-		/// HeardSecretSpreadInVeryLowProbability
-		/// </summary>
 		public static LifeRecordItem HeardSecretSpreadInVeryLowProbability => Instance[(short)676];
 
-		/// <summary>
-		/// RequestKeepSecretFail
-		/// </summary>
 		public static LifeRecordItem RequestKeepSecretFail => Instance[(short)677];
 
-		/// <summary>
-		/// RequestKeepSecretSuccess
-		/// </summary>
 		public static LifeRecordItem RequestKeepSecretSuccess => Instance[(short)678];
 
-		/// <summary>
-		/// BeRequestedToKeepSecret
-		/// </summary>
 		public static LifeRecordItem BeRequestedToKeepSecret => Instance[(short)679];
 
-		/// <summary>
-		/// ThreadNeedleMatchFail
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleMatchFail => Instance[(short)680];
 
-		/// <summary>
-		/// ThreadNeedleSeparateFail
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleSeparateFail => Instance[(short)681];
 
-		/// <summary>
-		/// ThreadNeedleMatchSuccess
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleMatchSuccess => Instance[(short)682];
 
-		/// <summary>
-		/// ThreadNeedleSeparateSuccess
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleSeparateSuccess => Instance[(short)683];
 
-		/// <summary>
-		/// ThreadNeedleBeMatched0
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleBeMatched1 => Instance[(short)684];
 
-		/// <summary>
-		/// ThreadNeedleBeSeparated0
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleBeSeparated1 => Instance[(short)685];
 
-		/// <summary>
-		/// ThreadNeedleBeMatched1
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleBeMatched2 => Instance[(short)686];
 
-		/// <summary>
-		/// ThreadNeedleBeSeparated1
-		/// </summary>
 		public static LifeRecordItem ThreadNeedleBeSeparated2 => Instance[(short)687];
 
-		/// <summary>
-		/// SpreadSecretKnown
-		/// </summary>
 		public static LifeRecordItem SpreadSecretKnown => Instance[(short)688];
 
-		/// <summary>
-		/// SectMainStoryXuannvBirthOfMirrorCreatedImposture
-		/// </summary>
 		public static LifeRecordItem SectMainStoryXuannvBirthOfMirrorCreatedImposture => Instance[(short)689];
 
-		/// <summary>
-		/// EscapeFromEnemyNestBySelf
-		/// </summary>
 		public static LifeRecordItem EscapeFromEnemyNestBySelf => Instance[(short)690];
 
-		/// <summary>
-		/// SaveFromInfection
-		/// </summary>
 		public static LifeRecordItem SaveFromInfection => Instance[(short)691];
 
-		/// <summary>
-		/// SaveFromEnemyNest
-		/// </summary>
 		public static LifeRecordItem SaveFromEnemyNest => Instance[(short)692];
 
-		/// <summary>
-		/// SaveFromEnemyNestFailed
-		/// </summary>
 		public static LifeRecordItem SaveFromEnemyNestFailed => Instance[(short)693];
 
-		/// <summary>
-		/// TameCarrierSucceed
-		/// </summary>
 		public static LifeRecordItem TameCarrierSucceed => Instance[(short)694];
 
-		/// <summary>
-		/// TameCarrierFail
-		/// </summary>
 		public static LifeRecordItem TameCarrierFail => Instance[(short)695];
 
-		/// <summary>
-		/// ReleaseCarrier
-		/// </summary>
 		public static LifeRecordItem ReleaseCarrier => Instance[(short)696];
 
-		/// <summary>
-		/// DLCLoongRidingEffectQiuniuAudience
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectQiuniuAudience => Instance[(short)697];
 
-		/// <summary>
-		/// DLCLoongRidingEffectQiuniu
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectQiuniu => Instance[(short)698];
 
-		/// <summary>
-		/// DLCLoongRidingEffectYazi
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectYazi => Instance[(short)699];
 
-		/// <summary>
-		/// DLCLoongRidingEffectChaofeng
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectChaofeng => Instance[(short)700];
 
-		/// <summary>
-		/// DLCLoongRidingEffectPulao
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectPulao => Instance[(short)701];
 
-		/// <summary>
-		/// DLCLoongRidingEffectSuanni
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectSuanni => Instance[(short)702];
 
-		/// <summary>
-		/// DLCLoongRidingEffectBaxia
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectBaxia => Instance[(short)703];
 
-		/// <summary>
-		/// DLCLoongRidingEffectBian
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectBian => Instance[(short)704];
 
-		/// <summary>
-		/// DLCLoongRidingEffectFuxi
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectFuxi => Instance[(short)705];
 
-		/// <summary>
-		/// DLCLoongRidingEffectChiwen
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectChiwen => Instance[(short)706];
 
-		/// <summary>
-		/// DefeatLoong
-		/// </summary>
 		public static LifeRecordItem DefeatLoong => Instance[(short)707];
 
-		/// <summary>
-		/// DefeatedByLoong
-		/// </summary>
 		public static LifeRecordItem DefeatedByLoong => Instance[(short)708];
 
-		/// <summary>
-		/// DLCLoongRidingEffectYazi2
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectYazi2 => Instance[(short)709];
 
-		/// <summary>
-		/// DieFromAge
-		/// </summary>
 		public static LifeRecordItem DieFromAge => Instance[(short)710];
 
-		/// <summary>
-		/// DieFromPoorHealth
-		/// </summary>
 		public static LifeRecordItem DieFromPoorHealth => Instance[(short)711];
 
-		/// <summary>
-		/// KilledInPublic
-		/// </summary>
 		public static LifeRecordItem KilledInPublic => Instance[(short)712];
 
-		/// <summary>
-		/// KilledInPrivate
-		/// </summary>
 		public static LifeRecordItem KilledInPrivate => Instance[(short)713];
 
-		/// <summary>
-		/// KilledAfterXiangshuInfected
-		/// </summary>
 		public static LifeRecordItem KilledAfterXiangshuInfected => Instance[(short)714];
 
-		/// <summary>
-		/// Assassinated
-		/// </summary>
 		public static LifeRecordItem Assassinated => Instance[(short)715];
 
-		/// <summary>
-		/// KilledByXiangshu
-		/// </summary>
 		public static LifeRecordItem KilledByXiangshu => Instance[(short)716];
 
-		/// <summary>
-		/// PurchaseItem1
-		/// </summary>
 		public static LifeRecordItem PurchaseItem1 => Instance[(short)717];
 
-		/// <summary>
-		/// SellItem1
-		/// </summary>
 		public static LifeRecordItem SellItem1 => Instance[(short)718];
 
-		/// <summary>
-		/// CleanBodyReincarnationSuccess
-		/// </summary>
 		public static LifeRecordItem CleanBodyReincarnationSuccess => Instance[(short)719];
 
-		/// <summary>
-		/// CleanBodyReincarnationFail
-		/// </summary>
 		public static LifeRecordItem CleanBodyReincarnationFail => Instance[(short)720];
 
-		/// <summary>
-		/// EvilBodyReincarnationSuccess
-		/// </summary>
 		public static LifeRecordItem EvilBodyReincarnationSuccess => Instance[(short)721];
 
-		/// <summary>
-		/// EvilBodyReincarnationFail
-		/// </summary>
 		public static LifeRecordItem EvilBodyReincarnationFail => Instance[(short)722];
 
-		/// <summary>
-		/// WugKingForestSpiritBecomeEnemy
-		/// </summary>
 		public static LifeRecordItem WugKingForestSpiritBecomeEnemy => Instance[(short)723];
 
-		/// <summary>
-		/// SecretMakeEnemy
-		/// </summary>
 		public static LifeRecordItem SecretMakeEnemy => Instance[(short)724];
 
-		/// <summary>
-		/// SecretBeMadeEnemy
-		/// </summary>
 		public static LifeRecordItem SecretBeMadeEnemy => Instance[(short)725];
 
-		/// <summary>
-		/// CleanBodyDefeatAnimal
-		/// </summary>
 		public static LifeRecordItem CleanBodyDefeatAnimal => Instance[(short)726];
 
-		/// <summary>
-		/// EvilBodyDefeatAnimal
-		/// </summary>
 		public static LifeRecordItem EvilBodyDefeatAnimal => Instance[(short)727];
 
-		/// <summary>
-		/// CleanBodyDefeatHereticRandomEnemy
-		/// </summary>
 		public static LifeRecordItem CleanBodyDefeatHereticRandomEnemy => Instance[(short)728];
 
-		/// <summary>
-		/// EvilBodyDefeatHereticRandomEnemy
-		/// </summary>
 		public static LifeRecordItem EvilBodyDefeatHereticRandomEnemy => Instance[(short)729];
 
-		/// <summary>
-		/// CleanBodyDefeatRighteousRandomEnemy
-		/// </summary>
 		public static LifeRecordItem CleanBodyDefeatRighteousRandomEnemy => Instance[(short)730];
 
-		/// <summary>
-		/// EvilBodyDefeatRighteousRandomEnemy
-		/// </summary>
 		public static LifeRecordItem EvilBodyDefeatRighteousRandomEnemy => Instance[(short)731];
 
-		/// <summary>
-		/// WuxianParanoiaAdded
-		/// </summary>
 		public static LifeRecordItem WuxianParanoiaAdded => Instance[(short)732];
 
-		/// <summary>
-		/// WuxianParanoiaAttack
-		/// </summary>
 		public static LifeRecordItem WuxianParanoiaAttack => Instance[(short)733];
 
-		/// <summary>
-		/// WuxianParanoiaErased
-		/// </summary>
 		public static LifeRecordItem WuxianParanoiaErased => Instance[(short)734];
 
-		/// <summary>
-		/// WugKingRedEyeLoseItem
-		/// </summary>
 		public static LifeRecordItem WugKingRedEyeLoseItem => Instance[(short)735];
 
-		/// <summary>
-		/// WugForestSpiritReduceFavorability
-		/// </summary>
 		public static LifeRecordItem WugForestSpiritReduceFavorability => Instance[(short)736];
 
-		/// <summary>
-		/// WugKingForestSpiritBeBecomeEnemy
-		/// </summary>
 		public static LifeRecordItem WugKingForestSpiritBeBecomeEnemy => Instance[(short)737];
 
-		/// <summary>
-		/// WugKingBlackBloodChangeDisorderOfQi
-		/// </summary>
 		public static LifeRecordItem WugKingBlackBloodChangeDisorderOfQi => Instance[(short)738];
 
-		/// <summary>
-		/// WugDevilInsideXiangshuInfection
-		/// </summary>
 		public static LifeRecordItem WugDevilInsideXiangshuInfection => Instance[(short)739];
 
-		/// <summary>
-		/// WugCorpseWormChangeHealth
-		/// </summary>
 		public static LifeRecordItem WugCorpseWormChangeHealth => Instance[(short)740];
 
-		/// <summary>
-		/// WugKingIceSilkwormLoseNeili
-		/// </summary>
 		public static LifeRecordItem WugKingIceSilkwormLoseNeili => Instance[(short)741];
 
-		/// <summary>
-		/// WugKingGoldenSilkwormEatGrownWug
-		/// </summary>
 		public static LifeRecordItem WugKingGoldenSilkwormEatGrownWug => Instance[(short)742];
 
-		/// <summary>
-		/// WugAzureMarrowAddPoison
-		/// </summary>
 		public static LifeRecordItem WugAzureMarrowAddPoison => Instance[(short)743];
 
-		/// <summary>
-		/// WugAzureMarrowAddWug
-		/// </summary>
 		public static LifeRecordItem WugAzureMarrowAddWug => Instance[(short)744];
 
-		/// <summary>
-		/// WugAzureMarrowBeAddWug
-		/// </summary>
 		public static LifeRecordItem WugAzureMarrowBeAddWug => Instance[(short)745];
 
-		/// <summary>
-		/// WuxianParanoiaErased2
-		/// </summary>
 		public static LifeRecordItem WuxianParanoiaErased2 => Instance[(short)746];
 
-		/// <summary>
-		/// WuxianDecreasedMood
-		/// </summary>
 		public static LifeRecordItem WuxianDecreasedMood => Instance[(short)747];
 
-		/// <summary>
-		/// WuxianDecreasedFavorability
-		/// </summary>
 		public static LifeRecordItem WuxianDecreasedFavorability => Instance[(short)748];
 
-		/// <summary>
-		/// WuxianQiDecline
-		/// </summary>
 		public static LifeRecordItem WuxianQiDecline => Instance[(short)749];
 
-		/// <summary>
-		/// WuxianPoisoning
-		/// </summary>
 		public static LifeRecordItem WuxianPoisoning => Instance[(short)750];
 
-		/// <summary>
-		/// WuxianLoseItem
-		/// </summary>
 		public static LifeRecordItem WuxianLoseItem => Instance[(short)751];
 
-		/// <summary>
-		/// WugDevilInsideChangeHappiness
-		/// </summary>
 		public static LifeRecordItem WugDevilInsideChangeHappiness => Instance[(short)752];
 
-		/// <summary>
-		/// WugRedEyeChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugRedEyeChangeToGrown => Instance[(short)753];
 
-		/// <summary>
-		/// WugForestSpiritChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugForestSpiritChangeToGrown => Instance[(short)754];
 
-		/// <summary>
-		/// WugBlackBloodChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugBlackBloodChangeToGrown => Instance[(short)755];
 
-		/// <summary>
-		/// WugDevilInsideChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugDevilInsideChangeToGrown => Instance[(short)756];
 
-		/// <summary>
-		/// WugCorpseWormChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugCorpseWormChangeToGrown => Instance[(short)757];
 
-		/// <summary>
-		/// WugCorpseWormBeChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugCorpseWormBeChangeToGrown => Instance[(short)758];
 
-		/// <summary>
-		/// WugIceSilkwormChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugIceSilkwormChangeToGrown => Instance[(short)759];
 
-		/// <summary>
-		/// WugGoldenSilkwormChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugGoldenSilkwormChangeToGrown => Instance[(short)760];
 
-		/// <summary>
-		/// WugAzureMarrowChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugAzureMarrowChangeToGrown => Instance[(short)761];
 
-		/// <summary>
-		/// WugAzureMarrowBeChangeToGrown
-		/// </summary>
 		public static LifeRecordItem WugAzureMarrowBeChangeToGrown => Instance[(short)762];
 
-		/// <summary>
-		/// ManageLearnLifeSkillSuccess
-		/// </summary>
 		public static LifeRecordItem ManageLearnLifeSkillSuccess => Instance[(short)763];
 
-		/// <summary>
-		/// ManageLearnCombatSkillSuccess
-		/// </summary>
 		public static LifeRecordItem ManageLearnCombatSkillSuccess => Instance[(short)764];
 
-		/// <summary>
-		/// ManageLearnLifeSkillFail
-		/// </summary>
 		public static LifeRecordItem ManageLearnLifeSkillFail => Instance[(short)765];
 
-		/// <summary>
-		/// ManageLearnCombatSkillFail
-		/// </summary>
 		public static LifeRecordItem ManageLearnCombatSkillFail => Instance[(short)766];
 
-		/// <summary>
-		/// ManageLifeSkillAbilityUp
-		/// </summary>
 		public static LifeRecordItem ManageLifeSkillAbilityUp => Instance[(short)767];
 
-		/// <summary>
-		/// ManageCombatSkillAbilityUp
-		/// </summary>
 		public static LifeRecordItem ManageCombatSkillAbilityUp => Instance[(short)768];
 
-		/// <summary>
-		/// SmallVillagerXiangshuCompletelyInfected
-		/// </summary>
 		public static LifeRecordItem SmallVillagerXiangshuCompletelyInfected => Instance[(short)769];
 
-		/// <summary>
-		/// SmallVillagerSavedFromInfection
-		/// </summary>
 		public static LifeRecordItem SmallVillagerSavedFromInfection => Instance[(short)770];
 
-		/// <summary>
-		/// SmallVillagerSaveFromInfection
-		/// </summary>
 		public static LifeRecordItem SmallVillagerSaveFromInfection => Instance[(short)771];
 
-		/// <summary>
-		/// StorageResourceToTreasury
-		/// </summary>
 		public static LifeRecordItem StorageResourceToTreasury => Instance[(short)772];
 
-		/// <summary>
-		/// StorageItemToTreasury
-		/// </summary>
 		public static LifeRecordItem StorageItemToTreasury => Instance[(short)773];
 
-		/// <summary>
-		/// TakeResourceFromTreasury
-		/// </summary>
 		public static LifeRecordItem TakeResourceFromTreasury => Instance[(short)774];
 
-		/// <summary>
-		/// TakeItemFromTreasury
-		/// </summary>
 		public static LifeRecordItem TakeItemFromTreasury => Instance[(short)775];
 
-		/// <summary>
-		/// TaiwuStorageResourceToTreasury
-		/// </summary>
 		public static LifeRecordItem TaiwuStorageResourceToTreasury => Instance[(short)776];
 
-		/// <summary>
-		/// TaiwuStorageItemToTreasury
-		/// </summary>
 		public static LifeRecordItem TaiwuStorageItemToTreasury => Instance[(short)777];
 
-		/// <summary>
-		/// TaiwuTakeResourceFromTreasury
-		/// </summary>
 		public static LifeRecordItem TaiwuTakeResourceFromTreasury => Instance[(short)778];
 
-		/// <summary>
-		/// TaiwuTakeItemFromTreasury
-		/// </summary>
 		public static LifeRecordItem TaiwuTakeItemFromTreasury => Instance[(short)779];
 
-		/// <summary>
-		/// DecideToGuardTreasury
-		/// </summary>
 		public static LifeRecordItem DecideToGuardTreasury => Instance[(short)780];
 
-		/// <summary>
-		/// FinishGuardingTreasury
-		/// </summary>
 		public static LifeRecordItem FinishGuardingTreasury => Instance[(short)781];
 
-		/// <summary>
-		/// IntrudeTreasuryCancelSupportMakeEnemy
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryCancelSupportMakeEnemy => Instance[(short)782];
 
-		/// <summary>
-		/// IntrudeTreasuryBeCancelSupportMakeEnemy
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryBeCancelSupportMakeEnemy => Instance[(short)783];
 
-		/// <summary>
-		/// IntrudeTreasuryCancelSupport
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryCancelSupport => Instance[(short)784];
 
-		/// <summary>
-		/// IntrudeTreasuryBeCancelSupport
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryBeCancelSupport => Instance[(short)785];
 
-		/// <summary>
-		/// IntrudeTreasuryMakeEnemyOthers
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryMakeEnemyOthers => Instance[(short)786];
 
-		/// <summary>
-		/// IntrudeTreasuryBeMakeEnemyOthers
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryBeMakeEnemyOthers => Instance[(short)787];
 
-		/// <summary>
-		/// IntrudeTreasuryLostMorale
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryLostMorale => Instance[(short)788];
 
-		/// <summary>
-		/// IntrudeTreasuryBeLostMorale
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryBeLostMorale => Instance[(short)789];
 
-		/// <summary>
-		/// IntrudeTreasuryBeLostMorale2
-		/// </summary>
 		public static LifeRecordItem IntrudeTreasuryBeLostMorale2 => Instance[(short)790];
 
-		/// <summary>
-		/// PlunderTreasuryCancelSupportMakeEnemy
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryCancelSupportMakeEnemy => Instance[(short)791];
 
-		/// <summary>
-		/// PlunderTreasuryBeCancelSupportMakeEnemy
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryBeCancelSupportMakeEnemy => Instance[(short)792];
 
-		/// <summary>
-		/// PlunderTreasuryCancelSupport
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryCancelSupport => Instance[(short)793];
 
-		/// <summary>
-		/// PlunderTreasuryBeCancelSupport
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryBeCancelSupport => Instance[(short)794];
 
-		/// <summary>
-		/// PlunderTreasuryMakeEnemyOthers
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryMakeEnemyOthers => Instance[(short)795];
 
-		/// <summary>
-		/// PlunderTreasuryBeMakeEnemyOthers
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryBeMakeEnemyOthers => Instance[(short)796];
 
-		/// <summary>
-		/// PlunderTreasuryLostMorale
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryLostMorale => Instance[(short)797];
 
-		/// <summary>
-		/// PlunderTreasuryBeLostMorale
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryBeLostMorale => Instance[(short)798];
 
-		/// <summary>
-		/// PlunderTreasuryBeLostMorale2
-		/// </summary>
 		public static LifeRecordItem PlunderTreasuryBeLostMorale2 => Instance[(short)799];
 
-		/// <summary>
-		/// DonateTreasuryProvideSupport
-		/// </summary>
 		public static LifeRecordItem DonateTreasuryProvideSupport => Instance[(short)800];
 
-		/// <summary>
-		/// DonateTreasuryBeProvideSupport
-		/// </summary>
 		public static LifeRecordItem DonateTreasuryBeProvideSupport => Instance[(short)801];
 
-		/// <summary>
-		/// DonateTreasuryGetMorale
-		/// </summary>
 		public static LifeRecordItem DonateTreasuryGetMorale => Instance[(short)802];
 
-		/// <summary>
-		/// DonateTreasuryBeGetMorale
-		/// </summary>
 		public static LifeRecordItem DonateTreasuryBeGetMorale => Instance[(short)803];
 
-		/// <summary>
-		/// DonateTreasuryGetMorale2
-		/// </summary>
 		public static LifeRecordItem DonateTreasuryGetMorale2 => Instance[(short)804];
 
-		/// <summary>
-		/// TreasuryDistributeResource
-		/// </summary>
 		public static LifeRecordItem TreasuryDistributeResource => Instance[(short)805];
 
-		/// <summary>
-		/// TreasuryDistributeItem
-		/// </summary>
 		public static LifeRecordItem TreasuryDistributeItem => Instance[(short)806];
 
-		/// <summary>
-		/// PoisonEnemyFail12
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail12 => Instance[(short)807];
 
-		/// <summary>
-		/// PoisonEnemyFail22
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail22 => Instance[(short)808];
 
-		/// <summary>
-		/// PoisonEnemyFail32
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail32 => Instance[(short)809];
 
-		/// <summary>
-		/// PoisonEnemyFail42
-		/// </summary>
 		public static LifeRecordItem PoisonEnemyFail42 => Instance[(short)810];
 
-		/// <summary>
-		/// PoisonEnemySucceed2
-		/// </summary>
 		public static LifeRecordItem PoisonEnemySucceed2 => Instance[(short)811];
 
-		/// <summary>
-		/// PoisonEnemySucceedAndEscaped2
-		/// </summary>
 		public static LifeRecordItem PoisonEnemySucceedAndEscaped2 => Instance[(short)812];
 
-		/// <summary>
-		/// GetPoisonedByEnemySucceed2
-		/// </summary>
 		public static LifeRecordItem GetPoisonedByEnemySucceed2 => Instance[(short)813];
 
-		/// <summary>
-		/// PlotHarmEnemyFail12
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail12 => Instance[(short)814];
 
-		/// <summary>
-		/// PlotHarmEnemyFail22
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail22 => Instance[(short)815];
 
-		/// <summary>
-		/// PlotHarmEnemyFail32
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail32 => Instance[(short)816];
 
-		/// <summary>
-		/// PlotHarmEnemyFail42
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemyFail42 => Instance[(short)817];
 
-		/// <summary>
-		/// PlotHarmEnemySucceed2
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemySucceed2 => Instance[(short)818];
 
-		/// <summary>
-		/// PlotHarmEnemySucceedAndEscaped2
-		/// </summary>
 		public static LifeRecordItem PlotHarmEnemySucceedAndEscaped2 => Instance[(short)819];
 
-		/// <summary>
-		/// GetPlottedAgainstSucceed2
-		/// </summary>
 		public static LifeRecordItem GetPlottedAgainstSucceed2 => Instance[(short)820];
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaLow
-		/// </summary>
 		public static LifeRecordItem SectMainStoryBaihuaManiaLow => Instance[(short)821];
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaHigh
-		/// </summary>
 		public static LifeRecordItem SectMainStoryBaihuaManiaHigh => Instance[(short)822];
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaAttack
-		/// </summary>
 		public static LifeRecordItem SectMainStoryBaihuaManiaAttack => Instance[(short)823];
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaAttacked
-		/// </summary>
 		public static LifeRecordItem SectMainStoryBaihuaManiaAttacked => Instance[(short)824];
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaCure
-		/// </summary>
 		public static LifeRecordItem SectMainStoryBaihuaManiaCure => Instance[(short)825];
 
-		/// <summary>
-		/// SectMainStoryBaihuaManiaCured
-		/// </summary>
 		public static LifeRecordItem SectMainStoryBaihuaManiaCured => Instance[(short)826];
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessHuaJu
-		/// </summary>
 		public static LifeRecordItem GiveUpLegendaryBookSuccessHuaJu => Instance[(short)827];
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessXuanZhi
-		/// </summary>
 		public static LifeRecordItem GiveUpLegendaryBookSuccessXuanZhi => Instance[(short)828];
 
-		/// <summary>
-		/// GiveUpLegendaryBookSuccessYingJiao
-		/// </summary>
 		public static LifeRecordItem GiveUpLegendaryBookSuccessYingJiao => Instance[(short)829];
 
-		/// <summary>
-		/// SecretMakeEnemy2
-		/// </summary>
 		public static LifeRecordItem SecretMakeEnemy2 => Instance[(short)830];
 
-		/// <summary>
-		/// SecretBeMadeEnemy2
-		/// </summary>
 		public static LifeRecordItem SecretBeMadeEnemy2 => Instance[(short)831];
 
-		/// <summary>
-		/// DecideToHuntFugitive
-		/// </summary>
 		public static LifeRecordItem DecideToHuntFugitive => Instance[(short)832];
 
-		/// <summary>
-		/// FinishHuntFugitive
-		/// </summary>
 		public static LifeRecordItem FinishHuntFugitive => Instance[(short)833];
 
-		/// <summary>
-		/// DecideToEscapePunishment
-		/// </summary>
 		public static LifeRecordItem DecideToEscapePunishment => Instance[(short)834];
 
-		/// <summary>
-		/// FinishEscapePunishment
-		/// </summary>
 		public static LifeRecordItem FinishEscapePunishment => Instance[(short)835];
 
-		/// <summary>
-		/// DecideToSeekAsylum
-		/// </summary>
 		public static LifeRecordItem DecideToSeekAsylum => Instance[(short)836];
 
-		/// <summary>
-		/// FinishSeekAsylum
-		/// </summary>
 		public static LifeRecordItem FinishSeekAsylum => Instance[(short)837];
 
-		/// <summary>
-		/// SeekAsylumSuccess
-		/// </summary>
 		public static LifeRecordItem SeekAsylumSuccess => Instance[(short)838];
 
-		/// <summary>
-		/// DecideToEscortPrisoner
-		/// </summary>
 		public static LifeRecordItem DecideToEscortPrisoner => Instance[(short)839];
 
-		/// <summary>
-		/// EscortPrisonerSucceed
-		/// </summary>
 		public static LifeRecordItem EscortPrisonerSucceed => Instance[(short)840];
 
-		/// <summary>
-		/// ImprisonedShaoLin
-		/// </summary>
 		public static LifeRecordItem ImprisonedShaoLin => Instance[(short)841];
 
-		/// <summary>
-		/// ImprisonedEmei1
-		/// </summary>
 		public static LifeRecordItem ImprisonedEmei1 => Instance[(short)842];
 
-		/// <summary>
-		/// ImprisonedEmei2
-		/// </summary>
 		public static LifeRecordItem ImprisonedEmei2 => Instance[(short)843];
 
-		/// <summary>
-		/// ImprisonedBaihua
-		/// </summary>
 		public static LifeRecordItem ImprisonedBaihua => Instance[(short)844];
 
-		/// <summary>
-		/// ImprisonedWudang
-		/// </summary>
 		public static LifeRecordItem ImprisonedWudang => Instance[(short)845];
 
-		/// <summary>
-		/// ImprisonedYuanshan
-		/// </summary>
 		public static LifeRecordItem ImprisonedYuanshan => Instance[(short)846];
 
-		/// <summary>
-		/// ImprisonedShingXiang
-		/// </summary>
 		public static LifeRecordItem ImprisonedShingXiang => Instance[(short)847];
 
-		/// <summary>
-		/// ImprisonedRanShan
-		/// </summary>
 		public static LifeRecordItem ImprisonedRanShan => Instance[(short)848];
 
-		/// <summary>
-		/// ImprisonedXuanNv
-		/// </summary>
 		public static LifeRecordItem ImprisonedXuanNv => Instance[(short)849];
 
-		/// <summary>
-		/// ImprisonedZhuJian
-		/// </summary>
 		public static LifeRecordItem ImprisonedZhuJian => Instance[(short)850];
 
-		/// <summary>
-		/// ImprisonedKongSang
-		/// </summary>
 		public static LifeRecordItem ImprisonedKongSang => Instance[(short)851];
 
-		/// <summary>
-		/// ImprisonedJinGang
-		/// </summary>
 		public static LifeRecordItem ImprisonedJinGang => Instance[(short)852];
 
-		/// <summary>
-		/// ImprisonedWuXian
-		/// </summary>
 		public static LifeRecordItem ImprisonedWuXian => Instance[(short)853];
 
-		/// <summary>
-		/// ImprisonedJieQing1
-		/// </summary>
 		public static LifeRecordItem ImprisonedJieQing1 => Instance[(short)854];
 
-		/// <summary>
-		/// ImprisonedJieQing2
-		/// </summary>
 		public static LifeRecordItem ImprisonedJieQing2 => Instance[(short)855];
 
-		/// <summary>
-		/// ImprisonedFuLong
-		/// </summary>
 		public static LifeRecordItem ImprisonedFuLong => Instance[(short)856];
 
-		/// <summary>
-		/// ImprisonedXueHou
-		/// </summary>
 		public static LifeRecordItem ImprisonedXueHou => Instance[(short)857];
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportMakeEnemyNpc
-		/// </summary>
 		public static LifeRecordItem IntrudePrisonCancelSupportMakeEnemyNpc => Instance[(short)858];
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportMakeEnemyTaiwu
-		/// </summary>
 		public static LifeRecordItem IntrudePrisonCancelSupportMakeEnemyTaiwu => Instance[(short)859];
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportNpc
-		/// </summary>
 		public static LifeRecordItem IntrudePrisonCancelSupportNpc => Instance[(short)860];
 
-		/// <summary>
-		/// IntrudePrisonCancelSupportTaiwu
-		/// </summary>
 		public static LifeRecordItem IntrudePrisonCancelSupportTaiwu => Instance[(short)861];
 
-		/// <summary>
-		/// IntrudePrisonMakeEnemyOthersNpc
-		/// </summary>
 		public static LifeRecordItem IntrudePrisonMakeEnemyOthersNpc => Instance[(short)862];
 
-		/// <summary>
-		/// IntrudePrisonMakeEnemyOthersTaiwu
-		/// </summary>
 		public static LifeRecordItem IntrudePrisonMakeEnemyOthersTaiwu => Instance[(short)863];
 
-		/// <summary>
-		/// RequestTheReleaseOfTheCriminalNpc
-		/// </summary>
 		public static LifeRecordItem RequestTheReleaseOfTheCriminalNpc => Instance[(short)864];
 
-		/// <summary>
-		/// RequestTheReleaseOfTheCriminalTaiwu
-		/// </summary>
 		public static LifeRecordItem RequestTheReleaseOfTheCriminalTaiwu => Instance[(short)865];
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityNpc
-		/// </summary>
 		public static LifeRecordItem ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityNpc => Instance[(short)866];
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityTaiwu
-		/// </summary>
 		public static LifeRecordItem ImprisonedXiangshuInfectedSupportIncreaseAndFavorabilityTaiwu => Instance[(short)867];
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedIncreaseFavorabilityNpc
-		/// </summary>
 		public static LifeRecordItem ImprisonedXiangshuInfectedIncreaseFavorabilityNpc => Instance[(short)868];
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedIncreaseFavorabilityTaiwu
-		/// </summary>
 		public static LifeRecordItem ImprisonedXiangshuInfectedIncreaseFavorabilityTaiwu => Instance[(short)869];
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedNpc
-		/// </summary>
 		public static LifeRecordItem ImprisonedXiangshuInfectedNpc => Instance[(short)870];
 
-		/// <summary>
-		/// ImprisonedXiangshuInfectedTaiwu
-		/// </summary>
 		public static LifeRecordItem ImprisonedXiangshuInfectedTaiwu => Instance[(short)871];
 
-		/// <summary>
-		/// RobbedFromPrisonNpc
-		/// </summary>
 		public static LifeRecordItem RobbedFromPrisonNpc => Instance[(short)872];
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportMakeEnemyNpc
-		/// </summary>
 		public static LifeRecordItem PrisonBreakIntrudePrisonCancelSupportMakeEnemyNpc => Instance[(short)873];
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu
-		/// </summary>
 		public static LifeRecordItem PrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu => Instance[(short)874];
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportNpc
-		/// </summary>
 		public static LifeRecordItem PrisonBreakIntrudePrisonCancelSupportNpc => Instance[(short)875];
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonCancelSupportTaiwu
-		/// </summary>
 		public static LifeRecordItem PrisonBreakIntrudePrisonCancelSupportTaiwu => Instance[(short)876];
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonMakeEnemyOthersNpc
-		/// </summary>
 		public static LifeRecordItem PrisonBreakIntrudePrisonMakeEnemyOthersNpc => Instance[(short)877];
 
-		/// <summary>
-		/// PrisonBreakIntrudePrisonMakeEnemyOthersTaiwu
-		/// </summary>
 		public static LifeRecordItem PrisonBreakIntrudePrisonMakeEnemyOthersTaiwu => Instance[(short)878];
 
-		/// <summary>
-		/// ResistArrestIntrudePrisonCancelSupportMakeEnemyNpc
-		/// </summary>
 		public static LifeRecordItem ResistArrestIntrudePrisonCancelSupportMakeEnemyNpc => Instance[(short)879];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwu => Instance[(short)880];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportNpc
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonCancelSupportNpc => Instance[(short)881];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwu
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwu => Instance[(short)882];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpc
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpc => Instance[(short)883];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwu
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwu => Instance[(short)884];
 
-		/// <summary>
-		/// ArrestFailedCaptor
-		/// </summary>
 		public static LifeRecordItem ArrestFailedCaptor => Instance[(short)885];
 
-		/// <summary>
-		/// ArrestFailedCriminal
-		/// </summary>
 		public static LifeRecordItem ArrestFailedCriminal => Instance[(short)886];
 
-		/// <summary>
-		/// ResistArresEngageInBattleTaiwu
-		/// </summary>
 		public static LifeRecordItem ResistArresEngageInBattleTaiwu => Instance[(short)887];
 
-		/// <summary>
-		/// ArrestedSuccessfullyCaptor
-		/// </summary>
 		public static LifeRecordItem ArrestedSuccessfullyCaptor => Instance[(short)888];
 
-		/// <summary>
-		/// ArrestedSuccessfullyCriminal
-		/// </summary>
 		public static LifeRecordItem ArrestedSuccessfullyCriminal => Instance[(short)889];
 
-		/// <summary>
-		/// ReceiveCriminalsCaptor
-		/// </summary>
 		public static LifeRecordItem ReceiveCriminalsCaptor => Instance[(short)890];
 
-		/// <summary>
-		/// ReceiveCriminalsTaiwu
-		/// </summary>
 		public static LifeRecordItem ReceiveCriminalsTaiwu => Instance[(short)891];
 
-		/// <summary>
-		/// ReceiveCriminalsCriminal
-		/// </summary>
 		public static LifeRecordItem ReceiveCriminalsCriminal => Instance[(short)892];
 
-		/// <summary>
-		/// BuyHandOverTheCriminalCaptor
-		/// </summary>
 		public static LifeRecordItem BuyHandOverTheCriminalCaptor => Instance[(short)893];
 
-		/// <summary>
-		/// BuyHandOverTheCriminalTaiwu
-		/// </summary>
 		public static LifeRecordItem BuyHandOverTheCriminalTaiwu => Instance[(short)894];
 
-		/// <summary>
-		/// LifeSkillBattleHandOverTheCriminalCaptor
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleHandOverTheCriminalCaptor => Instance[(short)895];
 
-		/// <summary>
-		/// LifeSkillBattleHandOverTheCriminalTaiwu
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleHandOverTheCriminalTaiwu => Instance[(short)896];
 
-		/// <summary>
-		/// LifeSkillBattleLoseHandOverTheCriminalCaptor
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleLoseHandOverTheCriminalCaptor => Instance[(short)897];
 
-		/// <summary>
-		/// LifeSkillBattleLoseHandOverTheCriminalTaiwu
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleLoseHandOverTheCriminalTaiwu => Instance[(short)898];
 
-		/// <summary>
-		/// VictoryInCombatHandOverTheCriminalCaptor
-		/// </summary>
 		public static LifeRecordItem VictoryInCombatHandOverTheCriminalCaptor => Instance[(short)899];
 
-		/// <summary>
-		/// VictoryInCombatHandOverTheCriminalTaiwu
-		/// </summary>
 		public static LifeRecordItem VictoryInCombatHandOverTheCriminalTaiwu => Instance[(short)900];
 
-		/// <summary>
-		/// FailureInCombatHandOverTheCriminalCaptor
-		/// </summary>
 		public static LifeRecordItem FailureInCombatHandOverTheCriminalCaptor => Instance[(short)901];
 
-		/// <summary>
-		/// FailureInCombatHandOverTheCriminalTaiwu
-		/// </summary>
 		public static LifeRecordItem FailureInCombatHandOverTheCriminalTaiwu => Instance[(short)902];
 
-		/// <summary>
-		/// SectMainStoryFulongFightSucceed
-		/// </summary>
 		public static LifeRecordItem SectMainStoryFulongFightSucceed => Instance[(short)903];
 
-		/// <summary>
-		/// SectMainStoryFulongFightFail
-		/// </summary>
 		public static LifeRecordItem SectMainStoryFulongFightFail => Instance[(short)904];
 
-		/// <summary>
-		/// SectMainStoryFulongRobbery
-		/// </summary>
 		public static LifeRecordItem SectMainStoryFulongRobbery => Instance[(short)905];
 
-		/// <summary>
-		/// SectMainStoryFulongRobberKilledByTaiwu
-		/// </summary>
 		public static LifeRecordItem SectMainStoryFulongRobberKilledByTaiwu => Instance[(short)906];
 
-		/// <summary>
-		/// SectMainStoryFulongProtect
-		/// </summary>
 		public static LifeRecordItem SectMainStoryFulongProtect => Instance[(short)907];
 
-		/// <summary>
-		/// HonestSectPunishLevel1
-		/// </summary>
 		public static LifeRecordItem HonestSectPunishLevel1 => Instance[(short)908];
 
-		/// <summary>
-		/// HonestSectPunishLevel2
-		/// </summary>
 		public static LifeRecordItem HonestSectPunishLevel2 => Instance[(short)909];
 
-		/// <summary>
-		/// HonestSectPunishLevel3
-		/// </summary>
 		public static LifeRecordItem HonestSectPunishLevel3 => Instance[(short)910];
 
-		/// <summary>
-		/// HonestSectPunishLevel4
-		/// </summary>
 		public static LifeRecordItem HonestSectPunishLevel4 => Instance[(short)911];
 
-		/// <summary>
-		/// HonestSectPunishLevel5
-		/// </summary>
 		public static LifeRecordItem HonestSectPunishLevel5 => Instance[(short)912];
 
-		/// <summary>
-		/// HonestSectPunishTogetherWithSpouseLevel5
-		/// </summary>
 		public static LifeRecordItem HonestSectPunishTogetherWithSpouseLevel5 => Instance[(short)913];
 
-		/// <summary>
-		/// ArrestedSectPunishLevel1
-		/// </summary>
 		public static LifeRecordItem ArrestedSectPunishLevel1 => Instance[(short)914];
 
-		/// <summary>
-		/// ArrestedSectPunishLevel2
-		/// </summary>
 		public static LifeRecordItem ArrestedSectPunishLevel2 => Instance[(short)915];
 
-		/// <summary>
-		/// ArrestedSectPunishLevel3
-		/// </summary>
 		public static LifeRecordItem ArrestedSectPunishLevel3 => Instance[(short)916];
 
-		/// <summary>
-		/// ArrestedSectPunishLevel4
-		/// </summary>
 		public static LifeRecordItem ArrestedSectPunishLevel4 => Instance[(short)917];
 
-		/// <summary>
-		/// ArrestedSectPunishLevel5
-		/// </summary>
 		public static LifeRecordItem ArrestedSectPunishLevel5 => Instance[(short)918];
 
-		/// <summary>
-		/// ArrestedSectPunishTogetherWithSpouseLevel5
-		/// </summary>
 		public static LifeRecordItem ArrestedSectPunishTogetherWithSpouseLevel5 => Instance[(short)919];
 
-		/// <summary>
-		/// BeImplicatedSectPunishLevel5
-		/// </summary>
 		public static LifeRecordItem BeImplicatedSectPunishLevel5 => Instance[(short)920];
 
-		/// <summary>
-		/// BeReleasedUponCompletionOfASentence
-		/// </summary>
 		public static LifeRecordItem BeReleasedUponCompletionOfASentence => Instance[(short)921];
 
-		/// <summary>
-		/// PrisonBreak
-		/// </summary>
 		public static LifeRecordItem PrisonBreak => Instance[(short)922];
 
-		/// <summary>
-		/// SendingToPrison1Taiwu
-		/// </summary>
 		public static LifeRecordItem SendingToPrison1Taiwu => Instance[(short)923];
 
-		/// <summary>
-		/// SendingToPrison2Taiwu
-		/// </summary>
 		public static LifeRecordItem SendingToPrison2Taiwu => Instance[(short)924];
 
-		/// <summary>
-		/// SendingToPrisonCriminal
-		/// </summary>
 		public static LifeRecordItem SendingToPrisonCriminal => Instance[(short)925];
 
-		/// <summary>
-		/// SentToPrisonTaiwu
-		/// </summary>
 		public static LifeRecordItem SentToPrisonTaiwu => Instance[(short)926];
 
-		/// <summary>
-		/// SentToPrisonCriminal
-		/// </summary>
 		public static LifeRecordItem SentToPrisonCriminal => Instance[(short)927];
 
-		/// <summary>
-		/// CatchCriminalsWinTaiwu
-		/// </summary>
 		public static LifeRecordItem CatchCriminalsWinTaiwu => Instance[(short)928];
 
-		/// <summary>
-		/// CatchCriminalsWinCriminal
-		/// </summary>
 		public static LifeRecordItem CatchCriminalsWinCriminal => Instance[(short)929];
 
-		/// <summary>
-		/// CatchCriminalsFailedTaiwu
-		/// </summary>
 		public static LifeRecordItem CatchCriminalsFailedTaiwu => Instance[(short)930];
 
-		/// <summary>
-		/// CatchCriminalsFailedCriminal
-		/// </summary>
 		public static LifeRecordItem CatchCriminalsFailedCriminal => Instance[(short)931];
 
-		/// <summary>
-		/// BuyHandOverTheCriminalCaptorByExp
-		/// </summary>
 		public static LifeRecordItem BuyHandOverTheCriminalCaptorByExp => Instance[(short)932];
 
-		/// <summary>
-		/// BuyHandOverTheCriminalTaiwuByExp
-		/// </summary>
 		public static LifeRecordItem BuyHandOverTheCriminalTaiwuByExp => Instance[(short)933];
 
-		/// <summary>
-		/// SendingToPrison1TaiwuByExp
-		/// </summary>
 		public static LifeRecordItem SendingToPrison1TaiwuByExp => Instance[(short)934];
 
-		/// <summary>
-		/// VillagerMigrateResources
-		/// </summary>
 		public static LifeRecordItem VillagerMigrateResources => Instance[(short)935];
 
-		/// <summary>
-		/// VillagerCookingIngredient
-		/// </summary>
 		public static LifeRecordItem VillagerCookingIngredient => Instance[(short)936];
 
-		/// <summary>
-		/// VillagerMakingItem
-		/// </summary>
 		public static LifeRecordItem VillagerMakingItem => Instance[(short)937];
 
-		/// <summary>
-		/// VillagerRepairItem0
-		/// </summary>
 		public static LifeRecordItem VillagerRepairItem0 => Instance[(short)938];
 
-		/// <summary>
-		/// VillagerRepairItem1
-		/// </summary>
 		public static LifeRecordItem VillagerRepairItem1 => Instance[(short)939];
 
-		/// <summary>
-		/// VillagerDisassembleItem0
-		/// </summary>
 		public static LifeRecordItem VillagerDisassembleItem0 => Instance[(short)940];
 
-		/// <summary>
-		/// VillagerDisassembleItem1
-		/// </summary>
 		public static LifeRecordItem VillagerDisassembleItem1 => Instance[(short)941];
 
-		/// <summary>
-		/// VillagerRefiningMedicine
-		/// </summary>
 		public static LifeRecordItem VillagerRefiningMedicine => Instance[(short)942];
 
-		/// <summary>
-		/// VillagerDetoxify0
-		/// </summary>
 		public static LifeRecordItem VillagerDetoxify0 => Instance[(short)943];
 
-		/// <summary>
-		/// VillagerDetoxify1
-		/// </summary>
 		public static LifeRecordItem VillagerDetoxify1 => Instance[(short)944];
 
-		/// <summary>
-		/// VillagerEnvenomedItem
-		/// </summary>
 		public static LifeRecordItem VillagerEnvenomedItem => Instance[(short)945];
 
-		/// <summary>
-		/// VillagerSoldItem
-		/// </summary>
 		public static LifeRecordItem VillagerSoldItem => Instance[(short)946];
 
-		/// <summary>
-		/// VillagerBuyItem
-		/// </summary>
 		public static LifeRecordItem VillagerBuyItem => Instance[(short)947];
 
-		/// <summary>
-		/// VillagerSeverEnemy
-		/// </summary>
 		public static LifeRecordItem VillagerSeverEnemy => Instance[(short)948];
 
-		/// <summary>
-		/// VillagerEmotionUp
-		/// </summary>
 		public static LifeRecordItem VillagerEmotionUp => Instance[(short)949];
 
-		/// <summary>
-		/// VillagerMakeFriends
-		/// </summary>
 		public static LifeRecordItem VillagerMakeFriends => Instance[(short)950];
 
-		/// <summary>
-		/// VillagerGetMarried
-		/// </summary>
 		public static LifeRecordItem VillagerGetMarried => Instance[(short)951];
 
-		/// <summary>
-		/// VillagerBecomeBrothers
-		/// </summary>
 		public static LifeRecordItem VillagerBecomeBrothers => Instance[(short)952];
 
-		/// <summary>
-		/// VillagerAdopt
-		/// </summary>
 		public static LifeRecordItem VillagerAdopt => Instance[(short)953];
 
-		/// <summary>
-		/// VillagerTreatment0
-		/// </summary>
 		public static LifeRecordItem VillagerTreatment0 => Instance[(short)954];
 
-		/// <summary>
-		/// VillagerTreatment1
-		/// </summary>
 		public static LifeRecordItem VillagerTreatment1 => Instance[(short)955];
 
-		/// <summary>
-		/// VillagerBeTreatment0
-		/// </summary>
 		public static LifeRecordItem VillagerBeTreatment0 => Instance[(short)956];
 
-		/// <summary>
-		/// VillagerBeTreatment1
-		/// </summary>
 		public static LifeRecordItem VillagerBeTreatment1 => Instance[(short)957];
 
-		/// <summary>
-		/// XiangshuInfectedPrisonTaiwuVillage
-		/// </summary>
 		public static LifeRecordItem XiangshuInfectedPrisonTaiwuVillage => Instance[(short)958];
 
-		/// <summary>
-		/// XiangshuInfectedPrisonSettlement
-		/// </summary>
 		public static LifeRecordItem XiangshuInfectedPrisonSettlement => Instance[(short)959];
 
-		/// <summary>
-		/// VillagerBeRepairItem1
-		/// </summary>
 		public static LifeRecordItem VillagerBeRepairItem1 => Instance[(short)960];
 
-		/// <summary>
-		/// TaiwuVillagerTakeItem
-		/// </summary>
 		public static LifeRecordItem TaiwuVillagerTakeItem => Instance[(short)961];
 
-		/// <summary>
-		/// TaiwuVillagerStorageItem
-		/// </summary>
 		public static LifeRecordItem TaiwuVillagerStorageItem => Instance[(short)962];
 
-		/// <summary>
-		/// TaiwuVillagerStorageResources
-		/// </summary>
 		public static LifeRecordItem TaiwuVillagerStorageResources => Instance[(short)963];
 
-		/// <summary>
-		/// TaiwuVillagerTakeResources
-		/// </summary>
 		public static LifeRecordItem TaiwuVillagerTakeResources => Instance[(short)964];
 
-		/// <summary>
-		/// LiteratiEntertainingUp
-		/// </summary>
 		public static LifeRecordItem LiteratiEntertainingUp => Instance[(short)965];
 
-		/// <summary>
-		/// LiteratiEntertainingDown
-		/// </summary>
 		public static LifeRecordItem LiteratiEntertainingDown => Instance[(short)966];
 
-		/// <summary>
-		/// LiteratiBuildingRelationshipUp
-		/// </summary>
 		public static LifeRecordItem LiteratiBuildingRelationshipUp => Instance[(short)967];
 
-		/// <summary>
-		/// LiteratiBuildingRelationshipDown
-		/// </summary>
 		public static LifeRecordItem LiteratiBuildingRelationshipDown => Instance[(short)968];
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceUp
-		/// </summary>
 		public static LifeRecordItem LiteratiSpreadingInfluenceUp => Instance[(short)969];
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceDown
-		/// </summary>
 		public static LifeRecordItem LiteratiSpreadingInfluenceDown => Instance[(short)970];
 
-		/// <summary>
-		/// SwordTombKeeperBuildingRelationshipUp
-		/// </summary>
 		public static LifeRecordItem SwordTombKeeperBuildingRelationshipUp => Instance[(short)971];
 
-		/// <summary>
-		/// SwordTombKeeperBuildingRelationshipDown
-		/// </summary>
 		public static LifeRecordItem SwordTombKeeperBuildingRelationshipDown => Instance[(short)972];
 
-		/// <summary>
-		/// SwordTombKeeperSpreadingInfluenceUp
-		/// </summary>
 		public static LifeRecordItem SwordTombKeeperSpreadingInfluenceUp => Instance[(short)973];
 
-		/// <summary>
-		/// SwordTombKeeperSpreadingInfluenceDown
-		/// </summary>
 		public static LifeRecordItem SwordTombKeeperSpreadingInfluenceDown => Instance[(short)974];
 
-		/// <summary>
-		/// InquireSwordTomb
-		/// </summary>
 		public static LifeRecordItem InquireSwordTomb => Instance[(short)975];
 
-		/// <summary>
-		/// GuardingSwordTomb
-		/// </summary>
 		public static LifeRecordItem GuardingSwordTomb => Instance[(short)976];
 
-		/// <summary>
-		/// VillagerPrioritizedActions
-		/// </summary>
 		public static LifeRecordItem VillagerPrioritizedActions => Instance[(short)977];
 
-		/// <summary>
-		/// VillagerPrioritizedActionsStop
-		/// </summary>
 		public static LifeRecordItem VillagerPrioritizedActionsStop => Instance[(short)978];
 
-		/// <summary>
-		/// EnvenomedItemOverload
-		/// </summary>
 		public static LifeRecordItem EnvenomedItemOverload => Instance[(short)979];
 
-		/// <summary>
-		/// DetoxifyItemOverload
-		/// </summary>
 		public static LifeRecordItem DetoxifyItemOverload => Instance[(short)980];
 
-		/// <summary>
-		/// VillagerEnvenomedItemOverload
-		/// </summary>
 		public static LifeRecordItem VillagerEnvenomedItemOverload => Instance[(short)981];
 
-		/// <summary>
-		/// VillagerDetoxifyItemOverload
-		/// </summary>
 		public static LifeRecordItem VillagerDetoxifyItemOverload => Instance[(short)982];
 
-		/// <summary>
-		/// VillagerCookingIngredientFailed0
-		/// </summary>
 		public static LifeRecordItem VillagerCookingIngredientFailed0 => Instance[(short)983];
 
-		/// <summary>
-		/// VillagerCookingIngredientFailed1
-		/// </summary>
 		public static LifeRecordItem VillagerCookingIngredientFailed1 => Instance[(short)984];
 
-		/// <summary>
-		/// VillagerMakingItemFailed0
-		/// </summary>
 		public static LifeRecordItem VillagerMakingItemFailed0 => Instance[(short)985];
 
-		/// <summary>
-		/// VillagerMakingItemFailed1
-		/// </summary>
 		public static LifeRecordItem VillagerMakingItemFailed1 => Instance[(short)986];
 
-		/// <summary>
-		/// VillagerRepairFailed
-		/// </summary>
 		public static LifeRecordItem VillagerRepairFailed => Instance[(short)987];
 
-		/// <summary>
-		/// VillagerDisassembleItemFailed
-		/// </summary>
 		public static LifeRecordItem VillagerDisassembleItemFailed => Instance[(short)988];
 
-		/// <summary>
-		/// VillagerRefiningMedicineFailed0
-		/// </summary>
 		public static LifeRecordItem VillagerRefiningMedicineFailed0 => Instance[(short)989];
 
-		/// <summary>
-		/// VillagerRefiningMedicineFailed1
-		/// </summary>
 		public static LifeRecordItem VillagerRefiningMedicineFailed1 => Instance[(short)990];
 
-		/// <summary>
-		/// VillagerAddPoisonToItemFailed
-		/// </summary>
 		public static LifeRecordItem VillagerAddPoisonToItemFailed => Instance[(short)991];
 
-		/// <summary>
-		/// VillagerDetoxItemFailed
-		/// </summary>
 		public static LifeRecordItem VillagerDetoxItemFailed => Instance[(short)992];
 
-		/// <summary>
-		/// VillagerDistanceFailed0
-		/// </summary>
 		public static LifeRecordItem VillagerDistanceFailed0 => Instance[(short)993];
 
-		/// <summary>
-		/// VillagerDistanceFailed1
-		/// </summary>
 		public static LifeRecordItem VillagerDistanceFailed1 => Instance[(short)994];
 
-		/// <summary>
-		/// VillagerDistanceFailed2
-		/// </summary>
 		public static LifeRecordItem VillagerDistanceFailed2 => Instance[(short)995];
 
-		/// <summary>
-		/// VillagerAttainmentsFailed
-		/// </summary>
 		public static LifeRecordItem VillagerAttainmentsFailed => Instance[(short)996];
 
-		/// <summary>
-		/// TaiwuPunishmentTongyong
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentTongyong => Instance[(short)997];
 
-		/// <summary>
-		/// TaiwuPunishmentShaolin
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentShaolin => Instance[(short)998];
 
-		/// <summary>
-		/// TaiwuPunishmentEmei
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentEmei => Instance[(short)999];
 
-		/// <summary>
-		/// TaiwuPunishmentBaihua
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentBaihua => Instance[(short)1000];
 
-		/// <summary>
-		/// TaiwuPunishmentWudang
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentWudang => Instance[(short)1001];
 
-		/// <summary>
-		/// TaiwuPunishmentYuanshan
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentYuanshan => Instance[(short)1002];
 
-		/// <summary>
-		/// TaiwuPunishmentShingXiang
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentShingXiang => Instance[(short)1003];
 
-		/// <summary>
-		/// TaiwuPunishmentRanShan
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentRanShan => Instance[(short)1004];
 
-		/// <summary>
-		/// TaiwuPunishmentXuanNv
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentXuanNv => Instance[(short)1005];
 
-		/// <summary>
-		/// TaiwuPunishmentZhuJian
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentZhuJian => Instance[(short)1006];
 
-		/// <summary>
-		/// TaiwuPunishmentKongSang
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentKongSang => Instance[(short)1007];
 
-		/// <summary>
-		/// TaiwuPunishmentJinGang
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentJinGang => Instance[(short)1008];
 
-		/// <summary>
-		/// TaiwuPunishmentWuXian
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentWuXian => Instance[(short)1009];
 
-		/// <summary>
-		/// TaiwuPunishmentJieQing
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentJieQing => Instance[(short)1010];
 
-		/// <summary>
-		/// TaiwuPunishmentFuLong
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentFuLong => Instance[(short)1011];
 
-		/// <summary>
-		/// TaiwuPunishmentXueHou
-		/// </summary>
 		public static LifeRecordItem TaiwuPunishmentXueHou => Instance[(short)1012];
 
-		/// <summary>
-		/// SectPunishLevel5Expel
-		/// </summary>
 		public static LifeRecordItem SectPunishLevel5Expel => Instance[(short)1013];
 
-		/// <summary>
-		/// BeImplicatedSectPunishLevel5New
-		/// </summary>
 		public static LifeRecordItem BeImplicatedSectPunishLevel5New => Instance[(short)1014];
 
-		/// <summary>
-		/// BeImplicatedSectPunishLevel5Expel
-		/// </summary>
 		public static LifeRecordItem BeImplicatedSectPunishLevel5Expel => Instance[(short)1015];
 
-		/// <summary>
-		/// ResistArrestIntrudePrisonCancelSupportMakeEnemyNpcGuard
-		/// </summary>
 		public static LifeRecordItem ResistArrestIntrudePrisonCancelSupportMakeEnemyNpcGuard => Instance[(short)1016];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwuWanted
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonCancelSupportMakeEnemyTaiwuWanted => Instance[(short)1017];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportNpcGuard
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonCancelSupportNpcGuard => Instance[(short)1018];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwuWanted
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonCancelSupportTaiwuWanted => Instance[(short)1019];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpcGuard
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersNpcGuard => Instance[(short)1020];
 
-		/// <summary>
-		/// ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwuWanted
-		/// </summary>
 		public static LifeRecordItem ResistArresPrisonBreakIntrudePrisonMakeEnemyOthersTaiwuWanted => Instance[(short)1021];
 
-		/// <summary>
-		/// CivilianSkillForgive
-		/// </summary>
 		public static LifeRecordItem ForgiveForCivilianSkill => Instance[(short)1022];
 
-		/// <summary>
-		/// BeggarEatSomeoneFood
-		/// </summary>
 		public static LifeRecordItem BeggarEatSomeoneFood => Instance[(short)1023];
 
-		/// <summary>
-		/// SomeoneFoodEatedByBeggar
-		/// </summary>
 		public static LifeRecordItem SomeoneFoodEatedByBeggar => Instance[(short)1024];
 
-		/// <summary>
-		/// AristocratReleasePrisoner
-		/// </summary>
 		public static LifeRecordItem AristocratReleasePrisoner => Instance[(short)1025];
 
-		/// <summary>
-		/// PrisonerBeReleaseByAristocrat
-		/// </summary>
 		public static LifeRecordItem PrisonerBeReleaseByAristocrat => Instance[(short)1026];
 
-		/// <summary>
-		/// JieQingPunishmentAssassinSetOut
-		/// </summary>
 		public static LifeRecordItem JieQingPunishmentAssassinSetOut => Instance[(short)1027];
 
-		/// <summary>
-		/// JieQingPunishmentAssassinSucceed
-		/// </summary>
 		public static LifeRecordItem JieQingPunishmentAssassinSucceed => Instance[(short)1028];
 
-		/// <summary>
-		/// JieQingPunishmentAssassinBeSucceed
-		/// </summary>
 		public static LifeRecordItem JieQingPunishmentAssassinBeSucceed => Instance[(short)1029];
 
-		/// <summary>
-		/// JieQingPunishmentAssassinFailed
-		/// </summary>
 		public static LifeRecordItem JieQingPunishmentAssassinFailed => Instance[(short)1030];
 
-		/// <summary>
-		/// JieQingPunishmentAssassinBeFailed
-		/// </summary>
 		public static LifeRecordItem JieQingPunishmentAssassinBeFailed => Instance[(short)1031];
 
-		/// <summary>
-		/// JieQingPunishmentAssassinGiveUp
-		/// </summary>
 		public static LifeRecordItem JieQingPunishmentAssassinGiveUp => Instance[(short)1032];
 
-		/// <summary>
-		/// ExociseXiangshuInfectionVictoryInCombatDie
-		/// </summary>
 		public static LifeRecordItem ExociseXiangshuInfectionVictoryInCombatDie => Instance[(short)1033];
 
-		/// <summary>
-		/// BecomeExociseXiangshuInfectionVictoryInCombatDie
-		/// </summary>
 		public static LifeRecordItem BecomeExociseXiangshuInfectionVictoryInCombatDie => Instance[(short)1034];
 
-		/// <summary>
-		/// ArrestFailedTaiwu
-		/// </summary>
 		public static LifeRecordItem ArrestFailedTaiwu => Instance[(short)1035];
 
-		/// <summary>
-		/// ArrestedSuccessfullyTaiwu
-		/// </summary>
 		public static LifeRecordItem ArrestedSuccessfullyTaiwu => Instance[(short)1036];
 
-		/// <summary>
-		/// LifeSkillBattleLoseAndTheArrestFailedCaptor
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleLoseAndTheArrestFailedCaptor => Instance[(short)1037];
 
-		/// <summary>
-		/// LifeSkillBattleWinAndAvoidArrestTaiwu
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleWinAndAvoidArrestTaiwu => Instance[(short)1038];
 
-		/// <summary>
-		/// LifeSkillBattleWinAndSuccessfulArrestCaptor
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleWinAndSuccessfulArrestCaptor => Instance[(short)1039];
 
-		/// <summary>
-		/// LifeSkillBattleLoseAndWasArrestedTaiwu
-		/// </summary>
 		public static LifeRecordItem LifeSkillBattleLoseAndWasArrestedTaiwu => Instance[(short)1040];
 
-		/// <summary>
-		/// FailedArrestForBriberyCaptorByAuthority
-		/// </summary>
 		public static LifeRecordItem FailedArrestForBriberyCaptorByAuthority => Instance[(short)1041];
 
-		/// <summary>
-		/// BribeSucceededInAvoidingArrestTaiwuByAuthority
-		/// </summary>
 		public static LifeRecordItem BribeSucceededInAvoidingArrestTaiwuByAuthority => Instance[(short)1042];
 
-		/// <summary>
-		/// FailedArrestForBriberyCaptorByExp
-		/// </summary>
 		public static LifeRecordItem FailedArrestForBriberyCaptorByExp => Instance[(short)1043];
 
-		/// <summary>
-		/// BribeSucceededInAvoidingArrestTaiwuByExp
-		/// </summary>
 		public static LifeRecordItem BribeSucceededInAvoidingArrestTaiwuByExp => Instance[(short)1044];
 
-		/// <summary>
-		/// FailedArrestForBriberyCaptorByMoney
-		/// </summary>
 		public static LifeRecordItem FailedArrestForBriberyCaptorByMoney => Instance[(short)1045];
 
-		/// <summary>
-		/// BribeSucceededInAvoidingArrestTaiwuByMoney
-		/// </summary>
 		public static LifeRecordItem BribeSucceededInAvoidingArrestTaiwuByMoney => Instance[(short)1046];
 
-		/// <summary>
-		/// SubmitToCaptureMeeklyTaiwu
-		/// </summary>
 		public static LifeRecordItem SubmitToCaptureMeeklyTaiwu => Instance[(short)1047];
 
-		/// <summary>
-		/// SubmitToCaptureMeeklyCaptor
-		/// </summary>
 		public static LifeRecordItem SubmitToCaptureMeeklyCaptor => Instance[(short)1048];
 
-		/// <summary>
-		/// NormalInformationChangeProfession
-		/// </summary>
 		public static LifeRecordItem NormalInformationChangeProfession => Instance[(short)1049];
 
-		/// <summary>
-		/// FeedTheAnimal
-		/// </summary>
 		public static LifeRecordItem FeedTheAnimal => Instance[(short)1050];
 
-		/// <summary>
-		/// ProfessionDoctorLifeTransition
-		/// </summary>
 		public static LifeRecordItem ProfessionDoctorLifeTransition => Instance[(short)1051];
 
-		/// <summary>
-		/// ProfessionDoctorLifeTransitionTaiwu
-		/// </summary>
 		public static LifeRecordItem ProfessionDoctorLifeTransitionTaiwu => Instance[(short)1052];
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByExp
-		/// </summary>
 		public static LifeRecordItem CombatSkillKeyPointComprehensionByExp => Instance[(short)1053];
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByItems
-		/// </summary>
 		public static LifeRecordItem CombatSkillKeyPointComprehensionByItems => Instance[(short)1054];
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByLoveRelationship
-		/// </summary>
 		public static LifeRecordItem CombatSkillKeyPointComprehensionByLoveRelationship => Instance[(short)1055];
 
-		/// <summary>
-		/// CombatSkillKeyPointComprehensionByHatredRelationship
-		/// </summary>
 		public static LifeRecordItem CombatSkillKeyPointComprehensionByHatredRelationship => Instance[(short)1056];
 
-		/// <summary>
-		/// SpiritualDebtKongsangPoisoned
-		/// </summary>
 		public static LifeRecordItem SpiritualDebtKongsangPoisoned => Instance[(short)1057];
 
-		/// <summary>
-		/// MartialArtistSkill3NPCItemDropCaseA
-		/// </summary>
 		public static LifeRecordItem MartialArtistSkill3NPCItemDropCaseA => Instance[(short)1058];
 
-		/// <summary>
-		/// MartialArtistSkill3NPCItemDropCaseB
-		/// </summary>
 		public static LifeRecordItem MartialArtistSkill3NPCItemDropCaseB => Instance[(short)1059];
 
-		/// <summary>
-		/// SectPunishElopeSucceedJust
-		/// </summary>
 		public static LifeRecordItem SectPunishElopeSucceedJust => Instance[(short)1060];
 
-		/// <summary>
-		/// SectPunishElopeSucceedKind
-		/// </summary>
 		public static LifeRecordItem SectPunishElopeSucceedKind => Instance[(short)1061];
 
-		/// <summary>
-		/// SectPunishElopeSucceedEven
-		/// </summary>
 		public static LifeRecordItem SectPunishElopeSucceedEven => Instance[(short)1062];
 
-		/// <summary>
-		/// SectPunishElopeSucceed
-		/// </summary>
 		public static LifeRecordItem SectPunishElopeSucceed => Instance[(short)1063];
 
-		/// <summary>
-		/// VillagerGetRefineItem
-		/// </summary>
 		public static LifeRecordItem VillagerGetRefineItem => Instance[(short)1064];
 
-		/// <summary>
-		/// VillagerUpgradeRefineItem
-		/// </summary>
 		public static LifeRecordItem VillagerUpgradeRefineItem => Instance[(short)1065];
 
-		/// <summary>
-		/// VillagerTreatmentTaiwu
-		/// </summary>
 		public static LifeRecordItem VillagerTreatmentTaiwu => Instance[(short)1066];
 
-		/// <summary>
-		/// VillagerReduceXiangshuInfect
-		/// </summary>
 		public static LifeRecordItem VillagerReduceXiangshuInfect => Instance[(short)1067];
 
-		/// <summary>
-		/// VillagerEarnMoney
-		/// </summary>
 		public static LifeRecordItem VillagerEarnMoney => Instance[(short)1068];
 
-		/// <summary>
-		/// VillagerBeEarnedMoney
-		/// </summary>
 		public static LifeRecordItem VillagerBeEarnedMoney => Instance[(short)1069];
 
-		/// <summary>
-		/// VillagerBeSoldItem
-		/// </summary>
 		public static LifeRecordItem VillagerBeSoldItem => Instance[(short)1070];
 
-		/// <summary>
-		/// VillagerBePurchasedItem
-		/// </summary>
 		public static LifeRecordItem VillagerBePurchasedItem => Instance[(short)1071];
 
-		/// <summary>
-		/// VillagerGetMerchantFavorability
-		/// </summary>
 		public static LifeRecordItem VillagerGetMerchantFavorability => Instance[(short)1072];
 
-		/// <summary>
-		/// VillagerGetMerchantFavorabilityTaiwu
-		/// </summary>
 		public static LifeRecordItem VillagerGetMerchantFavorabilityTaiwu => Instance[(short)1073];
 
-		/// <summary>
-		/// LiteratiBeEntertainedUp
-		/// </summary>
 		public static LifeRecordItem LiteratiBeEntertainedUp => Instance[(short)1074];
 
-		/// <summary>
-		/// LiteratiBeEntertainedDown
-		/// </summary>
 		public static LifeRecordItem LiteratiBeEntertainedDown => Instance[(short)1075];
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceCultureUp
-		/// </summary>
 		public static LifeRecordItem LiteratiSpreadingInfluenceCultureUp => Instance[(short)1076];
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceCultureDown
-		/// </summary>
 		public static LifeRecordItem LiteratiSpreadingInfluenceCultureDown => Instance[(short)1077];
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceSafetyUp
-		/// </summary>
 		public static LifeRecordItem LiteratiSpreadingInfluenceSafetyUp => Instance[(short)1078];
 
-		/// <summary>
-		/// LiteratiSpreadingInfluenceSafetyDown
-		/// </summary>
 		public static LifeRecordItem LiteratiSpreadingInfluenceSafetyDown => Instance[(short)1079];
 
-		/// <summary>
-		/// LiteratiConnectRelationshipUp
-		/// </summary>
 		public static LifeRecordItem LiteratiConnectRelationshipUp => Instance[(short)1080];
 
-		/// <summary>
-		/// LiteratiConnectRelationshipDown
-		/// </summary>
 		public static LifeRecordItem LiteratiConnectRelationshipDown => Instance[(short)1081];
 
-		/// <summary>
-		/// LiteratiConnectRelationshipUpTaiwu
-		/// </summary>
 		public static LifeRecordItem LiteratiConnectRelationshipUpTaiwu => Instance[(short)1082];
 
-		/// <summary>
-		/// LiteratiConnectRelationshipDownTaiwu
-		/// </summary>
 		public static LifeRecordItem LiteratiConnectRelationshipDownTaiwu => Instance[(short)1083];
 
-		/// <summary>
-		/// LiteratiBeConnectedRelationshipUp
-		/// </summary>
 		public static LifeRecordItem LiteratiBeConnectedRelationshipUp => Instance[(short)1084];
 
-		/// <summary>
-		/// LiteratiBeConnectedRelationshipDown
-		/// </summary>
 		public static LifeRecordItem LiteratiBeConnectedRelationshipDown => Instance[(short)1085];
 
-		/// <summary>
-		/// GuardingSwordTombXiangshuInfectUp
-		/// </summary>
 		public static LifeRecordItem GuardingSwordTombXiangshuInfectUp => Instance[(short)1086];
 
-		/// <summary>
-		/// GuardingSwordTombSucceed
-		/// </summary>
 		public static LifeRecordItem GuardingSwordTombSucceed => Instance[(short)1087];
 
-		/// <summary>
-		/// VillagerMakeEnemy
-		/// </summary>
 		public static LifeRecordItem VillagerMakeEnemy => Instance[(short)1088];
 
-		/// <summary>
-		/// VillagerConfessLoveSucceed
-		/// </summary>
 		public static LifeRecordItem VillagerConfessLoveSucceed => Instance[(short)1089];
 
-		/// <summary>
-		/// OrderProduct
-		/// </summary>
 		public static LifeRecordItem OrderProduct => Instance[(short)1090];
 
-		/// <summary>
-		/// ReceiveProduct
-		/// </summary>
 		public static LifeRecordItem ReceiveProduct => Instance[(short)1091];
 
-		/// <summary>
-		/// BeOrderProduct
-		/// </summary>
 		public static LifeRecordItem BeOrderProduct => Instance[(short)1092];
 
-		/// <summary>
-		/// BeReceiveProduct
-		/// </summary>
 		public static LifeRecordItem BeReceiveProduct => Instance[(short)1093];
 
-		/// <summary>
-		/// CaptureOrder
-		/// </summary>
 		public static LifeRecordItem CaptureOrder => Instance[(short)1094];
 
-		/// <summary>
-		/// BeCaptureOrder
-		/// </summary>
 		public static LifeRecordItem BeCaptureOrder => Instance[(short)1095];
 
-		/// <summary>
-		/// CaptureOrderIntermediator
-		/// </summary>
 		public static LifeRecordItem CaptureOrderIntermediator => Instance[(short)1096];
 
-		/// <summary>
-		/// OrderProductForOthers
-		/// </summary>
 		public static LifeRecordItem OrderProductForOthers => Instance[(short)1097];
 
-		/// <summary>
-		/// BeOrderProductForOthers
-		/// </summary>
 		public static LifeRecordItem BeOrderProductForOthers => Instance[(short)1098];
 
-		/// <summary>
-		/// DeliveredOrderProduct
-		/// </summary>
 		public static LifeRecordItem DeliveredOrderProduct => Instance[(short)1099];
 
-		/// <summary>
-		/// BeDeliveredOrderProduct
-		/// </summary>
 		public static LifeRecordItem BeDeliveredOrderProduct => Instance[(short)1100];
 
-		/// <summary>
-		/// AcquisitionDiscard
-		/// </summary>
 		public static LifeRecordItem AcquisitionDiscard => Instance[(short)1101];
 
-		/// <summary>
-		/// ShopBuildingBaseDevelopLifeSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingBaseDevelopLifeSkill => Instance[(short)1102];
 
-		/// <summary>
-		/// ShopBuildingBaseDevelopCombatSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingBaseDevelopCombatSkill => Instance[(short)1103];
 
-		/// <summary>
-		/// ShopBuildingPersonalityDevelopLifeSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingPersonalityDevelopLifeSkill => Instance[(short)1104];
 
-		/// <summary>
-		/// ShopBuildingPersonalityDevelopCombatSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingPersonalityDevelopCombatSkill => Instance[(short)1105];
 
-		/// <summary>
-		/// ShopBuildingLeaderDevelopLifeSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingLeaderDevelopLifeSkill => Instance[(short)1106];
 
-		/// <summary>
-		/// ShopBuildingLeaderDevelopCombatSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingLeaderDevelopCombatSkill => Instance[(short)1107];
 
-		/// <summary>
-		/// ShopBuildingLearnLifeSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingLearnLifeSkill => Instance[(short)1108];
 
-		/// <summary>
-		/// ShopBuildingLearnCombatSkill
-		/// </summary>
 		public static LifeRecordItem ShopBuildingLearnCombatSkill => Instance[(short)1109];
 
-		/// <summary>
-		/// JoinTaiwuVillageAfterTaiwuVillageStoneClaimed
-		/// </summary>
 		public static LifeRecordItem JoinTaiwuVillageAfterTaiwuVillageStoneClaimed => Instance[(short)1110];
 
-		/// <summary>
-		/// TaiwuVillagerFinishedReading
-		/// </summary>
 		public static LifeRecordItem TaiwuVillagerFinishedReading => Instance[(short)1111];
 
-		/// <summary>
-		/// TaiwuVillagerSalaryReceived
-		/// </summary>
 		public static LifeRecordItem TaiwuVillagerSalaryReceived => Instance[(short)1112];
 
-		/// <summary>
-		/// ChangeGradeDrop
-		/// </summary>
 		public static LifeRecordItem ChangeGradeDrop => Instance[(short)1113];
 
-		/// <summary>
-		/// FarmerCollectMaterial
-		/// </summary>
 		public static LifeRecordItem FarmerCollectMaterial => Instance[(short)1114];
 
-		/// <summary>
-		/// JoinOrganization
-		/// </summary>
 		public static LifeRecordItem JoinOrganization => Instance[(short)1115];
 
-		/// <summary>
-		/// BreakAwayOrganization
-		/// </summary>
 		public static LifeRecordItem BreakAwayOrganization => Instance[(short)1116];
 
-		/// <summary>
-		/// ChangeOrganization
-		/// </summary>
 		public static LifeRecordItem ChangeOrganization => Instance[(short)1117];
 
-		/// <summary>
-		/// VillagerFavorabilityUp
-		/// </summary>
 		public static LifeRecordItem VillagerFavorabilityUp => Instance[(short)1118];
 
-		/// <summary>
-		/// VillagerFavorabilityDown
-		/// </summary>
 		public static LifeRecordItem VillagerFavorabilityDown => Instance[(short)1119];
 
-		/// <summary>
-		/// VillagerFavorabilityUpPerson
-		/// </summary>
 		public static LifeRecordItem VillagerFavorabilityUpPerson => Instance[(short)1120];
 
-		/// <summary>
-		/// VillagerFavorabilityDownPersonB
-		/// </summary>
 		public static LifeRecordItem VillagerFavorabilityDownPerson => Instance[(short)1121];
 
-		/// <summary>
-		/// TeamUpProtection
-		/// </summary>
 		public static LifeRecordItem TeamUpProtection => Instance[(short)1122];
 
-		/// <summary>
-		/// TeamUpRescue
-		/// </summary>
 		public static LifeRecordItem TeamUpRescue => Instance[(short)1123];
 
-		/// <summary>
-		/// TeamUpMourn
-		/// </summary>
 		public static LifeRecordItem TeamUpMourn => Instance[(short)1124];
 
-		/// <summary>
-		/// TeamUpVisitFriendOrFamily
-		/// </summary>
 		public static LifeRecordItem TeamUpVisitFriendOrFamily => Instance[(short)1125];
 
-		/// <summary>
-		/// TeamUpFindTreasure
-		/// </summary>
 		public static LifeRecordItem TeamUpFindTreasure => Instance[(short)1126];
 
-		/// <summary>
-		/// TeamUpFindSpecialMaterial
-		/// </summary>
 		public static LifeRecordItem TeamUpFindSpecialMaterial => Instance[(short)1127];
 
-		/// <summary>
-		/// TeamUpTakeRevenge
-		/// </summary>
 		public static LifeRecordItem TeamUpTakeRevenge => Instance[(short)1128];
 
-		/// <summary>
-		/// TeamUpContestForLegendaryBook
-		/// </summary>
 		public static LifeRecordItem TeamUpContestForLegendaryBook => Instance[(short)1129];
 
-		/// <summary>
-		/// TeamUpEscapeFromPrison
-		/// </summary>
 		public static LifeRecordItem TeamUpEscapeFromPrison => Instance[(short)1130];
 
-		/// <summary>
-		/// TeamUpSeekAsylum
-		/// </summary>
 		public static LifeRecordItem TeamUpSeekAsylum => Instance[(short)1131];
 
-		/// <summary>
-		/// GetInfected
-		/// </summary>
 		public static LifeRecordItem GetInfected => Instance[(short)1132];
 
-		/// <summary>
-		/// DieByInfected
-		/// </summary>
 		public static LifeRecordItem DieByInfected => Instance[(short)1133];
 
-		/// <summary>
-		/// InheritLegacy
-		/// </summary>
 		public static LifeRecordItem InheritLegacy => Instance[(short)1134];
 
-		/// <summary>
-		/// 低心情宾客服用了物品
-		/// </summary>
 		public static LifeRecordItem Banquet_1 => Instance[(short)1135];
 
-		/// <summary>
-		/// 低心情宾客服用了喜爱的物品
-		/// </summary>
 		public static LifeRecordItem Banquet_2 => Instance[(short)1136];
 
-		/// <summary>
-		/// 低心情宾客在宴席上服用了物品
-		/// </summary>
 		public static LifeRecordItem Banquet_3 => Instance[(short)1137];
 
-		/// <summary>
-		/// 低心情宾客在宴席上服用了喜爱的物品
-		/// </summary>
 		public static LifeRecordItem Banquet_4 => Instance[(short)1138];
 
-		/// <summary>
-		/// 宾客服用了物品
-		/// </summary>
 		public static LifeRecordItem Banquet_5 => Instance[(short)1139];
 
-		/// <summary>
-		/// 宾客服用了喜爱的物品
-		/// </summary>
 		public static LifeRecordItem Banquet_6 => Instance[(short)1140];
 
-		/// <summary>
-		/// 宾客在宴席上服用了物品
-		/// </summary>
 		public static LifeRecordItem Banquet_7 => Instance[(short)1141];
 
-		/// <summary>
-		/// 宾客在宴席上服用了喜爱的物品
-		/// </summary>
 		public static LifeRecordItem Banquet_8 => Instance[(short)1142];
 
-		/// <summary>
-		/// 宴堂没有可食用物品
-		/// </summary>
 		public static LifeRecordItem Banquet_9 => Instance[(short)1143];
 
-		/// <summary>
-		/// 宾客已经吃不下
-		/// </summary>
 		public static LifeRecordItem Banquet_10 => Instance[(short)1144];
 
-		/// <summary>
-		/// SectMainStoryWudangInjured
-		/// </summary>
 		public static LifeRecordItem SectMainStoryWudangInjured => Instance[(short)1145];
 
-		/// <summary>
-		/// ExtendDarkAshTime
-		/// </summary>
 		public static LifeRecordItem ExtendDarkAshTime => Instance[(short)1146];
 
-		/// <summary>
-		/// AdoreInMarriage
-		/// </summary>
 		public static LifeRecordItem AdoreInMarriage => Instance[(short)1147];
 
-		/// <summary>
-		/// SameAreaDistantMarriage
-		/// </summary>
 		public static LifeRecordItem SameAreaDistantMarriage => Instance[(short)1148];
 
-		/// <summary>
-		/// SameStateDistantMarriage
-		/// </summary>
 		public static LifeRecordItem SameStateDistantMarriage => Instance[(short)1149];
 
-		/// <summary>
-		/// DifferentStateDistantMarriage
-		/// </summary>
 		public static LifeRecordItem DifferentStateDistantMarriage => Instance[(short)1150];
 
-		/// <summary>
-		/// GoToOuterWorlds
-		/// </summary>
 		public static LifeRecordItem GoToOuterWorlds => Instance[(short)1151];
 
-		/// <summary>
-		/// BackFromOuterWorlds
-		/// </summary>
 		public static LifeRecordItem BackFromOuterWorlds => Instance[(short)1152];
 
-		/// <summary>
-		/// SectMainStoryXuehouJixiDrainNeili
-		/// </summary>
 		public static LifeRecordItem SectMainStoryXuehouJixiDrainNeili => Instance[(short)1153];
 
-		/// <summary>
-		/// SectMainStoryXuehouTaiwuTransferFiveElements
-		/// </summary>
 		public static LifeRecordItem SectMainStoryXuehouTaiwuTransferFiveElements => Instance[(short)1154];
 
-		/// <summary>
-		/// AlertnessUpBySecretInformation
-		/// </summary>
 		public static LifeRecordItem AlertnessUpBySecretInformation => Instance[(short)1155];
 
-		/// <summary>
-		/// AlertnessDownBySecretInformation
-		/// </summary>
 		public static LifeRecordItem AlertnessDownBySecretInformation => Instance[(short)1156];
 
-		/// <summary>
-		/// ConsummateLevelIncreased
-		/// </summary>
 		public static LifeRecordItem ConsummateLevelIncreased => Instance[(short)1157];
 
-		/// <summary>
-		/// CombatSkillQualificationGrowthGuaranteed
-		/// </summary>
 		public static LifeRecordItem CombatSkillQualificationGrowthGuaranteed => Instance[(short)1158];
 
-		/// <summary>
-		/// CombatSkillQualificationGrowthPersonality
-		/// </summary>
 		public static LifeRecordItem CombatSkillQualificationGrowthPersonality => Instance[(short)1159];
 
-		/// <summary>
-		/// CombatSkillQualificationGrowthMentor
-		/// </summary>
 		public static LifeRecordItem CombatSkillQualificationGrowthMentor => Instance[(short)1160];
 
-		/// <summary>
-		/// LifeSkillQualificationGrowthGuaranteed
-		/// </summary>
 		public static LifeRecordItem LifeSkillQualificationGrowthGuaranteed => Instance[(short)1161];
 
-		/// <summary>
-		/// LifeSkillQualificationGrowthPersonality
-		/// </summary>
 		public static LifeRecordItem LifeSkillQualificationGrowthPersonality => Instance[(short)1162];
 
-		/// <summary>
-		/// LifeSkillQualificationGrowthMentor
-		/// </summary>
 		public static LifeRecordItem LifeSkillQualificationGrowthMentor => Instance[(short)1163];
 
-		/// <summary>
-		/// IdentityActionHelpCivilians
-		/// </summary>
 		public static LifeRecordItem IdentityActionHelpCivilians => Instance[(short)1164];
 
-		/// <summary>
-		/// IdentityActionHelpCiviliansTarget
-		/// </summary>
 		public static LifeRecordItem IdentityActionHelpCiviliansTarget => Instance[(short)1205];
 
-		/// <summary>
-		/// IdentityActionFightHeretics
-		/// </summary>
 		public static LifeRecordItem IdentityActionFightHeretics => Instance[(short)1165];
 
-		/// <summary>
-		/// IdentityActionFightHereticsTarget
-		/// </summary>
 		public static LifeRecordItem IdentityActionFightHereticsTarget => Instance[(short)1206];
 
-		/// <summary>
-		/// IdentityActionShaolin0
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin0 => Instance[(short)1166];
 
-		/// <summary>
-		/// IdentityActionShaolin0Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin0Target => Instance[(short)1207];
 
-		/// <summary>
-		/// IdentityActionShaolin1
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin1 => Instance[(short)1167];
 
-		/// <summary>
-		/// IdentityActionShaolin2
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin2 => Instance[(short)1168];
 
-		/// <summary>
-		/// IdentityActionShaolin2Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin2Target => Instance[(short)1208];
 
-		/// <summary>
-		/// IdentityActionShaolin3
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin3 => Instance[(short)1169];
 
-		/// <summary>
-		/// IdentityActionShaolin4
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin4 => Instance[(short)1170];
 
-		/// <summary>
-		/// IdentityActionShaolin4Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin4Target => Instance[(short)1375];
 
-		/// <summary>
-		/// IdentityActionShaolin5
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin5 => Instance[(short)1171];
 
-		/// <summary>
-		/// IdentityActionShaolin5Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin5Target => Instance[(short)1376];
 
-		/// <summary>
-		/// IdentityActionShaolin6
-		/// </summary>
 		public static LifeRecordItem IdentityActionShaolin6 => Instance[(short)1172];
 
-		/// <summary>
-		/// IdentityActionEmei0
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei0 => Instance[(short)1173];
 
-		/// <summary>
-		/// IdentityActionEmei0Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei0Target => Instance[(short)1380];
 
-		/// <summary>
-		/// IdentityActionEmei1
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei1 => Instance[(short)1174];
 
-		/// <summary>
-		/// IdentityActionEmei4
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei4 => Instance[(short)1175];
 
-		/// <summary>
-		/// IdentityActionEmei4Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei4Target => Instance[(short)1209];
 
-		/// <summary>
-		/// IdentityActionEmei5
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei5 => Instance[(short)1176];
 
-		/// <summary>
-		/// IdentityActionEmei6
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei6 => Instance[(short)1177];
 
-		/// <summary>
-		/// IdentityActionEmei6Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionEmei6Target => Instance[(short)1210];
 
-		/// <summary>
-		/// IdentityActionBaihua0
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua0 => Instance[(short)1178];
 
-		/// <summary>
-		/// IdentityActionBaihua0Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua0Target => Instance[(short)1211];
 
-		/// <summary>
-		/// IdentityActionBaihua1
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua1 => Instance[(short)1179];
 
-		/// <summary>
-		/// IdentityActionBaihua2
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua2 => Instance[(short)1180];
 
-		/// <summary>
-		/// IdentityActionBaihua3
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua3 => Instance[(short)1181];
 
-		/// <summary>
-		/// IdentityActionBaihua3Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua3Target => Instance[(short)1212];
 
-		/// <summary>
-		/// IdentityActionBaihua5
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua5 => Instance[(short)1183];
 
-		/// <summary>
-		/// IdentityActionBaihua5Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionBaihua5Target => Instance[(short)1213];
 
-		/// <summary>
-		/// IdentityActionWudang5
-		/// </summary>
 		public static LifeRecordItem IdentityActionWudang5 => Instance[(short)1188];
 
-		/// <summary>
-		/// IdentityActionYuanshan1
-		/// </summary>
 		public static LifeRecordItem IdentityActionYuanshan1 => Instance[(short)1191];
 
-		/// <summary>
-		/// IdentityActionYuanshan1Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionYuanshan1Target => Instance[(short)1218];
 
-		/// <summary>
-		/// IdentityActionYuanshan2
-		/// </summary>
-		public static LifeRecordItem IdentityActionYuanshan2 => Instance[(short)1192];
-
-		/// <summary>
-		/// IdentityActionYuanshan3
-		/// </summary>
 		public static LifeRecordItem IdentityActionYuanshan3 => Instance[(short)1193];
 
-		/// <summary>
-		/// IdentityActionYuanshan3Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionYuanshan3Target => Instance[(short)1219];
 
-		/// <summary>
-		/// IdentityActionYuanshan5
-		/// </summary>
-		public static LifeRecordItem IdentityActionYuanshan5 => Instance[(short)1194];
-
-		/// <summary>
-		/// IdentityActionYuanshan5Target
-		/// </summary>
-		public static LifeRecordItem IdentityActionYuanshan5Target => Instance[(short)1220];
-
-		/// <summary>
-		/// IdentityActionYuanshan6
-		/// </summary>
 		public static LifeRecordItem IdentityActionYuanshan6 => Instance[(short)1195];
 
-		/// <summary>
-		/// IdentityActionYuanshan6Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionYuanshan6Target => Instance[(short)1384];
 
-		/// <summary>
-		/// IdentityActionShixiang0
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang0 => Instance[(short)1196];
 
-		/// <summary>
-		/// IdentityActionShixiang1
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang1 => Instance[(short)1197];
 
-		/// <summary>
-		/// IdentityActionShixiang2
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang2 => Instance[(short)1198];
 
-		/// <summary>
-		/// IdentityActionShixiang3
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang3 => Instance[(short)1199];
 
-		/// <summary>
-		/// IdentityActionShixiang4
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang4 => Instance[(short)1200];
 
-		/// <summary>
-		/// IdentityActionShixiang5
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang5 => Instance[(short)1201];
 
-		/// <summary>
-		/// IdentityActionShixiang5Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang5Target => Instance[(short)1221];
 
-		/// <summary>
-		/// IdentityActionShixiang6
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang6 => Instance[(short)1202];
 
-		/// <summary>
-		/// IdentityActionShixiang6Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang6Target => Instance[(short)1222];
 
-		/// <summary>
-		/// IdentityActionShixiang7
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang7 => Instance[(short)1203];
 
-		/// <summary>
-		/// IdentityActionShixiang7Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang7Target => Instance[(short)1223];
 
-		/// <summary>
-		/// IdentityActionShixiang8
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang8 => Instance[(short)1204];
 
-		/// <summary>
-		/// IdentityActionShixiang8Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionShixiang8Target => Instance[(short)1224];
 
-		/// <summary>
-		/// IdentityActionRanShan1
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan1 => Instance[(short)1225];
 
-		/// <summary>
-		/// IdentityActionRanShan1Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan1Target => Instance[(short)1226];
 
-		/// <summary>
-		/// IdentityActionRanShan2
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan2 => Instance[(short)1227];
 
-		/// <summary>
-		/// IdentityActionRanShan2Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan2Target => Instance[(short)1228];
 
-		/// <summary>
-		/// IdentityActionRanShan3
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan3 => Instance[(short)1229];
 
-		/// <summary>
-		/// IdentityActionRanShan4
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan4 => Instance[(short)1230];
 
-		/// <summary>
-		/// IdentityActionRanShan5
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan5 => Instance[(short)1231];
 
-		/// <summary>
-		/// IdentityActionRanShan6
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan6 => Instance[(short)1232];
 
-		/// <summary>
-		/// IdentityActionRanShan7
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan7 => Instance[(short)1233];
 
-		/// <summary>
-		/// IdentityActionRanShan7Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan7Target => Instance[(short)1234];
 
-		/// <summary>
-		/// IdentityActionRanShan8
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan8 => Instance[(short)1235];
 
-		/// <summary>
-		/// IdentityActionRanShan8Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionRanShan8Target => Instance[(short)1236];
 
-		/// <summary>
-		/// IdentityActionXuanNv1
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv1 => Instance[(short)1237];
 
-		/// <summary>
-		/// IdentityActionXuanNv1Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv1Target => Instance[(short)1238];
 
-		/// <summary>
-		/// IdentityActionXuanNv2
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv2 => Instance[(short)1239];
 
-		/// <summary>
-		/// IdentityActionXuanNv2Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv2Target => Instance[(short)1388];
 
-		/// <summary>
-		/// IdentityActionXuanNv3
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv3 => Instance[(short)1240];
 
-		/// <summary>
-		/// IdentityActionXuanNv3Audience
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv3Audience => Instance[(short)1389];
 
-		/// <summary>
-		/// IdentityActionXuanNv4
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv4 => Instance[(short)1241];
 
-		/// <summary>
-		/// IdentityActionXuanNv4Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv4Target => Instance[(short)1242];
 
-		/// <summary>
-		/// IdentityActionXuanNv5
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv5 => Instance[(short)1243];
 
-		/// <summary>
-		/// IdentityActionXuanNv5Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv5Target => Instance[(short)1244];
 
-		/// <summary>
-		/// IdentityActionXuanNv6
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv6 => Instance[(short)1245];
 
-		/// <summary>
-		/// IdentityActionXuanNv7
-		/// </summary>
 		public static LifeRecordItem IdentityActionXuanNv7 => Instance[(short)1246];
 
-		/// <summary>
-		/// IdentityActionZhuJian1
-		/// </summary>
 		public static LifeRecordItem IdentityActionZhuJian1 => Instance[(short)1247];
 
-		/// <summary>
-		/// IdentityActionZhuJian1Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionZhuJian1Target => Instance[(short)1248];
 
-		/// <summary>
-		/// IdentityActionZhuJian2
-		/// </summary>
 		public static LifeRecordItem IdentityActionZhuJian2 => Instance[(short)1249];
 
-		/// <summary>
-		/// IdentityActionZhuJian3
-		/// </summary>
 		public static LifeRecordItem IdentityActionZhuJian3 => Instance[(short)1250];
 
-		/// <summary>
-		/// IdentityActionZhuJian4
-		/// </summary>
 		public static LifeRecordItem IdentityActionZhuJian4 => Instance[(short)1251];
 
-		/// <summary>
-		/// IdentityActionZhuJian5
-		/// </summary>
 		public static LifeRecordItem IdentityActionZhuJian5 => Instance[(short)1252];
 
-		/// <summary>
-		/// IdentityActionZhuJian8
-		/// </summary>
 		public static LifeRecordItem IdentityActionZhuJian8 => Instance[(short)1377];
 
-		/// <summary>
-		/// IdentityActionKongSang1
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang1 => Instance[(short)1256];
 
-		/// <summary>
-		/// IdentityActionKongSang1Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang1Target => Instance[(short)1257];
 
-		/// <summary>
-		/// IdentityActionKongSang2
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang2 => Instance[(short)1258];
 
-		/// <summary>
-		/// IdentityActionKongSang3
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang3 => Instance[(short)1259];
 
-		/// <summary>
-		/// IdentityActionKongSang4A
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang4A => Instance[(short)1260];
 
-		/// <summary>
-		/// IdentityActionKongSang4B
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang4B => Instance[(short)1261];
 
-		/// <summary>
-		/// IdentityActionKongSang5A
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang5A => Instance[(short)1262];
 
-		/// <summary>
-		/// IdentityActionKongSang5B
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang5B => Instance[(short)1263];
 
-		/// <summary>
-		/// IdentityActionKongSang6
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang6 => Instance[(short)1264];
 
-		/// <summary>
-		/// IdentityActionKongSang6Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang6Target => Instance[(short)1265];
 
-		/// <summary>
-		/// IdentityActionKongSang7
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang7 => Instance[(short)1266];
 
-		/// <summary>
-		/// IdentityActionKongSang7Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang7Target => Instance[(short)1267];
 
-		/// <summary>
-		/// IdentityActionKongSang8A
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang8A => Instance[(short)1268];
 
-		/// <summary>
-		/// IdentityActionKongSang8ATarget
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang8ATarget => Instance[(short)1390];
 
-		/// <summary>
-		/// IdentityActionKongSang8B
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang8B => Instance[(short)1269];
 
-		/// <summary>
-		/// IdentityActionKongSang9A
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang9A => Instance[(short)1270];
 
-		/// <summary>
-		/// IdentityActionKongSang9ATarget
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang9ATarget => Instance[(short)1391];
 
-		/// <summary>
-		/// IdentityActionKongSang9B
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang9B => Instance[(short)1271];
 
-		/// <summary>
-		/// IdentityActionKongSang10
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang10 => Instance[(short)1272];
 
-		/// <summary>
-		/// IdentityActionKongSang10Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionKongSang10Target => Instance[(short)1273];
 
-		/// <summary>
-		/// IdentityActionJingGangZong2Steal
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong2Steal => Instance[(short)1277];
 
-		/// <summary>
-		/// IdentityActionJingGangZong2Rob
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong2Rob => Instance[(short)1278];
 
-		/// <summary>
-		/// IdentityActionJingGangZong2Scam
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong2Scam => Instance[(short)1279];
 
-		/// <summary>
-		/// IdentityActionJingGangZong3
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong3 => Instance[(short)1280];
 
-		/// <summary>
-		/// IdentityActionJingGangZong4
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong4 => Instance[(short)1281];
 
-		/// <summary>
-		/// IdentityActionJingGangZong4Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong4Target => Instance[(short)1282];
 
-		/// <summary>
-		/// IdentityActionJingGangZong5
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong5 => Instance[(short)1283];
 
-		/// <summary>
-		/// IdentityActionJingGangZong5Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong5Target => Instance[(short)1284];
 
-		/// <summary>
-		/// IdentityActionJingGangZong6
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong6 => Instance[(short)1285];
 
-		/// <summary>
-		/// IdentityActionJingGangZong6Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong6Target => Instance[(short)1286];
 
-		/// <summary>
-		/// IdentityActionJingGangZong7
-		/// </summary>
 		public static LifeRecordItem IdentityActionJingGangZong7 => Instance[(short)1287];
 
-		/// <summary>
-		/// IdentityActionWuXian1
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian1 => Instance[(short)1288];
 
-		/// <summary>
-		/// IdentityActionWuXian2
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian2 => Instance[(short)1289];
 
-		/// <summary>
-		/// IdentityActionWuXian2Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian2Target => Instance[(short)1290];
 
-		/// <summary>
-		/// IdentityActionWuXian3
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian3 => Instance[(short)1291];
 
-		/// <summary>
-		/// IdentityActionWuXian3Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian3Target => Instance[(short)1292];
 
-		/// <summary>
-		/// IdentityActionWuXian4
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian4 => Instance[(short)1293];
 
-		/// <summary>
-		/// IdentityActionWuXian4Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian4Target => Instance[(short)1378];
 
-		/// <summary>
-		/// IdentityActionWuXian5
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian5 => Instance[(short)1294];
 
-		/// <summary>
-		/// IdentityActionWuXian6
-		/// </summary>
 		public static LifeRecordItem IdentityActionWuXian6 => Instance[(short)1295];
 
-		/// <summary>
-		/// IdentityActionJieQing1A
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing1A => Instance[(short)1296];
 
-		/// <summary>
-		/// IdentityActionJieQing1B
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing1B => Instance[(short)1297];
 
-		/// <summary>
-		/// IdentityActionJieQing2
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing2 => Instance[(short)1298];
 
-		/// <summary>
-		/// IdentityActionJieQing2Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing2Target => Instance[(short)1392];
 
-		/// <summary>
-		/// IdentityActionJieQing3
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing3 => Instance[(short)1299];
 
-		/// <summary>
-		/// IdentityActionJieQing4
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing4 => Instance[(short)1300];
 
-		/// <summary>
-		/// IdentityActionJieQing5
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing5 => Instance[(short)1301];
 
-		/// <summary>
-		/// IdentityActionJieQing6A
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing6A => Instance[(short)1302];
 
-		/// <summary>
-		/// IdentityActionJieQing6B
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing6B => Instance[(short)1303];
 
-		/// <summary>
-		/// IdentityActionJieQing7
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing7 => Instance[(short)1304];
 
-		/// <summary>
-		/// IdentityActionJieQing7Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing7Target => Instance[(short)1381];
 
-		/// <summary>
-		/// IdentityActionJieQing8
-		/// </summary>
 		public static LifeRecordItem IdentityActionJieQing8 => Instance[(short)1305];
 
-		/// <summary>
-		/// IdentityActionFuLong2
-		/// </summary>
 		public static LifeRecordItem IdentityActionFuLong2 => Instance[(short)1308];
 
-		/// <summary>
-		/// IdentityActionFuLong6
-		/// </summary>
 		public static LifeRecordItem IdentityActionFuLong6 => Instance[(short)1314];
 
-		/// <summary>
-		/// IdentityActionXveHou2StealA
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou2StealA => Instance[(short)1317];
 
-		/// <summary>
-		/// IdentityActionXveHou2StealB
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou2StealB => Instance[(short)1318];
 
-		/// <summary>
-		/// IdentityActionXveHou3RobA
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou3RobA => Instance[(short)1319];
 
-		/// <summary>
-		/// IdentityActionXveHou3RobB
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou3RobB => Instance[(short)1320];
 
-		/// <summary>
-		/// IdentityActionXveHou4ScamA
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou4ScamA => Instance[(short)1321];
 
-		/// <summary>
-		/// IdentityActionXveHou4ScamB
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou4ScamB => Instance[(short)1322];
 
-		/// <summary>
-		/// IdentityActionXveHou5
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou5 => Instance[(short)1323];
 
-		/// <summary>
-		/// IdentityActionXveHou6
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou6 => Instance[(short)1324];
 
-		/// <summary>
-		/// IdentityActionXveHou7
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou7 => Instance[(short)1325];
 
-		/// <summary>
-		/// IdentityActionXveHou7Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionXveHou7Target => Instance[(short)1326];
 
-		/// <summary>
-		/// IdentityActionChengZhen1
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen1 => Instance[(short)1330];
 
-		/// <summary>
-		/// IdentityActionChengZhen1TargetA
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen1TargetA => Instance[(short)1331];
 
-		/// <summary>
-		/// IdentityActionChengZhen1TargetB
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen1TargetB => Instance[(short)1332];
 
-		/// <summary>
-		/// IdentityActionChengZhen2
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen2 => Instance[(short)1333];
 
-		/// <summary>
-		/// IdentityActionChengZhen2TargetA
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen2TargetA => Instance[(short)1334];
 
-		/// <summary>
-		/// IdentityActionChengZhen2TargetB
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen2TargetB => Instance[(short)1335];
 
-		/// <summary>
-		/// IdentityActionChengZhen3
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen3 => Instance[(short)1336];
 
-		/// <summary>
-		/// IdentityActionChengZhen4
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen4 => Instance[(short)1337];
 
-		/// <summary>
-		/// IdentityActionChengZhen5
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen5 => Instance[(short)1338];
 
-		/// <summary>
-		/// IdentityActionChengZhen6
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen6 => Instance[(short)1339];
 
-		/// <summary>
-		/// IdentityActionChengZhen6Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen6Target => Instance[(short)1340];
 
-		/// <summary>
-		/// IdentityActionChengZhen7
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen7 => Instance[(short)1341];
 
-		/// <summary>
-		/// IdentityActionChengZhen7Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen7Target => Instance[(short)1342];
 
-		/// <summary>
-		/// IdentityActionChengZhen8
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen8 => Instance[(short)1343];
 
-		/// <summary>
-		/// IdentityActionChengZhen8Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen8Target => Instance[(short)1344];
 
-		/// <summary>
-		/// IdentityActionChengZhen9
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen9 => Instance[(short)1345];
 
-		/// <summary>
-		/// IdentityActionChengZhen9Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen9Target => Instance[(short)1346];
 
-		/// <summary>
-		/// IdentityActionChengZhen10
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen10 => Instance[(short)1347];
 
-		/// <summary>
-		/// IdentityActionChengZhen10TargetA
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen10TargetA => Instance[(short)1348];
 
-		/// <summary>
-		/// IdentityActionChengZhen10TargetB
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen10TargetB => Instance[(short)1349];
 
-		/// <summary>
-		/// IdentityActionChengZhen11
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen11 => Instance[(short)1350];
 
-		/// <summary>
-		/// IdentityActionChengZhen12
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen12 => Instance[(short)1351];
 
-		/// <summary>
-		/// IdentityActionChengZhen13
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen13 => Instance[(short)1352];
 
-		/// <summary>
-		/// IdentityActionChengZhen13Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen13Target => Instance[(short)1353];
 
-		/// <summary>
-		/// IdentityActionChengZhen14
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen14 => Instance[(short)1354];
 
-		/// <summary>
-		/// IdentityActionChengZhen15
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen15 => Instance[(short)1355];
 
-		/// <summary>
-		/// IdentityActionChengZhen16
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen16 => Instance[(short)1356];
 
-		/// <summary>
-		/// IdentityActionChengZhen16Target
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen16Target => Instance[(short)1357];
 
-		/// <summary>
-		/// IdentityActionChengZhen17
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen17 => Instance[(short)1358];
 
-		/// <summary>
-		/// IdentityActionChengZhen18
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen18 => Instance[(short)1359];
 
-		/// <summary>
-		/// IdentityActionChengZhen19
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen19 => Instance[(short)1360];
 
-		/// <summary>
-		/// IdentityActionChengZhen20
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen20 => Instance[(short)1361];
 
-		/// <summary>
-		/// IdentityActionChengZhen21
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen21 => Instance[(short)1362];
 
-		/// <summary>
-		/// IdentityActionChengZhen22
-		/// </summary>
 		public static LifeRecordItem IdentityActionChengZhen22 => Instance[(short)1363];
 
-		/// <summary>
-		/// BehaviorTypeAction1
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction1 => Instance[(short)1364];
 
-		/// <summary>
-		/// BehaviorTypeAction1Target
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction1Target => Instance[(short)1402];
 
-		/// <summary>
-		/// BehaviorTypeAction2
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction2 => Instance[(short)1365];
 
-		/// <summary>
-		/// BehaviorTypeAction2Target
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction2Target => Instance[(short)1403];
 
-		/// <summary>
-		/// BehaviorTypeAction3
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction3 => Instance[(short)1366];
 
-		/// <summary>
-		/// BehaviorTypeAction4
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction4 => Instance[(short)1367];
 
-		/// <summary>
-		/// BehaviorTypeAction5
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction5 => Instance[(short)1368];
 
-		/// <summary>
-		/// BehaviorTypeAction6
-		/// </summary>
 		public static LifeRecordItem BehaviorTypeAction6 => Instance[(short)1369];
 
-		/// <summary>
-		/// CherryPickResource
-		/// </summary>
 		public static LifeRecordItem CherryPickResource => Instance[(short)1370];
 
-		/// <summary>
-		/// BuddistMeditate
-		/// </summary>
-		public static LifeRecordItem BuddistMeditate => Instance[(short)1371];
-
-		/// <summary>
-		/// TaoistMeditate
-		/// </summary>
-		public static LifeRecordItem TaoistMeditate => Instance[(short)1372];
-
-		/// <summary>
-		/// IdentityActionCaptureCricket1
-		/// </summary>
 		public static LifeRecordItem IdentityActionCaptureCricket1 => Instance[(short)1373];
 
-		/// <summary>
-		/// DLCLoongRidingEffectBaxia02
-		/// </summary>
 		public static LifeRecordItem DLCLoongRidingEffectBaxia02 => Instance[(short)1374];
 
-		/// <summary>
-		/// WeiQiBadOther
-		/// </summary>
 		public static LifeRecordItem WeiQiBadOther => Instance[(short)1386];
 
-		/// <summary>
-		/// WeiQiGoodOther
-		/// </summary>
 		public static LifeRecordItem WeiQiGoodOther => Instance[(short)1387];
 
-		/// <summary>
-		/// TwelveImmortalsEffectAdored
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectAdored => Instance[(short)1393];
 
-		/// <summary>
-		/// TwelveImmortalsEffectEnemy
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectEnemy => Instance[(short)1394];
 
-		/// <summary>
-		/// TwelveImmortalsEffectSuxia
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectSuxia => Instance[(short)1395];
 
-		/// <summary>
-		/// TwelveImmortalsEffectBecomeMoTian
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectBecomeMoTian => Instance[(short)1396];
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackByMoTian
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectBeAttackByMoTian => Instance[(short)1397];
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackByJiao
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectBeAttackByJiao => Instance[(short)1398];
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackByMirror
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectBeAttackByMirror => Instance[(short)1399];
 
-		/// <summary>
-		/// TwelveImmortalsEffectBeAttackBySkeletonDemon
-		/// </summary>
 		public static LifeRecordItem TwelveImmortalsEffectBeAttackBySkeletonDemon => Instance[(short)1400];
 
-		/// <summary>
-		/// DemonHeirRevenge
-		/// </summary>
 		public static LifeRecordItem DemonHeirRevenge => Instance[(short)1404];
 
-		/// <summary>
-		/// DefeatDemonHeir
-		/// </summary>
 		public static LifeRecordItem DefeatDemonHeir => Instance[(short)1405];
 
-		/// <summary>
-		/// BeDefetedByDemonHeir
-		/// </summary>
 		public static LifeRecordItem BeDefetedByDemonHeir => Instance[(short)1406];
 
-		/// <summary>
-		/// DemonHeirDefeatTaiwu
-		/// </summary>
 		public static LifeRecordItem DemonHeirDefeatTaiwu => Instance[(short)1407];
 
-		/// <summary>
-		/// DemonHeirRebirth1
-		/// </summary>
 		public static LifeRecordItem DemonHeirRebirth1 => Instance[(short)1408];
 
-		/// <summary>
-		/// DemonHeirRebirth2
-		/// </summary>
 		public static LifeRecordItem DemonHeirRebirth2 => Instance[(short)1409];
 
-		/// <summary>
-		/// DLCCricketTurnToCricketForm
-		/// </summary>
 		public static LifeRecordItem DLCCricketTurnToCricketForm => Instance[(short)1410];
 
-		/// <summary>
-		/// DLCCricketRetranmogrifyToHuman
-		/// </summary>
 		public static LifeRecordItem DLCCricketRetranmogrifyToHuman => Instance[(short)1411];
 
-		/// <summary>
-		/// DecideToParticipateNewAdventure
-		/// </summary>
 		public static LifeRecordItem DecideToParticipateNewAdventure => Instance[(short)1412];
 
-		/// <summary>
-		/// LeaveNewAdventure
-		/// </summary>
 		public static LifeRecordItem LeaveNewAdventure => Instance[(short)1413];
+
+		public static LifeRecordItem DLCChickenRetranmogrifyToHuman => Instance[(short)1415];
+
+		public static LifeRecordItem DLCChickenTurnToChickenForm => Instance[(short)1416];
+
+		public static LifeRecordItem DLCLoongRetranmogrifyToHuman => Instance[(short)1417];
+
+		public static LifeRecordItem DLCLoongTurnToLoongForm => Instance[(short)1418];
+
+		public static LifeRecordItem XiangshuSkill0NPCEvilCase => Instance[(short)1419];
+
+		public static LifeRecordItem XiangshuSkill0TaiwuEvilCase => Instance[(short)1420];
+
+		public static LifeRecordItem XiangshuSkill1NPCEvilCorruption => Instance[(short)1421];
+
+		public static LifeRecordItem XiangshuSkill1TaiwuEvilCorruption => Instance[(short)1422];
+
+		public static LifeRecordItem XiangshuSkill0NPCItemDropCase => Instance[(short)1423];
+
+		public static LifeRecordItem XiangshuSkill2TaiwuItemDropCase => Instance[(short)1424];
+
+		public static LifeRecordItem RequestHealInjurySucceedByRes => Instance[(short)1425];
+
+		public static LifeRecordItem RequestDetoxPoisonSucceedByRes => Instance[(short)1426];
+
+		public static LifeRecordItem RequestHealthSucceedByRes => Instance[(short)1427];
+
+		public static LifeRecordItem RequestHealDisorderOfQiSucceedByRes => Instance[(short)1428];
+
+		public static LifeRecordItem RequestHealInjuryFailByRes => Instance[(short)1429];
+
+		public static LifeRecordItem RequestDetoxPoisonFailByRes => Instance[(short)1430];
+
+		public static LifeRecordItem RequestHealthFailByRes => Instance[(short)1431];
+
+		public static LifeRecordItem RequestHealDisorderOfQiFailByRes => Instance[(short)1432];
+
+		public static LifeRecordItem AcceptRequestHealInjuryByRes => Instance[(short)1433];
+
+		public static LifeRecordItem AcceptRequestDetoxPoisonByRes => Instance[(short)1434];
+
+		public static LifeRecordItem AcceptRequestHealthByRes => Instance[(short)1435];
+
+		public static LifeRecordItem AcceptRequestHealDisorderOfQiByRes => Instance[(short)1436];
+
+		public static LifeRecordItem RefuseRequestHealInjuryByRes => Instance[(short)1437];
+
+		public static LifeRecordItem RefuseRequestDetoxPoisonByRes => Instance[(short)1438];
+
+		public static LifeRecordItem RefuseRequestHealthByRes => Instance[(short)1439];
+
+		public static LifeRecordItem RefuseRequestHealDisorderOfQiByRes => Instance[(short)1440];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LifeRecord Instance = new LifeRecord();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "RelatedIds", "TemplateId" };
@@ -15365,12 +7148,42 @@ public class LifeRecord : ConfigData<LifeRecordItem, short>
 		_dataArray.Add(new LifeRecordItem(1412, LocalStringManager.GetConfig("LifeRecord_language", "Name_1412"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1412"), new string[6] { "Location", "Adventure", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
 		_dataArray.Add(new LifeRecordItem(1413, LocalStringManager.GetConfig("LifeRecord_language", "Name_1413"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1413"), new string[6] { "Location", "Adventure", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
 		_dataArray.Add(new LifeRecordItem(1414, LocalStringManager.GetConfig("LifeRecord_language", "Name_1414"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1414"), new string[6] { "OrgGrade", "OrgGrade", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 70, -1, ELifeRecordDisplayType.Relation));
+		_dataArray.Add(new LifeRecordItem(1415, LocalStringManager.GetConfig("LifeRecord_language", "Name_1415"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1415"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Invalid, -1, -1, ELifeRecordDisplayType.NoCategory));
+		_dataArray.Add(new LifeRecordItem(1416, LocalStringManager.GetConfig("LifeRecord_language", "Name_1416"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1416"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Invalid, -1, -1, ELifeRecordDisplayType.NoCategory));
+		_dataArray.Add(new LifeRecordItem(1417, LocalStringManager.GetConfig("LifeRecord_language", "Name_1417"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1417"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Invalid, -1, -1, ELifeRecordDisplayType.NoCategory));
+		_dataArray.Add(new LifeRecordItem(1418, LocalStringManager.GetConfig("LifeRecord_language", "Name_1418"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1418"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Invalid, -1, -1, ELifeRecordDisplayType.NoCategory));
+		_dataArray.Add(new LifeRecordItem(1419, LocalStringManager.GetConfig("LifeRecord_language", "Name_1419"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1419"), new string[6] { "Character", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 30, -1, ELifeRecordDisplayType.Negative));
+		_dataArray.Add(new LifeRecordItem(1420, LocalStringManager.GetConfig("LifeRecord_language", "Name_1420"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1420"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Crime));
+		_dataArray.Add(new LifeRecordItem(1421, LocalStringManager.GetConfig("LifeRecord_language", "Name_1421"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1421"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 40, -1, ELifeRecordDisplayType.Negative));
+		_dataArray.Add(new LifeRecordItem(1422, LocalStringManager.GetConfig("LifeRecord_language", "Name_1422"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1422"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Crime));
+		_dataArray.Add(new LifeRecordItem(1423, LocalStringManager.GetConfig("LifeRecord_language", "Name_1423"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1423"), new string[6] { "Location", "Character", "Item", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 40, -1, ELifeRecordDisplayType.Negative));
+		_dataArray.Add(new LifeRecordItem(1424, LocalStringManager.GetConfig("LifeRecord_language", "Name_1424"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1424"), new string[6] { "Location", "", "", "", "", "" }, isSourceRecord: true, new List<short>(), -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Crime));
+		_dataArray.Add(new LifeRecordItem(1425, LocalStringManager.GetConfig("LifeRecord_language", "Name_1425"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1425"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1433 }, -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1426, LocalStringManager.GetConfig("LifeRecord_language", "Name_1426"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1426"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1434 }, -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1427, LocalStringManager.GetConfig("LifeRecord_language", "Name_1427"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1427"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1435 }, -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1428, LocalStringManager.GetConfig("LifeRecord_language", "Name_1428"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1428"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1436 }, -30000, ELifeRecordScoreType.Normal, 60, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1429, LocalStringManager.GetConfig("LifeRecord_language", "Name_1429"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1429"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1437 }, -30000, ELifeRecordScoreType.Normal, 40, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1430, LocalStringManager.GetConfig("LifeRecord_language", "Name_1430"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1430"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1438 }, -30000, ELifeRecordScoreType.Normal, 40, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1431, LocalStringManager.GetConfig("LifeRecord_language", "Name_1431"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1431"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1439 }, -30000, ELifeRecordScoreType.Normal, 40, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1432, LocalStringManager.GetConfig("LifeRecord_language", "Name_1432"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1432"), new string[6] { "Character", "Location", "Integer", "Resource", "", "" }, isSourceRecord: true, new List<short> { 1440 }, -30000, ELifeRecordScoreType.Normal, 40, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1433, LocalStringManager.GetConfig("LifeRecord_language", "Name_1433"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1433"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1425 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1434, LocalStringManager.GetConfig("LifeRecord_language", "Name_1434"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1434"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1426 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1435, LocalStringManager.GetConfig("LifeRecord_language", "Name_1435"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1435"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1427 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1436, LocalStringManager.GetConfig("LifeRecord_language", "Name_1436"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1436"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1428 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1437, LocalStringManager.GetConfig("LifeRecord_language", "Name_1437"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1437"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1429 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1438, LocalStringManager.GetConfig("LifeRecord_language", "Name_1438"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1438"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1430 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+		_dataArray.Add(new LifeRecordItem(1439, LocalStringManager.GetConfig("LifeRecord_language", "Name_1439"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1439"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1431 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
+	}
+
+	private void CreateItems24()
+	{
+		_dataArray.Add(new LifeRecordItem(1440, LocalStringManager.GetConfig("LifeRecord_language", "Name_1440"), LocalStringManager.GetConfig("LifeRecord_language", "Desc_1440"), new string[6] { "", "", "", "", "", "" }, isSourceRecord: false, new List<short> { 1432 }, -30000, ELifeRecordScoreType.Normal, 50, -1, ELifeRecordDisplayType.Normal));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<LifeRecordItem>(1415);
+		_dataArray = new List<LifeRecordItem>(1441);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();
@@ -15395,5 +7208,6 @@ public class LifeRecord : ConfigData<LifeRecordItem, short>
 		CreateItems21();
 		CreateItems22();
 		CreateItems23();
+		CreateItems24();
 	}
 }

@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 蛟池日志数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class JiaoPoolRecord : ISerializableGameData
 {
@@ -29,46 +26,24 @@ public class JiaoPoolRecord : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[7] { "RecordTemplateId", "Jiao1Id", "Jiao2Id", "TemplateId", "PropertyChangeVolume", "NurturanceTemplateId", "Date" };
 	}
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short RecordTemplateId;
 
-	/// <summary>
-	/// 蛟1的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Jiao1Id;
 
-	/// <summary>
-	/// 蛟2的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Jiao2Id;
 
-	/// <summary>
-	/// 养育方针Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short NurturanceTemplateId;
 
-	/// <summary>
-	/// 模板Id
-	/// 属性、物品Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 变化量
-	/// </summary>
 	[SerializableGameDataField]
 	public int PropertyChangeVolume;
 
-	/// <summary>
-	/// 变化量
-	/// </summary>
 	[SerializableGameDataField]
 	public int Date;
 
@@ -136,13 +111,11 @@ public class JiaoPoolRecord : ISerializableGameData
 		PropertyChangeVolume = value;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 24;
@@ -153,7 +126,6 @@ public class JiaoPoolRecord : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 7;
@@ -179,7 +151,6 @@ public class JiaoPoolRecord : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

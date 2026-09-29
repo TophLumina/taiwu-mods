@@ -4,50 +4,32 @@ using Config;
 
 namespace GameData.Domains.Taiwu.Profession;
 
-/// <summary>
-/// 志向相关公式的实现
-/// </summary>
 public static class ProfessionFormulaImpl
 {
-	/// <summary>
-	/// 无参数计算公式
-	/// </summary>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int Calculate(int templateId)
 	{
 		return ProfessionFormula.Instance[templateId].Calculate();
 	}
 
-	/// <summary>
-	/// 1参数计算公式
-	/// </summary>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int Calculate(int templateId, int arg0)
 	{
 		return ProfessionFormula.Instance[templateId].Calculate(arg0);
 	}
 
-	/// <summary>
-	/// 2参数计算公式
-	/// </summary>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int Calculate(int templateId, int arg0, int arg1)
 	{
 		return ProfessionFormula.Instance[templateId].Calculate(arg0, arg1);
 	}
 
-	/// <summary>
-	/// 3参数计算公式
-	/// </summary>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int Calculate(int templateId, int arg0, int arg1, int arg2)
 	{
 		return ProfessionFormula.Instance[templateId].Calculate(arg0, arg1, arg2);
 	}
 
-	/// <summary>
-	/// 无参数计算公式
-	/// </summary>
 	public static int Calculate(this ProfessionFormulaItem formulaCfg)
 	{
 		if (formulaCfg.Type == EProfessionFormulaType.SeniorityGainFormula9)
@@ -59,9 +41,6 @@ public static class ProfessionFormulaImpl
 		throw ThrowArgCountException(formulaCfg, 0);
 	}
 
-	/// <summary>
-	/// 1参数计算公式
-	/// </summary>
 	public static int Calculate(this ProfessionFormulaItem formulaCfg, int arg0)
 	{
 		return formulaCfg.ClampValue(formulaCfg.Type switch
@@ -78,9 +57,6 @@ public static class ProfessionFormulaImpl
 		});
 	}
 
-	/// <summary>
-	/// 2参数计算公式
-	/// </summary>
 	public static int Calculate(this ProfessionFormulaItem formulaCfg, int arg0, int arg1)
 	{
 		return formulaCfg.ClampValue(formulaCfg.Type switch
@@ -92,9 +68,6 @@ public static class ProfessionFormulaImpl
 		});
 	}
 
-	/// <summary>
-	/// 3参数计算公式
-	/// </summary>
 	public static int Calculate(this ProfessionFormulaItem formulaCfg, int arg0, int arg1, int arg2)
 	{
 		if (formulaCfg.Type == EProfessionFormulaType.SeniorityGainFormula5)

@@ -7,71 +7,32 @@ namespace Config;
 [Serializable]
 public class QiDisorderEffect : ConfigData<QiDisorderEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 顺畅
-		/// </summary>
 		public const sbyte Smooth = 0;
 
-		/// <summary>
-		/// 滞碍
-		/// </summary>
 		public const sbyte Sluggish = 1;
 
-		/// <summary>
-		/// 逆阻
-		/// </summary>
 		public const sbyte Blocked = 2;
 
-		/// <summary>
-		/// 紊乱
-		/// </summary>
 		public const sbyte Disordered = 3;
 
-		/// <summary>
-		/// 绝断
-		/// </summary>
 		public const sbyte Cutoff = 4;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 顺畅
-		/// </summary>
 		public static QiDisorderEffectItem Smooth => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 滞碍
-		/// </summary>
 		public static QiDisorderEffectItem Sluggish => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 逆阻
-		/// </summary>
 		public static QiDisorderEffectItem Blocked => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 紊乱
-		/// </summary>
 		public static QiDisorderEffectItem Disordered => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 绝断
-		/// </summary>
 		public static QiDisorderEffectItem Cutoff => Instance[(sbyte)4];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static QiDisorderEffect Instance = new QiDisorderEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "ThresholdMin", "ThresholdMax", "HealthRecovery", "BreakCostHealth", "InjuredRate", "NeiliCostInCombat", "PoisonResistChange" };

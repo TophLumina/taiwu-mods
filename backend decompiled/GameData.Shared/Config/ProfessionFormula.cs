@@ -7,1161 +7,472 @@ namespace Config;
 [Serializable]
 public class ProfessionFormula : ConfigData<ProfessionFormulaItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 资历获取_山人_1
-		/// </summary>
 		public const int AddSenioritySavage1 = 0;
 
-		/// <summary>
-		/// 资历获取_山人_2
-		/// </summary>
 		public const int AddSenioritySavage2 = 1;
 
-		/// <summary>
-		/// 资历获取_山人_3
-		/// </summary>
 		public const int AddSenioritySavage3 = 2;
 
-		/// <summary>
-		/// 资历获取_山人_4
-		/// </summary>
 		public const int AddSenioritySavage4 = 3;
 
-		/// <summary>
-		/// 资历获取_山人_5
-		/// </summary>
 		public const int AddSenioritySavage5 = 4;
 
-		/// <summary>
-		/// 资历获取_山人_6
-		/// </summary>
 		public const int AddSenioritySavage6 = 5;
 
-		/// <summary>
-		/// 资历获取_山人_7
-		/// </summary>
 		public const int AddSenioritySavage7 = 6;
 
-		/// <summary>
-		/// 资历获取_山人_8
-		/// </summary>
 		public const int AddSenioritySavage8 = 7;
 
-		/// <summary>
-		/// 资历获取_猎户_1
-		/// </summary>
 		public const int AddSeniorityHunter1 = 8;
 
-		/// <summary>
-		/// 资历获取_猎户_2
-		/// </summary>
 		public const int AddSeniorityHunter2 = 9;
 
-		/// <summary>
-		/// 资历获取_猎户_3
-		/// </summary>
 		public const int AddSeniorityHunter3 = 10;
 
-		/// <summary>
-		/// 资历获取_猎户_4
-		/// </summary>
 		public const int AddSeniorityHunter4 = 11;
 
-		/// <summary>
-		/// 资历获取_猎户_5
-		/// </summary>
 		public const int AddSeniorityHunter5 = 12;
 
-		/// <summary>
-		/// 资历获取_猎户_6
-		/// </summary>
 		public const int AddSeniorityHunter6 = 13;
 
-		/// <summary>
-		/// 资历获取_猎户_7
-		/// </summary>
 		public const int AddSeniorityHunter7 = 14;
 
-		/// <summary>
-		/// 资历获取_猎户_8
-		/// </summary>
 		public const int AddSeniorityHunter8 = 15;
 
-		/// <summary>
-		/// 资历获取_匠人_1
-		/// </summary>
 		public const int AddSeniorityCraft1 = 16;
 
-		/// <summary>
-		/// 资历获取_匠人_2
-		/// </summary>
 		public const int AddSeniorityCraft2 = 17;
 
-		/// <summary>
-		/// 资历获取_匠人_3
-		/// </summary>
 		public const int AddSeniorityCraft3 = 18;
 
-		/// <summary>
-		/// 资历获取_匠人_4
-		/// </summary>
 		public const int AddSeniorityCraft4 = 19;
 
-		/// <summary>
-		/// 资历获取_匠人_5
-		/// </summary>
 		public const int AddSeniorityCraft5 = 20;
 
-		/// <summary>
-		/// 资历获取_匠人_6_1
-		/// </summary>
 		public const int AddSeniorityCraft61 = 21;
 
-		/// <summary>
-		/// 资历获取_匠人_6_2
-		/// </summary>
 		public const int AddSeniorityCraft62 = 22;
 
-		/// <summary>
-		/// 资历获取_武师_1
-		/// </summary>
 		public const int AddSeniorityMartialArtist1 = 23;
 
-		/// <summary>
-		/// 资历获取_武师_2
-		/// </summary>
 		public const int AddSeniorityMartialArtist2 = 24;
 
-		/// <summary>
-		/// 资历获取_武师_3
-		/// </summary>
 		public const int AddSeniorityMartialArtist3 = 25;
 
-		/// <summary>
-		/// 资历获取_武师_4
-		/// </summary>
 		public const int AddSeniorityMartialArtist4 = 26;
 
-		/// <summary>
-		/// 资历获取_武师_5
-		/// </summary>
 		public const int AddSeniorityMartialArtist5 = 27;
 
-		/// <summary>
-		/// 资历获取_武师_6
-		/// </summary>
 		public const int AddSeniorityMartialArtist6 = 28;
 
-		/// <summary>
-		/// 资历获取_武师_7
-		/// </summary>
 		public const int AddSeniorityMartialArtist7 = 29;
 
-		/// <summary>
-		/// 资历获取_武师_练功
-		/// </summary>
 		public const int AddSeniorityMartialArtist8 = 30;
 
-		/// <summary>
-		/// 资历获取_才俊_1
-		/// </summary>
 		public const int AddSeniorityLiterati1 = 31;
 
-		/// <summary>
-		/// 资历获取_才俊_2
-		/// </summary>
 		public const int AddSeniorityLiterati2 = 32;
 
-		/// <summary>
-		/// 资历获取_才俊_3
-		/// </summary>
 		public const int AddSeniorityLiterati3 = 33;
 
-		/// <summary>
-		/// 资历获取_才俊_4
-		/// </summary>
 		public const int AddSeniorityLiterati4 = 34;
 
-		/// <summary>
-		/// 资历获取_才俊_5
-		/// </summary>
 		public const int AddSeniorityLiterati5 = 35;
 
-		/// <summary>
-		/// 资历获取_才俊_6
-		/// </summary>
 		public const int AddSeniorityLiterati6 = 36;
 
-		/// <summary>
-		/// 资历获取_道长_1
-		/// </summary>
 		public const int AddSeniorityTaoistMonk1 = 37;
 
-		/// <summary>
-		/// 资历获取_道长_2
-		/// </summary>
 		public const int AddSeniorityTaoistMonk2 = 38;
 
-		/// <summary>
-		/// 资历获取_道长_3
-		/// </summary>
 		public const int AddSeniorityTaoistMonk3 = 39;
 
-		/// <summary>
-		/// 资历获取_道长_4
-		/// </summary>
 		public const int AddSeniorityTaoistMonk4 = 40;
 
-		/// <summary>
-		/// 资历获取_道长_5
-		/// </summary>
 		public const int AddSeniorityTaoistMonk5 = 41;
 
-		/// <summary>
-		/// 资历获取_道长_6
-		/// </summary>
 		public const int AddSeniorityTaoistMonk6 = 42;
 
-		/// <summary>
-		/// 资历获取_高僧_1
-		/// </summary>
 		public const int AddSeniorityBuddhistMonk1 = 43;
 
-		/// <summary>
-		/// 资历获取_高僧_2
-		/// </summary>
 		public const int AddSeniorityBuddhistMonk2 = 44;
 
-		/// <summary>
-		/// 资历获取_高僧_3
-		/// </summary>
 		public const int AddSeniorityBuddhistMonk3 = 45;
 
-		/// <summary>
-		/// 资历获取_高僧_4
-		/// </summary>
 		public const int AddSeniorityBuddhistMonk4 = 46;
 
-		/// <summary>
-		/// 资历获取_高僧_5
-		/// </summary>
 		public const int AddSeniorityBuddhistMonk5 = 47;
 
-		/// <summary>
-		/// 资历获取_高僧_6
-		/// </summary>
 		public const int AddSeniorityBuddhistMonk6 = 48;
 
-		/// <summary>
-		/// 资历获取_豪客_1
-		/// </summary>
 		public const int AddSeniorityWineTaster1 = 49;
 
-		/// <summary>
-		/// 资历获取_豪客_2
-		/// </summary>
 		public const int AddSeniorityWineTaster2 = 50;
 
-		/// <summary>
-		/// 资历获取_豪客_3
-		/// </summary>
 		public const int AddSeniorityWineTaster3 = 51;
 
-		/// <summary>
-		/// 资历获取_豪客_4
-		/// </summary>
 		public const int AddSeniorityWineTaster4 = 52;
 
-		/// <summary>
-		/// 资历获取_豪客_5
-		/// </summary>
 		public const int AddSeniorityWineTaster5 = 53;
 
-		/// <summary>
-		/// 资历获取_豪客_6
-		/// </summary>
 		public const int AddSeniorityWineTaster6 = 54;
 
-		/// <summary>
-		/// 资历获取_豪客_7
-		/// </summary>
 		public const int AddSeniorityWineTaster7 = 55;
 
-		/// <summary>
-		/// 资历获取_名门_1
-		/// </summary>
 		public const int AddSeniorityAristocrat1 = 56;
 
-		/// <summary>
-		/// 资历获取_名门_2
-		/// </summary>
 		public const int AddSeniorityAristocrat2 = 57;
 
-		/// <summary>
-		/// 资历获取_名门_3
-		/// </summary>
 		public const int AddSeniorityAristocrat3 = 58;
 
-		/// <summary>
-		/// 资历获取_名门_4
-		/// </summary>
 		public const int AddSeniorityAristocrat4 = 59;
 
-		/// <summary>
-		/// 资历获取_名门_5
-		/// </summary>
 		public const int AddSeniorityAristocrat5 = 60;
 
-		/// <summary>
-		/// 资历获取_乞丐_1
-		/// </summary>
 		public const int AddSeniorityBeggar1 = 61;
 
-		/// <summary>
-		/// 资历获取_乞丐_2
-		/// </summary>
 		public const int AddSeniorityBeggar2 = 62;
 
-		/// <summary>
-		/// 资历获取_乞丐_3
-		/// </summary>
 		public const int AddSeniorityBeggar3 = 63;
 
-		/// <summary>
-		/// 资历获取_乞丐_4
-		/// </summary>
 		public const int AddSeniorityBeggar4 = 64;
 
-		/// <summary>
-		/// 资历获取_乞丐_5
-		/// </summary>
 		public const int AddSeniorityBeggar5 = 65;
 
-		/// <summary>
-		/// 资历获取_平民_1
-		/// </summary>
 		public const int AddSeniorityCivilian1 = 66;
 
-		/// <summary>
-		/// 资历获取_平民_2
-		/// </summary>
 		public const int AddSeniorityCivilian2 = 67;
 
-		/// <summary>
-		/// 资历获取_平民_3
-		/// </summary>
 		public const int AddSeniorityCivilian3 = 68;
 
-		/// <summary>
-		/// 资历获取_平民_4
-		/// </summary>
 		public const int AddSeniorityCivilian4 = 69;
 
-		/// <summary>
-		/// 资历获取_平民_5
-		/// </summary>
 		public const int AddSeniorityCivilian5 = 70;
 
-		/// <summary>
-		/// 资历获取_平民_6
-		/// </summary>
 		public const int AddSeniorityCivilian6 = 71;
 
-		/// <summary>
-		/// 资历获取_旅人_1
-		/// </summary>
 		public const int AddSeniorityTraveler1 = 72;
 
-		/// <summary>
-		/// 资历获取_旅人_2
-		/// </summary>
 		public const int AddSeniorityTraveler2 = 73;
 
-		/// <summary>
-		/// 资历获取_旅人_3
-		/// </summary>
 		public const int AddSeniorityTraveler3 = 74;
 
-		/// <summary>
-		/// 资历获取_旅人_4
-		/// </summary>
 		public const int AddSeniorityTraveler4 = 75;
 
-		/// <summary>
-		/// 资历获取_旅人_5
-		/// </summary>
 		public const int AddSeniorityTraveler5 = 76;
 
-		/// <summary>
-		/// 资历获取_旅人_6
-		/// </summary>
 		public const int AddSeniorityTraveler6 = 77;
 
-		/// <summary>
-		/// 资历获取_云游僧_1
-		/// </summary>
 		public const int AddSeniorityTravelingBuddhistMonk1 = 78;
 
-		/// <summary>
-		/// 资历获取_云游僧_2
-		/// </summary>
 		public const int AddSeniorityTravelingBuddhistMonk2 = 79;
 
-		/// <summary>
-		/// 资历获取_云游僧_3
-		/// </summary>
 		public const int AddSeniorityTravelingBuddhistMonk3 = 80;
 
-		/// <summary>
-		/// 资历获取_云游僧_4
-		/// </summary>
 		public const int AddSeniorityTravelingBuddhistMonk4 = 81;
 
-		/// <summary>
-		/// 资历获取_云游僧_5
-		/// </summary>
 		public const int AddSeniorityTravelingBuddhistMonk5 = 82;
 
-		/// <summary>
-		/// 资历获取_大夫_1
-		/// </summary>
 		public const int AddSeniorityDoctor1 = 83;
 
-		/// <summary>
-		/// 资历获取_大夫_2
-		/// </summary>
 		public const int AddSeniorityDoctor2 = 84;
 
-		/// <summary>
-		/// 资历获取_大夫_3
-		/// </summary>
 		public const int AddSeniorityDoctor3 = 85;
 
-		/// <summary>
-		/// 资历获取_大夫_4
-		/// </summary>
 		public const int AddSeniorityDoctor4 = 86;
 
-		/// <summary>
-		/// 资历获取_大夫_5
-		/// </summary>
 		public const int AddSeniorityDoctor5 = 87;
 
-		/// <summary>
-		/// 资历获取_大夫_6
-		/// </summary>
 		public const int AddSeniorityDoctor6 = 88;
 
-		/// <summary>
-		/// 资历获取_大夫_7
-		/// </summary>
 		public const int AddSeniorityDoctor7 = 89;
 
-		/// <summary>
-		/// 资历获取_大夫_8
-		/// </summary>
 		public const int AddSeniorityDoctor8 = 90;
 
-		/// <summary>
-		/// 资历获取_云游道_1
-		/// </summary>
 		public const int AddSeniorityTravelingTaoistMonk1 = 91;
 
-		/// <summary>
-		/// 资历获取_云游道_2
-		/// </summary>
 		public const int AddSeniorityTravelingTaoistMonk2 = 92;
 
-		/// <summary>
-		/// 资历获取_云游道_3
-		/// </summary>
 		public const int AddSeniorityTravelingTaoistMonk3 = 93;
 
-		/// <summary>
-		/// 资历获取_云游道_4
-		/// </summary>
 		public const int AddSeniorityTravelingTaoistMonk4 = 94;
 
-		/// <summary>
-		/// 资历获取_云游道_5
-		/// </summary>
 		public const int AddSeniorityTravelingTaoistMonk5 = 95;
 
-		/// <summary>
-		/// 资历获取_富商_1
-		/// </summary>
 		public const int AddSeniorityCapitalist1 = 96;
 
-		/// <summary>
-		/// 资历获取_富商_2
-		/// </summary>
 		public const int AddSeniorityCapitalist2 = 97;
 
-		/// <summary>
-		/// 资历获取_富商_3
-		/// </summary>
 		public const int AddSeniorityCapitalist3 = 98;
 
-		/// <summary>
-		/// 资历获取_富商_4
-		/// </summary>
 		public const int AddSeniorityCapitalist4 = 99;
 
-		/// <summary>
-		/// 资历获取_贵客_1
-		/// </summary>
 		public const int AddSeniorityTeaTaster1 = 100;
 
-		/// <summary>
-		/// 资历获取_贵客_2
-		/// </summary>
 		public const int AddSeniorityTeaTaster2 = 101;
 
-		/// <summary>
-		/// 资历获取_贵客_3
-		/// </summary>
 		public const int AddSeniorityTeaTaster3 = 102;
 
-		/// <summary>
-		/// 资历获取_贵客_4
-		/// </summary>
 		public const int AddSeniorityTeaTaster4 = 103;
 
-		/// <summary>
-		/// 资历获取_贵客_5
-		/// </summary>
 		public const int AddSeniorityTeaTaster5 = 104;
 
-		/// <summary>
-		/// 资历获取_贵客_6
-		/// </summary>
 		public const int AddSeniorityTeaTaster6 = 105;
 
-		/// <summary>
-		/// 资历获取_贵客_7
-		/// </summary>
 		public const int AddSeniorityTeaTaster7 = 106;
 
-		/// <summary>
-		/// 资历获取_王公_1
-		/// </summary>
 		public const int AddSeniorityDuke1 = 107;
 
-		/// <summary>
-		/// 资历获取_王公_2
-		/// </summary>
 		public const int AddSeniorityDuke2 = 108;
 
-		/// <summary>
-		/// 资历获取_王公_3
-		/// </summary>
 		public const int AddSeniorityDuke3 = 109;
 
-		/// <summary>
-		/// 资历获取_王公_4
-		/// </summary>
 		public const int AddSeniorityDuke4 = 110;
 
-		/// <summary>
-		/// 资历获取_王公_5
-		/// </summary>
 		public const int AddSeniorityDuke5 = 111;
 
-		/// <summary>
-		/// 资历获取_王公_6
-		/// </summary>
 		public const int AddSeniorityDuke6 = 112;
 
-		/// <summary>
-		/// 技能效果_王公_获取蛐蛐模拟次数
-		/// </summary>
 		public const int SkillDukeGetCricketSimulateCount = 113;
+
+		public const int AddSeniorityXiangshu1 = 114;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 资历获取_山人_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage1 => Instance[0];
 
-		/// <summary>
-		/// 资历获取_山人_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage2 => Instance[1];
 
-		/// <summary>
-		/// 资历获取_山人_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage3 => Instance[2];
 
-		/// <summary>
-		/// 资历获取_山人_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage4 => Instance[3];
 
-		/// <summary>
-		/// 资历获取_山人_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage5 => Instance[4];
 
-		/// <summary>
-		/// 资历获取_山人_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage6 => Instance[5];
 
-		/// <summary>
-		/// 资历获取_山人_7
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage7 => Instance[6];
 
-		/// <summary>
-		/// 资历获取_山人_8
-		/// </summary>
 		public static ProfessionFormulaItem AddSenioritySavage8 => Instance[7];
 
-		/// <summary>
-		/// 资历获取_猎户_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter1 => Instance[8];
 
-		/// <summary>
-		/// 资历获取_猎户_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter2 => Instance[9];
 
-		/// <summary>
-		/// 资历获取_猎户_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter3 => Instance[10];
 
-		/// <summary>
-		/// 资历获取_猎户_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter4 => Instance[11];
 
-		/// <summary>
-		/// 资历获取_猎户_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter5 => Instance[12];
 
-		/// <summary>
-		/// 资历获取_猎户_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter6 => Instance[13];
 
-		/// <summary>
-		/// 资历获取_猎户_7
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter7 => Instance[14];
 
-		/// <summary>
-		/// 资历获取_猎户_8
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityHunter8 => Instance[15];
 
-		/// <summary>
-		/// 资历获取_匠人_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCraft1 => Instance[16];
 
-		/// <summary>
-		/// 资历获取_匠人_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCraft2 => Instance[17];
 
-		/// <summary>
-		/// 资历获取_匠人_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCraft3 => Instance[18];
 
-		/// <summary>
-		/// 资历获取_匠人_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCraft4 => Instance[19];
 
-		/// <summary>
-		/// 资历获取_匠人_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCraft5 => Instance[20];
 
-		/// <summary>
-		/// 资历获取_匠人_6_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCraft61 => Instance[21];
 
-		/// <summary>
-		/// 资历获取_匠人_6_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCraft62 => Instance[22];
 
-		/// <summary>
-		/// 资历获取_武师_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist1 => Instance[23];
 
-		/// <summary>
-		/// 资历获取_武师_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist2 => Instance[24];
 
-		/// <summary>
-		/// 资历获取_武师_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist3 => Instance[25];
 
-		/// <summary>
-		/// 资历获取_武师_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist4 => Instance[26];
 
-		/// <summary>
-		/// 资历获取_武师_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist5 => Instance[27];
 
-		/// <summary>
-		/// 资历获取_武师_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist6 => Instance[28];
 
-		/// <summary>
-		/// 资历获取_武师_7
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist7 => Instance[29];
 
-		/// <summary>
-		/// 资历获取_武师_练功
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityMartialArtist8 => Instance[30];
 
-		/// <summary>
-		/// 资历获取_才俊_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityLiterati1 => Instance[31];
 
-		/// <summary>
-		/// 资历获取_才俊_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityLiterati2 => Instance[32];
 
-		/// <summary>
-		/// 资历获取_才俊_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityLiterati3 => Instance[33];
 
-		/// <summary>
-		/// 资历获取_才俊_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityLiterati4 => Instance[34];
 
-		/// <summary>
-		/// 资历获取_才俊_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityLiterati5 => Instance[35];
 
-		/// <summary>
-		/// 资历获取_才俊_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityLiterati6 => Instance[36];
 
-		/// <summary>
-		/// 资历获取_道长_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTaoistMonk1 => Instance[37];
 
-		/// <summary>
-		/// 资历获取_道长_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTaoistMonk2 => Instance[38];
 
-		/// <summary>
-		/// 资历获取_道长_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTaoistMonk3 => Instance[39];
 
-		/// <summary>
-		/// 资历获取_道长_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTaoistMonk4 => Instance[40];
 
-		/// <summary>
-		/// 资历获取_道长_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTaoistMonk5 => Instance[41];
 
-		/// <summary>
-		/// 资历获取_道长_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTaoistMonk6 => Instance[42];
 
-		/// <summary>
-		/// 资历获取_高僧_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBuddhistMonk1 => Instance[43];
 
-		/// <summary>
-		/// 资历获取_高僧_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBuddhistMonk2 => Instance[44];
 
-		/// <summary>
-		/// 资历获取_高僧_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBuddhistMonk3 => Instance[45];
 
-		/// <summary>
-		/// 资历获取_高僧_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBuddhistMonk4 => Instance[46];
 
-		/// <summary>
-		/// 资历获取_高僧_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBuddhistMonk5 => Instance[47];
 
-		/// <summary>
-		/// 资历获取_高僧_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBuddhistMonk6 => Instance[48];
 
-		/// <summary>
-		/// 资历获取_豪客_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityWineTaster1 => Instance[49];
 
-		/// <summary>
-		/// 资历获取_豪客_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityWineTaster2 => Instance[50];
 
-		/// <summary>
-		/// 资历获取_豪客_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityWineTaster3 => Instance[51];
 
-		/// <summary>
-		/// 资历获取_豪客_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityWineTaster4 => Instance[52];
 
-		/// <summary>
-		/// 资历获取_豪客_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityWineTaster5 => Instance[53];
 
-		/// <summary>
-		/// 资历获取_豪客_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityWineTaster6 => Instance[54];
 
-		/// <summary>
-		/// 资历获取_豪客_7
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityWineTaster7 => Instance[55];
 
-		/// <summary>
-		/// 资历获取_名门_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityAristocrat1 => Instance[56];
 
-		/// <summary>
-		/// 资历获取_名门_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityAristocrat2 => Instance[57];
 
-		/// <summary>
-		/// 资历获取_名门_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityAristocrat3 => Instance[58];
 
-		/// <summary>
-		/// 资历获取_名门_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityAristocrat4 => Instance[59];
 
-		/// <summary>
-		/// 资历获取_名门_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityAristocrat5 => Instance[60];
 
-		/// <summary>
-		/// 资历获取_乞丐_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBeggar1 => Instance[61];
 
-		/// <summary>
-		/// 资历获取_乞丐_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBeggar2 => Instance[62];
 
-		/// <summary>
-		/// 资历获取_乞丐_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBeggar3 => Instance[63];
 
-		/// <summary>
-		/// 资历获取_乞丐_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBeggar4 => Instance[64];
 
-		/// <summary>
-		/// 资历获取_乞丐_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityBeggar5 => Instance[65];
 
-		/// <summary>
-		/// 资历获取_平民_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCivilian1 => Instance[66];
 
-		/// <summary>
-		/// 资历获取_平民_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCivilian2 => Instance[67];
 
-		/// <summary>
-		/// 资历获取_平民_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCivilian3 => Instance[68];
 
-		/// <summary>
-		/// 资历获取_平民_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCivilian4 => Instance[69];
 
-		/// <summary>
-		/// 资历获取_平民_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCivilian5 => Instance[70];
 
-		/// <summary>
-		/// 资历获取_平民_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCivilian6 => Instance[71];
 
-		/// <summary>
-		/// 资历获取_旅人_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTraveler1 => Instance[72];
 
-		/// <summary>
-		/// 资历获取_旅人_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTraveler2 => Instance[73];
 
-		/// <summary>
-		/// 资历获取_旅人_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTraveler3 => Instance[74];
 
-		/// <summary>
-		/// 资历获取_旅人_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTraveler4 => Instance[75];
 
-		/// <summary>
-		/// 资历获取_旅人_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTraveler5 => Instance[76];
 
-		/// <summary>
-		/// 资历获取_旅人_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTraveler6 => Instance[77];
 
-		/// <summary>
-		/// 资历获取_云游僧_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingBuddhistMonk1 => Instance[78];
 
-		/// <summary>
-		/// 资历获取_云游僧_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingBuddhistMonk2 => Instance[79];
 
-		/// <summary>
-		/// 资历获取_云游僧_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingBuddhistMonk3 => Instance[80];
 
-		/// <summary>
-		/// 资历获取_云游僧_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingBuddhistMonk4 => Instance[81];
 
-		/// <summary>
-		/// 资历获取_云游僧_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingBuddhistMonk5 => Instance[82];
 
-		/// <summary>
-		/// 资历获取_大夫_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor1 => Instance[83];
 
-		/// <summary>
-		/// 资历获取_大夫_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor2 => Instance[84];
 
-		/// <summary>
-		/// 资历获取_大夫_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor3 => Instance[85];
 
-		/// <summary>
-		/// 资历获取_大夫_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor4 => Instance[86];
 
-		/// <summary>
-		/// 资历获取_大夫_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor5 => Instance[87];
 
-		/// <summary>
-		/// 资历获取_大夫_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor6 => Instance[88];
 
-		/// <summary>
-		/// 资历获取_大夫_7
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor7 => Instance[89];
 
-		/// <summary>
-		/// 资历获取_大夫_8
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDoctor8 => Instance[90];
 
-		/// <summary>
-		/// 资历获取_云游道_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingTaoistMonk1 => Instance[91];
 
-		/// <summary>
-		/// 资历获取_云游道_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingTaoistMonk2 => Instance[92];
 
-		/// <summary>
-		/// 资历获取_云游道_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingTaoistMonk3 => Instance[93];
 
-		/// <summary>
-		/// 资历获取_云游道_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingTaoistMonk4 => Instance[94];
 
-		/// <summary>
-		/// 资历获取_云游道_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTravelingTaoistMonk5 => Instance[95];
 
-		/// <summary>
-		/// 资历获取_富商_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCapitalist1 => Instance[96];
 
-		/// <summary>
-		/// 资历获取_富商_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCapitalist2 => Instance[97];
 
-		/// <summary>
-		/// 资历获取_富商_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCapitalist3 => Instance[98];
 
-		/// <summary>
-		/// 资历获取_富商_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityCapitalist4 => Instance[99];
 
-		/// <summary>
-		/// 资历获取_贵客_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTeaTaster1 => Instance[100];
 
-		/// <summary>
-		/// 资历获取_贵客_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTeaTaster2 => Instance[101];
 
-		/// <summary>
-		/// 资历获取_贵客_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTeaTaster3 => Instance[102];
 
-		/// <summary>
-		/// 资历获取_贵客_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTeaTaster4 => Instance[103];
 
-		/// <summary>
-		/// 资历获取_贵客_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTeaTaster5 => Instance[104];
 
-		/// <summary>
-		/// 资历获取_贵客_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTeaTaster6 => Instance[105];
 
-		/// <summary>
-		/// 资历获取_贵客_7
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityTeaTaster7 => Instance[106];
 
-		/// <summary>
-		/// 资历获取_王公_1
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDuke1 => Instance[107];
 
-		/// <summary>
-		/// 资历获取_王公_2
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDuke2 => Instance[108];
 
-		/// <summary>
-		/// 资历获取_王公_3
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDuke3 => Instance[109];
 
-		/// <summary>
-		/// 资历获取_王公_4
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDuke4 => Instance[110];
 
-		/// <summary>
-		/// 资历获取_王公_5
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDuke5 => Instance[111];
 
-		/// <summary>
-		/// 资历获取_王公_6
-		/// </summary>
 		public static ProfessionFormulaItem AddSeniorityDuke6 => Instance[112];
 
-		/// <summary>
-		/// 技能效果_王公_获取蛐蛐模拟次数
-		/// </summary>
 		public static ProfessionFormulaItem SkillDukeGetCricketSimulateCount => Instance[113];
+
+		public static ProfessionFormulaItem AddSeniorityXiangshu1 => Instance[114];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ProfessionFormula Instance = new ProfessionFormula();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId" };
@@ -1296,12 +607,13 @@ public class ProfessionFormula : ConfigData<ProfessionFormulaItem, int>
 		_dataArray.Add(new ProfessionFormulaItem(111, EProfessionFormulaType.SeniorityGainFormula6, new int[1] { 2 }, 30750));
 		_dataArray.Add(new ProfessionFormulaItem(112, EProfessionFormulaType.SeniorityGainFormula9, new int[1] { 307500 }, -1));
 		_dataArray.Add(new ProfessionFormulaItem(113, EProfessionFormulaType.SeniorityGainFormula9, new int[1] { 18 }, -1));
+		_dataArray.Add(new ProfessionFormulaItem(114, EProfessionFormulaType.SeniorityGainFormula1, new int[1] { 1 }, -1));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<ProfessionFormulaItem>(114);
+		_dataArray = new List<ProfessionFormulaItem>(115);
 		CreateItems0();
 		CreateItems1();
 	}

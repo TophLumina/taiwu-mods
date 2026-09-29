@@ -36,6 +36,7 @@ public class WeightBasedPathfinder<TContext, TObject, TStateKey> : IPathfinder<T
 		{
 			nodesOnPath.Clear();
 			nodesOnPath.Add(startNode);
+			_stateMemoryPool.Return(currMemory);
 			return true;
 		}
 		for (int i = nodesOnPath.Count - 2; i >= 0; i--)

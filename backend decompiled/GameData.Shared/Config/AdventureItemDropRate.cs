@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AdventureItemDropRate : ConfigData<AdventureItemDropRateItem, byte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureItemDropRate Instance = new AdventureItemDropRate();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "ItemGradeDropRate" };

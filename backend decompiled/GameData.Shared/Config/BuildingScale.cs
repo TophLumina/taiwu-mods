@@ -7,171 +7,72 @@ namespace Config;
 [Serializable]
 public class BuildingScale : ConfigData<BuildingScaleItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 太吾村建设空间
-		/// </summary>
 		public const short BuildingSpace = 107;
 
-		/// <summary>
-		/// 太吾村石屋容量
-		/// </summary>
 		public const short StoneRoomCapacity = 108;
 
-		/// <summary>
-		/// 太吾村蛟池数量
-		/// </summary>
 		public const short JiaoPoolCount = 109;
 
-		/// <summary>
-		/// 饲槽重量上限
-		/// </summary>
 		public const short TroughLoad = 110;
 
-		/// <summary>
-		/// 祠堂收获威望
-		/// </summary>
 		public const short TaiwuShrineEffect = 111;
 
-		/// <summary>
-		/// 仓库重量上限
-		/// </summary>
 		public const short WareHouseLoad = 112;
 
-		/// <summary>
-		/// 居所居住空间
-		/// </summary>
 		public const short ResidenceCapacity = 113;
 
-		/// <summary>
-		/// 厢房容纳人数
-		/// </summary>
 		public const short ComfortableHouseCapacity = 114;
 
-		/// <summary>
-		/// 茶马帮货物栏位
-		/// </summary>
 		public const short TeaHorseCaravanSlot = 116;
 
-		/// <summary>
-		/// 凤凰台内息恢复
-		/// </summary>
 		public const short PhoenixPlatformPracticalEffect = 225;
 
-		/// <summary>
-		/// 方略室同道上限
-		/// </summary>
 		public const short StrategyRoomEffect = 226;
 
-		/// <summary>
-		/// 画影轩初见好感
-		/// </summary>
 		public const short MakeupRoomPercentEffect = 227;
 
-		/// <summary>
-		/// 生灭两星幡生平遗惠
-		/// </summary>
 		public const short BirthDeathStreamerEffect = 228;
 
-		/// <summary>
-		/// 丹房健康恢复
-		/// </summary>
 		public const short LifeElixirRoomEffect = 229;
 
-		/// <summary>
-		/// 阅经阁悟性消耗
-		/// </summary>
 		public const short SutraReadingRoomEffect = 230;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 太吾村建设空间
-		/// </summary>
 		public static BuildingScaleItem BuildingSpace => Instance[(short)107];
 
-		/// <summary>
-		/// 太吾村石屋容量
-		/// </summary>
 		public static BuildingScaleItem StoneRoomCapacity => Instance[(short)108];
 
-		/// <summary>
-		/// 太吾村蛟池数量
-		/// </summary>
 		public static BuildingScaleItem JiaoPoolCount => Instance[(short)109];
 
-		/// <summary>
-		/// 饲槽重量上限
-		/// </summary>
 		public static BuildingScaleItem TroughLoad => Instance[(short)110];
 
-		/// <summary>
-		/// 祠堂收获威望
-		/// </summary>
 		public static BuildingScaleItem TaiwuShrineEffect => Instance[(short)111];
 
-		/// <summary>
-		/// 仓库重量上限
-		/// </summary>
 		public static BuildingScaleItem WareHouseLoad => Instance[(short)112];
 
-		/// <summary>
-		/// 居所居住空间
-		/// </summary>
 		public static BuildingScaleItem ResidenceCapacity => Instance[(short)113];
 
-		/// <summary>
-		/// 厢房容纳人数
-		/// </summary>
 		public static BuildingScaleItem ComfortableHouseCapacity => Instance[(short)114];
 
-		/// <summary>
-		/// 茶马帮货物栏位
-		/// </summary>
 		public static BuildingScaleItem TeaHorseCaravanSlot => Instance[(short)116];
 
-		/// <summary>
-		/// 凤凰台内息恢复
-		/// </summary>
 		public static BuildingScaleItem PhoenixPlatformPracticalEffect => Instance[(short)225];
 
-		/// <summary>
-		/// 方略室同道上限
-		/// </summary>
 		public static BuildingScaleItem StrategyRoomEffect => Instance[(short)226];
 
-		/// <summary>
-		/// 画影轩初见好感
-		/// </summary>
 		public static BuildingScaleItem MakeupRoomPercentEffect => Instance[(short)227];
 
-		/// <summary>
-		/// 生灭两星幡生平遗惠
-		/// </summary>
 		public static BuildingScaleItem BirthDeathStreamerEffect => Instance[(short)228];
 
-		/// <summary>
-		/// 丹房健康恢复
-		/// </summary>
 		public static BuildingScaleItem LifeElixirRoomEffect => Instance[(short)229];
 
-		/// <summary>
-		/// 阅经阁悟性消耗
-		/// </summary>
 		public static BuildingScaleItem SutraReadingRoomEffect => Instance[(short)230];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static BuildingScale Instance = new BuildingScale();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "Name", "CombatSkillType", "LifeSkillType", "ResourceType", "Formula", "TemplateId", "LevelEffect" };

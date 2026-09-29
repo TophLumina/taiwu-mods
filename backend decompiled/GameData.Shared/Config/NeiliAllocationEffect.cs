@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class NeiliAllocationEffect : ConfigData<NeiliAllocationEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static NeiliAllocationEffect Instance = new NeiliAllocationEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId" };

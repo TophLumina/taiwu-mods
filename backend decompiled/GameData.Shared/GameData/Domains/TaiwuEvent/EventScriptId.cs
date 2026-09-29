@@ -3,34 +3,16 @@ using Config;
 
 namespace GameData.Domains.TaiwuEvent;
 
-/// <summary>
-/// 事件脚本ID
-/// </summary>
 public readonly struct EventScriptId : IEquatable<EventScriptId>
 {
-	/// <summary>
-	/// 脚本类型
-	/// </summary>
 	public readonly sbyte Type;
 
-	/// <summary>
-	/// 事件脚本引用
-	/// </summary>
 	public readonly EventScriptRef EventScriptRef;
 
-	/// <summary>
-	/// 奇遇脚本引用
-	/// </summary>
 	public readonly AdventureScriptRef AdventureScriptRef;
 
-	/// <summary>
-	/// 无效值
-	/// </summary>
 	public static readonly EventScriptId Invalid;
 
-	/// <summary>
-	/// 构造函数, 根据事件和选项Guid初始化所有字段.
-	/// </summary>
 	public EventScriptId(sbyte type, EventScriptRef @ref)
 	{
 		Type = type;
@@ -38,9 +20,6 @@ public readonly struct EventScriptId : IEquatable<EventScriptId>
 		AdventureScriptRef = AdventureScriptRef.Invalid;
 	}
 
-	/// <summary>
-	/// 构造函数, 根据奇遇的调试信息初始化
-	/// </summary>
 	public EventScriptId(sbyte type, AdventureScriptRef @ref)
 	{
 		Type = type;
@@ -71,11 +50,6 @@ public readonly struct EventScriptId : IEquatable<EventScriptId>
 		return true;
 	}
 
-	/// <summary>
-	/// 是否为选项类型
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public static bool IsOptionType(sbyte type)
 	{
 		if (type != 3 && type != 4)
@@ -85,11 +59,6 @@ public readonly struct EventScriptId : IEquatable<EventScriptId>
 		return true;
 	}
 
-	/// <summary>
-	/// 是否为条件类型
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public static bool IsConditionList(sbyte type)
 	{
 		if (type != 2 && type != 4 && type != 5)
@@ -99,7 +68,6 @@ public readonly struct EventScriptId : IEquatable<EventScriptId>
 		return true;
 	}
 
-	/// <inheritdoc />
 	public bool Equals(EventScriptId other)
 	{
 		if (Type == other.Type)
@@ -109,7 +77,6 @@ public readonly struct EventScriptId : IEquatable<EventScriptId>
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override bool Equals(object obj)
 	{
 		if (obj is EventScriptId other)
@@ -119,13 +86,11 @@ public readonly struct EventScriptId : IEquatable<EventScriptId>
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override int GetHashCode()
 	{
 		return HashCode.Combine(Type, EventScriptRef);
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		EventScriptTypeItem typeCfg = EventScriptType.Instance[Type];
@@ -136,10 +101,6 @@ public readonly struct EventScriptId : IEquatable<EventScriptId>
 		return $"{typeCfg.Name} {AdventureScriptRef}";
 	}
 
-	/// <summary>
-	/// 获取对应的脚本文件名 (不含完整路径和后缀名)
-	/// </summary>
-	/// <returns></returns>
 	public string GetFileName()
 	{
 		return Type switch

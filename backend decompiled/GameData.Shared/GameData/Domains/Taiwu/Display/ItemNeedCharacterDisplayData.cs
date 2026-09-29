@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 村民需要的物品 的人物显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharacterData, IVillagerSelectCharacterData
 {
@@ -17,9 +14,6 @@ public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharac
 	[SerializableGameDataField]
 	public int CharacterTemplateId;
 
-	/// <summary>
-	/// 姓名数据
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
@@ -32,63 +26,33 @@ public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharac
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
-	/// <summary>
-	/// 角色创建类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CreatingType;
 
-	/// <summary>
-	/// 拿取时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int TakeTime;
 
-	/// <summary>
-	/// 拿取数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int TakeAmount;
 
-	/// <summary>
-	/// 对太吾的好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public short FavorabilityToTaiwu;
 
-	/// <summary>
-	/// 见过太吾
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInteractedWithTaiwu;
 
-	/// <summary>
-	/// 与太吾的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationToTaiwu;
 
-	/// <summary>
-	/// 太吾与之的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationFromTaiwu;
 
-	/// <summary>
-	/// 身份
-	/// </summary>
 	[SerializableGameDataField]
 	public short RoleTemplateId;
 
-	/// <summary>
-	/// 势力值
-	/// </summary>
 	[SerializableGameDataField]
 	public int PowerLevel;
 
-	/// <summary>
-	/// 是否为同道
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsCompanion;
 
@@ -113,16 +77,10 @@ public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharac
 
 	int IVillagerSelectCharacterData.RoleTemplateId => RoleTemplateId;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ItemNeedCharacterDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ItemNeedCharacterDisplayData(ItemNeedCharacterDisplayData other)
 	{
 		CharacterId = other.CharacterId;
@@ -144,9 +102,6 @@ public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharac
 		GeneralScrollListData = new CharacterDisplayDataForGeneralScrollList(other.GeneralScrollListData);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ItemNeedCharacterDisplayData other)
 	{
 		CharacterId = other.CharacterId;
@@ -168,13 +123,11 @@ public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharac
 		GeneralScrollListData = new CharacterDisplayDataForGeneralScrollList(other.GeneralScrollListData);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 75;
@@ -187,7 +140,6 @@ public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharac
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -255,7 +207,6 @@ public class ItemNeedCharacterDisplayData : ISerializableGameData, ISelectCharac
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

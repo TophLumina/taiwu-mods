@@ -3,24 +3,12 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 区域旅行路线索引
-/// </summary>
 public struct TravelRouteKey(short fromAreaId, short toAreaId) : ISerializableGameData, IEquatable<TravelRouteKey>
 {
-	/// <summary>
-	/// 起点区域
-	/// </summary>
 	public short FromAreaId = fromAreaId;
 
-	/// <summary>
-	/// 终点区域
-	/// </summary>
 	public short ToAreaId = toAreaId;
 
-	/// <summary>
-	/// 交换起点和终点
-	/// </summary>
 	public void Reverse()
 	{
 		FromAreaId += ToAreaId;

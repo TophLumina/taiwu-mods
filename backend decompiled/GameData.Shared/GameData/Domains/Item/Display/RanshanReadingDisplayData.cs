@@ -3,45 +3,24 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item.Display;
 
-/// <summary>
-/// 然山读书显示数据
-/// </summary>
 public class RanshanReadingDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 预测数据
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] PreviewProgress;
 
-	/// <summary>
-	/// 书页状态
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] State;
 
-	/// <summary>
-	/// 研读进度
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] ReadingProgress;
 
-	/// <summary>
-	/// 正逆，仅功法书有
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] Type;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public RanshanReadingDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public RanshanReadingDisplayData(RanshanReadingDisplayData other)
 	{
 		int[] item = other.PreviewProgress;
@@ -74,9 +53,6 @@ public class RanshanReadingDisplayData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(RanshanReadingDisplayData other)
 	{
 		int[] item = other.PreviewProgress;
@@ -109,13 +85,11 @@ public class RanshanReadingDisplayData : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -130,7 +104,6 @@ public class RanshanReadingDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -210,7 +183,6 @@ public class RanshanReadingDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

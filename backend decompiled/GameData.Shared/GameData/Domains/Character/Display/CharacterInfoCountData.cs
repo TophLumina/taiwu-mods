@@ -2,26 +2,14 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物列表所需的人物秘闻数量数据
-/// </summary>
 public class CharacterInfoCountData : ISerializableGameData
 {
-	/// <summary>
-	/// Npc持有的秘闻数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int HoldInfoCount;
 
-	/// <summary>
-	/// 玩家未持有的的秘闻数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int HoldInfoTaiwuDontHoldCount;
 
-	/// <summary>
-	/// 与玩家相关的秘闻数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int HoldInfoTaiwuRelatedCount;
 
@@ -43,13 +31,11 @@ public class CharacterInfoCountData : ISerializableGameData
 		HoldInfoTaiwuRelatedCount = other.HoldInfoTaiwuRelatedCount;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -60,7 +46,6 @@ public class CharacterInfoCountData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = HoldInfoCount;
@@ -76,7 +61,6 @@ public class CharacterInfoCountData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

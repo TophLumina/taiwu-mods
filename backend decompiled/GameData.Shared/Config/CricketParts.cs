@@ -7,361 +7,148 @@ namespace Config;
 [Serializable]
 public class CricketParts : ConfigData<CricketPartsItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 呆物
-		/// </summary>
 		public const short Trash = 0;
 
-		/// <summary>
-		/// 绣花针
-		/// </summary>
 		public const short XiuHuaZhen = 1;
 
-		/// <summary>
-		/// 两头枪
-		/// </summary>
 		public const short LiangTouQiang = 2;
 
-		/// <summary>
-		/// 吹铃
-		/// </summary>
 		public const short ChuiLing = 3;
 
-		/// <summary>
-		/// 跑马黄
-		/// </summary>
 		public const short PaoMaHuang = 4;
 
-		/// <summary>
-		/// 玉锄头
-		/// </summary>
 		public const short YuChuTou = 5;
 
-		/// <summary>
-		/// 披袍轩甲
-		/// </summary>
 		public const short PiPaoXuanJia = 6;
 
-		/// <summary>
-		/// 反生名
-		/// </summary>
 		public const short FanShengMing = 7;
 
-		/// <summary>
-		/// 朱砂额
-		/// </summary>
 		public const short ZhuShaE = 8;
 
-		/// <summary>
-		/// 头陀
-		/// </summary>
 		public const short TouTuo = 9;
 
-		/// <summary>
-		/// 铁弹子
-		/// </summary>
 		public const short TieDanZi = 10;
 
-		/// <summary>
-		/// 赤须
-		/// </summary>
 		public const short ChiXu = 11;
 
-		/// <summary>
-		/// 玉尾
-		/// </summary>
 		public const short YuWei = 12;
 
-		/// <summary>
-		/// 油纸灯
-		/// </summary>
 		public const short YouZhiDeng = 13;
 
-		/// <summary>
-		/// 真三色
-		/// </summary>
 		public const short ZhenSanSe = 14;
 
-		/// <summary>
-		/// 草三段
-		/// </summary>
 		public const short CaoSanDuan = 15;
 
-		/// <summary>
-		/// 真紫黄
-		/// </summary>
 		public const short ZhenZiHuang = 16;
 
-		/// <summary>
-		/// 梅花翅
-		/// </summary>
 		public const short MeiHuaChi = 17;
 
-		/// <summary>
-		/// 天蓝青
-		/// </summary>
 		public const short TianLanQing = 18;
 
-		/// <summary>
-		/// 三段锦
-		/// </summary>
 		public const short SanDuanJin = 19;
 
-		/// <summary>
-		/// 三太子
-		/// </summary>
 		public const short SanTaiZi = 20;
 
-		/// <summary>
-		/// 八败
-		/// </summary>
 		public const short BaBai = 21;
 
-		/// <summary>
-		/// 真青
-		/// </summary>
 		public const short RealCyan = 22;
 
-		/// <summary>
-		/// 真黄
-		/// </summary>
 		public const short RealYellow = 23;
 
-		/// <summary>
-		/// 真紫
-		/// </summary>
 		public const short RealPurple = 24;
 
-		/// <summary>
-		/// 真红
-		/// </summary>
 		public const short RealRed = 25;
 
-		/// <summary>
-		/// 真乌
-		/// </summary>
 		public const short RealBlack = 26;
 
-		/// <summary>
-		/// 真白
-		/// </summary>
 		public const short RealWhite = 27;
 
-		/// <summary>
-		/// 尖头
-		/// </summary>
 		public const short SharpHead = 31;
 
-		/// <summary>
-		/// 圆翅
-		/// </summary>
 		public const short RoundWings = 46;
 
-		/// <summary>
-		/// 芝麻牙
-		/// </summary>
 		public const short SesameTeeth = 70;
 
-		/// <summary>
-		/// 正红
-		/// </summary>
 		public const short Red = 127;
 
-		/// <summary>
-		/// 正黑
-		/// </summary>
 		public const short Black = 133;
 
-		/// <summary>
-		/// 正白
-		/// </summary>
 		public const short White = 139;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 呆物
-		/// </summary>
 		public static CricketPartsItem Trash => Instance[(short)0];
 
-		/// <summary>
-		/// 绣花针
-		/// </summary>
 		public static CricketPartsItem XiuHuaZhen => Instance[(short)1];
 
-		/// <summary>
-		/// 两头枪
-		/// </summary>
 		public static CricketPartsItem LiangTouQiang => Instance[(short)2];
 
-		/// <summary>
-		/// 吹铃
-		/// </summary>
 		public static CricketPartsItem ChuiLing => Instance[(short)3];
 
-		/// <summary>
-		/// 跑马黄
-		/// </summary>
 		public static CricketPartsItem PaoMaHuang => Instance[(short)4];
 
-		/// <summary>
-		/// 玉锄头
-		/// </summary>
 		public static CricketPartsItem YuChuTou => Instance[(short)5];
 
-		/// <summary>
-		/// 披袍轩甲
-		/// </summary>
 		public static CricketPartsItem PiPaoXuanJia => Instance[(short)6];
 
-		/// <summary>
-		/// 反生名
-		/// </summary>
 		public static CricketPartsItem FanShengMing => Instance[(short)7];
 
-		/// <summary>
-		/// 朱砂额
-		/// </summary>
 		public static CricketPartsItem ZhuShaE => Instance[(short)8];
 
-		/// <summary>
-		/// 头陀
-		/// </summary>
 		public static CricketPartsItem TouTuo => Instance[(short)9];
 
-		/// <summary>
-		/// 铁弹子
-		/// </summary>
 		public static CricketPartsItem TieDanZi => Instance[(short)10];
 
-		/// <summary>
-		/// 赤须
-		/// </summary>
 		public static CricketPartsItem ChiXu => Instance[(short)11];
 
-		/// <summary>
-		/// 玉尾
-		/// </summary>
 		public static CricketPartsItem YuWei => Instance[(short)12];
 
-		/// <summary>
-		/// 油纸灯
-		/// </summary>
 		public static CricketPartsItem YouZhiDeng => Instance[(short)13];
 
-		/// <summary>
-		/// 真三色
-		/// </summary>
 		public static CricketPartsItem ZhenSanSe => Instance[(short)14];
 
-		/// <summary>
-		/// 草三段
-		/// </summary>
 		public static CricketPartsItem CaoSanDuan => Instance[(short)15];
 
-		/// <summary>
-		/// 真紫黄
-		/// </summary>
 		public static CricketPartsItem ZhenZiHuang => Instance[(short)16];
 
-		/// <summary>
-		/// 梅花翅
-		/// </summary>
 		public static CricketPartsItem MeiHuaChi => Instance[(short)17];
 
-		/// <summary>
-		/// 天蓝青
-		/// </summary>
 		public static CricketPartsItem TianLanQing => Instance[(short)18];
 
-		/// <summary>
-		/// 三段锦
-		/// </summary>
 		public static CricketPartsItem SanDuanJin => Instance[(short)19];
 
-		/// <summary>
-		/// 三太子
-		/// </summary>
 		public static CricketPartsItem SanTaiZi => Instance[(short)20];
 
-		/// <summary>
-		/// 八败
-		/// </summary>
 		public static CricketPartsItem BaBai => Instance[(short)21];
 
-		/// <summary>
-		/// 真青
-		/// </summary>
 		public static CricketPartsItem RealCyan => Instance[(short)22];
 
-		/// <summary>
-		/// 真黄
-		/// </summary>
 		public static CricketPartsItem RealYellow => Instance[(short)23];
 
-		/// <summary>
-		/// 真紫
-		/// </summary>
 		public static CricketPartsItem RealPurple => Instance[(short)24];
 
-		/// <summary>
-		/// 真红
-		/// </summary>
 		public static CricketPartsItem RealRed => Instance[(short)25];
 
-		/// <summary>
-		/// 真乌
-		/// </summary>
 		public static CricketPartsItem RealBlack => Instance[(short)26];
 
-		/// <summary>
-		/// 真白
-		/// </summary>
 		public static CricketPartsItem RealWhite => Instance[(short)27];
 
-		/// <summary>
-		/// 尖头
-		/// </summary>
 		public static CricketPartsItem SharpHead => Instance[(short)31];
 
-		/// <summary>
-		/// 圆翅
-		/// </summary>
 		public static CricketPartsItem RoundWings => Instance[(short)46];
 
-		/// <summary>
-		/// 芝麻牙
-		/// </summary>
 		public static CricketPartsItem SesameTeeth => Instance[(short)70];
 
-		/// <summary>
-		/// 正红
-		/// </summary>
 		public static CricketPartsItem Red => Instance[(short)127];
 
-		/// <summary>
-		/// 正黑
-		/// </summary>
 		public static CricketPartsItem Black => Instance[(short)133];
 
-		/// <summary>
-		/// 正白
-		/// </summary>
 		public static CricketPartsItem White => Instance[(short)139];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CricketParts Instance = new CricketParts();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

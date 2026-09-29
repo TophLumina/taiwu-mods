@@ -6,9 +6,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.World.Notification;
 
-/// <summary>
-/// 过月月报永久数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 [Obsolete]
 public class PermanentMonthNotify : ISerializableGameData
@@ -26,31 +23,20 @@ public class PermanentMonthNotify : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "NotificationCollections", "CharacterNames", "JiaoLoongNames" };
 	}
 
-	/// <summary>
-	/// 按日期存储的通知
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, MonthlyNotificationCollection> NotificationCollections = new Dictionary<int, MonthlyNotificationCollection>();
 
-	/// <summary>
-	/// 关联的角色名信息
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, NameAndLifeRelatedData> CharacterNames = new Dictionary<int, NameAndLifeRelatedData>();
 
-	/// <summary>
-	/// 关联的蛟、龙名字相关显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, JiaoLoongNameRelatedData> JiaoLoongNames = new Dictionary<int, JiaoLoongNameRelatedData>();
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -64,7 +50,6 @@ public class PermanentMonthNotify : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 3;
@@ -79,7 +64,6 @@ public class PermanentMonthNotify : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -10,421 +10,172 @@ namespace Config;
 [Serializable]
 public class Organization : ConfigData<OrganizationItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 无门无派
-		/// </summary>
 		public const sbyte None = 0;
 
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public const sbyte Shaolin = 1;
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public const sbyte Emei = 2;
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public const sbyte Baihua = 3;
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public const sbyte Wudang = 4;
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public const sbyte Yuanshan = 5;
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public const sbyte Shixiang = 6;
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public const sbyte Ranshan = 7;
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public const sbyte Xuannv = 8;
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public const sbyte Zhujian = 9;
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public const sbyte Kongsang = 10;
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public const sbyte Jingang = 11;
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public const sbyte Wuxian = 12;
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public const sbyte Jieqing = 13;
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public const sbyte Fulong = 14;
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public const sbyte Xuehou = 15;
 
-		/// <summary>
-		/// 太吾村
-		/// </summary>
 		public const sbyte Taiwu = 16;
 
-		/// <summary>
-		/// 外道
-		/// </summary>
 		public const sbyte Heretic = 17;
 
-		/// <summary>
-		/// 任侠
-		/// </summary>
 		public const sbyte Righteous = 18;
 
-		/// <summary>
-		/// 相枢爪牙
-		/// </summary>
 		public const sbyte XiangshuMinion = 19;
 
-		/// <summary>
-		/// 入魔者
-		/// </summary>
 		public const sbyte XiangshuInfected = 20;
 
-		/// <summary>
-		/// 京城
-		/// </summary>
 		public const sbyte Jingcheng = 21;
 
-		/// <summary>
-		/// 成都
-		/// </summary>
 		public const sbyte Chengdu = 22;
 
-		/// <summary>
-		/// 桂州
-		/// </summary>
 		public const sbyte Guizhou = 23;
 
-		/// <summary>
-		/// 襄阳
-		/// </summary>
 		public const sbyte Xiangyang = 24;
 
-		/// <summary>
-		/// 太原
-		/// </summary>
 		public const sbyte Taiyuan = 25;
 
-		/// <summary>
-		/// 广州
-		/// </summary>
 		public const sbyte Guangzhou = 26;
 
-		/// <summary>
-		/// 青州
-		/// </summary>
 		public const sbyte Qingzhou = 27;
 
-		/// <summary>
-		/// 江陵
-		/// </summary>
 		public const sbyte Jiangling = 28;
 
-		/// <summary>
-		/// 福州
-		/// </summary>
 		public const sbyte Fuzhou = 29;
 
-		/// <summary>
-		/// 辽阳
-		/// </summary>
 		public const sbyte Liaoyang = 30;
 
-		/// <summary>
-		/// 秦州
-		/// </summary>
 		public const sbyte Qinzhou = 31;
 
-		/// <summary>
-		/// 大理
-		/// </summary>
 		public const sbyte Dali = 32;
 
-		/// <summary>
-		/// 寿春
-		/// </summary>
 		public const sbyte Shouchun = 33;
 
-		/// <summary>
-		/// 杭州
-		/// </summary>
 		public const sbyte Hangzhou = 34;
 
-		/// <summary>
-		/// 扬州
-		/// </summary>
 		public const sbyte Yangzhou = 35;
 
-		/// <summary>
-		/// 村庄
-		/// </summary>
 		public const sbyte Village = 36;
 
-		/// <summary>
-		/// 市镇
-		/// </summary>
 		public const sbyte Town = 37;
 
-		/// <summary>
-		/// 山寨
-		/// </summary>
 		public const sbyte WalledTown = 38;
 
-		/// <summary>
-		/// 野兽
-		/// </summary>
 		public const sbyte Beast = 40;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 无门无派
-		/// </summary>
 		public static OrganizationItem None => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public static OrganizationItem Shaolin => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public static OrganizationItem Emei => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public static OrganizationItem Baihua => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public static OrganizationItem Wudang => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public static OrganizationItem Yuanshan => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public static OrganizationItem Shixiang => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public static OrganizationItem Ranshan => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public static OrganizationItem Xuannv => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public static OrganizationItem Zhujian => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public static OrganizationItem Kongsang => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public static OrganizationItem Jingang => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public static OrganizationItem Wuxian => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public static OrganizationItem Jieqing => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public static OrganizationItem Fulong => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public static OrganizationItem Xuehou => Instance[(sbyte)15];
 
-		/// <summary>
-		/// 太吾村
-		/// </summary>
 		public static OrganizationItem Taiwu => Instance[(sbyte)16];
 
-		/// <summary>
-		/// 外道
-		/// </summary>
 		public static OrganizationItem Heretic => Instance[(sbyte)17];
 
-		/// <summary>
-		/// 任侠
-		/// </summary>
 		public static OrganizationItem Righteous => Instance[(sbyte)18];
 
-		/// <summary>
-		/// 相枢爪牙
-		/// </summary>
 		public static OrganizationItem XiangshuMinion => Instance[(sbyte)19];
 
-		/// <summary>
-		/// 入魔者
-		/// </summary>
 		public static OrganizationItem XiangshuInfected => Instance[(sbyte)20];
 
-		/// <summary>
-		/// 京城
-		/// </summary>
 		public static OrganizationItem Jingcheng => Instance[(sbyte)21];
 
-		/// <summary>
-		/// 成都
-		/// </summary>
 		public static OrganizationItem Chengdu => Instance[(sbyte)22];
 
-		/// <summary>
-		/// 桂州
-		/// </summary>
 		public static OrganizationItem Guizhou => Instance[(sbyte)23];
 
-		/// <summary>
-		/// 襄阳
-		/// </summary>
 		public static OrganizationItem Xiangyang => Instance[(sbyte)24];
 
-		/// <summary>
-		/// 太原
-		/// </summary>
 		public static OrganizationItem Taiyuan => Instance[(sbyte)25];
 
-		/// <summary>
-		/// 广州
-		/// </summary>
 		public static OrganizationItem Guangzhou => Instance[(sbyte)26];
 
-		/// <summary>
-		/// 青州
-		/// </summary>
 		public static OrganizationItem Qingzhou => Instance[(sbyte)27];
 
-		/// <summary>
-		/// 江陵
-		/// </summary>
 		public static OrganizationItem Jiangling => Instance[(sbyte)28];
 
-		/// <summary>
-		/// 福州
-		/// </summary>
 		public static OrganizationItem Fuzhou => Instance[(sbyte)29];
 
-		/// <summary>
-		/// 辽阳
-		/// </summary>
 		public static OrganizationItem Liaoyang => Instance[(sbyte)30];
 
-		/// <summary>
-		/// 秦州
-		/// </summary>
 		public static OrganizationItem Qinzhou => Instance[(sbyte)31];
 
-		/// <summary>
-		/// 大理
-		/// </summary>
 		public static OrganizationItem Dali => Instance[(sbyte)32];
 
-		/// <summary>
-		/// 寿春
-		/// </summary>
 		public static OrganizationItem Shouchun => Instance[(sbyte)33];
 
-		/// <summary>
-		/// 杭州
-		/// </summary>
 		public static OrganizationItem Hangzhou => Instance[(sbyte)34];
 
-		/// <summary>
-		/// 扬州
-		/// </summary>
 		public static OrganizationItem Yangzhou => Instance[(sbyte)35];
 
-		/// <summary>
-		/// 村庄
-		/// </summary>
 		public static OrganizationItem Village => Instance[(sbyte)36];
 
-		/// <summary>
-		/// 市镇
-		/// </summary>
 		public static OrganizationItem Town => Instance[(sbyte)37];
 
-		/// <summary>
-		/// 山寨
-		/// </summary>
 		public static OrganizationItem WalledTown => Instance[(sbyte)38];
 
-		/// <summary>
-		/// 野兽
-		/// </summary>
 		public static OrganizationItem Beast => Instance[(sbyte)40];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Organization Instance = new Organization();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

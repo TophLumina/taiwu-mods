@@ -101,8 +101,6 @@ public class LegendaryBookDomain : BaseGameDataDomain
 
 	private SingleValueCollectionModificationCollection<sbyte> _modificationsLegendaryBookSkillPresetSlot = SingleValueCollectionModificationCollection<sbyte>.Create();
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	[DataUpgrader(Version = "1.0.48", Date = "2026/07/03")]
 	private void FixAbnormalHiddenLegendaryBookOwner(DataContext context)
 	{
@@ -562,7 +560,7 @@ public class LegendaryBookDomain : BaseGameDataDomain
 		if (blockData == null)
 		{
 			sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(areaId);
-			blockData = DomainManager.Map.GetRandomMapBlockDataByFilters(context.Random, stateTemplateId, -1, null, includeBlockWithAdventure: false);
+			blockData = DomainManager.Map.GetRandomMapBlockDataByFilters(context.Random, stateTemplateId, null, includeBlockWithAdventure: false);
 		}
 		Location location = blockData.GetLocation();
 		CreateLegendaryBookAdventure(context, location, bookType, appearType, prevOwnerId);

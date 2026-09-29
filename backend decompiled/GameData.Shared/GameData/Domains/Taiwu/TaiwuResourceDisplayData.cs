@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 太吾身上的资源
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class TaiwuResourceDisplayData : ISerializableGameData
 {
@@ -32,6 +29,21 @@ public class TaiwuResourceDisplayData : ISerializableGameData
 	public int Exp;
 
 	[SerializableGameDataField]
+	public int TaiwuPopulationTipsTeammateAdult;
+
+	[SerializableGameDataField]
+	public int TaiwuPopulationTipsTeammateChild;
+
+	[SerializableGameDataField]
+	public int TaiwuPopulationTipsTeammateBaby;
+
+	[SerializableGameDataField]
+	public int TaiwuPopulationTipsBaby;
+
+	[SerializableGameDataField]
+	public int TaiwuPopulationTipsChild;
+
+	[SerializableGameDataField]
 	public int TaiwuPopulationTipsAdult;
 
 	[SerializableGameDataField]
@@ -50,9 +62,7 @@ public class TaiwuResourceDisplayData : ISerializableGameData
 
 	public int TaiwuPopulationTipsAdultIdle => IdleVillager;
 
-	public int TaiwuPopulationTipsChild => Villager - TaiwuPopulationTipsAdult;
-
-	public int TaiwuPopulationTipsChildIdle => TaiwuPopulationTipsChild - TaiwuPopulationTipsChildWorking;
+	public int TaiwuPopulationTipsChildIdle => TaiwuPopulationTipsChild - TaiwuPopulationTipsChildWorking - TaiwuPopulationTipsTeammateChild;
 
 	public bool IsSerializedSizeFixed()
 	{
@@ -61,7 +71,7 @@ public class TaiwuResourceDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 40;
+		int totalSize = 60;
 		totalSize = ((Resources == null) ? (totalSize + 2) : (totalSize + (2 + 4 * Resources.Length)));
 		totalSize = ((ResourcesDelta == null) ? (totalSize + 2) : (totalSize + (2 + 4 * ResourcesDelta.Length)));
 		if (totalSize > 4)
@@ -117,6 +127,16 @@ public class TaiwuResourceDisplayData : ISerializableGameData
 		*(int*)pCurrData = Debt;
 		pCurrData += 4;
 		*(int*)pCurrData = Exp;
+		pCurrData += 4;
+		*(int*)pCurrData = TaiwuPopulationTipsTeammateAdult;
+		pCurrData += 4;
+		*(int*)pCurrData = TaiwuPopulationTipsTeammateChild;
+		pCurrData += 4;
+		*(int*)pCurrData = TaiwuPopulationTipsTeammateBaby;
+		pCurrData += 4;
+		*(int*)pCurrData = TaiwuPopulationTipsBaby;
+		pCurrData += 4;
+		*(int*)pCurrData = TaiwuPopulationTipsChild;
 		pCurrData += 4;
 		*(int*)pCurrData = TaiwuPopulationTipsAdult;
 		pCurrData += 4;
@@ -184,6 +204,16 @@ public class TaiwuResourceDisplayData : ISerializableGameData
 		Debt = *(int*)pCurrData;
 		pCurrData += 4;
 		Exp = *(int*)pCurrData;
+		pCurrData += 4;
+		TaiwuPopulationTipsTeammateAdult = *(int*)pCurrData;
+		pCurrData += 4;
+		TaiwuPopulationTipsTeammateChild = *(int*)pCurrData;
+		pCurrData += 4;
+		TaiwuPopulationTipsTeammateBaby = *(int*)pCurrData;
+		pCurrData += 4;
+		TaiwuPopulationTipsBaby = *(int*)pCurrData;
+		pCurrData += 4;
+		TaiwuPopulationTipsChild = *(int*)pCurrData;
 		pCurrData += 4;
 		TaiwuPopulationTipsAdult = *(int*)pCurrData;
 		pCurrData += 4;

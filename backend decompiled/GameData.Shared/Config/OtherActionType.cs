@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class OtherActionType : ConfigData<OtherActionTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static OtherActionType Instance = new OtherActionType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

@@ -43,10 +43,8 @@ public class SectEmeiGuidanceMapData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 3;
+		int totalSize = 39;
 		totalSize = ((Data == null) ? (totalSize + 2) : (totalSize + (2 + Data.GetSerializedSize())));
-		totalSize += Location.GetSerializedSize();
-		totalSize += NameData.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

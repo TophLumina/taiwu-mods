@@ -4,39 +4,21 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 一个角色用于显示的轮回数据
-/// </summary>
 public class CharacterSamsaraData : ISerializableGameData
 {
-	/// <summary>
-	/// 所有有效的前世轮回数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<DeadCharacter> DeadCharacters;
 
-	/// <summary>
-	/// 所有有效的前世名称数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<NameRelatedData> DeadCharacterNames;
 
-	/// <summary>
-	/// 前世轮回数据的位置
-	/// </summary>
 	[SerializableGameDataField]
 	public PreexistenceCharIds PreexistenceCharIds;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterSamsaraData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterSamsaraData(CharacterSamsaraData other)
 	{
 		if (other.DeadCharacters != null)
@@ -57,9 +39,6 @@ public class CharacterSamsaraData : ISerializableGameData
 		PreexistenceCharIds = other.PreexistenceCharIds;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterSamsaraData other)
 	{
 		if (other.DeadCharacters != null)
@@ -80,13 +59,11 @@ public class CharacterSamsaraData : ISerializableGameData
 		PreexistenceCharIds = other.PreexistenceCharIds;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 40;
@@ -112,7 +89,6 @@ public class CharacterSamsaraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -171,7 +147,6 @@ public class CharacterSamsaraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

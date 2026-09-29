@@ -1,17 +1,14 @@
 using System.Collections.Generic;
 using GameData.Combat.Math;
 using GameData.Common;
+using GameData.Domains.Combat;
 
 namespace GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.PestleEffect;
 
 public class NuMuJinGangChu : PestleEffectBase
 {
-	public NuMuJinGangChu()
-	{
-	}
-
-	public NuMuJinGangChu(int charId)
-		: base(charId, 11403)
+	public NuMuJinGangChu(int charId, SkillEffectKey effectKey)
+		: base(charId, effectKey)
 	{
 	}
 

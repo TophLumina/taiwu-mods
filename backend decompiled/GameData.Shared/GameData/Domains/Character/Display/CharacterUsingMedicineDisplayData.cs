@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 用药界面的显示数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class CharacterUsingMedicineDisplayData : ISerializableGameData
 {
@@ -35,13 +32,11 @@ public class CharacterUsingMedicineDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public Inventory AutoUseMedicineInventory;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 145;
@@ -68,7 +63,6 @@ public class CharacterUsingMedicineDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -147,7 +141,6 @@ public class CharacterUsingMedicineDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

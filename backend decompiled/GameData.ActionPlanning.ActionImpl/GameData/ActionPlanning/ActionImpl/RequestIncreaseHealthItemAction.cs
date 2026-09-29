@@ -112,7 +112,7 @@ public class RequestIncreaseHealthItemAction : ICharacterActionImpl, ISerializab
 			character.AddEatingItem(context, ItemUsed);
 			character.ChangeHappiness(context, baseItem.GetHappinessChange());
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, targetChar, baseItem.GetFavorabilityChange() * 5);
-			lifeRecordCollection.AddRequestHealthSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+			lifeRecordCollection.AddRequestHealthItemSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			int secretInfoOffset = DomainManager.Information.GetSecretInformationCollection().AddAcceptRequestIncreaseHealth(targetCharId, selfCharId);
 			DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
 		}
@@ -120,7 +120,7 @@ public class RequestIncreaseHealthItemAction : ICharacterActionImpl, ISerializab
 		{
 			character.ChangeHappiness(context, -3);
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, targetChar, -6000);
-			lifeRecordCollection.AddRequestHealthFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+			lifeRecordCollection.AddRequestHealthItemFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			int secretInfoOffset2 = DomainManager.Information.GetSecretInformationCollection().AddRefuseRequestIncreaseHealth(targetCharId, selfCharId);
 			DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);
 		}

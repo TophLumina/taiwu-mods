@@ -7,171 +7,72 @@ namespace Config;
 [Serializable]
 public class SectMainStory : ConfigData<SectMainStoryItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public const sbyte Shaolin = 0;
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public const sbyte Emei = 1;
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public const sbyte Baihua = 2;
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public const sbyte Wudang = 3;
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public const sbyte Yuanshan = 4;
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public const sbyte Shixiang = 5;
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public const sbyte Ranshan = 6;
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public const sbyte Xuannv = 7;
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public const sbyte Zhujian = 8;
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public const sbyte Kongsang = 9;
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public const sbyte Jingang = 10;
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public const sbyte Wuxian = 11;
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public const sbyte Jieqing = 12;
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public const sbyte Fulong = 13;
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public const sbyte Xuehou = 14;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public static SectMainStoryItem Shaolin => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public static SectMainStoryItem Emei => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public static SectMainStoryItem Baihua => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public static SectMainStoryItem Wudang => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public static SectMainStoryItem Yuanshan => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public static SectMainStoryItem Shixiang => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public static SectMainStoryItem Ranshan => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public static SectMainStoryItem Xuannv => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public static SectMainStoryItem Zhujian => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public static SectMainStoryItem Kongsang => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public static SectMainStoryItem Jingang => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public static SectMainStoryItem Wuxian => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public static SectMainStoryItem Jieqing => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public static SectMainStoryItem Fulong => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public static SectMainStoryItem Xuehou => Instance[(sbyte)14];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SectMainStory Instance = new SectMainStory();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

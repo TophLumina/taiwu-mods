@@ -27,6 +27,9 @@
     <Reference Include="GameData.Utilities">
       <HintPath>D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\GameData.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="GameData.Combat.Math">
+      <HintPath>D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\GameData.Combat.Math.dll</HintPath>
+    </Reference>
     <Reference Include="Redzen">
       <HintPath>D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\Redzen.dll</HintPath>
     </Reference>

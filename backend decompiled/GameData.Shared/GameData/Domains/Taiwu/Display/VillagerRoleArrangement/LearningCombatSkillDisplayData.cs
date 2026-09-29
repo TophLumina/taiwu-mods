@@ -2,31 +2,20 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 
-/// <summary>
-/// 学习生活技能
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class LearningCombatSkillDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 请教别人生活技能的成功率（额外部分，无法计算精确值）
-	/// </summary>
 	[SerializableGameDataField]
 	public float LearningSuccessRate;
 
-	/// <summary>
-	/// 每月额外请教一次的概率
-	/// </summary>
 	[SerializableGameDataField]
 	public float ExtraLearningChance;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -37,7 +26,6 @@ public class LearningCombatSkillDisplayData : IVillagerRoleArrangementDisplayDat
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(float*)pData = LearningSuccessRate;
@@ -51,7 +39,6 @@ public class LearningCombatSkillDisplayData : IVillagerRoleArrangementDisplayDat
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

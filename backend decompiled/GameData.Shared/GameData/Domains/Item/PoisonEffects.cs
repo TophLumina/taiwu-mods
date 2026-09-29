@@ -5,39 +5,19 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 淬毒效果
-/// </summary>
 [Obsolete("Instead by FullPoisonEffects. Now only for archive data fix. Do not delete this code.")]
 public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 {
-	/// <summary>
-	/// 淬毒物品，最终的ID，混合毒也是一个ID
-	/// </summary>
 	private unsafe fixed short _medicineTemplateIds[1];
 
-	/// <summary>
-	/// 已经被鉴定
-	/// </summary>
 	public bool IsIdentified;
 
 	private PoisonsAndLevels _poisons;
 
-	/// <summary>
-	/// 最大淬毒栏位
-	/// </summary>
 	public const int MaxPoisonCount = 3;
 
-	/// <summary>
-	/// 是否有毒
-	/// </summary>
 	public bool HasPoison => GetTotalPoisonCount() > 0;
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值,依赖于 <see cref="F:GameData.Domains.Item.PoisonEffects.MaxPoisonCount" /> 的值
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (short* medicineTemplateIds = _medicineTemplateIds)
@@ -61,10 +41,6 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		return true;
 	}
 
-	/// <summary>
-	/// 是否为两种毒组成的混合毒药
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool IsTwoPoisonsMix()
 	{
 		if (_medicineTemplateIds[0] >= 389)
@@ -74,10 +50,6 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		return false;
 	}
 
-	/// <summary>
-	/// 是否为三种毒组成的混合毒药
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool IsThreePoisonsMix()
 	{
 		if (_medicineTemplateIds[0] >= 404)
@@ -87,19 +59,11 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		return false;
 	}
 
-	/// <summary>
-	/// 获取栏位所有的毒的效果
-	/// </summary>
-	/// <returns></returns>
 	public PoisonsAndLevels GetAllPoisonsAndLevels()
 	{
 		return _poisons;
 	}
 
-	/// <summary>
-	/// 获取栏位所有的材料
-	/// </summary>
-	/// <returns></returns>
 	public unsafe short[] GetAllMedicineTemplateIds()
 	{
 		short[] ids = new short[3];
@@ -133,21 +97,11 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		return ids;
 	}
 
-	/// <summary>
-	/// 获取最终的淬毒材料，可能是混合毒
-	/// </summary>
-	/// <returns></returns>
 	public unsafe short GetMedicineTemplateId()
 	{
 		return _medicineTemplateIds[0];
 	}
 
-	/// <summary>
-	/// 获取指定栏位的淬毒材料，仅用于淬毒解毒等需要知道具体毒时
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public short GetMedicineTemplateIdAt(int index)
 	{
 		if (index < 0 || index >= 3)
@@ -157,9 +111,6 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		return GetAllMedicineTemplateIds()[index];
 	}
 
-	/// <summary>
-	/// 解毒，ID是目前含有的毒
-	/// </summary>
 	public unsafe void Remove(short materialTemplateId)
 	{
 		if (Enumerable.Contains(GetAllMedicineTemplateIds(), materialTemplateId))
@@ -177,9 +128,6 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		}
 	}
 
-	/// <summary>
-	/// 淬毒
-	/// </summary>
 	public unsafe void Add(short materialTemplateId)
 	{
 		if (GetTotalPoisonCount() > 3)
@@ -231,9 +179,6 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		CalcFinialMedicineId();
 	}
 
-	/// <summary>
-	/// 重新计算最终的毒药ID
-	/// </summary>
 	public unsafe void CalcFinialMedicineId()
 	{
 		switch (GetTotalPoisonCount())
@@ -256,20 +201,11 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		}
 	}
 
-	/// <summary>
-	/// 获取总淬毒次数
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetTotalPoisonCount()
 	{
 		return _poisons.GetTotalPoisonCount();
 	}
 
-	/// <summary>
-	/// 是否包含某种毒药
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public unsafe bool Contains(short templateId)
 	{
 		MedicineItem config = Medicine.Instance[templateId];
@@ -283,10 +219,6 @@ public struct PoisonEffects : ISerializableGameData, IEquatable<PoisonEffects>
 		return false;
 	}
 
-	/// <summary>
-	/// 获取毒素的最高品级
-	/// </summary>
-	/// <returns></returns>
 	public int GetMaxGrade()
 	{
 		return GetAllMedicineTemplateIds().Max((short id) => (id <= -1) ? (-1) : Medicine.Instance[id].Grade);

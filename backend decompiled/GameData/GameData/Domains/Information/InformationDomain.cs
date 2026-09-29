@@ -187,8 +187,6 @@ public class InformationDomain : BaseGameDataDomain
 
 	private BinaryModificationCollection _modificationsSecretInformationCollection = BinaryModificationCollection.Create();
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	private void OnInitializedDomainData()
 	{
 	}
@@ -2598,7 +2596,7 @@ public class InformationDomain : BaseGameDataDomain
 		if (secret != null)
 		{
 			secret.QueryParameters(out var occurence);
-			if (occurence.CharacterRelationshipSnapshotCollection.TryGetValue(characterId, out CharacterRelationshipSnapshot characterRelationshipSnapshot))
+			if (occurence.CharacterRelationshipSnapshotCollection.TryGetValue(characterId, out var characterRelationshipSnapshot))
 			{
 				return characterRelationshipSnapshot;
 			}

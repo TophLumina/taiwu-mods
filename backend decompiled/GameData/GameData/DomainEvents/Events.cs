@@ -42,6 +42,8 @@ public static class Events
 
 	public delegate void OnQiArtAffected(DataContext context, GameData.Domains.Character.Character character, short skillId);
 
+	public delegate void OnPolymorphCharacterResetStatus(DataContext context, GameData.Domains.Character.Character character);
+
 	public delegate void OnCombatBegin(DataContext context);
 
 	public delegate void OnCombatSettlement(DataContext context, sbyte combatStatus);
@@ -250,6 +252,8 @@ public static class Events
 	[DomainEvent(MaxReenterCount = 1)]
 	public delegate void OnChangeDurabilityToZero(DataContext context, CombatCharacter character, ItemKey itemKey);
 
+	public delegate void OnRemovePestleEffect(DataContext context, SkillEffectKey effectKey);
+
 	public delegate void OnSectStoryUnyieldingFallenOnceInterrupt(DataContext context, int charId);
 
 	public delegate void OnPassingLegacyWhileAdvancingMonth(DataContext context);
@@ -273,6 +277,8 @@ public static class Events
 	private static OnXiangshuInfectionFeatureChangedEnd _handlersXiangshuInfectionFeatureChangedEnd;
 
 	private static OnQiArtAffected _handlersQiArtAffected;
+
+	private static OnPolymorphCharacterResetStatus _handlersPolymorphCharacterResetStatus;
 
 	private static OnCombatBegin _handlersCombatBegin;
 
@@ -472,6 +478,8 @@ public static class Events
 
 	private static OnChangeDurabilityToZero _handlersChangeDurabilityToZero;
 
+	private static OnRemovePestleEffect _handlersRemovePestleEffect;
+
 	private static OnSectStoryUnyieldingFallenOnceInterrupt _handlersSectStoryUnyieldingFallenOnceInterrupt;
 
 	private static OnPassingLegacyWhileAdvancingMonth _handlersPassingLegacyWhileAdvancingMonth;
@@ -538,7 +546,7 @@ public static class Events
 		else if (itemKey.ItemType == 4)
 		{
 			DomainManager.Global.InvokeGuidingTrigger(context, 21);
-			if ((uint)(itemSubType - 402) <= 2u)
+			if ((uint)(itemSubType - 402) <= 3u)
 			{
 				DomainManager.Global.InvokeGuidingTrigger(context, 11);
 			}
@@ -1513,7 +1521,7 @@ public static class Events
 			return;
 		}
 		sbyte orgTemplateId = settlement.GetOrgTemplateId();
-		if (settlement.CalcApprovingRateTotal() >= 1000)
+		if (settlement.CalcApprovingRate() >= 1000)
 		{
 			switch (orgTemplateId)
 			{
@@ -1775,6 +1783,7 @@ public static class Events
 		_handlersEatingItem = null;
 		_handlersXiangshuInfectionFeatureChangedEnd = null;
 		_handlersQiArtAffected = null;
+		_handlersPolymorphCharacterResetStatus = null;
 		_handlersCombatBegin = null;
 		_handlersCombatSettlement = null;
 		_handlersCombatEnd = null;
@@ -1874,6 +1883,7 @@ public static class Events
 		_handlersCombatCostNeiliConfirm = null;
 		_handlersCostTrickDuringPreparingSkill = null;
 		_handlersChangeDurabilityToZero = null;
+		_handlersRemovePestleEffect = null;
 		_handlersSectStoryUnyieldingFallenOnceInterrupt = null;
 		_handlersPassingLegacyWhileAdvancingMonth = null;
 		_handlersAdvanceMonthBegin = null;
@@ -1970,6 +1980,21 @@ public static class Events
 	public static void RaiseQiArtAffected(DataContext context, GameData.Domains.Character.Character character, short skillId)
 	{
 		_handlersQiArtAffected?.Invoke(context, character, skillId);
+	}
+
+	public static void RegisterHandler_PolymorphCharacterResetStatus(OnPolymorphCharacterResetStatus handler)
+	{
+		_handlersPolymorphCharacterResetStatus = (OnPolymorphCharacterResetStatus)Delegate.Combine(_handlersPolymorphCharacterResetStatus, handler);
+	}
+
+	public static void UnRegisterHandler_PolymorphCharacterResetStatus(OnPolymorphCharacterResetStatus handler)
+	{
+		_handlersPolymorphCharacterResetStatus = (OnPolymorphCharacterResetStatus)Delegate.Remove(_handlersPolymorphCharacterResetStatus, handler);
+	}
+
+	public static void RaisePolymorphCharacterResetStatus(DataContext context, GameData.Domains.Character.Character character)
+	{
+		_handlersPolymorphCharacterResetStatus?.Invoke(context, character);
 	}
 
 	public static void RegisterHandler_CombatBegin(OnCombatBegin handler)
@@ -3455,6 +3480,21 @@ public static class Events
 	public static void RaiseChangeDurabilityToZero(DataContext context, CombatCharacter character, ItemKey itemKey)
 	{
 		_handlersChangeDurabilityToZero?.Invoke(context, character, itemKey);
+	}
+
+	public static void RegisterHandler_RemovePestleEffect(OnRemovePestleEffect handler)
+	{
+		_handlersRemovePestleEffect = (OnRemovePestleEffect)Delegate.Combine(_handlersRemovePestleEffect, handler);
+	}
+
+	public static void UnRegisterHandler_RemovePestleEffect(OnRemovePestleEffect handler)
+	{
+		_handlersRemovePestleEffect = (OnRemovePestleEffect)Delegate.Remove(_handlersRemovePestleEffect, handler);
+	}
+
+	public static void RaiseRemovePestleEffect(DataContext context, SkillEffectKey effectKey)
+	{
+		_handlersRemovePestleEffect?.Invoke(context, effectKey);
 	}
 
 	public static void RegisterHandler_SectStoryUnyieldingFallenOnceInterrupt(OnSectStoryUnyieldingFallenOnceInterrupt handler)

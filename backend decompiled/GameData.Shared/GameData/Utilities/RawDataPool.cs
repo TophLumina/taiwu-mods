@@ -7,13 +7,6 @@ using GameData.GameDataBridge.VnPipe;
 
 namespace GameData.Utilities;
 
-/// <summary>
-/// 二进制数据池, 通过偏移和长度来定位数据.
-/// 数据长度暂时添加软限制 16 mb (特殊情况下可以超过此值).
-/// 该限制主要作为一种数据验证和提醒，以防止因数据错误而申请巨量内存却没有即使抛出，以及设计层面上的无限制扩大一次性传输的数据。
-/// 数据只能添加, 不能修改也不能移除, 因此只供一次性使用.
-/// 原始数据存放空间会一直处于 pinned 状态.
-/// </summary>
 public class RawDataPool : Stream
 {
 	public const int InvalidOffset = -1;
@@ -32,21 +25,12 @@ public class RawDataPool : Stream
 
 	private readonly int _initialCapacity;
 
-	/// <summary>
-	/// 池中保存的原始数据的字节数 (小于等于原始数据数组长度)
-	/// </summary>
 	private int _size;
 
 	private bool _disposed;
 
-	/// <summary>
-	/// [Stream 接口专用] 当前读取偏移
-	/// </summary>
 	private int _streamCurrReadingOffset;
 
-	/// <summary>
-	/// 池中保存的原始数据的字节数 (小于等于原始数据数组长度)
-	/// </summary>
 	public int RawDataSize => _size;
 
 	public int Capacity => _rawData.Length;
@@ -83,11 +67,6 @@ public class RawDataPool : Stream
 		_rawData = EmptyArray;
 	}
 
-	/// <summary>
-	/// 从 Socket 中读取原始数据, 并初始化此对象
-	/// </summary>
-	/// <param name="socket"></param>
-	/// <param name="size"></param>
 	public unsafe RawDataPool(Socket socket, int size)
 	{
 		if (size <= 0)
@@ -197,29 +176,16 @@ public class RawDataPool : Stream
 		}
 	}
 
-	/// <summary>
-	/// 清除所有数据, 但不改变容量
-	/// </summary>
 	public void Clear()
 	{
 		_size = 0;
 	}
 
-	/// <summary>
-	/// 设置当前的读取偏移.
-	/// 调用 Stream 的相关读操作之前, 必须调用此方法.
-	/// </summary>
-	/// <param name="offset"></param>
 	public void SetStreamReadingOffset(int offset)
 	{
 		_streamCurrReadingOffset = offset;
 	}
 
-	/// <summary>
-	/// 获取当前的读取偏移.
-	/// 调用 Stream 的相关读操作之后, 必须调用此方法.
-	/// </summary>
-	/// <returns></returns>
 	public int GetStreamReadingOffset()
 	{
 		return _streamCurrReadingOffset;
@@ -285,42 +251,21 @@ public class RawDataPool : Stream
 		_rawDataPointer[destOffset] = value;
 	}
 
-	/// <summary>
-	/// 获取要写入的数据的偏移
-	/// </summary>
-	/// <returns>当前数据偏移</returns>
 	public int GetWritingOffset()
 	{
 		return _size;
 	}
 
-	/// <summary>
-	/// 获取已写入的数据的长度
-	/// </summary>
-	/// <param name="offset">之前通过 GetWritingOffset 获得的数据偏移</param>
-	/// <returns>写入的数据的长度</returns>
 	public int GetWrittenDataSize(int offset)
 	{
 		return _size - offset;
 	}
 
-	/// <summary>
-	/// 获取数据的地址
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <returns></returns>
 	public unsafe byte* GetPointer(int offset)
 	{
 		return _rawDataPointer + offset;
 	}
 
-	/// <summary>
-	/// 获取数据的地址, 跳过了数据头.
-	/// 数据头固定 4 字节, 一般是元素个数, 或者数据长度.
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="pHeader"></param>
-	/// <returns></returns>
 	public unsafe byte* GetPointerWithHeader(int offset, uint* pHeader)
 	{
 		byte* pData = _rawDataPointer + offset;
@@ -328,12 +273,6 @@ public class RawDataPool : Stream
 		return pData + 4;
 	}
 
-	/// <summary>
-	/// 添加非托管类型的数据
-	/// </summary>
-	/// <param name="value"></param>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public unsafe int AddUnmanaged<T>(T value) where T : unmanaged
 	{
 		int offset = _size;
@@ -344,12 +283,6 @@ public class RawDataPool : Stream
 		return offset;
 	}
 
-	/// <summary>
-	/// 直接将非托管类型数据写入到已分配的地址
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="value"></param>
-	/// <typeparam name="T"></typeparam>
 	public unsafe void SetUnmanaged<T>(int offset, T value) where T : unmanaged
 	{
 		if (offset + sizeof(T) > _size)
@@ -359,24 +292,11 @@ public class RawDataPool : Stream
 		*(T*)(_rawDataPointer + offset) = value;
 	}
 
-	/// <summary>
-	/// 获取非托管类型的数据
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public unsafe T GetUnmanaged<T>(int offset) where T : unmanaged
 	{
 		return *(T*)(_rawDataPointer + offset);
 	}
 
-	/// <summary>
-	/// 添加二进制数据
-	/// </summary>
-	/// <param name="pData"></param>
-	/// <param name="dataSize"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.Exception"></exception>
 	public unsafe int Add(byte* pData, int dataSize)
 	{
 		int offset = _size;
@@ -390,16 +310,6 @@ public class RawDataPool : Stream
 		return offset;
 	}
 
-	/// <summary>
-	/// 添加二进制数据, 包括数据头.
-	/// 数据头固定 4 字节, 一般是元素个数, 或者数据长度.
-	/// </summary>
-	/// <param name="pData"></param>
-	/// <param name="dataSize"></param>
-	/// <param name="header"></param>
-	/// <param name="checkMaxSize"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.Exception"></exception>
 	public unsafe int AddWithHeader(byte* pData, int dataSize, uint header, bool checkMaxSize = true)
 	{
 		if (checkMaxSize && dataSize > 33554432)
@@ -420,16 +330,6 @@ public class RawDataPool : Stream
 		return offset;
 	}
 
-	/// <summary>
-	/// 在池中分配指定大小的数据内存, 由调用者写入值.
-	/// 注意, 此方法设置的地址可能会在下次分配内存时失效.
-	/// </summary>
-	/// <remarks>
-	/// 2023/11/27: 此方法设置的地址在内部扩容后也会失效, 因此应避免在后续逻辑分配了新的内存后继续对该地址进行操作, 而是应该改为通过 offset 修改、获取指定地址的数据.
-	/// </remarks>
-	/// <param name="dataSize"></param>
-	/// <param name="ppData">存放 "分配的内存的起始地址" 数据的地址</param>
-	/// <returns></returns>
 	public unsafe int Allocate(int dataSize, byte** ppData)
 	{
 		int offset = _size;
@@ -440,19 +340,6 @@ public class RawDataPool : Stream
 		return offset;
 	}
 
-	/// <summary>
-	/// 在池中分配指定大小的数据内存, 包括数据头.
-	/// 数据头固定 4 字节, 一般是元素个数, 或者数据长度.
-	/// 注意, 此方法设置的地址可能会在下次分配内存时失效.
-	/// </summary>
-	/// <remarks>
-	/// 2023/11/27: 此方法设置的地址在内部扩容后也会失效, 因此应避免在后续逻辑分配了新的内存后继续对该地址进行操作, 而是应该改为通过 offset 修改、获取指定地址的数据.
-	/// </remarks>
-	/// <param name="dataSize"></param>
-	/// <param name="ppData">存放 "分配的内存的起始地址" 数据的地址</param>
-	/// <param name="header"></param>
-	/// <param name="checkMaxSize"></param>
-	/// <returns></returns>
 	public unsafe int AllocateWithHeader(int dataSize, byte** ppData, uint header, bool checkMaxSize = true)
 	{
 		if (checkMaxSize && dataSize > 33554432)
@@ -469,11 +356,6 @@ public class RawDataPool : Stream
 		return offset;
 	}
 
-	/// <summary>
-	/// 把所有有效数据用 Socket 发送出去
-	/// </summary>
-	/// <param name="socket"></param>
-	/// <returns>已发送的字节数</returns>
 	public int CopyTo(Socket socket)
 	{
 		if (_size <= 0)

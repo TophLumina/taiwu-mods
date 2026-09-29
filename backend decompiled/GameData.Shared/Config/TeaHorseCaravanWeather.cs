@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class TeaHorseCaravanWeather : ConfigData<TeaHorseCaravanWeatherItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TeaHorseCaravanWeather Instance = new TeaHorseCaravanWeather();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Icon" };

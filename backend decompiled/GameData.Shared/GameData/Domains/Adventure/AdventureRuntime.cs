@@ -14,9 +14,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇运行时
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, ISerializableGameData
 {
@@ -67,150 +64,74 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		};
 	}
 
-	/// <summary>
-	/// 二分查找数量阈值
-	/// </summary>
 	private const int BinarySearchThreshold = 64;
 
-	/// <summary>
-	/// 奇遇实例 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int Id;
 
-	/// <summary>
-	/// 奇遇中心点在大地图上的位置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public Location MapLocation;
 
-	/// <summary>
-	/// 奇遇库 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int CoreId;
 
-	/// <summary>
-	/// 所有奇遇地格
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	private List<AdventureBlock> _blocks;
 
-	/// <summary>
-	/// 所有奇遇元素
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	private List<AdventureElement> _elements;
 
-	/// <summary>
-	/// 变量值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	private Dictionary<AdventureParameterKey, AdventureParameterValue> _parameterValues;
 
-	/// <summary>
-	/// 已触发的单次自动事件
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	private List<int> _invokedOnceAutoEvents;
 
-	/// <summary>
-	/// 已触发的单次元素事件
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	private Dictionary<int, IntList> _invokedOnceElementEvents;
 
-	/// <summary>
-	/// 奇遇中临时道具数据
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	private List<AdventureItem> _temporaryItems;
 
-	/// <summary>
-	/// 参与的智能人物 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	private List<int> _calledCharacters;
 
-	/// <summary>
-	/// 创建的临时人物 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	private List<int> _temporaryCharacters;
 
-	/// <summary>
-	/// 用于序列化的状态类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 11)]
 	private byte _internalStatusType;
 
-	/// <summary>
-	/// 自动消亡时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 12)]
 	private int _autoDeleteDate = -1;
 
-	/// <summary>
-	/// 表现随机种子
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 13)]
 	public int DisplayRandomSeed;
 
-	/// <summary>
-	/// 当前所有行为
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 14)]
 	private List<AdventureAction> _actions;
 
-	/// <summary>
-	/// 下个元素 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 15)]
 	private int _nextElementId;
 
-	/// <summary>
-	/// 下个元素 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 16)]
 	private int _blockGroupIndex;
 
-	/// <summary>
-	/// 生成版本号
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 17)]
 	public AdventureVersion Version;
 
-	/// <summary>
-	/// 刚刚移除的元素 ID 缓存
-	/// </summary>
 	private List<int> _justRemovedElementIds;
 
-	/// <summary>
-	/// 地格缓存桶，仅后端可使用
-	/// </summary>
 	private AdventureBlockBucket _blockCacheBucket;
 
-	/// <summary>
-	/// 寻路算法模型
-	/// </summary>
 	private AStarAlgorithmSimple<AdventureBlockIndex> _aStarAlgorithm;
 
-	/// <summary>
-	/// 正在筛选角色的元素
-	/// </summary>
 	private static readonly Dictionary<CharacterFilterKey, List<AdventureElement>> FilterElements = new Dictionary<CharacterFilterKey, List<AdventureElement>>();
 
-	/// <summary>
-	/// 状态类型
-	/// </summary>
 	public EAdventureStatusType StatusType => (EAdventureStatusType)_internalStatusType;
 
-	/// <inheritdoc cref="P:GameData.Adventure.AdventureData.Size" />
 	public int Size => Core.Size;
 
-	/// <summary>
-	/// 所有临时道具，包括太吾与元素的
-	/// </summary>
 	public IReadOnlyList<AdventureItem> TemporaryItems
 	{
 		get
@@ -220,42 +141,24 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <inheritdoc />
 	public int RemainMonths => CalcRemainMonths(ExternalDataBridge.Context.CurrDate);
 
-	/// <summary>
-	/// 奇遇格核心数据
-	/// </summary>
 	public IReadOnlyList<AdventureBlockData> CoreBlocks => Core.Groups[_blockGroupIndex].Blocks;
 
-	/// <summary>
-	/// 核心数据
-	/// </summary>
 	public AdventureData Core => ExternalDataBridge.Context.AdventureCore.GetAdventureData(CoreId);
 
-	/// <inheritdoc />
 	int IAdventureRuntime.Id => Id;
 
-	/// <inheritdoc />
 	int IAdventureRuntime.CoreId => CoreId;
 
-	/// <inheritdoc />
 	Location IAdventureRuntime.MapLocation => MapLocation;
 
-	/// <inheritdoc />
 	bool IAdventureRuntime.Satisfied => AllSatisfied();
 
-	/// <inheritdoc />
 	IReadOnlyList<AdventureParameterData> IAdventureParameterProvider.Parameters => Core.Parameters;
 
-	/// <summary>
-	/// 存在任意有效落点
-	/// </summary>
 	public bool AnyEntry => _blocks.Any((AdventureBlock x) => x.ContainStatus(EAdventureBlockStatusType.In));
 
-	/// <summary>
-	/// 所有临时人物
-	/// </summary>
 	public IReadOnlyList<int> TemporaryCharacters
 	{
 		get
@@ -268,9 +171,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 应当保留
-	/// </summary>
 	public bool ShouldStay
 	{
 		get
@@ -283,17 +183,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 某个位置是否处于奇遇内
-	/// </summary>
 	public bool InAdventure(AdventureBlockIndex index)
 	{
 		return MathUtils.Abs(index.X) + MathUtils.Abs(index.Y) <= Size;
 	}
 
-	/// <summary>
-	/// 某个位置是否可通行
-	/// </summary>
 	public bool IsPassable(AdventureBlockIndex index)
 	{
 		if (!InAdventure(index))
@@ -314,9 +208,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 某个位置是否可作为奇遇出口
-	/// </summary>
 	public bool IsExitPoint(AdventureBlockIndex index)
 	{
 		foreach (AdventureBlock block in _blocks)
@@ -329,9 +220,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return false;
 	}
 
-	/// <summary>
-	/// 计算剩余持续时间，负数为无限
-	/// </summary>
 	public int CalcRemainMonths(int currDate)
 	{
 		if (_autoDeleteDate < 0)
@@ -341,32 +229,16 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return MathUtils.Max(_autoDeleteDate - currDate, 0);
 	}
 
-	/// <summary>
-	/// 是否为已触发的单次自动事件
-	/// </summary>
-	/// <param name="eventId"></param>
-	/// <returns></returns>
 	public bool IsInvokedOnceAutoEvent(int eventId)
 	{
 		return _invokedOnceAutoEvents?.Contains(eventId) ?? false;
 	}
 
-	/// <summary>
-	/// 是否为已触发的单次元素事件
-	/// </summary>
-	/// <param name="elementId"></param>
-	/// <param name="eventId"></param>
-	/// <returns></returns>
 	public bool IsInvokedOnceElementEvent(int elementId, int eventId)
 	{
 		return _invokedOnceElementEvents?.GetOrDefault(elementId).Items?.Contains(eventId) == true;
 	}
 
-	/// <summary>
-	/// 单次自动事件已触发
-	/// </summary>
-	/// <param name="eventId"></param>
-	/// <returns></returns>
 	public bool OnceAutoEventInvoked(int eventId)
 	{
 		if (_invokedOnceAutoEvents == null)
@@ -381,12 +253,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 单次元素事件已触发
-	/// </summary>
-	/// <param name="elementId"></param>
-	/// <param name="eventId"></param>
-	/// <returns></returns>
 	public bool OnceElementEventInvoked(int elementId, int eventId)
 	{
 		if (_invokedOnceElementEvents == null)
@@ -414,17 +280,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 获取所有奇遇内的坐标
-	/// </summary>
 	public IEnumerable<AdventureBlockIndex> GetIndexes()
 	{
 		return AdventureBlockIndex.GetIndexes(Size);
 	}
 
-	/// <summary>
-	/// 获取所有邻接可通行的坐标
-	/// </summary>
 	public IEnumerable<AdventureBlockIndex> GetNeighborPassableIndexes(AdventureBlockIndex index, int distance)
 	{
 		foreach (AdventureBlockIndex neighbor in GetIndexes())
@@ -436,9 +296,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 获取奇遇内所有元素
-	/// </summary>
 	public IReadOnlyList<AdventureElement> GetAllElements()
 	{
 		if (_elements == null)
@@ -448,25 +305,16 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return _elements;
 	}
 
-	/// <summary>
-	/// 奇遇中是否有指定元素
-	/// </summary>
 	public bool IsElementAlive(int elementId)
 	{
 		return GetElement(elementId) != null;
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Adventure.AdventureRuntime.IsElementAlive(System.Int32)" />
 	public bool IsElementAlive(AdventureElement element)
 	{
 		return IsElementAlive(element.Id);
 	}
 
-	/// <summary>
-	/// 获取指定 ID 的元素
-	/// </summary>
-	/// <param name="elementId"></param>
-	/// <returns></returns>
 	public AdventureElement GetElement(int elementId)
 	{
 		List<AdventureElement> elements = _elements;
@@ -488,10 +336,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 通过二分查找搜索指定 ID 元素，依赖于当前实现元素在数组中按顺序存储
-	/// 假定外部已校验过至少有一个元素
-	/// </summary>
 	private AdventureElement GetElementByBinarySearch(int elementId)
 	{
 		int minIndex = 0;
@@ -516,9 +360,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 获取某个位置的首个元素
-	/// </summary>
 	public AdventureElement GetElement(AdventureBlockIndex index)
 	{
 		List<AdventureElement> elements = _elements;
@@ -536,9 +377,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 尝试获取某个位置上的所有元素
-	/// </summary>
 	public IEnumerable<AdventureElement> GetElements(AdventureBlockIndex index)
 	{
 		List<AdventureElement> elements = _elements;
@@ -555,11 +393,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 尝试获取某个核心 ID 的所有元素
-	/// </summary>
-	/// <param name="elementCoreId"></param>
-	/// <returns></returns>
 	public IEnumerable<AdventureElement> GetElementsByCoreId(int elementCoreId)
 	{
 		List<AdventureElement> elements = _elements;
@@ -576,9 +409,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 获取带有指定标签的元素
-	/// </summary>
 	public IEnumerable<AdventureElement> GetElementsByTag(string tag)
 	{
 		List<AdventureElement> elements = _elements;
@@ -595,9 +425,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 获取带有指定标签组中任一标签的元素
-	/// </summary>
 	public IEnumerable<AdventureElement> GetElementByAnyTags(IReadOnlyList<string> tags)
 	{
 		if (tags == null || tags.Count <= 0)
@@ -618,9 +445,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 获取带有指定标签组中所有标签的元素
-	/// </summary>
 	public IEnumerable<AdventureElement> GetElementByAllTags(IReadOnlyList<string> tags)
 	{
 		if (tags == null || tags.Count <= 0)
@@ -641,9 +465,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 获取指定元素键的首个元素
-	/// </summary>
 	public AdventureElement GetElementByCharacterKey(string characterKey)
 	{
 		if (!string.IsNullOrEmpty(characterKey))
@@ -664,20 +485,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 获取所有地格数据
-	/// </summary>
-	/// <returns></returns>
 	public IReadOnlyList<AdventureBlock> GetAllBlocks()
 	{
 		return _blocks;
 	}
 
-	/// <summary>
-	/// 获取指定位置的地格数据
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public AdventureBlock GetBlock(AdventureBlockIndex index)
 	{
 		foreach (AdventureBlock block in _blocks)
@@ -690,11 +502,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 获取指定位置的地格核心数据
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public AdventureBlockData GetBlockCore(AdventureBlockIndex index)
 	{
 		if (_blockCacheBucket != null)
@@ -711,20 +518,12 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 获取指定位置的地格所属分组
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public IReadOnlyList<int> GetBlockGroupIds(AdventureBlockIndex index)
 	{
 		IReadOnlyList<int> readOnlyList = GetBlockCore(index)?.GroupIds;
 		return readOnlyList ?? Array.Empty<int>();
 	}
 
-	/// <summary>
-	/// 获取指定分组的所有地格
-	/// </summary>
 	public IEnumerable<AdventureBlock> GetBlocksByGroupId(int groupId)
 	{
 		foreach (AdventureBlock block in _blocks)
@@ -736,9 +535,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 获取满足任意分组的地格
-	/// </summary>
 	public IEnumerable<AdventureBlock> GetBlocksByAnyGroupIds(IReadOnlyList<int> groupIds)
 	{
 		if (groupIds == null || groupIds.Count <= 0)
@@ -754,9 +550,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 获取满足所有分组的地格
-	/// </summary>
 	public IEnumerable<AdventureBlock> GetBlocksByAllGroupIds(IReadOnlyList<int> groupIds)
 	{
 		if (groupIds == null || groupIds.Count <= 0)
@@ -772,12 +565,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 查找两点间最短路径
-	/// </summary>
-	/// <param name="from"></param>
-	/// <param name="to"></param>
-	/// <returns>查找到的路径，失败时返回 null</returns>
 	public IReadOnlyList<AdventureBlockIndex> FindShortestPath(AdventureBlockIndex from, AdventureBlockIndex to)
 	{
 		if (_aStarAlgorithm == null)
@@ -787,7 +574,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return _aStarAlgorithm.FindShortestPath(from, to);
 	}
 
-	/// <inheritdoc cref="T:GameData.Common.Algorithm.AStarAlgorithm`1.GetValidNeighbors" />
 	public IEnumerable<AdventureBlockIndex> GetValidNeighbors(AdventureBlockIndex index)
 	{
 		foreach (EAdventureDirection direction in AdventureBlockIndex.Directions)
@@ -800,7 +586,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <inheritdoc cref="T:GameData.Common.Algorithm.AStarAlgorithm`1.GetMoveCost" />
 	public int GetMoveCost(AdventureBlockIndex pos)
 	{
 		int timeCost = GetBlockCore(pos).TimeCost;
@@ -816,13 +601,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return MathUtils.Max(timeCost * costPercent, 1);
 	}
 
-	/// <inheritdoc />
 	public AdventureParameterValue? GetParameterOrNull(AdventureParameterKey key)
 	{
 		return _parameterValues?.GetOrNull(key);
 	}
 
-	/// <inheritdoc />
 	public void SetParameter(AdventureParameterKey key, AdventureParameterValue value)
 	{
 		if (_parameterValues == null)
@@ -832,23 +615,16 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		_parameterValues[key] = value;
 	}
 
-	/// <inheritdoc />
 	public void RemoveParameter(AdventureParameterKey key)
 	{
 		_parameterValues?.Remove(key);
 	}
 
-	/// <summary>
-	/// 查找太吾持有的某个临时道具
-	/// </summary>
 	public AdventureItem GetTemporaryItemTaiwu(ItemKey itemKey)
 	{
 		return GetTemporaryItem(0, itemKey);
 	}
 
-	/// <summary>
-	/// 查找指定持有者的临时道具
-	/// </summary>
 	public AdventureItem GetTemporaryItem(int ownerId, ItemKey itemKey)
 	{
 		foreach (AdventureItem item in TemporaryItems)
@@ -861,17 +637,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 查找太吾持有的指定模板临时道具
-	/// </summary>
 	public AdventureItem GetTemporaryItemFirstTaiwu(sbyte itemType, short templateId)
 	{
 		return GetTemporaryItemFirst(0, itemType, templateId);
 	}
 
-	/// <summary>
-	/// 查找指定持有者的指定模板临时道具
-	/// </summary>
 	public AdventureItem GetTemporaryItemFirst(int ownerId, sbyte itemType, short templateId)
 	{
 		foreach (AdventureItem item in TemporaryItems)
@@ -884,17 +654,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return null;
 	}
 
-	/// <summary>
-	/// 查找太吾持有的所有指定模板临时道具
-	/// </summary>
 	public IEnumerable<AdventureItem> GetTemporaryItemsTaiwu(sbyte itemType, short templateId)
 	{
 		return GetTemporaryItems(0, itemType, templateId);
 	}
 
-	/// <summary>
-	/// 查找指定持有者的所有指定模板临时道具
-	/// </summary>
 	public IEnumerable<AdventureItem> GetTemporaryItems(int ownerId, sbyte itemType, short templateId)
 	{
 		return from x in GetTemporaryItems(ownerId)
@@ -902,17 +666,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 			select x;
 	}
 
-	/// <summary>
-	/// 查找太吾的所有临时道具
-	/// </summary>
 	public IEnumerable<AdventureItem> GetTemporaryItemsTaiwu()
 	{
 		return TemporaryItems.Where(AdventureItem.IsItemOwnedByTaiwu);
 	}
 
-	/// <summary>
-	/// 查找指定持有者的所有临时道具
-	/// </summary>
 	public IEnumerable<AdventureItem> GetTemporaryItems(int ownerId)
 	{
 		foreach (AdventureItem item in TemporaryItems)
@@ -924,15 +682,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		return $"{Core.Name}({Id})";
 	}
 
-	/// <summary>
-	/// 随机地格组索引
-	/// </summary>
 	private static int RandomBlockGroupIndex(IRandomSource random, AdventureData data)
 	{
 		RepeatedField<AdventureGroupData> groups = data.Groups;
@@ -958,9 +712,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		throw new AdventureCoreGroupNoWeightException(data);
 	}
 
-	/// <summary>
-	/// 基于数据构造奇遇
-	/// </summary>
 	public AdventureRuntime(int id, Location location, AdventureData data, IRandomSource random = null)
 	{
 		Id = id;
@@ -1002,9 +753,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 继承升级的字段
-	/// </summary>
 	public bool InheritByUpgrade(AdventureRuntime other)
 	{
 		_parameterValues = ((other._parameterValues != null) ? new Dictionary<AdventureParameterKey, AdventureParameterValue>(other._parameterValues) : new Dictionary<AdventureParameterKey, AdventureParameterValue>());
@@ -1060,14 +808,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 尝试选取元素模板对应的位置
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="elementCoreId">元素核心库 ID</param>
-	/// <param name="blockIndex">基础落点位置</param>
-	/// <param name="elementIndex">选取的落点位置</param>
-	/// <returns></returns>
 	private bool TrySelectIndex(IRandomSource random, int elementCoreId, AdventureBlockIndex blockIndex, out AdventureBlockIndex elementIndex)
 	{
 		elementIndex = blockIndex;
@@ -1092,9 +832,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 在指定地格分组内随机一个地格
-	/// </summary>
 	private AdventureBlockIndex RandomIndexInGroup(IRandomSource random, AdventureBlockIndex index)
 	{
 		IReadOnlyList<int> groupIds = GetBlockGroupIds(index);
@@ -1113,9 +850,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return pool.GetRandom(random);
 	}
 
-	/// <summary>
-	/// 在指定位置创建元素
-	/// </summary>
 	public AdventureElement CreateElementAt(IAdventureContextBridge context, int coreId, AdventureBlockIndex index)
 	{
 		if (!TrySelectIndex(context.Random, coreId, index, out var elementIndex))
@@ -1132,9 +866,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return newElement;
 	}
 
-	/// <summary>
-	/// 移除某个元素
-	/// </summary>
 	public bool RemoveElement(int elementId)
 	{
 		List<AdventureElement> elements = _elements;
@@ -1154,9 +885,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return anyChanged;
 	}
 
-	/// <summary>
-	/// 移除索引元素
-	/// </summary>
 	private void RemoveElementAtIndex(int elementIndex)
 	{
 		AdventureElement element = _elements[elementIndex];
@@ -1173,9 +901,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 随机一个入口落点
-	/// </summary>
 	public AdventureBlockIndex PickEntryPoint(IRandomSource random)
 	{
 		int priority = int.MinValue;
@@ -1200,9 +925,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return new AdventureBlockIndex(0, 0, AdventureBlockIndex.CenterI);
 	}
 
-	/// <summary>
-	/// 设置状态类型
-	/// </summary>
 	public void SetStatusType(IAdventureContextBridge context, EAdventureStatusType statusType)
 	{
 		EAdventureStatusType statusType2 = StatusType;
@@ -1218,9 +940,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 设置自动消亡时间
-	/// </summary>
 	public void SetAutoDeleteDate(uint stayMonths)
 	{
 		if (stayMonths == 0)
@@ -1233,10 +952,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 更新所有地格的状态数据
-	/// </summary>
-	/// <returns>数据是否产生过变化</returns>
 	public bool UpdateStatus(IAdventureDomainBridge bridge)
 	{
 		if (_blockCacheBucket == null)
@@ -1260,9 +975,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return anyChanged;
 	}
 
-	/// <summary>
-	/// 判定强制移除
-	/// </summary>
 	public void CheckForceRemove()
 	{
 		List<AdventureElement> elements = _elements;
@@ -1272,9 +984,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 是否所有条件均已满足
-	/// </summary>
 	private bool AllSatisfied()
 	{
 		List<AdventureElement> elements = _elements;
@@ -1292,17 +1001,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 添加太吾的临时道具
-	/// </summary>
 	public void AddTemporaryItemTaiwu(IAdventureContextBridge context, ItemKey itemKey, int count = 1)
 	{
 		AddTemporaryItem(context, 0, itemKey, count);
 	}
 
-	/// <summary>
-	/// 添加指定持有者的临时道具
-	/// </summary>
 	public void AddTemporaryItem(IAdventureContextBridge context, int ownerId, ItemKey itemKey, int count = 1)
 	{
 		if (_temporaryItems == null)
@@ -1321,17 +1024,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		context.OwnedByAdventure(itemKey);
 	}
 
-	/// <summary>
-	/// 彻底移除太吾的临时道具
-	/// </summary>
 	public void RemoveTemporaryItemTaiwu(IAdventureContextBridge context, ItemKey itemKey)
 	{
 		RemoveTemporaryItem(context, 0, itemKey);
 	}
 
-	/// <summary>
-	/// 彻底移除指定持有者的临时道具
-	/// </summary>
 	public void RemoveTemporaryItem(IAdventureContextBridge context, int ownerId, ItemKey itemKey)
 	{
 		List<AdventureItem> temporaryItems = _temporaryItems;
@@ -1363,9 +1060,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 将某个道具从奇遇中解绑使得外部可以直接使用
-	/// </summary>
 	public bool UnbindTemporaryItem(int ownerId, ItemKey itemKey)
 	{
 		if (!ItemTemplateHelper.IsPureStackable(itemKey) && IsMultiOwned(itemKey))
@@ -1384,9 +1078,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return false;
 	}
 
-	/// <summary>
-	/// 道具是否被多重持有
-	/// </summary>
 	private bool IsMultiOwned(ItemKey itemKey)
 	{
 		List<AdventureItem> temporaryItems = _temporaryItems;
@@ -1405,21 +1096,16 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return ownerCount > 1;
 	}
 
-	/// <inheritdoc />
 	public bool IsTemporaryCharacter(int charId)
 	{
 		return _temporaryCharacters?.Contains(charId) ?? false;
 	}
 
-	/// <inheritdoc />
 	public bool IsCalledCharacter(int charId)
 	{
 		return _calledCharacters?.Contains(charId) ?? false;
 	}
 
-	/// <summary>
-	/// 获取所有拉取到的智能人物
-	/// </summary>
 	public void CollectCharacters(ICollection<int> characters)
 	{
 		List<int> calledCharacters = _calledCharacters;
@@ -1433,9 +1119,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 动态绑定角色预校验
-	/// </summary>
 	public bool DynamicBindPrecheck(AdventureElement element, int charId)
 	{
 		if (StatusType == EAdventureStatusType.Releasing)
@@ -1453,9 +1136,25 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return element.CharacterId < 0;
 	}
 
-	/// <summary>
-	/// 动态绑定召集的真实角色
-	/// </summary>
+	public AdventureElement DynamicBindPreCheckKey(string characterKey, int charId)
+	{
+		List<AdventureElement> elements = _elements;
+		if (elements == null || elements.Count <= 0 || string.IsNullOrEmpty(characterKey))
+		{
+			return null;
+		}
+		AdventureElement keyElement = _elements.FirstOrDefault((AdventureElement x) => x.CharacterId < 0 && x.Core.CharacterKey == characterKey);
+		if (keyElement == null)
+		{
+			return null;
+		}
+		if (!DynamicBindPrecheck(keyElement, charId))
+		{
+			return null;
+		}
+		return keyElement;
+	}
+
 	public void DynamicBindCalledCharacter(AdventureElement element, int charId)
 	{
 		if (!DynamicBindPrecheck(element, charId))
@@ -1471,9 +1170,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		_calledCharacters.Add(charId);
 	}
 
-	/// <summary>
-	/// 动态绑定生成的临时角色
-	/// </summary>
 	public void DynamicBindTemporaryCharacter(AdventureElement element, int charId)
 	{
 		if (!DynamicBindPrecheck(element, charId))
@@ -1489,28 +1185,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		_temporaryCharacters.Add(charId);
 	}
 
-	/// <summary>
-	/// 动态绑定预留键真实角色
-	/// </summary>
-	public bool DynamicBindKeyCharacter(string characterKey, int charId)
-	{
-		List<AdventureElement> elements = _elements;
-		if (elements == null || elements.Count <= 0 || string.IsNullOrEmpty(characterKey))
-		{
-			return false;
-		}
-		AdventureElement keyElement = _elements.FirstOrDefault((AdventureElement x) => x.CharacterId < 0 && x.Core.CharacterKey == characterKey);
-		if (keyElement == null)
-		{
-			return false;
-		}
-		DynamicBindCalledCharacter(keyElement, charId);
-		return true;
-	}
-
-	/// <summary>
-	/// 解绑角色并移除对应元素
-	/// </summary>
 	public EAdventureUnbindType DynamicUnbindCharacterAndRemoveElement(AdventureElement element)
 	{
 		if (StatusType == EAdventureStatusType.Releasing || element.CharacterId < 0 || !RemoveElement(element.Id))
@@ -1532,7 +1206,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return EAdventureUnbindType.None;
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Adventure.AdventureRuntime.DynamicUnbindCharacterAndRemoveElement(GameData.Domains.Adventure.AdventureElement)" />
 	public EAdventureUnbindType DynamicUnbindCharacterAndRemoveElement(int charId)
 	{
 		if (StatusType != EAdventureStatusType.Releasing)
@@ -1568,9 +1241,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return EAdventureUnbindType.None;
 	}
 
-	/// <summary>
-	/// 抓取指定批次的人物
-	/// </summary>
 	bool IAdventureRuntime.CallCharacters(IAdventureContextBridge context, EAdventureCharacterType type)
 	{
 		foreach (AdventureElement element in GetAllElements())
@@ -1613,9 +1283,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return allSatisfied;
 	}
 
-	/// <summary>
-	/// 太吾首次进入奇遇，生成临时角色
-	/// </summary>
 	public bool GenerateCharacters(IAdventureContextBridge context)
 	{
 		if ((int)StatusType >= 2)
@@ -1640,11 +1307,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 立刻生成元素需求的角色并进行绑定
-	/// </summary>
-	/// <param name="context"></param>
-	/// <param name="element"></param>
 	private bool GenerateAndBindCharacterImmediate(IAdventureContextBridge context, AdventureElement element)
 	{
 		if (element.CharacterId >= 0)
@@ -1660,7 +1322,7 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		if (elementCore.CharacterId >= 0)
 		{
 			short templateId = (short)elementCore.CharacterId;
-			int charId = context.GenerateTemporaryCharacter(templateId);
+			int charId = context.GenerateTemporaryCharacter(templateId, MapLocation);
 			if (charId < 0)
 			{
 				success = false;
@@ -1683,9 +1345,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return success;
 	}
 
-	/// <summary>
-	/// 回收所有数据
-	/// </summary>
 	public void ReleaseData(IAdventureContextBridge context)
 	{
 		SetStatusType(context, EAdventureStatusType.Releasing);
@@ -1706,34 +1365,21 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 太吾是否处于行为
-	/// </summary>
-	/// <returns></returns>
 	public bool InActionTaiwu()
 	{
 		return QueryTaiwuActionId() >= 1;
 	}
 
-	/// <summary>
-	/// 元素是否处于行为
-	/// </summary>
 	public bool InActionElement(AdventureElement element)
 	{
 		return QueryElementActionId(element) >= 1;
 	}
 
-	/// <summary>
-	/// 查询太吾当前正在进行的行为 ID
-	/// </summary>
 	public int QueryTaiwuActionId()
 	{
 		return QueryTaiwuAction()?.Id ?? 0;
 	}
 
-	/// <summary>
-	/// 查询太吾当前正在进行的行为数据
-	/// </summary>
 	public AdventureActionData QueryTaiwuActionData(out int remainTime)
 	{
 		remainTime = 0;
@@ -1746,17 +1392,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return QueryActionData(action.Key);
 	}
 
-	/// <summary>
-	/// 查询元素当前正在进行的行为 ID
-	/// </summary>
 	public int QueryElementActionId(AdventureElement element)
 	{
 		return QueryElementAction(element)?.Id ?? 0;
 	}
 
-	/// <summary>
-	/// 查询元素当前正在进行的行为数据
-	/// </summary>
 	public AdventureActionData QueryElementActionData(AdventureElement element, out int remainTime)
 	{
 		remainTime = 0;
@@ -1769,10 +1409,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return QueryActionData(action.Key);
 	}
 
-	/// <summary>
-	/// 查询与太吾处于相同行为组的所有元素
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerable<AdventureElement> QueryTaiwuActionGroupElements()
 	{
 		AdventureAction action = QueryTaiwuAction();
@@ -1783,9 +1419,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return Enumerable.Empty<AdventureElement>();
 	}
 
-	/// <summary>
-	/// 查询与指定元素处于相同行为组的所有元素
-	/// </summary>
 	public IEnumerable<AdventureElement> QueryElementActionGroupElements(AdventureElement actionElement)
 	{
 		AdventureAction action = QueryElementAction(actionElement);
@@ -1869,41 +1502,26 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 元素开始行为
-	/// </summary>
 	public bool StartAction(string key, AdventureElement element)
 	{
 		return StartAction(key, containsTaiwu: false, element);
 	}
 
-	/// <summary>
-	/// 多个元素开始行为
-	/// </summary>
 	public bool StartAction(string key, IReadOnlyList<AdventureElement> elements)
 	{
 		return StartAction(key, containsTaiwu: false, elements);
 	}
 
-	/// <summary>
-	/// 太吾开始行为
-	/// </summary>
 	public bool StartActionWithTaiwu(string key)
 	{
 		return StartAction(key, containsTaiwu: true, Array.Empty<AdventureElement>());
 	}
 
-	/// <summary>
-	/// 元素与太吾开始行为
-	/// </summary>
 	public bool StartActionWithTaiwu(string key, AdventureElement element)
 	{
 		return StartAction(key, containsTaiwu: true, element);
 	}
 
-	/// <summary>
-	/// 多个元素与太吾开始行为
-	/// </summary>
 	public bool StartActionWithTaiwu(string key, IReadOnlyList<AdventureElement> elements)
 	{
 		return StartAction(key, containsTaiwu: true, elements);
@@ -1970,10 +1588,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return true;
 	}
 
-	/// <summary>
-	/// 中断太吾行为
-	/// </summary>
-	/// <returns></returns>
 	public bool InterruptTaiwuAction()
 	{
 		int actionId = QueryTaiwuActionId();
@@ -1984,9 +1598,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return false;
 	}
 
-	/// <summary>
-	/// 中断元素行为
-	/// </summary>
 	public bool InterruptElementAction(AdventureElement element)
 	{
 		int actionId = QueryElementActionId(element);
@@ -1997,9 +1608,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return false;
 	}
 
-	/// <summary>
-	/// 中断刚刚移除的元素行为
-	/// </summary>
 	public bool InterruptJustRemovedElementActions()
 	{
 		List<int> justRemovedElementIds = _justRemovedElementIds;
@@ -2026,9 +1634,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return false;
 	}
 
-	/// <summary>
-	/// 中断行为
-	/// </summary>
 	public bool InterruptAction(int actionId)
 	{
 		List<AdventureAction> actions = _actions;
@@ -2047,9 +1652,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return false;
 	}
 
-	/// <summary>
-	/// 中断所有行为
-	/// </summary>
 	public void InterruptAllActions()
 	{
 		List<AdventureAction> actions = _actions;
@@ -2059,9 +1661,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 缓存所有行为
-	/// </summary>
 	public void CacheActions(IList<int> actionIds)
 	{
 		actionIds.Clear();
@@ -2075,13 +1674,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		}
 	}
 
-	/// <summary>
-	/// 更新所有行为
-	/// </summary>
-	/// <param name="actionId"></param>
-	/// <param name="deltaTime"></param>
-	/// <param name="finishedAction">完成的行为</param>
-	/// <returns>数据发生了变化</returns>
 	public bool ChangeAction(int actionId, int deltaTime, out AdventureAction finishedAction)
 	{
 		finishedAction = null;
@@ -2112,16 +1704,10 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return false;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AdventureRuntime()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AdventureRuntime(AdventureRuntime other)
 	{
 		Id = other.Id;
@@ -2209,9 +1795,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		Version = other.Version;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AdventureRuntime other)
 	{
 		Id = other.Id;
@@ -2299,13 +1882,11 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		Version = other.Version;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 39;
@@ -2377,7 +1958,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -2581,7 +2161,6 @@ public class AdventureRuntime : IAdventureRuntime, IAdventureParameterProvider, 
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

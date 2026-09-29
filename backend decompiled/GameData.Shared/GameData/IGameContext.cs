@@ -16,21 +16,12 @@ public interface IGameContext
 
 	string Language { get; }
 
-	/// <summary>
-	/// The Scroll of Taiwu_Data 的路径.
-	/// </summary>
 	string DataPath { get; }
 
-	/// <summary>
-	/// 显示内部开发版本的预设异常调试Log
-	/// </summary>
 	bool DevOnlyPredefinedLog { get; }
 
 	bool HideTaiwuOriginalSurname { get; }
 
-	/// <summary>
-	/// 世界Id，用于获取一些世界相关的随机表现（比如毁坏地区样式）
-	/// </summary>
 	uint WorldId { get; }
 
 	int TaiwuCharId { get; }
@@ -55,14 +46,8 @@ public interface IGameContext
 
 	TwelveImmortalsCacheData TwelveImmortalsCache { get; }
 
-	/// <summary>
-	/// 玄狱数据
-	/// </summary>
 	ChallengeModeData ChallengeModeData { get; }
 
-	/// <summary>
-	/// 亡流寨name id，用于判定要不要优先返回“亡流寨”
-	/// </summary>
 	short StockadeInStoryNameId => -2;
 
 	IReadOnlyDictionary<int, string> CustomTexts { get; }
@@ -71,11 +56,6 @@ public interface IGameContext
 
 	bool IsProfessionalSkillUnlockedAndEquipped(int professionSkillTemplateId);
 
-	/// <summary>
-	/// 志向数据
-	/// </summary>
-	/// <param name="professionSkillTemplateId"></param>
-	/// <returns></returns>
 	ProfessionData GetProfessionData(int professionSkillTemplateId);
 
 	bool GetWorldFunctionsStatus(byte worldFunctionType);

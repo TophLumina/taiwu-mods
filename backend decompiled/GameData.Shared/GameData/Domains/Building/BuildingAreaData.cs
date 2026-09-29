@@ -5,20 +5,11 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 产业地图数据
-/// </summary>
 public class BuildingAreaData : ISerializableGameData
 {
-	/// <summary>
-	/// 地图宽度
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Width;
 
-	/// <summary>
-	/// 地形类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LandFormType;
 
@@ -87,9 +78,6 @@ public class BuildingAreaData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 获取中心格索引
-	/// </summary>
 	public short GetCenterBlockIndex()
 	{
 		int coord = Width / 2;
@@ -105,9 +93,6 @@ public class BuildingAreaData : ISerializableGameData
 		return (x: index % Width, y: index / Width);
 	}
 
-	/// <summary>
-	/// 获取指定距离内的相邻格子列表
-	/// </summary>
 	public void GetNeighborBlocks(short blockIndex, sbyte blockWidth, List<short> neighborList, List<int> neighborDistanceList = null, int range = 1)
 	{
 		int blockX = blockIndex % Width;

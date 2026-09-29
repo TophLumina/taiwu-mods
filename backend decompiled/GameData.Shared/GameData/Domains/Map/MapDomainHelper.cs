@@ -4,9 +4,6 @@ namespace GameData.Domains.Map;
 
 public static class MapDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort Areas = 0;
@@ -162,9 +159,6 @@ public static class MapDomainHelper
 		public const ushort LocationNaturalDisasterDateNew = 75;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort GmCmd_SetLockTime = 0;
@@ -310,14 +304,8 @@ public static class MapDomainHelper
 		public const ushort GetPathInAreaWithAvoidSettings = 70;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
 	public const ushort DataCount = 76;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "Areas", 0 },
@@ -398,10 +386,6 @@ public static class MapDomainHelper
 		{ "LocationNaturalDisasterDateNew", 75 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
 	public static readonly string[] DataId2FieldName = new string[76]
 	{
 		"Areas", "AreaBlocks0", "AreaBlocks1", "AreaBlocks2", "AreaBlocks3", "AreaBlocks4", "AreaBlocks5", "AreaBlocks6", "AreaBlocks7", "AreaBlocks8",
@@ -414,14 +398,8 @@ public static class MapDomainHelper
 		"PastTaiwuVillageAreaBlocks", "PastTaiwuVillageLockMoveTime", "ChaishanAreaBlocks", "ArrivedSize2Blocks", "LocationNaturalDisasterDate", "LocationNaturalDisasterDateNew"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
 	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[76][];
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId = new Dictionary<string, ushort>
 	{
 		{ "GmCmd_SetLockTime", 0 },

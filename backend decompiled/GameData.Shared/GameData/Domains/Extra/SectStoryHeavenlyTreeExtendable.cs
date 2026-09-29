@@ -6,12 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 地区主线 - 武当 - 神木数据
-/// 对于引用类型字段, 构造函数中可以不创建对象, 保留默认的 null 值.
-/// 在进行反序列化时, 允许所有引用类型字段都为 null.
-/// 但是在序列化时, 要求所有是定长集合的引用字段都已经被创建, 且长度与定义一致. 集合中的引用类型元素若也为定长, 则也必须被创建; 变长的则可以为 null.
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 {
@@ -42,83 +36,40 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[10] { "Id", "TemplateId", "Location", "GrowPoint", "TriggerRandomEnemyCount", "MetInDream", "FindFairyland", "FightWithSnake", "SnakeTemplateId", "ReadBookList" };
 	}
 
-	/// <summary>
-	/// 神木角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 神木种类
-	/// Misc TemplateId
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 神木位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 神木成长值 
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort GrowPoint;
 
-	/// <summary>
-	/// 神木成长时触发生成相枢爪牙的次数
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort TriggerRandomEnemyCount;
 
-	/// <summary>
-	/// 神木入梦事件是否触发
-	/// </summary>
 	[SerializableGameDataField]
 	public bool MetInDream;
 
-	/// <summary>
-	/// 神木是否已经发现洞天
-	/// </summary>
 	[SerializableGameDataField]
 	public bool FindFairyland;
 
-	/// <summary>
-	/// 是否已经和洞天的蛇战斗过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool FightWithSnake;
 
-	/// <summary>
-	/// 神木洞天对应的蛇
-	/// </summary>
 	[SerializableGameDataField]
 	public short SnakeTemplateId;
 
-	/// <summary>
-	/// 神木读过的书
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> ReadBookList;
 
-	/// <summary>
-	/// 生长值未满，才能进行清空敌人、培育的操作
-	/// </summary>
 	public bool IsGrowPointMax => GrowPoint >= 900;
 
-	/// <summary>
-	/// 获取成长阶段对应的人物模板
-	/// </summary>
 	public int GrowTemplateId => GameData.Domains.World.SharedMethods.GetHeavenlyTreeTemplateIdByGrowValue(GrowPoint);
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="templateId"></param>
-	/// <param name="location"></param>
 	public SectStoryHeavenlyTreeExtendable(int id, short templateId, Location location)
 	{
 		Id = id;
@@ -128,11 +79,6 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		TriggerRandomEnemyCount = 0;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="tree"></param>
-	/// <param name="growPoint"></param>
 	public SectStoryHeavenlyTreeExtendable(SectStoryHeavenlyTreeExtendable tree, ushort growPoint)
 	{
 		Id = tree.Id;
@@ -142,12 +88,6 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		TriggerRandomEnemyCount = tree.TriggerRandomEnemyCount;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="tree"></param>
-	/// <param name="growPoint"></param>
-	/// <param name="triggerRandomEnemyCount"></param>
 	public SectStoryHeavenlyTreeExtendable(SectStoryHeavenlyTreeExtendable tree, ushort growPoint, ushort triggerRandomEnemyCount)
 	{
 		Id = tree.Id;
@@ -157,11 +97,6 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		TriggerRandomEnemyCount = triggerRandomEnemyCount;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="tree"></param>
-	/// <param name="id"></param>
 	public SectStoryHeavenlyTreeExtendable(SectStoryHeavenlyTreeExtendable tree, int id)
 	{
 		Id = id;
@@ -171,16 +106,10 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		TriggerRandomEnemyCount = tree.TriggerRandomEnemyCount;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectStoryHeavenlyTreeExtendable()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectStoryHeavenlyTreeExtendable(SectStoryHeavenlyTreeExtendable other)
 	{
 		Id = other.Id;
@@ -195,9 +124,6 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		ReadBookList = ((other.ReadBookList == null) ? null : new List<short>(other.ReadBookList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectStoryHeavenlyTreeExtendable other)
 	{
 		Id = other.Id;
@@ -212,13 +138,11 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		ReadBookList = ((other.ReadBookList == null) ? null : new List<short>(other.ReadBookList));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 21;
@@ -230,7 +154,6 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -278,7 +201,6 @@ public class SectStoryHeavenlyTreeExtendable : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

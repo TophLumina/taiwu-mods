@@ -4,43 +4,21 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 地区主线 - 武当 - 神木数据
-/// </summary>
 [Obsolete("use SectStoryHeavenlyTreeExtendable instead.")]
 public struct SectStoryHeavenlyTree : ISerializableGameData
 {
-	/// <summary>
-	/// 神木角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 神木种类
-	/// Misc TemplateId
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 神木位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 神木成长值 
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort GrowPoint;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="templateId"></param>
-	/// <param name="location"></param>
 	public SectStoryHeavenlyTree(int id, short templateId, Location location)
 	{
 		Id = id;
@@ -49,11 +27,6 @@ public struct SectStoryHeavenlyTree : ISerializableGameData
 		GrowPoint = 0;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="tree"></param>
-	/// <param name="growPoint"></param>
 	public SectStoryHeavenlyTree(SectStoryHeavenlyTree tree, ushort growPoint)
 	{
 		Id = tree.Id;
@@ -62,12 +35,6 @@ public struct SectStoryHeavenlyTree : ISerializableGameData
 		GrowPoint = growPoint;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="tree"></param>
-	/// <param name="growPoint"></param>
-	/// <param name="triggerRandomEnemyCount"></param>
 	public SectStoryHeavenlyTree(SectStoryHeavenlyTree tree, ushort growPoint, ushort triggerRandomEnemyCount)
 	{
 		Id = tree.Id;
@@ -76,11 +43,6 @@ public struct SectStoryHeavenlyTree : ISerializableGameData
 		GrowPoint = growPoint;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="tree"></param>
-	/// <param name="id"></param>
 	public SectStoryHeavenlyTree(SectStoryHeavenlyTree tree, int id)
 	{
 		Id = id;
@@ -89,13 +51,11 @@ public struct SectStoryHeavenlyTree : ISerializableGameData
 		GrowPoint = tree.GrowPoint;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -106,7 +66,6 @@ public struct SectStoryHeavenlyTree : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -125,7 +84,6 @@ public struct SectStoryHeavenlyTree : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

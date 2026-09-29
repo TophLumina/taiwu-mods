@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 采集资源结果
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public struct CollectResourceResult : ISerializableGameData
 {
@@ -19,13 +16,11 @@ public struct CollectResourceResult : ISerializableGameData
 	[SerializableGameDataField]
 	public ItemDisplayData ItemDisplayData;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 5;
@@ -37,7 +32,6 @@ public struct CollectResourceResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -67,7 +61,6 @@ public struct CollectResourceResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

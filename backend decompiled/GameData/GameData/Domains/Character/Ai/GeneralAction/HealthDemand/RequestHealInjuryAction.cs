@@ -85,11 +85,11 @@ public class RequestHealInjuryAction : IGeneralAction
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, baseItem.GetFavorabilityChange() * 5);
 			if (IsInnerInjury)
 			{
-				lifeRecordCollection.AddRequestHealInnerInjurySucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+				lifeRecordCollection.AddRequestHealInnerInjuryItemSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			}
 			else
 			{
-				lifeRecordCollection.AddRequestHealOuterInjurySucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+				lifeRecordCollection.AddRequestHealOuterInjuryItemSucceed(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			}
 			int secretInfoOffset = secretInformationCollection.AddAcceptRequestHealInjury(targetCharId, selfCharId);
 			SecretInformationId secretInfoId = DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
@@ -100,11 +100,11 @@ public class RequestHealInjuryAction : IGeneralAction
 			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, -6000);
 			if (IsInnerInjury)
 			{
-				lifeRecordCollection.AddRequestHealInnerInjuryFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+				lifeRecordCollection.AddRequestHealInnerInjuryItemFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			}
 			else
 			{
-				lifeRecordCollection.AddRequestHealOuterInjuryFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
+				lifeRecordCollection.AddRequestHealOuterInjuryItemFail(selfCharId, currDate, targetCharId, location, ItemUsed.ItemType, ItemUsed.TemplateId);
 			}
 			int secretInfoOffset2 = secretInformationCollection.AddRefuseRequestHealInjury(targetCharId, selfCharId);
 			SecretInformationId secretInfoId2 = DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);

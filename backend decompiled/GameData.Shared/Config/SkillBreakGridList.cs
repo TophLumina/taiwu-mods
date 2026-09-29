@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SkillBreakGridList : ConfigData<SkillBreakGridListItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakGridList Instance = new SkillBreakGridList();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "BreakGridListJust", "BreakGridListKind", "BreakGridListEven", "BreakGridListRebel", "BreakGridListEgoistic", "TemplateId" };

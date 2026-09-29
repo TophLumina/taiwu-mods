@@ -5,29 +5,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Relation.RelationTree;
 
-/// <summary>
-/// 核心角色的多个配偶及子女
-/// </summary>
 [SerializableGameData(NotForDisplayModule = true)]
 public class SpousesAndChildren : ISerializableGameData
 {
-	/// <summary>
-	/// 核心角色
-	/// </summary>
 	[SerializableGameDataField]
 	public int CoreCharId;
 
-	/// <summary>
-	/// 配偶及子女 (需要排序)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SpouseAndChildren> Spouses;
 
-	/// <summary>
-	/// 角色的多个配偶及子女
-	/// </summary>
-	/// <param name="coreCharId"></param>
-	/// <param name="spouses"></param>
 	public SpousesAndChildren(int coreCharId, List<SpouseAndChildren> spouses)
 	{
 		CoreCharId = coreCharId;

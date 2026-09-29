@@ -4,39 +4,21 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 产业格索引
-/// </summary>
 public struct BuildingBlockKey(short areaId, short blockId, short buildingBlockIndex) : ISerializableGameData, IEquatable<BuildingBlockKey>
 {
-	/// <summary>
-	/// 区域索引
-	/// </summary>
 	[SerializableGameDataField]
 	public short AreaId = areaId;
 
-	/// <summary>
-	/// 地块索引
-	/// </summary>
 	[SerializableGameDataField]
 	public short BlockId = blockId;
 
-	/// <summary>
-	/// 在产业地图中的索引
-	/// </summary>
 	[SerializableGameDataField]
 	public short BuildingBlockIndex = buildingBlockIndex;
 
 	public static readonly BuildingBlockKey Invalid = new BuildingBlockKey(-1, -1, 0);
 
-	/// <summary>
-	/// 是否为无效
-	/// </summary>
 	public bool IsInvalid => Equals(Invalid);
 
-	/// <summary>
-	/// 获取所在地块
-	/// </summary>
 	public Location GetLocation()
 	{
 		return new Location(AreaId, BlockId);

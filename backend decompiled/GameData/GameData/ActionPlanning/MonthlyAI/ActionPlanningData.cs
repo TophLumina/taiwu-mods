@@ -704,7 +704,7 @@ public class ActionPlanningData : ISerializableGameData
 				CharacterGoalData currGoal = Goals[index];
 				if (currGoal.GoalTemplateId == templateId)
 				{
-					return null;
+					return currGoal.Template.RecreateEveryMonth ? currGoal : null;
 				}
 			}
 		}
@@ -736,7 +736,7 @@ public class ActionPlanningData : ISerializableGameData
 				{
 					if (currGoal.Match(templateId, arg0))
 					{
-						return null;
+						return currGoal.Template.RecreateEveryMonth ? currGoal : null;
 					}
 					if (currGoal.Template.Overwrite)
 					{
@@ -774,7 +774,7 @@ public class ActionPlanningData : ISerializableGameData
 				{
 					if (currGoal.Match(templateId, arg0, arg1))
 					{
-						return null;
+						return currGoal.Template.RecreateEveryMonth ? currGoal : null;
 					}
 					if (currGoal.Template.Overwrite)
 					{
@@ -812,7 +812,7 @@ public class ActionPlanningData : ISerializableGameData
 				{
 					if (currGoal.Match(templateId, arg0, arg1, arg2))
 					{
-						return null;
+						return currGoal.Template.RecreateEveryMonth ? currGoal : null;
 					}
 					if (currGoal.Template.Overwrite)
 					{
@@ -884,19 +884,37 @@ public class ActionPlanningData : ISerializableGameData
 		int secondHighestPriority = int.MinValue;
 		foreach (CharacterGoalData goal in GetAllGoals())
 		{
-			if (!goal.Unreachable && goal.State != CharacterGoalData.EGoalState.Achieved)
+			if (goal.Unreachable || goal.State == CharacterGoalData.EGoalState.Achieved)
 			{
-				int priority = goal.GetPriority(character);
-				if (priority > highestPriority)
+				continue;
+			}
+			int priority = goal.GetPriority(character);
+			if (priority > highestPriority)
+			{
+				if (highestPriorityGoal != null)
 				{
-					highestPriority = priority;
-					highestPriorityGoal = goal;
+					if (!highestPriorityGoal.Template.IsPrioritizedGoal)
+					{
+						secondHighestPriority = highestPriority;
+						secondHighestPriorityGoal = highestPriorityGoal;
+					}
+					else if (!goal.Template.IsPrioritizedGoal)
+					{
+						if (priority > secondHighestPriority)
+						{
+							secondHighestPriority = priority;
+							secondHighestPriorityGoal = goal;
+						}
+						continue;
+					}
 				}
-				else if (priority > secondHighestPriority && !goal.Template.IsPrioritizedGoal)
-				{
-					secondHighestPriority = priority;
-					secondHighestPriorityGoal = goal;
-				}
+				highestPriority = priority;
+				highestPriorityGoal = goal;
+			}
+			else if (priority > secondHighestPriority && !goal.Template.IsPrioritizedGoal)
+			{
+				secondHighestPriority = priority;
+				secondHighestPriorityGoal = goal;
 			}
 		}
 		CharacterGoalData prevPrimaryGoal = GetCurrentGoal(ECurrentGoalType.Primary);

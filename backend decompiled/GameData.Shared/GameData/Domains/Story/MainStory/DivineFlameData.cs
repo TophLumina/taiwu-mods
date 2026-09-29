@@ -3,9 +3,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Story.MainStory;
 
-/// <summary>
-/// 主线神火线数据，存档数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class DivineFlameData : ISerializableGameData
 {
@@ -29,57 +26,29 @@ public class DivineFlameData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "IsUnlocked", "CooldownDate" };
 	}
 
-	/// <summary>
-	/// 是否解锁
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public bool IsUnlocked;
 
-	/// <summary>
-	/// 冷却结束时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int CooldownDate;
 
-	/// <summary>
-	/// 冷却时间
-	/// </summary>
 	public static readonly int CooldownDuration = 1;
 
-	/// <summary>
-	/// 设置冷却结束时间
-	/// </summary>
-	/// <param name="data"></param>
 	public void SetCooldownDate(int data)
 	{
 		CooldownDate = data;
 	}
 
-	/// <summary>
-	/// 设置是否解锁
-	/// </summary>
-	/// <param name="isUnlocked"></param>
 	public void SetIsUnlocked(bool isUnlocked)
 	{
 		IsUnlocked = isUnlocked;
 	}
 
-	/// <summary>
-	/// 是否冷却完毕
-	/// </summary>
-	/// <param name="curDate"></param>
-	/// <returns></returns>
 	public bool IsCooldownEnd(int curDate)
 	{
 		return curDate >= CooldownDate;
 	}
 
-	/// <summary>
-	/// 获取神火线-剑柄效果的目标类型
-	/// </summary>
-	/// <param name="xiangshuAvatarId"></param>
-	/// <param name="isGood"></param>
-	/// <returns></returns>
 	public static TargetType GetTargetType(sbyte xiangshuAvatarId, bool isGood)
 	{
 		switch (xiangshuAvatarId)
@@ -111,25 +80,16 @@ public class DivineFlameData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public DivineFlameData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DivineFlameData(DivineFlameData other)
 	{
 		IsUnlocked = other.IsUnlocked;
 		CooldownDate = other.CooldownDate;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DivineFlameData other)
 	{
 		IsUnlocked = other.IsUnlocked;

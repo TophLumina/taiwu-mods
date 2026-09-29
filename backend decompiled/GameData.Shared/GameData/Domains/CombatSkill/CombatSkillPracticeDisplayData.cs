@@ -6,9 +6,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 突破界面单个显示功法所需的所有数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class CombatSkillPracticeDisplayData : ISerializableGameData
 {
@@ -30,9 +27,6 @@ public class CombatSkillPracticeDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public int ReBreakCd;
 
-	/// <summary>
-	/// 在突破界面显示用的天资上限值，比display中的base值，要多考虑奇书和指令加成，但是不考虑现在选的总纲
-	/// </summary>
 	[SerializableGameDataField]
 	public int DisplayAvailableSteps;
 
@@ -43,11 +37,9 @@ public class CombatSkillPracticeDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 8;
+		int totalSize = 24;
 		totalSize = ((CombatSkillDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CombatSkillDisplayData.GetSerializedSize())));
 		totalSize = ((SkillBreakPlate == null) ? (totalSize + 2) : (totalSize + (2 + SkillBreakPlate.GetSerializedSize())));
-		totalSize = ((CombatSkillBreakSuccessRateDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CombatSkillBreakSuccessRateDisplayData.GetSerializedSize())));
-		totalSize = ((CombatSkillBreakAvailableStepsDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CombatSkillBreakAvailableStepsDisplayData.GetSerializedSize())));
 		if (Bonuses != null)
 		{
 			totalSize += 2;

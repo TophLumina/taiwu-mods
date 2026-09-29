@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GameData.Domains.TaiwuEvent.EventHelper;
 using GameData.GameDataBridge;
 
@@ -60,6 +61,12 @@ public class InterfaceFunctions
 	{
 		DomainManager.TaiwuEvent.SetListenerWithActionName(onFinishEventId, runtime.Current.ArgBox, "ExchangeComplete");
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ShowExchangePanel, characterId, onFinishEventId);
+	}
+
+	[EventFunction(965)]
+	private static void ShowNewFunctionUnlock(EventScriptRuntime runtime, int templateId, string afterEventId)
+	{
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.ShowNewFeatureUnlock(new List<int> { templateId }, afterEventId, runtime.Current.ArgBox);
 	}
 
 	[EventFunction(614)]

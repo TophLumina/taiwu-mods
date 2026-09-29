@@ -2,19 +2,10 @@ using System;
 
 namespace GameData.Domains.TaiwuEvent;
 
-/// <summary>
-/// 奇遇脚本引用
-/// </summary>
 public readonly struct AdventureScriptRef(string debugInfo) : IEquatable<AdventureScriptRef>
 {
-	/// <summary>
-	/// 调试信息
-	/// </summary>
 	public readonly string DebugInfo = debugInfo;
 
-	/// <summary>
-	/// 无效引用
-	/// </summary>
 	public static readonly AdventureScriptRef Invalid = new AdventureScriptRef(string.Empty);
 
 	public override string ToString()

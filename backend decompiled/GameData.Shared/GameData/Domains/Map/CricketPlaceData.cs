@@ -3,9 +3,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 一个区域中的促织信息
-/// </summary>
 public class CricketPlaceData : ISerializableGameData
 {
 	[SerializableGameDataField]

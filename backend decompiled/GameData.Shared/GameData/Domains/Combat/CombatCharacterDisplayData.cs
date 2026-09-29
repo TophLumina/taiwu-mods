@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 战斗人物显示数据。用于向前端返回战斗中打开人物界面显示所需数据，使前端不必监听战斗域数据
-/// </summary>
 public class CombatCharacterDisplayData : ISerializableGameData
 {
 	[SerializableGameDataField]

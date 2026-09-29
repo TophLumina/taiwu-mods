@@ -138,7 +138,7 @@ public class AiMemory
 			sbyte direction = skill.GetDirection();
 			if (direction != -1)
 			{
-				short effectTemplateId = (short)((direction == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
+				short effectTemplateId = ((direction == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
 				SpecialEffectItem effectConfig = Config.SpecialEffect.Instance[effectTemplateId];
 				if (effectConfig.RequireAttackPower < 0 || power >= effectConfig.RequireAttackPower)
 				{

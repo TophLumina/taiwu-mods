@@ -5,48 +5,31 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 选择名誉弹窗数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class EventSelectFameData : ISerializableGameData
 {
-	/// <summary>
-	/// 所有可以被选择的名誉的相关数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<FameActionRecord> fameActionRecords;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public EventSelectFameData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public EventSelectFameData(EventSelectFameData other)
 	{
 		fameActionRecords = ((other.fameActionRecords == null) ? null : new List<FameActionRecord>(other.fameActionRecords));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(EventSelectFameData other)
 	{
 		fameActionRecords = ((other.fameActionRecords == null) ? null : new List<FameActionRecord>(other.fameActionRecords));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -58,7 +41,6 @@ public class EventSelectFameData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -86,7 +68,6 @@ public class EventSelectFameData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -4,275 +4,112 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LifeRecord.GeneralRecord;
 
-/// <summary>
-/// 已经渲染过的通用记录的实参的集合 (仅供前端使用).
-/// 前端需要把 <see cref="T:GameData.Domains.LifeRecord.GeneralRecord.ArgumentCollection" /> 中的实参转为真正要显示的文本, 并放入此集合.
-/// </summary>
 public class RenderedArgumentCollection
 {
-	/// <summary>
-	/// 角色数据集合
-	/// </summary>
 	public readonly List<string> Characters;
 
-	/// <summary>
-	/// 地点数据集合
-	/// </summary>
 	public readonly List<string> Locations;
 
-	/// <summary>
-	/// 物品数据集合
-	/// </summary>
 	public readonly List<string> Items;
 
-	/// <summary>
-	/// 功法数据集合
-	/// </summary>
 	public readonly List<string> CombatSkills;
 
-	/// <summary>
-	/// 资源数据集合
-	/// </summary>
 	public readonly List<string> Resources;
 
-	/// <summary>
-	/// 定居点数据集合
-	/// </summary>
 	public readonly List<string> Settlements;
 
-	/// <summary>
-	/// 团体级别数据集合
-	/// </summary>
 	public readonly List<string> OrgGrades;
 
-	/// <summary>
-	/// 产业建筑数据集合
-	/// </summary>
 	public readonly List<string> Buildings;
 
-	/// <summary>
-	/// 剑冢数据集合
-	/// </summary>
 	public readonly List<string> SwordTombs;
 
-	/// <summary>
-	/// 紫竹化身数据集合
-	/// </summary>
 	public readonly List<string> JuniorXiangshuList;
 
-	/// <summary>
-	/// 奇遇数据集合
-	/// </summary>
 	public readonly List<string> Adventures;
 
-	/// <summary>
-	/// 角色立场数据集合
-	/// </summary>
 	public readonly List<string> BehaviorTypes;
 
-	/// <summary>
-	/// 好感类型数据集合
-	/// </summary>
 	public readonly List<string> FavorabilityTypes;
 
-	/// <summary>
-	/// 促织数据集合
-	/// </summary>
 	public readonly List<string> Crickets;
 
-	/// <summary>
-	/// 物品子类数据集合
-	/// </summary>
 	public readonly List<string> ItemSubTypes;
 
-	/// <summary>
-	/// 鸡数据集合
-	/// </summary>
 	public readonly List<string> Chickens;
 
-	/// <summary>
-	/// 角色属性引用类型数据集合
-	/// </summary>
 	public readonly List<string> CharacterPropertyReferencedTypes;
 
-	/// <summary>
-	/// 身体部位类型数据集合
-	/// </summary>
 	public readonly List<string> BodyPartTypes;
 
-	/// <summary>
-	/// 伤势类型数据集合
-	/// </summary>
 	public readonly List<string> InjuryTypes;
 
-	/// <summary>
-	/// 毒素类型数据集合
-	/// </summary>
 	public readonly List<string> PoisonTypes;
 
-	/// <summary>
-	/// 角色模板数据的集合
-	/// </summary>
 	public readonly List<string> CharacterTemplates;
 
-	/// <summary>
-	/// 角色特性数据的集合
-	/// </summary>
 	public readonly List<string> Features;
 
-	/// <summary>
-	/// 整型数据集合
-	/// </summary>
 	public readonly List<string> Integers;
 
-	/// <summary>
-	/// 技艺数据集合
-	/// </summary>
 	public readonly List<string> LifeSkills;
 
-	/// <summary>
-	/// 商会类型集合
-	/// </summary>
 	public readonly List<string> MerchantTypes;
 
-	/// <summary>
-	/// 物品实例的Key
-	/// </summary>
 	public readonly List<string> ItemKeys;
 
-	/// <summary>
-	/// 战斗类型
-	/// </summary>
 	public readonly List<string> CombatTypes;
 
-	/// <summary>
-	/// 技艺类型集合
-	/// </summary>
 	public readonly List<string> LifeSkillTypes;
 
-	/// <summary>
-	/// 功法类型集合
-	/// </summary>
 	public readonly List<string> CombatSkillTypes;
 
-	/// <summary>
-	/// 见闻集合
-	/// </summary>
 	public readonly List<string> Informations;
 
-	/// <summary>
-	/// 秘闻集合
-	/// </summary>
 	public readonly List<string> SecretInformationTemplates;
 
-	/// <summary>
-	/// 惩罚类型集合
-	/// </summary>
 	public readonly List<string> PunishmentTypes;
 
-	/// <summary>
-	/// 角色称号集合
-	/// </summary>
 	public readonly List<string> CharacterTitles;
 
-	/// <summary>
-	/// 浮点数集合
-	/// </summary>
 	public readonly List<string> FloatValues;
 
-	/// <summary>
-	/// 角色真名集合
-	/// </summary>
 	public readonly List<string> CharacterRealNames;
 
-	/// <summary>
-	/// 月份集合
-	/// </summary>
 	public readonly List<string> Months;
 
-	/// <summary>
-	/// 志向
-	/// </summary>
 	public readonly List<string> Professions;
 
-	/// <summary>
-	/// 志向技能
-	/// </summary>
 	public readonly List<string> ProfessionSkills;
 
-	/// <summary>
-	/// 物品品阶
-	/// </summary>
 	public readonly List<string> ItemGrades;
 
-	/// <summary>
-	/// 文本
-	/// </summary>
 	public readonly List<string> Texts;
 
-	/// <summary>
-	/// 音乐
-	/// </summary>
 	public readonly List<string> Musics;
 
-	/// <summary>
-	/// 州域
-	/// </summary>
 	public readonly List<string> MapStates;
 
-	/// <summary>
-	/// 蛟龙
-	/// </summary>
 	public readonly List<string> JiaoLoongs;
 
-	/// <summary>
-	/// 蛟的属性
-	/// </summary>
 	public readonly List<string> JiaoProperties;
 
-	/// <summary>
-	/// 轮回类型
-	/// </summary>
 	public readonly List<string> Destinys;
 
-	/// <summary>
-	/// 秘闻 Key
-	/// </summary>
 	public readonly List<string> SecretInformations;
 
-	/// <summary>
-	/// 商店名称
-	/// </summary>
 	public readonly List<string> Merchants;
 
-	/// <summary>
-	/// 遗惠名称
-	/// </summary>
 	public readonly List<string> Legacys;
 
-	/// <summary>
-	/// 人物品级
-	/// </summary>
 	public readonly List<string> CharGrades;
 
-	/// <summary>
-	/// 宴席
-	/// </summary>
 	public readonly List<string> Feasts;
 
-	/// <summary>
-	/// 奇遇元素
-	/// </summary>
 	public readonly List<string> AdventureElements;
 
-	/// <summary>
-	/// 七元
-	/// </summary>
 	public readonly List<string> PersonalityTypes;
 
-	/// <summary>
-	/// 已经渲染过的通用记录的实参的集合
-	/// </summary>
 	public RenderedArgumentCollection()
 	{
 		Characters = new List<string>();
@@ -329,9 +166,6 @@ public class RenderedArgumentCollection
 		PersonalityTypes = new List<string>();
 	}
 
-	/// <summary>
-	/// 清空集合内的所有数据
-	/// </summary>
 	public void Clear()
 	{
 		Characters.Clear();
@@ -388,7 +222,6 @@ public class RenderedArgumentCollection
 		PersonalityTypes.Clear();
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.LifeRecord.GeneralRecord.RenderedArgumentCollection.TryGet(System.SByte,System.Int32,System.String@)" />
 	public string Get(sbyte paramType, int index)
 	{
 		if (TryGet(paramType, index, out var text))
@@ -399,13 +232,6 @@ public class RenderedArgumentCollection
 		return string.Empty;
 	}
 
-	/// <summary>
-	/// 获取渲染过的实参的字串
-	/// </summary>
-	/// <param name="paramType"></param>
-	/// <param name="index"></param>
-	/// <param name="text">参数文本</param>
-	/// <returns></returns>
 	public bool TryGet(sbyte paramType, int index, out string text)
 	{
 		List<string> list = GetList(paramType);

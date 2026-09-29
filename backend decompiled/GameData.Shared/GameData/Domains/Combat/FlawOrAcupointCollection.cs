@@ -8,15 +8,9 @@ using Redzen.Random;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 破绽/点穴集合
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class FlawOrAcupointCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 减少持续时间结果
-	/// </summary>
 	public struct ReduceKeepTimeResult
 	{
 		public bool DataChanged;
@@ -26,9 +20,6 @@ public class FlawOrAcupointCollection : ISerializableGameData
 		public List<(sbyte part, sbyte level)> RemovedList;
 	}
 
-	/// <summary>
-	/// 消除帧数委托
-	/// </summary>
 	public delegate int ReduceFrameDelegate(int totalFrame);
 
 	public readonly SortedDictionary<sbyte, List<FlawOrAcupointEntry>> BodyPartDict;
@@ -44,9 +35,6 @@ public class FlawOrAcupointCollection : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取持续中的破绽或点穴总数
-	/// </summary>
 	public int GetTotalCount()
 	{
 		int totalCount = 0;
@@ -57,25 +45,16 @@ public class FlawOrAcupointCollection : ISerializableGameData
 		return totalCount;
 	}
 
-	/// <summary>
-	/// 减少持续时间
-	/// </summary>
 	public ReduceKeepTimeResult ReduceKeepTime(int recoverValue, byte[] countArray)
 	{
 		return ReduceKeepTimePercentInternal((int _) => recoverValue, countArray);
 	}
 
-	/// <summary>
-	/// 减少持续时间百分比
-	/// </summary>
 	public ReduceKeepTimeResult ReduceKeepTimePercent(CValuePercent reducePercent, byte[] countArray)
 	{
 		return ReduceKeepTimePercentInternal((int totalFrame) => totalFrame * reducePercent, countArray);
 	}
 
-	/// <summary>
-	/// 减少持续时间
-	/// </summary>
 	private ReduceKeepTimeResult ReduceKeepTimePercentInternal(ReduceFrameDelegate reduceFrameDelegate, IList<byte> countArray)
 	{
 		bool dataChanged = false;
@@ -113,9 +92,6 @@ public class FlawOrAcupointCollection : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 将随机一个破绽/封穴的剩余时间恢复到上限
-	/// </summary>
 	public bool RandomRecoverKeepTimeToTotal(IRandomSource random)
 	{
 		List<sbyte> pool = ObjectPool<List<sbyte>>.Instance.Get();
@@ -141,9 +117,6 @@ public class FlawOrAcupointCollection : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 离线恢复持续时间
-	/// </summary>
 	public bool OfflineRecoverKeepTimePercent(int recoverPercent)
 	{
 		if (recoverPercent <= 0)
@@ -164,9 +137,6 @@ public class FlawOrAcupointCollection : ISerializableGameData
 		return anyChanged;
 	}
 
-	/// <summary>
-	/// 计算点穴参数值
-	/// </summary>
 	public int CalcAcupointParam(sbyte bodyPart)
 	{
 		if (!BodyPartDict.TryGetValue(bodyPart, out var entries) || entries.Count == 0)

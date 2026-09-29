@@ -7,101 +7,44 @@ namespace Config;
 [Serializable]
 public class AdventureRemakePerformanceEffectParam : ConfigData<AdventureRemakePerformanceEffectParamItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 外层地格火焰
-		/// </summary>
 		public const short BlockFire = 0;
 
-		/// <summary>
-		/// 前景烟
-		/// </summary>
 		public const short FrontVerticalSmoke = 1;
 
-		/// <summary>
-		/// 后景烟
-		/// </summary>
 		public const short BackVerticalSmoke = 2;
 
-		/// <summary>
-		/// 闪电
-		/// </summary>
 		public const short Lightning = 3;
 
-		/// <summary>
-		/// 雨
-		/// </summary>
 		public const short Rain = 4;
 
-		/// <summary>
-		/// 大雾
-		/// </summary>
 		public const short Fog = 5;
 
-		/// <summary>
-		/// 幻海背景
-		/// </summary>
 		public const short HuanhaiBack = 6;
 
-		/// <summary>
-		/// 神魔背景
-		/// </summary>
 		public const short GodDemonBack = 7;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 外层地格火焰
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem BlockFire => Instance[(short)0];
 
-		/// <summary>
-		/// 前景烟
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem FrontVerticalSmoke => Instance[(short)1];
 
-		/// <summary>
-		/// 后景烟
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem BackVerticalSmoke => Instance[(short)2];
 
-		/// <summary>
-		/// 闪电
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem Lightning => Instance[(short)3];
 
-		/// <summary>
-		/// 雨
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem Rain => Instance[(short)4];
 
-		/// <summary>
-		/// 大雾
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem Fog => Instance[(short)5];
 
-		/// <summary>
-		/// 幻海背景
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem HuanhaiBack => Instance[(short)6];
 
-		/// <summary>
-		/// 神魔背景
-		/// </summary>
 		public static AdventureRemakePerformanceEffectParamItem GodDemonBack => Instance[(short)7];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureRemakePerformanceEffectParam Instance = new AdventureRemakePerformanceEffectParam();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "Type", "LoadName", "CountRange", "ParticleStartDelayRandom", "ParticleStartSpeedRandom" };

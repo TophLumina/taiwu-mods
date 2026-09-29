@@ -7,61 +7,28 @@ namespace Config;
 [Serializable]
 public class Weather : ConfigData<WeatherItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 梦回太吾村
-		/// </summary>
 		public const sbyte DreamBack = 18;
 
-		/// <summary>
-		/// 玄灰等级轻
-		/// </summary>
 		public const sbyte DarkAshLow = 19;
 
-		/// <summary>
-		/// 玄灰等级中
-		/// </summary>
 		public const sbyte DarkAshMid = 20;
 
-		/// <summary>
-		/// 玄灰等级高
-		/// </summary>
 		public const sbyte DarkAshHigh = 21;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 梦回太吾村
-		/// </summary>
 		public static WeatherItem DreamBack => Instance[(sbyte)18];
 
-		/// <summary>
-		/// 玄灰等级轻
-		/// </summary>
 		public static WeatherItem DarkAshLow => Instance[(sbyte)19];
 
-		/// <summary>
-		/// 玄灰等级中
-		/// </summary>
 		public static WeatherItem DarkAshMid => Instance[(sbyte)20];
 
-		/// <summary>
-		/// 玄灰等级高
-		/// </summary>
 		public static WeatherItem DarkAshHigh => Instance[(sbyte)21];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Weather Instance = new Weather();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Season", "TemplateId", "Particle", "CloudLayers" };

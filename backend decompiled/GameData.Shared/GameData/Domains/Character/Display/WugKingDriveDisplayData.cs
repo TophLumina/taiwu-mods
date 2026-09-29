@@ -4,61 +4,35 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 王蛊驱动显示数据。用于向前端返回王蛊驱动状态的显示数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true, NotForArchive = true)]
 public class WugKingDriveDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharacterId;
 
-	/// <summary>
-	/// 王蛊类型 (WugType)
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte WugType;
 
-	/// <summary>
-	/// 驱动类型 (WugKingDriveType: None/Positive/Negative)
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte DriveType;
 
-	/// <summary>
-	/// 驱动开始日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int StartDate;
 
-	/// <summary>
-	/// 是否可以驱动（冷却检查）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanDrive;
 
-	/// <summary>
-	/// 王蛊是否在服食栏中
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInEatingSlot;
 
-	/// <summary>
-	/// 关联的王蛊物品显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData ItemDisplayData;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -70,7 +44,6 @@ public class WugKingDriveDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -108,7 +81,6 @@ public class WugKingDriveDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

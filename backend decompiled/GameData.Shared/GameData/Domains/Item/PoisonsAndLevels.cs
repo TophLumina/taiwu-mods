@@ -6,29 +6,13 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 毒素的量以及等级
-/// </summary>
 [Serializable]
 public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatable<PoisonsAndLevels>
 {
-	/// <summary>
-	/// 最大下毒或解毒等级
-	/// </summary>
 	public const int MaxLevel = 3;
 
-	/// <summary>
-	/// 各种毒素的量.
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.Combat.PoisonType" />
-	/// </summary>
 	public unsafe fixed short Values[6];
 
-	/// <summary>
-	/// 各种毒素的下毒或解毒等级.
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.Combat.PoisonType" />
-	/// </summary>
 	public unsafe fixed sbyte Levels[6];
 
 	public bool IsMixed => GetTotalPoisonCount() > 1;
@@ -55,12 +39,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return Levels[index];
 	}
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 PoisonType.Count == 6.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (short* values = Values)
@@ -75,10 +53,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		}
 	}
 
-	/// <summary>
-	/// 从配置表构造对象
-	/// </summary>
-	/// <param name="poisons"></param>
 	public unsafe PoisonsAndLevels(params short[] poisons)
 	{
 		for (int i = 0; i < 6; i++)
@@ -156,14 +130,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		}
 	}
 
-	/// <summary>
-	/// 根据毒素变化量、毒素级别、以及当前中毒量和毒抗计算毒素变化量.
-	/// </summary>
-	/// <param name="baseDelta">基础变化量</param>
-	/// <param name="level">毒素等级, 1 为生毒, 2 为剧毒, 3 为奇毒</param>
-	/// <param name="currPoisonedValue">当前中毒量</param>
-	/// <param name="poisonResist">当前毒抗值</param>
-	/// <returns>毒素变化量</returns>
 	public static int CalcPoisonDelta(int baseDelta, sbyte level, int currPoisonedValue, int poisonResist)
 	{
 		sbyte currPoisonedLevel = CalcPoisonedLevel(currPoisonedValue);
@@ -222,12 +188,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return (short)(value * level * GlobalConfig.Instance.CalcApplyItemPoisonParam);
 	}
 
-	/// <summary>
-	/// 计算指定中毒量对于该角色的中毒等级
-	/// 事件代码中有调用
-	/// </summary>
-	/// <param name="poisoned"></param>
-	/// <returns></returns>
 	public static sbyte CalcPoisonedLevel(int poisoned)
 	{
 		short[] thresholds = GlobalConfig.Instance.PoisonLevelThresholds;
@@ -246,10 +206,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return 0;
 	}
 
-	/// <summary>
-	/// 判断毒素值和等级对应的道具级别
-	/// </summary>
-	/// <returns><see cref="T:GameData.Domains.Character.Grade" /></returns>
 	public static sbyte CalcGradeByPoisonAndLevel(short value, sbyte level)
 	{
 		int num = level - 1;
@@ -257,10 +213,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return (sbyte)MathUtils.Clamp(num * 3 + modResult, 0, 8);
 	}
 
-	/// <summary>
-	/// 判断指定毒素类型的毒素值和等级对应的道具级别
-	/// </summary>
-	/// <returns><see cref="T:GameData.Domains.Character.Grade" /></returns>
 	public unsafe sbyte GetGrade(sbyte poisonType)
 	{
 		if (Values[poisonType] <= 0 || Levels[poisonType] <= 0)
@@ -270,10 +222,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return CalcGradeByPoisonAndLevel(Values[poisonType], Levels[poisonType]);
 	}
 
-	/// <summary>
-	/// 获取混合毒的ID，不是三种混合时为-1
-	/// </summary>
-	/// <returns></returns>
 	public short GetMixTemplateId()
 	{
 		if (!IsMixed)
@@ -283,10 +231,11 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return MixedPoisonType.PoisonsAndLevelToMedicineTemplateId(ref this);
 	}
 
-	/// <summary>
-	/// 是否含有非零值 (只检查值, 不检查等级)
-	/// </summary>
-	/// <returns></returns>
+	public unsafe short GetEatValue(sbyte type)
+	{
+		return (short)(Values[type] * 10 * Levels[type]);
+	}
+
 	public unsafe bool IsNonZero()
 	{
 		fixed (short* pValues = Values)
@@ -340,12 +289,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return true;
 	}
 
-	/// <summary>
-	/// 获取指定类型毒素的量与级别
-	/// </summary>
-	/// <param name="poisonType"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public unsafe readonly (short value, sbyte level) GetValueAndLevel(sbyte poisonType)
 	{
 		if ((poisonType < 0 || poisonType >= 6) ? true : false)
@@ -355,10 +298,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return (value: Values[poisonType], level: Levels[poisonType]);
 	}
 
-	/// <summary>
-	/// 获取毒的种类数量
-	/// </summary>
-	/// <returns></returns>
 	public unsafe sbyte GetTotalPoisonCount()
 	{
 		sbyte poisonCount = 0;
@@ -372,10 +311,6 @@ public struct PoisonsAndLevels : ISerializableGameData, ISerializable, IEquatabl
 		return poisonCount;
 	}
 
-	/// <summary>
-	/// 获取毒素等级的总合
-	/// </summary>
-	/// <returns></returns>
 	public unsafe sbyte GetTotalLevel()
 	{
 		sbyte totalLevel = 0;

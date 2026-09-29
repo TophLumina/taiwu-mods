@@ -3,9 +3,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 开关滑块值
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public struct ToggleSliderValue(bool isOn, int value) : ISerializableGameData
 {

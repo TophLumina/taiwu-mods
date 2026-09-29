@@ -462,6 +462,12 @@ public class Food : ItemBase, ISerializableGameData
 		return Config.Food.Instance[TemplateId].FunctionDesc;
 	}
 
+	[CollectionObjectField(true, false, false, false, false)]
+	public MainAttributes GetMainAttributesRegenMonthly()
+	{
+		return Config.Food.Instance[TemplateId].MainAttributesRegenMonthly;
+	}
+
 	public Food()
 	{
 	}

@@ -3,14 +3,8 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 角色持有秘闻数据集合
-/// </summary>
 public class SecretInformationCharacterDataCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 集合对象
-	/// </summary>
 	[SerializableGameDataField]
 	public readonly IDictionary<int, SecretInformationCharacterData> Collection;
 

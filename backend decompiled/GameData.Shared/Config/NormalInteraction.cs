@@ -7,61 +7,28 @@ namespace Config;
 [Serializable]
 public class NormalInteraction : ConfigData<NormalInteractionItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 切磋请求
-		/// </summary>
 		public const short RequestPlayCombat = 0;
 
-		/// <summary>
-		/// 挑战请求
-		/// </summary>
 		public const short RequestNormalCombat = 1;
 
-		/// <summary>
-		/// 较艺请求
-		/// </summary>
 		public const short RequestLifeSkillBattle = 2;
 
-		/// <summary>
-		/// 促织决斗请求
-		/// </summary>
 		public const short RequestCricketBattle = 3;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 切磋请求
-		/// </summary>
 		public static NormalInteractionItem RequestPlayCombat => Instance[(short)0];
 
-		/// <summary>
-		/// 挑战请求
-		/// </summary>
 		public static NormalInteractionItem RequestNormalCombat => Instance[(short)1];
 
-		/// <summary>
-		/// 较艺请求
-		/// </summary>
 		public static NormalInteractionItem RequestLifeSkillBattle => Instance[(short)2];
 
-		/// <summary>
-		/// 促织决斗请求
-		/// </summary>
 		public static NormalInteractionItem RequestCricketBattle => Instance[(short)3];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static NormalInteraction Instance = new NormalInteraction();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "HeadEvent", "AgreeAndSuccess", "AgreeAndFail", "Disagree", "TemplateId" };

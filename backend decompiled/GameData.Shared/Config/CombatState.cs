@@ -8,2551 +8,1044 @@ namespace Config;
 [Serializable]
 public class CombatState : ConfigData<CombatStateItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 金针伐脉功·正
-		/// </summary>
 		public const short JinZhenFaMaiGongDirect = 0;
 
-		/// <summary>
-		/// 金针伐脉功·逆
-		/// </summary>
 		public const short JinZhenFaMaiGongReverse = 1;
 
-		/// <summary>
-		/// 离魂功·正
-		/// </summary>
 		public const short LiHunGongDirect = 2;
 
-		/// <summary>
-		/// 离魂功·逆
-		/// </summary>
 		public const short LiHunGongReverse = 3;
 
-		/// <summary>
-		/// 大金刚拳·正增益
-		/// </summary>
 		public const short DaJinGangQuanDirectBuff = 4;
 
-		/// <summary>
-		/// 大金刚拳·正减益
-		/// </summary>
 		public const short DaJinGangQuanDirectDebuff = 5;
 
-		/// <summary>
-		/// 大金刚拳·逆增益
-		/// </summary>
 		public const short DaJinGangQuanReverseBuff = 6;
 
-		/// <summary>
-		/// 大金刚拳·逆减益
-		/// </summary>
 		public const short DaJinGangQuanReverseDebuff = 7;
 
-		/// <summary>
-		/// 少林一指禅·正
-		/// </summary>
 		public const short ShaoLinYiZhiChanDirect = 8;
 
-		/// <summary>
-		/// 少林一指禅·逆
-		/// </summary>
 		public const short ShaoLinYiZhiChanReverse = 9;
 
-		/// <summary>
-		/// 轻身术
-		/// </summary>
 		public const short QingShenShu = 10;
 
-		/// <summary>
-		/// 沾衣十八跌·正
-		/// </summary>
 		public const short ZhanYiShiBaDieDirect = 11;
 
-		/// <summary>
-		/// 沾衣十八跌·逆
-		/// </summary>
 		public const short ZhanYiShiBaDieReverse = 12;
 
-		/// <summary>
-		/// 移花接木手·正增益
-		/// </summary>
 		public const short YiHuaJieMuShouDirectBuff = 13;
 
-		/// <summary>
-		/// 移花接木手·正减益
-		/// </summary>
 		public const short YiHuaJieMuShouDirectDebuff = 14;
 
-		/// <summary>
-		/// 移花接木手·逆增益
-		/// </summary>
 		public const short YiHuaJieMuShouReverseBuff = 15;
 
-		/// <summary>
-		/// 移花接木手·逆减益
-		/// </summary>
 		public const short YiHuaJieMuShouReverseDebuff = 16;
 
-		/// <summary>
-		/// 峨眉一指禅·正
-		/// </summary>
 		public const short EMeiYiZhiChanDirect = 17;
 
-		/// <summary>
-		/// 峨眉一指禅·逆
-		/// </summary>
 		public const short EMeiYiZhiChanReverse = 18;
 
-		/// <summary>
-		/// 金顶飞仙
-		/// </summary>
 		public const short JinDingFeiXian = 19;
 
-		/// <summary>
-		/// 血海凝冰术·正
-		/// </summary>
 		public const short XueHaiNingBingShuDirect = 20;
 
-		/// <summary>
-		/// 血海凝冰术·逆
-		/// </summary>
 		public const short XueHaiNingBingShuReverse = 21;
 
-		/// <summary>
-		/// 太极剑法·正
-		/// </summary>
 		public const short TaiJiJianFaDirect = 22;
 
-		/// <summary>
-		/// 太极剑法·逆
-		/// </summary>
 		public const short TaiJiJianFaReverse = 23;
 
-		/// <summary>
-		/// 云床九练·正
-		/// </summary>
 		public const short YunChuangJiuLianDirect = 24;
 
-		/// <summary>
-		/// 云床九练·逆
-		/// </summary>
 		public const short YunChuangJiuLianReverse = 25;
 
-		/// <summary>
-		/// 开阖剑术·正0
-		/// </summary>
 		public const short KaiHeJianShuDirect0 = 26;
 
-		/// <summary>
-		/// 开阖剑术·正1
-		/// </summary>
 		public const short KaiHeJianShuDirect1 = 27;
 
-		/// <summary>
-		/// 开阖剑术·正2
-		/// </summary>
 		public const short KaiHeJianShuDirect2 = 28;
 
-		/// <summary>
-		/// 开阖剑术·正3
-		/// </summary>
 		public const short KaiHeJianShuDirect3 = 29;
 
-		/// <summary>
-		/// 开阖剑术·逆0
-		/// </summary>
 		public const short KaiHeJianShuReverse0 = 30;
 
-		/// <summary>
-		/// 开阖剑术·逆1
-		/// </summary>
 		public const short KaiHeJianShuReverse1 = 31;
 
-		/// <summary>
-		/// 开阖剑术·逆2
-		/// </summary>
 		public const short KaiHeJianShuReverse2 = 32;
 
-		/// <summary>
-		/// 开阖剑术·逆3
-		/// </summary>
 		public const short KaiHeJianShuReverse3 = 33;
 
-		/// <summary>
-		/// 御风符·正
-		/// </summary>
 		public const short YuFengFuDirect = 34;
 
-		/// <summary>
-		/// 御风符·逆
-		/// </summary>
 		public const short YuFengFuReverse = 35;
 
-		/// <summary>
-		/// 不思归
-		/// </summary>
 		public const short BuSiGui = 36;
 
-		/// <summary>
-		/// 凤来仪·正
-		/// </summary>
 		public const short FengLaiYiDirect = 37;
 
-		/// <summary>
-		/// 凤来仪·逆
-		/// </summary>
 		public const short FengLaiYiReverse = 38;
 
-		/// <summary>
-		/// 嫘祖剥茧式·正
-		/// </summary>
 		public const short LeiZuBoJianShiDirect = 39;
 
-		/// <summary>
-		/// 嫘祖剥茧式·逆
-		/// </summary>
 		public const short LeiZuBoJianShiReverse = 40;
 
-		/// <summary>
-		/// 大太阴一明指
-		/// </summary>
 		public const short DaTaiYinYiMingZhi = 41;
 
-		/// <summary>
-		/// 断魂幽吟曲
-		/// </summary>
 		public const short DuanHunYouYinQu = 42;
 
-		/// <summary>
-		/// 柴山擒跌手·正
-		/// </summary>
 		public const short ChaiShanQinDieShouDirect = 43;
 
-		/// <summary>
-		/// 柴山擒跌手·逆
-		/// </summary>
 		public const short ChaiShanQinDieShouReverse = 44;
 
-		/// <summary>
-		/// 威灵仙化骨掌·正
-		/// </summary>
 		public const short WeiLingXianHuaGuZhangDirect = 45;
 
-		/// <summary>
-		/// 威灵仙化骨掌·逆
-		/// </summary>
 		public const short WeiLingXianHuaGuZhangReverse = 46;
 
-		/// <summary>
-		/// 磕金震玉小八式·正增益
-		/// </summary>
 		public const short KeJinZhenYuXiaoBaShiDirectBuff = 47;
 
-		/// <summary>
-		/// 磕金震玉小八式·正减益
-		/// </summary>
 		public const short KeJinZhenYuXiaoBaShiDirectDebuff = 48;
 
-		/// <summary>
-		/// 磕金震玉小八式·逆增益
-		/// </summary>
 		public const short KeJinZhenYuXiaoBaShiReverseBuff = 49;
 
-		/// <summary>
-		/// 磕金震玉小八式·逆减益
-		/// </summary>
 		public const short KeJinZhenYuXiaoBaShiReverseDebuff = 50;
 
-		/// <summary>
-		/// 飞山断海大八式·正
-		/// </summary>
 		public const short FeiShanDuanHaiDaBaShiDirect = 51;
 
-		/// <summary>
-		/// 飞山断海大八式·逆
-		/// </summary>
 		public const short FeiShanDuanHaiDaBaShiReverse = 52;
 
-		/// <summary>
-		/// 五怒手·正
-		/// </summary>
 		public const short WuNuShouDirect = 53;
 
-		/// <summary>
-		/// 五怒手·逆
-		/// </summary>
 		public const short WuNuShouReverse = 54;
 
-		/// <summary>
-		/// 金刚黑砂掌·正
-		/// </summary>
 		public const short JinGangHeiShaZhangDirect = 55;
 
-		/// <summary>
-		/// 金刚黑砂掌·逆
-		/// </summary>
 		public const short JinGangHeiShaZhangReverse = 56;
 
-		/// <summary>
-		/// 拿脉功·正
-		/// </summary>
 		public const short NaMaiGongDirect = 57;
 
-		/// <summary>
-		/// 拿脉功·逆
-		/// </summary>
 		public const short NaMaiGongReverse = 58;
 
-		/// <summary>
-		/// 勾镰剑法·正
-		/// </summary>
 		public const short GouLianJianFaDirect = 59;
 
-		/// <summary>
-		/// 勾镰剑法·逆
-		/// </summary>
 		public const short GouLianJianFaReverse = 60;
 
-		/// <summary>
-		/// 玉索倒悬·正
-		/// </summary>
 		public const short YuSuoDaoXuanDirect = 61;
 
-		/// <summary>
-		/// 玉索倒悬·逆
-		/// </summary>
 		public const short YuSuoDaoXuanReverse = 62;
 
-		/// <summary>
-		/// 天蛇翻
-		/// </summary>
 		public const short TianSheFan = 63;
 
-		/// <summary>
-		/// 血偶破煞法·正
-		/// </summary>
 		public const short XueOuPoShaFaDirect = 64;
 
-		/// <summary>
-		/// 血偶破煞法·逆
-		/// </summary>
 		public const short XueOuPoShaFaReverse = 65;
 
-		/// <summary>
-		/// 血偶破煞·正
-		/// </summary>
 		public const short XueOuPoShaDirect = 66;
 
-		/// <summary>
-		/// 血偶破煞·逆
-		/// </summary>
 		public const short XueOuPoShaReverse = 67;
 
-		/// <summary>
-		/// 天渊纵
-		/// </summary>
 		public const short TianYuanZong = 68;
 
-		/// <summary>
-		/// 赤青神火劲·正增益
-		/// </summary>
 		public const short ChiQingShenHuoJinDirectBuff = 69;
 
-		/// <summary>
-		/// 赤青神火劲·正减益
-		/// </summary>
 		public const short ChiQingShenHuoJinDirectDebuff = 70;
 
-		/// <summary>
-		/// 赤青神火劲·逆增益
-		/// </summary>
 		public const short ChiQingShenHuoJinReverseBuff = 71;
 
-		/// <summary>
-		/// 赤青神火劲·逆减益
-		/// </summary>
 		public const short ChiQingShenHuoJinReverseDebuff = 72;
 
-		/// <summary>
-		/// 蝎子勾魂脚·正
-		/// </summary>
 		public const short XieZiGouHunJiaoDirect = 73;
 
-		/// <summary>
-		/// 蝎子勾魂脚·逆
-		/// </summary>
 		public const short XieZiGouHunJiaoReverse = 74;
 
-		/// <summary>
-		/// 伏君忧虞·力道
-		/// </summary>
 		public const short FuJunYouYuHit0 = 75;
 
-		/// <summary>
-		/// 伏君忧虞·精妙
-		/// </summary>
 		public const short FuJunYouYuHit1 = 76;
 
-		/// <summary>
-		/// 伏君忧虞·迅疾
-		/// </summary>
 		public const short FuJunYouYuHit2 = 77;
 
-		/// <summary>
-		/// 伏君忧虞·动心
-		/// </summary>
 		public const short FuJunYouYuHit3 = 78;
 
-		/// <summary>
-		/// 伏君忧虞·卸力
-		/// </summary>
 		public const short FuJunYouYuAvoid0 = 79;
 
-		/// <summary>
-		/// 伏君忧虞·拆招
-		/// </summary>
 		public const short FuJunYouYuAvoid1 = 80;
 
-		/// <summary>
-		/// 伏君忧虞·闪避
-		/// </summary>
 		public const short FuJunYouYuAvoid2 = 81;
 
-		/// <summary>
-		/// 伏君忧虞·守心
-		/// </summary>
 		public const short FuJunYouYuAvoid3 = 82;
 
-		/// <summary>
-		/// 解封·架势恢复
-		/// </summary>
 		public const short JieFeng0 = 83;
 
-		/// <summary>
-		/// 解封·提气恢复
-		/// </summary>
 		public const short JieFeng1 = 84;
 
-		/// <summary>
-		/// 解封·移动速度
-		/// </summary>
 		public const short JieFeng2 = 85;
 
-		/// <summary>
-		/// 解封·步伐稳健
-		/// </summary>
 		public const short JieFeng3 = 86;
 
-		/// <summary>
-		/// 解封·施展速度
-		/// </summary>
 		public const short JieFeng4 = 87;
 
-		/// <summary>
-		/// 解封·引气冲关
-		/// </summary>
 		public const short JieFeng5 = 88;
 
-		/// <summary>
-		/// 解封·兵器切换
-		/// </summary>
 		public const short JieFeng6 = 89;
 
-		/// <summary>
-		/// 解封·攻击速度
-		/// </summary>
 		public const short JieFeng7 = 90;
 
-		/// <summary>
-		/// 解封·内功发挥
-		/// </summary>
 		public const short JieFeng8 = 91;
 
-		/// <summary>
-		/// 解封·调息吐纳
-		/// </summary>
 		public const short JieFeng9 = 92;
 
-		/// <summary>
-		/// 试锋
-		/// </summary>
 		public const short ShiFeng = 93;
 
-		/// <summary>
-		/// 拆刃增益·架势恢复
-		/// </summary>
 		public const short ChaiRenBuff0 = 94;
 
-		/// <summary>
-		/// 拆刃增益·提气恢复
-		/// </summary>
 		public const short ChaiRenBuff1 = 95;
 
-		/// <summary>
-		/// 拆刃增益·移动速度
-		/// </summary>
 		public const short ChaiRenBuff2 = 96;
 
-		/// <summary>
-		/// 拆刃增益·步伐稳健
-		/// </summary>
 		public const short ChaiRenBuff3 = 97;
 
-		/// <summary>
-		/// 拆刃增益·施展速度
-		/// </summary>
 		public const short ChaiRenBuff4 = 98;
 
-		/// <summary>
-		/// 拆刃增益·引气冲关
-		/// </summary>
 		public const short ChaiRenBuff5 = 99;
 
-		/// <summary>
-		/// 拆刃增益·兵器切换
-		/// </summary>
 		public const short ChaiRenBuff6 = 100;
 
-		/// <summary>
-		/// 拆刃增益·攻击速度
-		/// </summary>
 		public const short ChaiRenBuff7 = 101;
 
-		/// <summary>
-		/// 拆刃增益·内功发挥
-		/// </summary>
 		public const short ChaiRenBuff8 = 102;
 
-		/// <summary>
-		/// 拆刃增益·调息吐纳
-		/// </summary>
 		public const short ChaiRenBuff9 = 103;
 
-		/// <summary>
-		/// 拆刃减益·架势恢复
-		/// </summary>
 		public const short ChaiRenDebuff0 = 104;
 
-		/// <summary>
-		/// 拆刃减益·提气恢复
-		/// </summary>
 		public const short ChaiRenDebuff1 = 105;
 
-		/// <summary>
-		/// 拆刃减益·移动速度
-		/// </summary>
 		public const short ChaiRenDebuff2 = 106;
 
-		/// <summary>
-		/// 拆刃减益·步伐稳健
-		/// </summary>
 		public const short ChaiRenDebuff3 = 107;
 
-		/// <summary>
-		/// 拆刃减益·施展速度
-		/// </summary>
 		public const short ChaiRenDebuff4 = 108;
 
-		/// <summary>
-		/// 拆刃减益·引气冲关
-		/// </summary>
 		public const short ChaiRenDebuff5 = 109;
 
-		/// <summary>
-		/// 拆刃减益·兵器切换
-		/// </summary>
 		public const short ChaiRenDebuff6 = 110;
 
-		/// <summary>
-		/// 拆刃减益·攻击速度
-		/// </summary>
 		public const short ChaiRenDebuff7 = 111;
 
-		/// <summary>
-		/// 拆刃减益·内功发挥
-		/// </summary>
 		public const short ChaiRenDebuff8 = 112;
 
-		/// <summary>
-		/// 拆刃减益·调息吐纳
-		/// </summary>
 		public const short ChaiRenDebuff9 = 113;
 
-		/// <summary>
-		/// 夺神·增益
-		/// </summary>
 		public const short DuoShenBuff = 114;
 
-		/// <summary>
-		/// 夺神·减益
-		/// </summary>
 		public const short DuoShenDebuff = 115;
 
-		/// <summary>
-		/// 心神动摇
-		/// </summary>
 		public const short ReduceMindAvoid = 116;
 
-		/// <summary>
-		/// 浑心无字
-		/// </summary>
 		public const short LegendaryBook0 = 117;
 
-		/// <summary>
-		/// 白衣行化
-		/// </summary>
 		public const short LegendaryBook1 = 118;
 
-		/// <summary>
-		/// 大全千法
-		/// </summary>
 		public const short LegendaryBook2 = 119;
 
-		/// <summary>
-		/// 象龙演画
-		/// </summary>
 		public const short LegendaryBook3 = 120;
 
-		/// <summary>
-		/// 心观残笺
-		/// </summary>
 		public const short LegendaryBook4 = 121;
 
-		/// <summary>
-		/// 八埏至宝
-		/// </summary>
 		public const short LegendaryBook5 = 122;
 
-		/// <summary>
-		/// 化影奇功
-		/// </summary>
 		public const short LegendaryBook6 = 123;
 
-		/// <summary>
-		/// 无名神剑
-		/// </summary>
 		public const short LegendaryBook7 = 124;
 
-		/// <summary>
-		/// 十杀魔罗
-		/// </summary>
 		public const short LegendaryBook8 = 125;
 
-		/// <summary>
-		/// 一画开天
-		/// </summary>
 		public const short LegendaryBook9 = 126;
 
-		/// <summary>
-		/// 无先玄元
-		/// </summary>
 		public const short LegendaryBook10 = 127;
 
-		/// <summary>
-		/// 九似真藏
-		/// </summary>
 		public const short LegendaryBook11 = 128;
 
-		/// <summary>
-		/// 天通神术
-		/// </summary>
 		public const short LegendaryBook12 = 129;
 
-		/// <summary>
-		/// 神女绝音
-		/// </summary>
 		public const short LegendaryBook13 = 130;
 
-		/// <summary>
-		/// 凌绝顶
-		/// </summary>
 		public const short SavageSkillMountain = 131;
 
-		/// <summary>
-		/// 一线天
-		/// </summary>
 		public const short SavageSkillCanyon = 132;
 
-		/// <summary>
-		/// 九折径
-		/// </summary>
 		public const short SavageSkillHill = 133;
 
-		/// <summary>
-		/// 苍茫野
-		/// </summary>
 		public const short SavageSkillField = 134;
 
-		/// <summary>
-		/// 连山翠
-		/// </summary>
 		public const short SavageSkillWoodland = 135;
 
-		/// <summary>
-		/// 空行涧
-		/// </summary>
 		public const short SavageSkillRiverBeach = 136;
 
-		/// <summary>
-		/// 烟波荡
-		/// </summary>
 		public const short SavageSkillLake = 137;
 
-		/// <summary>
-		/// 森罗嶂
-		/// </summary>
 		public const short SavageSkillJungle = 138;
 
-		/// <summary>
-		/// 岩穴暝
-		/// </summary>
 		public const short SavageSkillCave = 139;
 
-		/// <summary>
-		/// 幽潭沉
-		/// </summary>
 		public const short SavageSkillSwamp = 140;
 
-		/// <summary>
-		/// 桃花源
-		/// </summary>
 		public const short SavageSkillTaoYuan = 141;
 
-		/// <summary>
-		/// 无命奇毒0
-		/// </summary>
 		public const short WuMingQiDu0 = 142;
 
-		/// <summary>
-		/// 无命奇毒1
-		/// </summary>
 		public const short WuMingQiDu1 = 143;
 
-		/// <summary>
-		/// 无命奇毒2
-		/// </summary>
 		public const short WuMingQiDu2 = 144;
 
-		/// <summary>
-		/// 无命奇毒3
-		/// </summary>
 		public const short WuMingQiDu3 = 145;
 
-		/// <summary>
-		/// 坏血断肠
-		/// </summary>
 		public const short HuaiXueDuanChang = 146;
 
-		/// <summary>
-		/// 剧恶深苦
-		/// </summary>
 		public const short JuEShenKu = 147;
 
-		/// <summary>
-		/// 猴子
-		/// </summary>
 		public const short Monkey0 = 148;
 
-		/// <summary>
-		/// 恶鹰
-		/// </summary>
 		public const short Eagle0 = 149;
 
-		/// <summary>
-		/// 野猪
-		/// </summary>
 		public const short Pig0 = 150;
 
-		/// <summary>
-		/// 棕熊
-		/// </summary>
 		public const short Bear0 = 151;
 
-		/// <summary>
-		/// 野牛
-		/// </summary>
 		public const short Bull0 = 152;
 
-		/// <summary>
-		/// 巨蛇
-		/// </summary>
 		public const short Snake0 = 153;
 
-		/// <summary>
-		/// 花豹
-		/// </summary>
 		public const short Jaguar0 = 154;
 
-		/// <summary>
-		/// 狮子
-		/// </summary>
 		public const short Lion0 = 155;
 
-		/// <summary>
-		/// 老虎
-		/// </summary>
 		public const short Tiger0 = 156;
 
-		/// <summary>
-		/// 灵猴
-		/// </summary>
 		public const short Monkey1 = 157;
 
-		/// <summary>
-		/// 金鹏
-		/// </summary>
 		public const short Eagle1 = 158;
 
-		/// <summary>
-		/// 玄猪
-		/// </summary>
 		public const short Pig1 = 159;
 
-		/// <summary>
-		/// 白熊
-		/// </summary>
 		public const short Bear1 = 160;
 
-		/// <summary>
-		/// 夔牛
-		/// </summary>
 		public const short Bull1 = 161;
 
-		/// <summary>
-		/// 巴蟒
-		/// </summary>
 		public const short Snake1 = 162;
 
-		/// <summary>
-		/// 黑豹
-		/// </summary>
 		public const short Jaguar1 = 163;
 
-		/// <summary>
-		/// 金狮
-		/// </summary>
 		public const short Lion1 = 164;
 
-		/// <summary>
-		/// 白虎
-		/// </summary>
 		public const short Tiger1 = 165;
 
-		/// <summary>
-		/// 七轮感应法·正
-		/// </summary>
 		public const short QiLunGanYingFaDirect = 166;
 
-		/// <summary>
-		/// 七轮感应法·逆
-		/// </summary>
 		public const short QiLunGanYingFaReverse = 167;
 
-		/// <summary>
-		/// 白蛟
-		/// </summary>
 		public const short JiaoWhite = 168;
 
-		/// <summary>
-		/// 黑蛟
-		/// </summary>
 		public const short JiaoBlack = 169;
 
-		/// <summary>
-		/// 青蛟
-		/// </summary>
 		public const short JiaoGreen = 170;
 
-		/// <summary>
-		/// 赤蛟
-		/// </summary>
 		public const short JiaoRed = 171;
 
-		/// <summary>
-		/// 黄蛟
-		/// </summary>
 		public const short JiaoYellow = 172;
 
-		/// <summary>
-		/// 白黑蛟
-		/// </summary>
 		public const short JiaoWB = 173;
 
-		/// <summary>
-		/// 白青蛟
-		/// </summary>
 		public const short JiaoWG = 174;
 
-		/// <summary>
-		/// 白赤蛟
-		/// </summary>
 		public const short JiaoWR = 175;
 
-		/// <summary>
-		/// 白黄蛟
-		/// </summary>
 		public const short JiaoWY = 176;
 
-		/// <summary>
-		/// 黑青蛟
-		/// </summary>
 		public const short JiaoBG = 177;
 
-		/// <summary>
-		/// 黑赤蛟
-		/// </summary>
 		public const short JiaoBR = 178;
 
-		/// <summary>
-		/// 黑黄蛟
-		/// </summary>
 		public const short JiaoBY = 179;
 
-		/// <summary>
-		/// 青赤蛟
-		/// </summary>
 		public const short JiaoGR = 180;
 
-		/// <summary>
-		/// 青黄蛟
-		/// </summary>
 		public const short JiaoGY = 181;
 
-		/// <summary>
-		/// 赤黄蛟
-		/// </summary>
 		public const short JiaoRY = 182;
 
-		/// <summary>
-		/// 白黑青蛟
-		/// </summary>
 		public const short JiaoWBG = 183;
 
-		/// <summary>
-		/// 白黑赤蛟
-		/// </summary>
 		public const short JiaoWBR = 184;
 
-		/// <summary>
-		/// 白黑黄蛟
-		/// </summary>
 		public const short JiaoWBY = 185;
 
-		/// <summary>
-		/// 白青赤蛟
-		/// </summary>
 		public const short JiaoWGR = 186;
 
-		/// <summary>
-		/// 白青黄蛟
-		/// </summary>
 		public const short JiaoWGY = 187;
 
-		/// <summary>
-		/// 白赤黄蛟
-		/// </summary>
 		public const short JiaoWRY = 188;
 
-		/// <summary>
-		/// 黑青赤蛟
-		/// </summary>
 		public const short JiaoBGR = 189;
 
-		/// <summary>
-		/// 黑青黄蛟
-		/// </summary>
 		public const short JiaoBGY = 190;
 
-		/// <summary>
-		/// 黑赤黄蛟
-		/// </summary>
 		public const short JiaoBRY = 191;
 
-		/// <summary>
-		/// 青赤黄蛟
-		/// </summary>
 		public const short JiaoGRY = 192;
 
-		/// <summary>
-		/// 白黑青赤蛟
-		/// </summary>
 		public const short JiaoWBGR = 193;
 
-		/// <summary>
-		/// 白黑青黄蛟
-		/// </summary>
 		public const short JiaoWBGY = 194;
 
-		/// <summary>
-		/// 白黑赤黄蛟
-		/// </summary>
 		public const short JiaoWBRY = 195;
 
-		/// <summary>
-		/// 白青赤黄蛟
-		/// </summary>
 		public const short JiaoWGRY = 196;
 
-		/// <summary>
-		/// 黑青赤黄蛟
-		/// </summary>
 		public const short JiaoBGRY = 197;
 
-		/// <summary>
-		/// 白青赤黄黑蛟
-		/// </summary>
 		public const short JiaoWGRYB = 198;
 
-		/// <summary>
-		/// 囚牛
-		/// </summary>
 		public const short Qiuniu = 199;
 
-		/// <summary>
-		/// 睚眦
-		/// </summary>
 		public const short Yazi = 200;
 
-		/// <summary>
-		/// 嘲风
-		/// </summary>
 		public const short Chaofeng = 201;
 
-		/// <summary>
-		/// 蒲牢
-		/// </summary>
 		public const short Pulao = 202;
 
-		/// <summary>
-		/// 狻猊
-		/// </summary>
 		public const short Suanni = 203;
 
-		/// <summary>
-		/// 霸下
-		/// </summary>
 		public const short Baxia = 204;
 
-		/// <summary>
-		/// 狴犴
-		/// </summary>
 		public const short Bian = 205;
 
-		/// <summary>
-		/// 负屃
-		/// </summary>
 		public const short Fuxi = 206;
 
-		/// <summary>
-		/// 螭吻
-		/// </summary>
 		public const short Chiwen = 207;
 
-		/// <summary>
-		/// 六合刀法·正
-		/// </summary>
 		public const short LiuHeDaoFaDirect = 208;
 
-		/// <summary>
-		/// 六合刀法·逆
-		/// </summary>
 		public const short LiuHeDaoFaReverse = 209;
 
-		/// <summary>
-		/// 鸩羽香·正
-		/// </summary>
 		public const short ZhenYuXiangDirect = 210;
 
-		/// <summary>
-		/// 鸩羽香·逆
-		/// </summary>
 		public const short ZhenYuXiangReverse = 211;
 
-		/// <summary>
-		/// 阴风蝎子手·正
-		/// </summary>
 		public const short YinFengXieZiShouDirect = 212;
 
-		/// <summary>
-		/// 阴风蝎子手·逆
-		/// </summary>
 		public const short YinFengXieZiShouReverse = 213;
 
-		/// <summary>
-		/// 寒冰刺骨法·正
-		/// </summary>
 		public const short HanBingCiGuFaDirect = 214;
 
-		/// <summary>
-		/// 寒冰刺骨法·逆
-		/// </summary>
 		public const short HanBingCiGuFaReverse = 215;
 
-		/// <summary>
-		/// 掌血功·正
-		/// </summary>
 		public const short ZhangXueGongDirect = 216;
 
-		/// <summary>
-		/// 掌血功·逆
-		/// </summary>
 		public const short ZhangXueGongReverse = 217;
 
-		/// <summary>
-		/// 黄泉指·正
-		/// </summary>
 		public const short HuangQuanZhiDirect = 218;
 
-		/// <summary>
-		/// 黄泉指·逆
-		/// </summary>
 		public const short HuangQuanZhiReverse = 219;
 
-		/// <summary>
-		/// 大花曼陀罗指·正
-		/// </summary>
 		public const short DaHuaManTuoLuoZhiDirect = 220;
 
-		/// <summary>
-		/// 大花曼陀罗指·逆
-		/// </summary>
 		public const short DaHuaManTuoLuoZhiReverse = 221;
 
-		/// <summary>
-		/// 琼花叹·正
-		/// </summary>
 		public const short QiongHuaTanDirect = 222;
 
-		/// <summary>
-		/// 琼花叹·逆
-		/// </summary>
 		public const short QiongHuaTanReverse = 223;
 
-		/// <summary>
-		/// 胸中死气
-		/// </summary>
 		public const short XiongZhongSiQi = 224;
 
-		/// <summary>
-		/// 死气夺魂
-		/// </summary>
 		public const short SiQiDuoHun = 225;
 
-		/// <summary>
-		/// 少林遗力
-		/// </summary>
 		public const short LegacyPowerShaolin = 226;
 
-		/// <summary>
-		/// 峨眉遗力
-		/// </summary>
 		public const short LegacyPowerEmei = 227;
 
-		/// <summary>
-		/// 百花遗力
-		/// </summary>
 		public const short LegacyPowerBaihua = 228;
 
-		/// <summary>
-		/// 武当遗力
-		/// </summary>
 		public const short LegacyPowerWudang = 229;
 
-		/// <summary>
-		/// 元山遗力
-		/// </summary>
 		public const short LegacyPowerYuanshan = 230;
 
-		/// <summary>
-		/// 狮相遗力
-		/// </summary>
 		public const short LegacyPowerShixiang = 231;
 
-		/// <summary>
-		/// 然山遗力
-		/// </summary>
 		public const short LegacyPowerRanshan = 232;
 
-		/// <summary>
-		/// 璇女遗力
-		/// </summary>
 		public const short LegacyPowerXuannv = 233;
 
-		/// <summary>
-		/// 铸剑遗力
-		/// </summary>
 		public const short LegacyPowerZhujian = 234;
 
-		/// <summary>
-		/// 空桑遗力
-		/// </summary>
 		public const short LegacyPowerKongsang = 235;
 
-		/// <summary>
-		/// 金刚遗力
-		/// </summary>
 		public const short LegacyPowerJingang = 236;
 
-		/// <summary>
-		/// 五仙遗力
-		/// </summary>
 		public const short LegacyPowerWuxian = 237;
 
-		/// <summary>
-		/// 界青遗力
-		/// </summary>
 		public const short LegacyPowerJieqing = 238;
 
-		/// <summary>
-		/// 伏龙遗力
-		/// </summary>
 		public const short LegacyPowerFulong = 239;
 
-		/// <summary>
-		/// 血犼遗力
-		/// </summary>
 		public const short LegacyPowerXuehou = 240;
 
-		/// <summary>
-		/// 落魂钟
-		/// </summary>
 		public const short SoulWitheringBell = 241;
 
-		/// <summary>
-		/// 落魂钟转移后
-		/// </summary>
 		public const short SoulWitheringBellAfterTransfer = 242;
 
-		/// <summary>
-		/// 狩猎野兽
-		/// </summary>
 		public const short HuntingBeasts = 243;
 
-		/// <summary>
-		/// 天铸玄铁册·正
-		/// </summary>
 		public const short TianZhuXuanTieCeDirect = 244;
 
-		/// <summary>
-		/// 天铸玄铁册·逆
-		/// </summary>
 		public const short TianZhuXuanTieCeReverse = 245;
 
-		/// <summary>
-		/// 金刚狱石
-		/// </summary>
 		public const short FiveElementsStoneMetal = 246;
 
-		/// <summary>
-		/// 紫霞狱石
-		/// </summary>
 		public const short FiveElementsStoneWood = 247;
 
-		/// <summary>
-		/// 玄阴狱石
-		/// </summary>
 		public const short FiveElementsStoneWater = 248;
 
-		/// <summary>
-		/// 纯阳狱石
-		/// </summary>
 		public const short FiveElementsStoneFire = 249;
 
-		/// <summary>
-		/// 归元狱石
-		/// </summary>
 		public const short FiveElementsStoneEarth = 250;
 
-		/// <summary>
-		/// 金蚕蛊·增益
-		/// </summary>
 		public const short GoldenSilkwormBuff = 251;
 
-		/// <summary>
-		/// 金蚕蛊·减益
-		/// </summary>
 		public const short GoldenSilkwormDebuff = 252;
+
+		public const short LoongWhite = 253;
+
+		public const short LoongBlack = 254;
+
+		public const short LoongGreen = 255;
+
+		public const short LoongRed = 256;
+
+		public const short LoongYellow = 257;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 金针伐脉功·正
-		/// </summary>
 		public static CombatStateItem JinZhenFaMaiGongDirect => Instance[(short)0];
 
-		/// <summary>
-		/// 金针伐脉功·逆
-		/// </summary>
 		public static CombatStateItem JinZhenFaMaiGongReverse => Instance[(short)1];
 
-		/// <summary>
-		/// 离魂功·正
-		/// </summary>
 		public static CombatStateItem LiHunGongDirect => Instance[(short)2];
 
-		/// <summary>
-		/// 离魂功·逆
-		/// </summary>
 		public static CombatStateItem LiHunGongReverse => Instance[(short)3];
 
-		/// <summary>
-		/// 大金刚拳·正增益
-		/// </summary>
 		public static CombatStateItem DaJinGangQuanDirectBuff => Instance[(short)4];
 
-		/// <summary>
-		/// 大金刚拳·正减益
-		/// </summary>
 		public static CombatStateItem DaJinGangQuanDirectDebuff => Instance[(short)5];
 
-		/// <summary>
-		/// 大金刚拳·逆增益
-		/// </summary>
 		public static CombatStateItem DaJinGangQuanReverseBuff => Instance[(short)6];
 
-		/// <summary>
-		/// 大金刚拳·逆减益
-		/// </summary>
 		public static CombatStateItem DaJinGangQuanReverseDebuff => Instance[(short)7];
 
-		/// <summary>
-		/// 少林一指禅·正
-		/// </summary>
 		public static CombatStateItem ShaoLinYiZhiChanDirect => Instance[(short)8];
 
-		/// <summary>
-		/// 少林一指禅·逆
-		/// </summary>
 		public static CombatStateItem ShaoLinYiZhiChanReverse => Instance[(short)9];
 
-		/// <summary>
-		/// 轻身术
-		/// </summary>
 		public static CombatStateItem QingShenShu => Instance[(short)10];
 
-		/// <summary>
-		/// 沾衣十八跌·正
-		/// </summary>
 		public static CombatStateItem ZhanYiShiBaDieDirect => Instance[(short)11];
 
-		/// <summary>
-		/// 沾衣十八跌·逆
-		/// </summary>
 		public static CombatStateItem ZhanYiShiBaDieReverse => Instance[(short)12];
 
-		/// <summary>
-		/// 移花接木手·正增益
-		/// </summary>
 		public static CombatStateItem YiHuaJieMuShouDirectBuff => Instance[(short)13];
 
-		/// <summary>
-		/// 移花接木手·正减益
-		/// </summary>
 		public static CombatStateItem YiHuaJieMuShouDirectDebuff => Instance[(short)14];
 
-		/// <summary>
-		/// 移花接木手·逆增益
-		/// </summary>
 		public static CombatStateItem YiHuaJieMuShouReverseBuff => Instance[(short)15];
 
-		/// <summary>
-		/// 移花接木手·逆减益
-		/// </summary>
 		public static CombatStateItem YiHuaJieMuShouReverseDebuff => Instance[(short)16];
 
-		/// <summary>
-		/// 峨眉一指禅·正
-		/// </summary>
 		public static CombatStateItem EMeiYiZhiChanDirect => Instance[(short)17];
 
-		/// <summary>
-		/// 峨眉一指禅·逆
-		/// </summary>
 		public static CombatStateItem EMeiYiZhiChanReverse => Instance[(short)18];
 
-		/// <summary>
-		/// 金顶飞仙
-		/// </summary>
 		public static CombatStateItem JinDingFeiXian => Instance[(short)19];
 
-		/// <summary>
-		/// 血海凝冰术·正
-		/// </summary>
 		public static CombatStateItem XueHaiNingBingShuDirect => Instance[(short)20];
 
-		/// <summary>
-		/// 血海凝冰术·逆
-		/// </summary>
 		public static CombatStateItem XueHaiNingBingShuReverse => Instance[(short)21];
 
-		/// <summary>
-		/// 太极剑法·正
-		/// </summary>
 		public static CombatStateItem TaiJiJianFaDirect => Instance[(short)22];
 
-		/// <summary>
-		/// 太极剑法·逆
-		/// </summary>
 		public static CombatStateItem TaiJiJianFaReverse => Instance[(short)23];
 
-		/// <summary>
-		/// 云床九练·正
-		/// </summary>
 		public static CombatStateItem YunChuangJiuLianDirect => Instance[(short)24];
 
-		/// <summary>
-		/// 云床九练·逆
-		/// </summary>
 		public static CombatStateItem YunChuangJiuLianReverse => Instance[(short)25];
 
-		/// <summary>
-		/// 开阖剑术·正0
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuDirect0 => Instance[(short)26];
 
-		/// <summary>
-		/// 开阖剑术·正1
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuDirect1 => Instance[(short)27];
 
-		/// <summary>
-		/// 开阖剑术·正2
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuDirect2 => Instance[(short)28];
 
-		/// <summary>
-		/// 开阖剑术·正3
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuDirect3 => Instance[(short)29];
 
-		/// <summary>
-		/// 开阖剑术·逆0
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuReverse0 => Instance[(short)30];
 
-		/// <summary>
-		/// 开阖剑术·逆1
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuReverse1 => Instance[(short)31];
 
-		/// <summary>
-		/// 开阖剑术·逆2
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuReverse2 => Instance[(short)32];
 
-		/// <summary>
-		/// 开阖剑术·逆3
-		/// </summary>
 		public static CombatStateItem KaiHeJianShuReverse3 => Instance[(short)33];
 
-		/// <summary>
-		/// 御风符·正
-		/// </summary>
 		public static CombatStateItem YuFengFuDirect => Instance[(short)34];
 
-		/// <summary>
-		/// 御风符·逆
-		/// </summary>
 		public static CombatStateItem YuFengFuReverse => Instance[(short)35];
 
-		/// <summary>
-		/// 不思归
-		/// </summary>
 		public static CombatStateItem BuSiGui => Instance[(short)36];
 
-		/// <summary>
-		/// 凤来仪·正
-		/// </summary>
 		public static CombatStateItem FengLaiYiDirect => Instance[(short)37];
 
-		/// <summary>
-		/// 凤来仪·逆
-		/// </summary>
 		public static CombatStateItem FengLaiYiReverse => Instance[(short)38];
 
-		/// <summary>
-		/// 嫘祖剥茧式·正
-		/// </summary>
 		public static CombatStateItem LeiZuBoJianShiDirect => Instance[(short)39];
 
-		/// <summary>
-		/// 嫘祖剥茧式·逆
-		/// </summary>
 		public static CombatStateItem LeiZuBoJianShiReverse => Instance[(short)40];
 
-		/// <summary>
-		/// 大太阴一明指
-		/// </summary>
 		public static CombatStateItem DaTaiYinYiMingZhi => Instance[(short)41];
 
-		/// <summary>
-		/// 断魂幽吟曲
-		/// </summary>
 		public static CombatStateItem DuanHunYouYinQu => Instance[(short)42];
 
-		/// <summary>
-		/// 柴山擒跌手·正
-		/// </summary>
 		public static CombatStateItem ChaiShanQinDieShouDirect => Instance[(short)43];
 
-		/// <summary>
-		/// 柴山擒跌手·逆
-		/// </summary>
 		public static CombatStateItem ChaiShanQinDieShouReverse => Instance[(short)44];
 
-		/// <summary>
-		/// 威灵仙化骨掌·正
-		/// </summary>
 		public static CombatStateItem WeiLingXianHuaGuZhangDirect => Instance[(short)45];
 
-		/// <summary>
-		/// 威灵仙化骨掌·逆
-		/// </summary>
 		public static CombatStateItem WeiLingXianHuaGuZhangReverse => Instance[(short)46];
 
-		/// <summary>
-		/// 磕金震玉小八式·正增益
-		/// </summary>
 		public static CombatStateItem KeJinZhenYuXiaoBaShiDirectBuff => Instance[(short)47];
 
-		/// <summary>
-		/// 磕金震玉小八式·正减益
-		/// </summary>
 		public static CombatStateItem KeJinZhenYuXiaoBaShiDirectDebuff => Instance[(short)48];
 
-		/// <summary>
-		/// 磕金震玉小八式·逆增益
-		/// </summary>
 		public static CombatStateItem KeJinZhenYuXiaoBaShiReverseBuff => Instance[(short)49];
 
-		/// <summary>
-		/// 磕金震玉小八式·逆减益
-		/// </summary>
 		public static CombatStateItem KeJinZhenYuXiaoBaShiReverseDebuff => Instance[(short)50];
 
-		/// <summary>
-		/// 飞山断海大八式·正
-		/// </summary>
 		public static CombatStateItem FeiShanDuanHaiDaBaShiDirect => Instance[(short)51];
 
-		/// <summary>
-		/// 飞山断海大八式·逆
-		/// </summary>
 		public static CombatStateItem FeiShanDuanHaiDaBaShiReverse => Instance[(short)52];
 
-		/// <summary>
-		/// 五怒手·正
-		/// </summary>
 		public static CombatStateItem WuNuShouDirect => Instance[(short)53];
 
-		/// <summary>
-		/// 五怒手·逆
-		/// </summary>
 		public static CombatStateItem WuNuShouReverse => Instance[(short)54];
 
-		/// <summary>
-		/// 金刚黑砂掌·正
-		/// </summary>
 		public static CombatStateItem JinGangHeiShaZhangDirect => Instance[(short)55];
 
-		/// <summary>
-		/// 金刚黑砂掌·逆
-		/// </summary>
 		public static CombatStateItem JinGangHeiShaZhangReverse => Instance[(short)56];
 
-		/// <summary>
-		/// 拿脉功·正
-		/// </summary>
 		public static CombatStateItem NaMaiGongDirect => Instance[(short)57];
 
-		/// <summary>
-		/// 拿脉功·逆
-		/// </summary>
 		public static CombatStateItem NaMaiGongReverse => Instance[(short)58];
 
-		/// <summary>
-		/// 勾镰剑法·正
-		/// </summary>
 		public static CombatStateItem GouLianJianFaDirect => Instance[(short)59];
 
-		/// <summary>
-		/// 勾镰剑法·逆
-		/// </summary>
 		public static CombatStateItem GouLianJianFaReverse => Instance[(short)60];
 
-		/// <summary>
-		/// 玉索倒悬·正
-		/// </summary>
 		public static CombatStateItem YuSuoDaoXuanDirect => Instance[(short)61];
 
-		/// <summary>
-		/// 玉索倒悬·逆
-		/// </summary>
 		public static CombatStateItem YuSuoDaoXuanReverse => Instance[(short)62];
 
-		/// <summary>
-		/// 天蛇翻
-		/// </summary>
 		public static CombatStateItem TianSheFan => Instance[(short)63];
 
-		/// <summary>
-		/// 血偶破煞法·正
-		/// </summary>
 		public static CombatStateItem XueOuPoShaFaDirect => Instance[(short)64];
 
-		/// <summary>
-		/// 血偶破煞法·逆
-		/// </summary>
 		public static CombatStateItem XueOuPoShaFaReverse => Instance[(short)65];
 
-		/// <summary>
-		/// 血偶破煞·正
-		/// </summary>
 		public static CombatStateItem XueOuPoShaDirect => Instance[(short)66];
 
-		/// <summary>
-		/// 血偶破煞·逆
-		/// </summary>
 		public static CombatStateItem XueOuPoShaReverse => Instance[(short)67];
 
-		/// <summary>
-		/// 天渊纵
-		/// </summary>
 		public static CombatStateItem TianYuanZong => Instance[(short)68];
 
-		/// <summary>
-		/// 赤青神火劲·正增益
-		/// </summary>
 		public static CombatStateItem ChiQingShenHuoJinDirectBuff => Instance[(short)69];
 
-		/// <summary>
-		/// 赤青神火劲·正减益
-		/// </summary>
 		public static CombatStateItem ChiQingShenHuoJinDirectDebuff => Instance[(short)70];
 
-		/// <summary>
-		/// 赤青神火劲·逆增益
-		/// </summary>
 		public static CombatStateItem ChiQingShenHuoJinReverseBuff => Instance[(short)71];
 
-		/// <summary>
-		/// 赤青神火劲·逆减益
-		/// </summary>
 		public static CombatStateItem ChiQingShenHuoJinReverseDebuff => Instance[(short)72];
 
-		/// <summary>
-		/// 蝎子勾魂脚·正
-		/// </summary>
 		public static CombatStateItem XieZiGouHunJiaoDirect => Instance[(short)73];
 
-		/// <summary>
-		/// 蝎子勾魂脚·逆
-		/// </summary>
 		public static CombatStateItem XieZiGouHunJiaoReverse => Instance[(short)74];
 
-		/// <summary>
-		/// 伏君忧虞·力道
-		/// </summary>
 		public static CombatStateItem FuJunYouYuHit0 => Instance[(short)75];
 
-		/// <summary>
-		/// 伏君忧虞·精妙
-		/// </summary>
 		public static CombatStateItem FuJunYouYuHit1 => Instance[(short)76];
 
-		/// <summary>
-		/// 伏君忧虞·迅疾
-		/// </summary>
 		public static CombatStateItem FuJunYouYuHit2 => Instance[(short)77];
 
-		/// <summary>
-		/// 伏君忧虞·动心
-		/// </summary>
 		public static CombatStateItem FuJunYouYuHit3 => Instance[(short)78];
 
-		/// <summary>
-		/// 伏君忧虞·卸力
-		/// </summary>
 		public static CombatStateItem FuJunYouYuAvoid0 => Instance[(short)79];
 
-		/// <summary>
-		/// 伏君忧虞·拆招
-		/// </summary>
 		public static CombatStateItem FuJunYouYuAvoid1 => Instance[(short)80];
 
-		/// <summary>
-		/// 伏君忧虞·闪避
-		/// </summary>
 		public static CombatStateItem FuJunYouYuAvoid2 => Instance[(short)81];
 
-		/// <summary>
-		/// 伏君忧虞·守心
-		/// </summary>
 		public static CombatStateItem FuJunYouYuAvoid3 => Instance[(short)82];
 
-		/// <summary>
-		/// 解封·架势恢复
-		/// </summary>
 		public static CombatStateItem JieFeng0 => Instance[(short)83];
 
-		/// <summary>
-		/// 解封·提气恢复
-		/// </summary>
 		public static CombatStateItem JieFeng1 => Instance[(short)84];
 
-		/// <summary>
-		/// 解封·移动速度
-		/// </summary>
 		public static CombatStateItem JieFeng2 => Instance[(short)85];
 
-		/// <summary>
-		/// 解封·步伐稳健
-		/// </summary>
 		public static CombatStateItem JieFeng3 => Instance[(short)86];
 
-		/// <summary>
-		/// 解封·施展速度
-		/// </summary>
 		public static CombatStateItem JieFeng4 => Instance[(short)87];
 
-		/// <summary>
-		/// 解封·引气冲关
-		/// </summary>
 		public static CombatStateItem JieFeng5 => Instance[(short)88];
 
-		/// <summary>
-		/// 解封·兵器切换
-		/// </summary>
 		public static CombatStateItem JieFeng6 => Instance[(short)89];
 
-		/// <summary>
-		/// 解封·攻击速度
-		/// </summary>
 		public static CombatStateItem JieFeng7 => Instance[(short)90];
 
-		/// <summary>
-		/// 解封·内功发挥
-		/// </summary>
 		public static CombatStateItem JieFeng8 => Instance[(short)91];
 
-		/// <summary>
-		/// 解封·调息吐纳
-		/// </summary>
 		public static CombatStateItem JieFeng9 => Instance[(short)92];
 
-		/// <summary>
-		/// 试锋
-		/// </summary>
 		public static CombatStateItem ShiFeng => Instance[(short)93];
 
-		/// <summary>
-		/// 拆刃增益·架势恢复
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff0 => Instance[(short)94];
 
-		/// <summary>
-		/// 拆刃增益·提气恢复
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff1 => Instance[(short)95];
 
-		/// <summary>
-		/// 拆刃增益·移动速度
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff2 => Instance[(short)96];
 
-		/// <summary>
-		/// 拆刃增益·步伐稳健
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff3 => Instance[(short)97];
 
-		/// <summary>
-		/// 拆刃增益·施展速度
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff4 => Instance[(short)98];
 
-		/// <summary>
-		/// 拆刃增益·引气冲关
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff5 => Instance[(short)99];
 
-		/// <summary>
-		/// 拆刃增益·兵器切换
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff6 => Instance[(short)100];
 
-		/// <summary>
-		/// 拆刃增益·攻击速度
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff7 => Instance[(short)101];
 
-		/// <summary>
-		/// 拆刃增益·内功发挥
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff8 => Instance[(short)102];
 
-		/// <summary>
-		/// 拆刃增益·调息吐纳
-		/// </summary>
 		public static CombatStateItem ChaiRenBuff9 => Instance[(short)103];
 
-		/// <summary>
-		/// 拆刃减益·架势恢复
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff0 => Instance[(short)104];
 
-		/// <summary>
-		/// 拆刃减益·提气恢复
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff1 => Instance[(short)105];
 
-		/// <summary>
-		/// 拆刃减益·移动速度
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff2 => Instance[(short)106];
 
-		/// <summary>
-		/// 拆刃减益·步伐稳健
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff3 => Instance[(short)107];
 
-		/// <summary>
-		/// 拆刃减益·施展速度
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff4 => Instance[(short)108];
 
-		/// <summary>
-		/// 拆刃减益·引气冲关
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff5 => Instance[(short)109];
 
-		/// <summary>
-		/// 拆刃减益·兵器切换
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff6 => Instance[(short)110];
 
-		/// <summary>
-		/// 拆刃减益·攻击速度
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff7 => Instance[(short)111];
 
-		/// <summary>
-		/// 拆刃减益·内功发挥
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff8 => Instance[(short)112];
 
-		/// <summary>
-		/// 拆刃减益·调息吐纳
-		/// </summary>
 		public static CombatStateItem ChaiRenDebuff9 => Instance[(short)113];
 
-		/// <summary>
-		/// 夺神·增益
-		/// </summary>
 		public static CombatStateItem DuoShenBuff => Instance[(short)114];
 
-		/// <summary>
-		/// 夺神·减益
-		/// </summary>
 		public static CombatStateItem DuoShenDebuff => Instance[(short)115];
 
-		/// <summary>
-		/// 心神动摇
-		/// </summary>
 		public static CombatStateItem ReduceMindAvoid => Instance[(short)116];
 
-		/// <summary>
-		/// 浑心无字
-		/// </summary>
 		public static CombatStateItem LegendaryBook0 => Instance[(short)117];
 
-		/// <summary>
-		/// 白衣行化
-		/// </summary>
 		public static CombatStateItem LegendaryBook1 => Instance[(short)118];
 
-		/// <summary>
-		/// 大全千法
-		/// </summary>
 		public static CombatStateItem LegendaryBook2 => Instance[(short)119];
 
-		/// <summary>
-		/// 象龙演画
-		/// </summary>
 		public static CombatStateItem LegendaryBook3 => Instance[(short)120];
 
-		/// <summary>
-		/// 心观残笺
-		/// </summary>
 		public static CombatStateItem LegendaryBook4 => Instance[(short)121];
 
-		/// <summary>
-		/// 八埏至宝
-		/// </summary>
 		public static CombatStateItem LegendaryBook5 => Instance[(short)122];
 
-		/// <summary>
-		/// 化影奇功
-		/// </summary>
 		public static CombatStateItem LegendaryBook6 => Instance[(short)123];
 
-		/// <summary>
-		/// 无名神剑
-		/// </summary>
 		public static CombatStateItem LegendaryBook7 => Instance[(short)124];
 
-		/// <summary>
-		/// 十杀魔罗
-		/// </summary>
 		public static CombatStateItem LegendaryBook8 => Instance[(short)125];
 
-		/// <summary>
-		/// 一画开天
-		/// </summary>
 		public static CombatStateItem LegendaryBook9 => Instance[(short)126];
 
-		/// <summary>
-		/// 无先玄元
-		/// </summary>
 		public static CombatStateItem LegendaryBook10 => Instance[(short)127];
 
-		/// <summary>
-		/// 九似真藏
-		/// </summary>
 		public static CombatStateItem LegendaryBook11 => Instance[(short)128];
 
-		/// <summary>
-		/// 天通神术
-		/// </summary>
 		public static CombatStateItem LegendaryBook12 => Instance[(short)129];
 
-		/// <summary>
-		/// 神女绝音
-		/// </summary>
 		public static CombatStateItem LegendaryBook13 => Instance[(short)130];
 
-		/// <summary>
-		/// 凌绝顶
-		/// </summary>
 		public static CombatStateItem SavageSkillMountain => Instance[(short)131];
 
-		/// <summary>
-		/// 一线天
-		/// </summary>
 		public static CombatStateItem SavageSkillCanyon => Instance[(short)132];
 
-		/// <summary>
-		/// 九折径
-		/// </summary>
 		public static CombatStateItem SavageSkillHill => Instance[(short)133];
 
-		/// <summary>
-		/// 苍茫野
-		/// </summary>
 		public static CombatStateItem SavageSkillField => Instance[(short)134];
 
-		/// <summary>
-		/// 连山翠
-		/// </summary>
 		public static CombatStateItem SavageSkillWoodland => Instance[(short)135];
 
-		/// <summary>
-		/// 空行涧
-		/// </summary>
 		public static CombatStateItem SavageSkillRiverBeach => Instance[(short)136];
 
-		/// <summary>
-		/// 烟波荡
-		/// </summary>
 		public static CombatStateItem SavageSkillLake => Instance[(short)137];
 
-		/// <summary>
-		/// 森罗嶂
-		/// </summary>
 		public static CombatStateItem SavageSkillJungle => Instance[(short)138];
 
-		/// <summary>
-		/// 岩穴暝
-		/// </summary>
 		public static CombatStateItem SavageSkillCave => Instance[(short)139];
 
-		/// <summary>
-		/// 幽潭沉
-		/// </summary>
 		public static CombatStateItem SavageSkillSwamp => Instance[(short)140];
 
-		/// <summary>
-		/// 桃花源
-		/// </summary>
 		public static CombatStateItem SavageSkillTaoYuan => Instance[(short)141];
 
-		/// <summary>
-		/// 无命奇毒0
-		/// </summary>
 		public static CombatStateItem WuMingQiDu0 => Instance[(short)142];
 
-		/// <summary>
-		/// 无命奇毒1
-		/// </summary>
 		public static CombatStateItem WuMingQiDu1 => Instance[(short)143];
 
-		/// <summary>
-		/// 无命奇毒2
-		/// </summary>
 		public static CombatStateItem WuMingQiDu2 => Instance[(short)144];
 
-		/// <summary>
-		/// 无命奇毒3
-		/// </summary>
 		public static CombatStateItem WuMingQiDu3 => Instance[(short)145];
 
-		/// <summary>
-		/// 坏血断肠
-		/// </summary>
 		public static CombatStateItem HuaiXueDuanChang => Instance[(short)146];
 
-		/// <summary>
-		/// 剧恶深苦
-		/// </summary>
 		public static CombatStateItem JuEShenKu => Instance[(short)147];
 
-		/// <summary>
-		/// 猴子
-		/// </summary>
 		public static CombatStateItem Monkey0 => Instance[(short)148];
 
-		/// <summary>
-		/// 恶鹰
-		/// </summary>
 		public static CombatStateItem Eagle0 => Instance[(short)149];
 
-		/// <summary>
-		/// 野猪
-		/// </summary>
 		public static CombatStateItem Pig0 => Instance[(short)150];
 
-		/// <summary>
-		/// 棕熊
-		/// </summary>
 		public static CombatStateItem Bear0 => Instance[(short)151];
 
-		/// <summary>
-		/// 野牛
-		/// </summary>
 		public static CombatStateItem Bull0 => Instance[(short)152];
 
-		/// <summary>
-		/// 巨蛇
-		/// </summary>
 		public static CombatStateItem Snake0 => Instance[(short)153];
 
-		/// <summary>
-		/// 花豹
-		/// </summary>
 		public static CombatStateItem Jaguar0 => Instance[(short)154];
 
-		/// <summary>
-		/// 狮子
-		/// </summary>
 		public static CombatStateItem Lion0 => Instance[(short)155];
 
-		/// <summary>
-		/// 老虎
-		/// </summary>
 		public static CombatStateItem Tiger0 => Instance[(short)156];
 
-		/// <summary>
-		/// 灵猴
-		/// </summary>
 		public static CombatStateItem Monkey1 => Instance[(short)157];
 
-		/// <summary>
-		/// 金鹏
-		/// </summary>
 		public static CombatStateItem Eagle1 => Instance[(short)158];
 
-		/// <summary>
-		/// 玄猪
-		/// </summary>
 		public static CombatStateItem Pig1 => Instance[(short)159];
 
-		/// <summary>
-		/// 白熊
-		/// </summary>
 		public static CombatStateItem Bear1 => Instance[(short)160];
 
-		/// <summary>
-		/// 夔牛
-		/// </summary>
 		public static CombatStateItem Bull1 => Instance[(short)161];
 
-		/// <summary>
-		/// 巴蟒
-		/// </summary>
 		public static CombatStateItem Snake1 => Instance[(short)162];
 
-		/// <summary>
-		/// 黑豹
-		/// </summary>
 		public static CombatStateItem Jaguar1 => Instance[(short)163];
 
-		/// <summary>
-		/// 金狮
-		/// </summary>
 		public static CombatStateItem Lion1 => Instance[(short)164];
 
-		/// <summary>
-		/// 白虎
-		/// </summary>
 		public static CombatStateItem Tiger1 => Instance[(short)165];
 
-		/// <summary>
-		/// 七轮感应法·正
-		/// </summary>
 		public static CombatStateItem QiLunGanYingFaDirect => Instance[(short)166];
 
-		/// <summary>
-		/// 七轮感应法·逆
-		/// </summary>
 		public static CombatStateItem QiLunGanYingFaReverse => Instance[(short)167];
 
-		/// <summary>
-		/// 白蛟
-		/// </summary>
 		public static CombatStateItem JiaoWhite => Instance[(short)168];
 
-		/// <summary>
-		/// 黑蛟
-		/// </summary>
 		public static CombatStateItem JiaoBlack => Instance[(short)169];
 
-		/// <summary>
-		/// 青蛟
-		/// </summary>
 		public static CombatStateItem JiaoGreen => Instance[(short)170];
 
-		/// <summary>
-		/// 赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoRed => Instance[(short)171];
 
-		/// <summary>
-		/// 黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoYellow => Instance[(short)172];
 
-		/// <summary>
-		/// 白黑蛟
-		/// </summary>
 		public static CombatStateItem JiaoWB => Instance[(short)173];
 
-		/// <summary>
-		/// 白青蛟
-		/// </summary>
 		public static CombatStateItem JiaoWG => Instance[(short)174];
 
-		/// <summary>
-		/// 白赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoWR => Instance[(short)175];
 
-		/// <summary>
-		/// 白黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoWY => Instance[(short)176];
 
-		/// <summary>
-		/// 黑青蛟
-		/// </summary>
 		public static CombatStateItem JiaoBG => Instance[(short)177];
 
-		/// <summary>
-		/// 黑赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoBR => Instance[(short)178];
 
-		/// <summary>
-		/// 黑黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoBY => Instance[(short)179];
 
-		/// <summary>
-		/// 青赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoGR => Instance[(short)180];
 
-		/// <summary>
-		/// 青黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoGY => Instance[(short)181];
 
-		/// <summary>
-		/// 赤黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoRY => Instance[(short)182];
 
-		/// <summary>
-		/// 白黑青蛟
-		/// </summary>
 		public static CombatStateItem JiaoWBG => Instance[(short)183];
 
-		/// <summary>
-		/// 白黑赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoWBR => Instance[(short)184];
 
-		/// <summary>
-		/// 白黑黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoWBY => Instance[(short)185];
 
-		/// <summary>
-		/// 白青赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoWGR => Instance[(short)186];
 
-		/// <summary>
-		/// 白青黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoWGY => Instance[(short)187];
 
-		/// <summary>
-		/// 白赤黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoWRY => Instance[(short)188];
 
-		/// <summary>
-		/// 黑青赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoBGR => Instance[(short)189];
 
-		/// <summary>
-		/// 黑青黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoBGY => Instance[(short)190];
 
-		/// <summary>
-		/// 黑赤黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoBRY => Instance[(short)191];
 
-		/// <summary>
-		/// 青赤黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoGRY => Instance[(short)192];
 
-		/// <summary>
-		/// 白黑青赤蛟
-		/// </summary>
 		public static CombatStateItem JiaoWBGR => Instance[(short)193];
 
-		/// <summary>
-		/// 白黑青黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoWBGY => Instance[(short)194];
 
-		/// <summary>
-		/// 白黑赤黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoWBRY => Instance[(short)195];
 
-		/// <summary>
-		/// 白青赤黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoWGRY => Instance[(short)196];
 
-		/// <summary>
-		/// 黑青赤黄蛟
-		/// </summary>
 		public static CombatStateItem JiaoBGRY => Instance[(short)197];
 
-		/// <summary>
-		/// 白青赤黄黑蛟
-		/// </summary>
 		public static CombatStateItem JiaoWGRYB => Instance[(short)198];
 
-		/// <summary>
-		/// 囚牛
-		/// </summary>
 		public static CombatStateItem Qiuniu => Instance[(short)199];
 
-		/// <summary>
-		/// 睚眦
-		/// </summary>
 		public static CombatStateItem Yazi => Instance[(short)200];
 
-		/// <summary>
-		/// 嘲风
-		/// </summary>
 		public static CombatStateItem Chaofeng => Instance[(short)201];
 
-		/// <summary>
-		/// 蒲牢
-		/// </summary>
 		public static CombatStateItem Pulao => Instance[(short)202];
 
-		/// <summary>
-		/// 狻猊
-		/// </summary>
 		public static CombatStateItem Suanni => Instance[(short)203];
 
-		/// <summary>
-		/// 霸下
-		/// </summary>
 		public static CombatStateItem Baxia => Instance[(short)204];
 
-		/// <summary>
-		/// 狴犴
-		/// </summary>
 		public static CombatStateItem Bian => Instance[(short)205];
 
-		/// <summary>
-		/// 负屃
-		/// </summary>
 		public static CombatStateItem Fuxi => Instance[(short)206];
 
-		/// <summary>
-		/// 螭吻
-		/// </summary>
 		public static CombatStateItem Chiwen => Instance[(short)207];
 
-		/// <summary>
-		/// 六合刀法·正
-		/// </summary>
 		public static CombatStateItem LiuHeDaoFaDirect => Instance[(short)208];
 
-		/// <summary>
-		/// 六合刀法·逆
-		/// </summary>
 		public static CombatStateItem LiuHeDaoFaReverse => Instance[(short)209];
 
-		/// <summary>
-		/// 鸩羽香·正
-		/// </summary>
 		public static CombatStateItem ZhenYuXiangDirect => Instance[(short)210];
 
-		/// <summary>
-		/// 鸩羽香·逆
-		/// </summary>
 		public static CombatStateItem ZhenYuXiangReverse => Instance[(short)211];
 
-		/// <summary>
-		/// 阴风蝎子手·正
-		/// </summary>
 		public static CombatStateItem YinFengXieZiShouDirect => Instance[(short)212];
 
-		/// <summary>
-		/// 阴风蝎子手·逆
-		/// </summary>
 		public static CombatStateItem YinFengXieZiShouReverse => Instance[(short)213];
 
-		/// <summary>
-		/// 寒冰刺骨法·正
-		/// </summary>
 		public static CombatStateItem HanBingCiGuFaDirect => Instance[(short)214];
 
-		/// <summary>
-		/// 寒冰刺骨法·逆
-		/// </summary>
 		public static CombatStateItem HanBingCiGuFaReverse => Instance[(short)215];
 
-		/// <summary>
-		/// 掌血功·正
-		/// </summary>
 		public static CombatStateItem ZhangXueGongDirect => Instance[(short)216];
 
-		/// <summary>
-		/// 掌血功·逆
-		/// </summary>
 		public static CombatStateItem ZhangXueGongReverse => Instance[(short)217];
 
-		/// <summary>
-		/// 黄泉指·正
-		/// </summary>
 		public static CombatStateItem HuangQuanZhiDirect => Instance[(short)218];
 
-		/// <summary>
-		/// 黄泉指·逆
-		/// </summary>
 		public static CombatStateItem HuangQuanZhiReverse => Instance[(short)219];
 
-		/// <summary>
-		/// 大花曼陀罗指·正
-		/// </summary>
 		public static CombatStateItem DaHuaManTuoLuoZhiDirect => Instance[(short)220];
 
-		/// <summary>
-		/// 大花曼陀罗指·逆
-		/// </summary>
 		public static CombatStateItem DaHuaManTuoLuoZhiReverse => Instance[(short)221];
 
-		/// <summary>
-		/// 琼花叹·正
-		/// </summary>
 		public static CombatStateItem QiongHuaTanDirect => Instance[(short)222];
 
-		/// <summary>
-		/// 琼花叹·逆
-		/// </summary>
 		public static CombatStateItem QiongHuaTanReverse => Instance[(short)223];
 
-		/// <summary>
-		/// 胸中死气
-		/// </summary>
 		public static CombatStateItem XiongZhongSiQi => Instance[(short)224];
 
-		/// <summary>
-		/// 死气夺魂
-		/// </summary>
 		public static CombatStateItem SiQiDuoHun => Instance[(short)225];
 
-		/// <summary>
-		/// 少林遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerShaolin => Instance[(short)226];
 
-		/// <summary>
-		/// 峨眉遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerEmei => Instance[(short)227];
 
-		/// <summary>
-		/// 百花遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerBaihua => Instance[(short)228];
 
-		/// <summary>
-		/// 武当遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerWudang => Instance[(short)229];
 
-		/// <summary>
-		/// 元山遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerYuanshan => Instance[(short)230];
 
-		/// <summary>
-		/// 狮相遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerShixiang => Instance[(short)231];
 
-		/// <summary>
-		/// 然山遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerRanshan => Instance[(short)232];
 
-		/// <summary>
-		/// 璇女遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerXuannv => Instance[(short)233];
 
-		/// <summary>
-		/// 铸剑遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerZhujian => Instance[(short)234];
 
-		/// <summary>
-		/// 空桑遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerKongsang => Instance[(short)235];
 
-		/// <summary>
-		/// 金刚遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerJingang => Instance[(short)236];
 
-		/// <summary>
-		/// 五仙遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerWuxian => Instance[(short)237];
 
-		/// <summary>
-		/// 界青遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerJieqing => Instance[(short)238];
 
-		/// <summary>
-		/// 伏龙遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerFulong => Instance[(short)239];
 
-		/// <summary>
-		/// 血犼遗力
-		/// </summary>
 		public static CombatStateItem LegacyPowerXuehou => Instance[(short)240];
 
-		/// <summary>
-		/// 落魂钟
-		/// </summary>
 		public static CombatStateItem SoulWitheringBell => Instance[(short)241];
 
-		/// <summary>
-		/// 落魂钟转移后
-		/// </summary>
 		public static CombatStateItem SoulWitheringBellAfterTransfer => Instance[(short)242];
 
-		/// <summary>
-		/// 狩猎野兽
-		/// </summary>
 		public static CombatStateItem HuntingBeasts => Instance[(short)243];
 
-		/// <summary>
-		/// 天铸玄铁册·正
-		/// </summary>
 		public static CombatStateItem TianZhuXuanTieCeDirect => Instance[(short)244];
 
-		/// <summary>
-		/// 天铸玄铁册·逆
-		/// </summary>
 		public static CombatStateItem TianZhuXuanTieCeReverse => Instance[(short)245];
 
-		/// <summary>
-		/// 金刚狱石
-		/// </summary>
 		public static CombatStateItem FiveElementsStoneMetal => Instance[(short)246];
 
-		/// <summary>
-		/// 紫霞狱石
-		/// </summary>
 		public static CombatStateItem FiveElementsStoneWood => Instance[(short)247];
 
-		/// <summary>
-		/// 玄阴狱石
-		/// </summary>
 		public static CombatStateItem FiveElementsStoneWater => Instance[(short)248];
 
-		/// <summary>
-		/// 纯阳狱石
-		/// </summary>
 		public static CombatStateItem FiveElementsStoneFire => Instance[(short)249];
 
-		/// <summary>
-		/// 归元狱石
-		/// </summary>
 		public static CombatStateItem FiveElementsStoneEarth => Instance[(short)250];
 
-		/// <summary>
-		/// 金蚕蛊·增益
-		/// </summary>
 		public static CombatStateItem GoldenSilkwormBuff => Instance[(short)251];
 
-		/// <summary>
-		/// 金蚕蛊·减益
-		/// </summary>
 		public static CombatStateItem GoldenSilkwormDebuff => Instance[(short)252];
+
+		public static CombatStateItem LoongWhite => Instance[(short)253];
+
+		public static CombatStateItem LoongBlack => Instance[(short)254];
+
+		public static CombatStateItem LoongGreen => Instance[(short)255];
+
+		public static CombatStateItem LoongRed => Instance[(short)256];
+
+		public static CombatStateItem LoongYellow => Instance[(short)257];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CombatState Instance = new CombatState();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "PropertyList", "ReverseState", "TipsDesc", "Desc", "TemplateId" };
@@ -3284,12 +1777,17 @@ public class CombatState : ConfigData<CombatStateItem, short>
 		{
 			new CombatStateProperty(36, 5, 1)
 		}, -1, LocalStringManager.GetConfig("CombatState_language", "TipsDesc_252"), LocalStringManager.GetConfig("CombatState_language", "Desc_252")));
+		_dataArray.Add(new CombatStateItem(253, LocalStringManager.GetConfig("CombatState_language", "Name_253"), new List<CombatStateProperty>(), -1, LocalStringManager.GetConfig("CombatState_language", "TipsDesc_253"), LocalStringManager.GetConfig("CombatState_language", "Desc_253")));
+		_dataArray.Add(new CombatStateItem(254, LocalStringManager.GetConfig("CombatState_language", "Name_254"), new List<CombatStateProperty>(), -1, LocalStringManager.GetConfig("CombatState_language", "TipsDesc_254"), LocalStringManager.GetConfig("CombatState_language", "Desc_254")));
+		_dataArray.Add(new CombatStateItem(255, LocalStringManager.GetConfig("CombatState_language", "Name_255"), new List<CombatStateProperty>(), -1, LocalStringManager.GetConfig("CombatState_language", "TipsDesc_255"), LocalStringManager.GetConfig("CombatState_language", "Desc_255")));
+		_dataArray.Add(new CombatStateItem(256, LocalStringManager.GetConfig("CombatState_language", "Name_256"), new List<CombatStateProperty>(), -1, LocalStringManager.GetConfig("CombatState_language", "TipsDesc_256"), LocalStringManager.GetConfig("CombatState_language", "Desc_256")));
+		_dataArray.Add(new CombatStateItem(257, LocalStringManager.GetConfig("CombatState_language", "Name_257"), new List<CombatStateProperty>(), -1, LocalStringManager.GetConfig("CombatState_language", "TipsDesc_257"), LocalStringManager.GetConfig("CombatState_language", "Desc_257")));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<CombatStateItem>(253);
+		_dataArray = new List<CombatStateItem>(258);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

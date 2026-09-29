@@ -8,561 +8,228 @@ namespace Config;
 [Serializable]
 public class Merchant : ConfigData<MerchantItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 服牛帮0
-		/// </summary>
 		public const sbyte Foods0 = 0;
 
-		/// <summary>
-		/// 服牛帮1
-		/// </summary>
 		public const sbyte Foods1 = 1;
 
-		/// <summary>
-		/// 服牛帮2
-		/// </summary>
 		public const sbyte Foods2 = 2;
 
-		/// <summary>
-		/// 服牛帮3
-		/// </summary>
 		public const sbyte Foods3 = 3;
 
-		/// <summary>
-		/// 服牛帮4
-		/// </summary>
 		public const sbyte Foods4 = 4;
 
-		/// <summary>
-		/// 服牛帮5
-		/// </summary>
 		public const sbyte Foods5 = 5;
 
-		/// <summary>
-		/// 服牛帮6
-		/// </summary>
 		public const sbyte Foods6 = 6;
 
-		/// <summary>
-		/// 文山书海阁0
-		/// </summary>
 		public const sbyte Books0 = 7;
 
-		/// <summary>
-		/// 文山书海阁1
-		/// </summary>
 		public const sbyte Books1 = 8;
 
-		/// <summary>
-		/// 文山书海阁2
-		/// </summary>
 		public const sbyte Books2 = 9;
 
-		/// <summary>
-		/// 文山书海阁3
-		/// </summary>
 		public const sbyte Books3 = 10;
 
-		/// <summary>
-		/// 文山书海阁4
-		/// </summary>
 		public const sbyte Books4 = 11;
 
-		/// <summary>
-		/// 文山书海阁5
-		/// </summary>
 		public const sbyte Books5 = 12;
 
-		/// <summary>
-		/// 文山书海阁6
-		/// </summary>
 		public const sbyte Books6 = 13;
 
-		/// <summary>
-		/// 五湖商会0
-		/// </summary>
 		public const sbyte Materials0 = 14;
 
-		/// <summary>
-		/// 五湖商会1
-		/// </summary>
 		public const sbyte Materials1 = 15;
 
-		/// <summary>
-		/// 五湖商会2
-		/// </summary>
 		public const sbyte Materials2 = 16;
 
-		/// <summary>
-		/// 五湖商会3
-		/// </summary>
 		public const sbyte Materials3 = 17;
 
-		/// <summary>
-		/// 五湖商会4
-		/// </summary>
 		public const sbyte Materials4 = 18;
 
-		/// <summary>
-		/// 五湖商会5
-		/// </summary>
 		public const sbyte Materials5 = 19;
 
-		/// <summary>
-		/// 五湖商会6
-		/// </summary>
 		public const sbyte Materials6 = 20;
 
-		/// <summary>
-		/// 大武魁商号0
-		/// </summary>
 		public const sbyte Equipments0 = 21;
 
-		/// <summary>
-		/// 大武魁商号1
-		/// </summary>
 		public const sbyte Equipments1 = 22;
 
-		/// <summary>
-		/// 大武魁商号2
-		/// </summary>
 		public const sbyte Equipments2 = 23;
 
-		/// <summary>
-		/// 大武魁商号3
-		/// </summary>
 		public const sbyte Equipments3 = 24;
 
-		/// <summary>
-		/// 大武魁商号4
-		/// </summary>
 		public const sbyte Equipments4 = 25;
 
-		/// <summary>
-		/// 大武魁商号5
-		/// </summary>
 		public const sbyte Equipments5 = 26;
 
-		/// <summary>
-		/// 大武魁商号6
-		/// </summary>
 		public const sbyte Equipments6 = 27;
 
-		/// <summary>
-		/// 回春堂0
-		/// </summary>
 		public const sbyte Medicines0 = 28;
 
-		/// <summary>
-		/// 回春堂1
-		/// </summary>
 		public const sbyte Medicines1 = 29;
 
-		/// <summary>
-		/// 回春堂2
-		/// </summary>
 		public const sbyte Medicines2 = 30;
 
-		/// <summary>
-		/// 回春堂3
-		/// </summary>
 		public const sbyte Medicines3 = 31;
 
-		/// <summary>
-		/// 回春堂4
-		/// </summary>
 		public const sbyte Medicines4 = 32;
 
-		/// <summary>
-		/// 回春堂5
-		/// </summary>
 		public const sbyte Medicines5 = 33;
 
-		/// <summary>
-		/// 回春堂6
-		/// </summary>
 		public const sbyte Medicines6 = 34;
 
-		/// <summary>
-		/// 公输坊0
-		/// </summary>
 		public const sbyte Constructions0 = 35;
 
-		/// <summary>
-		/// 公输坊1
-		/// </summary>
 		public const sbyte Constructions1 = 36;
 
-		/// <summary>
-		/// 公输坊2
-		/// </summary>
 		public const sbyte Constructions2 = 37;
 
-		/// <summary>
-		/// 公输坊3
-		/// </summary>
 		public const sbyte Constructions3 = 38;
 
-		/// <summary>
-		/// 公输坊4
-		/// </summary>
 		public const sbyte Constructions4 = 39;
 
-		/// <summary>
-		/// 公输坊5
-		/// </summary>
 		public const sbyte Constructions5 = 40;
 
-		/// <summary>
-		/// 公输坊6
-		/// </summary>
 		public const sbyte Constructions6 = 41;
 
-		/// <summary>
-		/// 奇货斋0
-		/// </summary>
 		public const sbyte Accessories0 = 42;
 
-		/// <summary>
-		/// 奇货斋1
-		/// </summary>
 		public const sbyte Accessories1 = 43;
 
-		/// <summary>
-		/// 奇货斋2
-		/// </summary>
 		public const sbyte Accessories2 = 44;
 
-		/// <summary>
-		/// 奇货斋3
-		/// </summary>
 		public const sbyte Accessories3 = 45;
 
-		/// <summary>
-		/// 奇货斋4
-		/// </summary>
 		public const sbyte Accessories4 = 46;
 
-		/// <summary>
-		/// 奇货斋5
-		/// </summary>
 		public const sbyte Accessories5 = 47;
 
-		/// <summary>
-		/// 奇货斋6
-		/// </summary>
 		public const sbyte Accessories6 = 48;
 
-		/// <summary>
-		/// 五湖珍宝0
-		/// </summary>
 		public const sbyte WuHuZhenBao0 = 49;
 
-		/// <summary>
-		/// 五湖珍宝1
-		/// </summary>
 		public const sbyte WuHuZhenBao1 = 50;
 
-		/// <summary>
-		/// 五湖珍宝2
-		/// </summary>
 		public const sbyte WuHuZhenBao2 = 51;
 
-		/// <summary>
-		/// 农户互动
-		/// </summary>
 		public const sbyte FruitShop = 52;
 
-		/// <summary>
-		/// 峨眉互动
-		/// </summary>
 		public const sbyte EMeiShop = 53;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 服牛帮0
-		/// </summary>
 		public static MerchantItem Foods0 => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 服牛帮1
-		/// </summary>
 		public static MerchantItem Foods1 => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 服牛帮2
-		/// </summary>
 		public static MerchantItem Foods2 => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 服牛帮3
-		/// </summary>
 		public static MerchantItem Foods3 => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 服牛帮4
-		/// </summary>
 		public static MerchantItem Foods4 => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 服牛帮5
-		/// </summary>
 		public static MerchantItem Foods5 => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 服牛帮6
-		/// </summary>
 		public static MerchantItem Foods6 => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 文山书海阁0
-		/// </summary>
 		public static MerchantItem Books0 => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 文山书海阁1
-		/// </summary>
 		public static MerchantItem Books1 => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 文山书海阁2
-		/// </summary>
 		public static MerchantItem Books2 => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 文山书海阁3
-		/// </summary>
 		public static MerchantItem Books3 => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 文山书海阁4
-		/// </summary>
 		public static MerchantItem Books4 => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 文山书海阁5
-		/// </summary>
 		public static MerchantItem Books5 => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 文山书海阁6
-		/// </summary>
 		public static MerchantItem Books6 => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 五湖商会0
-		/// </summary>
 		public static MerchantItem Materials0 => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 五湖商会1
-		/// </summary>
 		public static MerchantItem Materials1 => Instance[(sbyte)15];
 
-		/// <summary>
-		/// 五湖商会2
-		/// </summary>
 		public static MerchantItem Materials2 => Instance[(sbyte)16];
 
-		/// <summary>
-		/// 五湖商会3
-		/// </summary>
 		public static MerchantItem Materials3 => Instance[(sbyte)17];
 
-		/// <summary>
-		/// 五湖商会4
-		/// </summary>
 		public static MerchantItem Materials4 => Instance[(sbyte)18];
 
-		/// <summary>
-		/// 五湖商会5
-		/// </summary>
 		public static MerchantItem Materials5 => Instance[(sbyte)19];
 
-		/// <summary>
-		/// 五湖商会6
-		/// </summary>
 		public static MerchantItem Materials6 => Instance[(sbyte)20];
 
-		/// <summary>
-		/// 大武魁商号0
-		/// </summary>
 		public static MerchantItem Equipments0 => Instance[(sbyte)21];
 
-		/// <summary>
-		/// 大武魁商号1
-		/// </summary>
 		public static MerchantItem Equipments1 => Instance[(sbyte)22];
 
-		/// <summary>
-		/// 大武魁商号2
-		/// </summary>
 		public static MerchantItem Equipments2 => Instance[(sbyte)23];
 
-		/// <summary>
-		/// 大武魁商号3
-		/// </summary>
 		public static MerchantItem Equipments3 => Instance[(sbyte)24];
 
-		/// <summary>
-		/// 大武魁商号4
-		/// </summary>
 		public static MerchantItem Equipments4 => Instance[(sbyte)25];
 
-		/// <summary>
-		/// 大武魁商号5
-		/// </summary>
 		public static MerchantItem Equipments5 => Instance[(sbyte)26];
 
-		/// <summary>
-		/// 大武魁商号6
-		/// </summary>
 		public static MerchantItem Equipments6 => Instance[(sbyte)27];
 
-		/// <summary>
-		/// 回春堂0
-		/// </summary>
 		public static MerchantItem Medicines0 => Instance[(sbyte)28];
 
-		/// <summary>
-		/// 回春堂1
-		/// </summary>
 		public static MerchantItem Medicines1 => Instance[(sbyte)29];
 
-		/// <summary>
-		/// 回春堂2
-		/// </summary>
 		public static MerchantItem Medicines2 => Instance[(sbyte)30];
 
-		/// <summary>
-		/// 回春堂3
-		/// </summary>
 		public static MerchantItem Medicines3 => Instance[(sbyte)31];
 
-		/// <summary>
-		/// 回春堂4
-		/// </summary>
 		public static MerchantItem Medicines4 => Instance[(sbyte)32];
 
-		/// <summary>
-		/// 回春堂5
-		/// </summary>
 		public static MerchantItem Medicines5 => Instance[(sbyte)33];
 
-		/// <summary>
-		/// 回春堂6
-		/// </summary>
 		public static MerchantItem Medicines6 => Instance[(sbyte)34];
 
-		/// <summary>
-		/// 公输坊0
-		/// </summary>
 		public static MerchantItem Constructions0 => Instance[(sbyte)35];
 
-		/// <summary>
-		/// 公输坊1
-		/// </summary>
 		public static MerchantItem Constructions1 => Instance[(sbyte)36];
 
-		/// <summary>
-		/// 公输坊2
-		/// </summary>
 		public static MerchantItem Constructions2 => Instance[(sbyte)37];
 
-		/// <summary>
-		/// 公输坊3
-		/// </summary>
 		public static MerchantItem Constructions3 => Instance[(sbyte)38];
 
-		/// <summary>
-		/// 公输坊4
-		/// </summary>
 		public static MerchantItem Constructions4 => Instance[(sbyte)39];
 
-		/// <summary>
-		/// 公输坊5
-		/// </summary>
 		public static MerchantItem Constructions5 => Instance[(sbyte)40];
 
-		/// <summary>
-		/// 公输坊6
-		/// </summary>
 		public static MerchantItem Constructions6 => Instance[(sbyte)41];
 
-		/// <summary>
-		/// 奇货斋0
-		/// </summary>
 		public static MerchantItem Accessories0 => Instance[(sbyte)42];
 
-		/// <summary>
-		/// 奇货斋1
-		/// </summary>
 		public static MerchantItem Accessories1 => Instance[(sbyte)43];
 
-		/// <summary>
-		/// 奇货斋2
-		/// </summary>
 		public static MerchantItem Accessories2 => Instance[(sbyte)44];
 
-		/// <summary>
-		/// 奇货斋3
-		/// </summary>
 		public static MerchantItem Accessories3 => Instance[(sbyte)45];
 
-		/// <summary>
-		/// 奇货斋4
-		/// </summary>
 		public static MerchantItem Accessories4 => Instance[(sbyte)46];
 
-		/// <summary>
-		/// 奇货斋5
-		/// </summary>
 		public static MerchantItem Accessories5 => Instance[(sbyte)47];
 
-		/// <summary>
-		/// 奇货斋6
-		/// </summary>
 		public static MerchantItem Accessories6 => Instance[(sbyte)48];
 
-		/// <summary>
-		/// 五湖珍宝0
-		/// </summary>
 		public static MerchantItem WuHuZhenBao0 => Instance[(sbyte)49];
 
-		/// <summary>
-		/// 五湖珍宝1
-		/// </summary>
 		public static MerchantItem WuHuZhenBao1 => Instance[(sbyte)50];
 
-		/// <summary>
-		/// 五湖珍宝2
-		/// </summary>
 		public static MerchantItem WuHuZhenBao2 => Instance[(sbyte)51];
 
-		/// <summary>
-		/// 农户互动
-		/// </summary>
 		public static MerchantItem FruitShop => Instance[(sbyte)52];
 
-		/// <summary>
-		/// 峨眉互动
-		/// </summary>
 		public static MerchantItem EMeiShop => Instance[(sbyte)53];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Merchant Instance = new Merchant();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

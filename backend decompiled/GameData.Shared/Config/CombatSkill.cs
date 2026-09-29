@@ -10,1361 +10,556 @@ namespace Config;
 [Serializable]
 public class CombatSkill : ConfigData<CombatSkillItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 沛然诀
-		/// </summary>
 		public const short PeiranJue = 0;
 
-		/// <summary>
-		/// 小纵跃功
-		/// </summary>
 		public const short SmallLeapSkill = 1;
 
-		/// <summary>
-		/// 水火硬气功
-		/// </summary>
 		public const short ShuiHuoYingQiGong = 2;
 
-		/// <summary>
-		/// 太祖长拳
-		/// </summary>
 		public const short TaizuChangquan = 3;
 
-		/// <summary>
-		/// 元始先天功
-		/// </summary>
 		public const short YuanShiXianTianGong = 34;
 
-		/// <summary>
-		/// 天髓宝箓
-		/// </summary>
 		public const short TianSuiBaoLu = 53;
 
-		/// <summary>
-		/// 金顶飞仙
-		/// </summary>
 		public const short JinDingFeiXian = 126;
 
-		/// <summary>
-		/// 醉八仙步
-		/// </summary>
 		public const short ZuiBaXianBu = 199;
 
-		/// <summary>
-		/// 醉卧东海
-		/// </summary>
 		public const short ZuiWoDongHai = 203;
 
-		/// <summary>
-		/// 小罗汉棍阵
-		/// </summary>
 		public const short XiaoLuoHanGunZhen = 214;
 
-		/// <summary>
-		/// 四象莲华阵
-		/// </summary>
 		public const short SiXiangLianHuaZhen = 223;
 
-		/// <summary>
-		/// 三才剑阵
-		/// </summary>
 		public const short SanCaiJianZhen = 237;
 
-		/// <summary>
-		/// 真武荡魔阵
-		/// </summary>
 		public const short ZhenWuDangMoZhen = 241;
 
-		/// <summary>
-		/// 元山七煞阵
-		/// </summary>
 		public const short YuanShanQiShaZhen = 246;
 
-		/// <summary>
-		/// 六丁六甲阵
-		/// </summary>
 		public const short LiuDingLiuJiaZhen = 261;
 
-		/// <summary>
-		/// 天女散花阵
-		/// </summary>
 		public const short TianNvSanHuaZhen = 268;
 
-		/// <summary>
-		/// 神机阵
-		/// </summary>
 		public const short ShenJiZhen = 275;
 
-		/// <summary>
-		/// 七轮感应法
-		/// </summary>
 		public const short QiLunGanYingFa = 291;
 
-		/// <summary>
-		/// 南斗六星阵
-		/// </summary>
 		public const short NanDouLiuXingZhen = 309;
 
-		/// <summary>
-		/// 龙闯阵
-		/// </summary>
 		public const short LongChuangZhen = 315;
 
-		/// <summary>
-		/// 千年醉
-		/// </summary>
 		public const short QianNianZui = 318;
 
-		/// <summary>
-		/// 十二血童大阵
-		/// </summary>
 		public const short ShiErXueTongDaZhen = 326;
 
-		/// <summary>
-		/// 武当纯阳拳
-		/// </summary>
 		public const short WuDangChunYangQuan = 350;
 
-		/// <summary>
-		/// 柴山五禽拳
-		/// </summary>
 		public const short KongsangFistAndPalm0 = 369;
 
-		/// <summary>
-		/// 大雪山掌法
-		/// </summary>
 		public const short KongsangFistAndPalm1 = 370;
 
-		/// <summary>
-		/// 掌血功
-		/// </summary>
 		public const short KongsangFistAndPalm2 = 371;
 
-		/// <summary>
-		/// 威灵仙化骨掌
-		/// </summary>
 		public const short KongsangFistAndPalm3 = 372;
 
-		/// <summary>
-		/// 丹砂神掌
-		/// </summary>
 		public const short KongsangFistAndPalm4 = 373;
 
-		/// <summary>
-		/// 青蛟神掌
-		/// </summary>
 		public const short KongsangFistAndPalm5 = 374;
 
-		/// <summary>
-		/// 伏龙醉八仙拳
-		/// </summary>
 		public const short FuLongZuiBaXianQuan = 392;
 
-		/// <summary>
-		/// 疯魔醉拳
-		/// </summary>
 		public const short FengMoZuiQuan = 394;
 
-		/// <summary>
-		/// 一玄手
-		/// </summary>
 		public const short XuannvFinger0 = 439;
 
-		/// <summary>
-		/// 玄冰指法
-		/// </summary>
 		public const short XuannvFinger1 = 440;
 
-		/// <summary>
-		/// 玉殒指
-		/// </summary>
 		public const short XuannvFinger2 = 441;
 
-		/// <summary>
-		/// 嫘祖剥茧式
-		/// </summary>
 		public const short XuannvFinger3 = 442;
 
-		/// <summary>
-		/// 寒潭藏虺式
-		/// </summary>
 		public const short XuannvFinger4 = 443;
 
-		/// <summary>
-		/// 常羲十二式
-		/// </summary>
 		public const short XuannvFinger5 = 444;
 
-		/// <summary>
-		/// 璇玑指穴法
-		/// </summary>
 		public const short XuannvFinger6 = 445;
 
-		/// <summary>
-		/// 大太阴一明指
-		/// </summary>
 		public const short XuannvFinger7 = 446;
 
-		/// <summary>
-		/// 赤目蛊降
-		/// </summary>
 		public const short WugRedEye = 454;
 
-		/// <summary>
-		/// 螭魅蛊降
-		/// </summary>
 		public const short WugForestSpirit = 455;
 
-		/// <summary>
-		/// 黑血蛊降
-		/// </summary>
 		public const short WugBlackBlood = 456;
 
-		/// <summary>
-		/// 心魔蛊降
-		/// </summary>
 		public const short WugDevilInside = 457;
 
-		/// <summary>
-		/// 九阴尸螭蛊
-		/// </summary>
 		public const short WugCorpseWorm = 458;
 
-		/// <summary>
-		/// 碧玉冰蚕蛊
-		/// </summary>
 		public const short WugIceSilkworm = 459;
 
-		/// <summary>
-		/// 王蛊金蚕降
-		/// </summary>
 		public const short WugGoldenSilkworm = 460;
 
-		/// <summary>
-		/// 百彩青髓蛊
-		/// </summary>
 		public const short WugAzureMarrow = 461;
 
-		/// <summary>
-		/// 太素绝手
-		/// </summary>
 		public const short TaiSuJueShou = 468;
 
-		/// <summary>
-		/// 鳌王神腿
-		/// </summary>
 		public const short AoWangShenTui = 485;
 
-		/// <summary>
-		/// 界青十诀
-		/// </summary>
 		public const short JieqingThrow0 = 512;
 
-		/// <summary>
-		/// 摘叶飞花术
-		/// </summary>
 		public const short JieqingThrow1 = 513;
 
-		/// <summary>
-		/// 无影六手
-		/// </summary>
 		public const short JieqingThrow2 = 514;
 
-		/// <summary>
-		/// 飞星术
-		/// </summary>
 		public const short JieqingThrow3 = 515;
 
-		/// <summary>
-		/// 乱飞蝗
-		/// </summary>
 		public const short JieqingThrow4 = 516;
 
-		/// <summary>
-		/// 爻图奇术
-		/// </summary>
 		public const short JieqingThrow5 = 517;
 
-		/// <summary>
-		/// 鸣龙掷
-		/// </summary>
 		public const short JieqingThrow6 = 518;
 
-		/// <summary>
-		/// 定影神针
-		/// </summary>
 		public const short JieqingThrow7 = 519;
 
-		/// <summary>
-		/// 无想神通
-		/// </summary>
 		public const short JieqingThrow8 = 520;
 
-		/// <summary>
-		/// 武当丹剑
-		/// </summary>
 		public const short WudangSword0 = 541;
 
-		/// <summary>
-		/// 武当逍遥剑
-		/// </summary>
 		public const short WudangSword1 = 542;
 
-		/// <summary>
-		/// 白虹剑法
-		/// </summary>
 		public const short WudangSword2 = 543;
 
-		/// <summary>
-		/// 太乙玄门剑
-		/// </summary>
 		public const short WudangSword3 = 544;
 
-		/// <summary>
-		/// 纯阳剑意
-		/// </summary>
 		public const short WudangSword4 = 545;
 
-		/// <summary>
-		/// 真武游龙剑
-		/// </summary>
 		public const short WudangSword5 = 546;
 
-		/// <summary>
-		/// 太极剑法
-		/// </summary>
 		public const short WudangSword6 = 547;
 
-		/// <summary>
-		/// 先天少阳剑气
-		/// </summary>
 		public const short WudangSword7 = 548;
 
-		/// <summary>
-		/// 无极剑式
-		/// </summary>
 		public const short WudangSword8 = 549;
 
-		/// <summary>
-		/// 达摩剑法
-		/// </summary>
 		public const short DaMoJianFa = 557;
 
-		/// <summary>
-		/// 开阖剑术
-		/// </summary>
 		public const short KaiHeJianShu = 561;
 
-		/// <summary>
-		/// 万化十四剑
-		/// </summary>
 		public const short WanHuaShiSiJian = 566;
 
-		/// <summary>
-		/// 玄冥剑气
-		/// </summary>
 		public const short XuanMingJianQi = 589;
 
-		/// <summary>
-		/// 八卦五行刀
-		/// </summary>
 		public const short YuanshanBlade0 = 590;
 
-		/// <summary>
-		/// 六合刀法
-		/// </summary>
 		public const short YuanshanBlade1 = 591;
 
-		/// <summary>
-		/// 虎步八极刀
-		/// </summary>
 		public const short YuanshanBlade2 = 592;
 
-		/// <summary>
-		/// 太乙金刀
-		/// </summary>
 		public const short YuanshanBlade3 = 593;
 
-		/// <summary>
-		/// 七星刀法
-		/// </summary>
 		public const short YuanshanBlade4 = 594;
 
-		/// <summary>
-		/// 无极刀法
-		/// </summary>
 		public const short YuanshanBlade5 = 595;
 
-		/// <summary>
-		/// 天罡刀法
-		/// </summary>
 		public const short YuanshanBlade6 = 596;
 
-		/// <summary>
-		/// 太玄神刀
-		/// </summary>
 		public const short YuanshanBlade7 = 597;
 
-		/// <summary>
-		/// 斩鳌刀法
-		/// </summary>
 		public const short ZhanAoDaoFa = 602;
 
-		/// <summary>
-		/// 金猊镇魔刀
-		/// </summary>
 		public const short JinNiZhenMoDao = 604;
 
-		/// <summary>
-		/// 九宫醉刀
-		/// </summary>
 		public const short JiuGongZuiDao = 625;
 
-		/// <summary>
-		/// 六心四意刀
-		/// </summary>
 		public const short LiuXinSiYiDao = 627;
 
-		/// <summary>
-		/// 大两仪醉刀
-		/// </summary>
 		public const short DaLiangYiZuiDao = 629;
 
-		/// <summary>
-		/// 少林六合棍
-		/// </summary>
 		public const short ShaolinPolearm0 = 632;
 
-		/// <summary>
-		/// 少林阴阳棍
-		/// </summary>
 		public const short ShaolinPolearm1 = 633;
 
-		/// <summary>
-		/// 十八点齐眉棍
-		/// </summary>
 		public const short ShaolinPolearm2 = 634;
 
-		/// <summary>
-		/// 大小夜叉棍
-		/// </summary>
 		public const short ShaolinPolearm3 = 635;
 
-		/// <summary>
-		/// 五虎群羊棍
-		/// </summary>
 		public const short ShaolinPolearm4 = 636;
 
-		/// <summary>
-		/// 少林疯魔棍
-		/// </summary>
 		public const short ShaolinPolearm5 = 637;
 
-		/// <summary>
-		/// 韦陀降魔杖
-		/// </summary>
 		public const short ShaolinPolearm6 = 638;
 
-		/// <summary>
-		/// 大智菩提杖法
-		/// </summary>
 		public const short ShaolinPolearm7 = 639;
 
-		/// <summary>
-		/// 达摩杖法
-		/// </summary>
 		public const short ShaolinPolearm8 = 640;
 
-		/// <summary>
-		/// 五行刺
-		/// </summary>
 		public const short EmeiSpecial0 = 658;
 
-		/// <summary>
-		/// 失魂刺
-		/// </summary>
 		public const short EmeiSpecial1 = 659;
 
-		/// <summary>
-		/// 美人刺
-		/// </summary>
 		public const short EmeiSpecial2 = 660;
 
-		/// <summary>
-		/// 灵蛇刺
-		/// </summary>
 		public const short EmeiSpecial3 = 661;
 
-		/// <summary>
-		/// 化影刺
-		/// </summary>
 		public const short EmeiSpecial4 = 662;
 
-		/// <summary>
-		/// 定慧神针
-		/// </summary>
 		public const short EmeiSpecial5 = 663;
 
-		/// <summary>
-		/// 玉女刺
-		/// </summary>
 		public const short EmeiSpecial6 = 664;
 
-		/// <summary>
-		/// 金顶仙针
-		/// </summary>
 		public const short EmeiSpecial7 = 665;
 
-		/// <summary>
-		/// 黄鳞鞭法
-		/// </summary>
 		public const short WuxianWhip0 = 691;
 
-		/// <summary>
-		/// 蜈蚣索
-		/// </summary>
 		public const short WuxianWhip1 = 692;
 
-		/// <summary>
-		/// 五圣鞭法
-		/// </summary>
 		public const short WuxianWhip2 = 693;
 
-		/// <summary>
-		/// 勾魂碎骨鞭
-		/// </summary>
 		public const short WuxianWhip3 = 694;
 
-		/// <summary>
-		/// 蚩尤铁鞭
-		/// </summary>
 		public const short WuxianWhip4 = 695;
 
-		/// <summary>
-		/// 破玉索
-		/// </summary>
 		public const short WuxianWhip5 = 696;
 
-		/// <summary>
-		/// 仙蛛擒蟒功
-		/// </summary>
 		public const short WuxianWhip6 = 697;
 
-		/// <summary>
-		/// 巴龙神鞭
-		/// </summary>
 		public const short WuxianWhip7 = 698;
 
-		/// <summary>
-		/// 天蛇索
-		/// </summary>
 		public const short WuxianWhip8 = 699;
 
-		/// <summary>
-		/// 御针术
-		/// </summary>
 		public const short BaihuaControllableShot0 = 700;
 
-		/// <summary>
-		/// 五行梅花针
-		/// </summary>
 		public const short BaihuaControllableShot1 = 701;
 
-		/// <summary>
-		/// 寒冰刺骨法
-		/// </summary>
 		public const short BaihuaControllableShot2 = 702;
 
-		/// <summary>
-		/// 扁鹊神针
-		/// </summary>
 		public const short BaihuaControllableShot3 = 703;
 
-		/// <summary>
-		/// 破元长针
-		/// </summary>
 		public const short BaihuaControllableShot4 = 704;
 
-		/// <summary>
-		/// 针死不针活法
-		/// </summary>
 		public const short BaihuaControllableShot5 = 705;
 
-		/// <summary>
-		/// 六弦九针术
-		/// </summary>
 		public const short BaihuaControllableShot6 = 706;
 
-		/// <summary>
-		/// 化脉神针
-		/// </summary>
 		public const short BaihuaControllableShot7 = 707;
 
-		/// <summary>
-		/// 十二弦奇针功
-		/// </summary>
 		public const short BaihuaControllableShot8 = 708;
 
-		/// <summary>
-		/// 袖里飞燕
-		/// </summary>
 		public const short XiuLiFeiYan = 709;
 
-		/// <summary>
-		/// 天枢玄机
-		/// </summary>
 		public const short TianshuXuanji = 716;
 
-		/// <summary>
-		/// 七文五彩
-		/// </summary>
 		public const short QiWenWuCai = 737;
 
-		/// <summary>
-		/// 方天敕令
-		/// </summary>
 		public const short FangTianChiLing = 742;
 
-		/// <summary>
-		/// 天幕神主
-		/// </summary>
 		public const short TianMuShenZhu = 937;
 
-		/// <summary>
-		/// 乘光披霞
-		/// </summary>
 		public const short ChengGuangPiXia = 765;
 
-		/// <summary>
-		/// 开明天兽
-		/// </summary>
 		public const short KaiMingTianShou = 939;
 
-		/// <summary>
-		/// 凶兵闯三阵
-		/// </summary>
 		public const short XiongBinChuangSanZhen = 847;
 
-		/// <summary>
-		/// 九剑·鬼神霞
-		/// </summary>
+		public const short JueDiTianTong = 944;
+
+		public const short DengShiKunShan = 945;
+
 		public const short JiuJianGuiShenXia = 869;
 
-		/// <summary>
-		/// 三三化灵
-		/// </summary>
 		public const short SanSanHuaLing = 882;
 
-		/// <summary>
-		/// 七七生慧
-		/// </summary>
 		public const short QiQiShengHui = 883;
 
-		/// <summary>
-		/// 九九造命
-		/// </summary>
 		public const short JiuJiuZaoMing = 884;
 
-		/// <summary>
-		/// 灵散·天地人
-		/// </summary>
 		public const short LingSanTianDiRen = 885;
 
-		/// <summary>
-		/// 慧亡·七觉支
-		/// </summary>
 		public const short HuiWangQiJueZhi = 886;
 
-		/// <summary>
-		/// 命陨·无间狱
-		/// </summary>
 		public const short MingYunWuJianYu = 887;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 沛然诀
-		/// </summary>
 		public static CombatSkillItem PeiranJue => Instance[(short)0];
 
-		/// <summary>
-		/// 小纵跃功
-		/// </summary>
 		public static CombatSkillItem SmallLeapSkill => Instance[(short)1];
 
-		/// <summary>
-		/// 水火硬气功
-		/// </summary>
 		public static CombatSkillItem ShuiHuoYingQiGong => Instance[(short)2];
 
-		/// <summary>
-		/// 太祖长拳
-		/// </summary>
 		public static CombatSkillItem TaizuChangquan => Instance[(short)3];
 
-		/// <summary>
-		/// 元始先天功
-		/// </summary>
 		public static CombatSkillItem YuanShiXianTianGong => Instance[(short)34];
 
-		/// <summary>
-		/// 天髓宝箓
-		/// </summary>
 		public static CombatSkillItem TianSuiBaoLu => Instance[(short)53];
 
-		/// <summary>
-		/// 金顶飞仙
-		/// </summary>
 		public static CombatSkillItem JinDingFeiXian => Instance[(short)126];
 
-		/// <summary>
-		/// 醉八仙步
-		/// </summary>
 		public static CombatSkillItem ZuiBaXianBu => Instance[(short)199];
 
-		/// <summary>
-		/// 醉卧东海
-		/// </summary>
 		public static CombatSkillItem ZuiWoDongHai => Instance[(short)203];
 
-		/// <summary>
-		/// 小罗汉棍阵
-		/// </summary>
 		public static CombatSkillItem XiaoLuoHanGunZhen => Instance[(short)214];
 
-		/// <summary>
-		/// 四象莲华阵
-		/// </summary>
 		public static CombatSkillItem SiXiangLianHuaZhen => Instance[(short)223];
 
-		/// <summary>
-		/// 三才剑阵
-		/// </summary>
 		public static CombatSkillItem SanCaiJianZhen => Instance[(short)237];
 
-		/// <summary>
-		/// 真武荡魔阵
-		/// </summary>
 		public static CombatSkillItem ZhenWuDangMoZhen => Instance[(short)241];
 
-		/// <summary>
-		/// 元山七煞阵
-		/// </summary>
 		public static CombatSkillItem YuanShanQiShaZhen => Instance[(short)246];
 
-		/// <summary>
-		/// 六丁六甲阵
-		/// </summary>
 		public static CombatSkillItem LiuDingLiuJiaZhen => Instance[(short)261];
 
-		/// <summary>
-		/// 天女散花阵
-		/// </summary>
 		public static CombatSkillItem TianNvSanHuaZhen => Instance[(short)268];
 
-		/// <summary>
-		/// 神机阵
-		/// </summary>
 		public static CombatSkillItem ShenJiZhen => Instance[(short)275];
 
-		/// <summary>
-		/// 七轮感应法
-		/// </summary>
 		public static CombatSkillItem QiLunGanYingFa => Instance[(short)291];
 
-		/// <summary>
-		/// 南斗六星阵
-		/// </summary>
 		public static CombatSkillItem NanDouLiuXingZhen => Instance[(short)309];
 
-		/// <summary>
-		/// 龙闯阵
-		/// </summary>
 		public static CombatSkillItem LongChuangZhen => Instance[(short)315];
 
-		/// <summary>
-		/// 千年醉
-		/// </summary>
 		public static CombatSkillItem QianNianZui => Instance[(short)318];
 
-		/// <summary>
-		/// 十二血童大阵
-		/// </summary>
 		public static CombatSkillItem ShiErXueTongDaZhen => Instance[(short)326];
 
-		/// <summary>
-		/// 武当纯阳拳
-		/// </summary>
 		public static CombatSkillItem WuDangChunYangQuan => Instance[(short)350];
 
-		/// <summary>
-		/// 柴山五禽拳
-		/// </summary>
 		public static CombatSkillItem KongsangFistAndPalm0 => Instance[(short)369];
 
-		/// <summary>
-		/// 大雪山掌法
-		/// </summary>
 		public static CombatSkillItem KongsangFistAndPalm1 => Instance[(short)370];
 
-		/// <summary>
-		/// 掌血功
-		/// </summary>
 		public static CombatSkillItem KongsangFistAndPalm2 => Instance[(short)371];
 
-		/// <summary>
-		/// 威灵仙化骨掌
-		/// </summary>
 		public static CombatSkillItem KongsangFistAndPalm3 => Instance[(short)372];
 
-		/// <summary>
-		/// 丹砂神掌
-		/// </summary>
 		public static CombatSkillItem KongsangFistAndPalm4 => Instance[(short)373];
 
-		/// <summary>
-		/// 青蛟神掌
-		/// </summary>
 		public static CombatSkillItem KongsangFistAndPalm5 => Instance[(short)374];
 
-		/// <summary>
-		/// 伏龙醉八仙拳
-		/// </summary>
 		public static CombatSkillItem FuLongZuiBaXianQuan => Instance[(short)392];
 
-		/// <summary>
-		/// 疯魔醉拳
-		/// </summary>
 		public static CombatSkillItem FengMoZuiQuan => Instance[(short)394];
 
-		/// <summary>
-		/// 一玄手
-		/// </summary>
 		public static CombatSkillItem XuannvFinger0 => Instance[(short)439];
 
-		/// <summary>
-		/// 玄冰指法
-		/// </summary>
 		public static CombatSkillItem XuannvFinger1 => Instance[(short)440];
 
-		/// <summary>
-		/// 玉殒指
-		/// </summary>
 		public static CombatSkillItem XuannvFinger2 => Instance[(short)441];
 
-		/// <summary>
-		/// 嫘祖剥茧式
-		/// </summary>
 		public static CombatSkillItem XuannvFinger3 => Instance[(short)442];
 
-		/// <summary>
-		/// 寒潭藏虺式
-		/// </summary>
 		public static CombatSkillItem XuannvFinger4 => Instance[(short)443];
 
-		/// <summary>
-		/// 常羲十二式
-		/// </summary>
 		public static CombatSkillItem XuannvFinger5 => Instance[(short)444];
 
-		/// <summary>
-		/// 璇玑指穴法
-		/// </summary>
 		public static CombatSkillItem XuannvFinger6 => Instance[(short)445];
 
-		/// <summary>
-		/// 大太阴一明指
-		/// </summary>
 		public static CombatSkillItem XuannvFinger7 => Instance[(short)446];
 
-		/// <summary>
-		/// 赤目蛊降
-		/// </summary>
 		public static CombatSkillItem WugRedEye => Instance[(short)454];
 
-		/// <summary>
-		/// 螭魅蛊降
-		/// </summary>
 		public static CombatSkillItem WugForestSpirit => Instance[(short)455];
 
-		/// <summary>
-		/// 黑血蛊降
-		/// </summary>
 		public static CombatSkillItem WugBlackBlood => Instance[(short)456];
 
-		/// <summary>
-		/// 心魔蛊降
-		/// </summary>
 		public static CombatSkillItem WugDevilInside => Instance[(short)457];
 
-		/// <summary>
-		/// 九阴尸螭蛊
-		/// </summary>
 		public static CombatSkillItem WugCorpseWorm => Instance[(short)458];
 
-		/// <summary>
-		/// 碧玉冰蚕蛊
-		/// </summary>
 		public static CombatSkillItem WugIceSilkworm => Instance[(short)459];
 
-		/// <summary>
-		/// 王蛊金蚕降
-		/// </summary>
 		public static CombatSkillItem WugGoldenSilkworm => Instance[(short)460];
 
-		/// <summary>
-		/// 百彩青髓蛊
-		/// </summary>
 		public static CombatSkillItem WugAzureMarrow => Instance[(short)461];
 
-		/// <summary>
-		/// 太素绝手
-		/// </summary>
 		public static CombatSkillItem TaiSuJueShou => Instance[(short)468];
 
-		/// <summary>
-		/// 鳌王神腿
-		/// </summary>
 		public static CombatSkillItem AoWangShenTui => Instance[(short)485];
 
-		/// <summary>
-		/// 界青十诀
-		/// </summary>
 		public static CombatSkillItem JieqingThrow0 => Instance[(short)512];
 
-		/// <summary>
-		/// 摘叶飞花术
-		/// </summary>
 		public static CombatSkillItem JieqingThrow1 => Instance[(short)513];
 
-		/// <summary>
-		/// 无影六手
-		/// </summary>
 		public static CombatSkillItem JieqingThrow2 => Instance[(short)514];
 
-		/// <summary>
-		/// 飞星术
-		/// </summary>
 		public static CombatSkillItem JieqingThrow3 => Instance[(short)515];
 
-		/// <summary>
-		/// 乱飞蝗
-		/// </summary>
 		public static CombatSkillItem JieqingThrow4 => Instance[(short)516];
 
-		/// <summary>
-		/// 爻图奇术
-		/// </summary>
 		public static CombatSkillItem JieqingThrow5 => Instance[(short)517];
 
-		/// <summary>
-		/// 鸣龙掷
-		/// </summary>
 		public static CombatSkillItem JieqingThrow6 => Instance[(short)518];
 
-		/// <summary>
-		/// 定影神针
-		/// </summary>
 		public static CombatSkillItem JieqingThrow7 => Instance[(short)519];
 
-		/// <summary>
-		/// 无想神通
-		/// </summary>
 		public static CombatSkillItem JieqingThrow8 => Instance[(short)520];
 
-		/// <summary>
-		/// 武当丹剑
-		/// </summary>
 		public static CombatSkillItem WudangSword0 => Instance[(short)541];
 
-		/// <summary>
-		/// 武当逍遥剑
-		/// </summary>
 		public static CombatSkillItem WudangSword1 => Instance[(short)542];
 
-		/// <summary>
-		/// 白虹剑法
-		/// </summary>
 		public static CombatSkillItem WudangSword2 => Instance[(short)543];
 
-		/// <summary>
-		/// 太乙玄门剑
-		/// </summary>
 		public static CombatSkillItem WudangSword3 => Instance[(short)544];
 
-		/// <summary>
-		/// 纯阳剑意
-		/// </summary>
 		public static CombatSkillItem WudangSword4 => Instance[(short)545];
 
-		/// <summary>
-		/// 真武游龙剑
-		/// </summary>
 		public static CombatSkillItem WudangSword5 => Instance[(short)546];
 
-		/// <summary>
-		/// 太极剑法
-		/// </summary>
 		public static CombatSkillItem WudangSword6 => Instance[(short)547];
 
-		/// <summary>
-		/// 先天少阳剑气
-		/// </summary>
 		public static CombatSkillItem WudangSword7 => Instance[(short)548];
 
-		/// <summary>
-		/// 无极剑式
-		/// </summary>
 		public static CombatSkillItem WudangSword8 => Instance[(short)549];
 
-		/// <summary>
-		/// 达摩剑法
-		/// </summary>
 		public static CombatSkillItem DaMoJianFa => Instance[(short)557];
 
-		/// <summary>
-		/// 开阖剑术
-		/// </summary>
 		public static CombatSkillItem KaiHeJianShu => Instance[(short)561];
 
-		/// <summary>
-		/// 万化十四剑
-		/// </summary>
 		public static CombatSkillItem WanHuaShiSiJian => Instance[(short)566];
 
-		/// <summary>
-		/// 玄冥剑气
-		/// </summary>
 		public static CombatSkillItem XuanMingJianQi => Instance[(short)589];
 
-		/// <summary>
-		/// 八卦五行刀
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade0 => Instance[(short)590];
 
-		/// <summary>
-		/// 六合刀法
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade1 => Instance[(short)591];
 
-		/// <summary>
-		/// 虎步八极刀
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade2 => Instance[(short)592];
 
-		/// <summary>
-		/// 太乙金刀
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade3 => Instance[(short)593];
 
-		/// <summary>
-		/// 七星刀法
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade4 => Instance[(short)594];
 
-		/// <summary>
-		/// 无极刀法
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade5 => Instance[(short)595];
 
-		/// <summary>
-		/// 天罡刀法
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade6 => Instance[(short)596];
 
-		/// <summary>
-		/// 太玄神刀
-		/// </summary>
 		public static CombatSkillItem YuanshanBlade7 => Instance[(short)597];
 
-		/// <summary>
-		/// 斩鳌刀法
-		/// </summary>
 		public static CombatSkillItem ZhanAoDaoFa => Instance[(short)602];
 
-		/// <summary>
-		/// 金猊镇魔刀
-		/// </summary>
 		public static CombatSkillItem JinNiZhenMoDao => Instance[(short)604];
 
-		/// <summary>
-		/// 九宫醉刀
-		/// </summary>
 		public static CombatSkillItem JiuGongZuiDao => Instance[(short)625];
 
-		/// <summary>
-		/// 六心四意刀
-		/// </summary>
 		public static CombatSkillItem LiuXinSiYiDao => Instance[(short)627];
 
-		/// <summary>
-		/// 大两仪醉刀
-		/// </summary>
 		public static CombatSkillItem DaLiangYiZuiDao => Instance[(short)629];
 
-		/// <summary>
-		/// 少林六合棍
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm0 => Instance[(short)632];
 
-		/// <summary>
-		/// 少林阴阳棍
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm1 => Instance[(short)633];
 
-		/// <summary>
-		/// 十八点齐眉棍
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm2 => Instance[(short)634];
 
-		/// <summary>
-		/// 大小夜叉棍
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm3 => Instance[(short)635];
 
-		/// <summary>
-		/// 五虎群羊棍
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm4 => Instance[(short)636];
 
-		/// <summary>
-		/// 少林疯魔棍
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm5 => Instance[(short)637];
 
-		/// <summary>
-		/// 韦陀降魔杖
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm6 => Instance[(short)638];
 
-		/// <summary>
-		/// 大智菩提杖法
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm7 => Instance[(short)639];
 
-		/// <summary>
-		/// 达摩杖法
-		/// </summary>
 		public static CombatSkillItem ShaolinPolearm8 => Instance[(short)640];
 
-		/// <summary>
-		/// 五行刺
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial0 => Instance[(short)658];
 
-		/// <summary>
-		/// 失魂刺
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial1 => Instance[(short)659];
 
-		/// <summary>
-		/// 美人刺
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial2 => Instance[(short)660];
 
-		/// <summary>
-		/// 灵蛇刺
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial3 => Instance[(short)661];
 
-		/// <summary>
-		/// 化影刺
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial4 => Instance[(short)662];
 
-		/// <summary>
-		/// 定慧神针
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial5 => Instance[(short)663];
 
-		/// <summary>
-		/// 玉女刺
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial6 => Instance[(short)664];
 
-		/// <summary>
-		/// 金顶仙针
-		/// </summary>
 		public static CombatSkillItem EmeiSpecial7 => Instance[(short)665];
 
-		/// <summary>
-		/// 黄鳞鞭法
-		/// </summary>
 		public static CombatSkillItem WuxianWhip0 => Instance[(short)691];
 
-		/// <summary>
-		/// 蜈蚣索
-		/// </summary>
 		public static CombatSkillItem WuxianWhip1 => Instance[(short)692];
 
-		/// <summary>
-		/// 五圣鞭法
-		/// </summary>
 		public static CombatSkillItem WuxianWhip2 => Instance[(short)693];
 
-		/// <summary>
-		/// 勾魂碎骨鞭
-		/// </summary>
 		public static CombatSkillItem WuxianWhip3 => Instance[(short)694];
 
-		/// <summary>
-		/// 蚩尤铁鞭
-		/// </summary>
 		public static CombatSkillItem WuxianWhip4 => Instance[(short)695];
 
-		/// <summary>
-		/// 破玉索
-		/// </summary>
 		public static CombatSkillItem WuxianWhip5 => Instance[(short)696];
 
-		/// <summary>
-		/// 仙蛛擒蟒功
-		/// </summary>
 		public static CombatSkillItem WuxianWhip6 => Instance[(short)697];
 
-		/// <summary>
-		/// 巴龙神鞭
-		/// </summary>
 		public static CombatSkillItem WuxianWhip7 => Instance[(short)698];
 
-		/// <summary>
-		/// 天蛇索
-		/// </summary>
 		public static CombatSkillItem WuxianWhip8 => Instance[(short)699];
 
-		/// <summary>
-		/// 御针术
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot0 => Instance[(short)700];
 
-		/// <summary>
-		/// 五行梅花针
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot1 => Instance[(short)701];
 
-		/// <summary>
-		/// 寒冰刺骨法
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot2 => Instance[(short)702];
 
-		/// <summary>
-		/// 扁鹊神针
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot3 => Instance[(short)703];
 
-		/// <summary>
-		/// 破元长针
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot4 => Instance[(short)704];
 
-		/// <summary>
-		/// 针死不针活法
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot5 => Instance[(short)705];
 
-		/// <summary>
-		/// 六弦九针术
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot6 => Instance[(short)706];
 
-		/// <summary>
-		/// 化脉神针
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot7 => Instance[(short)707];
 
-		/// <summary>
-		/// 十二弦奇针功
-		/// </summary>
 		public static CombatSkillItem BaihuaControllableShot8 => Instance[(short)708];
 
-		/// <summary>
-		/// 袖里飞燕
-		/// </summary>
 		public static CombatSkillItem XiuLiFeiYan => Instance[(short)709];
 
-		/// <summary>
-		/// 天枢玄机
-		/// </summary>
 		public static CombatSkillItem TianshuXuanji => Instance[(short)716];
 
-		/// <summary>
-		/// 七文五彩
-		/// </summary>
 		public static CombatSkillItem QiWenWuCai => Instance[(short)737];
 
-		/// <summary>
-		/// 方天敕令
-		/// </summary>
 		public static CombatSkillItem FangTianChiLing => Instance[(short)742];
 
-		/// <summary>
-		/// 天幕神主
-		/// </summary>
 		public static CombatSkillItem TianMuShenZhu => Instance[(short)937];
 
-		/// <summary>
-		/// 乘光披霞
-		/// </summary>
 		public static CombatSkillItem ChengGuangPiXia => Instance[(short)765];
 
-		/// <summary>
-		/// 开明天兽
-		/// </summary>
 		public static CombatSkillItem KaiMingTianShou => Instance[(short)939];
 
-		/// <summary>
-		/// 凶兵闯三阵
-		/// </summary>
 		public static CombatSkillItem XiongBinChuangSanZhen => Instance[(short)847];
 
-		/// <summary>
-		/// 九剑·鬼神霞
-		/// </summary>
+		public static CombatSkillItem JueDiTianTong => Instance[(short)944];
+
+		public static CombatSkillItem DengShiKunShan => Instance[(short)945];
+
 		public static CombatSkillItem JiuJianGuiShenXia => Instance[(short)869];
 
-		/// <summary>
-		/// 三三化灵
-		/// </summary>
 		public static CombatSkillItem SanSanHuaLing => Instance[(short)882];
 
-		/// <summary>
-		/// 七七生慧
-		/// </summary>
 		public static CombatSkillItem QiQiShengHui => Instance[(short)883];
 
-		/// <summary>
-		/// 九九造命
-		/// </summary>
 		public static CombatSkillItem JiuJiuZaoMing => Instance[(short)884];
 
-		/// <summary>
-		/// 灵散·天地人
-		/// </summary>
 		public static CombatSkillItem LingSanTianDiRen => Instance[(short)885];
 
-		/// <summary>
-		/// 慧亡·七觉支
-		/// </summary>
 		public static CombatSkillItem HuiWangQiJueZhi => Instance[(short)886];
 
-		/// <summary>
-		/// 命陨·无间狱
-		/// </summary>
 		public static CombatSkillItem MingYunWuJianYu => Instance[(short)887];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CombatSkill Instance = new CombatSkill();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -29997,62 +29192,110 @@ public class CombatSkill : ConfigData<CombatSkillItem, short>
 		_dataArray.Add(new CombatSkillItem(921, LocalStringManager.GetConfig("CombatSkill_language", "Name_921"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_921"), "sp_icon_combatskill_200_23", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1696, 1696, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_921"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_921"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 4), new OuterAndInnerShorts(0, 4), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
 		_dataArray.Add(new CombatSkillItem(922, LocalStringManager.GetConfig("CombatSkill_language", "Name_922"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_922"), "sp_icon_combatskill_301_14", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 0, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1709, 1709, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_922"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_922"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(4, 4), new OuterAndInnerShorts(4, 4), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
 		_dataArray.Add(new CombatSkillItem(923, LocalStringManager.GetConfig("CombatSkill_language", "Name_923"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_923"), "sp_icon_combatskill_200_12", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 1, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1783, 1783, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_923"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_923"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(3, 0, 3, 0), new HitOrAvoidShorts(3, 0, 3, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
-		_dataArray.Add(new CombatSkillItem(924, LocalStringManager.GetConfig("CombatSkill_language", "Name_924"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_924"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1802, 1814, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_924"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_924"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 1, 1, 0), new HitOrAvoidShorts(0, 1, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, 0, -1), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(924, LocalStringManager.GetConfig("CombatSkill_language", "Name_924"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_924"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(2, 265),
+			new PropertyAndValue(80, 550)
+		}, 1802, 1814, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_924"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_924"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 1, 1, 0), new HitOrAvoidShorts(0, 1, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, 0, -1), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 7 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			925, 926, 927, 928, 929, 930, 931, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(925, LocalStringManager.GetConfig("CombatSkill_language", "Name_925"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_925"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 3, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1803, 1815, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_925"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_925"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(1, 0, 1, 0), new HitOrAvoidShorts(1, 0, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, -1, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(925, LocalStringManager.GetConfig("CombatSkill_language", "Name_925"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_925"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 3, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(3, 265),
+			new PropertyAndValue(80, 550)
+		}, 1803, 1815, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_925"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_925"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(1, 0, 1, 0), new HitOrAvoidShorts(1, 0, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, -1, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 8 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 926, 927, 928, 929, 930, 931, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(926, LocalStringManager.GetConfig("CombatSkill_language", "Name_926"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_926"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 4, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1804, 1816, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_926"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_926"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(2, 0, 0, 0), new HitOrAvoidShorts(2, 0, 0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, -1, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(926, LocalStringManager.GetConfig("CombatSkill_language", "Name_926"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_926"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 4, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(1, 265),
+			new PropertyAndValue(80, 550)
+		}, 1804, 1816, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_926"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_926"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(2, 0, 0, 0), new HitOrAvoidShorts(2, 0, 0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, -1, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 5 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 927, 928, 929, 930, 931, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(927, LocalStringManager.GetConfig("CombatSkill_language", "Name_927"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_927"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 2, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1805, 1817, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_927"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_927"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 0, 0, 3), new HitOrAvoidShorts(0, 0, 0, 3), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, -1, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(927, LocalStringManager.GetConfig("CombatSkill_language", "Name_927"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_927"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 2, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(5, 265),
+			new PropertyAndValue(80, 550)
+		}, 1805, 1817, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_927"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_927"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 0, 0, 3), new HitOrAvoidShorts(0, 0, 0, 3), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, -1, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 4 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 928, 929, 930, 931, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(928, LocalStringManager.GetConfig("CombatSkill_language", "Name_928"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_928"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 1, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1806, 1818, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_928"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_928"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 1, 1, 0), new HitOrAvoidShorts(0, 1, 1, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, -1, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(928, LocalStringManager.GetConfig("CombatSkill_language", "Name_928"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_928"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 1, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(4, 265),
+			new PropertyAndValue(80, 550)
+		}, 1806, 1818, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_928"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_928"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 1, 1, 0), new HitOrAvoidShorts(0, 1, 1, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, -1, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 15 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 929, 930, 931, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(929, LocalStringManager.GetConfig("CombatSkill_language", "Name_929"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_929"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 0, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1807, 1819, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_929"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_929"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(2, 0, 0, 0), new HitOrAvoidShorts(2, 0, 0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(-1, 0, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(929, LocalStringManager.GetConfig("CombatSkill_language", "Name_929"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_929"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 0, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(0, 265),
+			new PropertyAndValue(80, 550)
+		}, 1807, 1819, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_929"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_929"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(2, 0, 0, 0), new HitOrAvoidShorts(2, 0, 0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(-1, 0, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 6 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 928, 930, 931, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(930, LocalStringManager.GetConfig("CombatSkill_language", "Name_930"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_930"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 3, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1808, 1820, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_930"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_930"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(1, 1, 1, 0), new HitOrAvoidShorts(1, 1, 1, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, -1, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(930, LocalStringManager.GetConfig("CombatSkill_language", "Name_930"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_930"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 3, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(0, 265),
+			new PropertyAndValue(80, 550)
+		}, 1808, 1820, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_930"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_930"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(1, 1, 1, 0), new HitOrAvoidShorts(1, 1, 1, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, -1, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 12 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 928, 929, 931, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(931, LocalStringManager.GetConfig("CombatSkill_language", "Name_931"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_931"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 2, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1809, 1821, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_931"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_931"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 0, 3, 0), new HitOrAvoidShorts(0, 0, 3, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, -1, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(931, LocalStringManager.GetConfig("CombatSkill_language", "Name_931"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_931"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 2, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(2, 265),
+			new PropertyAndValue(80, 550)
+		}, 1809, 1821, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_931"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_931"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 0, 3, 0), new HitOrAvoidShorts(0, 0, 3, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, -1, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 17 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 928, 929, 930, 932, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(932, LocalStringManager.GetConfig("CombatSkill_language", "Name_932"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_932"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1810, 1822, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_932"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_932"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 3, 0, 0), new HitOrAvoidShorts(0, 3, 0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, 0, -1), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(932, LocalStringManager.GetConfig("CombatSkill_language", "Name_932"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_932"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(3, 265),
+			new PropertyAndValue(80, 550)
+		}, 1810, 1822, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_932"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_932"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 3, 0, 0), new HitOrAvoidShorts(0, 3, 0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, 0, -1), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 13 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 928, 929, 930, 931, 933, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(933, LocalStringManager.GetConfig("CombatSkill_language", "Name_933"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_933"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 4, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1811, 1823, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_933"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_933"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 1, 1, 0), new HitOrAvoidShorts(0, 1, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, -1, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(933, LocalStringManager.GetConfig("CombatSkill_language", "Name_933"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_933"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 4, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(1, 265),
+			new PropertyAndValue(80, 550)
+		}, 1811, 1823, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_933"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_933"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 1, 1, 0), new HitOrAvoidShorts(0, 1, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, 0, 0, 0, -1, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 3 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 928, 929, 930, 931, 932, 934,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(934, LocalStringManager.GetConfig("CombatSkill_language", "Name_934"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_934"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 0, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1812, 1824, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_934"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_934"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(1, 0, 1, 0), new HitOrAvoidShorts(1, 0, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(-1, 0, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(934, LocalStringManager.GetConfig("CombatSkill_language", "Name_934"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_934"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 0, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(4, 265),
+			new PropertyAndValue(80, 550)
+		}, 1812, 1824, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_934"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_934"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(1, 0, 1, 0), new HitOrAvoidShorts(1, 0, 1, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(-1, 0, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 16 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 928, 929, 930, 931, 932, 933,
 			935
 		}, 40, new List<sbyte> { 19, 16, 17, 20 }, null));
-		_dataArray.Add(new CombatSkillItem(935, LocalStringManager.GetConfig("CombatSkill_language", "Name_935"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_935"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 1, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1813, 1825, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_935"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_935"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 0, 0, 2), new HitOrAvoidShorts(0, 0, 0, 2), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, -1, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -1, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
+		_dataArray.Add(new CombatSkillItem(935, LocalStringManager.GetConfig("CombatSkill_language", "Name_935"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_935"), "sp_icon_combatskill_400_0", 0, 0, ECombatSkillSubType.Invalid, 3, 0, 1, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>
+		{
+			new PropertyAndValue(5, 265),
+			new PropertyAndValue(80, 550)
+		}, 1813, 1825, 5, 3, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_935"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_935"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 4, 750, 810, 108, -1, -1, 3, new sbyte[4] { 1, 1, 1, 1 }, 5, new HitOrAvoidShorts(0, 0, 0, 2), new HitOrAvoidShorts(0, 0, 0, 2), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(1, 1), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(0, -1, 0, 0, 0, 0), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 50, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte> { 14 }, new sbyte[5] { 9, 9, 9, 9, 9 }, new List<short>
 		{
 			924, 925, 926, 927, 928, 929, 930, 931, 932, 933,
 			934
@@ -30074,20 +29317,35 @@ public class CombatSkill : ConfigData<CombatSkillItem, short>
 		{
 			new NeedTrick(21, 3)
 		}, 0, 0, 938, -1, new sbyte[7] { 10, 10, 10, 10, 10, 10, 10 }, 230, new sbyte[4] { 0, 100, 0, 0 }, hasAtkAcupointEffect: true, hasAtkFlawEffect: true, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
-		_dataArray.Add(new CombatSkillItem(944, LocalStringManager.GetConfig("CombatSkill_language", "Name_944"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_944"), "sp_icon_combatskill_401_0", 1, 10, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1831, 1831, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_944"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_944"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4], 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, "C_007", "S_000", "Particle_boss16_S_000", null, null, new short[5] { 55, 55, 55, 55, 55 }, "SE_boss16td_S_000", null, null, null, null, null, 45000, new List<sbyte>(), 0, 100, 100, 0, 1500, 25, new List<NeedTrick>
+		_dataArray.Add(new CombatSkillItem(944, LocalStringManager.GetConfig("CombatSkill_language", "Name_944"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_944"), "sp_icon_combatskill_401_0", 1, 10, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1831, 1831, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_944"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_944"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4], 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, "C_007", "S_000", "Particle_boss16_S_000", null, null, new short[5] { 55, 55, 55, 55, 55 }, "se_boss16_S_000", null, null, null, null, null, 45000, new List<sbyte>(), 0, 100, 100, 0, 1500, 25, new List<NeedTrick>
 		{
 			new NeedTrick(21, 3)
 		}, 0, 0, 882, -1, new sbyte[7] { 10, 10, 10, 10, 10, 10, 10 }, 300, new sbyte[4] { 20, 40, 40, 0 }, hasAtkAcupointEffect: true, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
-		_dataArray.Add(new CombatSkillItem(945, LocalStringManager.GetConfig("CombatSkill_language", "Name_945"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_945"), "sp_icon_combatskill_403_0", 1, 10, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1832, 1832, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_945"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_945"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4], 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, "C_007", "S_002", "Particle_boss16_S_002", null, null, new short[5] { 120, 120, 120, 120, 120 }, "SE_boss16kms_S_000", null, null, null, null, null, 45000, new List<sbyte>(), 0, 100, 0, 0, 1500, 25, new List<NeedTrick>
+		_dataArray.Add(new CombatSkillItem(945, LocalStringManager.GetConfig("CombatSkill_language", "Name_945"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_945"), "sp_icon_combatskill_403_0", 1, 10, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1832, 1832, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_945"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_945"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4], 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, "C_007", "S_002", "Particle_boss16_S_002", null, null, new short[5] { 120, 120, 120, 120, 120 }, "se_boss16_S_002", null, null, null, null, null, 45000, new List<sbyte>(), 0, 100, 0, 0, 1500, 25, new List<NeedTrick>
 		{
 			new NeedTrick(21, 3)
 		}, 0, 0, 883, -1, new sbyte[7] { 10, 10, 10, 10, 10, 10, 10 }, 300, new sbyte[4] { 40, 20, 40, 0 }, hasAtkAcupointEffect: false, hasAtkFlawEffect: true, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(946, LocalStringManager.GetConfig("CombatSkill_language", "Name_946"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_946"), "sp_icon_combatskill_404_2", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1836, 1836, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_946"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_946"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(4, 4, 4, 4), new HitOrAvoidShorts(4, 4, 4, 4), new OuterAndInnerShorts(8, 8), new OuterAndInnerShorts(8, 8), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 50, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(947, LocalStringManager.GetConfig("CombatSkill_language", "Name_947"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_947"), "sp_icon_combatskill_404_1", 4, 2, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1837, 1837, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_947"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_947"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4], 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 50, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(948, LocalStringManager.GetConfig("CombatSkill_language", "Name_948"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_948"), "sp_icon_combatskill_404_0", 1, 10, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1838, 1838, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_948"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_948"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4], 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, "C_007", "S_004", "Particle_boss16_S_004", null, null, new short[5] { 55, 55, 55, 55, 55 }, "se_boss16_S_004", null, null, null, null, null, 45000, new List<sbyte>(), 0, 100, 100, 0, 1500, 25, new List<NeedTrick>
+		{
+			new NeedTrick(21, 3)
+		}, 0, 0, 882, -1, new sbyte[7] { 10, 10, 10, 10, 10, 10, 10 }, 300, new sbyte[4] { 20, 40, 40, 0 }, hasAtkAcupointEffect: true, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(949, LocalStringManager.GetConfig("CombatSkill_language", "Name_949"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_949"), "sp_icon_combatskill_404_3", 1, 10, ECombatSkillSubType.Invalid, 3, 0, 5, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1839, 1839, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_949"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_949"), goneMadInnerInjury: true, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4], 0, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, "C_007", "S_005", "Particle_boss16_S_005", null, null, new short[5] { 120, 120, 120, 120, 120 }, "se_boss16_S_005", null, null, null, null, null, 45000, new List<sbyte>(), 0, 100, 0, 0, 1500, 25, new List<NeedTrick>
+		{
+			new NeedTrick(21, 3)
+		}, 0, 0, 883, -1, new sbyte[7] { 10, 10, 10, 10, 10, 10, 10 }, 300, new sbyte[4] { 40, 20, 40, 0 }, hasAtkAcupointEffect: false, hasAtkFlawEffect: true, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(950, LocalStringManager.GetConfig("CombatSkill_language", "Name_950"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_950"), "sp_icon_combatskill_200_0", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 0, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1840, 1840, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_950"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_950"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(4, 0, 4, 0), new HitOrAvoidShorts(4, 0, 4, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, 120, 4000, canPartlyJump: true, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(951, LocalStringManager.GetConfig("CombatSkill_language", "Name_951"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_951"), "sp_icon_combatskill_200_1", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 2, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1841, 1841, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_951"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_951"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(4, 4, 0, 0), new HitOrAvoidShorts(4, 4, 0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(952, LocalStringManager.GetConfig("CombatSkill_language", "Name_952"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_952"), "sp_icon_combatskill_200_2", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 1, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1842, 1842, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_952"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_952"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(4, 0, 4, 0), new HitOrAvoidShorts(4, 0, 4, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(953, LocalStringManager.GetConfig("CombatSkill_language", "Name_953"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_953"), "sp_icon_combatskill_200_3", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 3, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1843, 1843, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_953"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_953"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(4, 0, 4, 0), new HitOrAvoidShorts(4, 0, 4, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
+		_dataArray.Add(new CombatSkillItem(954, LocalStringManager.GetConfig("CombatSkill_language", "Name_954"), 8, LocalStringManager.GetConfig("CombatSkill_language", "Desc_954"), "sp_icon_combatskill_200_4", 0, 0, ECombatSkillSubType.Invalid, 1, 0, 4, -1, canObtainByAdventure: false, isNonPublic: false, -1, new List<PropertyAndValue>(), 1844, 1844, 0, -1, 8, LocalStringManager.GetConfig("CombatSkill_language", "BreakStart_954"), LocalStringManager.GetConfig("CombatSkill_language", "BreakEnd_954"), goneMadInnerInjury: false, new List<sbyte> { 2, 0, 1, 3, 4, 5, 6 }, 3, 500, 0, 0, -1, -1, 0, new sbyte[4] { 9, 9, 9, 9 }, 0, new HitOrAvoidShorts(4, 4, 0, 0), new HitOrAvoidShorts(4, 4, 0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), new OuterAndInnerShorts(0, 0), 0, 0, 0, 0, 0, 0, 0, 0, new PoisonShorts(default(int), default(int), default(int), default(int), default(int), default(int)), null, null, null, null, null, null, new short[5], null, null, null, null, null, null, 0, new List<sbyte>(), 0, 0, 100, 0, 0, 0, new List<NeedTrick>(), 0, 0, -1, -1, new sbyte[7] { 20, 20, 1, 20, 20, 20, 20 }, 0, new sbyte[4], hasAtkAcupointEffect: false, hasAtkFlawEffect: false, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 0, -1, null, 0, 0, 0, new short[4], 36, 0, 36, -1, -1, canPartlyJump: false, null, null, -1, -1, -2, 0, 0, 0, new short[4], 0, 0, 0, 0, 0, null, null, null, null, null, null, new List<PropertyAndValue>(), new int[7], new int[7], 0, 0, new List<sbyte>(), new sbyte[5], new List<short>(), 0, new List<sbyte> { 0, 1, 2, 3 }, null));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<CombatSkillItem>(946);
+		_dataArray = new List<CombatSkillItem>(955);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

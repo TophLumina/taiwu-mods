@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class DemonSlayerTrial : ConfigData<DemonSlayerTrialItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DemonSlayerTrial Instance = new DemonSlayerTrial();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "SpecialDesc", "CharacterId", "FirstTimeRewards", "FirstTimeRewardLuohan", "TemplateId" };

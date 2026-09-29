@@ -5,24 +5,13 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 额外商品信息的集合
-/// 已废弃，用新结构代替<see cref="T:GameData.Domains.Extra.MerchantExtraGoodsData" />
-/// </summary>
 [SerializableGameData]
 [Obsolete("use new archive data MerchantExtraGoodsData instead, do not delete this")]
 public class MerchantExtraGoods : ISerializableGameData
 {
-	/// <summary>
-	/// 额外商品信息的集合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<MerchantExtraGoodsItem> Items = new List<MerchantExtraGoodsItem>();
 
-	/// <summary>
-	/// 检查包含物品
-	/// </summary>
-	/// <returns></returns>
 	public bool Check(int id, int index)
 	{
 		return Items?.Exists((MerchantExtraGoodsItem d) => d.Id == id && d.Index == index) ?? false;

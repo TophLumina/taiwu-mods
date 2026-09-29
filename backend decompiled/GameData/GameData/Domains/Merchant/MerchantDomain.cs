@@ -114,8 +114,6 @@ public class MerchantDomain : BaseGameDataDomain
 
 	private readonly byte[] _dataStatesMerchantMaxLevelData = new byte[2];
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	private void OnInitializedDomainData()
 	{
 	}
@@ -1749,7 +1747,7 @@ public class MerchantDomain : BaseGameDataDomain
 	{
 		Location taiwuVillageLocation = DomainManager.Taiwu.GetTaiwuVillageLocation();
 		sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(taiwuVillageLocation.AreaId);
-		sbyte mainAreaTemplateId = MapState.Instance[stateTemplateId].MainAreaID;
+		short mainAreaTemplateId = MapState.Instance[stateTemplateId].MainAreaID;
 		int goodCount = 2;
 		int goodIndex = 1;
 		sbyte merchantType = -1;

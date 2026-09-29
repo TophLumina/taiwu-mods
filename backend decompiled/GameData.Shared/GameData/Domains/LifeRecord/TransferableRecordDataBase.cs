@@ -10,99 +10,48 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.LifeRecord;
 
-/// <summary>
-/// 通用记录，为前后端交换数据而设。
-/// 需要前端将数据转换为正确的显示格式
-///
-/// 需注意，这里的数据应当倒序存储(IntoData会假定数据是倒序存储的)
-/// 同时，应注意，此数据的全部继承均不支持AutoGenerateSerializableGameData序列化（但可以使用code-generator生成的序列化代码）
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true, NotRestrictCollectionSerializedSize = true, GenerateVirtualMethods = true)]
 public class TransferableRecordDataBase : ISerializableGameData
 {
-	/// <summary>
-	/// 经历头长度
-	/// 这个字段记录了Record中有几条内容在经历之外，是自动生成的
-	/// 在合并两个经历时，这些Record需要被优先删除，否则会造成Record重复
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int HeaderCount;
 
-	/// <summary>
-	/// 经历条目
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1, CollectionMaxElementsCount = int.MaxValue)]
 	public List<TransferableRecord> Record = new List<TransferableRecord>();
 
-	/// <summary>
-	/// 数据集合
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2, SubDataMaxCount = int.MaxValue)]
 	public TransferableArgumentCollection ArgumentCollection = new TransferableArgumentCollection();
 
-	/// <summary>
-	/// 人物名称映射
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3, CollectionMaxElementsCount = int.MaxValue)]
 	public Dictionary<int, NameAndLifeRelatedData> CharNames;
 
-	/// <summary>
-	/// 地点名称
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4, CollectionMaxElementsCount = int.MaxValue)]
 	public Dictionary<Location, LocationNameRelatedData> LocationNames;
 
-	/// <summary>
-	/// 定居点名称
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5, CollectionMaxElementsCount = int.MaxValue)]
 	public Dictionary<short, SettlementNameRelatedData> SettlementNames;
 
-	/// <summary>
-	/// 蛟数据
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6, CollectionMaxElementsCount = int.MaxValue)]
 	public Dictionary<int, JiaoLoongNameRelatedData> JiaoLoongNames;
 
-	/// <summary>
-	/// 额外数据数，用于防止漏算经历index
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public int ExtraCount;
 
-	/// <summary>
-	/// 太吾id，用于Shared中直接判断isTaiwu
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public int TaiwuCharId;
 
-	/// <summary>
-	/// Npc人名
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	public int CharId = -1;
 
-	/// <summary>
-	/// 最老一条记录的时间，用于后续显示额外时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	public int StartDate = -1;
 
-	/// <summary>
-	/// 最新一条记录的时间，用于处理跳转array
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 11)]
 	public int EndDate = -1;
 
-	/// <summary>
-	/// 是否为梦回
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 12)]
 	public bool IsDreamBack;
 
-	/// <summary>
-	/// 对太吾好感度
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 13)]
 	public short FavorToTaiwu;
 
@@ -124,11 +73,6 @@ public class TransferableRecordDataBase : ISerializableGameData
 
 	public int LifeRecordCount => Record.Count - HeaderCount - ExtraCount;
 
-	/// <summary>
-	/// 增加日期记录
-	/// </summary>
-	/// <param name="date"></param>
-	/// <param name="increaseExtraCount">是否额外数据数用于防止漏算经历index。如果在Header处增加Date，此处应填false</param>
 	public virtual void AddDate(int date, bool increaseExtraCount = true)
 	{
 		TransferableRecord dateLine = new TransferableRecord(date, -2);
@@ -140,28 +84,14 @@ public class TransferableRecordDataBase : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 增加分割线记录
-	/// </summary>
-	/// <param name="date"></param>
-	/// <param name="increaseExtraCount">是否额外数据数用于防止漏算经历index。如果在Header处增加Date，此处应填false</param>
 	public virtual void AddSeparateLine(int date, bool increaseExtraCount = true)
 	{
 	}
 
-	/// <summary>
-	/// 增加经历头，用于标识此经历已结束
-	/// 由于这一项只可能出现在Header中，因此省略bool increaseExtraCount的相关逻辑
-	/// </summary>
-	/// <param name="date"></param>
 	public virtual void AddBirth(int date)
 	{
 	}
 
-	/// <summary>
-	/// 用于合并两个分页
-	/// </summary>
-	/// <param name="data"></param>
 	public virtual void TransferData(TransferableRecordDataBase data)
 	{
 		if (data.LifeRecordCount != 0)
@@ -183,14 +113,6 @@ public class TransferableRecordDataBase : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 合并字典，将src字典中内容合并到dsc，重复key以src字典为主
-	/// 在执行之后会清空src
-	/// </summary>
-	/// <param name="dst"></param>
-	/// <param name="src"></param>
-	/// <typeparam name="TK"></typeparam>
-	/// <typeparam name="TV"></typeparam>
 	public void MergeDict<TK, TV>(ref Dictionary<TK, TV> dst, ref Dictionary<TK, TV> src)
 	{
 		if (src == null)

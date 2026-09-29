@@ -10,83 +10,42 @@ namespace GameData.Domains.Building;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class BuildingEarningDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 收获物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> CollectionItemDisplayList;
 
-	/// <summary>
-	/// 采集建筑获得的银钱威望列表，first代表银钱或者威望类型，second代表数量
-	/// </summary>
 	[SerializableGameDataField]
 	public List<IntPair> CollectionResourceList;
 
-	/// <summary>
-	/// 放在商店售卖的物品;(ItemKey:道具id) ShopSoldItemList长度等于建筑规模，长度只有建筑扩建时改变;和ShopSoldItemEarnList按索引对应使用
-	/// 定长，没有的地方用null占位
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> ShopSoldItemDisplayList;
 
-	/// <summary>
-	/// 放在商店售卖物品获得的银钱或威望(和ShopSoldItemDisplayList按索引对应，同一个位置的索引都为空时代表这个位置没有道具，也没有卖出道具收到的资源)
-	/// first代表银钱或者威望类型，second代表数量
-	/// </summary>
 	[SerializableGameDataField]
 	public List<IntPair> ShopSoldItemEarnList;
 
-	/// <summary>
-	/// 招募人才
-	/// </summary>
 	[SerializableGameDataField]
 	public List<RecruitCharacterData> RecruitCharacterDataList;
 
-	/// <summary>
-	/// //招募的人才等级列表 first是等级，second是存在时间，超过三个月会消失
-	/// </summary>
 	[SerializableGameDataField]
 	public List<IntPair> RecruitLevelList;
 
-	/// <summary>
-	/// 藏书阁修补的书籍
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> FixBookInfoDisplayList;
 
-	/// <summary>
-	/// 自动上货
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoSoldItem;
 
-	/// <summary>
-	/// 自动派遣
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoArrange;
 
-	/// <summary>
-	/// 自动入住
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoCheckIn;
 
-	/// <summary>
-	/// 经营人员信息
-	/// </summary>
 	[SerializableGameDataField]
 	public List<BuildingManagerDisplayData> ManagerDisplayDataList;
 
-	/// <summary>
-	/// 居所
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> Residences;
 
-	/// <summary>
-	/// 厢房
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> ComfortableHouses;
 

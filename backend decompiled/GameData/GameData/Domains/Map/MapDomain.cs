@@ -547,8 +547,6 @@ public class MapDomain : BaseGameDataDomain
 
 	private SingleValueCollectionModificationCollection<Location> _modificationsLocationNaturalDisasterDateNew = SingleValueCollectionModificationCollection<Location>.Create();
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	public bool TempDisableTriggerNormalPickupByTaiwuEscape { get; set; }
 
 	public Location TaiwuLastLocation { get; set; }
@@ -1217,6 +1215,54 @@ public class MapDomain : BaseGameDataDomain
 				}
 			}
 		}
+		if (DomainManager.Story.GetTaiwuAsXiangshuEntered())
+		{
+			if (DomainManager.Character.TryGetFixedCharacterByTemplateId(1340, out var longyufu))
+			{
+				Location loc2 = longyufu.GetLocation();
+				if (loc2.IsValid())
+				{
+					NameAndAvatar data2 = new NameAndAvatar
+					{
+						Avatar = longyufu.GenerateAvatarRelatedData(),
+						CharId = longyufu.GetId(),
+						IsTaiwu = false
+					};
+					CharacterDomain.GetNameRelatedData(longyufu, ref data2.Name);
+					ret[loc2.AreaId].TaiwuAsXiangshuLongYufu = data2;
+				}
+			}
+			if (DomainManager.Character.TryGetFixedCharacterByTemplateId(1341, out var ziwuxiao))
+			{
+				Location loc3 = ziwuxiao.GetLocation();
+				if (loc3.IsValid())
+				{
+					NameAndAvatar data3 = new NameAndAvatar
+					{
+						Avatar = ziwuxiao.GenerateAvatarRelatedData(),
+						CharId = ziwuxiao.GetId(),
+						IsTaiwu = false
+					};
+					CharacterDomain.GetNameRelatedData(ziwuxiao, ref data3.Name);
+					ret[loc3.AreaId].TaiwuAsXiangshuZiWuxiao = data3;
+				}
+			}
+			if (DomainManager.Character.TryGetFixedCharacterByTemplateId(1342, out var ranchenzi))
+			{
+				Location loc4 = ranchenzi.GetLocation();
+				if (loc4.IsValid())
+				{
+					NameAndAvatar data4 = new NameAndAvatar
+					{
+						Avatar = ranchenzi.GenerateAvatarRelatedData(),
+						CharId = ranchenzi.GetId(),
+						IsTaiwu = false
+					};
+					CharacterDomain.GetNameRelatedData(ranchenzi, ref data4.Name);
+					ret[loc4.AreaId].TaiwuAsXiangshuRanchenzi = data4;
+				}
+			}
+		}
 		return ret;
 	}
 
@@ -1237,7 +1283,6 @@ public class MapDomain : BaseGameDataDomain
 		MapCharacterFilter.Find(CharacterMatchers.MatchNotTaiwuOwnedLegendaryBook, cache, areaId, includeInfected: true);
 		int legendaryBookConsumedCount = cache.Count - legendaryBookOwnerCount;
 		ObjectPool<List<GameData.Domains.Character.Character>>.Instance.Return(cache);
-		bool anyPurpleBamboo = IsContainsPurpleBamboo(areaId);
 		sbyte stateId = GetStateIdByAreaId(areaId);
 		XiangshuInfectedDemonData demonData = ((stateId < 0) ? XiangshuInfectedDemonData.Invalid : GetElement_StateXiangshuInfectedDemons(stateId));
 		GameData.Domains.Character.Character character;
@@ -1250,7 +1295,8 @@ public class MapDomain : BaseGameDataDomain
 			_loongStatusInternal = DomainManager.Extra.GetAreaLoongStatus(areaId),
 			AnyFleeBeast = GetFleeBeasts().Any((Location x) => x.AreaId == areaId),
 			BrokenLevel = QueryAreaBrokenLevel(areaId),
-			PurpleBambooTemplateIds = (anyPurpleBamboo ? new List<short>(IterAreaPurpleBambooTemplateIds(areaId)) : null),
+			PurpleBamboos = GetPurpleBambooNameAndAvatar(areaId).ToArray(),
+			SpecialNpc = GetNonPurpleBambooNameAndAvatar(areaId).ToArray(),
 			HasSectZhujianSpecialMerchant = (DomainManager.Taiwu.GetAreaMerchantInfo(areaId).merchantSourceType == OpenShopEventArguments.EMerchantSourceType.SpecialBuilding),
 			SettlementDisplayData = (from x in GetAreaByAreaId(areaId).SettlementInfos
 				where x.SettlementId != -1
@@ -1259,26 +1305,33 @@ public class MapDomain : BaseGameDataDomain
 			{
 				for (int j = 0; j < 6; j++)
 				{
-					ints[j] += ((data.CurrResources[j] > GlobalConfig.Instance.VillagerRoleFarmerMigrateMinResource) ? 1 : 0);
+					if (data.CanBeFarmerMigrateTarget((sbyte)j))
+					{
+						ints[j]++;
+					}
 				}
 				return ints;
 			})
 		};
+		displayData.AdventureNameAndDuration = (from x in displayData.AllActivatedAdventureOrMajorEventCoreIds.Where((int x) => !XiangshuAvatarIds.IsSwordTombAdventure(x)).Select(AdventureDomain.Core.GetAdventureAny).Where(delegate(IAdventureData x)
+			{
+				IReadOnlyList<EAdventureTag> readOnlyList = x?.Tags;
+				return readOnlyList == null || (!readOnlyList.Contains(EAdventureTag.MainStory) && !readOnlyList.Contains(EAdventureTag.SectStory));
+			})
+			orderby x.Name, x.StayMonths
+			select new AdventureNameAndDurationDisplayData(x.Name, x.StayMonths)).ToArray();
 		Dictionary<int, int> dictionary = new Dictionary<int, int>();
 		dictionary[0] = Counter((int x) => AdventureDomain.Core.GetAdventureAny(x)?.Tags.Contains(EAdventureTag.MainStory) ?? false);
 		dictionary[1] = Counter((int x) => AdventureDomain.Core.GetAdventureAny(x)?.Tags.Contains(EAdventureTag.SectStory) ?? false);
 		dictionary[21] = Counter(XiangshuAvatarIds.IsSwordTombAdventure);
 		dictionary[22] = Counter((int x) => AdventureDomain.Core.TryGetAdventureMajorEventData(x, out var _));
-		dictionary[8] = Counter(delegate(int x)
-		{
-			IReadOnlyList<EAdventureTag> readOnlyList = AdventureDomain.Core.GetAdventureAny(x)?.Tags;
-			return readOnlyList != null && !readOnlyList.Contains(EAdventureTag.MainStory) && !readOnlyList.Contains(EAdventureTag.SectStory) && !XiangshuAvatarIds.IsSwordTombAdventure(x);
-		});
+		dictionary[8] = displayData.AdventureNameAndDuration.Length;
 		dictionary[2] = legendaryBookOwnerCount;
 		dictionary[23] = legendaryBookConsumedCount;
 		dictionary[3] = (displayData.AnyLoong ? (-1) : 0);
-		dictionary[4] = (anyPurpleBamboo ? (-1) : 0);
-		dictionary[5] = infectedCount;
+		dictionary[4] = displayData.PurpleBamboos.Length;
+		dictionary[24] = displayData.SpecialNpc.Length;
+		dictionary[5] = Math.Max(infectedCount + (anyInfectedDemon ? (-1) : 0), 0);
 		dictionary[17] = (anyInfectedDemon ? (-1) : 0);
 		dictionary[6] = DomainManager.Extra.GetAreaPastLifeRelationCount(areaId);
 		dictionary[7] = (GetFleeLoongs().Any((Location x) => x.AreaId == areaId) ? (-1) : 0);
@@ -2705,6 +2758,56 @@ public class MapDomain : BaseGameDataDomain
 		}
 	}
 
+	public IEnumerable<NameAndAvatarWithFavor> GetPurpleBambooNameAndAvatar(short areaId)
+	{
+		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
+		byte size = GetAreaSize(areaId);
+		for (short i = 0; i < size * size; i++)
+		{
+			MapBlockData blockData = GetBlock(areaId, i);
+			if (blockData.FixedCharacterSet != null)
+			{
+				foreach (int charId in blockData.FixedCharacterSet.Where((int objectId) => DomainManager.Character.GetElement_Objects(objectId).GetXiangshuType() == 3))
+				{
+					yield return new NameAndAvatarWithFavor
+					{
+						NameAndAvatar = new NameAndAvatar
+						{
+							Avatar = DomainManager.Character.GetAvatarRelatedData(charId),
+							CharId = charId,
+							IsTaiwu = (charId == taiwuCharId),
+							Name = DomainManager.Character.GetNameRelatedData(charId)
+						},
+						Favor = DomainManager.Character.GetFavorability(charId, taiwuCharId)
+					};
+				}
+			}
+		}
+	}
+
+	public IEnumerable<NameAndAvatar> GetNonPurpleBambooNameAndAvatar(short areaId)
+	{
+		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
+		byte size = GetAreaSize(areaId);
+		for (short i = 0; i < size * size; i++)
+		{
+			MapBlockData blockData = GetBlock(areaId, i);
+			if (blockData.FixedCharacterSet != null)
+			{
+				foreach (int charId in blockData.FixedCharacterSet.Where((int objectId) => DomainManager.Character.GetElement_Objects(objectId).GetXiangshuType() != 3))
+				{
+					yield return new NameAndAvatar
+					{
+						Avatar = DomainManager.Character.GetAvatarRelatedData(charId),
+						CharId = charId,
+						IsTaiwu = (charId == taiwuCharId),
+						Name = DomainManager.Character.GetNameRelatedData(charId)
+					};
+				}
+			}
+		}
+	}
+
 	[DomainMethod]
 	public List<short> GetBelongBlockTemplateIdList(List<Location> locationList)
 	{
@@ -2948,7 +3051,7 @@ public class MapDomain : BaseGameDataDomain
 	public void GetLocationByDistance(Location centerLocation, int minStep, int maxStep, ref List<MapBlockData> mapBlockList)
 	{
 		ByteCoordinate centerBlockPos = DomainManager.Map.GetBlock(centerLocation).GetBlockPos();
-		DomainManager.Map.GetRealNeighborBlocks(centerLocation.AreaId, centerLocation.BlockId, mapBlockList, maxStep);
+		DomainManager.Map.GetRealNeighborBlocks(centerLocation.AreaId, centerLocation.BlockId, mapBlockList, maxStep, minStep <= 0);
 		if (minStep <= 0)
 		{
 			return;
@@ -3761,11 +3864,16 @@ public class MapDomain : BaseGameDataDomain
 						AddCount(5);
 					}
 				}
+				List<short> features = targetChar2.GetFeatureIds();
 				if (targetChar2.IsOwningBook())
 				{
 					AddCount(7);
 				}
-				if (targetChar2.GetFeatureIds().Contains(861))
+				if (features.Contains(215))
+				{
+					Transfer(0, 44);
+				}
+				if (features.Contains(861))
 				{
 					AddCount(5);
 				}
@@ -3780,8 +3888,7 @@ public class MapDomain : BaseGameDataDomain
 				}
 				if (targetChar2.GetOrganizationInfo().OrgTemplateId == 16)
 				{
-					RemoveCount(0);
-					AddCount(1);
+					Transfer(0, 1);
 				}
 				if (orgTemplateIds != null && orgTemplateIds.Count > 0)
 				{
@@ -3797,13 +3904,21 @@ public class MapDomain : BaseGameDataDomain
 		{
 			foreach (int charId3 in blockData.InfectedCharacterSet)
 			{
-				GameData.Domains.Character.Character targetChar3 = DomainManager.Character.GetElement_Objects(charId3);
-				if (targetChar3.GetFeatureIds().Contains(814))
+				List<short> features2 = DomainManager.Character.GetElement_Objects(charId3).GetFeatureIds();
+				if (features2 != null)
 				{
-					AddCount(42);
+					if (features2.Contains(814))
+					{
+						Transfer(6, 42);
+					}
+					else if (features2.Contains(215))
+					{
+						Transfer(6, 44);
+					}
 				}
 			}
 		}
+		result.CharacterCountDict.RemoveAllKeys((short key) => result.CharacterCountDict[key] == 0);
 		return result;
 		void AddCount(short key)
 		{
@@ -3812,6 +3927,11 @@ public class MapDomain : BaseGameDataDomain
 		void RemoveCount(short key)
 		{
 			result.CharacterCountDict[key] = result.CharacterCountDict.GetOrDefault(key) - 1;
+		}
+		void Transfer(short from, short to)
+		{
+			AddCount(to);
+			RemoveCount(from);
 		}
 	}
 
@@ -3846,6 +3966,10 @@ public class MapDomain : BaseGameDataDomain
 		}
 		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
 		Location taiwuLocation = DomainManager.Taiwu.GetTaiwu().GetLocation();
+		if (!taiwuLocation.IsValid())
+		{
+			return result;
+		}
 		Span<MapBlockData> blocks = GetAreaBlocks(taiwuLocation.AreaId);
 		if (blocks != null)
 		{
@@ -4889,7 +5013,7 @@ public class MapDomain : BaseGameDataDomain
 			GetRealNeighborBlocks(areaId, centerBlockId, curBlockNeighbors, maxSteps);
 			foreach (MapBlockData blockData in curBlockNeighbors)
 			{
-				if ((nearTaiwu || taiwuLocation.AreaId != areaId || (taiwuLocation.BlockId != blockData.BlockId && !taiwuLocationNeighbors.Contains(blockData))) && (onSettlement || (!blockData.IsCityTown() && blockData.BlockType != EMapBlockType.Station)) && MapBlockDataMatchers.IsValidForRandomEnemy(blockData))
+				if ((nearTaiwu || taiwuLocation.AreaId != areaId || (taiwuLocation.BlockId != blockData.BlockId && !taiwuLocationNeighbors.Contains(blockData))) && (onSettlement || (!blockData.IsCityTown() && blockData.BlockType != EMapBlockType.Station)) && MapBlockDataMatchers.IsValidForRandomEnemy(blockData) && blockData.IsPassable())
 				{
 					validBlocks.Add(blockData);
 				}
@@ -4904,7 +5028,7 @@ public class MapDomain : BaseGameDataDomain
 			for (int i = 0; i < span.Length; i++)
 			{
 				MapBlockData blockData2 = span[i];
-				if ((nearTaiwu || taiwuLocation.AreaId != areaId || (taiwuLocation.BlockId != blockData2.BlockId && !taiwuLocationNeighbors.Contains(blockData2))) && (onSettlement || (!blockData2.IsCityTown() && blockData2.BlockType != EMapBlockType.Station)) && MapBlockDataMatchers.IsValidForRandomEnemy(blockData2))
+				if ((nearTaiwu || taiwuLocation.AreaId != areaId || (taiwuLocation.BlockId != blockData2.BlockId && !taiwuLocationNeighbors.Contains(blockData2))) && (onSettlement || (!blockData2.IsCityTown() && blockData2.BlockType != EMapBlockType.Station)) && MapBlockDataMatchers.IsValidForRandomEnemy(blockData2) && blockData2.IsPassable())
 				{
 					validBlocks.Add(blockData2);
 				}
@@ -4940,7 +5064,7 @@ public class MapDomain : BaseGameDataDomain
 		for (int i = 0; i < areaBlocks.Length; i++)
 		{
 			MapBlockData block = areaBlocks[i];
-			if (taiwuLocation != block.GetLocation())
+			if (taiwuLocation != block.GetLocation() && block.IsPassable())
 			{
 				validBlocks.Add(block);
 			}
@@ -8564,7 +8688,7 @@ public class MapDomain : BaseGameDataDomain
 		return blockData.CharacterSet != null && blockData.CharacterSet.Count > 0;
 	}
 
-	public MapBlockData GetRandomMapBlockDataByFilters(IRandomSource random, sbyte stateTemplateId, sbyte areaFilterType, List<short> mapBlockSubTypes, bool includeBlockWithAdventure)
+	public MapBlockData GetRandomMapBlockDataByFilters(IRandomSource random, sbyte stateTemplateId, List<short> mapBlockSubTypes, bool includeBlockWithAdventure)
 	{
 		if (mapBlockSubTypes != null && mapBlockSubTypes.Count > 0)
 		{
@@ -8617,22 +8741,7 @@ public class MapDomain : BaseGameDataDomain
 			areaList.RemoveRange(normalAreaCount, 6);
 		}
 		MapStateItem stateConfig = MapState.Instance[stateTemplateId];
-		if (1 == 0)
-		{
-		}
-		short num = areaFilterType switch
-		{
-			-1 => areaList[random.Next(0, areaList.Count)], 
-			0 => DomainManager.Taiwu.GetTaiwuVillageLocation().AreaId, 
-			1 => stateConfig.MainAreaID, 
-			2 => stateConfig.SectAreaID, 
-			3 => areaList.First((short area) => area != stateConfig.MainAreaID && area != stateConfig.SectAreaID), 
-			_ => throw new Exception($"Unrecognized area filter type {areaFilterType}"), 
-		};
-		if (1 == 0)
-		{
-		}
-		short selectedAreaId = num;
+		short selectedAreaId = areaList[random.Next(0, areaList.Count)];
 		ObjectPool<List<short>>.Instance.Return(areaList);
 		return GetRandomMapBlockDataInAreaByFilters(random, selectedAreaId, mapBlockSubTypes, includeBlockWithAdventure);
 	}
@@ -9364,7 +9473,7 @@ public class MapDomain : BaseGameDataDomain
 		GameData.Domains.Character.Character doctorChar = DomainManager.Character.GetElement_Objects(doctorId);
 		GameData.Domains.Character.Character patientChar = DomainManager.Character.GetElement_Objects(patientId);
 		int maxRequireAttainment;
-		int healEffect = doctorChar.CalcHealEffect(type, patientChar, out maxRequireAttainment, isExpensiveHeal);
+		int healEffect = doctorChar.CalcHealEffect(type, patientChar, out maxRequireAttainment, isExpensiveHeal ? 100 : 0);
 		int costHerb = patientChar.CalcHealCostHerb(type, isExpensiveHeal);
 		int costMoney = (needPay ? patientChar.CalcHealCostMoney(type, doctorChar.GetBehaviorType(), isExpensiveHeal) : 0);
 		int costSpiritualDebt = (isExpensiveHeal ? patientChar.CalcHealCostSpiritualDebt(type) : 0);
@@ -9421,7 +9530,7 @@ public class MapDomain : BaseGameDataDomain
 			doctorChar.ChangeResource(context, 6, costMoney);
 		}
 		DomainManager.World.AdvanceDaysInMonth(context, 1);
-		doctorChar.DoHealAction(context, type, patientChar, doctorId == DomainManager.Taiwu.GetTaiwuCharId(), isExpensiveHeal);
+		doctorChar.DoHealAction(context, type, patientChar, doctorId == DomainManager.Taiwu.GetTaiwuCharId(), isExpensiveHeal ? 100 : 0);
 		return true;
 	}
 
@@ -10188,7 +10297,7 @@ public class MapDomain : BaseGameDataDomain
 
 	private bool TryGetSectCombatMatchBubble(int coreId, short mapBlockTemplateId, TeammateBubbleCollection collection)
 	{
-		if (coreId != 75)
+		if (coreId != 213197576)
 		{
 			return false;
 		}
@@ -11843,7 +11952,7 @@ public class MapDomain : BaseGameDataDomain
 
 	public void UpdateXiangshuInfectedDemons(DataContext context)
 	{
-		if (DomainManager.World.IsChallengeModeEnabled(EChallengeModeImplement.NI2))
+		if (DomainManager.World.IsChallengeModeEnabled(EChallengeModeImplement.InfectedDemon))
 		{
 			for (sbyte stateId = 0; stateId < 15; stateId++)
 			{

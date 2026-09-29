@@ -4,9 +4,6 @@ namespace GameData.Domains.Character;
 
 public static class CharacterDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort Objects = 0;
@@ -118,11 +115,10 @@ public static class CharacterDomainHelper
 		public const ushort PlanningActionSettings = 53;
 
 		public const ushort PlanningGoalSettings = 54;
+
+		public const ushort AdventureCallCharacterCooldown = 55;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort CreateProtagonist = 0;
@@ -604,16 +600,20 @@ public static class CharacterDomainHelper
 		public const ushort GmCmd_ClearAllActionPlanningData = 238;
 
 		public const ushort GmCmd_TaiwuMeetAll = 239;
+
+		public const ushort GetFeatureDynamicFactor = 240;
+
+		public const ushort GetCharacterDisplayDataForMapBlockIncludingDead = 241;
+
+		public const ushort TryGetCharacterDeadData = 242;
+
+		public const ushort GmCmd_CreateInventoryItem = 243;
+
+		public const ushort IsFeatureBeIgnored = 244;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
-	public const ushort DataCount = 55;
+	public const ushort DataCount = 56;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "Objects", 0 },
@@ -670,38 +670,29 @@ public static class CharacterDomainHelper
 		{ "TwelveImmortalsData", 51 },
 		{ "TwelveImmortalsCache", 52 },
 		{ "PlanningActionSettings", 53 },
-		{ "PlanningGoalSettings", 54 }
+		{ "PlanningGoalSettings", 54 },
+		{ "AdventureCallCharacterCooldown", 55 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
-	public static readonly string[] DataId2FieldName = new string[55]
+	public static readonly string[] DataId2FieldName = new string[56]
 	{
 		"Objects", "NextObjectId", "DeadCharacters", "DeadCharDeletionStates", "RecentDeadCharacters", "WaitingReincarnationChars", "Graves", "PregnantStates", "PregnancyLockEndDates", "UnguardedChars",
 		"KidnappedChars", "Relations", "ActualBloodParents", "CharacterGroups", "JoinGroupDates", "SoldLibrarySkillBooks", "AvatarElementGrowthProgress", "TargetedForAssassination", "PrioritizedActions", "CrossAreaMoveInfos",
 		"OngoingVengeances", "PregeneratedCityTownGuards", "PregeneratedRandomEnemies", "ForceRebelLocation", "ForceKindLocation", "AvoidDeathCharId", "SubscriberOrders", "OutterWorldCharacter", "CharacterProfessions", "CharacterPrioritizedActionCooldowns",
 		"FollowMovementCharacters", "CharacterAiActionCooldowns", "CharacterAiActionRestrictions", "CharacterSpecialGroup", "CharacterAiActionSuccessRateAdjusts", "PregeneratedFixedEnemies", "MixedPoisonEffectTriggerDates", "CharacterAvatarSnapshot", "CharacterDarkAshCounterData", "FuyuFaith",
 		"CharacterTemporaryFeatures", "CharacterExtraTitles", "RemovedSpecialRelations", "Alertness", "TemporaryIntelligentCharIds", "UsedCombatResources", "XiangshuInfectedDemonsPenetrationsBonus", "XiangshuInfectedDemonsPenetrationResistsBonus", "TemporaryEnemyCharIds", "CharacterCreationMetas",
-		"ActionPlanningDataDict", "TwelveImmortalsData", "TwelveImmortalsCache", "PlanningActionSettings", "PlanningGoalSettings"
+		"ActionPlanningDataDict", "TwelveImmortalsData", "TwelveImmortalsCache", "PlanningActionSettings", "PlanningGoalSettings", "AdventureCallCharacterCooldown"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
 	public static readonly string[][] DataId2ObjectFieldId2FieldName;
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId;
 
 	public static readonly string[] MethodId2MethodName;
 
 	static CharacterDomainHelper()
 	{
-		string[][] array = new string[55][];
+		string[][] array = new string[56][];
 		array[0] = CharacterHelper.FieldId2FieldName;
 		array[6] = GraveHelper.FieldId2FieldName;
 		DataId2ObjectFieldId2FieldName = array;
@@ -946,9 +937,14 @@ public static class CharacterDomainHelper
 			{ "GetCarrierMaxProperty", 236 },
 			{ "GmCmd_ClearCharacterActionPlanningData", 237 },
 			{ "GmCmd_ClearAllActionPlanningData", 238 },
-			{ "GmCmd_TaiwuMeetAll", 239 }
+			{ "GmCmd_TaiwuMeetAll", 239 },
+			{ "GetFeatureDynamicFactor", 240 },
+			{ "GetCharacterDisplayDataForMapBlockIncludingDead", 241 },
+			{ "TryGetCharacterDeadData", 242 },
+			{ "GmCmd_CreateInventoryItem", 243 },
+			{ "IsFeatureBeIgnored", 244 }
 		};
-		MethodId2MethodName = new string[240]
+		MethodId2MethodName = new string[245]
 		{
 			"CreateProtagonist", "GetRelatedCharactersForRelations", "TryCreateRelation", "GetGenealogy", "GenerateRandomHanName", "GenerateRandomZangName", "GenerateRandomChildName", "GetNameRelatedDataList", "GetNameRelatedData", "GetNameAndLifeRelatedDataList",
 			"GetNameAndLifeRelatedData", "GetFavorability", "GmCmd_GetAllGroupMembers", "GmCmd_GenerateRandomRefinedItemToCharacter", "GmCmd_ChangeInjury", "GmCmd_ChangePoisonByType", "GmCmd_ForgetCombatSkill", "GmCmd_RevokeCombatSkill", "GmCmd_SetLearnedLifeSkills", "GmCmd_GetCricket",
@@ -973,7 +969,8 @@ public static class CharacterDomainHelper
 			"GetCharacterDisplayDataForNeiliPage", "GetCharacterInjuryDisplayData", "GetCharacterMenuAttainmentDisplayData", "GetKidnapMenuDisplayData", "GetPersonalities", "GetCharacterDisplayDataForPractice", "GetCharacterUsingMedicineDisplayData", "GetCharacterItemsDisplayData", "GetViewCharacterMenuDisplayData", "GetCharacterDisplayDataForGeneralScrollListBatch",
 			"GetYuanshanSelectDataList", "GetVillagerCharDisplayDataList", "GetCharacterDisplayDataForBaihuaLifeLink", "GetAlertnessValue", "SetAlertnessValue", "GetAlertnessData", "GetTransferItemPreviewDisplayData", "GetAllRanshanReadBooksData", "GetCharacterOverviewEatingDisplayData", "GetEquipmentKeys",
 			"GetCharDisplayDataListAsVillager", "GetPreviewLeftMaxHealth", "GetGraveDisplayDataListForSelection", "GetCharacterDisplayDataForBeggarUltimate", "GetAvatarRelatedDataListIncludeDead", "GetFixedCharacterName", "GetCharacterDisplayDataForGuard", "SimulateProfessionDoctorSkill0", "GetCharacterDivinePower", "GetCharacterGhostTechnique",
-			"PreviewAllocateNeili", "GetCharacterDisplayDataForTasterUltimate", "GmCmd_ChangeXiangshuInfection", "TransferInventoryItemInventoryWithDebt", "GetActionPlanningDsiplayData", "GetCharacterProfessionList", "GetCarrierMaxProperty", "GmCmd_ClearCharacterActionPlanningData", "GmCmd_ClearAllActionPlanningData", "GmCmd_TaiwuMeetAll"
+			"PreviewAllocateNeili", "GetCharacterDisplayDataForTasterUltimate", "GmCmd_ChangeXiangshuInfection", "TransferInventoryItemInventoryWithDebt", "GetActionPlanningDsiplayData", "GetCharacterProfessionList", "GetCarrierMaxProperty", "GmCmd_ClearCharacterActionPlanningData", "GmCmd_ClearAllActionPlanningData", "GmCmd_TaiwuMeetAll",
+			"GetFeatureDynamicFactor", "GetCharacterDisplayDataForMapBlockIncludingDead", "TryGetCharacterDeadData", "GmCmd_CreateInventoryItem", "IsFeatureBeIgnored"
 		};
 	}
 }

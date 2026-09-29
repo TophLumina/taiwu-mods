@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AiAction : ConfigData<AiActionItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AiAction Instance = new AiAction();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "ParamStrings", "ParamInts", "GroupId", "TemplateId", "Type" };

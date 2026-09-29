@@ -6,81 +6,42 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 村民状态
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public struct VillagerStatusDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 村民的角色Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharacterId;
 
-	/// <summary>
-	/// 村民姓名相关数据
-	/// </summary>
 	[SerializableGameDataField]
 	public NameRelatedData Name;
 
-	/// <summary>
-	/// 村民的当前年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrAge;
 
-	/// <summary>
-	/// 村民当前健康状态
-	/// </summary>
 	[SerializableGameDataField]
 	public short Health;
 
-	/// <summary>
-	/// 前剩余的最大健康值
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaxLeftHealth;
 
-	/// <summary>
-	/// 村民性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 立场
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BehaviorType;
 
-	/// <summary>
-	/// 心情
-	/// </summary>
 	[SerializableGameDataField]
 	public short Happiness;
 
-	/// <summary>
-	/// 对太吾的好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public short FavorabilityToTaiwu;
 
-	/// <summary>
-	/// 名誉
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Fame;
 
-	/// <summary>
-	/// 村民居住状态
-	/// </summary>
 	[SerializableGameDataField]
 	public byte LivingStatus;
 
-	/// <summary>
-	/// 村民工作状态
-	/// </summary>
 	[SerializableGameDataField]
 	public byte WorkStatus;
 
@@ -165,69 +126,36 @@ public struct VillagerStatusDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public sbyte KidnapCount;
 
-	/// <summary>
-	/// 团体数据
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrgInfo;
 
-	/// <summary>
-	/// 什么身份
-	/// </summary>
 	[SerializableGameDataField]
 	public short RoleTemplateId;
 
-	/// <summary>
-	/// 在做哪个工作
-	/// </summary>
 	[SerializableGameDataField]
 	public VillagerRoleArrangementDisplayDataWrapper ArrangementDisplayData;
 
-	/// <summary>
-	/// 如果受困，在哪个位置
-	/// </summary>
 	[SerializableGameDataField]
 	public short TrappedAreaId;
 
-	/// <summary>
-	/// 与太吾的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationToTaiwu;
 
-	/// <summary>
-	/// 太吾与之的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationFromTaiwu;
 
-	/// <summary>
-	/// 剩余潜力次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LeftPotentialCount;
 
-	/// <summary>
-	/// 是否与太吾同一派系
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSameFactionWithTaiwu;
 
-	/// <summary>
-	/// 工作状态村民的工作类型<see cref="T:GameData.Domains.Taiwu.VillagerWorkType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte WorkType;
 
-	/// <summary>
-	/// 与太吾互动过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInteractedWithTaiwu;
 
-	/// <summary>
-	/// 形象数据
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
@@ -243,13 +171,11 @@ public struct VillagerStatusDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public short InfluencePower;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 307;
@@ -264,7 +190,6 @@ public struct VillagerStatusDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -409,7 +334,6 @@ public struct VillagerStatusDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

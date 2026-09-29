@@ -7,9 +7,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 已死亡角色
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class DeadCharacter : ISerializableGameData
 {
@@ -67,149 +64,73 @@ public class DeadCharacter : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 随机姓名
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
-	/// <summary>
-	/// 法号
-	/// </summary>
 	[SerializableGameDataField]
 	public MonasticTitle MonasticTitle;
 
-	/// <summary>
-	/// 称号列表
-	/// 原计算数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> TitleIds;
 
-	/// <summary>
-	/// 基本信息 - 性别
-	/// 0: 女, 1: 男, -1: 未知/不限制.
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 基本信息 - 名誉类型
-	/// 原计算数据
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FameType;
 
-	/// <summary>
-	/// 基本信息 - 心情
-	/// (-120, -90]: 悲极, (-90, -60]: 痛苦, (-60, -30]: 沮丧, (-30, 30): 寻常, [30, 60): 开怀, [60, 90): 欢喜, [90, 120): 乐极.
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Happiness;
 
-	/// <summary>
-	/// 基本信息 - 立场
-	/// [-500, 500]. 实际为性格的道德部分, [-500, -375]: 唯我, (-375, -125]: 叛逆, (-125, 125): 中庸, [125, 375): 仁善, [375, 500]: 刚正.
-	/// </summary>
 	[SerializableGameDataField]
 	public short Morality;
 
-	/// <summary>
-	/// 基本信息 - 团体信息
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrganizationInfo;
 
-	/// <summary>
-	/// 基本信息 - 外貌
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarData Avatar;
 
-	/// <summary>
-	/// 基本信息 - 衣装的显示 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short ClothingDisplayId;
 
-	/// <summary>
-	/// 基本信息 - 魅力
-	/// 原缓存字段
-	/// </summary>
 	[SerializableGameDataField]
 	public short Attraction;
 
-	/// <summary>
-	/// 基本信息 - 出生日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int BirthDate;
 
-	/// <summary>
-	/// 基本信息 - 死亡日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int DeathDate;
 
-	/// <summary>
-	/// 基本信息 - 出家类型
-	/// 0: 未出家, 1: 门派道人, 2: 门派和尚, 3: 道人, 4: 和尚. 其中 1, 2 为门派出家, 有赐法号. 3, 4 为非门派出家, 无法号.
-	/// </summary>
 	[SerializableGameDataField]
 	public byte MonkType;
 
-	/// <summary>
-	/// 基本信息 - 特性列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> FeatureIds;
 
-	/// <summary>
-	/// 基础主要属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes BaseMainAttributes;
 
-	/// <summary>
-	/// 当前年龄（真实年龄通过生日和死亡日期计算）
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrAge;
 
-	/// <summary>
-	/// 基础技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts BaseLifeSkillQualifications;
 
-	/// <summary>
-	/// 基础武学资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts BaseCombatSkillQualifications;
 
-	/// <summary>
-	/// 前世
-	/// </summary>
 	[SerializableGameDataField]
 	public PreexistenceCharIds PreexistenceCharIds;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public DeadCharacter()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DeadCharacter(DeadCharacter other)
 	{
 		TemplateId = other.TemplateId;
@@ -235,9 +156,6 @@ public class DeadCharacter : ISerializableGameData
 		PreexistenceCharIds = other.PreexistenceCharIds;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DeadCharacter other)
 	{
 		TemplateId = other.TemplateId;
@@ -263,13 +181,11 @@ public class DeadCharacter : ISerializableGameData
 		PreexistenceCharIds = other.PreexistenceCharIds;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 158;
@@ -283,7 +199,6 @@ public class DeadCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -374,7 +289,6 @@ public class DeadCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -538,9 +452,6 @@ public class DeadCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 生成能够用于显示的形象数据
-	/// </summary>
 	public AvatarRelatedData GenerateAvatarRelatedData()
 	{
 		return new AvatarRelatedData
@@ -551,10 +462,6 @@ public class DeadCharacter : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 该角色的职位和出家状态是否允许婚配
-	/// </summary>
-	/// <returns>是否允许婚配</returns>
 	public bool OrgAndMonkTypeAllowMarriage()
 	{
 		if (MonkType == 0)
@@ -573,38 +480,21 @@ public class DeadCharacter : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获得该角色职位对应的精纯境界
-	/// </summary>
-	/// <returns>职位对应的精纯境界</returns>
 	public sbyte GetConsummateLevel()
 	{
 		return OrganizationInfo.GetOrgMemberConfig().ConsummateLevel;
 	}
 
-	/// <summary>
-	/// 获取死亡时的真实年龄
-	/// </summary>
-	/// <returns></returns>
 	public short GetActualAge()
 	{
 		return (short)((DeathDate - BirthDate) / 12);
 	}
 
-	/// <summary>
-	/// 死人是否已经相枢入魔
-	/// </summary>
-	/// <returns></returns>
 	public bool IsCompletelyInfected()
 	{
 		return FeatureIds.Contains(211);
 	}
 
-	/// <summary>
-	/// 获取不包含昵称、自定义显示名.
-	/// 注意该方法获取到的数据不完整，不包含自定义名相关, 外部使用获取完整的数据需要通过 CharacterDomain.GetNameRelatedData.
-	/// </summary>
-	/// <returns></returns>
 	public NameRelatedData GetRawNameRelatedData()
 	{
 		NameRelatedData result = new NameRelatedData();

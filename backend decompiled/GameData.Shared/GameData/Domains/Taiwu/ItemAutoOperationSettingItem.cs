@@ -8,9 +8,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 太吾自动处理物品的设置项，存档数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class ItemAutoOperationSettingItem : ISerializableGameData
 {
@@ -235,16 +232,10 @@ public class ItemAutoOperationSettingItem : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ItemAutoOperationSettingItem()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ItemAutoOperationSettingItem(ItemAutoOperationSettingItem other)
 	{
 		TargetType = other.TargetType;
@@ -252,9 +243,6 @@ public class ItemAutoOperationSettingItem : ISerializableGameData
 		SubtypeList = ((other.SubtypeList == null) ? null : new List<sbyte>(other.SubtypeList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ItemAutoOperationSettingItem other)
 	{
 		TargetType = other.TargetType;

@@ -7,2201 +7,884 @@ namespace Config;
 [Serializable]
 public class RandomEnemy : ConfigData<RandomEnemyItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 病乞丐
-		/// </summary>
 		public const short SickBeggar = 0;
 
-		/// <summary>
-		/// 恶丐
-		/// </summary>
 		public const short EvilBeggar = 1;
 
-		/// <summary>
-		/// 托钵恶丐
-		/// </summary>
 		public const short BowlBeggar = 2;
 
-		/// <summary>
-		/// 弄蛇恶丐
-		/// </summary>
 		public const short SnakeBeggar = 3;
 
-		/// <summary>
-		/// 恶丐头子
-		/// </summary>
 		public const short BossBeggar = 4;
 
-		/// <summary>
-		/// 小毛贼
-		/// </summary>
 		public const short PettyThief = 5;
 
-		/// <summary>
-		/// 惯盗
-		/// </summary>
 		public const short CommonThief = 6;
 
-		/// <summary>
-		/// 采花贼
-		/// </summary>
 		public const short RapistThief = 7;
 
-		/// <summary>
-		/// 女飞贼
-		/// </summary>
 		public const short FemaleThief = 8;
 
-		/// <summary>
-		/// 大盗
-		/// </summary>
 		public const short BigThief = 9;
 
-		/// <summary>
-		/// 地痞
-		/// </summary>
 		public const short LocalThug = 10;
 
-		/// <summary>
-		/// 山贼
-		/// </summary>
 		public const short MountainBandit = 11;
 
-		/// <summary>
-		/// 恶霸
-		/// </summary>
 		public const short EvilBandit = 12;
 
-		/// <summary>
-		/// 悍匪
-		/// </summary>
 		public const short FierceBandit = 13;
 
-		/// <summary>
-		/// 山大王
-		/// </summary>
 		public const short BossBandit = 14;
 
-		/// <summary>
-		/// 少林弃徒
-		/// </summary>
 		public const short ShaolinTraitor = 15;
 
-		/// <summary>
-		/// 峨眉弃徒
-		/// </summary>
 		public const short EmeiTraitor = 16;
 
-		/// <summary>
-		/// 百花弃徒
-		/// </summary>
 		public const short BaihuaTraitor = 17;
 
-		/// <summary>
-		/// 武当弃徒
-		/// </summary>
 		public const short WudangTraitor = 18;
 
-		/// <summary>
-		/// 元山弃徒
-		/// </summary>
 		public const short YuanshanTraitor = 19;
 
-		/// <summary>
-		/// 狮相弃徒
-		/// </summary>
 		public const short ShixiangTraitor = 20;
 
-		/// <summary>
-		/// 然山弃徒
-		/// </summary>
 		public const short RanshanTraitor = 21;
 
-		/// <summary>
-		/// 璇女弃徒
-		/// </summary>
 		public const short XuannvTraitor = 22;
 
-		/// <summary>
-		/// 铸剑弃徒
-		/// </summary>
 		public const short ZhujianTraitor = 23;
 
-		/// <summary>
-		/// 空桑弃徒
-		/// </summary>
 		public const short KongsangTraitor = 24;
 
-		/// <summary>
-		/// 金刚弃徒
-		/// </summary>
 		public const short JingangTraitor = 25;
 
-		/// <summary>
-		/// 五仙弃徒
-		/// </summary>
 		public const short WuxianTraitor = 26;
 
-		/// <summary>
-		/// 界青弃徒
-		/// </summary>
 		public const short JieqingTraitor = 27;
 
-		/// <summary>
-		/// 伏龙弃徒
-		/// </summary>
 		public const short FulongTraitor = 28;
 
-		/// <summary>
-		/// 血犼弃徒
-		/// </summary>
 		public const short XuehouTraitor = 29;
 
-		/// <summary>
-		/// 亡命徒
-		/// </summary>
 		public const short Desperado = 30;
 
-		/// <summary>
-		/// 花和尚
-		/// </summary>
 		public const short RapistMonk = 31;
 
-		/// <summary>
-		/// 妖道
-		/// </summary>
 		public const short DevilishTaoist = 32;
 
-		/// <summary>
-		/// 吃人鬼
-		/// </summary>
 		public const short ManEatingGhost = 33;
 
-		/// <summary>
-		/// 元凶
-		/// </summary>
 		public const short CrimeCulprit = 34;
 
-		/// <summary>
-		/// 狐媚子
-		/// </summary>
 		public const short FoxyGirl = 35;
 
-		/// <summary>
-		/// 妖妇
-		/// </summary>
 		public const short DevilishWoman = 36;
 
-		/// <summary>
-		/// 毒寡妇
-		/// </summary>
 		public const short PoisonousWidow = 37;
 
-		/// <summary>
-		/// 合欢仙
-		/// </summary>
 		public const short HappyReunionFairy = 38;
 
-		/// <summary>
-		/// 玉面娘娘
-		/// </summary>
 		public const short FairFaceQueen = 39;
 
-		/// <summary>
-		/// 鬼仆
-		/// </summary>
 		public const short GhostServant = 40;
 
-		/// <summary>
-		/// 炼尸人
-		/// </summary>
 		public const short RefineCorpsePerson = 41;
 
-		/// <summary>
-		/// 尸爪人
-		/// </summary>
 		public const short CorpseClawPerson = 42;
 
-		/// <summary>
-		/// 鬼医
-		/// </summary>
 		public const short GhostDoctor = 43;
 
-		/// <summary>
-		/// 活死人
-		/// </summary>
 		public const short LivingDead = 44;
 
-		/// <summary>
-		/// 妖乐师
-		/// </summary>
 		public const short DevilishMusician = 45;
 
-		/// <summary>
-		/// 阴阳生
-		/// </summary>
 		public const short MystifyingChessPlayer = 46;
 
-		/// <summary>
-		/// 血书客
-		/// </summary>
 		public const short BloodCalligrapher = 47;
 
-		/// <summary>
-		/// 坏色翁
-		/// </summary>
 		public const short BadMonkOldMan = 48;
 
-		/// <summary>
-		/// 无明子
-		/// </summary>
 		public const short IgnorantWiseMan = 49;
 
-		/// <summary>
-		/// 金刚教众
-		/// </summary>
 		public const short HereticMetal = 50;
 
-		/// <summary>
-		/// 紫霞教众
-		/// </summary>
 		public const short HereticWood = 51;
 
-		/// <summary>
-		/// 玄阴教众
-		/// </summary>
 		public const short HereticWater = 52;
 
-		/// <summary>
-		/// 纯阳教众
-		/// </summary>
 		public const short HereticFire = 53;
 
-		/// <summary>
-		/// 归元教众
-		/// </summary>
 		public const short HereticEarth = 54;
 
-		/// <summary>
-		/// 异疆怪人
-		/// </summary>
 		public const short ForeignWeirdo = 55;
 
-		/// <summary>
-		/// 毒手客
-		/// </summary>
 		public const short PoisonHand = 56;
 
-		/// <summary>
-		/// 邪士
-		/// </summary>
 		public const short EvilBachelor = 57;
 
-		/// <summary>
-		/// 童身老怪
-		/// </summary>
 		public const short PureOldBeing = 58;
 
-		/// <summary>
-		/// 邪道共主
-		/// </summary>
 		public const short EvilWayConjointBoss = 59;
 
-		/// <summary>
-		/// 丧心侠士
-		/// </summary>
 		public const short LoseHeartChivalrousMan = 60;
 
-		/// <summary>
-		/// 恶煞
-		/// </summary>
 		public const short EvilSpirit = 61;
 
-		/// <summary>
-		/// 失魂人
-		/// </summary>
 		public const short LoseSoulPerson = 62;
 
-		/// <summary>
-		/// 血披战鬼
-		/// </summary>
 		public const short BloodyWarGhost = 63;
 
-		/// <summary>
-		/// 炼心师
-		/// </summary>
 		public const short RefineHeartMaster = 64;
 
-		/// <summary>
-		/// 疯魔
-		/// </summary>
 		public const short MadDemon = 65;
 
-		/// <summary>
-		/// 火池客
-		/// </summary>
 		public const short FirePondMale = 66;
 
-		/// <summary>
-		/// 寒池女
-		/// </summary>
 		public const short ColdPondFemale = 67;
 
-		/// <summary>
-		/// 阿鼻众
-		/// </summary>
 		public const short AviciFolk = 68;
 
-		/// <summary>
-		/// 摩罗尊主
-		/// </summary>
 		public const short SoumoulouLord = 69;
 
-		/// <summary>
-		/// 绝境客
-		/// </summary>
 		public const short DesperatePerson = 70;
 
-		/// <summary>
-		/// 非人众
-		/// </summary>
 		public const short InHumanFolk = 71;
 
-		/// <summary>
-		/// 无相老僧
-		/// </summary>
 		public const short NoAppearanceOldMonk = 72;
 
-		/// <summary>
-		/// 无名老道
-		/// </summary>
 		public const short NoNameOldTaoist = 73;
 
-		/// <summary>
-		/// 弃世老人
-		/// </summary>
 		public const short WorldWearyOldPerson = 74;
 
-		/// <summary>
-		/// 相枢闻恶声
-		/// </summary>
 		public const short XiangshuMinion0 = 75;
 
-		/// <summary>
-		/// 相枢祛善
-		/// </summary>
 		public const short XiangshuMinion1 = 76;
 
-		/// <summary>
-		/// 相枢唤目
-		/// </summary>
 		public const short XiangshuMinion2 = 77;
 
-		/// <summary>
-		/// 相枢妖心示显
-		/// </summary>
 		public const short XiangshuMinion3 = 78;
 
-		/// <summary>
-		/// 相枢百邪
-		/// </summary>
 		public const short XiangshuMinion4 = 79;
 
-		/// <summary>
-		/// 相枢堕心九部众
-		/// </summary>
 		public const short XiangshuMinion5 = 80;
 
-		/// <summary>
-		/// 相枢众相生
-		/// </summary>
 		public const short XiangshuMinion6 = 81;
 
-		/// <summary>
-		/// 相枢神断护法
-		/// </summary>
 		public const short XiangshuMinion7 = 82;
 
-		/// <summary>
-		/// 相枢玄狱九老
-		/// </summary>
 		public const short XiangshuMinion8 = 83;
 
-		/// <summary>
-		/// 任侠义士
-		/// </summary>
 		public const short Righteous0 = 84;
 
-		/// <summary>
-		/// 任侠巡街武人
-		/// </summary>
 		public const short Righteous1 = 85;
 
-		/// <summary>
-		/// 任侠年轻侠士
-		/// </summary>
 		public const short Righteous2 = 86;
 
-		/// <summary>
-		/// 任侠镖师
-		/// </summary>
 		public const short Righteous3 = 87;
 
-		/// <summary>
-		/// 任侠成名镖师
-		/// </summary>
 		public const short Righteous4 = 88;
 
-		/// <summary>
-		/// 任侠江湖奇人
-		/// </summary>
 		public const short Righteous5 = 89;
 
-		/// <summary>
-		/// 任侠无名侠客
-		/// </summary>
 		public const short Righteous6 = 90;
 
-		/// <summary>
-		/// 任侠成名英豪
-		/// </summary>
 		public const short Righteous7 = 91;
 
-		/// <summary>
-		/// 任侠隐居名宿
-		/// </summary>
 		public const short Righteous8 = 92;
 
-		/// <summary>
-		/// 隐退的少林前辈
-		/// </summary>
 		public const short ShaolinRetiredSenior = 93;
 
-		/// <summary>
-		/// 少林长老
-		/// </summary>
 		public const short ShaolinMember6 = 94;
 
-		/// <summary>
-		/// 少林十八罗汉
-		/// </summary>
 		public const short ShaolinMember5 = 95;
 
-		/// <summary>
-		/// 少林持戒僧
-		/// </summary>
 		public const short ShaolinMember4 = 96;
 
-		/// <summary>
-		/// 少林菩提院弟子
-		/// </summary>
 		public const short ShaolinMember3 = 97;
 
-		/// <summary>
-		/// 少林般若堂弟子
-		/// </summary>
 		public const short ShaolinMember2 = 98;
 
-		/// <summary>
-		/// 少林罗汉堂弟子
-		/// </summary>
 		public const short ShaolinMember1 = 99;
 
-		/// <summary>
-		/// 少林比丘
-		/// </summary>
 		public const short ShaolinMember0 = 100;
 
-		/// <summary>
-		/// 隐退的峨眉前辈
-		/// </summary>
 		public const short EmeiRetiredSenior = 101;
 
-		/// <summary>
-		/// 峨眉掌门弟子
-		/// </summary>
 		public const short EmeiMember6 = 102;
 
-		/// <summary>
-		/// 峨眉真传弟子
-		/// </summary>
 		public const short EmeiMember5 = 103;
 
-		/// <summary>
-		/// 峨眉八门嫡传
-		/// </summary>
 		public const short EmeiMember4 = 104;
 
-		/// <summary>
-		/// 峨眉八门正徒
-		/// </summary>
 		public const short EmeiMember3 = 105;
 
-		/// <summary>
-		/// 峨眉杂门弟子
-		/// </summary>
 		public const short EmeiMember2 = 106;
 
-		/// <summary>
-		/// 峨眉内门散徒
-		/// </summary>
 		public const short EmeiMember1 = 107;
 
-		/// <summary>
-		/// 峨眉外门散徒
-		/// </summary>
 		public const short EmeiMember0 = 108;
 
-		/// <summary>
-		/// 隐退的百花前辈
-		/// </summary>
 		public const short BaihuaRetiredSenior = 109;
 
-		/// <summary>
-		/// 百花鹿裳使
-		/// </summary>
 		public const short BaihuaMember6 = 110;
 
-		/// <summary>
-		/// 百花妙手
-		/// </summary>
 		public const short BaihuaMember5 = 111;
 
-		/// <summary>
-		/// 百花朱匣弟子
-		/// </summary>
 		public const short BaihuaMember4 = 112;
 
-		/// <summary>
-		/// 百花玉匣弟子
-		/// </summary>
 		public const short BaihuaMember3 = 113;
 
-		/// <summary>
-		/// 百花金匣弟子
-		/// </summary>
 		public const short BaihuaMember2 = 114;
 
-		/// <summary>
-		/// 百花花匣弟子
-		/// </summary>
 		public const short BaihuaMember1 = 115;
 
-		/// <summary>
-		/// 百花牧鹿童
-		/// </summary>
 		public const short BaihuaMember0 = 116;
 
-		/// <summary>
-		/// 隐退的武当前辈
-		/// </summary>
 		public const short WudangRetiredSenior = 117;
 
-		/// <summary>
-		/// 武当掌门弟子
-		/// </summary>
 		public const short WudangMember6 = 118;
 
-		/// <summary>
-		/// 武当真传弟子
-		/// </summary>
 		public const short WudangMember5 = 119;
 
-		/// <summary>
-		/// 武当真武殿弟子
-		/// </summary>
 		public const short WudangMember4 = 120;
 
-		/// <summary>
-		/// 武当紫霄宫弟子
-		/// </summary>
 		public const short WudangMember3 = 121;
 
-		/// <summary>
-		/// 武当太和宫弟子
-		/// </summary>
 		public const short WudangMember2 = 122;
 
-		/// <summary>
-		/// 武当接引道人
-		/// </summary>
 		public const short WudangMember1 = 123;
 
-		/// <summary>
-		/// 武当外门弟子
-		/// </summary>
 		public const short WudangMember0 = 124;
 
-		/// <summary>
-		/// 隐退的元山前辈
-		/// </summary>
 		public const short YuanshanRetiredSenior = 125;
 
-		/// <summary>
-		/// 元山伏魔众
-		/// </summary>
 		public const short YuanshanMember6 = 126;
 
-		/// <summary>
-		/// 元山传法众
-		/// </summary>
 		public const short YuanshanMember5 = 127;
 
-		/// <summary>
-		/// 元山苦行众
-		/// </summary>
 		public const short YuanshanMember4 = 128;
 
-		/// <summary>
-		/// 元山护法弟子
-		/// </summary>
 		public const short YuanshanMember3 = 129;
 
-		/// <summary>
-		/// 元山石牢弟子
-		/// </summary>
 		public const short YuanshanMember2 = 130;
 
-		/// <summary>
-		/// 元山入门弟子
-		/// </summary>
 		public const short YuanshanMember1 = 131;
 
-		/// <summary>
-		/// 元山受戒仆
-		/// </summary>
 		public const short YuanshanMember0 = 132;
 
-		/// <summary>
-		/// 隐退的狮相前辈
-		/// </summary>
 		public const short ShixiangRetiredSenior = 133;
 
-		/// <summary>
-		/// 狮相狂狮强手
-		/// </summary>
 		public const short ShixiangMember6 = 134;
 
-		/// <summary>
-		/// 狮相锦狮强手
-		/// </summary>
 		public const short ShixiangMember5 = 135;
 
-		/// <summary>
-		/// 狮相睡狮强手
-		/// </summary>
 		public const short ShixiangMember4 = 136;
 
-		/// <summary>
-		/// 狮相狂狮堂弟子
-		/// </summary>
 		public const short ShixiangMember3 = 137;
 
-		/// <summary>
-		/// 狮相锦狮堂弟子
-		/// </summary>
 		public const short ShixiangMember2 = 138;
 
-		/// <summary>
-		/// 狮相睡狮堂弟子
-		/// </summary>
 		public const short ShixiangMember1 = 139;
 
-		/// <summary>
-		/// 狮相狮崽子
-		/// </summary>
 		public const short ShixiangMember0 = 140;
 
-		/// <summary>
-		/// 隐退的然山前辈
-		/// </summary>
 		public const short RanshanRetiredSenior = 141;
 
-		/// <summary>
-		/// 然山青琅护法
-		/// </summary>
 		public const short RanshanMember6 = 142;
 
-		/// <summary>
-		/// 然山三宗传人
-		/// </summary>
 		public const short RanshanMember5 = 143;
 
-		/// <summary>
-		/// 然山玉符宗游士
-		/// </summary>
 		public const short RanshanMember4 = 144;
 
-		/// <summary>
-		/// 然山神剑宗游士
-		/// </summary>
 		public const short RanshanMember3 = 145;
 
-		/// <summary>
-		/// 然山阴阳宗游士
-		/// </summary>
 		public const short RanshanMember2 = 146;
 
-		/// <summary>
-		/// 然山剑奴
-		/// </summary>
 		public const short RanshanMember1 = 147;
 
-		/// <summary>
-		/// 然山散人
-		/// </summary>
 		public const short RanshanMember0 = 148;
 
-		/// <summary>
-		/// 隐退的璇女前辈
-		/// </summary>
 		public const short XuannvRetiredSenior = 149;
 
-		/// <summary>
-		/// 璇女羽衣使
-		/// </summary>
 		public const short XuannvMember6 = 150;
 
-		/// <summary>
-		/// 璇女霓裳使
-		/// </summary>
 		public const short XuannvMember5 = 151;
 
-		/// <summary>
-		/// 璇女守玉人
-		/// </summary>
 		public const short XuannvMember4 = 152;
 
-		/// <summary>
-		/// 璇女天音阁弟子
-		/// </summary>
 		public const short XuannvMember3 = 153;
 
-		/// <summary>
-		/// 璇女内门弟子
-		/// </summary>
 		public const short XuannvMember2 = 154;
 
-		/// <summary>
-		/// 璇女外门弟子
-		/// </summary>
 		public const short XuannvMember1 = 155;
 
-		/// <summary>
-		/// 璇女婢子
-		/// </summary>
 		public const short XuannvMember0 = 156;
 
-		/// <summary>
-		/// 隐退的铸剑前辈
-		/// </summary>
 		public const short ZhujianRetiredSenior = 157;
 
-		/// <summary>
-		/// 铸剑七星匠
-		/// </summary>
 		public const short ZhujianMember6 = 158;
 
-		/// <summary>
-		/// 铸剑玄鸿匠
-		/// </summary>
 		public const short ZhujianMember5 = 159;
 
-		/// <summary>
-		/// 铸剑镇山匠
-		/// </summary>
 		public const short ZhujianMember4 = 160;
 
-		/// <summary>
-		/// 铸剑百辟匠
-		/// </summary>
 		public const short ZhujianMember3 = 161;
 
-		/// <summary>
-		/// 铸剑青君匠
-		/// </summary>
 		public const short ZhujianMember2 = 162;
 
-		/// <summary>
-		/// 铸剑学徒
-		/// </summary>
 		public const short ZhujianMember1 = 163;
 
-		/// <summary>
-		/// 铸剑火工
-		/// </summary>
 		public const short ZhujianMember0 = 164;
 
-		/// <summary>
-		/// 隐退的空桑前辈
-		/// </summary>
 		public const short KongsangRetiredSenior = 165;
 
-		/// <summary>
-		/// 空桑长老
-		/// </summary>
 		public const short KongsangMember6 = 166;
 
-		/// <summary>
-		/// 空桑蛟士
-		/// </summary>
 		public const short KongsangMember5 = 167;
 
-		/// <summary>
-		/// 空桑持鼎首徒
-		/// </summary>
 		public const short KongsangMember4 = 168;
 
-		/// <summary>
-		/// 空桑玄炉院弟子
-		/// </summary>
 		public const short KongsangMember3 = 169;
 
-		/// <summary>
-		/// 空桑蛟王院弟子
-		/// </summary>
 		public const short KongsangMember2 = 170;
 
-		/// <summary>
-		/// 空桑朱砭院弟子
-		/// </summary>
 		public const short KongsangMember1 = 171;
 
-		/// <summary>
-		/// 空桑药童
-		/// </summary>
 		public const short KongsangMember0 = 172;
 
-		/// <summary>
-		/// 隐退的金刚前辈
-		/// </summary>
 		public const short JingangRetiredSenior = 173;
 
-		/// <summary>
-		/// 金刚上尊
-		/// </summary>
 		public const short JingangMember6 = 174;
 
-		/// <summary>
-		/// 金刚护法尊者
-		/// </summary>
 		public const short JingangMember5 = 175;
 
-		/// <summary>
-		/// 金刚金刚力士
-		/// </summary>
 		public const short JingangMember4 = 176;
 
-		/// <summary>
-		/// 金刚不动殿弟子
-		/// </summary>
 		public const short JingangMember3 = 177;
 
-		/// <summary>
-		/// 金刚金刚院弟子
-		/// </summary>
 		public const short JingangMember2 = 178;
 
-		/// <summary>
-		/// 金刚罗刹院弟子
-		/// </summary>
 		public const short JingangMember1 = 179;
 
-		/// <summary>
-		/// 金刚净火童
-		/// </summary>
 		public const short JingangMember0 = 180;
 
-		/// <summary>
-		/// 隐退的五仙前辈
-		/// </summary>
 		public const short WuxianRetiredSenior = 181;
 
-		/// <summary>
-		/// 五仙巫相
-		/// </summary>
 		public const short WuxianMember6 = 182;
 
-		/// <summary>
-		/// 五仙族长
-		/// </summary>
 		public const short WuxianMember5 = 183;
 
-		/// <summary>
-		/// 五仙仙娘使
-		/// </summary>
 		public const short WuxianMember4 = 184;
 
-		/// <summary>
-		/// 五仙五毒使
-		/// </summary>
 		public const short WuxianMember3 = 185;
 
-		/// <summary>
-		/// 五仙花蛊部众
-		/// </summary>
 		public const short WuxianMember2 = 186;
 
-		/// <summary>
-		/// 五仙五毒部众
-		/// </summary>
 		public const short WuxianMember1 = 187;
 
-		/// <summary>
-		/// 五仙教众
-		/// </summary>
 		public const short WuxianMember0 = 188;
 
-		/// <summary>
-		/// 隐退的界青前辈
-		/// </summary>
 		public const short JieqingRetiredSenior = 189;
 
-		/// <summary>
-		/// 界青七宿鬼
-		/// </summary>
 		public const short JieqingMember6 = 190;
 
-		/// <summary>
-		/// 界青魁首
-		/// </summary>
 		public const short JieqingMember5 = 191;
 
-		/// <summary>
-		/// 界青死士
-		/// </summary>
 		public const short JieqingMember4 = 192;
 
-		/// <summary>
-		/// 界青杀手
-		/// </summary>
 		public const short JieqingMember3 = 193;
 
-		/// <summary>
-		/// 界青门人
-		/// </summary>
 		public const short JieqingMember2 = 194;
 
-		/// <summary>
-		/// 界青引路人
-		/// </summary>
 		public const short JieqingMember1 = 195;
 
-		/// <summary>
-		/// 界青外门众
-		/// </summary>
 		public const short JieqingMember0 = 196;
 
-		/// <summary>
-		/// 隐退的伏龙前辈
-		/// </summary>
 		public const short FulongRetiredSenior = 197;
 
-		/// <summary>
-		/// 伏龙龙头长老
-		/// </summary>
 		public const short FulongMember6 = 198;
 
-		/// <summary>
-		/// 伏龙首徒
-		/// </summary>
 		public const short FulongMember5 = 199;
 
-		/// <summary>
-		/// 伏龙巡海使
-		/// </summary>
 		public const short FulongMember4 = 200;
 
-		/// <summary>
-		/// 伏龙赐姓弟子
-		/// </summary>
 		public const short FulongMember3 = 201;
 
-		/// <summary>
-		/// 伏龙入门弟子
-		/// </summary>
 		public const short FulongMember2 = 202;
 
-		/// <summary>
-		/// 伏龙外姓弟子
-		/// </summary>
 		public const short FulongMember1 = 203;
 
-		/// <summary>
-		/// 伏龙岛众
-		/// </summary>
 		public const short FulongMember0 = 204;
 
-		/// <summary>
-		/// 隐退的血犼前辈
-		/// </summary>
 		public const short XuehouRetiredSenior = 205;
 
-		/// <summary>
-		/// 血犼长老
-		/// </summary>
 		public const short XuehouMember6 = 206;
 
-		/// <summary>
-		/// 血犼犼母圣使
-		/// </summary>
 		public const short XuehouMember5 = 207;
 
-		/// <summary>
-		/// 血犼护法
-		/// </summary>
 		public const short XuehouMember4 = 208;
 
-		/// <summary>
-		/// 血犼血童子
-		/// </summary>
 		public const short XuehouMember3 = 209;
 
-		/// <summary>
-		/// 血犼精英
-		/// </summary>
 		public const short XuehouMember2 = 210;
 
-		/// <summary>
-		/// 血犼教众
-		/// </summary>
 		public const short XuehouMember1 = 211;
 
-		/// <summary>
-		/// 血犼杂役
-		/// </summary>
 		public const short XuehouMember0 = 212;
 
-		/// <summary>
-		/// 兔儿郎
-		/// </summary>
 		public const short FoxyBoy = 233;
 
-		/// <summary>
-		/// 浪子
-		/// </summary>
 		public const short DevilishMan = 234;
 
-		/// <summary>
-		/// 裙带倌
-		/// </summary>
 		public const short PoisonousWidower = 235;
 
-		/// <summary>
-		/// 风流客
-		/// </summary>
 		public const short PhilanderingMan = 236;
 
-		/// <summary>
-		/// 粉面郎君
-		/// </summary>
 		public const short FairFaceKing = 237;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 病乞丐
-		/// </summary>
 		public static RandomEnemyItem SickBeggar => Instance[(short)0];
 
-		/// <summary>
-		/// 恶丐
-		/// </summary>
 		public static RandomEnemyItem EvilBeggar => Instance[(short)1];
 
-		/// <summary>
-		/// 托钵恶丐
-		/// </summary>
 		public static RandomEnemyItem BowlBeggar => Instance[(short)2];
 
-		/// <summary>
-		/// 弄蛇恶丐
-		/// </summary>
 		public static RandomEnemyItem SnakeBeggar => Instance[(short)3];
 
-		/// <summary>
-		/// 恶丐头子
-		/// </summary>
 		public static RandomEnemyItem BossBeggar => Instance[(short)4];
 
-		/// <summary>
-		/// 小毛贼
-		/// </summary>
 		public static RandomEnemyItem PettyThief => Instance[(short)5];
 
-		/// <summary>
-		/// 惯盗
-		/// </summary>
 		public static RandomEnemyItem CommonThief => Instance[(short)6];
 
-		/// <summary>
-		/// 采花贼
-		/// </summary>
 		public static RandomEnemyItem RapistThief => Instance[(short)7];
 
-		/// <summary>
-		/// 女飞贼
-		/// </summary>
 		public static RandomEnemyItem FemaleThief => Instance[(short)8];
 
-		/// <summary>
-		/// 大盗
-		/// </summary>
 		public static RandomEnemyItem BigThief => Instance[(short)9];
 
-		/// <summary>
-		/// 地痞
-		/// </summary>
 		public static RandomEnemyItem LocalThug => Instance[(short)10];
 
-		/// <summary>
-		/// 山贼
-		/// </summary>
 		public static RandomEnemyItem MountainBandit => Instance[(short)11];
 
-		/// <summary>
-		/// 恶霸
-		/// </summary>
 		public static RandomEnemyItem EvilBandit => Instance[(short)12];
 
-		/// <summary>
-		/// 悍匪
-		/// </summary>
 		public static RandomEnemyItem FierceBandit => Instance[(short)13];
 
-		/// <summary>
-		/// 山大王
-		/// </summary>
 		public static RandomEnemyItem BossBandit => Instance[(short)14];
 
-		/// <summary>
-		/// 少林弃徒
-		/// </summary>
 		public static RandomEnemyItem ShaolinTraitor => Instance[(short)15];
 
-		/// <summary>
-		/// 峨眉弃徒
-		/// </summary>
 		public static RandomEnemyItem EmeiTraitor => Instance[(short)16];
 
-		/// <summary>
-		/// 百花弃徒
-		/// </summary>
 		public static RandomEnemyItem BaihuaTraitor => Instance[(short)17];
 
-		/// <summary>
-		/// 武当弃徒
-		/// </summary>
 		public static RandomEnemyItem WudangTraitor => Instance[(short)18];
 
-		/// <summary>
-		/// 元山弃徒
-		/// </summary>
 		public static RandomEnemyItem YuanshanTraitor => Instance[(short)19];
 
-		/// <summary>
-		/// 狮相弃徒
-		/// </summary>
 		public static RandomEnemyItem ShixiangTraitor => Instance[(short)20];
 
-		/// <summary>
-		/// 然山弃徒
-		/// </summary>
 		public static RandomEnemyItem RanshanTraitor => Instance[(short)21];
 
-		/// <summary>
-		/// 璇女弃徒
-		/// </summary>
 		public static RandomEnemyItem XuannvTraitor => Instance[(short)22];
 
-		/// <summary>
-		/// 铸剑弃徒
-		/// </summary>
 		public static RandomEnemyItem ZhujianTraitor => Instance[(short)23];
 
-		/// <summary>
-		/// 空桑弃徒
-		/// </summary>
 		public static RandomEnemyItem KongsangTraitor => Instance[(short)24];
 
-		/// <summary>
-		/// 金刚弃徒
-		/// </summary>
 		public static RandomEnemyItem JingangTraitor => Instance[(short)25];
 
-		/// <summary>
-		/// 五仙弃徒
-		/// </summary>
 		public static RandomEnemyItem WuxianTraitor => Instance[(short)26];
 
-		/// <summary>
-		/// 界青弃徒
-		/// </summary>
 		public static RandomEnemyItem JieqingTraitor => Instance[(short)27];
 
-		/// <summary>
-		/// 伏龙弃徒
-		/// </summary>
 		public static RandomEnemyItem FulongTraitor => Instance[(short)28];
 
-		/// <summary>
-		/// 血犼弃徒
-		/// </summary>
 		public static RandomEnemyItem XuehouTraitor => Instance[(short)29];
 
-		/// <summary>
-		/// 亡命徒
-		/// </summary>
 		public static RandomEnemyItem Desperado => Instance[(short)30];
 
-		/// <summary>
-		/// 花和尚
-		/// </summary>
 		public static RandomEnemyItem RapistMonk => Instance[(short)31];
 
-		/// <summary>
-		/// 妖道
-		/// </summary>
 		public static RandomEnemyItem DevilishTaoist => Instance[(short)32];
 
-		/// <summary>
-		/// 吃人鬼
-		/// </summary>
 		public static RandomEnemyItem ManEatingGhost => Instance[(short)33];
 
-		/// <summary>
-		/// 元凶
-		/// </summary>
 		public static RandomEnemyItem CrimeCulprit => Instance[(short)34];
 
-		/// <summary>
-		/// 狐媚子
-		/// </summary>
 		public static RandomEnemyItem FoxyGirl => Instance[(short)35];
 
-		/// <summary>
-		/// 妖妇
-		/// </summary>
 		public static RandomEnemyItem DevilishWoman => Instance[(short)36];
 
-		/// <summary>
-		/// 毒寡妇
-		/// </summary>
 		public static RandomEnemyItem PoisonousWidow => Instance[(short)37];
 
-		/// <summary>
-		/// 合欢仙
-		/// </summary>
 		public static RandomEnemyItem HappyReunionFairy => Instance[(short)38];
 
-		/// <summary>
-		/// 玉面娘娘
-		/// </summary>
 		public static RandomEnemyItem FairFaceQueen => Instance[(short)39];
 
-		/// <summary>
-		/// 鬼仆
-		/// </summary>
 		public static RandomEnemyItem GhostServant => Instance[(short)40];
 
-		/// <summary>
-		/// 炼尸人
-		/// </summary>
 		public static RandomEnemyItem RefineCorpsePerson => Instance[(short)41];
 
-		/// <summary>
-		/// 尸爪人
-		/// </summary>
 		public static RandomEnemyItem CorpseClawPerson => Instance[(short)42];
 
-		/// <summary>
-		/// 鬼医
-		/// </summary>
 		public static RandomEnemyItem GhostDoctor => Instance[(short)43];
 
-		/// <summary>
-		/// 活死人
-		/// </summary>
 		public static RandomEnemyItem LivingDead => Instance[(short)44];
 
-		/// <summary>
-		/// 妖乐师
-		/// </summary>
 		public static RandomEnemyItem DevilishMusician => Instance[(short)45];
 
-		/// <summary>
-		/// 阴阳生
-		/// </summary>
 		public static RandomEnemyItem MystifyingChessPlayer => Instance[(short)46];
 
-		/// <summary>
-		/// 血书客
-		/// </summary>
 		public static RandomEnemyItem BloodCalligrapher => Instance[(short)47];
 
-		/// <summary>
-		/// 坏色翁
-		/// </summary>
 		public static RandomEnemyItem BadMonkOldMan => Instance[(short)48];
 
-		/// <summary>
-		/// 无明子
-		/// </summary>
 		public static RandomEnemyItem IgnorantWiseMan => Instance[(short)49];
 
-		/// <summary>
-		/// 金刚教众
-		/// </summary>
 		public static RandomEnemyItem HereticMetal => Instance[(short)50];
 
-		/// <summary>
-		/// 紫霞教众
-		/// </summary>
 		public static RandomEnemyItem HereticWood => Instance[(short)51];
 
-		/// <summary>
-		/// 玄阴教众
-		/// </summary>
 		public static RandomEnemyItem HereticWater => Instance[(short)52];
 
-		/// <summary>
-		/// 纯阳教众
-		/// </summary>
 		public static RandomEnemyItem HereticFire => Instance[(short)53];
 
-		/// <summary>
-		/// 归元教众
-		/// </summary>
 		public static RandomEnemyItem HereticEarth => Instance[(short)54];
 
-		/// <summary>
-		/// 异疆怪人
-		/// </summary>
 		public static RandomEnemyItem ForeignWeirdo => Instance[(short)55];
 
-		/// <summary>
-		/// 毒手客
-		/// </summary>
 		public static RandomEnemyItem PoisonHand => Instance[(short)56];
 
-		/// <summary>
-		/// 邪士
-		/// </summary>
 		public static RandomEnemyItem EvilBachelor => Instance[(short)57];
 
-		/// <summary>
-		/// 童身老怪
-		/// </summary>
 		public static RandomEnemyItem PureOldBeing => Instance[(short)58];
 
-		/// <summary>
-		/// 邪道共主
-		/// </summary>
 		public static RandomEnemyItem EvilWayConjointBoss => Instance[(short)59];
 
-		/// <summary>
-		/// 丧心侠士
-		/// </summary>
 		public static RandomEnemyItem LoseHeartChivalrousMan => Instance[(short)60];
 
-		/// <summary>
-		/// 恶煞
-		/// </summary>
 		public static RandomEnemyItem EvilSpirit => Instance[(short)61];
 
-		/// <summary>
-		/// 失魂人
-		/// </summary>
 		public static RandomEnemyItem LoseSoulPerson => Instance[(short)62];
 
-		/// <summary>
-		/// 血披战鬼
-		/// </summary>
 		public static RandomEnemyItem BloodyWarGhost => Instance[(short)63];
 
-		/// <summary>
-		/// 炼心师
-		/// </summary>
 		public static RandomEnemyItem RefineHeartMaster => Instance[(short)64];
 
-		/// <summary>
-		/// 疯魔
-		/// </summary>
 		public static RandomEnemyItem MadDemon => Instance[(short)65];
 
-		/// <summary>
-		/// 火池客
-		/// </summary>
 		public static RandomEnemyItem FirePondMale => Instance[(short)66];
 
-		/// <summary>
-		/// 寒池女
-		/// </summary>
 		public static RandomEnemyItem ColdPondFemale => Instance[(short)67];
 
-		/// <summary>
-		/// 阿鼻众
-		/// </summary>
 		public static RandomEnemyItem AviciFolk => Instance[(short)68];
 
-		/// <summary>
-		/// 摩罗尊主
-		/// </summary>
 		public static RandomEnemyItem SoumoulouLord => Instance[(short)69];
 
-		/// <summary>
-		/// 绝境客
-		/// </summary>
 		public static RandomEnemyItem DesperatePerson => Instance[(short)70];
 
-		/// <summary>
-		/// 非人众
-		/// </summary>
 		public static RandomEnemyItem InHumanFolk => Instance[(short)71];
 
-		/// <summary>
-		/// 无相老僧
-		/// </summary>
 		public static RandomEnemyItem NoAppearanceOldMonk => Instance[(short)72];
 
-		/// <summary>
-		/// 无名老道
-		/// </summary>
 		public static RandomEnemyItem NoNameOldTaoist => Instance[(short)73];
 
-		/// <summary>
-		/// 弃世老人
-		/// </summary>
 		public static RandomEnemyItem WorldWearyOldPerson => Instance[(short)74];
 
-		/// <summary>
-		/// 相枢闻恶声
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion0 => Instance[(short)75];
 
-		/// <summary>
-		/// 相枢祛善
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion1 => Instance[(short)76];
 
-		/// <summary>
-		/// 相枢唤目
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion2 => Instance[(short)77];
 
-		/// <summary>
-		/// 相枢妖心示显
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion3 => Instance[(short)78];
 
-		/// <summary>
-		/// 相枢百邪
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion4 => Instance[(short)79];
 
-		/// <summary>
-		/// 相枢堕心九部众
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion5 => Instance[(short)80];
 
-		/// <summary>
-		/// 相枢众相生
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion6 => Instance[(short)81];
 
-		/// <summary>
-		/// 相枢神断护法
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion7 => Instance[(short)82];
 
-		/// <summary>
-		/// 相枢玄狱九老
-		/// </summary>
 		public static RandomEnemyItem XiangshuMinion8 => Instance[(short)83];
 
-		/// <summary>
-		/// 任侠义士
-		/// </summary>
 		public static RandomEnemyItem Righteous0 => Instance[(short)84];
 
-		/// <summary>
-		/// 任侠巡街武人
-		/// </summary>
 		public static RandomEnemyItem Righteous1 => Instance[(short)85];
 
-		/// <summary>
-		/// 任侠年轻侠士
-		/// </summary>
 		public static RandomEnemyItem Righteous2 => Instance[(short)86];
 
-		/// <summary>
-		/// 任侠镖师
-		/// </summary>
 		public static RandomEnemyItem Righteous3 => Instance[(short)87];
 
-		/// <summary>
-		/// 任侠成名镖师
-		/// </summary>
 		public static RandomEnemyItem Righteous4 => Instance[(short)88];
 
-		/// <summary>
-		/// 任侠江湖奇人
-		/// </summary>
 		public static RandomEnemyItem Righteous5 => Instance[(short)89];
 
-		/// <summary>
-		/// 任侠无名侠客
-		/// </summary>
 		public static RandomEnemyItem Righteous6 => Instance[(short)90];
 
-		/// <summary>
-		/// 任侠成名英豪
-		/// </summary>
 		public static RandomEnemyItem Righteous7 => Instance[(short)91];
 
-		/// <summary>
-		/// 任侠隐居名宿
-		/// </summary>
 		public static RandomEnemyItem Righteous8 => Instance[(short)92];
 
-		/// <summary>
-		/// 隐退的少林前辈
-		/// </summary>
 		public static RandomEnemyItem ShaolinRetiredSenior => Instance[(short)93];
 
-		/// <summary>
-		/// 少林长老
-		/// </summary>
 		public static RandomEnemyItem ShaolinMember6 => Instance[(short)94];
 
-		/// <summary>
-		/// 少林十八罗汉
-		/// </summary>
 		public static RandomEnemyItem ShaolinMember5 => Instance[(short)95];
 
-		/// <summary>
-		/// 少林持戒僧
-		/// </summary>
 		public static RandomEnemyItem ShaolinMember4 => Instance[(short)96];
 
-		/// <summary>
-		/// 少林菩提院弟子
-		/// </summary>
 		public static RandomEnemyItem ShaolinMember3 => Instance[(short)97];
 
-		/// <summary>
-		/// 少林般若堂弟子
-		/// </summary>
 		public static RandomEnemyItem ShaolinMember2 => Instance[(short)98];
 
-		/// <summary>
-		/// 少林罗汉堂弟子
-		/// </summary>
 		public static RandomEnemyItem ShaolinMember1 => Instance[(short)99];
 
-		/// <summary>
-		/// 少林比丘
-		/// </summary>
 		public static RandomEnemyItem ShaolinMember0 => Instance[(short)100];
 
-		/// <summary>
-		/// 隐退的峨眉前辈
-		/// </summary>
 		public static RandomEnemyItem EmeiRetiredSenior => Instance[(short)101];
 
-		/// <summary>
-		/// 峨眉掌门弟子
-		/// </summary>
 		public static RandomEnemyItem EmeiMember6 => Instance[(short)102];
 
-		/// <summary>
-		/// 峨眉真传弟子
-		/// </summary>
 		public static RandomEnemyItem EmeiMember5 => Instance[(short)103];
 
-		/// <summary>
-		/// 峨眉八门嫡传
-		/// </summary>
 		public static RandomEnemyItem EmeiMember4 => Instance[(short)104];
 
-		/// <summary>
-		/// 峨眉八门正徒
-		/// </summary>
 		public static RandomEnemyItem EmeiMember3 => Instance[(short)105];
 
-		/// <summary>
-		/// 峨眉杂门弟子
-		/// </summary>
 		public static RandomEnemyItem EmeiMember2 => Instance[(short)106];
 
-		/// <summary>
-		/// 峨眉内门散徒
-		/// </summary>
 		public static RandomEnemyItem EmeiMember1 => Instance[(short)107];
 
-		/// <summary>
-		/// 峨眉外门散徒
-		/// </summary>
 		public static RandomEnemyItem EmeiMember0 => Instance[(short)108];
 
-		/// <summary>
-		/// 隐退的百花前辈
-		/// </summary>
 		public static RandomEnemyItem BaihuaRetiredSenior => Instance[(short)109];
 
-		/// <summary>
-		/// 百花鹿裳使
-		/// </summary>
 		public static RandomEnemyItem BaihuaMember6 => Instance[(short)110];
 
-		/// <summary>
-		/// 百花妙手
-		/// </summary>
 		public static RandomEnemyItem BaihuaMember5 => Instance[(short)111];
 
-		/// <summary>
-		/// 百花朱匣弟子
-		/// </summary>
 		public static RandomEnemyItem BaihuaMember4 => Instance[(short)112];
 
-		/// <summary>
-		/// 百花玉匣弟子
-		/// </summary>
 		public static RandomEnemyItem BaihuaMember3 => Instance[(short)113];
 
-		/// <summary>
-		/// 百花金匣弟子
-		/// </summary>
 		public static RandomEnemyItem BaihuaMember2 => Instance[(short)114];
 
-		/// <summary>
-		/// 百花花匣弟子
-		/// </summary>
 		public static RandomEnemyItem BaihuaMember1 => Instance[(short)115];
 
-		/// <summary>
-		/// 百花牧鹿童
-		/// </summary>
 		public static RandomEnemyItem BaihuaMember0 => Instance[(short)116];
 
-		/// <summary>
-		/// 隐退的武当前辈
-		/// </summary>
 		public static RandomEnemyItem WudangRetiredSenior => Instance[(short)117];
 
-		/// <summary>
-		/// 武当掌门弟子
-		/// </summary>
 		public static RandomEnemyItem WudangMember6 => Instance[(short)118];
 
-		/// <summary>
-		/// 武当真传弟子
-		/// </summary>
 		public static RandomEnemyItem WudangMember5 => Instance[(short)119];
 
-		/// <summary>
-		/// 武当真武殿弟子
-		/// </summary>
 		public static RandomEnemyItem WudangMember4 => Instance[(short)120];
 
-		/// <summary>
-		/// 武当紫霄宫弟子
-		/// </summary>
 		public static RandomEnemyItem WudangMember3 => Instance[(short)121];
 
-		/// <summary>
-		/// 武当太和宫弟子
-		/// </summary>
 		public static RandomEnemyItem WudangMember2 => Instance[(short)122];
 
-		/// <summary>
-		/// 武当接引道人
-		/// </summary>
 		public static RandomEnemyItem WudangMember1 => Instance[(short)123];
 
-		/// <summary>
-		/// 武当外门弟子
-		/// </summary>
 		public static RandomEnemyItem WudangMember0 => Instance[(short)124];
 
-		/// <summary>
-		/// 隐退的元山前辈
-		/// </summary>
 		public static RandomEnemyItem YuanshanRetiredSenior => Instance[(short)125];
 
-		/// <summary>
-		/// 元山伏魔众
-		/// </summary>
 		public static RandomEnemyItem YuanshanMember6 => Instance[(short)126];
 
-		/// <summary>
-		/// 元山传法众
-		/// </summary>
 		public static RandomEnemyItem YuanshanMember5 => Instance[(short)127];
 
-		/// <summary>
-		/// 元山苦行众
-		/// </summary>
 		public static RandomEnemyItem YuanshanMember4 => Instance[(short)128];
 
-		/// <summary>
-		/// 元山护法弟子
-		/// </summary>
 		public static RandomEnemyItem YuanshanMember3 => Instance[(short)129];
 
-		/// <summary>
-		/// 元山石牢弟子
-		/// </summary>
 		public static RandomEnemyItem YuanshanMember2 => Instance[(short)130];
 
-		/// <summary>
-		/// 元山入门弟子
-		/// </summary>
 		public static RandomEnemyItem YuanshanMember1 => Instance[(short)131];
 
-		/// <summary>
-		/// 元山受戒仆
-		/// </summary>
 		public static RandomEnemyItem YuanshanMember0 => Instance[(short)132];
 
-		/// <summary>
-		/// 隐退的狮相前辈
-		/// </summary>
 		public static RandomEnemyItem ShixiangRetiredSenior => Instance[(short)133];
 
-		/// <summary>
-		/// 狮相狂狮强手
-		/// </summary>
 		public static RandomEnemyItem ShixiangMember6 => Instance[(short)134];
 
-		/// <summary>
-		/// 狮相锦狮强手
-		/// </summary>
 		public static RandomEnemyItem ShixiangMember5 => Instance[(short)135];
 
-		/// <summary>
-		/// 狮相睡狮强手
-		/// </summary>
 		public static RandomEnemyItem ShixiangMember4 => Instance[(short)136];
 
-		/// <summary>
-		/// 狮相狂狮堂弟子
-		/// </summary>
 		public static RandomEnemyItem ShixiangMember3 => Instance[(short)137];
 
-		/// <summary>
-		/// 狮相锦狮堂弟子
-		/// </summary>
 		public static RandomEnemyItem ShixiangMember2 => Instance[(short)138];
 
-		/// <summary>
-		/// 狮相睡狮堂弟子
-		/// </summary>
 		public static RandomEnemyItem ShixiangMember1 => Instance[(short)139];
 
-		/// <summary>
-		/// 狮相狮崽子
-		/// </summary>
 		public static RandomEnemyItem ShixiangMember0 => Instance[(short)140];
 
-		/// <summary>
-		/// 隐退的然山前辈
-		/// </summary>
 		public static RandomEnemyItem RanshanRetiredSenior => Instance[(short)141];
 
-		/// <summary>
-		/// 然山青琅护法
-		/// </summary>
 		public static RandomEnemyItem RanshanMember6 => Instance[(short)142];
 
-		/// <summary>
-		/// 然山三宗传人
-		/// </summary>
 		public static RandomEnemyItem RanshanMember5 => Instance[(short)143];
 
-		/// <summary>
-		/// 然山玉符宗游士
-		/// </summary>
 		public static RandomEnemyItem RanshanMember4 => Instance[(short)144];
 
-		/// <summary>
-		/// 然山神剑宗游士
-		/// </summary>
 		public static RandomEnemyItem RanshanMember3 => Instance[(short)145];
 
-		/// <summary>
-		/// 然山阴阳宗游士
-		/// </summary>
 		public static RandomEnemyItem RanshanMember2 => Instance[(short)146];
 
-		/// <summary>
-		/// 然山剑奴
-		/// </summary>
 		public static RandomEnemyItem RanshanMember1 => Instance[(short)147];
 
-		/// <summary>
-		/// 然山散人
-		/// </summary>
 		public static RandomEnemyItem RanshanMember0 => Instance[(short)148];
 
-		/// <summary>
-		/// 隐退的璇女前辈
-		/// </summary>
 		public static RandomEnemyItem XuannvRetiredSenior => Instance[(short)149];
 
-		/// <summary>
-		/// 璇女羽衣使
-		/// </summary>
 		public static RandomEnemyItem XuannvMember6 => Instance[(short)150];
 
-		/// <summary>
-		/// 璇女霓裳使
-		/// </summary>
 		public static RandomEnemyItem XuannvMember5 => Instance[(short)151];
 
-		/// <summary>
-		/// 璇女守玉人
-		/// </summary>
 		public static RandomEnemyItem XuannvMember4 => Instance[(short)152];
 
-		/// <summary>
-		/// 璇女天音阁弟子
-		/// </summary>
 		public static RandomEnemyItem XuannvMember3 => Instance[(short)153];
 
-		/// <summary>
-		/// 璇女内门弟子
-		/// </summary>
 		public static RandomEnemyItem XuannvMember2 => Instance[(short)154];
 
-		/// <summary>
-		/// 璇女外门弟子
-		/// </summary>
 		public static RandomEnemyItem XuannvMember1 => Instance[(short)155];
 
-		/// <summary>
-		/// 璇女婢子
-		/// </summary>
 		public static RandomEnemyItem XuannvMember0 => Instance[(short)156];
 
-		/// <summary>
-		/// 隐退的铸剑前辈
-		/// </summary>
 		public static RandomEnemyItem ZhujianRetiredSenior => Instance[(short)157];
 
-		/// <summary>
-		/// 铸剑七星匠
-		/// </summary>
 		public static RandomEnemyItem ZhujianMember6 => Instance[(short)158];
 
-		/// <summary>
-		/// 铸剑玄鸿匠
-		/// </summary>
 		public static RandomEnemyItem ZhujianMember5 => Instance[(short)159];
 
-		/// <summary>
-		/// 铸剑镇山匠
-		/// </summary>
 		public static RandomEnemyItem ZhujianMember4 => Instance[(short)160];
 
-		/// <summary>
-		/// 铸剑百辟匠
-		/// </summary>
 		public static RandomEnemyItem ZhujianMember3 => Instance[(short)161];
 
-		/// <summary>
-		/// 铸剑青君匠
-		/// </summary>
 		public static RandomEnemyItem ZhujianMember2 => Instance[(short)162];
 
-		/// <summary>
-		/// 铸剑学徒
-		/// </summary>
 		public static RandomEnemyItem ZhujianMember1 => Instance[(short)163];
 
-		/// <summary>
-		/// 铸剑火工
-		/// </summary>
 		public static RandomEnemyItem ZhujianMember0 => Instance[(short)164];
 
-		/// <summary>
-		/// 隐退的空桑前辈
-		/// </summary>
 		public static RandomEnemyItem KongsangRetiredSenior => Instance[(short)165];
 
-		/// <summary>
-		/// 空桑长老
-		/// </summary>
 		public static RandomEnemyItem KongsangMember6 => Instance[(short)166];
 
-		/// <summary>
-		/// 空桑蛟士
-		/// </summary>
 		public static RandomEnemyItem KongsangMember5 => Instance[(short)167];
 
-		/// <summary>
-		/// 空桑持鼎首徒
-		/// </summary>
 		public static RandomEnemyItem KongsangMember4 => Instance[(short)168];
 
-		/// <summary>
-		/// 空桑玄炉院弟子
-		/// </summary>
 		public static RandomEnemyItem KongsangMember3 => Instance[(short)169];
 
-		/// <summary>
-		/// 空桑蛟王院弟子
-		/// </summary>
 		public static RandomEnemyItem KongsangMember2 => Instance[(short)170];
 
-		/// <summary>
-		/// 空桑朱砭院弟子
-		/// </summary>
 		public static RandomEnemyItem KongsangMember1 => Instance[(short)171];
 
-		/// <summary>
-		/// 空桑药童
-		/// </summary>
 		public static RandomEnemyItem KongsangMember0 => Instance[(short)172];
 
-		/// <summary>
-		/// 隐退的金刚前辈
-		/// </summary>
 		public static RandomEnemyItem JingangRetiredSenior => Instance[(short)173];
 
-		/// <summary>
-		/// 金刚上尊
-		/// </summary>
 		public static RandomEnemyItem JingangMember6 => Instance[(short)174];
 
-		/// <summary>
-		/// 金刚护法尊者
-		/// </summary>
 		public static RandomEnemyItem JingangMember5 => Instance[(short)175];
 
-		/// <summary>
-		/// 金刚金刚力士
-		/// </summary>
 		public static RandomEnemyItem JingangMember4 => Instance[(short)176];
 
-		/// <summary>
-		/// 金刚不动殿弟子
-		/// </summary>
 		public static RandomEnemyItem JingangMember3 => Instance[(short)177];
 
-		/// <summary>
-		/// 金刚金刚院弟子
-		/// </summary>
 		public static RandomEnemyItem JingangMember2 => Instance[(short)178];
 
-		/// <summary>
-		/// 金刚罗刹院弟子
-		/// </summary>
 		public static RandomEnemyItem JingangMember1 => Instance[(short)179];
 
-		/// <summary>
-		/// 金刚净火童
-		/// </summary>
 		public static RandomEnemyItem JingangMember0 => Instance[(short)180];
 
-		/// <summary>
-		/// 隐退的五仙前辈
-		/// </summary>
 		public static RandomEnemyItem WuxianRetiredSenior => Instance[(short)181];
 
-		/// <summary>
-		/// 五仙巫相
-		/// </summary>
 		public static RandomEnemyItem WuxianMember6 => Instance[(short)182];
 
-		/// <summary>
-		/// 五仙族长
-		/// </summary>
 		public static RandomEnemyItem WuxianMember5 => Instance[(short)183];
 
-		/// <summary>
-		/// 五仙仙娘使
-		/// </summary>
 		public static RandomEnemyItem WuxianMember4 => Instance[(short)184];
 
-		/// <summary>
-		/// 五仙五毒使
-		/// </summary>
 		public static RandomEnemyItem WuxianMember3 => Instance[(short)185];
 
-		/// <summary>
-		/// 五仙花蛊部众
-		/// </summary>
 		public static RandomEnemyItem WuxianMember2 => Instance[(short)186];
 
-		/// <summary>
-		/// 五仙五毒部众
-		/// </summary>
 		public static RandomEnemyItem WuxianMember1 => Instance[(short)187];
 
-		/// <summary>
-		/// 五仙教众
-		/// </summary>
 		public static RandomEnemyItem WuxianMember0 => Instance[(short)188];
 
-		/// <summary>
-		/// 隐退的界青前辈
-		/// </summary>
 		public static RandomEnemyItem JieqingRetiredSenior => Instance[(short)189];
 
-		/// <summary>
-		/// 界青七宿鬼
-		/// </summary>
 		public static RandomEnemyItem JieqingMember6 => Instance[(short)190];
 
-		/// <summary>
-		/// 界青魁首
-		/// </summary>
 		public static RandomEnemyItem JieqingMember5 => Instance[(short)191];
 
-		/// <summary>
-		/// 界青死士
-		/// </summary>
 		public static RandomEnemyItem JieqingMember4 => Instance[(short)192];
 
-		/// <summary>
-		/// 界青杀手
-		/// </summary>
 		public static RandomEnemyItem JieqingMember3 => Instance[(short)193];
 
-		/// <summary>
-		/// 界青门人
-		/// </summary>
 		public static RandomEnemyItem JieqingMember2 => Instance[(short)194];
 
-		/// <summary>
-		/// 界青引路人
-		/// </summary>
 		public static RandomEnemyItem JieqingMember1 => Instance[(short)195];
 
-		/// <summary>
-		/// 界青外门众
-		/// </summary>
 		public static RandomEnemyItem JieqingMember0 => Instance[(short)196];
 
-		/// <summary>
-		/// 隐退的伏龙前辈
-		/// </summary>
 		public static RandomEnemyItem FulongRetiredSenior => Instance[(short)197];
 
-		/// <summary>
-		/// 伏龙龙头长老
-		/// </summary>
 		public static RandomEnemyItem FulongMember6 => Instance[(short)198];
 
-		/// <summary>
-		/// 伏龙首徒
-		/// </summary>
 		public static RandomEnemyItem FulongMember5 => Instance[(short)199];
 
-		/// <summary>
-		/// 伏龙巡海使
-		/// </summary>
 		public static RandomEnemyItem FulongMember4 => Instance[(short)200];
 
-		/// <summary>
-		/// 伏龙赐姓弟子
-		/// </summary>
 		public static RandomEnemyItem FulongMember3 => Instance[(short)201];
 
-		/// <summary>
-		/// 伏龙入门弟子
-		/// </summary>
 		public static RandomEnemyItem FulongMember2 => Instance[(short)202];
 
-		/// <summary>
-		/// 伏龙外姓弟子
-		/// </summary>
 		public static RandomEnemyItem FulongMember1 => Instance[(short)203];
 
-		/// <summary>
-		/// 伏龙岛众
-		/// </summary>
 		public static RandomEnemyItem FulongMember0 => Instance[(short)204];
 
-		/// <summary>
-		/// 隐退的血犼前辈
-		/// </summary>
 		public static RandomEnemyItem XuehouRetiredSenior => Instance[(short)205];
 
-		/// <summary>
-		/// 血犼长老
-		/// </summary>
 		public static RandomEnemyItem XuehouMember6 => Instance[(short)206];
 
-		/// <summary>
-		/// 血犼犼母圣使
-		/// </summary>
 		public static RandomEnemyItem XuehouMember5 => Instance[(short)207];
 
-		/// <summary>
-		/// 血犼护法
-		/// </summary>
 		public static RandomEnemyItem XuehouMember4 => Instance[(short)208];
 
-		/// <summary>
-		/// 血犼血童子
-		/// </summary>
 		public static RandomEnemyItem XuehouMember3 => Instance[(short)209];
 
-		/// <summary>
-		/// 血犼精英
-		/// </summary>
 		public static RandomEnemyItem XuehouMember2 => Instance[(short)210];
 
-		/// <summary>
-		/// 血犼教众
-		/// </summary>
 		public static RandomEnemyItem XuehouMember1 => Instance[(short)211];
 
-		/// <summary>
-		/// 血犼杂役
-		/// </summary>
 		public static RandomEnemyItem XuehouMember0 => Instance[(short)212];
 
-		/// <summary>
-		/// 兔儿郎
-		/// </summary>
 		public static RandomEnemyItem FoxyBoy => Instance[(short)233];
 
-		/// <summary>
-		/// 浪子
-		/// </summary>
 		public static RandomEnemyItem DevilishMan => Instance[(short)234];
 
-		/// <summary>
-		/// 裙带倌
-		/// </summary>
 		public static RandomEnemyItem PoisonousWidower => Instance[(short)235];
 
-		/// <summary>
-		/// 风流客
-		/// </summary>
 		public static RandomEnemyItem PhilanderingMan => Instance[(short)236];
 
-		/// <summary>
-		/// 粉面郎君
-		/// </summary>
 		public static RandomEnemyItem FairFaceKing => Instance[(short)237];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static RandomEnemy Instance = new RandomEnemy();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "SectIds", "RequireAttackSkillType", "PoisonsToAdd", "TemplateId", "PracticeRandomRange" };

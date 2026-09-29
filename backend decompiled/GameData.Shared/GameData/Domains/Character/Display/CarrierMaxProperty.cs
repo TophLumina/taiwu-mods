@@ -24,16 +24,10 @@ public class CarrierMaxProperty : ISerializableGameData
 	[SerializableGameDataField]
 	public int WorkingCarrierCaptureRateBonus;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CarrierMaxProperty()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CarrierMaxProperty(CarrierMaxProperty other)
 	{
 		WorkingCarrierMaxInventoryLoadBonus = other.WorkingCarrierMaxInventoryLoadBonus;
@@ -44,9 +38,6 @@ public class CarrierMaxProperty : ISerializableGameData
 		WorkingCarrierCaptureRateBonus = other.WorkingCarrierCaptureRateBonus;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CarrierMaxProperty other)
 	{
 		WorkingCarrierMaxInventoryLoadBonus = other.WorkingCarrierMaxInventoryLoadBonus;

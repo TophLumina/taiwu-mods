@@ -7,9 +7,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.World.Display;
 
-/// <summary>
-/// 地区主线 - 铸剑 - 机关人属性显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class SectZhujianGearMateAttributeDisplayData : ISerializableGameData
 {
@@ -28,27 +25,15 @@ public class SectZhujianGearMateAttributeDisplayData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "GearMate", "Items", "MainAttributes", "CanUseWarehouse" };
 	}
 
-	/// <summary>
-	/// 机关人数据
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public GearMate GearMate;
 
-	/// <summary>
-	/// 角色可用物品（包含背包、仓库、公库等）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public List<ItemDisplayData> Items;
 
-	/// <summary>
-	/// 机关人主要属性
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public List<int> MainAttributes;
 
-	/// <summary>
-	/// 是否可以使用仓库
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public bool CanUseWarehouse;
 

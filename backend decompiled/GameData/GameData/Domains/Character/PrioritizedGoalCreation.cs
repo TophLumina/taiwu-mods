@@ -248,7 +248,7 @@ public class PrioritizedGoalCreation
 		int adventureId = -1;
 		foreach (AdventureRuntime runtime in DomainManager.Adventure.QueryAdventuresInArea(selfLocation.AreaId))
 		{
-			if (!ResourceDisasterHelper.IsDisasterAdventure(runtime.CoreId) || !runtime.StatusType.IsActive())
+			if (!ResourceDisasterHelper.IsDisasterAdventure(runtime.CoreId) || !runtime.StatusType.IsActive() || runtime.RemainMonths < runtime.Core.StayMonths - 1)
 			{
 				continue;
 			}
@@ -326,23 +326,24 @@ public class PrioritizedGoalCreation
 	private static bool AdoptInfant(DataContext context, Character selfChar)
 	{
 		int selfCharId = selfChar.GetId();
-		if (!DomainManager.Character.TryGetBloodRelationInfant(selfCharId, out var infantId))
+		CharacterGoalData existingGoal = selfChar.GetGoal(268);
+		if (existingGoal != null && DomainManager.Character.IsCharacterPotentialInfantAdopter(existingGoal.Args.TargetCharId, selfCharId))
 		{
-			if (!DomainManager.Character.TryGetClosestInfant(selfCharId, out var infantData))
-			{
-				return false;
-			}
-			(infantId, _) = infantData;
-		}
-		if (DomainManager.Character.InfantHasPotentialAdopter(infantId))
-		{
-			if (!DomainManager.Character.IsCharacterPotentialInfantAdopter(infantId, selfCharId))
-			{
-				return false;
-			}
 			return true;
 		}
-		if (!DomainManager.Character.TryGetElement_Objects(infantId, out var _) || context.Random.CheckProb(50, 100))
+		if (!DomainManager.Character.TryGetAssignedInfant(selfCharId, out var infantId))
+		{
+			return false;
+		}
+		if (!DomainManager.Character.TryGetElement_Objects(infantId, out var _))
+		{
+			return false;
+		}
+		if (existingGoal != null && existingGoal.Args.TargetCharId == infantId)
+		{
+			return true;
+		}
+		if (DomainManager.Character.InfantHasPotentialAdopter(infantId) && !DomainManager.Character.IsCharacterPotentialInfantAdopter(infantId, selfCharId))
 		{
 			return false;
 		}
@@ -678,6 +679,26 @@ public class PrioritizedGoalCreation
 			return false;
 		}
 		return selfChar.OfflineAddGoal(274, targetCharId);
+	}
+
+	private static bool ReturnHome(DataContext context, Character selfChar)
+	{
+		OrganizationInfo orgInfo = selfChar.GetOrganizationInfo();
+		if (orgInfo.SettlementId < 0)
+		{
+			return false;
+		}
+		OrganizationMemberItem orgMemberCfg = orgInfo.GetOrgMemberConfig();
+		if (orgMemberCfg.CanStroll)
+		{
+			return false;
+		}
+		if (selfChar.IsOnHomeSettlement())
+		{
+			return false;
+		}
+		Location location = DomainManager.Organization.GetSettlement(orgInfo.SettlementId).GetLocation();
+		return selfChar.OfflineAddGoal(275, location);
 	}
 
 	public static bool CheckHuntTaiwuCondition(short featureId, int killerConsummateLevel, int taiwuConsummateLevel)

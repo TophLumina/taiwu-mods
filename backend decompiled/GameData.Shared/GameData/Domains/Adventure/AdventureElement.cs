@@ -8,9 +8,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇元素
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class AdventureElement : IAdventureParticipant, IAdventureParameterProvider, ISerializableGameData
 {
@@ -41,102 +38,50 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		public static readonly string[] FieldId2FieldName = new string[10] { "Id", "CoreId", "InternalIndex", "CharacterId", "MovingIndex", "MovingTimer", "PatrolledIndexes", "ParameterValues", "VisibleIndex", "ResetTarget" };
 	}
 
-	/// <summary>
-	/// 因未配置可见条件而可见的索引
-	/// </summary>
 	public const int VisibleByDefaultIndex = int.MaxValue;
 
-	/// <summary>
-	/// 运行时 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int Id;
 
-	/// <summary>
-	/// 元素库 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int CoreId;
 
-	/// <summary>
-	/// 当前位置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	private AdventureBlockIndex _internalIndex;
 
-	/// <summary>
-	/// 对应角色 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public int CharacterId;
 
-	/// <summary>
-	/// 正在行动的规则序号
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	private int _movingIndex;
 
-	/// <summary>
-	/// 正在行动的规则计时器
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	private int _movingTimer;
 
-	/// <summary>
-	/// 已巡逻的地格
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	private List<AdventureBlockIndex> _patrolledIndexes;
 
-	/// <summary>
-	/// 变量值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	private Dictionary<AdventureParameterKey, AdventureParameterValue> _parameterValues;
 
-	/// <summary>
-	/// 可见索引
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public int VisibleIndex;
 
-	/// <summary>
-	/// 初始生成位置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	private AdventureBlockIndex _resetTarget;
 
-	/// <summary>
-	/// 索引
-	/// </summary>
 	public AdventureBlockIndex Index => _internalIndex;
 
-	/// <summary>
-	/// 复位目标
-	/// </summary>
 	public AdventureBlockIndex ResetTarget => _resetTarget;
 
-	/// <summary>
-	/// 是否可见
-	/// </summary>
 	public bool Visible => VisibleIndex >= 0;
 
-	/// <summary>
-	/// 是否因未配置可见条件而可见
-	/// </summary>
 	public bool VisibleByDefault => VisibleIndex == int.MaxValue;
 
-	/// <inheritdoc />
 	IReadOnlyList<AdventureParameterData> IAdventureParameterProvider.Parameters => Core.Parameters;
 
-	/// <summary>
-	/// 核心数据
-	/// </summary>
 	public AdventureElementData Core => ExternalDataBridge.Context.AdventureCore.GetAdventureElementData(CoreId);
 
-	/// <summary>
-	/// 基于数据构造奇遇元素
-	/// </summary>
 	public AdventureElement(int id, int coreId, AdventureBlockIndex index)
 	{
 		Id = id;
@@ -148,29 +93,21 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		this.InitializeParameters();
 	}
 
-	/// <summary>
-	/// 设置索引
-	/// </summary>
 	public void SetIndex(AdventureBlockIndex index)
 	{
 		_internalIndex = index;
 	}
 
-	/// <summary>
-	/// 绑定角色
-	/// </summary>
 	internal void BindCharacter(int charId)
 	{
 		CharacterId = charId;
 	}
 
-	/// <inheritdoc />
 	public AdventureParameterValue? GetParameterOrNull(AdventureParameterKey key)
 	{
 		return _parameterValues?.GetOrNull(key);
 	}
 
-	/// <inheritdoc />
 	public void SetParameter(AdventureParameterKey key, AdventureParameterValue value)
 	{
 		if (_parameterValues == null)
@@ -180,24 +117,16 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		_parameterValues[key] = value;
 	}
 
-	/// <inheritdoc />
 	public void RemoveParameter(AdventureParameterKey key)
 	{
 		_parameterValues?.Remove(key);
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		return $"{Core.Name}({Id})";
 	}
 
-	/// <summary>
-	/// 更新状态信息
-	/// </summary>
-	/// <param name="bridge"></param>
-	/// <param name="adventureId"></param>
-	/// <returns></returns>
 	public bool UpdateStatus(IAdventureDomainBridge bridge, int adventureId)
 	{
 		int visibleIndex = -1;
@@ -226,9 +155,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		return true;
 	}
 
-	/// <summary>
-	/// 尝试获取跟随目标
-	/// </summary>
 	public AdventureBlockIndex? GetFollowTarget(AdventureRuntime adventure)
 	{
 		if (this.TryGetParameter("ConchShipPresetKey_FollowTargetElementId", out var elementId))
@@ -246,14 +172,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		return null;
 	}
 
-	/// <summary>
-	/// 更新移动状态
-	/// </summary>
-	/// <param name="bridge"></param>
-	/// <param name="random"></param>
-	/// <param name="adventure">所属奇遇</param>
-	/// <param name="costedTime">太吾已消耗的精力</param>
-	/// <returns>移动次数，负数表示未产生数据变化</returns>
 	public int UpdateMove(IAdventureDomainBridge bridge, IRandomSource random, AdventureRuntime adventure, int costedTime)
 	{
 		int moveTimes = -1;
@@ -289,14 +207,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		return moveTimes;
 	}
 
-	/// <summary>
-	/// 根据指定移动规则执行一次移动
-	/// </summary>
-	/// <param name="bridge"></param>
-	/// <param name="random"></param>
-	/// <param name="adventure"></param>
-	/// <param name="data">移动数据</param>
-	/// <param name="moveTimes">移动次数</param>
 	private void DoMove(IAdventureDomainBridge bridge, IRandomSource random, AdventureRuntime adventure, AdventureElementMoveData data, int moveTimes)
 	{
 		AdventureTaiwu runtime = bridge.GetAdventureTaiwu();
@@ -373,12 +283,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		ObjectPool<List<IAdventureParticipant>>.Instance.Return(participants);
 	}
 
-	/// <summary>
-	/// 随机移动若干次
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="adventure"></param>
-	/// <param name="moveTimes"></param>
 	private void DoMoveRandom(IRandomSource random, AdventureRuntime adventure, int moveTimes)
 	{
 		List<AdventureBlockIndex> pool = ObjectPool<List<AdventureBlockIndex>>.Instance.Get();
@@ -403,14 +307,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		ObjectPool<List<AdventureBlockIndex>>.Instance.Return(pool);
 	}
 
-	/// <summary>
-	/// 巡逻移动若干次
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="adventure"></param>
-	/// <param name="moveTimes"></param>
-	/// <param name="data"></param>
-	/// <param name="checker"></param>
 	private void DoMovePatrol(IRandomSource random, AdventureRuntime adventure, int moveTimes, AdventureElementMoveData data, AdventurePatrolTargetChecker checker)
 	{
 		if (_patrolledIndexes == null)
@@ -459,9 +355,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		ObjectPool<List<AdventureBlockIndex>>.Instance.Return(pool);
 	}
 
-	/// <summary>
-	/// 通过寻路向目标移动若干次
-	/// </summary>
 	private bool DoMoveAStar(AdventureRuntime adventure, AdventureBlockIndex target, int moveTimes)
 	{
 		if (target == Index)
@@ -479,13 +372,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		return true;
 	}
 
-	/// <summary>
-	/// 向指定参与者靠近若干次
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="adventure"></param>
-	/// <param name="moveTimes"></param>
-	/// <param name="participants"></param>
 	private void DoMoveCloser(IRandomSource random, AdventureRuntime adventure, int moveTimes, IReadOnlyList<IAdventureParticipant> participants)
 	{
 		List<AdventureBlockIndex> pool = ObjectPool<List<AdventureBlockIndex>>.Instance.Get();
@@ -522,13 +408,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		ObjectPool<List<AdventureBlockIndex>>.Instance.Return(pool);
 	}
 
-	/// <summary>
-	/// 向指定参与者远离若干次
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="adventure"></param>
-	/// <param name="moveTimes"></param>
-	/// <param name="participants"></param>
 	private void DoMoveAway(IRandomSource random, AdventureRuntime adventure, int moveTimes, IReadOnlyList<IAdventureParticipant> participants)
 	{
 		List<AdventureBlockIndex> pool = ObjectPool<List<AdventureBlockIndex>>.Instance.Get();
@@ -576,16 +455,10 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		ObjectPool<List<AdventureBlockIndex>>.Instance.Return(pool);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AdventureElement()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AdventureElement(AdventureElement other)
 	{
 		Id = other.Id;
@@ -600,9 +473,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		_resetTarget = other._resetTarget;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AdventureElement other)
 	{
 		Id = other.Id;
@@ -617,13 +487,11 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		_resetTarget = other._resetTarget;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 26;
@@ -650,7 +518,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -701,7 +568,6 @@ public class AdventureElement : IAdventureParticipant, IAdventureParameterProvid
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

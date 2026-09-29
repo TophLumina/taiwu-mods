@@ -9,501 +9,204 @@ namespace Config;
 [Serializable]
 public class ProtagonistFeature : ConfigData<ProtagonistFeatureItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 锋从磨砺
-		/// </summary>
 		public const short Strength = 0;
 
-		/// <summary>
-		/// 迅由危亡
-		/// </summary>
 		public const short Dexterity = 1;
 
-		/// <summary>
-		/// 开山辟路
-		/// </summary>
 		public const short Attack = 2;
 
-		/// <summary>
-		/// 御抵山洪
-		/// </summary>
 		public const short Defend = 3;
 
-		/// <summary>
-		/// 纯凭自然
-		/// </summary>
 		public const short Vitality = 4;
 
-		/// <summary>
-		/// 形因境变
-		/// </summary>
 		public const short Energy = 5;
 
-		/// <summary>
-		/// 逐鹰驱虎
-		/// </summary>
 		public const short Hit = 6;
 
-		/// <summary>
-		/// 世外不染
-		/// </summary>
 		public const short Avoid = 7;
 
-		/// <summary>
-		/// 香自苦寒
-		/// </summary>
 		public const short Concentration = 8;
 
-		/// <summary>
-		/// 意随心寂
-		/// </summary>
 		public const short Intelligence = 9;
 
-		/// <summary>
-		/// 天地铸就
-		/// </summary>
 		public const short DamageStep = 10;
 
-		/// <summary>
-		/// 七元炽盛
-		/// </summary>
 		public const short Personality = 11;
 
-		/// <summary>
-		/// 谷中秘友
-		/// </summary>
 		public const short CloseFriend = 12;
 
-		/// <summary>
-		/// 梦境中人
-		/// </summary>
 		public const short Attraction = 13;
 
-		/// <summary>
-		/// 白额灵蛇
-		/// </summary>
 		public const short PoisonResists = 14;
 
-		/// <summary>
-		/// 服芝食玉
-		/// </summary>
 		public const short Longevity = 15;
 
-		/// <summary>
-		/// 东搜西罗
-		/// </summary>
 		public const short MaterialResources = 16;
 
-		/// <summary>
-		/// 十枚碎金
-		/// </summary>
 		public const short Money = 17;
 
-		/// <summary>
-		/// 桂酒椒浆
-		/// </summary>
 		public const short Wines = 18;
 
-		/// <summary>
-		/// 翠叶古茗
-		/// </summary>
 		public const short Teas = 19;
 
-		/// <summary>
-		/// 褓衣似锦
-		/// </summary>
 		public const short Clothing = 20;
 
-		/// <summary>
-		/// 缠云登天
-		/// </summary>
 		public const short Rope = 21;
 
-		/// <summary>
-		/// 泥封古罐
-		/// </summary>
 		public const short CricketJar = 22;
 
-		/// <summary>
-		/// 山野滋味
-		/// </summary>
 		public const short Food = 23;
 
-		/// <summary>
-		/// 驰马试剑
-		/// </summary>
 		public const short Horse = 24;
 
-		/// <summary>
-		/// 山海种源
-		/// </summary>
 		public const short BuildingMaterial = 25;
 
-		/// <summary>
-		/// 怪窟诡物
-		/// </summary>
 		public const short PoisonMaterials = 26;
 
-		/// <summary>
-		/// 灰炉遗药
-		/// </summary>
 		public const short Medicines = 27;
 
-		/// <summary>
-		/// 七宝号印
-		/// </summary>
 		public const short SealOfMerchant = 28;
 
-		/// <summary>
-		/// 异果下凡
-		/// </summary>
 		public const short Fruit = 29;
 
-		/// <summary>
-		/// 家传宝物
-		/// </summary>
 		public const short Accessory = 30;
 
-		/// <summary>
-		/// 盛世集录
-		/// </summary>
 		public const short Construction = 31;
 
-		/// <summary>
-		/// 琴棋书画
-		/// </summary>
 		public const short Literature = 32;
 
-		/// <summary>
-		/// 一任自然
-		/// </summary>
 		public const short Religion = 33;
 
-		/// <summary>
-		/// 医相星卜
-		/// </summary>
 		public const short WitchDoctor = 34;
 
-		/// <summary>
-		/// 天工开物
-		/// </summary>
 		public const short Artisan = 35;
 
-		/// <summary>
-		/// 拳脚无双
-		/// </summary>
 		public const short FistFeet = 36;
 
-		/// <summary>
-		/// 剑气刀光
-		/// </summary>
 		public const short SwordBlade = 37;
 
-		/// <summary>
-		/// 星流电转
-		/// </summary>
 		public const short ThrowShot = 38;
 
-		/// <summary>
-		/// 奇门巧力
-		/// </summary>
 		public const short SpecialWhip = 39;
 
-		/// <summary>
-		/// 璞玉韬光
-		/// </summary>
 		public const short LifeSkillLearning = 40;
 
-		/// <summary>
-		/// 神锋敛彩
-		/// </summary>
 		public const short CombatSkillLearning = 41;
 
-		/// <summary>
-		/// 天材地宝
-		/// </summary>
 		public const short CraftMaterials = 42;
 
-		/// <summary>
-		/// 先利其器
-		/// </summary>
 		public const short CraftTools = 43;
 
-		/// <summary>
-		/// 幽谷奇音
-		/// </summary>
 		public const short CombatMusic = 44;
 
-		/// <summary>
-		/// 天人造化
-		/// </summary>
 		public const short MartialArtist = 45;
 
-		/// <summary>
-		/// 天地演画
-		/// </summary>
 		public const short GenericGridCount = 46;
 
-		/// <summary>
-		/// 古冢遗刻
-		/// </summary>
 		public const short SkillBooks = 47;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 锋从磨砺
-		/// </summary>
 		public static ProtagonistFeatureItem Strength => Instance[(short)0];
 
-		/// <summary>
-		/// 迅由危亡
-		/// </summary>
 		public static ProtagonistFeatureItem Dexterity => Instance[(short)1];
 
-		/// <summary>
-		/// 开山辟路
-		/// </summary>
 		public static ProtagonistFeatureItem Attack => Instance[(short)2];
 
-		/// <summary>
-		/// 御抵山洪
-		/// </summary>
 		public static ProtagonistFeatureItem Defend => Instance[(short)3];
 
-		/// <summary>
-		/// 纯凭自然
-		/// </summary>
 		public static ProtagonistFeatureItem Vitality => Instance[(short)4];
 
-		/// <summary>
-		/// 形因境变
-		/// </summary>
 		public static ProtagonistFeatureItem Energy => Instance[(short)5];
 
-		/// <summary>
-		/// 逐鹰驱虎
-		/// </summary>
 		public static ProtagonistFeatureItem Hit => Instance[(short)6];
 
-		/// <summary>
-		/// 世外不染
-		/// </summary>
 		public static ProtagonistFeatureItem Avoid => Instance[(short)7];
 
-		/// <summary>
-		/// 香自苦寒
-		/// </summary>
 		public static ProtagonistFeatureItem Concentration => Instance[(short)8];
 
-		/// <summary>
-		/// 意随心寂
-		/// </summary>
 		public static ProtagonistFeatureItem Intelligence => Instance[(short)9];
 
-		/// <summary>
-		/// 天地铸就
-		/// </summary>
 		public static ProtagonistFeatureItem DamageStep => Instance[(short)10];
 
-		/// <summary>
-		/// 七元炽盛
-		/// </summary>
 		public static ProtagonistFeatureItem Personality => Instance[(short)11];
 
-		/// <summary>
-		/// 谷中秘友
-		/// </summary>
 		public static ProtagonistFeatureItem CloseFriend => Instance[(short)12];
 
-		/// <summary>
-		/// 梦境中人
-		/// </summary>
 		public static ProtagonistFeatureItem Attraction => Instance[(short)13];
 
-		/// <summary>
-		/// 白额灵蛇
-		/// </summary>
 		public static ProtagonistFeatureItem PoisonResists => Instance[(short)14];
 
-		/// <summary>
-		/// 服芝食玉
-		/// </summary>
 		public static ProtagonistFeatureItem Longevity => Instance[(short)15];
 
-		/// <summary>
-		/// 东搜西罗
-		/// </summary>
 		public static ProtagonistFeatureItem MaterialResources => Instance[(short)16];
 
-		/// <summary>
-		/// 十枚碎金
-		/// </summary>
 		public static ProtagonistFeatureItem Money => Instance[(short)17];
 
-		/// <summary>
-		/// 桂酒椒浆
-		/// </summary>
 		public static ProtagonistFeatureItem Wines => Instance[(short)18];
 
-		/// <summary>
-		/// 翠叶古茗
-		/// </summary>
 		public static ProtagonistFeatureItem Teas => Instance[(short)19];
 
-		/// <summary>
-		/// 褓衣似锦
-		/// </summary>
 		public static ProtagonistFeatureItem Clothing => Instance[(short)20];
 
-		/// <summary>
-		/// 缠云登天
-		/// </summary>
 		public static ProtagonistFeatureItem Rope => Instance[(short)21];
 
-		/// <summary>
-		/// 泥封古罐
-		/// </summary>
 		public static ProtagonistFeatureItem CricketJar => Instance[(short)22];
 
-		/// <summary>
-		/// 山野滋味
-		/// </summary>
 		public static ProtagonistFeatureItem Food => Instance[(short)23];
 
-		/// <summary>
-		/// 驰马试剑
-		/// </summary>
 		public static ProtagonistFeatureItem Horse => Instance[(short)24];
 
-		/// <summary>
-		/// 山海种源
-		/// </summary>
 		public static ProtagonistFeatureItem BuildingMaterial => Instance[(short)25];
 
-		/// <summary>
-		/// 怪窟诡物
-		/// </summary>
 		public static ProtagonistFeatureItem PoisonMaterials => Instance[(short)26];
 
-		/// <summary>
-		/// 灰炉遗药
-		/// </summary>
 		public static ProtagonistFeatureItem Medicines => Instance[(short)27];
 
-		/// <summary>
-		/// 七宝号印
-		/// </summary>
 		public static ProtagonistFeatureItem SealOfMerchant => Instance[(short)28];
 
-		/// <summary>
-		/// 异果下凡
-		/// </summary>
 		public static ProtagonistFeatureItem Fruit => Instance[(short)29];
 
-		/// <summary>
-		/// 家传宝物
-		/// </summary>
 		public static ProtagonistFeatureItem Accessory => Instance[(short)30];
 
-		/// <summary>
-		/// 盛世集录
-		/// </summary>
 		public static ProtagonistFeatureItem Construction => Instance[(short)31];
 
-		/// <summary>
-		/// 琴棋书画
-		/// </summary>
 		public static ProtagonistFeatureItem Literature => Instance[(short)32];
 
-		/// <summary>
-		/// 一任自然
-		/// </summary>
 		public static ProtagonistFeatureItem Religion => Instance[(short)33];
 
-		/// <summary>
-		/// 医相星卜
-		/// </summary>
 		public static ProtagonistFeatureItem WitchDoctor => Instance[(short)34];
 
-		/// <summary>
-		/// 天工开物
-		/// </summary>
 		public static ProtagonistFeatureItem Artisan => Instance[(short)35];
 
-		/// <summary>
-		/// 拳脚无双
-		/// </summary>
 		public static ProtagonistFeatureItem FistFeet => Instance[(short)36];
 
-		/// <summary>
-		/// 剑气刀光
-		/// </summary>
 		public static ProtagonistFeatureItem SwordBlade => Instance[(short)37];
 
-		/// <summary>
-		/// 星流电转
-		/// </summary>
 		public static ProtagonistFeatureItem ThrowShot => Instance[(short)38];
 
-		/// <summary>
-		/// 奇门巧力
-		/// </summary>
 		public static ProtagonistFeatureItem SpecialWhip => Instance[(short)39];
 
-		/// <summary>
-		/// 璞玉韬光
-		/// </summary>
 		public static ProtagonistFeatureItem LifeSkillLearning => Instance[(short)40];
 
-		/// <summary>
-		/// 神锋敛彩
-		/// </summary>
 		public static ProtagonistFeatureItem CombatSkillLearning => Instance[(short)41];
 
-		/// <summary>
-		/// 天材地宝
-		/// </summary>
 		public static ProtagonistFeatureItem CraftMaterials => Instance[(short)42];
 
-		/// <summary>
-		/// 先利其器
-		/// </summary>
 		public static ProtagonistFeatureItem CraftTools => Instance[(short)43];
 
-		/// <summary>
-		/// 幽谷奇音
-		/// </summary>
 		public static ProtagonistFeatureItem CombatMusic => Instance[(short)44];
 
-		/// <summary>
-		/// 天人造化
-		/// </summary>
 		public static ProtagonistFeatureItem MartialArtist => Instance[(short)45];
 
-		/// <summary>
-		/// 天地演画
-		/// </summary>
 		public static ProtagonistFeatureItem GenericGridCount => Instance[(short)46];
 
-		/// <summary>
-		/// 古冢遗刻
-		/// </summary>
 		public static ProtagonistFeatureItem SkillBooks => Instance[(short)47];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ProtagonistFeature Instance = new ProtagonistFeature();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "EffectDesc", "PermanentBonus", "CustomGroupItem", "CustomGroupName", "TemplateId", "Type", "Cost", "PrerequisiteCost" };

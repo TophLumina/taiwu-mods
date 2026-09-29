@@ -5,40 +5,22 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.EventOption;
 
-/// <summary>
-/// 选项消耗
-/// </summary>
 [Serializable]
 [SerializableGameData(NotForDisplayModule = true, NotForArchive = true)]
 public class EventOptionCost : ISerializableGameData
 {
-	/// <summary>
-	/// 消耗类型 <see cref="T:Config.EventOptionConsumeType.DefKey" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ConsumeType;
 
-	/// <summary>
-	/// 消耗数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int CostAmount;
 
-	/// <summary>
-	/// 是否自动扣除
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoConsume;
 
-	/// <summary>
-	/// 公式
-	/// </summary>
 	[SerializableGameDataField]
 	public string Expression;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public EventOptionCost()
 	{
 		ConsumeType = -1;
@@ -47,9 +29,6 @@ public class EventOptionCost : ISerializableGameData
 		Expression = null;
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public EventOptionCost(EventOptionCost other)
 	{
 		ConsumeType = other.ConsumeType;
@@ -58,9 +37,6 @@ public class EventOptionCost : ISerializableGameData
 		Expression = other.Expression;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(EventOptionCost other)
 	{
 		ConsumeType = other.ConsumeType;
@@ -69,13 +45,11 @@ public class EventOptionCost : ISerializableGameData
 		Expression = other.Expression;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -87,7 +61,6 @@ public class EventOptionCost : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -125,7 +98,6 @@ public class EventOptionCost : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

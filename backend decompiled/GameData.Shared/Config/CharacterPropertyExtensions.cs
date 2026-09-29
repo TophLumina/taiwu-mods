@@ -3,9 +3,6 @@ using Config.ConfigCells.Character;
 
 namespace Config;
 
-/// <summary>
-/// 角色属性扩展方法
-/// </summary>
 public static class CharacterPropertyExtensions
 {
 	public static ERefiningEffectAccessoryType ToRefiningEffectAccessoryType(this ECharacterPropertyReferencedType propertyType)
@@ -31,9 +28,6 @@ public static class CharacterPropertyExtensions
 		};
 	}
 
-	/// <summary>
-	/// 根据类型计算和，类型相同时返回加值，类型不同时返回零
-	/// </summary>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int Sum(this ECharacterPropertyReferencedType propertyType, PropertyAndValue propertyAndValue)
 	{
@@ -44,9 +38,6 @@ public static class CharacterPropertyExtensions
 		return propertyAndValue.Value;
 	}
 
-	/// <summary>
-	/// 根据类型计算和，类型相同时叠加，类型不同时返回原值
-	/// </summary>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int Sum(ECharacterPropertyReferencedType propertyType, PropertyAndValue propertyAndValue, int value)
 	{

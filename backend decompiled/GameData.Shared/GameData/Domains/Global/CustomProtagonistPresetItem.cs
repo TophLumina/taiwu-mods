@@ -8,9 +8,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Global;
 
-/// <summary>
-/// 自定义人物预设项
-/// </summary>
 [Serializable]
 [SerializableGameData(IsExtensible = true)]
 public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPresetItem>
@@ -36,45 +33,24 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		public static readonly string[] FieldId2FieldName = new string[7] { "NeiliProportion", "MainAttributes", "LifeSkillQualificationGrowthType", "CombatSkillQualificationGrowthType", "LifeSkillQualifications", "CombatSkillQualifications", "SelectedFeatures" };
 	}
 
-	/// <summary>
-	/// 内力五行属性
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public NeiliProportionOfFiveElements NeiliProportion;
 
-	/// <summary>
-	/// 主属性
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public MainAttributes MainAttributes;
 
-	/// <summary>
-	/// 技艺资质成长类型 <see cref="T:GameData.Domains.Character.SkillQualificationGrowthType" />
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public sbyte LifeSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 功法资质成长类型 <see cref="T:GameData.Domains.Character.SkillQualificationGrowthType" />
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public sbyte CombatSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 技艺资质
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public LifeSkillShorts LifeSkillQualifications;
 
-	/// <summary>
-	/// 功法资质
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public CombatSkillShorts CombatSkillQualifications;
 
-	/// <summary>
-	/// 选中的特性
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public List<short> SelectedFeatures;
 
@@ -98,9 +74,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 
 	private short CombatSkillDefault => Global.CustomProtagonistCombatSkillQualificationDefaultPoint;
 
-	/// <summary>
-	/// 内力属性
-	/// </summary>
 	public sbyte NeiliType
 	{
 		get
@@ -113,26 +86,12 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		}
 	}
 
-	/// <summary>
-	/// 主属性剩余点数
-	/// </summary>
 	public int MainAttributeRemainPoints => AttributeTotal - MainAttributes.GetSum();
 
-	/// <summary>
-	/// 技艺资质剩余点数
-	/// </summary>
 	public int LifeSkillQualificationRemainPoints => LifeSkillTotal - LifeSkillQualifications.GetSum();
 
-	/// <summary>
-	/// 功法资质剩余点数
-	/// </summary>
 	public int CombatSkillQualificationRemainPoints => CombatSkillTotal - CombatSkillQualifications.GetSum();
 
-	/// <summary>
-	/// 根据五行类型生成内力属性
-	/// </summary>
-	/// <param name="innateFiveElementsType">五行类型</param>
-	/// <returns></returns>
 	public static NeiliProportionOfFiveElements GenerateNeiliProportionByNeiliType(sbyte innateFiveElementsType)
 	{
 		NeiliProportionOfFiveElements result = default(NeiliProportionOfFiveElements);
@@ -153,11 +112,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		return result;
 	}
 
-	/// <summary>
-	/// 获取指定内力属性对应的标准内力类型，不为标准内力类型时返回 -1
-	/// </summary>
-	/// <param name="neiliProportion"></param>
-	/// <returns></returns>
 	public static sbyte GetNeiliTypeByProportion(NeiliProportionOfFiveElements neiliProportion)
 	{
 		for (sbyte i = 0; i <= 5; i++)
@@ -170,17 +124,11 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		return -1;
 	}
 
-	/// <summary>
-	/// 从配置表数据隐式转换
-	/// </summary>
 	public static implicit operator CustomProtagonistPresetItem(CharacterItem config)
 	{
 		return new CustomProtagonistPresetItem(config);
 	}
 
-	/// <summary>
-	/// 从配置表构造预设数据
-	/// </summary>
 	public CustomProtagonistPresetItem(CharacterItem config)
 	{
 		NeiliProportion = config.PresetNeiliProportionOfFiveElements;
@@ -192,33 +140,21 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		SelectedFeatures = ((config.FeatureIds == null) ? null : new List<short>(config.FeatureIds));
 	}
 
-	/// <summary>
-	/// 能否增加主属性
-	/// </summary>
 	public bool CanAddMainAttribute(sbyte mainAttributeType)
 	{
 		return MainAttributes[mainAttributeType] < AttributeMax;
 	}
 
-	/// <summary>
-	/// 能否增加技艺资质
-	/// </summary>
 	public bool CanAddLifeSkillQualification(sbyte lifeSkillType)
 	{
 		return LifeSkillQualifications[lifeSkillType] < LifeSkillMax;
 	}
 
-	/// <summary>
-	/// 能否增加功法资质
-	/// </summary>
 	public bool CanAddCombatSkillQualification(sbyte combatSkillType)
 	{
 		return CombatSkillQualifications[combatSkillType] < CombatSkillMax;
 	}
 
-	/// <summary>
-	/// 重置主属性加点
-	/// </summary>
 	public void ResetMainAttributes()
 	{
 		for (int i = 0; i < 6; i++)
@@ -227,9 +163,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		}
 	}
 
-	/// <summary>
-	/// 重置资质加点
-	/// </summary>
 	public void ResetQualifications()
 	{
 		LifeSkillQualificationGrowthType = 0;
@@ -244,9 +177,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		}
 	}
 
-	/// <summary>
-	/// 随机主属性加点
-	/// </summary>
 	public unsafe void RandomMainAttributes(IRandomSource random)
 	{
 		ResetMainAttributes();
@@ -257,9 +187,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		}
 	}
 
-	/// <summary>
-	/// 随机资质加点
-	/// </summary>
 	public unsafe void RandomQualifications(IRandomSource random)
 	{
 		ResetQualifications();
@@ -287,9 +214,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		}
 	}
 
-	/// <summary>
-	/// 改变主属性
-	/// </summary>
 	public void ChangeMainAttribute(sbyte type, int deltaValue)
 	{
 		if (deltaValue > 0)
@@ -299,9 +223,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		MainAttributes[type] = (short)Math.Clamp(MainAttributes[type] + deltaValue, 0, AttributeMax);
 	}
 
-	/// <summary>
-	/// 改变技艺资质
-	/// </summary>
 	public void ChangeLifeSkillQualification(sbyte type, int deltaValue)
 	{
 		if (deltaValue > 0)
@@ -311,9 +232,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		LifeSkillQualifications[type] = (short)Math.Clamp(LifeSkillQualifications[type] + deltaValue, 0, LifeSkillMax);
 	}
 
-	/// <summary>
-	/// 改变功法资质
-	/// </summary>
 	public void ChangeCombatSkillQualification(sbyte type, int deltaValue)
 	{
 		if (deltaValue > 0)
@@ -323,7 +241,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		CombatSkillQualifications[type] = (short)Math.Clamp(CombatSkillQualifications[type] + deltaValue, 0, CombatSkillMax);
 	}
 
-	/// <inheritdoc />
 	public override void Clear()
 	{
 		NeiliProportion = GenerateNeiliProportionByNeiliType(5);
@@ -335,7 +252,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		SelectedFeatures?.Clear();
 	}
 
-	/// <inheritdoc />
 	public override CustomProtagonistPresetItem Clone()
 	{
 		return new CustomProtagonistPresetItem
@@ -350,16 +266,10 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CustomProtagonistPresetItem()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CustomProtagonistPresetItem(CustomProtagonistPresetItem other)
 	{
 		NeiliProportion = other.NeiliProportion;
@@ -371,9 +281,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		SelectedFeatures = ((other.SelectedFeatures == null) ? null : new List<short>(other.SelectedFeatures));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CustomProtagonistPresetItem other)
 	{
 		NeiliProportion = other.NeiliProportion;
@@ -385,13 +292,11 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		SelectedFeatures = ((other.SelectedFeatures == null) ? null : new List<short>(other.SelectedFeatures));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public override bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public override int GetSerializedSize()
 	{
 		int totalSize = 84;
@@ -403,7 +308,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe override int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -442,7 +346,6 @@ public class CustomProtagonistPresetItem : PresetItemBase<CustomProtagonistPrese
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe override int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

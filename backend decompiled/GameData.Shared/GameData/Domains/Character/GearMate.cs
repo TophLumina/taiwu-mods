@@ -5,12 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 地区主线 - 铸剑 - 机关人
-/// 对于引用类型字段, 构造函数中可以不创建对象, 保留默认的 null 值.
-/// 在进行反序列化时, 允许所有引用类型字段都为 null.
-/// 但是在序列化时, 要求所有是定长集合的引用字段都已经被创建, 且长度与定义一致. 集合中的引用类型元素若也为定长, 则也必须被创建; 变长的则可以为 null.
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class GearMate : ISerializableGameData
 {
@@ -57,106 +51,54 @@ public class GearMate : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 机关人角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 主要属性进度
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 6)]
 	public int[] MainAttributeProgress;
 
-	/// <summary>
-	/// 精纯进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int ConsummateLevelProgress;
 
-	/// <summary>
-	/// 特性进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int FeatureProgress;
 
-	/// <summary>
-	/// 内力上限/周天真气进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int Neili;
 
-	/// <summary>
-	/// 技艺书籍研读进度
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, TaiwuLifeSkill> LifeSkillReadingProgress;
 
-	/// <summary>
-	/// 功法书籍研读进度
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, TaiwuCombatSkill> CombatSkillReadingProgress;
 
-	/// <summary>
-	/// 功法玄机格数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, SkillBreakPlateBonusList> SkillBreakBonusDict;
 
-	/// <summary>
-	/// 功法威力上限数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> SkillBreakMaxPowerDict;
 
-	/// <summary>
-	/// 功法突破数据
-	/// 突破盘数据[功法ID -&gt; 突破盘]
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, SkillBreakBonusCollection> SkillBreakBonusDictObsolete;
 
-	/// <summary>
-	/// 峨眉独创一格词条数据 [功法ID -&gt; 加成数据]
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, SkillBreakBonusCollection> SectEmeiSkillBreakBonus;
 
-	/// <summary>
-	/// 佛像突破数据 [功法ID -&gt; 罗汉ID]
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, sbyte> LuohanBreakDict;
 
-	/// <summary>
-	/// 武学强化数据
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 14)]
 	public int[] CombatSkillAttainmentProgress;
 
-	/// <summary>
-	/// 技艺强化数据
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 16)]
 	public int[] LifeSkillAttainmentProgress;
 
-	/// <summary>
-	/// 设置的内力五行
-	/// </summary>
 	[SerializableGameDataField]
 	public int NeiliType;
 
-	/// <summary>
-	/// 真气
-	/// </summary>
 	[SerializableGameDataField]
 	public NeiliAllocation NeiliAllocation;
 
-	/// <summary>
-	/// 默认构造
-	/// </summary>
 	public GearMate()
 	{
 		MainAttributeProgress = new int[6];
@@ -173,9 +115,6 @@ public class GearMate : ISerializableGameData
 		NeiliAllocation = default(NeiliAllocation);
 	}
 
-	/// <summary>
-	/// 基于角色 ID 构造
-	/// </summary>
 	public GearMate(int charId)
 	{
 		Id = charId;
@@ -193,55 +132,31 @@ public class GearMate : ISerializableGameData
 		NeiliAllocation = default(NeiliAllocation);
 	}
 
-	/// <summary>
-	/// 该类功法是否已被强化过
-	/// </summary>
-	/// <param name="combatSkillType"></param>
-	/// <param name="grade"></param>
-	/// <returns></returns>
 	public bool IsCombatSkillBuffed(sbyte combatSkillType, sbyte grade)
 	{
 		return (CombatSkillAttainmentProgress[combatSkillType] & (1 << (int)grade)) != 0;
 	}
 
-	/// <summary>
-	/// 该类技艺是否已被强化过
-	/// </summary>
-	/// <param name="lifeSkillType"></param>
-	/// <param name="grade"></param>
-	/// <returns></returns>
 	public bool IsLifeSkillBuffed(sbyte lifeSkillType, sbyte grade)
 	{
 		return (LifeSkillAttainmentProgress[lifeSkillType] & (1 << (int)grade)) != 0;
 	}
 
-	/// <summary>
-	/// 设置一类功法已被强化过
-	/// </summary>
-	/// <param name="combatSkillType"></param>
-	/// <param name="grade"></param>
 	public void SetCombatSkillBuffed(sbyte combatSkillType, sbyte grade)
 	{
 		CombatSkillAttainmentProgress[combatSkillType] |= 1 << (int)grade;
 	}
 
-	/// <summary>
-	/// 设置一类技艺已被强化过
-	/// </summary>
-	/// <param name="lifeSkillType"></param>
-	/// <param name="grade"></param>
 	public void SetLifeSkillBuffed(sbyte lifeSkillType, sbyte grade)
 	{
 		LifeSkillAttainmentProgress[lifeSkillType] |= 1 << (int)grade;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 174;
@@ -259,7 +174,6 @@ public class GearMate : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -309,7 +223,6 @@ public class GearMate : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

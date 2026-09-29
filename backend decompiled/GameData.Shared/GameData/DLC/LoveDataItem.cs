@@ -5,81 +5,41 @@ using GameData.Utilities;
 
 namespace GameData.DLC;
 
-/// <summary>
-/// 恋人相关的数据
-/// </summary>
 public class LoveDataItem : ISerializableGameData
 {
-	/// <summary>
-	/// 太吾ID，不会改变
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuCharId;
 
-	/// <summary>
-	/// 恋人ID，转世时改变
-	/// </summary>
 	[SerializableGameDataField]
 	public int LoverCharId;
 
-	/// <summary>
-	/// 从恋人与太吾第一次相恋算起，每一世的相恋状态的列表，
-	/// </summary>
 	[SerializableGameDataField]
 	public List<bool> ReincarnationLoveList;
 
-	/// <summary>
-	/// 定情时太吾获得的物品，物品被移除定情的信息时要设置为非法值
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey TaiwuOwnedToken;
 
-	/// <summary>
-	/// 定情时NPC获得的物品，物品被移除定情的信息时要设置为非法值
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey LoverOwnedToken;
 
-	/// <summary>
-	/// 约会次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int DateCount;
 
-	/// <summary>
-	/// 是否绑定轮回
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsBindSamsara;
 
-	/// <summary>
-	/// NPC对太吾的昵称的ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuNicknameId;
 
-	/// <summary>
-	/// 互动时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int InteractTime;
 
-	/// <summary>
-	/// 定情时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int BecomeLoverTime;
 
-	/// <summary>
-	/// 事件与发生事件的字典 事件GUID -&gt; 发生时间
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, int> EventTimeDict;
 
-	/// <summary>
-	/// 检查是否连续三世相恋
-	/// </summary>
-	/// <returns></returns>
 	public bool CheckReincarnationLoveContinueThreeTimes()
 	{
 		if (ReincarnationLoveList.Count < 3)
@@ -132,13 +92,11 @@ public class LoveDataItem : ISerializableGameData
 		EventTimeDict = other.EventTimeDict;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 41;
@@ -151,7 +109,6 @@ public class LoveDataItem : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -213,7 +170,6 @@ public class LoveDataItem : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

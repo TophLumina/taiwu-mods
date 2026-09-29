@@ -3,10 +3,6 @@ using Config;
 
 namespace GameData.Domains.Character.AvatarSystem.AvatarRes;
 
-/// <summary>
-/// Avatar资源
-/// 最小资源单位
-/// </summary>
 public class AvatarAsset
 {
 	public object ExternalObject;

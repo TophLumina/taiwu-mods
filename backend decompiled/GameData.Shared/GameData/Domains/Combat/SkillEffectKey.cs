@@ -4,29 +4,14 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 功法持续效果索引
-/// </summary>
 public struct SkillEffectKey : ISerializableGameData, IEquatable<SkillEffectKey>
 {
-	/// <summary>
-	/// 功法 ID
-	/// </summary>
 	public short SkillId;
 
-	/// <summary>
-	/// 是否正练
-	/// </summary>
 	public bool IsDirect;
 
-	/// <summary>
-	/// 功法配置
-	/// </summary>
 	public CombatSkillItem SkillConfig => Config.CombatSkill.Instance[SkillId];
 
-	/// <summary>
-	/// 特效 ID
-	/// </summary>
 	public int EffectId
 	{
 		get
@@ -39,9 +24,6 @@ public struct SkillEffectKey : ISerializableGameData, IEquatable<SkillEffectKey>
 		}
 	}
 
-	/// <summary>
-	/// 特效配置
-	/// </summary>
 	public SpecialEffectItem EffectConfig => Config.SpecialEffect.Instance[EffectId];
 
 	public SkillEffectKey(short skillId, bool isDirect)

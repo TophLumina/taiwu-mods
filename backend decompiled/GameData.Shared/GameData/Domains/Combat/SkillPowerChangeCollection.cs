@@ -4,19 +4,10 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 战斗中功法威力持续变化效果集合
-/// </summary>
 public class SkillPowerChangeCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 变化值集合。(效果来源功法, 是否正练) -&gt; 威力变化值
-	/// </summary>
 	public Dictionary<SkillEffectKey, int> EffectDict = new Dictionary<SkillEffectKey, int>();
 
-	/// <summary>
-	/// 增加威力变化
-	/// </summary>
 	public void Add(SkillEffectKey effectKey, int power)
 	{
 		if (!EffectDict.TryAdd(effectKey, power))
@@ -25,9 +16,6 @@ public class SkillPowerChangeCollection : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取总变化值
-	/// </summary>
 	public int GetTotalChangeValue()
 	{
 		int totalValue = 0;
@@ -38,13 +26,11 @@ public class SkillPowerChangeCollection : ISerializableGameData
 		return totalValue;
 	}
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -60,7 +46,6 @@ public class SkillPowerChangeCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -90,7 +75,6 @@ public class SkillPowerChangeCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

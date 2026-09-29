@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SecretInformationAppliedResult : ConfigData<SecretInformationAppliedResultItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationAppliedResult Instance = new SecretInformationAppliedResult();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "InnerResultEvent", "Texts", "SelectionIds", "SecretInformation", "CombatConfigId", "SpecialConditionId", "SpecialConditionResultIds", "TemplateId", "ResultEventGuid", "ResultEventGuidKey" };

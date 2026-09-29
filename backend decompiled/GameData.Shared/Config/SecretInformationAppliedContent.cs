@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class SecretInformationAppliedContent : ConfigData<SecretInformationAppliedContentItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 重复使用
-		/// </summary>
 		public const short Repeat = 0;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 重复使用
-		/// </summary>
 		public static SecretInformationAppliedContentItem Repeat => Instance[(short)0];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationAppliedContent Instance = new SecretInformationAppliedContent();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "LinkedResult", "Texts", "TemplateId" };

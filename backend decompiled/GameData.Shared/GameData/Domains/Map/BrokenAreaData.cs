@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 毁坏区域的额外数据，主要用于记录其等级和其中的随机敌人
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class BrokenAreaData : ISerializableGameData
 {
@@ -22,15 +19,9 @@ public class BrokenAreaData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "Level", "RandomEnemies" };
 	}
 
-	/// <summary>
-	/// 毁坏区域等级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Level;
 
-	/// <summary>
-	/// 毁坏区域的随即敌人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<MapTemplateEnemyInfo> RandomEnemies;
 
@@ -41,31 +32,23 @@ public class BrokenAreaData : ISerializableGameData
 		RandomEnemies = new List<MapTemplateEnemyInfo>();
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BrokenAreaData(BrokenAreaData other)
 	{
 		Level = other.Level;
 		RandomEnemies = ((other.RandomEnemies == null) ? null : new List<MapTemplateEnemyInfo>(other.RandomEnemies));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BrokenAreaData other)
 	{
 		Level = other.Level;
 		RandomEnemies = ((other.RandomEnemies == null) ? null : new List<MapTemplateEnemyInfo>(other.RandomEnemies));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 3;
@@ -77,7 +60,6 @@ public class BrokenAreaData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -109,7 +91,6 @@ public class BrokenAreaData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

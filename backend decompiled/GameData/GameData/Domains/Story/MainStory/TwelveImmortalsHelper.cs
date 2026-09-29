@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Config;
+using GameData.Common;
 using GameData.Domains.Character;
 using GameData.Domains.Map;
 using GameData.Utilities;
@@ -149,5 +150,42 @@ public static class TwelveImmortalsHelper
 		}
 		ObjectPool<List<ByteCoordinate>>.Instance.Return(settlementPos);
 		return result;
+	}
+
+	public static void AddTwelveImmortalsFeatureAutoDetected(DataContext context, GameData.Domains.Character.Character character)
+	{
+		if (character.GetTwelveImmortalsConfig() != null)
+		{
+			AddTwelveImmortalsFeatureForTwelveImmortals(context, character);
+		}
+		else
+		{
+			AddTwelveImmortalsFeature(context, character);
+		}
+	}
+
+	public static void AddTwelveImmortalsFeature(DataContext context, GameData.Domains.Character.Character character)
+	{
+		bool noFeature = character.GetCreatingType() == 1;
+		foreach (TwelveImmortalsItem immortal in (IEnumerable<TwelveImmortalsItem>)TwelveImmortals.Instance)
+		{
+			bool needFeature = DomainManager.Story.TaiwuAsXiangshuIsTwelveImmortalsAlive(immortal);
+			character.ChangeFeature(context, immortal.BonusFeature, needFeature && !noFeature);
+		}
+		character.SetFeatureIds(character.GetFeatureIds(), context);
+	}
+
+	public static void AddTwelveImmortalsFeatureForTwelveImmortals(DataContext context, GameData.Domains.Character.Character character)
+	{
+		bool noFeature = character.GetCreatingType() == 1;
+		short templateId = character.GetTemplateId();
+		foreach (TwelveImmortalsItem immortal in (IEnumerable<TwelveImmortalsItem>)TwelveImmortals.Instance)
+		{
+			bool bonusDefeated = !DomainManager.Story.TaiwuAsXiangshuIsTwelveImmortalsAlive(immortal);
+			bool bonusNormal = !bonusDefeated && templateId == immortal.Character;
+			character.ChangeFeature(context, immortal.BonusFeature, bonusNormal && !noFeature);
+			character.ChangeFeature(context, immortal.BonusFeatureInDefeated, bonusDefeated && !noFeature);
+		}
+		character.SetFeatureIds(character.GetFeatureIds(), context);
 	}
 }

@@ -4,10 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 匠人订单
-/// 太吾村建筑和非太吾村匠人
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class ArtisanOrder : ISerializableGameData
 {
@@ -46,93 +42,44 @@ public class ArtisanOrder : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 产业建筑Key
-	/// 匠人npc为Invalid
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public BuildingBlockKey BuildingBlockKey;
 
-	/// <summary>
-	/// 匠人Id
-	/// 太吾村产业为领袖npcId
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int ArtisanId;
 
-	/// <summary>
-	/// 订购者Id
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int SubscriberId;
 
-	/// <summary>
-	/// 指定的产出类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public short ItemSubType;
 
-	/// <summary>
-	/// 指定的产出类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public sbyte LifeSkillType;
 
-	/// <summary>
-	/// 制造进度
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public int Progress;
 
-	/// <summary>
-	/// 制造完毕后放入的位置
-	/// 目前仅支持私库和公库
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public int StorageType;
 
-	/// <summary>
-	/// 产物权重
-	/// 仅包含投入引子增加的权重
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public Dictionary<Production, int> ProductionWeight;
 
-	/// <summary>
-	/// 压价较艺胜利
-	/// 仅匠人订单需要
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public bool IsDebateWon;
 
-	/// <summary>
-	/// 订单进度每月增量
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	public int ProgressDelta;
 
-	/// <summary>
-	/// 较艺次数
-	/// 仅匠人订单需要
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	public int DebateCount;
 
-	/// <summary>
-	/// 订单进度每月增量基础值，不受ArtisanOrderProgressBonus影响
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 11)]
 	public int ProgressBaseDelta;
 
-	/// <summary>
-	/// 用于判定是否为受玄狱模式影响
-	/// 由于目前太吾村外不存在建筑代制，所以可以直接使用BuildingBlockKey进行判定
-	/// </summary>
 	public bool IsAffectedByChallenge => !BuildingBlockKey.Equals(BuildingBlockKey.Invalid);
 
-	/// <summary>
-	///
-	/// </summary>
 	public ArtisanOrder()
 	{
 		BuildingBlockKey = BuildingBlockKey.Invalid;
@@ -148,13 +95,6 @@ public class ArtisanOrder : ISerializableGameData
 		DebateCount = 0;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="artisanId"></param>
-	/// <param name="subscriberId"></param>
-	/// <param name="lifeSkillType"></param>
-	/// <param name="progressDelta"></param>
 	public ArtisanOrder(int artisanId, int subscriberId, sbyte lifeSkillType, int progressDelta)
 	{
 		BuildingBlockKey = BuildingBlockKey.Invalid;
@@ -170,16 +110,6 @@ public class ArtisanOrder : ISerializableGameData
 		DebateCount = 0;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="buildingBlockKey"></param>
-	/// <param name="artisanId"></param>
-	/// <param name="subscriberId"></param>
-	/// <param name="lifeSkillType"></param>
-	/// <param name="progressDelta"></param>
-	/// <param name="progressBaseDelta"></param>
-	/// <param name="itemSubType"></param>
 	public ArtisanOrder(BuildingBlockKey buildingBlockKey, int artisanId, int subscriberId, sbyte lifeSkillType, int progressDelta, int progressBaseDelta, short itemSubType)
 	{
 		BuildingBlockKey = buildingBlockKey;
@@ -196,10 +126,6 @@ public class ArtisanOrder : ISerializableGameData
 		DebateCount = 0;
 	}
 
-	/// <summary>
-	/// 是否是匠人订单
-	/// </summary>
-	/// <returns></returns>
 	public bool IsArtisanOrder()
 	{
 		return BuildingBlockKey.Equals(BuildingBlockKey.Invalid);
@@ -212,8 +138,7 @@ public class ArtisanOrder : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 34;
-		totalSize += BuildingBlockKey.GetSerializedSize();
+		int totalSize = 42;
 		totalSize += 4;
 		if (ProductionWeight != null)
 		{

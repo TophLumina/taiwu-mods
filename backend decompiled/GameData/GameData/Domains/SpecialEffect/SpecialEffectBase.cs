@@ -232,6 +232,11 @@ public class SpecialEffectBase : ISpecialEffectModifier, IFrameCounterHandler
 		return 0;
 	}
 
+	protected void RemoveSelf(DataContext context)
+	{
+		DomainManager.SpecialEffect.Remove(context, Id);
+	}
+
 	protected void InvalidateCache(DataContext context, ushort fieldId)
 	{
 		InvalidateCache(context, CharacterId, fieldId);

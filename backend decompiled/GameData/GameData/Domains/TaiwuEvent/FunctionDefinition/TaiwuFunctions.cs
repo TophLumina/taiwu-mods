@@ -1,10 +1,16 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Config;
 using GameData.Combat.Math;
+using GameData.Common;
 using GameData.Domains.Character;
 using GameData.Domains.CombatSkill;
 using GameData.Domains.Item;
+using GameData.Domains.Item.Display;
 using GameData.Domains.Map;
+using GameData.Domains.Taiwu;
+using GameData.Domains.TaiwuEvent.DisplayEvent;
 using GameData.Domains.TaiwuEvent.EventHelper;
 using GameData.Domains.World.Notification;
 using GameData.GameDataBridge;
@@ -198,5 +204,133 @@ public class TaiwuFunctions
 	private static void TaiwuSetClothing(EventScriptRuntime runtime, short templateId)
 	{
 		DomainManager.Taiwu.SetSpecifyClothingTemplateId(templateId, runtime.Context);
+	}
+
+	[EventFunction(968)]
+	private static void OpenDreamBackItemSelect(EventScriptRuntime runtime, string keyPrefix = "SacrificeCandidate")
+	{
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		int charId = taiwu.GetId();
+		List<ItemDisplayData> candidates = new List<ItemDisplayData>();
+		List<ItemDisplayData> inventoryList = DomainManager.Item.GetItemDisplayDataListOptionalFromInventory(taiwu.GetInventory(), charId, 1);
+		if (inventoryList != null)
+		{
+			candidates.AddRange(inventoryList.Where((ItemDisplayData data) => IsSacrificeCandidate(data.Key)));
+		}
+		ItemKey[] equipment = taiwu.GetEquipment();
+		for (int num = 0; num < equipment.Length; num++)
+		{
+			ItemKey equipmentKey = equipment[num];
+			if (equipmentKey.IsValid() && IsSacrificeCandidate(equipmentKey))
+			{
+				ItemBase itemBase = DomainManager.Item.TryGetBaseItem(equipmentKey);
+				if (itemBase != null)
+				{
+					candidates.Add(DomainManager.Item.GetItemDisplayData(itemBase, 1, charId, 0));
+				}
+			}
+		}
+		if (candidates.Count != 0)
+		{
+			EventArgBox argBox = runtime.ArgBox;
+			if (!argBox.Get("SelectItemInfo", out EventSelectItemData selectItemData))
+			{
+				selectItemData = new EventSelectItemData
+				{
+					CanSelectItemList = new List<ITradeableContent>(),
+					FilterList = new List<SelectItemFilter>(),
+					MinSelectAmount = 1,
+					FilterWithOrOperate = true,
+					CheckSameByReferenceOnly = true
+				};
+				argBox.Set("SelectItemInfo", selectItemData);
+			}
+			for (int i = 0; i < candidates.Count; i++)
+			{
+				selectItemData.FilterList.Add(new SelectItemFilter
+				{
+					Key = $"{keyPrefix}{i}",
+					DisplayDataFilterId = 0,
+					FilterTemplateId = -1
+				});
+				selectItemData.CanSelectItemList.Add(candidates[i]);
+			}
+		}
+		static bool IsSacrificeCandidate(ItemKey itemKey)
+		{
+			return ItemTemplateHelper.IsInheritable(itemKey.ItemType, itemKey.TemplateId) && ItemTemplateHelper.GetItemSubType(itemKey.ItemType, itemKey.TemplateId) != 1202;
+		}
+	}
+
+	[EventFunction(969)]
+	private static void ConfirmDreamBackItemSelect(EventScriptRuntime runtime)
+	{
+		EventArgBox argBox = runtime.ArgBox;
+		if (!argBox.Get("SelectItemInfo", out EventSelectItemData selectItemData) || selectItemData?.FilterList == null || selectItemData.CanSelectItemList == null)
+		{
+			return;
+		}
+		int[] lowerLimits = GlobalConfig.DreamBackDestroyItemWorthLowerLimit;
+		int count = Math.Min(selectItemData.FilterList.Count, selectItemData.CanSelectItemList.Count);
+		List<ITradeableContent> selected = new List<ITradeableContent>();
+		long totalValue = 0L;
+		for (int i = 0; i < count; i++)
+		{
+			string filterKey = selectItemData.FilterList[i].Key;
+			if (!string.IsNullOrEmpty(filterKey) && argBox.Get(filterKey, out ItemKey selectedKey) && selectedKey.IsValid())
+			{
+				ITradeableContent content = selectItemData.CanSelectItemList[i];
+				ItemKey itemKey = content.Key;
+				if (itemKey.IsValid())
+				{
+					sbyte grade = ItemTemplateHelper.GetGrade(itemKey.ItemType, itemKey.TemplateId);
+					int lowerLimit = lowerLimits[Math.Clamp(grade, 0, lowerLimits.Length - 1)];
+					int unitValue = Math.Max(DomainManager.Item.GetValue(itemKey), lowerLimit);
+					int amount = ((content.Amount <= 0) ? 1 : content.Amount);
+					totalValue += (long)unitValue * (long)amount;
+					selected.Add(content);
+				}
+			}
+		}
+		if (selected.Count == 0 || totalValue <= 0)
+		{
+			return;
+		}
+		int maxPoint = TaiwuDomain.GetLegacyMaxPoint(LegacyPoint.Instance[(short)52]);
+		int legacyPoint = (int)Math.Clamp(totalValue * GlobalConfig.Instance.WorthToLegacyPercentage / 100, 0L, maxPoint);
+		if (legacyPoint <= 0)
+		{
+			return;
+		}
+		DataContext context = runtime.Context;
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Inventory inventory = taiwu.GetInventory();
+		foreach (ITradeableContent content2 in selected)
+		{
+			Inventory keys = content2.GetAllInventoryFromPool();
+			if (keys == null)
+			{
+				continue;
+			}
+			try
+			{
+				foreach (var (itemKey3, amount2) in keys.Items)
+				{
+					if (inventory.Items.ContainsKey(itemKey3))
+					{
+						taiwu.RemoveInventoryItem(context, itemKey3, amount2, deleteItem: true);
+					}
+					else if (ItemType.IsEquipmentItemType(itemKey3.ItemType) && taiwu.UnequipItem(context, itemKey3))
+					{
+						taiwu.RemoveInventoryItem(context, itemKey3, 1, deleteItem: true);
+					}
+				}
+			}
+			finally
+			{
+				ItemDisplayData.ReturnInventoryToPool(keys);
+			}
+		}
+		DomainManager.Taiwu.AddDreamBackLegacyPoint(context, legacyPoint);
 	}
 }

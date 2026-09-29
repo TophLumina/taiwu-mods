@@ -5,21 +5,12 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 仙人泼墨/豪侠研武人物显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class CharacterDisplayDataForTasterUltimate : ISerializableGameData
 {
-	/// <summary>
-	/// 角色通用滚动列表显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayDataForGeneralScrollList CharacterData;
 
-	/// <summary>
-	/// 研读进度数据列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ReadProgressData> ReadProgressList;
 

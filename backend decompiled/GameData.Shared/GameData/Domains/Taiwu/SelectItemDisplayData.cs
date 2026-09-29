@@ -5,43 +5,26 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 选择道具显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class SelectItemDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 行囊道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> InventoryItems;
 
-	/// <summary>
-	/// 私库道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> WarehouseItems;
 
-	/// <summary>
-	/// 公库道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> TreasuryItems;
 
-	/// <summary>
-	/// 货仓道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> StockItems;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -108,7 +91,6 @@ public class SelectItemDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -240,7 +222,6 @@ public class SelectItemDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

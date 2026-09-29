@@ -7,234 +7,118 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件交互判定动画数据
-/// </summary>
 [Serializable]
 [SerializableGameData(NoCopyConstructors = true)]
 public class EventInteractCheckData : ISerializableGameData
 {
-	/// <summary>
-	/// InteractCheck 模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public short InteractCheckTemplateId;
 
-	/// <summary>
-	/// 每个阶段成功的概率
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> PhaseProbList;
 
-	/// <summary>
-	/// 失败阶段
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FailPhase;
 
-	/// <summary>
-	/// 失败阶段在配置表中的Index
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FailPhaseIndex = -1;
 
-	/// <summary>
-	/// 是否是逃跑
-	/// false使用配置表InteractCheck.ActionPhaseList；此时FailPhase=-1或&gt;=EscapePhaseList.Count表示成功
-	/// true逃跑需要使用配置表InteractCheck.EscapePhaseList;此时FailPhase=HarmfulActionPhase.Count表示成功
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsEscape;
 
-	/// <summary>
-	/// 我方姓名相关数据
-	/// </summary>
 	[SerializableGameDataField]
 	public NameRelatedData SelfNameRelatedData;
 
-	/// <summary>
-	/// 发起方角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int SelfCharacterId;
 
-	/// <summary>
-	/// 目标角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetCharacterId;
 
-	/// <summary>
-	/// 倾诉爱意各个修正因素-爱慕
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> ConfessionLovePureFixProbDict;
 
-	/// <summary>
-	/// 倾诉爱意各个修正因素-世俗
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> ConfessionLoveSecularFixProbDict;
 
-	/// <summary>
-	/// 战斗力是否高于目标
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CombatPowerHigher;
 
-	/// <summary>
-	/// 我方主要属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes SelfMainAttributes;
 
-	/// <summary>
-	/// 我方武学造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts SelfCombatSkillAttainments;
 
-	/// <summary>
-	/// 我方技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts SelfLifeSkillAttainments;
 
-	/// <summary>
-	/// 我方命中属性
-	/// </summary>
 	[SerializableGameDataField]
 	public HitOrAvoidInts SelfHitValues;
 
-	/// <summary>
-	/// 我方化解属性
-	/// </summary>
 	[SerializableGameDataField]
 	public HitOrAvoidInts SelfAvoidValues;
 
-	/// <summary>
-	/// 我方攻击属性-攻击
-	/// </summary>
 	[SerializableGameDataField]
 	public OuterAndInnerInts SelfPenetrations;
 
-	/// <summary>
-	/// 我方防御属性 - 防御
-	/// </summary>
 	[SerializableGameDataField]
 	public OuterAndInnerInts SelfPenetrationResists;
 
-	/// <summary>
-	/// 我方-次要属性-施展速度
-	/// </summary>
 	[SerializableGameDataField]
 	public short SelfCastSpeed;
 
-	/// <summary>
-	/// 我方-次要属性-攻击速度
-	/// </summary>
 	[SerializableGameDataField]
 	public short SelfAttackSpeed;
 
-	/// <summary>
-	/// 我方-次要属性-移动速度
-	/// </summary>
 	[SerializableGameDataField]
 	public short SelfMoveSpeed;
 
-	/// <summary>
-	/// 目标姓名相关数据
-	/// </summary>
 	[SerializableGameDataField]
 	public NameRelatedData TargetNameRelatedData;
 
-	/// <summary>
-	/// 目标武学造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts TargetCombatSkillAttainments;
 
-	/// <summary>
-	/// 目标技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts TargetLifeSkillAttainments;
 
-	/// <summary>
-	/// 目标命中属性
-	/// </summary>
 	[SerializableGameDataField]
 	public HitOrAvoidInts TargetHitValues;
 
-	/// <summary>
-	/// 目标化解属性
-	/// </summary>
 	[SerializableGameDataField]
 	public HitOrAvoidInts TargetAvoidValues;
 
-	/// <summary>
-	/// 目标攻击属性-攻击
-	/// </summary>
 	[SerializableGameDataField]
 	public OuterAndInnerInts TargetPenetrations;
 
-	/// <summary>
-	/// 目标防御属性 - 防御
-	/// </summary>
 	[SerializableGameDataField]
 	public OuterAndInnerInts TargetPenetrationResists;
 
-	/// <summary>
-	/// 目标-次要属性-施展速度
-	/// </summary>
 	[SerializableGameDataField]
 	public short TargetCastSpeed;
 
-	/// <summary>
-	/// 目标-次要属性-攻击速度
-	/// </summary>
 	[SerializableGameDataField]
 	public short TargetAttackSpeed;
 
-	/// <summary>
-	/// 对方-次要属性-移动速度
-	/// </summary>
 	[SerializableGameDataField]
 	public short TargetMoveSpeed;
 
-	/// <summary>
-	/// 目标警惕值
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetAlertFactor;
 
-	/// <summary>
-	/// 我方技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts SelfLifeSkillQualities;
 
-	/// <summary>
-	/// 我方武学资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts SelfCombatSkillQualities;
 
-	/// <summary>
-	/// 偷师的技艺功法等级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte StealSkillGrade;
 
-	/// <summary>
-	/// 偷师的技艺类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte StealLifeSkillType;
 
-	/// <summary>
-	/// 偷师的功法类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte StealCombatSkillType;
 
@@ -249,13 +133,11 @@ public class EventInteractCheckData : ISerializableGameData
 	{
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 385;
@@ -269,7 +151,6 @@ public class EventInteractCheckData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -351,7 +232,6 @@ public class EventInteractCheckData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

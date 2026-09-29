@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 地区主线 姬穸数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class SectStoryJixiData : ISerializableGameData
 {
@@ -74,172 +71,89 @@ public class SectStoryJixiData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 当前姬穸是否处于吸取内力形态
-	/// </summary>
 	[SerializableGameDataField]
 	public bool JixiDrainNeili;
 
-	/// <summary>
-	/// 太吾指定的姬穸吃人/吸取目标角色ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int JixiTargetCharIdByTaiwu = -1;
 
-	/// <summary>
-	/// 上个吸取目标角色ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int PreviousDrainTarget = -1;
 
-	/// <summary>
-	/// 太吾指定的姬穸目标真气类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short DrainTargetNeiliAllocType = -1;
 
-	/// <summary>
-	/// 姬穸当前目标吸取真气进度，只在吸取基础真气时 记录已经吸取了多少即将吸取的真气进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int DrainTargetBasicNeiliAllocProgress;
 
-	/// <summary>
-	/// 杀死的角色ID列表,
-	/// DeadCharacter的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> KillTargets = new List<int>();
 
-	/// <summary>
-	/// 吸取的真气
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList NeiliAllocProgressDrained;
 
-	/// <summary>
-	/// 临时真气进度，不计入NeiliAllocProgressDrained，因转给太吾而导致姬穸降级时重置
-	/// </summary>
 	[SerializableGameDataField]
 	public int JixiTempNeiliAllocationProgressFromTaiwuAmount;
 
-	/// <summary>
-	/// 临时吃人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int JixiTempKillAmount;
 
-	/// <summary>
-	/// 向太吾转移的真气进度，每55点进度 使太吾+1点真气。
-	/// 此处只记录遗留的进度，再次转移时加上该遗留进度之后 再计算实际使太吾增加几点真气
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList NeiliAllocProgressTransfer;
 
-	/// <summary>
-	/// 吸取的真气（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList NeiliAllocProgressDrainedTotal;
 
-	/// <summary>
-	/// 传给太吾的真气进度（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int TransferToTaiwuTotal;
 
-	/// <summary>
-	/// 从太吾获取的真气进度（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int TransferFromTaiwuTotal;
 
-	/// <summary>
-	/// 消灭的外道数量（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int TempalteEnemyKilledTotal;
 
-	/// <summary>
-	/// 消灭的外道获取的恩义（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int KillTempalteEnemyGainTotal;
 
-	/// <summary>
-	/// 形态变换次数（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] ChangeFormTotal = new int[3];
 
-	/// <summary>
-	/// 为太吾恢复健康次数（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int RescueTaiwuTimes;
 
-	/// <summary>
-	/// 吸取的真气（对当前目标的吸取进度）
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList CurrentTargetNeiliAllocProgressDrained;
 
-	/// <summary>
-	/// 当前形态 吃人数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrentFormKillAmount;
 
-	/// <summary>
-	/// 当前形态 吸取的真气进度
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList CurrentFormNeiliAllocProgressDrained;
 
-	/// <summary>
-	/// 太吾转移五行的目标Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuTargetCharacterId = -1;
 
-	/// <summary>
-	/// 太吾转移五行的目标五行类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TaiwuTargetFiveElementsType = -1;
 
-	/// <summary>
-	/// 太吾转移五行的总量
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] TaiwuTransformFiveElementsTotal;
 
-	/// <summary>
-	/// 太吾转移当前目标五行的总量
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] TaiwuTransformFiveElementsCurrent;
 
-	/// <summary>
-	/// 恢复健康等操作消耗的成长进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int CostedGrowthValue;
 
-	/// <summary>
-	/// 向太吾转移的真气进度，每55点进度 使太吾+1点真气。
-	/// 此处只记录遗留的进度，再次转移时加上该遗留进度之后 再计算实际使太吾增加几点真气
-	/// </summary>
 	[SerializableGameDataField]
 	public float[] NeiliAllocProgressTransferRemain;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 58;
@@ -260,7 +174,6 @@ public class SectStoryJixiData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -406,7 +319,6 @@ public class SectStoryJixiData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

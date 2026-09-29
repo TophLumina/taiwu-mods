@@ -9,9 +9,6 @@ namespace Config;
 [Serializable]
 public class Armor : ConfigData<ArmorItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Armor Instance = new Armor();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

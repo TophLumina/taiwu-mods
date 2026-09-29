@@ -4,22 +4,11 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 命中或化解值
-/// </summary>
 [Serializable]
 public struct HitOrAvoidInts : ISerializableGameData, ISerializable
 {
-	/// <summary>
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.CombatSkill.AttackHitType" />
-	/// </summary>
 	public unsafe fixed int Items[4];
 
-	/// <summary>
-	/// 替代 unsafe 调用的数据获取接口
-	/// </summary>
-	/// <param name="index"><see cref="T:GameData.Domains.CombatSkill.AttackHitType" /></param>
 	public unsafe int this[int index]
 	{
 		get
@@ -40,12 +29,6 @@ public struct HitOrAvoidInts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 AttackHitType.Count == 4.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (int* items = Items)
@@ -55,10 +38,6 @@ public struct HitOrAvoidInts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 从配置表构造对象
-	/// </summary>
-	/// <param name="values"></param>
 	public unsafe HitOrAvoidInts(params int[] values)
 	{
 		for (int i = 0; i < 4; i++)

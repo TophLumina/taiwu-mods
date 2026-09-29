@@ -9,14 +9,8 @@ using TaiwuModdingLib.Core.Utils;
 
 namespace GameData.Domains.Mod;
 
-/// <summary>
-/// Mod 方面的配置数据管理器
-/// </summary>
 public class ModConfigDataManager
 {
-	/// <summary>
-	/// 读入 Mod 的配置数据
-	/// </summary>
 	public void LoadModConfig(ModInfo modInfo)
 	{
 		string cfgDirPath = Path.Combine(modInfo.DirectoryName, "Config");

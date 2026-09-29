@@ -7,15 +7,9 @@ namespace GameData.Domains.Character.Display;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class AllocateNeiliPreviewDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 属性差值字典，key 为 (short)ECharacterPropertyReferencedType，value 为差值
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> PropertyDeltas;
 
-	/// <summary>
-	/// 预览涉及的属性类型 key 列表
-	/// </summary>
 	public static readonly short[] PreviewPropertyKeys = new short[28]
 	{
 		6, 7, 8, 9, 10, 11, 12, 13, 14, 15,

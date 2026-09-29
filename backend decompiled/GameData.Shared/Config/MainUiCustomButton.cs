@@ -7,391 +7,160 @@ namespace Config;
 [Serializable]
 public class MainUiCustomButton : ConfigData<MainUiCustomButtonItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 队伍
-		/// </summary>
 		public const sbyte Party = 0;
 
-		/// <summary>
-		/// 装备
-		/// </summary>
 		public const sbyte Equipment = 1;
 
-		/// <summary>
-		/// 行囊
-		/// </summary>
 		public const sbyte Inventory = 2;
 
-		/// <summary>
-		/// 关押
-		/// </summary>
 		public const sbyte Prisoner = 3;
 
-		/// <summary>
-		/// 造诣
-		/// </summary>
 		public const sbyte Attainment = 4;
 
-		/// <summary>
-		/// 突破
-		/// </summary>
 		public const sbyte SkillBreak = 5;
 
-		/// <summary>
-		/// 内力
-		/// </summary>
 		public const sbyte Neili = 6;
 
-		/// <summary>
-		/// 运功
-		/// </summary>
 		public const sbyte EquipCombatSkill = 7;
 
-		/// <summary>
-		/// 见闻
-		/// </summary>
 		public const sbyte Information = 8;
 
-		/// <summary>
-		/// 秘闻
-		/// </summary>
 		public const sbyte SecretInformation = 9;
 
-		/// <summary>
-		/// 经历
-		/// </summary>
 		public const sbyte LifeRecord = 10;
 
-		/// <summary>
-		/// 诊疗
-		/// </summary>
 		public const sbyte Heal = 11;
 
-		/// <summary>
-		/// 促织陈列
-		/// </summary>
 		public const sbyte Cricket = 12;
 
-		/// <summary>
-		/// 石屋
-		/// </summary>
 		public const sbyte StoneRoom = 13;
 
-		/// <summary>
-		/// 蛟池
-		/// </summary>
 		public const sbyte Jiao = 14;
 
-		/// <summary>
-		/// 茶马帮
-		/// </summary>
 		public const sbyte TeaCaravan = 15;
 
-		/// <summary>
-		/// 轮回台
-		/// </summary>
 		public const sbyte SamsaraPlatform = 16;
 
-		/// <summary>
-		/// 元鸡舍
-		/// </summary>
 		public const sbyte ChickenCoop = 17;
 
-		/// <summary>
-		/// 调遣元鸡
-		/// </summary>
 		public const sbyte ChickenAssign = 19;
 
-		/// <summary>
-		/// 奇纹星斗
-		/// </summary>
 		public const sbyte SectJieqing = 20;
 
-		/// <summary>
-		/// 蛊仙
-		/// </summary>
 		public const sbyte SectWuxian = 21;
 
-		/// <summary>
-		/// 化念珠
-		/// </summary>
 		public const sbyte SectYuanshan = 22;
 
-		/// <summary>
-		/// 孤鸾镜水谣
-		/// </summary>
 		public const sbyte SectXuannv = 23;
 
-		/// <summary>
-		/// 神鸡图
-		/// </summary>
 		public const sbyte SectFulong = 24;
 
-		/// <summary>
-		/// 产业视图
-		/// </summary>
 		public const sbyte Building = 25;
 
-		/// <summary>
-		/// 村民名册
-		/// </summary>
 		public const sbyte Villager = 26;
 
-		/// <summary>
-		/// 传承名谱
-		/// </summary>
 		public const sbyte Lineage = 18;
 
-		/// <summary>
-		/// 派遣名册
-		/// </summary>
 		public const sbyte VillagerAssign = 27;
 
-		/// <summary>
-		/// 势力情报
-		/// </summary>
 		public const sbyte SettlementInformation = 28;
 
-		/// <summary>
-		/// 查看绘卷
-		/// </summary>
 		public const sbyte TaiwuScroll = 29;
 
-		/// <summary>
-		/// 太吾传承
-		/// </summary>
 		public const sbyte TaiwuScrollLegacy = 30;
 
-		/// <summary>
-		/// 铭刻
-		/// </summary>
 		public const sbyte Inscribe = 31;
 
-		/// <summary>
-		/// 太吾百晓册
-		/// </summary>
 		public const sbyte Encyclopedia = 32;
 
-		/// <summary>
-		/// 奇书宝典
-		/// </summary>
 		public const sbyte LegendaryBook = 33;
 
-		/// <summary>
-		/// 太吾日志
-		/// </summary>
 		public const sbyte TaiwuLog = 34;
 
-		/// <summary>
-		/// 关注
-		/// </summary>
 		public const sbyte Follow = 35;
 
-		/// <summary>
-		/// 历程
-		/// </summary>
 		public const sbyte TaiwuLifeSummary = 36;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 队伍
-		/// </summary>
 		public static MainUiCustomButtonItem Party => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 装备
-		/// </summary>
 		public static MainUiCustomButtonItem Equipment => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 行囊
-		/// </summary>
 		public static MainUiCustomButtonItem Inventory => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 关押
-		/// </summary>
 		public static MainUiCustomButtonItem Prisoner => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 造诣
-		/// </summary>
 		public static MainUiCustomButtonItem Attainment => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 突破
-		/// </summary>
 		public static MainUiCustomButtonItem SkillBreak => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 内力
-		/// </summary>
 		public static MainUiCustomButtonItem Neili => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 运功
-		/// </summary>
 		public static MainUiCustomButtonItem EquipCombatSkill => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 见闻
-		/// </summary>
 		public static MainUiCustomButtonItem Information => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 秘闻
-		/// </summary>
 		public static MainUiCustomButtonItem SecretInformation => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 经历
-		/// </summary>
 		public static MainUiCustomButtonItem LifeRecord => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 诊疗
-		/// </summary>
 		public static MainUiCustomButtonItem Heal => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 促织陈列
-		/// </summary>
 		public static MainUiCustomButtonItem Cricket => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 石屋
-		/// </summary>
 		public static MainUiCustomButtonItem StoneRoom => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 蛟池
-		/// </summary>
 		public static MainUiCustomButtonItem Jiao => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 茶马帮
-		/// </summary>
 		public static MainUiCustomButtonItem TeaCaravan => Instance[(sbyte)15];
 
-		/// <summary>
-		/// 轮回台
-		/// </summary>
 		public static MainUiCustomButtonItem SamsaraPlatform => Instance[(sbyte)16];
 
-		/// <summary>
-		/// 元鸡舍
-		/// </summary>
 		public static MainUiCustomButtonItem ChickenCoop => Instance[(sbyte)17];
 
-		/// <summary>
-		/// 调遣元鸡
-		/// </summary>
 		public static MainUiCustomButtonItem ChickenAssign => Instance[(sbyte)19];
 
-		/// <summary>
-		/// 奇纹星斗
-		/// </summary>
 		public static MainUiCustomButtonItem SectJieqing => Instance[(sbyte)20];
 
-		/// <summary>
-		/// 蛊仙
-		/// </summary>
 		public static MainUiCustomButtonItem SectWuxian => Instance[(sbyte)21];
 
-		/// <summary>
-		/// 化念珠
-		/// </summary>
 		public static MainUiCustomButtonItem SectYuanshan => Instance[(sbyte)22];
 
-		/// <summary>
-		/// 孤鸾镜水谣
-		/// </summary>
 		public static MainUiCustomButtonItem SectXuannv => Instance[(sbyte)23];
 
-		/// <summary>
-		/// 神鸡图
-		/// </summary>
 		public static MainUiCustomButtonItem SectFulong => Instance[(sbyte)24];
 
-		/// <summary>
-		/// 产业视图
-		/// </summary>
 		public static MainUiCustomButtonItem Building => Instance[(sbyte)25];
 
-		/// <summary>
-		/// 村民名册
-		/// </summary>
 		public static MainUiCustomButtonItem Villager => Instance[(sbyte)26];
 
-		/// <summary>
-		/// 传承名谱
-		/// </summary>
 		public static MainUiCustomButtonItem Lineage => Instance[(sbyte)18];
 
-		/// <summary>
-		/// 派遣名册
-		/// </summary>
 		public static MainUiCustomButtonItem VillagerAssign => Instance[(sbyte)27];
 
-		/// <summary>
-		/// 势力情报
-		/// </summary>
 		public static MainUiCustomButtonItem SettlementInformation => Instance[(sbyte)28];
 
-		/// <summary>
-		/// 查看绘卷
-		/// </summary>
 		public static MainUiCustomButtonItem TaiwuScroll => Instance[(sbyte)29];
 
-		/// <summary>
-		/// 太吾传承
-		/// </summary>
 		public static MainUiCustomButtonItem TaiwuScrollLegacy => Instance[(sbyte)30];
 
-		/// <summary>
-		/// 铭刻
-		/// </summary>
 		public static MainUiCustomButtonItem Inscribe => Instance[(sbyte)31];
 
-		/// <summary>
-		/// 太吾百晓册
-		/// </summary>
 		public static MainUiCustomButtonItem Encyclopedia => Instance[(sbyte)32];
 
-		/// <summary>
-		/// 奇书宝典
-		/// </summary>
 		public static MainUiCustomButtonItem LegendaryBook => Instance[(sbyte)33];
 
-		/// <summary>
-		/// 太吾日志
-		/// </summary>
 		public static MainUiCustomButtonItem TaiwuLog => Instance[(sbyte)34];
 
-		/// <summary>
-		/// 关注
-		/// </summary>
 		public static MainUiCustomButtonItem Follow => Instance[(sbyte)35];
 
-		/// <summary>
-		/// 历程
-		/// </summary>
 		public static MainUiCustomButtonItem TaiwuLifeSummary => Instance[(sbyte)36];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MainUiCustomButton Instance = new MainUiCustomButton();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "TutorialFunctionType", "MainMenuButtonId", "TemplateId", "IconNormal", "IconHighLight", "IconPressed", "IconDisable" };

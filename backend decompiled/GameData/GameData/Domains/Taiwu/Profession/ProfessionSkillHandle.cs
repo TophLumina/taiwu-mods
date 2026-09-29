@@ -108,6 +108,7 @@ public static class ProfessionSkillHandle
 			15 => CheckSpecialCondition_CapitalistSkill(professionData, skillIndex), 
 			16 => CheckSpecialCondition_TeaTasterSkill(professionData, skillIndex), 
 			17 => CheckSpecialCondition_DukeSkill(professionData, skillIndex), 
+			18 => CheckSpecialCondition_XiangshuSkill(professionData, skillIndex), 
 			_ => true, 
 		};
 	}
@@ -199,13 +200,16 @@ public static class ProfessionSkillHandle
 			case 17:
 				ExecuteOnClick_DukeSkill(context, professionData, skillIndex, ref arg);
 				break;
+			case 18:
+				ExecuteOnClick_XiangshuSkill(context, professionData, skillIndex, ref arg);
+				break;
 			}
 		}
 	}
 
 	public static void ConfirmSkillExecute(ref ProfessionSkillArg professionSkillArg)
 	{
-		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ConfirmProfessionSkillExecute, professionSkillArg);
+		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ConfirmProfessionSkillExecute, professionSkillArg, -1);
 	}
 
 	public static void ConfirmSkillExecuteWithEvent(ProfessionSkillArg professionSkillArg, string afterEvent, EventArgBox argBox)
@@ -234,7 +238,7 @@ public static class ProfessionSkillHandle
 				ProfessionId = professionId,
 				SkillId = skillCfg.TemplateId,
 				IsSuccess = true,
-				SkipAnimation = (skillCfg.TemplateId == 23 || skillCfg.TemplateId == 15)
+				SkipAnimation = (skillCfg.TemplateId == 23 || skillCfg.TemplateId == 15 || skillCfg.TemplateId == 72 || skillCfg.TemplateId == 73 || skillCfg.TemplateId == 74)
 			};
 			ConfirmSkillExecute(ref professionSkillArg);
 			return;
@@ -303,6 +307,7 @@ public static class ProfessionSkillHandle
 		BeggarSkill_AdvanceMonth(context);
 		HunterSkill_AdvanceMonth(context);
 		MartialArtistSkill_AdvanceMonth(context);
+		XiangshuSkill_AdvanceMonth(context);
 		TaoistMonkSkill_OnPostAdvanceMonth(context);
 		UpdateSeniorityOnPostAdvanceMonth(context, taiwu);
 		UpdateDukeMonthlyEvent(context);
@@ -2817,5 +2822,57 @@ public static class ProfessionSkillHandle
 			return DomainManager.Extra.CheckTasterUltimateSpecialCondition(isCombatSkill: true) == 0;
 		}
 		return true;
+	}
+
+	private static void ExecuteOnClick_XiangshuSkill(DataContext context, ProfessionData professionData, int index, ref ProfessionSkillArg arg)
+	{
+		switch (index)
+		{
+		case 0:
+			ExecuteOnClick_Xiangshu_0(context, professionData, ref arg);
+			break;
+		case 1:
+			ExecuteOnClick_Xiangshu_1(context, professionData, ref arg);
+			break;
+		case 2:
+			ExecuteOnClick_Xiangshu_2(context, professionData, ref arg);
+			break;
+		default:
+			throw new Exception(professionData.GetSkillConfig(index).Name + " is not an executable skill.");
+		}
+	}
+
+	private static void ExecuteOnClick_Xiangshu_0(DataContext context, ProfessionData professionData, ref ProfessionSkillArg professionSkillArg)
+	{
+		DomainManager.Extra.XiangshuSkill0Execute(context, updateData: true);
+	}
+
+	private static void ExecuteOnClick_Xiangshu_1(DataContext context, ProfessionData professionData, ref ProfessionSkillArg professionSkillArg)
+	{
+		DomainManager.Extra.XiangshuSkill1Execute(context);
+	}
+
+	private static void ExecuteOnClick_Xiangshu_2(DataContext context, ProfessionData professionData, ref ProfessionSkillArg professionSkillArg)
+	{
+		if (professionSkillArg.EffectBlocks == null)
+		{
+			DomainManager.Extra.XiangshuSkill2Execute(context, updateData: true);
+		}
+	}
+
+	private static void XiangshuSkill_AdvanceMonth(DataContext context)
+	{
+		DomainManager.Extra.XiangshuSkill0Execute(context, updateData: false);
+		DomainManager.Extra.XiangshuSkill2Execute(context, updateData: false);
+	}
+
+	private static bool CheckSpecialCondition_XiangshuSkill(ProfessionData professionData, int skillIndex)
+	{
+		return skillIndex switch
+		{
+			0 => DomainManager.Extra.HasXiangshuSkill0AffectTarget(), 
+			1 => DomainManager.Extra.HasXiangshuSkill1AffectTarget(), 
+			_ => true, 
+		};
 	}
 }

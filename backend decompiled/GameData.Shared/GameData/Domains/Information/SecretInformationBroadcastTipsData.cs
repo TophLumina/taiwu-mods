@@ -5,120 +5,57 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 秘闻数据公开时显示过月通知的tips数据
-/// 本数据结构制作时仅考虑用于过月通知的Tips，因此设置的static变量是本次过月通知显示时所有实例通用的
-/// </summary>
 public class SecretInformationBroadcastTipsData : ISerializableGameData
 {
-	/// <summary>
-	/// 秘闻元数据 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int MetaDataId;
 
-	/// <summary>
-	/// 秘闻的显示数据（后获取数据）
-	/// </summary>
 	public SecretInformationDisplayData DisplayData;
 
-	/// <summary>
-	/// 秘闻显示所属的数据包（后获取数据）
-	/// </summary>
 	public static SecretInformationDisplayPackage DisplayPackage;
 
-	/// <summary>
-	/// 角色名字关联数据字典（后获取数据）
-	/// </summary>
 	public static Dictionary<int, NameRelatedData> NameRelatedDataMap;
 
-	/// <summary>
-	/// 秘闻公开的类型
-	/// 0-与太吾相关
-	/// 1-经由太吾传播
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BroadcastType;
 
-	/// <summary>
-	/// 行为人受到的名誉行为影响列表
-	/// 注意这是一个组合后的List，按照这样的顺序反复添加：FameActionTemplateId,名誉值改变量，持续时节数
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FameActionsOfMain;
 
-	/// <summary>
-	/// 接受人1受到的名誉行为影响列表
-	/// 注意这是一个组合后的List，按照这样的顺序反复添加：FameActionTemplateId,名誉值改变量，持续时节数
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FameActionsOfTarget1;
 
-	/// <summary>
-	/// 接受人2受到的名誉行为影响列表
-	/// 注意这是一个组合后的List，按照这样的顺序反复添加：FameActionTemplateId,名誉值改变量，持续时节数
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FameActionsOfTarget2;
 
-	/// <summary>
-	/// 因秘闻公开而心情上升的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> HappinessUpCharacters;
 
-	/// <summary>
-	/// 因秘闻公开而心情下降的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> HappinessDownCharacters;
 
-	/// <summary>
-	/// 因秘闻公开而对行为人好感上升的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FavorToMainUpCharacters;
 
-	/// <summary>
-	/// 因秘闻公开而对行为人好感下降的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FavorToMainDownCharacters;
 
-	/// <summary>
-	/// 因秘闻公开而对接受人1好感上升的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FavorToTarget1UpCharacters;
 
-	/// <summary>
-	/// 因秘闻公开而对接受人1好感下降的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FavorToTarget1DownCharacters;
 
-	/// <summary>
-	/// 因秘闻公开而对接受人2好感上升的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FavorToTarget2UpCharacters;
 
-	/// <summary>
-	/// 因秘闻公开而对接受人2好感下降的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> FavorToTarget2DownCharacters;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SecretInformationBroadcastTipsData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SecretInformationBroadcastTipsData(SecretInformationBroadcastTipsData other)
 	{
 		MetaDataId = other.MetaDataId;
@@ -136,9 +73,6 @@ public class SecretInformationBroadcastTipsData : ISerializableGameData
 		FavorToTarget2DownCharacters = ((other.FavorToTarget2DownCharacters == null) ? null : new List<int>(other.FavorToTarget2DownCharacters));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SecretInformationBroadcastTipsData other)
 	{
 		MetaDataId = other.MetaDataId;
@@ -156,13 +90,11 @@ public class SecretInformationBroadcastTipsData : ISerializableGameData
 		FavorToTarget2DownCharacters = ((other.FavorToTarget2DownCharacters == null) ? null : new List<int>(other.FavorToTarget2DownCharacters));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 5;
@@ -184,7 +116,6 @@ public class SecretInformationBroadcastTipsData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -387,7 +318,6 @@ public class SecretInformationBroadcastTipsData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

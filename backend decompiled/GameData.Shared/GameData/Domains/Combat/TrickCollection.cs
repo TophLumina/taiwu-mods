@@ -4,50 +4,28 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 蓄式集合
-/// </summary>
 public class TrickCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 下个蓄式索引
-	/// </summary>
 	private int _nextTrickIndex;
 
-	/// <summary>
-	/// 当前所有蓄式索引
-	/// </summary>
 	[SerializableGameDataField]
 	private SortedDictionary<int, sbyte> _tricks = new SortedDictionary<int, sbyte>();
 
-	/// <summary>
-	/// 化解获得的蓄式索引
-	/// </summary>
 	[SerializableGameDataField]
 	private List<int> _avoidTricks = new List<int>();
 
-	/// <inheritdoc cref="F:GameData.Domains.Combat.TrickCollection._tricks" />
 	public IReadOnlyDictionary<int, sbyte> Tricks => _tricks;
 
-	/// <summary>
-	/// 包含蓄式
-	/// </summary>
 	public bool ContainsTrick(sbyte type)
 	{
 		return _tricks.ContainsKey(type);
 	}
 
-	/// <summary>
-	/// 替换蓄式
-	/// </summary>
 	public void ReplaceTrick(int index, sbyte type)
 	{
 		_tricks[index] = type;
 	}
 
-	/// <summary>
-	/// 添加蓄式
-	/// </summary>
 	public void AppendTrick(sbyte type, bool addByAvoid)
 	{
 		_tricks.Add(_nextTrickIndex, type);
@@ -58,35 +36,23 @@ public class TrickCollection : ISerializableGameData
 		_nextTrickIndex++;
 	}
 
-	/// <summary>
-	/// 移除蓄式
-	/// </summary>
 	public void RemoveTrick(int trickIndex)
 	{
 		_tricks.Remove(trickIndex);
 		_avoidTricks.Remove(trickIndex);
 	}
 
-	/// <summary>
-	/// 清空蓄式
-	/// </summary>
 	public void ClearTricks()
 	{
 		_tricks.Clear();
 		_avoidTricks.Clear();
 	}
 
-	/// <summary>
-	/// 指定位置的蓄式是否为化解得式
-	/// </summary>
 	public bool IsAvoidTrick(int index)
 	{
 		return _avoidTricks.Contains(index);
 	}
 
-	/// <summary>
-	/// 将指定类型的蓄式排至最前
-	/// </summary>
 	public void RearrangeTrick(sbyte type)
 	{
 		List<int> indexes = ObjectPool<List<int>>.Instance.Get();
@@ -121,38 +87,27 @@ public class TrickCollection : ISerializableGameData
 		ObjectPool<List<bool>>.Instance.Return(moveIsAvoid);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TrickCollection()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TrickCollection(TrickCollection other)
 	{
 		_tricks = ((other._tricks == null) ? null : new SortedDictionary<int, sbyte>(other._tricks));
 		_avoidTricks = ((other._avoidTricks == null) ? null : new List<int>(other._avoidTricks));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TrickCollection other)
 	{
 		_tricks = ((other._tricks == null) ? null : new SortedDictionary<int, sbyte>(other._tricks));
 		_avoidTricks = ((other._avoidTricks == null) ? null : new List<int>(other._avoidTricks));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -165,7 +120,6 @@ public class TrickCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -195,7 +149,6 @@ public class TrickCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

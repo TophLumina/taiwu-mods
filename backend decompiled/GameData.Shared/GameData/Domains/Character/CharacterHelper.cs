@@ -4,10 +4,6 @@ namespace GameData.Domains.Character;
 
 public static class CharacterHelper
 {
-	/// <summary>
-	/// 数据字段 ID 集合.
-	/// 字段顺序: 档案字段, 缓存字段, 模板字段.
-	/// </summary>
 	public static class FieldIds
 	{
 		public const ushort Id = 0;
@@ -246,199 +242,203 @@ public static class CharacterHelper
 
 		public const ushort DarkAshProtector = 117;
 
-		public const ushort Surname = 118;
+		public const ushort ImmunityMask = 118;
 
-		public const ushort GivenName = 119;
+		public const ushort Surname = 119;
 
-		public const ushort AnonymousTitle = 120;
+		public const ushort GivenName = 120;
 
-		public const ushort RandomFeaturesAtCreating = 121;
+		public const ushort AnonymousTitle = 121;
 
-		public const ushort AllowUseFreeWeapon = 122;
+		public const ushort RandomFeaturesAtCreating = 122;
 
-		public const ushort AllowEscape = 123;
+		public const ushort AllowUseFreeWeapon = 123;
 
-		public const ushort AllowHeal = 124;
+		public const ushort AllowEscape = 124;
 
-		public const ushort CanDefeat = 125;
+		public const ushort AllowHeal = 125;
 
-		public const ushort RandomEnemyId = 126;
+		public const ushort CanDefeat = 126;
 
-		public const ushort LeadingEnemyNestId = 127;
+		public const ushort RandomEnemyId = 127;
 
-		public const ushort FixedAvatarName = 128;
+		public const ushort LeadingEnemyNestId = 128;
 
-		public const ushort PresetBodyType = 129;
+		public const ushort FixedAvatarName = 129;
 
-		public const ushort HideAge = 130;
+		public const ushort PresetBodyType = 130;
 
-		public const ushort Race = 131;
+		public const ushort HideAge = 131;
 
-		public const ushort PresetFame = 132;
+		public const ushort Race = 132;
 
-		public const ushort BaseAttraction = 133;
+		public const ushort PresetFame = 133;
 
-		public const ushort CanBeKidnapped = 134;
+		public const ushort BaseAttraction = 134;
 
-		public const ushort FixWeaponPower = 135;
+		public const ushort CanBeKidnapped = 135;
 
-		public const ushort FixArmorPower = 136;
+		public const ushort FixWeaponPower = 136;
 
-		public const ushort FixCombatSkillPower = 137;
+		public const ushort FixArmorPower = 137;
 
-		public const ushort BaseHitValues = 138;
+		public const ushort FixCombatSkillPower = 138;
 
-		public const ushort BasePenetrations = 139;
+		public const ushort BaseHitValues = 139;
 
-		public const ushort BaseAvoidValues = 140;
+		public const ushort BasePenetrations = 140;
 
-		public const ushort BasePenetrationResists = 141;
+		public const ushort BaseAvoidValues = 141;
 
-		public const ushort BaseRecoveryOfStanceAndBreath = 142;
+		public const ushort BasePenetrationResists = 142;
 
-		public const ushort BaseMoveSpeed = 143;
+		public const ushort BaseRecoveryOfStanceAndBreath = 143;
 
-		public const ushort BaseRecoveryOfFlaw = 144;
+		public const ushort BaseMoveSpeed = 144;
 
-		public const ushort BaseCastSpeed = 145;
+		public const ushort BaseRecoveryOfFlaw = 145;
 
-		public const ushort BaseRecoveryOfBlockedAcupoint = 146;
+		public const ushort BaseCastSpeed = 146;
 
-		public const ushort BaseWeaponSwitchSpeed = 147;
+		public const ushort BaseRecoveryOfBlockedAcupoint = 147;
 
-		public const ushort BaseAttackSpeed = 148;
+		public const ushort BaseWeaponSwitchSpeed = 148;
 
-		public const ushort BaseInnerRatio = 149;
+		public const ushort BaseAttackSpeed = 149;
 
-		public const ushort BaseRecoveryOfQiDisorder = 150;
+		public const ushort BaseInnerRatio = 150;
 
-		public const ushort BasePoisonResists = 151;
+		public const ushort BaseRecoveryOfQiDisorder = 151;
 
-		public const ushort InnerInjuryImmunity = 152;
+		public const ushort BasePoisonResists = 152;
 
-		public const ushort OuterInjuryImmunity = 153;
+		public const ushort InnerInjuryImmunity = 153;
 
-		public const ushort MindImmunity = 154;
+		public const ushort OuterInjuryImmunity = 154;
 
-		public const ushort FlawImmunity = 155;
+		public const ushort MindImmunity = 155;
 
-		public const ushort AcupointImmunity = 156;
+		public const ushort FlawImmunity = 156;
 
-		public const ushort PoisonImmunities = 157;
+		public const ushort AcupointImmunity = 157;
 
-		public const ushort PresetEquipment = 158;
+		public const ushort PoisonImmunities = 158;
 
-		public const ushort PresetInventory = 159;
+		public const ushort PresetEquipment = 159;
 
-		public const ushort PresetCombatSkills = 160;
+		public const ushort PresetInventory = 160;
 
-		public const ushort PresetNeiliProportionOfFiveElements = 161;
+		public const ushort PresetCombatSkills = 161;
 
-		public const ushort MinionGroupId = 162;
+		public const ushort PresetNeiliProportionOfFiveElements = 162;
 
-		public const ushort DamageSteps = 163;
+		public const ushort MinionGroupId = 163;
 
-		public const ushort IdeaAllocationProportion = 164;
+		public const ushort DamageSteps = 164;
 
-		public const ushort ExtraEquipmentLoad = 165;
+		public const ushort IdeaAllocationProportion = 165;
 
-		public const ushort InitCurrAge = 166;
+		public const ushort ExtraEquipmentLoad = 166;
 
-		public const ushort PresetTeammateCommands = 167;
+		public const ushort InitCurrAge = 167;
 
-		public const ushort IsFavorabilityDisplay = 168;
+		public const ushort PresetTeammateCommands = 168;
 
-		public const ushort FixedCharacterShowNameOnMap = 169;
+		public const ushort IsFavorabilityDisplay = 169;
 
-		public const ushort SpecialCombatSkeleton = 170;
+		public const ushort FixedCharacterShowNameOnMap = 170;
 
-		public const ushort DieImmunity = 171;
+		public const ushort SpecialCombatSkeleton = 171;
 
-		public const ushort FatalImmunity = 172;
+		public const ushort DieImmunity = 172;
 
-		public const ushort LearnedLifeSkillGrades = 173;
+		public const ushort FatalImmunity = 173;
 
-		public const ushort CombatAi = 174;
+		public const ushort LearnedLifeSkillGrades = 174;
 
-		public const ushort CanMove = 175;
+		public const ushort CombatAi = 175;
 
-		public const ushort CanOpenCharacterMenu = 176;
+		public const ushort CanMove = 176;
 
-		public const ushort RandomAnimalAttack = 177;
+		public const ushort CanOpenCharacterMenu = 177;
 
-		public const ushort DropResources = 178;
+		public const ushort RandomAnimalAttack = 178;
 
-		public const ushort SpecialGradeName = 179;
+		public const ushort DropResources = 179;
 
-		public const ushort PresetEatingItems = 180;
+		public const ushort SpecialGradeName = 180;
 
-		public const ushort CanSpeak = 181;
+		public const ushort PresetEatingItems = 181;
 
-		public const ushort RandomEnemyFavorability = 182;
+		public const ushort CanSpeak = 182;
 
-		public const ushort GroupId = 183;
+		public const ushort RandomEnemyFavorability = 183;
 
-		public const ushort ExtraCombatSkillGrids = 184;
+		public const ushort GroupId = 184;
 
-		public const ushort SpecialTemmateType = 185;
+		public const ushort ExtraCombatSkillGrids = 185;
 
-		public const ushort RandomIdealSects = 186;
+		public const ushort SpecialTemmateType = 186;
 
-		public const ushort AllowDropWugKing = 187;
+		public const ushort RandomIdealSects = 187;
 
-		public const ushort AllowFavorabilitySkipCd = 188;
+		public const ushort AllowDropWugKing = 188;
 
-		public const ushort SpecialMuteBubbleEnemy = 189;
+		public const ushort AllowFavorabilitySkipCd = 189;
 
-		public const ushort SpecialMuteBubbleSelf = 190;
+		public const ushort SpecialMuteBubbleEnemy = 190;
 
-		public const ushort DropRatePercentAsTeammate = 191;
+		public const ushort SpecialMuteBubbleSelf = 191;
 
-		public const ushort DropRatePercentAsMainChar = 192;
+		public const ushort DropRatePercentAsTeammate = 192;
 
-		public const ushort FixedAvatarSpineSkin = 193;
+		public const ushort DropRatePercentAsMainChar = 193;
 
-		public const ushort FixedAvatarSpineName = 194;
+		public const ushort FixedAvatarSpineSkin = 194;
 
-		public const ushort CanBeTaiwu = 195;
+		public const ushort FixedAvatarSpineName = 195;
 
-		public const ushort CanBePossessionBody = 196;
+		public const ushort CanBeTaiwu = 196;
 
-		public const ushort EquipmentLock = 197;
+		public const ushort CanBePossessionBody = 197;
 
-		public const ushort CanBePossessionSoul = 198;
+		public const ushort EquipmentLock = 198;
 
-		public const ushort XiangshuInfectedDemonBonus = 199;
+		public const ushort CanBePossessionSoul = 199;
+
+		public const ushort XiangshuInfectedDemonBonus = 200;
+
+		public const ushort InfectedFixedAvatarSpineName = 201;
+
+		public const ushort InfectedFixedAvatarSpineSkin = 202;
+
+		public const ushort DisableTeammateCommands = 203;
+
+		public const ushort ShowLegendaryBookConsumedCloth = 204;
+
+		public const ushort AvatarDataPath = 205;
+
+		public const ushort GroupType = 206;
+
+		public const ushort TaiwuAsXiangshuDelete = 207;
+
+		public const ushort ConvertToIntelligent = 208;
+
+		public const ushort InfectedFixedAvatarName = 209;
+
+		public const ushort ChallengeModeMinionGroupId = 210;
 	}
 
-	/// <summary>
-	/// 档案数据字段数 (可能也是模板数据)
-	/// </summary>
 	public const ushort ArchiveFieldsCount = 75;
 
-	/// <summary>
-	/// 缓存数据字段数
-	/// </summary>
-	public const ushort CacheFieldsCount = 43;
+	public const ushort CacheFieldsCount = 44;
 
-	/// <summary>
-	/// 纯模板数据字段数 (不同时是档案数据)
-	/// </summary>
-	public const ushort PureTemplateFieldsCount = 82;
+	public const ushort PureTemplateFieldsCount = 92;
 
-	/// <summary>
-	/// 可变数据字段数 (档案字段数与缓存字段数之和)
-	/// </summary>
-	public const ushort WritableFieldsCount = 118;
+	public const ushort WritableFieldsCount = 119;
 
-	/// <summary>
-	/// 只读数据字段数 (模板字段数)
-	/// </summary>
-	public const ushort ReadonlyFieldsCount = 82;
+	public const ushort ReadonlyFieldsCount = 92;
 
-	/// <summary>
-	/// 通过字段名获取字段 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2FieldId = new Dictionary<string, ushort>
 	{
 		{ "Id", 0 },
@@ -559,94 +559,102 @@ public static class CharacterHelper
 		{ "MaxConsummateLevel", 115 },
 		{ "CombatSkillEquipment", 116 },
 		{ "DarkAshProtector", 117 },
-		{ "Surname", 118 },
-		{ "GivenName", 119 },
-		{ "AnonymousTitle", 120 },
-		{ "RandomFeaturesAtCreating", 121 },
-		{ "AllowUseFreeWeapon", 122 },
-		{ "AllowEscape", 123 },
-		{ "AllowHeal", 124 },
-		{ "CanDefeat", 125 },
-		{ "RandomEnemyId", 126 },
-		{ "LeadingEnemyNestId", 127 },
-		{ "FixedAvatarName", 128 },
-		{ "PresetBodyType", 129 },
-		{ "HideAge", 130 },
-		{ "Race", 131 },
-		{ "PresetFame", 132 },
-		{ "BaseAttraction", 133 },
-		{ "CanBeKidnapped", 134 },
-		{ "FixWeaponPower", 135 },
-		{ "FixArmorPower", 136 },
-		{ "FixCombatSkillPower", 137 },
-		{ "BaseHitValues", 138 },
-		{ "BasePenetrations", 139 },
-		{ "BaseAvoidValues", 140 },
-		{ "BasePenetrationResists", 141 },
-		{ "BaseRecoveryOfStanceAndBreath", 142 },
-		{ "BaseMoveSpeed", 143 },
-		{ "BaseRecoveryOfFlaw", 144 },
-		{ "BaseCastSpeed", 145 },
-		{ "BaseRecoveryOfBlockedAcupoint", 146 },
-		{ "BaseWeaponSwitchSpeed", 147 },
-		{ "BaseAttackSpeed", 148 },
-		{ "BaseInnerRatio", 149 },
-		{ "BaseRecoveryOfQiDisorder", 150 },
-		{ "BasePoisonResists", 151 },
-		{ "InnerInjuryImmunity", 152 },
-		{ "OuterInjuryImmunity", 153 },
-		{ "MindImmunity", 154 },
-		{ "FlawImmunity", 155 },
-		{ "AcupointImmunity", 156 },
-		{ "PoisonImmunities", 157 },
-		{ "PresetEquipment", 158 },
-		{ "PresetInventory", 159 },
-		{ "PresetCombatSkills", 160 },
-		{ "PresetNeiliProportionOfFiveElements", 161 },
-		{ "MinionGroupId", 162 },
-		{ "DamageSteps", 163 },
-		{ "IdeaAllocationProportion", 164 },
-		{ "ExtraEquipmentLoad", 165 },
-		{ "InitCurrAge", 166 },
-		{ "PresetTeammateCommands", 167 },
-		{ "IsFavorabilityDisplay", 168 },
-		{ "FixedCharacterShowNameOnMap", 169 },
-		{ "SpecialCombatSkeleton", 170 },
-		{ "DieImmunity", 171 },
-		{ "FatalImmunity", 172 },
-		{ "LearnedLifeSkillGrades", 173 },
-		{ "CombatAi", 174 },
-		{ "CanMove", 175 },
-		{ "CanOpenCharacterMenu", 176 },
-		{ "RandomAnimalAttack", 177 },
-		{ "DropResources", 178 },
-		{ "SpecialGradeName", 179 },
-		{ "PresetEatingItems", 180 },
-		{ "CanSpeak", 181 },
-		{ "RandomEnemyFavorability", 182 },
-		{ "GroupId", 183 },
-		{ "ExtraCombatSkillGrids", 184 },
-		{ "SpecialTemmateType", 185 },
-		{ "RandomIdealSects", 186 },
-		{ "AllowDropWugKing", 187 },
-		{ "AllowFavorabilitySkipCd", 188 },
-		{ "SpecialMuteBubbleEnemy", 189 },
-		{ "SpecialMuteBubbleSelf", 190 },
-		{ "DropRatePercentAsTeammate", 191 },
-		{ "DropRatePercentAsMainChar", 192 },
-		{ "FixedAvatarSpineSkin", 193 },
-		{ "FixedAvatarSpineName", 194 },
-		{ "CanBeTaiwu", 195 },
-		{ "CanBePossessionBody", 196 },
-		{ "EquipmentLock", 197 },
-		{ "CanBePossessionSoul", 198 },
-		{ "XiangshuInfectedDemonBonus", 199 }
+		{ "ImmunityMask", 118 },
+		{ "Surname", 119 },
+		{ "GivenName", 120 },
+		{ "AnonymousTitle", 121 },
+		{ "RandomFeaturesAtCreating", 122 },
+		{ "AllowUseFreeWeapon", 123 },
+		{ "AllowEscape", 124 },
+		{ "AllowHeal", 125 },
+		{ "CanDefeat", 126 },
+		{ "RandomEnemyId", 127 },
+		{ "LeadingEnemyNestId", 128 },
+		{ "FixedAvatarName", 129 },
+		{ "PresetBodyType", 130 },
+		{ "HideAge", 131 },
+		{ "Race", 132 },
+		{ "PresetFame", 133 },
+		{ "BaseAttraction", 134 },
+		{ "CanBeKidnapped", 135 },
+		{ "FixWeaponPower", 136 },
+		{ "FixArmorPower", 137 },
+		{ "FixCombatSkillPower", 138 },
+		{ "BaseHitValues", 139 },
+		{ "BasePenetrations", 140 },
+		{ "BaseAvoidValues", 141 },
+		{ "BasePenetrationResists", 142 },
+		{ "BaseRecoveryOfStanceAndBreath", 143 },
+		{ "BaseMoveSpeed", 144 },
+		{ "BaseRecoveryOfFlaw", 145 },
+		{ "BaseCastSpeed", 146 },
+		{ "BaseRecoveryOfBlockedAcupoint", 147 },
+		{ "BaseWeaponSwitchSpeed", 148 },
+		{ "BaseAttackSpeed", 149 },
+		{ "BaseInnerRatio", 150 },
+		{ "BaseRecoveryOfQiDisorder", 151 },
+		{ "BasePoisonResists", 152 },
+		{ "InnerInjuryImmunity", 153 },
+		{ "OuterInjuryImmunity", 154 },
+		{ "MindImmunity", 155 },
+		{ "FlawImmunity", 156 },
+		{ "AcupointImmunity", 157 },
+		{ "PoisonImmunities", 158 },
+		{ "PresetEquipment", 159 },
+		{ "PresetInventory", 160 },
+		{ "PresetCombatSkills", 161 },
+		{ "PresetNeiliProportionOfFiveElements", 162 },
+		{ "MinionGroupId", 163 },
+		{ "DamageSteps", 164 },
+		{ "IdeaAllocationProportion", 165 },
+		{ "ExtraEquipmentLoad", 166 },
+		{ "InitCurrAge", 167 },
+		{ "PresetTeammateCommands", 168 },
+		{ "IsFavorabilityDisplay", 169 },
+		{ "FixedCharacterShowNameOnMap", 170 },
+		{ "SpecialCombatSkeleton", 171 },
+		{ "DieImmunity", 172 },
+		{ "FatalImmunity", 173 },
+		{ "LearnedLifeSkillGrades", 174 },
+		{ "CombatAi", 175 },
+		{ "CanMove", 176 },
+		{ "CanOpenCharacterMenu", 177 },
+		{ "RandomAnimalAttack", 178 },
+		{ "DropResources", 179 },
+		{ "SpecialGradeName", 180 },
+		{ "PresetEatingItems", 181 },
+		{ "CanSpeak", 182 },
+		{ "RandomEnemyFavorability", 183 },
+		{ "GroupId", 184 },
+		{ "ExtraCombatSkillGrids", 185 },
+		{ "SpecialTemmateType", 186 },
+		{ "RandomIdealSects", 187 },
+		{ "AllowDropWugKing", 188 },
+		{ "AllowFavorabilitySkipCd", 189 },
+		{ "SpecialMuteBubbleEnemy", 190 },
+		{ "SpecialMuteBubbleSelf", 191 },
+		{ "DropRatePercentAsTeammate", 192 },
+		{ "DropRatePercentAsMainChar", 193 },
+		{ "FixedAvatarSpineSkin", 194 },
+		{ "FixedAvatarSpineName", 195 },
+		{ "CanBeTaiwu", 196 },
+		{ "CanBePossessionBody", 197 },
+		{ "EquipmentLock", 198 },
+		{ "CanBePossessionSoul", 199 },
+		{ "XiangshuInfectedDemonBonus", 200 },
+		{ "InfectedFixedAvatarSpineName", 201 },
+		{ "InfectedFixedAvatarSpineSkin", 202 },
+		{ "DisableTeammateCommands", 203 },
+		{ "ShowLegendaryBookConsumedCloth", 204 },
+		{ "AvatarDataPath", 205 },
+		{ "GroupType", 206 },
+		{ "TaiwuAsXiangshuDelete", 207 },
+		{ "ConvertToIntelligent", 208 },
+		{ "InfectedFixedAvatarName", 209 },
+		{ "ChallengeModeMinionGroupId", 210 }
 	};
 
-	/// <summary>
-	/// 通过字段 ID 获取字段名
-	/// </summary>
-	public static readonly string[] FieldId2FieldName = new string[200]
+	public static readonly string[] FieldId2FieldName = new string[211]
 	{
 		"Id", "TemplateId", "CreatingType", "Gender", "ActualAge", "BirthMonth", "Happiness", "BaseMorality", "OrganizationInfo", "IdealSect",
 		"LifeSkillTypeInterest", "CombatSkillTypeInterest", "MainAttributeInterest", "Transgender", "Bisexual", "XiangshuType", "MonkType", "FeatureIds", "BaseMainAttributes", "Health",
@@ -659,14 +667,16 @@ public static class CharacterHelper
 		"HitValues", "Penetrations", "AvoidValues", "PenetrationResists", "RecoveryOfStanceAndBreath", "MoveSpeed", "RecoveryOfFlaw", "CastSpeed", "RecoveryOfBlockedAcupoint", "WeaponSwitchSpeed",
 		"AttackSpeed", "InnerRatio", "RecoveryOfQiDisorder", "PoisonResists", "MaxHealth", "Fertility", "LifeSkillQualifications", "LifeSkillAttainments", "CombatSkillQualifications", "CombatSkillAttainments",
 		"Personalities", "HobbyChangingPeriod", "FavorabilityChangingFactor", "MaxInventoryLoad", "CurrInventoryLoad", "MaxEquipmentLoad", "CurrEquipmentLoad", "InventoryTotalValue", "MaxNeili", "NeiliAllocation",
-		"NeiliProportionOfFiveElements", "NeiliType", "CombatPower", "AttackTendencyOfInnerAndOuter", "AllocatedNeiliEffects", "MaxConsummateLevel", "CombatSkillEquipment", "DarkAshProtector", "Surname", "GivenName",
-		"AnonymousTitle", "RandomFeaturesAtCreating", "AllowUseFreeWeapon", "AllowEscape", "AllowHeal", "CanDefeat", "RandomEnemyId", "LeadingEnemyNestId", "FixedAvatarName", "PresetBodyType",
-		"HideAge", "Race", "PresetFame", "BaseAttraction", "CanBeKidnapped", "FixWeaponPower", "FixArmorPower", "FixCombatSkillPower", "BaseHitValues", "BasePenetrations",
-		"BaseAvoidValues", "BasePenetrationResists", "BaseRecoveryOfStanceAndBreath", "BaseMoveSpeed", "BaseRecoveryOfFlaw", "BaseCastSpeed", "BaseRecoveryOfBlockedAcupoint", "BaseWeaponSwitchSpeed", "BaseAttackSpeed", "BaseInnerRatio",
-		"BaseRecoveryOfQiDisorder", "BasePoisonResists", "InnerInjuryImmunity", "OuterInjuryImmunity", "MindImmunity", "FlawImmunity", "AcupointImmunity", "PoisonImmunities", "PresetEquipment", "PresetInventory",
-		"PresetCombatSkills", "PresetNeiliProportionOfFiveElements", "MinionGroupId", "DamageSteps", "IdeaAllocationProportion", "ExtraEquipmentLoad", "InitCurrAge", "PresetTeammateCommands", "IsFavorabilityDisplay", "FixedCharacterShowNameOnMap",
-		"SpecialCombatSkeleton", "DieImmunity", "FatalImmunity", "LearnedLifeSkillGrades", "CombatAi", "CanMove", "CanOpenCharacterMenu", "RandomAnimalAttack", "DropResources", "SpecialGradeName",
-		"PresetEatingItems", "CanSpeak", "RandomEnemyFavorability", "GroupId", "ExtraCombatSkillGrids", "SpecialTemmateType", "RandomIdealSects", "AllowDropWugKing", "AllowFavorabilitySkipCd", "SpecialMuteBubbleEnemy",
-		"SpecialMuteBubbleSelf", "DropRatePercentAsTeammate", "DropRatePercentAsMainChar", "FixedAvatarSpineSkin", "FixedAvatarSpineName", "CanBeTaiwu", "CanBePossessionBody", "EquipmentLock", "CanBePossessionSoul", "XiangshuInfectedDemonBonus"
+		"NeiliProportionOfFiveElements", "NeiliType", "CombatPower", "AttackTendencyOfInnerAndOuter", "AllocatedNeiliEffects", "MaxConsummateLevel", "CombatSkillEquipment", "DarkAshProtector", "ImmunityMask", "Surname",
+		"GivenName", "AnonymousTitle", "RandomFeaturesAtCreating", "AllowUseFreeWeapon", "AllowEscape", "AllowHeal", "CanDefeat", "RandomEnemyId", "LeadingEnemyNestId", "FixedAvatarName",
+		"PresetBodyType", "HideAge", "Race", "PresetFame", "BaseAttraction", "CanBeKidnapped", "FixWeaponPower", "FixArmorPower", "FixCombatSkillPower", "BaseHitValues",
+		"BasePenetrations", "BaseAvoidValues", "BasePenetrationResists", "BaseRecoveryOfStanceAndBreath", "BaseMoveSpeed", "BaseRecoveryOfFlaw", "BaseCastSpeed", "BaseRecoveryOfBlockedAcupoint", "BaseWeaponSwitchSpeed", "BaseAttackSpeed",
+		"BaseInnerRatio", "BaseRecoveryOfQiDisorder", "BasePoisonResists", "InnerInjuryImmunity", "OuterInjuryImmunity", "MindImmunity", "FlawImmunity", "AcupointImmunity", "PoisonImmunities", "PresetEquipment",
+		"PresetInventory", "PresetCombatSkills", "PresetNeiliProportionOfFiveElements", "MinionGroupId", "DamageSteps", "IdeaAllocationProportion", "ExtraEquipmentLoad", "InitCurrAge", "PresetTeammateCommands", "IsFavorabilityDisplay",
+		"FixedCharacterShowNameOnMap", "SpecialCombatSkeleton", "DieImmunity", "FatalImmunity", "LearnedLifeSkillGrades", "CombatAi", "CanMove", "CanOpenCharacterMenu", "RandomAnimalAttack", "DropResources",
+		"SpecialGradeName", "PresetEatingItems", "CanSpeak", "RandomEnemyFavorability", "GroupId", "ExtraCombatSkillGrids", "SpecialTemmateType", "RandomIdealSects", "AllowDropWugKing", "AllowFavorabilitySkipCd",
+		"SpecialMuteBubbleEnemy", "SpecialMuteBubbleSelf", "DropRatePercentAsTeammate", "DropRatePercentAsMainChar", "FixedAvatarSpineSkin", "FixedAvatarSpineName", "CanBeTaiwu", "CanBePossessionBody", "EquipmentLock", "CanBePossessionSoul",
+		"XiangshuInfectedDemonBonus", "InfectedFixedAvatarSpineName", "InfectedFixedAvatarSpineSkin", "DisableTeammateCommands", "ShowLegendaryBookConsumedCloth", "AvatarDataPath", "GroupType", "TaiwuAsXiangshuDelete", "ConvertToIntelligent", "InfectedFixedAvatarName",
+		"ChallengeModeMinionGroupId"
 	};
 }

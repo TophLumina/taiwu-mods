@@ -310,7 +310,7 @@ public readonly struct CombatContext
 		{
 			return false;
 		}
-		if (Attacker.IsBreakAttacking || DomainManager.SpecialEffect.ModifyData(AttackerId, SkillTemplateId, 248, dataValue: false, hitType))
+		if (DomainManager.SpecialEffect.ModifyData(AttackerId, SkillTemplateId, 248, dataValue: false, hitType))
 		{
 			return true;
 		}

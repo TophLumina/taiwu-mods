@@ -42,6 +42,9 @@
     <Reference Include="SourceGenerator.Core">
       <HintPath>D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\SourceGenerator.Core.dll</HintPath>
     </Reference>
+    <Reference Include="GameData.Combat.Chicken">
+      <HintPath>D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\GameData.Combat.Chicken.dll</HintPath>
+    </Reference>
     <Reference Include="MoonSharp.Interpreter">
       <HintPath>D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend\MoonSharp.Interpreter.dll</HintPath>
     </Reference>

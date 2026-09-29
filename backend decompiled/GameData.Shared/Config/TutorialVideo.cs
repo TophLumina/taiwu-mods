@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class TutorialVideo : ConfigData<TutorialVideoItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TutorialVideo Instance = new TutorialVideo();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "PartsTitle", "PartsDesc", "Chapter", "ChapterName", "VideoSummary", "TemplateId", "VideoPath", "PartVideos", "CustomPosition" };
@@ -104,15 +101,7 @@ public class TutorialVideo : ConfigData<TutorialVideoItem, short>
 			LocalStringManager.GetConfig("TutorialVideo_language", "PartsDesc_12_1")
 		}, new string[2] { "Tutorial_Chapter_3_6a", "Tutorial_Chapter_3_6b" }, 2, 5, LocalStringManager.GetConfig("TutorialVideo_language", "ChapterName_12"), LocalStringManager.GetConfig("TutorialVideo_language", "VideoSummary_12"), null));
 		_dataArray.Add(new TutorialVideoItem(13, "Tutorial_Chapter_4_1", LocalStringManager.GetConfig("TutorialVideo_language", "Name_13"), new string[1] { LocalStringManager.GetConfig("TutorialVideo_language", "PartsTitle_13_0") }, new string[1] { LocalStringManager.GetConfig("TutorialVideo_language", "PartsDesc_13_0") }, new string[1] { "Tutorial_Chapter_4_1a" }, 3, 0, LocalStringManager.GetConfig("TutorialVideo_language", "ChapterName_13"), LocalStringManager.GetConfig("TutorialVideo_language", "VideoSummary_13"), null));
-		_dataArray.Add(new TutorialVideoItem(14, "Tutorial_Chapter_4_2", LocalStringManager.GetConfig("TutorialVideo_language", "Name_14"), new string[2]
-		{
-			LocalStringManager.GetConfig("TutorialVideo_language", "PartsTitle_14_0"),
-			LocalStringManager.GetConfig("TutorialVideo_language", "PartsTitle_14_1")
-		}, new string[2]
-		{
-			LocalStringManager.GetConfig("TutorialVideo_language", "PartsDesc_14_0"),
-			LocalStringManager.GetConfig("TutorialVideo_language", "PartsDesc_14_1")
-		}, new string[2] { "Tutorial_Chapter_4_2a", "Tutorial_Chapter_4_2b" }, 3, 1, LocalStringManager.GetConfig("TutorialVideo_language", "ChapterName_14"), LocalStringManager.GetConfig("TutorialVideo_language", "VideoSummary_14"), null));
+		_dataArray.Add(new TutorialVideoItem(14, "Tutorial_Chapter_4_2", LocalStringManager.GetConfig("TutorialVideo_language", "Name_14"), new string[1] { LocalStringManager.GetConfig("TutorialVideo_language", "PartsTitle_14_0") }, new string[1] { LocalStringManager.GetConfig("TutorialVideo_language", "PartsDesc_14_0") }, new string[1] { "Tutorial_Chapter_4_2a" }, 3, 1, LocalStringManager.GetConfig("TutorialVideo_language", "ChapterName_14"), LocalStringManager.GetConfig("TutorialVideo_language", "VideoSummary_14"), null));
 		_dataArray.Add(new TutorialVideoItem(15, "Tutorial_Chapter_4_3", LocalStringManager.GetConfig("TutorialVideo_language", "Name_15"), new string[2]
 		{
 			LocalStringManager.GetConfig("TutorialVideo_language", "PartsTitle_15_0"),

@@ -20,7 +20,7 @@ public class CharacterOverviewEatingDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 20;
+		int totalSize = 132;
 		totalSize = ((InjuryDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + InjuryDisplayData.GetSerializedSize())));
 		if (totalSize > 4)
 		{

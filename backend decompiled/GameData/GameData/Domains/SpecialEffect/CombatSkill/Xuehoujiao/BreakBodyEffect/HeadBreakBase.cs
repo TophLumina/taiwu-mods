@@ -127,7 +127,7 @@ public class HeadBreakBase : BreakBodyEffectBase
 	{
 		if (dataKey.CharId != base.CharacterId)
 		{
-			return 0;
+			return base.GetModifyValue(dataKey, currModifyValue);
 		}
 		if (_hitAffecting && (dataKey.FieldId == 56 || dataKey.FieldId == 57 || dataKey.FieldId == 58 || dataKey.FieldId == 59))
 		{
@@ -137,6 +137,6 @@ public class HeadBreakBase : BreakBodyEffectBase
 		{
 			return -40;
 		}
-		return 0;
+		return base.GetModifyValue(dataKey, currModifyValue);
 	}
 }

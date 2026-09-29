@@ -7,9 +7,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 较艺准备界面显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class LifeSkillCombatBeginDisplayData : ISerializableGameData
 {
@@ -56,11 +53,8 @@ public class LifeSkillCombatBeginDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 9;
+		int totalSize = 81;
 		totalSize = ((UnlockedCountList == null) ? (totalSize + 2) : (totalSize + (2 + 4 * UnlockedCountList.Count)));
-		totalSize += SelfAttainments.GetSerializedSize();
-		totalSize += EnemyAttainments.GetSerializedSize();
-		totalSize += CurReadingBook.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

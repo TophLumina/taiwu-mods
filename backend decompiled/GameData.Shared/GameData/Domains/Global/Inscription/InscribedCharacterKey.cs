@@ -3,36 +3,13 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Global.Inscription;
 
-/// <summary>
-/// 铭刻的角色的索引
-/// </summary>
-public struct InscribedCharacterKey : ISerializableGameData, IEquatable<InscribedCharacterKey>
+public struct InscribedCharacterKey(uint worldId, int charId) : ISerializableGameData, IEquatable<InscribedCharacterKey>
 {
-	/// <summary>
-	/// 世界 ID
-	/// </summary>
-	public uint WorldId;
+	public uint WorldId = worldId;
 
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
-	public int CharId;
+	public int CharId = charId;
 
-	/// <summary>
-	/// 无效的铭刻角色Key
-	/// </summary>
 	public static readonly InscribedCharacterKey Invalid = new InscribedCharacterKey(0u, -1);
-
-	/// <summary>
-	/// 铭刻的角色的索引
-	/// </summary>
-	/// <param name="worldId"></param>
-	/// <param name="charId"></param>
-	public InscribedCharacterKey(uint worldId, int charId)
-	{
-		WorldId = worldId;
-		CharId = charId;
-	}
 
 	public static explicit operator ulong(InscribedCharacterKey value)
 	{

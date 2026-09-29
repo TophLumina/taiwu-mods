@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class Choosy : ConfigData<ChoosyItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Choosy Instance = new Choosy();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "LifeSkillType", "TemplateId", "BaseUpgradeRate", "MaxUpgradeRate", "BaseUpgradeCount", "MaxUpgradeCount", "GradeList", "AttainmentRate", "UpgradeRateAttainmentBonus", "UpgradeCountAttainmentBonus" };

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SpecialEffectDataField : ConfigData<SpecialEffectDataFieldItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SpecialEffectDataField Instance = new SpecialEffectDataField();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "TemplateId", "FieldName", "DisplayFormat" };

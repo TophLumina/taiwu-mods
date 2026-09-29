@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class ZhujianCombatSkillToWeapon : ConfigData<ZhujianCombatSkillToWeaponItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ZhujianCombatSkillToWeapon Instance = new ZhujianCombatSkillToWeapon();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "CombatSkillId", "WeaponId", "EffectId", "TemplateId" };

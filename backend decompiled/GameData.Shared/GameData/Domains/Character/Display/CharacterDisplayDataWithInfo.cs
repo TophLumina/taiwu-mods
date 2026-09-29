@@ -3,31 +3,20 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物列表所需的数据，包含人物显示数据和秘闻数量数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class CharacterDisplayDataWithInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData CharacterDisplayData;
 
-	/// <summary>
-	/// 秘闻数量数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterInfoCountData CharacterInfoCountData;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -39,7 +28,6 @@ public class CharacterDisplayDataWithInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -66,7 +54,6 @@ public class CharacterDisplayDataWithInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

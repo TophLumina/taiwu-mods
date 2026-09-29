@@ -7,111 +7,48 @@ namespace Config;
 [Serializable]
 public class MerchantType : ConfigData<MerchantTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 服牛帮
-		/// </summary>
 		public const sbyte Foods = 0;
 
-		/// <summary>
-		/// 文山书海阁
-		/// </summary>
 		public const sbyte Books = 1;
 
-		/// <summary>
-		/// 五湖商会
-		/// </summary>
 		public const sbyte Materials = 2;
 
-		/// <summary>
-		/// 大武魁商号
-		/// </summary>
 		public const sbyte Equipments = 3;
 
-		/// <summary>
-		/// 回春堂
-		/// </summary>
 		public const sbyte Medicines = 4;
 
-		/// <summary>
-		/// 公输坊
-		/// </summary>
 		public const sbyte Constructions = 5;
 
-		/// <summary>
-		/// 奇货斋
-		/// </summary>
 		public const sbyte Accessories = 6;
 
-		/// <summary>
-		/// 农户互动
-		/// </summary>
 		public const sbyte FruitShop = 7;
 
-		/// <summary>
-		/// 峨眉互动
-		/// </summary>
 		public const sbyte EMeiShop = 8;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 服牛帮
-		/// </summary>
 		public static MerchantTypeItem Foods => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 文山书海阁
-		/// </summary>
 		public static MerchantTypeItem Books => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 五湖商会
-		/// </summary>
 		public static MerchantTypeItem Materials => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 大武魁商号
-		/// </summary>
 		public static MerchantTypeItem Equipments => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 回春堂
-		/// </summary>
 		public static MerchantTypeItem Medicines => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 公输坊
-		/// </summary>
 		public static MerchantTypeItem Constructions => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 奇货斋
-		/// </summary>
 		public static MerchantTypeItem Accessories => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 农户互动
-		/// </summary>
 		public static MerchantTypeItem FruitShop => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 峨眉互动
-		/// </summary>
 		public static MerchantTypeItem EMeiShop => Instance[(sbyte)8];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MerchantType Instance = new MerchantType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

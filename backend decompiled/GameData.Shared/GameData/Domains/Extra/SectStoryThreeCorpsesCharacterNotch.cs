@@ -1,8 +1,5 @@
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 然山三尸跟随 档次类型
-/// </summary>
 public class SectStoryThreeCorpsesCharacterNotch
 {
 	public const sbyte Low = 0;

@@ -9,9 +9,6 @@ namespace Config;
 [Serializable]
 public class MakeItemSubType : ConfigData<MakeItemSubTypeItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MakeItemSubType Instance = new MakeItemSubType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "FilterName", "RefiningEffect", "Desc", "Result", "TemplateId", "Icon" };

@@ -6,7 +6,6 @@ public enum CombatCharacterStateType : sbyte
 	Idle,
 	SelectChangeTrick,
 	PrepareAttack,
-	BreakAttack,
 	Attack,
 	PrepareUnlockAttack,
 	UnlockAttack,
@@ -23,5 +22,8 @@ public enum CombatCharacterStateType : sbyte
 	ChangeBossPhase,
 	JumpMove,
 	AnimalAttack,
-	SpecialShow
+	SpecialShow,
+	UseGoldenWire,
+	SmarterChicken,
+	AddChickenPoint
 }

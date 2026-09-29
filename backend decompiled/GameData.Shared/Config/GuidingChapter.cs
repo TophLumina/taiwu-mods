@@ -7,3891 +7,1560 @@ namespace Config;
 [Serializable]
 public class GuidingChapter : ConfigData<GuidingChapterItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 伏虞剑柄
-		/// </summary>
 		public const short Item1 = 0;
 
-		/// <summary>
-		/// 太吾传承
-		/// </summary>
 		public const short Item2 = 1;
 
-		/// <summary>
-		/// 遗惠点数
-		/// </summary>
 		public const short Item3 = 2;
 
-		/// <summary>
-		/// 生平遗惠
-		/// </summary>
 		public const short Item4 = 3;
 
-		/// <summary>
-		/// 铭刻
-		/// </summary>
 		public const short Item5 = 4;
 
-		/// <summary>
-		/// 侵袭进度
-		/// </summary>
 		public const short Item6 = 5;
 
-		/// <summary>
-		/// 相枢入魔
-		/// </summary>
 		public const short Item7 = 6;
 
-		/// <summary>
-		/// 失心人
-		/// </summary>
 		public const short Item8 = 7;
 
-		/// <summary>
-		/// 玄石火灰
-		/// </summary>
 		public const short Item9 = 8;
 
-		/// <summary>
-		/// 伏虞心念
-		/// </summary>
 		public const short Item10 = 9;
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public const short Item11 = 10;
 
-		/// <summary>
-		/// 相枢化身
-		/// </summary>
 		public const short Item12 = 11;
 
-		/// <summary>
-		/// 神剑碎片
-		/// </summary>
 		public const short Item13 = 12;
 
-		/// <summary>
-		/// 破冢化身
-		/// </summary>
 		public const short Item14 = 13;
 
-		/// <summary>
-		/// 紫竹化身
-		/// </summary>
 		public const short Item15 = 14;
 
-		/// <summary>
-		/// 州域与地区
-		/// </summary>
 		public const short Item16 = 15;
 
-		/// <summary>
-		/// 世界旅行
-		/// </summary>
 		public const short Item17 = 16;
 
-		/// <summary>
-		/// 传驿通路
-		/// </summary>
 		public const short Item18 = 17;
 
-		/// <summary>
-		/// 地区恩义
-		/// </summary>
 		public const short Item19 = 18;
 
-		/// <summary>
-		/// 地格与地形
-		/// </summary>
 		public const short Item20 = 19;
 
-		/// <summary>
-		/// 地格移动
-		/// </summary>
 		public const short Item21 = 20;
 
-		/// <summary>
-		/// 视野
-		/// </summary>
 		public const short Item22 = 21;
 
-		/// <summary>
-		/// 定居点
-		/// </summary>
 		public const short Item23 = 22;
 
-		/// <summary>
-		/// 地格资源
-		/// </summary>
 		public const short Item24 = 23;
 
-		/// <summary>
-		/// 天灾
-		/// </summary>
 		public const short Item25 = 24;
 
-		/// <summary>
-		/// 拾取遗宝
-		/// </summary>
 		public const short Item26 = 25;
 
-		/// <summary>
-		/// 行囊超重
-		/// </summary>
 		public const short Item27 = 26;
 
-		/// <summary>
-		/// 挖掘系统
-		/// </summary>
 		public const short Item28 = 27;
 
-		/// <summary>
-		/// 精力
-		/// </summary>
 		public const short Item29 = 28;
 
-		/// <summary>
-		/// 月份更替
-		/// </summary>
 		public const short Item30 = 29;
 
-		/// <summary>
-		/// 太吾月报
-		/// </summary>
 		public const short Item31 = 30;
 
-		/// <summary>
-		/// 势力与身份
-		/// </summary>
 		public const short Item32 = 31;
 
-		/// <summary>
-		/// 势力值
-		/// </summary>
 		public const short Item33 = 32;
 
-		/// <summary>
-		/// 晋升
-		/// </summary>
 		public const short Item34 = 33;
 
-		/// <summary>
-		/// 守卫
-		/// </summary>
 		public const short Item35 = 34;
 
-		/// <summary>
-		/// 法规
-		/// </summary>
 		public const short Item36 = 35;
 
-		/// <summary>
-		/// 监牢界面
-		/// </summary>
 		public const short Item37 = 36;
 
-		/// <summary>
-		/// 囚犯
-		/// </summary>
 		public const short Item38 = 37;
 
-		/// <summary>
-		/// 悬赏与送监
-		/// </summary>
 		public const short Item39 = 38;
 
-		/// <summary>
-		/// 犯罪处罚
-		/// </summary>
 		public const short Item40 = 39;
 
-		/// <summary>
-		/// 库房
-		/// </summary>
 		public const short Item41 = 40;
 
-		/// <summary>
-		/// 库房交换
-		/// </summary>
 		public const short Item42 = 41;
 
-		/// <summary>
-		/// 商会
-		/// </summary>
 		public const short Item43 = 42;
 
-		/// <summary>
-		/// 商店等级
-		/// </summary>
 		public const short Item44 = 43;
 
-		/// <summary>
-		/// 商会好感
-		/// </summary>
 		public const short Item45 = 44;
 
-		/// <summary>
-		/// 额外商品
-		/// </summary>
 		public const short Item46 = 45;
 
-		/// <summary>
-		/// 交易
-		/// </summary>
 		public const short Item47 = 46;
 
-		/// <summary>
-		/// 商队
-		/// </summary>
 		public const short Item48 = 47;
 
-		/// <summary>
-		/// 外道与任侠
-		/// </summary>
 		public const short Item49 = 48;
 
-		/// <summary>
-		/// 相枢爪牙
-		/// </summary>
 		public const short Item50 = 49;
 
-		/// <summary>
-		/// 野兽
-		/// </summary>
 		public const short Item51 = 50;
 
-		/// <summary>
-		/// 门派
-		/// </summary>
 		public const short Item52 = 51;
 
-		/// <summary>
-		/// 门派戒律
-		/// </summary>
 		public const short Item53 = 52;
 
-		/// <summary>
-		/// 学艺许可
-		/// </summary>
 		public const short Item54 = 53;
 
-		/// <summary>
-		/// 门派修习
-		/// </summary>
 		public const short Item55 = 54;
 
-		/// <summary>
-		/// 门派支持度
-		/// </summary>
 		public const short Item56 = 55;
 
-		/// <summary>
-		/// 门派较武
-		/// </summary>
 		public const short Item57 = 56;
 
-		/// <summary>
-		/// 地区故事
-		/// </summary>
 		public const short Item58 = 57;
 
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public const short Item59 = 58;
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public const short Item60 = 59;
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public const short Item61 = 60;
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public const short Item62 = 61;
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public const short Item63 = 62;
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public const short Item64 = 63;
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public const short Item65 = 64;
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public const short Item66 = 65;
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public const short Item67 = 66;
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public const short Item68 = 67;
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public const short Item69 = 68;
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public const short Item70 = 69;
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public const short Item71 = 70;
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public const short Item72 = 71;
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public const short Item73 = 72;
 
-		/// <summary>
-		/// 姓名
-		/// </summary>
 		public const short Item74 = 73;
 
-		/// <summary>
-		/// 生时
-		/// </summary>
 		public const short Item75 = 74;
 
-		/// <summary>
-		/// 年龄
-		/// </summary>
 		public const short Item76 = 75;
 
-		/// <summary>
-		/// 性别
-		/// </summary>
 		public const short Item77 = 76;
 
-		/// <summary>
-		/// 魅力
-		/// </summary>
 		public const short Item78 = 77;
 
-		/// <summary>
-		/// 相貌
-		/// </summary>
 		public const short Item79 = 78;
 
-		/// <summary>
-		/// 理想门派
-		/// </summary>
 		public const short Item80 = 79;
 
-		/// <summary>
-		/// 称号
-		/// </summary>
 		public const short Item81 = 80;
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public const short Item82 = 81;
 
-		/// <summary>
-		/// 好感
-		/// </summary>
 		public const short Item83 = 82;
 
-		/// <summary>
-		/// 戒心
-		/// </summary>
 		public const short Item84 = 83;
 
-		/// <summary>
-		/// 喜恶
-		/// </summary>
 		public const short Item85 = 84;
 
-		/// <summary>
-		/// 立场
-		/// </summary>
 		public const short Item86 = 85;
 
-		/// <summary>
-		/// 名誉
-		/// </summary>
 		public const short Item87 = 86;
 
-		/// <summary>
-		/// 轮回
-		/// </summary>
 		public const short Item88 = 87;
 
-		/// <summary>
-		/// 九世轮回
-		/// </summary>
 		public const short Item89 = 88;
 
-		/// <summary>
-		/// 资质
-		/// </summary>
 		public const short Item90 = 89;
 
-		/// <summary>
-		/// 造诣
-		/// </summary>
 		public const short Item91 = 90;
 
-		/// <summary>
-		/// 主要属性
-		/// </summary>
 		public const short Item92 = 91;
 
-		/// <summary>
-		/// 主要属性的消耗与恢复
-		/// </summary>
 		public const short Item93 = 92;
 
-		/// <summary>
-		/// 攻击属性
-		/// </summary>
 		public const short Item94 = 93;
 
-		/// <summary>
-		/// 防御属性
-		/// </summary>
 		public const short Item95 = 94;
 
-		/// <summary>
-		/// 命中属性
-		/// </summary>
 		public const short Item96 = 95;
 
-		/// <summary>
-		/// 化解属性
-		/// </summary>
 		public const short Item97 = 96;
 
-		/// <summary>
-		/// 次要属性
-		/// </summary>
 		public const short Item98 = 97;
 
-		/// <summary>
-		/// 人物特性
-		/// </summary>
 		public const short Item99 = 98;
 
-		/// <summary>
-		/// 特性倾向
-		/// </summary>
 		public const short Item100 = 99;
 
-		/// <summary>
-		/// 队伍机略
-		/// </summary>
 		public const short Item101 = 100;
 
-		/// <summary>
-		/// 七元赋性
-		/// </summary>
 		public const short Item102 = 101;
 
-		/// <summary>
-		/// 伤病
-		/// </summary>
 		public const short Item103 = 102;
 
-		/// <summary>
-		/// 健康
-		/// </summary>
 		public const short Item104 = 103;
 
-		/// <summary>
-		/// 寿元
-		/// </summary>
 		public const short Item105 = 104;
 
-		/// <summary>
-		/// 伤势
-		/// </summary>
 		public const short Item106 = 105;
 
-		/// <summary>
-		/// 毒素
-		/// </summary>
 		public const short Item107 = 106;
 
-		/// <summary>
-		/// 施加毒素
-		/// </summary>
 		public const short Item108 = 107;
 
-		/// <summary>
-		/// 混合毒素
-		/// </summary>
 		public const short Item109 = 108;
 
-		/// <summary>
-		/// 毒性发作
-		/// </summary>
 		public const short Item110 = 109;
 
-		/// <summary>
-		/// 内息
-		/// </summary>
 		public const short Item111 = 110;
 
-		/// <summary>
-		/// 蛊虫
-		/// </summary>
 		public const short Item112 = 111;
 
-		/// <summary>
-		/// 蛊引
-		/// </summary>
 		public const short Item113 = 112;
 
-		/// <summary>
-		/// 蛊虫的成长
-		/// </summary>
 		public const short Item114 = 113;
 
-		/// <summary>
-		/// 解蛊
-		/// </summary>
 		public const short Item115 = 114;
 
-		/// <summary>
-		/// 王蛊
-		/// </summary>
 		public const short Item116 = 115;
 
-		/// <summary>
-		/// 诊疗
-		/// </summary>
 		public const short Item117 = 116;
 
-		/// <summary>
-		/// 服食汲饮
-		/// </summary>
 		public const short Item118 = 117;
 
-		/// <summary>
-		/// 用药
-		/// </summary>
 		public const short Item119 = 118;
 
-		/// <summary>
-		/// 关系
-		/// </summary>
 		public const short Item120 = 119;
 
-		/// <summary>
-		/// 爱慕
-		/// </summary>
 		public const short Item121 = 120;
 
-		/// <summary>
-		/// 仇敌
-		/// </summary>
 		public const short Item122 = 121;
 
-		/// <summary>
-		/// 族谱
-		/// </summary>
 		public const short Item123 = 122;
 
-		/// <summary>
-		/// 经历
-		/// </summary>
 		public const short Item124 = 123;
 
-		/// <summary>
-		/// 见闻
-		/// </summary>
 		public const short Item125 = 124;
 
-		/// <summary>
-		/// 地方见闻
-		/// </summary>
 		public const short Item126 = 125;
 
-		/// <summary>
-		/// 门派见闻
-		/// </summary>
 		public const short Item127 = 126;
 
-		/// <summary>
-		/// 技艺见闻
-		/// </summary>
 		public const short Item128 = 127;
 
-		/// <summary>
-		/// 西域见闻
-		/// </summary>
 		public const short Item129 = 128;
 
-		/// <summary>
-		/// 剑冢见闻
-		/// </summary>
 		public const short Item130 = 129;
 
-		/// <summary>
-		/// 志向见闻
-		/// </summary>
 		public const short Item131 = 130;
 
-		/// <summary>
-		/// 人物互动
-		/// </summary>
 		public const short Item132 = 131;
 
-		/// <summary>
-		/// 互动-交谈
-		/// </summary>
 		public const short Item133 = 132;
 
-		/// <summary>
-		/// 个人交换
-		/// </summary>
 		public const short Item134 = 133;
 
-		/// <summary>
-		/// 互动-比试
-		/// </summary>
 		public const short Item135 = 134;
 
-		/// <summary>
-		/// 请教
-		/// </summary>
 		public const short Item136 = 135;
 
-		/// <summary>
-		/// 交换藏书
-		/// </summary>
 		public const short Item137 = 136;
 
-		/// <summary>
-		/// 互动-修习
-		/// </summary>
 		public const short Item138 = 137;
 
-		/// <summary>
-		/// 邀为同道
-		/// </summary>
 		public const short Item139 = 138;
 
-		/// <summary>
-		/// 互动-亲近
-		/// </summary>
 		public const short Item140 = 139;
 
-		/// <summary>
-		/// 互动-敌对
-		/// </summary>
 		public const short Item141 = 140;
 
-		/// <summary>
-		/// 乞丐
-		/// </summary>
 		public const short Item142 = 141;
 
-		/// <summary>
-		/// 农户
-		/// </summary>
 		public const short Item143 = 142;
 
-		/// <summary>
-		/// 下九流
-		/// </summary>
 		public const short Item144 = 143;
 
-		/// <summary>
-		/// 手艺人
-		/// </summary>
 		public const short Item145 = 144;
 
-		/// <summary>
-		/// 大夫
-		/// </summary>
 		public const short Item146 = 145;
 
-		/// <summary>
-		/// 商人
-		/// </summary>
 		public const short Item147 = 146;
 
-		/// <summary>
-		/// 文人
-		/// </summary>
 		public const short Item148 = 147;
 
-		/// <summary>
-		/// 富豪
-		/// </summary>
 		public const short Item149 = 148;
 
-		/// <summary>
-		/// 城镇二阶身份
-		/// </summary>
 		public const short Item150 = 149;
 
-		/// <summary>
-		/// 城镇一阶身份
-		/// </summary>
 		public const short Item151 = 150;
 
-		/// <summary>
-		/// 修改法规
-		/// </summary>
 		public const short Item152 = 151;
 
-		/// <summary>
-		/// 荐送弟子
-		/// </summary>
 		public const short Item153 = 152;
 
-		/// <summary>
-		/// 面壁阅经
-		/// </summary>
 		public const short Item154 = 153;
 
-		/// <summary>
-		/// 天府之国
-		/// </summary>
 		public const short Item155 = 154;
 
-		/// <summary>
-		/// 起死回生
-		/// </summary>
 		public const short Item156 = 155;
 
-		/// <summary>
-		/// 七星调元
-		/// </summary>
 		public const short Item157 = 156;
 
-		/// <summary>
-		/// 石牢静坐
-		/// </summary>
 		public const short Item158 = 157;
 
-		/// <summary>
-		/// 散播威名
-		/// </summary>
 		public const short Item159 = 158;
 
-		/// <summary>
-		/// 王禅典籍
-		/// </summary>
 		public const short Item160 = 159;
 
-		/// <summary>
-		/// 玉镜沉思
-		/// </summary>
 		public const short Item161 = 160;
 
-		/// <summary>
-		/// 欧冶古具
-		/// </summary>
 		public const short Item162 = 161;
 
-		/// <summary>
-		/// 铸剑试炼
-		/// </summary>
 		public const short Item163 = 162;
 
-		/// <summary>
-		/// 秘药延寿
-		/// </summary>
 		public const short Item164 = 163;
 
-		/// <summary>
-		/// 金刚秘法
-		/// </summary>
 		public const short Item165 = 164;
 
-		/// <summary>
-		/// 五圣秘浴
-		/// </summary>
 		public const short Item166 = 165;
 
-		/// <summary>
-		/// 委托暗杀
-		/// </summary>
 		public const short Item167 = 166;
 
-		/// <summary>
-		/// 龙岛忠仆
-		/// </summary>
 		public const short Item168 = 167;
 
-		/// <summary>
-		/// 血池秘法
-		/// </summary>
 		public const short Item169 = 168;
 
-		/// <summary>
-		/// 同道
-		/// </summary>
 		public const short Item170 = 169;
 
-		/// <summary>
-		/// 俘虏
-		/// </summary>
 		public const short Item171 = 170;
 
-		/// <summary>
-		/// 生育
-		/// </summary>
 		public const short Item172 = 171;
 
-		/// <summary>
-		/// 怀孕
-		/// </summary>
 		public const short Item173 = 172;
 
-		/// <summary>
-		/// 养育子女
-		/// </summary>
 		public const short Item174 = 173;
 
-		/// <summary>
-		/// 坟墓
-		/// </summary>
 		public const short Item175 = 174;
 
-		/// <summary>
-		/// NPC需求查看
-		/// </summary>
 		public const short Item176 = 175;
 
-		/// <summary>
-		/// 满足NPC的需求
-		/// </summary>
 		public const short Item177 = 176;
 
-		/// <summary>
-		/// 过月代办意外事件
-		/// </summary>
 		public const short Item178 = 177;
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public const short Item179 = 178;
 
-		/// <summary>
-		/// 武学
-		/// </summary>
 		public const short Item180 = 179;
 
-		/// <summary>
-		/// 研读书籍
-		/// </summary>
 		public const short Item181 = 180;
 
-		/// <summary>
-		/// 参考书籍
-		/// </summary>
 		public const short Item182 = 181;
 
-		/// <summary>
-		/// 总纲与心法
-		/// </summary>
 		public const short Item183 = 182;
 
-		/// <summary>
-		/// 研读技艺
-		/// </summary>
 		public const short Item184 = 183;
 
-		/// <summary>
-		/// 周天运转
-		/// </summary>
 		public const short Item185 = 184;
 
-		/// <summary>
-		/// 辅助内功
-		/// </summary>
 		public const short Item186 = 185;
 
-		/// <summary>
-		/// 灵光一闪
-		/// </summary>
 		public const short Item187 = 186;
 
-		/// <summary>
-		/// 研读策略
-		/// </summary>
 		public const short Item188 = 187;
 
-		/// <summary>
-		/// 天人感应
-		/// </summary>
 		public const short Item189 = 188;
 
-		/// <summary>
-		/// 周天策略
-		/// </summary>
 		public const short Item190 = 189;
 
-		/// <summary>
-		/// 专心致志与聚精会神
-		/// </summary>
 		public const short Item191 = 190;
 
-		/// <summary>
-		/// 心法效果
-		/// </summary>
 		public const short Item192 = 191;
 
-		/// <summary>
-		/// 内外功比例
-		/// </summary>
 		public const short Item193 = 192;
 
-		/// <summary>
-		/// 突破准备
-		/// </summary>
 		public const short Item194 = 193;
 
-		/// <summary>
-		/// 突破流程
-		/// </summary>
 		public const short Item195 = 194;
 
-		/// <summary>
-		/// 连接突破格
-		/// </summary>
 		public const short Item196 = 195;
 
-		/// <summary>
-		/// 突破功法 - 天资上限/走火入魔
-		/// </summary>
 		public const short Item197 = 196;
 
-		/// <summary>
-		/// 突破功法 - 突破格类型
-		/// </summary>
 		public const short Item198 = 197;
 
-		/// <summary>
-		/// 玄机格
-		/// </summary>
 		public const short Item199 = 198;
 
-		/// <summary>
-		/// 参悟玄机
-		/// </summary>
 		public const short Item200 = 199;
 
-		/// <summary>
-		/// 突破功法 - 完成突破
-		/// </summary>
 		public const short Item201 = 200;
 
-		/// <summary>
-		/// 功法五行
-		/// </summary>
 		public const short Item202 = 201;
 
-		/// <summary>
-		/// 功法威力
-		/// </summary>
 		public const short Item203 = 202;
 
-		/// <summary>
-		/// 发挥需求
-		/// </summary>
 		public const short Item204 = 203;
 
-		/// <summary>
-		/// 运功
-		/// </summary>
 		public const short Item205 = 204;
 
-		/// <summary>
-		/// 精解
-		/// </summary>
 		public const short Item206 = 205;
 
-		/// <summary>
-		/// 运功效果
-		/// </summary>
 		public const short Item207 = 206;
 
-		/// <summary>
-		/// 精纯境界
-		/// </summary>
 		public const short Item208 = 207;
 
-		/// <summary>
-		/// 内力
-		/// </summary>
 		public const short Item209 = 208;
 
-		/// <summary>
-		/// 内力属性
-		/// </summary>
 		public const short Item210 = 209;
 
-		/// <summary>
-		/// 内力冲克
-		/// </summary>
 		public const short Item211 = 210;
 
-		/// <summary>
-		/// 凝聚真气
-		/// </summary>
 		public const short Item212 = 211;
 
-		/// <summary>
-		/// 奇书宝典
-		/// </summary>
 		public const short Item213 = 212;
 
-		/// <summary>
-		/// 争夺奇书
-		/// </summary>
 		public const short Item214 = 213;
 
-		/// <summary>
-		/// 奇书奇遇
-		/// </summary>
 		public const short Item215 = 214;
 
-		/// <summary>
-		/// 解读奇书
-		/// </summary>
 		public const short Item216 = 215;
 
-		/// <summary>
-		/// 奇书执迷
-		/// </summary>
 		public const short Item217 = 216;
 
-		/// <summary>
-		/// 战斗类型
-		/// </summary>
 		public const short Item218 = 217;
 
-		/// <summary>
-		/// 战斗准备
-		/// </summary>
 		public const short Item219 = 218;
 
-		/// <summary>
-		/// 战斗限制
-		/// </summary>
 		public const short Item220 = 219;
 
-		/// <summary>
-		/// 战斗结算
-		/// </summary>
 		public const short Item221 = 220;
 
-		/// <summary>
-		/// 距离与移动
-		/// </summary>
 		public const short Item222 = 221;
 
-		/// <summary>
-		/// 兵器攻击
-		/// </summary>
 		public const short Item223 = 222;
 
-		/// <summary>
-		/// 招式
-		/// </summary>
 		public const short Item224 = 223;
 
-		/// <summary>
-		/// 追击
-		/// </summary>
 		public const short Item225 = 224;
 
-		/// <summary>
-		/// 攻击耗时
-		/// </summary>
 		public const short Item226 = 225;
 
-		/// <summary>
-		/// 攻击范围
-		/// </summary>
 		public const short Item227 = 226;
 
-		/// <summary>
-		/// 命中与化解
-		/// </summary>
 		public const short Item228 = 227;
 
-		/// <summary>
-		/// 命中要害
-		/// </summary>
 		public const short Item229 = 228;
 
-		/// <summary>
-		/// 兵器切换
-		/// </summary>
 		public const short Item230 = 229;
 
-		/// <summary>
-		/// 变招
-		/// </summary>
 		public const short Item231 = 230;
 
-		/// <summary>
-		/// 解封
-		/// </summary>
 		public const short Item232 = 231;
 
-		/// <summary>
-		/// 生铸
-		/// </summary>
 		public const short Item233 = 232;
 
-		/// <summary>
-		/// 战败标记
-		/// </summary>
 		public const short Item234 = 233;
 
-		/// <summary>
-		/// 直接伤害
-		/// </summary>
 		public const short Item235 = 234;
 
-		/// <summary>
-		/// 伤害累积
-		/// </summary>
 		public const short Item236 = 235;
 
-		/// <summary>
-		/// 身心强健
-		/// </summary>
 		public const short Item237 = 236;
 
-		/// <summary>
-		/// 伤势标记
-		/// </summary>
 		public const short Item238 = 237;
 
-		/// <summary>
-		/// 重创标记
-		/// </summary>
 		public const short Item239 = 238;
 
-		/// <summary>
-		/// 破绽标记
-		/// </summary>
 		public const short Item240 = 239;
 
-		/// <summary>
-		/// 封穴标记
-		/// </summary>
 		public const short Item241 = 240;
 
-		/// <summary>
-		/// 失神标记
-		/// </summary>
 		public const short Item242 = 241;
 
-		/// <summary>
-		/// 毒素标记
-		/// </summary>
 		public const short Item243 = 242;
 
-		/// <summary>
-		/// 蛊虫标记
-		/// </summary>
 		public const short Item244 = 243;
 
-		/// <summary>
-		/// 内息标记
-		/// </summary>
 		public const short Item245 = 244;
 
-		/// <summary>
-		/// 状态标记
-		/// </summary>
 		public const short Item246 = 245;
 
-		/// <summary>
-		/// 真气标记
-		/// </summary>
 		public const short Item247 = 246;
 
-		/// <summary>
-		/// 健康标记
-		/// </summary>
 		public const short Item248 = 247;
 
-		/// <summary>
-		/// 真气盈亏
-		/// </summary>
 		public const short Item249 = 248;
 
-		/// <summary>
-		/// 施展需要
-		/// </summary>
 		public const short Item250 = 249;
 
-		/// <summary>
-		/// 架势
-		/// </summary>
 		public const short Item251 = 250;
 
-		/// <summary>
-		/// 提气
-		/// </summary>
 		public const short Item252 = 251;
 
-		/// <summary>
-		/// 脚力
-		/// </summary>
 		public const short Item253 = 252;
 
-		/// <summary>
-		/// 蓄式
-		/// </summary>
 		public const short Item254 = 253;
 
-		/// <summary>
-		/// 内功
-		/// </summary>
 		public const short Item255 = 254;
 
-		/// <summary>
-		/// 身法
-		/// </summary>
 		public const short Item256 = 255;
 
-		/// <summary>
-		/// 摧破功法
-		/// </summary>
 		public const short Item257 = 256;
 
-		/// <summary>
-		/// 护体功法
-		/// </summary>
 		public const short Item258 = 257;
 
-		/// <summary>
-		/// 奇窍功法
-		/// </summary>
 		public const short Item259 = 258;
 
-		/// <summary>
-		/// 威力成数
-		/// </summary>
 		public const short Item260 = 259;
 
-		/// <summary>
-		/// 反击
-		/// </summary>
 		public const short Item261 = 260;
 
-		/// <summary>
-		/// 反震
-		/// </summary>
 		public const short Item262 = 261;
 
-		/// <summary>
-		/// 封禁
-		/// </summary>
 		public const short Item263 = 262;
 
-		/// <summary>
-		/// 功法反噬
-		/// </summary>
 		public const short Item264 = 263;
 
-		/// <summary>
-		/// 助战同道
-		/// </summary>
 		public const short Item265 = 264;
 
-		/// <summary>
-		/// 助战指令
-		/// </summary>
 		public const short Item266 = 265;
 
-		/// <summary>
-		/// 负面指令
-		/// </summary>
 		public const short Item267 = 266;
 
-		/// <summary>
-		/// 战斗行为
-		/// </summary>
 		public const short Item268 = 267;
 
-		/// <summary>
-		/// 战斗行为-疗伤驱毒
-		/// </summary>
 		public const short Item269 = 268;
 
-		/// <summary>
-		/// 战斗行为-使用物品
-		/// </summary>
 		public const short Item270 = 269;
 
-		/// <summary>
-		/// 逃离战斗
-		/// </summary>
 		public const short Item271 = 270;
 
-		/// <summary>
-		/// 认输投降
-		/// </summary>
 		public const short Item272 = 271;
 
-		/// <summary>
-		/// 处决
-		/// </summary>
 		public const short Item273 = 272;
 
-		/// <summary>
-		/// 产业视图
-		/// </summary>
 		public const short Item274 = 273;
 
-		/// <summary>
-		/// 产业建筑
-		/// </summary>
 		public const short Item275 = 274;
 
-		/// <summary>
-		/// 扩展建筑
-		/// </summary>
 		public const short Item276 = 275;
 
-		/// <summary>
-		/// 建筑受损
-		/// </summary>
 		public const short Item277 = 276;
 
-		/// <summary>
-		/// 自然资源
-		/// </summary>
 		public const short Item278 = 277;
 
-		/// <summary>
-		/// 建造
-		/// </summary>
 		public const short Item279 = 278;
 
-		/// <summary>
-		/// 扩建
-		/// </summary>
 		public const short Item280 = 279;
 
-		/// <summary>
-		/// 培育
-		/// </summary>
 		public const short Item281 = 280;
 
-		/// <summary>
-		/// 重申信誓
-		/// </summary>
 		public const short Item282 = 281;
 
-		/// <summary>
-		/// 撤除
-		/// </summary>
 		public const short Item283 = 282;
 
-		/// <summary>
-		/// 产业规划
-		/// </summary>
 		public const short Item284 = 283;
 
-		/// <summary>
-		/// 产业经营
-		/// </summary>
 		public const short Item285 = 284;
 
-		/// <summary>
-		/// 经营进度
-		/// </summary>
 		public const short Item286 = 285;
 
-		/// <summary>
-		/// 主事与学徒
-		/// </summary>
 		public const short Item287 = 286;
 
-		/// <summary>
-		/// 资源建筑
-		/// </summary>
 		public const short Item288 = 287;
 
-		/// <summary>
-		/// 售货建筑
-		/// </summary>
 		public const short Item289 = 288;
 
-		/// <summary>
-		/// 制造类建筑
-		/// </summary>
 		public const short Item290 = 289;
 
-		/// <summary>
-		/// 居所
-		/// </summary>
 		public const short Item291 = 290;
 
-		/// <summary>
-		/// 蛰室
-		/// </summary>
 		public const short Item292 = 291;
 
-		/// <summary>
-		/// 石屋
-		/// </summary>
 		public const short Item293 = 292;
 
-		/// <summary>
-		/// 太吾氏祠堂
-		/// </summary>
 		public const short Item294 = 293;
 
-		/// <summary>
-		/// 宴堂介绍
-		/// </summary>
 		public const short Item295 = 294;
 
-		/// <summary>
-		/// 仓库
-		/// </summary>
 		public const short Item296 = 295;
 
-		/// <summary>
-		/// 元鸡舍
-		/// </summary>
 		public const short Item297 = 296;
 
-		/// <summary>
-		/// 轮回台
-		/// </summary>
 		public const short Item298 = 297;
 
-		/// <summary>
-		/// 茶马帮
-		/// </summary>
 		public const short Item299 = 298;
 
-		/// <summary>
-		/// 练功房
-		/// </summary>
 		public const short Item300 = 299;
 
-		/// <summary>
-		/// 太吾村民
-		/// </summary>
 		public const short Item301 = 300;
 
-		/// <summary>
-		/// 村民身份
-		/// </summary>
 		public const short Item302 = 301;
 
-		/// <summary>
-		/// 村民身份职能
-		/// </summary>
 		public const short Item303 = 302;
 
-		/// <summary>
-		/// 物品
-		/// </summary>
 		public const short Item304 = 303;
 
-		/// <summary>
-		/// 资源
-		/// </summary>
 		public const short Item305 = 304;
 
-		/// <summary>
-		/// 银钱
-		/// </summary>
 		public const short Item306 = 305;
 
-		/// <summary>
-		/// 威望
-		/// </summary>
 		public const short Item307 = 306;
 
-		/// <summary>
-		/// 历练
-		/// </summary>
 		public const short Item308 = 307;
 
-		/// <summary>
-		/// 食物
-		/// </summary>
 		public const short Item309 = 308;
 
-		/// <summary>
-		/// 丹药
-		/// </summary>
 		public const short Item310 = 309;
 
-		/// <summary>
-		/// 毒药
-		/// </summary>
 		public const short Item311 = 310;
 
-		/// <summary>
-		/// 装备
-		/// </summary>
 		public const short Item312 = 311;
 
-		/// <summary>
-		/// 装备负重
-		/// </summary>
 		public const short Item313 = 312;
 
-		/// <summary>
-		/// 装备特殊效果
-		/// </summary>
 		public const short Item314 = 313;
 
-		/// <summary>
-		/// 兵器
-		/// </summary>
 		public const short Item315 = 314;
 
-		/// <summary>
-		/// 兵器属性
-		/// </summary>
 		public const short Item316 = 315;
 
-		/// <summary>
-		/// 护具
-		/// </summary>
 		public const short Item317 = 316;
 
-		/// <summary>
-		/// 护具属性
-		/// </summary>
 		public const short Item318 = 317;
 
-		/// <summary>
-		/// 宝物
-		/// </summary>
 		public const short Item319 = 318;
 
-		/// <summary>
-		/// 衣装
-		/// </summary>
 		public const short Item320 = 319;
 
-		/// <summary>
-		/// 代步
-		/// </summary>
 		public const short Item321 = 320;
 
-		/// <summary>
-		/// 野兽代步
-		/// </summary>
 		public const short Item322 = 321;
 
-		/// <summary>
-		/// 代步属性
-		/// </summary>
 		public const short Item323 = 322;
 
-		/// <summary>
-		/// 书籍
-		/// </summary>
 		public const short Item324 = 323;
 
-		/// <summary>
-		/// 工具
-		/// </summary>
 		public const short Item325 = 324;
 
-		/// <summary>
-		/// 引子
-		/// </summary>
 		public const short Item326 = 325;
 
-		/// <summary>
-		/// 精制材料
-		/// </summary>
 		public const short Item327 = 326;
 
-		/// <summary>
-		/// 心材
-		/// </summary>
 		public const short Item328 = 327;
 
-		/// <summary>
-		/// 绳索
-		/// </summary>
 		public const short Item329 = 328;
 
-		/// <summary>
-		/// 信鸽
-		/// </summary>
 		public const short Item330 = 329;
 
-		/// <summary>
-		/// 神木种子
-		/// </summary>
 		public const short Item331 = 330;
 
-		/// <summary>
-		/// 养育神木
-		/// </summary>
 		public const short Item332 = 331;
 
-		/// <summary>
-		/// 血露
-		/// </summary>
 		public const short Item333 = 332;
 
-		/// <summary>
-		/// 西域珍宝
-		/// </summary>
 		public const short Item334 = 333;
 
-		/// <summary>
-		/// 制造物品
-		/// </summary>
 		public const short Item335 = 334;
 
-		/// <summary>
-		/// 代制物品
-		/// </summary>
 		public const short Item336 = 335;
 
-		/// <summary>
-		/// 修理物品
-		/// </summary>
 		public const short Item337 = 336;
 
-		/// <summary>
-		/// 拆解物品
-		/// </summary>
 		public const short Item338 = 337;
 
-		/// <summary>
-		/// 精制物品
-		/// </summary>
 		public const short Item339 = 338;
 
-		/// <summary>
-		/// 淬毒
-		/// </summary>
 		public const short Item340 = 339;
 
-		/// <summary>
-		/// 解毒
-		/// </summary>
 		public const short Item341 = 340;
 
-		/// <summary>
-		/// 验毒
-		/// </summary>
 		public const short Item342 = 341;
 
-		/// <summary>
-		/// 改制衣装
-		/// </summary>
 		public const short Item343 = 342;
 
-		/// <summary>
-		/// 志向
-		/// </summary>
 		public const short Item344 = 343;
 
-		/// <summary>
-		/// 志向技能
-		/// </summary>
 		public const short Item345 = 344;
 
-		/// <summary>
-		/// 志向有成
-		/// </summary>
 		public const short Item346 = 345;
 
-		/// <summary>
-		/// 寻找促织
-		/// </summary>
 		public const short Item347 = 346;
 
-		/// <summary>
-		/// 捕捉促织
-		/// </summary>
 		public const short Item348 = 347;
 
-		/// <summary>
-		/// 促织属性
-		/// </summary>
 		public const short Item349 = 348;
 
-		/// <summary>
-		/// 促织决斗
-		/// </summary>
 		public const short Item350 = 349;
 
-		/// <summary>
-		/// 促织战绩
-		/// </summary>
 		public const short Item351 = 350;
 
-		/// <summary>
-		/// 遭遇奇遇
-		/// </summary>
 		public const short Item352 = 351;
 
-		/// <summary>
-		/// 初入奇遇
-		/// </summary>
 		public const short Item353 = 352;
 
-		/// <summary>
-		/// 探索奇遇
-		/// </summary>
 		public const short Item354 = 353;
 
-		/// <summary>
-		/// 较艺准备
-		/// </summary>
 		public const short Item355 = 354;
 
-		/// <summary>
-		/// 开始较艺
-		/// </summary>
 		public const short Item356 = 355;
 
-		/// <summary>
-		/// 使用策略
-		/// </summary>
 		public const short Item357 = 356;
 
-		/// <summary>
-		/// 论战
-		/// </summary>
 		public const short Item358 = 357;
 
-		/// <summary>
-		/// 较艺胜负
-		/// </summary>
 		public const short Item359 = 358;
 
-		/// <summary>
-		/// 较艺压力
-		/// </summary>
 		public const short Item360 = 359;
 
-		/// <summary>
-		/// 较艺结算
-		/// </summary>
 		public const short Item361 = 360;
 
-		/// <summary>
-		/// 诛魔试炼
-		/// </summary>
 		public const short Item362 = 361;
 
-		/// <summary>
-		/// 罗汉开悟
-		/// </summary>
 		public const short Item363 = 362;
 
-		/// <summary>
-		/// 独创心法
-		/// </summary>
 		public const short Item364 = 363;
 
-		/// <summary>
-		/// 生关死节
-		/// </summary>
 		public const short Item365 = 364;
 
-		/// <summary>
-		/// 改正修逆
-		/// </summary>
 		public const short Item366 = 365;
 
-		/// <summary>
-		/// 移宫易穴
-		/// </summary>
 		public const short Item367 = 366;
 
-		/// <summary>
-		/// 神魔入阵
-		/// </summary>
 		public const short Item368 = 367;
 
-		/// <summary>
-		/// 统筹方略
-		/// </summary>
 		public const short Item369 = 368;
 
-		/// <summary>
-		/// 寄托奇书
-		/// </summary>
 		public const short Item370 = 369;
 
-		/// <summary>
-		/// 奇书断执
-		/// </summary>
 		public const short Item371 = 370;
 
-		/// <summary>
-		/// 孤鸾镜水谣
-		/// </summary>
 		public const short Item372 = 371;
 
-		/// <summary>
-		/// 造化生人
-		/// </summary>
 		public const short Item373 = 372;
 
-		/// <summary>
-		/// 天外游历
-		/// </summary>
 		public const short Item374 = 373;
 
-		/// <summary>
-		/// 天枢玄铸
-		/// </summary>
 		public const short Item375 = 374;
 
-		/// <summary>
-		/// 驱使古鼎
-		/// </summary>
 		public const short Item376 = 375;
 
-		/// <summary>
-		/// 鼎蛟淬身
-		/// </summary>
 		public const short Item377 = 376;
 
-		/// <summary>
-		/// 化魂仪式
-		/// </summary>
 		public const short Item378 = 377;
 
-		/// <summary>
-		/// 炼制王蛊
-		/// </summary>
 		public const short Item379 = 378;
 
-		/// <summary>
-		/// 驱动王蛊
-		/// </summary>
 		public const short Item380 = 379;
 
-		/// <summary>
-		/// 奇纹星斗
-		/// </summary>
 		public const short Item381 = 380;
 
-		/// <summary>
-		/// 调遣元鸡
-		/// </summary>
 		public const short Item382 = 381;
 
-		/// <summary>
-		/// 元鸡灵羽
-		/// </summary>
 		public const short Item383 = 382;
 
-		/// <summary>
-		/// 姬穸随行
-		/// </summary>
 		public const short Item384 = 386;
 
-		/// <summary>
-		/// 持印汲气
-		/// </summary>
 		public const short Item385 = 383;
 
-		/// <summary>
-		/// 三才护阵
-		/// </summary>
 		public const short Item386 = 384;
 
-		/// <summary>
-		/// 三魔乱阵
-		/// </summary>
 		public const short Item387 = 385;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 伏虞剑柄
-		/// </summary>
 		public static GuidingChapterItem Item1 => Instance[(short)0];
 
-		/// <summary>
-		/// 太吾传承
-		/// </summary>
 		public static GuidingChapterItem Item2 => Instance[(short)1];
 
-		/// <summary>
-		/// 遗惠点数
-		/// </summary>
 		public static GuidingChapterItem Item3 => Instance[(short)2];
 
-		/// <summary>
-		/// 生平遗惠
-		/// </summary>
 		public static GuidingChapterItem Item4 => Instance[(short)3];
 
-		/// <summary>
-		/// 铭刻
-		/// </summary>
 		public static GuidingChapterItem Item5 => Instance[(short)4];
 
-		/// <summary>
-		/// 侵袭进度
-		/// </summary>
 		public static GuidingChapterItem Item6 => Instance[(short)5];
 
-		/// <summary>
-		/// 相枢入魔
-		/// </summary>
 		public static GuidingChapterItem Item7 => Instance[(short)6];
 
-		/// <summary>
-		/// 失心人
-		/// </summary>
 		public static GuidingChapterItem Item8 => Instance[(short)7];
 
-		/// <summary>
-		/// 玄石火灰
-		/// </summary>
 		public static GuidingChapterItem Item9 => Instance[(short)8];
 
-		/// <summary>
-		/// 伏虞心念
-		/// </summary>
 		public static GuidingChapterItem Item10 => Instance[(short)9];
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public static GuidingChapterItem Item11 => Instance[(short)10];
 
-		/// <summary>
-		/// 相枢化身
-		/// </summary>
 		public static GuidingChapterItem Item12 => Instance[(short)11];
 
-		/// <summary>
-		/// 神剑碎片
-		/// </summary>
 		public static GuidingChapterItem Item13 => Instance[(short)12];
 
-		/// <summary>
-		/// 破冢化身
-		/// </summary>
 		public static GuidingChapterItem Item14 => Instance[(short)13];
 
-		/// <summary>
-		/// 紫竹化身
-		/// </summary>
 		public static GuidingChapterItem Item15 => Instance[(short)14];
 
-		/// <summary>
-		/// 州域与地区
-		/// </summary>
 		public static GuidingChapterItem Item16 => Instance[(short)15];
 
-		/// <summary>
-		/// 世界旅行
-		/// </summary>
 		public static GuidingChapterItem Item17 => Instance[(short)16];
 
-		/// <summary>
-		/// 传驿通路
-		/// </summary>
 		public static GuidingChapterItem Item18 => Instance[(short)17];
 
-		/// <summary>
-		/// 地区恩义
-		/// </summary>
 		public static GuidingChapterItem Item19 => Instance[(short)18];
 
-		/// <summary>
-		/// 地格与地形
-		/// </summary>
 		public static GuidingChapterItem Item20 => Instance[(short)19];
 
-		/// <summary>
-		/// 地格移动
-		/// </summary>
 		public static GuidingChapterItem Item21 => Instance[(short)20];
 
-		/// <summary>
-		/// 视野
-		/// </summary>
 		public static GuidingChapterItem Item22 => Instance[(short)21];
 
-		/// <summary>
-		/// 定居点
-		/// </summary>
 		public static GuidingChapterItem Item23 => Instance[(short)22];
 
-		/// <summary>
-		/// 地格资源
-		/// </summary>
 		public static GuidingChapterItem Item24 => Instance[(short)23];
 
-		/// <summary>
-		/// 天灾
-		/// </summary>
 		public static GuidingChapterItem Item25 => Instance[(short)24];
 
-		/// <summary>
-		/// 拾取遗宝
-		/// </summary>
 		public static GuidingChapterItem Item26 => Instance[(short)25];
 
-		/// <summary>
-		/// 行囊超重
-		/// </summary>
 		public static GuidingChapterItem Item27 => Instance[(short)26];
 
-		/// <summary>
-		/// 挖掘系统
-		/// </summary>
 		public static GuidingChapterItem Item28 => Instance[(short)27];
 
-		/// <summary>
-		/// 精力
-		/// </summary>
 		public static GuidingChapterItem Item29 => Instance[(short)28];
 
-		/// <summary>
-		/// 月份更替
-		/// </summary>
 		public static GuidingChapterItem Item30 => Instance[(short)29];
 
-		/// <summary>
-		/// 太吾月报
-		/// </summary>
 		public static GuidingChapterItem Item31 => Instance[(short)30];
 
-		/// <summary>
-		/// 势力与身份
-		/// </summary>
 		public static GuidingChapterItem Item32 => Instance[(short)31];
 
-		/// <summary>
-		/// 势力值
-		/// </summary>
 		public static GuidingChapterItem Item33 => Instance[(short)32];
 
-		/// <summary>
-		/// 晋升
-		/// </summary>
 		public static GuidingChapterItem Item34 => Instance[(short)33];
 
-		/// <summary>
-		/// 守卫
-		/// </summary>
 		public static GuidingChapterItem Item35 => Instance[(short)34];
 
-		/// <summary>
-		/// 法规
-		/// </summary>
 		public static GuidingChapterItem Item36 => Instance[(short)35];
 
-		/// <summary>
-		/// 监牢界面
-		/// </summary>
 		public static GuidingChapterItem Item37 => Instance[(short)36];
 
-		/// <summary>
-		/// 囚犯
-		/// </summary>
 		public static GuidingChapterItem Item38 => Instance[(short)37];
 
-		/// <summary>
-		/// 悬赏与送监
-		/// </summary>
 		public static GuidingChapterItem Item39 => Instance[(short)38];
 
-		/// <summary>
-		/// 犯罪处罚
-		/// </summary>
 		public static GuidingChapterItem Item40 => Instance[(short)39];
 
-		/// <summary>
-		/// 库房
-		/// </summary>
 		public static GuidingChapterItem Item41 => Instance[(short)40];
 
-		/// <summary>
-		/// 库房交换
-		/// </summary>
 		public static GuidingChapterItem Item42 => Instance[(short)41];
 
-		/// <summary>
-		/// 商会
-		/// </summary>
 		public static GuidingChapterItem Item43 => Instance[(short)42];
 
-		/// <summary>
-		/// 商店等级
-		/// </summary>
 		public static GuidingChapterItem Item44 => Instance[(short)43];
 
-		/// <summary>
-		/// 商会好感
-		/// </summary>
 		public static GuidingChapterItem Item45 => Instance[(short)44];
 
-		/// <summary>
-		/// 额外商品
-		/// </summary>
 		public static GuidingChapterItem Item46 => Instance[(short)45];
 
-		/// <summary>
-		/// 交易
-		/// </summary>
 		public static GuidingChapterItem Item47 => Instance[(short)46];
 
-		/// <summary>
-		/// 商队
-		/// </summary>
 		public static GuidingChapterItem Item48 => Instance[(short)47];
 
-		/// <summary>
-		/// 外道与任侠
-		/// </summary>
 		public static GuidingChapterItem Item49 => Instance[(short)48];
 
-		/// <summary>
-		/// 相枢爪牙
-		/// </summary>
 		public static GuidingChapterItem Item50 => Instance[(short)49];
 
-		/// <summary>
-		/// 野兽
-		/// </summary>
 		public static GuidingChapterItem Item51 => Instance[(short)50];
 
-		/// <summary>
-		/// 门派
-		/// </summary>
 		public static GuidingChapterItem Item52 => Instance[(short)51];
 
-		/// <summary>
-		/// 门派戒律
-		/// </summary>
 		public static GuidingChapterItem Item53 => Instance[(short)52];
 
-		/// <summary>
-		/// 学艺许可
-		/// </summary>
 		public static GuidingChapterItem Item54 => Instance[(short)53];
 
-		/// <summary>
-		/// 门派修习
-		/// </summary>
 		public static GuidingChapterItem Item55 => Instance[(short)54];
 
-		/// <summary>
-		/// 门派支持度
-		/// </summary>
 		public static GuidingChapterItem Item56 => Instance[(short)55];
 
-		/// <summary>
-		/// 门派较武
-		/// </summary>
 		public static GuidingChapterItem Item57 => Instance[(short)56];
 
-		/// <summary>
-		/// 地区故事
-		/// </summary>
 		public static GuidingChapterItem Item58 => Instance[(short)57];
 
-		/// <summary>
-		/// 少林派
-		/// </summary>
 		public static GuidingChapterItem Item59 => Instance[(short)58];
 
-		/// <summary>
-		/// 峨眉派
-		/// </summary>
 		public static GuidingChapterItem Item60 => Instance[(short)59];
 
-		/// <summary>
-		/// 百花谷
-		/// </summary>
 		public static GuidingChapterItem Item61 => Instance[(short)60];
 
-		/// <summary>
-		/// 武当派
-		/// </summary>
 		public static GuidingChapterItem Item62 => Instance[(short)61];
 
-		/// <summary>
-		/// 元山派
-		/// </summary>
 		public static GuidingChapterItem Item63 => Instance[(short)62];
 
-		/// <summary>
-		/// 狮相门
-		/// </summary>
 		public static GuidingChapterItem Item64 => Instance[(short)63];
 
-		/// <summary>
-		/// 然山派
-		/// </summary>
 		public static GuidingChapterItem Item65 => Instance[(short)64];
 
-		/// <summary>
-		/// 璇女派
-		/// </summary>
 		public static GuidingChapterItem Item66 => Instance[(short)65];
 
-		/// <summary>
-		/// 铸剑山庄
-		/// </summary>
 		public static GuidingChapterItem Item67 => Instance[(short)66];
 
-		/// <summary>
-		/// 空桑派
-		/// </summary>
 		public static GuidingChapterItem Item68 => Instance[(short)67];
 
-		/// <summary>
-		/// 金刚宗
-		/// </summary>
 		public static GuidingChapterItem Item69 => Instance[(short)68];
 
-		/// <summary>
-		/// 五仙教
-		/// </summary>
 		public static GuidingChapterItem Item70 => Instance[(short)69];
 
-		/// <summary>
-		/// 界青门
-		/// </summary>
 		public static GuidingChapterItem Item71 => Instance[(short)70];
 
-		/// <summary>
-		/// 伏龙坛
-		/// </summary>
 		public static GuidingChapterItem Item72 => Instance[(short)71];
 
-		/// <summary>
-		/// 血犼教
-		/// </summary>
 		public static GuidingChapterItem Item73 => Instance[(short)72];
 
-		/// <summary>
-		/// 姓名
-		/// </summary>
 		public static GuidingChapterItem Item74 => Instance[(short)73];
 
-		/// <summary>
-		/// 生时
-		/// </summary>
 		public static GuidingChapterItem Item75 => Instance[(short)74];
 
-		/// <summary>
-		/// 年龄
-		/// </summary>
 		public static GuidingChapterItem Item76 => Instance[(short)75];
 
-		/// <summary>
-		/// 性别
-		/// </summary>
 		public static GuidingChapterItem Item77 => Instance[(short)76];
 
-		/// <summary>
-		/// 魅力
-		/// </summary>
 		public static GuidingChapterItem Item78 => Instance[(short)77];
 
-		/// <summary>
-		/// 相貌
-		/// </summary>
 		public static GuidingChapterItem Item79 => Instance[(short)78];
 
-		/// <summary>
-		/// 理想门派
-		/// </summary>
 		public static GuidingChapterItem Item80 => Instance[(short)79];
 
-		/// <summary>
-		/// 称号
-		/// </summary>
 		public static GuidingChapterItem Item81 => Instance[(short)80];
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public static GuidingChapterItem Item82 => Instance[(short)81];
 
-		/// <summary>
-		/// 好感
-		/// </summary>
 		public static GuidingChapterItem Item83 => Instance[(short)82];
 
-		/// <summary>
-		/// 戒心
-		/// </summary>
 		public static GuidingChapterItem Item84 => Instance[(short)83];
 
-		/// <summary>
-		/// 喜恶
-		/// </summary>
 		public static GuidingChapterItem Item85 => Instance[(short)84];
 
-		/// <summary>
-		/// 立场
-		/// </summary>
 		public static GuidingChapterItem Item86 => Instance[(short)85];
 
-		/// <summary>
-		/// 名誉
-		/// </summary>
 		public static GuidingChapterItem Item87 => Instance[(short)86];
 
-		/// <summary>
-		/// 轮回
-		/// </summary>
 		public static GuidingChapterItem Item88 => Instance[(short)87];
 
-		/// <summary>
-		/// 九世轮回
-		/// </summary>
 		public static GuidingChapterItem Item89 => Instance[(short)88];
 
-		/// <summary>
-		/// 资质
-		/// </summary>
 		public static GuidingChapterItem Item90 => Instance[(short)89];
 
-		/// <summary>
-		/// 造诣
-		/// </summary>
 		public static GuidingChapterItem Item91 => Instance[(short)90];
 
-		/// <summary>
-		/// 主要属性
-		/// </summary>
 		public static GuidingChapterItem Item92 => Instance[(short)91];
 
-		/// <summary>
-		/// 主要属性的消耗与恢复
-		/// </summary>
 		public static GuidingChapterItem Item93 => Instance[(short)92];
 
-		/// <summary>
-		/// 攻击属性
-		/// </summary>
 		public static GuidingChapterItem Item94 => Instance[(short)93];
 
-		/// <summary>
-		/// 防御属性
-		/// </summary>
 		public static GuidingChapterItem Item95 => Instance[(short)94];
 
-		/// <summary>
-		/// 命中属性
-		/// </summary>
 		public static GuidingChapterItem Item96 => Instance[(short)95];
 
-		/// <summary>
-		/// 化解属性
-		/// </summary>
 		public static GuidingChapterItem Item97 => Instance[(short)96];
 
-		/// <summary>
-		/// 次要属性
-		/// </summary>
 		public static GuidingChapterItem Item98 => Instance[(short)97];
 
-		/// <summary>
-		/// 人物特性
-		/// </summary>
 		public static GuidingChapterItem Item99 => Instance[(short)98];
 
-		/// <summary>
-		/// 特性倾向
-		/// </summary>
 		public static GuidingChapterItem Item100 => Instance[(short)99];
 
-		/// <summary>
-		/// 队伍机略
-		/// </summary>
 		public static GuidingChapterItem Item101 => Instance[(short)100];
 
-		/// <summary>
-		/// 七元赋性
-		/// </summary>
 		public static GuidingChapterItem Item102 => Instance[(short)101];
 
-		/// <summary>
-		/// 伤病
-		/// </summary>
 		public static GuidingChapterItem Item103 => Instance[(short)102];
 
-		/// <summary>
-		/// 健康
-		/// </summary>
 		public static GuidingChapterItem Item104 => Instance[(short)103];
 
-		/// <summary>
-		/// 寿元
-		/// </summary>
 		public static GuidingChapterItem Item105 => Instance[(short)104];
 
-		/// <summary>
-		/// 伤势
-		/// </summary>
 		public static GuidingChapterItem Item106 => Instance[(short)105];
 
-		/// <summary>
-		/// 毒素
-		/// </summary>
 		public static GuidingChapterItem Item107 => Instance[(short)106];
 
-		/// <summary>
-		/// 施加毒素
-		/// </summary>
 		public static GuidingChapterItem Item108 => Instance[(short)107];
 
-		/// <summary>
-		/// 混合毒素
-		/// </summary>
 		public static GuidingChapterItem Item109 => Instance[(short)108];
 
-		/// <summary>
-		/// 毒性发作
-		/// </summary>
 		public static GuidingChapterItem Item110 => Instance[(short)109];
 
-		/// <summary>
-		/// 内息
-		/// </summary>
 		public static GuidingChapterItem Item111 => Instance[(short)110];
 
-		/// <summary>
-		/// 蛊虫
-		/// </summary>
 		public static GuidingChapterItem Item112 => Instance[(short)111];
 
-		/// <summary>
-		/// 蛊引
-		/// </summary>
 		public static GuidingChapterItem Item113 => Instance[(short)112];
 
-		/// <summary>
-		/// 蛊虫的成长
-		/// </summary>
 		public static GuidingChapterItem Item114 => Instance[(short)113];
 
-		/// <summary>
-		/// 解蛊
-		/// </summary>
 		public static GuidingChapterItem Item115 => Instance[(short)114];
 
-		/// <summary>
-		/// 王蛊
-		/// </summary>
 		public static GuidingChapterItem Item116 => Instance[(short)115];
 
-		/// <summary>
-		/// 诊疗
-		/// </summary>
 		public static GuidingChapterItem Item117 => Instance[(short)116];
 
-		/// <summary>
-		/// 服食汲饮
-		/// </summary>
 		public static GuidingChapterItem Item118 => Instance[(short)117];
 
-		/// <summary>
-		/// 用药
-		/// </summary>
 		public static GuidingChapterItem Item119 => Instance[(short)118];
 
-		/// <summary>
-		/// 关系
-		/// </summary>
 		public static GuidingChapterItem Item120 => Instance[(short)119];
 
-		/// <summary>
-		/// 爱慕
-		/// </summary>
 		public static GuidingChapterItem Item121 => Instance[(short)120];
 
-		/// <summary>
-		/// 仇敌
-		/// </summary>
 		public static GuidingChapterItem Item122 => Instance[(short)121];
 
-		/// <summary>
-		/// 族谱
-		/// </summary>
 		public static GuidingChapterItem Item123 => Instance[(short)122];
 
-		/// <summary>
-		/// 经历
-		/// </summary>
 		public static GuidingChapterItem Item124 => Instance[(short)123];
 
-		/// <summary>
-		/// 见闻
-		/// </summary>
 		public static GuidingChapterItem Item125 => Instance[(short)124];
 
-		/// <summary>
-		/// 地方见闻
-		/// </summary>
 		public static GuidingChapterItem Item126 => Instance[(short)125];
 
-		/// <summary>
-		/// 门派见闻
-		/// </summary>
 		public static GuidingChapterItem Item127 => Instance[(short)126];
 
-		/// <summary>
-		/// 技艺见闻
-		/// </summary>
 		public static GuidingChapterItem Item128 => Instance[(short)127];
 
-		/// <summary>
-		/// 西域见闻
-		/// </summary>
 		public static GuidingChapterItem Item129 => Instance[(short)128];
 
-		/// <summary>
-		/// 剑冢见闻
-		/// </summary>
 		public static GuidingChapterItem Item130 => Instance[(short)129];
 
-		/// <summary>
-		/// 志向见闻
-		/// </summary>
 		public static GuidingChapterItem Item131 => Instance[(short)130];
 
-		/// <summary>
-		/// 人物互动
-		/// </summary>
 		public static GuidingChapterItem Item132 => Instance[(short)131];
 
-		/// <summary>
-		/// 互动-交谈
-		/// </summary>
 		public static GuidingChapterItem Item133 => Instance[(short)132];
 
-		/// <summary>
-		/// 个人交换
-		/// </summary>
 		public static GuidingChapterItem Item134 => Instance[(short)133];
 
-		/// <summary>
-		/// 互动-比试
-		/// </summary>
 		public static GuidingChapterItem Item135 => Instance[(short)134];
 
-		/// <summary>
-		/// 请教
-		/// </summary>
 		public static GuidingChapterItem Item136 => Instance[(short)135];
 
-		/// <summary>
-		/// 交换藏书
-		/// </summary>
 		public static GuidingChapterItem Item137 => Instance[(short)136];
 
-		/// <summary>
-		/// 互动-修习
-		/// </summary>
 		public static GuidingChapterItem Item138 => Instance[(short)137];
 
-		/// <summary>
-		/// 邀为同道
-		/// </summary>
 		public static GuidingChapterItem Item139 => Instance[(short)138];
 
-		/// <summary>
-		/// 互动-亲近
-		/// </summary>
 		public static GuidingChapterItem Item140 => Instance[(short)139];
 
-		/// <summary>
-		/// 互动-敌对
-		/// </summary>
 		public static GuidingChapterItem Item141 => Instance[(short)140];
 
-		/// <summary>
-		/// 乞丐
-		/// </summary>
 		public static GuidingChapterItem Item142 => Instance[(short)141];
 
-		/// <summary>
-		/// 农户
-		/// </summary>
 		public static GuidingChapterItem Item143 => Instance[(short)142];
 
-		/// <summary>
-		/// 下九流
-		/// </summary>
 		public static GuidingChapterItem Item144 => Instance[(short)143];
 
-		/// <summary>
-		/// 手艺人
-		/// </summary>
 		public static GuidingChapterItem Item145 => Instance[(short)144];
 
-		/// <summary>
-		/// 大夫
-		/// </summary>
 		public static GuidingChapterItem Item146 => Instance[(short)145];
 
-		/// <summary>
-		/// 商人
-		/// </summary>
 		public static GuidingChapterItem Item147 => Instance[(short)146];
 
-		/// <summary>
-		/// 文人
-		/// </summary>
 		public static GuidingChapterItem Item148 => Instance[(short)147];
 
-		/// <summary>
-		/// 富豪
-		/// </summary>
 		public static GuidingChapterItem Item149 => Instance[(short)148];
 
-		/// <summary>
-		/// 城镇二阶身份
-		/// </summary>
 		public static GuidingChapterItem Item150 => Instance[(short)149];
 
-		/// <summary>
-		/// 城镇一阶身份
-		/// </summary>
 		public static GuidingChapterItem Item151 => Instance[(short)150];
 
-		/// <summary>
-		/// 修改法规
-		/// </summary>
 		public static GuidingChapterItem Item152 => Instance[(short)151];
 
-		/// <summary>
-		/// 荐送弟子
-		/// </summary>
 		public static GuidingChapterItem Item153 => Instance[(short)152];
 
-		/// <summary>
-		/// 面壁阅经
-		/// </summary>
 		public static GuidingChapterItem Item154 => Instance[(short)153];
 
-		/// <summary>
-		/// 天府之国
-		/// </summary>
 		public static GuidingChapterItem Item155 => Instance[(short)154];
 
-		/// <summary>
-		/// 起死回生
-		/// </summary>
 		public static GuidingChapterItem Item156 => Instance[(short)155];
 
-		/// <summary>
-		/// 七星调元
-		/// </summary>
 		public static GuidingChapterItem Item157 => Instance[(short)156];
 
-		/// <summary>
-		/// 石牢静坐
-		/// </summary>
 		public static GuidingChapterItem Item158 => Instance[(short)157];
 
-		/// <summary>
-		/// 散播威名
-		/// </summary>
 		public static GuidingChapterItem Item159 => Instance[(short)158];
 
-		/// <summary>
-		/// 王禅典籍
-		/// </summary>
 		public static GuidingChapterItem Item160 => Instance[(short)159];
 
-		/// <summary>
-		/// 玉镜沉思
-		/// </summary>
 		public static GuidingChapterItem Item161 => Instance[(short)160];
 
-		/// <summary>
-		/// 欧冶古具
-		/// </summary>
 		public static GuidingChapterItem Item162 => Instance[(short)161];
 
-		/// <summary>
-		/// 铸剑试炼
-		/// </summary>
 		public static GuidingChapterItem Item163 => Instance[(short)162];
 
-		/// <summary>
-		/// 秘药延寿
-		/// </summary>
 		public static GuidingChapterItem Item164 => Instance[(short)163];
 
-		/// <summary>
-		/// 金刚秘法
-		/// </summary>
 		public static GuidingChapterItem Item165 => Instance[(short)164];
 
-		/// <summary>
-		/// 五圣秘浴
-		/// </summary>
 		public static GuidingChapterItem Item166 => Instance[(short)165];
 
-		/// <summary>
-		/// 委托暗杀
-		/// </summary>
 		public static GuidingChapterItem Item167 => Instance[(short)166];
 
-		/// <summary>
-		/// 龙岛忠仆
-		/// </summary>
 		public static GuidingChapterItem Item168 => Instance[(short)167];
 
-		/// <summary>
-		/// 血池秘法
-		/// </summary>
 		public static GuidingChapterItem Item169 => Instance[(short)168];
 
-		/// <summary>
-		/// 同道
-		/// </summary>
 		public static GuidingChapterItem Item170 => Instance[(short)169];
 
-		/// <summary>
-		/// 俘虏
-		/// </summary>
 		public static GuidingChapterItem Item171 => Instance[(short)170];
 
-		/// <summary>
-		/// 生育
-		/// </summary>
 		public static GuidingChapterItem Item172 => Instance[(short)171];
 
-		/// <summary>
-		/// 怀孕
-		/// </summary>
 		public static GuidingChapterItem Item173 => Instance[(short)172];
 
-		/// <summary>
-		/// 养育子女
-		/// </summary>
 		public static GuidingChapterItem Item174 => Instance[(short)173];
 
-		/// <summary>
-		/// 坟墓
-		/// </summary>
 		public static GuidingChapterItem Item175 => Instance[(short)174];
 
-		/// <summary>
-		/// NPC需求查看
-		/// </summary>
 		public static GuidingChapterItem Item176 => Instance[(short)175];
 
-		/// <summary>
-		/// 满足NPC的需求
-		/// </summary>
 		public static GuidingChapterItem Item177 => Instance[(short)176];
 
-		/// <summary>
-		/// 过月代办意外事件
-		/// </summary>
 		public static GuidingChapterItem Item178 => Instance[(short)177];
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public static GuidingChapterItem Item179 => Instance[(short)178];
 
-		/// <summary>
-		/// 武学
-		/// </summary>
 		public static GuidingChapterItem Item180 => Instance[(short)179];
 
-		/// <summary>
-		/// 研读书籍
-		/// </summary>
 		public static GuidingChapterItem Item181 => Instance[(short)180];
 
-		/// <summary>
-		/// 参考书籍
-		/// </summary>
 		public static GuidingChapterItem Item182 => Instance[(short)181];
 
-		/// <summary>
-		/// 总纲与心法
-		/// </summary>
 		public static GuidingChapterItem Item183 => Instance[(short)182];
 
-		/// <summary>
-		/// 研读技艺
-		/// </summary>
 		public static GuidingChapterItem Item184 => Instance[(short)183];
 
-		/// <summary>
-		/// 周天运转
-		/// </summary>
 		public static GuidingChapterItem Item185 => Instance[(short)184];
 
-		/// <summary>
-		/// 辅助内功
-		/// </summary>
 		public static GuidingChapterItem Item186 => Instance[(short)185];
 
-		/// <summary>
-		/// 灵光一闪
-		/// </summary>
 		public static GuidingChapterItem Item187 => Instance[(short)186];
 
-		/// <summary>
-		/// 研读策略
-		/// </summary>
 		public static GuidingChapterItem Item188 => Instance[(short)187];
 
-		/// <summary>
-		/// 天人感应
-		/// </summary>
 		public static GuidingChapterItem Item189 => Instance[(short)188];
 
-		/// <summary>
-		/// 周天策略
-		/// </summary>
 		public static GuidingChapterItem Item190 => Instance[(short)189];
 
-		/// <summary>
-		/// 专心致志与聚精会神
-		/// </summary>
 		public static GuidingChapterItem Item191 => Instance[(short)190];
 
-		/// <summary>
-		/// 心法效果
-		/// </summary>
 		public static GuidingChapterItem Item192 => Instance[(short)191];
 
-		/// <summary>
-		/// 内外功比例
-		/// </summary>
 		public static GuidingChapterItem Item193 => Instance[(short)192];
 
-		/// <summary>
-		/// 突破准备
-		/// </summary>
 		public static GuidingChapterItem Item194 => Instance[(short)193];
 
-		/// <summary>
-		/// 突破流程
-		/// </summary>
 		public static GuidingChapterItem Item195 => Instance[(short)194];
 
-		/// <summary>
-		/// 连接突破格
-		/// </summary>
 		public static GuidingChapterItem Item196 => Instance[(short)195];
 
-		/// <summary>
-		/// 突破功法 - 天资上限/走火入魔
-		/// </summary>
 		public static GuidingChapterItem Item197 => Instance[(short)196];
 
-		/// <summary>
-		/// 突破功法 - 突破格类型
-		/// </summary>
 		public static GuidingChapterItem Item198 => Instance[(short)197];
 
-		/// <summary>
-		/// 玄机格
-		/// </summary>
 		public static GuidingChapterItem Item199 => Instance[(short)198];
 
-		/// <summary>
-		/// 参悟玄机
-		/// </summary>
 		public static GuidingChapterItem Item200 => Instance[(short)199];
 
-		/// <summary>
-		/// 突破功法 - 完成突破
-		/// </summary>
 		public static GuidingChapterItem Item201 => Instance[(short)200];
 
-		/// <summary>
-		/// 功法五行
-		/// </summary>
 		public static GuidingChapterItem Item202 => Instance[(short)201];
 
-		/// <summary>
-		/// 功法威力
-		/// </summary>
 		public static GuidingChapterItem Item203 => Instance[(short)202];
 
-		/// <summary>
-		/// 发挥需求
-		/// </summary>
 		public static GuidingChapterItem Item204 => Instance[(short)203];
 
-		/// <summary>
-		/// 运功
-		/// </summary>
 		public static GuidingChapterItem Item205 => Instance[(short)204];
 
-		/// <summary>
-		/// 精解
-		/// </summary>
 		public static GuidingChapterItem Item206 => Instance[(short)205];
 
-		/// <summary>
-		/// 运功效果
-		/// </summary>
 		public static GuidingChapterItem Item207 => Instance[(short)206];
 
-		/// <summary>
-		/// 精纯境界
-		/// </summary>
 		public static GuidingChapterItem Item208 => Instance[(short)207];
 
-		/// <summary>
-		/// 内力
-		/// </summary>
 		public static GuidingChapterItem Item209 => Instance[(short)208];
 
-		/// <summary>
-		/// 内力属性
-		/// </summary>
 		public static GuidingChapterItem Item210 => Instance[(short)209];
 
-		/// <summary>
-		/// 内力冲克
-		/// </summary>
 		public static GuidingChapterItem Item211 => Instance[(short)210];
 
-		/// <summary>
-		/// 凝聚真气
-		/// </summary>
 		public static GuidingChapterItem Item212 => Instance[(short)211];
 
-		/// <summary>
-		/// 奇书宝典
-		/// </summary>
 		public static GuidingChapterItem Item213 => Instance[(short)212];
 
-		/// <summary>
-		/// 争夺奇书
-		/// </summary>
 		public static GuidingChapterItem Item214 => Instance[(short)213];
 
-		/// <summary>
-		/// 奇书奇遇
-		/// </summary>
 		public static GuidingChapterItem Item215 => Instance[(short)214];
 
-		/// <summary>
-		/// 解读奇书
-		/// </summary>
 		public static GuidingChapterItem Item216 => Instance[(short)215];
 
-		/// <summary>
-		/// 奇书执迷
-		/// </summary>
 		public static GuidingChapterItem Item217 => Instance[(short)216];
 
-		/// <summary>
-		/// 战斗类型
-		/// </summary>
 		public static GuidingChapterItem Item218 => Instance[(short)217];
 
-		/// <summary>
-		/// 战斗准备
-		/// </summary>
 		public static GuidingChapterItem Item219 => Instance[(short)218];
 
-		/// <summary>
-		/// 战斗限制
-		/// </summary>
 		public static GuidingChapterItem Item220 => Instance[(short)219];
 
-		/// <summary>
-		/// 战斗结算
-		/// </summary>
 		public static GuidingChapterItem Item221 => Instance[(short)220];
 
-		/// <summary>
-		/// 距离与移动
-		/// </summary>
 		public static GuidingChapterItem Item222 => Instance[(short)221];
 
-		/// <summary>
-		/// 兵器攻击
-		/// </summary>
 		public static GuidingChapterItem Item223 => Instance[(short)222];
 
-		/// <summary>
-		/// 招式
-		/// </summary>
 		public static GuidingChapterItem Item224 => Instance[(short)223];
 
-		/// <summary>
-		/// 追击
-		/// </summary>
 		public static GuidingChapterItem Item225 => Instance[(short)224];
 
-		/// <summary>
-		/// 攻击耗时
-		/// </summary>
 		public static GuidingChapterItem Item226 => Instance[(short)225];
 
-		/// <summary>
-		/// 攻击范围
-		/// </summary>
 		public static GuidingChapterItem Item227 => Instance[(short)226];
 
-		/// <summary>
-		/// 命中与化解
-		/// </summary>
 		public static GuidingChapterItem Item228 => Instance[(short)227];
 
-		/// <summary>
-		/// 命中要害
-		/// </summary>
 		public static GuidingChapterItem Item229 => Instance[(short)228];
 
-		/// <summary>
-		/// 兵器切换
-		/// </summary>
 		public static GuidingChapterItem Item230 => Instance[(short)229];
 
-		/// <summary>
-		/// 变招
-		/// </summary>
 		public static GuidingChapterItem Item231 => Instance[(short)230];
 
-		/// <summary>
-		/// 解封
-		/// </summary>
 		public static GuidingChapterItem Item232 => Instance[(short)231];
 
-		/// <summary>
-		/// 生铸
-		/// </summary>
 		public static GuidingChapterItem Item233 => Instance[(short)232];
 
-		/// <summary>
-		/// 战败标记
-		/// </summary>
 		public static GuidingChapterItem Item234 => Instance[(short)233];
 
-		/// <summary>
-		/// 直接伤害
-		/// </summary>
 		public static GuidingChapterItem Item235 => Instance[(short)234];
 
-		/// <summary>
-		/// 伤害累积
-		/// </summary>
 		public static GuidingChapterItem Item236 => Instance[(short)235];
 
-		/// <summary>
-		/// 身心强健
-		/// </summary>
 		public static GuidingChapterItem Item237 => Instance[(short)236];
 
-		/// <summary>
-		/// 伤势标记
-		/// </summary>
 		public static GuidingChapterItem Item238 => Instance[(short)237];
 
-		/// <summary>
-		/// 重创标记
-		/// </summary>
 		public static GuidingChapterItem Item239 => Instance[(short)238];
 
-		/// <summary>
-		/// 破绽标记
-		/// </summary>
 		public static GuidingChapterItem Item240 => Instance[(short)239];
 
-		/// <summary>
-		/// 封穴标记
-		/// </summary>
 		public static GuidingChapterItem Item241 => Instance[(short)240];
 
-		/// <summary>
-		/// 失神标记
-		/// </summary>
 		public static GuidingChapterItem Item242 => Instance[(short)241];
 
-		/// <summary>
-		/// 毒素标记
-		/// </summary>
 		public static GuidingChapterItem Item243 => Instance[(short)242];
 
-		/// <summary>
-		/// 蛊虫标记
-		/// </summary>
 		public static GuidingChapterItem Item244 => Instance[(short)243];
 
-		/// <summary>
-		/// 内息标记
-		/// </summary>
 		public static GuidingChapterItem Item245 => Instance[(short)244];
 
-		/// <summary>
-		/// 状态标记
-		/// </summary>
 		public static GuidingChapterItem Item246 => Instance[(short)245];
 
-		/// <summary>
-		/// 真气标记
-		/// </summary>
 		public static GuidingChapterItem Item247 => Instance[(short)246];
 
-		/// <summary>
-		/// 健康标记
-		/// </summary>
 		public static GuidingChapterItem Item248 => Instance[(short)247];
 
-		/// <summary>
-		/// 真气盈亏
-		/// </summary>
 		public static GuidingChapterItem Item249 => Instance[(short)248];
 
-		/// <summary>
-		/// 施展需要
-		/// </summary>
 		public static GuidingChapterItem Item250 => Instance[(short)249];
 
-		/// <summary>
-		/// 架势
-		/// </summary>
 		public static GuidingChapterItem Item251 => Instance[(short)250];
 
-		/// <summary>
-		/// 提气
-		/// </summary>
 		public static GuidingChapterItem Item252 => Instance[(short)251];
 
-		/// <summary>
-		/// 脚力
-		/// </summary>
 		public static GuidingChapterItem Item253 => Instance[(short)252];
 
-		/// <summary>
-		/// 蓄式
-		/// </summary>
 		public static GuidingChapterItem Item254 => Instance[(short)253];
 
-		/// <summary>
-		/// 内功
-		/// </summary>
 		public static GuidingChapterItem Item255 => Instance[(short)254];
 
-		/// <summary>
-		/// 身法
-		/// </summary>
 		public static GuidingChapterItem Item256 => Instance[(short)255];
 
-		/// <summary>
-		/// 摧破功法
-		/// </summary>
 		public static GuidingChapterItem Item257 => Instance[(short)256];
 
-		/// <summary>
-		/// 护体功法
-		/// </summary>
 		public static GuidingChapterItem Item258 => Instance[(short)257];
 
-		/// <summary>
-		/// 奇窍功法
-		/// </summary>
 		public static GuidingChapterItem Item259 => Instance[(short)258];
 
-		/// <summary>
-		/// 威力成数
-		/// </summary>
 		public static GuidingChapterItem Item260 => Instance[(short)259];
 
-		/// <summary>
-		/// 反击
-		/// </summary>
 		public static GuidingChapterItem Item261 => Instance[(short)260];
 
-		/// <summary>
-		/// 反震
-		/// </summary>
 		public static GuidingChapterItem Item262 => Instance[(short)261];
 
-		/// <summary>
-		/// 封禁
-		/// </summary>
 		public static GuidingChapterItem Item263 => Instance[(short)262];
 
-		/// <summary>
-		/// 功法反噬
-		/// </summary>
 		public static GuidingChapterItem Item264 => Instance[(short)263];
 
-		/// <summary>
-		/// 助战同道
-		/// </summary>
 		public static GuidingChapterItem Item265 => Instance[(short)264];
 
-		/// <summary>
-		/// 助战指令
-		/// </summary>
 		public static GuidingChapterItem Item266 => Instance[(short)265];
 
-		/// <summary>
-		/// 负面指令
-		/// </summary>
 		public static GuidingChapterItem Item267 => Instance[(short)266];
 
-		/// <summary>
-		/// 战斗行为
-		/// </summary>
 		public static GuidingChapterItem Item268 => Instance[(short)267];
 
-		/// <summary>
-		/// 战斗行为-疗伤驱毒
-		/// </summary>
 		public static GuidingChapterItem Item269 => Instance[(short)268];
 
-		/// <summary>
-		/// 战斗行为-使用物品
-		/// </summary>
 		public static GuidingChapterItem Item270 => Instance[(short)269];
 
-		/// <summary>
-		/// 逃离战斗
-		/// </summary>
 		public static GuidingChapterItem Item271 => Instance[(short)270];
 
-		/// <summary>
-		/// 认输投降
-		/// </summary>
 		public static GuidingChapterItem Item272 => Instance[(short)271];
 
-		/// <summary>
-		/// 处决
-		/// </summary>
 		public static GuidingChapterItem Item273 => Instance[(short)272];
 
-		/// <summary>
-		/// 产业视图
-		/// </summary>
 		public static GuidingChapterItem Item274 => Instance[(short)273];
 
-		/// <summary>
-		/// 产业建筑
-		/// </summary>
 		public static GuidingChapterItem Item275 => Instance[(short)274];
 
-		/// <summary>
-		/// 扩展建筑
-		/// </summary>
 		public static GuidingChapterItem Item276 => Instance[(short)275];
 
-		/// <summary>
-		/// 建筑受损
-		/// </summary>
 		public static GuidingChapterItem Item277 => Instance[(short)276];
 
-		/// <summary>
-		/// 自然资源
-		/// </summary>
 		public static GuidingChapterItem Item278 => Instance[(short)277];
 
-		/// <summary>
-		/// 建造
-		/// </summary>
 		public static GuidingChapterItem Item279 => Instance[(short)278];
 
-		/// <summary>
-		/// 扩建
-		/// </summary>
 		public static GuidingChapterItem Item280 => Instance[(short)279];
 
-		/// <summary>
-		/// 培育
-		/// </summary>
 		public static GuidingChapterItem Item281 => Instance[(short)280];
 
-		/// <summary>
-		/// 重申信誓
-		/// </summary>
 		public static GuidingChapterItem Item282 => Instance[(short)281];
 
-		/// <summary>
-		/// 撤除
-		/// </summary>
 		public static GuidingChapterItem Item283 => Instance[(short)282];
 
-		/// <summary>
-		/// 产业规划
-		/// </summary>
 		public static GuidingChapterItem Item284 => Instance[(short)283];
 
-		/// <summary>
-		/// 产业经营
-		/// </summary>
 		public static GuidingChapterItem Item285 => Instance[(short)284];
 
-		/// <summary>
-		/// 经营进度
-		/// </summary>
 		public static GuidingChapterItem Item286 => Instance[(short)285];
 
-		/// <summary>
-		/// 主事与学徒
-		/// </summary>
 		public static GuidingChapterItem Item287 => Instance[(short)286];
 
-		/// <summary>
-		/// 资源建筑
-		/// </summary>
 		public static GuidingChapterItem Item288 => Instance[(short)287];
 
-		/// <summary>
-		/// 售货建筑
-		/// </summary>
 		public static GuidingChapterItem Item289 => Instance[(short)288];
 
-		/// <summary>
-		/// 制造类建筑
-		/// </summary>
 		public static GuidingChapterItem Item290 => Instance[(short)289];
 
-		/// <summary>
-		/// 居所
-		/// </summary>
 		public static GuidingChapterItem Item291 => Instance[(short)290];
 
-		/// <summary>
-		/// 蛰室
-		/// </summary>
 		public static GuidingChapterItem Item292 => Instance[(short)291];
 
-		/// <summary>
-		/// 石屋
-		/// </summary>
 		public static GuidingChapterItem Item293 => Instance[(short)292];
 
-		/// <summary>
-		/// 太吾氏祠堂
-		/// </summary>
 		public static GuidingChapterItem Item294 => Instance[(short)293];
 
-		/// <summary>
-		/// 宴堂介绍
-		/// </summary>
 		public static GuidingChapterItem Item295 => Instance[(short)294];
 
-		/// <summary>
-		/// 仓库
-		/// </summary>
 		public static GuidingChapterItem Item296 => Instance[(short)295];
 
-		/// <summary>
-		/// 元鸡舍
-		/// </summary>
 		public static GuidingChapterItem Item297 => Instance[(short)296];
 
-		/// <summary>
-		/// 轮回台
-		/// </summary>
 		public static GuidingChapterItem Item298 => Instance[(short)297];
 
-		/// <summary>
-		/// 茶马帮
-		/// </summary>
 		public static GuidingChapterItem Item299 => Instance[(short)298];
 
-		/// <summary>
-		/// 练功房
-		/// </summary>
 		public static GuidingChapterItem Item300 => Instance[(short)299];
 
-		/// <summary>
-		/// 太吾村民
-		/// </summary>
 		public static GuidingChapterItem Item301 => Instance[(short)300];
 
-		/// <summary>
-		/// 村民身份
-		/// </summary>
 		public static GuidingChapterItem Item302 => Instance[(short)301];
 
-		/// <summary>
-		/// 村民身份职能
-		/// </summary>
 		public static GuidingChapterItem Item303 => Instance[(short)302];
 
-		/// <summary>
-		/// 物品
-		/// </summary>
 		public static GuidingChapterItem Item304 => Instance[(short)303];
 
-		/// <summary>
-		/// 资源
-		/// </summary>
 		public static GuidingChapterItem Item305 => Instance[(short)304];
 
-		/// <summary>
-		/// 银钱
-		/// </summary>
 		public static GuidingChapterItem Item306 => Instance[(short)305];
 
-		/// <summary>
-		/// 威望
-		/// </summary>
 		public static GuidingChapterItem Item307 => Instance[(short)306];
 
-		/// <summary>
-		/// 历练
-		/// </summary>
 		public static GuidingChapterItem Item308 => Instance[(short)307];
 
-		/// <summary>
-		/// 食物
-		/// </summary>
 		public static GuidingChapterItem Item309 => Instance[(short)308];
 
-		/// <summary>
-		/// 丹药
-		/// </summary>
 		public static GuidingChapterItem Item310 => Instance[(short)309];
 
-		/// <summary>
-		/// 毒药
-		/// </summary>
 		public static GuidingChapterItem Item311 => Instance[(short)310];
 
-		/// <summary>
-		/// 装备
-		/// </summary>
 		public static GuidingChapterItem Item312 => Instance[(short)311];
 
-		/// <summary>
-		/// 装备负重
-		/// </summary>
 		public static GuidingChapterItem Item313 => Instance[(short)312];
 
-		/// <summary>
-		/// 装备特殊效果
-		/// </summary>
 		public static GuidingChapterItem Item314 => Instance[(short)313];
 
-		/// <summary>
-		/// 兵器
-		/// </summary>
 		public static GuidingChapterItem Item315 => Instance[(short)314];
 
-		/// <summary>
-		/// 兵器属性
-		/// </summary>
 		public static GuidingChapterItem Item316 => Instance[(short)315];
 
-		/// <summary>
-		/// 护具
-		/// </summary>
 		public static GuidingChapterItem Item317 => Instance[(short)316];
 
-		/// <summary>
-		/// 护具属性
-		/// </summary>
 		public static GuidingChapterItem Item318 => Instance[(short)317];
 
-		/// <summary>
-		/// 宝物
-		/// </summary>
 		public static GuidingChapterItem Item319 => Instance[(short)318];
 
-		/// <summary>
-		/// 衣装
-		/// </summary>
 		public static GuidingChapterItem Item320 => Instance[(short)319];
 
-		/// <summary>
-		/// 代步
-		/// </summary>
 		public static GuidingChapterItem Item321 => Instance[(short)320];
 
-		/// <summary>
-		/// 野兽代步
-		/// </summary>
 		public static GuidingChapterItem Item322 => Instance[(short)321];
 
-		/// <summary>
-		/// 代步属性
-		/// </summary>
 		public static GuidingChapterItem Item323 => Instance[(short)322];
 
-		/// <summary>
-		/// 书籍
-		/// </summary>
 		public static GuidingChapterItem Item324 => Instance[(short)323];
 
-		/// <summary>
-		/// 工具
-		/// </summary>
 		public static GuidingChapterItem Item325 => Instance[(short)324];
 
-		/// <summary>
-		/// 引子
-		/// </summary>
 		public static GuidingChapterItem Item326 => Instance[(short)325];
 
-		/// <summary>
-		/// 精制材料
-		/// </summary>
 		public static GuidingChapterItem Item327 => Instance[(short)326];
 
-		/// <summary>
-		/// 心材
-		/// </summary>
 		public static GuidingChapterItem Item328 => Instance[(short)327];
 
-		/// <summary>
-		/// 绳索
-		/// </summary>
 		public static GuidingChapterItem Item329 => Instance[(short)328];
 
-		/// <summary>
-		/// 信鸽
-		/// </summary>
 		public static GuidingChapterItem Item330 => Instance[(short)329];
 
-		/// <summary>
-		/// 神木种子
-		/// </summary>
 		public static GuidingChapterItem Item331 => Instance[(short)330];
 
-		/// <summary>
-		/// 养育神木
-		/// </summary>
 		public static GuidingChapterItem Item332 => Instance[(short)331];
 
-		/// <summary>
-		/// 血露
-		/// </summary>
 		public static GuidingChapterItem Item333 => Instance[(short)332];
 
-		/// <summary>
-		/// 西域珍宝
-		/// </summary>
 		public static GuidingChapterItem Item334 => Instance[(short)333];
 
-		/// <summary>
-		/// 制造物品
-		/// </summary>
 		public static GuidingChapterItem Item335 => Instance[(short)334];
 
-		/// <summary>
-		/// 代制物品
-		/// </summary>
 		public static GuidingChapterItem Item336 => Instance[(short)335];
 
-		/// <summary>
-		/// 修理物品
-		/// </summary>
 		public static GuidingChapterItem Item337 => Instance[(short)336];
 
-		/// <summary>
-		/// 拆解物品
-		/// </summary>
 		public static GuidingChapterItem Item338 => Instance[(short)337];
 
-		/// <summary>
-		/// 精制物品
-		/// </summary>
 		public static GuidingChapterItem Item339 => Instance[(short)338];
 
-		/// <summary>
-		/// 淬毒
-		/// </summary>
 		public static GuidingChapterItem Item340 => Instance[(short)339];
 
-		/// <summary>
-		/// 解毒
-		/// </summary>
 		public static GuidingChapterItem Item341 => Instance[(short)340];
 
-		/// <summary>
-		/// 验毒
-		/// </summary>
 		public static GuidingChapterItem Item342 => Instance[(short)341];
 
-		/// <summary>
-		/// 改制衣装
-		/// </summary>
 		public static GuidingChapterItem Item343 => Instance[(short)342];
 
-		/// <summary>
-		/// 志向
-		/// </summary>
 		public static GuidingChapterItem Item344 => Instance[(short)343];
 
-		/// <summary>
-		/// 志向技能
-		/// </summary>
 		public static GuidingChapterItem Item345 => Instance[(short)344];
 
-		/// <summary>
-		/// 志向有成
-		/// </summary>
 		public static GuidingChapterItem Item346 => Instance[(short)345];
 
-		/// <summary>
-		/// 寻找促织
-		/// </summary>
 		public static GuidingChapterItem Item347 => Instance[(short)346];
 
-		/// <summary>
-		/// 捕捉促织
-		/// </summary>
 		public static GuidingChapterItem Item348 => Instance[(short)347];
 
-		/// <summary>
-		/// 促织属性
-		/// </summary>
 		public static GuidingChapterItem Item349 => Instance[(short)348];
 
-		/// <summary>
-		/// 促织决斗
-		/// </summary>
 		public static GuidingChapterItem Item350 => Instance[(short)349];
 
-		/// <summary>
-		/// 促织战绩
-		/// </summary>
 		public static GuidingChapterItem Item351 => Instance[(short)350];
 
-		/// <summary>
-		/// 遭遇奇遇
-		/// </summary>
 		public static GuidingChapterItem Item352 => Instance[(short)351];
 
-		/// <summary>
-		/// 初入奇遇
-		/// </summary>
 		public static GuidingChapterItem Item353 => Instance[(short)352];
 
-		/// <summary>
-		/// 探索奇遇
-		/// </summary>
 		public static GuidingChapterItem Item354 => Instance[(short)353];
 
-		/// <summary>
-		/// 较艺准备
-		/// </summary>
 		public static GuidingChapterItem Item355 => Instance[(short)354];
 
-		/// <summary>
-		/// 开始较艺
-		/// </summary>
 		public static GuidingChapterItem Item356 => Instance[(short)355];
 
-		/// <summary>
-		/// 使用策略
-		/// </summary>
 		public static GuidingChapterItem Item357 => Instance[(short)356];
 
-		/// <summary>
-		/// 论战
-		/// </summary>
 		public static GuidingChapterItem Item358 => Instance[(short)357];
 
-		/// <summary>
-		/// 较艺胜负
-		/// </summary>
 		public static GuidingChapterItem Item359 => Instance[(short)358];
 
-		/// <summary>
-		/// 较艺压力
-		/// </summary>
 		public static GuidingChapterItem Item360 => Instance[(short)359];
 
-		/// <summary>
-		/// 较艺结算
-		/// </summary>
 		public static GuidingChapterItem Item361 => Instance[(short)360];
 
-		/// <summary>
-		/// 诛魔试炼
-		/// </summary>
 		public static GuidingChapterItem Item362 => Instance[(short)361];
 
-		/// <summary>
-		/// 罗汉开悟
-		/// </summary>
 		public static GuidingChapterItem Item363 => Instance[(short)362];
 
-		/// <summary>
-		/// 独创心法
-		/// </summary>
 		public static GuidingChapterItem Item364 => Instance[(short)363];
 
-		/// <summary>
-		/// 生关死节
-		/// </summary>
 		public static GuidingChapterItem Item365 => Instance[(short)364];
 
-		/// <summary>
-		/// 改正修逆
-		/// </summary>
 		public static GuidingChapterItem Item366 => Instance[(short)365];
 
-		/// <summary>
-		/// 移宫易穴
-		/// </summary>
 		public static GuidingChapterItem Item367 => Instance[(short)366];
 
-		/// <summary>
-		/// 神魔入阵
-		/// </summary>
 		public static GuidingChapterItem Item368 => Instance[(short)367];
 
-		/// <summary>
-		/// 统筹方略
-		/// </summary>
 		public static GuidingChapterItem Item369 => Instance[(short)368];
 
-		/// <summary>
-		/// 寄托奇书
-		/// </summary>
 		public static GuidingChapterItem Item370 => Instance[(short)369];
 
-		/// <summary>
-		/// 奇书断执
-		/// </summary>
 		public static GuidingChapterItem Item371 => Instance[(short)370];
 
-		/// <summary>
-		/// 孤鸾镜水谣
-		/// </summary>
 		public static GuidingChapterItem Item372 => Instance[(short)371];
 
-		/// <summary>
-		/// 造化生人
-		/// </summary>
 		public static GuidingChapterItem Item373 => Instance[(short)372];
 
-		/// <summary>
-		/// 天外游历
-		/// </summary>
 		public static GuidingChapterItem Item374 => Instance[(short)373];
 
-		/// <summary>
-		/// 天枢玄铸
-		/// </summary>
 		public static GuidingChapterItem Item375 => Instance[(short)374];
 
-		/// <summary>
-		/// 驱使古鼎
-		/// </summary>
 		public static GuidingChapterItem Item376 => Instance[(short)375];
 
-		/// <summary>
-		/// 鼎蛟淬身
-		/// </summary>
 		public static GuidingChapterItem Item377 => Instance[(short)376];
 
-		/// <summary>
-		/// 化魂仪式
-		/// </summary>
 		public static GuidingChapterItem Item378 => Instance[(short)377];
 
-		/// <summary>
-		/// 炼制王蛊
-		/// </summary>
 		public static GuidingChapterItem Item379 => Instance[(short)378];
 
-		/// <summary>
-		/// 驱动王蛊
-		/// </summary>
 		public static GuidingChapterItem Item380 => Instance[(short)379];
 
-		/// <summary>
-		/// 奇纹星斗
-		/// </summary>
 		public static GuidingChapterItem Item381 => Instance[(short)380];
 
-		/// <summary>
-		/// 调遣元鸡
-		/// </summary>
 		public static GuidingChapterItem Item382 => Instance[(short)381];
 
-		/// <summary>
-		/// 元鸡灵羽
-		/// </summary>
 		public static GuidingChapterItem Item383 => Instance[(short)382];
 
-		/// <summary>
-		/// 姬穸随行
-		/// </summary>
 		public static GuidingChapterItem Item384 => Instance[(short)386];
 
-		/// <summary>
-		/// 持印汲气
-		/// </summary>
 		public static GuidingChapterItem Item385 => Instance[(short)383];
 
-		/// <summary>
-		/// 三才护阵
-		/// </summary>
 		public static GuidingChapterItem Item386 => Instance[(short)384];
 
-		/// <summary>
-		/// 三魔乱阵
-		/// </summary>
 		public static GuidingChapterItem Item387 => Instance[(short)385];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static GuidingChapter Instance = new GuidingChapter();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Class", "PartTitle", "PartDesc", "TemplateId", "PartImage", "Encyclopedia" };

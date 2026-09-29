@@ -5,24 +5,14 @@ using Config;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 前端用于获取Vector2[]途径点id的接口
-/// </summary>
-/// <typeparam name="T"></typeparam>
 public class TravelRouteHelper<T>
 {
 	private readonly Func<short, T> _indexer;
 
 	private readonly Func<float[], T> _converter;
 
-	/// <summary>
-	/// 路线途径地区，在GetRoute调用开始被赋值，调用结束后数据可能过期
-	/// </summary>
 	public short FromId;
 
-	/// <summary>
-	/// 路线途径地区，在GetRoute调用开始被赋值，调用结束后数据可能过期
-	/// </summary>
 	public short ToId;
 
 	public TravelRouteHelper(Func<short, T> indexer, Func<float[], T> converter)

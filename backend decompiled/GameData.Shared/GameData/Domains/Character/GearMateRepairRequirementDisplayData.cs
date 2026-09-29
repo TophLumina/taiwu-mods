@@ -2,61 +2,35 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 一次性给前端机关人修理显示需要的数据
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class GearMateRepairRequirementDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 机关人
-	/// </summary>
 	[SerializableGameDataField]
 	public int GearMateId;
 
-	/// <summary>
-	/// 诊疗类型<see cref="T:GameData.Domains.Character.GearMateRepairType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte RepairType;
 
-	/// <summary>
-	/// 资源类型<see cref="F:GameData.Domains.Character.GearMateRepairRequirementDisplayData.ResourceType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ResourceType;
 
-	/// <summary>
-	/// 资源消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResourceCost;
 
-	/// <summary>
-	/// 造诣类型<see cref="F:GameData.Domains.Character.GearMateRepairRequirementDisplayData.LifeSkillType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillType;
 
-	/// <summary>
-	/// 造诣需要
-	/// </summary>
 	[SerializableGameDataField]
 	public int AttainmentCount;
 
-	/// <summary>
-	/// 引子等级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemGrade;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 16;
@@ -67,7 +41,6 @@ public class GearMateRepairRequirementDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = GearMateId;
@@ -91,7 +64,6 @@ public class GearMateRepairRequirementDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

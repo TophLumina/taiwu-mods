@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇行为
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class AdventureAction : ISerializableGameData
 {
@@ -28,46 +25,25 @@ public class AdventureAction : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "Id", "Key", "RemainTime", "ContainsTaiwu", "Elements" };
 	}
 
-	/// <summary>
-	/// 行为 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int Id;
 
-	/// <summary>
-	/// 行为键
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public string Key;
 
-	/// <summary>
-	/// 剩余时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int RemainTime;
 
-	/// <summary>
-	/// 包含太吾
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public bool ContainsTaiwu;
 
-	/// <summary>
-	/// 参与的元素
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public List<int> Elements;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AdventureAction()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AdventureAction(AdventureAction other)
 	{
 		Id = other.Id;
@@ -77,9 +53,6 @@ public class AdventureAction : ISerializableGameData
 		Elements = ((other.Elements == null) ? null : new List<int>(other.Elements));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AdventureAction other)
 	{
 		Id = other.Id;
@@ -89,13 +62,11 @@ public class AdventureAction : ISerializableGameData
 		Elements = ((other.Elements == null) ? null : new List<int>(other.Elements));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 11;
@@ -108,7 +79,6 @@ public class AdventureAction : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -165,7 +135,6 @@ public class AdventureAction : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

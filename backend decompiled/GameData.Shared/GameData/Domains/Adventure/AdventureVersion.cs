@@ -3,10 +3,7 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇版本号
-/// </summary>
-[SerializeAs(typeof(ulong))]
+[SerializeTo(typeof(ulong))]
 public readonly record struct AdventureVersion(int Major, int Minor)
 {
 	public readonly int Major = Major;

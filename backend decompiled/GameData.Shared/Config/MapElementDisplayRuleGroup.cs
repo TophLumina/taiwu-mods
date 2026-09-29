@@ -7,61 +7,28 @@ namespace Config;
 [Serializable]
 public class MapElementDisplayRuleGroup : ConfigData<MapElementDisplayRuleGroupItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 人物数量
-		/// </summary>
 		public const short CharacterCount = 0;
 
-		/// <summary>
-		/// 人物头像
-		/// </summary>
 		public const short CharacterAvatar = 1;
 
-		/// <summary>
-		/// 地图元素
-		/// </summary>
 		public const short MapElement = 2;
 
-		/// <summary>
-		/// 地图互动
-		/// </summary>
 		public const short MapInteract = 3;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 人物数量
-		/// </summary>
 		public static MapElementDisplayRuleGroupItem CharacterCount => Instance[(short)0];
 
-		/// <summary>
-		/// 人物头像
-		/// </summary>
 		public static MapElementDisplayRuleGroupItem CharacterAvatar => Instance[(short)1];
 
-		/// <summary>
-		/// 地图元素
-		/// </summary>
 		public static MapElementDisplayRuleGroupItem MapElement => Instance[(short)2];
 
-		/// <summary>
-		/// 地图互动
-		/// </summary>
 		public static MapElementDisplayRuleGroupItem MapInteract => Instance[(short)3];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MapElementDisplayRuleGroup Instance = new MapElementDisplayRuleGroup();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Icon" };

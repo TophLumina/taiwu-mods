@@ -4,6 +4,7 @@ using GameData.Combat.Math;
 using GameData.Common;
 using GameData.DomainEvents;
 using GameData.Domains.Character;
+using GameData.Domains.CombatSkill;
 
 namespace GameData.Domains.SpecialEffect.CombatSkill.Common.Implement;
 
@@ -15,9 +16,7 @@ public class CostNeiliAllocationImplement : ISpecialEffectImplement, ISpecialEff
 		DamageCannotReduce
 	}
 
-	private const int AddRangeBaseValue = 5;
-
-	private const int AddRangeValuePerGrid = 5;
+	private const int AddRangeValue = 20;
 
 	private readonly EType _directType;
 
@@ -29,9 +28,9 @@ public class CostNeiliAllocationImplement : ISpecialEffectImplement, ISpecialEff
 
 	private short _costNeiliEffectingSkillId = -1;
 
-	private int _costNeiliEffectingAddRange;
-
 	private EType Type => EffectBase.IsDirect ? _directType : _reverseType;
+
+	private CombatSkillKey EffectingSkillKey => new CombatSkillKey(EffectBase.CharacterId, _costNeiliEffectingSkillId);
 
 	public CombatSkillEffectBase EffectBase { get; set; }
 
@@ -63,7 +62,7 @@ public class CostNeiliAllocationImplement : ISpecialEffectImplement, ISpecialEff
 
 	public int GetModifyValue(AffectedDataKey dataKey, int currModifyValue)
 	{
-		if (dataKey.CharId != EffectBase.CharacterId || dataKey.CombatSkillId != _costNeiliEffectingSkillId)
+		if (dataKey.IsNormalAttack || dataKey.SkillKey != EffectingSkillKey)
 		{
 			return 0;
 		}
@@ -71,14 +70,14 @@ public class CostNeiliAllocationImplement : ISpecialEffectImplement, ISpecialEff
 		bool flag = (uint)(fieldId - 145) <= 1u;
 		if (flag && Type == EType.AddRange)
 		{
-			return _costNeiliEffectingAddRange;
+			return 20;
 		}
 		return 0;
 	}
 
 	public bool GetModifiedValue(AffectedDataKey dataKey, bool dataValue)
 	{
-		if (dataKey.CharId != EffectBase.CharacterId || dataKey.CombatSkillId != _costNeiliEffectingSkillId)
+		if (dataKey.IsNormalAttack || dataKey.SkillKey != EffectingSkillKey)
 		{
 			return dataValue;
 		}
@@ -164,7 +163,6 @@ public class CostNeiliAllocationImplement : ISpecialEffectImplement, ISpecialEff
 		switch (Type)
 		{
 		case EType.AddRange:
-			_costNeiliEffectingAddRange = 5 + 5 * EffectBase.CombatChar.GetCharacter().GetCombatSkillGridCost(_costNeiliEffectingSkillId);
 			DomainManager.SpecialEffect.InvalidateCache(context, EffectBase.CharacterId, 145);
 			DomainManager.SpecialEffect.InvalidateCache(context, EffectBase.CharacterId, 146);
 			break;
@@ -182,7 +180,6 @@ public class CostNeiliAllocationImplement : ISpecialEffectImplement, ISpecialEff
 		switch (Type)
 		{
 		case EType.AddRange:
-			_costNeiliEffectingAddRange = 0;
 			DomainManager.SpecialEffect.InvalidateCache(context, EffectBase.CharacterId, 145);
 			DomainManager.SpecialEffect.InvalidateCache(context, EffectBase.CharacterId, 146);
 			break;

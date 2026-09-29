@@ -5,10 +5,8 @@ namespace Config;
 [Serializable]
 public class AdventureBaseBranch : AdventureBranch
 {
-	/// 分支的Key, 用于游戏中选择分支时索引
 	public string BranchKey;
 
-	/// 该分支的福缘商店最大数量，实际游戏中会生成50%到100%
 	public short LuckStoreCount;
 
 	public byte PortA;

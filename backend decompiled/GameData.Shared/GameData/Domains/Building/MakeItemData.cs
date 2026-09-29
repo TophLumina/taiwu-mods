@@ -49,22 +49,13 @@ public class MakeItemData : ISerializableGameData
 	[SerializableGameDataField(FieldIndex = 5)]
 	public ItemKey MaterialKey;
 
-	/// <summary>
-	/// 精益求精的目标装备特效
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public short EquipmentEffectId = -1;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public MakeItemData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public MakeItemData(MakeItemData other)
 	{
 		ProductItemType = other.ProductItemType;
@@ -76,9 +67,6 @@ public class MakeItemData : ISerializableGameData
 		EquipmentEffectId = other.EquipmentEffectId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(MakeItemData other)
 	{
 		ProductItemType = other.ProductItemType;
@@ -97,11 +85,8 @@ public class MakeItemData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 7;
+		int totalSize = 35;
 		totalSize = ((ProductItemIdList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * ProductItemIdList.Count)));
-		totalSize += MaterialResources.GetSerializedSize();
-		totalSize += ToolKey.GetSerializedSize();
-		totalSize += MaterialKey.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

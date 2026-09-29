@@ -4,58 +4,31 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 旅行预览显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class TravelPreviewDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 目标地区 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short ToAreaId;
 
-	/// <summary>
-	/// 需要解锁驿站的地区 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> NeedUnlockStations;
 
-	/// <summary>
-	/// 威望消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public int AuthorityCost;
 
-	/// <summary>
-	/// 金钱消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public int MoneyCost;
 
-	/// <summary>
-	/// 时间消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public int DaysCost;
 
-	/// <summary>
-	/// 当前威望
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrentAuthority;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TravelPreviewDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TravelPreviewDisplayData(TravelPreviewDisplayData other)
 	{
 		ToAreaId = other.ToAreaId;
@@ -66,9 +39,6 @@ public class TravelPreviewDisplayData : ISerializableGameData
 		CurrentAuthority = other.CurrentAuthority;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TravelPreviewDisplayData other)
 	{
 		ToAreaId = other.ToAreaId;
@@ -79,13 +49,11 @@ public class TravelPreviewDisplayData : ISerializableGameData
 		CurrentAuthority = other.CurrentAuthority;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 18;
@@ -97,7 +65,6 @@ public class TravelPreviewDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -136,7 +103,6 @@ public class TravelPreviewDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

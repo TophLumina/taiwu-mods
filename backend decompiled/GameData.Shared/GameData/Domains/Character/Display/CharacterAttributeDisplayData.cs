@@ -3,9 +3,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物基础属性显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public class CharacterAttributeDisplayData : ISerializableGameData
 {
@@ -63,16 +60,10 @@ public class CharacterAttributeDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public bool CanAffectedByCombatDifficulty;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterAttributeDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterAttributeDisplayData(CharacterAttributeDisplayData other)
 	{
 		CurMainAttributes = other.CurMainAttributes;
@@ -95,9 +86,6 @@ public class CharacterAttributeDisplayData : ISerializableGameData
 		CanAffectedByCombatDifficulty = other.CanAffectedByCombatDifficulty;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterAttributeDisplayData other)
 	{
 		CurMainAttributes = other.CurMainAttributes;
@@ -127,16 +115,7 @@ public class CharacterAttributeDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 17;
-		totalSize += CurMainAttributes.GetSerializedSize();
-		totalSize += MaxMainAttributes.GetSerializedSize();
-		totalSize += MainAttributeRecoveries.GetSerializedSize();
-		totalSize += AtkHitAttribute.GetSerializedSize();
-		totalSize += AtkPenetrability.GetSerializedSize();
-		totalSize += DefHitAttribute.GetSerializedSize();
-		totalSize += DefPenetrability.GetSerializedSize();
-		totalSize += RecoveryOfStanceAndBreath.GetSerializedSize();
-		totalSize += PoisonResists.GetSerializedSize();
+		int totalSize = 129;
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

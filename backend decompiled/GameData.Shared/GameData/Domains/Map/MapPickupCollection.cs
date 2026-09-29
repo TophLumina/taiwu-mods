@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地图一个格子里所有拾取物的数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, IsExtensible = true)]
 public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>, IEnumerable
 {
@@ -25,29 +22,17 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		public static readonly string[] FieldId2FieldName = new string[3] { "PickupList", "IsNormalPickupTriggeredThisMonth", "IsEventPickupTriggeredThisMonth" };
 	}
 
-	/// <summary>
-	/// 拾取物列表，有顺序
-	/// </summary>
 	[SerializableGameDataField]
 	public List<MapPickup> PickupList;
 
-	/// <summary>
-	/// 本月是否触发过普通拾取物，如果有，本格上的普通拾取物就不再可见
-	/// </summary>
 	[Obsolete("现在可以堆叠显示了")]
 	[SerializableGameDataField]
 	public bool IsNormalPickupTriggeredThisMonth;
 
-	/// <summary>
-	/// 本月是否触发过事件拾取物，如果有，本格上的事件拾取物就不再可见
-	/// </summary>
 	[Obsolete("现在可以堆叠显示了")]
 	[SerializableGameDataField]
 	public bool IsEventPickupTriggeredThisMonth;
 
-	/// <summary>
-	/// 拾取物的数量
-	/// </summary>
 	public int Count
 	{
 		get
@@ -60,17 +45,11 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		}
 	}
 
-	/// <summary>
-	/// 默认构造
-	/// </summary>
 	public MapPickupCollection()
 	{
 		PickupList = new List<MapPickup>();
 	}
 
-	/// <summary>
-	/// 添加一个拾取物
-	/// </summary>
 	public void AddPickup(MapPickup pickup)
 	{
 		if (pickup != null)
@@ -79,9 +58,6 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		}
 	}
 
-	/// <summary>
-	/// 将指定拾取物移至最前
-	/// </summary>
 	public void SetPickupAtFirst(MapPickup pickup)
 	{
 		if (pickup != null)
@@ -104,10 +80,6 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		}
 	}
 
-	/// <summary>
-	/// 置之不理一个拾取物
-	/// </summary>
-	/// <param name="pickup"></param>
 	public void IgnorePickup(MapPickup pickup)
 	{
 		if (pickup != null)
@@ -123,9 +95,6 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		}
 	}
 
-	/// <summary>
-	/// 获取一个拾取物
-	/// </summary>
 	public MapPickup Get(int index)
 	{
 		if (PickupList == null || index < 0 || index >= PickupList.Count)
@@ -135,10 +104,6 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		return PickupList[index];
 	}
 
-	/// <summary>
-	/// 清理触发过状态，和所有置之不理状态
-	/// </summary>
-	/// <returns>是否修改了自身</returns>
 	public bool ClearIgnoredAndTriggered()
 	{
 		bool modified = false;
@@ -153,25 +118,21 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		return modified;
 	}
 
-	/// <inheritdoc cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 	public IEnumerator<MapPickup> GetEnumerator()
 	{
 		return PickupList.GetEnumerator();
 	}
 
-	/// <inheritdoc cref="M:System.Collections.IEnumerable.GetEnumerator" />
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return GetEnumerator();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -196,7 +157,6 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -244,7 +204,6 @@ public class MapPickupCollection : ISerializableGameData, IEnumerable<MapPickup>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

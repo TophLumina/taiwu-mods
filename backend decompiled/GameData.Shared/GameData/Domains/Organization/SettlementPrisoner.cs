@@ -3,9 +3,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Organization;
 
-/// <summary>
-/// 监牢关联角色
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SettlementPrisoner : KidnappedCharacter, ISerializableGameData
 {
@@ -32,46 +29,25 @@ public class SettlementPrisoner : KidnappedCharacter, ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[8] { "Duration", "PunishmentType", "PunishmentSeverity", "CharId", "RopeItemKey", "KidnapBeginDate", "Resistance", "InitialMorality" };
 	}
 
-	/// <summary>
-	/// 关押时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int Duration;
 
-	/// <summary>
-	/// 惩罚类型 (犯罪条目)
-	/// </summary>
 	[SerializableGameDataField]
 	public short PunishmentType;
 
-	/// <summary>
-	/// 惩罚力度
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte PunishmentSeverity;
 
-	/// <summary>
-	/// 初始立场
-	/// </summary>
 	[SerializableGameDataField]
 	public short InitialMorality;
 
-	/// <summary>
-	/// 关押时的配偶角色ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int SpouseCharId = -1;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SettlementPrisoner()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SettlementPrisoner(SettlementPrisoner other)
 	{
 		Duration = other.Duration;
@@ -84,9 +60,6 @@ public class SettlementPrisoner : KidnappedCharacter, ISerializableGameData
 		InitialMorality = other.InitialMorality;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SettlementPrisoner other)
 	{
 		Duration = other.Duration;
@@ -99,13 +72,11 @@ public class SettlementPrisoner : KidnappedCharacter, ISerializableGameData
 		InitialMorality = other.InitialMorality;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public new bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public new int GetSerializedSize()
 	{
 		int totalSize = 28;
@@ -116,7 +87,6 @@ public class SettlementPrisoner : KidnappedCharacter, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public new unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -145,7 +115,6 @@ public class SettlementPrisoner : KidnappedCharacter, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public new unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

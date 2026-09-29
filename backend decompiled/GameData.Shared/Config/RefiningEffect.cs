@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class RefiningEffect : ConfigData<RefiningEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static RefiningEffect Instance = new RefiningEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "WeaponType", "ArmorType", "AccessoryType" };

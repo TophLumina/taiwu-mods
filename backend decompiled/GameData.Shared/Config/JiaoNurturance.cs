@@ -8,121 +8,52 @@ namespace Config;
 [Serializable]
 public class JiaoNurturance : ConfigData<JiaoNurturanceItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 任其成长
-		/// </summary>
 		public const short NaturalGrowth = 0;
 
-		/// <summary>
-		/// 深潭药浴
-		/// </summary>
 		public const short MedicineBath = 1;
 
-		/// <summary>
-		/// 大口进食
-		/// </summary>
 		public const short Gourmet = 2;
 
-		/// <summary>
-		/// 猎牛牧虎
-		/// </summary>
 		public const short BeastHunting = 3;
 
-		/// <summary>
-		/// 增长灵性
-		/// </summary>
 		public const short SpiritualGrowth = 4;
 
-		/// <summary>
-		/// 协助伏魔
-		/// </summary>
 		public const short DevilHunting = 5;
 
-		/// <summary>
-		/// 妆饰财宝
-		/// </summary>
 		public const short Opulence = 6;
 
-		/// <summary>
-		/// 歌舞娱乐
-		/// </summary>
 		public const short Entertainment = 7;
 
-		/// <summary>
-		/// 通情识礼
-		/// </summary>
 		public const short Literacy = 8;
 
-		/// <summary>
-		/// 缠缚教习
-		/// </summary>
 		public const short WrapTeach = 9;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 任其成长
-		/// </summary>
 		public static JiaoNurturanceItem NaturalGrowth => Instance[(short)0];
 
-		/// <summary>
-		/// 深潭药浴
-		/// </summary>
 		public static JiaoNurturanceItem MedicineBath => Instance[(short)1];
 
-		/// <summary>
-		/// 大口进食
-		/// </summary>
 		public static JiaoNurturanceItem Gourmet => Instance[(short)2];
 
-		/// <summary>
-		/// 猎牛牧虎
-		/// </summary>
 		public static JiaoNurturanceItem BeastHunting => Instance[(short)3];
 
-		/// <summary>
-		/// 增长灵性
-		/// </summary>
 		public static JiaoNurturanceItem SpiritualGrowth => Instance[(short)4];
 
-		/// <summary>
-		/// 协助伏魔
-		/// </summary>
 		public static JiaoNurturanceItem DevilHunting => Instance[(short)5];
 
-		/// <summary>
-		/// 妆饰财宝
-		/// </summary>
 		public static JiaoNurturanceItem Opulence => Instance[(short)6];
 
-		/// <summary>
-		/// 歌舞娱乐
-		/// </summary>
 		public static JiaoNurturanceItem Entertainment => Instance[(short)7];
 
-		/// <summary>
-		/// 通情识礼
-		/// </summary>
 		public static JiaoNurturanceItem Literacy => Instance[(short)8];
 
-		/// <summary>
-		/// 缠缚教习
-		/// </summary>
 		public static JiaoNurturanceItem WrapTeach => Instance[(short)9];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static JiaoNurturance Instance = new JiaoNurturance();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "EventDesc", "ResourceCostType", "BasePropertyChange", "TemplateId", "NurturanceCostMonth", "NurturanceAnimation" };

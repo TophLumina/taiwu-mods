@@ -3,19 +3,10 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 战斗状态集合
-/// </summary>
 public class CombatStateCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 状态ID -&gt; (强度, 是否反转, 来源人物ID)
-	/// </summary>
 	public readonly Dictionary<short, (short power, bool reverse, int srcCharId)> StateDict = new Dictionary<short, (short, bool, int)>();
 
-	/// <summary>
-	/// 状态ID -&gt; 特效ID。用于后端查找对应特效，非序列化数据
-	/// </summary>
 	public readonly Dictionary<short, long> State2EffectId = new Dictionary<short, long>();
 
 	public bool IsSerializedSizeFixed()

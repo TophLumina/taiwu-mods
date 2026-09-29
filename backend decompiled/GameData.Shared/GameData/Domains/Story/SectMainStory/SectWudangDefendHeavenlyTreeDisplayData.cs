@@ -6,9 +6,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Story.SectMainStory;
 
-/// <summary>
-/// 自 SerializeDefault 迁移而来的匿名结构
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public class SectWudangDefendHeavenlyTreeDisplayData : ISerializableGameData
 {
@@ -25,25 +22,16 @@ public class SectWudangDefendHeavenlyTreeDisplayData : ISerializableGameData
 		return sectWudangDefendHeavenlyTreeDisplayData;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectWudangDefendHeavenlyTreeDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectWudangDefendHeavenlyTreeDisplayData(SectWudangDefendHeavenlyTreeDisplayData other)
 	{
 		Locations = ((other.Locations == null) ? null : new List<Location>(other.Locations));
 		EventTriggered = other.EventTriggered;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectWudangDefendHeavenlyTreeDisplayData other)
 	{
 		Locations = ((other.Locations == null) ? null : new List<Location>(other.Locations));
@@ -58,7 +46,7 @@ public class SectWudangDefendHeavenlyTreeDisplayData : ISerializableGameData
 	public int GetSerializedSize()
 	{
 		int totalSize = 1;
-		totalSize = ((Locations == null) ? (totalSize + 2) : (totalSize + (2 + default(Location).GetSerializedSize() * Locations.Count)));
+		totalSize = ((Locations == null) ? (totalSize + 2) : (totalSize + (2 + 4 * Locations.Count)));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

@@ -4,66 +4,40 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 用于演出的摧破功法伤害分段数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class SkillDamageSectionData : ISerializableGameData
 {
-	/// <summary>
-	/// 伤害
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<DefeatMarkKey, int> Values = new Dictionary<DefeatMarkKey, int>();
 
-	/// <summary>
-	/// 结果
-	/// </summary>
 	[SerializableGameDataField]
 	public ESkillDamageSectionResult Result;
 
-	/// <summary>
-	/// 命中
-	/// </summary>
 	public bool Hit => Result == ESkillDamageSectionResult.Hit;
 
-	/// <summary>
-	/// 暴击
-	/// </summary>
 	public bool Critical => Result == ESkillDamageSectionResult.Critical;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SkillDamageSectionData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SkillDamageSectionData(SkillDamageSectionData other)
 	{
 		Values = ((other.Values == null) ? null : new Dictionary<DefeatMarkKey, int>(other.Values));
 		Result = other.Result;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SkillDamageSectionData other)
 	{
 		Values = ((other.Values == null) ? null : new Dictionary<DefeatMarkKey, int>(other.Values));
 		Result = other.Result;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 1;
@@ -75,7 +49,6 @@ public class SkillDamageSectionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* num = pData + SerializationHelper.DictionaryAsBasicTypePair.Serialize(pData, ref Values, (Func<DefeatMarkKey, int>)((DefeatMarkKey key) => key), (Func<int, int>)((int value) => value));
@@ -88,7 +61,6 @@ public class SkillDamageSectionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

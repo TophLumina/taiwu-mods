@@ -12,9 +12,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 注意此处的回购数据已经废弃清空，新的在 <see cref="T:GameData.Domains.Merchant.MerchantBuyBackData" />
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true, IsExtensible = true)]
 public class MerchantData : ISerializableGameData
 {
@@ -51,114 +48,53 @@ public class MerchantData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 商人NPC角色ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int CharId;
 
-	/// <summary>
-	/// 商人类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public sbyte MerchantTemplateId;
 
-	/// <summary>
-	/// 资金。交换藏书时为威望
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int Money;
 
-	/// <summary>
-	/// 货物列表0
-	/// 交换藏书时为技艺书列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public Inventory GoodsList0;
 
-	/// <summary>
-	/// 货物列表1
-	/// 交换藏书时为好感功法书列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public Inventory GoodsList1;
 
-	/// <summary>
-	/// 货物列表2
-	/// 交换藏书时为门派功法书列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public Inventory GoodsList2;
 
-	/// <summary>
-	/// 货物列表3
-	/// 交换藏书时为门派功法书列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public Inventory GoodsList3;
 
-	/// <summary>
-	/// 货物列表4
-	/// 交换藏书时为门派功法书列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public Inventory GoodsList4;
 
-	/// <summary>
-	/// 货物列表5
-	/// 交换藏书时为门派功法书列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public Inventory GoodsList5;
 
-	/// <summary>
-	/// 货物列表6
-	/// 交换藏书时为门派功法书列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	public Inventory GoodsList6;
 
-	/// <summary>
-	/// 价格变化数据。道具 -&gt; 价格增加百分比（负数表示折扣）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	public Dictionary<ItemKey, int> PriceChangeData = new Dictionary<ItemKey, int>();
 
 	public const int MaxGoodsListCount = 7;
 
-	/// <summary>
-	/// 立场涨价幅度
-	/// </summary>
 	public const int BehaviorAddDiscount = 25;
 
-	/// <summary>
-	/// 立场降价幅度
-	/// </summary>
 	public const int BehaviorReduceDiscount = -25;
 
-	/// <summary>
-	/// 商人的最大等级
-	/// </summary>
 	public const sbyte MaxLevel = 6;
 
-	/// <summary>
-	/// 商店配置
-	/// </summary>
 	public MerchantItem MerchantConfig => Config.Merchant.Instance[MerchantTemplateId];
 
-	/// <summary>
-	/// 商会类型
-	/// </summary>
 	public sbyte MerchantType => MerchantConfig.MerchantType;
 
-	/// <summary>
-	/// 商店等级
-	/// </summary>
 	public sbyte MerchantLevel => MerchantConfig.Level;
 
-	/// <summary>
-	/// 商店分组配置
-	/// </summary>
 	public MerchantItem GroupConfig => Config.Merchant.Instance[MerchantConfig.GroupId];
 
 	public MerchantData(int charId, sbyte merchantTemplateId)
@@ -171,9 +107,6 @@ public class MerchantData : ISerializableGameData
 	{
 	}
 
-	/// <summary>
-	/// 获取货物预设
-	/// </summary>
 	public static IList<PresetItemTemplateIdGroup> GetGoodsPreset(MerchantItem template, int index)
 	{
 		return index switch
@@ -196,9 +129,6 @@ public class MerchantData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 获取指定商品价格变化百分比
-	/// </summary>
 	public int GetPriceChangePercent(ItemKey itemKey)
 	{
 		if (!PriceChangeData.TryGetValue(itemKey, out var value))
@@ -208,9 +138,6 @@ public class MerchantData : ISerializableGameData
 		return value;
 	}
 
-	/// <summary>
-	/// 获取指定类型和等级的商人模板ID
-	/// </summary>
 	public static sbyte FindMerchantTemplateId(sbyte type, sbyte level)
 	{
 		for (int i = 0; i < Config.Merchant.Instance.Count; i++)
@@ -224,9 +151,6 @@ public class MerchantData : ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 获取卖出物品价格
-	/// </summary>
 	public static int GetItemSoldPrice(int srcPrice, int favorChangeRate, short itemSubType, short merchantLoveItemType, short merchantHateItemType, sbyte merchantBehaviorType, int durabilityRate)
 	{
 		int biddingInfo = 0;
@@ -258,9 +182,6 @@ public class MerchantData : ISerializableGameData
 		return Math.Max(0, srcPrice * (20 + 20 * favorChangeRate / 100 + biddingInfo) / 100 * durabilityBidding / 100);
 	}
 
-	/// <summary>
-	/// 根据索引来获取商品列表
-	/// </summary>
 	public Inventory GetGoodsList(int index)
 	{
 		switch (index)
@@ -312,9 +233,6 @@ public class MerchantData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 随机获得进货时，人物立场对价格的影响
-	/// </summary>
 	public static int CalculateCharacterBehaviourDiscount(IRandomSource source, sbyte behaviorType)
 	{
 		int random = source.Next(0, 100);
@@ -329,12 +247,6 @@ public class MerchantData : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 获取人物好感对购买或出售的价格的影响，百分值
-	/// </summary>
-	/// <param name="isBuy"></param>
-	/// <param name="favorability"></param>
-	/// <returns></returns>
 	public static int GetCharFavorabilityEffect(bool isBuy, short favorability)
 	{
 		sbyte favorabilityIndex = FavorabilityType.ToIndex(FavorabilityType.GetFavorabilityType(favorability));

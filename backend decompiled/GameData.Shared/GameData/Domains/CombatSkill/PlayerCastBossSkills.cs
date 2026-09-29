@@ -4,19 +4,10 @@ using GameData.Utilities;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 玩家可施展的 boss 功法
-/// </summary>
 public static class PlayerCastBossSkills
 {
-	/// <summary>
-	/// 玩家可施展的 boss 功法 ID 列表
-	/// </summary>
 	public static readonly List<short> Ids = new List<short>();
 
-	/// <summary>
-	/// 初始化缓存
-	/// </summary>
 	public static void Initialize()
 	{
 		Ids.Clear();

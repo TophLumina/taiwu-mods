@@ -2,37 +2,23 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 一个有身份的村民的显示数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class VillagerRoleCharacterSlimDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 什么身份
-	/// </summary>
 	[SerializableGameDataField]
 	public short RoleTemplateId;
 
-	/// <summary>
-	/// 在做哪个工作
-	/// </summary>
 	[SerializableGameDataField]
 	public short ArrangementTemplateId;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -43,7 +29,6 @@ public class VillagerRoleCharacterSlimDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = Id;
@@ -59,7 +44,6 @@ public class VillagerRoleCharacterSlimDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

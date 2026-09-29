@@ -5,73 +5,41 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 商会信息的商人内容
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class MerchantInfoMerchantData : ISerializableGameData
 {
-	/// <summary>
-	/// 商人角色ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 姓名数据
-	/// </summary>
 	[SerializableGameDataField]
 	public NameRelatedData NameRelatedData;
 
-	/// <summary>
-	/// 立场
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BehaviorType;
 
-	/// <summary>
-	/// 对太吾的好感
-	/// </summary>
 	[SerializableGameDataField]
 	public short Favorability;
 
-	/// <summary>
-	/// 商店的模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short MerchantTemplateId;
 
-	/// <summary>
-	/// 当前地区的模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrentAreaTemplateId;
 
-	/// <summary>
-	/// 所属势力的模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short OrgTemplateId;
 
-	/// <summary>
-	/// 所属势力的地格名称数据
-	/// </summary>
 	[SerializableGameDataField]
 	public FullBlockName FullBlockName;
 
-	/// <summary>
-	/// 头像数据
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarData;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 45;
@@ -84,7 +52,6 @@ public class MerchantInfoMerchantData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -126,7 +93,6 @@ public class MerchantInfoMerchantData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

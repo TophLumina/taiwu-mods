@@ -7,9 +7,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 商店回购数据，不存档，每次过月清除。需要配合<see cref="T:GameData.Domains.Merchant.MerchantData" />使用。
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true, IsExtensible = true)]
 public class MerchantBuyBackData : ISerializableGameData
 {
@@ -26,21 +23,12 @@ public class MerchantBuyBackData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "MerchantType", "BuyInGoodsList", "BuyInPrice" };
 	}
 
-	/// <summary>
-	/// 商店类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public sbyte MerchantType = -1;
 
-	/// <summary>
-	/// 回购列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public Inventory BuyInGoodsList = new Inventory();
 
-	/// <summary>
-	/// 回购价格。记录玩家卖出道具时的价格，回购时按原价购买
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public Dictionary<ItemKey, long> BuyInPrice = new Dictionary<ItemKey, long>();
 

@@ -7,82 +7,44 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件系统选择见闻/秘闻数据信息
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class EventSelectInformationData : ISerializableGameData
 {
-	/// <summary>
-	/// 见闻/秘闻关联的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int RelatedCharacterId;
 
-	/// <summary>
-	/// 选择需求是否已经处理
-	/// </summary>
 	public bool SelectComplete;
 
-	/// <summary>
-	/// 选择数据是否是有效数据
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AvailableData;
 
-	/// <summary>
-	/// 是否为秘闻商店
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsForShopping;
 
-	/// <summary>
-	/// 选择人物的姓名显示关联数据
-	/// </summary>
 	[SerializableGameDataField]
 	public NameRelatedData CharacterNameRelatedData;
 
-	/// <summary>
-	/// 用于等待选择的秘闻数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> ToSelectSecretInformationDataIdList;
 
-	/// <summary>
-	/// 用于等待选择的普通见闻数据
-	/// </summary>
 	[SerializableGameDataField]
 	public NormalInformationCollection ToSelectNormalInformation;
 
-	/// <summary>
-	/// 可选择的见闻类型，默认-1 不限制
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte SelectInformationType;
 
-	/// <summary>
-	/// 选择结果保存的Key，保存到当前事件的
-	/// </summary>
 	[SerializableGameDataField]
 	public string SaveKey;
 
-	/// <summary>
-	/// 见闻/秘闻关联的事件GUID
-	/// </summary>
 	public string SelectForEventGuid;
 
-	/// <summary>
-	/// 选择行为关联的事件选项Key
-	/// </summary>
 	public string SelectForOptionKey;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 39;
@@ -96,7 +58,6 @@ public class EventSelectInformationData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -168,7 +129,6 @@ public class EventSelectInformationData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

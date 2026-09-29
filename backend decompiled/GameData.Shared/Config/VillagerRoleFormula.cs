@@ -7,501 +7,204 @@ namespace Config;
 [Serializable]
 public class VillagerRoleFormula : ConfigData<VillagerRoleFormulaItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 农户自动采集次数
-		/// </summary>
 		public const int FarmerAutoCollectActionCount = 0;
 
-		/// <summary>
-		/// 农户自动采集数量
-		/// </summary>
 		public const int FarmerAutoCollectActionResult = 1;
 
-		/// <summary>
-		/// 农户迁移心材成功率
-		/// </summary>
 		public const int FarmerMigrateResourceSuccessRate = 2;
 
-		/// <summary>
-		/// 农户迁移心材额外成功率
-		/// </summary>
 		public const int FarmerMigrateResourceExtraSuccessRate = 3;
 
-		/// <summary>
-		/// 农户元鸡心材升级几率
-		/// </summary>
 		public const int FarmerChickenUpgradeBuildingCoreRate = 4;
 
-		/// <summary>
-		/// 大夫可互动人物品级
-		/// </summary>
 		public const int DoctorInteractTargetGrade = 5;
 
-		/// <summary>
-		/// 大夫可互动最高品级
-		/// </summary>
 		public const int DoctorInteractTargetMaxGrade = 6;
 
-		/// <summary>
-		/// 大夫自动威望收入基础
-		/// </summary>
 		public const int DoctorAutoActionAuthorityIncome = 7;
 
-		/// <summary>
-		/// 大夫自动威望收入浮动
-		/// </summary>
 		public const int DoctorAutoActionAuthorityIncomeAdjust = 8;
 
-		/// <summary>
-		/// 大夫派遣恩义收入
-		/// </summary>
 		public const int DoctorWorkSpiritualDebtIncome = 9;
 
-		/// <summary>
-		/// 大夫元鸡降低入魔值量
-		/// </summary>
 		public const int DoctorChickenUpgradeInfectionChangeAmount = 10;
 
-		/// <summary>
-		/// 大夫行为目标状态门槛
-		/// </summary>
 		public const int DoctorCureRequirement = 11;
 
-		/// <summary>
-		/// 使者自动行为影响人数
-		/// </summary>
 		public const int VillageHeadAutoActionAffectCount = 12;
 
-		/// <summary>
-		/// 使者自动行为好感变化
-		/// </summary>
 		public const int VillageHeadAutoActionFavorChange = 13;
 
-		/// <summary>
-		/// 使者自动行为好感增加概率
-		/// </summary>
 		public const int VillageHeadAutoActionFavorIncreaseRate = 14;
 
-		/// <summary>
-		/// 使者派遣行为调控范围
-		/// </summary>
 		public const int VillageHeadWorkChangeRuleRange = 15;
 
-		/// <summary>
-		/// 使者派遣行为超常数量
-		/// </summary>
 		public const int VillageHeadWorkSpecialRuleCount = 16;
 
-		/// <summary>
-		/// 使者派遣行为每月威望消耗
-		/// </summary>
 		public const int VillageHeadWorkMonthlyAuthorityCost = 17;
 
-		/// <summary>
-		/// 使者元鸡效果结成关系几率
-		/// </summary>
 		public const int VillageHeadChickenUpgradeActionChance = 18;
 
-		/// <summary>
-		/// 文人自动行为影响的人数
-		/// </summary>
 		public const int LiteratiAutoActionInfluenceCount = 19;
 
-		/// <summary>
-		/// 文人自动行为变化的心情
-		/// </summary>
 		public const int LiteratiAutoActionHappinessChange = 20;
 
-		/// <summary>
-		/// 文人派遣行为可进行的次数
-		/// </summary>
 		public const int LiteratiWorkUsableCount = 21;
 
-		/// <summary>
-		/// 文人派遣行为影响的量
-		/// </summary>
 		public const int LiteratiWorkEffectiveValue = 22;
 
-		/// <summary>
-		/// 文人元鸡影响的人数
-		/// </summary>
 		public const int LiteratiChickenInfluenceCount = 23;
 
-		/// <summary>
-		/// 文人元鸡变化的好感
-		/// </summary>
 		public const int LiteratiChickenRelationChange = 24;
 
-		/// <summary>
-		/// 商人可互动人物品级
-		/// </summary>
 		public const int MerchantInteractTargetGrade = 25;
 
-		/// <summary>
-		/// 商人可互动最高品级
-		/// </summary>
 		public const int MerchantInteractTargetMaxGrade = 26;
 
-		/// <summary>
-		/// 商人自动银钱收入基础
-		/// </summary>
 		public const int MerchantAutoActionMoneyIncome = 27;
 
-		/// <summary>
-		/// 商人自动银钱收入浮动
-		/// </summary>
 		public const int MerchantAutoActionMoneyIncomeAdjust = 28;
 
-		/// <summary>
-		/// 商人自动银钱收入目标银钱门槛
-		/// </summary>
 		public const int MerchantAutoActionTargetMoneyRequirement = 29;
 
-		/// <summary>
-		/// 商人购买物品价格比例
-		/// </summary>
 		public const int MerchantBuyItemPriceRate = 30;
 
-		/// <summary>
-		/// 商人出售物品价格比例
-		/// </summary>
 		public const int MerchantSellItemPriceRate = 31;
 
-		/// <summary>
-		/// 商人元鸡增加地区商会总部好感
-		/// </summary>
 		public const int MerchantChickenIncreaseHeadMerchantFavor = 32;
 
-		/// <summary>
-		/// 商人元鸡增加地区商会分部好感
-		/// </summary>
 		public const int MerchantChickenIncreaseBranchMerchantFavor = 33;
 
-		/// <summary>
-		/// 护冢自动行为每月可消灭的数量
-		/// </summary>
 		public const int SwordTombKeeperAutoActionKOCount = 34;
 
-		/// <summary>
-		/// 护冢派遣行为入魔值每月增加
-		/// </summary>
 		public const int SwordTombKeeperWorkInfectAddPerMonth = 35;
 
-		/// <summary>
-		/// 护冢派遣行为收集几率
-		/// </summary>
 		public const int SwordTombKeeperWorkCollectOdd = 36;
 
-		/// <summary>
-		/// 护冢派遣行为受伤几率
-		/// </summary>
 		public const int SwordTombKeeperWorkHurtOdd = 37;
 
-		/// <summary>
-		/// 护冢派遣行为受伤数量
-		/// </summary>
 		public const int SwordTombKeeperWorkHurtCount = 38;
 
-		/// <summary>
-		/// 护冢派遣行为收集见闻时得到特性几率
-		/// </summary>
 		public const int SwordTombKeeperWorkFeatureOddWhenInformationCollect = 39;
 
-		/// <summary>
-		/// 护冢派遣行为被攻击时得到特性几率
-		/// </summary>
 		public const int SwordTombKeeperWorkFeatureOddWhenBeAttacked = 40;
 
-		/// <summary>
-		/// 护冢元鸡降低比例
-		/// </summary>
 		public const int SwordTombKeeperChickenDecreaseFactor = 41;
 
-		/// <summary>
-		/// 匠人自动修理次数
-		/// </summary>
 		public const int CraftsmanAutoRepairCount = 42;
 
-		/// <summary>
-		/// 匠人获得精制引子的几率
-		/// </summary>
 		public const int CraftsmanAutoGainRefineMaterialChance = 43;
 
-		/// <summary>
-		/// 匠人获得精制引子的品级
-		/// </summary>
 		public const int CraftsmanAutoGainRefineMaterialGrade = 44;
 
-		/// <summary>
-		/// 匠人元鸡效果增加精制引子的品级
-		/// </summary>
 		public const int CraftsmanChikenUpgradeAutoGainRefineMaterialGrade = 45;
 
-		/// <summary>
-		/// 授予身份时给的好感
-		/// </summary>
 		public const int BaseFavorAddGainRole = 46;
 
-		/// <summary>
-		/// 剥夺身份时扣的好感
-		/// </summary>
 		public const int BaseFavorCostLostRole = 47;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 农户自动采集次数
-		/// </summary>
 		public static VillagerRoleFormulaItem FarmerAutoCollectActionCount => Instance[0];
 
-		/// <summary>
-		/// 农户自动采集数量
-		/// </summary>
 		public static VillagerRoleFormulaItem FarmerAutoCollectActionResult => Instance[1];
 
-		/// <summary>
-		/// 农户迁移心材成功率
-		/// </summary>
 		public static VillagerRoleFormulaItem FarmerMigrateResourceSuccessRate => Instance[2];
 
-		/// <summary>
-		/// 农户迁移心材额外成功率
-		/// </summary>
 		public static VillagerRoleFormulaItem FarmerMigrateResourceExtraSuccessRate => Instance[3];
 
-		/// <summary>
-		/// 农户元鸡心材升级几率
-		/// </summary>
 		public static VillagerRoleFormulaItem FarmerChickenUpgradeBuildingCoreRate => Instance[4];
 
-		/// <summary>
-		/// 大夫可互动人物品级
-		/// </summary>
 		public static VillagerRoleFormulaItem DoctorInteractTargetGrade => Instance[5];
 
-		/// <summary>
-		/// 大夫可互动最高品级
-		/// </summary>
 		public static VillagerRoleFormulaItem DoctorInteractTargetMaxGrade => Instance[6];
 
-		/// <summary>
-		/// 大夫自动威望收入基础
-		/// </summary>
 		public static VillagerRoleFormulaItem DoctorAutoActionAuthorityIncome => Instance[7];
 
-		/// <summary>
-		/// 大夫自动威望收入浮动
-		/// </summary>
 		public static VillagerRoleFormulaItem DoctorAutoActionAuthorityIncomeAdjust => Instance[8];
 
-		/// <summary>
-		/// 大夫派遣恩义收入
-		/// </summary>
 		public static VillagerRoleFormulaItem DoctorWorkSpiritualDebtIncome => Instance[9];
 
-		/// <summary>
-		/// 大夫元鸡降低入魔值量
-		/// </summary>
 		public static VillagerRoleFormulaItem DoctorChickenUpgradeInfectionChangeAmount => Instance[10];
 
-		/// <summary>
-		/// 大夫行为目标状态门槛
-		/// </summary>
 		public static VillagerRoleFormulaItem DoctorCureRequirement => Instance[11];
 
-		/// <summary>
-		/// 使者自动行为影响人数
-		/// </summary>
 		public static VillagerRoleFormulaItem VillageHeadAutoActionAffectCount => Instance[12];
 
-		/// <summary>
-		/// 使者自动行为好感变化
-		/// </summary>
 		public static VillagerRoleFormulaItem VillageHeadAutoActionFavorChange => Instance[13];
 
-		/// <summary>
-		/// 使者自动行为好感增加概率
-		/// </summary>
 		public static VillagerRoleFormulaItem VillageHeadAutoActionFavorIncreaseRate => Instance[14];
 
-		/// <summary>
-		/// 使者派遣行为调控范围
-		/// </summary>
 		public static VillagerRoleFormulaItem VillageHeadWorkChangeRuleRange => Instance[15];
 
-		/// <summary>
-		/// 使者派遣行为超常数量
-		/// </summary>
 		public static VillagerRoleFormulaItem VillageHeadWorkSpecialRuleCount => Instance[16];
 
-		/// <summary>
-		/// 使者派遣行为每月威望消耗
-		/// </summary>
 		public static VillagerRoleFormulaItem VillageHeadWorkMonthlyAuthorityCost => Instance[17];
 
-		/// <summary>
-		/// 使者元鸡效果结成关系几率
-		/// </summary>
 		public static VillagerRoleFormulaItem VillageHeadChickenUpgradeActionChance => Instance[18];
 
-		/// <summary>
-		/// 文人自动行为影响的人数
-		/// </summary>
 		public static VillagerRoleFormulaItem LiteratiAutoActionInfluenceCount => Instance[19];
 
-		/// <summary>
-		/// 文人自动行为变化的心情
-		/// </summary>
 		public static VillagerRoleFormulaItem LiteratiAutoActionHappinessChange => Instance[20];
 
-		/// <summary>
-		/// 文人派遣行为可进行的次数
-		/// </summary>
 		public static VillagerRoleFormulaItem LiteratiWorkUsableCount => Instance[21];
 
-		/// <summary>
-		/// 文人派遣行为影响的量
-		/// </summary>
 		public static VillagerRoleFormulaItem LiteratiWorkEffectiveValue => Instance[22];
 
-		/// <summary>
-		/// 文人元鸡影响的人数
-		/// </summary>
 		public static VillagerRoleFormulaItem LiteratiChickenInfluenceCount => Instance[23];
 
-		/// <summary>
-		/// 文人元鸡变化的好感
-		/// </summary>
 		public static VillagerRoleFormulaItem LiteratiChickenRelationChange => Instance[24];
 
-		/// <summary>
-		/// 商人可互动人物品级
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantInteractTargetGrade => Instance[25];
 
-		/// <summary>
-		/// 商人可互动最高品级
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantInteractTargetMaxGrade => Instance[26];
 
-		/// <summary>
-		/// 商人自动银钱收入基础
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantAutoActionMoneyIncome => Instance[27];
 
-		/// <summary>
-		/// 商人自动银钱收入浮动
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantAutoActionMoneyIncomeAdjust => Instance[28];
 
-		/// <summary>
-		/// 商人自动银钱收入目标银钱门槛
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantAutoActionTargetMoneyRequirement => Instance[29];
 
-		/// <summary>
-		/// 商人购买物品价格比例
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantBuyItemPriceRate => Instance[30];
 
-		/// <summary>
-		/// 商人出售物品价格比例
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantSellItemPriceRate => Instance[31];
 
-		/// <summary>
-		/// 商人元鸡增加地区商会总部好感
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantChickenIncreaseHeadMerchantFavor => Instance[32];
 
-		/// <summary>
-		/// 商人元鸡增加地区商会分部好感
-		/// </summary>
 		public static VillagerRoleFormulaItem MerchantChickenIncreaseBranchMerchantFavor => Instance[33];
 
-		/// <summary>
-		/// 护冢自动行为每月可消灭的数量
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperAutoActionKOCount => Instance[34];
 
-		/// <summary>
-		/// 护冢派遣行为入魔值每月增加
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperWorkInfectAddPerMonth => Instance[35];
 
-		/// <summary>
-		/// 护冢派遣行为收集几率
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperWorkCollectOdd => Instance[36];
 
-		/// <summary>
-		/// 护冢派遣行为受伤几率
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperWorkHurtOdd => Instance[37];
 
-		/// <summary>
-		/// 护冢派遣行为受伤数量
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperWorkHurtCount => Instance[38];
 
-		/// <summary>
-		/// 护冢派遣行为收集见闻时得到特性几率
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperWorkFeatureOddWhenInformationCollect => Instance[39];
 
-		/// <summary>
-		/// 护冢派遣行为被攻击时得到特性几率
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperWorkFeatureOddWhenBeAttacked => Instance[40];
 
-		/// <summary>
-		/// 护冢元鸡降低比例
-		/// </summary>
 		public static VillagerRoleFormulaItem SwordTombKeeperChickenDecreaseFactor => Instance[41];
 
-		/// <summary>
-		/// 匠人自动修理次数
-		/// </summary>
 		public static VillagerRoleFormulaItem CraftsmanAutoRepairCount => Instance[42];
 
-		/// <summary>
-		/// 匠人获得精制引子的几率
-		/// </summary>
 		public static VillagerRoleFormulaItem CraftsmanAutoGainRefineMaterialChance => Instance[43];
 
-		/// <summary>
-		/// 匠人获得精制引子的品级
-		/// </summary>
 		public static VillagerRoleFormulaItem CraftsmanAutoGainRefineMaterialGrade => Instance[44];
 
-		/// <summary>
-		/// 匠人元鸡效果增加精制引子的品级
-		/// </summary>
 		public static VillagerRoleFormulaItem CraftsmanChikenUpgradeAutoGainRefineMaterialGrade => Instance[45];
 
-		/// <summary>
-		/// 授予身份时给的好感
-		/// </summary>
 		public static VillagerRoleFormulaItem BaseFavorAddGainRole => Instance[46];
 
-		/// <summary>
-		/// 剥夺身份时扣的好感
-		/// </summary>
 		public static VillagerRoleFormulaItem BaseFavorCostLostRole => Instance[47];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static VillagerRoleFormula Instance = new VillagerRoleFormula();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayName", "DisplayFormat", "TemplateId" };

@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class AdventureRemakeBlockEffect : ConfigData<AdventureRemakeBlockEffectItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 雾气
-		/// </summary>
 		public const short Fog = 0;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 雾气
-		/// </summary>
 		public static AdventureRemakeBlockEffectItem Fog => Instance[(short)0];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureRemakeBlockEffect Instance = new AdventureRemakeBlockEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "LoadName" };

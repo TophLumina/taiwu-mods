@@ -5,11 +5,8 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 建筑经营产出 Tips 数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NotForArchive = true)]
-public struct BuildingManageYieldTipsData : ISerializableGameData
+public struct BuildingManageYieldTipsData(int arg1) : ISerializableGameData
 {
 	public static class FieldIds
 	{
@@ -34,61 +31,29 @@ public struct BuildingManageYieldTipsData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[8] { "ManageProduceValuationMin", "ManageProduceValuationMax", "ResourceOutputValuation", "ProduceResourceType", "ManagerAttainment", "BuildingProduceDependencyData", "ProduceDependencies", "SafetyOrCultureFactorSettlementsAndPickValue" };
 	}
 
-	/// <summary>
-	/// 估计产出值下限
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int ManageProduceValuationMin = 0;
 
-	/// <summary>
-	/// 估计产出值上限
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int ManageProduceValuationMax = 0;
 
-	/// <summary>
-	/// 资源产出估值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int ResourceOutputValuation = 0;
 
-	/// <summary>
-	/// 产出资源类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public sbyte ProduceResourceType = 0;
 
-	/// <summary>
-	/// 经营者总造诣
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public int ManagerAttainment = 0;
 
-	/// <summary>
-	/// 资源产出数据 configData.IsCollectResourceBuilding
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public BuildingProduceDependencyData BuildingProduceDependencyData = default(BuildingProduceDependencyData);
 
-	/// <summary>
-	/// 产出依赖项：<see cref="F:Config.BuildingBlockItem.IsShop" /> 为真且<see cref="F:Config.BuildingBlockItem.RequireCulture" /> 不为 0 或 <see cref="F:Config.BuildingBlockItem.RequireSafety" /> 不为 0
-	/// <para>K: 产业格数据 V: 依赖项的效率比率</para>
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public Dictionary<BuildingBlockKey, BuildingProduceDependencyData> ProduceDependencies = new Dictionary<BuildingBlockKey, BuildingProduceDependencyData>();
 
-	/// <summary>
-	/// 安定文化对建筑收获影响所涉及的单个定居点值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public Dictionary<int, SettlementDisplayData> SafetyOrCultureFactorSettlementsAndPickValue = new Dictionary<int, SettlementDisplayData>();
-
-	/// <summary>
-	///
-	/// </summary>
-	public BuildingManageYieldTipsData(int arg1)
-	{
-	}
 
 	public bool IsSerializedSizeFixed()
 	{
@@ -97,8 +62,7 @@ public struct BuildingManageYieldTipsData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 19;
-		totalSize += BuildingProduceDependencyData.GetSerializedSize();
+		int totalSize = 59;
 		totalSize += 4;
 		if (ProduceDependencies != null)
 		{

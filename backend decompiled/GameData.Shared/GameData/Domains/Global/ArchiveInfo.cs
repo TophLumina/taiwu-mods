@@ -4,25 +4,12 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Global;
 
-/// <summary>
-/// 档案信息
-/// </summary>
 public class ArchiveInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 档案状态.
-	/// <see cref="T:GameData.Domains.Global.ArchiveStatus" />.
-	/// </summary>
 	public sbyte Status;
 
-	/// <summary>
-	/// 世界信息
-	/// </summary>
 	public WorldInfo WorldInfo;
 
-	/// <summary>
-	/// 备份信息.
-	/// </summary>
 	public List<(long timestamp, WorldInfo worldInfo)> BackupWorldsInfo;
 
 	public bool IsSerializedSizeFixed()

@@ -281,7 +281,7 @@ public class CharacterGoalData : ISerializableGameData, IContextArgGroup, IGoal<
 				return ContextArgs[i];
 			}
 		}
-		throw new Exception($"Accessing invalid argument of type {type}.");
+		return null;
 	}
 
 	void IContextArgGroup.SetArgOfType(EPlanningParameterType type, PlanningContextArg arg)

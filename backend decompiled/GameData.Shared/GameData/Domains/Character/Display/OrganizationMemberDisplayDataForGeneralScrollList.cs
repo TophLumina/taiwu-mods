@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 定居点Npc滚动列表的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class OrganizationMemberDisplayDataForGeneralScrollList : ISerializableGameData, ISelectCharacterData
 {
@@ -29,16 +26,10 @@ public class OrganizationMemberDisplayDataForGeneralScrollList : ISerializableGa
 		return CharacterDisplayDataForGeneralScrollList;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public OrganizationMemberDisplayDataForGeneralScrollList()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public OrganizationMemberDisplayDataForGeneralScrollList(OrganizationMemberDisplayDataForGeneralScrollList other)
 	{
 		CharacterDisplayDataForGeneralScrollList = new CharacterDisplayDataForGeneralScrollList(other.CharacterDisplayDataForGeneralScrollList);
@@ -47,9 +38,6 @@ public class OrganizationMemberDisplayDataForGeneralScrollList : ISerializableGa
 		ApprovingState = other.ApprovingState;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(OrganizationMemberDisplayDataForGeneralScrollList other)
 	{
 		CharacterDisplayDataForGeneralScrollList = new CharacterDisplayDataForGeneralScrollList(other.CharacterDisplayDataForGeneralScrollList);

@@ -31,7 +31,7 @@ public static class AdventureExtensions
 		switch (unbindType)
 		{
 		case EAdventureUnbindType.Called:
-			DomainManager.Character.UnhideCharacterOnMap(context, character, 4uL);
+			DomainManager.Character.ReleaseCharacterByAdventure(context, character);
 			break;
 		case EAdventureUnbindType.Temporary:
 			character.DeactivateExternalRelationState(context, 4uL);

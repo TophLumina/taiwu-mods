@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameData.DLC;
+using GameData.DLC.CricketPolymorph;
 using GameData.DLC.FiveLoong;
 using GameData.Domains.Building;
 using GameData.Domains.Character;
@@ -197,9 +198,11 @@ public class CrossArchiveGameData : ISerializableGameData
 
 		public const ushort AutoCheckInComfortableList = 84;
 
-		public const ushort Count = 85;
+		public const ushort CricketRoomData = 85;
 
-		public static readonly string[] FieldId2FieldName = new string[85]
+		public const ushort Count = 86;
+
+		public static readonly string[] FieldId2FieldName = new string[86]
 		{
 			"TaiwuChar", "TaiwuResources", "TaiwuExp", "ExternalEquippedCombatSkills", "NormalInformation", "CombatSkills", "TaiwuEffects", "UnpackedItems", "TaiwuVillageLocation", "TaiwuVillageAreaData",
 			"TaiwuVillageBlocks", "Chicken", "XiangshuIdInKungfuPracticeRoom", "CricketCollectionDatas", "AutoWorkBlockIndexList", "AutoSoldBlockIndexList", "AutoCheckInList", "WarehouseItems", "TaiwuCombatSkills", "TaiwuLifeSkills",
@@ -209,7 +212,7 @@ public class CrossArchiveGameData : ISerializableGameData
 			"JiaoPools", "IsJiaoPoolOpen", "MaxTaiwuVillageLevel", "TaiwuCombatSkillProficiencies", "SectEmeiSkillBreakBonus", "SectEmeiBreakBonusTemplateIds", "SectEmeiBonusData", "SectFulongOrgMemberChickens", "SectZhujianGearMate", "LegendaryBookBreakPlateCounts",
 			"CombatSkillBreakPlateList", "CombatSkillBreakPlateLastClearTimeList", "CombatSkillBreakPlateLastForceBreakoutStepsCount", "CombatSkillCurrBreakPlateIndex", "LegendaryBookWeaponSlot", "LegendaryBookWeaponEffectId", "LegendaryBookSkillSlot", "LegendaryBookSkillEffectId", "LegendaryBookBonusCountYin", "LegendaryBookBonusCountYang",
 			"StockItems", "WeaponInnerRatiosByTemplateId", "WeaponInnerRatiosById", "TaiwuTreasuryResources", "LockedItems", "CombatSkillBreakPresets", "CombatSkillBreakPlates", "IsExtraProfessionSkillUnlocked", "ProfessionFeatures", "BuildingResourceOutputSettings",
-			"FarmerAutoCollectStorageType", "VillagerRoleAutoActionStates", "ComfortableHousesAutoCheckInType", "BuildingDefaultStoreLocation", "AutoCheckInComfortableList"
+			"FarmerAutoCollectStorageType", "VillagerRoleAutoActionStates", "ComfortableHousesAutoCheckInType", "BuildingDefaultStoreLocation", "AutoCheckInComfortableList", "CricketRoomData"
 		};
 	}
 
@@ -291,6 +294,9 @@ public class CrossArchiveGameData : ISerializableGameData
 
 	[SerializableGameDataField]
 	public Dictionary<BuildingBlockKey, bool> ComfortableHousesAutoCheckInType;
+
+	[SerializableGameDataField]
+	public CricketRoomData CricketRoomData;
 
 	[SerializableGameDataField]
 	public Inventory WarehouseItems;
@@ -396,6 +402,8 @@ public class CrossArchiveGameData : ISerializableGameData
 	public WorldCreationInfo WorldCreationInfo;
 
 	public uint WorldId;
+
+	public int DreamBackCount;
 
 	[SerializableGameDataField]
 	public Dictionary<int, ProfessionData> Professions;
@@ -722,13 +730,14 @@ public class CrossArchiveGameData : ISerializableGameData
 		totalSize += SerializationHelper.DictionaryOfCustomTypeBasicTypePair.GetSerializedSize(ComfortableHousesAutoCheckInType);
 		totalSize = ((BuildingDefaultStoreLocation == null) ? (totalSize + 2) : (totalSize + (2 + BuildingDefaultStoreLocation.GetSerializedSize())));
 		totalSize = ((AutoCheckInComfortableList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * AutoCheckInComfortableList.Count)));
+		totalSize = ((CricketRoomData == null) ? (totalSize + 2) : (totalSize + (2 + CricketRoomData.GetSerializedSize())));
 		return (totalSize <= 4) ? totalSize : ((totalSize + 3) / 4 * 4);
 	}
 
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
-		*(short*)pCurrData = 85;
+		*(short*)pCurrData = 86;
 		pCurrData += 2;
 		if (TaiwuChar != null)
 		{
@@ -1371,6 +1380,20 @@ public class CrossArchiveGameData : ISerializableGameData
 				((short*)pCurrData)[num15] = AutoCheckInComfortableList[num15];
 			}
 			pCurrData += 2 * elementsCount21;
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
+		if (CricketRoomData != null)
+		{
+			byte* pSubDataCount17 = pCurrData;
+			pCurrData += 2;
+			int fieldSize15 = CricketRoomData.Serialize(pCurrData);
+			pCurrData += fieldSize15;
+			Tester.Assert(fieldSize15 <= 65535);
+			*(ushort*)pSubDataCount17 = (ushort)fieldSize15;
 		}
 		else
 		{
@@ -2343,6 +2366,23 @@ public class CrossArchiveGameData : ISerializableGameData
 			else
 			{
 				AutoCheckInComfortableList?.Clear();
+			}
+		}
+		if (fieldCount > 85)
+		{
+			ushort fieldSize11 = *(ushort*)pCurrData;
+			pCurrData += 2;
+			if (fieldSize11 > 0)
+			{
+				if (CricketRoomData == null)
+				{
+					CricketRoomData = new CricketRoomData();
+				}
+				pCurrData += CricketRoomData.Deserialize(pCurrData);
+			}
+			else
+			{
+				CricketRoomData = null;
 			}
 		}
 		int totalSize = (int)(pCurrData - pData);

@@ -10,12 +10,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Global.Inscription;
 
-/// <summary>
-/// 铭刻的角色
-/// </summary>
-/// <summary>
-/// 铭刻的角色 - 属性计算相关
-/// </summary>
 [Serializable]
 [SerializableGameData(IsExtensible = true)]
 public class InscribedCharacter : ISerializableGameData
@@ -69,127 +63,63 @@ public class InscribedCharacter : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 铭刻时间戳
-	/// </summary>
 	[SerializableGameDataField]
 	public long Timestamp;
 
-	/// <summary>
-	/// 基本信息 - 姓
-	/// </summary>
 	[SerializableGameDataField]
 	public string Surname;
 
-	/// <summary>
-	/// 基本信息 - 名
-	/// </summary>
 	[SerializableGameDataField]
 	public string GivenName;
 
-	/// <summary>
-	/// 基本信息 - 性别
-	/// 0: 女, 1: 男, -1: 未知/不限制.
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 基本信息 - 实际年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short ActualAge;
 
-	/// <summary>
-	/// 基本信息 - 当前年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrAge;
 
-	/// <summary>
-	/// 基本信息 - 基础最大健康
-	/// 以月为单位
-	/// </summary>
 	[SerializableGameDataField]
 	public short BaseMaxHealth;
 
-	/// <summary>
-	/// 基本信息 - 立场
-	/// [-500, 500]. 实际为性格的道德部分, [-500, -375]: 唯我, (-375, -125]: 叛逆, (-125, 125): 中庸, [125, 375): 仁善, [375, 500]: 刚正.
-	/// </summary>
 	[SerializableGameDataField]
 	public short Morality;
 
-	/// <summary>
-	/// 基本信息 - 团体信息
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrganizationInfo;
 
-	/// <summary>
-	/// 基本信息 - 外貌
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarData Avatar;
 
-	/// <summary>
-	/// 基本信息 - 衣装的显示 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short ClothingDisplayId;
 
-	/// <summary>
-	/// 基本信息 - 出生月份
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BirthMonth;
 
-	/// <summary>
-	/// 基本信息 - 特性列表
-	/// 只包括可铭刻的特性
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> FeatureIds = new List<short>();
 
-	/// <summary>
-	/// 基础主要属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes BaseMainAttributes;
 
-	/// <summary>
-	/// 基础技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts BaseLifeSkillQualifications;
 
-	/// <summary>
-	/// 技艺资质成长
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 基础武学资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts BaseCombatSkillQualifications;
 
-	/// <summary>
-	/// 武学资质成长
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CombatSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 天赋
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 2)]
 	public SkillQualificationBonus[] InnateSkillQualificationBonuses;
 
-	/// <summary>
-	/// 生成能够用于显示的形象数据
-	/// </summary>
 	public AvatarRelatedData GenerateAvatarRelatedData()
 	{
 		return new AvatarRelatedData
@@ -200,16 +130,10 @@ public class InscribedCharacter : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public InscribedCharacter()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public InscribedCharacter(InscribedCharacter other)
 	{
 		Timestamp = other.Timestamp;
@@ -239,9 +163,6 @@ public class InscribedCharacter : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(InscribedCharacter other)
 	{
 		Timestamp = other.Timestamp;
@@ -271,13 +192,11 @@ public class InscribedCharacter : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 112;
@@ -292,7 +211,6 @@ public class InscribedCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -406,7 +324,6 @@ public class InscribedCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -571,12 +488,6 @@ public class InscribedCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 计算最大健康.
-	/// 参考角色对象的方法 <see cref="!:GameData.Domains.Character.Character.CalcMaxHealth" />, 需要确保与其逻辑同步.
-	/// </summary>
-	/// <param name="actualAge">实际年龄</param>
-	/// <returns></returns>
 	public short CalcMaxHealth(short actualAge)
 	{
 		int percentBonus = 0;
@@ -593,13 +504,6 @@ public class InscribedCharacter : ISerializableGameData
 		return (short)((value >= 0) ? value : 0);
 	}
 
-	/// <summary>
-	/// 计算魅力.
-	/// 参考角色对象的方法 <see cref="!:GameData.Domains.Character.Character.CalcAttraction" />, 需要确保与其逻辑同步.
-	/// </summary>
-	/// <param name="actualAge">实际年龄</param>
-	/// <param name="clothingDisplayId">衣装的显示 ID</param>
-	/// <returns></returns>
 	public short CalcAttraction(short actualAge, short clothingDisplayId)
 	{
 		if (CurrAge < 16)
@@ -616,12 +520,6 @@ public class InscribedCharacter : ISerializableGameData
 		return (short)MathUtils.Clamp(value, 0, 900);
 	}
 
-	/// <summary>
-	/// 计算主要属性最大值.
-	/// 参考角色对象的方法 <see cref="!:GameData.Domains.Character.Character.CalcMaxMainAttributes" />, 需要确保与其逻辑同步.
-	/// </summary>
-	/// <param name="actualAge">实际年龄</param>
-	/// <returns></returns>
 	public unsafe MainAttributes CalcMaxMainAttributes(short actualAge)
 	{
 		MainAttributes value = BaseMainAttributes;
@@ -644,12 +542,6 @@ public class InscribedCharacter : ISerializableGameData
 		return value;
 	}
 
-	/// <summary>
-	/// 计算技艺资质.
-	/// 参考角色对象的方法 <see cref="!:GameData.Domains.Character.Character.CalcLifeSkillQualifications" />, 需要确保与其逻辑同步.
-	/// </summary>
-	/// <param name="actualAge">实际年龄</param>
-	/// <returns></returns>
 	public unsafe LifeSkillShorts CalcLifeSkillQualifications(short actualAge)
 	{
 		LifeSkillShorts value = BaseLifeSkillQualifications;
@@ -700,12 +592,6 @@ public class InscribedCharacter : ISerializableGameData
 		return value;
 	}
 
-	/// <summary>
-	/// 计算武学资质.
-	/// 参考角色对象的方法 <see cref="!:GameData.Domains.Character.Character.CalcCombatSkillQualifications" />, 需要确保与其逻辑同步.
-	/// </summary>
-	/// <param name="actualAge">实际年龄</param>
-	/// <returns></returns>
 	public unsafe CombatSkillShorts CalcCombatSkillQualifications(short actualAge)
 	{
 		CombatSkillShorts value = BaseCombatSkillQualifications;
@@ -756,13 +642,6 @@ public class InscribedCharacter : ISerializableGameData
 		return value;
 	}
 
-	/// <summary>
-	/// 获取人物属性的通用附加值.
-	/// 铭刻人物只包括特性的通用附加值.
-	/// 参考角色对象的方法 <see cref="!:GameData.Domains.Character.Character.GetCommonPropertyBonus" />, 需要确保与其逻辑同步.
-	/// </summary>
-	/// <param name="propertyType"></param>
-	/// <returns></returns>
 	private int GetCommonPropertyBonus(ECharacterPropertyReferencedType propertyType)
 	{
 		if (FeatureIds != null)

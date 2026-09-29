@@ -7,251 +7,104 @@ namespace Config;
 [Serializable]
 public class PrioritizedActions : ConfigData<PrioritizedActionsItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 拜师学艺
-		/// </summary>
 		public const short JoinSect = 0;
 
-		/// <summary>
-		/// 受邀赴约
-		/// </summary>
 		public const short Appointment = 1;
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public const short ProtectFriendOrFamily = 2;
 
-		/// <summary>
-		/// 解救亲友
-		/// </summary>
 		public const short RescueFriendOrFamily = 3;
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public const short Mourn = 4;
 
-		/// <summary>
-		/// 探访亲友
-		/// </summary>
 		public const short VisitFriendOrFamily = 5;
 
-		/// <summary>
-		/// 寻找宝藏
-		/// </summary>
 		public const short FindTreasure = 6;
 
-		/// <summary>
-		/// 天材地宝
-		/// </summary>
 		public const short FindSpecialMaterial = 7;
 
-		/// <summary>
-		/// 寻仇报复
-		/// </summary>
 		public const short TakeRevenge = 8;
 
-		/// <summary>
-		/// 奇书争夺
-		/// </summary>
 		public const short ContestForLegendaryBook = 9;
 
-		/// <summary>
-		/// 收养弃婴
-		/// </summary>
 		public const short AdoptInfant = 10;
 
-		/// <summary>
-		/// 抗击三魔
-		/// </summary>
 		public const short SectStoryYuanshanToFightDemon = 11;
 
-		/// <summary>
-		/// 消灭敌人
-		/// </summary>
 		public const short SectStoryShixiangToFightEnemy = 12;
 
-		/// <summary>
-		/// 同门相残
-		/// </summary>
 		public const short SectStoryEmeiToFightComrade = 13;
 
-		/// <summary>
-		/// 似曾相识
-		/// </summary>
 		public const short DejaVu = 14;
 
-		/// <summary>
-		/// 守卫公库
-		/// </summary>
 		public const short GuardTreasury = 15;
 
-		/// <summary>
-		/// 治疗死气
-		/// </summary>
 		public const short SectStoryBaihuaToCureManic = 16;
 
-		/// <summary>
-		/// 抓捕逃犯
-		/// </summary>
 		public const short HuntFugitive = 17;
 
-		/// <summary>
-		/// 畏罪潜逃
-		/// </summary>
 		public const short EscapeFromPrison = 18;
 
-		/// <summary>
-		/// 寻求庇护
-		/// </summary>
 		public const short SeekAsylum = 19;
 
-		/// <summary>
-		/// 押送囚犯
-		/// </summary>
 		public const short EscortPrisoner = 20;
 
-		/// <summary>
-		/// 村民身份
-		/// </summary>
 		public const short VillagerRoleArrangement = 21;
 
-		/// <summary>
-		/// 追杀太吾
-		/// </summary>
 		public const short HuntTaiwu = 22;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 拜师学艺
-		/// </summary>
 		public static PrioritizedActionsItem JoinSect => Instance[(short)0];
 
-		/// <summary>
-		/// 受邀赴约
-		/// </summary>
 		public static PrioritizedActionsItem Appointment => Instance[(short)1];
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public static PrioritizedActionsItem ProtectFriendOrFamily => Instance[(short)2];
 
-		/// <summary>
-		/// 解救亲友
-		/// </summary>
 		public static PrioritizedActionsItem RescueFriendOrFamily => Instance[(short)3];
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public static PrioritizedActionsItem Mourn => Instance[(short)4];
 
-		/// <summary>
-		/// 探访亲友
-		/// </summary>
 		public static PrioritizedActionsItem VisitFriendOrFamily => Instance[(short)5];
 
-		/// <summary>
-		/// 寻找宝藏
-		/// </summary>
 		public static PrioritizedActionsItem FindTreasure => Instance[(short)6];
 
-		/// <summary>
-		/// 天材地宝
-		/// </summary>
 		public static PrioritizedActionsItem FindSpecialMaterial => Instance[(short)7];
 
-		/// <summary>
-		/// 寻仇报复
-		/// </summary>
 		public static PrioritizedActionsItem TakeRevenge => Instance[(short)8];
 
-		/// <summary>
-		/// 奇书争夺
-		/// </summary>
 		public static PrioritizedActionsItem ContestForLegendaryBook => Instance[(short)9];
 
-		/// <summary>
-		/// 收养弃婴
-		/// </summary>
 		public static PrioritizedActionsItem AdoptInfant => Instance[(short)10];
 
-		/// <summary>
-		/// 抗击三魔
-		/// </summary>
 		public static PrioritizedActionsItem SectStoryYuanshanToFightDemon => Instance[(short)11];
 
-		/// <summary>
-		/// 消灭敌人
-		/// </summary>
 		public static PrioritizedActionsItem SectStoryShixiangToFightEnemy => Instance[(short)12];
 
-		/// <summary>
-		/// 同门相残
-		/// </summary>
 		public static PrioritizedActionsItem SectStoryEmeiToFightComrade => Instance[(short)13];
 
-		/// <summary>
-		/// 似曾相识
-		/// </summary>
 		public static PrioritizedActionsItem DejaVu => Instance[(short)14];
 
-		/// <summary>
-		/// 守卫公库
-		/// </summary>
 		public static PrioritizedActionsItem GuardTreasury => Instance[(short)15];
 
-		/// <summary>
-		/// 治疗死气
-		/// </summary>
 		public static PrioritizedActionsItem SectStoryBaihuaToCureManic => Instance[(short)16];
 
-		/// <summary>
-		/// 抓捕逃犯
-		/// </summary>
 		public static PrioritizedActionsItem HuntFugitive => Instance[(short)17];
 
-		/// <summary>
-		/// 畏罪潜逃
-		/// </summary>
 		public static PrioritizedActionsItem EscapeFromPrison => Instance[(short)18];
 
-		/// <summary>
-		/// 寻求庇护
-		/// </summary>
 		public static PrioritizedActionsItem SeekAsylum => Instance[(short)19];
 
-		/// <summary>
-		/// 押送囚犯
-		/// </summary>
 		public static PrioritizedActionsItem EscortPrisoner => Instance[(short)20];
 
-		/// <summary>
-		/// 村民身份
-		/// </summary>
 		public static PrioritizedActionsItem VillagerRoleArrangement => Instance[(short)21];
 
-		/// <summary>
-		/// 追杀太吾
-		/// </summary>
 		public static PrioritizedActionsItem HuntTaiwu => Instance[(short)22];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static PrioritizedActions Instance = new PrioritizedActions();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "OrgTemplateId", "RefuseAppointment", "TemplateId", "ActType", "FailToCreateActionCoolDown", "ActionCoolDown", "BasePriority" };

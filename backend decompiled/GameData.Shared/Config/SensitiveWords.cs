@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SensitiveWords : ConfigData<SensitiveWordsItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SensitiveWords Instance = new SensitiveWords();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "Content", "Type" };
@@ -7749,7 +7746,7 @@ public class SensitiveWords : ConfigData<SensitiveWordsItem, int>
 		_dataArray.Add(new SensitiveWordsItem(7240, "美国会议员提案协助流亡藏人移居美国", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7241, "摩登娱乐", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7242, "CNC彩票", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(7243, "共贱_x005F_x005f_x005F_x005f_x005F_x005f_x005F_x005f_x005F_x0008_和谐", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(7243, "共贱_x005f_x005f_x005f_x005f_x0008_和谐", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7244, "加宝", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7245, "八九年天安门", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7246, "香港惠泽社群", ESensitiveWordsType.Politics));
@@ -8061,7 +8058,7 @@ public class SensitiveWords : ConfigData<SensitiveWordsItem, int>
 		_dataArray.Add(new SensitiveWordsItem(7532, "liusi", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7533, "国家行政学院", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7534, "sun春l", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(7535, "珙_x005F_x005f_x005F_x0008_榧", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(7535, "珙_x005f_x0008_榧", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7536, "周勇康", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7537, "mo术", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(7538, "桃隐论坛社区", ESensitiveWordsType.Politics));
@@ -11813,7 +11810,7 @@ public class SensitiveWords : ConfigData<SensitiveWordsItem, int>
 		_dataArray.Add(new SensitiveWordsItem(11048, "澳门银座手机app", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(11049, "核武器", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(11050, "毛责冬", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(11051, "古月钅白巾氵_x005F_x005f_x005F_x005f_x005F_x005f_x005F_x005f_x005F_x0008_寿", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(11051, "古月钅白巾氵_x005f_x005f_x005f_x005f_x0008_寿", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(11052, "习以为常", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(11053, "zhu镕ji", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(11054, "菠菜社区", ESensitiveWordsType.Politics));
@@ -17221,7 +17218,7 @@ public class SensitiveWords : ConfigData<SensitiveWordsItem, int>
 		_dataArray.Add(new SensitiveWordsItem(16120, "插人人", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(16121, "tiananme", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(16122, "江zm", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(16123, "珙_x005F_x005f_x005F_x005f_x005F_x005f_x005F_x005f_x005F_x0008_榧", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(16123, "珙_x005f_x005f_x005f_x005f_x0008_榧", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(16124, "连发国际娱乐", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(16125, "六四下跪学生回国探亲遭逮捕控罪", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(16126, "热比娅称新疆近万人一夜失踪", ESensitiveWordsType.Politics));
@@ -20152,14 +20149,14 @@ public class SensitiveWords : ConfigData<SensitiveWordsItem, int>
 		_dataArray.Add(new SensitiveWordsItem(18867, "台海中线", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(18868, "疯狂的宇宙", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(18869, "亲自加速", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(18870, "1.1010119131015101E+17", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(18871, "1.1010119421221E+17", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(18870, "110101191310151000", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(18871, "110101194212210000", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(18872, "13010519500830181X", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(18873, "3.4010319550212403E+17", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(18874, "3.2100219260817702E+17", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(18875, "3.1010419540422099E+17", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(18873, "340103195502124000", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(18874, "321002192608177000", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(18875, "310104195404221000", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(18876, "11010819621120576X", ESensitiveWordsType.Politics));
-		_dataArray.Add(new SensitiveWordsItem(18877, "3.3060219600928998E+17", ESensitiveWordsType.Politics));
+		_dataArray.Add(new SensitiveWordsItem(18877, "330602196009290000", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(18878, "11010819560813423X", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(18879, "日本731", ESensitiveWordsType.Politics));
 		_dataArray.Add(new SensitiveWordsItem(18880, "于洪机场", ESensitiveWordsType.Politics));

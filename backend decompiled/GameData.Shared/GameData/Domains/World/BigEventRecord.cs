@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.World;
 
-/// <summary>
-/// 大事件记录
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true, IsExtensible = true)]
 public class BigEventRecord : ISerializableGameData
 {
@@ -17,9 +14,6 @@ public class BigEventRecord : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[1] { "OccurDate" };
 	}
 
-	/// <summary>
-	/// 发生日期
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int OccurDate;
 

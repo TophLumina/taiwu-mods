@@ -10,8711 +10,3488 @@ namespace Config;
 [Serializable]
 public class Weapon : ConfigData<WeaponItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 空手
-		/// </summary>
 		public const short EmptyHand = 0;
 
-		/// <summary>
-		/// 树枝
-		/// </summary>
 		public const short Branch = 1;
 
-		/// <summary>
-		/// 石子
-		/// </summary>
 		public const short Stone = 2;
 
-		/// <summary>
-		/// 灰黑药霜
-		/// </summary>
 		public const short PoisonCream0 = 3;
 
-		/// <summary>
-		/// 月白药霜
-		/// </summary>
 		public const short PoisonCream1 = 4;
 
-		/// <summary>
-		/// 翠绿药霜
-		/// </summary>
 		public const short PoisonCream2 = 5;
 
-		/// <summary>
-		/// 靛蓝药霜
-		/// </summary>
 		public const short PoisonCream3 = 6;
 
-		/// <summary>
-		/// 天青药霜
-		/// </summary>
 		public const short PoisonCream4 = 7;
 
-		/// <summary>
-		/// 霞紫药霜
-		/// </summary>
 		public const short PoisonCream5 = 8;
 
-		/// <summary>
-		/// 金黄药霜
-		/// </summary>
 		public const short PoisonCream6 = 9;
 
-		/// <summary>
-		/// 琥珀药霜
-		/// </summary>
 		public const short PoisonCream7 = 10;
 
-		/// <summary>
-		/// 赤血药霜
-		/// </summary>
 		public const short PoisonCream8 = 11;
 
-		/// <summary>
-		/// 灰黑毒砂
-		/// </summary>
 		public const short PoisonSand0 = 12;
 
-		/// <summary>
-		/// 月白毒砂
-		/// </summary>
 		public const short PoisonSand1 = 13;
 
-		/// <summary>
-		/// 翠绿毒砂
-		/// </summary>
 		public const short PoisonSand2 = 14;
 
-		/// <summary>
-		/// 靛蓝毒砂
-		/// </summary>
 		public const short PoisonSand3 = 15;
 
-		/// <summary>
-		/// 天青毒砂
-		/// </summary>
 		public const short PoisonSand4 = 16;
 
-		/// <summary>
-		/// 霞紫毒砂
-		/// </summary>
 		public const short PoisonSand5 = 17;
 
-		/// <summary>
-		/// 金黄毒砂
-		/// </summary>
 		public const short PoisonSand6 = 18;
 
-		/// <summary>
-		/// 琥珀毒砂
-		/// </summary>
 		public const short PoisonSand7 = 19;
 
-		/// <summary>
-		/// 赤血毒砂
-		/// </summary>
 		public const short PoisonSand8 = 20;
 
-		/// <summary>
-		/// 灰黑铁鹞
-		/// </summary>
 		public const short IronHarrier0 = 21;
 
-		/// <summary>
-		/// 月白铁鹞
-		/// </summary>
 		public const short IronHarrier1 = 22;
 
-		/// <summary>
-		/// 翠绿铁鹞
-		/// </summary>
 		public const short IronHarrier2 = 23;
 
-		/// <summary>
-		/// 靛蓝铁鹞
-		/// </summary>
 		public const short IronHarrier3 = 24;
 
-		/// <summary>
-		/// 天青铁鹞
-		/// </summary>
 		public const short IronHarrier4 = 25;
 
-		/// <summary>
-		/// 霞紫铁鹞
-		/// </summary>
 		public const short IronHarrier5 = 26;
 
-		/// <summary>
-		/// 金黄铁鹞
-		/// </summary>
 		public const short IronHarrier6 = 27;
 
-		/// <summary>
-		/// 琥珀铁鹞
-		/// </summary>
 		public const short IronHarrier7 = 28;
 
-		/// <summary>
-		/// 赤血铁鹞
-		/// </summary>
 		public const short IronHarrier8 = 29;
 
-		/// <summary>
-		/// 灰黑木鹞
-		/// </summary>
 		public const short WoodHarrier0 = 30;
 
-		/// <summary>
-		/// 月白木鹞
-		/// </summary>
 		public const short WoodHarrier1 = 31;
 
-		/// <summary>
-		/// 翠绿木鹞
-		/// </summary>
 		public const short WoodHarrier2 = 32;
 
-		/// <summary>
-		/// 靛蓝木鹞
-		/// </summary>
 		public const short WoodHarrier3 = 33;
 
-		/// <summary>
-		/// 天青木鹞
-		/// </summary>
 		public const short WoodHarrier4 = 34;
 
-		/// <summary>
-		/// 霞紫木鹞
-		/// </summary>
 		public const short WoodHarrier5 = 35;
 
-		/// <summary>
-		/// 金黄木鹞
-		/// </summary>
 		public const short WoodHarrier6 = 36;
 
-		/// <summary>
-		/// 琥珀木鹞
-		/// </summary>
 		public const short WoodHarrier7 = 37;
 
-		/// <summary>
-		/// 赤血木鹞
-		/// </summary>
 		public const short WoodHarrier8 = 38;
 
-		/// <summary>
-		/// 灰黑令
-		/// </summary>
 		public const short JadeToken0 = 39;
 
-		/// <summary>
-		/// 月白令
-		/// </summary>
 		public const short JadeToken1 = 40;
 
-		/// <summary>
-		/// 翠绿令
-		/// </summary>
 		public const short JadeToken2 = 41;
 
-		/// <summary>
-		/// 靛蓝令
-		/// </summary>
 		public const short JadeToken3 = 42;
 
-		/// <summary>
-		/// 天青令
-		/// </summary>
 		public const short JadeToken4 = 43;
 
-		/// <summary>
-		/// 霞紫令
-		/// </summary>
 		public const short JadeToken5 = 44;
 
-		/// <summary>
-		/// 金黄令
-		/// </summary>
 		public const short JadeToken6 = 45;
 
-		/// <summary>
-		/// 琥珀令
-		/// </summary>
 		public const short JadeToken7 = 46;
 
-		/// <summary>
-		/// 赤血令
-		/// </summary>
 		public const short JadeToken8 = 47;
 
-		/// <summary>
-		/// 灰黑符
-		/// </summary>
 		public const short ClothAmulet0 = 48;
 
-		/// <summary>
-		/// 月白符
-		/// </summary>
 		public const short ClothAmulet1 = 49;
 
-		/// <summary>
-		/// 翠绿符
-		/// </summary>
 		public const short ClothAmulet2 = 50;
 
-		/// <summary>
-		/// 靛蓝符
-		/// </summary>
 		public const short ClothAmulet3 = 51;
 
-		/// <summary>
-		/// 天青符
-		/// </summary>
 		public const short ClothAmulet4 = 52;
 
-		/// <summary>
-		/// 霞紫符
-		/// </summary>
 		public const short ClothAmulet5 = 53;
 
-		/// <summary>
-		/// 金黄符
-		/// </summary>
 		public const short ClothAmulet6 = 54;
 
-		/// <summary>
-		/// 琥珀符
-		/// </summary>
 		public const short ClothAmulet7 = 55;
 
-		/// <summary>
-		/// 赤血符
-		/// </summary>
 		public const short ClothAmulet8 = 56;
 
-		/// <summary>
-		/// 铁针匣
-		/// </summary>
 		public const short IronNeedleBox0 = 57;
 
-		/// <summary>
-		/// 蝎尾针匣
-		/// </summary>
 		public const short IronNeedleBox1 = 58;
 
-		/// <summary>
-		/// 破血针匣
-		/// </summary>
 		public const short IronNeedleBox2 = 59;
 
-		/// <summary>
-		/// 白虎煞
-		/// </summary>
 		public const short IronNeedleBox3 = 60;
 
-		/// <summary>
-		/// 蛟须匣
-		/// </summary>
 		public const short IronNeedleBox4 = 61;
 
-		/// <summary>
-		/// 黑铁针匣
-		/// </summary>
 		public const short IronNeedleBox5 = 62;
 
-		/// <summary>
-		/// 五邪针匣
-		/// </summary>
 		public const short IronNeedleBox6 = 63;
 
-		/// <summary>
-		/// 碧霄宝匣
-		/// </summary>
 		public const short IronNeedleBox7 = 64;
 
-		/// <summary>
-		/// 生死乱
-		/// </summary>
 		public const short IronNeedleBox8 = 65;
 
-		/// <summary>
-		/// 铜针匣
-		/// </summary>
 		public const short CopperNeedleBox0 = 66;
 
-		/// <summary>
-		/// 烂银针匣
-		/// </summary>
 		public const short CopperNeedleBox1 = 67;
 
-		/// <summary>
-		/// 芙蓉针匣
-		/// </summary>
 		public const short CopperNeedleBox2 = 68;
 
-		/// <summary>
-		/// 三色绞
-		/// </summary>
 		public const short CopperNeedleBox3 = 69;
 
-		/// <summary>
-		/// 金英华须
-		/// </summary>
 		public const short CopperNeedleBox4 = 70;
 
-		/// <summary>
-		/// 丧乱匣
-		/// </summary>
 		public const short CopperNeedleBox5 = 71;
 
-		/// <summary>
-		/// 逆元匣
-		/// </summary>
 		public const short CopperNeedleBox6 = 72;
 
-		/// <summary>
-		/// 阴阳乱
-		/// </summary>
 		public const short CopperNeedleBox7 = 73;
 
-		/// <summary>
-		/// 金弦乱
-		/// </summary>
 		public const short CopperNeedleBox8 = 74;
 
-		/// <summary>
-		/// 玛瑙针匣
-		/// </summary>
 		public const short StoneNeedleBox0 = 75;
 
-		/// <summary>
-		/// 红琳针匣
-		/// </summary>
 		public const short StoneNeedleBox1 = 76;
 
-		/// <summary>
-		/// 乱萤匣
-		/// </summary>
 		public const short StoneNeedleBox2 = 77;
 
-		/// <summary>
-		/// 鬼焰匣
-		/// </summary>
 		public const short StoneNeedleBox3 = 78;
 
-		/// <summary>
-		/// 摄元匣
-		/// </summary>
 		public const short StoneNeedleBox4 = 79;
 
-		/// <summary>
-		/// 七星针匣
-		/// </summary>
 		public const short StoneNeedleBox5 = 80;
 
-		/// <summary>
-		/// 九灵辟邪匣
-		/// </summary>
 		public const short StoneNeedleBox6 = 81;
 
-		/// <summary>
-		/// 照夜宝匣
-		/// </summary>
 		public const short StoneNeedleBox7 = 82;
 
-		/// <summary>
-		/// 岐伯匣
-		/// </summary>
 		public const short StoneNeedleBox8 = 83;
 
-		/// <summary>
-		/// 白露针匣
-		/// </summary>
 		public const short JadeNeedleBox0 = 84;
 
-		/// <summary>
-		/// 碧玉三棱匣
-		/// </summary>
 		public const short JadeNeedleBox1 = 85;
 
-		/// <summary>
-		/// 清影针匣
-		/// </summary>
 		public const short JadeNeedleBox2 = 86;
 
-		/// <summary>
-		/// 璃锋宝匣
-		/// </summary>
 		public const short JadeNeedleBox3 = 87;
 
-		/// <summary>
-		/// 血络引
-		/// </summary>
 		public const short JadeNeedleBox4 = 88;
 
-		/// <summary>
-		/// 玉虬冰匣
-		/// </summary>
 		public const short JadeNeedleBox5 = 89;
 
-		/// <summary>
-		/// 百疠辟易匣
-		/// </summary>
 		public const short JadeNeedleBox6 = 90;
 
-		/// <summary>
-		/// 青女匣
-		/// </summary>
 		public const short JadeNeedleBox7 = 91;
 
-		/// <summary>
-		/// 神定匣
-		/// </summary>
 		public const short JadeNeedleBox8 = 92;
 
-		/// <summary>
-		/// 木针匣
-		/// </summary>
 		public const short WoodNeedleBox0 = 93;
 
-		/// <summary>
-		/// 白芷针匣
-		/// </summary>
 		public const short WoodNeedleBox1 = 94;
 
-		/// <summary>
-		/// 蜈蜂匣
-		/// </summary>
 		public const short WoodNeedleBox2 = 95;
 
-		/// <summary>
-		/// 流火针匣
-		/// </summary>
 		public const short WoodNeedleBox3 = 96;
 
-		/// <summary>
-		/// 血鸦匣
-		/// </summary>
 		public const short WoodNeedleBox4 = 97;
 
-		/// <summary>
-		/// 独灵针匣
-		/// </summary>
 		public const short WoodNeedleBox5 = 98;
 
-		/// <summary>
-		/// 朱华宝匣
-		/// </summary>
 		public const short WoodNeedleBox6 = 99;
 
-		/// <summary>
-		/// 妄意匣
-		/// </summary>
 		public const short WoodNeedleBox7 = 100;
 
-		/// <summary>
-		/// 乌烛心
-		/// </summary>
 		public const short WoodNeedleBox8 = 101;
 
-		/// <summary>
-		/// 绿竹针匣
-		/// </summary>
 		public const short BambooNeedleBox0 = 102;
 
-		/// <summary>
-		/// 三指匣
-		/// </summary>
 		public const short BambooNeedleBox1 = 103;
 
-		/// <summary>
-		/// 素梅针匣
-		/// </summary>
 		public const short BambooNeedleBox2 = 104;
 
-		/// <summary>
-		/// 蚊虻匣
-		/// </summary>
 		public const short BambooNeedleBox3 = 105;
 
-		/// <summary>
-		/// 碧眼匣
-		/// </summary>
 		public const short BambooNeedleBox4 = 106;
 
-		/// <summary>
-		/// 幽藏鬼须匣
-		/// </summary>
 		public const short BambooNeedleBox5 = 107;
 
-		/// <summary>
-		/// 百解匣
-		/// </summary>
 		public const short BambooNeedleBox6 = 108;
 
-		/// <summary>
-		/// 烟暝奇匣
-		/// </summary>
 		public const short BambooNeedleBox7 = 109;
 
-		/// <summary>
-		/// 九曲神匣
-		/// </summary>
 		public const short BambooNeedleBox8 = 110;
 
-		/// <summary>
-		/// 铁梭子
-		/// </summary>
 		public const short IronThorn0 = 111;
 
-		/// <summary>
-		/// 点钢对刺
-		/// </summary>
 		public const short IronThorn1 = 112;
 
-		/// <summary>
-		/// 分水娥眉刺
-		/// </summary>
 		public const short IronThorn2 = 113;
 
-		/// <summary>
-		/// 梨花对刺
-		/// </summary>
 		public const short IronThorn3 = 114;
 
-		/// <summary>
-		/// 八卦龙形刺
-		/// </summary>
 		public const short IronThorn4 = 115;
 
-		/// <summary>
-		/// 乌磐刺
-		/// </summary>
 		public const short IronThorn5 = 116;
 
-		/// <summary>
-		/// 无双神铁刺
-		/// </summary>
 		public const short IronThorn6 = 117;
 
-		/// <summary>
-		/// 火炼麒麟刺
-		/// </summary>
 		public const short IronThorn7 = 118;
 
-		/// <summary>
-		/// 魔罗刺
-		/// </summary>
 		public const short IronThorn8 = 119;
 
-		/// <summary>
-		/// 三棱刺
-		/// </summary>
 		public const short CopperThorn0 = 120;
 
-		/// <summary>
-		/// 朔风对刺
-		/// </summary>
 		public const short CopperThorn1 = 121;
 
-		/// <summary>
-		/// 孤星刺
-		/// </summary>
 		public const short CopperThorn2 = 122;
 
-		/// <summary>
-		/// 阴阳分水刺
-		/// </summary>
 		public const short CopperThorn3 = 123;
 
-		/// <summary>
-		/// 紫金剔龙梭
-		/// </summary>
 		public const short CopperThorn4 = 124;
 
-		/// <summary>
-		/// 日月梭
-		/// </summary>
 		public const short CopperThorn5 = 125;
 
-		/// <summary>
-		/// 赤练白牙
-		/// </summary>
 		public const short CopperThorn6 = 126;
 
-		/// <summary>
-		/// 八面戮仙刺
-		/// </summary>
 		public const short CopperThorn7 = 127;
 
-		/// <summary>
-		/// 玄女梭
-		/// </summary>
 		public const short CopperThorn8 = 128;
 
-		/// <summary>
-		/// 乌衣刺
-		/// </summary>
 		public const short StoneThorn0 = 129;
 
-		/// <summary>
-		/// 红锋双梭
-		/// </summary>
 		public const short StoneThorn1 = 130;
 
-		/// <summary>
-		/// 四象梭
-		/// </summary>
 		public const short StoneThorn2 = 131;
 
-		/// <summary>
-		/// 分影对刺
-		/// </summary>
 		public const short StoneThorn3 = 132;
 
-		/// <summary>
-		/// 穿空刺
-		/// </summary>
 		public const short StoneThorn4 = 133;
 
-		/// <summary>
-		/// 黄龙刺
-		/// </summary>
 		public const short StoneThorn5 = 134;
 
-		/// <summary>
-		/// 星女灵梭
-		/// </summary>
 		public const short StoneThorn6 = 135;
 
-		/// <summary>
-		/// 浑天一对刺
-		/// </summary>
 		public const short StoneThorn7 = 136;
 
-		/// <summary>
-		/// 云上仙姿
-		/// </summary>
 		public const short StoneThorn8 = 137;
 
-		/// <summary>
-		/// 晶光刺
-		/// </summary>
 		public const short JadeThorn0 = 138;
 
-		/// <summary>
-		/// 飞雪梭
-		/// </summary>
 		public const short JadeThorn1 = 139;
 
-		/// <summary>
-		/// 青黄琼脂刺
-		/// </summary>
 		public const short JadeThorn2 = 140;
 
-		/// <summary>
-		/// 无瑕对刺
-		/// </summary>
 		public const short JadeThorn3 = 141;
 
-		/// <summary>
-		/// 鹿角白枝
-		/// </summary>
 		public const short JadeThorn4 = 142;
 
-		/// <summary>
-		/// 幽独刺
-		/// </summary>
 		public const short JadeThorn5 = 143;
 
-		/// <summary>
-		/// 玉清宝梭
-		/// </summary>
 		public const short JadeThorn6 = 144;
 
-		/// <summary>
-		/// 莲华冰魄
-		/// </summary>
 		public const short JadeThorn7 = 145;
 
-		/// <summary>
-		/// 天仙刺
-		/// </summary>
 		public const short JadeThorn8 = 146;
 
-		/// <summary>
-		/// 木对刺
-		/// </summary>
 		public const short WoodThorn0 = 147;
 
-		/// <summary>
-		/// 白鹤对刺
-		/// </summary>
 		public const short WoodThorn1 = 148;
 
-		/// <summary>
-		/// 飞来刺
-		/// </summary>
 		public const short WoodThorn2 = 149;
 
-		/// <summary>
-		/// 残香梭
-		/// </summary>
 		public const short WoodThorn3 = 150;
 
-		/// <summary>
-		/// 子母电光刺
-		/// </summary>
 		public const short WoodThorn4 = 151;
 
-		/// <summary>
-		/// 乱花刺
-		/// </summary>
 		public const short WoodThorn5 = 152;
 
-		/// <summary>
-		/// 天光云影刺
-		/// </summary>
 		public const short WoodThorn6 = 153;
 
-		/// <summary>
-		/// 降龙刺
-		/// </summary>
 		public const short WoodThorn7 = 154;
 
-		/// <summary>
-		/// 九寸阎罗
-		/// </summary>
 		public const short WoodThorn8 = 155;
 
-		/// <summary>
-		/// 青竹刺
-		/// </summary>
 		public const short BambooThorn0 = 156;
 
-		/// <summary>
-		/// 蛇牙曲刺
-		/// </summary>
 		public const short BambooThorn1 = 157;
 
-		/// <summary>
-		/// 织素梭
-		/// </summary>
 		public const short BambooThorn2 = 158;
 
-		/// <summary>
-		/// 颠倒一对刺
-		/// </summary>
 		public const short BambooThorn3 = 159;
 
-		/// <summary>
-		/// 迷离刺
-		/// </summary>
 		public const short BambooThorn4 = 160;
 
-		/// <summary>
-		/// 悲苦双梭
-		/// </summary>
 		public const short BambooThorn5 = 161;
 
-		/// <summary>
-		/// 定灵梭
-		/// </summary>
 		public const short BambooThorn6 = 162;
 
-		/// <summary>
-		/// 烟霞对刺
-		/// </summary>
 		public const short BambooThorn7 = 163;
 
-		/// <summary>
-		/// 如如
-		/// </summary>
 		public const short BambooThorn8 = 164;
 
-		/// <summary>
-		/// 飞刀
-		/// </summary>
 		public const short IronHidden0 = 165;
 
-		/// <summary>
-		/// 铁蒺藜
-		/// </summary>
 		public const short IronHidden1 = 166;
 
-		/// <summary>
-		/// 梅花镖
-		/// </summary>
 		public const short IronHidden2 = 167;
 
-		/// <summary>
-		/// 雷公钻
-		/// </summary>
 		public const short IronHidden3 = 168;
 
-		/// <summary>
-		/// 透骨子午钉
-		/// </summary>
 		public const short IronHidden4 = 169;
 
-		/// <summary>
-		/// 轰雷霆
-		/// </summary>
 		public const short IronHidden5 = 170;
 
-		/// <summary>
-		/// 神铁飞叉
-		/// </summary>
 		public const short IronHidden6 = 171;
 
-		/// <summary>
-		/// 金刚圈
-		/// </summary>
 		public const short IronHidden7 = 172;
 
-		/// <summary>
-		/// 玄铁黑莲
-		/// </summary>
 		public const short IronHidden8 = 173;
 
-		/// <summary>
-		/// 铜钱镖
-		/// </summary>
 		public const short CopperHidden0 = 174;
 
-		/// <summary>
-		/// 柳叶飞刀
-		/// </summary>
 		public const short CopperHidden1 = 175;
 
-		/// <summary>
-		/// 追魂钉
-		/// </summary>
 		public const short CopperHidden2 = 176;
 
-		/// <summary>
-		/// 青索飞锤
-		/// </summary>
 		public const short CopperHidden3 = 177;
 
-		/// <summary>
-		/// 雷火如意珠
-		/// </summary>
 		public const short CopperHidden4 = 178;
 
-		/// <summary>
-		/// 阴阳钩
-		/// </summary>
 		public const short CopperHidden5 = 179;
 
-		/// <summary>
-		/// 乾坤钉
-		/// </summary>
 		public const short CopperHidden6 = 180;
 
-		/// <summary>
-		/// 龙蛇蛰
-		/// </summary>
 		public const short CopperHidden7 = 181;
 
-		/// <summary>
-		/// 金蝉神针
-		/// </summary>
 		public const short CopperHidden8 = 182;
 
-		/// <summary>
-		/// 飞蝗石
-		/// </summary>
 		public const short StoneHidden0 = 183;
 
-		/// <summary>
-		/// 寒鸦镖
-		/// </summary>
 		public const short StoneHidden1 = 184;
 
-		/// <summary>
-		/// 三宝八卦
-		/// </summary>
 		public const short StoneHidden2 = 185;
 
-		/// <summary>
-		/// 青螺飞钉
-		/// </summary>
 		public const short StoneHidden3 = 186;
 
-		/// <summary>
-		/// 满天星
-		/// </summary>
 		public const short StoneHidden4 = 187;
 
-		/// <summary>
-		/// 九煞玄钉
-		/// </summary>
 		public const short StoneHidden5 = 188;
 
-		/// <summary>
-		/// 金光锉
-		/// </summary>
 		public const short StoneHidden6 = 189;
 
-		/// <summary>
-		/// 鬼纤尘
-		/// </summary>
 		public const short StoneHidden7 = 190;
 
-		/// <summary>
-		/// 紫微星
-		/// </summary>
 		public const short StoneHidden8 = 191;
 
-		/// <summary>
-		/// 冰玉飞针
-		/// </summary>
 		public const short JadeHidden0 = 192;
 
-		/// <summary>
-		/// 玉橄榄
-		/// </summary>
 		public const short JadeHidden1 = 193;
 
-		/// <summary>
-		/// 笑面罗汉
-		/// </summary>
 		public const short JadeHidden2 = 194;
 
-		/// <summary>
-		/// 玉蝉飞针
-		/// </summary>
 		public const short JadeHidden3 = 195;
 
-		/// <summary>
-		/// 五色透影
-		/// </summary>
 		public const short JadeHidden4 = 196;
 
-		/// <summary>
-		/// 杜鹃啼血
-		/// </summary>
 		public const short JadeHidden5 = 197;
 
-		/// <summary>
-		/// 鬼脸玉蟾蜍
-		/// </summary>
 		public const short JadeHidden6 = 198;
 
-		/// <summary>
-		/// 玄冥神针
-		/// </summary>
 		public const short JadeHidden7 = 199;
 
-		/// <summary>
-		/// 昆仑血络
-		/// </summary>
 		public const short JadeHidden8 = 200;
 
-		/// <summary>
-		/// 袖里箭
-		/// </summary>
 		public const short WoodHidden0 = 201;
 
-		/// <summary>
-		/// 飞凫钩爪
-		/// </summary>
 		public const short WoodHidden1 = 202;
 
-		/// <summary>
-		/// 堂前燕
-		/// </summary>
 		public const short WoodHidden2 = 203;
 
-		/// <summary>
-		/// 花落去
-		/// </summary>
 		public const short WoodHidden3 = 204;
 
-		/// <summary>
-		/// 乱红锥
-		/// </summary>
 		public const short WoodHidden4 = 205;
 
-		/// <summary>
-		/// 血鸳鸯
-		/// </summary>
 		public const short WoodHidden5 = 206;
 
-		/// <summary>
-		/// 辟血飞刀
-		/// </summary>
 		public const short WoodHidden6 = 207;
 
-		/// <summary>
-		/// 暴雨梨花针
-		/// </summary>
 		public const short WoodHidden7 = 208;
 
-		/// <summary>
-		/// 苍冥奇针
-		/// </summary>
 		public const short WoodHidden8 = 209;
 
-		/// <summary>
-		/// 青竹镖
-		/// </summary>
 		public const short BambooHidden0 = 210;
 
-		/// <summary>
-		/// 蛇舌飞索
-		/// </summary>
 		public const short BambooHidden1 = 211;
 
-		/// <summary>
-		/// 飞絮镖
-		/// </summary>
 		public const short BambooHidden2 = 212;
 
-		/// <summary>
-		/// 燕归来
-		/// </summary>
 		public const short BambooHidden3 = 213;
 
-		/// <summary>
-		/// 困龙索
-		/// </summary>
 		public const short BambooHidden4 = 214;
 
-		/// <summary>
-		/// 荻花飞针
-		/// </summary>
 		public const short BambooHidden5 = 215;
 
-		/// <summary>
-		/// 通天索
-		/// </summary>
 		public const short BambooHidden6 = 216;
 
-		/// <summary>
-		/// 含沙射影
-		/// </summary>
 		public const short BambooHidden7 = 217;
 
-		/// <summary>
-		/// 极乐神针
-		/// </summary>
 		public const short BambooHidden8 = 218;
 
-		/// <summary>
-		/// 铁箫
-		/// </summary>
 		public const short IronFlute0 = 219;
 
-		/// <summary>
-		/// 折骨萧
-		/// </summary>
 		public const short IronFlute1 = 220;
 
-		/// <summary>
-		/// 狼牙短箫
-		/// </summary>
 		public const short IronFlute2 = 221;
 
-		/// <summary>
-		/// 龙首箫
-		/// </summary>
 		public const short IronFlute3 = 222;
 
-		/// <summary>
-		/// 催魂令
-		/// </summary>
 		public const short IronFlute4 = 223;
 
-		/// <summary>
-		/// 轻雷
-		/// </summary>
 		public const short IronFlute5 = 224;
 
-		/// <summary>
-		/// 吞海长鲸
-		/// </summary>
 		public const short IronFlute6 = 225;
 
-		/// <summary>
-		/// 干云
-		/// </summary>
 		public const short IronFlute7 = 226;
 
-		/// <summary>
-		/// 玄铁箫
-		/// </summary>
 		public const short IronFlute8 = 227;
 
-		/// <summary>
-		/// 哑箫
-		/// </summary>
 		public const short CopperFlute0 = 228;
 
-		/// <summary>
-		/// 银梢箫
-		/// </summary>
 		public const short CopperFlute1 = 229;
 
-		/// <summary>
-		/// 笑面翁
-		/// </summary>
 		public const short CopperFlute2 = 230;
 
-		/// <summary>
-		/// 凤头箫
-		/// </summary>
 		public const short CopperFlute3 = 231;
 
-		/// <summary>
-		/// 鸳鸯缠金箫
-		/// </summary>
 		public const short CopperFlute4 = 232;
 
-		/// <summary>
-		/// 愁断肠
-		/// </summary>
 		public const short CopperFlute5 = 233;
 
-		/// <summary>
-		/// 鬼夜哭
-		/// </summary>
 		public const short CopperFlute6 = 234;
 
-		/// <summary>
-		/// 霞鹿
-		/// </summary>
 		public const short CopperFlute7 = 235;
 
-		/// <summary>
-		/// 邪引
-		/// </summary>
 		public const short CopperFlute8 = 236;
 
-		/// <summary>
-		/// 玛瑙箫
-		/// </summary>
 		public const short StoneFlute0 = 237;
 
-		/// <summary>
-		/// 彩石箫
-		/// </summary>
 		public const short StoneFlute1 = 238;
 
-		/// <summary>
-		/// 鬼纹短箫
-		/// </summary>
 		public const short StoneFlute2 = 239;
 
-		/// <summary>
-		/// 寻莺
-		/// </summary>
 		public const short StoneFlute3 = 240;
 
-		/// <summary>
-		/// 万蜂引
-		/// </summary>
 		public const short StoneFlute4 = 241;
 
-		/// <summary>
-		/// 赤龙箫
-		/// </summary>
 		public const short StoneFlute5 = 242;
 
-		/// <summary>
-		/// 暮蝉
-		/// </summary>
 		public const short StoneFlute6 = 243;
 
-		/// <summary>
-		/// 星河百转
-		/// </summary>
 		public const short StoneFlute7 = 244;
 
-		/// <summary>
-		/// 神鬼踏歌
-		/// </summary>
 		public const short StoneFlute8 = 245;
 
-		/// <summary>
-		/// 水玉箫
-		/// </summary>
 		public const short JadeFlute0 = 246;
 
-		/// <summary>
-		/// 翠骨箫
-		/// </summary>
 		public const short JadeFlute1 = 247;
 
-		/// <summary>
-		/// 玉螺短箫
-		/// </summary>
 		public const short JadeFlute2 = 248;
 
-		/// <summary>
-		/// 摄魂箫
-		/// </summary>
 		public const short JadeFlute3 = 249;
 
-		/// <summary>
-		/// 韩湘子
-		/// </summary>
 		public const short JadeFlute4 = 250;
 
-		/// <summary>
-		/// 紫凤箫
-		/// </summary>
 		public const short JadeFlute5 = 251;
 
-		/// <summary>
-		/// 素月璃骨
-		/// </summary>
 		public const short JadeFlute6 = 252;
 
-		/// <summary>
-		/// 碧海珍珑
-		/// </summary>
 		public const short JadeFlute7 = 253;
 
-		/// <summary>
-		/// 玉人托心
-		/// </summary>
 		public const short JadeFlute8 = 254;
 
-		/// <summary>
-		/// 木箫
-		/// </summary>
 		public const short WoodFlute0 = 255;
 
-		/// <summary>
-		/// 子胥箫
-		/// </summary>
 		public const short WoodFlute1 = 256;
 
-		/// <summary>
-		/// 黄蝶箫
-		/// </summary>
 		public const short WoodFlute2 = 257;
 
-		/// <summary>
-		/// 柯亭箫
-		/// </summary>
 		public const short WoodFlute3 = 258;
 
-		/// <summary>
-		/// 碧烟引
-		/// </summary>
 		public const short WoodFlute4 = 259;
 
-		/// <summary>
-		/// 梦里听香
-		/// </summary>
 		public const short WoodFlute5 = 260;
 
-		/// <summary>
-		/// 烟波媚
-		/// </summary>
 		public const short WoodFlute6 = 261;
 
-		/// <summary>
-		/// 天外奇音
-		/// </summary>
 		public const short WoodFlute7 = 262;
 
-		/// <summary>
-		/// 独然骨
-		/// </summary>
 		public const short WoodFlute8 = 263;
 
-		/// <summary>
-		/// 青竹箫
-		/// </summary>
 		public const short BambooFlute0 = 264;
 
-		/// <summary>
-		/// 蛇箫
-		/// </summary>
 		public const short BambooFlute1 = 265;
 
-		/// <summary>
-		/// 玉屏箫
-		/// </summary>
 		public const short BambooFlute2 = 266;
 
-		/// <summary>
-		/// 碧漆九节箫
-		/// </summary>
 		public const short BambooFlute3 = 267;
 
-		/// <summary>
-		/// 青阳引
-		/// </summary>
 		public const short BambooFlute4 = 268;
 
-		/// <summary>
-		/// 绣文芙蓉箫
-		/// </summary>
 		public const short BambooFlute5 = 269;
 
-		/// <summary>
-		/// 长相忆
-		/// </summary>
 		public const short BambooFlute6 = 270;
 
-		/// <summary>
-		/// 桃花仙
-		/// </summary>
 		public const short BambooFlute7 = 271;
 
-		/// <summary>
-		/// 万古愁
-		/// </summary>
 		public const short BambooFlute8 = 272;
 
-		/// <summary>
-		/// 铁手
-		/// </summary>
 		public const short IronGlovesA0 = 273;
 
-		/// <summary>
-		/// 四楞拳套
-		/// </summary>
 		public const short IronGlovesA1 = 274;
 
-		/// <summary>
-		/// 虎头铁掌套
-		/// </summary>
 		public const short IronGlovesA2 = 275;
 
-		/// <summary>
-		/// 风火浑铁臂
-		/// </summary>
 		public const short IronGlovesA3 = 276;
 
-		/// <summary>
-		/// 豹螭铁手
-		/// </summary>
 		public const short IronGlovesA4 = 277;
 
-		/// <summary>
-		/// 金刚臂
-		/// </summary>
 		public const short IronGlovesA5 = 278;
 
-		/// <summary>
-		/// 擒龙手
-		/// </summary>
 		public const short IronGlovesA6 = 279;
 
-		/// <summary>
-		/// 神威臂
-		/// </summary>
 		public const short IronGlovesA7 = 280;
 
-		/// <summary>
-		/// 青浊手
-		/// </summary>
 		public const short IronGlovesA8 = 281;
 
-		/// <summary>
-		/// 顽铁掌套
-		/// </summary>
 		public const short IronGlovesB0 = 282;
 
-		/// <summary>
-		/// 碎骨精钢手
-		/// </summary>
 		public const short IronGlovesB1 = 283;
 
-		/// <summary>
-		/// 铁云掌套
-		/// </summary>
 		public const short IronGlovesB2 = 284;
 
-		/// <summary>
-		/// 震山铁臂
-		/// </summary>
 		public const short IronGlovesB3 = 285;
 
-		/// <summary>
-		/// 坤元手
-		/// </summary>
 		public const short IronGlovesB4 = 286;
 
-		/// <summary>
-		/// 奔雷铁臂
-		/// </summary>
 		public const short IronGlovesB5 = 287;
 
-		/// <summary>
-		/// 龙鳞臂甲
-		/// </summary>
 		public const short IronGlovesB6 = 288;
 
-		/// <summary>
-		/// 混沌手
-		/// </summary>
 		public const short IronGlovesB7 = 289;
 
-		/// <summary>
-		/// 玄铁掌套
-		/// </summary>
 		public const short IronGlovesB8 = 290;
 
-		/// <summary>
-		/// 鹰爪手
-		/// </summary>
 		public const short CopperGlovesA0 = 291;
 
-		/// <summary>
-		/// 狼牙爪
-		/// </summary>
 		public const short CopperGlovesA1 = 292;
 
-		/// <summary>
-		/// 烂银金络爪
-		/// </summary>
 		public const short CopperGlovesA2 = 293;
 
-		/// <summary>
-		/// 灵鹫爪
-		/// </summary>
 		public const short CopperGlovesA3 = 294;
 
-		/// <summary>
-		/// 金蛇锁
-		/// </summary>
 		public const short CopperGlovesA4 = 295;
 
-		/// <summary>
-		/// 搏狮手
-		/// </summary>
 		public const short CopperGlovesA5 = 296;
 
-		/// <summary>
-		/// 断玉分金
-		/// </summary>
 		public const short CopperGlovesA6 = 297;
 
-		/// <summary>
-		/// 青鬼破空
-		/// </summary>
 		public const short CopperGlovesA7 = 298;
 
-		/// <summary>
-		/// 金胎手
-		/// </summary>
 		public const short CopperGlovesA8 = 299;
 
-		/// <summary>
-		/// 铁骨手
-		/// </summary>
 		public const short CopperGlovesB0 = 300;
 
-		/// <summary>
-		/// 金瓜臂
-		/// </summary>
 		public const short CopperGlovesB1 = 301;
 
-		/// <summary>
-		/// 破阵臂甲
-		/// </summary>
 		public const short CopperGlovesB2 = 302;
 
-		/// <summary>
-		/// 雷公臂
-		/// </summary>
 		public const short CopperGlovesB3 = 303;
 
-		/// <summary>
-		/// 风云五指束
-		/// </summary>
 		public const short CopperGlovesB4 = 304;
 
-		/// <summary>
-		/// 千顷沧涛手
-		/// </summary>
 		public const short CopperGlovesB5 = 305;
 
-		/// <summary>
-		/// 夸娥神臂
-		/// </summary>
 		public const short CopperGlovesB6 = 306;
 
-		/// <summary>
-		/// 鲸龙臂
-		/// </summary>
 		public const short CopperGlovesB7 = 307;
 
-		/// <summary>
-		/// 诛灭手
-		/// </summary>
 		public const short CopperGlovesB8 = 308;
 
-		/// <summary>
-		/// 玛瑙指扣
-		/// </summary>
 		public const short StoneGloves0 = 309;
 
-		/// <summary>
-		/// 红珠一指束
-		/// </summary>
 		public const short StoneGloves1 = 310;
 
-		/// <summary>
-		/// 幻光手
-		/// </summary>
 		public const short StoneGloves2 = 311;
 
-		/// <summary>
-		/// 霞光臂
-		/// </summary>
 		public const short StoneGloves3 = 312;
 
-		/// <summary>
-		/// 残星手
-		/// </summary>
 		public const short StoneGloves4 = 313;
 
-		/// <summary>
-		/// 如意鬼手
-		/// </summary>
 		public const short StoneGloves5 = 314;
 
-		/// <summary>
-		/// 百曜
-		/// </summary>
 		public const short StoneGloves6 = 315;
 
-		/// <summary>
-		/// 磐龙手
-		/// </summary>
 		public const short StoneGloves7 = 316;
 
-		/// <summary>
-		/// 帝女心
-		/// </summary>
 		public const short StoneGloves8 = 317;
 
-		/// <summary>
-		/// 晶玉指扣
-		/// </summary>
 		public const short JadeGloves0 = 318;
 
-		/// <summary>
-		/// 冷萼手
-		/// </summary>
 		public const short JadeGloves1 = 319;
 
-		/// <summary>
-		/// 飞琼手
-		/// </summary>
 		public const short JadeGloves2 = 320;
 
-		/// <summary>
-		/// 水玲珑
-		/// </summary>
 		public const short JadeGloves3 = 321;
 
-		/// <summary>
-		/// 孀娥指扣
-		/// </summary>
 		public const short JadeGloves4 = 322;
 
-		/// <summary>
-		/// 蟾魄手
-		/// </summary>
 		public const short JadeGloves5 = 323;
 
-		/// <summary>
-		/// 并蒂莲骨
-		/// </summary>
 		public const short JadeGloves6 = 324;
 
-		/// <summary>
-		/// 龙蛇冰绡
-		/// </summary>
 		public const short JadeGloves7 = 325;
 
-		/// <summary>
-		/// 无垢
-		/// </summary>
 		public const short JadeGloves8 = 326;
 
-		/// <summary>
-		/// 木手甲
-		/// </summary>
 		public const short WoodGloves0 = 327;
 
-		/// <summary>
-		/// 凤飞一指束
-		/// </summary>
 		public const short WoodGloves1 = 328;
 
-		/// <summary>
-		/// 碎红爪
-		/// </summary>
 		public const short WoodGloves2 = 329;
 
-		/// <summary>
-		/// 梅雪争春
-		/// </summary>
 		public const short WoodGloves3 = 330;
 
-		/// <summary>
-		/// 天香伏邪手
-		/// </summary>
 		public const short WoodGloves4 = 331;
 
-		/// <summary>
-		/// 轻黄手
-		/// </summary>
 		public const short WoodGloves5 = 332;
 
-		/// <summary>
-		/// 降魔神木臂
-		/// </summary>
 		public const short WoodGloves6 = 333;
 
-		/// <summary>
-		/// 破朝霞
-		/// </summary>
 		public const short WoodGloves7 = 334;
 
-		/// <summary>
-		/// 滴血露华
-		/// </summary>
 		public const short WoodGloves8 = 335;
 
-		/// <summary>
-		/// 青竹手
-		/// </summary>
 		public const short BambooGloves0 = 336;
 
-		/// <summary>
-		/// 宿雨手
-		/// </summary>
 		public const short BambooGloves1 = 337;
 
-		/// <summary>
-		/// 猿公手
-		/// </summary>
 		public const short BambooGloves2 = 338;
 
-		/// <summary>
-		/// 缚妖五指束
-		/// </summary>
 		public const short BambooGloves3 = 339;
 
-		/// <summary>
-		/// 杏黄朝烟手
-		/// </summary>
 		public const short BambooGloves4 = 340;
 
-		/// <summary>
-		/// 乾坤臂
-		/// </summary>
 		public const short BambooGloves5 = 341;
 
-		/// <summary>
-		/// 暗香血趾
-		/// </summary>
 		public const short BambooGloves6 = 342;
 
-		/// <summary>
-		/// 玄色蟠龙手
-		/// </summary>
 		public const short BambooGloves7 = 343;
 
-		/// <summary>
-		/// 妙叹
-		/// </summary>
 		public const short BambooGloves8 = 344;
 
-		/// <summary>
-		/// 虎爪手
-		/// </summary>
 		public const short ClothGlovesA0 = 345;
 
-		/// <summary>
-		/// 兽纹掌套
-		/// </summary>
 		public const short ClothGlovesA1 = 346;
 
-		/// <summary>
-		/// 阴阳手
-		/// </summary>
 		public const short ClothGlovesA2 = 347;
 
-		/// <summary>
-		/// 六合掌套
-		/// </summary>
 		public const short ClothGlovesA3 = 348;
 
-		/// <summary>
-		/// 夜吼
-		/// </summary>
 		public const short ClothGlovesA4 = 349;
 
-		/// <summary>
-		/// 五影参差
-		/// </summary>
 		public const short ClothGlovesA5 = 350;
 
-		/// <summary>
-		/// 混天织
-		/// </summary>
 		public const short ClothGlovesA6 = 351;
 
-		/// <summary>
-		/// 羽绶金麟
-		/// </summary>
 		public const short ClothGlovesA7 = 352;
 
-		/// <summary>
-		/// 金蝉手套
-		/// </summary>
 		public const short ClothGlovesA8 = 353;
 
-		/// <summary>
-		/// 山民护手
-		/// </summary>
 		public const short ClothGlovesB0 = 354;
 
-		/// <summary>
-		/// 黄纹手
-		/// </summary>
 		public const short ClothGlovesB1 = 355;
 
-		/// <summary>
-		/// 鹤唳盘云手
-		/// </summary>
 		public const short ClothGlovesB2 = 356;
 
-		/// <summary>
-		/// 掌清秋
-		/// </summary>
 		public const short ClothGlovesB3 = 357;
 
-		/// <summary>
-		/// 龙凤织云手
-		/// </summary>
 		public const short ClothGlovesB4 = 358;
 
-		/// <summary>
-		/// 五光织
-		/// </summary>
 		public const short ClothGlovesB5 = 359;
 
-		/// <summary>
-		/// 归霞
-		/// </summary>
 		public const short ClothGlovesB6 = 360;
 
-		/// <summary>
-		/// 画九英
-		/// </summary>
 		public const short ClothGlovesB7 = 361;
 
-		/// <summary>
-		/// 泥云手
-		/// </summary>
 		public const short ClothGlovesB8 = 362;
 
-		/// <summary>
-		/// 缠手带
-		/// </summary>
 		public const short SilkGlovesA0 = 363;
 
-		/// <summary>
-		/// 流莺手
-		/// </summary>
 		public const short SilkGlovesA1 = 364;
 
-		/// <summary>
-		/// 化意手
-		/// </summary>
 		public const short SilkGlovesA2 = 365;
 
-		/// <summary>
-		/// 百卉金丝手
-		/// </summary>
 		public const short SilkGlovesA3 = 366;
 
-		/// <summary>
-		/// 逝水
-		/// </summary>
 		public const short SilkGlovesA4 = 367;
 
-		/// <summary>
-		/// 千般巧
-		/// </summary>
 		public const short SilkGlovesA5 = 368;
 
-		/// <summary>
-		/// 玄冰鬼趾
-		/// </summary>
 		public const short SilkGlovesA6 = 369;
 
-		/// <summary>
-		/// 千螭
-		/// </summary>
 		public const short SilkGlovesA7 = 370;
 
-		/// <summary>
-		/// 天蚕掌套
-		/// </summary>
 		public const short SilkGlovesA8 = 371;
 
-		/// <summary>
-		/// 黄麻手
-		/// </summary>
 		public const short SilkGlovesB0 = 372;
 
-		/// <summary>
-		/// 纳锦五指束
-		/// </summary>
 		public const short SilkGlovesB1 = 373;
 
-		/// <summary>
-		/// 幽芷手
-		/// </summary>
 		public const short SilkGlovesB2 = 374;
 
-		/// <summary>
-		/// 碧牙手
-		/// </summary>
 		public const short SilkGlovesB3 = 375;
 
-		/// <summary>
-		/// 浑似雪
-		/// </summary>
 		public const short SilkGlovesB4 = 376;
 
-		/// <summary>
-		/// 金银织
-		/// </summary>
 		public const short SilkGlovesB5 = 377;
 
-		/// <summary>
-		/// 太阴玄冥手
-		/// </summary>
 		public const short SilkGlovesB6 = 378;
 
-		/// <summary>
-		/// 柔香蚀骨
-		/// </summary>
 		public const short SilkGlovesB7 = 379;
 
-		/// <summary>
-		/// 携露
-		/// </summary>
 		public const short SilkGlovesB8 = 380;
 
-		/// <summary>
-		/// 独钴铁杵
-		/// </summary>
 		public const short IronPestle0 = 381;
 
-		/// <summary>
-		/// 镔钢杵
-		/// </summary>
 		public const short IronPestle1 = 382;
 
-		/// <summary>
-		/// 钩钳杵
-		/// </summary>
 		public const short IronPestle2 = 383;
 
-		/// <summary>
-		/// 火舍杵
-		/// </summary>
 		public const short IronPestle3 = 384;
 
-		/// <summary>
-		/// 狮头宝杵
-		/// </summary>
 		public const short IronPestle4 = 385;
 
-		/// <summary>
-		/// 千层塔
-		/// </summary>
 		public const short IronPestle5 = 386;
 
-		/// <summary>
-		/// 大轮金刚杵
-		/// </summary>
 		public const short IronPestle6 = 387;
 
-		/// <summary>
-		/// 不动尊
-		/// </summary>
 		public const short IronPestle7 = 388;
 
-		/// <summary>
-		/// 大日如来杵
-		/// </summary>
 		public const short IronPestle8 = 389;
 
-		/// <summary>
-		/// 元铜杵
-		/// </summary>
 		public const short CopperPestle0 = 390;
 
-		/// <summary>
-		/// 骷髅杵
-		/// </summary>
 		public const short CopperPestle1 = 391;
 
-		/// <summary>
-		/// 万字杵
-		/// </summary>
 		public const short CopperPestle2 = 392;
 
-		/// <summary>
-		/// 力士杵
-		/// </summary>
 		public const short CopperPestle3 = 393;
 
-		/// <summary>
-		/// 五峰光明杵
-		/// </summary>
 		public const short CopperPestle4 = 394;
 
-		/// <summary>
-		/// 虎衣宝杵
-		/// </summary>
 		public const short CopperPestle5 = 395;
 
-		/// <summary>
-		/// 无能胜
-		/// </summary>
 		public const short CopperPestle6 = 396;
 
-		/// <summary>
-		/// 大威德杵
-		/// </summary>
 		public const short CopperPestle7 = 397;
 
-		/// <summary>
-		/// 非天
-		/// </summary>
 		public const short CopperPestle8 = 398;
 
-		/// <summary>
-		/// 灶黑短杵
-		/// </summary>
 		public const short StonePestle0 = 399;
 
-		/// <summary>
-		/// 三钴石杵
-		/// </summary>
 		public const short StonePestle1 = 400;
 
-		/// <summary>
-		/// 夜叉杵
-		/// </summary>
 		public const short StonePestle2 = 401;
 
-		/// <summary>
-		/// 韦驮杵
-		/// </summary>
 		public const short StonePestle3 = 402;
 
-		/// <summary>
-		/// 无相杵
-		/// </summary>
 		public const short StonePestle4 = 403;
 
-		/// <summary>
-		/// 五色蓝芒杵
-		/// </summary>
 		public const short StonePestle5 = 404;
 
-		/// <summary>
-		/// 四宝须弥杵
-		/// </summary>
 		public const short StonePestle6 = 405;
 
-		/// <summary>
-		/// 金刚摧破
-		/// </summary>
 		public const short StonePestle7 = 406;
 
-		/// <summary>
-		/// 钧天柱
-		/// </summary>
 		public const short StonePestle8 = 407;
 
-		/// <summary>
-		/// 捣药棒
-		/// </summary>
 		public const short JadePestle0 = 408;
 
-		/// <summary>
-		/// 晶光杵
-		/// </summary>
 		public const short JadePestle1 = 409;
 
-		/// <summary>
-		/// 独钴玉骨杵
-		/// </summary>
 		public const short JadePestle2 = 410;
 
-		/// <summary>
-		/// 降魔杵
-		/// </summary>
 		public const short JadePestle3 = 411;
 
-		/// <summary>
-		/// 真如杵
-		/// </summary>
 		public const short JadePestle4 = 412;
 
-		/// <summary>
-		/// 七宝坠玉杵
-		/// </summary>
 		public const short JadePestle5 = 413;
 
-		/// <summary>
-		/// 步掷旋盖
-		/// </summary>
 		public const short JadePestle6 = 414;
 
-		/// <summary>
-		/// 九钴天魔杵
-		/// </summary>
 		public const short JadePestle7 = 415;
 
-		/// <summary>
-		/// 三界降服
-		/// </summary>
 		public const short JadePestle8 = 416;
 
-		/// <summary>
-		/// 三钴木杵
-		/// </summary>
 		public const short WoodPestle0 = 417;
 
-		/// <summary>
-		/// 云形杵
-		/// </summary>
 		public const short WoodPestle1 = 418;
 
-		/// <summary>
-		/// 鬼面杵
-		/// </summary>
 		public const short WoodPestle2 = 419;
 
-		/// <summary>
-		/// 八吉祥杵
-		/// </summary>
 		public const short WoodPestle3 = 420;
 
-		/// <summary>
-		/// 马大士
-		/// </summary>
 		public const short WoodPestle4 = 421;
 
-		/// <summary>
-		/// 青白二莲
-		/// </summary>
 		public const short WoodPestle5 = 422;
 
-		/// <summary>
-		/// 甘露
-		/// </summary>
 		public const short WoodPestle6 = 423;
 
-		/// <summary>
-		/// 染净不二
-		/// </summary>
 		public const short WoodPestle7 = 424;
 
-		/// <summary>
-		/// 胜乐轮
-		/// </summary>
 		public const short WoodPestle8 = 425;
 
-		/// <summary>
-		/// 短竹杵
-		/// </summary>
 		public const short BambooPestle0 = 426;
 
-		/// <summary>
-		/// 羯磨杵
-		/// </summary>
 		public const short BambooPestle1 = 427;
 
-		/// <summary>
-		/// 五钴欢喜杵
-		/// </summary>
 		public const short BambooPestle2 = 428;
 
-		/// <summary>
-		/// 真言杵
-		/// </summary>
 		public const short BambooPestle3 = 429;
 
-		/// <summary>
-		/// 缠龙杵
-		/// </summary>
 		public const short BambooPestle4 = 430;
 
-		/// <summary>
-		/// 曼荼罗杵
-		/// </summary>
 		public const short BambooPestle5 = 431;
 
-		/// <summary>
-		/// 菩提心
-		/// </summary>
 		public const short BambooPestle6 = 432;
 
-		/// <summary>
-		/// 般若智焰
-		/// </summary>
 		public const short BambooPestle7 = 433;
 
-		/// <summary>
-		/// 帝释天
-		/// </summary>
 		public const short BambooPestle8 = 434;
 
-		/// <summary>
-		/// 铁剑
-		/// </summary>
 		public const short IronSwordA0 = 435;
 
-		/// <summary>
-		/// 斩马剑
-		/// </summary>
 		public const short IronSwordA1 = 436;
 
-		/// <summary>
-		/// 青锋剑
-		/// </summary>
 		public const short IronSwordA2 = 437;
 
-		/// <summary>
-		/// 燕支剑
-		/// </summary>
 		public const short IronSwordA3 = 438;
 
-		/// <summary>
-		/// 三尺鸦九剑
-		/// </summary>
 		public const short IronSwordA4 = 439;
 
-		/// <summary>
-		/// 工布
-		/// </summary>
 		public const short IronSwordA5 = 440;
 
-		/// <summary>
-		/// 九焠翠血剑
-		/// </summary>
 		public const short IronSwordA6 = 441;
 
-		/// <summary>
-		/// 干将
-		/// </summary>
 		public const short IronSwordA7 = 442;
 
-		/// <summary>
-		/// 湛卢
-		/// </summary>
 		public const short IronSwordA8 = 443;
 
-		/// <summary>
-		/// 镔铁重剑
-		/// </summary>
 		public const short IronSwordB0 = 444;
 
-		/// <summary>
-		/// 折铁剑
-		/// </summary>
 		public const short IronSwordB1 = 445;
 
-		/// <summary>
-		/// 墨阳剑
-		/// </summary>
 		public const short IronSwordB2 = 446;
 
-		/// <summary>
-		/// 白虹剑
-		/// </summary>
 		public const short IronSwordB3 = 447;
 
-		/// <summary>
-		/// 真刚
-		/// </summary>
 		public const short IronSwordB4 = 448;
 
-		/// <summary>
-		/// 定秦剑
-		/// </summary>
 		public const short IronSwordB5 = 449;
 
-		/// <summary>
-		/// 巨阙
-		/// </summary>
 		public const short IronSwordB6 = 450;
 
-		/// <summary>
-		/// 乌光神铁剑
-		/// </summary>
 		public const short IronSwordB7 = 451;
 
-		/// <summary>
-		/// 玄铁剑
-		/// </summary>
 		public const short IronSwordB8 = 452;
 
-		/// <summary>
-		/// 无锋钝剑
-		/// </summary>
 		public const short IronSwordC0 = 453;
 
-		/// <summary>
-		/// 克己剑
-		/// </summary>
 		public const short IronSwordC1 = 454;
 
-		/// <summary>
-		/// 镇岳尚方剑
-		/// </summary>
 		public const short IronSwordC2 = 455;
 
-		/// <summary>
-		/// 照胆剑
-		/// </summary>
 		public const short IronSwordC3 = 456;
 
-		/// <summary>
-		/// 定岚
-		/// </summary>
 		public const short IronSwordC4 = 457;
 
-		/// <summary>
-		/// 碧海垂云
-		/// </summary>
 		public const short IronSwordC5 = 458;
 
-		/// <summary>
-		/// 龙虎画影
-		/// </summary>
 		public const short IronSwordC6 = 459;
 
-		/// <summary>
-		/// 泰阿
-		/// </summary>
 		public const short IronSwordC7 = 460;
 
-		/// <summary>
-		/// 太初青宵
-		/// </summary>
 		public const short IronSwordC8 = 461;
 
-		/// <summary>
-		/// 素剑
-		/// </summary>
 		public const short CopperSwordA0 = 462;
 
-		/// <summary>
-		/// 七指剑
-		/// </summary>
 		public const short CopperSwordA1 = 463;
 
-		/// <summary>
-		/// 棠溪剑
-		/// </summary>
 		public const short CopperSwordA2 = 464;
 
-		/// <summary>
-		/// 孤光剑
-		/// </summary>
 		public const short CopperSwordA3 = 465;
 
-		/// <summary>
-		/// 分景
-		/// </summary>
 		public const short CopperSwordA4 = 466;
 
-		/// <summary>
-		/// 鱼肠
-		/// </summary>
 		public const short CopperSwordA5 = 467;
 
-		/// <summary>
-		/// 紫青素剑
-		/// </summary>
 		public const short CopperSwordA6 = 468;
 
-		/// <summary>
-		/// 莫邪
-		/// </summary>
 		public const short CopperSwordA7 = 469;
 
-		/// <summary>
-		/// 纯钧
-		/// </summary>
 		public const short CopperSwordA8 = 470;
 
-		/// <summary>
-		/// 元铜剑
-		/// </summary>
 		public const short CopperSwordB0 = 471;
 
-		/// <summary>
-		/// 破山剑
-		/// </summary>
 		public const short CopperSwordB1 = 472;
 
-		/// <summary>
-		/// 秀霸剑
-		/// </summary>
 		public const short CopperSwordB2 = 473;
 
-		/// <summary>
-		/// 罡风
-		/// </summary>
 		public const short CopperSwordB3 = 474;
 
-		/// <summary>
-		/// 万仞斩蛟剑
-		/// </summary>
 		public const short CopperSwordB4 = 475;
 
-		/// <summary>
-		/// 赤霄剑
-		/// </summary>
 		public const short CopperSwordB5 = 476;
 
-		/// <summary>
-		/// 胜邪
-		/// </summary>
 		public const short CopperSwordB6 = 477;
 
-		/// <summary>
-		/// 琨珸剑
-		/// </summary>
 		public const short CopperSwordB7 = 478;
 
-		/// <summary>
-		/// 轩辕夏禹剑
-		/// </summary>
 		public const short CopperSwordB8 = 479;
 
-		/// <summary>
-		/// 蛇盘软剑
-		/// </summary>
 		public const short CopperSwordC0 = 480;
 
-		/// <summary>
-		/// 绕指柔剑
-		/// </summary>
 		public const short CopperSwordC1 = 481;
 
-		/// <summary>
-		/// 游龙剑
-		/// </summary>
 		public const short CopperSwordC2 = 482;
 
-		/// <summary>
-		/// 玉虚软剑
-		/// </summary>
 		public const short CopperSwordC3 = 483;
 
-		/// <summary>
-		/// 残灯照月
-		/// </summary>
 		public const short CopperSwordC4 = 484;
 
-		/// <summary>
-		/// 却邪
-		/// </summary>
 		public const short CopperSwordC5 = 485;
 
-		/// <summary>
-		/// 辟尘剑
-		/// </summary>
 		public const short CopperSwordC6 = 486;
 
-		/// <summary>
-		/// 七星龙渊剑
-		/// </summary>
 		public const short CopperSwordC7 = 487;
 
-		/// <summary>
-		/// 金蝉剑
-		/// </summary>
 		public const short CopperSwordC8 = 488;
 
-		/// <summary>
-		/// 黑光剑
-		/// </summary>
 		public const short StoneSword0 = 489;
 
-		/// <summary>
-		/// 阴阳子母剑
-		/// </summary>
 		public const short StoneSword1 = 490;
 
-		/// <summary>
-		/// 龙彩剑
-		/// </summary>
 		public const short StoneSword2 = 491;
 
-		/// <summary>
-		/// 定光
-		/// </summary>
 		public const short StoneSword3 = 492;
 
-		/// <summary>
-		/// 君子如兰
-		/// </summary>
 		public const short StoneSword4 = 493;
 
-		/// <summary>
-		/// 紫电清霜
-		/// </summary>
 		public const short StoneSword5 = 494;
 
-		/// <summary>
-		/// 飞景天剑
-		/// </summary>
 		public const short StoneSword6 = 495;
 
-		/// <summary>
-		/// 太一尺
-		/// </summary>
 		public const short StoneSword7 = 496;
 
-		/// <summary>
-		/// 青冥剑
-		/// </summary>
 		public const short StoneSword8 = 497;
 
-		/// <summary>
-		/// 晶玉剑
-		/// </summary>
 		public const short JadeSword0 = 498;
 
-		/// <summary>
-		/// 翠羽流采
-		/// </summary>
 		public const short JadeSword1 = 499;
 
-		/// <summary>
-		/// 巧凌霜
-		/// </summary>
 		public const short JadeSword2 = 500;
 
-		/// <summary>
-		/// 含光
-		/// </summary>
 		public const short JadeSword3 = 501;
 
-		/// <summary>
-		/// 淑女冰洁
-		/// </summary>
 		public const short JadeSword4 = 502;
 
-		/// <summary>
-		/// 宵练
-		/// </summary>
 		public const short JadeSword5 = 503;
 
-		/// <summary>
-		/// 龙池天剑
-		/// </summary>
 		public const short JadeSword6 = 504;
 
-		/// <summary>
-		/// 承影
-		/// </summary>
 		public const short JadeSword7 = 505;
 
-		/// <summary>
-		/// 白冥剑
-		/// </summary>
 		public const short JadeSword8 = 506;
 
-		/// <summary>
-		/// 木剑
-		/// </summary>
 		public const short WoodSword0 = 507;
 
-		/// <summary>
-		/// 逐鬼剑
-		/// </summary>
 		public const short WoodSword1 = 508;
 
-		/// <summary>
-		/// 疏影剑
-		/// </summary>
 		public const short WoodSword2 = 509;
 
-		/// <summary>
-		/// 沉香独俏剑
-		/// </summary>
 		public const short WoodSword3 = 510;
 
-		/// <summary>
-		/// 斩魔雌雄剑
-		/// </summary>
 		public const short WoodSword4 = 511;
 
-		/// <summary>
-		/// 朱霞丹剑
-		/// </summary>
 		public const short WoodSword5 = 512;
 
-		/// <summary>
-		/// 风雷飞翅剑
-		/// </summary>
 		public const short WoodSword6 = 513;
 
-		/// <summary>
-		/// 惊鸿
-		/// </summary>
 		public const short WoodSword7 = 514;
 
-		/// <summary>
-		/// 神锋
-		/// </summary>
 		public const short WoodSword8 = 515;
 
-		/// <summary>
-		/// 青竹剑
-		/// </summary>
 		public const short BambooSword0 = 516;
 
-		/// <summary>
-		/// 四尺缠身剑
-		/// </summary>
 		public const short BambooSword1 = 517;
 
-		/// <summary>
-		/// 紫虚剑
-		/// </summary>
 		public const short BambooSword2 = 518;
 
-		/// <summary>
-		/// 灵景金光
-		/// </summary>
 		public const short BambooSword3 = 519;
 
-		/// <summary>
-		/// 化龙蛇
-		/// </summary>
 		public const short BambooSword4 = 520;
 
-		/// <summary>
-		/// 辟邪神木剑
-		/// </summary>
 		public const short BambooSword5 = 521;
 
-		/// <summary>
-		/// 空碧
-		/// </summary>
 		public const short BambooSword6 = 522;
 
-		/// <summary>
-		/// 血穹剑
-		/// </summary>
 		public const short BambooSword7 = 523;
 
-		/// <summary>
-		/// 离离千世
-		/// </summary>
 		public const short BambooSword8 = 524;
 
-		/// <summary>
-		/// 铁刀
-		/// </summary>
 		public const short IronBladeA0 = 525;
 
-		/// <summary>
-		/// 白杨刀
-		/// </summary>
 		public const short IronBladeA1 = 526;
 
-		/// <summary>
-		/// 番夷尖刀
-		/// </summary>
 		public const short IronBladeA2 = 527;
 
-		/// <summary>
-		/// 凤翅刀
-		/// </summary>
 		public const short IronBladeA3 = 528;
 
-		/// <summary>
-		/// 修罗刃
-		/// </summary>
 		public const short IronBladeA4 = 529;
 
-		/// <summary>
-		/// 寒月
-		/// </summary>
 		public const short IronBladeA5 = 530;
 
-		/// <summary>
-		/// 鬼庖丁
-		/// </summary>
 		public const short IronBladeA6 = 531;
 
-		/// <summary>
-		/// 残刀
-		/// </summary>
 		public const short IronBladeA7 = 532;
 
-		/// <summary>
-		/// 斩龙铡
-		/// </summary>
 		public const short IronBladeA8 = 533;
 
-		/// <summary>
-		/// 朴刀
-		/// </summary>
 		public const short IronBladeB0 = 534;
 
-		/// <summary>
-		/// 直背狼牙刀
-		/// </summary>
 		public const short IronBladeB1 = 535;
 
-		/// <summary>
-		/// 斩马刀
-		/// </summary>
 		public const short IronBladeB2 = 536;
 
-		/// <summary>
-		/// 苗祖刀
-		/// </summary>
 		public const short IronBladeB3 = 537;
 
-		/// <summary>
-		/// 新亭侯刀
-		/// </summary>
 		public const short IronBladeB4 = 538;
 
-		/// <summary>
-		/// 百炼千人斩
-		/// </summary>
 		public const short IronBladeB5 = 539;
 
-		/// <summary>
-		/// 泰山宝环刀
-		/// </summary>
 		public const short IronBladeB6 = 540;
 
-		/// <summary>
-		/// 狂名
-		/// </summary>
 		public const short IronBladeB7 = 541;
 
-		/// <summary>
-		/// 玄铁刀
-		/// </summary>
 		public const short IronBladeB8 = 542;
 
-		/// <summary>
-		/// 戒刀
-		/// </summary>
 		public const short IronBladeC0 = 543;
 
-		/// <summary>
-		/// 宿铁刀
-		/// </summary>
 		public const short IronBladeC1 = 544;
 
-		/// <summary>
-		/// 九环刀
-		/// </summary>
 		public const short IronBladeC2 = 545;
 
-		/// <summary>
-		/// 松纹古锭刀
-		/// </summary>
 		public const short IronBladeC3 = 546;
 
-		/// <summary>
-		/// 山河分断
-		/// </summary>
 		public const short IronBladeC4 = 547;
 
-		/// <summary>
-		/// 大夏龙雀刀
-		/// </summary>
 		public const short IronBladeC5 = 548;
 
-		/// <summary>
-		/// 百岳
-		/// </summary>
 		public const short IronBladeC6 = 549;
 
-		/// <summary>
-		/// 龙鳞宝刀
-		/// </summary>
 		public const short IronBladeC7 = 550;
 
-		/// <summary>
-		/// 九厄
-		/// </summary>
 		public const short IronBladeC8 = 551;
 
-		/// <summary>
-		/// 开山刀
-		/// </summary>
 		public const short CopperBladeA0 = 552;
 
-		/// <summary>
-		/// 银背弯刀
-		/// </summary>
 		public const short CopperBladeA1 = 553;
 
-		/// <summary>
-		/// 雁翎刀
-		/// </summary>
 		public const short CopperBladeA2 = 554;
 
-		/// <summary>
-		/// 鸳鸯刀
-		/// </summary>
 		public const short CopperBladeA3 = 555;
 
-		/// <summary>
-		/// 吴钩
-		/// </summary>
 		public const short CopperBladeA4 = 556;
 
-		/// <summary>
-		/// 狂狮碎金刀
-		/// </summary>
 		public const short CopperBladeA5 = 557;
 
-		/// <summary>
-		/// 赤刀
-		/// </summary>
 		public const short CopperBladeA6 = 558;
 
-		/// <summary>
-		/// 鸣鸿刀
-		/// </summary>
 		public const short CopperBladeA7 = 559;
 
-		/// <summary>
-		/// 五煌炼血刀
-		/// </summary>
 		public const short CopperBladeA8 = 560;
 
-		/// <summary>
-		/// 元铜刀
-		/// </summary>
 		public const short CopperBladeB0 = 561;
 
-		/// <summary>
-		/// 泼风砍刀
-		/// </summary>
 		public const short CopperBladeB1 = 562;
 
-		/// <summary>
-		/// 项王金刀
-		/// </summary>
 		public const short CopperBladeB2 = 563;
 
-		/// <summary>
-		/// 牛虎奔雷刀
-		/// </summary>
 		public const short CopperBladeB3 = 564;
 
-		/// <summary>
-		/// 阮师刀
-		/// </summary>
 		public const short CopperBladeB4 = 565;
 
-		/// <summary>
-		/// 碧眼鬼头刀
-		/// </summary>
 		public const short CopperBladeB5 = 566;
 
-		/// <summary>
-		/// 苍龙宝刀
-		/// </summary>
 		public const short CopperBladeB6 = 567;
 
-		/// <summary>
-		/// 九犀刀
-		/// </summary>
 		public const short CopperBladeB7 = 568;
 
-		/// <summary>
-		/// 虎魄
-		/// </summary>
 		public const short CopperBladeB8 = 569;
 
-		/// <summary>
-		/// 鱼头刀
-		/// </summary>
 		public const short CopperBladeC0 = 570;
 
-		/// <summary>
-		/// 警恶刀
-		/// </summary>
 		public const short CopperBladeC1 = 571;
 
-		/// <summary>
-		/// 银装环首刀
-		/// </summary>
 		public const short CopperBladeC2 = 572;
 
-		/// <summary>
-		/// 镇元金刀
-		/// </summary>
 		public const short CopperBladeC3 = 573;
 
-		/// <summary>
-		/// 乾坤宝刀
-		/// </summary>
 		public const short CopperBladeC4 = 574;
 
-		/// <summary>
-		/// 昆吾刀
-		/// </summary>
 		public const short CopperBladeC5 = 575;
 
-		/// <summary>
-		/// 百辟刀
-		/// </summary>
 		public const short CopperBladeC6 = 576;
 
-		/// <summary>
-		/// 鲲鹏金翅
-		/// </summary>
 		public const short CopperBladeC7 = 577;
 
-		/// <summary>
-		/// 无妄刀
-		/// </summary>
 		public const short CopperBladeC8 = 578;
 
-		/// <summary>
-		/// 鸾刀
-		/// </summary>
 		public const short StoneBlade0 = 579;
 
-		/// <summary>
-		/// 灵宝刀
-		/// </summary>
 		public const short StoneBlade1 = 580;
 
-		/// <summary>
-		/// 血光短刃
-		/// </summary>
 		public const short StoneBlade2 = 581;
 
-		/// <summary>
-		/// 火猊舌
-		/// </summary>
 		public const short StoneBlade3 = 582;
 
-		/// <summary>
-		/// 金乌眼
-		/// </summary>
 		public const short StoneBlade4 = 583;
 
-		/// <summary>
-		/// 含章
-		/// </summary>
 		public const short StoneBlade5 = 584;
 
-		/// <summary>
-		/// 晦冥刀
-		/// </summary>
 		public const short StoneBlade6 = 585;
 
-		/// <summary>
-		/// 七星宝刀
-		/// </summary>
 		public const short StoneBlade7 = 586;
 
-		/// <summary>
-		/// 太元霓霞
-		/// </summary>
 		public const short StoneBlade8 = 587;
 
-		/// <summary>
-		/// 玉环刀
-		/// </summary>
 		public const short JadeBlade0 = 588;
 
-		/// <summary>
-		/// 漏景刀
-		/// </summary>
 		public const short JadeBlade1 = 589;
 
-		/// <summary>
-		/// 玉芙蓉刀
-		/// </summary>
 		public const short JadeBlade2 = 590;
 
-		/// <summary>
-		/// 碧波刀
-		/// </summary>
 		public const short JadeBlade3 = 591;
 
-		/// <summary>
-		/// 素女分纱
-		/// </summary>
 		public const short JadeBlade4 = 592;
 
-		/// <summary>
-		/// 露陌
-		/// </summary>
 		public const short JadeBlade5 = 593;
 
-		/// <summary>
-		/// 宝血龙象刀
-		/// </summary>
 		public const short JadeBlade6 = 594;
 
-		/// <summary>
-		/// 青鸾宝刀
-		/// </summary>
 		public const short JadeBlade7 = 595;
 
-		/// <summary>
-		/// 天霜皓月
-		/// </summary>
 		public const short JadeBlade8 = 596;
 
-		/// <summary>
-		/// 木刀
-		/// </summary>
 		public const short WoodBlade0 = 597;
 
-		/// <summary>
-		/// 坠燕刀
-		/// </summary>
 		public const short WoodBlade1 = 598;
 
-		/// <summary>
-		/// 飞鹿弯刀
-		/// </summary>
 		public const short WoodBlade2 = 599;
 
-		/// <summary>
-		/// 断虹刀
-		/// </summary>
 		public const short WoodBlade3 = 600;
 
-		/// <summary>
-		/// 化血刀
-		/// </summary>
 		public const short WoodBlade4 = 601;
 
-		/// <summary>
-		/// 凤骨火云
-		/// </summary>
 		public const short WoodBlade5 = 602;
 
-		/// <summary>
-		/// 舍忧
-		/// </summary>
 		public const short WoodBlade6 = 603;
 
-		/// <summary>
-		/// 百胜刀
-		/// </summary>
 		public const short WoodBlade7 = 604;
 
-		/// <summary>
-		/// 蔽日刀
-		/// </summary>
 		public const short WoodBlade8 = 605;
 
-		/// <summary>
-		/// 青竹刀
-		/// </summary>
 		public const short BambooBlade0 = 606;
 
-		/// <summary>
-		/// 慈悲刀
-		/// </summary>
 		public const short BambooBlade1 = 607;
 
-		/// <summary>
-		/// 四象刀
-		/// </summary>
 		public const short BambooBlade2 = 608;
 
-		/// <summary>
-		/// 青犊刀
-		/// </summary>
 		public const short BambooBlade3 = 609;
 
-		/// <summary>
-		/// 七绝子母刀
-		/// </summary>
 		public const short BambooBlade4 = 610;
 
-		/// <summary>
-		/// 辟邪神木刀
-		/// </summary>
 		public const short BambooBlade5 = 611;
 
-		/// <summary>
-		/// 神术
-		/// </summary>
 		public const short BambooBlade6 = 612;
 
-		/// <summary>
-		/// 太一伏魔刀
-		/// </summary>
 		public const short BambooBlade7 = 613;
 
-		/// <summary>
-		/// 十方殊途
-		/// </summary>
 		public const short BambooBlade8 = 614;
 
-		/// <summary>
-		/// 铁扁担
-		/// </summary>
 		public const short IronPolearmA0 = 615;
 
-		/// <summary>
-		/// 浑铁棒
-		/// </summary>
 		public const short IronPolearmA1 = 616;
 
-		/// <summary>
-		/// 狼牙哨棍
-		/// </summary>
 		public const short IronPolearmA2 = 617;
 
-		/// <summary>
-		/// 四棱点钢棍
-		/// </summary>
 		public const short IronPolearmA3 = 618;
 
-		/// <summary>
-		/// 降龙棍
-		/// </summary>
 		public const short IronPolearmA4 = 619;
 
-		/// <summary>
-		/// 九曲盘龙棍
-		/// </summary>
 		public const short IronPolearmA5 = 620;
 
-		/// <summary>
-		/// 阴阳神铁棒
-		/// </summary>
 		public const short IronPolearmA6 = 621;
 
-		/// <summary>
-		/// 定穹
-		/// </summary>
 		public const short IronPolearmA7 = 622;
 
-		/// <summary>
-		/// 浑元玄铁棒
-		/// </summary>
 		public const short IronPolearmA8 = 623;
 
-		/// <summary>
-		/// 浑铁枪
-		/// </summary>
 		public const short IronPolearmB0 = 624;
 
-		/// <summary>
-		/// 芦叶枪
-		/// </summary>
 		public const short IronPolearmB1 = 625;
 
-		/// <summary>
-		/// 太宁笔枪
-		/// </summary>
 		public const short IronPolearmB2 = 626;
 
-		/// <summary>
-		/// 贯甲三尖枪
-		/// </summary>
 		public const short IronPolearmB3 = 627;
 
-		/// <summary>
-		/// 丈八蛇矛
-		/// </summary>
 		public const short IronPolearmB4 = 628;
 
-		/// <summary>
-		/// 虎头湛金枪
-		/// </summary>
 		public const short IronPolearmB5 = 629;
 
-		/// <summary>
-		/// 乌青蟠龙枪
-		/// </summary>
 		public const short IronPolearmB6 = 630;
 
-		/// <summary>
-		/// 霸王枪
-		/// </summary>
 		public const short IronPolearmB7 = 631;
 
-		/// <summary>
-		/// 万人敌
-		/// </summary>
 		public const short IronPolearmB8 = 632;
 
-		/// <summary>
-		/// 元铜杖
-		/// </summary>
 		public const short CopperPolearmA0 = 633;
 
-		/// <summary>
-		/// 护法禅杖
-		/// </summary>
 		public const short CopperPolearmA1 = 634;
 
-		/// <summary>
-		/// 丧门杖
-		/// </summary>
 		public const short CopperPolearmA2 = 635;
 
-		/// <summary>
-		/// 伏虎杖
-		/// </summary>
 		public const short CopperPolearmA3 = 636;
 
-		/// <summary>
-		/// 赤鬼杖
-		/// </summary>
 		public const short CopperPolearmA4 = 637;
 
-		/// <summary>
-		/// 震岳山河杖
-		/// </summary>
 		public const short CopperPolearmA5 = 638;
 
-		/// <summary>
-		/// 通天杖
-		/// </summary>
 		public const short CopperPolearmA6 = 639;
 
-		/// <summary>
-		/// 架海神杖
-		/// </summary>
 		public const short CopperPolearmA7 = 640;
 
-		/// <summary>
-		/// 囚龙柱
-		/// </summary>
 		public const short CopperPolearmA8 = 641;
 
-		/// <summary>
-		/// 虎牙枪
-		/// </summary>
 		public const short CopperPolearmB0 = 642;
 
-		/// <summary>
-		/// 雁翅枪
-		/// </summary>
 		public const short CopperPolearmB1 = 643;
 
-		/// <summary>
-		/// 凤嘴梨花枪
-		/// </summary>
 		public const short CopperPolearmB2 = 644;
 
-		/// <summary>
-		/// 六合吐金枪
-		/// </summary>
 		public const short CopperPolearmB3 = 645;
 
-		/// <summary>
-		/// 五花提卢枪
-		/// </summary>
 		public const short CopperPolearmB4 = 646;
 
-		/// <summary>
-		/// 龙胆枪
-		/// </summary>
 		public const short CopperPolearmB5 = 647;
 
-		/// <summary>
-		/// 八宝方天戟
-		/// </summary>
 		public const short CopperPolearmB6 = 648;
 
-		/// <summary>
-		/// 沥泉枪
-		/// </summary>
 		public const short CopperPolearmB7 = 649;
 
-		/// <summary>
-		/// 四海神光
-		/// </summary>
 		public const short CopperPolearmB8 = 650;
 
-		/// <summary>
-		/// 丈五石尺
-		/// </summary>
 		public const short StonePolearm0 = 651;
 
-		/// <summary>
-		/// 宝石棒
-		/// </summary>
 		public const short StonePolearm1 = 652;
 
-		/// <summary>
-		/// 萤飞棍
-		/// </summary>
 		public const short StonePolearm2 = 653;
 
-		/// <summary>
-		/// 天河棍
-		/// </summary>
 		public const short StonePolearm3 = 654;
 
-		/// <summary>
-		/// 摩天棍
-		/// </summary>
 		public const short StonePolearm4 = 655;
 
-		/// <summary>
-		/// 金睛玄虎棒
-		/// </summary>
 		public const short StonePolearm5 = 656;
 
-		/// <summary>
-		/// 禅台玄柱
-		/// </summary>
 		public const short StonePolearm6 = 657;
 
-		/// <summary>
-		/// 独角黄龙
-		/// </summary>
 		public const short StonePolearm7 = 658;
 
-		/// <summary>
-		/// 神照尺
-		/// </summary>
 		public const short StonePolearm8 = 659;
 
-		/// <summary>
-		/// 水玉杖
-		/// </summary>
 		public const short JadePolearm0 = 660;
 
-		/// <summary>
-		/// 点翠连珠杖
-		/// </summary>
 		public const short JadePolearm1 = 661;
 
-		/// <summary>
-		/// 兽钮玉杖
-		/// </summary>
 		public const short JadePolearm2 = 662;
 
-		/// <summary>
-		/// 一品杖
-		/// </summary>
 		public const short JadePolearm3 = 663;
 
-		/// <summary>
-		/// 宝象禅杖
-		/// </summary>
 		public const short JadePolearm4 = 664;
 
-		/// <summary>
-		/// 麒麟杖
-		/// </summary>
 		public const short JadePolearm5 = 665;
 
-		/// <summary>
-		/// 蓬莱尺
-		/// </summary>
 		public const short JadePolearm6 = 666;
 
-		/// <summary>
-		/// 璃光宝树
-		/// </summary>
 		public const short JadePolearm7 = 667;
 
-		/// <summary>
-		/// 仙窍杖
-		/// </summary>
 		public const short JadePolearm8 = 668;
 
-		/// <summary>
-		/// 烧火棍
-		/// </summary>
 		public const short WoodPolearmA0 = 669;
 
-		/// <summary>
-		/// 齐眉棍
-		/// </summary>
 		public const short WoodPolearmA1 = 670;
 
-		/// <summary>
-		/// 水火五行棍
-		/// </summary>
 		public const short WoodPolearmA2 = 671;
 
-		/// <summary>
-		/// 连珠飞棍
-		/// </summary>
 		public const short WoodPolearmA3 = 672;
 
-		/// <summary>
-		/// 扫霞棍
-		/// </summary>
 		public const short WoodPolearmA4 = 673;
 
-		/// <summary>
-		/// 嗔痴棍
-		/// </summary>
 		public const short WoodPolearmA5 = 674;
 
-		/// <summary>
-		/// 赤梢疯魔棍
-		/// </summary>
 		public const short WoodPolearmA6 = 675;
 
-		/// <summary>
-		/// 神影八卦棍
-		/// </summary>
 		public const short WoodPolearmA7 = 676;
 
-		/// <summary>
-		/// 达摩棍
-		/// </summary>
 		public const short WoodPolearmA8 = 677;
 
-		/// <summary>
-		/// 苦修杖
-		/// </summary>
 		public const short WoodPolearmB0 = 678;
 
-		/// <summary>
-		/// 罗汉杖
-		/// </summary>
 		public const short WoodPolearmB1 = 679;
 
-		/// <summary>
-		/// 戒杀杖
-		/// </summary>
 		public const short WoodPolearmB2 = 680;
 
-		/// <summary>
-		/// 诤灭禅杖
-		/// </summary>
 		public const short WoodPolearmB3 = 681;
 
-		/// <summary>
-		/// 八荒杖
-		/// </summary>
 		public const short WoodPolearmB4 = 682;
 
-		/// <summary>
-		/// 遁龙杖
-		/// </summary>
 		public const short WoodPolearmB5 = 683;
 
-		/// <summary>
-		/// 摩诃妙谛
-		/// </summary>
 		public const short WoodPolearmB6 = 684;
 
-		/// <summary>
-		/// 黑天浮屠
-		/// </summary>
 		public const short WoodPolearmB7 = 685;
 
-		/// <summary>
-		/// 盘古柱
-		/// </summary>
 		public const short WoodPolearmB8 = 686;
 
-		/// <summary>
-		/// 驱蛇棒
-		/// </summary>
 		public const short BambooPolearmA0 = 687;
 
-		/// <summary>
-		/// 扫尘棍
-		/// </summary>
 		public const short BambooPolearmA1 = 688;
 
-		/// <summary>
-		/// 盘花软棍
-		/// </summary>
 		public const short BambooPolearmA2 = 689;
 
-		/// <summary>
-		/// 七结蛇棒
-		/// </summary>
 		public const short BambooPolearmA3 = 690;
 
-		/// <summary>
-		/// 灵猿棍
-		/// </summary>
 		public const short BambooPolearmA4 = 691;
 
-		/// <summary>
-		/// 青眼鬼头棒
-		/// </summary>
 		public const short BambooPolearmA5 = 692;
 
-		/// <summary>
-		/// 玲珑鹿头棒
-		/// </summary>
 		public const short BambooPolearmA6 = 693;
 
-		/// <summary>
-		/// 天机棍
-		/// </summary>
 		public const short BambooPolearmA7 = 694;
 
-		/// <summary>
-		/// 紫竹心灯
-		/// </summary>
 		public const short BambooPolearmA8 = 695;
 
-		/// <summary>
-		/// 青竹杖
-		/// </summary>
 		public const short BambooPolearmB0 = 696;
 
-		/// <summary>
-		/// 礼佛杖
-		/// </summary>
 		public const short BambooPolearmB1 = 697;
 
-		/// <summary>
-		/// 飞烟杖
-		/// </summary>
 		public const short BambooPolearmB2 = 698;
 
-		/// <summary>
-		/// 慈航禅杖
-		/// </summary>
 		public const short BambooPolearmB3 = 699;
 
-		/// <summary>
-		/// 菩提杖
-		/// </summary>
 		public const short BambooPolearmB4 = 700;
 
-		/// <summary>
-		/// 潜龙杖
-		/// </summary>
 		public const short BambooPolearmB5 = 701;
 
-		/// <summary>
-		/// 净土自在
-		/// </summary>
 		public const short BambooPolearmB6 = 702;
 
-		/// <summary>
-		/// 十法界杖
-		/// </summary>
 		public const short BambooPolearmB7 = 703;
 
-		/// <summary>
-		/// 化世杖
-		/// </summary>
 		public const short BambooPolearmB8 = 704;
 
-		/// <summary>
-		/// 铁琴
-		/// </summary>
 		public const short IronZither0 = 705;
 
-		/// <summary>
-		/// 破虏琴
-		/// </summary>
 		public const short IronZither1 = 706;
 
-		/// <summary>
-		/// 鹏翅琴
-		/// </summary>
 		public const short IronZither2 = 707;
 
-		/// <summary>
-		/// 如山令
-		/// </summary>
 		public const short IronZither3 = 708;
 
-		/// <summary>
-		/// 七弦铁门闩
-		/// </summary>
 		public const short IronZither4 = 709;
 
-		/// <summary>
-		/// 老龙枕
-		/// </summary>
 		public const short IronZither5 = 710;
 
-		/// <summary>
-		/// 八荒萧杀
-		/// </summary>
 		public const short IronZither6 = 711;
 
-		/// <summary>
-		/// 镇狱碑
-		/// </summary>
 		public const short IronZither7 = 712;
 
-		/// <summary>
-		/// 玄妃
-		/// </summary>
 		public const short IronZither8 = 713;
 
-		/// <summary>
-		/// 黄斑琴
-		/// </summary>
 		public const short CopperZither0 = 714;
 
-		/// <summary>
-		/// 冷月琴
-		/// </summary>
 		public const short CopperZither1 = 715;
 
-		/// <summary>
-		/// 镜影琴
-		/// </summary>
 		public const short CopperZither2 = 716;
 
-		/// <summary>
-		/// 敛骨匣
-		/// </summary>
 		public const short CopperZither3 = 717;
 
-		/// <summary>
-		/// 鬼壶琴
-		/// </summary>
 		public const short CopperZither4 = 718;
 
-		/// <summary>
-		/// 天王如意琴
-		/// </summary>
 		public const short CopperZither5 = 719;
 
-		/// <summary>
-		/// 金麟雪
-		/// </summary>
 		public const short CopperZither6 = 720;
 
-		/// <summary>
-		/// 十罗刹
-		/// </summary>
 		public const short CopperZither7 = 721;
 
-		/// <summary>
-		/// 金魁泰斗
-		/// </summary>
 		public const short CopperZither8 = 722;
 
-		/// <summary>
-		/// 乌徽琴
-		/// </summary>
 		public const short StoneZither0 = 723;
 
-		/// <summary>
-		/// 春雷琴
-		/// </summary>
 		public const short StoneZither1 = 724;
 
-		/// <summary>
-		/// 文武七弦琴
-		/// </summary>
 		public const short StoneZither2 = 725;
 
-		/// <summary>
-		/// 残夜琴
-		/// </summary>
 		public const short StoneZither3 = 726;
 
-		/// <summary>
-		/// 鬼眼五弦琴
-		/// </summary>
 		public const short StoneZither4 = 727;
 
-		/// <summary>
-		/// 绕梁琴
-		/// </summary>
 		public const short StoneZither5 = 728;
 
-		/// <summary>
-		/// 清角
-		/// </summary>
 		public const short StoneZither6 = 729;
 
-		/// <summary>
-		/// 百光陆离
-		/// </summary>
 		public const short StoneZither7 = 730;
 
-		/// <summary>
-		/// 求凰
-		/// </summary>
 		public const short StoneZither8 = 731;
 
-		/// <summary>
-		/// 晶玉瑶琴
-		/// </summary>
 		public const short JadeZither0 = 732;
 
-		/// <summary>
-		/// 琼响琴
-		/// </summary>
 		public const short JadeZither1 = 733;
 
-		/// <summary>
-		/// 素娥琴
-		/// </summary>
 		public const short JadeZither2 = 734;
 
-		/// <summary>
-		/// 玉壶琴
-		/// </summary>
 		public const short JadeZither3 = 735;
 
-		/// <summary>
-		/// 天光余韵
-		/// </summary>
 		public const short JadeZither4 = 736;
 
-		/// <summary>
-		/// 号钟琴
-		/// </summary>
 		public const short JadeZither5 = 737;
 
-		/// <summary>
-		/// 玉玲珑
-		/// </summary>
 		public const short JadeZither6 = 738;
 
-		/// <summary>
-		/// 瑶台寒玉琴
-		/// </summary>
 		public const short JadeZither7 = 739;
 
-		/// <summary>
-		/// 神骇
-		/// </summary>
 		public const short JadeZither8 = 740;
 
-		/// <summary>
-		/// 百衲琴
-		/// </summary>
 		public const short WoodZither0 = 741;
 
-		/// <summary>
-		/// 铁客琴
-		/// </summary>
 		public const short WoodZither1 = 742;
 
-		/// <summary>
-		/// 冉香五弦琴
-		/// </summary>
 		public const short WoodZither2 = 743;
 
-		/// <summary>
-		/// 潜龙吟
-		/// </summary>
 		public const short WoodZither3 = 744;
 
-		/// <summary>
-		/// 太古遗音
-		/// </summary>
 		public const short WoodZither4 = 745;
 
-		/// <summary>
-		/// 焦尾琴
-		/// </summary>
 		public const short WoodZither5 = 746;
 
-		/// <summary>
-		/// 凤凰琴
-		/// </summary>
 		public const short WoodZither6 = 747;
 
-		/// <summary>
-		/// 洗凡
-		/// </summary>
 		public const short WoodZither7 = 748;
 
-		/// <summary>
-		/// 伏羲琴
-		/// </summary>
 		public const short WoodZither8 = 749;
 
-		/// <summary>
-		/// 清涧琴
-		/// </summary>
 		public const short BambooZither0 = 750;
 
-		/// <summary>
-		/// 秋啸琴
-		/// </summary>
 		public const short BambooZither1 = 751;
 
-		/// <summary>
-		/// 蛇腹文琴
-		/// </summary>
 		public const short BambooZither2 = 752;
 
-		/// <summary>
-		/// 响泉琴
-		/// </summary>
 		public const short BambooZither3 = 753;
 
-		/// <summary>
-		/// 独幽琴
-		/// </summary>
 		public const short BambooZither4 = 754;
 
-		/// <summary>
-		/// 绿绮琴
-		/// </summary>
 		public const short BambooZither5 = 755;
 
-		/// <summary>
-		/// 九霄环佩
-		/// </summary>
 		public const short BambooZither6 = 756;
 
-		/// <summary>
-		/// 清绝
-		/// </summary>
 		public const short BambooZither7 = 757;
 
-		/// <summary>
-		/// 希声
-		/// </summary>
 		public const short BambooZither8 = 758;
 
-		/// <summary>
-		/// 白云展
-		/// </summary>
 		public const short WoodWhisk0 = 759;
 
-		/// <summary>
-		/// 风生扫
-		/// </summary>
 		public const short WoodWhisk1 = 760;
 
-		/// <summary>
-		/// 仙云鹤翼尘
-		/// </summary>
 		public const short WoodWhisk2 = 761;
 
-		/// <summary>
-		/// 纯阳云展
-		/// </summary>
 		public const short WoodWhisk3 = 762;
 
-		/// <summary>
-		/// 天罡拂尘
-		/// </summary>
 		public const short WoodWhisk4 = 763;
 
-		/// <summary>
-		/// 日月龙虎尘
-		/// </summary>
 		public const short WoodWhisk5 = 764;
 
-		/// <summary>
-		/// 紫气霞光
-		/// </summary>
 		public const short WoodWhisk6 = 765;
 
-		/// <summary>
-		/// 太乙拂尘
-		/// </summary>
 		public const short WoodWhisk7 = 766;
 
-		/// <summary>
-		/// 三花宝拂尘
-		/// </summary>
 		public const short WoodWhisk8 = 767;
 
-		/// <summary>
-		/// 静禅扫
-		/// </summary>
 		public const short BambooWhisk0 = 768;
 
-		/// <summary>
-		/// 八卦葫芦尘
-		/// </summary>
 		public const short BambooWhisk1 = 769;
 
-		/// <summary>
-		/// 灵宝拂尘
-		/// </summary>
 		public const short BambooWhisk2 = 770;
 
-		/// <summary>
-		/// 四象和合尘
-		/// </summary>
 		public const short BambooWhisk3 = 771;
 
-		/// <summary>
-		/// 去烦恼
-		/// </summary>
 		public const short BambooWhisk4 = 772;
 
-		/// <summary>
-		/// 无漏尘
-		/// </summary>
 		public const short BambooWhisk5 = 773;
 
-		/// <summary>
-		/// 太清拂尘
-		/// </summary>
 		public const short BambooWhisk6 = 774;
 
-		/// <summary>
-		/// 玄虚妙旨
-		/// </summary>
 		public const short BambooWhisk7 = 775;
 
-		/// <summary>
-		/// 混无极
-		/// </summary>
 		public const short BambooWhisk8 = 776;
 
-		/// <summary>
-		/// 黄云展
-		/// </summary>
 		public const short ClothWhisk0 = 777;
 
-		/// <summary>
-		/// 清鬃葫芦尘
-		/// </summary>
 		public const short ClothWhisk1 = 778;
 
-		/// <summary>
-		/// 三宝两仪尘
-		/// </summary>
 		public const short ClothWhisk2 = 779;
 
-		/// <summary>
-		/// 宝殿云展
-		/// </summary>
 		public const short ClothWhisk3 = 780;
 
-		/// <summary>
-		/// 长生尘
-		/// </summary>
 		public const short ClothWhisk4 = 781;
 
-		/// <summary>
-		/// 太虚逍遥尘
-		/// </summary>
 		public const short ClothWhisk5 = 782;
 
-		/// <summary>
-		/// 苍龙尾
-		/// </summary>
 		public const short ClothWhisk6 = 783;
 
-		/// <summary>
-		/// 太公拂尘
-		/// </summary>
 		public const short ClothWhisk7 = 784;
 
-		/// <summary>
-		/// 三清天
-		/// </summary>
 		public const short ClothWhisk8 = 785;
 
-		/// <summary>
-		/// 云游拂尘
-		/// </summary>
 		public const short SilkWhisk0 = 786;
 
-		/// <summary>
-		/// 龟蛇扫
-		/// </summary>
 		public const short SilkWhisk1 = 787;
 
-		/// <summary>
-		/// 真师拂尘
-		/// </summary>
 		public const short SilkWhisk2 = 788;
 
-		/// <summary>
-		/// 净世观音尘
-		/// </summary>
 		public const short SilkWhisk3 = 789;
 
-		/// <summary>
-		/// 老君拂尘
-		/// </summary>
 		public const short SilkWhisk4 = 790;
 
-		/// <summary>
-		/// 扫乾坤
-		/// </summary>
 		public const short SilkWhisk5 = 791;
 
-		/// <summary>
-		/// 浑元拂尘
-		/// </summary>
 		public const short SilkWhisk6 = 792;
 
-		/// <summary>
-		/// 吕祖拂尘
-		/// </summary>
 		public const short SilkWhisk7 = 793;
 
-		/// <summary>
-		/// 太玄华发
-		/// </summary>
 		public const short SilkWhisk8 = 794;
 
-		/// <summary>
-		/// 七节鞭
-		/// </summary>
 		public const short WoodWhip0 = 795;
 
-		/// <summary>
-		/// 刑戮鞭
-		/// </summary>
 		public const short WoodWhip1 = 796;
 
-		/// <summary>
-		/// 飞蜈鞭
-		/// </summary>
 		public const short WoodWhip2 = 797;
 
-		/// <summary>
-		/// 血绞长鞭
-		/// </summary>
 		public const short WoodWhip3 = 798;
 
-		/// <summary>
-		/// 罗刹娑
-		/// </summary>
 		public const short WoodWhip4 = 799;
 
-		/// <summary>
-		/// 奇狂索
-		/// </summary>
 		public const short WoodWhip5 = 800;
 
-		/// <summary>
-		/// 句芒索
-		/// </summary>
 		public const short WoodWhip6 = 801;
 
-		/// <summary>
-		/// 龙骨神木鞭
-		/// </summary>
 		public const short WoodWhip7 = 802;
 
-		/// <summary>
-		/// 玄蛇索
-		/// </summary>
 		public const short WoodWhip8 = 803;
 
-		/// <summary>
-		/// 竹节索
-		/// </summary>
 		public const short BambooWhip0 = 804;
 
-		/// <summary>
-		/// 荆棘软鞭
-		/// </summary>
 		public const short BambooWhip1 = 805;
 
-		/// <summary>
-		/// 青蟒鞭
-		/// </summary>
 		public const short BambooWhip2 = 806;
 
-		/// <summary>
-		/// 连环百节鞭
-		/// </summary>
 		public const short BambooWhip3 = 807;
 
-		/// <summary>
-		/// 鬼蝠黑索
-		/// </summary>
 		public const short BambooWhip4 = 808;
 
-		/// <summary>
-		/// 如影随行
-		/// </summary>
 		public const short BambooWhip5 = 809;
 
-		/// <summary>
-		/// 桃仙索
-		/// </summary>
 		public const short BambooWhip6 = 810;
 
-		/// <summary>
-		/// 缚龙索
-		/// </summary>
 		public const short BambooWhip7 = 811;
 
-		/// <summary>
-		/// 青蛛紫螟
-		/// </summary>
 		public const short BambooWhip8 = 812;
 
-		/// <summary>
-		/// 虎皮长鞭
-		/// </summary>
 		public const short ClothWhip0 = 813;
 
-		/// <summary>
-		/// 紫梢鞭
-		/// </summary>
 		public const short ClothWhip1 = 814;
 
-		/// <summary>
-		/// 兽王鞭
-		/// </summary>
 		public const short ClothWhip2 = 815;
 
-		/// <summary>
-		/// 九夷长鞭
-		/// </summary>
 		public const short ClothWhip3 = 816;
 
-		/// <summary>
-		/// 鬼咆鞭
-		/// </summary>
 		public const short ClothWhip4 = 817;
 
-		/// <summary>
-		/// 白景缠金索
-		/// </summary>
 		public const short ClothWhip5 = 818;
 
-		/// <summary>
-		/// 凤翎神火鞭
-		/// </summary>
 		public const short ClothWhip6 = 819;
 
-		/// <summary>
-		/// 金蛇鞭
-		/// </summary>
 		public const short ClothWhip7 = 820;
 
-		/// <summary>
-		/// 金蝉索
-		/// </summary>
 		public const short ClothWhip8 = 821;
 
-		/// <summary>
-		/// 蜡梢黄鞭
-		/// </summary>
 		public const short SilkWhip0 = 822;
 
-		/// <summary>
-		/// 曲尘索
-		/// </summary>
 		public const short SilkWhip1 = 823;
 
-		/// <summary>
-		/// 花衣索
-		/// </summary>
 		public const short SilkWhip2 = 824;
 
-		/// <summary>
-		/// 长虹索
-		/// </summary>
 		public const short SilkWhip3 = 825;
 
-		/// <summary>
-		/// 错金龙梢鞭
-		/// </summary>
 		public const short SilkWhip4 = 826;
 
-		/// <summary>
-		/// 火树银花
-		/// </summary>
 		public const short SilkWhip5 = 827;
 
-		/// <summary>
-		/// 五方天帝索
-		/// </summary>
 		public const short SilkWhip6 = 828;
 
-		/// <summary>
-		/// 雾幻琼索
-		/// </summary>
 		public const short SilkWhip7 = 829;
 
-		/// <summary>
-		/// 天蚕索
-		/// </summary>
 		public const short SilkWhip8 = 830;
 
-		/// <summary>
-		/// 伏虞剑
-		/// </summary>
 		public const short FuyuSword = 839;
 
-		/// <summary>
-		/// 莫女衣-近距
-		/// </summary>
 		public const short MonvA = 840;
 
-		/// <summary>
-		/// 伏邪铁-近距
-		/// </summary>
 		public const short DayueYaochangA = 841;
 
-		/// <summary>
-		/// 大玄凝-近距
-		/// </summary>
 		public const short JiuhanA = 842;
 
-		/// <summary>
-		/// 凤凰茧-近距
-		/// </summary>
 		public const short JinHuangerA = 843;
 
-		/// <summary>
-		/// 焚神炼-近距
-		/// </summary>
 		public const short YiYihouA = 844;
 
-		/// <summary>
-		/// 解龙魄-近距
-		/// </summary>
 		public const short WeiQiA = 845;
 
-		/// <summary>
-		/// 溶尘隐-近距
-		/// </summary>
 		public const short YixiangA = 846;
 
-		/// <summary>
-		/// 囚魔木-近距
-		/// </summary>
 		public const short XuefengA = 847;
 
-		/// <summary>
-		/// 鬼神霞-近距
-		/// </summary>
 		public const short ShuFangA = 848;
 
-		/// <summary>
-		/// 伏虞剑-近距
-		/// </summary>
 		public const short XiangshuA = 849;
 
-		/// <summary>
-		/// 语茯花-近距
-		/// </summary>
 		public const short YufuA = 850;
 
-		/// <summary>
-		/// 紫竹灵-近距
-		/// </summary>
 		public const short ZiwushaoA = 851;
 
-		/// <summary>
-		/// 莫女衣-中距
-		/// </summary>
 		public const short MonvB = 852;
 
-		/// <summary>
-		/// 伏邪铁-中距
-		/// </summary>
 		public const short DayueYaochangB = 853;
 
-		/// <summary>
-		/// 大玄凝-中距
-		/// </summary>
 		public const short JiuhanB = 854;
 
-		/// <summary>
-		/// 凤凰茧-中距
-		/// </summary>
 		public const short JinHuangerB = 855;
 
-		/// <summary>
-		/// 焚神炼-中距
-		/// </summary>
 		public const short YiYihouB = 856;
 
-		/// <summary>
-		/// 解龙魄-中距
-		/// </summary>
 		public const short WeiQiB = 857;
 
-		/// <summary>
-		/// 溶尘隐-中距
-		/// </summary>
 		public const short YixiangB = 858;
 
-		/// <summary>
-		/// 囚魔木-中距
-		/// </summary>
 		public const short XuefengB = 859;
 
-		/// <summary>
-		/// 鬼神霞-中距
-		/// </summary>
 		public const short ShuFangB = 860;
 
-		/// <summary>
-		/// 伏虞剑-中距
-		/// </summary>
 		public const short XiangshuB = 861;
 
-		/// <summary>
-		/// 语茯花-中距
-		/// </summary>
 		public const short YufuB = 862;
 
-		/// <summary>
-		/// 紫竹灵-中距
-		/// </summary>
 		public const short ZiwushaoB = 863;
 
-		/// <summary>
-		/// 莫女衣-远距
-		/// </summary>
 		public const short MonvC = 864;
 
-		/// <summary>
-		/// 伏邪铁-远距
-		/// </summary>
 		public const short DayueYaochangC = 865;
 
-		/// <summary>
-		/// 大玄凝-远距
-		/// </summary>
 		public const short JiuhanC = 866;
 
-		/// <summary>
-		/// 凤凰茧-远距
-		/// </summary>
 		public const short JinHuangerC = 867;
 
-		/// <summary>
-		/// 焚神炼-远距
-		/// </summary>
 		public const short YiYihouC = 868;
 
-		/// <summary>
-		/// 解龙魄-远距
-		/// </summary>
 		public const short WeiQiC = 869;
 
-		/// <summary>
-		/// 溶尘隐-远距
-		/// </summary>
 		public const short YixiangC = 870;
 
-		/// <summary>
-		/// 囚魔木-远距
-		/// </summary>
 		public const short XuefengC = 871;
 
-		/// <summary>
-		/// 鬼神霞-远距
-		/// </summary>
 		public const short ShuFangC = 872;
 
-		/// <summary>
-		/// 伏虞剑-远距
-		/// </summary>
 		public const short XiangshuC = 873;
 
-		/// <summary>
-		/// 语茯花-远距
-		/// </summary>
 		public const short YufuC = 874;
 
-		/// <summary>
-		/// 紫竹灵-远距
-		/// </summary>
 		public const short ZiwushaoC = 875;
 
-		/// <summary>
-		/// 喉声
-		/// </summary>
 		public const short Voice = 884;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 空手
-		/// </summary>
 		public static WeaponItem EmptyHand => Instance[(short)0];
 
-		/// <summary>
-		/// 树枝
-		/// </summary>
 		public static WeaponItem Branch => Instance[(short)1];
 
-		/// <summary>
-		/// 石子
-		/// </summary>
 		public static WeaponItem Stone => Instance[(short)2];
 
-		/// <summary>
-		/// 灰黑药霜
-		/// </summary>
 		public static WeaponItem PoisonCream0 => Instance[(short)3];
 
-		/// <summary>
-		/// 月白药霜
-		/// </summary>
 		public static WeaponItem PoisonCream1 => Instance[(short)4];
 
-		/// <summary>
-		/// 翠绿药霜
-		/// </summary>
 		public static WeaponItem PoisonCream2 => Instance[(short)5];
 
-		/// <summary>
-		/// 靛蓝药霜
-		/// </summary>
 		public static WeaponItem PoisonCream3 => Instance[(short)6];
 
-		/// <summary>
-		/// 天青药霜
-		/// </summary>
 		public static WeaponItem PoisonCream4 => Instance[(short)7];
 
-		/// <summary>
-		/// 霞紫药霜
-		/// </summary>
 		public static WeaponItem PoisonCream5 => Instance[(short)8];
 
-		/// <summary>
-		/// 金黄药霜
-		/// </summary>
 		public static WeaponItem PoisonCream6 => Instance[(short)9];
 
-		/// <summary>
-		/// 琥珀药霜
-		/// </summary>
 		public static WeaponItem PoisonCream7 => Instance[(short)10];
 
-		/// <summary>
-		/// 赤血药霜
-		/// </summary>
 		public static WeaponItem PoisonCream8 => Instance[(short)11];
 
-		/// <summary>
-		/// 灰黑毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand0 => Instance[(short)12];
 
-		/// <summary>
-		/// 月白毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand1 => Instance[(short)13];
 
-		/// <summary>
-		/// 翠绿毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand2 => Instance[(short)14];
 
-		/// <summary>
-		/// 靛蓝毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand3 => Instance[(short)15];
 
-		/// <summary>
-		/// 天青毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand4 => Instance[(short)16];
 
-		/// <summary>
-		/// 霞紫毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand5 => Instance[(short)17];
 
-		/// <summary>
-		/// 金黄毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand6 => Instance[(short)18];
 
-		/// <summary>
-		/// 琥珀毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand7 => Instance[(short)19];
 
-		/// <summary>
-		/// 赤血毒砂
-		/// </summary>
 		public static WeaponItem PoisonSand8 => Instance[(short)20];
 
-		/// <summary>
-		/// 灰黑铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier0 => Instance[(short)21];
 
-		/// <summary>
-		/// 月白铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier1 => Instance[(short)22];
 
-		/// <summary>
-		/// 翠绿铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier2 => Instance[(short)23];
 
-		/// <summary>
-		/// 靛蓝铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier3 => Instance[(short)24];
 
-		/// <summary>
-		/// 天青铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier4 => Instance[(short)25];
 
-		/// <summary>
-		/// 霞紫铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier5 => Instance[(short)26];
 
-		/// <summary>
-		/// 金黄铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier6 => Instance[(short)27];
 
-		/// <summary>
-		/// 琥珀铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier7 => Instance[(short)28];
 
-		/// <summary>
-		/// 赤血铁鹞
-		/// </summary>
 		public static WeaponItem IronHarrier8 => Instance[(short)29];
 
-		/// <summary>
-		/// 灰黑木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier0 => Instance[(short)30];
 
-		/// <summary>
-		/// 月白木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier1 => Instance[(short)31];
 
-		/// <summary>
-		/// 翠绿木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier2 => Instance[(short)32];
 
-		/// <summary>
-		/// 靛蓝木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier3 => Instance[(short)33];
 
-		/// <summary>
-		/// 天青木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier4 => Instance[(short)34];
 
-		/// <summary>
-		/// 霞紫木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier5 => Instance[(short)35];
 
-		/// <summary>
-		/// 金黄木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier6 => Instance[(short)36];
 
-		/// <summary>
-		/// 琥珀木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier7 => Instance[(short)37];
 
-		/// <summary>
-		/// 赤血木鹞
-		/// </summary>
 		public static WeaponItem WoodHarrier8 => Instance[(short)38];
 
-		/// <summary>
-		/// 灰黑令
-		/// </summary>
 		public static WeaponItem JadeToken0 => Instance[(short)39];
 
-		/// <summary>
-		/// 月白令
-		/// </summary>
 		public static WeaponItem JadeToken1 => Instance[(short)40];
 
-		/// <summary>
-		/// 翠绿令
-		/// </summary>
 		public static WeaponItem JadeToken2 => Instance[(short)41];
 
-		/// <summary>
-		/// 靛蓝令
-		/// </summary>
 		public static WeaponItem JadeToken3 => Instance[(short)42];
 
-		/// <summary>
-		/// 天青令
-		/// </summary>
 		public static WeaponItem JadeToken4 => Instance[(short)43];
 
-		/// <summary>
-		/// 霞紫令
-		/// </summary>
 		public static WeaponItem JadeToken5 => Instance[(short)44];
 
-		/// <summary>
-		/// 金黄令
-		/// </summary>
 		public static WeaponItem JadeToken6 => Instance[(short)45];
 
-		/// <summary>
-		/// 琥珀令
-		/// </summary>
 		public static WeaponItem JadeToken7 => Instance[(short)46];
 
-		/// <summary>
-		/// 赤血令
-		/// </summary>
 		public static WeaponItem JadeToken8 => Instance[(short)47];
 
-		/// <summary>
-		/// 灰黑符
-		/// </summary>
 		public static WeaponItem ClothAmulet0 => Instance[(short)48];
 
-		/// <summary>
-		/// 月白符
-		/// </summary>
 		public static WeaponItem ClothAmulet1 => Instance[(short)49];
 
-		/// <summary>
-		/// 翠绿符
-		/// </summary>
 		public static WeaponItem ClothAmulet2 => Instance[(short)50];
 
-		/// <summary>
-		/// 靛蓝符
-		/// </summary>
 		public static WeaponItem ClothAmulet3 => Instance[(short)51];
 
-		/// <summary>
-		/// 天青符
-		/// </summary>
 		public static WeaponItem ClothAmulet4 => Instance[(short)52];
 
-		/// <summary>
-		/// 霞紫符
-		/// </summary>
 		public static WeaponItem ClothAmulet5 => Instance[(short)53];
 
-		/// <summary>
-		/// 金黄符
-		/// </summary>
 		public static WeaponItem ClothAmulet6 => Instance[(short)54];
 
-		/// <summary>
-		/// 琥珀符
-		/// </summary>
 		public static WeaponItem ClothAmulet7 => Instance[(short)55];
 
-		/// <summary>
-		/// 赤血符
-		/// </summary>
 		public static WeaponItem ClothAmulet8 => Instance[(short)56];
 
-		/// <summary>
-		/// 铁针匣
-		/// </summary>
 		public static WeaponItem IronNeedleBox0 => Instance[(short)57];
 
-		/// <summary>
-		/// 蝎尾针匣
-		/// </summary>
 		public static WeaponItem IronNeedleBox1 => Instance[(short)58];
 
-		/// <summary>
-		/// 破血针匣
-		/// </summary>
 		public static WeaponItem IronNeedleBox2 => Instance[(short)59];
 
-		/// <summary>
-		/// 白虎煞
-		/// </summary>
 		public static WeaponItem IronNeedleBox3 => Instance[(short)60];
 
-		/// <summary>
-		/// 蛟须匣
-		/// </summary>
 		public static WeaponItem IronNeedleBox4 => Instance[(short)61];
 
-		/// <summary>
-		/// 黑铁针匣
-		/// </summary>
 		public static WeaponItem IronNeedleBox5 => Instance[(short)62];
 
-		/// <summary>
-		/// 五邪针匣
-		/// </summary>
 		public static WeaponItem IronNeedleBox6 => Instance[(short)63];
 
-		/// <summary>
-		/// 碧霄宝匣
-		/// </summary>
 		public static WeaponItem IronNeedleBox7 => Instance[(short)64];
 
-		/// <summary>
-		/// 生死乱
-		/// </summary>
 		public static WeaponItem IronNeedleBox8 => Instance[(short)65];
 
-		/// <summary>
-		/// 铜针匣
-		/// </summary>
 		public static WeaponItem CopperNeedleBox0 => Instance[(short)66];
 
-		/// <summary>
-		/// 烂银针匣
-		/// </summary>
 		public static WeaponItem CopperNeedleBox1 => Instance[(short)67];
 
-		/// <summary>
-		/// 芙蓉针匣
-		/// </summary>
 		public static WeaponItem CopperNeedleBox2 => Instance[(short)68];
 
-		/// <summary>
-		/// 三色绞
-		/// </summary>
 		public static WeaponItem CopperNeedleBox3 => Instance[(short)69];
 
-		/// <summary>
-		/// 金英华须
-		/// </summary>
 		public static WeaponItem CopperNeedleBox4 => Instance[(short)70];
 
-		/// <summary>
-		/// 丧乱匣
-		/// </summary>
 		public static WeaponItem CopperNeedleBox5 => Instance[(short)71];
 
-		/// <summary>
-		/// 逆元匣
-		/// </summary>
 		public static WeaponItem CopperNeedleBox6 => Instance[(short)72];
 
-		/// <summary>
-		/// 阴阳乱
-		/// </summary>
 		public static WeaponItem CopperNeedleBox7 => Instance[(short)73];
 
-		/// <summary>
-		/// 金弦乱
-		/// </summary>
 		public static WeaponItem CopperNeedleBox8 => Instance[(short)74];
 
-		/// <summary>
-		/// 玛瑙针匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox0 => Instance[(short)75];
 
-		/// <summary>
-		/// 红琳针匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox1 => Instance[(short)76];
 
-		/// <summary>
-		/// 乱萤匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox2 => Instance[(short)77];
 
-		/// <summary>
-		/// 鬼焰匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox3 => Instance[(short)78];
 
-		/// <summary>
-		/// 摄元匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox4 => Instance[(short)79];
 
-		/// <summary>
-		/// 七星针匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox5 => Instance[(short)80];
 
-		/// <summary>
-		/// 九灵辟邪匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox6 => Instance[(short)81];
 
-		/// <summary>
-		/// 照夜宝匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox7 => Instance[(short)82];
 
-		/// <summary>
-		/// 岐伯匣
-		/// </summary>
 		public static WeaponItem StoneNeedleBox8 => Instance[(short)83];
 
-		/// <summary>
-		/// 白露针匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox0 => Instance[(short)84];
 
-		/// <summary>
-		/// 碧玉三棱匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox1 => Instance[(short)85];
 
-		/// <summary>
-		/// 清影针匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox2 => Instance[(short)86];
 
-		/// <summary>
-		/// 璃锋宝匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox3 => Instance[(short)87];
 
-		/// <summary>
-		/// 血络引
-		/// </summary>
 		public static WeaponItem JadeNeedleBox4 => Instance[(short)88];
 
-		/// <summary>
-		/// 玉虬冰匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox5 => Instance[(short)89];
 
-		/// <summary>
-		/// 百疠辟易匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox6 => Instance[(short)90];
 
-		/// <summary>
-		/// 青女匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox7 => Instance[(short)91];
 
-		/// <summary>
-		/// 神定匣
-		/// </summary>
 		public static WeaponItem JadeNeedleBox8 => Instance[(short)92];
 
-		/// <summary>
-		/// 木针匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox0 => Instance[(short)93];
 
-		/// <summary>
-		/// 白芷针匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox1 => Instance[(short)94];
 
-		/// <summary>
-		/// 蜈蜂匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox2 => Instance[(short)95];
 
-		/// <summary>
-		/// 流火针匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox3 => Instance[(short)96];
 
-		/// <summary>
-		/// 血鸦匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox4 => Instance[(short)97];
 
-		/// <summary>
-		/// 独灵针匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox5 => Instance[(short)98];
 
-		/// <summary>
-		/// 朱华宝匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox6 => Instance[(short)99];
 
-		/// <summary>
-		/// 妄意匣
-		/// </summary>
 		public static WeaponItem WoodNeedleBox7 => Instance[(short)100];
 
-		/// <summary>
-		/// 乌烛心
-		/// </summary>
 		public static WeaponItem WoodNeedleBox8 => Instance[(short)101];
 
-		/// <summary>
-		/// 绿竹针匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox0 => Instance[(short)102];
 
-		/// <summary>
-		/// 三指匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox1 => Instance[(short)103];
 
-		/// <summary>
-		/// 素梅针匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox2 => Instance[(short)104];
 
-		/// <summary>
-		/// 蚊虻匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox3 => Instance[(short)105];
 
-		/// <summary>
-		/// 碧眼匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox4 => Instance[(short)106];
 
-		/// <summary>
-		/// 幽藏鬼须匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox5 => Instance[(short)107];
 
-		/// <summary>
-		/// 百解匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox6 => Instance[(short)108];
 
-		/// <summary>
-		/// 烟暝奇匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox7 => Instance[(short)109];
 
-		/// <summary>
-		/// 九曲神匣
-		/// </summary>
 		public static WeaponItem BambooNeedleBox8 => Instance[(short)110];
 
-		/// <summary>
-		/// 铁梭子
-		/// </summary>
 		public static WeaponItem IronThorn0 => Instance[(short)111];
 
-		/// <summary>
-		/// 点钢对刺
-		/// </summary>
 		public static WeaponItem IronThorn1 => Instance[(short)112];
 
-		/// <summary>
-		/// 分水娥眉刺
-		/// </summary>
 		public static WeaponItem IronThorn2 => Instance[(short)113];
 
-		/// <summary>
-		/// 梨花对刺
-		/// </summary>
 		public static WeaponItem IronThorn3 => Instance[(short)114];
 
-		/// <summary>
-		/// 八卦龙形刺
-		/// </summary>
 		public static WeaponItem IronThorn4 => Instance[(short)115];
 
-		/// <summary>
-		/// 乌磐刺
-		/// </summary>
 		public static WeaponItem IronThorn5 => Instance[(short)116];
 
-		/// <summary>
-		/// 无双神铁刺
-		/// </summary>
 		public static WeaponItem IronThorn6 => Instance[(short)117];
 
-		/// <summary>
-		/// 火炼麒麟刺
-		/// </summary>
 		public static WeaponItem IronThorn7 => Instance[(short)118];
 
-		/// <summary>
-		/// 魔罗刺
-		/// </summary>
 		public static WeaponItem IronThorn8 => Instance[(short)119];
 
-		/// <summary>
-		/// 三棱刺
-		/// </summary>
 		public static WeaponItem CopperThorn0 => Instance[(short)120];
 
-		/// <summary>
-		/// 朔风对刺
-		/// </summary>
 		public static WeaponItem CopperThorn1 => Instance[(short)121];
 
-		/// <summary>
-		/// 孤星刺
-		/// </summary>
 		public static WeaponItem CopperThorn2 => Instance[(short)122];
 
-		/// <summary>
-		/// 阴阳分水刺
-		/// </summary>
 		public static WeaponItem CopperThorn3 => Instance[(short)123];
 
-		/// <summary>
-		/// 紫金剔龙梭
-		/// </summary>
 		public static WeaponItem CopperThorn4 => Instance[(short)124];
 
-		/// <summary>
-		/// 日月梭
-		/// </summary>
 		public static WeaponItem CopperThorn5 => Instance[(short)125];
 
-		/// <summary>
-		/// 赤练白牙
-		/// </summary>
 		public static WeaponItem CopperThorn6 => Instance[(short)126];
 
-		/// <summary>
-		/// 八面戮仙刺
-		/// </summary>
 		public static WeaponItem CopperThorn7 => Instance[(short)127];
 
-		/// <summary>
-		/// 玄女梭
-		/// </summary>
 		public static WeaponItem CopperThorn8 => Instance[(short)128];
 
-		/// <summary>
-		/// 乌衣刺
-		/// </summary>
 		public static WeaponItem StoneThorn0 => Instance[(short)129];
 
-		/// <summary>
-		/// 红锋双梭
-		/// </summary>
 		public static WeaponItem StoneThorn1 => Instance[(short)130];
 
-		/// <summary>
-		/// 四象梭
-		/// </summary>
 		public static WeaponItem StoneThorn2 => Instance[(short)131];
 
-		/// <summary>
-		/// 分影对刺
-		/// </summary>
 		public static WeaponItem StoneThorn3 => Instance[(short)132];
 
-		/// <summary>
-		/// 穿空刺
-		/// </summary>
 		public static WeaponItem StoneThorn4 => Instance[(short)133];
 
-		/// <summary>
-		/// 黄龙刺
-		/// </summary>
 		public static WeaponItem StoneThorn5 => Instance[(short)134];
 
-		/// <summary>
-		/// 星女灵梭
-		/// </summary>
 		public static WeaponItem StoneThorn6 => Instance[(short)135];
 
-		/// <summary>
-		/// 浑天一对刺
-		/// </summary>
 		public static WeaponItem StoneThorn7 => Instance[(short)136];
 
-		/// <summary>
-		/// 云上仙姿
-		/// </summary>
 		public static WeaponItem StoneThorn8 => Instance[(short)137];
 
-		/// <summary>
-		/// 晶光刺
-		/// </summary>
 		public static WeaponItem JadeThorn0 => Instance[(short)138];
 
-		/// <summary>
-		/// 飞雪梭
-		/// </summary>
 		public static WeaponItem JadeThorn1 => Instance[(short)139];
 
-		/// <summary>
-		/// 青黄琼脂刺
-		/// </summary>
 		public static WeaponItem JadeThorn2 => Instance[(short)140];
 
-		/// <summary>
-		/// 无瑕对刺
-		/// </summary>
 		public static WeaponItem JadeThorn3 => Instance[(short)141];
 
-		/// <summary>
-		/// 鹿角白枝
-		/// </summary>
 		public static WeaponItem JadeThorn4 => Instance[(short)142];
 
-		/// <summary>
-		/// 幽独刺
-		/// </summary>
 		public static WeaponItem JadeThorn5 => Instance[(short)143];
 
-		/// <summary>
-		/// 玉清宝梭
-		/// </summary>
 		public static WeaponItem JadeThorn6 => Instance[(short)144];
 
-		/// <summary>
-		/// 莲华冰魄
-		/// </summary>
 		public static WeaponItem JadeThorn7 => Instance[(short)145];
 
-		/// <summary>
-		/// 天仙刺
-		/// </summary>
 		public static WeaponItem JadeThorn8 => Instance[(short)146];
 
-		/// <summary>
-		/// 木对刺
-		/// </summary>
 		public static WeaponItem WoodThorn0 => Instance[(short)147];
 
-		/// <summary>
-		/// 白鹤对刺
-		/// </summary>
 		public static WeaponItem WoodThorn1 => Instance[(short)148];
 
-		/// <summary>
-		/// 飞来刺
-		/// </summary>
 		public static WeaponItem WoodThorn2 => Instance[(short)149];
 
-		/// <summary>
-		/// 残香梭
-		/// </summary>
 		public static WeaponItem WoodThorn3 => Instance[(short)150];
 
-		/// <summary>
-		/// 子母电光刺
-		/// </summary>
 		public static WeaponItem WoodThorn4 => Instance[(short)151];
 
-		/// <summary>
-		/// 乱花刺
-		/// </summary>
 		public static WeaponItem WoodThorn5 => Instance[(short)152];
 
-		/// <summary>
-		/// 天光云影刺
-		/// </summary>
 		public static WeaponItem WoodThorn6 => Instance[(short)153];
 
-		/// <summary>
-		/// 降龙刺
-		/// </summary>
 		public static WeaponItem WoodThorn7 => Instance[(short)154];
 
-		/// <summary>
-		/// 九寸阎罗
-		/// </summary>
 		public static WeaponItem WoodThorn8 => Instance[(short)155];
 
-		/// <summary>
-		/// 青竹刺
-		/// </summary>
 		public static WeaponItem BambooThorn0 => Instance[(short)156];
 
-		/// <summary>
-		/// 蛇牙曲刺
-		/// </summary>
 		public static WeaponItem BambooThorn1 => Instance[(short)157];
 
-		/// <summary>
-		/// 织素梭
-		/// </summary>
 		public static WeaponItem BambooThorn2 => Instance[(short)158];
 
-		/// <summary>
-		/// 颠倒一对刺
-		/// </summary>
 		public static WeaponItem BambooThorn3 => Instance[(short)159];
 
-		/// <summary>
-		/// 迷离刺
-		/// </summary>
 		public static WeaponItem BambooThorn4 => Instance[(short)160];
 
-		/// <summary>
-		/// 悲苦双梭
-		/// </summary>
 		public static WeaponItem BambooThorn5 => Instance[(short)161];
 
-		/// <summary>
-		/// 定灵梭
-		/// </summary>
 		public static WeaponItem BambooThorn6 => Instance[(short)162];
 
-		/// <summary>
-		/// 烟霞对刺
-		/// </summary>
 		public static WeaponItem BambooThorn7 => Instance[(short)163];
 
-		/// <summary>
-		/// 如如
-		/// </summary>
 		public static WeaponItem BambooThorn8 => Instance[(short)164];
 
-		/// <summary>
-		/// 飞刀
-		/// </summary>
 		public static WeaponItem IronHidden0 => Instance[(short)165];
 
-		/// <summary>
-		/// 铁蒺藜
-		/// </summary>
 		public static WeaponItem IronHidden1 => Instance[(short)166];
 
-		/// <summary>
-		/// 梅花镖
-		/// </summary>
 		public static WeaponItem IronHidden2 => Instance[(short)167];
 
-		/// <summary>
-		/// 雷公钻
-		/// </summary>
 		public static WeaponItem IronHidden3 => Instance[(short)168];
 
-		/// <summary>
-		/// 透骨子午钉
-		/// </summary>
 		public static WeaponItem IronHidden4 => Instance[(short)169];
 
-		/// <summary>
-		/// 轰雷霆
-		/// </summary>
 		public static WeaponItem IronHidden5 => Instance[(short)170];
 
-		/// <summary>
-		/// 神铁飞叉
-		/// </summary>
 		public static WeaponItem IronHidden6 => Instance[(short)171];
 
-		/// <summary>
-		/// 金刚圈
-		/// </summary>
 		public static WeaponItem IronHidden7 => Instance[(short)172];
 
-		/// <summary>
-		/// 玄铁黑莲
-		/// </summary>
 		public static WeaponItem IronHidden8 => Instance[(short)173];
 
-		/// <summary>
-		/// 铜钱镖
-		/// </summary>
 		public static WeaponItem CopperHidden0 => Instance[(short)174];
 
-		/// <summary>
-		/// 柳叶飞刀
-		/// </summary>
 		public static WeaponItem CopperHidden1 => Instance[(short)175];
 
-		/// <summary>
-		/// 追魂钉
-		/// </summary>
 		public static WeaponItem CopperHidden2 => Instance[(short)176];
 
-		/// <summary>
-		/// 青索飞锤
-		/// </summary>
 		public static WeaponItem CopperHidden3 => Instance[(short)177];
 
-		/// <summary>
-		/// 雷火如意珠
-		/// </summary>
 		public static WeaponItem CopperHidden4 => Instance[(short)178];
 
-		/// <summary>
-		/// 阴阳钩
-		/// </summary>
 		public static WeaponItem CopperHidden5 => Instance[(short)179];
 
-		/// <summary>
-		/// 乾坤钉
-		/// </summary>
 		public static WeaponItem CopperHidden6 => Instance[(short)180];
 
-		/// <summary>
-		/// 龙蛇蛰
-		/// </summary>
 		public static WeaponItem CopperHidden7 => Instance[(short)181];
 
-		/// <summary>
-		/// 金蝉神针
-		/// </summary>
 		public static WeaponItem CopperHidden8 => Instance[(short)182];
 
-		/// <summary>
-		/// 飞蝗石
-		/// </summary>
 		public static WeaponItem StoneHidden0 => Instance[(short)183];
 
-		/// <summary>
-		/// 寒鸦镖
-		/// </summary>
 		public static WeaponItem StoneHidden1 => Instance[(short)184];
 
-		/// <summary>
-		/// 三宝八卦
-		/// </summary>
 		public static WeaponItem StoneHidden2 => Instance[(short)185];
 
-		/// <summary>
-		/// 青螺飞钉
-		/// </summary>
 		public static WeaponItem StoneHidden3 => Instance[(short)186];
 
-		/// <summary>
-		/// 满天星
-		/// </summary>
 		public static WeaponItem StoneHidden4 => Instance[(short)187];
 
-		/// <summary>
-		/// 九煞玄钉
-		/// </summary>
 		public static WeaponItem StoneHidden5 => Instance[(short)188];
 
-		/// <summary>
-		/// 金光锉
-		/// </summary>
 		public static WeaponItem StoneHidden6 => Instance[(short)189];
 
-		/// <summary>
-		/// 鬼纤尘
-		/// </summary>
 		public static WeaponItem StoneHidden7 => Instance[(short)190];
 
-		/// <summary>
-		/// 紫微星
-		/// </summary>
 		public static WeaponItem StoneHidden8 => Instance[(short)191];
 
-		/// <summary>
-		/// 冰玉飞针
-		/// </summary>
 		public static WeaponItem JadeHidden0 => Instance[(short)192];
 
-		/// <summary>
-		/// 玉橄榄
-		/// </summary>
 		public static WeaponItem JadeHidden1 => Instance[(short)193];
 
-		/// <summary>
-		/// 笑面罗汉
-		/// </summary>
 		public static WeaponItem JadeHidden2 => Instance[(short)194];
 
-		/// <summary>
-		/// 玉蝉飞针
-		/// </summary>
 		public static WeaponItem JadeHidden3 => Instance[(short)195];
 
-		/// <summary>
-		/// 五色透影
-		/// </summary>
 		public static WeaponItem JadeHidden4 => Instance[(short)196];
 
-		/// <summary>
-		/// 杜鹃啼血
-		/// </summary>
 		public static WeaponItem JadeHidden5 => Instance[(short)197];
 
-		/// <summary>
-		/// 鬼脸玉蟾蜍
-		/// </summary>
 		public static WeaponItem JadeHidden6 => Instance[(short)198];
 
-		/// <summary>
-		/// 玄冥神针
-		/// </summary>
 		public static WeaponItem JadeHidden7 => Instance[(short)199];
 
-		/// <summary>
-		/// 昆仑血络
-		/// </summary>
 		public static WeaponItem JadeHidden8 => Instance[(short)200];
 
-		/// <summary>
-		/// 袖里箭
-		/// </summary>
 		public static WeaponItem WoodHidden0 => Instance[(short)201];
 
-		/// <summary>
-		/// 飞凫钩爪
-		/// </summary>
 		public static WeaponItem WoodHidden1 => Instance[(short)202];
 
-		/// <summary>
-		/// 堂前燕
-		/// </summary>
 		public static WeaponItem WoodHidden2 => Instance[(short)203];
 
-		/// <summary>
-		/// 花落去
-		/// </summary>
 		public static WeaponItem WoodHidden3 => Instance[(short)204];
 
-		/// <summary>
-		/// 乱红锥
-		/// </summary>
 		public static WeaponItem WoodHidden4 => Instance[(short)205];
 
-		/// <summary>
-		/// 血鸳鸯
-		/// </summary>
 		public static WeaponItem WoodHidden5 => Instance[(short)206];
 
-		/// <summary>
-		/// 辟血飞刀
-		/// </summary>
 		public static WeaponItem WoodHidden6 => Instance[(short)207];
 
-		/// <summary>
-		/// 暴雨梨花针
-		/// </summary>
 		public static WeaponItem WoodHidden7 => Instance[(short)208];
 
-		/// <summary>
-		/// 苍冥奇针
-		/// </summary>
 		public static WeaponItem WoodHidden8 => Instance[(short)209];
 
-		/// <summary>
-		/// 青竹镖
-		/// </summary>
 		public static WeaponItem BambooHidden0 => Instance[(short)210];
 
-		/// <summary>
-		/// 蛇舌飞索
-		/// </summary>
 		public static WeaponItem BambooHidden1 => Instance[(short)211];
 
-		/// <summary>
-		/// 飞絮镖
-		/// </summary>
 		public static WeaponItem BambooHidden2 => Instance[(short)212];
 
-		/// <summary>
-		/// 燕归来
-		/// </summary>
 		public static WeaponItem BambooHidden3 => Instance[(short)213];
 
-		/// <summary>
-		/// 困龙索
-		/// </summary>
 		public static WeaponItem BambooHidden4 => Instance[(short)214];
 
-		/// <summary>
-		/// 荻花飞针
-		/// </summary>
 		public static WeaponItem BambooHidden5 => Instance[(short)215];
 
-		/// <summary>
-		/// 通天索
-		/// </summary>
 		public static WeaponItem BambooHidden6 => Instance[(short)216];
 
-		/// <summary>
-		/// 含沙射影
-		/// </summary>
 		public static WeaponItem BambooHidden7 => Instance[(short)217];
 
-		/// <summary>
-		/// 极乐神针
-		/// </summary>
 		public static WeaponItem BambooHidden8 => Instance[(short)218];
 
-		/// <summary>
-		/// 铁箫
-		/// </summary>
 		public static WeaponItem IronFlute0 => Instance[(short)219];
 
-		/// <summary>
-		/// 折骨萧
-		/// </summary>
 		public static WeaponItem IronFlute1 => Instance[(short)220];
 
-		/// <summary>
-		/// 狼牙短箫
-		/// </summary>
 		public static WeaponItem IronFlute2 => Instance[(short)221];
 
-		/// <summary>
-		/// 龙首箫
-		/// </summary>
 		public static WeaponItem IronFlute3 => Instance[(short)222];
 
-		/// <summary>
-		/// 催魂令
-		/// </summary>
 		public static WeaponItem IronFlute4 => Instance[(short)223];
 
-		/// <summary>
-		/// 轻雷
-		/// </summary>
 		public static WeaponItem IronFlute5 => Instance[(short)224];
 
-		/// <summary>
-		/// 吞海长鲸
-		/// </summary>
 		public static WeaponItem IronFlute6 => Instance[(short)225];
 
-		/// <summary>
-		/// 干云
-		/// </summary>
 		public static WeaponItem IronFlute7 => Instance[(short)226];
 
-		/// <summary>
-		/// 玄铁箫
-		/// </summary>
 		public static WeaponItem IronFlute8 => Instance[(short)227];
 
-		/// <summary>
-		/// 哑箫
-		/// </summary>
 		public static WeaponItem CopperFlute0 => Instance[(short)228];
 
-		/// <summary>
-		/// 银梢箫
-		/// </summary>
 		public static WeaponItem CopperFlute1 => Instance[(short)229];
 
-		/// <summary>
-		/// 笑面翁
-		/// </summary>
 		public static WeaponItem CopperFlute2 => Instance[(short)230];
 
-		/// <summary>
-		/// 凤头箫
-		/// </summary>
 		public static WeaponItem CopperFlute3 => Instance[(short)231];
 
-		/// <summary>
-		/// 鸳鸯缠金箫
-		/// </summary>
 		public static WeaponItem CopperFlute4 => Instance[(short)232];
 
-		/// <summary>
-		/// 愁断肠
-		/// </summary>
 		public static WeaponItem CopperFlute5 => Instance[(short)233];
 
-		/// <summary>
-		/// 鬼夜哭
-		/// </summary>
 		public static WeaponItem CopperFlute6 => Instance[(short)234];
 
-		/// <summary>
-		/// 霞鹿
-		/// </summary>
 		public static WeaponItem CopperFlute7 => Instance[(short)235];
 
-		/// <summary>
-		/// 邪引
-		/// </summary>
 		public static WeaponItem CopperFlute8 => Instance[(short)236];
 
-		/// <summary>
-		/// 玛瑙箫
-		/// </summary>
 		public static WeaponItem StoneFlute0 => Instance[(short)237];
 
-		/// <summary>
-		/// 彩石箫
-		/// </summary>
 		public static WeaponItem StoneFlute1 => Instance[(short)238];
 
-		/// <summary>
-		/// 鬼纹短箫
-		/// </summary>
 		public static WeaponItem StoneFlute2 => Instance[(short)239];
 
-		/// <summary>
-		/// 寻莺
-		/// </summary>
 		public static WeaponItem StoneFlute3 => Instance[(short)240];
 
-		/// <summary>
-		/// 万蜂引
-		/// </summary>
 		public static WeaponItem StoneFlute4 => Instance[(short)241];
 
-		/// <summary>
-		/// 赤龙箫
-		/// </summary>
 		public static WeaponItem StoneFlute5 => Instance[(short)242];
 
-		/// <summary>
-		/// 暮蝉
-		/// </summary>
 		public static WeaponItem StoneFlute6 => Instance[(short)243];
 
-		/// <summary>
-		/// 星河百转
-		/// </summary>
 		public static WeaponItem StoneFlute7 => Instance[(short)244];
 
-		/// <summary>
-		/// 神鬼踏歌
-		/// </summary>
 		public static WeaponItem StoneFlute8 => Instance[(short)245];
 
-		/// <summary>
-		/// 水玉箫
-		/// </summary>
 		public static WeaponItem JadeFlute0 => Instance[(short)246];
 
-		/// <summary>
-		/// 翠骨箫
-		/// </summary>
 		public static WeaponItem JadeFlute1 => Instance[(short)247];
 
-		/// <summary>
-		/// 玉螺短箫
-		/// </summary>
 		public static WeaponItem JadeFlute2 => Instance[(short)248];
 
-		/// <summary>
-		/// 摄魂箫
-		/// </summary>
 		public static WeaponItem JadeFlute3 => Instance[(short)249];
 
-		/// <summary>
-		/// 韩湘子
-		/// </summary>
 		public static WeaponItem JadeFlute4 => Instance[(short)250];
 
-		/// <summary>
-		/// 紫凤箫
-		/// </summary>
 		public static WeaponItem JadeFlute5 => Instance[(short)251];
 
-		/// <summary>
-		/// 素月璃骨
-		/// </summary>
 		public static WeaponItem JadeFlute6 => Instance[(short)252];
 
-		/// <summary>
-		/// 碧海珍珑
-		/// </summary>
 		public static WeaponItem JadeFlute7 => Instance[(short)253];
 
-		/// <summary>
-		/// 玉人托心
-		/// </summary>
 		public static WeaponItem JadeFlute8 => Instance[(short)254];
 
-		/// <summary>
-		/// 木箫
-		/// </summary>
 		public static WeaponItem WoodFlute0 => Instance[(short)255];
 
-		/// <summary>
-		/// 子胥箫
-		/// </summary>
 		public static WeaponItem WoodFlute1 => Instance[(short)256];
 
-		/// <summary>
-		/// 黄蝶箫
-		/// </summary>
 		public static WeaponItem WoodFlute2 => Instance[(short)257];
 
-		/// <summary>
-		/// 柯亭箫
-		/// </summary>
 		public static WeaponItem WoodFlute3 => Instance[(short)258];
 
-		/// <summary>
-		/// 碧烟引
-		/// </summary>
 		public static WeaponItem WoodFlute4 => Instance[(short)259];
 
-		/// <summary>
-		/// 梦里听香
-		/// </summary>
 		public static WeaponItem WoodFlute5 => Instance[(short)260];
 
-		/// <summary>
-		/// 烟波媚
-		/// </summary>
 		public static WeaponItem WoodFlute6 => Instance[(short)261];
 
-		/// <summary>
-		/// 天外奇音
-		/// </summary>
 		public static WeaponItem WoodFlute7 => Instance[(short)262];
 
-		/// <summary>
-		/// 独然骨
-		/// </summary>
 		public static WeaponItem WoodFlute8 => Instance[(short)263];
 
-		/// <summary>
-		/// 青竹箫
-		/// </summary>
 		public static WeaponItem BambooFlute0 => Instance[(short)264];
 
-		/// <summary>
-		/// 蛇箫
-		/// </summary>
 		public static WeaponItem BambooFlute1 => Instance[(short)265];
 
-		/// <summary>
-		/// 玉屏箫
-		/// </summary>
 		public static WeaponItem BambooFlute2 => Instance[(short)266];
 
-		/// <summary>
-		/// 碧漆九节箫
-		/// </summary>
 		public static WeaponItem BambooFlute3 => Instance[(short)267];
 
-		/// <summary>
-		/// 青阳引
-		/// </summary>
 		public static WeaponItem BambooFlute4 => Instance[(short)268];
 
-		/// <summary>
-		/// 绣文芙蓉箫
-		/// </summary>
 		public static WeaponItem BambooFlute5 => Instance[(short)269];
 
-		/// <summary>
-		/// 长相忆
-		/// </summary>
 		public static WeaponItem BambooFlute6 => Instance[(short)270];
 
-		/// <summary>
-		/// 桃花仙
-		/// </summary>
 		public static WeaponItem BambooFlute7 => Instance[(short)271];
 
-		/// <summary>
-		/// 万古愁
-		/// </summary>
 		public static WeaponItem BambooFlute8 => Instance[(short)272];
 
-		/// <summary>
-		/// 铁手
-		/// </summary>
 		public static WeaponItem IronGlovesA0 => Instance[(short)273];
 
-		/// <summary>
-		/// 四楞拳套
-		/// </summary>
 		public static WeaponItem IronGlovesA1 => Instance[(short)274];
 
-		/// <summary>
-		/// 虎头铁掌套
-		/// </summary>
 		public static WeaponItem IronGlovesA2 => Instance[(short)275];
 
-		/// <summary>
-		/// 风火浑铁臂
-		/// </summary>
 		public static WeaponItem IronGlovesA3 => Instance[(short)276];
 
-		/// <summary>
-		/// 豹螭铁手
-		/// </summary>
 		public static WeaponItem IronGlovesA4 => Instance[(short)277];
 
-		/// <summary>
-		/// 金刚臂
-		/// </summary>
 		public static WeaponItem IronGlovesA5 => Instance[(short)278];
 
-		/// <summary>
-		/// 擒龙手
-		/// </summary>
 		public static WeaponItem IronGlovesA6 => Instance[(short)279];
 
-		/// <summary>
-		/// 神威臂
-		/// </summary>
 		public static WeaponItem IronGlovesA7 => Instance[(short)280];
 
-		/// <summary>
-		/// 青浊手
-		/// </summary>
 		public static WeaponItem IronGlovesA8 => Instance[(short)281];
 
-		/// <summary>
-		/// 顽铁掌套
-		/// </summary>
 		public static WeaponItem IronGlovesB0 => Instance[(short)282];
 
-		/// <summary>
-		/// 碎骨精钢手
-		/// </summary>
 		public static WeaponItem IronGlovesB1 => Instance[(short)283];
 
-		/// <summary>
-		/// 铁云掌套
-		/// </summary>
 		public static WeaponItem IronGlovesB2 => Instance[(short)284];
 
-		/// <summary>
-		/// 震山铁臂
-		/// </summary>
 		public static WeaponItem IronGlovesB3 => Instance[(short)285];
 
-		/// <summary>
-		/// 坤元手
-		/// </summary>
 		public static WeaponItem IronGlovesB4 => Instance[(short)286];
 
-		/// <summary>
-		/// 奔雷铁臂
-		/// </summary>
 		public static WeaponItem IronGlovesB5 => Instance[(short)287];
 
-		/// <summary>
-		/// 龙鳞臂甲
-		/// </summary>
 		public static WeaponItem IronGlovesB6 => Instance[(short)288];
 
-		/// <summary>
-		/// 混沌手
-		/// </summary>
 		public static WeaponItem IronGlovesB7 => Instance[(short)289];
 
-		/// <summary>
-		/// 玄铁掌套
-		/// </summary>
 		public static WeaponItem IronGlovesB8 => Instance[(short)290];
 
-		/// <summary>
-		/// 鹰爪手
-		/// </summary>
 		public static WeaponItem CopperGlovesA0 => Instance[(short)291];
 
-		/// <summary>
-		/// 狼牙爪
-		/// </summary>
 		public static WeaponItem CopperGlovesA1 => Instance[(short)292];
 
-		/// <summary>
-		/// 烂银金络爪
-		/// </summary>
 		public static WeaponItem CopperGlovesA2 => Instance[(short)293];
 
-		/// <summary>
-		/// 灵鹫爪
-		/// </summary>
 		public static WeaponItem CopperGlovesA3 => Instance[(short)294];
 
-		/// <summary>
-		/// 金蛇锁
-		/// </summary>
 		public static WeaponItem CopperGlovesA4 => Instance[(short)295];
 
-		/// <summary>
-		/// 搏狮手
-		/// </summary>
 		public static WeaponItem CopperGlovesA5 => Instance[(short)296];
 
-		/// <summary>
-		/// 断玉分金
-		/// </summary>
 		public static WeaponItem CopperGlovesA6 => Instance[(short)297];
 
-		/// <summary>
-		/// 青鬼破空
-		/// </summary>
 		public static WeaponItem CopperGlovesA7 => Instance[(short)298];
 
-		/// <summary>
-		/// 金胎手
-		/// </summary>
 		public static WeaponItem CopperGlovesA8 => Instance[(short)299];
 
-		/// <summary>
-		/// 铁骨手
-		/// </summary>
 		public static WeaponItem CopperGlovesB0 => Instance[(short)300];
 
-		/// <summary>
-		/// 金瓜臂
-		/// </summary>
 		public static WeaponItem CopperGlovesB1 => Instance[(short)301];
 
-		/// <summary>
-		/// 破阵臂甲
-		/// </summary>
 		public static WeaponItem CopperGlovesB2 => Instance[(short)302];
 
-		/// <summary>
-		/// 雷公臂
-		/// </summary>
 		public static WeaponItem CopperGlovesB3 => Instance[(short)303];
 
-		/// <summary>
-		/// 风云五指束
-		/// </summary>
 		public static WeaponItem CopperGlovesB4 => Instance[(short)304];
 
-		/// <summary>
-		/// 千顷沧涛手
-		/// </summary>
 		public static WeaponItem CopperGlovesB5 => Instance[(short)305];
 
-		/// <summary>
-		/// 夸娥神臂
-		/// </summary>
 		public static WeaponItem CopperGlovesB6 => Instance[(short)306];
 
-		/// <summary>
-		/// 鲸龙臂
-		/// </summary>
 		public static WeaponItem CopperGlovesB7 => Instance[(short)307];
 
-		/// <summary>
-		/// 诛灭手
-		/// </summary>
 		public static WeaponItem CopperGlovesB8 => Instance[(short)308];
 
-		/// <summary>
-		/// 玛瑙指扣
-		/// </summary>
 		public static WeaponItem StoneGloves0 => Instance[(short)309];
 
-		/// <summary>
-		/// 红珠一指束
-		/// </summary>
 		public static WeaponItem StoneGloves1 => Instance[(short)310];
 
-		/// <summary>
-		/// 幻光手
-		/// </summary>
 		public static WeaponItem StoneGloves2 => Instance[(short)311];
 
-		/// <summary>
-		/// 霞光臂
-		/// </summary>
 		public static WeaponItem StoneGloves3 => Instance[(short)312];
 
-		/// <summary>
-		/// 残星手
-		/// </summary>
 		public static WeaponItem StoneGloves4 => Instance[(short)313];
 
-		/// <summary>
-		/// 如意鬼手
-		/// </summary>
 		public static WeaponItem StoneGloves5 => Instance[(short)314];
 
-		/// <summary>
-		/// 百曜
-		/// </summary>
 		public static WeaponItem StoneGloves6 => Instance[(short)315];
 
-		/// <summary>
-		/// 磐龙手
-		/// </summary>
 		public static WeaponItem StoneGloves7 => Instance[(short)316];
 
-		/// <summary>
-		/// 帝女心
-		/// </summary>
 		public static WeaponItem StoneGloves8 => Instance[(short)317];
 
-		/// <summary>
-		/// 晶玉指扣
-		/// </summary>
 		public static WeaponItem JadeGloves0 => Instance[(short)318];
 
-		/// <summary>
-		/// 冷萼手
-		/// </summary>
 		public static WeaponItem JadeGloves1 => Instance[(short)319];
 
-		/// <summary>
-		/// 飞琼手
-		/// </summary>
 		public static WeaponItem JadeGloves2 => Instance[(short)320];
 
-		/// <summary>
-		/// 水玲珑
-		/// </summary>
 		public static WeaponItem JadeGloves3 => Instance[(short)321];
 
-		/// <summary>
-		/// 孀娥指扣
-		/// </summary>
 		public static WeaponItem JadeGloves4 => Instance[(short)322];
 
-		/// <summary>
-		/// 蟾魄手
-		/// </summary>
 		public static WeaponItem JadeGloves5 => Instance[(short)323];
 
-		/// <summary>
-		/// 并蒂莲骨
-		/// </summary>
 		public static WeaponItem JadeGloves6 => Instance[(short)324];
 
-		/// <summary>
-		/// 龙蛇冰绡
-		/// </summary>
 		public static WeaponItem JadeGloves7 => Instance[(short)325];
 
-		/// <summary>
-		/// 无垢
-		/// </summary>
 		public static WeaponItem JadeGloves8 => Instance[(short)326];
 
-		/// <summary>
-		/// 木手甲
-		/// </summary>
 		public static WeaponItem WoodGloves0 => Instance[(short)327];
 
-		/// <summary>
-		/// 凤飞一指束
-		/// </summary>
 		public static WeaponItem WoodGloves1 => Instance[(short)328];
 
-		/// <summary>
-		/// 碎红爪
-		/// </summary>
 		public static WeaponItem WoodGloves2 => Instance[(short)329];
 
-		/// <summary>
-		/// 梅雪争春
-		/// </summary>
 		public static WeaponItem WoodGloves3 => Instance[(short)330];
 
-		/// <summary>
-		/// 天香伏邪手
-		/// </summary>
 		public static WeaponItem WoodGloves4 => Instance[(short)331];
 
-		/// <summary>
-		/// 轻黄手
-		/// </summary>
 		public static WeaponItem WoodGloves5 => Instance[(short)332];
 
-		/// <summary>
-		/// 降魔神木臂
-		/// </summary>
 		public static WeaponItem WoodGloves6 => Instance[(short)333];
 
-		/// <summary>
-		/// 破朝霞
-		/// </summary>
 		public static WeaponItem WoodGloves7 => Instance[(short)334];
 
-		/// <summary>
-		/// 滴血露华
-		/// </summary>
 		public static WeaponItem WoodGloves8 => Instance[(short)335];
 
-		/// <summary>
-		/// 青竹手
-		/// </summary>
 		public static WeaponItem BambooGloves0 => Instance[(short)336];
 
-		/// <summary>
-		/// 宿雨手
-		/// </summary>
 		public static WeaponItem BambooGloves1 => Instance[(short)337];
 
-		/// <summary>
-		/// 猿公手
-		/// </summary>
 		public static WeaponItem BambooGloves2 => Instance[(short)338];
 
-		/// <summary>
-		/// 缚妖五指束
-		/// </summary>
 		public static WeaponItem BambooGloves3 => Instance[(short)339];
 
-		/// <summary>
-		/// 杏黄朝烟手
-		/// </summary>
 		public static WeaponItem BambooGloves4 => Instance[(short)340];
 
-		/// <summary>
-		/// 乾坤臂
-		/// </summary>
 		public static WeaponItem BambooGloves5 => Instance[(short)341];
 
-		/// <summary>
-		/// 暗香血趾
-		/// </summary>
 		public static WeaponItem BambooGloves6 => Instance[(short)342];
 
-		/// <summary>
-		/// 玄色蟠龙手
-		/// </summary>
 		public static WeaponItem BambooGloves7 => Instance[(short)343];
 
-		/// <summary>
-		/// 妙叹
-		/// </summary>
 		public static WeaponItem BambooGloves8 => Instance[(short)344];
 
-		/// <summary>
-		/// 虎爪手
-		/// </summary>
 		public static WeaponItem ClothGlovesA0 => Instance[(short)345];
 
-		/// <summary>
-		/// 兽纹掌套
-		/// </summary>
 		public static WeaponItem ClothGlovesA1 => Instance[(short)346];
 
-		/// <summary>
-		/// 阴阳手
-		/// </summary>
 		public static WeaponItem ClothGlovesA2 => Instance[(short)347];
 
-		/// <summary>
-		/// 六合掌套
-		/// </summary>
 		public static WeaponItem ClothGlovesA3 => Instance[(short)348];
 
-		/// <summary>
-		/// 夜吼
-		/// </summary>
 		public static WeaponItem ClothGlovesA4 => Instance[(short)349];
 
-		/// <summary>
-		/// 五影参差
-		/// </summary>
 		public static WeaponItem ClothGlovesA5 => Instance[(short)350];
 
-		/// <summary>
-		/// 混天织
-		/// </summary>
 		public static WeaponItem ClothGlovesA6 => Instance[(short)351];
 
-		/// <summary>
-		/// 羽绶金麟
-		/// </summary>
 		public static WeaponItem ClothGlovesA7 => Instance[(short)352];
 
-		/// <summary>
-		/// 金蝉手套
-		/// </summary>
 		public static WeaponItem ClothGlovesA8 => Instance[(short)353];
 
-		/// <summary>
-		/// 山民护手
-		/// </summary>
 		public static WeaponItem ClothGlovesB0 => Instance[(short)354];
 
-		/// <summary>
-		/// 黄纹手
-		/// </summary>
 		public static WeaponItem ClothGlovesB1 => Instance[(short)355];
 
-		/// <summary>
-		/// 鹤唳盘云手
-		/// </summary>
 		public static WeaponItem ClothGlovesB2 => Instance[(short)356];
 
-		/// <summary>
-		/// 掌清秋
-		/// </summary>
 		public static WeaponItem ClothGlovesB3 => Instance[(short)357];
 
-		/// <summary>
-		/// 龙凤织云手
-		/// </summary>
 		public static WeaponItem ClothGlovesB4 => Instance[(short)358];
 
-		/// <summary>
-		/// 五光织
-		/// </summary>
 		public static WeaponItem ClothGlovesB5 => Instance[(short)359];
 
-		/// <summary>
-		/// 归霞
-		/// </summary>
 		public static WeaponItem ClothGlovesB6 => Instance[(short)360];
 
-		/// <summary>
-		/// 画九英
-		/// </summary>
 		public static WeaponItem ClothGlovesB7 => Instance[(short)361];
 
-		/// <summary>
-		/// 泥云手
-		/// </summary>
 		public static WeaponItem ClothGlovesB8 => Instance[(short)362];
 
-		/// <summary>
-		/// 缠手带
-		/// </summary>
 		public static WeaponItem SilkGlovesA0 => Instance[(short)363];
 
-		/// <summary>
-		/// 流莺手
-		/// </summary>
 		public static WeaponItem SilkGlovesA1 => Instance[(short)364];
 
-		/// <summary>
-		/// 化意手
-		/// </summary>
 		public static WeaponItem SilkGlovesA2 => Instance[(short)365];
 
-		/// <summary>
-		/// 百卉金丝手
-		/// </summary>
 		public static WeaponItem SilkGlovesA3 => Instance[(short)366];
 
-		/// <summary>
-		/// 逝水
-		/// </summary>
 		public static WeaponItem SilkGlovesA4 => Instance[(short)367];
 
-		/// <summary>
-		/// 千般巧
-		/// </summary>
 		public static WeaponItem SilkGlovesA5 => Instance[(short)368];
 
-		/// <summary>
-		/// 玄冰鬼趾
-		/// </summary>
 		public static WeaponItem SilkGlovesA6 => Instance[(short)369];
 
-		/// <summary>
-		/// 千螭
-		/// </summary>
 		public static WeaponItem SilkGlovesA7 => Instance[(short)370];
 
-		/// <summary>
-		/// 天蚕掌套
-		/// </summary>
 		public static WeaponItem SilkGlovesA8 => Instance[(short)371];
 
-		/// <summary>
-		/// 黄麻手
-		/// </summary>
 		public static WeaponItem SilkGlovesB0 => Instance[(short)372];
 
-		/// <summary>
-		/// 纳锦五指束
-		/// </summary>
 		public static WeaponItem SilkGlovesB1 => Instance[(short)373];
 
-		/// <summary>
-		/// 幽芷手
-		/// </summary>
 		public static WeaponItem SilkGlovesB2 => Instance[(short)374];
 
-		/// <summary>
-		/// 碧牙手
-		/// </summary>
 		public static WeaponItem SilkGlovesB3 => Instance[(short)375];
 
-		/// <summary>
-		/// 浑似雪
-		/// </summary>
 		public static WeaponItem SilkGlovesB4 => Instance[(short)376];
 
-		/// <summary>
-		/// 金银织
-		/// </summary>
 		public static WeaponItem SilkGlovesB5 => Instance[(short)377];
 
-		/// <summary>
-		/// 太阴玄冥手
-		/// </summary>
 		public static WeaponItem SilkGlovesB6 => Instance[(short)378];
 
-		/// <summary>
-		/// 柔香蚀骨
-		/// </summary>
 		public static WeaponItem SilkGlovesB7 => Instance[(short)379];
 
-		/// <summary>
-		/// 携露
-		/// </summary>
 		public static WeaponItem SilkGlovesB8 => Instance[(short)380];
 
-		/// <summary>
-		/// 独钴铁杵
-		/// </summary>
 		public static WeaponItem IronPestle0 => Instance[(short)381];
 
-		/// <summary>
-		/// 镔钢杵
-		/// </summary>
 		public static WeaponItem IronPestle1 => Instance[(short)382];
 
-		/// <summary>
-		/// 钩钳杵
-		/// </summary>
 		public static WeaponItem IronPestle2 => Instance[(short)383];
 
-		/// <summary>
-		/// 火舍杵
-		/// </summary>
 		public static WeaponItem IronPestle3 => Instance[(short)384];
 
-		/// <summary>
-		/// 狮头宝杵
-		/// </summary>
 		public static WeaponItem IronPestle4 => Instance[(short)385];
 
-		/// <summary>
-		/// 千层塔
-		/// </summary>
 		public static WeaponItem IronPestle5 => Instance[(short)386];
 
-		/// <summary>
-		/// 大轮金刚杵
-		/// </summary>
 		public static WeaponItem IronPestle6 => Instance[(short)387];
 
-		/// <summary>
-		/// 不动尊
-		/// </summary>
 		public static WeaponItem IronPestle7 => Instance[(short)388];
 
-		/// <summary>
-		/// 大日如来杵
-		/// </summary>
 		public static WeaponItem IronPestle8 => Instance[(short)389];
 
-		/// <summary>
-		/// 元铜杵
-		/// </summary>
 		public static WeaponItem CopperPestle0 => Instance[(short)390];
 
-		/// <summary>
-		/// 骷髅杵
-		/// </summary>
 		public static WeaponItem CopperPestle1 => Instance[(short)391];
 
-		/// <summary>
-		/// 万字杵
-		/// </summary>
 		public static WeaponItem CopperPestle2 => Instance[(short)392];
 
-		/// <summary>
-		/// 力士杵
-		/// </summary>
 		public static WeaponItem CopperPestle3 => Instance[(short)393];
 
-		/// <summary>
-		/// 五峰光明杵
-		/// </summary>
 		public static WeaponItem CopperPestle4 => Instance[(short)394];
 
-		/// <summary>
-		/// 虎衣宝杵
-		/// </summary>
 		public static WeaponItem CopperPestle5 => Instance[(short)395];
 
-		/// <summary>
-		/// 无能胜
-		/// </summary>
 		public static WeaponItem CopperPestle6 => Instance[(short)396];
 
-		/// <summary>
-		/// 大威德杵
-		/// </summary>
 		public static WeaponItem CopperPestle7 => Instance[(short)397];
 
-		/// <summary>
-		/// 非天
-		/// </summary>
 		public static WeaponItem CopperPestle8 => Instance[(short)398];
 
-		/// <summary>
-		/// 灶黑短杵
-		/// </summary>
 		public static WeaponItem StonePestle0 => Instance[(short)399];
 
-		/// <summary>
-		/// 三钴石杵
-		/// </summary>
 		public static WeaponItem StonePestle1 => Instance[(short)400];
 
-		/// <summary>
-		/// 夜叉杵
-		/// </summary>
 		public static WeaponItem StonePestle2 => Instance[(short)401];
 
-		/// <summary>
-		/// 韦驮杵
-		/// </summary>
 		public static WeaponItem StonePestle3 => Instance[(short)402];
 
-		/// <summary>
-		/// 无相杵
-		/// </summary>
 		public static WeaponItem StonePestle4 => Instance[(short)403];
 
-		/// <summary>
-		/// 五色蓝芒杵
-		/// </summary>
 		public static WeaponItem StonePestle5 => Instance[(short)404];
 
-		/// <summary>
-		/// 四宝须弥杵
-		/// </summary>
 		public static WeaponItem StonePestle6 => Instance[(short)405];
 
-		/// <summary>
-		/// 金刚摧破
-		/// </summary>
 		public static WeaponItem StonePestle7 => Instance[(short)406];
 
-		/// <summary>
-		/// 钧天柱
-		/// </summary>
 		public static WeaponItem StonePestle8 => Instance[(short)407];
 
-		/// <summary>
-		/// 捣药棒
-		/// </summary>
 		public static WeaponItem JadePestle0 => Instance[(short)408];
 
-		/// <summary>
-		/// 晶光杵
-		/// </summary>
 		public static WeaponItem JadePestle1 => Instance[(short)409];
 
-		/// <summary>
-		/// 独钴玉骨杵
-		/// </summary>
 		public static WeaponItem JadePestle2 => Instance[(short)410];
 
-		/// <summary>
-		/// 降魔杵
-		/// </summary>
 		public static WeaponItem JadePestle3 => Instance[(short)411];
 
-		/// <summary>
-		/// 真如杵
-		/// </summary>
 		public static WeaponItem JadePestle4 => Instance[(short)412];
 
-		/// <summary>
-		/// 七宝坠玉杵
-		/// </summary>
 		public static WeaponItem JadePestle5 => Instance[(short)413];
 
-		/// <summary>
-		/// 步掷旋盖
-		/// </summary>
 		public static WeaponItem JadePestle6 => Instance[(short)414];
 
-		/// <summary>
-		/// 九钴天魔杵
-		/// </summary>
 		public static WeaponItem JadePestle7 => Instance[(short)415];
 
-		/// <summary>
-		/// 三界降服
-		/// </summary>
 		public static WeaponItem JadePestle8 => Instance[(short)416];
 
-		/// <summary>
-		/// 三钴木杵
-		/// </summary>
 		public static WeaponItem WoodPestle0 => Instance[(short)417];
 
-		/// <summary>
-		/// 云形杵
-		/// </summary>
 		public static WeaponItem WoodPestle1 => Instance[(short)418];
 
-		/// <summary>
-		/// 鬼面杵
-		/// </summary>
 		public static WeaponItem WoodPestle2 => Instance[(short)419];
 
-		/// <summary>
-		/// 八吉祥杵
-		/// </summary>
 		public static WeaponItem WoodPestle3 => Instance[(short)420];
 
-		/// <summary>
-		/// 马大士
-		/// </summary>
 		public static WeaponItem WoodPestle4 => Instance[(short)421];
 
-		/// <summary>
-		/// 青白二莲
-		/// </summary>
 		public static WeaponItem WoodPestle5 => Instance[(short)422];
 
-		/// <summary>
-		/// 甘露
-		/// </summary>
 		public static WeaponItem WoodPestle6 => Instance[(short)423];
 
-		/// <summary>
-		/// 染净不二
-		/// </summary>
 		public static WeaponItem WoodPestle7 => Instance[(short)424];
 
-		/// <summary>
-		/// 胜乐轮
-		/// </summary>
 		public static WeaponItem WoodPestle8 => Instance[(short)425];
 
-		/// <summary>
-		/// 短竹杵
-		/// </summary>
 		public static WeaponItem BambooPestle0 => Instance[(short)426];
 
-		/// <summary>
-		/// 羯磨杵
-		/// </summary>
 		public static WeaponItem BambooPestle1 => Instance[(short)427];
 
-		/// <summary>
-		/// 五钴欢喜杵
-		/// </summary>
 		public static WeaponItem BambooPestle2 => Instance[(short)428];
 
-		/// <summary>
-		/// 真言杵
-		/// </summary>
 		public static WeaponItem BambooPestle3 => Instance[(short)429];
 
-		/// <summary>
-		/// 缠龙杵
-		/// </summary>
 		public static WeaponItem BambooPestle4 => Instance[(short)430];
 
-		/// <summary>
-		/// 曼荼罗杵
-		/// </summary>
 		public static WeaponItem BambooPestle5 => Instance[(short)431];
 
-		/// <summary>
-		/// 菩提心
-		/// </summary>
 		public static WeaponItem BambooPestle6 => Instance[(short)432];
 
-		/// <summary>
-		/// 般若智焰
-		/// </summary>
 		public static WeaponItem BambooPestle7 => Instance[(short)433];
 
-		/// <summary>
-		/// 帝释天
-		/// </summary>
 		public static WeaponItem BambooPestle8 => Instance[(short)434];
 
-		/// <summary>
-		/// 铁剑
-		/// </summary>
 		public static WeaponItem IronSwordA0 => Instance[(short)435];
 
-		/// <summary>
-		/// 斩马剑
-		/// </summary>
 		public static WeaponItem IronSwordA1 => Instance[(short)436];
 
-		/// <summary>
-		/// 青锋剑
-		/// </summary>
 		public static WeaponItem IronSwordA2 => Instance[(short)437];
 
-		/// <summary>
-		/// 燕支剑
-		/// </summary>
 		public static WeaponItem IronSwordA3 => Instance[(short)438];
 
-		/// <summary>
-		/// 三尺鸦九剑
-		/// </summary>
 		public static WeaponItem IronSwordA4 => Instance[(short)439];
 
-		/// <summary>
-		/// 工布
-		/// </summary>
 		public static WeaponItem IronSwordA5 => Instance[(short)440];
 
-		/// <summary>
-		/// 九焠翠血剑
-		/// </summary>
 		public static WeaponItem IronSwordA6 => Instance[(short)441];
 
-		/// <summary>
-		/// 干将
-		/// </summary>
 		public static WeaponItem IronSwordA7 => Instance[(short)442];
 
-		/// <summary>
-		/// 湛卢
-		/// </summary>
 		public static WeaponItem IronSwordA8 => Instance[(short)443];
 
-		/// <summary>
-		/// 镔铁重剑
-		/// </summary>
 		public static WeaponItem IronSwordB0 => Instance[(short)444];
 
-		/// <summary>
-		/// 折铁剑
-		/// </summary>
 		public static WeaponItem IronSwordB1 => Instance[(short)445];
 
-		/// <summary>
-		/// 墨阳剑
-		/// </summary>
 		public static WeaponItem IronSwordB2 => Instance[(short)446];
 
-		/// <summary>
-		/// 白虹剑
-		/// </summary>
 		public static WeaponItem IronSwordB3 => Instance[(short)447];
 
-		/// <summary>
-		/// 真刚
-		/// </summary>
 		public static WeaponItem IronSwordB4 => Instance[(short)448];
 
-		/// <summary>
-		/// 定秦剑
-		/// </summary>
 		public static WeaponItem IronSwordB5 => Instance[(short)449];
 
-		/// <summary>
-		/// 巨阙
-		/// </summary>
 		public static WeaponItem IronSwordB6 => Instance[(short)450];
 
-		/// <summary>
-		/// 乌光神铁剑
-		/// </summary>
 		public static WeaponItem IronSwordB7 => Instance[(short)451];
 
-		/// <summary>
-		/// 玄铁剑
-		/// </summary>
 		public static WeaponItem IronSwordB8 => Instance[(short)452];
 
-		/// <summary>
-		/// 无锋钝剑
-		/// </summary>
 		public static WeaponItem IronSwordC0 => Instance[(short)453];
 
-		/// <summary>
-		/// 克己剑
-		/// </summary>
 		public static WeaponItem IronSwordC1 => Instance[(short)454];
 
-		/// <summary>
-		/// 镇岳尚方剑
-		/// </summary>
 		public static WeaponItem IronSwordC2 => Instance[(short)455];
 
-		/// <summary>
-		/// 照胆剑
-		/// </summary>
 		public static WeaponItem IronSwordC3 => Instance[(short)456];
 
-		/// <summary>
-		/// 定岚
-		/// </summary>
 		public static WeaponItem IronSwordC4 => Instance[(short)457];
 
-		/// <summary>
-		/// 碧海垂云
-		/// </summary>
 		public static WeaponItem IronSwordC5 => Instance[(short)458];
 
-		/// <summary>
-		/// 龙虎画影
-		/// </summary>
 		public static WeaponItem IronSwordC6 => Instance[(short)459];
 
-		/// <summary>
-		/// 泰阿
-		/// </summary>
 		public static WeaponItem IronSwordC7 => Instance[(short)460];
 
-		/// <summary>
-		/// 太初青宵
-		/// </summary>
 		public static WeaponItem IronSwordC8 => Instance[(short)461];
 
-		/// <summary>
-		/// 素剑
-		/// </summary>
 		public static WeaponItem CopperSwordA0 => Instance[(short)462];
 
-		/// <summary>
-		/// 七指剑
-		/// </summary>
 		public static WeaponItem CopperSwordA1 => Instance[(short)463];
 
-		/// <summary>
-		/// 棠溪剑
-		/// </summary>
 		public static WeaponItem CopperSwordA2 => Instance[(short)464];
 
-		/// <summary>
-		/// 孤光剑
-		/// </summary>
 		public static WeaponItem CopperSwordA3 => Instance[(short)465];
 
-		/// <summary>
-		/// 分景
-		/// </summary>
 		public static WeaponItem CopperSwordA4 => Instance[(short)466];
 
-		/// <summary>
-		/// 鱼肠
-		/// </summary>
 		public static WeaponItem CopperSwordA5 => Instance[(short)467];
 
-		/// <summary>
-		/// 紫青素剑
-		/// </summary>
 		public static WeaponItem CopperSwordA6 => Instance[(short)468];
 
-		/// <summary>
-		/// 莫邪
-		/// </summary>
 		public static WeaponItem CopperSwordA7 => Instance[(short)469];
 
-		/// <summary>
-		/// 纯钧
-		/// </summary>
 		public static WeaponItem CopperSwordA8 => Instance[(short)470];
 
-		/// <summary>
-		/// 元铜剑
-		/// </summary>
 		public static WeaponItem CopperSwordB0 => Instance[(short)471];
 
-		/// <summary>
-		/// 破山剑
-		/// </summary>
 		public static WeaponItem CopperSwordB1 => Instance[(short)472];
 
-		/// <summary>
-		/// 秀霸剑
-		/// </summary>
 		public static WeaponItem CopperSwordB2 => Instance[(short)473];
 
-		/// <summary>
-		/// 罡风
-		/// </summary>
 		public static WeaponItem CopperSwordB3 => Instance[(short)474];
 
-		/// <summary>
-		/// 万仞斩蛟剑
-		/// </summary>
 		public static WeaponItem CopperSwordB4 => Instance[(short)475];
 
-		/// <summary>
-		/// 赤霄剑
-		/// </summary>
 		public static WeaponItem CopperSwordB5 => Instance[(short)476];
 
-		/// <summary>
-		/// 胜邪
-		/// </summary>
 		public static WeaponItem CopperSwordB6 => Instance[(short)477];
 
-		/// <summary>
-		/// 琨珸剑
-		/// </summary>
 		public static WeaponItem CopperSwordB7 => Instance[(short)478];
 
-		/// <summary>
-		/// 轩辕夏禹剑
-		/// </summary>
 		public static WeaponItem CopperSwordB8 => Instance[(short)479];
 
-		/// <summary>
-		/// 蛇盘软剑
-		/// </summary>
 		public static WeaponItem CopperSwordC0 => Instance[(short)480];
 
-		/// <summary>
-		/// 绕指柔剑
-		/// </summary>
 		public static WeaponItem CopperSwordC1 => Instance[(short)481];
 
-		/// <summary>
-		/// 游龙剑
-		/// </summary>
 		public static WeaponItem CopperSwordC2 => Instance[(short)482];
 
-		/// <summary>
-		/// 玉虚软剑
-		/// </summary>
 		public static WeaponItem CopperSwordC3 => Instance[(short)483];
 
-		/// <summary>
-		/// 残灯照月
-		/// </summary>
 		public static WeaponItem CopperSwordC4 => Instance[(short)484];
 
-		/// <summary>
-		/// 却邪
-		/// </summary>
 		public static WeaponItem CopperSwordC5 => Instance[(short)485];
 
-		/// <summary>
-		/// 辟尘剑
-		/// </summary>
 		public static WeaponItem CopperSwordC6 => Instance[(short)486];
 
-		/// <summary>
-		/// 七星龙渊剑
-		/// </summary>
 		public static WeaponItem CopperSwordC7 => Instance[(short)487];
 
-		/// <summary>
-		/// 金蝉剑
-		/// </summary>
 		public static WeaponItem CopperSwordC8 => Instance[(short)488];
 
-		/// <summary>
-		/// 黑光剑
-		/// </summary>
 		public static WeaponItem StoneSword0 => Instance[(short)489];
 
-		/// <summary>
-		/// 阴阳子母剑
-		/// </summary>
 		public static WeaponItem StoneSword1 => Instance[(short)490];
 
-		/// <summary>
-		/// 龙彩剑
-		/// </summary>
 		public static WeaponItem StoneSword2 => Instance[(short)491];
 
-		/// <summary>
-		/// 定光
-		/// </summary>
 		public static WeaponItem StoneSword3 => Instance[(short)492];
 
-		/// <summary>
-		/// 君子如兰
-		/// </summary>
 		public static WeaponItem StoneSword4 => Instance[(short)493];
 
-		/// <summary>
-		/// 紫电清霜
-		/// </summary>
 		public static WeaponItem StoneSword5 => Instance[(short)494];
 
-		/// <summary>
-		/// 飞景天剑
-		/// </summary>
 		public static WeaponItem StoneSword6 => Instance[(short)495];
 
-		/// <summary>
-		/// 太一尺
-		/// </summary>
 		public static WeaponItem StoneSword7 => Instance[(short)496];
 
-		/// <summary>
-		/// 青冥剑
-		/// </summary>
 		public static WeaponItem StoneSword8 => Instance[(short)497];
 
-		/// <summary>
-		/// 晶玉剑
-		/// </summary>
 		public static WeaponItem JadeSword0 => Instance[(short)498];
 
-		/// <summary>
-		/// 翠羽流采
-		/// </summary>
 		public static WeaponItem JadeSword1 => Instance[(short)499];
 
-		/// <summary>
-		/// 巧凌霜
-		/// </summary>
 		public static WeaponItem JadeSword2 => Instance[(short)500];
 
-		/// <summary>
-		/// 含光
-		/// </summary>
 		public static WeaponItem JadeSword3 => Instance[(short)501];
 
-		/// <summary>
-		/// 淑女冰洁
-		/// </summary>
 		public static WeaponItem JadeSword4 => Instance[(short)502];
 
-		/// <summary>
-		/// 宵练
-		/// </summary>
 		public static WeaponItem JadeSword5 => Instance[(short)503];
 
-		/// <summary>
-		/// 龙池天剑
-		/// </summary>
 		public static WeaponItem JadeSword6 => Instance[(short)504];
 
-		/// <summary>
-		/// 承影
-		/// </summary>
 		public static WeaponItem JadeSword7 => Instance[(short)505];
 
-		/// <summary>
-		/// 白冥剑
-		/// </summary>
 		public static WeaponItem JadeSword8 => Instance[(short)506];
 
-		/// <summary>
-		/// 木剑
-		/// </summary>
 		public static WeaponItem WoodSword0 => Instance[(short)507];
 
-		/// <summary>
-		/// 逐鬼剑
-		/// </summary>
 		public static WeaponItem WoodSword1 => Instance[(short)508];
 
-		/// <summary>
-		/// 疏影剑
-		/// </summary>
 		public static WeaponItem WoodSword2 => Instance[(short)509];
 
-		/// <summary>
-		/// 沉香独俏剑
-		/// </summary>
 		public static WeaponItem WoodSword3 => Instance[(short)510];
 
-		/// <summary>
-		/// 斩魔雌雄剑
-		/// </summary>
 		public static WeaponItem WoodSword4 => Instance[(short)511];
 
-		/// <summary>
-		/// 朱霞丹剑
-		/// </summary>
 		public static WeaponItem WoodSword5 => Instance[(short)512];
 
-		/// <summary>
-		/// 风雷飞翅剑
-		/// </summary>
 		public static WeaponItem WoodSword6 => Instance[(short)513];
 
-		/// <summary>
-		/// 惊鸿
-		/// </summary>
 		public static WeaponItem WoodSword7 => Instance[(short)514];
 
-		/// <summary>
-		/// 神锋
-		/// </summary>
 		public static WeaponItem WoodSword8 => Instance[(short)515];
 
-		/// <summary>
-		/// 青竹剑
-		/// </summary>
 		public static WeaponItem BambooSword0 => Instance[(short)516];
 
-		/// <summary>
-		/// 四尺缠身剑
-		/// </summary>
 		public static WeaponItem BambooSword1 => Instance[(short)517];
 
-		/// <summary>
-		/// 紫虚剑
-		/// </summary>
 		public static WeaponItem BambooSword2 => Instance[(short)518];
 
-		/// <summary>
-		/// 灵景金光
-		/// </summary>
 		public static WeaponItem BambooSword3 => Instance[(short)519];
 
-		/// <summary>
-		/// 化龙蛇
-		/// </summary>
 		public static WeaponItem BambooSword4 => Instance[(short)520];
 
-		/// <summary>
-		/// 辟邪神木剑
-		/// </summary>
 		public static WeaponItem BambooSword5 => Instance[(short)521];
 
-		/// <summary>
-		/// 空碧
-		/// </summary>
 		public static WeaponItem BambooSword6 => Instance[(short)522];
 
-		/// <summary>
-		/// 血穹剑
-		/// </summary>
 		public static WeaponItem BambooSword7 => Instance[(short)523];
 
-		/// <summary>
-		/// 离离千世
-		/// </summary>
 		public static WeaponItem BambooSword8 => Instance[(short)524];
 
-		/// <summary>
-		/// 铁刀
-		/// </summary>
 		public static WeaponItem IronBladeA0 => Instance[(short)525];
 
-		/// <summary>
-		/// 白杨刀
-		/// </summary>
 		public static WeaponItem IronBladeA1 => Instance[(short)526];
 
-		/// <summary>
-		/// 番夷尖刀
-		/// </summary>
 		public static WeaponItem IronBladeA2 => Instance[(short)527];
 
-		/// <summary>
-		/// 凤翅刀
-		/// </summary>
 		public static WeaponItem IronBladeA3 => Instance[(short)528];
 
-		/// <summary>
-		/// 修罗刃
-		/// </summary>
 		public static WeaponItem IronBladeA4 => Instance[(short)529];
 
-		/// <summary>
-		/// 寒月
-		/// </summary>
 		public static WeaponItem IronBladeA5 => Instance[(short)530];
 
-		/// <summary>
-		/// 鬼庖丁
-		/// </summary>
 		public static WeaponItem IronBladeA6 => Instance[(short)531];
 
-		/// <summary>
-		/// 残刀
-		/// </summary>
 		public static WeaponItem IronBladeA7 => Instance[(short)532];
 
-		/// <summary>
-		/// 斩龙铡
-		/// </summary>
 		public static WeaponItem IronBladeA8 => Instance[(short)533];
 
-		/// <summary>
-		/// 朴刀
-		/// </summary>
 		public static WeaponItem IronBladeB0 => Instance[(short)534];
 
-		/// <summary>
-		/// 直背狼牙刀
-		/// </summary>
 		public static WeaponItem IronBladeB1 => Instance[(short)535];
 
-		/// <summary>
-		/// 斩马刀
-		/// </summary>
 		public static WeaponItem IronBladeB2 => Instance[(short)536];
 
-		/// <summary>
-		/// 苗祖刀
-		/// </summary>
 		public static WeaponItem IronBladeB3 => Instance[(short)537];
 
-		/// <summary>
-		/// 新亭侯刀
-		/// </summary>
 		public static WeaponItem IronBladeB4 => Instance[(short)538];
 
-		/// <summary>
-		/// 百炼千人斩
-		/// </summary>
 		public static WeaponItem IronBladeB5 => Instance[(short)539];
 
-		/// <summary>
-		/// 泰山宝环刀
-		/// </summary>
 		public static WeaponItem IronBladeB6 => Instance[(short)540];
 
-		/// <summary>
-		/// 狂名
-		/// </summary>
 		public static WeaponItem IronBladeB7 => Instance[(short)541];
 
-		/// <summary>
-		/// 玄铁刀
-		/// </summary>
 		public static WeaponItem IronBladeB8 => Instance[(short)542];
 
-		/// <summary>
-		/// 戒刀
-		/// </summary>
 		public static WeaponItem IronBladeC0 => Instance[(short)543];
 
-		/// <summary>
-		/// 宿铁刀
-		/// </summary>
 		public static WeaponItem IronBladeC1 => Instance[(short)544];
 
-		/// <summary>
-		/// 九环刀
-		/// </summary>
 		public static WeaponItem IronBladeC2 => Instance[(short)545];
 
-		/// <summary>
-		/// 松纹古锭刀
-		/// </summary>
 		public static WeaponItem IronBladeC3 => Instance[(short)546];
 
-		/// <summary>
-		/// 山河分断
-		/// </summary>
 		public static WeaponItem IronBladeC4 => Instance[(short)547];
 
-		/// <summary>
-		/// 大夏龙雀刀
-		/// </summary>
 		public static WeaponItem IronBladeC5 => Instance[(short)548];
 
-		/// <summary>
-		/// 百岳
-		/// </summary>
 		public static WeaponItem IronBladeC6 => Instance[(short)549];
 
-		/// <summary>
-		/// 龙鳞宝刀
-		/// </summary>
 		public static WeaponItem IronBladeC7 => Instance[(short)550];
 
-		/// <summary>
-		/// 九厄
-		/// </summary>
 		public static WeaponItem IronBladeC8 => Instance[(short)551];
 
-		/// <summary>
-		/// 开山刀
-		/// </summary>
 		public static WeaponItem CopperBladeA0 => Instance[(short)552];
 
-		/// <summary>
-		/// 银背弯刀
-		/// </summary>
 		public static WeaponItem CopperBladeA1 => Instance[(short)553];
 
-		/// <summary>
-		/// 雁翎刀
-		/// </summary>
 		public static WeaponItem CopperBladeA2 => Instance[(short)554];
 
-		/// <summary>
-		/// 鸳鸯刀
-		/// </summary>
 		public static WeaponItem CopperBladeA3 => Instance[(short)555];
 
-		/// <summary>
-		/// 吴钩
-		/// </summary>
 		public static WeaponItem CopperBladeA4 => Instance[(short)556];
 
-		/// <summary>
-		/// 狂狮碎金刀
-		/// </summary>
 		public static WeaponItem CopperBladeA5 => Instance[(short)557];
 
-		/// <summary>
-		/// 赤刀
-		/// </summary>
 		public static WeaponItem CopperBladeA6 => Instance[(short)558];
 
-		/// <summary>
-		/// 鸣鸿刀
-		/// </summary>
 		public static WeaponItem CopperBladeA7 => Instance[(short)559];
 
-		/// <summary>
-		/// 五煌炼血刀
-		/// </summary>
 		public static WeaponItem CopperBladeA8 => Instance[(short)560];
 
-		/// <summary>
-		/// 元铜刀
-		/// </summary>
 		public static WeaponItem CopperBladeB0 => Instance[(short)561];
 
-		/// <summary>
-		/// 泼风砍刀
-		/// </summary>
 		public static WeaponItem CopperBladeB1 => Instance[(short)562];
 
-		/// <summary>
-		/// 项王金刀
-		/// </summary>
 		public static WeaponItem CopperBladeB2 => Instance[(short)563];
 
-		/// <summary>
-		/// 牛虎奔雷刀
-		/// </summary>
 		public static WeaponItem CopperBladeB3 => Instance[(short)564];
 
-		/// <summary>
-		/// 阮师刀
-		/// </summary>
 		public static WeaponItem CopperBladeB4 => Instance[(short)565];
 
-		/// <summary>
-		/// 碧眼鬼头刀
-		/// </summary>
 		public static WeaponItem CopperBladeB5 => Instance[(short)566];
 
-		/// <summary>
-		/// 苍龙宝刀
-		/// </summary>
 		public static WeaponItem CopperBladeB6 => Instance[(short)567];
 
-		/// <summary>
-		/// 九犀刀
-		/// </summary>
 		public static WeaponItem CopperBladeB7 => Instance[(short)568];
 
-		/// <summary>
-		/// 虎魄
-		/// </summary>
 		public static WeaponItem CopperBladeB8 => Instance[(short)569];
 
-		/// <summary>
-		/// 鱼头刀
-		/// </summary>
 		public static WeaponItem CopperBladeC0 => Instance[(short)570];
 
-		/// <summary>
-		/// 警恶刀
-		/// </summary>
 		public static WeaponItem CopperBladeC1 => Instance[(short)571];
 
-		/// <summary>
-		/// 银装环首刀
-		/// </summary>
 		public static WeaponItem CopperBladeC2 => Instance[(short)572];
 
-		/// <summary>
-		/// 镇元金刀
-		/// </summary>
 		public static WeaponItem CopperBladeC3 => Instance[(short)573];
 
-		/// <summary>
-		/// 乾坤宝刀
-		/// </summary>
 		public static WeaponItem CopperBladeC4 => Instance[(short)574];
 
-		/// <summary>
-		/// 昆吾刀
-		/// </summary>
 		public static WeaponItem CopperBladeC5 => Instance[(short)575];
 
-		/// <summary>
-		/// 百辟刀
-		/// </summary>
 		public static WeaponItem CopperBladeC6 => Instance[(short)576];
 
-		/// <summary>
-		/// 鲲鹏金翅
-		/// </summary>
 		public static WeaponItem CopperBladeC7 => Instance[(short)577];
 
-		/// <summary>
-		/// 无妄刀
-		/// </summary>
 		public static WeaponItem CopperBladeC8 => Instance[(short)578];
 
-		/// <summary>
-		/// 鸾刀
-		/// </summary>
 		public static WeaponItem StoneBlade0 => Instance[(short)579];
 
-		/// <summary>
-		/// 灵宝刀
-		/// </summary>
 		public static WeaponItem StoneBlade1 => Instance[(short)580];
 
-		/// <summary>
-		/// 血光短刃
-		/// </summary>
 		public static WeaponItem StoneBlade2 => Instance[(short)581];
 
-		/// <summary>
-		/// 火猊舌
-		/// </summary>
 		public static WeaponItem StoneBlade3 => Instance[(short)582];
 
-		/// <summary>
-		/// 金乌眼
-		/// </summary>
 		public static WeaponItem StoneBlade4 => Instance[(short)583];
 
-		/// <summary>
-		/// 含章
-		/// </summary>
 		public static WeaponItem StoneBlade5 => Instance[(short)584];
 
-		/// <summary>
-		/// 晦冥刀
-		/// </summary>
 		public static WeaponItem StoneBlade6 => Instance[(short)585];
 
-		/// <summary>
-		/// 七星宝刀
-		/// </summary>
 		public static WeaponItem StoneBlade7 => Instance[(short)586];
 
-		/// <summary>
-		/// 太元霓霞
-		/// </summary>
 		public static WeaponItem StoneBlade8 => Instance[(short)587];
 
-		/// <summary>
-		/// 玉环刀
-		/// </summary>
 		public static WeaponItem JadeBlade0 => Instance[(short)588];
 
-		/// <summary>
-		/// 漏景刀
-		/// </summary>
 		public static WeaponItem JadeBlade1 => Instance[(short)589];
 
-		/// <summary>
-		/// 玉芙蓉刀
-		/// </summary>
 		public static WeaponItem JadeBlade2 => Instance[(short)590];
 
-		/// <summary>
-		/// 碧波刀
-		/// </summary>
 		public static WeaponItem JadeBlade3 => Instance[(short)591];
 
-		/// <summary>
-		/// 素女分纱
-		/// </summary>
 		public static WeaponItem JadeBlade4 => Instance[(short)592];
 
-		/// <summary>
-		/// 露陌
-		/// </summary>
 		public static WeaponItem JadeBlade5 => Instance[(short)593];
 
-		/// <summary>
-		/// 宝血龙象刀
-		/// </summary>
 		public static WeaponItem JadeBlade6 => Instance[(short)594];
 
-		/// <summary>
-		/// 青鸾宝刀
-		/// </summary>
 		public static WeaponItem JadeBlade7 => Instance[(short)595];
 
-		/// <summary>
-		/// 天霜皓月
-		/// </summary>
 		public static WeaponItem JadeBlade8 => Instance[(short)596];
 
-		/// <summary>
-		/// 木刀
-		/// </summary>
 		public static WeaponItem WoodBlade0 => Instance[(short)597];
 
-		/// <summary>
-		/// 坠燕刀
-		/// </summary>
 		public static WeaponItem WoodBlade1 => Instance[(short)598];
 
-		/// <summary>
-		/// 飞鹿弯刀
-		/// </summary>
 		public static WeaponItem WoodBlade2 => Instance[(short)599];
 
-		/// <summary>
-		/// 断虹刀
-		/// </summary>
 		public static WeaponItem WoodBlade3 => Instance[(short)600];
 
-		/// <summary>
-		/// 化血刀
-		/// </summary>
 		public static WeaponItem WoodBlade4 => Instance[(short)601];
 
-		/// <summary>
-		/// 凤骨火云
-		/// </summary>
 		public static WeaponItem WoodBlade5 => Instance[(short)602];
 
-		/// <summary>
-		/// 舍忧
-		/// </summary>
 		public static WeaponItem WoodBlade6 => Instance[(short)603];
 
-		/// <summary>
-		/// 百胜刀
-		/// </summary>
 		public static WeaponItem WoodBlade7 => Instance[(short)604];
 
-		/// <summary>
-		/// 蔽日刀
-		/// </summary>
 		public static WeaponItem WoodBlade8 => Instance[(short)605];
 
-		/// <summary>
-		/// 青竹刀
-		/// </summary>
 		public static WeaponItem BambooBlade0 => Instance[(short)606];
 
-		/// <summary>
-		/// 慈悲刀
-		/// </summary>
 		public static WeaponItem BambooBlade1 => Instance[(short)607];
 
-		/// <summary>
-		/// 四象刀
-		/// </summary>
 		public static WeaponItem BambooBlade2 => Instance[(short)608];
 
-		/// <summary>
-		/// 青犊刀
-		/// </summary>
 		public static WeaponItem BambooBlade3 => Instance[(short)609];
 
-		/// <summary>
-		/// 七绝子母刀
-		/// </summary>
 		public static WeaponItem BambooBlade4 => Instance[(short)610];
 
-		/// <summary>
-		/// 辟邪神木刀
-		/// </summary>
 		public static WeaponItem BambooBlade5 => Instance[(short)611];
 
-		/// <summary>
-		/// 神术
-		/// </summary>
 		public static WeaponItem BambooBlade6 => Instance[(short)612];
 
-		/// <summary>
-		/// 太一伏魔刀
-		/// </summary>
 		public static WeaponItem BambooBlade7 => Instance[(short)613];
 
-		/// <summary>
-		/// 十方殊途
-		/// </summary>
 		public static WeaponItem BambooBlade8 => Instance[(short)614];
 
-		/// <summary>
-		/// 铁扁担
-		/// </summary>
 		public static WeaponItem IronPolearmA0 => Instance[(short)615];
 
-		/// <summary>
-		/// 浑铁棒
-		/// </summary>
 		public static WeaponItem IronPolearmA1 => Instance[(short)616];
 
-		/// <summary>
-		/// 狼牙哨棍
-		/// </summary>
 		public static WeaponItem IronPolearmA2 => Instance[(short)617];
 
-		/// <summary>
-		/// 四棱点钢棍
-		/// </summary>
 		public static WeaponItem IronPolearmA3 => Instance[(short)618];
 
-		/// <summary>
-		/// 降龙棍
-		/// </summary>
 		public static WeaponItem IronPolearmA4 => Instance[(short)619];
 
-		/// <summary>
-		/// 九曲盘龙棍
-		/// </summary>
 		public static WeaponItem IronPolearmA5 => Instance[(short)620];
 
-		/// <summary>
-		/// 阴阳神铁棒
-		/// </summary>
 		public static WeaponItem IronPolearmA6 => Instance[(short)621];
 
-		/// <summary>
-		/// 定穹
-		/// </summary>
 		public static WeaponItem IronPolearmA7 => Instance[(short)622];
 
-		/// <summary>
-		/// 浑元玄铁棒
-		/// </summary>
 		public static WeaponItem IronPolearmA8 => Instance[(short)623];
 
-		/// <summary>
-		/// 浑铁枪
-		/// </summary>
 		public static WeaponItem IronPolearmB0 => Instance[(short)624];
 
-		/// <summary>
-		/// 芦叶枪
-		/// </summary>
 		public static WeaponItem IronPolearmB1 => Instance[(short)625];
 
-		/// <summary>
-		/// 太宁笔枪
-		/// </summary>
 		public static WeaponItem IronPolearmB2 => Instance[(short)626];
 
-		/// <summary>
-		/// 贯甲三尖枪
-		/// </summary>
 		public static WeaponItem IronPolearmB3 => Instance[(short)627];
 
-		/// <summary>
-		/// 丈八蛇矛
-		/// </summary>
 		public static WeaponItem IronPolearmB4 => Instance[(short)628];
 
-		/// <summary>
-		/// 虎头湛金枪
-		/// </summary>
 		public static WeaponItem IronPolearmB5 => Instance[(short)629];
 
-		/// <summary>
-		/// 乌青蟠龙枪
-		/// </summary>
 		public static WeaponItem IronPolearmB6 => Instance[(short)630];
 
-		/// <summary>
-		/// 霸王枪
-		/// </summary>
 		public static WeaponItem IronPolearmB7 => Instance[(short)631];
 
-		/// <summary>
-		/// 万人敌
-		/// </summary>
 		public static WeaponItem IronPolearmB8 => Instance[(short)632];
 
-		/// <summary>
-		/// 元铜杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA0 => Instance[(short)633];
 
-		/// <summary>
-		/// 护法禅杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA1 => Instance[(short)634];
 
-		/// <summary>
-		/// 丧门杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA2 => Instance[(short)635];
 
-		/// <summary>
-		/// 伏虎杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA3 => Instance[(short)636];
 
-		/// <summary>
-		/// 赤鬼杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA4 => Instance[(short)637];
 
-		/// <summary>
-		/// 震岳山河杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA5 => Instance[(short)638];
 
-		/// <summary>
-		/// 通天杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA6 => Instance[(short)639];
 
-		/// <summary>
-		/// 架海神杖
-		/// </summary>
 		public static WeaponItem CopperPolearmA7 => Instance[(short)640];
 
-		/// <summary>
-		/// 囚龙柱
-		/// </summary>
 		public static WeaponItem CopperPolearmA8 => Instance[(short)641];
 
-		/// <summary>
-		/// 虎牙枪
-		/// </summary>
 		public static WeaponItem CopperPolearmB0 => Instance[(short)642];
 
-		/// <summary>
-		/// 雁翅枪
-		/// </summary>
 		public static WeaponItem CopperPolearmB1 => Instance[(short)643];
 
-		/// <summary>
-		/// 凤嘴梨花枪
-		/// </summary>
 		public static WeaponItem CopperPolearmB2 => Instance[(short)644];
 
-		/// <summary>
-		/// 六合吐金枪
-		/// </summary>
 		public static WeaponItem CopperPolearmB3 => Instance[(short)645];
 
-		/// <summary>
-		/// 五花提卢枪
-		/// </summary>
 		public static WeaponItem CopperPolearmB4 => Instance[(short)646];
 
-		/// <summary>
-		/// 龙胆枪
-		/// </summary>
 		public static WeaponItem CopperPolearmB5 => Instance[(short)647];
 
-		/// <summary>
-		/// 八宝方天戟
-		/// </summary>
 		public static WeaponItem CopperPolearmB6 => Instance[(short)648];
 
-		/// <summary>
-		/// 沥泉枪
-		/// </summary>
 		public static WeaponItem CopperPolearmB7 => Instance[(short)649];
 
-		/// <summary>
-		/// 四海神光
-		/// </summary>
 		public static WeaponItem CopperPolearmB8 => Instance[(short)650];
 
-		/// <summary>
-		/// 丈五石尺
-		/// </summary>
 		public static WeaponItem StonePolearm0 => Instance[(short)651];
 
-		/// <summary>
-		/// 宝石棒
-		/// </summary>
 		public static WeaponItem StonePolearm1 => Instance[(short)652];
 
-		/// <summary>
-		/// 萤飞棍
-		/// </summary>
 		public static WeaponItem StonePolearm2 => Instance[(short)653];
 
-		/// <summary>
-		/// 天河棍
-		/// </summary>
 		public static WeaponItem StonePolearm3 => Instance[(short)654];
 
-		/// <summary>
-		/// 摩天棍
-		/// </summary>
 		public static WeaponItem StonePolearm4 => Instance[(short)655];
 
-		/// <summary>
-		/// 金睛玄虎棒
-		/// </summary>
 		public static WeaponItem StonePolearm5 => Instance[(short)656];
 
-		/// <summary>
-		/// 禅台玄柱
-		/// </summary>
 		public static WeaponItem StonePolearm6 => Instance[(short)657];
 
-		/// <summary>
-		/// 独角黄龙
-		/// </summary>
 		public static WeaponItem StonePolearm7 => Instance[(short)658];
 
-		/// <summary>
-		/// 神照尺
-		/// </summary>
 		public static WeaponItem StonePolearm8 => Instance[(short)659];
 
-		/// <summary>
-		/// 水玉杖
-		/// </summary>
 		public static WeaponItem JadePolearm0 => Instance[(short)660];
 
-		/// <summary>
-		/// 点翠连珠杖
-		/// </summary>
 		public static WeaponItem JadePolearm1 => Instance[(short)661];
 
-		/// <summary>
-		/// 兽钮玉杖
-		/// </summary>
 		public static WeaponItem JadePolearm2 => Instance[(short)662];
 
-		/// <summary>
-		/// 一品杖
-		/// </summary>
 		public static WeaponItem JadePolearm3 => Instance[(short)663];
 
-		/// <summary>
-		/// 宝象禅杖
-		/// </summary>
 		public static WeaponItem JadePolearm4 => Instance[(short)664];
 
-		/// <summary>
-		/// 麒麟杖
-		/// </summary>
 		public static WeaponItem JadePolearm5 => Instance[(short)665];
 
-		/// <summary>
-		/// 蓬莱尺
-		/// </summary>
 		public static WeaponItem JadePolearm6 => Instance[(short)666];
 
-		/// <summary>
-		/// 璃光宝树
-		/// </summary>
 		public static WeaponItem JadePolearm7 => Instance[(short)667];
 
-		/// <summary>
-		/// 仙窍杖
-		/// </summary>
 		public static WeaponItem JadePolearm8 => Instance[(short)668];
 
-		/// <summary>
-		/// 烧火棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA0 => Instance[(short)669];
 
-		/// <summary>
-		/// 齐眉棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA1 => Instance[(short)670];
 
-		/// <summary>
-		/// 水火五行棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA2 => Instance[(short)671];
 
-		/// <summary>
-		/// 连珠飞棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA3 => Instance[(short)672];
 
-		/// <summary>
-		/// 扫霞棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA4 => Instance[(short)673];
 
-		/// <summary>
-		/// 嗔痴棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA5 => Instance[(short)674];
 
-		/// <summary>
-		/// 赤梢疯魔棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA6 => Instance[(short)675];
 
-		/// <summary>
-		/// 神影八卦棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA7 => Instance[(short)676];
 
-		/// <summary>
-		/// 达摩棍
-		/// </summary>
 		public static WeaponItem WoodPolearmA8 => Instance[(short)677];
 
-		/// <summary>
-		/// 苦修杖
-		/// </summary>
 		public static WeaponItem WoodPolearmB0 => Instance[(short)678];
 
-		/// <summary>
-		/// 罗汉杖
-		/// </summary>
 		public static WeaponItem WoodPolearmB1 => Instance[(short)679];
 
-		/// <summary>
-		/// 戒杀杖
-		/// </summary>
 		public static WeaponItem WoodPolearmB2 => Instance[(short)680];
 
-		/// <summary>
-		/// 诤灭禅杖
-		/// </summary>
 		public static WeaponItem WoodPolearmB3 => Instance[(short)681];
 
-		/// <summary>
-		/// 八荒杖
-		/// </summary>
 		public static WeaponItem WoodPolearmB4 => Instance[(short)682];
 
-		/// <summary>
-		/// 遁龙杖
-		/// </summary>
 		public static WeaponItem WoodPolearmB5 => Instance[(short)683];
 
-		/// <summary>
-		/// 摩诃妙谛
-		/// </summary>
 		public static WeaponItem WoodPolearmB6 => Instance[(short)684];
 
-		/// <summary>
-		/// 黑天浮屠
-		/// </summary>
 		public static WeaponItem WoodPolearmB7 => Instance[(short)685];
 
-		/// <summary>
-		/// 盘古柱
-		/// </summary>
 		public static WeaponItem WoodPolearmB8 => Instance[(short)686];
 
-		/// <summary>
-		/// 驱蛇棒
-		/// </summary>
 		public static WeaponItem BambooPolearmA0 => Instance[(short)687];
 
-		/// <summary>
-		/// 扫尘棍
-		/// </summary>
 		public static WeaponItem BambooPolearmA1 => Instance[(short)688];
 
-		/// <summary>
-		/// 盘花软棍
-		/// </summary>
 		public static WeaponItem BambooPolearmA2 => Instance[(short)689];
 
-		/// <summary>
-		/// 七结蛇棒
-		/// </summary>
 		public static WeaponItem BambooPolearmA3 => Instance[(short)690];
 
-		/// <summary>
-		/// 灵猿棍
-		/// </summary>
 		public static WeaponItem BambooPolearmA4 => Instance[(short)691];
 
-		/// <summary>
-		/// 青眼鬼头棒
-		/// </summary>
 		public static WeaponItem BambooPolearmA5 => Instance[(short)692];
 
-		/// <summary>
-		/// 玲珑鹿头棒
-		/// </summary>
 		public static WeaponItem BambooPolearmA6 => Instance[(short)693];
 
-		/// <summary>
-		/// 天机棍
-		/// </summary>
 		public static WeaponItem BambooPolearmA7 => Instance[(short)694];
 
-		/// <summary>
-		/// 紫竹心灯
-		/// </summary>
 		public static WeaponItem BambooPolearmA8 => Instance[(short)695];
 
-		/// <summary>
-		/// 青竹杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB0 => Instance[(short)696];
 
-		/// <summary>
-		/// 礼佛杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB1 => Instance[(short)697];
 
-		/// <summary>
-		/// 飞烟杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB2 => Instance[(short)698];
 
-		/// <summary>
-		/// 慈航禅杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB3 => Instance[(short)699];
 
-		/// <summary>
-		/// 菩提杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB4 => Instance[(short)700];
 
-		/// <summary>
-		/// 潜龙杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB5 => Instance[(short)701];
 
-		/// <summary>
-		/// 净土自在
-		/// </summary>
 		public static WeaponItem BambooPolearmB6 => Instance[(short)702];
 
-		/// <summary>
-		/// 十法界杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB7 => Instance[(short)703];
 
-		/// <summary>
-		/// 化世杖
-		/// </summary>
 		public static WeaponItem BambooPolearmB8 => Instance[(short)704];
 
-		/// <summary>
-		/// 铁琴
-		/// </summary>
 		public static WeaponItem IronZither0 => Instance[(short)705];
 
-		/// <summary>
-		/// 破虏琴
-		/// </summary>
 		public static WeaponItem IronZither1 => Instance[(short)706];
 
-		/// <summary>
-		/// 鹏翅琴
-		/// </summary>
 		public static WeaponItem IronZither2 => Instance[(short)707];
 
-		/// <summary>
-		/// 如山令
-		/// </summary>
 		public static WeaponItem IronZither3 => Instance[(short)708];
 
-		/// <summary>
-		/// 七弦铁门闩
-		/// </summary>
 		public static WeaponItem IronZither4 => Instance[(short)709];
 
-		/// <summary>
-		/// 老龙枕
-		/// </summary>
 		public static WeaponItem IronZither5 => Instance[(short)710];
 
-		/// <summary>
-		/// 八荒萧杀
-		/// </summary>
 		public static WeaponItem IronZither6 => Instance[(short)711];
 
-		/// <summary>
-		/// 镇狱碑
-		/// </summary>
 		public static WeaponItem IronZither7 => Instance[(short)712];
 
-		/// <summary>
-		/// 玄妃
-		/// </summary>
 		public static WeaponItem IronZither8 => Instance[(short)713];
 
-		/// <summary>
-		/// 黄斑琴
-		/// </summary>
 		public static WeaponItem CopperZither0 => Instance[(short)714];
 
-		/// <summary>
-		/// 冷月琴
-		/// </summary>
 		public static WeaponItem CopperZither1 => Instance[(short)715];
 
-		/// <summary>
-		/// 镜影琴
-		/// </summary>
 		public static WeaponItem CopperZither2 => Instance[(short)716];
 
-		/// <summary>
-		/// 敛骨匣
-		/// </summary>
 		public static WeaponItem CopperZither3 => Instance[(short)717];
 
-		/// <summary>
-		/// 鬼壶琴
-		/// </summary>
 		public static WeaponItem CopperZither4 => Instance[(short)718];
 
-		/// <summary>
-		/// 天王如意琴
-		/// </summary>
 		public static WeaponItem CopperZither5 => Instance[(short)719];
 
-		/// <summary>
-		/// 金麟雪
-		/// </summary>
 		public static WeaponItem CopperZither6 => Instance[(short)720];
 
-		/// <summary>
-		/// 十罗刹
-		/// </summary>
 		public static WeaponItem CopperZither7 => Instance[(short)721];
 
-		/// <summary>
-		/// 金魁泰斗
-		/// </summary>
 		public static WeaponItem CopperZither8 => Instance[(short)722];
 
-		/// <summary>
-		/// 乌徽琴
-		/// </summary>
 		public static WeaponItem StoneZither0 => Instance[(short)723];
 
-		/// <summary>
-		/// 春雷琴
-		/// </summary>
 		public static WeaponItem StoneZither1 => Instance[(short)724];
 
-		/// <summary>
-		/// 文武七弦琴
-		/// </summary>
 		public static WeaponItem StoneZither2 => Instance[(short)725];
 
-		/// <summary>
-		/// 残夜琴
-		/// </summary>
 		public static WeaponItem StoneZither3 => Instance[(short)726];
 
-		/// <summary>
-		/// 鬼眼五弦琴
-		/// </summary>
 		public static WeaponItem StoneZither4 => Instance[(short)727];
 
-		/// <summary>
-		/// 绕梁琴
-		/// </summary>
 		public static WeaponItem StoneZither5 => Instance[(short)728];
 
-		/// <summary>
-		/// 清角
-		/// </summary>
 		public static WeaponItem StoneZither6 => Instance[(short)729];
 
-		/// <summary>
-		/// 百光陆离
-		/// </summary>
 		public static WeaponItem StoneZither7 => Instance[(short)730];
 
-		/// <summary>
-		/// 求凰
-		/// </summary>
 		public static WeaponItem StoneZither8 => Instance[(short)731];
 
-		/// <summary>
-		/// 晶玉瑶琴
-		/// </summary>
 		public static WeaponItem JadeZither0 => Instance[(short)732];
 
-		/// <summary>
-		/// 琼响琴
-		/// </summary>
 		public static WeaponItem JadeZither1 => Instance[(short)733];
 
-		/// <summary>
-		/// 素娥琴
-		/// </summary>
 		public static WeaponItem JadeZither2 => Instance[(short)734];
 
-		/// <summary>
-		/// 玉壶琴
-		/// </summary>
 		public static WeaponItem JadeZither3 => Instance[(short)735];
 
-		/// <summary>
-		/// 天光余韵
-		/// </summary>
 		public static WeaponItem JadeZither4 => Instance[(short)736];
 
-		/// <summary>
-		/// 号钟琴
-		/// </summary>
 		public static WeaponItem JadeZither5 => Instance[(short)737];
 
-		/// <summary>
-		/// 玉玲珑
-		/// </summary>
 		public static WeaponItem JadeZither6 => Instance[(short)738];
 
-		/// <summary>
-		/// 瑶台寒玉琴
-		/// </summary>
 		public static WeaponItem JadeZither7 => Instance[(short)739];
 
-		/// <summary>
-		/// 神骇
-		/// </summary>
 		public static WeaponItem JadeZither8 => Instance[(short)740];
 
-		/// <summary>
-		/// 百衲琴
-		/// </summary>
 		public static WeaponItem WoodZither0 => Instance[(short)741];
 
-		/// <summary>
-		/// 铁客琴
-		/// </summary>
 		public static WeaponItem WoodZither1 => Instance[(short)742];
 
-		/// <summary>
-		/// 冉香五弦琴
-		/// </summary>
 		public static WeaponItem WoodZither2 => Instance[(short)743];
 
-		/// <summary>
-		/// 潜龙吟
-		/// </summary>
 		public static WeaponItem WoodZither3 => Instance[(short)744];
 
-		/// <summary>
-		/// 太古遗音
-		/// </summary>
 		public static WeaponItem WoodZither4 => Instance[(short)745];
 
-		/// <summary>
-		/// 焦尾琴
-		/// </summary>
 		public static WeaponItem WoodZither5 => Instance[(short)746];
 
-		/// <summary>
-		/// 凤凰琴
-		/// </summary>
 		public static WeaponItem WoodZither6 => Instance[(short)747];
 
-		/// <summary>
-		/// 洗凡
-		/// </summary>
 		public static WeaponItem WoodZither7 => Instance[(short)748];
 
-		/// <summary>
-		/// 伏羲琴
-		/// </summary>
 		public static WeaponItem WoodZither8 => Instance[(short)749];
 
-		/// <summary>
-		/// 清涧琴
-		/// </summary>
 		public static WeaponItem BambooZither0 => Instance[(short)750];
 
-		/// <summary>
-		/// 秋啸琴
-		/// </summary>
 		public static WeaponItem BambooZither1 => Instance[(short)751];
 
-		/// <summary>
-		/// 蛇腹文琴
-		/// </summary>
 		public static WeaponItem BambooZither2 => Instance[(short)752];
 
-		/// <summary>
-		/// 响泉琴
-		/// </summary>
 		public static WeaponItem BambooZither3 => Instance[(short)753];
 
-		/// <summary>
-		/// 独幽琴
-		/// </summary>
 		public static WeaponItem BambooZither4 => Instance[(short)754];
 
-		/// <summary>
-		/// 绿绮琴
-		/// </summary>
 		public static WeaponItem BambooZither5 => Instance[(short)755];
 
-		/// <summary>
-		/// 九霄环佩
-		/// </summary>
 		public static WeaponItem BambooZither6 => Instance[(short)756];
 
-		/// <summary>
-		/// 清绝
-		/// </summary>
 		public static WeaponItem BambooZither7 => Instance[(short)757];
 
-		/// <summary>
-		/// 希声
-		/// </summary>
 		public static WeaponItem BambooZither8 => Instance[(short)758];
 
-		/// <summary>
-		/// 白云展
-		/// </summary>
 		public static WeaponItem WoodWhisk0 => Instance[(short)759];
 
-		/// <summary>
-		/// 风生扫
-		/// </summary>
 		public static WeaponItem WoodWhisk1 => Instance[(short)760];
 
-		/// <summary>
-		/// 仙云鹤翼尘
-		/// </summary>
 		public static WeaponItem WoodWhisk2 => Instance[(short)761];
 
-		/// <summary>
-		/// 纯阳云展
-		/// </summary>
 		public static WeaponItem WoodWhisk3 => Instance[(short)762];
 
-		/// <summary>
-		/// 天罡拂尘
-		/// </summary>
 		public static WeaponItem WoodWhisk4 => Instance[(short)763];
 
-		/// <summary>
-		/// 日月龙虎尘
-		/// </summary>
 		public static WeaponItem WoodWhisk5 => Instance[(short)764];
 
-		/// <summary>
-		/// 紫气霞光
-		/// </summary>
 		public static WeaponItem WoodWhisk6 => Instance[(short)765];
 
-		/// <summary>
-		/// 太乙拂尘
-		/// </summary>
 		public static WeaponItem WoodWhisk7 => Instance[(short)766];
 
-		/// <summary>
-		/// 三花宝拂尘
-		/// </summary>
 		public static WeaponItem WoodWhisk8 => Instance[(short)767];
 
-		/// <summary>
-		/// 静禅扫
-		/// </summary>
 		public static WeaponItem BambooWhisk0 => Instance[(short)768];
 
-		/// <summary>
-		/// 八卦葫芦尘
-		/// </summary>
 		public static WeaponItem BambooWhisk1 => Instance[(short)769];
 
-		/// <summary>
-		/// 灵宝拂尘
-		/// </summary>
 		public static WeaponItem BambooWhisk2 => Instance[(short)770];
 
-		/// <summary>
-		/// 四象和合尘
-		/// </summary>
 		public static WeaponItem BambooWhisk3 => Instance[(short)771];
 
-		/// <summary>
-		/// 去烦恼
-		/// </summary>
 		public static WeaponItem BambooWhisk4 => Instance[(short)772];
 
-		/// <summary>
-		/// 无漏尘
-		/// </summary>
 		public static WeaponItem BambooWhisk5 => Instance[(short)773];
 
-		/// <summary>
-		/// 太清拂尘
-		/// </summary>
 		public static WeaponItem BambooWhisk6 => Instance[(short)774];
 
-		/// <summary>
-		/// 玄虚妙旨
-		/// </summary>
 		public static WeaponItem BambooWhisk7 => Instance[(short)775];
 
-		/// <summary>
-		/// 混无极
-		/// </summary>
 		public static WeaponItem BambooWhisk8 => Instance[(short)776];
 
-		/// <summary>
-		/// 黄云展
-		/// </summary>
 		public static WeaponItem ClothWhisk0 => Instance[(short)777];
 
-		/// <summary>
-		/// 清鬃葫芦尘
-		/// </summary>
 		public static WeaponItem ClothWhisk1 => Instance[(short)778];
 
-		/// <summary>
-		/// 三宝两仪尘
-		/// </summary>
 		public static WeaponItem ClothWhisk2 => Instance[(short)779];
 
-		/// <summary>
-		/// 宝殿云展
-		/// </summary>
 		public static WeaponItem ClothWhisk3 => Instance[(short)780];
 
-		/// <summary>
-		/// 长生尘
-		/// </summary>
 		public static WeaponItem ClothWhisk4 => Instance[(short)781];
 
-		/// <summary>
-		/// 太虚逍遥尘
-		/// </summary>
 		public static WeaponItem ClothWhisk5 => Instance[(short)782];
 
-		/// <summary>
-		/// 苍龙尾
-		/// </summary>
 		public static WeaponItem ClothWhisk6 => Instance[(short)783];
 
-		/// <summary>
-		/// 太公拂尘
-		/// </summary>
 		public static WeaponItem ClothWhisk7 => Instance[(short)784];
 
-		/// <summary>
-		/// 三清天
-		/// </summary>
 		public static WeaponItem ClothWhisk8 => Instance[(short)785];
 
-		/// <summary>
-		/// 云游拂尘
-		/// </summary>
 		public static WeaponItem SilkWhisk0 => Instance[(short)786];
 
-		/// <summary>
-		/// 龟蛇扫
-		/// </summary>
 		public static WeaponItem SilkWhisk1 => Instance[(short)787];
 
-		/// <summary>
-		/// 真师拂尘
-		/// </summary>
 		public static WeaponItem SilkWhisk2 => Instance[(short)788];
 
-		/// <summary>
-		/// 净世观音尘
-		/// </summary>
 		public static WeaponItem SilkWhisk3 => Instance[(short)789];
 
-		/// <summary>
-		/// 老君拂尘
-		/// </summary>
 		public static WeaponItem SilkWhisk4 => Instance[(short)790];
 
-		/// <summary>
-		/// 扫乾坤
-		/// </summary>
 		public static WeaponItem SilkWhisk5 => Instance[(short)791];
 
-		/// <summary>
-		/// 浑元拂尘
-		/// </summary>
 		public static WeaponItem SilkWhisk6 => Instance[(short)792];
 
-		/// <summary>
-		/// 吕祖拂尘
-		/// </summary>
 		public static WeaponItem SilkWhisk7 => Instance[(short)793];
 
-		/// <summary>
-		/// 太玄华发
-		/// </summary>
 		public static WeaponItem SilkWhisk8 => Instance[(short)794];
 
-		/// <summary>
-		/// 七节鞭
-		/// </summary>
 		public static WeaponItem WoodWhip0 => Instance[(short)795];
 
-		/// <summary>
-		/// 刑戮鞭
-		/// </summary>
 		public static WeaponItem WoodWhip1 => Instance[(short)796];
 
-		/// <summary>
-		/// 飞蜈鞭
-		/// </summary>
 		public static WeaponItem WoodWhip2 => Instance[(short)797];
 
-		/// <summary>
-		/// 血绞长鞭
-		/// </summary>
 		public static WeaponItem WoodWhip3 => Instance[(short)798];
 
-		/// <summary>
-		/// 罗刹娑
-		/// </summary>
 		public static WeaponItem WoodWhip4 => Instance[(short)799];
 
-		/// <summary>
-		/// 奇狂索
-		/// </summary>
 		public static WeaponItem WoodWhip5 => Instance[(short)800];
 
-		/// <summary>
-		/// 句芒索
-		/// </summary>
 		public static WeaponItem WoodWhip6 => Instance[(short)801];
 
-		/// <summary>
-		/// 龙骨神木鞭
-		/// </summary>
 		public static WeaponItem WoodWhip7 => Instance[(short)802];
 
-		/// <summary>
-		/// 玄蛇索
-		/// </summary>
 		public static WeaponItem WoodWhip8 => Instance[(short)803];
 
-		/// <summary>
-		/// 竹节索
-		/// </summary>
 		public static WeaponItem BambooWhip0 => Instance[(short)804];
 
-		/// <summary>
-		/// 荆棘软鞭
-		/// </summary>
 		public static WeaponItem BambooWhip1 => Instance[(short)805];
 
-		/// <summary>
-		/// 青蟒鞭
-		/// </summary>
 		public static WeaponItem BambooWhip2 => Instance[(short)806];
 
-		/// <summary>
-		/// 连环百节鞭
-		/// </summary>
 		public static WeaponItem BambooWhip3 => Instance[(short)807];
 
-		/// <summary>
-		/// 鬼蝠黑索
-		/// </summary>
 		public static WeaponItem BambooWhip4 => Instance[(short)808];
 
-		/// <summary>
-		/// 如影随行
-		/// </summary>
 		public static WeaponItem BambooWhip5 => Instance[(short)809];
 
-		/// <summary>
-		/// 桃仙索
-		/// </summary>
 		public static WeaponItem BambooWhip6 => Instance[(short)810];
 
-		/// <summary>
-		/// 缚龙索
-		/// </summary>
 		public static WeaponItem BambooWhip7 => Instance[(short)811];
 
-		/// <summary>
-		/// 青蛛紫螟
-		/// </summary>
 		public static WeaponItem BambooWhip8 => Instance[(short)812];
 
-		/// <summary>
-		/// 虎皮长鞭
-		/// </summary>
 		public static WeaponItem ClothWhip0 => Instance[(short)813];
 
-		/// <summary>
-		/// 紫梢鞭
-		/// </summary>
 		public static WeaponItem ClothWhip1 => Instance[(short)814];
 
-		/// <summary>
-		/// 兽王鞭
-		/// </summary>
 		public static WeaponItem ClothWhip2 => Instance[(short)815];
 
-		/// <summary>
-		/// 九夷长鞭
-		/// </summary>
 		public static WeaponItem ClothWhip3 => Instance[(short)816];
 
-		/// <summary>
-		/// 鬼咆鞭
-		/// </summary>
 		public static WeaponItem ClothWhip4 => Instance[(short)817];
 
-		/// <summary>
-		/// 白景缠金索
-		/// </summary>
 		public static WeaponItem ClothWhip5 => Instance[(short)818];
 
-		/// <summary>
-		/// 凤翎神火鞭
-		/// </summary>
 		public static WeaponItem ClothWhip6 => Instance[(short)819];
 
-		/// <summary>
-		/// 金蛇鞭
-		/// </summary>
 		public static WeaponItem ClothWhip7 => Instance[(short)820];
 
-		/// <summary>
-		/// 金蝉索
-		/// </summary>
 		public static WeaponItem ClothWhip8 => Instance[(short)821];
 
-		/// <summary>
-		/// 蜡梢黄鞭
-		/// </summary>
 		public static WeaponItem SilkWhip0 => Instance[(short)822];
 
-		/// <summary>
-		/// 曲尘索
-		/// </summary>
 		public static WeaponItem SilkWhip1 => Instance[(short)823];
 
-		/// <summary>
-		/// 花衣索
-		/// </summary>
 		public static WeaponItem SilkWhip2 => Instance[(short)824];
 
-		/// <summary>
-		/// 长虹索
-		/// </summary>
 		public static WeaponItem SilkWhip3 => Instance[(short)825];
 
-		/// <summary>
-		/// 错金龙梢鞭
-		/// </summary>
 		public static WeaponItem SilkWhip4 => Instance[(short)826];
 
-		/// <summary>
-		/// 火树银花
-		/// </summary>
 		public static WeaponItem SilkWhip5 => Instance[(short)827];
 
-		/// <summary>
-		/// 五方天帝索
-		/// </summary>
 		public static WeaponItem SilkWhip6 => Instance[(short)828];
 
-		/// <summary>
-		/// 雾幻琼索
-		/// </summary>
 		public static WeaponItem SilkWhip7 => Instance[(short)829];
 
-		/// <summary>
-		/// 天蚕索
-		/// </summary>
 		public static WeaponItem SilkWhip8 => Instance[(short)830];
 
-		/// <summary>
-		/// 伏虞剑
-		/// </summary>
 		public static WeaponItem FuyuSword => Instance[(short)839];
 
-		/// <summary>
-		/// 莫女衣-近距
-		/// </summary>
 		public static WeaponItem MonvA => Instance[(short)840];
 
-		/// <summary>
-		/// 伏邪铁-近距
-		/// </summary>
 		public static WeaponItem DayueYaochangA => Instance[(short)841];
 
-		/// <summary>
-		/// 大玄凝-近距
-		/// </summary>
 		public static WeaponItem JiuhanA => Instance[(short)842];
 
-		/// <summary>
-		/// 凤凰茧-近距
-		/// </summary>
 		public static WeaponItem JinHuangerA => Instance[(short)843];
 
-		/// <summary>
-		/// 焚神炼-近距
-		/// </summary>
 		public static WeaponItem YiYihouA => Instance[(short)844];
 
-		/// <summary>
-		/// 解龙魄-近距
-		/// </summary>
 		public static WeaponItem WeiQiA => Instance[(short)845];
 
-		/// <summary>
-		/// 溶尘隐-近距
-		/// </summary>
 		public static WeaponItem YixiangA => Instance[(short)846];
 
-		/// <summary>
-		/// 囚魔木-近距
-		/// </summary>
 		public static WeaponItem XuefengA => Instance[(short)847];
 
-		/// <summary>
-		/// 鬼神霞-近距
-		/// </summary>
 		public static WeaponItem ShuFangA => Instance[(short)848];
 
-		/// <summary>
-		/// 伏虞剑-近距
-		/// </summary>
 		public static WeaponItem XiangshuA => Instance[(short)849];
 
-		/// <summary>
-		/// 语茯花-近距
-		/// </summary>
 		public static WeaponItem YufuA => Instance[(short)850];
 
-		/// <summary>
-		/// 紫竹灵-近距
-		/// </summary>
 		public static WeaponItem ZiwushaoA => Instance[(short)851];
 
-		/// <summary>
-		/// 莫女衣-中距
-		/// </summary>
 		public static WeaponItem MonvB => Instance[(short)852];
 
-		/// <summary>
-		/// 伏邪铁-中距
-		/// </summary>
 		public static WeaponItem DayueYaochangB => Instance[(short)853];
 
-		/// <summary>
-		/// 大玄凝-中距
-		/// </summary>
 		public static WeaponItem JiuhanB => Instance[(short)854];
 
-		/// <summary>
-		/// 凤凰茧-中距
-		/// </summary>
 		public static WeaponItem JinHuangerB => Instance[(short)855];
 
-		/// <summary>
-		/// 焚神炼-中距
-		/// </summary>
 		public static WeaponItem YiYihouB => Instance[(short)856];
 
-		/// <summary>
-		/// 解龙魄-中距
-		/// </summary>
 		public static WeaponItem WeiQiB => Instance[(short)857];
 
-		/// <summary>
-		/// 溶尘隐-中距
-		/// </summary>
 		public static WeaponItem YixiangB => Instance[(short)858];
 
-		/// <summary>
-		/// 囚魔木-中距
-		/// </summary>
 		public static WeaponItem XuefengB => Instance[(short)859];
 
-		/// <summary>
-		/// 鬼神霞-中距
-		/// </summary>
 		public static WeaponItem ShuFangB => Instance[(short)860];
 
-		/// <summary>
-		/// 伏虞剑-中距
-		/// </summary>
 		public static WeaponItem XiangshuB => Instance[(short)861];
 
-		/// <summary>
-		/// 语茯花-中距
-		/// </summary>
 		public static WeaponItem YufuB => Instance[(short)862];
 
-		/// <summary>
-		/// 紫竹灵-中距
-		/// </summary>
 		public static WeaponItem ZiwushaoB => Instance[(short)863];
 
-		/// <summary>
-		/// 莫女衣-远距
-		/// </summary>
 		public static WeaponItem MonvC => Instance[(short)864];
 
-		/// <summary>
-		/// 伏邪铁-远距
-		/// </summary>
 		public static WeaponItem DayueYaochangC => Instance[(short)865];
 
-		/// <summary>
-		/// 大玄凝-远距
-		/// </summary>
 		public static WeaponItem JiuhanC => Instance[(short)866];
 
-		/// <summary>
-		/// 凤凰茧-远距
-		/// </summary>
 		public static WeaponItem JinHuangerC => Instance[(short)867];
 
-		/// <summary>
-		/// 焚神炼-远距
-		/// </summary>
 		public static WeaponItem YiYihouC => Instance[(short)868];
 
-		/// <summary>
-		/// 解龙魄-远距
-		/// </summary>
 		public static WeaponItem WeiQiC => Instance[(short)869];
 
-		/// <summary>
-		/// 溶尘隐-远距
-		/// </summary>
 		public static WeaponItem YixiangC => Instance[(short)870];
 
-		/// <summary>
-		/// 囚魔木-远距
-		/// </summary>
 		public static WeaponItem XuefengC => Instance[(short)871];
 
-		/// <summary>
-		/// 鬼神霞-远距
-		/// </summary>
 		public static WeaponItem ShuFangC => Instance[(short)872];
 
-		/// <summary>
-		/// 伏虞剑-远距
-		/// </summary>
 		public static WeaponItem XiangshuC => Instance[(short)873];
 
-		/// <summary>
-		/// 语茯花-远距
-		/// </summary>
 		public static WeaponItem YufuC => Instance[(short)874];
 
-		/// <summary>
-		/// 紫竹灵-远距
-		/// </summary>
 		public static WeaponItem ZiwushaoC => Instance[(short)875];
 
-		/// <summary>
-		/// 喉声
-		/// </summary>
 		public static WeaponItem Voice => Instance[(short)884];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Weapon Instance = new Weapon();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -14415,8 +9192,8 @@ public class Weapon : ConfigData<WeaponItem, short>
 		_dataArray.Add(new WeaponItem(879, LocalStringManager.GetConfig("Weapon_language", "Name_879"), 0, 16, 8, -1, "icon_Weapon_siwujian", LocalStringManager.GetConfig("Weapon_language", "Desc_879"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_879"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 500, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, 1785, 1500, 1800, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "weapon_FHJ", "weapon_DXN", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "battle_parry_d_01", "battle_parry_d_02", "battle_parry_d_03" }, new List<string> { "se_combat_hit_sword_1", "se_combat_hit_sword_2", "se_combat_hit_sword_3" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 190, 32, 1, 48, 96, 35, 80, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 330, 75, 50, 0, 100));
 		_dataArray.Add(new WeaponItem(880, LocalStringManager.GetConfig("Weapon_language", "Name_880"), 0, 16, 8, -1, "icon_Weapon_liuqibajian", LocalStringManager.GetConfig("Weapon_language", "Desc_880"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_880"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 1500, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, 1786, 1800, 1700, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "weapon_QMM", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "battle_parry_d_01", "battle_parry_d_02", "battle_parry_d_03" }, new List<string> { "se_combat_hit_sword_1", "se_combat_hit_sword_2", "se_combat_hit_sword_3" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 205, 32, 2, 60, 120, 40, 90, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 485, 120, 50, 0, 100));
 		_dataArray.Add(new WeaponItem(881, LocalStringManager.GetConfig("Weapon_language", "Name_881"), 0, 16, 8, -1, "icon_Weapon_jiujianguishenxia", LocalStringManager.GetConfig("Weapon_language", "Desc_881"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_881"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: true, -99, 20, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, 1790, 520, 1220, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "weapon_GSX", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "battle_parry_d_01", "battle_parry_d_02", "battle_parry_d_03" }, new List<string> { "se_combat_hit_heart" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 190, 29, 0, 36, 72, 20, 120, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 165, 60, 100, 0, 100));
-		_dataArray.Add(new WeaponItem(882, LocalStringManager.GetConfig("Weapon_language", "Name_882"), 0, 16, 8, -1, "icon_Weapon_tianmuxinwei", LocalStringManager.GetConfig("Weapon_language", "Desc_882"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_882"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 20, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 3000, 3000, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 220, 60, 0, 36, 72, 60, 120, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 250, 30, 50, 0, 100));
-		_dataArray.Add(new WeaponItem(883, LocalStringManager.GetConfig("Weapon_language", "Name_883"), 0, 16, 8, -1, "icon_Weapon_kaimingtianshou", LocalStringManager.GetConfig("Weapon_language", "Desc_883"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_883"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 2500, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 2600, 1600, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 220, 32, 2, 60, 120, 20, 80, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 750, 120, 50, 0, 100));
+		_dataArray.Add(new WeaponItem(882, LocalStringManager.GetConfig("Weapon_language", "Name_882"), 0, 16, 8, -1, "icon_Weapon_tianmuxinwei", LocalStringManager.GetConfig("Weapon_language", "Desc_882"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_882"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 20, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 3000, 3000, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "se_combat_hit_punch_1", "se_combat_hit_punch_2", "se_combat_hit_punch_3" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 220, 60, 0, 36, 72, 60, 120, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 250, 30, 50, 0, 100));
+		_dataArray.Add(new WeaponItem(883, LocalStringManager.GetConfig("Weapon_language", "Name_883"), 0, 16, 8, -1, "icon_Weapon_kaimingtianshou", LocalStringManager.GetConfig("Weapon_language", "Desc_883"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_883"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 2500, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 2600, 1600, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "se_combat_hit_punch_1", "se_combat_hit_punch_2", "se_combat_hit_punch_3" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 220, 32, 2, 60, 120, 20, 80, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 750, 120, 50, 0, 100));
 		_dataArray.Add(new WeaponItem(884, LocalStringManager.GetConfig("Weapon_language", "Name_884"), 0, 3, 0, -1, "icon_Weapon_housheng", LocalStringManager.GetConfig("Weapon_language", "Desc_884"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_884"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, 0, 10, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: false, 0, isSpecial: true, -1, 36, -1, new List<int>(), 0, -1, -1, 250, 250, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>
 		{
 			new PropertyAndValue(2, 60),
@@ -14477,7 +9254,7 @@ public class Weapon : ConfigData<WeaponItem, short>
 		_dataArray.Add(new WeaponItem(932, LocalStringManager.GetConfig("Weapon_language", "Name_932"), 0, 17, 6, -1, "icon_Weapon_rongrongyan", LocalStringManager.GetConfig("Weapon_language", "Desc_932"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_932"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 0, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: false, 0, isSpecial: true, -1, 36, -1, new List<int>(), 0, -1, 1789, 960, 2200, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 1, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, null, playArmorHitSound: true, -1, new List<sbyte> { 16, 16, 16, 16, 16, 16 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 50, 10, 2, 60, 240, 30, 70, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 410, 120, 0, 0, 100));
 		_dataArray.Add(new WeaponItem(933, LocalStringManager.GetConfig("Weapon_language", "Name_933"), 0, 17, 6, -1, "icon_Weapon_lingzhizhua", LocalStringManager.GetConfig("Weapon_language", "Desc_933"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_933"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 0, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: false, 0, isSpecial: true, -1, 36, -1, new List<int>(), 0, -1, 1789, 960, 720, new PoisonsAndLevels(90, 3, 0, 0, 0, 0, 90, 3, 90, 3, 0, 0), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "se_combat_hit_punch_1", "se_combat_hit_punch_2", "se_combat_hit_punch_3" }, null, playArmorHitSound: true, -1, new List<sbyte> { 17, 17, 17, 17, 17, 17 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 150, 15, 1, 48, 192, 25, 65, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 295, 75, 50, 0, 100));
 		_dataArray.Add(new WeaponItem(934, LocalStringManager.GetConfig("Weapon_language", "Name_934"), 0, 17, 6, -1, "icon_Weapon_lingzhisan", LocalStringManager.GetConfig("Weapon_language", "Desc_934"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_934"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 0, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: false, 0, isSpecial: true, -1, 36, -1, new List<int>(), 0, -1, 1789, 960, 720, new PoisonsAndLevels(0, 0, 90, 3, 90, 3, 0, 0, 0, 0, 90, 3), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "se_combat_hit_punch_1", "se_combat_hit_punch_2", "se_combat_hit_punch_3" }, null, playArmorHitSound: true, -1, new List<sbyte> { 16, 16, 16, 16, 16, 16 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 180, 10, 2, 60, 240, 20, 60, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 405, 120, 50, 0, 100));
-		_dataArray.Add(new WeaponItem(935, LocalStringManager.GetConfig("Weapon_language", "Name_935"), 0, 16, 8, -1, "icon_Weapon_shengjielingfu", LocalStringManager.GetConfig("Weapon_language", "Desc_935"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_935"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 100, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 1800, 1800, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 200, 32, 1, 48, 96, 20, 80, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 450, 75, 50, 0, 100));
+		_dataArray.Add(new WeaponItem(935, LocalStringManager.GetConfig("Weapon_language", "Name_935"), 0, 16, 8, -1, "icon_Weapon_shengjielingfu", LocalStringManager.GetConfig("Weapon_language", "Desc_935"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_935"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 100, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 1800, 1800, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "se_combat_hit_punch_1", "se_combat_hit_punch_2", "se_combat_hit_punch_3" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 200, 32, 1, 48, 96, 20, 80, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 450, 75, 50, 0, 100));
 		_dataArray.Add(new WeaponItem(936, LocalStringManager.GetConfig("Weapon_language", "Name_936"), 0, 16, 8, -1, "icon_Weapon_bayumoluobi", LocalStringManager.GetConfig("Weapon_language", "Desc_936"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_936"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 1000, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 2400, 2400, new PoisonsAndLevels(120, 3, 0, 0, 0, 0, 120, 3, 0, 0, 0, 0), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 175, 32, 2, 60, 120, 20, 60, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 750, 120, 50, 0, 100));
 		_dataArray.Add(new WeaponItem(937, LocalStringManager.GetConfig("Weapon_language", "Name_937"), 0, 16, 8, -1, "icon_Weapon_shiquanmiefaqi", LocalStringManager.GetConfig("Weapon_language", "Desc_937"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_937"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 2500, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 2400, 2400, new PoisonsAndLevels(0, 0, 120, 3, 120, 3, 0, 0, 0, 0, 0, 0), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 175, 32, 2, 60, 120, 40, 80, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 750, 120, 50, 0, 100));
 		_dataArray.Add(new WeaponItem(938, LocalStringManager.GetConfig("Weapon_language", "Name_938"), 0, 16, 8, -1, "icon_Weapon_wanxiangxuanmoyan", LocalStringManager.GetConfig("Weapon_language", "Desc_938"), LocalStringManager.GetConfig("Weapon_language", "FunctionDesc_938"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: false, -99, 1500, 0, 0, 0, 0, 0, allowRandomCreate: false, allowRawCreate: false, allowCrippledCreate: true, 0, isSpecial: true, -1, -1, -1, new List<int>(), 0, -1, -1, 2400, 2400, new PoisonsAndLevels(0, 0, 0, 0, 0, 0, 0, 0, 120, 3, 120, 3), new List<PropertyAndValue>(), 0, "Null", "Null", null, null, null, null, null, null, null, "Particle_H_005", null, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, new List<string> { "" }, null, playArmorHitSound: true, -1, new List<sbyte> { 21, 21, 21, 21, 21, 21 }, new List<TrickDistanceAdjust>(), randomTrick: false, canChangeTrick: true, 175, 32, 2, 60, 120, 60, 120, new HitOrAvoidShorts(default(short), default(short), default(short), default(short)), 750, 120, 50, 0, 100));

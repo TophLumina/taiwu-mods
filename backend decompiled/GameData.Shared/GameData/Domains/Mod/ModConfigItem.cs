@@ -6,50 +6,27 @@ using GameData.Utilities.Mod;
 
 namespace GameData.Domains.Mod;
 
-/// <summary>
-/// MOD 配置条目
-/// </summary>
 public class ModConfigItem : ICommonObjectSerializationAware
 {
 	internal static string ModIdentifier;
 
-	/// <summary>
-	/// 所属表名
-	/// </summary>
 	public string ConfigName;
 
-	/// <summary>
-	/// 已存在的配置条目模板引用名
-	/// </summary>
 	public string SrcConfigRefName;
 
-	/// <summary>
-	/// 新配置条目的引用名
-	/// </summary>
 	public string DestConfigRefName;
 
-	/// <summary>
-	/// 模板 Id
-	/// </summary>
 	public int TemplateId = -1;
 
-	/// <summary>
-	/// 数据表
-	/// </summary>
 	public ModConfigItemData Data;
 
-	/// <summary>
-	/// 合法
-	/// </summary>
 	public bool IsValid;
 
-	/// <inheritdoc />
 	public bool SkipMember(MemberInfo member, bool deserializing)
 	{
 		return member.Name == "Data";
 	}
 
-	/// <inheritdoc />
 	public void DeserializingMissingField(CommonObjectSerializationMember member)
 	{
 		string name = member.Name;
@@ -60,7 +37,6 @@ public class ModConfigItem : ICommonObjectSerializationAware
 		}
 	}
 
-	/// <inheritdoc />
 	public bool DeserializingUnknownField(string name, out CommonObjectSerializationMember proc)
 	{
 		if ("Data" == name)
@@ -80,13 +56,11 @@ public class ModConfigItem : ICommonObjectSerializationAware
 		return false;
 	}
 
-	/// <inheritdoc />
 	public void InitializeOnDeserializing()
 	{
 		IsValid = true;
 	}
 
-	/// <inheritdoc />
 	public void FinishedDeserialization()
 	{
 		if (ConfigName == null)

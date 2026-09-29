@@ -4,48 +4,23 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 辩论中正在生效的策略
-/// </summary>
 public class ActivatedStrategy : ISerializableGameData
 {
-	/// <summary>
-	/// Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 附着的论点Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int PawnId;
 
-	/// <summary>
-	/// 模板Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 是否是太吾释放
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsCastedByTaiwu;
 
-	/// <summary>
-	/// 是否揭示
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsRevealed;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="pawnId"></param>
-	/// <param name="templateId"></param>
-	/// <param name="isCastedByTaiwu"></param>
 	public ActivatedStrategy(int id, int pawnId, short templateId, bool isCastedByTaiwu)
 	{
 		Id = id;
@@ -55,29 +30,16 @@ public class ActivatedStrategy : ISerializableGameData
 		IsRevealed = false;
 	}
 
-	/// <summary>
-	/// 获取策略配置
-	/// </summary>
-	/// <returns></returns>
 	public DebateStrategyItem GetConfig()
 	{
 		return DebateStrategy.Instance[TemplateId];
 	}
 
-	/// <summary>
-	/// 获取策略触发类型
-	/// </summary>
-	/// <param name="id"></param>
-	/// <returns></returns>
 	public EDebateStrategyTriggerType GetTriggerType()
 	{
 		return GetConfig().TriggerType;
 	}
 
-	/// <summary>
-	/// 是否惰性
-	/// </summary>
-	/// <returns></returns>
 	public bool GetIsInertia()
 	{
 		DebateStrategyItem config = GetConfig();
@@ -95,16 +57,10 @@ public class ActivatedStrategy : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ActivatedStrategy()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ActivatedStrategy(ActivatedStrategy other)
 	{
 		Id = other.Id;
@@ -114,9 +70,6 @@ public class ActivatedStrategy : ISerializableGameData
 		IsRevealed = other.IsRevealed;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ActivatedStrategy other)
 	{
 		Id = other.Id;
@@ -126,13 +79,11 @@ public class ActivatedStrategy : ISerializableGameData
 		IsRevealed = other.IsRevealed;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -143,7 +94,6 @@ public class ActivatedStrategy : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = Id;
@@ -163,7 +113,6 @@ public class ActivatedStrategy : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

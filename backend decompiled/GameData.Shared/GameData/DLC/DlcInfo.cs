@@ -5,26 +5,14 @@ using GameData.Utilities;
 
 namespace GameData.DLC;
 
-/// <summary>
-/// 一个dlc扩展包的信息
-/// </summary>
 public class DlcInfo : ISerializableGameData, IEquatable<DlcInfo>
 {
-	/// <summary>
-	/// dlc id
-	/// </summary>
 	[SerializableGameDataField]
 	public DlcId DlcId;
 
-	/// <summary>
-	/// 是否安装
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInstalled;
 
-	/// <summary>
-	/// 事件路径
-	/// </summary>
 	[SerializableGameDataField]
 	public string EventDirectory;
 
@@ -35,45 +23,26 @@ public class DlcInfo : ISerializableGameData, IEquatable<DlcInfo>
 		EventDirectory = eventDirectory;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool Equals(DlcInfo other)
 	{
 		return DlcId.Equals(other?.DlcId);
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <returns></returns>
 	public override int GetHashCode()
 	{
 		return DlcId.GetHashCode();
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <returns></returns>
 	public string GetVersionString()
 	{
 		var (major, minor, build, revision) = BitOperation.UnpackVersion(DlcId.Version);
 		return new Version(major, minor, build, revision).ToString();
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public DlcInfo()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DlcInfo(DlcInfo other)
 	{
 		DlcId = other.DlcId;
@@ -81,9 +50,6 @@ public class DlcInfo : ISerializableGameData, IEquatable<DlcInfo>
 		EventDirectory = other.EventDirectory;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DlcInfo other)
 	{
 		DlcId = other.DlcId;
@@ -91,13 +57,11 @@ public class DlcInfo : ISerializableGameData, IEquatable<DlcInfo>
 		EventDirectory = other.EventDirectory;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 17;
@@ -109,7 +73,6 @@ public class DlcInfo : ISerializableGameData, IEquatable<DlcInfo>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -144,7 +107,6 @@ public class DlcInfo : ISerializableGameData, IEquatable<DlcInfo>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -6,9 +6,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇数据上下文桥接器
-/// </summary>
 public interface IAdventureContextBridge
 {
 	IRandomSource Random { get; }
@@ -25,7 +22,7 @@ public interface IAdventureContextBridge
 
 	void CallCharacters(IList<int> calledCharacters, CharacterFilterKey filterKey, Location location, int maxCount);
 
-	int GenerateTemporaryCharacter(short templateId);
+	int GenerateTemporaryCharacter(short templateId, Location location);
 
 	int GenerateTemporaryCharacter(CharacterFilterKey filterKey, Location location);
 

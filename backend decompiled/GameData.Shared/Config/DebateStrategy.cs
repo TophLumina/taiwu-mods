@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class DebateStrategy : ConfigData<DebateStrategyItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DebateStrategy Instance = new DebateStrategy();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

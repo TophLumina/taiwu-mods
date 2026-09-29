@@ -32,11 +32,13 @@ public class QingPingDiao : CombatSkillEffectBase
 			ShowSpecialEffectTips(0);
 		}
 		Events.RegisterHandler_AttackSkillAttackEnd(OnAttackSkillAttackEnd);
+		Events.RegisterHandler_CastSkillEnd(OnCastSkillEnd);
 	}
 
 	public override void OnDisable(DataContext context)
 	{
 		Events.UnRegisterHandler_AttackSkillAttackEnd(OnAttackSkillAttackEnd);
+		Events.UnRegisterHandler_CastSkillEnd(OnCastSkillEnd);
 	}
 
 	private void OnAttackSkillAttackEnd(CombatContext context, sbyte hitType, bool hit, int index)
@@ -59,6 +61,14 @@ public class QingPingDiao : CombatSkillEffectBase
 			ShowSpecialEffectTips(1);
 		}
 		RemoveSelf(context);
+	}
+
+	private void OnCastSkillEnd(DataContext context, int charId, bool isAlly, short skillId, sbyte power, bool _)
+	{
+		if (SkillKey.IsMatch(charId, skillId))
+		{
+			RemoveSelf(context);
+		}
 	}
 
 	public override int GetModifyValue(AffectedDataKey dataKey, int currModifyValue)

@@ -5,36 +5,19 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Relation.RelationTree;
 
-/// <summary>
-/// 配偶及子女
-/// </summary>
 [Obsolete]
 [SerializableGameData(NotForDisplayModule = true)]
 public class SpouseAndChildrenObsoleted : ISerializableGameData
 {
-	/// <summary>
-	/// 核心角色的配偶.
-	/// 为 -1 表示配偶不存在但有子女. 比如自己未婚时认的义亲子女, 轮回台感应生下的孩子.
-	/// </summary>
 	[SerializableGameDataField]
 	public int SpouseCharId;
 
-	/// <summary>
-	/// "和核心角色共同的血亲子女" + "核心角色的继亲子女, 配偶的血亲子女或继亲子女" + "和核心角色共同的义亲子女" (需要排序)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharIdAndRelation> Children;
 
-	/// <summary>
-	/// "和核心角色共同的血亲子女" 的配偶及子女 (不需要排序).
-	/// 到孙辈时此数据固定为空.
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SpousesAndChildrenObsoleted> BloodChildrenSpouses;
 
-	/// <summary>
-	/// 配偶及子女
-	/// </summary>
 	public SpouseAndChildrenObsoleted()
 	{
 		SpouseCharId = -1;

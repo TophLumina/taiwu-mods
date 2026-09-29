@@ -7,37 +7,15 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.LifeRecord;
 
-/// <summary>
-/// 最小的经历传输单位，需要与<see cref="T:GameData.Domains.LifeRecord.TransferableArgumentCollection" />一并传送
-/// GameData.Domains.LifeRecord.TransferableRecord
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class TransferableRecord : ISerializableGameData
 {
-	/// <summary>
-	/// 记录类型 (即记录配置表中的模板 ID)
-	/// RecordType可能为-1(生成的姓名信息), -2(日期), -3(分割线)
-	/// <see cref="T:GameData.Domains.LifeRecord.TransferableRecordType" />.
-	/// </summary>
 	[SerializableGameDataField]
 	public int Date;
 
-	/// <summary>
-	/// 记录类型 (即记录配置表中的模板 ID)
-	/// RecordType可能为-1(生成的姓名信息), -2(日期), -3(分割线)
-	/// <see cref="T:GameData.Domains.LifeRecord.TransferableRecordType" />.
-	/// </summary>
 	[SerializableGameDataField]
 	public short RecordType;
 
-	/// <summary>
-	/// 实参集合.
-	/// paramType: 参数类型. <see cref="T:GameData.Domains.LifeRecord.GeneralRecord.ParameterType" />.
-	/// index: 该参数在同类参数列表中的索引.
-	///
-	/// 对LifeRecordDate，Arguments只有一项，sbyte为-1，且int值为Date
-	/// 对SeparateLine，Arguments为空
-	/// </summary>
 	[SerializableGameDataField]
 	public List<(sbyte, int)> Arguments;
 
@@ -53,12 +31,6 @@ public class TransferableRecord : ISerializableGameData
 		Arguments = new List<(sbyte, int)>();
 	}
 
-	/// <summary>
-	/// 计算分数（可以直接计算得分，不必理会其分数格式是否为计算）
-	/// 其计算逻辑应保证与<see cref="T:GameData.Domains.LifeRecord.ReadonlyLifeRecords" />中的计算逻辑一致
-	/// </summary>
-	/// <param name="argumentCollection"></param>
-	/// <returns></returns>
 	public int GetCalculatedLifeRecordScore(TransferableArgumentCollection argumentCollection)
 	{
 		switch (RecordType)

@@ -3,48 +3,34 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.ActionPlanning.MonthlyAI;
 
-[AutoGenerateSerializableGameData]
+[AutoGenerateSerializableGameData(IsExtensible = true, NotForDisplayModule = true, NoCopyConstructors = true)]
 public class PlanningGoalSettings : ISerializableGameData
 {
+	public static class FieldIds
+	{
+		public const ushort Disabled = 0;
+
+		public const ushort PriorityAdjust = 1;
+
+		public const ushort Count = 2;
+
+		public static readonly string[] FieldId2FieldName = new string[2] { "Disabled", "PriorityAdjust" };
+	}
+
 	[SerializableGameDataField(FieldIndex = 0)]
 	public bool Disabled;
 
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int PriorityAdjust;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
-	public PlanningGoalSettings()
-	{
-	}
-
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
-	public PlanningGoalSettings(PlanningGoalSettings other)
-	{
-		Disabled = other.Disabled;
-		PriorityAdjust = other.PriorityAdjust;
-	}
-
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
-	public void Assign(PlanningGoalSettings other)
-	{
-		Disabled = other.Disabled;
-		PriorityAdjust = other.PriorityAdjust;
-	}
-
 	public bool IsSerializedSizeFixed()
 	{
-		return true;
+		return false;
 	}
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 5;
+		int totalSize = 7;
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -54,10 +40,12 @@ public class PlanningGoalSettings : ISerializableGameData
 
 	public unsafe int Serialize(byte* pData)
 	{
-		*pData = (Disabled ? ((byte)1) : ((byte)0));
-		byte* num = pData + 1;
-		*(int*)num = PriorityAdjust;
-		int totalSize = (int)(num + 4 - pData);
+		*(short*)pData = 2;
+		byte* num = pData + 2;
+		*num = (Disabled ? ((byte)1) : ((byte)0));
+		byte* num2 = num + 1;
+		*(int*)num2 = PriorityAdjust;
+		int totalSize = (int)(num2 + 4 - pData);
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -68,10 +56,18 @@ public class PlanningGoalSettings : ISerializableGameData
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
-		Disabled = *pCurrData != 0;
-		pCurrData++;
-		PriorityAdjust = *(int*)pCurrData;
-		pCurrData += 4;
+		ushort num = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (num > 0)
+		{
+			Disabled = *pCurrData != 0;
+			pCurrData++;
+		}
+		if (num > 1)
+		{
+			PriorityAdjust = *(int*)pCurrData;
+			pCurrData += 4;
+		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

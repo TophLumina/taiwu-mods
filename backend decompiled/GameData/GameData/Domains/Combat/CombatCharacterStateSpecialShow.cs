@@ -1,4 +1,3 @@
-using System;
 using Config;
 using GameData.Common;
 
@@ -8,14 +7,6 @@ public class CombatCharacterStateSpecialShow : CombatCharacterStateBase
 {
 	private CombatCharacter _specialShowChar;
 
-	private short _enterFrame;
-
-	private short _castAniFrame;
-
-	private short _hitFrame;
-
-	private short _leaveFrame;
-
 	public CombatCharacterStateSpecialShow(CombatDomain combatDomain, CombatCharacter combatChar)
 		: base(combatDomain, combatChar, CombatCharacterStateType.SpecialShow)
 	{
@@ -24,76 +15,46 @@ public class CombatCharacterStateSpecialShow : CombatCharacterStateBase
 
 	public override void OnEnter()
 	{
+		base.OnEnter();
 		DataContext context = CombatChar.GetDataContext();
 		CombatChar.NeedEnterSpecialShow = false;
 		_specialShowChar = CurrentCombatDomain.GetElement_CombatCharacterDict(CurrentCombatDomain.GetSpecialShowCombatCharId());
-		_enterFrame = 34;
-		_castAniFrame = 0;
-		_hitFrame = 0;
-		_leaveFrame = 0;
 		int displayPos = CurrentCombatDomain.GetDisplayPosition(CombatChar.IsAlly, CombatItemUse.DefValue.UseThrowPoison.Distance);
 		_specialShowChar.SetVisible(visible: true, context);
 		_specialShowChar.SetDisplayPosition(displayPos, context);
 		_specialShowChar.SetAnimationToLoop(_specialShowChar.GetIdleAni(), context);
+		DelayCall(DelayedEnter, 34);
 	}
 
-	public override void OnExit()
+	private void DelayedEnter()
 	{
+		DataContext context = CombatChar.GetDataContext();
+		CombatItemUseItem throwConfig = CombatItemUse.Instance[(short)10];
+		_specialShowChar.SetAnimationToPlayOnce(throwConfig.Animation, context);
+		_specialShowChar.SetParticleToPlay(throwConfig.Particle, context);
+		_specialShowChar.SetAttackSoundToPlay(throwConfig.Sound, context);
+		DelayCall(DelayedHit, AnimDataCollection.GetEventFrame(throwConfig.Animation, "act0"));
+		DelayCall(DelayedCast, AnimDataCollection.GetDurationFrame(throwConfig.Animation));
 	}
 
-	public override bool OnUpdate()
+	private void DelayedHit()
 	{
-		if (!base.OnUpdate())
-		{
-			return false;
-		}
-		if (_enterFrame > 0)
-		{
-			_enterFrame--;
-			if (_enterFrame == 0)
-			{
-				DataContext context = CombatChar.GetDataContext();
-				CombatItemUseItem throwConfig = CombatItemUse.Instance[(short)10];
-				_specialShowChar.SetAnimationToPlayOnce(throwConfig.Animation, context);
-				_specialShowChar.SetParticleToPlay(throwConfig.Particle, context);
-				_specialShowChar.SetAttackSoundToPlay(throwConfig.Sound, context);
-				_castAniFrame = (short)Math.Round(AnimDataCollection.Data[throwConfig.Animation].Duration * 60f);
-				_hitFrame = (short)Math.Round(AnimDataCollection.Data[throwConfig.Animation].Events["act0"][0] * 60f);
-			}
-			return false;
-		}
-		if (_hitFrame > 0)
-		{
-			_hitFrame--;
-			if (_hitFrame == 0)
-			{
-				DataContext context2 = CombatChar.GetDataContext();
-				CombatCharacter enemyChar = CurrentCombatDomain.GetCombatCharacter(!CombatChar.IsAlly);
-				short stateId = (short)(142 + CurrentCombatDomain.CombatConfig.TemplateId - 164);
-				enemyChar.SetAnimationToPlayOnce(enemyChar.GetBeHitAni(2), context2);
-				CurrentCombatDomain.AddCombatState(context2, enemyChar, 0, stateId);
-			}
-		}
-		if (_castAniFrame > 0)
-		{
-			_castAniFrame--;
-			if (_castAniFrame == 0)
-			{
-				_specialShowChar.SetDisplayPosition(int.MinValue, CombatChar.GetDataContext());
-				_leaveFrame = 48;
-			}
-			return false;
-		}
-		if (_leaveFrame > 0)
-		{
-			_leaveFrame--;
-			if (_leaveFrame == 0)
-			{
-				_specialShowChar.SetVisible(visible: false, CombatChar.GetDataContext());
-				CombatChar.StateMachine.TranslateState();
-			}
-			return false;
-		}
-		return false;
+		DataContext context = CombatChar.GetDataContext();
+		CombatCharacter enemyChar = CurrentCombatDomain.GetCombatCharacter(!CombatChar.IsAlly);
+		short stateId = (short)(142 + CurrentCombatDomain.CombatConfig.TemplateId - 164);
+		enemyChar.SetAnimationToPlayOnce(enemyChar.GetBeHitAni(2), context);
+		CurrentCombatDomain.AddCombatState(context, enemyChar, 0, stateId);
+	}
+
+	private void DelayedCast()
+	{
+		_specialShowChar.SetDisplayPosition(int.MinValue, CombatChar.GetDataContext());
+		DelayCall(DelayedLeave, 48);
+	}
+
+	private void DelayedLeave()
+	{
+		_specialShowChar.SetVisible(visible: false, CombatChar.GetDataContext());
+		CombatChar.StateMachine.TranslateState();
 	}
 }

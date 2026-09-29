@@ -5,15 +5,9 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地块信息的人物数量数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class MapBlockCharacterCountData : ISerializableGameData
 {
-	/// <summary>
-	/// 人物数量的字典,key是<see cref="T:Config.MapElementDisplayRuleItem.DefKey" />,value是人数
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> CharacterCountDict;
 
@@ -27,7 +21,7 @@ public class MapBlockCharacterCountData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 0;
+		int totalSize = 12;
 		totalSize += 4;
 		if (CharacterCountDict != null)
 		{
@@ -38,7 +32,6 @@ public class MapBlockCharacterCountData : ISerializableGameData
 				totalSize += 4;
 			}
 		}
-		totalSize += TreasureExpectResult.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

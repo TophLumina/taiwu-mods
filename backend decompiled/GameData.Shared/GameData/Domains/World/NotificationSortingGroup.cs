@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.World;
 
-/// <summary>
-/// 动物
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class NotificationSortingGroup : ISerializableGameData
 {
@@ -23,37 +20,18 @@ public class NotificationSortingGroup : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "Id", "Priority", "IsHidden", "IsOnTop" };
 	}
 
-	/// <summary>
-	/// Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 优先度
-	/// </summary>
 	[SerializableGameDataField]
 	public int Priority;
 
-	/// <summary>
-	/// 是否隐藏
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsHidden;
 
-	/// <summary>
-	/// 是否置顶
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsOnTop;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="priority"></param>
-	/// <param name="isHidden"></param>
-	/// <param name="isOnTop"></param>
 	public NotificationSortingGroup(int id, int priority, bool isHidden, bool isOnTop)
 	{
 		Id = id;
@@ -62,16 +40,10 @@ public class NotificationSortingGroup : ISerializableGameData
 		IsOnTop = isOnTop;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public NotificationSortingGroup()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public NotificationSortingGroup(NotificationSortingGroup other)
 	{
 		Id = other.Id;
@@ -80,9 +52,6 @@ public class NotificationSortingGroup : ISerializableGameData
 		IsOnTop = other.IsOnTop;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(NotificationSortingGroup other)
 	{
 		Id = other.Id;
@@ -91,13 +60,11 @@ public class NotificationSortingGroup : ISerializableGameData
 		IsOnTop = other.IsOnTop;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -108,7 +75,6 @@ public class NotificationSortingGroup : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 4;
@@ -128,7 +94,6 @@ public class NotificationSortingGroup : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

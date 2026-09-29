@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AvatarLipColors : ConfigData<AvatarLipColorsItem, byte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AvatarLipColors Instance = new AvatarLipColors();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayDesc", "TemplateId", "ColorHex" };

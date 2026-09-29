@@ -73,7 +73,7 @@ public class SkillCostNeiliAllocation : CombatSkillEffectBase
 
 	private void OnPrepareSkillBegin(DataContext context, int charId, bool isAlly, short skillId)
 	{
-		if (isAlly != base.CombatChar.IsAlly && IsSrcSkillPerformed && !DomainManager.Combat.GetElement_CombatCharacterDict(charId).GetAutoCastingSkill())
+		if (isAlly != base.CombatChar.IsAlly && IsSrcSkillPerformed && !DomainManager.Combat.GetElement_CombatCharacterDict(charId).GetAutoCastingSkill() && base.IsCurrent)
 		{
 			ReduceEffectCount();
 		}
@@ -81,9 +81,16 @@ public class SkillCostNeiliAllocation : CombatSkillEffectBase
 
 	private void OnCombatCharChanged(DataContext context, bool isAlly)
 	{
-		if (IsSrcSkillPerformed && isAlly != base.CombatChar.IsAlly)
+		if (IsSrcSkillPerformed)
 		{
-			UpdateEnemyUid(context, init: false);
+			if (isAlly != base.CombatChar.IsAlly)
+			{
+				UpdateEnemyUid(context, init: false);
+			}
+			else
+			{
+				DomainManager.Combat.UpdateSkillCanUse(context, base.EnemyChar);
+			}
 		}
 	}
 
@@ -118,6 +125,10 @@ public class SkillCostNeiliAllocation : CombatSkillEffectBase
 
 	public override (sbyte, sbyte) GetModifiedValue(AffectedDataKey dataKey, (sbyte, sbyte) dataValue)
 	{
+		if (!base.IsCurrent)
+		{
+			return dataValue;
+		}
 		CombatSkillItem skillConfig = Config.CombatSkill.Instance[dataKey.CombatSkillId];
 		dataValue.Item1 = (sbyte)(skillConfig.EquipType - 1);
 		dataValue.Item2 = (sbyte)(dataValue.Item2 + CostNeiliAllocationPerGrade * (skillConfig.Grade + 1));

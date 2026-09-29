@@ -3,25 +3,13 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 内外值
-/// </summary>
 [Serializable]
 public struct OuterAndInnerShorts : ISerializableGameData
 {
-	/// <summary>
-	/// 外值
-	/// </summary>
 	public short Outer;
 
-	/// <summary>
-	/// 内值
-	/// </summary>
 	public short Inner;
 
-	/// <summary>
-	/// 平均值
-	/// </summary>
 	public short Average => (short)((Outer + Inner) / 2);
 
 	public OuterAndInnerShorts(short outer, short inner)

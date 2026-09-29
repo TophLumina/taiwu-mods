@@ -4,26 +4,14 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 秘闻事号
-/// </summary>
 [AutoGenerateSerializableGameData]
 public struct SecretOccurenceId : IEquatable<SecretOccurenceId>, ISerializableGameData
 {
-	/// <summary>
-	/// Id
-	/// </summary>
 	[SerializableGameDataField]
 	private int _id = -1;
 
-	/// <summary>
-	/// 默认非法 Id
-	/// </summary>
 	private const int InvalidId = -1;
 
-	/// <summary>
-	/// 非法值
-	/// </summary>
 	public static SecretOccurenceId Invalid
 	{
 		get
@@ -34,26 +22,17 @@ public struct SecretOccurenceId : IEquatable<SecretOccurenceId>, ISerializableGa
 		}
 	}
 
-	/// <summary>
-	/// 有效性
-	/// </summary>
 	public bool Valid => _id >= 0;
 
 	public SecretOccurenceId()
 	{
 	}
 
-	/// <summary>
-	/// 转为 <see cref="T:System.Int32" />
-	/// </summary>
 	public static explicit operator int(SecretOccurenceId occurenceId)
 	{
 		return occurenceId._id;
 	}
 
-	/// <summary>
-	/// 转为 <see cref="T:GameData.Domains.Information.SecretOccurenceId" />
-	/// </summary>
 	public static explicit operator SecretOccurenceId(int value)
 	{
 		SecretOccurenceId result = new SecretOccurenceId();
@@ -71,7 +50,6 @@ public struct SecretOccurenceId : IEquatable<SecretOccurenceId>, ISerializableGa
 		return !(self == other);
 	}
 
-	/// <inheritdoc cref="M:System.Object.ToString" />
 	public override string ToString()
 	{
 		return string.Format("{0}: {1}", "SecretOccurenceId", _id);

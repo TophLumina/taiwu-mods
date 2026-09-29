@@ -59,6 +59,7 @@ using GameData.Domains.TaiwuEvent.EventHelper;
 using GameData.Domains.World;
 using GameData.Domains.World.MonthlyEvent;
 using GameData.Domains.World.Notification;
+using GameData.GameDataBridge;
 using GameData.Serializer;
 using GameData.Utilities;
 using Redzen.Random;
@@ -704,6 +705,9 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	[CollectionObjectField(false, false, true, false, false)]
 	private uint _darkAshProtector;
 
+	[CollectionObjectField(false, false, true, false, false)]
+	private ImmunityMask _immunityMask;
+
 	private const int BasePersonality = 10;
 
 	private const int PreexistenceAttributeBonusDivisor = 10;
@@ -1027,6 +1031,25 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			value |= CharacterFeature.Instance[featureId].DarkAshProtector;
 		}
 		return (uint)value;
+	}
+
+	[ObjectCollectionDependency(4, 0, new ushort[] { 1, 17 }, Scope = InfluenceScope.Self)]
+	[SingleValueCollectionDependency(19, new ushort[] { 72 })]
+	private ImmunityMask CalcImmunityMask()
+	{
+		ImmunityMask result = ImmunityMask.From(Template);
+		foreach (short featureId in GetValidFeatureIds())
+		{
+			result += ImmunityMask.From(CharacterFeature.Instance[featureId]);
+		}
+		for (sbyte i = 0; i < 6; i++)
+		{
+			if (DomainManager.Extra.HasPoisonImmunity(_id, i))
+			{
+				result = result.SetPoisonImmunity(i, isImmune: true);
+			}
+		}
+		return result;
 	}
 
 	[ObjectCollectionDependency(4, 0, new ushort[] { 8, 41, 17 }, Scope = InfluenceScope.Self)]
@@ -1690,7 +1713,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			int addValue = 0;
 			foreach (CombatCharacter enemyChar in DomainManager.Combat.GetCharacters(!combatChar.IsAlly))
 			{
-				foreach (short featureId in enemyChar.GetCharacter().GetFeatureIds())
+				foreach (short featureId in enemyChar.GetCharacter().GetValidFeatureIds())
 				{
 					addValue -= CharacterFeature.Instance[featureId].InCombatEnemyAllPoisonResistReduceValue;
 				}
@@ -1879,14 +1902,11 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	private OuterAndInnerShorts CalcFavorabilityChangingFactor()
 	{
 		OuterAndInnerShorts value = new OuterAndInnerShorts(100, 100);
-		foreach (short featureId in _featureIds)
+		foreach (short featureId in GetValidFeatureIds())
 		{
-			if (!HideAndDisableFeature(featureId))
-			{
-				CharacterFeatureItem config = CharacterFeature.Instance[featureId];
-				value.Outer = (short)(value.Outer * config.FavorabilityIncrementFactor / 100);
-				value.Inner = (short)(value.Inner * config.FavorabilityDecrementFactor / 100);
-			}
+			CharacterFeatureItem config = CharacterFeature.Instance[featureId];
+			value.Outer = (short)(value.Outer * config.FavorabilityIncrementFactor / 100);
+			value.Inner = (short)(value.Inner * config.FavorabilityDecrementFactor / 100);
 		}
 		return value;
 	}
@@ -2238,6 +2258,17 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		return ((IGoal<Character, StateKey>)goal).IsComplete((IAgent<Character, StateKey>)context.PlanningAgent);
 	}
 
+	private bool OfflineValidateGoal(ActionPlanningData planningData, CharacterGoalData goalData, int currDate)
+	{
+		if (goalData.IsValid(this))
+		{
+			return true;
+		}
+		planningData.SetGoalReplaced(goalData, currDate);
+		planningData.Goals?.Remove(goalData);
+		return false;
+	}
+
 	public IReadOnlyList<CharacterGoalData> GetGoals()
 	{
 		IReadOnlyList<CharacterGoalData> result;
@@ -2429,6 +2460,12 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		CharacterGoalData currentGoal = planningData.GetCurrentGoal(goalType);
 		while (currentGoal != null)
 		{
+			if (!OfflineValidateGoal(planningData, currentGoal, currDate))
+			{
+				planningData.UpdateCurrentGoalsByPriority(this, currDate);
+				currentGoal = planningData.GetCurrentGoal(goalType);
+				continue;
+			}
 			CharacterActionData currentAction = planningData.GetCurrentAction(goalType);
 			if (currentAction != null)
 			{
@@ -2516,6 +2553,11 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	{
 		int currDate = DomainManager.World.GetCurrDate();
 		ActionPlanningData planningData = ActionPlanningData;
+		CharacterGoalData currentGoal = planningData.GetCurrentGoal(goalType);
+		if (currentGoal != null && !OfflineValidateGoal(planningData, currentGoal, currDate))
+		{
+			currentGoal = null;
+		}
 		List<CharacterActionData> interruptedActions = planningData.InterruptedActions;
 		if (interruptedActions != null && interruptedActions.Count > 0)
 		{
@@ -2526,7 +2568,6 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			}
 			planningData.InterruptedActions.Clear();
 		}
-		CharacterGoalData currentGoal = planningData.GetCurrentGoal(goalType);
 		if (currentGoal == null)
 		{
 			return;
@@ -2611,6 +2652,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		{
 			currentGoal.TryApplyEffect(effect);
 		}
+		if (!currentGoal.IsValid(this))
+		{
+			return null;
+		}
 		if (!ReassessPlan(context, currentGoal))
 		{
 			return null;
@@ -2650,7 +2695,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		{
 			if (actionTemplate.CharacterSelector != EPlanningActionCharacterSelector.None)
 			{
-				Character targetChar = context.PlanningAgent.SelectActionTarget(context, currentGoal.TemplateNode, currentAction.ActionNode, args);
+				Character targetChar = context.PlanningAgent.SelectActionTarget(context, currentGoal.TemplateNode, currentAction.ActionNode, args, currentGoal.State == CharacterGoalData.EGoalState.Primary);
 				if (targetChar == null)
 				{
 					return null;
@@ -2697,7 +2742,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	private bool OfflineUpdatePrioritizedGoals(DataContext context, ActionPlanningData planningData)
 	{
-		if (!_location.IsValid() || IsActiveExternalRelationState(188uL))
+		if (!_location.IsValid() || IsActiveExternalRelationState(188uL) || GetAgeGroup() == 0)
 		{
 			return false;
 		}
@@ -3129,12 +3174,11 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	private unsafe void OfflineChangePoisoned(ref PoisonsAndLevels delta)
 	{
-		CharacterItem characterCfg = Config.Character.Instance[_templateId];
-		byte poisonImmunities = DomainManager.Extra.GetPoisonImmunities(_id);
+		ImmunityMask immunityMask = GetImmunityMask();
 		ref PoisonInts poisonResists = ref GetPoisonResists();
 		for (sbyte poisonType = 0; poisonType < 6; poisonType++)
 		{
-			if (!SharedMethods.HasPoisonImmunity(poisonType, characterCfg, ref poisonResists, poisonImmunities))
+			if (!SharedMethods.HasPoisonImmunity(poisonType, immunityMask, ref poisonResists))
 			{
 				int poisonDelta = delta.Values[poisonType];
 				sbyte poisonLevel = delta.Levels[poisonType];
@@ -3214,19 +3258,16 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		CValuePercentBonus percent = 0;
 		if (baseDelta < 0)
 		{
-			foreach (short featureId in _featureIds)
+			foreach (short featureId in GetValidFeatureIds())
 			{
 				percent += (CValuePercentBonus)CharacterFeature.Instance[featureId].QiDisorderBuffPercent;
 			}
 		}
 		else
 		{
-			foreach (short featureId2 in _featureIds)
+			foreach (short featureId2 in GetValidFeatureIds())
 			{
-				if (!IgnoreFeature(featureId2))
-				{
-					percent += (CValuePercentBonus)CharacterFeature.Instance[featureId2].QiDisorderDebuffPercent;
-				}
+				percent += (CValuePercentBonus)CharacterFeature.Instance[featureId2].QiDisorderDebuffPercent;
 			}
 		}
 		delta *= percent.StaySymbol();
@@ -3245,8 +3286,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	public void ChangeInjury(DataContext context, sbyte bodyPartType, bool isInnerInjury, sbyte delta)
 	{
-		CharacterItem config = Config.Character.Instance[_templateId];
-		if (isInnerInjury ? config.InnerInjuryImmunity : config.OuterInjuryImmunity)
+		if (GetImmunityMask().IsImmune(isInnerInjury ? EMarkType.Inner : EMarkType.Outer))
 		{
 			return;
 		}
@@ -3268,8 +3308,8 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	public void ChangeInjuries(DataContext context, Injuries delta)
 	{
-		CharacterItem config = Config.Character.Instance[_templateId];
-		_injuries.Change(delta, config.OuterInjuryImmunity, config.InnerInjuryImmunity);
+		ImmunityMask immunity = GetImmunityMask();
+		_injuries.Change(delta, immunity.IsImmune(EMarkType.Outer), immunity.IsImmune(EMarkType.Inner));
 		SetInjuries(_injuries, context);
 	}
 
@@ -3463,7 +3503,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	private sbyte GetCombatSkillExtraSlotCount(sbyte equipType)
 	{
 		int extraSlotCount = 0;
-		foreach (short featureId in _featureIds)
+		foreach (short featureId in GetValidFeatureIds())
 		{
 			extraSlotCount += CharacterFeature.Instance[featureId].CombatSkillSlotBonuses[equipType];
 		}
@@ -3673,6 +3713,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		CombatSkillHelper.InitializeEquippedSkills(_equippedCombatSkills);
 		SetEquippedCombatSkills(_equippedCombatSkills, context);
 		DomainManager.Extra.RemoveCharacterEquippedCombatSkills(context, _id);
+		if (IsTaiwu())
+		{
+			DomainManager.Taiwu.SyncCurrentCombatSkillPlan(context);
+		}
 		DomainManager.SpecialEffect.UpdateEquippedSkillEffect(context, this);
 		if (IsTaiwu())
 		{
@@ -3782,6 +3826,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		else
 		{
 			DomainManager.Extra.RemoveCharacterEquippedCombatSkills(context, _id);
+		}
+		if (IsTaiwu())
+		{
+			DomainManager.Taiwu.SyncCurrentCombatSkillPlan(context);
 		}
 		UpdateAllocatedGenericGrids(context);
 		DomainManager.SpecialEffect.UpdateEquippedSkillEffect(context, this);
@@ -3962,7 +4010,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		int totalValue = 0;
 		foreach (var (key, combatSkill2) in combatSkills)
 		{
-			if (combatSkill2.Template.Type == lifeSkillType)
+			if (combatSkill2.Template.Type == lifeSkillType && combatSkill2.Template.BookId >= 0)
 			{
 				int baseValue = ItemTemplateHelper.GetBaseValue(10, combatSkill2.Template.BookId);
 				int value = baseValue * combatSkill2.GetReadNormalPagesCount() / 5;
@@ -4383,6 +4431,11 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		return CreatingType.IsFixedPresetType(_creatingType);
 	}
 
+	public bool IsNonActorSkeleton()
+	{
+		return CombatDomain.CharId2BossId.ContainsKey(_templateId) || GameData.Domains.Combat.SharedConstValue.CharId2AnimalId.ContainsKey(_templateId);
+	}
+
 	public int GetSrcCharId()
 	{
 		return _srcCharId;
@@ -4454,7 +4507,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		{
 			return true;
 		}
-		if (_featureIds.Contains(680))
+		if (GetImmunityMask().IsImmune(EMarkType.Health))
 		{
 			return true;
 		}
@@ -4514,12 +4567,12 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	public bool HasPoisonImmunity(sbyte poisonType)
 	{
-		return Config.Character.Instance[_templateId].PoisonImmunities[poisonType] || GetPoisonResist(poisonType) >= 1000 || DomainManager.Extra.HasPoisonImmunity(_id, poisonType);
+		return HasInnatePoisonImmunity(poisonType) || HasAcquiredPoisonImmunity(poisonType);
 	}
 
 	public bool HasInnatePoisonImmunity(sbyte poisonType)
 	{
-		return Config.Character.Instance[_templateId].PoisonImmunities[poisonType] || DomainManager.Extra.HasPoisonImmunity(_id, poisonType);
+		return GetImmunityMask().IsImmuneToPoison(poisonType);
 	}
 
 	public bool HasAcquiredPoisonImmunity(sbyte poisonType)
@@ -4530,12 +4583,11 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public unsafe int GetPoisonMarkCount()
 	{
 		int count = 0;
-		CharacterItem characterCfg = Config.Character.Instance[_templateId];
-		byte poisonImmunities = DomainManager.Extra.GetPoisonImmunities(_id);
+		ImmunityMask immunityMask = GetImmunityMask();
 		ref PoisonInts poisonResists = ref GetPoisonResists();
 		for (sbyte poisonType = 0; poisonType < 6; poisonType++)
 		{
-			if (!SharedMethods.HasPoisonImmunity(poisonType, characterCfg, ref poisonResists, poisonImmunities))
+			if (!SharedMethods.HasPoisonImmunity(poisonType, immunityMask, ref poisonResists))
 			{
 				count += PoisonsAndLevels.CalcPoisonedLevel(_poisoned.Items[poisonType]);
 			}
@@ -4830,6 +4882,15 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	public void ReAdjustClothingByAge(DataContext context)
 	{
+		CharacterItem template = Template;
+		if (template != null)
+		{
+			bool[] equipmentLock = template.EquipmentLock;
+			if (((equipmentLock != null) ? new bool?(equipmentLock[4]) : ((bool?)null)) == true)
+			{
+				return;
+			}
+		}
 		sbyte ageGroup = GetAgeGroup();
 		short currClothingTemplateId = _equipment[4].TemplateId;
 		if (currClothingTemplateId >= 0)
@@ -4872,7 +4933,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		CValuePercentBonus bonus = 0;
 		if (delta > 0)
 		{
-			foreach (short id in _featureIds)
+			foreach (short id in GetValidFeatureIds())
 			{
 				bonus += (CValuePercentBonus)CharacterFeature.Instance[id].HealthRecovery;
 			}
@@ -5316,9 +5377,12 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			featureId = prevFeatureId;
 			return false;
 		}
-		if (_featureIds.Contains(733))
+		foreach (short existFeatureId in _featureIds)
 		{
-			return false;
+			if (CharacterFeature.Instance[existFeatureId].IgnoreInfected)
+			{
+				return false;
+			}
 		}
 		return true;
 	}
@@ -6120,6 +6184,50 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		return Template.BaseAttraction;
 	}
 
+	public int? CalcFeatureDynamicFactor(short featureId)
+	{
+		return CalcFeatureDynamicFactor(CharacterFeature.Instance[featureId]);
+	}
+
+	public int? CalcFeatureDynamicFactor(CharacterFeatureItem config)
+	{
+		ECharacterFeatureDynamicFactorType dynamicFactorType = config.DynamicFactorType;
+		if (1 == 0)
+		{
+		}
+		int? result = ((dynamicFactorType != ECharacterFeatureDynamicFactorType.Chicken) ? ((int?)null) : new int?(CalcFeatureDynamicFactorChicken(config.TemplateId)));
+		if (1 == 0)
+		{
+		}
+		return result;
+	}
+
+	private int CalcFeatureDynamicFactorChicken(short featureId)
+	{
+		if (_organizationInfo.OrgTemplateId != 16)
+		{
+			return 0;
+		}
+		sbyte personalityType = FindSmarterChickenPersonalityType(featureId);
+		if (personalityType == -1)
+		{
+			return 0;
+		}
+		int factor = 0;
+		foreach (GameData.Domains.Building.Chicken chicken in DomainManager.Building.GetTaiwuVillageChickens())
+		{
+			if (chicken.TemplateId != 63)
+			{
+				ChickenItem config = Config.Chicken.Instance[chicken.TemplateId];
+				if (config.PersonalityType == personalityType)
+				{
+					factor++;
+				}
+			}
+		}
+		return factor;
+	}
+
 	private int GetReversedFeatureBonus(ECharacterPropertyReferencedType propertyType, int originBonus, short featureId)
 	{
 		if (!BonusPropertyTypes.Contains(propertyType))
@@ -6140,38 +6248,47 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		int add = 0;
 		int addPercent = 0;
 		bool standardIsAdd = CharacterPropertyReferenced.Instance[(int)propertyType].FeatureStandardIsAdd;
-		foreach (short featureId in _featureIds)
+		foreach (short featureId in GetValidFeatureIds())
 		{
-			if (!IgnoreFeature(featureId))
+			CharacterFeatureItem config = CharacterFeature.Instance[featureId];
+			int value = config.GetCharacterPropertyBonusInt(propertyType);
+			value = GetDynamicFeatureValue(propertyType, value, featureId);
+			value = GetReversedFeatureBonus(propertyType, value, featureId);
+			if (standardIsAdd)
 			{
-				CharacterFeatureItem config = CharacterFeature.Instance[featureId];
-				int value = config.GetCharacterPropertyBonusInt(propertyType);
-				value = GetReversedFeatureBonus(propertyType, value, featureId);
-				if (standardIsAdd)
-				{
-					add += value;
-				}
-				else
-				{
-					addPercent += value;
-				}
-				int num = addPercent;
-				if (1 == 0)
-				{
-				}
-				int num2 = propertyType switch
-				{
-					ECharacterPropertyReferencedType.Attraction => config.AttractionPercentBonus, 
-					ECharacterPropertyReferencedType.MaxHealth => config.MaxHealthPercentBonus, 
-					_ => 0, 
-				};
-				if (1 == 0)
-				{
-				}
-				addPercent = num + num2;
+				add += value;
 			}
+			else
+			{
+				addPercent += value;
+			}
+			int num = addPercent;
+			if (1 == 0)
+			{
+			}
+			int num2 = propertyType switch
+			{
+				ECharacterPropertyReferencedType.Attraction => config.AttractionPercentBonus, 
+				ECharacterPropertyReferencedType.MaxHealth => config.MaxHealthPercentBonus, 
+				_ => 0, 
+			};
+			if (1 == 0)
+			{
+			}
+			addPercent = num + num2;
 		}
 		return new CValueModify(add, addPercent);
+	}
+
+	private int GetDynamicFeatureValue(ECharacterPropertyReferencedType propertyType, int value, short featureId)
+	{
+		CharacterFeatureItem config = CharacterFeature.Instance[featureId];
+		int? factor = ((propertyType.IsHit() || propertyType.IsAvoid() || propertyType.IsPenetrate() || propertyType.IsPenetrateResist()) ? CalcFeatureDynamicFactor(config) : ((int?)null));
+		if (factor.HasValue)
+		{
+			value *= factor.Value;
+		}
+		return value;
 	}
 
 	private CValueModify GetPropertyBonusOfEquipments(ECharacterPropertyReferencedType propertyType)
@@ -6256,6 +6373,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			{
 				return true;
 			}
+		}
+		if (DynamicMapping.TwelveImmortalsFeatureId2TemplateId.TryGetValue(featureId, out var immortalTemplateId) && DomainManager.Story.IsTwelveImmortalsBeSuppression(immortalTemplateId))
+		{
+			return true;
 		}
 		return HideAndDisableFeature(featureId);
 	}
@@ -6352,6 +6473,103 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		}
 		int livedMonths = ((!IsCompletelyInfected()) ? CharacterDomain.GetLivedMonths(_currAge, _birthMonth) : (_currAge * 12));
 		return (short)Math.Clamp(0, Math.Min(32767, value - livedMonths), 32767);
+	}
+
+	public bool IsInBlockCharSet()
+	{
+		if (!_location.IsValid())
+		{
+			return false;
+		}
+		MapBlockData block = DomainManager.Map.GetBlock(_location);
+		if (block.CharacterSet != null && block.CharacterSet.Contains(_id))
+		{
+			return true;
+		}
+		if (block.InfectedCharacterSet != null && block.InfectedCharacterSet.Contains(_id))
+		{
+			return true;
+		}
+		if (block.FixedCharacterSet != null && block.FixedCharacterSet.Contains(_id))
+		{
+			return true;
+		}
+		if (block.EnemyCharacterSet != null && block.EnemyCharacterSet.Contains(_id))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public bool ItemCanImproveInventoryLoad(ItemKey itemKey)
+	{
+		switch (itemKey.ItemType)
+		{
+		case 4:
+		{
+			GameData.Domains.Item.Carrier item2 = DomainManager.Item.GetElement_Carriers(itemKey.Id);
+			if (item2.IsDurabilityRunningOut())
+			{
+				return false;
+			}
+			sbyte equipmentType2 = item2.GetEquipmentType();
+			short worstValue2 = GetWorstInventoryLoadBonusInEquipment(equipmentType2);
+			return item2.GetEquipmentCombatPowerValueFactor() > worstValue2;
+		}
+		case 2:
+		{
+			GameData.Domains.Item.Accessory item = DomainManager.Item.GetElement_Accessories(itemKey.Id);
+			if (item.IsDurabilityRunningOut())
+			{
+				return false;
+			}
+			sbyte equipmentType = item.GetEquipmentType();
+			short worstValue = GetWorstInventoryLoadBonusInEquipment(equipmentType);
+			return item.GetEquipmentCombatPowerValueFactor() > worstValue;
+		}
+		default:
+			return false;
+		}
+	}
+
+	public short GetWorstInventoryLoadBonusInEquipment(sbyte equipmentType)
+	{
+		sbyte[] slots = EquipmentSlot.EquipmentType2Slots[equipmentType];
+		short minValue = short.MaxValue;
+		sbyte[] array = slots;
+		foreach (sbyte slot in array)
+		{
+			ItemKey[] equipment = GetEquipment();
+			ItemKey itemKey = equipment[slot];
+			if (!itemKey.IsValid())
+			{
+				return 0;
+			}
+			switch (itemKey.ItemType)
+			{
+			case 4:
+			{
+				GameData.Domains.Item.Carrier item2 = DomainManager.Item.GetElement_Carriers(itemKey.Id);
+				short value2 = item2.GetMaxInventoryLoadBonus();
+				if (value2 < minValue)
+				{
+					minValue = value2;
+				}
+				break;
+			}
+			case 2:
+			{
+				GameData.Domains.Item.Accessory item = DomainManager.Item.GetElement_Accessories(itemKey.Id);
+				short value = item.GetMaxInventoryLoadBonus();
+				if (value < minValue)
+				{
+					minValue = value;
+				}
+				break;
+			}
+			}
+		}
+		return minValue;
 	}
 
 	[Obsolete("This method is obsolete, and will be removed in future. Use ChangeCurrMainAttribute instead.")]
@@ -6583,6 +6801,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 
 	public void AddEatingItem(DataContext context, ItemKey itemKey, IReadOnlyList<sbyte> targetBodyParts = null, bool reduceMainAttribute = true)
 	{
+		bool needDelete = false;
 		Tester.Assert(itemKey.IsValid());
 		if (itemKey.ItemType == 8)
 		{
@@ -6593,6 +6812,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 				if (config.Duration == 0)
 				{
 					TryApplyAttachedPoison(context, itemKey);
+					if (!ItemTemplateHelper.IsPureStackable(itemKey))
+					{
+						needDelete = true;
+					}
 				}
 			}
 			if (config.Duration > 0)
@@ -6639,6 +6862,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			int value = DomainManager.Item.GetValue(itemKey);
 			int addSeniority3 = ProfessionFormulaImpl.Calculate(63, value);
 			DomainManager.Extra.ChangeProfessionSeniority(context, 9, addSeniority3);
+		}
+		if (needDelete)
+		{
+			DomainManager.Item.RemoveItem(context, itemKey);
 		}
 	}
 
@@ -6989,6 +7216,27 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		SetEatingItems(ref _eatingItems, context);
 	}
 
+	private void ApplyPoisonMask(ref PoisonInts poisonEffect)
+	{
+		ImmunityMask immunityMask = GetImmunityMask();
+		ref PoisonInts poisonResists = ref GetPoisonResists();
+		for (sbyte poisonType = 0; poisonType < 6; poisonType++)
+		{
+			if (immunityMask.IsImmuneToPoison(poisonType))
+			{
+				poisonEffect[poisonType] = -2;
+			}
+			else if (SharedMethods.HasPoisonImmunity(poisonType, immunityMask, ref poisonResists))
+			{
+				poisonEffect[poisonType] = -1;
+			}
+			else if (poisonEffect[poisonType] < 0)
+			{
+				poisonEffect[poisonType] = 0;
+			}
+		}
+	}
+
 	public unsafe short TryApplyAttachedPoison(DataContext context, ItemKey itemKey)
 	{
 		if (!ModificationStateHelper.IsActive(itemKey.ModificationState, 1) || !DomainManager.Item.PoisonEffects.TryGetValue(itemKey.Id, out var poisonEffect))
@@ -6997,16 +7245,25 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		}
 		DomainManager.Item.SetPoisonsIdentified(context, itemKey, isIdentified: true);
 		PoisonsAndLevels poisons = poisonEffect.GetAllPoisonsAndLevels();
+		PoisonInts charBefore = _poisoned;
+		ApplyPoisonMask(ref charBefore);
+		PoisonsAndLevels poisonsAdd = poisons;
 		for (sbyte type = 0; type < 6; type++)
 		{
-			poisons.Values[type] = (short)(poisons.Values[type] * 10 * poisons.Levels[type]);
+			poisons.Values[type] = poisons.GetEatValue(type);
 		}
 		ChangePoisoned(context, ref poisons);
 		short medicineTemplateId = poisonEffect.GetMedicineTemplateId();
 		ApplyMixedPoisonInstantEffects(context);
+		PoisonInts charAfter = _poisoned;
+		ApplyPoisonMask(ref charAfter);
 		if (IsTaiwu())
 		{
 			DomainManager.Global.InvokeGuidingTrigger(context, 270);
+		}
+		if (DomainManager.World.GetAdvancingMonthState() == 0 && (DomainManager.Taiwu.GetGroupCharIds().Contains(_id) || DomainManager.Taiwu.GetTaiwuSpecialGroup().Contains(_id)))
+		{
+			GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.RaiseEatPoisonedItem, _id, itemKey, poisonsAdd, charBefore, charAfter);
 		}
 		return Config.Medicine.Instance[medicineTemplateId].Duration;
 	}
@@ -7082,7 +7339,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		foreach (sbyte poisonType in poisonTypes)
 		{
 			sbyte markCount = PoisonsAndLevels.CalcPoisonedLevel(poisoned[poisonType]);
-			if (markCount == 0 || GetPoisonImmunities()[poisonType] || DomainManager.Extra.HasPoisonImmunity(_id, poisonType))
+			if (markCount == 0 || HasInnatePoisonImmunity(poisonType))
 			{
 				return 0;
 			}
@@ -7767,6 +8024,38 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		}
 	}
 
+	public void ChangeFeature(DataContext context, short featureId, bool needFeature)
+	{
+		bool hasFeature = _featureIds.Contains(featureId);
+		if (hasFeature != needFeature)
+		{
+			if (needFeature)
+			{
+				AddFeature(context, featureId);
+			}
+			else
+			{
+				RemoveFeature(context, featureId);
+			}
+		}
+	}
+
+	public IEnumerable<short> GetValidFeatureIds()
+	{
+		List<short> featureIds = _featureIds;
+		if (featureIds == null || featureIds.Count <= 0)
+		{
+			yield break;
+		}
+		foreach (short featureId in _featureIds)
+		{
+			if (!IgnoreFeature(featureId))
+			{
+				yield return featureId;
+			}
+		}
+	}
+
 	public void ClearGeneticFeatures(DataContext context)
 	{
 		for (int i = _featureIds.Count - 1; i >= 0; i--)
@@ -7824,9 +8113,9 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		{
 			short currFeatureId = _featureIds[i];
 			short currGroupId = CharacterFeature.Instance[currFeatureId].MutexGroupId;
-			if (currGroupId >= 0)
+			if (currGroupId >= 0 && !groupToFeatures.TryAdd(currGroupId, currFeatureId))
 			{
-				groupToFeatures.Add(currGroupId, currFeatureId);
+				AdaptableLog.Warning($"Character {this} contains mutex features in group: {currGroupId}");
 			}
 		}
 	}
@@ -7957,7 +8246,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public CValueModifyDelta GetFeatureBonusHealOuterInjury()
 	{
 		int res = 0;
-		foreach (short id in _featureIds)
+		foreach (short id in GetValidFeatureIds())
 		{
 			CharacterFeatureItem config = CharacterFeature.Instance[id];
 			if (config.HealOuterBonus != 0)
@@ -7971,7 +8260,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public CValueModifyDelta GetFeatureBonusHealInnerInjury()
 	{
 		int res = 0;
-		foreach (short id in _featureIds)
+		foreach (short id in GetValidFeatureIds())
 		{
 			CharacterFeatureItem config = CharacterFeature.Instance[id];
 			if (config.HealInnerBonus != 0)
@@ -7995,13 +8284,14 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public int GetFeatureBonusDetoxPoisonValue(sbyte poisonType)
 	{
 		int res = 0;
-		foreach (short id in _featureIds)
+		foreach (short id in GetValidFeatureIds())
 		{
 			CharacterFeatureItem config = CharacterFeature.Instance[id];
 			if (config.DetoxPoisonBonus == poisonType)
 			{
 				res += GlobalConfig.Instance.SolarTermAddHealPoison;
 			}
+			res += config.DetoxAnyPoisonBonus;
 		}
 		return res;
 	}
@@ -8009,13 +8299,14 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public int GetFeatureBonusAttachPoisonValue(sbyte poisonType)
 	{
 		int res = 0;
-		foreach (short id in _featureIds)
+		foreach (short id in GetValidFeatureIds())
 		{
 			CharacterFeatureItem config = CharacterFeature.Instance[id];
 			if (config.AttachPoisonBonus == poisonType)
 			{
 				res += GlobalConfig.Instance.SolarTermAddPoisonEffect;
 			}
+			res += config.AttachAnyPoisonBonus;
 		}
 		return res;
 	}
@@ -8087,6 +8378,30 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public bool IsLoseConsummateBonusByFeature()
 	{
 		return _featureIds.Any((short f) => CharacterFeature.Instance[f].LoseConsummateBonus);
+	}
+
+	public sbyte CalcSmarterChickenPersonalityType()
+	{
+		foreach (SmarterChickenItem config in (IEnumerable<SmarterChickenItem>)SmarterChicken.Instance)
+		{
+			if (config.CharacterMale == _templateId || config.CharacterFemale == _templateId)
+			{
+				return config.PersonalityType;
+			}
+		}
+		return -1;
+	}
+
+	private static sbyte FindSmarterChickenPersonalityType(short featureId)
+	{
+		foreach (SmarterChickenItem config in (IEnumerable<SmarterChickenItem>)SmarterChicken.Instance)
+		{
+			if (config.CharacterFeature == featureId)
+			{
+				return config.PersonalityType;
+			}
+		}
+		return -1;
 	}
 
 	public bool NeedHealAction(EHealActionType type)
@@ -8187,7 +8502,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		return result;
 	}
 
-	public int CalcHealEffect(EHealActionType type, Character patient, out int maxRequireAttainment, bool isExpensiveHeal = false)
+	public int CalcHealEffect(EHealActionType type, Character patient, out int maxRequireAttainment, CValuePercentBonus attainmentBonus = default(CValuePercentBonus))
 	{
 		maxRequireAttainment = 0;
 		int patientId = patient.GetId();
@@ -8197,27 +8512,27 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		case EHealActionType.Healing:
 		{
 			maxRequireAttainment = DomainManager.Combat.GetHealInjuryMaxRequireAttainment(patientId);
-			DomainManager.Combat.HealInjury(patientId, this, out var _, out var allHealMarkCount, out maxHealMarkCount, canHealOld: true, getCost: true, checkHerb: false, null, null, isExpensiveHeal);
+			DomainManager.Combat.HealInjury(patientId, this, out var _, out var allHealMarkCount, out maxHealMarkCount, canHealOld: true, getCost: true, checkHerb: false, null, null, attainmentBonus);
 			return allHealMarkCount;
 		}
 		case EHealActionType.Detox:
 		{
 			maxRequireAttainment = DomainManager.Combat.GetHealPoisonMaxRequireAttainment(patientId);
-			DomainManager.Combat.HealPoison(patientId, this, out maxHealMarkCount, out var healPoisonValue, canHealOld: true, getCost: true, checkHerb: false, isExpensiveHeal);
+			DomainManager.Combat.HealPoison(patientId, this, out maxHealMarkCount, out var healPoisonValue, canHealOld: true, getCost: true, checkHerb: false, attainmentBonus);
 			return healPoisonValue;
 		}
 		case EHealActionType.Breathing:
 		{
 			maxRequireAttainment = DomainManager.Combat.GetHealQiDisorderRequireAttainment(patientId);
 			short disorderOfQi = patient.GetDisorderOfQi();
-			short result2 = DomainManager.Combat.HealQiDisorder(patientId, this, isExpensiveHeal);
+			short result2 = DomainManager.Combat.HealQiDisorder(patientId, this, attainmentBonus);
 			return disorderOfQi - result2;
 		}
 		case EHealActionType.Recover:
 		{
 			maxRequireAttainment = DomainManager.Combat.GetHealHealthRequireAttainment(patientId);
 			short health = patient.GetHealth();
-			short result = DomainManager.Combat.HealHealth(patientId, this, isExpensiveHeal);
+			short result = DomainManager.Combat.HealHealth(patientId, this, attainmentBonus);
 			return result - health;
 		}
 		default:
@@ -8225,7 +8540,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		}
 	}
 
-	public bool DoHealAction(DataContext context, EHealActionType type, Character patient, bool canGetProfessionSeniority = false, bool isExpensiveHeal = false)
+	public bool DoHealAction(DataContext context, EHealActionType type, Character patient, bool canGetProfessionSeniority = false, CValuePercentBonus attainmentBonus = default(CValuePercentBonus))
 	{
 		int patientId = patient.GetId();
 		switch (type)
@@ -8233,7 +8548,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		case EHealActionType.Healing:
 		{
 			Injuries injuries = patient.GetInjuries();
-			Injuries result3 = DomainManager.Combat.HealInjury(patientId, this, isExpensiveHeal);
+			Injuries result3 = DomainManager.Combat.HealInjury(patientId, this, attainmentBonus);
 			patient.SetInjuries(result3, context);
 			Injuries marks = injuries.Subtract(result3);
 			if (canGetProfessionSeniority)
@@ -8263,7 +8578,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		case EHealActionType.Detox:
 		{
 			PoisonInts poisons = patient.GetPoisoned();
-			PoisonInts result2 = DomainManager.Combat.HealPoison(patientId, this, isExpensiveHeal);
+			PoisonInts result2 = DomainManager.Combat.HealPoison(patientId, this, attainmentBonus);
 			patient.SetPoisoned(ref result2, context);
 			if (canGetProfessionSeniority)
 			{
@@ -8283,7 +8598,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		case EHealActionType.Breathing:
 		{
 			short disorderOfQi = patient.GetDisorderOfQi();
-			short result4 = DomainManager.Combat.HealQiDisorder(patientId, this, isExpensiveHeal);
+			short result4 = DomainManager.Combat.HealQiDisorder(patientId, this, attainmentBonus);
 			patient.SetDisorderOfQi(result4, context);
 			int delta2 = disorderOfQi - result4;
 			if (canGetProfessionSeniority)
@@ -8297,7 +8612,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		case EHealActionType.Recover:
 		{
 			short health = patient.GetHealth();
-			short result = DomainManager.Combat.HealHealth(patientId, this, isExpensiveHeal);
+			short result = DomainManager.Combat.HealHealth(patientId, this, attainmentBonus);
 			patient.SetHealth(result, context);
 			int delta = result - health;
 			if (canGetProfessionSeniority)
@@ -8880,7 +9195,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		SpanList<ItemKey> selectedPoisons = span;
 		short toxicologyAttainment = GetLifeSkillAttainment(9);
 		_inventory.SelectPoisonsToAdd(random, toxicologyAttainment, _organizationInfo.Grade, itemToAttachPoisonOn, ref selectedPoisons);
-		return selectedPoisons.ToArray();
+		return (selectedPoisons.Count > 0) ? selectedPoisons.ToArray() : Array.Empty<ItemKey>();
 	}
 
 	public void FindItems(Predicate<ItemBase> predicate, List<(ItemKey itemKey, int amount)> items, bool searchInventory, bool searchEquipment)
@@ -9117,13 +9432,21 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		ObjectPool<List<ItemKey>>.Instance.Return(clothingList);
 	}
 
+	public bool IsBoss()
+	{
+		return CombatDomain.CharId2BossId.ContainsKey(_templateId);
+	}
+
 	public void GenerateBequest(DataContext context)
 	{
-		List<int> list = ObjectPool<List<int>>.Instance.Get();
-		Dictionary<ItemKey, int> bequests = new Dictionary<ItemKey, int>();
-		GenerateBequestBooks(context, bequests, list);
-		DivideBequest(context, bequests, list);
-		ObjectPool<List<int>>.Instance.Return(list);
+		if (!IsBoss())
+		{
+			List<int> list = ObjectPool<List<int>>.Instance.Get();
+			Dictionary<ItemKey, int> bequests = new Dictionary<ItemKey, int>();
+			GenerateBequestBooks(context, bequests, list);
+			DivideBequest(context, bequests, list);
+			ObjectPool<List<int>>.Instance.Return(list);
+		}
 	}
 
 	private void GenerateBequestBooks(DataContext context, Dictionary<ItemKey, int> tempBooks, List<int> canChoosePages)
@@ -9131,6 +9454,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		Dictionary<short, GameData.Domains.CombatSkill.CombatSkill> combatSkills = DomainManager.CombatSkill.GetCharCombatSkills(_id);
 		foreach (GameData.Domains.CombatSkill.CombatSkill combatSkill in combatSkills.Values)
 		{
+			if (combatSkill.Template.BookId < 0)
+			{
+				continue;
+			}
 			ushort readingState = combatSkill.GetReadingState();
 			if (!CombatSkillStateHelper.HasReadOutlinePages(readingState) || !CombatSkillStateHelper.IsReadNormalPagesMeetConditionOfBreakout(readingState) || !context.Random.CheckPercentProb(GlobalConfig.Instance.BequestGenerateBookPercent))
 			{
@@ -9172,9 +9499,13 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		}
 		foreach (LifeSkillItem lifeSkill in _learnedLifeSkills)
 		{
-			if (lifeSkill.IsAllPagesRead() && context.Random.CheckPercentProb(GlobalConfig.Instance.BequestGenerateBookPercent))
+			if (!lifeSkill.IsAllPagesRead() || !context.Random.CheckPercentProb(GlobalConfig.Instance.BequestGenerateBookPercent))
 			{
-				Config.LifeSkillItem config = LifeSkill.Instance[lifeSkill.SkillTemplateId];
+				continue;
+			}
+			Config.LifeSkillItem config = LifeSkill.Instance[lifeSkill.SkillTemplateId];
+			if (config.SkillBookId >= 0)
+			{
 				short attainment2 = _lifeSkillAttainments[config.Type];
 				ushort pageState2 = 0;
 				for (byte page2 = 0; page2 < 5; page2++)
@@ -9510,6 +9841,141 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 				}
 			}
 		}
+	}
+
+	private bool CanSpareItem(ItemKey itemKey, int amount, IReadOnlyDictionary<ItemKey, int> taiwuGiftItems, bool allowUsed, bool inventoryOverloading)
+	{
+		if (!ItemTemplateHelper.IsTransferable(itemKey.ItemType, itemKey.TemplateId))
+		{
+			return false;
+		}
+		if (ItemTemplateHelper.GetBaseValue(itemKey.ItemType, itemKey.TemplateId) <= 0)
+		{
+			return false;
+		}
+		if (taiwuGiftItems.TryGetValue(itemKey, out var giftAmount) && giftAmount >= amount)
+		{
+			return false;
+		}
+		ItemBase baseItem = DomainManager.Item.GetBaseItem(itemKey);
+		if (!allowUsed && baseItem.GetCurrDurability() < baseItem.GetMaxDurability())
+		{
+			return false;
+		}
+		if (TryDetectAttachedPoisons(itemKey))
+		{
+			return false;
+		}
+		if (itemKey.ItemType == 10)
+		{
+			if (baseItem.GetItemSubType() == 1001)
+			{
+				(int, byte) readingInfo = GetCombatSkillBookCurrReadingInfo((GameData.Domains.Item.SkillBook)baseItem);
+				if (readingInfo.Item1 < 0 || readingInfo.Item2 < 6)
+				{
+					return false;
+				}
+			}
+			else
+			{
+				(int, byte) readingInfo2 = GetLifeSkillBookCurrReadingInfo((GameData.Domains.Item.SkillBook)baseItem);
+				if (readingInfo2.Item1 < 0 || readingInfo2.Item2 < 5)
+				{
+					return false;
+				}
+			}
+		}
+		else
+		{
+			if (itemKey.ItemType == 12 && itemKey.TemplateId == 267)
+			{
+				return false;
+			}
+			if (inventoryOverloading && ((baseItem is GameData.Domains.Item.Accessory accessory && accessory.GetMaxInventoryLoadBonus() > 0) || (baseItem is GameData.Domains.Item.Carrier carrier && carrier.GetMaxInventoryLoadBonus() > 0)))
+			{
+				return false;
+			}
+		}
+		if (ActionPlanningData.Goals != null)
+		{
+			foreach (CharacterGoalData goal in ActionPlanningData.Goals)
+			{
+				int itemId = goal.Args.ItemId;
+				if (itemId == itemKey.Id)
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public bool HasSpareableItem(bool allowUsed)
+	{
+		IReadOnlyDictionary<ItemKey, int> taiwuGiftItems = DomainManager.Extra.GetTaiwuGiftItems(_id);
+		int villagerIdealClothing = ((_organizationInfo.OrgTemplateId == 16) ? GetIdealClothingTemplateId() : (-1));
+		int keepClothingCount = ((villagerIdealClothing >= 0 && _equipment[4].IsValid() && _equipment[4].TemplateId == villagerIdealClothing) ? 1 : 0);
+		bool isOverLoading = IsOverweight;
+		foreach (var (itemKey2, amount) in _inventory.Items)
+		{
+			if (itemKey2.ItemType == 3 && keepClothingCount > 0)
+			{
+				keepClothingCount--;
+			}
+			else if (CanSpareItem(itemKey2, amount, taiwuGiftItems, allowUsed, isOverLoading))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public ItemBase SelectSpareableItem(DataContext context, sbyte targetGrade, bool allowUsed, Predicate<ItemKey> predicate = null)
+	{
+		int currBestGrade = 9;
+		List<(ItemBase, int)> selectableItems = context.AdvanceMonthRelatedData.ItemsWithAmount.Occupy();
+		IReadOnlyDictionary<ItemKey, int> taiwuGiftItems = DomainManager.Extra.GetTaiwuGiftItems(_id);
+		int villagerIdealClothing = ((_organizationInfo.OrgTemplateId == 16) ? GetIdealClothingTemplateId() : (-1));
+		int keepClothingCount = ((villagerIdealClothing >= 0 && _equipment[4].IsValid() && _equipment[4].TemplateId == villagerIdealClothing) ? 1 : 0);
+		bool isOverLoading = IsOverweight;
+		foreach (var (itemKey2, amount) in _inventory.Items)
+		{
+			if (itemKey2.ItemType == 3 && keepClothingCount > 0)
+			{
+				keepClothingCount--;
+			}
+			else
+			{
+				if (!CanSpareItem(itemKey2, amount, taiwuGiftItems, allowUsed, isOverLoading) || (predicate != null && !predicate(itemKey2)))
+				{
+					continue;
+				}
+				ItemBase baseItem = DomainManager.Item.GetBaseItem(itemKey2);
+				sbyte grade = baseItem.GetGrade();
+				if (grade == currBestGrade)
+				{
+					selectableItems.Add((baseItem, amount));
+				}
+				else if (currBestGrade < targetGrade)
+				{
+					if (grade >= currBestGrade && grade <= targetGrade)
+					{
+						currBestGrade = grade;
+						selectableItems.Clear();
+						selectableItems.Add((baseItem, amount));
+					}
+				}
+				else if (currBestGrade > targetGrade && grade < currBestGrade)
+				{
+					currBestGrade = grade;
+					selectableItems.Clear();
+					selectableItems.Add((baseItem, amount));
+				}
+			}
+		}
+		ItemBase selectedItem = ((selectableItems.Count == 0) ? null : selectableItems.GetRandom(context.Random).Item1);
+		context.AdvanceMonthRelatedData.ItemsWithAmount.Release(ref selectableItems);
+		return selectedItem;
 	}
 
 	private void OfflineCreateInventoryOnCharacterCreation(DataContext context, sbyte itemType, short templateId, int amount)
@@ -11678,6 +12144,16 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			recovery = Math.Max(1, recovery * (actionPointBonus + 100) / 100);
 			if (_id == taiwuCharId)
 			{
+				EatingItems eatingItems = GetEatingItems();
+				for (int j = 0; j < 9; j++)
+				{
+					ItemKey itemKey = eatingItems.Get(j);
+					if (itemKey.IsValid() && itemKey.ItemType == 7)
+					{
+						FoodItem foodConfig = Config.Food.Instance[itemKey.TemplateId];
+						recovery += foodConfig.MainAttributesRegenMonthly.Get(i);
+					}
+				}
 				ExtraDomain extraDomain = DomainManager.Extra;
 				int professionId = ProfessionRelatedConstants.MainAttributeRecoverProfessionIds[i];
 				if (extraDomain.IsProfessionalSkillUnlocked(professionId, 0))
@@ -11751,7 +12227,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		if (delta > 0)
 		{
 			int percent = 100;
-			foreach (short id in _featureIds)
+			foreach (short id in GetValidFeatureIds())
 			{
 				percent += CharacterFeature.Instance[id].HealthRecovery;
 			}
@@ -11801,7 +12277,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		deltaOld = delta;
 		int percent = 100;
 		int increase = 0;
-		foreach (short featureId in _featureIds)
+		foreach (short featureId in GetValidFeatureIds())
 		{
 			CharacterFeatureItem config = CharacterFeature.Instance[featureId];
 			percent += config.QiDisorderBuffPercent;
@@ -12556,6 +13032,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			mod.ItemsToBeLost.Add((block, itemKey, amount));
 			decreasedHappiness += item.GetHappinessChange() * amount;
 		}
+		if (!IsTaiwu())
+		{
+			OfflineAddGoal(248, overloadedWeight);
+		}
 		context.AdvanceMonthRelatedData.ItemsWithAmount.Release(ref itemsToBeLost);
 		ObjectPool<List<MapBlockData>>.Instance.Return(nearbyBlocks);
 		return -decreasedHappiness;
@@ -12813,13 +13293,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		{
 		}
 		delta = num + num2;
-		foreach (short featureId in _featureIds)
+		foreach (short featureId in GetValidFeatureIds())
 		{
-			if (!IgnoreFeature(featureId))
-			{
-				CharacterFeatureItem featureCfg = CharacterFeature.Instance[featureId];
-				delta += featureCfg.XiangshuInfectionChange;
-			}
+			CharacterFeatureItem featureCfg = CharacterFeature.Instance[featureId];
+			delta += featureCfg.XiangshuInfectionChange;
 		}
 		if (delta > 127)
 		{
@@ -12929,6 +13406,19 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 					{
 						mod.PoisonedChanged = true;
 					}
+					if (medicineCfg.DetoxWugType < 0)
+					{
+						break;
+					}
+					for (int currSlot = 0; currSlot < 9; currSlot++)
+					{
+						ItemKey curItemKey = (ItemKey)_eatingItems.ItemKeys[currSlot];
+						if (EatingItems.IsWug(curItemKey) && Config.Medicine.Instance[curItemKey.TemplateId].WugType == medicineCfg.DetoxWugType)
+						{
+							short deltaDuration = GameData.Domains.Item.Medicine.GetDeltaWugDuration(medicineCfg.Grade);
+							_eatingItems.ChangeDuration(context, currSlot, deltaDuration, ref mod.RemovedWugs);
+						}
+					}
 					break;
 				}
 				case EMedicineEffectType.DetoxPoison:
@@ -13024,6 +13514,16 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			recovery = Math.Max(1, recovery * (actionPointBonus + 100) / 100);
 			if (_id == taiwuCharId)
 			{
+				EatingItems eatingItems = GetEatingItems();
+				for (int j = 0; j < 9; j++)
+				{
+					ItemKey itemKey = eatingItems.Get(j);
+					if (itemKey.IsValid() && itemKey.ItemType == 7)
+					{
+						FoodItem foodConfig = Config.Food.Instance[itemKey.TemplateId];
+						recovery += foodConfig.MainAttributesRegenMonthly.Get(i);
+					}
+				}
 				ExtraDomain extraDomain = DomainManager.Extra;
 				int professionId = ProfessionRelatedConstants.MainAttributeRecoverProfessionIds[i];
 				if (extraDomain.IsProfessionalSkillUnlocked(professionId, 0))
@@ -14478,78 +14978,6 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		return (charId: selectedCharId, actionType: targetActionType);
 	}
 
-	public ItemBase SelectSpareableItem(DataContext context, sbyte targetGrade, bool allowUsed)
-	{
-		int currBestGrade = 9;
-		List<(ItemBase, int)> selectableItems = context.AdvanceMonthRelatedData.ItemsWithAmount.Occupy();
-		IReadOnlyDictionary<ItemKey, int> taiwuGiftItems = DomainManager.Extra.GetTaiwuGiftItems(_id);
-		int villagerIdealClothing = ((_organizationInfo.OrgTemplateId == 16) ? GetIdealClothingTemplateId() : (-1));
-		int keepClothingCount = ((villagerIdealClothing >= 0 && _equipment.Exist((ItemKey e) => e.IsValid() && e.ItemType == 3 && e.TemplateId == villagerIdealClothing)) ? 1 : 0);
-		foreach (var (itemKey2, amount) in _inventory.Items)
-		{
-			if (!ItemTemplateHelper.IsTransferable(itemKey2.ItemType, itemKey2.TemplateId) || ItemTemplateHelper.GetBaseValue(itemKey2.ItemType, itemKey2.TemplateId) <= 0 || (taiwuGiftItems.TryGetValue(itemKey2, out var giftAmount) && giftAmount >= amount))
-			{
-				continue;
-			}
-			ItemBase baseItem = DomainManager.Item.GetBaseItem(itemKey2);
-			if ((!allowUsed && baseItem.GetCurrDurability() < baseItem.GetMaxDurability()) || TryDetectAttachedPoisons(itemKey2))
-			{
-				continue;
-			}
-			if (itemKey2.ItemType == 10)
-			{
-				if (baseItem.GetItemSubType() == 1001)
-				{
-					(int, byte) readingInfo = GetCombatSkillBookCurrReadingInfo((GameData.Domains.Item.SkillBook)baseItem);
-					if (readingInfo.Item1 < 0 || readingInfo.Item2 < 6)
-					{
-						continue;
-					}
-				}
-				else
-				{
-					(int, byte) readingInfo2 = GetLifeSkillBookCurrReadingInfo((GameData.Domains.Item.SkillBook)baseItem);
-					if (readingInfo2.Item1 < 0 || readingInfo2.Item2 < 5)
-					{
-						continue;
-					}
-				}
-			}
-			else if (itemKey2.ItemType == 3 && keepClothingCount > 0)
-			{
-				keepClothingCount--;
-				continue;
-			}
-			if (itemKey2.ItemType == 12 && itemKey2.TemplateId == 267)
-			{
-				continue;
-			}
-			sbyte grade = baseItem.GetGrade();
-			if (grade == currBestGrade)
-			{
-				selectableItems.Add((baseItem, amount));
-			}
-			else if (currBestGrade < targetGrade)
-			{
-				if (grade >= currBestGrade && grade <= targetGrade)
-				{
-					currBestGrade = grade;
-					selectableItems.Clear();
-					selectableItems.Add((baseItem, amount));
-				}
-			}
-			else if (currBestGrade > targetGrade && grade < currBestGrade)
-			{
-				currBestGrade = grade;
-				selectableItems.Clear();
-				selectableItems.Add((baseItem, amount));
-			}
-		}
-		ItemBase selectedItem = ((selectableItems.Count == 0) ? null : selectableItems.GetRandom(context.Random).Item1);
-		context.AdvanceMonthRelatedData.ItemsWithAmount.Release(ref selectableItems);
-		return selectedItem;
-	}
-
 	private bool HasBookToReadForExp()
 	{
 		foreach (ItemKey itemKey in _inventory.Items.Keys)
@@ -14598,12 +15026,6 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		ItemKey selectedBook = books.GetRandomOrDefault(context.Random, ItemKey.Invalid);
 		context.AdvanceMonthRelatedData.ItemKeys.Release(ref books);
 		return selectedBook;
-	}
-
-	[Obsolete("Use SelectSpareableItem instead.")]
-	public ItemKey SelectItemToGive(DataContext context, sbyte targetGrade)
-	{
-		return SelectSpareableItem(context, targetGrade, allowUsed: true)?.GetItemKey() ?? ItemKey.Invalid;
 	}
 
 	public unsafe sbyte GetStealActionPhase(IRandomSource random, Character targetChar, int alertFactor, bool showCheckAnim = false)
@@ -15259,9 +15681,12 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		{
 			if (itemKey.TemplateId == 475)
 			{
-				int charId = itemKey.Id;
-				Character characterData = DomainManager.Character.GetElement_Objects(charId);
-				return (int)Math.Clamp(Wager.CharacterValue(characterData.GetFame(), characterData.GetAttraction(), characterData.GetOrganizationInfo().Grade, characterData.GetDisplayingGender(), characterData.GetPhysiologicalAge()), 0L, 2147483647L);
+				if (DomainManager.Character.TryGetElement_Objects(itemKey.Id, out var characterData))
+				{
+					return (int)Math.Clamp(Wager.CharacterValue(characterData.GetFame(), characterData.GetAttraction(), characterData.GetOrganizationInfo().Grade, characterData.GetDisplayingGender(), characterData.GetPhysiologicalAge()), 0L, 2147483647L);
+				}
+				AdaptableLog.Warning($"Invalid character id {itemKey.Id} got, prisoner alertness factor calculation may fail");
+				return 0;
 			}
 			if (itemKey.TemplateId != 388 && itemKey.TemplateId != 389)
 			{
@@ -15696,6 +16121,10 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		int currDate = DomainManager.World.GetCurrDate();
 		foreach (var (mixedPoisonType, markCount) in mixedPoisonInfoList)
 		{
+			if (!DomainManager.Character.IsCharacterAlive(character._id))
+			{
+				break;
+			}
 			switch (mixedPoisonType)
 			{
 			case 15:
@@ -15742,15 +16171,15 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			{
 				List<(ItemBase, int)> lostItems = context.AdvanceMonthRelatedData.ItemsWithAmount.Occupy();
 				CharacterDomain.GetLostItemsByAmount(context, markCount, character._inventory.Items, lostItems, character._id == taiwu._id);
-				Location location2 = character.GetValidLocation();
+				Location location3 = character.GetValidLocation();
 				List<MapBlockData> nearbyBlocks = ObjectPool<List<MapBlockData>>.Instance.Get();
-				DomainManager.Map.GetRealNeighborBlocks(location2.AreaId, location2.BlockId, nearbyBlocks, 2, includeCenter: true);
+				DomainManager.Map.GetRealNeighborBlocks(location3.AreaId, location3.BlockId, nearbyBlocks, 2, includeCenter: true);
 				if (character._id == taiwu._id)
 				{
 					foreach (var item3 in lostItems)
 					{
 						ItemBase item = item3.Item1;
-						monthlyNotifications.AddPoisonMakeLoss(taiwu._id, location2, item.GetItemType(), item.GetTemplateId());
+						monthlyNotifications.AddPoisonMakeLoss(taiwu._id, location3, item.GetItemType(), item.GetTemplateId());
 					}
 				}
 				int deltaHappiness = 0;
@@ -15760,7 +16189,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 					int amount = item4.Item2;
 					ItemKey itemKey = item2.GetItemKey();
 					character.RemoveInventoryItem(context, itemKey, amount, deleteItem: false);
-					lifeRecordCollection.AddMixPoisonHotRottenGloomy(character._id, currDate, location2, itemKey.ItemType, itemKey.TemplateId);
+					lifeRecordCollection.AddMixPoisonHotRottenGloomy(character._id, currDate, location3, itemKey.ItemType, itemKey.TemplateId);
 					MapBlockData block = nearbyBlocks.GetRandom(context.Random);
 					DomainManager.Map.AddBlockItem(context, block, itemKey, amount);
 					deltaHappiness -= item2.GetHappinessChange() * amount;
@@ -15772,12 +16201,12 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			}
 			case 21:
 			{
-				Location location3 = character._location;
-				if (!location3.IsValid())
+				Location location2 = character._location;
+				if (!location2.IsValid())
 				{
-					location3 = character.GetValidLocation();
+					location2 = character.GetValidLocation();
 				}
-				MapBlockData currBlockData2 = DomainManager.Map.GetBlock(location3);
+				MapBlockData currBlockData2 = DomainManager.Map.GetBlock(location2);
 				if (currBlockData2.CharacterSet != null)
 				{
 					foreach (int charId3 in currBlockData2.CharacterSet)
@@ -15789,7 +16218,7 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 						}
 					}
 				}
-				if (location3.Equals(taiwu._location))
+				if (location2.Equals(taiwu._location))
 				{
 					HashSet<int> taiwuGroup2 = DomainManager.Taiwu.GetGroupCharIds().GetCollection();
 					foreach (int charId4 in taiwuGroup2)
@@ -15803,14 +16232,14 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 				}
 				if (character._id == taiwu._id)
 				{
-					monthlyNotifications.AddRottenPoisonDiffuse(character._id, location3);
+					monthlyNotifications.AddRottenPoisonDiffuse(character._id, location2);
 				}
-				lifeRecordCollection.AddMixPoisonRedRottenCold(character._id, currDate, location3);
+				lifeRecordCollection.AddMixPoisonRedRottenCold(character._id, currDate, location2);
 				break;
 			}
 			case 22:
 			{
-				if (character.GetAgeGroup() == 0)
+				if (character.GetAgeGroup() == 0 || !character._location.IsValid())
 				{
 					break;
 				}
@@ -16048,6 +16477,27 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 			return false;
 		}
 		return DomainManager.Map.GetBelongSettlementBlock(location) != null;
+	}
+
+	public bool IsOnHomeSettlement()
+	{
+		if (_organizationInfo.SettlementId < 0)
+		{
+			return false;
+		}
+		Location location = _location;
+		if (!location.IsValid())
+		{
+			location = GetValidLocation();
+		}
+		if (location.AreaId >= 45)
+		{
+			return false;
+		}
+		MapBlockData currBlock = DomainManager.Map.GetBlockData(location.AreaId, location.BlockId);
+		Settlement settlement = DomainManager.Organization.GetSettlement(_organizationInfo.SettlementId);
+		Location settlementLocation = settlement.GetLocation();
+		return settlementLocation == currBlock.GetRootBlock().GetLocation();
 	}
 
 	public void AddTravelTarget(DataContext context, NpcTravelTarget target)
@@ -20658,6 +21108,33 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 		return _darkAshProtector;
 	}
 
+	public ImmunityMask GetImmunityMask()
+	{
+		ObjectCollectionDataStates dataStates = CollectionHelperData.DataStates;
+		Thread.MemoryBarrier();
+		if (dataStates.IsCached(DataStatesOffset, 118))
+		{
+			return _immunityMask;
+		}
+		ImmunityMask value = CalcImmunityMask();
+		bool lockTaken = false;
+		try
+		{
+			_spinLock.Enter(ref lockTaken);
+			_immunityMask = value;
+			dataStates.SetCached(DataStatesOffset, 118);
+		}
+		finally
+		{
+			if (lockTaken)
+			{
+				_spinLock.Exit(useMemoryBarrier: false);
+			}
+		}
+		Thread.MemoryBarrier();
+		return _immunityMask;
+	}
+
 	[CollectionObjectField(true, false, false, false, false)]
 	public string GetSurname()
 	{
@@ -21148,6 +21625,66 @@ public class Character : BaseGameDataObject, ISerializableGameData, IValueSelect
 	public bool GetXiangshuInfectedDemonBonus()
 	{
 		return Config.Character.Instance[_templateId].XiangshuInfectedDemonBonus;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public string GetInfectedFixedAvatarSpineName()
+	{
+		return Config.Character.Instance[_templateId].InfectedFixedAvatarSpineName;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public string GetInfectedFixedAvatarSpineSkin()
+	{
+		return Config.Character.Instance[_templateId].InfectedFixedAvatarSpineSkin;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public List<sbyte> GetDisableTeammateCommands()
+	{
+		return Config.Character.Instance[_templateId].DisableTeammateCommands;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public bool GetShowLegendaryBookConsumedCloth()
+	{
+		return Config.Character.Instance[_templateId].ShowLegendaryBookConsumedCloth;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public string GetAvatarDataPath()
+	{
+		return Config.Character.Instance[_templateId].AvatarDataPath;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public ECharacterGroupType GetGroupType()
+	{
+		return Config.Character.Instance[_templateId].GroupType;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public bool GetTaiwuAsXiangshuDelete()
+	{
+		return Config.Character.Instance[_templateId].TaiwuAsXiangshuDelete;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public bool GetConvertToIntelligent()
+	{
+		return Config.Character.Instance[_templateId].ConvertToIntelligent;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public string GetInfectedFixedAvatarName()
+	{
+		return Config.Character.Instance[_templateId].InfectedFixedAvatarName;
+	}
+
+	[CollectionObjectField(true, false, false, false, false)]
+	public short GetChallengeModeMinionGroupId()
+	{
+		return Config.Character.Instance[_templateId].ChallengeModeMinionGroupId;
 	}
 
 	public Character()

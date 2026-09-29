@@ -6,57 +6,30 @@ using Redzen.Random;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 制造结果的一个阶段的数据。目前共三个阶段：品级-1，原品级，品级+1
-/// </summary>
 [SerializableGameData]
 public struct MakeResultStage : ISerializableGameData
 {
-	/// <summary>
-	/// 本阶段的造诣需求
-	/// </summary>
 	[SerializableGameDataField]
 	public int LifeSkillRequiredAttainment;
 
-	/// <summary>
-	/// 角色是否满足了本阶段造诣需求
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LifeSkillIsMeet;
 
-	/// <summary>
-	/// 物品模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	private short _templateId;
 
-	/// <summary>
-	/// 物品类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemType;
 
-	/// <summary>
-	/// 未选二级分类时的物品模板
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> TemplateIdList;
 
-	/// <summary>
-	/// 未选二级分类时，物品模板对应的制造子类模板列表，因为TIP要展示所有可能
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> SubTypeIdList;
 
-	/// <summary>
-	/// 制造子类模板的ID，选择了二级分类时使用
-	/// </summary>
 	[SerializableGameDataField]
 	public short SubTypeId;
 
-	/// <summary>
-	/// 是否已经完成初始化，用于判断结构体是否有效
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInit;
 
@@ -86,9 +59,6 @@ public struct MakeResultStage : ISerializableGameData
 		IsInit = true;
 	}
 
-	/// <summary>
-	/// 获取物品品级与模板ID，如果是未选二级分类，返回列表的随机一项
-	/// </summary>
 	public (sbyte, short) GetGradeAndId(IRandomSource randomSource)
 	{
 		if (TemplateIdList != null && TemplateIdList.Count > 0)

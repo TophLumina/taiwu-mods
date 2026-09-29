@@ -5,44 +5,23 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 地区主线 - 峨眉 - 突破格加成显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class SectStoryBonusDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 功法 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short CombatSkillId;
 
-	/// <summary>
-	/// 已设置的额外突破格
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> BreakBonusTemplateIds;
 
-	/// <summary>
-	/// 额外加成，根据 <see cref="F:GameData.Domains.Extra.SectStoryBonusDisplayData.BreakBonusTemplateIds" /> 计算的值
-	/// </summary>
 	[SerializableGameDataField]
 	public SkillBreakBonusCollection ExtraBonus;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
-	public SectStoryBonusDisplayData()
-	{
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -55,7 +34,6 @@ public class SectStoryBonusDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -100,7 +78,6 @@ public class SectStoryBonusDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

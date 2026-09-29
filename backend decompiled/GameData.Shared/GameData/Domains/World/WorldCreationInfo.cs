@@ -6,15 +6,9 @@ using GameData.Utilities;
 
 namespace GameData.Domains.World;
 
-/// <summary>
-/// 进入新世界时的世界创建信息
-/// </summary>
 [Serializable]
 public struct WorldCreationInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 难度等级的枚举
-	/// </summary>
 	public enum EDifficultyLevel
 	{
 		Level1,
@@ -24,127 +18,57 @@ public struct WorldCreationInfo : ISerializableGameData
 		Custom
 	}
 
-	/// <summary>
-	/// 世界人口类型.
-	/// <see cref="T:GameData.Domains.World.WorldPopulationType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte WorldPopulationType;
 
-	/// <summary>
-	/// 角色寿命类型.
-	/// <see cref="T:GameData.Domains.World.CharacterLifespanType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CharacterLifespanType;
 
-	/// <summary>
-	/// 战斗难度.
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CombatDifficulty;
 
-	/// <summary>
-	/// 研读难度
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ReadingDifficulty;
 
-	/// <summary>
-	/// 突破难度
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BreakoutDifficulty;
 
-	/// <summary>
-	/// 周天难度
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte LoopingDifficulty;
 
-	/// <summary>
-	/// 敌人的修习
-	/// <see cref="F:Config.WorldCreation.DefKey.EnemyPracticeLevel" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte EnemyPracticeLevel;
 
-	/// <summary>
-	/// 人情的变化
-	/// <see cref="F:Config.WorldCreation.DefKey.FavorabilityChange" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte FavorabilityChange;
 
-	/// <summary>
-	/// 地图上的外道数量的类型.
-	/// <see cref="T:GameData.Domains.World.HereticsAmountType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte HereticsAmountType;
 
-	/// <summary>
-	/// 侵袭的速度类型.
-	/// <see cref="T:GameData.Domains.World.BossInvasionSpeedType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BossInvasionSpeedType;
 
-	/// <summary>
-	/// 世界的资源数量类型.
-	/// <see cref="T:GameData.Domains.World.WorldResourceAmountType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte WorldResourceAmountType;
 
-	/// <summary>
-	/// 志向的成长类型
-	/// <see cref="T:GameData.Domains.World.Difficulty" />
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ProfessionUpgrade;
 
-	/// <summary>
-	/// 战利品收获率类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short LootYield;
 
-	/// <summary>
-	/// 是否允许随机太吾继承人
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AllowRandomTaiwuHeir;
 
-	/// <summary>
-	/// 是否只允许选择符合立场的选项
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RestrictOptionsBehaviorType;
 
-	/// <summary>
-	/// 太吾村所在洲
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TaiwuVillageStateTemplateId;
 
-	/// <summary>
-	/// 太吾村地貌类型.
-	/// <see cref="T:GameData.Domains.World.LandFormType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TaiwuVillageLandFormType;
 
-	/// <summary>
-	/// 获取单个设置
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public int Get(byte templateId)
 	{
 		return templateId switch
@@ -168,12 +92,6 @@ public struct WorldCreationInfo : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 修改单个设置
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="value"></param>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public void Set(byte templateId, byte value)
 	{
 		switch (templateId)
@@ -228,11 +146,6 @@ public struct WorldCreationInfo : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 根据难度预设创建世界细节
-	/// </summary>
-	/// <param name="difficulty"></param>
-	/// <returns></returns>
 	public static WorldCreationInfo CreateByDifficultyPreset(sbyte difficulty)
 	{
 		WorldCreationInfo creationInfo = default(WorldCreationInfo);
@@ -243,11 +156,6 @@ public struct WorldCreationInfo : ISerializableGameData
 		return creationInfo;
 	}
 
-	/// <summary>
-	/// 根据难度设置获取最小难度，结果不会是自定义，略过了常规分组
-	/// </summary>
-	/// <param name="worldCreationInfo"></param>
-	/// <returns></returns>
 	public static sbyte GetMinDifficulty(WorldCreationInfo worldCreationInfo)
 	{
 		sbyte difficulty = 3;
@@ -272,12 +180,6 @@ public struct WorldCreationInfo : ISerializableGameData
 		return Math.Max(difficulty, 0);
 	}
 
-	/// <summary>
-	/// 获取指定分组的综合难度等级
-	/// </summary>
-	/// <param name="groupId"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.Exception"></exception>
 	public int GetGroupLevel(sbyte groupId)
 	{
 		int legacyBonusSum = GetGroupLegacyBonusSum(groupId);
@@ -291,11 +193,6 @@ public struct WorldCreationInfo : ISerializableGameData
 		throw new Exception($"Invalid legacy bonus sum {legacyBonusSum} for group {groupId}.");
 	}
 
-	/// <summary>
-	/// 获取指定分组的遗惠得分
-	/// </summary>
-	/// <param name="groupId"></param>
-	/// <returns></returns>
 	public int GetGroupLegacyBonusSum(sbyte groupId)
 	{
 		WorldCreationGroupItem worldCreationGroupItem = WorldCreationGroup.Instance[groupId];
@@ -313,13 +210,11 @@ public struct WorldCreationInfo : ISerializableGameData
 		return legacyBonusSum;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 18;
@@ -330,7 +225,6 @@ public struct WorldCreationInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = WorldPopulationType;
@@ -374,7 +268,6 @@ public struct WorldCreationInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

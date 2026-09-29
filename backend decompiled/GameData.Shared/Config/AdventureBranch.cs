@@ -5,19 +5,14 @@ namespace Config;
 [Serializable]
 public abstract class AdventureBranch
 {
-	/// 分支长度
 	public short Length;
 
-	/// 该分支上的全局事件
 	public string GlobalEvent;
 
-	/// 技艺权重 (LifeSkillId, Weight)
 	public (byte, short)[] SkillWeights;
 
-	/// 地形及对应七元的权重 (TerrainId, TerrainWeight, [CalmWeight, Clever, Enthusiastic, Brave, Firm])
 	public (byte, short, short[])[] TerrainPersonalityWeights;
 
-	/// 七元对应的奖励和事件类型及其权重
 	public AdventurePersonalityContentWeights[] PersonalityContentWeights;
 
 	protected AdventureBranch(short len, string globalEvent, int[] skillCfg, int[] terrainPersonalityCfg, int[] emptyBlockCfg, string[] eventCfg, int[] resRewardCfg, int[] itemRewardCfg, string[] bonusRewardCfg)

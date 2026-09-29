@@ -5,36 +5,16 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Global;
 
-/// <summary>
-/// </summary>
 public class GameStatRecordListInt : IGameStatRecord, ISerializableGameData
 {
-	/// <summary>
-	/// 实际存储在本地存档的值
-	/// </summary>
 	[SerializableGameDataField]
 	private List<int> _value;
 
-	/// <summary>
-	/// 将本地存档的值转换为统计需要的int值
-	/// </summary>
-	/// 该值为列表长度
-	/// <returns></returns>
 	public int GetStat()
 	{
 		return _value.Count;
 	}
 
-	/// <summary>
-	/// 将value存入本地存储
-	/// </summary>
-	/// <param name="value"></param>
-	/// <param name="setType"></param>
-	/// <typeparam name="T">
-	/// 输入值为int会导致列表更新为仅包含该输入值的新表
-	/// 输入值为ListInt会导致列表更新为输入值
-	/// </typeparam>
-	/// <returns></returns>
 	public bool SetStat<T>(T value, EStatInfoSetType setType)
 	{
 		if (!(value is int case1))
@@ -115,11 +95,6 @@ public class GameStatRecordListInt : IGameStatRecord, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 查询一个值是否在表中
-	/// </summary>
-	/// <param name="value"></param>
-	/// <returns></returns>
 	public bool Contains(int value)
 	{
 		foreach (int item in _value)
@@ -132,11 +107,6 @@ public class GameStatRecordListInt : IGameStatRecord, ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 查询两个存储是否共有一个特定的值
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool Overlaps<T>(T other)
 	{
 		if (other is GameStatRecordListInt value)
@@ -155,39 +125,26 @@ public class GameStatRecordListInt : IGameStatRecord, ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
 	public GameStatRecordListInt()
 	{
 		_value = new List<int>();
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="other"></param>
 	public GameStatRecordListInt(GameStatRecordListInt other)
 	{
 		_value = new List<int>(other._value);
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="other"></param>
 	public void Assign(GameStatRecordListInt other)
 	{
 		_value = new List<int>(other._value);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -199,7 +156,6 @@ public class GameStatRecordListInt : IGameStatRecord, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -228,7 +184,6 @@ public class GameStatRecordListInt : IGameStatRecord, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

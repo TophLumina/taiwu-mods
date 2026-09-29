@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Organization.Display;
 
-/// <summary>
-/// 定居点显示数据。用于向前端返回显示所需数据，使前端不必监听定居点数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public struct SettlementDisplayData : ISerializableGameData
 {
@@ -57,9 +54,6 @@ public struct SettlementDisplayData : ISerializableGameData
 
 	public short RandomNameId => SettlementNameRelatedData.RandomNameId;
 
-	/// <summary>
-	/// 获取定居点玄灰显示状态
-	/// </summary>
 	public LanguageKey DarkAshStatus
 	{
 		get
@@ -99,8 +93,7 @@ public struct SettlementDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 34;
-		totalSize += SettlementNameRelatedData.GetSerializedSize();
+		int totalSize = 38;
 		totalSize = ((PlaceHolder == null) ? (totalSize + 2) : (totalSize + (2 + PlaceHolder.Length)));
 		if (totalSize > 4)
 		{

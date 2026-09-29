@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 突破盘格子
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class SkillBreakPlateGrid : ISerializableGameData
 {
@@ -29,50 +26,26 @@ public class SkillBreakPlateGrid : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[6] { "TemplateId", "SuccessRateFix", "InternalState", "AddMaxPower", "RecordedSuccessRate", "RecordedStepIsGoneMad" };
 	}
 
-	/// <summary>
-	/// 模板ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public sbyte TemplateId;
 
-	/// <summary>
-	/// 成功率修正
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public sbyte SuccessRateFix;
 
-	/// <summary>
-	/// 状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	private sbyte _internalState;
 
-	/// <summary>
-	/// 分布的加成威力值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public int AddMaxPower;
 
-	/// <summary>
-	/// 被选中时的成功率
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public short RecordedSuccessRate;
 
-	/// <summary>
-	/// 被选中时是否处于走火入魔状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public bool RecordedStepIsGoneMad;
 
-	/// <summary>
-	/// 模板数据
-	/// </summary>
 	public SkillBreakGridTypeItem Template => SkillBreakGridType.Instance[TemplateId];
 
-	/// <summary>
-	/// 格子状态
-	/// </summary>
 	public ESkillBreakGridState State
 	{
 		get
@@ -85,12 +58,6 @@ public class SkillBreakPlateGrid : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 构造方法
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="successRateFix"></param>
-	/// <param name="state"></param>
 	public SkillBreakPlateGrid(sbyte templateId, sbyte successRateFix, ESkillBreakGridState state)
 	{
 		TemplateId = templateId;
@@ -100,16 +67,10 @@ public class SkillBreakPlateGrid : ISerializableGameData
 		RecordedSuccessRate = -1;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SkillBreakPlateGrid()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SkillBreakPlateGrid(SkillBreakPlateGrid other)
 	{
 		TemplateId = other.TemplateId;
@@ -120,9 +81,6 @@ public class SkillBreakPlateGrid : ISerializableGameData
 		RecordedStepIsGoneMad = other.RecordedStepIsGoneMad;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SkillBreakPlateGrid other)
 	{
 		TemplateId = other.TemplateId;

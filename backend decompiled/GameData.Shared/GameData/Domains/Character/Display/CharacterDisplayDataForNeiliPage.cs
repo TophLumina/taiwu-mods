@@ -60,12 +60,7 @@ public class CharacterDisplayDataForNeiliPage : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 18;
-		totalSize += NeiliPercent.GetSerializedSize();
-		totalSize += BaseNeiliAllocation.GetSerializedSize();
-		totalSize += NeiliAllocation.GetSerializedSize();
-		totalSize += CombatNeiliAllocation.GetSerializedSize();
-		totalSize += NeiliAllocationEffects.GetSerializedSize();
+		int totalSize = 58;
 		totalSize = ((FeatureIds == null) ? (totalSize + 2) : (totalSize + (2 + 2 * FeatureIds.Count)));
 		if (totalSize > 4)
 		{

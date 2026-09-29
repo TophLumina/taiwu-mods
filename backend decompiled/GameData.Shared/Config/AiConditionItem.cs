@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using AiEditor;
 using Config.Common;
 
@@ -8,42 +9,28 @@ namespace Config;
 [Serializable]
 public class AiConditionItem : ConfigItem<AiConditionItem, int>, IAiConfigTuple
 {
-	/// <summary>
-	/// 模板ID
-	/// </summary>
 	public readonly int TemplateId;
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	public readonly EAiConditionType Type;
 
-	/// <summary>
-	/// 名称
-	/// </summary>
 	public readonly string Name;
 
-	/// <summary>
-	/// 说明
-	/// </summary>
 	public readonly string Desc;
 
-	/// <summary>
-	/// 文本参数
-	/// - 此处由程序维护，与代码中解析顺序对应，如有新增参数需求，请联系程序修改
-	/// </summary>
 	public readonly List<int> ParamStrings;
 
-	/// <summary>
-	/// 数字参数
-	/// </summary>
 	public readonly List<int> ParamInts;
 
-	/// <summary>
-	/// 所属组
-	/// - 此列由程序维护，前端编辑器使用，后端实现需确保与配置值一致
-	/// </summary>
 	public readonly int GroupId;
+
+	public AiGroupItem Group
+	{
+		[return: MaybeNull]
+		get
+		{
+			return AiGroup.Instance.GetItemOrDefault(GroupId);
+		}
+	}
 
 	int IAiConfigTuple.TemplateId => TemplateId;
 
@@ -53,16 +40,6 @@ public class AiConditionItem : ConfigItem<AiConditionItem, int>, IAiConfigTuple
 
 	string IAiConfigTuple.Desc => Desc;
 
-	/// <summary>
-	/// 构造器 - constructor0
-	/// </summary>
-	/// <param name="templateId">模板ID</param>
-	/// <param name="type">类型</param>
-	/// <param name="name">名称</param>
-	/// <param name="desc">说明</param>
-	/// <param name="paramStrings">文本参数 - 此处由程序维护，与代码中解析顺序对应，如有新增参数需求，请联系程序修改</param>
-	/// <param name="paramInts">数字参数</param>
-	/// <param name="groupId">所属组 - 此列由程序维护，前端编辑器使用，后端实现需确保与配置值一致</param>
 	public AiConditionItem(int templateId, EAiConditionType type, string name, string desc, List<int> paramStrings, List<int> paramInts, int groupId)
 	{
 		TemplateId = templateId;
@@ -74,9 +51,6 @@ public class AiConditionItem : ConfigItem<AiConditionItem, int>, IAiConfigTuple
 		GroupId = groupId;
 	}
 
-	/// <summary>
-	/// 默认构造器 - constructor1
-	/// </summary>
 	public AiConditionItem()
 	{
 		TemplateId = 0;
@@ -88,9 +62,6 @@ public class AiConditionItem : ConfigItem<AiConditionItem, int>, IAiConfigTuple
 		GroupId = 0;
 	}
 
-	/// <summary>
-	/// 复制构造器 - constructor2
-	/// </summary>
 	public AiConditionItem(int templateId, AiConditionItem other)
 	{
 		TemplateId = templateId;
@@ -107,10 +78,6 @@ public class AiConditionItem : ConfigItem<AiConditionItem, int>, IAiConfigTuple
 		return TemplateId;
 	}
 
-	/// <summary>
-	/// 以指定Id生成ConfigData的副本
-	/// </summary>
-	/// <param name="templateId"></param>
 	public override AiConditionItem Duplicate(int templateId)
 	{
 		return new AiConditionItem(templateId, this);

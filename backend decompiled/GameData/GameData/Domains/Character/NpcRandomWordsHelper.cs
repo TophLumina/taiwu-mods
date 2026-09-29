@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Config;
 using GameData.DLC;
@@ -50,24 +51,33 @@ public static class NpcRandomWordsHelper
 
 	public static string RandomContent(this NpcRandomWordsItem word, IRandomSource random)
 	{
-		string words = word.Words;
-		short templateId = word.TemplateId;
-		if (templateId >= 689 && templateId <= 693)
+		switch (word.FormatRule)
+		{
+		case ENpcRandomWordsFormatRule.LegendaryBook:
 		{
 			short selectedTaiwuTitle = word.RandomMatchTitle(random);
 			Tester.Assert(selectedTaiwuTitle >= 0, "Illegal selectedTaiwuTitle");
 			CharacterTitleItem titleItem = CharacterTitle.Instance[selectedTaiwuTitle];
 			MiscItem miscItem = Misc.Instance[titleItem.Misc];
-			words = words.GetFormat(miscItem.Name);
+			return word.Words.GetFormat(miscItem.Name);
 		}
-		if (word.TemplateId == 695)
+		case ENpcRandomWordsFormatRule.CombatTitle:
 		{
 			short selectedTaiwuTitle2 = word.RandomMatchTitle(random);
 			Tester.Assert(selectedTaiwuTitle2 >= 0, "Illegal selectedTaiwuTitle");
 			CharacterTitleItem titleItem2 = CharacterTitle.Instance[selectedTaiwuTitle2];
-			words = words.GetFormat(titleItem2.Name);
+			return word.Words.GetFormat(titleItem2.Name);
 		}
-		return words;
+		case ENpcRandomWordsFormatRule.Item:
+		{
+			MiscItem template = word.HolderMisc;
+			return word.Words.GetFormat($"<color=#GradeColor_{template?.Grade ?? 0}>{template?.Name ?? "Decode Error"}</color>");
+		}
+		case ENpcRandomWordsFormatRule.None:
+			return word.Words;
+		default:
+			throw new Exception($"unknown format rule: {word.FormatRule}");
+		}
 	}
 
 	private static short RandomMatchTitle(this NpcRandomWordsItem word, IRandomSource random = null)
@@ -94,6 +104,11 @@ public static class NpcRandomWordsHelper
 
 	private static bool IsMatch(this NpcRandomWordsItem word, Character npcChar)
 	{
+		List<sbyte> limit = word.MonthLimit;
+		if (limit != null && limit.Count > 0 && !limit.Contains((sbyte)(DomainManager.World.GetCurrDate() % 12)))
+		{
+			return false;
+		}
 		Character taiwuChar = DomainManager.Taiwu.GetTaiwu();
 		if (word.SelfGender != -1 && !taiwuChar.CheckGenderMeetsRequirement(word.SelfGender))
 		{

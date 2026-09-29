@@ -6,50 +6,26 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 功法装备方案
-/// </summary>
 [SerializableGameData(NotForDisplayModule = true)]
 public class CombatSkillPlan : ISerializableGameData
 {
-	/// <summary>
-	/// 功法方案数量上限
-	/// </summary>
 	public const int MaxPlanCount = 9;
 
-	/// <summary>
-	/// 内功
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] NeigongList = new short[9];
 
-	/// <summary>
-	/// 摧破
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] AttackSkillList = new short[9];
 
-	/// <summary>
-	/// 身法
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] AgilitySkillList = new short[9];
 
-	/// <summary>
-	/// 护体
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] DefenseSkillList = new short[9];
 
-	/// <summary>
-	/// 奇窍
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] AssistanceSkillList = new short[9];
 
-	/// <summary>
-	/// 各类功法万用格分配个数
-	/// </summary>
 	[SerializableGameDataField]
 	public byte[] GenericGridAllocation = new byte[4];
 
@@ -58,9 +34,6 @@ public class CombatSkillPlan : ISerializableGameData
 		Reset();
 	}
 
-	/// <summary>
-	/// 重置当前运功方案
-	/// </summary>
 	public void Reset()
 	{
 		for (int i = 0; i < NeigongList.Length; i++)
@@ -85,10 +58,6 @@ public class CombatSkillPlan : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拷贝功法装配
-	/// </summary>
-	/// <param name="plan"></param>
 	public void CopyFrom(CombatSkillPlan plan)
 	{
 		NeigongList = CopyArray(plan.NeigongList, NeigongList);
@@ -111,9 +80,6 @@ public class CombatSkillPlan : ISerializableGameData
 		return dstArray;
 	}
 
-	/// <summary>
-	/// 记录当前装备的功法
-	/// </summary>
 	public void Record(short[] skillIdList)
 	{
 		for (sbyte type = 0; type < 5; type++)
@@ -126,11 +92,6 @@ public class CombatSkillPlan : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 对比功法装配
-	/// </summary>
-	/// <param name="skillIdList"></param>
-	/// <returns></returns>
 	public bool Equal(short[] skillIdList)
 	{
 		for (sbyte type = 0; type < 5; type++)
@@ -147,9 +108,6 @@ public class CombatSkillPlan : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 获取指定类型的功法列表
-	/// </summary>
 	public short[] GetSkillList(sbyte type)
 	{
 		return type switch
@@ -194,9 +152,6 @@ public class CombatSkillPlan : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillPlan(CombatSkillPlan other)
 	{
 		short[] item = other.NeigongList;
@@ -243,9 +198,6 @@ public class CombatSkillPlan : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillPlan other)
 	{
 		short[] item = other.NeigongList;
@@ -292,13 +244,11 @@ public class CombatSkillPlan : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -315,7 +265,6 @@ public class CombatSkillPlan : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -429,7 +378,6 @@ public class CombatSkillPlan : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

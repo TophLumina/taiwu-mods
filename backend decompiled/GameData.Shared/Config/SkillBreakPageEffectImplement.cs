@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class SkillBreakPageEffectImplement : ConfigData<SkillBreakPageEffectImplementItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakPageEffectImplement Instance = new SkillBreakPageEffectImplement();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "EffectDesc", "TemplateId" };

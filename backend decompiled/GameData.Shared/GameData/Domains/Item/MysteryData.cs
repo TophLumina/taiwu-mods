@@ -4,10 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 玄字效果数据
-/// 每个道具与角色的组合对应一个数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class MysteryData : ISerializableGameData
 {
@@ -22,51 +18,33 @@ public class MysteryData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "Compatibility", "EffectIds" };
 	}
 
-	/// <summary>
-	/// 契合度
-	/// 角色 ID -&gt; 与角色契合度
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public Dictionary<int, int> Compatibility;
 
-	/// <summary>
-	/// 特效 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public List<long> EffectIds;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public MysteryData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public MysteryData(MysteryData other)
 	{
 		Compatibility = ((other.Compatibility == null) ? null : new Dictionary<int, int>(other.Compatibility));
 		EffectIds = ((other.EffectIds == null) ? null : new List<long>(other.EffectIds));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(MysteryData other)
 	{
 		Compatibility = ((other.Compatibility == null) ? null : new Dictionary<int, int>(other.Compatibility));
 		EffectIds = ((other.EffectIds == null) ? null : new List<long>(other.EffectIds));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -79,7 +57,6 @@ public class MysteryData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -111,7 +88,6 @@ public class MysteryData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

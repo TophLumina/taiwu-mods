@@ -7,19 +7,8 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map.TeammateBubble;
 
-/// <summary>
-/// 同道气泡文本集合
-/// </summary>
-/// <summary>
-/// 同道气泡文本集合
-/// </summary>
 public class TeammateBubbleCollection : WriteableRecordCollection
 {
-	/// <summary>
-	/// 获取所有同道气泡文本的渲染信息
-	/// </summary>
-	/// <param name="renderInfos">调用者保证传入时此集合为空</param>
-	/// <param name="argumentCollection">传入时可以不为空</param>
 	public void GetRenderInfos(List<TeammateBubbleRenderInfo> renderInfos, ArgumentCollection argumentCollection)
 	{
 		int index = -1;
@@ -34,12 +23,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		}
 	}
 
-	/// <summary>
-	/// 获取指定索引的同道气泡文本的渲染信息
-	/// </summary>
-	/// <param name="offset"></param>
-	/// <param name="argumentCollection">实参集合</param>
-	/// <returns></returns>
 	public new unsafe TeammateBubbleRenderInfo GetRenderInfo(int offset, ArgumentCollection argumentCollection)
 	{
 		fixed (byte* pRawData = RawData)
@@ -100,13 +83,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return (templateId - 968) / 2;
 	}
 
-	/// <summary>
-	/// 开始添加同道气泡文本
-	/// </summary>
-	/// <param name="index">出战同道的索引</param>
-	/// <param name="recordType">即时通知类型</param>
-	/// <param name="subtype"></param>
-	/// <returns>当前即时通知的起始偏移</returns>
 	private unsafe int BeginAddingRecord(int index, short recordType, int subtype)
 	{
 		int offset = Size;
@@ -123,9 +99,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return offset;
 	}
 
-	/// <summary>
-	/// 添加无参数的同道气泡文本
-	/// </summary>
 	public int AddNoneParameterBubble(TeammateBubbleItem config, int index, int subtype)
 	{
 		Tester.Assert(string.IsNullOrEmpty(config.Parameters[0]));
@@ -136,14 +109,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加单独角色的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public int AddSingleCharacterParameterBubble(TeammateBubbleItem config, int index, int subtype, int charId)
 	{
 		Tester.Assert(config.Parameters[0] == "Character");
@@ -155,9 +120,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 角色身份同道气泡
-	/// </summary>
 	public int AddCharacterIdentityBubble(TeammateBubbleItem config, int index, int subtype, int charId, OrganizationInfo orgInfo, sbyte gender)
 	{
 		Tester.Assert(config.Parameters[0] == "Settlement");
@@ -170,14 +132,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加单独角色模板的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public int AddSingleCharacterTemplateNoneParameterBubble(TeammateBubbleItem config, int index, int subtype, short templateId)
 	{
 		Tester.Assert(string.IsNullOrEmpty(config.Parameters[0]));
@@ -189,15 +143,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加元鸡的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="location"></param>
-	/// <param name="chickenTemplateId"></param>
-	/// <returns></returns>
 	public int AddChickenParameterBubble(TeammateBubbleItem config, int index, int subtype, Location location, short chickenTemplateId)
 	{
 		Tester.Assert(config.Parameters[0] == "Location");
@@ -210,14 +155,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加带有位置的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="location"></param>
-	/// <returns></returns>
 	public int AddLocationParameterBubble(TeammateBubbleItem config, int index, int subtype, Location location)
 	{
 		Tester.Assert(config.Parameters[0] == "Location");
@@ -229,15 +166,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加奇遇的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="location"></param>
-	/// <param name="adventureTemplateId"></param>
-	/// <returns></returns>
 	public int AddLocationParameterBubble(TeammateBubbleItem config, int index, int subtype, Location location, short adventureTemplateId)
 	{
 		Tester.Assert(config.Parameters[0] == "Location");
@@ -250,14 +178,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加奇遇的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="adventureTemplateId"></param>
-	/// <returns></returns>
 	public int AddAdventureParameterBubble(TeammateBubbleItem config, int index, int subtype, int adventureTemplateId)
 	{
 		Tester.Assert(config.Parameters[0] == "Adventure");
@@ -269,15 +189,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加秘闻角色的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="charId"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public int AddSecretInformationCharacterParameterBubble(TeammateBubbleItem config, int index, int subtype, int charId, short templateId)
 	{
 		Tester.Assert(config.Parameters[0] == "Character");
@@ -290,15 +201,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加奇书入魔角色的同道气泡文本
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="charId"></param>
-	/// <param name="bookKey"></param>
-	/// <returns></returns>
 	public int AddLegendaryBookInsaneCharacterParameterBubble(TeammateBubbleItem config, int index, int subtype, int charId, ItemKey bookKey)
 	{
 		Tester.Assert(config.Parameters[0] == "Character");
@@ -311,14 +213,6 @@ public class TeammateBubbleCollection : WriteableRecordCollection
 		return beginOffset;
 	}
 
-	/// <summary>
-	/// 添加单独的功法类别名气泡
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="index"></param>
-	/// <param name="subtype"></param>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public int AddSingleCombatSkillTypeParameterBubble(TeammateBubbleItem config, int index, int subtype, sbyte type)
 	{
 		Tester.Assert(config.Parameters[0] == "CombatSkillType");

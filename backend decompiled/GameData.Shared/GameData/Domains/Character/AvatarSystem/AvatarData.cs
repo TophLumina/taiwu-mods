@@ -8,13 +8,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Character.AvatarSystem;
 
-/// <summary>
-/// 根据偏移量修正值进行魅力计算的相关逻辑.
-/// 备注: 数据上存储的是偏移量而非百分比/插值参数, 主要是为了保证当配置发生修改时，立绘外观尽可能保持不变，只改变魅力的计算结果.
-/// </summary>
-/// <summary>
-/// 角色根据avatar数据进行魅力计算，不包含由于属性带来的魅力加成影响
-/// </summary>
 [Serializable]
 [SerializableGameData(IsExtensible = true)]
 public class AvatarData : ISerializableGameData
@@ -127,342 +120,163 @@ public class AvatarData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 是否显示面纱
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowVeil;
 
-	/// <summary>
-	/// 形象 ID.
-	/// 【隐形规则】：奇数是男性体型，偶数是女性体型！
-	/// 取值范围 [1, 6]. 1, 3, 5 为男性体型从瘦到胖. 2, 4, 6 为女性体型从瘦到胖.
-	/// </summary>
 	[SerializableGameDataField]
 	public byte AvatarId;
 
-	/// <summary>
-	/// 整体皮肤颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorSkinId;
 
-	/// <summary>
-	/// 衣服颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorClothId;
 
-	/// <summary>
-	/// 婴幼儿衣服id，以幼儿作为索引，婴儿取模
-	/// </summary>
 	[SerializableGameDataField]
 	public short ChildClothId;
 
-	/// <summary>
-	/// 前端专用，要么监听，要么手动赋值，否则影响魅力的显示
-	/// 衣服Id
-	/// </summary>
 	public short ClothDisplayId;
 
-	/// <summary>
-	/// 前端专用
-	/// 是否显示害羞表现
-	/// </summary>
 	public bool ShowBlush;
 
-	/// <summary>
-	/// 前端专用
-	/// 是否显示界青特殊面具
-	/// </summary>
 	public bool ShowJieqingMask;
 
-	/// <summary>
-	/// 前端专用 玄灰状态的款式 从0开始，-1代表没有
-	/// </summary>
 	public sbyte DarkAshStyle = -1;
 
-	/// <summary>
-	/// 前端专用 入邪展示状态：-1=没有, 0=入邪, 1=入魔
-	/// </summary>
 	public sbyte XiangshuInfectionStyle = -1;
 
-	/// <summary>
-	/// 前端专用 心念展示状态：-1=没有, 0=蓝睁眼, 1=蓝闭眼, 2=白睁眼, 3=白闭眼, 4=红睁眼, 5=红闭眼
-	/// </summary>
 	public sbyte HuanxinFaceStyle = -1;
 
-	/// <summary>
-	/// 前端专用 婴儿所属门派/城镇的模板ID
-	/// </summary>
 	public sbyte BabyOrgTemplateId = -1;
 
-	/// <summary>
-	/// 前端专用 婴儿的品阶等级，仅当BabyOrgTemplateId不为-1时有效
-	/// </summary>
 	public sbyte BabyOrgGrade = -1;
 
-	/// <summary>
-	/// 衣服部件id，0表示没有
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ClothPartId;
 
-	/// <summary>
-	/// 头部id，0表示没有,只有mod体型能不使用头
-	/// </summary>
 	[SerializableGameDataField]
 	public byte HeadId = 1;
 
-	/// <summary>
-	/// 眼部主系列id
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyesMainId;
 
-	/// <summary>
-	/// 左眼异种id
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyesLeftId;
 
-	/// <summary>
-	/// 右眼异种id
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyesRightId;
 
-	/// <summary>
-	/// 眉毛id
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyebrowId;
 
-	/// <summary>
-	/// 眼珠颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorEyeballId;
 
-	/// <summary>
-	/// 眉毛颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorEyebrowId;
 
-	/// <summary>
-	/// 【百分比】在眼睛区域所处高度的百分比
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyesHeight;
 
-	/// <summary>
-	/// 【百分比】两眼间距的百分比
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyesDistance;
 
-	/// <summary>
-	/// 【绝对值】左眼旋转角度(右眼自动镜像)
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyesAngle;
 
-	/// <summary>
-	/// 【绝对值】眼睛缩放值
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyesScale;
 
-	/// <summary>
-	/// 【绝对值】眉毛相对眼睛图片上边缘的高度差
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyebrowHeight;
 
-	/// <summary>
-	/// 【百分比】眉毛间距百分比
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyebrowDistance;
 
-	/// <summary>
-	/// 【绝对值】左眼眉毛旋转角度(右眼眉毛自动镜像)
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyebrowAngle;
 
-	/// <summary>
-	/// 【绝对值】眉毛缩放值
-	/// </summary>
 	[SerializableGameDataField]
 	public short EyebrowScale;
 
-	/// <summary>
-	/// 鼻子ID 0表示没有鼻子，只有mod资源才可以赋值0
-	/// </summary>
 	[SerializableGameDataField]
 	public short NoseId;
 
-	/// <summary>
-	/// 【百分比】鼻子在脸部区域的高度百分比(x必定居中)
-	/// </summary>
 	[SerializableGameDataField]
 	public short NoseHeight;
 
-	/// <summary>
-	/// 【绝对值】鼻子的缩放值
-	/// </summary>
 	[SerializableGameDataField]
 	public short NoseScale;
 
-	/// <summary>
-	/// 嘴巴id 0表示没有嘴巴，只有mod资源才可以赋值0
-	/// </summary>
 	[SerializableGameDataField]
 	public short MouthId;
 
-	/// <summary>
-	/// 【百分比】在嘴巴区域的高度百分比(x必定居中)
-	/// </summary>
 	[SerializableGameDataField]
 	public short MouthHeight;
 
-	/// <summary>
-	/// 【绝对值】嘴巴的缩放值
-	/// </summary>
 	[SerializableGameDataField]
 	public short MouthScale;
 
-	/// <summary>
-	/// 唇色索引
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorMouthId;
 
-	/// <summary>
-	/// 上嘴唇胡须id
-	/// </summary>
 	[SerializableGameDataField]
 	public short Beard1Id;
 
-	/// <summary>
-	/// 下嘴唇胡须id
-	/// </summary>
 	[SerializableGameDataField]
 	public short Beard2Id;
 
-	/// <summary>
-	/// 上胡须颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorBeard1Id;
 
-	/// <summary>
-	/// 下胡须颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorBeard2Id;
 
-	/// <summary>
-	/// 前发id
-	/// </summary>
 	[SerializableGameDataField]
 	public short FrontHairId;
 
-	/// <summary>
-	/// 后发id
-	/// </summary>
 	[SerializableGameDataField]
 	public short BackHairId;
 
-	/// <summary>
-	/// 前发层颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorFrontHairId;
 
-	/// <summary>
-	/// 后发层颜色
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorBackHairId;
 
-	/// <summary>
-	/// 特征1id
-	/// </summary>
 	[SerializableGameDataField]
 	public short Feature1Id;
 
-	/// <summary>
-	/// 特征2id
-	/// </summary>
 	[SerializableGameDataField]
 	public short Feature2Id;
 
-	/// <summary>
-	/// 抬头纹id
-	/// </summary>
 	[SerializableGameDataField]
 	public short Wrinkle1Id;
 
-	/// <summary>
-	/// 表情纹id
-	/// </summary>
 	[SerializableGameDataField]
 	public short Wrinkle2Id;
 
-	/// <summary>
-	/// 眼袋纹id
-	/// </summary>
 	[SerializableGameDataField]
 	public short Wrinkle3Id;
 
-	/// <summary>
-	/// 特征1颜色id
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorFeature1Id;
 
-	/// <summary>
-	/// 特征2颜色id
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ColorFeature2Id;
 
-	/// <summary>
-	/// 可生长部件的显示能力.
-	/// 比如为女性, 或者男性年龄未到, 都不可显示胡须.
-	/// 每个比特位一个表示一个部件的显示能力, 0 表示不可显示, 1 表示可显示.
-	/// 部件的顺序参见 <see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" />
-	/// </summary>
 	[SerializableGameDataField]
 	private byte _growableElementsShowingAbilities;
 
-	/// <summary>
-	/// 可生长部件的显示状态.
-	/// 比如剃须后, 胡须就处于隐藏状态; 几个月后, 会再生长出来.
-	/// 每个比特位一个表示一个部件的显示状态, 0 表示隐藏, 1 表示显示.
-	/// 部件的顺序参见 <see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" />
-	/// </summary>
 	[SerializableGameDataField]
 	private byte _growableElementsShowingStates;
 
-	/// <summary>
-	/// 特征1镜像类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Feature1MirrorType;
 
-	/// <summary>
-	/// 特征2镜像类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Feature2MirrorType;
 
-	/// <summary>
-	/// 魅力等级排序
-	/// </summary>
 	public static readonly short[] CharmLevel = new short[9] { 100, 200, 300, 400, 500, 600, 700, 800, 900 };
 
 	[NonSerialized]
@@ -474,21 +288,10 @@ public class AvatarData : ISerializableGameData
 	[NonSerialized]
 	private AvatarAsset _headAsset;
 
-	/// 所有的id均表示资源名中解析出来的id，不是存储在AvatarGroup中各个IEnumrable的索引
-	///  <summary>
-	///  基础魅力值
-	///  </summary>
 	public short BaseCharm => GetBaseCharm();
 
-	/// <summary>
-	/// 性别，不存档
-	/// 这个性别仅是玩家体型数据表现出来的性别，并不是角色的真实性别
-	/// </summary>
 	public sbyte Gender => GetGender();
 
-	/// <summary>
-	/// 面部可见性
-	/// </summary>
 	public bool FaceVisible
 	{
 		get
@@ -505,19 +308,11 @@ public class AvatarData : ISerializableGameData
 
 	private AvatarManager AvatarManager => AvatarManager.Instance;
 
-	/// <summary>
-	/// 获取形象的性别 (角色对象里有正式的性别字段)
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetGender()
 	{
 		return (AvatarId % 2 == 1) ? ((sbyte)1) : ((sbyte)0);
 	}
 
-	/// <summary>
-	/// 是否显示面具
-	/// </summary>
-	/// <returns></returns>
 	public bool ShowMask()
 	{
 		short clothDisplayId = ClothDisplayId;
@@ -534,11 +329,6 @@ public class AvatarData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 改变形象的性别 (角色对象里有正式的性别字段).
-	/// 此方法未提交数据更改.
-	/// </summary>
-	/// <param name="gender"></param>
 	public void ChangeGender(sbyte gender)
 	{
 		int oriGender = AvatarId % 2;
@@ -555,30 +345,17 @@ public class AvatarData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取体型
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetBodyType()
 	{
 		return (sbyte)((AvatarId - 1) / 2);
 	}
 
-	/// <summary>
-	/// 改变体型.
-	/// 此方法未提交数据更改.
-	/// </summary>
-	/// <param name="bodyType"><see cref="T:GameData.Domains.Character.BodyType" /></param>
 	public void ChangeBodyType(sbyte bodyType)
 	{
 		int genderOffset = (AvatarId - 1) % 2;
 		AvatarId = (byte)(bodyType * 2 + genderOffset + 1);
 	}
 
-	/// <summary>
-	/// 把受到禁用的数据修改到空值
-	/// </summary>
-	/// <returns></returns>
 	public AvatarData FormatDisabledElements()
 	{
 		AvatarManager manager = AvatarManager.Instance;
@@ -595,10 +372,6 @@ public class AvatarData : ISerializableGameData
 		return this;
 	}
 
-	/// <summary>
-	/// 根据体型将外貌数据转换为骷髅
-	/// </summary>
-	/// <exception cref="T:System.Exception"></exception>
 	public void ConvertAvatarToSkeleton()
 	{
 		sbyte bodyType = GetBodyType();
@@ -612,12 +385,6 @@ public class AvatarData : ISerializableGameData
 		HeadId = AvatarHead.Instance[headTemplateId].HeadId;
 	}
 
-	/// <summary>
-	/// 设置指定的可生长部件的显示能力.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"><see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" /></param>
-	/// <param name="showable"></param>
 	public void SetGrowableElementShowingAbility(sbyte growableElementType, bool showable)
 	{
 		if (showable)
@@ -630,21 +397,11 @@ public class AvatarData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 设置指定的可生长部件为有显示能力.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"><see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" /></param>
 	public void SetGrowableElementShowingAbility(sbyte growableElementType)
 	{
 		_growableElementsShowingAbilities |= (byte)(1 << (int)growableElementType);
 	}
 
-	/// <summary>
-	/// 设置指定的可生长部件为没有显示能力.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"><see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" /></param>
 	public void ResetGrowableElementShowingAbility(sbyte growableElementType)
 	{
 		_growableElementsShowingAbilities &= (byte)(~(1 << (int)growableElementType));
@@ -670,23 +427,11 @@ public class AvatarData : ISerializableGameData
 		return _growableElementsShowingStates;
 	}
 
-	/// <summary>
-	/// 获取指定的可生长部件的显示能力.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"></param>
-	/// <returns>true: 可显示, false: 不可显示</returns>
 	public bool GetGrowableElementShowingAbility(sbyte growableElementType)
 	{
 		return (_growableElementsShowingAbilities & (1 << (int)growableElementType)) != 0;
 	}
 
-	/// <summary>
-	/// 设置指定可生长部件的显示状态.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"><see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" /></param>
-	/// <param name="show"></param>
 	public void SetGrowableElementShowingState(sbyte growableElementType, bool show)
 	{
 		if (show)
@@ -699,44 +444,21 @@ public class AvatarData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 设置指定可生长部件为处于显示状态.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"><see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" /></param>
 	public void SetGrowableElementShowingState(sbyte growableElementType)
 	{
 		_growableElementsShowingStates |= (byte)(1 << (int)growableElementType);
 	}
 
-	/// <summary>
-	/// 设置指定可生长部件为处于隐藏状态.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"><see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" /></param>
 	public void ResetGrowableElementShowingState(sbyte growableElementType)
 	{
 		_growableElementsShowingStates &= (byte)(~(1 << (int)growableElementType));
 	}
 
-	/// <summary>
-	/// 获取指定可生长部件的显示状态.
-	/// 有显示能力, 且处于显示状态, 才会显示; 其他情况都不会显示.
-	/// </summary>
-	/// <param name="growableElementType"><see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" /></param>
-	/// <returns>true: 显示, false: 隐藏</returns>
 	public bool GetGrowableElementShowingState(sbyte growableElementType)
 	{
 		return (_growableElementsShowingStates & (1 << (int)growableElementType)) != 0;
 	}
 
-	/// <summary>
-	/// 获取多胞胎婴儿的形象.
-	/// 多胞胎婴儿的先天形象完全一样, 只有部分后天形象不同.
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="gender"></param>
-	/// <returns></returns>
 	public AvatarData GenerateMultipleBirthChildAvatar(IRandomSource random, sbyte gender)
 	{
 		AvatarData avatar = new AvatarData(this);
@@ -746,20 +468,12 @@ public class AvatarData : ISerializableGameData
 		return avatar;
 	}
 
-	/// <summary>
-	/// 从其他捏脸数据复制
-	/// </summary>
-	/// <param name="other"></param>
 	public void Copy(AvatarData other)
 	{
 		Assign(other);
 		ClothDisplayId = other.ClothDisplayId;
 	}
 
-	/// <summary>
-	/// 获取前发和后发的Spine动画形象插槽配置字段
-	/// </summary>
-	/// <returns>(前发,后发)</returns>
 	public (string[], string[]) GetSkeletonSlotAndAttachment()
 	{
 		if (!GetGrowableElementShowingState(0) || !GetGrowableElementShowingAbility(0))
@@ -772,9 +486,6 @@ public class AvatarData : ISerializableGameData
 		return (frontHairAsset.Config.SkeletonSlotAndAttachment, backHairAsset.Config.SkeletonSlotAndAttachment);
 	}
 
-	/// <summary>
-	/// 切换到结婚时风格1的显示数据（冠冕1/盖头）
-	/// </summary>
 	public void ChangeToMarriageStyle1()
 	{
 		ClothDisplayId = SharedConstValue.MarriageClothDisplayId;
@@ -782,9 +493,6 @@ public class AvatarData : ISerializableGameData
 		BackHairId = SharedConstValue.MarriageHairHeadDressId;
 	}
 
-	/// <summary>
-	/// 切换到结婚时风格2的显示数据（冠冕2/凤冠）
-	/// </summary>
 	public void ChangeToMarriageStyle2()
 	{
 		ClothDisplayId = SharedConstValue.MarriageClothDisplayId;
@@ -792,24 +500,15 @@ public class AvatarData : ISerializableGameData
 		BackHairId = SharedConstValue.MarriageHairPhoenixCoronetId;
 	}
 
-	/// <summary>
-	/// 狮相异族高手衣装
-	/// </summary>
 	public void ChangeToShixiangBarbarianMaster()
 	{
 		ClothDisplayId = SharedConstValue.ShixiangBarbarianMasterClothDisplayId;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AvatarData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AvatarData(AvatarData other)
 	{
 		ShowVeil = other.ShowVeil;
@@ -861,9 +560,6 @@ public class AvatarData : ISerializableGameData
 		Feature2MirrorType = other.Feature2MirrorType;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AvatarData other)
 	{
 		ShowVeil = other.ShowVeil;
@@ -915,13 +611,11 @@ public class AvatarData : ISerializableGameData
 		Feature2MirrorType = other.Feature2MirrorType;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 77;
@@ -932,7 +626,6 @@ public class AvatarData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 47;
@@ -1038,7 +731,6 @@ public class AvatarData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -1287,10 +979,6 @@ public class AvatarData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 五官魅力值.
-	/// </summary>
-	/// <returns></returns>
 	public short GetFaceCharm()
 	{
 		(int, int) adjust = GetFaceValueAdjust();
@@ -1326,9 +1014,6 @@ public class AvatarData : ISerializableGameData
 		return (elementAdjust: item, layoutAdjust: layoutAdjust);
 	}
 
-	/// <summary>
-	/// 计算得分
-	/// </summary>
 	public static int CalcScore(int totalScore, float[] offsetRange, short offsetShort)
 	{
 		float offset = (float)offsetShort / 100f;
@@ -1345,35 +1030,16 @@ public class AvatarData : ISerializableGameData
 		return totalScore;
 	}
 
-	/// <summary>
-	/// 计算得分修正
-	/// </summary>
-	/// <param name="scoreConfig"></param>
-	/// <param name="score"></param>
-	/// <param name="totalScore"></param>
-	/// <returns></returns>
 	public static int CalcAdjustedScore(AvatarFaceElementScoreItem scoreConfig, int score, int totalScore)
 	{
 		return 100 - scoreConfig.AdjustWeight + scoreConfig.AdjustWeight * score / totalScore;
 	}
 
-	/// <summary>
-	/// 根据百分比计算当前偏移
-	/// </summary>
-	/// <param name="offsetRange"></param>
-	/// <param name="percent"></param>
-	/// <returns></returns>
 	public static float CalcOffset(float[] offsetRange, int percent)
 	{
 		return (offsetRange[^1] - offsetRange[0]) * (float)percent / 100f + offsetRange[0];
 	}
 
-	/// <summary>
-	/// 根据百分比计算当前偏移量的 short 格式 (* 100).
-	/// </summary>
-	/// <param name="offsetRange"></param>
-	/// <param name="percent"></param>
-	/// <returns></returns>
 	public static short CalcOffsetShortVal(float[] offsetRange, int percent)
 	{
 		return (short)(100f * CalcOffset(offsetRange, percent));
@@ -1389,57 +1055,26 @@ public class AvatarData : ISerializableGameData
 		return CalcOffsetPercent(offsetRange, (float)val / 100f);
 	}
 
-	/// <summary>
-	/// 获取最佳范围内的组件偏移量
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="offsetRange"></param>
-	/// <returns></returns>
 	public static float GetRandomOffset(IRandomSource random, float[] offsetRange)
 	{
 		return offsetRange[1] + (float)(random.NextDouble() * (double)(offsetRange[2] - offsetRange[1]));
 	}
 
-	/// <summary>
-	/// 获取最佳范围内的组件偏移量 short 格式
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="offsetRange"></param>
-	/// <returns></returns>
 	public static short GetRandomOffsetShortVal(IRandomSource random, float[] offsetRange)
 	{
 		return (short)(GetRandomOffset(random, offsetRange) * 100f);
 	}
 
-	/// <summary>
-	/// 获取纯随机组件偏移量
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="offsetRange"></param>
-	/// <returns></returns>
 	public static float GetTotalRandomOffset(IRandomSource random, float[] offsetRange)
 	{
 		return offsetRange[0] + (float)(random.NextDouble() * (double)(offsetRange[^1] - offsetRange[0]));
 	}
 
-	/// <summary>
-	/// 获取纯随机组件偏移量 short 格式
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="offsetRange"></param>
-	/// <returns></returns>
 	public static short GetTotalRandomOffsetShortVal(IRandomSource random, float[] offsetRange)
 	{
 		return (short)(GetTotalRandomOffset(random, offsetRange) * 100f);
 	}
 
-	/// <summary>
-	/// 计算魅力值
-	/// 注意：获取眼睛魅力值的接口必须早于获取鼻子魅力值的接口先被调用
-	/// </summary>
-	/// <param name="characterAge">角色年龄</param>
-	/// <param name="clothId"></param>
-	/// <returns></returns>
 	public short GetCharm(short characterAge, short clothId)
 	{
 		_headAsset = AvatarManager.GetAsset(AvatarId, EAvatarElementsType.Head, HeadId);
@@ -1449,11 +1084,6 @@ public class AvatarData : ISerializableGameData
 		return (short)num;
 	}
 
-	/// <summary>
-	/// 获取人物形象基础魅力值
-	/// 注意：获取眼睛魅力值的接口必须早于获取鼻子魅力值的接口先被调用
-	/// </summary>
-	/// <returns></returns>
 	public short GetBaseCharm()
 	{
 		_headAsset = AvatarManager.GetAsset(AvatarId, EAvatarElementsType.Head, HeadId);
@@ -1633,12 +1263,6 @@ public class AvatarData : ISerializableGameData
 		return charm;
 	}
 
-	/// <summary>
-	/// 调整到目标魅力值
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="targetBaseCharm"></param>
-	/// <returns></returns>
 	public bool AdjustToBaseCharm(IRandomSource random, short targetBaseCharm)
 	{
 		_avatarGroup = AvatarManager.GetAvatarGroup(AvatarId);

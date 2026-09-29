@@ -708,11 +708,11 @@ public class AiController
 		{
 			if (!_combatCharacter.IsAlly || DomainManager.Combat.IsAiMoving)
 			{
-				_combatCharacter.SetTargetDistance(GetTargetDistance(), context);
+				_combatCharacter.SetTargetDistance(context, GetTargetDistance());
 			}
 			else
 			{
-				_combatCharacter.SetTargetDistance(_combatCharacter.PlayerTargetDistance, context);
+				_combatCharacter.SetTargetDistance(context, _combatCharacter.PlayerTargetDistance);
 			}
 			short targetDistance = _combatCharacter.GetTargetDistance();
 			short currDistance = DomainManager.Combat.GetCurrentDistance();

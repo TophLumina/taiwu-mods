@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class CharacterMission : ConfigData<CharacterMissionItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CharacterMission Instance = new CharacterMission();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

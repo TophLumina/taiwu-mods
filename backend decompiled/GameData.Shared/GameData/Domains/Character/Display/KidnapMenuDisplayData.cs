@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 关押界面显示数据，包含某角色所关押的所有角色信息
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class KidnapMenuDisplayData : ISerializableGameData
 {
@@ -26,27 +23,15 @@ public class KidnapMenuDisplayData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "KidnapperId", "KidnapCharDisplayDataList", "MaxKidnapSlotCount", "CurrentKidnapCount" };
 	}
 
-	/// <summary>
-	/// 关押者角色ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int KidnapperId;
 
-	/// <summary>
-	/// 所有被关押角色的显示数据列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public List<KidnapCharDisplayData> KidnapCharDisplayDataList;
 
-	/// <summary>
-	/// 关押者的最大关押槽位数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int MaxKidnapSlotCount;
 
-	/// <summary>
-	/// 当前关押数量
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public int CurrentKidnapCount;
 

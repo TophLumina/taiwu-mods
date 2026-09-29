@@ -9,39 +9,21 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.TaiwuEvent.EventLog;
 
-/// <summary>
-/// 事件记录数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class EventLogData : ISerializableGameData
 {
-	/// <summary>
-	/// 所有事件记录需要用到的角色列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> CharacterList;
 
-	/// <summary>
-	/// 所有事件记录需要用到的秘闻列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SecretInformationDisplayData> SecretInformationList;
 
-	/// <summary>
-	/// 所有事件记录需要用到的物品列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> ItemList;
 
-	/// <summary>
-	/// 所有事件记录需要用到的功法列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillDisplayData> CombatSkillList;
 
-	/// <summary>
-	/// 所有事件记录的列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<EventLogResultData> ResultList;
 

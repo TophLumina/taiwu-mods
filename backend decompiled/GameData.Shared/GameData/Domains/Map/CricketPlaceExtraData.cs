@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 一个区域中的扩展促织信息
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class CricketPlaceExtraData : ISerializableGameData
 {
@@ -23,46 +20,24 @@ public class CricketPlaceExtraData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "ExtraMapUnits", "RegularCrickets", "WishingCrickets" };
 	}
 
-	/// <summary>
-	/// 额外的促织地图单元
-	/// <para>是 blockId -&gt; 剩余时间 的映射表</para>
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public Dictionary<short, short> ExtraMapUnits;
 
-	/// <summary>
-	/// 作为普通促织显示
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public List<short> RegularCrickets;
 
-	/// <summary>
-	/// 许愿生成的蛐蛐
-	/// blockId -&gt; CricketParts.TemplateId
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public Dictionary<short, short> WishingCrickets;
 
-	/// <summary>
-	/// 指定位置是否显示为绿色的通常蛐蛐
-	/// </summary>
-	/// <param name="blockId"></param>
-	/// <returns></returns>
 	public bool IsRegularCricket(short blockId)
 	{
 		return RegularCrickets?.Contains(blockId) ?? false;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CricketPlaceExtraData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CricketPlaceExtraData(CricketPlaceExtraData other)
 	{
 		ExtraMapUnits = ((other.ExtraMapUnits == null) ? null : new Dictionary<short, short>(other.ExtraMapUnits));
@@ -70,9 +45,6 @@ public class CricketPlaceExtraData : ISerializableGameData
 		WishingCrickets = ((other.WishingCrickets == null) ? null : new Dictionary<short, short>(other.WishingCrickets));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CricketPlaceExtraData other)
 	{
 		ExtraMapUnits = ((other.ExtraMapUnits == null) ? null : new Dictionary<short, short>(other.ExtraMapUnits));
@@ -80,13 +52,11 @@ public class CricketPlaceExtraData : ISerializableGameData
 		WishingCrickets = ((other.WishingCrickets == null) ? null : new Dictionary<short, short>(other.WishingCrickets));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -100,7 +70,6 @@ public class CricketPlaceExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -133,7 +102,6 @@ public class CricketPlaceExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

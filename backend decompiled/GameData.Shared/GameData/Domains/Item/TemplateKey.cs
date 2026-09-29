@@ -3,53 +3,29 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 物品模板的索引
-/// </summary>
 [Serializable]
 public struct TemplateKey : ISerializableGameData, IEquatable<TemplateKey>
 {
-	/// <summary>
-	/// 无效模板
-	/// </summary>
 	public static readonly TemplateKey Invalid;
 
-	/// <summary>
-	/// 物品类型. <see cref="T:GameData.Domains.Item.ItemType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemType;
 
-	/// <summary>
-	/// 物品模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 物品模板的索引
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
 	public TemplateKey(sbyte itemType, short templateId)
 	{
 		ItemType = itemType;
 		TemplateId = templateId;
 	}
 
-	/// <summary>
-	/// 用于配置的构造
-	/// </summary>
 	public TemplateKey(string typeName, short templateId)
 	{
 		ItemType = GameData.Domains.Item.ItemType.TypeName2TypeId[typeName];
 		TemplateId = templateId;
 	}
 
-	/// <summary>
-	/// 是否有效
-	/// </summary>
-	/// <returns></returns>
 	public bool IsValid()
 	{
 		if (ItemType >= 0)
@@ -98,13 +74,11 @@ public struct TemplateKey : ISerializableGameData, IEquatable<TemplateKey>
 		return (ItemType.GetHashCode() * 397) ^ TemplateId.GetHashCode();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 3;
@@ -115,7 +89,6 @@ public struct TemplateKey : ISerializableGameData, IEquatable<TemplateKey>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (byte)ItemType;
@@ -129,7 +102,6 @@ public struct TemplateKey : ISerializableGameData, IEquatable<TemplateKey>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

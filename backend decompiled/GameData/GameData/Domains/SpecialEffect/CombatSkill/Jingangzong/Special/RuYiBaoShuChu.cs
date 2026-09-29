@@ -28,8 +28,16 @@ public class RuYiBaoShuChu : CombatSkillEffectBase
 
 	public override void OnEnable(DataContext context)
 	{
-		SkillEffectKey effectKey = DomainManager.Combat.GetUsingWeaponData(base.CombatChar).GetPestleEffect();
-		_addPower = ((effectKey.SkillId >= 0) ? (10 * (Config.CombatSkill.Instance[effectKey.SkillId].Grade + 1)) : 0);
+		List<SkillEffectKey> pestleEffects = DomainManager.Combat.GetUsingWeaponData(base.CombatChar).GetPestleEffect();
+		int gradeSum = 0;
+		foreach (SkillEffectKey effectKey in pestleEffects)
+		{
+			if (effectKey.SkillId >= 0)
+			{
+				gradeSum += Config.CombatSkill.Instance[effectKey.SkillId].Grade + 1;
+			}
+		}
+		_addPower = 10 * gradeSum;
 		if (_addPower > 0)
 		{
 			ShowSpecialEffectTips(0);

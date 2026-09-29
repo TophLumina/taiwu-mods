@@ -8,9 +8,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Organization;
 
-/// <summary>
-/// 定居点公库
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class SettlementTreasury : ISerializableGameData
 {
@@ -37,76 +34,34 @@ public class SettlementTreasury : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[8] { "GuardIds", "TemplateGuardIds", "Resources", "LovingItemSubTypes", "HatingItemSubTypes", "Contributions", "Inventory", "LayerIndex" };
 	}
 
-	/// <summary>
-	/// 公库守卫角色 ID 集合
-	/// 可能包含一个或多个非智能NPC
-	/// 非智能NPC会在过月时被Settlement.UpdateTreasuryOnAdvanceMonth清空
-	/// 相关函数：
-	/// 1. 获取（临时）守卫：Settlement.GetGuardsDisplayData / Settlement.GetGuards
-	/// 2. 刷新临时守卫：Settlement.GetGuardsUnsorted / Settlement.RefreshGuards
-	/// 3. 更新智能NPC守卫：Settlement.ForceUpdateTreasuryGuards / Settlement.UpdateTreasuryOnAdvanceMonth
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet GuardIds;
 
-	/// <summary>
-	/// 公库模板守卫 ID 集合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> TemplateGuardIds = new List<short>();
 
-	/// <summary>
-	/// 公库资源
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts Resources;
 
-	/// <summary>
-	/// 公库物品
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public Inventory Inventory = new Inventory();
 
-	/// <summary>
-	/// 喜好物品子类型集合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LovingItemSubTypes = new List<short>();
 
-	/// <summary>
-	/// 厌恶物品子类型集合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> HatingItemSubTypes = new List<short>();
 
-	/// <summary>
-	/// 成员贡献值集合
-	/// 角色ID =&gt; 贡献值
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> Contributions = new Dictionary<int, int>();
 
-	/// <summary>
-	/// 库房层级 <see cref="T:GameData.Domains.Organization.SettlementTreasuryLayers" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LayerIndex;
 
-	/// <summary>
-	/// 是否需要提交数据，非序列化
-	/// </summary>
 	public bool NeedCommit;
 
-	/// <summary>
-	/// 成员已使用的预设贡献值
-	/// </summary>
 	private readonly Dictionary<int, int> _memberUsedPresetContributions = new Dictionary<int, int>();
 
-	/// <summary>
-	/// 计算贡献提供的势力值加成
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public int CalcBonusInfluencePower(int charId)
 	{
 		int contribution = Contributions.GetValueOrDefault(charId, 0);
@@ -114,12 +69,6 @@ public class SettlementTreasury : ISerializableGameData
 		return 100 + MathUtils.Min(contribution * 10 / accessoryValue, 100);
 	}
 
-	/// <summary>
-	/// 指定子类型和价值，计算根据喜好修正后的价值
-	/// </summary>
-	/// <param name="itemSubType">物品子类型 <see cref="T:GameData.Domains.Item.ItemSubType" /></param>
-	/// <param name="worth">物品价值</param>
-	/// <returns>修正后的价值</returns>
 	public int CalcAdjustedWorth(short itemSubType, int worth)
 	{
 		if (LovingItemSubTypes.Contains(itemSubType))
@@ -133,11 +82,6 @@ public class SettlementTreasury : ISerializableGameData
 		return worth;
 	}
 
-	/// <summary>
-	/// 获取角色的贡献度
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public int GetContribution(int charId)
 	{
 		if (!Contributions.TryGetValue(charId, out var contribution))
@@ -147,9 +91,6 @@ public class SettlementTreasury : ISerializableGameData
 		return contribution;
 	}
 
-	/// <summary>
-	/// 检测是否有无效数据并进行修复.
-	/// </summary>
 	public void DetectAndFixInvalidData()
 	{
 		for (sbyte resourceType = 0; resourceType < 8; resourceType++)
@@ -162,13 +103,11 @@ public class SettlementTreasury : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 35;
@@ -185,7 +124,6 @@ public class SettlementTreasury : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -271,7 +209,6 @@ public class SettlementTreasury : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -394,18 +331,11 @@ public class SettlementTreasury : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 清空成员已用的预设贡献值
-	/// </summary>
 	public void ClearMemberUsedPresetContribution()
 	{
 		_memberUsedPresetContributions.Clear();
 	}
 
-	/// <summary>
-	/// 获取成员的贡献值.
-	/// 包含预设贡献值和累计贡献值.
-	/// </summary>
 	public int GetMemberContribution(int charId, OrganizationInfo orgInfo)
 	{
 		int presetContribution = orgInfo.GetOrgMemberConfig().ContributionPerMonth;
@@ -413,10 +343,6 @@ public class SettlementTreasury : ISerializableGameData
 		return Contributions.GetValueOrDefault(charId, 0) + presetContribution - usedPresetContribution;
 	}
 
-	/// <summary>
-	/// 离线修改成员贡献值.
-	/// 会优先使用预设贡献值, 用完后再使用累计贡献值.
-	/// </summary>
 	public void OfflineChangeContribution(int charId, int presetContribution, int delta)
 	{
 		if (delta >= 0)

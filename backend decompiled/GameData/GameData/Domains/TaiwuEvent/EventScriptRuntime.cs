@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using CompDevLib.Interpreter;
 using CompDevLib.Interpreter.Parse;
 using Config;
@@ -117,6 +118,9 @@ public class EventScriptRuntime : IInterpreterContext<EventScriptRuntime>
 		RegisterFunctionsFromType<MajorEventFunctions>();
 		RegisterFunctionsFromType<MainStoryInternalFunctions>();
 		RegisterFunctionsFromType<CricketPolymorphFunctions>();
+		RegisterFunctionsFromType<TameLoongFunctions>();
+		RegisterFunctionsFromType<DlcTaiwuAsXiangshuFunctions>();
+		RegisterFunctionsFromType<DlcSmarterChickenFunctions>();
 	}
 
 	public void ResetCache()
@@ -208,6 +212,14 @@ public class EventScriptRuntime : IInterpreterContext<EventScriptRuntime>
 				}
 			}
 		}
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public void ToEvent(string nextEvent = "")
+	{
+		ScriptExecutionInstance current = Current;
+		current.NextEvent = nextEvent;
+		current.ExitScript();
 	}
 
 	public void Execute(string instStr)

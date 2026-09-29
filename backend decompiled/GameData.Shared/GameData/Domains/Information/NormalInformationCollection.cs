@@ -7,32 +7,12 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 一般见闻集合
-/// 通常用于角色所持见闻信息
-/// </summary>
 public class NormalInformationCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 被传播见闻次数记录
-	/// 一般用于技艺见闻
-	/// <para>
-	/// 负数索引储存的是：
-	/// 1. UsedCountWithMax 为 true 的情况，储存的是已使用的次数
-	/// 2. UsedCountWithMax 为 false 的情况，储存的是剩余数量的相反数(为了兼容旧存档而如此)
-	/// </para>
-	/// </summary>
 	public readonly IDictionary<short, sbyte> ReceivedCounts = new Dictionary<short, sbyte>();
 
-	/// <summary>
-	/// 见闻列表
-	/// </summary>
 	private IList<NormalInformation> _elements;
 
-	/// <summary>
-	/// 获取列表
-	/// 不存在的时候将会创建一个
-	/// </summary>
 	public IList<NormalInformation> GetList()
 	{
 		if (_elements == null)
@@ -42,10 +22,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return _elements;
 	}
 
-	/// <summary>
-	/// 使用次数的索引
-	/// 为负值
-	/// </summary>
 	private short _GetUsedCountIndex(NormalInformation normalInformation)
 	{
 		InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
@@ -56,9 +32,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return short.MinValue;
 	}
 
-	/// <summary>
-	/// 获得使用次数上限
-	/// </summary>
 	public sbyte GetUsedCountMax(NormalInformation normalInformation)
 	{
 		InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
@@ -69,9 +42,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return (sbyte)GlobalConfig.Instance.NormalInformationDefaultCostableMaxUseCount;
 	}
 
-	/// <summary>
-	/// 获得使用次数
-	/// </summary>
 	public sbyte GetUsedCount(NormalInformation normalInformation)
 	{
 		InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
@@ -87,9 +57,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 设置使用次数
-	/// </summary>
 	public sbyte SetUsedCount(NormalInformation normalInformation, sbyte count)
 	{
 		InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
@@ -105,10 +72,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 获取剩余使用次数
-	/// <para>仅适用于 UsedCountWithMax 为 false 的见闻</para>
-	/// </summary>
 	public sbyte GetRemainUsableCount(NormalInformation normalInformation)
 	{
 		InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
@@ -125,10 +88,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return (sbyte)GlobalConfig.Instance.NormalInformationDefaultCostableMaxUseCount;
 	}
 
-	/// <summary>
-	/// 设置剩余使用次数
-	/// <para>仅适用于 UsedCountWithMax 为 false 的见闻</para>
-	/// </summary>
 	public sbyte SetRemainUsableCount(NormalInformation normalInformation, sbyte remainCount)
 	{
 		InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
@@ -139,19 +98,16 @@ public class NormalInformationCollection : ISerializableGameData
 		return remainCount;
 	}
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		return 4 + ReceivedCounts.Count * 3 + ((_elements == null) ? 4 : (4 + _elements.Sum((NormalInformation element) => element.GetSerializedSize())));
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -181,7 +137,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return (int)(pCurrData - pData);
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -222,9 +177,6 @@ public class NormalInformationCollection : ISerializableGameData
 		return (int)(pCurrData - pData);
 	}
 
-	/// <summary>
-	/// 清除使用次数信息
-	/// </summary>
 	public void ClearUsedCountData(NormalInformation normalInformation)
 	{
 		short key = _GetUsedCountIndex(normalInformation);

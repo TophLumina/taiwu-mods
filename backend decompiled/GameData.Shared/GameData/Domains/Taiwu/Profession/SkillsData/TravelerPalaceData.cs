@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 旅人仙府数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class TravelerPalaceData : ISerializableGameData
 {
@@ -22,50 +19,33 @@ public class TravelerPalaceData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "CustomName", "Location" };
 	}
 
-	/// <summary>
-	/// 自定义名称
-	/// </summary>
 	[SerializableGameDataField]
 	public string CustomName;
 
-	/// <summary>
-	/// 位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TravelerPalaceData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TravelerPalaceData(TravelerPalaceData other)
 	{
 		CustomName = other.CustomName;
 		Location = other.Location;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TravelerPalaceData other)
 	{
 		CustomName = other.CustomName;
 		Location = other.Location;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -77,7 +57,6 @@ public class TravelerPalaceData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -112,7 +91,6 @@ public class TravelerPalaceData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

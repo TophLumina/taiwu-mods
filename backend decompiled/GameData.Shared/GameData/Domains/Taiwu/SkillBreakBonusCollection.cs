@@ -8,22 +8,12 @@ namespace GameData.Domains.Taiwu;
 
 public class SkillBreakBonusCollection : ISerializableGameData, IEquatable<SkillBreakBonusCollection>
 {
-	/// <summary>
-	/// 角色属性加成（运功），属性类型 (<see cref="T:ECharacterPropertyReferencedType" />) 为Key, 加成总量为Value
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, short> CharacterPropertyBonusDict = new Dictionary<short, short>();
 
-	/// <summary>
-	/// 功法加成，功法属性类型 (<see cref="T:Config.CombatSkillProperty" /> 为Key, 加成总量为Value)
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, short> CombatSkillPropertyBonusDict = new Dictionary<short, short>();
 
-	/// <summary>
-	/// 新增加成效果
-	/// </summary>
-	/// <param name="bonusTypeTemplateId">加成格的模板Id <see cref="F:Config.SkillBreakPlateGridBonusTypeItem.TemplateId" /></param>
 	public void AddBonusType(short bonusTypeTemplateId)
 	{
 		SkillBreakPlateGridBonusTypeItem bonusTypeCfg = SkillBreakPlateGridBonusType.Instance[bonusTypeTemplateId];
@@ -71,10 +61,6 @@ public class SkillBreakBonusCollection : ISerializableGameData, IEquatable<Skill
 		}
 	}
 
-	/// <summary>
-	/// 移除加成效果
-	/// </summary>
-	/// <param name="bonusTypeTemplateId">加成格的模板Id <see cref="F:Config.SkillBreakPlateGridBonusTypeItem.TemplateId" /></param>
 	public void RemoveBonusType(short bonusTypeTemplateId)
 	{
 		SkillBreakPlateGridBonusTypeItem bonusTypeCfg = SkillBreakPlateGridBonusType.Instance[bonusTypeTemplateId];
@@ -122,9 +108,6 @@ public class SkillBreakBonusCollection : ISerializableGameData, IEquatable<Skill
 		}
 	}
 
-	/// <summary>
-	/// 清空所有加成
-	/// </summary>
 	public void Clear()
 	{
 		CharacterPropertyBonusDict.Clear();

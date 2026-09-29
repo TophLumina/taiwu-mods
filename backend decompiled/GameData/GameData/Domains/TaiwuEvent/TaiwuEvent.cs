@@ -557,7 +557,9 @@ public class TaiwuEvent : IValueSelector
 					OptionGuid = taiwuEventOption.OptionGuid,
 					Behavior = taiwuEventOption.Behavior,
 					OptionContent = taiwuEventOption.GetReplacedContent?.Invoke(),
-					Important = taiwuEventOption.Important
+					Important = taiwuEventOption.Important,
+					ImportantOptionTipLanguageKey = taiwuEventOption.ImportantOptionTipLanguageKey,
+					ImportantOptionTitleLanguageKey = taiwuEventOption.ImportantOptionTitleLanguageKey
 				};
 				if (string.IsNullOrEmpty(optionInfo.OptionContent))
 				{
@@ -678,7 +680,9 @@ public class TaiwuEvent : IValueSelector
 					OptionGuid = taiwuEventOption.OptionGuid,
 					Behavior = taiwuEventOption.Behavior,
 					OptionContent = taiwuEventOption.GetReplacedContent?.Invoke(),
-					Important = taiwuEventOption.Important
+					Important = taiwuEventOption.Important,
+					ImportantOptionTipLanguageKey = taiwuEventOption.ImportantOptionTipLanguageKey,
+					ImportantOptionTitleLanguageKey = taiwuEventOption.ImportantOptionTitleLanguageKey
 				};
 				if (string.IsNullOrEmpty(optionInfo.OptionContent))
 				{

@@ -5,53 +5,26 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 经营建筑的收获数据
-/// </summary>
-/// TODO: 该数据需要迁移, 禁止使用ModificationState做特殊处理
 public class BuildingEarningsData : ISerializableGameData
 {
-	/// <summary>
-	/// 采集建筑收获的物品列表 (当铺生成的物品超过一定时间没领取会消失,使用ModificationState记录存在时间)；和售卖道具的区别是售卖道具是定长的，没有道具的地方是空
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemKey> CollectionItemList;
 
-	/// <summary>
-	/// 采集建筑获得的银钱威望列表，first代表银钱或者威望类型，second代表数量
-	/// </summary>
 	[SerializableGameDataField]
 	public List<IntPair> CollectionResourceList;
 
-	/// <summary>
-	/// 放在商店售卖的物品;(ItemKey:道具id) ShopSoldItemList长度等于建筑规模，长度只有建筑扩建时改变;和ShopSoldItemEarnList按索引对应使用
-	/// 第一次创建的时候是定长,等于slotCount，没有道具的地方是ItemKey.Invalid
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemKey> ShopSoldItemList;
 
-	/// <summary>
-	/// 放在商店售卖物品获得的银钱或威望(和ShopSoldItemList按索引对应，同一个位置的索引都为空时代表这个位置没有道具，也没有卖出道具收到的资源)
-	/// first代表银钱或者威望类型，second代表数量
-	/// </summary>
 	[SerializableGameDataField]
 	public List<IntPair> ShopSoldItemEarnList;
 
-	/// <summary>
-	/// //招募的人才等级列表 first是等级，second是存在时间，超过三个月会消失
-	/// </summary>
 	[SerializableGameDataField]
 	public List<IntPair> RecruitLevelList;
 
-	/// <summary>
-	/// 藏书阁修补的书籍
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemKey> FixBookInfoList;
 
-	/// <summary>
-	/// 构造方法，初始化所有集合.
-	/// </summary>
 	public BuildingEarningsData()
 	{
 		CollectionItemList = new List<ItemKey>();
@@ -62,13 +35,11 @@ public class BuildingEarningsData : ISerializableGameData
 		FixBookInfoList = new List<ItemKey>();
 	}
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -85,7 +56,6 @@ public class BuildingEarningsData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -193,7 +163,6 @@ public class BuildingEarningsData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -4,9 +4,6 @@ namespace GameData.Domains.World;
 
 public static class WorldDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort WorldId = 0;
@@ -126,11 +123,10 @@ public static class WorldDomainHelper
 		public const ushort AreaStoryWeathers = 57;
 
 		public const ushort WaitForDecideChallengeModeIds = 58;
+
+		public const ushort DreamBackCount = 59;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort CreateWorld = 0;
@@ -192,14 +188,8 @@ public static class WorldDomainHelper
 		public const ushort DecideNewChallengeMode = 28;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
-	public const ushort DataCount = 59;
+	public const ushort DataCount = 60;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "WorldId", 0 },
@@ -260,31 +250,22 @@ public static class WorldDomainHelper
 		{ "TriggeredGuidingChapterDictionary", 55 },
 		{ "PermanentMonthNotifies", 56 },
 		{ "AreaStoryWeathers", 57 },
-		{ "WaitForDecideChallengeModeIds", 58 }
+		{ "WaitForDecideChallengeModeIds", 58 },
+		{ "DreamBackCount", 59 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
-	public static readonly string[] DataId2FieldName = new string[59]
+	public static readonly string[] DataId2FieldName = new string[60]
 	{
 		"WorldId", "XiangshuProgress", "XiangshuAvatarTaskStatuses", "XiangshuAvatarTasksInOrder", "MainStoryLineProgress", "BeatRanChenZi", "WorldFunctionsStatuses", "CustomTexts", "NextCustomTextId", "InstantNotifications",
 		"OnHandingMonthlyEventBlock", "LastMonthlyNotifications", "WorldPopulationType", "CharacterLifespanType", "CombatDifficulty", "HereticsAmountType", "BossInvasionSpeedType", "WorldResourceAmountType", "AllowRandomTaiwuHeir", "RestrictOptionsBehaviorType",
 		"TaiwuVillageStateTemplateId", "TaiwuVillageLandFormType", "HideTaiwuOriginalSurname", "AllowExecute", "ArchiveFilesBackupInterval", "WorldStandardPopulation", "CurrDate", "DaysInCurrMonth", "AdvancingMonthState", "CurrTaskList",
 		"SortedTaskList", "WorldStateData", "ArchiveFilesBackupCount", "SortedMonthlyNotificationSortingGroups", "MonthlyEventLastTriggerDates", "ProfessionUpgrade", "CanResetWorldSettings", "FavorabilityChange", "EnemyPracticeLevel", "LoopingDifficulty",
 		"BreakoutDifficulty", "ReadingDifficulty", "LootYield", "BigEvents", "StateWeathers", "ExtraTriggeredTasks", "TaskSortingOrder", "PinnedOnTopTasks", "WorldVersionInfo", "NewfeatureTriggered",
-		"TaskFinishedDateList", "ChallengeModeData", "ExorcismEnabled", "MonthNotifies", "GameStatSaved", "TriggeredGuidingChapterDictionary", "PermanentMonthNotifies", "AreaStoryWeathers", "WaitForDecideChallengeModeIds"
+		"TaskFinishedDateList", "ChallengeModeData", "ExorcismEnabled", "MonthNotifies", "GameStatSaved", "TriggeredGuidingChapterDictionary", "PermanentMonthNotifies", "AreaStoryWeathers", "WaitForDecideChallengeModeIds", "DreamBackCount"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
-	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[59][];
+	public static readonly string[][] DataId2ObjectFieldId2FieldName = new string[60][];
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId = new Dictionary<string, ushort>
 	{
 		{ "CreateWorld", 0 },

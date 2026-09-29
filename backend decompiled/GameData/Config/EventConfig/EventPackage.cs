@@ -44,12 +44,24 @@ public abstract class EventPackage
 		ModIdString = modId;
 	}
 
+	public void ClearLanguage()
+	{
+		if (EventList != null)
+		{
+			for (int i = 0; i < EventList.Count; i++)
+			{
+				EventList[i]?.ClearLanguage();
+			}
+		}
+	}
+
 	public void InitLanguage(string languageFilePath)
 	{
 		if (!File.Exists(languageFilePath))
 		{
 			return;
 		}
+		ClearLanguage();
 		Dictionary<string, List<string>> contentMap = new Dictionary<string, List<string>>();
 		string guidLineStart = "- EventGuid : ";
 		string contentLineStart = "-- EventContent :";

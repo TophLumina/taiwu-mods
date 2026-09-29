@@ -3,38 +3,12 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Organization.Display;
 
-/// <summary>
-/// 定居点名称相关数据
-/// </summary>
-public struct SettlementNameRelatedData : ISerializableGameData
+public struct SettlementNameRelatedData(short randomNameId, short mapBlockTemplateId) : ISerializableGameData
 {
-	/// <summary>
-	/// 定居点随机名称 ID.
-	/// 小于 0 表示该定居点使用固定名称.
-	/// </summary>
-	public short RandomNameId;
+	public short RandomNameId = randomNameId;
 
-	/// <summary>
-	/// 所在地块模板 ID.
-	/// 定居点的固定名称从地块配置数据中获取.
-	/// </summary>
-	public short MapBlockTemplateId;
+	public short MapBlockTemplateId = mapBlockTemplateId;
 
-	/// <summary>
-	/// 定居点名称相关数据
-	/// </summary>
-	/// <param name="randomNameId"></param>
-	/// <param name="mapBlockTemplateId"></param>
-	public SettlementNameRelatedData(short randomNameId, short mapBlockTemplateId)
-	{
-		RandomNameId = randomNameId;
-		MapBlockTemplateId = mapBlockTemplateId;
-	}
-
-	/// <summary>
-	/// 获取定居点名
-	/// </summary>
-	/// <returns></returns>
 	public string GetName()
 	{
 		if (RandomNameId != -1)

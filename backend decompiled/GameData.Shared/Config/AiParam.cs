@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AiParam : ConfigData<AiParamItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AiParam Instance = new AiParam();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "PrintingAliases", "TemplateId", "Type" };

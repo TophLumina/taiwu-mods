@@ -18,9 +18,6 @@ public class TaiwuFollowingDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public CharacterInjuryDisplayData Injury = new CharacterInjuryDisplayData();
 
-	/// <summary>
-	/// 获取无效位置的显示数据
-	/// </summary>
 	public static CharacterLocationDisplayData InvalidLocation => new CharacterLocationDisplayData
 	{
 		CharacterId = -1,

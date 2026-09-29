@@ -7,58 +7,31 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.World.Display;
 
-/// <summary>
-/// 机关人突破功法显示数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 public class SectZhujianGearMateBreakoutDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 太吾的技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 历练
-	/// </summary>
 	[SerializableGameDataField]
 	public int Exp;
 
-	/// <summary>
-	/// 功法显示数据列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillDisplayData> CombatSkillDisplayDataList;
 
-	/// <summary>
-	/// 机关人突破功法禁止原因列表 (功法ID, 禁止原因)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ShortPair> GearMateBreakoutCombatSkillBanReasonList;
 
-	/// <summary>
-	/// 机关人的技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts GearMateLifeSkillAttainments;
 
-	/// <summary>
-	/// 机关人功法研读进度 (功法模板ID -&gt; 每页研读进度数组)
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, SByteList> GearMateCombatSkillReadingProgress;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectZhujianGearMateBreakoutDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectZhujianGearMateBreakoutDisplayData(SectZhujianGearMateBreakoutDisplayData other)
 	{
 		LifeSkillAttainments = other.LifeSkillAttainments;
@@ -82,9 +55,6 @@ public class SectZhujianGearMateBreakoutDisplayData : ISerializableGameData
 		GearMateCombatSkillReadingProgress = ((other.GearMateCombatSkillReadingProgress == null) ? null : new Dictionary<short, SByteList>(other.GearMateCombatSkillReadingProgress));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectZhujianGearMateBreakoutDisplayData other)
 	{
 		LifeSkillAttainments = other.LifeSkillAttainments;
@@ -115,8 +85,7 @@ public class SectZhujianGearMateBreakoutDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 4;
-		totalSize += LifeSkillAttainments.GetSerializedSize();
+		int totalSize = 68;
 		if (CombatSkillDisplayDataList != null)
 		{
 			totalSize += 2;
@@ -141,7 +110,6 @@ public class SectZhujianGearMateBreakoutDisplayData : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize += GearMateLifeSkillAttainments.GetSerializedSize();
 		totalSize += 4;
 		if (GearMateCombatSkillReadingProgress != null)
 		{

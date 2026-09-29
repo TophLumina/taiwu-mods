@@ -7,41 +7,20 @@ namespace Config;
 [Serializable]
 public class SamsaraPlatformRecord : ConfigData<SamsaraPlatformRecordItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 轮回成功
-		/// </summary>
 		public const short SamsaraSuccess = 0;
 
-		/// <summary>
-		/// 轮回失败
-		/// </summary>
 		public const short SamsaraFailed = 1;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 轮回成功
-		/// </summary>
 		public static SamsaraPlatformRecordItem SamsaraSuccess => Instance[(short)0];
 
-		/// <summary>
-		/// 轮回失败
-		/// </summary>
 		public static SamsaraPlatformRecordItem SamsaraFailed => Instance[(short)1];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SamsaraPlatformRecord Instance = new SamsaraPlatformRecord();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "TemplateId" };

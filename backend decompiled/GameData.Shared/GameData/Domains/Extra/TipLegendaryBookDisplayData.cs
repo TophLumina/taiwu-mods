@@ -23,16 +23,10 @@ public class TipLegendaryBookDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public int BreakPlateCount;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TipLegendaryBookDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TipLegendaryBookDisplayData(TipLegendaryBookDisplayData other)
 	{
 		WeaponSlot = other.WeaponSlot;
@@ -42,9 +36,6 @@ public class TipLegendaryBookDisplayData : ISerializableGameData
 		BreakPlateCount = other.BreakPlateCount;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TipLegendaryBookDisplayData other)
 	{
 		WeaponSlot = other.WeaponSlot;
@@ -61,8 +52,7 @@ public class TipLegendaryBookDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 12;
-		totalSize += WeaponSlot.GetSerializedSize();
+		int totalSize = 20;
 		totalSize += SkillSlot.GetSerializedSize();
 		if (totalSize > 4)
 		{

@@ -5,18 +5,12 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 秘闻公开效果数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class SecretInformationEffectData : ISerializableGameData
 {
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 类型，-1代表来源者，其余参见<see cref="T:Config.SecretInformationAppliedRelation" />, 行为人为主要，其余都为次要
-	/// </summary>
 	[SerializableGameDataField]
 	public short Type;
 

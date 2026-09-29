@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class ChallengeMode : ConfigData<ChallengeModeItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ChallengeMode Instance = new ChallengeMode();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Type", "Icon" };
@@ -28,7 +25,7 @@ public class ChallengeMode : ConfigData<ChallengeModeItem, int>
 	{
 		_dataArray.Add(new ChallengeModeItem(0, EChallengeModeType.Required, EChallengeModeImplement.LimitedNeiliAllocation, 0, "ui9_icon_challenge_mode_0", LocalStringManager.GetConfig("ChallengeMode_language", "Name_0"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_0")));
 		_dataArray.Add(new ChallengeModeItem(1, EChallengeModeType.Required, EChallengeModeImplement.DamageStep, 0, "ui9_icon_challenge_mode_1", LocalStringManager.GetConfig("ChallengeMode_language", "Name_1"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_1")));
-		_dataArray.Add(new ChallengeModeItem(2, EChallengeModeType.Required, EChallengeModeImplement.NI2, 0, "ui9_icon_challenge_mode_2", LocalStringManager.GetConfig("ChallengeMode_language", "Name_2"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_2")));
+		_dataArray.Add(new ChallengeModeItem(2, EChallengeModeType.Required, EChallengeModeImplement.InfectedDemon, 0, "ui9_icon_challenge_mode_2", LocalStringManager.GetConfig("ChallengeMode_language", "Name_2"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_2")));
 		_dataArray.Add(new ChallengeModeItem(3, EChallengeModeType.Required, EChallengeModeImplement.ScarMark, 0, "ui9_icon_challenge_mode_3", LocalStringManager.GetConfig("ChallengeMode_language", "Name_3"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_3")));
 		_dataArray.Add(new ChallengeModeItem(4, EChallengeModeType.Required, EChallengeModeImplement.BuildingWorkHard, 0, "ui9_icon_challenge_mode_4", LocalStringManager.GetConfig("ChallengeMode_language", "Name_4"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_4")));
 		_dataArray.Add(new ChallengeModeItem(5, EChallengeModeType.Required, EChallengeModeImplement.MoreAlertness, 0, "ui9_icon_challenge_mode_5", LocalStringManager.GetConfig("ChallengeMode_language", "Name_5"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_5")));
@@ -45,7 +42,7 @@ public class ChallengeMode : ConfigData<ChallengeModeItem, int>
 		_dataArray.Add(new ChallengeModeItem(16, EChallengeModeType.Optional, EChallengeModeImplement.AdvanceMonthWorsen, 2, "ui9_icon_challenge_mode_16", LocalStringManager.GetConfig("ChallengeMode_language", "Name_16"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_16")));
 		_dataArray.Add(new ChallengeModeItem(17, EChallengeModeType.Optional, EChallengeModeImplement.TaiwuVowLimition, 3, "ui9_icon_challenge_mode_17", LocalStringManager.GetConfig("ChallengeMode_language", "Name_17"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_17")));
 		_dataArray.Add(new ChallengeModeItem(18, EChallengeModeType.Optional, EChallengeModeImplement.CricketFairCombat, 4, "ui9_icon_challenge_mode_18", LocalStringManager.GetConfig("ChallengeMode_language", "Name_18"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_18")));
-		_dataArray.Add(new ChallengeModeItem(19, EChallengeModeType.Optional, EChallengeModeImplement.NI19, 3, "ui9_icon_challenge_mode_19", LocalStringManager.GetConfig("ChallengeMode_language", "Name_19"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_19")));
+		_dataArray.Add(new ChallengeModeItem(19, EChallengeModeType.Optional, EChallengeModeImplement.SuccessorOfXiangshu, 3, "ui9_icon_challenge_mode_19", LocalStringManager.GetConfig("ChallengeMode_language", "Name_19"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_19")));
 		_dataArray.Add(new ChallengeModeItem(20, EChallengeModeType.Bonus, EChallengeModeImplement.WugKing, -6, "ui9_icon_challenge_mode_20", LocalStringManager.GetConfig("ChallengeMode_language", "Name_20"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_20")));
 		_dataArray.Add(new ChallengeModeItem(21, EChallengeModeType.Bonus, EChallengeModeImplement.ReincarnationBonus, -12, "ui9_icon_challenge_mode_21", LocalStringManager.GetConfig("ChallengeMode_language", "Name_21"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_21")));
 		_dataArray.Add(new ChallengeModeItem(22, EChallengeModeType.Bonus, EChallengeModeImplement.Exp, -3, "ui9_icon_challenge_mode_22", LocalStringManager.GetConfig("ChallengeMode_language", "Name_22"), LocalStringManager.GetConfig("ChallengeMode_language", "Desc_22")));

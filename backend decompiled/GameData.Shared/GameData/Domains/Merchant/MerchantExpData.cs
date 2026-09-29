@@ -20,15 +20,9 @@ public class MerchantExpData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "CharId", "Favorabilitys" };
 	}
 
-	/// <summary>
-	/// 角色ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int CharId;
 
-	/// <summary>
-	/// 商会好感
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int[] Favorabilitys;
 
@@ -44,12 +38,6 @@ public class MerchantExpData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取商店等级，0-5级，6级只有总部有
-	/// 映射关系：商会好感=&gt;商会好感等级=&gt;商店等级
-	/// </summary>
-	/// <param name="merchantType"></param>
-	/// <returns></returns>
 	public sbyte GetMerchantLevel(sbyte merchantType)
 	{
 		sbyte favorabilityLevel = GetFavorabilityLevel(merchantType);
@@ -76,11 +64,6 @@ public class MerchantExpData : ISerializableGameData
 		return Favorabilitys[merchantType];
 	}
 
-	/// <summary>
-	/// 获取好感等级，0-10级
-	/// </summary>
-	/// <param name="merchantType"></param>
-	/// <returns></returns>
 	public sbyte GetFavorabilityLevel(sbyte merchantType)
 	{
 		int favorability = Favorabilitys[merchantType];
@@ -101,16 +84,10 @@ public class MerchantExpData : ISerializableGameData
 		return GlobalConfig.MerchantLevelNeedFavorabilityLevel[merchantLevel];
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public MerchantExpData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public MerchantExpData(MerchantExpData other)
 	{
 		CharId = other.CharId;
@@ -123,9 +100,6 @@ public class MerchantExpData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(MerchantExpData other)
 	{
 		CharId = other.CharId;

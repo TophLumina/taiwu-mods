@@ -4,86 +4,44 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 关系界面用关系人集合
-/// </summary>
 public class RelatedCharactersForRelations : ISerializableGameData
 {
-	/// <summary>
-	/// 父母
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet Parents;
 
-	/// <summary>
-	/// 子女
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet Children;
 
-	/// <summary>
-	/// 手足
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet BrothersAndSisters;
 
-	/// <summary>
-	/// 结义
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet SwornBrothersAndSisters;
 
-	/// <summary>
-	/// 夫妻
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet HusbandsAndWives;
 
-	/// <summary>
-	/// 师父
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet Mentors;
 
-	/// <summary>
-	/// 朋友
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet Friends;
 
-	/// <summary>
-	/// 爱慕
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet Adored;
 
-	/// <summary>
-	/// 爱慕自己
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet RelatedAdored;
 
-	/// <summary>
-	/// 仇视
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet Enemies;
 
-	/// <summary>
-	/// 仇视自己
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet RelatedEnemies;
 
-	/// <summary>
-	/// 派系成员
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterSet FactionMembers;
 
-	/// <summary>
-	/// 派系头目角色 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int FactionLeaderId;
 

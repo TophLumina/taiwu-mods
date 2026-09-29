@@ -52,7 +52,7 @@ public abstract class TaiwuEventItem
 
 	public string EscOptionKey;
 
-	public string EventContent { get; private set; }
+	public string EventContent { get; private set; } = string.Empty;
 
 	public TaiwuEventOption this[string key] => GetOptionByKey(key);
 
@@ -77,6 +77,18 @@ public abstract class TaiwuEventItem
 	public virtual List<string> GetExtraFormatLanguageKeys()
 	{
 		return null;
+	}
+
+	public void ClearLanguage()
+	{
+		EventContent = string.Empty;
+		if (EventOptions != null)
+		{
+			for (int i = 0; i < EventOptions.Length; i++)
+			{
+				EventOptions[i]?.ClearLanguage();
+			}
+		}
 	}
 
 	public void SetLanguage(string[] languageArray)

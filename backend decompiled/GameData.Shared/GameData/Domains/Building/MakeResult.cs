@@ -4,39 +4,21 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 制造结果
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public struct MakeResult : ISerializableGameData
 {
-	/// <summary>
-	/// 目标阶段的索引，因为制造最终会选择满足条件的最高阶段
-	/// </summary>
 	[SerializableGameDataField]
 	private int _targetStageIndex;
 
-	/// <summary>
-	/// 制造的三个阶段的数组
-	/// </summary>
 	[SerializableGameDataField]
 	public MakeResultStage[] MakeResultItemArray;
 
-	/// <summary>
-	/// 能增加制造品级的建筑名称
-	/// </summary>
 	[SerializableGameDataField]
 	public short UpgradeBuildingNameTemplate;
 
-	/// <summary>
-	/// 已建造所需建造
-	/// </summary>
 	[SerializableGameDataField]
 	public bool UpgradeBuildingCanUse;
 
-	/// <summary>
-	/// 满足条件的最高阶段
-	/// </summary>
 	public MakeResultStage TargetResultStage => MakeResultItemArray?.GetOrDefault(_targetStageIndex) ?? default(MakeResultStage);
 
 	public int TargetStageIndex => _targetStageIndex;

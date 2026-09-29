@@ -3,9 +3,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地块全名相关数据，拿到前端去拼接
-/// </summary>
 [SerializableGameData]
 public struct FullBlockName : ISerializableGameData
 {

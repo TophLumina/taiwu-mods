@@ -61,8 +61,6 @@ public class TutorialChapterDomain : BaseGameDataDomain
 
 	private SpinLock _spinLockNextForceLocation = new SpinLock(enableThreadOwnerTracking: false);
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	public byte TutorialAreaSize { get; private set; } = 20;
 
 	public bool InGuiding => DomainManager.Global.GetCurrGameWorldType() == 2;

@@ -18,12 +18,8 @@ public class DaWeiDeJinGangChu : PestleEffectBase
 
 	private int _addPower;
 
-	public DaWeiDeJinGangChu()
-	{
-	}
-
-	public DaWeiDeJinGangChu(int charId)
-		: base(charId, 11405)
+	public DaWeiDeJinGangChu(int charId, SkillEffectKey effectKey)
+		: base(charId, effectKey)
 	{
 	}
 

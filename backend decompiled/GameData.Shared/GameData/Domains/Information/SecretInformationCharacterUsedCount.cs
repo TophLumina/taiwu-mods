@@ -4,17 +4,9 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 记录一个角色使用秘闻的次数
-/// </summary>
 [SerializableGameData(NotForDisplayModule = true)]
 public class SecretInformationCharacterUsedCount : ISerializableGameData
 {
-	/// <summary>
-	/// 秘闻使用次数集合
-	/// K: 秘闻元数据 Id
-	/// V: 秘闻使用次数
-	/// </summary>
 	[SerializableGameDataField]
 	public readonly IDictionary<int, sbyte> UsedCounts;
 
@@ -38,13 +30,11 @@ public class SecretInformationCharacterUsedCount : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -56,7 +46,6 @@ public class SecretInformationCharacterUsedCount : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -86,7 +75,6 @@ public class SecretInformationCharacterUsedCount : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

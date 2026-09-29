@@ -5,7 +5,7 @@ using CompDevLib.Interpreter;
 using CompDevLib.Interpreter.Parse;
 using Config;
 using GameData.ArchiveData;
-using GameData.DLC.CricketPolymorph;
+using GameData.DLC;
 using GameData.Domains.Building;
 using GameData.Domains.Character;
 using GameData.Domains.Character.Ai;
@@ -1183,9 +1183,10 @@ public class EventConditions
 	private static bool CheckInteractionCooldown(EventScriptRuntime runtime, GameData.Domains.Character.Character character, short templateId)
 	{
 		bool result = DomainManager.TaiwuEvent.IsInteractionEventOptionOffCooldown(character.GetId(), templateId);
+		InteractionEventOptionItem config = InteractionEventOption.Instance[templateId];
 		if (runtime.RecordingConditionHints)
 		{
-			runtime.RecordConditionHint(548, result);
+			runtime.RecordConditionHint(548, result, config.Name);
 		}
 		return result;
 	}
@@ -1419,10 +1420,10 @@ public class EventConditions
 	{
 		Evaluator evaluator = runtime.Evaluator;
 		ItemKey key = parameters[0].GetAnyValue<ItemKey>(evaluator);
-		ECricketPolymorphState stateType = (ECricketPolymorphState)parameters[1].GetIntValue(evaluator);
+		EPolymorphState stateType = (EPolymorphState)parameters[1].GetIntValue(evaluator);
 		if (key.ItemType != 11 || !DomainManager.Taiwu.TryGetCricketPolymorph(key.Id, out var polymorph))
 		{
-			return evaluator.PushEvaluationResult(stateType == ECricketPolymorphState.None);
+			return evaluator.PushEvaluationResult(stateType == EPolymorphState.None);
 		}
 		return evaluator.PushEvaluationResult(polymorph.ContainsState(stateType));
 	}
@@ -1699,6 +1700,14 @@ public class EventConditions
 		return evaluator.PushEvaluationResult(result);
 	}
 
+	[EventFunction(967)]
+	private static ValueInfo GetIsQuickStartGame(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		bool result = GameData.Domains.TaiwuEvent.EventHelper.EventHelper.GetIsQuickStartGame();
+		return evaluator.PushEvaluationResult(result);
+	}
+
 	[EventFunction(106)]
 	private static ValueInfo CheckSettlementInMapArea(EventScriptRuntime runtime, ASTNode[] parameters)
 	{
@@ -1906,6 +1915,15 @@ public class EventConditions
 		return evaluator.PushEvaluationResult(result);
 	}
 
+	[EventFunction(958)]
+	private static ValueInfo CheckExtraTaskFinished(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		int taskInfoId = parameters[0].GetIntValue(evaluator);
+		bool result = DomainManager.World.IsExtraTaskFinished(taskInfoId);
+		return evaluator.PushEvaluationResult(result);
+	}
+
 	[EventFunction(74)]
 	private static ValueInfo CheckTaskChain(EventScriptRuntime runtime, ASTNode[] parameters)
 	{
@@ -1935,6 +1953,29 @@ public class EventConditions
 		string tempArgKey = parameters[2].GetStringValue(evaluator);
 		EventArgBox argBox = DomainManager.Extra.GetSectMainStoryEventArgBox(orgTemplateId);
 		ValueInfo valueInfo = argBox.SelectValue(evaluator, sectMainStoryArgKey);
+		if (valueInfo.ValueType == EValueType.Void)
+		{
+			return evaluator.PushEvaluationResult(value: false);
+		}
+		if (string.IsNullOrEmpty(tempArgKey))
+		{
+			evaluator.RemoveTopValue(valueInfo);
+			return evaluator.PushEvaluationResult(value: true);
+		}
+		runtime.ArgBox.SetValueFromStack(evaluator.EvaluationStack, tempArgKey, valueInfo.ValueType);
+		return evaluator.PushEvaluationResult(value: true);
+	}
+
+	[EventFunction(907)]
+	private static ValueInfo CheckDlcArgBox(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		byte templateId = (byte)parameters[0].GetIntValue(evaluator);
+		ImplementedDlcItem config = ImplementedDlc.Instance[templateId];
+		string dlcArgKey = parameters[1].GetStringValue(evaluator);
+		string tempArgKey = parameters[2].GetStringValue(evaluator);
+		EventArgBox argBox = DomainManager.Extra.GetOrCreateDlcArgBox(config.AppId, runtime.Context);
+		ValueInfo valueInfo = argBox.SelectValue(evaluator, dlcArgKey);
 		if (valueInfo.ValueType == EValueType.Void)
 		{
 			return evaluator.PushEvaluationResult(value: false);

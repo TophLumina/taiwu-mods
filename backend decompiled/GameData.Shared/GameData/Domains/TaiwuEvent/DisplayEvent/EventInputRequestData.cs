@@ -5,58 +5,29 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件输入请求的数据结构
-/// </summary>
 public class EventInputRequestData : ISerializableGameData
 {
-	/// <summary>
-	/// 输入结果保存的key
-	/// </summary>
 	[SerializableGameDataField]
 	public string DataKey;
 
-	/// <summary>
-	/// 输入类型 <see cref="T:GameData.Domains.TaiwuEvent.DisplayEvent.EventInputDataType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte InputDataType;
 
-	/// <summary>
-	/// 当输入类型为IntegerNumber时，可以通过该字段限定输入值的范围[下限值，上限值]
-	/// 当输入类型为Name、GivenName时可以通过该字段限定输入字符长度的的范围[下限值，上限值]
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] NumberRange;
 
-	/// <summary>
-	/// 当输入类型为GivenName时，这个字段将会被使用
-	/// 用于协助前端检测玩家输入的GivenName是否触发敏感词
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
-	/// <summary>
-	/// 确认按钮置灰时的tips文本key，不传则没有tips
-	/// </summary>
 	[SerializableGameDataField]
 	public string ConfirmDisableTips;
 
-	/// <summary>
-	/// 显示给孩子取名
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowPartnerBtn;
 
-	/// <summary>
-	/// 能否使用伴侣取名
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanUsePartnerBtn;
 
-	/// <summary>
-	/// 孩子姓名数据
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName ChildFullName;
 
@@ -65,16 +36,10 @@ public class EventInputRequestData : ISerializableGameData
 
 	public static readonly string ExtraSurNameKey = "ExtraSurName";
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public EventInputRequestData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public EventInputRequestData(EventInputRequestData other)
 	{
 		DataKey = other.DataKey;
@@ -94,9 +59,6 @@ public class EventInputRequestData : ISerializableGameData
 		ChildGender = other.ChildGender;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(EventInputRequestData other)
 	{
 		DataKey = other.DataKey;
@@ -116,13 +78,11 @@ public class EventInputRequestData : ISerializableGameData
 		ChildGender = other.ChildGender;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 24;
@@ -136,7 +96,6 @@ public class EventInputRequestData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -215,7 +174,6 @@ public class EventInputRequestData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

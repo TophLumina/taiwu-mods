@@ -51,6 +51,13 @@ public struct BoolArray16
 		this[index] = value;
 	}
 
+	public BoolArray16 ReadonlySet(int index, bool value)
+	{
+		BoolArray16 result = this;
+		result.Set(index, value);
+		return result;
+	}
+
 	public bool Any()
 	{
 		return _originalData != 0;
@@ -59,5 +66,13 @@ public struct BoolArray16
 	public void Reset()
 	{
 		_originalData = 0;
+	}
+
+	public static BoolArray16 operator |(BoolArray16 l, BoolArray16 r)
+	{
+		return new BoolArray16
+		{
+			_originalData = (ushort)(l._originalData | r._originalData)
+		};
 	}
 }

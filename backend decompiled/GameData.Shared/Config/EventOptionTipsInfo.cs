@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class EventOptionTipsInfo : ConfigData<EventOptionTipsInfoItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventOptionTipsInfo Instance = new EventOptionTipsInfo();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Title", "Desc", "TemplateId", "Guid" };

@@ -7,101 +7,44 @@ namespace Config;
 [Serializable]
 public class SettlementTreasuryEventEffect : ConfigData<SettlementTreasuryEventEffectItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 擅闯门派库房0
-		/// </summary>
 		public const short IntrudeSectTreasuryLow = 0;
 
-		/// <summary>
-		/// 擅闯门派库房1
-		/// </summary>
 		public const short IntrudeSectTreasuryMid = 1;
 
-		/// <summary>
-		/// 擅闯门派库房2
-		/// </summary>
 		public const short IntrudeSectTreasuryHigh = 2;
 
-		/// <summary>
-		/// 掠夺门派库房
-		/// </summary>
 		public const short PlunderSectTreasury = 3;
 
-		/// <summary>
-		/// 赠予门派库房
-		/// </summary>
 		public const short DonateSectTreasury = 4;
 
-		/// <summary>
-		/// 擅闯城镇库房
-		/// </summary>
 		public const short IntrudeTownTreasury = 5;
 
-		/// <summary>
-		/// 掠夺城镇库房
-		/// </summary>
 		public const short PlunderTownrTreasury = 6;
 
-		/// <summary>
-		/// 赠予城镇库房
-		/// </summary>
 		public const short DonateTownTreasury = 7;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 擅闯门派库房0
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem IntrudeSectTreasuryLow => Instance[(short)0];
 
-		/// <summary>
-		/// 擅闯门派库房1
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem IntrudeSectTreasuryMid => Instance[(short)1];
 
-		/// <summary>
-		/// 擅闯门派库房2
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem IntrudeSectTreasuryHigh => Instance[(short)2];
 
-		/// <summary>
-		/// 掠夺门派库房
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem PlunderSectTreasury => Instance[(short)3];
 
-		/// <summary>
-		/// 赠予门派库房
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem DonateSectTreasury => Instance[(short)4];
 
-		/// <summary>
-		/// 擅闯城镇库房
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem IntrudeTownTreasury => Instance[(short)5];
 
-		/// <summary>
-		/// 掠夺城镇库房
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem PlunderTownrTreasury => Instance[(short)6];
 
-		/// <summary>
-		/// 赠予城镇库房
-		/// </summary>
 		public static SettlementTreasuryEventEffectItem DonateTownTreasury => Instance[(short)7];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SettlementTreasuryEventEffect Instance = new SettlementTreasuryEventEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TaiwuBounty", "TemplateId" };

@@ -15,15 +15,12 @@ using GameData.DomainEvents;
 using GameData.Domains.Adventure.Modifications;
 using GameData.Domains.Character;
 using GameData.Domains.Character.Ai;
-using GameData.Domains.Character.Creation;
 using GameData.Domains.Character.Display;
 using GameData.Domains.Global;
 using GameData.Domains.Item;
 using GameData.Domains.Map;
-using GameData.Domains.Organization;
 using GameData.Domains.Taiwu.Profession;
 using GameData.Domains.TaiwuEvent;
-using GameData.Domains.TaiwuEvent.MonthlyEventActions;
 using GameData.Domains.World.MonthlyEvent;
 using GameData.Domains.World.Notification;
 using GameData.GameDataBridge;
@@ -90,8 +87,6 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 	private SpinLock _spinLockAdventureCache = new SpinLock(enableThreadOwnerTracking: false);
 
 	private SingleValueCollectionModificationCollection<int> _modificationsAdventureMajorEvents = SingleValueCollectionModificationCollection<int>.Create();
-
-	private Queue<uint> _pendingLoadingOperationIds;
 
 	public static AdventureCore Core { get; private set; }
 
@@ -189,6 +184,30 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 			GenerateAdventureRemake(context, adventure2.CoreId, adventure2.MapLocation);
 		}
 		ObjectPool<List<IAdventureRuntime>>.Instance.Return(adventures);
+	}
+
+	[DataUpgrader(Version = "1.1.0", Date = "2026/08/29")]
+	private void FixAbnormalCharacterLocations(DataContext context)
+	{
+		int count = 0;
+		foreach (AdventureRuntime runtime in _adventures.Values)
+		{
+			foreach (int charId in runtime.TemporaryCharacters)
+			{
+				if (DomainManager.Character.TryGetElement_Objects(charId, out var character) && !(character.GetLocation() == runtime.MapLocation))
+				{
+					count++;
+					Location prevLocation = character.GetLocation();
+					character.SetLocation(runtime.MapLocation, context);
+					character.ActiveExternalRelationState(context, 4uL);
+					Logger.Warn($"Fix {character} location from {prevLocation} to {runtime.MapLocation}");
+				}
+			}
+		}
+		if (count != 0)
+		{
+			Logger.Warn($"Fix {count} abnormal character locations");
+		}
 	}
 
 	private void OnInitializedDomainData()
@@ -493,19 +512,6 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 		return result;
 	}
 
-	public bool TryCreateAdventureSite(DataContext context, short areaId, short blockId, short adventureId, MonthlyActionKey monthlyActionKey)
-	{
-		return false;
-	}
-
-	public void ActivateAdventureSite(DataContext context, short areaId, short blockId)
-	{
-	}
-
-	public void RemoveAdventureSite(DataContext context, short areaId, short blockId, bool isTimeout, bool isComplete)
-	{
-	}
-
 	public void RemoveAllJuniorXiangshuAdventures(DataContext context)
 	{
 	}
@@ -727,25 +733,6 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 		}
 	}
 
-	public static sbyte GetEnemyNestTemplateId(short adventureId)
-	{
-		foreach (EnemyNestItem enemyNest in (IEnumerable<EnemyNestItem>)EnemyNest.Instance)
-		{
-			if (enemyNest.AdventureId == adventureId)
-			{
-				return (sbyte)enemyNest.TemplateId;
-			}
-		}
-		Logger.Warn($"adventureId {Config.Adventure.Instance[adventureId].Name}{adventureId} is not an heretic stronghold.");
-		return 0;
-	}
-
-	public static bool CheckPassPopulationRestriction(IRandomSource randomSource)
-	{
-		float prob = DomainManager.World.GetProbAdjustOfCreatingCharacter();
-		return randomSource.NextFloat() < prob;
-	}
-
 	[DomainMethod]
 	public string SelectAndMarkCustomTextInvoked(DataContext context, int adventureId, List<string> keys)
 	{
@@ -778,88 +765,6 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 		return result;
 	}
 
-	public unsafe void DestroyEnemyNest(DataContext context, short areaId, short enemyNestId, sbyte behaviorType)
-	{
-		InstantNotificationCollection notificationCollection = DomainManager.World.GetInstantNotificationCollection();
-		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
-		int taiwuCharId = taiwu.GetId();
-		EnemyNestItem enemyNestCfg = EnemyNest.Instance[enemyNestId];
-		Config.Character instance = Config.Character.Instance;
-		List<short> members = enemyNestCfg.Members;
-		CharacterItem enemyLeaderCfg = instance[members[members.Count - 1]];
-		AdventureData adventureCfg = Core.GetAdventureData(enemyNestCfg.AdventureId);
-		ProfessionFormulaItem formula = ProfessionFormula.DefValue.AddSeniorityMartialArtist4;
-		int addSeniority = formula.Calculate(adventureCfg.Grade);
-		DomainManager.Extra.ChangeProfessionSeniority(context, 3, addSeniority);
-		DomainManager.Taiwu.AddLegacyPoint(context, 13);
-		DomainManager.Extra.ChangeAreaSpiritualDebt(context, areaId, enemyNestCfg.SpiritualDebtChange);
-		taiwu.ChangeResource(context, 6, enemyNestCfg.MoneyReward);
-		taiwu.ChangeResource(context, 7, enemyNestCfg.AuthorityReward);
-		taiwu.ChangeExp(context, enemyNestCfg.ExpReward);
-		foreach (short randomEnemy in enemyNestCfg.Members)
-		{
-			if (!_escapingRandomEnemies.Contains(randomEnemy))
-			{
-				_escapingRandomEnemies.Add(randomEnemy);
-			}
-		}
-		SetEscapingRandomEnemies(_escapingRandomEnemies, context);
-		switch (behaviorType)
-		{
-		case 0:
-			taiwu.RecordFameAction(context, 40, -1, 5, jumpAccordingToTargetFame: false);
-			DomainManager.Map.ChangeSettlementSafetyInArea(context, areaId, 1);
-			notificationCollection.AddFameIncreased(taiwuCharId);
-			break;
-		case 1:
-			taiwu.RecordFameAction(context, 38, -1, 5, jumpAccordingToTargetFame: false);
-			DomainManager.Map.ChangeSettlementCultureInArea(context, areaId, 1);
-			notificationCollection.AddFameIncreased(taiwuCharId);
-			break;
-		case 2:
-			DomainManager.Map.ChangeSettlementSafetyInArea(context, areaId, 1);
-			DomainManager.Map.ChangeSettlementCultureInArea(context, areaId, 1);
-			break;
-		case 3:
-		{
-			taiwu.RecordFameAction(context, 42, -1, 5, jumpAccordingToTargetFame: false);
-			taiwu.ChangeHappiness(context, 3);
-			int moneyGain = enemyLeaderCfg.Resources.Items[6];
-			moneyGain = context.Random.Next(moneyGain * 5, moneyGain * 10 + 1);
-			if (moneyGain > 0)
-			{
-				taiwu.ChangeResource(context, 6, moneyGain);
-				notificationCollection.AddResourceIncreased(taiwuCharId, 6, moneyGain);
-			}
-			notificationCollection.AddFameDecreased(taiwuCharId);
-			notificationCollection.AddHappinessIncreased(taiwuCharId);
-			break;
-		}
-		case 4:
-		{
-			taiwu.RecordFameAction(context, 44, -1, 5, jumpAccordingToTargetFame: false);
-			notificationCollection.AddFameDecreased(taiwuCharId);
-			sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(areaId);
-			sbyte orgTemplateId = MapState.Instance[stateTemplateId].SectID;
-			sbyte gender = Gender.GetRandom(context.Random);
-			short charTemplateId = OrganizationDomain.GetCharacterTemplateId(orgTemplateId, stateTemplateId, gender);
-			OrganizationInfo orgInfo = taiwu.GetOrganizationInfo();
-			orgInfo.Grade = 0;
-			IntelligentCharacterCreationInfo info = new IntelligentCharacterCreationInfo(taiwu.GetLocation(), orgInfo, charTemplateId);
-			info.BaseAttraction = (short)context.Random.Next(enemyLeaderCfg.BaseAttraction / 2, enemyLeaderCfg.BaseAttraction + 1);
-			info.Age = (short)context.Random.Next(16, 25);
-			GameData.Domains.Character.Character newCharacter = DomainManager.Character.CreateIntelligentCharacter(context, ref info);
-			int newCharId = newCharacter.GetId();
-			DomainManager.Character.CompleteCreatingCharacter(newCharId);
-			newCharacter.AddFeature(context, 678);
-			DomainManager.Character.ChangeFavorabilityOptional(context, newCharacter, taiwu, -10000, 0);
-			DomainManager.Taiwu.JoinGroup(context, newCharId);
-			GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.OpenGetItem_Character, new List<int> { newCharId }, (sbyte)14);
-			break;
-		}
-		}
-	}
-
 	[DomainMethod]
 	public bool ConsumeActionPointInAdventure(DataContext context, int value)
 	{
@@ -884,12 +789,18 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 		DomainManager.Taiwu.AddLegacyPoint(context, 39);
 	}
 
-	public void AddLegacyPointDestroyEnemyNest(DataContext context, int combatDifficulty)
+	public void ApplyDestroyEnemyNest(DataContext context, short enemyNestId)
 	{
+		EnemyNestItem enemyNestCfg = EnemyNest.Instance[enemyNestId];
+		AdventureData adventureCfg = Core.GetAdventureData(enemyNestCfg.AdventureId);
 		ProfessionFormulaItem formula = ProfessionFormula.DefValue.AddSeniorityMartialArtist4;
-		int addSeniority = formula.Calculate(combatDifficulty);
+		int addSeniority = formula.Calculate(adventureCfg.Grade);
 		DomainManager.Extra.ChangeProfessionSeniority(context, 3, addSeniority);
 		DomainManager.Taiwu.AddLegacyPoint(context, 13);
+		if (_escapingRandomEnemies.AddUniqueRange(enemyNestCfg.Members))
+		{
+			SetEscapingRandomEnemies(_escapingRandomEnemies, context);
+		}
 	}
 
 	private void ClearExternStatus(DataContext context)
@@ -958,7 +869,7 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 		}
 	}
 
-	public void CollectAllCharactersInAdventure(HashSet<int> charIds, bool includeTemporaryCharacters = false)
+	public void CollectAllCharactersInAdventure(HashSet<int> charIds, bool includeTemporaryCharacters = false, bool onlyIntelligent = true)
 	{
 		int key;
 		foreach (KeyValuePair<int, AdventureRuntime> adventure in _adventures)
@@ -972,7 +883,7 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 			}
 			foreach (int charId in adventureRuntime.TemporaryCharacters)
 			{
-				if (DomainManager.Character.IsTemporaryIntelligentCharacter(charId))
+				if (!onlyIntelligent || DomainManager.Character.IsTemporaryIntelligentCharacter(charId))
 				{
 					charIds.Add(charId);
 				}
@@ -989,7 +900,7 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 			}
 			foreach (int charId2 in majorEvent.TemporaryCharacters)
 			{
-				if (DomainManager.Character.IsTemporaryIntelligentCharacter(charId2))
+				if (!onlyIntelligent || DomainManager.Character.IsTemporaryIntelligentCharacter(charId2))
 				{
 					charIds.Add(charId2);
 				}
@@ -1020,8 +931,18 @@ public class AdventureDomain : BaseGameDataDomain, IAdventureDomainBridge
 		{
 			return false;
 		}
-		adventure.DynamicBindKeyCharacter("NpcGroom", groomCharId);
-		adventure.DynamicBindKeyCharacter("NpcBride", brideCharId);
+		AdventureElement groom = adventure.DynamicBindPreCheckKey("NpcGroom", groomCharId);
+		AdventureElement bride = adventure.DynamicBindPreCheckKey("NpcBride", brideCharId);
+		if (groom == null || bride == null)
+		{
+			return false;
+		}
+		adventure.DynamicBindCalledCharacter(groom, groomCharId);
+		adventure.DynamicBindCalledCharacter(bride, brideCharId);
+		GameData.Domains.Character.Character groomChar = DomainManager.Character.GetElement_Objects(groomCharId);
+		GameData.Domains.Character.Character brideChar = DomainManager.Character.GetElement_Objects(brideCharId);
+		DomainManager.Character.CallCharacterByAdventure(context, adventure.MapLocation, groomChar);
+		DomainManager.Character.CallCharacterByAdventure(context, adventure.MapLocation, brideChar);
 		return true;
 	}
 

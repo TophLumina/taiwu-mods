@@ -7,1391 +7,560 @@ namespace Config;
 [Serializable]
 public class SecretInformation : ConfigData<SecretInformationItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 人物死亡
-		/// </summary>
 		public const short Die = 0;
 
-		/// <summary>
-		/// 公开杀害
-		/// </summary>
 		public const short KillInPublic = 1;
 
-		/// <summary>
-		/// 公开关押
-		/// </summary>
 		public const short KidnapInPublic = 2;
 
-		/// <summary>
-		/// 惩戒杀害
-		/// </summary>
 		public const short KillForPunishment = 3;
 
-		/// <summary>
-		/// 惩戒关押
-		/// </summary>
 		public const short KidnapForPunishment = 4;
 
-		/// <summary>
-		/// 天降资源
-		/// </summary>
 		public const short UnexpectedResourceGain = 5;
 
-		/// <summary>
-		/// 天降财宝
-		/// </summary>
 		public const short UnexpectedItemGain = 6;
 
-		/// <summary>
-		/// 天赐秘籍
-		/// </summary>
 		public const short UnexpectedSkillBookGain = 7;
 
-		/// <summary>
-		/// 天助疗愈
-		/// </summary>
 		public const short UnexpectedCure = 8;
 
-		/// <summary>
-		/// 天损资源
-		/// </summary>
 		public const short UnexpectedResourceLose = 9;
 
-		/// <summary>
-		/// 天损财宝
-		/// </summary>
 		public const short UnexpectedItemLose = 10;
 
-		/// <summary>
-		/// 天损秘籍
-		/// </summary>
 		public const short UnexpectedSkillBookLose = 11;
 
-		/// <summary>
-		/// 天降灾刑
-		/// </summary>
 		public const short UnexpectedHarm = 12;
 
-		/// <summary>
-		/// 较艺胜利
-		/// </summary>
 		public const short LifeSkillBattleWin = 13;
 
-		/// <summary>
-		/// 促织战胜
-		/// </summary>
 		public const short CricketBattleWin = 14;
 
-		/// <summary>
-		/// 战斗大胜
-		/// </summary>
 		public const short MajorVictoryInCombat = 15;
 
-		/// <summary>
-		/// 战斗胜利
-		/// </summary>
 		public const short MinorVictoryInCombat = 16;
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public const short Mourn = 17;
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public const short OfferProtection = 18;
 
-		/// <summary>
-		/// 痛失骨肉
-		/// </summary>
 		public const short LoseFetus = 19;
 
-		/// <summary>
-		/// 痛失骨肉2
-		/// </summary>
 		public const short LoseFetus2 = 20;
 
-		/// <summary>
-		/// 生下孩子
-		/// </summary>
 		public const short GiveBirthToChild = 21;
 
-		/// <summary>
-		/// 生下孩子2
-		/// </summary>
 		public const short GiveBirthToChild2 = 22;
 
-		/// <summary>
-		/// 遗弃孩子
-		/// </summary>
 		public const short AbandonChild = 23;
 
-		/// <summary>
-		/// 释放俘虏
-		/// </summary>
 		public const short ReleaseKidnappedCharacter = 24;
 
-		/// <summary>
-		/// 解救俘虏
-		/// </summary>
 		public const short RescueKidnappedCharacter = 25;
 
-		/// <summary>
-		/// 逃脱关押
-		/// </summary>
 		public const short KidnappedCharacterEscaped = 26;
 
-		/// <summary>
-		/// 研读失败
-		/// </summary>
 		public const short ReadBookFail = 27;
 
-		/// <summary>
-		/// 突破失败
-		/// </summary>
 		public const short BreakoutFail = 28;
 
-		/// <summary>
-		/// 遗失宝物
-		/// </summary>
 		public const short LoseOverloadingItem = 29;
 
-		/// <summary>
-		/// 化解仇怨
-		/// </summary>
 		public const short SeverEnemy = 30;
 
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public const short BecomeEnemy = 31;
 
-		/// <summary>
-		/// 结为好友
-		/// </summary>
 		public const short BecomeFriend = 32;
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public const short SeverFriend = 33;
 
-		/// <summary>
-		/// 两情相悦
-		/// </summary>
 		public const short BecomeLover = 34;
 
-		/// <summary>
-		/// 恋人分手
-		/// </summary>
 		public const short BreakupWithLover = 35;
 
-		/// <summary>
-		/// 共结连理
-		/// </summary>
 		public const short BecomeHusbandAndWife = 36;
 
-		/// <summary>
-		/// 义结金兰
-		/// </summary>
 		public const short BecomeSwornBrothersAndSisters = 37;
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public const short SeverSwornBrothersAndSisters = 38;
 
-		/// <summary>
-		/// 拜认义亲
-		/// </summary>
 		public const short GetAdopted = 39;
 
-		/// <summary>
-		/// 收养子女
-		/// </summary>
 		public const short AdoptChild = 40;
 
-		/// <summary>
-		/// 赠送资源
-		/// </summary>
 		public const short GivingResource = 41;
 
-		/// <summary>
-		/// 赠送道具
-		/// </summary>
 		public const short GiveItem = 42;
 
-		/// <summary>
-		/// 修建坟墓
-		/// </summary>
 		public const short BuildGrave = 43;
 
-		/// <summary>
-		/// 施医赠药
-		/// </summary>
 		public const short Cure = 44;
 
-		/// <summary>
-		/// 修补道具
-		/// </summary>
 		public const short RepairItem = 45;
 
-		/// <summary>
-		/// 指点技艺
-		/// </summary>
 		public const short InstructOnLifeSkill = 46;
 
-		/// <summary>
-		/// 指点武学
-		/// </summary>
 		public const short InstructOnCombatSkill = 47;
 
-		/// <summary>
-		/// 同意疗伤
-		/// </summary>
 		public const short AcceptRequestHealInjury = 48;
 
-		/// <summary>
-		/// 同意驱毒
-		/// </summary>
 		public const short AcceptRequestDetoxPoison = 49;
 
-		/// <summary>
-		/// 同意续命
-		/// </summary>
 		public const short AcceptRequestIncreaseHealth = 50;
 
-		/// <summary>
-		/// 同意调息
-		/// </summary>
 		public const short AcceptRequestRestoreDisorderOfQi = 51;
 
-		/// <summary>
-		/// 同意补内
-		/// </summary>
 		public const short AcceptRequestIncreaseNeili = 52;
 
-		/// <summary>
-		/// 同意灭蛊
-		/// </summary>
 		public const short AcceptRequestKillWug = 53;
 
-		/// <summary>
-		/// 同意乞食
-		/// </summary>
 		public const short AcceptRequestFood = 54;
 
-		/// <summary>
-		/// 同意茶酒
-		/// </summary>
 		public const short AcceptRequestTeaWine = 55;
 
-		/// <summary>
-		/// 同意资源
-		/// </summary>
 		public const short AcceptRequestResource = 56;
 
-		/// <summary>
-		/// 同意道具
-		/// </summary>
 		public const short AcceptRequestItem = 57;
 
-		/// <summary>
-		/// 同意对饮
-		/// </summary>
 		public const short AcceptRequestDrinking = 58;
 
-		/// <summary>
-		/// 同意施舍
-		/// </summary>
 		public const short AcceptRequestGivingMoney = 59;
 
-		/// <summary>
-		/// 同意研读
-		/// </summary>
 		public const short AcceptRequestInstructionOnReading = 60;
 
-		/// <summary>
-		/// 同意突破
-		/// </summary>
 		public const short AcceptRequestInstructionOnBreakout = 61;
 
-		/// <summary>
-		/// 同意修理
-		/// </summary>
 		public const short AcceptRequestRepairItem = 62;
 
-		/// <summary>
-		/// 同意淬毒
-		/// </summary>
 		public const short AcceptRequestAddPoisonToItem = 63;
 
-		/// <summary>
-		/// 同意技艺
-		/// </summary>
 		public const short AcceptRequestInstructionOnLifeSkill = 64;
 
-		/// <summary>
-		/// 同意武学
-		/// </summary>
 		public const short AcceptRequestInstructionOnCombatSkill = 65;
 
-		/// <summary>
-		/// 梳头成功
-		/// </summary>
 		public const short RehaircutSuccess = 66;
 
-		/// <summary>
-		/// 梳头失误
-		/// </summary>
 		public const short RehaircutIncompleted = 67;
 
-		/// <summary>
-		/// 梳头失败
-		/// </summary>
 		public const short RehaircutFail = 68;
 
-		/// <summary>
-		/// 拒绝疗伤
-		/// </summary>
 		public const short RefuseRequestHealInjury = 69;
 
-		/// <summary>
-		/// 拒绝驱毒
-		/// </summary>
 		public const short RefuseRequestDetoxPoison = 70;
 
-		/// <summary>
-		/// 拒绝续命
-		/// </summary>
 		public const short RefuseRequestIncreaseHealth = 71;
 
-		/// <summary>
-		/// 拒绝调息
-		/// </summary>
 		public const short RefuseRequestRestoreDisorderOfQi = 72;
 
-		/// <summary>
-		/// 拒绝补内
-		/// </summary>
 		public const short RefuseRequestIncreaseNeili = 73;
 
-		/// <summary>
-		/// 拒绝灭蛊
-		/// </summary>
 		public const short RefuseRequestKillWug = 74;
 
-		/// <summary>
-		/// 拒绝乞食
-		/// </summary>
 		public const short RefuseRequestFood = 75;
 
-		/// <summary>
-		/// 拒绝茶酒
-		/// </summary>
 		public const short RefuseRequestTeaWine = 76;
 
-		/// <summary>
-		/// 拒绝资源
-		/// </summary>
 		public const short RefuseRequestResource = 77;
 
-		/// <summary>
-		/// 拒绝道具
-		/// </summary>
 		public const short RefuseRequestItem = 78;
 
-		/// <summary>
-		/// 拒绝对饮
-		/// </summary>
 		public const short RefuseRequestDrinking = 79;
 
-		/// <summary>
-		/// 拒绝施舍
-		/// </summary>
 		public const short RefuseRequestGivingMoney = 80;
 
-		/// <summary>
-		/// 拒绝研读
-		/// </summary>
 		public const short RefuseRequestInstructionOnReading = 81;
 
-		/// <summary>
-		/// 拒绝突破
-		/// </summary>
 		public const short RefuseRequestInstructionOnBreakout = 82;
 
-		/// <summary>
-		/// 拒绝修理
-		/// </summary>
 		public const short RefuseRequestRepairItem = 83;
 
-		/// <summary>
-		/// 拒绝淬毒
-		/// </summary>
 		public const short RefuseRequestAddPoisonToItem = 84;
 
-		/// <summary>
-		/// 拒绝技艺
-		/// </summary>
 		public const short RefuseRequestInstructionOnLifeSkill = 85;
 
-		/// <summary>
-		/// 拒绝武学
-		/// </summary>
 		public const short RefuseRequestInstructionOnCombatSkill = 86;
 
-		/// <summary>
-		/// 盗掘资源
-		/// </summary>
 		public const short RobGraveResource = 87;
 
-		/// <summary>
-		/// 窃取资源
-		/// </summary>
 		public const short StealResource = 88;
 
-		/// <summary>
-		/// 骗取资源
-		/// </summary>
 		public const short ScamResource = 89;
 
-		/// <summary>
-		/// 夺取资源
-		/// </summary>
 		public const short RobResource = 90;
 
-		/// <summary>
-		/// 盗掘道具
-		/// </summary>
 		public const short RobGraveItem = 91;
 
-		/// <summary>
-		/// 窃取道具
-		/// </summary>
 		public const short StealItem = 92;
 
-		/// <summary>
-		/// 骗取道具
-		/// </summary>
 		public const short ScamItem = 93;
 
-		/// <summary>
-		/// 夺取道具
-		/// </summary>
 		public const short RobItem = 94;
 
-		/// <summary>
-		/// 秘密杀害
-		/// </summary>
 		public const short KillInPrivate = 95;
 
-		/// <summary>
-		/// 秘密关押
-		/// </summary>
 		public const short KidnapInPrivate = 96;
 
-		/// <summary>
-		/// 毒害他人
-		/// </summary>
 		public const short PoisonEnemy = 97;
 
-		/// <summary>
-		/// 损伤他人
-		/// </summary>
 		public const short PlotHarmEnemy = 98;
 
-		/// <summary>
-		/// 窃取技艺
-		/// </summary>
 		public const short StealLifeSkill = 99;
 
-		/// <summary>
-		/// 骗取技艺
-		/// </summary>
 		public const short ScamLifeSkill = 100;
 
-		/// <summary>
-		/// 窃取武学
-		/// </summary>
 		public const short StealCombatSkill = 101;
 
-		/// <summary>
-		/// 骗取武学
-		/// </summary>
 		public const short ScamCombatSkill = 102;
 
-		/// <summary>
-		/// 道具淬毒
-		/// </summary>
 		public const short AddPoisonToItem = 103;
 
-		/// <summary>
-		/// 饮食破戒
-		/// </summary>
 		public const short MonkBreakRule = 104;
 
-		/// <summary>
-		/// 非法春宵
-		/// </summary>
 		public const short MakeLoveIllegal = 105;
 
-		/// <summary>
-		/// 情难自禁
-		/// </summary>
 		public const short Rape = 106;
 
-		/// <summary>
-		/// 痛失骨肉父亲不可知
-		/// </summary>
 		public const short LoseFetusFatherUnknown = 107;
 
-		/// <summary>
-		/// 生下孩子父亲不可知
-		/// </summary>
 		public const short GiveBirthToChildFatherUnknown = 108;
 
-		/// <summary>
-		/// 与人约会
-		/// </summary>
 		public const short DatingWithCrush = 109;
 
-		/// <summary>
-		/// 迫使不语
-		/// </summary>
 		public const short ForcingSilence = 110;
 
-		/// <summary>
-		/// 寻回子女
-		/// </summary>
 		public const short RetrieveChild = 111;
 
-		/// <summary>
-		/// 解读经文1
-		/// </summary>
 		public const short SolveScripture1 = 112;
 
-		/// <summary>
-		/// 解读经文2
-		/// </summary>
 		public const short SolveScripture2 = 113;
 
-		/// <summary>
-		/// 解读经文3
-		/// </summary>
 		public const short SolveScripture3 = 114;
 
-		/// <summary>
-		/// 解读经文4
-		/// </summary>
 		public const short SolveScripture4 = 115;
 
-		/// <summary>
-		/// 公开越狱
-		/// </summary>
 		public const short PrisonBreak = 116;
 
-		/// <summary>
-		/// 身怀六甲
-		/// </summary>
 		public const short Pregnant = 117;
 
-		/// <summary>
-		/// 身怀六甲父亲未知
-		/// </summary>
 		public const short PregnantWithoutFather = 118;
 
-		/// <summary>
-		/// 人物入魔
-		/// </summary>
 		public const short XiangshuType0 = 119;
 
-		/// <summary>
-		/// 人物入邪
-		/// </summary>
 		public const short XiangshuType1 = 120;
 
-		/// <summary>
-		/// 人物出家
-		/// </summary>
 		public const short BecomeMonk = 121;
 
-		/// <summary>
-		/// 人物离婚
-		/// </summary>
 		public const short Divorce = 122;
 
-		/// <summary>
-		/// 拜为师父
-		/// </summary>
 		public const short BecomeMaster = 123;
 
-		/// <summary>
-		/// 收为徒弟
-		/// </summary>
 		public const short BecomeApprentice = 124;
 
-		/// <summary>
-		/// 加入门派
-		/// </summary>
 		public const short JoinOrganization = 125;
 
-		/// <summary>
-		/// 获得奇书
-		/// </summary>
 		public const short GainQiBook = 126;
 
-		/// <summary>
-		/// 丢失奇书
-		/// </summary>
 		public const short LostQiBook = 127;
 
-		/// <summary>
-		/// 乞讨银钱
-		/// </summary>
 		public const short BegMoney = 128;
 
-		/// <summary>
-		/// 人物入狱
-		/// </summary>
 		public const short Imprisoned = 129;
 
-		/// <summary>
-		/// 人物出狱
-		/// </summary>
 		public const short ReleasedPrison = 130;
 
-		/// <summary>
-		/// 求取俘虏
-		/// </summary>
 		public const short BegPrisoner = 131;
 
-		/// <summary>
-		/// 偷窃俘虏
-		/// </summary>
 		public const short StealPrisoner = 132;
 
-		/// <summary>
-		/// 唬骗俘虏
-		/// </summary>
 		public const short ScamPrisoner = 133;
 
-		/// <summary>
-		/// 夺取俘虏
-		/// </summary>
 		public const short RobPrisoner = 134;
 
-		/// <summary>
-		/// 断绝父母
-		/// </summary>
 		public const short SeverGetAdopted = 135;
 
-		/// <summary>
-		/// 断绝子女
-		/// </summary>
 		public const short SeverAdoptChild = 136;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 人物死亡
-		/// </summary>
 		public static SecretInformationItem Die => Instance[(short)0];
 
-		/// <summary>
-		/// 公开杀害
-		/// </summary>
 		public static SecretInformationItem KillInPublic => Instance[(short)1];
 
-		/// <summary>
-		/// 公开关押
-		/// </summary>
 		public static SecretInformationItem KidnapInPublic => Instance[(short)2];
 
-		/// <summary>
-		/// 惩戒杀害
-		/// </summary>
 		public static SecretInformationItem KillForPunishment => Instance[(short)3];
 
-		/// <summary>
-		/// 惩戒关押
-		/// </summary>
 		public static SecretInformationItem KidnapForPunishment => Instance[(short)4];
 
-		/// <summary>
-		/// 天降资源
-		/// </summary>
 		public static SecretInformationItem UnexpectedResourceGain => Instance[(short)5];
 
-		/// <summary>
-		/// 天降财宝
-		/// </summary>
 		public static SecretInformationItem UnexpectedItemGain => Instance[(short)6];
 
-		/// <summary>
-		/// 天赐秘籍
-		/// </summary>
 		public static SecretInformationItem UnexpectedSkillBookGain => Instance[(short)7];
 
-		/// <summary>
-		/// 天助疗愈
-		/// </summary>
 		public static SecretInformationItem UnexpectedCure => Instance[(short)8];
 
-		/// <summary>
-		/// 天损资源
-		/// </summary>
 		public static SecretInformationItem UnexpectedResourceLose => Instance[(short)9];
 
-		/// <summary>
-		/// 天损财宝
-		/// </summary>
 		public static SecretInformationItem UnexpectedItemLose => Instance[(short)10];
 
-		/// <summary>
-		/// 天损秘籍
-		/// </summary>
 		public static SecretInformationItem UnexpectedSkillBookLose => Instance[(short)11];
 
-		/// <summary>
-		/// 天降灾刑
-		/// </summary>
 		public static SecretInformationItem UnexpectedHarm => Instance[(short)12];
 
-		/// <summary>
-		/// 较艺胜利
-		/// </summary>
 		public static SecretInformationItem LifeSkillBattleWin => Instance[(short)13];
 
-		/// <summary>
-		/// 促织战胜
-		/// </summary>
 		public static SecretInformationItem CricketBattleWin => Instance[(short)14];
 
-		/// <summary>
-		/// 战斗大胜
-		/// </summary>
 		public static SecretInformationItem MajorVictoryInCombat => Instance[(short)15];
 
-		/// <summary>
-		/// 战斗胜利
-		/// </summary>
 		public static SecretInformationItem MinorVictoryInCombat => Instance[(short)16];
 
-		/// <summary>
-		/// 祭拜故人
-		/// </summary>
 		public static SecretInformationItem Mourn => Instance[(short)17];
 
-		/// <summary>
-		/// 保护亲友
-		/// </summary>
 		public static SecretInformationItem OfferProtection => Instance[(short)18];
 
-		/// <summary>
-		/// 痛失骨肉
-		/// </summary>
 		public static SecretInformationItem LoseFetus => Instance[(short)19];
 
-		/// <summary>
-		/// 痛失骨肉2
-		/// </summary>
 		public static SecretInformationItem LoseFetus2 => Instance[(short)20];
 
-		/// <summary>
-		/// 生下孩子
-		/// </summary>
 		public static SecretInformationItem GiveBirthToChild => Instance[(short)21];
 
-		/// <summary>
-		/// 生下孩子2
-		/// </summary>
 		public static SecretInformationItem GiveBirthToChild2 => Instance[(short)22];
 
-		/// <summary>
-		/// 遗弃孩子
-		/// </summary>
 		public static SecretInformationItem AbandonChild => Instance[(short)23];
 
-		/// <summary>
-		/// 释放俘虏
-		/// </summary>
 		public static SecretInformationItem ReleaseKidnappedCharacter => Instance[(short)24];
 
-		/// <summary>
-		/// 解救俘虏
-		/// </summary>
 		public static SecretInformationItem RescueKidnappedCharacter => Instance[(short)25];
 
-		/// <summary>
-		/// 逃脱关押
-		/// </summary>
 		public static SecretInformationItem KidnappedCharacterEscaped => Instance[(short)26];
 
-		/// <summary>
-		/// 研读失败
-		/// </summary>
 		public static SecretInformationItem ReadBookFail => Instance[(short)27];
 
-		/// <summary>
-		/// 突破失败
-		/// </summary>
 		public static SecretInformationItem BreakoutFail => Instance[(short)28];
 
-		/// <summary>
-		/// 遗失宝物
-		/// </summary>
 		public static SecretInformationItem LoseOverloadingItem => Instance[(short)29];
 
-		/// <summary>
-		/// 化解仇怨
-		/// </summary>
 		public static SecretInformationItem SeverEnemy => Instance[(short)30];
 
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public static SecretInformationItem BecomeEnemy => Instance[(short)31];
 
-		/// <summary>
-		/// 结为好友
-		/// </summary>
 		public static SecretInformationItem BecomeFriend => Instance[(short)32];
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public static SecretInformationItem SeverFriend => Instance[(short)33];
 
-		/// <summary>
-		/// 两情相悦
-		/// </summary>
 		public static SecretInformationItem BecomeLover => Instance[(short)34];
 
-		/// <summary>
-		/// 恋人分手
-		/// </summary>
 		public static SecretInformationItem BreakupWithLover => Instance[(short)35];
 
-		/// <summary>
-		/// 共结连理
-		/// </summary>
 		public static SecretInformationItem BecomeHusbandAndWife => Instance[(short)36];
 
-		/// <summary>
-		/// 义结金兰
-		/// </summary>
 		public static SecretInformationItem BecomeSwornBrothersAndSisters => Instance[(short)37];
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public static SecretInformationItem SeverSwornBrothersAndSisters => Instance[(short)38];
 
-		/// <summary>
-		/// 拜认义亲
-		/// </summary>
 		public static SecretInformationItem GetAdopted => Instance[(short)39];
 
-		/// <summary>
-		/// 收养子女
-		/// </summary>
 		public static SecretInformationItem AdoptChild => Instance[(short)40];
 
-		/// <summary>
-		/// 赠送资源
-		/// </summary>
 		public static SecretInformationItem GivingResource => Instance[(short)41];
 
-		/// <summary>
-		/// 赠送道具
-		/// </summary>
 		public static SecretInformationItem GiveItem => Instance[(short)42];
 
-		/// <summary>
-		/// 修建坟墓
-		/// </summary>
 		public static SecretInformationItem BuildGrave => Instance[(short)43];
 
-		/// <summary>
-		/// 施医赠药
-		/// </summary>
 		public static SecretInformationItem Cure => Instance[(short)44];
 
-		/// <summary>
-		/// 修补道具
-		/// </summary>
 		public static SecretInformationItem RepairItem => Instance[(short)45];
 
-		/// <summary>
-		/// 指点技艺
-		/// </summary>
 		public static SecretInformationItem InstructOnLifeSkill => Instance[(short)46];
 
-		/// <summary>
-		/// 指点武学
-		/// </summary>
 		public static SecretInformationItem InstructOnCombatSkill => Instance[(short)47];
 
-		/// <summary>
-		/// 同意疗伤
-		/// </summary>
 		public static SecretInformationItem AcceptRequestHealInjury => Instance[(short)48];
 
-		/// <summary>
-		/// 同意驱毒
-		/// </summary>
 		public static SecretInformationItem AcceptRequestDetoxPoison => Instance[(short)49];
 
-		/// <summary>
-		/// 同意续命
-		/// </summary>
 		public static SecretInformationItem AcceptRequestIncreaseHealth => Instance[(short)50];
 
-		/// <summary>
-		/// 同意调息
-		/// </summary>
 		public static SecretInformationItem AcceptRequestRestoreDisorderOfQi => Instance[(short)51];
 
-		/// <summary>
-		/// 同意补内
-		/// </summary>
 		public static SecretInformationItem AcceptRequestIncreaseNeili => Instance[(short)52];
 
-		/// <summary>
-		/// 同意灭蛊
-		/// </summary>
 		public static SecretInformationItem AcceptRequestKillWug => Instance[(short)53];
 
-		/// <summary>
-		/// 同意乞食
-		/// </summary>
 		public static SecretInformationItem AcceptRequestFood => Instance[(short)54];
 
-		/// <summary>
-		/// 同意茶酒
-		/// </summary>
 		public static SecretInformationItem AcceptRequestTeaWine => Instance[(short)55];
 
-		/// <summary>
-		/// 同意资源
-		/// </summary>
 		public static SecretInformationItem AcceptRequestResource => Instance[(short)56];
 
-		/// <summary>
-		/// 同意道具
-		/// </summary>
 		public static SecretInformationItem AcceptRequestItem => Instance[(short)57];
 
-		/// <summary>
-		/// 同意对饮
-		/// </summary>
 		public static SecretInformationItem AcceptRequestDrinking => Instance[(short)58];
 
-		/// <summary>
-		/// 同意施舍
-		/// </summary>
 		public static SecretInformationItem AcceptRequestGivingMoney => Instance[(short)59];
 
-		/// <summary>
-		/// 同意研读
-		/// </summary>
 		public static SecretInformationItem AcceptRequestInstructionOnReading => Instance[(short)60];
 
-		/// <summary>
-		/// 同意突破
-		/// </summary>
 		public static SecretInformationItem AcceptRequestInstructionOnBreakout => Instance[(short)61];
 
-		/// <summary>
-		/// 同意修理
-		/// </summary>
 		public static SecretInformationItem AcceptRequestRepairItem => Instance[(short)62];
 
-		/// <summary>
-		/// 同意淬毒
-		/// </summary>
 		public static SecretInformationItem AcceptRequestAddPoisonToItem => Instance[(short)63];
 
-		/// <summary>
-		/// 同意技艺
-		/// </summary>
 		public static SecretInformationItem AcceptRequestInstructionOnLifeSkill => Instance[(short)64];
 
-		/// <summary>
-		/// 同意武学
-		/// </summary>
 		public static SecretInformationItem AcceptRequestInstructionOnCombatSkill => Instance[(short)65];
 
-		/// <summary>
-		/// 梳头成功
-		/// </summary>
 		public static SecretInformationItem RehaircutSuccess => Instance[(short)66];
 
-		/// <summary>
-		/// 梳头失误
-		/// </summary>
 		public static SecretInformationItem RehaircutIncompleted => Instance[(short)67];
 
-		/// <summary>
-		/// 梳头失败
-		/// </summary>
 		public static SecretInformationItem RehaircutFail => Instance[(short)68];
 
-		/// <summary>
-		/// 拒绝疗伤
-		/// </summary>
 		public static SecretInformationItem RefuseRequestHealInjury => Instance[(short)69];
 
-		/// <summary>
-		/// 拒绝驱毒
-		/// </summary>
 		public static SecretInformationItem RefuseRequestDetoxPoison => Instance[(short)70];
 
-		/// <summary>
-		/// 拒绝续命
-		/// </summary>
 		public static SecretInformationItem RefuseRequestIncreaseHealth => Instance[(short)71];
 
-		/// <summary>
-		/// 拒绝调息
-		/// </summary>
 		public static SecretInformationItem RefuseRequestRestoreDisorderOfQi => Instance[(short)72];
 
-		/// <summary>
-		/// 拒绝补内
-		/// </summary>
 		public static SecretInformationItem RefuseRequestIncreaseNeili => Instance[(short)73];
 
-		/// <summary>
-		/// 拒绝灭蛊
-		/// </summary>
 		public static SecretInformationItem RefuseRequestKillWug => Instance[(short)74];
 
-		/// <summary>
-		/// 拒绝乞食
-		/// </summary>
 		public static SecretInformationItem RefuseRequestFood => Instance[(short)75];
 
-		/// <summary>
-		/// 拒绝茶酒
-		/// </summary>
 		public static SecretInformationItem RefuseRequestTeaWine => Instance[(short)76];
 
-		/// <summary>
-		/// 拒绝资源
-		/// </summary>
 		public static SecretInformationItem RefuseRequestResource => Instance[(short)77];
 
-		/// <summary>
-		/// 拒绝道具
-		/// </summary>
 		public static SecretInformationItem RefuseRequestItem => Instance[(short)78];
 
-		/// <summary>
-		/// 拒绝对饮
-		/// </summary>
 		public static SecretInformationItem RefuseRequestDrinking => Instance[(short)79];
 
-		/// <summary>
-		/// 拒绝施舍
-		/// </summary>
 		public static SecretInformationItem RefuseRequestGivingMoney => Instance[(short)80];
 
-		/// <summary>
-		/// 拒绝研读
-		/// </summary>
 		public static SecretInformationItem RefuseRequestInstructionOnReading => Instance[(short)81];
 
-		/// <summary>
-		/// 拒绝突破
-		/// </summary>
 		public static SecretInformationItem RefuseRequestInstructionOnBreakout => Instance[(short)82];
 
-		/// <summary>
-		/// 拒绝修理
-		/// </summary>
 		public static SecretInformationItem RefuseRequestRepairItem => Instance[(short)83];
 
-		/// <summary>
-		/// 拒绝淬毒
-		/// </summary>
 		public static SecretInformationItem RefuseRequestAddPoisonToItem => Instance[(short)84];
 
-		/// <summary>
-		/// 拒绝技艺
-		/// </summary>
 		public static SecretInformationItem RefuseRequestInstructionOnLifeSkill => Instance[(short)85];
 
-		/// <summary>
-		/// 拒绝武学
-		/// </summary>
 		public static SecretInformationItem RefuseRequestInstructionOnCombatSkill => Instance[(short)86];
 
-		/// <summary>
-		/// 盗掘资源
-		/// </summary>
 		public static SecretInformationItem RobGraveResource => Instance[(short)87];
 
-		/// <summary>
-		/// 窃取资源
-		/// </summary>
 		public static SecretInformationItem StealResource => Instance[(short)88];
 
-		/// <summary>
-		/// 骗取资源
-		/// </summary>
 		public static SecretInformationItem ScamResource => Instance[(short)89];
 
-		/// <summary>
-		/// 夺取资源
-		/// </summary>
 		public static SecretInformationItem RobResource => Instance[(short)90];
 
-		/// <summary>
-		/// 盗掘道具
-		/// </summary>
 		public static SecretInformationItem RobGraveItem => Instance[(short)91];
 
-		/// <summary>
-		/// 窃取道具
-		/// </summary>
 		public static SecretInformationItem StealItem => Instance[(short)92];
 
-		/// <summary>
-		/// 骗取道具
-		/// </summary>
 		public static SecretInformationItem ScamItem => Instance[(short)93];
 
-		/// <summary>
-		/// 夺取道具
-		/// </summary>
 		public static SecretInformationItem RobItem => Instance[(short)94];
 
-		/// <summary>
-		/// 秘密杀害
-		/// </summary>
 		public static SecretInformationItem KillInPrivate => Instance[(short)95];
 
-		/// <summary>
-		/// 秘密关押
-		/// </summary>
 		public static SecretInformationItem KidnapInPrivate => Instance[(short)96];
 
-		/// <summary>
-		/// 毒害他人
-		/// </summary>
 		public static SecretInformationItem PoisonEnemy => Instance[(short)97];
 
-		/// <summary>
-		/// 损伤他人
-		/// </summary>
 		public static SecretInformationItem PlotHarmEnemy => Instance[(short)98];
 
-		/// <summary>
-		/// 窃取技艺
-		/// </summary>
 		public static SecretInformationItem StealLifeSkill => Instance[(short)99];
 
-		/// <summary>
-		/// 骗取技艺
-		/// </summary>
 		public static SecretInformationItem ScamLifeSkill => Instance[(short)100];
 
-		/// <summary>
-		/// 窃取武学
-		/// </summary>
 		public static SecretInformationItem StealCombatSkill => Instance[(short)101];
 
-		/// <summary>
-		/// 骗取武学
-		/// </summary>
 		public static SecretInformationItem ScamCombatSkill => Instance[(short)102];
 
-		/// <summary>
-		/// 道具淬毒
-		/// </summary>
 		public static SecretInformationItem AddPoisonToItem => Instance[(short)103];
 
-		/// <summary>
-		/// 饮食破戒
-		/// </summary>
 		public static SecretInformationItem MonkBreakRule => Instance[(short)104];
 
-		/// <summary>
-		/// 非法春宵
-		/// </summary>
 		public static SecretInformationItem MakeLoveIllegal => Instance[(short)105];
 
-		/// <summary>
-		/// 情难自禁
-		/// </summary>
 		public static SecretInformationItem Rape => Instance[(short)106];
 
-		/// <summary>
-		/// 痛失骨肉父亲不可知
-		/// </summary>
 		public static SecretInformationItem LoseFetusFatherUnknown => Instance[(short)107];
 
-		/// <summary>
-		/// 生下孩子父亲不可知
-		/// </summary>
 		public static SecretInformationItem GiveBirthToChildFatherUnknown => Instance[(short)108];
 
-		/// <summary>
-		/// 与人约会
-		/// </summary>
 		public static SecretInformationItem DatingWithCrush => Instance[(short)109];
 
-		/// <summary>
-		/// 迫使不语
-		/// </summary>
 		public static SecretInformationItem ForcingSilence => Instance[(short)110];
 
-		/// <summary>
-		/// 寻回子女
-		/// </summary>
 		public static SecretInformationItem RetrieveChild => Instance[(short)111];
 
-		/// <summary>
-		/// 解读经文1
-		/// </summary>
 		public static SecretInformationItem SolveScripture1 => Instance[(short)112];
 
-		/// <summary>
-		/// 解读经文2
-		/// </summary>
 		public static SecretInformationItem SolveScripture2 => Instance[(short)113];
 
-		/// <summary>
-		/// 解读经文3
-		/// </summary>
 		public static SecretInformationItem SolveScripture3 => Instance[(short)114];
 
-		/// <summary>
-		/// 解读经文4
-		/// </summary>
 		public static SecretInformationItem SolveScripture4 => Instance[(short)115];
 
-		/// <summary>
-		/// 公开越狱
-		/// </summary>
 		public static SecretInformationItem PrisonBreak => Instance[(short)116];
 
-		/// <summary>
-		/// 身怀六甲
-		/// </summary>
 		public static SecretInformationItem Pregnant => Instance[(short)117];
 
-		/// <summary>
-		/// 身怀六甲父亲未知
-		/// </summary>
 		public static SecretInformationItem PregnantWithoutFather => Instance[(short)118];
 
-		/// <summary>
-		/// 人物入魔
-		/// </summary>
 		public static SecretInformationItem XiangshuType0 => Instance[(short)119];
 
-		/// <summary>
-		/// 人物入邪
-		/// </summary>
 		public static SecretInformationItem XiangshuType1 => Instance[(short)120];
 
-		/// <summary>
-		/// 人物出家
-		/// </summary>
 		public static SecretInformationItem BecomeMonk => Instance[(short)121];
 
-		/// <summary>
-		/// 人物离婚
-		/// </summary>
 		public static SecretInformationItem Divorce => Instance[(short)122];
 
-		/// <summary>
-		/// 拜为师父
-		/// </summary>
 		public static SecretInformationItem BecomeMaster => Instance[(short)123];
 
-		/// <summary>
-		/// 收为徒弟
-		/// </summary>
 		public static SecretInformationItem BecomeApprentice => Instance[(short)124];
 
-		/// <summary>
-		/// 加入门派
-		/// </summary>
 		public static SecretInformationItem JoinOrganization => Instance[(short)125];
 
-		/// <summary>
-		/// 获得奇书
-		/// </summary>
 		public static SecretInformationItem GainQiBook => Instance[(short)126];
 
-		/// <summary>
-		/// 丢失奇书
-		/// </summary>
 		public static SecretInformationItem LostQiBook => Instance[(short)127];
 
-		/// <summary>
-		/// 乞讨银钱
-		/// </summary>
 		public static SecretInformationItem BegMoney => Instance[(short)128];
 
-		/// <summary>
-		/// 人物入狱
-		/// </summary>
 		public static SecretInformationItem Imprisoned => Instance[(short)129];
 
-		/// <summary>
-		/// 人物出狱
-		/// </summary>
 		public static SecretInformationItem ReleasedPrison => Instance[(short)130];
 
-		/// <summary>
-		/// 求取俘虏
-		/// </summary>
 		public static SecretInformationItem BegPrisoner => Instance[(short)131];
 
-		/// <summary>
-		/// 偷窃俘虏
-		/// </summary>
 		public static SecretInformationItem StealPrisoner => Instance[(short)132];
 
-		/// <summary>
-		/// 唬骗俘虏
-		/// </summary>
 		public static SecretInformationItem ScamPrisoner => Instance[(short)133];
 
-		/// <summary>
-		/// 夺取俘虏
-		/// </summary>
 		public static SecretInformationItem RobPrisoner => Instance[(short)134];
 
-		/// <summary>
-		/// 断绝父母
-		/// </summary>
 		public static SecretInformationItem SeverGetAdopted => Instance[(short)135];
 
-		/// <summary>
-		/// 断绝子女
-		/// </summary>
 		public static SecretInformationItem SeverAdoptChild => Instance[(short)136];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformation Instance = new SecretInformation();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -2658,7 +1827,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 5, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 108, 108, 112, 3712, 112, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_112"), autoDissemination: false, 9, -1));
+		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 5, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 108, 108, 112, 3712, 112, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_112"), autoDissemination: false, 9, 58));
 		_dataArray.Add(new SecretInformationItem(113, LocalStringManager.GetConfig("SecretInformation_language", "Name_113"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_113"), new sbyte[1], -1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_113_0"),
@@ -2669,7 +1838,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 10, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 109, 109, 113, 3713, 113, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_113"), autoDissemination: false, 9, -1));
+		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 10, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 109, 109, 113, 3713, 113, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_113"), autoDissemination: false, 9, 58));
 		_dataArray.Add(new SecretInformationItem(114, LocalStringManager.GetConfig("SecretInformation_language", "Name_114"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_114"), new sbyte[1], -1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_114_0"),
@@ -2680,7 +1849,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 15, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 110, 110, 114, 3714, 114, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_114"), autoDissemination: false, 9, -1));
+		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 15, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 110, 110, 114, 3714, 114, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_114"), autoDissemination: false, 9, 58));
 		_dataArray.Add(new SecretInformationItem(115, LocalStringManager.GetConfig("SecretInformation_language", "Name_115"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_115"), new sbyte[1], -1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_115_0"),
@@ -2691,7 +1860,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 20, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 111, 111, 115, 3715, 115, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_115"), autoDissemination: false, 9, -1));
+		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, -1, 5, -3, 20, -1, ESecretInformationInitialTarget.None, new int[1], new int[0], new int[0], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 111, 111, 115, 3715, 115, 1, 10000, 10000, 1, 25, -1, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_115"), autoDissemination: false, 9, 58));
 		_dataArray.Add(new SecretInformationItem(116, LocalStringManager.GetConfig("SecretInformation_language", "Name_116"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_116"), new sbyte[2] { 0, 1 }, -1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_116_0"),
@@ -2713,7 +1882,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, 1, 3, 0, 10, 18, ESecretInformationInitialTarget.Local, new int[2] { 0, 1 }, new int[2] { 0, 1 }, new int[2] { 0, 1 }, isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: true, ESecretInformationValueType.Normal, 113, 113, 117, 3735, 117, 6, 10, 10000, 5, 12425, 2500, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_117"), autoDissemination: true, 5, 47));
+		}, 1, 0, 0, 0, 0, 0, 0, autoBroadCast: false, 100, 1, 3, 0, 10, 18, ESecretInformationInitialTarget.Local, new int[2] { 0, 1 }, new int[2] { 0, 1 }, new int[2] { 0, 1 }, isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: true, ESecretInformationValueType.Normal, 113, 113, 117, 3735, 117, 6, 10, 10000, 5, 12425, 2500, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_117"), autoDissemination: true, 5, 46));
 		_dataArray.Add(new SecretInformationItem(118, LocalStringManager.GetConfig("SecretInformation_language", "Name_118"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_118"), new sbyte[2] { 0, 1 }, 1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_118_0"),
@@ -2735,7 +1904,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 0, 0, 0, 1, 0, 0, autoBroadCast: false, 100, 1, 3, -3, 10, 18, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Negative, 115, 115, 119, 3912, 119, 6, 1000, 10000, 1, 100, 2500, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_119"), autoDissemination: true, 9, -1));
+		}, 1, 0, 0, 0, 1, 0, 0, autoBroadCast: false, 100, 1, 3, -3, 10, 18, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Negative, 115, 115, 119, 3912, 119, 6, 1000, 10000, 1, 100, 2500, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_119"), autoDissemination: true, 9, 58));
 	}
 
 	private void CreateItems2()
@@ -2750,7 +1919,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 0, 0, 0, 1, 0, 0, autoBroadCast: false, 100, 1, 3, -3, 10, 18, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Negative, 116, 116, 120, 3927, 120, 6, 1000, 10000, 1, 100, 2500, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_120"), autoDissemination: true, 9, -1));
+		}, 1, 0, 0, 0, 1, 0, 0, autoBroadCast: false, 100, 1, 3, -3, 10, 18, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Negative, 116, 116, 120, 3927, 120, 6, 1000, 10000, 1, 100, 2500, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_120"), autoDissemination: true, 9, 58));
 		_dataArray.Add(new SecretInformationItem(121, LocalStringManager.GetConfig("SecretInformation_language", "Name_121"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_121"), new sbyte[2] { 0, 1 }, -1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_121_0"),
@@ -2816,7 +1985,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 1, 1, 0, 0, 0, 0, 0, autoBroadCast: false, 300, 1, 5, -3, 10, 6, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 122, 122, 126, 4235, 126, 9, 10000, 10000, 0, 0, 0, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_126"), autoDissemination: true, 9, -1));
+		}, 1, 1, 0, 0, 0, 0, 0, autoBroadCast: false, 300, 1, 5, -3, 10, 6, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 122, 122, 126, 4235, 126, 9, 10000, 10000, 0, 0, 0, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_126"), autoDissemination: true, 9, 58));
 		_dataArray.Add(new SecretInformationItem(127, LocalStringManager.GetConfig("SecretInformation_language", "Name_127"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_127"), new sbyte[2] { 0, 3 }, -1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_127_0"),
@@ -2827,7 +1996,7 @@ public class SecretInformation : ConfigData<SecretInformationItem, short>
 		{
 			27, 1, 6, 22, 1, 3, 10, 0, 3, 11,
 			1, 5, 15
-		}, 2, 1, 0, 0, 0, 0, 0, autoBroadCast: false, 300, 1, 5, -3, 10, 6, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 123, 123, 127, 4250, 127, 9, 10000, 10000, 0, 0, 0, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_127"), autoDissemination: true, 9, -1));
+		}, 2, 1, 0, 0, 0, 0, 0, autoBroadCast: false, 300, 1, 5, -3, 10, 6, ESecretInformationInitialTarget.Area, new int[1], new int[1], new int[1], isGeneralRelationCharactersNeedSnapshot: false, isRelationCharactersAliveStateNeedSnapshot: false, ESecretInformationValueType.Normal, 123, 123, 127, 4250, 127, 9, 10000, 10000, 0, 0, 0, LocalStringManager.GetConfig("SecretInformation_language", "BroadcastDesc_127"), autoDissemination: true, 9, 58));
 		_dataArray.Add(new SecretInformationItem(128, LocalStringManager.GetConfig("SecretInformation_language", "Name_128"), LocalStringManager.GetConfig("SecretInformation_language", "Desc_128"), new sbyte[2], -1, new string[4]
 		{
 			LocalStringManager.GetConfig("SecretInformation_language", "ParametersUiName_128_0"),

@@ -20,21 +20,12 @@ public class XiangshuInfectedDemonData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "CharId", "Minions", "LastRescuedOrKilledDate" };
 	}
 
-	/// <summary>
-	/// 失心魔 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId = -1;
 
-	/// <summary>
-	/// 召唤出的爪牙
-	/// </summary>
 	[SerializableGameDataField]
 	public List<XiangshuInfectedDemonMinion> Minions;
 
-	/// <summary>
-	/// 上一次被解救或消灭的时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int LastRescuedOrKilledDate = int.MinValue;
 
@@ -69,13 +60,11 @@ public class XiangshuInfectedDemonData : ISerializableGameData
 		Minions.Add(new XiangshuInfectedDemonMinion(areaId, mapTemplateEnemyInfo));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -87,7 +76,6 @@ public class XiangshuInfectedDemonData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -121,7 +109,6 @@ public class XiangshuInfectedDemonData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

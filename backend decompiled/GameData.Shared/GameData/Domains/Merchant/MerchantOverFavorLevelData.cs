@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Merchant;
 
-/// <summary>
-/// 一个商会的一个等级的超好感数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class MerchantOverFavorLevelData : ISerializableGameData, ICloneable
 {
@@ -23,15 +20,9 @@ public class MerchantOverFavorLevelData : ISerializableGameData, ICloneable
 		public static readonly string[] FieldId2FieldName = new string[2] { "BuyCount", "Inventory" };
 	}
 
-	/// <summary>
-	/// 剩余购买次数
-	/// </summary>
 	[SerializableGameDataField]
 	public short BuyCount;
 
-	/// <summary>
-	/// 回购记录
-	/// </summary>
 	[SerializableGameDataField]
 	public Inventory Inventory = new Inventory();
 
@@ -49,13 +40,11 @@ public class MerchantOverFavorLevelData : ISerializableGameData, ICloneable
 		return levelData;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -67,7 +56,6 @@ public class MerchantOverFavorLevelData : ISerializableGameData, ICloneable
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -97,7 +85,6 @@ public class MerchantOverFavorLevelData : ISerializableGameData, ICloneable
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

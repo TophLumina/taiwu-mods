@@ -2,14 +2,8 @@ using System.Collections.Generic;
 
 namespace GameData.Domains.TaiwuEvent.Enum;
 
-/// <summary>
-/// 过月事件行为相关常量定义
-/// </summary>
 public static class ConfigMonthlyActionDefines
 {
-	/// <summary>
-	/// 组织模板ID =&gt; 女版招亲过月事件行为模板ID
-	/// </summary>
 	public static readonly Dictionary<sbyte, short> OrgTemplateIdToContestForTaiwuBride = new Dictionary<sbyte, short>
 	{
 		{ 1, 31 },
@@ -29,9 +23,6 @@ public static class ConfigMonthlyActionDefines
 		{ 15, 45 }
 	};
 
-	/// <summary>
-	/// 功法类型 =&gt; 过月事件行为模板ID
-	/// </summary>
 	public static readonly Dictionary<sbyte, short> CombatSkillTypeToMonthlyAction = new Dictionary<sbyte, short>
 	{
 		{ 3, 62 },
@@ -47,9 +38,6 @@ public static class ConfigMonthlyActionDefines
 		{ 13, 72 }
 	};
 
-	/// <summary>
-	/// 过月事件行为模板ID =&gt; 技艺类型
-	/// </summary>
 	public static readonly Dictionary<short, sbyte> MonthlyActionToLifeSkillType = new Dictionary<short, sbyte>
 	{
 		{ 74, 6 },

@@ -1,48 +1,24 @@
 using System;
 using GameData.Domains.Item.Display;
 using GameData.Serializer;
+using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 物品的索引
-/// </summary>
 public struct ItemKey : ISerializableGameData, ITradeableContent, IEquatable<ItemKey>
 {
-	/// <summary>
-	/// 无效的物品 Key
-	/// </summary>
 	public static readonly ItemKey Invalid = new ItemKey(-1, byte.MaxValue, -1, -1);
 
-	/// <summary>
-	/// 物品类型. <see cref="T:GameData.Domains.Item.ItemType" />
-	/// </summary>
 	public sbyte ItemType;
 
-	/// <summary>
-	/// 变动状态.
-	/// 每个比特表示一种变动状态, 如被淬毒, 被精制等.
-	/// </summary>
 	public byte ModificationState;
 
-	/// <summary>
-	/// 物品模板 ID
-	/// </summary>
 	public short TemplateId;
 
-	/// <summary>
-	/// 物品实例 ID
-	/// </summary>
 	public int Id;
 
-	/// <summary>
-	/// 获取道具模板键
-	/// </summary>
 	public TemplateKey TemplateKey => new TemplateKey(ItemType, TemplateId);
 
-	/// <summary>
-	/// 检查物品是否有模板
-	/// </summary>
 	public bool HasTemplate
 	{
 		get
@@ -52,6 +28,18 @@ public struct ItemKey : ISerializableGameData, ITradeableContent, IEquatable<Ite
 				return ItemType >= 0;
 			}
 			return false;
+		}
+	}
+
+	public ItemKey StackKey
+	{
+		get
+		{
+			if (!ItemTemplateHelper.IsStackable(ItemType, TemplateId))
+			{
+				return this;
+			}
+			return new ItemKey(ItemType, (byte)(ModificationState & -2), TemplateId, ((byte)(ModificationState & -2) != 0) ? Id : 0);
 		}
 	}
 
@@ -104,13 +92,6 @@ public struct ItemKey : ISerializableGameData, ITradeableContent, IEquatable<Ite
 		}
 	}
 
-	/// <summary>
-	/// 物品的索引
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="modificationState"></param>
-	/// <param name="templateId"></param>
-	/// <param name="id"></param>
 	public ItemKey(sbyte itemType, byte modificationState, short templateId, int id)
 	{
 		ItemType = itemType;
@@ -157,9 +138,6 @@ public struct ItemKey : ISerializableGameData, ITradeableContent, IEquatable<Ite
 		return 8;
 	}
 
-	/// <summary>
-	/// 检查物品索引是否有效
-	/// </summary>
 	public bool IsValid()
 	{
 		return Id >= 0;
@@ -193,11 +171,6 @@ public struct ItemKey : ISerializableGameData, ITradeableContent, IEquatable<Ite
 		return false;
 	}
 
-	/// <summary>
-	/// 检查物品模板是否一样
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool TemplateEquals(ItemKey other)
 	{
 		if (ItemType == other.ItemType)
@@ -207,12 +180,6 @@ public struct ItemKey : ISerializableGameData, ITradeableContent, IEquatable<Ite
 		return false;
 	}
 
-	/// <summary>
-	/// 检查物品模板是否一样
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public bool TemplateEquals(sbyte itemType, short templateId)
 	{
 		if (ItemType == itemType)
@@ -238,8 +205,8 @@ public struct ItemKey : ISerializableGameData, ITradeableContent, IEquatable<Ite
 
 	public override string ToString()
 	{
-		string typeName = ((ItemType >= 0) ? GameData.Domains.Item.ItemType.TypeId2TypeName[ItemType] : ItemType.ToString());
-		string name = ((ItemType >= 0 && TemplateId >= 0) ? ItemTemplateHelper.GetName(ItemType, TemplateId) : null);
+		string typeName = (GameData.Domains.Item.ItemType.TypeId2TypeName.CheckIndex(ItemType) ? GameData.Domains.Item.ItemType.TypeId2TypeName[ItemType] : ItemType.ToString());
+		string name = ItemTemplateHelper.GetNameOrDefault(ItemType, TemplateId);
 		string state = Convert.ToString(ModificationState, 2);
 		if (name == null)
 		{

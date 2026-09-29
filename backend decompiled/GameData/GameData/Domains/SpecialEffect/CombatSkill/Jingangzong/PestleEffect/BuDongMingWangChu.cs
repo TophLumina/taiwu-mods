@@ -14,24 +14,20 @@ public class BuDongMingWangChu : PestleEffectBase
 
 	private const sbyte ChangeDamage = 40;
 
-	public BuDongMingWangChu()
-	{
-	}
-
-	public BuDongMingWangChu(int charId)
-		: base(charId, 11405)
+	public BuDongMingWangChu(int charId, SkillEffectKey effectKey)
+		: base(charId, effectKey)
 	{
 	}
 
 	public override void OnEnable(DataContext context)
 	{
+		base.OnEnable(context);
 		AffectDatas = new Dictionary<AffectedDataKey, EDataModifyType>();
 		AffectDatas.Add(new AffectedDataKey(base.CharacterId, 145, -1), EDataModifyType.Add);
 		AffectDatas.Add(new AffectedDataKey(base.CharacterId, 146, -1), EDataModifyType.Add);
 		AffectDatas.Add(new AffectedDataKey(base.CharacterId, 9, -1), EDataModifyType.TotalPercent);
 		AffectDatas.Add(new AffectedDataKey(base.CharacterId, 102, -1), EDataModifyType.TotalPercent);
 		Events.RegisterHandler_ChangeWeapon(OnChangeWeapon);
-		base.OnEnable(context);
 	}
 
 	public override void OnDisable(DataContext context)

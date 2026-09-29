@@ -7,1661 +7,668 @@ namespace Config;
 [Serializable]
 public class Adventure : ConfigData<AdventureItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 返回竹庐
-		/// </summary>
 		public const short ReturnBambooHouse = 0;
 
-		/// <summary>
-		/// 顺河而下
-		/// </summary>
 		public const short DownRiver = 1;
 
-		/// <summary>
-		/// 玄石紫竹
-		/// </summary>
 		public const short RockBamboo = 2;
 
-		/// <summary>
-		/// 英雄猴杰
-		/// </summary>
 		public const short MonkeyHero = 3;
 
-		/// <summary>
-		/// 村中异变
-		/// </summary>
 		public const short VilliageChange = 4;
 
-		/// <summary>
-		/// 荒废驿站
-		/// </summary>
 		public const short AbandonedPost = 5;
 
-		/// <summary>
-		/// 山底暗河
-		/// </summary>
 		public const short UnderhillRiver = 6;
 
-		/// <summary>
-		/// 深谷出口
-		/// </summary>
 		public const short ValleyExit = 7;
 
-		/// <summary>
-		/// 古墓仙人
-		/// </summary>
 		public const short TombImmortal = 8;
 
-		/// <summary>
-		/// 天下武林盟会
-		/// </summary>
 		public const short WulinConference = 9;
 
-		/// <summary>
-		/// 玄竹降世
-		/// </summary>
 		public const short BlackBambooAppear = 10;
 
-		/// <summary>
-		/// 出神之地
-		/// </summary>
 		public const short LandOfTrance = 11;
 
-		/// <summary>
-		/// 长生之死
-		/// </summary>
 		public const short SectMainStoryKongsang_1 = 12;
 
-		/// <summary>
-		/// 敌潜伏龙
-		/// </summary>
 		public const short SectMainStoryFulong_3 = 13;
 
-		/// <summary>
-		/// 诡事悬谜·一
-		/// </summary>
 		public const short SectMainStoryXuehou_2 = 14;
 
-		/// <summary>
-		/// 何为正宗
-		/// </summary>
 		public const short SectMainStoryEmei_2 = 15;
 
-		/// <summary>
-		/// 祭龙盛典
-		/// </summary>
 		public const short SectMainStoryFulong_1 = 16;
 
-		/// <summary>
-		/// 青琅一梦
-		/// </summary>
 		public const short SectMainStoryRanshan_2 = 17;
 
-		/// <summary>
-		/// 三才绝魔大阵
-		/// </summary>
 		public const short SectMainStoryRemakeYuanshan_1 = 18;
 
-		/// <summary>
-		/// 三魔交涉
-		/// </summary>
 		public const short SectMainStoryYuanshan_2 = 19;
 
-		/// <summary>
-		/// 三宗比武
-		/// </summary>
 		public const short SectMainStoryRanshan_1 = 20;
 
-		/// <summary>
-		/// 狮相绝艺
-		/// </summary>
 		public const short SectMainStoryShixiang_1 = 21;
 
-		/// <summary>
-		/// 试剑大典
-		/// </summary>
 		public const short SectMainStoryZhujian_2 = 22;
 
-		/// <summary>
-		/// 手足俱全
-		/// </summary>
 		public const short SectMainStoryZhujian_1 = 23;
 
-		/// <summary>
-		/// 五圣心毒
-		/// </summary>
 		public const short SectMainStoryWuxian_1 = 24;
 
-		/// <summary>
-		/// 五仙异变
-		/// </summary>
 		public const short SectMainStoryWuxian_4 = 25;
 
-		/// <summary>
-		/// 乡村怪病
-		/// </summary>
 		public const short SectMainStoryBaihua_4 = 26;
 
-		/// <summary>
-		/// 心命之争
-		/// </summary>
 		public const short SectMainStoryBaihua_3 = 27;
 
-		/// <summary>
-		/// 星陨坠火
-		/// </summary>
 		public const short SectMainStoryFulong_2 = 28;
 
-		/// <summary>
-		/// 一明幻境·二
-		/// </summary>
 		public const short SectMainStoryXuannv_3 = 29;
 
-		/// <summary>
-		/// 一明幻境·三
-		/// </summary>
 		public const short SectMainStoryXuannv_4 = 30;
 
-		/// <summary>
-		/// 一明幻境·一
-		/// </summary>
 		public const short SectMainStoryXuannv_2 = 31;
 
-		/// <summary>
-		/// 疑梦相悲
-		/// </summary>
 		public const short SectMainStoryXuehou_5 = 32;
 
-		/// <summary>
-		/// 幽墓昔人
-		/// </summary>
 		public const short SectMainStoryXuehou_1 = 33;
 
-		/// <summary>
-		/// 古经迷踪
-		/// </summary>
 		public const short SectMainStoryJingang_1 = 34;
 
-		/// <summary>
-		/// 诡事悬谜·二
-		/// </summary>
 		public const short SectMainStoryXuehou_3 = 35;
 
-		/// <summary>
-		/// 祭星典
-		/// </summary>
 		public const short SectMainStoryWuxian_3 = 36;
 
-		/// <summary>
-		/// 跳盘王
-		/// </summary>
 		public const short SectMainStoryWuxian_2 = 37;
 
-		/// <summary>
-		/// 诡事悬谜·三
-		/// </summary>
 		public const short SectMainStoryXuehou_4 = 38;
 
-		/// <summary>
-		/// 镜里孤鸾
-		/// </summary>
 		public const short SectMainStoryXuannv_1 = 39;
 
-		/// <summary>
-		/// 崖底仙踪
-		/// </summary>
 		public const short SectMainStoryEmei_1 = 40;
 
-		/// <summary>
-		/// 身心交病
-		/// </summary>
 		public const short SectMainStoryBaihua_1 = 41;
 
-		/// <summary>
-		/// 游说三魔
-		/// </summary>
 		public const short SectMainStoryYuanshan_1 = 42;
 
-		/// <summary>
-		/// 起死回生
-		/// </summary>
 		public const short SectMainStoryBaihua_2 = 43;
 
-		/// <summary>
-		/// 黑白踪影
-		/// </summary>
 		public const short SectMainStoryBaihua_6 = 44;
 
-		/// <summary>
-		/// 奇人疑踪
-		/// </summary>
 		public const short SectMainStoryBaihua_5 = 45;
 
-		/// <summary>
-		/// 邪魔现身
-		/// </summary>
 		public const short SectMainStoryYuanshan_3 = 46;
 
-		/// <summary>
-		/// 决战奇人
-		/// </summary>
 		public const short SectMainStoryBaihua_7 = 47;
 
-		/// <summary>
-		/// 复生之人
-		/// </summary>
 		public const short SectMainStoryBaihua_8 = 48;
 
-		/// <summary>
-		/// 城镇集会
-		/// </summary>
 		public const short TownMarket = 49;
 
-		/// <summary>
-		/// 家常茶会
-		/// </summary>
 		public const short TeaParty_1 = 50;
 
-		/// <summary>
-		/// 家常酒宴
-		/// </summary>
 		public const short WineParty_1 = 51;
 
-		/// <summary>
-		/// 酒楼酒宴
-		/// </summary>
 		public const short WineParty_2 = 52;
 
-		/// <summary>
-		/// 青庐交拜
-		/// </summary>
 		public const short MarryAdventure = 53;
 
-		/// <summary>
-		/// 庭院茶会
-		/// </summary>
 		public const short TeaParty_2 = 54;
 
-		/// <summary>
-		/// 庄园茶会
-		/// </summary>
 		public const short TeaParty_3 = 55;
 
-		/// <summary>
-		/// 庄园酒宴
-		/// </summary>
 		public const short WineParty_3 = 56;
 
-		/// <summary>
-		/// 门派争端
-		/// </summary>
 		public const short ElopeWithLove = 57;
 
-		/// <summary>
-		/// 恶丐窝
-		/// </summary>
 		public const short EnemyNest_ViciousBeggarsNest = 58;
 
-		/// <summary>
-		/// 贼人营寨
-		/// </summary>
 		public const short EnemyNest_ThievesCamp = 59;
 
-		/// <summary>
-		/// 悍匪砦
-		/// </summary>
 		public const short EnemyNest_BanditsStronghold = 60;
 
-		/// <summary>
-		/// 叛徒结伙
-		/// </summary>
 		public const short EnemyNest_TraitorsGang = 61;
 
-		/// <summary>
-		/// 恶人谷
-		/// </summary>
 		public const short EnemyNest_VillainsValley = 62;
 
-		/// <summary>
-		/// 迷香阵
-		/// </summary>
 		public const short EnemyNest_Mixiangzhen = 63;
 
-		/// <summary>
-		/// 乱葬岗
-		/// </summary>
 		public const short EnemyNest_MassGrave = 64;
 
-		/// <summary>
-		/// 异士居
-		/// </summary>
 		public const short EnemyNest_HereticHome = 65;
 
-		/// <summary>
-		/// 邪人死地
-		/// </summary>
 		public const short EnemyNest_EvilGround = 66;
 
-		/// <summary>
-		/// 修罗场
-		/// </summary>
 		public const short EnemyNest_Xiuluochang = 67;
 
-		/// <summary>
-		/// 群魔乱舞
-		/// </summary>
 		public const short EnemyNest_FlurryofDemons = 68;
 
-		/// <summary>
-		/// 弃世绝境
-		/// </summary>
 		public const short EnemyNest_DeadEnd = 69;
 
-		/// <summary>
-		/// 义士堂
-		/// </summary>
 		public const short RighteousLow = 70;
 
-		/// <summary>
-		/// 任侠会盟
-		/// </summary>
 		public const short RighteousMiddle = 71;
 
-		/// <summary>
-		/// 世外秘境
-		/// </summary>
 		public const short RighteousHigh = 72;
 
-		/// <summary>
-		/// 比武大会·刀法
-		/// </summary>
 		public const short SummerCombatMatch2 = 73;
 
-		/// <summary>
-		/// 比武大会·剑法
-		/// </summary>
 		public const short SummerCombatMatch3 = 74;
 
-		/// <summary>
-		/// 门派较武
-		/// </summary>
 		public const short SectCombatMatch = 75;
 
-		/// <summary>
-		/// 比武大会·乐器
-		/// </summary>
 		public const short SummerCombatMatch1 = 76;
 
-		/// <summary>
-		/// 春日集市
-		/// </summary>
 		public const short SpringMarket = 77;
 
-		/// <summary>
-		/// 比武大会·暗器
-		/// </summary>
 		public const short SummerCombatMatch8 = 78;
 
-		/// <summary>
-		/// 比武大会·长兵
-		/// </summary>
 		public const short SummerCombatMatch11 = 79;
 
-		/// <summary>
-		/// 比武大会·奇门
-		/// </summary>
 		public const short SummerCombatMatch4 = 80;
 
-		/// <summary>
-		/// 比武大会·拳掌
-		/// </summary>
 		public const short SummerCombatMatch6 = 81;
 
-		/// <summary>
-		/// 比武大会·软兵
-		/// </summary>
 		public const short SummerCombatMatch10 = 82;
 
-		/// <summary>
-		/// 比武大会·腿法
-		/// </summary>
 		public const short SummerCombatMatch9 = 83;
 
-		/// <summary>
-		/// 比武大会·御射
-		/// </summary>
 		public const short SummerCombatMatch5 = 84;
 
-		/// <summary>
-		/// 比武大会·指法
-		/// </summary>
 		public const short SummerCombatMatch7 = 85;
 
-		/// <summary>
-		/// 较艺大会·厨艺
-		/// </summary>
 		public const short WinterLifeSkillMatch4 = 86;
 
-		/// <summary>
-		/// 较艺大会·毒术
-		/// </summary>
 		public const short WinterLifeSkillMatch6 = 87;
 
-		/// <summary>
-		/// 较艺大会·锻造
-		/// </summary>
 		public const short WinterLifeSkillMatch = 88;
 
-		/// <summary>
-		/// 较艺大会·巧匠
-		/// </summary>
 		public const short WinterLifeSkillMatch2 = 89;
 
-		/// <summary>
-		/// 较艺大会·医术
-		/// </summary>
 		public const short WinterLifeSkillMatch5 = 90;
 
-		/// <summary>
-		/// 较艺大会·织锦
-		/// </summary>
 		public const short WinterLifeSkillMatch3 = 91;
 
-		/// <summary>
-		/// 较艺大会·制木
-		/// </summary>
 		public const short WinterLifeSkillMatch1 = 92;
 
-		/// <summary>
-		/// 促织大会
-		/// </summary>
 		public const short CricketCompetition = 93;
 
-		/// <summary>
-		/// 比武招亲·成都（女）
-		/// </summary>
 		public const short FemaleMarriageChengDu = 109;
 
-		/// <summary>
-		/// 比武招亲·大理（女）
-		/// </summary>
 		public const short FemaleMarriageDaLi = 110;
 
-		/// <summary>
-		/// 比武招亲·福州（女）
-		/// </summary>
 		public const short FemaleMarriageFuZhou = 111;
 
-		/// <summary>
-		/// 比武招亲·广州（女）
-		/// </summary>
 		public const short FemaleMarriageGuangZhou = 112;
 
-		/// <summary>
-		/// 比武招亲·桂州（女）
-		/// </summary>
 		public const short FemaleMarriageGuiZhou = 113;
 
-		/// <summary>
-		/// 比武招亲·杭州（女）
-		/// </summary>
 		public const short FemaleMarriageHangZhou = 114;
 
-		/// <summary>
-		/// 比武招亲·江陵（女）
-		/// </summary>
 		public const short FemaleMarriageJiangLing = 115;
 
-		/// <summary>
-		/// 比武招亲·京城（女）
-		/// </summary>
 		public const short marryJingCheng = 116;
 
-		/// <summary>
-		/// 比武招亲·辽阳（女）
-		/// </summary>
 		public const short FemaleMarriageLiaoYan = 117;
 
-		/// <summary>
-		/// 比武招亲·秦州（女）
-		/// </summary>
 		public const short FemaleMarriageQinZhou = 118;
 
-		/// <summary>
-		/// 比武招亲·青州（女）
-		/// </summary>
 		public const short FemaleMarriageQingZhou = 119;
 
-		/// <summary>
-		/// 比武招亲·寿春（女）
-		/// </summary>
 		public const short FemaleMarriageShouChun = 120;
 
-		/// <summary>
-		/// 比武招亲·太原（女）
-		/// </summary>
 		public const short FemaleMarriageTaiYuan = 121;
 
-		/// <summary>
-		/// 比武招亲·襄阳（女）
-		/// </summary>
 		public const short FemaleMarriageXiangYang = 122;
 
-		/// <summary>
-		/// 比武招亲·扬州（女）
-		/// </summary>
 		public const short MarryYangzhou = 123;
 
-		/// <summary>
-		/// 祸福相依
-		/// </summary>
 		public const short MedicineOther = 136;
 
-		/// <summary>
-		/// 奇正相征
-		/// </summary>
 		public const short MedicineHitDefuse = 137;
 
-		/// <summary>
-		/// 生死相循
-		/// </summary>
 		public const short MedicineHeal = 138;
 
-		/// <summary>
-		/// 实幻相映
-		/// </summary>
 		public const short MedicineAttackProtect = 139;
 
-		/// <summary>
-		/// 万物相生
-		/// </summary>
 		public const short MedicineDetoxify = 140;
 
-		/// <summary>
-		/// 剑冢“大玄凝”
-		/// </summary>
 		public const short SwordGrave_DaXuanN = 147;
 
-		/// <summary>
-		/// 剑冢“焚神炼”
-		/// </summary>
 		public const short SwordGrave_FenShen = 148;
 
-		/// <summary>
-		/// 剑冢“凤凰茧”
-		/// </summary>
 		public const short SwordGrave_FengHuang = 149;
 
-		/// <summary>
-		/// 剑冢“伏邪铁”
-		/// </summary>
 		public const short SwordGrave_FuXieTie = 150;
 
-		/// <summary>
-		/// 剑冢“鬼神霞”
-		/// </summary>
 		public const short SwordGrave_GuiShenX = 151;
 
-		/// <summary>
-		/// 剑冢“解龙魄”
-		/// </summary>
 		public const short SwordGrave_JieLongP = 152;
 
-		/// <summary>
-		/// 剑冢“莫女衣”
-		/// </summary>
 		public const short SwordGrave_MoNvYi = 153;
 
-		/// <summary>
-		/// 剑冢“囚魔木”
-		/// </summary>
 		public const short SwordGrave_QiuMoMu = 154;
 
-		/// <summary>
-		/// 剑冢“溶尘隐”
-		/// </summary>
 		public const short SwordGrave_Rongchen = 155;
 
-		/// <summary>
-		/// 灭之篇·“大玄凝”
-		/// </summary>
 		public const short Mie_DaXuanN = 156;
 
-		/// <summary>
-		/// 灭之篇·“焚神炼”
-		/// </summary>
 		public const short Mie_FenShen = 157;
 
-		/// <summary>
-		/// 灭之篇·“凤凰茧”
-		/// </summary>
 		public const short Mie_FengHuang = 158;
 
-		/// <summary>
-		/// 灭之篇·“伏邪铁”
-		/// </summary>
 		public const short Mie_FuXieTie = 159;
 
-		/// <summary>
-		/// 灭之篇·“鬼神霞”
-		/// </summary>
 		public const short Mie_GuiShenX = 160;
 
-		/// <summary>
-		/// 灭之篇·“解龙魄”
-		/// </summary>
 		public const short Mie_JieLongP = 161;
 
-		/// <summary>
-		/// 灭之篇·“莫女衣”
-		/// </summary>
 		public const short Mie_MoNvYi = 162;
 
-		/// <summary>
-		/// 灭之篇·“囚魔木”
-		/// </summary>
 		public const short Mie_QiuMoMu = 163;
 
-		/// <summary>
-		/// 灭之篇·“溶尘隐”
-		/// </summary>
 		public const short Mie_Rongchen = 164;
 
-		/// <summary>
-		/// 缘之篇·“大玄凝”
-		/// </summary>
 		public const short Yuan_DaXuanN = 165;
 
-		/// <summary>
-		/// 缘之篇·“焚神炼”
-		/// </summary>
 		public const short Yuan_FenShen = 166;
 
-		/// <summary>
-		/// 缘之篇·“凤凰茧”
-		/// </summary>
 		public const short Yuan_FengHuang = 167;
 
-		/// <summary>
-		/// 缘之篇·“伏邪铁”
-		/// </summary>
 		public const short Yuan_FuXieTie = 168;
 
-		/// <summary>
-		/// 缘之篇·“鬼神霞”
-		/// </summary>
 		public const short Yuan_GuiShenX = 169;
 
-		/// <summary>
-		/// 缘之篇·“解龙魄”
-		/// </summary>
 		public const short Yuan_JieLongP = 170;
 
-		/// <summary>
-		/// 缘之篇·“莫女衣”
-		/// </summary>
 		public const short Yuan_MoNvYi = 171;
 
-		/// <summary>
-		/// 缘之篇·“囚魔木”
-		/// </summary>
 		public const short Yuan_QiuMoMu = 172;
 
-		/// <summary>
-		/// 缘之篇·“溶尘隐”
-		/// </summary>
 		public const short Yuan_Rongchen = 173;
 
-		/// <summary>
-		/// 封魔神光·大玄凝
-		/// </summary>
 		public const short SealEvil_DaXuanN = 174;
 
-		/// <summary>
-		/// 封魔神光·焚神炼
-		/// </summary>
 		public const short SealEvil_FenShen = 175;
 
-		/// <summary>
-		/// 封魔神光·凤凰茧
-		/// </summary>
 		public const short SealEvil_FengHuang = 176;
 
-		/// <summary>
-		/// 封魔神光·伏邪铁
-		/// </summary>
 		public const short SealEvil_FuXieTie = 177;
 
-		/// <summary>
-		/// 封魔神光·鬼神霞
-		/// </summary>
 		public const short SealEvil_GuiShenX = 178;
 
-		/// <summary>
-		/// 封魔神光·解龙魄
-		/// </summary>
 		public const short SealEvil_JieLongP = 179;
 
-		/// <summary>
-		/// 封魔神光·莫女衣
-		/// </summary>
 		public const short SealEvil_MoNvYi = 180;
 
-		/// <summary>
-		/// 封魔神光·囚魔木
-		/// </summary>
 		public const short SealEvil_QiuMoMu = 181;
 
-		/// <summary>
-		/// 封魔神光·溶尘隐
-		/// </summary>
 		public const short SealEvil_Rongchen = 182;
 
-		/// <summary>
-		/// 《八埏至宝经》
-		/// </summary>
 		public const short Queerbook6 = 183;
 
-		/// <summary>
-		/// 《白衣行化笈》
-		/// </summary>
 		public const short Queerbook2 = 184;
 
-		/// <summary>
-		/// 《大全千法》
-		/// </summary>
 		public const short Queerbook3 = 185;
 
-		/// <summary>
-		/// 《化影奇书》
-		/// </summary>
 		public const short Queerbook7 = 186;
 
-		/// <summary>
-		/// 《浑心无字诀》
-		/// </summary>
 		public const short Queerbook1 = 187;
 
-		/// <summary>
-		/// 《九似真藏》
-		/// </summary>
 		public const short Queerbook12 = 188;
 
-		/// <summary>
-		/// 《神女绝音》
-		/// </summary>
 		public const short Queerbook14 = 189;
 
-		/// <summary>
-		/// 《十杀魔罗录》
-		/// </summary>
 		public const short Queerbook9 = 190;
 
-		/// <summary>
-		/// 《天通神术》
-		/// </summary>
 		public const short Queerbook13 = 191;
 
-		/// <summary>
-		/// 《无名剑典》
-		/// </summary>
 		public const short Queerbook8 = 192;
 
-		/// <summary>
-		/// 《无先玄元书》
-		/// </summary>
 		public const short Queerbook11 = 193;
 
-		/// <summary>
-		/// 《象龙演画》
-		/// </summary>
 		public const short Queerbook4 = 194;
 
-		/// <summary>
-		/// 《心观残笺》
-		/// </summary>
 		public const short Queerbook5 = 195;
 
-		/// <summary>
-		/// 《一画开天》
-		/// </summary>
 		public const short Queerbook10 = 196;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 返回竹庐
-		/// </summary>
 		public static AdventureItem ReturnBambooHouse => Instance[(short)0];
 
-		/// <summary>
-		/// 顺河而下
-		/// </summary>
 		public static AdventureItem DownRiver => Instance[(short)1];
 
-		/// <summary>
-		/// 玄石紫竹
-		/// </summary>
 		public static AdventureItem RockBamboo => Instance[(short)2];
 
-		/// <summary>
-		/// 英雄猴杰
-		/// </summary>
 		public static AdventureItem MonkeyHero => Instance[(short)3];
 
-		/// <summary>
-		/// 村中异变
-		/// </summary>
 		public static AdventureItem VilliageChange => Instance[(short)4];
 
-		/// <summary>
-		/// 荒废驿站
-		/// </summary>
 		public static AdventureItem AbandonedPost => Instance[(short)5];
 
-		/// <summary>
-		/// 山底暗河
-		/// </summary>
 		public static AdventureItem UnderhillRiver => Instance[(short)6];
 
-		/// <summary>
-		/// 深谷出口
-		/// </summary>
 		public static AdventureItem ValleyExit => Instance[(short)7];
 
-		/// <summary>
-		/// 古墓仙人
-		/// </summary>
 		public static AdventureItem TombImmortal => Instance[(short)8];
 
-		/// <summary>
-		/// 天下武林盟会
-		/// </summary>
 		public static AdventureItem WulinConference => Instance[(short)9];
 
-		/// <summary>
-		/// 玄竹降世
-		/// </summary>
 		public static AdventureItem BlackBambooAppear => Instance[(short)10];
 
-		/// <summary>
-		/// 出神之地
-		/// </summary>
 		public static AdventureItem LandOfTrance => Instance[(short)11];
 
-		/// <summary>
-		/// 长生之死
-		/// </summary>
 		public static AdventureItem SectMainStoryKongsang_1 => Instance[(short)12];
 
-		/// <summary>
-		/// 敌潜伏龙
-		/// </summary>
 		public static AdventureItem SectMainStoryFulong_3 => Instance[(short)13];
 
-		/// <summary>
-		/// 诡事悬谜·一
-		/// </summary>
 		public static AdventureItem SectMainStoryXuehou_2 => Instance[(short)14];
 
-		/// <summary>
-		/// 何为正宗
-		/// </summary>
 		public static AdventureItem SectMainStoryEmei_2 => Instance[(short)15];
 
-		/// <summary>
-		/// 祭龙盛典
-		/// </summary>
 		public static AdventureItem SectMainStoryFulong_1 => Instance[(short)16];
 
-		/// <summary>
-		/// 青琅一梦
-		/// </summary>
 		public static AdventureItem SectMainStoryRanshan_2 => Instance[(short)17];
 
-		/// <summary>
-		/// 三才绝魔大阵
-		/// </summary>
 		public static AdventureItem SectMainStoryRemakeYuanshan_1 => Instance[(short)18];
 
-		/// <summary>
-		/// 三魔交涉
-		/// </summary>
 		public static AdventureItem SectMainStoryYuanshan_2 => Instance[(short)19];
 
-		/// <summary>
-		/// 三宗比武
-		/// </summary>
 		public static AdventureItem SectMainStoryRanshan_1 => Instance[(short)20];
 
-		/// <summary>
-		/// 狮相绝艺
-		/// </summary>
 		public static AdventureItem SectMainStoryShixiang_1 => Instance[(short)21];
 
-		/// <summary>
-		/// 试剑大典
-		/// </summary>
 		public static AdventureItem SectMainStoryZhujian_2 => Instance[(short)22];
 
-		/// <summary>
-		/// 手足俱全
-		/// </summary>
 		public static AdventureItem SectMainStoryZhujian_1 => Instance[(short)23];
 
-		/// <summary>
-		/// 五圣心毒
-		/// </summary>
 		public static AdventureItem SectMainStoryWuxian_1 => Instance[(short)24];
 
-		/// <summary>
-		/// 五仙异变
-		/// </summary>
 		public static AdventureItem SectMainStoryWuxian_4 => Instance[(short)25];
 
-		/// <summary>
-		/// 乡村怪病
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_4 => Instance[(short)26];
 
-		/// <summary>
-		/// 心命之争
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_3 => Instance[(short)27];
 
-		/// <summary>
-		/// 星陨坠火
-		/// </summary>
 		public static AdventureItem SectMainStoryFulong_2 => Instance[(short)28];
 
-		/// <summary>
-		/// 一明幻境·二
-		/// </summary>
 		public static AdventureItem SectMainStoryXuannv_3 => Instance[(short)29];
 
-		/// <summary>
-		/// 一明幻境·三
-		/// </summary>
 		public static AdventureItem SectMainStoryXuannv_4 => Instance[(short)30];
 
-		/// <summary>
-		/// 一明幻境·一
-		/// </summary>
 		public static AdventureItem SectMainStoryXuannv_2 => Instance[(short)31];
 
-		/// <summary>
-		/// 疑梦相悲
-		/// </summary>
 		public static AdventureItem SectMainStoryXuehou_5 => Instance[(short)32];
 
-		/// <summary>
-		/// 幽墓昔人
-		/// </summary>
 		public static AdventureItem SectMainStoryXuehou_1 => Instance[(short)33];
 
-		/// <summary>
-		/// 古经迷踪
-		/// </summary>
 		public static AdventureItem SectMainStoryJingang_1 => Instance[(short)34];
 
-		/// <summary>
-		/// 诡事悬谜·二
-		/// </summary>
 		public static AdventureItem SectMainStoryXuehou_3 => Instance[(short)35];
 
-		/// <summary>
-		/// 祭星典
-		/// </summary>
 		public static AdventureItem SectMainStoryWuxian_3 => Instance[(short)36];
 
-		/// <summary>
-		/// 跳盘王
-		/// </summary>
 		public static AdventureItem SectMainStoryWuxian_2 => Instance[(short)37];
 
-		/// <summary>
-		/// 诡事悬谜·三
-		/// </summary>
 		public static AdventureItem SectMainStoryXuehou_4 => Instance[(short)38];
 
-		/// <summary>
-		/// 镜里孤鸾
-		/// </summary>
 		public static AdventureItem SectMainStoryXuannv_1 => Instance[(short)39];
 
-		/// <summary>
-		/// 崖底仙踪
-		/// </summary>
 		public static AdventureItem SectMainStoryEmei_1 => Instance[(short)40];
 
-		/// <summary>
-		/// 身心交病
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_1 => Instance[(short)41];
 
-		/// <summary>
-		/// 游说三魔
-		/// </summary>
 		public static AdventureItem SectMainStoryYuanshan_1 => Instance[(short)42];
 
-		/// <summary>
-		/// 起死回生
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_2 => Instance[(short)43];
 
-		/// <summary>
-		/// 黑白踪影
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_6 => Instance[(short)44];
 
-		/// <summary>
-		/// 奇人疑踪
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_5 => Instance[(short)45];
 
-		/// <summary>
-		/// 邪魔现身
-		/// </summary>
 		public static AdventureItem SectMainStoryYuanshan_3 => Instance[(short)46];
 
-		/// <summary>
-		/// 决战奇人
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_7 => Instance[(short)47];
 
-		/// <summary>
-		/// 复生之人
-		/// </summary>
 		public static AdventureItem SectMainStoryBaihua_8 => Instance[(short)48];
 
-		/// <summary>
-		/// 城镇集会
-		/// </summary>
 		public static AdventureItem TownMarket => Instance[(short)49];
 
-		/// <summary>
-		/// 家常茶会
-		/// </summary>
 		public static AdventureItem TeaParty_1 => Instance[(short)50];
 
-		/// <summary>
-		/// 家常酒宴
-		/// </summary>
 		public static AdventureItem WineParty_1 => Instance[(short)51];
 
-		/// <summary>
-		/// 酒楼酒宴
-		/// </summary>
 		public static AdventureItem WineParty_2 => Instance[(short)52];
 
-		/// <summary>
-		/// 青庐交拜
-		/// </summary>
 		public static AdventureItem MarryAdventure => Instance[(short)53];
 
-		/// <summary>
-		/// 庭院茶会
-		/// </summary>
 		public static AdventureItem TeaParty_2 => Instance[(short)54];
 
-		/// <summary>
-		/// 庄园茶会
-		/// </summary>
 		public static AdventureItem TeaParty_3 => Instance[(short)55];
 
-		/// <summary>
-		/// 庄园酒宴
-		/// </summary>
 		public static AdventureItem WineParty_3 => Instance[(short)56];
 
-		/// <summary>
-		/// 门派争端
-		/// </summary>
 		public static AdventureItem ElopeWithLove => Instance[(short)57];
 
-		/// <summary>
-		/// 恶丐窝
-		/// </summary>
 		public static AdventureItem EnemyNest_ViciousBeggarsNest => Instance[(short)58];
 
-		/// <summary>
-		/// 贼人营寨
-		/// </summary>
 		public static AdventureItem EnemyNest_ThievesCamp => Instance[(short)59];
 
-		/// <summary>
-		/// 悍匪砦
-		/// </summary>
 		public static AdventureItem EnemyNest_BanditsStronghold => Instance[(short)60];
 
-		/// <summary>
-		/// 叛徒结伙
-		/// </summary>
 		public static AdventureItem EnemyNest_TraitorsGang => Instance[(short)61];
 
-		/// <summary>
-		/// 恶人谷
-		/// </summary>
 		public static AdventureItem EnemyNest_VillainsValley => Instance[(short)62];
 
-		/// <summary>
-		/// 迷香阵
-		/// </summary>
 		public static AdventureItem EnemyNest_Mixiangzhen => Instance[(short)63];
 
-		/// <summary>
-		/// 乱葬岗
-		/// </summary>
 		public static AdventureItem EnemyNest_MassGrave => Instance[(short)64];
 
-		/// <summary>
-		/// 异士居
-		/// </summary>
 		public static AdventureItem EnemyNest_HereticHome => Instance[(short)65];
 
-		/// <summary>
-		/// 邪人死地
-		/// </summary>
 		public static AdventureItem EnemyNest_EvilGround => Instance[(short)66];
 
-		/// <summary>
-		/// 修罗场
-		/// </summary>
 		public static AdventureItem EnemyNest_Xiuluochang => Instance[(short)67];
 
-		/// <summary>
-		/// 群魔乱舞
-		/// </summary>
 		public static AdventureItem EnemyNest_FlurryofDemons => Instance[(short)68];
 
-		/// <summary>
-		/// 弃世绝境
-		/// </summary>
 		public static AdventureItem EnemyNest_DeadEnd => Instance[(short)69];
 
-		/// <summary>
-		/// 义士堂
-		/// </summary>
 		public static AdventureItem RighteousLow => Instance[(short)70];
 
-		/// <summary>
-		/// 任侠会盟
-		/// </summary>
 		public static AdventureItem RighteousMiddle => Instance[(short)71];
 
-		/// <summary>
-		/// 世外秘境
-		/// </summary>
 		public static AdventureItem RighteousHigh => Instance[(short)72];
 
-		/// <summary>
-		/// 比武大会·刀法
-		/// </summary>
 		public static AdventureItem SummerCombatMatch2 => Instance[(short)73];
 
-		/// <summary>
-		/// 比武大会·剑法
-		/// </summary>
 		public static AdventureItem SummerCombatMatch3 => Instance[(short)74];
 
-		/// <summary>
-		/// 门派较武
-		/// </summary>
 		public static AdventureItem SectCombatMatch => Instance[(short)75];
 
-		/// <summary>
-		/// 比武大会·乐器
-		/// </summary>
 		public static AdventureItem SummerCombatMatch1 => Instance[(short)76];
 
-		/// <summary>
-		/// 春日集市
-		/// </summary>
 		public static AdventureItem SpringMarket => Instance[(short)77];
 
-		/// <summary>
-		/// 比武大会·暗器
-		/// </summary>
 		public static AdventureItem SummerCombatMatch8 => Instance[(short)78];
 
-		/// <summary>
-		/// 比武大会·长兵
-		/// </summary>
 		public static AdventureItem SummerCombatMatch11 => Instance[(short)79];
 
-		/// <summary>
-		/// 比武大会·奇门
-		/// </summary>
 		public static AdventureItem SummerCombatMatch4 => Instance[(short)80];
 
-		/// <summary>
-		/// 比武大会·拳掌
-		/// </summary>
 		public static AdventureItem SummerCombatMatch6 => Instance[(short)81];
 
-		/// <summary>
-		/// 比武大会·软兵
-		/// </summary>
 		public static AdventureItem SummerCombatMatch10 => Instance[(short)82];
 
-		/// <summary>
-		/// 比武大会·腿法
-		/// </summary>
 		public static AdventureItem SummerCombatMatch9 => Instance[(short)83];
 
-		/// <summary>
-		/// 比武大会·御射
-		/// </summary>
 		public static AdventureItem SummerCombatMatch5 => Instance[(short)84];
 
-		/// <summary>
-		/// 比武大会·指法
-		/// </summary>
 		public static AdventureItem SummerCombatMatch7 => Instance[(short)85];
 
-		/// <summary>
-		/// 较艺大会·厨艺
-		/// </summary>
 		public static AdventureItem WinterLifeSkillMatch4 => Instance[(short)86];
 
-		/// <summary>
-		/// 较艺大会·毒术
-		/// </summary>
 		public static AdventureItem WinterLifeSkillMatch6 => Instance[(short)87];
 
-		/// <summary>
-		/// 较艺大会·锻造
-		/// </summary>
 		public static AdventureItem WinterLifeSkillMatch => Instance[(short)88];
 
-		/// <summary>
-		/// 较艺大会·巧匠
-		/// </summary>
 		public static AdventureItem WinterLifeSkillMatch2 => Instance[(short)89];
 
-		/// <summary>
-		/// 较艺大会·医术
-		/// </summary>
 		public static AdventureItem WinterLifeSkillMatch5 => Instance[(short)90];
 
-		/// <summary>
-		/// 较艺大会·织锦
-		/// </summary>
 		public static AdventureItem WinterLifeSkillMatch3 => Instance[(short)91];
 
-		/// <summary>
-		/// 较艺大会·制木
-		/// </summary>
 		public static AdventureItem WinterLifeSkillMatch1 => Instance[(short)92];
 
-		/// <summary>
-		/// 促织大会
-		/// </summary>
 		public static AdventureItem CricketCompetition => Instance[(short)93];
 
-		/// <summary>
-		/// 比武招亲·成都（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageChengDu => Instance[(short)109];
 
-		/// <summary>
-		/// 比武招亲·大理（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageDaLi => Instance[(short)110];
 
-		/// <summary>
-		/// 比武招亲·福州（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageFuZhou => Instance[(short)111];
 
-		/// <summary>
-		/// 比武招亲·广州（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageGuangZhou => Instance[(short)112];
 
-		/// <summary>
-		/// 比武招亲·桂州（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageGuiZhou => Instance[(short)113];
 
-		/// <summary>
-		/// 比武招亲·杭州（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageHangZhou => Instance[(short)114];
 
-		/// <summary>
-		/// 比武招亲·江陵（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageJiangLing => Instance[(short)115];
 
-		/// <summary>
-		/// 比武招亲·京城（女）
-		/// </summary>
 		public static AdventureItem marryJingCheng => Instance[(short)116];
 
-		/// <summary>
-		/// 比武招亲·辽阳（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageLiaoYan => Instance[(short)117];
 
-		/// <summary>
-		/// 比武招亲·秦州（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageQinZhou => Instance[(short)118];
 
-		/// <summary>
-		/// 比武招亲·青州（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageQingZhou => Instance[(short)119];
 
-		/// <summary>
-		/// 比武招亲·寿春（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageShouChun => Instance[(short)120];
 
-		/// <summary>
-		/// 比武招亲·太原（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageTaiYuan => Instance[(short)121];
 
-		/// <summary>
-		/// 比武招亲·襄阳（女）
-		/// </summary>
 		public static AdventureItem FemaleMarriageXiangYang => Instance[(short)122];
 
-		/// <summary>
-		/// 比武招亲·扬州（女）
-		/// </summary>
 		public static AdventureItem MarryYangzhou => Instance[(short)123];
 
-		/// <summary>
-		/// 祸福相依
-		/// </summary>
 		public static AdventureItem MedicineOther => Instance[(short)136];
 
-		/// <summary>
-		/// 奇正相征
-		/// </summary>
 		public static AdventureItem MedicineHitDefuse => Instance[(short)137];
 
-		/// <summary>
-		/// 生死相循
-		/// </summary>
 		public static AdventureItem MedicineHeal => Instance[(short)138];
 
-		/// <summary>
-		/// 实幻相映
-		/// </summary>
 		public static AdventureItem MedicineAttackProtect => Instance[(short)139];
 
-		/// <summary>
-		/// 万物相生
-		/// </summary>
 		public static AdventureItem MedicineDetoxify => Instance[(short)140];
 
-		/// <summary>
-		/// 剑冢“大玄凝”
-		/// </summary>
 		public static AdventureItem SwordGrave_DaXuanN => Instance[(short)147];
 
-		/// <summary>
-		/// 剑冢“焚神炼”
-		/// </summary>
 		public static AdventureItem SwordGrave_FenShen => Instance[(short)148];
 
-		/// <summary>
-		/// 剑冢“凤凰茧”
-		/// </summary>
 		public static AdventureItem SwordGrave_FengHuang => Instance[(short)149];
 
-		/// <summary>
-		/// 剑冢“伏邪铁”
-		/// </summary>
 		public static AdventureItem SwordGrave_FuXieTie => Instance[(short)150];
 
-		/// <summary>
-		/// 剑冢“鬼神霞”
-		/// </summary>
 		public static AdventureItem SwordGrave_GuiShenX => Instance[(short)151];
 
-		/// <summary>
-		/// 剑冢“解龙魄”
-		/// </summary>
 		public static AdventureItem SwordGrave_JieLongP => Instance[(short)152];
 
-		/// <summary>
-		/// 剑冢“莫女衣”
-		/// </summary>
 		public static AdventureItem SwordGrave_MoNvYi => Instance[(short)153];
 
-		/// <summary>
-		/// 剑冢“囚魔木”
-		/// </summary>
 		public static AdventureItem SwordGrave_QiuMoMu => Instance[(short)154];
 
-		/// <summary>
-		/// 剑冢“溶尘隐”
-		/// </summary>
 		public static AdventureItem SwordGrave_Rongchen => Instance[(short)155];
 
-		/// <summary>
-		/// 灭之篇·“大玄凝”
-		/// </summary>
 		public static AdventureItem Mie_DaXuanN => Instance[(short)156];
 
-		/// <summary>
-		/// 灭之篇·“焚神炼”
-		/// </summary>
 		public static AdventureItem Mie_FenShen => Instance[(short)157];
 
-		/// <summary>
-		/// 灭之篇·“凤凰茧”
-		/// </summary>
 		public static AdventureItem Mie_FengHuang => Instance[(short)158];
 
-		/// <summary>
-		/// 灭之篇·“伏邪铁”
-		/// </summary>
 		public static AdventureItem Mie_FuXieTie => Instance[(short)159];
 
-		/// <summary>
-		/// 灭之篇·“鬼神霞”
-		/// </summary>
 		public static AdventureItem Mie_GuiShenX => Instance[(short)160];
 
-		/// <summary>
-		/// 灭之篇·“解龙魄”
-		/// </summary>
 		public static AdventureItem Mie_JieLongP => Instance[(short)161];
 
-		/// <summary>
-		/// 灭之篇·“莫女衣”
-		/// </summary>
 		public static AdventureItem Mie_MoNvYi => Instance[(short)162];
 
-		/// <summary>
-		/// 灭之篇·“囚魔木”
-		/// </summary>
 		public static AdventureItem Mie_QiuMoMu => Instance[(short)163];
 
-		/// <summary>
-		/// 灭之篇·“溶尘隐”
-		/// </summary>
 		public static AdventureItem Mie_Rongchen => Instance[(short)164];
 
-		/// <summary>
-		/// 缘之篇·“大玄凝”
-		/// </summary>
 		public static AdventureItem Yuan_DaXuanN => Instance[(short)165];
 
-		/// <summary>
-		/// 缘之篇·“焚神炼”
-		/// </summary>
 		public static AdventureItem Yuan_FenShen => Instance[(short)166];
 
-		/// <summary>
-		/// 缘之篇·“凤凰茧”
-		/// </summary>
 		public static AdventureItem Yuan_FengHuang => Instance[(short)167];
 
-		/// <summary>
-		/// 缘之篇·“伏邪铁”
-		/// </summary>
 		public static AdventureItem Yuan_FuXieTie => Instance[(short)168];
 
-		/// <summary>
-		/// 缘之篇·“鬼神霞”
-		/// </summary>
 		public static AdventureItem Yuan_GuiShenX => Instance[(short)169];
 
-		/// <summary>
-		/// 缘之篇·“解龙魄”
-		/// </summary>
 		public static AdventureItem Yuan_JieLongP => Instance[(short)170];
 
-		/// <summary>
-		/// 缘之篇·“莫女衣”
-		/// </summary>
 		public static AdventureItem Yuan_MoNvYi => Instance[(short)171];
 
-		/// <summary>
-		/// 缘之篇·“囚魔木”
-		/// </summary>
 		public static AdventureItem Yuan_QiuMoMu => Instance[(short)172];
 
-		/// <summary>
-		/// 缘之篇·“溶尘隐”
-		/// </summary>
 		public static AdventureItem Yuan_Rongchen => Instance[(short)173];
 
-		/// <summary>
-		/// 封魔神光·大玄凝
-		/// </summary>
 		public static AdventureItem SealEvil_DaXuanN => Instance[(short)174];
 
-		/// <summary>
-		/// 封魔神光·焚神炼
-		/// </summary>
 		public static AdventureItem SealEvil_FenShen => Instance[(short)175];
 
-		/// <summary>
-		/// 封魔神光·凤凰茧
-		/// </summary>
 		public static AdventureItem SealEvil_FengHuang => Instance[(short)176];
 
-		/// <summary>
-		/// 封魔神光·伏邪铁
-		/// </summary>
 		public static AdventureItem SealEvil_FuXieTie => Instance[(short)177];
 
-		/// <summary>
-		/// 封魔神光·鬼神霞
-		/// </summary>
 		public static AdventureItem SealEvil_GuiShenX => Instance[(short)178];
 
-		/// <summary>
-		/// 封魔神光·解龙魄
-		/// </summary>
 		public static AdventureItem SealEvil_JieLongP => Instance[(short)179];
 
-		/// <summary>
-		/// 封魔神光·莫女衣
-		/// </summary>
 		public static AdventureItem SealEvil_MoNvYi => Instance[(short)180];
 
-		/// <summary>
-		/// 封魔神光·囚魔木
-		/// </summary>
 		public static AdventureItem SealEvil_QiuMoMu => Instance[(short)181];
 
-		/// <summary>
-		/// 封魔神光·溶尘隐
-		/// </summary>
 		public static AdventureItem SealEvil_Rongchen => Instance[(short)182];
 
-		/// <summary>
-		/// 《八埏至宝经》
-		/// </summary>
 		public static AdventureItem Queerbook6 => Instance[(short)183];
 
-		/// <summary>
-		/// 《白衣行化笈》
-		/// </summary>
 		public static AdventureItem Queerbook2 => Instance[(short)184];
 
-		/// <summary>
-		/// 《大全千法》
-		/// </summary>
 		public static AdventureItem Queerbook3 => Instance[(short)185];
 
-		/// <summary>
-		/// 《化影奇书》
-		/// </summary>
 		public static AdventureItem Queerbook7 => Instance[(short)186];
 
-		/// <summary>
-		/// 《浑心无字诀》
-		/// </summary>
 		public static AdventureItem Queerbook1 => Instance[(short)187];
 
-		/// <summary>
-		/// 《九似真藏》
-		/// </summary>
 		public static AdventureItem Queerbook12 => Instance[(short)188];
 
-		/// <summary>
-		/// 《神女绝音》
-		/// </summary>
 		public static AdventureItem Queerbook14 => Instance[(short)189];
 
-		/// <summary>
-		/// 《十杀魔罗录》
-		/// </summary>
 		public static AdventureItem Queerbook9 => Instance[(short)190];
 
-		/// <summary>
-		/// 《天通神术》
-		/// </summary>
 		public static AdventureItem Queerbook13 => Instance[(short)191];
 
-		/// <summary>
-		/// 《无名剑典》
-		/// </summary>
 		public static AdventureItem Queerbook8 => Instance[(short)192];
 
-		/// <summary>
-		/// 《无先玄元书》
-		/// </summary>
 		public static AdventureItem Queerbook11 => Instance[(short)193];
 
-		/// <summary>
-		/// 《象龙演画》
-		/// </summary>
 		public static AdventureItem Queerbook4 => Instance[(short)194];
 
-		/// <summary>
-		/// 《心观残笺》
-		/// </summary>
 		public static AdventureItem Queerbook5 => Instance[(short)195];
 
-		/// <summary>
-		/// 《一画开天》
-		/// </summary>
 		public static AdventureItem Queerbook10 => Instance[(short)196];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Adventure Instance = new Adventure();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

@@ -4,121 +4,64 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 村民选人界面专用显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class VillagerSelectCharacterDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 基础显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayDataForGeneralScrollList MainData;
 
-	/// <summary>
-	/// 工作类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte WorkType;
 
-	/// <summary>
-	/// 工作状态
-	/// </summary>
 	[SerializableGameDataField]
 	public byte WorkStatus;
 
-	/// <summary>
-	/// 身份安排ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int ArrangementTemplateId;
 
-	/// <summary>
-	/// 建筑块模板ID（用于经营地点显示）
-	/// </summary>
 	[SerializableGameDataField]
 	public int BuildingBlockTemplateId;
 
-	/// <summary>
-	/// 是否为买入操作（用于经营岗位区分）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsBuyOperation;
 
-	/// <summary>
-	/// 是否为领队
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsWorkLeader;
 
-	/// <summary>
-	/// 陵墓ID（守墓时使用）
-	/// </summary>
 	[SerializableGameDataField]
 	public int GraveId;
 
-	/// <summary>
-	/// 剑冢ID（守护剑冢时使用）
-	/// </summary>
 	[SerializableGameDataField]
 	public int SwordTombId;
 
-	/// <summary>
-	/// 位置数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterTableLocationData LocationData;
 
-	/// <summary>
-	/// 组织信息（用于身份显示）
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrgInfo;
 
-	/// <summary>
-	/// 关系数据（用于筛选）
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationToTaiwu;
 
 	[SerializableGameDataField]
 	public ushort RelationFromTaiwu;
 
-	/// <summary>
-	/// 村民身份ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short RoleTemplateId;
 
-	/// <summary>
-	/// 剩余潜力次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LeftPotentialCount;
 
-	/// <summary>
-	/// 技艺造诣（建筑派遣选人显示所需造诣）
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 武学造诣（建筑派遣选人显示所需造诣）
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillAttainments;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public VillagerSelectCharacterDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public VillagerSelectCharacterDisplayData(VillagerSelectCharacterDisplayData other)
 	{
 		MainData = new CharacterDisplayDataForGeneralScrollList(other.MainData);
@@ -140,9 +83,6 @@ public class VillagerSelectCharacterDisplayData : ISerializableGameData
 		CombatSkillAttainments = other.CombatSkillAttainments;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(VillagerSelectCharacterDisplayData other)
 	{
 		MainData = new CharacterDisplayDataForGeneralScrollList(other.MainData);
@@ -171,11 +111,8 @@ public class VillagerSelectCharacterDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 47;
+		int totalSize = 115;
 		totalSize = ((MainData == null) ? (totalSize + 2) : (totalSize + (2 + MainData.GetSerializedSize())));
-		totalSize += OrgInfo.GetSerializedSize();
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize += CombatSkillAttainments.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

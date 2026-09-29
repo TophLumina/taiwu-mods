@@ -7,171 +7,72 @@ namespace Config;
 [Serializable]
 public class EnemyNest : ConfigData<EnemyNestItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 恶丐窝
-		/// </summary>
 		public const short ViciousBeggarsNest = 0;
 
-		/// <summary>
-		/// 贼人营寨
-		/// </summary>
 		public const short ThievesCamp = 1;
 
-		/// <summary>
-		/// 悍匪砦
-		/// </summary>
 		public const short BanditsStronghold = 2;
 
-		/// <summary>
-		/// 叛徒结伙
-		/// </summary>
 		public const short TraitorsGang = 3;
 
-		/// <summary>
-		/// 恶人谷
-		/// </summary>
 		public const short VillainsValley = 4;
 
-		/// <summary>
-		/// 迷香阵
-		/// </summary>
 		public const short Mixiangzhen = 5;
 
-		/// <summary>
-		/// 乱葬岗
-		/// </summary>
 		public const short MassGrave = 6;
 
-		/// <summary>
-		/// 异士居
-		/// </summary>
 		public const short HereticHome = 7;
 
-		/// <summary>
-		/// 邪人死地
-		/// </summary>
 		public const short EvilGround = 8;
 
-		/// <summary>
-		/// 修罗场
-		/// </summary>
 		public const short Xiuluochang = 9;
 
-		/// <summary>
-		/// 群魔乱舞
-		/// </summary>
 		public const short FlurryofDemons = 10;
 
-		/// <summary>
-		/// 弃世绝境
-		/// </summary>
 		public const short DeadEnd = 11;
 
-		/// <summary>
-		/// 义士堂
-		/// </summary>
 		public const short HallOfTheRighteous = 12;
 
-		/// <summary>
-		/// 任侠会盟
-		/// </summary>
 		public const short HerosLeague = 13;
 
-		/// <summary>
-		/// 世外秘境
-		/// </summary>
 		public const short UnchartedTerritory = 14;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 恶丐窝
-		/// </summary>
 		public static EnemyNestItem ViciousBeggarsNest => Instance[(short)0];
 
-		/// <summary>
-		/// 贼人营寨
-		/// </summary>
 		public static EnemyNestItem ThievesCamp => Instance[(short)1];
 
-		/// <summary>
-		/// 悍匪砦
-		/// </summary>
 		public static EnemyNestItem BanditsStronghold => Instance[(short)2];
 
-		/// <summary>
-		/// 叛徒结伙
-		/// </summary>
 		public static EnemyNestItem TraitorsGang => Instance[(short)3];
 
-		/// <summary>
-		/// 恶人谷
-		/// </summary>
 		public static EnemyNestItem VillainsValley => Instance[(short)4];
 
-		/// <summary>
-		/// 迷香阵
-		/// </summary>
 		public static EnemyNestItem Mixiangzhen => Instance[(short)5];
 
-		/// <summary>
-		/// 乱葬岗
-		/// </summary>
 		public static EnemyNestItem MassGrave => Instance[(short)6];
 
-		/// <summary>
-		/// 异士居
-		/// </summary>
 		public static EnemyNestItem HereticHome => Instance[(short)7];
 
-		/// <summary>
-		/// 邪人死地
-		/// </summary>
 		public static EnemyNestItem EvilGround => Instance[(short)8];
 
-		/// <summary>
-		/// 修罗场
-		/// </summary>
 		public static EnemyNestItem Xiuluochang => Instance[(short)9];
 
-		/// <summary>
-		/// 群魔乱舞
-		/// </summary>
 		public static EnemyNestItem FlurryofDemons => Instance[(short)10];
 
-		/// <summary>
-		/// 弃世绝境
-		/// </summary>
 		public static EnemyNestItem DeadEnd => Instance[(short)11];
 
-		/// <summary>
-		/// 义士堂
-		/// </summary>
 		public static EnemyNestItem HallOfTheRighteous => Instance[(short)12];
 
-		/// <summary>
-		/// 任侠会盟
-		/// </summary>
 		public static EnemyNestItem HerosLeague => Instance[(short)13];
 
-		/// <summary>
-		/// 世外秘境
-		/// </summary>
 		public static EnemyNestItem UnchartedTerritory => Instance[(short)14];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EnemyNest Instance = new EnemyNest();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TipTitle", "TipDesc", "Members", "Leader", "MonthlyActionId", "AdventureId", "TemplateId", "SpawnAmountFactors" };

@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 旅行僧相关数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializableGameData
 {
@@ -27,52 +24,24 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		public static readonly string[] FieldId2FieldName = new string[4] { "StateTempleVisited", "StateTempleLocation", "GeneratedTempleIndices", "SelectedSkill3FeatureId" };
 	}
 
-	/// <summary>
-	/// 每次生成的寺庙数量
-	/// </summary>
 	public const int GenerateTempleCount = 5;
 
-	/// <summary>
-	/// 4技能默认特性。
-	/// </summary>
 	public const short DefaultSelectedSkill3FeatureId = 252;
 
-	/// <summary>
-	/// 各个州域的寺庙是否被访问过
-	/// areaId -&gt; 是否访问过
-	/// 这里是用数组当Dict用，实际生成了哪些寺庙，要根据_generatedTempleIndices才知道哪些州域是生成了寺庙的
-	/// </summary>
 	[SerializableGameDataField]
 	private bool[] _stateTempleVisited;
 
-	/// <summary>
-	/// 各个州域的寺庙所在位置
-	/// areaId -&gt; 寺庙地点 blockId
-	/// 这里是用数组当Dict用，实际生成了哪些寺庙，要根据_generatedTempleIndices才知道哪些州域是生成了寺庙的
-	/// </summary>
 	[SerializableGameDataField]
 	private Location[] _stateTempleLocation;
 
-	/// <summary>
-	/// 哪些下标的州域生成了寺庙
-	/// </summary>
 	[SerializableGameDataField]
 	private List<int> _generatedTempleIndices;
 
-	/// <summary>
-	/// 4技能选中的特性是哪个。用于重新装配技能时，自动赋予太吾上次选择的特性。
-	/// 如果是-1，则会在装配时自动选择九世轮回特性中的第一个，并记录。
-	/// 只要4技能装配中，这个值不能是-1。
-	/// </summary>
 	[SerializableGameDataField]
 	private short _selectedSkill3FeatureId;
 
-	/// <summary>
-	/// 是否拜访完所有寺庙
-	/// </summary>
 	public bool HasVisitedAllTemple => GetVisitedTempleCount() >= 15;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		_generatedTempleIndices?.Clear();
@@ -86,7 +55,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		}
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 		if (sourceData is ObsoleteTravelingBuddhistMonkSkillsData)
@@ -96,9 +64,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		}
 	}
 
-	/// <summary>
-	/// 在指定地块创建寺庙, 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
 	public void OfflineCreateTemple(sbyte stateId, Location location)
 	{
 		_stateTempleLocation[stateId] = location;
@@ -112,9 +77,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		}
 	}
 
-	/// <summary>
-	/// 将指定区域的寺庙设为已访问, 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
 	public void OfflineSetStateTempleVisited(sbyte stateId)
 	{
 		if (!_stateTempleVisited[stateId])
@@ -137,10 +99,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		}
 	}
 
-	/// <summary>
-	/// 获取被访问的寺庙数量
-	/// </summary>
-	/// <returns></returns>
 	public int GetVisitedTempleCount()
 	{
 		return _stateTempleVisited.Count((bool x) => x);
@@ -151,9 +109,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		return _generatedTempleIndices?.Contains(index) ?? false;
 	}
 
-	/// <summary>
-	/// 检查指定区域是否建立过寺庙
-	/// </summary>
 	public bool StateHasTemple(sbyte stateId)
 	{
 		if (IsGeneratedTempleIndex(stateId) && _stateTempleLocation.CheckIndex(stateId))
@@ -172,9 +127,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		return _stateTempleLocation[stateId];
 	}
 
-	/// <summary>
-	/// 检查指定区域的寺庙是否被访问过
-	/// </summary>
 	public bool IsStateTempleVisited(sbyte stateId)
 	{
 		if (_stateTempleVisited.CheckIndex(stateId))
@@ -200,9 +152,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		_selectedSkill3FeatureId = featureId;
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TravelingBuddhistMonkSkillsData(TravelingBuddhistMonkSkillsData other)
 	{
 		bool[] item = other._stateTempleVisited;
@@ -223,9 +172,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		_selectedSkill3FeatureId = other._selectedSkill3FeatureId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TravelingBuddhistMonkSkillsData other)
 	{
 		bool[] item = other._stateTempleVisited;
@@ -246,13 +192,11 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		_selectedSkill3FeatureId = other._selectedSkill3FeatureId;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -266,7 +210,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -332,7 +275,6 @@ public class TravelingBuddhistMonkSkillsData : IProfessionSkillsData, ISerializa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

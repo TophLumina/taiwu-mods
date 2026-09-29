@@ -3,18 +3,11 @@ using GameData.Domains.Item;
 using GameData.Domains.Taiwu.Profession;
 using GameData.Serializer;
 using GameData.Utilities;
+using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 地格人物列表的人物TIP所需数据
-/// </summary>
-/// <summary>
-/// 对于引用类型字段, 构造函数中可以不创建对象, 保留默认的 null 值.
-/// 在进行反序列化时, 允许所有引用类型字段都为 null.
-/// 但是在序列化时, 要求所有是定长集合的引用字段都已经被创建, 且长度与定义一致. 集合中的引用类型元素若也为定长, 则也必须被创建; 变长的则可以为 null.
-/// </summary>
-[SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
+[AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class CharacterDisplayDataForMapBlock : ISerializableGameData
 {
 	[SerializableGameDataField]
@@ -41,9 +34,6 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 隐居
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsReclusiveChar;
 
@@ -59,9 +49,6 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 	[SerializableGameDataField]
 	public OrganizationInfo OrganizationInfo;
 
-	/// <summary>
-	/// 势力值
-	/// </summary>
 	[SerializableGameDataField]
 	public int InfluencePower;
 
@@ -71,307 +58,201 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 	[SerializableGameDataField]
 	public short LeftMaxHealth;
 
-	/// <summary>
-	/// 称号ID列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> TitleIdList;
 
-	/// <summary>
-	/// 轮回
-	/// </summary>
 	[SerializableGameDataField]
 	public short PreexistenceCharCount;
 
-	/// <summary>
-	/// 内息紊乱
-	/// </summary>
 	[SerializableGameDataField]
 	public short DisorderOfQi;
 
-	/// <summary>
-	/// 内力五行
-	/// </summary>
 	[SerializableGameDataField]
 	public NeiliProportionOfFiveElements NeiliProportionOfFiveElements;
 
-	/// <summary>
-	/// 精纯
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ConsummateLevel;
 
-	/// <summary>
-	/// 出生月份
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BirthMonth;
 
-	/// <summary>
-	/// 进攻
-	/// </summary>
 	[SerializableGameDataField]
 	public int AttackMedal;
 
-	/// <summary>
-	/// 守御
-	/// </summary>
 	[SerializableGameDataField]
 	public int DefenceMedal;
 
-	/// <summary>
-	/// 机略
-	/// </summary>
 	[SerializableGameDataField]
 	public int WisdomMedal;
 
-	/// <summary>
-	/// 伤势
-	/// </summary>
 	[SerializableGameDataField]
 	public Injuries Injuries;
 
-	/// <summary>
-	/// 毒素
-	/// </summary>
 	[SerializableGameDataField]
 	public PoisonInts Poisons;
 
-	/// <summary>
-	/// 同道指令
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> TeammateCommands;
 
-	/// <summary>
-	/// 对太吾的关系的列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> RelationshipToTaiwuList;
 
-	/// <summary>
-	/// 喜恶数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterLoveAndHateItemInfo LoveAndHateItemInfo;
 
-	/// <summary>
-	/// 关联人物数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<ushort, NameAndAvatarArray> RelationshipDict;
 
-	/// <summary>
-	/// 关联人物数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<ushort, int> RelationshipCountDict;
 
-	/// <summary>
-	/// 可见互动的可用情况字典
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, bool> VisibleCharacterInteractionEventOptionDict;
 
-	/// <summary>
-	/// 临时特性剩余时间
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> TemporaryFeatureLeftTimes;
 
-	/// <summary>
-	/// VisibleCharacterInteractionEventOptionDict中没有正常互动的原因
-	/// 0: 无效；1: 没有关系；2：敌对等状态，比如点击了只有打架的交互
-	/// </summary>
 	[SerializableGameDataField]
 	public int NoInteractionReason;
 
-	/// <summary>
-	/// 对太吾的好感
-	/// </summary>
 	[SerializableGameDataField]
 	public short FavorabilityToTaiwu;
 
-	/// <summary>
-	/// 对太吾的戒心
-	/// </summary>
 	[SerializableGameDataField]
 	public int Alertness;
 
-	/// <summary>
-	/// 七元
-	/// </summary>
 	[SerializableGameDataField]
 	public Personalities Personalities;
 
-	/// <summary>
-	/// 每个品级的已学功法的数量
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] LearnedCombatSkillCountArray;
 
-	/// <summary>
-	/// 已学的前四个最高品级内功功法
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] LearnedHighestGradeNeigongCombatSkillArray;
 
-	/// <summary>
-	/// 已学的前四个最高品级摧破功法
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] LearnedHighestGradeAttackCombatSkillArray;
 
-	/// <summary>
-	/// 已学的前四个最高品级身法功法
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] LearnedHighestGradeAgileCombatSkillArray;
 
-	/// <summary>
-	/// 已学的前四个最高品级护体功法
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] LearnedHighestGradeDefenseCombatSkillArray;
 
-	/// <summary>
-	/// 已学的前四个最高品级奇窍功法
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] LearnedHighestGradeAssistCombatSkillArray;
 
-	/// <summary>
-	/// 主属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes MainAttributes;
 
-	/// <summary>
-	/// 当前主属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes CurrMainAttributes;
 
-	/// <summary>
-	/// 武学资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillQualifications;
 
-	/// <summary>
-	/// 武学造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillAttainments;
 
-	/// <summary>
-	/// 神力
-	/// </summary>
 	[SerializableGameDataField]
 	public int DivinePower;
 
-	/// <summary>
-	/// 鬼术
-	/// </summary>
 	[SerializableGameDataField]
 	public int GhostTechnique;
 
-	/// <summary>
-	/// 武学资质成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CombatSkillGrowthType;
 
-	/// <summary>
-	/// 技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillQualifications;
 
-	/// <summary>
-	/// 技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 技艺资质成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillGrowthType;
 
-	/// <summary>
-	/// 特性ID列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> FeatureIds;
 
-	/// <summary>
-	/// 装备
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey[] EquipmentArray;
 
-	/// <summary>
-	/// 物品（排除装备和书籍）
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey[] HighestGradeItemArray;
 
-	/// <summary>
-	/// 武学书籍
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey[] HighestGradeCombatSkillBookArray;
 
-	/// <summary>
-	/// 技艺书籍
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey[] HighestGradeLifeSkillBookArray;
 
-	/// <summary>
-	/// 每个品级可交互藏书的数量
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] SkillBookCountArray;
 
-	/// <summary>
-	/// 奇书
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> LegendaryBookTypeList;
 
-	/// <summary>
-	/// 玄灰保护状态
-	/// </summary>
 	[SerializableGameDataField]
 	public uint DarkAshProtector;
 
-	/// <summary>
-	/// 当前志向
-	/// </summary>
 	[SerializableGameDataField]
 	public ProfessionData CurrentProfession;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
+	[SerializableGameDataField]
+	public bool IsXiangshuInfectedDemon;
+
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
-		int totalSize = 326;
+		int totalSize = 327;
 		totalSize = ((AvatarRelatedData == null) ? (totalSize + 2) : (totalSize + (2 + AvatarRelatedData.GetSerializedSize())));
 		totalSize = ((TitleIdList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * TitleIdList.Count)));
 		totalSize = ((TeammateCommands == null) ? (totalSize + 2) : (totalSize + (2 + TeammateCommands.Count)));
 		totalSize = ((RelationshipToTaiwuList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * RelationshipToTaiwuList.Count)));
-		totalSize += SerializationHelper.DictionaryOfBasicTypeCustomTypePair.GetSerializedSize(RelationshipDict);
-		totalSize += SerializationHelper.DictionaryOfBasicTypePair.GetSerializedSize(RelationshipCountDict);
-		totalSize += SerializationHelper.DictionaryOfBasicTypePair.GetSerializedSize(VisibleCharacterInteractionEventOptionDict);
-		totalSize += SerializationHelper.DictionaryOfBasicTypePair.GetSerializedSize(TemporaryFeatureLeftTimes);
+		totalSize += 4;
+		if (RelationshipDict != null)
+		{
+			foreach (KeyValuePair<ushort, NameAndAvatarArray> pair in RelationshipDict)
+			{
+				totalSize += 2;
+				totalSize += pair.Value.GetSerializedSize();
+			}
+		}
+		totalSize += 4;
+		if (RelationshipCountDict != null)
+		{
+			foreach (KeyValuePair<ushort, int> item in RelationshipCountDict)
+			{
+				_ = item;
+				totalSize += 2;
+				totalSize += 4;
+			}
+		}
+		totalSize += 4;
+		if (VisibleCharacterInteractionEventOptionDict != null)
+		{
+			foreach (KeyValuePair<short, bool> item2 in VisibleCharacterInteractionEventOptionDict)
+			{
+				_ = item2;
+				totalSize += 2;
+				totalSize++;
+			}
+		}
+		totalSize += 4;
+		if (TemporaryFeatureLeftTimes != null)
+		{
+			foreach (KeyValuePair<short, int> temporaryFeatureLeftTime in TemporaryFeatureLeftTimes)
+			{
+				_ = temporaryFeatureLeftTime;
+				totalSize += 2;
+				totalSize += 4;
+			}
+		}
 		totalSize = ((LearnedCombatSkillCountArray == null) ? (totalSize + 2) : (totalSize + (2 + 2 * LearnedCombatSkillCountArray.Length)));
 		totalSize = ((LearnedHighestGradeNeigongCombatSkillArray == null) ? (totalSize + 2) : (totalSize + (2 + 2 * LearnedHighestGradeNeigongCombatSkillArray.Length)));
 		totalSize = ((LearnedHighestGradeAttackCombatSkillArray == null) ? (totalSize + 2) : (totalSize + (2 + 2 * LearnedHighestGradeAttackCombatSkillArray.Length)));
@@ -393,7 +274,6 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -447,9 +327,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int i = 0; i < elementsCount; i++)
 			{
-				((short*)pCurrData)[i] = TitleIdList[i];
+				*(short*)pCurrData = TitleIdList[i];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount;
 		}
 		else
 		{
@@ -481,9 +361,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int j = 0; j < elementsCount2; j++)
 			{
-				pCurrData[j] = (byte)TeammateCommands[j];
+				*pCurrData = (byte)TeammateCommands[j];
+				pCurrData++;
 			}
-			pCurrData += elementsCount2;
 		}
 		else
 		{
@@ -498,9 +378,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int k = 0; k < elementsCount3; k++)
 			{
-				((short*)pCurrData)[k] = RelationshipToTaiwuList[k];
+				*(short*)pCurrData = RelationshipToTaiwuList[k];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount3;
 		}
 		else
 		{
@@ -508,10 +388,73 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 		}
 		pCurrData += LoveAndHateItemInfo.Serialize(pCurrData);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypeCustomTypePair.Serialize(pCurrData, ref RelationshipDict);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Serialize(pCurrData, ref RelationshipCountDict);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Serialize(pCurrData, ref VisibleCharacterInteractionEventOptionDict);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Serialize(pCurrData, ref TemporaryFeatureLeftTimes);
+		if (RelationshipDict != null)
+		{
+			*(int*)pCurrData = RelationshipDict.Count;
+			pCurrData += 4;
+			foreach (KeyValuePair<ushort, NameAndAvatarArray> pair in RelationshipDict)
+			{
+				*(ushort*)pCurrData = pair.Key;
+				pCurrData += 2;
+				pCurrData += pair.Value.Serialize(pCurrData);
+			}
+		}
+		else
+		{
+			*(int*)pCurrData = 0;
+			pCurrData += 4;
+		}
+		if (RelationshipCountDict != null)
+		{
+			*(int*)pCurrData = RelationshipCountDict.Count;
+			pCurrData += 4;
+			foreach (KeyValuePair<ushort, int> pair2 in RelationshipCountDict)
+			{
+				*(ushort*)pCurrData = pair2.Key;
+				pCurrData += 2;
+				*(int*)pCurrData = pair2.Value;
+				pCurrData += 4;
+			}
+		}
+		else
+		{
+			*(int*)pCurrData = 0;
+			pCurrData += 4;
+		}
+		if (VisibleCharacterInteractionEventOptionDict != null)
+		{
+			*(int*)pCurrData = VisibleCharacterInteractionEventOptionDict.Count;
+			pCurrData += 4;
+			foreach (KeyValuePair<short, bool> pair3 in VisibleCharacterInteractionEventOptionDict)
+			{
+				*(short*)pCurrData = pair3.Key;
+				pCurrData += 2;
+				*pCurrData = (pair3.Value ? ((byte)1) : ((byte)0));
+				pCurrData++;
+			}
+		}
+		else
+		{
+			*(int*)pCurrData = 0;
+			pCurrData += 4;
+		}
+		if (TemporaryFeatureLeftTimes != null)
+		{
+			*(int*)pCurrData = TemporaryFeatureLeftTimes.Count;
+			pCurrData += 4;
+			foreach (KeyValuePair<short, int> pair4 in TemporaryFeatureLeftTimes)
+			{
+				*(short*)pCurrData = pair4.Key;
+				pCurrData += 2;
+				*(int*)pCurrData = pair4.Value;
+				pCurrData += 4;
+			}
+		}
+		else
+		{
+			*(int*)pCurrData = 0;
+			pCurrData += 4;
+		}
 		*(int*)pCurrData = NoInteractionReason;
 		pCurrData += 4;
 		*(short*)pCurrData = FavorabilityToTaiwu;
@@ -527,9 +470,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int l = 0; l < elementsCount4; l++)
 			{
-				((short*)pCurrData)[l] = LearnedCombatSkillCountArray[l];
+				*(short*)pCurrData = LearnedCombatSkillCountArray[l];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount4;
 		}
 		else
 		{
@@ -544,9 +487,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int m = 0; m < elementsCount5; m++)
 			{
-				((short*)pCurrData)[m] = LearnedHighestGradeNeigongCombatSkillArray[m];
+				*(short*)pCurrData = LearnedHighestGradeNeigongCombatSkillArray[m];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount5;
 		}
 		else
 		{
@@ -561,9 +504,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int n = 0; n < elementsCount6; n++)
 			{
-				((short*)pCurrData)[n] = LearnedHighestGradeAttackCombatSkillArray[n];
+				*(short*)pCurrData = LearnedHighestGradeAttackCombatSkillArray[n];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount6;
 		}
 		else
 		{
@@ -578,9 +521,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int num = 0; num < elementsCount7; num++)
 			{
-				((short*)pCurrData)[num] = LearnedHighestGradeAgileCombatSkillArray[num];
+				*(short*)pCurrData = LearnedHighestGradeAgileCombatSkillArray[num];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount7;
 		}
 		else
 		{
@@ -595,9 +538,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int num2 = 0; num2 < elementsCount8; num2++)
 			{
-				((short*)pCurrData)[num2] = LearnedHighestGradeDefenseCombatSkillArray[num2];
+				*(short*)pCurrData = LearnedHighestGradeDefenseCombatSkillArray[num2];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount8;
 		}
 		else
 		{
@@ -612,9 +555,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int num3 = 0; num3 < elementsCount9; num3++)
 			{
-				((short*)pCurrData)[num3] = LearnedHighestGradeAssistCombatSkillArray[num3];
+				*(short*)pCurrData = LearnedHighestGradeAssistCombatSkillArray[num3];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount9;
 		}
 		else
 		{
@@ -643,9 +586,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int num4 = 0; num4 < elementsCount10; num4++)
 			{
-				((short*)pCurrData)[num4] = FeatureIds[num4];
+				*(short*)pCurrData = FeatureIds[num4];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount10;
 		}
 		else
 		{
@@ -724,9 +667,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int num9 = 0; num9 < elementsCount15; num9++)
 			{
-				((short*)pCurrData)[num9] = SkillBookCountArray[num9];
+				*(short*)pCurrData = SkillBookCountArray[num9];
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount15;
 		}
 		else
 		{
@@ -741,9 +684,9 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			pCurrData += 2;
 			for (int num10 = 0; num10 < elementsCount16; num10++)
 			{
-				pCurrData[num10] = (byte)LegendaryBookTypeList[num10];
+				*pCurrData = (byte)LegendaryBookTypeList[num10];
+				pCurrData++;
 			}
-			pCurrData += elementsCount16;
 		}
 		else
 		{
@@ -766,6 +709,8 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			*(short*)pCurrData = 0;
 			pCurrData += 2;
 		}
+		*pCurrData = (IsXiangshuInfectedDemon ? ((byte)1) : ((byte)0));
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -774,7 +719,6 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -789,10 +733,7 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		pCurrData += 2;
 		if (num > 0)
 		{
-			if (AvatarRelatedData == null)
-			{
-				AvatarRelatedData = new AvatarRelatedData();
-			}
+			AvatarRelatedData = new AvatarRelatedData();
 			pCurrData += AvatarRelatedData.Deserialize(pCurrData);
 		}
 		else
@@ -826,7 +767,7 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		{
 			if (TitleIdList == null)
 			{
-				TitleIdList = new List<short>(elementsCount);
+				TitleIdList = new List<short>();
 			}
 			else
 			{
@@ -834,9 +775,10 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			}
 			for (int i = 0; i < elementsCount; i++)
 			{
-				TitleIdList.Add(((short*)pCurrData)[i]);
+				short element = *(short*)pCurrData;
+				pCurrData += 2;
+				TitleIdList.Add(element);
 			}
-			pCurrData += 2 * elementsCount;
 		}
 		else
 		{
@@ -865,7 +807,7 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		{
 			if (TeammateCommands == null)
 			{
-				TeammateCommands = new List<sbyte>(elementsCount2);
+				TeammateCommands = new List<sbyte>();
 			}
 			else
 			{
@@ -873,9 +815,10 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			}
 			for (int j = 0; j < elementsCount2; j++)
 			{
-				TeammateCommands.Add((sbyte)pCurrData[j]);
+				sbyte element2 = (sbyte)(*pCurrData);
+				pCurrData++;
+				TeammateCommands.Add(element2);
 			}
-			pCurrData += (int)elementsCount2;
 		}
 		else
 		{
@@ -887,7 +830,7 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		{
 			if (RelationshipToTaiwuList == null)
 			{
-				RelationshipToTaiwuList = new List<short>(elementsCount3);
+				RelationshipToTaiwuList = new List<short>();
 			}
 			else
 			{
@@ -895,23 +838,117 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			}
 			for (int k = 0; k < elementsCount3; k++)
 			{
-				RelationshipToTaiwuList.Add(((short*)pCurrData)[k]);
+				short element3 = *(short*)pCurrData;
+				pCurrData += 2;
+				RelationshipToTaiwuList.Add(element3);
 			}
-			pCurrData += 2 * elementsCount3;
 		}
 		else
 		{
 			RelationshipToTaiwuList?.Clear();
 		}
-		if (LoveAndHateItemInfo == null)
-		{
-			LoveAndHateItemInfo = new CharacterLoveAndHateItemInfo();
-		}
+		LoveAndHateItemInfo = new CharacterLoveAndHateItemInfo();
 		pCurrData += LoveAndHateItemInfo.Deserialize(pCurrData);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypeCustomTypePair.Deserialize(pCurrData, ref RelationshipDict);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Deserialize(pCurrData, ref RelationshipCountDict);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Deserialize(pCurrData, ref VisibleCharacterInteractionEventOptionDict);
-		pCurrData += SerializationHelper.DictionaryOfBasicTypePair.Deserialize(pCurrData, ref TemporaryFeatureLeftTimes);
+		int RelationshipDictElementsCount = *(int*)pCurrData;
+		pCurrData += 4;
+		if (RelationshipDictElementsCount > 0)
+		{
+			if (RelationshipDict == null)
+			{
+				RelationshipDict = new Dictionary<ushort, NameAndAvatarArray>();
+			}
+			else
+			{
+				RelationshipDict.Clear();
+			}
+			for (int l = 0; l < RelationshipDictElementsCount; l++)
+			{
+				ushort key = *(ushort*)pCurrData;
+				pCurrData += 2;
+				NameAndAvatarArray value = default(NameAndAvatarArray);
+				pCurrData += value.Deserialize(pCurrData);
+				RelationshipDict.Add(key, value);
+			}
+		}
+		else
+		{
+			RelationshipDict?.Clear();
+		}
+		int RelationshipCountDictElementsCount = *(int*)pCurrData;
+		pCurrData += 4;
+		if (RelationshipCountDictElementsCount > 0)
+		{
+			if (RelationshipCountDict == null)
+			{
+				RelationshipCountDict = new Dictionary<ushort, int>();
+			}
+			else
+			{
+				RelationshipCountDict.Clear();
+			}
+			for (int m = 0; m < RelationshipCountDictElementsCount; m++)
+			{
+				ushort key2 = *(ushort*)pCurrData;
+				pCurrData += 2;
+				int value2 = *(int*)pCurrData;
+				pCurrData += 4;
+				RelationshipCountDict.Add(key2, value2);
+			}
+		}
+		else
+		{
+			RelationshipCountDict?.Clear();
+		}
+		int VisibleCharacterInteractionEventOptionDictElementsCount = *(int*)pCurrData;
+		pCurrData += 4;
+		if (VisibleCharacterInteractionEventOptionDictElementsCount > 0)
+		{
+			if (VisibleCharacterInteractionEventOptionDict == null)
+			{
+				VisibleCharacterInteractionEventOptionDict = new Dictionary<short, bool>();
+			}
+			else
+			{
+				VisibleCharacterInteractionEventOptionDict.Clear();
+			}
+			for (int n = 0; n < VisibleCharacterInteractionEventOptionDictElementsCount; n++)
+			{
+				short key3 = *(short*)pCurrData;
+				pCurrData += 2;
+				bool value3 = *pCurrData != 0;
+				pCurrData++;
+				VisibleCharacterInteractionEventOptionDict.Add(key3, value3);
+			}
+		}
+		else
+		{
+			VisibleCharacterInteractionEventOptionDict?.Clear();
+		}
+		int TemporaryFeatureLeftTimesElementsCount = *(int*)pCurrData;
+		pCurrData += 4;
+		if (TemporaryFeatureLeftTimesElementsCount > 0)
+		{
+			if (TemporaryFeatureLeftTimes == null)
+			{
+				TemporaryFeatureLeftTimes = new Dictionary<short, int>();
+			}
+			else
+			{
+				TemporaryFeatureLeftTimes.Clear();
+			}
+			for (int num2 = 0; num2 < TemporaryFeatureLeftTimesElementsCount; num2++)
+			{
+				short key4 = *(short*)pCurrData;
+				pCurrData += 2;
+				int value4 = *(int*)pCurrData;
+				pCurrData += 4;
+				TemporaryFeatureLeftTimes.Add(key4, value4);
+			}
+		}
+		else
+		{
+			TemporaryFeatureLeftTimes?.Clear();
+		}
 		NoInteractionReason = *(int*)pCurrData;
 		pCurrData += 4;
 		FavorabilityToTaiwu = *(short*)pCurrData;
@@ -927,11 +964,11 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				LearnedCombatSkillCountArray = new short[elementsCount4];
 			}
-			for (int l = 0; l < elementsCount4; l++)
+			for (int num3 = 0; num3 < elementsCount4; num3++)
 			{
-				LearnedCombatSkillCountArray[l] = ((short*)pCurrData)[l];
+				LearnedCombatSkillCountArray[num3] = *(short*)pCurrData;
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount4;
 		}
 		else
 		{
@@ -945,11 +982,11 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				LearnedHighestGradeNeigongCombatSkillArray = new short[elementsCount5];
 			}
-			for (int m = 0; m < elementsCount5; m++)
+			for (int num4 = 0; num4 < elementsCount5; num4++)
 			{
-				LearnedHighestGradeNeigongCombatSkillArray[m] = ((short*)pCurrData)[m];
+				LearnedHighestGradeNeigongCombatSkillArray[num4] = *(short*)pCurrData;
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount5;
 		}
 		else
 		{
@@ -963,11 +1000,11 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				LearnedHighestGradeAttackCombatSkillArray = new short[elementsCount6];
 			}
-			for (int n = 0; n < elementsCount6; n++)
+			for (int num5 = 0; num5 < elementsCount6; num5++)
 			{
-				LearnedHighestGradeAttackCombatSkillArray[n] = ((short*)pCurrData)[n];
+				LearnedHighestGradeAttackCombatSkillArray[num5] = *(short*)pCurrData;
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount6;
 		}
 		else
 		{
@@ -981,11 +1018,11 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				LearnedHighestGradeAgileCombatSkillArray = new short[elementsCount7];
 			}
-			for (int num2 = 0; num2 < elementsCount7; num2++)
+			for (int num6 = 0; num6 < elementsCount7; num6++)
 			{
-				LearnedHighestGradeAgileCombatSkillArray[num2] = ((short*)pCurrData)[num2];
+				LearnedHighestGradeAgileCombatSkillArray[num6] = *(short*)pCurrData;
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount7;
 		}
 		else
 		{
@@ -999,11 +1036,11 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				LearnedHighestGradeDefenseCombatSkillArray = new short[elementsCount8];
 			}
-			for (int num3 = 0; num3 < elementsCount8; num3++)
+			for (int num7 = 0; num7 < elementsCount8; num7++)
 			{
-				LearnedHighestGradeDefenseCombatSkillArray[num3] = ((short*)pCurrData)[num3];
+				LearnedHighestGradeDefenseCombatSkillArray[num7] = *(short*)pCurrData;
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount8;
 		}
 		else
 		{
@@ -1017,11 +1054,11 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				LearnedHighestGradeAssistCombatSkillArray = new short[elementsCount9];
 			}
-			for (int num4 = 0; num4 < elementsCount9; num4++)
+			for (int num8 = 0; num8 < elementsCount9; num8++)
 			{
-				LearnedHighestGradeAssistCombatSkillArray[num4] = ((short*)pCurrData)[num4];
+				LearnedHighestGradeAssistCombatSkillArray[num8] = *(short*)pCurrData;
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount9;
 		}
 		else
 		{
@@ -1047,17 +1084,18 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		{
 			if (FeatureIds == null)
 			{
-				FeatureIds = new List<short>(elementsCount10);
+				FeatureIds = new List<short>();
 			}
 			else
 			{
 				FeatureIds.Clear();
 			}
-			for (int num5 = 0; num5 < elementsCount10; num5++)
+			for (int num9 = 0; num9 < elementsCount10; num9++)
 			{
-				FeatureIds.Add(((short*)pCurrData)[num5]);
+				short element4 = *(short*)pCurrData;
+				pCurrData += 2;
+				FeatureIds.Add(element4);
 			}
-			pCurrData += 2 * elementsCount10;
 		}
 		else
 		{
@@ -1071,11 +1109,10 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				EquipmentArray = new ItemKey[elementsCount11];
 			}
-			for (int num6 = 0; num6 < elementsCount11; num6++)
+			for (int num10 = 0; num10 < elementsCount11; num10++)
 			{
-				ItemKey element = default(ItemKey);
-				pCurrData += element.Deserialize(pCurrData);
-				EquipmentArray[num6] = element;
+				EquipmentArray[num10] = default(ItemKey);
+				pCurrData += EquipmentArray[num10].Deserialize(pCurrData);
 			}
 		}
 		else
@@ -1090,11 +1127,10 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				HighestGradeItemArray = new ItemKey[elementsCount12];
 			}
-			for (int num7 = 0; num7 < elementsCount12; num7++)
+			for (int num11 = 0; num11 < elementsCount12; num11++)
 			{
-				ItemKey element2 = default(ItemKey);
-				pCurrData += element2.Deserialize(pCurrData);
-				HighestGradeItemArray[num7] = element2;
+				HighestGradeItemArray[num11] = default(ItemKey);
+				pCurrData += HighestGradeItemArray[num11].Deserialize(pCurrData);
 			}
 		}
 		else
@@ -1109,11 +1145,10 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				HighestGradeCombatSkillBookArray = new ItemKey[elementsCount13];
 			}
-			for (int num8 = 0; num8 < elementsCount13; num8++)
+			for (int num12 = 0; num12 < elementsCount13; num12++)
 			{
-				ItemKey element3 = default(ItemKey);
-				pCurrData += element3.Deserialize(pCurrData);
-				HighestGradeCombatSkillBookArray[num8] = element3;
+				HighestGradeCombatSkillBookArray[num12] = default(ItemKey);
+				pCurrData += HighestGradeCombatSkillBookArray[num12].Deserialize(pCurrData);
 			}
 		}
 		else
@@ -1128,11 +1163,10 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				HighestGradeLifeSkillBookArray = new ItemKey[elementsCount14];
 			}
-			for (int num9 = 0; num9 < elementsCount14; num9++)
+			for (int num13 = 0; num13 < elementsCount14; num13++)
 			{
-				ItemKey element4 = default(ItemKey);
-				pCurrData += element4.Deserialize(pCurrData);
-				HighestGradeLifeSkillBookArray[num9] = element4;
+				HighestGradeLifeSkillBookArray[num13] = default(ItemKey);
+				pCurrData += HighestGradeLifeSkillBookArray[num13].Deserialize(pCurrData);
 			}
 		}
 		else
@@ -1147,11 +1181,11 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 			{
 				SkillBookCountArray = new short[elementsCount15];
 			}
-			for (int num10 = 0; num10 < elementsCount15; num10++)
+			for (int num14 = 0; num14 < elementsCount15; num14++)
 			{
-				SkillBookCountArray[num10] = ((short*)pCurrData)[num10];
+				SkillBookCountArray[num14] = *(short*)pCurrData;
+				pCurrData += 2;
 			}
-			pCurrData += 2 * elementsCount15;
 		}
 		else
 		{
@@ -1163,17 +1197,18 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		{
 			if (LegendaryBookTypeList == null)
 			{
-				LegendaryBookTypeList = new List<sbyte>(elementsCount16);
+				LegendaryBookTypeList = new List<sbyte>();
 			}
 			else
 			{
 				LegendaryBookTypeList.Clear();
 			}
-			for (int num11 = 0; num11 < elementsCount16; num11++)
+			for (int num15 = 0; num15 < elementsCount16; num15++)
 			{
-				LegendaryBookTypeList.Add((sbyte)pCurrData[num11]);
+				sbyte element5 = (sbyte)(*pCurrData);
+				pCurrData++;
+				LegendaryBookTypeList.Add(element5);
 			}
-			pCurrData += (int)elementsCount16;
 		}
 		else
 		{
@@ -1181,20 +1216,19 @@ public class CharacterDisplayDataForMapBlock : ISerializableGameData
 		}
 		DarkAshProtector = *(uint*)pCurrData;
 		pCurrData += 4;
-		ushort num12 = *(ushort*)pCurrData;
+		ushort num16 = *(ushort*)pCurrData;
 		pCurrData += 2;
-		if (num12 > 0)
+		if (num16 > 0)
 		{
-			if (CurrentProfession == null)
-			{
-				CurrentProfession = new ProfessionData();
-			}
+			CurrentProfession = new ProfessionData();
 			pCurrData += CurrentProfession.Deserialize(pCurrData);
 		}
 		else
 		{
 			CurrentProfession = null;
 		}
+		IsXiangshuInfectedDemon = *pCurrData != 0;
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

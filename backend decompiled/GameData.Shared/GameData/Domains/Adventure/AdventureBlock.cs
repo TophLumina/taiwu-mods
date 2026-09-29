@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇地格
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class AdventureBlock : ISerializableGameData
 {
@@ -28,49 +25,25 @@ public class AdventureBlock : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "InternalIndex", "InternalStatusType", "SpecialIcon", "SpecialParticle", "InCloud" };
 	}
 
-	/// <summary>
-	/// 地格位置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	private AdventureBlockIndex _internalIndex;
 
-	/// <summary>
-	/// 用于序列化的类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	private int _internalStatusType;
 
-	/// <summary>
-	/// 地皮（覆盖 <see cref="P:GameData.Adventure.AdventureBlockData.Icon" />）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public string SpecialIcon;
 
-	/// <summary>
-	/// 氛围特效
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public string SpecialParticle;
 
-	/// <summary>
-	/// 被云雾笼罩
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public bool InCloud;
 
-	/// <summary>
-	/// 入口优先级，仅在后端使用
-	/// </summary>
 	public int EntryPriority;
 
-	/// <summary>
-	/// 索引
-	/// </summary>
 	public AdventureBlockIndex Index => _internalIndex;
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	private EAdventureBlockStatusType StatusType
 	{
 		get
@@ -83,27 +56,16 @@ public class AdventureBlock : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 基于位置构造奇遇地格
-	/// </summary>
 	public AdventureBlock(AdventureBlockIndex index)
 	{
 		_internalIndex = index;
 	}
 
-	/// <summary>
-	/// 是否处于某个状态
-	/// </summary>
-	/// <param name="statusType"></param>
-	/// <returns></returns>
 	public bool ContainStatus(EAdventureBlockStatusType statusType)
 	{
 		return (StatusType & statusType) == statusType;
 	}
 
-	/// <summary>
-	/// 基于数据构造奇遇地格
-	/// </summary>
 	public AdventureBlock(AdventureBlockData data)
 	{
 		_internalIndex = data.Index;
@@ -111,12 +73,6 @@ public class AdventureBlock : ISerializableGameData
 		InCloud = data.InCloud;
 	}
 
-	/// <summary>
-	/// 更新状态信息
-	/// </summary>
-	/// <param name="bridge"></param>
-	/// <param name="adventureId"></param>
-	/// <param name="data"></param>
 	public bool UpdateStatus(IAdventureDomainBridge bridge, int adventureId, AdventureBlockData data)
 	{
 		EAdventureBlockStatusType statusType = EAdventureBlockStatusType.None;
@@ -140,16 +96,10 @@ public class AdventureBlock : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AdventureBlock()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AdventureBlock(AdventureBlock other)
 	{
 		_internalIndex = other._internalIndex;
@@ -159,9 +109,6 @@ public class AdventureBlock : ISerializableGameData
 		InCloud = other.InCloud;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AdventureBlock other)
 	{
 		_internalIndex = other._internalIndex;
@@ -171,13 +118,11 @@ public class AdventureBlock : ISerializableGameData
 		InCloud = other.InCloud;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 7;
@@ -191,7 +136,6 @@ public class AdventureBlock : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -252,7 +196,6 @@ public class AdventureBlock : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

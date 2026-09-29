@@ -15,7 +15,7 @@ public class LifeSkillStateSensor : CharacterStateSensorBase
 		switch (stateTemplateId)
 		{
 		case 161:
-			result = ((args.CombatSkillType >= 0) ? selfChar.GetLifeSkillQualification(args.LifeSkillType) : int.MinValue);
+			result = ((args.LifeSkillType >= 0) ? selfChar.GetLifeSkillQualification(args.LifeSkillType) : int.MinValue);
 			break;
 		case 162:
 		case 163:

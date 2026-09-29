@@ -8,63 +8,33 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.World.Display;
 
-/// <summary>
-/// 武当-保卫神木界面数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class DefendHeavenlyTreeDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 所有村民、神木、太吾及其同道的角色显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, CharacterDisplayData> AllCharacterDisplayDataDict;
 
-	/// <summary>
-	/// 神木数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SectStoryHeavenlyTreeExtendable> HeavenlyTreeList;
 
-	/// <summary>
-	/// 空闲可工作的村民
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> WorkAvailableVillagerList;
 
-	/// <summary>
-	/// 可以神木涤秽的村民，包括太吾及其同道，未排除垂危
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> TreeClearEnemyAvailableVillagerList;
 
-	/// <summary>
-	/// 全部的书籍物品列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> BookItemList;
 
-	/// <summary>
-	/// 太吾读完的书籍列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> AvailableBookList;
 
-	/// <summary>
-	/// 太吾行囊资源物品列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> ResourceItemList;
 
-	/// <summary>
-	/// 神木全部地块字典，神木特殊角色ID=&gt;神木邻接范围地格列表
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, DefendHeavenlyTreeBlockData> HeavenlyTreeBlockDict = new Dictionary<int, DefendHeavenlyTreeBlockData>();
 
-	/// <summary>
-	/// 神木可见地块字典，神木特殊角色ID=&gt;神木邻接范围地格列表
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, DefendHeavenlyTreeBlockData> HeavenlyTreeVisibleBlockDict = new Dictionary<int, DefendHeavenlyTreeBlockData>();
 

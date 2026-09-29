@@ -7,55 +7,32 @@ namespace GameData.Domains.Taiwu.Display;
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NotForArchive = true, NoCopyConstructors = true)]
 public class DispatchSwordTombDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 剑冢id，对应配置表
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Id;
 
-	/// <summary>
-	/// 位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 位置详情，方便显示
-	/// </summary>
 	[SerializableGameDataField]
 	public MapBlockData BlockData;
 
-	/// <summary>
-	/// 位置详情Root，方便显示
-	/// </summary>
 	[SerializableGameDataField]
 	public MapBlockData RootBlockData;
 
-	/// <summary>
-	/// 剩余出冢月数，有的可以没有
-	/// </summary>
 	[SerializableGameDataField]
 	public short RemainingMonths;
 
-	/// <summary>
-	/// 剑冢中的化身状态，0:平静如常;1:隐有异动;2:破冢而出;3:打掉了
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte EscapeState;
 
-	/// <summary>
-	/// 有多少护冢在看守
-	/// </summary>
 	[SerializableGameDataField]
 	public short KeeperCount;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -68,7 +45,6 @@ public class DispatchSwordTombDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -117,7 +93,6 @@ public class DispatchSwordTombDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -5,9 +5,9 @@ namespace GameData.Utilities;
 
 public static class StringFormatExtensions
 {
-	private static readonly Regex PascalSnakeCheckerRegex = new Regex("[^A-Za-z_]|[A-Z]{2,}", RegexOptions.Compiled);
+	private static readonly Regex PascalSnakeCheckerRegex = new Regex("[^A-Za-z0-9_]", RegexOptions.Compiled);
 
-	private static readonly Regex PascalSnakeRegex = new Regex("(?<!^)([A-Z])", RegexOptions.Compiled);
+	private static readonly Regex PascalSnakeRegex = new Regex("(?<!^)(?<!_)(?=[A-Z][a-z])|(?<=[a-z])(?=[A-Z])|(?<=[a-z])(?=[0-9]+[A-Za-z])|(?<=[A-Z])(?=[0-9]+(?=[a-z]|[A-Z]$))", RegexOptions.Compiled);
 
 	public static string GetFormat(this string str, object arg0)
 	{
@@ -71,7 +71,7 @@ public static class StringFormatExtensions
 		{
 			throw new NotSupportedException("not supported " + str);
 		}
-		return PascalSnakeRegex.Replace(str, "_$1").ToLower();
+		return PascalSnakeRegex.Replace(str, "_").ToLower();
 	}
 
 	public static string ReplaceLast(this string input, string oldValue, string newValue)

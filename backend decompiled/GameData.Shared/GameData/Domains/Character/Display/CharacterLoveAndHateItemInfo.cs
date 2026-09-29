@@ -2,72 +2,40 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 人物对物品喜恶的信息
-/// </summary>
 public class CharacterLoveAndHateItemInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharacterId;
 
-	/// <summary>
-	/// 是否已揭示喜爱物品类型
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LovingItemRevealed;
 
-	/// <summary>
-	/// 是否已揭示厌恶物品类型
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HatingItemRevealed;
 
-	/// <summary>
-	/// 是否需要播放初次揭示喜爱物品的特效
-	/// </summary>
 	[SerializableGameDataField]
 	public bool NeedShowFirstRevealLovingEffect;
 
-	/// <summary>
-	/// 是否需要播放初次揭示厌恶物品类型的特效
-	/// </summary>
 	[SerializableGameDataField]
 	public bool NeedShowFirstRevealHatingEffect;
 
-	/// <summary>
-	/// 喜爱物品子类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short LovingItemSubType;
 
-	/// <summary>
-	/// 厌恶物品子类型
-	/// </summary>
 	[SerializableGameDataField]
 	public short HatingItemSubType;
 
-	/// <summary>
-	/// 喜恶过期时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int HobbyExpirationDate;
 
-	/// <summary>
-	/// 角色创建类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CreatingType;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 17;
@@ -78,7 +46,6 @@ public class CharacterLoveAndHateItemInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = CharacterId;
@@ -106,7 +73,6 @@ public class CharacterLoveAndHateItemInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

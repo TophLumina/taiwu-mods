@@ -4,71 +4,43 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 策略的一组目标集合
-/// </summary>
 public class StrategyTarget : ISerializableGameData
 {
-	/// <summary>
-	/// 类型
-	/// </summary>
 	[SerializableGameDataField]
 	public int ObjectType;
 
-	/// <summary>
-	/// 集合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ulong> List;
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	public EDebateStrategyTargetObjectType Type => (EDebateStrategyTargetObjectType)ObjectType;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="list"></param>
 	public StrategyTarget(EDebateStrategyTargetObjectType type, List<ulong> list)
 	{
 		ObjectType = (int)type;
 		List = list;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public StrategyTarget()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public StrategyTarget(StrategyTarget other)
 	{
 		ObjectType = other.ObjectType;
 		List = ((other.List == null) ? null : new List<ulong>(other.List));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(StrategyTarget other)
 	{
 		ObjectType = other.ObjectType;
 		List = ((other.List == null) ? null : new List<ulong>(other.List));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -80,7 +52,6 @@ public class StrategyTarget : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -111,7 +82,6 @@ public class StrategyTarget : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

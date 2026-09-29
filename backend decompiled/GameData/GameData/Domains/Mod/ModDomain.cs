@@ -56,8 +56,6 @@ public class ModDomain : BaseGameDataDomain
 
 	private static readonly DataInfluence[][] CacheInfluences = new DataInfluence[2][];
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	public void LoadAllMods(ModInfoList modInfoList)
 	{
 		UnloadAllMods();

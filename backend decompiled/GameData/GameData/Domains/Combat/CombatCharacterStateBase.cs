@@ -140,6 +140,10 @@ public class CombatCharacterStateBase
 					CombatChar.ChangeCharId = mainCharId;
 				}
 			}
+			if (DomainManager.Combat.TaiwuInAllyMainChar && CombatChar.IsAlly)
+			{
+				DomainManager.Combat.TickChickenPoints(context);
+			}
 			for (int i = 1; i < charList.Length; i++)
 			{
 				int charId = charList[i];

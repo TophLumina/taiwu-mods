@@ -8,98 +8,50 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 战败标记集合
-/// </summary>
 public class DefeatMarkCollection : ISerializableGameData
 {
-	/// <summary>
-	/// 外伤标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public byte[] OuterInjuryMarkList = new byte[7];
 
-	/// <summary>
-	/// 内伤标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public byte[] InnerInjuryMarkList = new byte[7];
 
-	/// <summary>
-	/// 破绽标记列表
-	/// </summary>
 	[SerializableGameDataField]
 	public ByteList[] FlawMarkList = new ByteList[7];
 
-	/// <summary>
-	/// 点穴标记列表
-	/// </summary>
 	[SerializableGameDataField]
 	public ByteList[] AcupointMarkList = new ByteList[7];
 
-	/// <summary>
-	/// 中毒标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public byte[] PoisonMarkList = new byte[6];
 
-	/// <summary>
-	/// 心神标记来源功法列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<bool> MindMarkList = new List<bool>();
 
-	/// <summary>
-	/// 必死标记来源功法列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillKey> DieMarkList = new List<CombatSkillKey>();
 
-	/// <summary>
-	/// 重创标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int FatalDamageMarkCount;
 
-	/// <summary>
-	/// 愈合标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int ScarMarkCount;
 
-	/// <summary>
-	/// 疲敝标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int TiredMarkCount;
 
-	/// <summary>
-	/// 蛊虫标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte WugMarkCount;
 
-	/// <summary>
-	/// 内息标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte QiDisorderMarkCount;
 
-	/// <summary>
-	/// 状态标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte StateMarkCount;
 
-	/// <summary>
-	/// 真气标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public (sbyte scatter, sbyte bulge) NeiliAllocationMarkCount = (scatter: 0, bulge: 0);
 
-	/// <summary>
-	/// 健康标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte HealthMarkCount;
 
@@ -107,9 +59,6 @@ public class DefeatMarkCollection : ISerializableGameData
 
 	private static short QiDisorderThreshold => GlobalConfig.Instance.DefeatMarkQiDisorderThreshold;
 
-	/// <summary>
-	/// 枚举所有战败标记键
-	/// </summary>
 	public IEnumerable<DefeatMarkKey> GetAllKeys(short oldDisorderOfQi, PoisonInts oldPoisons, Injuries oldInjuries)
 	{
 		for (int i = 0; i < TiredMarkCount; i++)
@@ -198,17 +147,11 @@ public class DefeatMarkCollection : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 枚举所有战败标记键
-	/// </summary>
 	public IEnumerable<DefeatMarkKey> GetAllKeys(ICombatCharacterBridge combatChar)
 	{
 		return GetAllKeys(combatChar.GetOldDisorderOfQi(), combatChar.GetOldPoison(), combatChar.GetOldInjuries());
 	}
 
-	/// <summary>
-	/// 枚举所有战败标记键，不判断新旧
-	/// </summary>
 	public IEnumerable<DefeatMarkKey> GetAllKeysWithoutOld()
 	{
 		PoisonInts oldPoisons = default(PoisonInts);
@@ -218,17 +161,11 @@ public class DefeatMarkCollection : ISerializableGameData
 		return GetAllKeys(0, oldPoisons, oldInjuries);
 	}
 
-	/// <summary>
-	/// 计算内息标记数量
-	/// </summary>
 	public static sbyte CalcQiDisorderMarkCount(int disorderOfQi)
 	{
 		return (sbyte)MathUtils.Clamp((disorderOfQi - QiDisorderFirstExtra) / QiDisorderThreshold, 0, 6);
 	}
 
-	/// <summary>
-	/// 计算内息标记阈值
-	/// </summary>
 	public static short CalcQiDisorderMarkThreshold(int disorderOfQi)
 	{
 		if (CalcQiDisorderMarkCount(disorderOfQi) != 0)
@@ -238,9 +175,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		return (short)(QiDisorderThreshold + QiDisorderFirstExtra);
 	}
 
-	/// <summary>
-	/// 计算健康标记数量
-	/// </summary>
 	public static sbyte GetHealthMarkCount(EHealthType healthType)
 	{
 		return healthType switch
@@ -253,9 +187,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 同步失神标记
-	/// </summary>
 	public bool SyncMindMark(IList<bool> newMindMark)
 	{
 		CollectionUtils.Sort(newMindMark, (bool a, bool b) => b.CompareTo(a));
@@ -273,25 +204,16 @@ public class DefeatMarkCollection : ISerializableGameData
 		return anyChanged;
 	}
 
-	/// <summary>
-	/// 获取标记总数
-	/// </summary>
 	public int GetTotalCount()
 	{
 		return OuterInjuryMarkList.Sum() + InnerInjuryMarkList.Sum() + GetTotalFlawCount() + GetTotalAcupointCount() + PoisonMarkList.Sum() + MindMarkList.Count + DieMarkList.Count + FatalDamageMarkCount + ScarMarkCount + TiredMarkCount + WugMarkCount + QiDisorderMarkCount + StateMarkCount + NeiliAllocationMarkCount.scatter + NeiliAllocationMarkCount.bulge + HealthMarkCount;
 	}
 
-	/// <summary>
-	/// 获取伤势标记总数
-	/// </summary>
 	public int GetTotalInjuryCount()
 	{
 		return 0 + OuterInjuryMarkList.Sum() + InnerInjuryMarkList.Sum();
 	}
 
-	/// <summary>
-	/// 获取毒素标记总数
-	/// </summary>
 	public int GetTotalPoisonCount()
 	{
 		int totalCount = 0;
@@ -302,9 +224,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		return totalCount;
 	}
 
-	/// <summary>
-	/// 获取破绽标记总数
-	/// </summary>
 	public int GetTotalFlawCount()
 	{
 		int totalCount = 0;
@@ -315,9 +234,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		return totalCount;
 	}
 
-	/// <summary>
-	/// 获取点穴标记总数
-	/// </summary>
 	public int GetTotalAcupointCount()
 	{
 		int totalCount = 0;
@@ -328,9 +244,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		return totalCount;
 	}
 
-	/// <summary>
-	/// 清除所有标记
-	/// </summary>
 	public void Clear()
 	{
 		for (sbyte part = 0; part < 7; part++)
@@ -351,9 +264,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		NeiliAllocationMarkCount = (scatter: 0, bulge: 0);
 	}
 
-	/// <summary>
-	/// 判断相比于指定标记集合是否新增了任何标记
-	/// </summary>
 	public bool AnyMarkAdded(DefeatMarkCollection other)
 	{
 		for (sbyte part = 0; part < 7; part++)
@@ -401,9 +311,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public DefeatMarkCollection()
 	{
 		for (sbyte part = 0; part < 7; part++)
@@ -413,9 +320,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DefeatMarkCollection(DefeatMarkCollection other)
 	{
 		byte[] item = other.OuterInjuryMarkList;
@@ -465,9 +369,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		HealthMarkCount = other.HealthMarkCount;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DefeatMarkCollection other)
 	{
 		byte[] item = other.OuterInjuryMarkList;
@@ -517,13 +418,11 @@ public class DefeatMarkCollection : ISerializableGameData
 		HealthMarkCount = other.HealthMarkCount;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 18;
@@ -567,7 +466,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -738,7 +636,6 @@ public class DefeatMarkCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

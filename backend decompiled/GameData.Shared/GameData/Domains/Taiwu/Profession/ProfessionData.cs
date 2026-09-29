@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Config;
 using GameData.Combat.Math;
@@ -9,9 +10,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Taiwu.Profession;
 
-/// <summary>
-/// 职业 (志向) 相关数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class ProfessionData : ISerializableGameData
 {
@@ -38,66 +36,35 @@ public class ProfessionData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[8] { "TemplateId", "Type", "Seniority", "SkillOffCooldownDates", "HadBeenUnlocked", "SkillsData", "ExtraSeniority", "LearnedSkills" };
 	}
 
-	/// <summary>
-	/// 志向的模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int TemplateId;
 
-	/// <summary>
-	/// 类型. <see cref="T:GameData.Domains.Taiwu.Profession.ProfessionDataType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Type = -1;
 
-	/// <summary>
-	/// 志向的资历
-	/// </summary>
 	[SerializableGameDataField]
 	public int Seniority;
 
-	/// <summary>
-	/// 志向的额外资历
-	/// </summary>
 	[SerializableGameDataField]
 	public int ExtraSeniority;
 
-	/// <summary>
-	/// 技能冷却结束时间, 小于当前时间表示技能不在冷却
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] SkillOffCooldownDates;
 
-	/// <summary>
-	/// 转职冷却结束日期
-	/// </summary>
 	[Obsolete]
 	public int ProfessionOffCooldownDate;
 
-	/// <summary>
-	/// 是否被解锁过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] HadBeenUnlocked;
 
-	/// <summary>
-	/// 职业技能相关数据, 为 null 表示没有技能相关存档数据
-	/// </summary>
 	[SerializableGameDataField]
 	public IProfessionSkillsData SkillsData;
 
-	/// <summary>
-	/// 已领悟的技能（一志难求词条）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] LearnedSkills;
 
 	private const int SkillCount = 4;
 
-	/// <summary>
-	/// 获取技能总数量
-	/// </summary>
-	/// <returns></returns>
 	public int GetSkillCount()
 	{
 		ProfessionItem professionItem = Config.Profession.Instance[TemplateId];
@@ -138,20 +105,11 @@ public class ProfessionData : ISerializableGameData
 		OfflineUpdateHadBeenUnlocked(isInherit: true);
 	}
 
-	/// <summary>
-	/// 获得志向模板数据
-	/// </summary>
-	/// <returns></returns>
 	public ProfessionItem GetConfig()
 	{
 		return Config.Profession.Instance[TemplateId];
 	}
 
-	/// <summary>
-	/// 获得志向技能模板数据
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public ProfessionSkillItem GetSkillConfig(int index)
 	{
 		ProfessionItem professionCfg = GetConfig();
@@ -162,11 +120,6 @@ public class ProfessionData : ISerializableGameData
 		return ProfessionSkill.Instance[professionCfg.ExtraProfessionSkill];
 	}
 
-	/// <summary>
-	/// 根据技能ID获取技能序号
-	/// </summary>
-	/// <param name="skillId"></param>
-	/// <returns></returns>
 	public int GetSkillIndex(int skillId)
 	{
 		ProfessionItem professionCfg = GetConfig();
@@ -182,32 +135,17 @@ public class ProfessionData : ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 是否可以转职到当前职业
-	/// </summary>
-	/// <param name="currDate"></param>
-	/// <returns></returns>
 	[Obsolete]
 	public bool IsProfessionAvailable(int currDate)
 	{
 		return currDate >= ProfessionOffCooldownDate;
 	}
 
-	/// <summary>
-	/// 指定技能是否已解锁
-	/// </summary>
-	/// <param name="skillIndex"></param>
-	/// <returns></returns>
 	public bool IsSkillUnlocked(int skillIndex)
 	{
 		return Seniority >= SharedMethods.GetSkillUnlockSeniority(SharedMethods.GetSkillId(TemplateId, skillIndex));
 	}
 
-	/// <summary>
-	/// 指定技能是否已领悟（一志难求词条）
-	/// </summary>
-	/// <param name="skillIndex"></param>
-	/// <returns></returns>
 	public bool IsSkillLearned(int skillIndex)
 	{
 		if (LearnedSkills == null || LearnedSkills.Length <= skillIndex)
@@ -217,10 +155,6 @@ public class ProfessionData : ISerializableGameData
 		return LearnedSkills[skillIndex];
 	}
 
-	/// <summary>
-	/// 设置技能已领悟（一志难求词条）
-	/// </summary>
-	/// <param name="skillIndex"></param>
 	public void SetSkillLearned(int skillIndex)
 	{
 		if (LearnedSkills == null)
@@ -230,10 +164,6 @@ public class ProfessionData : ISerializableGameData
 		LearnedSkills[skillIndex] = true;
 	}
 
-	/// <summary>
-	/// 解锁的技能数量
-	/// </summary>
-	/// <returns></returns>
 	public int GetUnlockedSkillCount()
 	{
 		for (int i = 3; i >= 0; i--)
@@ -246,18 +176,11 @@ public class ProfessionData : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 获得当前资历的百分比
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityPercent()
 	{
 		return SeniorityToPercentage(Seniority);
 	}
 
-	/// <summary>
-	/// 刷新职业是否被解锁过，需要在志向发生变化时调用
-	/// </summary>
 	public void OfflineUpdateHadBeenUnlocked(bool isInherit = false)
 	{
 		ProfessionItem config = GetConfig();
@@ -286,12 +209,6 @@ public class ProfessionData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 技能是否处于冷却
-	/// </summary>
-	/// <param name="currDate"></param>
-	/// <param name="skillIndex"></param>
-	/// <returns></returns>
 	public bool IsSkillCooldown(int currDate, int skillIndex)
 	{
 		if (ExternalDataBridge.Context.NoProfessionSkillCooldown)
@@ -301,10 +218,6 @@ public class ProfessionData : ISerializableGameData
 		return currDate < SkillOffCooldownDates[skillIndex];
 	}
 
-	/// <summary>
-	/// 技能进行冷却
-	/// </summary>
-	/// <param name="skillIndex"></param>
 	public void OfflineSkillCooldown(int skillIndex)
 	{
 		if (!ExternalDataBridge.Context.NoProfessionSkillCooldown)
@@ -321,11 +234,6 @@ public class ProfessionData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取技能相关的额外数据
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public T GetSkillsData<T>() where T : IProfessionSkillsData
 	{
 		return (T)SkillsData;
@@ -355,20 +263,15 @@ public class ProfessionData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ProfessionData()
 	{
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 15;
@@ -383,7 +286,6 @@ public class ProfessionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -470,7 +372,6 @@ public class ProfessionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -584,98 +485,56 @@ public class ProfessionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的人物身份品级
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityOrgGrade()
 	{
 		return SeniorityToOrgGrade(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的主要属性恢复量
-	/// </summary>
 	public int GetSeniorityMainAttributeAdditional()
 	{
 		return SeniorityToMainAttributeAdditional(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的视野范围加成 (旅人 - 绘制地图)
-	/// </summary>
 	public int GetSeniorityVisionRangeBonus()
 	{
 		return SeniorityToVisionRangeBonus(Seniority);
 	}
 
-	/// <summary>
-	/// 旅人三技能-能够传送的距离半径
-	/// </summary>
-	/// <returns></returns>
 	public int SeniorityToTeleportDistance()
 	{
 		return SeniorityToTeleportDistance(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的资源恢复量 (山人 - 休养生息)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityResourceRecoveryFactor()
 	{
 		return SeniorityToResourceRecoveryFactor(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的造诣加成 (匠人 - 行规用矩)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityAttainmentBonus()
 	{
 		return SeniorityToAttainmentBonus(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的徒手工具造诣加成 (匠人 - 匠心巧手)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityEmptyToolAttainmentBonus()
 	{
 		return SeniorityToEmptyToolAttainmentBonus(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的消耗的资源量（匠人 - 独具匠心）
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityChangeWeaponTrickCostResource(int changeTrickCountToLast, sbyte weaponGrade)
 	{
 		return changeTrickCountToLast * (weaponGrade + 1) * 1000 * (100 - GetSeniorityChangeWeaponTrickCostResourceReduceRate()) / 100;
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的资源减免（匠人 - 独具匠心）
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityChangeWeaponTrickCostResourceReduceRate()
 	{
 		return SeniorityToChangeWeaponTrickCostResourceReduceRate(Seniority);
 	}
 
-	/// <summary>
-	/// 获取消耗的引子品级（匠人 - 独具匠心）
-	/// </summary>
-	/// <returns></returns>
 	public int GetChangeWeaponTrickCostMaterialGrade(sbyte weaponGrade)
 	{
 		return Math.Clamp(weaponGrade - 1, 1, 7);
 	}
 
-	/// <summary>
-	/// 获取消耗的引子数量（匠人 - 独具匠心）
-	/// </summary>
-	/// <returns></returns>
 	public int GetChangeWeaponTrickCostMaterialCount(int changeTrickCountToOrigin)
 	{
 		if (changeTrickCountToOrigin != 0)
@@ -685,224 +544,126 @@ public class ProfessionData : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的疗伤收费 (大夫 - 看诊施药)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityTreatmentCharge()
 	{
 		return SeniorityToTreatmentCharge(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的购买道具价格因子百分比 (富商 - 慧眼识珠)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityTradeCostFactor()
 	{
 		return SeniorityToTradeCostFactor(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的商队等级 (富商 - 召集商队)
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityCaravanGrade()
 	{
 		return SeniorityToCaravanGrade(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的买卖价格 (富商 - 召集商队)
-	/// </summary>
-	/// <returns></returns>
 	public (int sell, int buy) SeniorityToCaravanPrice()
 	{
 		return SeniorityToCaravanPrice(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的行酒令额外增益数值（豪客 - 酒中真仙）
-	/// </summary>
-	/// <returns></returns>
 	public CValuePercentBonus GetSeniorityToWineTasterSolarTermBonus(int wineCount)
 	{
 		return SeniorityToWineTasterSolarTermBonus(Seniority, wineCount);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的势力值增加 (名门 - 代人说项)
-	/// </summary>
-	/// <returns></returns>
 	public int GetInfluencePowerBonusFactor()
 	{
 		return SeniorityToInfluencePowerBonusFactor(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的资质成长阶级 (名门 - 采擢荐进)
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityGrowingGrade(IRandomSource random)
 	{
 		return SeniorityToGrowingGrade(Seniority, random);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的资质成长阶级 (名门 - 采擢荐进)
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityGrowingGrade()
 	{
 		return SeniorityToGrowingGrade(Seniority);
 	}
 
-	/// <summary>
-	/// 培养等级（升级次数）
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityFeatureUpgradeCount(IRandomSource random)
 	{
 		return SeniorityToFeatureUpgradeCount(Seniority, random);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的威望获得量 (才俊 - 礼乐之教, 武师 - 保镖护院)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityAuthorityGain()
 	{
 		return SeniorityToAuthorityGain(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的文化增长 (才俊 - 礼乐之教)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityCultureGain()
 	{
 		return SeniorityToCultureGain(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的安定增长 (武师 - 保镖护院)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSenioritySafetyGain()
 	{
 		return SeniorityToSafetyGain(Seniority);
 	}
 
-	/// <summary>
-	/// 根据资历，减少门派人物对收礼级别的需求（武师 - 江湖中人;平民-父老乡亲）
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityGiftLevelReduce()
 	{
 		return SeniorityToGiftLevelReduce(Seniority);
 	}
 
-	/// <summary>
-	/// 根据资历，提升好感增加百分比（武师 - 江湖中人;平民-父老乡亲）
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityFavorAddPercent()
 	{
 		return GetSeniorityFavorAddPercent(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的发现野兽的数量 (猎户 - 追踪野兽)
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityAnimalCount()
 	{
 		return SeniorityToAnimalCount(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的狩猎野兽加成百分比
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityHunterAnimalBonus()
 	{
 		return SeniorityHunterAnimalBonus(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的能够召集野兽的等级 (猎户 - 召集野兽)
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetSeniorityCallAnimalGrade()
 	{
 		return SeniorityCallAnimalGrade(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的乞讨银钱基础值 (乞丐 - 托钵行乞)
-	/// </summary>
-	/// <returns></returns>
 	public int GetSeniorityBeggingMoneyBaseValue()
 	{
 		return SeniorityToBeggingMoneyBaseValue(Seniority);
 	}
 
-	/// <summary>
-	/// 获取当前资历对应的定居点类型 (大夫 - 游医义诊)
-	/// </summary>
-	/// <returns><see cref="T:GameData.Domains.Taiwu.Profession.ProfessionRelatedConstants.SettlementType" /></returns>
 	public sbyte GetSeniorityDoctorMaxSettlementType()
 	{
 		return SeniorityToDoctorMaxSettlementType(Seniority);
 	}
 
-	/// <summary>
-	/// 大夫的药收费 (大夫 - 看诊施药)
-	/// </summary>
-	/// <returns></returns>
 	public short GetSeniorityDoctorMedicinePricePercent()
 	{
 		return GetSeniorityDoctorMedicinePricePercent(Seniority);
 	}
 
-	/// <summary>
-	/// 好感增加百分比 (大夫 - 看诊施药)
-	/// </summary>
-	/// <returns></returns>
 	public short GetSeniorityDoctorFavorAddPercent()
 	{
 		return GetSeniorityDoctorFavorAddPercent(Seniority);
 	}
 
-	/// <summary>
-	/// 道长二技能（驱邪法事）获得的威望系数
-	/// </summary>
-	/// <returns></returns>
 	public int GetTaoistMonkSkill3AuthorityPara()
 	{
 		return GetTaoistMonkSkill3AuthorityPara(Seniority);
 	}
 
-	/// <summary>
-	/// 资历对应的定居点类型 (乞丐 - 托钵行乞)
-	/// </summary>
-	/// <returns>GameData.Domains.Taiwu.Profession.ProfessionRelatedConstants.SettlementType</returns>
 	public sbyte GetSeniorityBeggarMaxSettlementType()
 	{
 		return SeniorityToBeggarMaxSettlementType(Seniority);
 	}
 
-	/// <summary>
-	/// 获取志向技能会造成的名誉变化 (乞丐 - 芜行俚语)
-	/// </summary>
 	public int GetFameChange()
 	{
 		return FameAction.Instance[(short)56].Fame;
 	}
 
-	/// <summary>
-	/// 获取主属性恢复加成后的值
-	/// </summary>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public int GetMainAttributesRecoveryBonusAppliedRate(sbyte mainAttributeType, int baseRecovery)
 	{
@@ -910,22 +671,32 @@ public class ProfessionData : ISerializableGameData
 		return baseRecovery;
 	}
 
-	/// <summary>
-	/// 资历对应的资历百分比
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
+	public int GetSeniorityOrgGradeXiangshuSkill0()
+	{
+		return SeniorityOrgGradeXiangshuSkill0(Seniority);
+	}
+
+	public int GetXiangshuSkill1InfectionChange()
+	{
+		return GetXiangshuSkill1InfectionChange(Seniority);
+	}
+
+	public int GetXiangshuSkill2MinionCount()
+	{
+		return GetXiangshuSkill2MinionCount(Seniority);
+	}
+
+	public List<short> GetXiangshuSkill2MinionTemplateIdList()
+	{
+		return GetXiangshuSkill2MinionTemplateIdList(Seniority);
+	}
+
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToPercentage(int seniority)
 	{
 		return seniority * 100 / 3000000;
 	}
 
-	/// <summary>
-	/// 资历对应的人物身份品级
-	/// </summary>
-	/// <param name="seniority">当前资历</param>
-	/// <returns>人物身份品级 <see cref="T:GameData.Domains.Character.Grade" /></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static sbyte SeniorityToOrgGrade(int seniority)
 	{
@@ -949,35 +720,18 @@ public class ProfessionData : ISerializableGameData
 		return 2;
 	}
 
-	/// <summary>
-	/// 资历对应的主要属性恢复量
-	/// 10 + 20 * 资历/资历上限
-	/// </summary>
-	/// <param name="seniority">当前资历</param>
-	/// <returns>资历恢复量</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToMainAttributeAdditional(int seniority)
 	{
 		return 10 + 20 * SeniorityToPercentage(seniority) / 100;
 	}
 
-	/// <summary>
-	/// 资历对应的视野范围加成 (旅人 - 绘制地图)
-	/// (资历 - 2000) / 1000
-	/// </summary>
-	/// <param name="seniority">当前资历</param>
-	/// <returns>视野范围</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToVisionRangeBonus(int seniority)
 	{
 		return 10 * SeniorityToPercentage(seniority) / 100;
 	}
 
-	/// <summary>
-	/// 旅人三技能-能够传送的距离半径
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToTeleportDistance(int seniority)
 	{
@@ -985,94 +739,48 @@ public class ProfessionData : ISerializableGameData
 		return 10 + 10 * (percentage / 100);
 	}
 
-	/// <summary>
-	/// 资历对应的资源恢复率 (山人 - 休养生息)
-	/// <para>实际恢复量 = 地格各资源最大值 * A / 100</para>
-	/// <para>A = (33 + 33 * 资历 / 资历上限)</para>
-	/// <para>此处即为 A 的计算</para>
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToResourceRecoveryFactor(int seniority)
 	{
 		return 33 + 33 * seniority / 3000000;
 	}
 
-	/// <summary>
-	/// 资历对应的徒手工具造诣加成 (匠人 - 匠心巧手)
-	/// 徒手时的造诣 = 原造诣 * (50 + 50 * 资历/资历上限)% 
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToEmptyToolAttainmentBonus(int seniority)
 	{
 		return 50 * seniority / 3000000 - 50;
 	}
 
-	/// <summary>
-	/// 资历对应的改变武器式的资源减免 (匠人 - 匠心巧手)
-	/// （当前资历*50/资历上限）%
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToChangeWeaponTrickCostResourceReduceRate(int seniority)
 	{
 		return 50 * seniority / 3000000;
 	}
 
-	/// <summary>
-	/// 资历对应的造诣加成 (匠人 - 行规用矩)
-	/// 工具提供的造诣加成 =（33 + 33*当前资历/资历上限）%
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToAttainmentBonus(int seniority)
 	{
 		return 33 + 33 * seniority / 3000000;
 	}
 
-	/// <summary>
-	/// 资历对应的治疗收费 (大夫 - 看诊施药)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToTreatmentCharge(int seniority)
 	{
 		return 100 + 2900 * seniority / 3000000;
 	}
 
-	/// <summary>
-	/// 资历对应的道具购买价格百分比因子 (富商 - 慧眼识珠)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToTradeCostFactor(int seniority)
 	{
 		return 500;
 	}
 
-	/// <summary>
-	/// 资历对应的商队等级 (富商 - 召集商队)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static sbyte SeniorityToCaravanGrade(int seniority)
 	{
 		return (sbyte)(SeniorityToPercentage(seniority) / 15);
 	}
 
-	/// <summary>
-	/// 资历对应的买卖价格 (富商 - 召集商队)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static (int sell, int buy) SeniorityToCaravanPrice(int seniority)
 	{
@@ -1080,57 +788,29 @@ public class ProfessionData : ISerializableGameData
 		return (sell: 25 * percentage / 100, buy: -25 * percentage / 100);
 	}
 
-	/// <summary>
-	/// 行酒令额外增益数值（豪客 - 酒中真仙）
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <param name="wineCount">酒类型数量</param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static CValuePercentBonus SeniorityToWineTasterSolarTermBonus(int seniority, int wineCount)
 	{
 		return wineCount * 20 * SeniorityToPercentage(seniority) / 100;
 	}
 
-	/// <summary>
-	/// 资历对应的势力值增加 (名门 - 代人说项)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToInfluencePowerBonusFactor(int seniority)
 	{
 		return 50 + SeniorityToPercentage(seniority) / 2;
 	}
 
-	/// <summary>
-	/// 资历对应的资质成长阶级 (名门 - 采擢荐进)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public static sbyte SeniorityToGrowingGrade(int seniority, IRandomSource random)
 	{
 		return (sbyte)(random.Next(ProfessionRelatedConstants.AristocratGradeRange[0], ProfessionRelatedConstants.AristocratGradeRange[1] + 1) + SeniorityToGrowingGrade(seniority));
 	}
 
-	/// <summary>
-	/// 资历对应的资质成长阶级 (名门 - 采擢荐进)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	public static sbyte SeniorityToGrowingGrade(int seniority)
 	{
 		int percentage = SeniorityToPercentage(seniority);
 		return (sbyte)(3 * percentage / 100);
 	}
 
-	/// <summary>
-	/// 资历对应的培养等级 (名门 - 采擢荐进)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <param name="random"></param>
-	/// <returns></returns>
 	public static sbyte SeniorityToFeatureUpgradeCount(int seniority, IRandomSource random)
 	{
 		int percentage = SeniorityToPercentage(seniority);
@@ -1148,44 +828,24 @@ public class ProfessionData : ISerializableGameData
 		return 3;
 	}
 
-	/// <summary>
-	/// 资历对应的威望获得量 (才俊 - 礼乐之教)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToAuthorityGain(int seniority)
 	{
 		return seniority / 5;
 	}
 
-	/// <summary>
-	/// 资历对应的文化值增长 (才俊 - 礼乐之教)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToCultureGain(int seniority)
 	{
 		return seniority / 400;
 	}
 
-	/// <summary>
-	/// 资历对应的安定值增长 (武师 - 保镖护院)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToSafetyGain(int seniority)
 	{
 		return seniority / 400;
 	}
 
-	/// <summary>
-	/// 根据资历，减少门派人物对收礼级别的需求（武师 - 江湖中人;平民-父老乡亲）
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static sbyte SeniorityToGiftLevelReduce(int seniority)
 	{
@@ -1193,11 +853,6 @@ public class ProfessionData : ISerializableGameData
 		return (sbyte)(1 + 4 * percentage / 100);
 	}
 
-	/// <summary>
-	/// / 根据资历，提升好感增加百分比（武师 - 江湖中人;平民-父老乡亲）
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static sbyte GetSeniorityFavorAddPercent(int seniority)
 	{
@@ -1205,11 +860,6 @@ public class ProfessionData : ISerializableGameData
 		return (sbyte)(33 + 33 * percentage / 100);
 	}
 
-	/// <summary>
-	/// 根据资历获取最大结仇人数（平民-退隐江湖）
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int GetSeniorityCivilianAddHatredLimit(int seniority)
 	{
@@ -1217,11 +867,6 @@ public class ProfessionData : ISerializableGameData
 		return 12 - 8 * percentage / 100;
 	}
 
-	/// <summary>
-	/// 根据资历获取最大解仇人数（平民-安居乐业）
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int GetSeniorityCivilianSeverHatredLimit(int seniority)
 	{
@@ -1229,11 +874,6 @@ public class ProfessionData : ISerializableGameData
 		return 3 + 3 * percentage / 100;
 	}
 
-	/// <summary>
-	/// 资历对应的发现野兽的数量 (猎户 - 追踪野兽)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static sbyte SeniorityToAnimalCount(int seniority)
 	{
@@ -1248,11 +888,6 @@ public class ProfessionData : ISerializableGameData
 		return (sbyte)GlobalConfig.Instance.HunterSkill2_SeniorityPercentToAnimalCount.Length;
 	}
 
-	/// <summary>
-	/// 资历对应的狩猎野兽加成百分比
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityHunterAnimalBonus(int seniority)
 	{
@@ -1260,11 +895,6 @@ public class ProfessionData : ISerializableGameData
 		return 33 + 33 * seniorityPercentage / 100;
 	}
 
-	/// <summary>
-	/// 资历对应的能够召集野兽的等级 (猎户 - 召集野兽)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static sbyte SeniorityCallAnimalGrade(int seniority)
 	{
@@ -1287,22 +917,12 @@ public class ProfessionData : ISerializableGameData
 		return 3;
 	}
 
-	/// <summary>
-	/// 资历对应的乞讨银钱基础值 (乞丐 - 托钵行乞)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToBeggingMoneyBaseValue(int seniority)
 	{
 		return 10 + SeniorityToPercentage(seniority);
 	}
 
-	/// <summary>
-	/// 资历对应的定居点类型 (大夫 - 游医义诊)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns>GameData.Domains.Taiwu.Profession.ProfessionRelatedConstants.SettlementType</returns>
 	public static sbyte SeniorityToDoctorMaxSettlementType(int seniority)
 	{
 		int percentage = SeniorityToPercentage(seniority);
@@ -1325,44 +945,24 @@ public class ProfessionData : ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 大夫的药收费 (大夫 - 看诊施药)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	public static short GetSeniorityDoctorMedicinePricePercent(int seniority)
 	{
 		int percentage = SeniorityToPercentage(seniority);
 		return (short)(150 + 150 * percentage / 100);
 	}
 
-	/// <summary>
-	/// 好感增加百分比 (大夫 - 看诊施药)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	public static short GetSeniorityDoctorFavorAddPercent(int seniority)
 	{
 		int percentage = SeniorityToPercentage(seniority);
 		return (short)(150 + 150 * percentage / 100);
 	}
 
-	/// <summary>
-	/// 道长二技能（驱邪法事）获得的威望系数
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	public static short GetTaoistMonkSkill3AuthorityPara(int seniority)
 	{
 		int percentage = SeniorityToPercentage(seniority);
 		return (short)(30 + percentage * 60 / 100);
 	}
 
-	/// <summary>
-	/// 资历对应的定居点类型 (乞丐 - 托钵行乞)
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns>GameData.Domains.Taiwu.Profession.ProfessionRelatedConstants.SettlementType</returns>
 	public static sbyte SeniorityToBeggarMaxSettlementType(int seniority)
 	{
 		int percentage = SeniorityToPercentage(seniority);
@@ -1381,14 +981,78 @@ public class ProfessionData : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 额外策略个数的公式，适用于研读和周天
-	/// </summary>
-	/// <param name="seniority"></param>
-	/// <returns></returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int SeniorityToExtraReadingLoopingStrategyCount(int seniority)
 	{
 		return 1 + 2 * seniority / 3000000;
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static sbyte SeniorityOrgGradeXiangshuSkill0(int seniority)
+	{
+		int seniorityPercent = SeniorityToPercentage(seniority);
+		int maxAffectedGrade = ProfessionRelatedConstants.XiangshuSkill0MaxAffectedGradeRules[0].Grade;
+		(int, int)[] xiangshuSkill0MaxAffectedGradeRules = ProfessionRelatedConstants.XiangshuSkill0MaxAffectedGradeRules;
+		for (int i = 0; i < xiangshuSkill0MaxAffectedGradeRules.Length; i++)
+		{
+			(int, int) rule = xiangshuSkill0MaxAffectedGradeRules[i];
+			if (seniorityPercent >= rule.Item1)
+			{
+				maxAffectedGrade = rule.Item2;
+			}
+		}
+		return (sbyte)maxAffectedGrade;
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public short GetXiangshuSkill1InfectionChange(int seniority)
+	{
+		return (short)((float)SeniorityToPercentage(seniority) * 62.5f / 100f + 37.5f);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public short GetXiangshuSkill2MinionCount(int seniority)
+	{
+		int seniorityPercent = SeniorityToPercentage(seniority);
+		int ratioPercent = ProfessionRelatedConstants.XiangshuSkill2MinionCountRules[0].RatioPercent;
+		(int, int)[] xiangshuSkill2MinionCountRules = ProfessionRelatedConstants.XiangshuSkill2MinionCountRules;
+		for (int i = 0; i < xiangshuSkill2MinionCountRules.Length; i++)
+		{
+			(int, int) rule = xiangshuSkill2MinionCountRules[i];
+			if (seniorityPercent >= rule.Item1)
+			{
+				ratioPercent = rule.Item2;
+			}
+		}
+		return (short)(20 * ratioPercent / 100);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public List<short> GetXiangshuSkill2MinionTemplateIdList(int seniority)
+	{
+		int seniorityPercent = SeniorityToPercentage(seniority);
+		List<short> templateIdList = new List<short>();
+		if (seniorityPercent >= 100)
+		{
+			templateIdList.Add(374);
+			return templateIdList;
+		}
+		int minIndex = ProfessionRelatedConstants.XiangshuSkill2MinionTemplateTierRules[0].MinIndex;
+		int maxIndex = ProfessionRelatedConstants.XiangshuSkill2MinionTemplateTierRules[0].MaxIndex;
+		(int, int, int)[] xiangshuSkill2MinionTemplateTierRules = ProfessionRelatedConstants.XiangshuSkill2MinionTemplateTierRules;
+		for (int i = 0; i < xiangshuSkill2MinionTemplateTierRules.Length; i++)
+		{
+			(int, int, int) rule = xiangshuSkill2MinionTemplateTierRules[i];
+			if (seniorityPercent >= rule.Item1)
+			{
+				minIndex = rule.Item2;
+				maxIndex = rule.Item3;
+			}
+		}
+		for (int j = 366 + minIndex; j <= 366 + maxIndex; j++)
+		{
+			templateIdList.Add((short)j);
+		}
+		return templateIdList;
 	}
 }

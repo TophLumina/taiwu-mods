@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class SkillBreakPlateGridBonusType : ConfigData<SkillBreakPlateGridBonusTypeItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakPlateGridBonusType Instance = new SkillBreakPlateGridBonusType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "ExtraBonusFitCombatSkillTypes", "ExtraBonusFitLifeSkillTypes", "ExtraBonusFitItemSubTypes", "CharacterPropertyBonusList", "CombatSkillPropertyBonusList", "TemplateId" };

@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-///             地区主线特殊商店数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class SectStorySpecialMerchant : ISerializableGameData
 {
@@ -23,31 +20,20 @@ public class SectStorySpecialMerchant : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "MerchantData", "RefreshTime", "MerchantExtraGoodsData" };
 	}
 
-	/// <summary>
-	/// 商店数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantData MerchantData;
 
-	/// <summary>
-	/// 刷新时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int RefreshTime;
 
-	/// <summary>
-	/// 额外商品数据
-	/// </summary>
 	[SerializableGameDataField]
 	public MerchantExtraGoodsData MerchantExtraGoodsData;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -60,7 +46,6 @@ public class SectStorySpecialMerchant : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -104,7 +89,6 @@ public class SectStorySpecialMerchant : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

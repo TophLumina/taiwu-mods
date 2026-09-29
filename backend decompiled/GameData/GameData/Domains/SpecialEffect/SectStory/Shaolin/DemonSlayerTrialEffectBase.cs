@@ -24,6 +24,6 @@ public abstract class DemonSlayerTrialEffectBase : SpecialEffectBase
 
 	private void OnCombatSettlement(DataContext context, sbyte combatStatus)
 	{
-		DomainManager.SpecialEffect.Remove(context, Id);
+		RemoveSelf(context);
 	}
 }

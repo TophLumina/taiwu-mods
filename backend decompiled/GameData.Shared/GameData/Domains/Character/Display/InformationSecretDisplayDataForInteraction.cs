@@ -18,9 +18,6 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 	[SerializableGameDataField]
 	public bool Interactable;
 
-	/// <summary>
-	/// 数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int Amount;
 
@@ -43,9 +40,6 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		}
 	}
 
-	/// <summary>
-	/// 可交互
-	/// </summary>
 	bool ITradeableContent.Interactable
 	{
 		get
@@ -58,9 +52,6 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		}
 	}
 
-	/// <summary>
-	/// templateId为Misc的秘闻
-	/// </summary>
 	public ItemKey Key
 	{
 		get
@@ -103,18 +94,11 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		return GetAllItemKeysFromPool();
 	}
 
-	/// <summary>
-	/// 从对象池获取，必须归还
-	/// </summary>
-	/// <returns></returns>
 	public static Inventory GetItemKeyListFromPool()
 	{
 		return LocalObjectPool.Get();
 	}
 
-	/// <summary>
-	/// </summary>
-	/// <returns></returns>
 	public Inventory GetAllItemKeysFromPool()
 	{
 		Inventory itemKeyListFromPool = GetItemKeyListFromPool();
@@ -132,16 +116,10 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		return 2;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public InformationSecretDisplayDataForInteraction()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public InformationSecretDisplayDataForInteraction(InformationSecretDisplayDataForInteraction other)
 	{
 		_key = other._key;
@@ -151,9 +129,6 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		AlertFactor = other.AlertFactor;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(InformationSecretDisplayDataForInteraction other)
 	{
 		_key = other._key;
@@ -163,13 +138,11 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		AlertFactor = other.AlertFactor;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 21;
@@ -180,7 +153,6 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -201,7 +173,6 @@ public class InformationSecretDisplayDataForInteraction : ITradeableContent, ISe
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

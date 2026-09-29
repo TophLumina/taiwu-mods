@@ -5,15 +5,9 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 一个人在什么地方，是不是绑架在那里，或者是不是奇遇中等位置信息
-/// </summary>
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true, NotForArchive = true, NoCopyConstructors = true)]
 public class CharacterLocationDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 对应<see cref="F:GameData.Domains.Character.Display.CharacterLocationDisplayData.DisplayType" />
-	/// </summary>
 	public enum EDisplayType
 	{
 		Normal,
@@ -22,57 +16,30 @@ public class CharacterLocationDisplayData : ISerializableGameData
 		Buried
 	}
 
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharacterId;
 
-	/// <summary>
-	/// 综合显示状态。0: 正常位于某处；1：被绑架在某处；2：在奇遇中；3：埋藏在某处
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte DisplayType;
 
-	/// <summary>
-	/// 当前位置，如果他被绑架，这里给到绑架者的位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 用于显示的地块名字信息
-	/// </summary>
 	[SerializableGameDataField]
 	public FullBlockName FullBlockName;
 
-	/// <summary>
-	/// Location对应的地块信息
-	/// </summary>
 	[SerializableGameDataField]
 	public MapBlockData BlockData;
 
-	/// <summary>
-	/// Location对应的地块信息
-	/// </summary>
 	[SerializableGameDataField]
 	public MapBlockData RootBlockData;
 
-	/// <summary>
-	/// 当前在奇遇中，<see cref="F:GameData.Adventure.AdventureDataHelper.Invalid" /> 的id表示不在
-	/// </summary>
 	[SerializableGameDataField]
 	public int AdventureCoreId;
 
-	/// <summary>
-	/// 如果是被人关押，那么关押者的信息
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData Kidnapper;
 
-	/// <summary>
-	/// 是否在石屋中
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsCapturedInStoneRoom;
 
@@ -83,8 +50,7 @@ public class CharacterLocationDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 10;
-		totalSize += Location.GetSerializedSize();
+		int totalSize = 14;
 		totalSize += FullBlockName.GetSerializedSize();
 		totalSize = ((BlockData == null) ? (totalSize + 2) : (totalSize + (2 + BlockData.GetSerializedSize())));
 		totalSize = ((RootBlockData == null) ? (totalSize + 2) : (totalSize + (2 + RootBlockData.GetSerializedSize())));

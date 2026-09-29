@@ -7,171 +7,72 @@ namespace Config;
 [Serializable]
 public class WorldCreation : ConfigData<WorldCreationItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 人物的寿元
-		/// </summary>
 		public const byte CharacterLifeSpan = 0;
 
-		/// <summary>
-		/// 战斗的难度
-		/// </summary>
 		public const byte CombatDifficulty = 1;
 
-		/// <summary>
-		/// 研读的速度
-		/// </summary>
 		public const byte ReadingDifficulty = 2;
 
-		/// <summary>
-		/// 突破的难度
-		/// </summary>
 		public const byte BreakoutDifficulty = 3;
 
-		/// <summary>
-		/// 周天的速度
-		/// </summary>
 		public const byte NeigongLoopingDifficulty = 4;
 
-		/// <summary>
-		/// 外道的数量
-		/// </summary>
 		public const byte HereticsAmount = 5;
 
-		/// <summary>
-		/// 侵袭的速度
-		/// </summary>
 		public const byte BossInvasionSpeed = 6;
 
-		/// <summary>
-		/// 世界的资源
-		/// </summary>
 		public const byte WorldResourceAmount = 7;
 
-		/// <summary>
-		/// 世界的人数
-		/// </summary>
 		public const byte WorldPopulation = 8;
 
-		/// <summary>
-		/// 立场的限制
-		/// </summary>
 		public const byte RestrictOptionsBehavior = 9;
 
-		/// <summary>
-		/// 随机继承人
-		/// </summary>
 		public const byte AllowRandomTaiwuHeir = 10;
 
-		/// <summary>
-		/// 敌人的修习
-		/// </summary>
 		public const byte EnemyPracticeLevel = 11;
 
-		/// <summary>
-		/// 人情的变化
-		/// </summary>
 		public const byte FavorabilityChange = 12;
 
-		/// <summary>
-		/// 志向的成长
-		/// </summary>
 		public const byte ProfessionUpgrade = 13;
 
-		/// <summary>
-		/// 战利品收益
-		/// </summary>
 		public const byte LootYield = 14;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 人物的寿元
-		/// </summary>
 		public static WorldCreationItem CharacterLifeSpan => Instance[(byte)0];
 
-		/// <summary>
-		/// 战斗的难度
-		/// </summary>
 		public static WorldCreationItem CombatDifficulty => Instance[(byte)1];
 
-		/// <summary>
-		/// 研读的速度
-		/// </summary>
 		public static WorldCreationItem ReadingDifficulty => Instance[(byte)2];
 
-		/// <summary>
-		/// 突破的难度
-		/// </summary>
 		public static WorldCreationItem BreakoutDifficulty => Instance[(byte)3];
 
-		/// <summary>
-		/// 周天的速度
-		/// </summary>
 		public static WorldCreationItem NeigongLoopingDifficulty => Instance[(byte)4];
 
-		/// <summary>
-		/// 外道的数量
-		/// </summary>
 		public static WorldCreationItem HereticsAmount => Instance[(byte)5];
 
-		/// <summary>
-		/// 侵袭的速度
-		/// </summary>
 		public static WorldCreationItem BossInvasionSpeed => Instance[(byte)6];
 
-		/// <summary>
-		/// 世界的资源
-		/// </summary>
 		public static WorldCreationItem WorldResourceAmount => Instance[(byte)7];
 
-		/// <summary>
-		/// 世界的人数
-		/// </summary>
 		public static WorldCreationItem WorldPopulation => Instance[(byte)8];
 
-		/// <summary>
-		/// 立场的限制
-		/// </summary>
 		public static WorldCreationItem RestrictOptionsBehavior => Instance[(byte)9];
 
-		/// <summary>
-		/// 随机继承人
-		/// </summary>
 		public static WorldCreationItem AllowRandomTaiwuHeir => Instance[(byte)10];
 
-		/// <summary>
-		/// 敌人的修习
-		/// </summary>
 		public static WorldCreationItem EnemyPracticeLevel => Instance[(byte)11];
 
-		/// <summary>
-		/// 人情的变化
-		/// </summary>
 		public static WorldCreationItem FavorabilityChange => Instance[(byte)12];
 
-		/// <summary>
-		/// 志向的成长
-		/// </summary>
 		public static WorldCreationItem ProfessionUpgrade => Instance[(byte)13];
 
-		/// <summary>
-		/// 战利品收益
-		/// </summary>
 		public static WorldCreationItem LootYield => Instance[(byte)14];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static WorldCreation Instance = new WorldCreation();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "Options", "TemplateId", "Icons", "ShowInLegacy", "DifficultyPreset", "SaveFileKey" };

@@ -7,381 +7,156 @@ namespace Config;
 [Serializable]
 public class TeaWine : ConfigData<TeaWineItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 关外酪酒
-		/// </summary>
 		public const short WineOuter0 = 0;
 
-		/// <summary>
-		/// 宝丰酒
-		/// </summary>
 		public const short WineOuter1 = 1;
 
-		/// <summary>
-		/// 竹叶青酒
-		/// </summary>
 		public const short WineOuter2 = 2;
 
-		/// <summary>
-		/// 花雕酒
-		/// </summary>
 		public const short WineOuter3 = 3;
 
-		/// <summary>
-		/// 新丰酒
-		/// </summary>
 		public const short WineOuter4 = 4;
 
-		/// <summary>
-		/// 曲阿酒
-		/// </summary>
 		public const short WineOuter5 = 5;
 
-		/// <summary>
-		/// 剑南烧春
-		/// </summary>
 		public const short WineOuter6 = 6;
 
-		/// <summary>
-		/// 茅台白酒
-		/// </summary>
 		public const short WineOuter7 = 7;
 
-		/// <summary>
-		/// 猴儿酒
-		/// </summary>
 		public const short WineOuter8 = 8;
 
-		/// <summary>
-		/// 高粱酒
-		/// </summary>
 		public const short WineInner0 = 9;
 
-		/// <summary>
-		/// 西凤酒
-		/// </summary>
 		public const short WineInner1 = 10;
 
-		/// <summary>
-		/// 东坡蜜酒
-		/// </summary>
 		public const short WineInner2 = 11;
 
-		/// <summary>
-		/// 西域葡萄酒
-		/// </summary>
 		public const short WineInner3 = 12;
 
-		/// <summary>
-		/// 姚子雪曲
-		/// </summary>
 		public const short WineInner4 = 13;
 
-		/// <summary>
-		/// 百草玉露酒
-		/// </summary>
 		public const short WineInner5 = 14;
 
-		/// <summary>
-		/// 杏花汾清
-		/// </summary>
 		public const short WineInner6 = 15;
 
-		/// <summary>
-		/// 兰陵美酒
-		/// </summary>
 		public const short WineInner7 = 16;
 
-		/// <summary>
-		/// 杜康酒
-		/// </summary>
 		public const short WineInner8 = 17;
 
-		/// <summary>
-		/// 普洱茶
-		/// </summary>
 		public const short TeaOuter0 = 18;
 
-		/// <summary>
-		/// 鹿苑毛尖
-		/// </summary>
 		public const short TeaOuter1 = 19;
 
-		/// <summary>
-		/// 武夷岩茶
-		/// </summary>
 		public const short TeaOuter2 = 20;
 
-		/// <summary>
-		/// 君山银针
-		/// </summary>
 		public const short TeaOuter3 = 21;
 
-		/// <summary>
-		/// 祁门红茶
-		/// </summary>
 		public const short TeaOuter4 = 22;
 
-		/// <summary>
-		/// 金瓜贡茶
-		/// </summary>
 		public const short TeaOuter5 = 23;
 
-		/// <summary>
-		/// 顾渚紫笋
-		/// </summary>
 		public const short TeaOuter6 = 24;
 
-		/// <summary>
-		/// 大红袍
-		/// </summary>
 		public const short TeaOuter7 = 25;
 
-		/// <summary>
-		/// 蒙顶黄芽
-		/// </summary>
 		public const short TeaOuter8 = 26;
 
-		/// <summary>
-		/// 竹叶青茶
-		/// </summary>
 		public const short TeaInner0 = 27;
 
-		/// <summary>
-		/// 都匀毛尖
-		/// </summary>
 		public const short TeaInner1 = 28;
 
-		/// <summary>
-		/// 六安瓜片
-		/// </summary>
 		public const short TeaInner2 = 29;
 
-		/// <summary>
-		/// 信阳毛尖
-		/// </summary>
 		public const short TeaInner3 = 30;
 
-		/// <summary>
-		/// 庐山云雾茶
-		/// </summary>
 		public const short TeaInner4 = 31;
 
-		/// <summary>
-		/// 碧螺春
-		/// </summary>
 		public const short TeaInner5 = 32;
 
-		/// <summary>
-		/// 西湖龙井茶
-		/// </summary>
 		public const short TeaInner6 = 33;
 
-		/// <summary>
-		/// 方山露芽
-		/// </summary>
 		public const short TeaInner7 = 34;
 
-		/// <summary>
-		/// 蒙顶甘露
-		/// </summary>
 		public const short TeaInner8 = 35;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 关外酪酒
-		/// </summary>
 		public static TeaWineItem WineOuter0 => Instance[(short)0];
 
-		/// <summary>
-		/// 宝丰酒
-		/// </summary>
 		public static TeaWineItem WineOuter1 => Instance[(short)1];
 
-		/// <summary>
-		/// 竹叶青酒
-		/// </summary>
 		public static TeaWineItem WineOuter2 => Instance[(short)2];
 
-		/// <summary>
-		/// 花雕酒
-		/// </summary>
 		public static TeaWineItem WineOuter3 => Instance[(short)3];
 
-		/// <summary>
-		/// 新丰酒
-		/// </summary>
 		public static TeaWineItem WineOuter4 => Instance[(short)4];
 
-		/// <summary>
-		/// 曲阿酒
-		/// </summary>
 		public static TeaWineItem WineOuter5 => Instance[(short)5];
 
-		/// <summary>
-		/// 剑南烧春
-		/// </summary>
 		public static TeaWineItem WineOuter6 => Instance[(short)6];
 
-		/// <summary>
-		/// 茅台白酒
-		/// </summary>
 		public static TeaWineItem WineOuter7 => Instance[(short)7];
 
-		/// <summary>
-		/// 猴儿酒
-		/// </summary>
 		public static TeaWineItem WineOuter8 => Instance[(short)8];
 
-		/// <summary>
-		/// 高粱酒
-		/// </summary>
 		public static TeaWineItem WineInner0 => Instance[(short)9];
 
-		/// <summary>
-		/// 西凤酒
-		/// </summary>
 		public static TeaWineItem WineInner1 => Instance[(short)10];
 
-		/// <summary>
-		/// 东坡蜜酒
-		/// </summary>
 		public static TeaWineItem WineInner2 => Instance[(short)11];
 
-		/// <summary>
-		/// 西域葡萄酒
-		/// </summary>
 		public static TeaWineItem WineInner3 => Instance[(short)12];
 
-		/// <summary>
-		/// 姚子雪曲
-		/// </summary>
 		public static TeaWineItem WineInner4 => Instance[(short)13];
 
-		/// <summary>
-		/// 百草玉露酒
-		/// </summary>
 		public static TeaWineItem WineInner5 => Instance[(short)14];
 
-		/// <summary>
-		/// 杏花汾清
-		/// </summary>
 		public static TeaWineItem WineInner6 => Instance[(short)15];
 
-		/// <summary>
-		/// 兰陵美酒
-		/// </summary>
 		public static TeaWineItem WineInner7 => Instance[(short)16];
 
-		/// <summary>
-		/// 杜康酒
-		/// </summary>
 		public static TeaWineItem WineInner8 => Instance[(short)17];
 
-		/// <summary>
-		/// 普洱茶
-		/// </summary>
 		public static TeaWineItem TeaOuter0 => Instance[(short)18];
 
-		/// <summary>
-		/// 鹿苑毛尖
-		/// </summary>
 		public static TeaWineItem TeaOuter1 => Instance[(short)19];
 
-		/// <summary>
-		/// 武夷岩茶
-		/// </summary>
 		public static TeaWineItem TeaOuter2 => Instance[(short)20];
 
-		/// <summary>
-		/// 君山银针
-		/// </summary>
 		public static TeaWineItem TeaOuter3 => Instance[(short)21];
 
-		/// <summary>
-		/// 祁门红茶
-		/// </summary>
 		public static TeaWineItem TeaOuter4 => Instance[(short)22];
 
-		/// <summary>
-		/// 金瓜贡茶
-		/// </summary>
 		public static TeaWineItem TeaOuter5 => Instance[(short)23];
 
-		/// <summary>
-		/// 顾渚紫笋
-		/// </summary>
 		public static TeaWineItem TeaOuter6 => Instance[(short)24];
 
-		/// <summary>
-		/// 大红袍
-		/// </summary>
 		public static TeaWineItem TeaOuter7 => Instance[(short)25];
 
-		/// <summary>
-		/// 蒙顶黄芽
-		/// </summary>
 		public static TeaWineItem TeaOuter8 => Instance[(short)26];
 
-		/// <summary>
-		/// 竹叶青茶
-		/// </summary>
 		public static TeaWineItem TeaInner0 => Instance[(short)27];
 
-		/// <summary>
-		/// 都匀毛尖
-		/// </summary>
 		public static TeaWineItem TeaInner1 => Instance[(short)28];
 
-		/// <summary>
-		/// 六安瓜片
-		/// </summary>
 		public static TeaWineItem TeaInner2 => Instance[(short)29];
 
-		/// <summary>
-		/// 信阳毛尖
-		/// </summary>
 		public static TeaWineItem TeaInner3 => Instance[(short)30];
 
-		/// <summary>
-		/// 庐山云雾茶
-		/// </summary>
 		public static TeaWineItem TeaInner4 => Instance[(short)31];
 
-		/// <summary>
-		/// 碧螺春
-		/// </summary>
 		public static TeaWineItem TeaInner5 => Instance[(short)32];
 
-		/// <summary>
-		/// 西湖龙井茶
-		/// </summary>
 		public static TeaWineItem TeaInner6 => Instance[(short)33];
 
-		/// <summary>
-		/// 方山露芽
-		/// </summary>
 		public static TeaWineItem TeaInner7 => Instance[(short)34];
 
-		/// <summary>
-		/// 蒙顶甘露
-		/// </summary>
 		public static TeaWineItem TeaInner8 => Instance[(short)35];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TeaWine Instance = new TeaWine();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

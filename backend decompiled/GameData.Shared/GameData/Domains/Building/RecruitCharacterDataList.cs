@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 招募角色信息列表
-/// </summary>
 [SerializableGameData(IsExtensible = true, NotForDisplayModule = true)]
 public class RecruitCharacterDataList : ISerializableGameData
 {
@@ -22,13 +19,11 @@ public class RecruitCharacterDataList : ISerializableGameData
 	[SerializableGameDataField]
 	public List<RecruitCharacterData> Items = new List<RecruitCharacterData>();
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -53,7 +48,6 @@ public class RecruitCharacterDataList : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -97,7 +91,6 @@ public class RecruitCharacterDataList : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

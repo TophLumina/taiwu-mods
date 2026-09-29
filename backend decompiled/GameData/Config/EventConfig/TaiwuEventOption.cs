@@ -47,7 +47,11 @@ public class TaiwuEventOption
 
 	public bool Important;
 
-	public string OptionContent { get; private set; }
+	public string OptionContent { get; private set; } = string.Empty;
+
+	public string ImportantOptionTitleLanguageKey { get; private set; }
+
+	public string ImportantOptionTipLanguageKey { get; private set; }
 
 	public bool WasSelected
 	{
@@ -97,6 +101,21 @@ public class TaiwuEventOption
 	public void SetContent(string content)
 	{
 		OptionContent = content;
+	}
+
+	public void ClearLanguage()
+	{
+		OptionContent = string.Empty;
+	}
+
+	public void SetImportantOptionTitleLanguageKey(string languageKey)
+	{
+		ImportantOptionTitleLanguageKey = languageKey;
+	}
+
+	public void SetImportantOptionTipLanguageKey(string languageKey)
+	{
+		ImportantOptionTipLanguageKey = languageKey;
 	}
 
 	public string Select(EventScriptRuntime scriptRuntime)

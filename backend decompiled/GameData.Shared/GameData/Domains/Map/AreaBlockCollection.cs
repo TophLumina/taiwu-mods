@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 地块数据集合
-/// </summary>
 public class AreaBlockCollection : IDictionary<short, MapBlockData>, ICollection<KeyValuePair<short, MapBlockData>>, IEnumerable<KeyValuePair<short, MapBlockData>>, IEnumerable
 {
 	public struct Enumerator : IEnumerator<KeyValuePair<short, MapBlockData>>, IEnumerator, IDisposable, IDictionaryEnumerator
@@ -58,14 +55,8 @@ public class AreaBlockCollection : IDictionary<short, MapBlockData>, ICollection
 		}
 	}
 
-	/// <summary>
-	/// 游戏运行过程中使用的正式集合
-	/// </summary>
 	private MapBlockData[] _collection;
 
-	/// <summary>
-	/// 读取档案时的临时集合. 需要在读取完档案数据后, 转为正式集合.
-	/// </summary>
 	private List<MapBlockData> _tmpCollection;
 
 	public int Count
@@ -118,11 +109,6 @@ public class AreaBlockCollection : IDictionary<short, MapBlockData>, ICollection
 		_collection = new MapBlockData[blockCount];
 	}
 
-	/// <summary>
-	/// 读取完档案数据, 构造好临时集合后, 把临时集合内的数据转到正式集合.
-	/// 转到正式集合前, IDictionary 的接口方法, 除了 Add, Clear, GetEnumerator 之外都不能调用.
-	/// 转到正式集合后, IDictionary 的接口方法, 除了 CopyTo, Remove, Keys, Clear 之外都可以调用.
-	/// </summary>
 	public void ConvertToRegularCollection()
 	{
 		_collection = ((_tmpCollection == null) ? Array.Empty<MapBlockData>() : _tmpCollection.ToArray());

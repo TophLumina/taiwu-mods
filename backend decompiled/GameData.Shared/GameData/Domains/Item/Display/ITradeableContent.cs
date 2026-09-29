@@ -75,6 +75,18 @@ public interface ITradeableContent : ISerializableGameData
 
 	int TravelTimeReduction => -1;
 
+	long ExchangeValue
+	{
+		get
+		{
+			return Value;
+		}
+		set
+		{
+			Value = value;
+		}
+	}
+
 	sbyte[] BookPageStates => null;
 
 	sbyte[] BookPageProgress => null;
@@ -109,17 +121,27 @@ public interface ITradeableContent : ISerializableGameData
 
 	bool IsInCurrentCricketPreset => false;
 
-	/// <summary>
-	/// 是否为特殊互动的物品（如 偷师、唬骗互动中的功法、技艺，这些功法技艺以书籍的形式出现在列表中，且正常参与筛选排序，其他逻辑以此字段区分是否为假物品）
-	/// </summary>
 	bool IsSpecialInteract => false;
 
-	/// <summary>
-	/// 警惕值
-	/// </summary>
 	int AlertFactor => 0;
 
+	bool ForceNotTransferable => false;
+
+	ItemKey StackKey
+	{
+		get
+		{
+			if (!PoisonIsIdentified)
+			{
+				return GetStackKey();
+			}
+			return RealKey;
+		}
+	}
+
 	ITradeableContent Clone(int amount = -1);
+
+	sbyte GetContentType();
 
 	void ChangeAmount(Inventory inventory, bool isAdd)
 	{
@@ -144,19 +166,23 @@ public interface ITradeableContent : ISerializableGameData
 		return GetAllInventoryFromPool();
 	}
 
-	/// <summary>
-	/// 优势计算
-	/// </summary>
-	/// <param name="exchange"></param>
-	/// <returns></returns>
 	int Advantage(Exchange exchange)
 	{
 		return exchange.CalcValueAdvantage(Grade);
 	}
 
-	/// <summary>
-	/// 获取类型
-	/// </summary>
-	/// <returns></returns>
-	sbyte GetContentType();
+	IEnumerable<(ItemKey Key, int Amount)> Take(int amount, bool isPreview = true)
+	{
+		yield return (Key: Key, Amount: amount);
+	}
+
+	ItemKey GetStackKey()
+	{
+		ItemKey key = RealKey.StackKey;
+		if (ExtraGoodsType != 0)
+		{
+			key.Id = ExtraGoodsType;
+		}
+		return key;
+	}
 }

@@ -23,5 +23,6 @@ public enum ItemOwnerType : sbyte
 	FleeCarrier,
 	SpecialGroupMember,
 	BequestBook,
-	CricketPolymorph
+	CricketPolymorph,
+	TameLoong
 }

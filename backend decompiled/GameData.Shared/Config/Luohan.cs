@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class Luohan : ConfigData<LuohanItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Luohan Instance = new Luohan();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Accessory", "Medicine", "Material", "TemplateId" };

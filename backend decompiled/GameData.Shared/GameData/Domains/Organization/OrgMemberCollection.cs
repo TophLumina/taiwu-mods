@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Organization;
 
-/// <summary>
-/// 团体成员集合
-/// </summary>
 public class OrgMemberCollection : ISerializableGameData, IEnumerable<int>, IEnumerable
 {
 	private readonly HashSet<int> _grade0;
@@ -78,11 +75,6 @@ public class OrgMemberCollection : ISerializableGameData, IEnumerable<int>, IEnu
 		return (int)(num8 + SerializationHelper.Deserialize(num8, _grade8) - pData);
 	}
 
-	/// <summary>
-	/// 获取指定阶级的成员集合
-	/// </summary>
-	/// <param name="grade"></param>
-	/// <returns></returns>
 	public HashSet<int> GetMembers(sbyte grade)
 	{
 		return grade switch
@@ -100,9 +92,6 @@ public class OrgMemberCollection : ISerializableGameData, IEnumerable<int>, IEnu
 		};
 	}
 
-	/// <summary>
-	/// 获取所有成员列表
-	/// </summary>
 	public void GetAllMembers(List<int> members)
 	{
 		members.Clear();
@@ -117,32 +106,16 @@ public class OrgMemberCollection : ISerializableGameData, IEnumerable<int>, IEnu
 		members.AddRange(_grade8);
 	}
 
-	/// <summary>
-	/// 获取所有成员的个数
-	/// </summary>
-	/// <returns></returns>
 	public int GetCount()
 	{
 		return _grade0.Count + _grade1.Count + _grade2.Count + _grade3.Count + _grade4.Count + _grade5.Count + _grade6.Count + _grade7.Count + _grade8.Count;
 	}
 
-	/// <summary>
-	/// 添加指定阶级的成员.
-	/// 此方法未提交数据更改.
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="grade"></param>
 	public void Add(int charId, sbyte grade)
 	{
 		GetMembers(grade).Add(charId);
 	}
 
-	/// <summary>
-	/// 移除指定阶级的成员.
-	/// 此方法未提交数据更改.
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="grade"></param>
 	public void Remove(int charId, sbyte grade)
 	{
 		if (!GetMembers(grade).Remove(charId))
@@ -151,22 +124,12 @@ public class OrgMemberCollection : ISerializableGameData, IEnumerable<int>, IEnu
 		}
 	}
 
-	/// <summary>
-	/// 响应成员阶级的改变.
-	/// 此方法未提交数据更改.
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="srcGrade"></param>
-	/// <param name="destGrade"></param>
 	public void OnChangeGrade(int charId, sbyte srcGrade, sbyte destGrade)
 	{
 		Remove(charId, srcGrade);
 		Add(charId, destGrade);
 	}
 
-	/// <summary>
-	/// 获取所有成员的迭代器
-	/// </summary>
 	public IEnumerator<int> GetEnumerator()
 	{
 		foreach (int item in _grade0)

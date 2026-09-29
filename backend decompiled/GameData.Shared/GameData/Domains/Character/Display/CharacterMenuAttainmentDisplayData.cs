@@ -6,121 +6,65 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 角色菜单技艺页面数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class CharacterMenuAttainmentDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 功法盘配置数据
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] CombatSkillAttainmentPanels;
 
-	/// <summary>
-	/// 功法盘配置数据
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] CombatSkillAttainmentPlans;
 
-	/// <summary>
-	/// 已学功法id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LearnedCombatSkills;
 
-	/// <summary>
-	/// 功法资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillQualifications;
 
-	/// <summary>
-	/// 实际年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short ActualAge;
 
-	/// <summary>
-	/// 功法成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CombatSkillGrowthType;
 
-	/// <summary>
-	/// 功法造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillAttainments;
 
-	/// <summary>
-	/// 已学功法简略数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillDisplayDataCharacterMenuListItem> LearnedCombatSkillDatasSimple;
 
-	/// <summary>
-	/// 神力
-	/// </summary>
 	[SerializableGameDataField]
 	public int DivinePower;
 
-	/// <summary>
-	/// 鬼术
-	/// </summary>
 	[SerializableGameDataField]
 	public int GhostTechnique;
 
-	/// <summary>
-	/// 目标已学技艺列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<LifeSkillItem> LearnedLifeSkills;
 
-	/// <summary>
-	/// 技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillQualifications;
 
-	/// <summary>
-	/// 技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 技艺成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillGrowthType;
 
-	/// <summary>
-	/// 太吾已学技艺数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, TaiwuLifeSkill> TaiwuLifeSkills = new Dictionary<short, TaiwuLifeSkill>();
 
-	/// <summary>
-	/// 太吾未学技艺数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, TaiwuLifeSkill> TaiwuNotLearnLifeSkills = new Dictionary<short, TaiwuLifeSkill>();
 
-	/// <summary>
-	/// 角色创建类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte CreationType;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 133;
@@ -151,7 +95,6 @@ public class CharacterMenuAttainmentDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -278,7 +221,6 @@ public class CharacterMenuAttainmentDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

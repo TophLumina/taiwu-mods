@@ -7,9011 +7,3892 @@ namespace Config;
 [Serializable]
 public class EventFunction : ConfigData<EventFunctionItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// If
-		/// </summary>
 		public const int If = 0;
 
-		/// <summary>
-		/// Else
-		/// </summary>
 		public const int Else = 1;
 
-		/// <summary>
-		/// ElseIf
-		/// </summary>
 		public const int ElseIf = 2;
 
-		/// <summary>
-		/// Loop
-		/// </summary>
 		public const int Loop = 3;
 
-		/// <summary>
-		/// Break
-		/// </summary>
 		public const int Break = 4;
 
-		/// <summary>
-		/// End
-		/// </summary>
 		public const int End = 5;
 
-		/// <summary>
-		/// Continue
-		/// </summary>
 		public const int Continue = 6;
 
-		/// <summary>
-		/// Label
-		/// </summary>
 		public const int Label = 7;
 
-		/// <summary>
-		/// Jump
-		/// </summary>
 		public const int Jump = 8;
 
-		/// <summary>
-		/// Return
-		/// </summary>
 		public const int Return = 9;
 
-		/// <summary>
-		/// Assign
-		/// </summary>
 		public const int Assign = 10;
 
-		/// <summary>
-		/// Random
-		/// </summary>
 		public const int Random = 11;
 
-		/// <summary>
-		/// CheckProb
-		/// </summary>
 		public const int CheckProb = 12;
 
-		/// <summary>
-		/// GetRandomUnrepeated
-		/// </summary>
 		public const int GetRandomUnrepeated = 767;
 
-		/// <summary>
-		/// EventTransition
-		/// </summary>
 		public const int EventTransition = 13;
 
-		/// <summary>
-		/// OptionInjection
-		/// </summary>
 		public const int OptionInjection = 94;
 
-		/// <summary>
-		/// InjectAllOptions
-		/// </summary>
 		public const int InjectAllOptions = 420;
 
-		/// <summary>
-		/// ExecuteGlobalScript
-		/// </summary>
 		public const int ExecuteGlobalScript = 91;
 
-		/// <summary>
-		/// SaveSectMainStoryValue
-		/// </summary>
 		public const int SaveSectMainStoryValue = 101;
 
-		/// <summary>
-		/// ReadSectMainStoryValue
-		/// </summary>
 		public const int ReadSectMainStoryValue = 102;
 
-		/// <summary>
-		/// SaveGlobalValue
-		/// </summary>
 		public const int SaveGlobalValue = 485;
 
-		/// <summary>
-		/// ReadGlobalValue
-		/// </summary>
 		public const int ReadGlobalValue = 486;
 
-		/// <summary>
-		/// GetListLength
-		/// </summary>
+		public const int SaveDlcValue = 903;
+
+		public const int ReadDlcValue = 904;
+
 		public const int GetListLength = 215;
 
-		/// <summary>
-		/// GetListElement
-		/// </summary>
 		public const int GetListElement = 216;
 
-		/// <summary>
-		/// GetLocalLanguageString
-		/// </summary>
 		public const int GetLocalLanguageString = 568;
 
-		/// <summary>
-		/// SetListenerWithActionName
-		/// </summary>
 		public const int SetListenerWithActionName = 640;
 
-		/// <summary>
-		/// Log
-		/// </summary>
 		public const int Log = 14;
 
-		/// <summary>
-		/// Comment
-		/// </summary>
 		public const int Comment = 15;
 
-		/// <summary>
-		/// PlayAudio
-		/// </summary>
 		public const int PlayAudio = 16;
 
-		/// <summary>
-		/// PerformCutscene
-		/// </summary>
 		public const int PerformCutscene = 482;
 
-		/// <summary>
-		/// SetEventCgTexture
-		/// </summary>
 		public const int SetEventCgTexture = 611;
 
-		/// <summary>
-		/// SetEventCgTextureByName
-		/// </summary>
 		public const int SetEventCgTextureByName = 614;
 
-		/// <summary>
-		/// ShowEventCgTextureInPictureShowPage
-		/// </summary>
 		public const int ShowEventCgTextureInPictureShowPage = 680;
 
-		/// <summary>
-		/// PlayTutorialVideo
-		/// </summary>
 		public const int PlayTutorialVideo = 603;
 
-		/// <summary>
-		/// BackToTutorialChapterMenu
-		/// </summary>
 		public const int BackToTutorialChapterMenu = 637;
 
-		/// <summary>
-		/// BackToMainMenu
-		/// </summary>
 		public const int BackToMainMenu = 661;
 
-		/// <summary>
-		/// ScreenShake
-		/// </summary>
 		public const int ScreenShake = 17;
 
-		/// <summary>
-		/// SpecifyEventBackground
-		/// </summary>
 		public const int SpecifyEventBackground = 197;
 
-		/// <summary>
-		/// BlackMask
-		/// </summary>
 		public const int BlackMask = 483;
 
-		/// <summary>
-		/// SetObtainPopupEnabled
-		/// </summary>
 		public const int SetObtainPopupEnabled = 829;
 
-		/// <summary>
-		/// CloseCharacterMenu
-		/// </summary>
 		public const int CloseCharacterMenu = 832;
 
-		/// <summary>
-		/// OpenEmeiCombatSkillSpecialBreak
-		/// </summary>
 		public const int OpenEmeiCombatSkillSpecialBreak = 187;
 
-		/// <summary>
-		/// SpecifyCurrMainAttribute
-		/// </summary>
 		public const int SpecifyCurrMainAttribute = 18;
 
-		/// <summary>
-		/// ChangeCurrMainAttribute
-		/// </summary>
 		public const int ChangeCurrMainAttribute = 19;
 
-		/// <summary>
-		/// SpecifyInjury
-		/// </summary>
 		public const int SpecifyInjury = 20;
 
-		/// <summary>
-		/// ChangeInjury
-		/// </summary>
 		public const int ChangeInjury = 21;
 
-		/// <summary>
-		/// ClearInjuries
-		/// </summary>
 		public const int ClearInjuries = 22;
 
-		/// <summary>
-		/// SpecifyPoisoned
-		/// </summary>
 		public const int SpecifyPoisoned = 23;
 
-		/// <summary>
-		/// ChangePoisoned
-		/// </summary>
 		public const int ChangePoisoned = 24;
 
-		/// <summary>
-		/// ClearPoisons
-		/// </summary>
 		public const int ClearPoisons = 25;
 
-		/// <summary>
-		/// SpecifyDisorderOfQi
-		/// </summary>
 		public const int SpecifyDisorderOfQi = 26;
 
-		/// <summary>
-		/// ChangeDisorderOfQi
-		/// </summary>
 		public const int ChangeDisorderOfQi = 27;
 
-		/// <summary>
-		/// SpecifyHealth
-		/// </summary>
 		public const int SpecifyHealth = 28;
 
-		/// <summary>
-		/// ChangeHealth
-		/// </summary>
 		public const int ChangeHealth = 29;
 
-		/// <summary>
-		/// SpecifyHappiness
-		/// </summary>
 		public const int SpecifyHappiness = 30;
 
-		/// <summary>
-		/// ChangeHappiness
-		/// </summary>
 		public const int ChangeHappiness = 31;
 
-		/// <summary>
-		/// GetHappiness
-		/// </summary>
 		public const int GetHappiness = 570;
 
-		/// <summary>
-		/// SpecifyFavorabilities
-		/// </summary>
 		public const int SpecifyFavorabilities = 32;
 
-		/// <summary>
-		/// ChangeFavorability
-		/// </summary>
 		public const int ChangeFavorability = 33;
 
-		/// <summary>
-		/// AddFeature
-		/// </summary>
 		public const int AddFeature = 34;
 
-		/// <summary>
-		/// RemoveFeature
-		/// </summary>
 		public const int RemoveFeature = 35;
 
-		/// <summary>
-		/// AddKidnappedCharacter
-		/// </summary>
 		public const int AddKidnappedCharacter = 36;
 
-		/// <summary>
-		/// RemoveKidnappedCharacter
-		/// </summary>
 		public const int RemoveKidnappedCharacter = 37;
 
-		/// <summary>
-		/// AddTaiwuPropertyPermanentBonus
-		/// </summary>
 		public const int AddTaiwuPropertyPermanentBonus = 585;
 
-		/// <summary>
-		/// JoinGroup
-		/// </summary>
 		public const int JoinGroup = 38;
 
-		/// <summary>
-		/// LeaveGroup
-		/// </summary>
 		public const int LeaveGroup = 39;
 
-		/// <summary>
-		/// KillCharacter
-		/// </summary>
 		public const int KillCharacter = 40;
 
-		/// <summary>
-		/// TakeRandomDamage
-		/// </summary>
 		public const int TakeRandomDamage = 189;
 
-		/// <summary>
-		/// AddInventoryItem
-		/// </summary>
 		public const int AddInventoryItem = 41;
 
-		/// <summary>
-		/// RemoveInventoryItem
-		/// </summary>
 		public const int RemoveInventoryItem = 65;
 
-		/// <summary>
-		/// TransferInventoryItem
-		/// </summary>
 		public const int TransferInventoryItem = 42;
 
-		/// <summary>
-		/// AddWarehouseItem
-		/// </summary>
 		public const int AddWarehouseItem = 744;
 
-		/// <summary>
-		/// SpecifyCharacterResource
-		/// </summary>
 		public const int SpecifyCharacterResource = 129;
 
-		/// <summary>
-		/// ChangeCharacterResource
-		/// </summary>
 		public const int ChangeCharacterResource = 66;
 
-		/// <summary>
-		/// GetCharacterResource
-		/// </summary>
 		public const int GetCharacterResource = 679;
 
-		/// <summary>
-		/// TransferCharacterResource
-		/// </summary>
 		public const int TransferCharacterResource = 130;
 
-		/// <summary>
-		/// ChangeCharBaseCombatSkillQualification
-		/// </summary>
 		public const int ChangeCharBaseCombatSkillQualification = 43;
 
-		/// <summary>
-		/// ChangeCharBaseLifeSkillQualification
-		/// </summary>
 		public const int ChangeCharBaseLifeSkillQualification = 44;
 
-		/// <summary>
-		/// SpecifyBaseCombatSkillQualification
-		/// </summary>
 		public const int SpecifyBaseCombatSkillQualification = 789;
 
-		/// <summary>
-		/// SpecifyBaseLifeSkillQualification
-		/// </summary>
 		public const int SpecifyBaseLifeSkillQualification = 790;
 
-		/// <summary>
-		/// LearnCombatSkill
-		/// </summary>
 		public const int LearnCombatSkill = 45;
 
-		/// <summary>
-		/// LearnLifeSkill
-		/// </summary>
 		public const int LearnLifeSkill = 46;
 
-		/// <summary>
-		/// AddLegacyPoint
-		/// </summary>
 		public const int AddLegacyPoint = 47;
 
-		/// <summary>
-		/// ExpelTaiwuVillager
-		/// </summary>
 		public const int ExpelTaiwuVillager = 48;
 
-		/// <summary>
-		/// MakeAppointment
-		/// </summary>
 		public const int MakeAppointment = 49;
 
-		/// <summary>
-		/// RemoveAppointment
-		/// </summary>
 		public const int RemoveAppointment = 50;
 
-		/// <summary>
-		/// AdvanceDays
-		/// </summary>
 		public const int AdvanceDays = 51;
 
-		/// <summary>
-		/// ChangeMainStoryLineProgress
-		/// </summary>
 		public const int ChangeMainStoryLineProgress = 52;
 
-		/// <summary>
-		/// SetWorldFunctionsStatus
-		/// </summary>
 		public const int SetWorldFunctionsStatus = 53;
 
-		/// <summary>
-		/// ResetWorldFunctionStatus
-		/// </summary>
 		public const int ResetWorldFunctionStatus = 849;
 
-		/// <summary>
-		/// ChangeSpiritualDebt
-		/// </summary>
 		public const int ChangeSpiritualDebt = 54;
 
-		/// <summary>
-		/// ChangeSettlementSafety
-		/// </summary>
 		public const int ChangeSettlementSafety = 55;
 
-		/// <summary>
-		/// ChangeSettlementCulture
-		/// </summary>
 		public const int ChangeSettlementCulture = 56;
 
-		/// <summary>
-		/// GetSettlementLeader
-		/// </summary>
 		public const int GetSettlementLeader = 860;
 
-		/// <summary>
-		/// SetBlockAndViewRangeVisible
-		/// </summary>
 		public const int SetBlockAndViewRangeVisible = 57;
 
-		/// <summary>
-		/// SetSectAllowLearning
-		/// </summary>
 		public const int SetSectAllowLearning = 58;
 
-		/// <summary>
-		/// SetSectFunctionStatus
-		/// </summary>
 		public const int SetSectFunctionStatus = 325;
 
-		/// <summary>
-		/// JoinOrganization
-		/// </summary>
 		public const int JoinOrganization = 59;
 
-		/// <summary>
-		/// SetSectCharApprovedTaiwu
-		/// </summary>
 		public const int SetSectCharApprovedTaiwu = 60;
 
-		/// <summary>
-		/// SetSectSpiritualDebtInteractionOccurred
-		/// </summary>
 		public const int SetSectSpiritualDebtInteractionOccurred = 226;
 
-		/// <summary>
-		/// ChangeMerchantFavorability
-		/// </summary>
 		public const int ChangeMerchantFavorability = 61;
 
-		/// <summary>
-		/// CreateItem
-		/// </summary>
 		public const int CreateItem = 62;
 
-		/// <summary>
-		/// CreateCricket
-		/// </summary>
 		public const int CreateCricket = 63;
 
-		/// <summary>
-		/// CreateCricketByGrade
-		/// </summary>
 		public const int CreateCricketByGrade = 836;
 
-		/// <summary>
-		/// CreateCombatSkillBook
-		/// </summary>
 		public const int CreateCombatSkillBook = 556;
 
-		/// <summary>
-		/// ReadAllBookPages
-		/// </summary>
 		public const int ReadAllBookPages = 558;
 
-		/// <summary>
-		/// SetEquipmentEffectId
-		/// </summary>
 		public const int SetEquipmentEffectId = 408;
 
-		/// <summary>
-		/// GetCharacterFavorability
-		/// </summary>
 		public const int GetCharacterFavorability = 111;
 
-		/// <summary>
-		/// GetCharacterBehaviorType
-		/// </summary>
 		public const int GetCharacterBehaviorType = 566;
 
-		/// <summary>
-		/// SetCharCombatSkillPracticeLevel
-		/// </summary>
 		public const int SetCharCombatSkillPracticeLevel = 64;
 
-		/// <summary>
-		/// CreateAdventureSite
-		/// </summary>
 		public const int CreateAdventureSite = 67;
 
-		/// <summary>
-		/// CreateConfigMonthlyAction
-		/// </summary>
 		public const int CreateConfigMonthlyAction = 145;
 
-		/// <summary>
-		/// CreateEnemyCharacter
-		/// </summary>
 		public const int CreateEnemyCharacter = 92;
 
-		/// <summary>
-		/// CreateEventActor
-		/// </summary>
 		public const int CreateEventActor = 93;
 
-		/// <summary>
-		/// GetFixedCharacter
-		/// </summary>
+		public const int SetEventActor = 940;
+
 		public const int GetFixedCharacter = 99;
 
-		/// <summary>
-		/// GetOrCreateIntelligentCharacterByFilter
-		/// </summary>
 		public const int GetIntelligentCharacterByFilter = 114;
 
-		/// <summary>
-		/// MoveCharacter
-		/// </summary>
 		public const int MoveCharacter = 100;
 
-		/// <summary>
-		/// StartCombat
-		/// </summary>
 		public const int StartCombat = 89;
 
-		/// <summary>
-		/// StartNpcCombat
-		/// </summary>
 		public const int StartNpcCombat = 778;
 
-		/// <summary>
-		/// StartCombatWithSpecialTeammate
-		/// </summary>
 		public const int StartCombatWithSpecialTeammate = 841;
 
-		/// <summary>
-		/// TriggerExtraTask
-		/// </summary>
 		public const int TriggerExtraTask = 68;
 
-		/// <summary>
-		/// FinishExtraTask
-		/// </summary>
 		public const int FinishExtraTask = 69;
 
-		/// <summary>
-		/// FinishExtraTaskChain
-		/// </summary>
 		public const int FinishExtraTaskChain = 70;
 
-		/// <summary>
-		/// TriggerSectMainStoryEndingCountDown
-		/// </summary>
 		public const int TriggerSectMainStoryEndingCountDown = 115;
 
-		/// <summary>
-		/// SetSectMainStoryEnding
-		/// </summary>
 		public const int SetSectMainStoryEnding = 116;
 
-		/// <summary>
-		/// GetTemplateIdOfFixedCharacterCombatWith
-		/// </summary>
 		public const int GetTemplateIdOfFixedCharacterCombatWith = 113;
 
-		/// <summary>
-		/// SetCharacterFollowTaiwu
-		/// </summary>
 		public const int SetCharacterFollowTaiwu = 117;
 
-		/// <summary>
-		/// CancelCharacterFollowTaiwu
-		/// </summary>
 		public const int CancelCharacterFollowTaiwu = 120;
 
-		/// <summary>
-		/// StartLifeSkillCombat
-		/// </summary>
 		public const int StartLifeSkillCombat = 118;
 
-		/// <summary>
-		/// ExitAdventure
-		/// </summary>
 		public const int ExitAdventure = 124;
 
-		/// <summary>
-		/// GetAdventureCharacter
-		/// </summary>
 		public const int GetAdventureCharacter = 143;
 
-		/// <summary>
-		/// GetAdventureCharacterCount
-		/// </summary>
 		public const int GetAdventureCharacterCount = 144;
 
-		/// <summary>
-		/// FinishAdventureEvent
-		/// </summary>
 		public const int FinishAdventureEvent = 125;
 
-		/// <summary>
-		/// SelectAdventureBranch
-		/// </summary>
 		public const int SelectAdventureBranch = 126;
 
-		/// <summary>
-		/// GenerateAdventureMap
-		/// </summary>
 		public const int GenerateAdventureMap = 119;
 
-		/// <summary>
-		/// GetRandomInventoryItem
-		/// </summary>
 		public const int GetRandomInventoryItem = 440;
 
-		/// <summary>
-		/// GetInventoryItem
-		/// </summary>
 		public const int GetInventoryItem = 850;
 
-		/// <summary>
-		/// CheckInventoryItem
-		/// </summary>
 		public const int CheckInventoryItem = 702;
 
-		/// <summary>
-		/// GetStealActionPhase
-		/// </summary>
 		public const int GetStealActionPhase = 441;
 
-		/// <summary>
-		/// GetPoisonActionPhase
-		/// </summary>
 		public const int GetPoisonActionPhase = 540;
 
-		/// <summary>
-		/// GetPlotHarmActionPhase
-		/// </summary>
 		public const int GetPlotHarmActionPhase = 541;
 
-		/// <summary>
-		/// HandlePoisonAction
-		/// </summary>
 		public const int HandlePoisonAction = 542;
 
-		/// <summary>
-		/// HandlePlotHarmAction
-		/// </summary>
 		public const int HandlePlotHarmAction = 543;
 
-		/// <summary>
-		/// CheckHarmfulActionPhase
-		/// </summary>
 		public const int CheckHarmfulActionPhase = 442;
 
-		/// <summary>
-		/// FilterCharacterItem
-		/// </summary>
 		public const int FilterCharacterItem = 127;
 
-		/// <summary>
-		/// FilterMapBlockInRange
-		/// </summary>
 		public const int FilterMapBlockInRange = 167;
 
-		/// <summary>
-		/// FilterMapBlockOnEdge
-		/// </summary>
 		public const int FilterMapBlockOnEdge = 698;
 
-		/// <summary>
-		/// RegisterToSelectItemSubTypes
-		/// </summary>
 		public const int RegisterToSelectItemSubTypes = 132;
 
-		/// <summary>
-		/// RegisterToSelectItemTemplateIds
-		/// </summary>
 		public const int RegisterToSelectItemTemplateIds = 133;
 
-		/// <summary>
-		/// RegisterToExcludeItemTemplateIds
-		/// </summary>
 		public const int RegisterToExcludeItemTemplateIds = 134;
 
-		/// <summary>
-		/// RegisterToSelectItemGrade
-		/// </summary>
 		public const int RegisterToSelectItemGrade = 534;
 
-		/// <summary>
-		/// RegisterToSelectItemGroup
-		/// </summary>
 		public const int RegisterToSelectItemGroup = 559;
 
-		/// <summary>
-		/// RegisterToSelectItemResourceType
-		/// </summary>
 		public const int RegisterToSelectItemResourceType = 703;
 
-		/// <summary>
-		/// RegisterToExcludeItemResourceType
-		/// </summary>
 		public const int RegisterToExcludeItemResourceType = 704;
 
-		/// <summary>
-		/// FilterCharacterItemByRegister
-		/// </summary>
 		public const int FilterCharacterItemByRegister = 135;
 
-		/// <summary>
-		/// CharacterTeachTaiwuProfession
-		/// </summary>
 		public const int CharacterTeachTaiwuProfession = 147;
 
-		/// <summary>
-		/// RegisterSettlementMemberFeature
-		/// </summary>
 		public const int RegisterSettlementMemberFeature = 227;
 
-		/// <summary>
-		/// AddBuilding
-		/// </summary>
 		public const int AddBuilding = 149;
 
-		/// <summary>
-		/// SectStoryZhujianCreateCatchableThief
-		/// </summary>
 		public const int SectStoryZhujianCreateCatchableThief = 139;
 
-		/// <summary>
-		/// SectStoryZhujianCreateGearMate
-		/// </summary>
 		public const int SectStoryZhujianCreateGearMate = 150;
 
-		/// <summary>
-		/// SectStoryZhujianAddAreaMerchantType
-		/// </summary>
 		public const int SectStoryZhujianAddAreaMerchantType = 151;
 
-		/// <summary>
-		/// SectStoryZhujianRemoveAreaMerchantType
-		/// </summary>
 		public const int SectStoryZhujianRemoveAreaMerchantType = 152;
 
-		/// <summary>
-		/// SectStoryEmeiSetMemberInsaneState
-		/// </summary>
 		public const int SectStoryEmeiSetMemberInsaneState = 188;
 
-		/// <summary>
-		/// GetMapBlockSettlement
-		/// </summary>
 		public const int GetMapBlockSettlement = 243;
 
-		/// <summary>
-		/// GetOtherSmallSettlement
-		/// </summary>
 		public const int GetOtherSmallSettlement = 154;
 
-		/// <summary>
-		/// GetSectSettlement
-		/// </summary>
 		public const int GetSectSettlement = 481;
 
-		/// <summary>
-		/// GetRandomSettlementInState
-		/// </summary>
 		public const int GetRandomSettlementInState = 192;
 
-		/// <summary>
-		/// GetSettlementListInState
-		/// </summary>
 		public const int GetSettlementListInState = 217;
 
-		/// <summary>
-		/// GetCharacterCurrentMapBlock
-		/// </summary>
 		public const int GetCharacterCurrentMapBlock = 198;
 
-		/// <summary>
-		/// GetCharacterSettlement
-		/// </summary>
 		public const int GetCharacterSettlement = 263;
 
-		/// <summary>
-		/// GetSettlementMapBlock
-		/// </summary>
 		public const int GetSettlementMapBlock = 199;
 
-		/// <summary>
-		/// GetCharacterCurrentMapArea
-		/// </summary>
 		public const int GetCharacterCurrentMapArea = 261;
 
-		/// <summary>
-		/// GetSettlementMapArea
-		/// </summary>
 		public const int GetSettlementMapArea = 262;
 
-		/// <summary>
-		/// CreateMerchantRandomItem
-		/// </summary>
 		public const int CreateMerchantRandomItem = 153;
 
-		/// <summary>
-		/// GetCurrentEvent
-		/// </summary>
 		public const int GetCurrentEvent = 437;
 
-		/// <summary>
-		/// TriggerLegacyPassingEvent
-		/// </summary>
 		public const int TriggerLegacyPassingEvent = 156;
 
-		/// <summary>
-		/// StartSetCharacterGivenName
-		/// </summary>
 		public const int StartSetCharacterGivenName = 164;
 
-		/// <summary>
-		/// FinishSetCharacterGivenName
-		/// </summary>
 		public const int FinishSetCharacterGivenName = 165;
 
-		/// <summary>
-		/// CheckExpression
-		/// </summary>
 		public const int CheckExpression = 71;
 
-		/// <summary>
-		/// CheckAnd
-		/// </summary>
 		public const int CheckAnd = 109;
 
-		/// <summary>
-		/// CheckOr
-		/// </summary>
 		public const int CheckOr = 110;
 
-		/// <summary>
-		/// CheckListElement
-		/// </summary>
 		public const int CheckListElement = 218;
 
-		/// <summary>
-		/// CheckWorldFunctionStatus
-		/// </summary>
 		public const int CheckWorldFunctionStatus = 155;
 
-		/// <summary>
-		/// CheckMainStoryProgress
-		/// </summary>
 		public const int CheckMainStoryProgress = 72;
 
-		/// <summary>
-		/// CheckGlobalArgBox
-		/// </summary>
 		public const int CheckGlobalArgBox = 423;
 
-		/// <summary>
-		/// CheckTask
-		/// </summary>
+		public const int CheckDlcArgBox = 907;
+
 		public const int CheckTask = 73;
 
-		/// <summary>
-		/// CheckTaskFinished
-		/// </summary>
 		public const int CheckTaskFinished = 586;
 
-		/// <summary>
-		/// CheckTaskChain
-		/// </summary>
 		public const int CheckTaskChain = 74;
 
-		/// <summary>
-		/// CheckXiangshuLevel
-		/// </summary>
 		public const int CheckXiangshuLevel = 75;
 
-		/// <summary>
-		/// CheckFixedCharacterTemplate
-		/// </summary>
 		public const int CheckFixedCharacterTemplate = 128;
 
-		/// <summary>
-		/// TryGetFixedCharacter
-		/// </summary>
 		public const int TryGetFixedCharacter = 515;
 
-		/// <summary>
-		/// CheckCharacterCurrMainAttribute
-		/// </summary>
 		public const int CheckCharacterCurrMainAttribute = 76;
 
-		/// <summary>
-		/// CheckCharacterMainAttribute
-		/// </summary>
 		public const int CheckCharacterMainAttribute = 77;
 
-		/// <summary>
-		/// CheckCharacterLifeSkillQualification
-		/// </summary>
 		public const int CheckCharacterLifeSkillQualification = 78;
 
-		/// <summary>
-		/// CheckCharacterLifeSkillAttainment
-		/// </summary>
 		public const int CheckCharacterLifeSkillAttainment = 79;
 
-		/// <summary>
-		/// CheckCharacterCombatSkillQualification
-		/// </summary>
 		public const int CheckCharacterCombatSkillQualification = 80;
 
-		/// <summary>
-		/// CheckCharacterCombatSkillAttainment
-		/// </summary>
 		public const int CheckCharacterCombatSkillAttainment = 81;
 
-		/// <summary>
-		/// GetCharacterCombatSkillAttainment
-		/// </summary>
 		public const int GetCharacterCombatSkillAttainment = 577;
 
-		/// <summary>
-		/// CheckCharacterPersonality
-		/// </summary>
 		public const int CheckCharacterPersonality = 82;
 
-		/// <summary>
-		/// CheckCharacterBehaviorType
-		/// </summary>
 		public const int CheckCharacterBehaviorType = 107;
 
-		/// <summary>
-		/// CheckCharacterMorality
-		/// </summary>
 		public const int CheckCharacterMorality = 108;
 
-		/// <summary>
-		/// ChangeCharacterMorality
-		/// </summary>
 		public const int ChangeCharacterMorality = 571;
 
-		/// <summary>
-		/// SetCharacterBehaviorType
-		/// </summary>
 		public const int SetCharacterBehaviorType = 572;
 
-		/// <summary>
-		/// CheckCharacterCurrAge
-		/// </summary>
 		public const int CheckCharacterCurrAge = 160;
 
-		/// <summary>
-		/// CheckCharacterActualAge
-		/// </summary>
 		public const int CheckCharacterActualAge = 161;
 
-		/// <summary>
-		/// CheckCharacterAgeGroup
-		/// </summary>
 		public const int CheckCharacterAgeGroup = 162;
 
-		/// <summary>
-		/// CheckCharacterGender
-		/// </summary>
 		public const int CheckCharacterGender = 203;
 
-		/// <summary>
-		/// CheckCharacterResource
-		/// </summary>
 		public const int CheckCharacterResource = 83;
 
-		/// <summary>
-		/// CheckCharacterFeature
-		/// </summary>
 		public const int CheckCharacterFeature = 84;
 
-		/// <summary>
-		/// CheckCharacterCurrentProfession
-		/// </summary>
 		public const int CheckCharacterCurrentProfession = 140;
 
-		/// <summary>
-		/// CheckCharacterSeniorityPercent
-		/// </summary>
 		public const int CheckCharacterSeniorityPercent = 141;
 
-		/// <summary>
-		/// CheckCharacterInventoryByTemplate
-		/// </summary>
 		public const int CheckCharacterInventoryByTemplate = 85;
 
-		/// <summary>
-		/// CheckCharacterOnSettlementBlock
-		/// </summary>
 		public const int CheckCharacterOnSettlementBlock = 86;
 
-		/// <summary>
-		/// CheckCharacterInSettlementInfluenceRange
-		/// </summary>
 		public const int CheckCharacterInSettlementInfluenceRange = 87;
 
-		/// <summary>
-		/// CheckCharacterInMapState
-		/// </summary>
 		public const int CheckCharacterInMapState = 95;
 
-		/// <summary>
-		/// CheckCharacterInMapArea
-		/// </summary>
 		public const int CheckCharacterInMapArea = 96;
 
-		/// <summary>
-		/// CheckCharacterInBrokenArea
-		/// </summary>
 		public const int CheckCharacterInBrokenArea = 520;
 
-		/// <summary>
-		/// CheckCharacterInMapBlockRange
-		/// </summary>
 		public const int CheckCharacterInMapBlockRange = 168;
 
-		/// <summary>
-		/// CheckCharacterOnMapBlockTemplate
-		/// </summary>
 		public const int CheckCharacterOnMapBlockTemplate = 638;
 
-		/// <summary>
-		/// CheckCharacterOnAnySettlement
-		/// </summary>
 		public const int CheckCharacterOnAnySettlement = 97;
 
-		/// <summary>
-		/// CheckCharacterInAnySettlementInfluenceRange
-		/// </summary>
 		public const int CheckCharacterInAnySettlementInfluenceRange = 98;
 
-		/// <summary>
-		/// CheckCharacterInSettlementArea
-		/// </summary>
 		public const int CheckCharacterInSettlementArea = 194;
 
-		/// <summary>
-		/// CheckCharacterFavorability
-		/// </summary>
 		public const int CheckCharacterFavorability = 88;
 
-		/// <summary>
-		/// CheckCharacterFavorabilityType
-		/// </summary>
 		public const int CheckCharacterFavorabilityType = 142;
 
-		/// <summary>
-		/// CheckCharacterGrade
-		/// </summary>
 		public const int CheckCharacterGrade = 103;
 
-		/// <summary>
-		/// GetCharacterGrade
-		/// </summary>
 		public const int GetCharacterGrade = 573;
 
-		/// <summary>
-		/// CheckCharacterSettlement
-		/// </summary>
 		public const int CheckCharacterSettlement = 104;
 
-		/// <summary>
-		/// CheckCharacterHasItem
-		/// </summary>
 		public const int CheckCharacterHasItem = 121;
 
-		/// <summary>
-		/// CheckCharacterMerchantType
-		/// </summary>
 		public const int CheckCharacterMerchantType = 122;
 
-		/// <summary>
-		/// CheckCharacterReadLifeSkillPageCount
-		/// </summary>
 		public const int CheckCharacterReadLifeSkillPageCount = 131;
 
-		/// <summary>
-		/// CheckCharacterNeiliTypeConflictCombatSkill
-		/// </summary>
 		public const int CheckCharacterNeiliTypeConflictCombatSkill = 567;
 
-		/// <summary>
-		/// CheckPreviousCombatResult
-		/// </summary>
 		public const int CheckPreviousCombatResult = 90;
 
-		/// <summary>
-		/// CheckPreviousCombatType
-		/// </summary>
 		public const int CheckPreviousCombatType = 473;
 
-		/// <summary>
-		/// CheckSectFunctionStatus
-		/// </summary>
 		public const int CheckSectFunctionStatus = 326;
 
-		/// <summary>
-		/// CheckSectCanTeach
-		/// </summary>
 		public const int CheckSectCanTeach = 674;
 
-		/// <summary>
-		/// CheckSettlementInMapState
-		/// </summary>
 		public const int CheckSettlementInMapState = 105;
 
-		/// <summary>
-		/// CheckSettlementInMapArea
-		/// </summary>
 		public const int CheckSettlementInMapArea = 106;
 
-		/// <summary>
-		/// CheckSettlementTreasuryAlertTime
-		/// </summary>
 		public const int CheckSettlementTreasuryAlertTime = 768;
 
-		/// <summary>
-		/// CheckAreaSpiritualDebt
-		/// </summary>
 		public const int CheckAreaSpiritualDebt = 112;
 
-		/// <summary>
-		/// CheckAreaHasAdventure
-		/// </summary>
 		public const int CheckAreaHasAdventure = 204;
 
-		/// <summary>
-		/// CheckAreaHasMajorEvent
-		/// </summary>
 		public const int CheckAreaHasMajorEvent = 787;
 
-		/// <summary>
-		/// CheckAreaHasAdultGraveOfTargetOrganization
-		/// </summary>
 		public const int CheckAreaHasAdultGraveOfTargetOrganization = 517;
 
-		/// <summary>
-		/// CheckSectMainStoryValueExists
-		/// </summary>
 		public const int CheckSectMainStoryValueExists = 123;
 
-		/// <summary>
-		/// CheckMapBlockByMatcher
-		/// </summary>
 		public const int CheckMapBlockByMatcher = 769;
 
-		/// <summary>
-		/// CheckItemType
-		/// </summary>
 		public const int CheckItemType = 136;
 
-		/// <summary>
-		/// CheckItemSubType
-		/// </summary>
 		public const int CheckItemSubType = 137;
 
-		/// <summary>
-		/// CheckItemTemplate
-		/// </summary>
 		public const int CheckItemTemplate = 138;
 
-		/// <summary>
-		/// TryGetCharacterCurrentProfession
-		/// </summary>
 		public const int TryGetCharacterCurrentProfession = 146;
 
-		/// <summary>
-		/// CheckCharacterPassMatcher
-		/// </summary>
 		public const int CheckCharacterPassMatcher = 213;
 
-		/// <summary>
-		/// CheckCharacterCanTeachTaiwuProfession
-		/// </summary>
 		public const int CheckCharacterCanTeachTaiwuProfession = 148;
 
-		/// <summary>
-		/// CheckCharacterCanTeachTaiwuProfessionSkillUnlock
-		/// </summary>
 		public const int CheckCharacterCanTeachTaiwuProfessionSkillUnlock = 163;
 
-		/// <summary>
-		/// CheckCharacterConsummateLevel
-		/// </summary>
 		public const int CheckCharacterConsummateLevel = 157;
 
-		/// <summary>
-		/// CheckIsDreamBack
-		/// </summary>
 		public const int CheckIsDreamBack = 158;
 
-		/// <summary>
-		/// CheckCharacterAlive
-		/// </summary>
 		public const int CheckCharacterAlive = 159;
 
-		/// <summary>
-		/// CheckCharacterOnValidLocation
-		/// </summary>
 		public const int CheckCharacterOnValidLocation = 516;
 
-		/// <summary>
-		/// CheckCharacterIntelligent
-		/// </summary>
 		public const int CheckCharacterIntelligent = 716;
 
-		/// <summary>
-		/// CreateFixedSkillBook
-		/// </summary>
 		public const int CreateFixedSkillBook = 166;
 
-		/// <summary>
-		/// CheckAdventureParameterCount
-		/// </summary>
 		public const int CheckAdventureParameterCount = 169;
 
-		/// <summary>
-		/// CheckCurrentAdventure
-		/// </summary>
 		public const int CheckCurrentAdventure = 421;
 
-		/// <summary>
-		/// CheckMovePoint
-		/// </summary>
 		public const int CheckMovePoint = 170;
 
-		/// <summary>
-		/// ChangeActionPoint
-		/// </summary>
 		public const int ChangeActionPoint = 717;
 
-		/// <summary>
-		/// CheckCurrMonth
-		/// </summary>
 		public const int CheckCurrMonth = 171;
 
-		/// <summary>
-		/// CheckCharacterKidnapSpecificGender
-		/// </summary>
 		public const int CheckCharacterKidnapSpecificGender = 172;
 
-		/// <summary>
-		/// CheckCharacterKidnapSpecificAgeGroup
-		/// </summary>
 		public const int CheckCharacterKidnapSpecificAgeGroup = 173;
 
-		/// <summary>
-		/// CheckCharacterKidnapSpecificId
-		/// </summary>
 		public const int CheckCharacterKidnapSpecificId = 174;
 
-		/// <summary>
-		/// CheckCharacterTeammateSpecificIdGender
-		/// </summary>
 		public const int CheckCharacterTeammateSpecificIdGender = 175;
 
-		/// <summary>
-		/// CheckCharacterTeammateSpecificIdAgeGroup
-		/// </summary>
 		public const int CheckCharacterTeammateSpecificIdAgeGroup = 176;
 
-		/// <summary>
-		/// CheckCharacterTeammateSpecificIdId
-		/// </summary>
 		public const int CheckCharacterTeammateSpecificIdId = 177;
 
-		/// <summary>
-		/// CheckCharacterExp
-		/// </summary>
 		public const int CheckCharacterExp = 178;
 
-		/// <summary>
-		/// CheckCharacterReadCombatSkillPageCount
-		/// </summary>
 		public const int CheckCharacterReadCombatSkillPageCount = 179;
 
-		/// <summary>
-		/// CheckCharacterCombatSkillBreakout
-		/// </summary>
 		public const int CheckCharacterCombatSkillBreakout = 180;
 
-		/// <summary>
-		/// CheckSettlementApprovingRate
-		/// </summary>
 		public const int CheckSettlementApprovingRate = 190;
 
-		/// <summary>
-		/// AddMaxApprovingRateBonus
-		/// </summary>
 		public const int AddMaxApprovingRateBonus = 535;
 
-		/// <summary>
-		/// CheckSettlementApprovingRateUpperLimit
-		/// </summary>
 		public const int CheckSettlementApprovingRateUpperLimit = 560;
 
-		/// <summary>
-		/// CheckStateHasSettlementType
-		/// </summary>
 		public const int CheckStateHasSettlementType = 193;
 
-		/// <summary>
-		/// CheckAdventureTemplate
-		/// </summary>
 		public const int CheckAdventureTemplate = 202;
 
-		/// <summary>
-		/// CheckAdventurePerMoveCount
-		/// </summary>
 		public const int CheckAdventurePerMoveCount = 181;
 
-		/// <summary>
-		/// CheckAdventurePerCostMovePoint
-		/// </summary>
 		public const int CheckAdventurePerCostMovePoint = 182;
 
-		/// <summary>
-		/// CheckAdventureElementVisible
-		/// </summary>
 		public const int CheckAdventureElementVisible = 183;
 
-		/// <summary>
-		/// SwitchEmeiBlood
-		/// </summary>
 		public const int SwitchEmeiBlood = 184;
 
-		/// <summary>
-		/// CheckAdventureCharacterGroup
-		/// </summary>
 		public const int CheckAdventureCharacterGroup = 185;
 
-		/// <summary>
-		/// CheckAdventureElementGroup
-		/// </summary>
 		public const int CheckAdventureElementGroup = 186;
 
-		/// <summary>
-		/// GetCharacterConsummateLevel
-		/// </summary>
 		public const int GetCharacterConsummateLevel = 191;
 
-		/// <summary>
-		/// OpenYuanshanMiniGame
-		/// </summary>
 		public const int OpenYuanshanMiniGame = 195;
 
-		/// <summary>
-		/// ProcessYuanshanMiniGameResults
-		/// </summary>
 		public const int ProcessYuanshanMiniGameResults = 196;
 
-		/// <summary>
-		/// SpecifyXiangshuInfectionValue
-		/// </summary>
 		public const int SpecifyXiangshuInfectionValue = 200;
 
-		/// <summary>
-		/// ChangeXiangshuInfectionValue
-		/// </summary>
 		public const int ChangeXiangshuInfectionValue = 201;
 
-		/// <summary>
-		/// SetCharacterMarriageStyleOne
-		/// </summary>
 		public const int SetCharacterMarriageStyleOne = 205;
 
-		/// <summary>
-		/// SetCharacterMarriageStyleTwo
-		/// </summary>
 		public const int SetCharacterMarriageStyleTwo = 206;
 
-		/// <summary>
-		/// IsVitalInPrison
-		/// </summary>
 		public const int IsVitalInPrison = 207;
 
-		/// <summary>
-		/// SetVitalInPrison
-		/// </summary>
 		public const int SetVitalInPrison = 208;
 
-		/// <summary>
-		/// PlayVitalAnim
-		/// </summary>
 		public const int PlayVitalAnim = 209;
 
-		/// <summary>
-		/// GetCharacterBySettlementGradeAndAge
-		/// </summary>
 		public const int GetCharacterBySettlementGradeAndAge = 210;
 
-		/// <summary>
-		/// AreVitalsDemon
-		/// </summary>
 		public const int AreVitalsDemon = 211;
 
-		/// <summary>
-		/// GetCurrentVitalIndex
-		/// </summary>
 		public const int GetCurrentVitalIndex = 212;
 
-		/// <summary>
-		/// InitThreeVitals
-		/// </summary>
 		public const int InitThreeVitals = 214;
 
-		/// <summary>
-		/// CheckAdventureParameter
-		/// </summary>
 		public const int CheckAdventureParameter = 219;
 
-		/// <summary>
-		/// SetAdventureParameter
-		/// </summary>
 		public const int SetAdventureParameter = 220;
 
-		/// <summary>
-		/// ChangeAdventureParameter
-		/// </summary>
 		public const int ChangeAdventureParameter = 221;
 
-		/// <summary>
-		/// CheckAdventureParameterStartWith
-		/// </summary>
 		public const int CheckAdventureParameterStartWith = 222;
 
-		/// <summary>
-		/// SetAdventureParameterStartWith
-		/// </summary>
 		public const int SetAdventureParameterStartWith = 223;
 
-		/// <summary>
-		/// ChangeAdventureParameterStartWith
-		/// </summary>
 		public const int ChangeAdventureParameterStartWith = 224;
 
-		/// <summary>
-		/// AdventureCheckProb
-		/// </summary>
 		public const int AdventureCheckProb = 225;
 
-		/// <summary>
-		/// CheckAdventureElementCount
-		/// </summary>
 		public const int CheckAdventureElementCount = 228;
 
-		/// <summary>
-		/// CheckAdventureElementTagCount
-		/// </summary>
 		public const int CheckAdventureElementTagCount = 229;
 
-		/// <summary>
-		/// GetAdventureElementTagCount
-		/// </summary>
 		public const int GetAdventureElementTagCount = 372;
 
-		/// <summary>
-		/// CheckAdventureParameterIsMax
-		/// </summary>
 		public const int CheckAdventureParameterIsMax = 230;
 
-		/// <summary>
-		/// CheckAdventureParameterIsMin
-		/// </summary>
 		public const int CheckAdventureParameterIsMin = 231;
 
-		/// <summary>
-		/// CheckAdventureElementInElement
-		/// </summary>
 		public const int CheckAdventureElementInElement = 232;
 
-		/// <summary>
-		/// CheckAdventureTaiwuInElement
-		/// </summary>
 		public const int CheckAdventureTaiwuInElement = 233;
 
-		/// <summary>
-		/// CheckAdventureTaiwuInBlockGroup
-		/// </summary>
 		public const int CheckAdventureTaiwuInBlockGroup = 234;
 
-		/// <summary>
-		/// AdventureCreateItem
-		/// </summary>
 		public const int AdventureCreateItem = 235;
 
-		/// <summary>
-		/// AdventureRemoveItem
-		/// </summary>
 		public const int AdventureRemoveItem = 236;
 
-		/// <summary>
-		/// AdventureConsumeItem
-		/// </summary>
 		public const int AdventureConsumeItem = 474;
 
-		/// <summary>
-		/// AdventureCheckUseItem
-		/// </summary>
 		public const int AdventureCheckUseItem = 237;
 
-		/// <summary>
-		/// AddJieqingMaskCharId
-		/// </summary>
 		public const int AddJieqingMaskCharId = 238;
 
-		/// <summary>
-		/// RemoveJieqingMaskCharId
-		/// </summary>
 		public const int RemoveJieqingMaskCharId = 239;
 
-		/// <summary>
-		/// AdventureSetAutoDeleteDate
-		/// </summary>
 		public const int AdventureSetAutoDeleteDate = 240;
 
-		/// <summary>
-		/// AdventureExit
-		/// </summary>
 		public const int AdventureExit = 241;
 
-		/// <summary>
-		/// AdventureExitNotReset
-		/// </summary>
 		public const int AdventureExitNotReset = 687;
 
-		/// <summary>
-		/// AdventureCreateAndEnter
-		/// </summary>
 		public const int AdventureCreateAndEnter = 718;
 
-		/// <summary>
-		/// AdventureExitResetCharacterState
-		/// </summary>
 		public const int AdventureExitResetCharacterState = 688;
 
-		/// <summary>
-		/// AdventureExitResetElementParameter
-		/// </summary>
 		public const int AdventureExitResetElementParameter = 689;
 
-		/// <summary>
-		/// AdventureExitResetElementBlockIndex
-		/// </summary>
 		public const int AdventureExitResetElementBlockIndex = 690;
 
-		/// <summary>
-		/// AdventureExitInterruptAllActions
-		/// </summary>
 		public const int AdventureExitInterruptAllActions = 691;
 
-		/// <summary>
-		/// AdventureExitResetTaiwuBuff
-		/// </summary>
 		public const int AdventureExitResetTaiwuBuff = 692;
 
-		/// <summary>
-		/// DestroyEnemyNest
-		/// </summary>
 		public const int DestroyEnemyNest = 242;
 
-		/// <summary>
-		/// SectMainStoryUnlockUI
-		/// </summary>
 		public const int SectMainStoryUnlockUI = 244;
 
-		/// <summary>
-		/// CheckAdventureElementVisibleWithTag
-		/// </summary>
 		public const int CheckAdventureElementVisibleWithTag = 245;
 
-		/// <summary>
-		/// CheckAdventureElementGroupWithTag
-		/// </summary>
 		public const int CheckAdventureElementGroupWithTag = 246;
 
-		/// <summary>
-		/// CheckAdventureElementInElementWithTag
-		/// </summary>
 		public const int CheckAdventureElementInElementWithTag = 247;
 
-		/// <summary>
-		/// CheckAdventureTaiwuInElementWithTag
-		/// </summary>
 		public const int CheckAdventureTaiwuInElementWithTag = 248;
 
-		/// <summary>
-		/// GetCurrentFaith
-		/// </summary>
 		public const int GetCurrentFaith = 249;
 
-		/// <summary>
-		/// GetFaithLevel
-		/// </summary>
 		public const int GetFaithLevel = 250;
 
-		/// <summary>
-		/// GetFuyuFaithTime
-		/// </summary>
 		public const int GetFuyuFaithTime = 251;
 
-		/// <summary>
-		/// OpenFuyuFaithPanel
-		/// </summary>
 		public const int OpenFuyuFaithPanel = 252;
 
-		/// <summary>
-		/// OpenFuyuGiftPanel
-		/// </summary>
 		public const int OpenFuyuGiftPanel = 253;
 
-		/// <summary>
-		/// ApplyFuyuFaith
-		/// </summary>
 		public const int ApplyFuyuFaith = 254;
 
-		/// <summary>
-		/// ReadSelectResultCount
-		/// </summary>
 		public const int ReadSelectResultCount = 255;
 
-		/// <summary>
-		/// TryGetMaxAcceptableFuyuFaith
-		/// </summary>
 		public const int TryGetMaxAcceptableFuyuFaith = 256;
 
-		/// <summary>
-		/// CheckTaiwuHasFuyuFaith
-		/// </summary>
 		public const int CheckTaiwuHasFuyuFaith = 257;
 
-		/// <summary>
-		/// CheckCharacterFuyuFaith
-		/// </summary>
 		public const int CheckCharacterFuyuFaith = 258;
 
-		/// <summary>
-		/// AdventureElementFillByGroup
-		/// </summary>
 		public const int AdventureElementFillByGroup = 259;
 
-		/// <summary>
-		/// AdventureElementFillByElement
-		/// </summary>
 		public const int AdventureElementFillByElement = 260;
 
-		/// <summary>
-		/// AdventureDelete
-		/// </summary>
 		public const int AdventureDelete = 264;
 
-		/// <summary>
-		/// AdventureDeleteNew
-		/// </summary>
 		public const int AdventureDeleteNew = 811;
 
-		/// <summary>
-		/// CheckAdventureElementParameter
-		/// </summary>
 		public const int CheckAdventureElementParameter = 265;
 
-		/// <summary>
-		/// SetAdventureElementParameter
-		/// </summary>
 		public const int SetAdventureElementParameter = 266;
 
-		/// <summary>
-		/// ChangeAdventureElementParameter
-		/// </summary>
 		public const int ChangeAdventureElementParameter = 267;
 
-		/// <summary>
-		/// AdventureChangeElementCountAtTaiwuLocation
-		/// </summary>
 		public const int AdventureChangeElementCountAtTaiwuLocation = 268;
 
-		/// <summary>
-		/// AdventureChangeElementCountAtTaiwuLocationBig
-		/// </summary>
 		public const int AdventureChangeElementCountAtTaiwuLocationBig = 774;
 
-		/// <summary>
-		/// AdventureClearElementAtTaiwuLocation
-		/// </summary>
 		public const int AdventureClearElementAtTaiwuLocation = 269;
 
-		/// <summary>
-		/// AdventureClearElement
-		/// </summary>
 		public const int AdventureClearElement = 270;
 
-		/// <summary>
-		/// AdventureDeleteElement
-		/// </summary>
 		public const int AdventureDeleteElement = 271;
 
-		/// <summary>
-		/// AdventureDeleteElementByElement
-		/// </summary>
 		public const int AdventureDeleteElementByElement = 272;
 
-		/// <summary>
-		/// AdventureDeleteElementByElementGroup
-		/// </summary>
 		public const int AdventureDeleteElementByElementGroup = 273;
 
-		/// <summary>
-		/// CheckAdventureElementHaveElement
-		/// </summary>
 		public const int CheckAdventureElementHaveElement = 274;
 
-		/// <summary>
-		/// GetMovePointValue
-		/// </summary>
 		public const int GetMovePointValue = 275;
 
-		/// <summary>
-		/// CheckAdventureElementCombatPowerIsMax
-		/// </summary>
 		public const int CheckAdventureElementCombatPowerIsMax = 276;
 
-		/// <summary>
-		/// AdventureElementSimulateCombat
-		/// </summary>
 		public const int AdventureElementSimulateCombat = 277;
 
-		/// <summary>
-		/// AdventureCheckHasItem
-		/// </summary>
 		public const int AdventureCheckHasItem = 278;
 
-		/// <summary>
-		/// AdventureSaveElementCharacterId
-		/// </summary>
 		public const int AdventureSaveElementCharacterId = 279;
 
-		/// <summary>
-		/// AdventureCreateElementRandom
-		/// </summary>
 		public const int AdventureCreateElementRandom = 280;
 
-		/// <summary>
-		/// AdventureTaiwuRandomMove
-		/// </summary>
 		public const int AdventureTaiwuRandomMove = 281;
 
-		/// <summary>
-		/// AdventureDeleteCurrElement
-		/// </summary>
 		public const int AdventureDeleteCurrElement = 282;
 
-		/// <summary>
-		/// AdventurePlayDeleteElementAnim
-		/// </summary>
 		public const int AdventurePlayDeleteElementAnim = 484;
 
-		/// <summary>
-		/// ClearDisorderOfQi
-		/// </summary>
 		public const int ClearDisorderOfQi = 283;
 
-		/// <summary>
-		/// RecoverHealth
-		/// </summary>
 		public const int RecoverHealth = 284;
 
-		/// <summary>
-		/// AdventureSaveElementTimeCosted
-		/// </summary>
 		public const int AdventureSaveElementTimeCosted = 285;
 
-		/// <summary>
-		/// AdventureCheckIsSpecifyElement
-		/// </summary>
 		public const int AdventureCheckIsSpecifyElement = 286;
 
-		/// <summary>
-		/// AdventureGetParameterValue
-		/// </summary>
 		public const int AdventureGetParameterValue = 287;
 
-		/// <summary>
-		/// AdventureGetElementParameterValue
-		/// </summary>
 		public const int AdventureGetElementParameterValue = 288;
 
-		/// <summary>
-		/// AdventureGetItemCount
-		/// </summary>
 		public const int AdventureGetItemCount = 289;
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElementAtSameBlock
-		/// </summary>
 		public const int AdventureCompareCombatPowerWithElementAtSameBlock = 290;
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElementTagAtSameBlock
-		/// </summary>
 		public const int AdventureCompareCombatPowerWithElementTagAtSameBlock = 291;
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElement
-		/// </summary>
 		public const int AdventureCompareCombatPowerWithElement = 292;
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElementTag
-		/// </summary>
 		public const int AdventureCompareCombatPowerWithElementTag = 293;
 
-		/// <summary>
-		/// AdventureCheckElementSameLocation
-		/// </summary>
 		public const int AdventureCheckElementSameLocation = 294;
 
-		/// <summary>
-		/// AdventureCheckElementSameLocationWithTag
-		/// </summary>
 		public const int AdventureCheckElementSameLocationWithTag = 295;
 
-		/// <summary>
-		/// AdventureCheckTwoElementSameLocation
-		/// </summary>
 		public const int AdventureCheckTwoElementSameLocation = 598;
 
-		/// <summary>
-		/// AdventureCheckIsSpecifyTagElement
-		/// </summary>
 		public const int AdventureCheckIsSpecifyTagElement = 296;
 
-		/// <summary>
-		/// AdventureChangeElementCount
-		/// </summary>
 		public const int AdventureChangeElementCount = 297;
 
-		/// <summary>
-		/// CheckJieQingInteractUnlock
-		/// </summary>
 		public const int CheckJieQingInteractUnlock = 298;
 
-		/// <summary>
-		/// JieQingInteractConfirmKill
-		/// </summary>
 		public const int JieQingInteractConfirmKill = 299;
 
-		/// <summary>
-		/// CharacterStarFortuneEnough
-		/// </summary>
 		public const int CharacterStarFortuneEnough = 300;
 
-		/// <summary>
-		/// AdventureSaveElementById
-		/// </summary>
 		public const int AdventureSaveElementById = 301;
 
-		/// <summary>
-		/// AdventureSaveElementByTag
-		/// </summary>
 		public const int AdventureSaveElementByTag = 302;
 
-		/// <summary>
-		/// AdventureSaveElementByTagGlobal
-		/// </summary>
 		public const int AdventureSaveElementByTagGlobal = 303;
 
-		/// <summary>
-		/// MajorEventExitAndDelete
-		/// </summary>
 		public const int MajorEventExitAndDelete = 304;
 
-		/// <summary>
-		/// MajorEventExitAndDeleteAndInvokeOther
-		/// </summary>
 		public const int MajorEventExitAndDeleteAndInvokeOther = 374;
 
-		/// <summary>
-		/// MajorEventExitAndDeleteNew
-		/// </summary>
 		public const int MajorEventExitAndDeleteNew = 812;
 
-		/// <summary>
-		/// MajorEventSetSkipFinishAnim
-		/// </summary>
 		public const int MajorEventSetSkipFinishAnim = 856;
 
-		/// <summary>
-		/// AdventureSetTaiwuViewType
-		/// </summary>
 		public const int AdventureSetTaiwuViewType = 305;
 
-		/// <summary>
-		/// AdventureCheckViewType
-		/// </summary>
 		public const int AdventureCheckViewType = 306;
 
-		/// <summary>
-		/// AdventureCheckElementInRange
-		/// </summary>
 		public const int AdventureCheckElementInRange = 307;
 
-		/// <summary>
-		/// AdventureCheckElementInRangeWithTag
-		/// </summary>
 		public const int AdventureCheckElementInRangeWithTag = 308;
 
-		/// <summary>
-		/// AdventureCreateElementAtGroup
-		/// </summary>
 		public const int AdventureCreateElementAtGroup = 309;
 
-		/// <summary>
-		/// AdventureCreateElementInheritCharacter
-		/// </summary>
 		public const int AdventureCreateElementInheritCharacter = 310;
 
-		/// <summary>
-		/// AdventureParameterStartProgress
-		/// </summary>
 		public const int AdventureParameterStartProgress = 311;
 
-		/// <summary>
-		/// AdventureElementParameterStartProgress
-		/// </summary>
 		public const int AdventureElementParameterStartProgress = 312;
 
-		/// <summary>
-		/// AdventureElementMoveToTaiwuNearby
-		/// </summary>
 		public const int AdventureElementMoveToTaiwuNearby = 313;
 
-		/// <summary>
-		/// AdventureGetElementCountInRange
-		/// </summary>
 		public const int AdventureGetElementCountInRange = 314;
 
-		/// <summary>
-		/// CharacterGetAvailableEatingSlotsCount
-		/// </summary>
 		public const int CharacterGetAvailableEatingSlotsCount = 315;
 
-		/// <summary>
-		/// CheckCharacterAvailableEatingSlotsCount
-		/// </summary>
 		public const int CheckCharacterAvailableEatingSlotsCount = 578;
 
-		/// <summary>
-		/// CharacterAddEatingItem
-		/// </summary>
 		public const int CharacterAddEatingItem = 316;
 
-		/// <summary>
-		/// ClearCharacterEatingItemByIndex
-		/// </summary>
 		public const int ClearCharacterEatingItemByIndex = 809;
 
-		/// <summary>
-		/// ClearCharacterEatingItem
-		/// </summary>
 		public const int ClearCharacterEatingItem = 810;
 
-		/// <summary>
-		/// MedicineExtraAddPercent
-		/// </summary>
 		public const int MedicineExtraAddPercent = 544;
 
-		/// <summary>
-		/// CharacterChangeCurrNeili
-		/// </summary>
 		public const int CharacterChangeCurrNeili = 317;
 
-		/// <summary>
-		/// CharacterSetCurrNeili
-		/// </summary>
 		public const int CharacterSetCurrNeili = 318;
 
-		/// <summary>
-		/// CharacterCheckNeiliType
-		/// </summary>
 		public const int CharacterCheckNeiliType = 319;
 
-		/// <summary>
-		/// GetRandomItemTemplateByGrade
-		/// </summary>
 		public const int GetRandomItemTemplateByGrade = 320;
 
-		/// <summary>
-		/// ItemAddPoisonRandom
-		/// </summary>
 		public const int ItemAddPoisonRandom = 321;
 
-		/// <summary>
-		/// CharacterHaveInjury
-		/// </summary>
 		public const int CharacterHaveInjury = 322;
 
-		/// <summary>
-		/// CharacterHavePoison
-		/// </summary>
 		public const int CharacterHavePoison = 323;
 
-		/// <summary>
-		/// TaiwuHealCharacter
-		/// </summary>
 		public const int TaiwuHealCharacter = 324;
 
-		/// <summary>
-		/// RandomSuccessorActive
-		/// </summary>
 		public const int RandomSuccessorActive = 327;
 
-		/// <summary>
-		/// GetSectMainStoryEnding
-		/// </summary>
 		public const int GetSectMainStoryEnding = 328;
 
-		/// <summary>
-		/// OpenModifyBook
-		/// </summary>
 		public const int OpenModifyBook = 329;
 
-		/// <summary>
-		/// GetSectMapBlock
-		/// </summary>
 		public const int GetSectMapBlock = 330;
 
-		/// <summary>
-		/// CheckWuxianWugJugPoison
-		/// </summary>
 		public const int CheckWuxianWugJugPoison = 331;
 
-		/// <summary>
-		/// GetCurrDate
-		/// </summary>
 		public const int GetCurrDate = 332;
 
-		/// <summary>
-		/// StartShavingAction
-		/// </summary>
 		public const int StartShavingAction = 333;
 
-		/// <summary>
-		/// AdventureElementParameterStartProgressWithTag
-		/// </summary>
 		public const int AdventureElementParameterStartProgressWithTag = 334;
 
-		/// <summary>
-		/// RemoveInventoryItemByTemplateId
-		/// </summary>
 		public const int RemoveInventoryItemByTemplateId = 335;
 
-		/// <summary>
-		/// SelectFilterCharacterAgeGroup
-		/// </summary>
 		public const int SelectFilterCharacterAgeGroup = 336;
 
-		/// <summary>
-		/// CheckAdventureElementInProgress
-		/// </summary>
 		public const int CheckAdventureElementInProgress = 337;
 
-		/// <summary>
-		/// AdventureElementSimulateCombatWithTag
-		/// </summary>
 		public const int AdventureElementSimulateCombatWithTag = 338;
 
-		/// <summary>
-		/// CheckPreviousSimulateCombatResult
-		/// </summary>
 		public const int CheckPreviousSimulateCombatResult = 339;
 
-		/// <summary>
-		/// AdventureCreateElementAtGroupWithTag
-		/// </summary>
 		public const int AdventureCreateElementAtGroupWithTag = 340;
 
-		/// <summary>
-		/// CheckSectMainStoryEnding
-		/// </summary>
 		public const int CheckSectMainStoryEnding = 341;
 
-		/// <summary>
-		/// GetTaiwuGroupList
-		/// </summary>
 		public const int GetTaiwuGroupList = 342;
 
-		/// <summary>
-		/// CreateIntList
-		/// </summary>
 		public const int CreateIntList = 343;
 
-		/// <summary>
-		/// AddToIntList
-		/// </summary>
 		public const int AddToIntList = 344;
 
-		/// <summary>
-		/// SelectCharacter
-		/// </summary>
 		public const int SelectCharacter = 345;
 
-		/// <summary>
-		/// SelectCharacterWithFilter
-		/// </summary>
 		public const int SelectCharacterWithFilter = 621;
 
-		/// <summary>
-		/// CheckAdventureElementInTaiwuBigBlockWithTag
-		/// </summary>
 		public const int CheckAdventureElementInTaiwuBigBlockWithTag = 346;
 
-		/// <summary>
-		/// CheckAdventureElementInBigBlockWithTag
-		/// </summary>
 		public const int CheckAdventureElementInBigBlockWithTag = 347;
 
-		/// <summary>
-		/// CheckItemValid
-		/// </summary>
 		public const int CheckItemValid = 348;
 
-		/// <summary>
-		/// CheckAdventureElementParameterInProgress
-		/// </summary>
 		public const int CheckAdventureElementParameterInProgress = 349;
 
-		/// <summary>
-		/// CheckGotoOutterWorldCoolDown
-		/// </summary>
 		public const int CheckGotoOutterWorldCoolDown = 350;
 
-		/// <summary>
-		/// AdventureGetElementDistanceToTaiwu
-		/// </summary>
 		public const int AdventureGetElementDistanceToTaiwu = 351;
 
-		/// <summary>
-		/// AdventureCheckViewTypeToElement
-		/// </summary>
 		public const int AdventureCheckViewTypeToElement = 352;
 
-		/// <summary>
-		/// MajorEventCreate
-		/// </summary>
 		public const int MajorEventCreate = 353;
 
-		/// <summary>
-		/// MajorEventCreateAndEnter
-		/// </summary>
 		public const int MajorEventCreateAndEnter = 780;
 
-		/// <summary>
-		/// GetSettlementRandomMapBlock
-		/// </summary>
 		public const int GetSettlementRandomMapBlock = 354;
 
-		/// <summary>
-		/// SetBlackSnakeName
-		/// </summary>
 		public const int SetBlackSnakeName = 355;
 
-		/// <summary>
-		/// AdventureParameterStopProgress
-		/// </summary>
 		public const int AdventureParameterStopProgress = 356;
 
-		/// <summary>
-		/// AdventureElementParameterStopProgress
-		/// </summary>
 		public const int AdventureElementParameterStopProgress = 357;
 
-		/// <summary>
-		/// AdventureCheckElementDistanceToGroupBlock
-		/// </summary>
 		public const int AdventureCheckElementDistanceToGroupBlock = 358;
 
-		/// <summary>
-		/// ReduceRandomDamage
-		/// </summary>
 		public const int ReduceRandomDamage = 359;
 
-		/// <summary>
-		/// EditCharBaseNeiliProportionOfFiveElements
-		/// </summary>
 		public const int EditCharBaseNeiliProportionOfFiveElements = 360;
 
-		/// <summary>
-		/// GetCharacterFiveElements
-		/// </summary>
 		public const int GetCharacterFiveElements = 782;
 
-		/// <summary>
-		/// AdventureCheckElementAtResetTarget
-		/// </summary>
 		public const int AdventureCheckElementAtResetTarget = 361;
 
-		/// <summary>
-		/// GetJixiCharacter
-		/// </summary>
 		public const int GetJixiCharacter = 362;
 
-		/// <summary>
-		/// CopyFixedCharacterName
-		/// </summary>
 		public const int CopyFixedCharacterName = 363;
 
-		/// <summary>
-		/// CreateIntelligentCharacterWithQualificationBonusWithReturn
-		/// </summary>
 		public const int CreateIntelligentCharacterWithQualificationBonusWithReturn = 364;
 
-		/// <summary>
-		/// AdventureSaveElementAtTaiwuBigBlock
-		/// </summary>
 		public const int AdventureSaveElementAtTaiwuBigBlock = 365;
 
-		/// <summary>
-		/// AdventureSaveElementAtTaiwuBlock
-		/// </summary>
 		public const int AdventureSaveElementAtTaiwuBlock = 366;
 
-		/// <summary>
-		/// AdventureSaveElementAtElementBigBlock
-		/// </summary>
 		public const int AdventureSaveElementAtElementBigBlock = 367;
 
-		/// <summary>
-		/// RemoveItemPoison
-		/// </summary>
 		public const int RemoveItemPoison = 368;
 
-		/// <summary>
-		/// TryGetJixiCharacter
-		/// </summary>
 		public const int TryGetJixiCharacter = 369;
 
-		/// <summary>
-		/// DisableFixedCharacterAiMove
-		/// </summary>
 		public const int DisableFixedCharacterAiMove = 373;
 
-		/// <summary>
-		/// CheckLovingItemSubType
-		/// </summary>
 		public const int CheckLovingItemSubType = 375;
 
-		/// <summary>
-		/// CheckHatingItemSubType
-		/// </summary>
 		public const int CheckHatingItemSubType = 376;
 
-		/// <summary>
-		/// GetCharacterFavorabilityType
-		/// </summary>
 		public const int GetCharacterFavorabilityType = 377;
 
-		/// <summary>
-		/// AdventureGetCurrentCharIds
-		/// </summary>
 		public const int AdventureGetCurrentCharIds = 370;
 
-		/// <summary>
-		/// AdventureGetCharIds
-		/// </summary>
 		public const int AdventureGetCharIds = 371;
 
-		/// <summary>
-		/// AdventureCheckElementDistanceToTaiwu
-		/// </summary>
 		public const int AdventureCheckElementDistanceToTaiwu = 378;
 
-		/// <summary>
-		/// AdventureConvertElementCharJoinGroup
-		/// </summary>
 		public const int AdventureConvertElementCharJoinGroup = 379;
 
-		/// <summary>
-		/// AdventureCreateRandomEnemyBindElement
-		/// </summary>
 		public const int AdventureCreateRandomEnemyBindElement = 380;
 
-		/// <summary>
-		/// CheckAdventureParameterInProgress
-		/// </summary>
 		public const int CheckAdventureParameterInProgress = 381;
 
-		/// <summary>
-		/// CheckAdventureInProgress
-		/// </summary>
 		public const int CheckAdventureInProgress = 382;
 
-		/// <summary>
-		/// CheckJixiCanFollow
-		/// </summary>
 		public const int CheckJixiCanFollow = 383;
 
-		/// <summary>
-		/// DeallocateNeili
-		/// </summary>
 		public const int DeallocateNeili = 384;
 
-		/// <summary>
-		/// AllocateNeili
-		/// </summary>
 		public const int AllocateNeili = 385;
 
-		/// <summary>
-		/// CharacterGetCurrNeili
-		/// </summary>
 		public const int CharacterGetCurrNeili = 386;
 
-		/// <summary>
-		/// AdventureCheckElementDistanceToResetTarget
-		/// </summary>
 		public const int AdventureCheckElementDistanceToResetTarget = 387;
 
-		/// <summary>
-		/// GearMateJoinGroup
-		/// </summary>
 		public const int GearMateJoinGroup = 388;
 
-		/// <summary>
-		/// GearMateLeaveGroup
-		/// </summary>
 		public const int GearMateLeaveGroup = 389;
 
-		/// <summary>
-		/// CheckUsedFuyuSwordInCombat
-		/// </summary>
 		public const int CheckUsedFuyuSwordInCombat = 390;
 
-		/// <summary>
-		/// AdventureElementRandomMove
-		/// </summary>
 		public const int AdventureElementRandomMove = 391;
 
-		/// <summary>
-		/// CheckAdventureElementInBlockGroupBigBlockWithTag
-		/// </summary>
 		public const int CheckAdventureElementInBlockGroupBigBlockWithTag = 392;
 
-		/// <summary>
-		/// AdventureElementSimulateCombatById
-		/// </summary>
 		public const int AdventureElementSimulateCombatById = 393;
 
-		/// <summary>
-		/// TemporarilyChangeExtraNeiliAllocation
-		/// </summary>
 		public const int TemporarilyChangeExtraNeiliAllocation = 394;
 
-		/// <summary>
-		/// CharacterRevertAllTemporaryModifications
-		/// </summary>
 		public const int CharacterRevertAllTemporaryModifications = 395;
 
-		/// <summary>
-		/// AddExtraNeiliAllocationProgressToGainExtraNeiliAllocation
-		/// </summary>
 		public const int AddExtraNeiliAllocationProgressToGainExtraNeiliAllocation = 699;
 
-		/// <summary>
-		/// OpenDriveWugKingUi
-		/// </summary>
 		public const int OpenDriveWugKingUi = 396;
 
-		/// <summary>
-		/// SetCommonOptionAvailable
-		/// </summary>
 		public const int SetCommonOptionAvailable = 397;
 
-		/// <summary>
-		/// BanCommonOption
-		/// </summary>
 		public const int BanCommonOption = 513;
 
-		/// <summary>
-		/// CheckItemPoisoned
-		/// </summary>
 		public const int CheckItemPoisoned = 398;
 
-		/// <summary>
-		/// CheckEventActorTemplate
-		/// </summary>
 		public const int CheckEventActorTemplate = 399;
 
-		/// <summary>
-		/// CheckCharacterEatingWugKing
-		/// </summary>
 		public const int CheckCharacterEatingWugKing = 400;
 
-		/// <summary>
-		/// AddItemPoison
-		/// </summary>
 		public const int AddItemPoison = 401;
 
-		/// <summary>
-		/// AddNormalInformation
-		/// </summary>
 		public const int AddNormalInformation = 569;
 
-		/// <summary>
-		/// AdventureChangeElementValueWithSpecificTag
-		/// </summary>
 		public const int AdventureChangeElementValueWithSpecificTag = 402;
 
-		/// <summary>
-		/// AdventureMoveElementToElementNearById
-		/// </summary>
 		public const int AdventureMoveElementToElementNearById = 403;
 
-		/// <summary>
-		/// AdventureMoveElementToElementNearByKey
-		/// </summary>
 		public const int AdventureMoveElementToElementNearByKey = 404;
 
-		/// <summary>
-		/// AdventureMoveElementToGroup
-		/// </summary>
 		public const int AdventureMoveElementToGroup = 405;
 
-		/// <summary>
-		/// GetCharacterPersonalityType
-		/// </summary>
 		public const int GetCharacterPersonalityType = 406;
 
-		/// <summary>
-		/// GetCharacterLifeSkillAttainment
-		/// </summary>
 		public const int GetCharacterLifeSkillAttainment = 407;
 
-		/// <summary>
-		/// CreateRandomEnemyWithGender
-		/// </summary>
 		public const int CreateRandomEnemyWithGender = 409;
 
-		/// <summary>
-		/// AdventureElementAlertAnim
-		/// </summary>
 		public const int AdventureElementAlertAnim = 410;
 
-		/// <summary>
-		/// AdventureBlockChangeIcon
-		/// </summary>
 		public const int AdventureBlockChangeIcon = 411;
 
-		/// <summary>
-		/// AdventureGroupChangeIcon
-		/// </summary>
 		public const int AdventureGroupChangeIcon = 719;
 
-		/// <summary>
-		/// AdventureElementShowHideEffect
-		/// </summary>
 		public const int AdventureElementShowHideEffect = 412;
 
-		/// <summary>
-		/// AdventureGroupEffect
-		/// </summary>
 		public const int AdventureGroupEffect = 413;
 
-		/// <summary>
-		/// AddInstantNotificationNoArgument
-		/// </summary>
 		public const int AddInstantNotificationNoArgument = 414;
 
-		/// <summary>
-		/// AddInstantNotificationArgumentOneCharacter
-		/// </summary>
 		public const int AddInstantNotificationArgumentOneCharacter = 415;
 
-		/// <summary>
-		/// AddInstantNotificationArgumentTwoCharacter
-		/// </summary>
 		public const int AddInstantNotificationArgumentTwoCharacter = 416;
 
-		/// <summary>
-		/// AddInstantNotificationArgumentThreeCharacter
-		/// </summary>
 		public const int AddInstantNotificationArgumentThreeCharacter = 417;
 
-		/// <summary>
-		/// AddMonthlyEventNoArgument
-		/// </summary>
 		public const int AddMonthlyEventNoArgument = 580;
 
-		/// <summary>
-		/// AddMonthlyNotificationNoArgument
-		/// </summary>
 		public const int AddMonthlyNotificationNoArgument = 581;
 
-		/// <summary>
-		/// AddMonthlyEventArgumentOneCharacter
-		/// </summary>
 		public const int AddMonthlyEventArgumentOneCharacter = 720;
 
-		/// <summary>
-		/// WorldMapTaiwuRandomMove
-		/// </summary>
 		public const int WorldMapTaiwuRandomMove = 418;
 
-		/// <summary>
-		/// CreateGearMate
-		/// </summary>
 		public const int CreateGearMate = 419;
 
-		/// <summary>
-		/// CheckCorpsesCharacterGoodEnding
-		/// </summary>
 		public const int CheckCorpsesCharacterGoodEnding = 422;
 
-		/// <summary>
-		/// CheckValueExist
-		/// </summary>
 		public const int CheckValueExist = 424;
 
-		/// <summary>
-		/// AddListToIntList
-		/// </summary>
 		public const int AddListToIntList = 425;
 
-		/// <summary>
-		/// CheckCharacterInjuryCount
-		/// </summary>
 		public const int CheckCharacterInjuryCount = 426;
 
-		/// <summary>
-		/// AdventureQueryTaiwuActionId
-		/// </summary>
 		public const int AdventureQueryTaiwuActionId = 427;
 
-		/// <summary>
-		/// AdventureQueryElementActionId
-		/// </summary>
 		public const int AdventureQueryElementActionId = 428;
 
-		/// <summary>
-		/// AdventureChangeAction
-		/// </summary>
 		public const int AdventureChangeAction = 429;
 
-		/// <summary>
-		/// AdventureElementStartActionWithTaiwu
-		/// </summary>
 		public const int AdventureElementStartActionWithTaiwu = 430;
 
-		/// <summary>
-		/// AdventureElementStartActionWithElement
-		/// </summary>
 		public const int AdventureElementStartActionWithElement = 431;
 
-		/// <summary>
-		/// AdventureCheckFinishedActionKey
-		/// </summary>
 		public const int AdventureCheckFinishedActionKey = 432;
 
-		/// <summary>
-		/// AdventureGetFinishedActionElement
-		/// </summary>
 		public const int AdventureGetFinishedActionElement = 433;
 
-		/// <summary>
-		/// AdventureElementsStartActionWithTaiwu
-		/// </summary>
 		public const int AdventureElementsStartActionWithTaiwu = 434;
 
-		/// <summary>
-		/// AdventureElementsStartAction
-		/// </summary>
 		public const int AdventureElementsStartAction = 435;
 
-		/// <summary>
-		/// AdventureRemoveViewCloud
-		/// </summary>
 		public const int AdventureRemoveViewCloud = 436;
 
-		/// <summary>
-		/// AdventureGetElementListByTag
-		/// </summary>
 		public const int AdventureGetElementListByTag = 438;
 
-		/// <summary>
-		/// AdventureGetElementListByCoreId
-		/// </summary>
 		public const int AdventureGetElementListByCoreId = 439;
 
-		/// <summary>
-		/// MajorEventGetNodeReward
-		/// </summary>
 		public const int MajorEventGetNodeReward = 443;
 
-		/// <summary>
-		/// ChangeMusicStatus
-		/// </summary>
 		public const int ChangeMusicStatus = 444;
 
-		/// <summary>
-		/// ChangeSoundStatus
-		/// </summary>
 		public const int ChangeSoundStatus = 445;
 
-		/// <summary>
-		/// CheckTotalMonth
-		/// </summary>
 		public const int CheckTotalMonth = 446;
 
-		/// <summary>
-		/// CheckJixiFollowing
-		/// </summary>
 		public const int CheckJixiFollowing = 447;
 
-		/// <summary>
-		/// AdventureCheckElementInRangeWithTagForTaiwu
-		/// </summary>
 		public const int AdventureCheckElementInRangeWithTagForTaiwu = 448;
 
-		/// <summary>
-		/// CheckCharacterHasItemType
-		/// </summary>
+		public const int RemoveAllAdventureByCoreId = 927;
+
 		public const int CheckCharacterHasItemType = 449;
 
-		/// <summary>
-		/// RemoveAllMajorEventByCoreId
-		/// </summary>
 		public const int RemoveAllMajorEventByCoreId = 450;
 
-		/// <summary>
-		/// SetJixiGrow
-		/// </summary>
 		public const int SetJixiGrow = 451;
 
-		/// <summary>
-		/// AdventureAddElementItem
-		/// </summary>
 		public const int AdventureAddElementItem = 452;
 
-		/// <summary>
-		/// AdventureRemoveElementItem
-		/// </summary>
 		public const int AdventureRemoveElementItem = 453;
 
-		/// <summary>
-		/// AdventureSelectElementItem
-		/// </summary>
 		public const int AdventureSelectElementItem = 454;
 
-		/// <summary>
-		/// AdventureCheckElementItem
-		/// </summary>
 		public const int AdventureCheckElementItem = 455;
 
-		/// <summary>
-		/// AdventureHalfItemToTaiwu
-		/// </summary>
 		public const int AdventureHalfItemToTaiwu = 775;
 
-		/// <summary>
-		/// CheckDisorderOfQi
-		/// </summary>
 		public const int CheckDisorderOfQi = 456;
 
-		/// <summary>
-		/// ResetMartialArtTournament
-		/// </summary>
 		public const int ResetMartialArtTournament = 457;
 
-		/// <summary>
-		/// OnLegendaryBookAdventureActivated
-		/// </summary>
 		public const int OnLegendaryBookAdventureActivated = 458;
 
-		/// <summary>
-		/// OnLegendaryBookAdventureRemoved
-		/// </summary>
 		public const int OnLegendaryBookAdventureRemoved = 459;
 
-		/// <summary>
-		/// SetRanshanThreeCorpseFollowing
-		/// </summary>
 		public const int SetRanshanThreeCorpseFollowing = 460;
 
-		/// <summary>
-		/// AdventureAddElementItemPoison
-		/// </summary>
 		public const int AdventureAddElementItemPoison = 461;
 
-		/// <summary>
-		/// AdventureTransferItemToCharacter
-		/// </summary>
 		public const int AdventureTransferItemToCharacter = 462;
 
-		/// <summary>
-		/// AdventureTaiwuShowDialog
-		/// </summary>
 		public const int AdventureTaiwuShowDialog = 463;
 
-		/// <summary>
-		/// AdventureElementShowDialog
-		/// </summary>
 		public const int AdventureElementShowDialog = 464;
 
-		/// <summary>
-		/// AdventureTaiwuAtBlockByElementId
-		/// </summary>
 		public const int AdventureTaiwuAtBlockByElementId = 465;
 
-		/// <summary>
-		/// AdventureTaiwuAtBlockByElementCoreId
-		/// </summary>
 		public const int AdventureTaiwuAtBlockByElementCoreId = 466;
 
-		/// <summary>
-		/// AdventureTaiwuAtBlockByElementTags
-		/// </summary>
 		public const int AdventureTaiwuAtBlockByElementTags = 467;
 
-		/// <summary>
-		/// AdventureTaiwuDistanceToElementById
-		/// </summary>
 		public const int AdventureTaiwuDistanceToElementById = 468;
 
-		/// <summary>
-		/// AdventureTaiwuDistanceToElementByCoreId
-		/// </summary>
 		public const int AdventureTaiwuDistanceToElementByCoreId = 469;
 
-		/// <summary>
-		/// AdventureTaiwuDistanceToElementByTags
-		/// </summary>
 		public const int AdventureTaiwuDistanceToElementByTags = 470;
 
-		/// <summary>
-		/// AdventureCheckElementItemSubType
-		/// </summary>
 		public const int AdventureCheckElementItemSubType = 471;
 
-		/// <summary>
-		/// AdventureSelectElementRandomItemBySubType
-		/// </summary>
 		public const int AdventureSelectElementRandomItemBySubType = 472;
 
-		/// <summary>
-		/// QuerySettlementSect
-		/// </summary>
 		public const int QuerySettlementSect = 475;
 
-		/// <summary>
-		/// GenerateSectComplementCombatSkillBookByGrade
-		/// </summary>
 		public const int GenerateSectComplementCombatSkillBookByGrade = 476;
 
-		/// <summary>
-		/// GenerateMatchItem
-		/// </summary>
 		public const int GenerateMatchItem = 675;
 
-		/// <summary>
-		/// SelectItemFromList
-		/// </summary>
 		public const int SelectItemFromList = 477;
 
-		/// <summary>
-		/// RemoveItemFromList
-		/// </summary>
 		public const int RemoveItemFromList = 478;
 
-		/// <summary>
-		/// AddItemToList
-		/// </summary>
 		public const int AddItemToList = 479;
 
-		/// <summary>
-		/// AddItemListToList
-		/// </summary>
 		public const int AddItemListToList = 676;
 
-		/// <summary>
-		/// DeleteAllItemFromList
-		/// </summary>
 		public const int DeleteAllItemFromList = 480;
 
-		/// <summary>
-		/// AdventureFindElementByCharacterId
-		/// </summary>
 		public const int AdventureFindElementByCharacterId = 487;
 
-		/// <summary>
-		/// CheckTaiwuChickenCount
-		/// </summary>
 		public const int CheckTaiwuChickenCount = 488;
 
-		/// <summary>
-		/// RemoveArgBoxValue
-		/// </summary>
 		public const int RemoveArgBoxValue = 489;
 
-		/// <summary>
-		/// ClearArgBoxValue
-		/// </summary>
 		public const int ClearArgBoxValue = 490;
 
-		/// <summary>
-		/// AdventureFindElementMeetCondition
-		/// </summary>
 		public const int AdventureFindElementMeetCondition = 491;
 
-		/// <summary>
-		/// AdventureFindElementAtLocationByTags
-		/// </summary>
 		public const int AdventureFindElementAtLocationByTags = 492;
 
-		/// <summary>
-		/// CanStartRelationHusbandOrWife
-		/// </summary>
 		public const int CanStartRelationHusbandOrWife = 493;
 
-		/// <summary>
-		/// GetTaiwuKidnappedCharacterList
-		/// </summary>
 		public const int GetTaiwuKidnappedCharacterList = 494;
 
-		/// <summary>
-		/// AdventureGetElementKidnappedCharacterList
-		/// </summary>
 		public const int AdventureGetElementKidnappedCharacterList = 495;
 
-		/// <summary>
-		/// AdventureStartCricketCombat
-		/// </summary>
 		public const int AdventureStartCricketCombat = 496;
 
-		/// <summary>
-		/// AdventureSaveElementBlockIndex
-		/// </summary>
 		public const int AdventureSaveElementBlockIndex = 497;
 
-		/// <summary>
-		/// AdventureSaveTaiwuBlockIndex
-		/// </summary>
 		public const int AdventureSaveTaiwuBlockIndex = 498;
 
-		/// <summary>
-		/// AdventureCheckElementBindCharacter
-		/// </summary>
 		public const int AdventureCheckElementBindCharacter = 499;
 
-		/// <summary>
-		/// AdventureGetBlockListByGroup
-		/// </summary>
 		public const int AdventureGetBlockListByGroup = 500;
 
-		/// <summary>
-		/// AdventureCheckTaiwuAtBlock
-		/// </summary>
 		public const int AdventureCheckTaiwuAtBlock = 501;
 
-		/// <summary>
-		/// AdventureGetElementBigBlockList
-		/// </summary>
 		public const int AdventureGetElementBigBlockList = 502;
 
-		/// <summary>
-		/// AdventureGetTaiwuBigBlockList
-		/// </summary>
 		public const int AdventureGetTaiwuBigBlockList = 503;
 
-		/// <summary>
-		/// AdventureGetBlockElementList
-		/// </summary>
 		public const int AdventureGetBlockElementList = 504;
 
-		/// <summary>
-		/// AdventureCameraMoveToBlock
-		/// </summary>
 		public const int AdventureCameraMoveToBlock = 505;
 
-		/// <summary>
-		/// AdventureDelayAction
-		/// </summary>
 		public const int AdventureDelayAction = 776;
 
-		/// <summary>
-		/// AdventureElementMoveToBlock
-		/// </summary>
 		public const int AdventureElementMoveToBlock = 506;
 
-		/// <summary>
-		/// AdventureCheckElementAtBlockById
-		/// </summary>
 		public const int AdventureCheckElementAtBlockById = 507;
 
-		/// <summary>
-		/// AdventureCheckElementAtBlockByCoreId
-		/// </summary>
 		public const int AdventureCheckElementAtBlockByCoreId = 508;
 
-		/// <summary>
-		/// AdventureCheckElementAtBlockByTag
-		/// </summary>
 		public const int AdventureCheckElementAtBlockByTag = 509;
 
-		/// <summary>
-		/// AdventureElementDirectionalMove
-		/// </summary>
 		public const int AdventureElementDirectionalMove = 510;
 
-		/// <summary>
-		/// AdventureElementDirectionalMoveNew
-		/// </summary>
 		public const int AdventureElementDirectionalMoveNew = 777;
 
-		/// <summary>
-		/// CheckAdventureElementDirectionalPassable
-		/// </summary>
 		public const int CheckAdventureElementDirectionalPassable = 511;
 
-		/// <summary>
-		/// AddAudioCommand
-		/// </summary>
 		public const int AddAudioCommand = 512;
 
-		/// <summary>
-		/// ChangeMusicStatusWithFade
-		/// </summary>
 		public const int ChangeMusicStatusWithFade = 514;
 
-		/// <summary>
-		/// AdventureElementParametricDirectionalMove
-		/// </summary>
 		public const int AdventureElementParametricDirectionalMove = 518;
 
-		/// <summary>
-		/// CheckAdventureElementParametricDirectionalPassable
-		/// </summary>
 		public const int CheckAdventureElementParametricDirectionalPassable = 519;
 
-		/// <summary>
-		/// CheckAdventureTaiwuDirectionalPassable
-		/// </summary>
 		public const int CheckAdventureTaiwuDirectionalPassable = 521;
 
-		/// <summary>
-		/// CheckAdventureTaiwuDirectionalElementCount
-		/// </summary>
 		public const int CheckAdventureTaiwuDirectionalElementCount = 522;
 
-		/// <summary>
-		/// AdventureChangeElementCountAtTaiwuDirectionalBlock
-		/// </summary>
 		public const int AdventureChangeElementCountAtTaiwuDirectionalBlock = 523;
 
-		/// <summary>
-		/// AdventureSaveElementByIdAtTaiwuDirectionalBlock
-		/// </summary>
 		public const int AdventureSaveElementByIdAtTaiwuDirectionalBlock = 524;
 
-		/// <summary>
-		/// ChangeCharacterExp
-		/// </summary>
 		public const int ChangeCharacterExp = 525;
 
-		/// <summary>
-		/// CheckTaiwuHaveReadingBook
-		/// </summary>
 		public const int CheckTaiwuHaveReadingBook = 604;
 
-		/// <summary>
-		/// GetTaiwuReadingBook
-		/// </summary>
 		public const int GetTaiwuReadingBook = 605;
 
-		/// <summary>
-		/// TaiwuReadingBook
-		/// </summary>
 		public const int TaiwuReadingBook = 526;
 
-		/// <summary>
-		/// TaiwuAddReadingEvent
-		/// </summary>
 		public const int TaiwuAddReadingEvent = 527;
 
-		/// <summary>
-		/// AdventureShowHideCloudByViewAtGroup
-		/// </summary>
 		public const int AdventureShowHideCloudByViewAtGroup = 528;
 
-		/// <summary>
-		/// AdventureHideCloudAtGroup
-		/// </summary>
 		public const int AdventureHideCloudAtGroup = 529;
 
-		/// <summary>
-		/// ShowExchangePanel
-		/// </summary>
 		public const int ShowExchangePanel = 530;
 
-		/// <summary>
-		/// SaveCharacterCombatSkill
-		/// </summary>
 		public const int SaveCharacterCombatSkill = 531;
 
-		/// <summary>
-		/// ChangeTaiwuCombatSkillProficiency
-		/// </summary>
 		public const int ChangeTaiwuCombatSkillProficiency = 532;
 
-		/// <summary>
-		/// TeachCombatSkill
-		/// </summary>
 		public const int TeachCombatSkill = 533;
 
-		/// <summary>
-		/// GetCombatPower
-		/// </summary>
 		public const int GetCombatPower = 536;
 
-		/// <summary>
-		/// GetItemGrade
-		/// </summary>
 		public const int GetItemGrade = 537;
 
-		/// <summary>
-		/// CheckItemGrade
-		/// </summary>
 		public const int CheckItemGrade = 538;
 
-		/// <summary>
-		/// HasRelation
-		/// </summary>
 		public const int HasRelation = 539;
 
-		/// <summary>
-		/// AddOneWayRelationType
-		/// </summary>
 		public const int AddOneWayRelationType = 861;
 
-		/// <summary>
-		/// AdventureGetElementsInAction
-		/// </summary>
+		public const int AddRelation = 955;
+
+		public const int RemoveRelation = 956;
+
 		public const int AdventureGetElementsInAction = 545;
 
-		/// <summary>
-		/// AdventureGetElementsInActionWithElement
-		/// </summary>
 		public const int AdventureGetElementsInActionWithElement = 546;
 
-		/// <summary>
-		/// SetInteractionCooldown
-		/// </summary>
 		public const int SetInteractionCooldown = 547;
 
-		/// <summary>
-		/// CheckInteractionCooldown
-		/// </summary>
 		public const int CheckInteractionCooldown = 548;
 
-		/// <summary>
-		/// SetInteractionMonthCooldown
-		/// </summary>
 		public const int SetInteractionMonthCooldown = 834;
 
-		/// <summary>
-		/// CheckInteractionMonthCooldown
-		/// </summary>
 		public const int CheckInteractionMonthCooldown = 835;
 
-		/// <summary>
-		/// AdventureTaiwuDirectionalMove
-		/// </summary>
 		public const int AdventureTaiwuDirectionalMove = 549;
 
-		/// <summary>
-		/// AdventureTaiwuDirectionalMoveNew
-		/// </summary>
 		public const int AdventureTaiwuDirectionalMoveNew = 783;
 
-		/// <summary>
-		/// AdventureConsumeActionPoint
-		/// </summary>
 		public const int AdventureConsumeActionPoint = 550;
 
-		/// <summary>
-		/// AdventureSaveTaiwuPreAndCurBlockIndex
-		/// </summary>
 		public const int AdventureSaveTaiwuPreAndCurBlockIndex = 551;
 
-		/// <summary>
-		/// AdventureSetTaiwuToBlockIndex
-		/// </summary>
 		public const int AdventureSetTaiwuToBlockIndex = 552;
 
-		/// <summary>
-		/// CheckItemGradeByOperator
-		/// </summary>
 		public const int CheckItemGradeByOperator = 553;
 
-		/// <summary>
-		/// AdventureCreateElementRandomAtBigBlock
-		/// </summary>
 		public const int AdventureCreateElementRandomAtBigBlock = 554;
 
-		/// <summary>
-		/// CharacterCheckNeiliTypePercent
-		/// </summary>
 		public const int CharacterCheckNeiliTypePercent = 555;
 
-		/// <summary>
-		/// AdventureInteractCaravan
-		/// </summary>
 		public const int AdventureInteractCaravan = 557;
 
-		/// <summary>
-		/// ResetTransactionData
-		/// </summary>
 		public const int ResetTransactionData = 889;
 
-		/// <summary>
-		/// AdventureElementAnyFollowTarget
-		/// </summary>
 		public const int AdventureElementAnyFollowTarget = 561;
 
-		/// <summary>
-		/// SetAdventureElementFollowTargetBlock
-		/// </summary>
 		public const int SetAdventureElementFollowTargetBlock = 562;
 
-		/// <summary>
-		/// SetAdventureElementFollowTargetElement
-		/// </summary>
 		public const int SetAdventureElementFollowTargetElement = 563;
 
-		/// <summary>
-		/// ClearAdventureElementFollowTarget
-		/// </summary>
 		public const int ClearAdventureElementFollowTarget = 564;
 
-		/// <summary>
-		/// AdventureSaveElementCurBlockIndex
-		/// </summary>
 		public const int AdventureSaveElementCurBlockIndex = 565;
 
-		/// <summary>
-		/// AdventureSetGroupBlockCloud
-		/// </summary>
 		public const int AdventureSetGroupBlockCloud = 574;
 
-		/// <summary>
-		/// AdventureSetBlockCloud
-		/// </summary>
 		public const int AdventureSetBlockCloud = 575;
 
-		/// <summary>
-		/// AdventureSetBlockListCloud
-		/// </summary>
 		public const int AdventureSetBlockListCloud = 576;
 
-		/// <summary>
-		/// AdventureGetBlockListAroundElement
-		/// </summary>
 		public const int AdventureGetBlockListAroundElement = 579;
 
-		/// <summary>
-		/// QueryAdventureCountInWorld
-		/// </summary>
 		public const int QueryAdventureCountInWorld = 844;
 
-		/// <summary>
-		/// AdventureGenerate
-		/// </summary>
 		public const int AdventureGenerate = 582;
 
-		/// <summary>
-		/// AdventureGenerateNotCallCharacter
-		/// </summary>
 		public const int AdventureGenerateNotCallCharacter = 822;
 
-		/// <summary>
-		/// AdventureFillPresetCharacter
-		/// </summary>
 		public const int AdventureFillPresetCharacter = 838;
 
-		/// <summary>
-		/// CreateFixedCharacterGrave
-		/// </summary>
 		public const int CreateFixedCharacterGrave = 583;
 
-		/// <summary>
-		/// TeleportMoveTaiwuToBlock
-		/// </summary>
 		public const int TeleportMoveTaiwuToBlock = 584;
 
-		/// <summary>
-		/// SetNextSwordTombAdventureCooldown
-		/// </summary>
 		public const int SetNextSwordTombAdventureCooldown = 587;
 
-		/// <summary>
-		/// RemoveSwordTombFromLocation
-		/// </summary>
 		public const int RemoveSwordTombFromLocation = 588;
 
-		/// <summary>
-		/// GetDefeatSwordTombCount
-		/// </summary>
 		public const int GetDefeatSwordTombCount = 589;
 
-		/// <summary>
-		/// GetAdventureElementFollowTargetBlock
-		/// </summary>
 		public const int GetAdventureElementFollowTargetBlock = 590;
 
-		/// <summary>
-		/// GetAdventureElementFollowTargetElement
-		/// </summary>
 		public const int GetAdventureElementFollowTargetElement = 591;
 
-		/// <summary>
-		/// AdventureElementArrivedTarget
-		/// </summary>
 		public const int AdventureElementArrivedTarget = 592;
 
-		/// <summary>
-		/// StartInformationSelect
-		/// </summary>
 		public const int StartInformationSelect = 593;
 
-		/// <summary>
-		/// FinishInformationSelect
-		/// </summary>
 		public const int FinishInformationSelect = 594;
 
-		/// <summary>
-		/// ApplyNormalInformation
-		/// </summary>
 		public const int ApplyNormalInformation = 595;
 
-		/// <summary>
-		/// GetRandomItemTemplate
-		/// </summary>
 		public const int GetRandomItemTemplate = 596;
 
-		/// <summary>
-		/// ClearRegisterItemFilter
-		/// </summary>
 		public const int ClearRegisterItemFilter = 597;
 
-		/// <summary>
-		/// GetSectCombatSkillBookByGrade
-		/// </summary>
 		public const int GetSectCombatSkillBookByGrade = 599;
 
-		/// <summary>
-		/// SaveXiangshuLevel
-		/// </summary>
 		public const int SaveXiangshuLevel = 600;
 
-		/// <summary>
-		/// AddTaiwuBreakoutStepBase
-		/// </summary>
 		public const int AddTaiwuBreakoutStepBase = 601;
 
-		/// <summary>
-		/// AddTaiwuBreakoutBaseSuccessRate
-		/// </summary>
 		public const int AddTaiwuBreakoutBaseSuccessRate = 602;
 
-		/// <summary>
-		/// MajorEventSetAtmosphereType
-		/// </summary>
 		public const int MajorEventSetAtmosphereType = 606;
 
-		/// <summary>
-		/// MajorEventUnsetAtmosphereType
-		/// </summary>
 		public const int MajorEventUnsetAtmosphereType = 607;
 
-		/// <summary>
-		/// GetLastSwordTombLocation
-		/// </summary>
 		public const int GetLastSwordTombLocation = 608;
 
-		/// <summary>
-		/// ActivateSwordTombAtLocation
-		/// </summary>
 		public const int ActivateSwordTombAtLocation = 609;
 
-		/// <summary>
-		/// ActivateRemainingSwordTombs
-		/// </summary>
 		public const int ActivateRemainingSwordTombs = 615;
 
-		/// <summary>
-		/// DeactivateAllSwordTombAdventure
-		/// </summary>
 		public const int DeactivateAllSwordTombAdventure = 610;
 
-		/// <summary>
-		/// MakeSectCharactersApproveTaiwuInWulinConference
-		/// </summary>
 		public const int MakeSectCharactersApproveTaiwuInWulinConference = 612;
 
-		/// <summary>
-		/// YufuKillTopTenRankingCharacters
-		/// </summary>
 		public const int YufuKillTopTenRankingCharacters = 613;
 
-		/// <summary>
-		/// SaveWorld
-		/// </summary>
 		public const int SaveWorld = 616;
 
-		/// <summary>
-		/// MakeWorldChaos
-		/// </summary>
 		public const int MakeWorldChaos = 617;
 
-		/// <summary>
-		/// MakeTaiwuVillageAreaGraduallyBroken
-		/// </summary>
 		public const int MakeTaiwuVillageAreaGraduallyBroken = 618;
 
-		/// <summary>
-		/// CheckCharacterCarrierGrade
-		/// </summary>
 		public const int CheckCharacterCarrierGrade = 619;
 
-		/// <summary>
-		/// CheckInventoryItemOperationType
-		/// </summary>
 		public const int CheckInventoryItemOperationType = 620;
 
-		/// <summary>
-		/// AdventureCreateElementAtAllBlock
-		/// </summary>
 		public const int AdventureCreateElementAtAllBlock = 622;
 
-		/// <summary>
-		/// AdventureTeleportMoveTaiwuToBlock
-		/// </summary>
 		public const int AdventureTeleportMoveTaiwuToBlock = 623;
 
-		/// <summary>
-		/// AdventureGetElementListAtBlockByTag
-		/// </summary>
 		public const int AdventureGetElementListAtBlockByTag = 624;
 
-		/// <summary>
-		/// CheckCharacterEquipItemTemplate
-		/// </summary>
 		public const int CheckCharacterEquipItemTemplate = 625;
 
-		/// <summary>
-		/// SetCarrierTamePoint
-		/// </summary>
 		public const int SetCarrierTamePoint = 626;
 
-		/// <summary>
-		/// GetHighestOrLowestHappinessCharacter
-		/// </summary>
 		public const int GetHighestOrLowestHappinessCharacter = 627;
 
-		/// <summary>
-		/// CreateChickenKingToTaiwuVillage
-		/// </summary>
 		public const int CreateChickenKingToTaiwuVillage = 628;
 
-		/// <summary>
-		/// RemoveElementFromList
-		/// </summary>
 		public const int RemoveElementFromList = 629;
 
-		/// <summary>
-		/// GetSwordTombAdventureMaxMonthCount
-		/// </summary>
 		public const int GetSwordTombAdventureMaxMonthCount = 630;
 
-		/// <summary>
-		/// StartCommonSelectCharacterFeature
-		/// </summary>
 		public const int StartCommonSelectCharacterFeature = 631;
 
-		/// <summary>
-		/// TrySetListValue
-		/// </summary>
 		public const int TrySetListValue = 632;
 
-		/// <summary>
-		/// SortListValueReturnIndexList
-		/// </summary>
 		public const int SortListValueReturnIndexList = 633;
 
-		/// <summary>
-		/// CreateTeammateWithXiangshuCloth
-		/// </summary>
 		public const int CreateTeammateWithXiangshuCloth = 634;
 
-		/// <summary>
-		/// SetTutorialFunctionStatus
-		/// </summary>
 		public const int SetTutorialFunctionStatus = 635;
 
-		/// <summary>
-		/// SetAllTutorialFunctionStatuses
-		/// </summary>
 		public const int SetAllTutorialFunctionStatuses = 646;
 
-		/// <summary>
-		/// CheckCurrentTutorialChapter
-		/// </summary>
 		public const int CheckCurrentTutorialChapter = 636;
 
-		/// <summary>
-		/// CheckAdventureBlcokIsInCloud
-		/// </summary>
 		public const int CheckAdventureBlcokIsInCloud = 639;
 
-		/// <summary>
-		/// SettlementHasBuilding
-		/// </summary>
 		public const int SettlementHasBuilding = 641;
 
-		/// <summary>
-		/// CheckCharacterLoopingNeigong
-		/// </summary>
 		public const int CheckCharacterLoopingNeigong = 642;
 
-		/// <summary>
-		/// HuanxingUnlockFuyuPower
-		/// </summary>
 		public const int HuanxingUnlockFuyuPower = 643;
 
-		/// <summary>
-		/// SetCharacterInvincibleInCombat
-		/// </summary>
 		public const int SetCharacterInvincibleInCombat = 851;
 
-		/// <summary>
-		/// CheckAdventureElementDirectionalElementCount
-		/// </summary>
 		public const int CheckAdventureElementDirectionalElementCount = 644;
 
-		/// <summary>
-		/// TutorialRemoveBuildingAreaBambooHouse
-		/// </summary>
 		public const int TutorialRemoveBuildingAreaBambooHouse = 645;
 
-		/// <summary>
-		/// GetMapBlockByCoordinate
-		/// </summary>
 		public const int GetMapBlockByCoordinate = 647;
 
-		/// <summary>
-		/// ClearMapBlockCurrResources
-		/// </summary>
 		public const int ClearMapBlockCurrResources = 648;
 
-		/// <summary>
-		/// SetMapBlockCurrResource
-		/// </summary>
 		public const int SetMapBlockCurrResource = 649;
 
-		/// <summary>
-		/// FillMapBlockCurrResourceByType
-		/// </summary>
 		public const int FillMapBlockCurrResourceByType = 650;
 
-		/// <summary>
-		/// SetForceCollectResourceItem
-		/// </summary>
 		public const int SetForceCollectResourceItem = 651;
 
-		/// <summary>
-		/// SetForceCollectResourceAmount
-		/// </summary>
 		public const int SetForceCollectResourceAmount = 652;
 
-		/// <summary>
-		/// TutorialUnlockProfessionSkill
-		/// </summary>
 		public const int TutorialUnlockProfessionSkill = 653;
 
-		/// <summary>
-		/// TryGetEventTriggerParameter
-		/// </summary>
 		public const int TryGetEventTriggerParameter = 654;
 
-		/// <summary>
-		/// CheckProfessionSkill
-		/// </summary>
 		public const int CheckProfessionSkill = 655;
 
-		/// <summary>
-		/// AdventureCreateBlockList
-		/// </summary>
 		public const int AdventureCreateBlockList = 656;
 
-		/// <summary>
-		/// AdventureBlockListAddElement
-		/// </summary>
 		public const int AdventureBlockListAddElement = 657;
 
-		/// <summary>
-		/// AdventureBlockListSetEffect
-		/// </summary>
 		public const int AdventureBlockListSetEffect = 658;
 
-		/// <summary>
-		/// AdventureBlockSetEffect
-		/// </summary>
 		public const int AdventureBlockSetEffect = 686;
 
-		/// <summary>
-		/// AdventureSetGlobalEffect
-		/// </summary>
 		public const int AdventureSetGlobalEffect = 659;
 
-		/// <summary>
-		/// ChangeCharacterRelationBecomeHusbandOrWife
-		/// </summary>
 		public const int ChangeCharacterRelationBecomeHusbandOrWife = 660;
 
-		/// <summary>
-		/// LoadDreamBackArchive
-		/// </summary>
 		public const int LoadDreamBackArchive = 662;
 
-		/// <summary>
-		/// SaveArchiveForDreamBack
-		/// </summary>
 		public const int SaveArchiveForDreamBack = 712;
 
-		/// <summary>
-		/// CheckHasDreamBackArchive
-		/// </summary>
 		public const int CheckHasDreamBackArchive = 663;
 
-		/// <summary>
-		/// CheckAdventureBlcokElementCount
-		/// </summary>
 		public const int CheckAdventureBlcokElementCount = 664;
 
-		/// <summary>
-		/// PrepareSectMembersAndTaiwuVillagersForSpiritualWanderPlace
-		/// </summary>
 		public const int PrepareSectMembersAndTaiwuVillagersForSpiritualWanderPlace = 665;
 
-		/// <summary>
-		/// SetXiangshuMinionsSurroundTaiwuVillage
-		/// </summary>
 		public const int SetXiangshuMinionsSurroundTaiwuVillage = 666;
 
-		/// <summary>
-		/// GetLastXiangshuAvatar
-		/// </summary>
 		public const int GetLastXiangshuAvatar = 667;
 
-		/// <summary>
-		/// GetLeaderInMaxApprovingRateSectByGoodness
-		/// </summary>
 		public const int GetLeaderInMaxApprovingRateSectByGoodness = 668;
 
-		/// <summary>
-		/// AdventureCreateElementRandomAtGroup
-		/// </summary>
 		public const int AdventureCreateElementRandomAtGroup = 673;
 
-		/// <summary>
-		/// AdventureGetTaiwuLocationElementListByTag
-		/// </summary>
 		public const int AdventureGetTaiwuLocationElementListByTag = 669;
 
-		/// <summary>
-		/// AdventureSaveNearestElementByTag
-		/// </summary>
 		public const int AdventureSaveNearestElementByTag = 670;
 
-		/// <summary>
-		/// AdventureCheckBlockHaveElement
-		/// </summary>
 		public const int AdventureCheckBlockHaveElement = 671;
 
-		/// <summary>
-		/// AdventureStopElementActionByTag
-		/// </summary>
 		public const int AdventureStopElementActionByTag = 672;
 
-		/// <summary>
-		/// GetCharacterInventoryItemCount
-		/// </summary>
 		public const int GetCharacterInventoryItemCount = 677;
 
-		/// <summary>
-		/// GetMartialArtTournamentReward
-		/// </summary>
 		public const int GetMartialArtTournamentReward = 678;
 
-		/// <summary>
-		/// SetHideAllTeammates
-		/// </summary>
 		public const int SetHideAllTeammates = 681;
 
-		/// <summary>
-		/// GetCharacterAttraction
-		/// </summary>
 		public const int GetCharacterAttraction = 682;
 
-		/// <summary>
-		/// CheckCharacterAttraction
-		/// </summary>
 		public const int CheckCharacterAttraction = 683;
 
-		/// <summary>
-		/// GetCharacterCurrMainAttribute
-		/// </summary>
 		public const int GetCharacterCurrMainAttribute = 684;
 
-		/// <summary>
-		/// CreateEnemyCharacterByConsummateLevel
-		/// </summary>
 		public const int CreateEnemyCharacterByConsummateLevel = 685;
 
-		/// <summary>
-		/// TriggerCricketCatch
-		/// </summary>
 		public const int TriggerCricketCatch = 693;
 
-		/// <summary>
-		/// AdventureGetElementListAroundElement
-		/// </summary>
 		public const int AdventureGetElementListAroundElement = 694;
 
-		/// <summary>
-		/// GetRangeBetweenElement
-		/// </summary>
 		public const int GetRangeBetweenElement = 695;
 
-		/// <summary>
-		/// AdventureSaveAllElementLocation
-		/// </summary>
 		public const int AdventureSaveAllElementLocation = 696;
 
-		/// <summary>
-		/// AdventureSaveElementLocation
-		/// </summary>
 		public const int AdventureSaveElementLocation = 697;
 
-		/// <summary>
-		/// AdventureStartSelectElement
-		/// </summary>
 		public const int AdventureStartSelectElement = 700;
 
-		/// <summary>
-		/// AdventureIsActive
-		/// </summary>
 		public const int AdventureIsActive = 890;
 
-		/// <summary>
-		/// TriggeredGuidingChapter
-		/// </summary>
 		public const int TriggeredGuidingChapter = 701;
 
-		/// <summary>
-		/// GenerateEnemiesInBornArea
-		/// </summary>
 		public const int GenerateEnemiesInBornArea = 705;
 
-		/// <summary>
-		/// CheckBlockHasCricket
-		/// </summary>
 		public const int CheckBlockHasCricket = 706;
 
-		/// <summary>
-		/// GenerateCricketPlaceNearTaiwu
-		/// </summary>
 		public const int GenerateCricketPlaceNearTaiwu = 707;
 
-		/// <summary>
-		/// SetCricketAtTaiwuLocationFake
-		/// </summary>
 		public const int SetCricketAtTaiwuLocationFake = 708;
 
-		/// <summary>
-		/// OpenMonthNotifyForStartCricketContent
-		/// </summary>
 		public const int OpenMonthNotifyForStartCricketContent = 709;
 
-		/// <summary>
-		/// TaiwuRecordLifeSummary
-		/// </summary>
 		public const int TaiwuRecordLifeSummary = 710;
 
-		/// <summary>
-		/// RequestSetStat
-		/// </summary>
 		public const int RequestSetStat = 711;
 
-		/// <summary>
-		/// CreateMissNingOfTaiwuVillage
-		/// </summary>
 		public const int CreateMissNingOfTaiwuVillage = 713;
 
-		/// <summary>
-		/// StartShowSwordTombCreate
-		/// </summary>
 		public const int StartShowSwordTombCreate = 714;
 
-		/// <summary>
-		/// ApplyHelpSectInStory
-		/// </summary>
 		public const int ApplyHelpSectInStory = 715;
 
-		/// <summary>
-		/// ChangeBlockTemplate
-		/// </summary>
 		public const int ChangeBlockTemplate = 721;
 
-		/// <summary>
-		/// OpenLegacyActivateDisplay
-		/// </summary>
 		public const int OpenLegacyActivateDisplay = 722;
 
-		/// <summary>
-		/// SetTaiwuVillageShowShrine
-		/// </summary>
 		public const int SetTaiwuVillageShowShrine = 723;
 
-		/// <summary>
-		/// SetTaiwuAsLeaderOfTaiwuVillage
-		/// </summary>
 		public const int SetTaiwuAsLeaderOfTaiwuVillage = 724;
 
-		/// <summary>
-		/// SetFirstSwordTombFinished
-		/// </summary>
 		public const int SetFirstSwordTombFinished = 725;
 
-		/// <summary>
-		/// HideAllMapBlockCharacters
-		/// </summary>
 		public const int HideAllMapBlockCharacters = 726;
 
-		/// <summary>
-		/// CreateAllSwordTombAdventure
-		/// </summary>
 		public const int CreateAllSwordTombAdventure = 727;
 
-		/// <summary>
-		/// TaiwuGroupFull
-		/// </summary>
+		public const int CreateEightSwordTombAdventure = 933;
+
 		public const int TaiwuGroupFull = 728;
 
-		/// <summary>
-		/// CharacterJoinTaiwu
-		/// </summary>
 		public const int CharacterJoinTaiwu = 729;
 
-		/// <summary>
-		/// CricketPolymorphReturnByDead
-		/// </summary>
 		public const int CricketPolymorphReturnByDead = 730;
 
-		/// <summary>
-		/// CheckCricketPolymorphState
-		/// </summary>
 		public const int CheckCricketPolymorphState = 731;
 
-		/// <summary>
-		/// CricketPolymorph
-		/// </summary>
 		public const int CricketPolymorph = 732;
 
-		/// <summary>
-		/// CricketPolymorphEffect
-		/// </summary>
 		public const int CricketPolymorphEffect = 824;
 
-		/// <summary>
-		/// CheckCricketColorId
-		/// </summary>
 		public const int CheckCricketColorId = 733;
 
-		/// <summary>
-		/// GetOrCreateFirstXiangshuAvatarForStory
-		/// </summary>
 		public const int GetOrCreateFirstXiangshuAvatarForStory = 734;
 
-		/// <summary>
-		/// CreateBreakTombXiangshuAvatar
-		/// </summary>
 		public const int CreateBreakTombXiangshuAvatar = 735;
 
-		/// <summary>
-		/// GetLegendaryBookItem
-		/// </summary>
 		public const int GetLegendaryBookItem = 736;
 
-		/// <summary>
-		/// GetSwordFragmentTemplateByCharacter
-		/// </summary>
 		public const int GetSwordFragmentTemplateByCharacter = 737;
 
-		/// <summary>
-		/// SetEventRoleAlternativeName
-		/// </summary>
 		public const int SetEventRoleAlternativeName = 738;
 
-		/// <summary>
-		/// StartSetCharacterName
-		/// </summary>
 		public const int StartSetCharacterName = 739;
 
-		/// <summary>
-		/// FinishSetCharacterName
-		/// </summary>
 		public const int FinishSetCharacterName = 740;
 
-		/// <summary>
-		/// CheckXiangshuAvatarTaskStatus
-		/// </summary>
 		public const int CheckXiangshuAvatarTaskStatus = 741;
 
-		/// <summary>
-		/// ChangeMusicVolume
-		/// </summary>
 		public const int ChangeMusicVolume = 742;
 
-		/// <summary>
-		/// PlayMusicForCount
-		/// </summary>
 		public const int PlayMusicForCount = 743;
 
-		/// <summary>
-		/// AutoEquipItems
-		/// </summary>
 		public const int AutoEquipItems = 745;
 
-		/// <summary>
-		/// AutoEquipCombatSkills
-		/// </summary>
 		public const int AutoEquipCombatSkills = 746;
 
-		/// <summary>
-		/// AutoAllocateNeili
-		/// </summary>
 		public const int AutoAllocateNeili = 747;
 
-		/// <summary>
-		/// ChangeEquipment
-		/// </summary>
 		public const int ChangeEquipment = 781;
 
-		/// <summary>
-		/// SwordTombInvasion
-		/// </summary>
 		public const int SwordTombInvasion = 748;
 
-		/// <summary>
-		/// TryGetBlockXiangshuAvatar
-		/// </summary>
 		public const int TryGetBlockXiangshuAvatar = 749;
 
-		/// <summary>
-		/// CheckCharacterIsAnySectMember
-		/// </summary>
 		public const int CheckCharacterIsAnySectMember = 750;
 
-		/// <summary>
-		/// CheckDefeatSwordTombCount
-		/// </summary>
 		public const int CheckDefeatSwordTombCount = 751;
 
-		/// <summary>
-		/// CheckSectMainStoryTriggerConditions
-		/// </summary>
 		public const int CheckSectMainStoryTriggerConditions = 752;
 
-		/// <summary>
-		/// CharacterRestoreAllStatus
-		/// </summary>
 		public const int CharacterRestoreAllStatus = 753;
 
-		/// <summary>
-		/// IsExorcismNeedToBeDisabled
-		/// </summary>
 		public const int IsExorcismNeedToBeDisabled = 754;
 
-		/// <summary>
-		/// SetExorcismEnabled
-		/// </summary>
 		public const int SetExorcismEnabled = 755;
 
-		/// <summary>
-		/// GetExorcismEnabled
-		/// </summary>
 		public const int GetExorcismEnabled = 756;
 
-		/// <summary>
-		/// CheckCharacterIsXiangshuAvatar
-		/// </summary>
 		public const int CheckCharacterIsXiangshuAvatar = 757;
 
-		/// <summary>
-		/// GetXiangshuAvatarIdByCharacter
-		/// </summary>
 		public const int GetXiangshuAvatarIdByCharacter = 758;
 
-		/// <summary>
-		/// MarkTaiwuDieOfCombatWithXiangshuAttacking
-		/// </summary>
 		public const int MarkTaiwuDieOfCombatWithXiangshuAttacking = 759;
 
-		/// <summary>
-		/// SetXiangshuDisplayStatus
-		/// </summary>
 		public const int SetXiangshuDisplayStatus = 760;
 
-		/// <summary>
-		/// BlockHasNormalHeavenlyTree
-		/// </summary>
 		public const int BlockHasNormalHeavenlyTree = 761;
 
-		/// <summary>
-		/// GetSwordTombInformation
-		/// </summary>
 		public const int GetSwordTombInformation = 762;
 
-		/// <summary>
-		/// StartSelectFilteredCharacters
-		/// </summary>
 		public const int StartSelectFilteredCharacters = 763;
 
-		/// <summary>
-		/// AnySelectableFilteredCharacter
-		/// </summary>
 		public const int AnySelectableFilteredCharacter = 764;
 
-		/// <summary>
-		/// ClearAreaCricket
-		/// </summary>
 		public const int ClearAreaCricket = 765;
 
-		/// <summary>
-		/// SetNextSwordTombCountDownDate
-		/// </summary>
 		public const int SetNextSwordTombCountDownDate = 766;
 
-		/// <summary>
-		/// DeepValleyToSmallVillage
-		/// </summary>
 		public const int DeepValleyToSmallVillage = 770;
 
-		/// <summary>
-		/// SmallVillageToBrokenArea
-		/// </summary>
 		public const int SmallVillageToBrokenArea = 771;
 
-		/// <summary>
-		/// BrokenAreaToTaiwuVillageArea
-		/// </summary>
 		public const int BrokenAreaToTaiwuVillageArea = 772;
 
-		/// <summary>
-		/// DeepValleyToTaiwuVillageArea
-		/// </summary>
 		public const int DeepValleyToTaiwuVillageArea = 773;
 
-		/// <summary>
-		/// TravelToPastTaiwuVillageArea
-		/// </summary>
 		public const int TravelToPastTaiwuVillageArea = 813;
 
-		/// <summary>
-		/// BackFromPastTaiwuVillageArea
-		/// </summary>
 		public const int BackFromPastTaiwuVillageArea = 820;
 
-		/// <summary>
-		/// GenerateMainStoryXiangshuMinion
-		/// </summary>
 		public const int GenerateMainStoryXiangshuMinion = 848;
 
-		/// <summary>
-		/// GenerateChapter9XiangshuMinion
-		/// </summary>
 		public const int GenerateChapter9XiangshuMinion = 842;
 
-		/// <summary>
-		/// CheckChapter9TaiwuEscapeXiangshuMinionRange
-		/// </summary>
 		public const int CheckChapter9TaiwuEscapeXiangshuMinionRange = 843;
 
-		/// <summary>
-		/// CharacterMakeLove
-		/// </summary>
 		public const int CharacterMakeLove = 779;
 
-		/// <summary>
-		/// EventTriggerParameterIsBuildingBlockTemplate
-		/// </summary>
 		public const int EventTriggerParameterIsBuildingBlockTemplate = 784;
 
-		/// <summary>
-		/// CheckSectSpiritualDebtInteractionOccurred
-		/// </summary>
 		public const int CheckSectSpiritualDebtInteractionOccurred = 785;
 
-		/// <summary>
-		/// AddFuyuFaith
-		/// </summary>
 		public const int AddFuyuFaith = 786;
 
-		/// <summary>
-		/// SwordFragmentUnlockSkill
-		/// </summary>
 		public const int SwordFragmentUnlockSkill = 788;
 
-		/// <summary>
-		/// TaiwuHaveCheatOnSecretInformation
-		/// </summary>
 		public const int TaiwuHaveCheatOnSecretInformation = 791;
 
-		/// <summary>
-		/// ShowUnlockSkillSlotAnim
-		/// </summary>
 		public const int ShowUnlockSkillSlotAnim = 792;
 
-		/// <summary>
-		/// SetAreaStoryWeather
-		/// </summary>
 		public const int SetAreaStoryWeather = 793;
 
-		/// <summary>
-		/// AddCharacterExtraTitle
-		/// </summary>
 		public const int AddCharacterExtraTitle = 794;
 
-		/// <summary>
-		/// SelectCharacterCricket
-		/// </summary>
 		public const int SelectCharacterCricket = 795;
 
-		/// <summary>
-		/// StartCricketCombat
-		/// </summary>
 		public const int StartCricketCombat = 796;
 
-		/// <summary>
-		/// StartCricketCombatWithConfig
-		/// </summary>
 		public const int StartCricketCombatWithConfig = 797;
 
-		/// <summary>
-		/// GetSimulateCricketBattleResult
-		/// </summary>
 		public const int GetSimulateCricketBattleResult = 798;
 
-		/// <summary>
-		/// ClearCricketItemShow
-		/// </summary>
 		public const int ClearCricketItemShow = 799;
 
-		/// <summary>
-		/// GetItemCurrDurability
-		/// </summary>
 		public const int GetItemCurrDurability = 800;
 
-		/// <summary>
-		/// SetItemCurrDurability
-		/// </summary>
 		public const int SetItemCurrDurability = 801;
 
-		/// <summary>
-		/// GetItemMaxDurability
-		/// </summary>
 		public const int GetItemMaxDurability = 802;
 
-		/// <summary>
-		/// CheckCricketWinsCount
-		/// </summary>
 		public const int CheckCricketWinsCount = 803;
 
-		/// <summary>
-		/// CheckCharCricketCount
-		/// </summary>
 		public const int CheckCharCricketCount = 804;
 
-		/// <summary>
-		/// CheckCricketAlive
-		/// </summary>
 		public const int CheckCricketAlive = 805;
 
-		/// <summary>
-		/// AdjustCricketExtraAge
-		/// </summary>
 		public const int AdjustCricketExtraAge = 806;
 
-		/// <summary>
-		/// BuyCricketStart
-		/// </summary>
 		public const int BuyCricketStart = 807;
 
-		/// <summary>
-		/// BuyCricketOption
-		/// </summary>
 		public const int BuyCricketOption = 808;
 
-		/// <summary>
-		/// EventSetItemList
-		/// </summary>
 		public const int EventSetItemList = 837;
 
-		/// <summary>
-		/// SetCoverCricketJarGradeList
-		/// </summary>
 		public const int SetCoverCricketJarGradeList = 840;
 
-		/// <summary>
-		/// CreateNoMindGuy
-		/// </summary>
 		public const int CreateNoMindGuy = 814;
 
-		/// <summary>
-		/// GetCharFame
-		/// </summary>
 		public const int GetCharFame = 815;
 
-		/// <summary>
-		/// GetCharPositiveFameValue
-		/// </summary>
 		public const int GetCharPositiveFameValue = 816;
 
-		/// <summary>
-		/// GetCharNegativeFameValue
-		/// </summary>
 		public const int GetCharNegativeFameValue = 817;
 
-		/// <summary>
-		/// CompareCharFame
-		/// </summary>
 		public const int CompareCharFame = 818;
 
-		/// <summary>
-		/// SetIconPlateIsUnlocked
-		/// </summary>
 		public const int SetIconPlateIsUnlocked = 819;
 
-		/// <summary>
-		/// SetUnknownDateDisplay
-		/// </summary>
 		public const int SetUnknownDateDisplay = 821;
 
-		/// <summary>
-		/// ReleaseNoMindGuys
-		/// </summary>
 		public const int ReleaseNoMindGuys = 823;
 
-		/// <summary>
-		/// GetNoMindGuyList
-		/// </summary>
 		public const int GetNoMindGuyList = 825;
 
-		/// <summary>
-		/// BanNormalAttackInTutorial
-		/// </summary>
 		public const int BanNormalAttackInTutorial = 826;
 
-		/// <summary>
-		/// BanMoveInTutorial
-		/// </summary>
 		public const int BanMoveInTutorial = 827;
 
-		/// <summary>
-		/// BanEnemyAiInTutorial
-		/// </summary>
 		public const int BanEnemyAiInTutorial = 828;
 
-		/// <summary>
-		/// GenerateEnemyNestMinion
-		/// </summary>
 		public const int GenerateEnemyNestMinion = 830;
 
-		/// <summary>
-		/// ComplementEnemyNestMinion
-		/// </summary>
 		public const int ComplementEnemyNestMinion = 831;
 
-		/// <summary>
-		/// ClearEnemyNestMinion
-		/// </summary>
 		public const int ClearEnemyNestMinion = 855;
 
-		/// <summary>
-		/// ClearResourceDisasterStatus
-		/// </summary>
 		public const int ClearResourceDisasterStatus = 895;
 
-		/// <summary>
-		/// ClearElopeWithLoveStatus
-		/// </summary>
 		public const int ClearElopeWithLoveStatus = 883;
 
-		/// <summary>
-		/// ClearSwordTombStatus
-		/// </summary>
 		public const int ClearSwordTombStatus = 887;
 
-		/// <summary>
-		/// GetThreeVitalsBetray
-		/// </summary>
 		public const int GetThreeVitalsBetray = 833;
 
-		/// <summary>
-		/// HealAllDefeatMark
-		/// </summary>
 		public const int HealAllDefeatMark = 839;
 
-		/// <summary>
-		/// CurrAliveTwelveImmortalsTotalCount
-		/// </summary>
+		public const int GetMainStoryEndingLine = 938;
+
 		public const int CurrAliveTwelveImmortalsTotalCount = 845;
 
-		/// <summary>
-		/// GenerateTwelveImmortals
-		/// </summary>
 		public const int GenerateTwelveImmortals = 846;
 
-		/// <summary>
-		/// IsTwelveImmortalsMember
-		/// </summary>
 		public const int IsTwelveImmortalsMember = 847;
 
-		/// <summary>
-		/// SetDivineFlameIsUnlocked
-		/// </summary>
 		public const int SetDivineFlameIsUnlocked = 852;
 
-		/// <summary>
-		/// SetNpcFollowTaiwu
-		/// </summary>
 		public const int SetNpcFollowTaiwu = 853;
 
-		/// <summary>
-		/// SetNoMindGuyFollowTaiwu
-		/// </summary>
 		public const int SetNoMindGuyFollowTaiwu = 854;
 
-		/// <summary>
-		/// CreateThreeWayDemon
-		/// </summary>
 		public const int CreateThreeWayDemon = 857;
 
-		/// <summary>
-		/// TaiwuSetClothing
-		/// </summary>
 		public const int TaiwuSetClothing = 858;
 
-		/// <summary>
-		/// TeleportToTaiwuVillage
-		/// </summary>
 		public const int TeleportToTaiwuVillage = 859;
 
-		/// <summary>
-		/// EventClearListeningEvent
-		/// </summary>
 		public const int EventClearListeningEvent = 862;
 
-		/// <summary>
-		/// TaiwuKillTwelveImmortals
-		/// </summary>
 		public const int TaiwuKillTwelveImmortals = 863;
 
-		/// <summary>
-		/// AssisterKillTwelveImmortals
-		/// </summary>
 		public const int AssisterKillTwelveImmortals = 864;
 
-		/// <summary>
-		/// SetTwelveImmortalsAssistState
-		/// </summary>
 		public const int SetTwelveImmortalsAssistState = 870;
 
-		/// <summary>
-		/// CharacterInSuxiaImpactRange
-		/// </summary>
 		public const int CharacterInSuxiaImpactRange = 865;
 
-		/// <summary>
-		/// MoveCharacterAwaySuxiaImpactRange
-		/// </summary>
 		public const int MoveCharacterAwaySuxiaImpactRange = 866;
 
-		/// <summary>
-		/// LearnTwelveImmortalsCombatSkill
-		/// </summary>
 		public const int LearnTwelveImmortalsCombatSkill = 867;
 
-		/// <summary>
-		/// MakeChaishanBroken
-		/// </summary>
 		public const int MakeChaishanBroken = 868;
 
-		/// <summary>
-		/// RestoreAllAreaDestroyedBlocks
-		/// </summary>
 		public const int RestoreAllAreaDestroyedBlocks = 869;
 
-		/// <summary>
-		/// CreateEmeiGuidance
-		/// </summary>
 		public const int CreateEmeiGuidance = 871;
 
-		/// <summary>
-		/// ClearEmeiGuidance
-		/// </summary>
 		public const int ClearEmeiGuidance = 872;
 
-		/// <summary>
-		/// GuideEmeiCharacter
-		/// </summary>
 		public const int GuideEmeiCharacter = 873;
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceType
-		/// </summary>
 		public const int GetCharacterEmeiGuidanceType = 874;
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceChanged
-		/// </summary>
 		public const int GetCharacterEmeiGuidanceChanged = 875;
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceNotch
-		/// </summary>
 		public const int GetCharacterEmeiGuidanceNotch = 876;
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceByType
-		/// </summary>
 		public const int GetCharacterEmeiGuidanceByType = 877;
 
-		/// <summary>
-		/// CheckCharacterFavorabilityTypeForExchangeBook
-		/// </summary>
 		public const int CheckCharacterFavorabilityTypeForExchangeBook = 878;
 
-		/// <summary>
-		/// EmeiInteractionOneCheck
-		/// </summary>
 		public const int EmeiInteractionOneCheck = 879;
 
-		/// <summary>
-		/// EmeiInteractionTwoCheck
-		/// </summary>
 		public const int EmeiInteractionTwoCheck = 880;
 
-		/// <summary>
-		/// EmeiInteractionOneAdd
-		/// </summary>
 		public const int EmeiInteractionOneAdd = 881;
 
-		/// <summary>
-		/// EmeiInteractionTwoAdd
-		/// </summary>
 		public const int EmeiInteractionTwoAdd = 882;
 
-		/// <summary>
-		/// IsCricketPolymorph
-		/// </summary>
 		public const int IsCricketPolymorph = 884;
 
-		/// <summary>
-		/// ActiveAdventureOrMajorEventInTaiwuBlock
-		/// </summary>
 		public const int ActiveAdventureOrMajorEventInTaiwuBlock = 885;
 
-		/// <summary>
-		/// UpdateFixedCharacterMonthlyMovement
-		/// </summary>
 		public const int UpdateFixedCharacterMonthlyMovement = 886;
 
-		/// <summary>
-		/// CheckCharacterAlertnessForTeach
-		/// </summary>
 		public const int CheckCharacterAlertnessForTeach = 888;
 
-		/// <summary>
-		/// IsCharacterFollowingTaiwu
-		/// </summary>
 		public const int IsCharacterFollowingTaiwu = 891;
 
-		/// <summary>
-		/// IsProfessionSkillEquipped
-		/// </summary>
 		public const int IsProfessionSkillEquipped = 892;
 
-		/// <summary>
-		/// AddFuyuFaithBySecure
-		/// </summary>
 		public const int AddFuyuFaithBySecure = 893;
 
-		/// <summary>
-		/// AddTianjiefuluBySecure
-		/// </summary>
 		public const int AddTianjiefuluBySecure = 894;
 
-		/// <summary>
-		/// CheckSettlementHasChicken
-		/// </summary>
 		public const int CheckSettlementHasChicken = 896;
 
-		/// <summary>
-		/// CheckFirstMartialArtTournamentHostSect
-		/// </summary>
 		public const int CheckFirstMartialArtTournamentHostSect = 897;
 
-		/// <summary>
-		/// CheckCharacterCombatSkillRatio50
-		/// </summary>
 		public const int CheckCharacterCombatSkillRatio50 = 898;
+
+		public const int AdventureRemoveElementAndHandleBoundCharacterByInstanceId = 899;
+
+		public const int GetChickenDisplayName = 900;
+
+		public const int CreateXiangshuTower = 901;
+
+		public const int ConvertFixedCharacter = 902;
+
+		public const int ConvertRandomEnemy = 943;
+
+		public const int ShowXiangshuLevelChanged = 920;
+
+		public const int RemoveAllSwordTomb = 905;
+
+		public const int RemoveAllSwordTombAdventure = 928;
+
+		public const int CheckHasSwordTomb = 921;
+
+		public const int SmarterChickenSetKingMonthlyEventInvoked = 906;
+
+		public const int SmarterChickenReturn = 908;
+
+		public const int CheckSmarterChickenState = 909;
+
+		public const int SmarterChickenBecomeCharacter = 910;
+
+		public const int PagodaofTheFallenCreateTwelveImmortals = 911;
+
+		public const int TaiwuAsXiangshuEntered = 912;
+
+		public const int TaiwuAsXiangshuGetUndefeatedAvatarTemplateId = 913;
+
+		public const int DefeatFiveLoong = 961;
+
+		public const int ConvertFiveLoongToCarrier = 914;
+
+		public const int ConvertFiveLoongCarrierToHuman = 917;
+
+		public const int ConvertFiveLoongHuman = 918;
+
+		public const int FreeFiveLoongCarrier = 930;
+
+		public const int GetFiveLoongCharacterCreated = 915;
+
+		public const int GetFiveLoongState = 916;
+
+		public const int GetLoongByEnemyId = 937;
+
+		public const int IsItemKeyLoongCarrier = 922;
+
+		public const int GotJiaoEgg = 923;
+
+		public const int GotLoongScale = 936;
+
+		public const int HaveDefeatFiveLoong = 924;
+
+		public const int CharacterIsLoong = 949;
+
+		public const int GetFiveLoongCharacter = 942;
+
+		public const int GetLoongEnemyTemplateId = 944;
+
+		public const int GetLoongEnemyTemplateIdByItemKey = 946;
+
+		public const int CanTameLoong = 939;
+
+		public const int CheckDlcInstalled = 919;
+
+		public const int AdoptChicken = 925;
+
+		public const int CreateChickenEventActor = 966;
+
+		public const int IsEscapedChicken = 926;
+
+		public const int CharacterIsChicken = 959;
+
+		public const int TaiwuAsXiangshuDeleteCharacter = 929;
+
+		public const int AddTwelveImmortalsFeature = 931;
+
+		public const int AddTwelveImmortalsFeatureForTwelveImmortals = 957;
+
+		public const int ChangeProfessionSeniority = 932;
+
+		public const int SetTaiwuAsXiangshuTwelveImmortalsStatus = 934;
+
+		public const int ClearBlockEnemies = 935;
+
+		public const int TaiwuAsXiangshuWipeOut = 941;
+
+		public const int StartUnlockTaiwuStation = 945;
+
+		public const int AddTaiwuVillageStoneClaimed = 951;
+
+		public const int AdventureRemoveElementsAndHandleBoundCharactersByCoreId = 947;
+
+		public const int AdventureRemoveElementsAndHandleBoundCharactersByTag = 948;
+
+		public const int OpenTaiwuAsXiangshuTowerFinalLayer = 950;
+
+		public const int ApplyMonthlyEventAnimalTamingResult = 952;
+
+		public const int JumpToMonthlyEventAnimalTamingEvent = 953;
+
+		public const int StartMonthlyEventAnimalTamingEventCombat = 954;
+
+		public const int CheckExtraTaskFinished = 958;
+
+		public const int ChickenPolymorphEffect = 960;
+
+		public const int IsConvertToIntelligentConfig = 962;
+
+		public const int CharacterHasSpecialAvatar = 963;
+
+		public const int ReserveThreeRealmsPowerPerformance = 964;
+
+		public const int ShowNewFunctionUnlock = 965;
+
+		public const int GetIsQuickStartGame = 967;
+
+		public const int OpenDreamBackItemSelect = 968;
+
+		public const int ConfirmDreamBackItemSelect = 969;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// If
-		/// </summary>
 		public static EventFunctionItem If => Instance[0];
 
-		/// <summary>
-		/// Else
-		/// </summary>
 		public static EventFunctionItem Else => Instance[1];
 
-		/// <summary>
-		/// ElseIf
-		/// </summary>
 		public static EventFunctionItem ElseIf => Instance[2];
 
-		/// <summary>
-		/// Loop
-		/// </summary>
 		public static EventFunctionItem Loop => Instance[3];
 
-		/// <summary>
-		/// Break
-		/// </summary>
 		public static EventFunctionItem Break => Instance[4];
 
-		/// <summary>
-		/// End
-		/// </summary>
 		public static EventFunctionItem End => Instance[5];
 
-		/// <summary>
-		/// Continue
-		/// </summary>
 		public static EventFunctionItem Continue => Instance[6];
 
-		/// <summary>
-		/// Label
-		/// </summary>
 		public static EventFunctionItem Label => Instance[7];
 
-		/// <summary>
-		/// Jump
-		/// </summary>
 		public static EventFunctionItem Jump => Instance[8];
 
-		/// <summary>
-		/// Return
-		/// </summary>
 		public static EventFunctionItem Return => Instance[9];
 
-		/// <summary>
-		/// Assign
-		/// </summary>
 		public static EventFunctionItem Assign => Instance[10];
 
-		/// <summary>
-		/// Random
-		/// </summary>
 		public static EventFunctionItem Random => Instance[11];
 
-		/// <summary>
-		/// CheckProb
-		/// </summary>
 		public static EventFunctionItem CheckProb => Instance[12];
 
-		/// <summary>
-		/// GetRandomUnrepeated
-		/// </summary>
 		public static EventFunctionItem GetRandomUnrepeated => Instance[767];
 
-		/// <summary>
-		/// EventTransition
-		/// </summary>
 		public static EventFunctionItem EventTransition => Instance[13];
 
-		/// <summary>
-		/// OptionInjection
-		/// </summary>
 		public static EventFunctionItem OptionInjection => Instance[94];
 
-		/// <summary>
-		/// InjectAllOptions
-		/// </summary>
 		public static EventFunctionItem InjectAllOptions => Instance[420];
 
-		/// <summary>
-		/// ExecuteGlobalScript
-		/// </summary>
 		public static EventFunctionItem ExecuteGlobalScript => Instance[91];
 
-		/// <summary>
-		/// SaveSectMainStoryValue
-		/// </summary>
 		public static EventFunctionItem SaveSectMainStoryValue => Instance[101];
 
-		/// <summary>
-		/// ReadSectMainStoryValue
-		/// </summary>
 		public static EventFunctionItem ReadSectMainStoryValue => Instance[102];
 
-		/// <summary>
-		/// SaveGlobalValue
-		/// </summary>
 		public static EventFunctionItem SaveGlobalValue => Instance[485];
 
-		/// <summary>
-		/// ReadGlobalValue
-		/// </summary>
 		public static EventFunctionItem ReadGlobalValue => Instance[486];
 
-		/// <summary>
-		/// GetListLength
-		/// </summary>
+		public static EventFunctionItem SaveDlcValue => Instance[903];
+
+		public static EventFunctionItem ReadDlcValue => Instance[904];
+
 		public static EventFunctionItem GetListLength => Instance[215];
 
-		/// <summary>
-		/// GetListElement
-		/// </summary>
 		public static EventFunctionItem GetListElement => Instance[216];
 
-		/// <summary>
-		/// GetLocalLanguageString
-		/// </summary>
 		public static EventFunctionItem GetLocalLanguageString => Instance[568];
 
-		/// <summary>
-		/// SetListenerWithActionName
-		/// </summary>
 		public static EventFunctionItem SetListenerWithActionName => Instance[640];
 
-		/// <summary>
-		/// Log
-		/// </summary>
 		public static EventFunctionItem Log => Instance[14];
 
-		/// <summary>
-		/// Comment
-		/// </summary>
 		public static EventFunctionItem Comment => Instance[15];
 
-		/// <summary>
-		/// PlayAudio
-		/// </summary>
 		public static EventFunctionItem PlayAudio => Instance[16];
 
-		/// <summary>
-		/// PerformCutscene
-		/// </summary>
 		public static EventFunctionItem PerformCutscene => Instance[482];
 
-		/// <summary>
-		/// SetEventCgTexture
-		/// </summary>
 		public static EventFunctionItem SetEventCgTexture => Instance[611];
 
-		/// <summary>
-		/// SetEventCgTextureByName
-		/// </summary>
 		public static EventFunctionItem SetEventCgTextureByName => Instance[614];
 
-		/// <summary>
-		/// ShowEventCgTextureInPictureShowPage
-		/// </summary>
 		public static EventFunctionItem ShowEventCgTextureInPictureShowPage => Instance[680];
 
-		/// <summary>
-		/// PlayTutorialVideo
-		/// </summary>
 		public static EventFunctionItem PlayTutorialVideo => Instance[603];
 
-		/// <summary>
-		/// BackToTutorialChapterMenu
-		/// </summary>
 		public static EventFunctionItem BackToTutorialChapterMenu => Instance[637];
 
-		/// <summary>
-		/// BackToMainMenu
-		/// </summary>
 		public static EventFunctionItem BackToMainMenu => Instance[661];
 
-		/// <summary>
-		/// ScreenShake
-		/// </summary>
 		public static EventFunctionItem ScreenShake => Instance[17];
 
-		/// <summary>
-		/// SpecifyEventBackground
-		/// </summary>
 		public static EventFunctionItem SpecifyEventBackground => Instance[197];
 
-		/// <summary>
-		/// BlackMask
-		/// </summary>
 		public static EventFunctionItem BlackMask => Instance[483];
 
-		/// <summary>
-		/// SetObtainPopupEnabled
-		/// </summary>
 		public static EventFunctionItem SetObtainPopupEnabled => Instance[829];
 
-		/// <summary>
-		/// CloseCharacterMenu
-		/// </summary>
 		public static EventFunctionItem CloseCharacterMenu => Instance[832];
 
-		/// <summary>
-		/// OpenEmeiCombatSkillSpecialBreak
-		/// </summary>
 		public static EventFunctionItem OpenEmeiCombatSkillSpecialBreak => Instance[187];
 
-		/// <summary>
-		/// SpecifyCurrMainAttribute
-		/// </summary>
 		public static EventFunctionItem SpecifyCurrMainAttribute => Instance[18];
 
-		/// <summary>
-		/// ChangeCurrMainAttribute
-		/// </summary>
 		public static EventFunctionItem ChangeCurrMainAttribute => Instance[19];
 
-		/// <summary>
-		/// SpecifyInjury
-		/// </summary>
 		public static EventFunctionItem SpecifyInjury => Instance[20];
 
-		/// <summary>
-		/// ChangeInjury
-		/// </summary>
 		public static EventFunctionItem ChangeInjury => Instance[21];
 
-		/// <summary>
-		/// ClearInjuries
-		/// </summary>
 		public static EventFunctionItem ClearInjuries => Instance[22];
 
-		/// <summary>
-		/// SpecifyPoisoned
-		/// </summary>
 		public static EventFunctionItem SpecifyPoisoned => Instance[23];
 
-		/// <summary>
-		/// ChangePoisoned
-		/// </summary>
 		public static EventFunctionItem ChangePoisoned => Instance[24];
 
-		/// <summary>
-		/// ClearPoisons
-		/// </summary>
 		public static EventFunctionItem ClearPoisons => Instance[25];
 
-		/// <summary>
-		/// SpecifyDisorderOfQi
-		/// </summary>
 		public static EventFunctionItem SpecifyDisorderOfQi => Instance[26];
 
-		/// <summary>
-		/// ChangeDisorderOfQi
-		/// </summary>
 		public static EventFunctionItem ChangeDisorderOfQi => Instance[27];
 
-		/// <summary>
-		/// SpecifyHealth
-		/// </summary>
 		public static EventFunctionItem SpecifyHealth => Instance[28];
 
-		/// <summary>
-		/// ChangeHealth
-		/// </summary>
 		public static EventFunctionItem ChangeHealth => Instance[29];
 
-		/// <summary>
-		/// SpecifyHappiness
-		/// </summary>
 		public static EventFunctionItem SpecifyHappiness => Instance[30];
 
-		/// <summary>
-		/// ChangeHappiness
-		/// </summary>
 		public static EventFunctionItem ChangeHappiness => Instance[31];
 
-		/// <summary>
-		/// GetHappiness
-		/// </summary>
 		public static EventFunctionItem GetHappiness => Instance[570];
 
-		/// <summary>
-		/// SpecifyFavorabilities
-		/// </summary>
 		public static EventFunctionItem SpecifyFavorabilities => Instance[32];
 
-		/// <summary>
-		/// ChangeFavorability
-		/// </summary>
 		public static EventFunctionItem ChangeFavorability => Instance[33];
 
-		/// <summary>
-		/// AddFeature
-		/// </summary>
 		public static EventFunctionItem AddFeature => Instance[34];
 
-		/// <summary>
-		/// RemoveFeature
-		/// </summary>
 		public static EventFunctionItem RemoveFeature => Instance[35];
 
-		/// <summary>
-		/// AddKidnappedCharacter
-		/// </summary>
 		public static EventFunctionItem AddKidnappedCharacter => Instance[36];
 
-		/// <summary>
-		/// RemoveKidnappedCharacter
-		/// </summary>
 		public static EventFunctionItem RemoveKidnappedCharacter => Instance[37];
 
-		/// <summary>
-		/// AddTaiwuPropertyPermanentBonus
-		/// </summary>
 		public static EventFunctionItem AddTaiwuPropertyPermanentBonus => Instance[585];
 
-		/// <summary>
-		/// JoinGroup
-		/// </summary>
 		public static EventFunctionItem JoinGroup => Instance[38];
 
-		/// <summary>
-		/// LeaveGroup
-		/// </summary>
 		public static EventFunctionItem LeaveGroup => Instance[39];
 
-		/// <summary>
-		/// KillCharacter
-		/// </summary>
 		public static EventFunctionItem KillCharacter => Instance[40];
 
-		/// <summary>
-		/// TakeRandomDamage
-		/// </summary>
 		public static EventFunctionItem TakeRandomDamage => Instance[189];
 
-		/// <summary>
-		/// AddInventoryItem
-		/// </summary>
 		public static EventFunctionItem AddInventoryItem => Instance[41];
 
-		/// <summary>
-		/// RemoveInventoryItem
-		/// </summary>
 		public static EventFunctionItem RemoveInventoryItem => Instance[65];
 
-		/// <summary>
-		/// TransferInventoryItem
-		/// </summary>
 		public static EventFunctionItem TransferInventoryItem => Instance[42];
 
-		/// <summary>
-		/// AddWarehouseItem
-		/// </summary>
 		public static EventFunctionItem AddWarehouseItem => Instance[744];
 
-		/// <summary>
-		/// SpecifyCharacterResource
-		/// </summary>
 		public static EventFunctionItem SpecifyCharacterResource => Instance[129];
 
-		/// <summary>
-		/// ChangeCharacterResource
-		/// </summary>
 		public static EventFunctionItem ChangeCharacterResource => Instance[66];
 
-		/// <summary>
-		/// GetCharacterResource
-		/// </summary>
 		public static EventFunctionItem GetCharacterResource => Instance[679];
 
-		/// <summary>
-		/// TransferCharacterResource
-		/// </summary>
 		public static EventFunctionItem TransferCharacterResource => Instance[130];
 
-		/// <summary>
-		/// ChangeCharBaseCombatSkillQualification
-		/// </summary>
 		public static EventFunctionItem ChangeCharBaseCombatSkillQualification => Instance[43];
 
-		/// <summary>
-		/// ChangeCharBaseLifeSkillQualification
-		/// </summary>
 		public static EventFunctionItem ChangeCharBaseLifeSkillQualification => Instance[44];
 
-		/// <summary>
-		/// SpecifyBaseCombatSkillQualification
-		/// </summary>
 		public static EventFunctionItem SpecifyBaseCombatSkillQualification => Instance[789];
 
-		/// <summary>
-		/// SpecifyBaseLifeSkillQualification
-		/// </summary>
 		public static EventFunctionItem SpecifyBaseLifeSkillQualification => Instance[790];
 
-		/// <summary>
-		/// LearnCombatSkill
-		/// </summary>
 		public static EventFunctionItem LearnCombatSkill => Instance[45];
 
-		/// <summary>
-		/// LearnLifeSkill
-		/// </summary>
 		public static EventFunctionItem LearnLifeSkill => Instance[46];
 
-		/// <summary>
-		/// AddLegacyPoint
-		/// </summary>
 		public static EventFunctionItem AddLegacyPoint => Instance[47];
 
-		/// <summary>
-		/// ExpelTaiwuVillager
-		/// </summary>
 		public static EventFunctionItem ExpelTaiwuVillager => Instance[48];
 
-		/// <summary>
-		/// MakeAppointment
-		/// </summary>
 		public static EventFunctionItem MakeAppointment => Instance[49];
 
-		/// <summary>
-		/// RemoveAppointment
-		/// </summary>
 		public static EventFunctionItem RemoveAppointment => Instance[50];
 
-		/// <summary>
-		/// AdvanceDays
-		/// </summary>
 		public static EventFunctionItem AdvanceDays => Instance[51];
 
-		/// <summary>
-		/// ChangeMainStoryLineProgress
-		/// </summary>
 		public static EventFunctionItem ChangeMainStoryLineProgress => Instance[52];
 
-		/// <summary>
-		/// SetWorldFunctionsStatus
-		/// </summary>
 		public static EventFunctionItem SetWorldFunctionsStatus => Instance[53];
 
-		/// <summary>
-		/// ResetWorldFunctionStatus
-		/// </summary>
 		public static EventFunctionItem ResetWorldFunctionStatus => Instance[849];
 
-		/// <summary>
-		/// ChangeSpiritualDebt
-		/// </summary>
 		public static EventFunctionItem ChangeSpiritualDebt => Instance[54];
 
-		/// <summary>
-		/// ChangeSettlementSafety
-		/// </summary>
 		public static EventFunctionItem ChangeSettlementSafety => Instance[55];
 
-		/// <summary>
-		/// ChangeSettlementCulture
-		/// </summary>
 		public static EventFunctionItem ChangeSettlementCulture => Instance[56];
 
-		/// <summary>
-		/// GetSettlementLeader
-		/// </summary>
 		public static EventFunctionItem GetSettlementLeader => Instance[860];
 
-		/// <summary>
-		/// SetBlockAndViewRangeVisible
-		/// </summary>
 		public static EventFunctionItem SetBlockAndViewRangeVisible => Instance[57];
 
-		/// <summary>
-		/// SetSectAllowLearning
-		/// </summary>
 		public static EventFunctionItem SetSectAllowLearning => Instance[58];
 
-		/// <summary>
-		/// SetSectFunctionStatus
-		/// </summary>
 		public static EventFunctionItem SetSectFunctionStatus => Instance[325];
 
-		/// <summary>
-		/// JoinOrganization
-		/// </summary>
 		public static EventFunctionItem JoinOrganization => Instance[59];
 
-		/// <summary>
-		/// SetSectCharApprovedTaiwu
-		/// </summary>
 		public static EventFunctionItem SetSectCharApprovedTaiwu => Instance[60];
 
-		/// <summary>
-		/// SetSectSpiritualDebtInteractionOccurred
-		/// </summary>
 		public static EventFunctionItem SetSectSpiritualDebtInteractionOccurred => Instance[226];
 
-		/// <summary>
-		/// ChangeMerchantFavorability
-		/// </summary>
 		public static EventFunctionItem ChangeMerchantFavorability => Instance[61];
 
-		/// <summary>
-		/// CreateItem
-		/// </summary>
 		public static EventFunctionItem CreateItem => Instance[62];
 
-		/// <summary>
-		/// CreateCricket
-		/// </summary>
 		public static EventFunctionItem CreateCricket => Instance[63];
 
-		/// <summary>
-		/// CreateCricketByGrade
-		/// </summary>
 		public static EventFunctionItem CreateCricketByGrade => Instance[836];
 
-		/// <summary>
-		/// CreateCombatSkillBook
-		/// </summary>
 		public static EventFunctionItem CreateCombatSkillBook => Instance[556];
 
-		/// <summary>
-		/// ReadAllBookPages
-		/// </summary>
 		public static EventFunctionItem ReadAllBookPages => Instance[558];
 
-		/// <summary>
-		/// SetEquipmentEffectId
-		/// </summary>
 		public static EventFunctionItem SetEquipmentEffectId => Instance[408];
 
-		/// <summary>
-		/// GetCharacterFavorability
-		/// </summary>
 		public static EventFunctionItem GetCharacterFavorability => Instance[111];
 
-		/// <summary>
-		/// GetCharacterBehaviorType
-		/// </summary>
 		public static EventFunctionItem GetCharacterBehaviorType => Instance[566];
 
-		/// <summary>
-		/// SetCharCombatSkillPracticeLevel
-		/// </summary>
 		public static EventFunctionItem SetCharCombatSkillPracticeLevel => Instance[64];
 
-		/// <summary>
-		/// CreateAdventureSite
-		/// </summary>
 		public static EventFunctionItem CreateAdventureSite => Instance[67];
 
-		/// <summary>
-		/// CreateConfigMonthlyAction
-		/// </summary>
 		public static EventFunctionItem CreateConfigMonthlyAction => Instance[145];
 
-		/// <summary>
-		/// CreateEnemyCharacter
-		/// </summary>
 		public static EventFunctionItem CreateEnemyCharacter => Instance[92];
 
-		/// <summary>
-		/// CreateEventActor
-		/// </summary>
 		public static EventFunctionItem CreateEventActor => Instance[93];
 
-		/// <summary>
-		/// GetFixedCharacter
-		/// </summary>
+		public static EventFunctionItem SetEventActor => Instance[940];
+
 		public static EventFunctionItem GetFixedCharacter => Instance[99];
 
-		/// <summary>
-		/// GetOrCreateIntelligentCharacterByFilter
-		/// </summary>
 		public static EventFunctionItem GetIntelligentCharacterByFilter => Instance[114];
 
-		/// <summary>
-		/// MoveCharacter
-		/// </summary>
 		public static EventFunctionItem MoveCharacter => Instance[100];
 
-		/// <summary>
-		/// StartCombat
-		/// </summary>
 		public static EventFunctionItem StartCombat => Instance[89];
 
-		/// <summary>
-		/// StartNpcCombat
-		/// </summary>
 		public static EventFunctionItem StartNpcCombat => Instance[778];
 
-		/// <summary>
-		/// StartCombatWithSpecialTeammate
-		/// </summary>
 		public static EventFunctionItem StartCombatWithSpecialTeammate => Instance[841];
 
-		/// <summary>
-		/// TriggerExtraTask
-		/// </summary>
 		public static EventFunctionItem TriggerExtraTask => Instance[68];
 
-		/// <summary>
-		/// FinishExtraTask
-		/// </summary>
 		public static EventFunctionItem FinishExtraTask => Instance[69];
 
-		/// <summary>
-		/// FinishExtraTaskChain
-		/// </summary>
 		public static EventFunctionItem FinishExtraTaskChain => Instance[70];
 
-		/// <summary>
-		/// TriggerSectMainStoryEndingCountDown
-		/// </summary>
 		public static EventFunctionItem TriggerSectMainStoryEndingCountDown => Instance[115];
 
-		/// <summary>
-		/// SetSectMainStoryEnding
-		/// </summary>
 		public static EventFunctionItem SetSectMainStoryEnding => Instance[116];
 
-		/// <summary>
-		/// GetTemplateIdOfFixedCharacterCombatWith
-		/// </summary>
 		public static EventFunctionItem GetTemplateIdOfFixedCharacterCombatWith => Instance[113];
 
-		/// <summary>
-		/// SetCharacterFollowTaiwu
-		/// </summary>
 		public static EventFunctionItem SetCharacterFollowTaiwu => Instance[117];
 
-		/// <summary>
-		/// CancelCharacterFollowTaiwu
-		/// </summary>
 		public static EventFunctionItem CancelCharacterFollowTaiwu => Instance[120];
 
-		/// <summary>
-		/// StartLifeSkillCombat
-		/// </summary>
 		public static EventFunctionItem StartLifeSkillCombat => Instance[118];
 
-		/// <summary>
-		/// ExitAdventure
-		/// </summary>
 		public static EventFunctionItem ExitAdventure => Instance[124];
 
-		/// <summary>
-		/// GetAdventureCharacter
-		/// </summary>
 		public static EventFunctionItem GetAdventureCharacter => Instance[143];
 
-		/// <summary>
-		/// GetAdventureCharacterCount
-		/// </summary>
 		public static EventFunctionItem GetAdventureCharacterCount => Instance[144];
 
-		/// <summary>
-		/// FinishAdventureEvent
-		/// </summary>
 		public static EventFunctionItem FinishAdventureEvent => Instance[125];
 
-		/// <summary>
-		/// SelectAdventureBranch
-		/// </summary>
 		public static EventFunctionItem SelectAdventureBranch => Instance[126];
 
-		/// <summary>
-		/// GenerateAdventureMap
-		/// </summary>
 		public static EventFunctionItem GenerateAdventureMap => Instance[119];
 
-		/// <summary>
-		/// GetRandomInventoryItem
-		/// </summary>
 		public static EventFunctionItem GetRandomInventoryItem => Instance[440];
 
-		/// <summary>
-		/// GetInventoryItem
-		/// </summary>
 		public static EventFunctionItem GetInventoryItem => Instance[850];
 
-		/// <summary>
-		/// CheckInventoryItem
-		/// </summary>
 		public static EventFunctionItem CheckInventoryItem => Instance[702];
 
-		/// <summary>
-		/// GetStealActionPhase
-		/// </summary>
 		public static EventFunctionItem GetStealActionPhase => Instance[441];
 
-		/// <summary>
-		/// GetPoisonActionPhase
-		/// </summary>
 		public static EventFunctionItem GetPoisonActionPhase => Instance[540];
 
-		/// <summary>
-		/// GetPlotHarmActionPhase
-		/// </summary>
 		public static EventFunctionItem GetPlotHarmActionPhase => Instance[541];
 
-		/// <summary>
-		/// HandlePoisonAction
-		/// </summary>
 		public static EventFunctionItem HandlePoisonAction => Instance[542];
 
-		/// <summary>
-		/// HandlePlotHarmAction
-		/// </summary>
 		public static EventFunctionItem HandlePlotHarmAction => Instance[543];
 
-		/// <summary>
-		/// CheckHarmfulActionPhase
-		/// </summary>
 		public static EventFunctionItem CheckHarmfulActionPhase => Instance[442];
 
-		/// <summary>
-		/// FilterCharacterItem
-		/// </summary>
 		public static EventFunctionItem FilterCharacterItem => Instance[127];
 
-		/// <summary>
-		/// FilterMapBlockInRange
-		/// </summary>
 		public static EventFunctionItem FilterMapBlockInRange => Instance[167];
 
-		/// <summary>
-		/// FilterMapBlockOnEdge
-		/// </summary>
 		public static EventFunctionItem FilterMapBlockOnEdge => Instance[698];
 
-		/// <summary>
-		/// RegisterToSelectItemSubTypes
-		/// </summary>
 		public static EventFunctionItem RegisterToSelectItemSubTypes => Instance[132];
 
-		/// <summary>
-		/// RegisterToSelectItemTemplateIds
-		/// </summary>
 		public static EventFunctionItem RegisterToSelectItemTemplateIds => Instance[133];
 
-		/// <summary>
-		/// RegisterToExcludeItemTemplateIds
-		/// </summary>
 		public static EventFunctionItem RegisterToExcludeItemTemplateIds => Instance[134];
 
-		/// <summary>
-		/// RegisterToSelectItemGrade
-		/// </summary>
 		public static EventFunctionItem RegisterToSelectItemGrade => Instance[534];
 
-		/// <summary>
-		/// RegisterToSelectItemGroup
-		/// </summary>
 		public static EventFunctionItem RegisterToSelectItemGroup => Instance[559];
 
-		/// <summary>
-		/// RegisterToSelectItemResourceType
-		/// </summary>
 		public static EventFunctionItem RegisterToSelectItemResourceType => Instance[703];
 
-		/// <summary>
-		/// RegisterToExcludeItemResourceType
-		/// </summary>
 		public static EventFunctionItem RegisterToExcludeItemResourceType => Instance[704];
 
-		/// <summary>
-		/// FilterCharacterItemByRegister
-		/// </summary>
 		public static EventFunctionItem FilterCharacterItemByRegister => Instance[135];
 
-		/// <summary>
-		/// CharacterTeachTaiwuProfession
-		/// </summary>
 		public static EventFunctionItem CharacterTeachTaiwuProfession => Instance[147];
 
-		/// <summary>
-		/// RegisterSettlementMemberFeature
-		/// </summary>
 		public static EventFunctionItem RegisterSettlementMemberFeature => Instance[227];
 
-		/// <summary>
-		/// AddBuilding
-		/// </summary>
 		public static EventFunctionItem AddBuilding => Instance[149];
 
-		/// <summary>
-		/// SectStoryZhujianCreateCatchableThief
-		/// </summary>
 		public static EventFunctionItem SectStoryZhujianCreateCatchableThief => Instance[139];
 
-		/// <summary>
-		/// SectStoryZhujianCreateGearMate
-		/// </summary>
 		public static EventFunctionItem SectStoryZhujianCreateGearMate => Instance[150];
 
-		/// <summary>
-		/// SectStoryZhujianAddAreaMerchantType
-		/// </summary>
 		public static EventFunctionItem SectStoryZhujianAddAreaMerchantType => Instance[151];
 
-		/// <summary>
-		/// SectStoryZhujianRemoveAreaMerchantType
-		/// </summary>
 		public static EventFunctionItem SectStoryZhujianRemoveAreaMerchantType => Instance[152];
 
-		/// <summary>
-		/// SectStoryEmeiSetMemberInsaneState
-		/// </summary>
 		public static EventFunctionItem SectStoryEmeiSetMemberInsaneState => Instance[188];
 
-		/// <summary>
-		/// GetMapBlockSettlement
-		/// </summary>
 		public static EventFunctionItem GetMapBlockSettlement => Instance[243];
 
-		/// <summary>
-		/// GetOtherSmallSettlement
-		/// </summary>
 		public static EventFunctionItem GetOtherSmallSettlement => Instance[154];
 
-		/// <summary>
-		/// GetSectSettlement
-		/// </summary>
 		public static EventFunctionItem GetSectSettlement => Instance[481];
 
-		/// <summary>
-		/// GetRandomSettlementInState
-		/// </summary>
 		public static EventFunctionItem GetRandomSettlementInState => Instance[192];
 
-		/// <summary>
-		/// GetSettlementListInState
-		/// </summary>
 		public static EventFunctionItem GetSettlementListInState => Instance[217];
 
-		/// <summary>
-		/// GetCharacterCurrentMapBlock
-		/// </summary>
 		public static EventFunctionItem GetCharacterCurrentMapBlock => Instance[198];
 
-		/// <summary>
-		/// GetCharacterSettlement
-		/// </summary>
 		public static EventFunctionItem GetCharacterSettlement => Instance[263];
 
-		/// <summary>
-		/// GetSettlementMapBlock
-		/// </summary>
 		public static EventFunctionItem GetSettlementMapBlock => Instance[199];
 
-		/// <summary>
-		/// GetCharacterCurrentMapArea
-		/// </summary>
 		public static EventFunctionItem GetCharacterCurrentMapArea => Instance[261];
 
-		/// <summary>
-		/// GetSettlementMapArea
-		/// </summary>
 		public static EventFunctionItem GetSettlementMapArea => Instance[262];
 
-		/// <summary>
-		/// CreateMerchantRandomItem
-		/// </summary>
 		public static EventFunctionItem CreateMerchantRandomItem => Instance[153];
 
-		/// <summary>
-		/// GetCurrentEvent
-		/// </summary>
 		public static EventFunctionItem GetCurrentEvent => Instance[437];
 
-		/// <summary>
-		/// TriggerLegacyPassingEvent
-		/// </summary>
 		public static EventFunctionItem TriggerLegacyPassingEvent => Instance[156];
 
-		/// <summary>
-		/// StartSetCharacterGivenName
-		/// </summary>
 		public static EventFunctionItem StartSetCharacterGivenName => Instance[164];
 
-		/// <summary>
-		/// FinishSetCharacterGivenName
-		/// </summary>
 		public static EventFunctionItem FinishSetCharacterGivenName => Instance[165];
 
-		/// <summary>
-		/// CheckExpression
-		/// </summary>
 		public static EventFunctionItem CheckExpression => Instance[71];
 
-		/// <summary>
-		/// CheckAnd
-		/// </summary>
 		public static EventFunctionItem CheckAnd => Instance[109];
 
-		/// <summary>
-		/// CheckOr
-		/// </summary>
 		public static EventFunctionItem CheckOr => Instance[110];
 
-		/// <summary>
-		/// CheckListElement
-		/// </summary>
 		public static EventFunctionItem CheckListElement => Instance[218];
 
-		/// <summary>
-		/// CheckWorldFunctionStatus
-		/// </summary>
 		public static EventFunctionItem CheckWorldFunctionStatus => Instance[155];
 
-		/// <summary>
-		/// CheckMainStoryProgress
-		/// </summary>
 		public static EventFunctionItem CheckMainStoryProgress => Instance[72];
 
-		/// <summary>
-		/// CheckGlobalArgBox
-		/// </summary>
 		public static EventFunctionItem CheckGlobalArgBox => Instance[423];
 
-		/// <summary>
-		/// CheckTask
-		/// </summary>
+		public static EventFunctionItem CheckDlcArgBox => Instance[907];
+
 		public static EventFunctionItem CheckTask => Instance[73];
 
-		/// <summary>
-		/// CheckTaskFinished
-		/// </summary>
 		public static EventFunctionItem CheckTaskFinished => Instance[586];
 
-		/// <summary>
-		/// CheckTaskChain
-		/// </summary>
 		public static EventFunctionItem CheckTaskChain => Instance[74];
 
-		/// <summary>
-		/// CheckXiangshuLevel
-		/// </summary>
 		public static EventFunctionItem CheckXiangshuLevel => Instance[75];
 
-		/// <summary>
-		/// CheckFixedCharacterTemplate
-		/// </summary>
 		public static EventFunctionItem CheckFixedCharacterTemplate => Instance[128];
 
-		/// <summary>
-		/// TryGetFixedCharacter
-		/// </summary>
 		public static EventFunctionItem TryGetFixedCharacter => Instance[515];
 
-		/// <summary>
-		/// CheckCharacterCurrMainAttribute
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCurrMainAttribute => Instance[76];
 
-		/// <summary>
-		/// CheckCharacterMainAttribute
-		/// </summary>
 		public static EventFunctionItem CheckCharacterMainAttribute => Instance[77];
 
-		/// <summary>
-		/// CheckCharacterLifeSkillQualification
-		/// </summary>
 		public static EventFunctionItem CheckCharacterLifeSkillQualification => Instance[78];
 
-		/// <summary>
-		/// CheckCharacterLifeSkillAttainment
-		/// </summary>
 		public static EventFunctionItem CheckCharacterLifeSkillAttainment => Instance[79];
 
-		/// <summary>
-		/// CheckCharacterCombatSkillQualification
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCombatSkillQualification => Instance[80];
 
-		/// <summary>
-		/// CheckCharacterCombatSkillAttainment
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCombatSkillAttainment => Instance[81];
 
-		/// <summary>
-		/// GetCharacterCombatSkillAttainment
-		/// </summary>
 		public static EventFunctionItem GetCharacterCombatSkillAttainment => Instance[577];
 
-		/// <summary>
-		/// CheckCharacterPersonality
-		/// </summary>
 		public static EventFunctionItem CheckCharacterPersonality => Instance[82];
 
-		/// <summary>
-		/// CheckCharacterBehaviorType
-		/// </summary>
 		public static EventFunctionItem CheckCharacterBehaviorType => Instance[107];
 
-		/// <summary>
-		/// CheckCharacterMorality
-		/// </summary>
 		public static EventFunctionItem CheckCharacterMorality => Instance[108];
 
-		/// <summary>
-		/// ChangeCharacterMorality
-		/// </summary>
 		public static EventFunctionItem ChangeCharacterMorality => Instance[571];
 
-		/// <summary>
-		/// SetCharacterBehaviorType
-		/// </summary>
 		public static EventFunctionItem SetCharacterBehaviorType => Instance[572];
 
-		/// <summary>
-		/// CheckCharacterCurrAge
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCurrAge => Instance[160];
 
-		/// <summary>
-		/// CheckCharacterActualAge
-		/// </summary>
 		public static EventFunctionItem CheckCharacterActualAge => Instance[161];
 
-		/// <summary>
-		/// CheckCharacterAgeGroup
-		/// </summary>
 		public static EventFunctionItem CheckCharacterAgeGroup => Instance[162];
 
-		/// <summary>
-		/// CheckCharacterGender
-		/// </summary>
 		public static EventFunctionItem CheckCharacterGender => Instance[203];
 
-		/// <summary>
-		/// CheckCharacterResource
-		/// </summary>
 		public static EventFunctionItem CheckCharacterResource => Instance[83];
 
-		/// <summary>
-		/// CheckCharacterFeature
-		/// </summary>
 		public static EventFunctionItem CheckCharacterFeature => Instance[84];
 
-		/// <summary>
-		/// CheckCharacterCurrentProfession
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCurrentProfession => Instance[140];
 
-		/// <summary>
-		/// CheckCharacterSeniorityPercent
-		/// </summary>
 		public static EventFunctionItem CheckCharacterSeniorityPercent => Instance[141];
 
-		/// <summary>
-		/// CheckCharacterInventoryByTemplate
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInventoryByTemplate => Instance[85];
 
-		/// <summary>
-		/// CheckCharacterOnSettlementBlock
-		/// </summary>
 		public static EventFunctionItem CheckCharacterOnSettlementBlock => Instance[86];
 
-		/// <summary>
-		/// CheckCharacterInSettlementInfluenceRange
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInSettlementInfluenceRange => Instance[87];
 
-		/// <summary>
-		/// CheckCharacterInMapState
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInMapState => Instance[95];
 
-		/// <summary>
-		/// CheckCharacterInMapArea
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInMapArea => Instance[96];
 
-		/// <summary>
-		/// CheckCharacterInBrokenArea
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInBrokenArea => Instance[520];
 
-		/// <summary>
-		/// CheckCharacterInMapBlockRange
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInMapBlockRange => Instance[168];
 
-		/// <summary>
-		/// CheckCharacterOnMapBlockTemplate
-		/// </summary>
 		public static EventFunctionItem CheckCharacterOnMapBlockTemplate => Instance[638];
 
-		/// <summary>
-		/// CheckCharacterOnAnySettlement
-		/// </summary>
 		public static EventFunctionItem CheckCharacterOnAnySettlement => Instance[97];
 
-		/// <summary>
-		/// CheckCharacterInAnySettlementInfluenceRange
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInAnySettlementInfluenceRange => Instance[98];
 
-		/// <summary>
-		/// CheckCharacterInSettlementArea
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInSettlementArea => Instance[194];
 
-		/// <summary>
-		/// CheckCharacterFavorability
-		/// </summary>
 		public static EventFunctionItem CheckCharacterFavorability => Instance[88];
 
-		/// <summary>
-		/// CheckCharacterFavorabilityType
-		/// </summary>
 		public static EventFunctionItem CheckCharacterFavorabilityType => Instance[142];
 
-		/// <summary>
-		/// CheckCharacterGrade
-		/// </summary>
 		public static EventFunctionItem CheckCharacterGrade => Instance[103];
 
-		/// <summary>
-		/// GetCharacterGrade
-		/// </summary>
 		public static EventFunctionItem GetCharacterGrade => Instance[573];
 
-		/// <summary>
-		/// CheckCharacterSettlement
-		/// </summary>
 		public static EventFunctionItem CheckCharacterSettlement => Instance[104];
 
-		/// <summary>
-		/// CheckCharacterHasItem
-		/// </summary>
 		public static EventFunctionItem CheckCharacterHasItem => Instance[121];
 
-		/// <summary>
-		/// CheckCharacterMerchantType
-		/// </summary>
 		public static EventFunctionItem CheckCharacterMerchantType => Instance[122];
 
-		/// <summary>
-		/// CheckCharacterReadLifeSkillPageCount
-		/// </summary>
 		public static EventFunctionItem CheckCharacterReadLifeSkillPageCount => Instance[131];
 
-		/// <summary>
-		/// CheckCharacterNeiliTypeConflictCombatSkill
-		/// </summary>
 		public static EventFunctionItem CheckCharacterNeiliTypeConflictCombatSkill => Instance[567];
 
-		/// <summary>
-		/// CheckPreviousCombatResult
-		/// </summary>
 		public static EventFunctionItem CheckPreviousCombatResult => Instance[90];
 
-		/// <summary>
-		/// CheckPreviousCombatType
-		/// </summary>
 		public static EventFunctionItem CheckPreviousCombatType => Instance[473];
 
-		/// <summary>
-		/// CheckSectFunctionStatus
-		/// </summary>
 		public static EventFunctionItem CheckSectFunctionStatus => Instance[326];
 
-		/// <summary>
-		/// CheckSectCanTeach
-		/// </summary>
 		public static EventFunctionItem CheckSectCanTeach => Instance[674];
 
-		/// <summary>
-		/// CheckSettlementInMapState
-		/// </summary>
 		public static EventFunctionItem CheckSettlementInMapState => Instance[105];
 
-		/// <summary>
-		/// CheckSettlementInMapArea
-		/// </summary>
 		public static EventFunctionItem CheckSettlementInMapArea => Instance[106];
 
-		/// <summary>
-		/// CheckSettlementTreasuryAlertTime
-		/// </summary>
 		public static EventFunctionItem CheckSettlementTreasuryAlertTime => Instance[768];
 
-		/// <summary>
-		/// CheckAreaSpiritualDebt
-		/// </summary>
 		public static EventFunctionItem CheckAreaSpiritualDebt => Instance[112];
 
-		/// <summary>
-		/// CheckAreaHasAdventure
-		/// </summary>
 		public static EventFunctionItem CheckAreaHasAdventure => Instance[204];
 
-		/// <summary>
-		/// CheckAreaHasMajorEvent
-		/// </summary>
 		public static EventFunctionItem CheckAreaHasMajorEvent => Instance[787];
 
-		/// <summary>
-		/// CheckAreaHasAdultGraveOfTargetOrganization
-		/// </summary>
 		public static EventFunctionItem CheckAreaHasAdultGraveOfTargetOrganization => Instance[517];
 
-		/// <summary>
-		/// CheckSectMainStoryValueExists
-		/// </summary>
 		public static EventFunctionItem CheckSectMainStoryValueExists => Instance[123];
 
-		/// <summary>
-		/// CheckMapBlockByMatcher
-		/// </summary>
 		public static EventFunctionItem CheckMapBlockByMatcher => Instance[769];
 
-		/// <summary>
-		/// CheckItemType
-		/// </summary>
 		public static EventFunctionItem CheckItemType => Instance[136];
 
-		/// <summary>
-		/// CheckItemSubType
-		/// </summary>
 		public static EventFunctionItem CheckItemSubType => Instance[137];
 
-		/// <summary>
-		/// CheckItemTemplate
-		/// </summary>
 		public static EventFunctionItem CheckItemTemplate => Instance[138];
 
-		/// <summary>
-		/// TryGetCharacterCurrentProfession
-		/// </summary>
 		public static EventFunctionItem TryGetCharacterCurrentProfession => Instance[146];
 
-		/// <summary>
-		/// CheckCharacterPassMatcher
-		/// </summary>
 		public static EventFunctionItem CheckCharacterPassMatcher => Instance[213];
 
-		/// <summary>
-		/// CheckCharacterCanTeachTaiwuProfession
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCanTeachTaiwuProfession => Instance[148];
 
-		/// <summary>
-		/// CheckCharacterCanTeachTaiwuProfessionSkillUnlock
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCanTeachTaiwuProfessionSkillUnlock => Instance[163];
 
-		/// <summary>
-		/// CheckCharacterConsummateLevel
-		/// </summary>
 		public static EventFunctionItem CheckCharacterConsummateLevel => Instance[157];
 
-		/// <summary>
-		/// CheckIsDreamBack
-		/// </summary>
 		public static EventFunctionItem CheckIsDreamBack => Instance[158];
 
-		/// <summary>
-		/// CheckCharacterAlive
-		/// </summary>
 		public static EventFunctionItem CheckCharacterAlive => Instance[159];
 
-		/// <summary>
-		/// CheckCharacterOnValidLocation
-		/// </summary>
 		public static EventFunctionItem CheckCharacterOnValidLocation => Instance[516];
 
-		/// <summary>
-		/// CheckCharacterIntelligent
-		/// </summary>
 		public static EventFunctionItem CheckCharacterIntelligent => Instance[716];
 
-		/// <summary>
-		/// CreateFixedSkillBook
-		/// </summary>
 		public static EventFunctionItem CreateFixedSkillBook => Instance[166];
 
-		/// <summary>
-		/// CheckAdventureParameterCount
-		/// </summary>
 		public static EventFunctionItem CheckAdventureParameterCount => Instance[169];
 
-		/// <summary>
-		/// CheckCurrentAdventure
-		/// </summary>
 		public static EventFunctionItem CheckCurrentAdventure => Instance[421];
 
-		/// <summary>
-		/// CheckMovePoint
-		/// </summary>
 		public static EventFunctionItem CheckMovePoint => Instance[170];
 
-		/// <summary>
-		/// ChangeActionPoint
-		/// </summary>
 		public static EventFunctionItem ChangeActionPoint => Instance[717];
 
-		/// <summary>
-		/// CheckCurrMonth
-		/// </summary>
 		public static EventFunctionItem CheckCurrMonth => Instance[171];
 
-		/// <summary>
-		/// CheckCharacterKidnapSpecificGender
-		/// </summary>
 		public static EventFunctionItem CheckCharacterKidnapSpecificGender => Instance[172];
 
-		/// <summary>
-		/// CheckCharacterKidnapSpecificAgeGroup
-		/// </summary>
 		public static EventFunctionItem CheckCharacterKidnapSpecificAgeGroup => Instance[173];
 
-		/// <summary>
-		/// CheckCharacterKidnapSpecificId
-		/// </summary>
 		public static EventFunctionItem CheckCharacterKidnapSpecificId => Instance[174];
 
-		/// <summary>
-		/// CheckCharacterTeammateSpecificIdGender
-		/// </summary>
 		public static EventFunctionItem CheckCharacterTeammateSpecificIdGender => Instance[175];
 
-		/// <summary>
-		/// CheckCharacterTeammateSpecificIdAgeGroup
-		/// </summary>
 		public static EventFunctionItem CheckCharacterTeammateSpecificIdAgeGroup => Instance[176];
 
-		/// <summary>
-		/// CheckCharacterTeammateSpecificIdId
-		/// </summary>
 		public static EventFunctionItem CheckCharacterTeammateSpecificIdId => Instance[177];
 
-		/// <summary>
-		/// CheckCharacterExp
-		/// </summary>
 		public static EventFunctionItem CheckCharacterExp => Instance[178];
 
-		/// <summary>
-		/// CheckCharacterReadCombatSkillPageCount
-		/// </summary>
 		public static EventFunctionItem CheckCharacterReadCombatSkillPageCount => Instance[179];
 
-		/// <summary>
-		/// CheckCharacterCombatSkillBreakout
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCombatSkillBreakout => Instance[180];
 
-		/// <summary>
-		/// CheckSettlementApprovingRate
-		/// </summary>
 		public static EventFunctionItem CheckSettlementApprovingRate => Instance[190];
 
-		/// <summary>
-		/// AddMaxApprovingRateBonus
-		/// </summary>
 		public static EventFunctionItem AddMaxApprovingRateBonus => Instance[535];
 
-		/// <summary>
-		/// CheckSettlementApprovingRateUpperLimit
-		/// </summary>
 		public static EventFunctionItem CheckSettlementApprovingRateUpperLimit => Instance[560];
 
-		/// <summary>
-		/// CheckStateHasSettlementType
-		/// </summary>
 		public static EventFunctionItem CheckStateHasSettlementType => Instance[193];
 
-		/// <summary>
-		/// CheckAdventureTemplate
-		/// </summary>
 		public static EventFunctionItem CheckAdventureTemplate => Instance[202];
 
-		/// <summary>
-		/// CheckAdventurePerMoveCount
-		/// </summary>
 		public static EventFunctionItem CheckAdventurePerMoveCount => Instance[181];
 
-		/// <summary>
-		/// CheckAdventurePerCostMovePoint
-		/// </summary>
 		public static EventFunctionItem CheckAdventurePerCostMovePoint => Instance[182];
 
-		/// <summary>
-		/// CheckAdventureElementVisible
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementVisible => Instance[183];
 
-		/// <summary>
-		/// SwitchEmeiBlood
-		/// </summary>
 		public static EventFunctionItem SwitchEmeiBlood => Instance[184];
 
-		/// <summary>
-		/// CheckAdventureCharacterGroup
-		/// </summary>
 		public static EventFunctionItem CheckAdventureCharacterGroup => Instance[185];
 
-		/// <summary>
-		/// CheckAdventureElementGroup
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementGroup => Instance[186];
 
-		/// <summary>
-		/// GetCharacterConsummateLevel
-		/// </summary>
 		public static EventFunctionItem GetCharacterConsummateLevel => Instance[191];
 
-		/// <summary>
-		/// OpenYuanshanMiniGame
-		/// </summary>
 		public static EventFunctionItem OpenYuanshanMiniGame => Instance[195];
 
-		/// <summary>
-		/// ProcessYuanshanMiniGameResults
-		/// </summary>
 		public static EventFunctionItem ProcessYuanshanMiniGameResults => Instance[196];
 
-		/// <summary>
-		/// SpecifyXiangshuInfectionValue
-		/// </summary>
 		public static EventFunctionItem SpecifyXiangshuInfectionValue => Instance[200];
 
-		/// <summary>
-		/// ChangeXiangshuInfectionValue
-		/// </summary>
 		public static EventFunctionItem ChangeXiangshuInfectionValue => Instance[201];
 
-		/// <summary>
-		/// SetCharacterMarriageStyleOne
-		/// </summary>
 		public static EventFunctionItem SetCharacterMarriageStyleOne => Instance[205];
 
-		/// <summary>
-		/// SetCharacterMarriageStyleTwo
-		/// </summary>
 		public static EventFunctionItem SetCharacterMarriageStyleTwo => Instance[206];
 
-		/// <summary>
-		/// IsVitalInPrison
-		/// </summary>
 		public static EventFunctionItem IsVitalInPrison => Instance[207];
 
-		/// <summary>
-		/// SetVitalInPrison
-		/// </summary>
 		public static EventFunctionItem SetVitalInPrison => Instance[208];
 
-		/// <summary>
-		/// PlayVitalAnim
-		/// </summary>
 		public static EventFunctionItem PlayVitalAnim => Instance[209];
 
-		/// <summary>
-		/// GetCharacterBySettlementGradeAndAge
-		/// </summary>
 		public static EventFunctionItem GetCharacterBySettlementGradeAndAge => Instance[210];
 
-		/// <summary>
-		/// AreVitalsDemon
-		/// </summary>
 		public static EventFunctionItem AreVitalsDemon => Instance[211];
 
-		/// <summary>
-		/// GetCurrentVitalIndex
-		/// </summary>
 		public static EventFunctionItem GetCurrentVitalIndex => Instance[212];
 
-		/// <summary>
-		/// InitThreeVitals
-		/// </summary>
 		public static EventFunctionItem InitThreeVitals => Instance[214];
 
-		/// <summary>
-		/// CheckAdventureParameter
-		/// </summary>
 		public static EventFunctionItem CheckAdventureParameter => Instance[219];
 
-		/// <summary>
-		/// SetAdventureParameter
-		/// </summary>
 		public static EventFunctionItem SetAdventureParameter => Instance[220];
 
-		/// <summary>
-		/// ChangeAdventureParameter
-		/// </summary>
 		public static EventFunctionItem ChangeAdventureParameter => Instance[221];
 
-		/// <summary>
-		/// CheckAdventureParameterStartWith
-		/// </summary>
 		public static EventFunctionItem CheckAdventureParameterStartWith => Instance[222];
 
-		/// <summary>
-		/// SetAdventureParameterStartWith
-		/// </summary>
 		public static EventFunctionItem SetAdventureParameterStartWith => Instance[223];
 
-		/// <summary>
-		/// ChangeAdventureParameterStartWith
-		/// </summary>
 		public static EventFunctionItem ChangeAdventureParameterStartWith => Instance[224];
 
-		/// <summary>
-		/// AdventureCheckProb
-		/// </summary>
 		public static EventFunctionItem AdventureCheckProb => Instance[225];
 
-		/// <summary>
-		/// CheckAdventureElementCount
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementCount => Instance[228];
 
-		/// <summary>
-		/// CheckAdventureElementTagCount
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementTagCount => Instance[229];
 
-		/// <summary>
-		/// GetAdventureElementTagCount
-		/// </summary>
 		public static EventFunctionItem GetAdventureElementTagCount => Instance[372];
 
-		/// <summary>
-		/// CheckAdventureParameterIsMax
-		/// </summary>
 		public static EventFunctionItem CheckAdventureParameterIsMax => Instance[230];
 
-		/// <summary>
-		/// CheckAdventureParameterIsMin
-		/// </summary>
 		public static EventFunctionItem CheckAdventureParameterIsMin => Instance[231];
 
-		/// <summary>
-		/// CheckAdventureElementInElement
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementInElement => Instance[232];
 
-		/// <summary>
-		/// CheckAdventureTaiwuInElement
-		/// </summary>
 		public static EventFunctionItem CheckAdventureTaiwuInElement => Instance[233];
 
-		/// <summary>
-		/// CheckAdventureTaiwuInBlockGroup
-		/// </summary>
 		public static EventFunctionItem CheckAdventureTaiwuInBlockGroup => Instance[234];
 
-		/// <summary>
-		/// AdventureCreateItem
-		/// </summary>
 		public static EventFunctionItem AdventureCreateItem => Instance[235];
 
-		/// <summary>
-		/// AdventureRemoveItem
-		/// </summary>
 		public static EventFunctionItem AdventureRemoveItem => Instance[236];
 
-		/// <summary>
-		/// AdventureConsumeItem
-		/// </summary>
 		public static EventFunctionItem AdventureConsumeItem => Instance[474];
 
-		/// <summary>
-		/// AdventureCheckUseItem
-		/// </summary>
 		public static EventFunctionItem AdventureCheckUseItem => Instance[237];
 
-		/// <summary>
-		/// AddJieqingMaskCharId
-		/// </summary>
 		public static EventFunctionItem AddJieqingMaskCharId => Instance[238];
 
-		/// <summary>
-		/// RemoveJieqingMaskCharId
-		/// </summary>
 		public static EventFunctionItem RemoveJieqingMaskCharId => Instance[239];
 
-		/// <summary>
-		/// AdventureSetAutoDeleteDate
-		/// </summary>
 		public static EventFunctionItem AdventureSetAutoDeleteDate => Instance[240];
 
-		/// <summary>
-		/// AdventureExit
-		/// </summary>
 		public static EventFunctionItem AdventureExit => Instance[241];
 
-		/// <summary>
-		/// AdventureExitNotReset
-		/// </summary>
 		public static EventFunctionItem AdventureExitNotReset => Instance[687];
 
-		/// <summary>
-		/// AdventureCreateAndEnter
-		/// </summary>
 		public static EventFunctionItem AdventureCreateAndEnter => Instance[718];
 
-		/// <summary>
-		/// AdventureExitResetCharacterState
-		/// </summary>
 		public static EventFunctionItem AdventureExitResetCharacterState => Instance[688];
 
-		/// <summary>
-		/// AdventureExitResetElementParameter
-		/// </summary>
 		public static EventFunctionItem AdventureExitResetElementParameter => Instance[689];
 
-		/// <summary>
-		/// AdventureExitResetElementBlockIndex
-		/// </summary>
 		public static EventFunctionItem AdventureExitResetElementBlockIndex => Instance[690];
 
-		/// <summary>
-		/// AdventureExitInterruptAllActions
-		/// </summary>
 		public static EventFunctionItem AdventureExitInterruptAllActions => Instance[691];
 
-		/// <summary>
-		/// AdventureExitResetTaiwuBuff
-		/// </summary>
 		public static EventFunctionItem AdventureExitResetTaiwuBuff => Instance[692];
 
-		/// <summary>
-		/// DestroyEnemyNest
-		/// </summary>
 		public static EventFunctionItem DestroyEnemyNest => Instance[242];
 
-		/// <summary>
-		/// SectMainStoryUnlockUI
-		/// </summary>
 		public static EventFunctionItem SectMainStoryUnlockUI => Instance[244];
 
-		/// <summary>
-		/// CheckAdventureElementVisibleWithTag
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementVisibleWithTag => Instance[245];
 
-		/// <summary>
-		/// CheckAdventureElementGroupWithTag
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementGroupWithTag => Instance[246];
 
-		/// <summary>
-		/// CheckAdventureElementInElementWithTag
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementInElementWithTag => Instance[247];
 
-		/// <summary>
-		/// CheckAdventureTaiwuInElementWithTag
-		/// </summary>
 		public static EventFunctionItem CheckAdventureTaiwuInElementWithTag => Instance[248];
 
-		/// <summary>
-		/// GetCurrentFaith
-		/// </summary>
 		public static EventFunctionItem GetCurrentFaith => Instance[249];
 
-		/// <summary>
-		/// GetFaithLevel
-		/// </summary>
 		public static EventFunctionItem GetFaithLevel => Instance[250];
 
-		/// <summary>
-		/// GetFuyuFaithTime
-		/// </summary>
 		public static EventFunctionItem GetFuyuFaithTime => Instance[251];
 
-		/// <summary>
-		/// OpenFuyuFaithPanel
-		/// </summary>
 		public static EventFunctionItem OpenFuyuFaithPanel => Instance[252];
 
-		/// <summary>
-		/// OpenFuyuGiftPanel
-		/// </summary>
 		public static EventFunctionItem OpenFuyuGiftPanel => Instance[253];
 
-		/// <summary>
-		/// ApplyFuyuFaith
-		/// </summary>
 		public static EventFunctionItem ApplyFuyuFaith => Instance[254];
 
-		/// <summary>
-		/// ReadSelectResultCount
-		/// </summary>
 		public static EventFunctionItem ReadSelectResultCount => Instance[255];
 
-		/// <summary>
-		/// TryGetMaxAcceptableFuyuFaith
-		/// </summary>
 		public static EventFunctionItem TryGetMaxAcceptableFuyuFaith => Instance[256];
 
-		/// <summary>
-		/// CheckTaiwuHasFuyuFaith
-		/// </summary>
 		public static EventFunctionItem CheckTaiwuHasFuyuFaith => Instance[257];
 
-		/// <summary>
-		/// CheckCharacterFuyuFaith
-		/// </summary>
 		public static EventFunctionItem CheckCharacterFuyuFaith => Instance[258];
 
-		/// <summary>
-		/// AdventureElementFillByGroup
-		/// </summary>
 		public static EventFunctionItem AdventureElementFillByGroup => Instance[259];
 
-		/// <summary>
-		/// AdventureElementFillByElement
-		/// </summary>
 		public static EventFunctionItem AdventureElementFillByElement => Instance[260];
 
-		/// <summary>
-		/// AdventureDelete
-		/// </summary>
 		public static EventFunctionItem AdventureDelete => Instance[264];
 
-		/// <summary>
-		/// AdventureDeleteNew
-		/// </summary>
 		public static EventFunctionItem AdventureDeleteNew => Instance[811];
 
-		/// <summary>
-		/// CheckAdventureElementParameter
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementParameter => Instance[265];
 
-		/// <summary>
-		/// SetAdventureElementParameter
-		/// </summary>
 		public static EventFunctionItem SetAdventureElementParameter => Instance[266];
 
-		/// <summary>
-		/// ChangeAdventureElementParameter
-		/// </summary>
 		public static EventFunctionItem ChangeAdventureElementParameter => Instance[267];
 
-		/// <summary>
-		/// AdventureChangeElementCountAtTaiwuLocation
-		/// </summary>
 		public static EventFunctionItem AdventureChangeElementCountAtTaiwuLocation => Instance[268];
 
-		/// <summary>
-		/// AdventureChangeElementCountAtTaiwuLocationBig
-		/// </summary>
 		public static EventFunctionItem AdventureChangeElementCountAtTaiwuLocationBig => Instance[774];
 
-		/// <summary>
-		/// AdventureClearElementAtTaiwuLocation
-		/// </summary>
 		public static EventFunctionItem AdventureClearElementAtTaiwuLocation => Instance[269];
 
-		/// <summary>
-		/// AdventureClearElement
-		/// </summary>
 		public static EventFunctionItem AdventureClearElement => Instance[270];
 
-		/// <summary>
-		/// AdventureDeleteElement
-		/// </summary>
 		public static EventFunctionItem AdventureDeleteElement => Instance[271];
 
-		/// <summary>
-		/// AdventureDeleteElementByElement
-		/// </summary>
 		public static EventFunctionItem AdventureDeleteElementByElement => Instance[272];
 
-		/// <summary>
-		/// AdventureDeleteElementByElementGroup
-		/// </summary>
 		public static EventFunctionItem AdventureDeleteElementByElementGroup => Instance[273];
 
-		/// <summary>
-		/// CheckAdventureElementHaveElement
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementHaveElement => Instance[274];
 
-		/// <summary>
-		/// GetMovePointValue
-		/// </summary>
 		public static EventFunctionItem GetMovePointValue => Instance[275];
 
-		/// <summary>
-		/// CheckAdventureElementCombatPowerIsMax
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementCombatPowerIsMax => Instance[276];
 
-		/// <summary>
-		/// AdventureElementSimulateCombat
-		/// </summary>
 		public static EventFunctionItem AdventureElementSimulateCombat => Instance[277];
 
-		/// <summary>
-		/// AdventureCheckHasItem
-		/// </summary>
 		public static EventFunctionItem AdventureCheckHasItem => Instance[278];
 
-		/// <summary>
-		/// AdventureSaveElementCharacterId
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementCharacterId => Instance[279];
 
-		/// <summary>
-		/// AdventureCreateElementRandom
-		/// </summary>
 		public static EventFunctionItem AdventureCreateElementRandom => Instance[280];
 
-		/// <summary>
-		/// AdventureTaiwuRandomMove
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuRandomMove => Instance[281];
 
-		/// <summary>
-		/// AdventureDeleteCurrElement
-		/// </summary>
 		public static EventFunctionItem AdventureDeleteCurrElement => Instance[282];
 
-		/// <summary>
-		/// AdventurePlayDeleteElementAnim
-		/// </summary>
 		public static EventFunctionItem AdventurePlayDeleteElementAnim => Instance[484];
 
-		/// <summary>
-		/// ClearDisorderOfQi
-		/// </summary>
 		public static EventFunctionItem ClearDisorderOfQi => Instance[283];
 
-		/// <summary>
-		/// RecoverHealth
-		/// </summary>
 		public static EventFunctionItem RecoverHealth => Instance[284];
 
-		/// <summary>
-		/// AdventureSaveElementTimeCosted
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementTimeCosted => Instance[285];
 
-		/// <summary>
-		/// AdventureCheckIsSpecifyElement
-		/// </summary>
 		public static EventFunctionItem AdventureCheckIsSpecifyElement => Instance[286];
 
-		/// <summary>
-		/// AdventureGetParameterValue
-		/// </summary>
 		public static EventFunctionItem AdventureGetParameterValue => Instance[287];
 
-		/// <summary>
-		/// AdventureGetElementParameterValue
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementParameterValue => Instance[288];
 
-		/// <summary>
-		/// AdventureGetItemCount
-		/// </summary>
 		public static EventFunctionItem AdventureGetItemCount => Instance[289];
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElementAtSameBlock
-		/// </summary>
 		public static EventFunctionItem AdventureCompareCombatPowerWithElementAtSameBlock => Instance[290];
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElementTagAtSameBlock
-		/// </summary>
 		public static EventFunctionItem AdventureCompareCombatPowerWithElementTagAtSameBlock => Instance[291];
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElement
-		/// </summary>
 		public static EventFunctionItem AdventureCompareCombatPowerWithElement => Instance[292];
 
-		/// <summary>
-		/// AdventureCompareCombatPowerWithElementTag
-		/// </summary>
 		public static EventFunctionItem AdventureCompareCombatPowerWithElementTag => Instance[293];
 
-		/// <summary>
-		/// AdventureCheckElementSameLocation
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementSameLocation => Instance[294];
 
-		/// <summary>
-		/// AdventureCheckElementSameLocationWithTag
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementSameLocationWithTag => Instance[295];
 
-		/// <summary>
-		/// AdventureCheckTwoElementSameLocation
-		/// </summary>
 		public static EventFunctionItem AdventureCheckTwoElementSameLocation => Instance[598];
 
-		/// <summary>
-		/// AdventureCheckIsSpecifyTagElement
-		/// </summary>
 		public static EventFunctionItem AdventureCheckIsSpecifyTagElement => Instance[296];
 
-		/// <summary>
-		/// AdventureChangeElementCount
-		/// </summary>
 		public static EventFunctionItem AdventureChangeElementCount => Instance[297];
 
-		/// <summary>
-		/// CheckJieQingInteractUnlock
-		/// </summary>
 		public static EventFunctionItem CheckJieQingInteractUnlock => Instance[298];
 
-		/// <summary>
-		/// JieQingInteractConfirmKill
-		/// </summary>
 		public static EventFunctionItem JieQingInteractConfirmKill => Instance[299];
 
-		/// <summary>
-		/// CharacterStarFortuneEnough
-		/// </summary>
 		public static EventFunctionItem CharacterStarFortuneEnough => Instance[300];
 
-		/// <summary>
-		/// AdventureSaveElementById
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementById => Instance[301];
 
-		/// <summary>
-		/// AdventureSaveElementByTag
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementByTag => Instance[302];
 
-		/// <summary>
-		/// AdventureSaveElementByTagGlobal
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementByTagGlobal => Instance[303];
 
-		/// <summary>
-		/// MajorEventExitAndDelete
-		/// </summary>
 		public static EventFunctionItem MajorEventExitAndDelete => Instance[304];
 
-		/// <summary>
-		/// MajorEventExitAndDeleteAndInvokeOther
-		/// </summary>
 		public static EventFunctionItem MajorEventExitAndDeleteAndInvokeOther => Instance[374];
 
-		/// <summary>
-		/// MajorEventExitAndDeleteNew
-		/// </summary>
 		public static EventFunctionItem MajorEventExitAndDeleteNew => Instance[812];
 
-		/// <summary>
-		/// MajorEventSetSkipFinishAnim
-		/// </summary>
 		public static EventFunctionItem MajorEventSetSkipFinishAnim => Instance[856];
 
-		/// <summary>
-		/// AdventureSetTaiwuViewType
-		/// </summary>
 		public static EventFunctionItem AdventureSetTaiwuViewType => Instance[305];
 
-		/// <summary>
-		/// AdventureCheckViewType
-		/// </summary>
 		public static EventFunctionItem AdventureCheckViewType => Instance[306];
 
-		/// <summary>
-		/// AdventureCheckElementInRange
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementInRange => Instance[307];
 
-		/// <summary>
-		/// AdventureCheckElementInRangeWithTag
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementInRangeWithTag => Instance[308];
 
-		/// <summary>
-		/// AdventureCreateElementAtGroup
-		/// </summary>
 		public static EventFunctionItem AdventureCreateElementAtGroup => Instance[309];
 
-		/// <summary>
-		/// AdventureCreateElementInheritCharacter
-		/// </summary>
 		public static EventFunctionItem AdventureCreateElementInheritCharacter => Instance[310];
 
-		/// <summary>
-		/// AdventureParameterStartProgress
-		/// </summary>
 		public static EventFunctionItem AdventureParameterStartProgress => Instance[311];
 
-		/// <summary>
-		/// AdventureElementParameterStartProgress
-		/// </summary>
 		public static EventFunctionItem AdventureElementParameterStartProgress => Instance[312];
 
-		/// <summary>
-		/// AdventureElementMoveToTaiwuNearby
-		/// </summary>
 		public static EventFunctionItem AdventureElementMoveToTaiwuNearby => Instance[313];
 
-		/// <summary>
-		/// AdventureGetElementCountInRange
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementCountInRange => Instance[314];
 
-		/// <summary>
-		/// CharacterGetAvailableEatingSlotsCount
-		/// </summary>
 		public static EventFunctionItem CharacterGetAvailableEatingSlotsCount => Instance[315];
 
-		/// <summary>
-		/// CheckCharacterAvailableEatingSlotsCount
-		/// </summary>
 		public static EventFunctionItem CheckCharacterAvailableEatingSlotsCount => Instance[578];
 
-		/// <summary>
-		/// CharacterAddEatingItem
-		/// </summary>
 		public static EventFunctionItem CharacterAddEatingItem => Instance[316];
 
-		/// <summary>
-		/// ClearCharacterEatingItemByIndex
-		/// </summary>
 		public static EventFunctionItem ClearCharacterEatingItemByIndex => Instance[809];
 
-		/// <summary>
-		/// ClearCharacterEatingItem
-		/// </summary>
 		public static EventFunctionItem ClearCharacterEatingItem => Instance[810];
 
-		/// <summary>
-		/// MedicineExtraAddPercent
-		/// </summary>
 		public static EventFunctionItem MedicineExtraAddPercent => Instance[544];
 
-		/// <summary>
-		/// CharacterChangeCurrNeili
-		/// </summary>
 		public static EventFunctionItem CharacterChangeCurrNeili => Instance[317];
 
-		/// <summary>
-		/// CharacterSetCurrNeili
-		/// </summary>
 		public static EventFunctionItem CharacterSetCurrNeili => Instance[318];
 
-		/// <summary>
-		/// CharacterCheckNeiliType
-		/// </summary>
 		public static EventFunctionItem CharacterCheckNeiliType => Instance[319];
 
-		/// <summary>
-		/// GetRandomItemTemplateByGrade
-		/// </summary>
 		public static EventFunctionItem GetRandomItemTemplateByGrade => Instance[320];
 
-		/// <summary>
-		/// ItemAddPoisonRandom
-		/// </summary>
 		public static EventFunctionItem ItemAddPoisonRandom => Instance[321];
 
-		/// <summary>
-		/// CharacterHaveInjury
-		/// </summary>
 		public static EventFunctionItem CharacterHaveInjury => Instance[322];
 
-		/// <summary>
-		/// CharacterHavePoison
-		/// </summary>
 		public static EventFunctionItem CharacterHavePoison => Instance[323];
 
-		/// <summary>
-		/// TaiwuHealCharacter
-		/// </summary>
 		public static EventFunctionItem TaiwuHealCharacter => Instance[324];
 
-		/// <summary>
-		/// RandomSuccessorActive
-		/// </summary>
 		public static EventFunctionItem RandomSuccessorActive => Instance[327];
 
-		/// <summary>
-		/// GetSectMainStoryEnding
-		/// </summary>
 		public static EventFunctionItem GetSectMainStoryEnding => Instance[328];
 
-		/// <summary>
-		/// OpenModifyBook
-		/// </summary>
 		public static EventFunctionItem OpenModifyBook => Instance[329];
 
-		/// <summary>
-		/// GetSectMapBlock
-		/// </summary>
 		public static EventFunctionItem GetSectMapBlock => Instance[330];
 
-		/// <summary>
-		/// CheckWuxianWugJugPoison
-		/// </summary>
 		public static EventFunctionItem CheckWuxianWugJugPoison => Instance[331];
 
-		/// <summary>
-		/// GetCurrDate
-		/// </summary>
 		public static EventFunctionItem GetCurrDate => Instance[332];
 
-		/// <summary>
-		/// StartShavingAction
-		/// </summary>
 		public static EventFunctionItem StartShavingAction => Instance[333];
 
-		/// <summary>
-		/// AdventureElementParameterStartProgressWithTag
-		/// </summary>
 		public static EventFunctionItem AdventureElementParameterStartProgressWithTag => Instance[334];
 
-		/// <summary>
-		/// RemoveInventoryItemByTemplateId
-		/// </summary>
 		public static EventFunctionItem RemoveInventoryItemByTemplateId => Instance[335];
 
-		/// <summary>
-		/// SelectFilterCharacterAgeGroup
-		/// </summary>
 		public static EventFunctionItem SelectFilterCharacterAgeGroup => Instance[336];
 
-		/// <summary>
-		/// CheckAdventureElementInProgress
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementInProgress => Instance[337];
 
-		/// <summary>
-		/// AdventureElementSimulateCombatWithTag
-		/// </summary>
 		public static EventFunctionItem AdventureElementSimulateCombatWithTag => Instance[338];
 
-		/// <summary>
-		/// CheckPreviousSimulateCombatResult
-		/// </summary>
 		public static EventFunctionItem CheckPreviousSimulateCombatResult => Instance[339];
 
-		/// <summary>
-		/// AdventureCreateElementAtGroupWithTag
-		/// </summary>
 		public static EventFunctionItem AdventureCreateElementAtGroupWithTag => Instance[340];
 
-		/// <summary>
-		/// CheckSectMainStoryEnding
-		/// </summary>
 		public static EventFunctionItem CheckSectMainStoryEnding => Instance[341];
 
-		/// <summary>
-		/// GetTaiwuGroupList
-		/// </summary>
 		public static EventFunctionItem GetTaiwuGroupList => Instance[342];
 
-		/// <summary>
-		/// CreateIntList
-		/// </summary>
 		public static EventFunctionItem CreateIntList => Instance[343];
 
-		/// <summary>
-		/// AddToIntList
-		/// </summary>
 		public static EventFunctionItem AddToIntList => Instance[344];
 
-		/// <summary>
-		/// SelectCharacter
-		/// </summary>
 		public static EventFunctionItem SelectCharacter => Instance[345];
 
-		/// <summary>
-		/// SelectCharacterWithFilter
-		/// </summary>
 		public static EventFunctionItem SelectCharacterWithFilter => Instance[621];
 
-		/// <summary>
-		/// CheckAdventureElementInTaiwuBigBlockWithTag
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementInTaiwuBigBlockWithTag => Instance[346];
 
-		/// <summary>
-		/// CheckAdventureElementInBigBlockWithTag
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementInBigBlockWithTag => Instance[347];
 
-		/// <summary>
-		/// CheckItemValid
-		/// </summary>
 		public static EventFunctionItem CheckItemValid => Instance[348];
 
-		/// <summary>
-		/// CheckAdventureElementParameterInProgress
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementParameterInProgress => Instance[349];
 
-		/// <summary>
-		/// CheckGotoOutterWorldCoolDown
-		/// </summary>
 		public static EventFunctionItem CheckGotoOutterWorldCoolDown => Instance[350];
 
-		/// <summary>
-		/// AdventureGetElementDistanceToTaiwu
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementDistanceToTaiwu => Instance[351];
 
-		/// <summary>
-		/// AdventureCheckViewTypeToElement
-		/// </summary>
 		public static EventFunctionItem AdventureCheckViewTypeToElement => Instance[352];
 
-		/// <summary>
-		/// MajorEventCreate
-		/// </summary>
 		public static EventFunctionItem MajorEventCreate => Instance[353];
 
-		/// <summary>
-		/// MajorEventCreateAndEnter
-		/// </summary>
 		public static EventFunctionItem MajorEventCreateAndEnter => Instance[780];
 
-		/// <summary>
-		/// GetSettlementRandomMapBlock
-		/// </summary>
 		public static EventFunctionItem GetSettlementRandomMapBlock => Instance[354];
 
-		/// <summary>
-		/// SetBlackSnakeName
-		/// </summary>
 		public static EventFunctionItem SetBlackSnakeName => Instance[355];
 
-		/// <summary>
-		/// AdventureParameterStopProgress
-		/// </summary>
 		public static EventFunctionItem AdventureParameterStopProgress => Instance[356];
 
-		/// <summary>
-		/// AdventureElementParameterStopProgress
-		/// </summary>
 		public static EventFunctionItem AdventureElementParameterStopProgress => Instance[357];
 
-		/// <summary>
-		/// AdventureCheckElementDistanceToGroupBlock
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementDistanceToGroupBlock => Instance[358];
 
-		/// <summary>
-		/// ReduceRandomDamage
-		/// </summary>
 		public static EventFunctionItem ReduceRandomDamage => Instance[359];
 
-		/// <summary>
-		/// EditCharBaseNeiliProportionOfFiveElements
-		/// </summary>
 		public static EventFunctionItem EditCharBaseNeiliProportionOfFiveElements => Instance[360];
 
-		/// <summary>
-		/// GetCharacterFiveElements
-		/// </summary>
 		public static EventFunctionItem GetCharacterFiveElements => Instance[782];
 
-		/// <summary>
-		/// AdventureCheckElementAtResetTarget
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementAtResetTarget => Instance[361];
 
-		/// <summary>
-		/// GetJixiCharacter
-		/// </summary>
 		public static EventFunctionItem GetJixiCharacter => Instance[362];
 
-		/// <summary>
-		/// CopyFixedCharacterName
-		/// </summary>
 		public static EventFunctionItem CopyFixedCharacterName => Instance[363];
 
-		/// <summary>
-		/// CreateIntelligentCharacterWithQualificationBonusWithReturn
-		/// </summary>
 		public static EventFunctionItem CreateIntelligentCharacterWithQualificationBonusWithReturn => Instance[364];
 
-		/// <summary>
-		/// AdventureSaveElementAtTaiwuBigBlock
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementAtTaiwuBigBlock => Instance[365];
 
-		/// <summary>
-		/// AdventureSaveElementAtTaiwuBlock
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementAtTaiwuBlock => Instance[366];
 
-		/// <summary>
-		/// AdventureSaveElementAtElementBigBlock
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementAtElementBigBlock => Instance[367];
 
-		/// <summary>
-		/// RemoveItemPoison
-		/// </summary>
 		public static EventFunctionItem RemoveItemPoison => Instance[368];
 
-		/// <summary>
-		/// TryGetJixiCharacter
-		/// </summary>
 		public static EventFunctionItem TryGetJixiCharacter => Instance[369];
 
-		/// <summary>
-		/// DisableFixedCharacterAiMove
-		/// </summary>
 		public static EventFunctionItem DisableFixedCharacterAiMove => Instance[373];
 
-		/// <summary>
-		/// CheckLovingItemSubType
-		/// </summary>
 		public static EventFunctionItem CheckLovingItemSubType => Instance[375];
 
-		/// <summary>
-		/// CheckHatingItemSubType
-		/// </summary>
 		public static EventFunctionItem CheckHatingItemSubType => Instance[376];
 
-		/// <summary>
-		/// GetCharacterFavorabilityType
-		/// </summary>
 		public static EventFunctionItem GetCharacterFavorabilityType => Instance[377];
 
-		/// <summary>
-		/// AdventureGetCurrentCharIds
-		/// </summary>
 		public static EventFunctionItem AdventureGetCurrentCharIds => Instance[370];
 
-		/// <summary>
-		/// AdventureGetCharIds
-		/// </summary>
 		public static EventFunctionItem AdventureGetCharIds => Instance[371];
 
-		/// <summary>
-		/// AdventureCheckElementDistanceToTaiwu
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementDistanceToTaiwu => Instance[378];
 
-		/// <summary>
-		/// AdventureConvertElementCharJoinGroup
-		/// </summary>
 		public static EventFunctionItem AdventureConvertElementCharJoinGroup => Instance[379];
 
-		/// <summary>
-		/// AdventureCreateRandomEnemyBindElement
-		/// </summary>
 		public static EventFunctionItem AdventureCreateRandomEnemyBindElement => Instance[380];
 
-		/// <summary>
-		/// CheckAdventureParameterInProgress
-		/// </summary>
 		public static EventFunctionItem CheckAdventureParameterInProgress => Instance[381];
 
-		/// <summary>
-		/// CheckAdventureInProgress
-		/// </summary>
 		public static EventFunctionItem CheckAdventureInProgress => Instance[382];
 
-		/// <summary>
-		/// CheckJixiCanFollow
-		/// </summary>
 		public static EventFunctionItem CheckJixiCanFollow => Instance[383];
 
-		/// <summary>
-		/// DeallocateNeili
-		/// </summary>
 		public static EventFunctionItem DeallocateNeili => Instance[384];
 
-		/// <summary>
-		/// AllocateNeili
-		/// </summary>
 		public static EventFunctionItem AllocateNeili => Instance[385];
 
-		/// <summary>
-		/// CharacterGetCurrNeili
-		/// </summary>
 		public static EventFunctionItem CharacterGetCurrNeili => Instance[386];
 
-		/// <summary>
-		/// AdventureCheckElementDistanceToResetTarget
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementDistanceToResetTarget => Instance[387];
 
-		/// <summary>
-		/// GearMateJoinGroup
-		/// </summary>
 		public static EventFunctionItem GearMateJoinGroup => Instance[388];
 
-		/// <summary>
-		/// GearMateLeaveGroup
-		/// </summary>
 		public static EventFunctionItem GearMateLeaveGroup => Instance[389];
 
-		/// <summary>
-		/// CheckUsedFuyuSwordInCombat
-		/// </summary>
 		public static EventFunctionItem CheckUsedFuyuSwordInCombat => Instance[390];
 
-		/// <summary>
-		/// AdventureElementRandomMove
-		/// </summary>
 		public static EventFunctionItem AdventureElementRandomMove => Instance[391];
 
-		/// <summary>
-		/// CheckAdventureElementInBlockGroupBigBlockWithTag
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementInBlockGroupBigBlockWithTag => Instance[392];
 
-		/// <summary>
-		/// AdventureElementSimulateCombatById
-		/// </summary>
 		public static EventFunctionItem AdventureElementSimulateCombatById => Instance[393];
 
-		/// <summary>
-		/// TemporarilyChangeExtraNeiliAllocation
-		/// </summary>
 		public static EventFunctionItem TemporarilyChangeExtraNeiliAllocation => Instance[394];
 
-		/// <summary>
-		/// CharacterRevertAllTemporaryModifications
-		/// </summary>
 		public static EventFunctionItem CharacterRevertAllTemporaryModifications => Instance[395];
 
-		/// <summary>
-		/// AddExtraNeiliAllocationProgressToGainExtraNeiliAllocation
-		/// </summary>
 		public static EventFunctionItem AddExtraNeiliAllocationProgressToGainExtraNeiliAllocation => Instance[699];
 
-		/// <summary>
-		/// OpenDriveWugKingUi
-		/// </summary>
 		public static EventFunctionItem OpenDriveWugKingUi => Instance[396];
 
-		/// <summary>
-		/// SetCommonOptionAvailable
-		/// </summary>
 		public static EventFunctionItem SetCommonOptionAvailable => Instance[397];
 
-		/// <summary>
-		/// BanCommonOption
-		/// </summary>
 		public static EventFunctionItem BanCommonOption => Instance[513];
 
-		/// <summary>
-		/// CheckItemPoisoned
-		/// </summary>
 		public static EventFunctionItem CheckItemPoisoned => Instance[398];
 
-		/// <summary>
-		/// CheckEventActorTemplate
-		/// </summary>
 		public static EventFunctionItem CheckEventActorTemplate => Instance[399];
 
-		/// <summary>
-		/// CheckCharacterEatingWugKing
-		/// </summary>
 		public static EventFunctionItem CheckCharacterEatingWugKing => Instance[400];
 
-		/// <summary>
-		/// AddItemPoison
-		/// </summary>
 		public static EventFunctionItem AddItemPoison => Instance[401];
 
-		/// <summary>
-		/// AddNormalInformation
-		/// </summary>
 		public static EventFunctionItem AddNormalInformation => Instance[569];
 
-		/// <summary>
-		/// AdventureChangeElementValueWithSpecificTag
-		/// </summary>
 		public static EventFunctionItem AdventureChangeElementValueWithSpecificTag => Instance[402];
 
-		/// <summary>
-		/// AdventureMoveElementToElementNearById
-		/// </summary>
 		public static EventFunctionItem AdventureMoveElementToElementNearById => Instance[403];
 
-		/// <summary>
-		/// AdventureMoveElementToElementNearByKey
-		/// </summary>
 		public static EventFunctionItem AdventureMoveElementToElementNearByKey => Instance[404];
 
-		/// <summary>
-		/// AdventureMoveElementToGroup
-		/// </summary>
 		public static EventFunctionItem AdventureMoveElementToGroup => Instance[405];
 
-		/// <summary>
-		/// GetCharacterPersonalityType
-		/// </summary>
 		public static EventFunctionItem GetCharacterPersonalityType => Instance[406];
 
-		/// <summary>
-		/// GetCharacterLifeSkillAttainment
-		/// </summary>
 		public static EventFunctionItem GetCharacterLifeSkillAttainment => Instance[407];
 
-		/// <summary>
-		/// CreateRandomEnemyWithGender
-		/// </summary>
 		public static EventFunctionItem CreateRandomEnemyWithGender => Instance[409];
 
-		/// <summary>
-		/// AdventureElementAlertAnim
-		/// </summary>
 		public static EventFunctionItem AdventureElementAlertAnim => Instance[410];
 
-		/// <summary>
-		/// AdventureBlockChangeIcon
-		/// </summary>
 		public static EventFunctionItem AdventureBlockChangeIcon => Instance[411];
 
-		/// <summary>
-		/// AdventureGroupChangeIcon
-		/// </summary>
 		public static EventFunctionItem AdventureGroupChangeIcon => Instance[719];
 
-		/// <summary>
-		/// AdventureElementShowHideEffect
-		/// </summary>
 		public static EventFunctionItem AdventureElementShowHideEffect => Instance[412];
 
-		/// <summary>
-		/// AdventureGroupEffect
-		/// </summary>
 		public static EventFunctionItem AdventureGroupEffect => Instance[413];
 
-		/// <summary>
-		/// AddInstantNotificationNoArgument
-		/// </summary>
 		public static EventFunctionItem AddInstantNotificationNoArgument => Instance[414];
 
-		/// <summary>
-		/// AddInstantNotificationArgumentOneCharacter
-		/// </summary>
 		public static EventFunctionItem AddInstantNotificationArgumentOneCharacter => Instance[415];
 
-		/// <summary>
-		/// AddInstantNotificationArgumentTwoCharacter
-		/// </summary>
 		public static EventFunctionItem AddInstantNotificationArgumentTwoCharacter => Instance[416];
 
-		/// <summary>
-		/// AddInstantNotificationArgumentThreeCharacter
-		/// </summary>
 		public static EventFunctionItem AddInstantNotificationArgumentThreeCharacter => Instance[417];
 
-		/// <summary>
-		/// AddMonthlyEventNoArgument
-		/// </summary>
 		public static EventFunctionItem AddMonthlyEventNoArgument => Instance[580];
 
-		/// <summary>
-		/// AddMonthlyNotificationNoArgument
-		/// </summary>
 		public static EventFunctionItem AddMonthlyNotificationNoArgument => Instance[581];
 
-		/// <summary>
-		/// AddMonthlyEventArgumentOneCharacter
-		/// </summary>
 		public static EventFunctionItem AddMonthlyEventArgumentOneCharacter => Instance[720];
 
-		/// <summary>
-		/// WorldMapTaiwuRandomMove
-		/// </summary>
 		public static EventFunctionItem WorldMapTaiwuRandomMove => Instance[418];
 
-		/// <summary>
-		/// CreateGearMate
-		/// </summary>
 		public static EventFunctionItem CreateGearMate => Instance[419];
 
-		/// <summary>
-		/// CheckCorpsesCharacterGoodEnding
-		/// </summary>
 		public static EventFunctionItem CheckCorpsesCharacterGoodEnding => Instance[422];
 
-		/// <summary>
-		/// CheckValueExist
-		/// </summary>
 		public static EventFunctionItem CheckValueExist => Instance[424];
 
-		/// <summary>
-		/// AddListToIntList
-		/// </summary>
 		public static EventFunctionItem AddListToIntList => Instance[425];
 
-		/// <summary>
-		/// CheckCharacterInjuryCount
-		/// </summary>
 		public static EventFunctionItem CheckCharacterInjuryCount => Instance[426];
 
-		/// <summary>
-		/// AdventureQueryTaiwuActionId
-		/// </summary>
 		public static EventFunctionItem AdventureQueryTaiwuActionId => Instance[427];
 
-		/// <summary>
-		/// AdventureQueryElementActionId
-		/// </summary>
 		public static EventFunctionItem AdventureQueryElementActionId => Instance[428];
 
-		/// <summary>
-		/// AdventureChangeAction
-		/// </summary>
 		public static EventFunctionItem AdventureChangeAction => Instance[429];
 
-		/// <summary>
-		/// AdventureElementStartActionWithTaiwu
-		/// </summary>
 		public static EventFunctionItem AdventureElementStartActionWithTaiwu => Instance[430];
 
-		/// <summary>
-		/// AdventureElementStartActionWithElement
-		/// </summary>
 		public static EventFunctionItem AdventureElementStartActionWithElement => Instance[431];
 
-		/// <summary>
-		/// AdventureCheckFinishedActionKey
-		/// </summary>
 		public static EventFunctionItem AdventureCheckFinishedActionKey => Instance[432];
 
-		/// <summary>
-		/// AdventureGetFinishedActionElement
-		/// </summary>
 		public static EventFunctionItem AdventureGetFinishedActionElement => Instance[433];
 
-		/// <summary>
-		/// AdventureElementsStartActionWithTaiwu
-		/// </summary>
 		public static EventFunctionItem AdventureElementsStartActionWithTaiwu => Instance[434];
 
-		/// <summary>
-		/// AdventureElementsStartAction
-		/// </summary>
 		public static EventFunctionItem AdventureElementsStartAction => Instance[435];
 
-		/// <summary>
-		/// AdventureRemoveViewCloud
-		/// </summary>
 		public static EventFunctionItem AdventureRemoveViewCloud => Instance[436];
 
-		/// <summary>
-		/// AdventureGetElementListByTag
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementListByTag => Instance[438];
 
-		/// <summary>
-		/// AdventureGetElementListByCoreId
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementListByCoreId => Instance[439];
 
-		/// <summary>
-		/// MajorEventGetNodeReward
-		/// </summary>
 		public static EventFunctionItem MajorEventGetNodeReward => Instance[443];
 
-		/// <summary>
-		/// ChangeMusicStatus
-		/// </summary>
 		public static EventFunctionItem ChangeMusicStatus => Instance[444];
 
-		/// <summary>
-		/// ChangeSoundStatus
-		/// </summary>
 		public static EventFunctionItem ChangeSoundStatus => Instance[445];
 
-		/// <summary>
-		/// CheckTotalMonth
-		/// </summary>
 		public static EventFunctionItem CheckTotalMonth => Instance[446];
 
-		/// <summary>
-		/// CheckJixiFollowing
-		/// </summary>
 		public static EventFunctionItem CheckJixiFollowing => Instance[447];
 
-		/// <summary>
-		/// AdventureCheckElementInRangeWithTagForTaiwu
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementInRangeWithTagForTaiwu => Instance[448];
 
-		/// <summary>
-		/// CheckCharacterHasItemType
-		/// </summary>
+		public static EventFunctionItem RemoveAllAdventureByCoreId => Instance[927];
+
 		public static EventFunctionItem CheckCharacterHasItemType => Instance[449];
 
-		/// <summary>
-		/// RemoveAllMajorEventByCoreId
-		/// </summary>
 		public static EventFunctionItem RemoveAllMajorEventByCoreId => Instance[450];
 
-		/// <summary>
-		/// SetJixiGrow
-		/// </summary>
 		public static EventFunctionItem SetJixiGrow => Instance[451];
 
-		/// <summary>
-		/// AdventureAddElementItem
-		/// </summary>
 		public static EventFunctionItem AdventureAddElementItem => Instance[452];
 
-		/// <summary>
-		/// AdventureRemoveElementItem
-		/// </summary>
 		public static EventFunctionItem AdventureRemoveElementItem => Instance[453];
 
-		/// <summary>
-		/// AdventureSelectElementItem
-		/// </summary>
 		public static EventFunctionItem AdventureSelectElementItem => Instance[454];
 
-		/// <summary>
-		/// AdventureCheckElementItem
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementItem => Instance[455];
 
-		/// <summary>
-		/// AdventureHalfItemToTaiwu
-		/// </summary>
 		public static EventFunctionItem AdventureHalfItemToTaiwu => Instance[775];
 
-		/// <summary>
-		/// CheckDisorderOfQi
-		/// </summary>
 		public static EventFunctionItem CheckDisorderOfQi => Instance[456];
 
-		/// <summary>
-		/// ResetMartialArtTournament
-		/// </summary>
 		public static EventFunctionItem ResetMartialArtTournament => Instance[457];
 
-		/// <summary>
-		/// OnLegendaryBookAdventureActivated
-		/// </summary>
 		public static EventFunctionItem OnLegendaryBookAdventureActivated => Instance[458];
 
-		/// <summary>
-		/// OnLegendaryBookAdventureRemoved
-		/// </summary>
 		public static EventFunctionItem OnLegendaryBookAdventureRemoved => Instance[459];
 
-		/// <summary>
-		/// SetRanshanThreeCorpseFollowing
-		/// </summary>
 		public static EventFunctionItem SetRanshanThreeCorpseFollowing => Instance[460];
 
-		/// <summary>
-		/// AdventureAddElementItemPoison
-		/// </summary>
 		public static EventFunctionItem AdventureAddElementItemPoison => Instance[461];
 
-		/// <summary>
-		/// AdventureTransferItemToCharacter
-		/// </summary>
 		public static EventFunctionItem AdventureTransferItemToCharacter => Instance[462];
 
-		/// <summary>
-		/// AdventureTaiwuShowDialog
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuShowDialog => Instance[463];
 
-		/// <summary>
-		/// AdventureElementShowDialog
-		/// </summary>
 		public static EventFunctionItem AdventureElementShowDialog => Instance[464];
 
-		/// <summary>
-		/// AdventureTaiwuAtBlockByElementId
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuAtBlockByElementId => Instance[465];
 
-		/// <summary>
-		/// AdventureTaiwuAtBlockByElementCoreId
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuAtBlockByElementCoreId => Instance[466];
 
-		/// <summary>
-		/// AdventureTaiwuAtBlockByElementTags
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuAtBlockByElementTags => Instance[467];
 
-		/// <summary>
-		/// AdventureTaiwuDistanceToElementById
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuDistanceToElementById => Instance[468];
 
-		/// <summary>
-		/// AdventureTaiwuDistanceToElementByCoreId
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuDistanceToElementByCoreId => Instance[469];
 
-		/// <summary>
-		/// AdventureTaiwuDistanceToElementByTags
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuDistanceToElementByTags => Instance[470];
 
-		/// <summary>
-		/// AdventureCheckElementItemSubType
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementItemSubType => Instance[471];
 
-		/// <summary>
-		/// AdventureSelectElementRandomItemBySubType
-		/// </summary>
 		public static EventFunctionItem AdventureSelectElementRandomItemBySubType => Instance[472];
 
-		/// <summary>
-		/// QuerySettlementSect
-		/// </summary>
 		public static EventFunctionItem QuerySettlementSect => Instance[475];
 
-		/// <summary>
-		/// GenerateSectComplementCombatSkillBookByGrade
-		/// </summary>
 		public static EventFunctionItem GenerateSectComplementCombatSkillBookByGrade => Instance[476];
 
-		/// <summary>
-		/// GenerateMatchItem
-		/// </summary>
 		public static EventFunctionItem GenerateMatchItem => Instance[675];
 
-		/// <summary>
-		/// SelectItemFromList
-		/// </summary>
 		public static EventFunctionItem SelectItemFromList => Instance[477];
 
-		/// <summary>
-		/// RemoveItemFromList
-		/// </summary>
 		public static EventFunctionItem RemoveItemFromList => Instance[478];
 
-		/// <summary>
-		/// AddItemToList
-		/// </summary>
 		public static EventFunctionItem AddItemToList => Instance[479];
 
-		/// <summary>
-		/// AddItemListToList
-		/// </summary>
 		public static EventFunctionItem AddItemListToList => Instance[676];
 
-		/// <summary>
-		/// DeleteAllItemFromList
-		/// </summary>
 		public static EventFunctionItem DeleteAllItemFromList => Instance[480];
 
-		/// <summary>
-		/// AdventureFindElementByCharacterId
-		/// </summary>
 		public static EventFunctionItem AdventureFindElementByCharacterId => Instance[487];
 
-		/// <summary>
-		/// CheckTaiwuChickenCount
-		/// </summary>
 		public static EventFunctionItem CheckTaiwuChickenCount => Instance[488];
 
-		/// <summary>
-		/// RemoveArgBoxValue
-		/// </summary>
 		public static EventFunctionItem RemoveArgBoxValue => Instance[489];
 
-		/// <summary>
-		/// ClearArgBoxValue
-		/// </summary>
 		public static EventFunctionItem ClearArgBoxValue => Instance[490];
 
-		/// <summary>
-		/// AdventureFindElementMeetCondition
-		/// </summary>
 		public static EventFunctionItem AdventureFindElementMeetCondition => Instance[491];
 
-		/// <summary>
-		/// AdventureFindElementAtLocationByTags
-		/// </summary>
 		public static EventFunctionItem AdventureFindElementAtLocationByTags => Instance[492];
 
-		/// <summary>
-		/// CanStartRelationHusbandOrWife
-		/// </summary>
 		public static EventFunctionItem CanStartRelationHusbandOrWife => Instance[493];
 
-		/// <summary>
-		/// GetTaiwuKidnappedCharacterList
-		/// </summary>
 		public static EventFunctionItem GetTaiwuKidnappedCharacterList => Instance[494];
 
-		/// <summary>
-		/// AdventureGetElementKidnappedCharacterList
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementKidnappedCharacterList => Instance[495];
 
-		/// <summary>
-		/// AdventureStartCricketCombat
-		/// </summary>
 		public static EventFunctionItem AdventureStartCricketCombat => Instance[496];
 
-		/// <summary>
-		/// AdventureSaveElementBlockIndex
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementBlockIndex => Instance[497];
 
-		/// <summary>
-		/// AdventureSaveTaiwuBlockIndex
-		/// </summary>
 		public static EventFunctionItem AdventureSaveTaiwuBlockIndex => Instance[498];
 
-		/// <summary>
-		/// AdventureCheckElementBindCharacter
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementBindCharacter => Instance[499];
 
-		/// <summary>
-		/// AdventureGetBlockListByGroup
-		/// </summary>
 		public static EventFunctionItem AdventureGetBlockListByGroup => Instance[500];
 
-		/// <summary>
-		/// AdventureCheckTaiwuAtBlock
-		/// </summary>
 		public static EventFunctionItem AdventureCheckTaiwuAtBlock => Instance[501];
 
-		/// <summary>
-		/// AdventureGetElementBigBlockList
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementBigBlockList => Instance[502];
 
-		/// <summary>
-		/// AdventureGetTaiwuBigBlockList
-		/// </summary>
 		public static EventFunctionItem AdventureGetTaiwuBigBlockList => Instance[503];
 
-		/// <summary>
-		/// AdventureGetBlockElementList
-		/// </summary>
 		public static EventFunctionItem AdventureGetBlockElementList => Instance[504];
 
-		/// <summary>
-		/// AdventureCameraMoveToBlock
-		/// </summary>
 		public static EventFunctionItem AdventureCameraMoveToBlock => Instance[505];
 
-		/// <summary>
-		/// AdventureDelayAction
-		/// </summary>
 		public static EventFunctionItem AdventureDelayAction => Instance[776];
 
-		/// <summary>
-		/// AdventureElementMoveToBlock
-		/// </summary>
 		public static EventFunctionItem AdventureElementMoveToBlock => Instance[506];
 
-		/// <summary>
-		/// AdventureCheckElementAtBlockById
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementAtBlockById => Instance[507];
 
-		/// <summary>
-		/// AdventureCheckElementAtBlockByCoreId
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementAtBlockByCoreId => Instance[508];
 
-		/// <summary>
-		/// AdventureCheckElementAtBlockByTag
-		/// </summary>
 		public static EventFunctionItem AdventureCheckElementAtBlockByTag => Instance[509];
 
-		/// <summary>
-		/// AdventureElementDirectionalMove
-		/// </summary>
 		public static EventFunctionItem AdventureElementDirectionalMove => Instance[510];
 
-		/// <summary>
-		/// AdventureElementDirectionalMoveNew
-		/// </summary>
 		public static EventFunctionItem AdventureElementDirectionalMoveNew => Instance[777];
 
-		/// <summary>
-		/// CheckAdventureElementDirectionalPassable
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementDirectionalPassable => Instance[511];
 
-		/// <summary>
-		/// AddAudioCommand
-		/// </summary>
 		public static EventFunctionItem AddAudioCommand => Instance[512];
 
-		/// <summary>
-		/// ChangeMusicStatusWithFade
-		/// </summary>
 		public static EventFunctionItem ChangeMusicStatusWithFade => Instance[514];
 
-		/// <summary>
-		/// AdventureElementParametricDirectionalMove
-		/// </summary>
 		public static EventFunctionItem AdventureElementParametricDirectionalMove => Instance[518];
 
-		/// <summary>
-		/// CheckAdventureElementParametricDirectionalPassable
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementParametricDirectionalPassable => Instance[519];
 
-		/// <summary>
-		/// CheckAdventureTaiwuDirectionalPassable
-		/// </summary>
 		public static EventFunctionItem CheckAdventureTaiwuDirectionalPassable => Instance[521];
 
-		/// <summary>
-		/// CheckAdventureTaiwuDirectionalElementCount
-		/// </summary>
 		public static EventFunctionItem CheckAdventureTaiwuDirectionalElementCount => Instance[522];
 
-		/// <summary>
-		/// AdventureChangeElementCountAtTaiwuDirectionalBlock
-		/// </summary>
 		public static EventFunctionItem AdventureChangeElementCountAtTaiwuDirectionalBlock => Instance[523];
 
-		/// <summary>
-		/// AdventureSaveElementByIdAtTaiwuDirectionalBlock
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementByIdAtTaiwuDirectionalBlock => Instance[524];
 
-		/// <summary>
-		/// ChangeCharacterExp
-		/// </summary>
 		public static EventFunctionItem ChangeCharacterExp => Instance[525];
 
-		/// <summary>
-		/// CheckTaiwuHaveReadingBook
-		/// </summary>
 		public static EventFunctionItem CheckTaiwuHaveReadingBook => Instance[604];
 
-		/// <summary>
-		/// GetTaiwuReadingBook
-		/// </summary>
 		public static EventFunctionItem GetTaiwuReadingBook => Instance[605];
 
-		/// <summary>
-		/// TaiwuReadingBook
-		/// </summary>
 		public static EventFunctionItem TaiwuReadingBook => Instance[526];
 
-		/// <summary>
-		/// TaiwuAddReadingEvent
-		/// </summary>
 		public static EventFunctionItem TaiwuAddReadingEvent => Instance[527];
 
-		/// <summary>
-		/// AdventureShowHideCloudByViewAtGroup
-		/// </summary>
 		public static EventFunctionItem AdventureShowHideCloudByViewAtGroup => Instance[528];
 
-		/// <summary>
-		/// AdventureHideCloudAtGroup
-		/// </summary>
 		public static EventFunctionItem AdventureHideCloudAtGroup => Instance[529];
 
-		/// <summary>
-		/// ShowExchangePanel
-		/// </summary>
 		public static EventFunctionItem ShowExchangePanel => Instance[530];
 
-		/// <summary>
-		/// SaveCharacterCombatSkill
-		/// </summary>
 		public static EventFunctionItem SaveCharacterCombatSkill => Instance[531];
 
-		/// <summary>
-		/// ChangeTaiwuCombatSkillProficiency
-		/// </summary>
 		public static EventFunctionItem ChangeTaiwuCombatSkillProficiency => Instance[532];
 
-		/// <summary>
-		/// TeachCombatSkill
-		/// </summary>
 		public static EventFunctionItem TeachCombatSkill => Instance[533];
 
-		/// <summary>
-		/// GetCombatPower
-		/// </summary>
 		public static EventFunctionItem GetCombatPower => Instance[536];
 
-		/// <summary>
-		/// GetItemGrade
-		/// </summary>
 		public static EventFunctionItem GetItemGrade => Instance[537];
 
-		/// <summary>
-		/// CheckItemGrade
-		/// </summary>
 		public static EventFunctionItem CheckItemGrade => Instance[538];
 
-		/// <summary>
-		/// HasRelation
-		/// </summary>
 		public static EventFunctionItem HasRelation => Instance[539];
 
-		/// <summary>
-		/// AddOneWayRelationType
-		/// </summary>
 		public static EventFunctionItem AddOneWayRelationType => Instance[861];
 
-		/// <summary>
-		/// AdventureGetElementsInAction
-		/// </summary>
+		public static EventFunctionItem AddRelation => Instance[955];
+
+		public static EventFunctionItem RemoveRelation => Instance[956];
+
 		public static EventFunctionItem AdventureGetElementsInAction => Instance[545];
 
-		/// <summary>
-		/// AdventureGetElementsInActionWithElement
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementsInActionWithElement => Instance[546];
 
-		/// <summary>
-		/// SetInteractionCooldown
-		/// </summary>
 		public static EventFunctionItem SetInteractionCooldown => Instance[547];
 
-		/// <summary>
-		/// CheckInteractionCooldown
-		/// </summary>
 		public static EventFunctionItem CheckInteractionCooldown => Instance[548];
 
-		/// <summary>
-		/// SetInteractionMonthCooldown
-		/// </summary>
 		public static EventFunctionItem SetInteractionMonthCooldown => Instance[834];
 
-		/// <summary>
-		/// CheckInteractionMonthCooldown
-		/// </summary>
 		public static EventFunctionItem CheckInteractionMonthCooldown => Instance[835];
 
-		/// <summary>
-		/// AdventureTaiwuDirectionalMove
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuDirectionalMove => Instance[549];
 
-		/// <summary>
-		/// AdventureTaiwuDirectionalMoveNew
-		/// </summary>
 		public static EventFunctionItem AdventureTaiwuDirectionalMoveNew => Instance[783];
 
-		/// <summary>
-		/// AdventureConsumeActionPoint
-		/// </summary>
 		public static EventFunctionItem AdventureConsumeActionPoint => Instance[550];
 
-		/// <summary>
-		/// AdventureSaveTaiwuPreAndCurBlockIndex
-		/// </summary>
 		public static EventFunctionItem AdventureSaveTaiwuPreAndCurBlockIndex => Instance[551];
 
-		/// <summary>
-		/// AdventureSetTaiwuToBlockIndex
-		/// </summary>
 		public static EventFunctionItem AdventureSetTaiwuToBlockIndex => Instance[552];
 
-		/// <summary>
-		/// CheckItemGradeByOperator
-		/// </summary>
 		public static EventFunctionItem CheckItemGradeByOperator => Instance[553];
 
-		/// <summary>
-		/// AdventureCreateElementRandomAtBigBlock
-		/// </summary>
 		public static EventFunctionItem AdventureCreateElementRandomAtBigBlock => Instance[554];
 
-		/// <summary>
-		/// CharacterCheckNeiliTypePercent
-		/// </summary>
 		public static EventFunctionItem CharacterCheckNeiliTypePercent => Instance[555];
 
-		/// <summary>
-		/// AdventureInteractCaravan
-		/// </summary>
 		public static EventFunctionItem AdventureInteractCaravan => Instance[557];
 
-		/// <summary>
-		/// ResetTransactionData
-		/// </summary>
 		public static EventFunctionItem ResetTransactionData => Instance[889];
 
-		/// <summary>
-		/// AdventureElementAnyFollowTarget
-		/// </summary>
 		public static EventFunctionItem AdventureElementAnyFollowTarget => Instance[561];
 
-		/// <summary>
-		/// SetAdventureElementFollowTargetBlock
-		/// </summary>
 		public static EventFunctionItem SetAdventureElementFollowTargetBlock => Instance[562];
 
-		/// <summary>
-		/// SetAdventureElementFollowTargetElement
-		/// </summary>
 		public static EventFunctionItem SetAdventureElementFollowTargetElement => Instance[563];
 
-		/// <summary>
-		/// ClearAdventureElementFollowTarget
-		/// </summary>
 		public static EventFunctionItem ClearAdventureElementFollowTarget => Instance[564];
 
-		/// <summary>
-		/// AdventureSaveElementCurBlockIndex
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementCurBlockIndex => Instance[565];
 
-		/// <summary>
-		/// AdventureSetGroupBlockCloud
-		/// </summary>
 		public static EventFunctionItem AdventureSetGroupBlockCloud => Instance[574];
 
-		/// <summary>
-		/// AdventureSetBlockCloud
-		/// </summary>
 		public static EventFunctionItem AdventureSetBlockCloud => Instance[575];
 
-		/// <summary>
-		/// AdventureSetBlockListCloud
-		/// </summary>
 		public static EventFunctionItem AdventureSetBlockListCloud => Instance[576];
 
-		/// <summary>
-		/// AdventureGetBlockListAroundElement
-		/// </summary>
 		public static EventFunctionItem AdventureGetBlockListAroundElement => Instance[579];
 
-		/// <summary>
-		/// QueryAdventureCountInWorld
-		/// </summary>
 		public static EventFunctionItem QueryAdventureCountInWorld => Instance[844];
 
-		/// <summary>
-		/// AdventureGenerate
-		/// </summary>
 		public static EventFunctionItem AdventureGenerate => Instance[582];
 
-		/// <summary>
-		/// AdventureGenerateNotCallCharacter
-		/// </summary>
 		public static EventFunctionItem AdventureGenerateNotCallCharacter => Instance[822];
 
-		/// <summary>
-		/// AdventureFillPresetCharacter
-		/// </summary>
 		public static EventFunctionItem AdventureFillPresetCharacter => Instance[838];
 
-		/// <summary>
-		/// CreateFixedCharacterGrave
-		/// </summary>
 		public static EventFunctionItem CreateFixedCharacterGrave => Instance[583];
 
-		/// <summary>
-		/// TeleportMoveTaiwuToBlock
-		/// </summary>
 		public static EventFunctionItem TeleportMoveTaiwuToBlock => Instance[584];
 
-		/// <summary>
-		/// SetNextSwordTombAdventureCooldown
-		/// </summary>
 		public static EventFunctionItem SetNextSwordTombAdventureCooldown => Instance[587];
 
-		/// <summary>
-		/// RemoveSwordTombFromLocation
-		/// </summary>
 		public static EventFunctionItem RemoveSwordTombFromLocation => Instance[588];
 
-		/// <summary>
-		/// GetDefeatSwordTombCount
-		/// </summary>
 		public static EventFunctionItem GetDefeatSwordTombCount => Instance[589];
 
-		/// <summary>
-		/// GetAdventureElementFollowTargetBlock
-		/// </summary>
 		public static EventFunctionItem GetAdventureElementFollowTargetBlock => Instance[590];
 
-		/// <summary>
-		/// GetAdventureElementFollowTargetElement
-		/// </summary>
 		public static EventFunctionItem GetAdventureElementFollowTargetElement => Instance[591];
 
-		/// <summary>
-		/// AdventureElementArrivedTarget
-		/// </summary>
 		public static EventFunctionItem AdventureElementArrivedTarget => Instance[592];
 
-		/// <summary>
-		/// StartInformationSelect
-		/// </summary>
 		public static EventFunctionItem StartInformationSelect => Instance[593];
 
-		/// <summary>
-		/// FinishInformationSelect
-		/// </summary>
 		public static EventFunctionItem FinishInformationSelect => Instance[594];
 
-		/// <summary>
-		/// ApplyNormalInformation
-		/// </summary>
 		public static EventFunctionItem ApplyNormalInformation => Instance[595];
 
-		/// <summary>
-		/// GetRandomItemTemplate
-		/// </summary>
 		public static EventFunctionItem GetRandomItemTemplate => Instance[596];
 
-		/// <summary>
-		/// ClearRegisterItemFilter
-		/// </summary>
 		public static EventFunctionItem ClearRegisterItemFilter => Instance[597];
 
-		/// <summary>
-		/// GetSectCombatSkillBookByGrade
-		/// </summary>
 		public static EventFunctionItem GetSectCombatSkillBookByGrade => Instance[599];
 
-		/// <summary>
-		/// SaveXiangshuLevel
-		/// </summary>
 		public static EventFunctionItem SaveXiangshuLevel => Instance[600];
 
-		/// <summary>
-		/// AddTaiwuBreakoutStepBase
-		/// </summary>
 		public static EventFunctionItem AddTaiwuBreakoutStepBase => Instance[601];
 
-		/// <summary>
-		/// AddTaiwuBreakoutBaseSuccessRate
-		/// </summary>
 		public static EventFunctionItem AddTaiwuBreakoutBaseSuccessRate => Instance[602];
 
-		/// <summary>
-		/// MajorEventSetAtmosphereType
-		/// </summary>
 		public static EventFunctionItem MajorEventSetAtmosphereType => Instance[606];
 
-		/// <summary>
-		/// MajorEventUnsetAtmosphereType
-		/// </summary>
 		public static EventFunctionItem MajorEventUnsetAtmosphereType => Instance[607];
 
-		/// <summary>
-		/// GetLastSwordTombLocation
-		/// </summary>
 		public static EventFunctionItem GetLastSwordTombLocation => Instance[608];
 
-		/// <summary>
-		/// ActivateSwordTombAtLocation
-		/// </summary>
 		public static EventFunctionItem ActivateSwordTombAtLocation => Instance[609];
 
-		/// <summary>
-		/// ActivateRemainingSwordTombs
-		/// </summary>
 		public static EventFunctionItem ActivateRemainingSwordTombs => Instance[615];
 
-		/// <summary>
-		/// DeactivateAllSwordTombAdventure
-		/// </summary>
 		public static EventFunctionItem DeactivateAllSwordTombAdventure => Instance[610];
 
-		/// <summary>
-		/// MakeSectCharactersApproveTaiwuInWulinConference
-		/// </summary>
 		public static EventFunctionItem MakeSectCharactersApproveTaiwuInWulinConference => Instance[612];
 
-		/// <summary>
-		/// YufuKillTopTenRankingCharacters
-		/// </summary>
 		public static EventFunctionItem YufuKillTopTenRankingCharacters => Instance[613];
 
-		/// <summary>
-		/// SaveWorld
-		/// </summary>
 		public static EventFunctionItem SaveWorld => Instance[616];
 
-		/// <summary>
-		/// MakeWorldChaos
-		/// </summary>
 		public static EventFunctionItem MakeWorldChaos => Instance[617];
 
-		/// <summary>
-		/// MakeTaiwuVillageAreaGraduallyBroken
-		/// </summary>
 		public static EventFunctionItem MakeTaiwuVillageAreaGraduallyBroken => Instance[618];
 
-		/// <summary>
-		/// CheckCharacterCarrierGrade
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCarrierGrade => Instance[619];
 
-		/// <summary>
-		/// CheckInventoryItemOperationType
-		/// </summary>
 		public static EventFunctionItem CheckInventoryItemOperationType => Instance[620];
 
-		/// <summary>
-		/// AdventureCreateElementAtAllBlock
-		/// </summary>
 		public static EventFunctionItem AdventureCreateElementAtAllBlock => Instance[622];
 
-		/// <summary>
-		/// AdventureTeleportMoveTaiwuToBlock
-		/// </summary>
 		public static EventFunctionItem AdventureTeleportMoveTaiwuToBlock => Instance[623];
 
-		/// <summary>
-		/// AdventureGetElementListAtBlockByTag
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementListAtBlockByTag => Instance[624];
 
-		/// <summary>
-		/// CheckCharacterEquipItemTemplate
-		/// </summary>
 		public static EventFunctionItem CheckCharacterEquipItemTemplate => Instance[625];
 
-		/// <summary>
-		/// SetCarrierTamePoint
-		/// </summary>
 		public static EventFunctionItem SetCarrierTamePoint => Instance[626];
 
-		/// <summary>
-		/// GetHighestOrLowestHappinessCharacter
-		/// </summary>
 		public static EventFunctionItem GetHighestOrLowestHappinessCharacter => Instance[627];
 
-		/// <summary>
-		/// CreateChickenKingToTaiwuVillage
-		/// </summary>
 		public static EventFunctionItem CreateChickenKingToTaiwuVillage => Instance[628];
 
-		/// <summary>
-		/// RemoveElementFromList
-		/// </summary>
 		public static EventFunctionItem RemoveElementFromList => Instance[629];
 
-		/// <summary>
-		/// GetSwordTombAdventureMaxMonthCount
-		/// </summary>
 		public static EventFunctionItem GetSwordTombAdventureMaxMonthCount => Instance[630];
 
-		/// <summary>
-		/// StartCommonSelectCharacterFeature
-		/// </summary>
 		public static EventFunctionItem StartCommonSelectCharacterFeature => Instance[631];
 
-		/// <summary>
-		/// TrySetListValue
-		/// </summary>
 		public static EventFunctionItem TrySetListValue => Instance[632];
 
-		/// <summary>
-		/// SortListValueReturnIndexList
-		/// </summary>
 		public static EventFunctionItem SortListValueReturnIndexList => Instance[633];
 
-		/// <summary>
-		/// CreateTeammateWithXiangshuCloth
-		/// </summary>
 		public static EventFunctionItem CreateTeammateWithXiangshuCloth => Instance[634];
 
-		/// <summary>
-		/// SetTutorialFunctionStatus
-		/// </summary>
 		public static EventFunctionItem SetTutorialFunctionStatus => Instance[635];
 
-		/// <summary>
-		/// SetAllTutorialFunctionStatuses
-		/// </summary>
 		public static EventFunctionItem SetAllTutorialFunctionStatuses => Instance[646];
 
-		/// <summary>
-		/// CheckCurrentTutorialChapter
-		/// </summary>
 		public static EventFunctionItem CheckCurrentTutorialChapter => Instance[636];
 
-		/// <summary>
-		/// CheckAdventureBlcokIsInCloud
-		/// </summary>
 		public static EventFunctionItem CheckAdventureBlcokIsInCloud => Instance[639];
 
-		/// <summary>
-		/// SettlementHasBuilding
-		/// </summary>
 		public static EventFunctionItem SettlementHasBuilding => Instance[641];
 
-		/// <summary>
-		/// CheckCharacterLoopingNeigong
-		/// </summary>
 		public static EventFunctionItem CheckCharacterLoopingNeigong => Instance[642];
 
-		/// <summary>
-		/// HuanxingUnlockFuyuPower
-		/// </summary>
 		public static EventFunctionItem HuanxingUnlockFuyuPower => Instance[643];
 
-		/// <summary>
-		/// SetCharacterInvincibleInCombat
-		/// </summary>
 		public static EventFunctionItem SetCharacterInvincibleInCombat => Instance[851];
 
-		/// <summary>
-		/// CheckAdventureElementDirectionalElementCount
-		/// </summary>
 		public static EventFunctionItem CheckAdventureElementDirectionalElementCount => Instance[644];
 
-		/// <summary>
-		/// TutorialRemoveBuildingAreaBambooHouse
-		/// </summary>
 		public static EventFunctionItem TutorialRemoveBuildingAreaBambooHouse => Instance[645];
 
-		/// <summary>
-		/// GetMapBlockByCoordinate
-		/// </summary>
 		public static EventFunctionItem GetMapBlockByCoordinate => Instance[647];
 
-		/// <summary>
-		/// ClearMapBlockCurrResources
-		/// </summary>
 		public static EventFunctionItem ClearMapBlockCurrResources => Instance[648];
 
-		/// <summary>
-		/// SetMapBlockCurrResource
-		/// </summary>
 		public static EventFunctionItem SetMapBlockCurrResource => Instance[649];
 
-		/// <summary>
-		/// FillMapBlockCurrResourceByType
-		/// </summary>
 		public static EventFunctionItem FillMapBlockCurrResourceByType => Instance[650];
 
-		/// <summary>
-		/// SetForceCollectResourceItem
-		/// </summary>
 		public static EventFunctionItem SetForceCollectResourceItem => Instance[651];
 
-		/// <summary>
-		/// SetForceCollectResourceAmount
-		/// </summary>
 		public static EventFunctionItem SetForceCollectResourceAmount => Instance[652];
 
-		/// <summary>
-		/// TutorialUnlockProfessionSkill
-		/// </summary>
 		public static EventFunctionItem TutorialUnlockProfessionSkill => Instance[653];
 
-		/// <summary>
-		/// TryGetEventTriggerParameter
-		/// </summary>
 		public static EventFunctionItem TryGetEventTriggerParameter => Instance[654];
 
-		/// <summary>
-		/// CheckProfessionSkill
-		/// </summary>
 		public static EventFunctionItem CheckProfessionSkill => Instance[655];
 
-		/// <summary>
-		/// AdventureCreateBlockList
-		/// </summary>
 		public static EventFunctionItem AdventureCreateBlockList => Instance[656];
 
-		/// <summary>
-		/// AdventureBlockListAddElement
-		/// </summary>
 		public static EventFunctionItem AdventureBlockListAddElement => Instance[657];
 
-		/// <summary>
-		/// AdventureBlockListSetEffect
-		/// </summary>
 		public static EventFunctionItem AdventureBlockListSetEffect => Instance[658];
 
-		/// <summary>
-		/// AdventureBlockSetEffect
-		/// </summary>
 		public static EventFunctionItem AdventureBlockSetEffect => Instance[686];
 
-		/// <summary>
-		/// AdventureSetGlobalEffect
-		/// </summary>
 		public static EventFunctionItem AdventureSetGlobalEffect => Instance[659];
 
-		/// <summary>
-		/// ChangeCharacterRelationBecomeHusbandOrWife
-		/// </summary>
 		public static EventFunctionItem ChangeCharacterRelationBecomeHusbandOrWife => Instance[660];
 
-		/// <summary>
-		/// LoadDreamBackArchive
-		/// </summary>
 		public static EventFunctionItem LoadDreamBackArchive => Instance[662];
 
-		/// <summary>
-		/// SaveArchiveForDreamBack
-		/// </summary>
 		public static EventFunctionItem SaveArchiveForDreamBack => Instance[712];
 
-		/// <summary>
-		/// CheckHasDreamBackArchive
-		/// </summary>
 		public static EventFunctionItem CheckHasDreamBackArchive => Instance[663];
 
-		/// <summary>
-		/// CheckAdventureBlcokElementCount
-		/// </summary>
 		public static EventFunctionItem CheckAdventureBlcokElementCount => Instance[664];
 
-		/// <summary>
-		/// PrepareSectMembersAndTaiwuVillagersForSpiritualWanderPlace
-		/// </summary>
 		public static EventFunctionItem PrepareSectMembersAndTaiwuVillagersForSpiritualWanderPlace => Instance[665];
 
-		/// <summary>
-		/// SetXiangshuMinionsSurroundTaiwuVillage
-		/// </summary>
 		public static EventFunctionItem SetXiangshuMinionsSurroundTaiwuVillage => Instance[666];
 
-		/// <summary>
-		/// GetLastXiangshuAvatar
-		/// </summary>
 		public static EventFunctionItem GetLastXiangshuAvatar => Instance[667];
 
-		/// <summary>
-		/// GetLeaderInMaxApprovingRateSectByGoodness
-		/// </summary>
 		public static EventFunctionItem GetLeaderInMaxApprovingRateSectByGoodness => Instance[668];
 
-		/// <summary>
-		/// AdventureCreateElementRandomAtGroup
-		/// </summary>
 		public static EventFunctionItem AdventureCreateElementRandomAtGroup => Instance[673];
 
-		/// <summary>
-		/// AdventureGetTaiwuLocationElementListByTag
-		/// </summary>
 		public static EventFunctionItem AdventureGetTaiwuLocationElementListByTag => Instance[669];
 
-		/// <summary>
-		/// AdventureSaveNearestElementByTag
-		/// </summary>
 		public static EventFunctionItem AdventureSaveNearestElementByTag => Instance[670];
 
-		/// <summary>
-		/// AdventureCheckBlockHaveElement
-		/// </summary>
 		public static EventFunctionItem AdventureCheckBlockHaveElement => Instance[671];
 
-		/// <summary>
-		/// AdventureStopElementActionByTag
-		/// </summary>
 		public static EventFunctionItem AdventureStopElementActionByTag => Instance[672];
 
-		/// <summary>
-		/// GetCharacterInventoryItemCount
-		/// </summary>
 		public static EventFunctionItem GetCharacterInventoryItemCount => Instance[677];
 
-		/// <summary>
-		/// GetMartialArtTournamentReward
-		/// </summary>
 		public static EventFunctionItem GetMartialArtTournamentReward => Instance[678];
 
-		/// <summary>
-		/// SetHideAllTeammates
-		/// </summary>
 		public static EventFunctionItem SetHideAllTeammates => Instance[681];
 
-		/// <summary>
-		/// GetCharacterAttraction
-		/// </summary>
 		public static EventFunctionItem GetCharacterAttraction => Instance[682];
 
-		/// <summary>
-		/// CheckCharacterAttraction
-		/// </summary>
 		public static EventFunctionItem CheckCharacterAttraction => Instance[683];
 
-		/// <summary>
-		/// GetCharacterCurrMainAttribute
-		/// </summary>
 		public static EventFunctionItem GetCharacterCurrMainAttribute => Instance[684];
 
-		/// <summary>
-		/// CreateEnemyCharacterByConsummateLevel
-		/// </summary>
 		public static EventFunctionItem CreateEnemyCharacterByConsummateLevel => Instance[685];
 
-		/// <summary>
-		/// TriggerCricketCatch
-		/// </summary>
 		public static EventFunctionItem TriggerCricketCatch => Instance[693];
 
-		/// <summary>
-		/// AdventureGetElementListAroundElement
-		/// </summary>
 		public static EventFunctionItem AdventureGetElementListAroundElement => Instance[694];
 
-		/// <summary>
-		/// GetRangeBetweenElement
-		/// </summary>
 		public static EventFunctionItem GetRangeBetweenElement => Instance[695];
 
-		/// <summary>
-		/// AdventureSaveAllElementLocation
-		/// </summary>
 		public static EventFunctionItem AdventureSaveAllElementLocation => Instance[696];
 
-		/// <summary>
-		/// AdventureSaveElementLocation
-		/// </summary>
 		public static EventFunctionItem AdventureSaveElementLocation => Instance[697];
 
-		/// <summary>
-		/// AdventureStartSelectElement
-		/// </summary>
 		public static EventFunctionItem AdventureStartSelectElement => Instance[700];
 
-		/// <summary>
-		/// AdventureIsActive
-		/// </summary>
 		public static EventFunctionItem AdventureIsActive => Instance[890];
 
-		/// <summary>
-		/// TriggeredGuidingChapter
-		/// </summary>
 		public static EventFunctionItem TriggeredGuidingChapter => Instance[701];
 
-		/// <summary>
-		/// GenerateEnemiesInBornArea
-		/// </summary>
 		public static EventFunctionItem GenerateEnemiesInBornArea => Instance[705];
 
-		/// <summary>
-		/// CheckBlockHasCricket
-		/// </summary>
 		public static EventFunctionItem CheckBlockHasCricket => Instance[706];
 
-		/// <summary>
-		/// GenerateCricketPlaceNearTaiwu
-		/// </summary>
 		public static EventFunctionItem GenerateCricketPlaceNearTaiwu => Instance[707];
 
-		/// <summary>
-		/// SetCricketAtTaiwuLocationFake
-		/// </summary>
 		public static EventFunctionItem SetCricketAtTaiwuLocationFake => Instance[708];
 
-		/// <summary>
-		/// OpenMonthNotifyForStartCricketContent
-		/// </summary>
 		public static EventFunctionItem OpenMonthNotifyForStartCricketContent => Instance[709];
 
-		/// <summary>
-		/// TaiwuRecordLifeSummary
-		/// </summary>
 		public static EventFunctionItem TaiwuRecordLifeSummary => Instance[710];
 
-		/// <summary>
-		/// RequestSetStat
-		/// </summary>
 		public static EventFunctionItem RequestSetStat => Instance[711];
 
-		/// <summary>
-		/// CreateMissNingOfTaiwuVillage
-		/// </summary>
 		public static EventFunctionItem CreateMissNingOfTaiwuVillage => Instance[713];
 
-		/// <summary>
-		/// StartShowSwordTombCreate
-		/// </summary>
 		public static EventFunctionItem StartShowSwordTombCreate => Instance[714];
 
-		/// <summary>
-		/// ApplyHelpSectInStory
-		/// </summary>
 		public static EventFunctionItem ApplyHelpSectInStory => Instance[715];
 
-		/// <summary>
-		/// ChangeBlockTemplate
-		/// </summary>
 		public static EventFunctionItem ChangeBlockTemplate => Instance[721];
 
-		/// <summary>
-		/// OpenLegacyActivateDisplay
-		/// </summary>
 		public static EventFunctionItem OpenLegacyActivateDisplay => Instance[722];
 
-		/// <summary>
-		/// SetTaiwuVillageShowShrine
-		/// </summary>
 		public static EventFunctionItem SetTaiwuVillageShowShrine => Instance[723];
 
-		/// <summary>
-		/// SetTaiwuAsLeaderOfTaiwuVillage
-		/// </summary>
 		public static EventFunctionItem SetTaiwuAsLeaderOfTaiwuVillage => Instance[724];
 
-		/// <summary>
-		/// SetFirstSwordTombFinished
-		/// </summary>
 		public static EventFunctionItem SetFirstSwordTombFinished => Instance[725];
 
-		/// <summary>
-		/// HideAllMapBlockCharacters
-		/// </summary>
 		public static EventFunctionItem HideAllMapBlockCharacters => Instance[726];
 
-		/// <summary>
-		/// CreateAllSwordTombAdventure
-		/// </summary>
 		public static EventFunctionItem CreateAllSwordTombAdventure => Instance[727];
 
-		/// <summary>
-		/// TaiwuGroupFull
-		/// </summary>
+		public static EventFunctionItem CreateEightSwordTombAdventure => Instance[933];
+
 		public static EventFunctionItem TaiwuGroupFull => Instance[728];
 
-		/// <summary>
-		/// CharacterJoinTaiwu
-		/// </summary>
 		public static EventFunctionItem CharacterJoinTaiwu => Instance[729];
 
-		/// <summary>
-		/// CricketPolymorphReturnByDead
-		/// </summary>
 		public static EventFunctionItem CricketPolymorphReturnByDead => Instance[730];
 
-		/// <summary>
-		/// CheckCricketPolymorphState
-		/// </summary>
 		public static EventFunctionItem CheckCricketPolymorphState => Instance[731];
 
-		/// <summary>
-		/// CricketPolymorph
-		/// </summary>
 		public static EventFunctionItem CricketPolymorph => Instance[732];
 
-		/// <summary>
-		/// CricketPolymorphEffect
-		/// </summary>
 		public static EventFunctionItem CricketPolymorphEffect => Instance[824];
 
-		/// <summary>
-		/// CheckCricketColorId
-		/// </summary>
 		public static EventFunctionItem CheckCricketColorId => Instance[733];
 
-		/// <summary>
-		/// GetOrCreateFirstXiangshuAvatarForStory
-		/// </summary>
 		public static EventFunctionItem GetOrCreateFirstXiangshuAvatarForStory => Instance[734];
 
-		/// <summary>
-		/// CreateBreakTombXiangshuAvatar
-		/// </summary>
 		public static EventFunctionItem CreateBreakTombXiangshuAvatar => Instance[735];
 
-		/// <summary>
-		/// GetLegendaryBookItem
-		/// </summary>
 		public static EventFunctionItem GetLegendaryBookItem => Instance[736];
 
-		/// <summary>
-		/// GetSwordFragmentTemplateByCharacter
-		/// </summary>
 		public static EventFunctionItem GetSwordFragmentTemplateByCharacter => Instance[737];
 
-		/// <summary>
-		/// SetEventRoleAlternativeName
-		/// </summary>
 		public static EventFunctionItem SetEventRoleAlternativeName => Instance[738];
 
-		/// <summary>
-		/// StartSetCharacterName
-		/// </summary>
 		public static EventFunctionItem StartSetCharacterName => Instance[739];
 
-		/// <summary>
-		/// FinishSetCharacterName
-		/// </summary>
 		public static EventFunctionItem FinishSetCharacterName => Instance[740];
 
-		/// <summary>
-		/// CheckXiangshuAvatarTaskStatus
-		/// </summary>
 		public static EventFunctionItem CheckXiangshuAvatarTaskStatus => Instance[741];
 
-		/// <summary>
-		/// ChangeMusicVolume
-		/// </summary>
 		public static EventFunctionItem ChangeMusicVolume => Instance[742];
 
-		/// <summary>
-		/// PlayMusicForCount
-		/// </summary>
 		public static EventFunctionItem PlayMusicForCount => Instance[743];
 
-		/// <summary>
-		/// AutoEquipItems
-		/// </summary>
 		public static EventFunctionItem AutoEquipItems => Instance[745];
 
-		/// <summary>
-		/// AutoEquipCombatSkills
-		/// </summary>
 		public static EventFunctionItem AutoEquipCombatSkills => Instance[746];
 
-		/// <summary>
-		/// AutoAllocateNeili
-		/// </summary>
 		public static EventFunctionItem AutoAllocateNeili => Instance[747];
 
-		/// <summary>
-		/// ChangeEquipment
-		/// </summary>
 		public static EventFunctionItem ChangeEquipment => Instance[781];
 
-		/// <summary>
-		/// SwordTombInvasion
-		/// </summary>
 		public static EventFunctionItem SwordTombInvasion => Instance[748];
 
-		/// <summary>
-		/// TryGetBlockXiangshuAvatar
-		/// </summary>
 		public static EventFunctionItem TryGetBlockXiangshuAvatar => Instance[749];
 
-		/// <summary>
-		/// CheckCharacterIsAnySectMember
-		/// </summary>
 		public static EventFunctionItem CheckCharacterIsAnySectMember => Instance[750];
 
-		/// <summary>
-		/// CheckDefeatSwordTombCount
-		/// </summary>
 		public static EventFunctionItem CheckDefeatSwordTombCount => Instance[751];
 
-		/// <summary>
-		/// CheckSectMainStoryTriggerConditions
-		/// </summary>
 		public static EventFunctionItem CheckSectMainStoryTriggerConditions => Instance[752];
 
-		/// <summary>
-		/// CharacterRestoreAllStatus
-		/// </summary>
 		public static EventFunctionItem CharacterRestoreAllStatus => Instance[753];
 
-		/// <summary>
-		/// IsExorcismNeedToBeDisabled
-		/// </summary>
 		public static EventFunctionItem IsExorcismNeedToBeDisabled => Instance[754];
 
-		/// <summary>
-		/// SetExorcismEnabled
-		/// </summary>
 		public static EventFunctionItem SetExorcismEnabled => Instance[755];
 
-		/// <summary>
-		/// GetExorcismEnabled
-		/// </summary>
 		public static EventFunctionItem GetExorcismEnabled => Instance[756];
 
-		/// <summary>
-		/// CheckCharacterIsXiangshuAvatar
-		/// </summary>
 		public static EventFunctionItem CheckCharacterIsXiangshuAvatar => Instance[757];
 
-		/// <summary>
-		/// GetXiangshuAvatarIdByCharacter
-		/// </summary>
 		public static EventFunctionItem GetXiangshuAvatarIdByCharacter => Instance[758];
 
-		/// <summary>
-		/// MarkTaiwuDieOfCombatWithXiangshuAttacking
-		/// </summary>
 		public static EventFunctionItem MarkTaiwuDieOfCombatWithXiangshuAttacking => Instance[759];
 
-		/// <summary>
-		/// SetXiangshuDisplayStatus
-		/// </summary>
 		public static EventFunctionItem SetXiangshuDisplayStatus => Instance[760];
 
-		/// <summary>
-		/// BlockHasNormalHeavenlyTree
-		/// </summary>
 		public static EventFunctionItem BlockHasNormalHeavenlyTree => Instance[761];
 
-		/// <summary>
-		/// GetSwordTombInformation
-		/// </summary>
 		public static EventFunctionItem GetSwordTombInformation => Instance[762];
 
-		/// <summary>
-		/// StartSelectFilteredCharacters
-		/// </summary>
 		public static EventFunctionItem StartSelectFilteredCharacters => Instance[763];
 
-		/// <summary>
-		/// AnySelectableFilteredCharacter
-		/// </summary>
 		public static EventFunctionItem AnySelectableFilteredCharacter => Instance[764];
 
-		/// <summary>
-		/// ClearAreaCricket
-		/// </summary>
 		public static EventFunctionItem ClearAreaCricket => Instance[765];
 
-		/// <summary>
-		/// SetNextSwordTombCountDownDate
-		/// </summary>
 		public static EventFunctionItem SetNextSwordTombCountDownDate => Instance[766];
 
-		/// <summary>
-		/// DeepValleyToSmallVillage
-		/// </summary>
 		public static EventFunctionItem DeepValleyToSmallVillage => Instance[770];
 
-		/// <summary>
-		/// SmallVillageToBrokenArea
-		/// </summary>
 		public static EventFunctionItem SmallVillageToBrokenArea => Instance[771];
 
-		/// <summary>
-		/// BrokenAreaToTaiwuVillageArea
-		/// </summary>
 		public static EventFunctionItem BrokenAreaToTaiwuVillageArea => Instance[772];
 
-		/// <summary>
-		/// DeepValleyToTaiwuVillageArea
-		/// </summary>
 		public static EventFunctionItem DeepValleyToTaiwuVillageArea => Instance[773];
 
-		/// <summary>
-		/// TravelToPastTaiwuVillageArea
-		/// </summary>
 		public static EventFunctionItem TravelToPastTaiwuVillageArea => Instance[813];
 
-		/// <summary>
-		/// BackFromPastTaiwuVillageArea
-		/// </summary>
 		public static EventFunctionItem BackFromPastTaiwuVillageArea => Instance[820];
 
-		/// <summary>
-		/// GenerateMainStoryXiangshuMinion
-		/// </summary>
 		public static EventFunctionItem GenerateMainStoryXiangshuMinion => Instance[848];
 
-		/// <summary>
-		/// GenerateChapter9XiangshuMinion
-		/// </summary>
 		public static EventFunctionItem GenerateChapter9XiangshuMinion => Instance[842];
 
-		/// <summary>
-		/// CheckChapter9TaiwuEscapeXiangshuMinionRange
-		/// </summary>
 		public static EventFunctionItem CheckChapter9TaiwuEscapeXiangshuMinionRange => Instance[843];
 
-		/// <summary>
-		/// CharacterMakeLove
-		/// </summary>
 		public static EventFunctionItem CharacterMakeLove => Instance[779];
 
-		/// <summary>
-		/// EventTriggerParameterIsBuildingBlockTemplate
-		/// </summary>
 		public static EventFunctionItem EventTriggerParameterIsBuildingBlockTemplate => Instance[784];
 
-		/// <summary>
-		/// CheckSectSpiritualDebtInteractionOccurred
-		/// </summary>
 		public static EventFunctionItem CheckSectSpiritualDebtInteractionOccurred => Instance[785];
 
-		/// <summary>
-		/// AddFuyuFaith
-		/// </summary>
 		public static EventFunctionItem AddFuyuFaith => Instance[786];
 
-		/// <summary>
-		/// SwordFragmentUnlockSkill
-		/// </summary>
 		public static EventFunctionItem SwordFragmentUnlockSkill => Instance[788];
 
-		/// <summary>
-		/// TaiwuHaveCheatOnSecretInformation
-		/// </summary>
 		public static EventFunctionItem TaiwuHaveCheatOnSecretInformation => Instance[791];
 
-		/// <summary>
-		/// ShowUnlockSkillSlotAnim
-		/// </summary>
 		public static EventFunctionItem ShowUnlockSkillSlotAnim => Instance[792];
 
-		/// <summary>
-		/// SetAreaStoryWeather
-		/// </summary>
 		public static EventFunctionItem SetAreaStoryWeather => Instance[793];
 
-		/// <summary>
-		/// AddCharacterExtraTitle
-		/// </summary>
 		public static EventFunctionItem AddCharacterExtraTitle => Instance[794];
 
-		/// <summary>
-		/// SelectCharacterCricket
-		/// </summary>
 		public static EventFunctionItem SelectCharacterCricket => Instance[795];
 
-		/// <summary>
-		/// StartCricketCombat
-		/// </summary>
 		public static EventFunctionItem StartCricketCombat => Instance[796];
 
-		/// <summary>
-		/// StartCricketCombatWithConfig
-		/// </summary>
 		public static EventFunctionItem StartCricketCombatWithConfig => Instance[797];
 
-		/// <summary>
-		/// GetSimulateCricketBattleResult
-		/// </summary>
 		public static EventFunctionItem GetSimulateCricketBattleResult => Instance[798];
 
-		/// <summary>
-		/// ClearCricketItemShow
-		/// </summary>
 		public static EventFunctionItem ClearCricketItemShow => Instance[799];
 
-		/// <summary>
-		/// GetItemCurrDurability
-		/// </summary>
 		public static EventFunctionItem GetItemCurrDurability => Instance[800];
 
-		/// <summary>
-		/// SetItemCurrDurability
-		/// </summary>
 		public static EventFunctionItem SetItemCurrDurability => Instance[801];
 
-		/// <summary>
-		/// GetItemMaxDurability
-		/// </summary>
 		public static EventFunctionItem GetItemMaxDurability => Instance[802];
 
-		/// <summary>
-		/// CheckCricketWinsCount
-		/// </summary>
 		public static EventFunctionItem CheckCricketWinsCount => Instance[803];
 
-		/// <summary>
-		/// CheckCharCricketCount
-		/// </summary>
 		public static EventFunctionItem CheckCharCricketCount => Instance[804];
 
-		/// <summary>
-		/// CheckCricketAlive
-		/// </summary>
 		public static EventFunctionItem CheckCricketAlive => Instance[805];
 
-		/// <summary>
-		/// AdjustCricketExtraAge
-		/// </summary>
 		public static EventFunctionItem AdjustCricketExtraAge => Instance[806];
 
-		/// <summary>
-		/// BuyCricketStart
-		/// </summary>
 		public static EventFunctionItem BuyCricketStart => Instance[807];
 
-		/// <summary>
-		/// BuyCricketOption
-		/// </summary>
 		public static EventFunctionItem BuyCricketOption => Instance[808];
 
-		/// <summary>
-		/// EventSetItemList
-		/// </summary>
 		public static EventFunctionItem EventSetItemList => Instance[837];
 
-		/// <summary>
-		/// SetCoverCricketJarGradeList
-		/// </summary>
 		public static EventFunctionItem SetCoverCricketJarGradeList => Instance[840];
 
-		/// <summary>
-		/// CreateNoMindGuy
-		/// </summary>
 		public static EventFunctionItem CreateNoMindGuy => Instance[814];
 
-		/// <summary>
-		/// GetCharFame
-		/// </summary>
 		public static EventFunctionItem GetCharFame => Instance[815];
 
-		/// <summary>
-		/// GetCharPositiveFameValue
-		/// </summary>
 		public static EventFunctionItem GetCharPositiveFameValue => Instance[816];
 
-		/// <summary>
-		/// GetCharNegativeFameValue
-		/// </summary>
 		public static EventFunctionItem GetCharNegativeFameValue => Instance[817];
 
-		/// <summary>
-		/// CompareCharFame
-		/// </summary>
 		public static EventFunctionItem CompareCharFame => Instance[818];
 
-		/// <summary>
-		/// SetIconPlateIsUnlocked
-		/// </summary>
 		public static EventFunctionItem SetIconPlateIsUnlocked => Instance[819];
 
-		/// <summary>
-		/// SetUnknownDateDisplay
-		/// </summary>
 		public static EventFunctionItem SetUnknownDateDisplay => Instance[821];
 
-		/// <summary>
-		/// ReleaseNoMindGuys
-		/// </summary>
 		public static EventFunctionItem ReleaseNoMindGuys => Instance[823];
 
-		/// <summary>
-		/// GetNoMindGuyList
-		/// </summary>
 		public static EventFunctionItem GetNoMindGuyList => Instance[825];
 
-		/// <summary>
-		/// BanNormalAttackInTutorial
-		/// </summary>
 		public static EventFunctionItem BanNormalAttackInTutorial => Instance[826];
 
-		/// <summary>
-		/// BanMoveInTutorial
-		/// </summary>
 		public static EventFunctionItem BanMoveInTutorial => Instance[827];
 
-		/// <summary>
-		/// BanEnemyAiInTutorial
-		/// </summary>
 		public static EventFunctionItem BanEnemyAiInTutorial => Instance[828];
 
-		/// <summary>
-		/// GenerateEnemyNestMinion
-		/// </summary>
 		public static EventFunctionItem GenerateEnemyNestMinion => Instance[830];
 
-		/// <summary>
-		/// ComplementEnemyNestMinion
-		/// </summary>
 		public static EventFunctionItem ComplementEnemyNestMinion => Instance[831];
 
-		/// <summary>
-		/// ClearEnemyNestMinion
-		/// </summary>
 		public static EventFunctionItem ClearEnemyNestMinion => Instance[855];
 
-		/// <summary>
-		/// ClearResourceDisasterStatus
-		/// </summary>
 		public static EventFunctionItem ClearResourceDisasterStatus => Instance[895];
 
-		/// <summary>
-		/// ClearElopeWithLoveStatus
-		/// </summary>
 		public static EventFunctionItem ClearElopeWithLoveStatus => Instance[883];
 
-		/// <summary>
-		/// ClearSwordTombStatus
-		/// </summary>
 		public static EventFunctionItem ClearSwordTombStatus => Instance[887];
 
-		/// <summary>
-		/// GetThreeVitalsBetray
-		/// </summary>
 		public static EventFunctionItem GetThreeVitalsBetray => Instance[833];
 
-		/// <summary>
-		/// HealAllDefeatMark
-		/// </summary>
 		public static EventFunctionItem HealAllDefeatMark => Instance[839];
 
-		/// <summary>
-		/// CurrAliveTwelveImmortalsTotalCount
-		/// </summary>
+		public static EventFunctionItem GetMainStoryEndingLine => Instance[938];
+
 		public static EventFunctionItem CurrAliveTwelveImmortalsTotalCount => Instance[845];
 
-		/// <summary>
-		/// GenerateTwelveImmortals
-		/// </summary>
 		public static EventFunctionItem GenerateTwelveImmortals => Instance[846];
 
-		/// <summary>
-		/// IsTwelveImmortalsMember
-		/// </summary>
 		public static EventFunctionItem IsTwelveImmortalsMember => Instance[847];
 
-		/// <summary>
-		/// SetDivineFlameIsUnlocked
-		/// </summary>
 		public static EventFunctionItem SetDivineFlameIsUnlocked => Instance[852];
 
-		/// <summary>
-		/// SetNpcFollowTaiwu
-		/// </summary>
 		public static EventFunctionItem SetNpcFollowTaiwu => Instance[853];
 
-		/// <summary>
-		/// SetNoMindGuyFollowTaiwu
-		/// </summary>
 		public static EventFunctionItem SetNoMindGuyFollowTaiwu => Instance[854];
 
-		/// <summary>
-		/// CreateThreeWayDemon
-		/// </summary>
 		public static EventFunctionItem CreateThreeWayDemon => Instance[857];
 
-		/// <summary>
-		/// TaiwuSetClothing
-		/// </summary>
 		public static EventFunctionItem TaiwuSetClothing => Instance[858];
 
-		/// <summary>
-		/// TeleportToTaiwuVillage
-		/// </summary>
 		public static EventFunctionItem TeleportToTaiwuVillage => Instance[859];
 
-		/// <summary>
-		/// EventClearListeningEvent
-		/// </summary>
 		public static EventFunctionItem EventClearListeningEvent => Instance[862];
 
-		/// <summary>
-		/// TaiwuKillTwelveImmortals
-		/// </summary>
 		public static EventFunctionItem TaiwuKillTwelveImmortals => Instance[863];
 
-		/// <summary>
-		/// AssisterKillTwelveImmortals
-		/// </summary>
 		public static EventFunctionItem AssisterKillTwelveImmortals => Instance[864];
 
-		/// <summary>
-		/// SetTwelveImmortalsAssistState
-		/// </summary>
 		public static EventFunctionItem SetTwelveImmortalsAssistState => Instance[870];
 
-		/// <summary>
-		/// CharacterInSuxiaImpactRange
-		/// </summary>
 		public static EventFunctionItem CharacterInSuxiaImpactRange => Instance[865];
 
-		/// <summary>
-		/// MoveCharacterAwaySuxiaImpactRange
-		/// </summary>
 		public static EventFunctionItem MoveCharacterAwaySuxiaImpactRange => Instance[866];
 
-		/// <summary>
-		/// LearnTwelveImmortalsCombatSkill
-		/// </summary>
 		public static EventFunctionItem LearnTwelveImmortalsCombatSkill => Instance[867];
 
-		/// <summary>
-		/// MakeChaishanBroken
-		/// </summary>
 		public static EventFunctionItem MakeChaishanBroken => Instance[868];
 
-		/// <summary>
-		/// RestoreAllAreaDestroyedBlocks
-		/// </summary>
 		public static EventFunctionItem RestoreAllAreaDestroyedBlocks => Instance[869];
 
-		/// <summary>
-		/// CreateEmeiGuidance
-		/// </summary>
 		public static EventFunctionItem CreateEmeiGuidance => Instance[871];
 
-		/// <summary>
-		/// ClearEmeiGuidance
-		/// </summary>
 		public static EventFunctionItem ClearEmeiGuidance => Instance[872];
 
-		/// <summary>
-		/// GuideEmeiCharacter
-		/// </summary>
 		public static EventFunctionItem GuideEmeiCharacter => Instance[873];
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceType
-		/// </summary>
 		public static EventFunctionItem GetCharacterEmeiGuidanceType => Instance[874];
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceChanged
-		/// </summary>
 		public static EventFunctionItem GetCharacterEmeiGuidanceChanged => Instance[875];
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceNotch
-		/// </summary>
 		public static EventFunctionItem GetCharacterEmeiGuidanceNotch => Instance[876];
 
-		/// <summary>
-		/// GetCharacterEmeiGuidanceByType
-		/// </summary>
 		public static EventFunctionItem GetCharacterEmeiGuidanceByType => Instance[877];
 
-		/// <summary>
-		/// CheckCharacterFavorabilityTypeForExchangeBook
-		/// </summary>
 		public static EventFunctionItem CheckCharacterFavorabilityTypeForExchangeBook => Instance[878];
 
-		/// <summary>
-		/// EmeiInteractionOneCheck
-		/// </summary>
 		public static EventFunctionItem EmeiInteractionOneCheck => Instance[879];
 
-		/// <summary>
-		/// EmeiInteractionTwoCheck
-		/// </summary>
 		public static EventFunctionItem EmeiInteractionTwoCheck => Instance[880];
 
-		/// <summary>
-		/// EmeiInteractionOneAdd
-		/// </summary>
 		public static EventFunctionItem EmeiInteractionOneAdd => Instance[881];
 
-		/// <summary>
-		/// EmeiInteractionTwoAdd
-		/// </summary>
 		public static EventFunctionItem EmeiInteractionTwoAdd => Instance[882];
 
-		/// <summary>
-		/// IsCricketPolymorph
-		/// </summary>
 		public static EventFunctionItem IsCricketPolymorph => Instance[884];
 
-		/// <summary>
-		/// ActiveAdventureOrMajorEventInTaiwuBlock
-		/// </summary>
 		public static EventFunctionItem ActiveAdventureOrMajorEventInTaiwuBlock => Instance[885];
 
-		/// <summary>
-		/// UpdateFixedCharacterMonthlyMovement
-		/// </summary>
 		public static EventFunctionItem UpdateFixedCharacterMonthlyMovement => Instance[886];
 
-		/// <summary>
-		/// CheckCharacterAlertnessForTeach
-		/// </summary>
 		public static EventFunctionItem CheckCharacterAlertnessForTeach => Instance[888];
 
-		/// <summary>
-		/// IsCharacterFollowingTaiwu
-		/// </summary>
 		public static EventFunctionItem IsCharacterFollowingTaiwu => Instance[891];
 
-		/// <summary>
-		/// IsProfessionSkillEquipped
-		/// </summary>
 		public static EventFunctionItem IsProfessionSkillEquipped => Instance[892];
 
-		/// <summary>
-		/// AddFuyuFaithBySecure
-		/// </summary>
 		public static EventFunctionItem AddFuyuFaithBySecure => Instance[893];
 
-		/// <summary>
-		/// AddTianjiefuluBySecure
-		/// </summary>
 		public static EventFunctionItem AddTianjiefuluBySecure => Instance[894];
 
-		/// <summary>
-		/// CheckSettlementHasChicken
-		/// </summary>
 		public static EventFunctionItem CheckSettlementHasChicken => Instance[896];
 
-		/// <summary>
-		/// CheckFirstMartialArtTournamentHostSect
-		/// </summary>
 		public static EventFunctionItem CheckFirstMartialArtTournamentHostSect => Instance[897];
 
-		/// <summary>
-		/// CheckCharacterCombatSkillRatio50
-		/// </summary>
 		public static EventFunctionItem CheckCharacterCombatSkillRatio50 => Instance[898];
+
+		public static EventFunctionItem AdventureRemoveElementAndHandleBoundCharacterByInstanceId => Instance[899];
+
+		public static EventFunctionItem GetChickenDisplayName => Instance[900];
+
+		public static EventFunctionItem CreateXiangshuTower => Instance[901];
+
+		public static EventFunctionItem ConvertFixedCharacter => Instance[902];
+
+		public static EventFunctionItem ConvertRandomEnemy => Instance[943];
+
+		public static EventFunctionItem ShowXiangshuLevelChanged => Instance[920];
+
+		public static EventFunctionItem RemoveAllSwordTomb => Instance[905];
+
+		public static EventFunctionItem RemoveAllSwordTombAdventure => Instance[928];
+
+		public static EventFunctionItem CheckHasSwordTomb => Instance[921];
+
+		public static EventFunctionItem SmarterChickenSetKingMonthlyEventInvoked => Instance[906];
+
+		public static EventFunctionItem SmarterChickenReturn => Instance[908];
+
+		public static EventFunctionItem CheckSmarterChickenState => Instance[909];
+
+		public static EventFunctionItem SmarterChickenBecomeCharacter => Instance[910];
+
+		public static EventFunctionItem PagodaofTheFallenCreateTwelveImmortals => Instance[911];
+
+		public static EventFunctionItem TaiwuAsXiangshuEntered => Instance[912];
+
+		public static EventFunctionItem TaiwuAsXiangshuGetUndefeatedAvatarTemplateId => Instance[913];
+
+		public static EventFunctionItem DefeatFiveLoong => Instance[961];
+
+		public static EventFunctionItem ConvertFiveLoongToCarrier => Instance[914];
+
+		public static EventFunctionItem ConvertFiveLoongCarrierToHuman => Instance[917];
+
+		public static EventFunctionItem ConvertFiveLoongHuman => Instance[918];
+
+		public static EventFunctionItem FreeFiveLoongCarrier => Instance[930];
+
+		public static EventFunctionItem GetFiveLoongCharacterCreated => Instance[915];
+
+		public static EventFunctionItem GetFiveLoongState => Instance[916];
+
+		public static EventFunctionItem GetLoongByEnemyId => Instance[937];
+
+		public static EventFunctionItem IsItemKeyLoongCarrier => Instance[922];
+
+		public static EventFunctionItem GotJiaoEgg => Instance[923];
+
+		public static EventFunctionItem GotLoongScale => Instance[936];
+
+		public static EventFunctionItem HaveDefeatFiveLoong => Instance[924];
+
+		public static EventFunctionItem CharacterIsLoong => Instance[949];
+
+		public static EventFunctionItem GetFiveLoongCharacter => Instance[942];
+
+		public static EventFunctionItem GetLoongEnemyTemplateId => Instance[944];
+
+		public static EventFunctionItem GetLoongEnemyTemplateIdByItemKey => Instance[946];
+
+		public static EventFunctionItem CanTameLoong => Instance[939];
+
+		public static EventFunctionItem CheckDlcInstalled => Instance[919];
+
+		public static EventFunctionItem AdoptChicken => Instance[925];
+
+		public static EventFunctionItem CreateChickenEventActor => Instance[966];
+
+		public static EventFunctionItem IsEscapedChicken => Instance[926];
+
+		public static EventFunctionItem CharacterIsChicken => Instance[959];
+
+		public static EventFunctionItem TaiwuAsXiangshuDeleteCharacter => Instance[929];
+
+		public static EventFunctionItem AddTwelveImmortalsFeature => Instance[931];
+
+		public static EventFunctionItem AddTwelveImmortalsFeatureForTwelveImmortals => Instance[957];
+
+		public static EventFunctionItem ChangeProfessionSeniority => Instance[932];
+
+		public static EventFunctionItem SetTaiwuAsXiangshuTwelveImmortalsStatus => Instance[934];
+
+		public static EventFunctionItem ClearBlockEnemies => Instance[935];
+
+		public static EventFunctionItem TaiwuAsXiangshuWipeOut => Instance[941];
+
+		public static EventFunctionItem StartUnlockTaiwuStation => Instance[945];
+
+		public static EventFunctionItem AddTaiwuVillageStoneClaimed => Instance[951];
+
+		public static EventFunctionItem AdventureRemoveElementsAndHandleBoundCharactersByCoreId => Instance[947];
+
+		public static EventFunctionItem AdventureRemoveElementsAndHandleBoundCharactersByTag => Instance[948];
+
+		public static EventFunctionItem OpenTaiwuAsXiangshuTowerFinalLayer => Instance[950];
+
+		public static EventFunctionItem ApplyMonthlyEventAnimalTamingResult => Instance[952];
+
+		public static EventFunctionItem JumpToMonthlyEventAnimalTamingEvent => Instance[953];
+
+		public static EventFunctionItem StartMonthlyEventAnimalTamingEventCombat => Instance[954];
+
+		public static EventFunctionItem CheckExtraTaskFinished => Instance[958];
+
+		public static EventFunctionItem ChickenPolymorphEffect => Instance[960];
+
+		public static EventFunctionItem IsConvertToIntelligentConfig => Instance[962];
+
+		public static EventFunctionItem CharacterHasSpecialAvatar => Instance[963];
+
+		public static EventFunctionItem ReserveThreeRealmsPowerPerformance => Instance[964];
+
+		public static EventFunctionItem ShowNewFunctionUnlock => Instance[965];
+
+		public static EventFunctionItem GetIsQuickStartGame => Instance[967];
+
+		public static EventFunctionItem OpenDreamBackItemSelect => Instance[968];
+
+		public static EventFunctionItem ConfirmDreamBackItemSelect => Instance[969];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventFunction Instance = new EventFunction();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "ParameterTypes", "ParameterNames", "ReturnValue", "FollowUp", "RequiredPreviousCommands", "InGameHint", "TemplateId" };
@@ -9154,7 +4035,11 @@ public class EventFunction : ConfigData<EventFunctionItem, int>
 			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_38_0"),
 			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_38_1")
 		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_38")));
-		_dataArray.Add(new EventFunctionItem(39, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_39"), LocalStringManager.GetConfig("EventFunction_language", "Desc_39"), new int[1] { 6 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_39")));
+		_dataArray.Add(new EventFunctionItem(39, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_39"), LocalStringManager.GetConfig("EventFunction_language", "Desc_39"), new int[2] { 6, 3 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_39_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_39_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_39")));
 		_dataArray.Add(new EventFunctionItem(40, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_40"), LocalStringManager.GetConfig("EventFunction_language", "Desc_40"), new int[3] { 6, 6, 31 }, new string[3]
 		{
 			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_40_0"),
@@ -11692,12 +6577,174 @@ public class EventFunction : ConfigData<EventFunctionItem, int>
 			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_898_1"),
 			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_898_2")
 		}, 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_898")));
+		_dataArray.Add(new EventFunctionItem(899, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_899"), LocalStringManager.GetConfig("EventFunction_language", "Desc_899"), new int[1] { 82 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_899_0") }, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_899")));
+	}
+
+	private void CreateItems15()
+	{
+		_dataArray.Add(new EventFunctionItem(900, EEventFunctionType.DataRtrieval, LocalStringManager.GetConfig("EventFunction_language", "Name_900"), LocalStringManager.GetConfig("EventFunction_language", "Desc_900"), new int[1] { 130 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_900_0") }, 4, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_900")));
+		_dataArray.Add(new EventFunctionItem(901, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_901"), LocalStringManager.GetConfig("EventFunction_language", "Desc_901"), new int[0], new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_901")));
+		_dataArray.Add(new EventFunctionItem(902, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_902"), LocalStringManager.GetConfig("EventFunction_language", "Desc_902"), new int[2] { 6, 3 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_902_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_902_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_902")));
+		_dataArray.Add(new EventFunctionItem(903, EEventFunctionType.Basic, LocalStringManager.GetConfig("EventFunction_language", "Name_903"), LocalStringManager.GetConfig("EventFunction_language", "Desc_903"), new int[3] { 131, 132, 0 }, new string[3]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_903_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_903_1"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_903_2")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_903")));
+		_dataArray.Add(new EventFunctionItem(904, EEventFunctionType.Basic, LocalStringManager.GetConfig("EventFunction_language", "Name_904"), LocalStringManager.GetConfig("EventFunction_language", "Desc_904"), new int[2] { 131, 132 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_904_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_904_1")
+		}, 0, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_904")));
+		_dataArray.Add(new EventFunctionItem(905, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_905"), LocalStringManager.GetConfig("EventFunction_language", "Desc_905"), new int[1] { 5 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_905_0") }, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_905")));
+		_dataArray.Add(new EventFunctionItem(906, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_906"), LocalStringManager.GetConfig("EventFunction_language", "Desc_906"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_906")));
+		_dataArray.Add(new EventFunctionItem(907, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_907"), LocalStringManager.GetConfig("EventFunction_language", "Desc_907"), new int[3] { 131, 132, 4 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_907")));
+		_dataArray.Add(new EventFunctionItem(908, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_908"), LocalStringManager.GetConfig("EventFunction_language", "Desc_908"), new int[1] { 6 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_908")));
+		_dataArray.Add(new EventFunctionItem(909, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_909"), LocalStringManager.GetConfig("EventFunction_language", "Desc_909"), new int[2] { 18, 117 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_909")));
+		_dataArray.Add(new EventFunctionItem(910, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_910"), LocalStringManager.GetConfig("EventFunction_language", "Desc_910"), new int[2] { 18, 20 }, new string[0], 6, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_910")));
+		_dataArray.Add(new EventFunctionItem(911, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_911"), LocalStringManager.GetConfig("EventFunction_language", "Desc_911"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_911")));
+		_dataArray.Add(new EventFunctionItem(912, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_912"), LocalStringManager.GetConfig("EventFunction_language", "Desc_912"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_912")));
+		_dataArray.Add(new EventFunctionItem(913, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_913"), LocalStringManager.GetConfig("EventFunction_language", "Desc_913"), new int[0], new string[0], 46, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_913")));
+		_dataArray.Add(new EventFunctionItem(914, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_914"), LocalStringManager.GetConfig("EventFunction_language", "Desc_914"), new int[2] { 45, 3 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_914_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_914_1")
+		}, 7, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_914")));
+		_dataArray.Add(new EventFunctionItem(915, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_915"), LocalStringManager.GetConfig("EventFunction_language", "Desc_915"), new int[1] { 45 }, new string[0], 1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_915")));
+		_dataArray.Add(new EventFunctionItem(916, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_916"), LocalStringManager.GetConfig("EventFunction_language", "Desc_916"), new int[1] { 45 }, new string[0], 1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_916")));
+		_dataArray.Add(new EventFunctionItem(917, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_917"), LocalStringManager.GetConfig("EventFunction_language", "Desc_917"), new int[4] { 7, 20, 3, 5 }, new string[4]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_917_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_917_1"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_917_2"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_917_3")
+		}, 6, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: true, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_917")));
+		_dataArray.Add(new EventFunctionItem(918, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_918"), LocalStringManager.GetConfig("EventFunction_language", "Desc_918"), new int[3] { 6, 3, 3 }, new string[3]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_918_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_918_1"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_918_2")
+		}, 7, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_918")));
+		_dataArray.Add(new EventFunctionItem(919, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_919"), LocalStringManager.GetConfig("EventFunction_language", "Desc_919"), new int[1] { 131 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_919")));
+		_dataArray.Add(new EventFunctionItem(920, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_920"), LocalStringManager.GetConfig("EventFunction_language", "Desc_920"), new int[1] { 5 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_920_0") }, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_920")));
+		_dataArray.Add(new EventFunctionItem(921, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_921"), LocalStringManager.GetConfig("EventFunction_language", "Desc_921"), new int[0], new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_921")));
+		_dataArray.Add(new EventFunctionItem(922, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_922"), LocalStringManager.GetConfig("EventFunction_language", "Desc_922"), new int[1] { 7 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_922")));
+		_dataArray.Add(new EventFunctionItem(923, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_923"), LocalStringManager.GetConfig("EventFunction_language", "Desc_923"), new int[0], new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_923")));
+		_dataArray.Add(new EventFunctionItem(924, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_924"), LocalStringManager.GetConfig("EventFunction_language", "Desc_924"), new int[0], new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_924")));
+		_dataArray.Add(new EventFunctionItem(925, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_925"), LocalStringManager.GetConfig("EventFunction_language", "Desc_925"), new int[2] { 130, 5 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_925_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_925_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_925")));
+		_dataArray.Add(new EventFunctionItem(926, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_926"), LocalStringManager.GetConfig("EventFunction_language", "Desc_926"), new int[1] { 130 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_926")));
+		_dataArray.Add(new EventFunctionItem(927, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_927"), LocalStringManager.GetConfig("EventFunction_language", "Desc_927"), new int[1] { 81 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_927")));
+		_dataArray.Add(new EventFunctionItem(928, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_928"), LocalStringManager.GetConfig("EventFunction_language", "Desc_928"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_928")));
+		_dataArray.Add(new EventFunctionItem(929, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_929"), LocalStringManager.GetConfig("EventFunction_language", "Desc_929"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_929")));
+		_dataArray.Add(new EventFunctionItem(930, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_930"), LocalStringManager.GetConfig("EventFunction_language", "Desc_930"), new int[1] { 7 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_930")));
+		_dataArray.Add(new EventFunctionItem(931, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_931"), LocalStringManager.GetConfig("EventFunction_language", "Desc_931"), new int[1] { 6 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_931")));
+		_dataArray.Add(new EventFunctionItem(932, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_932"), LocalStringManager.GetConfig("EventFunction_language", "Desc_932"), new int[2] { 52, 1 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_932")));
+		_dataArray.Add(new EventFunctionItem(933, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_933"), LocalStringManager.GetConfig("EventFunction_language", "Desc_933"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: false, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_933")));
+		_dataArray.Add(new EventFunctionItem(934, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_934"), LocalStringManager.GetConfig("EventFunction_language", "Desc_934"), new int[2] { 134, 133 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_934")));
+		_dataArray.Add(new EventFunctionItem(935, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_935"), LocalStringManager.GetConfig("EventFunction_language", "Desc_935"), new int[1] { 9 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_935")));
+		_dataArray.Add(new EventFunctionItem(936, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_936"), LocalStringManager.GetConfig("EventFunction_language", "Desc_936"), new int[0], new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_936")));
+		_dataArray.Add(new EventFunctionItem(937, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_937"), LocalStringManager.GetConfig("EventFunction_language", "Desc_937"), new int[1] { 45 }, new string[0], 1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_937")));
+		_dataArray.Add(new EventFunctionItem(938, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_938"), LocalStringManager.GetConfig("EventFunction_language", "Desc_938"), new int[0], new string[0], 1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_938")));
+		_dataArray.Add(new EventFunctionItem(939, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_939"), LocalStringManager.GetConfig("EventFunction_language", "Desc_939"), new int[0], new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_939")));
+		_dataArray.Add(new EventFunctionItem(940, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_940"), LocalStringManager.GetConfig("EventFunction_language", "Desc_940"), new int[2] { 4, 3 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_940_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_940_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_940")));
+		_dataArray.Add(new EventFunctionItem(941, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_941"), LocalStringManager.GetConfig("EventFunction_language", "Desc_941"), new int[1] { 3 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_941_0") }, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_941")));
+		_dataArray.Add(new EventFunctionItem(942, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_942"), LocalStringManager.GetConfig("EventFunction_language", "Desc_942"), new int[2] { 45, 4 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_942_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_942_1")
+		}, 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_942")));
+		_dataArray.Add(new EventFunctionItem(943, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_943"), LocalStringManager.GetConfig("EventFunction_language", "Desc_943"), new int[1] { 6 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_943")));
+		_dataArray.Add(new EventFunctionItem(944, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_944"), LocalStringManager.GetConfig("EventFunction_language", "Desc_944"), new int[1] { 6 }, new string[0], 1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_944")));
+		_dataArray.Add(new EventFunctionItem(945, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_945"), LocalStringManager.GetConfig("EventFunction_language", "Desc_945"), new int[1] { 5 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_945")));
+		_dataArray.Add(new EventFunctionItem(946, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_946"), LocalStringManager.GetConfig("EventFunction_language", "Desc_946"), new int[1] { 7 }, new string[0], 1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_946")));
+		_dataArray.Add(new EventFunctionItem(947, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_947"), LocalStringManager.GetConfig("EventFunction_language", "Desc_947"), new int[1] { 61 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_947_0") }, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_947")));
+		_dataArray.Add(new EventFunctionItem(948, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_948"), LocalStringManager.GetConfig("EventFunction_language", "Desc_948"), new int[1] { 62 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_948_0") }, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_948")));
+		_dataArray.Add(new EventFunctionItem(949, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_949"), LocalStringManager.GetConfig("EventFunction_language", "Desc_949"), new int[1] { 6 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_949")));
+		_dataArray.Add(new EventFunctionItem(950, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_950"), LocalStringManager.GetConfig("EventFunction_language", "Desc_950"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_950")));
+		_dataArray.Add(new EventFunctionItem(951, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_951"), LocalStringManager.GetConfig("EventFunction_language", "Desc_951"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_951")));
+		_dataArray.Add(new EventFunctionItem(952, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_952"), LocalStringManager.GetConfig("EventFunction_language", "Desc_952"), new int[1] { 1 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_952")));
+		_dataArray.Add(new EventFunctionItem(953, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_953"), LocalStringManager.GetConfig("EventFunction_language", "Desc_953"), new int[7] { 5, 5, 5, 5, 5, 5, 5 }, new string[7]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_953_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_953_1"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_953_2"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_953_3"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_953_4"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_953_5"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_953_6")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: true, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_953")));
+		_dataArray.Add(new EventFunctionItem(954, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_954"), LocalStringManager.GetConfig("EventFunction_language", "Desc_954"), new int[2] { 5, 42 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_954_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_954_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_954")));
+		_dataArray.Add(new EventFunctionItem(955, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_955"), LocalStringManager.GetConfig("EventFunction_language", "Desc_955"), new int[3] { 6, 6, 88 }, new string[3]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_955_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_955_1"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_955_2")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_955")));
+		_dataArray.Add(new EventFunctionItem(956, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_956"), LocalStringManager.GetConfig("EventFunction_language", "Desc_956"), new int[3] { 6, 6, 88 }, new string[3]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_956_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_956_1"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_956_2")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_956")));
+		_dataArray.Add(new EventFunctionItem(957, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_957"), LocalStringManager.GetConfig("EventFunction_language", "Desc_957"), new int[1] { 6 }, new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_957")));
+		_dataArray.Add(new EventFunctionItem(958, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_958"), LocalStringManager.GetConfig("EventFunction_language", "Desc_958"), new int[1] { 38 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_958")));
+		_dataArray.Add(new EventFunctionItem(959, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_959"), LocalStringManager.GetConfig("EventFunction_language", "Desc_959"), new int[1] { 6 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_959")));
+	}
+
+	private void CreateItems16()
+	{
+		_dataArray.Add(new EventFunctionItem(960, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_960"), LocalStringManager.GetConfig("EventFunction_language", "Desc_960"), new int[2] { 46, 4 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_960_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_960_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_960")));
+		_dataArray.Add(new EventFunctionItem(961, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_961"), LocalStringManager.GetConfig("EventFunction_language", "Desc_961"), new int[2] { 45, 5 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_961_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_961_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: true, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_961")));
+		_dataArray.Add(new EventFunctionItem(962, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_962"), LocalStringManager.GetConfig("EventFunction_language", "Desc_962"), new int[1] { 6 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_962")));
+		_dataArray.Add(new EventFunctionItem(963, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_963"), LocalStringManager.GetConfig("EventFunction_language", "Desc_963"), new int[1] { 6 }, new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_963")));
+		_dataArray.Add(new EventFunctionItem(964, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_964"), LocalStringManager.GetConfig("EventFunction_language", "Desc_964"), new int[2] { 135, 133 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_964_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_964_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_964")));
+		_dataArray.Add(new EventFunctionItem(965, EEventFunctionType.UI, LocalStringManager.GetConfig("EventFunction_language", "Name_965"), LocalStringManager.GetConfig("EventFunction_language", "Desc_965"), new int[2] { 136, 5 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_965_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_965_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: true, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_965")));
+		_dataArray.Add(new EventFunctionItem(966, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_966"), LocalStringManager.GetConfig("EventFunction_language", "Desc_966"), new int[2] { 130, 4 }, new string[2]
+		{
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_966_0"),
+			LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_966_1")
+		}, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_966")));
+		_dataArray.Add(new EventFunctionItem(967, EEventFunctionType.Condition, LocalStringManager.GetConfig("EventFunction_language", "Name_967"), LocalStringManager.GetConfig("EventFunction_language", "Desc_967"), new int[0], new string[0], 3, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_967")));
+		_dataArray.Add(new EventFunctionItem(968, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_968"), LocalStringManager.GetConfig("EventFunction_language", "Desc_968"), new int[1] { 4 }, new string[1] { LocalStringManager.GetConfig("EventFunction_language", "ParameterNames_968_0") }, -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_968")));
+		_dataArray.Add(new EventFunctionItem(969, EEventFunctionType.Behavior, LocalStringManager.GetConfig("EventFunction_language", "Name_969"), LocalStringManager.GetConfig("EventFunction_language", "Desc_969"), new int[0], new string[0], -1, indentNext: false, -1, canCreateManually: true, new List<int>(), allowedInCondition: false, isTransition: false, allowExternalUsage: true, LocalStringManager.GetConfig("EventFunction_language", "InGameHint_969")));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<EventFunctionItem>(899);
+		_dataArray = new List<EventFunctionItem>(970);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();
@@ -11713,5 +6760,7 @@ public class EventFunction : ConfigData<EventFunctionItem, int>
 		CreateItems12();
 		CreateItems13();
 		CreateItems14();
+		CreateItems15();
+		CreateItems16();
 	}
 }

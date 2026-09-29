@@ -7,231 +7,96 @@ namespace Config;
 [Serializable]
 public class TeaHorseCaravanEvent : ConfigData<TeaHorseCaravanEventItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 遇到海市蜃楼
-		/// </summary>
 		public const short FindMirage = 0;
 
-		/// <summary>
-		/// 发现野人
-		/// </summary>
 		public const short FindBigfoot = 1;
 
-		/// <summary>
-		/// 发现动物
-		/// </summary>
 		public const short FindAnimal = 2;
 
-		/// <summary>
-		/// 发现植物
-		/// </summary>
 		public const short FindPlant = 3;
 
-		/// <summary>
-		/// 回传见闻
-		/// </summary>
 		public const short GetInformation = 4;
 
-		/// <summary>
-		/// 发现聚落
-		/// </summary>
 		public const short FindSettlement = 5;
 
-		/// <summary>
-		/// 发现天气
-		/// </summary>
 		public const short FindWeather = 6;
 
-		/// <summary>
-		/// 迷路了
-		/// </summary>
 		public const short Lost = 7;
 
-		/// <summary>
-		/// 遇到盗贼
-		/// </summary>
 		public const short MeetTheif = 8;
 
-		/// <summary>
-		/// 遇到盗贼1
-		/// </summary>
 		public const short MeetTheif1 = 9;
 
-		/// <summary>
-		/// 遇到盗贼2
-		/// </summary>
 		public const short MeetTheif2 = 10;
 
-		/// <summary>
-		/// 遇到盗贼3
-		/// </summary>
 		public const short MeetTheif3 = 11;
 
-		/// <summary>
-		/// 颠簸损坏
-		/// </summary>
 		public const short GoodsDamage = 12;
 
-		/// <summary>
-		/// 发现商队残骸
-		/// </summary>
 		public const short FindWreckage = 13;
 
-		/// <summary>
-		/// 援助路人
-		/// </summary>
 		public const short HelpPasserby = 14;
 
-		/// <summary>
-		/// 水土不服
-		/// </summary>
 		public const short Unacclimatized = 15;
 
-		/// <summary>
-		/// 获得援助
-		/// </summary>
 		public const short GetHelp = 16;
 
-		/// <summary>
-		/// 偶得野味
-		/// </summary>
 		public const short FindVenison = 17;
 
-		/// <summary>
-		/// 发现果林
-		/// </summary>
 		public const short FindFruit = 18;
 
-		/// <summary>
-		/// 发现村落
-		/// </summary>
 		public const short FindVillage = 19;
 
-		/// <summary>
-		/// 路遇商队
-		/// </summary>
 		public const short MeetMerchan = 20;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 遇到海市蜃楼
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindMirage => Instance[(short)0];
 
-		/// <summary>
-		/// 发现野人
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindBigfoot => Instance[(short)1];
 
-		/// <summary>
-		/// 发现动物
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindAnimal => Instance[(short)2];
 
-		/// <summary>
-		/// 发现植物
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindPlant => Instance[(short)3];
 
-		/// <summary>
-		/// 回传见闻
-		/// </summary>
 		public static TeaHorseCaravanEventItem GetInformation => Instance[(short)4];
 
-		/// <summary>
-		/// 发现聚落
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindSettlement => Instance[(short)5];
 
-		/// <summary>
-		/// 发现天气
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindWeather => Instance[(short)6];
 
-		/// <summary>
-		/// 迷路了
-		/// </summary>
 		public static TeaHorseCaravanEventItem Lost => Instance[(short)7];
 
-		/// <summary>
-		/// 遇到盗贼
-		/// </summary>
 		public static TeaHorseCaravanEventItem MeetTheif => Instance[(short)8];
 
-		/// <summary>
-		/// 遇到盗贼1
-		/// </summary>
 		public static TeaHorseCaravanEventItem MeetTheif1 => Instance[(short)9];
 
-		/// <summary>
-		/// 遇到盗贼2
-		/// </summary>
 		public static TeaHorseCaravanEventItem MeetTheif2 => Instance[(short)10];
 
-		/// <summary>
-		/// 遇到盗贼3
-		/// </summary>
 		public static TeaHorseCaravanEventItem MeetTheif3 => Instance[(short)11];
 
-		/// <summary>
-		/// 颠簸损坏
-		/// </summary>
 		public static TeaHorseCaravanEventItem GoodsDamage => Instance[(short)12];
 
-		/// <summary>
-		/// 发现商队残骸
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindWreckage => Instance[(short)13];
 
-		/// <summary>
-		/// 援助路人
-		/// </summary>
 		public static TeaHorseCaravanEventItem HelpPasserby => Instance[(short)14];
 
-		/// <summary>
-		/// 水土不服
-		/// </summary>
 		public static TeaHorseCaravanEventItem Unacclimatized => Instance[(short)15];
 
-		/// <summary>
-		/// 获得援助
-		/// </summary>
 		public static TeaHorseCaravanEventItem GetHelp => Instance[(short)16];
 
-		/// <summary>
-		/// 偶得野味
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindVenison => Instance[(short)17];
 
-		/// <summary>
-		/// 发现果林
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindFruit => Instance[(short)18];
 
-		/// <summary>
-		/// 发现村落
-		/// </summary>
 		public static TeaHorseCaravanEventItem FindVillage => Instance[(short)19];
 
-		/// <summary>
-		/// 路遇商队
-		/// </summary>
 		public static TeaHorseCaravanEventItem MeetMerchan => Instance[(short)20];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TeaHorseCaravanEvent Instance = new TeaHorseCaravanEvent();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Parameters" };

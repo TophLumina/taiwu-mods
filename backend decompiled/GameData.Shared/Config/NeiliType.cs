@@ -8,91 +8,40 @@ namespace Config;
 [Serializable]
 public class NeiliType : ConfigData<NeiliTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 金刚·金刚伏魔
-		/// </summary>
 		public const sbyte PureMetal = 0;
 
-		/// <summary>
-		/// 紫霞·紫气东来
-		/// </summary>
 		public const sbyte PureWood = 1;
 
-		/// <summary>
-		/// 玄阴·玄阴冰寒
-		/// </summary>
 		public const sbyte PureWater = 2;
 
-		/// <summary>
-		/// 纯阳·纯阳炽火
-		/// </summary>
 		public const sbyte PureFire = 3;
 
-		/// <summary>
-		/// 归元·归元化蕴
-		/// </summary>
 		public const sbyte PureEarth = 4;
 
-		/// <summary>
-		/// 混元·天人一体
-		/// </summary>
 		public const sbyte Mix = 5;
 
-		/// <summary>
-		/// 金刚·金沉则活
-		/// </summary>
 		public const sbyte PartialMetal0 = 6;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 金刚·金刚伏魔
-		/// </summary>
 		public static NeiliTypeItem PureMetal => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 紫霞·紫气东来
-		/// </summary>
 		public static NeiliTypeItem PureWood => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 玄阴·玄阴冰寒
-		/// </summary>
 		public static NeiliTypeItem PureWater => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 纯阳·纯阳炽火
-		/// </summary>
 		public static NeiliTypeItem PureFire => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 归元·归元化蕴
-		/// </summary>
 		public static NeiliTypeItem PureEarth => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 混元·天人一体
-		/// </summary>
 		public static NeiliTypeItem Mix => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 金刚·金沉则活
-		/// </summary>
 		public static NeiliTypeItem PartialMetal0 => Instance[(sbyte)6];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static NeiliType Instance = new NeiliType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "NeiliTypeConditionText", "SimpleDesc", "EffectDesc", "LifeGateFeatures", "DeathGateFeatures", "TemplateId", "LinePos" };

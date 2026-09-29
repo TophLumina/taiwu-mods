@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 伏龙着火区域数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class FulongInFlameArea : ISerializableGameData
 {
@@ -33,53 +30,27 @@ public class FulongInFlameArea : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[8] { "LightedBlocks", "ExtinguishedBlocks", "MineBlocks", "TriggeredMineBlocks", "RewardGrade", "EdgeBlocks", "AreaId", "MineCount" };
 	}
 
-	/// <summary>
-	/// 着火的地格
-	/// blockId -&gt; 周围的炸弹数
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> LightedBlocks;
 
-	/// <summary>
-	/// 已熄灭火焰的地格
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> ExtinguishedBlocks;
 
-	/// <summary>
-	/// 有炸弹的地格
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> MineBlocks;
 
-	/// <summary>
-	/// 炸弹已被触发的地格
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> TriggeredMineBlocks;
 
-	/// <summary>
-	/// 奖励品级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte RewardGrade;
 
-	/// <summary>
-	/// 边界地格
-	/// blockId -&gt; FulongInFlameAreaEdgeType
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, sbyte> EdgeBlocks;
 
-	/// <summary>
-	/// 区域位置
-	/// </summary>
 	[SerializableGameDataField]
 	public short AreaId;
 
-	/// <summary>
-	/// 炸弹数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int MineCount;
 
@@ -95,14 +66,6 @@ public class FulongInFlameArea : ISerializableGameData
 		MineCount = -1;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="lightedBlocks"></param>
-	/// <param name="mineBlocks"></param>
-	/// <param name="edgeBlocks"></param>
-	/// <param name="isBig"></param>
-	/// <param name="areaId"></param>
 	public FulongInFlameArea(Dictionary<short, int> lightedBlocks, List<short> mineBlocks, Dictionary<short, sbyte> edgeBlocks, bool isBig, short areaId, int mineCount)
 	{
 		LightedBlocks = lightedBlocks;
@@ -115,31 +78,16 @@ public class FulongInFlameArea : ISerializableGameData
 		MineCount = mineCount;
 	}
 
-	/// <summary>
-	/// 两个着火的位置是否相邻
-	/// 采用太吾的距离判断方式而非传统扫雷的方式，即周围四方向距离为1的是相邻;如果设计有变需要修改这里
-	/// 因为前后端获取MapBlockData不同所以直接将其作为参数
-	/// </summary>
-	/// <param name="a"></param>
-	/// <param name="b"></param>
-	/// <returns></returns>
 	public static bool IsAdjacent(MapBlockData a, MapBlockData b)
 	{
 		return a.GetBlockPos().GetManhattanDistance(b.GetBlockPos()) == 1;
 	}
 
-	/// <summary>
-	/// 是否已完全扑灭
-	/// </summary>
-	/// <returns></returns>
 	public bool IsFullyExtinguished()
 	{
 		return ExtinguishedBlocks.Count + MineBlocks.Count >= LightedBlocks.Count;
 	}
 
-	/// <summary>
-	/// 检查一个位置是否在火区里（不判定激活状态）
-	/// </summary>
 	public bool IsLocationInFlame(Location location)
 	{
 		if (location.AreaId == AreaId)
@@ -149,9 +97,6 @@ public class FulongInFlameArea : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 检查一个位置是否在未激活的火区里
-	/// </summary>
 	public bool IsLocationInActiveFlame(Location location)
 	{
 		if (IsLocationInFlame(location) && !ExtinguishedBlocks.Contains(location.BlockId))
@@ -161,9 +106,6 @@ public class FulongInFlameArea : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public FulongInFlameArea(FulongInFlameArea other)
 	{
 		LightedBlocks = ((other.LightedBlocks == null) ? null : new Dictionary<short, int>(other.LightedBlocks));
@@ -176,9 +118,6 @@ public class FulongInFlameArea : ISerializableGameData
 		MineCount = other.MineCount;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(FulongInFlameArea other)
 	{
 		LightedBlocks = ((other.LightedBlocks == null) ? null : new Dictionary<short, int>(other.LightedBlocks));
@@ -191,13 +130,11 @@ public class FulongInFlameArea : ISerializableGameData
 		MineCount = other.MineCount;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 9;
@@ -213,7 +150,6 @@ public class FulongInFlameArea : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -286,7 +222,6 @@ public class FulongInFlameArea : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -7,181 +7,76 @@ namespace Config;
 [Serializable]
 public class DemandInteraction : ConfigData<DemandInteractionItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 外伤请求药物
-		/// </summary>
 		public const short RequestHealOuterInjuryByItem = 0;
 
-		/// <summary>
-		/// 内伤请求药物
-		/// </summary>
 		public const short RequestHealInnerInjuryByItem = 1;
 
-		/// <summary>
-		/// 驱毒请求药物
-		/// </summary>
 		public const short RequestHealPoisonByItem = 2;
 
-		/// <summary>
-		/// 续命请求药物
-		/// </summary>
 		public const short RequestHealth = 3;
 
-		/// <summary>
-		/// 内息请求药物
-		/// </summary>
 		public const short RequestHealDisorderOfQi = 4;
 
-		/// <summary>
-		/// 内力请求药物
-		/// </summary>
 		public const short RequestNeili = 5;
 
-		/// <summary>
-		/// 灭蛊请求药物
-		/// </summary>
 		public const short RequestKillWug = 6;
 
-		/// <summary>
-		/// 食物请求
-		/// </summary>
 		public const short RequestFood = 7;
 
-		/// <summary>
-		/// 茶酒请求
-		/// </summary>
 		public const short RequestTeaWine = 8;
 
-		/// <summary>
-		/// 资源请求
-		/// </summary>
 		public const short RequestResource = 9;
 
-		/// <summary>
-		/// 道具请求
-		/// </summary>
 		public const short RequestItem = 10;
 
-		/// <summary>
-		/// 修理请求
-		/// </summary>
 		public const short RequestRepairItem = 11;
 
-		/// <summary>
-		/// 淬毒请求
-		/// </summary>
 		public const short RequestAddPoisonToItem = 12;
 
-		/// <summary>
-		/// 研读请求
-		/// </summary>
 		public const short RequestInstructionOnReadingLifeSkill = 13;
 
-		/// <summary>
-		/// 研读武学请求
-		/// </summary>
 		public const short RequestInstructionOnReadingCombatSkill = 14;
 
-		/// <summary>
-		/// 突破请求
-		/// </summary>
 		public const short RequestInstructionOnBreakout = 15;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 外伤请求药物
-		/// </summary>
 		public static DemandInteractionItem RequestHealOuterInjuryByItem => Instance[(short)0];
 
-		/// <summary>
-		/// 内伤请求药物
-		/// </summary>
 		public static DemandInteractionItem RequestHealInnerInjuryByItem => Instance[(short)1];
 
-		/// <summary>
-		/// 驱毒请求药物
-		/// </summary>
 		public static DemandInteractionItem RequestHealPoisonByItem => Instance[(short)2];
 
-		/// <summary>
-		/// 续命请求药物
-		/// </summary>
 		public static DemandInteractionItem RequestHealth => Instance[(short)3];
 
-		/// <summary>
-		/// 内息请求药物
-		/// </summary>
 		public static DemandInteractionItem RequestHealDisorderOfQi => Instance[(short)4];
 
-		/// <summary>
-		/// 内力请求药物
-		/// </summary>
 		public static DemandInteractionItem RequestNeili => Instance[(short)5];
 
-		/// <summary>
-		/// 灭蛊请求药物
-		/// </summary>
 		public static DemandInteractionItem RequestKillWug => Instance[(short)6];
 
-		/// <summary>
-		/// 食物请求
-		/// </summary>
 		public static DemandInteractionItem RequestFood => Instance[(short)7];
 
-		/// <summary>
-		/// 茶酒请求
-		/// </summary>
 		public static DemandInteractionItem RequestTeaWine => Instance[(short)8];
 
-		/// <summary>
-		/// 资源请求
-		/// </summary>
 		public static DemandInteractionItem RequestResource => Instance[(short)9];
 
-		/// <summary>
-		/// 道具请求
-		/// </summary>
 		public static DemandInteractionItem RequestItem => Instance[(short)10];
 
-		/// <summary>
-		/// 修理请求
-		/// </summary>
 		public static DemandInteractionItem RequestRepairItem => Instance[(short)11];
 
-		/// <summary>
-		/// 淬毒请求
-		/// </summary>
 		public static DemandInteractionItem RequestAddPoisonToItem => Instance[(short)12];
 
-		/// <summary>
-		/// 研读请求
-		/// </summary>
 		public static DemandInteractionItem RequestInstructionOnReadingLifeSkill => Instance[(short)13];
 
-		/// <summary>
-		/// 研读武学请求
-		/// </summary>
 		public static DemandInteractionItem RequestInstructionOnReadingCombatSkill => Instance[(short)14];
 
-		/// <summary>
-		/// 突破请求
-		/// </summary>
 		public static DemandInteractionItem RequestInstructionOnBreakout => Instance[(short)15];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DemandInteraction Instance = new DemandInteraction();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "HeadEvent", "AgreeSelect", "AfterAgree", "TemplateId" };

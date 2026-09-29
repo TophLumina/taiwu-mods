@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class ResourceDisaster : ConfigData<ResourceDisasterItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ResourceDisaster Instance = new ResourceDisaster();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TargetId", "ResourceType", "TemplateId" };

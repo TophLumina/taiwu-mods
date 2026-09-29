@@ -6,9 +6,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 用于适配存档模块的玄机数据列表
-/// </summary>
 [AutoGenerateSerializableGameData]
 public class SkillBreakPlateBonusList : IList<SkillBreakPlateBonus>, ICollection<SkillBreakPlateBonus>, IEnumerable<SkillBreakPlateBonus>, IEnumerable, ISerializableGameData
 {
@@ -17,15 +14,10 @@ public class SkillBreakPlateBonusList : IList<SkillBreakPlateBonus>, ICollection
 
 	private IList<SkillBreakPlateBonus> ListImplementation => _list ?? (_list = new List<SkillBreakPlateBonus>());
 
-	/// <inheritdoc cref="P:System.Collections.Generic.ICollection`1.Count" />
 	public int Count => ListImplementation.Count;
 
-	/// <inheritdoc />
 	public bool IsReadOnly => ListImplementation.IsReadOnly;
 
-	/// <summary>
-	/// 索引
-	/// </summary>
 	public SkillBreakPlateBonus this[int index]
 	{
 		get
@@ -38,9 +30,6 @@ public class SkillBreakPlateBonusList : IList<SkillBreakPlateBonus>, ICollection
 		}
 	}
 
-	/// <summary>
-	/// List 风格构造方法
-	/// </summary>
 	public SkillBreakPlateBonusList(IEnumerable<SkillBreakPlateBonus> collection)
 	{
 		if (_list == null)
@@ -51,7 +40,6 @@ public class SkillBreakPlateBonusList : IList<SkillBreakPlateBonus>, ICollection
 		_list.AddRange(collection);
 	}
 
-	/// <inheritdoc />
 	public IEnumerator<SkillBreakPlateBonus> GetEnumerator()
 	{
 		return ListImplementation.GetEnumerator();
@@ -62,72 +50,55 @@ public class SkillBreakPlateBonusList : IList<SkillBreakPlateBonus>, ICollection
 		return ((IEnumerable)ListImplementation).GetEnumerator();
 	}
 
-	/// <inheritdoc />
 	public void Add(SkillBreakPlateBonus item)
 	{
 		ListImplementation.Add(item);
 	}
 
-	/// <inheritdoc />
 	public void Clear()
 	{
 		ListImplementation.Clear();
 	}
 
-	/// <inheritdoc />
 	public bool Contains(SkillBreakPlateBonus item)
 	{
 		return ListImplementation.Contains(item);
 	}
 
-	/// <inheritdoc />
 	public void CopyTo(SkillBreakPlateBonus[] array, int arrayIndex)
 	{
 		ListImplementation.CopyTo(array, arrayIndex);
 	}
 
-	/// <inheritdoc />
 	public bool Remove(SkillBreakPlateBonus item)
 	{
 		return ListImplementation.Remove(item);
 	}
 
-	/// <inheritdoc />
 	public int IndexOf(SkillBreakPlateBonus item)
 	{
 		return ListImplementation.IndexOf(item);
 	}
 
-	/// <inheritdoc />
 	public void Insert(int index, SkillBreakPlateBonus item)
 	{
 		ListImplementation.Insert(index, item);
 	}
 
-	/// <inheritdoc />
 	public void RemoveAt(int index)
 	{
 		ListImplementation.RemoveAt(index);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SkillBreakPlateBonusList()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SkillBreakPlateBonusList(SkillBreakPlateBonusList other)
 	{
 		_list = ((other._list == null) ? null : new List<SkillBreakPlateBonus>(other._list));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SkillBreakPlateBonusList other)
 	{
 		_list = ((other._list == null) ? null : new List<SkillBreakPlateBonus>(other._list));

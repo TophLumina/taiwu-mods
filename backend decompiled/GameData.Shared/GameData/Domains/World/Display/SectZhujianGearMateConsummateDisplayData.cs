@@ -8,39 +8,21 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.World.Display;
 
-/// <summary>
-/// 地区主线 - 铸剑 - 机关人 - 精纯 显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class SectZhujianGearMateConsummateDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 机关人数据
-	/// </summary>
 	[SerializableGameDataField]
 	public GearMate GearMate;
 
-	/// <summary>
-	/// 机关人显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData GearMateDisplayData;
 
-	/// <summary>
-	/// 机关人精纯
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ConsummateLevel;
 
-	/// <summary>
-	/// 是否可以使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanUseWarehouse;
 
-	/// <summary>
-	/// 太吾持有的机关人可升级精纯的物品（包含行囊、私库、公库）
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> CanUpgradeConsummateItemList;
 

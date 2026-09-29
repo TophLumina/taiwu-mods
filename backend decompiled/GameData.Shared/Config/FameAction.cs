@@ -7,721 +7,292 @@ namespace Config;
 [Serializable]
 public class FameAction : ConfigData<FameActionItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 血债难赎
-		/// </summary>
 		public const short Kill = 0;
 
-		/// <summary>
-		/// 拘人害命
-		/// </summary>
 		public const short Kidnap = 2;
 
-		/// <summary>
-		/// 义薄云天
-		/// </summary>
 		public const short Rescue = 4;
 
-		/// <summary>
-		/// 是非不分
-		/// </summary>
 		public const short MakeEnemy = 6;
 
-		/// <summary>
-		/// 嫉恶如仇2
-		/// </summary>
 		public const short SeverEnemy = 8;
 
-		/// <summary>
-		/// 结交良善
-		/// </summary>
 		public const short MakeFriends = 10;
 
-		/// <summary>
-		/// 良谊高义
-		/// </summary>
 		public const short MakeBrothers = 12;
 
-		/// <summary>
-		/// 佳人才子
-		/// </summary>
 		public const short MakeLovers = 14;
 
-		/// <summary>
-		/// 败德辱行
-		/// </summary>
 		public const short MakeBadLovers = 15;
 
-		/// <summary>
-		/// 救抚良善
-		/// </summary>
 		public const short AdoptChild = 16;
 
-		/// <summary>
-		/// 寄身善贤
-		/// </summary>
 		public const short AdoptedAsChild = 18;
 
-		/// <summary>
-		/// 乐善好施
-		/// </summary>
 		public const short GiveItem = 20;
 
-		/// <summary>
-		/// 良师益友
-		/// </summary>
 		public const short TeachSkill = 22;
 
-		/// <summary>
-		/// 救死扶伤
-		/// </summary>
 		public const short Heal = 24;
 
-		/// <summary>
-		/// 养虎遗患
-		/// </summary>
 		public const short HealBad = 25;
 
-		/// <summary>
-		/// 出手伤人
-		/// </summary>
 		public const short SurpriseAttack = 26;
 
-		/// <summary>
-		/// 惩戒恶人
-		/// </summary>
 		public const short DisciplineEvil = 27;
 
-		/// <summary>
-		/// 偷师窃艺
-		/// </summary>
 		public const short StealSkill = 28;
 
-		/// <summary>
-		/// 窃取财物
-		/// </summary>
 		public const short Steal = 29;
 
-		/// <summary>
-		/// 抢劫财物
-		/// </summary>
 		public const short Rob = 30;
 
-		/// <summary>
-		/// 掘坟盗墓
-		/// </summary>
 		public const short RobGrave = 31;
 
-		/// <summary>
-		/// 施毒害人
-		/// </summary>
 		public const short Poison = 32;
 
-		/// <summary>
-		/// 落荒而逃
-		/// </summary>
 		public const short Escape = 33;
 
-		/// <summary>
-		/// 欺凌幼小
-		/// </summary>
 		public const short FightChildren = 34;
 
-		/// <summary>
-		/// 趁人之危
-		/// </summary>
 		public const short TakeAdventageOfOthers = 35;
 
-		/// <summary>
-		/// 比武得胜
-		/// </summary>
 		public const short WinCombat = 36;
 
-		/// <summary>
-		/// 比武落败
-		/// </summary>
 		public const short LoseCombat = 37;
 
-		/// <summary>
-		/// 宅心仁厚
-		/// </summary>
 		public const short ResponseKind = 38;
 
-		/// <summary>
-		/// 义正辞严
-		/// </summary>
 		public const short ResponseJust = 40;
 
-		/// <summary>
-		/// 恣肆无忌
-		/// </summary>
 		public const short ResponseRebel = 42;
 
-		/// <summary>
-		/// 唯利是图
-		/// </summary>
 		public const short ResponseEgoistic = 44;
 
-		/// <summary>
-		/// 流言蜚语
-		/// </summary>
 		public const short RumorsAround = 46;
 
-		/// <summary>
-		/// 软弱可欺
-		/// </summary>
 		public const short EasyToPickOn = 47;
 
-		/// <summary>
-		/// 受人恩惠
-		/// </summary>
 		public const short GetAlms = 48;
 
-		/// <summary>
-		/// 受人斥责
-		/// </summary>
 		public const short GetBlame = 49;
 
-		/// <summary>
-		/// 受人愚弄
-		/// </summary>
 		public const short GetFooled = 50;
 
-		/// <summary>
-		/// 受人胁迫
-		/// </summary>
 		public const short GetDuress = 51;
 
-		/// <summary>
-		/// 受人称赞
-		/// </summary>
 		public const short GetPraised = 52;
 
-		/// <summary>
-		/// 受人嘲笑
-		/// </summary>
 		public const short GetRidiculed = 53;
 
-		/// <summary>
-		/// 前人恩情
-		/// </summary>
 		public const short InheritGoodOne = 54;
 
-		/// <summary>
-		/// 前人罪业
-		/// </summary>
 		public const short InheritBadOne = 55;
 
-		/// <summary>
-		/// 芜行俚语
-		/// </summary>
 		public const short Indecent = 56;
 
-		/// <summary>
-		/// 行乞讨钱
-		/// </summary>
 		public const short Beg = 57;
 
-		/// <summary>
-		/// 庸医害命
-		/// </summary>
 		public const short Quack = 58;
 
-		/// <summary>
-		/// 行侠仗义
-		/// </summary>
 		public const short KillHeretic = 59;
 
-		/// <summary>
-		/// 杀害义士
-		/// </summary>
 		public const short KillRighteous = 60;
 
-		/// <summary>
-		/// 伤风败俗
-		/// </summary>
 		public const short Immoral = 61;
 
-		/// <summary>
-		/// 败坏清规
-		/// </summary>
 		public const short BreakRules = 62;
 
-		/// <summary>
-		/// 罔顾人伦
-		/// </summary>
 		public const short Unethical = 63;
 
-		/// <summary>
-		/// 欺师背祖
-		/// </summary>
 		public const short Betrayal = 64;
 
-		/// <summary>
-		/// 负心薄幸
-		/// </summary>
 		public const short Unfaithful = 65;
 
-		/// <summary>
-		/// 衣冠禽兽
-		/// </summary>
 		public const short Rape = 66;
 
-		/// <summary>
-		/// 受人羞辱
-		/// </summary>
 		public const short BeSneered = 67;
 
-		/// <summary>
-		/// 自取其辱
-		/// </summary>
 		public const short SneerSelf = 68;
 
-		/// <summary>
-		/// 知难而上
-		/// </summary>
 		public const short CombatWithStrong = 69;
 
-		/// <summary>
-		/// 欺软怕硬
-		/// </summary>
 		public const short CombatWithWeak = 70;
 
-		/// <summary>
-		/// 正派名宗
-		/// </summary>
 		public const short FriendWithGoodSects = 71;
 
-		/// <summary>
-		/// 邪派外道
-		/// </summary>
 		public const short FriendWithEvilSects = 72;
 
-		/// <summary>
-		/// 亦正亦邪1
-		/// </summary>
 		public const short FriendWithNeutralSects1 = 73;
 
-		/// <summary>
-		/// 亦正亦邪2
-		/// </summary>
 		public const short FriendWithNeutralSects2 = 74;
 
-		/// <summary>
-		/// 较艺得胜
-		/// </summary>
 		public const short WinSkill = 75;
 
-		/// <summary>
-		/// 较艺落败
-		/// </summary>
 		public const short LoseSkill = 76;
 
-		/// <summary>
-		/// 制造名品
-		/// </summary>
 		public const short MakeFamousItem = 77;
 
-		/// <summary>
-		/// 云蒸龙变
-		/// </summary>
 		public const short DLCLoongDefeatLoong = 78;
 
-		/// <summary>
-		/// 擅闯库房
-		/// </summary>
 		public const short IntrudeTreasury = 79;
 
-		/// <summary>
-		/// 掠夺库房
-		/// </summary>
 		public const short PlunderTreasury = 80;
 
-		/// <summary>
-		/// 施仁布泽
-		/// </summary>
 		public const short AidTreasury = 81;
 
-		/// <summary>
-		/// 负罪在身
-		/// </summary>
 		public const short CommitCrime = 82;
 
-		/// <summary>
-		/// 缉逃擒凶
-		/// </summary>
 		public const short CaptureCriminals = 83;
 
-		/// <summary>
-		/// 手艺不精
-		/// </summary>
 		public const short LackSkill = 92;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 血债难赎
-		/// </summary>
 		public static FameActionItem Kill => Instance[(short)0];
 
-		/// <summary>
-		/// 拘人害命
-		/// </summary>
 		public static FameActionItem Kidnap => Instance[(short)2];
 
-		/// <summary>
-		/// 义薄云天
-		/// </summary>
 		public static FameActionItem Rescue => Instance[(short)4];
 
-		/// <summary>
-		/// 是非不分
-		/// </summary>
 		public static FameActionItem MakeEnemy => Instance[(short)6];
 
-		/// <summary>
-		/// 嫉恶如仇2
-		/// </summary>
 		public static FameActionItem SeverEnemy => Instance[(short)8];
 
-		/// <summary>
-		/// 结交良善
-		/// </summary>
 		public static FameActionItem MakeFriends => Instance[(short)10];
 
-		/// <summary>
-		/// 良谊高义
-		/// </summary>
 		public static FameActionItem MakeBrothers => Instance[(short)12];
 
-		/// <summary>
-		/// 佳人才子
-		/// </summary>
 		public static FameActionItem MakeLovers => Instance[(short)14];
 
-		/// <summary>
-		/// 败德辱行
-		/// </summary>
 		public static FameActionItem MakeBadLovers => Instance[(short)15];
 
-		/// <summary>
-		/// 救抚良善
-		/// </summary>
 		public static FameActionItem AdoptChild => Instance[(short)16];
 
-		/// <summary>
-		/// 寄身善贤
-		/// </summary>
 		public static FameActionItem AdoptedAsChild => Instance[(short)18];
 
-		/// <summary>
-		/// 乐善好施
-		/// </summary>
 		public static FameActionItem GiveItem => Instance[(short)20];
 
-		/// <summary>
-		/// 良师益友
-		/// </summary>
 		public static FameActionItem TeachSkill => Instance[(short)22];
 
-		/// <summary>
-		/// 救死扶伤
-		/// </summary>
 		public static FameActionItem Heal => Instance[(short)24];
 
-		/// <summary>
-		/// 养虎遗患
-		/// </summary>
 		public static FameActionItem HealBad => Instance[(short)25];
 
-		/// <summary>
-		/// 出手伤人
-		/// </summary>
 		public static FameActionItem SurpriseAttack => Instance[(short)26];
 
-		/// <summary>
-		/// 惩戒恶人
-		/// </summary>
 		public static FameActionItem DisciplineEvil => Instance[(short)27];
 
-		/// <summary>
-		/// 偷师窃艺
-		/// </summary>
 		public static FameActionItem StealSkill => Instance[(short)28];
 
-		/// <summary>
-		/// 窃取财物
-		/// </summary>
 		public static FameActionItem Steal => Instance[(short)29];
 
-		/// <summary>
-		/// 抢劫财物
-		/// </summary>
 		public static FameActionItem Rob => Instance[(short)30];
 
-		/// <summary>
-		/// 掘坟盗墓
-		/// </summary>
 		public static FameActionItem RobGrave => Instance[(short)31];
 
-		/// <summary>
-		/// 施毒害人
-		/// </summary>
 		public static FameActionItem Poison => Instance[(short)32];
 
-		/// <summary>
-		/// 落荒而逃
-		/// </summary>
 		public static FameActionItem Escape => Instance[(short)33];
 
-		/// <summary>
-		/// 欺凌幼小
-		/// </summary>
 		public static FameActionItem FightChildren => Instance[(short)34];
 
-		/// <summary>
-		/// 趁人之危
-		/// </summary>
 		public static FameActionItem TakeAdventageOfOthers => Instance[(short)35];
 
-		/// <summary>
-		/// 比武得胜
-		/// </summary>
 		public static FameActionItem WinCombat => Instance[(short)36];
 
-		/// <summary>
-		/// 比武落败
-		/// </summary>
 		public static FameActionItem LoseCombat => Instance[(short)37];
 
-		/// <summary>
-		/// 宅心仁厚
-		/// </summary>
 		public static FameActionItem ResponseKind => Instance[(short)38];
 
-		/// <summary>
-		/// 义正辞严
-		/// </summary>
 		public static FameActionItem ResponseJust => Instance[(short)40];
 
-		/// <summary>
-		/// 恣肆无忌
-		/// </summary>
 		public static FameActionItem ResponseRebel => Instance[(short)42];
 
-		/// <summary>
-		/// 唯利是图
-		/// </summary>
 		public static FameActionItem ResponseEgoistic => Instance[(short)44];
 
-		/// <summary>
-		/// 流言蜚语
-		/// </summary>
 		public static FameActionItem RumorsAround => Instance[(short)46];
 
-		/// <summary>
-		/// 软弱可欺
-		/// </summary>
 		public static FameActionItem EasyToPickOn => Instance[(short)47];
 
-		/// <summary>
-		/// 受人恩惠
-		/// </summary>
 		public static FameActionItem GetAlms => Instance[(short)48];
 
-		/// <summary>
-		/// 受人斥责
-		/// </summary>
 		public static FameActionItem GetBlame => Instance[(short)49];
 
-		/// <summary>
-		/// 受人愚弄
-		/// </summary>
 		public static FameActionItem GetFooled => Instance[(short)50];
 
-		/// <summary>
-		/// 受人胁迫
-		/// </summary>
 		public static FameActionItem GetDuress => Instance[(short)51];
 
-		/// <summary>
-		/// 受人称赞
-		/// </summary>
 		public static FameActionItem GetPraised => Instance[(short)52];
 
-		/// <summary>
-		/// 受人嘲笑
-		/// </summary>
 		public static FameActionItem GetRidiculed => Instance[(short)53];
 
-		/// <summary>
-		/// 前人恩情
-		/// </summary>
 		public static FameActionItem InheritGoodOne => Instance[(short)54];
 
-		/// <summary>
-		/// 前人罪业
-		/// </summary>
 		public static FameActionItem InheritBadOne => Instance[(short)55];
 
-		/// <summary>
-		/// 芜行俚语
-		/// </summary>
 		public static FameActionItem Indecent => Instance[(short)56];
 
-		/// <summary>
-		/// 行乞讨钱
-		/// </summary>
 		public static FameActionItem Beg => Instance[(short)57];
 
-		/// <summary>
-		/// 庸医害命
-		/// </summary>
 		public static FameActionItem Quack => Instance[(short)58];
 
-		/// <summary>
-		/// 行侠仗义
-		/// </summary>
 		public static FameActionItem KillHeretic => Instance[(short)59];
 
-		/// <summary>
-		/// 杀害义士
-		/// </summary>
 		public static FameActionItem KillRighteous => Instance[(short)60];
 
-		/// <summary>
-		/// 伤风败俗
-		/// </summary>
 		public static FameActionItem Immoral => Instance[(short)61];
 
-		/// <summary>
-		/// 败坏清规
-		/// </summary>
 		public static FameActionItem BreakRules => Instance[(short)62];
 
-		/// <summary>
-		/// 罔顾人伦
-		/// </summary>
 		public static FameActionItem Unethical => Instance[(short)63];
 
-		/// <summary>
-		/// 欺师背祖
-		/// </summary>
 		public static FameActionItem Betrayal => Instance[(short)64];
 
-		/// <summary>
-		/// 负心薄幸
-		/// </summary>
 		public static FameActionItem Unfaithful => Instance[(short)65];
 
-		/// <summary>
-		/// 衣冠禽兽
-		/// </summary>
 		public static FameActionItem Rape => Instance[(short)66];
 
-		/// <summary>
-		/// 受人羞辱
-		/// </summary>
 		public static FameActionItem BeSneered => Instance[(short)67];
 
-		/// <summary>
-		/// 自取其辱
-		/// </summary>
 		public static FameActionItem SneerSelf => Instance[(short)68];
 
-		/// <summary>
-		/// 知难而上
-		/// </summary>
 		public static FameActionItem CombatWithStrong => Instance[(short)69];
 
-		/// <summary>
-		/// 欺软怕硬
-		/// </summary>
 		public static FameActionItem CombatWithWeak => Instance[(short)70];
 
-		/// <summary>
-		/// 正派名宗
-		/// </summary>
 		public static FameActionItem FriendWithGoodSects => Instance[(short)71];
 
-		/// <summary>
-		/// 邪派外道
-		/// </summary>
 		public static FameActionItem FriendWithEvilSects => Instance[(short)72];
 
-		/// <summary>
-		/// 亦正亦邪1
-		/// </summary>
 		public static FameActionItem FriendWithNeutralSects1 => Instance[(short)73];
 
-		/// <summary>
-		/// 亦正亦邪2
-		/// </summary>
 		public static FameActionItem FriendWithNeutralSects2 => Instance[(short)74];
 
-		/// <summary>
-		/// 较艺得胜
-		/// </summary>
 		public static FameActionItem WinSkill => Instance[(short)75];
 
-		/// <summary>
-		/// 较艺落败
-		/// </summary>
 		public static FameActionItem LoseSkill => Instance[(short)76];
 
-		/// <summary>
-		/// 制造名品
-		/// </summary>
 		public static FameActionItem MakeFamousItem => Instance[(short)77];
 
-		/// <summary>
-		/// 云蒸龙变
-		/// </summary>
 		public static FameActionItem DLCLoongDefeatLoong => Instance[(short)78];
 
-		/// <summary>
-		/// 擅闯库房
-		/// </summary>
 		public static FameActionItem IntrudeTreasury => Instance[(short)79];
 
-		/// <summary>
-		/// 掠夺库房
-		/// </summary>
 		public static FameActionItem PlunderTreasury => Instance[(short)80];
 
-		/// <summary>
-		/// 施仁布泽
-		/// </summary>
 		public static FameActionItem AidTreasury => Instance[(short)81];
 
-		/// <summary>
-		/// 负罪在身
-		/// </summary>
 		public static FameActionItem CommitCrime => Instance[(short)82];
 
-		/// <summary>
-		/// 缉逃擒凶
-		/// </summary>
 		public static FameActionItem CaptureCriminals => Instance[(short)83];
 
-		/// <summary>
-		/// 手艺不精
-		/// </summary>
 		public static FameActionItem LackSkill => Instance[(short)92];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static FameAction Instance = new FameAction();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "GoodJumpId", "BadJumpId", "NormalJumpId", "TemplateId", "Duration", "RepeatType", "MaxStackCount", "ReductionTime" };

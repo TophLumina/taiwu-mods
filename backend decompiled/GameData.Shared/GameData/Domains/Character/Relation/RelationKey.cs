@@ -3,31 +3,11 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Relation;
 
-/// <summary>
-/// 角色关系的索引
-/// </summary>
-public struct RelationKey : ISerializableGameData, IEquatable<RelationKey>
+public struct RelationKey(int charId, int relatedCharId) : ISerializableGameData, IEquatable<RelationKey>
 {
-	/// <summary>
-	/// 自身角色 ID
-	/// </summary>
-	public int CharId;
+	public int CharId = charId;
 
-	/// <summary>
-	/// 关系人角色 ID
-	/// </summary>
-	public int RelatedCharId;
-
-	/// <summary>
-	/// 角色关系的索引
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="relatedCharId"></param>
-	public RelationKey(int charId, int relatedCharId)
-	{
-		CharId = charId;
-		RelatedCharId = relatedCharId;
-	}
+	public int RelatedCharId = relatedCharId;
 
 	public static explicit operator ulong(RelationKey value)
 	{

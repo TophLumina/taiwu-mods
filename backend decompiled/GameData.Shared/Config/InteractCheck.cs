@@ -7,101 +7,44 @@ namespace Config;
 [Serializable]
 public class InteractCheck : ConfigData<InteractCheckItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 互动-敌对-唬骗
-		/// </summary>
 		public const short ScamAction = 0;
 
-		/// <summary>
-		/// 互动-敌对-窃取
-		/// </summary>
 		public const short StealAction = 1;
 
-		/// <summary>
-		/// 互动-敌对-抢夺
-		/// </summary>
 		public const short RobAction = 2;
 
-		/// <summary>
-		/// 互动-敌对-毒害
-		/// </summary>
 		public const short PoisonAction = 3;
 
-		/// <summary>
-		/// 互动-敌对-暗中损害
-		/// </summary>
 		public const short PlotHarmAction = 4;
 
-		/// <summary>
-		/// 互动-亲近-倾诉爱意
-		/// </summary>
 		public const short ConfessionLove = 5;
 
-		/// <summary>
-		/// 互动-修习-偷师技艺
-		/// </summary>
 		public const short StealLifeSkillAction = 6;
 
-		/// <summary>
-		/// 互动-修习-偷师功法
-		/// </summary>
 		public const short StealCombatSkillAction = 7;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 互动-敌对-唬骗
-		/// </summary>
 		public static InteractCheckItem ScamAction => Instance[(short)0];
 
-		/// <summary>
-		/// 互动-敌对-窃取
-		/// </summary>
 		public static InteractCheckItem StealAction => Instance[(short)1];
 
-		/// <summary>
-		/// 互动-敌对-抢夺
-		/// </summary>
 		public static InteractCheckItem RobAction => Instance[(short)2];
 
-		/// <summary>
-		/// 互动-敌对-毒害
-		/// </summary>
 		public static InteractCheckItem PoisonAction => Instance[(short)3];
 
-		/// <summary>
-		/// 互动-敌对-暗中损害
-		/// </summary>
 		public static InteractCheckItem PlotHarmAction => Instance[(short)4];
 
-		/// <summary>
-		/// 互动-亲近-倾诉爱意
-		/// </summary>
 		public static InteractCheckItem ConfessionLove => Instance[(short)5];
 
-		/// <summary>
-		/// 互动-修习-偷师技艺
-		/// </summary>
 		public static InteractCheckItem StealLifeSkillAction => Instance[(short)6];
 
-		/// <summary>
-		/// 互动-修习-偷师功法
-		/// </summary>
 		public static InteractCheckItem StealCombatSkillAction => Instance[(short)7];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static InteractCheck Instance = new InteractCheck();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "ActionPhaseList", "EscapePhaseList", "TemplateId" };

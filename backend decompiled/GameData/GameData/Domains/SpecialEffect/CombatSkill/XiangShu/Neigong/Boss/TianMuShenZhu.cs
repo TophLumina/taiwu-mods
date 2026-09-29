@@ -30,6 +30,7 @@ public class TianMuShenZhu : CombatSkillEffectBase, IMarkAppearHandler
 		_invoker.Setup();
 		Events.RegisterHandler_CombatBegin(OnCombatBegin);
 		CreateAffectedData(102, EDataModifyType.AddPercent, -1);
+		CreateAffectedData(327, EDataModifyType.Custom, -1);
 	}
 
 	public override void OnDisable(DataContext context)
@@ -66,5 +67,14 @@ public class TianMuShenZhu : CombatSkillEffectBase, IMarkAppearHandler
 		}
 		ShowSpecialEffectTipsOnceInFrame(0);
 		return -10 * base.EffectCount;
+	}
+
+	public override bool GetModifiedValue(AffectedDataKey dataKey, bool dataValue)
+	{
+		if (dataKey.CharId != base.CharacterId || dataKey.FieldId != 327)
+		{
+			return base.GetModifiedValue(dataKey, dataValue);
+		}
+		return true;
 	}
 }

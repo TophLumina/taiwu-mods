@@ -4,14 +4,8 @@ using GameData.Adventure;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇巡逻工具集
-/// </summary>
 public static class AdventurePatrolHelper
 {
-	/// <summary>
-	/// 巡逻目标校验器
-	/// </summary>
 	public static Dictionary<EAdventureElementMoveType, AdventurePatrolTargetChecker> TargetCheckers = new Dictionary<EAdventureElementMoveType, AdventurePatrolTargetChecker>
 	{
 		{

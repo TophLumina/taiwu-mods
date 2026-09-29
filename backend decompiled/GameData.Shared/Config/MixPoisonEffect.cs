@@ -7,221 +7,92 @@ namespace Config;
 [Serializable]
 public class MixPoisonEffect : ConfigData<MixPoisonEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 裂皮碎骨
-		/// </summary>
 		public const sbyte MixPoisonEffect034 = 0;
 
-		/// <summary>
-		/// 心残肉挫
-		/// </summary>
 		public const sbyte MixPoisonEffect045 = 1;
 
-		/// <summary>
-		/// 骨错筋缠
-		/// </summary>
 		public const sbyte MixPoisonEffect014 = 2;
 
-		/// <summary>
-		/// 肝肠寸断
-		/// </summary>
 		public const sbyte MixPoisonEffect024 = 3;
 
-		/// <summary>
-		/// 血迷关窍
-		/// </summary>
 		public const sbyte MixPoisonEffect345 = 4;
 
-		/// <summary>
-		/// 五脏败腐
-		/// </summary>
 		public const sbyte MixPoisonEffect134 = 5;
 
-		/// <summary>
-		/// 坏血断肠
-		/// </summary>
 		public const sbyte MixPoisonEffect234 = 6;
 
-		/// <summary>
-		/// 毒火焚心
-		/// </summary>
 		public const sbyte MixPoisonEffect035 = 7;
 
-		/// <summary>
-		/// 骨中烧疽
-		/// </summary>
 		public const sbyte MixPoisonEffect013 = 8;
 
-		/// <summary>
-		/// 血火阴杀
-		/// </summary>
 		public const sbyte MixPoisonEffect023 = 9;
 
-		/// <summary>
-		/// 摧心蚀元
-		/// </summary>
 		public const sbyte MixPoisonEffect125 = 10;
 
-		/// <summary>
-		/// 化骨封髓
-		/// </summary>
 		public const sbyte MixPoisonEffect124 = 11;
 
-		/// <summary>
-		/// 寒锥锁脉
-		/// </summary>
 		public const sbyte MixPoisonEffect012 = 12;
 
-		/// <summary>
-		/// 锁血凝髓
-		/// </summary>
 		public const sbyte MixPoisonEffect123 = 13;
 
-		/// <summary>
-		/// 邪阴彻体
-		/// </summary>
 		public const sbyte MixPoisonEffect245 = 14;
 
-		/// <summary>
-		/// 迷惧钻心
-		/// </summary>
 		public const sbyte MixPoisonEffect025 = 15;
 
-		/// <summary>
-		/// 剧恶深苦
-		/// </summary>
 		public const sbyte MixPoisonEffect235 = 16;
 
-		/// <summary>
-		/// 失魂鬼瘴
-		/// </summary>
 		public const sbyte MixPoisonEffect145 = 17;
 
-		/// <summary>
-		/// 绝脉乱心
-		/// </summary>
 		public const sbyte MixPoisonEffect015 = 18;
 
-		/// <summary>
-		/// 封颅闭血
-		/// </summary>
 		public const sbyte MixPoisonEffect135 = 19;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 裂皮碎骨
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect034 => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 心残肉挫
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect045 => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 骨错筋缠
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect014 => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 肝肠寸断
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect024 => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 血迷关窍
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect345 => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 五脏败腐
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect134 => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 坏血断肠
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect234 => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 毒火焚心
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect035 => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 骨中烧疽
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect013 => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 血火阴杀
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect023 => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 摧心蚀元
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect125 => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 化骨封髓
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect124 => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 寒锥锁脉
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect012 => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 锁血凝髓
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect123 => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 邪阴彻体
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect245 => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 迷惧钻心
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect025 => Instance[(sbyte)15];
 
-		/// <summary>
-		/// 剧恶深苦
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect235 => Instance[(sbyte)16];
 
-		/// <summary>
-		/// 失魂鬼瘴
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect145 => Instance[(sbyte)17];
 
-		/// <summary>
-		/// 绝脉乱心
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect015 => Instance[(sbyte)18];
 
-		/// <summary>
-		/// 封颅闭血
-		/// </summary>
 		public static MixPoisonEffectItem MixPoisonEffect135 => Instance[(sbyte)19];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MixPoisonEffect Instance = new MixPoisonEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "ShortDesc", "MedicineId", "EffectId", "HasPoisonTypes", "AffectPoisonTypes", "LifeRecord", "TemplateId" };

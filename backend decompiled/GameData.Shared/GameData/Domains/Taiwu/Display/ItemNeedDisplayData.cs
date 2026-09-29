@@ -5,38 +5,20 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 村民需要的物品显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class ItemNeedDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 物品显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData ItemDisplayData;
 
-	/// <summary>
-	/// 拿取的人物信息
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemNeedCharacterDisplayData> CharacterDisplayDataList;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
-	public ItemNeedDisplayData()
-	{
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -62,7 +44,6 @@ public class ItemNeedDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -118,7 +99,6 @@ public class ItemNeedDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

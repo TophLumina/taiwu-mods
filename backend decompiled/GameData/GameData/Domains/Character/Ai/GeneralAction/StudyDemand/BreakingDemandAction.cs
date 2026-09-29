@@ -38,34 +38,36 @@ public class BreakingDemandAction : IGeneralAction
 		int selfCharId = selfChar.GetId();
 		int targetCharId = targetChar.GetId();
 		CombatSkillItem combatSkillCfg = Config.CombatSkill.Instance[CombatSkillTemplateId];
-		SkillBookItem bookCfg = Config.SkillBook.Instance[combatSkillCfg.BookId];
-		LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
-		int currDate = DomainManager.World.GetCurrDate();
-		Location location = selfChar.GetLocation();
-		if (AgreeToRequest)
+		if (combatSkillCfg.BookId >= 0)
 		{
-			GameData.Domains.CombatSkill.CombatSkill combatSkill = DomainManager.CombatSkill.GetElement_CombatSkills(new CombatSkillKey(selfCharId, CombatSkillTemplateId));
-			ushort readingState = combatSkill.GetReadingState();
-			ushort activationState = CombatSkillStateHelper.GenerateRandomActivatedNormalPages(context.Random, readingState, 0);
-			activationState = CombatSkillStateHelper.GenerateRandomActivatedOutlinePage(context.Random, readingState, activationState, selfChar.GetBehaviorType());
-			sbyte availableStepsCount = selfChar.GetSkillBreakoutAvailableStepsCount(CombatSkillTemplateId);
-			combatSkill.SetActivationState(activationState, context);
-			combatSkill.SetBreakoutStepsCount(availableStepsCount, context);
-			selfChar.ChangeHappiness(context, ItemTemplateHelper.GetBaseHappinessChange(10, combatSkillCfg.BookId) / 2);
-			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, ItemTemplateHelper.GetBaseFavorabilityChange(10, combatSkillCfg.BookId));
-			lifeRecordCollection.AddRequestInstructionOnBreakoutSucceed(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
-			SecretInformationCollection secretInformationCollection = DomainManager.Information.GetSecretInformationCollection();
-			int secretInfoOffset = secretInformationCollection.AddAcceptRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
-			SecretInformationId secretInfoId = DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
-		}
-		else
-		{
-			selfChar.ChangeHappiness(context, -3);
-			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, -3000);
-			lifeRecordCollection.AddRequestInstructionOnBreakoutFail(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
-			SecretInformationCollection secretInformationCollection2 = DomainManager.Information.GetSecretInformationCollection();
-			int secretInfoOffset2 = secretInformationCollection2.AddRefuseRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
-			SecretInformationId secretInfoId2 = DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);
+			LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+			int currDate = DomainManager.World.GetCurrDate();
+			Location location = selfChar.GetLocation();
+			if (AgreeToRequest)
+			{
+				GameData.Domains.CombatSkill.CombatSkill combatSkill = DomainManager.CombatSkill.GetElement_CombatSkills(new CombatSkillKey(selfCharId, CombatSkillTemplateId));
+				ushort readingState = combatSkill.GetReadingState();
+				ushort activationState = CombatSkillStateHelper.GenerateRandomActivatedNormalPages(context.Random, readingState, 0);
+				activationState = CombatSkillStateHelper.GenerateRandomActivatedOutlinePage(context.Random, readingState, activationState, selfChar.GetBehaviorType());
+				sbyte availableStepsCount = selfChar.GetSkillBreakoutAvailableStepsCount(CombatSkillTemplateId);
+				combatSkill.SetActivationState(activationState, context);
+				combatSkill.SetBreakoutStepsCount(availableStepsCount, context);
+				selfChar.ChangeHappiness(context, ItemTemplateHelper.GetBaseHappinessChange(10, combatSkillCfg.BookId) / 2);
+				DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, ItemTemplateHelper.GetBaseFavorabilityChange(10, combatSkillCfg.BookId));
+				lifeRecordCollection.AddRequestInstructionOnBreakoutSucceed(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
+				SecretInformationCollection secretInformationCollection = DomainManager.Information.GetSecretInformationCollection();
+				int secretInfoOffset = secretInformationCollection.AddAcceptRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
+				SecretInformationId secretInfoId = DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
+			}
+			else
+			{
+				selfChar.ChangeHappiness(context, -3);
+				DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, selfChar, targetChar, -3000);
+				lifeRecordCollection.AddRequestInstructionOnBreakoutFail(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
+				SecretInformationCollection secretInformationCollection2 = DomainManager.Information.GetSecretInformationCollection();
+				int secretInfoOffset2 = secretInformationCollection2.AddRefuseRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
+				SecretInformationId secretInfoId2 = DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);
+			}
 		}
 	}
 }

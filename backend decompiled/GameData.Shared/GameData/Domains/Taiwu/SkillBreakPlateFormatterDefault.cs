@@ -1,14 +1,9 @@
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 突破盘默认格式化接口
-/// </summary>
 public class SkillBreakPlateFormatterDefault : ISkillBreakPlateFormatter
 {
-	/// <inheritdoc />
 	public string AlignSpace => " ";
 
-	/// <inheritdoc />
 	public string Format(SkillBreakPlateIndex index, SkillBreakPlateGrid grid)
 	{
 		sbyte templateId = grid.TemplateId;

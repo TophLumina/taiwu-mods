@@ -5,64 +5,34 @@ namespace GameData.Domains.CombatSkill;
 [SerializableGameData(NotForArchive = true)]
 public class CombatSkillBreakSuccessRateDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 基础成功率（结果）
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BaseSuccessRate;
 
-	/// <summary>
-	/// 基础的基础
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BaseBaseSuccessRate;
 
-	/// <summary>
-	/// 门派加成
-	/// </summary>
 	[SerializableGameDataField]
 	public byte OrganizationBonus;
 
-	/// <summary>
-	/// 悟性加成
-	/// </summary>
 	[SerializableGameDataField]
 	public byte AttributesBonus;
 
-	/// <summary>
-	/// 精纯加成
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ConsummateLevelBonus;
 
-	/// <summary>
-	/// 产业加成
-	/// </summary>
 	[SerializableGameDataField]
 	public byte BuildingBonus;
 
-	/// <summary>
-	/// 奇遇加成
-	/// </summary>
 	[SerializableGameDataField]
 	public byte AdventureBonus;
 
-	/// <summary>
-	/// 难度加成
-	/// </summary>
 	[SerializableGameDataField]
 	public byte DifficultyBonus;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CombatSkillBreakSuccessRateDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillBreakSuccessRateDisplayData(CombatSkillBreakSuccessRateDisplayData other)
 	{
 		BaseSuccessRate = other.BaseSuccessRate;
@@ -75,9 +45,6 @@ public class CombatSkillBreakSuccessRateDisplayData : ISerializableGameData
 		DifficultyBonus = other.DifficultyBonus;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillBreakSuccessRateDisplayData other)
 	{
 		BaseSuccessRate = other.BaseSuccessRate;
@@ -90,13 +57,11 @@ public class CombatSkillBreakSuccessRateDisplayData : ISerializableGameData
 		DifficultyBonus = other.DifficultyBonus;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -107,7 +72,6 @@ public class CombatSkillBreakSuccessRateDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = BaseSuccessRate;
@@ -133,7 +97,6 @@ public class CombatSkillBreakSuccessRateDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -3,20 +3,11 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Ai.PrioritizedAction;
 
-/// <summary>
-/// 优先行动冷却
-/// </summary>
 [Serializable]
 public struct PrioritizedActionCooldown(short templateId, int cooldown) : ISerializableGameData, IEquatable<PrioritizedActionCooldown>
 {
-	/// <summary>
-	/// 优先行动模板Id
-	/// </summary>
 	public short TemplateId = templateId;
 
-	/// <summary>
-	/// 冷却结束日期
-	/// </summary>
 	public int Cooldown = cooldown;
 
 	public bool IsSerializedSizeFixed()

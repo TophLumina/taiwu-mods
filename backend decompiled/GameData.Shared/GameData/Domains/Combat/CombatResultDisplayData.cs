@@ -12,112 +12,56 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 战斗结果显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class CombatResultDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 战斗状态类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CombatStatus;
 
-	/// <summary>
-	/// 是否全选掉落物
-	/// </summary>
 	[SerializableGameDataField]
 	public bool SelectAllItem;
 
-	/// <summary>
-	/// 战斗结果快照-战前状态
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatResultSnapshot SnapshotBeforeCombat;
 
-	/// <summary>
-	/// 战斗结果快照-战斗状态
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatResultSnapshot SnapshotAfterCombat;
 
-	/// <summary>
-	/// 获得历练值
-	/// </summary>
 	[SerializableGameDataField]
 	public int Exp;
 
-	/// <summary>
-	/// 获得资源值
-	/// </summary>
 	[SerializableGameDataField]
 	public ResourceInts Resource;
 
-	/// <summary>
-	/// 获得地区恩义
-	/// </summary>
 	[SerializableGameDataField]
 	public int AreaSpiritualDebt;
 
-	/// <summary>
-	/// 是否显示灵光一闪
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowReadingEvent;
 
-	/// <summary>
-	/// 是否显示天人感应
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowLoopingEvent;
 
-	/// <summary>
-	/// 评价列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> EvaluationList = new List<sbyte>();
 
-	/// <summary>
-	/// 掉落道具列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> ItemList = new List<ItemDisplayData>();
 
-	/// <summary>
-	/// 获得人物列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> CharList;
 
-	/// <summary>
-	/// 遗惠卡列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LegacyTemplateIds;
 
-	/// <summary>
-	/// 有变化的功法实战度数据
-	/// 功法 ID -&gt; 变化后的实战度
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> ChangedProficiencies;
 
-	/// <summary>
-	/// 有变化的功法实战度数据差值
-	/// 功法 ID -&gt; 实战度差值
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, int> ChangedProficienciesDelta;
 
-	/// <summary>
-	/// 掉落道具来源人物，非序列化字段
-	/// </summary>
 	public Dictionary<ItemKey, int> ItemSrcCharDict = new Dictionary<ItemKey, int>();
 
-	/// <summary>
-	/// 是否主角胜利
-	/// </summary>
 	public bool IsWin
 	{
 		get
@@ -130,37 +74,18 @@ public class CombatResultDisplayData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 战斗评价配置
-	/// </summary>
 	public IEnumerable<CombatEvaluationItem> Evaluations => EvaluationList.Select(ParseEvaluation);
 
-	/// <summary>
-	/// 选取战斗评价配置
-	/// </summary>
 	public IEnumerable<T> SelectEvaluations<T>(Func<CombatEvaluationItem, T> selector)
 	{
 		return Evaluations.Select(selector);
 	}
 
-	/// <summary>
-	/// 转换战斗评价配置
-	/// </summary>
-	/// <param name="evaluationTemplateId"></param>
-	/// <returns></returns>
 	private static CombatEvaluationItem ParseEvaluation(sbyte evaluationTemplateId)
 	{
 		return CombatEvaluation.Instance[evaluationTemplateId];
 	}
 
-	/// <summary>
-	/// 计算战斗评价加成值
-	/// </summary>
-	/// <param name="baseValue">基础值</param>
-	/// <param name="selectorB">战斗评价 B 类加成值选取器</param>
-	/// <param name="selectorC">战斗评价 C 类加成值选取器</param>
-	/// <param name="extraAddPercent">额外 B 类加成值</param>
-	/// <returns>加成后的值</returns>
 	public int ModifyValue(int baseValue, Func<CombatEvaluationItem, int> selectorB, Func<CombatEvaluationItem, int> selectorC, int extraAddPercent = 0)
 	{
 		CValuePercentBonus percent = Math.Max(CalcEvaluationSum(selectorB) + extraAddPercent, -100);
@@ -168,39 +93,23 @@ public class CombatResultDisplayData : ISerializableGameData
 		return baseValue * percent * totalPercent;
 	}
 
-	/// <summary>
-	/// 获取经验加成统计
-	/// </summary>
-	/// <param name="addPercent">B类加成总和（如 150 表示 +150%）</param>
-	/// <param name="totalPercent">C类加成总和（如 50 表示 *150%）</param>
 	public void GetExpBonusStats(out int addPercent, out int totalPercent)
 	{
 		addPercent = CalcEvaluationSum((CombatEvaluationItem cfg) => cfg.ExpAddPercent);
 		totalPercent = Math.Max(CalcEvaluationTotal((CombatEvaluationItem cfg) => cfg.ExpTotalPercent), -100);
 	}
 
-	/// <summary>
-	/// 获取威望加成统计
-	/// </summary>
-	/// <param name="addPercent">B类加成总和</param>
-	/// <param name="totalPercent">C类加成总和</param>
 	public void GetAuthorityBonusStats(out int addPercent, out int totalPercent)
 	{
 		addPercent = CalcEvaluationSum((CombatEvaluationItem cfg) => cfg.AuthorityAddPercent);
 		totalPercent = Math.Max(CalcEvaluationTotal((CombatEvaluationItem cfg) => cfg.AuthorityTotalPercent), -100);
 	}
 
-	/// <summary>
-	/// 计算累加类型加成（B类）
-	/// </summary>
 	private int CalcEvaluationSum(Func<CombatEvaluationItem, int> selector)
 	{
 		return SelectEvaluations(selector).Sum();
 	}
 
-	/// <summary>
-	/// 计算最大最小类型加成（C类）
-	/// </summary>
 	private int CalcEvaluationTotal(Func<CombatEvaluationItem, int> selector)
 	{
 		int totalPercentAdd = 0;
@@ -219,13 +128,11 @@ public class CombatResultDisplayData : ISerializableGameData
 		return totalPercentAdd + totalPercentReduce;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 500;
@@ -268,7 +175,6 @@ public class CombatResultDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -391,7 +297,6 @@ public class CombatResultDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

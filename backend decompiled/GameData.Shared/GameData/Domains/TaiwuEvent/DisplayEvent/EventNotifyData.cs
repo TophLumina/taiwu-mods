@@ -6,33 +6,18 @@ namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
 public class EventNotifyData : ISerializableGameData
 {
-	/// <summary>
-	/// 标题的多语言Key
-	/// </summary>
 	[SerializableGameDataField]
 	public string TitleKey;
 
-	/// <summary>
-	/// 标题的格式化参数
-	/// </summary>
 	[SerializableGameDataField]
 	public string[] TitleFormatArgs;
 
-	/// <summary>
-	/// 文本的多语言key
-	/// </summary>
 	[SerializableGameDataField]
 	public string ContentKey;
 
-	/// <summary>
-	/// 文本的格式化参数
-	/// </summary>
 	[SerializableGameDataField]
 	public string[] ContentFormatArgs;
 
-	/// <summary>
-	/// 空白通知
-	/// </summary>
 	public static readonly EventNotifyData Empty = new EventNotifyData();
 
 	public EventNotifyData()

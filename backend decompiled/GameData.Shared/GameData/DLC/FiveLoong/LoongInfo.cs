@@ -8,9 +8,6 @@ using GameData.Utilities;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 地图上神龙的信息
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class LoongInfo : ISerializableGameData
 {
@@ -41,96 +38,46 @@ public class LoongInfo : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[10] { "CharacterTemplateId", "IsDisappear", "TaiwuDebuffCount", "LoongTerrainCenterLocation", "LoongCurrentLocation", "CoveredMapBlockTemplateId", "DisappearDate", "MinionLoongBlockList", "CharacterDebuffCounts", "MapBlockExtraItems" };
 	}
 
-	/// <summary>
-	/// 神龙地形范围：距离中心位置
-	/// </summary>
 	public const short LoongTerrainRange = 3;
 
-	/// <summary>
-	/// 神龙消失再次出现的时间间隔
-	/// 108=9年*12
-	/// </summary>
 	public const short LoongDisappearTime = 108;
 
-	/// <summary>
-	/// 角色模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public short CharacterTemplateId;
 
-	/// <summary>
-	/// 是否处于被降服的状态
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsDisappear;
 
-	/// <summary>
-	/// 被降服的时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int DisappearDate;
 
-	/// <summary>
-	/// 太吾的标记数量
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public ushort TaiwuDebuffCount;
 
-	/// <summary>
-	/// 神龙地形的中心位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location LoongTerrainCenterLocation;
 
-	/// <summary>
-	/// 神龙当前的位置（移动用）
-	/// </summary>
 	[SerializableGameDataField]
 	public Location LoongCurrentLocation;
 
-	/// <summary>
-	/// 地格被覆盖前的类型
-	/// key: blockId  value:TemplateId
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, short> CoveredMapBlockTemplateId;
 
-	/// <summary>
-	/// 地格额外物品数据表
-	/// key: blockId value:额外物品数据集合
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<Location, Inventory> MapBlockExtraItems = new Dictionary<Location, Inventory>();
 
-	/// <summary>
-	/// 神龙被击败后小龙逃窜的地格；神龙再次出现前要移除他们
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public List<short> MinionLoongBlockList;
 
-	/// <summary>
-	/// npc的标记数量
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, ushort> CharacterDebuffCounts;
 
-	/// <summary>
-	/// 龙的 ID
-	/// </summary>
 	public short LoongTemplateId => (short)(CharacterTemplateId - 246);
 
-	/// <summary>
-	/// 模板数据
-	/// </summary>
 	public LoongItem ConfigData => Loong.Instance[LoongTemplateId];
 
-	/// <summary>
-	/// 修改角色的 Debuff 数量
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <param name="delta"></param>
 	public void ChangeCharacterDebuffCount(int charId, int delta)
 	{
 		if (CharacterDebuffCounts == null)
@@ -155,11 +102,6 @@ public class LoongInfo : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取角色的 Debuff 数量
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public ushort GetCharacterDebuffCount(int charId)
 	{
 		if (CharacterDebuffCounts == null)
@@ -173,22 +115,11 @@ public class LoongInfo : ISerializableGameData
 		return value;
 	}
 
-	/// <summary>
-	/// 角色模板ID 转为 龙的模板ID
-	/// </summary>
-	/// <param name="charTemplateId"><see cref="T:Config.Character" /></param>
-	/// <returns><see cref="T:Config.Loong" /></returns>
 	public static short CharacterTemplateIdToLoongTemplateId(short charTemplateId)
 	{
 		return (short)(charTemplateId - 246);
 	}
 
-	/// <summary>
-	/// 构造方法
-	/// </summary>
-	/// <param name="charTemplateId"></param>
-	/// <param name="initialLocation"></param>
-	/// <param name="coveredMapBlockTemplateId"></param>
 	public LoongInfo(short charTemplateId, Location initialLocation, Dictionary<short, short> coveredMapBlockTemplateId)
 	{
 		CharacterTemplateId = charTemplateId;
@@ -197,20 +128,15 @@ public class LoongInfo : ISerializableGameData
 		CoveredMapBlockTemplateId = coveredMapBlockTemplateId;
 	}
 
-	/// <summary>
-	/// 反序列化器所必须
-	/// </summary>
 	public LoongInfo()
 	{
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 19;
@@ -225,7 +151,6 @@ public class LoongInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -269,7 +194,6 @@ public class LoongInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

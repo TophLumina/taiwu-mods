@@ -7,121 +7,52 @@ namespace Config;
 [Serializable]
 public class AvatarHead : ConfigData<AvatarHeadItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 男孩瘦头型
-		/// </summary>
 		public const byte ThinBoy = 6;
 
-		/// <summary>
-		/// 女孩瘦头型
-		/// </summary>
 		public const byte ThinGirl = 7;
 
-		/// <summary>
-		/// 男孩胖头型
-		/// </summary>
 		public const byte FatBoy = 8;
 
-		/// <summary>
-		/// 女孩胖头型
-		/// </summary>
 		public const byte FatGirl = 9;
 
-		/// <summary>
-		/// 男性瘦骷髅
-		/// </summary>
 		public const byte MaleThinSkeleton = 10;
 
-		/// <summary>
-		/// 女性瘦骷髅
-		/// </summary>
 		public const byte FemaleThinSkeleton = 11;
 
-		/// <summary>
-		/// 男性中骷髅
-		/// </summary>
 		public const byte MaleNormalSkeleton = 12;
 
-		/// <summary>
-		/// 女性中骷髅
-		/// </summary>
 		public const byte FemaleNormalSkeleton = 13;
 
-		/// <summary>
-		/// 男性胖骷髅
-		/// </summary>
 		public const byte MaleStrongSkeleton = 14;
 
-		/// <summary>
-		/// 女性胖骷髅
-		/// </summary>
 		public const byte FemaleStrongSkeleton = 15;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 男孩瘦头型
-		/// </summary>
 		public static AvatarHeadItem ThinBoy => Instance[(byte)6];
 
-		/// <summary>
-		/// 女孩瘦头型
-		/// </summary>
 		public static AvatarHeadItem ThinGirl => Instance[(byte)7];
 
-		/// <summary>
-		/// 男孩胖头型
-		/// </summary>
 		public static AvatarHeadItem FatBoy => Instance[(byte)8];
 
-		/// <summary>
-		/// 女孩胖头型
-		/// </summary>
 		public static AvatarHeadItem FatGirl => Instance[(byte)9];
 
-		/// <summary>
-		/// 男性瘦骷髅
-		/// </summary>
 		public static AvatarHeadItem MaleThinSkeleton => Instance[(byte)10];
 
-		/// <summary>
-		/// 女性瘦骷髅
-		/// </summary>
 		public static AvatarHeadItem FemaleThinSkeleton => Instance[(byte)11];
 
-		/// <summary>
-		/// 男性中骷髅
-		/// </summary>
 		public static AvatarHeadItem MaleNormalSkeleton => Instance[(byte)12];
 
-		/// <summary>
-		/// 女性中骷髅
-		/// </summary>
 		public static AvatarHeadItem FemaleNormalSkeleton => Instance[(byte)13];
 
-		/// <summary>
-		/// 男性胖骷髅
-		/// </summary>
 		public static AvatarHeadItem MaleStrongSkeleton => Instance[(byte)14];
 
-		/// <summary>
-		/// 女性胖骷髅
-		/// </summary>
 		public static AvatarHeadItem FemaleStrongSkeleton => Instance[(byte)15];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AvatarHead Instance = new AvatarHead();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "DisplayDesc", "RelativeExtraPart", "TemplateId", "HeadId", "NameOrPath" };

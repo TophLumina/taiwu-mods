@@ -2,9 +2,6 @@ using System;
 
 namespace Config.ConfigCells;
 
-/// <summary>
-/// 敌人巢穴生成信息
-/// </summary>
 [Serializable]
 public class EnemyNestCreationInfo
 {

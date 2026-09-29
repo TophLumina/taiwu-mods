@@ -3,40 +3,14 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 猎户召唤的野兽索引
-/// </summary>
-public struct HunterAnimalKey : ISerializableGameData, IEquatable<HunterAnimalKey>
+public struct HunterAnimalKey(short areaId, short blockId, short animalId) : ISerializableGameData, IEquatable<HunterAnimalKey>
 {
-	/// <summary>
-	/// 区域ID
-	/// </summary>
-	public short AreaId;
+	public short AreaId = areaId;
 
-	/// <summary>
-	/// 地块ID
-	/// </summary>
-	public short BlockId;
+	public short BlockId = blockId;
 
-	/// <summary>
-	/// 野兽ID
-	/// </summary>
-	public short AnimalId;
+	public short AnimalId = animalId;
 
-	/// <summary>
-	/// 默认构造函数
-	/// </summary>
-	/// <param name="areaId"></param>
-	/// <param name="blockId"></param>
-	/// <param name="animalId"></param>
-	public HunterAnimalKey(short areaId, short blockId, short animalId)
-	{
-		AreaId = areaId;
-		BlockId = blockId;
-		AnimalId = animalId;
-	}
-
-	/// <inheritdoc />
 	public bool Equals(HunterAnimalKey other)
 	{
 		if (AreaId == other.AreaId && BlockId == other.BlockId)
@@ -46,7 +20,6 @@ public struct HunterAnimalKey : ISerializableGameData, IEquatable<HunterAnimalKe
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override bool Equals(object obj)
 	{
 		if (obj is HunterAnimalKey other)
@@ -56,19 +29,16 @@ public struct HunterAnimalKey : ISerializableGameData, IEquatable<HunterAnimalKe
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override int GetHashCode()
 	{
 		return (((AreaId.GetHashCode() * 397) ^ BlockId.GetHashCode()) * 397) ^ AnimalId.GetHashCode();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -79,7 +49,6 @@ public struct HunterAnimalKey : ISerializableGameData, IEquatable<HunterAnimalKe
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = AreaId;
@@ -95,7 +64,6 @@ public struct HunterAnimalKey : ISerializableGameData, IEquatable<HunterAnimalKe
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

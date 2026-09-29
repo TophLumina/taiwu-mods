@@ -6,28 +6,12 @@ namespace Config;
 [Serializable]
 public class SamsaraPlatformRecordItem : ConfigItem<SamsaraPlatformRecordItem, short>
 {
-	/// <summary>
-	/// 模板ID
-	/// </summary>
 	public readonly short TemplateId;
 
-	/// <summary>
-	/// 说明
-	/// </summary>
 	public readonly string Desc;
 
-	/// <summary>
-	/// 参数
-	/// - 此字段自动生成, 其数据来自 "参数0" 到 "参数5" 共 6 个字段.
-	/// </summary>
 	public readonly string[] Parameters;
 
-	/// <summary>
-	/// 构造器 - constructor0
-	/// </summary>
-	/// <param name="templateId">模板ID</param>
-	/// <param name="desc">说明</param>
-	/// <param name="parameters">参数 - 此字段自动生成, 其数据来自 "参数0" 到 "参数5" 共 6 个字段.</param>
 	public SamsaraPlatformRecordItem(short templateId, string desc, string[] parameters)
 	{
 		TemplateId = templateId;
@@ -35,9 +19,6 @@ public class SamsaraPlatformRecordItem : ConfigItem<SamsaraPlatformRecordItem, s
 		Parameters = parameters;
 	}
 
-	/// <summary>
-	/// 默认构造器 - constructor1
-	/// </summary>
 	public SamsaraPlatformRecordItem()
 	{
 		TemplateId = 0;
@@ -45,9 +26,6 @@ public class SamsaraPlatformRecordItem : ConfigItem<SamsaraPlatformRecordItem, s
 		Parameters = new string[5] { "", "", "", "", "" };
 	}
 
-	/// <summary>
-	/// 复制构造器 - constructor2
-	/// </summary>
 	public SamsaraPlatformRecordItem(short templateId, SamsaraPlatformRecordItem other)
 	{
 		TemplateId = templateId;
@@ -60,10 +38,6 @@ public class SamsaraPlatformRecordItem : ConfigItem<SamsaraPlatformRecordItem, s
 		return TemplateId;
 	}
 
-	/// <summary>
-	/// 以指定Id生成ConfigData的副本
-	/// </summary>
-	/// <param name="templateId"></param>
 	public override SamsaraPlatformRecordItem Duplicate(int templateId)
 	{
 		return new SamsaraPlatformRecordItem((short)templateId, this);

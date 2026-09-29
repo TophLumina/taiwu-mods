@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class ResourceCollection : ConfigData<ResourceCollectionItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ResourceCollection Instance = new ResourceCollection();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "ItemIdList", "TemplateId" };

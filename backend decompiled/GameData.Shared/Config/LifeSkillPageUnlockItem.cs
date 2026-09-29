@@ -6,9 +6,6 @@ namespace Config;
 [Serializable]
 public struct LifeSkillPageUnlockItem
 {
-	/// <summary>
-	/// 通过解锁名称索引到解锁类型
-	/// </summary>
 	private static readonly Dictionary<string, LifeSkillPageUnlockType> Name2UnlockType;
 
 	public LifeSkillPageUnlockType Type;

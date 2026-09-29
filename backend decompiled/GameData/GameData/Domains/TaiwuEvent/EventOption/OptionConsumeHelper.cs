@@ -15,6 +15,10 @@ public static class OptionConsumeHelper
 		{
 			return DomainManager.World.GetLeftDaysInCurrMonth() >= info.ConsumeCount;
 		}
+		if (info.ConsumeType == 18)
+		{
+			return DomainManager.Extra.GetTotalActionPointsRemaining() >= info.ConsumeCount;
+		}
 		if (info.ConsumeType == 9 && DomainManager.Character.TryGetElement_Objects(targetId, out var target) && target != null)
 		{
 			Settlement settlement = DomainManager.Organization.GetSettlement(target.GetOrganizationInfo().SettlementId);
@@ -49,7 +53,11 @@ public static class OptionConsumeHelper
 	{
 		if (info.ConsumeType == 8)
 		{
-			return DomainManager.Extra.GetTotalActionPointsRemaining() / 10;
+			return DomainManager.World.GetLeftDaysInCurrMonth();
+		}
+		if (info.ConsumeType == 18)
+		{
+			return DomainManager.Extra.GetTotalActionPointsRemaining();
 		}
 		if (info.ConsumeType == 9 && DomainManager.Character.TryGetElement_Objects(targetId, out var target) && target != null)
 		{
@@ -89,11 +97,12 @@ public static class OptionConsumeHelper
 		DataContext context = DomainManager.TaiwuEvent.MainThreadDataContext;
 		if (info.ConsumeType == 8)
 		{
-			if (taiwuId != DomainManager.Taiwu.GetTaiwuCharId())
-			{
-				throw new Exception("consume move point can only called by taiwu exception");
-			}
 			DomainManager.World.AdvanceDaysInMonth(context, info.ConsumeCount);
+			return true;
+		}
+		if (info.ConsumeType == 18)
+		{
+			DomainManager.World.ConsumeActionPoint(context, info.ConsumeCount);
 			return true;
 		}
 		if (info.ConsumeType == 9 && DomainManager.Character.TryGetElement_Objects(targetId, out var characterB) && characterB != null)

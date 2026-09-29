@@ -2,24 +2,11 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.AvatarSystem;
 
-/// <summary>
-/// 角色形象部件的生长进度 (实际上是会生长出来的日期)
-/// </summary>
 [SerializableGameData(NotForDisplayModule = true)]
 public struct AvatarElementsGrownDates : ISerializableGameData
 {
-	/// <summary>
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.Character.AvatarSystem.AvatarGrowableElementType" />
-	/// </summary>
 	public unsafe fixed int Items[7];
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 AvatarGrowableElementType.Count == 7.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (int* items = Items)
@@ -65,10 +52,6 @@ public struct AvatarElementsGrownDates : ISerializableGameData
 		return 28;
 	}
 
-	/// <summary>
-	/// 返回是否包含有效数据
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool ContainsValidData()
 	{
 		for (int i = 0; i < 7; i++)

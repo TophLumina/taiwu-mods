@@ -5,83 +5,42 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 五方神龙 - 蛟和龙子在前端显示时的数据结构
-/// 用于一次获取tips需要显示的数据，不再需要多层异步
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class JiaoLoongDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 蛟从卵开始使用的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 物品的显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData ItemDisplayData;
 
-	/// <summary>
-	/// 是蛟还是龙子
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsJiao;
 
-	/// <summary>
-	/// 蛟的数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Jiao Jiao;
 
-	/// <summary>
-	/// 龙子的数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ChildrenOfLoong Loong;
 
-	/// <summary>
-	/// 可选的化龙结果
-	/// 小于等于0时不可化龙
-	/// </summary>
 	[SerializableGameDataField]
 	public int EvolutionChoice;
 
-	/// <summary>
-	/// 根据当前ItemKey的TemplateId获取的Jiao配置表中的TemplateId
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 驯服度
-	/// </summary>
 	[SerializableGameDataField]
 	public int TamePoint;
 
-	/// <summary>
-	/// 最大驯服度
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxTamePoint;
 
-	/// <summary>
-	/// 蛟龙名称数据
-	/// </summary>
 	[SerializableGameDataField]
 	public JiaoLoongNameRelatedData JiaoLoongNameRelatedData;
 
-	/// <summary>
-	/// 颜色数量
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ColorCount;
 
-	/// <summary>
-	/// 是否是蛟卵
-	/// </summary>
 	public bool IsEgg
 	{
 		get
@@ -106,11 +65,10 @@ public class JiaoLoongDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 20;
+		int totalSize = 32;
 		totalSize = ((ItemDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + ItemDisplayData.GetSerializedSize())));
 		totalSize = ((Jiao == null) ? (totalSize + 2) : (totalSize + (2 + Jiao.GetSerializedSize())));
 		totalSize = ((Loong == null) ? (totalSize + 2) : (totalSize + (2 + Loong.GetSerializedSize())));
-		totalSize += JiaoLoongNameRelatedData.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

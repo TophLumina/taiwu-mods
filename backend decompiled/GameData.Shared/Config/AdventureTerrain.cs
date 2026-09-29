@@ -7,41 +7,20 @@ namespace Config;
 [Serializable]
 public class AdventureTerrain : ConfigData<AdventureTerrainItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 山岭
-		/// </summary>
 		public const sbyte NormalStart = 1;
 
-		/// <summary>
-		/// 深渊
-		/// </summary>
 		public const sbyte NormalEnd = 22;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 山岭
-		/// </summary>
 		public static AdventureTerrainItem NormalStart => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 深渊
-		/// </summary>
 		public static AdventureTerrainItem NormalEnd => Instance[(sbyte)22];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureTerrain Instance = new AdventureTerrain();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "Img", "FlatImg", "EventBack", "CombatSceneId" };

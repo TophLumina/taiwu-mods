@@ -89,7 +89,7 @@ public class XueZhuHuaBaFa : CombatSkillEffectBase
 
 	private void OnCastSkillEnd(DataContext context, int charId, bool isAlly, short skillId, sbyte power, bool interrupted)
 	{
-		if (SkillKey.IsMatch(charId, skillId) && PowerMatchAffectRequire(power) && _effectCount < base.MaxEffectCount && !base.EnemyChar.CheckHealthImmunity(context))
+		if (SkillKey.IsMatch(charId, skillId) && PowerMatchAffectRequire(power) && _effectCount < base.MaxEffectCount && !base.EnemyChar.CheckImmunityAndShowEffect(EMarkType.Health))
 		{
 			short health = base.EnemyChar.GetCharacter().GetHealth();
 			int unit = Math.Min(health * AbsorbsHealthPercent / 12, base.MaxEffectCount - _effectCount);

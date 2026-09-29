@@ -3,24 +3,24 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.LifeRecord;
 
-[AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
-public class TransferableLifeRecordMonthData
+[AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true, AllowFixedSize = false)]
+public class TransferableLifeRecordMonthData : ISerializableGameData
 {
-	[SerializableGameDataField(FieldIndex = 0)]
+	[SerializableGameDataField]
 	public int Date;
 
-	[SerializableGameDataField(FieldIndex = 1)]
+	[SerializableGameDataField]
 	public int Index;
 
-	[SerializableGameDataField(FieldIndex = 2)]
+	[SerializableGameDataField]
 	public int Score;
 
-	[SerializableGameDataField(FieldIndex = 3)]
+	[SerializableGameDataField]
 	public int DataCount;
 
 	public bool IsSerializedSizeFixed()
 	{
-		return true;
+		return false;
 	}
 
 	public int GetSerializedSize()

@@ -6,231 +6,119 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 姬穸特殊互动
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class JixiSpecialInteractDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 当前姬穸Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int JixiCharId;
 
-	/// <summary>
-	/// 当前姬穸形态配置Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int JixiCurrentTemplateId;
 
-	/// <summary>
-	/// 太吾指定的姬穸吃人/吸取目标角色ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int JixiTargetCharIdByTaiwu = -1;
 
-	/// <summary>
-	/// 姬穸目标角色的显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData JixiTargetCharacterDisplayData;
 
-	/// <summary>
-	/// 太吾指定的姬穸目标真气类型
-	/// NeiliAllocationType
-	/// </summary>
 	[SerializableGameDataField]
 	public short DrainTargetNeiliAllocType = -1;
 
-	/// <summary>
-	/// 吸取的真气（当前状态）
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList NeiliAllocProgressDrained;
 
-	/// <summary>
-	/// 固定的真气进度（正常的每点额外真气需要的进度是递增的，姬穸的吸取和成长进度都是固定的）
-	/// </summary>
 	[SerializableGameDataField]
 	public int FixedNeiliProgressPerAllocation;
 
-	/// <summary>
-	/// 当前成长进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int GrowthValue;
 
-	/// <summary>
-	/// 成长至青年所需成长进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int GrowthTotalYoung;
 
-	/// <summary>
-	/// 成长至成年所需成长进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int GrowthTotalAdult;
 
-	/// <summary>
-	/// 杀死的角色数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int KillAmount;
 
-	/// <summary>
-	/// 吸取的真气点数（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int NeiliAllocDrainedTotal;
 
-	/// <summary>
-	/// 传给太吾的真气（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int TransferToTaiwuTotal;
 
-	/// <summary>
-	/// 从太吾获取的真气（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int TransferFromTaiwuTotal;
 
-	/// <summary>
-	/// 消灭的外道数量（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int TempalteEnemyKilledTotal;
 
-	/// <summary>
-	/// 消灭的外道获取的恩义（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int KillTempalteEnemyGainTotal;
 
-	/// <summary>
-	/// 形态变换次数（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] ChangeFormTotal = new int[3];
 
-	/// <summary>
-	/// 为太吾恢复健康次数（总计）
-	/// </summary>
 	[SerializableGameDataField]
 	public int RescueTaiwuTimes;
 
-	/// <summary>
-	/// 吸取的真气（对当前目标的吸取进度）
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList CurrentTargetNeiliAllocProgressDrained;
 
-	/// <summary>
-	/// 当前形态 吃人数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrentFormKillAmount;
 
-	/// <summary>
-	/// 当前形态 吸取的真气进度
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList CurrentFormNeiliAllocProgressDrained;
 
-	/// <summary>
-	/// 当前形态 每月吸真气进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrentFormMonthlyProgress;
 
-	/// <summary>
-	/// 杀死的目标列表（DeadCharacter）
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> KillTargets;
 
-	/// <summary>
-	/// 当前是否在吸食真气状态 false则表示在吃人 
-	/// </summary>
 	[SerializableGameDataField]
 	public bool JixiDrainNeili;
 
-	/// <summary>
-	///  姬穸对太吾的好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public short Favorability;
 
-	/// <summary>
-	/// 被吸食目标的基础真气
-	/// </summary>
 	[SerializableGameDataField]
 	public NeiliAllocation BaseNeiliAllocation;
 
-	/// <summary>
-	/// 被吸食目标的额外真气
-	/// </summary>
 	[SerializableGameDataField]
 	public NeiliAllocation ExtraNeiliAllocation;
 
-	/// <summary>
-	/// 恢复健康等操作消耗的成长进度
-	/// </summary>
 	[SerializableGameDataField]
 	public int CostedGrowthValue;
 
-	/// <summary>
-	/// 向太吾转移的真气进度，每55点进度 使太吾+1点真气。
-	/// 此处只记录遗留的进度，再次转移时加上该遗留进度之后 再计算实际使太吾增加几点真气
-	/// </summary>
 	[SerializableGameDataField]
 	public float[] NeiliAllocProgressTransferRemain;
 
-	/// <summary>
-	/// 太吾转移五行的目标Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuTargetCharacterId;
 
-	/// <summary>
-	/// 太吾转移五行的目标显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData TaiwuTargetCharacterDisplayData;
 
-	/// <summary>
-	/// 太吾转移五行的目标五行类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TaiwuTargetFiveElementsType;
 
-	/// <summary>
-	/// 太吾转移五行的目标的五行属性
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] TaiwuTargetCharacterFiveElements;
 
-	/// <summary>
-	/// 太吾转移当前目标五行的总量
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] TaiwuTransformFiveElementsCurrent;
 
-	/// <summary>
-	/// 太吾转移五行的总量
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] TaiwuTransformFiveElementsTotal;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 94;
@@ -252,7 +140,6 @@ public class JixiSpecialInteractDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -449,7 +336,6 @@ public class JixiSpecialInteractDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

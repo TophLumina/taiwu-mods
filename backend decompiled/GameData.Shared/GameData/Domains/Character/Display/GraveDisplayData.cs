@@ -3,9 +3,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 坟墓显示数据。用于向前端返回显示所需数据，使前端不必监听坟墓数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NotForArchive = true, NoCopyConstructors = true)]
 public class GraveDisplayData : ISerializableGameData
 {
@@ -13,7 +10,7 @@ public class GraveDisplayData : ISerializableGameData
 	public int Id;
 
 	[SerializableGameDataField]
-	public short TemplateId;
+	public short OrgTemplateId;
 
 	[SerializableGameDataField]
 	public NameRelatedData NameData;
@@ -39,20 +36,16 @@ public class GraveDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public bool IsSearchedCharacter;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
+	public short TemplateId => NameData.CharTemplateId;
+
 	public GraveDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public GraveDisplayData(GraveDisplayData other)
 	{
 		Id = other.Id;
-		TemplateId = other.TemplateId;
+		OrgTemplateId = other.OrgTemplateId;
 		NameData = other.NameData;
 		OrgSettlementId = other.OrgSettlementId;
 		Principal = other.Principal;
@@ -63,13 +56,10 @@ public class GraveDisplayData : ISerializableGameData
 		IsSearchedCharacter = other.IsSearchedCharacter;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(GraveDisplayData other)
 	{
 		Id = other.Id;
-		TemplateId = other.TemplateId;
+		OrgTemplateId = other.OrgTemplateId;
 		NameData = other.NameData;
 		OrgSettlementId = other.OrgSettlementId;
 		Principal = other.Principal;
@@ -80,13 +70,11 @@ public class GraveDisplayData : ISerializableGameData
 		IsSearchedCharacter = other.IsSearchedCharacter;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 51;
@@ -97,13 +85,12 @@ public class GraveDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
 		*(int*)pCurrData = Id;
 		pCurrData += 4;
-		*(short*)pCurrData = TemplateId;
+		*(short*)pCurrData = OrgTemplateId;
 		pCurrData += 2;
 		pCurrData += NameData.Serialize(pCurrData);
 		*(short*)pCurrData = OrgSettlementId;
@@ -127,13 +114,12 @@ public class GraveDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
 		Id = *(int*)pCurrData;
 		pCurrData += 4;
-		TemplateId = *(short*)pCurrData;
+		OrgTemplateId = *(short*)pCurrData;
 		pCurrData += 2;
 		pCurrData += NameData.Deserialize(pCurrData);
 		OrgSettlementId = *(short*)pCurrData;

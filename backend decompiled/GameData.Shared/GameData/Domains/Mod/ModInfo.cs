@@ -6,56 +6,29 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Mod;
 
-/// <summary>
-/// 模组相关的信息
-/// </summary>
 public class ModInfo : ISerializableGameData, IEquatable<ModInfo>
 {
-	/// <summary>
-	/// Mod 文件夹全路径
-	/// </summary>
 	[SerializableGameDataField]
 	public string DirectoryName;
 
-	/// <summary>
-	/// Mod 标题
-	/// </summary>
 	[SerializableGameDataField]
 	public string Title;
 
-	/// <summary>
-	/// Mod 发布时的文件Id
-	/// </summary>
 	[SerializableGameDataField]
 	public ModId ModId;
 
-	/// <summary>
-	/// 后端的插件
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> BackendPlugins;
 
-	/// <summary>
-	/// 未选定为测试的前端的插件
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> BackendPluginsLegacy;
 
-	/// <summary>
-	/// 后端的补丁包（启动时读取，会修改内存中的程序集）
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> BackendPatches;
 
-	/// <summary>
-	/// 事件包
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> EventPackages;
 
-	/// <summary>
-	/// Mod 设置相关数据
-	/// </summary>
 	[SerializableGameDataField]
 	public SerializableModData ModSettings;
 

@@ -8,52 +8,20 @@ namespace Config;
 [Serializable]
 public class VillagerRoleFormulaItem : ConfigItem<VillagerRoleFormulaItem, int>, IConfigFormula<EVillagerRoleFormulaType>, IConfigFormula
 {
-	/// <summary>
-	/// 模板 ID
-	/// </summary>
 	public readonly int TemplateId;
 
-	/// <summary>
-	/// 公式类型
-	/// - 类型定义在分表 t_Type 中，在代码中进行实现, 必须和常量列表同步修改, 且修改公式类型时必须通知程序.
-	/// </summary>
 	public readonly EVillagerRoleFormulaType Type;
 
-	/// <summary>
-	/// 常量列表
-	/// - 公式中用到的常量数值
-	/// </summary>
 	public readonly int[] Constants;
 
-	/// <summary>
-	/// 最大值
-	/// - 值为-1表示无最大值
-	/// </summary>
 	public readonly int MaxValue;
 
-	/// <summary>
-	/// 显示文本
-	/// - 在派遣界面显示的数据标题
-	/// </summary>
 	public readonly string DisplayName;
 
-	/// <summary>
-	/// 显示格式
-	/// - 在派遣界面显示的数据格式
-	/// </summary>
 	public readonly string DisplayFormat;
 
 	EVillagerRoleFormulaType IConfigFormula<EVillagerRoleFormulaType>.ImplType => Type;
 
-	/// <summary>
-	/// 构造器 - constructor0
-	/// </summary>
-	/// <param name="templateId">模板 ID</param>
-	/// <param name="type">公式类型 - 类型定义在分表 t_Type 中，在代码中进行实现, 必须和常量列表同步修改, 且修改公式类型时必须通知程序.</param>
-	/// <param name="constants">常量列表 - 公式中用到的常量数值</param>
-	/// <param name="maxValue">最大值 - 值为-1表示无最大值</param>
-	/// <param name="displayName">显示文本 - 在派遣界面显示的数据标题</param>
-	/// <param name="displayFormat">显示格式 - 在派遣界面显示的数据格式</param>
 	public VillagerRoleFormulaItem(int templateId, EVillagerRoleFormulaType type, int[] constants, int maxValue, string displayName, string displayFormat)
 	{
 		TemplateId = templateId;
@@ -64,9 +32,6 @@ public class VillagerRoleFormulaItem : ConfigItem<VillagerRoleFormulaItem, int>,
 		DisplayFormat = displayFormat;
 	}
 
-	/// <summary>
-	/// 默认构造器 - constructor1
-	/// </summary>
 	public VillagerRoleFormulaItem()
 	{
 		TemplateId = 0;
@@ -77,9 +42,6 @@ public class VillagerRoleFormulaItem : ConfigItem<VillagerRoleFormulaItem, int>,
 		DisplayFormat = null;
 	}
 
-	/// <summary>
-	/// 复制构造器 - constructor2
-	/// </summary>
 	public VillagerRoleFormulaItem(int templateId, VillagerRoleFormulaItem other)
 	{
 		TemplateId = templateId;
@@ -95,10 +57,6 @@ public class VillagerRoleFormulaItem : ConfigItem<VillagerRoleFormulaItem, int>,
 		return TemplateId;
 	}
 
-	/// <summary>
-	/// 以指定Id生成ConfigData的副本
-	/// </summary>
-	/// <param name="templateId"></param>
 	public override VillagerRoleFormulaItem Duplicate(int templateId)
 	{
 		return new VillagerRoleFormulaItem(templateId, this);
@@ -160,7 +118,6 @@ public class VillagerRoleFormulaItem : ConfigItem<VillagerRoleFormulaItem, int>,
 		return MaxValue;
 	}
 
-	/// <inheritdoc />
 	public ArgumentException ThrowArgCountException(int argCount)
 	{
 		return new ArgumentException($"Formula {TemplateId}'s type {Type} doesn't match arg count {argCount}");

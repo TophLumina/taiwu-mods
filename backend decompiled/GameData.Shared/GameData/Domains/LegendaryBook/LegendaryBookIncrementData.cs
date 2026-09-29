@@ -5,81 +5,42 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LegendaryBook;
 
-/// <summary>
-/// 增强奇书信息
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NotForArchive = true, NoCopyConstructors = true)]
 public class LegendaryBookIncrementData : ISerializableGameData
 {
-	/// <summary>
-	/// 奇书地格数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, MapBlockData> BlockDataMap;
 
-	/// <summary>
-	/// 奇书地格数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, FullBlockName> BlockNameDataMap;
 
-	/// <summary>
-	/// 奇书位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, Location> BookLocationMap;
 
-	/// <summary>
-	/// 奇书剩余时间
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, int> BookDurationMap;
 
-	/// <summary>
-	/// 角色字典
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, LegendaryBookCharacterRelatedData> CharacterMap;
 
-	/// <summary>
-	/// 奇书拥有者
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, int> OwnerMap;
 
-	/// <summary>
-	/// 奇书争夺者
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> ContestList;
 
-	/// <summary>
-	/// 奇书入邪者
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> ShockedList;
 
-	/// <summary>
-	/// 奇书入魔者
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> InsaneList;
 
-	/// <summary>
-	/// 奇书堕魔者
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> ConsumedList;
 
-	/// <summary>
-	/// 上个持有者
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> PreviousOwner;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public LegendaryBookIncrementData()
 	{
 		BlockDataMap = new Dictionary<sbyte, MapBlockData>();
@@ -94,13 +55,11 @@ public class LegendaryBookIncrementData : ISerializableGameData
 		ConsumedList = new List<int>();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -122,7 +81,6 @@ public class LegendaryBookIncrementData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -225,7 +183,6 @@ public class LegendaryBookIncrementData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

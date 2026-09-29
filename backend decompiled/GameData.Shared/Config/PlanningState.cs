@@ -7,2141 +7,880 @@ namespace Config;
 [Serializable]
 public class PlanningState : ConfigData<PlanningStateItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 整数
-		/// </summary>
 		public const int IntegerParameter = 0;
 
-		/// <summary>
-		/// 目标需要资源
-		/// </summary>
 		public const int RequiredResourceAmount = 1;
 
-		/// <summary>
-		/// 目标购入价格
-		/// </summary>
 		public const int ItemPurchasePrice = 2;
 
-		/// <summary>
-		/// 目标道具可预定
-		/// </summary>
 		public const int ItemCanMakeArtisanOrder = 602;
 
-		/// <summary>
-		/// 目标道具存在订单
-		/// </summary>
 		public const int ItemSubscribed = 603;
 
-		/// <summary>
-		/// 道具品级
-		/// </summary>
 		public const int ItemGrade = 392;
 
-		/// <summary>
-		/// 道具耐久度
-		/// </summary>
 		public const int ItemDurability = 394;
 
-		/// <summary>
-		/// 道具最大耐久度
-		/// </summary>
 		public const int ItemMaxDurability = 395;
 
-		/// <summary>
-		/// 道具为武学书籍
-		/// </summary>
 		public const int ItemIsCombatSkillBook = 610;
 
-		/// <summary>
-		/// 道具为技艺书籍
-		/// </summary>
 		public const int ItemIsLifeSkillBook = 611;
 
-		/// <summary>
-		/// 目标武学造诣
-		/// </summary>
 		public const int RequiredCombatSkillAttainment = 3;
 
-		/// <summary>
-		/// 目标技艺造诣
-		/// </summary>
 		public const int RequiredLifeSkillAttainment = 4;
 
-		/// <summary>
-		/// 伏虞心念
-		/// </summary>
 		public const int FuyuFaith = 5;
 
-		/// <summary>
-		/// 主要属性当前值
-		/// </summary>
 		public const int CurrMainAttribute = 6;
 
-		/// <summary>
-		/// 膂力
-		/// </summary>
 		public const int CurrMainAttributeStrength = 7;
 
-		/// <summary>
-		/// 悟性
-		/// </summary>
 		public const int CurrMainAttributeIntelligent = 12;
 
-		/// <summary>
-		/// 对方主要属性当前值
-		/// </summary>
 		public const int TargetCurrMainAttribute = 13;
 
-		/// <summary>
-		/// 对方膂力
-		/// </summary>
 		public const int TargetCurrMainAttributeStrength = 14;
 
-		/// <summary>
-		/// 对方悟性
-		/// </summary>
 		public const int TargetCurrMainAttributeIntelligent = 19;
 
-		/// <summary>
-		/// 主要属性最大值
-		/// </summary>
 		public const int MaxMainAttribute = 20;
 
-		/// <summary>
-		/// 膂力最大值
-		/// </summary>
 		public const int MaxMainAttributeStrength = 21;
 
-		/// <summary>
-		/// 悟性最大值
-		/// </summary>
 		public const int MaxMainAttributeIntelligent = 26;
 
-		/// <summary>
-		/// 对方主要属性最大值
-		/// </summary>
 		public const int TargetMaxMainAttribute = 27;
 
-		/// <summary>
-		/// 对方膂力最大值
-		/// </summary>
 		public const int TargetMaxMainAttributeStrength = 28;
 
-		/// <summary>
-		/// 对方悟性最大值
-		/// </summary>
 		public const int TargetMaxMainAttributeIntelligent = 33;
 
-		/// <summary>
-		/// 性别
-		/// </summary>
 		public const int Gender = 34;
 
-		/// <summary>
-		/// 魅力
-		/// </summary>
 		public const int Attraction = 35;
 
-		/// <summary>
-		/// 立场
-		/// </summary>
 		public const int Morality = 36;
 
-		/// <summary>
-		/// 身份品级
-		/// </summary>
 		public const int InteractionGrade = 37;
 
-		/// <summary>
-		/// 出家
-		/// </summary>
 		public const int IsMonk = 600;
 
-		/// <summary>
-		/// 志向资历
-		/// </summary>
 		public const int CurrProfessionSeniority = 38;
 
-		/// <summary>
-		/// 资源满足阈值
-		/// </summary>
 		public const int ResourceSatisfyingThreshold = 39;
 
-		/// <summary>
-		/// 道具满足阈值
-		/// </summary>
 		public const int ItemSatisfyingThreshold = 40;
 
-		/// <summary>
-		/// 持有秘闻
-		/// </summary>
 		public const int KnowSecrets = 41;
 
-		/// <summary>
-		/// 名誉
-		/// </summary>
+		public const int AtHomeSettlement = 615;
+
 		public const int Fame = 42;
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public const int Happiness = 43;
 
-		/// <summary>
-		/// 好感
-		/// </summary>
 		public const int SelfToTargetFavorability = 44;
 
-		/// <summary>
-		/// 身龄
-		/// </summary>
 		public const int CurrAge = 45;
 
-		/// <summary>
-		/// 命龄
-		/// </summary>
 		public const int ActualAge = 46;
 
-		/// <summary>
-		/// 轮回数
-		/// </summary>
 		public const int ReincarnationCount = 47;
 
-		/// <summary>
-		/// 历练
-		/// </summary>
 		public const int Exp = 48;
 
-		/// <summary>
-		/// 战斗力
-		/// </summary>
 		public const int CombatPower = 49;
 
-		/// <summary>
-		/// 势力值
-		/// </summary>
 		public const int InfluencePower = 50;
 
-		/// <summary>
-		/// 精纯
-		/// </summary>
 		public const int ConsummateLevel = 51;
 
-		/// <summary>
-		/// 内力
-		/// </summary>
 		public const int Neili = 52;
 
-		/// <summary>
-		/// 最大内力
-		/// </summary>
 		public const int MaxNeili = 53;
 
-		/// <summary>
-		/// 健康
-		/// </summary>
 		public const int Health = 55;
 
-		/// <summary>
-		/// 最大健康
-		/// </summary>
 		public const int LeftMaxHealth = 56;
 
-		/// <summary>
-		/// 伤势
-		/// </summary>
 		public const int Injuries = 57;
 
-		/// <summary>
-		/// 毒素
-		/// </summary>
 		public const int Poisoned = 58;
 
-		/// <summary>
-		/// 内息紊乱
-		/// </summary>
 		public const int DisorderOfQi = 59;
 
-		/// <summary>
-		/// 玄灰
-		/// </summary>
 		public const int DarkAsh = 60;
 
-		/// <summary>
-		/// 蛊虫
-		/// </summary>
 		public const int Wug = 61;
 
-		/// <summary>
-		/// 坏蛊虫
-		/// </summary>
 		public const int BadWug = 62;
 
-		/// <summary>
-		/// 王蛊
-		/// </summary>
 		public const int WugKing = 63;
 
-		/// <summary>
-		/// 有任意受损
-		/// </summary>
 		public const int NeedHealing = 64;
 
-		/// <summary>
-		/// 相枢入邪值
-		/// </summary>
 		public const int XiangshuInfection = 65;
 
-		/// <summary>
-		/// 相枢入邪
-		/// </summary>
 		public const int XiangshuCompletelyInfected = 66;
 
-		/// <summary>
-		/// 相枢入魔
-		/// </summary>
 		public const int XiangshuPartiallyInfected = 67;
 
-		/// <summary>
-		/// 对方魅力
-		/// </summary>
 		public const int TargetAttraction = 72;
 
-		/// <summary>
-		/// 对方持有秘闻
-		/// </summary>
 		public const int TargetKnowSecrets = 78;
 
-		/// <summary>
-		/// 对方心情
-		/// </summary>
 		public const int TargetHappiness = 80;
 
-		/// <summary>
-		/// 对方好感
-		/// </summary>
 		public const int TargetToSelfFavorability = 81;
 
-		/// <summary>
-		/// 对方身龄
-		/// </summary>
 		public const int TargetCurrAge = 82;
 
-		/// <summary>
-		/// 对方命龄
-		/// </summary>
 		public const int TargetActualAge = 83;
 
-		/// <summary>
-		/// 对方势力值
-		/// </summary>
 		public const int TargetInfluencePower = 87;
 
-		/// <summary>
-		/// 对方健康
-		/// </summary>
 		public const int TargetHealth = 92;
 
-		/// <summary>
-		/// 对方伤势
-		/// </summary>
 		public const int TargetInjuries = 94;
 
-		/// <summary>
-		/// 对方毒素
-		/// </summary>
 		public const int TargetPoisoned = 95;
 
-		/// <summary>
-		/// 对方内息紊乱
-		/// </summary>
 		public const int TargetDisorderOfQi = 96;
 
-		/// <summary>
-		/// 对方蛊虫
-		/// </summary>
 		public const int TargetWug = 98;
 
-		/// <summary>
-		/// 对方相枢入邪值
-		/// </summary>
 		public const int TargetXiangshuInfection = 102;
 
-		/// <summary>
-		/// 对方相枢入邪
-		/// </summary>
 		public const int TargetPartiallyInfected = 103;
 
-		/// <summary>
-		/// 对方相枢入魔
-		/// </summary>
 		public const int TargetCompletelyInfected = 104;
 
-		/// <summary>
-		/// 对方被绑架
-		/// </summary>
 		public const int TargetIsKidnapped = 106;
 
-		/// <summary>
-		/// 对方死亡
-		/// </summary>
 		public const int TargetDead = 107;
 
-		/// <summary>
-		/// 装备负重
-		/// </summary>
 		public const int EquipmentLoad = 108;
 
-		/// <summary>
-		/// 行囊负重
-		/// </summary>
 		public const int InventoryLoad = 109;
 
-		/// <summary>
-		/// 最大装备负重
-		/// </summary>
 		public const int EquipmentMaxLoad = 110;
 
-		/// <summary>
-		/// 最大行囊负重
-		/// </summary>
 		public const int InventoryMaxLoad = 111;
 
-		/// <summary>
-		/// 持有道具价值
-		/// </summary>
 		public const int InventoryItemValue = 112;
 
-		/// <summary>
-		/// 丹药总价值
-		/// </summary>
 		public const int MedicineTotalWorth = 113;
 
-		/// <summary>
-		/// 毒药总价值
-		/// </summary>
 		public const int PoisonTotalWorth = 114;
 
-		/// <summary>
-		/// 七元
-		/// </summary>
 		public const int Personality = 115;
 
-		/// <summary>
-		/// 冷静
-		/// </summary>
 		public const int PersonalityCalm = 116;
 
-		/// <summary>
-		/// 合道
-		/// </summary>
 		public const int PersonalityPerceptive = 122;
 
-		/// <summary>
-		/// 武学资质
-		/// </summary>
 		public const int CombatSkillQualification = 131;
 
-		/// <summary>
-		/// 内功资质
-		/// </summary>
 		public const int CombatSkillQualificationNeigong = 132;
 
-		/// <summary>
-		/// 乐器资质
-		/// </summary>
 		public const int CombatSkillQualificationMusic = 145;
 
-		/// <summary>
-		/// 对方武学资质
-		/// </summary>
 		public const int TargetCombatSkillQualification = 146;
 
-		/// <summary>
-		/// 对方内功资质
-		/// </summary>
 		public const int TargetCombatSkillQualificationNeigong = 147;
 
-		/// <summary>
-		/// 对方乐器资质
-		/// </summary>
 		public const int TargetCombatSkillQualificationMusic = 160;
 
-		/// <summary>
-		/// 技艺资质
-		/// </summary>
 		public const int LifeSkillQualification = 161;
 
-		/// <summary>
-		/// 音律资质
-		/// </summary>
 		public const int LifeSkillQualificationMusic = 162;
 
-		/// <summary>
-		/// 杂学资质
-		/// </summary>
 		public const int LifeSkillQualificationEclectic = 177;
 
-		/// <summary>
-		/// 对方技艺资质
-		/// </summary>
 		public const int TargetLifeSkillQualification = 178;
 
-		/// <summary>
-		/// 对方音律资质
-		/// </summary>
 		public const int TargetLifeSkillQualificationMusic = 179;
 
-		/// <summary>
-		/// 对方杂学资质
-		/// </summary>
 		public const int TargetLifeSkillQualificationEclectic = 194;
 
-		/// <summary>
-		/// 武学造诣
-		/// </summary>
 		public const int CombatSkillAttainment = 195;
 
-		/// <summary>
-		/// 内功造诣
-		/// </summary>
 		public const int CombatSkillAttainmentNeigong = 196;
 
-		/// <summary>
-		/// 乐器造诣
-		/// </summary>
 		public const int CombatSkillAttainmentMusic = 209;
 
-		/// <summary>
-		/// 对方武学造诣
-		/// </summary>
 		public const int TargetCombatSkillAttainment = 211;
 
-		/// <summary>
-		/// 对方内功造诣
-		/// </summary>
 		public const int TargetCombatSkillAttainmentNeigong = 212;
 
-		/// <summary>
-		/// 对方乐器造诣
-		/// </summary>
 		public const int TargetCombatSkillAttainmentMusic = 225;
 
-		/// <summary>
-		/// 技艺造诣
-		/// </summary>
 		public const int LifeSkillAttainment = 227;
 
-		/// <summary>
-		/// 音律造诣
-		/// </summary>
 		public const int LifeSkillAttainmentMusic = 228;
 
-		/// <summary>
-		/// 杂学造诣
-		/// </summary>
 		public const int LifeSkillAttainmentEclectic = 243;
 
-		/// <summary>
-		/// 制造造诣
-		/// </summary>
 		public const int LifeSkillAttainmentCrafting = 244;
 
-		/// <summary>
-		/// 最高技艺造诣
-		/// </summary>
 		public const int MaxLifeSkillQualification = 246;
 
-		/// <summary>
-		/// 对方技艺造诣
-		/// </summary>
 		public const int TargetLifeSkillAttainment = 247;
 
-		/// <summary>
-		/// 对方音律造诣
-		/// </summary>
 		public const int TargetLifeSkillAttainmentMusic = 248;
 
-		/// <summary>
-		/// 对方杂学造诣
-		/// </summary>
 		public const int TargetLifeSkillAttainmentEclectic = 263;
 
-		/// <summary>
-		/// 对方制造造诣
-		/// </summary>
 		public const int TargetLifeSkillAttainmentCraft = 264;
 
-		/// <summary>
-		/// 获得朋友关系
-		/// </summary>
 		public const int FriendRelationAdded = 267;
 
-		/// <summary>
-		/// 获得派系关系
-		/// </summary>
 		public const int FactionRelationAdded = 268;
 
-		/// <summary>
-		/// 获得义亲关系
-		/// </summary>
 		public const int AdoptedRelationAdded = 269;
 
-		/// <summary>
-		/// 获得夫妻关系
-		/// </summary>
 		public const int SpouseRelationAdded = 270;
 
-		/// <summary>
-		/// 获得结义关系
-		/// </summary>
 		public const int SwornRelationAdded = 271;
 
-		/// <summary>
-		/// 获得伴侣关系
-		/// </summary>
 		public const int CoupleRelationAdded = 272;
 
-		/// <summary>
-		/// 获得仇敌关系
-		/// </summary>
 		public const int EnemyRelationAdded = 274;
 
-		/// <summary>
-		/// 解除夫妻关系
-		/// </summary>
 		public const int SpouseRelationEnded = 280;
 
-		/// <summary>
-		/// 解除伴侣关系
-		/// </summary>
 		public const int CoupleRelationEnded = 282;
 
-		/// <summary>
-		/// 朋友人数
-		/// </summary>
 		public const int FriendRelationCount = 287;
 
-		/// <summary>
-		/// 父母人数
-		/// </summary>
 		public const int ParentRelationCount = 607;
 
-		/// <summary>
-		/// 手足人数
-		/// </summary>
 		public const int SiblingRelationCount = 608;
 
-		/// <summary>
-		/// 子女人数
-		/// </summary>
 		public const int ChildrenRlationCount = 609;
 
-		/// <summary>
-		/// 派系人数
-		/// </summary>
 		public const int FactionRelationCount = 288;
 
-		/// <summary>
-		/// 义亲人数
-		/// </summary>
 		public const int AdoptiveRelatioinCount = 289;
 
-		/// <summary>
-		/// 夫妻人数
-		/// </summary>
 		public const int SpouseRelationCount = 290;
 
-		/// <summary>
-		/// 结义人数
-		/// </summary>
 		public const int SwornBrotherhoodRelationCount = 291;
 
-		/// <summary>
-		/// 伴侣人数
-		/// </summary>
 		public const int TwoWayAdoredRelationCount = 292;
 
-		/// <summary>
-		/// 爱慕人数
-		/// </summary>
 		public const int AdoredRelationCount = 293;
 
-		/// <summary>
-		/// 仇敌人数
-		/// </summary>
 		public const int EnemyRelationCount = 294;
 
-		/// <summary>
-		/// 师徒人数
-		/// </summary>
 		public const int MentorMenteeRelationCount = 295;
 
-		/// <summary>
-		/// 是太吾
-		/// </summary>
 		public const int IsTaiwu = 296;
 
-		/// <summary>
-		/// 是逃犯
-		/// </summary>
 		public const int IsFugitive = 297;
 
-		/// <summary>
-		/// 对方为爱慕
-		/// </summary>
 		public const int TargetAdoreSelf = 302;
 
-		/// <summary>
-		/// 对方为仇敌
-		/// </summary>
 		public const int TargetEnemySelf = 303;
 
-		/// <summary>
-		/// 对方是亲友
-		/// </summary>
 		public const int TargetIsFriendOrFamily = 304;
 
-		/// <summary>
-		/// 对方为父母
-		/// </summary>
 		public const int TargetIsParent = 305;
 
-		/// <summary>
-		/// 对方为手足
-		/// </summary>
 		public const int TargetIsSibling = 306;
 
-		/// <summary>
-		/// 对方为子女
-		/// </summary>
 		public const int TargetIsChild = 307;
 
-		/// <summary>
-		/// 对方为朋友
-		/// </summary>
 		public const int TargetIsFriend = 308;
 
-		/// <summary>
-		/// 对方为义亲
-		/// </summary>
 		public const int TargetIsAdoptiveFamily = 309;
 
-		/// <summary>
-		/// 对方为夫妻
-		/// </summary>
 		public const int TargetIsSpouse = 310;
 
-		/// <summary>
-		/// 对方为结义
-		/// </summary>
 		public const int TargetIsSwornBrotherOrSister = 311;
 
-		/// <summary>
-		/// 对方为伴侣
-		/// </summary>
 		public const int TargetIsTwoWayAdored = 312;
 
-		/// <summary>
-		/// 对方为师徒
-		/// </summary>
 		public const int TargetIsMentorOrMentee = 313;
 
-		/// <summary>
-		/// 对方为派系
-		/// </summary>
 		public const int TargetIsFromSameFaction = 314;
 
-		/// <summary>
-		/// 对方为同门
-		/// </summary>
 		public const int TargetIsFromSameSettlement = 315;
 
-		/// <summary>
-		/// 对方为同乡
-		/// </summary>
 		public const int TargetIsFromSameArea = 316;
 
-		/// <summary>
-		/// 从属门派
-		/// </summary>
 		public const int IsSectMember = 317;
 
-		/// <summary>
-		/// 从属城镇
-		/// </summary>
 		public const int IsCivilian = 318;
 
-		/// <summary>
-		/// 从属其他
-		/// </summary>
 		public const int TargetIsOtherMember = 606;
 
-		/// <summary>
-		/// 从属外道
-		/// </summary>
 		public const int IsHeretic = 319;
 
-		/// <summary>
-		/// 从属义士
-		/// </summary>
 		public const int IsRightous = 320;
 
-		/// <summary>
-		/// 从属太吾
-		/// </summary>
 		public const int IsTaiwuVillageMember = 321;
 
-		/// <summary>
-		/// 从属爪牙
-		/// </summary>
 		public const int IsXiangshuMinion = 322;
 
-		/// <summary>
-		/// 从属野兽
-		/// </summary>
 		public const int IsAnimal = 323;
 
-		/// <summary>
-		/// 从属邪派门派
-		/// </summary>
 		public const int IsEvilSectMember = 331;
 
-		/// <summary>
-		/// 从属正派门派
-		/// </summary>
 		public const int IsGoodSectMember = 332;
 
-		/// <summary>
-		/// 从属中立门派
-		/// </summary>
 		public const int IsNeutralSectMember = 333;
 
-		/// <summary>
-		/// 志向为山人
-		/// </summary>
 		public const int ProfessionIsSavage = 337;
 
-		/// <summary>
-		/// 志向为猎户
-		/// </summary>
 		public const int ProfessionIsHunter = 338;
 
-		/// <summary>
-		/// 志向为匠人
-		/// </summary>
 		public const int ProfessionIsCraft = 339;
 
-		/// <summary>
-		/// 志向为武师
-		/// </summary>
 		public const int ProfessionIsMartialArtist = 340;
 
-		/// <summary>
-		/// 志向为才俊
-		/// </summary>
 		public const int ProfessionIsLiterati = 341;
 
-		/// <summary>
-		/// 志向为道长
-		/// </summary>
 		public const int ProfessionIsTaoistMonk = 342;
 
-		/// <summary>
-		/// 志向为高僧
-		/// </summary>
 		public const int ProfessionIsBuddhistMonk = 343;
 
-		/// <summary>
-		/// 志向为豪客
-		/// </summary>
 		public const int ProfessionIsWineTaster = 344;
 
-		/// <summary>
-		/// 志向为名门
-		/// </summary>
 		public const int ProfessionIsAristocrat = 345;
 
-		/// <summary>
-		/// 志向为乞丐
-		/// </summary>
 		public const int ProfessionIsBeggar = 346;
 
-		/// <summary>
-		/// 志向为平民
-		/// </summary>
 		public const int ProfessionIsCivilian = 347;
 
-		/// <summary>
-		/// 志向为旅人
-		/// </summary>
 		public const int ProfessionIsTraveler = 348;
 
-		/// <summary>
-		/// 志向为云游僧
-		/// </summary>
 		public const int ProfessionIsTravelingBuddhistMonk = 349;
 
-		/// <summary>
-		/// 志向为大夫
-		/// </summary>
 		public const int ProfessionIsDoctor = 350;
 
-		/// <summary>
-		/// 志向为云游道
-		/// </summary>
 		public const int ProfessionIsTravelingTaoistMonk = 351;
 
-		/// <summary>
-		/// 志向为富商
-		/// </summary>
 		public const int ProfessionIsCapitalist = 352;
 
-		/// <summary>
-		/// 志向为贵客
-		/// </summary>
 		public const int ProfessionIsTeaTaster = 353;
 
-		/// <summary>
-		/// 志向为王公
-		/// </summary>
 		public const int ProfessionIsDuke = 354;
 
-		/// <summary>
-		/// 资源
-		/// </summary>
 		public const int Resource = 355;
 
-		/// <summary>
-		/// 食材
-		/// </summary>
 		public const int ResourceFood = 356;
 
-		/// <summary>
-		/// 威望
-		/// </summary>
 		public const int ResourceAuthority = 363;
 
-		/// <summary>
-		/// 任意材料资源
-		/// </summary>
 		public const int MaterialResource = 364;
 
-		/// <summary>
-		/// 持有资源价值
-		/// </summary>
 		public const int ResourceTotalWorth = 365;
 
-		/// <summary>
-		/// 对方资源
-		/// </summary>
 		public const int TargetResource = 366;
 
-		/// <summary>
-		/// 对方食材
-		/// </summary>
 		public const int TargetFood = 367;
 
-		/// <summary>
-		/// 对方威望
-		/// </summary>
 		public const int TargetAuthority = 374;
 
-		/// <summary>
-		/// 对方任意材料资源
-		/// </summary>
 		public const int TargetMaterialResource = 375;
 
-		/// <summary>
-		/// 对方持有资源价值
-		/// </summary>
 		public const int TargetResourceTotalWorth = 376;
 
-		/// <summary>
-		/// 道具
-		/// </summary>
 		public const int Item = 391;
 
-		/// <summary>
-		/// 道具数量
-		/// </summary>
 		public const int ItemNumber = 393;
 
-		/// <summary>
-		/// 工具道具
-		/// </summary>
 		public const int CraftToolItem = 409;
 
-		/// <summary>
-		/// 心材道具
-		/// </summary>
 		public const int BuildingCoreItem = 410;
 
-		/// <summary>
-		/// 天劫符箓
-		/// </summary>
 		public const int TianjieFulu = 411;
 
-		/// <summary>
-		/// 野兽代步
-		/// </summary>
 		public const int AnimalCarrier = 412;
 
-		/// <summary>
-		/// 功法书籍
-		/// </summary>
 		public const int CombatSkillBook = 413;
 
-		/// <summary>
-		/// 技艺书籍
-		/// </summary>
 		public const int LifeSkillBook = 414;
 
-		/// <summary>
-		/// 疗伤道具
-		/// </summary>
 		public const int WoundRecoveryItem = 415;
 
-		/// <summary>
-		/// 毒药道具
-		/// </summary>
 		public const int PoisonItem = 416;
 
-		/// <summary>
-		/// 调息道具
-		/// </summary>
 		public const int QiRecoveryItem = 417;
 
-		/// <summary>
-		/// 解毒道具
-		/// </summary>
 		public const int DetoxPoisonItem = 418;
 
-		/// <summary>
-		/// 野果道具
-		/// </summary>
 		public const int FruitItem = 419;
 
-		/// <summary>
-		/// 内力道具
-		/// </summary>
 		public const int NeiliRecoveryItem = 420;
 
-		/// <summary>
-		/// 属性道具
-		/// </summary>
 		public const int AttributeRecoveryItem = 421;
 
-		/// <summary>
-		/// 健康道具
-		/// </summary>
 		public const int HealthRecoveryItem = 422;
 
-		/// <summary>
-		/// 解蛊道具
-		/// </summary>
 		public const int DetoxWugItem = 423;
 
-		/// <summary>
-		/// 酒类道具
-		/// </summary>
 		public const int Wine = 424;
 
-		/// <summary>
-		/// 茶类道具
-		/// </summary>
 		public const int Tea = 425;
 
-		/// <summary>
-		/// 公库贡献值
-		/// </summary>
+		public const int SpareableItem = 614;
+
 		public const int TreasuryContribution = 427;
 
-		/// <summary>
-		/// 坟墓耐久
-		/// </summary>
+		public const int ResourceContribution = 604;
+
+		public const int ItemContribution = 605;
+
+		public const int CanTakeInventoryLoadItemFromTreasury = 613;
+
 		public const int GraveDurability = 432;
 
-		/// <summary>
-		/// 最大坟墓耐久
-		/// </summary>
 		public const int GraveMaxDurability = 433;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 整数
-		/// </summary>
 		public static PlanningStateItem IntegerParameter => Instance[0];
 
-		/// <summary>
-		/// 目标需要资源
-		/// </summary>
 		public static PlanningStateItem RequiredResourceAmount => Instance[1];
 
-		/// <summary>
-		/// 目标购入价格
-		/// </summary>
 		public static PlanningStateItem ItemPurchasePrice => Instance[2];
 
-		/// <summary>
-		/// 目标道具可预定
-		/// </summary>
 		public static PlanningStateItem ItemCanMakeArtisanOrder => Instance[602];
 
-		/// <summary>
-		/// 目标道具存在订单
-		/// </summary>
 		public static PlanningStateItem ItemSubscribed => Instance[603];
 
-		/// <summary>
-		/// 道具品级
-		/// </summary>
 		public static PlanningStateItem ItemGrade => Instance[392];
 
-		/// <summary>
-		/// 道具耐久度
-		/// </summary>
 		public static PlanningStateItem ItemDurability => Instance[394];
 
-		/// <summary>
-		/// 道具最大耐久度
-		/// </summary>
 		public static PlanningStateItem ItemMaxDurability => Instance[395];
 
-		/// <summary>
-		/// 道具为武学书籍
-		/// </summary>
 		public static PlanningStateItem ItemIsCombatSkillBook => Instance[610];
 
-		/// <summary>
-		/// 道具为技艺书籍
-		/// </summary>
 		public static PlanningStateItem ItemIsLifeSkillBook => Instance[611];
 
-		/// <summary>
-		/// 目标武学造诣
-		/// </summary>
 		public static PlanningStateItem RequiredCombatSkillAttainment => Instance[3];
 
-		/// <summary>
-		/// 目标技艺造诣
-		/// </summary>
 		public static PlanningStateItem RequiredLifeSkillAttainment => Instance[4];
 
-		/// <summary>
-		/// 伏虞心念
-		/// </summary>
 		public static PlanningStateItem FuyuFaith => Instance[5];
 
-		/// <summary>
-		/// 主要属性当前值
-		/// </summary>
 		public static PlanningStateItem CurrMainAttribute => Instance[6];
 
-		/// <summary>
-		/// 膂力
-		/// </summary>
 		public static PlanningStateItem CurrMainAttributeStrength => Instance[7];
 
-		/// <summary>
-		/// 悟性
-		/// </summary>
 		public static PlanningStateItem CurrMainAttributeIntelligent => Instance[12];
 
-		/// <summary>
-		/// 对方主要属性当前值
-		/// </summary>
 		public static PlanningStateItem TargetCurrMainAttribute => Instance[13];
 
-		/// <summary>
-		/// 对方膂力
-		/// </summary>
 		public static PlanningStateItem TargetCurrMainAttributeStrength => Instance[14];
 
-		/// <summary>
-		/// 对方悟性
-		/// </summary>
 		public static PlanningStateItem TargetCurrMainAttributeIntelligent => Instance[19];
 
-		/// <summary>
-		/// 主要属性最大值
-		/// </summary>
 		public static PlanningStateItem MaxMainAttribute => Instance[20];
 
-		/// <summary>
-		/// 膂力最大值
-		/// </summary>
 		public static PlanningStateItem MaxMainAttributeStrength => Instance[21];
 
-		/// <summary>
-		/// 悟性最大值
-		/// </summary>
 		public static PlanningStateItem MaxMainAttributeIntelligent => Instance[26];
 
-		/// <summary>
-		/// 对方主要属性最大值
-		/// </summary>
 		public static PlanningStateItem TargetMaxMainAttribute => Instance[27];
 
-		/// <summary>
-		/// 对方膂力最大值
-		/// </summary>
 		public static PlanningStateItem TargetMaxMainAttributeStrength => Instance[28];
 
-		/// <summary>
-		/// 对方悟性最大值
-		/// </summary>
 		public static PlanningStateItem TargetMaxMainAttributeIntelligent => Instance[33];
 
-		/// <summary>
-		/// 性别
-		/// </summary>
 		public static PlanningStateItem Gender => Instance[34];
 
-		/// <summary>
-		/// 魅力
-		/// </summary>
 		public static PlanningStateItem Attraction => Instance[35];
 
-		/// <summary>
-		/// 立场
-		/// </summary>
 		public static PlanningStateItem Morality => Instance[36];
 
-		/// <summary>
-		/// 身份品级
-		/// </summary>
 		public static PlanningStateItem InteractionGrade => Instance[37];
 
-		/// <summary>
-		/// 出家
-		/// </summary>
 		public static PlanningStateItem IsMonk => Instance[600];
 
-		/// <summary>
-		/// 志向资历
-		/// </summary>
 		public static PlanningStateItem CurrProfessionSeniority => Instance[38];
 
-		/// <summary>
-		/// 资源满足阈值
-		/// </summary>
 		public static PlanningStateItem ResourceSatisfyingThreshold => Instance[39];
 
-		/// <summary>
-		/// 道具满足阈值
-		/// </summary>
 		public static PlanningStateItem ItemSatisfyingThreshold => Instance[40];
 
-		/// <summary>
-		/// 持有秘闻
-		/// </summary>
 		public static PlanningStateItem KnowSecrets => Instance[41];
 
-		/// <summary>
-		/// 名誉
-		/// </summary>
+		public static PlanningStateItem AtHomeSettlement => Instance[615];
+
 		public static PlanningStateItem Fame => Instance[42];
 
-		/// <summary>
-		/// 心情
-		/// </summary>
 		public static PlanningStateItem Happiness => Instance[43];
 
-		/// <summary>
-		/// 好感
-		/// </summary>
 		public static PlanningStateItem SelfToTargetFavorability => Instance[44];
 
-		/// <summary>
-		/// 身龄
-		/// </summary>
 		public static PlanningStateItem CurrAge => Instance[45];
 
-		/// <summary>
-		/// 命龄
-		/// </summary>
 		public static PlanningStateItem ActualAge => Instance[46];
 
-		/// <summary>
-		/// 轮回数
-		/// </summary>
 		public static PlanningStateItem ReincarnationCount => Instance[47];
 
-		/// <summary>
-		/// 历练
-		/// </summary>
 		public static PlanningStateItem Exp => Instance[48];
 
-		/// <summary>
-		/// 战斗力
-		/// </summary>
 		public static PlanningStateItem CombatPower => Instance[49];
 
-		/// <summary>
-		/// 势力值
-		/// </summary>
 		public static PlanningStateItem InfluencePower => Instance[50];
 
-		/// <summary>
-		/// 精纯
-		/// </summary>
 		public static PlanningStateItem ConsummateLevel => Instance[51];
 
-		/// <summary>
-		/// 内力
-		/// </summary>
 		public static PlanningStateItem Neili => Instance[52];
 
-		/// <summary>
-		/// 最大内力
-		/// </summary>
 		public static PlanningStateItem MaxNeili => Instance[53];
 
-		/// <summary>
-		/// 健康
-		/// </summary>
 		public static PlanningStateItem Health => Instance[55];
 
-		/// <summary>
-		/// 最大健康
-		/// </summary>
 		public static PlanningStateItem LeftMaxHealth => Instance[56];
 
-		/// <summary>
-		/// 伤势
-		/// </summary>
 		public static PlanningStateItem Injuries => Instance[57];
 
-		/// <summary>
-		/// 毒素
-		/// </summary>
 		public static PlanningStateItem Poisoned => Instance[58];
 
-		/// <summary>
-		/// 内息紊乱
-		/// </summary>
 		public static PlanningStateItem DisorderOfQi => Instance[59];
 
-		/// <summary>
-		/// 玄灰
-		/// </summary>
 		public static PlanningStateItem DarkAsh => Instance[60];
 
-		/// <summary>
-		/// 蛊虫
-		/// </summary>
 		public static PlanningStateItem Wug => Instance[61];
 
-		/// <summary>
-		/// 坏蛊虫
-		/// </summary>
 		public static PlanningStateItem BadWug => Instance[62];
 
-		/// <summary>
-		/// 王蛊
-		/// </summary>
 		public static PlanningStateItem WugKing => Instance[63];
 
-		/// <summary>
-		/// 有任意受损
-		/// </summary>
 		public static PlanningStateItem NeedHealing => Instance[64];
 
-		/// <summary>
-		/// 相枢入邪值
-		/// </summary>
 		public static PlanningStateItem XiangshuInfection => Instance[65];
 
-		/// <summary>
-		/// 相枢入邪
-		/// </summary>
 		public static PlanningStateItem XiangshuCompletelyInfected => Instance[66];
 
-		/// <summary>
-		/// 相枢入魔
-		/// </summary>
 		public static PlanningStateItem XiangshuPartiallyInfected => Instance[67];
 
-		/// <summary>
-		/// 对方魅力
-		/// </summary>
 		public static PlanningStateItem TargetAttraction => Instance[72];
 
-		/// <summary>
-		/// 对方持有秘闻
-		/// </summary>
 		public static PlanningStateItem TargetKnowSecrets => Instance[78];
 
-		/// <summary>
-		/// 对方心情
-		/// </summary>
 		public static PlanningStateItem TargetHappiness => Instance[80];
 
-		/// <summary>
-		/// 对方好感
-		/// </summary>
 		public static PlanningStateItem TargetToSelfFavorability => Instance[81];
 
-		/// <summary>
-		/// 对方身龄
-		/// </summary>
 		public static PlanningStateItem TargetCurrAge => Instance[82];
 
-		/// <summary>
-		/// 对方命龄
-		/// </summary>
 		public static PlanningStateItem TargetActualAge => Instance[83];
 
-		/// <summary>
-		/// 对方势力值
-		/// </summary>
 		public static PlanningStateItem TargetInfluencePower => Instance[87];
 
-		/// <summary>
-		/// 对方健康
-		/// </summary>
 		public static PlanningStateItem TargetHealth => Instance[92];
 
-		/// <summary>
-		/// 对方伤势
-		/// </summary>
 		public static PlanningStateItem TargetInjuries => Instance[94];
 
-		/// <summary>
-		/// 对方毒素
-		/// </summary>
 		public static PlanningStateItem TargetPoisoned => Instance[95];
 
-		/// <summary>
-		/// 对方内息紊乱
-		/// </summary>
 		public static PlanningStateItem TargetDisorderOfQi => Instance[96];
 
-		/// <summary>
-		/// 对方蛊虫
-		/// </summary>
 		public static PlanningStateItem TargetWug => Instance[98];
 
-		/// <summary>
-		/// 对方相枢入邪值
-		/// </summary>
 		public static PlanningStateItem TargetXiangshuInfection => Instance[102];
 
-		/// <summary>
-		/// 对方相枢入邪
-		/// </summary>
 		public static PlanningStateItem TargetPartiallyInfected => Instance[103];
 
-		/// <summary>
-		/// 对方相枢入魔
-		/// </summary>
 		public static PlanningStateItem TargetCompletelyInfected => Instance[104];
 
-		/// <summary>
-		/// 对方被绑架
-		/// </summary>
 		public static PlanningStateItem TargetIsKidnapped => Instance[106];
 
-		/// <summary>
-		/// 对方死亡
-		/// </summary>
 		public static PlanningStateItem TargetDead => Instance[107];
 
-		/// <summary>
-		/// 装备负重
-		/// </summary>
 		public static PlanningStateItem EquipmentLoad => Instance[108];
 
-		/// <summary>
-		/// 行囊负重
-		/// </summary>
 		public static PlanningStateItem InventoryLoad => Instance[109];
 
-		/// <summary>
-		/// 最大装备负重
-		/// </summary>
 		public static PlanningStateItem EquipmentMaxLoad => Instance[110];
 
-		/// <summary>
-		/// 最大行囊负重
-		/// </summary>
 		public static PlanningStateItem InventoryMaxLoad => Instance[111];
 
-		/// <summary>
-		/// 持有道具价值
-		/// </summary>
 		public static PlanningStateItem InventoryItemValue => Instance[112];
 
-		/// <summary>
-		/// 丹药总价值
-		/// </summary>
 		public static PlanningStateItem MedicineTotalWorth => Instance[113];
 
-		/// <summary>
-		/// 毒药总价值
-		/// </summary>
 		public static PlanningStateItem PoisonTotalWorth => Instance[114];
 
-		/// <summary>
-		/// 七元
-		/// </summary>
 		public static PlanningStateItem Personality => Instance[115];
 
-		/// <summary>
-		/// 冷静
-		/// </summary>
 		public static PlanningStateItem PersonalityCalm => Instance[116];
 
-		/// <summary>
-		/// 合道
-		/// </summary>
 		public static PlanningStateItem PersonalityPerceptive => Instance[122];
 
-		/// <summary>
-		/// 武学资质
-		/// </summary>
 		public static PlanningStateItem CombatSkillQualification => Instance[131];
 
-		/// <summary>
-		/// 内功资质
-		/// </summary>
 		public static PlanningStateItem CombatSkillQualificationNeigong => Instance[132];
 
-		/// <summary>
-		/// 乐器资质
-		/// </summary>
 		public static PlanningStateItem CombatSkillQualificationMusic => Instance[145];
 
-		/// <summary>
-		/// 对方武学资质
-		/// </summary>
 		public static PlanningStateItem TargetCombatSkillQualification => Instance[146];
 
-		/// <summary>
-		/// 对方内功资质
-		/// </summary>
 		public static PlanningStateItem TargetCombatSkillQualificationNeigong => Instance[147];
 
-		/// <summary>
-		/// 对方乐器资质
-		/// </summary>
 		public static PlanningStateItem TargetCombatSkillQualificationMusic => Instance[160];
 
-		/// <summary>
-		/// 技艺资质
-		/// </summary>
 		public static PlanningStateItem LifeSkillQualification => Instance[161];
 
-		/// <summary>
-		/// 音律资质
-		/// </summary>
 		public static PlanningStateItem LifeSkillQualificationMusic => Instance[162];
 
-		/// <summary>
-		/// 杂学资质
-		/// </summary>
 		public static PlanningStateItem LifeSkillQualificationEclectic => Instance[177];
 
-		/// <summary>
-		/// 对方技艺资质
-		/// </summary>
 		public static PlanningStateItem TargetLifeSkillQualification => Instance[178];
 
-		/// <summary>
-		/// 对方音律资质
-		/// </summary>
 		public static PlanningStateItem TargetLifeSkillQualificationMusic => Instance[179];
 
-		/// <summary>
-		/// 对方杂学资质
-		/// </summary>
 		public static PlanningStateItem TargetLifeSkillQualificationEclectic => Instance[194];
 
-		/// <summary>
-		/// 武学造诣
-		/// </summary>
 		public static PlanningStateItem CombatSkillAttainment => Instance[195];
 
-		/// <summary>
-		/// 内功造诣
-		/// </summary>
 		public static PlanningStateItem CombatSkillAttainmentNeigong => Instance[196];
 
-		/// <summary>
-		/// 乐器造诣
-		/// </summary>
 		public static PlanningStateItem CombatSkillAttainmentMusic => Instance[209];
 
-		/// <summary>
-		/// 对方武学造诣
-		/// </summary>
 		public static PlanningStateItem TargetCombatSkillAttainment => Instance[211];
 
-		/// <summary>
-		/// 对方内功造诣
-		/// </summary>
 		public static PlanningStateItem TargetCombatSkillAttainmentNeigong => Instance[212];
 
-		/// <summary>
-		/// 对方乐器造诣
-		/// </summary>
 		public static PlanningStateItem TargetCombatSkillAttainmentMusic => Instance[225];
 
-		/// <summary>
-		/// 技艺造诣
-		/// </summary>
 		public static PlanningStateItem LifeSkillAttainment => Instance[227];
 
-		/// <summary>
-		/// 音律造诣
-		/// </summary>
 		public static PlanningStateItem LifeSkillAttainmentMusic => Instance[228];
 
-		/// <summary>
-		/// 杂学造诣
-		/// </summary>
 		public static PlanningStateItem LifeSkillAttainmentEclectic => Instance[243];
 
-		/// <summary>
-		/// 制造造诣
-		/// </summary>
 		public static PlanningStateItem LifeSkillAttainmentCrafting => Instance[244];
 
-		/// <summary>
-		/// 最高技艺造诣
-		/// </summary>
 		public static PlanningStateItem MaxLifeSkillQualification => Instance[246];
 
-		/// <summary>
-		/// 对方技艺造诣
-		/// </summary>
 		public static PlanningStateItem TargetLifeSkillAttainment => Instance[247];
 
-		/// <summary>
-		/// 对方音律造诣
-		/// </summary>
 		public static PlanningStateItem TargetLifeSkillAttainmentMusic => Instance[248];
 
-		/// <summary>
-		/// 对方杂学造诣
-		/// </summary>
 		public static PlanningStateItem TargetLifeSkillAttainmentEclectic => Instance[263];
 
-		/// <summary>
-		/// 对方制造造诣
-		/// </summary>
 		public static PlanningStateItem TargetLifeSkillAttainmentCraft => Instance[264];
 
-		/// <summary>
-		/// 获得朋友关系
-		/// </summary>
 		public static PlanningStateItem FriendRelationAdded => Instance[267];
 
-		/// <summary>
-		/// 获得派系关系
-		/// </summary>
 		public static PlanningStateItem FactionRelationAdded => Instance[268];
 
-		/// <summary>
-		/// 获得义亲关系
-		/// </summary>
 		public static PlanningStateItem AdoptedRelationAdded => Instance[269];
 
-		/// <summary>
-		/// 获得夫妻关系
-		/// </summary>
 		public static PlanningStateItem SpouseRelationAdded => Instance[270];
 
-		/// <summary>
-		/// 获得结义关系
-		/// </summary>
 		public static PlanningStateItem SwornRelationAdded => Instance[271];
 
-		/// <summary>
-		/// 获得伴侣关系
-		/// </summary>
 		public static PlanningStateItem CoupleRelationAdded => Instance[272];
 
-		/// <summary>
-		/// 获得仇敌关系
-		/// </summary>
 		public static PlanningStateItem EnemyRelationAdded => Instance[274];
 
-		/// <summary>
-		/// 解除夫妻关系
-		/// </summary>
 		public static PlanningStateItem SpouseRelationEnded => Instance[280];
 
-		/// <summary>
-		/// 解除伴侣关系
-		/// </summary>
 		public static PlanningStateItem CoupleRelationEnded => Instance[282];
 
-		/// <summary>
-		/// 朋友人数
-		/// </summary>
 		public static PlanningStateItem FriendRelationCount => Instance[287];
 
-		/// <summary>
-		/// 父母人数
-		/// </summary>
 		public static PlanningStateItem ParentRelationCount => Instance[607];
 
-		/// <summary>
-		/// 手足人数
-		/// </summary>
 		public static PlanningStateItem SiblingRelationCount => Instance[608];
 
-		/// <summary>
-		/// 子女人数
-		/// </summary>
 		public static PlanningStateItem ChildrenRlationCount => Instance[609];
 
-		/// <summary>
-		/// 派系人数
-		/// </summary>
 		public static PlanningStateItem FactionRelationCount => Instance[288];
 
-		/// <summary>
-		/// 义亲人数
-		/// </summary>
 		public static PlanningStateItem AdoptiveRelatioinCount => Instance[289];
 
-		/// <summary>
-		/// 夫妻人数
-		/// </summary>
 		public static PlanningStateItem SpouseRelationCount => Instance[290];
 
-		/// <summary>
-		/// 结义人数
-		/// </summary>
 		public static PlanningStateItem SwornBrotherhoodRelationCount => Instance[291];
 
-		/// <summary>
-		/// 伴侣人数
-		/// </summary>
 		public static PlanningStateItem TwoWayAdoredRelationCount => Instance[292];
 
-		/// <summary>
-		/// 爱慕人数
-		/// </summary>
 		public static PlanningStateItem AdoredRelationCount => Instance[293];
 
-		/// <summary>
-		/// 仇敌人数
-		/// </summary>
 		public static PlanningStateItem EnemyRelationCount => Instance[294];
 
-		/// <summary>
-		/// 师徒人数
-		/// </summary>
 		public static PlanningStateItem MentorMenteeRelationCount => Instance[295];
 
-		/// <summary>
-		/// 是太吾
-		/// </summary>
 		public static PlanningStateItem IsTaiwu => Instance[296];
 
-		/// <summary>
-		/// 是逃犯
-		/// </summary>
 		public static PlanningStateItem IsFugitive => Instance[297];
 
-		/// <summary>
-		/// 对方为爱慕
-		/// </summary>
 		public static PlanningStateItem TargetAdoreSelf => Instance[302];
 
-		/// <summary>
-		/// 对方为仇敌
-		/// </summary>
 		public static PlanningStateItem TargetEnemySelf => Instance[303];
 
-		/// <summary>
-		/// 对方是亲友
-		/// </summary>
 		public static PlanningStateItem TargetIsFriendOrFamily => Instance[304];
 
-		/// <summary>
-		/// 对方为父母
-		/// </summary>
 		public static PlanningStateItem TargetIsParent => Instance[305];
 
-		/// <summary>
-		/// 对方为手足
-		/// </summary>
 		public static PlanningStateItem TargetIsSibling => Instance[306];
 
-		/// <summary>
-		/// 对方为子女
-		/// </summary>
 		public static PlanningStateItem TargetIsChild => Instance[307];
 
-		/// <summary>
-		/// 对方为朋友
-		/// </summary>
 		public static PlanningStateItem TargetIsFriend => Instance[308];
 
-		/// <summary>
-		/// 对方为义亲
-		/// </summary>
 		public static PlanningStateItem TargetIsAdoptiveFamily => Instance[309];
 
-		/// <summary>
-		/// 对方为夫妻
-		/// </summary>
 		public static PlanningStateItem TargetIsSpouse => Instance[310];
 
-		/// <summary>
-		/// 对方为结义
-		/// </summary>
 		public static PlanningStateItem TargetIsSwornBrotherOrSister => Instance[311];
 
-		/// <summary>
-		/// 对方为伴侣
-		/// </summary>
 		public static PlanningStateItem TargetIsTwoWayAdored => Instance[312];
 
-		/// <summary>
-		/// 对方为师徒
-		/// </summary>
 		public static PlanningStateItem TargetIsMentorOrMentee => Instance[313];
 
-		/// <summary>
-		/// 对方为派系
-		/// </summary>
 		public static PlanningStateItem TargetIsFromSameFaction => Instance[314];
 
-		/// <summary>
-		/// 对方为同门
-		/// </summary>
 		public static PlanningStateItem TargetIsFromSameSettlement => Instance[315];
 
-		/// <summary>
-		/// 对方为同乡
-		/// </summary>
 		public static PlanningStateItem TargetIsFromSameArea => Instance[316];
 
-		/// <summary>
-		/// 从属门派
-		/// </summary>
 		public static PlanningStateItem IsSectMember => Instance[317];
 
-		/// <summary>
-		/// 从属城镇
-		/// </summary>
 		public static PlanningStateItem IsCivilian => Instance[318];
 
-		/// <summary>
-		/// 从属其他
-		/// </summary>
 		public static PlanningStateItem TargetIsOtherMember => Instance[606];
 
-		/// <summary>
-		/// 从属外道
-		/// </summary>
 		public static PlanningStateItem IsHeretic => Instance[319];
 
-		/// <summary>
-		/// 从属义士
-		/// </summary>
 		public static PlanningStateItem IsRightous => Instance[320];
 
-		/// <summary>
-		/// 从属太吾
-		/// </summary>
 		public static PlanningStateItem IsTaiwuVillageMember => Instance[321];
 
-		/// <summary>
-		/// 从属爪牙
-		/// </summary>
 		public static PlanningStateItem IsXiangshuMinion => Instance[322];
 
-		/// <summary>
-		/// 从属野兽
-		/// </summary>
 		public static PlanningStateItem IsAnimal => Instance[323];
 
-		/// <summary>
-		/// 从属邪派门派
-		/// </summary>
 		public static PlanningStateItem IsEvilSectMember => Instance[331];
 
-		/// <summary>
-		/// 从属正派门派
-		/// </summary>
 		public static PlanningStateItem IsGoodSectMember => Instance[332];
 
-		/// <summary>
-		/// 从属中立门派
-		/// </summary>
 		public static PlanningStateItem IsNeutralSectMember => Instance[333];
 
-		/// <summary>
-		/// 志向为山人
-		/// </summary>
 		public static PlanningStateItem ProfessionIsSavage => Instance[337];
 
-		/// <summary>
-		/// 志向为猎户
-		/// </summary>
 		public static PlanningStateItem ProfessionIsHunter => Instance[338];
 
-		/// <summary>
-		/// 志向为匠人
-		/// </summary>
 		public static PlanningStateItem ProfessionIsCraft => Instance[339];
 
-		/// <summary>
-		/// 志向为武师
-		/// </summary>
 		public static PlanningStateItem ProfessionIsMartialArtist => Instance[340];
 
-		/// <summary>
-		/// 志向为才俊
-		/// </summary>
 		public static PlanningStateItem ProfessionIsLiterati => Instance[341];
 
-		/// <summary>
-		/// 志向为道长
-		/// </summary>
 		public static PlanningStateItem ProfessionIsTaoistMonk => Instance[342];
 
-		/// <summary>
-		/// 志向为高僧
-		/// </summary>
 		public static PlanningStateItem ProfessionIsBuddhistMonk => Instance[343];
 
-		/// <summary>
-		/// 志向为豪客
-		/// </summary>
 		public static PlanningStateItem ProfessionIsWineTaster => Instance[344];
 
-		/// <summary>
-		/// 志向为名门
-		/// </summary>
 		public static PlanningStateItem ProfessionIsAristocrat => Instance[345];
 
-		/// <summary>
-		/// 志向为乞丐
-		/// </summary>
 		public static PlanningStateItem ProfessionIsBeggar => Instance[346];
 
-		/// <summary>
-		/// 志向为平民
-		/// </summary>
 		public static PlanningStateItem ProfessionIsCivilian => Instance[347];
 
-		/// <summary>
-		/// 志向为旅人
-		/// </summary>
 		public static PlanningStateItem ProfessionIsTraveler => Instance[348];
 
-		/// <summary>
-		/// 志向为云游僧
-		/// </summary>
 		public static PlanningStateItem ProfessionIsTravelingBuddhistMonk => Instance[349];
 
-		/// <summary>
-		/// 志向为大夫
-		/// </summary>
 		public static PlanningStateItem ProfessionIsDoctor => Instance[350];
 
-		/// <summary>
-		/// 志向为云游道
-		/// </summary>
 		public static PlanningStateItem ProfessionIsTravelingTaoistMonk => Instance[351];
 
-		/// <summary>
-		/// 志向为富商
-		/// </summary>
 		public static PlanningStateItem ProfessionIsCapitalist => Instance[352];
 
-		/// <summary>
-		/// 志向为贵客
-		/// </summary>
 		public static PlanningStateItem ProfessionIsTeaTaster => Instance[353];
 
-		/// <summary>
-		/// 志向为王公
-		/// </summary>
 		public static PlanningStateItem ProfessionIsDuke => Instance[354];
 
-		/// <summary>
-		/// 资源
-		/// </summary>
 		public static PlanningStateItem Resource => Instance[355];
 
-		/// <summary>
-		/// 食材
-		/// </summary>
 		public static PlanningStateItem ResourceFood => Instance[356];
 
-		/// <summary>
-		/// 威望
-		/// </summary>
 		public static PlanningStateItem ResourceAuthority => Instance[363];
 
-		/// <summary>
-		/// 任意材料资源
-		/// </summary>
 		public static PlanningStateItem MaterialResource => Instance[364];
 
-		/// <summary>
-		/// 持有资源价值
-		/// </summary>
 		public static PlanningStateItem ResourceTotalWorth => Instance[365];
 
-		/// <summary>
-		/// 对方资源
-		/// </summary>
 		public static PlanningStateItem TargetResource => Instance[366];
 
-		/// <summary>
-		/// 对方食材
-		/// </summary>
 		public static PlanningStateItem TargetFood => Instance[367];
 
-		/// <summary>
-		/// 对方威望
-		/// </summary>
 		public static PlanningStateItem TargetAuthority => Instance[374];
 
-		/// <summary>
-		/// 对方任意材料资源
-		/// </summary>
 		public static PlanningStateItem TargetMaterialResource => Instance[375];
 
-		/// <summary>
-		/// 对方持有资源价值
-		/// </summary>
 		public static PlanningStateItem TargetResourceTotalWorth => Instance[376];
 
-		/// <summary>
-		/// 道具
-		/// </summary>
 		public static PlanningStateItem Item => Instance[391];
 
-		/// <summary>
-		/// 道具数量
-		/// </summary>
 		public static PlanningStateItem ItemNumber => Instance[393];
 
-		/// <summary>
-		/// 工具道具
-		/// </summary>
 		public static PlanningStateItem CraftToolItem => Instance[409];
 
-		/// <summary>
-		/// 心材道具
-		/// </summary>
 		public static PlanningStateItem BuildingCoreItem => Instance[410];
 
-		/// <summary>
-		/// 天劫符箓
-		/// </summary>
 		public static PlanningStateItem TianjieFulu => Instance[411];
 
-		/// <summary>
-		/// 野兽代步
-		/// </summary>
 		public static PlanningStateItem AnimalCarrier => Instance[412];
 
-		/// <summary>
-		/// 功法书籍
-		/// </summary>
 		public static PlanningStateItem CombatSkillBook => Instance[413];
 
-		/// <summary>
-		/// 技艺书籍
-		/// </summary>
 		public static PlanningStateItem LifeSkillBook => Instance[414];
 
-		/// <summary>
-		/// 疗伤道具
-		/// </summary>
 		public static PlanningStateItem WoundRecoveryItem => Instance[415];
 
-		/// <summary>
-		/// 毒药道具
-		/// </summary>
 		public static PlanningStateItem PoisonItem => Instance[416];
 
-		/// <summary>
-		/// 调息道具
-		/// </summary>
 		public static PlanningStateItem QiRecoveryItem => Instance[417];
 
-		/// <summary>
-		/// 解毒道具
-		/// </summary>
 		public static PlanningStateItem DetoxPoisonItem => Instance[418];
 
-		/// <summary>
-		/// 野果道具
-		/// </summary>
 		public static PlanningStateItem FruitItem => Instance[419];
 
-		/// <summary>
-		/// 内力道具
-		/// </summary>
 		public static PlanningStateItem NeiliRecoveryItem => Instance[420];
 
-		/// <summary>
-		/// 属性道具
-		/// </summary>
 		public static PlanningStateItem AttributeRecoveryItem => Instance[421];
 
-		/// <summary>
-		/// 健康道具
-		/// </summary>
 		public static PlanningStateItem HealthRecoveryItem => Instance[422];
 
-		/// <summary>
-		/// 解蛊道具
-		/// </summary>
 		public static PlanningStateItem DetoxWugItem => Instance[423];
 
-		/// <summary>
-		/// 酒类道具
-		/// </summary>
 		public static PlanningStateItem Wine => Instance[424];
 
-		/// <summary>
-		/// 茶类道具
-		/// </summary>
 		public static PlanningStateItem Tea => Instance[425];
 
-		/// <summary>
-		/// 公库贡献值
-		/// </summary>
+		public static PlanningStateItem SpareableItem => Instance[614];
+
 		public static PlanningStateItem TreasuryContribution => Instance[427];
 
-		/// <summary>
-		/// 坟墓耐久
-		/// </summary>
+		public static PlanningStateItem ResourceContribution => Instance[604];
+
+		public static PlanningStateItem ItemContribution => Instance[605];
+
+		public static PlanningStateItem CanTakeInventoryLoadItemFromTreasury => Instance[613];
+
 		public static PlanningStateItem GraveDurability => Instance[432];
 
-		/// <summary>
-		/// 最大坟墓耐久
-		/// </summary>
 		public static PlanningStateItem GraveMaxDurability => Instance[433];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static PlanningState Instance = new PlanningState();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "ParentState", "InputParamType", "OutputParamType", "TemplateId", "ValueType" };
@@ -2802,8 +1541,8 @@ public class PlanningState : ConfigData<PlanningStateItem, int>
 		_dataArray.Add(new PlanningStateItem(601, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.None, -1, -1, 0));
 		_dataArray.Add(new PlanningStateItem(602, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.GoalArgumentStateSensor, 11, -1, 0));
 		_dataArray.Add(new PlanningStateItem(603, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.GoalArgumentStateSensor, 11, -1, 0));
-		_dataArray.Add(new PlanningStateItem(604, EPlanningStateValueType.Int, -1, EPlanningStateSensorType.None, -1, -1, 0));
-		_dataArray.Add(new PlanningStateItem(605, EPlanningStateValueType.Int, -1, EPlanningStateSensorType.None, -1, -1, 0));
+		_dataArray.Add(new PlanningStateItem(604, EPlanningStateValueType.Int, -1, EPlanningStateSensorType.OrganizationStateSensor, 5, -1, 0));
+		_dataArray.Add(new PlanningStateItem(605, EPlanningStateValueType.Int, -1, EPlanningStateSensorType.OrganizationStateSensor, 11, -1, 0));
 		_dataArray.Add(new PlanningStateItem(606, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.OrganizationStateSensor, -1, -1, 0));
 		_dataArray.Add(new PlanningStateItem(607, EPlanningStateValueType.Int, -1, EPlanningStateSensorType.RelationStateSensor, -1, 0, 0));
 		_dataArray.Add(new PlanningStateItem(608, EPlanningStateValueType.Int, -1, EPlanningStateSensorType.RelationStateSensor, -1, 0, 0));
@@ -2811,12 +1550,15 @@ public class PlanningState : ConfigData<PlanningStateItem, int>
 		_dataArray.Add(new PlanningStateItem(610, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.GoalArgumentStateSensor, 12, -1, 0));
 		_dataArray.Add(new PlanningStateItem(611, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.GoalArgumentStateSensor, 12, -1, 0));
 		_dataArray.Add(new PlanningStateItem(612, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.TriggerStateSensor, -1, -1, 0));
+		_dataArray.Add(new PlanningStateItem(613, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.OrganizationStateSensor, -1, -1, 0));
+		_dataArray.Add(new PlanningStateItem(614, EPlanningStateValueType.Bool, 391, EPlanningStateSensorType.InventoryStateSensor, -1, -1, 0));
+		_dataArray.Add(new PlanningStateItem(615, EPlanningStateValueType.Bool, -1, EPlanningStateSensorType.CharacterStateSensor, -1, -1, 0));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<PlanningStateItem>(613);
+		_dataArray = new List<PlanningStateItem>(616);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

@@ -7,92 +7,54 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件选项显示数据组合
-/// </summary>
 [Serializable]
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public struct EventOptionInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 选项的类型 由于界面的修改，这个字段现在的作用有所调整
-	/// SpecialEventOptionType，用于记录选项的特殊互动类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OptionType;
 
-	/// <summary>
-	/// 对应配置表中选项的OptionKey
-	/// </summary>
 	[SerializableGameDataField]
 	public string OptionKey;
 
-	/// <summary>
-	/// 对应事件选项的guid
-	/// </summary>
 	[SerializableGameDataField]
 	public string OptionGuid;
 
-	/// <summary>
-	/// 经过占位符替换的选项文本
-	/// !!!没有经过颜色替换!!!
-	/// </summary>
 	[SerializableGameDataField]
 	public string OptionContent;
 
-	/// <summary>
-	/// --需求
-	/// 如果该变量为空则表示不显示问号tips图标
-	/// 否则解析该列表显示出对应的图标
-	/// 各条可用数据间是且的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public List<OptionAvailableInfo> OptionAvailableConditions;
 
-	/// <summary>
-	/// -- 指令需求
-	/// </summary>
 	[SerializableGameDataField]
 	public List<OptionAvailableConditionInfo> OptionAvailableConditionInfos;
 
-	/// <summary>
-	/// --消耗
-	/// 该变量不为空，则解析为选项内容后的消耗图标+文本的方式
-	/// </summary>
 	[SerializableGameDataField]
 	public List<OptionConsumeInfo> OptionConsumeInfos;
 
-	/// <summary>
-	/// 经过后台计算好的选项状态，供前端显示
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OptionState;
 
-	/// <summary>
-	/// 选项的立场，用于决定是否显示Like小头像
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Behavior;
 
-	/// <summary>
-	/// 额外的格式化多语言Key
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> ExtraFormatLanguageKeys;
 
-	/// <summary>
-	/// 重要选项
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Important;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
+	[SerializableGameDataField]
+	public string ImportantOptionTipLanguageKey;
+
+	[SerializableGameDataField]
+	public string ImportantOptionTitleLanguageKey;
+
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -141,6 +103,8 @@ public struct EventOptionInfo : ISerializableGameData
 		{
 			totalSize += 2;
 		}
+		totalSize = ((ImportantOptionTipLanguageKey == null) ? (totalSize + 2) : (totalSize + (2 + 2 * ImportantOptionTipLanguageKey.Length)));
+		totalSize = ((ImportantOptionTitleLanguageKey == null) ? (totalSize + 2) : (totalSize + (2 + 2 * ImportantOptionTitleLanguageKey.Length)));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -148,7 +112,6 @@ public struct EventOptionInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -320,6 +283,46 @@ public struct EventOptionInfo : ISerializableGameData
 		}
 		*pCurrData = (Important ? ((byte)1) : ((byte)0));
 		pCurrData++;
+		if (ImportantOptionTipLanguageKey != null)
+		{
+			int elementsCount8 = ImportantOptionTipLanguageKey.Length;
+			Tester.Assert(elementsCount8 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount8;
+			pCurrData += 2;
+			fixed (char* pChar5 = ImportantOptionTipLanguageKey)
+			{
+				for (int num3 = 0; num3 < elementsCount8; num3++)
+				{
+					((short*)pCurrData)[num3] = (short)pChar5[num3];
+				}
+			}
+			pCurrData += 2 * elementsCount8;
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
+		if (ImportantOptionTitleLanguageKey != null)
+		{
+			int elementsCount9 = ImportantOptionTitleLanguageKey.Length;
+			Tester.Assert(elementsCount9 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount9;
+			pCurrData += 2;
+			fixed (char* pChar6 = ImportantOptionTitleLanguageKey)
+			{
+				for (int num4 = 0; num4 < elementsCount9; num4++)
+				{
+					((short*)pCurrData)[num4] = (short)pChar6[num4];
+				}
+			}
+			pCurrData += 2 * elementsCount9;
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -328,7 +331,6 @@ public struct EventOptionInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -486,6 +488,30 @@ public struct EventOptionInfo : ISerializableGameData
 		}
 		Important = *pCurrData != 0;
 		pCurrData++;
+		ushort elementsCount8 = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (elementsCount8 > 0)
+		{
+			int fieldSize4 = 2 * elementsCount8;
+			ImportantOptionTipLanguageKey = Encoding.Unicode.GetString(pCurrData, fieldSize4);
+			pCurrData += fieldSize4;
+		}
+		else
+		{
+			ImportantOptionTipLanguageKey = null;
+		}
+		ushort elementsCount9 = *(ushort*)pCurrData;
+		pCurrData += 2;
+		if (elementsCount9 > 0)
+		{
+			int fieldSize5 = 2 * elementsCount9;
+			ImportantOptionTitleLanguageKey = Encoding.Unicode.GetString(pCurrData, fieldSize5);
+			pCurrData += fieldSize5;
+		}
+		else
+		{
+			ImportantOptionTitleLanguageKey = null;
+		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class CombatDifficulty : ConfigData<CombatDifficultyItem, byte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CombatDifficulty Instance = new CombatDifficulty();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

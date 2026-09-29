@@ -104,8 +104,8 @@ public class ErJianMoNvYi : CombatSkillEffectBase
 						break;
 					}
 				}
-				bool canAddOuter = !base.CurrEnemyChar.GetOuterInjuryImmunity() && !outerFull;
-				bool canAddInner = !base.CurrEnemyChar.GetInnerInjuryImmunity() && !innerFull;
+				bool canAddOuter = !base.CurrEnemyChar.Immunity.IsImmune(EMarkType.Outer) && !outerFull;
+				bool canAddInner = !base.CurrEnemyChar.Immunity.IsImmune(EMarkType.Inner) && !innerFull;
 				if (canAddOuter || canAddInner)
 				{
 					bool addInner = canAddInner && (!canAddOuter || context.Random.CheckPercentProb(50));

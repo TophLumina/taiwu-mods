@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 悬赏人物显示数据
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class CharacterDisplayDataForSettlementBounty : ISerializableGameData
 {
@@ -56,13 +53,11 @@ public class CharacterDisplayDataForSettlementBounty : ISerializableGameData
 	[SerializableGameDataField]
 	public CharacterDisplayDataForGeneralScrollList CharacterDisplayDataForGeneralScrollList;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 58;
@@ -77,7 +72,6 @@ public class CharacterDisplayDataForSettlementBounty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -153,7 +147,6 @@ public class CharacterDisplayDataForSettlementBounty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

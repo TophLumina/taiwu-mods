@@ -13,19 +13,10 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 前后端共享的静态方法
-/// </summary>
 public static class SharedMethods
 {
-	/// <summary>
-	/// 资源建筑效果生效的建筑最大建筑数量
-	/// </summary>
 	public const int ResourceBlockBaseValueCount = 5;
 
-	/// <summary>
-	/// 获取材料的品级和造诣要求，用于制造药品和食物的材料有特殊规则
-	/// </summary>
 	public static short GetMaterialGradeAndAttainment(short materialTemplateId, sbyte itemType, sbyte lifeSkillType, int totalAttainment, List<short> makeItemSubtypeIdList, out sbyte grade, out short baseRequiredAttainment, int allPagesReadCookingSkillBookCount, short makeItemSubTypeId = -1, int attainmentEffect = 0, bool isPerfect = false, bool isManul = false, short manulFoodTemplateId = -1)
 	{
 		MaterialItem materialConfig = Material.Instance[materialTemplateId];
@@ -78,16 +69,6 @@ public static class SharedMethods
 		return GetMakeRequiredLifeSkillAttainment(makeItemSubTypeId, isManul, isPerfect, attainmentEffect, baseRequiredAttainment, grade, out manualAttainment, out perfectAttainment, out buildingReduceAttainment);
 	}
 
-	/// <summary>
-	/// 获取某阶段的品级和造诣要求
-	/// </summary>
-	/// <param name="i"></param>
-	/// <param name="startGrade"></param>
-	/// <param name="itemType"></param>
-	/// <param name="requirement"></param>
-	/// <param name="subTypeExtraLifeSkill"></param>
-	/// <param name="targetGrade"></param>
-	/// <param name="targetRequirement"></param>
 	public static void GetStageRequirementAndGrade(int i, sbyte startGrade, sbyte itemType, int requirement, short subTypeExtraLifeSkill, out sbyte targetGrade, out int targetRequirement)
 	{
 		requirement -= subTypeExtraLifeSkill;
@@ -108,12 +89,6 @@ public static class SharedMethods
 		}
 	}
 
-	/// <summary>
-	/// 获取产物品级范围
-	/// </summary>
-	/// <param name="materialFinalGrade"></param>
-	/// <param name="makeResultItemType"></param>
-	/// <returns></returns>
 	public static (sbyte minGrade, sbyte maxGrade) GetMakeResultGradeRange(sbyte materialFinalGrade, sbyte makeResultItemType)
 	{
 		sbyte minGrade = materialFinalGrade;
@@ -127,26 +102,11 @@ public static class SharedMethods
 		return (minGrade: minGrade, maxGrade: maxGrade);
 	}
 
-	/// <summary>
-	/// 获取某阶段的造诣要求
-	/// </summary>
-	/// <param name="i"></param>
-	/// <param name="attainment"></param>
-	/// <param name="subTypeExtraLifeSkill"></param>
-	/// <returns></returns>
 	public static short GetStageRequiredAttainment(int i, int attainment, short subTypeExtraLifeSkill)
 	{
 		return (short)(attainment * GlobalConfig.Instance.MakeItemStageAttainmentFactor[i] / 100 + subTypeExtraLifeSkill);
 	}
 
-	/// <summary>
-	/// 根据配置的基础品级，增减后的品级，基础模板ID来获得最终的品级和ID
-	/// </summary>
-	/// <param name="baseGrade"></param>
-	/// <param name="targetGrade"></param>
-	/// <param name="itemType"></param>
-	/// <param name="baseTemplateId"></param>
-	/// <returns></returns>
 	public static (bool success, sbyte finalGrade, short finialTemplateId) GetFinalGradeAndId(sbyte baseGrade, sbyte targetGrade, sbyte itemType, short baseTemplateId)
 	{
 		short baseGroupId = ItemTemplateHelper.GetGroupId(itemType, baseTemplateId);
@@ -160,13 +120,6 @@ public static class SharedMethods
 		return (success: (ItemTemplateHelper.CheckTemplateValid(itemType, resultTemplateId) ? ItemTemplateHelper.GetGroupId(itemType, resultTemplateId) : (-1)) == baseGroupId, finalGrade: Convert.ToSByte(targetGrade), finialTemplateId: resultTemplateId);
 	}
 
-	/// <summary>
-	/// 获取药材材料在制造时实际的品级
-	/// </summary>
-	/// <param name="grade"></param>
-	/// <param name="makeItemSubtypeIdList"></param>
-	/// <param name="makeItemSubTypeId"></param>
-	/// <param name="isManual"></param>
 	public static sbyte GetHerbMaterialTempGrade(sbyte grade, List<short> makeItemSubtypeIdList, short makeItemSubTypeId, bool isManual)
 	{
 		if (makeItemSubtypeIdList.FindIndex((short item) => item == makeItemSubTypeId) == -1)
@@ -177,13 +130,6 @@ public static class SharedMethods
 		return GetHerbMaterialTempGrade(grade, isManual, !config.IsOdd);
 	}
 
-	/// <summary>
-	/// 获取药材材料在制造时实际的品级
-	/// </summary>
-	/// <param name="isManual">是否手动选择子分类</param>
-	/// <param name="isMain">是否选择主方</param>
-	/// <param name="grade">材料原始级别</param>
-	/// <returns></returns>
 	public static sbyte GetHerbMaterialTempGrade(sbyte grade, bool isManual, bool isMain)
 	{
 		if (!isManual)
@@ -200,10 +146,6 @@ public static class SharedMethods
 		});
 	}
 
-	/// <summary>
-	/// 获取制造要求的技艺造诣
-	/// </summary>
-	/// <returns></returns>
 	public static short GetMakeRequiredLifeSkillAttainment(short makeItemSubTypeId, bool isManual, bool isPerfect, int effectValue, int materialAttainment, int materialGrade, out int manualAttainment, out int perfectAttainment, out int buildingReduceAttainment)
 	{
 		buildingReduceAttainment = GetReduceLifeSkillAttainmentByBuildingEffect(materialAttainment, effectValue);
@@ -215,13 +157,6 @@ public static class SharedMethods
 		return (short)total;
 	}
 
-	/// <summary>
-	/// 获取手写选择字诀的额外技艺造诣要求，排除食物
-	/// </summary>
-	/// <param name="makeItemSubTypeId"></param>
-	/// <param name="isManual"></param>
-	/// <param name="materialGrade"></param>
-	/// <returns></returns>
 	public static short GetMakeExtraLifeSkillAttainment(short makeItemSubTypeId, bool isManual, int materialGrade)
 	{
 		if (!isManual || makeItemSubTypeId < 0)
@@ -236,33 +171,16 @@ public static class SharedMethods
 		return (short)(makeItemSubTypeConfig.ExtraLifeSkill * (materialGrade + 1));
 	}
 
-	/// <summary>
-	/// 获取建筑对技艺造诣要求的影响结果
-	/// </summary>
-	/// <param name="attainment"></param>
-	/// <param name="effectValue"></param>
-	/// <returns></returns>
 	public static short GetRequiredLifeSkillAttainmentByBuildingEffect(int attainment, int effectValue)
 	{
 		return (short)(attainment - GetReduceLifeSkillAttainmentByBuildingEffect(attainment, effectValue));
 	}
 
-	/// <summary>
-	/// 获取建筑对技艺造诣要求的影响
-	/// </summary>
-	/// <param name="attainment"></param>
-	/// <param name="effectValue"></param>
-	/// <returns></returns>
 	public static short GetReduceLifeSkillAttainmentByBuildingEffect(int attainment, int effectValue)
 	{
 		return (short)(attainment * effectValue / 100);
 	}
 
-	/// <summary>
-	/// 检查鸡是否能吃该物品
-	/// </summary>
-	/// <param name="itemKey"></param>
-	/// <returns></returns>
 	public static bool CheckItemCanFeedChicken(ItemKey itemKey)
 	{
 		if (ItemTemplateHelper.GetItemSubType(itemKey.ItemType, itemKey.TemplateId) == 1204)
@@ -276,12 +194,6 @@ public static class SharedMethods
 		return true;
 	}
 
-	/// <summary>
-	/// 建筑是否可以出售该道具
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="itemKey"></param>
-	/// <returns></returns>
 	public static bool IsBuildingCanSoldItem(BuildingBlockItem config, ItemKey itemKey)
 	{
 		if (!ItemTemplateHelper.IsTransferable(itemKey.ItemType, itemKey.TemplateId))
@@ -396,9 +308,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 获取建筑能出售的物品类型列表，经过大类概括，仅可用于自动上货设置，在<see cref="M:GameData.Domains.Building.SharedMethods.IsBuildingCanSoldItem(Config.BuildingBlockItem,GameData.Domains.Item.ItemKey)" />的结果为真时才有效
-	/// </summary>
 	public static List<sbyte> GetBuildingCanSoldItemTypeList(BuildingBlockItem config, out short itemSubType)
 	{
 		itemSubType = -1;
@@ -456,23 +365,11 @@ public static class SharedMethods
 		return typeList;
 	}
 
-	/// <summary>
-	/// 获取建筑扩建需要的资源
-	/// </summary>
-	/// <param name="baseCost">基础消耗</param>
-	/// <param name="addCostPerLevel">每等级增加消耗</param>
-	/// <param name="buildingLevel">建筑等级（升级前）</param>
 	public static int GetExpandBuildingCost(int baseCost, int addCostPerLevel, sbyte buildingLevel)
 	{
 		return baseCost + baseCost * addCostPerLevel * buildingLevel / 100;
 	}
 
-	/// <summary>
-	/// 计算经营进度变化量
-	/// </summary>
-	/// <param name="buildingTemplateId"></param>
-	/// <param name="attainment"></param>
-	/// <returns></returns>
 	public static int GetShopManageProgressDelta(short buildingTemplateId, int attainment)
 	{
 		if (buildingTemplateId == 105)
@@ -482,14 +379,6 @@ public static class SharedMethods
 		return GlobalConfig.Instance.ShopManageProgressBaseDelta + attainment;
 	}
 
-	/// <summary>
-	/// 获得拆除建筑操作的资源返还
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="level">建筑等级</param>
-	/// <param name="resourceType"></param>
-	/// <param name="blockData"></param>
-	/// <returns></returns>
 	public static int GetResourceReturnOfRemoveBuilding(BuildingBlockItem config, sbyte level, sbyte resourceType, BuildingBlockData blockData)
 	{
 		CValuePercent percent = config.RemoveGetResourcePercent;
@@ -522,11 +411,6 @@ public static class SharedMethods
 		return cost * percent;
 	}
 
-	/// <summary>
-	/// 建筑是否可以升级（显示扩建toggle,但是名字不一样）
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static bool BuildingCanUpgrade(BuildingBlockItem config)
 	{
 		if (config.MaxLevel > 1)
@@ -536,20 +420,11 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 泰晤士祠堂
-	/// </summary>
-	/// <param name="leaderFameType"></param>
-	/// <param name="attainment"></param>
-	/// <returns></returns>
 	public static int GetTaiwuShrineEffect(sbyte leaderFameType, int attainment)
 	{
 		return BuildingFormula.DefValue.TaiwuShrineEffect.Calculate(leaderFameType, attainment);
 	}
 
-	/// <summary>
-	/// 选取计算安定或文化对建筑收获影响所涉及的单个定居点值
-	/// </summary>
 	public static int CalcSafetyOrCultureFactorSettlementPickValue(short requiredValue, short value)
 	{
 		if (requiredValue > 0)
@@ -567,10 +442,6 @@ public static class SharedMethods
 		return (-requiredValue - value) / 5 + 5;
 	}
 
-	/// <summary>
-	/// 选取计算安定或文化对建筑收获影响所涉及的定居点.
-	/// TODO: 该方法操作的是纯显示数据,不应该在同步逻辑内.
-	/// </summary>
 	public static List<SettlementDisplayData> PickSafetyOrCultureFactorSettlements(BuildingBlockItem config, IList<SettlementDisplayData> source, out int addition)
 	{
 		List<SettlementDisplayData> settlements = new List<SettlementDisplayData>();
@@ -625,11 +496,6 @@ public static class SharedMethods
 		return result;
 	}
 
-	/// <summary>
-	/// 建筑是否产出银钱威望
-	/// </summary>
-	/// <param name="buildingBlockItem"></param>
-	/// <param name="shopEventItem"></param>
 	public static bool IsBuildingProduceMoneyAuthority(BuildingBlockItem buildingBlockItem, ShopEventItem shopEventItem)
 	{
 		if (buildingBlockItem.IsShop && shopEventItem != null)
@@ -639,12 +505,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 建筑是否卖东西
-	/// </summary>
-	/// <param name="buildingBlockItem"></param>
-	/// <param name="shopEventItem"></param>
-	/// <returns></returns>
 	public static bool IsBuildingSoldItem(BuildingBlockItem buildingBlockItem, ShopEventItem shopEventItem)
 	{
 		if (buildingBlockItem.IsShop && shopEventItem != null)
@@ -654,11 +514,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 建筑是否出售物品获得资源
-	/// </summary>
-	/// <param name="buildingBlockItem"></param>
-	/// <returns></returns>
 	public static bool IsBuildingExchangeResourceGoods(BuildingBlockItem buildingBlockItem)
 	{
 		if (buildingBlockItem.SuccesEvent.Count != 0)
@@ -668,11 +523,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 建筑是否收获资源
-	/// </summary>
-	/// <param name="buildingBlockItem"></param>
-	/// <returns></returns>
 	public static bool IsBuildingCollectResourceGoods(BuildingBlockItem buildingBlockItem)
 	{
 		if (buildingBlockItem.SuccesEvent.Count != 0)
@@ -695,11 +545,6 @@ public static class SharedMethods
 		return -1;
 	}
 
-	/// <summary>
-	/// 需要安稳或文化
-	/// </summary>
-	/// <param name="buildingBlockItem"></param>
-	/// <returns></returns>
 	public static bool BuildingRequireSafetyOrCulture(BuildingBlockItem buildingBlockItem)
 	{
 		if (buildingBlockItem.RequireCulture == 0)
@@ -709,20 +554,11 @@ public static class SharedMethods
 		return true;
 	}
 
-	/// <summary>
-	/// 计算促织恢复耐久所需时间
-	/// </summary>
-	/// <param name="jarGrade">促织罐品级</param>
-	/// <returns>所需月份数</returns>
 	public static int CalcCricketRegenTime(sbyte jarGrade)
 	{
 		return 3 - Grade.GetGroup(jarGrade);
 	}
 
-	/// <summary>
-	/// 有无可用的心材
-	/// </summary>
-	/// <returns>item1:是否有  item2: 有的话数量</returns>
 	public static (bool, int count) HasBuildingCore(BuildingBlockItem config, List<ItemDisplayData> canUseBuildingCore)
 	{
 		if (canUseBuildingCore != null)
@@ -738,10 +574,6 @@ public static class SharedMethods
 		return (false, count: 0);
 	}
 
-	/// <summary>
-	/// 是否有建筑效果
-	/// </summary>
-	/// <returns></returns>
 	public static bool HasEffect(BuildingBlockItem config)
 	{
 		if (config == null)
@@ -764,11 +596,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 是否为经营事件不为空的经营建筑，这些建筑会产出，其他是经营建筑但经营事件为空的，里面的人员不会产出，但是会成长
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static bool BuildingIsShopWithEvent(BuildingBlockItem config)
 	{
 		if (config.IsShop)
@@ -783,11 +610,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 经营进度
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static bool BuildingShowManageProgress(BuildingBlockItem config)
 	{
 		if (!BuildingIsShopWithEvent(config))
@@ -797,11 +619,6 @@ public static class SharedMethods
 		return true;
 	}
 
-	/// <summary>
-	/// 产出道具
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static bool BuildingShopEventHaveItemList(BuildingBlockItem config)
 	{
 		List<short> succesEvent = config.SuccesEvent;
@@ -812,11 +629,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 产出资源
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static bool BuildingShopEventHaveResourceList(BuildingBlockItem config)
 	{
 		List<short> succesEvent = config.SuccesEvent;
@@ -827,11 +639,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 出售道具
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static bool BuildingShopEventHaveSoldItemList(BuildingBlockItem config)
 	{
 		List<short> succesEvent = config.SuccesEvent;
@@ -842,11 +649,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 产出人才
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static bool BuildingShopEventRecruitPeople(BuildingBlockItem config)
 	{
 		List<short> succesEvent = config.SuccesEvent;
@@ -857,10 +659,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 建筑可以放人+宴堂
-	/// </summary>
-	/// <returns></returns>
 	public static bool BuildingCanGetEarningData(BuildingBlockItem configData)
 	{
 		if (!configData.IsShop)
@@ -870,10 +668,6 @@ public static class SharedMethods
 		return true;
 	}
 
-	/// <summary>
-	/// 建筑可以放人+宴堂+居所
-	/// </summary>
-	/// <returns></returns>
 	public static bool BuildingGetDisplayData(BuildingBlockItem configData)
 	{
 		if (!configData.IsShop && configData.TemplateId != 47)
@@ -883,11 +677,6 @@ public static class SharedMethods
 		return true;
 	}
 
-	/// <summary>
-	/// 获取建筑经营栏位
-	/// </summary>
-	/// <param name="buildingTemplateId"></param>
-	/// <returns></returns>
 	public static sbyte GetBuildingSlotCount(short buildingTemplateId)
 	{
 		switch (buildingTemplateId)
@@ -914,22 +703,11 @@ public static class SharedMethods
 		}
 	}
 
-	/// <summary>
-	/// 获取建筑收获物暂存时间
-	/// 仅应对当铺以及招募建筑使用
-	/// </summary>
-	/// <param name="buildingTemplateId"></param>
-	/// <returns></returns>
 	public static int GetBuildingEarnPreserveTime(short buildingTemplateId)
 	{
 		return GetBuildingSlotCount(buildingTemplateId);
 	}
 
-	/// <summary>
-	/// 最大制造进度
-	/// </summary>
-	/// <param name="isAffectedByChallenge">是否受玄狱挑战影响</param>
-	/// <returns></returns>
 	public static int MaxProductionProgress(bool isAffectedByChallenge)
 	{
 		if (!ExternalDataBridge.Context.ChallengeModeData.IsEnabled(EChallengeModeImplement.BuildingWorkHard))
@@ -939,11 +717,6 @@ public static class SharedMethods
 		return GlobalConfig.Instance.MaxProductionProgress * 3;
 	}
 
-	/// <summary>
-	/// 获取物品能增加的制造进度
-	/// </summary>
-	/// <param name="content"></param>
-	/// <returns></returns>
 	public static int GetItemProductionProgress(ItemDisplayData content)
 	{
 		if (!content.IsResource)
@@ -953,11 +726,6 @@ public static class SharedMethods
 		return 1;
 	}
 
-	/// <summary>
-	/// 获取建筑固定效果
-	/// </summary>
-	/// <param name="buildingTemplateId"></param>
-	/// <returns></returns>
 	public static sbyte GetBuildingFixedBuff(short buildingTemplateId)
 	{
 		BuildingBlockItem config = BuildingBlock.Instance[buildingTemplateId];
@@ -978,12 +746,6 @@ public static class SharedMethods
 		return fixedBuff;
 	}
 
-	/// <summary>
-	/// 获取建筑固定效果
-	/// </summary>
-	/// <param name="buildingTemplateId"></param>
-	/// <param name="level"></param>
-	/// <returns></returns>
 	public static sbyte GetBuildingLevelEffect(short buildingTemplateId, int level)
 	{
 		BuildingBlockItem config = BuildingBlock.Instance[buildingTemplateId];
@@ -1009,9 +771,6 @@ public static class SharedMethods
 		return (config.MaxDurability - blockData.Durability) * config.BaseRepairCost;
 	}
 
-	/// <summary>
-	/// 计算村民角色代表的技艺和赋性类型
-	/// </summary>
 	public unsafe static (short, short) CalcVillagerRoleLifeSkillAndPersonalityType(short roleTemplateId, LifeSkillShorts attainments, Personalities personalities)
 	{
 		switch (roleTemplateId)
@@ -1067,19 +826,11 @@ public static class SharedMethods
 		}
 	}
 
-	/// <summary>
-	/// 建筑时是否需要消耗资源（消耗的，取消建造时才返还）
-	/// </summary>
 	public static bool NeedCostResourceToBuild(BuildingBlockItem buildingBlockConfigItem)
 	{
 		return buildingBlockConfigItem.Class != EBuildingBlockClass.BornResource;
 	}
 
-	/// <summary>
-	/// 获取计算得出的指定等级的建筑的最终维护费用
-	/// </summary>
-	/// <param name="configData"></param>
-	/// <returns></returns>
 	public static int[] GetFinalMaintenanceCost(BuildingBlockItem configData)
 	{
 		int[] resourceCosts = new int[8];
@@ -1090,12 +841,6 @@ public static class SharedMethods
 		return resourceCosts;
 	}
 
-	/// <summary>
-	/// 资源建筑效果总和
-	/// </summary>
-	/// <param name="formulaTemplateId"></param>
-	/// <param name="baseValues"></param>
-	/// <returns></returns>
 	public static int CalcResourceBlockTotalEffectValue(int formulaTemplateId, Span<int> baseValues)
 	{
 		BuildingFormulaItem formula = BuildingFormula.Instance[formulaTemplateId];
@@ -1107,11 +852,6 @@ public static class SharedMethods
 		return total;
 	}
 
-	/// <summary>
-	/// 资源建筑效果 按照等级排名的生效比例
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public static int GetResourceBlockEffectPercentage(int index)
 	{
 		if (5 <= index)
@@ -1121,22 +861,11 @@ public static class SharedMethods
 		return 100 * (5 - index) / 5;
 	}
 
-	/// <summary>
-	/// 资源建筑效果 基础值
-	/// </summary>
-	/// <param name="level"></param>
-	/// <param name="percentage"></param>
-	/// <returns></returns>
 	public static int GetResourceBlockEffectPercentageValue(int level, int percentage)
 	{
 		return level * percentage / 100;
 	}
 
-	/// <summary>
-	/// 除EBuildingScaleClass.LevelEffect外的建筑效果
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public static List<short> GetResourceBlockEffectScaleTemplateIdList(short templateId)
 	{
 		BuildingBlockItem config = BuildingBlock.Instance[templateId];
@@ -1154,11 +883,6 @@ public static class SharedMethods
 		return list;
 	}
 
-	/// <summary>
-	/// buildingScale条目是否受到受到ResourceBlockBaseValueCount影响
-	/// </summary>
-	/// <param name="buildingScaleTemplateId"></param>
-	/// <returns></returns>
 	public static bool HaveResourceBlockEffect(short buildingScaleTemplateId)
 	{
 		BuildingScaleItem config = BuildingScale.Instance[buildingScaleTemplateId];
@@ -1169,12 +893,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 受到ResourceBlockBaseValueCount影响且前5
-	/// </summary>
-	/// <param name="buildingBlockTemplateId"></param>
-	/// <param name="rank"></param>
-	/// <returns></returns>
 	public static bool HaveUsefulResourceBlockEffect(short buildingBlockTemplateId, int rank)
 	{
 		if (BuildingBlock.Instance[buildingBlockTemplateId].Class == EBuildingBlockClass.BornResource)
@@ -1184,17 +902,6 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 获取最佳工具
-	/// 需注意，这个方法不能修复<see cref="M:GameData.Domains.Item.ItemTemplateHelper.GetResourceType(System.SByte,System.Int16)" />返回<see cref="F:GameData.Domains.Character.ResourceType.Food" />的装备
-	/// 因为食物物品需要特殊的修理方法
-	/// </summary>
-	/// <param name="tools"></param>
-	/// <param name="attainments"></param>
-	/// <param name="equipment"></param>
-	/// <param name="equipmentDurability"></param>
-	/// <param name="runOut"></param>
-	/// <returns></returns>
 	public static ItemDisplayData BestTool(IEnumerable<ItemDisplayData> tools, LifeSkillShorts attainments, ItemKey equipment, short equipmentDurability, HashSet<ItemKey> runOut = null)
 	{
 		bool flag = equipment.IsValid();
@@ -1221,15 +928,6 @@ public static class SharedMethods
 			.FirstOrDefault() ?? new ItemDisplayData();
 	}
 
-	/// <summary>
-	/// 获取最佳工具
-	/// </summary>
-	/// <param name="tools"></param>
-	/// <param name="attainments"></param>
-	/// <param name="equipment"></param>
-	/// <param name="equipmentDurability"></param>
-	/// <param name="runOut"></param>
-	/// <returns></returns>
 	public static ItemKey BestTool(IEnumerable<ItemKey> tools, LifeSkillShorts attainments, ItemKey equipment, short equipmentDurability, HashSet<ItemKey> runOut = null)
 	{
 		if (!equipment.IsValid())
@@ -1250,27 +948,11 @@ public static class SharedMethods
 			.FirstOrDefault();
 	}
 
-	/// <summary>
-	/// 检测使用某工具时，是否能满足修理该物品的造诣需求
-	/// </summary>
-	/// <param name="itemData"></param>
-	/// <param name="tool"></param>
-	/// <param name="attainments"></param>
-	/// <returns>保证返回true时，tool必然为工具或invalid</returns>
 	public static bool CheckBestToolAttainment(ItemDisplayData itemData, ItemKey tool, LifeSkillShorts attainments)
 	{
 		return CheckBestToolAttainment(itemData.RealKey, tool, itemData.Durability, attainments);
 	}
 
-	/// <summary>
-	/// 检测使用某工具时，是否能满足修理该物品的造诣需求
-	/// 后端用，仅需获取物品的等级
-	/// </summary>
-	/// <param name="tool"></param>
-	/// <param name="equipment"></param>
-	/// <param name="durability"></param>
-	/// <param name="attainments"></param>
-	/// <returns>保证返回true时，tool必然为工具或invalid</returns>
 	public static bool CheckBestToolAttainment(ItemKey tool, ItemKey equipment, short durability, LifeSkillShorts attainments)
 	{
 		sbyte lifeSkillType = ItemTemplateHelper.GetCraftRequiredLifeSkillType(equipment.ItemType, equipment.TemplateId);
@@ -1300,23 +982,11 @@ public static class SharedMethods
 		return false;
 	}
 
-	/// <summary>
-	/// 获取修复物品需要的资源
-	/// </summary>
-	/// <param name="itemData"></param>
-	/// <returns></returns>
 	public static ResourceInts GetRepairResource(ItemDisplayData itemData)
 	{
 		return GetRepairResource(itemData.MaterialResources, itemData.RealKey, itemData.Durability);
 	}
 
-	/// <summary>
-	/// 获取修复物品需要的资源
-	/// </summary>
-	/// <param name="resources"></param>
-	/// <param name="equipment"></param>
-	/// <param name="durability"></param>
-	/// <returns></returns>
 	public static ResourceInts GetRepairResource(MaterialResources resources, ItemKey equipment, short durability)
 	{
 		return ItemTemplateHelper.GetRepairNeedResources(resources, equipment, durability);

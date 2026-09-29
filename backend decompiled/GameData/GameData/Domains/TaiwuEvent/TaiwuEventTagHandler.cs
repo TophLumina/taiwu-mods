@@ -1517,12 +1517,12 @@ internal class TaiwuEventTagHandler
 		{
 			return error;
 		}
-		int adventureTemplateId = -1;
-		if (!_argBox.Get(key, ref adventureTemplateId))
+		int adventureCoreId = -1;
+		if (!_argBox.Get(key, ref adventureCoreId))
 		{
 			return Error("DecodeSwordGrave", key);
 		}
-		Config.AdventureItem config = Config.Adventure.Instance[adventureTemplateId];
+		IAdventureData config = AdventureDomain.Core.GetAdventureAny(adventureCoreId);
 		if (1 == 0)
 		{
 		}

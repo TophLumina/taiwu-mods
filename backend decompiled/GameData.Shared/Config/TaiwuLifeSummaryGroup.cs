@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class TaiwuLifeSummaryGroup : ConfigData<TaiwuLifeSummaryGroupItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TaiwuLifeSummaryGroup Instance = new TaiwuLifeSummaryGroup();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Type", "Items", "TemplateId", "Size" };

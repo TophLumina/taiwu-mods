@@ -10,10 +10,15 @@ public static class CastBoostKit
 
 	private const int ClearDefendAddQiDisorderValuePerGrid = 500;
 
+	public static int GetCastBoostEffectUnit(short skillId)
+	{
+		return Config.CombatSkill.Instance[skillId].GridCost;
+	}
+
 	public static CastBoostEffectDisplayData GetPureCostNeiliEffectData(this CombatSkillKey skillKey, byte type, short skillId, bool applyEffect)
 	{
 		CombatCharacter combatChar = DomainManager.Combat.GetElement_CombatCharacterDict(skillKey.CharId);
-		sbyte gridCost = Config.CombatSkill.Instance[skillId].GridCost;
+		int gridCost = GetCastBoostEffectUnit(skillId);
 		int costValue = gridCost * -5;
 		costValue = (applyEffect ? combatChar.ApplySpecialEffectToNeiliAllocation(type, costValue) : costValue);
 		CombatSkillEffectDescriptionDisplayData effectDescription = DomainManager.CombatSkill.GetEffectDisplayData(skillKey);
@@ -28,7 +33,7 @@ public static class CastBoostKit
 
 	public static CastBoostEffectDisplayData GetCostClearDefendData(this CombatSkillKey skillKey, short skillId)
 	{
-		sbyte gridCost = Config.CombatSkill.Instance[skillId].GridCost;
+		int gridCost = GetCastBoostEffectUnit(skillId);
 		int costValue = gridCost * 500;
 		CombatSkillEffectDescriptionDisplayData effectDescription = DomainManager.CombatSkill.GetEffectDisplayData(skillKey);
 		return CastBoostEffectDisplayData.GenerateClearDefend(effectDescription, costValue);

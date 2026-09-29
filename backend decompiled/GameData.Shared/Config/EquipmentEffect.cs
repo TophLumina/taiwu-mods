@@ -8,61 +8,28 @@ namespace Config;
 [Serializable]
 public class EquipmentEffect : ConfigData<EquipmentEffectItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 义父所制
-		/// </summary>
 		public const short MadeByAdoptiveFather = 54;
 
-		/// <summary>
-		/// 试炼
-		/// </summary>
 		public const short ZhujianTest = 55;
 
-		/// <summary>
-		/// 血褓
-		/// </summary>
 		public const short ProtagonistClothingEffect = 66;
 
-		/// <summary>
-		/// 破厄
-		/// </summary>
 		public const short ProtagonistAccessoryEffect = 67;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 义父所制
-		/// </summary>
 		public static EquipmentEffectItem MadeByAdoptiveFather => Instance[(short)54];
 
-		/// <summary>
-		/// 试炼
-		/// </summary>
 		public static EquipmentEffectItem ZhujianTest => Instance[(short)55];
 
-		/// <summary>
-		/// 血褓
-		/// </summary>
 		public static EquipmentEffectItem ProtagonistClothingEffect => Instance[(short)66];
 
-		/// <summary>
-		/// 破厄
-		/// </summary>
 		public static EquipmentEffectItem ProtagonistAccessoryEffect => Instance[(short)67];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EquipmentEffect Instance = new EquipmentEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "TemplateId", "EffectClassName" };

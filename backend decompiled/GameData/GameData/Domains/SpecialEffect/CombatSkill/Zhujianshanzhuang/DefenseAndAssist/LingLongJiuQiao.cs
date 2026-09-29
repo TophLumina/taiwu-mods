@@ -78,7 +78,7 @@ public class LingLongJiuQiao : DefenseSkillBase
 		foreach (sbyte slot in TargetEquipmentSlots)
 		{
 			ItemKey key = equipments[slot];
-			if (key.IsValid())
+			if (key.IsValid() && CombatDomain.IsWeaponCanBreak(key.GetConfig().ItemSubType))
 			{
 				ItemBase item = DomainManager.Item.GetBaseItem(key);
 				if (base.IsDirect ? (item.GetCurrDurability() < item.GetMaxDurability()) : (item.GetCurrDurability() > 0))

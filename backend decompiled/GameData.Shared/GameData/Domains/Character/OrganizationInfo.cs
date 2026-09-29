@@ -4,42 +4,19 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 角色所属团体信息
-/// </summary>
 [Serializable]
 public struct OrganizationInfo : ISerializableGameData, IEquatable<OrganizationInfo>
 {
-	/// <summary>
-	/// 团体模板 ID.
-	/// 必然大于等于 0.
-	/// </summary>
 	public sbyte OrgTemplateId;
 
-	/// <summary>
-	/// 团体阶层
-	/// </summary>
 	public sbyte Grade;
 
-	/// <summary>
-	/// 是否正职
-	/// </summary>
 	public bool Principal;
 
-	/// <summary>
-	/// 定居点 ID.
-	/// 小于 0 表示无定居点.
-	/// </summary>
 	public short SettlementId;
 
-	/// <summary>
-	/// 无门无派
-	/// </summary>
 	public static readonly OrganizationInfo None = new OrganizationInfo(0, 0, principal: true, -1);
 
-	/// <summary>
-	/// 交互品级，用于在于太吾交互时判断Npc的品级
-	/// </summary>
 	public sbyte InteractionGrade
 	{
 		get
@@ -52,13 +29,6 @@ public struct OrganizationInfo : ISerializableGameData, IEquatable<OrganizationI
 		}
 	}
 
-	/// <summary>
-	/// 从配置表构造此对象时, settlementId 永远为默认值
-	/// </summary>
-	/// <param name="orgTemplateId"></param>
-	/// <param name="grade"></param>
-	/// <param name="principal"></param>
-	/// <param name="settlementId"></param>
 	public OrganizationInfo(sbyte orgTemplateId, sbyte grade, bool principal = true, short settlementId = -1)
 	{
 		OrgTemplateId = orgTemplateId;
@@ -94,11 +64,6 @@ public struct OrganizationInfo : ISerializableGameData, IEquatable<OrganizationI
 		return name + gradeName;
 	}
 
-	/// <summary>
-	/// 获取品级/交互品级
-	/// </summary>
-	/// <param name="targetIsTaiwu"></param>
-	/// <returns></returns>
 	public sbyte GetGrade(bool targetIsTaiwu = false)
 	{
 		if (!targetIsTaiwu)

@@ -768,6 +768,10 @@ public class Sect : Settlement, ISerializableGameData
 
 	public void AddBounty(DataContext context, GameData.Domains.Character.Character character, sbyte punishmentSeverity, short punishmentType, int duration = -1)
 	{
+		if (punishmentSeverity < 0)
+		{
+			punishmentSeverity = GetPunishmentTypeSeverity(PunishmentType.Instance[punishmentType], includeDefault: true);
+		}
 		if (duration < 0)
 		{
 			duration = PunishmentSeverity.Instance[punishmentSeverity].BountyDuration;

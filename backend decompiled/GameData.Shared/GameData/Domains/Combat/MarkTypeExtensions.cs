@@ -1,15 +1,7 @@
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 标记类型拓展
-/// </summary>
 public static class MarkTypeExtensions
 {
-	/// <summary>
-	/// 获取标记组类型
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public static EMarkGroupType GetGroup(this EMarkType type)
 	{
 		switch (type)

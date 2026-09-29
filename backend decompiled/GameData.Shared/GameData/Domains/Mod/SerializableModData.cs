@@ -7,43 +7,22 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Mod;
 
-/// <summary>
-/// 用于保存单个Mod中的所有可存档数据的类
-/// </summary>
 public class SerializableModData : ISerializableGameData
 {
-	/// <summary>
-	/// 所有的 int 类型存档数据
-	/// </summary>
 	[SerializableGameDataField]
 	private readonly Dictionary<string, int> _intValues;
 
-	/// <summary>
-	/// 所有的 float 类型存档数据
-	/// </summary>
 	[SerializableGameDataField]
 	private readonly Dictionary<string, float> _floatValues;
 
-	/// <summary>
-	/// 所有的 bool 类型存档数据
-	/// </summary>
 	[SerializableGameDataField]
 	private readonly Dictionary<string, bool> _boolValues;
 
-	/// <summary>
-	/// 所有的 string 类型存档数据
-	/// </summary>
 	[SerializableGameDataField]
 	private readonly Dictionary<string, string> _stringValues;
 
-	/// <summary>
-	/// 所有继承 ISerializableGameData 的类型的存档数据
-	/// </summary>
 	private readonly Dictionary<Type, Dictionary<string, ISerializableGameData>> _serializableGameDataValues;
 
-	/// <summary>
-	/// 构造方法，初始化数据
-	/// </summary>
 	public SerializableModData()
 	{
 		_intValues = new Dictionary<string, int>();
@@ -53,11 +32,6 @@ public class SerializableModData : ISerializableGameData
 		_serializableGameDataValues = new Dictionary<Type, Dictionary<string, ISerializableGameData>>();
 	}
 
-	/// <summary>
-	/// 直接从EventArgBox中复制来的同名方法，用于从字节流中读取一个 String。
-	/// </summary>
-	/// <param name="pData"></param>
-	/// <returns></returns>
 	private unsafe string ReadString(ref byte* pData)
 	{
 		ushort elementsCount = *(ushort*)pData;
@@ -72,13 +46,6 @@ public class SerializableModData : ISerializableGameData
 		return string.Empty;
 	}
 
-	/// <summary>
-	/// 直接从EventArgBox中复制来的同名方法，用于向字节流中写入一个 String。
-	/// 由于这里的string长度是用ushort，出于所占空间大小考虑优先使用该方法而不是 Serializer 中的保存 string 的方法
-	/// </summary>
-	/// <param name="pData"></param>
-	/// <param name="target"></param>
-	/// <returns></returns>
 	private unsafe int WriteString(byte* pData, string target)
 	{
 		byte* pCurrData = pData;
@@ -105,11 +72,6 @@ public class SerializableModData : ISerializableGameData
 		return (int)(pCurrData - pData);
 	}
 
-	/// <summary>
-	/// 是否包含指定Key
-	/// </summary>
-	/// <param name="key"></param>
-	/// <returns></returns>
 	public bool ContainsKey(string key)
 	{
 		if (_intValues.ContainsKey(key) || _boolValues.ContainsKey(key) || _stringValues.ContainsKey(key) || _floatValues.ContainsKey(key))
@@ -126,57 +88,26 @@ public class SerializableModData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取一个 int 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public bool Get(string key, out int val)
 	{
 		return _intValues.TryGetValue(key, out val);
 	}
 
-	/// <summary>
-	/// 获取一个 float 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public bool Get(string key, out float val)
 	{
 		return _floatValues.TryGetValue(key, out val);
 	}
 
-	/// <summary>
-	/// 获取一个 int 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public bool Get(string key, out bool val)
 	{
 		return _boolValues.TryGetValue(key, out val);
 	}
 
-	/// <summary>
-	/// 获取一个 string 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public bool Get(string key, out string val)
 	{
 		return _stringValues.TryGetValue(key, out val);
 	}
 
-	/// <summary>
-	/// 获取一个继承 ISerializableGameData 的自定义类的实例
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="serializableGameData"></param>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public bool Get<T>(string key, out T serializableGameData) where T : ISerializableGameData
 	{
 		if (_serializableGameDataValues.TryGetValue(typeof(T), out var collection) && collection.TryGetValue(key, out var data))
@@ -188,56 +119,26 @@ public class SerializableModData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 设置一个 int 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public void Set(string key, int val)
 	{
 		_intValues[key] = val;
 	}
 
-	/// <summary>
-	/// 设置一个 float 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public void Set(string key, float val)
 	{
 		_floatValues[key] = val;
 	}
 
-	/// <summary>
-	/// 设置一个 bool 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public void Set(string key, bool val)
 	{
 		_boolValues[key] = val;
 	}
 
-	/// <summary>
-	/// 设置一个 string 数据
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="val"></param>
-	/// <returns></returns>
 	public void Set(string key, string val)
 	{
 		_stringValues[key] = val;
 	}
 
-	/// <summary>
-	/// 设置一个继承 ISerializableGameData 的自定义类的实例
-	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="serializableGameData"></param>
-	/// <typeparam name="T"></typeparam>
 	public void Set<T>(string key, T serializableGameData) where T : ISerializableGameData
 	{
 		Type type = typeof(T);

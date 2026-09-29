@@ -50,7 +50,7 @@ public class PlotHarmAction : ICharacterActionImpl, ISerializableGameData
 	public void PostExecute(DataContext context, Character character, CharacterActionData actionData)
 	{
 		Character targetChar = actionData.TargetChar;
-		DomainManager.Character.HandlePlotHarmAction(context, character, targetChar, _harmItem, _actionPhase);
+		DomainManager.Character.HandlePlotHarmAction(context, character, targetChar, _harmItem, actionData.Template);
 	}
 
 	public bool IsSerializedSizeFixed()

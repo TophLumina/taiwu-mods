@@ -7,91 +7,40 @@ namespace Config;
 [Serializable]
 public class ReadingStrategy : ConfigData<ReadingStrategyItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 照猫画虎
-		/// </summary>
 		public const sbyte DoubleCurrentPageStrategyAddValues = 4;
 
-		/// <summary>
-		/// 按图索骥
-		/// </summary>
 		public const sbyte DoubleCurrentPageStrategyEfficiencyChange = 5;
 
-		/// <summary>
-		/// 寻章摘句
-		/// </summary>
 		public const sbyte CostBookDurabilityToAddReadingProgress = 6;
 
-		/// <summary>
-		/// 含英咀华
-		/// </summary>
 		public const sbyte CostBookDurabilityToAddReadingEfficiency = 7;
 
-		/// <summary>
-		/// 春诵夏弦
-		/// </summary>
 		public const sbyte ReduceIntCostButNoExpGain = 12;
 
-		/// <summary>
-		/// 心领得间
-		/// </summary>
 		public const sbyte IntGainAccordingToStrategies = 14;
 
-		/// <summary>
-		/// 义父注解
-		/// </summary>
 		public const sbyte NotesByAdoptiveFather = 18;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 照猫画虎
-		/// </summary>
 		public static ReadingStrategyItem DoubleCurrentPageStrategyAddValues => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 按图索骥
-		/// </summary>
 		public static ReadingStrategyItem DoubleCurrentPageStrategyEfficiencyChange => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 寻章摘句
-		/// </summary>
 		public static ReadingStrategyItem CostBookDurabilityToAddReadingProgress => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 含英咀华
-		/// </summary>
 		public static ReadingStrategyItem CostBookDurabilityToAddReadingEfficiency => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 春诵夏弦
-		/// </summary>
 		public static ReadingStrategyItem ReduceIntCostButNoExpGain => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 心领得间
-		/// </summary>
 		public static ReadingStrategyItem IntGainAccordingToStrategies => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 义父注解
-		/// </summary>
 		public static ReadingStrategyItem NotesByAdoptiveFather => Instance[(sbyte)18];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ReadingStrategy Instance = new ReadingStrategy();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "Dialog", "TemplateId" };

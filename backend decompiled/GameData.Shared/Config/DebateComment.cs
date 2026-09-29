@@ -7,121 +7,52 @@ namespace Config;
 [Serializable]
 public class DebateComment : ConfigData<DebateCommentItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 直言不讳
-		/// </summary>
 		public const short PositiveComment0 = 0;
 
-		/// <summary>
-		/// 黔驴技穷
-		/// </summary>
 		public const short NegativeComment0 = 1;
 
-		/// <summary>
-		/// 审时度势
-		/// </summary>
 		public const short PositiveComment1 = 2;
 
-		/// <summary>
-		/// 花言巧语
-		/// </summary>
 		public const short NegativeComment1 = 3;
 
-		/// <summary>
-		/// 好言相劝
-		/// </summary>
 		public const short PositiveComment2 = 4;
 
-		/// <summary>
-		/// 不胜其烦
-		/// </summary>
 		public const short NegativeComment2 = 5;
 
-		/// <summary>
-		/// 穷追猛打
-		/// </summary>
 		public const short PositiveComment3 = 6;
 
-		/// <summary>
-		/// 恶语相向
-		/// </summary>
 		public const short NegativeComment3 = 7;
 
-		/// <summary>
-		/// 妙语连珠
-		/// </summary>
 		public const short PositiveComment4 = 8;
 
-		/// <summary>
-		/// 物极必反
-		/// </summary>
 		public const short NegativeComment4 = 9;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 直言不讳
-		/// </summary>
 		public static DebateCommentItem PositiveComment0 => Instance[(short)0];
 
-		/// <summary>
-		/// 黔驴技穷
-		/// </summary>
 		public static DebateCommentItem NegativeComment0 => Instance[(short)1];
 
-		/// <summary>
-		/// 审时度势
-		/// </summary>
 		public static DebateCommentItem PositiveComment1 => Instance[(short)2];
 
-		/// <summary>
-		/// 花言巧语
-		/// </summary>
 		public static DebateCommentItem NegativeComment1 => Instance[(short)3];
 
-		/// <summary>
-		/// 好言相劝
-		/// </summary>
 		public static DebateCommentItem PositiveComment2 => Instance[(short)4];
 
-		/// <summary>
-		/// 不胜其烦
-		/// </summary>
 		public static DebateCommentItem NegativeComment2 => Instance[(short)5];
 
-		/// <summary>
-		/// 穷追猛打
-		/// </summary>
 		public static DebateCommentItem PositiveComment3 => Instance[(short)6];
 
-		/// <summary>
-		/// 恶语相向
-		/// </summary>
 		public static DebateCommentItem NegativeComment3 => Instance[(short)7];
 
-		/// <summary>
-		/// 妙语连珠
-		/// </summary>
 		public static DebateCommentItem PositiveComment4 => Instance[(short)8];
 
-		/// <summary>
-		/// 物极必反
-		/// </summary>
 		public static DebateCommentItem NegativeComment4 => Instance[(short)9];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DebateComment Instance = new DebateComment();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "ResultTip", "BubbleContent", "BehaviorType", "Negation", "TemplateId", "Favor", "IsPositive", "CheckValue" };

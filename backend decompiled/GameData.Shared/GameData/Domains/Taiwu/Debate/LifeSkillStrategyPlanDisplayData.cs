@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 较艺策略选择方案集合
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class LifeSkillStrategyPlanDisplayData : ISerializableGameData
 {

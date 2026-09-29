@@ -5,22 +5,13 @@ namespace GameData.Domains.Organization;
 
 public struct SectFunctionStatuses : ISerializableGameData
 {
-	[SerializeAs(typeof(byte))]
+	[SerializeTo(typeof(byte))]
 	public enum SectFunctionStatusType : byte
 	{
-		/// <summary>
-		/// 特殊互动
-		/// </summary>
 		SpecialInteractionUnlocked,
-		/// <summary>
-		/// 升级互动
-		/// </summary>
 		UpgradedInteractionUnlocked
 	}
 
-	/// <summary>
-	/// 标记位
-	/// </summary>
 	private ulong _bits;
 
 	public bool this[SectFunctionStatusType type]

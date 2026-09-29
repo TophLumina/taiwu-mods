@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Story.SectMainStory;
 
-/// <summary>
-/// 自 SerializeDefault 迁移而来的匿名结构
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public class SectJieqingWorthDisplayData : ISerializableGameData
 {
@@ -21,24 +18,15 @@ public class SectJieqingWorthDisplayData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectJieqingWorthDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectJieqingWorthDisplayData(SectJieqingWorthDisplayData other)
 	{
 		Value = ((other.Value == null) ? null : new Dictionary<int, int>(other.Value));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectJieqingWorthDisplayData other)
 	{
 		Value = ((other.Value == null) ? null : new Dictionary<int, int>(other.Value));

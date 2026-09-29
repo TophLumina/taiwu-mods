@@ -3,58 +3,32 @@ using GameData.Serializer;
 
 namespace GameData.Utilities;
 
-/// <summary>
-/// 预设基类
-/// </summary>
 public abstract class PresetBase<T> : IPreset, ISerializableGameData where T : PresetItemBase<T>, new()
 {
-	/// <summary>
-	/// 当前版本号
-	/// </summary>
 	private const int Version = 0;
 
-	/// <summary>
-	/// 默认预设数量
-	/// </summary>
 	public const int DefaultPresetCount = 3;
 
-	/// <summary>
-	/// 最小预设数量
-	/// </summary>
 	public const int MinPresetCount = 1;
 
-	/// <summary>
-	/// 预设数据
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	private readonly List<T> _presets = new List<T>();
 
-	/// <summary>
-	/// 最大预设数量
-	/// </summary>
 	public virtual int MaxPresetCount => 9;
 
-	/// <summary>
-	/// 预设数据 - 只读
-	/// </summary>
 	public IReadOnlyList<T> Presets => _presets;
 
-	/// <inheritdoc />
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int CurrentPresetIndex { get; private set; }
 
-	/// <inheritdoc />
+	public T CurrentPreset => _presets.GetOrDefault(CurrentPresetIndex);
+
 	public bool CanAdd => _presets.Count < MaxPresetCount;
 
-	/// <inheritdoc />
 	public bool CanDelete => _presets.Count > 1;
 
-	/// <inheritdoc />
 	public int ActivePresetCount => Presets.Count;
 
-	/// <summary>
-	/// 构造方法
-	/// </summary>
 	protected PresetBase(int defaultPresetCount = 3)
 	{
 		for (int i = 0; i < defaultPresetCount; i++)
@@ -63,9 +37,6 @@ public abstract class PresetBase<T> : IPreset, ISerializableGameData where T : P
 		}
 	}
 
-	/// <summary>
-	/// 单独将某个预设覆盖为指定预设，成功时返回克隆后的预设，失败时返回 null
-	/// </summary>
 	public T OverwritePreset(T preset, int presetIndex)
 	{
 		if (presetIndex < 0 || presetIndex >= ActivePresetCount)
@@ -76,9 +47,6 @@ public abstract class PresetBase<T> : IPreset, ISerializableGameData where T : P
 		return Presets[presetIndex];
 	}
 
-	/// <summary>
-	/// 覆盖预设数据，仅用于存档修复
-	/// </summary>
 	public void OverwritePresets(IReadOnlyList<T> presets, int presetIndex)
 	{
 		if (presets != null && presets.Count > 0)
@@ -89,7 +57,6 @@ public abstract class PresetBase<T> : IPreset, ISerializableGameData where T : P
 		}
 	}
 
-	/// <inheritdoc />
 	public bool ChangePreset(int newPresetIndex)
 	{
 		bool num = _presets.CheckIndex(newPresetIndex);
@@ -100,7 +67,6 @@ public abstract class PresetBase<T> : IPreset, ISerializableGameData where T : P
 		return num;
 	}
 
-	/// <inheritdoc />
 	public void AddPreset()
 	{
 		if (CanAdd)
@@ -110,7 +76,6 @@ public abstract class PresetBase<T> : IPreset, ISerializableGameData where T : P
 		}
 	}
 
-	/// <inheritdoc />
 	public void ClonePreset()
 	{
 		if (CanAdd)
@@ -121,13 +86,11 @@ public abstract class PresetBase<T> : IPreset, ISerializableGameData where T : P
 		}
 	}
 
-	/// <inheritdoc />
 	public void ClearPreset()
 	{
 		_presets[CurrentPresetIndex].Clear();
 	}
 
-	/// <inheritdoc />
 	public void DeletePreset()
 	{
 		if (CanDelete)

@@ -7,111 +7,48 @@ namespace Config;
 [Serializable]
 public class SwordTomb : ConfigData<SwordTombItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 莫女衣
-		/// </summary>
 		public const sbyte Monv = 0;
 
-		/// <summary>
-		/// 伏邪铁
-		/// </summary>
 		public const sbyte DayueYaochang = 1;
 
-		/// <summary>
-		/// 大玄凝
-		/// </summary>
 		public const sbyte Jiuhan = 2;
 
-		/// <summary>
-		/// 凤凰茧
-		/// </summary>
 		public const sbyte JinHuanger = 3;
 
-		/// <summary>
-		/// 焚神炼
-		/// </summary>
 		public const sbyte YiYihou = 4;
 
-		/// <summary>
-		/// 解龙魄
-		/// </summary>
 		public const sbyte WeiQi = 5;
 
-		/// <summary>
-		/// 溶尘隐
-		/// </summary>
 		public const sbyte Yixiang = 6;
 
-		/// <summary>
-		/// 囚魔木
-		/// </summary>
 		public const sbyte Xuefeng = 7;
 
-		/// <summary>
-		/// 鬼神霞
-		/// </summary>
 		public const sbyte ShuFang = 8;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 莫女衣
-		/// </summary>
 		public static SwordTombItem Monv => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 伏邪铁
-		/// </summary>
 		public static SwordTombItem DayueYaochang => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 大玄凝
-		/// </summary>
 		public static SwordTombItem Jiuhan => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 凤凰茧
-		/// </summary>
 		public static SwordTombItem JinHuanger => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 焚神炼
-		/// </summary>
 		public static SwordTombItem YiYihou => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 解龙魄
-		/// </summary>
 		public static SwordTombItem WeiQi => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 溶尘隐
-		/// </summary>
 		public static SwordTombItem Yixiang => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 囚魔木
-		/// </summary>
 		public static SwordTombItem Xuefeng => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 鬼神霞
-		/// </summary>
 		public static SwordTombItem ShuFang => Instance[(sbyte)8];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SwordTomb Instance = new SwordTomb();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

@@ -1,151 +1,75 @@
 using System.Collections.Generic;
+using System.Text;
 using GameData.Serializer;
 using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 辩论中的行为
-/// </summary>
 public class DebateOperation : ISerializableGameData
 {
-	/// <summary>
-	///
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte OperationType;
 
-	/// <summary>
-	/// 棋子Id
-	/// 论点冲突行为时一定是太吾棋子，移动行为时可能是npc棋子
-	/// </summary>
 	[SerializableGameDataField]
 	public int PawnId;
 
-	/// <summary>
-	/// npc棋子Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int NpcPawnId;
 
-	/// <summary>
-	/// 太吾压力
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuPressure;
 
-	/// <summary>
-	/// 太吾血量
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuGamePoint;
 
-	/// <summary>
-	/// 太吾论据
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuBases;
 
-	/// <summary>
-	/// npc压力
-	/// </summary>
 	[SerializableGameDataField]
 	public int NpcPressure;
 
-	/// <summary>
-	/// npc血量
-	/// </summary>
 	[SerializableGameDataField]
 	public int NpcGamePoint;
 
-	/// <summary>
-	/// npc论据
-	/// </summary>
 	[SerializableGameDataField]
 	public int NpcBases;
 
-	/// <summary>
-	/// 模板Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 论战结果
-	/// </summary>
 	[SerializableGameDataField]
 	public int Result;
 
-	/// <summary>
-	/// 操作失败
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsFailed;
 
-	/// <summary>
-	/// 论点移动后的位置/双方论点基础论据
-	/// 太吾论点论据，npc论点论据
-	/// </summary>
 	[SerializableGameDataField]
 	public IntPair Target;
 
-	/// <summary>
-	/// 卡片index
-	/// </summary>
 	[SerializableGameDataField]
 	public int Index;
 
-	/// <summary>
-	/// 卡片起始位置
-	/// </summary>
 	[SerializableGameDataField]
 	public int Source;
 
-	/// <summary>
-	/// 卡片目的位置
-	/// </summary>
 	[SerializableGameDataField]
 	public int Destination;
 
-	/// <summary>
-	/// 是否是太吾
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwu;
 
-	/// <summary>
-	/// 策略目标
-	/// </summary>
 	[SerializableGameDataField]
 	public List<StrategyTarget> StrategyTargets;
 
-	/// <summary>
-	/// 格子效果
-	/// </summary>
 	[SerializableGameDataField]
 	public DebateNodeEffectState NodeEffectState;
 
-	/// <summary>
-	/// 记录参数
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] RecordParams;
 
-	/// <summary>
-	/// 策略ID列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> CardIdList;
 
-	/// <summary>
-	/// 移动论点
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="id"></param>
-	/// <param name="target"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
-	/// <param name="isImmuneRemove"></param>
 	public DebateOperation(sbyte type, int id, IntPair target, DebatePlayer taiwu, DebatePlayer npc, bool isImmuneRemove)
 	{
 		OperationType = type;
@@ -162,15 +86,6 @@ public class DebateOperation : ISerializableGameData
 		Result = (isImmuneRemove ? 1 : 0);
 	}
 
-	/// <summary>
-	/// 论点消除结论
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="id"></param>
-	/// <param name="target"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, int id, IntPair target, DebatePlayer taiwu, DebatePlayer npc)
 	{
 		OperationType = type;
@@ -187,17 +102,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 放置论点
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="id"></param>
-	/// <param name="target"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
-	/// <param name="bases"></param>
-	/// <param name="isFailed"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, int id, IntPair target, DebatePlayer taiwu, DebatePlayer npc, int bases, bool isFailed)
 	{
 		OperationType = type;
@@ -216,15 +120,6 @@ public class DebateOperation : ISerializableGameData
 		IsFailed = isFailed;
 	}
 
-	/// <summary>
-	/// 论点基础论据变化 / 移除论点 / 一次性策略触发 / 策略触发
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="id"></param>
-	/// <param name="result"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
 	public DebateOperation(sbyte type, int id, int result, DebatePlayer taiwu, DebatePlayer npc, bool isTaiwu = false)
 	{
 		OperationType = type;
@@ -241,16 +136,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 卡片位置变化
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="value1"></param>
-	/// <param name="value2"></param>
-	/// <param name="result"></param>
-	/// <param name="templateId"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
 	public DebateOperation(sbyte type, int value1, int value2, int result, short templateId, DebatePlayer taiwu, DebatePlayer npc)
 	{
 		OperationType = type;
@@ -266,16 +151,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 论战
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="value1"></param>
-	/// <param name="value2"></param>
-	/// <param name="result"></param>
-	/// <param name="bases"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
 	public DebateOperation(sbyte type, int value1, int value2, int result, IntPair bases, DebatePlayer taiwu, DebatePlayer npc)
 	{
 		OperationType = type;
@@ -292,15 +167,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 观众评价
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="ids">(观众，玩家)</param>
-	/// <param name="result"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, IntPair ids, short result, DebatePlayer taiwu, DebatePlayer npc)
 	{
 		OperationType = type;
@@ -317,14 +183,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 结论点变化
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
-	/// <param name="nodeEffectTemplateId"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, DebatePlayer taiwu, DebatePlayer npc, short nodeEffectTemplateId = -1)
 	{
 		OperationType = type;
@@ -340,14 +198,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 回合开始
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="templateId"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, short templateId, DebatePlayer taiwu, DebatePlayer npc)
 	{
 		OperationType = type;
@@ -363,16 +213,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 使用策略
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="templateId"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
-	/// <param name="strategyTargets"></param>
-	/// <param name="isFailed"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, short templateId, DebatePlayer taiwu, DebatePlayer npc, List<StrategyTarget> strategyTargets, bool isFailed)
 	{
 		OperationType = type;
@@ -390,14 +230,6 @@ public class DebateOperation : ISerializableGameData
 		IsFailed = isFailed;
 	}
 
-	/// <summary>
-	/// 压力影响
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="pressureType"></param>
-	/// <param name="taiwu"></param>
-	/// <param name="npc"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, sbyte pressureType, DebatePlayer taiwu, DebatePlayer npc)
 	{
 		OperationType = type;
@@ -413,13 +245,6 @@ public class DebateOperation : ISerializableGameData
 		NpcGamePoint = npc.GamePoint;
 	}
 
-	/// <summary>
-	/// 格子特效的变化
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="nodeEffectState"></param>
-	/// <param name="coordinate"></param>
-	/// <param name="isTaiwu">是否由太吾的棋子触发</param>
 	public DebateOperation(sbyte type, DebateNodeEffectState nodeEffectState, IntPair coordinate, bool isTaiwu = false)
 	{
 		OperationType = type;
@@ -428,13 +253,6 @@ public class DebateOperation : ISerializableGameData
 		IsTaiwu = isTaiwu;
 	}
 
-	/// <summary>
-	/// 添加记录
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="templateId"></param>
-	/// <param name="recordParams"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, short templateId, int[] recordParams)
 	{
 		OperationType = type;
@@ -443,12 +261,6 @@ public class DebateOperation : ISerializableGameData
 		RecordParams = recordParams;
 	}
 
-	/// <summary>
-	/// 重置策略
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="cardIdList"></param>
 	public DebateOperation(sbyte type, bool isTaiwu, List<short> cardIdList)
 	{
 		OperationType = type;
@@ -456,16 +268,38 @@ public class DebateOperation : ISerializableGameData
 		CardIdList = new List<short>(cardIdList);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
+	public override string ToString()
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.Append(string.Format("{0}: {1}, ", "OperationType", OperationType));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "PawnId", PawnId));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "NpcPawnId", NpcPawnId));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "TaiwuPressure", TaiwuPressure));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "TaiwuGamePoint", TaiwuGamePoint));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "TaiwuBases", TaiwuBases));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "NpcPressure", NpcPressure));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "NpcGamePoint", NpcGamePoint));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "NpcBases", NpcBases));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "TemplateId", TemplateId));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "Result", Result));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "IsFailed", IsFailed));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "Target", Target));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "Index", Index));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "Source", Source));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "Destination", Destination));
+		stringBuilder.Append(string.Format("{0}: {1}, ", "IsTaiwu", IsTaiwu));
+		int strategyCount = StrategyTargets?.Count ?? (-1);
+		stringBuilder.Append(string.Format("{0}.Count: {1}, ", "StrategyTargets", strategyCount));
+		stringBuilder.Append("NodeEffectState: " + (NodeEffectState?.ToString() ?? "null") + ", ");
+		stringBuilder.Append((RecordParams == null) ? "RecordParams: null, " : ("RecordParams: [" + string.Join(", ", RecordParams) + "], "));
+		stringBuilder.Append((CardIdList == null) ? "CardIdList: null" : ("CardIdList: [" + string.Join(", ", CardIdList) + "]"));
+		return stringBuilder.ToString();
+	}
+
 	public DebateOperation()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DebateOperation(DebateOperation other)
 	{
 		OperationType = other.OperationType;
@@ -510,9 +344,6 @@ public class DebateOperation : ISerializableGameData
 		CardIdList = ((other.CardIdList == null) ? null : new List<short>(other.CardIdList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DebateOperation other)
 	{
 		OperationType = other.OperationType;
@@ -557,13 +388,11 @@ public class DebateOperation : ISerializableGameData
 		CardIdList = ((other.CardIdList == null) ? null : new List<short>(other.CardIdList));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 61;
@@ -591,7 +420,6 @@ public class DebateOperation : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -714,7 +542,6 @@ public class DebateOperation : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

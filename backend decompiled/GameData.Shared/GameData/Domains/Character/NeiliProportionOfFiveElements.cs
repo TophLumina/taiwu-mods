@@ -7,33 +7,15 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 内力五行属性
-/// </summary>
 [Serializable]
 public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializable, IEquatable<NeiliProportionOfFiveElements>
 {
-	/// <summary>
-	/// 五行最小值
-	/// </summary>
 	public const sbyte MinValue = 0;
 
-	/// <summary>
-	/// 五行最大值
-	/// </summary>
 	public const sbyte MaxValue = 100;
 
-	/// <summary>
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.CombatSkill.FiveElementsType" />
-	/// </summary>
 	public unsafe fixed sbyte Items[5];
 
-	/// <summary>
-	/// 直接通过 index 安全访问数据的接口.
-	/// 主要用于对性能要求不是特别严格的情况 (非过月逻辑中频繁调用或可能每帧多次调用的逻辑皆可)
-	/// </summary>
-	/// <param name="index">五行类型<see cref="T:GameData.Domains.CombatSkill.FiveElementsType" /></param>
 	public unsafe ref sbyte this[int index]
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -47,12 +29,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		}
 	}
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 FiveElementsType.Count == 5.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (sbyte* items = Items)
@@ -62,10 +38,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		}
 	}
 
-	/// <summary>
-	/// 用指定数据初始化对象，用于配置数据的添加
-	/// </summary>
-	/// <param name="proportions"></param>
 	public unsafe NeiliProportionOfFiveElements(params sbyte[] proportions)
 	{
 		for (int i = 0; i < 5; i++)
@@ -122,7 +94,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		}
 	}
 
-	/// <inheritdoc />
 	public bool Equals(NeiliProportionOfFiveElements other)
 	{
 		for (int i = 0; i < 5; i++)
@@ -135,10 +106,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		return true;
 	}
 
-	/// <summary>
-	/// 检查是否为有效值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool CheckValid()
 	{
 		int sum = 0;
@@ -154,12 +121,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		return sum == 100;
 	}
 
-	/// <summary>
-	/// 转移内力五行属性
-	/// </summary>
-	/// <param name="destType">移入类型</param>
-	/// <param name="transferType">转移方式. <see cref="T:GameData.Domains.Character.NeiliProportionTransferType" /></param>
-	/// <param name="amount">转移量</param>
 	public unsafe void Transfer(sbyte destType, sbyte transferType, int amount)
 	{
 		Tester.Assert(SumCheck() == 100);
@@ -193,10 +154,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		reference2 += actualAmount;
 	}
 
-	/// <summary>
-	/// 获取所有五行属性的和
-	/// </summary>
-	/// <returns></returns>
 	public unsafe int Sum()
 	{
 		int sum = 0;
@@ -207,10 +164,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		return sum;
 	}
 
-	/// <summary>
-	/// 获取所有五行属性的和，同时检查是否有超出范围的值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe int SumCheck()
 	{
 		for (int i = 0; i < 5; i++)
@@ -220,11 +173,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		return Sum();
 	}
 
-	/// <summary>
-	/// 根据不同的内力五行转移类型, 获取用转移目标类型索引转移来源类型的数组
-	/// </summary>
-	/// <param name="transferType"></param>
-	/// <returns></returns>
 	private static sbyte[] GetTransferSources(sbyte transferType)
 	{
 		return transferType switch
@@ -237,22 +185,11 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		};
 	}
 
-	/// <summary>
-	/// 根据不同的内力五行转移类型, 获取用转移目标类型索引转移来源类型
-	/// </summary>
-	/// <param name="transferType"></param>
-	/// <param name="destFiveElementType"></param>
-	/// <returns></returns>
 	public static sbyte GetTransferSource(sbyte transferType, sbyte destFiveElementType)
 	{
 		return GetTransferSources(transferType)[destFiveElementType];
 	}
 
-	/// <summary>
-	/// 获取汇总换算比例后的内力五行
-	/// </summary>
-	/// <param name="array"></param>
-	/// <returns></returns>
 	public static NeiliProportionOfFiveElements GetTotal(Span<NeiliProportionOfFiveElements> array)
 	{
 		NeiliProportionOfFiveElements totalElements = default(NeiliProportionOfFiveElements);
@@ -276,9 +213,6 @@ public struct NeiliProportionOfFiveElements : ISerializableGameData, ISerializab
 		return totalElements;
 	}
 
-	/// <summary>
-	/// 获取单纯累加后的内力五行
-	/// </summary>
 	public static void GetSum(Span<NeiliProportionOfFiveElements> array, Span<int> sumElements)
 	{
 		for (int i = 0; i < sumElements.Length; i++)

@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 关押角色显示数据。用于关押界面获取所有显示所需数据，避免监听
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class KidnapCharDisplayData : ITradeableContent, ISerializableGameData
 {
@@ -168,21 +165,12 @@ public class KidnapCharDisplayData : ITradeableContent, ISerializableGameData
 	[SerializableGameDataField]
 	public int RopeEffect;
 
-	/// <summary>
-	/// 是否已入魔
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CompletelyInfected;
 
-	/// <summary>
-	/// 是否是奇书持有者
-	/// </summary>
 	[SerializableGameDataField]
 	public bool OwningBook;
 
-	/// <summary>
-	/// 俘虏总是可交互
-	/// </summary>
 	public bool Interactable
 	{
 		get
@@ -255,16 +243,10 @@ public class KidnapCharDisplayData : ITradeableContent, ISerializableGameData
 		return 1;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public KidnapCharDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public KidnapCharDisplayData(KidnapCharDisplayData other)
 	{
 		CharacterId = other.CharacterId;
@@ -323,9 +305,6 @@ public class KidnapCharDisplayData : ITradeableContent, ISerializableGameData
 		OwningBook = other.OwningBook;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(KidnapCharDisplayData other)
 	{
 		CharacterId = other.CharacterId;
@@ -384,13 +363,11 @@ public class KidnapCharDisplayData : ITradeableContent, ISerializableGameData
 		OwningBook = other.OwningBook;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 352;
@@ -404,7 +381,6 @@ public class KidnapCharDisplayData : ITradeableContent, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -524,7 +500,6 @@ public class KidnapCharDisplayData : ITradeableContent, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

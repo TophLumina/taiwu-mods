@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Story.SectMainStory;
 
-/// <summary>
-/// 峨眉指点数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SectEmeiGuidanceData : ISerializableGameData
 {
@@ -32,22 +29,13 @@ public class SectEmeiGuidanceData : ISerializableGameData
 	[SerializableGameDataField]
 	public bool Changed;
 
-	/// <summary>
-	/// 峨眉指点档次
-	/// </summary>
 	[SerializableGameDataField]
 	public int Point;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectEmeiGuidanceData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectEmeiGuidanceData(SectEmeiGuidanceData other)
 	{
 		CharId = other.CharId;
@@ -56,9 +44,6 @@ public class SectEmeiGuidanceData : ISerializableGameData
 		Changed = other.Changed;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectEmeiGuidanceData other)
 	{
 		CharId = other.CharId;
@@ -67,13 +52,11 @@ public class SectEmeiGuidanceData : ISerializableGameData
 		Changed = other.Changed;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 15;
@@ -84,7 +67,6 @@ public class SectEmeiGuidanceData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 4;
@@ -104,7 +86,6 @@ public class SectEmeiGuidanceData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

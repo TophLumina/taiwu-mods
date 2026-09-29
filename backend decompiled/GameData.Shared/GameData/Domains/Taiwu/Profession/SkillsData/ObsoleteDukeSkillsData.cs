@@ -5,31 +5,17 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 王公相关数据
-/// </summary>
 [Obsolete]
 [SerializableGameData(NotForDisplayModule = true)]
 public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameData
 {
-	/// <summary>
-	/// 未被授予的角色ID标记
-	/// </summary>
 	public const int NobodyCharacterId = -1;
 
-	/// <summary>
-	/// 当前所有官位称号的拥有者ID
-	/// (templateId - templateOffset) -&gt; CharacterId
-	/// </summary>
 	[SerializableGameDataField]
 	private int[] _dukeTitleOwners;
 
-	/// <summary>
-	/// 官位称号模板ID偏移量，用于计算数组下标，不存档
-	/// </summary>
 	private static short DukeTitleTemplateOffset => 37;
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -38,36 +24,20 @@ public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameDa
 		}
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 	}
 
-	/// <summary>
-	/// 检查某个称号是否已被授予
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public bool TitleHasOwner(short templateId)
 	{
 		return GetOwnerOfTitle(templateId) != -1;
 	}
 
-	/// <summary>
-	/// 检查某个角色是否拥有称号
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public bool CharacterHasTitle(int charId)
 	{
 		return GetTitleFromOwner(charId) != -1;
 	}
 
-	/// <summary>
-	/// 根据拥有者获取称号，未授予返回-1
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public short GetTitleFromOwner(int charId)
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -80,20 +50,11 @@ public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameDa
 		return -1;
 	}
 
-	/// <summary>
-	/// 获取某个称号的拥有者ID
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public int GetOwnerOfTitle(short templateId)
 	{
 		return _dukeTitleOwners[templateId - DukeTitleTemplateOffset];
 	}
 
-	/// <summary>
-	/// 获取所有已授予官职称号的角色ID
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerable<(int CharacterId, short TemplateId)> GetAllOwners()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -105,10 +66,6 @@ public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameDa
 		}
 	}
 
-	/// <summary>
-	/// 获取所有可授予的官职称号模板ID
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerable<short> GetAllTitles()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -117,9 +74,6 @@ public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameDa
 		}
 	}
 
-	/// <summary>
-	/// 默认构造，缓存模板偏移量
-	/// </summary>
 	public ObsoleteDukeSkillsData()
 	{
 		_dukeTitleOwners = new int[6];
@@ -129,13 +83,11 @@ public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameDa
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -147,7 +99,6 @@ public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameDa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -176,7 +127,6 @@ public class ObsoleteDukeSkillsData : IProfessionSkillsData, ISerializableGameDa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

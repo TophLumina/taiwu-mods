@@ -4,25 +4,17 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 需要显示的特效集合
-/// </summary>
 [SerializableGameData]
 public class ShowSpecialEffectCollection : ISerializableGameData
 {
-	/// <summary>
-	/// (特效ID, 说明文字序号, 需要用道具描述代替特效描述时的道具key)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ShowSpecialEffectDisplayData> ShowEffectList = new List<ShowSpecialEffectDisplayData>();
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -46,7 +38,6 @@ public class ShowSpecialEffectCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -76,7 +67,6 @@ public class ShowSpecialEffectCollection : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

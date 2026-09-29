@@ -7,105 +7,51 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 秘闻显示数据
-/// <para>因秘闻结构复杂不便表现模块交互获取, 特此设置秘闻专用显示数据类</para>
-/// </summary>
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true, NotForArchive = true)]
 public class SecretInformationDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 秘闻 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public SecretInformationId SecretInformationId;
 
-	/// <summary>
-	/// 秘闻模板 Id
-	/// <see cref="T:Config.SecretInformation" />
-	/// </summary>
 	[SerializableGameDataField]
 	public short SecretInformationTemplateId;
 
-	/// <summary>
-	/// 持有此秘闻的人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int HolderCount;
 
-	/// <summary>
-	/// 来源
-	/// </summary>
 	[SerializableGameDataField]
 	public int SourceCharacterId;
 
-	/// <summary>
-	/// 是否公开
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInBroadcast;
 
-	/// <summary>
-	/// 威望消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public int AuthorityCostWhenDisseminating;
 
-	/// <summary>
-	/// 威望消耗(公开)
-	/// 限定志向技能专用字段
-	/// </summary>
 	[SerializableGameDataField]
 	public int AuthorityCostWhenDisseminatingForBroadcast;
 
-	/// <summary>
-	/// 使用次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int UsedCount;
 
-	/// <summary>
-	/// 发生地点
-	/// </summary>
 	[SerializableGameDataField]
 	public FullBlockName Location;
 
-	/// <summary>
-	/// 发生日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int OccurenceDate;
 
-	/// <summary>
-	/// 秘闻事号
-	/// </summary>
 	[SerializableGameDataField]
 	public SecretOccurenceId OccurenceId;
 
-	/// <summary>
-	/// 传播概率
-	/// </summary>
 	[SerializableGameDataField]
 	public int DisseminationRate;
 
-	/// <summary>
-	/// 交易时的价格
-	/// </summary>
 	[SerializableGameDataField]
 	public int ShopValue;
 
-	/// <summary>
-	/// 参数包
-	/// </summary>
 	[SerializableGameDataField]
 	public byte[] ParametersPack;
 
-	/// <summary>
-	/// 获取actorId/reactorId与secActorId
-	/// </summary>
-	/// <param name="actorId">主要人物，为-1时无效</param>
-	/// <param name="reactorId">次要人物，为-1时无效</param>
-	/// <param name="secActorId">次要人物2，为-1时无效</param>
 	public void GetCharacterRelatedParameter(out int actorId, out int reactorId, out int secActorId)
 	{
 		SecretInformationItem infoConfig = SecretInformation.Instance.GetItem(SecretInformationTemplateId);
@@ -133,16 +79,10 @@ public class SecretInformationDisplayData : ISerializableGameData
 		secActorId = secActor;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SecretInformationDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SecretInformationDisplayData(SecretInformationDisplayData other)
 	{
 		SecretInformationId = other.SecretInformationId;
@@ -167,9 +107,6 @@ public class SecretInformationDisplayData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SecretInformationDisplayData other)
 	{
 		SecretInformationId = other.SecretInformationId;

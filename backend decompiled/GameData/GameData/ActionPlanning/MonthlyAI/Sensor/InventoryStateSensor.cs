@@ -40,6 +40,7 @@ public class InventoryStateSensor : CharacterStateSensorBase
 			111 => selfChar.GetMaxInventoryLoad(), 
 			108 => selfChar.GetCurrEquipmentLoad(), 
 			110 => selfChar.GetMaxEquipmentLoad(), 
+			614 => selfChar.HasSpareableItem(allowUsed: true).ToInt(), 
 			_ => throw new ActionPlanningException($"Unimplemented planning state: {stateKey}"), 
 		};
 		if (1 == 0)

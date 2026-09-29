@@ -3,9 +3,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 夺舍角色的数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class PossessionData : ISerializableGameData
 {
@@ -18,15 +15,9 @@ public class PossessionData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[1] { "SoulCharId" };
 	}
 
-	/// <summary>
-	/// 夺舍者原来的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int SoulCharId;
 
-	/// <summary>
-	/// 夺舍者原来的Id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> SoulCharIds;
 
@@ -40,36 +31,25 @@ public class PossessionData : ISerializableGameData
 		SoulCharIds = soulCharIds;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public PossessionData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public PossessionData(PossessionData other)
 	{
 		SoulCharId = other.SoulCharId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(PossessionData other)
 	{
 		SoulCharId = other.SoulCharId;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -80,7 +60,6 @@ public class PossessionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 1;
@@ -94,7 +73,6 @@ public class PossessionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

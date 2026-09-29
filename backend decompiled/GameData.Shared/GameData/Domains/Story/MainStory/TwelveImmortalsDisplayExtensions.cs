@@ -6,9 +6,6 @@ namespace GameData.Domains.Story.MainStory;
 
 public static class TwelveImmortalsDisplayExtensions
 {
-	/// <summary>
-	/// 尝试获取角色作为十二仙的配置，返回值可能为空
-	/// </summary>
 	public static TwelveImmortalsItem GetTwelveImmortalsConfig(this CharacterDisplayData immortal)
 	{
 		foreach (TwelveImmortalsItem config in (IEnumerable<TwelveImmortalsItem>)TwelveImmortals.Instance)

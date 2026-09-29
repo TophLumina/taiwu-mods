@@ -9,101 +9,44 @@ namespace Config;
 [Serializable]
 public class MapPickups : ConfigData<MapPickupsItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 食材资源
-		/// </summary>
 		public const short FoodResource = 0;
 
-		/// <summary>
-		/// 木材资源
-		/// </summary>
 		public const short WoodResource = 1;
 
-		/// <summary>
-		/// 金铁资源
-		/// </summary>
 		public const short StonResource = 2;
 
-		/// <summary>
-		/// 玉石资源
-		/// </summary>
 		public const short JadeResource = 3;
 
-		/// <summary>
-		/// 织物资源
-		/// </summary>
 		public const short SilkResource = 4;
 
-		/// <summary>
-		/// 药材资源
-		/// </summary>
 		public const short HerbalResource = 5;
 
-		/// <summary>
-		/// 银钱资源
-		/// </summary>
 		public const short MoneyResource = 6;
 
-		/// <summary>
-		/// 威望资源
-		/// </summary>
 		public const short AuthorityResource = 7;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 食材资源
-		/// </summary>
 		public static MapPickupsItem FoodResource => Instance[(short)0];
 
-		/// <summary>
-		/// 木材资源
-		/// </summary>
 		public static MapPickupsItem WoodResource => Instance[(short)1];
 
-		/// <summary>
-		/// 金铁资源
-		/// </summary>
 		public static MapPickupsItem StonResource => Instance[(short)2];
 
-		/// <summary>
-		/// 玉石资源
-		/// </summary>
 		public static MapPickupsItem JadeResource => Instance[(short)3];
 
-		/// <summary>
-		/// 织物资源
-		/// </summary>
 		public static MapPickupsItem SilkResource => Instance[(short)4];
 
-		/// <summary>
-		/// 药材资源
-		/// </summary>
 		public static MapPickupsItem HerbalResource => Instance[(short)5];
 
-		/// <summary>
-		/// 银钱资源
-		/// </summary>
 		public static MapPickupsItem MoneyResource => Instance[(short)6];
 
-		/// <summary>
-		/// 威望资源
-		/// </summary>
 		public static MapPickupsItem AuthorityResource => Instance[(short)7];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MapPickups Instance = new MapPickups();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

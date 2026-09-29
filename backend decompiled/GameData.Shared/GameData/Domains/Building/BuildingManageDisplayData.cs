@@ -11,69 +11,36 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 建筑管理界面的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class BuildingManageDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 建筑数据
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingBlockData BlockData;
 
-	/// <summary>
-	/// 产业地图数据
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingAreaData AreaData;
 
-	/// <summary>
-	/// 产业地图的所有数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<BuildingBlockData> BlockList;
 
-	/// <summary>
-	/// 太吾已学功法
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LearnedCombatSkillItems;
 
-	/// <summary>
-	/// 太吾已学技艺
-	/// </summary>
 	[SerializableGameDataField]
 	public List<LifeSkillItem> LearnedLifeSkillItems;
 
-	/// <summary>
-	/// 产业公式上下文数据
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingFormulaContextBridge BuildingFormulaContextBridge;
 
-	/// <summary>
-	/// 太吾能否使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransferItemToWarehouse;
 
-	/// <summary>
-	/// 当前地格在资源格中的等级排名
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResourceBlockRanking;
 
-	/// <summary>
-	/// 可以使用的建筑心材
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> CanUseBuildingCore;
 
-	/// <summary>
-	/// 太吾在野外时行囊里的建筑心材
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> CannotUseInventoryBuildingCore;
 
@@ -83,219 +50,111 @@ public class BuildingManageDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public int BuildingSpaceLimit;
 
-	/// <summary>
-	/// 是否是太吾村的建筑
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwuVillageBuilding;
 
-	/// <summary>
-	/// 建筑经营效率
-	/// </summary>
 	[SerializableGameDataField]
 	public int BuildingAttainment;
 
-	/// <summary>
-	/// 可以工作的成年人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> AvailableWorker;
 
-	/// <summary>
-	/// 可以当学徒的未成年人
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> AvailableChildren;
 
-	/// <summary>
-	/// TIPS数据
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingManageYieldTipsData TipsData;
 
-	/// <summary>
-	/// 正在修理的藏书
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData FixingBookItemData;
 
-	/// <summary>
-	/// 正在修理的藏书的书页
-	/// </summary>
 	[SerializableGameDataField]
 	public SkillBookPageDisplayData SkillBookPageDisplayData;
 
-	/// <summary>
-	/// 太吾产业的资源格效果
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuVillageResourceBlockEffect;
 
-	/// <summary>
-	/// 行囊可出售道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> InventoryCanSoldItemList;
 
-	/// <summary>
-	/// 玩家仓库可出售道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> WarehouseCanSoldItemList;
 
-	/// <summary>
-	/// 玩家公库可出售道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> TreasuryCanSoldItemList;
 
-	/// <summary>
-	/// 货仓可出售道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> StockCanSoldItemList;
 
-	/// <summary>
-	/// 建筑的成功率
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] SuccessRates;
 
-	/// <summary>
-	/// 建筑收获数据
-	/// </summary>
 	[SerializableGameDataField]
 	public BuildingEarningsData EarningsData;
 
-	/// <summary>
-	/// 村民身份显示数据，主事+学徒
-	/// </summary>
 	[SerializableGameDataField]
 	public List<VillagerRoleCharacterDisplayData> VillagerRoleDataList;
 
-	/// <summary>
-	/// 人物显示数据，主事+学徒
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> CharacterDataList;
 
-	/// <summary>
-	/// 工作效率，主事+学徒
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> VillagerEfficiencyList;
 
-	/// <summary>
-	/// 学徒研习数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ShopBuildingTeachBookData> TeachBookDataList;
 
-	/// <summary>
-	/// 解锁的村民列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> UnlockedWorkingVillagerList;
 
-	/// <summary>
-	/// 过月时学徒研习增加的资质
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> ShopManagerUpgradeQualificationDict;
 
-	/// <summary>
-	/// 经营者列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> ShopManagerList;
 
-	/// <summary>
-	/// 资源产出量
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<sbyte, int> ResourceOutputValue;
 
-	/// <summary>
-	/// 经营界面的研习簿
-	/// </summary>
 	[SerializableGameDataField]
 	public TransferableRecordDataBase ShopEventRecordData;
 
-	/// <summary>
-	/// 自动上货
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoSoldItem;
 
-	/// <summary>
-	/// 元鸡
-	/// </summary>
 	[SerializableGameDataField]
 	public List<Chicken> Chickens;
 
-	/// <summary>
-	/// 元鸡昵称
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> ChickenNickNames;
 
-	/// <summary>
-	/// 自动入住
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoCheckIn;
 
-	/// <summary>
-	/// 自动入住类型：心情最差或好感最低
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoCheckInType;
 
-	/// <summary>
-	/// 居所
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> Residences;
 
-	/// <summary>
-	/// 厢房
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> ComfortableHouses;
 
-	/// <summary>
-	/// 居所中被锁定的居民ID列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> LockedResidences;
 
-	/// <summary>
-	/// 厢房中被锁定的居民ID列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> LockedComfortableHouses;
 
-	/// <summary>
-	/// 宴堂数据，仅宴堂有效
-	/// </summary>
 	[SerializableGameDataField]
 	public Feast Feast;
 
-	/// <summary>
-	/// 练功房中紫竹化身的id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> XiangshuIdInKungfuRoom;
 
-	/// <summary>
-	/// 太吾当前位置的定居点模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrLocationOrganizationTemplateId;
 
-	/// <summary>
-	/// 练功房
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> CanPracticeSkills;
 
@@ -306,9 +165,8 @@ public class BuildingManageDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 27;
+		int totalSize = 29;
 		totalSize = ((BlockData == null) ? (totalSize + 2) : (totalSize + (2 + BlockData.GetSerializedSize())));
-		totalSize = ((AreaData == null) ? (totalSize + 2) : (totalSize + (2 + AreaData.GetSerializedSize())));
 		if (BlockList != null)
 		{
 			totalSize += 2;
@@ -322,7 +180,7 @@ public class BuildingManageDisplayData : ISerializableGameData
 			totalSize += 2;
 		}
 		totalSize = ((LearnedCombatSkillItems == null) ? (totalSize + 2) : (totalSize + (2 + 2 * LearnedCombatSkillItems.Count)));
-		totalSize = ((LearnedLifeSkillItems == null) ? (totalSize + 2) : (totalSize + (2 + default(LifeSkillItem).GetSerializedSize() * LearnedLifeSkillItems.Count)));
+		totalSize = ((LearnedLifeSkillItems == null) ? (totalSize + 2) : (totalSize + (2 + 4 * LearnedLifeSkillItems.Count)));
 		totalSize = ((BuildingFormulaContextBridge == null) ? (totalSize + 2) : (totalSize + (2 + BuildingFormulaContextBridge.GetSerializedSize())));
 		if (CanUseBuildingCore != null)
 		{
@@ -463,7 +321,7 @@ public class BuildingManageDisplayData : ISerializableGameData
 			}
 		}
 		totalSize = ((ShopEventRecordData == null) ? (totalSize + 2) : (totalSize + (2 + ShopEventRecordData.GetSerializedSize())));
-		totalSize = ((Chickens == null) ? (totalSize + 2) : (totalSize + (2 + default(Chicken).GetSerializedSize() * Chickens.Count)));
+		totalSize = ((Chickens == null) ? (totalSize + 2) : (totalSize + (2 + 12 * Chickens.Count)));
 		if (ChickenNickNames != null)
 		{
 			totalSize += 2;

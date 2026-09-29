@@ -3,59 +3,32 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 物品的索引
-/// </summary>
 [Obsolete]
 public struct ShopEventData(int eventDate, short itemTemplateId, sbyte resourceType, int resourceCount, sbyte recruitPeopleLevel, short eventConfigId, sbyte eventDesType, sbyte itemType) : ISerializableGameData
 {
 	public static readonly ShopEventData Invalid = new ShopEventData(0, -1, -1, -1, 0, -1, -1, -1);
 
-	/// <summary>
-	/// 事件发生时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int EventDate = eventDate;
 
-	/// <summary>
-	/// 事件产生道具模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public short ItemTemplateId = itemTemplateId;
 
-	/// <summary>
-	/// 事件产生道具类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemType = itemType;
 
-	/// <summary>
-	/// 事件产生资源类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ResourceType = resourceType;
 
-	/// <summary>
-	/// 事件产生资源数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResourceCount = resourceCount;
 
-	/// <summary>
-	/// 招募人才等级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte RecruitPeopleLevel = recruitPeopleLevel;
 
-	/// <summary>
-	/// 相应配置表id
-	/// </summary>
 	[SerializableGameDataField]
 	public short EventConfigId = eventConfigId;
 
-	/// <summary>
-	/// 事件描述类型，用来显示多语言
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte EventDesType = eventDesType;
 

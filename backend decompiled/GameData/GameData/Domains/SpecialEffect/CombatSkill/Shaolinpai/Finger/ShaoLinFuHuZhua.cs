@@ -5,8 +5,6 @@ namespace GameData.Domains.SpecialEffect.CombatSkill.Shaolinpai.Finger;
 
 public class ShaoLinFuHuZhua : ChangePowerByEquipType
 {
-	protected override sbyte ChangePowerUnitReverse => 3;
-
 	public ShaoLinFuHuZhua()
 	{
 	}

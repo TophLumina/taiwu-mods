@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.World;
 
-/// <summary>
-/// 游戏版本信息
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class GameVersionInfo : ISerializableGameData
 {
@@ -30,52 +27,28 @@ public class GameVersionInfo : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[6] { "TimestampCreating", "TimestampLastSaving", "GameVersionCreating", "GameVersionLastSaving", "GameBuildDateCreating", "GameBuildDateLastSaving" };
 	}
 
-	/// <summary>
-	/// 创建存档时的时间戳 (UTC)
-	/// </summary>
 	[SerializableGameDataField]
 	public long TimestampCreating;
 
-	/// <summary>
-	/// 保存存档时的时间戳 (UTC)
-	/// </summary>
 	[SerializableGameDataField]
 	public long TimestampLastSaving;
 
-	/// <summary>
-	/// 创建存档时的游戏版本
-	/// </summary>
 	[SerializableGameDataField]
 	public string GameVersionCreating = string.Empty;
 
-	/// <summary>
-	/// 最后一次存档时的游戏版本
-	/// </summary>
 	[SerializableGameDataField]
 	public string GameVersionLastSaving = string.Empty;
 
-	/// <summary>
-	/// 创建存档时的游戏版本日期
-	/// </summary>
 	[SerializableGameDataField]
 	public string GameBuildDateCreating = string.Empty;
 
-	/// <summary>
-	/// 最后一次存档时的游戏版本日期
-	/// </summary>
 	[SerializableGameDataField]
 	public string GameBuildDateLastSaving = string.Empty;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public GameVersionInfo()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public GameVersionInfo(GameVersionInfo other)
 	{
 		TimestampCreating = other.TimestampCreating;
@@ -86,9 +59,6 @@ public class GameVersionInfo : ISerializableGameData
 		GameBuildDateLastSaving = other.GameBuildDateLastSaving;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(GameVersionInfo other)
 	{
 		TimestampCreating = other.TimestampCreating;
@@ -99,13 +69,11 @@ public class GameVersionInfo : ISerializableGameData
 		GameBuildDateLastSaving = other.GameBuildDateLastSaving;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 18;
@@ -120,7 +88,6 @@ public class GameVersionInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -218,7 +185,6 @@ public class GameVersionInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -302,9 +268,6 @@ public class GameVersionInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 将字符串转为游戏版本
-	/// </summary>
 	public static Version ParseGameVersion(string gameVersion)
 	{
 		if (string.IsNullOrEmpty(gameVersion))

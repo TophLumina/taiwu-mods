@@ -2,33 +2,18 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item.Display;
 
-/// <summary>
-/// 物品威力信息
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct ItemPowerInfo : ISerializableGameData
 {
-	/// <summary>
-	/// 威力
-	/// </summary>
 	[SerializableGameDataField]
 	public short Power;
 
-	/// <summary>
-	/// 威力上限
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaxPower;
 
-	/// <summary>
-	/// 发挥威力
-	/// </summary>
 	[SerializableGameDataField]
 	public short RequirementsPower;
 
-	/// <summary>
-	/// 默认威力值
-	/// </summary>
 	public static ItemPowerInfo Default => new ItemPowerInfo
 	{
 		Power = 100,
@@ -36,9 +21,6 @@ public struct ItemPowerInfo : ISerializableGameData
 		RequirementsPower = 100
 	};
 
-	/// <summary>
-	/// 是否有任意值
-	/// </summary>
 	public bool AnyValue
 	{
 		get
@@ -51,13 +33,11 @@ public struct ItemPowerInfo : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -68,7 +48,6 @@ public struct ItemPowerInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = Power;
@@ -84,7 +63,6 @@ public struct ItemPowerInfo : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

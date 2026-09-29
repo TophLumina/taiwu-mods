@@ -64,13 +64,11 @@ public class SpecialEffectDomain : BaseGameDataDomain
 
 	private static readonly DataInfluence[][] CacheInfluences = new DataInfluence[3][];
 
-	private static readonly DataInfluence[][] CacheInfluencesAffectedDatas = new DataInfluence[345][];
+	private static readonly DataInfluence[][] CacheInfluencesAffectedDatas = new DataInfluence[346][];
 
-	private readonly ObjectCollectionDataStates _dataStatesAffectedDatas = new ObjectCollectionDataStates(345, 0);
+	private readonly ObjectCollectionDataStates _dataStatesAffectedDatas = new ObjectCollectionDataStates(346, 0);
 
 	public readonly ObjectCollectionHelperData HelperDataAffectedDatas;
-
-	private Queue<uint> _pendingLoadingOperationIds;
 
 	private static readonly List<Action> ResetOnInitializeGameDataModuleEffects = new List<Action>();
 
@@ -284,6 +282,19 @@ public class SpecialEffectDomain : BaseGameDataDomain
 		return effect.Id;
 	}
 
+	public long Add(DataContext context, int charId, SkillEffectKey effectKey, string effectName)
+	{
+		string fullTypeName = "GameData.Domains.SpecialEffect." + effectName;
+		Type specialEffectType = Type.GetType(fullTypeName);
+		if (specialEffectType == null)
+		{
+			throw new Exception("Cannot find type '" + fullTypeName + "'.");
+		}
+		SpecialEffectBase effect = (SpecialEffectBase)Activator.CreateInstance(specialEffectType, charId, effectKey);
+		Add(context, effect);
+		return effect.Id;
+	}
+
 	public void Add(DataContext context, int charId, short skillTemplateId, sbyte effectActiveType, sbyte direction = -1)
 	{
 		CombatSkillKey skillKey = new CombatSkillKey(charId, skillTemplateId);
@@ -444,7 +455,7 @@ public class SpecialEffectDomain : BaseGameDataDomain
 		if (skill.GetSpecialEffectId() >= 0)
 		{
 			CombatSkillItem skillConfig = Config.CombatSkill.Instance[skillTemplateId];
-			short effectTemplateId = (short)((skill.GetDirection() == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
+			short effectTemplateId = ((skill.GetDirection() == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
 			if (Config.SpecialEffect.Instance[effectTemplateId].EffectActiveType == effectActiveType && (effectActiveType == 3 || effectActiveType == 2))
 			{
 				Remove(context, skill.GetSpecialEffectId());
@@ -1313,7 +1324,7 @@ public class SpecialEffectDomain : BaseGameDataDomain
 	{
 		if (_affectedDatas.TryGetValue(objectId, out var instance))
 		{
-			if (fieldId >= 345)
+			if (fieldId >= 346)
 			{
 				throw new Exception($"Not allow to reset modification state of readonly field data: {fieldId}");
 			}
@@ -1330,7 +1341,7 @@ public class SpecialEffectDomain : BaseGameDataDomain
 		{
 			return false;
 		}
-		if (fieldId >= 345)
+		if (fieldId >= 346)
 		{
 			throw new Exception($"Not allow to check modification state of readonly field data: {fieldId}");
 		}

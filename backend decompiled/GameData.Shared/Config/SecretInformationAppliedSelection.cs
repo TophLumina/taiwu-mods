@@ -8,961 +8,388 @@ namespace Config;
 [Serializable]
 public class SecretInformationAppliedSelection : ConfigData<SecretInformationAppliedSelectionItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 其它话题
-		/// </summary>
 		public const short OtherTopics = 0;
 
-		/// <summary>
-		/// 所言极是
-		/// </summary>
 		public const short Agree = 1;
 
-		/// <summary>
-		/// 不敢苟同
-		/// </summary>
 		public const short Disagree = 2;
 
-		/// <summary>
-		/// 婉言安慰
-		/// </summary>
 		public const short Comfort = 3;
 
-		/// <summary>
-		/// 幸灾乐祸
-		/// </summary>
 		public const short Gloat = 4;
 
-		/// <summary>
-		/// 痛斥其非
-		/// </summary>
 		public const short Criticize = 5;
 
-		/// <summary>
-		/// 无所顾忌
-		/// </summary>
 		public const short Support = 6;
 
-		/// <summary>
-		/// 赞不绝口
-		/// </summary>
 		public const short Praise = 7;
 
-		/// <summary>
-		/// 冷言嘲讽
-		/// </summary>
 		public const short Mock = 8;
 
-		/// <summary>
-		/// 岂有此理
-		/// </summary>
 		public const short Angry = 9;
 
-		/// <summary>
-		/// 闷闷不乐
-		/// </summary>
 		public const short Hurt = 10;
 
-		/// <summary>
-		/// 出手惩戒
-		/// </summary>
 		public const short Punish = 11;
 
-		/// <summary>
-		/// 血债血偿
-		/// </summary>
 		public const short KillForRevenge = 12;
 
-		/// <summary>
-		/// 激怒挑衅
-		/// </summary>
 		public const short Provoke = 13;
 
-		/// <summary>
-		/// 要求保密
-		/// </summary>
 		public const short RequestKeepSecret = 14;
 
-		/// <summary>
-		/// 为其保密
-		/// </summary>
 		public const short ArgeeKeepSecret = 15;
 
-		/// <summary>
-		/// 拒绝保密
-		/// </summary>
 		public const short RefuseKeepSecret = 16;
 
-		/// <summary>
-		/// 请求释放
-		/// </summary>
 		public const short RequestRelease = 17;
 
-		/// <summary>
-		/// 索要俘虏
-		/// </summary>
 		public const short RequestPrisoner = 18;
 
-		/// <summary>
-		/// 释放俘虏
-		/// </summary>
 		public const short AgreeRelease = 19;
 
-		/// <summary>
-		/// 拒绝释放
-		/// </summary>
 		public const short RefuseRelease = 20;
 
-		/// <summary>
-		/// 转交俘虏
-		/// </summary>
 		public const short AgreeTransfer = 21;
 
-		/// <summary>
-		/// 拒绝转交
-		/// </summary>
 		public const short RefuseTransfer = 22;
 
-		/// <summary>
-		/// 空口无凭
-		/// </summary>
 		public const short PrisonerAbsent = 23;
 
-		/// <summary>
-		/// 空口无凭2
-		/// </summary>
 		public const short PrisonerAbsent2 = 24;
 
-		/// <summary>
-		/// 暗中解救
-		/// </summary>
 		public const short RescueByStealing = 25;
 
-		/// <summary>
-		/// 用计解救
-		/// </summary>
 		public const short RescueByScamming = 26;
 
-		/// <summary>
-		/// 强行解救
-		/// </summary>
 		public const short RescueByRobbing = 27;
 
-		/// <summary>
-		/// 暗中夺人
-		/// </summary>
 		public const short RobPrisonerByStealing = 28;
 
-		/// <summary>
-		/// 用计夺人
-		/// </summary>
 		public const short RobPrisonerByScamming = 29;
 
-		/// <summary>
-		/// 强行夺人
-		/// </summary>
 		public const short RobPrisonerByRobbing = 30;
 
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public const short MakeEnemy = 31;
 
-		/// <summary>
-		/// 受人怨恨
-		/// </summary>
 		public const short BeMadeEnemy = 32;
 
-		/// <summary>
-		/// 背恩绝情
-		/// </summary>
 		public const short BreakUp = 33;
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public const short SeverSworn = 34;
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public const short SeverFriend = 35;
 
-		/// <summary>
-		/// 对方战斗
-		/// </summary>
 		public const short StartCombatByCharacter = 36;
 
-		/// <summary>
-		/// 如此便好
-		/// </summary>
 		public const short Relieved = 37;
 
-		/// <summary>
-		/// 无可奈何
-		/// </summary>
 		public const short NoOtherWay = 38;
 
-		/// <summary>
-		/// 无话可说
-		/// </summary>
 		public const short Slient = 39;
 
-		/// <summary>
-		/// 杀人灭口
-		/// </summary>
 		public const short KillForKeepSecret = 40;
 
-		/// <summary>
-		/// 对方战斗拒绝保密
-		/// </summary>
 		public const short CombatRefuseKeepSecret = 41;
 
-		/// <summary>
-		/// 迎战敌人
-		/// </summary>
 		public const short RespondCombat = 42;
 
-		/// <summary>
-		/// 重伤恶斗关押
-		/// </summary>
 		public const short DirectKidnap = 43;
 
-		/// <summary>
-		/// 重伤死斗关押
-		/// </summary>
 		public const short DirectKidnap2 = 44;
 
-		/// <summary>
-		/// 重伤惩戒关押
-		/// </summary>
 		public const short DirectPunishKidnap = 45;
 
-		/// <summary>
-		/// 重伤杀害
-		/// </summary>
 		public const short DirectKill = 46;
 
-		/// <summary>
-		/// 就此作罢
-		/// </summary>
 		public const short GiveUp = 47;
 
-		/// <summary>
-		/// 捕捉人物
-		/// </summary>
 		public const short KidnapWithRope = 48;
 
-		/// <summary>
-		/// 恶斗关押退回
-		/// </summary>
 		public const short GiveUpKidnapByBeat = 49;
 
-		/// <summary>
-		/// 死斗关押退回
-		/// </summary>
 		public const short GiveUpKidnapByKill = 50;
 
-		/// <summary>
-		/// 惩戒关押退回
-		/// </summary>
 		public const short GiveUpKidnapByPunish = 51;
 
-		/// <summary>
-		/// 传剑
-		/// </summary>
 		public const short BeKilled = 52;
 
-		/// <summary>
-		/// 设法逃脱
-		/// </summary>
 		public const short TryEscapeRescue = 53;
 
-		/// <summary>
-		/// 抢人设法逃脱
-		/// </summary>
 		public const short TryEscapeRob = 54;
 
-		/// <summary>
-		/// 处置俘虏
-		/// </summary>
 		public const short HandlePrisoner = 55;
 
-		/// <summary>
-		/// 抢人公开关押
-		/// </summary>
 		public const short KidnapInPublicByRob = 56;
 
-		/// <summary>
-		/// 抢人秘密关押
-		/// </summary>
 		public const short KidnapInPrivateByRob = 57;
 
-		/// <summary>
-		/// 处置俘虏2
-		/// </summary>
 		public const short HandlePrisoner2 = 58;
 
-		/// <summary>
-		/// 俘虏公开关押2
-		/// </summary>
 		public const short KidnapInPublicByRob2 = 59;
 
-		/// <summary>
-		/// 俘虏秘密关押2
-		/// </summary>
 		public const short KidnapInPrivateByRob2 = 60;
 
-		/// <summary>
-		/// 抢人公开杀害
-		/// </summary>
 		public const short KillInPublicByRob = 61;
 
-		/// <summary>
-		/// 抢人秘密杀害
-		/// </summary>
 		public const short KillForPunishByRob = 62;
 
-		/// <summary>
-		/// 抢人放过敌人
-		/// </summary>
 		public const short GiveUpByRob = 63;
 
-		/// <summary>
-		/// 俘虏公开关押
-		/// </summary>
 		public const short KidnapDetainerInPublic = 64;
 
-		/// <summary>
-		/// 俘虏秘密关押
-		/// </summary>
 		public const short KidnapDetainerInPrivate = 65;
 
-		/// <summary>
-		/// 玩家逃跑
-		/// </summary>
 		public const short TaiwuEscape = 66;
 
-		/// <summary>
-		/// 敌人逃跑
-		/// </summary>
 		public const short CharEscape = 67;
 
-		/// <summary>
-		/// 公开杀害
-		/// </summary>
 		public const short KillInPublic = 68;
 
-		/// <summary>
-		/// 惩戒杀害
-		/// </summary>
 		public const short KillForPunish = 69;
 
-		/// <summary>
-		/// 秘密杀害
-		/// </summary>
 		public const short KillInPrivate = 70;
 
-		/// <summary>
-		/// 公开关押
-		/// </summary>
 		public const short KidnapInPublic = 71;
 
-		/// <summary>
-		/// 惩戒关押
-		/// </summary>
 		public const short KidnapForPunish = 72;
 
-		/// <summary>
-		/// 秘密关押
-		/// </summary>
 		public const short KidnapInPrivate = 73;
 
-		/// <summary>
-		/// 较艺唬骗
-		/// </summary>
 		public const short ScamDebating = 74;
 
-		/// <summary>
-		/// 对方解救
-		/// </summary>
 		public const short RescueByChar = 75;
 
-		/// <summary>
-		/// 对方抢人
-		/// </summary>
 		public const short RobByChar = 76;
 
-		/// <summary>
-		/// 与其一战
-		/// </summary>
 		public const short ResistStealPrisoner = 77;
 
-		/// <summary>
-		/// 任其离去
-		/// </summary>
 		public const short NotResistStealPrisoner = 78;
 
-		/// <summary>
-		/// 与其一辩
-		/// </summary>
 		public const short ResistScamPrisoner = 79;
 
-		/// <summary>
-		/// 顺应其意
-		/// </summary>
 		public const short NotResistScamPrisoner = 80;
 
-		/// <summary>
-		/// 抢人顺应其意
-		/// </summary>
 		public const short NotResistRobPrisonerEnemy = 81;
 
-		/// <summary>
-		/// 交出俘虏
-		/// </summary>
 		public const short NotResistRobPrisoner = 82;
 
-		/// <summary>
-		/// 抢人交出俘虏
-		/// </summary>
 		public const short HandInPrisoner = 83;
 
-		/// <summary>
-		/// 恕难从命
-		/// </summary>
 		public const short ResistRobPrisoner = 84;
 
-		/// <summary>
-		/// 俘虏被夺
-		/// </summary>
 		public const short PrisonerRobbed = 85;
 
-		/// <summary>
-		/// 趁势要挟
-		/// </summary>
 		public const short Threaten = 86;
 
-		/// <summary>
-		/// 告知掌门
-		/// </summary>
 		public const short SectLeaderKnown = 87;
 
-		/// <summary>
-		/// 穿针引线
-		/// </summary>
 		public const short ThreadPointer = 88;
 
-		/// <summary>
-		/// 要求分手
-		/// </summary>
 		public const short AskCharBreakUp = 89;
 
-		/// <summary>
-		/// 背恩绝情2
-		/// </summary>
 		public const short BreakUpChar = 90;
 
-		/// <summary>
-		/// 执意断情
-		/// </summary>
 		public const short ForceBreakUpChar = 91;
 
-		/// <summary>
-		/// 暂且作罢
-		/// </summary>
 		public const short GiveUpWithLove = 92;
 
-		/// <summary>
-		/// 规劝告诫
-		/// </summary>
 		public const short Admonish = 93;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 其它话题
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem OtherTopics => Instance[(short)0];
 
-		/// <summary>
-		/// 所言极是
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Agree => Instance[(short)1];
 
-		/// <summary>
-		/// 不敢苟同
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Disagree => Instance[(short)2];
 
-		/// <summary>
-		/// 婉言安慰
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Comfort => Instance[(short)3];
 
-		/// <summary>
-		/// 幸灾乐祸
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Gloat => Instance[(short)4];
 
-		/// <summary>
-		/// 痛斥其非
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Criticize => Instance[(short)5];
 
-		/// <summary>
-		/// 无所顾忌
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Support => Instance[(short)6];
 
-		/// <summary>
-		/// 赞不绝口
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Praise => Instance[(short)7];
 
-		/// <summary>
-		/// 冷言嘲讽
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Mock => Instance[(short)8];
 
-		/// <summary>
-		/// 岂有此理
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Angry => Instance[(short)9];
 
-		/// <summary>
-		/// 闷闷不乐
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Hurt => Instance[(short)10];
 
-		/// <summary>
-		/// 出手惩戒
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Punish => Instance[(short)11];
 
-		/// <summary>
-		/// 血债血偿
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KillForRevenge => Instance[(short)12];
 
-		/// <summary>
-		/// 激怒挑衅
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Provoke => Instance[(short)13];
 
-		/// <summary>
-		/// 要求保密
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RequestKeepSecret => Instance[(short)14];
 
-		/// <summary>
-		/// 为其保密
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem ArgeeKeepSecret => Instance[(short)15];
 
-		/// <summary>
-		/// 拒绝保密
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RefuseKeepSecret => Instance[(short)16];
 
-		/// <summary>
-		/// 请求释放
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RequestRelease => Instance[(short)17];
 
-		/// <summary>
-		/// 索要俘虏
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RequestPrisoner => Instance[(short)18];
 
-		/// <summary>
-		/// 释放俘虏
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem AgreeRelease => Instance[(short)19];
 
-		/// <summary>
-		/// 拒绝释放
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RefuseRelease => Instance[(short)20];
 
-		/// <summary>
-		/// 转交俘虏
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem AgreeTransfer => Instance[(short)21];
 
-		/// <summary>
-		/// 拒绝转交
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RefuseTransfer => Instance[(short)22];
 
-		/// <summary>
-		/// 空口无凭
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem PrisonerAbsent => Instance[(short)23];
 
-		/// <summary>
-		/// 空口无凭2
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem PrisonerAbsent2 => Instance[(short)24];
 
-		/// <summary>
-		/// 暗中解救
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RescueByStealing => Instance[(short)25];
 
-		/// <summary>
-		/// 用计解救
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RescueByScamming => Instance[(short)26];
 
-		/// <summary>
-		/// 强行解救
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RescueByRobbing => Instance[(short)27];
 
-		/// <summary>
-		/// 暗中夺人
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RobPrisonerByStealing => Instance[(short)28];
 
-		/// <summary>
-		/// 用计夺人
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RobPrisonerByScamming => Instance[(short)29];
 
-		/// <summary>
-		/// 强行夺人
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RobPrisonerByRobbing => Instance[(short)30];
 
-		/// <summary>
-		/// 结下仇怨
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem MakeEnemy => Instance[(short)31];
 
-		/// <summary>
-		/// 受人怨恨
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem BeMadeEnemy => Instance[(short)32];
 
-		/// <summary>
-		/// 背恩绝情
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem BreakUp => Instance[(short)33];
 
-		/// <summary>
-		/// 割袍断义
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem SeverSworn => Instance[(short)34];
 
-		/// <summary>
-		/// 断绝友谊
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem SeverFriend => Instance[(short)35];
 
-		/// <summary>
-		/// 对方战斗
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem StartCombatByCharacter => Instance[(short)36];
 
-		/// <summary>
-		/// 如此便好
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Relieved => Instance[(short)37];
 
-		/// <summary>
-		/// 无可奈何
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem NoOtherWay => Instance[(short)38];
 
-		/// <summary>
-		/// 无话可说
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Slient => Instance[(short)39];
 
-		/// <summary>
-		/// 杀人灭口
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KillForKeepSecret => Instance[(short)40];
 
-		/// <summary>
-		/// 对方战斗拒绝保密
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem CombatRefuseKeepSecret => Instance[(short)41];
 
-		/// <summary>
-		/// 迎战敌人
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RespondCombat => Instance[(short)42];
 
-		/// <summary>
-		/// 重伤恶斗关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem DirectKidnap => Instance[(short)43];
 
-		/// <summary>
-		/// 重伤死斗关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem DirectKidnap2 => Instance[(short)44];
 
-		/// <summary>
-		/// 重伤惩戒关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem DirectPunishKidnap => Instance[(short)45];
 
-		/// <summary>
-		/// 重伤杀害
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem DirectKill => Instance[(short)46];
 
-		/// <summary>
-		/// 就此作罢
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem GiveUp => Instance[(short)47];
 
-		/// <summary>
-		/// 捕捉人物
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapWithRope => Instance[(short)48];
 
-		/// <summary>
-		/// 恶斗关押退回
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem GiveUpKidnapByBeat => Instance[(short)49];
 
-		/// <summary>
-		/// 死斗关押退回
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem GiveUpKidnapByKill => Instance[(short)50];
 
-		/// <summary>
-		/// 惩戒关押退回
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem GiveUpKidnapByPunish => Instance[(short)51];
 
-		/// <summary>
-		/// 传剑
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem BeKilled => Instance[(short)52];
 
-		/// <summary>
-		/// 设法逃脱
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem TryEscapeRescue => Instance[(short)53];
 
-		/// <summary>
-		/// 抢人设法逃脱
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem TryEscapeRob => Instance[(short)54];
 
-		/// <summary>
-		/// 处置俘虏
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem HandlePrisoner => Instance[(short)55];
 
-		/// <summary>
-		/// 抢人公开关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapInPublicByRob => Instance[(short)56];
 
-		/// <summary>
-		/// 抢人秘密关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapInPrivateByRob => Instance[(short)57];
 
-		/// <summary>
-		/// 处置俘虏2
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem HandlePrisoner2 => Instance[(short)58];
 
-		/// <summary>
-		/// 俘虏公开关押2
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapInPublicByRob2 => Instance[(short)59];
 
-		/// <summary>
-		/// 俘虏秘密关押2
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapInPrivateByRob2 => Instance[(short)60];
 
-		/// <summary>
-		/// 抢人公开杀害
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KillInPublicByRob => Instance[(short)61];
 
-		/// <summary>
-		/// 抢人秘密杀害
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KillForPunishByRob => Instance[(short)62];
 
-		/// <summary>
-		/// 抢人放过敌人
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem GiveUpByRob => Instance[(short)63];
 
-		/// <summary>
-		/// 俘虏公开关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapDetainerInPublic => Instance[(short)64];
 
-		/// <summary>
-		/// 俘虏秘密关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapDetainerInPrivate => Instance[(short)65];
 
-		/// <summary>
-		/// 玩家逃跑
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem TaiwuEscape => Instance[(short)66];
 
-		/// <summary>
-		/// 敌人逃跑
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem CharEscape => Instance[(short)67];
 
-		/// <summary>
-		/// 公开杀害
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KillInPublic => Instance[(short)68];
 
-		/// <summary>
-		/// 惩戒杀害
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KillForPunish => Instance[(short)69];
 
-		/// <summary>
-		/// 秘密杀害
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KillInPrivate => Instance[(short)70];
 
-		/// <summary>
-		/// 公开关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapInPublic => Instance[(short)71];
 
-		/// <summary>
-		/// 惩戒关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapForPunish => Instance[(short)72];
 
-		/// <summary>
-		/// 秘密关押
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem KidnapInPrivate => Instance[(short)73];
 
-		/// <summary>
-		/// 较艺唬骗
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem ScamDebating => Instance[(short)74];
 
-		/// <summary>
-		/// 对方解救
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RescueByChar => Instance[(short)75];
 
-		/// <summary>
-		/// 对方抢人
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem RobByChar => Instance[(short)76];
 
-		/// <summary>
-		/// 与其一战
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem ResistStealPrisoner => Instance[(short)77];
 
-		/// <summary>
-		/// 任其离去
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem NotResistStealPrisoner => Instance[(short)78];
 
-		/// <summary>
-		/// 与其一辩
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem ResistScamPrisoner => Instance[(short)79];
 
-		/// <summary>
-		/// 顺应其意
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem NotResistScamPrisoner => Instance[(short)80];
 
-		/// <summary>
-		/// 抢人顺应其意
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem NotResistRobPrisonerEnemy => Instance[(short)81];
 
-		/// <summary>
-		/// 交出俘虏
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem NotResistRobPrisoner => Instance[(short)82];
 
-		/// <summary>
-		/// 抢人交出俘虏
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem HandInPrisoner => Instance[(short)83];
 
-		/// <summary>
-		/// 恕难从命
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem ResistRobPrisoner => Instance[(short)84];
 
-		/// <summary>
-		/// 俘虏被夺
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem PrisonerRobbed => Instance[(short)85];
 
-		/// <summary>
-		/// 趁势要挟
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Threaten => Instance[(short)86];
 
-		/// <summary>
-		/// 告知掌门
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem SectLeaderKnown => Instance[(short)87];
 
-		/// <summary>
-		/// 穿针引线
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem ThreadPointer => Instance[(short)88];
 
-		/// <summary>
-		/// 要求分手
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem AskCharBreakUp => Instance[(short)89];
 
-		/// <summary>
-		/// 背恩绝情2
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem BreakUpChar => Instance[(short)90];
 
-		/// <summary>
-		/// 执意断情
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem ForceBreakUpChar => Instance[(short)91];
 
-		/// <summary>
-		/// 暂且作罢
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem GiveUpWithLove => Instance[(short)92];
 
-		/// <summary>
-		/// 规劝告诫
-		/// </summary>
 		public static SecretInformationAppliedSelectionItem Admonish => Instance[(short)93];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationAppliedSelection Instance = new SecretInformationAppliedSelection();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Text", "SelectionTexts", "MutexSelectionIds", "MainAttributeCost", "SpecialConditionId", "SpecialConditionId2", "PlayerBehaviorTypeIds", "ResultId1", "ResultId2", "TemplateId" };

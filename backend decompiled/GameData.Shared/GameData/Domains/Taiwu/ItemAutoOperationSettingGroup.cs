@@ -6,9 +6,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 太吾自动处理物品的设置组，存档数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class ItemAutoOperationSettingGroup : ISerializableGameData
 {
@@ -27,33 +24,18 @@ public class ItemAutoOperationSettingGroup : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[4] { "OperationType", "IsEnabled", "SourceList", "TypeDict" };
 	}
 
-	/// <summary>
-	/// 操作类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public EItemAutoOperationType OperationType;
 
-	/// <summary>
-	/// 是否启用
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public bool IsEnabled;
 
-	/// <summary>
-	/// 物品来源
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public List<EItemAutoOperationSource> SourceList = new List<EItemAutoOperationSource>();
 
-	/// <summary>
-	/// 详细设置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public Dictionary<EItemAutoOperationTargetType, ItemAutoOperationSettingItem> TypeDict = new Dictionary<EItemAutoOperationTargetType, ItemAutoOperationSettingItem>();
 
-	/// <summary>
-	/// 拆解可用的类型
-	/// </summary>
 	public static readonly List<EItemAutoOperationTargetType> DisassembleTargetTypeList = new List<EItemAutoOperationTargetType>
 	{
 		EItemAutoOperationTargetType.Weapon,
@@ -61,9 +43,6 @@ public class ItemAutoOperationSettingGroup : ISerializableGameData
 		EItemAutoOperationTargetType.Material
 	};
 
-	/// <summary>
-	/// 丢弃可用的类型
-	/// </summary>
 	public static readonly List<EItemAutoOperationTargetType> DiscardTargetTypeList = new List<EItemAutoOperationTargetType>
 	{
 		EItemAutoOperationTargetType.Food,
@@ -96,12 +75,6 @@ public class ItemAutoOperationSettingGroup : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 根据操作类型获取可用的目标类型列表
-	/// </summary>
-	/// <param name="operationType"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public static List<EItemAutoOperationTargetType> GetTargetTypeList(EItemAutoOperationType operationType)
 	{
 		return operationType switch
@@ -112,16 +85,10 @@ public class ItemAutoOperationSettingGroup : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ItemAutoOperationSettingGroup()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ItemAutoOperationSettingGroup(ItemAutoOperationSettingGroup other)
 	{
 		OperationType = other.OperationType;
@@ -143,9 +110,6 @@ public class ItemAutoOperationSettingGroup : ISerializableGameData
 		TypeDict = null;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ItemAutoOperationSettingGroup other)
 	{
 		OperationType = other.OperationType;

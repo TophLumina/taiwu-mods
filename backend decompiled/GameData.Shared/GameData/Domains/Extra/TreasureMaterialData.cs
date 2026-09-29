@@ -3,26 +3,16 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 一个 Area 中的宝藏数据
-/// </summary>
 public class TreasureMaterialData : ISerializableGameData
 {
-	/// <summary>
-	/// 地格上的心材模板 ID
-	/// K：地格 ID
-	/// V：心材的 Misc 模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, List<short>> BlockMaterialTemplateIds = new Dictionary<short, List<short>>();
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int offset = 4;
@@ -42,7 +32,6 @@ public class TreasureMaterialData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -86,7 +75,6 @@ public class TreasureMaterialData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

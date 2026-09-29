@@ -81,31 +81,33 @@ public class StudyDemandBreakingAction : ICharacterActionImpl, ISerializableGame
 		int selfCharId = character.GetId();
 		int targetCharId = targetChar.GetId();
 		CombatSkillItem combatSkillCfg = Config.CombatSkill.Instance[CombatSkillTemplateId];
-		_ = Config.SkillBook.Instance[combatSkillCfg.BookId];
-		LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
-		int currDate = DomainManager.World.GetCurrDate();
-		Location location = character.GetLocation();
-		if (AgreeToRequest)
+		if (combatSkillCfg.BookId >= 0)
 		{
-			GameData.Domains.CombatSkill.CombatSkill element_CombatSkills = DomainManager.CombatSkill.GetElement_CombatSkills(new CombatSkillKey(selfCharId, CombatSkillTemplateId));
-			ushort readingState = element_CombatSkills.GetReadingState();
-			ushort activationState = CombatSkillStateHelper.GenerateRandomActivatedOutlinePage(activationState: CombatSkillStateHelper.GenerateRandomActivatedNormalPages(context.Random, readingState, 0), random: context.Random, readingState: readingState, behaviorType: character.GetBehaviorType());
-			sbyte availableStepsCount = character.GetSkillBreakoutAvailableStepsCount(CombatSkillTemplateId);
-			element_CombatSkills.SetActivationState(activationState, context);
-			element_CombatSkills.SetBreakoutStepsCount(availableStepsCount, context);
-			character.ChangeHappiness(context, ItemTemplateHelper.GetBaseHappinessChange(10, combatSkillCfg.BookId) / 2);
-			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, targetChar, ItemTemplateHelper.GetBaseFavorabilityChange(10, combatSkillCfg.BookId));
-			lifeRecordCollection.AddRequestInstructionOnBreakoutSucceed(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
-			int secretInfoOffset = DomainManager.Information.GetSecretInformationCollection().AddAcceptRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
-			DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
-		}
-		else
-		{
-			character.ChangeHappiness(context, -3);
-			DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, targetChar, -3000);
-			lifeRecordCollection.AddRequestInstructionOnBreakoutFail(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
-			int secretInfoOffset2 = DomainManager.Information.GetSecretInformationCollection().AddRefuseRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
-			DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);
+			LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+			int currDate = DomainManager.World.GetCurrDate();
+			Location location = character.GetLocation();
+			if (AgreeToRequest)
+			{
+				GameData.Domains.CombatSkill.CombatSkill element_CombatSkills = DomainManager.CombatSkill.GetElement_CombatSkills(new CombatSkillKey(selfCharId, CombatSkillTemplateId));
+				ushort readingState = element_CombatSkills.GetReadingState();
+				ushort activationState = CombatSkillStateHelper.GenerateRandomActivatedOutlinePage(activationState: CombatSkillStateHelper.GenerateRandomActivatedNormalPages(context.Random, readingState, 0), random: context.Random, readingState: readingState, behaviorType: character.GetBehaviorType());
+				sbyte availableStepsCount = character.GetSkillBreakoutAvailableStepsCount(CombatSkillTemplateId);
+				element_CombatSkills.SetActivationState(activationState, context);
+				element_CombatSkills.SetBreakoutStepsCount(availableStepsCount, context);
+				character.ChangeHappiness(context, ItemTemplateHelper.GetBaseHappinessChange(10, combatSkillCfg.BookId) / 2);
+				DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, targetChar, ItemTemplateHelper.GetBaseFavorabilityChange(10, combatSkillCfg.BookId));
+				lifeRecordCollection.AddRequestInstructionOnBreakoutSucceed(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
+				int secretInfoOffset = DomainManager.Information.GetSecretInformationCollection().AddAcceptRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
+				DomainManager.Information.AddSecretInformation(context, secretInfoOffset);
+			}
+			else
+			{
+				character.ChangeHappiness(context, -3);
+				DomainManager.Character.ChangeFavorabilityOptionalMonthlyEvolution(context, character, targetChar, -3000);
+				lifeRecordCollection.AddRequestInstructionOnBreakoutFail(selfCharId, currDate, targetCharId, location, CombatSkillTemplateId);
+				int secretInfoOffset2 = DomainManager.Information.GetSecretInformationCollection().AddRefuseRequestInstructionOnBreakout(targetCharId, selfCharId, CombatSkillTemplateId);
+				DomainManager.Information.AddSecretInformation(context, secretInfoOffset2);
+			}
 		}
 	}
 

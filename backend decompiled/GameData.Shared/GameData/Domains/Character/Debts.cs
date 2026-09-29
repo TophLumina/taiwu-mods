@@ -7,24 +7,11 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 角色对太吾的债务
-/// 1. 集合中不存在从太吾 借入(-) 非等价物时, 借出 将作为正值直接添加到集合中
-/// 2. 集合中不存在向太吾 借出(+) 非等价物时, 借入 将作为负值直接添加到集合中
-/// 3. 集合中已存在 借入(-) 时, 借出 将直接抵消绝对值大于本次借出的借入项, 溢出的部分转化为等价物债务. 如果无小于本次借出的项, 则直接添加到集合.
-/// 4. 集合中已存在 借出(+) 时, 借入 将抵消小于本次借入的借出项, 循环抵扣, 最后无法再抵扣的部分转化为等价物债务. 
-/// </summary>
 [Obsolete]
 public class Debts : ISerializableGameData
 {
-	/// <summary>
-	/// 等价物债务的好感. (资源价值)
-	/// </summary>
 	public long Equivalent;
 
-	/// <summary>
-	/// 非等价物债务好感. (道具转换成好感)
-	/// </summary>
 	public readonly SortedList<long, int> Nonequivalents;
 
 	private static readonly Queue<(long, int)> OnExchange = new Queue<(long, int)>();
@@ -82,32 +69,16 @@ public class Debts : ISerializableGameData
 		return (int)(pCurrData - pData);
 	}
 
-	/// <summary>
-	/// 将道具的好感变化转换成欠恩失义使用的价值
-	/// </summary>
-	/// <param name="itemType"></param>
-	/// <param name="itemTemplateId"></param>
-	/// <returns></returns>
 	public static long ItemToWorth(sbyte itemType, short itemTemplateId)
 	{
 		return ItemTemplateHelper.GetBaseFavorabilityChange(itemType, itemTemplateId) * 10;
 	}
 
-	/// <summary>
-	/// 将资源转换成欠恩失义使用的价值
-	/// </summary>
-	/// <param name="resourceType"></param>
-	/// <param name="amount"></param>
-	/// <returns></returns>
 	public static long ResourceAmountToWorth(short resourceType, int amount)
 	{
 		return GlobalConfig.ResourcesWorth[resourceType] * amount;
 	}
 
-	/// <summary>
-	/// 将资源转换成欠恩失义使用的价值
-	/// </summary>
-	/// <returns></returns>
 	public static long ResourceAmountToWorth(ref ResourceInts resources)
 	{
 		long worth = 0L;
@@ -118,13 +89,6 @@ public class Debts : ISerializableGameData
 		return worth;
 	}
 
-	/// <summary>
-	/// 将欠恩失义使用的价值转化成资源数量
-	/// </summary>
-	/// <param name="resourceType"></param>
-	/// <param name="worth"></param>
-	/// <param name="keepRemainder">是否考虑余数</param>
-	/// <returns></returns>
 	public static int WorthToResourceAmount(short resourceType, long worth, bool keepRemainder = false)
 	{
 		worth = Math.Abs(worth);
@@ -134,19 +98,11 @@ public class Debts : ISerializableGameData
 		return (int)Math.Min((keepRemainder && remainder > 0) ? (result + 1) : result, 2147483647L);
 	}
 
-	/// <summary>
-	/// 获取当前债务下的好感最大值
-	/// </summary>
-	/// <returns></returns>
 	public short GetMaxFavorabilityWithDebt()
 	{
 		return (short)MathUtils.Clamp(30000 - GetTotalWorthLentToTaiwu() / 10, -30000L, 30000L);
 	}
 
-	/// <summary>
-	/// 借出等价物给太吾
-	/// </summary>
-	/// <param name="worth">等价物的价值</param>
 	public void LendEquivalentToTaiwu(long worth)
 	{
 		if (worth <= 0)
@@ -156,10 +112,6 @@ public class Debts : ISerializableGameData
 		Equivalent += worth;
 	}
 
-	/// <summary>
-	/// 从太吾处借入等价物 (太吾还债)
-	/// </summary>
-	/// <param name="worth">等价物的价值</param>
 	public void BorrowEquivalentFromTaiwu(long worth)
 	{
 		if (worth <= 0)
@@ -169,11 +121,6 @@ public class Debts : ISerializableGameData
 		Equivalent -= worth;
 	}
 
-	/// <summary>
-	/// 借出非等价物给太吾
-	/// </summary>
-	/// <param name="worth">单个事物的价值</param>
-	/// <param name="count">事物的个数</param>
 	public void LendNonequivalentToTaiwu(long worth, int count = 1)
 	{
 		if (worth <= 0)
@@ -242,12 +189,6 @@ public class Debts : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 从太吾处借入非等价物 (太吾还债)
-	/// </summary>
-	/// <param name="worth">单个事物的价值</param>
-	/// <param name="count">事物的个数</param>
-	/// <returns>是否偿还了非等价物债务，用于商店出售物品时记录便于回购时取消偿还</returns>
 	public bool BorrowNonequivalentFromTaiwu(long worth, int count = 1)
 	{
 		if (worth <= 0)
@@ -323,21 +264,11 @@ public class Debts : ISerializableGameData
 		Nonequivalents.Clear();
 	}
 
-	/// <summary>
-	/// 获取借出给太吾的价值之和
-	/// 返回值大于等于零.
-	/// </summary>
-	/// <returns></returns>
 	public long GetTotalWorthLentToTaiwu()
 	{
 		return GetEquivalentWorth() + GetTotalNonEquivalentWorth();
 	}
 
-	/// <summary>
-	/// 获取借出给太吾的等价物价值
-	/// 返回值大于等于零.
-	/// </summary>
-	/// <returns></returns>
 	public long GetEquivalentWorth()
 	{
 		if (Equivalent < 0)
@@ -347,11 +278,6 @@ public class Debts : ISerializableGameData
 		return Equivalent;
 	}
 
-	/// <summary>
-	/// 获取借出给太吾的非等价价值总和.
-	/// 返回值大于等于零.
-	/// </summary>
-	/// <returns></returns>
 	public long GetTotalNonEquivalentWorth()
 	{
 		long value = 0L;
@@ -367,10 +293,6 @@ public class Debts : ISerializableGameData
 		return value;
 	}
 
-	/// <summary>
-	/// 获取债务的非等价价值总和.
-	/// </summary>
-	/// <returns></returns>
 	public long GetFinalNonEquivalentWorth()
 	{
 		long value = 0L;
@@ -383,16 +305,11 @@ public class Debts : ISerializableGameData
 		return value;
 	}
 
-	/// <summary>
-	/// 获取债务的价值总和.
-	/// </summary>
-	/// <returns></returns>
 	public long GetFinalWorth()
 	{
 		return Equivalent + GetFinalNonEquivalentWorth();
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		string str = Equivalent.ToString();

@@ -4,10 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 秘闻快照，存档数据
-/// 目前用于过月月报显示，保存可能已经被删除的秘闻的显示信息
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SecretInformationSnapshot : ISerializableGameData
 {
@@ -46,89 +42,46 @@ public class SecretInformationSnapshot : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 秘闻 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int SecretInformationId;
 
-	/// <summary>
-	/// 秘闻模板 Id
-	/// <see cref="T:Config.SecretInformation" />
-	/// </summary>
 	[SerializableGameDataField]
 	public short SecretInformationTemplateId;
 
-	/// <summary>
-	/// 持有此秘闻的人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int HolderCount;
 
-	/// <summary>
-	/// 来源
-	/// </summary>
 	[SerializableGameDataField]
 	public int SourceCharacterId;
 
-	/// <summary>
-	/// 威望消耗
-	/// </summary>
 	[SerializableGameDataField]
 	public int AuthorityCost;
 
-	/// <summary>
-	/// 是否公开
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInBroadcast;
 
-	/// <summary>
-	/// 使用次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int UsedCount;
 
-	/// <summary>
-	/// 发生地点
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 发生日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int OccurenceDate;
 
-	/// <summary>
-	/// 参数包
-	/// </summary>
 	[SerializableGameDataField]
 	public byte[] ParametersPack;
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	[SerializableGameDataField]
 	public int Type;
 
-	/// <summary>
-	/// 秘闻事号
-	/// </summary>
 	[SerializableGameDataField]
 	public SecretOccurenceId OccurenceId;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SecretInformationSnapshot()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SecretInformationSnapshot(SecretInformationSnapshot other)
 	{
 		SecretInformationId = other.SecretInformationId;
@@ -151,9 +104,6 @@ public class SecretInformationSnapshot : ISerializableGameData
 		OccurenceId = other.OccurenceId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SecretInformationSnapshot other)
 	{
 		SecretInformationId = other.SecretInformationId;
@@ -176,13 +126,11 @@ public class SecretInformationSnapshot : ISerializableGameData
 		OccurenceId = other.OccurenceId;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 41;
@@ -194,7 +142,6 @@ public class SecretInformationSnapshot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -245,7 +192,6 @@ public class SecretInformationSnapshot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

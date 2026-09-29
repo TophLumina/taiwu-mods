@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 给人物主界面(ViewCharacterMenu)使用的显示数据，避免前端出现“请求-返回-再请求”的链式流程。
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class ViewCharacterMenuDisplayData : ISerializableGameData
 {
@@ -29,50 +26,34 @@ public class ViewCharacterMenuDisplayData : ISerializableGameData
 
 		public const ushort GroupLeaderId = 7;
 
-		public const ushort Count = 8;
+		public const ushort TaiwuCombatSpecialGroup = 8;
 
-		public static readonly string[] FieldId2FieldName = new string[8] { "CharacterDisplayDataList", "IsTaiwuTeam", "TaiwuTeamCharIds", "TaiwuSpecialGroup", "TaiwuGearMateGroup", "NoNameInfantCharIds", "TaiwuGroupMaxDisplayCount", "GroupLeaderId" };
+		public const ushort Count = 9;
+
+		public static readonly string[] FieldId2FieldName = new string[9] { "CharacterDisplayDataList", "IsTaiwuTeam", "TaiwuTeamCharIds", "TaiwuSpecialGroup", "TaiwuGearMateGroup", "NoNameInfantCharIds", "TaiwuGroupMaxDisplayCount", "GroupLeaderId", "TaiwuCombatSpecialGroup" };
 	}
 
-	/// <summary>
-	/// 相关角色的数据列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public List<CharacterDisplayData> CharacterDisplayDataList;
 
-	/// <summary>
-	/// 当前人物主界面显示的角色列表是否为太吾队伍
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public bool IsTaiwuTeam;
 
-	/// <summary>
-	/// 太吾队伍角色 Id 列表（包含太吾自己）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public List<int> TaiwuTeamCharIds;
 
-	/// <summary>
-	/// 太吾特殊同道 Id 列表（野兽同道、机关人等）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public List<int> TaiwuSpecialGroup;
 
-	/// <summary>
-	/// 太吾机关人同道 Id 列表，是 TaiwuSpecialGroup 的子集
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public List<int> TaiwuGearMateGroup;
 
-	/// <summary>
-	/// 无名婴儿角色 Id 列表（FullNameType.NoNameInfant），用于控制经历等功能可用性
-	/// </summary>
+	[SerializableGameDataField(FieldIndex = 8)]
+	public List<int> TaiwuCombatSpecialGroup;
+
 	[SerializableGameDataField(FieldIndex = 5)]
 	public List<int> NoNameInfantCharIds;
 
-	/// <summary>
-	/// 太吾队伍的显示上限
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public int TaiwuGroupMaxDisplayCount;
 
@@ -103,6 +84,7 @@ public class ViewCharacterMenuDisplayData : ISerializableGameData
 		totalSize = ((TaiwuSpecialGroup == null) ? (totalSize + 2) : (totalSize + (2 + 4 * TaiwuSpecialGroup.Count)));
 		totalSize = ((TaiwuGearMateGroup == null) ? (totalSize + 2) : (totalSize + (2 + 4 * TaiwuGearMateGroup.Count)));
 		totalSize = ((NoNameInfantCharIds == null) ? (totalSize + 2) : (totalSize + (2 + 4 * NoNameInfantCharIds.Count)));
+		totalSize = ((TaiwuCombatSpecialGroup == null) ? (totalSize + 2) : (totalSize + (2 + 4 * TaiwuCombatSpecialGroup.Count)));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;
@@ -113,7 +95,7 @@ public class ViewCharacterMenuDisplayData : ISerializableGameData
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
-		*(short*)pCurrData = 8;
+		*(short*)pCurrData = 9;
 		pCurrData += 2;
 		if (CharacterDisplayDataList != null)
 		{
@@ -218,6 +200,23 @@ public class ViewCharacterMenuDisplayData : ISerializableGameData
 		pCurrData += 4;
 		*(int*)pCurrData = GroupLeaderId;
 		pCurrData += 4;
+		if (TaiwuCombatSpecialGroup != null)
+		{
+			int elementsCount6 = TaiwuCombatSpecialGroup.Count;
+			Tester.Assert(elementsCount6 <= 65535);
+			*(ushort*)pCurrData = (ushort)elementsCount6;
+			pCurrData += 2;
+			for (int n = 0; n < elementsCount6; n++)
+			{
+				*(int*)pCurrData = TaiwuCombatSpecialGroup[n];
+				pCurrData += 4;
+			}
+		}
+		else
+		{
+			*(short*)pCurrData = 0;
+			pCurrData += 2;
+		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -385,6 +384,32 @@ public class ViewCharacterMenuDisplayData : ISerializableGameData
 		{
 			GroupLeaderId = *(int*)pCurrData;
 			pCurrData += 4;
+		}
+		if (fieldCount > 8)
+		{
+			ushort elementsCount6 = *(ushort*)pCurrData;
+			pCurrData += 2;
+			if (elementsCount6 > 0)
+			{
+				if (TaiwuCombatSpecialGroup == null)
+				{
+					TaiwuCombatSpecialGroup = new List<int>();
+				}
+				else
+				{
+					TaiwuCombatSpecialGroup.Clear();
+				}
+				for (int n = 0; n < elementsCount6; n++)
+				{
+					int element6 = *(int*)pCurrData;
+					pCurrData += 4;
+					TaiwuCombatSpecialGroup.Add(element6);
+				}
+			}
+			else
+			{
+				TaiwuCombatSpecialGroup?.Clear();
+			}
 		}
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)

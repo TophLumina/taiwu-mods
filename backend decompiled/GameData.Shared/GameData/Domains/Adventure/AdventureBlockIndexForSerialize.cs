@@ -4,9 +4,7 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 用于序列化的奇遇格索引
-/// </summary>
+[SerializeFrom(typeof(AdventureBlockIndex))]
 [SerializableGameData(IsExtensible = true)]
 public struct AdventureBlockIndexForSerialize : ISerializableGameData, IEquatable<AdventureBlockIndexForSerialize>
 {
@@ -46,13 +44,11 @@ public struct AdventureBlockIndexForSerialize : ISerializableGameData, IEquatabl
 		return "(" + _gx + "," + _gy + ")";
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10;
@@ -63,7 +59,6 @@ public struct AdventureBlockIndexForSerialize : ISerializableGameData, IEquatabl
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 2;
@@ -79,7 +74,6 @@ public struct AdventureBlockIndexForSerialize : ISerializableGameData, IEquatabl
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

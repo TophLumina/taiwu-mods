@@ -7,411 +7,168 @@ namespace Config;
 [Serializable]
 public class StoryScroll : ConfigData<StoryScrollItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 莫女生
-		/// </summary>
 		public const short MonvBegin = 0;
 
-		/// <summary>
-		/// 大岳瑶常生
-		/// </summary>
 		public const short DaYueYaoChangBegin = 6;
 
-		/// <summary>
-		/// 九寒生
-		/// </summary>
 		public const short JiuHanBegin = 12;
 
-		/// <summary>
-		/// 金凰儿生
-		/// </summary>
 		public const short JinHuangerBegin = 18;
 
-		/// <summary>
-		/// 衣以侯生
-		/// </summary>
 		public const short YiYiHouBegin = 24;
 
-		/// <summary>
-		/// 卫起生
-		/// </summary>
 		public const short WeiQiBegin = 30;
 
-		/// <summary>
-		/// 以向生
-		/// </summary>
 		public const short YiXiangBegin = 36;
 
-		/// <summary>
-		/// 血枫生
-		/// </summary>
 		public const short XueFengBegin = 42;
 
-		/// <summary>
-		/// 术方生
-		/// </summary>
 		public const short ShuFangBegin = 48;
 
-		/// <summary>
-		/// 少林派盛
-		/// </summary>
 		public const short SectShaoLinGood = 54;
 
-		/// <summary>
-		/// 少林派衰
-		/// </summary>
 		public const short SectShaoLinBad = 55;
 
-		/// <summary>
-		/// 峨眉派盛
-		/// </summary>
 		public const short SectEMeiGood = 56;
 
-		/// <summary>
-		/// 峨眉派衰
-		/// </summary>
 		public const short SectEMeiBad = 57;
 
-		/// <summary>
-		/// 百花谷盛
-		/// </summary>
 		public const short SectBaiHuaGood = 58;
 
-		/// <summary>
-		/// 百花谷衰
-		/// </summary>
 		public const short SectBaiHuaBad = 59;
 
-		/// <summary>
-		/// 武当派盛
-		/// </summary>
 		public const short SectWuDangGood = 60;
 
-		/// <summary>
-		/// 武当派衰
-		/// </summary>
 		public const short SectWuDangBad = 61;
 
-		/// <summary>
-		/// 元山派盛
-		/// </summary>
 		public const short SectYuanShanGood = 62;
 
-		/// <summary>
-		/// 元山派衰
-		/// </summary>
 		public const short SectYuanShanBad = 63;
 
-		/// <summary>
-		/// 狮相门盛
-		/// </summary>
 		public const short SectShiXiangGood = 64;
 
-		/// <summary>
-		/// 狮相门衰
-		/// </summary>
 		public const short SectShiXiangBad = 65;
 
-		/// <summary>
-		/// 然山派盛
-		/// </summary>
 		public const short SectRanShanGood = 66;
 
-		/// <summary>
-		/// 然山派衰
-		/// </summary>
 		public const short SectRanShanBad = 67;
 
-		/// <summary>
-		/// 璇女派盛
-		/// </summary>
 		public const short SectXuanNvGood = 68;
 
-		/// <summary>
-		/// 璇女派衰
-		/// </summary>
 		public const short SectXuanNvBad = 69;
 
-		/// <summary>
-		/// 铸剑山庄盛
-		/// </summary>
 		public const short SectZhuJianGood = 70;
 
-		/// <summary>
-		/// 铸剑山庄衰
-		/// </summary>
 		public const short SectZhuJianBad = 71;
 
-		/// <summary>
-		/// 空桑派盛
-		/// </summary>
 		public const short SectKongSangGood = 72;
 
-		/// <summary>
-		/// 空桑派衰
-		/// </summary>
 		public const short SectKongSangBad = 73;
 
-		/// <summary>
-		/// 金刚宗盛
-		/// </summary>
 		public const short SectJinGangGood = 74;
 
-		/// <summary>
-		/// 金刚宗衰
-		/// </summary>
 		public const short SectJinGangBad = 75;
 
-		/// <summary>
-		/// 五仙教盛
-		/// </summary>
 		public const short SectWuXianGood = 76;
 
-		/// <summary>
-		/// 五仙教衰
-		/// </summary>
 		public const short SectWuXianBad = 77;
 
-		/// <summary>
-		/// 界青门盛
-		/// </summary>
 		public const short SectJieQingGood = 78;
 
-		/// <summary>
-		/// 界青门衰
-		/// </summary>
 		public const short SectJieQingBad = 79;
 
-		/// <summary>
-		/// 伏龙坛盛
-		/// </summary>
 		public const short SectFuLongGood = 80;
 
-		/// <summary>
-		/// 伏龙坛衰
-		/// </summary>
 		public const short SectFuLongBad = 81;
 
-		/// <summary>
-		/// 血犼教盛
-		/// </summary>
 		public const short SectXueHouGood = 82;
 
-		/// <summary>
-		/// 血犼教衰
-		/// </summary>
 		public const short SectXueHouBad = 83;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 莫女生
-		/// </summary>
 		public static StoryScrollItem MonvBegin => Instance[(short)0];
 
-		/// <summary>
-		/// 大岳瑶常生
-		/// </summary>
 		public static StoryScrollItem DaYueYaoChangBegin => Instance[(short)6];
 
-		/// <summary>
-		/// 九寒生
-		/// </summary>
 		public static StoryScrollItem JiuHanBegin => Instance[(short)12];
 
-		/// <summary>
-		/// 金凰儿生
-		/// </summary>
 		public static StoryScrollItem JinHuangerBegin => Instance[(short)18];
 
-		/// <summary>
-		/// 衣以侯生
-		/// </summary>
 		public static StoryScrollItem YiYiHouBegin => Instance[(short)24];
 
-		/// <summary>
-		/// 卫起生
-		/// </summary>
 		public static StoryScrollItem WeiQiBegin => Instance[(short)30];
 
-		/// <summary>
-		/// 以向生
-		/// </summary>
 		public static StoryScrollItem YiXiangBegin => Instance[(short)36];
 
-		/// <summary>
-		/// 血枫生
-		/// </summary>
 		public static StoryScrollItem XueFengBegin => Instance[(short)42];
 
-		/// <summary>
-		/// 术方生
-		/// </summary>
 		public static StoryScrollItem ShuFangBegin => Instance[(short)48];
 
-		/// <summary>
-		/// 少林派盛
-		/// </summary>
 		public static StoryScrollItem SectShaoLinGood => Instance[(short)54];
 
-		/// <summary>
-		/// 少林派衰
-		/// </summary>
 		public static StoryScrollItem SectShaoLinBad => Instance[(short)55];
 
-		/// <summary>
-		/// 峨眉派盛
-		/// </summary>
 		public static StoryScrollItem SectEMeiGood => Instance[(short)56];
 
-		/// <summary>
-		/// 峨眉派衰
-		/// </summary>
 		public static StoryScrollItem SectEMeiBad => Instance[(short)57];
 
-		/// <summary>
-		/// 百花谷盛
-		/// </summary>
 		public static StoryScrollItem SectBaiHuaGood => Instance[(short)58];
 
-		/// <summary>
-		/// 百花谷衰
-		/// </summary>
 		public static StoryScrollItem SectBaiHuaBad => Instance[(short)59];
 
-		/// <summary>
-		/// 武当派盛
-		/// </summary>
 		public static StoryScrollItem SectWuDangGood => Instance[(short)60];
 
-		/// <summary>
-		/// 武当派衰
-		/// </summary>
 		public static StoryScrollItem SectWuDangBad => Instance[(short)61];
 
-		/// <summary>
-		/// 元山派盛
-		/// </summary>
 		public static StoryScrollItem SectYuanShanGood => Instance[(short)62];
 
-		/// <summary>
-		/// 元山派衰
-		/// </summary>
 		public static StoryScrollItem SectYuanShanBad => Instance[(short)63];
 
-		/// <summary>
-		/// 狮相门盛
-		/// </summary>
 		public static StoryScrollItem SectShiXiangGood => Instance[(short)64];
 
-		/// <summary>
-		/// 狮相门衰
-		/// </summary>
 		public static StoryScrollItem SectShiXiangBad => Instance[(short)65];
 
-		/// <summary>
-		/// 然山派盛
-		/// </summary>
 		public static StoryScrollItem SectRanShanGood => Instance[(short)66];
 
-		/// <summary>
-		/// 然山派衰
-		/// </summary>
 		public static StoryScrollItem SectRanShanBad => Instance[(short)67];
 
-		/// <summary>
-		/// 璇女派盛
-		/// </summary>
 		public static StoryScrollItem SectXuanNvGood => Instance[(short)68];
 
-		/// <summary>
-		/// 璇女派衰
-		/// </summary>
 		public static StoryScrollItem SectXuanNvBad => Instance[(short)69];
 
-		/// <summary>
-		/// 铸剑山庄盛
-		/// </summary>
 		public static StoryScrollItem SectZhuJianGood => Instance[(short)70];
 
-		/// <summary>
-		/// 铸剑山庄衰
-		/// </summary>
 		public static StoryScrollItem SectZhuJianBad => Instance[(short)71];
 
-		/// <summary>
-		/// 空桑派盛
-		/// </summary>
 		public static StoryScrollItem SectKongSangGood => Instance[(short)72];
 
-		/// <summary>
-		/// 空桑派衰
-		/// </summary>
 		public static StoryScrollItem SectKongSangBad => Instance[(short)73];
 
-		/// <summary>
-		/// 金刚宗盛
-		/// </summary>
 		public static StoryScrollItem SectJinGangGood => Instance[(short)74];
 
-		/// <summary>
-		/// 金刚宗衰
-		/// </summary>
 		public static StoryScrollItem SectJinGangBad => Instance[(short)75];
 
-		/// <summary>
-		/// 五仙教盛
-		/// </summary>
 		public static StoryScrollItem SectWuXianGood => Instance[(short)76];
 
-		/// <summary>
-		/// 五仙教衰
-		/// </summary>
 		public static StoryScrollItem SectWuXianBad => Instance[(short)77];
 
-		/// <summary>
-		/// 界青门盛
-		/// </summary>
 		public static StoryScrollItem SectJieQingGood => Instance[(short)78];
 
-		/// <summary>
-		/// 界青门衰
-		/// </summary>
 		public static StoryScrollItem SectJieQingBad => Instance[(short)79];
 
-		/// <summary>
-		/// 伏龙坛盛
-		/// </summary>
 		public static StoryScrollItem SectFuLongGood => Instance[(short)80];
 
-		/// <summary>
-		/// 伏龙坛衰
-		/// </summary>
 		public static StoryScrollItem SectFuLongBad => Instance[(short)81];
 
-		/// <summary>
-		/// 血犼教盛
-		/// </summary>
 		public static StoryScrollItem SectXueHouGood => Instance[(short)82];
 
-		/// <summary>
-		/// 血犼教衰
-		/// </summary>
 		public static StoryScrollItem SectXueHouBad => Instance[(short)83];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static StoryScroll Instance = new StoryScroll();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "StoryBoss", "StorySect", "StoryNote", "TemplateId", "StoryResultMark", "StoryUnlocked", "StoryTypeIcon", "StoryCharm", "StoryEnd", "StoryImage" };

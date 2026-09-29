@@ -24,9 +24,9 @@ public class LeiZuBoJianShi : CombatSkillEffectBase
 
 	private short CombatStateId => (short)(base.IsDirect ? 39 : 40);
 
-	private static bool IsDetachable(ItemKey itemKey)
+	private static bool IsDetachable(short characterTemplateId, sbyte slot, ItemKey itemKey)
 	{
-		return itemKey.IsValid() && DomainManager.Item.GetBaseEquipment(itemKey).GetDetachable();
+		return itemKey.IsValid() && SharedMethods.CanModifyEquipSlot(characterTemplateId, slot, itemKey);
 	}
 
 	private bool IsGodArmor(int itemId)
@@ -37,7 +37,7 @@ public class LeiZuBoJianShi : CombatSkillEffectBase
 	private bool IsDetachable(sbyte slot)
 	{
 		ItemKey itemKey = CurrEnemyEquipments[slot];
-		if (!IsDetachable(itemKey))
+		if (!IsDetachable(CharObj.GetTemplateId(), slot, itemKey))
 		{
 			return false;
 		}
@@ -89,10 +89,10 @@ public class LeiZuBoJianShi : CombatSkillEffectBase
 
 	private sbyte RandomTargetSlot(IRandomSource random)
 	{
-		ItemKey clothKey = CurrEnemyEquipments[4];
 		List<sbyte> slotPool = ObjectPool<List<sbyte>>.Instance.Get();
 		slotPool.Clear();
-		if (IsDetachable(clothKey) && random.CheckPercentProb(50))
+		bool clothDetachable = IsDetachable(4);
+		if (clothDetachable && random.CheckPercentProb(50))
 		{
 			slotPool.Add(4);
 		}
@@ -100,7 +100,7 @@ public class LeiZuBoJianShi : CombatSkillEffectBase
 		{
 			slotPool.AddRange(CanRemoveSlots.Where(IsDetachable));
 		}
-		if (slotPool.Count == 0 && IsDetachable(clothKey))
+		if (slotPool.Count == 0 && clothDetachable)
 		{
 			slotPool.Add(4);
 		}

@@ -5,58 +5,30 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 囚犯人物显示数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 public class CharacterDisplayDataForSettlementPrisoner : ISerializableGameData
 {
-	/// <summary>
-	/// 监牢关押数据
-	/// </summary>
 	[SerializableGameDataField]
 	public SettlementPrisoner SettlementPrisoner;
 
-	/// <summary>
-	/// 抵抗值
-	/// </summary>
 	[SerializableGameDataField]
 	public int Resistance;
 
-	/// <summary>
-	/// 逃跑概率
-	/// </summary>
 	[SerializableGameDataField]
 	public int EscapeRate;
 
-	/// <summary>
-	/// 定居点随机名称 ID.
-	/// 小于 0 表示该定居点使用固定名称.
-	/// </summary>
 	[SerializableGameDataField]
 	public short RandomNameId = -1;
 
-	/// <summary>
-	/// 是否已入魔
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CompletelyInfected;
 
-	/// <summary>
-	/// 是否是奇书持有者
-	/// </summary>
 	[SerializableGameDataField]
 	public bool OwningBook;
 
-	/// <summary>
-	/// 人物关押数据，只复用其中的人物信息
-	/// </summary>
 	[SerializableGameDataField]
 	public KidnapCharDisplayData KidnapCharDisplayData;
 
-	/// <summary>
-	/// Npc被关押的监牢等级.
-	/// </summary>
 	public PrisonType PrisonType
 	{
 		get
@@ -73,16 +45,10 @@ public class CharacterDisplayDataForSettlementPrisoner : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterDisplayDataForSettlementPrisoner()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterDisplayDataForSettlementPrisoner(CharacterDisplayDataForSettlementPrisoner other)
 	{
 		SettlementPrisoner = new SettlementPrisoner(other.SettlementPrisoner);
@@ -94,9 +60,6 @@ public class CharacterDisplayDataForSettlementPrisoner : ISerializableGameData
 		KidnapCharDisplayData = new KidnapCharDisplayData(other.KidnapCharDisplayData);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterDisplayDataForSettlementPrisoner other)
 	{
 		SettlementPrisoner = new SettlementPrisoner(other.SettlementPrisoner);

@@ -15,43 +15,24 @@ public class TasterUltimateResult : ISerializableGameData
 	[SerializableGameDataField]
 	public List<short> Books = new List<short>();
 
-	/// <summary>
-	/// 修习度数据
-	/// (charId, bookId), (prevPracticeLevel, currPracticeLevel)
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public Dictionary<IntPair, IntPair> PracticeLevelData = new Dictionary<IntPair, IntPair>();
 
-	/// <summary>
-	/// 研读数据
-	/// (charId, bookId), readPage
-	/// 功法的书页数据使用CombatSkillBookPage而非包含正逆练信息的InternalIndex
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<IntPair, byte> ReadBookPageData = new Dictionary<IntPair, byte>();
 
-	/// <summary>
-	/// 好感增减数据
-	/// (charId, charId), isAdd
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<IntPair, bool> FavorabilityChangeData = new Dictionary<IntPair, bool>();
 
-	/// <summary>
-	/// 好感增减数据
-	/// (charId, charId), relationType
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<IntPair, ushort> RelationChangeData = new Dictionary<IntPair, ushort>();
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -68,7 +49,6 @@ public class TasterUltimateResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -102,7 +82,6 @@ public class TasterUltimateResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

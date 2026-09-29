@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SecretInformationAppliedStruct : ConfigData<SecretInformationAppliedStructItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationAppliedStruct Instance = new SecretInformationAppliedStruct();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

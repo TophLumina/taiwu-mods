@@ -7,245 +7,125 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件中目标角色显示的额外信息
-/// ！！！生成后需要手动注释SelectItemData在Serialize方法里的长度断言，否则会再次触发由于背包过大送礼时导致的报错！！！
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class TaiwuEventDisplayExtraData : ISerializableGameData
 {
-	/// <summary>
-	/// 是否隐藏右边人物的好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HideRightFavorability;
 
-	/// <summary>
-	/// 是否打开左边人物的好感度
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HideLeftFavorability;
 
-	/// <summary>
-	/// 是否禁止查看目标人物
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ForbidViewCharacter;
 
-	/// <summary>
-	/// 是否禁止查看主要人物
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ForbidViewSelf;
 
-	/// <summary>
-	/// 做选择的角色名字显示使用代称
-	/// </summary>
 	[SerializableGameDataField]
 	public bool MainRoleUseAlternativeName;
 
-	/// <summary>
-	/// 目标交谈角色名字显示使用代称
-	/// </summary>
 	[SerializableGameDataField]
 	public bool TargetRoleUseAlternativeName;
 
-	/// <summary>
-	/// 主要人物是否害羞标记位
-	/// </summary>
 	[SerializableGameDataField]
 	public bool MainRoleShyFlag;
 
-	/// <summary>
-	/// 目标人物是否害羞标记位
-	/// </summary>
 	[SerializableGameDataField]
 	public bool TargetRoleShyFlag;
 
-	/// <summary>
-	/// 左侧人物是否显示伤病信息
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LeftRoleShowInjuryInfo;
 
-	/// <summary>
-	/// 右侧人物是否显示伤病信息
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RightRoleShowInjuryInfo;
 
-	/// <summary>
-	/// 主要人物临时穿搭的衣装id
-	/// 如果值为负数，表示该值没有意义
-	/// </summary>
 	[SerializableGameDataField]
 	public short MainRoleAdjustClothDisplayId;
 
-	/// <summary>
-	/// 目标人物临时穿搭的衣装id
-	/// 如果值为负数，表示该值没有意义
-	/// </summary>
 	[SerializableGameDataField]
 	public short TargetRoleAdjustClothDisplayId;
 
-	/// <summary>
-	/// 当外道在地图上未生成时,使用此id以显示剪影
-	/// </summary>
 	[SerializableGameDataField]
 	public short HereticTemplateId;
 
-	/// <summary>
-	/// 正在互动的商队Id，此字段赋值后商队形象代替交互目标角色显示
-	/// </summary>
 	[SerializableGameDataField]
 	public CaravanDisplayData CaravanData;
 
-	/// <summary>
-	/// 选择物品的信息，如果事件带有这个信息，将会刷新为选择物品的显示模式
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public EventSelectItemData SelectItemData;
 
-	/// <summary>
-	/// 选择人物的信息，如果事件带有这个信息，将会刷新为选择人物的显示模式
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public EventSelectCharacterData SelectCharacterData;
 
-	/// <summary>
-	/// 选择研读书籍次数数据
-	/// </summary>
 	[SerializableGameDataField]
 	public EventSelectReadingBookCountData SelectReadingBookCountData;
 
-	/// <summary>
-	/// 选择功法运转次数数据
-	/// </summary>
 	[SerializableGameDataField]
 	public EventSelectNeigongLoopingCountData SelectNeigongLoopingCountData;
 
-	/// <summary>
-	/// 选择伏虞心念数据
-	/// </summary>
 	[SerializableGameDataField]
 	public EventSelectFuyuFaithCountData SelectFuyuFaithCountData;
 
-	/// <summary>
-	/// 选择名誉的信息，如果事件带有这个信息，将会刷新为选择名誉的显示模式
-	/// </summary>
 	[SerializableGameDataField]
 	public EventSelectFameData SelectFameData;
 
-	/// <summary>
-	/// 要求用户输入的信息，如果事件带有这个信息，将会刷新为输入状态模式
-	/// </summary>
 	[SerializableGameDataField]
 	public EventInputRequestData InputRequestData;
 
-	/// <summary>
-	/// 演员相关显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public EventActorData ActorData;
 
-	/// <summary>
-	/// 左侧显示为演员的相关显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public EventActorData LeftActorData;
 
-	/// <summary>
-	/// 用于从多个avatar里选择一个avatar的数据列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<AvatarRelatedData> SelectOneAvatarRelatedDataList;
 
-	/// <summary>
-	/// 右侧普通角色使用剪影
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RightCharacterShadow;
 
-	/// <summary>
-	/// 右侧普通角色禁止显示精纯
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RightForbiddenConsummateLevel;
 
-	/// <summary>
-	/// 左侧是否显示好感变化特效
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LeftForbidShowFavorChangeEffect;
 
-	/// <summary>
-	/// 右侧是否显示好感变化特效
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RightForbidShowFavorChangeEffect;
 
-	/// <summary>
-	/// 要显示的蛟tips需要的数据
-	/// 看代码目前只需要ItemDisplayData，若需要则以后修改这里
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData JiaoDisplayData;
 
-	/// <summary>
-	/// 左侧演员显示婚服1
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LeftActorShowMarriageLook1;
 
-	/// <summary>
-	/// 左侧演员显示婚服2
-	/// </summary>
 	[SerializableGameDataField]
 	public bool LeftActorShowMarriageLook2;
 
-	/// <summary>
-	/// 右侧演员显示婚服1
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RightActorShowMarriageLook1;
 
-	/// <summary>
-	/// 右侧演员显示婚服2
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RightActorShowMarriageLook2;
 
-	/// <summary>
-	/// 是否显示通用快捷按键
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ShowCommonOptionIndex;
 
-	/// <summary>
-	/// 是否显示互动toggle
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowInteractOption;
 
-	/// <summary>
-	/// 是否显示志向预览
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowProfessionReview;
 
-	/// <summary>
-	/// 是否显示地格人物背景
-	/// </summary>
 	[SerializableGameDataField]
 	public bool ShowBlockCharacterBack;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 28;
@@ -281,7 +161,6 @@ public class TaiwuEventDisplayExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -527,7 +406,6 @@ public class TaiwuEventDisplayExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

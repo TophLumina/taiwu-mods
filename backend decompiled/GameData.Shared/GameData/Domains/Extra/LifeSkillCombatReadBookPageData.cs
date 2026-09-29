@@ -4,14 +4,8 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 已经获取过卡牌的技艺的书页
-/// </summary>
 public struct LifeSkillCombatReadBookPageData(LifeSkillCombatReadBookPageData other) : ISerializableGameData
 {
-	/// <summary>
-	/// 页码列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<byte> PageList = new List<byte>(other.PageList);
 
@@ -20,13 +14,11 @@ public struct LifeSkillCombatReadBookPageData(LifeSkillCombatReadBookPageData ot
 		PageList = new List<byte>(other.PageList);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -38,7 +30,6 @@ public struct LifeSkillCombatReadBookPageData(LifeSkillCombatReadBookPageData ot
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -67,7 +58,6 @@ public struct LifeSkillCombatReadBookPageData(LifeSkillCombatReadBookPageData ot
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

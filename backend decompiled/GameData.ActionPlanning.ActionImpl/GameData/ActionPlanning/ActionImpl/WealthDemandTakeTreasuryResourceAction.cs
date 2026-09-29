@@ -3,10 +3,8 @@ using GameData.ActionPlanning.MonthlyAI;
 using GameData.Common;
 using GameData.Domains;
 using GameData.Domains.Character;
-using GameData.Domains.Character.Ai;
 using GameData.Domains.Organization;
 using GameData.Serializer;
-using GameData.Utilities;
 using SerializableGameDataSourceGenerator;
 
 namespace GameData.ActionPlanning.ActionImpl;
@@ -34,10 +32,6 @@ public class WealthDemandTakeTreasuryResourceAction : ICharacterActionImpl, ISer
 	bool ICharacterActionImpl.OfflineInitActionData(DataContext context, Character character, ContextArgGroupHandle argGroup, CharacterActionData actionData)
 	{
 		if (!ActionHelper.CanInteractTreasury(character))
-		{
-			return false;
-		}
-		if (!context.Random.CheckPercentProb(AiHelper.GeneralActionConstants.TakeFromTreasuryChance[character.GetBehaviorType()]))
 		{
 			return false;
 		}

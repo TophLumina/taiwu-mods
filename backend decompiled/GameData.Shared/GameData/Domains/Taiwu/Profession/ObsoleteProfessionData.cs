@@ -6,53 +6,28 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession;
 
-/// <summary>
-/// 职业 (志向) 相关数据
-/// </summary>
 [Obsolete]
 [SerializableGameData(NotForDisplayModule = true)]
 public class ObsoleteProfessionData : ISerializableGameData
 {
-	/// <summary>
-	/// 职业的模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int TemplateId;
 
-	/// <summary>
-	/// 职业的资历
-	/// </summary>
 	[SerializableGameDataField]
 	public int Seniority;
 
-	/// <summary>
-	/// 转职冷却结束日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int ProfessionOffCooldownDate;
 
-	/// <summary>
-	/// 技能冷却结束时间, 小于当前时间表示技能不在冷却
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] SkillOffCooldownDates;
 
-	/// <summary>
-	/// 是否被解锁过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] HadBeenUnlocked;
 
-	/// <summary>
-	/// 职业技能相关数据, 为 null 表示没有技能相关存档数据
-	/// </summary>
 	[SerializableGameDataField]
 	public IProfessionSkillsData SkillsData;
 
-	/// <summary>
-	/// 获取技能总数量
-	/// </summary>
-	/// <returns></returns>
 	public int GetSkillCount()
 	{
 		ProfessionItem professionItem = Config.Profession.Instance[TemplateId];
@@ -73,20 +48,11 @@ public class ObsoleteProfessionData : ISerializableGameData
 		SkillsData = CreateExtraData(TemplateId);
 	}
 
-	/// <summary>
-	/// 获得志向模板数据
-	/// </summary>
-	/// <returns></returns>
 	public ProfessionItem GetConfig()
 	{
 		return Config.Profession.Instance[TemplateId];
 	}
 
-	/// <summary>
-	/// 获得志向技能模板数据
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public ProfessionSkillItem GetSkillConfig(int index)
 	{
 		ProfessionItem professionCfg = GetConfig();
@@ -97,11 +63,6 @@ public class ObsoleteProfessionData : ISerializableGameData
 		return ProfessionSkill.Instance[professionCfg.ExtraProfessionSkill];
 	}
 
-	/// <summary>
-	/// 根据技能ID获取技能序号
-	/// </summary>
-	/// <param name="skillId"></param>
-	/// <returns></returns>
 	public int GetSkillIndex(int skillId)
 	{
 		ProfessionItem professionCfg = GetConfig();
@@ -117,21 +78,11 @@ public class ObsoleteProfessionData : ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 指定技能是否已解锁
-	/// </summary>
-	/// <param name="skillIndex"></param>
-	/// <returns></returns>
 	public bool IsSkillUnlocked(int skillIndex)
 	{
 		return Seniority >= ProfessionRelatedConstants.SkillUnlockSeniority[skillIndex];
 	}
 
-	/// <summary>
-	/// 获取技能相关的额外数据
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public T GetSkillsData<T>() where T : IProfessionSkillsData
 	{
 		return (T)SkillsData;
@@ -159,13 +110,11 @@ public class ObsoleteProfessionData : ISerializableGameData
 	{
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -179,7 +128,6 @@ public class ObsoleteProfessionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -245,7 +193,6 @@ public class ObsoleteProfessionData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

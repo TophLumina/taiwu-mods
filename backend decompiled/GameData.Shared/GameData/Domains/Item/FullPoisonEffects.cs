@@ -7,9 +7,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 新版淬毒数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class FullPoisonEffects : ISerializableGameData
 {
@@ -24,41 +21,20 @@ public class FullPoisonEffects : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "PoisonSlotList", "IsIdentified" };
 	}
 
-	/// <summary>
-	/// 最大淬毒栏位
-	/// </summary>
 	public static readonly int MaxSlotCount = 3;
 
-	/// <summary>
-	/// 槽位列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<PoisonSlot> PoisonSlotList;
 
-	/// <summary>
-	/// 是否已鉴定
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsIdentified;
 
-	/// <summary>
-	/// 是否经过凝炼
-	/// </summary>
 	public bool IsCondensed => PoisonSlotList?.Any((PoisonSlot p) => p.IsCondensed) ?? false;
 
-	/// <summary>
-	/// 是否有效
-	/// </summary>
 	public bool IsValid => PoisonSlotList?.Any((PoisonSlot p) => p.IsValid) ?? false;
 
-	/// <summary>
-	/// 当前有效槽位数量
-	/// </summary>
 	public int CurrentValidSlotCount => PoisonSlotList?.Count((PoisonSlot p) => p.IsValid) ?? 0;
 
-	/// <summary>
-	/// 是否是混合毒
-	/// </summary>
 	public bool IsMixed
 	{
 		get
@@ -72,22 +48,13 @@ public class FullPoisonEffects : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 是否是三种混合毒
-	/// </summary>
 	public bool IsThreeMixed => PoisonSlotList?.Count((PoisonSlot p) => p.IsValid && p.IsAddPoison) == MaxSlotCount;
 
-	/// <summary>
-	/// 完全清理
-	/// </summary>
 	public void Clear()
 	{
 		PoisonSlotList?.Clear();
 	}
 
-	/// <summary>
-	/// 只清理凝炼数据
-	/// </summary>
 	public void ClearCondense()
 	{
 		PoisonSlotList?.ForEach(delegate(PoisonSlot s)
@@ -96,9 +63,6 @@ public class FullPoisonEffects : ISerializableGameData
 		});
 	}
 
-	/// <summary>
-	/// 淬毒
-	/// </summary>
 	public void AddPoison(short templateId, IReadOnlyList<short> condensedMedicineTemplateIdList)
 	{
 		if (templateId < 0)
@@ -124,9 +88,6 @@ public class FullPoisonEffects : ISerializableGameData
 		PoisonSlotList.Add(slot);
 	}
 
-	/// <summary>
-	/// 解毒
-	/// </summary>
 	public void RemovePoison(short templateId)
 	{
 		int sameIndex = PoisonSlotList?.FindIndex((PoisonSlot p) => p.IsSameType(templateId)) ?? (-1);
@@ -137,9 +98,6 @@ public class FullPoisonEffects : ISerializableGameData
 		PoisonSlotList.RemoveAt(sameIndex);
 	}
 
-	/// <summary>
-	/// 获取毒素的量和等级
-	/// </summary>
 	public PoisonsAndLevels GetAllPoisonsAndLevels()
 	{
 		PoisonsAndLevels poisons = default(PoisonsAndLevels);
@@ -155,11 +113,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return poisons;
 	}
 
-	/// <summary>
-	/// 是否包含指定毒素类型
-	/// </summary>
-	/// <param name="poisonType"><see cref="T:GameData.Domains.Combat.PoisonType" /></param>
-	/// <returns></returns>
 	public bool ContainsPoisonType(sbyte poisonType)
 	{
 		if (PoisonSlotList == null)
@@ -176,11 +129,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否包含同类毒素
-	/// </summary>
-	/// <param name="medicineTemplateId"><see cref="F:Config.MedicineItem.TemplateId" /></param>
-	/// <returns></returns>
 	public bool ContainsPoisonOfSameType(short medicineTemplateId)
 	{
 		if (PoisonSlotList == null)
@@ -197,10 +145,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取模板ID
-	/// </summary>
-	/// <returns></returns>
 	public short GetMedicineTemplateId()
 	{
 		if (!IsValid)
@@ -214,10 +158,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return PoisonSlotList.First().MedicineTemplateId;
 	}
 
-	/// <summary>
-	/// 获取混合毒的模板ID
-	/// </summary>
-	/// <returns></returns>
 	public short GetMixedMedicineTemplateId()
 	{
 		if (!IsMixed)
@@ -227,10 +167,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return GetAllPoisonsAndLevels().GetMixTemplateId();
 	}
 
-	/// <summary>
-	/// 获取全部毒物的模板ID
-	/// </summary>
-	/// <returns></returns>
 	public List<short> GetAllMedicineTemplateIds(bool includeCondensed = false)
 	{
 		if (!IsValid)
@@ -249,11 +185,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return list;
 	}
 
-	/// <summary>
-	/// 获取指定索引的毒物
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public short GetMedicineTemplateIdAt(int index)
 	{
 		List<short> list = GetAllMedicineTemplateIds();
@@ -264,10 +195,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 是否为两种毒组成的混合毒药
-	/// </summary>
-	/// <returns></returns>
 	public bool IsTwoPoisonsMix()
 	{
 		short id = GetMedicineTemplateId();
@@ -278,10 +205,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 是否为三种毒组成的混合毒药
-	/// </summary>
-	/// <returns></returns>
 	public bool IsThreePoisonsMix()
 	{
 		short id = GetMedicineTemplateId();
@@ -292,10 +215,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取毒素种类数量
-	/// </summary>
-	/// <returns></returns>
 	public int GetTotalPoisonCount()
 	{
 		if (!IsValid)
@@ -305,18 +224,11 @@ public class FullPoisonEffects : ISerializableGameData
 		return PoisonSlotList.Count((PoisonSlot s) => s.IsValid);
 	}
 
-	/// <summary>
-	/// 获取毒素的最高品级
-	/// </summary>
-	/// <returns></returns>
 	public int GetMaxGrade()
 	{
 		return GetAllMedicineTemplateIds()?.Max((short id) => (id <= -1) ? (-1) : Medicine.Instance[id].Grade) ?? 0;
 	}
 
-	/// <summary>
-	/// 比较值是否相同
-	/// </summary>
 	public bool SameOf(FullPoisonEffects other)
 	{
 		if (other == null)
@@ -353,16 +265,10 @@ public class FullPoisonEffects : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public FullPoisonEffects()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public FullPoisonEffects(FullPoisonEffects other)
 	{
 		if (other.PoisonSlotList != null)
@@ -382,9 +288,6 @@ public class FullPoisonEffects : ISerializableGameData
 		IsIdentified = other.IsIdentified;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(FullPoisonEffects other)
 	{
 		if (other.PoisonSlotList != null)
@@ -404,13 +307,11 @@ public class FullPoisonEffects : ISerializableGameData
 		IsIdentified = other.IsIdentified;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 3;
@@ -435,7 +336,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -481,7 +381,6 @@ public class FullPoisonEffects : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

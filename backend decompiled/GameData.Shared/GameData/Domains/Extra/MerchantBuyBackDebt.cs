@@ -5,9 +5,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 卖出时偿还了非等价物债务的物品，用于回购时恢复债务
-/// </summary>
 [Obsolete]
 public class MerchantBuyBackDebt : ISerializableGameData
 {
@@ -47,26 +44,16 @@ public class MerchantBuyBackDebt : ISerializableGameData
 		throw new Exception($"Item amount cannot be negative after removing: {itemKey}, {amount}");
 	}
 
-	/// <summary>
-	/// 空构造方法用于反序列化
-	/// </summary>
-	public MerchantBuyBackDebt()
-	{
-	}
-
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		return 4 + 12 * Items.Count;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -81,7 +68,6 @@ public class MerchantBuyBackDebt : ISerializableGameData
 		return (int)(pCurrData - pData);
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

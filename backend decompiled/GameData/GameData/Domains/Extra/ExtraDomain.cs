@@ -16,6 +16,7 @@ using GameData.Common.SingleValueCollection;
 using GameData.DLC;
 using GameData.DLC.FiveLoong;
 using GameData.DLC.Shared;
+using GameData.DLC.TameLoong;
 using GameData.Dependencies;
 using GameData.DomainEvents;
 using GameData.Domains.Adventure;
@@ -393,9 +394,11 @@ public class ExtraDomain : BaseGameDataDomain
 	[DomainData(DomainDataType.SingleValueCollection, true, false, false, false)]
 	private readonly Dictionary<int, SecretInformationShopCharacterData> _secretInformationShopCharacterData;
 
+	[Obsolete]
 	[DomainData(DomainDataType.SingleValueCollection, true, false, true, true)]
 	private readonly Dictionary<int, LoveDataItem> _loveDataDict;
 
+	[Obsolete]
 	[DomainData(DomainDataType.SingleValueCollection, true, false, true, true)]
 	private readonly HashSetAsDictionary<int> _previousLoverSet;
 
@@ -403,6 +406,7 @@ public class ExtraDomain : BaseGameDataDomain
 	private readonly HashSetAsDictionary<int> _confessLoveFailedSet;
 
 	[DomainData(DomainDataType.SingleValueCollection, true, false, true, true)]
+	[Obsolete]
 	private readonly Dictionary<ItemKey, LoveTokenDataItem> _loveTokenDataDict;
 
 	[DomainData(DomainDataType.SingleValueCollection, true, false, false, false)]
@@ -583,9 +587,15 @@ public class ExtraDomain : BaseGameDataDomain
 
 	public List<int> ProfessionSkillUnlockedCache;
 
-	public Dictionary<Location, List<short>> MartialArtistCreateRandomEnemyDict;
-
 	private readonly Dictionary<int, int> _addingProfessionSeniorityData = new Dictionary<int, int>();
+
+	private Dictionary<Location, List<short>> _martialArtistCreateRandomEnemyDict;
+
+	private Dictionary<Location, List<short>> _xiangshuCreateMinionDict;
+
+	private HashSet<int> _xiangshuBlackFlameAffectedCharIds;
+
+	private Location _taiwuAsXiangshuSkill0Location;
 
 	[DomainData(DomainDataType.SingleValueCollection, true, false, true, true)]
 	private Dictionary<ulong, ResourceBlockExtraData> _resourceBlockExtraData;
@@ -1001,8 +1011,6 @@ public class ExtraDomain : BaseGameDataDomain
 
 	private SingleValueCollectionModificationCollection<short> _modificationsTaiwuVisitedAreas = SingleValueCollectionModificationCollection<short>.Create();
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	internal CrossArchiveGameData UnhandledCrossArchiveGameData => _unhandledCrossArchiveGameData;
 
 	public Dictionary<short, int> ChoosyRemainUpgradeRateDict => _choosyRemainUpgradeRateDict;
@@ -1030,6 +1038,8 @@ public class ExtraDomain : BaseGameDataDomain
 	public MerchantData[] BranchMerchantData => _branchMerchantData;
 
 	public Dictionary<int, sbyte> VillagerLastInfluencePowerGrade => _villagerLastInfluencePowerGrade;
+
+	public TaiwuAsXiangshuSkill0Result AsXiangshuSkill0Result { get; private set; }
 
 	public IReadOnlyDictionary<short, sbyte> SectZhujianAreaMerchantTypeDict => _sectZhujianAreaMerchantTypeDict;
 
@@ -1410,8 +1420,7 @@ public class ExtraDomain : BaseGameDataDomain
 		CharacterDisplayDataForRelations displayData = new CharacterDisplayDataForRelations
 		{
 			Main = DomainManager.Character.GetCharacterDisplayDataForGeneralScrollList(abridgedChar),
-			Location = abridgedChar.Location,
-			DeathDate = -1
+			Location = abridgedChar.Location
 		};
 		ushort relationType = GetDreamBackRelationTypeWithTaiwu(charId).Item1;
 		displayData.RelationType = relationType;
@@ -1917,40 +1926,44 @@ public class ExtraDomain : BaseGameDataDomain
 		Logger.Info($"Unpacking unhandled cross archive game data: stateType={stateType}, inheritData={inheritData}, overwriteEquipments={overwriteEquipments}");
 		if (!inheritData)
 		{
-			sbyte b = stateType;
-			sbyte b2 = b;
-			if (b2 != 1)
+			switch (stateType)
 			{
-				return;
-			}
-			Inventory dreamBackInventory = _unhandledCrossArchiveGameData.TaiwuChar.GetInventory();
+			case 1:
 			{
-				foreach (KeyValuePair<ItemKey, int> item2 in dreamBackInventory.Items)
+				Inventory dreamBackInventory = _unhandledCrossArchiveGameData.TaiwuChar.GetInventory();
 				{
-					item2.Deconstruct(out var key, out var value);
-					ItemKey itemKey = key;
-					int amount = value;
-					ItemKey unpackedKey = DomainManager.Item.UnpackCrossArchiveItem(context, _unhandledCrossArchiveGameData, itemKey);
-					if (!unpackedKey.IsValid())
+					foreach (KeyValuePair<ItemKey, int> item2 in dreamBackInventory.Items)
 					{
-						continue;
+						item2.Deconstruct(out var key, out var value);
+						ItemKey itemKey = key;
+						int amount = value;
+						ItemKey unpackedKey = DomainManager.Item.UnpackCrossArchiveItem(context, _unhandledCrossArchiveGameData, itemKey);
+						if (!unpackedKey.IsValid())
+						{
+							continue;
+						}
+						ItemBase item = DomainManager.Item.GetBaseItem(unpackedKey);
+						if (item.Owner.OwnerType != ItemOwnerType.None && !item.Owner.Equals(new ItemOwnerKey(ItemOwnerType.System, 19)))
+						{
+							Logger.Warn($"Removing item already owned by {item.Owner} before handling: {unpackedKey}.");
+							continue;
+						}
+						DomainManager.Item.RemoveItem(context, unpackedKey);
+						if (ItemTemplateHelper.GetItemSubType(unpackedKey.ItemType, unpackedKey.TemplateId) == 1202)
+						{
+							Logger.Info($"Removing legendary book {unpackedKey} in unhandled cross archive data.");
+							DomainManager.LegendaryBook.UnregisterLegendaryBookItem(unpackedKey);
+						}
+						_unhandledCrossArchiveGameData.UnpackedItems.Remove(itemKey.Id);
 					}
-					ItemBase item = DomainManager.Item.GetBaseItem(unpackedKey);
-					if (item.Owner.OwnerType != ItemOwnerType.None && !item.Owner.Equals(new ItemOwnerKey(ItemOwnerType.System, 19)))
-					{
-						Logger.Warn($"Removing item already owned by {item.Owner} before handling: {unpackedKey}.");
-						continue;
-					}
-					DomainManager.Item.RemoveItem(context, unpackedKey);
-					if (ItemTemplateHelper.GetItemSubType(unpackedKey.ItemType, unpackedKey.TemplateId) == 1202)
-					{
-						Logger.Info($"Removing legendary book {unpackedKey} in unhandled cross archive data.");
-						DomainManager.LegendaryBook.UnregisterLegendaryBookItem(unpackedKey);
-					}
-					_unhandledCrossArchiveGameData.UnpackedItems.Remove(itemKey.Id);
+					break;
 				}
-				return;
 			}
+			case 4:
+				_unhandledCrossArchiveGameData.CricketRoomData = null;
+				break;
+			}
+			return;
 		}
 		switch (stateType)
 		{
@@ -4857,7 +4870,7 @@ public class ExtraDomain : BaseGameDataDomain
 
 	public void TriggerTaiwuVillageVowMonthlyEvent(DataContext context)
 	{
-		if (!DomainManager.World.IsTaskFinished(31))
+		if (!DomainManager.World.IsExtraTaskFinished(31))
 		{
 			return;
 		}
@@ -5185,7 +5198,16 @@ public class ExtraDomain : BaseGameDataDomain
 		{
 			return (short)(templateId - 27 + 228);
 		}
-		return (short)(templateId - 46 + 256);
+		if (templateId <= 85)
+		{
+			return (short)(templateId - 46 + 256);
+		}
+		short enemy = TameLoongData.GetEnemyTemplateIdByCarrierTemplateId(templateId);
+		if (enemy != -1)
+		{
+			return enemy;
+		}
+		return 228;
 	}
 
 	public short GetCarrierTemplateIdByCharacterTemplateId(short templateId)
@@ -5285,7 +5307,10 @@ public class ExtraDomain : BaseGameDataDomain
 		{
 			character.RemoveInventoryItem(context, carrier, 1, deleteItem: false);
 		}
-		SetFleeCarrierLocation(context, carrier, location);
+		if (!TameLoongEntry.Flee(context, carrier))
+		{
+			SetFleeCarrierLocation(context, carrier, location);
+		}
 	}
 
 	public void UpdateTaiwuTaming(DataContext context)
@@ -5684,6 +5709,10 @@ public class ExtraDomain : BaseGameDataDomain
 				DefenceMedal = character.GetFeatureMedalValue(1),
 				WisdomMedal = character.GetFeatureMedalValue(2)
 			};
+			if (data.FeatureIds != null && data.FeatureIds.Contains(814))
+			{
+				data.IsXiangshuInfectedDemon = true;
+			}
 			if (DomainManager.Organization.TryGetSettlementCharacter(charId, out var settlementChar))
 			{
 				data.IsApproveTaiwu = settlementChar.GetApprovedTaiwu();
@@ -5721,6 +5750,10 @@ public class ExtraDomain : BaseGameDataDomain
 				DefenceMedal = -1,
 				WisdomMedal = -1
 			};
+		}
+		if (data.FeatureIds != null && data.FeatureIds.Contains(814))
+		{
+			data.IsXiangshuInfectedDemon = true;
 		}
 		return data;
 	}
@@ -7102,6 +7135,29 @@ public class ExtraDomain : BaseGameDataDomain
 		return false;
 	}
 
+	public bool TryGetDlcArgBox(ulong appId, out EventArgBox argBox)
+	{
+		return TryGetElement_DlcArgBoxes(appId, out argBox);
+	}
+
+	public bool PagodaofTheFallenEntered()
+	{
+		if (!DlcManager.IsDlcInstalled(5093790uL))
+		{
+			return false;
+		}
+		if (!DomainManager.Extra.TryGetDlcArgBox(5093790uL, out var dlcArgBox))
+		{
+			return false;
+		}
+		DlcEventArgKeyItem config = DlcEventArgKey.Instance[0];
+		if (!dlcArgBox.ContainsKey(config.ArgBoxKey))
+		{
+			return false;
+		}
+		return dlcArgBox.GetBool(config.ArgBoxKey);
+	}
+
 	public bool IsLocationInDreamBack(Location location)
 	{
 		int i = 0;
@@ -7971,29 +8027,6 @@ public class ExtraDomain : BaseGameDataDomain
 		return _loveDataDict.ContainsKey(charId);
 	}
 
-	public bool TryGetInteractOfLoveData(int charId, out LoveDataItem loveDataItem)
-	{
-		return TryGetElement_LoveDataDict(charId, out loveDataItem);
-	}
-
-	public void AddInteractOfLoveData(DataContext context, int charId, LoveDataItem loveDataItem)
-	{
-		AddElement_LoveDataDict(charId, loveDataItem, context);
-	}
-
-	public void SetInteractOfLoveData(DataContext context, int charId, LoveDataItem loveDataItem)
-	{
-		SetElement_LoveDataDict(charId, loveDataItem, context);
-	}
-
-	public void RemoveInteractOfLoveData(DataContext context, int charId)
-	{
-		if (_loveDataDict.ContainsKey(charId))
-		{
-			RemoveElement_LoveDataDict(charId, context);
-		}
-	}
-
 	public bool IsConfessLoveFailedCharacter(int charId)
 	{
 		return _confessLoveFailedSet.ContainsKey(charId);
@@ -8036,114 +8069,11 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 	}
 
-	public bool IsLoveToken(ItemKey itemKey)
-	{
-		return _loveTokenDataDict.ContainsKey(itemKey);
-	}
-
-	public bool TryGetLoveTokenData(ItemKey itemKey, out LoveTokenDataItem loveTokenDataItem)
-	{
-		return TryGetElement_LoveTokenDataDict(itemKey, out loveTokenDataItem);
-	}
-
-	public ItemKey AddLoveTokenData(DataContext context, ItemKey itemKey, LoveTokenDataItem loveTokenDataItem)
-	{
-		if (ModificationStateHelper.IsActive(itemKey.ModificationState, 4))
-		{
-			return itemKey;
-		}
-		ItemBase newItem = SetLoveTokenState(context, itemKey, isLoveToken: true);
-		ItemKey newItemKey = newItem.GetItemKey();
-		AddElement_LoveTokenDataDict(newItemKey, loveTokenDataItem, context);
-		if (loveTokenDataItem.IsTaiwuPresent)
-		{
-			GameData.Domains.Character.Character receiverChar = DomainManager.Character.GetElement_Objects(loveTokenDataItem.LoverCharId);
-			receiverChar.RemoveInventoryItem(context, itemKey, 1, deleteItem: false);
-			receiverChar.AddInventoryItem(context, newItemKey, 1);
-		}
-		else
-		{
-			DomainManager.Taiwu.RemoveItem(context, itemKey, 1, ItemSourceType.Inventory, deleteItem: false);
-			DomainManager.Taiwu.AddItem(context, newItemKey, 1, ItemSourceType.Inventory);
-		}
-		return newItemKey;
-	}
-
-	private ItemBase SetLoveTokenState(DataContext context, ItemKey itemKey, bool isLoveToken)
-	{
-		byte newState = (isLoveToken ? ModificationStateHelper.Activate(itemKey.ModificationState, 4) : ModificationStateHelper.Deactivate(itemKey.ModificationState, 4));
-		if (ItemTemplateHelper.IsPureStackable(itemKey))
-		{
-			ItemBase newItem = DomainManager.Item.CreateUniqueStackableItem(context, itemKey.ItemType, itemKey.TemplateId);
-			newItem.SetModificationState(newState, context);
-			return newItem;
-		}
-		if (isLoveToken)
-		{
-			ItemBase item = DomainManager.Item.GetBaseItem(itemKey);
-			item.SetModificationState(newState, context);
-			return item;
-		}
-		ItemKey newItemKey = DomainManager.Item.CreateItem(context, itemKey.ItemType, itemKey.TemplateId);
-		return DomainManager.Item.GetBaseItem(newItemKey);
-	}
-
-	public void SetLoveTokenData(DataContext context, ItemKey itemKey, LoveTokenDataItem loveTokenDataItem)
-	{
-		SetElement_LoveTokenDataDict(itemKey, loveTokenDataItem, context);
-	}
-
-	public ItemKey RemoveLoveTokenData(DataContext context, ItemKey itemKey, bool itemIsDeleted = false)
-	{
-		if (!TryGetLoveTokenData(itemKey, out var loveTokenDataItem))
-		{
-			return ItemKey.Invalid;
-		}
-		RemoveElement_LoveTokenDataDict(itemKey, context);
-		if (TryGetInteractOfLoveData(loveTokenDataItem.LoverCharId, out var loveDataItem))
-		{
-			if (loveDataItem.LoverOwnedToken.Equals(itemKey))
-			{
-				loveDataItem.LoverOwnedToken = ItemKey.Invalid;
-			}
-			else if (loveDataItem.TaiwuOwnedToken.Equals(itemKey))
-			{
-				loveDataItem.TaiwuOwnedToken = ItemKey.Invalid;
-			}
-			SetInteractOfLoveData(context, loveTokenDataItem.LoverCharId, loveDataItem);
-		}
-		if (!itemIsDeleted)
-		{
-			byte newState = ModificationStateHelper.Deactivate(itemKey.ModificationState, 4);
-			ItemBase item = SetLoveTokenState(context, itemKey, isLoveToken: false);
-			item.SetModificationState(newState, context);
-			ItemKey newItemKey = item.GetItemKey();
-			GameData.Domains.Character.Character character;
-			if (loveTokenDataItem.CurHolderCharId == DomainManager.Taiwu.GetTaiwuCharId())
-			{
-				ItemSourceType itemSource = DomainManager.Taiwu.GetNotPureStackableItemSource(itemKey);
-				DomainManager.Taiwu.RemoveItem(context, itemKey, 1, itemSource, deleteItem: false);
-				DomainManager.Taiwu.AddItem(context, newItemKey, 1, itemSource);
-			}
-			else if (DomainManager.Character.TryGetElement_Objects(loveTokenDataItem.CurHolderCharId, out character))
-			{
-				character.RemoveInventoryItem(context, itemKey, 1, deleteItem: false);
-				character.AddInventoryItem(context, newItemKey, 1);
-			}
-			itemKey = newItemKey;
-		}
-		return itemKey;
-	}
-
 	public void ResetInteractOfLoveData(DataContext context)
 	{
 		foreach (KeyValuePair<int, LoveDataItem> item in _loveDataDict)
 		{
 			AddElement_PreviousLoverSet(item.Key, default(VoidValue), context);
-		}
-		foreach (var (itemKey2, _) in _loveTokenDataDict)
-		{
-			RemoveLoveTokenData(context, itemKey2);
 		}
 		ClearLoveDataDict(context);
 		ClearConfessLoveFailedSet(context);
@@ -11179,9 +11109,10 @@ public class ExtraDomain : BaseGameDataDomain
 		int favorability = DomainManager.Merchant.GetCurFavorability(merchantType);
 		int curLevel = GameData.Domains.Merchant.SharedMethods.GetFavorLevel(favorability);
 		IsMerchantFavorabilityReachProgressLimit(favorability, out var limitedLevel, out var _);
+		limitedLevel = Math.Min(curLevel, limitedLevel);
 		for (int j = 0; j < merchantOverFavorData.MerchantOverFavorLevelDataArray.Length; j++)
 		{
-			if (j < limitedLevel && j <= curLevel)
+			if (j <= limitedLevel)
 			{
 				merchantOverFavorData.MerchantOverFavorLevelDataArray[j].BuyCount = short.MaxValue;
 			}
@@ -11270,9 +11201,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 	}
 
-	public MerchantExtraGoodsData.ExtraGoodsType GetExtraGoodsType(ItemKey itemKey)
+	public MerchantExtraGoodsType GetExtraGoodsType(ItemKey itemKey)
 	{
-		MerchantExtraGoodsData.ExtraGoodsType goodsType = MerchantExtraGoodsData.ExtraGoodsType.None;
+		MerchantExtraGoodsType goodsType = MerchantExtraGoodsType.None;
 		if (!itemKey.IsValid())
 		{
 			return goodsType;
@@ -11951,6 +11882,35 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 	}
 
+	public void AddSeniorityByFirstRead(DataContext context, sbyte lifeSkillType, sbyte bookGrade)
+	{
+		AddReadingSeniority(context, lifeSkillType, bookGrade, 43, 37);
+	}
+
+	public void AddSeniorityByRereading(DataContext context, sbyte lifeSkillType, sbyte bookGrade, int pageCount)
+	{
+		AddReadingSeniority(context, lifeSkillType, bookGrade, 44, 38, pageCount);
+	}
+
+	private void AddReadingSeniority(DataContext context, sbyte lifeSkillType, sbyte bookGrade, int buddhistFormulaKey, int taoistFormulaKey, int multiplier = 1)
+	{
+		switch (lifeSkillType)
+		{
+		case 13:
+		{
+			int addSeniority2 = ProfessionFormulaImpl.Calculate(buddhistFormulaKey, bookGrade) * multiplier;
+			ChangeProfessionSeniority(context, 6, addSeniority2);
+			break;
+		}
+		case 12:
+		{
+			int addSeniority = ProfessionFormulaImpl.Calculate(taoistFormulaKey, bookGrade) * multiplier;
+			ChangeProfessionSeniority(context, 5, addSeniority);
+			break;
+		}
+		}
+	}
+
 	private void OnProfessionSkillUnlocked(DataContext context, ProfessionItem professionCfg, ProfessionData professionData, HashSet<int> oldUnlockStates)
 	{
 		bool anyNewSkillUnlocked = false;
@@ -12313,24 +12273,6 @@ public class ExtraDomain : BaseGameDataDomain
 					{
 						break;
 					}
-					if (!isCombatSkill)
-					{
-						switch (lifeSkillType)
-						{
-						case 13:
-						{
-							int addSeniority2 = ProfessionFormulaImpl.Calculate(43, bookGrade);
-							DomainManager.Extra.ChangeProfessionSeniority(context, 6, addSeniority2);
-							break;
-						}
-						case 12:
-						{
-							int addSeniority = ProfessionFormulaImpl.Calculate(37, bookGrade);
-							DomainManager.Extra.ChangeProfessionSeniority(context, 5, addSeniority);
-							break;
-						}
-						}
-					}
 				}
 				else
 				{
@@ -12360,21 +12302,7 @@ public class ExtraDomain : BaseGameDataDomain
 				character3.ChangeExp(context, SkillGradeData.Instance[bookGrade].ReadingExpGainPerPage * GlobalConfig.Instance.ReadingFinishedBookExpGainPercent * pageCount / 100);
 				if (charId3 == taiwuId && !isCombatSkill)
 				{
-					switch (lifeSkillType)
-					{
-					case 13:
-					{
-						int addSeniority4 = ProfessionFormulaImpl.Calculate(44, bookGrade) * pageCount;
-						DomainManager.Extra.ChangeProfessionSeniority(context, 6, addSeniority4);
-						break;
-					}
-					case 12:
-					{
-						int addSeniority3 = ProfessionFormulaImpl.Calculate(38, bookGrade) * pageCount;
-						DomainManager.Extra.ChangeProfessionSeniority(context, 5, addSeniority3);
-						break;
-					}
-					}
+					AddSeniorityByRereading(context, lifeSkillType, bookGrade, pageCount);
 				}
 			}
 			result.ReadBookPageData.Add(new IntPair(charId3, bookId), readPageResult);
@@ -12693,21 +12621,21 @@ public class ExtraDomain : BaseGameDataDomain
 
 	private void AddMartialArtistCreateRandomEnemyDict(Location location, short templateId)
 	{
-		if (MartialArtistCreateRandomEnemyDict == null)
+		if (_martialArtistCreateRandomEnemyDict == null)
 		{
-			MartialArtistCreateRandomEnemyDict = new Dictionary<Location, List<short>>();
+			_martialArtistCreateRandomEnemyDict = new Dictionary<Location, List<short>>();
 		}
-		if (!MartialArtistCreateRandomEnemyDict.ContainsKey(location))
+		if (!_martialArtistCreateRandomEnemyDict.ContainsKey(location))
 		{
-			MartialArtistCreateRandomEnemyDict.Add(location, new List<short>());
+			_martialArtistCreateRandomEnemyDict.Add(location, new List<short>());
 		}
-		List<short> list = MartialArtistCreateRandomEnemyDict[location];
+		List<short> list = _martialArtistCreateRandomEnemyDict[location];
 		list.Add(templateId);
 	}
 
 	private void ClearMartialArtistCreateRandomEnemyDict(DataContext context)
 	{
-		MartialArtistCreateRandomEnemyDict?.Clear();
+		_martialArtistCreateRandomEnemyDict?.Clear();
 	}
 
 	public void MartialArtistSkill3Execute(DataContext context, bool updateData)
@@ -12717,7 +12645,7 @@ public class ExtraDomain : BaseGameDataDomain
 		{
 			UpdateDataForMartialArtistSkill3(context);
 		}
-		if (MartialArtistCreateRandomEnemyDict == null || MartialArtistCreateRandomEnemyDict.Count == 0)
+		if (_martialArtistCreateRandomEnemyDict == null || _martialArtistCreateRandomEnemyDict.Count == 0)
 		{
 			return;
 		}
@@ -12731,7 +12659,7 @@ public class ExtraDomain : BaseGameDataDomain
 		combatResultData.SnapshotAfterCombat = snapshotAfterInitialized;
 		List<ItemDisplayData> lootItemList = new List<ItemDisplayData>();
 		List<(MapTemplateEnemyInfo, Location)> enemyInfos = new List<(MapTemplateEnemyInfo, Location)>();
-		foreach (KeyValuePair<Location, List<short>> item in MartialArtistCreateRandomEnemyDict)
+		foreach (KeyValuePair<Location, List<short>> item in _martialArtistCreateRandomEnemyDict)
 		{
 			item.Deconstruct(out var key, out var value);
 			Location location = key;
@@ -12792,6 +12720,8 @@ public class ExtraDomain : BaseGameDataDomain
 							CombatDomain.ResultCalcAreaSpiritualDebt(isWin: true, createRandomEnemy, enemyTeam, combatResultData);
 							CombatDomain.ResultCalcLootItem(context.Random, 50, combatConfig.CombatType, combatResultData.CombatStatus, isPuppetCombat: false, combatConfig, createRandomEnemy, enemyTeam, Array.Empty<int>(), combatResultData);
 							ItemKey[] enemyEquips = enemyChar.GetEquipment();
+							LifeRecordCollection c = DomainManager.LifeRecord.GetLifeRecordCollection();
+							int date = DomainManager.World.GetCurrDate();
 							foreach (ItemDisplayData itemKey in combatResultData.ItemList)
 							{
 								ItemKey key2 = itemKey.Key;
@@ -12804,8 +12734,6 @@ public class ExtraDomain : BaseGameDataDomain
 								lootItemList.Add(itemKey);
 								if (GameData.Domains.Character.Character.IsCharacterIdValid(attackedNpcId))
 								{
-									LifeRecordCollection c = DomainManager.LifeRecord.GetLifeRecordCollection();
-									int date = DomainManager.World.GetCurrDate();
 									if (createRandomEnemyId >= 375 && createRandomEnemyId <= 383)
 									{
 										c.AddMartialArtistSkill3NPCItemDropCaseB(attackedNpcId, date, enemyChar.GetValidLocation(), createRandomEnemyId, key2.ItemType, key2.TemplateId);
@@ -13059,6 +12987,597 @@ public class ExtraDomain : BaseGameDataDomain
 		int goodCount = GetMartialArtistCreateGoodRandomEnemyCount();
 		int badCount = GetMartialArtistCreateRandomEnemyCount() - goodCount;
 		return new IntPair(goodCount, badCount);
+	}
+
+	private void AddXiangshuMinionDict(Location location, short templateId)
+	{
+		if (_xiangshuCreateMinionDict == null)
+		{
+			_xiangshuCreateMinionDict = new Dictionary<Location, List<short>>();
+		}
+		if (!_xiangshuCreateMinionDict.ContainsKey(location))
+		{
+			_xiangshuCreateMinionDict.Add(location, new List<short>());
+		}
+		List<short> list = _xiangshuCreateMinionDict[location];
+		list.Add(templateId);
+	}
+
+	private void ClearXiangshuMinionDict(DataContext context)
+	{
+		_xiangshuCreateMinionDict?.Clear();
+	}
+
+	public void XiangshuSkill2Execute(DataContext context, bool updateData)
+	{
+		List<short> combatBlockIds = new List<short>();
+		if (updateData)
+		{
+			UpdateDataForXiangshuSkill2(context);
+		}
+		if (_xiangshuCreateMinionDict == null || _xiangshuCreateMinionDict.Count == 0)
+		{
+			return;
+		}
+		CombatResultDisplayData combatResultData = new CombatResultDisplayData();
+		CombatResultSnapshot snapshotBeforeInitialized = combatResultData.SnapshotBeforeCombat;
+		snapshotBeforeInitialized.EatingItemList.Initialize();
+		combatResultData.SnapshotBeforeCombat = snapshotBeforeInitialized;
+		CombatResultSnapshot snapshotAfterInitialized = combatResultData.SnapshotAfterCombat;
+		snapshotAfterInitialized.EatingItemList.Initialize();
+		combatResultData.SnapshotAfterCombat = snapshotAfterInitialized;
+		List<ItemDisplayData> lootItemList = new List<ItemDisplayData>();
+		List<(MapTemplateEnemyInfo, Location)> enemyInfos = new List<(MapTemplateEnemyInfo, Location)>();
+		foreach (KeyValuePair<Location, List<short>> item in _xiangshuCreateMinionDict)
+		{
+			item.Deconstruct(out var key, out var value);
+			Location location = key;
+			List<short> templateIds = value;
+			MapBlockData mapBlockData = DomainManager.Map.GetBlockData(location.AreaId, location.BlockId);
+			HashSet<int> pickedNpcIds = new HashSet<int>();
+			for (int i = templateIds.Count - 1; i >= 0; i--)
+			{
+				short createdTemplateId = templateIds[i];
+				MapTemplateEnemyInfo mapRandomEnemyInfo = MapTemplateEnemyInfo.CreateDefault(createdTemplateId, location.BlockId, 1);
+				bool exit = mapBlockData.TemplateEnemyList != null && mapBlockData.TemplateEnemyList.Contains(mapRandomEnemyInfo);
+				if (updateData || exit)
+				{
+					GameData.Domains.Character.Character minion = DomainManager.Character.CreateRandomEnemy(context, createdTemplateId, isTemporary: true);
+					int minionId = minion.GetId();
+					DomainManager.Character.CompleteCreatingCharacter(minionId);
+					int[] enemyTeam = new int[1] { -1 };
+					int attackedNpcId = GetMapBlockAttackedNpcByConsummateLevel(context, createdTemplateId, mapBlockData, pickedNpcIds);
+					bool fightWin = false;
+					if (attackedNpcId >= 0)
+					{
+						GameData.Domains.Character.Character attackedNpc = DomainManager.Character.GetElement_Objects(attackedNpcId);
+						AiHelper.NpcCombatResultType combatResultType = DomainManager.Character.SimulateCharacterCombat(context, minion, attackedNpc, CombatType.Beat);
+						combatBlockIds.Add(location.BlockId);
+						fightWin = combatResultType <= AiHelper.NpcCombatResultType.MinorVictory;
+						enemyTeam[0] = attackedNpcId;
+					}
+					else
+					{
+						fightWin = true;
+					}
+					if (updateData)
+					{
+						if (fightWin && DomainManager.Character.TryGetElement_Objects(enemyTeam[0], out var enemyChar))
+						{
+							CombatConfigItem combatConfig = CombatConfig.Instance[(short)1];
+							combatResultData.CombatStatus = 3;
+							CombatDomain.ResultCalcExp(combatConfig, isPlaygroundCombat: false, minion, enemyTeam, combatResultData);
+							CombatDomain.ResultCalcResource(combatConfig, isPlaygroundCombat: false, minion, enemyTeam, combatResultData);
+							CombatDomain.ResultCalcLootItem(context.Random, 50, combatConfig.CombatType, combatResultData.CombatStatus, isPuppetCombat: false, combatConfig, minion, enemyTeam, Array.Empty<int>(), combatResultData);
+							ItemKey[] enemyEquips = enemyChar.GetEquipment();
+							LifeRecordCollection recordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+							int date = DomainManager.World.GetCurrDate();
+							foreach (ItemDisplayData itemKey in combatResultData.ItemList)
+							{
+								ItemKey key2 = itemKey.Key;
+								sbyte slotIndex = (sbyte)enemyEquips.IndexOf(key2);
+								if (slotIndex >= 0)
+								{
+									enemyChar.ChangeEquipment(context, slotIndex, -1, ItemKey.Invalid);
+								}
+								enemyChar.RemoveInventoryItem(context, key2, itemKey.Amount, deleteItem: false);
+								lootItemList.Add(itemKey);
+								if (GameData.Domains.Character.Character.IsCharacterIdValid(attackedNpcId))
+								{
+									recordCollection.AddXiangshuSkill0NPCItemDropCase(attackedNpcId, date, enemyChar.GetValidLocation(), minion.GetId(), key2.ItemType, key2.TemplateId);
+								}
+							}
+							combatResultData.ItemList.Clear();
+						}
+						if (fightWin)
+						{
+							enemyInfos.Add((mapRandomEnemyInfo, location));
+						}
+						else
+						{
+							templateIds.RemoveAt(i);
+						}
+					}
+				}
+			}
+		}
+		foreach (var info in enemyInfos)
+		{
+			Events.RaiseTemplateEnemyLocationChanged(context, info.Item1, Location.Invalid, info.Item2);
+		}
+		if (!updateData)
+		{
+			ClearXiangshuMinionDict(context);
+			return;
+		}
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+		int currDate = DomainManager.World.GetCurrDate();
+		lifeRecordCollection.AddXiangshuSkill2TaiwuItemDropCase(taiwu.GetId(), currDate, taiwu.GetLocation());
+		combatResultData.ItemList.Clear();
+		MergeKeyForItemDisplayDataList(lootItemList);
+		combatResultData.ItemList.AddRange(lootItemList);
+		ProfessionSkillArg professionSkillArg = new ProfessionSkillArg
+		{
+			ProfessionId = 18,
+			SkillId = 74,
+			IsSuccess = false,
+			EffectBlocks = combatBlockIds,
+			SkipAnimation = false,
+			CombatResultData = combatResultData
+		};
+		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ConfirmSkillExecuteAndPlayAnim, professionSkillArg, arg2: false);
+	}
+
+	public void UpdateDataForXiangshuSkill2(DataContext context)
+	{
+		ProfessionData professionData = GetProfessionData(18);
+		if (professionData == null)
+		{
+			return;
+		}
+		ClearXiangshuMinionDict(context);
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Location taiwuLocation = taiwu.GetLocation();
+		List<MapBlockData> mapBlockList = ObjectPool<List<MapBlockData>>.Instance.Get();
+		DomainManager.Map.GetLocationByDistance(taiwuLocation, 0, 3, ref mapBlockList);
+		CollectionUtils.Shuffle(context.Random, mapBlockList);
+		foreach (MapBlockData mapBlockData in mapBlockList)
+		{
+			if (!mapBlockData.Visible)
+			{
+				mapBlockData.SetVisible(visible: true, context);
+			}
+		}
+		int seniorityPercent = GetProfessionData(18).GetSeniorityPercent();
+		int minionCount = professionData.GetXiangshuSkill2MinionCount();
+		for (int i = 0; i < minionCount; i++)
+		{
+			int mapBlockIndex = i % mapBlockList.Count;
+			Location location = mapBlockList[mapBlockIndex].GetLocation();
+			List<short> minionTemplateIdList = professionData.GetXiangshuSkill2MinionTemplateIdList();
+			short minionTemplateId = minionTemplateIdList.GetRandom(context.Random);
+			AddXiangshuMinionDict(location, minionTemplateId);
+		}
+		ObjectPool<List<MapBlockData>>.Instance.Return(mapBlockList);
+	}
+
+	private int GetMapBlockAttackedNpcByConsummateLevel(DataContext context, short templateId, MapBlockData mapBlockData, HashSet<int> pickedNpcIds)
+	{
+		if (mapBlockData.CharacterSet == null || mapBlockData.CharacterSet.Count == 0)
+		{
+			return -1;
+		}
+		sbyte minionConsummateLevel = Config.Character.Instance[templateId].ConsummateLevel;
+		List<int> charIds = mapBlockData.CharacterSet.ToArray().ToList();
+		CollectionUtils.Shuffle(context.Random, charIds);
+		List<int> candidates = new List<int>();
+		foreach (int charId in charIds)
+		{
+			if (charId != DomainManager.Taiwu.GetTaiwuCharId() && !pickedNpcIds.Contains(charId) && DomainManager.Character.TryGetElement_Objects(charId, out var _))
+			{
+				candidates.Add(charId);
+			}
+		}
+		if (candidates.Count == 0)
+		{
+			return -1;
+		}
+		List<int> consummateEqual = new List<int>();
+		List<int> consummateLower = new List<int>();
+		List<int> consummateHigher = new List<int>();
+		foreach (int charId2 in candidates)
+		{
+			sbyte consummateLevel = DomainManager.Character.GetElement_Objects(charId2).GetConsummateLevel();
+			if (consummateLevel == minionConsummateLevel)
+			{
+				consummateEqual.Add(charId2);
+			}
+			else if (consummateLevel < minionConsummateLevel)
+			{
+				consummateLower.Add(charId2);
+			}
+			else
+			{
+				consummateHigher.Add(charId2);
+			}
+		}
+		int attackedNpcId = -1;
+		if (consummateEqual.Count > 0)
+		{
+			attackedNpcId = consummateEqual.GetRandom(context.Random);
+		}
+		else if (consummateLower.Count > 0)
+		{
+			attackedNpcId = consummateLower.GetRandom(context.Random);
+		}
+		else if (consummateHigher.Count > 0)
+		{
+			attackedNpcId = consummateHigher.GetRandom(context.Random);
+		}
+		if (attackedNpcId >= 0)
+		{
+			pickedNpcIds.Add(attackedNpcId);
+		}
+		return attackedNpcId;
+	}
+
+	public void XiangshuSkill1Execute(DataContext context)
+	{
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Location taiwuLocation = taiwu.GetLocation();
+		if (!taiwuLocation.IsValid())
+		{
+			return;
+		}
+		ProfessionData professionData = GetProfessionData(18);
+		if (professionData == null)
+		{
+			return;
+		}
+		HashSet<int> excludedCharIds = new HashSet<int>(DomainManager.Taiwu.GetGroupCharIds().GetCollection());
+		int infectionChange = professionData.GetXiangshuSkill1InfectionChange();
+		LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+		int currDate = DomainManager.World.GetCurrDate();
+		List<short> effectBlocks = new List<short>();
+		List<MapBlockData> mapBlockList = ObjectPool<List<MapBlockData>>.Instance.Get();
+		DomainManager.Map.GetLocationByDistance(taiwuLocation, 0, 2, ref mapBlockList);
+		InstantNotificationCollection instantNotificationCollection = DomainManager.World.GetInstantNotificationCollection();
+		foreach (MapBlockData mapBlockData in mapBlockList)
+		{
+			if (mapBlockData.CharacterSet == null || mapBlockData.CharacterSet.Count == 0)
+			{
+				continue;
+			}
+			int affectedCount = 0;
+			int[] array = mapBlockData.CharacterSet.ToArray();
+			foreach (int charId in array)
+			{
+				if (!excludedCharIds.Contains(charId) && DomainManager.Character.TryGetElement_Objects(charId, out var character) && character.CanBeXiangshuInfected() && !character.IsCompletelyInfected())
+				{
+					character.ChangeXiangshuInfection(context, infectionChange);
+					character.ChangeHappiness(context, -30);
+					lifeRecordCollection.AddXiangshuSkill1NPCEvilCorruption(charId, currDate, character.GetValidLocation());
+					instantNotificationCollection.AddTaiwuAsXiangshuSkill1(charId);
+					DomainManager.Story.AddXiangshuProfessionSeniorityTwo(context, character);
+					affectedCount++;
+				}
+			}
+			if (affectedCount > 0)
+			{
+				effectBlocks.Add(mapBlockData.BlockId);
+			}
+		}
+		ObjectPool<List<MapBlockData>>.Instance.Return(mapBlockList);
+		if (effectBlocks.Count != 0)
+		{
+			lifeRecordCollection.AddXiangshuSkill1TaiwuEvilCorruption(taiwu.GetId(), currDate, taiwuLocation);
+			ProfessionSkillArg professionSkillArg = new ProfessionSkillArg
+			{
+				ProfessionId = 18,
+				SkillId = 73,
+				IsSuccess = true,
+				EffectBlocks = effectBlocks
+			};
+			GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ConfirmSkillExecuteAndPlayAnim, professionSkillArg, arg2: false);
+		}
+	}
+
+	[DomainMethod]
+	public bool HasXiangshuSkill1AffectTarget()
+	{
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Location taiwuLocation = taiwu.GetLocation();
+		if (!taiwuLocation.IsValid())
+		{
+			return false;
+		}
+		ProfessionData professionData = GetProfessionData(18);
+		if (professionData == null)
+		{
+			return false;
+		}
+		HashSet<int> excludedCharIds = new HashSet<int>(DomainManager.Taiwu.GetGroupCharIds().GetCollection());
+		List<MapBlockData> mapBlockList = ObjectPool<List<MapBlockData>>.Instance.Get();
+		DomainManager.Map.GetLocationByDistance(taiwuLocation, 0, 2, ref mapBlockList);
+		bool hasTarget = false;
+		foreach (MapBlockData mapBlockData in mapBlockList)
+		{
+			if (mapBlockData.CharacterSet == null)
+			{
+				continue;
+			}
+			foreach (int charId in mapBlockData.CharacterSet)
+			{
+				if (excludedCharIds.Contains(charId) || !DomainManager.Character.TryGetElement_Objects(charId, out var character) || !character.CanBeXiangshuInfected() || character.IsCompletelyInfected())
+				{
+					continue;
+				}
+				hasTarget = true;
+				break;
+			}
+			if (!hasTarget)
+			{
+				continue;
+			}
+			break;
+		}
+		ObjectPool<List<MapBlockData>>.Instance.Return(mapBlockList);
+		return hasTarget;
+	}
+
+	private void AddXiangshuBlackFlameAffectedChar(int charId)
+	{
+		if (_xiangshuBlackFlameAffectedCharIds == null)
+		{
+			_xiangshuBlackFlameAffectedCharIds = new HashSet<int>();
+		}
+		_xiangshuBlackFlameAffectedCharIds.Add(charId);
+	}
+
+	private HashSet<int> GetAndClearXiangshuBlackFlameAffectedChars()
+	{
+		HashSet<int> set = _xiangshuBlackFlameAffectedCharIds;
+		_xiangshuBlackFlameAffectedCharIds = null;
+		return set;
+	}
+
+	private void AddToTaiwuAsXiangshuSkill0Result(int selfId, int targetId, sbyte mixedPoisonHarmfulActionType)
+	{
+		if (AsXiangshuSkill0Result == null)
+		{
+			TaiwuAsXiangshuSkill0Result taiwuAsXiangshuSkill0Result = (AsXiangshuSkill0Result = new TaiwuAsXiangshuSkill0Result());
+		}
+		AsXiangshuSkill0Result.ResultList.Add(new TaiwuAsXiangshuSkill0ResultItem
+		{
+			SelfCharId = selfId,
+			SelfCharacterDisplayData = DomainManager.Character.GetCharacterDisplayData(selfId),
+			TargetCharId = targetId,
+			TargetCharacterDisplayData = DomainManager.Character.GetCharacterDisplayData(targetId),
+			MixedPoisonHarmfulActionType = mixedPoisonHarmfulActionType
+		});
+	}
+
+	private void ClearTaiwuAsXiangshuSkill0Result()
+	{
+		if (AsXiangshuSkill0Result == null)
+		{
+			TaiwuAsXiangshuSkill0Result taiwuAsXiangshuSkill0Result = (AsXiangshuSkill0Result = new TaiwuAsXiangshuSkill0Result());
+		}
+		AsXiangshuSkill0Result.ResultList.Clear();
+	}
+
+	[DomainMethod]
+	public bool HasXiangshuSkill0AffectTarget()
+	{
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Location taiwuLocation = taiwu.GetLocation();
+		if (!taiwuLocation.IsValid())
+		{
+			return false;
+		}
+		ProfessionData professionData = GetProfessionData(18);
+		if (professionData == null)
+		{
+			return false;
+		}
+		HashSet<int> excludedCharIds = new HashSet<int>(DomainManager.Taiwu.GetGroupCharIds().GetCollection());
+		int maxAffectedGrade = professionData.GetSeniorityOrgGradeXiangshuSkill0();
+		List<MapBlockData> mapBlockList = ObjectPool<List<MapBlockData>>.Instance.Get();
+		DomainManager.Map.GetLocationByDistance(taiwuLocation, 0, 2, ref mapBlockList);
+		bool hasTarget = false;
+		foreach (MapBlockData mapBlockData in mapBlockList)
+		{
+			if (mapBlockData.CharacterSet == null)
+			{
+				continue;
+			}
+			foreach (int charId in mapBlockData.CharacterSet)
+			{
+				if (excludedCharIds.Contains(charId) || !DomainManager.Character.TryGetElement_Objects(charId, out var character) || character.GetAgeGroup() != 2 || character.GetOrganizationInfo().Grade > maxAffectedGrade)
+				{
+					continue;
+				}
+				hasTarget = true;
+				break;
+			}
+			if (!hasTarget)
+			{
+				continue;
+			}
+			break;
+		}
+		ObjectPool<List<MapBlockData>>.Instance.Return(mapBlockList);
+		return hasTarget;
+	}
+
+	public void XiangshuSkill0Execute(DataContext context, bool updateData)
+	{
+		if (updateData)
+		{
+			XiangshuSkill0MarkAffectedCharacters(context);
+		}
+		else
+		{
+			XiangshuSkill0AdvanceMonth(context);
+		}
+	}
+
+	private void XiangshuSkill0MarkAffectedCharacters(DataContext context)
+	{
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Location taiwuLocation = taiwu.GetLocation();
+		if (!taiwuLocation.IsValid())
+		{
+			return;
+		}
+		ProfessionData professionData = GetProfessionData(18);
+		if (professionData == null)
+		{
+			return;
+		}
+		_taiwuAsXiangshuSkill0Location = taiwuLocation;
+		HashSet<int> excludedCharIds = new HashSet<int>(DomainManager.Taiwu.GetGroupCharIds().GetCollection());
+		int maxAffectedGrade = professionData.GetSeniorityOrgGradeXiangshuSkill0();
+		List<short> effectBlocks = new List<short>();
+		List<MapBlockData> mapBlockList = ObjectPool<List<MapBlockData>>.Instance.Get();
+		DomainManager.Map.GetLocationByDistance(taiwuLocation, 0, 2, ref mapBlockList);
+		InstantNotificationCollection instantNotificationCollection = DomainManager.World.GetInstantNotificationCollection();
+		foreach (MapBlockData mapBlockData in mapBlockList)
+		{
+			if (mapBlockData.CharacterSet == null || mapBlockData.CharacterSet.Count == 0)
+			{
+				continue;
+			}
+			int affectedCount = 0;
+			int[] array = mapBlockData.CharacterSet.ToArray();
+			foreach (int charId in array)
+			{
+				if (!excludedCharIds.Contains(charId) && DomainManager.Character.TryGetElement_Objects(charId, out var character) && character.GetAgeGroup() == 2 && character.GetOrganizationInfo().Grade <= maxAffectedGrade)
+				{
+					AddXiangshuBlackFlameAffectedChar(charId);
+					instantNotificationCollection.AddTaiwuAsXiangshuSkill0(charId);
+					affectedCount++;
+				}
+			}
+			if (affectedCount > 0)
+			{
+				effectBlocks.Add(mapBlockData.BlockId);
+			}
+		}
+		ObjectPool<List<MapBlockData>>.Instance.Return(mapBlockList);
+		if (effectBlocks.Count != 0)
+		{
+			LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+			int currDate = DomainManager.World.GetCurrDate();
+			lifeRecordCollection.AddXiangshuSkill0TaiwuEvilCase(taiwu.GetId(), currDate, taiwuLocation);
+			ProfessionSkillArg professionSkillArg = new ProfessionSkillArg
+			{
+				ProfessionId = 18,
+				SkillId = 72,
+				IsSuccess = true,
+				EffectBlocks = effectBlocks
+			};
+			GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ConfirmSkillExecuteAndPlayAnim, professionSkillArg, arg2: false);
+		}
+	}
+
+	private void XiangshuSkill0AdvanceMonth(DataContext context)
+	{
+		HashSet<int> affectedCharIds = GetAndClearXiangshuBlackFlameAffectedChars();
+		if (affectedCharIds == null || affectedCharIds.Count == 0)
+		{
+			return;
+		}
+		ClearTaiwuAsXiangshuSkill0Result();
+		MonthlyEventCollection monthlyEvent = DomainManager.World.GetMonthlyEventCollection();
+		monthlyEvent.AddTaiwuAsXiangshuSkill0(_taiwuAsXiangshuSkill0Location);
+		foreach (int doerId in affectedCharIds)
+		{
+			if (!DomainManager.Character.TryGetElement_Objects(doerId, out var doer) || !DomainManager.Character.IsCharacterAlive(doerId) || !doer.GetLocation().IsValid())
+			{
+				continue;
+			}
+			int targetCharId = SelectXiangshuSkill0EvilTarget(context, doer);
+			if (targetCharId >= 0)
+			{
+				GameData.Domains.Character.Character targetChar = DomainManager.Character.GetElement_Objects(targetCharId);
+				sbyte mixedPoisonHarmfulActionType = PerformXiangshuSkill0EvilAct(context, doer, targetChar);
+				if (mixedPoisonHarmfulActionType > -1 && mixedPoisonHarmfulActionType < 4)
+				{
+					AddToTaiwuAsXiangshuSkill0Result(doer.GetId(), targetChar.GetId(), mixedPoisonHarmfulActionType);
+				}
+				bool doerIsTaiwuPeople = DomainManager.Character.IsTaiwuPeople(doerId);
+				bool targetIsTaiwuPeople = DomainManager.Character.IsTaiwuPeople(targetCharId);
+				GameData.Domains.Character.Character.ApplyAddRelation_Enemy(context, doer, targetChar, doerIsTaiwuPeople, 7);
+				GameData.Domains.Character.Character.ApplyAddRelation_Enemy(context, targetChar, doer, targetIsTaiwuPeople, 7);
+			}
+		}
+	}
+
+	private int SelectXiangshuSkill0EvilTarget(DataContext context, GameData.Domains.Character.Character doer)
+	{
+		Location location = doer.GetLocation();
+		if (!location.IsValid())
+		{
+			return -1;
+		}
+		HashSet<int> excludedCharIds = new HashSet<int>(DomainManager.Taiwu.GetGroupCharIds().GetCollection());
+		List<int> candidates = new List<int>();
+		List<int> enemies = new List<int>();
+		MapBlockData blockData = DomainManager.Map.GetBlock(location);
+		if (blockData.CharacterSet != null)
+		{
+			foreach (int charId in blockData.CharacterSet)
+			{
+				if (charId != doer.GetId() && !excludedCharIds.Contains(charId) && DomainManager.Character.TryGetElement_Objects(charId, out var targetChar) && targetChar.GetAgeGroup() == 2)
+				{
+					candidates.Add(charId);
+					if (DomainManager.Character.HasRelation(doer.GetId(), charId, 32768))
+					{
+						enemies.Add(charId);
+					}
+				}
+			}
+		}
+		if (enemies.Count > 0)
+		{
+			return enemies.GetRandom(context.Random);
+		}
+		if (candidates.Count > 0)
+		{
+			return candidates.GetRandom(context.Random);
+		}
+		return -1;
+	}
+
+	private sbyte PerformXiangshuSkill0EvilAct(DataContext context, GameData.Domains.Character.Character doer, GameData.Domains.Character.Character target)
+	{
+		LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+		int currDate = DomainManager.World.GetCurrDate();
+		lifeRecordCollection.AddXiangshuSkill0NPCEvilCase(doer.GetId(), currDate, target.GetId());
+		sbyte[] actionTypes = new sbyte[4] { 0, 1, 2, 3 };
+		CollectionUtils.Shuffle(context.Random, actionTypes);
+		sbyte[] array = actionTypes;
+		for (int i = 0; i < array.Length; i++)
+		{
+			switch (array[i])
+			{
+			case 0:
+				DomainManager.Character.HandleAttackAction(context, doer, target);
+				return 0;
+			case 1:
+				DomainManager.Character.HandlePoisonAction(context, doer, target, ItemKey.Invalid, -1);
+				return 1;
+			case 2:
+				DomainManager.Character.HandlePlotHarmAction(context, doer, target, ItemKey.Invalid, -1);
+				return 2;
+			case 3:
+				DomainManager.Character.HandleRapeAction(context, doer, target);
+				return 3;
+			}
+		}
+		return -1;
 	}
 
 	[DomainMethod]
@@ -13691,7 +14210,7 @@ public class ExtraDomain : BaseGameDataDomain
 		jixiSpecialInteractDisplayData.JixiTargetCharIdByTaiwu = _jixiData.JixiTargetCharIdByTaiwu;
 		jixiSpecialInteractDisplayData.JixiTargetCharacterDisplayData = DomainManager.Character.GetCharacterDisplayData(_jixiData.JixiTargetCharIdByTaiwu);
 		jixiSpecialInteractDisplayData.KillAmount = _jixiData.KillTargets.Count;
-		jixiSpecialInteractDisplayData.KillTempalteEnemyGainTotal = _jixiData.KillTempalteEnemyGainTotal;
+		jixiSpecialInteractDisplayData.KillTempalteEnemyGainTotal = Math.Max(0, _jixiData.KillTempalteEnemyGainTotal);
 		jixiSpecialInteractDisplayData.NeiliAllocDrainedTotal = _jixiData.NeiliAllocProgressDrainedTotal.Items.Select((int t) => t / 55).Sum() + _jixiData.TransferFromTaiwuTotal / 55;
 		jixiSpecialInteractDisplayData.NeiliAllocProgressDrained = _jixiData.NeiliAllocProgressDrained;
 		jixiSpecialInteractDisplayData.FixedNeiliProgressPerAllocation = 55;
@@ -20372,16 +20891,19 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(31, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveDataDict is no longer in use.")]
 	public LoveDataItem GetElement_LoveDataDict(int elementId)
 	{
 		return _loveDataDict[elementId];
 	}
 
+	[Obsolete("DomainData _loveDataDict is no longer in use.")]
 	public bool TryGetElement_LoveDataDict(int elementId, out LoveDataItem value)
 	{
 		return _loveDataDict.TryGetValue(elementId, out value);
 	}
 
+	[Obsolete("DomainData _loveDataDict is no longer in use.")]
 	private void AddElement_LoveDataDict(int elementId, LoveDataItem value, DataContext context)
 	{
 		_loveDataDict.Add(elementId, value);
@@ -20389,6 +20911,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(32, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveDataDict is no longer in use.")]
 	private void SetElement_LoveDataDict(int elementId, LoveDataItem value, DataContext context)
 	{
 		_loveDataDict[elementId] = value;
@@ -20396,6 +20919,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(32, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveDataDict is no longer in use.")]
 	private void RemoveElement_LoveDataDict(int elementId, DataContext context)
 	{
 		_loveDataDict.Remove(elementId);
@@ -20403,6 +20927,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(32, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveDataDict is no longer in use.")]
 	private void ClearLoveDataDict(DataContext context)
 	{
 		_loveDataDict.Clear();
@@ -20410,16 +20935,19 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(32, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _previousLoverSet is no longer in use.")]
 	public VoidValue GetElement_PreviousLoverSet(int elementId)
 	{
 		return _previousLoverSet[elementId];
 	}
 
+	[Obsolete("DomainData _previousLoverSet is no longer in use.")]
 	public bool TryGetElement_PreviousLoverSet(int elementId, out VoidValue value)
 	{
 		return _previousLoverSet.TryGetValue(elementId, out value);
 	}
 
+	[Obsolete("DomainData _previousLoverSet is no longer in use.")]
 	private void AddElement_PreviousLoverSet(int elementId, VoidValue value, DataContext context)
 	{
 		_previousLoverSet.Add(elementId, value);
@@ -20427,6 +20955,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(33, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _previousLoverSet is no longer in use.")]
 	private void SetElement_PreviousLoverSet(int elementId, VoidValue value, DataContext context)
 	{
 		_previousLoverSet[elementId] = value;
@@ -20434,6 +20963,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(33, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _previousLoverSet is no longer in use.")]
 	private void RemoveElement_PreviousLoverSet(int elementId, DataContext context)
 	{
 		_previousLoverSet.Remove(elementId);
@@ -20441,6 +20971,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(33, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _previousLoverSet is no longer in use.")]
 	private void ClearPreviousLoverSet(DataContext context)
 	{
 		_previousLoverSet.Clear();
@@ -20486,16 +21017,19 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(34, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveTokenDataDict is no longer in use.")]
 	public LoveTokenDataItem GetElement_LoveTokenDataDict(ItemKey elementId)
 	{
 		return _loveTokenDataDict[elementId];
 	}
 
+	[Obsolete("DomainData _loveTokenDataDict is no longer in use.")]
 	public bool TryGetElement_LoveTokenDataDict(ItemKey elementId, out LoveTokenDataItem value)
 	{
 		return _loveTokenDataDict.TryGetValue(elementId, out value);
 	}
 
+	[Obsolete("DomainData _loveTokenDataDict is no longer in use.")]
 	private void AddElement_LoveTokenDataDict(ItemKey elementId, LoveTokenDataItem value, DataContext context)
 	{
 		_loveTokenDataDict.Add(elementId, value);
@@ -20503,6 +21037,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(35, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveTokenDataDict is no longer in use.")]
 	private void SetElement_LoveTokenDataDict(ItemKey elementId, LoveTokenDataItem value, DataContext context)
 	{
 		_loveTokenDataDict[elementId] = value;
@@ -20510,6 +21045,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(35, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveTokenDataDict is no longer in use.")]
 	private void RemoveElement_LoveTokenDataDict(ItemKey elementId, DataContext context)
 	{
 		_loveTokenDataDict.Remove(elementId);
@@ -20517,6 +21053,7 @@ public class ExtraDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(35, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _loveTokenDataDict is no longer in use.")]
 	private void ClearLoveTokenDataDict(DataContext context)
 	{
 		_loveTokenDataDict.Clear();
@@ -24537,7 +25074,7 @@ public class ExtraDomain : BaseGameDataDomain
 
 	public override void OnSaveWorld(ArchiveFileBase archive)
 	{
-		archive.WriteSingleValueUnmanaged((ushort)201);
+		archive.WriteSingleValueUnmanaged((ushort)198);
 		archive.WriteDomainDataMeta(0);
 		archive.WriteSingleValueUnmanagedList(_exchangedSpecialWeaponList);
 		archive.WriteDomainDataMeta(1);
@@ -24598,14 +25135,8 @@ public class ExtraDomain : BaseGameDataDomain
 		archive.WriteSingleValueCustom(_legendaryBookBonusCountYin);
 		archive.WriteDomainDataMeta(29);
 		archive.WriteSingleValueCustom(_legendaryBookBonusCountYang);
-		archive.WriteDomainDataMeta(32);
-		archive.WriteSingleValueCollectionUnmanagedKeyCustomValue(_loveDataDict);
-		archive.WriteDomainDataMeta(33);
-		archive.WriteSingleValueCollectionUnmanagedKeyCustomValue(_previousLoverSet);
 		archive.WriteDomainDataMeta(34);
 		archive.WriteSingleValueCollectionUnmanagedKeyCustomValue(_confessLoveFailedSet);
-		archive.WriteDomainDataMeta(35);
-		archive.WriteSingleValueCollectionCustomKeyValue(_loveTokenDataDict);
 		archive.WriteDomainDataMeta(36);
 		archive.WriteSingleValueCollectionUnmanagedKeyCustomValue(_savedSouls);
 		archive.WriteDomainDataMeta(37);
@@ -27253,9 +27784,9 @@ public class ExtraDomain : BaseGameDataDomain
 		{
 		case 0:
 		{
-			int argsCount178 = operation.ArgsCount;
-			int num178 = argsCount178;
-			if (num178 == 1)
+			int argsCount182 = operation.ArgsCount;
+			int num182 = argsCount182;
+			if (num182 == 1)
 			{
 				GameData.Utilities.ShortList plan = default(GameData.Utilities.ShortList);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref plan);
@@ -27266,9 +27797,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 1:
 		{
-			int argsCount119 = operation.ArgsCount;
-			int num119 = argsCount119;
-			if (num119 == 1)
+			int argsCount123 = operation.ArgsCount;
+			int num123 = argsCount123;
+			if (num123 == 1)
 			{
 				Location location5 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location5);
@@ -27279,9 +27810,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 2:
 		{
-			int argsCount14 = operation.ArgsCount;
-			int num14 = argsCount14;
-			if (num14 == 1)
+			int argsCount18 = operation.ArgsCount;
+			int num18 = argsCount18;
+			if (num18 == 1)
 			{
 				Location location = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location);
@@ -27292,22 +27823,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 3:
 		{
-			int argsCount72 = operation.ArgsCount;
-			int num72 = argsCount72;
-			if (num72 == 1)
+			int argsCount76 = operation.ArgsCount;
+			int num76 = argsCount76;
+			if (num76 == 1)
 			{
 				int id2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id2);
-				bool returnValue58 = AddReadingEventBookId(context, id2);
-				return GameData.Serializer.Serializer.Serialize(returnValue58, returnDataPool);
+				bool returnValue61 = AddReadingEventBookId(context, id2);
+				return GameData.Serializer.Serializer.Serialize(returnValue61, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 4:
 		{
-			int argsCount139 = operation.ArgsCount;
-			int num139 = argsCount139;
-			if (num139 == 2)
+			int argsCount143 = operation.ArgsCount;
+			int num143 = argsCount143;
+			if (num143 == 2)
 			{
 				int id4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id4);
@@ -27321,22 +27852,22 @@ public class ExtraDomain : BaseGameDataDomain
 		case 5:
 			if (operation.ArgsCount == 0)
 			{
-				Dictionary<sbyte, LifeSkillCombatCardCollection> returnValue50 = GetAllLifeSkillCombatUsedCard(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue50, returnDataPool);
+				Dictionary<sbyte, LifeSkillCombatCardCollection> returnValue53 = GetAllLifeSkillCombatUsedCard(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue53, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 6:
 			if (operation.ArgsCount == 0)
 			{
-				Dictionary<sbyte, LifeSkillCombatCardCollection> returnValue115 = GetAllLifeSkillCombatCard(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue115, returnDataPool);
+				Dictionary<sbyte, LifeSkillCombatCardCollection> returnValue118 = GetAllLifeSkillCombatCard(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue118, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 7:
 		{
-			int argsCount98 = operation.ArgsCount;
-			int num98 = argsCount98;
-			if (num98 == 2)
+			int argsCount102 = operation.ArgsCount;
+			int num102 = argsCount102;
+			if (num102 == 2)
 			{
 				sbyte skillType5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType5);
@@ -27349,44 +27880,44 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 8:
 		{
-			int argsCount32 = operation.ArgsCount;
-			int num32 = argsCount32;
-			if (num32 == 2)
+			int argsCount36 = operation.ArgsCount;
+			int num36 = argsCount36;
+			if (num36 == 2)
 			{
 				sbyte skillType2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType2);
-				int charId5 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId5);
-				LifeSkillCombatCardCollection returnValue30 = GetCharacterLifeSkillCombatUsedCard(context, skillType2, charId5);
-				return GameData.Serializer.Serializer.Serialize(returnValue30, returnDataPool);
+				int charId6 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId6);
+				LifeSkillCombatCardCollection returnValue33 = GetCharacterLifeSkillCombatUsedCard(context, skillType2, charId6);
+				return GameData.Serializer.Serializer.Serialize(returnValue33, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 9:
 		{
-			int argsCount168 = operation.ArgsCount;
-			int num168 = argsCount168;
-			if (num168 == 1)
+			int argsCount172 = operation.ArgsCount;
+			int num172 = argsCount172;
+			if (num172 == 1)
 			{
 				sbyte skillType10 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType10);
-				LifeSkillCombatCardCollection returnValue128 = GetLifeSkillCombatUsedCard(context, skillType10);
-				return GameData.Serializer.Serializer.Serialize(returnValue128, returnDataPool);
+				LifeSkillCombatCardCollection returnValue131 = GetLifeSkillCombatUsedCard(context, skillType10);
+				return GameData.Serializer.Serializer.Serialize(returnValue131, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 10:
 			if (operation.ArgsCount == 0)
 			{
-				Dictionary<sbyte, LifeSkillCombatCardCollection> returnValue93 = GetAllLifeSkillCombatNewCard(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue93, returnDataPool);
+				Dictionary<sbyte, LifeSkillCombatCardCollection> returnValue96 = GetAllLifeSkillCombatNewCard(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue96, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 11:
 		{
-			int argsCount86 = operation.ArgsCount;
-			int num86 = argsCount86;
-			if (num86 == 2)
+			int argsCount90 = operation.ArgsCount;
+			int num90 = argsCount90;
+			if (num90 == 2)
 			{
 				sbyte skillType4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType4);
@@ -27399,22 +27930,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 12:
 		{
-			int argsCount43 = operation.ArgsCount;
-			int num43 = argsCount43;
-			if (num43 == 1)
+			int argsCount47 = operation.ArgsCount;
+			int num47 = argsCount47;
+			if (num47 == 1)
 			{
-				int charId8 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId8);
-				List<sbyte> returnValue40 = GetCharTeammateCommands(context, charId8);
-				return GameData.Serializer.Serializer.Serialize(returnValue40, returnDataPool);
+				int charId9 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId9);
+				List<sbyte> returnValue43 = GetCharTeammateCommands(context, charId9);
+				return GameData.Serializer.Serializer.Serialize(returnValue43, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 13:
 		{
-			int argsCount7 = operation.ArgsCount;
-			int num7 = argsCount7;
-			if (num7 == 2)
+			int argsCount11 = operation.ArgsCount;
+			int num11 = argsCount11;
+			if (num11 == 2)
 			{
 				sbyte skillType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType);
@@ -27427,9 +27958,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 14:
 		{
-			int argsCount157 = operation.ArgsCount;
-			int num157 = argsCount157;
-			if (num157 == 3)
+			int argsCount161 = operation.ArgsCount;
+			int num161 = argsCount161;
+			if (num161 == 3)
 			{
 				sbyte skillType9 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType9);
@@ -27444,9 +27975,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 15:
 		{
-			int argsCount133 = operation.ArgsCount;
-			int num133 = argsCount133;
-			if (num133 == 2)
+			int argsCount137 = operation.ArgsCount;
+			int num137 = argsCount137;
+			if (num137 == 2)
 			{
 				sbyte skillType7 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType7);
@@ -27459,9 +27990,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 16:
 		{
-			int argsCount105 = operation.ArgsCount;
-			int num105 = argsCount105;
-			if (num105 == 2)
+			int argsCount109 = operation.ArgsCount;
+			int num109 = argsCount109;
+			if (num109 == 2)
 			{
 				sbyte skillType6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType6);
@@ -27474,9 +28005,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 17:
 		{
-			int argsCount83 = operation.ArgsCount;
-			int num83 = argsCount83;
-			if (num83 == 2)
+			int argsCount87 = operation.ArgsCount;
+			int num87 = argsCount87;
+			if (num87 == 2)
 			{
 				sbyte skillType3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType3);
@@ -27489,54 +28020,54 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 18:
 		{
-			int argsCount47 = operation.ArgsCount;
-			int num47 = argsCount47;
-			if (num47 == 2)
+			int argsCount51 = operation.ArgsCount;
+			int num51 = argsCount51;
+			if (num51 == 2)
 			{
-				int professionId3 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId3);
+				int professionId4 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId4);
 				int skillIndex2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillIndex2);
-				ExecuteActiveProfessionSkill(professionId3, skillIndex2);
+				ExecuteActiveProfessionSkill(professionId4, skillIndex2);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 19:
 		{
-			int argsCount26 = operation.ArgsCount;
-			int num26 = argsCount26;
-			if (num26 == 2)
+			int argsCount30 = operation.ArgsCount;
+			int num30 = argsCount30;
+			if (num30 == 2)
 			{
-				int professionId = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId);
+				int professionId2 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId2);
 				int skillIndex = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillIndex);
-				bool returnValue22 = IsProfessionalSkillUnlocked(professionId, skillIndex);
-				return GameData.Serializer.Serializer.Serialize(returnValue22, returnDataPool);
+				bool returnValue25 = IsProfessionalSkillUnlocked(professionId2, skillIndex);
+				return GameData.Serializer.Serializer.Serialize(returnValue25, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 20:
 		{
-			int argsCount181 = operation.ArgsCount;
-			int num181 = argsCount181;
-			if (num181 == 2)
+			int argsCount185 = operation.ArgsCount;
+			int num185 = argsCount185;
+			if (num185 == 2)
 			{
-				int professionId5 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId5);
+				int professionId6 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId6);
 				int skillIndex4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillIndex4);
-				bool returnValue138 = CanExecuteProfessionSkill(professionId5, skillIndex4);
-				return GameData.Serializer.Serializer.Serialize(returnValue138, returnDataPool);
+				bool returnValue141 = CanExecuteProfessionSkill(professionId6, skillIndex4);
+				return GameData.Serializer.Serializer.Serialize(returnValue141, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 21:
 		{
-			int argsCount167 = operation.ArgsCount;
-			int num167 = argsCount167;
-			if (num167 == 2)
+			int argsCount171 = operation.ArgsCount;
+			int num171 = argsCount171;
+			if (num171 == 2)
 			{
 				bool noSkillCooldown = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref noSkillCooldown);
@@ -27549,22 +28080,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 22:
 		{
-			int argsCount143 = operation.ArgsCount;
-			int num143 = argsCount143;
-			if (num143 == 1)
+			int argsCount147 = operation.ArgsCount;
+			int num147 = argsCount147;
+			if (num147 == 1)
 			{
-				int charId36 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId36);
-				int returnValue109 = GetCharacterCustomDisplayName(charId36);
-				return GameData.Serializer.Serializer.Serialize(returnValue109, returnDataPool);
+				int charId37 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId37);
+				int returnValue112 = GetCharacterCustomDisplayName(charId37);
+				return GameData.Serializer.Serializer.Serialize(returnValue112, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 23:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue98 = GetTianJieFuLuCount();
-				return GameData.Serializer.Serializer.Serialize(returnValue98, returnDataPool);
+				int returnValue101 = GetTianJieFuLuCount();
+				return GameData.Serializer.Serializer.Serialize(returnValue101, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 24:
@@ -27576,37 +28107,37 @@ public class ExtraDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 25:
 		{
-			int argsCount94 = operation.ArgsCount;
-			int num94 = argsCount94;
-			if (num94 == 1)
+			int argsCount98 = operation.ArgsCount;
+			int num98 = argsCount98;
+			if (num98 == 1)
 			{
-				int charId22 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId22);
-				TreasureFindResult returnValue73 = FindTreasure(context, charId22);
-				return GameData.Serializer.Serializer.Serialize(returnValue73, returnDataPool);
+				int charId23 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId23);
+				TreasureFindResult returnValue76 = FindTreasure(context, charId23);
+				return GameData.Serializer.Serializer.Serialize(returnValue76, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 26:
 		{
-			int argsCount73 = operation.ArgsCount;
-			int num73 = argsCount73;
-			if (num73 == 2)
+			int argsCount77 = operation.ArgsCount;
+			int num77 = argsCount77;
+			if (num77 == 2)
 			{
-				int professionId4 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId4);
+				int professionId5 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId5);
 				int skillIndex3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillIndex3);
-				bool returnValue59 = CheckSpecialCondition(professionId4, skillIndex3);
-				return GameData.Serializer.Serializer.Serialize(returnValue59, returnDataPool);
+				bool returnValue62 = CheckSpecialCondition(professionId5, skillIndex3);
+				return GameData.Serializer.Serializer.Serialize(returnValue62, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 27:
 		{
-			int argsCount57 = operation.ArgsCount;
-			int num57 = argsCount57;
-			if (num57 == 2)
+			int argsCount61 = operation.ArgsCount;
+			int num61 = argsCount61;
+			if (num61 == 2)
 			{
 				ProfessionSkillArg professionSkillArg = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionSkillArg);
@@ -27619,22 +28150,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 28:
 		{
-			int argsCount36 = operation.ArgsCount;
-			int num36 = argsCount36;
-			if (num36 == 1)
+			int argsCount40 = operation.ArgsCount;
+			int num40 = argsCount40;
+			if (num40 == 1)
 			{
 				Location location2 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location2);
-				TreasureExpectResult returnValue34 = FindTreasureExpect(location2);
-				return GameData.Serializer.Serializer.Serialize(returnValue34, returnDataPool);
+				TreasureExpectResult returnValue37 = FindTreasureExpect(location2);
+				return GameData.Serializer.Serializer.Serialize(returnValue37, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 29:
 		{
-			int argsCount23 = operation.ArgsCount;
-			int num23 = argsCount23;
-			if (num23 == 1)
+			int argsCount27 = operation.ArgsCount;
+			int num27 = argsCount27;
+			if (num27 == 1)
 			{
 				bool maxSeniority = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref maxSeniority);
@@ -27645,24 +28176,24 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 30:
 		{
-			int argsCount184 = operation.ArgsCount;
-			int num184 = argsCount184;
-			if (num184 == 2)
+			int argsCount3 = operation.ArgsCount;
+			int num3 = argsCount3;
+			if (num3 == 2)
 			{
 				int seniority = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref seniority);
-				int professionId6 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId6);
-				SetProfessionSeniorityTarget(context, seniority, professionId6);
+				int professionId = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId);
+				SetProfessionSeniorityTarget(context, seniority, professionId);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 31:
 		{
-			int argsCount174 = operation.ArgsCount;
-			int num174 = argsCount174;
-			if (num174 == 1)
+			int argsCount178 = operation.ArgsCount;
+			int num178 = argsCount178;
+			if (num178 == 1)
 			{
 				int count4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref count4);
@@ -27673,9 +28204,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 32:
 		{
-			int argsCount160 = operation.ArgsCount;
-			int num160 = argsCount160;
-			if (num160 == 1)
+			int argsCount164 = operation.ArgsCount;
+			int num164 = argsCount164;
+			if (num164 == 1)
 			{
 				sbyte stateTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref stateTemplateId);
@@ -27686,16 +28217,16 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 33:
 		{
-			int argsCount149 = operation.ArgsCount;
-			int num149 = argsCount149;
-			if (num149 == 2)
+			int argsCount153 = operation.ArgsCount;
+			int num153 = argsCount153;
+			if (num153 == 2)
 			{
 				sbyte skillType8 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillType8);
-				int charId37 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId37);
-				LifeSkillCombatCardCollection returnValue113 = InitAiLifeSkillCombatUsedCard(context, skillType8, charId37);
-				return GameData.Serializer.Serializer.Serialize(returnValue113, returnDataPool);
+				int charId38 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId38);
+				LifeSkillCombatCardCollection returnValue116 = InitAiLifeSkillCombatUsedCard(context, skillType8, charId38);
+				return GameData.Serializer.Serializer.Serialize(returnValue116, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -27708,65 +28239,65 @@ public class ExtraDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 35:
 		{
-			int argsCount126 = operation.ArgsCount;
-			int num126 = argsCount126;
-			if (num126 == 1)
+			int argsCount130 = operation.ArgsCount;
+			int num130 = argsCount130;
+			if (num130 == 1)
 			{
 				Location location6 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location6);
-				List<sbyte> returnValue97 = GetBlockMerchantTypes(location6);
-				return GameData.Serializer.Serializer.Serialize(returnValue97, returnDataPool);
+				List<sbyte> returnValue100 = GetBlockMerchantTypes(location6);
+				return GameData.Serializer.Serializer.Serialize(returnValue100, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 36:
 		{
-			int argsCount114 = operation.ArgsCount;
-			int num114 = argsCount114;
-			if (num114 == 1)
+			int argsCount118 = operation.ArgsCount;
+			int num118 = argsCount118;
+			if (num118 == 1)
 			{
-				int charId26 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId26);
-				GameData.Utilities.ShortList returnValue89 = GetCharacterMasteredCombatSkills(charId26);
-				return GameData.Serializer.Serializer.Serialize(returnValue89, returnDataPool);
+				int charId27 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId27);
+				GameData.Utilities.ShortList returnValue92 = GetCharacterMasteredCombatSkills(charId27);
+				return GameData.Serializer.Serializer.Serialize(returnValue92, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 37:
 		{
-			int argsCount103 = operation.ArgsCount;
-			int num103 = argsCount103;
-			if (num103 == 2)
+			int argsCount107 = operation.ArgsCount;
+			int num107 = argsCount107;
+			if (num107 == 2)
 			{
-				int charId24 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId24);
+				int charId25 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId25);
 				short skillTemplateId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillTemplateId2);
-				bool returnValue79 = AddCharacterMasteredCombatSkill(context, charId24, skillTemplateId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue79, returnDataPool);
+				bool returnValue82 = AddCharacterMasteredCombatSkill(context, charId25, skillTemplateId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue82, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 38:
 		{
-			int argsCount89 = operation.ArgsCount;
-			int num89 = argsCount89;
-			if (num89 == 2)
+			int argsCount93 = operation.ArgsCount;
+			int num93 = argsCount93;
+			if (num93 == 2)
 			{
-				int charId21 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId21);
+				int charId22 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId22);
 				short skillTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillTemplateId);
-				bool returnValue69 = RemoveCharacterMasteredCombatSkill(context, charId21, skillTemplateId);
-				return GameData.Serializer.Serializer.Serialize(returnValue69, returnDataPool);
+				bool returnValue72 = RemoveCharacterMasteredCombatSkill(context, charId22, skillTemplateId);
+				return GameData.Serializer.Serializer.Serialize(returnValue72, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 39:
 		{
-			int argsCount80 = operation.ArgsCount;
-			int num80 = argsCount80;
-			if (num80 == 1)
+			int argsCount84 = operation.ArgsCount;
+			int num84 = argsCount84;
+			if (num84 == 1)
 			{
 				TreasureFindResult result = default(TreasureFindResult);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref result);
@@ -27777,145 +28308,158 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 40:
 		{
-			int argsCount65 = operation.ArgsCount;
-			int num65 = argsCount65;
-			if (num65 == 2)
+			int argsCount69 = operation.ArgsCount;
+			int num69 = argsCount69;
+			if (num69 == 2)
 			{
-				int charId17 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId17);
+				int charId18 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId18);
 				sbyte cmdType2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref cmdType2);
-				bool returnValue53 = SetAdvancedTeammateCommands(context, charId17, cmdType2);
-				return GameData.Serializer.Serializer.Serialize(returnValue53, returnDataPool);
+				bool returnValue56 = SetAdvancedTeammateCommands(context, charId18, cmdType2);
+				return GameData.Serializer.Serializer.Serialize(returnValue56, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 41:
 		{
-			int argsCount54 = operation.ArgsCount;
-			int num54 = argsCount54;
-			if (num54 == 2)
+			int argsCount58 = operation.ArgsCount;
+			int num58 = argsCount58;
+			if (num58 == 2)
 			{
-				int charId15 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId15);
+				int charId16 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId16);
 				sbyte cmdType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref cmdType);
-				bool returnValue47 = CancelAdvancedTeammateCommands(context, charId15, cmdType);
-				return GameData.Serializer.Serializer.Serialize(returnValue47, returnDataPool);
+				bool returnValue50 = CancelAdvancedTeammateCommands(context, charId16, cmdType);
+				return GameData.Serializer.Serializer.Serialize(returnValue50, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 42:
 			if (operation.ArgsCount == 0)
 			{
-				List<SectStoryHeavenlyTreeExtendable> returnValue35 = GetAllHeavenlyTrees();
-				return GameData.Serializer.Serializer.Serialize(returnValue35, returnDataPool);
+				List<SectStoryHeavenlyTreeExtendable> returnValue38 = GetAllHeavenlyTrees();
+				return GameData.Serializer.Serializer.Serialize(returnValue38, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 43:
 		{
-			int argsCount29 = operation.ArgsCount;
-			int num29 = argsCount29;
-			if (num29 == 2)
+			int argsCount33 = operation.ArgsCount;
+			int num33 = argsCount33;
+			if (num33 == 2)
 			{
 				int id = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id);
 				int maxSteps = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref maxSteps);
-				List<MapBlockData> returnValue27 = GetHeavenlyTreeNearBlocks(id, maxSteps);
-				return GameData.Serializer.Serializer.Serialize(returnValue27, returnDataPool);
+				List<MapBlockData> returnValue30 = GetHeavenlyTreeNearBlocks(id, maxSteps);
+				return GameData.Serializer.Serializer.Serialize(returnValue30, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 44:
 			if (operation.ArgsCount == 0)
 			{
-				List<sbyte> returnValue16 = GetInformationSettings(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue16, returnDataPool);
+				List<sbyte> returnValue19 = GetInformationSettings(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue19, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 45:
 		{
-			int argsCount5 = operation.ArgsCount;
-			int num5 = argsCount5;
-			if (num5 == 1)
+			int argsCount9 = operation.ArgsCount;
+			int num9 = argsCount9;
+			if (num9 == 1)
 			{
-				int charId = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId);
-				byte returnValue5 = GetPoisonImmunities(charId);
-				return GameData.Serializer.Serializer.Serialize(returnValue5, returnDataPool);
+				int charId2 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId2);
+				byte returnValue8 = GetPoisonImmunities(charId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue8, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 46:
 			if (operation.ArgsCount == 0)
 			{
-				RelatedCharactersForRelations returnValue135 = GetDreamBackTaiwuRelatedCharactersForRelations();
-				return GameData.Serializer.Serializer.Serialize(returnValue135, returnDataPool);
+				RelatedCharactersForRelations returnValue138 = GetDreamBackTaiwuRelatedCharactersForRelations();
+				return GameData.Serializer.Serializer.Serialize(returnValue138, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 47:
 			if (operation.ArgsCount == 0)
 			{
-				Genealogy returnValue131 = GetDreamBackTaiwuGenealogy();
-				return GameData.Serializer.Serializer.Serialize(returnValue131, returnDataPool);
+				Genealogy returnValue134 = GetDreamBackTaiwuGenealogy();
+				return GameData.Serializer.Serializer.Serialize(returnValue134, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 48:
 		{
-			int argsCount162 = operation.ArgsCount;
-			int num162 = argsCount162;
-			if (num162 == 1)
+			int argsCount166 = operation.ArgsCount;
+			int num166 = argsCount166;
+			if (num166 == 1)
 			{
 				List<int> charIds2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charIds2);
-				List<CharacterDisplayDataForRelations> returnValue126 = GetCharacterDisplayDataListForDreamBackRelations(charIds2);
-				return GameData.Serializer.Serializer.Serialize(returnValue126, returnDataPool);
+				List<CharacterDisplayDataForRelations> returnValue129 = GetCharacterDisplayDataListForDreamBackRelations(charIds2);
+				return GameData.Serializer.Serializer.Serialize(returnValue129, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 49:
 		{
-			int argsCount155 = operation.ArgsCount;
-			int num155 = argsCount155;
-			if (num155 == 2)
+			int argsCount159 = operation.ArgsCount;
+			int num159 = argsCount159;
+			if (num159 == 2)
 			{
 				int startDate = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref startDate);
 				int monthCount = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref monthCount);
-				ReadonlyLifeRecordsWithDate returnValue118 = GetDreamBackLifeRecordByDate(startDate, monthCount);
-				return GameData.Serializer.Serializer.Serialize(returnValue118, returnDataPool);
+				ReadonlyLifeRecordsWithDate returnValue121 = GetDreamBackLifeRecordByDate(startDate, monthCount);
+				return GameData.Serializer.Serializer.Serialize(returnValue121, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 50:
 		{
-			int argsCount144 = operation.ArgsCount;
-			int num144 = argsCount144;
-			if (num144 == 1)
+			int argsCount148 = operation.ArgsCount;
+			int num148 = argsCount148;
+			if (num148 == 1)
 			{
 				List<int> charIds = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charIds);
-				List<NameAndLifeRelatedData> returnValue110 = GetNameAndLifeRelatedDataListForDreamBack(charIds);
-				return GameData.Serializer.Serializer.Serialize(returnValue110, returnDataPool);
+				List<NameAndLifeRelatedData> returnValue113 = GetNameAndLifeRelatedDataListForDreamBack(charIds);
+				return GameData.Serializer.Serializer.Serialize(returnValue113, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 51:
 		{
-			int argsCount137 = operation.ArgsCount;
-			int num137 = argsCount137;
-			if (num137 == 1)
+			int argsCount141 = operation.ArgsCount;
+			int num141 = argsCount141;
+			if (num141 == 1)
 			{
-				int charId34 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId34);
-				bool returnValue104 = IsCharacterHatingItemRevealed(charId34);
-				return GameData.Serializer.Serializer.Serialize(returnValue104, returnDataPool);
+				int charId35 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId35);
+				bool returnValue107 = IsCharacterHatingItemRevealed(charId35);
+				return GameData.Serializer.Serializer.Serialize(returnValue107, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 52:
+		{
+			int argsCount133 = operation.ArgsCount;
+			int num133 = argsCount133;
+			if (num133 == 1)
+			{
+				int charId32 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId32);
+				bool returnValue103 = IsCharacterLovingItemRevealed(charId32);
+				return GameData.Serializer.Serializer.Serialize(returnValue103, returnDataPool);
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 53:
 		{
 			int argsCount129 = operation.ArgsCount;
 			int num129 = argsCount129;
@@ -27923,78 +28467,65 @@ public class ExtraDomain : BaseGameDataDomain
 			{
 				int charId31 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId31);
-				bool returnValue100 = IsCharacterLovingItemRevealed(charId31);
-				return GameData.Serializer.Serializer.Serialize(returnValue100, returnDataPool);
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 53:
-		{
-			int argsCount125 = operation.ArgsCount;
-			int num125 = argsCount125;
-			if (num125 == 1)
-			{
-				int charId30 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId30);
-				bool returnValue95 = IsCharacterHobbyRevealed(charId30);
-				return GameData.Serializer.Serializer.Serialize(returnValue95, returnDataPool);
+				bool returnValue98 = IsCharacterHobbyRevealed(charId31);
+				return GameData.Serializer.Serializer.Serialize(returnValue98, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 54:
 		{
-			int argsCount115 = operation.ArgsCount;
-			int num115 = argsCount115;
-			if (num115 == 2)
+			int argsCount119 = operation.ArgsCount;
+			int num119 = argsCount119;
+			if (num119 == 2)
 			{
-				int charId27 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId27);
+				int charId28 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId28);
 				bool isLovingItem = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isLovingItem);
-				SetCharacterRevealedHobbies(context, charId27, isLovingItem);
+				SetCharacterRevealedHobbies(context, charId28, isLovingItem);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 55:
 		{
-			int argsCount110 = operation.ArgsCount;
-			int num110 = argsCount110;
-			if (num110 == 1)
+			int argsCount114 = operation.ArgsCount;
+			int num114 = argsCount114;
+			if (num114 == 1)
 			{
 				short templateId7 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId7);
-				ConflictCombatSkill returnValue82 = GetConflictCombatSkill(templateId7);
-				return GameData.Serializer.Serializer.Serialize(returnValue82, returnDataPool);
+				ConflictCombatSkill returnValue85 = GetConflictCombatSkill(templateId7);
+				return GameData.Serializer.Serializer.Serialize(returnValue85, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 56:
 			if (operation.ArgsCount == 0)
 			{
-				ReadonlyLifeRecordsWithDate returnValue76 = GetAllDreamBackLifeRecords();
-				return GameData.Serializer.Serializer.Serialize(returnValue76, returnDataPool);
+				ReadonlyLifeRecordsWithDate returnValue79 = GetAllDreamBackLifeRecords();
+				return GameData.Serializer.Serializer.Serialize(returnValue79, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 57:
 			if (operation.ArgsCount == 0)
 			{
-				(int, int) returnValue72 = GetDreamBackTaiwuBirthAndEndDates();
-				return GameData.Serializer.Serializer.Serialize(returnValue72, returnDataPool);
+				(int, int) returnValue75 = GetDreamBackTaiwuBirthAndEndDates();
+				return GameData.Serializer.Serializer.Serialize(returnValue75, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 58:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue65 = IsCurrentTaiwuOverwrittenByDreamBack();
-				return GameData.Serializer.Serializer.Serialize(returnValue65, returnDataPool);
+				bool returnValue68 = IsCurrentTaiwuOverwrittenByDreamBack();
+				return GameData.Serializer.Serializer.Serialize(returnValue68, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 59:
 		{
-			int argsCount77 = operation.ArgsCount;
-			int num77 = argsCount77;
-			if (num77 == 2)
+			int argsCount81 = operation.ArgsCount;
+			int num81 = argsCount81;
+			if (num81 == 2)
 			{
 				short templateId6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId6);
@@ -28008,60 +28539,60 @@ public class ExtraDomain : BaseGameDataDomain
 		case 60:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue56 = HaveConflictCombatSkill();
-				return GameData.Serializer.Serializer.Serialize(returnValue56, returnDataPool);
+				bool returnValue59 = HaveConflictCombatSkill();
+				return GameData.Serializer.Serializer.Serialize(returnValue59, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 61:
 		{
-			int argsCount61 = operation.ArgsCount;
-			int num61 = argsCount61;
-			if (num61 == 2)
+			int argsCount65 = operation.ArgsCount;
+			int num65 = argsCount65;
+			if (num65 == 2)
 			{
-				int charId16 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId16);
+				int charId17 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId17);
 				bool isAdoreRelation3 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAdoreRelation3);
-				AddTaiwuOneWayRelationCoolDown(context, charId16, isAdoreRelation3);
+				AddTaiwuOneWayRelationCoolDown(context, charId17, isAdoreRelation3);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 62:
 		{
-			int argsCount49 = operation.ArgsCount;
-			int num49 = argsCount49;
-			if (num49 == 2)
+			int argsCount53 = operation.ArgsCount;
+			int num53 = argsCount53;
+			if (num53 == 2)
 			{
-				int charId11 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId11);
+				int charId12 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId12);
 				bool isAdoreRelation2 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAdoreRelation2);
-				bool returnValue42 = IsTaiwuAbleToAddOneWayRelation(charId11, isAdoreRelation2);
-				return GameData.Serializer.Serializer.Serialize(returnValue42, returnDataPool);
+				bool returnValue45 = IsTaiwuAbleToAddOneWayRelation(charId12, isAdoreRelation2);
+				return GameData.Serializer.Serializer.Serialize(returnValue45, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 63:
 		{
-			int argsCount41 = operation.ArgsCount;
-			int num41 = argsCount41;
-			if (num41 == 2)
+			int argsCount45 = operation.ArgsCount;
+			int num45 = argsCount45;
+			if (num45 == 2)
 			{
-				int charId7 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId7);
+				int charId8 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId8);
 				bool isAdoreRelation = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isAdoreRelation);
-				int returnValue38 = GetTaiwuAddOneWayRelationCoolDown(charId7, isAdoreRelation);
-				return GameData.Serializer.Serializer.Serialize(returnValue38, returnDataPool);
+				int returnValue41 = GetTaiwuAddOneWayRelationCoolDown(charId8, isAdoreRelation);
+				return GameData.Serializer.Serializer.Serialize(returnValue41, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 64:
 		{
-			int argsCount34 = operation.ArgsCount;
-			int num34 = argsCount34;
-			if (num34 == 4)
+			int argsCount38 = operation.ArgsCount;
+			int num38 = argsCount38;
+			if (num38 == 4)
 			{
 				ItemKey carrier = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref carrier);
@@ -28078,75 +28609,75 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 65:
 		{
-			int argsCount28 = operation.ArgsCount;
-			int num28 = argsCount28;
-			if (num28 == 1)
+			int argsCount32 = operation.ArgsCount;
+			int num32 = argsCount32;
+			if (num32 == 1)
 			{
 				int carrierId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref carrierId2);
-				int returnValue25 = GetCarrierTamePoint(carrierId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue25, returnDataPool);
+				int returnValue28 = GetCarrierTamePoint(carrierId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue28, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 66:
 		{
-			int argsCount19 = operation.ArgsCount;
-			int num19 = argsCount19;
-			if (num19 == 1)
+			int argsCount23 = operation.ArgsCount;
+			int num23 = argsCount23;
+			if (num23 == 1)
 			{
 				List<int> charIdList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charIdList);
-				List<CharacterDisplayData> returnValue17 = GetDreamBackCharacterDisplayDataList(charIdList);
-				return GameData.Serializer.Serializer.Serialize(returnValue17, returnDataPool);
+				List<CharacterDisplayData> returnValue20 = GetDreamBackCharacterDisplayDataList(charIdList);
+				return GameData.Serializer.Serializer.Serialize(returnValue20, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 67:
 		{
-			int argsCount11 = operation.ArgsCount;
-			int num11 = argsCount11;
-			if (num11 == 1)
+			int argsCount15 = operation.ArgsCount;
+			int num15 = argsCount15;
+			if (num15 == 1)
 			{
 				int carrierId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref carrierId);
-				int returnValue9 = GetCarrierMaxTamePoint(carrierId);
-				return GameData.Serializer.Serializer.Serialize(returnValue9, returnDataPool);
+				int returnValue12 = GetCarrierMaxTamePoint(carrierId);
+				return GameData.Serializer.Serializer.Serialize(returnValue12, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 68:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue = GetCurrMaxJiaoPoolCount();
-				return GameData.Serializer.Serializer.Serialize(returnValue, returnDataPool);
+				int returnValue4 = GetCurrMaxJiaoPoolCount();
+				return GameData.Serializer.Serializer.Serialize(returnValue4, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 69:
 			if (operation.ArgsCount == 0)
 			{
-				List<LoongInfo> returnValue137 = GmCmd_FindFiveLoongLocation();
-				return GameData.Serializer.Serializer.Serialize(returnValue137, returnDataPool);
+				List<LoongInfo> returnValue140 = GmCmd_FindFiveLoongLocation();
+				return GameData.Serializer.Serializer.Serialize(returnValue140, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 70:
 		{
-			int argsCount175 = operation.ArgsCount;
-			int num175 = argsCount175;
-			if (num175 == 1)
+			int argsCount179 = operation.ArgsCount;
+			int num179 = argsCount179;
+			if (num179 == 1)
 			{
 				int poolId15 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId15);
-				short returnValue133 = GetJiaoPoolBlockStyle(poolId15);
-				return GameData.Serializer.Serializer.Serialize(returnValue133, returnDataPool);
+				short returnValue136 = GetJiaoPoolBlockStyle(poolId15);
+				return GameData.Serializer.Serializer.Serialize(returnValue136, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 71:
 		{
-			int argsCount171 = operation.ArgsCount;
-			int num171 = argsCount171;
-			if (num171 == 2)
+			int argsCount175 = operation.ArgsCount;
+			int num175 = argsCount175;
+			if (num175 == 2)
 			{
 				int poolId14 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId14);
@@ -28159,55 +28690,55 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 72:
 		{
-			int argsCount164 = operation.ArgsCount;
-			int num164 = argsCount164;
-			if (num164 == 1)
+			int argsCount168 = operation.ArgsCount;
+			int num168 = argsCount168;
+			if (num168 == 1)
 			{
 				int id7 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id7);
-				ChildrenOfLoong returnValue127 = GetChildrenOfLoongById(id7);
-				return GameData.Serializer.Serializer.Serialize(returnValue127, returnDataPool);
+				ChildrenOfLoong returnValue130 = GetChildrenOfLoongById(id7);
+				return GameData.Serializer.Serializer.Serialize(returnValue130, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 73:
 			if (operation.ArgsCount == 0)
 			{
-				List<JiaoPool> returnValue123 = GetJiaoPoolList();
-				return GameData.Serializer.Serializer.Serialize(returnValue123, returnDataPool);
+				List<JiaoPool> returnValue126 = GetJiaoPoolList();
+				return GameData.Serializer.Serializer.Serialize(returnValue126, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 74:
 		{
-			int argsCount152 = operation.ArgsCount;
-			int num152 = argsCount152;
-			if (num152 == 1)
+			int argsCount156 = operation.ArgsCount;
+			int num156 = argsCount156;
+			if (num156 == 1)
 			{
 				int id6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref id6);
-				GameData.DLC.FiveLoong.Jiao returnValue116 = GetJiaoById(id6);
-				return GameData.Serializer.Serializer.Serialize(returnValue116, returnDataPool);
+				GameData.DLC.FiveLoong.Jiao returnValue119 = GetJiaoById(id6);
+				return GameData.Serializer.Serializer.Serialize(returnValue119, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 75:
 		{
-			int argsCount147 = operation.ArgsCount;
-			int num147 = argsCount147;
-			if (num147 == 1)
+			int argsCount151 = operation.ArgsCount;
+			int num151 = argsCount151;
+			if (num151 == 1)
 			{
 				int poolId11 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId11);
-				List<GameData.DLC.FiveLoong.Jiao> returnValue111 = GetJiaoPoolAllJiaoData(poolId11);
-				return GameData.Serializer.Serializer.Serialize(returnValue111, returnDataPool);
+				List<GameData.DLC.FiveLoong.Jiao> returnValue114 = GetJiaoPoolAllJiaoData(poolId11);
+				return GameData.Serializer.Serializer.Serialize(returnValue114, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 76:
 		{
-			int argsCount140 = operation.ArgsCount;
-			int num140 = argsCount140;
-			if (num140 == 2)
+			int argsCount144 = operation.ArgsCount;
+			int num144 = argsCount144;
+			if (num144 == 2)
 			{
 				int poolId9 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId9);
@@ -28220,9 +28751,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 77:
 		{
-			int argsCount136 = operation.ArgsCount;
-			int num136 = argsCount136;
-			if (num136 == 2)
+			int argsCount140 = operation.ArgsCount;
+			int num140 = argsCount140;
+			if (num140 == 2)
 			{
 				int poolId8 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId8);
@@ -28235,22 +28766,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 78:
 		{
-			int argsCount130 = operation.ArgsCount;
-			int num130 = argsCount130;
-			if (num130 == 1)
+			int argsCount134 = operation.ArgsCount;
+			int num134 = argsCount134;
+			if (num134 == 1)
 			{
 				int poolId7 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId7);
-				List<ItemKey> returnValue102 = PutJiaoOutOfPool(context, poolId7);
-				return GameData.Serializer.Serializer.Serialize(returnValue102, returnDataPool);
+				List<ItemKey> returnValue105 = PutJiaoOutOfPool(context, poolId7);
+				return GameData.Serializer.Serializer.Serialize(returnValue105, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 79:
 		{
-			int argsCount128 = operation.ArgsCount;
-			int num128 = argsCount128;
-			if (num128 == 2)
+			int argsCount132 = operation.ArgsCount;
+			int num132 = argsCount132;
+			if (num132 == 2)
 			{
 				int poolId6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId6);
@@ -28263,9 +28794,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 80:
 		{
-			int argsCount122 = operation.ArgsCount;
-			int num122 = argsCount122;
-			if (num122 == 2)
+			int argsCount126 = operation.ArgsCount;
+			int num126 = argsCount126;
+			if (num126 == 2)
 			{
 				int poolId5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId5);
@@ -28278,9 +28809,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 81:
 		{
-			int argsCount117 = operation.ArgsCount;
-			int num117 = argsCount117;
-			if (num117 == 1)
+			int argsCount121 = operation.ArgsCount;
+			int num121 = argsCount121;
+			if (num121 == 1)
 			{
 				int poolId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId4);
@@ -28291,9 +28822,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 82:
 		{
-			int argsCount112 = operation.ArgsCount;
-			int num112 = argsCount112;
-			if (num112 == 1)
+			int argsCount116 = operation.ArgsCount;
+			int num116 = argsCount116;
+			if (num116 == 1)
 			{
 				int poolId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId3);
@@ -28304,75 +28835,75 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 83:
 		{
-			int argsCount108 = operation.ArgsCount;
-			int num108 = argsCount108;
-			if (num108 == 1)
+			int argsCount112 = operation.ArgsCount;
+			int num112 = argsCount112;
+			if (num112 == 1)
 			{
 				List<int> jiaoLoongIds = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref jiaoLoongIds);
-				List<JiaoLoongNameRelatedData> returnValue80 = GetJiaoLoongNameRelatedDataList(jiaoLoongIds);
-				return GameData.Serializer.Serializer.Serialize(returnValue80, returnDataPool);
+				List<JiaoLoongNameRelatedData> returnValue83 = GetJiaoLoongNameRelatedDataList(jiaoLoongIds);
+				return GameData.Serializer.Serializer.Serialize(returnValue83, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 84:
 			if (operation.ArgsCount == 0)
 			{
-				List<ItemDisplayData> returnValue77 = GetAllJiaoForPool();
-				return GameData.Serializer.Serializer.Serialize(returnValue77, returnDataPool);
+				List<ItemDisplayData> returnValue80 = GetAllJiaoForPool();
+				return GameData.Serializer.Serializer.Serialize(returnValue80, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 85:
 			if (operation.ArgsCount == 0)
 			{
-				List<ItemDisplayData> returnValue75 = GetAllJiaoForEvolve();
-				return GameData.Serializer.Serializer.Serialize(returnValue75, returnDataPool);
+				List<ItemDisplayData> returnValue78 = GetAllJiaoForEvolve();
+				return GameData.Serializer.Serializer.Serialize(returnValue78, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 86:
 		{
-			int argsCount91 = operation.ArgsCount;
-			int num91 = argsCount91;
-			if (num91 == 1)
+			int argsCount95 = operation.ArgsCount;
+			int num95 = argsCount95;
+			if (num95 == 1)
 			{
-				ItemKey key8 = default(ItemKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key8);
-				GameData.DLC.FiveLoong.Jiao returnValue70 = GetJiaoByItemKey(key8);
-				return GameData.Serializer.Serializer.Serialize(returnValue70, returnDataPool);
+				ItemKey key9 = default(ItemKey);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key9);
+				GameData.DLC.FiveLoong.Jiao returnValue73 = GetJiaoByItemKey(key9);
+				return GameData.Serializer.Serializer.Serialize(returnValue73, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 87:
 		{
-			int argsCount85 = operation.ArgsCount;
-			int num85 = argsCount85;
-			if (num85 == 1)
+			int argsCount89 = operation.ArgsCount;
+			int num89 = argsCount89;
+			if (num89 == 1)
 			{
 				List<ItemKey> keys = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref keys);
-				List<GameData.DLC.FiveLoong.Jiao> returnValue68 = GetJiaosByItemKeys(keys);
-				return GameData.Serializer.Serializer.Serialize(returnValue68, returnDataPool);
+				List<GameData.DLC.FiveLoong.Jiao> returnValue71 = GetJiaosByItemKeys(keys);
+				return GameData.Serializer.Serializer.Serialize(returnValue71, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 88:
 		{
-			int argsCount81 = operation.ArgsCount;
-			int num81 = argsCount81;
-			if (num81 == 1)
+			int argsCount85 = operation.ArgsCount;
+			int num85 = argsCount85;
+			if (num85 == 1)
 			{
-				ItemKey key7 = default(ItemKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key7);
-				ChildrenOfLoong returnValue63 = GetChildrenOfLoongByItemKey(key7);
-				return GameData.Serializer.Serializer.Serialize(returnValue63, returnDataPool);
+				ItemKey key8 = default(ItemKey);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key8);
+				ChildrenOfLoong returnValue66 = GetChildrenOfLoongByItemKey(key8);
+				return GameData.Serializer.Serializer.Serialize(returnValue66, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 89:
 		{
-			int argsCount76 = operation.ArgsCount;
-			int num76 = argsCount76;
-			if (num76 == 2)
+			int argsCount80 = operation.ArgsCount;
+			int num80 = argsCount80;
+			if (num80 == 2)
 			{
 				int poolId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId2);
@@ -28385,9 +28916,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 90:
 		{
-			int argsCount69 = operation.ArgsCount;
-			int num69 = argsCount69;
-			if (num69 == 1)
+			int argsCount73 = operation.ArgsCount;
+			int num73 = argsCount73;
+			if (num73 == 1)
 			{
 				int poolId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId);
@@ -28398,9 +28929,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 91:
 		{
-			int argsCount64 = operation.ArgsCount;
-			int num64 = argsCount64;
-			if (num64 == 6)
+			int argsCount68 = operation.ArgsCount;
+			int num68 = argsCount68;
+			if (num68 == 6)
 			{
 				short templateId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId4);
@@ -28414,16 +28945,16 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isMaxTamePoint);
 				bool isMaxProperty = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isMaxProperty);
-				int returnValue52 = GmCmd_AddJiao(context, templateId4, nurturanceTemplateId, growthStage, isMale, isMaxTamePoint, isMaxProperty);
-				return GameData.Serializer.Serializer.Serialize(returnValue52, returnDataPool);
+				int returnValue55 = GmCmd_AddJiao(context, templateId4, nurturanceTemplateId, growthStage, isMale, isMaxTamePoint, isMaxProperty);
+				return GameData.Serializer.Serializer.Serialize(returnValue55, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 92:
 		{
-			int argsCount58 = operation.ArgsCount;
-			int num58 = argsCount58;
-			if (num58 == 1)
+			int argsCount62 = operation.ArgsCount;
+			int num62 = argsCount62;
+			if (num62 == 1)
 			{
 				int jiaoId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref jiaoId2);
@@ -28434,42 +28965,42 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 93:
 		{
-			int argsCount52 = operation.ArgsCount;
-			int num52 = argsCount52;
-			if (num52 == 1)
+			int argsCount56 = operation.ArgsCount;
+			int num56 = argsCount56;
+			if (num56 == 1)
 			{
 				short templateId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId3);
-				int returnValue45 = GmCmd_AddChildOfLoong(context, templateId3);
-				return GameData.Serializer.Serializer.Serialize(returnValue45, returnDataPool);
+				int returnValue48 = GmCmd_AddChildOfLoong(context, templateId3);
+				return GameData.Serializer.Serializer.Serialize(returnValue48, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 94:
 		{
-			int argsCount44 = operation.ArgsCount;
-			int num44 = argsCount44;
-			if (num44 == 2)
+			int argsCount48 = operation.ArgsCount;
+			int num48 = argsCount48;
+			if (num48 == 2)
 			{
-				ItemKey key6 = default(ItemKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key6);
+				ItemKey key7 = default(ItemKey);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key7);
 				short childOfLoongTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref childOfLoongTemplateId);
-				JiaoEvolveToChildOfLoong(context, key6, childOfLoongTemplateId);
+				JiaoEvolveToChildOfLoong(context, key7, childOfLoongTemplateId);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 95:
 		{
-			int argsCount39 = operation.ArgsCount;
-			int num39 = argsCount39;
-			if (num39 == 1)
+			int argsCount43 = operation.ArgsCount;
+			int num43 = argsCount43;
+			if (num43 == 1)
 			{
-				ItemKey key5 = default(ItemKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key5);
-				int returnValue37 = GetJiaoEvolutionChoice(context, key5);
-				return GameData.Serializer.Serializer.Serialize(returnValue37, returnDataPool);
+				ItemKey key6 = default(ItemKey);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key6);
+				int returnValue40 = GetJiaoEvolutionChoice(context, key6);
+				return GameData.Serializer.Serializer.Serialize(returnValue40, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -28483,74 +29014,74 @@ public class ExtraDomain : BaseGameDataDomain
 		case 97:
 			if (operation.ArgsCount == 0)
 			{
-				List<ItemDisplayData> returnValue29 = GetAllAdultJiao();
-				return GameData.Serializer.Serializer.Serialize(returnValue29, returnDataPool);
+				List<ItemDisplayData> returnValue32 = GetAllAdultJiao();
+				return GameData.Serializer.Serializer.Serialize(returnValue32, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 98:
 			if (operation.ArgsCount == 0)
 			{
-				List<JiaoEvolutionDisplayData> returnValue23 = GetAllEvolvingJiao();
-				return GameData.Serializer.Serializer.Serialize(returnValue23, returnDataPool);
+				List<JiaoEvolutionDisplayData> returnValue26 = GetAllEvolvingJiao();
+				return GameData.Serializer.Serializer.Serialize(returnValue26, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 99:
 		{
-			int argsCount22 = operation.ArgsCount;
-			int num22 = argsCount22;
-			if (num22 == 1)
+			int argsCount26 = operation.ArgsCount;
+			int num26 = argsCount26;
+			if (num26 == 1)
 			{
 				short templateId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId2);
-				short returnValue19 = GetJiaoTemplateIdByCarrierTemplateId(templateId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue19, returnDataPool);
+				short returnValue22 = GetJiaoTemplateIdByCarrierTemplateId(templateId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue22, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 100:
 		{
-			int argsCount16 = operation.ArgsCount;
-			int num16 = argsCount16;
-			if (num16 == 1)
+			int argsCount20 = operation.ArgsCount;
+			int num20 = argsCount20;
+			if (num20 == 1)
 			{
 				sbyte resourceType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref resourceType);
-				int returnValue13 = CalcResourceChangeByJiaoPool(resourceType);
-				return GameData.Serializer.Serializer.Serialize(returnValue13, returnDataPool);
+				int returnValue16 = CalcResourceChangeByJiaoPool(resourceType);
+				return GameData.Serializer.Serializer.Serialize(returnValue16, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 101:
 		{
-			int argsCount10 = operation.ArgsCount;
-			int num10 = argsCount10;
-			if (num10 == 1)
+			int argsCount14 = operation.ArgsCount;
+			int num14 = argsCount14;
+			if (num14 == 1)
 			{
 				short templateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId);
-				bool returnValue8 = IsOwnedChildrenOfLoong(templateId);
-				return GameData.Serializer.Serializer.Serialize(returnValue8, returnDataPool);
+				bool returnValue11 = IsOwnedChildrenOfLoong(templateId);
+				return GameData.Serializer.Serializer.Serialize(returnValue11, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 102:
 		{
-			int argsCount2 = operation.ArgsCount;
-			int num2 = argsCount2;
-			if (num2 == 1)
+			int argsCount6 = operation.ArgsCount;
+			int num6 = argsCount6;
+			if (num6 == 1)
 			{
 				int jiaoId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref jiaoId);
-				JiaoEvolutionDisplayData returnValue2 = GetNextRandomChildrenOfLoong(context, jiaoId);
-				return GameData.Serializer.Serializer.Serialize(returnValue2, returnDataPool);
+				JiaoEvolutionDisplayData returnValue5 = GetNextRandomChildrenOfLoong(context, jiaoId);
+				return GameData.Serializer.Serializer.Serialize(returnValue5, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 103:
 		{
-			int argsCount183 = operation.ArgsCount;
-			int num183 = argsCount183;
-			if (num183 == 1)
+			int argsCount2 = operation.ArgsCount;
+			int num2 = argsCount2;
+			if (num2 == 1)
 			{
 				bool isJiaoLoong = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isJiaoLoong);
@@ -28562,48 +29093,48 @@ public class ExtraDomain : BaseGameDataDomain
 		case 104:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue136 = GetIsJiaoPoolOpen();
-				return GameData.Serializer.Serializer.Serialize(returnValue136, returnDataPool);
+				bool returnValue139 = GetIsJiaoPoolOpen();
+				return GameData.Serializer.Serializer.Serialize(returnValue139, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 105:
 		{
-			int argsCount177 = operation.ArgsCount;
-			int num177 = argsCount177;
-			if (num177 == 1)
+			int argsCount181 = operation.ArgsCount;
+			int num181 = argsCount181;
+			if (num181 == 1)
 			{
 				JiaoPoolRecordArgumentCollection collection2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref collection2);
-				JiaoPoolRecordArgumentCollection returnValue134 = FillJiaoRecordArgumentCollection(context, collection2);
-				return GameData.Serializer.Serializer.Serialize(returnValue134, returnDataPool);
+				JiaoPoolRecordArgumentCollection returnValue137 = FillJiaoRecordArgumentCollection(context, collection2);
+				return GameData.Serializer.Serializer.Serialize(returnValue137, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 106:
 			if (operation.ArgsCount == 0)
 			{
-				sbyte returnValue132 = GetJiaoEvolutionPageStatus();
-				return GameData.Serializer.Serializer.Serialize(returnValue132, returnDataPool);
+				sbyte returnValue135 = GetJiaoEvolutionPageStatus();
+				return GameData.Serializer.Serializer.Serialize(returnValue135, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 107:
 		{
-			int argsCount170 = operation.ArgsCount;
-			int num170 = argsCount170;
-			if (num170 == 1)
+			int argsCount174 = operation.ArgsCount;
+			int num174 = argsCount174;
+			if (num174 == 1)
 			{
 				int poolId13 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId13);
-				bool returnValue130 = GetIsBabysittingMode(poolId13);
-				return GameData.Serializer.Serializer.Serialize(returnValue130, returnDataPool);
+				bool returnValue133 = GetIsBabysittingMode(poolId13);
+				return GameData.Serializer.Serializer.Serialize(returnValue133, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 108:
 		{
-			int argsCount165 = operation.ArgsCount;
-			int num165 = argsCount165;
-			if (num165 == 2)
+			int argsCount169 = operation.ArgsCount;
+			int num169 = argsCount169;
+			if (num169 == 2)
 			{
 				int poolId12 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId12);
@@ -28617,41 +29148,41 @@ public class ExtraDomain : BaseGameDataDomain
 		case 109:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue125 = GetFiveLoongDictCount(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue125, returnDataPool);
+				int returnValue128 = GetFiveLoongDictCount(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue128, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 110:
 		{
-			int argsCount158 = operation.ArgsCount;
-			int num158 = argsCount158;
-			if (num158 == 1)
+			int argsCount162 = operation.ArgsCount;
+			int num162 = argsCount162;
+			if (num162 == 1)
 			{
 				ItemKey itemKey8 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey8);
-				JiaoLoongNameRelatedData returnValue122 = GetJiaoLoongNameRelatedData(itemKey8);
-				return GameData.Serializer.Serializer.Serialize(returnValue122, returnDataPool);
+				JiaoLoongNameRelatedData returnValue125 = GetJiaoLoongNameRelatedData(itemKey8);
+				return GameData.Serializer.Serializer.Serialize(returnValue125, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 111:
 		{
-			int argsCount154 = operation.ArgsCount;
-			int num154 = argsCount154;
-			if (num154 == 1)
+			int argsCount158 = operation.ArgsCount;
+			int num158 = argsCount158;
+			if (num158 == 1)
 			{
 				int jiaoId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref jiaoId4);
-				bool returnValue117 = IsJiaoAbleToPet(jiaoId4);
-				return GameData.Serializer.Serializer.Serialize(returnValue117, returnDataPool);
+				bool returnValue120 = IsJiaoAbleToPet(jiaoId4);
+				return GameData.Serializer.Serializer.Serialize(returnValue120, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 112:
 		{
-			int argsCount150 = operation.ArgsCount;
-			int num150 = argsCount150;
-			if (num150 == 1)
+			int argsCount154 = operation.ArgsCount;
+			int num154 = argsCount154;
+			if (num154 == 1)
 			{
 				int jiaoId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref jiaoId3);
@@ -28662,9 +29193,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 113:
 		{
-			int argsCount146 = operation.ArgsCount;
-			int num146 = argsCount146;
-			if (num146 == 1)
+			int argsCount150 = operation.ArgsCount;
+			int num150 = argsCount150;
+			if (num150 == 1)
 			{
 				int poolId10 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref poolId10);
@@ -28675,14 +29206,14 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 114:
 		{
-			int argsCount141 = operation.ArgsCount;
-			int num141 = argsCount141;
-			if (num141 == 1)
+			int argsCount145 = operation.ArgsCount;
+			int num145 = argsCount145;
+			if (num145 == 1)
 			{
-				int charId35 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId35);
-				int returnValue108 = GetTaiwuAddOneWayRelationResultCode(charId35);
-				return GameData.Serializer.Serializer.Serialize(returnValue108, returnDataPool);
+				int charId36 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId36);
+				int returnValue111 = GetTaiwuAddOneWayRelationResultCode(charId36);
+				return GameData.Serializer.Serializer.Serialize(returnValue111, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -28695,8 +29226,8 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingBlockKey2);
 				int earningDataIndex2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref earningDataIndex2);
-				RecruitCharacterData returnValue107 = RequestRecruitCharacterData(context, buildingBlockKey2, earningDataIndex2);
-				return GameData.Serializer.Serializer.Serialize(returnValue107, returnDataPool);
+				RecruitCharacterData returnValue110 = RequestRecruitCharacterData(context, buildingBlockKey2, earningDataIndex2);
+				return GameData.Serializer.Serializer.Serialize(returnValue110, returnDataPool);
 			}
 			case 3:
 			{
@@ -28706,8 +29237,8 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref earningDataIndex);
 				bool autoRemove = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref autoRemove);
-				RecruitCharacterData returnValue106 = RequestRecruitCharacterData(context, buildingBlockKey, earningDataIndex, autoRemove);
-				return GameData.Serializer.Serializer.Serialize(returnValue106, returnDataPool);
+				RecruitCharacterData returnValue109 = RequestRecruitCharacterData(context, buildingBlockKey, earningDataIndex, autoRemove);
+				return GameData.Serializer.Serializer.Serialize(returnValue109, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -28721,9 +29252,9 @@ public class ExtraDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 117:
 		{
-			int argsCount135 = operation.ArgsCount;
-			int num135 = argsCount135;
-			if (num135 == 3)
+			int argsCount139 = operation.ArgsCount;
+			int num139 = argsCount139;
+			if (num139 == 3)
 			{
 				List<sbyte> huajuBooks = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref huajuBooks);
@@ -28738,14 +29269,14 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 118:
 		{
-			int argsCount131 = operation.ArgsCount;
-			int num131 = argsCount131;
-			if (num131 == 1)
+			int argsCount135 = operation.ArgsCount;
+			int num135 = argsCount135;
+			if (num135 == 1)
 			{
 				int corpseId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref corpseId);
-				List<ItemDisplayData> returnValue103 = GetItemListForRanshanTreeCorpsesLegendaryBookKeeping(corpseId);
-				return GameData.Serializer.Serializer.Serialize(returnValue103, returnDataPool);
+				List<ItemDisplayData> returnValue106 = GetItemListForRanshanTreeCorpsesLegendaryBookKeeping(corpseId);
+				return GameData.Serializer.Serializer.Serialize(returnValue106, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -28758,9 +29289,9 @@ public class ExtraDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 120:
 		{
-			int argsCount127 = operation.ArgsCount;
-			int num127 = argsCount127;
-			if (num127 == 3)
+			int argsCount131 = operation.ArgsCount;
+			int num131 = argsCount131;
+			if (num131 == 3)
 			{
 				short templateId8 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId8);
@@ -28775,22 +29306,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 121:
 		{
-			int argsCount124 = operation.ArgsCount;
-			int num124 = argsCount124;
-			if (num124 == 1)
+			int argsCount128 = operation.ArgsCount;
+			int num128 = argsCount128;
+			if (num128 == 1)
 			{
 				ItemKey book = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref book);
-				IntList returnValue94 = GetBookStrategiesExpireTime(context, book);
-				return GameData.Serializer.Serializer.Serialize(returnValue94, returnDataPool);
+				IntList returnValue97 = GetBookStrategiesExpireTime(context, book);
+				return GameData.Serializer.Serializer.Serialize(returnValue97, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 122:
 		{
-			int argsCount120 = operation.ArgsCount;
-			int num120 = argsCount120;
-			if (num120 == 1)
+			int argsCount124 = operation.ArgsCount;
+			int num124 = argsCount124;
+			if (num124 == 1)
 			{
 				NotificationSortingGroup group = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref group);
@@ -28801,37 +29332,37 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 123:
 		{
-			int argsCount116 = operation.ArgsCount;
-			int num116 = argsCount116;
-			if (num116 == 2)
+			int argsCount120 = operation.ArgsCount;
+			int num120 = argsCount120;
+			if (num120 == 2)
 			{
-				int charId28 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId28);
+				int charId29 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId29);
 				List<sbyte> cmdTypes = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref cmdTypes);
-				bool returnValue91 = SetCharTeammateCommandsManual(context, charId28, cmdTypes);
-				return GameData.Serializer.Serializer.Serialize(returnValue91, returnDataPool);
+				bool returnValue94 = SetCharTeammateCommandsManual(context, charId29, cmdTypes);
+				return GameData.Serializer.Serializer.Serialize(returnValue94, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 124:
 		{
-			int argsCount113 = operation.ArgsCount;
-			int num113 = argsCount113;
-			if (num113 == 1)
+			int argsCount117 = operation.ArgsCount;
+			int num117 = argsCount117;
+			if (num117 == 1)
 			{
-				int charId25 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId25);
-				List<sbyte> returnValue87 = GetCharAdvancedTeammateCommands(charId25);
-				return GameData.Serializer.Serializer.Serialize(returnValue87, returnDataPool);
+				int charId26 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId26);
+				List<sbyte> returnValue90 = GetCharAdvancedTeammateCommands(charId26);
+				return GameData.Serializer.Serializer.Serialize(returnValue90, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 125:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue85 = IsStoneRoomFull();
-				return GameData.Serializer.Serializer.Serialize(returnValue85, returnDataPool);
+				bool returnValue88 = IsStoneRoomFull();
+				return GameData.Serializer.Serializer.Serialize(returnValue88, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 126:
@@ -28841,8 +29372,8 @@ public class ExtraDomain : BaseGameDataDomain
 			{
 				short blockId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockId3);
-				int returnValue84 = ExtinguishFulongInFlameArea(context, blockId3);
-				return GameData.Serializer.Serializer.Serialize(returnValue84, returnDataPool);
+				int returnValue87 = ExtinguishFulongInFlameArea(context, blockId3);
+				return GameData.Serializer.Serializer.Serialize(returnValue87, returnDataPool);
 			}
 			case 2:
 			{
@@ -28850,17 +29381,17 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockId2);
 				bool isEvent = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isEvent);
-				int returnValue83 = ExtinguishFulongInFlameArea(context, blockId2, isEvent);
-				return GameData.Serializer.Serializer.Serialize(returnValue83, returnDataPool);
+				int returnValue86 = ExtinguishFulongInFlameArea(context, blockId2, isEvent);
+				return GameData.Serializer.Serializer.Serialize(returnValue86, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 127:
 		{
-			int argsCount107 = operation.ArgsCount;
-			int num107 = argsCount107;
-			if (num107 == 1)
+			int argsCount111 = operation.ArgsCount;
+			int num111 = argsCount111;
+			if (num111 == 1)
 			{
 				short blockId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockId);
@@ -28893,9 +29424,9 @@ public class ExtraDomain : BaseGameDataDomain
 			}
 		case 129:
 		{
-			int argsCount102 = operation.ArgsCount;
-			int num102 = argsCount102;
-			if (num102 == 2)
+			int argsCount106 = operation.ArgsCount;
+			int num106 = argsCount106;
+			if (num106 == 2)
 			{
 				int radius = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref radius);
@@ -28908,22 +29439,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 130:
 		{
-			int argsCount99 = operation.ArgsCount;
-			int num99 = argsCount99;
-			if (num99 == 1)
+			int argsCount103 = operation.ArgsCount;
+			int num103 = argsCount103;
+			if (num103 == 1)
 			{
-				int charId23 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId23);
-				HunterSkill_AnimalCharacterToItem(context, charId23);
+				int charId24 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId24);
+				HunterSkill_AnimalCharacterToItem(context, charId24);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 131:
 		{
-			int argsCount96 = operation.ArgsCount;
-			int num96 = argsCount96;
-			if (num96 == 1)
+			int argsCount100 = operation.ArgsCount;
+			int num100 = argsCount100;
+			if (num100 == 1)
 			{
 				TaiwuProfessionSkillSlots slots = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref slots);
@@ -28934,30 +29465,30 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 132:
 		{
-			int argsCount92 = operation.ArgsCount;
-			int num92 = argsCount92;
-			if (num92 == 1)
+			int argsCount96 = operation.ArgsCount;
+			int num96 = argsCount96;
+			if (num96 == 1)
 			{
 				bool isCombatSkill3 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isCombatSkill3);
-				string returnValue71 = GmCmd_CastTasterUltimateOnCurrentBlock(context, isCombatSkill3);
-				return GameData.Serializer.Serializer.Serialize(returnValue71, returnDataPool);
+				string returnValue74 = GmCmd_CastTasterUltimateOnCurrentBlock(context, isCombatSkill3);
+				return GameData.Serializer.Serializer.Serialize(returnValue74, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 133:
 		{
-			int argsCount88 = operation.ArgsCount;
-			int num88 = argsCount88;
-			if (num88 == 3)
+			int argsCount92 = operation.ArgsCount;
+			int num92 = argsCount92;
+			if (num92 == 3)
 			{
-				int charId20 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId20);
+				int charId21 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId21);
 				ItemKey itemKey5 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey5);
 				int amount3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref amount3);
-				EatTianJieFuLu(context, charId20, itemKey5, amount3);
+				EatTianJieFuLu(context, charId21, itemKey5, amount3);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -28965,48 +29496,48 @@ public class ExtraDomain : BaseGameDataDomain
 		case 134:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue66 = CheckAristocratUltimateSpecialCondition();
-				return GameData.Serializer.Serializer.Serialize(returnValue66, returnDataPool);
+				int returnValue69 = CheckAristocratUltimateSpecialCondition();
+				return GameData.Serializer.Serializer.Serialize(returnValue69, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 135:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue64 = CheckBeggarUltimateSpecialCondition();
-				return GameData.Serializer.Serializer.Serialize(returnValue64, returnDataPool);
+				int returnValue67 = CheckBeggarUltimateSpecialCondition();
+				return GameData.Serializer.Serializer.Serialize(returnValue67, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 136:
 		{
-			int argsCount78 = operation.ArgsCount;
-			int num78 = argsCount78;
-			if (num78 == 1)
+			int argsCount82 = operation.ArgsCount;
+			int num82 = argsCount82;
+			if (num82 == 1)
 			{
 				bool isCombatSkill2 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isCombatSkill2);
-				int returnValue61 = CheckTasterUltimateSpecialCondition(isCombatSkill2);
-				return GameData.Serializer.Serializer.Serialize(returnValue61, returnDataPool);
+				int returnValue64 = CheckTasterUltimateSpecialCondition(isCombatSkill2);
+				return GameData.Serializer.Serializer.Serialize(returnValue64, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 137:
 		{
-			int argsCount75 = operation.ArgsCount;
-			int num75 = argsCount75;
-			if (num75 == 1)
+			int argsCount79 = operation.ArgsCount;
+			int num79 = argsCount79;
+			if (num79 == 1)
 			{
-				int charId19 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId19);
-				ItemKey returnValue60 = GM_GetFriendOrFamilySendGift(context, charId19);
-				return GameData.Serializer.Serializer.Serialize(returnValue60, returnDataPool);
+				int charId20 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId20);
+				ItemKey returnValue63 = GM_GetFriendOrFamilySendGift(context, charId20);
+				return GameData.Serializer.Serializer.Serialize(returnValue63, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 138:
 		{
-			int argsCount70 = operation.ArgsCount;
-			int num70 = argsCount70;
-			if (num70 == 2)
+			int argsCount74 = operation.ArgsCount;
+			int num74 = argsCount74;
+			if (num74 == 2)
 			{
 				int templateId5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId5);
@@ -29019,9 +29550,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 139:
 		{
-			int argsCount67 = operation.ArgsCount;
-			int num67 = argsCount67;
-			if (num67 == 4)
+			int argsCount71 = operation.ArgsCount;
+			int num71 = argsCount71;
+			if (num71 == 4)
 			{
 				int gearMateId5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref gearMateId5);
@@ -29031,16 +29562,16 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type7);
 				ItemKey toolKey3 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref toolKey3);
-				int returnValue55 = GetGearMateRepairEffect(gearMateId5, artisanId5, type7, toolKey3);
-				return GameData.Serializer.Serializer.Serialize(returnValue55, returnDataPool);
+				int returnValue58 = GetGearMateRepairEffect(gearMateId5, artisanId5, type7, toolKey3);
+				return GameData.Serializer.Serializer.Serialize(returnValue58, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 140:
 		{
-			int argsCount63 = operation.ArgsCount;
-			int num63 = argsCount63;
-			if (num63 == 4)
+			int argsCount67 = operation.ArgsCount;
+			int num67 = argsCount67;
+			if (num67 == 4)
 			{
 				int gearMateId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref gearMateId4);
@@ -29057,9 +29588,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 141:
 		{
-			int argsCount60 = operation.ArgsCount;
-			int num60 = argsCount60;
-			if (num60 == 4)
+			int argsCount64 = operation.ArgsCount;
+			int num64 = argsCount64;
+			if (num64 == 4)
 			{
 				int gearMateId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref gearMateId3);
@@ -29069,34 +29600,34 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type5);
 				ItemKey toolKey = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref toolKey);
-				int returnValue49 = GetGearMateRepairRequirement(gearMateId3, artisanId3, type5, toolKey);
-				return GameData.Serializer.Serializer.Serialize(returnValue49, returnDataPool);
+				int returnValue52 = GetGearMateRepairRequirement(gearMateId3, artisanId3, type5, toolKey);
+				return GameData.Serializer.Serializer.Serialize(returnValue52, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 142:
 		{
-			int argsCount55 = operation.ArgsCount;
-			int num55 = argsCount55;
-			if (num55 == 1)
+			int argsCount59 = operation.ArgsCount;
+			int num59 = argsCount59;
+			if (num59 == 1)
 			{
 				int artisanId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref artisanId2);
-				GearMateRepairCount returnValue48 = GetGearMateAvailableRepairCount(artisanId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue48, returnDataPool);
+				GearMateRepairCount returnValue51 = GetGearMateAvailableRepairCount(artisanId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue51, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 143:
 		{
-			int argsCount51 = operation.ArgsCount;
-			int num51 = argsCount51;
-			if (num51 == 1)
+			int argsCount55 = operation.ArgsCount;
+			int num55 = argsCount55;
+			if (num55 == 1)
 			{
 				int gearMateId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref gearMateId2);
-				List<GearMateRepairRequirementDisplayData> returnValue44 = GetGearMateRepairRequirementDisplayDatas(gearMateId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue44, returnDataPool);
+				List<GearMateRepairRequirementDisplayData> returnValue47 = GetGearMateRepairRequirementDisplayDatas(gearMateId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue47, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -29105,32 +29636,32 @@ public class ExtraDomain : BaseGameDataDomain
 			{
 			case 3:
 			{
-				int charId14 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId14);
+				int charId15 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId15);
 				sbyte type4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type4);
 				ItemKey itemKey4 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey4);
-				UpgradeGearMate(context, charId14, type4, itemKey4);
+				UpgradeGearMate(context, charId15, type4, itemKey4);
 				return -1;
 			}
 			case 4:
 			{
-				int charId13 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId13);
+				int charId14 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId14);
 				sbyte type3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type3);
 				ItemKey itemKey3 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey3);
 				int count3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref count3);
-				UpgradeGearMate(context, charId13, type3, itemKey3, count3);
+				UpgradeGearMate(context, charId14, type3, itemKey3, count3);
 				return -1;
 			}
 			case 5:
 			{
-				int charId12 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId12);
+				int charId13 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId13);
 				sbyte type2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type2);
 				ItemKey itemKey2 = default(ItemKey);
@@ -29139,7 +29670,7 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref count2);
 				ItemSourceType sourceType2 = ItemSourceType.Equipment;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref sourceType2);
-				UpgradeGearMate(context, charId12, type2, itemKey2, count2, sourceType2);
+				UpgradeGearMate(context, charId13, type2, itemKey2, count2, sourceType2);
 				return -1;
 			}
 			default:
@@ -29147,74 +29678,74 @@ public class ExtraDomain : BaseGameDataDomain
 			}
 		case 145:
 		{
-			int argsCount46 = operation.ArgsCount;
-			int num46 = argsCount46;
-			if (num46 == 1)
+			int argsCount50 = operation.ArgsCount;
+			int num50 = argsCount50;
+			if (num50 == 1)
 			{
-				int charId10 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId10);
-				int returnValue41 = GetCharacterConsummateLevelProgress(charId10);
-				return GameData.Serializer.Serializer.Serialize(returnValue41, returnDataPool);
+				int charId11 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId11);
+				int returnValue44 = GetCharacterConsummateLevelProgress(charId11);
+				return GameData.Serializer.Serializer.Serialize(returnValue44, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 146:
 			if (operation.ArgsCount == 0)
 			{
-				IntPair returnValue39 = GetMartialArtistCreateGoodRandomEnemyAndBadRandomEnemyCount(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue39, returnDataPool);
+				IntPair returnValue42 = GetMartialArtistCreateGoodRandomEnemyAndBadRandomEnemyCount(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue42, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 147:
 		{
-			int argsCount38 = operation.ArgsCount;
-			int num38 = argsCount38;
-			if (num38 == 1)
+			int argsCount42 = operation.ArgsCount;
+			int num42 = argsCount42;
+			if (num42 == 1)
 			{
 				int artisanId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref artisanId);
-				GearMate returnValue36 = GetGearMateById(artisanId);
-				return GameData.Serializer.Serializer.Serialize(returnValue36, returnDataPool);
+				GearMate returnValue39 = GetGearMateById(artisanId);
+				return GameData.Serializer.Serializer.Serialize(returnValue39, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 148:
 		{
-			int argsCount35 = operation.ArgsCount;
-			int num35 = argsCount35;
-			if (num35 == 1)
+			int argsCount39 = operation.ArgsCount;
+			int num39 = argsCount39;
+			if (num39 == 1)
 			{
 				ProfessionData professionData = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionData);
-				bool returnValue32 = CheckSpecialCondition_SavageSkill_1(professionData);
-				return GameData.Serializer.Serializer.Serialize(returnValue32, returnDataPool);
+				bool returnValue35 = CheckSpecialCondition_SavageSkill_1(professionData);
+				return GameData.Serializer.Serializer.Serialize(returnValue35, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 149:
 		{
-			int argsCount33 = operation.ArgsCount;
-			int num33 = argsCount33;
-			if (num33 == 1)
+			int argsCount37 = operation.ArgsCount;
+			int num37 = argsCount37;
+			if (num37 == 1)
 			{
-				int charId6 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId6);
-				MerchantExtraGoodsData returnValue31 = GetMerchantExtraGoods(charId6);
-				return GameData.Serializer.Serializer.Serialize(returnValue31, returnDataPool);
+				int charId7 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId7);
+				MerchantExtraGoodsData returnValue34 = GetMerchantExtraGoods(charId7);
+				return GameData.Serializer.Serializer.Serialize(returnValue34, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 150:
 		{
-			int argsCount30 = operation.ArgsCount;
-			int num30 = argsCount30;
-			if (num30 == 2)
+			int argsCount34 = operation.ArgsCount;
+			int num34 = argsCount34;
+			if (num34 == 2)
 			{
-				int professionId2 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId2);
+				int professionId3 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref professionId3);
 				int extraSeniority = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref extraSeniority);
-				SetProfessionExtraSeniority(context, professionId2, extraSeniority);
+				SetProfessionExtraSeniority(context, professionId3, extraSeniority);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -29222,30 +29753,30 @@ public class ExtraDomain : BaseGameDataDomain
 		case 151:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue24 = CanShowProfessionSkillUnlocked();
-				return GameData.Serializer.Serializer.Serialize(returnValue24, returnDataPool);
+				bool returnValue27 = CanShowProfessionSkillUnlocked();
+				return GameData.Serializer.Serializer.Serialize(returnValue27, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 152:
 		{
-			int argsCount24 = operation.ArgsCount;
-			int num24 = argsCount24;
-			if (num24 == 2)
+			int argsCount28 = operation.ArgsCount;
+			int num28 = argsCount28;
+			if (num28 == 2)
 			{
 				int gearMateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref gearMateId);
 				List<short> checkCombatSkillList = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref checkCombatSkillList);
-				List<ShortPair> returnValue21 = GetGearMateBreakoutCombatSkillBanReasonList(gearMateId, checkCombatSkillList);
-				return GameData.Serializer.Serializer.Serialize(returnValue21, returnDataPool);
+				List<ShortPair> returnValue24 = GetGearMateBreakoutCombatSkillBanReasonList(gearMateId, checkCombatSkillList);
+				return GameData.Serializer.Serializer.Serialize(returnValue24, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 153:
 		{
-			int argsCount21 = operation.ArgsCount;
-			int num21 = argsCount21;
-			if (num21 == 1)
+			int argsCount25 = operation.ArgsCount;
+			int num25 = argsCount25;
+			if (num25 == 1)
 			{
 				List<short> effectBlocks = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref effectBlocks);
@@ -29256,91 +29787,91 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 154:
 		{
-			int argsCount17 = operation.ArgsCount;
-			int num17 = argsCount17;
-			if (num17 == 1)
+			int argsCount21 = operation.ArgsCount;
+			int num21 = argsCount21;
+			if (num21 == 1)
 			{
 				bool isCombatSkill = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isCombatSkill);
-				List<ItemDisplayData> returnValue14 = GetAllSkillBooksGearMateCanRead(isCombatSkill);
-				return GameData.Serializer.Serializer.Serialize(returnValue14, returnDataPool);
+				List<ItemDisplayData> returnValue17 = GetAllSkillBooksGearMateCanRead(isCombatSkill);
+				return GameData.Serializer.Serializer.Serialize(returnValue17, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 155:
 		{
-			int argsCount13 = operation.ArgsCount;
-			int num13 = argsCount13;
-			if (num13 == 1)
+			int argsCount17 = operation.ArgsCount;
+			int num17 = argsCount17;
+			if (num17 == 1)
 			{
 				int cricketId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref cricketId2);
-				bool returnValue11 = CanIdentifyCricket(cricketId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue11, returnDataPool);
+				bool returnValue14 = CanIdentifyCricket(cricketId2);
+				return GameData.Serializer.Serializer.Serialize(returnValue14, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 156:
 		{
-			int argsCount8 = operation.ArgsCount;
-			int num8 = argsCount8;
-			if (num8 == 1)
+			int argsCount12 = operation.ArgsCount;
+			int num12 = argsCount12;
+			if (num12 == 1)
 			{
 				int cricketId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref cricketId);
-				bool returnValue7 = CanUpgradeCricket(cricketId);
-				return GameData.Serializer.Serializer.Serialize(returnValue7, returnDataPool);
+				bool returnValue10 = CanUpgradeCricket(cricketId);
+				return GameData.Serializer.Serializer.Serialize(returnValue10, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 157:
 		{
-			int argsCount4 = operation.ArgsCount;
-			int num4 = argsCount4;
-			if (num4 == 1)
+			int argsCount8 = operation.ArgsCount;
+			int num8 = argsCount8;
+			if (num8 == 1)
 			{
 				ItemKey itemKey = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey);
-				bool returnValue4 = CanConvertToAnimalCharacter(itemKey);
-				return GameData.Serializer.Serializer.Serialize(returnValue4, returnDataPool);
+				bool returnValue7 = CanConvertToAnimalCharacter(itemKey);
+				return GameData.Serializer.Serializer.Serialize(returnValue7, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 158:
 		{
-			int argsCount185 = operation.ArgsCount;
-			int num185 = argsCount185;
-			if (num185 == 1)
+			int argsCount4 = operation.ArgsCount;
+			int num4 = argsCount4;
+			if (num4 == 1)
 			{
-				ItemKey key9 = default(ItemKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key9);
-				JiaoLoongDisplayData returnValue139 = GetJiaoLoongDisplayDataByItemKey(key9);
-				return GameData.Serializer.Serializer.Serialize(returnValue139, returnDataPool);
+				ItemKey key = default(ItemKey);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key);
+				JiaoLoongDisplayData returnValue3 = GetJiaoLoongDisplayDataByItemKey(key);
+				return GameData.Serializer.Serializer.Serialize(returnValue3, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 159:
 		{
-			int argsCount182 = operation.ArgsCount;
-			int num182 = argsCount182;
-			if (num182 == 3)
+			int argsCount = operation.ArgsCount;
+			int num = argsCount;
+			if (num == 3)
 			{
-				int charId38 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId38);
+				int charId = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId);
 				short skillId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillId);
-				int value6 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value6);
-				GmCmd_SetCharacterProficiencies(context, charId38, skillId, value6);
+				int value = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value);
+				GmCmd_SetCharacterProficiencies(context, charId, skillId, value);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 160:
 		{
-			int argsCount180 = operation.ArgsCount;
-			int num180 = argsCount180;
-			if (num180 == 2)
+			int argsCount184 = operation.ArgsCount;
+			int num184 = argsCount184;
+			if (num184 == 2)
 			{
 				int count5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref count5);
@@ -29353,9 +29884,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 161:
 		{
-			int argsCount179 = operation.ArgsCount;
-			int num179 = argsCount179;
-			if (num179 == 1)
+			int argsCount183 = operation.ArgsCount;
+			int num183 = argsCount183;
+			if (num183 == 1)
 			{
 				int skillTemplateId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref skillTemplateId4);
@@ -29366,9 +29897,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 162:
 		{
-			int argsCount176 = operation.ArgsCount;
-			int num176 = argsCount176;
-			if (num176 == 2)
+			int argsCount180 = operation.ArgsCount;
+			int num180 = argsCount180;
+			if (num180 == 2)
 			{
 				short roleTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref roleTemplateId);
@@ -29381,9 +29912,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 163:
 		{
-			int argsCount173 = operation.ArgsCount;
-			int num173 = argsCount173;
-			if (num173 == 2)
+			int argsCount177 = operation.ArgsCount;
+			int num177 = argsCount177;
+			if (num177 == 2)
 			{
 				int index8 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref index8);
@@ -29396,9 +29927,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 164:
 		{
-			int argsCount172 = operation.ArgsCount;
-			int num172 = argsCount172;
-			if (num172 == 2)
+			int argsCount176 = operation.ArgsCount;
+			int num176 = argsCount176;
+			if (num176 == 2)
 			{
 				ArtisanOrder order7 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref order7);
@@ -29411,22 +29942,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 165:
 		{
-			int argsCount169 = operation.ArgsCount;
-			int num169 = argsCount169;
-			if (num169 == 1)
+			int argsCount173 = operation.ArgsCount;
+			int num173 = argsCount173;
+			if (num173 == 1)
 			{
 				ArtisanOrder order6 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref order6);
-				ProductionPool returnValue129 = GetArtisanOrderProductionPool(order6);
-				return GameData.Serializer.Serializer.Serialize(returnValue129, returnDataPool);
+				ProductionPool returnValue132 = GetArtisanOrderProductionPool(order6);
+				return GameData.Serializer.Serializer.Serialize(returnValue132, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 166:
 		{
-			int argsCount166 = operation.ArgsCount;
-			int num166 = argsCount166;
-			if (num166 == 2)
+			int argsCount170 = operation.ArgsCount;
+			int num170 = argsCount170;
+			if (num170 == 2)
 			{
 				ArtisanOrder order5 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref order5);
@@ -29439,9 +29970,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 167:
 		{
-			int argsCount163 = operation.ArgsCount;
-			int num163 = argsCount163;
-			if (num163 == 2)
+			int argsCount167 = operation.ArgsCount;
+			int num167 = argsCount167;
+			if (num167 == 2)
 			{
 				ArtisanOrder order4 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref order4);
@@ -29454,22 +29985,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 168:
 		{
-			int argsCount161 = operation.ArgsCount;
-			int num161 = argsCount161;
-			if (num161 == 1)
+			int argsCount165 = operation.ArgsCount;
+			int num165 = argsCount165;
+			if (num165 == 1)
 			{
 				int artisanId12 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref artisanId12);
-				ArtisanOrder returnValue124 = GetNpcArtisanOrder(artisanId12);
-				return GameData.Serializer.Serializer.Serialize(returnValue124, returnDataPool);
+				ArtisanOrder returnValue127 = GetNpcArtisanOrder(artisanId12);
+				return GameData.Serializer.Serializer.Serialize(returnValue127, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 169:
 		{
-			int argsCount159 = operation.ArgsCount;
-			int num159 = argsCount159;
-			if (num159 == 3)
+			int argsCount163 = operation.ArgsCount;
+			int num163 = argsCount163;
+			if (num163 == 3)
 			{
 				int artisanId11 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref artisanId11);
@@ -29484,14 +30015,14 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 170:
 		{
-			int argsCount156 = operation.ArgsCount;
-			int num156 = argsCount156;
-			if (num156 == 1)
+			int argsCount160 = operation.ArgsCount;
+			int num160 = argsCount160;
+			if (num160 == 1)
 			{
 				BuildingBlockKey blockKey13 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey13);
-				ArtisanOrder returnValue121 = GetBuildingArtisanOrder(blockKey13);
-				return GameData.Serializer.Serializer.Serialize(returnValue121, returnDataPool);
+				ArtisanOrder returnValue124 = GetBuildingArtisanOrder(blockKey13);
+				return GameData.Serializer.Serializer.Serialize(returnValue124, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -29534,8 +30065,8 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref artisanId8);
 				sbyte lifeSkillType2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref lifeSkillType2);
-				ProductionPool returnValue120 = GetProductionPoolPreview(artisanId8, lifeSkillType2, -1);
-				return GameData.Serializer.Serializer.Serialize(returnValue120, returnDataPool);
+				ProductionPool returnValue123 = GetProductionPoolPreview(artisanId8, lifeSkillType2, -1);
+				return GameData.Serializer.Serializer.Serialize(returnValue123, returnDataPool);
 			}
 			case 3:
 			{
@@ -29545,17 +30076,17 @@ public class ExtraDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref lifeSkillType);
 				short itemSubType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemSubType);
-				ProductionPool returnValue119 = GetProductionPoolPreview(artisanId7, lifeSkillType, itemSubType);
-				return GameData.Serializer.Serializer.Serialize(returnValue119, returnDataPool);
+				ProductionPool returnValue122 = GetProductionPoolPreview(artisanId7, lifeSkillType, itemSubType);
+				return GameData.Serializer.Serializer.Serialize(returnValue122, returnDataPool);
 			}
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
 		case 173:
 		{
-			int argsCount153 = operation.ArgsCount;
-			int num153 = argsCount153;
-			if (num153 == 2)
+			int argsCount157 = operation.ArgsCount;
+			int num157 = argsCount157;
+			if (num157 == 2)
 			{
 				int artisanId6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref artisanId6);
@@ -29568,37 +30099,37 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 174:
 		{
-			int argsCount151 = operation.ArgsCount;
-			int num151 = argsCount151;
-			if (num151 == 2)
+			int argsCount155 = operation.ArgsCount;
+			int num155 = argsCount155;
+			if (num155 == 2)
 			{
 				ArtisanOrder order3 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref order3);
 				List<ItemDisplayData> itemList2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemList2);
-				ProductionPool returnValue114 = GetArtisanOrderMaterialPreview(order3, itemList2);
-				return GameData.Serializer.Serializer.Serialize(returnValue114, returnDataPool);
+				ProductionPool returnValue117 = GetArtisanOrderMaterialPreview(order3, itemList2);
+				return GameData.Serializer.Serializer.Serialize(returnValue117, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 175:
 		{
-			int argsCount148 = operation.ArgsCount;
-			int num148 = argsCount148;
-			if (num148 == 1)
+			int argsCount152 = operation.ArgsCount;
+			int num152 = argsCount152;
+			if (num152 == 1)
 			{
 				ArtisanOrder order2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref order2);
-				List<short> returnValue112 = GetArtisanOrderCanProduceItemSubType(order2);
-				return GameData.Serializer.Serializer.Serialize(returnValue112, returnDataPool);
+				List<short> returnValue115 = GetArtisanOrderCanProduceItemSubType(order2);
+				return GameData.Serializer.Serializer.Serialize(returnValue115, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 176:
 		{
-			int argsCount145 = operation.ArgsCount;
-			int num145 = argsCount145;
-			if (num145 == 1)
+			int argsCount149 = operation.ArgsCount;
+			int num149 = argsCount149;
+			if (num149 == 1)
 			{
 				sbyte type12 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type12);
@@ -29609,9 +30140,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 177:
 		{
-			int argsCount142 = operation.ArgsCount;
-			int num142 = argsCount142;
-			if (num142 == 2)
+			int argsCount146 = operation.ArgsCount;
+			int num146 = argsCount146;
+			if (num146 == 2)
 			{
 				short featureId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref featureId);
@@ -29625,15 +30156,15 @@ public class ExtraDomain : BaseGameDataDomain
 		case 178:
 			if (operation.ArgsCount == 0)
 			{
-				(int, int, int) returnValue105 = GmCmd_GetBuildingAreaEffectProgresses(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue105, returnDataPool);
+				(int, int, int) returnValue108 = GmCmd_GetBuildingAreaEffectProgresses(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue108, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 179:
 		{
-			int argsCount138 = operation.ArgsCount;
-			int num138 = argsCount138;
-			if (num138 == 3)
+			int argsCount142 = operation.ArgsCount;
+			int num142 = argsCount142;
+			if (num142 == 3)
 			{
 				int animal = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref animal);
@@ -29655,30 +30186,30 @@ public class ExtraDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 181:
 		{
-			int argsCount134 = operation.ArgsCount;
-			int num134 = argsCount134;
-			if (num134 == 1)
+			int argsCount138 = operation.ArgsCount;
+			int num138 = argsCount138;
+			if (num138 == 1)
 			{
-				int charId33 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId33);
-				GmCmd_RecordKilledByLongYufuCharacter(context, charId33);
+				int charId34 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId34);
+				GmCmd_RecordKilledByLongYufuCharacter(context, charId34);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 182:
 		{
-			int argsCount132 = operation.ArgsCount;
-			int num132 = argsCount132;
-			if (num132 == 3)
+			int argsCount136 = operation.ArgsCount;
+			int num136 = argsCount136;
+			if (num136 == 3)
 			{
-				int charId32 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId32);
+				int charId33 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId33);
 				int type11 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type11);
-				int value5 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value5);
-				GmCmd_VitalInfectionInOut(context, charId32, type11, value5);
+				int value6 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value6);
+				GmCmd_VitalInfectionInOut(context, charId33, type11, value6);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -29686,15 +30217,15 @@ public class ExtraDomain : BaseGameDataDomain
 		case 183:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue101 = CheckSpecialCondition_HunterSkill2(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue101, returnDataPool);
+				bool returnValue104 = CheckSpecialCondition_HunterSkill2(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue104, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 184:
 			if (operation.ArgsCount == 0)
 			{
-				List<CharacterDisplayData> returnValue99 = GetThreeVitalsCharDataList(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue99, returnDataPool);
+				List<CharacterDisplayData> returnValue102 = GetThreeVitalsCharDataList(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue102, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 185:
@@ -29707,32 +30238,32 @@ public class ExtraDomain : BaseGameDataDomain
 		case 186:
 			if (operation.ArgsCount == 0)
 			{
-				List<CharacterDisplayDataForInfect> returnValue96 = GetThreeVitalsTargetCharDataList();
-				return GameData.Serializer.Serializer.Serialize(returnValue96, returnDataPool);
+				List<CharacterDisplayDataForInfect> returnValue99 = GetThreeVitalsTargetCharDataList();
+				return GameData.Serializer.Serializer.Serialize(returnValue99, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 187:
 		{
-			int argsCount123 = operation.ArgsCount;
-			int num123 = argsCount123;
-			if (num123 == 3)
+			int argsCount127 = operation.ArgsCount;
+			int num127 = argsCount127;
+			if (num127 == 3)
 			{
-				int charId29 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId29);
+				int charId30 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId30);
 				SectStoryThreeVitalsCharacterType type10 = SectStoryThreeVitalsCharacterType.Heaven;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type10);
-				int value4 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value4);
-				TransferInfectionBetweenVitalAndCharacter(context, charId29, type10, value4);
+				int value5 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value5);
+				TransferInfectionBetweenVitalAndCharacter(context, charId30, type10, value5);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 188:
 		{
-			int argsCount121 = operation.ArgsCount;
-			int num121 = argsCount121;
-			if (num121 == 2)
+			int argsCount125 = operation.ArgsCount;
+			int num125 = argsCount125;
+			if (num125 == 2)
 			{
 				SectStoryThreeVitalsCharacterType type9 = SectStoryThreeVitalsCharacterType.Heaven;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type9);
@@ -29745,43 +30276,43 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 189:
 		{
-			int argsCount118 = operation.ArgsCount;
-			int num118 = argsCount118;
-			if (num118 == 1)
+			int argsCount122 = operation.ArgsCount;
+			int num122 = argsCount122;
+			if (num122 == 1)
 			{
 				BuildingBlockKey blockKey12 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey12);
-				ArtisanOrder returnValue92 = GetBuildingArtisanOrderAfterUpdate(context, blockKey12);
-				return GameData.Serializer.Serializer.Serialize(returnValue92, returnDataPool);
+				ArtisanOrder returnValue95 = GetBuildingArtisanOrderAfterUpdate(context, blockKey12);
+				return GameData.Serializer.Serializer.Serialize(returnValue95, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 190:
 			if (operation.ArgsCount == 0)
 			{
-				List<CharacterDisplayData> returnValue90 = GetCanSelectThreeVitalsDisplayData(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue90, returnDataPool);
+				List<CharacterDisplayData> returnValue93 = GetCanSelectThreeVitalsDisplayData(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue93, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 191:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue88 = AreVitalsDemon();
-				return GameData.Serializer.Serializer.Serialize(returnValue88, returnDataPool);
+				bool returnValue91 = AreVitalsDemon();
+				return GameData.Serializer.Serializer.Serialize(returnValue91, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 192:
 			if (operation.ArgsCount == 0)
 			{
-				List<CharacterDisplayData> returnValue86 = GetOppositeThreeVitalsCharDataList(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue86, returnDataPool);
+				List<CharacterDisplayData> returnValue89 = GetOppositeThreeVitalsCharDataList(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue89, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 193:
 		{
-			int argsCount111 = operation.ArgsCount;
-			int num111 = argsCount111;
-			if (num111 == 2)
+			int argsCount115 = operation.ArgsCount;
+			int num115 = argsCount115;
+			if (num115 == 2)
 			{
 				SectStoryThreeVitalsCharacterType type8 = SectStoryThreeVitalsCharacterType.Heaven;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type8);
@@ -29794,22 +30325,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 194:
 		{
-			int argsCount109 = operation.ArgsCount;
-			int num109 = argsCount109;
-			if (num109 == 1)
+			int argsCount113 = operation.ArgsCount;
+			int num113 = argsCount113;
+			if (num113 == 1)
 			{
 				BuildingBlockKey blockKey11 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey11);
-				int returnValue81 = GetResourceBlockProducingCoreCooldown(blockKey11);
-				return GameData.Serializer.Serializer.Serialize(returnValue81, returnDataPool);
+				int returnValue84 = GetResourceBlockProducingCoreCooldown(blockKey11);
+				return GameData.Serializer.Serializer.Serialize(returnValue84, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 195:
 		{
-			int argsCount106 = operation.ArgsCount;
-			int num106 = argsCount106;
-			if (num106 == 4)
+			int argsCount110 = operation.ArgsCount;
+			int num110 = argsCount110;
+			if (num110 == 4)
 			{
 				BuildingBlockKey blockKey10 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey10);
@@ -29826,29 +30357,29 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 196:
 		{
-			int argsCount104 = operation.ArgsCount;
-			int num104 = argsCount104;
-			if (num104 == 2)
+			int argsCount108 = operation.ArgsCount;
+			int num108 = argsCount108;
+			if (num108 == 2)
 			{
 				BuildingBlockKey blockKey9 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey9);
-				bool value3 = false;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value3);
-				FeastSetAutoRefill(context, blockKey9, value3);
+				bool value4 = false;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value4);
+				FeastSetAutoRefill(context, blockKey9, value4);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 197:
 		{
-			int argsCount101 = operation.ArgsCount;
-			int num101 = argsCount101;
-			if (num101 == 1)
+			int argsCount105 = operation.ArgsCount;
+			int num105 = argsCount105;
+			if (num105 == 1)
 			{
 				BuildingBlockKey blockKey8 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey8);
-				GameData.Domains.Building.Feast returnValue78 = GetFeast(blockKey8);
-				return GameData.Serializer.Serializer.Serialize(returnValue78, returnDataPool);
+				GameData.Domains.Building.Feast returnValue81 = GetFeast(blockKey8);
+				return GameData.Serializer.Serializer.Serialize(returnValue81, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -29880,9 +30411,9 @@ public class ExtraDomain : BaseGameDataDomain
 			}
 		case 199:
 		{
-			int argsCount100 = operation.ArgsCount;
-			int num100 = argsCount100;
-			if (num100 == 2)
+			int argsCount104 = operation.ArgsCount;
+			int num104 = argsCount104;
+			if (num104 == 2)
 			{
 				BuildingBlockKey blockKey5 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey5);
@@ -29895,9 +30426,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 200:
 		{
-			int argsCount97 = operation.ArgsCount;
-			int num97 = argsCount97;
-			if (num97 == 2)
+			int argsCount101 = operation.ArgsCount;
+			int num101 = argsCount101;
+			if (num101 == 2)
 			{
 				ArtisanOrder order = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref order);
@@ -29910,22 +30441,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 201:
 		{
-			int argsCount95 = operation.ArgsCount;
-			int num95 = argsCount95;
-			if (num95 == 1)
+			int argsCount99 = operation.ArgsCount;
+			int num99 = argsCount99;
+			if (num99 == 1)
 			{
 				BuildingBlockKey blockKey4 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey4);
-				bool returnValue74 = IsFeastException(context, blockKey4);
-				return GameData.Serializer.Serializer.Serialize(returnValue74, returnDataPool);
+				bool returnValue77 = IsFeastException(context, blockKey4);
+				return GameData.Serializer.Serializer.Serialize(returnValue77, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 202:
 		{
-			int argsCount93 = operation.ArgsCount;
-			int num93 = argsCount93;
-			if (num93 == 2)
+			int argsCount97 = operation.ArgsCount;
+			int num97 = argsCount97;
+			if (num97 == 2)
 			{
 				ItemKey itemKey6 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey6);
@@ -29938,9 +30469,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 203:
 		{
-			int argsCount90 = operation.ArgsCount;
-			int num90 = argsCount90;
-			if (num90 == 1)
+			int argsCount94 = operation.ArgsCount;
+			int num94 = argsCount94;
+			if (num94 == 1)
 			{
 				BuildingBlockKey blockKey3 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey3);
@@ -29951,9 +30482,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 204:
 		{
-			int argsCount87 = operation.ArgsCount;
-			int num87 = argsCount87;
-			if (num87 == 2)
+			int argsCount91 = operation.ArgsCount;
+			int num91 = argsCount91;
+			if (num91 == 2)
 			{
 				BuildingBlockKey blockKey2 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey2);
@@ -29967,15 +30498,15 @@ public class ExtraDomain : BaseGameDataDomain
 		case 205:
 			if (operation.ArgsCount == 0)
 			{
-				int returnValue67 = GetSectExtraLegacyBuildingStates();
-				return GameData.Serializer.Serializer.Serialize(returnValue67, returnDataPool);
+				int returnValue70 = GetSectExtraLegacyBuildingStates();
+				return GameData.Serializer.Serializer.Serialize(returnValue70, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 206:
 		{
-			int argsCount84 = operation.ArgsCount;
-			int num84 = argsCount84;
-			if (num84 == 2)
+			int argsCount88 = operation.ArgsCount;
+			int num88 = argsCount88;
+			if (num88 == 2)
 			{
 				SectStoryJieqingGame currJieqingGameState = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref currJieqingGameState);
@@ -29988,9 +30519,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 207:
 		{
-			int argsCount82 = operation.ArgsCount;
-			int num82 = argsCount82;
-			if (num82 == 1)
+			int argsCount86 = operation.ArgsCount;
+			int num86 = argsCount86;
+			if (num86 == 1)
 			{
 				short legacyTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref legacyTemplateId);
@@ -30001,14 +30532,14 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 208:
 		{
-			int argsCount79 = operation.ArgsCount;
-			int num79 = argsCount79;
-			if (num79 == 1)
+			int argsCount83 = operation.ArgsCount;
+			int num83 = argsCount83;
+			if (num83 == 1)
 			{
 				sbyte orgTemplateId7 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId7);
-				bool returnValue62 = IsSectBuiltExtraLegacyBuilding(orgTemplateId7);
-				return GameData.Serializer.Serializer.Serialize(returnValue62, returnDataPool);
+				bool returnValue65 = IsSectBuiltExtraLegacyBuilding(orgTemplateId7);
+				return GameData.Serializer.Serializer.Serialize(returnValue65, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
@@ -30021,9 +30552,9 @@ public class ExtraDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 210:
 		{
-			int argsCount74 = operation.ArgsCount;
-			int num74 = argsCount74;
-			if (num74 == 1)
+			int argsCount78 = operation.ArgsCount;
+			int num78 = argsCount78;
+			if (num78 == 1)
 			{
 				sbyte orgTemplateId6 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId6);
@@ -30034,9 +30565,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 211:
 		{
-			int argsCount71 = operation.ArgsCount;
-			int num71 = argsCount71;
-			if (num71 == 1)
+			int argsCount75 = operation.ArgsCount;
+			int num75 = argsCount75;
+			if (num75 == 1)
 			{
 				BuildingBlockKey blockKey = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey);
@@ -30047,44 +30578,44 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 212:
 		{
-			int argsCount68 = operation.ArgsCount;
-			int num68 = argsCount68;
-			if (num68 == 1)
+			int argsCount72 = operation.ArgsCount;
+			int num72 = argsCount72;
+			if (num72 == 1)
 			{
-				int charId18 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId18);
-				int returnValue57 = GetCharacterExtraLegacyPointWorth(charId18);
-				return GameData.Serializer.Serializer.Serialize(returnValue57, returnDataPool);
+				int charId19 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId19);
+				int returnValue60 = GetCharacterExtraLegacyPointWorth(charId19);
+				return GameData.Serializer.Serializer.Serialize(returnValue60, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 213:
 		{
-			int argsCount66 = operation.ArgsCount;
-			int num66 = argsCount66;
-			if (num66 == 2)
+			int argsCount70 = operation.ArgsCount;
+			int num70 = argsCount70;
+			if (num70 == 2)
 			{
 				Location location4 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location4);
 				List<short> orgTemplateIds = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateIds);
-				int returnValue54 = GetExtraLegacyPointCharacterCountOnBlock(location4, orgTemplateIds);
-				return GameData.Serializer.Serializer.Serialize(returnValue54, returnDataPool);
+				int returnValue57 = GetExtraLegacyPointCharacterCountOnBlock(location4, orgTemplateIds);
+				return GameData.Serializer.Serializer.Serialize(returnValue57, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 214:
 			if (operation.ArgsCount == 0)
 			{
-				(int, int) returnValue51 = GetSectExtraLegacyBuildingCounts();
-				return GameData.Serializer.Serializer.Serialize(returnValue51, returnDataPool);
+				(int, int) returnValue54 = GetSectExtraLegacyBuildingCounts();
+				return GameData.Serializer.Serializer.Serialize(returnValue54, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 215:
 		{
-			int argsCount62 = operation.ArgsCount;
-			int num62 = argsCount62;
-			if (num62 == 1)
+			int argsCount66 = operation.ArgsCount;
+			int num66 = argsCount66;
+			if (num66 == 1)
 			{
 				List<sbyte> customButtons = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref customButtons);
@@ -30095,9 +30626,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 216:
 		{
-			int argsCount59 = operation.ArgsCount;
-			int num59 = argsCount59;
-			if (num59 == 1)
+			int argsCount63 = operation.ArgsCount;
+			int num63 = argsCount63;
+			if (num63 == 1)
 			{
 				List<short> templateIds2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateIds2);
@@ -30108,9 +30639,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 217:
 		{
-			int argsCount56 = operation.ArgsCount;
-			int num56 = argsCount56;
-			if (num56 == 1)
+			int argsCount60 = operation.ArgsCount;
+			int num60 = argsCount60;
+			if (num60 == 1)
 			{
 				List<short> templateIds = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateIds);
@@ -30121,35 +30652,35 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 218:
 		{
-			int argsCount53 = operation.ArgsCount;
-			int num53 = argsCount53;
-			if (num53 == 1)
+			int argsCount57 = operation.ArgsCount;
+			int num57 = argsCount57;
+			if (num57 == 1)
 			{
 				int areaId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref areaId);
-				int returnValue46 = GetAreaCharacterJieQingSignAmount(areaId);
-				return GameData.Serializer.Serializer.Serialize(returnValue46, returnDataPool);
+				int returnValue49 = GetAreaCharacterJieQingSignAmount(areaId);
+				return GameData.Serializer.Serializer.Serialize(returnValue49, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 219:
 		{
-			int argsCount50 = operation.ArgsCount;
-			int num50 = argsCount50;
-			if (num50 == 1)
+			int argsCount54 = operation.ArgsCount;
+			int num54 = argsCount54;
+			if (num54 == 1)
 			{
 				Location location3 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location3);
-				bool returnValue43 = CheckLocationHasBeggerSkill1(location3);
-				return GameData.Serializer.Serializer.Serialize(returnValue43, returnDataPool);
+				bool returnValue46 = CheckLocationHasBeggerSkill1(location3);
+				return GameData.Serializer.Serializer.Serialize(returnValue46, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 220:
 		{
-			int argsCount48 = operation.ArgsCount;
-			int num48 = argsCount48;
-			if (num48 == 1)
+			int argsCount52 = operation.ArgsCount;
+			int num52 = argsCount52;
+			if (num52 == 1)
 			{
 				bool drainNeili = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref drainNeili);
@@ -30160,22 +30691,22 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 221:
 		{
-			int argsCount45 = operation.ArgsCount;
-			int num45 = argsCount45;
-			if (num45 == 1)
+			int argsCount49 = operation.ArgsCount;
+			int num49 = argsCount49;
+			if (num49 == 1)
 			{
-				int charId9 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId9);
-				SetJixiTarget(charId9);
+				int charId10 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId10);
+				SetJixiTarget(charId10);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 222:
 		{
-			int argsCount42 = operation.ArgsCount;
-			int num42 = argsCount42;
-			if (num42 == 2)
+			int argsCount46 = operation.ArgsCount;
+			int num46 = argsCount46;
+			if (num46 == 2)
 			{
 				int amount2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref amount2);
@@ -30188,9 +30719,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 223:
 		{
-			int argsCount40 = operation.ArgsCount;
-			int num40 = argsCount40;
-			if (num40 == 2)
+			int argsCount44 = operation.ArgsCount;
+			int num44 = argsCount44;
+			if (num44 == 2)
 			{
 				int amount = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref amount);
@@ -30203,9 +30734,9 @@ public class ExtraDomain : BaseGameDataDomain
 		}
 		case 224:
 		{
-			int argsCount37 = operation.ArgsCount;
-			int num37 = argsCount37;
-			if (num37 == 1)
+			int argsCount41 = operation.ArgsCount;
+			int num41 = argsCount41;
+			if (num41 == 1)
 			{
 				sbyte neiliType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref neiliType);
@@ -30217,8 +30748,8 @@ public class ExtraDomain : BaseGameDataDomain
 		case 225:
 			if (operation.ArgsCount == 0)
 			{
-				JixiSpecialInteractDisplayData returnValue33 = GetJixiSpecialInteractDisplayData();
-				return GameData.Serializer.Serializer.Serialize(returnValue33, returnDataPool);
+				JixiSpecialInteractDisplayData returnValue36 = GetJixiSpecialInteractDisplayData();
+				return GameData.Serializer.Serializer.Serialize(returnValue36, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 226:
@@ -30237,42 +30768,42 @@ public class ExtraDomain : BaseGameDataDomain
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 228:
 		{
-			int argsCount31 = operation.ArgsCount;
-			int num31 = argsCount31;
-			if (num31 == 1)
+			int argsCount35 = operation.ArgsCount;
+			int num35 = argsCount35;
+			if (num35 == 1)
 			{
-				int charId4 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId4);
-				int returnValue28 = GetCharacterExtraLegacyPointWorthCalculated(charId4);
-				return GameData.Serializer.Serializer.Serialize(returnValue28, returnDataPool);
+				int charId5 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId5);
+				int returnValue31 = GetCharacterExtraLegacyPointWorthCalculated(charId5);
+				return GameData.Serializer.Serializer.Serialize(returnValue31, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 229:
 			if (operation.ArgsCount == 0)
 			{
-				SectRanshanThreeCorpsesData returnValue26 = GetSectRanshanThreeCorpsesData();
-				return GameData.Serializer.Serializer.Serialize(returnValue26, returnDataPool);
+				SectRanshanThreeCorpsesData returnValue29 = GetSectRanshanThreeCorpsesData();
+				return GameData.Serializer.Serializer.Serialize(returnValue29, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 230:
 		{
-			int argsCount27 = operation.ArgsCount;
-			int num27 = argsCount27;
-			if (num27 == 1)
+			int argsCount31 = operation.ArgsCount;
+			int num31 = argsCount31;
+			if (num31 == 1)
 			{
-				int charId3 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId3);
-				SetTaiwuTransformFiveElementsTarget(charId3);
+				int charId4 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId4);
+				SetTaiwuTransformFiveElementsTarget(charId4);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 231:
 		{
-			int argsCount25 = operation.ArgsCount;
-			int num25 = argsCount25;
-			if (num25 == 1)
+			int argsCount29 = operation.ArgsCount;
+			int num29 = argsCount29;
+			if (num29 == 1)
 			{
 				sbyte fiveElementsType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref fiveElementsType);
@@ -30284,126 +30815,140 @@ public class ExtraDomain : BaseGameDataDomain
 		case 232:
 			if (operation.ArgsCount == 0)
 			{
-				SectYuanshanThreeVitalsData returnValue20 = GetSectYuanshanThreeVitalsData(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue20, returnDataPool);
+				SectYuanshanThreeVitalsData returnValue23 = GetSectYuanshanThreeVitalsData(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue23, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 233:
 		{
-			int argsCount20 = operation.ArgsCount;
-			int num20 = argsCount20;
-			if (num20 == 1)
+			int argsCount24 = operation.ArgsCount;
+			int num24 = argsCount24;
+			if (num24 == 1)
 			{
 				BuildingBlockKey targetBuildingBlock = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetBuildingBlock);
-				List<BuildingRecruitData> returnValue18 = RequestAllRecruitCharacterData(context, targetBuildingBlock);
-				return GameData.Serializer.Serializer.Serialize(returnValue18, returnDataPool);
+				List<BuildingRecruitData> returnValue21 = RequestAllRecruitCharacterData(context, targetBuildingBlock);
+				return GameData.Serializer.Serializer.Serialize(returnValue21, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 234:
 		{
-			int argsCount18 = operation.ArgsCount;
-			int num18 = argsCount18;
-			if (num18 == 1)
+			int argsCount22 = operation.ArgsCount;
+			int num22 = argsCount22;
+			if (num22 == 1)
 			{
 				sbyte type = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type);
-				TipLegendaryBookDisplayData returnValue15 = GetTipLegendaryBookDisplayData(type);
-				return GameData.Serializer.Serializer.Serialize(returnValue15, returnDataPool);
+				TipLegendaryBookDisplayData returnValue18 = GetTipLegendaryBookDisplayData(type);
+				return GameData.Serializer.Serializer.Serialize(returnValue18, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 235:
 		{
-			int argsCount15 = operation.ArgsCount;
-			int num15 = argsCount15;
-			if (num15 == 1)
+			int argsCount19 = operation.ArgsCount;
+			int num19 = argsCount19;
+			if (num19 == 1)
 			{
 				sbyte orgTemplateId5 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId5);
-				SectJieqingWorthDisplayData returnValue12 = GetSectMembersWorthExtraLegacyPoint(orgTemplateId5);
-				return GameData.Serializer.Serializer.Serialize(returnValue12, returnDataPool);
+				SectJieqingWorthDisplayData returnValue15 = GetSectMembersWorthExtraLegacyPoint(orgTemplateId5);
+				return GameData.Serializer.Serializer.Serialize(returnValue15, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 236:
 		{
-			int argsCount12 = operation.ArgsCount;
-			int num12 = argsCount12;
-			if (num12 == 1)
+			int argsCount16 = operation.ArgsCount;
+			int num16 = argsCount16;
+			if (num16 == 1)
 			{
-				int charId2 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId2);
-				int returnValue10 = GetCharacterExtraLegacyPointWorthForMapBlock(charId2);
-				return GameData.Serializer.Serializer.Serialize(returnValue10, returnDataPool);
+				int charId3 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId3);
+				int returnValue13 = GetCharacterExtraLegacyPointWorthForMapBlock(charId3);
+				return GameData.Serializer.Serializer.Serialize(returnValue13, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 237:
 		{
-			int argsCount9 = operation.ArgsCount;
-			int num9 = argsCount9;
-			if (num9 == 3)
+			int argsCount13 = operation.ArgsCount;
+			int num13 = argsCount13;
+			if (num13 == 3)
 			{
 				sbyte orgTemplateId4 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId4);
-				string key4 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key4);
-				int value2 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value2);
-				GmCmd_SetSectMainStoryArgBoxInt(context, orgTemplateId4, key4, value2);
+				string key5 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key5);
+				int value3 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value3);
+				GmCmd_SetSectMainStoryArgBoxInt(context, orgTemplateId4, key5, value3);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 238:
 		{
-			int argsCount6 = operation.ArgsCount;
-			int num6 = argsCount6;
-			if (num6 == 2)
+			int argsCount10 = operation.ArgsCount;
+			int num10 = argsCount10;
+			if (num10 == 2)
 			{
 				sbyte orgTemplateId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId3);
-				string key3 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key3);
-				bool returnValue6 = GmCmd_GetSectMainStoryArgBoxBool(context, orgTemplateId3, key3);
-				return GameData.Serializer.Serializer.Serialize(returnValue6, returnDataPool);
+				string key4 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key4);
+				bool returnValue9 = GmCmd_GetSectMainStoryArgBoxBool(context, orgTemplateId3, key4);
+				return GameData.Serializer.Serializer.Serialize(returnValue9, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 239:
 		{
-			int argsCount3 = operation.ArgsCount;
-			int num3 = argsCount3;
-			if (num3 == 2)
+			int argsCount7 = operation.ArgsCount;
+			int num7 = argsCount7;
+			if (num7 == 2)
 			{
 				sbyte orgTemplateId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId2);
-				string key2 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key2);
-				int returnValue3 = GmCmd_GetSectMainStoryArgBoxInt(context, orgTemplateId2, key2);
-				return GameData.Serializer.Serializer.Serialize(returnValue3, returnDataPool);
+				string key3 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key3);
+				int returnValue6 = GmCmd_GetSectMainStoryArgBoxInt(context, orgTemplateId2, key3);
+				return GameData.Serializer.Serializer.Serialize(returnValue6, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 240:
 		{
-			int argsCount = operation.ArgsCount;
-			int num = argsCount;
-			if (num == 3)
+			int argsCount5 = operation.ArgsCount;
+			int num5 = argsCount5;
+			if (num5 == 3)
 			{
 				sbyte orgTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId);
-				string key = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key);
-				bool value = false;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value);
-				GmCmd_SetSectMainStoryArgBoxBool(context, orgTemplateId, key, value);
+				string key2 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key2);
+				bool value2 = false;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value2);
+				GmCmd_SetSectMainStoryArgBoxBool(context, orgTemplateId, key2, value2);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
+		case 241:
+			if (operation.ArgsCount == 0)
+			{
+				bool returnValue2 = HasXiangshuSkill0AffectTarget();
+				return GameData.Serializer.Serializer.Serialize(returnValue2, returnDataPool);
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		case 242:
+			if (operation.ArgsCount == 0)
+			{
+				bool returnValue = HasXiangshuSkill1AffectTarget();
+				return GameData.Serializer.Serializer.Serialize(returnValue, returnDataPool);
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		default:
 			throw new Exception($"Unsupported methodId {operation.MethodId}");
 		}

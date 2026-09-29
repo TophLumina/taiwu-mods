@@ -7,41 +7,20 @@ namespace Config;
 [Serializable]
 public class TravelSkeleton : ConfigData<TravelSkeletonItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 无代步
-		/// </summary>
 		public const short NoCarrier = 55;
 
-		/// <summary>
-		/// 囚车
-		/// </summary>
 		public const short KidnappedCarrier = 56;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 无代步
-		/// </summary>
 		public static TravelSkeletonItem NoCarrier => Instance[(short)55];
 
-		/// <summary>
-		/// 囚车
-		/// </summary>
 		public static TravelSkeletonItem KidnappedCarrier => Instance[(short)56];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TravelSkeleton Instance = new TravelSkeleton();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -107,7 +86,7 @@ public class TravelSkeleton : ConfigData<TravelSkeletonItem, short>
 		_dataArray.Add(new TravelSkeletonItem(42, "animal_jaguar", "animal_jaguar_idle", null, null, "animal_jaguar", "animal_jaguar", anyCarrier: true, "animal_jaguar", "animal_jaguar_idle", "default", "animal_jaguar/animal_jaguar_SkeletonData", "se_carrier_jaguar", 0.5f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(43, "animal_lion", "animal_lion_idle", null, null, "animal_lion", "animal_lion", anyCarrier: true, "animal_lion", "animal_lion_idle", "default", "animal_lion/animal_lion_SkeletonData", "se_carrier_tiger", 0.5f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(44, "animal_tiger", "animal_tiger_idle", null, null, "animal_tiger", "animal_tiger", anyCarrier: true, "animal_tiger", "animal_tiger_idle", "default", "animal_tiger/animal_tiger_SkeletonData", "se_carrier_tiger", 0.5f, 0f, -260f));
-		_dataArray.Add(new TravelSkeletonItem(45, "Loong_jiao", "Loong_jiao_idle", null, null, "Loong_jiao", "Loong_jiao", anyCarrier: true, "Loong_jiao", "Loong_jiao_idle", "jiao", "Loong_jiao/Loong_jiao_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
+		_dataArray.Add(new TravelSkeletonItem(45, "Loong", "Loong_idle", null, null, "Loong", "Loong_idle", anyCarrier: true, "Loong", "Loong_idle", "jiao", "Loong/Loong_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(46, "dragon_qiuniu", "dragon_qiuniu_idle", null, null, "dragon_qiuniu", "dragon_qiuniu", anyCarrier: true, "dragon_qiuniu", "dragon_qiuniu_idle", "default", "dragon_qiuniu/dragon_qiuniu_SkeletonData", "se_carrier_dragon_qiuniu", 0.45f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(47, "dragon_yazi", "dragon_yazi_idle", null, null, "dragon_yazi", "dragon_yazi", anyCarrier: true, "dragon_yazi", "dragon_yazi_idle", "default", "dragon_yazi/dragon_yazi_SkeletonData", "se_carrier_dragon_yazi", 0.45f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(48, "dragon_chaofeng", "dragon_chaofeng_idle", null, null, "dragon_chaofeng", "dragon_chaofeng", anyCarrier: true, "dragon_chaofeng", "dragon_chaofeng_idle", "default", "dragon_chaofeng/dragon_chaofeng_SkeletonData", "se_carrier_dragon_chaofeng", 0.45f, 0f, -260f));
@@ -115,16 +94,26 @@ public class TravelSkeleton : ConfigData<TravelSkeletonItem, short>
 		_dataArray.Add(new TravelSkeletonItem(50, "dragon_suanni", "dragon_suanni_idle", null, null, "dragon_suanni", "dragon_suanni", anyCarrier: true, "dragon_suanni", "dragon_suanni_idle", "default", "dragon_suanni/dragon_suanni_SkeletonData", "se_carrier_dragon_suanni", 0.45f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(51, "dragon_baxia", "dragon_baxia_idle", null, null, "dragon_baxia", "dragon_baxia", anyCarrier: true, "dragon_baxia", "dragon_baxia_idle", "default", "dragon_baxia/dragon_baxia_SkeletonData", "se_carrier_dragon_baxia", 0.45f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(52, "dragon_bian", "dragon_bian_idle", null, null, "dragon_bian", "dragon_bian", anyCarrier: true, "dragon_bian", "dragon_bian_idle", "default", "dragon_bian/dragon_bian_SkeletonData", "se_carrier_dragon_bian", 0.45f, 0f, -260f));
-		_dataArray.Add(new TravelSkeletonItem(53, "Loong_fuxi", "Loong_fuxi_idle", null, null, "Loong_fuxi", "Loong_fuxi", anyCarrier: true, "Loong_fuxi", "Loong_fuxi_idle", "fuxi", "Loong_fuxi/Loong_fuxi_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
+		_dataArray.Add(new TravelSkeletonItem(53, "Loong", "Loong_idle", null, null, "Loong", "Loong_idle", anyCarrier: true, "Loong", "Loong_idle", "fuxi", "Loong/Loong_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(54, "dragon_chiwen", "dragon_chiwen_idle", null, null, "dragon_chiwen", "dragon_chiwen", anyCarrier: true, "dragon_chiwen", "dragon_chiwen_idle", "default", "dragon_chiwen/dragon_chiwen_SkeletonData", "se_carrier_dragon_chiwen", 0.45f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(55, "animal_human", "animal_human_idle", null, null, "animal_human", "animal_human", anyCarrier: false, null, null, "default", null, "se_carrier_foot", 0.5f, 0f, -260f));
 		_dataArray.Add(new TravelSkeletonItem(56, "coach_prison_slave", "coach_prison_slave_idle", "coach_prison_master", "coach_prison_master_idle", "coach_prison", "coach_prison", anyCarrier: true, "coach_prison", "coach_prison_idle", "default", "coach_prison/coach_prison_SkeletonData", "se_carrier_car_prison", 0.5f, 0f, -260f));
+		_dataArray.Add(new TravelSkeletonItem(57, "Loong", "Loong", null, null, "Loong", "Loong", anyCarrier: true, "Loong", "Loong", "white", "Loong/Loong_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
+		_dataArray.Add(new TravelSkeletonItem(58, "Loong", "Loong", null, null, "Loong", "Loong", anyCarrier: true, "Loong", "Loong", "black", "Loong/Loong_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
+		_dataArray.Add(new TravelSkeletonItem(59, "Loong", "Loong", null, null, "Loong", "Loong", anyCarrier: true, "Loong", "Loong", "blue", "Loong/Loong_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
+	}
+
+	private void CreateItems1()
+	{
+		_dataArray.Add(new TravelSkeletonItem(60, "Loong", "Loong", null, null, "Loong", "Loong", anyCarrier: true, "Loong", "Loong", "red", "Loong/Loong_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
+		_dataArray.Add(new TravelSkeletonItem(61, "Loong", "Loong", null, null, "Loong", "Loong", anyCarrier: true, "Loong", "Loong", "yellow", "Loong/Loong_SkeletonData", "se_carrier_Loong", 0.45f, 0f, -260f));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<TravelSkeletonItem>(57);
+		_dataArray = new List<TravelSkeletonItem>(62);
 		CreateItems0();
+		CreateItems1();
 	}
 }

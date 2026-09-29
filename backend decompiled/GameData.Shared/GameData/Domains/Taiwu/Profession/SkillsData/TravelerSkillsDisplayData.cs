@@ -6,33 +6,18 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 旅人相关数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class TravelerSkillsDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 所有仙府数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<TravelerPalaceData> Palaces;
 
-	/// <summary>
-	/// 所有仙府数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterLocationDisplayData> DisplayData;
 
-	/// <summary>
-	/// 太吾当前健康
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrHealth;
 
-	/// <summary>
-	/// 太吾剩余健康
-	/// </summary>
 	[SerializableGameDataField]
 	public short LeftMaxHealth;
 

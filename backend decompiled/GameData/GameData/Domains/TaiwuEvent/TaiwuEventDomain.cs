@@ -157,6 +157,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 	[DomainData(DomainDataType.SingleValue, true, false, false, false)]
 	private EventArgBox _globalArgBox;
 
+	[Obsolete("This field is obsolete and will be removed in future.")]
 	[DomainData(DomainDataType.SingleValue, true, false, false, false)]
 	private MonthlyEventActionsManager _monthlyEventActionManager;
 
@@ -244,8 +245,6 @@ public class TaiwuEventDomain : BaseGameDataDomain
 	public CharacterSet InteractedCharSet = default(CharacterSet);
 
 	private static readonly DataInfluence[][] CacheInfluences = new DataInfluence[30][];
-
-	private Queue<uint> _pendingLoadingOperationIds;
 
 	public bool ShowInteractCheckAnimation { get; set; }
 
@@ -1028,22 +1027,18 @@ public class TaiwuEventDomain : BaseGameDataDomain
 	}
 
 	[DomainMethod]
-	public void UpdateShowingEventTaiwuCharacterDisplayData()
+	public void UpdateShowingEventCharacterDisplayData()
 	{
 		TaiwuEventDisplayData displayData = GetDisplayingEventData();
-		int taiwuId = DomainManager.Taiwu.GetTaiwuCharId();
-		if (displayData.MainCharacter.CharacterId == taiwuId)
+		if (displayData.MainCharacter != null)
 		{
-			CharacterDisplayData taiwuCharacterDisplayData = DomainManager.Character.GetCharacterDisplayData(taiwuId);
-			displayData.MainCharacter = taiwuCharacterDisplayData;
-			SetDisplayingEventData(displayData, MainThreadDataContext);
+			displayData.MainCharacter = DomainManager.Character.GetCharacterDisplayData(displayData.MainCharacter.CharacterId);
 		}
-		else if (displayData.TargetCharacter.CharacterId == taiwuId)
+		if (displayData.TargetCharacter != null)
 		{
-			CharacterDisplayData taiwuCharacterDisplayData2 = DomainManager.Character.GetCharacterDisplayData(taiwuId);
-			displayData.TargetCharacter = taiwuCharacterDisplayData2;
-			SetDisplayingEventData(displayData, MainThreadDataContext);
+			displayData.TargetCharacter = DomainManager.Character.GetCharacterDisplayData(displayData.TargetCharacter.CharacterId);
 		}
+		SetDisplayingEventData(displayData, MainThreadDataContext);
 	}
 
 	[DomainMethod]
@@ -2980,12 +2975,6 @@ public class TaiwuEventDomain : BaseGameDataDomain
 	}
 
 	[DomainMethod]
-	public void GmCmd_SaveMonthlyActionManager(DataContext context)
-	{
-		SetMonthlyEventActionManager(_monthlyEventActionManager, context);
-	}
-
-	[DomainMethod]
 	public void GmCmd_TaiwuCrossArchive()
 	{
 		DomainManager.TaiwuEvent.OnEvent_TaiwuCrossArchive();
@@ -3392,7 +3381,15 @@ public class TaiwuEventDomain : BaseGameDataDomain
 	{
 		if (_languageFilePattern.TryGetValue(package, out var pattern))
 		{
-			package.InitLanguage(string.Format(pattern, LocalStringManager.CurLanguageType.ToString()));
+			LocalStringManager.LanguageType languageType = LocalStringManager.CurLanguageType;
+			string languageFilePath = string.Format(pattern, languageType.ToString());
+			if (!File.Exists(languageFilePath) && languageType != LocalStringManager.LanguageType.CN)
+			{
+				string fallbackPath = string.Format(pattern, LocalStringManager.LanguageType.CN.ToString());
+				Logger.AppendWarning($"Event language pack for [{languageType}] not found, fallback to [CN].\nmissing: {languageFilePath}\nfallback: {fallbackPath}");
+				languageFilePath = fallbackPath;
+			}
+			package.InitLanguage(languageFilePath);
 		}
 	}
 
@@ -3741,54 +3738,6 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		DomainManager.TaiwuEvent.SaveGlobalEventArgumentBox();
 	}
 
-	public void CollectUnreleasedCalledCharacters(HashSet<int> calledCharacters)
-	{
-		_monthlyEventActionManager.CollectUnreleasedCalledCharacters(calledCharacters);
-	}
-
-	[DomainMethod]
-	public (int, int) GetMonthlyActionStateAndTime(MonthlyActionKey key)
-	{
-		MonthlyActionBase action = _monthlyEventActionManager.GetMonthlyAction(key);
-		if (action == null)
-		{
-			return (0, 0);
-		}
-		return (action.State, action.Month);
-	}
-
-	public MonthlyActionBase GetMonthlyAction(MonthlyActionKey key)
-	{
-		return _monthlyEventActionManager.GetMonthlyAction(key);
-	}
-
-	public MonthlyActionKey AddTempDynamicAction<T>(DataContext context, T action) where T : MonthlyActionBase, IDynamicAction
-	{
-		MonthlyActionKey key = _monthlyEventActionManager.AddTempDynamicAction(action);
-		action.TriggerAction();
-		SetMonthlyEventActionManager(_monthlyEventActionManager, context);
-		return key;
-	}
-
-	public MonthlyActionKey AddWrappedConfigAction(DataContext context, short templateId, short assignedAreaId = -1)
-	{
-		MonthlyActionKey key = _monthlyEventActionManager.AddWrappedConfigAction(templateId, assignedAreaId);
-		SetMonthlyEventActionManager(_monthlyEventActionManager, context);
-		return key;
-	}
-
-	public void RemoveTempDynamicAction(DataContext context, MonthlyActionKey key)
-	{
-		_monthlyEventActionManager.RemoveTempDynamicAction(key);
-		SetMonthlyEventActionManager(_monthlyEventActionManager, context);
-	}
-
-	public void ClearTaiwuBindingMonthlyActions(DataContext context)
-	{
-		_monthlyEventActionManager.ClearTaiwuBindingMonthlyActions();
-		SetMonthlyEventActionManager(_monthlyEventActionManager, context);
-	}
-
 	public bool IsOneShotEventHandled(int oneShotEventType)
 	{
 		return _handledOneShotEvents.ContainsKey(oneShotEventType);
@@ -3933,7 +3882,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		}
 	}
 
-	public void OnEvent_InteractPrisoner(int arg0, int arg1)
+	public void OnEvent_InteractPrisoner(int arg0, int arg1, sbyte arg2)
 	{
 		if (!CheckListenedEventBlockTrigger())
 		{
@@ -3941,6 +3890,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			trigger.ArgBox.Clear();
 			trigger.ArgBox.Set(EventTriggerParameter.DefValue.CharacterId, arg0);
 			trigger.ArgBox.Set(EventTriggerParameter.DefValue.InteractPrisonerType, arg1);
+			trigger.ArgBox.Set(EventTriggerParameter.DefValue.TreasuryOrPrisonCurrentPage, arg2);
 			trigger.OnEvent(trigger.ArgBox);
 			TriggerHandled();
 		}
@@ -4697,6 +4647,52 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		}
 	}
 
+	public void OnEvent_XiangshuTowerRetrieveDemonHeart()
+	{
+		if (!CheckListenedEventBlockTrigger())
+		{
+			EventTrigger trigger = _eventManager.GetTrigger(71);
+			trigger.ArgBox.Clear();
+			trigger.OnEvent(trigger.ArgBox);
+			TriggerHandled();
+		}
+	}
+
+	public void OnEvent_XiangshuTowerFinalBattleTiandi()
+	{
+		if (!CheckListenedEventBlockTrigger())
+		{
+			EventTrigger trigger = _eventManager.GetTrigger(72);
+			trigger.ArgBox.Clear();
+			trigger.OnEvent(trigger.ArgBox);
+			TriggerHandled();
+		}
+	}
+
+	public void OnEvent_ChickenPolymorph(sbyte arg0, sbyte arg1)
+	{
+		if (!CheckListenedEventBlockTrigger())
+		{
+			EventTrigger trigger = _eventManager.GetTrigger(73);
+			trigger.ArgBox.Clear();
+			trigger.ArgBox.Set(EventTriggerParameter.DefValue.PersonalityType, arg0);
+			trigger.ArgBox.Set(EventTriggerParameter.DefValue.Gender, arg1);
+			trigger.OnEvent(trigger.ArgBox);
+			TriggerHandled();
+		}
+	}
+
+	public void OnEvent_AdvanceMonthExecute()
+	{
+		if (!CheckListenedEventBlockTrigger())
+		{
+			EventTrigger trigger = _eventManager.GetTrigger(74);
+			trigger.ArgBox.Clear();
+			trigger.OnEvent(trigger.ArgBox);
+			TriggerHandled();
+		}
+	}
+
 	[DomainMethod]
 	public void OnCharacterClicked(DataContext context, int charId)
 	{
@@ -4911,9 +4907,21 @@ public class TaiwuEventDomain : BaseGameDataDomain
 	}
 
 	[DomainMethod]
-	public void InteractPrisoner(int characterId, int interactPrisonerType)
+	public void OnClickedXiangshuRetrieveDemonHeartBtn()
 	{
-		DomainManager.TaiwuEvent.OnEvent_InteractPrisoner(characterId, interactPrisonerType);
+		DomainManager.TaiwuEvent.OnEvent_XiangshuTowerRetrieveDemonHeart();
+	}
+
+	[DomainMethod]
+	public void OnClickedXiangshuFinalBattleTiandiBtn()
+	{
+		DomainManager.TaiwuEvent.OnEvent_XiangshuTowerFinalBattleTiandi();
+	}
+
+	[DomainMethod]
+	public void InteractPrisoner(int characterId, int interactPrisonerType, sbyte prisonType)
+	{
+		DomainManager.TaiwuEvent.OnEvent_InteractPrisoner(characterId, interactPrisonerType, prisonType);
 	}
 
 	[DomainMethod]
@@ -5076,11 +5084,13 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(0, DataStates, CacheInfluences, context);
 	}
 
+	[Obsolete("DomainData _monthlyEventActionManager is no longer in use.")]
 	private MonthlyEventActionsManager GetMonthlyEventActionManager()
 	{
 		return _monthlyEventActionManager;
 	}
 
+	[Obsolete("DomainData _monthlyEventActionManager is no longer in use.")]
 	private void SetMonthlyEventActionManager(MonthlyEventActionsManager value, DataContext context)
 	{
 		_monthlyEventActionManager = value;
@@ -5431,11 +5441,9 @@ public class TaiwuEventDomain : BaseGameDataDomain
 
 	public override void OnSaveWorld(ArchiveFileBase archive)
 	{
-		archive.WriteSingleValueUnmanaged((ushort)12);
+		archive.WriteSingleValueUnmanaged((ushort)11);
 		archive.WriteDomainDataMeta(0);
 		archive.WriteSingleValueCustom(_globalArgBox);
-		archive.WriteDomainDataMeta(1);
-		archive.WriteSingleValueCustom(_monthlyEventActionManager);
 		archive.WriteDomainDataMeta(7);
 		archive.WriteSingleValueUnmanaged(_secretVillageOnFire);
 		archive.WriteDomainDataMeta(8);
@@ -5820,123 +5828,110 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		switch (operation.MethodId)
 		{
 		case 0:
-		{
-			int argsCount41 = operation.ArgsCount;
-			int num41 = argsCount41;
-			if (num41 == 1)
-			{
-				MonthlyActionKey key12 = default(MonthlyActionKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key12);
-				(int, int) returnValue10 = GetMonthlyActionStateAndTime(key12);
-				return GameData.Serializer.Serializer.Serialize(returnValue10, returnDataPool);
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 1:
 			if (operation.ArgsCount == 0)
 			{
 				InitConchShipEvents();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		case 1:
+		{
+			int argsCount3 = operation.ArgsCount;
+			int num3 = argsCount3;
+			if (num3 == 2)
+			{
+				string key = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key);
+				bool value = false;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value);
+				TriggerListener(key, value);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
 		case 2:
 		{
-			int argsCount49 = operation.ArgsCount;
-			int num49 = argsCount49;
-			if (num49 == 2)
+			int argsCount36 = operation.ArgsCount;
+			int num36 = argsCount36;
+			if (num36 == 3)
 			{
-				string key15 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key15);
-				bool value9 = false;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value9);
-				TriggerListener(key15, value9);
+				string key10 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key10);
+				ItemKey itemKey = default(ItemKey);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey);
+				bool callComplete2 = false;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref callComplete2);
+				SetItemSelectResult(key10, itemKey, callComplete2);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 3:
 		{
-			int argsCount67 = operation.ArgsCount;
-			int num67 = argsCount67;
-			if (num67 == 3)
+			int argsCount63 = operation.ArgsCount;
+			int num63 = argsCount63;
+			if (num63 == 3)
 			{
-				string key21 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key21);
-				ItemKey itemKey = default(ItemKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemKey);
+				string key19 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key19);
+				int charId9 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId9);
 				bool callComplete3 = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref callComplete3);
-				SetItemSelectResult(key21, itemKey, callComplete3);
+				SetCharacterSelectResult(key19, charId9, callComplete3);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 4:
 		{
-			int argsCount15 = operation.ArgsCount;
-			int num15 = argsCount15;
-			if (num15 == 3)
+			int argsCount13 = operation.ArgsCount;
+			int num13 = argsCount13;
+			if (num13 == 2)
 			{
 				string key2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key2);
-				int charId3 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId3);
-				bool callComplete2 = false;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref callComplete2);
-				SetCharacterSelectResult(key2, charId3, callComplete2);
+				int secretId = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref secretId);
+				SetSecretInformationSelectResult(key2, secretId);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 5:
 		{
-			int argsCount61 = operation.ArgsCount;
-			int num61 = argsCount61;
-			if (num61 == 2)
+			int argsCount55 = operation.ArgsCount;
+			int num55 = argsCount55;
+			if (num55 == 2)
 			{
-				string key18 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key18);
-				int secretId = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref secretId);
-				SetSecretInformationSelectResult(key18, secretId);
+				string key16 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key16);
+				NormalInformation normalInformation = default(NormalInformation);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref normalInformation);
+				SetNormalInformationSelectResult(key16, normalInformation);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 6:
-		{
-			int argsCount23 = operation.ArgsCount;
-			int num23 = argsCount23;
-			if (num23 == 2)
-			{
-				string key5 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key5);
-				NormalInformation normalInformation = default(NormalInformation);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref normalInformation);
-				SetNormalInformationSelectResult(key5, normalInformation);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 7:
 			if (operation.ArgsCount == 0)
 			{
 				StartHandleEventDuringAdvance();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 8:
+		case 7:
 			if (operation.ArgsCount == 0)
 			{
-				List<TaiwuEventSummaryDisplayData> returnValue11 = GetTriggeredEventSummaryDisplayData();
-				return GameData.Serializer.Serializer.Serialize(returnValue11, returnDataPool);
+				List<TaiwuEventSummaryDisplayData> returnValue = GetTriggeredEventSummaryDisplayData();
+				return GameData.Serializer.Serializer.Serialize(returnValue, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 9:
+		case 8:
 		{
-			int argsCount36 = operation.ArgsCount;
-			int num36 = argsCount36;
-			if (num36 == 1)
+			int argsCount47 = operation.ArgsCount;
+			int num47 = argsCount47;
+			if (num47 == 1)
 			{
 				string eventGuid3 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref eventGuid3);
@@ -5945,7 +5940,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 10:
+		case 9:
 			switch (operation.ArgsCount)
 			{
 			case 2:
@@ -5971,51 +5966,44 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
-		case 11:
+		case 10:
 			if (operation.ArgsCount == 0)
 			{
-				List<TaiwuEventDisplayData> returnValue3 = GetEventDisplayData();
-				return GameData.Serializer.Serializer.Serialize(returnValue3, returnDataPool);
+				List<TaiwuEventDisplayData> returnValue5 = GetEventDisplayData();
+				return GameData.Serializer.Serializer.Serialize(returnValue5, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 12:
-			if (operation.ArgsCount == 0)
+		case 11:
+		{
+			int argsCount8 = operation.ArgsCount;
+			int num8 = argsCount8;
+			if (num8 == 1)
 			{
-				GmCmd_SaveMonthlyActionManager(context);
+				int charId2 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId2);
+				OnCharacterClicked(context, charId2);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 12:
+		{
+			int argsCount67 = operation.ArgsCount;
+			int num67 = argsCount67;
+			if (num67 == 1)
+			{
+				int charId11 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId11);
+				OnLetTeammateLeaveGroup(context, charId11);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
 		case 13:
 		{
-			int argsCount60 = operation.ArgsCount;
-			int num60 = argsCount60;
-			if (num60 == 1)
-			{
-				int charId10 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId10);
-				OnCharacterClicked(context, charId10);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 14:
-		{
-			int argsCount44 = operation.ArgsCount;
-			int num44 = argsCount44;
-			if (num44 == 1)
-			{
-				int charId6 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId6);
-				OnLetTeammateLeaveGroup(context, charId6);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 15:
-		{
-			int argsCount31 = operation.ArgsCount;
-			int num31 = argsCount31;
-			if (num31 == 1)
+			int argsCount54 = operation.ArgsCount;
+			int num54 = argsCount54;
+			if (num54 == 1)
 			{
 				int caravanId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref caravanId);
@@ -6024,51 +6012,51 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
+		case 14:
+		{
+			int argsCount39 = operation.ArgsCount;
+			int num39 = argsCount39;
+			if (num39 == 1)
+			{
+				int charId5 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId5);
+				OnInteractKidnappedCharacter(charId5);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 15:
+		{
+			int argsCount25 = operation.ArgsCount;
+			int num25 = argsCount25;
+			if (num25 == 1)
+			{
+				short buildingTemplateId2 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId2);
+				OnSectBuildingClicked(buildingTemplateId2);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
 		case 16:
-		{
-			int argsCount18 = operation.ArgsCount;
-			int num18 = argsCount18;
-			if (num18 == 1)
-			{
-				int charId4 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId4);
-				OnInteractKidnappedCharacter(charId4);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 17:
-		{
-			int argsCount9 = operation.ArgsCount;
-			int num9 = argsCount9;
-			if (num9 == 1)
-			{
-				short buildingTemplateId = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId);
-				OnSectBuildingClicked(buildingTemplateId);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 18:
 			if (operation.ArgsCount == 0)
 			{
 				OnRecordEnterGame();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 19:
+		case 17:
 			if (operation.ArgsCount == 0)
 			{
 				OnNewGameMonth(context);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 20:
+		case 18:
 		{
-			int argsCount55 = operation.ArgsCount;
-			int num55 = argsCount55;
-			if (num55 == 1)
+			int argsCount69 = operation.ArgsCount;
+			int num69 = argsCount69;
+			if (num69 == 1)
 			{
 				short templateId8 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId8);
@@ -6077,11 +6065,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 21:
+		case 19:
 		{
-			int argsCount47 = operation.ArgsCount;
-			int num47 = argsCount47;
-			if (num47 == 1)
+			int argsCount60 = operation.ArgsCount;
+			int num60 = argsCount60;
+			if (num60 == 1)
 			{
 				bool maskVisible = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref maskVisible);
@@ -6090,26 +6078,26 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 22:
+		case 20:
 		{
-			int argsCount37 = operation.ArgsCount;
-			int num37 = argsCount37;
-			if (num37 == 2)
+			int argsCount50 = operation.ArgsCount;
+			int num50 = argsCount50;
+			if (num50 == 2)
 			{
 				BuildingBlockKey blockKey2 = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey2);
-				short templateId5 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId5);
-				OnMakingSystemOpened(blockKey2, templateId5);
+				short templateId6 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId6);
+				OnMakingSystemOpened(blockKey2, templateId6);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 23:
+		case 21:
 		{
-			int argsCount28 = operation.ArgsCount;
-			int num28 = argsCount28;
-			if (num28 == 3)
+			int argsCount43 = operation.ArgsCount;
+			int num43 = argsCount43;
+			if (num43 == 3)
 			{
 				BuildingBlockKey blockKey = default(BuildingBlockKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref blockKey);
@@ -6122,11 +6110,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 24:
+		case 22:
 		{
-			int argsCount20 = operation.ArgsCount;
-			int num20 = argsCount20;
-			if (num20 == 1)
+			int argsCount31 = operation.ArgsCount;
+			int num31 = argsCount31;
+			if (num31 == 1)
 			{
 				short templateId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId3);
@@ -6135,11 +6123,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 25:
+		case 23:
 		{
-			int argsCount12 = operation.ArgsCount;
-			int num12 = argsCount12;
-			if (num12 == 1)
+			int argsCount24 = operation.ArgsCount;
+			int num24 = argsCount24;
+			if (num24 == 1)
 			{
 				int animalId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref animalId);
@@ -6148,11 +6136,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 26:
+		case 24:
 		{
-			int argsCount6 = operation.ArgsCount;
-			int num6 = argsCount6;
-			if (num6 == 1)
+			int argsCount18 = operation.ArgsCount;
+			int num18 = argsCount18;
+			if (num18 == 1)
 			{
 				bool result = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref result);
@@ -6161,11 +6149,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 27:
+		case 25:
 		{
-			int argsCount71 = operation.ArgsCount;
-			int num71 = argsCount71;
-			if (num71 == 1)
+			int argsCount11 = operation.ArgsCount;
+			int num11 = argsCount11;
+			if (num11 == 1)
 			{
 				string eventDataDirectory = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref eventDataDirectory);
@@ -6174,11 +6162,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 28:
+		case 26:
 		{
-			int argsCount68 = operation.ArgsCount;
-			int num68 = argsCount68;
-			if (num68 == 1)
+			int argsCount4 = operation.ArgsCount;
+			int num4 = argsCount4;
+			if (num4 == 1)
 			{
 				int tombId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref tombId);
@@ -6187,11 +6175,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 29:
+		case 27:
 		{
-			int argsCount64 = operation.ArgsCount;
-			int num64 = argsCount64;
-			if (num64 == 1)
+			int argsCount70 = operation.ArgsCount;
+			int num70 = argsCount70;
+			if (num70 == 1)
 			{
 				short lifeSkillId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref lifeSkillId);
@@ -6200,11 +6188,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 30:
+		case 28:
 		{
-			int argsCount57 = operation.ArgsCount;
-			int num57 = argsCount57;
-			if (num57 == 1)
+			int argsCount64 = operation.ArgsCount;
+			int num64 = argsCount64;
+			if (num64 == 1)
 			{
 				short combatSkillId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref combatSkillId);
@@ -6213,59 +6201,59 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 31:
+		case 29:
 		{
-			int argsCount52 = operation.ArgsCount;
-			int num52 = argsCount52;
-			if (num52 == 3)
+			int argsCount58 = operation.ArgsCount;
+			int num58 = argsCount58;
+			if (num58 == 3)
 			{
-				int charId9 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId9);
+				int charId8 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId8);
 				sbyte concessionCount = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref concessionCount);
 				sbyte inducementCount = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref inducementCount);
-				OnLifeSkillCombatForceSilent(charId9, concessionCount, inducementCount);
+				OnLifeSkillCombatForceSilent(charId8, concessionCount, inducementCount);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 32:
+		case 30:
 			if (operation.ArgsCount == 0)
 			{
 				TryMoveWhenMoveDisable();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 33:
+		case 31:
 			if (operation.ArgsCount == 0)
 			{
 				TryMoveToInvalidLocationInTutorial();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 34:
+		case 32:
 		{
-			int argsCount33 = operation.ArgsCount;
-			int num33 = argsCount33;
-			if (num33 == 3)
+			int argsCount40 = operation.ArgsCount;
+			int num40 = argsCount40;
+			if (num40 == 3)
 			{
 				string actionName3 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName3);
-				string key10 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key10);
+				string key11 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key11);
 				CharacterSet characterSet = default(CharacterSet);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterSet);
-				SetCharacterSetSelectResult(actionName3, key10, characterSet);
+				SetCharacterSetSelectResult(actionName3, key11, characterSet);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 35:
+		case 33:
 		{
-			int argsCount27 = operation.ArgsCount;
-			int num27 = argsCount27;
-			if (num27 == 1)
+			int argsCount34 = operation.ArgsCount;
+			int num34 = argsCount34;
+			if (num34 == 1)
 			{
 				short characterTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterTemplateId);
@@ -6274,7 +6262,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 36:
+		case 34:
 			switch (operation.ArgsCount)
 			{
 			case 1:
@@ -6307,11 +6295,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			default:
 				throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 			}
-		case 37:
+		case 35:
 		{
-			int argsCount22 = operation.ArgsCount;
-			int num22 = argsCount22;
-			if (num22 == 1)
+			int argsCount27 = operation.ArgsCount;
+			int num27 = argsCount27;
+			if (num27 == 1)
 			{
 				bool flag = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref flag);
@@ -6320,11 +6308,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 38:
+		case 36:
 		{
-			int argsCount16 = operation.ArgsCount;
-			int num16 = argsCount16;
-			if (num16 == 1)
+			int argsCount22 = operation.ArgsCount;
+			int num22 = argsCount22;
+			if (num22 == 1)
 			{
 				sbyte resourceType = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref resourceType);
@@ -6333,18 +6321,18 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 39:
+		case 37:
 			if (operation.ArgsCount == 0)
 			{
 				EventLogData returnValue4 = GetEventLogData();
 				return GameData.Serializer.Serializer.Serialize(returnValue4, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 40:
+		case 38:
 		{
-			int argsCount7 = operation.ArgsCount;
-			int num7 = argsCount7;
-			if (num7 == 8)
+			int argsCount14 = operation.ArgsCount;
+			int num14 = argsCount14;
+			if (num14 == 8)
 			{
 				IntPair charIds = default(IntPair);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charIds);
@@ -6367,15 +6355,35 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
+		case 39:
+		{
+			int argsCount10 = operation.ArgsCount;
+			int num10 = argsCount10;
+			if (num10 == 1)
+			{
+				int charId3 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId3);
+				TaiwuVillagerExpelled(charId3);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 40:
+			if (operation.ArgsCount == 0)
+			{
+				GmCmd_TaiwuCrossArchive();
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 41:
 		{
-			int argsCount4 = operation.ArgsCount;
-			int num4 = argsCount4;
-			if (num4 == 1)
+			int argsCount2 = operation.ArgsCount;
+			int num2 = argsCount2;
+			if (num2 == 1)
 			{
-				int charId2 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId2);
-				TaiwuVillagerExpelled(charId2);
+				sbyte type = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type);
+				TaiwuCrossArchiveFindMemory(type);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -6383,52 +6391,32 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		case 42:
 			if (operation.ArgsCount == 0)
 			{
-				GmCmd_TaiwuCrossArchive();
+				UserLoadDreamBackArchive();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 43:
 		{
-			int argsCount69 = operation.ArgsCount;
-			int num69 = argsCount69;
-			if (num69 == 1)
+			int argsCount66 = operation.ArgsCount;
+			int num66 = argsCount66;
+			if (num66 == 3)
 			{
-				sbyte type2 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type2);
-				TaiwuCrossArchiveFindMemory(type2);
+				int charId10 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId10);
+				sbyte operationType = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operationType);
+				ItemDisplayData itemData = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemData);
+				OperateInventoryItem(charId10, operationType, itemData);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 44:
-			if (operation.ArgsCount == 0)
-			{
-				UserLoadDreamBackArchive();
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 45:
 		{
-			int argsCount63 = operation.ArgsCount;
-			int num63 = argsCount63;
-			if (num63 == 3)
-			{
-				int charId11 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId11);
-				sbyte operationType = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref operationType);
-				ItemDisplayData itemData = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref itemData);
-				OperateInventoryItem(charId11, operationType, itemData);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 46:
-		{
-			int argsCount58 = operation.ArgsCount;
-			int num58 = argsCount58;
-			if (num58 == 2)
+			int argsCount61 = operation.ArgsCount;
+			int num61 = argsCount61;
+			if (num61 == 2)
 			{
 				string key17 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key17);
@@ -6439,11 +6427,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 47:
+		case 45:
 		{
-			int argsCount54 = operation.ArgsCount;
-			int num54 = argsCount54;
-			if (num54 == 3)
+			int argsCount57 = operation.ArgsCount;
+			int num57 = argsCount57;
+			if (num57 == 3)
 			{
 				short templateId7 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId7);
@@ -6456,117 +6444,141 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 48:
+		case 46:
 		{
-			int argsCount50 = operation.ArgsCount;
-			int num50 = argsCount50;
-			if (num50 == 3)
+			int argsCount52 = operation.ArgsCount;
+			int num52 = argsCount52;
+			if (num52 == 3)
 			{
 				string actionName7 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName7);
-				string key16 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key16);
+				string key15 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key15);
 				ItemKey value10 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value10);
-				SetListenerEventActionISerializableArg(actionName7, key16, value10);
+				SetListenerEventActionISerializableArg(actionName7, key15, value10);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 47:
+		{
+			int argsCount49 = operation.ArgsCount;
+			int num49 = argsCount49;
+			if (num49 == 3)
+			{
+				string actionName6 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName6);
+				string key14 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key14);
+				int value9 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value9);
+				SetListenerEventActionIntArg(actionName6, key14, value9);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 48:
+		{
+			int argsCount45 = operation.ArgsCount;
+			int num45 = argsCount45;
+			if (num45 == 3)
+			{
+				string actionName5 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName5);
+				string key13 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key13);
+				bool value8 = false;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value8);
+				SetListenerEventActionBoolArg(actionName5, key13, value8);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 49:
 		{
-			int argsCount46 = operation.ArgsCount;
-			int num46 = argsCount46;
-			if (num46 == 3)
+			int argsCount42 = operation.ArgsCount;
+			int num42 = argsCount42;
+			if (num42 == 3)
 			{
-				string actionName6 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName6);
-				string key14 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key14);
-				int value8 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value8);
-				SetListenerEventActionIntArg(actionName6, key14, value8);
+				string actionName4 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName4);
+				string key12 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key12);
+				string value7 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value7);
+				SetListenerEventActionStringArg(actionName4, key12, value7);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 50:
 		{
-			int argsCount42 = operation.ArgsCount;
-			int num42 = argsCount42;
-			if (num42 == 3)
+			int argsCount37 = operation.ArgsCount;
+			int num37 = argsCount37;
+			if (num37 == 1)
 			{
-				string actionName5 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName5);
-				string key13 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key13);
-				bool value7 = false;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value7);
-				SetListenerEventActionBoolArg(actionName5, key13, value7);
-				return -1;
+				int targetCharId = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetCharId);
+				List<short> returnValue8 = GetValidInteractionEventOptions(targetCharId);
+				return GameData.Serializer.Serializer.Serialize(returnValue8, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 51:
 		{
-			int argsCount39 = operation.ArgsCount;
-			int num39 = argsCount39;
-			if (num39 == 3)
+			int argsCount33 = operation.ArgsCount;
+			int num33 = argsCount33;
+			if (num33 == 3)
 			{
-				string actionName4 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName4);
-				string key11 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key11);
-				string value6 = null;
+				string actionName2 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName2);
+				string key9 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key9);
+				IntList value6 = default(IntList);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value6);
-				SetListenerEventActionStringArg(actionName4, key11, value6);
+				SetListenerEventActionIntListArg(actionName2, key9, value6);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 52:
 		{
-			int argsCount34 = operation.ArgsCount;
-			int num34 = argsCount34;
-			if (num34 == 1)
+			int argsCount29 = operation.ArgsCount;
+			int num29 = argsCount29;
+			if (num29 == 3)
 			{
-				int targetCharId = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetCharId);
-				List<short> returnValue7 = GetValidInteractionEventOptions(targetCharId);
-				return GameData.Serializer.Serializer.Serialize(returnValue7, returnDataPool);
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 53:
-		{
-			int argsCount30 = operation.ArgsCount;
-			int num30 = argsCount30;
-			if (num30 == 3)
-			{
-				string actionName2 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName2);
-				string key9 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key9);
-				IntList value5 = default(IntList);
+				string actionName = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName);
+				string key8 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key8);
+				ItemKey value5 = default(ItemKey);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value5);
-				SetListenerEventActionIntListArg(actionName2, key9, value5);
+				SetListenerEventActionItemKeyArg(actionName, key8, value5);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
+		case 53:
+			if (operation.ArgsCount == 0)
+			{
+				TriggerShixiangDrumEasterEgg();
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 54:
 		{
-			int argsCount25 = operation.ArgsCount;
-			int num25 = argsCount25;
-			if (num25 == 3)
+			int argsCount23 = operation.ArgsCount;
+			int num23 = argsCount23;
+			if (num23 == 3)
 			{
-				string actionName = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref actionName);
-				string key7 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key7);
-				ItemKey value4 = default(ItemKey);
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value4);
-				SetListenerEventActionItemKeyArg(actionName, key7, value4);
+				int characterId = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterId);
+				int interactPrisonerType = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref interactPrisonerType);
+				sbyte prisonType = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref prisonType);
+				InteractPrisoner(characterId, interactPrisonerType, prisonType);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
@@ -6574,67 +6586,45 @@ public class TaiwuEventDomain : BaseGameDataDomain
 		case 55:
 			if (operation.ArgsCount == 0)
 			{
-				TriggerShixiangDrumEasterEgg();
+				OnClickedSendPrisonBtn();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		case 56:
 		{
-			int argsCount21 = operation.ArgsCount;
-			int num21 = argsCount21;
-			if (num21 == 2)
+			int argsCount19 = operation.ArgsCount;
+			int num19 = argsCount19;
+			if (num19 == 1)
 			{
-				int characterId = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref characterId);
-				int interactPrisonerType = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref interactPrisonerType);
-				InteractPrisoner(characterId, interactPrisonerType);
+				short buildingTemplateId = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId);
+				OnClickedPrisonBtn(buildingTemplateId);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 57:
-			if (operation.ArgsCount == 0)
-			{
-				OnClickedSendPrisonBtn();
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 58:
 		{
-			int argsCount13 = operation.ArgsCount;
-			int num13 = argsCount13;
-			if (num13 == 1)
+			int argsCount16 = operation.ArgsCount;
+			int num16 = argsCount16;
+			if (num16 == 3)
 			{
-				short buildingTemplateId2 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref buildingTemplateId2);
-				OnClickedPrisonBtn(buildingTemplateId2);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 59:
-		{
-			int argsCount11 = operation.ArgsCount;
-			int num11 = argsCount11;
-			if (num11 == 3)
-			{
-				string key = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key);
+				string key3 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key3);
 				List<int> charIds2 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charIds2);
 				bool callComplete = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref callComplete);
-				SetCharacterMultSelectResult(key, charIds2, callComplete);
+				SetCharacterMultSelectResult(key3, charIds2, callComplete);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 60:
+		case 58:
 		{
-			int argsCount8 = operation.ArgsCount;
-			int num8 = argsCount8;
-			if (num8 == 3)
+			int argsCount12 = operation.ArgsCount;
+			int num12 = argsCount12;
+			if (num12 == 3)
 			{
 				bool ok = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref ok);
@@ -6647,18 +6637,18 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 61:
+		case 59:
 			if (operation.ArgsCount == 0)
 			{
-				List<int> returnValue2 = GetImplementedFunctionIds(context);
-				return GameData.Serializer.Serializer.Serialize(returnValue2, returnDataPool);
+				List<int> returnValue3 = GetImplementedFunctionIds(context);
+				return GameData.Serializer.Serializer.Serialize(returnValue3, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 62:
+		case 60:
 		{
-			int argsCount2 = operation.ArgsCount;
-			int num2 = argsCount2;
-			if (num2 == 1)
+			int argsCount6 = operation.ArgsCount;
+			int num6 = argsCount6;
+			if (num6 == 1)
 			{
 				bool isPaused = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isPaused);
@@ -6667,18 +6657,18 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 63:
+		case 61:
 			if (operation.ArgsCount == 0)
 			{
 				EventScriptExecuteNext();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 64:
+		case 62:
 		{
-			int argsCount70 = operation.ArgsCount;
-			int num70 = argsCount70;
-			if (num70 == 2)
+			int argsCount = operation.ArgsCount;
+			int num = argsCount;
+			if (num == 2)
 			{
 				sbyte orgTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref orgTemplateId);
@@ -6689,18 +6679,18 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 65:
+		case 63:
 			if (operation.ArgsCount == 0)
 			{
 				EventSelectContinue();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 66:
+		case 64:
 		{
-			int argsCount66 = operation.ArgsCount;
-			int num66 = argsCount66;
-			if (num66 == 1)
+			int argsCount68 = operation.ArgsCount;
+			int num68 = argsCount68;
+			if (num68 == 1)
 			{
 				int count2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref count2);
@@ -6709,7 +6699,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 67:
+		case 65:
 		{
 			int argsCount65 = operation.ArgsCount;
 			int num65 = argsCount65;
@@ -6726,22 +6716,22 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 68:
+		case 66:
 		{
 			int argsCount62 = operation.ArgsCount;
 			int num62 = argsCount62;
 			if (num62 == 2)
 			{
-				string key19 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key19);
+				string key18 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key18);
 				GameData.Utilities.ShortList value11 = default(GameData.Utilities.ShortList);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value11);
-				SetShowingEventShortListArg(key19, value11);
+				SetShowingEventShortListArg(key18, value11);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 69:
+		case 67:
 		{
 			int argsCount59 = operation.ArgsCount;
 			int num59 = argsCount59;
@@ -6754,7 +6744,7 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 70:
+		case 68:
 		{
 			int argsCount56 = operation.ArgsCount;
 			int num56 = argsCount56;
@@ -6767,22 +6757,22 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 71:
+		case 69:
 		{
 			int argsCount53 = operation.ArgsCount;
 			int num53 = argsCount53;
 			if (num53 == 2)
 			{
-				int type = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type);
+				int type2 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref type2);
 				bool isGood = false;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref isGood);
-				OnClickDeportButton(type, isGood);
+				OnClickDeportButton(type2, isGood);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 72:
+		case 70:
 		{
 			int argsCount51 = operation.ArgsCount;
 			int num51 = argsCount51;
@@ -6797,61 +6787,61 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 73:
+		case 71:
 		{
 			int argsCount48 = operation.ArgsCount;
 			int num48 = argsCount48;
 			if (num48 == 1)
 			{
-				int charId8 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId8);
-				GmCmd_AddJieqingMaskCharId(charId8);
+				int charId7 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId7);
+				GmCmd_AddJieqingMaskCharId(charId7);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 72:
+		{
+			int argsCount46 = operation.ArgsCount;
+			int num46 = argsCount46;
+			if (num46 == 1)
+			{
+				int charId6 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId6);
+				GmCmd_RemoveJieqingMaskCharId(charId6);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 73:
+		{
+			int argsCount44 = operation.ArgsCount;
+			int num44 = argsCount44;
+			if (num44 == 1)
+			{
+				short templateId5 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId5);
+				EventCommonOptionSelect(templateId5);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
 		case 74:
 		{
-			int argsCount45 = operation.ArgsCount;
-			int num45 = argsCount45;
-			if (num45 == 1)
-			{
-				int charId7 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId7);
-				GmCmd_RemoveJieqingMaskCharId(charId7);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 75:
-		{
-			int argsCount43 = operation.ArgsCount;
-			int num43 = argsCount43;
-			if (num43 == 1)
-			{
-				short templateId6 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId6);
-				EventCommonOptionSelect(templateId6);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 76:
-		{
-			int argsCount40 = operation.ArgsCount;
-			int num40 = argsCount40;
-			if (num40 == 2)
+			int argsCount41 = operation.ArgsCount;
+			int num41 = argsCount41;
+			if (num41 == 2)
 			{
 				int targetCharId3 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetCharId3);
 				short customButtonTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref customButtonTemplateId);
-				bool returnValue9 = JumpToInteractionEventOption(targetCharId3, customButtonTemplateId);
-				return GameData.Serializer.Serializer.Serialize(returnValue9, returnDataPool);
+				bool returnValue10 = JumpToInteractionEventOption(targetCharId3, customButtonTemplateId);
+				return GameData.Serializer.Serializer.Serialize(returnValue10, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 77:
+		case 75:
 		{
 			int argsCount38 = operation.ArgsCount;
 			int num38 = argsCount38;
@@ -6861,27 +6851,27 @@ public class TaiwuEventDomain : BaseGameDataDomain
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetCharId2);
 				short targetTemplateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref targetTemplateId);
-				bool returnValue8 = JumpToInteractionEventOptionByInteractionId(context, targetCharId2, targetTemplateId);
-				return GameData.Serializer.Serializer.Serialize(returnValue8, returnDataPool);
+				bool returnValue9 = JumpToInteractionEventOptionByInteractionId(context, targetCharId2, targetTemplateId);
+				return GameData.Serializer.Serializer.Serialize(returnValue9, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 78:
+		case 76:
 		{
 			int argsCount35 = operation.ArgsCount;
 			int num35 = argsCount35;
 			if (num35 == 2)
 			{
-				int charId5 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId5);
+				int charId4 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId4);
 				Location location2 = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location2);
-				OnTaiwuTryInvite(context, charId5, location2);
+				OnTaiwuTryInvite(context, charId4, location2);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 79:
+		case 77:
 		{
 			int argsCount32 = operation.ArgsCount;
 			int num32 = argsCount32;
@@ -6894,11 +6884,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 80:
+		case 78:
 		{
-			int argsCount29 = operation.ArgsCount;
-			int num29 = argsCount29;
-			if (num29 == 1)
+			int argsCount30 = operation.ArgsCount;
+			int num30 = argsCount30;
+			if (num30 == 1)
 			{
 				BatchMapPickupInfo pickupInfo = default(BatchMapPickupInfo);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref pickupInfo);
@@ -6907,83 +6897,83 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 81:
+		case 79:
 		{
-			int argsCount26 = operation.ArgsCount;
-			int num26 = argsCount26;
-			if (num26 == 1)
+			int argsCount28 = operation.ArgsCount;
+			int num28 = argsCount28;
+			if (num28 == 1)
 			{
-				string key8 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key8);
-				GlobalArgValue returnValue6 = GmCmd_GetGlobalArgBoxInt(key8);
-				return GameData.Serializer.Serializer.Serialize(returnValue6, returnDataPool);
+				string key7 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key7);
+				GlobalArgValue returnValue7 = GmCmd_GetGlobalArgBoxInt(key7);
+				return GameData.Serializer.Serializer.Serialize(returnValue7, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 82:
+		case 80:
 		{
-			int argsCount24 = operation.ArgsCount;
-			int num24 = argsCount24;
-			if (num24 == 2)
+			int argsCount26 = operation.ArgsCount;
+			int num26 = argsCount26;
+			if (num26 == 2)
 			{
 				string key6 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key6);
-				int value3 = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value3);
-				GmCmd_SetGlobalArgBoxInt(context, key6, value3);
+				int value4 = 0;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value4);
+				GmCmd_SetGlobalArgBoxInt(context, key6, value4);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 83:
+		case 81:
 			if (operation.ArgsCount == 0)
 			{
-				bool returnValue5 = CheckIsShowingEvent();
-				return GameData.Serializer.Serializer.Serialize(returnValue5, returnDataPool);
+				bool returnValue6 = CheckIsShowingEvent();
+				return GameData.Serializer.Serializer.Serialize(returnValue6, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 84:
+		case 82:
 			if (operation.ArgsCount == 0)
 			{
 				OnClickChickenCoop();
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 85:
+		case 83:
 		{
-			int argsCount19 = operation.ArgsCount;
-			int num19 = argsCount19;
-			if (num19 == 2)
+			int argsCount21 = operation.ArgsCount;
+			int num21 = argsCount21;
+			if (num21 == 2)
+			{
+				string key5 = null;
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key5);
+				ItemKey value3 = default(ItemKey);
+				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value3);
+				SetShowingEventItemKeyArg(key5, value3);
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		}
+		case 84:
+		{
+			int argsCount20 = operation.ArgsCount;
+			int num20 = argsCount20;
+			if (num20 == 2)
 			{
 				string key4 = null;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key4);
-				ItemKey value2 = default(ItemKey);
+				short value2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value2);
-				SetShowingEventItemKeyArg(key4, value2);
+				SetShowingEventShortArg(key4, value2);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 86:
+		case 85:
 		{
 			int argsCount17 = operation.ArgsCount;
 			int num17 = argsCount17;
-			if (num17 == 2)
-			{
-				string key3 = null;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref key3);
-				short value = 0;
-				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref value);
-				SetShowingEventShortArg(key3, value);
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		}
-		case 87:
-		{
-			int argsCount14 = operation.ArgsCount;
-			int num14 = argsCount14;
-			if (num14 == 1)
+			if (num17 == 1)
 			{
 				Location location = default(Location);
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref location);
@@ -6992,18 +6982,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 88:
-			if (operation.ArgsCount == 0)
-			{
-				UpdateShowingEventTaiwuCharacterDisplayData();
-				return -1;
-			}
-			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 89:
+		case 86:
 		{
-			int argsCount10 = operation.ArgsCount;
-			int num10 = argsCount10;
-			if (num10 == 1)
+			int argsCount15 = operation.ArgsCount;
+			int num15 = argsCount15;
+			if (num15 == 1)
 			{
 				short templateId2 = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId2);
@@ -7012,38 +6995,38 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 90:
+		case 87:
 			if (operation.ArgsCount == 0)
 			{
 				GmCmd_TravelToPastTaiwuVillage(context);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 91:
+		case 88:
 			if (operation.ArgsCount == 0)
 			{
 				GmCmd_BackFromPastTaiwuVillage(context);
 				return -1;
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
-		case 92:
+		case 89:
 		{
-			int argsCount5 = operation.ArgsCount;
-			int num5 = argsCount5;
-			if (num5 == 1)
+			int argsCount9 = operation.ArgsCount;
+			int num9 = argsCount9;
+			if (num9 == 1)
 			{
 				short templateId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref templateId);
-				bool returnValue = EventCommonOptionHaveAvailableOption(templateId);
-				return GameData.Serializer.Serializer.Serialize(returnValue, returnDataPool);
+				bool returnValue2 = EventCommonOptionHaveAvailableOption(templateId);
+				return GameData.Serializer.Serializer.Serialize(returnValue2, returnDataPool);
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 93:
+		case 90:
 		{
-			int argsCount3 = operation.ArgsCount;
-			int num3 = argsCount3;
-			if (num3 == 3)
+			int argsCount7 = operation.ArgsCount;
+			int num7 = argsCount7;
+			if (num7 == 3)
 			{
 				int combatResult = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref combatResult);
@@ -7056,11 +7039,11 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
-		case 94:
+		case 91:
 		{
-			int argsCount = operation.ArgsCount;
-			int num = argsCount;
-			if (num == 1)
+			int argsCount5 = operation.ArgsCount;
+			int num5 = argsCount5;
+			if (num5 == 1)
 			{
 				int charId = 0;
 				argsOffset += GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charId);
@@ -7069,6 +7052,27 @@ public class TaiwuEventDomain : BaseGameDataDomain
 			}
 			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		}
+		case 92:
+			if (operation.ArgsCount == 0)
+			{
+				OnClickedXiangshuRetrieveDemonHeartBtn();
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		case 93:
+			if (operation.ArgsCount == 0)
+			{
+				OnClickedXiangshuFinalBattleTiandiBtn();
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
+		case 94:
+			if (operation.ArgsCount == 0)
+			{
+				UpdateShowingEventCharacterDisplayData();
+				return -1;
+			}
+			throw new Exception($"Unsupported argsCount of methodId: {operation.MethodId}");
 		default:
 			throw new Exception($"Unsupported methodId {operation.MethodId}");
 		}

@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// (GM 命令专用) 单个角色的 ID 和姓名
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public struct CharIdAndName(int charId, string name) : ISerializableGameData
 {

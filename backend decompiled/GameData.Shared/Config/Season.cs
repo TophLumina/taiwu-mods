@@ -7,61 +7,28 @@ namespace Config;
 [Serializable]
 public class Season : ConfigData<SeasonItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 春
-		/// </summary>
 		public const sbyte Spring = 0;
 
-		/// <summary>
-		/// 夏
-		/// </summary>
 		public const sbyte Summer = 1;
 
-		/// <summary>
-		/// 秋
-		/// </summary>
 		public const sbyte Autumn = 2;
 
-		/// <summary>
-		/// 冬
-		/// </summary>
 		public const sbyte Winter = 3;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 春
-		/// </summary>
 		public static SeasonItem Spring => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 夏
-		/// </summary>
 		public static SeasonItem Summer => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 秋
-		/// </summary>
 		public static SeasonItem Autumn => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 冬
-		/// </summary>
 		public static SeasonItem Winter => Instance[(sbyte)3];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Season Instance = new Season();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Months", "TemplateId" };

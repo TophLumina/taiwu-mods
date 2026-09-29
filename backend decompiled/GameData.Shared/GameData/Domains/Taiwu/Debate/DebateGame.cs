@@ -6,18 +6,9 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 新版较艺辩论游戏
-/// </summary>
-/// <summary>
-/// 辩论策略相关计算
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class DebateGame : ISerializableGameData
 {
-	/// <summary>
-	/// 策略效果的显示数据
-	/// </summary>
 	public struct EffectItem(int value, short effectTemplateId, short strategyTemplateId)
 	{
 		public int Value = value;
@@ -27,120 +18,57 @@ public class DebateGame : ISerializableGameData
 		public short StrategyTemplateId = strategyTemplateId;
 	}
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillType;
 
-	/// <summary>
-	/// 是否太吾先手
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwuFirst;
 
-	/// <summary>
-	/// 回合阶段
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte State;
 
-	/// <summary>
-	/// 回合
-	/// </summary>
 	[SerializableGameDataField]
 	public int Round;
 
-	/// <summary>
-	/// 左方选手
-	/// </summary>
 	[SerializableGameDataField]
 	public DebatePlayer PlayerLeft;
 
-	/// <summary>
-	/// 右方选手
-	/// </summary>
 	[SerializableGameDataField]
 	public DebatePlayer PlayerRight;
 
-	/// <summary>
-	/// 观众评价
-	/// 暂时只影响赛后奖励
-	/// </summary>
 	[SerializableGameDataField]
 	public List<DebateComment> Comments;
 
-	/// <summary>
-	/// 观众列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> Spectators;
 
-	/// <summary>
-	/// 论点格集合
-	/// 从上至下、从左至右
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<IntPair, DebateNode> DebateGrid;
 
-	/// <summary>
-	/// 论点棋子集合
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, Pawn> Pawns;
 
-	/// <summary>
-	/// 生效中的策略集合
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, ActivatedStrategy> ActivatedStrategies;
 
-	/// <summary>
-	/// 场地效果集合
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, DebateNodeEffectState> NodeEffects;
 
-	/// <summary>
-	/// 前端需要的数据变动
-	/// </summary>
 	[SerializableGameDataField]
 	public List<DebateOperation> DebateOperations;
 
-	/// <summary>
-	/// 游戏是否结束
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsGameOver;
 
-	/// <summary>
-	/// 太吾是否胜利
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwuWin;
 
-	/// <summary>
-	/// 太吾是否由AI控制
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwuAi;
 
-	/// <summary>
-	/// 太吾AI本回合是否已执行过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsTaiwuAiProcessedInRound;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="isTaiwuFirst"></param>
-	/// <param name="playerLeft"></param>
-	/// <param name="playerRight"></param>
-	/// <param name="spectators"></param>
-	/// <param name="debateGrid"></param>
-	/// <param name="isTaiwuAi"></param>
 	public DebateGame(sbyte type, bool isTaiwuFirst, DebatePlayer playerLeft, DebatePlayer playerRight, List<int> spectators, Dictionary<IntPair, DebateNode> debateGrid, bool isTaiwuAi)
 	{
 		LifeSkillType = type;
@@ -162,9 +90,6 @@ public class DebateGame : ISerializableGameData
 		IsTaiwuAiProcessedInRound = false;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public DebateGame()
 	{
 		PlayerLeft = new DebatePlayer();
@@ -178,13 +103,11 @@ public class DebateGame : ISerializableGameData
 		DebateOperations = new List<DebateOperation>();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 11;
@@ -217,7 +140,6 @@ public class DebateGame : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -340,7 +262,6 @@ public class DebateGame : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -477,9 +398,6 @@ public class DebateGame : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <summary>
-	/// 获取压力类型
-	/// </summary>
 	public sbyte GetPressureType(int pressure, int maxPressure)
 	{
 		int percent = pressure * 100 / maxPressure;
@@ -498,11 +416,6 @@ public class DebateGame : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 获取玩家数据
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public DebatePlayer GetPlayerByPlayerIsTaiwu(bool isTaiwu)
 	{
 		if (!isTaiwu)
@@ -512,10 +425,6 @@ public class DebateGame : ISerializableGameData
 		return PlayerLeft;
 	}
 
-	/// <summary>
-	/// 是否是玩家回合
-	/// </summary>
-	/// <returns></returns>
 	public bool GetIsTaiwuTurn()
 	{
 		if (State != 0 || !IsTaiwuFirst)
@@ -529,12 +438,6 @@ public class DebateGame : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 获取一个数值除以指定角色最大论据后的值
-	/// </summary>
-	/// <param name="value"></param>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public int GetValueDividedByMaxBases(int value, bool isTaiwu)
 	{
 		DebatePlayer player = GetPlayerByPlayerIsTaiwu(isTaiwu);
@@ -551,39 +454,16 @@ public class DebateGame : ISerializableGameData
 		return (pressure: pressure, gamePoint: GetPressureType(player.HighestPressure, player.MaxPressure) - GetPressureType(pressure, player.MaxPressure));
 	}
 
-	/// <summary>
-	/// 获取创建论点时，每级对应的论据
-	/// </summary>
-	/// <param name="maxBases"></param>
-	/// <param name="grade"></param>
-	/// <returns></returns>
 	public int GetPawnGradeToBase(int maxBases, int grade)
 	{
 		return maxBases * grade * DebateConstants.GradeToBasesPercent / 100;
 	}
 
-	/// <summary>
-	/// 计算论点的初始基础论据
-	/// 总论据上限 * 级别 * 5%
-	/// </summary>
-	/// <param name="grade"></param>
-	/// <param name="isOwnedByTaiwu"></param>
-	/// <param name="value">由厨艺23织锦2的效果获得的部分</param>
-	/// <returns></returns>
 	public int GetPawnInitialBases(bool isOwnedByTaiwu, sbyte grade, int value)
 	{
 		return GetPawnGradeToBase(GetPlayerByPlayerIsTaiwu(isOwnedByTaiwu).MaxBases, grade) + value;
 	}
 
-	/// <summary>
-	/// 获取论点棋子的战斗力
-	/// Max(基础论据 + 基础论据 * (策略buff总和 * 是否反转) / 100, 存在织锦3的其它己方论点的战斗力) + (诗书3敌方论点50%战斗力 * 是否反转)
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <param name="otherId">论战对手论点的Id</param>
-	/// <param name="isReal">获取真值</param>
-	/// <param name="isTaiwu">玩家或者AI在查看</param>
-	/// <returns></returns>
 	public int GetPawnBases(int pawnId, int otherId = -1, bool isReal = true, bool isTaiwu = true)
 	{
 		bool num = otherId >= 0;
@@ -599,22 +479,11 @@ public class DebateGame : ISerializableGameData
 		return bases + maxBases;
 	}
 
-	/// <summary>
-	/// 获取不包含织锦3诗书3情况的论点论据
-	/// </summary>
-	/// <returns></returns>
 	public int GetPawnBases(int id, bool isReal, bool isTaiwu)
 	{
 		return Pawns[id].Bases * (100 + GetPawnBasesFactor(id, isReal, isTaiwu)) / 100;
 	}
 
-	/// <summary>
-	/// 获取棋子战斗力策略buff总和
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="isReal"></param>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public int GetPawnBasesFactor(int id, bool isReal, bool isTaiwu)
 	{
 		int res = 0;
@@ -633,13 +502,6 @@ public class DebateGame : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 获取棋子战斗力策略buff总和的列表
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="isReal"></param>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public List<EffectItem> GetPawnBasesFactorList(int id, bool isReal, bool isTaiwu)
 	{
 		List<EffectItem> resultList = new List<EffectItem>();
@@ -677,15 +539,6 @@ public class DebateGame : ISerializableGameData
 		return resultList;
 	}
 
-	/// <summary>
-	/// 计算织锦3的效果
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <param name="includeSelf"></param>
-	/// <param name="value"></param>
-	/// <param name="id"></param>
-	/// <param name="isReal"></param>
-	/// <returns></returns>
 	public bool TryGetMaxBasesOfLinkedPawns(int id, bool isReal, bool isTaiwu, bool includeSelf, out int value)
 	{
 		value = 0;
@@ -707,11 +560,6 @@ public class DebateGame : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 获取论点数量
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public int GetPawnCount(bool isTaiwu)
 	{
 		int count = 0;
@@ -725,44 +573,26 @@ public class DebateGame : ISerializableGameData
 		return count;
 	}
 
-	/// <summary>
-	/// 获取一个棋子的目标位置
-	/// </summary>
 	public IntPair GetPawnTargetPosition(int pawnId)
 	{
 		return GetPawnTargetPosition(Pawns[pawnId]);
 	}
 
-	/// <summary>
-	/// 获取一个棋子的目标位置
-	/// </summary>
 	public IntPair GetPawnTargetPosition(Pawn pawn)
 	{
 		return new IntPair(pawn.IsOwnedByTaiwu ? (pawn.Coordinate.First + 1) : (pawn.Coordinate.First - 1), pawn.Coordinate.Second);
 	}
 
-	/// <summary>
-	/// 获取一个棋子的目标位置
-	/// </summary>
 	public IntPair GetPawnBehindPosition(int pawnId, int distance = 1)
 	{
 		return GetPawnBehindPosition(Pawns[pawnId], distance);
 	}
 
-	/// <summary>
-	/// 获取一个棋子的目标位置
-	/// </summary>
 	public IntPair GetPawnBehindPosition(Pawn pawn, int distance)
 	{
 		return new IntPair(pawn.IsOwnedByTaiwu ? (pawn.Coordinate.First - distance) : (pawn.Coordinate.First + distance), pawn.Coordinate.Second);
 	}
 
-	/// <summary>
-	/// 获取棋子能否造成伤害
-	/// </summary>
-	/// <param name="isOwnedByTaiwu"></param>
-	/// <param name="x"></param>
-	/// <returns></returns>
 	public bool GetPawnCanDamage(bool isOwnedByTaiwu, int x)
 	{
 		if (!isOwnedByTaiwu || x != DebateConstants.DebateLineNodeCount - 1)
@@ -776,11 +606,6 @@ public class DebateGame : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 获取棋子是否停止前进
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <returns></returns>
 	public bool GetPawnIsHalt(int pawnId)
 	{
 		if (Pawns[pawnId].IsHalt)
@@ -790,22 +615,11 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取论点格
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	public DebateNode GetNode(int x, int y)
 	{
 		return DebateGrid[new IntPair(x, y)];
 	}
 
-	/// <summary>
-	/// 获取一个坐标是否合法
-	/// </summary>
-	/// <param name="coordinate"></param>
-	/// <returns></returns>
 	public bool GetCoordinateValid(IntPair coordinate)
 	{
 		if (coordinate.First >= 0 && coordinate.First < DebateConstants.DebateLineNodeCount && coordinate.Second >= 0)
@@ -815,9 +629,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 获取一个横坐标是否合法
-	/// </summary>
 	public bool GetCoordinateValid(int x)
 	{
 		if (x >= 0)
@@ -827,12 +638,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 一个论点格能否落子
-	/// </summary>
-	/// <param name="coordinate"></param>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public bool GetNodeCanMakeMove(IntPair coordinate, bool isTaiwu)
 	{
 		if (!GetCoordinateValid(coordinate) || DebateGrid[coordinate].IsVantage != isTaiwu || DebateGrid[coordinate].PawnId >= 0 || GetMakeMoveBlockedByPawn(new IntPair(coordinate.First + 1, coordinate.Second), isTaiwu) || GetMakeMoveBlockedByPawn(new IntPair(coordinate.First - 1, coordinate.Second), isTaiwu) || GetMakeMoveBlockedByPawn(new IntPair(coordinate.First, coordinate.Second + 1), isTaiwu) || GetMakeMoveBlockedByPawn(new IntPair(coordinate.First, coordinate.Second - 1), isTaiwu) || GetNodeIsContainingEffect(coordinate, 23))
@@ -852,11 +657,6 @@ public class DebateGame : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 一个格子能否移动论点
-	/// </summary>
-	/// <param name="coordinate"></param>
-	/// <returns></returns>
 	public bool GetNodeCanTeleportPawn(IntPair coordinate)
 	{
 		if (GetCoordinateValid(coordinate))
@@ -866,12 +666,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 该坐标是否有附着了毒术1的论点
-	/// </summary>
-	/// <param name="coordinate"></param>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public bool GetMakeMoveBlockedByPawn(IntPair coordinate, bool isTaiwu)
 	{
 		int value;
@@ -882,12 +676,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 该坐标是否有指定势力的论点
-	/// </summary>
-	/// <param name="coordinate"></param>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public bool GetNodeContainsPawn(IntPair coordinate, bool isTaiwu)
 	{
 		if (GetCoordinateValid(coordinate) && DebateGrid[coordinate].PawnId >= 0)
@@ -897,13 +685,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 尝试获取一方的空论点格
-	/// 不受到毒术1的影响
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <param name="coordinates"></param>
-	/// <returns></returns>
 	public bool TryGetEmptyNode(bool isTaiwu, out List<IntPair> coordinates)
 	{
 		coordinates = null;
@@ -921,13 +702,6 @@ public class DebateGame : ISerializableGameData
 		return coordinates != null;
 	}
 
-	/// <summary>
-	/// 尝试获取一方的空论点格
-	/// 不受到毒术1的影响
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <param name="coordinates"></param>
-	/// <returns></returns>
 	public bool TryGetEmptyNode(bool isTaiwu, List<IntPair> coordinates)
 	{
 		coordinates.Clear();
@@ -941,22 +715,11 @@ public class DebateGame : ISerializableGameData
 		return coordinates.Count != 0;
 	}
 
-	/// <summary>
-	/// 获取起始点
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	public IntPair GetStartCoordinate(bool isTaiwu, int y)
 	{
 		return new IntPair(GetStartCoordinate(isTaiwu), y);
 	}
 
-	/// <summary>
-	/// 获取起始点
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public int GetStartCoordinate(bool isTaiwu)
 	{
 		if (!isTaiwu)
@@ -966,12 +729,6 @@ public class DebateGame : ISerializableGameData
 		return 0;
 	}
 
-	/// <summary>
-	/// 查看论点前后是否有空格
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <param name="distance"></param>
-	/// <returns></returns>
 	public bool GetPawnNodeContainsEmptyNeighbor(int pawnId, int distance)
 	{
 		Pawn pawn = Pawns[pawnId];
@@ -989,12 +746,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 查看论点格是否有指定效果
-	/// </summary>
-	/// <param name="coordinate"></param>
-	/// <param name="effectId"></param>
-	/// <returns></returns>
 	public bool GetNodeIsContainingEffect(IntPair coordinate, short effectId)
 	{
 		if (!GetCoordinateValid(coordinate))
@@ -1016,23 +767,11 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 能否落子
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public bool GetPlayerCanMakeMove(bool isTaiwu)
 	{
 		return GetPlayerByPlayerIsTaiwu(isTaiwu).MakeMoveCount < DebateConstants.MakeMoveLimit;
 	}
 
-	/// <summary>
-	/// 尝试获取一个策略的可选目标集合,如果返回true则集合的元素数量必然大于等于最小数量
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="res"></param>
-	/// <returns>无需目标或有指定目标为true，无目标为false</returns>
 	public bool TryGetStrategyTarget(short templateId, bool isTaiwu, out List<StrategyTarget> res)
 	{
 		res = null;
@@ -1096,15 +835,6 @@ public class DebateGame : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取一个策略的其中一组目标的对象
-	/// 持续生效的策略目标必为论点，并且论点必须有空策略槽
-	/// </summary>
-	/// <param name="cost"></param>
-	/// <param name="config"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="isInstant"></param>
-	/// <returns></returns>
 	private StrategyTarget GetStrategyTarget(int cost, short[] config, bool isTaiwu, bool isInstant)
 	{
 		EDebateStrategyTargetObjectType type = GetStrategyTargetType(config[0]);
@@ -1157,11 +887,6 @@ public class DebateGame : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 注意要去除参数阵营的底线格
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	private List<ulong> GetAnyNode(bool isTaiwu)
 	{
 		List<ulong> res = null;
@@ -1180,11 +905,6 @@ public class DebateGame : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 注意这里实际特指弈棋1的效果，即己方论点周围的空格
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	private List<ulong> GetSelfNode(bool isTaiwu)
 	{
 		List<ulong> res = null;
@@ -1222,9 +942,6 @@ public class DebateGame : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 对论点的所属阵营、空策略槽、额外策略点进行检查
-	/// </summary>
 	private bool TryGetStrategyPawnTarget(bool isBoth, bool isTaiwu, bool emptySlot, int cost, out List<ulong> res)
 	{
 		res = null;
@@ -1246,11 +963,6 @@ public class DebateGame : ISerializableGameData
 		return res != null;
 	}
 
-	/// <summary>
-	/// 添加可重复目标
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="targets"></param>
 	public void AddStrategyRepeatedTargets(short type, List<ulong> targets)
 	{
 		switch (type)
@@ -1276,11 +988,6 @@ public class DebateGame : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="selectedTargets"></param>
-	/// <param name="canSelectTargets"></param>
 	public void CullStrategyTargets(List<ulong> selectedTargets, List<ulong> canSelectTargets)
 	{
 		foreach (ulong target in selectedTargets)
@@ -1390,11 +1097,6 @@ public class DebateGame : ISerializableGameData
 		return DebateStrategyTarget.Instance[templateId].ObjectType;
 	}
 
-	/// <summary>
-	/// 获取一个论点上附着的策略数量
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <returns></returns>
 	public int GetPawnStrategyCount(int pawnId)
 	{
 		int res = 0;
@@ -1409,12 +1111,6 @@ public class DebateGame : ISerializableGameData
 		return res;
 	}
 
-	/// <summary>
-	/// 尝试获取一个论点上的空策略槽位置
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public bool TryGetPawnEmptyStrategySlotIndex(int pawnId, out int index)
 	{
 		index = -1;
@@ -1429,14 +1125,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 尝试获取一个论点上附着的特定效果策略的策略id
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <param name="effectTemplateId"></param>
-	/// <param name="isCastedByTaiwu"></param>
-	/// <param name="value"></param>
-	/// <returns></returns>
 	public bool TryGetPawnStrategyEffectId(int pawnId, short effectTemplateId, bool isCastedByTaiwu, out int value)
 	{
 		value = -1;
@@ -1464,14 +1152,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 尝试获取一个论点上附着的策略的效果值
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <param name="effectTemplateId"></param>
-	/// <param name="value"></param>
-	/// <param name="effectItemList"></param>
-	/// <returns></returns>
 	public bool TryGetPawnStrategyEffectValue(int pawnId, short effectTemplateId, out int value, List<EffectItem> effectItemList = null)
 	{
 		value = 0;
@@ -1502,16 +1182,6 @@ public class DebateGame : ISerializableGameData
 		return value != 0;
 	}
 
-	/// <summary>
-	/// 尝试获取一个论点上附着的可见策略的效果值
-	/// 计算论点表面论据时用
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <param name="effectTemplateId"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="value"></param>
-	/// <param name="effectItemList"></param>
-	/// <returns></returns>
 	public bool TryGetPawnRevealedStrategyEffectValue(int pawnId, short effectTemplateId, bool isTaiwu, out int value, List<EffectItem> effectItemList = null)
 	{
 		value = 0;
@@ -1542,16 +1212,6 @@ public class DebateGame : ISerializableGameData
 		return value != 0;
 	}
 
-	/// <summary>
-	/// 尝试获取一个论点上附着的策略的效果值
-	/// </summary>
-	/// <param name="pawnId"></param>
-	/// <param name="templateId"></param>
-	/// <param name="isReal"></param>
-	/// <param name="isTaiwu"></param>
-	/// <param name="value"></param>
-	/// <param name="effectItemList"></param>
-	/// <returns></returns>
 	public bool TryGetPawnStrategyEffectValue(int pawnId, short templateId, bool isReal, bool isTaiwu, out int value, List<EffectItem> effectItemList = null)
 	{
 		if (!isReal)
@@ -1561,12 +1221,6 @@ public class DebateGame : ISerializableGameData
 		return TryGetPawnStrategyEffectValue(pawnId, templateId, out value, effectItemList);
 	}
 
-	/// <summary>
-	/// 获取卡片位置
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <param name="location"></param>
-	/// <returns></returns>
 	public int GetStrategyCardLocation(bool isTaiwu, int location)
 	{
 		return location switch
@@ -1578,12 +1232,6 @@ public class DebateGame : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 获取策略卡片集合
-	/// </summary>
-	/// <param name="isTaiwu"></param>
-	/// <param name="location"></param>
-	/// <returns></returns>
 	public List<short> GetStrategyCardCollection(bool isTaiwu, int location)
 	{
 		return location switch
@@ -1601,12 +1249,6 @@ public class DebateGame : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 查看指定策略模板是否含有指定效果
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="effectId"></param>
-	/// <returns></returns>
 	public bool GetStrategyTemplateContainsEffect(short templateId, short effectId)
 	{
 		DebateStrategyItem config = DebateStrategy.Instance[templateId];
@@ -1624,13 +1266,6 @@ public class DebateGame : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 尝试选一个太吾或者npc不为空的指定集合
-	/// </summary>
-	/// <param name="location"></param>
-	/// <param name="collection">集合中的数值是卡片在原集合中的index</param>
-	/// <param name="isTaiwu"></param>
-	/// <returns></returns>
 	public int TryGetStrategyCardIndexCollection(ref bool isTaiwu, int location, out List<int> collection)
 	{
 		List<short> taiwuCollection = GetStrategyCardCollection(isTaiwu: true, location);

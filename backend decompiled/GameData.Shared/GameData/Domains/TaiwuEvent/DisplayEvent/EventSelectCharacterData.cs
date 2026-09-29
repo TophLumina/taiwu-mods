@@ -7,36 +7,20 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件系统调用角色选择弹窗时的参数
-/// </summary>
 public class EventSelectCharacterData : ISerializableGameData
 {
-	/// <summary>
-	/// 可以被选择的角色列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<CharacterSelectFilter> FilterList;
 
-	/// <summary>
-	/// 是否对规则采用或运算
-	/// </summary>
 	[SerializableGameDataField]
 	public bool UseOrOperate;
 
 	[SerializableGameDataField]
 	public SelectApprovedTaiwu SelectApprovedTaiwu;
 
-	/// <summary>
-	/// 事件选人时额外显示的页签
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ExtraSubPage;
 
-	/// <summary>
-	/// 选择完毕的回调.
-	/// 该逻辑只在后端使用.
-	/// </summary>
 	public Action OnSelectComplete;
 
 	public bool IsAvailableSelectResult(List<int> charIdList)
@@ -73,13 +57,11 @@ public class EventSelectCharacterData : ISerializableGameData
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -104,7 +86,6 @@ public class EventSelectCharacterData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -152,7 +133,6 @@ public class EventSelectCharacterData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -6,9 +6,6 @@ using Redzen.Random;
 
 namespace GameData.Domains.Taiwu.Profession.SkillsData;
 
-/// <summary>
-/// 王公相关数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 {
@@ -25,44 +22,21 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "DukeTitleOwners", "DukeLuckPoints", "DukeCricketGiven" };
 	}
 
-	/// <summary>
-	/// 未被授予的角色ID标记
-	/// </summary>
 	public const int NobodyCharacterId = -1;
 
-	/// <summary>
-	/// 官职称号数量
-	/// </summary>
 	public const int TitleCount = 6;
 
-	/// <summary>
-	/// 当前所有官位称号的拥有者ID
-	/// (templateId - templateOffset) -&gt; CharacterId
-	/// </summary>
 	[SerializableGameDataField]
 	private int[] _dukeTitleOwners;
 
-	/// <summary>
-	/// 当前所有官位称号的促织缘
-	/// (templateId - templateOffset) -&gt; 促织缘
-	/// </summary>
 	[SerializableGameDataField]
 	private int[] _dukeLuckPoints;
 
-	/// <summary>
-	/// 当前所有官位是否已进贡促织给太吾
-	/// </summary>
 	[SerializableGameDataField]
 	private bool[] _dukeCricketGiven;
 
-	/// <summary>
-	/// 官位称号模板ID偏移量，用于计算数组下标，不存档
-	/// </summary>
 	private static short DukeTitleTemplateOffset => 37;
 
-	/// <summary>
-	/// 默认构造
-	/// </summary>
 	public DukeSkillsData()
 	{
 		_dukeTitleOwners = new int[6];
@@ -78,7 +52,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		_dukeCricketGiven = new bool[6];
 	}
 
-	/// <inheritdoc />
 	public void Initialize()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -89,7 +62,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc />
 	public void InheritFrom(IProfessionSkillsData sourceData)
 	{
 		if (!(sourceData is ObsoleteDukeSkillsData skillsData))
@@ -102,31 +74,16 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 检查某个称号是否已被授予
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public bool TitleHasOwner(short templateId)
 	{
 		return GetOwnerOfTitle(templateId) != -1;
 	}
 
-	/// <summary>
-	/// 检查某个角色是否拥有称号
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public bool CharacterHasTitle(int charId)
 	{
 		return GetTitleFromOwner(charId) != -1;
 	}
 
-	/// <summary>
-	/// 根据拥有者获取称号，未授予返回-1
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public short GetTitleFromOwner(int charId)
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -139,28 +96,16 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 获取某个称号的拥有者ID
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public int GetOwnerOfTitle(short templateId)
 	{
 		return _dukeTitleOwners[templateId - DukeTitleTemplateOffset];
 	}
 
-	/// <summary>
-	/// 获取促织缘
-	/// </summary>
 	public int GetDukeLuckPointByTitle(short title)
 	{
 		return _dukeLuckPoints[title - DukeTitleTemplateOffset];
 	}
 
-	/// <summary>
-	/// 获取所有已授予官职称号的角色ID
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerable<(int CharacterId, short TemplateId)> GetAllOwners()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -172,10 +117,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取所有可授予的官职称号模板ID
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerable<short> GetAllTitles()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -184,10 +125,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获取还没有进贡促织的官职称号模板ID
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerable<short> GetNotGivenCricketTitles(Predicate<int> predicate)
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -199,10 +136,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 获得一个未进贡促织的角色ID
-	/// </summary>
-	/// <returns></returns>
 	public int GetNotGiveCricketCharId(Predicate<int> predicate)
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -215,35 +148,17 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 向某个角色授予称号
-	/// 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
-	/// <param name="random"></param>
-	/// <param name="templateId"></param>
-	/// <param name="charId"></param>
 	public void OfflineAssignTitleToCharacter(IRandomSource random, short templateId, int charId)
 	{
 		_dukeTitleOwners[templateId - DukeTitleTemplateOffset] = charId;
 		_dukeLuckPoints[templateId - DukeTitleTemplateOffset] = random.Next(51);
 	}
 
-	/// <summary>
-	/// 撤销某个称号的授予状态
-	/// 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
-	/// <param name="templateId"></param>
 	public void OfflineRemoveTitleFromAnybody(short templateId)
 	{
 		OfflineRemoveTitle(templateId - DukeTitleTemplateOffset);
 	}
 
-	/// <summary>
-	/// 撤销对某个角色授予的称号，返回 -1 表示该角色不存在称号
-	/// 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns>已撤销称号</returns>
 	public short OfflineRemoveTitleFromCharacter(int charId)
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -257,10 +172,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		return -1;
 	}
 
-	/// <summary>
-	/// 清除所有称号的授予状态
-	/// 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
 	public void OfflineClearAllTitles()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -269,29 +180,17 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 清除指定官职的授予状态
-	/// 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
-	/// <param name="i"></param>
 	private void OfflineRemoveTitle(int i)
 	{
 		_dukeTitleOwners[i] = -1;
 		_dukeLuckPoints[i] = 0;
 	}
 
-	/// <summary>
-	/// 设置促织缘
-	/// </summary>
 	public void OfflineSetDukeLuckPointByTitle(short title, int value)
 	{
 		_dukeLuckPoints[title - DukeTitleTemplateOffset] = value;
 	}
 
-	/// <summary>
-	/// 重置所有官职的进贡促织状态
-	/// 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
 	public void ResetAllCricketGivenData()
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -300,10 +199,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 设置一个角色的促织进贡状态
-	/// 需要调用<see cref="!:GameData.Domains.Extra.ExtraDomain.SetProfessionData" />方法应用修改
-	/// </summary>
 	public void SetCharacterCricketGivenData(int charId, bool isGiven)
 	{
 		for (int i = 0; i < _dukeTitleOwners.Length; i++)
@@ -315,9 +210,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DukeSkillsData(DukeSkillsData other)
 	{
 		int[] item = other._dukeTitleOwners;
@@ -343,9 +235,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DukeSkillsData other)
 	{
 		int[] item = other._dukeTitleOwners;
@@ -371,13 +260,11 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -391,7 +278,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -456,7 +342,6 @@ public class DukeSkillsData : IProfessionSkillsData, ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

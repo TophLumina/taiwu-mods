@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 梦回合并发生冲突的功法数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class ConflictCombatSkill : ISerializableGameData
 {
@@ -27,43 +24,26 @@ public class ConflictCombatSkill : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "TemplateId", "BreakStepCount", "ForcedBreakStepCount", "BreakPlate", "BreakPreset" };
 	}
 
-	/// <summary>
-	/// 模板ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public short TemplateId;
 
-	/// <summary>
-	/// 突破使用步数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public sbyte BreakStepCount;
 
-	/// <summary>
-	/// 强行突破的步数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public sbyte ForcedBreakStepCount;
 
-	/// <summary>
-	/// 突破盘
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public SkillBreakPlate BreakPlate;
 
-	/// <summary>
-	/// 突破预设
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public CombatSkillBreakPreset BreakPreset;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -76,7 +56,6 @@ public class ConflictCombatSkill : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -124,7 +103,6 @@ public class ConflictCombatSkill : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

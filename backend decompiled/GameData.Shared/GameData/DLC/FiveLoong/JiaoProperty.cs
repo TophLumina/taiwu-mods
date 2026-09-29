@@ -4,64 +4,33 @@ using GameData.Serializer;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 蛟的成长属性，会被龙之九子继承
-/// </summary>
 [SerializableGameData]
 public class JiaoProperty : ISerializableGameData
 {
-	/// <summary>
-	/// 旅行时间减少
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) TravelTimeReduction;
 
-	/// <summary>
-	/// 最大行囊负重加成
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) MaxInventoryLoadBonus;
 
-	/// <summary>
-	/// 掉落率加成
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) DropRateBonus;
 
-	/// <summary>
-	/// 降伏几率加成
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) CaptureRateBonus;
 
-	/// <summary>
-	/// 最大劫持软上限加成
-	/// 注意使用它的时候需要 / 100
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) MaxKidnapSlotAbilityBonus;
 
-	/// <summary>
-	/// 基础价值
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) Value;
 
-	/// <summary>
-	/// 探索的奖励
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) ExploreBonusRate;
 
-	/// <summary>
-	/// 心情变化
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) HappinessChange;
 
-	/// <summary>
-	/// 好感变化
-	/// </summary>
 	[SerializableGameDataField]
 	public (int Inherited, int Fostered) FavorabilityChange;
 
@@ -91,18 +60,6 @@ public class JiaoProperty : ISerializableGameData
 		FavorabilityChange = (Inherited: 0, Fostered: Config.JiaoProperty.Instance[(short)8].MaxValue * percent);
 	}
 
-	/// <summary>
-	/// 继承初始化
-	/// </summary>
-	/// <param name="travelTimeReduction"></param>
-	/// <param name="maxInventoryLoadBonus"></param>
-	/// <param name="dropRateBonus"></param>
-	/// <param name="captureRateBonus"></param>
-	/// <param name="maxKidnapSlotAbilityBonus"></param>
-	/// <param name="value"></param>
-	/// <param name="exploreBonusRate"></param>
-	/// <param name="happinessChange"></param>
-	/// <param name="favorabilityChange"></param>
 	public JiaoProperty(int travelTimeReduction, int maxInventoryLoadBonus, int dropRateBonus, int captureRateBonus, int maxKidnapSlotAbilityBonus, int value, int exploreBonusRate, int happinessChange, int favorabilityChange)
 	{
 		TravelTimeReduction = (Inherited: travelTimeReduction, Fostered: 0);
@@ -129,11 +86,6 @@ public class JiaoProperty : ISerializableGameData
 		FavorabilityChange = (Inherited: FavorabilityChange.Inherited, Fostered: 0);
 	}
 
-	/// <summary>
-	/// 增加成长值
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="value"></param>
 	public void Add(short templateId, int value)
 	{
 		switch (templateId)
@@ -168,11 +120,6 @@ public class JiaoProperty : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 设置成长值
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <param name="value"></param>
 	public void Set(short templateId, int value)
 	{
 		switch (templateId)
@@ -207,13 +154,6 @@ public class JiaoProperty : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 依据蛟的模板和属性模板获取蛟的属性值
-	/// 返回Math.Min(配置值+遗传值+成长值 / 100, 最大值）
-	/// </summary>
-	/// <param name="jiaoTemplateId"></param>
-	/// <param name="propertyTemplateId"></param>
-	/// <returns></returns>
 	public int Get(short jiaoTemplateId, short propertyTemplateId)
 	{
 		JiaoItem config = Config.Jiao.Instance[jiaoTemplateId];
@@ -233,15 +173,6 @@ public class JiaoProperty : ISerializableGameData
 		return Math.Min(Config.JiaoProperty.Instance[propertyTemplateId].MaxValue, value);
 	}
 
-	/// <summary>
-	/// 依据蛟的模板和属性模板获取龙之九子的属性值
-	/// 规则：如果是龙之九子的优势属性，直接返回它的优势属性值；
-	/// 否则返回Math.Min(配置值+遗传值+成长值 / 100, 最大值）
-	/// </summary>
-	/// <param name="jiaoTemplateId"></param>
-	/// <param name="loongTemplateId"></param>
-	/// <param name="propertyTemplateId"></param>
-	/// <returns></returns>
 	public int Get(short jiaoTemplateId, short loongTemplateId, short propertyTemplateId)
 	{
 		if (loongTemplateId >= 31 && loongTemplateId <= 39 && propertyTemplateId == Config.Jiao.Instance[loongTemplateId].AdvantageProperty)
@@ -265,12 +196,6 @@ public class JiaoProperty : ISerializableGameData
 		return Math.Min(Config.JiaoProperty.Instance[propertyTemplateId].MaxValue, value);
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="propertyTemplateId"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.Exception"></exception>
 	public (int Inherited, int Fostered) SeparateGet(short propertyTemplateId)
 	{
 		return propertyTemplateId switch
@@ -301,9 +226,6 @@ public class JiaoProperty : ISerializableGameData
 		FavorabilityChange = other.FavorabilityChange;
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public JiaoProperty(JiaoProperty other)
 	{
 		TravelTimeReduction = other.TravelTimeReduction;
@@ -317,9 +239,6 @@ public class JiaoProperty : ISerializableGameData
 		FavorabilityChange = other.FavorabilityChange;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(JiaoProperty other)
 	{
 		TravelTimeReduction = other.TravelTimeReduction;
@@ -333,13 +252,11 @@ public class JiaoProperty : ISerializableGameData
 		FavorabilityChange = other.FavorabilityChange;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 72;
@@ -350,7 +267,6 @@ public class JiaoProperty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* num = pData + SerializationHelper.Serialize(pData, TravelTimeReduction);
@@ -369,7 +285,6 @@ public class JiaoProperty : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* num = pData + SerializationHelper.Deserialize(pData, out TravelTimeReduction);

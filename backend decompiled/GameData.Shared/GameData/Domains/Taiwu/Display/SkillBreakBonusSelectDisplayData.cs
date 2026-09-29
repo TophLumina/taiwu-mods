@@ -8,72 +8,36 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 使用玄机界面的全部显示数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NotForArchive = true, NoCopyConstructors = true)]
 public class SkillBreakBonusSelectDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 能否使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransferItemToWarehouse;
 
-	/// <summary>
-	/// 行囊的玄机物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SkillBreakBonusSelectableItem> InventoryBonusItemList = new List<SkillBreakBonusSelectableItem>();
 
-	/// <summary>
-	/// 私库的玄机物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SkillBreakBonusSelectableItem> WarehouseBonusItemList = new List<SkillBreakBonusSelectableItem>();
 
-	/// <summary>
-	/// 公库的玄机物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SkillBreakBonusSelectableItem> TreasuryBonusItemList = new List<SkillBreakBonusSelectableItem>();
 
-	/// <summary>
-	/// 历练的玄机物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SkillBreakBonusSelectableItem> ExpBonusItemList = new List<SkillBreakBonusSelectableItem>();
 
-	/// <summary>
-	/// 人物的玄机物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SkillBreakBonusSelectableItem> CharacterBonusItemList = new List<SkillBreakBonusSelectableItem>();
 
-	/// <summary>
-	/// 技能显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillDisplayData CombatSkillDisplayData;
 
-	/// <summary>
-	/// 上次选择的人物
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData SelectedCharacterDisplayData;
 
-	/// <summary>
-	/// 内部汇总
-	/// </summary>
 	private List<SkillBreakBonusSelectableItem> _sourceList;
 
-	/// <summary>
-	/// 获取物品列表
-	/// </summary>
-	/// <param name="sourceType"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public List<SkillBreakBonusSelectableItem> GetBonusItemList(ItemSourceType sourceType)
 	{
 		return sourceType switch
@@ -85,11 +49,6 @@ public class SkillBreakBonusSelectDisplayData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 获取用于显示的列表，包含历练、人物
-	/// </summary>
-	/// <param name="sourceType"></param>
-	/// <returns></returns>
 	public List<SkillBreakBonusSelectableItem> GetTotalBonusItemList(ItemSourceType sourceType)
 	{
 		if (_sourceList == null)

@@ -8,73 +8,33 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.TaiwuEvent.EventLog;
 
-/// <summary>
-/// 事件记录中的单个对话或结果记录
-/// 注意！改动该类的字段后需要同步修改EventLogResultData和EventLogData的序列化代码
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class EventLogResultData : ISerializableGameData
 {
-	/// <summary>
-	/// 类型
-	/// 决定前端显示逻辑
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Type;
 
-	/// <summary>
-	/// 得到还是失去
-	/// 有可能不通过该字段而是直接通过值的正负来判断
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsLosing;
 
-	/// <summary>
-	/// 值列表 三合一
-	/// 用于记录配置表的TemplateId、角色的id和其它数值（如心情的变化值）
-	/// 为了清理角色形象记录表中没有任何引用的元素，固定第0个值为 n, n = 值列表中存在的角色数量；固定第 1 ~ n 个元素为角色Id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> ValueList;
 
-	/// <summary>
-	/// 人物字典，用于处理换头术
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, NameStringAndAvatar> CharDict;
 
-	/// <summary>
-	/// 文本
-	/// 仅用于保存对话文本，如果有结果类型有需要再做修改
-	/// </summary>
 	[SerializableGameDataField]
 	public string Text;
 
-	/// <summary>
-	/// 左边临时人物立绘
-	/// 仅用于保存对话文本，如果有结果类型有需要再做修改
-	/// </summary>
 	[SerializableGameDataField]
 	public EventActorData LeftActorData;
 
-	/// <summary>
-	/// 右边临时人物立绘
-	/// 仅用于保存对话文本，如果有结果类型有需要再做修改
-	/// </summary>
 	[SerializableGameDataField]
 	public EventActorData RightActorData;
 
-	/// <summary>
-	/// 左边名字
-	/// 仅用于保存对话文本，如果有结果类型有需要再做修改
-	/// </summary>
 	[SerializableGameDataField]
 	public string LeftName;
 
-	/// <summary>
-	/// 右边名字
-	/// 仅用于保存对话文本，如果有结果类型有需要再做修改
-	/// </summary>
 	[SerializableGameDataField]
 	public string RightName;
 
@@ -90,10 +50,6 @@ public class EventLogResultData : ISerializableGameData
 		RightName = null;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <returns></returns>
 	public override string ToString()
 	{
 		StringBuilder sb = new StringBuilder();

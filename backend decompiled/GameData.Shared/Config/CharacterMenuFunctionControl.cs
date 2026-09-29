@@ -7,171 +7,76 @@ namespace Config;
 [Serializable]
 public class CharacterMenuFunctionControl : ConfigData<CharacterMenuFunctionControlItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 战斗准备
-		/// </summary>
 		public const short ViewCombatBegin = 0;
 
-		/// <summary>
-		/// 较艺准备
-		/// </summary>
 		public const short ViewLifeSkillCombatBegin = 1;
 
-		/// <summary>
-		/// 战斗环节
-		/// </summary>
 		public const short ViewCombat = 2;
 
-		/// <summary>
-		/// 较艺环节
-		/// </summary>
 		public const short ViewDebate = 3;
 
-		/// <summary>
-		/// 促织环节
-		/// </summary>
 		public const short ViewCricketCombat = 4;
 
-		/// <summary>
-		/// 事件互动
-		/// </summary>
 		public const short ViewEventWindow = 5;
 
-		/// <summary>
-		/// 监牢悬赏界面
-		/// </summary>
 		public const short ViewSettlementBounty = 6;
 
-		/// <summary>
-		/// 势力情报界面
-		/// </summary>
 		public const short ViewSettlementInformation = 7;
 
-		/// <summary>
-		/// 交换物品界面
-		/// </summary>
 		public const short ViewExchange = 8;
 
-		/// <summary>
-		/// 关注人物界面
-		/// </summary>
 		public const short ViewFollowing = 9;
 
-		/// <summary>
-		/// 化魂界面
-		/// </summary>
 		public const short ViewSwapSoul = 10;
 
-		/// <summary>
-		/// 监牢界面
-		/// </summary>
 		public const short ViewSettlementPrison = 11;
 
-		/// <summary>
-		/// 产业经营界面
-		/// </summary>
 		public const short ViewBuildingManage = 12;
 
-		/// <summary>
-		/// 商店购买界面
-		/// </summary>
 		public const short ViewShop = 13;
 
-		/// <summary>
-		/// 奇书断执界面
-		/// </summary>
 		public const short ViewRanshanThreeCorpses = 14;
+
+		public const short AdventureMajorEvent = 15;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 战斗准备
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewCombatBegin => Instance[(short)0];
 
-		/// <summary>
-		/// 较艺准备
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewLifeSkillCombatBegin => Instance[(short)1];
 
-		/// <summary>
-		/// 战斗环节
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewCombat => Instance[(short)2];
 
-		/// <summary>
-		/// 较艺环节
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewDebate => Instance[(short)3];
 
-		/// <summary>
-		/// 促织环节
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewCricketCombat => Instance[(short)4];
 
-		/// <summary>
-		/// 事件互动
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewEventWindow => Instance[(short)5];
 
-		/// <summary>
-		/// 监牢悬赏界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewSettlementBounty => Instance[(short)6];
 
-		/// <summary>
-		/// 势力情报界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewSettlementInformation => Instance[(short)7];
 
-		/// <summary>
-		/// 交换物品界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewExchange => Instance[(short)8];
 
-		/// <summary>
-		/// 关注人物界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewFollowing => Instance[(short)9];
 
-		/// <summary>
-		/// 化魂界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewSwapSoul => Instance[(short)10];
 
-		/// <summary>
-		/// 监牢界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewSettlementPrison => Instance[(short)11];
 
-		/// <summary>
-		/// 产业经营界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewBuildingManage => Instance[(short)12];
 
-		/// <summary>
-		/// 商店购买界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewShop => Instance[(short)13];
 
-		/// <summary>
-		/// 奇书断执界面
-		/// </summary>
 		public static CharacterMenuFunctionControlItem ViewRanshanThreeCorpses => Instance[(short)14];
+
+		public static CharacterMenuFunctionControlItem AdventureMajorEvent => Instance[(short)15];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CharacterMenuFunctionControl Instance = new CharacterMenuFunctionControl();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -208,12 +113,13 @@ public class CharacterMenuFunctionControl : ConfigData<CharacterMenuFunctionCont
 		_dataArray.Add(new CharacterMenuFunctionControlItem(12, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All));
 		_dataArray.Add(new CharacterMenuFunctionControlItem(13, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All));
 		_dataArray.Add(new CharacterMenuFunctionControlItem(14, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All));
+		_dataArray.Add(new CharacterMenuFunctionControlItem(15, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.All, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None, ECharacterMenuFunctionControlType.None));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<CharacterMenuFunctionControlItem>(15);
+		_dataArray = new List<CharacterMenuFunctionControlItem>(16);
 		CreateItems0();
 	}
 }

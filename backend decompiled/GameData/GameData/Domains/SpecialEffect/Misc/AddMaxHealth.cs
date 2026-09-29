@@ -1,5 +1,7 @@
 using GameData.Combat.Math;
 using GameData.Common;
+using GameData.DomainEvents;
+using GameData.Domains.Character;
 
 namespace GameData.Domains.SpecialEffect.Misc;
 
@@ -19,7 +21,23 @@ public class AddMaxHealth : SpecialEffectBase
 
 	public override void OnEnable(DataContext context)
 	{
+		base.OnEnable(context);
 		CreateAffectedData(53, EDataModifyType.Add, -1);
+		Events.RegisterHandler_PolymorphCharacterResetStatus(OnPolymorphCharacterResetStatus);
+	}
+
+	public override void OnDisable(DataContext context)
+	{
+		Events.UnRegisterHandler_PolymorphCharacterResetStatus(OnPolymorphCharacterResetStatus);
+		base.OnDisable(context);
+	}
+
+	private void OnPolymorphCharacterResetStatus(DataContext context, GameData.Domains.Character.Character character)
+	{
+		if (character.GetId() == base.CharacterId)
+		{
+			RemoveSelf(context);
+		}
 	}
 
 	public override int GetModifyValue(AffectedDataKey dataKey, int currModifyValue)

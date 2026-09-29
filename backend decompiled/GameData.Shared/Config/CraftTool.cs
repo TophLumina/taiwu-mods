@@ -7,571 +7,232 @@ namespace Config;
 [Serializable]
 public class CraftTool : ConfigData<CraftToolItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 木工箱
-		/// </summary>
 		public const short Wood0 = 0;
 
-		/// <summary>
-		/// 巧匠盒
-		/// </summary>
 		public const short Wood1 = 1;
 
-		/// <summary>
-		/// 蝉翼刨
-		/// </summary>
 		public const short Wood2 = 2;
 
-		/// <summary>
-		/// 朱漆银匣
-		/// </summary>
 		public const short Wood3 = 3;
 
-		/// <summary>
-		/// 神铁琥珀刨
-		/// </summary>
 		public const short Wood4 = 4;
 
-		/// <summary>
-		/// 千机宝箱
-		/// </summary>
 		public const short Wood5 = 5;
 
-		/// <summary>
-		/// 鬼斧刨
-		/// </summary>
 		public const short Wood6 = 6;
 
-		/// <summary>
-		/// 如意乾坤盒
-		/// </summary>
 		public const short Wood7 = 7;
 
-		/// <summary>
-		/// 公输宝匣
-		/// </summary>
 		public const short Wood8 = 8;
 
-		/// <summary>
-		/// 青铜铸炉
-		/// </summary>
 		public const short Metal0 = 9;
 
-		/// <summary>
-		/// 赤纹炼
-		/// </summary>
 		public const short Metal1 = 10;
 
-		/// <summary>
-		/// 镔铁阴阳炼
-		/// </summary>
 		public const short Metal2 = 11;
 
-		/// <summary>
-		/// 乌金铸炉
-		/// </summary>
 		public const short Metal3 = 12;
 
-		/// <summary>
-		/// 混元铸炉
-		/// </summary>
 		public const short Metal4 = 13;
 
-		/// <summary>
-		/// 奇魄炼
-		/// </summary>
 		public const short Metal5 = 14;
 
-		/// <summary>
-		/// 七霞真火炼
-		/// </summary>
 		public const short Metal6 = 15;
 
-		/// <summary>
-		/// 九寒铸炉
-		/// </summary>
 		public const short Metal7 = 16;
 
-		/// <summary>
-		/// 若邪炼
-		/// </summary>
 		public const short Metal8 = 17;
 
-		/// <summary>
-		/// 黑石砂
-		/// </summary>
 		public const short Jade0 = 18;
 
-		/// <summary>
-		/// 金刚砂
-		/// </summary>
 		public const short Jade1 = 19;
 
-		/// <summary>
-		/// 翡翠珍珠砂
-		/// </summary>
 		public const short Jade2 = 20;
 
-		/// <summary>
-		/// 黄龙砂
-		/// </summary>
 		public const short Jade3 = 21;
 
-		/// <summary>
-		/// 三色宝石砂
-		/// </summary>
 		public const short Jade4 = 22;
 
-		/// <summary>
-		/// 幕雪砂
-		/// </summary>
 		public const short Jade5 = 23;
 
-		/// <summary>
-		/// 紫金沉香砂
-		/// </summary>
 		public const short Jade6 = 24;
 
-		/// <summary>
-		/// 冰晶血露砂
-		/// </summary>
 		public const short Jade7 = 25;
 
-		/// <summary>
-		/// 龙女砂
-		/// </summary>
 		public const short Jade8 = 26;
 
-		/// <summary>
-		/// 针线包
-		/// </summary>
 		public const short Fabric0 = 27;
 
-		/// <summary>
-		/// 青竹织机
-		/// </summary>
 		public const short Fabric1 = 28;
 
-		/// <summary>
-		/// 蝴蝶梭
-		/// </summary>
 		public const short Fabric2 = 29;
 
-		/// <summary>
-		/// 流云梭
-		/// </summary>
 		public const short Fabric3 = 30;
 
-		/// <summary>
-		/// 象牙织机
-		/// </summary>
 		public const short Fabric4 = 31;
 
-		/// <summary>
-		/// 百卉梭
-		/// </summary>
 		public const short Fabric5 = 32;
 
-		/// <summary>
-		/// 黄母织机
-		/// </summary>
 		public const short Fabric6 = 33;
 
-		/// <summary>
-		/// 七色流香梭
-		/// </summary>
 		public const short Fabric7 = 34;
 
-		/// <summary>
-		/// 天女宝霞梭
-		/// </summary>
 		public const short Fabric8 = 35;
 
-		/// <summary>
-		/// 石锅
-		/// </summary>
 		public const short Cooking0 = 36;
 
-		/// <summary>
-		/// 双耳铜锅
-		/// </summary>
 		public const short Cooking1 = 37;
 
-		/// <summary>
-		/// 福禄六耳锅
-		/// </summary>
 		public const short Cooking2 = 38;
 
-		/// <summary>
-		/// 灶王锅
-		/// </summary>
 		public const short Cooking3 = 39;
 
-		/// <summary>
-		/// 饕餮兽纹锅
-		/// </summary>
 		public const short Cooking4 = 40;
 
-		/// <summary>
-		/// 透香锅
-		/// </summary>
 		public const short Cooking5 = 41;
 
-		/// <summary>
-		/// 八宝六合锅
-		/// </summary>
 		public const short Cooking6 = 42;
 
-		/// <summary>
-		/// 玄铁滚金锅
-		/// </summary>
 		public const short Cooking7 = 43;
 
-		/// <summary>
-		/// 千斗锅
-		/// </summary>
 		public const short Cooking8 = 44;
 
-		/// <summary>
-		/// 陶土药钵
-		/// </summary>
 		public const short Medicine0 = 45;
 
-		/// <summary>
-		/// 百草鼎
-		/// </summary>
 		public const short Medicine1 = 46;
 
-		/// <summary>
-		/// 老君炼丹炉
-		/// </summary>
 		public const short Medicine2 = 47;
 
-		/// <summary>
-		/// 碧玉菩提钵
-		/// </summary>
 		public const short Medicine3 = 48;
 
-		/// <summary>
-		/// 鬼王炉
-		/// </summary>
 		public const short Medicine4 = 49;
 
-		/// <summary>
-		/// 神木药王鼎
-		/// </summary>
 		public const short Medicine5 = 50;
 
-		/// <summary>
-		/// 血玉钵
-		/// </summary>
 		public const short Medicine6 = 51;
 
-		/// <summary>
-		/// 天香琉璃鼎
-		/// </summary>
 		public const short Medicine7 = 52;
 
-		/// <summary>
-		/// 九沉玉骨炉
-		/// </summary>
 		public const short Medicine8 = 53;
 
-		/// <summary>
-		/// 徒手
-		/// </summary>
 		public const short Empty = 54;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 木工箱
-		/// </summary>
 		public static CraftToolItem Wood0 => Instance[(short)0];
 
-		/// <summary>
-		/// 巧匠盒
-		/// </summary>
 		public static CraftToolItem Wood1 => Instance[(short)1];
 
-		/// <summary>
-		/// 蝉翼刨
-		/// </summary>
 		public static CraftToolItem Wood2 => Instance[(short)2];
 
-		/// <summary>
-		/// 朱漆银匣
-		/// </summary>
 		public static CraftToolItem Wood3 => Instance[(short)3];
 
-		/// <summary>
-		/// 神铁琥珀刨
-		/// </summary>
 		public static CraftToolItem Wood4 => Instance[(short)4];
 
-		/// <summary>
-		/// 千机宝箱
-		/// </summary>
 		public static CraftToolItem Wood5 => Instance[(short)5];
 
-		/// <summary>
-		/// 鬼斧刨
-		/// </summary>
 		public static CraftToolItem Wood6 => Instance[(short)6];
 
-		/// <summary>
-		/// 如意乾坤盒
-		/// </summary>
 		public static CraftToolItem Wood7 => Instance[(short)7];
 
-		/// <summary>
-		/// 公输宝匣
-		/// </summary>
 		public static CraftToolItem Wood8 => Instance[(short)8];
 
-		/// <summary>
-		/// 青铜铸炉
-		/// </summary>
 		public static CraftToolItem Metal0 => Instance[(short)9];
 
-		/// <summary>
-		/// 赤纹炼
-		/// </summary>
 		public static CraftToolItem Metal1 => Instance[(short)10];
 
-		/// <summary>
-		/// 镔铁阴阳炼
-		/// </summary>
 		public static CraftToolItem Metal2 => Instance[(short)11];
 
-		/// <summary>
-		/// 乌金铸炉
-		/// </summary>
 		public static CraftToolItem Metal3 => Instance[(short)12];
 
-		/// <summary>
-		/// 混元铸炉
-		/// </summary>
 		public static CraftToolItem Metal4 => Instance[(short)13];
 
-		/// <summary>
-		/// 奇魄炼
-		/// </summary>
 		public static CraftToolItem Metal5 => Instance[(short)14];
 
-		/// <summary>
-		/// 七霞真火炼
-		/// </summary>
 		public static CraftToolItem Metal6 => Instance[(short)15];
 
-		/// <summary>
-		/// 九寒铸炉
-		/// </summary>
 		public static CraftToolItem Metal7 => Instance[(short)16];
 
-		/// <summary>
-		/// 若邪炼
-		/// </summary>
 		public static CraftToolItem Metal8 => Instance[(short)17];
 
-		/// <summary>
-		/// 黑石砂
-		/// </summary>
 		public static CraftToolItem Jade0 => Instance[(short)18];
 
-		/// <summary>
-		/// 金刚砂
-		/// </summary>
 		public static CraftToolItem Jade1 => Instance[(short)19];
 
-		/// <summary>
-		/// 翡翠珍珠砂
-		/// </summary>
 		public static CraftToolItem Jade2 => Instance[(short)20];
 
-		/// <summary>
-		/// 黄龙砂
-		/// </summary>
 		public static CraftToolItem Jade3 => Instance[(short)21];
 
-		/// <summary>
-		/// 三色宝石砂
-		/// </summary>
 		public static CraftToolItem Jade4 => Instance[(short)22];
 
-		/// <summary>
-		/// 幕雪砂
-		/// </summary>
 		public static CraftToolItem Jade5 => Instance[(short)23];
 
-		/// <summary>
-		/// 紫金沉香砂
-		/// </summary>
 		public static CraftToolItem Jade6 => Instance[(short)24];
 
-		/// <summary>
-		/// 冰晶血露砂
-		/// </summary>
 		public static CraftToolItem Jade7 => Instance[(short)25];
 
-		/// <summary>
-		/// 龙女砂
-		/// </summary>
 		public static CraftToolItem Jade8 => Instance[(short)26];
 
-		/// <summary>
-		/// 针线包
-		/// </summary>
 		public static CraftToolItem Fabric0 => Instance[(short)27];
 
-		/// <summary>
-		/// 青竹织机
-		/// </summary>
 		public static CraftToolItem Fabric1 => Instance[(short)28];
 
-		/// <summary>
-		/// 蝴蝶梭
-		/// </summary>
 		public static CraftToolItem Fabric2 => Instance[(short)29];
 
-		/// <summary>
-		/// 流云梭
-		/// </summary>
 		public static CraftToolItem Fabric3 => Instance[(short)30];
 
-		/// <summary>
-		/// 象牙织机
-		/// </summary>
 		public static CraftToolItem Fabric4 => Instance[(short)31];
 
-		/// <summary>
-		/// 百卉梭
-		/// </summary>
 		public static CraftToolItem Fabric5 => Instance[(short)32];
 
-		/// <summary>
-		/// 黄母织机
-		/// </summary>
 		public static CraftToolItem Fabric6 => Instance[(short)33];
 
-		/// <summary>
-		/// 七色流香梭
-		/// </summary>
 		public static CraftToolItem Fabric7 => Instance[(short)34];
 
-		/// <summary>
-		/// 天女宝霞梭
-		/// </summary>
 		public static CraftToolItem Fabric8 => Instance[(short)35];
 
-		/// <summary>
-		/// 石锅
-		/// </summary>
 		public static CraftToolItem Cooking0 => Instance[(short)36];
 
-		/// <summary>
-		/// 双耳铜锅
-		/// </summary>
 		public static CraftToolItem Cooking1 => Instance[(short)37];
 
-		/// <summary>
-		/// 福禄六耳锅
-		/// </summary>
 		public static CraftToolItem Cooking2 => Instance[(short)38];
 
-		/// <summary>
-		/// 灶王锅
-		/// </summary>
 		public static CraftToolItem Cooking3 => Instance[(short)39];
 
-		/// <summary>
-		/// 饕餮兽纹锅
-		/// </summary>
 		public static CraftToolItem Cooking4 => Instance[(short)40];
 
-		/// <summary>
-		/// 透香锅
-		/// </summary>
 		public static CraftToolItem Cooking5 => Instance[(short)41];
 
-		/// <summary>
-		/// 八宝六合锅
-		/// </summary>
 		public static CraftToolItem Cooking6 => Instance[(short)42];
 
-		/// <summary>
-		/// 玄铁滚金锅
-		/// </summary>
 		public static CraftToolItem Cooking7 => Instance[(short)43];
 
-		/// <summary>
-		/// 千斗锅
-		/// </summary>
 		public static CraftToolItem Cooking8 => Instance[(short)44];
 
-		/// <summary>
-		/// 陶土药钵
-		/// </summary>
 		public static CraftToolItem Medicine0 => Instance[(short)45];
 
-		/// <summary>
-		/// 百草鼎
-		/// </summary>
 		public static CraftToolItem Medicine1 => Instance[(short)46];
 
-		/// <summary>
-		/// 老君炼丹炉
-		/// </summary>
 		public static CraftToolItem Medicine2 => Instance[(short)47];
 
-		/// <summary>
-		/// 碧玉菩提钵
-		/// </summary>
 		public static CraftToolItem Medicine3 => Instance[(short)48];
 
-		/// <summary>
-		/// 鬼王炉
-		/// </summary>
 		public static CraftToolItem Medicine4 => Instance[(short)49];
 
-		/// <summary>
-		/// 神木药王鼎
-		/// </summary>
 		public static CraftToolItem Medicine5 => Instance[(short)50];
 
-		/// <summary>
-		/// 血玉钵
-		/// </summary>
 		public static CraftToolItem Medicine6 => Instance[(short)51];
 
-		/// <summary>
-		/// 天香琉璃鼎
-		/// </summary>
 		public static CraftToolItem Medicine7 => Instance[(short)52];
 
-		/// <summary>
-		/// 九沉玉骨炉
-		/// </summary>
 		public static CraftToolItem Medicine8 => Instance[(short)53];
 
-		/// <summary>
-		/// 徒手
-		/// </summary>
 		public static CraftToolItem Empty => Instance[(short)54];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CraftTool Instance = new CraftTool();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

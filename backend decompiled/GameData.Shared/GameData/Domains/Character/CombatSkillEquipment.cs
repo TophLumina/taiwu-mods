@@ -8,48 +8,21 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 功法装备配置.
-/// 该类型无法凭空创建，也不直接产生数据，而是在转换后用于读取、操作以下两种数据
-/// 1. short[] (Character._equippedCombatSkills)
-/// 2. CombatSkillPlan
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializableGameData
 {
-	/// <summary>
-	/// 数据源, 只在后端使用且不会被序列化, 用于应用数据修改时决定保存的目标数据.
-	/// </summary>
 	private object _sourceObj;
 
-	/// <summary>
-	/// 内功
-	/// </summary>
 	public ArraySegmentList<short> Neigong;
 
-	/// <summary>
-	/// 摧破
-	/// </summary>  
 	public ArraySegmentList<short> Attack;
 
-	/// <summary>
-	/// 轻灵
-	/// </summary>
 	public ArraySegmentList<short> Agility;
 
-	/// <summary>
-	/// 护体
-	/// </summary>
 	public ArraySegmentList<short> Defense;
 
-	/// <summary>
-	/// 奇窍
-	/// </summary>
 	public ArraySegmentList<short> Assistance;
 
-	/// <summary>
-	/// 获取指定类型的功法列表
-	/// </summary>
 	public ref ArraySegmentList<short> this[sbyte type] => type switch
 	{
 		0 => ref Neigong, 
@@ -60,10 +33,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		_ => throw new IndexOutOfRangeException($"{type} is out of range [0, {5})"), 
 	};
 
-	/// <summary>
-	/// 拷贝 (内部字段实际为浅拷贝引用).
-	/// </summary>
-	/// <param name="other"></param>
 	public void Assign(CombatSkillEquipment other)
 	{
 		_sourceObj = other._sourceObj;
@@ -74,20 +43,11 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		Assistance = other.Assistance;
 	}
 
-	/// <summary>
-	/// 指定功法是否已装配
-	/// </summary>
-	/// <param name="templateId"></param>
-	/// <returns></returns>
 	public bool IsCombatSkillEquipped(short templateId)
 	{
 		return this[Config.CombatSkill.Instance[templateId].EquipType].IndexOf(templateId) >= 0;
 	}
 
-	/// <summary>
-	/// 获取所有有效功法
-	/// </summary>
-	/// <param name="result">返回结果集合. 该方法会先清空集合中已有的元素.</param>
 	public void GetValidSkills(ICollection<short> result)
 	{
 		result.Clear();
@@ -105,11 +65,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		}
 	}
 
-	/// <summary>
-	/// 获取指定类型的所有有效功法
-	/// </summary>
-	/// <param name="equipType">功法装配类型 <see cref="T:GameData.Domains.CombatSkill.CombatSkillEquipType" /></param>
-	/// <param name="result">返回结果集合. 该方法会先清空集合中已有的元素.</param>
 	public void GetValidSkills(sbyte equipType, ICollection<short> result)
 	{
 		result.Clear();
@@ -124,7 +79,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		}
 	}
 
-	/// <inheritdoc />
 	public IEnumerator<short> GetEnumerator()
 	{
 		for (sbyte type = 0; type < 5; type++)
@@ -143,13 +97,11 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return GetEnumerator();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 10 + 2 * (Neigong.Count + Attack.Count + Agility.Count + Defense.Count + Assistance.Count);
@@ -160,7 +112,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -177,7 +128,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -225,20 +175,11 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return (int)(pCurrData - pData);
 	}
 
-	/// <summary>
-	/// 获取源数据.
-	/// </summary>
-	/// <returns></returns>
 	public T GetSourceObject<T>() where T : class
 	{
 		return _sourceObj as T;
 	}
 
-	/// <summary>
-	/// 设置指定栏位的功法数据. 该方法会自动扩容
-	/// </summary>
-	/// <param name="slot"></param>
-	/// <param name="skillTemplateId"></param>
 	public void OfflineSetSlot(int slot, short skillTemplateId)
 	{
 		sbyte equipType = Config.CombatSkill.Instance[skillTemplateId].EquipType;
@@ -246,10 +187,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		this[equipType][slot] = skillTemplateId;
 	}
 
-	/// <summary>
-	/// 离线添加功法数据, 将指定功法添加到最后
-	/// </summary>
-	/// <param name="skillTemplateId"></param>
 	public void OfflineAddSkill(short skillTemplateId)
 	{
 		sbyte equipType = Config.CombatSkill.Instance[skillTemplateId].EquipType;
@@ -257,11 +194,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		this[equipType].Add(skillTemplateId);
 	}
 
-	/// <summary>
-	/// 移除指定功法数据.
-	/// </summary>
-	/// <param name="skillTemplateId"></param>
-	/// <returns></returns>
 	public bool OfflineRemoveSkill(short skillTemplateId)
 	{
 		sbyte equipType = Config.CombatSkill.Instance[skillTemplateId].EquipType;
@@ -275,9 +207,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return true;
 	}
 
-	/// <summary>
-	/// 清空数据.
-	/// </summary>
 	public void OfflineClear()
 	{
 		Neigong.Clear();
@@ -287,11 +216,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		Assistance.Clear();
 	}
 
-	/// <summary>
-	/// 移除最后的功法
-	/// </summary>
-	/// <param name="equipType"></param>
-	/// <returns>被移除的功法，无可移除功法时返回 -1</returns>
 	public short OfflineRemoveLastSkill(sbyte equipType)
 	{
 		ArraySegmentList<short> collection = this[equipType];
@@ -306,12 +230,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return result;
 	}
 
-	/// <summary>
-	/// 离线确保容量. 可能导致内部容器对象发生改变.
-	/// </summary>
-	/// <param name="equipType">功法装配类型.</param>
-	/// <param name="capacity">容量需求.</param>
-	/// <returns>内部容器对象是否发生改变.</returns>
 	public bool OfflineEnsureCapacity(sbyte equipType, int capacity = -1)
 	{
 		ArraySegmentList<short> collection = this[equipType];
@@ -342,10 +260,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return true;
 	}
 
-	/// <summary>
-	/// 转换角色对象中保存的功法装配数组
-	/// </summary>
-	/// <param name="equippedCombatSkills"></param>
 	public void Set(short[] equippedCombatSkills)
 	{
 		_sourceObj = equippedCombatSkills;
@@ -356,10 +270,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		Assistance = ConvertPartialSegmentList(equippedCombatSkills, 4);
 	}
 
-	/// <summary>
-	/// 转换功法装配预设数据
-	/// </summary>
-	/// <param name="combatSkillPlan"></param>
 	public void Set(CombatSkillPlan combatSkillPlan)
 	{
 		_sourceObj = combatSkillPlan;
@@ -370,10 +280,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		Assistance = ConvertFullSegmentList(combatSkillPlan.AssistanceSkillList);
 	}
 
-	/// <summary>
-	/// 从装配数据中拷贝
-	/// </summary>
-	/// <param name="other"></param>
 	public void CopyFrom(CombatSkillEquipment other)
 	{
 		for (sbyte equipType = 0; equipType < 5; equipType++)
@@ -393,11 +299,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		}
 	}
 
-	/// <summary>
-	/// 方案是否与相同.
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool EqualsTo(CombatSkillEquipment other)
 	{
 		for (sbyte equipType = 0; equipType < 5; equipType++)
@@ -434,12 +335,6 @@ public class CombatSkillEquipment : IEnumerable<short>, IEnumerable, ISerializab
 		return new ArraySegmentList<short>(array, 0, array.Length, GetNextIndex(array), (short)(-1));
 	}
 
-	/// <summary>
-	/// 获取指定功法装备类型栏位组
-	/// </summary>
-	/// <param name="equippedSkills"></param>
-	/// <param name="equipType"></param>
-	/// <returns></returns>
 	private static ArraySegmentList<short> ConvertPartialSegmentList(short[] equippedSkills, sbyte equipType)
 	{
 		sbyte offset = CombatSkillHelper.SlotBeginIndexes[equipType];

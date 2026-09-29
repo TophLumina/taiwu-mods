@@ -9,49 +9,29 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LifeRecord.GeneralRecord;
 
-/// <summary>
-/// 人物经历渲染相关参数数据集合
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class ArgumentCollectionRenderArguments : ISerializableGameData
 {
-	/// <summary>
-	/// 获取时的唯一ID：为不同的界面或者通知获取时传入唯一的key
-	/// </summary>
 	[SerializableGameDataField]
 	public string Key;
 
-	/// <summary>
-	/// 关联的角色姓名显示相关数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<NameAndLifeRelatedData> CharNameAndLifeDataList;
 
-	/// <summary>
-	/// 关联的聚居点名字相关显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SettlementNameRelatedData> SettlementNames;
 
-	/// <summary>
-	/// 关联的地点名字相关显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<LocationNameRelatedData> LocationNames;
 
-	/// <summary>
-	/// 关联的蛟、龙名字相关显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<JiaoLoongNameRelatedData> JiaoLoongNames;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -67,7 +47,6 @@ public class ArgumentCollectionRenderArguments : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -163,7 +142,6 @@ public class ArgumentCollectionRenderArguments : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -12,6 +12,8 @@ using GameData.Common.SingleValueCollection;
 using GameData.DLC;
 using GameData.DLC.CricketPolymorph;
 using GameData.DLC.FiveLoong;
+using GameData.DLC.SmarterChicken;
+using GameData.DLC.TaiwuAsXiangshu;
 using GameData.Domains.Adventure;
 using GameData.Domains.Building;
 using GameData.Domains.Building.Display;
@@ -28,6 +30,7 @@ using GameData.Domains.Character.Relation;
 using GameData.Domains.Character.Relation.RelationTree;
 using GameData.Domains.Character.SortFilter;
 using GameData.Domains.Combat;
+using GameData.Domains.Combat.Chicken;
 using GameData.Domains.Combat.MixPoison;
 using GameData.Domains.CombatSkill;
 using GameData.Domains.Extra;
@@ -62,7 +65,6 @@ using GameData.Domains.TaiwuEvent;
 using GameData.Domains.TaiwuEvent.DisplayEvent;
 using GameData.Domains.TaiwuEvent.EventLog;
 using GameData.Domains.TaiwuEvent.EventOption;
-using GameData.Domains.TaiwuEvent.MonthlyEventActions;
 using GameData.Domains.World;
 using GameData.Domains.World.Display;
 using GameData.Domains.World.MonthlyEvent;
@@ -74,17 +76,6 @@ using GameData.Utilities;
 
 namespace GameData.Serializer;
 
-/// <summary>
-/// 负责表现模块与数据模块沟通的游戏数据序列化类
-/// </summary>
-/// <summary>
-/// 负责表现模块与数据模块沟通的游戏数据序列化类 - 二进制数据块
-/// </summary>
-/// <summary>
-/// 负责表现模块与数据模块沟通的游戏数据序列化类 - 额外的游戏数据序列化与反序列化方法.
-/// 此处放置未被自动生成的代码覆盖的数据类型的序列化和反序列化方法, 由手工编写.
-/// 注意, 序列化方法名必须为 Serialize, 反序列化方法名必须为 Deserialize, 且都必须加上 ExtraSerializerAttribute.
-/// </summary>
 public static class Serializer
 {
 	private static readonly IFormatter BinaryFormatter = new BinaryFormatter
@@ -92,23 +83,13 @@ public static class Serializer
 		AssemblyFormat = FormatterAssemblyStyle.Simple
 	};
 
-	/// <summary>
-	/// 根据修改记录计算出的原数据碎片
-	/// </summary>
 	private static readonly List<OriginalDataFragment> Fragments = new List<OriginalDataFragment>();
 
-	/// <summary>
-	/// 把无法解析的程序集全部解析为本地程序集
-	/// </summary>
 	private static Assembly ResolveEventHandlerLocalization(object sender, ResolveEventArgs args)
 	{
 		return typeof(Serializer).Assembly;
 	}
 
-	/// <summary>
-	/// 初始化模块间序列化类.
-	/// 不要多次调用此方法.
-	/// </summary>
 	public static void Initialize()
 	{
 		AppDomain currentDomain = AppDomain.CurrentDomain;
@@ -559,6 +540,18 @@ public static class Serializer
 		SerializerHolder<ProfessionSkillArg[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<ProfessionSkillArg>>.SerializeFunc = Serialize;
 		SerializerHolder<List<ProfessionSkillArg>>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0Result>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0Result>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0Result[]>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0Result[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<TaiwuAsXiangshuSkill0Result>>.SerializeFunc = Serialize;
+		SerializerHolder<List<TaiwuAsXiangshuSkill0Result>>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0ResultItem>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0ResultItem>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0ResultItem[]>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuSkill0ResultItem[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<TaiwuAsXiangshuSkill0ResultItem>>.SerializeFunc = Serialize;
+		SerializerHolder<List<TaiwuAsXiangshuSkill0ResultItem>>.DeserializeFunc = Deserialize;
 		SerializerHolder<TaiwuProfessionSkillSlots>.SerializeFunc = Serialize;
 		SerializerHolder<TaiwuProfessionSkillSlots>.DeserializeFunc = Deserialize;
 		SerializerHolder<TaiwuProfessionSkillSlots[]>.SerializeFunc = Serialize;
@@ -733,6 +726,12 @@ public static class Serializer
 		SerializerHolder<QiArtStrategyDisplayData[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<QiArtStrategyDisplayData>>.SerializeFunc = Serialize;
 		SerializerHolder<List<QiArtStrategyDisplayData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ShortCutOperationLevelData>.SerializeFunc = Serialize;
+		SerializerHolder<ShortCutOperationLevelData>.DeserializeFunc = Deserialize;
+		SerializerHolder<ShortCutOperationLevelData[]>.SerializeFunc = Serialize;
+		SerializerHolder<ShortCutOperationLevelData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ShortCutOperationLevelData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ShortCutOperationLevelData>>.DeserializeFunc = Deserialize;
 		SerializerHolder<SkillBreakBonusSelectableItem>.SerializeFunc = Serialize;
 		SerializerHolder<SkillBreakBonusSelectableItem>.DeserializeFunc = Deserialize;
 		SerializerHolder<SkillBreakBonusSelectableItem[]>.SerializeFunc = Serialize;
@@ -955,12 +954,6 @@ public static class Serializer
 		SerializerHolder<GlobalArgValue[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<GlobalArgValue>>.SerializeFunc = Serialize;
 		SerializerHolder<List<GlobalArgValue>>.DeserializeFunc = Deserialize;
-		SerializerHolder<MonthlyActionKey>.SerializeFunc = Serialize;
-		SerializerHolder<MonthlyActionKey>.DeserializeFunc = Deserialize;
-		SerializerHolder<MonthlyActionKey[]>.SerializeFunc = Serialize;
-		SerializerHolder<MonthlyActionKey[]>.DeserializeFunc = Deserialize;
-		SerializerHolder<List<MonthlyActionKey>>.SerializeFunc = Serialize;
-		SerializerHolder<List<MonthlyActionKey>>.DeserializeFunc = Deserialize;
 		SerializerHolder<EventLogData>.SerializeFunc = Serialize;
 		SerializerHolder<EventLogData>.DeserializeFunc = Deserialize;
 		SerializerHolder<EventLogData[]>.SerializeFunc = Serialize;
@@ -1717,6 +1710,12 @@ public static class Serializer
 		SerializerHolder<TransferableRecordDataBase[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<TransferableRecordDataBase>>.SerializeFunc = Serialize;
 		SerializerHolder<List<TransferableRecordDataBase>>.DeserializeFunc = Deserialize;
+		SerializerHolder<TransferableLifeRecordMonthData>.SerializeFunc = Serialize;
+		SerializerHolder<TransferableLifeRecordMonthData>.DeserializeFunc = Deserialize;
+		SerializerHolder<TransferableLifeRecordMonthData[]>.SerializeFunc = Serialize;
+		SerializerHolder<TransferableLifeRecordMonthData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<TransferableLifeRecordMonthData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<TransferableLifeRecordMonthData>>.DeserializeFunc = Deserialize;
 		SerializerHolder<TransferableRecord>.SerializeFunc = Serialize;
 		SerializerHolder<TransferableRecord>.DeserializeFunc = Deserialize;
 		SerializerHolder<TransferableRecord[]>.SerializeFunc = Serialize;
@@ -2491,6 +2490,24 @@ public static class Serializer
 		SerializerHolder<MixPoisonAffectedCountCollection[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<MixPoisonAffectedCountCollection>>.SerializeFunc = Serialize;
 		SerializerHolder<List<MixPoisonAffectedCountCollection>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPointDto>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPointDto>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPointDto[]>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPointDto[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ChickenPointDto>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ChickenPointDto>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPointZonesDto>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPointZonesDto>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPointZonesDto[]>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPointZonesDto[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ChickenPointZonesDto>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ChickenPointZonesDto>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenInvokeResultDto>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenInvokeResultDto>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenInvokeResultDto[]>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenInvokeResultDto[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ChickenInvokeResultDto>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ChickenInvokeResultDto>>.DeserializeFunc = Deserialize;
 		SerializerHolder<CombatSkillBreakAvailableStepsDisplayData>.SerializeFunc = Serialize;
 		SerializerHolder<CombatSkillBreakAvailableStepsDisplayData>.DeserializeFunc = Deserialize;
 		SerializerHolder<CombatSkillBreakAvailableStepsDisplayData[]>.SerializeFunc = Serialize;
@@ -2953,6 +2970,12 @@ public static class Serializer
 		SerializerHolder<NameAndAvatar[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<NameAndAvatar>>.SerializeFunc = Serialize;
 		SerializerHolder<List<NameAndAvatar>>.DeserializeFunc = Deserialize;
+		SerializerHolder<NameAndAvatarWithFavor>.SerializeFunc = Serialize;
+		SerializerHolder<NameAndAvatarWithFavor>.DeserializeFunc = Deserialize;
+		SerializerHolder<NameAndAvatarWithFavor[]>.SerializeFunc = Serialize;
+		SerializerHolder<NameAndAvatarWithFavor[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<NameAndAvatarWithFavor>>.SerializeFunc = Serialize;
+		SerializerHolder<List<NameAndAvatarWithFavor>>.DeserializeFunc = Deserialize;
 		SerializerHolder<NameStringAndAvatar>.SerializeFunc = Serialize;
 		SerializerHolder<NameStringAndAvatar>.DeserializeFunc = Deserialize;
 		SerializerHolder<NameStringAndAvatar[]>.SerializeFunc = Serialize;
@@ -3613,6 +3636,24 @@ public static class Serializer
 		SerializerHolder<ChickenPluckFeatherDisplayData[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<ChickenPluckFeatherDisplayData>>.SerializeFunc = Serialize;
 		SerializerHolder<List<ChickenPluckFeatherDisplayData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPolymorphDisplayData>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPolymorphDisplayData>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPolymorphDisplayData[]>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPolymorphDisplayData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ChickenPolymorphDisplayData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ChickenPolymorphDisplayData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPolymorphInfoData>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPolymorphInfoData>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPolymorphInfoData[]>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPolymorphInfoData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ChickenPolymorphInfoData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ChickenPolymorphInfoData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPolymorphLocationData>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPolymorphLocationData>.DeserializeFunc = Deserialize;
+		SerializerHolder<ChickenPolymorphLocationData[]>.SerializeFunc = Serialize;
+		SerializerHolder<ChickenPolymorphLocationData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ChickenPolymorphLocationData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ChickenPolymorphLocationData>>.DeserializeFunc = Deserialize;
 		SerializerHolder<CricketCollectionBatchButtonStateDisplayData>.SerializeFunc = Serialize;
 		SerializerHolder<CricketCollectionBatchButtonStateDisplayData>.DeserializeFunc = Deserialize;
 		SerializerHolder<CricketCollectionBatchButtonStateDisplayData[]>.SerializeFunc = Serialize;
@@ -3673,6 +3714,12 @@ public static class Serializer
 		SerializerHolder<AdventureMajorEventTaiwu[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<AdventureMajorEventTaiwu>>.SerializeFunc = Serialize;
 		SerializerHolder<List<AdventureMajorEventTaiwu>>.DeserializeFunc = Deserialize;
+		SerializerHolder<AdventureNameAndDurationDisplayData>.SerializeFunc = Serialize;
+		SerializerHolder<AdventureNameAndDurationDisplayData>.DeserializeFunc = Deserialize;
+		SerializerHolder<AdventureNameAndDurationDisplayData[]>.SerializeFunc = Serialize;
+		SerializerHolder<AdventureNameAndDurationDisplayData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<AdventureNameAndDurationDisplayData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<AdventureNameAndDurationDisplayData>>.DeserializeFunc = Deserialize;
 		SerializerHolder<AdventureParameterKey>.SerializeFunc = Serialize;
 		SerializerHolder<AdventureParameterKey>.DeserializeFunc = Deserialize;
 		SerializerHolder<AdventureParameterKey[]>.SerializeFunc = Serialize;
@@ -3721,24 +3768,6 @@ public static class Serializer
 		SerializerHolder<AdventureTaiwu[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<AdventureTaiwu>>.SerializeFunc = Serialize;
 		SerializerHolder<List<AdventureTaiwu>>.DeserializeFunc = Deserialize;
-		SerializerHolder<AdventureMapPoint>.SerializeFunc = Serialize;
-		SerializerHolder<AdventureMapPoint>.DeserializeFunc = Deserialize;
-		SerializerHolder<AdventureMapPoint[]>.SerializeFunc = Serialize;
-		SerializerHolder<AdventureMapPoint[]>.DeserializeFunc = Deserialize;
-		SerializerHolder<List<AdventureMapPoint>>.SerializeFunc = Serialize;
-		SerializerHolder<List<AdventureMapPoint>>.DeserializeFunc = Deserialize;
-		SerializerHolder<AdventureSiteData>.SerializeFunc = Serialize;
-		SerializerHolder<AdventureSiteData>.DeserializeFunc = Deserialize;
-		SerializerHolder<AdventureSiteData[]>.SerializeFunc = Serialize;
-		SerializerHolder<AdventureSiteData[]>.DeserializeFunc = Deserialize;
-		SerializerHolder<List<AdventureSiteData>>.SerializeFunc = Serialize;
-		SerializerHolder<List<AdventureSiteData>>.DeserializeFunc = Deserialize;
-		SerializerHolder<AreaAdventureData>.SerializeFunc = Serialize;
-		SerializerHolder<AreaAdventureData>.DeserializeFunc = Deserialize;
-		SerializerHolder<AreaAdventureData[]>.SerializeFunc = Serialize;
-		SerializerHolder<AreaAdventureData[]>.DeserializeFunc = Deserialize;
-		SerializerHolder<List<AreaAdventureData>>.SerializeFunc = Serialize;
-		SerializerHolder<List<AreaAdventureData>>.DeserializeFunc = Deserialize;
 		SerializerHolder<DlcId>.SerializeFunc = Serialize;
 		SerializerHolder<DlcId>.DeserializeFunc = Deserialize;
 		SerializerHolder<DlcId[]>.SerializeFunc = Serialize;
@@ -3769,6 +3798,48 @@ public static class Serializer
 		SerializerHolder<LoveTokenDataItem[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<LoveTokenDataItem>>.SerializeFunc = Serialize;
 		SerializerHolder<List<LoveTokenDataItem>>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerDisplayData>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerDisplayData>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerDisplayData[]>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerDisplayData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerDisplayData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerDisplayData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerPerformanceEntryDisplayData>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerPerformanceEntryDisplayData>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerPerformanceEntryDisplayData[]>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerPerformanceEntryDisplayData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerPerformanceEntryDisplayData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerPerformanceEntryDisplayData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerTwelveImmortalDisplayData>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerTwelveImmortalDisplayData>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerTwelveImmortalDisplayData[]>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerTwelveImmortalDisplayData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerTwelveImmortalDisplayData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerTwelveImmortalDisplayData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData>.DeserializeFunc = Deserialize;
+		SerializerHolder<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData[]>.SerializeFunc = Serialize;
+		SerializerHolder<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData>>.DeserializeFunc = Deserialize;
+		SerializerHolder<CombatChickenPreset>.SerializeFunc = Serialize;
+		SerializerHolder<CombatChickenPreset>.DeserializeFunc = Deserialize;
+		SerializerHolder<CombatChickenPreset[]>.SerializeFunc = Serialize;
+		SerializerHolder<CombatChickenPreset[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<CombatChickenPreset>>.SerializeFunc = Serialize;
+		SerializerHolder<List<CombatChickenPreset>>.DeserializeFunc = Deserialize;
+		SerializerHolder<CombatChickenPresetItem>.SerializeFunc = Serialize;
+		SerializerHolder<CombatChickenPresetItem>.DeserializeFunc = Deserialize;
+		SerializerHolder<CombatChickenPresetItem[]>.SerializeFunc = Serialize;
+		SerializerHolder<CombatChickenPresetItem[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<CombatChickenPresetItem>>.SerializeFunc = Serialize;
+		SerializerHolder<List<CombatChickenPresetItem>>.DeserializeFunc = Deserialize;
+		SerializerHolder<SmarterChickenData>.SerializeFunc = Serialize;
+		SerializerHolder<SmarterChickenData>.DeserializeFunc = Deserialize;
+		SerializerHolder<SmarterChickenData[]>.SerializeFunc = Serialize;
+		SerializerHolder<SmarterChickenData[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<SmarterChickenData>>.SerializeFunc = Serialize;
+		SerializerHolder<List<SmarterChickenData>>.DeserializeFunc = Deserialize;
 		SerializerHolder<ChildrenOfLoong>.SerializeFunc = Serialize;
 		SerializerHolder<ChildrenOfLoong>.DeserializeFunc = Deserialize;
 		SerializerHolder<ChildrenOfLoong[]>.SerializeFunc = Serialize;
@@ -3865,6 +3936,12 @@ public static class Serializer
 		SerializerHolder<MultiIntArray[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<MultiIntArray>>.SerializeFunc = Serialize;
 		SerializerHolder<List<MultiIntArray>>.DeserializeFunc = Deserialize;
+		SerializerHolder<NullableIntDto>.SerializeFunc = Serialize;
+		SerializerHolder<NullableIntDto>.DeserializeFunc = Deserialize;
+		SerializerHolder<NullableIntDto[]>.SerializeFunc = Serialize;
+		SerializerHolder<NullableIntDto[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<NullableIntDto>>.SerializeFunc = Serialize;
+		SerializerHolder<List<NullableIntDto>>.DeserializeFunc = Deserialize;
 		SerializerHolder<ActionPlanningDisplayData>.SerializeFunc = Serialize;
 		SerializerHolder<ActionPlanningDisplayData>.DeserializeFunc = Deserialize;
 		SerializerHolder<ActionPlanningDisplayData[]>.SerializeFunc = Serialize;
@@ -3883,18 +3960,6 @@ public static class Serializer
 		SerializerHolder<CharacterMissionDisplayData[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<CharacterMissionDisplayData>>.SerializeFunc = Serialize;
 		SerializerHolder<List<CharacterMissionDisplayData>>.DeserializeFunc = Deserialize;
-		SerializerHolder<PlanningActionSettings>.SerializeFunc = Serialize;
-		SerializerHolder<PlanningActionSettings>.DeserializeFunc = Deserialize;
-		SerializerHolder<PlanningActionSettings[]>.SerializeFunc = Serialize;
-		SerializerHolder<PlanningActionSettings[]>.DeserializeFunc = Deserialize;
-		SerializerHolder<List<PlanningActionSettings>>.SerializeFunc = Serialize;
-		SerializerHolder<List<PlanningActionSettings>>.DeserializeFunc = Deserialize;
-		SerializerHolder<PlanningGoalSettings>.SerializeFunc = Serialize;
-		SerializerHolder<PlanningGoalSettings>.DeserializeFunc = Deserialize;
-		SerializerHolder<PlanningGoalSettings[]>.SerializeFunc = Serialize;
-		SerializerHolder<PlanningGoalSettings[]>.DeserializeFunc = Deserialize;
-		SerializerHolder<List<PlanningGoalSettings>>.SerializeFunc = Serialize;
-		SerializerHolder<List<PlanningGoalSettings>>.DeserializeFunc = Deserialize;
 		SerializerHolder<ByteList>.SerializeFunc = Serialize;
 		SerializerHolder<ByteList>.DeserializeFunc = Deserialize;
 		SerializerHolder<ByteList[]>.SerializeFunc = Serialize;
@@ -4003,8 +4068,6 @@ public static class Serializer
 		SerializerHolder<(short, BuildingBlockData)>.DeserializeFunc = Deserialize;
 		SerializerHolder<Dictionary<TravelRouteKey, TravelRoute>>.SerializeFunc = Serialize;
 		SerializerHolder<Dictionary<TravelRouteKey, TravelRoute>>.DeserializeFunc = Deserialize;
-		SerializerHolder<Dictionary<Location, AdventureSiteData>>.SerializeFunc = Serialize;
-		SerializerHolder<Dictionary<Location, AdventureSiteData>>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<(int, short)>>.SerializeFunc = Serialize;
 		SerializerHolder<List<(int, short)>>.DeserializeFunc = Deserialize;
 		SerializerHolder<(int, bool)>.SerializeFunc = Serialize;
@@ -4045,6 +4108,12 @@ public static class Serializer
 		SerializerHolder<EGuidingChapterState[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<EGuidingChapterState>>.SerializeFunc = Serialize;
 		SerializerHolder<List<EGuidingChapterState>>.DeserializeFunc = Deserialize;
+		SerializerHolder<FarmerAutoWorkConfig>.SerializeFunc = Serialize;
+		SerializerHolder<FarmerAutoWorkConfig>.DeserializeFunc = Deserialize;
+		SerializerHolder<FarmerAutoWorkConfig[]>.SerializeFunc = Serialize;
+		SerializerHolder<FarmerAutoWorkConfig[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<FarmerAutoWorkConfig>>.SerializeFunc = Serialize;
+		SerializerHolder<List<FarmerAutoWorkConfig>>.DeserializeFunc = Deserialize;
 		SerializerHolder<EItemAutoOperationSource>.SerializeFunc = Serialize;
 		SerializerHolder<EItemAutoOperationSource>.DeserializeFunc = Deserialize;
 		SerializerHolder<EItemAutoOperationSource[]>.SerializeFunc = Serialize;
@@ -4093,6 +4162,12 @@ public static class Serializer
 		SerializerHolder<ETargetType[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<ETargetType>>.SerializeFunc = Serialize;
 		SerializerHolder<List<ETargetType>>.DeserializeFunc = Deserialize;
+		SerializerHolder<OperationLevel>.SerializeFunc = Serialize;
+		SerializerHolder<OperationLevel>.DeserializeFunc = Deserialize;
+		SerializerHolder<OperationLevel[]>.SerializeFunc = Serialize;
+		SerializerHolder<OperationLevel[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<OperationLevel>>.SerializeFunc = Serialize;
+		SerializerHolder<List<OperationLevel>>.DeserializeFunc = Deserialize;
 		SerializerHolder<EFilterItemKey>.SerializeFunc = Serialize;
 		SerializerHolder<EFilterItemKey>.DeserializeFunc = Deserialize;
 		SerializerHolder<EFilterItemKey[]>.SerializeFunc = Serialize;
@@ -4141,12 +4216,24 @@ public static class Serializer
 		SerializerHolder<ESkillDamageSectionResult[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<ESkillDamageSectionResult>>.SerializeFunc = Serialize;
 		SerializerHolder<List<ESkillDamageSectionResult>>.DeserializeFunc = Deserialize;
+		SerializerHolder<EGmCreateInventoryItemResult>.SerializeFunc = Serialize;
+		SerializerHolder<EGmCreateInventoryItemResult>.DeserializeFunc = Deserialize;
+		SerializerHolder<EGmCreateInventoryItemResult[]>.SerializeFunc = Serialize;
+		SerializerHolder<EGmCreateInventoryItemResult[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<EGmCreateInventoryItemResult>>.SerializeFunc = Serialize;
+		SerializerHolder<List<EGmCreateInventoryItemResult>>.DeserializeFunc = Deserialize;
 		SerializerHolder<EWisdomType>.SerializeFunc = Serialize;
 		SerializerHolder<EWisdomType>.DeserializeFunc = Deserialize;
 		SerializerHolder<EWisdomType[]>.SerializeFunc = Serialize;
 		SerializerHolder<EWisdomType[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<EWisdomType>>.SerializeFunc = Serialize;
 		SerializerHolder<List<EWisdomType>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ImmunityMask>.SerializeFunc = Serialize;
+		SerializerHolder<ImmunityMask>.DeserializeFunc = Deserialize;
+		SerializerHolder<ImmunityMask[]>.SerializeFunc = Serialize;
+		SerializerHolder<ImmunityMask[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ImmunityMask>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ImmunityMask>>.DeserializeFunc = Deserialize;
 		SerializerHolder<EApprovingState>.SerializeFunc = Serialize;
 		SerializerHolder<EApprovingState>.DeserializeFunc = Deserialize;
 		SerializerHolder<EApprovingState[]>.SerializeFunc = Serialize;
@@ -4171,12 +4258,18 @@ public static class Serializer
 		SerializerHolder<AdventureVersion[]>.DeserializeFunc = Deserialize;
 		SerializerHolder<List<AdventureVersion>>.SerializeFunc = Serialize;
 		SerializerHolder<List<AdventureVersion>>.DeserializeFunc = Deserialize;
-		SerializerHolder<ECricketPolymorphState>.SerializeFunc = Serialize;
-		SerializerHolder<ECricketPolymorphState>.DeserializeFunc = Deserialize;
-		SerializerHolder<ECricketPolymorphState[]>.SerializeFunc = Serialize;
-		SerializerHolder<ECricketPolymorphState[]>.DeserializeFunc = Deserialize;
-		SerializerHolder<List<ECricketPolymorphState>>.SerializeFunc = Serialize;
-		SerializerHolder<List<ECricketPolymorphState>>.DeserializeFunc = Deserialize;
+		SerializerHolder<EPolymorphState>.SerializeFunc = Serialize;
+		SerializerHolder<EPolymorphState>.DeserializeFunc = Deserialize;
+		SerializerHolder<EPolymorphState[]>.SerializeFunc = Serialize;
+		SerializerHolder<EPolymorphState[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<EPolymorphState>>.SerializeFunc = Serialize;
+		SerializerHolder<List<EPolymorphState>>.DeserializeFunc = Deserialize;
+		SerializerHolder<ETwelveImmortalsStatus>.SerializeFunc = Serialize;
+		SerializerHolder<ETwelveImmortalsStatus>.DeserializeFunc = Deserialize;
+		SerializerHolder<ETwelveImmortalsStatus[]>.SerializeFunc = Serialize;
+		SerializerHolder<ETwelveImmortalsStatus[]>.DeserializeFunc = Deserialize;
+		SerializerHolder<List<ETwelveImmortalsStatus>>.SerializeFunc = Serialize;
+		SerializerHolder<List<ETwelveImmortalsStatus>>.DeserializeFunc = Deserialize;
 		SerializerHolder<SectFunctionStatuses.SectFunctionStatusType>.SerializeFunc = Serialize;
 		SerializerHolder<SectFunctionStatuses.SectFunctionStatusType>.DeserializeFunc = Deserialize;
 		SerializerHolder<SectFunctionStatuses.SectFunctionStatusType[]>.SerializeFunc = Serialize;
@@ -8280,7 +8373,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				DefendHeavenlyTreeBlockData element2 = item[j];
@@ -8353,7 +8446,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				DefendHeavenlyTreeBlockData element2 = item[j];
@@ -8474,7 +8567,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				DefendHeavenlyTreeDisplayData element2 = item[j];
@@ -8547,7 +8640,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				DefendHeavenlyTreeDisplayData element2 = item[j];
@@ -10996,7 +11089,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				LegacyDisplayData element2 = item[j];
@@ -11069,7 +11162,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				LegacyDisplayData element2 = item[j];
@@ -13200,7 +13293,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TaiwuFollowingDisplayData element2 = item[j];
@@ -13273,7 +13366,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TaiwuFollowingDisplayData element2 = item[j];
@@ -15614,6 +15707,394 @@ public static class Serializer
 					else
 					{
 						ProfessionSkillArg element2 = new ProfessionSkillArg();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuSkill0Result item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuSkill0Result item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TaiwuAsXiangshuSkill0Result();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuSkill0Result[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuSkill0Result element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuSkill0Result element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuSkill0Result[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new TaiwuAsXiangshuSkill0Result[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					TaiwuAsXiangshuSkill0Result element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TaiwuAsXiangshuSkill0Result();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<TaiwuAsXiangshuSkill0Result> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuSkill0Result element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuSkill0Result element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<TaiwuAsXiangshuSkill0Result> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<TaiwuAsXiangshuSkill0Result>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						TaiwuAsXiangshuSkill0Result element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TaiwuAsXiangshuSkill0Result();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TaiwuAsXiangshuSkill0Result element2 = new TaiwuAsXiangshuSkill0Result();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuSkill0ResultItem item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuSkill0ResultItem item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TaiwuAsXiangshuSkill0ResultItem();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuSkill0ResultItem[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuSkill0ResultItem element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuSkill0ResultItem element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuSkill0ResultItem[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new TaiwuAsXiangshuSkill0ResultItem[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					TaiwuAsXiangshuSkill0ResultItem element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TaiwuAsXiangshuSkill0ResultItem();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<TaiwuAsXiangshuSkill0ResultItem> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuSkill0ResultItem element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuSkill0ResultItem element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<TaiwuAsXiangshuSkill0ResultItem> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<TaiwuAsXiangshuSkill0ResultItem>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						TaiwuAsXiangshuSkill0ResultItem element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TaiwuAsXiangshuSkill0ResultItem();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TaiwuAsXiangshuSkill0ResultItem element2 = new TaiwuAsXiangshuSkill0ResultItem();
 						pCurrData += element2.Deserialize(pCurrData);
 						item.Add(element2);
 					}
@@ -18779,7 +19260,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				Exchange element2 = item[j];
@@ -18852,7 +19333,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				Exchange element2 = item[j];
@@ -18973,7 +19454,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ExchangeAdvantage element2 = item[j];
@@ -19046,7 +19527,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ExchangeAdvantage element2 = item[j];
@@ -19167,7 +19648,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ExchangeItem element2 = item[j];
@@ -19240,7 +19721,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ExchangeItem element2 = item[j];
@@ -19943,7 +20424,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ExchangeDisplayData element2 = item[j];
@@ -20016,7 +20497,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ExchangeDisplayData element2 = item[j];
@@ -20137,7 +20618,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TreasuryData element2 = item[j];
@@ -20210,7 +20691,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TreasuryData element2 = item[j];
@@ -20331,7 +20812,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ShopDisplayData element2 = item[j];
@@ -20404,7 +20885,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				ShopDisplayData element2 = item[j];
@@ -21093,6 +21574,200 @@ public static class Serializer
 					QiArtStrategyDisplayData element2 = new QiArtStrategyDisplayData();
 					pCurrData += element2.Deserialize(pCurrData);
 					item.Add(element2);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(ShortCutOperationLevelData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ShortCutOperationLevelData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new ShortCutOperationLevelData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(ShortCutOperationLevelData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ShortCutOperationLevelData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ShortCutOperationLevelData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ShortCutOperationLevelData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ShortCutOperationLevelData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					ShortCutOperationLevelData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new ShortCutOperationLevelData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ShortCutOperationLevelData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ShortCutOperationLevelData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ShortCutOperationLevelData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ShortCutOperationLevelData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<ShortCutOperationLevelData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						ShortCutOperationLevelData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new ShortCutOperationLevelData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						ShortCutOperationLevelData element2 = new ShortCutOperationLevelData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
 				}
 			}
 			return 4 + (int)(pCurrData - pData);
@@ -21879,29 +22554,63 @@ public static class Serializer
 
 	public unsafe static int Serialize(TaiwuNeiliProportionDisplayData item, RawDataPool dataPool)
 	{
-		byte* pData = default(byte*);
-		int result = dataPool.Allocate(20, &pData);
-		item.Serialize(pData);
-		return result;
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
 	}
 
 	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuNeiliProportionDisplayData item)
 	{
-		byte* pData = dataPool.GetPointer(offset);
-		return item.Deserialize(pData);
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TaiwuNeiliProportionDisplayData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
 	}
 
 	public unsafe static int Serialize(TaiwuNeiliProportionDisplayData[] item, RawDataPool dataPool)
 	{
 		if (item != null && item.Length != 0)
 		{
+			int dataSize = 0;
 			int elementsCount = item.Length;
-			int dataSize = 20 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
 			for (int i = 0; i < elementsCount; i++)
 			{
-				pData += item[i].Serialize(pData);
+				TaiwuNeiliProportionDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuNeiliProportionDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
 			}
 			return offset;
 		}
@@ -21914,23 +22623,30 @@ public static class Serializer
 		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
 		if (elementsCount > 0)
 		{
-			byte* pCurrData = pData;
-			if (item != null && item.Length == elementsCount)
-			{
-				for (int i = 0; i < elementsCount; i++)
-				{
-					TaiwuNeiliProportionDisplayData element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-			}
-			else
+			if (item == null || item.Length != elementsCount)
 			{
 				item = new TaiwuNeiliProportionDisplayData[elementsCount];
-				for (int j = 0; j < elementsCount; j++)
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
 				{
-					TaiwuNeiliProportionDisplayData element2 = new TaiwuNeiliProportionDisplayData();
-					pCurrData += element2.Deserialize(pCurrData);
-					item[j] = element2;
+					TaiwuNeiliProportionDisplayData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TaiwuNeiliProportionDisplayData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
 				}
 			}
 			return 4 + (int)(pCurrData - pData);
@@ -21943,13 +22659,31 @@ public static class Serializer
 	{
 		if (item != null && item.Count > 0)
 		{
+			int dataSize = 0;
 			int elementsCount = item.Count;
-			int dataSize = 20 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
 			for (int i = 0; i < elementsCount; i++)
 			{
-				pData += item[i].Serialize(pData);
+				TaiwuNeiliProportionDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuNeiliProportionDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
 			}
 			return offset;
 		}
@@ -21974,16 +22708,36 @@ public static class Serializer
 			byte* pCurrData = pData;
 			for (int i = 0; i < elementsCount; i++)
 			{
-				if (i < destElementsCount)
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
 				{
-					TaiwuNeiliProportionDisplayData element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
+					if (i < destElementsCount)
+					{
+						TaiwuNeiliProportionDisplayData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TaiwuNeiliProportionDisplayData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TaiwuNeiliProportionDisplayData element2 = new TaiwuNeiliProportionDisplayData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
 				}
 				else
 				{
-					TaiwuNeiliProportionDisplayData element2 = new TaiwuNeiliProportionDisplayData();
-					pCurrData += element2.Deserialize(pCurrData);
-					item.Add(element2);
+					item.Add(null);
 				}
 			}
 			return 4 + (int)(pCurrData - pData);
@@ -26678,104 +27432,6 @@ public static class Serializer
 		return 4;
 	}
 
-	public unsafe static int Serialize(MonthlyActionKey item, RawDataPool dataPool)
-	{
-		byte* pData = default(byte*);
-		int result = dataPool.Allocate(3, &pData);
-		item.Serialize(pData);
-		return result;
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref MonthlyActionKey item)
-	{
-		byte* pData = dataPool.GetPointer(offset);
-		return item.Deserialize(pData);
-	}
-
-	public unsafe static int Serialize(MonthlyActionKey[] item, RawDataPool dataPool)
-	{
-		if (item != null && item.Length != 0)
-		{
-			int elementsCount = item.Length;
-			int dataSize = 3 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref MonthlyActionKey[] item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item == null || item.Length != elementsCount)
-			{
-				item = new MonthlyActionKey[elementsCount];
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				MonthlyActionKey element = default(MonthlyActionKey);
-				pCurrData += element.Deserialize(pCurrData);
-				item[i] = element;
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item = null;
-		return 4;
-	}
-
-	public unsafe static int Serialize(List<MonthlyActionKey> item, RawDataPool dataPool)
-	{
-		if (item != null && item.Count > 0)
-		{
-			int elementsCount = item.Count;
-			int dataSize = 3 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<MonthlyActionKey> item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item != null)
-			{
-				item.Clear();
-			}
-			else
-			{
-				item = new List<MonthlyActionKey>();
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				MonthlyActionKey element = default(MonthlyActionKey);
-				pCurrData += element.Deserialize(pCurrData);
-				item.Add(element);
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item?.Clear();
-		return 4;
-	}
-
 	public unsafe static int Serialize(EventLogData item, RawDataPool dataPool)
 	{
 		if (item != null)
@@ -26818,7 +27474,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				EventLogData element2 = item[j];
@@ -26891,7 +27547,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				EventLogData element2 = item[j];
@@ -39203,7 +39859,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantBuyBackData element2 = item[j];
@@ -39276,7 +39932,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantBuyBackData element2 = item[j];
@@ -39397,7 +40053,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantData element2 = item[j];
@@ -39470,7 +40126,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantData element2 = item[j];
@@ -39591,7 +40247,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantExpData element2 = item[j];
@@ -39664,7 +40320,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantExpData element2 = item[j];
@@ -40676,7 +41332,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantTradeArguments element2 = item[j];
@@ -40749,7 +41405,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				MerchantTradeArguments element2 = item[j];
@@ -47389,7 +48045,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TransferableArgumentCollection element2 = item[j];
@@ -47462,7 +48118,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TransferableArgumentCollection element2 = item[j];
@@ -47971,7 +48627,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TransferableRecordDataBase element2 = item[j];
@@ -48044,7 +48700,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				TransferableRecordDataBase element2 = item[j];
@@ -48104,6 +48760,200 @@ public static class Serializer
 					else
 					{
 						TransferableRecordDataBase element2 = new TransferableRecordDataBase();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(TransferableLifeRecordMonthData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TransferableLifeRecordMonthData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TransferableLifeRecordMonthData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(TransferableLifeRecordMonthData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TransferableLifeRecordMonthData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TransferableLifeRecordMonthData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TransferableLifeRecordMonthData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new TransferableLifeRecordMonthData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					TransferableLifeRecordMonthData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TransferableLifeRecordMonthData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<TransferableLifeRecordMonthData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TransferableLifeRecordMonthData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TransferableLifeRecordMonthData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<TransferableLifeRecordMonthData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<TransferableLifeRecordMonthData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						TransferableLifeRecordMonthData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TransferableLifeRecordMonthData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TransferableLifeRecordMonthData element2 = new TransferableLifeRecordMonthData();
 						pCurrData += element2.Deserialize(pCurrData);
 						item.Add(element2);
 					}
@@ -54278,7 +55128,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				SecretInformationDisplayData element2 = item[j];
@@ -54351,7 +55201,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				SecretInformationDisplayData element2 = item[j];
@@ -62166,29 +63016,63 @@ public static class Serializer
 
 	public unsafe static int Serialize(CombatReserveData item, RawDataPool dataPool)
 	{
-		byte* pData = default(byte*);
-		int result = dataPool.Allocate(12, &pData);
-		item.Serialize(pData);
-		return result;
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
 	}
 
 	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref CombatReserveData item)
 	{
-		byte* pData = dataPool.GetPointer(offset);
-		return item.Deserialize(pData);
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new CombatReserveData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
 	}
 
 	public unsafe static int Serialize(CombatReserveData[] item, RawDataPool dataPool)
 	{
 		if (item != null && item.Length != 0)
 		{
+			int dataSize = 0;
 			int elementsCount = item.Length;
-			int dataSize = 12 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
 			for (int i = 0; i < elementsCount; i++)
 			{
-				pData += item[i].Serialize(pData);
+				CombatReserveData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				CombatReserveData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
 			}
 			return offset;
 		}
@@ -62208,9 +63092,24 @@ public static class Serializer
 			byte* pCurrData = pData;
 			for (int i = 0; i < elementsCount; i++)
 			{
-				CombatReserveData element = default(CombatReserveData);
-				pCurrData += element.Deserialize(pCurrData);
-				item[i] = element;
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					CombatReserveData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new CombatReserveData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
 			}
 			return 4 + (int)(pCurrData - pData);
 		}
@@ -62222,13 +63121,31 @@ public static class Serializer
 	{
 		if (item != null && item.Count > 0)
 		{
+			int dataSize = 0;
 			int elementsCount = item.Count;
-			int dataSize = 12 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
 			for (int i = 0; i < elementsCount; i++)
 			{
-				pData += item[i].Serialize(pData);
+				CombatReserveData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				CombatReserveData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
 			}
 			return offset;
 		}
@@ -62241,20 +63158,49 @@ public static class Serializer
 		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
 		if (elementsCount > 0)
 		{
-			if (item != null)
-			{
-				item.Clear();
-			}
-			else
+			if (item == null)
 			{
 				item = new List<CombatReserveData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
 			}
 			byte* pCurrData = pData;
 			for (int i = 0; i < elementsCount; i++)
 			{
-				CombatReserveData element = default(CombatReserveData);
-				pCurrData += element.Deserialize(pCurrData);
-				item.Add(element);
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						CombatReserveData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new CombatReserveData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						CombatReserveData element2 = new CombatReserveData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
 			}
 			return 4 + (int)(pCurrData - pData);
 		}
@@ -68281,6 +69227,339 @@ public static class Serializer
 				{
 					item.Add(null);
 				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenPointDto item, RawDataPool dataPool)
+	{
+		int dataSize = item.GetSerializedSize();
+		if (dataSize > 33554432)
+		{
+			throw new Exception($"dataSize must be less than {8388608}KB");
+		}
+		byte* pData = default(byte*);
+		int result = dataPool.Allocate(dataSize, &pData);
+		item.Serialize(pData);
+		return result;
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPointDto item)
+	{
+		byte* pData = dataPool.GetPointer(offset);
+		return item.Deserialize(pData);
+	}
+
+	public unsafe static int Serialize(ChickenPointDto[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPointDto[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ChickenPointDto[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPointDto element = default(ChickenPointDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item[i] = element;
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ChickenPointDto> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ChickenPointDto> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<ChickenPointDto>();
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPointDto element = default(ChickenPointDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item.Add(element);
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenPointZonesDto item, RawDataPool dataPool)
+	{
+		int dataSize = item.GetSerializedSize();
+		if (dataSize > 33554432)
+		{
+			throw new Exception($"dataSize must be less than {8388608}KB");
+		}
+		byte* pData = default(byte*);
+		int result = dataPool.Allocate(dataSize, &pData);
+		item.Serialize(pData);
+		return result;
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPointZonesDto item)
+	{
+		byte* pData = dataPool.GetPointer(offset);
+		return item.Deserialize(pData);
+	}
+
+	public unsafe static int Serialize(ChickenPointZonesDto[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPointZonesDto[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ChickenPointZonesDto[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPointZonesDto element = default(ChickenPointZonesDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item[i] = element;
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ChickenPointZonesDto> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ChickenPointZonesDto> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<ChickenPointZonesDto>();
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPointZonesDto element = default(ChickenPointZonesDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item.Add(element);
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenInvokeResultDto item, RawDataPool dataPool)
+	{
+		int dataSize = item.GetSerializedSize();
+		if (dataSize > 33554432)
+		{
+			throw new Exception($"dataSize must be less than {8388608}KB");
+		}
+		byte* pData = default(byte*);
+		int result = dataPool.Allocate(dataSize, &pData);
+		item.Serialize(pData);
+		return result;
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenInvokeResultDto item)
+	{
+		byte* pData = dataPool.GetPointer(offset);
+		return item.Deserialize(pData);
+	}
+
+	public unsafe static int Serialize(ChickenInvokeResultDto[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenInvokeResultDto[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ChickenInvokeResultDto[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenInvokeResultDto element = default(ChickenInvokeResultDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item[i] = element;
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ChickenInvokeResultDto> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ChickenInvokeResultDto> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<ChickenInvokeResultDto>();
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenInvokeResultDto element = default(ChickenInvokeResultDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item.Add(element);
 			}
 			return 4 + (int)(pCurrData - pData);
 		}
@@ -76105,7 +77384,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				Genealogy element2 = item[j];
@@ -76178,7 +77457,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				Genealogy element2 = item[j];
@@ -76299,7 +77578,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				SpouseAndChildren element2 = item[j];
@@ -76372,7 +77651,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				SpouseAndChildren element2 = item[j];
@@ -77305,7 +78584,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForBeggarUltimate element2 = item[j];
@@ -77378,7 +78657,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForBeggarUltimate element2 = item[j];
@@ -77887,7 +79166,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForGeneralScrollList element2 = item[j];
@@ -77960,7 +79239,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForGeneralScrollList element2 = item[j];
@@ -79037,6 +80316,117 @@ public static class Serializer
 		return 4;
 	}
 
+	public unsafe static int Serialize(NameAndAvatarWithFavor item, RawDataPool dataPool)
+	{
+		int dataSize = item.GetSerializedSize();
+		if (dataSize > 33554432)
+		{
+			throw new Exception($"dataSize must be less than {8388608}KB");
+		}
+		byte* pData = default(byte*);
+		int result = dataPool.Allocate(dataSize, &pData);
+		item.Serialize(pData);
+		return result;
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref NameAndAvatarWithFavor item)
+	{
+		byte* pData = dataPool.GetPointer(offset);
+		return item.Deserialize(pData);
+	}
+
+	public unsafe static int Serialize(NameAndAvatarWithFavor[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref NameAndAvatarWithFavor[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new NameAndAvatarWithFavor[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				NameAndAvatarWithFavor element = default(NameAndAvatarWithFavor);
+				pCurrData += element.Deserialize(pCurrData);
+				item[i] = element;
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<NameAndAvatarWithFavor> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				dataSize += item[i].GetSerializedSize();
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				pData += item[j].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<NameAndAvatarWithFavor> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<NameAndAvatarWithFavor>();
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				NameAndAvatarWithFavor element = default(NameAndAvatarWithFavor);
+				pCurrData += element.Deserialize(pCurrData);
+				item.Add(element);
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
 	public unsafe static int Serialize(NameStringAndAvatar item, RawDataPool dataPool)
 	{
 		int dataSize = item.GetSerializedSize();
@@ -79578,7 +80968,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForRelations element2 = item[j];
@@ -79651,7 +81041,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForRelations element2 = item[j];
@@ -80659,7 +82049,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForYuanshanSelect element2 = item[j];
@@ -80732,7 +82122,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterDisplayDataForYuanshanSelect element2 = item[j];
@@ -81550,7 +82940,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterLocationDisplayData element2 = item[j];
@@ -81623,7 +83013,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterLocationDisplayData element2 = item[j];
@@ -82441,7 +83831,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterOverviewEatingDisplayData element2 = item[j];
@@ -82514,7 +83904,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				CharacterOverviewEatingDisplayData element2 = item[j];
@@ -85208,7 +86598,7 @@ public static class Serializer
 			int elementsCount = item.Length;
 			int dataSize = 36 * elementsCount;
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int i = 0; i < elementsCount; i++)
 			{
 				pData += item[i].Serialize(pData);
@@ -85248,7 +86638,7 @@ public static class Serializer
 			int elementsCount = item.Count;
 			int dataSize = 36 * elementsCount;
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int i = 0; i < elementsCount; i++)
 			{
 				pData += item[i].Serialize(pData);
@@ -85425,7 +86815,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				OrganizationMemberDisplayDataForGeneralScrollList element2 = item[j];
@@ -85498,7 +86888,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				OrganizationMemberDisplayDataForGeneralScrollList element2 = item[j];
@@ -85928,7 +87318,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				RepairPlan element2 = item[j];
@@ -86001,7 +87391,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				RepairPlan element2 = item[j];
@@ -87013,7 +88403,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				VillagerSelectCharacterDisplayData element2 = item[j];
@@ -87086,7 +88476,7 @@ public static class Serializer
 				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
 			}
 			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
 			for (int j = 0; j < elementsCount; j++)
 			{
 				VillagerSelectCharacterDisplayData element2 = item[j];
@@ -97020,6 +98410,588 @@ public static class Serializer
 		return 4;
 	}
 
+	public unsafe static int Serialize(ChickenPolymorphDisplayData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPolymorphDisplayData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new ChickenPolymorphDisplayData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenPolymorphDisplayData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPolymorphDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ChickenPolymorphDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPolymorphDisplayData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ChickenPolymorphDisplayData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					ChickenPolymorphDisplayData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new ChickenPolymorphDisplayData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ChickenPolymorphDisplayData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPolymorphDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ChickenPolymorphDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ChickenPolymorphDisplayData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<ChickenPolymorphDisplayData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						ChickenPolymorphDisplayData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new ChickenPolymorphDisplayData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						ChickenPolymorphDisplayData element2 = new ChickenPolymorphDisplayData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenPolymorphInfoData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPolymorphInfoData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new ChickenPolymorphInfoData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenPolymorphInfoData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPolymorphInfoData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ChickenPolymorphInfoData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPolymorphInfoData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ChickenPolymorphInfoData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					ChickenPolymorphInfoData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new ChickenPolymorphInfoData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ChickenPolymorphInfoData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPolymorphInfoData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ChickenPolymorphInfoData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ChickenPolymorphInfoData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<ChickenPolymorphInfoData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						ChickenPolymorphInfoData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new ChickenPolymorphInfoData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						ChickenPolymorphInfoData element2 = new ChickenPolymorphInfoData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenPolymorphLocationData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPolymorphLocationData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new ChickenPolymorphLocationData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(ChickenPolymorphLocationData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPolymorphLocationData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ChickenPolymorphLocationData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ChickenPolymorphLocationData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ChickenPolymorphLocationData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					ChickenPolymorphLocationData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new ChickenPolymorphLocationData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ChickenPolymorphLocationData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				ChickenPolymorphLocationData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				ChickenPolymorphLocationData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ChickenPolymorphLocationData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<ChickenPolymorphLocationData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						ChickenPolymorphLocationData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new ChickenPolymorphLocationData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						ChickenPolymorphLocationData element2 = new ChickenPolymorphLocationData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
 	public unsafe static int Serialize(CricketCollectionBatchButtonStateDisplayData item, RawDataPool dataPool)
 	{
 		byte* pData = default(byte*);
@@ -98719,6 +100691,200 @@ public static class Serializer
 		return 4;
 	}
 
+	public unsafe static int Serialize(AdventureNameAndDurationDisplayData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AdventureNameAndDurationDisplayData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new AdventureNameAndDurationDisplayData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(AdventureNameAndDurationDisplayData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				AdventureNameAndDurationDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				AdventureNameAndDurationDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AdventureNameAndDurationDisplayData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new AdventureNameAndDurationDisplayData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					AdventureNameAndDurationDisplayData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new AdventureNameAndDurationDisplayData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<AdventureNameAndDurationDisplayData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				AdventureNameAndDurationDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				AdventureNameAndDurationDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<AdventureNameAndDurationDisplayData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<AdventureNameAndDurationDisplayData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						AdventureNameAndDurationDisplayData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new AdventureNameAndDurationDisplayData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						AdventureNameAndDurationDisplayData element2 = new AdventureNameAndDurationDisplayData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
 	public unsafe static int Serialize(AdventureParameterKey item, RawDataPool dataPool)
 	{
 		int dataSize = item.GetSerializedSize();
@@ -100105,430 +102271,6 @@ public static class Serializer
 		return 4;
 	}
 
-	public unsafe static int Serialize(AdventureMapPoint item, RawDataPool dataPool)
-	{
-		byte* pData = default(byte*);
-		int result = dataPool.Allocate(24, &pData);
-		item.Serialize(pData);
-		return result;
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AdventureMapPoint item)
-	{
-		byte* pData = dataPool.GetPointer(offset);
-		return item.Deserialize(pData);
-	}
-
-	public unsafe static int Serialize(AdventureMapPoint[] item, RawDataPool dataPool)
-	{
-		if (item != null && item.Length != 0)
-		{
-			int elementsCount = item.Length;
-			int dataSize = 24 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AdventureMapPoint[] item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			byte* pCurrData = pData;
-			if (item != null && item.Length == elementsCount)
-			{
-				for (int i = 0; i < elementsCount; i++)
-				{
-					AdventureMapPoint element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-			}
-			else
-			{
-				item = new AdventureMapPoint[elementsCount];
-				for (int j = 0; j < elementsCount; j++)
-				{
-					AdventureMapPoint element2 = new AdventureMapPoint();
-					pCurrData += element2.Deserialize(pCurrData);
-					item[j] = element2;
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item = null;
-		return 4;
-	}
-
-	public unsafe static int Serialize(List<AdventureMapPoint> item, RawDataPool dataPool)
-	{
-		if (item != null && item.Count > 0)
-		{
-			int elementsCount = item.Count;
-			int dataSize = 24 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<AdventureMapPoint> item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item == null)
-			{
-				item = new List<AdventureMapPoint>();
-			}
-			int destElementsCount = item.Count;
-			if (elementsCount < destElementsCount)
-			{
-				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				if (i < destElementsCount)
-				{
-					AdventureMapPoint element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-				else
-				{
-					AdventureMapPoint element2 = new AdventureMapPoint();
-					pCurrData += element2.Deserialize(pCurrData);
-					item.Add(element2);
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item?.Clear();
-		return 4;
-	}
-
-	public unsafe static int Serialize(AdventureSiteData item, RawDataPool dataPool)
-	{
-		byte* pData = default(byte*);
-		int result = dataPool.Allocate(12, &pData);
-		item.Serialize(pData);
-		return result;
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AdventureSiteData item)
-	{
-		byte* pData = dataPool.GetPointer(offset);
-		return item.Deserialize(pData);
-	}
-
-	public unsafe static int Serialize(AdventureSiteData[] item, RawDataPool dataPool)
-	{
-		if (item != null && item.Length != 0)
-		{
-			int elementsCount = item.Length;
-			int dataSize = 12 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AdventureSiteData[] item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			byte* pCurrData = pData;
-			if (item != null && item.Length == elementsCount)
-			{
-				for (int i = 0; i < elementsCount; i++)
-				{
-					AdventureSiteData element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-			}
-			else
-			{
-				item = new AdventureSiteData[elementsCount];
-				for (int j = 0; j < elementsCount; j++)
-				{
-					AdventureSiteData element2 = new AdventureSiteData();
-					pCurrData += element2.Deserialize(pCurrData);
-					item[j] = element2;
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item = null;
-		return 4;
-	}
-
-	public unsafe static int Serialize(List<AdventureSiteData> item, RawDataPool dataPool)
-	{
-		if (item != null && item.Count > 0)
-		{
-			int elementsCount = item.Count;
-			int dataSize = 12 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<AdventureSiteData> item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item == null)
-			{
-				item = new List<AdventureSiteData>();
-			}
-			int destElementsCount = item.Count;
-			if (elementsCount < destElementsCount)
-			{
-				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				if (i < destElementsCount)
-				{
-					AdventureSiteData element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-				else
-				{
-					AdventureSiteData element2 = new AdventureSiteData();
-					pCurrData += element2.Deserialize(pCurrData);
-					item.Add(element2);
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item?.Clear();
-		return 4;
-	}
-
-	public unsafe static int Serialize(AreaAdventureData item, RawDataPool dataPool)
-	{
-		if (item != null)
-		{
-			int dataSize = item.GetSerializedSize();
-			byte* pData = default(byte*);
-			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
-			item.Serialize(pData);
-			return result;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AreaAdventureData item)
-	{
-		int dataSize = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
-		if (dataSize > 0)
-		{
-			if (item == null)
-			{
-				item = new AreaAdventureData();
-			}
-			item.Deserialize(pData);
-			return 4 + dataSize;
-		}
-		item = null;
-		return 4;
-	}
-
-	public unsafe static int Serialize(AreaAdventureData[] item, RawDataPool dataPool)
-	{
-		if (item != null && item.Length != 0)
-		{
-			int dataSize = 0;
-			int elementsCount = item.Length;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				AreaAdventureData element = item[i];
-				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
-			}
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int j = 0; j < elementsCount; j++)
-			{
-				AreaAdventureData element2 = item[j];
-				if (element2 != null)
-				{
-					byte* intPtr = pData;
-					pData += 4;
-					int subDataSize = element2.Serialize(pData);
-					pData += subDataSize;
-					*(int*)intPtr = subDataSize;
-				}
-				else
-				{
-					*(int*)pData = 0;
-					pData += 4;
-				}
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref AreaAdventureData[] item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item == null || item.Length != elementsCount)
-			{
-				item = new AreaAdventureData[elementsCount];
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				int num = *(int*)pCurrData;
-				pCurrData += 4;
-				if (num > 0)
-				{
-					AreaAdventureData element = item[i];
-					if (element != null)
-					{
-						pCurrData += element.Deserialize(pCurrData);
-						continue;
-					}
-					element = new AreaAdventureData();
-					pCurrData += element.Deserialize(pCurrData);
-					item[i] = element;
-				}
-				else
-				{
-					item[i] = null;
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item = null;
-		return 4;
-	}
-
-	public unsafe static int Serialize(List<AreaAdventureData> item, RawDataPool dataPool)
-	{
-		if (item != null && item.Count > 0)
-		{
-			int dataSize = 0;
-			int elementsCount = item.Count;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				AreaAdventureData element = item[i];
-				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
-			}
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int j = 0; j < elementsCount; j++)
-			{
-				AreaAdventureData element2 = item[j];
-				if (element2 != null)
-				{
-					byte* intPtr = pData;
-					pData += 4;
-					int subDataSize = element2.Serialize(pData);
-					pData += subDataSize;
-					*(int*)intPtr = subDataSize;
-				}
-				else
-				{
-					*(int*)pData = 0;
-					pData += 4;
-				}
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<AreaAdventureData> item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item == null)
-			{
-				item = new List<AreaAdventureData>();
-			}
-			int destElementsCount = item.Count;
-			if (elementsCount < destElementsCount)
-			{
-				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				int num = *(int*)pCurrData;
-				pCurrData += 4;
-				if (num > 0)
-				{
-					if (i < destElementsCount)
-					{
-						AreaAdventureData element = item[i];
-						if (element != null)
-						{
-							pCurrData += element.Deserialize(pCurrData);
-							continue;
-						}
-						element = new AreaAdventureData();
-						pCurrData += element.Deserialize(pCurrData);
-						item[i] = element;
-					}
-					else
-					{
-						AreaAdventureData element2 = new AreaAdventureData();
-						pCurrData += element2.Deserialize(pCurrData);
-						item.Add(element2);
-					}
-				}
-				else if (i < destElementsCount)
-				{
-					item[i] = null;
-				}
-				else
-				{
-					item.Add(null);
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item?.Clear();
-		return 4;
-	}
-
 	public unsafe static int Serialize(DlcId item, RawDataPool dataPool)
 	{
 		byte* pData = default(byte*);
@@ -101233,6 +102975,1364 @@ public static class Serializer
 					LoveTokenDataItem element2 = new LoveTokenDataItem();
 					pCurrData += element2.Deserialize(pCurrData);
 					item.Add(element2);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerDisplayData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerDisplayData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TaiwuAsXiangshuTowerDisplayData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerDisplayData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerDisplayData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new TaiwuAsXiangshuTowerDisplayData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					TaiwuAsXiangshuTowerDisplayData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TaiwuAsXiangshuTowerDisplayData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<TaiwuAsXiangshuTowerDisplayData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<TaiwuAsXiangshuTowerDisplayData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<TaiwuAsXiangshuTowerDisplayData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						TaiwuAsXiangshuTowerDisplayData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TaiwuAsXiangshuTowerDisplayData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TaiwuAsXiangshuTowerDisplayData element2 = new TaiwuAsXiangshuTowerDisplayData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerPerformanceEntryDisplayData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerPerformanceEntryDisplayData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TaiwuAsXiangshuTowerPerformanceEntryDisplayData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerPerformanceEntryDisplayData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerPerformanceEntryDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerPerformanceEntryDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerPerformanceEntryDisplayData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new TaiwuAsXiangshuTowerPerformanceEntryDisplayData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					TaiwuAsXiangshuTowerPerformanceEntryDisplayData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TaiwuAsXiangshuTowerPerformanceEntryDisplayData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<TaiwuAsXiangshuTowerPerformanceEntryDisplayData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerPerformanceEntryDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerPerformanceEntryDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<TaiwuAsXiangshuTowerPerformanceEntryDisplayData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<TaiwuAsXiangshuTowerPerformanceEntryDisplayData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						TaiwuAsXiangshuTowerPerformanceEntryDisplayData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TaiwuAsXiangshuTowerPerformanceEntryDisplayData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TaiwuAsXiangshuTowerPerformanceEntryDisplayData element2 = new TaiwuAsXiangshuTowerPerformanceEntryDisplayData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerTwelveImmortalDisplayData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerTwelveImmortalDisplayData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TaiwuAsXiangshuTowerTwelveImmortalDisplayData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerTwelveImmortalDisplayData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerTwelveImmortalDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerTwelveImmortalDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerTwelveImmortalDisplayData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new TaiwuAsXiangshuTowerTwelveImmortalDisplayData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					TaiwuAsXiangshuTowerTwelveImmortalDisplayData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TaiwuAsXiangshuTowerTwelveImmortalDisplayData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<TaiwuAsXiangshuTowerTwelveImmortalDisplayData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerTwelveImmortalDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerTwelveImmortalDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<TaiwuAsXiangshuTowerTwelveImmortalDisplayData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<TaiwuAsXiangshuTowerTwelveImmortalDisplayData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						TaiwuAsXiangshuTowerTwelveImmortalDisplayData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TaiwuAsXiangshuTowerTwelveImmortalDisplayData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TaiwuAsXiangshuTowerTwelveImmortalDisplayData element2 = new TaiwuAsXiangshuTowerTwelveImmortalDisplayData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData element2 = new TaiwuAsXiangshuTowerThreeRealmsPowerDisplayData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(CombatChickenPreset item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref CombatChickenPreset item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new CombatChickenPreset();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(CombatChickenPreset[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				CombatChickenPreset element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				CombatChickenPreset element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref CombatChickenPreset[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new CombatChickenPreset[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					CombatChickenPreset element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new CombatChickenPreset();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<CombatChickenPreset> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				CombatChickenPreset element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				CombatChickenPreset element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<CombatChickenPreset> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<CombatChickenPreset>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						CombatChickenPreset element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new CombatChickenPreset();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						CombatChickenPreset element2 = new CombatChickenPreset();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(CombatChickenPresetItem item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref CombatChickenPresetItem item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new CombatChickenPresetItem();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(CombatChickenPresetItem[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				CombatChickenPresetItem element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				CombatChickenPresetItem element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref CombatChickenPresetItem[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new CombatChickenPresetItem[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					CombatChickenPresetItem element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new CombatChickenPresetItem();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<CombatChickenPresetItem> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				CombatChickenPresetItem element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				CombatChickenPresetItem element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<CombatChickenPresetItem> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<CombatChickenPresetItem>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						CombatChickenPresetItem element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new CombatChickenPresetItem();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						CombatChickenPresetItem element2 = new CombatChickenPresetItem();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public unsafe static int Serialize(SmarterChickenData item, RawDataPool dataPool)
+	{
+		if (item != null)
+		{
+			int dataSize = item.GetSerializedSize();
+			byte* pData = default(byte*);
+			int result = dataPool.AllocateWithHeader(dataSize, &pData, (uint)dataSize);
+			item.Serialize(pData);
+			return result;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref SmarterChickenData item)
+	{
+		int dataSize = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&dataSize));
+		if (dataSize > 0)
+		{
+			if (item == null)
+			{
+				item = new SmarterChickenData();
+			}
+			item.Deserialize(pData);
+			return 4 + dataSize;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(SmarterChickenData[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Length;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				SmarterChickenData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				SmarterChickenData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref SmarterChickenData[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new SmarterChickenData[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					SmarterChickenData element = item[i];
+					if (element != null)
+					{
+						pCurrData += element.Deserialize(pCurrData);
+						continue;
+					}
+					element = new SmarterChickenData();
+					pCurrData += element.Deserialize(pCurrData);
+					item[i] = element;
+				}
+				else
+				{
+					item[i] = null;
+				}
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<SmarterChickenData> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int dataSize = 0;
+			int elementsCount = item.Count;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				SmarterChickenData element = item[i];
+				dataSize = ((element == null) ? (dataSize + 4) : (dataSize + (4 + element.GetSerializedSize())));
+			}
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int j = 0; j < elementsCount; j++)
+			{
+				SmarterChickenData element2 = item[j];
+				if (element2 != null)
+				{
+					byte* intPtr = pData;
+					pData += 4;
+					int subDataSize = element2.Serialize(pData);
+					pData += subDataSize;
+					*(int*)intPtr = subDataSize;
+				}
+				else
+				{
+					*(int*)pData = 0;
+					pData += 4;
+				}
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<SmarterChickenData> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null)
+			{
+				item = new List<SmarterChickenData>();
+			}
+			int destElementsCount = item.Count;
+			if (elementsCount < destElementsCount)
+			{
+				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				int num = *(int*)pCurrData;
+				pCurrData += 4;
+				if (num > 0)
+				{
+					if (i < destElementsCount)
+					{
+						SmarterChickenData element = item[i];
+						if (element != null)
+						{
+							pCurrData += element.Deserialize(pCurrData);
+							continue;
+						}
+						element = new SmarterChickenData();
+						pCurrData += element.Deserialize(pCurrData);
+						item[i] = element;
+					}
+					else
+					{
+						SmarterChickenData element2 = new SmarterChickenData();
+						pCurrData += element2.Deserialize(pCurrData);
+						item.Add(element2);
+					}
+				}
+				else if (i < destElementsCount)
+				{
+					item[i] = null;
+				}
+				else
+				{
+					item.Add(null);
 				}
 			}
 			return 4 + (int)(pCurrData - pData);
@@ -104074,6 +107174,104 @@ public static class Serializer
 		return 4;
 	}
 
+	public unsafe static int Serialize(NullableIntDto item, RawDataPool dataPool)
+	{
+		byte* pData = default(byte*);
+		int result = dataPool.Allocate(8, &pData);
+		item.Serialize(pData);
+		return result;
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref NullableIntDto item)
+	{
+		byte* pData = dataPool.GetPointer(offset);
+		return item.Deserialize(pData);
+	}
+
+	public unsafe static int Serialize(NullableIntDto[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int elementsCount = item.Length;
+			int dataSize = 8 * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				pData += item[i].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref NullableIntDto[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new NullableIntDto[elementsCount];
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				NullableIntDto element = default(NullableIntDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item[i] = element;
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<NullableIntDto> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int elementsCount = item.Count;
+			int dataSize = 8 * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				pData += item[i].Serialize(pData);
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<NullableIntDto> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<NullableIntDto>();
+			}
+			byte* pCurrData = pData;
+			for (int i = 0; i < elementsCount; i++)
+			{
+				NullableIntDto element = default(NullableIntDto);
+				pCurrData += element.Deserialize(pCurrData);
+				item.Add(element);
+			}
+			return 4 + (int)(pCurrData - pData);
+		}
+		item?.Clear();
+		return 4;
+	}
+
 	public unsafe static int Serialize(ActionPlanningDisplayData item, RawDataPool dataPool)
 	{
 		if (item != null)
@@ -104648,236 +107846,6 @@ public static class Serializer
 				else
 				{
 					item.Add(null);
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item?.Clear();
-		return 4;
-	}
-
-	public unsafe static int Serialize(PlanningActionSettings item, RawDataPool dataPool)
-	{
-		byte* pData = default(byte*);
-		int result = dataPool.Allocate(8, &pData);
-		item.Serialize(pData);
-		return result;
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref PlanningActionSettings item)
-	{
-		byte* pData = dataPool.GetPointer(offset);
-		return item.Deserialize(pData);
-	}
-
-	public unsafe static int Serialize(PlanningActionSettings[] item, RawDataPool dataPool)
-	{
-		if (item != null && item.Length != 0)
-		{
-			int elementsCount = item.Length;
-			int dataSize = 8 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref PlanningActionSettings[] item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			byte* pCurrData = pData;
-			if (item != null && item.Length == elementsCount)
-			{
-				for (int i = 0; i < elementsCount; i++)
-				{
-					PlanningActionSettings element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-			}
-			else
-			{
-				item = new PlanningActionSettings[elementsCount];
-				for (int j = 0; j < elementsCount; j++)
-				{
-					PlanningActionSettings element2 = new PlanningActionSettings();
-					pCurrData += element2.Deserialize(pCurrData);
-					item[j] = element2;
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item = null;
-		return 4;
-	}
-
-	public unsafe static int Serialize(List<PlanningActionSettings> item, RawDataPool dataPool)
-	{
-		if (item != null && item.Count > 0)
-		{
-			int elementsCount = item.Count;
-			int dataSize = 8 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<PlanningActionSettings> item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item == null)
-			{
-				item = new List<PlanningActionSettings>();
-			}
-			int destElementsCount = item.Count;
-			if (elementsCount < destElementsCount)
-			{
-				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				if (i < destElementsCount)
-				{
-					PlanningActionSettings element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-				else
-				{
-					PlanningActionSettings element2 = new PlanningActionSettings();
-					pCurrData += element2.Deserialize(pCurrData);
-					item.Add(element2);
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item?.Clear();
-		return 4;
-	}
-
-	public unsafe static int Serialize(PlanningGoalSettings item, RawDataPool dataPool)
-	{
-		byte* pData = default(byte*);
-		int result = dataPool.Allocate(8, &pData);
-		item.Serialize(pData);
-		return result;
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref PlanningGoalSettings item)
-	{
-		byte* pData = dataPool.GetPointer(offset);
-		return item.Deserialize(pData);
-	}
-
-	public unsafe static int Serialize(PlanningGoalSettings[] item, RawDataPool dataPool)
-	{
-		if (item != null && item.Length != 0)
-		{
-			int elementsCount = item.Length;
-			int dataSize = 8 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref PlanningGoalSettings[] item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			byte* pCurrData = pData;
-			if (item != null && item.Length == elementsCount)
-			{
-				for (int i = 0; i < elementsCount; i++)
-				{
-					PlanningGoalSettings element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-			}
-			else
-			{
-				item = new PlanningGoalSettings[elementsCount];
-				for (int j = 0; j < elementsCount; j++)
-				{
-					PlanningGoalSettings element2 = new PlanningGoalSettings();
-					pCurrData += element2.Deserialize(pCurrData);
-					item[j] = element2;
-				}
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item = null;
-		return 4;
-	}
-
-	public unsafe static int Serialize(List<PlanningGoalSettings> item, RawDataPool dataPool)
-	{
-		if (item != null && item.Count > 0)
-		{
-			int elementsCount = item.Count;
-			int dataSize = 8 * elementsCount;
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
-			for (int i = 0; i < elementsCount; i++)
-			{
-				pData += item[i].Serialize(pData);
-			}
-			return offset;
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<PlanningGoalSettings> item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item == null)
-			{
-				item = new List<PlanningGoalSettings>();
-			}
-			int destElementsCount = item.Count;
-			if (elementsCount < destElementsCount)
-			{
-				item.RemoveRange(elementsCount, destElementsCount - elementsCount);
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				if (i < destElementsCount)
-				{
-					PlanningGoalSettings element = item[i];
-					pCurrData += element.Deserialize(pCurrData);
-				}
-				else
-				{
-					PlanningGoalSettings element2 = new PlanningGoalSettings();
-					pCurrData += element2.Deserialize(pCurrData);
-					item.Add(element2);
 				}
 			}
 			return 4 + (int)(pCurrData - pData);
@@ -106611,715 +109579,6 @@ public static class Serializer
 		return 4;
 	}
 
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, CharacterSet> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, CharacterSet> item2 in item)
-		{
-			dataSize += sizeof(TKey) + item2.Value.GetSerializedSize();
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, CharacterSet> entry in item)
-		{
-			TKey elementId = entry.Key;
-			CharacterSet element = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			pData += element.Serialize(pData);
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, CharacterSet> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				dataPool.Allocate(1 + sizeof(TKey) + element.GetSerializedSize(), &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				pData2 += element.Serialize(pData2);
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, CharacterSet> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						CharacterSet element = default(CharacterSet);
-						pCurrData += element.Deserialize(pCurrData);
-						item[elementId] = element;
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			CharacterSet element2 = default(CharacterSet);
-			pCurrData2 += element2.Deserialize(pCurrData2);
-			item.Add(elementId2, element2);
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementTreasuryRecordCollection> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, SettlementTreasuryRecordCollection> item2 in item)
-		{
-			SettlementTreasuryRecordCollection element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, SettlementTreasuryRecordCollection> entry in item)
-		{
-			TKey elementId = entry.Key;
-			SettlementTreasuryRecordCollection element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementTreasuryRecordCollection> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SettlementTreasuryRecordCollection> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							SettlementTreasuryRecordCollection element = new SettlementTreasuryRecordCollection();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				SettlementTreasuryRecordCollection element2 = new SettlementTreasuryRecordCollection();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrisonRecordCollection> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, SettlementPrisonRecordCollection> item2 in item)
-		{
-			SettlementPrisonRecordCollection element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, SettlementPrisonRecordCollection> entry in item)
-		{
-			TKey elementId = entry.Key;
-			SettlementPrisonRecordCollection element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrisonRecordCollection> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SettlementPrisonRecordCollection> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							SettlementPrisonRecordCollection element = new SettlementPrisonRecordCollection();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				SettlementPrisonRecordCollection element2 = new SettlementPrisonRecordCollection();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrison> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, SettlementPrison> item2 in item)
-		{
-			SettlementPrison element = item2.Value;
-			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, SettlementPrison> entry in item)
-		{
-			TKey elementId = entry.Key;
-			SettlementPrison element2 = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			if (element2 != null)
-			{
-				byte* intPtr = pData;
-				pData += 4;
-				int subContentSize = element2.Serialize(pData);
-				pData += subContentSize;
-				*(int*)intPtr = subContentSize;
-			}
-			else
-			{
-				*(int*)pData = 0;
-				pData += 4;
-			}
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrison> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				int subContentSize = element?.GetSerializedSize() ?? 0;
-				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
-				dataPool.Allocate(subDataSize, &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				*(int*)pData2 = subContentSize;
-				pData2 += 4;
-				if (subContentSize > 0)
-				{
-					pData2 += element.Serialize(pData2);
-				}
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SettlementPrison> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						int num2 = *(int*)pCurrData;
-						pCurrData += 4;
-						if (num2 > 0)
-						{
-							SettlementPrison element = new SettlementPrison();
-							pCurrData += element.Deserialize(pCurrData);
-							item[elementId] = element;
-						}
-						else
-						{
-							item[elementId] = null;
-						}
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			int num3 = *(int*)pCurrData2;
-			pCurrData2 += 4;
-			if (num3 > 0)
-			{
-				SettlementPrison element2 = new SettlementPrison();
-				pCurrData2 += element2.Deserialize(pCurrData2);
-				item.Add(elementId2, element2);
-			}
-			else
-			{
-				item.Add(elementId2, null);
-			}
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SerializableList<PunishmentSeverityCustomizeData>> item, RawDataPool dataPool) where TKey : unmanaged
-	{
-		int dataSize = 4;
-		foreach (KeyValuePair<TKey, SerializableList<PunishmentSeverityCustomizeData>> item2 in item)
-		{
-			dataSize += sizeof(TKey) + item2.Value.GetSerializedSize();
-		}
-		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
-		*(int*)pData = 0;
-		pData += 4;
-		foreach (KeyValuePair<TKey, SerializableList<PunishmentSeverityCustomizeData>> entry in item)
-		{
-			TKey elementId = entry.Key;
-			SerializableList<PunishmentSeverityCustomizeData> element = entry.Value;
-			*(TKey*)pData = elementId;
-			pData += sizeof(TKey);
-			pData += element.Serialize(pData);
-		}
-		return offset;
-	}
-
-	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SerializableList<PunishmentSeverityCustomizeData>> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
-	{
-		int modificationsCount = modifications.Items.Count;
-		int actualModificationsCount = modificationsCount;
-		byte* pHeader = default(byte*);
-		int offset = dataPool.Allocate(8, &pHeader);
-		((int*)pHeader)[1] = 1;
-		byte* pData2 = default(byte*);
-		byte* pData = default(byte*);
-		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
-		{
-			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
-			switch (modification.Type)
-			{
-			case 0:
-			case 1:
-			{
-				if (!item.TryGetValue(modification.Id, out var element))
-				{
-					actualModificationsCount--;
-					break;
-				}
-				dataPool.Allocate(1 + sizeof(TKey) + element.GetSerializedSize(), &pData2);
-				*pData2 = (byte)modification.Type;
-				pData2++;
-				*(TKey*)pData2 = modification.Id;
-				pData2 += sizeof(TKey);
-				pData2 += element.Serialize(pData2);
-				break;
-			}
-			case 2:
-			case 3:
-				dataPool.Allocate(1 + sizeof(TKey), &pData);
-				*pData = (byte)modification.Type;
-				pData++;
-				*(TKey*)pData = modification.Id;
-				pData += sizeof(TKey);
-				break;
-			}
-		}
-		pHeader = dataPool.GetPointer(offset);
-		*(int*)pHeader = actualModificationsCount;
-		return offset;
-	}
-
-	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SerializableList<PunishmentSeverityCustomizeData>> item) where TKey : unmanaged
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		sbyte num = (sbyte)(*(int*)pData);
-		pData += 4;
-		if (num == 1)
-		{
-			if (elementsCount > 0)
-			{
-				byte* pCurrData = pData;
-				for (int i = 0; i < elementsCount; i++)
-				{
-					sbyte modificationType = (sbyte)(*pCurrData);
-					pCurrData++;
-					TKey elementId = *(TKey*)pCurrData;
-					pCurrData += sizeof(TKey);
-					switch (modificationType)
-					{
-					case 0:
-					case 1:
-					{
-						SerializableList<PunishmentSeverityCustomizeData> element = default(SerializableList<PunishmentSeverityCustomizeData>);
-						pCurrData += element.Deserialize(pCurrData);
-						item[elementId] = element;
-						break;
-					}
-					case 2:
-						item.Remove(elementId);
-						break;
-					case 3:
-						item.Clear();
-						break;
-					}
-				}
-				return 4 + (int)(pCurrData - pData);
-			}
-			return 4;
-		}
-		item.Clear();
-		byte* pCurrData2 = pData;
-		for (int j = 0; j < elementsCount; j++)
-		{
-			TKey elementId2 = *(TKey*)pCurrData2;
-			pCurrData2 += sizeof(TKey);
-			SerializableList<PunishmentSeverityCustomizeData> element2 = default(SerializableList<PunishmentSeverityCustomizeData>);
-			pCurrData2 += element2.Deserialize(pCurrData2);
-			item.Add(elementId2, element2);
-		}
-		return 4 + (int)(pCurrData2 - pData);
-	}
-
 	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, NormalInformationCollection> item, RawDataPool dataPool) where TKey : unmanaged
 	{
 		int dataSize = 4;
@@ -108610,6 +110869,715 @@ public static class Serializer
 			{
 				item.Add(elementId2, null);
 			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, CharacterSet> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, CharacterSet> item2 in item)
+		{
+			dataSize += sizeof(TKey) + item2.Value.GetSerializedSize();
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, CharacterSet> entry in item)
+		{
+			TKey elementId = entry.Key;
+			CharacterSet element = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			pData += element.Serialize(pData);
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, CharacterSet> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				dataPool.Allocate(1 + sizeof(TKey) + element.GetSerializedSize(), &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				pData2 += element.Serialize(pData2);
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, CharacterSet> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						CharacterSet element = default(CharacterSet);
+						pCurrData += element.Deserialize(pCurrData);
+						item[elementId] = element;
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			CharacterSet element2 = default(CharacterSet);
+			pCurrData2 += element2.Deserialize(pCurrData2);
+			item.Add(elementId2, element2);
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementTreasuryRecordCollection> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SettlementTreasuryRecordCollection> item2 in item)
+		{
+			SettlementTreasuryRecordCollection element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SettlementTreasuryRecordCollection> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SettlementTreasuryRecordCollection element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementTreasuryRecordCollection> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SettlementTreasuryRecordCollection> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							SettlementTreasuryRecordCollection element = new SettlementTreasuryRecordCollection();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				SettlementTreasuryRecordCollection element2 = new SettlementTreasuryRecordCollection();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrisonRecordCollection> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SettlementPrisonRecordCollection> item2 in item)
+		{
+			SettlementPrisonRecordCollection element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SettlementPrisonRecordCollection> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SettlementPrisonRecordCollection element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrisonRecordCollection> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SettlementPrisonRecordCollection> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							SettlementPrisonRecordCollection element = new SettlementPrisonRecordCollection();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				SettlementPrisonRecordCollection element2 = new SettlementPrisonRecordCollection();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrison> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SettlementPrison> item2 in item)
+		{
+			SettlementPrison element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SettlementPrison> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SettlementPrison element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SettlementPrison> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SettlementPrison> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							SettlementPrison element = new SettlementPrison();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				SettlementPrison element2 = new SettlementPrison();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SerializableList<PunishmentSeverityCustomizeData>> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SerializableList<PunishmentSeverityCustomizeData>> item2 in item)
+		{
+			dataSize += sizeof(TKey) + item2.Value.GetSerializedSize();
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SerializableList<PunishmentSeverityCustomizeData>> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SerializableList<PunishmentSeverityCustomizeData> element = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			pData += element.Serialize(pData);
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SerializableList<PunishmentSeverityCustomizeData>> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				dataPool.Allocate(1 + sizeof(TKey) + element.GetSerializedSize(), &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				pData2 += element.Serialize(pData2);
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SerializableList<PunishmentSeverityCustomizeData>> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						SerializableList<PunishmentSeverityCustomizeData> element = default(SerializableList<PunishmentSeverityCustomizeData>);
+						pCurrData += element.Deserialize(pCurrData);
+						item[elementId] = element;
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			SerializableList<PunishmentSeverityCustomizeData> element2 = default(SerializableList<PunishmentSeverityCustomizeData>);
+			pCurrData2 += element2.Deserialize(pCurrData2);
+			item.Add(elementId2, element2);
 		}
 		return 4 + (int)(pCurrData2 - pData);
 	}
@@ -111185,6 +114153,163 @@ public static class Serializer
 			if (num3 > 0)
 			{
 				BuildingEarningsData element2 = new BuildingEarningsData();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
+		}
+		return 4 + (int)(pCurrData2 - pData);
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SmarterChickenData> item, RawDataPool dataPool) where TKey : unmanaged
+	{
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, SmarterChickenData> item2 in item)
+		{
+			SmarterChickenData element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
+		byte* pData = default(byte*);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
+		*(int*)pData = 0;
+		pData += 4;
+		foreach (KeyValuePair<TKey, SmarterChickenData> entry in item)
+		{
+			TKey elementId = entry.Key;
+			SmarterChickenData element2 = entry.Value;
+			*(TKey*)pData = elementId;
+			pData += sizeof(TKey);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
+		}
+		return offset;
+	}
+
+	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, SmarterChickenData> item, RawDataPool dataPool, SingleValueCollectionModificationCollection<TKey> modifications) where TKey : unmanaged, IEquatable<TKey>
+	{
+		int modificationsCount = modifications.Items.Count;
+		int actualModificationsCount = modificationsCount;
+		byte* pHeader = default(byte*);
+		int offset = dataPool.Allocate(8, &pHeader);
+		((int*)pHeader)[1] = 1;
+		byte* pData2 = default(byte*);
+		byte* pData = default(byte*);
+		for (int modificationId = 0; modificationId < modificationsCount; modificationId++)
+		{
+			SingleValueCollectionModification<TKey> modification = modifications.Items[modificationId];
+			switch (modification.Type)
+			{
+			case 0:
+			case 1:
+			{
+				if (!item.TryGetValue(modification.Id, out var element))
+				{
+					actualModificationsCount--;
+					break;
+				}
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
+				*pData2 = (byte)modification.Type;
+				pData2++;
+				*(TKey*)pData2 = modification.Id;
+				pData2 += sizeof(TKey);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
+				break;
+			}
+			case 2:
+			case 3:
+				dataPool.Allocate(1 + sizeof(TKey), &pData);
+				*pData = (byte)modification.Type;
+				pData++;
+				*(TKey*)pData = modification.Id;
+				pData += sizeof(TKey);
+				break;
+			}
+		}
+		pHeader = dataPool.GetPointer(offset);
+		*(int*)pHeader = actualModificationsCount;
+		return offset;
+	}
+
+	public unsafe static int DeserializeModifications<TKey>(RawDataPool dataPool, int offset, IDictionary<TKey, SmarterChickenData> item) where TKey : unmanaged
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		sbyte num = (sbyte)(*(int*)pData);
+		pData += 4;
+		if (num == 1)
+		{
+			if (elementsCount > 0)
+			{
+				byte* pCurrData = pData;
+				for (int i = 0; i < elementsCount; i++)
+				{
+					sbyte modificationType = (sbyte)(*pCurrData);
+					pCurrData++;
+					TKey elementId = *(TKey*)pCurrData;
+					pCurrData += sizeof(TKey);
+					switch (modificationType)
+					{
+					case 0:
+					case 1:
+					{
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							SmarterChickenData element = new SmarterChickenData();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
+						break;
+					}
+					case 2:
+						item.Remove(elementId);
+						break;
+					case 3:
+						item.Clear();
+						break;
+					}
+				}
+				return 4 + (int)(pCurrData - pData);
+			}
+			return 4;
+		}
+		item.Clear();
+		byte* pCurrData2 = pData;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			TKey elementId2 = *(TKey*)pCurrData2;
+			pCurrData2 += sizeof(TKey);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				SmarterChickenData element2 = new SmarterChickenData();
 				pCurrData2 += element2.Deserialize(pCurrData2);
 				item.Add(elementId2, element2);
 			}
@@ -116786,19 +119911,35 @@ public static class Serializer
 
 	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, PlanningActionSettings> item, RawDataPool dataPool) where TKey : unmanaged
 	{
-		int elementsCount = item.Count;
-		int dataSize = 4 + (sizeof(TKey) + 8) * elementsCount;
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, PlanningActionSettings> item2 in item)
+		{
+			PlanningActionSettings element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
 		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
 		*(int*)pData = 0;
 		pData += 4;
 		foreach (KeyValuePair<TKey, PlanningActionSettings> entry in item)
 		{
 			TKey elementId = entry.Key;
-			PlanningActionSettings element = entry.Value;
+			PlanningActionSettings element2 = entry.Value;
 			*(TKey*)pData = elementId;
 			pData += sizeof(TKey);
-			pData += element.Serialize(pData);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
 		}
 		return offset;
 	}
@@ -116825,12 +119966,19 @@ public static class Serializer
 					actualModificationsCount--;
 					break;
 				}
-				dataPool.Allocate(1 + sizeof(TKey) + 8, &pData2);
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
 				*pData2 = (byte)modification.Type;
 				pData2++;
 				*(TKey*)pData2 = modification.Id;
 				pData2 += sizeof(TKey);
-				pData2 += element.Serialize(pData2);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
 				break;
 			}
 			case 2:
@@ -116870,9 +120018,18 @@ public static class Serializer
 					case 0:
 					case 1:
 					{
-						PlanningActionSettings element = new PlanningActionSettings();
-						pCurrData += element.Deserialize(pCurrData);
-						item[elementId] = element;
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							PlanningActionSettings element = new PlanningActionSettings();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
 						break;
 					}
 					case 2:
@@ -116893,28 +120050,53 @@ public static class Serializer
 		{
 			TKey elementId2 = *(TKey*)pCurrData2;
 			pCurrData2 += sizeof(TKey);
-			PlanningActionSettings element2 = new PlanningActionSettings();
-			pCurrData2 += element2.Deserialize(pCurrData2);
-			item.Add(elementId2, element2);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				PlanningActionSettings element2 = new PlanningActionSettings();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
 		}
 		return 4 + (int)(pCurrData2 - pData);
 	}
 
 	public unsafe static int SerializeModifications<TKey>(IDictionary<TKey, PlanningGoalSettings> item, RawDataPool dataPool) where TKey : unmanaged
 	{
-		int elementsCount = item.Count;
-		int dataSize = 4 + (sizeof(TKey) + 8) * elementsCount;
+		int dataSize = 4;
+		foreach (KeyValuePair<TKey, PlanningGoalSettings> item2 in item)
+		{
+			PlanningGoalSettings element = item2.Value;
+			dataSize = ((element == null) ? (dataSize + (sizeof(TKey) + 4)) : (dataSize + (sizeof(TKey) + 4 + element.GetSerializedSize())));
+		}
 		byte* pData = default(byte*);
-		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount, checkMaxSize: false);
+		int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)item.Count, checkMaxSize: false);
 		*(int*)pData = 0;
 		pData += 4;
 		foreach (KeyValuePair<TKey, PlanningGoalSettings> entry in item)
 		{
 			TKey elementId = entry.Key;
-			PlanningGoalSettings element = entry.Value;
+			PlanningGoalSettings element2 = entry.Value;
 			*(TKey*)pData = elementId;
 			pData += sizeof(TKey);
-			pData += element.Serialize(pData);
+			if (element2 != null)
+			{
+				byte* intPtr = pData;
+				pData += 4;
+				int subContentSize = element2.Serialize(pData);
+				pData += subContentSize;
+				*(int*)intPtr = subContentSize;
+			}
+			else
+			{
+				*(int*)pData = 0;
+				pData += 4;
+			}
 		}
 		return offset;
 	}
@@ -116941,12 +120123,19 @@ public static class Serializer
 					actualModificationsCount--;
 					break;
 				}
-				dataPool.Allocate(1 + sizeof(TKey) + 8, &pData2);
+				int subContentSize = element?.GetSerializedSize() ?? 0;
+				int subDataSize = 1 + sizeof(TKey) + 4 + subContentSize;
+				dataPool.Allocate(subDataSize, &pData2);
 				*pData2 = (byte)modification.Type;
 				pData2++;
 				*(TKey*)pData2 = modification.Id;
 				pData2 += sizeof(TKey);
-				pData2 += element.Serialize(pData2);
+				*(int*)pData2 = subContentSize;
+				pData2 += 4;
+				if (subContentSize > 0)
+				{
+					pData2 += element.Serialize(pData2);
+				}
 				break;
 			}
 			case 2:
@@ -116986,9 +120175,18 @@ public static class Serializer
 					case 0:
 					case 1:
 					{
-						PlanningGoalSettings element = new PlanningGoalSettings();
-						pCurrData += element.Deserialize(pCurrData);
-						item[elementId] = element;
+						int num2 = *(int*)pCurrData;
+						pCurrData += 4;
+						if (num2 > 0)
+						{
+							PlanningGoalSettings element = new PlanningGoalSettings();
+							pCurrData += element.Deserialize(pCurrData);
+							item[elementId] = element;
+						}
+						else
+						{
+							item[elementId] = null;
+						}
 						break;
 					}
 					case 2:
@@ -117009,9 +120207,18 @@ public static class Serializer
 		{
 			TKey elementId2 = *(TKey*)pCurrData2;
 			pCurrData2 += sizeof(TKey);
-			PlanningGoalSettings element2 = new PlanningGoalSettings();
-			pCurrData2 += element2.Deserialize(pCurrData2);
-			item.Add(elementId2, element2);
+			int num3 = *(int*)pCurrData2;
+			pCurrData2 += 4;
+			if (num3 > 0)
+			{
+				PlanningGoalSettings element2 = new PlanningGoalSettings();
+				pCurrData2 += element2.Deserialize(pCurrData2);
+				item.Add(elementId2, element2);
+			}
+			else
+			{
+				item.Add(elementId2, null);
+			}
 		}
 		return 4 + (int)(pCurrData2 - pData);
 	}
@@ -117308,6 +120515,95 @@ public static class Serializer
 				item.Add((EGuidingChapterState)pData[i]);
 			}
 			return 4 + 4 * elementsCount;
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public static int Serialize(FarmerAutoWorkConfig item, RawDataPool dataPool)
+	{
+		return dataPool.AddUnmanaged((ushort)item);
+	}
+
+	public static int Deserialize(RawDataPool dataPool, int offset, ref FarmerAutoWorkConfig item)
+	{
+		item = (FarmerAutoWorkConfig)dataPool.GetUnmanaged<ushort>(offset);
+		return 2;
+	}
+
+	public unsafe static int Serialize(FarmerAutoWorkConfig[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int elementsCount = item.Length;
+			int dataSize = 2 * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				((short*)pData)[i] = (short)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref FarmerAutoWorkConfig[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new FarmerAutoWorkConfig[elementsCount];
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item[i] = ((FarmerAutoWorkConfig*)pData)[i];
+			}
+			return 4 + 2 * elementsCount;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<FarmerAutoWorkConfig> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int elementsCount = item.Count;
+			int dataSize = 2 * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				((short*)pData)[i] = (short)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<FarmerAutoWorkConfig> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<FarmerAutoWorkConfig>(elementsCount);
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item.Add(((FarmerAutoWorkConfig*)pData)[i]);
+			}
+			return 4 + 2 * elementsCount;
 		}
 		item?.Clear();
 		return 4;
@@ -118018,6 +121314,95 @@ public static class Serializer
 			for (int i = 0; i < elementsCount; i++)
 			{
 				item.Add((ETargetType)pData[i]);
+			}
+			return 4 + elementsCount;
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public static int Serialize(OperationLevel item, RawDataPool dataPool)
+	{
+		return dataPool.AddUnmanaged((sbyte)item);
+	}
+
+	public static int Deserialize(RawDataPool dataPool, int offset, ref OperationLevel item)
+	{
+		item = (OperationLevel)dataPool.GetUnmanaged<sbyte>(offset);
+		return 1;
+	}
+
+	public unsafe static int Serialize(OperationLevel[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int elementsCount = item.Length;
+			int dataSize = elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				pData[i] = (byte)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref OperationLevel[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new OperationLevel[elementsCount];
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item[i] = (OperationLevel)pData[i];
+			}
+			return 4 + elementsCount;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<OperationLevel> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int elementsCount = item.Count;
+			int dataSize = elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				pData[i] = (byte)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<OperationLevel> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<OperationLevel>(elementsCount);
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item.Add((OperationLevel)pData[i]);
 			}
 			return 4 + elementsCount;
 		}
@@ -118737,6 +122122,95 @@ public static class Serializer
 		return 4;
 	}
 
+	public static int Serialize(EGmCreateInventoryItemResult item, RawDataPool dataPool)
+	{
+		return dataPool.AddUnmanaged((int)item);
+	}
+
+	public static int Deserialize(RawDataPool dataPool, int offset, ref EGmCreateInventoryItemResult item)
+	{
+		item = (EGmCreateInventoryItemResult)dataPool.GetUnmanaged<int>(offset);
+		return 4;
+	}
+
+	public unsafe static int Serialize(EGmCreateInventoryItemResult[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int elementsCount = item.Length;
+			int dataSize = 4 * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				((int*)pData)[i] = (int)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref EGmCreateInventoryItemResult[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new EGmCreateInventoryItemResult[elementsCount];
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item[i] = ((EGmCreateInventoryItemResult*)pData)[i];
+			}
+			return 4 + 4 * elementsCount;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<EGmCreateInventoryItemResult> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int elementsCount = item.Count;
+			int dataSize = 4 * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				((int*)pData)[i] = (int)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<EGmCreateInventoryItemResult> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<EGmCreateInventoryItemResult>(elementsCount);
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item.Add(((EGmCreateInventoryItemResult*)pData)[i]);
+			}
+			return 4 + 4 * elementsCount;
+		}
+		item?.Clear();
+		return 4;
+	}
+
 	public static int Serialize(EWisdomType item, RawDataPool dataPool)
 	{
 		return dataPool.AddUnmanaged((sbyte)item);
@@ -118821,6 +122295,95 @@ public static class Serializer
 				item.Add((EWisdomType)pData[i]);
 			}
 			return 4 + 4 * elementsCount;
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public static int Serialize(ImmunityMask item, RawDataPool dataPool)
+	{
+		return dataPool.AddUnmanaged((uint)item);
+	}
+
+	public static int Deserialize(RawDataPool dataPool, int offset, ref ImmunityMask item)
+	{
+		item = (ImmunityMask)dataPool.GetUnmanaged<uint>(offset);
+		return 4;
+	}
+
+	public unsafe static int Serialize(ImmunityMask[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int elementsCount = item.Length;
+			int dataSize = 4 * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				((int*)pData)[i] = (int)(uint)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ImmunityMask[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ImmunityMask[elementsCount];
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item[i] = (ImmunityMask)((uint*)pData)[i];
+			}
+			return 4 + sizeof(ImmunityMask) * elementsCount;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ImmunityMask> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int elementsCount = item.Count;
+			int dataSize = sizeof(ImmunityMask) * elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				((int*)pData)[i] = (int)(uint)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ImmunityMask> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<ImmunityMask>(elementsCount);
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item.Add((ImmunityMask)((uint*)pData)[i]);
+			}
+			return 4 + sizeof(ImmunityMask) * elementsCount;
 		}
 		item?.Clear();
 		return 4;
@@ -119182,18 +122745,18 @@ public static class Serializer
 		return 4;
 	}
 
-	public static int Serialize(ECricketPolymorphState item, RawDataPool dataPool)
+	public static int Serialize(EPolymorphState item, RawDataPool dataPool)
 	{
 		return dataPool.AddUnmanaged((byte)item);
 	}
 
-	public static int Deserialize(RawDataPool dataPool, int offset, ref ECricketPolymorphState item)
+	public static int Deserialize(RawDataPool dataPool, int offset, ref EPolymorphState item)
 	{
-		item = (ECricketPolymorphState)dataPool.GetUnmanaged<byte>(offset);
+		item = (EPolymorphState)dataPool.GetUnmanaged<byte>(offset);
 		return 1;
 	}
 
-	public unsafe static int Serialize(ECricketPolymorphState[] item, RawDataPool dataPool)
+	public unsafe static int Serialize(EPolymorphState[] item, RawDataPool dataPool)
 	{
 		if (item != null && item.Length != 0)
 		{
@@ -119210,7 +122773,7 @@ public static class Serializer
 		return dataPool.AddWithHeader(null, 0, 0u);
 	}
 
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ECricketPolymorphState[] item)
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref EPolymorphState[] item)
 	{
 		int elementsCount = default(int);
 		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
@@ -119218,11 +122781,11 @@ public static class Serializer
 		{
 			if (item == null || item.Length != elementsCount)
 			{
-				item = new ECricketPolymorphState[elementsCount];
+				item = new EPolymorphState[elementsCount];
 			}
 			for (int i = 0; i < elementsCount; i++)
 			{
-				item[i] = (ECricketPolymorphState)pData[i];
+				item[i] = (EPolymorphState)pData[i];
 			}
 			return 4 + 4 * elementsCount;
 		}
@@ -119230,7 +122793,7 @@ public static class Serializer
 		return 4;
 	}
 
-	public unsafe static int Serialize(List<ECricketPolymorphState> item, RawDataPool dataPool)
+	public unsafe static int Serialize(List<EPolymorphState> item, RawDataPool dataPool)
 	{
 		if (item != null && item.Count > 0)
 		{
@@ -119247,7 +122810,7 @@ public static class Serializer
 		return dataPool.AddWithHeader(null, 0, 0u);
 	}
 
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ECricketPolymorphState> item)
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<EPolymorphState> item)
 	{
 		int elementsCount = default(int);
 		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
@@ -119259,13 +122822,102 @@ public static class Serializer
 			}
 			else
 			{
-				item = new List<ECricketPolymorphState>(elementsCount);
+				item = new List<EPolymorphState>(elementsCount);
 			}
 			for (int i = 0; i < elementsCount; i++)
 			{
-				item.Add((ECricketPolymorphState)pData[i]);
+				item.Add((EPolymorphState)pData[i]);
 			}
 			return 4 + 4 * elementsCount;
+		}
+		item?.Clear();
+		return 4;
+	}
+
+	public static int Serialize(ETwelveImmortalsStatus item, RawDataPool dataPool)
+	{
+		return dataPool.AddUnmanaged((sbyte)item);
+	}
+
+	public static int Deserialize(RawDataPool dataPool, int offset, ref ETwelveImmortalsStatus item)
+	{
+		item = (ETwelveImmortalsStatus)dataPool.GetUnmanaged<sbyte>(offset);
+		return 1;
+	}
+
+	public unsafe static int Serialize(ETwelveImmortalsStatus[] item, RawDataPool dataPool)
+	{
+		if (item != null && item.Length != 0)
+		{
+			int elementsCount = item.Length;
+			int dataSize = elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				pData[i] = (byte)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref ETwelveImmortalsStatus[] item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item == null || item.Length != elementsCount)
+			{
+				item = new ETwelveImmortalsStatus[elementsCount];
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item[i] = (ETwelveImmortalsStatus)pData[i];
+			}
+			return 4 + elementsCount;
+		}
+		item = null;
+		return 4;
+	}
+
+	public unsafe static int Serialize(List<ETwelveImmortalsStatus> item, RawDataPool dataPool)
+	{
+		if (item != null && item.Count > 0)
+		{
+			int elementsCount = item.Count;
+			int dataSize = elementsCount;
+			byte* pData = default(byte*);
+			int offset = dataPool.AllocateWithHeader(dataSize, &pData, (uint)elementsCount);
+			for (int i = 0; i < elementsCount; i++)
+			{
+				pData[i] = (byte)item[i];
+			}
+			return offset;
+		}
+		return dataPool.AddWithHeader(null, 0, 0u);
+	}
+
+	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref List<ETwelveImmortalsStatus> item)
+	{
+		int elementsCount = default(int);
+		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
+		if (elementsCount > 0)
+		{
+			if (item != null)
+			{
+				item.Clear();
+			}
+			else
+			{
+				item = new List<ETwelveImmortalsStatus>(elementsCount);
+			}
+			for (int i = 0; i < elementsCount; i++)
+			{
+				item.Add((ETwelveImmortalsStatus)pData[i]);
+			}
+			return 4 + elementsCount;
 		}
 		item?.Clear();
 		return 4;
@@ -119360,13 +123012,6 @@ public static class Serializer
 		return 4;
 	}
 
-	/// <summary>
-	/// 序列化二进制数据块的全部数据.
-	/// 写入的数据大小可以超出限制.
-	/// </summary>
-	/// <param name="block"></param>
-	/// <param name="dataPool"></param>
-	/// <returns>序列化的数据的起始偏移</returns>
 	public unsafe static int SerializeModifications(IBinary block, RawDataPool dataPool)
 	{
 		int dataSize = block.GetSize();
@@ -119383,14 +123028,6 @@ public static class Serializer
 		return result;
 	}
 
-	/// <summary>
-	/// 序列化二进制数据块的数据改动.
-	/// 写入的数据大小可以超出限制.
-	/// </summary>
-	/// <param name="block"></param>
-	/// <param name="dataPool"></param>
-	/// <param name="modifications">修改记录. 虽然是值类型, 但由于不需要修改, 因此不用按引用传递.</param>
-	/// <returns>序列化的数据的起始偏移</returns>
 	public unsafe static int SerializeModifications(IBinary block, RawDataPool dataPool, BinaryModificationCollection modifications)
 	{
 		int recordsCount = modifications.Items.Count;
@@ -119456,13 +123093,6 @@ public static class Serializer
 		return (int)(pCurrData2 - pData);
 	}
 
-	/// <summary>
-	/// 从修改记录构造原数据碎片.
-	/// 即计算出原数据被打散后, 各部分在最终数据中的位置.
-	/// </summary>
-	/// <param name="oriSize">原数据的大小</param>
-	/// <param name="records"></param>
-	/// <param name="fragments">已排序的原数据碎片集合</param>
 	private static void GenerateOriginalDataFragments(int oriSize, List<BinaryModification> records, List<OriginalDataFragment> fragments)
 	{
 		fragments.Add(new OriginalDataFragment(0, oriSize, 0));
@@ -119485,11 +123115,6 @@ public static class Serializer
 		}
 	}
 
-	/// <summary>
-	/// 把原数据碎片写入到数据池
-	/// </summary>
-	/// <param name="fragments"></param>
-	/// <param name="dataPool"></param>
 	private unsafe static void WriteFragments(List<OriginalDataFragment> fragments, RawDataPool dataPool)
 	{
 		int fragmentsCount = fragments.Count;
@@ -119504,11 +123129,6 @@ public static class Serializer
 		}
 	}
 
-	/// <summary>
-	/// 从内存中读取原数据碎片
-	/// </summary>
-	/// <param name="fragments"></param>
-	/// <param name="pData"></param>
 	private unsafe static int ReadFragments(byte* pData, List<OriginalDataFragment> fragments)
 	{
 		byte* pCurrData = pData;
@@ -119523,15 +123143,6 @@ public static class Serializer
 		return (int)(pCurrData - pData);
 	}
 
-	/// <summary>
-	/// 根据现有数据和碎片集合, 构造同步数据
-	/// </summary>
-	/// <param name="currBlock">当前数据块</param>
-	/// <param name="fragments">已排序的原数据碎片集合</param>
-	/// <param name="dataPool">
-	/// 此方法会写入一个同步数据列表到数据池中, 其元素为: 若要更新到当前数据, 应该设置的数据及其位置.
-	/// 元素数据结构: offset (int), size (int), data.
-	/// </param>
 	private static void GenerateSyncData(IBinary currBlock, List<OriginalDataFragment> fragments, RawDataPool dataPool)
 	{
 		int currOffset = 0;
@@ -119556,14 +123167,6 @@ public static class Serializer
 		}
 	}
 
-	/// <summary>
-	/// 添加同步数据.
-	/// 同步数据结构: offset (int), size (int), data.
-	/// </summary>
-	/// <param name="dataPool"></param>
-	/// <param name="currBlock"></param>
-	/// <param name="offset"></param>
-	/// <param name="size"></param>
 	private unsafe static void AddSyncData(RawDataPool dataPool, IBinary currBlock, int offset, int size)
 	{
 		byte* pData = default(byte*);
@@ -119593,12 +123196,6 @@ public static class Serializer
 		RestructureFromSyncData(block, pSyncData, syncDataSize, newDataInfos);
 	}
 
-	/// <summary>
-	/// 根据碎片数据选择移动原数据的方式.
-	/// 当所有原数据都向后移时, 可以逆序原地移动; 当所有原数据都向前移时, 可以正序原地移动; 当完全没有规律时, 只能重建数据.
-	/// </summary>
-	/// <param name="fragments"></param>
-	/// <returns>0: 正序原地移动, 1: 逆序原地移动, 2: 重建数据</returns>
 	private static sbyte CalcFragmentsMovingMethod(List<OriginalDataFragment> fragments)
 	{
 		int fragmentsCount = fragments.Count;
@@ -119631,12 +123228,6 @@ public static class Serializer
 		return 2;
 	}
 
-	/// <summary>
-	/// 正序原地移动原数据
-	/// </summary>
-	/// <param name="block"></param>
-	/// <param name="fragments"></param>
-	/// <param name="currDataSize"></param>
 	private unsafe static void MoveFragmentsInPlaceForward(IBinary block, List<OriginalDataFragment> fragments, int currDataSize)
 	{
 		block.EnsureCapacity(currDataSize);
@@ -119651,12 +123242,6 @@ public static class Serializer
 		}
 	}
 
-	/// <summary>
-	/// 逆序原地移动原数据
-	/// </summary>
-	/// <param name="block"></param>
-	/// <param name="fragments"></param>
-	/// <param name="currDataSize"></param>
 	private unsafe static void MoveFragmentsInPlaceBackward(IBinary block, List<OriginalDataFragment> fragments, int currDataSize)
 	{
 		block.EnsureCapacity(currDataSize);
@@ -119670,12 +123255,6 @@ public static class Serializer
 		}
 	}
 
-	/// <summary>
-	/// 把原数据中的碎片复制到新的数据块, 之后再设置回原对象
-	/// </summary>
-	/// <param name="block"></param>
-	/// <param name="fragments"></param>
-	/// <param name="currDataSize"></param>
 	private unsafe static void ReconstructFromFragments(IBinary block, List<OriginalDataFragment> fragments, int currDataSize)
 	{
 		byte[] rawData = new byte[currDataSize];
@@ -119715,12 +123294,6 @@ public static class Serializer
 		}
 	}
 
-	/// <summary>
-	/// 深度复制一个实现了 ISerializableGameData 的对象
-	/// </summary>
-	/// <param name="obj"></param>
-	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public unsafe static T CreateCopy<T>(T obj) where T : ISerializableGameData, new()
 	{
 		T newObj = new T();
@@ -119742,9 +123315,6 @@ public static class Serializer
 		return newObj;
 	}
 
-	/// <summary>
-	/// 深度复制一个实现了 ISerializableGameData 的对象
-	/// </summary>
 	public unsafe static void CopyTo<T>(ref T src, ref T dst) where T : ISerializableGameData
 	{
 		int size = src.GetSerializedSize();
@@ -120243,61 +123813,6 @@ public static class Serializer
 			{
 				TravelRouteKey key = default(TravelRouteKey);
 				TravelRoute route = new TravelRoute();
-				pCurrData += key.Deserialize(pCurrData);
-				pCurrData += route.Deserialize(pCurrData);
-				item.Add(key, route);
-			}
-			return 4 + (int)(pCurrData - pData);
-		}
-		item?.Clear();
-		return 4;
-	}
-
-	[ExtraSerializer]
-	public unsafe static int Serialize(Dictionary<Location, AdventureSiteData> item, RawDataPool dataPool)
-	{
-		if (item != null && item.Count > 0)
-		{
-			int elementsCount = item.Count;
-			int dataSize = 0;
-			foreach (KeyValuePair<Location, AdventureSiteData> entry in item)
-			{
-				dataSize += entry.Key.GetSerializedSize() + entry.Value.GetSerializedSize();
-			}
-			byte* pData = default(byte*);
-			int offset = dataPool.AllocateWithHeader(dataSize * elementsCount, &pData, (uint)elementsCount);
-			{
-				foreach (KeyValuePair<Location, AdventureSiteData> entry2 in item)
-				{
-					pData += entry2.Key.Serialize(pData);
-					pData += entry2.Value.Serialize(pData);
-				}
-				return offset;
-			}
-		}
-		return dataPool.AddWithHeader(null, 0, 0u);
-	}
-
-	[ExtraSerializer]
-	public unsafe static int Deserialize(RawDataPool dataPool, int offset, ref Dictionary<Location, AdventureSiteData> item)
-	{
-		int elementsCount = default(int);
-		byte* pData = dataPool.GetPointerWithHeader(offset, (uint*)(&elementsCount));
-		if (elementsCount > 0)
-		{
-			if (item != null)
-			{
-				item.Clear();
-			}
-			else
-			{
-				item = new Dictionary<Location, AdventureSiteData>(elementsCount);
-			}
-			byte* pCurrData = pData;
-			for (int i = 0; i < elementsCount; i++)
-			{
-				Location key = default(Location);
-				AdventureSiteData route = new AdventureSiteData();
 				pCurrData += key.Deserialize(pCurrData);
 				pCurrData += route.Deserialize(pCurrData);
 				item.Add(key, route);

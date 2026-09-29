@@ -10,31 +10,19 @@ public class CharacterDisplayDataForYuanshanSelect : ISerializableGameData
 	[SerializableGameDataField]
 	public CharacterDisplayDataForGeneralScrollList GeneralData;
 
-	/// <summary>
-	/// 相枢入魔值
-	/// </summary>
 	[SerializableGameDataField]
 	public byte Infection;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterDisplayDataForYuanshanSelect()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterDisplayDataForYuanshanSelect(CharacterDisplayDataForYuanshanSelect other)
 	{
 		GeneralData = new CharacterDisplayDataForGeneralScrollList(other.GeneralData);
 		Infection = other.Infection;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterDisplayDataForYuanshanSelect other)
 	{
 		GeneralData = new CharacterDisplayDataForGeneralScrollList(other.GeneralData);

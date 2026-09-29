@@ -7,91 +7,40 @@ namespace Config;
 [Serializable]
 public class InformationType : ConfigData<InformationTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 地方
-		/// </summary>
 		public const sbyte Area = 0;
 
-		/// <summary>
-		/// 门派
-		/// </summary>
 		public const sbyte Sect = 1;
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public const sbyte LifeSkill = 2;
 
-		/// <summary>
-		/// 西域
-		/// </summary>
 		public const sbyte Western = 3;
 
-		/// <summary>
-		/// 名胜
-		/// </summary>
 		public const sbyte Scenic = 4;
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public const sbyte SwordTomb = 5;
 
-		/// <summary>
-		/// 志向
-		/// </summary>
 		public const sbyte Profession = 6;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 地方
-		/// </summary>
 		public static InformationTypeItem Area => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 门派
-		/// </summary>
 		public static InformationTypeItem Sect => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 技艺
-		/// </summary>
 		public static InformationTypeItem LifeSkill => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 西域
-		/// </summary>
 		public static InformationTypeItem Western => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 名胜
-		/// </summary>
 		public static InformationTypeItem Scenic => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 剑冢
-		/// </summary>
 		public static InformationTypeItem SwordTomb => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 志向
-		/// </summary>
 		public static InformationTypeItem Profession => Instance[(sbyte)6];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static InformationType Instance = new InformationType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "DescGain", "DescEffect", "DescEffectWay", "Title", "TemplateId" };

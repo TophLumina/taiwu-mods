@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class EventCgTexture : ConfigData<EventCgTextureItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventCgTexture Instance = new EventCgTexture();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "ResourceFormat" };
@@ -113,12 +110,15 @@ public class EventCgTexture : ConfigData<EventCgTextureItem, short>
 		_dataArray.Add(new EventCgTextureItem(80, "mainstorytextures_cg_PreDivineFlame_5", 2f));
 		_dataArray.Add(new EventCgTextureItem(81, "mainstorytextures_cg_PreDivineFlame_4", 2f));
 		_dataArray.Add(new EventCgTextureItem(82, "mainstorytextures_cg_PreDivineFlame_6", 2f));
+		_dataArray.Add(new EventCgTextureItem(83, "mainstorytextures_cg_pagodaofthefallen_1", 2f));
+		_dataArray.Add(new EventCgTextureItem(84, "mainstorytextures_cg_pagodaofthefallen_2", 2f));
+		_dataArray.Add(new EventCgTextureItem(85, "mainstorytextures_cg_pagodaofthefallen_0", 2f));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<EventCgTextureItem>(83);
+		_dataArray = new List<EventCgTextureItem>(86);
 		CreateItems0();
 		CreateItems1();
 	}

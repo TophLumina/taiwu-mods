@@ -7,211 +7,88 @@ namespace Config;
 [Serializable]
 public class RelationDisplayType : ConfigData<RelationDisplayTypeItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 父母
-		/// </summary>
 		public const short Parent = 0;
 
-		/// <summary>
-		/// 结义
-		/// </summary>
 		public const short Sworn = 1;
 
-		/// <summary>
-		/// 夫妻
-		/// </summary>
 		public const short HusbandOrWife = 2;
 
-		/// <summary>
-		/// 子女
-		/// </summary>
 		public const short Child = 3;
 
-		/// <summary>
-		/// 派系
-		/// </summary>
 		public const short Faction = 4;
 
-		/// <summary>
-		/// 仇敌
-		/// </summary>
 		public const short Enemy = 5;
 
-		/// <summary>
-		/// 朋友
-		/// </summary>
 		public const short Friend = 6;
 
-		/// <summary>
-		/// 爱慕
-		/// </summary>
 		public const short Adored = 7;
 
-		/// <summary>
-		/// 师承
-		/// </summary>
 		public const short Mentor = 8;
 
-		/// <summary>
-		/// 手足
-		/// </summary>
 		public const short Sibling = 9;
 
-		/// <summary>
-		/// 血亲父母
-		/// </summary>
 		public const short BloodParent = 10;
 
-		/// <summary>
-		/// 血亲子女
-		/// </summary>
 		public const short BloodChild = 11;
 
-		/// <summary>
-		/// 血亲手足
-		/// </summary>
 		public const short BloodBrotherOrSister = 12;
 
-		/// <summary>
-		/// 继亲父母
-		/// </summary>
 		public const short StepParent = 13;
 
-		/// <summary>
-		/// 继亲子女
-		/// </summary>
 		public const short StepChild = 14;
 
-		/// <summary>
-		/// 继亲手足
-		/// </summary>
 		public const short StepBrotherOrSister = 15;
 
-		/// <summary>
-		/// 义亲父母
-		/// </summary>
 		public const short AdoptiveParent = 16;
 
-		/// <summary>
-		/// 义亲子女
-		/// </summary>
 		public const short AdoptiveChild = 17;
 
-		/// <summary>
-		/// 义亲手足
-		/// </summary>
 		public const short AdoptiveBrotherOrSister = 18;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 父母
-		/// </summary>
 		public static RelationDisplayTypeItem Parent => Instance[(short)0];
 
-		/// <summary>
-		/// 结义
-		/// </summary>
 		public static RelationDisplayTypeItem Sworn => Instance[(short)1];
 
-		/// <summary>
-		/// 夫妻
-		/// </summary>
 		public static RelationDisplayTypeItem HusbandOrWife => Instance[(short)2];
 
-		/// <summary>
-		/// 子女
-		/// </summary>
 		public static RelationDisplayTypeItem Child => Instance[(short)3];
 
-		/// <summary>
-		/// 派系
-		/// </summary>
 		public static RelationDisplayTypeItem Faction => Instance[(short)4];
 
-		/// <summary>
-		/// 仇敌
-		/// </summary>
 		public static RelationDisplayTypeItem Enemy => Instance[(short)5];
 
-		/// <summary>
-		/// 朋友
-		/// </summary>
 		public static RelationDisplayTypeItem Friend => Instance[(short)6];
 
-		/// <summary>
-		/// 爱慕
-		/// </summary>
 		public static RelationDisplayTypeItem Adored => Instance[(short)7];
 
-		/// <summary>
-		/// 师承
-		/// </summary>
 		public static RelationDisplayTypeItem Mentor => Instance[(short)8];
 
-		/// <summary>
-		/// 手足
-		/// </summary>
 		public static RelationDisplayTypeItem Sibling => Instance[(short)9];
 
-		/// <summary>
-		/// 血亲父母
-		/// </summary>
 		public static RelationDisplayTypeItem BloodParent => Instance[(short)10];
 
-		/// <summary>
-		/// 血亲子女
-		/// </summary>
 		public static RelationDisplayTypeItem BloodChild => Instance[(short)11];
 
-		/// <summary>
-		/// 血亲手足
-		/// </summary>
 		public static RelationDisplayTypeItem BloodBrotherOrSister => Instance[(short)12];
 
-		/// <summary>
-		/// 继亲父母
-		/// </summary>
 		public static RelationDisplayTypeItem StepParent => Instance[(short)13];
 
-		/// <summary>
-		/// 继亲子女
-		/// </summary>
 		public static RelationDisplayTypeItem StepChild => Instance[(short)14];
 
-		/// <summary>
-		/// 继亲手足
-		/// </summary>
 		public static RelationDisplayTypeItem StepBrotherOrSister => Instance[(short)15];
 
-		/// <summary>
-		/// 义亲父母
-		/// </summary>
 		public static RelationDisplayTypeItem AdoptiveParent => Instance[(short)16];
 
-		/// <summary>
-		/// 义亲子女
-		/// </summary>
 		public static RelationDisplayTypeItem AdoptiveChild => Instance[(short)17];
 
-		/// <summary>
-		/// 义亲手足
-		/// </summary>
 		public static RelationDisplayTypeItem AdoptiveBrotherOrSister => Instance[(short)18];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static RelationDisplayType Instance = new RelationDisplayType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "TemplateId" };

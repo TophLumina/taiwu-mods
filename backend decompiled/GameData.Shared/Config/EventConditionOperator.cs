@@ -7,81 +7,36 @@ namespace Config;
 [Serializable]
 public class EventConditionOperator : ConfigData<EventConditionOperatorItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 等于
-		/// </summary>
 		public const int EQ = 0;
 
-		/// <summary>
-		/// 不等于
-		/// </summary>
 		public const int NE = 1;
 
-		/// <summary>
-		/// 大于
-		/// </summary>
 		public const int GT = 2;
 
-		/// <summary>
-		/// 小于
-		/// </summary>
 		public const int LT = 3;
 
-		/// <summary>
-		/// 大于等于
-		/// </summary>
 		public const int GE = 4;
 
-		/// <summary>
-		/// 小于等于
-		/// </summary>
 		public const int LE = 5;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 等于
-		/// </summary>
 		public static EventConditionOperatorItem EQ => Instance[0];
 
-		/// <summary>
-		/// 不等于
-		/// </summary>
 		public static EventConditionOperatorItem NE => Instance[1];
 
-		/// <summary>
-		/// 大于
-		/// </summary>
 		public static EventConditionOperatorItem GT => Instance[2];
 
-		/// <summary>
-		/// 小于
-		/// </summary>
 		public static EventConditionOperatorItem LT => Instance[3];
 
-		/// <summary>
-		/// 大于等于
-		/// </summary>
 		public static EventConditionOperatorItem GE => Instance[4];
 
-		/// <summary>
-		/// 小于等于
-		/// </summary>
 		public static EventConditionOperatorItem LE => Instance[5];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static EventConditionOperator Instance = new EventConditionOperator();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "TemplateId" };

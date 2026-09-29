@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class AiData : ConfigData<AiDataItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 太吾
-		/// </summary>
 		public const int Taiwu = 0;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 太吾
-		/// </summary>
 		public static AiDataItem Taiwu => Instance[0];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AiData Instance = new AiData();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "GroupId", "TemplateId", "Path" };

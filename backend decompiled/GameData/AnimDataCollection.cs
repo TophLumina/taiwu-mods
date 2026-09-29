@@ -8698,6 +8698,36 @@ public static class AnimDataCollection
 			new AnimData("M_ready2", 0f, new Dictionary<string, float[]>())
 		},
 		{
+			"SC_001",
+			new AnimData("SC_001", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"step",
+					new float[2] { 0.2333333f, 0.4666667f }
+				},
+				{
+					"act7",
+					new float[1] { 0.9666667f }
+				}
+			})
+		},
+		{
+			"SC_002_1",
+			new AnimData("SC_002_1", 0.4666667f, new Dictionary<string, float[]> { 
+			{
+				"step",
+				new float[2] { 0.2f, 0.3666667f }
+			} })
+		},
+		{
+			"SC_002_2",
+			new AnimData("SC_002_2", 0.4666667f, new Dictionary<string, float[]> { 
+			{
+				"step",
+				new float[2] { 0.2333333f, 0.4666667f }
+			} })
+		},
+		{
 			"Tactic_000",
 			new AnimData("Tactic_000", 0.4666667f, new Dictionary<string, float[]>
 			{
@@ -10340,8 +10370,308 @@ public static class AnimDataCollection
 			new AnimData("boss1_C_008", 0.1666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss1_C_011",
+			new AnimData("boss1_C_011", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_arm_backup",
+			new AnimData("boss1_C_011_arm_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_arm_burst",
+			new AnimData("boss1_C_011_arm_burst", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_arm_burst_backup",
+			new AnimData("boss1_C_011_arm_burst_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_ash",
+			new AnimData("boss1_C_011_ash", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_ash_backup",
+			new AnimData("boss1_C_011_ash_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_backup",
+			new AnimData("boss1_C_011_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_body",
+			new AnimData("boss1_C_011_body", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_body_backup",
+			new AnimData("boss1_C_011_body_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_body_burst",
+			new AnimData("boss1_C_011_body_burst", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_body_burst2",
+			new AnimData("boss1_C_011_body_burst2", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_burst2_backup",
+			new AnimData("boss1_C_011_burst2_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_burst_backup",
+			new AnimData("boss1_C_011_burst_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_crush",
+			new AnimData("boss1_C_011_crush", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_crush_backup",
+			new AnimData("boss1_C_011_crush_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_fuyu",
+			new AnimData("boss1_C_011_fuyu", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_fuyu_backup",
+			new AnimData("boss1_C_011_fuyu_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_head",
+			new AnimData("boss1_C_011_head", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_head_backup",
+			new AnimData("boss1_C_011_head_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_head_burst",
+			new AnimData("boss1_C_011_head_burst", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_head_burst_backup",
+			new AnimData("boss1_C_011_head_burst_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_killer",
+			new AnimData("boss1_C_011_killer", 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 2.166667f }
+				}
+			})
+		},
+		{
+			"boss1_C_011_killer_backup",
+			new AnimData("boss1_C_011_killer_backup", 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 2.166667f }
+				}
+			})
+		},
+		{
+			"boss1_C_011_leg",
+			new AnimData("boss1_C_011_leg", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_leg_backup",
+			new AnimData("boss1_C_011_leg_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_leg_burst",
+			new AnimData("boss1_C_011_leg_burst", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_leg_burst_backup",
+			new AnimData("boss1_C_011_leg_burst_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_melt",
+			new AnimData("boss1_C_011_melt", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_melt_backup",
+			new AnimData("boss1_C_011_melt_backup", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_stun",
+			new AnimData("boss1_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_stun_backup",
+			new AnimData("boss1_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_011_throat",
+			new AnimData("boss1_C_011_throat", 1.8f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_012",
+			new AnimData("boss1_C_012", 1.2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss1_C_016",
 			new AnimData("boss1_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss1_C_017",
+			new AnimData("boss1_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_018",
+			new AnimData("boss1_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_C_019",
+			new AnimData("boss1_C_019", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss1_C_020",
@@ -10350,6 +10680,76 @@ public static class AnimDataCollection
 		{
 			"boss1_C_021",
 			new AnimData("boss1_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss1_C_022",
+			new AnimData("boss1_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss1_C_024",
+			new AnimData("boss1_C_024", 2.033334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss1_C_024_1",
+			new AnimData("boss1_C_024_1", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss1_C_024_backup",
+			new AnimData("boss1_C_024_backup", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss1_C_025",
+			new AnimData("boss1_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_C_025_1",
+			new AnimData("boss1_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss1_C_025_2",
+			new AnimData("boss1_C_025_2", 1.633333f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss1_C_025_3",
+			new AnimData("boss1_C_025_3", 1.633333f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
 		},
 		{
 			"boss1_D_001",
@@ -10394,6 +10794,22 @@ public static class AnimDataCollection
 		{
 			"boss1_H_008",
 			new AnimData("boss1_H_008", 0.2666667f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss1_H_023_1",
+			new AnimData("boss1_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_H_024_1",
+			new AnimData("boss1_H_024_1", 2f / 3f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss1_MR_001",
@@ -10572,8 +10988,1474 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss1_M_016",
+			new AnimData("boss1_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_017",
+			new AnimData("boss1_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_018",
+			new AnimData("boss1_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_019",
+			new AnimData("boss1_M_019", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_020",
+			new AnimData("boss1_M_020", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss1_M_020_1",
+			new AnimData("boss1_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_020_2",
+			new AnimData("boss1_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_020_3",
+			new AnimData("boss1_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_021",
+			new AnimData("boss1_M_021", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss1_M_021_1",
+			new AnimData("boss1_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_021_2",
+			new AnimData("boss1_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_021_3",
+			new AnimData("boss1_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_022",
+			new AnimData("boss1_M_022", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss1_M_022_1",
+			new AnimData("boss1_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_022_2",
+			new AnimData("boss1_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_022_3",
+			new AnimData("boss1_M_022_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss1_M_023",
 			new AnimData("boss1_M_023", 0.5f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss1_M_024_1",
+			new AnimData("boss1_M_024_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_024_2",
+			new AnimData("boss1_M_024_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_024_3",
+			new AnimData("boss1_M_024_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_025",
+			new AnimData("boss1_M_025", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss1_M_025_1",
+			new AnimData("boss1_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_025_2",
+			new AnimData("boss1_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_025_3",
+			new AnimData("boss1_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_026",
+			new AnimData("boss1_M_026", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss1_M_026_1",
+			new AnimData("boss1_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_026_2",
+			new AnimData("boss1_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_026_3",
+			new AnimData("boss1_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_027",
+			new AnimData("boss1_M_027", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss1_M_027_1",
+			new AnimData("boss1_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_027_2",
+			new AnimData("boss1_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_027_3",
+			new AnimData("boss1_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_028",
+			new AnimData("boss1_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss1_M_031",
+			new AnimData("boss1_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss1_M_032",
+			new AnimData("boss1_M_032", 1.333333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.7666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_033",
+			new AnimData("boss1_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss1_M_034",
+			new AnimData("boss1_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss1_M_035",
+			new AnimData("boss1_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss1_M_036",
+			new AnimData("boss1_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss1_M_037",
+			new AnimData("boss1_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss1_M_037_1",
+			new AnimData("boss1_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_037_2",
+			new AnimData("boss1_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_037_3",
+			new AnimData("boss1_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_038_1",
+			new AnimData("boss1_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_038_2",
+			new AnimData("boss1_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_038_3",
+			new AnimData("boss1_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_039_1",
+			new AnimData("boss1_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_039_2",
+			new AnimData("boss1_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_039_3",
+			new AnimData("boss1_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_040_1",
+			new AnimData("boss1_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_040_2",
+			new AnimData("boss1_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_040_3",
+			new AnimData("boss1_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_041_1",
+			new AnimData("boss1_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_041_2",
+			new AnimData("boss1_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_041_3",
+			new AnimData("boss1_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_042_1",
+			new AnimData("boss1_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_042_2",
+			new AnimData("boss1_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_042_3",
+			new AnimData("boss1_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_043_1",
+			new AnimData("boss1_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_043_2",
+			new AnimData("boss1_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_043_3",
+			new AnimData("boss1_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_044_1",
+			new AnimData("boss1_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_044_2",
+			new AnimData("boss1_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_044_3",
+			new AnimData("boss1_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_045_1",
+			new AnimData("boss1_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_045_2",
+			new AnimData("boss1_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_045_3",
+			new AnimData("boss1_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_046_1",
+			new AnimData("boss1_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_046_2",
+			new AnimData("boss1_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_046_3",
+			new AnimData("boss1_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_047_1",
+			new AnimData("boss1_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_047_2",
+			new AnimData("boss1_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_047_3",
+			new AnimData("boss1_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_048_1",
+			new AnimData("boss1_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss1_M_048_2",
+			new AnimData("boss1_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss1_M_048_3",
+			new AnimData("boss1_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss1_M_ready",
@@ -11886,6 +13768,28 @@ public static class AnimDataCollection
 			new AnimData("boss10_C_021", 0.8333334f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss10_C_022",
+			new AnimData("boss10_C_022", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"hit",
+				new float[1] { 1.033333f }
+			} })
+		},
+		{
+			"boss10_C_023",
+			new AnimData("boss10_C_023", 2.5f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.933333f }
+				},
+				{
+					"hit",
+					new float[1] { 1.066667f }
+				}
+			})
+		},
+		{
 			"boss10_D_001",
 			new AnimData("boss10_D_001", 2.666667f, new Dictionary<string, float[]>())
 		},
@@ -12510,8 +14414,304 @@ public static class AnimDataCollection
 			new AnimData("boss11_step1_C_008", 0.3333333f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss11_step1_C_011",
+			new AnimData("boss11_step1_C_011", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_arm",
+			new AnimData("boss11_step1_C_011_arm", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_arm_backup",
+			new AnimData("boss11_step1_C_011_arm_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_arm_burst",
+			new AnimData("boss11_step1_C_011_arm_burst", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_arm_burst_backup",
+			new AnimData("boss11_step1_C_011_arm_burst_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_ash",
+			new AnimData("boss11_step1_C_011_ash", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_ash_backup",
+			new AnimData("boss11_step1_C_011_ash_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_backup",
+			new AnimData("boss11_step1_C_011_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_body",
+			new AnimData("boss11_step1_C_011_body", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_body_backup",
+			new AnimData("boss11_step1_C_011_body_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_body_burst",
+			new AnimData("boss11_step1_C_011_body_burst", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_body_burst2",
+			new AnimData("boss11_step1_C_011_body_burst2", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_body_burst2_backup",
+			new AnimData("boss11_step1_C_011_body_burst2_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_body_burst_backup",
+			new AnimData("boss11_step1_C_011_body_burst_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_crush",
+			new AnimData("boss11_step1_C_011_crush", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_crush_backup",
+			new AnimData("boss11_step1_C_011_crush_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_fuyu",
+			new AnimData("boss11_step1_C_011_fuyu", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_fuyu_backup",
+			new AnimData("boss11_step1_C_011_fuyu_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_head",
+			new AnimData("boss11_step1_C_011_head", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_head_backup",
+			new AnimData("boss11_step1_C_011_head_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_head_burst",
+			new AnimData("boss11_step1_C_011_head_burst", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_head_burst_backup",
+			new AnimData("boss11_step1_C_011_head_burst_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_killer",
+			new AnimData("boss11_step1_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss11_step1_C_011_killer_backup",
+			new AnimData("boss11_step1_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss11_step1_C_011_leg",
+			new AnimData("boss11_step1_C_011_leg", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_leg_backup",
+			new AnimData("boss11_step1_C_011_leg_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_leg_burst",
+			new AnimData("boss11_step1_C_011_leg_burst", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_leg_burst_backup",
+			new AnimData("boss11_step1_C_011_leg_burst_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_melt",
+			new AnimData("boss11_step1_C_011_melt", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_melt_backup",
+			new AnimData("boss11_step1_C_011_melt_backup", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_stun",
+			new AnimData("boss11_step1_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_stun_backup",
+			new AnimData("boss11_step1_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_011_throat",
+			new AnimData("boss11_step1_C_011_throat", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_012",
+			new AnimData("boss11_step1_C_012", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss11_step1_C_016",
 			new AnimData("boss11_step1_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss11_step1_C_017",
+			new AnimData("boss11_step1_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_018",
+			new AnimData("boss11_step1_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_019",
+			new AnimData("boss11_step1_C_019", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss11_step1_C_020",
@@ -12520,6 +14720,72 @@ public static class AnimDataCollection
 		{
 			"boss11_step1_C_021",
 			new AnimData("boss11_step1_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss11_step1_C_022",
+			new AnimData("boss11_step1_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss11_step1_C_024",
+			new AnimData("boss11_step1_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss11_step1_C_024_1",
+			new AnimData("boss11_step1_C_024_1", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss11_step1_C_025",
+			new AnimData("boss11_step1_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_C_025_1",
+			new AnimData("boss11_step1_C_025_1", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss11_step1_C_025_2",
+			new AnimData("boss11_step1_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss11_step1_C_025_3",
+			new AnimData("boss11_step1_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
 		},
 		{
 			"boss11_step1_D_001",
@@ -12564,6 +14830,22 @@ public static class AnimDataCollection
 		{
 			"boss11_step1_H_008",
 			new AnimData("boss11_step1_H_008", 0.2666667f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss11_step1_H_023_1",
+			new AnimData("boss11_step1_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_H_024_1",
+			new AnimData("boss11_step1_H_024_1", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss11_step1_MR_001",
@@ -12726,8 +15008,1452 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss11_step1_M_016",
+			new AnimData("boss11_step1_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_017",
+			new AnimData("boss11_step1_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_018",
+			new AnimData("boss11_step1_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_019",
+			new AnimData("boss11_step1_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_020",
+			new AnimData("boss11_step1_M_020", 0.9f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_020_1",
+			new AnimData("boss11_step1_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_020_2",
+			new AnimData("boss11_step1_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_020_3",
+			new AnimData("boss11_step1_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_021",
+			new AnimData("boss11_step1_M_021", 0.9f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_021_1",
+			new AnimData("boss11_step1_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_021_2",
+			new AnimData("boss11_step1_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_021_3",
+			new AnimData("boss11_step1_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_022",
+			new AnimData("boss11_step1_M_022", 0.9f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_022_1",
+			new AnimData("boss11_step1_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_022_2",
+			new AnimData("boss11_step1_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_022_3",
+			new AnimData("boss11_step1_M_022_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss11_step1_M_023",
-			new AnimData("boss11_step1_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss11_step1_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_M_024",
+			new AnimData("boss11_step1_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_025",
+			new AnimData("boss11_step1_M_025", 0.9f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_025_1",
+			new AnimData("boss11_step1_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_025_2",
+			new AnimData("boss11_step1_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_025_3",
+			new AnimData("boss11_step1_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_026",
+			new AnimData("boss11_step1_M_026", 0.9f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_026_1",
+			new AnimData("boss11_step1_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_026_2",
+			new AnimData("boss11_step1_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_026_3",
+			new AnimData("boss11_step1_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_027",
+			new AnimData("boss11_step1_M_027", 0.9f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_027_1",
+			new AnimData("boss11_step1_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_027_2",
+			new AnimData("boss11_step1_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_027_3",
+			new AnimData("boss11_step1_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_028",
+			new AnimData("boss11_step1_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss11_step1_M_031",
+			new AnimData("boss11_step1_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_032",
+			new AnimData("boss11_step1_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_033",
+			new AnimData("boss11_step1_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_034",
+			new AnimData("boss11_step1_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_035",
+			new AnimData("boss11_step1_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_036",
+			new AnimData("boss11_step1_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_037",
+			new AnimData("boss11_step1_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_037_1",
+			new AnimData("boss11_step1_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_037_2",
+			new AnimData("boss11_step1_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_037_3",
+			new AnimData("boss11_step1_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_038_1",
+			new AnimData("boss11_step1_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_038_2",
+			new AnimData("boss11_step1_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_038_3",
+			new AnimData("boss11_step1_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_039_1",
+			new AnimData("boss11_step1_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_039_2",
+			new AnimData("boss11_step1_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_039_3",
+			new AnimData("boss11_step1_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_040_1",
+			new AnimData("boss11_step1_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_040_2",
+			new AnimData("boss11_step1_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_040_3",
+			new AnimData("boss11_step1_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_041_1",
+			new AnimData("boss11_step1_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_041_2",
+			new AnimData("boss11_step1_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_041_3",
+			new AnimData("boss11_step1_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_042_1",
+			new AnimData("boss11_step1_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_042_2",
+			new AnimData("boss11_step1_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_042_3",
+			new AnimData("boss11_step1_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_043_1",
+			new AnimData("boss11_step1_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_043_2",
+			new AnimData("boss11_step1_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_043_3",
+			new AnimData("boss11_step1_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_044_1",
+			new AnimData("boss11_step1_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_044_2",
+			new AnimData("boss11_step1_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_044_3",
+			new AnimData("boss11_step1_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_045_1",
+			new AnimData("boss11_step1_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_045_2",
+			new AnimData("boss11_step1_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_045_3",
+			new AnimData("boss11_step1_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_046_1",
+			new AnimData("boss11_step1_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_046_2",
+			new AnimData("boss11_step1_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_046_3",
+			new AnimData("boss11_step1_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_047_1",
+			new AnimData("boss11_step1_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_047_2",
+			new AnimData("boss11_step1_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_047_3",
+			new AnimData("boss11_step1_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_048_1",
+			new AnimData("boss11_step1_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss11_step1_M_048_2",
+			new AnimData("boss11_step1_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss11_step1_M_048_3",
+			new AnimData("boss11_step1_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss11_step1_M_ready",
@@ -17250,8 +20976,304 @@ public static class AnimDataCollection
 			new AnimData("boss13_C_008", 0.3333333f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss13_C_011",
+			new AnimData("boss13_C_011", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_arm",
+			new AnimData("boss13_C_011_arm", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_arm_backup",
+			new AnimData("boss13_C_011_arm_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_arm_burst",
+			new AnimData("boss13_C_011_arm_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_arm_burst_backup",
+			new AnimData("boss13_C_011_arm_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_ash",
+			new AnimData("boss13_C_011_ash", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_ash_backup",
+			new AnimData("boss13_C_011_ash_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_backup",
+			new AnimData("boss13_C_011_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_body",
+			new AnimData("boss13_C_011_body", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_body_backup",
+			new AnimData("boss13_C_011_body_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_body_burst",
+			new AnimData("boss13_C_011_body_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_body_burst2",
+			new AnimData("boss13_C_011_body_burst2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_body_burst2_backup",
+			new AnimData("boss13_C_011_body_burst2_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_body_burst_backup",
+			new AnimData("boss13_C_011_body_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_crush",
+			new AnimData("boss13_C_011_crush", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_crush_backup",
+			new AnimData("boss13_C_011_crush_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_fuyu",
+			new AnimData("boss13_C_011_fuyu", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_fuyu_backup",
+			new AnimData("boss13_C_011_fuyu_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_head",
+			new AnimData("boss13_C_011_head", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_head_backup",
+			new AnimData("boss13_C_011_head_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_head_burst",
+			new AnimData("boss13_C_011_head_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_head_burst_backup",
+			new AnimData("boss13_C_011_head_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_killer",
+			new AnimData("boss13_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss13_C_011_killer_backup",
+			new AnimData("boss13_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss13_C_011_leg",
+			new AnimData("boss13_C_011_leg", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_leg_backup",
+			new AnimData("boss13_C_011_leg_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_leg_burst",
+			new AnimData("boss13_C_011_leg_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_leg_burst_backup",
+			new AnimData("boss13_C_011_leg_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_melt",
+			new AnimData("boss13_C_011_melt", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_melt_backup",
+			new AnimData("boss13_C_011_melt_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_stun",
+			new AnimData("boss13_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_stun_backup",
+			new AnimData("boss13_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_011_throat",
+			new AnimData("boss13_C_011_throat", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_012",
+			new AnimData("boss13_C_012", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss13_C_016",
 			new AnimData("boss13_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss13_C_017",
+			new AnimData("boss13_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_018",
+			new AnimData("boss13_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_019",
+			new AnimData("boss13_C_019", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss13_C_020",
@@ -17260,6 +21282,72 @@ public static class AnimDataCollection
 		{
 			"boss13_C_021",
 			new AnimData("boss13_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss13_C_022",
+			new AnimData("boss13_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss13_C_024",
+			new AnimData("boss13_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss13_C_024_1",
+			new AnimData("boss13_C_024_1", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss13_C_025",
+			new AnimData("boss13_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_C_025_1",
+			new AnimData("boss13_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss13_C_025_2",
+			new AnimData("boss13_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss13_C_025_3",
+			new AnimData("boss13_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
 		},
 		{
 			"boss13_D_001",
@@ -17304,6 +21392,22 @@ public static class AnimDataCollection
 		{
 			"boss13_H_008",
 			new AnimData("boss13_H_008", 0.4f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss13_H_023_1",
+			new AnimData("boss13_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_H_024_1",
+			new AnimData("boss13_H_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss13_MR_001",
@@ -17450,8 +21554,1428 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss13_M_016",
+			new AnimData("boss13_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_017",
+			new AnimData("boss13_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_018",
+			new AnimData("boss13_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_019",
+			new AnimData("boss13_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_020",
+			new AnimData("boss13_M_020", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss13_M_020_1",
+			new AnimData("boss13_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_020_2",
+			new AnimData("boss13_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_020_3",
+			new AnimData("boss13_M_020_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_021",
+			new AnimData("boss13_M_021", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss13_M_021_1",
+			new AnimData("boss13_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_021_2",
+			new AnimData("boss13_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_021_3",
+			new AnimData("boss13_M_021_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_022",
+			new AnimData("boss13_M_022", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss13_M_022_1",
+			new AnimData("boss13_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_022_2",
+			new AnimData("boss13_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_022_3",
+			new AnimData("boss13_M_022_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss13_M_023",
-			new AnimData("boss13_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss13_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_M_024",
+			new AnimData("boss13_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_025",
+			new AnimData("boss13_M_025", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss13_M_025_1",
+			new AnimData("boss13_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_025_2",
+			new AnimData("boss13_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_025_3",
+			new AnimData("boss13_M_025_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_026",
+			new AnimData("boss13_M_026", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss13_M_026_1",
+			new AnimData("boss13_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_026_2",
+			new AnimData("boss13_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_026_3",
+			new AnimData("boss13_M_026_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_027",
+			new AnimData("boss13_M_027", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss13_M_027_1",
+			new AnimData("boss13_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_027_2",
+			new AnimData("boss13_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_027_3",
+			new AnimData("boss13_M_027_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_028",
+			new AnimData("boss13_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss13_M_031",
+			new AnimData("boss13_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_032",
+			new AnimData("boss13_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_033",
+			new AnimData("boss13_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_034",
+			new AnimData("boss13_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_035",
+			new AnimData("boss13_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_036",
+			new AnimData("boss13_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_037",
+			new AnimData("boss13_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6f }
+				}
+			})
+		},
+		{
+			"boss13_M_037_1",
+			new AnimData("boss13_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_037_2",
+			new AnimData("boss13_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_037_3",
+			new AnimData("boss13_M_037_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_038_1",
+			new AnimData("boss13_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_038_2",
+			new AnimData("boss13_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_038_3",
+			new AnimData("boss13_M_038_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_039_1",
+			new AnimData("boss13_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_039_2",
+			new AnimData("boss13_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_039_3",
+			new AnimData("boss13_M_039_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_040_1",
+			new AnimData("boss13_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_040_2",
+			new AnimData("boss13_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_040_3",
+			new AnimData("boss13_M_040_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_041_1",
+			new AnimData("boss13_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_041_2",
+			new AnimData("boss13_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_041_3",
+			new AnimData("boss13_M_041_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_042_1",
+			new AnimData("boss13_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_042_2",
+			new AnimData("boss13_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_042_3",
+			new AnimData("boss13_M_042_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_043_1",
+			new AnimData("boss13_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_043_2",
+			new AnimData("boss13_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_043_3",
+			new AnimData("boss13_M_043_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_044_1",
+			new AnimData("boss13_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_044_2",
+			new AnimData("boss13_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_044_3",
+			new AnimData("boss13_M_044_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_045_1",
+			new AnimData("boss13_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_045_2",
+			new AnimData("boss13_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_045_3",
+			new AnimData("boss13_M_045_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_046_1",
+			new AnimData("boss13_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_046_2",
+			new AnimData("boss13_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_046_3",
+			new AnimData("boss13_M_046_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_047_1",
+			new AnimData("boss13_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_047_2",
+			new AnimData("boss13_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_047_3",
+			new AnimData("boss13_M_047_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_048_1",
+			new AnimData("boss13_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.4333334f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5333334f }
+				}
+			})
+		},
+		{
+			"boss13_M_048_2",
+			new AnimData("boss13_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss13_M_048_3",
+			new AnimData("boss13_M_048_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss13_M_ready",
@@ -18576,8 +24100,304 @@ public static class AnimDataCollection
 			new AnimData("boss14_C_008", 0.1666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss14_C_011",
+			new AnimData("boss14_C_011", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_arm",
+			new AnimData("boss14_C_011_arm", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_arm_backup",
+			new AnimData("boss14_C_011_arm_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_arm_burst",
+			new AnimData("boss14_C_011_arm_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_arm_burst_backup",
+			new AnimData("boss14_C_011_arm_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_ash",
+			new AnimData("boss14_C_011_ash", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_ash_backup",
+			new AnimData("boss14_C_011_ash_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_backup",
+			new AnimData("boss14_C_011_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_body",
+			new AnimData("boss14_C_011_body", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_body_backup",
+			new AnimData("boss14_C_011_body_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_body_burst",
+			new AnimData("boss14_C_011_body_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_body_burst2",
+			new AnimData("boss14_C_011_body_burst2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_body_burst2_backup",
+			new AnimData("boss14_C_011_body_burst2_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_body_burst_backup",
+			new AnimData("boss14_C_011_body_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_crush",
+			new AnimData("boss14_C_011_crush", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_crush_backup",
+			new AnimData("boss14_C_011_crush_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_fuyu",
+			new AnimData("boss14_C_011_fuyu", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_fuyu_backup",
+			new AnimData("boss14_C_011_fuyu_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_head",
+			new AnimData("boss14_C_011_head", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_head_backup",
+			new AnimData("boss14_C_011_head_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_head_burst",
+			new AnimData("boss14_C_011_head_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_head_burst_backup",
+			new AnimData("boss14_C_011_head_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_killer",
+			new AnimData("boss14_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss14_C_011_killer_backup",
+			new AnimData("boss14_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss14_C_011_leg",
+			new AnimData("boss14_C_011_leg", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_leg_backup",
+			new AnimData("boss14_C_011_leg_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_leg_burst",
+			new AnimData("boss14_C_011_leg_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_leg_burst_backup",
+			new AnimData("boss14_C_011_leg_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_melt",
+			new AnimData("boss14_C_011_melt", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_melt_backup",
+			new AnimData("boss14_C_011_melt_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_stun",
+			new AnimData("boss14_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_stun_backup",
+			new AnimData("boss14_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_011_throat",
+			new AnimData("boss14_C_011_throat", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_012",
+			new AnimData("boss14_C_012", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss14_C_016",
 			new AnimData("boss14_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss14_C_017",
+			new AnimData("boss14_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_018",
+			new AnimData("boss14_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_019",
+			new AnimData("boss14_C_019", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss14_C_020",
@@ -18586,6 +24406,72 @@ public static class AnimDataCollection
 		{
 			"boss14_C_021",
 			new AnimData("boss14_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss14_C_022",
+			new AnimData("boss14_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss14_C_024",
+			new AnimData("boss14_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss14_C_024_1",
+			new AnimData("boss14_C_024_1", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss14_C_025",
+			new AnimData("boss14_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_C_025_1",
+			new AnimData("boss14_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[2] { 0f, 0.4666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss14_C_025_2",
+			new AnimData("boss14_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[2] { 0f, 0.3333333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss14_C_025_3",
+			new AnimData("boss14_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[2] { 0f, 0.3333333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
 		},
 		{
 			"boss14_D_001",
@@ -18630,6 +24516,22 @@ public static class AnimDataCollection
 		{
 			"boss14_H_008",
 			new AnimData("boss14_H_008", 0.3333333f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss14_H_023_1",
+			new AnimData("boss14_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss14_H_024_1",
+			new AnimData("boss14_H_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss14_MR_001",
@@ -18773,8 +24675,54 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss14_M_018",
+			new AnimData("boss14_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss14_M_019",
+			new AnimData("boss14_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss14_M_023",
-			new AnimData("boss14_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss14_M_023", 0.5f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss14_M_028",
+			new AnimData("boss14_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
 		},
 		{
 			"boss14_M_ready",
@@ -19219,6 +25167,22 @@ public static class AnimDataCollection
 			new AnimData("boss16_D_001_hit", 2f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss16_D_002_1",
+			new AnimData("boss16_D_002_1", 1.5f, new Dictionary<string, float[]> { 
+			{
+				"hit",
+				new float[1] { 0.8000001f }
+			} })
+		},
+		{
+			"boss16_D_002_2",
+			new AnimData("boss16_D_002_2", 1.5f, new Dictionary<string, float[]> { 
+			{
+				"hit",
+				new float[1] { 0.8000001f }
+			} })
+		},
+		{
 			"boss16_H_000",
 			new AnimData("boss16_H_000", 1f, new Dictionary<string, float[]>())
 		},
@@ -19419,6 +25383,50 @@ public static class AnimDataCollection
 				{
 					"act4",
 					new float[1] { 1.666667f }
+				}
+			})
+		},
+		{
+			"boss16_S_004",
+			new AnimData("boss16_S_004", 4.133334f, new Dictionary<string, float[]>
+			{
+				{
+					"act1",
+					new float[1] { 1.833333f }
+				},
+				{
+					"act2",
+					new float[1] { 2f }
+				},
+				{
+					"act3",
+					new float[1] { 2.166667f }
+				},
+				{
+					"act4",
+					new float[1] { 2.333333f }
+				}
+			})
+		},
+		{
+			"boss16_S_005",
+			new AnimData("boss16_S_005", 3f, new Dictionary<string, float[]>
+			{
+				{
+					"act1",
+					new float[1] { 1.333333f }
+				},
+				{
+					"act2",
+					new float[1] { 1.666667f }
+				},
+				{
+					"act3",
+					new float[1] { 2f }
+				},
+				{
+					"act4",
+					new float[1] { 2.333333f }
 				}
 			})
 		},
@@ -21615,8 +27623,316 @@ public static class AnimDataCollection
 			new AnimData("boss2_C_008", 0.2666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss2_C_011",
+			new AnimData("boss2_C_011", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_arm",
+			new AnimData("boss2_C_011_arm", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_arm_backup",
+			new AnimData("boss2_C_011_arm_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_arm_burst",
+			new AnimData("boss2_C_011_arm_burst", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_arm_burst_backup",
+			new AnimData("boss2_C_011_arm_burst_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_ash",
+			new AnimData("boss2_C_011_ash", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_ash_backup",
+			new AnimData("boss2_C_011_ash_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_backup",
+			new AnimData("boss2_C_011_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_body",
+			new AnimData("boss2_C_011_body", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_body_backup",
+			new AnimData("boss2_C_011_body_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_body_burst",
+			new AnimData("boss2_C_011_body_burst", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_body_burst2",
+			new AnimData("boss2_C_011_body_burst2", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_body_burst2_backup",
+			new AnimData("boss2_C_011_body_burst2_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_body_burst_backup",
+			new AnimData("boss2_C_011_body_burst_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_crush",
+			new AnimData("boss2_C_011_crush", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_crush_backup",
+			new AnimData("boss2_C_011_crush_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_fuyu",
+			new AnimData("boss2_C_011_fuyu", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_fuyu_backup",
+			new AnimData("boss2_C_011_fuyu_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_head",
+			new AnimData("boss2_C_011_head", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_head_backup",
+			new AnimData("boss2_C_011_head_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_head_burst",
+			new AnimData("boss2_C_011_head_burst", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_head_burst_backup",
+			new AnimData("boss2_C_011_head_burst_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_killer",
+			new AnimData("boss2_C_011_killer", 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 2.166667f }
+				}
+			})
+		},
+		{
+			"boss2_C_011_killer_backup",
+			new AnimData("boss2_C_011_killer_backup", 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 2.166667f }
+				}
+			})
+		},
+		{
+			"boss2_C_011_leg",
+			new AnimData("boss2_C_011_leg", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_leg_backup",
+			new AnimData("boss2_C_011_leg_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_leg_burst",
+			new AnimData("boss2_C_011_leg_burst", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_leg_burst_backup",
+			new AnimData("boss2_C_011_leg_burst_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_melt",
+			new AnimData("boss2_C_011_melt", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_melt_backup",
+			new AnimData("boss2_C_011_melt_backup", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_stun",
+			new AnimData("boss2_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_stun_backup",
+			new AnimData("boss2_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_011_throat",
+			new AnimData("boss2_C_011_throat", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_012",
+			new AnimData("boss2_C_012", 1.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss2_C_016",
 			new AnimData("boss2_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss2_C_017",
+			new AnimData("boss2_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_018",
+			new AnimData("boss2_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_019",
+			new AnimData("boss2_C_019", 0.8000001f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss2_C_020",
@@ -21625,6 +27941,76 @@ public static class AnimDataCollection
 		{
 			"boss2_C_021",
 			new AnimData("boss2_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss2_C_022",
+			new AnimData("boss2_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss2_C_024",
+			new AnimData("boss2_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss2_C_024_1",
+			new AnimData("boss2_C_024_1", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss2_C_024_backup",
+			new AnimData("boss2_C_024_backup", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss2_C_025",
+			new AnimData("boss2_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_C_025_1",
+			new AnimData("boss2_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss2_C_025_2",
+			new AnimData("boss2_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss2_C_025_3",
+			new AnimData("boss2_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
 		},
 		{
 			"boss2_D_001",
@@ -21669,6 +28055,22 @@ public static class AnimDataCollection
 		{
 			"boss2_H_008",
 			new AnimData("boss2_H_008", 0.3333333f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss2_H_023_1",
+			new AnimData("boss2_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_H_024_1",
+			new AnimData("boss2_H_024_1", 1.633333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss2_MR_001",
@@ -21831,8 +28233,1554 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss2_M_016",
+			new AnimData("boss2_M_016", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_017",
+			new AnimData("boss2_M_017", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_018",
+			new AnimData("boss2_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss2_M_019",
+			new AnimData("boss2_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss2_M_020",
+			new AnimData("boss2_M_020", 1.133333f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss2_M_020_1",
+			new AnimData("boss2_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_020_2",
+			new AnimData("boss2_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_020_3",
+			new AnimData("boss2_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_021",
+			new AnimData("boss2_M_021", 1.133333f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss2_M_021_1",
+			new AnimData("boss2_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_021_2",
+			new AnimData("boss2_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_021_3",
+			new AnimData("boss2_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_022",
+			new AnimData("boss2_M_022", 1.133333f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss2_M_022_1",
+			new AnimData("boss2_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_022_2",
+			new AnimData("boss2_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_022_3",
+			new AnimData("boss2_M_022_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss2_M_023",
-			new AnimData("boss2_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss2_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_M_024_1",
+			new AnimData("boss2_M_024_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_024_2",
+			new AnimData("boss2_M_024_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_024_3",
+			new AnimData("boss2_M_024_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_025",
+			new AnimData("boss2_M_025", 1.133333f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss2_M_025_1",
+			new AnimData("boss2_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_025_2",
+			new AnimData("boss2_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_025_3",
+			new AnimData("boss2_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_026",
+			new AnimData("boss2_M_026", 1.133333f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss2_M_026_1",
+			new AnimData("boss2_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_026_2",
+			new AnimData("boss2_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_026_3",
+			new AnimData("boss2_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_027",
+			new AnimData("boss2_M_027", 1.133333f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss2_M_027_1",
+			new AnimData("boss2_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_027_2",
+			new AnimData("boss2_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_027_3",
+			new AnimData("boss2_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_028",
+			new AnimData("boss2_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss2_M_031",
+			new AnimData("boss2_M_031", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss2_M_032",
+			new AnimData("boss2_M_032", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss2_M_033",
+			new AnimData("boss2_M_033", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss2_M_034",
+			new AnimData("boss2_M_034", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss2_M_035",
+			new AnimData("boss2_M_035", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss2_M_036",
+			new AnimData("boss2_M_036", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss2_M_037",
+			new AnimData("boss2_M_037", 1.433333f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 2f / 3f }
+				},
+				{
+					"hit",
+					new float[1] { 2f / 3f }
+				}
+			})
+		},
+		{
+			"boss2_M_037_1",
+			new AnimData("boss2_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_037_2",
+			new AnimData("boss2_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_037_3",
+			new AnimData("boss2_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_038_1",
+			new AnimData("boss2_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_038_2",
+			new AnimData("boss2_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_038_3",
+			new AnimData("boss2_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_039_1",
+			new AnimData("boss2_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_039_2",
+			new AnimData("boss2_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_039_3",
+			new AnimData("boss2_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_040_1",
+			new AnimData("boss2_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_040_2",
+			new AnimData("boss2_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_040_3",
+			new AnimData("boss2_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_041_1",
+			new AnimData("boss2_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_041_2",
+			new AnimData("boss2_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_041_3",
+			new AnimData("boss2_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_042_1",
+			new AnimData("boss2_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_042_2",
+			new AnimData("boss2_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_042_3",
+			new AnimData("boss2_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_043_1",
+			new AnimData("boss2_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_043_2",
+			new AnimData("boss2_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_043_3",
+			new AnimData("boss2_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_044_1",
+			new AnimData("boss2_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_044_2",
+			new AnimData("boss2_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_044_3",
+			new AnimData("boss2_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_045_1",
+			new AnimData("boss2_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_045_2",
+			new AnimData("boss2_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_045_3",
+			new AnimData("boss2_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_046_1",
+			new AnimData("boss2_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_046_2",
+			new AnimData("boss2_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_046_3",
+			new AnimData("boss2_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_047_1",
+			new AnimData("boss2_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_047_2",
+			new AnimData("boss2_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_047_3",
+			new AnimData("boss2_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_048_1",
+			new AnimData("boss2_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss2_M_048_2",
+			new AnimData("boss2_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss2_M_048_3",
+			new AnimData("boss2_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss2_M_ready",
@@ -22907,8 +30855,296 @@ public static class AnimDataCollection
 			new AnimData("boss3_C_008", 0.2666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss3_C_011",
+			new AnimData("boss3_C_011", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_arm",
+			new AnimData("boss3_C_011_arm", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_arm_backup",
+			new AnimData("boss3_C_011_arm_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_arm_burst",
+			new AnimData("boss3_C_011_arm_burst", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_arm_burst_backup",
+			new AnimData("boss3_C_011_arm_burst_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_ash",
+			new AnimData("boss3_C_011_ash", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_ash_backup",
+			new AnimData("boss3_C_011_ash_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_backup",
+			new AnimData("boss3_C_011_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_body",
+			new AnimData("boss3_C_011_body", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_body_backup",
+			new AnimData("boss3_C_011_body_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_body_burst",
+			new AnimData("boss3_C_011_body_burst", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_body_burst2",
+			new AnimData("boss3_C_011_body_burst2", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_body_burst2_backup",
+			new AnimData("boss3_C_011_body_burst2_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_crush",
+			new AnimData("boss3_C_011_crush", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_crush_backup",
+			new AnimData("boss3_C_011_crush_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_fuyu",
+			new AnimData("boss3_C_011_fuyu", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_fuyu_backup",
+			new AnimData("boss3_C_011_fuyu_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_head",
+			new AnimData("boss3_C_011_head", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_head_backup",
+			new AnimData("boss3_C_011_head_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_head_burst",
+			new AnimData("boss3_C_011_head_burst", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_head_burst_backup",
+			new AnimData("boss3_C_011_head_burst_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_killer",
+			new AnimData("boss3_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss3_C_011_killer_backup",
+			new AnimData("boss3_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss3_C_011_leg",
+			new AnimData("boss3_C_011_leg", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_leg_backup",
+			new AnimData("boss3_C_011_leg_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_leg_burst",
+			new AnimData("boss3_C_011_leg_burst", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_leg_burst_backup",
+			new AnimData("boss3_C_011_leg_burst_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_melt",
+			new AnimData("boss3_C_011_melt", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_melt_backup",
+			new AnimData("boss3_C_011_melt_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_stun",
+			new AnimData("boss3_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_stun_backup",
+			new AnimData("boss3_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_011_throat",
+			new AnimData("boss3_C_011_throat", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_012",
+			new AnimData("boss3_C_012", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss3_C_016",
 			new AnimData("boss3_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss3_C_017",
+			new AnimData("boss3_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_018",
+			new AnimData("boss3_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_019",
+			new AnimData("boss3_C_019", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss3_C_020",
@@ -22917,6 +31153,88 @@ public static class AnimDataCollection
 		{
 			"boss3_C_021",
 			new AnimData("boss3_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss3_C_022",
+			new AnimData("boss3_C_022", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_024",
+			new AnimData("boss3_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss3_C_024_1",
+			new AnimData("boss3_C_024_1", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss3_C_024_backup",
+			new AnimData("boss3_C_024_backup", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss3_C_025",
+			new AnimData("boss3_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_C_025_1",
+			new AnimData("boss3_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss3_C_025_2",
+			new AnimData("boss3_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss3_C_025_3",
+			new AnimData("boss3_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss3_C_body_burst_backup",
+			new AnimData("boss3_C_body_burst_backup", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss3_D_001",
@@ -22961,6 +31279,22 @@ public static class AnimDataCollection
 		{
 			"boss3_H_008",
 			new AnimData("boss3_H_008", 0.3333333f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss3_H_023_1",
+			new AnimData("boss3_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_H_024_1",
+			new AnimData("boss3_H_024_1", 2.733334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss3_MR_001",
@@ -23139,8 +31473,1462 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss3_M_016",
+			new AnimData("boss3_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_017",
+			new AnimData("boss3_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_018",
+			new AnimData("boss3_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_019",
+			new AnimData("boss3_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_020",
+			new AnimData("boss3_M_020", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss3_M_020_1",
+			new AnimData("boss3_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_020_2",
+			new AnimData("boss3_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_020_3",
+			new AnimData("boss3_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_021",
+			new AnimData("boss3_M_021", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss3_M_021_1",
+			new AnimData("boss3_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_021_2",
+			new AnimData("boss3_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_021_3",
+			new AnimData("boss3_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_022",
+			new AnimData("boss3_M_022", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
 			"boss3_M_023",
-			new AnimData("boss3_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss3_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_M_024_1",
+			new AnimData("boss3_M_024_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_024_2",
+			new AnimData("boss3_M_024_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_024_3",
+			new AnimData("boss3_M_024_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_025",
+			new AnimData("boss3_M_025", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss3_M_025_1",
+			new AnimData("boss3_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_025_2",
+			new AnimData("boss3_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_025_3",
+			new AnimData("boss3_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_026",
+			new AnimData("boss3_M_026", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss3_M_026_1",
+			new AnimData("boss3_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_026_2",
+			new AnimData("boss3_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_026_3",
+			new AnimData("boss3_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_027",
+			new AnimData("boss3_M_027", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss3_M_027_1",
+			new AnimData("boss3_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_027_2",
+			new AnimData("boss3_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_027_3",
+			new AnimData("boss3_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_028",
+			new AnimData("boss3_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss3_M_031",
+			new AnimData("boss3_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_032",
+			new AnimData("boss3_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_033",
+			new AnimData("boss3_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_034",
+			new AnimData("boss3_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_035",
+			new AnimData("boss3_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_036",
+			new AnimData("boss3_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_037",
+			new AnimData("boss3_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2]
+					{
+						0f,
+						13f / 15f
+					}
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_037_1",
+			new AnimData("boss3_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_037_2",
+			new AnimData("boss3_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_037_3",
+			new AnimData("boss3_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_038_1",
+			new AnimData("boss3_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_038_2",
+			new AnimData("boss3_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_038_3",
+			new AnimData("boss3_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_039_1",
+			new AnimData("boss3_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_039_2",
+			new AnimData("boss3_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_039_3",
+			new AnimData("boss3_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_040_1",
+			new AnimData("boss3_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_040_2",
+			new AnimData("boss3_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_040_3",
+			new AnimData("boss3_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_041_1",
+			new AnimData("boss3_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_041_2",
+			new AnimData("boss3_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_041_3",
+			new AnimData("boss3_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_042_1",
+			new AnimData("boss3_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_042_2",
+			new AnimData("boss3_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_042_3",
+			new AnimData("boss3_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_043_1",
+			new AnimData("boss3_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_043_2",
+			new AnimData("boss3_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_043_3",
+			new AnimData("boss3_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_044_1",
+			new AnimData("boss3_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_044_2",
+			new AnimData("boss3_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_044_3",
+			new AnimData("boss3_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_045_1",
+			new AnimData("boss3_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_045_2",
+			new AnimData("boss3_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_045_3",
+			new AnimData("boss3_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_046_1",
+			new AnimData("boss3_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_046_2",
+			new AnimData("boss3_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_046_3",
+			new AnimData("boss3_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_047_1",
+			new AnimData("boss3_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_047_2",
+			new AnimData("boss3_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_047_3",
+			new AnimData("boss3_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss3_M_048_1",
+			new AnimData("boss3_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"act0",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"boss3_M_048_2",
+			new AnimData("boss3_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss3_M_048_3",
+			new AnimData("boss3_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss3_M_ready",
@@ -24261,8 +34049,296 @@ public static class AnimDataCollection
 			new AnimData("boss4_C_008", 0.2666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss4_C_011",
+			new AnimData("boss4_C_011", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_arm",
+			new AnimData("boss4_C_011_arm", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_arm_backup",
+			new AnimData("boss4_C_011_arm_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_arm_burst",
+			new AnimData("boss4_C_011_arm_burst", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_arm_burst_backup",
+			new AnimData("boss4_C_011_arm_burst_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_ash",
+			new AnimData("boss4_C_011_ash", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_ash_backup",
+			new AnimData("boss4_C_011_ash_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_backup",
+			new AnimData("boss4_C_011_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_body",
+			new AnimData("boss4_C_011_body", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_body_backup",
+			new AnimData("boss4_C_011_body_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_body_burst",
+			new AnimData("boss4_C_011_body_burst", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_body_burst2",
+			new AnimData("boss4_C_011_body_burst2", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_body_burst2_backup",
+			new AnimData("boss4_C_011_body_burst2_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_body_burst_backup",
+			new AnimData("boss4_C_011_body_burst_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_crush",
+			new AnimData("boss4_C_011_crush", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_crush_backup",
+			new AnimData("boss4_C_011_crush_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_fuyu",
+			new AnimData("boss4_C_011_fuyu", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_fuyu_backup",
+			new AnimData("boss4_C_011_fuyu_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_head",
+			new AnimData("boss4_C_011_head", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_head_backup",
+			new AnimData("boss4_C_011_head_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_head_burst",
+			new AnimData("boss4_C_011_head_burst", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_head_burst_backup",
+			new AnimData("boss4_C_011_head_burst_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_killer",
+			new AnimData("boss4_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.266667f }
+			} })
+		},
+		{
+			"boss4_C_011_killer_backup",
+			new AnimData("boss4_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.266667f }
+			} })
+		},
+		{
+			"boss4_C_011_leg",
+			new AnimData("boss4_C_011_leg", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_leg_backup",
+			new AnimData("boss4_C_011_leg_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_leg_burst",
+			new AnimData("boss4_C_011_leg_burst", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_leg_burst_backup",
+			new AnimData("boss4_C_011_leg_burst_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_melt",
+			new AnimData("boss4_C_011_melt", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_melt_backup",
+			new AnimData("boss4_C_011_melt_backup", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_stun",
+			new AnimData("boss4_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_011_throat",
+			new AnimData("boss4_C_011_throat", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_012",
+			new AnimData("boss4_C_012", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss4_C_016",
 			new AnimData("boss4_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss4_C_017",
+			new AnimData("boss4_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_018",
+			new AnimData("boss4_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_019",
+			new AnimData("boss4_C_019", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss4_C_020",
@@ -24271,6 +34347,76 @@ public static class AnimDataCollection
 		{
 			"boss4_C_021",
 			new AnimData("boss4_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss4_C_022",
+			new AnimData("boss4_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss4_C_024",
+			new AnimData("boss4_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss4_C_024_1",
+			new AnimData("boss4_C_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss4_C_024_backup",
+			new AnimData("boss4_C_024_backup", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss4_C_025",
+			new AnimData("boss4_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_C_025_1",
+			new AnimData("boss4_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss4_C_025_2",
+			new AnimData("boss4_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss4_C_025_3",
+			new AnimData("boss4_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
 		},
 		{
 			"boss4_D_001",
@@ -24315,6 +34461,22 @@ public static class AnimDataCollection
 		{
 			"boss4_H_008",
 			new AnimData("boss4_H_008", 0.4333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss4_H_023_1",
+			new AnimData("boss4_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_H_024_1",
+			new AnimData("boss4_H_024_1", 4.266667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss4_MR_001",
@@ -24501,8 +34663,1448 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss4_M_016",
+			new AnimData("boss4_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_017",
+			new AnimData("boss4_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_018",
+			new AnimData("boss4_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_019",
+			new AnimData("boss4_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"act0",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_020",
+			new AnimData("boss4_M_020", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_020_1",
+			new AnimData("boss4_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_020_2",
+			new AnimData("boss4_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_020_3",
+			new AnimData("boss4_M_020_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_021",
+			new AnimData("boss4_M_021", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_021_1",
+			new AnimData("boss4_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_021_2",
+			new AnimData("boss4_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_021_3",
+			new AnimData("boss4_M_021_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_022",
+			new AnimData("boss4_M_022", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_022_1",
+			new AnimData("boss4_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_022_2",
+			new AnimData("boss4_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_022_3",
+			new AnimData("boss4_M_022_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss4_M_023",
 			new AnimData("boss4_M_023", 0.5f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss4_M_024",
+			new AnimData("boss4_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_025",
+			new AnimData("boss4_M_025", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_025_1",
+			new AnimData("boss4_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_025_2",
+			new AnimData("boss4_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_025_3",
+			new AnimData("boss4_M_025_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_026",
+			new AnimData("boss4_M_026", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_026_1",
+			new AnimData("boss4_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_026_2",
+			new AnimData("boss4_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_026_3",
+			new AnimData("boss4_M_026_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_027",
+			new AnimData("boss4_M_027", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"move",
+					new float[2] { 0f, 0.4f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				}
+			})
+		},
+		{
+			"boss4_M_027_1",
+			new AnimData("boss4_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_027_2",
+			new AnimData("boss4_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_027_3",
+			new AnimData("boss4_M_027_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_028",
+			new AnimData("boss4_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss4_M_031",
+			new AnimData("boss4_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_032",
+			new AnimData("boss4_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_033",
+			new AnimData("boss4_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_034",
+			new AnimData("boss4_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_035",
+			new AnimData("boss4_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_036",
+			new AnimData("boss4_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_037",
+			new AnimData("boss4_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_037_1",
+			new AnimData("boss4_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_037_2",
+			new AnimData("boss4_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_037_3",
+			new AnimData("boss4_M_037_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_038_1",
+			new AnimData("boss4_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_038_2",
+			new AnimData("boss4_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_038_3",
+			new AnimData("boss4_M_038_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_039_1",
+			new AnimData("boss4_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_039_2",
+			new AnimData("boss4_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_039_3",
+			new AnimData("boss4_M_039_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_040_1",
+			new AnimData("boss4_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_040_2",
+			new AnimData("boss4_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_040_3",
+			new AnimData("boss4_M_040_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_041_1",
+			new AnimData("boss4_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_041_2",
+			new AnimData("boss4_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_041_3",
+			new AnimData("boss4_M_041_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_042_1",
+			new AnimData("boss4_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_042_2",
+			new AnimData("boss4_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_042_3",
+			new AnimData("boss4_M_042_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_043_1",
+			new AnimData("boss4_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_043_2",
+			new AnimData("boss4_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_043_3",
+			new AnimData("boss4_M_043_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_044_1",
+			new AnimData("boss4_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_044_2",
+			new AnimData("boss4_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_044_3",
+			new AnimData("boss4_M_044_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_045_1",
+			new AnimData("boss4_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_045_2",
+			new AnimData("boss4_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_045_3",
+			new AnimData("boss4_M_045_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_046_1",
+			new AnimData("boss4_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_046_2",
+			new AnimData("boss4_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_046_3",
+			new AnimData("boss4_M_046_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_047_1",
+			new AnimData("boss4_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_047_2",
+			new AnimData("boss4_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_047_3",
+			new AnimData("boss4_M_047_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_048_1",
+			new AnimData("boss4_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss4_M_048_2",
+			new AnimData("boss4_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss4_M_048_3",
+			new AnimData("boss4_M_048_3", 0.3666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss4_M_ready",
@@ -24612,115 +36214,115 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_ad",
-			new AnimData("fox_ad", 3.733334f, new Dictionary<string, float[]>())
+			new AnimData("fox_ad", 3.7333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_0",
-			new AnimData("fox_angry_A_000_0_0", 0.3333333f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_0", 0.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_0b",
-			new AnimData("fox_angry_A_000_0_0b", 0.3333333f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_0b", 0.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_0c",
-			new AnimData("fox_angry_A_000_0_0c", 0.3333333f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_0c", 0.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_1",
-			new AnimData("fox_angry_A_000_0_1", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_1", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_1b",
-			new AnimData("fox_angry_A_000_0_1b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_1b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_1c",
-			new AnimData("fox_angry_A_000_0_1c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_1c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_2",
-			new AnimData("fox_angry_A_000_0_2", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_2", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_2b",
-			new AnimData("fox_angry_A_000_0_2b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_2b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_2c",
-			new AnimData("fox_angry_A_000_0_2c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_2c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_3",
-			new AnimData("fox_angry_A_000_0_3", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_3", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_3b",
-			new AnimData("fox_angry_A_000_0_3b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_3b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_3c",
-			new AnimData("fox_angry_A_000_0_3c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_3c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_4",
-			new AnimData("fox_angry_A_000_0_4", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_4", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_4b",
-			new AnimData("fox_angry_A_000_0_4b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_4b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_4c",
-			new AnimData("fox_angry_A_000_0_4c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_4c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_5",
-			new AnimData("fox_angry_A_000_0_5", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_5", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_5b",
-			new AnimData("fox_angry_A_000_0_5b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_5b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_5c",
-			new AnimData("fox_angry_A_000_0_5c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_5c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_6",
-			new AnimData("fox_angry_A_000_0_6", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_6", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_6b",
-			new AnimData("fox_angry_A_000_0_6b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_6b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_6c",
-			new AnimData("fox_angry_A_000_0_6c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_6c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_7",
-			new AnimData("fox_angry_A_000_0_7", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_7", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_7b",
-			new AnimData("fox_angry_A_000_0_7b", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_7b", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_7c",
-			new AnimData("fox_angry_A_000_0_7c", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_7c", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_B0",
-			new AnimData("fox_angry_A_000_0_B0", 0.6333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_B0", 0.6333001f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_B0b",
-			new AnimData("fox_angry_A_000_0_B0b", 0.6333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_B0b", 0.6333001f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_A_000_0_B0c",
-			new AnimData("fox_angry_A_000_0_B0c", 0.6333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_A_000_0_B0c", 0.6333001f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_C_000",
@@ -24732,7 +36334,7 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_angry_C_006",
-			new AnimData("fox_angry_C_006", 0.1666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_C_006", 0.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_C_007",
@@ -24740,11 +36342,11 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_angry_C_007_1",
-			new AnimData("fox_angry_C_007_1", 0.3333333f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_C_007_1", 0.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_C_008",
-			new AnimData("fox_angry_C_008", 0.1666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_C_008", 0.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_C_016",
@@ -24752,11 +36354,11 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_angry_C_020",
-			new AnimData("fox_angry_C_020", 0.8333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_C_020", 0.8333001f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_C_021",
-			new AnimData("fox_angry_C_021", 0.8333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_C_021", 0.8333001f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_D_001",
@@ -24764,43 +36366,43 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_angry_D_001_hit",
-			new AnimData("fox_angry_D_001_hit", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_D_001_hit", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_000",
-			new AnimData("fox_angry_H_000", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_000", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_001",
-			new AnimData("fox_angry_H_001", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_001", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_002",
-			new AnimData("fox_angry_H_002", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_002", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_003",
-			new AnimData("fox_angry_H_003", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_003", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_004",
-			new AnimData("fox_angry_H_004", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_004", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_005",
-			new AnimData("fox_angry_H_005", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_005", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_007",
-			new AnimData("fox_angry_H_007", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_007", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_H_008",
-			new AnimData("fox_angry_H_008", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_H_008", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_MR_001",
-			new AnimData("fox_angry_MR_001", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_MR_001", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_MR_002",
@@ -24808,11 +36410,11 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_angry_M_001",
-			new AnimData("fox_angry_M_001", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_M_001", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_M_002",
-			new AnimData("fox_angry_M_002", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_M_002", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_M_003",
@@ -24880,19 +36482,19 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_angry_M_014",
-			new AnimData("fox_angry_M_014", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_M_014", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_M_014_red",
-			new AnimData("fox_angry_M_014_red", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_M_014_red", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_M_015",
-			new AnimData("fox_angry_M_015", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_M_015", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_M_015_red",
-			new AnimData("fox_angry_M_015_red", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_M_015_red", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_M_023",
@@ -24908,19 +36510,19 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_angry_S_000",
-			new AnimData("fox_angry_S_000", 3.666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_S_000", 3.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_S_001",
-			new AnimData("fox_angry_S_001", 2.833333f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_S_001", 2.8333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_S_002",
-			new AnimData("fox_angry_S_002", 2.666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_S_002", 2.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_Tactic_000",
-			new AnimData("fox_angry_Tactic_000", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_angry_Tactic_000", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_angry_T_001_0_1",
@@ -24932,99 +36534,99 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_A_000_0_0",
-			new AnimData("fox_A_000_0_0", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_0", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_0b",
-			new AnimData("fox_A_000_0_0b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_0b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_0c",
-			new AnimData("fox_A_000_0_0c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_0c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_1",
-			new AnimData("fox_A_000_0_1", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_1", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_1b",
-			new AnimData("fox_A_000_0_1b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_1b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_1c",
-			new AnimData("fox_A_000_0_1c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_1c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_2",
-			new AnimData("fox_A_000_0_2", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_2", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_2b",
-			new AnimData("fox_A_000_0_2b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_2b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_2c",
-			new AnimData("fox_A_000_0_2c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_2c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_3",
-			new AnimData("fox_A_000_0_3", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_3", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_3b",
-			new AnimData("fox_A_000_0_3b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_3b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_3c",
-			new AnimData("fox_A_000_0_3c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_3c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_4",
-			new AnimData("fox_A_000_0_4", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_4", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_4b",
-			new AnimData("fox_A_000_0_4b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_4b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_4c",
-			new AnimData("fox_A_000_0_4c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_4c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_5",
-			new AnimData("fox_A_000_0_5", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_5", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_5b",
-			new AnimData("fox_A_000_0_5b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_5b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_5c",
-			new AnimData("fox_A_000_0_5c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_5c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_6",
-			new AnimData("fox_A_000_0_6", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_6", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_6b",
-			new AnimData("fox_A_000_0_6b", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_6b", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_6c",
-			new AnimData("fox_A_000_0_6c", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_6c", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_7",
-			new AnimData("fox_A_000_0_7", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_7", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_7b",
-			new AnimData("fox_A_000_0_7b", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_7b", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_7c",
-			new AnimData("fox_A_000_0_7c", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_A_000_0_7c", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_A_000_0_B0",
@@ -25044,11 +36646,11 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_C_005",
-			new AnimData("fox_C_005", 3.166667f, new Dictionary<string, float[]>())
+			new AnimData("fox_C_005", 3.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_C_006",
-			new AnimData("fox_C_006", 0.1666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_C_006", 0.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_C_007",
@@ -25056,23 +36658,359 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_C_007_1",
-			new AnimData("fox_C_007_1", 0.3333333f, new Dictionary<string, float[]>())
+			new AnimData("fox_C_007_1", 0.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_C_008",
-			new AnimData("fox_C_008", 0.1666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_C_008", 0.1667f, new Dictionary<string, float[]>())
+		},
+		{
+			"fox_C_011",
+			new AnimData("fox_C_011", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_arm",
+			new AnimData("fox_C_011_arm", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_arm_backup",
+			new AnimData("fox_C_011_arm_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_arm_burst",
+			new AnimData("fox_C_011_arm_burst", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_arm_burst_backup",
+			new AnimData("fox_C_011_arm_burst_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_ash",
+			new AnimData("fox_C_011_ash", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_ash_backup",
+			new AnimData("fox_C_011_ash_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_backup",
+			new AnimData("fox_C_011_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_body",
+			new AnimData("fox_C_011_body", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_body_backup",
+			new AnimData("fox_C_011_body_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_body_burst",
+			new AnimData("fox_C_011_body_burst", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_body_burst2",
+			new AnimData("fox_C_011_body_burst2", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_body_burst2_backup",
+			new AnimData("fox_C_011_body_burst2_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_body_burst_backup",
+			new AnimData("fox_C_011_body_burst_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_crush",
+			new AnimData("fox_C_011_crush", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_crush_backup",
+			new AnimData("fox_C_011_crush_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_fuyu",
+			new AnimData("fox_C_011_fuyu", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_fuyu_backup",
+			new AnimData("fox_C_011_fuyu_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_head",
+			new AnimData("fox_C_011_head", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_head_backup",
+			new AnimData("fox_C_011_head_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_head_burst",
+			new AnimData("fox_C_011_head_burst", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_head_burst_backup",
+			new AnimData("fox_C_011_head_burst_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_leg",
+			new AnimData("fox_C_011_leg", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_leg_burst",
+			new AnimData("fox_C_011_leg_burst", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_leg_burst_backup",
+			new AnimData("fox_C_011_leg_burst_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_melt",
+			new AnimData("fox_C_011_melt", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_melt_backup",
+			new AnimData("fox_C_011_melt_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_stun",
+			new AnimData("fox_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_stun_backup",
+			new AnimData("fox_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011_throat",
+			new AnimData("fox_C_011_throat", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_011__leg_backup",
+			new AnimData("fox_C_011__leg_backup", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_012",
+			new AnimData("fox_C_012", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"fox_C_016",
 			new AnimData("fox_C_016", 2f, new Dictionary<string, float[]>())
 		},
 		{
+			"fox_C_017",
+			new AnimData("fox_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_018",
+			new AnimData("fox_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_019",
+			new AnimData("fox_C_019", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"fox_C_020",
-			new AnimData("fox_C_020", 0.8333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_C_020", 0.8333001f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_C_021",
-			new AnimData("fox_C_021", 0.8333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_C_021", 0.8333001f, new Dictionary<string, float[]>())
+		},
+		{
+			"fox_C_022",
+			new AnimData("fox_C_022", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_024",
+			new AnimData("fox_C_024", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_024_1",
+			new AnimData("fox_C_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_025",
+			new AnimData("fox_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_025_1",
+			new AnimData("fox_C_025_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_025_2",
+			new AnimData("fox_C_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"fox_C_025_3",
+			new AnimData("fox_C_025_3", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
 		},
 		{
 			"fox_D_001",
@@ -25080,43 +37018,59 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_D_001_hit",
-			new AnimData("fox_D_001_hit", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_D_001_hit", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_000",
-			new AnimData("fox_H_000", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_000", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_001",
-			new AnimData("fox_H_001", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_001", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_002",
-			new AnimData("fox_H_002", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_002", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_003",
-			new AnimData("fox_H_003", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_003", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_004",
-			new AnimData("fox_H_004", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_004", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_005",
-			new AnimData("fox_H_005", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_005", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_007",
-			new AnimData("fox_H_007", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_007", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_H_008",
-			new AnimData("fox_H_008", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_H_008", 0.4333f, new Dictionary<string, float[]>())
+		},
+		{
+			"fox_H_023_1",
+			new AnimData("fox_H_023_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_H_024_1",
+			new AnimData("fox_H_024_1", 4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"fox_MR_001",
-			new AnimData("fox_MR_001", 0.4666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_MR_001", 0.4667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_MR_002",
@@ -25124,11 +37078,11 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_M_001",
-			new AnimData("fox_M_001", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_M_001", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_M_002",
-			new AnimData("fox_M_002", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_M_002", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_M_003",
@@ -25204,23 +37158,1059 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_M_014",
-			new AnimData("fox_M_014", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_M_014", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_M_014_red",
-			new AnimData("fox_M_014_red", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_M_014_red", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_M_015",
-			new AnimData("fox_M_015", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_M_015", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_M_015_red",
-			new AnimData("fox_M_015_red", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("fox_M_015_red", 0.6667f, new Dictionary<string, float[]>())
+		},
+		{
+			"fox_M_016",
+			new AnimData("fox_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_017",
+			new AnimData("fox_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_018",
+			new AnimData("fox_M_018", 0.4333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_M_019",
+			new AnimData("fox_M_019", 0.4333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_M_020",
+			new AnimData("fox_M_020", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_020_1",
+			new AnimData("fox_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_020_2",
+			new AnimData("fox_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_020_3",
+			new AnimData("fox_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_021",
+			new AnimData("fox_M_021", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_021_1",
+			new AnimData("fox_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_021_2",
+			new AnimData("fox_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_021_3",
+			new AnimData("fox_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_022",
+			new AnimData("fox_M_022", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_022_1",
+			new AnimData("fox_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_022_2",
+			new AnimData("fox_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_022_3",
+			new AnimData("fox_M_022_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
 		},
 		{
 			"fox_M_023",
-			new AnimData("fox_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("fox_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"fox_M_024",
+			new AnimData("fox_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_025",
+			new AnimData("fox_M_025", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_025_1",
+			new AnimData("fox_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_025_2",
+			new AnimData("fox_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_025_3",
+			new AnimData("fox_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_026",
+			new AnimData("fox_M_026", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_026_1",
+			new AnimData("fox_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_026_2",
+			new AnimData("fox_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_026_3",
+			new AnimData("fox_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_027",
+			new AnimData("fox_M_027", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_027_1",
+			new AnimData("fox_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_027_2",
+			new AnimData("fox_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_027_3",
+			new AnimData("fox_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_028",
+			new AnimData("fox_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"fox_M_031",
+			new AnimData("fox_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_032",
+			new AnimData("fox_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_033",
+			new AnimData("fox_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_034",
+			new AnimData("fox_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_035",
+			new AnimData("fox_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_036",
+			new AnimData("fox_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_037",
+			new AnimData("fox_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_037_1",
+			new AnimData("fox_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_037_2",
+			new AnimData("fox_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_037_3",
+			new AnimData("fox_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_038_1",
+			new AnimData("fox_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_038_2",
+			new AnimData("fox_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_038_3",
+			new AnimData("fox_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_039_1",
+			new AnimData("fox_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_039_2",
+			new AnimData("fox_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_039_3",
+			new AnimData("fox_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_040_1",
+			new AnimData("fox_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_040_2",
+			new AnimData("fox_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_040_3",
+			new AnimData("fox_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_041_1",
+			new AnimData("fox_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_041_2",
+			new AnimData("fox_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_041_3",
+			new AnimData("fox_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_042_1",
+			new AnimData("fox_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_042_2",
+			new AnimData("fox_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_042_3",
+			new AnimData("fox_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_043_1",
+			new AnimData("fox_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_043_2",
+			new AnimData("fox_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_043_3",
+			new AnimData("fox_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_044_1",
+			new AnimData("fox_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_044_2",
+			new AnimData("fox_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_044_3",
+			new AnimData("fox_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_045_1",
+			new AnimData("fox_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_045_2",
+			new AnimData("fox_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_045_3",
+			new AnimData("fox_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_046_1",
+			new AnimData("fox_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_046_2",
+			new AnimData("fox_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_046_3",
+			new AnimData("fox_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_047_1",
+			new AnimData("fox_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_047_2",
+			new AnimData("fox_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_047_3",
+			new AnimData("fox_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
+		},
+		{
+			"fox_M_048_1",
+			new AnimData("fox_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				}
+			})
+		},
+		{
+			"fox_M_048_2",
+			new AnimData("fox_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"fox_M_048_3",
+			new AnimData("fox_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				}
+			})
 		},
 		{
 			"fox_M_ready",
@@ -25232,19 +38222,19 @@ public static class AnimDataCollection
 		},
 		{
 			"fox_S_000",
-			new AnimData("fox_S_000", 3.666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_S_000", 3.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_S_001",
-			new AnimData("fox_S_001", 2.833333f, new Dictionary<string, float[]>())
+			new AnimData("fox_S_001", 2.8333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_S_002",
-			new AnimData("fox_S_002", 2.666667f, new Dictionary<string, float[]>())
+			new AnimData("fox_S_002", 2.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_Tactic_000",
-			new AnimData("fox_Tactic_000", 0.4333334f, new Dictionary<string, float[]>())
+			new AnimData("fox_Tactic_000", 0.4333f, new Dictionary<string, float[]>())
 		},
 		{
 			"fox_T_001_0_1",
@@ -25256,11 +38246,11 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_ad",
-			new AnimData("boss5_angry_ad", 3.733334f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_ad", 3.7333f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_A_000_0_0",
-			new AnimData("boss5_angry_A_000_0_0", 0.3333333f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_0", 0.3333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25274,7 +38264,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_0b",
-			new AnimData("boss5_angry_A_000_0_0b", 0.3333333f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_0b", 0.3333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25288,7 +38278,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_0c",
-			new AnimData("boss5_angry_A_000_0_0c", 0.3333333f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_0c", 0.3333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25302,7 +38292,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_1",
-			new AnimData("boss5_angry_A_000_0_1", 0.3333333f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_1", 0.3333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25316,7 +38306,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_1b",
-			new AnimData("boss5_angry_A_000_0_1b", 0.3333333f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_1b", 0.3333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25330,7 +38320,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_1c",
-			new AnimData("boss5_angry_A_000_0_1c", 0.3333333f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_1c", 0.3333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25344,7 +38334,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_2",
-			new AnimData("boss5_angry_A_000_0_2", 0.6333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_2", 0.6333001f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25358,7 +38348,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_2b",
-			new AnimData("boss5_angry_A_000_0_2b", 0.6333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_2b", 0.6333001f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25372,7 +38362,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_2c",
-			new AnimData("boss5_angry_A_000_0_2c", 0.6333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_2c", 0.6333001f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25428,7 +38418,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_4",
-			new AnimData("boss5_angry_A_000_0_4", 0.4333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_4", 0.4333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25442,7 +38432,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_4b",
-			new AnimData("boss5_angry_A_000_0_4b", 0.4333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_4b", 0.4333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25456,7 +38446,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_4c",
-			new AnimData("boss5_angry_A_000_0_4c", 0.4333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_A_000_0_4c", 0.4333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -25470,7 +38460,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_5",
-			new AnimData("boss5_angry_A_000_0_5", 0.5666667f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_angry_A_000_0_5", 0.5667f, new Dictionary<string, float[]> { 
 			{
 				"act0",
 				new float[1] { 1f / 15f }
@@ -25478,7 +38468,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_5b",
-			new AnimData("boss5_angry_A_000_0_5b", 0.5666667f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_angry_A_000_0_5b", 0.5667f, new Dictionary<string, float[]> { 
 			{
 				"act0",
 				new float[1] { 1f / 15f }
@@ -25486,7 +38476,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_5c",
-			new AnimData("boss5_angry_A_000_0_5c", 0.5666667f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_angry_A_000_0_5c", 0.5667f, new Dictionary<string, float[]> { 
 			{
 				"act0",
 				new float[1] { 1f / 15f }
@@ -25494,27 +38484,27 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_A_000_0_6",
-			new AnimData("boss5_angry_A_000_0_6", 2.166667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_A_000_0_6", 2.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_A_000_0_6b",
-			new AnimData("boss5_angry_A_000_0_6b", 2.166667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_A_000_0_6b", 2.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_A_000_0_6c",
-			new AnimData("boss5_angry_A_000_0_6c", 2.166667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_A_000_0_6c", 2.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_A_000_0_7",
-			new AnimData("boss5_angry_A_000_0_7", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_A_000_0_7", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_A_000_0_7b",
-			new AnimData("boss5_angry_A_000_0_7b", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_A_000_0_7b", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_A_000_0_7c",
-			new AnimData("boss5_angry_A_000_0_7c", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_A_000_0_7c", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_A_000_0_B0",
@@ -25564,11 +38554,11 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_C_005",
-			new AnimData("boss5_angry_C_005", 3.333333f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_C_005", 3.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_C_006",
-			new AnimData("boss5_angry_C_006", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_C_006", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_C_007",
@@ -25576,11 +38566,11 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_C_007_1",
-			new AnimData("boss5_angry_C_007_1", 1f / 15f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_C_007_1", 0.0667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_C_008",
-			new AnimData("boss5_angry_C_008", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_C_008", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_C_016",
@@ -25600,7 +38590,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_D_001_hit",
-			new AnimData("boss5_angry_D_001_hit", 0.3333333f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_angry_D_001_hit", 0.3333f, new Dictionary<string, float[]> { 
 			{
 				"act0",
 				new float[1] { 0.1f }
@@ -25608,23 +38598,23 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_H_000",
-			new AnimData("boss5_angry_H_000", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_H_000", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_H_001",
-			new AnimData("boss5_angry_H_001", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_H_001", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_H_002",
-			new AnimData("boss5_angry_H_002", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_H_002", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_H_003",
-			new AnimData("boss5_angry_H_003", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_H_003", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_H_004",
-			new AnimData("boss5_angry_H_004", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_H_004", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_H_005",
@@ -25632,11 +38622,11 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_H_007",
-			new AnimData("boss5_angry_H_007", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_H_007", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_H_008",
-			new AnimData("boss5_angry_H_008", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_H_008", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_MR_001",
@@ -25684,7 +38674,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_M_003",
-			new AnimData("boss5_angry_M_003", 0.4333334f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_angry_M_003", 0.4333f, new Dictionary<string, float[]> { 
 			{
 				"move",
 				new float[1]
@@ -25734,7 +38724,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_M_004",
-			new AnimData("boss5_angry_M_004", 0.4333334f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_angry_M_004", 0.4333f, new Dictionary<string, float[]> { 
 			{
 				"move",
 				new float[1]
@@ -25844,7 +38834,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_M_ready",
-			new AnimData("boss5_angry_M_ready", 0.3333333f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_M_ready", 0.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_M_ready2",
@@ -25852,7 +38842,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_S_000",
-			new AnimData("boss5_angry_S_000", 3.666667f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_S_000", 3.6667f, new Dictionary<string, float[]>
 			{
 				{
 					"hide",
@@ -25904,7 +38894,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_S_002",
-			new AnimData("boss5_angry_S_002", 2.666667f, new Dictionary<string, float[]>
+			new AnimData("boss5_angry_S_002", 2.6667f, new Dictionary<string, float[]>
 			{
 				{
 					"hide",
@@ -25934,7 +38924,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_Tactic_000",
-			new AnimData("boss5_angry_Tactic_000", 2f / 3f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_angry_Tactic_000", 0.6667f, new Dictionary<string, float[]> { 
 			{
 				"act0",
 				new float[1] { 0.2666667f }
@@ -25942,7 +38932,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_angry_Tactic_ready_000",
-			new AnimData("boss5_angry_Tactic_ready_000", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_angry_Tactic_ready_000", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_angry_T_001_0_1",
@@ -26080,7 +39070,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_3",
-			new AnimData("boss5_A_000_0_3", 2f / 3f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_3", 0.6667f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -26094,7 +39084,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_3b",
-			new AnimData("boss5_A_000_0_3b", 2f / 3f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_3b", 0.6667f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -26108,7 +39098,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_3c",
-			new AnimData("boss5_A_000_0_3c", 2f / 3f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_3c", 0.6667f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -26122,7 +39112,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_4",
-			new AnimData("boss5_A_000_0_4", 0.4333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_4", 0.4333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -26136,7 +39126,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_4b",
-			new AnimData("boss5_A_000_0_4b", 0.4333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_4b", 0.4333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -26150,7 +39140,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_4c",
-			new AnimData("boss5_A_000_0_4c", 0.4333334f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_4c", 0.4333f, new Dictionary<string, float[]>
 			{
 				{
 					"act0",
@@ -26164,7 +39154,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_5",
-			new AnimData("boss5_A_000_0_5", 0.5666667f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_5", 0.5667f, new Dictionary<string, float[]>
 			{
 				{
 					"hit",
@@ -26178,7 +39168,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_5b",
-			new AnimData("boss5_A_000_0_5b", 0.5666667f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_5b", 0.5667f, new Dictionary<string, float[]>
 			{
 				{
 					"hit",
@@ -26192,7 +39182,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_5c",
-			new AnimData("boss5_A_000_0_5c", 0.5666667f, new Dictionary<string, float[]>
+			new AnimData("boss5_A_000_0_5c", 0.5667f, new Dictionary<string, float[]>
 			{
 				{
 					"hit",
@@ -26206,27 +39196,27 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_A_000_0_6",
-			new AnimData("boss5_A_000_0_6", 2.333333f, new Dictionary<string, float[]>())
+			new AnimData("boss5_A_000_0_6", 2.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_A_000_0_6b",
-			new AnimData("boss5_A_000_0_6b", 2.333333f, new Dictionary<string, float[]>())
+			new AnimData("boss5_A_000_0_6b", 2.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_A_000_0_6c",
-			new AnimData("boss5_A_000_0_6c", 2.333333f, new Dictionary<string, float[]>())
+			new AnimData("boss5_A_000_0_6c", 2.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_A_000_0_7",
-			new AnimData("boss5_A_000_0_7", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("boss5_A_000_0_7", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_A_000_0_7b",
-			new AnimData("boss5_A_000_0_7b", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("boss5_A_000_0_7b", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_A_000_0_7c",
-			new AnimData("boss5_A_000_0_7c", 2f / 3f, new Dictionary<string, float[]>())
+			new AnimData("boss5_A_000_0_7c", 0.6667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_A_000_0_B0",
@@ -26276,11 +39266,11 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_C_005",
-			new AnimData("boss5_C_005", 3.166667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_C_005", 3.1667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_C_006",
-			new AnimData("boss5_C_006", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_C_006", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_C_007",
@@ -26292,11 +39282,283 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_C_008",
-			new AnimData("boss5_C_008", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_C_008", 0.2667f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss5_C_011",
+			new AnimData("boss5_C_011", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_arm",
+			new AnimData("boss5_C_011_arm", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_arm_backup",
+			new AnimData("boss5_C_011_arm_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_arm_burst",
+			new AnimData("boss5_C_011_arm_burst", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_arm_burst_backup",
+			new AnimData("boss5_C_011_arm_burst_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_ash",
+			new AnimData("boss5_C_011_ash", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_ash_backup",
+			new AnimData("boss5_C_011_ash_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_backup",
+			new AnimData("boss5_C_011_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_body",
+			new AnimData("boss5_C_011_body", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_body_backup",
+			new AnimData("boss5_C_011_body_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_body_burst",
+			new AnimData("boss5_C_011_body_burst", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_body_burst2",
+			new AnimData("boss5_C_011_body_burst2", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_body_burst2_backup",
+			new AnimData("boss5_C_011_body_burst2_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_body_burst_backup",
+			new AnimData("boss5_C_011_body_burst_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_crush",
+			new AnimData("boss5_C_011_crush", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_crush_backup",
+			new AnimData("boss5_C_011_crush_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_fuyu",
+			new AnimData("boss5_C_011_fuyu", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_fuyu_backup",
+			new AnimData("boss5_C_011_fuyu_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_head",
+			new AnimData("boss5_C_011_head", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_head_backup",
+			new AnimData("boss5_C_011_head_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_head_burst",
+			new AnimData("boss5_C_011_head_burst", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_head_burst_backup",
+			new AnimData("boss5_C_011_head_burst_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_leg",
+			new AnimData("boss5_C_011_leg", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_leg_backup",
+			new AnimData("boss5_C_011_leg_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_leg_burst",
+			new AnimData("boss5_C_011_leg_burst", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_leg_burst_backup",
+			new AnimData("boss5_C_011_leg_burst_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_melt",
+			new AnimData("boss5_C_011_melt", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_melt_backup",
+			new AnimData("boss5_C_011_melt_backup", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_stun",
+			new AnimData("boss5_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_stun_backup",
+			new AnimData("boss5_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_011_throat",
+			new AnimData("boss5_C_011_throat", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss5_C_016",
 			new AnimData("boss5_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss5_C_017",
+			new AnimData("boss5_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_018",
+			new AnimData("boss5_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_019",
+			new AnimData("boss5_C_019", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss5_C_020",
@@ -26305,6 +39567,76 @@ public static class AnimDataCollection
 		{
 			"boss5_C_021",
 			new AnimData("boss5_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss5_C_022",
+			new AnimData("boss5_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss5_C_024",
+			new AnimData("boss5_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss5_C_024_1",
+			new AnimData("boss5_C_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss5_C_024_backup",
+			new AnimData("boss5_C_024_backup", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss5_C_025",
+			new AnimData("boss5_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_C_025_1",
+			new AnimData("boss5_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss5_C_025_2",
+			new AnimData("boss5_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss5_C_025_3",
+			new AnimData("boss5_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
 		},
 		{
 			"boss5_D_001",
@@ -26328,27 +39660,43 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_H_002",
-			new AnimData("boss5_H_002", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_H_002", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_H_003",
-			new AnimData("boss5_H_003", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_H_003", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_H_004",
-			new AnimData("boss5_H_004", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_H_004", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_H_005",
-			new AnimData("boss5_H_005", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_H_005", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_H_007",
-			new AnimData("boss5_H_007", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_H_007", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_H_008",
-			new AnimData("boss5_H_008", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_H_008", 0.2667f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss5_H_023_1",
+			new AnimData("boss5_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_H_024_1",
+			new AnimData("boss5_H_024_1", 3.3333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss5_MR_001",
@@ -26396,7 +39744,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_M_003",
-			new AnimData("boss5_M_003", 0.4333334f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_M_003", 0.4333f, new Dictionary<string, float[]> { 
 			{
 				"move",
 				new float[1]
@@ -26446,7 +39794,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_M_004",
-			new AnimData("boss5_M_004", 0.4333334f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_M_004", 0.4333f, new Dictionary<string, float[]> { 
 			{
 				"move",
 				new float[1]
@@ -26551,12 +39899,1464 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss5_M_016",
+			new AnimData("boss5_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_017",
+			new AnimData("boss5_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_018",
+			new AnimData("boss5_M_018", 0.2667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss5_M_019",
+			new AnimData("boss5_M_019", 0.2667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss5_M_020",
+			new AnimData("boss5_M_020", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss5_M_020_1",
+			new AnimData("boss5_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_020_2",
+			new AnimData("boss5_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_020_3",
+			new AnimData("boss5_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_021",
+			new AnimData("boss5_M_021", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss5_M_021_1",
+			new AnimData("boss5_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_021_2",
+			new AnimData("boss5_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_021_3",
+			new AnimData("boss5_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_022",
+			new AnimData("boss5_M_022", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss5_M_022_1",
+			new AnimData("boss5_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_022_2",
+			new AnimData("boss5_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_022_3",
+			new AnimData("boss5_M_022_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss5_M_023",
-			new AnimData("boss5_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss5_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_M_024",
+			new AnimData("boss5_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_025",
+			new AnimData("boss5_M_025", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss5_M_025_1",
+			new AnimData("boss5_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_025_2",
+			new AnimData("boss5_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_025_3",
+			new AnimData("boss5_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_026",
+			new AnimData("boss5_M_026", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss5_M_026_1",
+			new AnimData("boss5_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_026_2",
+			new AnimData("boss5_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_026_3",
+			new AnimData("boss5_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_027",
+			new AnimData("boss5_M_027", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss5_M_027_1",
+			new AnimData("boss5_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_027_2",
+			new AnimData("boss5_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_027_3",
+			new AnimData("boss5_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_028",
+			new AnimData("boss5_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_M_029",
+			new AnimData("boss5_M_029", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss5_M_031",
+			new AnimData("boss5_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_032",
+			new AnimData("boss5_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_033",
+			new AnimData("boss5_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_034",
+			new AnimData("boss5_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_035",
+			new AnimData("boss5_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_036",
+			new AnimData("boss5_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_037",
+			new AnimData("boss5_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_037_1",
+			new AnimData("boss5_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_037_2",
+			new AnimData("boss5_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_037_3",
+			new AnimData("boss5_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_038_1",
+			new AnimData("boss5_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_038_2",
+			new AnimData("boss5_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_038_3",
+			new AnimData("boss5_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_039_1",
+			new AnimData("boss5_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_039_2",
+			new AnimData("boss5_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_039_3",
+			new AnimData("boss5_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_040_1",
+			new AnimData("boss5_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_040_2",
+			new AnimData("boss5_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_040_3",
+			new AnimData("boss5_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_041_1",
+			new AnimData("boss5_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_041_2",
+			new AnimData("boss5_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_041_3",
+			new AnimData("boss5_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_042_1",
+			new AnimData("boss5_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_042_2",
+			new AnimData("boss5_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_042_3",
+			new AnimData("boss5_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_043_1",
+			new AnimData("boss5_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_043_2",
+			new AnimData("boss5_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_043_3",
+			new AnimData("boss5_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_044_1",
+			new AnimData("boss5_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_044_2",
+			new AnimData("boss5_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_044_3",
+			new AnimData("boss5_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_045_1",
+			new AnimData("boss5_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_045_2",
+			new AnimData("boss5_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_045_3",
+			new AnimData("boss5_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_046_1",
+			new AnimData("boss5_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_046_2",
+			new AnimData("boss5_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_046_3",
+			new AnimData("boss5_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_047_1",
+			new AnimData("boss5_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_047_2",
+			new AnimData("boss5_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_047_3",
+			new AnimData("boss5_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_048_1",
+			new AnimData("boss5_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss5_M_048_2",
+			new AnimData("boss5_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss5_M_048_3",
+			new AnimData("boss5_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss5_M_ready",
-			new AnimData("boss5_M_ready", 0.3333333f, new Dictionary<string, float[]>())
+			new AnimData("boss5_M_ready", 0.3333f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_M_ready2",
@@ -26564,7 +41364,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_S_000",
-			new AnimData("boss5_S_000", 3.666667f, new Dictionary<string, float[]>
+			new AnimData("boss5_S_000", 3.6667f, new Dictionary<string, float[]>
 			{
 				{
 					"hide",
@@ -26616,7 +41416,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_S_002",
-			new AnimData("boss5_S_002", 2.666667f, new Dictionary<string, float[]>
+			new AnimData("boss5_S_002", 2.6667f, new Dictionary<string, float[]>
 			{
 				{
 					"hide",
@@ -26646,7 +41446,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_Tactic_000",
-			new AnimData("boss5_Tactic_000", 2f / 3f, new Dictionary<string, float[]> { 
+			new AnimData("boss5_Tactic_000", 0.6667f, new Dictionary<string, float[]> { 
 			{
 				"act0",
 				new float[1] { 0.2666667f }
@@ -26654,7 +41454,7 @@ public static class AnimDataCollection
 		},
 		{
 			"boss5_Tactic_ready_000",
-			new AnimData("boss5_Tactic_ready_000", 0.2666667f, new Dictionary<string, float[]>())
+			new AnimData("boss5_Tactic_ready_000", 0.2667f, new Dictionary<string, float[]>())
 		},
 		{
 			"boss5_T_001_0_1",
@@ -27649,8 +42449,316 @@ public static class AnimDataCollection
 			new AnimData("boss6_C_008", 0.2666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss6_C_011",
+			new AnimData("boss6_C_011", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_arm",
+			new AnimData("boss6_C_011_arm", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_arm_backup",
+			new AnimData("boss6_C_011_arm_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_arm_burst",
+			new AnimData("boss6_C_011_arm_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_arm_burst_backup",
+			new AnimData("boss6_C_011_arm_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_ash",
+			new AnimData("boss6_C_011_ash", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_ash_backup",
+			new AnimData("boss6_C_011_ash_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_backup",
+			new AnimData("boss6_C_011_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_body",
+			new AnimData("boss6_C_011_body", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_body_backup",
+			new AnimData("boss6_C_011_body_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_body_burst",
+			new AnimData("boss6_C_011_body_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_body_burst2",
+			new AnimData("boss6_C_011_body_burst2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_body_burst2_backup",
+			new AnimData("boss6_C_011_body_burst2_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_body_burst_backup",
+			new AnimData("boss6_C_011_body_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_crush",
+			new AnimData("boss6_C_011_crush", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_crush_backup",
+			new AnimData("boss6_C_011_crush_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_fuyu",
+			new AnimData("boss6_C_011_fuyu", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_fuyu_backup",
+			new AnimData("boss6_C_011_fuyu_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_head",
+			new AnimData("boss6_C_011_head", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_head_backup",
+			new AnimData("boss6_C_011_head_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_head_burst",
+			new AnimData("boss6_C_011_head_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_head_burst_backup",
+			new AnimData("boss6_C_011_head_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_killer",
+			new AnimData("boss6_C_011_killer", 3f, new Dictionary<string, float[]>
+			{
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 2.166667f }
+				}
+			})
+		},
+		{
+			"boss6_C_011_killer_backup",
+			new AnimData("boss6_C_011_killer_backup", 3f, new Dictionary<string, float[]>
+			{
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 2.166667f }
+				}
+			})
+		},
+		{
+			"boss6_C_011_leg",
+			new AnimData("boss6_C_011_leg", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_leg_backup",
+			new AnimData("boss6_C_011_leg_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_leg_burst",
+			new AnimData("boss6_C_011_leg_burst", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_leg_burst_backup",
+			new AnimData("boss6_C_011_leg_burst_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_melt",
+			new AnimData("boss6_C_011_melt", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_melt_backup",
+			new AnimData("boss6_C_011_melt_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_011_stun",
+			new AnimData("boss6_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1] { 0.7333333f }
+			} })
+		},
+		{
+			"boss6_C_011_stun_backup",
+			new AnimData("boss6_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1] { 0.7333333f }
+			} })
+		},
+		{
+			"boss6_C_011_throat",
+			new AnimData("boss6_C_011_throat", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_012",
+			new AnimData("boss6_C_012", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss6_C_016",
 			new AnimData("boss6_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_C_017",
+			new AnimData("boss6_C_017", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_018",
+			new AnimData("boss6_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_019",
+			new AnimData("boss6_C_019", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss6_C_020",
@@ -27659,6 +42767,78 @@ public static class AnimDataCollection
 		{
 			"boss6_C_021",
 			new AnimData("boss6_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_C_022",
+			new AnimData("boss6_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_C_024",
+			new AnimData("boss6_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_C_024_1",
+			new AnimData("boss6_C_024_1", 2f, new Dictionary<string, float[]>
+			{
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 1.333333f }
+				}
+			})
+		},
+		{
+			"boss6_C_025",
+			new AnimData("boss6_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_C_025_1",
+			new AnimData("boss6_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss6_C_025_2",
+			new AnimData("boss6_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss6_C_025_3",
+			new AnimData("boss6_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
 		},
 		{
 			"boss6_D_001",
@@ -27703,6 +42883,22 @@ public static class AnimDataCollection
 		{
 			"boss6_H_008",
 			new AnimData("boss6_H_008", 0.4333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_H_023_1",
+			new AnimData("boss6_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_H_024_1",
+			new AnimData("boss6_H_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss6_MR_001",
@@ -27877,8 +43073,1428 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss6_M_016",
+			new AnimData("boss6_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_017",
+			new AnimData("boss6_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_018",
+			new AnimData("boss6_M_018", 0.4333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_M_019",
+			new AnimData("boss6_M_019", 0.4333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_M_020",
+			new AnimData("boss6_M_020", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss6_M_020_1",
+			new AnimData("boss6_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_020_2",
+			new AnimData("boss6_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_020_3",
+			new AnimData("boss6_M_020_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_021",
+			new AnimData("boss6_M_021", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss6_M_021_1",
+			new AnimData("boss6_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_021_2",
+			new AnimData("boss6_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_021_3",
+			new AnimData("boss6_M_021_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_022",
+			new AnimData("boss6_M_022", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss6_M_022_1",
+			new AnimData("boss6_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_022_2",
+			new AnimData("boss6_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_022_3",
+			new AnimData("boss6_M_022_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss6_M_023",
 			new AnimData("boss6_M_023", 0.5f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss6_M_024",
+			new AnimData("boss6_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_025",
+			new AnimData("boss6_M_025", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss6_M_025_1",
+			new AnimData("boss6_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_025_2",
+			new AnimData("boss6_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_025_3",
+			new AnimData("boss6_M_025_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_026",
+			new AnimData("boss6_M_026", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss6_M_026_1",
+			new AnimData("boss6_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_026_2",
+			new AnimData("boss6_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_026_3",
+			new AnimData("boss6_M_026_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_027",
+			new AnimData("boss6_M_027", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss6_M_027_1",
+			new AnimData("boss6_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_027_2",
+			new AnimData("boss6_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_027_3",
+			new AnimData("boss6_M_027_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_028",
+			new AnimData("boss6_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss6_M_031",
+			new AnimData("boss6_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_032",
+			new AnimData("boss6_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_033",
+			new AnimData("boss6_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_034",
+			new AnimData("boss6_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_035",
+			new AnimData("boss6_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_036",
+			new AnimData("boss6_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_037",
+			new AnimData("boss6_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_037_1",
+			new AnimData("boss6_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_037_2",
+			new AnimData("boss6_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_037_3",
+			new AnimData("boss6_M_037_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_038_1",
+			new AnimData("boss6_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_038_2",
+			new AnimData("boss6_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_038_3",
+			new AnimData("boss6_M_038_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_039_1",
+			new AnimData("boss6_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_039_2",
+			new AnimData("boss6_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_039_3",
+			new AnimData("boss6_M_039_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_040_1",
+			new AnimData("boss6_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_040_2",
+			new AnimData("boss6_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_040_3",
+			new AnimData("boss6_M_040_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_041_1",
+			new AnimData("boss6_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_041_2",
+			new AnimData("boss6_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_041_3",
+			new AnimData("boss6_M_041_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_042_1",
+			new AnimData("boss6_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_042_2",
+			new AnimData("boss6_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_042_3",
+			new AnimData("boss6_M_042_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_043_1",
+			new AnimData("boss6_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_043_2",
+			new AnimData("boss6_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_043_3",
+			new AnimData("boss6_M_043_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_044_1",
+			new AnimData("boss6_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_044_2",
+			new AnimData("boss6_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_044_3",
+			new AnimData("boss6_M_044_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_045_1",
+			new AnimData("boss6_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_045_2",
+			new AnimData("boss6_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_045_3",
+			new AnimData("boss6_M_045_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_046_1",
+			new AnimData("boss6_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_046_2",
+			new AnimData("boss6_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_046_3",
+			new AnimData("boss6_M_046_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_047_1",
+			new AnimData("boss6_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_047_2",
+			new AnimData("boss6_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_047_3",
+			new AnimData("boss6_M_047_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_048_1",
+			new AnimData("boss6_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss6_M_048_2",
+			new AnimData("boss6_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"waepon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss6_M_048_3",
+			new AnimData("boss6_M_048_3", 0.4666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"waepon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss6_M_ready",
@@ -28985,8 +45601,304 @@ public static class AnimDataCollection
 			new AnimData("boss7_C_008", 0.2666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss7_C_011",
+			new AnimData("boss7_C_011", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_arm",
+			new AnimData("boss7_C_011_arm", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_arm_backup",
+			new AnimData("boss7_C_011_arm_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_arm_burst",
+			new AnimData("boss7_C_011_arm_burst", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_arm_burst_backup",
+			new AnimData("boss7_C_011_arm_burst_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_ash",
+			new AnimData("boss7_C_011_ash", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_ash_backup",
+			new AnimData("boss7_C_011_ash_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_backup",
+			new AnimData("boss7_C_011_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_body",
+			new AnimData("boss7_C_011_body", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_body_backup",
+			new AnimData("boss7_C_011_body_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_body_burst",
+			new AnimData("boss7_C_011_body_burst", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_body_burst2",
+			new AnimData("boss7_C_011_body_burst2", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_body_burst2_backup",
+			new AnimData("boss7_C_011_body_burst2_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_body_burst_backup",
+			new AnimData("boss7_C_011_body_burst_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_crush",
+			new AnimData("boss7_C_011_crush", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_crush_backup",
+			new AnimData("boss7_C_011_crush_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_fuyu",
+			new AnimData("boss7_C_011_fuyu", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_fuyu_backup",
+			new AnimData("boss7_C_011_fuyu_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_head",
+			new AnimData("boss7_C_011_head", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_head_backup",
+			new AnimData("boss7_C_011_head_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_head_burst",
+			new AnimData("boss7_C_011_head_burst", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_head_burst_backup",
+			new AnimData("boss7_C_011_head_burst_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_killer",
+			new AnimData("boss7_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss7_C_011_killer_backup",
+			new AnimData("boss7_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss7_C_011_leg",
+			new AnimData("boss7_C_011_leg", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_leg_backup",
+			new AnimData("boss7_C_011_leg_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_leg_burst",
+			new AnimData("boss7_C_011_leg_burst", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_leg_burst_backup",
+			new AnimData("boss7_C_011_leg_burst_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_melt",
+			new AnimData("boss7_C_011_melt", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_melt_backup",
+			new AnimData("boss7_C_011_melt_backup", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_stun",
+			new AnimData("boss7_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_stun_backup",
+			new AnimData("boss7_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_011_throat",
+			new AnimData("boss7_C_011_throat", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_012",
+			new AnimData("boss7_C_012", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss7_C_016",
 			new AnimData("boss7_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss7_C_017",
+			new AnimData("boss7_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_018",
+			new AnimData("boss7_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_C_019",
+			new AnimData("boss7_C_019", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss7_C_020",
@@ -28995,6 +45907,50 @@ public static class AnimDataCollection
 		{
 			"boss7_C_021",
 			new AnimData("boss7_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss7_C_022",
+			new AnimData("boss7_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss7_C_024",
+			new AnimData("boss7_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss7_C_024_1",
+			new AnimData("boss7_C_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss7_C_025",
+			new AnimData("boss7_C_025", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss7_C_025_1",
+			new AnimData("boss7_C_025_1", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 0.5333334f }
+			} })
+		},
+		{
+			"boss7_C_025_2",
+			new AnimData("boss7_C_025_2", 1.6f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 0.3333333f }
+			} })
+		},
+		{
+			"boss7_C_025_3",
+			new AnimData("boss7_C_025_3", 1.6f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 0.3333333f }
+			} })
 		},
 		{
 			"boss7_D_001",
@@ -29039,6 +45995,22 @@ public static class AnimDataCollection
 		{
 			"boss7_H_008",
 			new AnimData("boss7_H_008", 0.3333333f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss7_H_023_1",
+			new AnimData("boss7_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_H_024_1",
+			new AnimData("boss7_H_024_1", 2.133333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss7_MR_001",
@@ -29241,8 +46213,1380 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss7_M_016",
+			new AnimData("boss7_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_017",
+			new AnimData("boss7_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_018",
+			new AnimData("boss7_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_019",
+			new AnimData("boss7_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_020",
+			new AnimData("boss7_M_020", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss7_M_020_1",
+			new AnimData("boss7_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_020_2",
+			new AnimData("boss7_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_020_3",
+			new AnimData("boss7_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_021",
+			new AnimData("boss7_M_021", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss7_M_021_1",
+			new AnimData("boss7_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_021_2",
+			new AnimData("boss7_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_021_3",
+			new AnimData("boss7_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_022",
+			new AnimData("boss7_M_022", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss7_M_022_1",
+			new AnimData("boss7_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_022_2",
+			new AnimData("boss7_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_022_3",
+			new AnimData("boss7_M_022_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
 			"boss7_M_023",
-			new AnimData("boss7_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss7_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_M_024",
+			new AnimData("boss7_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_025",
+			new AnimData("boss7_M_025", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss7_M_025_1",
+			new AnimData("boss7_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_025_2",
+			new AnimData("boss7_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_025_3",
+			new AnimData("boss7_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_026",
+			new AnimData("boss7_M_026", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss7_M_026_1",
+			new AnimData("boss7_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_026_2",
+			new AnimData("boss7_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_026_3",
+			new AnimData("boss7_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_027",
+			new AnimData("boss7_M_027", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss7_M_027_1",
+			new AnimData("boss7_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_027_2",
+			new AnimData("boss7_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_027_3",
+			new AnimData("boss7_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_028",
+			new AnimData("boss7_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss7_M_031",
+			new AnimData("boss7_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_032",
+			new AnimData("boss7_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_033",
+			new AnimData("boss7_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_034",
+			new AnimData("boss7_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_035",
+			new AnimData("boss7_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_036",
+			new AnimData("boss7_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_037",
+			new AnimData("boss7_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.9666667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_037_1",
+			new AnimData("boss7_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_037_2",
+			new AnimData("boss7_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_037_3",
+			new AnimData("boss7_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_038_1",
+			new AnimData("boss7_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_038_2",
+			new AnimData("boss7_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_038_3",
+			new AnimData("boss7_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_039_1",
+			new AnimData("boss7_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_039_2",
+			new AnimData("boss7_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_039_3",
+			new AnimData("boss7_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_040_1",
+			new AnimData("boss7_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_040_2",
+			new AnimData("boss7_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_040_3",
+			new AnimData("boss7_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_041_1",
+			new AnimData("boss7_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_041_2",
+			new AnimData("boss7_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_041_3",
+			new AnimData("boss7_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_042_1",
+			new AnimData("boss7_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_042_2",
+			new AnimData("boss7_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_042_3",
+			new AnimData("boss7_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_043_1",
+			new AnimData("boss7_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_043_2",
+			new AnimData("boss7_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_043_3",
+			new AnimData("boss7_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_044_1",
+			new AnimData("boss7_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_044_2",
+			new AnimData("boss7_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_044_3",
+			new AnimData("boss7_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_045_1",
+			new AnimData("boss7_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_045_2",
+			new AnimData("boss7_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_045_3",
+			new AnimData("boss7_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_046_1",
+			new AnimData("boss7_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_046_2",
+			new AnimData("boss7_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_046_3",
+			new AnimData("boss7_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_047_1",
+			new AnimData("boss7_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_047_2",
+			new AnimData("boss7_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_047_3",
+			new AnimData("boss7_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_048_1",
+			new AnimData("boss7_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss7_M_048_2",
+			new AnimData("boss7_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss7_M_048_3",
+			new AnimData("boss7_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.03333334f }
+				}
+			})
 		},
 		{
 			"boss7_M_ready",
@@ -30337,8 +48681,304 @@ public static class AnimDataCollection
 			new AnimData("boss8_C_008", 0.2666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss8_C_011",
+			new AnimData("boss8_C_011", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_arm",
+			new AnimData("boss8_C_011_arm", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_arm_backup",
+			new AnimData("boss8_C_011_arm_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_arm_burst",
+			new AnimData("boss8_C_011_arm_burst", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_arm_burst_backup",
+			new AnimData("boss8_C_011_arm_burst_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_ash",
+			new AnimData("boss8_C_011_ash", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_ash_backup",
+			new AnimData("boss8_C_011_ash_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_backup",
+			new AnimData("boss8_C_011_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_body",
+			new AnimData("boss8_C_011_body", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_body_backup",
+			new AnimData("boss8_C_011_body_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_body_burst",
+			new AnimData("boss8_C_011_body_burst", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_body_burst2",
+			new AnimData("boss8_C_011_body_burst2", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_body_burst2_backup",
+			new AnimData("boss8_C_011_body_burst2_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_body_burst_backup",
+			new AnimData("boss8_C_011_body_burst_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_crush",
+			new AnimData("boss8_C_011_crush", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_crush_backup",
+			new AnimData("boss8_C_011_crush_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_fuyu",
+			new AnimData("boss8_C_011_fuyu", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_fuyu_backup",
+			new AnimData("boss8_C_011_fuyu_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_head",
+			new AnimData("boss8_C_011_head", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_head_backup",
+			new AnimData("boss8_C_011_head_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_head_burst",
+			new AnimData("boss8_C_011_head_burst", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_head_burst_backup",
+			new AnimData("boss8_C_011_head_burst_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_killer",
+			new AnimData("boss8_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss8_C_011_killer_backup",
+			new AnimData("boss8_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss8_C_011_leg",
+			new AnimData("boss8_C_011_leg", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_leg_backup",
+			new AnimData("boss8_C_011_leg_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_leg_burst",
+			new AnimData("boss8_C_011_leg_burst", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_leg_burst_backup",
+			new AnimData("boss8_C_011_leg_burst_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_melt",
+			new AnimData("boss8_C_011_melt", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_melt_backup",
+			new AnimData("boss8_C_011_melt_backup", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_stun",
+			new AnimData("boss8_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_stun_backup",
+			new AnimData("boss8_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_011_throat",
+			new AnimData("boss8_C_011_throat", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_012",
+			new AnimData("boss8_C_012", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss8_C_016",
 			new AnimData("boss8_C_016", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss8_C_017",
+			new AnimData("boss8_C_017", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_018",
+			new AnimData("boss8_C_018", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_019",
+			new AnimData("boss8_C_019", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss8_C_020",
@@ -30347,6 +48987,58 @@ public static class AnimDataCollection
 		{
 			"boss8_C_021",
 			new AnimData("boss8_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss8_C_022",
+			new AnimData("boss8_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss8_C_024",
+			new AnimData("boss8_C_024", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss8_C_024_1",
+			new AnimData("boss8_C_024_1", 2f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss8_C_024_backup",
+			new AnimData("boss8_C_024_backup", 2f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss8_C_025",
+			new AnimData("boss8_C_025", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_C_025_1",
+			new AnimData("boss8_C_025_1", 0.8333334f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 0.4666667f }
+			} })
+		},
+		{
+			"boss8_C_025_2",
+			new AnimData("boss8_C_025_2", 1.6f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 0.3333333f }
+			} })
+		},
+		{
+			"boss8_C_025_3",
+			new AnimData("boss8_C_025_3", 1.6f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 0.3333333f }
+			} })
 		},
 		{
 			"boss8_D_001",
@@ -30391,6 +49083,22 @@ public static class AnimDataCollection
 		{
 			"boss8_H_008",
 			new AnimData("boss8_H_008", 0.3333333f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss8_H_023_1",
+			new AnimData("boss8_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_H_024_1",
+			new AnimData("boss8_H_024_1", 2.166667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss8_MR_001",
@@ -30569,8 +49277,1476 @@ public static class AnimDataCollection
 			})
 		},
 		{
+			"boss8_M_016",
+			new AnimData("boss8_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_017",
+			new AnimData("boss8_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_018",
+			new AnimData("boss8_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_019",
+			new AnimData("boss8_M_019", 0.6333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_020",
+			new AnimData("boss8_M_020", 0.9666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.7f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.3f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.3333333f }
+				},
+				{
+					"hit",
+					new float[1] { 0.3666667f }
+				}
+			})
+		},
+		{
+			"boss8_M_020_1",
+			new AnimData("boss8_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_020_2",
+			new AnimData("boss8_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_020_3",
+			new AnimData("boss8_M_020_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.1f }
+				}
+			})
+		},
+		{
+			"boss8_M_021",
+			new AnimData("boss8_M_021", 0.9666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.7f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.3f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.3333333f }
+				},
+				{
+					"hit",
+					new float[1] { 0.3666667f }
+				}
+			})
+		},
+		{
+			"boss8_M_021_1",
+			new AnimData("boss8_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_021_2",
+			new AnimData("boss8_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_021_3",
+			new AnimData("boss8_M_021_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_022",
+			new AnimData("boss8_M_022", 0.9666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.7f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.3f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.3333333f }
+				},
+				{
+					"hit",
+					new float[1] { 0.3666667f }
+				}
+			})
+		},
+		{
+			"boss8_M_022_1",
+			new AnimData("boss8_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_022_2",
+			new AnimData("boss8_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_022_3",
+			new AnimData("boss8_M_022_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
 			"boss8_M_023",
-			new AnimData("boss8_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss8_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_M_024",
+			new AnimData("boss8_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_025",
+			new AnimData("boss8_M_025", 0.9666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.7f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.3f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.3333333f }
+				},
+				{
+					"hit",
+					new float[1] { 0.3666667f }
+				}
+			})
+		},
+		{
+			"boss8_M_025_1",
+			new AnimData("boss8_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_025_2",
+			new AnimData("boss8_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_025_3",
+			new AnimData("boss8_M_025_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_026",
+			new AnimData("boss8_M_026", 0.9666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.7f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.3f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.3333333f }
+				},
+				{
+					"hit",
+					new float[1] { 0.3666667f }
+				}
+			})
+		},
+		{
+			"boss8_M_026_1",
+			new AnimData("boss8_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_026_2",
+			new AnimData("boss8_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_026_3",
+			new AnimData("boss8_M_026_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_027",
+			new AnimData("boss8_M_027", 0.9666667f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 0.7f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.3f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.3333333f }
+				},
+				{
+					"hit",
+					new float[1] { 0.3666667f }
+				}
+			})
+		},
+		{
+			"boss8_M_027_1",
+			new AnimData("boss8_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_027_2",
+			new AnimData("boss8_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_027_3",
+			new AnimData("boss8_M_027_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_028",
+			new AnimData("boss8_M_028", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss8_M_031",
+			new AnimData("boss8_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_032",
+			new AnimData("boss8_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_033",
+			new AnimData("boss8_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_034",
+			new AnimData("boss8_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_035",
+			new AnimData("boss8_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_036",
+			new AnimData("boss8_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_037",
+			new AnimData("boss8_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.066667f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_037_1",
+			new AnimData("boss8_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_037_2",
+			new AnimData("boss8_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_037_3",
+			new AnimData("boss8_M_037_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_038_1",
+			new AnimData("boss8_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_038_2",
+			new AnimData("boss8_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_038_3",
+			new AnimData("boss8_M_038_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_039_1",
+			new AnimData("boss8_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_039_2",
+			new AnimData("boss8_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_039_3",
+			new AnimData("boss8_M_039_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_040_1",
+			new AnimData("boss8_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_040_2",
+			new AnimData("boss8_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_040_3",
+			new AnimData("boss8_M_040_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_041_1",
+			new AnimData("boss8_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_041_2",
+			new AnimData("boss8_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_041_3",
+			new AnimData("boss8_M_041_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_042_1",
+			new AnimData("boss8_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_042_2",
+			new AnimData("boss8_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_042_3",
+			new AnimData("boss8_M_042_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_043_1",
+			new AnimData("boss8_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_043_2",
+			new AnimData("boss8_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_043_3",
+			new AnimData("boss8_M_043_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_044_1",
+			new AnimData("boss8_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_044_2",
+			new AnimData("boss8_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_044_3",
+			new AnimData("boss8_M_044_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_045_1",
+			new AnimData("boss8_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_045_2",
+			new AnimData("boss8_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_045_3",
+			new AnimData("boss8_M_045_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_046_1",
+			new AnimData("boss8_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_046_2",
+			new AnimData("boss8_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_046_3",
+			new AnimData("boss8_M_046_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_047_1",
+			new AnimData("boss8_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_047_2",
+			new AnimData("boss8_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_047_3",
+			new AnimData("boss8_M_047_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
+		},
+		{
+			"boss8_M_048_1",
+			new AnimData("boss8_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 0.5f }
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss8_M_048_2",
+			new AnimData("boss8_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss8_M_048_3",
+			new AnimData("boss8_M_048_3", 0.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"step",
+					new float[1] { 1f / 15f }
+				}
+			})
 		},
 		{
 			"boss8_M_ready",
@@ -31621,8 +51797,304 @@ public static class AnimDataCollection
 			new AnimData("boss9_C_008", 0.2666667f, new Dictionary<string, float[]>())
 		},
 		{
+			"boss9_C_011",
+			new AnimData("boss9_C_011", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_arm",
+			new AnimData("boss9_C_011_arm", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_arm_backup",
+			new AnimData("boss9_C_011_arm_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_arm_burst",
+			new AnimData("boss9_C_011_arm_burst", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_arm_burst_backup",
+			new AnimData("boss9_C_011_arm_burst_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_ash",
+			new AnimData("boss9_C_011_ash", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_ash_backup",
+			new AnimData("boss9_C_011_ash_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_backup",
+			new AnimData("boss9_C_011_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_body",
+			new AnimData("boss9_C_011_body", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_body_backup",
+			new AnimData("boss9_C_011_body_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_body_burst",
+			new AnimData("boss9_C_011_body_burst", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_body_burst2",
+			new AnimData("boss9_C_011_body_burst2", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_body_burst2_backup",
+			new AnimData("boss9_C_011_body_burst2_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_body_burst_backup",
+			new AnimData("boss9_C_011_body_burst_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_crush",
+			new AnimData("boss9_C_011_crush", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_crush_backup",
+			new AnimData("boss9_C_011_crush_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_fuyu",
+			new AnimData("boss9_C_011_fuyu", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_fuyu_backup",
+			new AnimData("boss9_C_011_fuyu_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_head",
+			new AnimData("boss9_C_011_head", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_head_backup",
+			new AnimData("boss9_C_011_head_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_head_burst",
+			new AnimData("boss9_C_011_head_burst", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_head_burst_backup",
+			new AnimData("boss9_C_011_head_burst_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_killer",
+			new AnimData("boss9_C_011_killer", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss9_C_011_killer_backup",
+			new AnimData("boss9_C_011_killer_backup", 3f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 2.166667f }
+			} })
+		},
+		{
+			"boss9_C_011_leg",
+			new AnimData("boss9_C_011_leg", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_leg_backup",
+			new AnimData("boss9_C_011_leg_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_leg_burst",
+			new AnimData("boss9_C_011_leg_burst", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_leg_burst_backup",
+			new AnimData("boss9_C_011_leg_burst_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_melt",
+			new AnimData("boss9_C_011_melt", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_melt_backup",
+			new AnimData("boss9_C_011_melt_backup", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_stun",
+			new AnimData("boss9_C_011_stun", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_stun_backup",
+			new AnimData("boss9_C_011_stun_backup", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_011_throat",
+			new AnimData("boss9_C_011_throat", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_012",
+			new AnimData("boss9_C_012", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
 			"boss9_C_016",
 			new AnimData("boss9_C_016", 2.666667f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss9_C_017",
+			new AnimData("boss9_C_017", 2.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_018",
+			new AnimData("boss9_C_018", 2.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_019",
+			new AnimData("boss9_C_019", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss9_C_020",
@@ -31631,6 +52103,72 @@ public static class AnimDataCollection
 		{
 			"boss9_C_021",
 			new AnimData("boss9_C_021", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss9_C_022",
+			new AnimData("boss9_C_022", 0.8333334f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss9_C_024",
+			new AnimData("boss9_C_024", 2.666667f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss9_C_024_1",
+			new AnimData("boss9_C_024_1", 2.666667f, new Dictionary<string, float[]> { 
+			{
+				"act0",
+				new float[1] { 1.333333f }
+			} })
+		},
+		{
+			"boss9_C_025",
+			new AnimData("boss9_C_025", 2.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_C_025_1",
+			new AnimData("boss9_C_025_1", 0.8333334f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.4666667f }
+				}
+			})
+		},
+		{
+			"boss9_C_025_2",
+			new AnimData("boss9_C_025_2", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
+		},
+		{
+			"boss9_C_025_3",
+			new AnimData("boss9_C_025_3", 1.6f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.3333333f }
+				}
+			})
 		},
 		{
 			"boss9_D_001",
@@ -31675,6 +52213,22 @@ public static class AnimDataCollection
 		{
 			"boss9_H_008",
 			new AnimData("boss9_H_008", 0.2666667f, new Dictionary<string, float[]>())
+		},
+		{
+			"boss9_H_023_1",
+			new AnimData("boss9_H_023_1", 1.333333f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_H_024_1",
+			new AnimData("boss9_H_024_1", 2.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
 		},
 		{
 			"boss9_MR_001",
@@ -31829,8 +52383,1160 @@ public static class AnimDataCollection
 			} })
 		},
 		{
+			"boss9_M_016",
+			new AnimData("boss9_M_016", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_017",
+			new AnimData("boss9_M_017", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_018",
+			new AnimData("boss9_M_018", 0.5666667f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_019",
+			new AnimData("boss9_M_019", 2f / 3f, new Dictionary<string, float[]>
+			{
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"act0",
+					new float[1] { 0.03333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_020",
+			new AnimData("boss9_M_020", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss9_M_020_1",
+			new AnimData("boss9_M_020_1", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_020_2",
+			new AnimData("boss9_M_020_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_020_3",
+			new AnimData("boss9_M_020_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_021",
+			new AnimData("boss9_M_021", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss9_M_021_1",
+			new AnimData("boss9_M_021_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_021_2",
+			new AnimData("boss9_M_021_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_021_3",
+			new AnimData("boss9_M_021_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_022",
+			new AnimData("boss9_M_022", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss9_M_022_1",
+			new AnimData("boss9_M_022_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_022_2",
+			new AnimData("boss9_M_022_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_022_3",
+			new AnimData("boss9_M_022_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
 			"boss9_M_023",
-			new AnimData("boss9_M_023", 0.5f, new Dictionary<string, float[]>())
+			new AnimData("boss9_M_023", 0.5f, new Dictionary<string, float[]> { 
+			{
+				"weapon_on",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_024",
+			new AnimData("boss9_M_024", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_025",
+			new AnimData("boss9_M_025", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss9_M_025_1",
+			new AnimData("boss9_M_025_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_025_2",
+			new AnimData("boss9_M_025_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_025_3",
+			new AnimData("boss9_M_025_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_026",
+			new AnimData("boss9_M_026", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss9_M_026_1",
+			new AnimData("boss9_M_026_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_026_2",
+			new AnimData("boss9_M_026_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_026_3",
+			new AnimData("boss9_M_026_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_027",
+			new AnimData("boss9_M_027", 13f / 15f, new Dictionary<string, float[]>
+			{
+				{
+					"hit",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"weapon_on",
+					new float[1]
+				},
+				{
+					"move",
+					new float[1] { 0.4f }
+				}
+			})
+		},
+		{
+			"boss9_M_027_1",
+			new AnimData("boss9_M_027_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_027_2",
+			new AnimData("boss9_M_027_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_027_3",
+			new AnimData("boss9_M_027_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_028",
+			new AnimData("boss9_M_028", 2.666667f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_031",
+			new AnimData("boss9_M_031", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_032",
+			new AnimData("boss9_M_032", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_033",
+			new AnimData("boss9_M_033", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_034",
+			new AnimData("boss9_M_034", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_035",
+			new AnimData("boss9_M_035", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_036",
+			new AnimData("boss9_M_036", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_037",
+			new AnimData("boss9_M_037", 1.4f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[2] { 0f, 1.033333f }
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_037_1",
+			new AnimData("boss9_M_037_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_037_2",
+			new AnimData("boss9_M_037_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_037_3",
+			new AnimData("boss9_M_037_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_038_1",
+			new AnimData("boss9_M_038_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_038_2",
+			new AnimData("boss9_M_038_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_038_3",
+			new AnimData("boss9_M_038_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_039_1",
+			new AnimData("boss9_M_039_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_039_2",
+			new AnimData("boss9_M_039_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_039_3",
+			new AnimData("boss9_M_039_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_040_1",
+			new AnimData("boss9_M_040_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_040_2",
+			new AnimData("boss9_M_040_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_040_3",
+			new AnimData("boss9_M_040_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_041_1",
+			new AnimData("boss9_M_041_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_041_2",
+			new AnimData("boss9_M_041_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_041_3",
+			new AnimData("boss9_M_041_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_042_1",
+			new AnimData("boss9_M_042_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_042_2",
+			new AnimData("boss9_M_042_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_042_3",
+			new AnimData("boss9_M_042_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_043_1",
+			new AnimData("boss9_M_043_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_043_2",
+			new AnimData("boss9_M_043_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_043_3",
+			new AnimData("boss9_M_043_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_044_1",
+			new AnimData("boss9_M_044_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_044_2",
+			new AnimData("boss9_M_044_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_044_3",
+			new AnimData("boss9_M_044_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_045_1",
+			new AnimData("boss9_M_045_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_045_2",
+			new AnimData("boss9_M_045_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_045_3",
+			new AnimData("boss9_M_045_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_046_1",
+			new AnimData("boss9_M_046_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_046_2",
+			new AnimData("boss9_M_046_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_046_3",
+			new AnimData("boss9_M_046_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_047_1",
+			new AnimData("boss9_M_047_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_047_2",
+			new AnimData("boss9_M_047_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_047_3",
+			new AnimData("boss9_M_047_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
+		},
+		{
+			"boss9_M_048_1",
+			new AnimData("boss9_M_048_1", 1f, new Dictionary<string, float[]>
+			{
+				{
+					"move",
+					new float[1]
+				},
+				{
+					"weapon_off",
+					new float[1]
+				},
+				{
+					"move_end",
+					new float[1] { 0.5666667f }
+				},
+				{
+					"act0",
+					new float[1] { 0.6333334f }
+				},
+				{
+					"hit",
+					new float[1] { 0.6333334f }
+				}
+			})
+		},
+		{
+			"boss9_M_048_2",
+			new AnimData("boss9_M_048_2", 2f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[2] { 0f, 2f }
+			} })
+		},
+		{
+			"boss9_M_048_3",
+			new AnimData("boss9_M_048_3", 0.4f, new Dictionary<string, float[]> { 
+			{
+				"weapon_off",
+				new float[1]
+			} })
 		},
 		{
 			"boss9_M_ready",

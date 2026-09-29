@@ -5,10 +5,6 @@ namespace GameData.Domains.Map;
 
 public static class TravelRouteHelperData
 {
-	/// <summary>
-	/// 显示用路径缓存
-	/// 用于保存路径与index的映射关系
-	/// </summary>
 	private static Dictionary<(short, short), short> _pathDictionary;
 
 	public static IReadOnlyDictionary<(short, short), short> PathDictionary

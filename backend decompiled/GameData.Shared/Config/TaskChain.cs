@@ -8,531 +8,224 @@ namespace Config;
 [Serializable]
 public class TaskChain : ConfigData<TaskChainItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 主线任务链-完整主线
-		/// </summary>
 		public const int MainStory = 0;
 
-		/// <summary>
-		/// 支线任务链-振兴太吾
-		/// </summary>
 		public const int SideQuest_Construction = 13;
 
-		/// <summary>
-		/// 支线任务链-紫竹化身
-		/// </summary>
 		public const int PurpleBambooJunior = 20;
 
-		/// <summary>
-		/// 支线任务链-奇毒绝方
-		/// </summary>
 		public const int SectMainStory_Kongsang = 24;
 
-		/// <summary>
-		/// 支线任务链-血犼主线
-		/// </summary>
 		public const int SectMainStory_Xuehou = 25;
 
-		/// <summary>
-		/// 支线任务链-血犼村中
-		/// </summary>
 		public const int SectMainStory_Xuehou_Jixi = 26;
 
-		/// <summary>
-		/// 支线任务链-少林主线
-		/// </summary>
 		public const int SectMainStory_Shaolin = 27;
 
-		/// <summary>
-		/// 支线任务链-璇女主线
-		/// </summary>
 		public const int SectMainStory_Xuannv = 28;
 
-		/// <summary>
-		/// 支线任务链-武当主线
-		/// </summary>
 		public const int SectMainStory_Wudang = 29;
 
-		/// <summary>
-		/// 支线任务链-元山主线
-		/// </summary>
 		public const int SectMainStory_Yuanshan = 30;
 
-		/// <summary>
-		/// 支线任务链-狮相主线
-		/// </summary>
 		public const int SectMainStory_Shixiang = 31;
 
-		/// <summary>
-		/// 支线任务链-金刚主线
-		/// </summary>
 		public const int SectMainStory_Jingang = 32;
 
-		/// <summary>
-		/// 支线任务链-五仙主线
-		/// </summary>
 		public const int SectMainStory_Wuxian = 33;
 
-		/// <summary>
-		/// 支线任务链-峨眉主线
-		/// </summary>
 		public const int SectMainStory_Emei = 34;
 
-		/// <summary>
-		/// 支线任务链-峨眉新主线
-		/// </summary>
 		public const int SectMainStory_EmeiRemake = 172;
 
-		/// <summary>
-		/// 支线任务链-预备比武
-		/// </summary>
 		public const int SectMainStory_EmeiPrepare = 173;
 
-		/// <summary>
-		/// 支线任务链-探查妖族
-		/// </summary>
 		public const int SectMainStory_EmeiSeekEvil = 174;
 
-		/// <summary>
-		/// 支线任务链-青琅仙阁
-		/// </summary>
 		public const int SectMainStory_Ranshan = 35;
 
-		/// <summary>
-		/// 支线任务链-武当神树
-		/// </summary>
 		public const int SectMainStory_Wudang_HeavenlyTree = 36;
 
-		/// <summary>
-		/// 支线任务链-孤鸾镜水
-		/// </summary>
 		public const int PlayerShadowInMirrorChain = 37;
 
-		/// <summary>
-		/// 主线任务链-梦回剧情
-		/// </summary>
 		public const int CrossArchive_MainPlotChain = 38;
 
-		/// <summary>
-		/// 支线任务链-梦回取物
-		/// </summary>
 		public const int CrossArchive_FetchPast = 39;
 
-		/// <summary>
-		/// 支线任务链-五方神龙
-		/// </summary>
 		public const int LoongDLC = 40;
 
-		/// <summary>
-		/// 支线任务链-挑战神龙
-		/// </summary>
 		public const int LoongDLCCaptureLoong = 41;
 
-		/// <summary>
-		/// 支线任务链-灵池育蛟
-		/// </summary>
 		public const int LoongDLCNurtureJiao = 42;
 
-		/// <summary>
-		/// 支线任务链-百花主线
-		/// </summary>
 		public const int SectMainStory_Baihua = 43;
 
-		/// <summary>
-		/// 支线任务链-教导三尸
-		/// </summary>
 		public const int SectMainStory_Ranshan_Sanshi = 44;
 
-		/// <summary>
-		/// 支线任务链-寻找玄白
-		/// </summary>
 		public const int SectMainStory_Baihua_Combat = 45;
 
-		/// <summary>
-		/// 支线任务链-指点玄白
-		/// </summary>
 		public const int SectMainStory_Baihua_Relationship = 46;
 
-		/// <summary>
-		/// 支线任务链-伏龙化羽
-		/// </summary>
 		public const int SectMainStory_Fulong = 47;
 
-		/// <summary>
-		/// 支线任务链-神鸡寻羽
-		/// </summary>
 		public const int ChickenMap = 48;
 
-		/// <summary>
-		/// 支线任务链-铸剑主线
-		/// </summary>
 		public const int SectMainStory_Zhujian = 49;
 
-		/// <summary>
-		/// 支线任务链-铸剑技艺
-		/// </summary>
 		public const int SectMainStory_ZhujianHeritage = 50;
 
-		/// <summary>
-		/// 支线任务链-神木种植
-		/// </summary>
 		public const int PlantTrees = 51;
 
-		/// <summary>
-		/// 支线任务链-界青主线
-		/// </summary>
 		public const int SectMainStory_Jieqing = 52;
 
-		/// <summary>
-		/// 支线任务链-铸剑升级互动
-		/// </summary>
 		public const int SectMainStory_ZhujianUpgrade = 53;
 
-		/// <summary>
-		/// 支线任务链-武当升级互动
-		/// </summary>
 		public const int SectMainStory_WudangUpgrade = 54;
 
-		/// <summary>
-		/// 支线任务链-璇女升级互动
-		/// </summary>
 		public const int SectMainStory_UpgradeXuannv = 55;
 
-		/// <summary>
-		/// 支线任务链-五仙升级互动
-		/// </summary>
 		public const int SectMainStory_UpgradeWuxian = 56;
 
-		/// <summary>
-		/// 支线任务链-血犼升级互动
-		/// </summary>
 		public const int SectMainStory_UpgradeXuehou = 57;
 
-		/// <summary>
-		/// 支线任务链-空桑升级互动
-		/// </summary>
 		public const int SectMainStory_UpgradeKongsang = 58;
 
-		/// <summary>
-		/// 支线任务链-狮相升级互动
-		/// </summary>
 		public const int SectMainStory_ShixiangUpgrade = 59;
 
-		/// <summary>
-		/// 支线任务链-元山升级互动
-		/// </summary>
 		public const int SectMainStory_YuanshanUpgrade = 60;
 
-		/// <summary>
-		/// 支线任务链-然山升级互动
-		/// </summary>
 		public const int SectMainStory_RanshanUpgrade = 61;
 
-		/// <summary>
-		/// 支线任务链-金刚升级互动
-		/// </summary>
 		public const int SectMainStory_JingangUpgrade = 62;
 
-		/// <summary>
-		/// 支线任务链-伏龙升级互动
-		/// </summary>
 		public const int SectMainStory_FulongUpgrade = 63;
 
-		/// <summary>
-		/// 支线任务链-百花升级互动
-		/// </summary>
 		public const int SectMainStory_BaihuaUpgrade = 64;
 
-		/// <summary>
-		/// 支线任务链-百花互动剧情
-		/// </summary>
 		public const int SectMainStory_BaihuaStory = 65;
 
-		/// <summary>
-		/// 支线任务链-少林升级互动
-		/// </summary>
 		public const int SectMainStory_ShaolinUpgrade = 66;
 
-		/// <summary>
-		/// 支线任务链-峨眉升级互动
-		/// </summary>
 		public const int SectMainStory_EmeiUpgrade = 169;
 
-		/// <summary>
-		/// 支线任务链-界青升级互动
-		/// </summary>
 		public const int SectMainStory_JieqingUpgrade = 171;
+
+		public const int ThreeRealmsPower = 180;
+
+		public const int TwelveImmortals = 181;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 主线任务链-完整主线
-		/// </summary>
 		public static TaskChainItem MainStory => Instance[0];
 
-		/// <summary>
-		/// 支线任务链-振兴太吾
-		/// </summary>
 		public static TaskChainItem SideQuest_Construction => Instance[13];
 
-		/// <summary>
-		/// 支线任务链-紫竹化身
-		/// </summary>
 		public static TaskChainItem PurpleBambooJunior => Instance[20];
 
-		/// <summary>
-		/// 支线任务链-奇毒绝方
-		/// </summary>
 		public static TaskChainItem SectMainStory_Kongsang => Instance[24];
 
-		/// <summary>
-		/// 支线任务链-血犼主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Xuehou => Instance[25];
 
-		/// <summary>
-		/// 支线任务链-血犼村中
-		/// </summary>
 		public static TaskChainItem SectMainStory_Xuehou_Jixi => Instance[26];
 
-		/// <summary>
-		/// 支线任务链-少林主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Shaolin => Instance[27];
 
-		/// <summary>
-		/// 支线任务链-璇女主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Xuannv => Instance[28];
 
-		/// <summary>
-		/// 支线任务链-武当主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Wudang => Instance[29];
 
-		/// <summary>
-		/// 支线任务链-元山主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Yuanshan => Instance[30];
 
-		/// <summary>
-		/// 支线任务链-狮相主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Shixiang => Instance[31];
 
-		/// <summary>
-		/// 支线任务链-金刚主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Jingang => Instance[32];
 
-		/// <summary>
-		/// 支线任务链-五仙主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Wuxian => Instance[33];
 
-		/// <summary>
-		/// 支线任务链-峨眉主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Emei => Instance[34];
 
-		/// <summary>
-		/// 支线任务链-峨眉新主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_EmeiRemake => Instance[172];
 
-		/// <summary>
-		/// 支线任务链-预备比武
-		/// </summary>
 		public static TaskChainItem SectMainStory_EmeiPrepare => Instance[173];
 
-		/// <summary>
-		/// 支线任务链-探查妖族
-		/// </summary>
 		public static TaskChainItem SectMainStory_EmeiSeekEvil => Instance[174];
 
-		/// <summary>
-		/// 支线任务链-青琅仙阁
-		/// </summary>
 		public static TaskChainItem SectMainStory_Ranshan => Instance[35];
 
-		/// <summary>
-		/// 支线任务链-武当神树
-		/// </summary>
 		public static TaskChainItem SectMainStory_Wudang_HeavenlyTree => Instance[36];
 
-		/// <summary>
-		/// 支线任务链-孤鸾镜水
-		/// </summary>
 		public static TaskChainItem PlayerShadowInMirrorChain => Instance[37];
 
-		/// <summary>
-		/// 主线任务链-梦回剧情
-		/// </summary>
 		public static TaskChainItem CrossArchive_MainPlotChain => Instance[38];
 
-		/// <summary>
-		/// 支线任务链-梦回取物
-		/// </summary>
 		public static TaskChainItem CrossArchive_FetchPast => Instance[39];
 
-		/// <summary>
-		/// 支线任务链-五方神龙
-		/// </summary>
 		public static TaskChainItem LoongDLC => Instance[40];
 
-		/// <summary>
-		/// 支线任务链-挑战神龙
-		/// </summary>
 		public static TaskChainItem LoongDLCCaptureLoong => Instance[41];
 
-		/// <summary>
-		/// 支线任务链-灵池育蛟
-		/// </summary>
 		public static TaskChainItem LoongDLCNurtureJiao => Instance[42];
 
-		/// <summary>
-		/// 支线任务链-百花主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Baihua => Instance[43];
 
-		/// <summary>
-		/// 支线任务链-教导三尸
-		/// </summary>
 		public static TaskChainItem SectMainStory_Ranshan_Sanshi => Instance[44];
 
-		/// <summary>
-		/// 支线任务链-寻找玄白
-		/// </summary>
 		public static TaskChainItem SectMainStory_Baihua_Combat => Instance[45];
 
-		/// <summary>
-		/// 支线任务链-指点玄白
-		/// </summary>
 		public static TaskChainItem SectMainStory_Baihua_Relationship => Instance[46];
 
-		/// <summary>
-		/// 支线任务链-伏龙化羽
-		/// </summary>
 		public static TaskChainItem SectMainStory_Fulong => Instance[47];
 
-		/// <summary>
-		/// 支线任务链-神鸡寻羽
-		/// </summary>
 		public static TaskChainItem ChickenMap => Instance[48];
 
-		/// <summary>
-		/// 支线任务链-铸剑主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Zhujian => Instance[49];
 
-		/// <summary>
-		/// 支线任务链-铸剑技艺
-		/// </summary>
 		public static TaskChainItem SectMainStory_ZhujianHeritage => Instance[50];
 
-		/// <summary>
-		/// 支线任务链-神木种植
-		/// </summary>
 		public static TaskChainItem PlantTrees => Instance[51];
 
-		/// <summary>
-		/// 支线任务链-界青主线
-		/// </summary>
 		public static TaskChainItem SectMainStory_Jieqing => Instance[52];
 
-		/// <summary>
-		/// 支线任务链-铸剑升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_ZhujianUpgrade => Instance[53];
 
-		/// <summary>
-		/// 支线任务链-武当升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_WudangUpgrade => Instance[54];
 
-		/// <summary>
-		/// 支线任务链-璇女升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_UpgradeXuannv => Instance[55];
 
-		/// <summary>
-		/// 支线任务链-五仙升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_UpgradeWuxian => Instance[56];
 
-		/// <summary>
-		/// 支线任务链-血犼升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_UpgradeXuehou => Instance[57];
 
-		/// <summary>
-		/// 支线任务链-空桑升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_UpgradeKongsang => Instance[58];
 
-		/// <summary>
-		/// 支线任务链-狮相升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_ShixiangUpgrade => Instance[59];
 
-		/// <summary>
-		/// 支线任务链-元山升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_YuanshanUpgrade => Instance[60];
 
-		/// <summary>
-		/// 支线任务链-然山升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_RanshanUpgrade => Instance[61];
 
-		/// <summary>
-		/// 支线任务链-金刚升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_JingangUpgrade => Instance[62];
 
-		/// <summary>
-		/// 支线任务链-伏龙升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_FulongUpgrade => Instance[63];
 
-		/// <summary>
-		/// 支线任务链-百花升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_BaihuaUpgrade => Instance[64];
 
-		/// <summary>
-		/// 支线任务链-百花互动剧情
-		/// </summary>
 		public static TaskChainItem SectMainStory_BaihuaStory => Instance[65];
 
-		/// <summary>
-		/// 支线任务链-少林升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_ShaolinUpgrade => Instance[66];
 
-		/// <summary>
-		/// 支线任务链-峨眉升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_EmeiUpgrade => Instance[169];
 
-		/// <summary>
-		/// 支线任务链-界青升级互动
-		/// </summary>
 		public static TaskChainItem SectMainStory_JieqingUpgrade => Instance[171];
+
+		public static TaskChainItem ThreeRealmsPower => Instance[180];
+
+		public static TaskChainItem TwelveImmortals => Instance[181];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TaskChain Instance = new TaskChain();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -561,8 +254,8 @@ public class TaskChain : ConfigData<TaskChainItem, int>
 			73, 75, 76, 81, 82, 83, 84, 677, 678, 679,
 			680, 681, 682, 683, 684, 685, 686, 732, 730, 701,
 			702, 703, 704
-		}, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_0"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
-		_dataArray.Add(new TaskChainItem(1, ETaskChainGroup.MainStory, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 34, 35, 36, 37, 38, 39, 40, 41, 42, 43 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_1"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_33"));
+		}, new List<int>(), new List<int> { 351 }, LocalStringManager.GetConfig("TaskChain_language", "Name_0"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
+		_dataArray.Add(new TaskChainItem(1, ETaskChainGroup.MainStory, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 34, 35, 36, 37, 38, 39, 40, 41, 42, 43 }, new List<int>(), new List<int> { 351 }, LocalStringManager.GetConfig("TaskChain_language", "Name_1"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_33"));
 		_dataArray.Add(new TaskChainItem(2, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 0 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_2"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
 		_dataArray.Add(new TaskChainItem(3, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 1 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_3"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_41"));
 		_dataArray.Add(new TaskChainItem(4, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 6, 7, 8, 9 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_4"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_41"));
@@ -577,7 +270,7 @@ public class TaskChain : ConfigData<TaskChainItem, int>
 		_dataArray.Add(new TaskChainItem(13, ETaskChainGroup.OptionalTasks, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 23, 24 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_13"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_42"));
 		_dataArray.Add(new TaskChainItem(14, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 29 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_14"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
 		_dataArray.Add(new TaskChainItem(15, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 30 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_15"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
-		_dataArray.Add(new TaskChainItem(16, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 33 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_16"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_33"));
+		_dataArray.Add(new TaskChainItem(16, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 33 }, new List<int>(), new List<int> { 351 }, LocalStringManager.GetConfig("TaskChain_language", "Name_16"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_33"));
 		_dataArray.Add(new TaskChainItem(17, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 45, 46 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_17"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_35"));
 		_dataArray.Add(new TaskChainItem(18, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 48 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_18"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_42"));
 		_dataArray.Add(new TaskChainItem(19, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 62, 63 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_19"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_42"));
@@ -587,9 +280,9 @@ public class TaskChain : ConfigData<TaskChainItem, int>
 			54, 604, 605, 606, 55, 607, 608, 609, 56, 610,
 			611, 612, 57, 613, 614, 615, 58, 616, 617, 618,
 			59, 619, 620, 621, 60, 622, 623, 624
-		}, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_20"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_46"));
-		_dataArray.Add(new TaskChainItem(21, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 699, 68 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_21"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
-		_dataArray.Add(new TaskChainItem(22, ETaskChainGroup.MainStory, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 77, 78, 79, 80 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_22"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
+		}, new List<int>(), new List<int> { 357 }, LocalStringManager.GetConfig("TaskChain_language", "Name_20"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_46"));
+		_dataArray.Add(new TaskChainItem(21, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 699, 68 }, new List<int>(), new List<int> { 351 }, LocalStringManager.GetConfig("TaskChain_language", "Name_21"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
+		_dataArray.Add(new TaskChainItem(22, ETaskChainGroup.MainStory, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 77, 78, 79, 80 }, new List<int>(), new List<int> { 351 }, LocalStringManager.GetConfig("TaskChain_language", "Name_22"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
 		_dataArray.Add(new TaskChainItem(23, ETaskChainGroup.OptionalTasks, ETaskChainType.Parallel, 22, 84, -1, new List<int>(), new List<int> { 230 }, new List<int> { 246 }, LocalStringManager.GetConfig("TaskChain_language", "Name_23"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_40"));
 		_dataArray.Add(new TaskChainItem(24, ETaskChainGroup.SectMainStory, ETaskChainType.Line, -1, -1, -1, new List<int>
 		{
@@ -785,20 +478,20 @@ public class TaskChain : ConfigData<TaskChainItem, int>
 		{
 			625, 626, 627, 628, 629, 630, 631, 632, 633, 634,
 			635, 636, 637, 638, 639, 640, 641
-		}, new List<int>(), new List<int> { 348 }, LocalStringManager.GetConfig("TaskChain_language", "Name_165"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_48"));
+		}, new List<int>(), new List<int> { 357 }, LocalStringManager.GetConfig("TaskChain_language", "Name_165"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_48"));
 		_dataArray.Add(new TaskChainItem(166, ETaskChainGroup.OptionalTasks, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 642, 643 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_166"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: true, "ui9_back_task_chain_icon_35"));
-		_dataArray.Add(new TaskChainItem(167, ETaskChainGroup.MainStory, ETaskChainType.Line, -1, 84, -1, new List<int> { 644, 645, 646, 647, 648, 649, 650 }, new List<int>(), new List<int> { 348 }, LocalStringManager.GetConfig("TaskChain_language", "Name_167"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_49"));
+		_dataArray.Add(new TaskChainItem(167, ETaskChainGroup.MainStory, ETaskChainType.Line, -1, 84, -1, new List<int> { 644, 645, 646, 647, 648, 649, 650 }, new List<int>(), new List<int> { 357 }, LocalStringManager.GetConfig("TaskChain_language", "Name_167"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_49"));
 		_dataArray.Add(new TaskChainItem(168, ETaskChainGroup.MainStory, ETaskChainType.Parallel, -1, 84, -1, new List<int>
 		{
 			651, 652, 653, 654, 655, 656, 657, 658, 659, 660,
 			661, 662, 663, 664, 665, 666, 667, 668, 669, 670
-		}, new List<int>(), new List<int> { 348 }, LocalStringManager.GetConfig("TaskChain_language", "Name_168"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_47"));
+		}, new List<int>(), new List<int> { 357 }, LocalStringManager.GetConfig("TaskChain_language", "Name_168"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_47"));
 		_dataArray.Add(new TaskChainItem(169, ETaskChainGroup.SectMainStory, ETaskChainType.Line, -1, -1, -1, new List<int> { 671, 672, 673, 674, 675, 676 }, new List<int>(), new List<int> { 348 }, LocalStringManager.GetConfig("TaskChain_language", "Name_169"), 2, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_18"));
 		_dataArray.Add(new TaskChainItem(170, ETaskChainGroup.MainStory, ETaskChainType.Parallel, -1, -1, -1, new List<int>
 		{
 			700, 687, 688, 689, 690, 691, 692, 693, 694, 695,
 			696, 697, 698
-		}, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_170"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
+		}, new List<int>(), new List<int> { 351 }, LocalStringManager.GetConfig("TaskChain_language", "Name_170"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_50"));
 		_dataArray.Add(new TaskChainItem(171, ETaskChainGroup.SectMainStory, ETaskChainType.Line, -1, -1, -1, new List<int> { 705, 706, 707, 708 }, new List<int>(), new List<int> { 348 }, LocalStringManager.GetConfig("TaskChain_language", "Name_171"), 13, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_20"));
 		_dataArray.Add(new TaskChainItem(172, ETaskChainGroup.SectMainStory, ETaskChainType.Line, -1, -1, -1, new List<int>
 		{
@@ -811,14 +504,27 @@ public class TaskChain : ConfigData<TaskChainItem, int>
 		_dataArray.Add(new TaskChainItem(176, ETaskChainGroup.OptionalTasks, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 734, 733, 737, 736, 735 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_176"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: true, "ui9_back_task_chain_icon_38"));
 		_dataArray.Add(new TaskChainItem(177, ETaskChainGroup.OptionalTasks, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 739, 740, 741, 742 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_177"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: true, "ui9_back_task_chain_icon_36"));
 		_dataArray.Add(new TaskChainItem(178, ETaskChainGroup.OptionalTasks, ETaskChainType.Line, -1, -1, -1, new List<int> { 743 }, new List<int>(), new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_178"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: true, "ui9_back_task_chain_icon_41"));
+		_dataArray.Add(new TaskChainItem(179, ETaskChainGroup.MainStory, ETaskChainType.Line, -1, -1, -1, new List<int> { 744, 745, 746 }, new List<int> { 351 }, new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_179"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_51"));
+	}
+
+	private void CreateItems3()
+	{
+		_dataArray.Add(new TaskChainItem(180, ETaskChainGroup.MainStory, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 747, 748, 749, 750 }, new List<int> { 351 }, new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_180"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_51"));
+		_dataArray.Add(new TaskChainItem(181, ETaskChainGroup.OptionalTasks, ETaskChainType.Parallel, -1, -1, -1, new List<int>
+		{
+			751, 752, 753, 754, 755, 756, 757, 758, 759, 760,
+			761, 762, 763
+		}, new List<int> { 351 }, new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_181"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, "ui9_back_task_chain_icon_51"));
+		_dataArray.Add(new TaskChainItem(182, ETaskChainGroup.OptionalTasks, ETaskChainType.Parallel, -1, -1, -1, new List<int> { 764, 765, 766, 767, 768, 769, 770, 771, 772, 773 }, new List<int> { 351 }, new List<int>(), LocalStringManager.GetConfig("TaskChain_language", "Name_182"), 0, new AutoTriggerMonthlyEvent[0], relateAdventure: false, null));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<TaskChainItem>(179);
+		_dataArray = new List<TaskChainItem>(183);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();
+		CreateItems3();
 	}
 }

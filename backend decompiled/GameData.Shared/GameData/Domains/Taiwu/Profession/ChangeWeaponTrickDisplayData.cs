@@ -8,9 +8,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Profession;
 
-/// <summary>
-/// 匠人-匠心独具-设置武器式的界面显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class ChangeWeaponTrickDisplayData : ISerializableGameData
 {
@@ -45,7 +42,7 @@ public class ChangeWeaponTrickDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 1;
+		int totalSize = 41;
 		if (InventoryItemList != null)
 		{
 			totalSize += 2;
@@ -95,8 +92,6 @@ public class ChangeWeaponTrickDisplayData : ISerializableGameData
 			totalSize += 2;
 		}
 		totalSize = ((AllMaterialInventory == null) ? (totalSize + 2) : (totalSize + (2 + AllMaterialInventory.GetSerializedSize())));
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize += EmptyToolKey.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

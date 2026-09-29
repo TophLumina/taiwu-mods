@@ -248,8 +248,6 @@ public class ItemDomain : BaseGameDataDomain
 
 	private SingleValueCollectionModificationCollection<int> _modificationsMedicineExtraAddPercent = SingleValueCollectionModificationCollection<int>.Create();
 
-	private Queue<uint> _pendingLoadingOperationIds;
-
 	[Obsolete("Instead by FullPoisonEffects. Now only for archive data fix. Do not delete this code.")]
 	public Dictionary<int, PoisonEffects> PoisonItems => _poisonItems;
 
@@ -267,6 +265,29 @@ public class ItemDomain : BaseGameDataDomain
 				book.SetOutlinePageType(context, 0);
 				AdaptableLog.Warning($"Fix Abnormal Book Outline Page: {book.GetItemKey()}.");
 			}
+		}
+	}
+
+	public void RemoveInvalidItemInInventory(Inventory inventory)
+	{
+		Dictionary<ItemKey, int> dict = inventory?.Items;
+		if (dict == null)
+		{
+			return;
+		}
+		foreach (KeyValuePair<ItemKey, int> item in dict)
+		{
+			if (!ItemTemplateHelper.IsPureStackable(item.Key) && item.Value > 1)
+			{
+				AdaptableLog.Warning($"non-stackable item {item.Key} has count = {item.Value} > 1, remove exceed.");
+				dict[item.Key] = 1;
+			}
+		}
+		Dictionary<ItemKey, int> removed = dict.Where((KeyValuePair<ItemKey, int> x) => TryGetBaseItem(x.Key) == null).ToDictionary((KeyValuePair<ItemKey, int> k) => k.Key, (KeyValuePair<ItemKey, int> v) => v.Value);
+		if (removed.Count != 0)
+		{
+			dict.RemoveDuplicateKeys(removed);
+			AdaptableLog.Warning("Removing invalid " + string.Join(", ", removed.Select((KeyValuePair<ItemKey, int> kv) => $"{kv.Key}x{kv.Value}")));
 		}
 	}
 
@@ -1272,7 +1293,6 @@ public class ItemDomain : BaseGameDataDomain
 	public ItemDisplayData GetItemDisplayData(ItemBase item, int amount = 1, int charId = -1, sbyte itemSourceType = -1)
 	{
 		ItemKey itemKey = item.GetItemKey();
-		LoveTokenDataItem loveTokenDataItem;
 		ItemDisplayData itemDisplayData = new ItemDisplayData(itemKey, amount)
 		{
 			Durability = item.GetCurrDurability(),
@@ -1288,8 +1308,8 @@ public class ItemDomain : BaseGameDataDomain
 			BookPageProgress = GetBookPageProgress(itemKey),
 			BookPageTypes = GetBookPageTypes(itemKey),
 			IsThreeCorpseKeepingLegendaryBook = DomainManager.Extra.IsThreeCorpseKeepingLegendaryBook(itemKey),
-			LoveTokenDataItem = (DomainManager.Extra.TryGetLoveTokenData(itemKey, out loveTokenDataItem) ? loveTokenDataItem : new LoveTokenDataItem()),
-			IsInCurrentCricketPreset = (itemKey.ItemType == 11 && charId == DomainManager.Taiwu.GetTaiwuCharId() && DomainManager.Taiwu.CheckItemIsInCurrentCricketPreset(itemKey))
+			IsInCurrentCricketPreset = (itemKey.ItemType == 11 && charId == DomainManager.Taiwu.GetTaiwuCharId() && DomainManager.Taiwu.CheckItemIsInCurrentCricketPreset(itemKey)),
+			ForceNotTransferable = GetForceNotTransferable(charId, itemKey)
 		};
 		if (ModificationStateHelper.IsActive(itemKey.ModificationState, 2))
 		{
@@ -1328,8 +1348,7 @@ public class ItemDomain : BaseGameDataDomain
 			int rangeMax = Math.Min(baseRatio + changeRange, 100);
 			itemDisplayData.WeaponInnerRatio = (sbyte)Math.Clamp(expect.First, rangeMin, rangeMax);
 			itemDisplayData.WeaponTrickList = weapon.GetTricks();
-			WeaponEffectDisplayData[] weaponEffects = DomainManager.Combat.GetWeaponEffects(item.GetItemKey());
-			itemDisplayData.WeaponEffectDisplayDataList = weaponEffects.Where((WeaponEffectDisplayData e) => e.EffectKey.SkillId >= 0).ToList();
+			itemDisplayData.WeaponEffectDisplayDataList = DomainManager.Combat.GetWeaponEffects(item.GetItemKey());
 		}
 		else if (item is Armor armor)
 		{
@@ -1400,6 +1419,12 @@ public class ItemDomain : BaseGameDataDomain
 			itemDisplayData.JiaoLoongDisplayData = DomainManager.Extra.GetJiaoLoongDisplayDataByItemKey(itemKey, getItemData: false);
 		}
 		return itemDisplayData;
+	}
+
+	public static bool GetForceNotTransferable(int charId, ItemKey key)
+	{
+		GameData.Domains.Character.Character character;
+		return DomainManager.Character.TryGetElement_Objects(charId, out character) && !GameData.Domains.Character.SharedMethods.CanModifyEquipSlot(character.GetTemplateId(), (sbyte)character.GetEquipment().IndexOf(key), key);
 	}
 
 	private sbyte[] GetBookPageStates(ItemKey itemKey)
@@ -1837,10 +1862,6 @@ public class ItemDomain : BaseGameDataDomain
 	public static bool CanItemBeLost(ItemKey itemKey)
 	{
 		if (!ItemTemplateHelper.IsTransferable(itemKey.ItemType, itemKey.TemplateId))
-		{
-			return false;
-		}
-		if (ModificationStateHelper.IsActive(itemKey.ModificationState, 4))
 		{
 			return false;
 		}
@@ -2916,10 +2937,6 @@ public class ItemDomain : BaseGameDataDomain
 		{
 			RemoveElement_RefinedItems(itemId, context);
 		}
-		if (ModificationStateHelper.IsActive(state, 4))
-		{
-			DomainManager.Extra.RemoveLoveTokenData(context, itemKey, itemIsDeleted: true);
-		}
 		ProfessionData professionData = DomainManager.Extra.GetProfessionData(2);
 		if (professionData?.SkillsData is CraftSkillsData craftSkillsData)
 		{
@@ -2990,6 +3007,11 @@ public class ItemDomain : BaseGameDataDomain
 			return (short)(groupBeginId + randomItemGrade);
 		}
 		return ItemTemplateHelper.GetTemplateIdInGroup(itemType, groupBeginId, randomItemGrade);
+	}
+
+	public static sbyte GetGradeAfterSatisfactionOffset(sbyte grade)
+	{
+		return (sbyte)Math.Clamp(grade + -2, 0, 8);
 	}
 
 	public static sbyte GenerateRandomItemGrade(IRandomSource random, sbyte itemGrade)
@@ -3792,7 +3814,7 @@ public class ItemDomain : BaseGameDataDomain
 			if (shouldEnable && enabled)
 			{
 				SpecialEffectBase effect = DomainManager.SpecialEffect.Get(enabledEffectId);
-				if (effect.CharacterId == charId)
+				if (effect != null && effect.CharacterId == charId)
 				{
 					continue;
 				}
@@ -3800,8 +3822,8 @@ public class ItemDomain : BaseGameDataDomain
 			}
 			if (shouldEnable)
 			{
-				short effectTemplateId = mysteryEffect.BonusEffects[i];
-				long effectId = DomainManager.SpecialEffect.AddEquipmentEffect(context, charId, itemId, effectTemplateId);
+				short templateId = mysteryEffect.BonusEffects[i];
+				long effectId = DomainManager.SpecialEffect.AddEquipmentEffect(context, charId, itemId, templateId);
 				MysteryData mysteryData2 = mysteryData;
 				if (mysteryData2.EffectIds == null)
 				{
@@ -3864,6 +3886,30 @@ public class ItemDomain : BaseGameDataDomain
 			SetElement_MysteryData(itemKey.Id, mysteryData, context);
 			equipment.SetEquipmentEffectId(equipment.GetEquipmentEffectId(), context);
 		}
+	}
+
+	public void TransferTaiwuMysteryCompatibility(DataContext context, int oldTaiwuCharId, int newTaiwuCharId)
+	{
+		List<int> transferTargets = ObjectPool<List<int>>.Instance.Get();
+		foreach (KeyValuePair<int, MysteryData> mysteryDatum in _mysteryData)
+		{
+			mysteryDatum.Deconstruct(out var key, out var value);
+			int itemId = key;
+			MysteryData data = value;
+			Dictionary<int, int> compatibility = data.Compatibility;
+			if (compatibility != null && compatibility.Count > 0 && data.Compatibility.TryGetValue(oldTaiwuCharId, out var oldValue))
+			{
+				transferTargets.AddUnique(itemId);
+				data.Compatibility.Accumulate(newTaiwuCharId, oldValue);
+				data.Compatibility[newTaiwuCharId] = Math.Min(data.Compatibility[newTaiwuCharId], 999999999);
+				data.Compatibility.Remove(oldTaiwuCharId);
+			}
+		}
+		foreach (int transferTarget in transferTargets)
+		{
+			SetElement_MysteryData(transferTarget, _mysteryData[transferTarget], context);
+		}
+		ObjectPool<List<int>>.Instance.Return(transferTargets);
 	}
 
 	public CValueModify CalcMysteryBonus(ItemKey itemKey, ECharacterPropertyReferencedType propertyType)
@@ -6236,7 +6282,7 @@ public class ItemDomain : BaseGameDataDomain
 		case 4:
 			return GameData.Serializer.Serializer.Serialize(instance.GetModificationState(), dataPool);
 		default:
-			if (fieldId >= 72)
+			if (fieldId >= 73)
 			{
 				throw new Exception($"Unsupported fieldId {fieldId}");
 			}
@@ -6278,7 +6324,7 @@ public class ItemDomain : BaseGameDataDomain
 			return;
 		}
 		}
-		if (fieldId >= 72)
+		if (fieldId >= 73)
 		{
 			throw new Exception($"Unsupported fieldId {fieldId}");
 		}

@@ -3,27 +3,15 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 用于演出的摧破功法装备数据
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct SkillEquipmentSnapshot : ISerializableGameData
 {
-	/// <summary>
-	/// 兵器道具键
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey WeaponOrShoesKey = ItemKey.Invalid;
 
-	/// <summary>
-	/// 兵器初始耐久
-	/// </summary>
 	[SerializableGameDataField]
 	public short WeaponOrShoesStartDurability = 0;
 
-	/// <summary>
-	/// 兵器结束耐久
-	/// </summary>
 	[SerializableGameDataField]
 	public short WeaponOrShoesEndDurability = 0;
 
@@ -38,13 +26,11 @@ public struct SkillEquipmentSnapshot : ISerializableGameData
 		WeaponOrShoesEndDurability = 0;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -55,7 +41,6 @@ public struct SkillEquipmentSnapshot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -72,7 +57,6 @@ public struct SkillEquipmentSnapshot : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

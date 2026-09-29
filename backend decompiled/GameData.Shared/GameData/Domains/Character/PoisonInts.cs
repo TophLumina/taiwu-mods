@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using GameData.Domains.Item;
@@ -6,23 +9,15 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 毒素的量
-/// </summary>
 [Serializable]
-public struct PoisonInts : ISerializableGameData, ISerializable
+public struct PoisonInts : ISerializableGameData, ISerializable, IEnumerable<(sbyte Type, int Amount)>, IEnumerable
 {
-	/// <summary>
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.Combat.PoisonType" />
-	/// </summary>
+	public const int DisplayAsImmune = -2;
+
+	public const int DisplayAsResist = -1;
+
 	public unsafe fixed int Items[6];
 
-	/// <summary>
-	/// 直接通过 index 安全访问数据的接口.
-	/// 主要用于对性能要求不是特别严格的情况 (非过月逻辑中频繁调用或可能每帧多次调用的逻辑皆可)
-	/// </summary>
-	/// <param name="index">毒素类型<see cref="T:GameData.Domains.Combat.PoisonType" /></param>
 	public unsafe ref int this[int index]
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -36,12 +31,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 PoisonType.Count == 6.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (int* items = Items)
@@ -52,10 +41,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 从配置表构造对象
-	/// </summary>
-	/// <param name="poisons"></param>
 	public unsafe PoisonInts(params int[] poisons)
 	{
 		for (int i = 0; i < 6; i++)
@@ -116,10 +101,35 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 添加毒素量
-	/// </summary>
-	/// <param name="delta"></param>
+	public IEnumerator<(sbyte, int)> GetEnumerator()
+	{
+		for (sbyte i = 0; i < 6; i++)
+		{
+			yield return (i, this[i]);
+		}
+	}
+
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return GetEnumerator();
+	}
+
+	public IEnumerable<string> GetDesc(LanguageKey key = LanguageKey.LK_CharacterMenu_PoisonAccumulator_EatPoisonedItem_Content_Detail, Func<sbyte, string> nameFunc = null)
+	{
+		if (nameFunc == null)
+		{
+			nameFunc = DefaultPoisonNameWithIcon;
+		}
+		return from item in this
+			where item.Amount != 0
+			select LocalStringManager.GetFormat(LanguageKey.LK_CharacterMenu_PoisonAccumulator_EatPoisonedItem_Content_Detail, nameFunc(item.Type), item.Amount);
+	}
+
+	private static string DefaultPoisonNameWithIcon(sbyte ty)
+	{
+		return $"<SpName=ui9_mousetip_icon_poison_{ty}_0>{LocalStringManager.Get($"LK_Poison_Name_{ty}")}";
+	}
+
 	public unsafe void Add(PoisonShorts delta)
 	{
 		for (int i = 0; i < 6; i++)
@@ -133,10 +143,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 添加毒素量
-	/// </summary>
-	/// <param name="delta"></param>
 	public unsafe void Add(ref PoisonInts delta)
 	{
 		for (int i = 0; i < 6; i++)
@@ -150,11 +156,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 计算并返回两者的差值
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public unsafe PoisonInts Subtract(ref PoisonInts other)
 	{
 		PoisonInts delta = default(PoisonInts);
@@ -165,9 +166,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		return delta;
 	}
 
-	/// <summary>
-	/// 获取倒转了正负号后的对象
-	/// </summary>
 	public unsafe PoisonInts GetReversed()
 	{
 		PoisonInts reversed = default(PoisonInts);
@@ -178,10 +176,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		return reversed;
 	}
 
-	/// <summary>
-	/// 是否含有非零值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool IsNonZero()
 	{
 		fixed (int* pItems = Items)
@@ -217,10 +211,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		return type;
 	}
 
-	/// <summary>
-	/// 获取和
-	/// </summary>
-	/// <returns></returns>
 	public unsafe int Sum()
 	{
 		int sum = 0;
@@ -231,10 +221,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		return sum;
 	}
 
-	/// <summary>
-	/// 最大值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe int Max()
 	{
 		int max = 0;
@@ -259,11 +245,6 @@ public struct PoisonInts : ISerializableGameData, ISerializable
 		return result;
 	}
 
-	/// <summary>
-	/// 获取值
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public unsafe int Get(int index)
 	{
 		return Items[index];

@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 界青地区主线 - 七巧板游戏数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class SectStoryJieqingGame : ISerializableGameData
 {
@@ -46,103 +43,52 @@ public class SectStoryJieqingGame : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 棋盘边长
-	/// </summary>
 	private const int BoardSize = 7;
 
-	/// <summary>
-	/// 预览区大小
-	/// </summary>
 	private const int PreviewSize = 4;
 
-	/// <summary>
-	/// 每章节的回合数
-	/// </summary>
 	private const int ChapterTurnCount = 4;
 
-	/// <summary>
-	/// 当前回合
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int CurrentTurn { get; set; }
 
-	/// <summary>
-	/// 当前分数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int CurrentScore { get; set; }
 
-	/// <summary>
-	/// 最大随机次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int RerollMaxCount { get; set; }
 
-	/// <summary>
-	/// 剩余随机次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public int RerollLeftCount { get; set; }
 
-	/// <summary>
-	/// 剩余重开次数
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public int ReopenLeftCount { get; set; }
 
-	/// <summary>
-	/// 游戏结果状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public sbyte GameResult { get; set; }
 
-	/// <summary>
-	/// 上次预览区的七巧板id
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public short LastPeaceTemplateId { get; set; }
 
-	/// <summary>
-	/// 当前预览区的七巧板id
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public short CurrPeaceTemplateId { get; set; }
 
-	/// <summary>
-	/// 当前预览区的七巧板是否镜像翻转
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public bool CurrPeaceIsFlipped { get; set; }
 
-	/// <summary>
-	/// 当前预览区的七巧板旋转状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	public sbyte CurrPeaceRotationState { get; set; }
 
-	/// <summary>
-	/// 棋盘放置的棋子状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	public List<JieqingGameChessData> BroadChessData { get; set; }
 
-	/// <summary>
-	/// 下个预览区的七巧板id
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 11)]
 	public short NextPieceTemplateId { get; set; }
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectStoryJieqingGame()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectStoryJieqingGame(SectStoryJieqingGame other)
 	{
 		CurrentTurn = other.CurrentTurn;
@@ -172,9 +118,6 @@ public class SectStoryJieqingGame : ISerializableGameData
 		NextPieceTemplateId = other.NextPieceTemplateId;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectStoryJieqingGame other)
 	{
 		CurrentTurn = other.CurrentTurn;

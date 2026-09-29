@@ -4,18 +4,9 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 一个 Area 中的动物信息
-/// <para>已经过时</para>
-/// </summary>
 [Obsolete]
 public class AnimalPlaceData : ISerializableGameData
 {
-	/// <summary>
-	/// 地格上的动物模板 Id
-	/// K: 地格 Id
-	/// V: 动物的 Character 模板 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, short> BlockAnimalCharacterTemplateIds;
 

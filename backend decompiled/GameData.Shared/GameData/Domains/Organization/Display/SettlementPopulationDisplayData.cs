@@ -3,33 +3,18 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Organization.Display;
 
-/// <summary>
-/// 定居点人口显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class SettlementPopulationDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 成年男性数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int ManCount;
 
-	/// <summary>
-	/// 成年女性数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int WomanCount;
 
-	/// <summary>
-	/// 孩童(男)数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int BoyCount;
 
-	/// <summary>
-	///  孩童(女)数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int GirlCount;
 

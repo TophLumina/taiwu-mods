@@ -3,27 +3,15 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 破绽/点穴条目
-/// </summary>
 [SerializableGameData(NotForArchive = true, NotForDisplayModule = true)]
 public struct FlawOrAcupointEntry : ISerializableGameData, IComparable<FlawOrAcupointEntry>
 {
-	/// <summary>
-	/// 等级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Level;
 
-	/// <summary>
-	/// 总帧数
-	/// </summary>
 	[SerializableGameDataField]
 	public int TotalFrame;
 
-	/// <summary>
-	/// 剩余帧数
-	/// </summary>
 	[SerializableGameDataField]
 	public int LeftFrame;
 
@@ -56,13 +44,11 @@ public struct FlawOrAcupointEntry : ISerializableGameData, IComparable<FlawOrAcu
 		return TotalFrame.CompareTo(other.TotalFrame);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 9;
@@ -73,7 +59,6 @@ public struct FlawOrAcupointEntry : ISerializableGameData, IComparable<FlawOrAcu
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*pData = (byte)Level;
@@ -89,7 +74,6 @@ public struct FlawOrAcupointEntry : ISerializableGameData, IComparable<FlawOrAcu
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

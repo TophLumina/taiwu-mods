@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 旗舰版选择角色使用的角色显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class CharacterDisplayDataForUltimateSelect : ISerializableGameData
 {
@@ -144,21 +141,12 @@ public class CharacterDisplayDataForUltimateSelect : ISerializableGameData
 	[SerializableGameDataField]
 	public sbyte VillagerNeedWaitTime;
 
-	/// <summary>
-	/// 是否被某人关押、被监狱关押、受困于奇遇，置灰此NPC；
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Trapped;
 
-	/// <summary>
-	/// 本月是否被邀请过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Invited;
 
-	/// <summary>
-	/// 是否正在比邀约更优先的行动中
-	/// </summary>
 	[SerializableGameDataField]
 	public bool PrioritizeActionOverInvite;
 
@@ -176,13 +164,11 @@ public class CharacterDisplayDataForUltimateSelect : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 270;
@@ -195,7 +181,6 @@ public class CharacterDisplayDataForUltimateSelect : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -298,7 +283,6 @@ public class CharacterDisplayDataForUltimateSelect : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

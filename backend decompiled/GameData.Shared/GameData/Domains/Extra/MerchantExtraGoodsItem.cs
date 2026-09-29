@@ -2,21 +2,12 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 额外商品信息
-/// </summary>
 [SerializableGameData]
 public struct MerchantExtraGoodsItem : ISerializableGameData
 {
-	/// <summary>
-	/// 商人行囊的序号
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Index;
 
-	/// <summary>
-	/// 额外物品的实际ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 

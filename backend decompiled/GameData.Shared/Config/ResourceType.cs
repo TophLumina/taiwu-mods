@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class ResourceType : ConfigData<ResourceTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ResourceType Instance = new ResourceType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "LifeSkillType", "PossibleBuildingCoreItem", "PossibleUpgradedBuildingCoreItem", "TemplateId", "Icon", "ImgPrefix" };

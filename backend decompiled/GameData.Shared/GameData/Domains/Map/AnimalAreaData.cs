@@ -3,27 +3,16 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 一个 Area 中的动物信息
-/// <para>替代 <see cref="T:GameData.Domains.Map.AnimalPlaceData" /> 的更新版本，支持每个地格上存储复数个单元</para>
-/// </summary>
 public class AnimalAreaData : ISerializableGameData
 {
-	/// <summary>
-	/// 地格上的动物模板 Id
-	/// K: 地格 Id
-	/// V: 动物的 Character 模板 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, List<short>> BlockAnimalCharacterTemplateIdList = new Dictionary<short, List<short>>();
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int offset = 0;
@@ -61,7 +50,6 @@ public class AnimalAreaData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -105,7 +93,6 @@ public class AnimalAreaData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

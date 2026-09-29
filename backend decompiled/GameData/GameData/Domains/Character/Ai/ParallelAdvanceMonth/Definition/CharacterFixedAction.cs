@@ -9,6 +9,8 @@ public class CharacterFixedAction : CharacterParallelActionWithTarget<CharacterF
 
 	public int EndAreaId => 141;
 
+	public bool IsEnabled => !DomainManager.TaiwuEvent.GetHideAllMapBlockCharacters();
+
 	public void Execute(DataContext context, Character character, HashSet<int> targetCharIds)
 	{
 		character.PeriAdvanceMonth_ExecuteFixedActions(context, targetCharIds);

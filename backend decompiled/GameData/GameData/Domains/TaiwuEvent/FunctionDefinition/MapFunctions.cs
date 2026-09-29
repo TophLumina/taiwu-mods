@@ -229,4 +229,13 @@ public class MapFunctions
 	{
 		DomainManager.Map.ChangeBlockTemplate(runtime.Context, block, blockTemplateId);
 	}
+
+	[EventFunction(935)]
+	private static void ClearBlockEnemies(EventScriptRuntime runtime, MapBlockData block)
+	{
+		if (block != null)
+		{
+			DomainManager.Map.ClearBlockRandomEnemies(runtime.Context, block);
+		}
+	}
 }

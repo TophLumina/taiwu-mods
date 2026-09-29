@@ -6,135 +6,72 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.CombatSkill;
 
-/// <summary>
-/// 功法显示数据。用于任务列表中显示的简化版信息
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData, IFilterableCombatSkill
 {
-	/// <summary>
-	/// 人物ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 功法模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 威力
-	/// </summary>
 	[SerializableGameDataField]
 	public short Power;
 
-	/// <summary>
-	/// 已经突破成功
-	/// </summary>
 	[SerializableGameDataField]
 	public bool BreakSuccess;
 
-	/// <summary>
-	/// 激活状态
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort ActivationState;
 
-	/// <summary>
-	/// 研读状态
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort ReadingState;
 
-	/// <summary>
-	/// 玄机品级
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> BreakBonusGrades;
 
-	/// <summary>
-	/// 是否被废除
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Revoked;
 
-	/// <summary>
-	///
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LuohanId;
 
-	/// <summary>
-	/// 是否精解
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Mastered;
 
-	/// <summary>
-	/// 生效状态
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanAffect;
 
-	/// <summary>
-	/// 梦回合并导致突破盘冲突，功法无法生效
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Conflicting;
 
-	/// <summary>
-	/// 占用格数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte GridCount;
 
-	/// <summary>
-	/// 功法是否被收藏，太吾专属数据
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsFavorite;
 
-	/// <summary>
-	/// 是否已装备到任何方案
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInAnyEquipPlans;
 
-	/// <summary>
-	/// 是否有峨眉派突破加成
-	/// </summary>
+	[SerializableGameDataField]
+	public bool IsInCurrentEquipPlan;
+
 	[SerializableGameDataField]
 	public bool HasSectEmeiSkillBreakBonus;
 
-	/// <summary>
-	/// 最大可获得内力
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaxObtainableNeili;
 
-	/// <summary>
-	/// 已获得内力
-	/// </summary>
 	[SerializableGameDataField]
 	public short ObtainedNeili;
 
-	/// <summary>
-	/// 周天五行起始类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FiveElementTransferTypeWhileLooping;
 
-	/// <summary>
-	/// 周天五行目标类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte FiveElementDestTypeWhileLooping;
 
-	/// <summary>
-	/// 实战度
-	/// </summary>
 	[SerializableGameDataField]
 	public int CombatSkillProficiency;
 
@@ -188,16 +125,10 @@ public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData
 
 	private CombatSkillItem SkillConfig => Config.CombatSkill.Instance[TemplateId];
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CombatSkillDisplayDataCharacterMenuListItem()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CombatSkillDisplayDataCharacterMenuListItem(CombatSkillDisplayDataCharacterMenuListItem other)
 	{
 		CharId = other.CharId;
@@ -215,6 +146,7 @@ public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData
 		GridCount = other.GridCount;
 		IsFavorite = other.IsFavorite;
 		IsInAnyEquipPlans = other.IsInAnyEquipPlans;
+		IsInCurrentEquipPlan = other.IsInCurrentEquipPlan;
 		HasSectEmeiSkillBreakBonus = other.HasSectEmeiSkillBreakBonus;
 		MaxObtainableNeili = other.MaxObtainableNeili;
 		ObtainedNeili = other.ObtainedNeili;
@@ -223,9 +155,6 @@ public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData
 		CombatSkillProficiency = other.CombatSkillProficiency;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CombatSkillDisplayDataCharacterMenuListItem other)
 	{
 		CharId = other.CharId;
@@ -243,6 +172,7 @@ public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData
 		GridCount = other.GridCount;
 		IsFavorite = other.IsFavorite;
 		IsInAnyEquipPlans = other.IsInAnyEquipPlans;
+		IsInCurrentEquipPlan = other.IsInCurrentEquipPlan;
 		HasSectEmeiSkillBreakBonus = other.HasSectEmeiSkillBreakBonus;
 		MaxObtainableNeili = other.MaxObtainableNeili;
 		ObtainedNeili = other.ObtainedNeili;
@@ -258,7 +188,7 @@ public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 32;
+		int totalSize = 33;
 		totalSize = ((BreakBonusGrades == null) ? (totalSize + 2) : (totalSize + (2 + BreakBonusGrades.Count)));
 		if (totalSize > 4)
 		{
@@ -314,6 +244,8 @@ public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData
 		*pCurrData = (IsFavorite ? ((byte)1) : ((byte)0));
 		pCurrData++;
 		*pCurrData = (IsInAnyEquipPlans ? ((byte)1) : ((byte)0));
+		pCurrData++;
+		*pCurrData = (IsInCurrentEquipPlan ? ((byte)1) : ((byte)0));
 		pCurrData++;
 		*pCurrData = (HasSectEmeiSkillBreakBonus ? ((byte)1) : ((byte)0));
 		pCurrData++;
@@ -388,6 +320,8 @@ public class CombatSkillDisplayDataCharacterMenuListItem : ISerializableGameData
 		IsFavorite = *pCurrData != 0;
 		pCurrData++;
 		IsInAnyEquipPlans = *pCurrData != 0;
+		pCurrData++;
+		IsInCurrentEquipPlan = *pCurrData != 0;
 		pCurrData++;
 		HasSectEmeiSkillBreakBonus = *pCurrData != 0;
 		pCurrData++;

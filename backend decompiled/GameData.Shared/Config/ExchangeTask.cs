@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class ExchangeTask : ConfigData<ExchangeTaskItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static ExchangeTask Instance = new ExchangeTask();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "ItemSubType", "MeetBehaviourType", "MeetOrganization", "TemplateId", "MeetGrade", "MeetFameLevel" };

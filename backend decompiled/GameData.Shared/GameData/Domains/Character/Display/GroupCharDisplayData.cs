@@ -3,9 +3,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 同道显示数据。用于同道界面获取所有显示所需数据，避免监听
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class GroupCharDisplayData : ISerializableGameData
 {
@@ -141,40 +138,22 @@ public class GroupCharDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public sbyte ConsummateLevel;
 
-	/// <summary>
-	/// 此人为特殊同道
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSpecialGroupMember;
 
-	/// <summary>
-	/// 与太吾互动过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInteractedWithTaiwu;
 
-	/// <summary>
-	/// 相枢化身类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte XiangshuType;
 
-	/// <summary>
-	/// 形象数据
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public GroupCharDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public GroupCharDisplayData(GroupCharDisplayData other)
 	{
 		CharacterId = other.CharacterId;
@@ -227,9 +206,6 @@ public class GroupCharDisplayData : ISerializableGameData
 		AvatarRelatedData = new AvatarRelatedData(other.AvatarRelatedData);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(GroupCharDisplayData other)
 	{
 		CharacterId = other.CharacterId;
@@ -282,13 +258,11 @@ public class GroupCharDisplayData : ISerializableGameData
 		AvatarRelatedData = new AvatarRelatedData(other.AvatarRelatedData);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 320;
@@ -302,7 +276,6 @@ public class GroupCharDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -412,7 +385,6 @@ public class GroupCharDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

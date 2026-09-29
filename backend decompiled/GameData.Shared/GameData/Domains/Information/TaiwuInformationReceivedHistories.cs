@@ -7,10 +7,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 太吾见闻接收历史
-/// <para>用于记载太吾过月接收见闻的相关历史记录，可用于月报回溯</para>
-/// </summary>
 [Obsolete]
 [SerializableGameData(IsExtensible = true)]
 public class TaiwuInformationReceivedHistories : ISerializableGameData
@@ -32,9 +28,6 @@ public class TaiwuInformationReceivedHistories : ISerializableGameData
 	[SerializableGameDataField]
 	private List<int> _packedNormalInformationIndices = new List<int>();
 
-	/// <summary>
-	/// 打包太吾上一个月接收的见闻
-	/// </summary>
 	public void PackReceivedNormalInformationInLastMonth(List<NormalInformation> taiwuReceivedNormalInformationInMonth)
 	{
 		Dictionary<int, List<NormalInformation>> recordMap = new Dictionary<int, List<NormalInformation>>();
@@ -67,18 +60,12 @@ public class TaiwuInformationReceivedHistories : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 清理所有的见闻记录缓存
-	/// </summary>
 	public void ClearReceivedInformation()
 	{
 		_receivedNormalInformation.Clear();
 		_packedNormalInformationIndices.Clear();
 	}
 
-	/// <summary>
-	/// 尝试解包太吾在某个月接收的见闻
-	/// </summary>
 	public bool TryUnpackReceivedNormalInformationInMonth(int date, out List<NormalInformation> result)
 	{
 		for (int i = 0; i < _packedNormalInformationIndices.Count; i++)
@@ -100,13 +87,11 @@ public class TaiwuInformationReceivedHistories : ISerializableGameData
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -119,7 +104,6 @@ public class TaiwuInformationReceivedHistories : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -166,7 +150,6 @@ public class TaiwuInformationReceivedHistories : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

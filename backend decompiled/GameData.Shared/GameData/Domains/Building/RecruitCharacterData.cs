@@ -11,10 +11,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 招募角色信息
-/// <para>用于存储已经预招募的角色。如此方可用于预览，以及用此数据创建真正的角色。</para>
-/// </summary>
 [SerializableGameData(IsExtensible = true, NotRestrictCollectionSerializedSize = true)]
 public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 {
@@ -67,117 +63,60 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		};
 	}
 
-	/// <summary>
-	/// 人物模板ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short TemplateId;
 
-	/// <summary>
-	/// 人物等级
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte PeopleLevel;
 
-	/// <summary>
-	/// 年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short Age;
 
-	/// <summary>
-	/// 姓名
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
-	/// <summary>
-	/// 基础魅力
-	/// </summary>
 	[SerializableGameDataField]
 	public short BaseAttraction;
 
-	/// <summary>
-	/// 外貌
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarData AvatarData;
 
-	/// <summary>
-	/// 主属性
-	/// </summary>
 	[SerializableGameDataField]
 	public MainAttributes MainAttributes;
 
-	/// <summary>
-	/// 特性列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> FeatureIds;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 异性相
-	/// </summary>
 	[SerializableGameDataField]
 	public bool Transgender;
 
-	/// <summary>
-	/// 武学资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillQualifications;
 
-	/// <summary>
-	/// 武学资质成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CombatSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillQualifications;
 
-	/// <summary>
-	/// 技艺资质成长类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillQualificationGrowthType;
 
-	/// <summary>
-	/// 计算出的七元，通常仅显示用
-	/// </summary>
 	[SerializableGameDataField]
 	public Personalities CalculatedPersonalities;
 
-	/// <summary>
-	/// 衣服模板 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public short ClothingTemplateId;
 
-	/// <summary>
-	/// 队友指令组
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> TeammateCommands;
 
-	/// <summary>
-	/// 出生月份
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BirthMonth;
 
-	/// <summary>
-	/// 最终魅力，尽可能接近正式计算值
-	/// </summary>
 	[SerializableGameDataField]
 	public short FinalAttraction;
 
@@ -228,9 +167,6 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		HasNewGoods = false
 	};
 
-	/// <summary>
-	/// 重新计算一些显示字段
-	/// </summary>
 	public unsafe void Recalculate()
 	{
 		for (int i = 0; i < 7; i++)
@@ -249,9 +185,6 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		}
 	}
 
-	/// <summary>
-	/// 获取基础立场值
-	/// </summary>
 	public unsafe short GetBaseMorality()
 	{
 		long seed = BaseAttraction % 10;
@@ -263,9 +196,6 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		return (short)Math.Clamp(seed % 1001 + -500, -500L, 500L);
 	}
 
-	/// <summary>
-	/// 生成能够用于显示的形象数据
-	/// </summary>
 	public AvatarRelatedData GenerateAvatarRelatedData()
 	{
 		ClothingItem clothingConfig = Clothing.Instance.GetItem(ClothingTemplateId);
@@ -278,10 +208,6 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		};
 	}
 
-	/// <summary>
-	/// 获得助阵指令
-	/// <para><paramref name="receiver" />在调用前需要手动清空</para>
-	/// </summary>
 	public void GetTeammateCommands(IList<sbyte> receiver)
 	{
 		if (TeammateCommands == null)
@@ -294,16 +220,10 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public RecruitCharacterData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public RecruitCharacterData(RecruitCharacterData other)
 	{
 		TemplateId = other.TemplateId;
@@ -327,9 +247,6 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		FinalAttraction = other.FinalAttraction;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(RecruitCharacterData other)
 	{
 		TemplateId = other.TemplateId;
@@ -353,13 +270,11 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		FinalAttraction = other.FinalAttraction;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 108;
@@ -373,7 +288,6 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -462,7 +376,6 @@ public class RecruitCharacterData : ISerializableGameData, ITradeableContent
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

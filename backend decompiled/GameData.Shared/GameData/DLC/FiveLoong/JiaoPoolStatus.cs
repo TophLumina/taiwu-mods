@@ -1,8 +1,5 @@
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 蛟池状态
-/// </summary>
 public class JiaoPoolStatus
 {
 	public const int None = 0;

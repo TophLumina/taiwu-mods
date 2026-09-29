@@ -5,41 +5,22 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 轻量级人头数据，仅用于显示人头+姓名
-/// </summary>
-[AutoGenerateSerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
+[AutoGenerateSerializableGameData(AllowFixedSize = false, NotForArchive = true, NoCopyConstructors = true)]
 public struct NameStringAndAvatar : ISerializableGameData
 {
-	/// <summary>
-	/// 肖像数据，可能为空
-	/// 为空时应显示死人
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData Avatar;
 
-	/// <summary>
-	/// 姓名数据
-	/// </summary>
 	[SerializableGameDataField]
 	public string Name;
 
-	/// <summary>
-	/// 人物Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 人物模板获取
-	/// </summary>
 	[SerializableGameDataField]
 	public short CharTemplateId;
 
-	/// <summary>
-	/// 此处约定avatar为null时数据无效
-	/// </summary>
-	public bool IsValid => Avatar != null;
+	public bool IsAlive => Avatar != null;
 
 	public bool IsSerializedSizeFixed()
 	{

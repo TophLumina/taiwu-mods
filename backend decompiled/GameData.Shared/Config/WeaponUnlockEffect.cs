@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class WeaponUnlockEffect : ConfigData<WeaponUnlockEffectItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static WeaponUnlockEffect Instance = new WeaponUnlockEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "EffectId", "TemplateId", "Animation", "Particle", "Sound", "DisplayPosition" };

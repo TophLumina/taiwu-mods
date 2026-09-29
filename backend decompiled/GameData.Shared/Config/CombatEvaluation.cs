@@ -8,81 +8,36 @@ namespace Config;
 [Serializable]
 public class CombatEvaluation : ConfigData<CombatEvaluationItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 驱魔除邪1
-		/// </summary>
 		public const sbyte SaveInfection0 = 23;
 
-		/// <summary>
-		/// 驱魔除邪2
-		/// </summary>
 		public const sbyte SaveInfection1 = 24;
 
-		/// <summary>
-		/// 返璞归真
-		/// </summary>
 		public const sbyte TaiZuChangQuan = 32;
 
-		/// <summary>
-		/// 实战领悟
-		/// </summary>
 		public const sbyte ReadInCombat = 33;
 
-		/// <summary>
-		/// 实战周天
-		/// </summary>
 		public const sbyte QiArtInCombat = 43;
 
-		/// <summary>
-		/// 屈膝束手
-		/// </summary>
 		public const sbyte SurrenderInCombat = 45;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 驱魔除邪1
-		/// </summary>
 		public static CombatEvaluationItem SaveInfection0 => Instance[(sbyte)23];
 
-		/// <summary>
-		/// 驱魔除邪2
-		/// </summary>
 		public static CombatEvaluationItem SaveInfection1 => Instance[(sbyte)24];
 
-		/// <summary>
-		/// 返璞归真
-		/// </summary>
 		public static CombatEvaluationItem TaiZuChangQuan => Instance[(sbyte)32];
 
-		/// <summary>
-		/// 实战领悟
-		/// </summary>
 		public static CombatEvaluationItem ReadInCombat => Instance[(sbyte)33];
 
-		/// <summary>
-		/// 实战周天
-		/// </summary>
 		public static CombatEvaluationItem QiArtInCombat => Instance[(sbyte)43];
 
-		/// <summary>
-		/// 屈膝束手
-		/// </summary>
 		public static CombatEvaluationItem SurrenderInCombat => Instance[(sbyte)45];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CombatEvaluation Instance = new CombatEvaluation();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "SmallVillageDesc", "RequireCombatConfigs", "FameAction", "AddLegacyPoint", "TemplateId" };

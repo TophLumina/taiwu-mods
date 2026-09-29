@@ -5,51 +5,27 @@ namespace GameData.Domains.Building.Display;
 [SerializableGameData(NoCopyConstructors = true)]
 public class TaiwuVillagerInfoTipsDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 总人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int TotalCount;
 
-	/// <summary>
-	/// 空闲人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int IdleCount;
 
-	/// <summary>
-	/// 经营中人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int ShopManageCount;
 
-	/// <summary>
-	/// 派遣中人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int DispatchCount;
 
-	/// <summary>
-	/// 未成年人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int MinorsCount;
 
-	/// <summary>
-	/// 成年人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int AdultsCount;
 
-	/// <summary>
-	/// 研习中人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int LearningCount;
 
-	/// <summary>
-	/// 在石屋中人数
-	/// </summary>
 	[SerializableGameDataField]
 	public int InStoneRoomCount;
 
@@ -68,13 +44,11 @@ public class TaiwuVillagerInfoTipsDisplayData : ISerializableGameData
 		};
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 32;
@@ -85,7 +59,6 @@ public class TaiwuVillagerInfoTipsDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = TotalCount;
@@ -111,7 +84,6 @@ public class TaiwuVillagerInfoTipsDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

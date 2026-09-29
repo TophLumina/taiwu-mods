@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Alertness;
 
-/// <summary>
-/// NPC对太吾的戒心数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class CharacterAlertnessData : ISerializableGameData
 {
@@ -21,113 +18,48 @@ public class CharacterAlertnessData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[2] { "Value", "RecordCollection" };
 	}
 
-	/// <summary>
-	/// 戒心值
-	/// </summary>
 	[SerializableGameDataField]
 	public int Value;
 
-	/// <summary>
-	/// 戒心变化记录
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterAlertnessRecordCollection RecordCollection;
 
-	/// <summary>
-	/// 笃信
-	/// </summary>
 	public const sbyte Level0 = 0;
 
-	/// <summary>
-	/// 深信
-	/// </summary>
 	public const sbyte Level1 = 1;
 
-	/// <summary>
-	/// 信任
-	/// </summary>
 	public const sbyte Level2 = 2;
 
-	/// <summary>
-	/// 平常
-	/// </summary>
 	public const sbyte Level3 = 3;
 
-	/// <summary>
-	/// 生疑
-	/// </summary>
 	public const sbyte Level4 = 4;
 
-	/// <summary>
-	/// 猜忌
-	/// </summary>
 	public const sbyte Level5 = 5;
 
-	/// <summary>
-	/// 戒备
-	/// </summary>
 	public const sbyte Level6 = 6;
 
-	/// <summary>
-	/// 戒心等级
-	/// </summary>
 	public sbyte Level => GetLevel(Value);
 
-	/// <summary>
-	/// 对好感变化的影响
-	/// </summary>
 	public int EffectChangeFavor => GetEffectChangeFavor(Level);
 
-	/// <summary>
-	/// 对好感上限的影响
-	/// </summary>
 	public int EffectMaxFavor => GetEffectMaxFavor(Value);
 
-	/// <summary>
-	/// 对互动成功率的影响
-	/// </summary>
 	public int EffectInteract => GetEffectInteract(Level);
 
-	/// <summary>
-	/// 对交换优势的影响
-	/// </summary>
 	public int EffectExchange => GetEffectExchange(Level);
 
-	/// <summary>
-	/// 最大好感
-	/// </summary>
 	public short MaxFavor => GetMaxFavor(EffectMaxFavor);
 
-	/// <summary>
-	/// 引用平常
-	/// </summary>
 	public static sbyte LevelNormal => 3;
 
-	/// <summary>
-	/// 最小等级
-	/// </summary>
 	public static sbyte LevelMin => 0;
 
-	/// <summary>
-	/// 最大等级
-	/// </summary>
 	public static sbyte LevelMax => 6;
 
-	/// <summary>
-	/// 戒心最大值
-	/// </summary>
 	public static int MaxValue => GlobalConfig.Instance.AlertnessMax;
 
-	/// <summary>
-	/// 戒心最小值
-	/// </summary>
 	public static int MinValue => GlobalConfig.Instance.AlertnessMin;
 
-	/// <summary>
-	/// 获取戒心等级
-	/// </summary>
-	/// <param name="alertness"></param>
-	/// <returns></returns>
 	public static sbyte GetLevel(int alertness)
 	{
 		if ((alertness == int.MinValue || alertness == int.MaxValue) ? true : false)
@@ -184,21 +116,12 @@ public class CharacterAlertnessData : ISerializableGameData
 		return (sbyte)Math.Clamp(level, LevelMin, LevelMax);
 	}
 
-	/// <summary>
-	/// 获取戒心对好感变化的影响
-	/// </summary>
-	/// <param name="level"></param>
-	/// <returns></returns>
 	public static int GetEffectChangeFavor(int level)
 	{
 		level = ValidateLevel(level);
 		return GlobalConfig.Instance.AlertnessLevelEffectToChangeFavor[level];
 	}
 
-	/// <summary>
-	/// 获取戒心对好感上限的影响
-	/// </summary>
-	/// <returns></returns>
 	public static int GetEffectMaxFavor(int value)
 	{
 		if ((value == int.MinValue || value == int.MaxValue) ? true : false)
@@ -208,45 +131,28 @@ public class CharacterAlertnessData : ISerializableGameData
 		return value / GlobalConfig.Instance.AlertnessEffectToMaxFavor;
 	}
 
-	/// <summary>
-	/// 获取戒心对互动成功率的影响
-	/// </summary>
-	/// <param name="level"></param>
-	/// <returns></returns>
 	public static int GetEffectInteract(int level)
 	{
 		level = ValidateLevel(level);
 		return GlobalConfig.Instance.AlertnessLevelEffectToInteractSuccessRate[level];
 	}
 
-	/// <summary>
-	/// 获取戒心对交换优势的影响
-	/// </summary>
-	/// <param name="level"></param>
-	/// <returns></returns>
 	public static int GetEffectExchange(int level)
 	{
 		level = ValidateLevel(level);
 		return GlobalConfig.Instance.ExchangeAlertnessLevel[level];
 	}
 
-	/// <summary>
-	/// 获取戒心影响后的好感上限
-	/// </summary>
-	/// <param name="effect"></param>
-	/// <returns></returns>
 	public static short GetMaxFavor(int effect)
 	{
 		return (short)Math.Clamp(30000 - effect, -30000, 30000);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -258,7 +164,6 @@ public class CharacterAlertnessData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -288,7 +193,6 @@ public class CharacterAlertnessData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

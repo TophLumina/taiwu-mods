@@ -9,121 +9,52 @@ namespace Config;
 [Serializable]
 public class TutorialChapters : ConfigData<TutorialChaptersItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 演武第一章
-		/// </summary>
 		public const short Chapter1 = 0;
 
-		/// <summary>
-		/// 演武第二章
-		/// </summary>
 		public const short Chapter2 = 1;
 
-		/// <summary>
-		/// 演武第三章
-		/// </summary>
 		public const short Chapter3 = 2;
 
-		/// <summary>
-		/// 演武第四章
-		/// </summary>
 		public const short Chapter4 = 3;
 
-		/// <summary>
-		/// 演武第五章
-		/// </summary>
 		public const short Chapter5 = 4;
 
-		/// <summary>
-		/// 演武第六章
-		/// </summary>
 		public const short Chapter6 = 5;
 
-		/// <summary>
-		/// 演武第七章
-		/// </summary>
 		public const short Chapter7 = 6;
 
-		/// <summary>
-		/// 演武第八章
-		/// </summary>
 		public const short Chapter8 = 7;
 
-		/// <summary>
-		/// 演武第九章
-		/// </summary>
 		public const short Chapter9 = 8;
 
-		/// <summary>
-		/// 演武第十章
-		/// </summary>
 		public const short Chapter10 = 9;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 演武第一章
-		/// </summary>
 		public static TutorialChaptersItem Chapter1 => Instance[(short)0];
 
-		/// <summary>
-		/// 演武第二章
-		/// </summary>
 		public static TutorialChaptersItem Chapter2 => Instance[(short)1];
 
-		/// <summary>
-		/// 演武第三章
-		/// </summary>
 		public static TutorialChaptersItem Chapter3 => Instance[(short)2];
 
-		/// <summary>
-		/// 演武第四章
-		/// </summary>
 		public static TutorialChaptersItem Chapter4 => Instance[(short)3];
 
-		/// <summary>
-		/// 演武第五章
-		/// </summary>
 		public static TutorialChaptersItem Chapter5 => Instance[(short)4];
 
-		/// <summary>
-		/// 演武第六章
-		/// </summary>
 		public static TutorialChaptersItem Chapter6 => Instance[(short)5];
 
-		/// <summary>
-		/// 演武第七章
-		/// </summary>
 		public static TutorialChaptersItem Chapter7 => Instance[(short)6];
 
-		/// <summary>
-		/// 演武第八章
-		/// </summary>
 		public static TutorialChaptersItem Chapter8 => Instance[(short)7];
 
-		/// <summary>
-		/// 演武第九章
-		/// </summary>
 		public static TutorialChaptersItem Chapter9 => Instance[(short)8];
 
-		/// <summary>
-		/// 演武第十章
-		/// </summary>
 		public static TutorialChaptersItem Chapter10 => Instance[(short)9];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TutorialChapters Instance = new TutorialChapters();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

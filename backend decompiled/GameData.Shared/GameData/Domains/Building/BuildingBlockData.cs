@@ -7,9 +7,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 产业格数据
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true)]
 public class BuildingBlockData : ISerializableGameData
 {
@@ -50,99 +47,49 @@ public class BuildingBlockData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 在产业地图中的索引
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public short BlockIndex;
 
-	/// <summary>
-	/// 模板ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public short TemplateId;
 
-	/// <summary>
-	/// 规模
-	/// (非太吾村、无用资源继续使用，其他移步 BuildingBlockData.CalcUnlockedLevelCount())
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public sbyte Level;
 
-	/// <summary>
-	/// 从属的产业格，用于占多格的建筑
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public short RootBlockIndex;
 
-	/// <summary>
-	/// 耐久度
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public sbyte Durability;
 
-	/// <summary>
-	/// 正在进行的操作
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public sbyte OperationType;
 
-	/// <summary>
-	/// 操作进度值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public short OperationProgress;
 
-	/// <summary>
-	/// 是否正在中断操作
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public bool OperationStopping;
 
-	/// <summary>
-	/// 已经解锁的位数据
-	/// <para>每个位，表示一个已经解锁的状态；初始自动解锁一个状态</para>
-	/// <para>因此，所有位上解锁过的状态个数就是建筑的规模值</para>
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	public ulong LevelUnlockedFlags = 1uL;
 
-	/// <summary>
-	/// 累计得分, 用于需要持续计分的建筑 (招人)
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	public int CumulatedScore;
 
-	/// <summary>
-	/// 自动指派的设置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 11)]
 	public BuildingOptionAutoGiveMemberPreset ArrangementSetting;
 
-	/// <summary>
-	/// 自动上货的设置
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 12)]
 	public BuildingOptionAutoAddSoldItemPreset SoldItemSetting;
 
-	/// <summary>
-	/// 经营工作进度
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public short ShopProgress { get; private set; }
 
 	public BuildingBlockItem ConfigData => BuildingBlock.Instance[TemplateId];
 
-	/// <summary>
-	/// 获取block工作进度百分比
-	/// </summary>
-	/// <returns></returns>
 	public int ShopProgressPercentage => (int)(ShopProgressFill * 100f);
 
-	/// <summary>
-	/// 获取block工作进度比例
-	/// </summary>
-	/// <returns></returns>
 	public float ShopProgressFill
 	{
 		get
@@ -169,9 +116,6 @@ public class BuildingBlockData : ISerializableGameData
 		CumulatedScore = 0;
 	}
 
-	/// <summary>
-	/// 重置产业格数据
-	/// </summary>
 	public void ResetData(short templateId, sbyte level = 1, short rootBlockIndex = -1)
 	{
 		TemplateId = templateId;
@@ -190,10 +134,6 @@ public class BuildingBlockData : ISerializableGameData
 		ShopProgress = 0;
 	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="delta"></param>
 	public void OfflineChangeShopProgress(int delta)
 	{
 		int needProgress = ConfigData.MaxProduceValue;
@@ -202,28 +142,16 @@ public class BuildingBlockData : ISerializableGameData
 		ShopProgress = (short)MathUtils.Clamp(ShopProgress + delta, 0, (needProgress > 0) ? needProgress : 32767);
 	}
 
-	/// <summary>
-	/// 能否正常使用
-	/// </summary>
 	public bool CanUse()
 	{
 		return OperationType != 0;
 	}
 
-	/// <summary>
-	/// 是否需要维护费用
-	/// </summary>
 	public bool NeedMaintenanceCost()
 	{
 		return OperationType != 0;
 	}
 
-	/// <summary>
-	/// 计算依赖此资源格的依赖项
-	/// </summary>
-	/// <param name="neighborBlockDataList">待判断的临近资源格列表</param>
-	/// <param name="neighborDistanceList">待判断的临近资源格距离列表</param>
-	/// <param name="onInfluenceFound">查找到的回调</param>
 	public void CalcInfluences(IEnumerable<BuildingBlockData> neighborBlockDataList, List<int> neighborDistanceList, Action<BuildingBlockData, int> onInfluenceFound)
 	{
 		int i = 0;
@@ -237,11 +165,6 @@ public class BuildingBlockData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 是否可以被指定地格依赖
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool CanInfluenceBuildingBlock(BuildingBlockData other)
 	{
 		BuildingBlockItem otherCfg = other.ConfigData;
@@ -252,9 +175,6 @@ public class BuildingBlockData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 计算已解锁的等级数
-	/// </summary>
 	public sbyte CalcUnlockedLevelCount()
 	{
 		sbyte count = 0;
@@ -267,39 +187,23 @@ public class BuildingBlockData : ISerializableGameData
 		return count;
 	}
 
-	/// <summary>
-	/// 重设初始解锁位
-	/// </summary>
-	/// <param name="index"></param>
 	public void ResetInitialUnlockedSlot(int index)
 	{
 		LevelUnlockedFlags = (uint)(1 << index);
 	}
 
-	/// <summary>
-	/// 解锁指定位
-	/// </summary>
-	/// <param name="index"></param>
 	public void UnlockLevelSlot(int index)
 	{
 		ulong mask = (uint)(1 << index);
 		LevelUnlockedFlags |= mask;
 	}
 
-	/// <summary>
-	/// 某栏位是否已解锁
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public bool SlotIsUnlocked(int index)
 	{
 		ulong mask = (uint)(1 << index);
 		return (LevelUnlockedFlags & mask) != 0;
 	}
 
-	/// <summary>
-	/// 指定产业格类型是否建筑
-	/// </summary>
 	public static bool IsBuilding(EBuildingBlockType type)
 	{
 		if (type != EBuildingBlockType.Building)
@@ -309,11 +213,6 @@ public class BuildingBlockData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 指定产业格类型是否可以扩建
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public static bool CanUpgrade(EBuildingBlockType type)
 	{
 		if (!IsBuilding(type))
@@ -323,9 +222,6 @@ public class BuildingBlockData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 指定产业格类型是否资源
-	/// </summary>
 	public static bool IsResource(EBuildingBlockType type)
 	{
 		if (type != EBuildingBlockType.NormalResource && type != EBuildingBlockType.SpecialResource)
@@ -335,9 +231,6 @@ public class BuildingBlockData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 指定产业格类型是否资源
-	/// </summary>
 	public static bool IsUsefulResource(EBuildingBlockType type)
 	{
 		if (type != EBuildingBlockType.NormalResource)
@@ -347,11 +240,6 @@ public class BuildingBlockData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 建筑规划中认为相同
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool PlanEquals(BuildingBlockData other)
 	{
 		if (other.BlockIndex == BlockIndex && other.TemplateId == TemplateId && other.Level == Level && other.RootBlockIndex == RootBlockIndex && other.Durability == Durability && other.OperationType == OperationType && other.OperationProgress == OperationProgress && other.OperationStopping == OperationStopping && other.ShopProgress == ShopProgress)
@@ -388,16 +276,10 @@ public class BuildingBlockData : ISerializableGameData
 		return data;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public BuildingBlockData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BuildingBlockData(BuildingBlockData other)
 	{
 		BlockIndex = other.BlockIndex;
@@ -415,9 +297,6 @@ public class BuildingBlockData : ISerializableGameData
 		SoldItemSetting = new BuildingOptionAutoAddSoldItemPreset(other.SoldItemSetting);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BuildingBlockData other)
 	{
 		BlockIndex = other.BlockIndex;

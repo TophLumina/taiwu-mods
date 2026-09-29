@@ -3,9 +3,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.TaiwuEvent;
 
-/// <summary>
-/// 自 SerializeDefault 迁移而来的匿名结构
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public struct GlobalArgValue : ISerializableGameData
 {

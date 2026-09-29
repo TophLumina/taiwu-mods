@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 促织决斗预设项
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class CricketPresetItem : PresetItemBase<CricketPresetItem>
 {
@@ -21,15 +18,9 @@ public class CricketPresetItem : PresetItemBase<CricketPresetItem>
 		public static readonly string[] FieldId2FieldName = new string[2] { "CricketIds", "PolymorphCharIds" };
 	}
 
-	/// <summary>
-	/// 促织道具 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public List<int> CricketIds;
 
-	/// <summary>
-	/// 化念角色 ID
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public List<int> PolymorphCharIds;
 
@@ -44,38 +35,27 @@ public class CricketPresetItem : PresetItemBase<CricketPresetItem>
 		return new CricketPresetItem(this);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CricketPresetItem()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CricketPresetItem(CricketPresetItem other)
 	{
 		CricketIds = ((other.CricketIds == null) ? null : new List<int>(other.CricketIds));
 		PolymorphCharIds = ((other.PolymorphCharIds == null) ? null : new List<int>(other.PolymorphCharIds));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CricketPresetItem other)
 	{
 		CricketIds = ((other.CricketIds == null) ? null : new List<int>(other.CricketIds));
 		PolymorphCharIds = ((other.PolymorphCharIds == null) ? null : new List<int>(other.PolymorphCharIds));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public override bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public override int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -88,7 +68,6 @@ public class CricketPresetItem : PresetItemBase<CricketPresetItem>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe override int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -136,7 +115,6 @@ public class CricketPresetItem : PresetItemBase<CricketPresetItem>
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe override int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

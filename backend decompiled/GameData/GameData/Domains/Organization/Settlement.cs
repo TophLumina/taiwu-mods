@@ -1167,11 +1167,9 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 
 	public int CalcItemContribution(ItemKey itemKey, int amount)
 	{
-		short itemSubType = ItemTemplateHelper.GetItemSubType(itemKey.ItemType, itemKey.TemplateId);
-		int value = DomainManager.Item.GetValue(itemKey);
 		sbyte grade = ItemTemplateHelper.GetGrade(itemKey.ItemType, itemKey.TemplateId);
 		SettlementTreasury treasury = GetTreasury(Treasuries, grade);
-		return treasury.CalcAdjustedWorth(itemSubType, value) * amount * GlobalConfig.Instance.ItemContributionPercent / 100;
+		return treasury.CalcItemContribution(itemKey, amount);
 	}
 
 	public void InitializeTreasurySupplyRequirements()
@@ -1516,7 +1514,7 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 		int currDate = DomainManager.World.GetCurrDate();
 		SettlementTreasuryRecordCollection settlementTreasuryRecordCollection = DomainManager.Organization.GetSettlementTreasuryRecordCollection(context, Id);
 		ItemBase item = DomainManager.Item.GetBaseItem(itemKey);
-		int worth = treasury.CalcAdjustedWorth(item.GetItemSubType(), item.GetValue()) * amount;
+		int worth = CalcItemContribution(itemKey, amount);
 		item.SetOwner(ItemOwnerType.Treasury, Id);
 		treasury.Inventory.OfflineAdd(itemKey, amount);
 		treasury.OfflineChangeContribution(character, worth);
@@ -1566,7 +1564,7 @@ public abstract class Settlement : BaseGameDataObject, IValueSelector
 		int currDate = DomainManager.World.GetCurrDate();
 		SettlementTreasuryRecordCollection settlementTreasuryRecordCollection = DomainManager.Organization.GetSettlementTreasuryRecordCollection(context, Id);
 		ItemBase item = DomainManager.Item.GetBaseItem(itemKey);
-		int worth = treasury.CalcAdjustedWorth(item.GetItemSubType(), item.GetValue()) * amount;
+		int worth = CalcItemContribution(itemKey, amount);
 		if (!treasury.Inventory.Items.ContainsKey(itemKey))
 		{
 			SettlementTreasury[] settlementTreasuries = treasuries.SettlementTreasuries;

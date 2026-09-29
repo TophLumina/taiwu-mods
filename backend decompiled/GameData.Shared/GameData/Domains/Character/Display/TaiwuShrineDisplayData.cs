@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 祠堂页面显示数据集合
-/// </summary>
 public class TaiwuShrineDisplayData : ISerializableGameData
 {
 	[SerializableGameDataField]

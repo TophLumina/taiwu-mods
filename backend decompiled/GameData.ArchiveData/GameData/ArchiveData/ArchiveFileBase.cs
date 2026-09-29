@@ -61,6 +61,7 @@ public abstract class ArchiveFileBase : IDisposable, IGameDataTypeFormatter
 		}
 		if (fileVersion != ArchiveFileVersion)
 		{
+			fileStream.Close();
 			throw new ArchiveFileHeaderException(ArchiveFileVersion, fileVersion);
 		}
 		ReadContent(fileStream, fileMeta);

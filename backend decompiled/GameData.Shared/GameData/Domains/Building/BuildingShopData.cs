@@ -6,15 +6,9 @@ namespace GameData.Domains.Building;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class BuildingShopData : ISerializableGameData
 {
-	/// <summary>
-	/// 太吾产业的资源格效果
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResourceBlockEffect;
 
-	/// <summary>
-	///
-	/// </summary>
 	[SerializableGameDataField]
 	public int Attainment;
 

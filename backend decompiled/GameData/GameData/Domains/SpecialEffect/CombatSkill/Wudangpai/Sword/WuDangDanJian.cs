@@ -5,8 +5,6 @@ namespace GameData.Domains.SpecialEffect.CombatSkill.Wudangpai.Sword;
 
 public class WuDangDanJian : ChangePowerByEquipType
 {
-	protected override sbyte ChangePowerUnitReverse => 3;
-
 	public WuDangDanJian()
 	{
 	}

@@ -4,9 +4,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 角色通用滚动列表的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class CharacterDisplayDataForGeneralScrollList : ISerializableGameData, ITaiwuSelectCharacterData, ISelectCharacterData
 {
@@ -142,105 +139,54 @@ public class CharacterDisplayDataForGeneralScrollList : ISerializableGameData, I
 	[SerializableGameDataField]
 	public sbyte ConsummateLevel;
 
-	/// <summary>
-	/// 此人为特殊同道
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSpecialGroupMember;
 
-	/// <summary>
-	/// 此人为同道
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsCompanion;
 
-	/// <summary>
-	/// 与太吾互动过
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInteractedWithTaiwu;
 
-	/// <summary>
-	/// 形象数据
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarRelatedData AvatarRelatedData;
 
-	/// <summary>
-	/// 组织信息
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrgInfo;
 
-	/// <summary>
-	/// 对太吾的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationToTaiwu;
 
-	/// <summary>
-	/// 太吾对角色的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort RelationFromTaiwu;
 
-	/// <summary>
-	/// 是否和太吾同一派系
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSameFactionWithTaiwu;
 
-	/// <summary>
-	/// 是否隐藏健康信息
-	/// </summary>
 	[SerializableGameDataField]
 	public bool HideHealth;
 
-	/// <summary>
-	/// 玄灰绝命持续时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int DarkAshRemainTime;
 
-	/// <summary>
-	/// 鼎蛟淬身持续时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int TripodVesselProtectRemainTime;
 
-	/// <summary>
-	/// 毒素标记总数量（排除不侵）
-	/// </summary>
 	[SerializableGameDataField]
 	public int PoisonCount;
 
-	/// <summary>
-	/// 服食栏普通蛊数量（非蛊王）
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte WugCount;
 
-	/// <summary>
-	/// 入魔值（相枢邪气）
-	/// </summary>
 	[SerializableGameDataField]
 	public int Infection;
 
-	/// <summary>
-	/// 额外真气分配（姬穸汲取真气用）
-	/// </summary>
 	[SerializableGameDataField]
 	public NeiliAllocation ExtraNeiliAllocation;
 
-	/// <summary>
-	/// 五行内力属性百分比（姬穸吸取内力用）
-	/// </summary>
 	[SerializableGameDataField]
 	public NeiliProportionOfFiveElements NeiliPercent;
 
-	/// <summary>
-	/// 相枢化身类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte XiangshuType;
 
@@ -253,16 +199,10 @@ public class CharacterDisplayDataForGeneralScrollList : ISerializableGameData, I
 		return this;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public CharacterDisplayDataForGeneralScrollList()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public CharacterDisplayDataForGeneralScrollList(CharacterDisplayDataForGeneralScrollList other)
 	{
 		CharacterId = other.CharacterId;
@@ -328,9 +268,6 @@ public class CharacterDisplayDataForGeneralScrollList : ISerializableGameData, I
 		XiangshuType = other.XiangshuType;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(CharacterDisplayDataForGeneralScrollList other)
 	{
 		CharacterId = other.CharacterId;
@@ -403,25 +340,10 @@ public class CharacterDisplayDataForGeneralScrollList : ISerializableGameData, I
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 92;
-		totalSize += NameData.GetSerializedSize();
-		totalSize += MaxMainAttributes.GetSerializedSize();
-		totalSize += Penetrations.GetSerializedSize();
-		totalSize += PenetrationResists.GetSerializedSize();
-		totalSize += HitValues.GetSerializedSize();
-		totalSize += AvoidValues.GetSerializedSize();
-		totalSize += LifeSkillQualifications.GetSerializedSize();
-		totalSize += CombatSkillQualifications.GetSerializedSize();
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize += CombatSkillAttainments.GetSerializedSize();
-		totalSize += Personalities.GetSerializedSize();
-		totalSize += Resources.GetSerializedSize();
+		int totalSize = 368;
 		totalSize += Command.GetSerializedSize();
 		totalSize += AdvancedCommand.GetSerializedSize();
 		totalSize = ((AvatarRelatedData == null) ? (totalSize + 2) : (totalSize + (2 + AvatarRelatedData.GetSerializedSize())));
-		totalSize += OrgInfo.GetSerializedSize();
-		totalSize += ExtraNeiliAllocation.GetSerializedSize();
-		totalSize += NeiliPercent.GetSerializedSize();
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

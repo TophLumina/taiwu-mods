@@ -10,161 +10,68 @@ namespace Config;
 [Serializable]
 public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 无门无派
-		/// </summary>
 		public const short None = 0;
 
-		/// <summary>
-		/// 入魔者1
-		/// </summary>
 		public const short XiangshuInfected1 = 1;
 
-		/// <summary>
-		/// 入魔者2
-		/// </summary>
 		public const short XiangshuInfected2 = 2;
 
-		/// <summary>
-		/// 入魔者3
-		/// </summary>
 		public const short XiangshuInfected3 = 3;
 
-		/// <summary>
-		/// 入魔者4
-		/// </summary>
 		public const short XiangshuInfected4 = 4;
 
-		/// <summary>
-		/// 入魔者5
-		/// </summary>
 		public const short XiangshuInfected5 = 5;
 
-		/// <summary>
-		/// 入魔者6
-		/// </summary>
 		public const short XiangshuInfected6 = 6;
 
-		/// <summary>
-		/// 入魔者7
-		/// </summary>
 		public const short XiangshuInfected7 = 7;
 
-		/// <summary>
-		/// 入魔者8
-		/// </summary>
 		public const short XiangshuInfected8 = 8;
 
-		/// <summary>
-		/// 入魔者9
-		/// </summary>
 		public const short XiangshuInfected9 = 9;
 
-		/// <summary>
-		/// 太吾传人
-		/// </summary>
 		public const short Taiwu = 10;
 
-		/// <summary>
-		/// 璇女天音阁弟子
-		/// </summary>
 		public const short TianyinPavilionDisciple = 114;
 
-		/// <summary>
-		/// 五仙教主
-		/// </summary>
 		public const short WuxianLeader = 145;
 
-		/// <summary>
-		/// 五仙圣女
-		/// </summary>
 		public const short WuxianSaintness = 146;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 无门无派
-		/// </summary>
 		public static OrganizationMemberItem None => Instance[(short)0];
 
-		/// <summary>
-		/// 入魔者1
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected1 => Instance[(short)1];
 
-		/// <summary>
-		/// 入魔者2
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected2 => Instance[(short)2];
 
-		/// <summary>
-		/// 入魔者3
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected3 => Instance[(short)3];
 
-		/// <summary>
-		/// 入魔者4
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected4 => Instance[(short)4];
 
-		/// <summary>
-		/// 入魔者5
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected5 => Instance[(short)5];
 
-		/// <summary>
-		/// 入魔者6
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected6 => Instance[(short)6];
 
-		/// <summary>
-		/// 入魔者7
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected7 => Instance[(short)7];
 
-		/// <summary>
-		/// 入魔者8
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected8 => Instance[(short)8];
 
-		/// <summary>
-		/// 入魔者9
-		/// </summary>
 		public static OrganizationMemberItem XiangshuInfected9 => Instance[(short)9];
 
-		/// <summary>
-		/// 太吾传人
-		/// </summary>
 		public static OrganizationMemberItem Taiwu => Instance[(short)10];
 
-		/// <summary>
-		/// 璇女天音阁弟子
-		/// </summary>
 		public static OrganizationMemberItem TianyinPavilionDisciple => Instance[(short)114];
 
-		/// <summary>
-		/// 五仙教主
-		/// </summary>
 		public static OrganizationMemberItem WuxianLeader => Instance[(short)145];
 
-		/// <summary>
-		/// 五仙圣女
-		/// </summary>
 		public static OrganizationMemberItem WuxianSaintness => Instance[(short)146];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static OrganizationMember Instance = new OrganizationMember();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -2848,7 +2755,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 20), new List<PresetInventoryItem>
 		{
@@ -2917,7 +2824,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 20), new List<PresetInventoryItem>
 		{
@@ -2986,7 +2893,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 19), new List<PresetInventoryItem>
 		{
@@ -3064,7 +2971,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing47 = new PresetEquipmentItem("Clothing", 19);
@@ -3152,7 +3059,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing48 = new PresetEquipmentItem("Clothing", 19);
@@ -3240,7 +3147,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing49 = new PresetEquipmentItem("Clothing", 18);
@@ -3565,7 +3472,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 23), new List<PresetInventoryItem>
 		{
@@ -3645,7 +3552,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 22), new List<PresetInventoryItem>
 		{
@@ -3725,7 +3632,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 22), new List<PresetInventoryItem>
 		{
@@ -3814,7 +3721,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing53 = new PresetEquipmentItem("Clothing", 22);
@@ -3913,7 +3820,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing54 = new PresetEquipmentItem("Clothing", 21);
@@ -4015,7 +3922,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing = new PresetEquipmentItem("Clothing", 21);
@@ -4388,7 +4295,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 26), new List<PresetInventoryItem>
 		{
@@ -4500,7 +4407,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 25), new List<PresetInventoryItem>
 		{
@@ -4612,7 +4519,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 25), new List<PresetInventoryItem>
 		{
@@ -4724,7 +4631,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 25), new List<PresetInventoryItem>
 		{
@@ -4836,7 +4743,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 24), new List<PresetInventoryItem>
 		{
@@ -4947,7 +4854,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 24), new List<PresetInventoryItem>
 		{
@@ -5374,7 +5281,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 29), new List<PresetInventoryItem>
 		{
@@ -5451,7 +5358,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 28), new List<PresetInventoryItem>
 		{
@@ -5528,7 +5435,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 28), new List<PresetInventoryItem>
 		{
@@ -5614,7 +5521,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing5 = new PresetEquipmentItem("Clothing", 28);
@@ -5710,7 +5617,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing6 = new PresetEquipmentItem("Clothing", 27);
@@ -5805,7 +5712,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing7 = new PresetEquipmentItem("Clothing", 27);
@@ -6155,7 +6062,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 33), new List<PresetInventoryItem>
 		{
@@ -6222,7 +6129,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 32), new List<PresetInventoryItem>
 		{
@@ -6289,7 +6196,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 32), new List<PresetInventoryItem>
 		{
@@ -6365,7 +6272,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing11 = new PresetEquipmentItem("Clothing", 32);
@@ -6451,7 +6358,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing12 = new PresetEquipmentItem("Clothing", 32);
@@ -6537,7 +6444,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing13 = new PresetEquipmentItem("Clothing", 31);
@@ -6860,7 +6767,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 100),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 100),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 36), new List<PresetInventoryItem>
 		{
@@ -6933,7 +6840,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 100),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 100),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 36), new List<PresetInventoryItem>
 		{
@@ -7006,7 +6913,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 100),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 100),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 35), new List<PresetInventoryItem>
 		{
@@ -7086,7 +6993,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 100),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 100),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing17 = new PresetEquipmentItem("Clothing", 35);
@@ -7176,7 +7083,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 100),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 100),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing18 = new PresetEquipmentItem("Clothing", 35);
@@ -7266,7 +7173,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 100),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 100),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing19 = new PresetEquipmentItem("Clothing", 34);
@@ -7602,7 +7509,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 39), new List<PresetInventoryItem>
 		{
@@ -7682,7 +7589,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 38), new List<PresetInventoryItem>
 		{
@@ -7762,7 +7669,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 38), new List<PresetInventoryItem>
 		{
@@ -7851,7 +7758,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing23 = new PresetEquipmentItem("Clothing", 38);
@@ -7950,7 +7857,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing24 = new PresetEquipmentItem("Clothing", 37);
@@ -8047,7 +7954,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing25 = new PresetEquipmentItem("Clothing", 37);
@@ -8399,7 +8306,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 42), new List<PresetInventoryItem>
 		{
@@ -8475,7 +8382,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 41), new List<PresetInventoryItem>
 		{
@@ -8551,7 +8458,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 41), new List<PresetInventoryItem>
 		{
@@ -8626,7 +8533,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 41), new List<PresetInventoryItem>
 		{
@@ -8701,7 +8608,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 41), new List<PresetInventoryItem>
 		{
@@ -8776,7 +8683,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 40), new List<PresetInventoryItem>
 		{
@@ -9047,7 +8954,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 15),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 45), new List<PresetInventoryItem>
 		{
@@ -9132,7 +9039,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 15),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 44), new List<PresetInventoryItem>
 		{
@@ -9221,7 +9128,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 15),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 44), new List<PresetInventoryItem>
 		{
@@ -9304,7 +9211,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 15),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 44), new List<PresetInventoryItem>
 		{
@@ -9387,7 +9294,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 15),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 44), new List<PresetInventoryItem>
 		{
@@ -9470,7 +9377,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 15),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 43), new List<PresetInventoryItem>
 		{
@@ -9789,7 +9696,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 48), new List<PresetInventoryItem>
 		{
@@ -9912,7 +9819,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 47), new List<PresetInventoryItem>
 		{
@@ -10035,7 +9942,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 47), new List<PresetInventoryItem>
 		{
@@ -10158,7 +10065,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 47), new List<PresetInventoryItem>
 		{
@@ -10279,7 +10186,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 47), new List<PresetInventoryItem>
 		{
@@ -10401,7 +10308,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 46), new List<PresetInventoryItem>
 		{
@@ -10877,7 +10784,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 51), new List<PresetInventoryItem>
 		{
@@ -10953,7 +10860,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 50), new List<PresetInventoryItem>
 		{
@@ -11029,7 +10936,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 50), new List<PresetInventoryItem>
 		{
@@ -11114,7 +11021,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing = new PresetEquipmentItem("Clothing", 50);
@@ -11208,7 +11115,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing2 = new PresetEquipmentItem("Clothing", 49);
@@ -11302,7 +11209,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 80),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing3 = new PresetEquipmentItem("Clothing", 49);
@@ -11649,7 +11556,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 54), new List<PresetInventoryItem>
 		{
@@ -11743,7 +11650,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 53), new List<PresetInventoryItem>
 		{
@@ -11837,7 +11744,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 53), new List<PresetInventoryItem>
 		{
@@ -11931,7 +11838,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 53), new List<PresetInventoryItem>
 		{
@@ -12024,7 +11931,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 52), new List<PresetInventoryItem>
 		{
@@ -12117,7 +12024,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 52), new List<PresetInventoryItem>
 		{
@@ -12465,7 +12372,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 57), new List<PresetInventoryItem>
 		{
@@ -12539,7 +12446,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 56), new List<PresetInventoryItem>
 		{
@@ -12613,7 +12520,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 56), new List<PresetInventoryItem>
 		{
@@ -12696,7 +12603,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing7 = new PresetEquipmentItem("Clothing", 56);
@@ -12788,7 +12695,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing8 = new PresetEquipmentItem("Clothing", 55);
@@ -12880,7 +12787,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 75),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing9 = new PresetEquipmentItem("Clothing", 55);
@@ -13226,7 +13133,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 60), new List<PresetInventoryItem>
 		{
@@ -13309,7 +13216,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 59), new List<PresetInventoryItem>
 		{
@@ -13392,7 +13299,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 59), new List<PresetInventoryItem>
 		{
@@ -13475,7 +13382,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 59), new List<PresetInventoryItem>
 		{
@@ -13557,7 +13464,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 59), new List<PresetInventoryItem>
 		{
@@ -13639,7 +13546,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 58), new List<PresetInventoryItem>
 		{
@@ -13947,7 +13854,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 50),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 63), new List<PresetInventoryItem>
 		{
@@ -14027,7 +13934,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 50),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 62), new List<PresetInventoryItem>
 		{
@@ -14107,7 +14014,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 50),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		}, new PresetEquipmentItem("Clothing", 62), new List<PresetInventoryItem>
 		{
@@ -14196,7 +14103,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 50),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing13 = new PresetEquipmentItem("Clothing", 62);
@@ -14293,7 +14200,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 50),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing14 = new PresetEquipmentItem("Clothing", 62);
@@ -14391,7 +14298,7 @@ public class OrganizationMember : ConfigData<OrganizationMemberItem, short>
 			new PresetEquipmentItemWithProb("Carrier", 18, 50),
 			new PresetEquipmentItemWithProb("Carrier", -1, 0),
 			new PresetEquipmentItemWithProb("Accessory", 90, 50),
-			new PresetEquipmentItemWithProb("Accessory", -1, 0),
+			new PresetEquipmentItemWithProb("Accessory", 90, 100),
 			new PresetEquipmentItemWithProb("Accessory", -1, 0)
 		};
 		PresetEquipmentItem clothing15 = new PresetEquipmentItem("Clothing", 61);

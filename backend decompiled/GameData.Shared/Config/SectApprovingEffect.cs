@@ -7,171 +7,72 @@ namespace Config;
 [Serializable]
 public class SectApprovingEffect : ConfigData<SectApprovingEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 以禅入武
-		/// </summary>
 		public const sbyte Shaolin = 0;
 
-		/// <summary>
-		/// 真传正法
-		/// </summary>
 		public const sbyte Emei = 1;
 
-		/// <summary>
-		/// 医武同源
-		/// </summary>
 		public const sbyte Baihua = 2;
 
-		/// <summary>
-		/// 道法自然
-		/// </summary>
 		public const sbyte Wudang = 3;
 
-		/// <summary>
-		/// 正大光明
-		/// </summary>
 		public const sbyte Yuanshan = 4;
 
-		/// <summary>
-		/// 蛮修横练
-		/// </summary>
 		public const sbyte Shixiang = 5;
 
-		/// <summary>
-		/// 字字玄玄
-		/// </summary>
 		public const sbyte Ranshan = 6;
 
-		/// <summary>
-		/// 仙姿玉色
-		/// </summary>
 		public const sbyte Xuannv = 7;
 
-		/// <summary>
-		/// 巧夺天工
-		/// </summary>
 		public const sbyte Zhujian = 8;
 
-		/// <summary>
-		/// 厚积薄发
-		/// </summary>
 		public const sbyte Kongsang = 9;
 
-		/// <summary>
-		/// 明王秘咒
-		/// </summary>
 		public const sbyte Jingang = 10;
 
-		/// <summary>
-		/// 毒蛊通魂
-		/// </summary>
 		public const sbyte Wuxian = 11;
 
-		/// <summary>
-		/// 另辟蹊径
-		/// </summary>
 		public const sbyte Jieqing = 12;
 
-		/// <summary>
-		/// 易学难精
-		/// </summary>
 		public const sbyte Fulong = 13;
 
-		/// <summary>
-		/// 邪诡恶毒
-		/// </summary>
 		public const sbyte Xuehou = 14;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 以禅入武
-		/// </summary>
 		public static SectApprovingEffectItem Shaolin => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 真传正法
-		/// </summary>
 		public static SectApprovingEffectItem Emei => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 医武同源
-		/// </summary>
 		public static SectApprovingEffectItem Baihua => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 道法自然
-		/// </summary>
 		public static SectApprovingEffectItem Wudang => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 正大光明
-		/// </summary>
 		public static SectApprovingEffectItem Yuanshan => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 蛮修横练
-		/// </summary>
 		public static SectApprovingEffectItem Shixiang => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 字字玄玄
-		/// </summary>
 		public static SectApprovingEffectItem Ranshan => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 仙姿玉色
-		/// </summary>
 		public static SectApprovingEffectItem Xuannv => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 巧夺天工
-		/// </summary>
 		public static SectApprovingEffectItem Zhujian => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 厚积薄发
-		/// </summary>
 		public static SectApprovingEffectItem Kongsang => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 明王秘咒
-		/// </summary>
 		public static SectApprovingEffectItem Jingang => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 毒蛊通魂
-		/// </summary>
 		public static SectApprovingEffectItem Wuxian => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 另辟蹊径
-		/// </summary>
 		public static SectApprovingEffectItem Jieqing => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 易学难精
-		/// </summary>
 		public static SectApprovingEffectItem Fulong => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 邪诡恶毒
-		/// </summary>
 		public static SectApprovingEffectItem Xuehou => Instance[(sbyte)14];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SectApprovingEffect Instance = new SectApprovingEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "RequirementSubstitutions", "TemplateId", "Icon" };

@@ -188,6 +188,13 @@ public static class WorldStateDataHelper
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
 		byte xiangshuInfection = taiwu.GetXiangshuInfection();
+		foreach (short featureId in taiwu.GetFeatureIds())
+		{
+			if (CharacterFeature.Instance[featureId].IgnoreInfected)
+			{
+				return;
+			}
+		}
 		if (xiangshuInfection >= 200)
 		{
 			data.SetWorldState(19);

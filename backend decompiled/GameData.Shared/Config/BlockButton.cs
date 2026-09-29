@@ -7,201 +7,84 @@ namespace Config;
 [Serializable]
 public class BlockButton : ConfigData<BlockButtonItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 收集食材
-		/// </summary>
 		public const byte Gather0 = 0;
 
-		/// <summary>
-		/// 砍伐木料
-		/// </summary>
 		public const byte Gather1 = 1;
 
-		/// <summary>
-		/// 发掘金铁
-		/// </summary>
 		public const byte Gather2 = 2;
 
-		/// <summary>
-		/// 发掘玉石
-		/// </summary>
 		public const byte Gather3 = 3;
 
-		/// <summary>
-		/// 采集织物
-		/// </summary>
 		public const byte Gather4 = 4;
 
-		/// <summary>
-		/// 采集药材
-		/// </summary>
 		public const byte Gather5 = 5;
 
-		/// <summary>
-		/// 挖掘一次
-		/// </summary>
 		public const byte Dig = 6;
 
-		/// <summary>
-		/// 连续挖掘
-		/// </summary>
 		public const byte KeepDig = 7;
 
-		/// <summary>
-		/// 标记地点
-		/// </summary>
 		public const byte Mark = 8;
 
-		/// <summary>
-		/// 取消标记
-		/// </summary>
 		public const byte CancelMark = 9;
 
-		/// <summary>
-		/// 派遣村民
-		/// </summary>
 		public const byte Assign = 10;
 
-		/// <summary>
-		/// 切换村民
-		/// </summary>
 		public const byte SwitchCharacter = 11;
 
-		/// <summary>
-		/// 快速撤免
-		/// </summary>
 		public const byte CancelAssign = 12;
 
-		/// <summary>
-		/// 快速派遣
-		/// </summary>
 		public const byte QuickAssign = 13;
 
-		/// <summary>
-		/// 锁定派遣
-		/// </summary>
 		public const byte LockAssign = 14;
 
-		/// <summary>
-		/// 查看信息
-		/// </summary>
 		public const byte ShowInfo = 15;
 
-		/// <summary>
-		/// 待命
-		/// </summary>
 		public const byte Idle = 16;
 
-		/// <summary>
-		/// 守墓
-		/// </summary>
 		public const byte GraveKeeping = 17;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 收集食材
-		/// </summary>
 		public static BlockButtonItem Gather0 => Instance[(byte)0];
 
-		/// <summary>
-		/// 砍伐木料
-		/// </summary>
 		public static BlockButtonItem Gather1 => Instance[(byte)1];
 
-		/// <summary>
-		/// 发掘金铁
-		/// </summary>
 		public static BlockButtonItem Gather2 => Instance[(byte)2];
 
-		/// <summary>
-		/// 发掘玉石
-		/// </summary>
 		public static BlockButtonItem Gather3 => Instance[(byte)3];
 
-		/// <summary>
-		/// 采集织物
-		/// </summary>
 		public static BlockButtonItem Gather4 => Instance[(byte)4];
 
-		/// <summary>
-		/// 采集药材
-		/// </summary>
 		public static BlockButtonItem Gather5 => Instance[(byte)5];
 
-		/// <summary>
-		/// 挖掘一次
-		/// </summary>
 		public static BlockButtonItem Dig => Instance[(byte)6];
 
-		/// <summary>
-		/// 连续挖掘
-		/// </summary>
 		public static BlockButtonItem KeepDig => Instance[(byte)7];
 
-		/// <summary>
-		/// 标记地点
-		/// </summary>
 		public static BlockButtonItem Mark => Instance[(byte)8];
 
-		/// <summary>
-		/// 取消标记
-		/// </summary>
 		public static BlockButtonItem CancelMark => Instance[(byte)9];
 
-		/// <summary>
-		/// 派遣村民
-		/// </summary>
 		public static BlockButtonItem Assign => Instance[(byte)10];
 
-		/// <summary>
-		/// 切换村民
-		/// </summary>
 		public static BlockButtonItem SwitchCharacter => Instance[(byte)11];
 
-		/// <summary>
-		/// 快速撤免
-		/// </summary>
 		public static BlockButtonItem CancelAssign => Instance[(byte)12];
 
-		/// <summary>
-		/// 快速派遣
-		/// </summary>
 		public static BlockButtonItem QuickAssign => Instance[(byte)13];
 
-		/// <summary>
-		/// 锁定派遣
-		/// </summary>
 		public static BlockButtonItem LockAssign => Instance[(byte)14];
 
-		/// <summary>
-		/// 查看信息
-		/// </summary>
 		public static BlockButtonItem ShowInfo => Instance[(byte)15];
 
-		/// <summary>
-		/// 待命
-		/// </summary>
 		public static BlockButtonItem Idle => Instance[(byte)16];
 
-		/// <summary>
-		/// 守墓
-		/// </summary>
 		public static BlockButtonItem GraveKeeping => Instance[(byte)17];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static BlockButton Instance = new BlockButton();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Summary", "Desc", "TimeConsumeDesc", "TemplateId" };

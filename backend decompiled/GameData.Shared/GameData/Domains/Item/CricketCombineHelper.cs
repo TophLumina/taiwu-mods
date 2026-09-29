@@ -46,16 +46,12 @@ public static class CricketCombineHelper
 		return LocalStringManager.GetFormat(LanguageKey.LK_Cricket_CombineName, colorConfig.Name, partConfig.NameAtSecond);
 	}
 
-	/// <summary>
-	/// 计算蛐蛐道具名称
-	/// </summary>
 	public static string CalcCricketName(this ITradeableContent data)
 	{
 		int nameId = data.CricketData?.NameId ?? (-1);
 		return CalcCricketName(data.CricketColorId, data.CricketPartId, nameId);
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Item.CricketCombineHelper.CalcCricketName(GameData.Domains.Item.Display.ITradeableContent)" />
 	public static string CalcCricketName(short colorId, short partId, int nameId)
 	{
 		string customName = ItemTemplateHelper.GetName(nameId);

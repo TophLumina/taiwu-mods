@@ -4,26 +4,14 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 功法突破盘索引
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public struct SkillBreakPlateIndex : ISerializableGameData, IEquatable<SkillBreakPlateIndex>
 {
-	/// <summary>
-	/// 无效索引
-	/// </summary>
 	public static SkillBreakPlateIndex Invalid => (x: -1, y: -1);
 
-	/// <summary>
-	/// 列数
-	/// </summary>
 	[SerializableGameDataField]
 	public int X { get; private set; }
 
-	/// <summary>
-	/// 行数
-	/// </summary>
 	[SerializableGameDataField]
 	public int Y { get; private set; }
 
@@ -34,11 +22,6 @@ public struct SkillBreakPlateIndex : ISerializableGameData, IEquatable<SkillBrea
 		return result;
 	}
 
-	/// <summary>
-	/// 反构造
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
 	public void Deconstruct(out int x, out int y)
 	{
 		int x2 = X;
@@ -47,12 +30,6 @@ public struct SkillBreakPlateIndex : ISerializableGameData, IEquatable<SkillBrea
 		y = y2;
 	}
 
-	/// <summary>
-	/// 加法
-	/// </summary>
-	/// <param name="lhs"></param>
-	/// <param name="rhs"></param>
-	/// <returns></returns>
 	public static SkillBreakPlateIndex operator +(SkillBreakPlateIndex lhs, SkillBreakPlateIndex rhs)
 	{
 		return new SkillBreakPlateIndex
@@ -62,12 +39,6 @@ public struct SkillBreakPlateIndex : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <summary>
-	/// 乘法
-	/// </summary>
-	/// <param name="value"></param>
-	/// <param name="multiplier"></param>
-	/// <returns></returns>
 	public static SkillBreakPlateIndex operator *(SkillBreakPlateIndex value, int multiplier)
 	{
 		return new SkillBreakPlateIndex
@@ -77,13 +48,11 @@ public struct SkillBreakPlateIndex : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		return $"Index({X},{Y})";
 	}
 
-	/// <inheritdoc />
 	public bool Equals(SkillBreakPlateIndex other)
 	{
 		if (X == other.X)
@@ -93,7 +62,6 @@ public struct SkillBreakPlateIndex : ISerializableGameData, IEquatable<SkillBrea
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override bool Equals(object obj)
 	{
 		if (obj is SkillBreakPlateIndex other)
@@ -103,29 +71,16 @@ public struct SkillBreakPlateIndex : ISerializableGameData, IEquatable<SkillBrea
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override int GetHashCode()
 	{
 		return (((((X * 397) ^ Y) * 397) ^ X) * 397) ^ Y;
 	}
 
-	/// <summary>
-	/// 等于
-	/// </summary>
-	/// <param name="left"></param>
-	/// <param name="right"></param>
-	/// <returns></returns>
 	public static bool operator ==(SkillBreakPlateIndex left, SkillBreakPlateIndex right)
 	{
 		return left.Equals(right);
 	}
 
-	/// <summary>
-	/// 不等
-	/// </summary>
-	/// <param name="left"></param>
-	/// <param name="right"></param>
-	/// <returns></returns>
 	public static bool operator !=(SkillBreakPlateIndex left, SkillBreakPlateIndex right)
 	{
 		return !(left == right);

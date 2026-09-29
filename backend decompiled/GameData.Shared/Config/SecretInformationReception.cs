@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SecretInformationReception : ConfigData<SecretInformationReceptionItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationReception Instance = new SecretInformationReception();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "PersonalityTypeRt", "PersonalityTypeDisForRelationForInvolved", "PersonalityTypeDisForRelationForUninvolved" };

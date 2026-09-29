@@ -63,7 +63,7 @@ public class ReverseNext : CombatSkillEffectBase
 			ReduceEffectCount();
 			ShowSpecialEffectTips(0);
 			InvalidateCache(context, 209);
-			short effectTemplateId = (short)((direction == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
+			short effectTemplateId = ((direction == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
 			SpecialEffectItem effectConfig = Config.SpecialEffect.Instance[effectTemplateId];
 			if (effectConfig.EffectActiveType == 1)
 			{
@@ -93,7 +93,7 @@ public class ReverseNext : CombatSkillEffectBase
 		CombatSkillKey skillKey = new CombatSkillKey(base.CharacterId, skillId);
 		CombatSkillItem skillConfig = Config.CombatSkill.Instance[skillId];
 		GameData.Domains.CombatSkill.CombatSkill skill = DomainManager.CombatSkill.GetElement_CombatSkills(skillKey);
-		short effectTemplateId = (short)((skill.GetDirection() == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
+		short effectTemplateId = ((skill.GetDirection() == 0) ? skillConfig.DirectEffectID : skillConfig.ReverseEffectID);
 		SpecialEffectItem effectConfig = Config.SpecialEffect.Instance[effectTemplateId];
 		if (effectConfig.EffectActiveType == 1)
 		{

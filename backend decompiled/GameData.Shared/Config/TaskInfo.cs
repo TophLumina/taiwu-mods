@@ -8,4001 +8,1608 @@ namespace Config;
 [Serializable]
 public class TaskInfo : ConfigData<TaskInfoItem, int>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 回村寻船
-		/// </summary>
 		public const int ReturnToGetBoat = 13;
 
-		/// <summary>
-		/// 以船渡河
-		/// </summary>
 		public const int TakeBoatToLeave = 14;
 
-		/// <summary>
-		/// 亡流驿站
-		/// </summary>
 		public const int BrokenAreaTravel = 19;
 
-		/// <summary>
-		/// 寻路太吾
-		/// </summary>
 		public const int FirstArriveTaiwuArea = 20;
 
-		/// <summary>
-		/// 振兴太吾
-		/// </summary>
 		public const int SideQuest_ConstructTaiwuVillage = 23;
 
-		/// <summary>
-		/// 派遣村民
-		/// </summary>
 		public const int SideQuest_AssignVillagers = 24;
 
-		/// <summary>
-		/// 耳闻仙人
-		/// </summary>
 		public const int HearsayOfImmortal = 25;
 
-		/// <summary>
-		/// 古墓仙人
-		/// </summary>
 		public const int VisitTombImmortal = 26;
 
-		/// <summary>
-		/// 仙人疑云
-		/// </summary>
 		public const int ReturnToTaiwuVillage = 27;
 
-		/// <summary>
-		/// 太吾驿站
-		/// </summary>
 		public const int MainStory_TaiwuVillageStation = 31;
 
-		/// <summary>
-		/// 以向化身1
-		/// </summary>
 		public const int PurpleBambooYixiangChp2 = 616;
 
-		/// <summary>
-		/// 等待盟会
-		/// </summary>
 		public const int MartialArtTournamentWait = 64;
 
-		/// <summary>
-		/// 筹备盟会
-		/// </summary>
 		public const int MartialArtTournamentPrepare = 65;
 
-		/// <summary>
-		/// 武林盟会
-		/// </summary>
 		public const int MartialArtTournamentReady = 66;
 
-		/// <summary>
-		/// 语茯来访
-		/// </summary>
 		public const int YufuArrivesAtTaiwuVillage = 67;
 
-		/// <summary>
-		/// 玄竹降世
-		/// </summary>
 		public const int DarkBambooAppeared = 74;
 
-		/// <summary>
-		/// 出神之法
-		/// </summary>
 		public const int MainStory_SpiritualWanderPlace0 = 82;
 
-		/// <summary>
-		/// 出神之地
-		/// </summary>
 		public const int MainStory_SpiritualWanderPlace1 = 83;
 
-		/// <summary>
-		/// 邪魔线前置-初遇魔血
-		/// </summary>
 		public const int PreEvilFirstDemonBlood = 644;
 
-		/// <summary>
-		/// 邪魔线前置-一念魔血
-		/// </summary>
 		public const int PreEvilDemonBloodSurge = 645;
 
-		/// <summary>
-		/// 邪魔线前置-欲念侵心-贪
-		/// </summary>
 		public const int PreEvilRaga = 646;
 
-		/// <summary>
-		/// 邪魔线前置-欲念侵心-嗔
-		/// </summary>
 		public const int PreEvilDvesa = 647;
 
-		/// <summary>
-		/// 邪魔线前置-欲念侵心-痴
-		/// </summary>
 		public const int PreEvilMoha = 648;
 
-		/// <summary>
-		/// 邪魔线前置-魔血玄石
-		/// </summary>
 		public const int PreEvilDemonBloodDarkstone = 649;
 
-		/// <summary>
-		/// 邪魔线前置-静待机缘
-		/// </summary>
 		public const int PreEvilWaitForChance = 650;
 
-		/// <summary>
-		/// 探听消息
-		/// </summary>
 		public const int MainStory_Investigate = 677;
 
-		/// <summary>
-		/// 流民之忧
-		/// </summary>
 		public const int MainStory_RefugeeDistress = 678;
 
-		/// <summary>
-		/// 寻找食物
-		/// </summary>
 		public const int MainStory_FindFood = 679;
 
-		/// <summary>
-		/// 医者之忧
-		/// </summary>
 		public const int MainStory_DoctorDistress = 680;
 
-		/// <summary>
-		/// 寻找药材
-		/// </summary>
 		public const int MainStory_FindHerbs = 681;
 
-		/// <summary>
-		/// 宁氏之忧
-		/// </summary>
 		public const int MainStory_NingDistress = 682;
 
-		/// <summary>
-		/// 寻找衣物
-		/// </summary>
 		public const int MainStory_FindClothes = 683;
 
-		/// <summary>
-		/// 无名伤者
-		/// </summary>
 		public const int MainStory_UnknownPatient = 684;
 
-		/// <summary>
-		/// 前往柴山
-		/// </summary>
 		public const int MainStory_GoToChaiMountain = 685;
 
-		/// <summary>
-		/// 柴山异变
-		/// </summary>
 		public const int MainStory_ChaiShanMutation = 686;
 
-		/// <summary>
-		/// 十二邪仙0
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals0 = 687;
 
-		/// <summary>
-		/// 十二邪仙1
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals1 = 688;
 
-		/// <summary>
-		/// 十二邪仙2
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals2 = 689;
 
-		/// <summary>
-		/// 十二邪仙3
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals3 = 690;
 
-		/// <summary>
-		/// 十二邪仙4
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals4 = 691;
 
-		/// <summary>
-		/// 十二邪仙5
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals5 = 692;
 
-		/// <summary>
-		/// 十二邪仙6
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals6 = 693;
 
-		/// <summary>
-		/// 十二邪仙7
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals7 = 694;
 
-		/// <summary>
-		/// 十二邪仙8
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals8 = 695;
 
-		/// <summary>
-		/// 十二邪仙9
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals9 = 696;
 
-		/// <summary>
-		/// 十二邪仙10
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals10 = 697;
 
-		/// <summary>
-		/// 十二邪仙11
-		/// </summary>
 		public const int MainStory_TwelveEvilImmortals11 = 698;
 
-		/// <summary>
-		/// 无绡去向
-		/// </summary>
 		public const int MainStory_WhereaboutsofZiwuxiao = 701;
 
-		/// <summary>
-		/// 子夜生变
-		/// </summary>
 		public const int MainStory_MidnightUpheaval = 702;
 
-		/// <summary>
-		/// 仙公踪迹
-		/// </summary>
 		public const int MainStory_WhereaboutsofXuxiangong = 703;
 
-		/// <summary>
-		/// 决战神魔
-		/// </summary>
 		public const int MainStory_ShowdownofGodsandDemons = 704;
 
-		/// <summary>
-		/// 空桑主线奇毒绝方
-		/// </summary>
 		public const int Kongsang_MissionUnaccepted = 101;
 
-		/// <summary>
-		/// 空桑主线无命寻人0
-		/// </summary>
 		public const int Kongsang_SearchTarget0 = 102;
 
-		/// <summary>
-		/// 空桑主线无命试毒0
-		/// </summary>
 		public const int Kongsang_PoisonTest0 = 103;
 
-		/// <summary>
-		/// 空桑主线上复掌门0
-		/// </summary>
 		public const int Kongsang_ReplySect0 = 104;
 
-		/// <summary>
-		/// 空桑主线无命寻人1
-		/// </summary>
 		public const int Kongsang_SearchTarget1 = 105;
 
-		/// <summary>
-		/// 空桑主线无命试毒1
-		/// </summary>
 		public const int Kongsang_PoisonTest1 = 106;
 
-		/// <summary>
-		/// 空桑主线上复掌门1
-		/// </summary>
 		public const int Kongsang_ReplySect1 = 107;
 
-		/// <summary>
-		/// 空桑主线无命寻人2
-		/// </summary>
 		public const int Kongsang_SearchTarget2 = 108;
 
-		/// <summary>
-		/// 空桑主线无命试毒2
-		/// </summary>
 		public const int Kongsang_PoisonTest2 = 109;
 
-		/// <summary>
-		/// 空桑主线上复掌门3
-		/// </summary>
 		public const int Kongsang_ReplySect3 = 110;
 
-		/// <summary>
-		/// 空桑主线寻找无命
-		/// </summary>
 		public const int Kongsang_FindWLiao = 111;
 
-		/// <summary>
-		/// 空桑主线上复掌门2
-		/// </summary>
 		public const int Kongsang_ReplySect2 = 112;
 
-		/// <summary>
-		/// 空桑主线百年奇遇
-		/// </summary>
 		public const int Kongsang_WaitForAdventure = 113;
 
-		/// <summary>
-		/// 空桑主线长生之死
-		/// </summary>
 		public const int Kongsang_AdventureAppeared = 114;
 
-		/// <summary>
-		/// 血犼主线调查血犼
-		/// </summary>
 		public const int Xuehou_GraveDigging = 115;
 
-		/// <summary>
-		/// 血犼主线破旧铃铛
-		/// </summary>
 		public const int Xuehou_RustBell = 116;
 
-		/// <summary>
-		/// 血犼主线老人异相
-		/// </summary>
 		public const int Xuehou_OldmanMyth = 117;
 
-		/// <summary>
-		/// 血犼主线红衣老人
-		/// </summary>
 		public const int Xuehou_Oldman = 118;
 
-		/// <summary>
-		/// 血犼主线调查血光
-		/// </summary>
 		public const int Xuehou_CheckBloodBlock = 119;
 
-		/// <summary>
-		/// 血犼主线墓地邂逅
-		/// </summary>
 		public const int Xuehou_AdventureGrave = 120;
 
-		/// <summary>
-		/// 血犼主线姬穸回村
-		/// </summary>
 		public const int Xuehou_BringJixiBack = 121;
 
-		/// <summary>
-		/// 血犼主线留在村中
-		/// </summary>
 		public const int Xuehou_StayWithJixi = 122;
 
-		/// <summary>
-		/// 血犼主线村中异事
-		/// </summary>
 		public const int Xuehou_MythInVillage = 123;
 
-		/// <summary>
-		/// 血犼主线真相线索1
-		/// </summary>
 		public const int Xuehou_TruthClue1 = 124;
 
-		/// <summary>
-		/// 血犼主线假象线索1
-		/// </summary>
 		public const int Xuehou_FalsityClue1 = 125;
 
-		/// <summary>
-		/// 血犼主线真相线索2
-		/// </summary>
 		public const int Xuehou_TruthClue2 = 126;
 
-		/// <summary>
-		/// 血犼主线假象线索2
-		/// </summary>
 		public const int Xuehou_FalsityClue2 = 127;
 
-		/// <summary>
-		/// 血犼主线真相线索3
-		/// </summary>
 		public const int Xuehou_TruthClue3 = 128;
 
-		/// <summary>
-		/// 血犼主线假象线索3
-		/// </summary>
 		public const int Xuehou_FalsityClue3 = 129;
 
-		/// <summary>
-		/// 血犼主线调查姬穸
-		/// </summary>
 		public const int Xuehou_InterrogateJixi = 130;
 
-		/// <summary>
-		/// 血犼主线传剑交谈
-		/// </summary>
 		public const int Xuehou_PassLegacy = 131;
 
-		/// <summary>
-		/// 少林主线少林异动
-		/// </summary>
 		public const int Shaolin_MythinShaolin = 132;
 
-		/// <summary>
-		/// 少林主线肮脏雕像
-		/// </summary>
 		public const int Shaolin_MuddyStatue = 133;
 
-		/// <summary>
-		/// 少林主线归还雕像
-		/// </summary>
 		public const int Shaolin_ReturnStatue = 134;
 
-		/// <summary>
-		/// 少林主线留在少林
-		/// </summary>
 		public const int Shaolin_StayAndWait = 135;
 
-		/// <summary>
-		/// 少林主线老僧相会
-		/// </summary>
 		public const int Shaolin_BodhidharmaInDream = 136;
 
-		/// <summary>
-		/// 少林主线雕像碎裂
-		/// </summary>
 		public const int Shaolin_BrokenStatue = 137;
 
-		/// <summary>
-		/// 少林主线禅武之争
-		/// </summary>
 		public const int Shaolin_Conflict = 138;
 
-		/// <summary>
-		/// 少林主线努力修习
-		/// </summary>
 		public const int Shaolin_Endeavor = 139;
 
-		/// <summary>
-		/// 少林主线老僧再临
-		/// </summary>
 		public const int Shaolin_WaitForBodhidharma = 140;
 
-		/// <summary>
-		/// 少林主线挖掘宝物
-		/// </summary>
 		public const int Shaolin_DiggingSutra = 141;
 
-		/// <summary>
-		/// 少林主线老僧传授
-		/// </summary>
 		public const int Shaolin_StudyForBodhidharmaChallenge = 142;
 
-		/// <summary>
-		/// 少林主线佛学书籍
-		/// </summary>
 		public const int Shaolin_ObtainedSutra = 143;
 
-		/// <summary>
-		/// 少林主线阅读佛经
-		/// </summary>
 		public const int Shaolin_ReadSutra = 144;
 
-		/// <summary>
-		/// 少林主线少林众塔
-		/// </summary>
 		public const int Shaolin_VisitShaolin = 145;
 
-		/// <summary>
-		/// 少林主线藏经阁楼
-		/// </summary>
 		public const int Shaolin_SutraLibrary = 146;
 
-		/// <summary>
-		/// 璇女主线璇女异动
-		/// </summary>
 		public const int Xuannv_QinAndQing = 147;
 
-		/// <summary>
-		/// 璇女主线询问古曲
-		/// </summary>
 		public const int Xuannv_WaitForLetters = 148;
 
-		/// <summary>
-		/// 璇女主线古曲旋律
-		/// </summary>
 		public const int Xuannv_SeekLetterSender = 149;
 
-		/// <summary>
-		/// 璇女主线镜里孤鸾
-		/// </summary>
 		public const int Xuannv_SeekXuannv = 150;
 
-		/// <summary>
-		/// 璇女主线寻人请求
-		/// </summary>
 		public const int Xuannv_AdventureSoulInMirror = 151;
 
-		/// <summary>
-		/// 璇女主线修习功法
-		/// </summary>
 		public const int Xuannv_RefusedToSearch = 152;
 
-		/// <summary>
-		/// 璇女新主线修习功法
-		/// </summary>
 		public const int Xuannv_Study = 153;
 
-		/// <summary>
-		/// 璇女新主线返回一明
-		/// </summary>
 		public const int Xuannv_ReturnToMirror = 154;
 
-		/// <summary>
-		/// 璇女新主线回璇女峰
-		/// </summary>
 		public const int Xuannv_TakeShiToXuannv = 155;
 
-		/// <summary>
-		/// 璇女新主线静待消息
-		/// </summary>
 		public const int Xuannv_WaitForMessage = 156;
 
-		/// <summary>
-		/// 璇女新主线查问天女
-		/// </summary>
 		public const int Xuannv_AskShadow = 157;
 
-		/// <summary>
-		/// 璇女新主线查问筠儿
-		/// </summary>
 		public const int Xuannv_AskJuner = 158;
 
-		/// <summary>
-		/// 璇女新主线查问璇女
-		/// </summary>
 		public const int Xuannv_AskXuannvSect = 159;
 
-		/// <summary>
-		/// 璇女新主线考试挂科
-		/// </summary>
 		public const int Xuannv_FailAndRetake = 160;
 
-		/// <summary>
-		/// 璇女新主线准备学习
-		/// </summary>
 		public const int Xuannv_ReadyToStudy = 161;
 
-		/// <summary>
-		/// 璇女主线前往寻人
-		/// </summary>
 		public const int Xuannv_AcceptedToSearch = 162;
 
-		/// <summary>
-		/// 璇女主线等候会面
-		/// </summary>
 		public const int Xuannv_AdventureIllusionOfMirror = 163;
 
-		/// <summary>
-		/// 璇女主线探访璇女
-		/// </summary>
 		public const int Xuannv_SeekLove = 164;
 
-		/// <summary>
-		/// 璇女主线回复掌门
-		/// </summary>
 		public const int Xuannv_WaitForReturn = 165;
 
-		/// <summary>
-		/// 孤鸾镜水
-		/// </summary>
 		public const int PlayerShadowInMirror = 166;
 
-		/// <summary>
-		/// 武当主线逆练功法
-		/// </summary>
 		public const int Wudang_Prologue = 167;
 
-		/// <summary>
-		/// 武当主线等待道长
-		/// </summary>
 		public const int Wudang_WaitForSlobbyTaoistMonk = 168;
 
-		/// <summary>
-		/// 武当主线道长探查
-		/// </summary>
 		public const int Wudang_SloppyTaoistMonkRequest = 169;
 
-		/// <summary>
-		/// 武当主线探访洞天
-		/// </summary>
 		public const int Wudang_SeekSite = 170;
 
-		/// <summary>
-		/// 武当主线回复道长
-		/// </summary>
 		public const int Wudang_ReturnToSloppyTaoistMonk = 171;
 
-		/// <summary>
-		/// 武当主线养护神树
-		/// </summary>
 		public const int Wudang_CultivateHeavenlyTreeMain = 172;
 
-		/// <summary>
-		/// 武当主线种植神树
-		/// </summary>
 		public const int Wudang_PlantHeavenlyTree = 173;
 
-		/// <summary>
-		/// 武当主线守卫神树
-		/// </summary>
 		public const int Wudang_ProtectHeavenlyTree = 174;
 
-		/// <summary>
-		/// 武当主线研修道法
-		/// </summary>
 		public const int Wudang_ReadTaoistBook = 175;
 
-		/// <summary>
-		/// 武当主线取神木种
-		/// </summary>
 		public const int Wudang_GetHeavenlyTreeSeed = 176;
 
-		/// <summary>
-		/// 武当主线道长做法
-		/// </summary>
 		public const int Wudang_TaoistMonkSacrifices = 177;
 
-		/// <summary>
-		/// 武当主线最终作法
-		/// </summary>
 		public const int Wudang_WaitForTimePassing = 178;
 
-		/// <summary>
-		/// 武当主线前往武当
-		/// </summary>
 		public const int Wudang_VisitWudang = 179;
 
-		/// <summary>
-		/// 武当主线等待仙缘
-		/// </summary>
 		public const int Wudang_WaitForImmortals = 180;
 
-		/// <summary>
-		/// 武当主线查问武当
-		/// </summary>
 		public const int Wudang_AskWudang = 181;
 
-		/// <summary>
-		/// 狮相主线狮相流言
-		/// </summary>
 		public const int Shixiang_Anecdote = 182;
 
-		/// <summary>
-		/// 狮相主线前往狮相
-		/// </summary>
 		public const int Shixiang_ArriveSect = 183;
 
-		/// <summary>
-		/// 狮相主线狮相传言
-		/// </summary>
 		public const int Shixiang_AskForJokes = 184;
 
-		/// <summary>
-		/// 狮相主线狮相异动
-		/// </summary>
 		public const int Shixiang_Myth = 185;
 
-		/// <summary>
-		/// 狮相主线狮相绝技
-		/// </summary>
 		public const int Shixiang_PoemAdventure = 186;
 
-		/// <summary>
-		/// 狮相主线静观其变
-		/// </summary>
 		public const int Shixiang_WaitforLetters = 187;
 
-		/// <summary>
-		/// 狮相主线探查狮相
-		/// </summary>
 		public const int Shixiang_Arrive = 188;
 
-		/// <summary>
-		/// 狮相主线消灭外道
-		/// </summary>
 		public const int Shixiang_Heretics = 189;
 
-		/// <summary>
-		/// 狮相主线上复门主
-		/// </summary>
 		public const int Shixiang_ReplyHead = 190;
 
-		/// <summary>
-		/// 狮相主线狮相异相
-		/// </summary>
 		public const int Shixiang_Stay = 191;
 
-		/// <summary>
-		/// 狮相主线剿灭叛徒
-		/// </summary>
 		public const int Shixiang_Traitors = 192;
 
-		/// <summary>
-		/// 狮相主线驱逐异族
-		/// </summary>
 		public const int Shixiang_Barbarians = 193;
 
-		/// <summary>
-		/// 狮相主线等待清理
-		/// </summary>
 		public const int Shixiang_WaitForBattles = 194;
 
-		/// <summary>
-		/// 狮相主线静待后续
-		/// </summary>
 		public const int Shixiang_Ending = 195;
 
-		/// <summary>
-		/// 金刚主线民不聊生
-		/// </summary>
 		public const int Jingang_Poverty = 196;
 
-		/// <summary>
-		/// 金刚主线前往金刚
-		/// </summary>
 		public const int Jingang_ToJingang = 197;
 
-		/// <summary>
-		/// 金刚剧情古刹何在
-		/// </summary>
 		public const int Jingang_AdventureAppeared = 198;
 
-		/// <summary>
-		/// 金刚主线古经迷踪
-		/// </summary>
 		public const int Jingang_Adventure = 199;
 
-		/// <summary>
-		/// 金刚主线解读残经
-		/// </summary>
 		public const int Jingang_Haunted = 200;
 
-		/// <summary>
-		/// 金刚主线高僧写经
-		/// </summary>
 		public const int Jingang_AssistReincarnation = 201;
 
-		/// <summary>
-		/// 金刚主线回复高僧
-		/// </summary>
 		public const int Jingang_WaitForReincarnation = 202;
 
-		/// <summary>
-		/// 金刚主线秦州换经
-		/// </summary>
 		public const int Jingang_ToKunlun = 203;
 
-		/// <summary>
-		/// 金刚主线襄阳换经
-		/// </summary>
 		public const int Jingang_SearchMonk = 204;
 
-		/// <summary>
-		/// 金刚主线太原换经
-		/// </summary>
 		public const int Jingang_SecInfoSpreading = 205;
 
-		/// <summary>
-		/// 金刚主线京城换经
-		/// </summary>
 		public const int Jingang_RefuseAndFailing = 206;
 
-		/// <summary>
-		/// 金刚主线高僧何往
-		/// </summary>
 		public const int Jingang_MonkEnding = 207;
 
-		/// <summary>
-		/// 金刚剧情高僧消失
-		/// </summary>
 		public const int Jingang_MonkKilled = 208;
 
-		/// <summary>
-		/// 金刚剧情中原僧人
-		/// </summary>
 		public const int Jingang_SutraDiscussion = 209;
 
-		/// <summary>
-		/// 金刚剧情疑问重重
-		/// </summary>
 		public const int Jingang_SutraFeedback = 210;
 
-		/// <summary>
-		/// 金刚剧情高僧写经
-		/// </summary>
 		public const int Jingang_SutraExplaining = 211;
 
-		/// <summary>
-		/// 金刚主线了结此事
-		/// </summary>
 		public const int Jingang_BackToJingang = 212;
 
-		/// <summary>
-		/// 金刚主线交还经文
-		/// </summary>
 		public const int Jingang_ReturnSutra = 213;
 
-		/// <summary>
-		/// 金刚主线真经无字
-		/// </summary>
 		public const int Jingang_Ending = 214;
 
-		/// <summary>
-		/// 五仙主线常来洗澡
-		/// </summary>
 		public const int Wuxian_Bath = 215;
 
-		/// <summary>
-		/// 五仙主线前往百花
-		/// </summary>
 		public const int Wuxian_ToBaihua = 216;
 
-		/// <summary>
-		/// 五仙主线五仙请求
-		/// </summary>
 		public const int Wuxian_AcceptRequest = 217;
 
-		/// <summary>
-		/// 五仙主线前往空桑
-		/// </summary>
 		public const int Wuxian_ToKongsang = 218;
 
-		/// <summary>
-		/// 五仙主线回到五仙
-		/// </summary>
 		public const int Wuxian_BackHome = 219;
 
-		/// <summary>
-		/// 五仙主线心愿未了
-		/// </summary>
 		public const int Wuxian_WishComeTrue = 220;
 
-		/// <summary>
-		/// 五仙主线五圣心毒
-		/// </summary>
 		public const int Wuxian_Adventure = 221;
 
-		/// <summary>
-		/// 峨眉主线峨眉凶案
-		/// </summary>
 		public const int Emei_HomocideCases = 222;
 
-		/// <summary>
-		/// 峨眉主线凶案线索
-		/// </summary>
 		public const int Emei_Clues = 223;
 
-		/// <summary>
-		/// 峨眉主线调查白猿
-		/// </summary>
 		public const int Emei_InvestigateWhiteGibbon = 224;
 
-		/// <summary>
-		/// 峨眉主线峨眉正宗
-		/// </summary>
 		public const int Emei_Orthrodox = 225;
 
-		/// <summary>
-		/// 峨眉主线何为正宗
-		/// </summary>
 		public const int Emei_OrthrodoxAdventure = 226;
 
-		/// <summary>
-		/// 峨眉主线等待奇遇
-		/// </summary>
 		public const int Emei_WaitForAdventure = 227;
 
-		/// <summary>
-		/// 峨眉主线寻找白猿
-		/// </summary>
 		public const int Emei_SeekWhiteGibbon = 228;
 
-		/// <summary>
-		/// 峨眉主线白猿消失
-		/// </summary>
 		public const int Emei_WhiteGibbonsDisappeared = 229;
 
-		/// <summary>
-		/// 峨眉主线小石消失
-		/// </summary>
 		public const int Emei_ShiHoujiuDisappeared = 230;
 
-		/// <summary>
-		/// 峨眉新主线初探风波
-		/// </summary>
 		public const int Emei_Prologue = 709;
 
-		/// <summary>
-		/// 峨眉新主线峨眉动向
-		/// </summary>
 		public const int Emei_StormApproaches = 710;
 
-		/// <summary>
-		/// 峨眉新主线峨眉山月
-		/// </summary>
 		public const int Emei_Midnight = 711;
 
-		/// <summary>
-		/// 峨眉新主线掌门密信
-		/// </summary>
 		public const int Emei_SecretLetter = 712;
 
-		/// <summary>
-		/// 峨眉新主线急赴峨眉
-		/// </summary>
 		public const int Emei_Crisis = 713;
 
-		/// <summary>
-		/// 峨眉新主线预备比武
-		/// </summary>
 		public const int Emei_Preparing = 714;
 
-		/// <summary>
-		/// 峨眉新主线预备比武0
-		/// </summary>
 		public const int Emei_TeachingMember = 715;
 
-		/// <summary>
-		/// 峨眉新主线预备比武1
-		/// </summary>
 		public const int Emei_SeekForWhiteGibbon = 716;
 
-		/// <summary>
-		/// 峨眉新主线预备比武2
-		/// </summary>
 		public const int Emei_SeekForXiaoshi = 717;
 
-		/// <summary>
-		/// 峨眉新主线预备比武3
-		/// </summary>
 		public const int Emei_TalkToMember = 718;
 
-		/// <summary>
-		/// 峨眉新主线预备比武4
-		/// </summary>
 		public const int Emei_TalkToVillager = 719;
 
-		/// <summary>
-		/// 峨眉新主线金顶比武
-		/// </summary>
 		public const int Emei_Tournament = 720;
 
-		/// <summary>
-		/// 峨眉新主线等待休养
-		/// </summary>
 		public const int Emei_TakeBreak = 731;
 
-		/// <summary>
-		/// 峨眉新主线峨眉现状
-		/// </summary>
 		public const int Emei_NowStates = 721;
 
-		/// <summary>
-		/// 峨眉新主线暂离峨眉
-		/// </summary>
 		public const int Emei_Leaving = 722;
 
-		/// <summary>
-		/// 峨眉新主线再寻白猿
-		/// </summary>
 		public const int Emei_SeekWhiteGibbonAgain = 723;
 
-		/// <summary>
-		/// 峨眉新主线追踪恶妖
-		/// </summary>
 		public const int Emei_SeekForEvil = 724;
 
-		/// <summary>
-		/// 峨眉新主线寻找恶妖0
-		/// </summary>
 		public const int Emei_Chat = 725;
 
-		/// <summary>
-		/// 峨眉新主线追击真凶
-		/// </summary>
 		public const int Emei_Pursuit = 726;
 
-		/// <summary>
-		/// 峨眉新主线别过群侠
-		/// </summary>
 		public const int Emei_Farewell = 727;
 
-		/// <summary>
-		/// 峨眉新主线漫步峨眉
-		/// </summary>
 		public const int Emei_WalkInMountains = 728;
 
-		/// <summary>
-		/// 峨眉新主线静待了结
-		/// </summary>
 		public const int Emei_Finale = 729;
 
-		/// <summary>
-		/// 梦回剧情跟上伏虞
-		/// </summary>
 		public const int CrossArchive_FollowFuyu = 231;
 
-		/// <summary>
-		/// 梦回剧情取回行囊
-		/// </summary>
 		public const int CrossArchive_Items = 232;
 
-		/// <summary>
-		/// 梦回剧情取回技艺
-		/// </summary>
 		public const int CrossArchive_LifeSkills = 233;
 
-		/// <summary>
-		/// 梦回剧情取回功法
-		/// </summary>
 		public const int CrossArchive_CombatSkills = 234;
 
-		/// <summary>
-		/// 五方神龙回太吾村
-		/// </summary>
 		public const int LoongDLCToVillage = 235;
 
-		/// <summary>
-		/// 五方神龙前往抓龙
-		/// </summary>
 		public const int LoongDLCCaptureLoong = 236;
 
-		/// <summary>
-		/// 五方神龙养育蛟卵
-		/// </summary>
 		public const int LoongDLCNurtureJiao = 237;
 
-		/// <summary>
-		/// 挑战白龙
-		/// </summary>
 		public const int ChallengeWhiteLoong = 238;
 
-		/// <summary>
-		/// 挑战黑龙
-		/// </summary>
 		public const int ChallengeBlackLoong = 239;
 
-		/// <summary>
-		/// 挑战青龙
-		/// </summary>
 		public const int ChallengeBlueLoong = 240;
 
-		/// <summary>
-		/// 挑战赤龙
-		/// </summary>
 		public const int ChallengeRedLoong = 241;
 
-		/// <summary>
-		/// 挑战黄龙
-		/// </summary>
 		public const int ChallengeYellowLoong = 242;
 
-		/// <summary>
-		/// 养育长蛟
-		/// </summary>
 		public const int NurtureJiao = 243;
 
-		/// <summary>
-		/// 繁育长蛟
-		/// </summary>
 		public const int ReproductJiao = 244;
 
-		/// <summary>
-		/// 五仙剧情此地危险
-		/// </summary>
 		public const int Wuxian_InWugDanger = 245;
 
-		/// <summary>
-		/// 五仙剧情查问五仙
-		/// </summary>
 		public const int Wuxian_SeekWuxian = 246;
 
-		/// <summary>
-		/// 五仙剧情前去洗澡
-		/// </summary>
 		public const int Wuxian_TakeBath = 247;
 
-		/// <summary>
-		/// 五仙剧情许下心愿
-		/// </summary>
 		public const int Wuxian_MakeAWish = 248;
 
-		/// <summary>
-		/// 五仙剧情五仙衰落
-		/// </summary>
 		public const int Wuxian_RefuseRequest = 249;
 
-		/// <summary>
-		/// 五仙剧情共跳盘王
-		/// </summary>
 		public const int Wuxian_BaihuaAdventure = 250;
 
-		/// <summary>
-		/// 五仙剧情找百花人
-		/// </summary>
 		public const int Wuxian_SeekBaihua = 251;
 
-		/// <summary>
-		/// 五仙剧情共祭星典
-		/// </summary>
 		public const int Wuxian_KongsangAdventure = 252;
 
-		/// <summary>
-		/// 五仙剧情找空桑人
-		/// </summary>
 		public const int Wuxian_SeekKongsang = 253;
 
-		/// <summary>
-		/// 五仙剧情跟随鸳虫
-		/// </summary>
 		public const int Wuxian_FollowLove = 254;
 
-		/// <summary>
-		/// 五仙剧情心愿已了
-		/// </summary>
 		public const int Wuxian_FailingWish = 255;
 
-		/// <summary>
-		/// 五仙剧情身中蛊毒
-		/// </summary>
 		public const int Wuxian_Wugged = 256;
 
-		/// <summary>
-		/// 五仙剧情见苒心毒
-		/// </summary>
 		public const int Wuxian_MeetWithRan = 257;
 
-		/// <summary>
-		/// 然山剧情前往然山
-		/// </summary>
 		public const int Ranshan_ToRanshan = 258;
 
-		/// <summary>
-		/// 然山剧情青琅一梦
-		/// </summary>
 		public const int Ranshan_QinglangDream = 259;
 
-		/// <summary>
-		/// 然山剧情迁思回虑
-		/// </summary>
 		public const int Ranshan_AfterQinglang = 260;
 
-		/// <summary>
-		/// 然山剧情准备比武
-		/// </summary>
 		public const int Ranshan_LeaveRanshan = 261;
 
-		/// <summary>
-		/// 然山剧情教导华居
-		/// </summary>
 		public const int Ranshan_TeachHuaju = 262;
 
-		/// <summary>
-		/// 然山剧情教导玄质
-		/// </summary>
 		public const int Ranshan_TeachXuanzhi = 263;
 
-		/// <summary>
-		/// 然山剧情教导迎娇
-		/// </summary>
 		public const int Ranshan_TeachYingjiao = 264;
 
-		/// <summary>
-		/// 然山剧情回到然山
-		/// </summary>
 		public const int Ranshan_BackToRanshan = 265;
 
-		/// <summary>
-		/// 然山剧情等待比武
-		/// </summary>
 		public const int Ranshan_WaitForBiWu = 266;
 
-		/// <summary>
-		/// 然山剧情三宗比武
-		/// </summary>
 		public const int Ranshan_SanZongBiWu = 267;
 
-		/// <summary>
-		/// 然山剧情无问仙踪
-		/// </summary>
 		public const int Ranshan_End = 268;
 
-		/// <summary>
-		/// 然山剧情进入青琅阁
-		/// </summary>
 		public const int Ranshan_EnterQinglangge = 269;
 
-		/// <summary>
-		/// 然山剧情仙途渺渺
-		/// </summary>
 		public const int Ranshan_EndInAdvance = 270;
 
-		/// <summary>
-		/// 百花剧情探查疯病
-		/// </summary>
 		public const int Baihua_Manic = 271;
 
-		/// <summary>
-		/// 百花剧情乡村怪病
-		/// </summary>
 		public const int Baihua_AdventureVillageEndemic = 272;
 
-		/// <summary>
-		/// 百花剧情寻医问诊
-		/// </summary>
 		public const int Baihua_SeekMedCare = 273;
 
-		/// <summary>
-		/// 百花剧情百花祖师
-		/// </summary>
 		public const int Baihua_WaitForGurus = 274;
 
-		/// <summary>
-		/// 百花剧情等待无忧
-		/// </summary>
 		public const int Baihua_WaitForMelano = 275;
 
-		/// <summary>
-		/// 百花剧情寻找祖师
-		/// </summary>
 		public const int Baihua_SeekGuru = 276;
 
-		/// <summary>
-		/// 百花剧情等待消息
-		/// </summary>
 		public const int Baihua_WaitForGuruLetter = 277;
 
-		/// <summary>
-		/// 百花剧情埋伏白一
-		/// </summary>
 		public const int Baihua_SearchInfectedLeuko = 278;
 
-		/// <summary>
-		/// 百花剧情埋伏白二
-		/// </summary>
 		public const int Baihua_AmbushLeuko = 279;
 
-		/// <summary>
-		/// 百花剧情埋伏玄一
-		/// </summary>
 		public const int Baihua_SearchInfectedMelano = 280;
 
-		/// <summary>
-		/// 百花剧情埋伏玄二
-		/// </summary>
 		public const int Baihua_AmbushMelano = 281;
 
-		/// <summary>
-		/// 百花剧情玄白回村
-		/// </summary>
 		public const int Baihua_BringAnimalsBack = 282;
 
-		/// <summary>
-		/// 百花剧情修复关系
-		/// </summary>
 		public const int Baihua_RepairLMRelationship = 283;
 
-		/// <summary>
-		/// 百花剧情关系白一
-		/// </summary>
 		public const int Baihua_LeukoFav = 284;
 
-		/// <summary>
-		/// 百花剧情关系白二
-		/// </summary>
 		public const int Baihua_LeukoClose = 285;
 
-		/// <summary>
-		/// 百花剧情关系白三
-		/// </summary>
 		public const int Baihua_LHelpsM = 286;
 
-		/// <summary>
-		/// 百花剧情关系玄一
-		/// </summary>
 		public const int Baihua_MelanoFav = 287;
 
-		/// <summary>
-		/// 百花剧情关系玄二
-		/// </summary>
 		public const int Baihua_MelanoClose = 288;
 
-		/// <summary>
-		/// 百花剧情关系玄三
-		/// </summary>
 		public const int Baihua_MHelpsL = 289;
 
-		/// <summary>
-		/// 百花剧情留守太吾
-		/// </summary>
 		public const int Baihua_PandemicStart = 290;
 
-		/// <summary>
-		/// 百花剧情谨慎留守
-		/// </summary>
 		public const int Baihua_WaitForAdventure = 291;
 
-		/// <summary>
-		/// 百花剧情复生之人
-		/// </summary>
 		public const int Baihua_AdventureFinale = 292;
 
-		/// <summary>
-		/// 百花剧情玄白复生
-		/// </summary>
 		public const int Baihua_Finale = 293;
 
-		/// <summary>
-		/// 伏龙剧情伏龙天灾
-		/// </summary>
 		public const int Fulong_Diaster = 294;
 
-		/// <summary>
-		/// 伏龙剧情伏龙祭典
-		/// </summary>
 		public const int Fulong_Sacrifice = 295;
 
-		/// <summary>
-		/// 伏龙剧情星陨坠火
-		/// </summary>
 		public const int Fulong_Comet = 296;
 
-		/// <summary>
-		/// 伏龙剧情返回伏龙
-		/// </summary>
 		public const int Fulong_ReturnToFulong = 297;
 
-		/// <summary>
-		/// 伏龙剧情停留伏龙
-		/// </summary>
 		public const int Fulong_StayFulong = 298;
 
-		/// <summary>
-		/// 伏龙剧情查问怪事
-		/// </summary>
 		public const int Fulong_Mystery = 299;
 
-		/// <summary>
-		/// 伏龙剧情查问琉璃
-		/// </summary>
 		public const int Fulong_AskLazuli = 300;
 
-		/// <summary>
-		/// 伏龙剧情游历天下
-		/// </summary>
 		public const int Fulong_TravelWithLazuli = 301;
 
-		/// <summary>
-		/// 伏龙剧情再返伏龙
-		/// </summary>
 		public const int Fulong_BackToFulong = 302;
 
-		/// <summary>
-		/// 伏龙剧情寻找鸡毛
-		/// </summary>
 		public const int Fulong_SeekFeather = 303;
 
-		/// <summary>
-		/// 伏龙剧情缝制羽衣
-		/// </summary>
 		public const int Fulong_SewFeatherCoat = 304;
 
-		/// <summary>
-		/// 伏龙剧情敌潜伏龙
-		/// </summary>
 		public const int Fulong_FinaleAdventure = 305;
 
-		/// <summary>
-		/// 伏龙剧情琉璃唤归
-		/// </summary>
 		public const int Fulong_BackHome = 306;
 
-		/// <summary>
-		/// 神鸡寻羽
-		/// </summary>
 		public const int SideQuest_ChickenMap = 307;
 
-		/// <summary>
-		/// 伏龙剧情扑灭天火
-		/// </summary>
 		public const int Fulong_FireFighting = 308;
 
-		/// <summary>
-		/// 伏龙剧情陪伴琉璃
-		/// </summary>
 		public const int Fulong_StayWithLazuli = 309;
 
-		/// <summary>
-		/// 伏龙剧情琉璃回村
-		/// </summary>
 		public const int Fulong_TakeLazuliBackToTaiwuVillage = 310;
 
-		/// <summary>
-		/// 伏龙剧情天火连绵
-		/// </summary>
 		public const int Fulong_FireSeeking = 311;
 
-		/// <summary>
-		/// 铸剑剧情砸锅卖铁
-		/// </summary>
 		public const int Zhujian_Poverty = 312;
 
-		/// <summary>
-		/// 铸剑剧情暗巷匠人
-		/// </summary>
 		public const int Zhujian_Crisis = 313;
 
-		/// <summary>
-		/// 铸剑剧情火照长空
-		/// </summary>
 		public const int Zhujian_Furnace = 314;
 
-		/// <summary>
-		/// 铸剑剧情烟雨湛卢
-		/// </summary>
 		public const int Zhujian_MistyZhanlu = 315;
 
-		/// <summary>
-		/// 铸剑剧情青铜开口
-		/// </summary>
 		public const int Zhujian_TongshengTalking = 316;
 
-		/// <summary>
-		/// 铸剑剧情杭州奇商
-		/// </summary>
 		public const int Zhujian_AccessoryMerchant = 317;
 
-		/// <summary>
-		/// 铸剑剧情劝导奇商
-		/// </summary>
 		public const int Zhujian_ConvinceAccessory = 318;
 
-		/// <summary>
-		/// 铸剑剧情找奇货斋
-		/// </summary>
 		public const int Zhujian_ReplyAccessoryMerchant = 319;
 
-		/// <summary>
-		/// 铸剑剧情文山书海
-		/// </summary>
 		public const int Zhujian_BookMerchant = 320;
 
-		/// <summary>
-		/// 铸剑剧情劝导商人
-		/// </summary>
 		public const int Zhujian_ConvinceMerchants = 321;
 
-		/// <summary>
-		/// 铸剑剧情答复伏牛
-		/// </summary>
 		public const int Zhujian_ReplyFoodsMerchant = 322;
 
-		/// <summary>
-		/// 铸剑剧情回春药堂
-		/// </summary>
 		public const int Zhujian_MedicineMerchant = 323;
 
-		/// <summary>
-		/// 铸剑剧情前往五湖
-		/// </summary>
 		public const int Zhujian_SeekMaterialMerchant = 324;
 
-		/// <summary>
-		/// 铸剑剧情建设分会
-		/// </summary>
 		public const int Zhujian_ConstructBranch = 325;
 
-		/// <summary>
-		/// 铸剑剧情手足俱全
-		/// </summary>
 		public const int Zhujian_AdventureBodyCompelete = 326;
 
-		/// <summary>
-		/// 铸剑剧情传承技艺
-		/// </summary>
 		public const int Zhujian_Heir = 327;
 
-		/// <summary>
-		/// 铸剑剧情铜生好感
-		/// </summary>
 		public const int Zhujian_TongshengFav = 328;
 
-		/// <summary>
-		/// 铸剑剧情等待器成
-		/// </summary>
 		public const int Zhujian_History = 329;
 
-		/// <summary>
-		/// 铸剑剧情前往湛庐
-		/// </summary>
 		public const int Zhujian_ToZhanlu = 330;
 
-		/// <summary>
-		/// 铸剑剧情湛卢夜色
-		/// </summary>
 		public const int Zhujian_MidnightZhujian = 331;
 
-		/// <summary>
-		/// 铸剑剧情试剑大典
-		/// </summary>
 		public const int Zhujian_AdventureFinale = 332;
 
-		/// <summary>
-		/// 铸剑剧情太原传艺
-		/// </summary>
 		public const int Zhujian_TaiyuanHeirtage = 333;
 
-		/// <summary>
-		/// 铸剑剧情襄阳传艺
-		/// </summary>
 		public const int Zhujian_XiangyangHeritage = 334;
 
-		/// <summary>
-		/// 铸剑剧情江陵传艺
-		/// </summary>
 		public const int Zhujian_JianglingHeritage = 335;
 
-		/// <summary>
-		/// 铸剑剧情江陵擒贼
-		/// </summary>
 		public const int Zhujian_JianglingThief = 336;
 
-		/// <summary>
-		/// 铸剑剧情襄阳擒贼
-		/// </summary>
 		public const int Zhujian_XiangyangThief = 337;
 
-		/// <summary>
-		/// 铸剑剧情秦州擒贼
-		/// </summary>
 		public const int Zhujian_QinzhouThief = 338;
 
-		/// <summary>
-		/// 铸剑剧情离开湛卢
-		/// </summary>
 		public const int Zhujian_End = 339;
 
-		/// <summary>
-		/// 新元山剧情拜访元山
-		/// </summary>
 		public const int RemakeYuanshan_VisitYuanshan = 340;
 
-		/// <summary>
-		/// 新元山剧情前往静坐
-		/// </summary>
 		public const int RemakeYuanshan_Meditation = 341;
 
-		/// <summary>
-		/// 新元山剧情定居点村
-		/// </summary>
 		public const int RemakeYuanshan_Village = 342;
 
-		/// <summary>
-		/// 新元山剧情试炼一村
-		/// </summary>
 		public const int RemakeYuanshan_TrialVillage = 343;
 
-		/// <summary>
-		/// 新元山剧情定居点寨
-		/// </summary>
 		public const int RemakeYuanshan_Stockade = 344;
 
-		/// <summary>
-		/// 新元山剧情寻找阿念
-		/// </summary>
 		public const int RemakeYuanshan_SearchNian = 345;
 
-		/// <summary>
-		/// 新元山剧情试炼二寨
-		/// </summary>
 		public const int RemakeYuanshan_TrialStockade = 346;
 
-		/// <summary>
-		/// 新元山剧情定居点镇
-		/// </summary>
 		public const int RemakeYuanshan_Town = 347;
 
-		/// <summary>
-		/// 新元山剧情试炼三镇
-		/// </summary>
 		public const int RemakeYuanshan_TrialTown = 348;
 
-		/// <summary>
-		/// 新元山剧情再临元山
-		/// </summary>
 		public const int RemakeYuanshan_RevisitYuanshan = 349;
 
-		/// <summary>
-		/// 新元山剧情静待参悟
-		/// </summary>
 		public const int RemakeYuanshan_WaitForEnlightment = 350;
 
-		/// <summary>
-		/// 新元山剧情镇魔大阵
-		/// </summary>
 		public const int RemakeYuanshan_Adventure = 351;
 
-		/// <summary>
-		/// 新元山剧情尘埃落定
-		/// </summary>
 		public const int RemakeYuanshan_Finale = 352;
 
-		/// <summary>
-		/// 新元山剧情冷月孤影
-		/// </summary>
 		public const int RemakeYuanshan_EasterEgg = 353;
 
-		/// <summary>
-		/// 界青剧情荒野破庙
-		/// </summary>
 		public const int Jieqing_Temple = 354;
 
-		/// <summary>
-		/// 界青剧情七星血光
-		/// </summary>
 		public const int Jieqing_BloodBeiDou = 355;
 
-		/// <summary>
-		/// 界青剧情慈祥老人
-		/// </summary>
 		public const int Jieqing_KindOldMan = 356;
 
-		/// <summary>
-		/// 界青剧情下无生渊
-		/// </summary>
 		public const int Jieqing_WuShengYuan = 357;
 
-		/// <summary>
-		/// 界青剧情无名秘信
-		/// </summary>
 		public const int Jieqing_Message = 358;
 
-		/// <summary>
-		/// 界青剧情摔珠之期
-		/// </summary>
 		public const int Jieqing_SmashPearl = 359;
 
-		/// <summary>
-		/// 界青剧情最终决战
-		/// </summary>
 		public const int Jieqing_FinalBattle = 360;
 
-		/// <summary>
-		/// 界青剧情界青故人
-		/// </summary>
 		public const int Jieqing_Recovery = 361;
 
-		/// <summary>
-		/// 界青剧情探访玉蝉
-		/// </summary>
 		public const int Jieqing_VisitYuChan = 362;
 
-		/// <summary>
-		/// 界青剧情善恶无生
-		/// </summary>
 		public const int Jieqing_End = 363;
 
-		/// <summary>
-		/// 通用任务神木种植
-		/// </summary>
 		public const int PlantTrees = 364;
 
-		/// <summary>
-		/// 铸剑升级互动湛卢观戏
-		/// </summary>
 		public const int ZhujianUpgrade_drama = 365;
 
-		/// <summary>
-		/// 铸剑升级互动竹鹊传信
-		/// </summary>
 		public const int ZhujianUpgrade_Start = 366;
 
-		/// <summary>
-		/// 铸剑升级互动铜生观戏
-		/// </summary>
 		public const int ZhujianUpgrade_Prelude = 367;
 
-		/// <summary>
-		/// 铸剑升级互动山庄探秘
-		/// </summary>
 		public const int ZhujianUpgrade_Epitasis = 368;
 
-		/// <summary>
-		/// 铸剑升级互动玄机之谜
-		/// </summary>
 		public const int ZhujianUpgrade_Adventure = 369;
 
-		/// <summary>
-		/// 铸剑升级互动小童观戏
-		/// </summary>
 		public const int ZhujianUpgrade_Ending = 370;
 
-		/// <summary>
-		/// 武当升级互动白鹤寄书
-		/// </summary>
 		public const int WudangUpgrade_Crane = 371;
 
-		/// <summary>
-		/// 武当升级互动探查黑蛇
-		/// </summary>
 		public const int WudangUpgrade_ExploreBlackSnake = 372;
 
-		/// <summary>
-		/// 武当升级互动一言相期
-		/// </summary>
 		public const int WudangUpgrade_Promise = 373;
 
-		/// <summary>
-		/// 武当升级互动探望黑蛇
-		/// </summary>
 		public const int WudangUpgrade_VisitBlackSnake = 374;
 
-		/// <summary>
-		/// 璇女升级互动筠儿托梦
-		/// </summary>
 		public const int UpgradeXuannv_Dreaming = 375;
 
-		/// <summary>
-		/// 璇女升级互动再访璇女
-		/// </summary>
 		public const int UpgradeXuannv_ToXuannv = 376;
 
-		/// <summary>
-		/// 璇女升级互动再探宝珏
-		/// </summary>
 		public const int UpgradeXuannv_CrackedMirror = 377;
 
-		/// <summary>
-		/// 五仙升级互动思望苗疆
-		/// </summary>
 		public const int WuxianUpgrade_Homesick = 378;
 
-		/// <summary>
-		/// 五仙升级互动前往黑水
-		/// </summary>
 		public const int WuxianUpgrade_Heishui = 379;
 
-		/// <summary>
-		/// 五仙升级互动苗鼓之声
-		/// </summary>
 		public const int WuxianUpgrade_Drum = 380;
 
-		/// <summary>
-		/// 血犼升级互动鬼事渐息
-		/// </summary>
 		public const int XuehouUpgrade_Begin = 381;
 
-		/// <summary>
-		/// 血犼升级互动故人无音
-		/// </summary>
 		public const int XuehouUpgrade_FollowLetter = 382;
 
-		/// <summary>
-		/// 血犼升级互动扬州今事
-		/// </summary>
 		public const int XuehouUpgrade_Yangzhou = 383;
 
-		/// <summary>
-		/// 血犼升级互动寻墓而出
-		/// </summary>
 		public const int XuehouUpgrade_Search = 384;
 
-		/// <summary>
-		/// 空桑升级互动心毒问鼎
-		/// </summary>
 		public const int KongsangUpgrade_Ask = 385;
 
-		/// <summary>
-		/// 空桑升级互动观鼎生灰
-		/// </summary>
 		public const int KongsangUpgrade_Check = 386;
 
-		/// <summary>
-		/// 空桑升级互动药灰绽隙
-		/// </summary>
 		public const int KongsangUpgrade_Cauldron = 387;
 
-		/// <summary>
-		/// 空桑升级互动青鼎流辉
-		/// </summary>
 		public const int KongsangUpgrade_View = 388;
 
-		/// <summary>
-		/// 狮相升级互动前往村中
-		/// </summary>
 		public const int ShixiangUpgrade_Village = 389;
 
-		/// <summary>
-		/// 狮相升级互动等待回音
-		/// </summary>
 		public const int ShixiangUpgrade_Echo = 390;
 
-		/// <summary>
-		/// 狮相升级互动静待消息
-		/// </summary>
 		public const int ShixiangUpgrade_Message = 391;
 
-		/// <summary>
-		/// 狮相升级互动尘埃落定
-		/// </summary>
 		public const int ShixiangUpgrade_End = 392;
 
-		/// <summary>
-		/// 元山升级互动三气入梦
-		/// </summary>
 		public const int YuanshanUpgrade_Dream = 393;
 
-		/// <summary>
-		/// 元山升级互动行抵元山
-		/// </summary>
 		public const int YuanshanUpgrade_Journey = 394;
 
-		/// <summary>
-		/// 元山升级互动山谷妖踪
-		/// </summary>
 		public const int YuanshanUpgrade_Valley = 395;
 
-		/// <summary>
-		/// 然山升级互动纸鹤传书
-		/// </summary>
 		public const int RanShan_message = 396;
 
-		/// <summary>
-		/// 然山升级互动然山邪祟
-		/// </summary>
 		public const int RanShan_Ghost = 397;
 
-		/// <summary>
-		/// 然山升级互动众魂比武
-		/// </summary>
 		public const int RanShan_ZhongHunBiWu = 398;
 
-		/// <summary>
-		/// 然山升级互动心境深处
-		/// </summary>
 		public const int RanShan_XinJing = 399;
 
-		/// <summary>
-		/// 金刚升级互动村人异事
-		/// </summary>
 		public const int JingangUpgrade_SupernaturalEvent = 400;
 
-		/// <summary>
-		/// 金刚升级互动夜半惊魂
-		/// </summary>
 		public const int JingangUpgrade_Ghost = 401;
 
-		/// <summary>
-		/// 金刚升级互动一问究竟
-		/// </summary>
 		public const int JingangUpgrade_Ask = 402;
 
-		/// <summary>
-		/// 伏龙升级互动元鸡落羽
-		/// </summary>
 		public const int FulongUpgrade_Chicken = 403;
 
-		/// <summary>
-		/// 伏龙升级互动探查大王
-		/// </summary>
 		public const int FulongUpgrade_Dawang = 404;
 
-		/// <summary>
-		/// 伏龙升级互动琉璃制衣
-		/// </summary>
 		public const int FulongUpgrade_GarmentManufacturing = 405;
 
-		/// <summary>
-		/// 伏龙升级互动羽衣已成
-		/// </summary>
 		public const int FulongUpgrade_Clothing = 406;
 
-		/// <summary>
-		/// 百花升级互动风起故尘
-		/// </summary>
 		public const int BaihuaUpgrade_Start = 407;
 
-		/// <summary>
-		/// 百花升级互动白鹿解骨
-		/// </summary>
 		public const int BaihuaUpgrade_LeukoHealer = 408;
 
-		/// <summary>
-		/// 百花升级互动玄鸮定脉
-		/// </summary>
 		public const int BaihuaUpgrade_MelanoHealer = 409;
 
-		/// <summary>
-		/// 百花升级互动聚首齐论
-		/// </summary>
 		public const int BaihuaUpgrade_Gather = 410;
 
-		/// <summary>
-		/// 百花升级互动河谷追凶
-		/// </summary>
 		public const int BaihuaUpgrade_Ending = 411;
 
-		/// <summary>
-		/// 少林升级互动静待佛缘
-		/// </summary>
 		public const int ShaolinUpgrade_Fate = 412;
 
-		/// <summary>
-		/// 少林升级互动探访无字
-		/// </summary>
 		public const int ShaolinUpgrade_Wuzi = 413;
 
-		/// <summary>
-		/// 少林升级互动一探究竟
-		/// </summary>
 		public const int ShaolinUpgrade_Investigate = 414;
 
-		/// <summary>
-		/// 少林升级互动尘埃落定
-		/// </summary>
 		public const int ShaolinUpgrade_Finale = 415;
 
-		/// <summary>
-		/// 峨眉升级互动山间奇闻
-		/// </summary>
 		public const int EmeiUpgrade_Start = 671;
 
-		/// <summary>
-		/// 峨眉升级互动峨眉仙猿
-		/// </summary>
 		public const int EmeiUpgrade_Xiaobaiyuan = 672;
 
-		/// <summary>
-		/// 峨眉升级互动寻找白猿
-		/// </summary>
 		public const int EmeiUpgrade_Baiyuan = 673;
 
-		/// <summary>
-		/// 峨眉升级互动静待修行
-		/// </summary>
 		public const int EmeiUpgrade_Study = 674;
 
-		/// <summary>
-		/// 峨眉升级互动心猿已生
-		/// </summary>
 		public const int EmeiUpgrade_Xinyuan = 675;
 
-		/// <summary>
-		/// 峨眉升级互动静待消息
-		/// </summary>
 		public const int EmeiUpgrade_Ending = 676;
 
-		/// <summary>
-		/// 界青升级互动静待玉蝉
-		/// </summary>
 		public const int JieqingUpgrade_Start = 705;
 
-		/// <summary>
-		/// 界青升级互动渊底怪声
-		/// </summary>
 		public const int JieqingUpgrade_Noise = 706;
 
-		/// <summary>
-		/// 界青升级互动深渊异变
-		/// </summary>
 		public const int JieqingUpgrade_Abyss = 707;
 
-		/// <summary>
-		/// 界青升级互动天外寂星
-		/// </summary>
 		public const int JieqingUpgrade_End = 708;
+
+		public const int DemonHeart = 745;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 回村寻船
-		/// </summary>
 		public static TaskInfoItem ReturnToGetBoat => Instance[13];
 
-		/// <summary>
-		/// 以船渡河
-		/// </summary>
 		public static TaskInfoItem TakeBoatToLeave => Instance[14];
 
-		/// <summary>
-		/// 亡流驿站
-		/// </summary>
 		public static TaskInfoItem BrokenAreaTravel => Instance[19];
 
-		/// <summary>
-		/// 寻路太吾
-		/// </summary>
 		public static TaskInfoItem FirstArriveTaiwuArea => Instance[20];
 
-		/// <summary>
-		/// 振兴太吾
-		/// </summary>
 		public static TaskInfoItem SideQuest_ConstructTaiwuVillage => Instance[23];
 
-		/// <summary>
-		/// 派遣村民
-		/// </summary>
 		public static TaskInfoItem SideQuest_AssignVillagers => Instance[24];
 
-		/// <summary>
-		/// 耳闻仙人
-		/// </summary>
 		public static TaskInfoItem HearsayOfImmortal => Instance[25];
 
-		/// <summary>
-		/// 古墓仙人
-		/// </summary>
 		public static TaskInfoItem VisitTombImmortal => Instance[26];
 
-		/// <summary>
-		/// 仙人疑云
-		/// </summary>
 		public static TaskInfoItem ReturnToTaiwuVillage => Instance[27];
 
-		/// <summary>
-		/// 太吾驿站
-		/// </summary>
 		public static TaskInfoItem MainStory_TaiwuVillageStation => Instance[31];
 
-		/// <summary>
-		/// 以向化身1
-		/// </summary>
 		public static TaskInfoItem PurpleBambooYixiangChp2 => Instance[616];
 
-		/// <summary>
-		/// 等待盟会
-		/// </summary>
 		public static TaskInfoItem MartialArtTournamentWait => Instance[64];
 
-		/// <summary>
-		/// 筹备盟会
-		/// </summary>
 		public static TaskInfoItem MartialArtTournamentPrepare => Instance[65];
 
-		/// <summary>
-		/// 武林盟会
-		/// </summary>
 		public static TaskInfoItem MartialArtTournamentReady => Instance[66];
 
-		/// <summary>
-		/// 语茯来访
-		/// </summary>
 		public static TaskInfoItem YufuArrivesAtTaiwuVillage => Instance[67];
 
-		/// <summary>
-		/// 玄竹降世
-		/// </summary>
 		public static TaskInfoItem DarkBambooAppeared => Instance[74];
 
-		/// <summary>
-		/// 出神之法
-		/// </summary>
 		public static TaskInfoItem MainStory_SpiritualWanderPlace0 => Instance[82];
 
-		/// <summary>
-		/// 出神之地
-		/// </summary>
 		public static TaskInfoItem MainStory_SpiritualWanderPlace1 => Instance[83];
 
-		/// <summary>
-		/// 邪魔线前置-初遇魔血
-		/// </summary>
 		public static TaskInfoItem PreEvilFirstDemonBlood => Instance[644];
 
-		/// <summary>
-		/// 邪魔线前置-一念魔血
-		/// </summary>
 		public static TaskInfoItem PreEvilDemonBloodSurge => Instance[645];
 
-		/// <summary>
-		/// 邪魔线前置-欲念侵心-贪
-		/// </summary>
 		public static TaskInfoItem PreEvilRaga => Instance[646];
 
-		/// <summary>
-		/// 邪魔线前置-欲念侵心-嗔
-		/// </summary>
 		public static TaskInfoItem PreEvilDvesa => Instance[647];
 
-		/// <summary>
-		/// 邪魔线前置-欲念侵心-痴
-		/// </summary>
 		public static TaskInfoItem PreEvilMoha => Instance[648];
 
-		/// <summary>
-		/// 邪魔线前置-魔血玄石
-		/// </summary>
 		public static TaskInfoItem PreEvilDemonBloodDarkstone => Instance[649];
 
-		/// <summary>
-		/// 邪魔线前置-静待机缘
-		/// </summary>
 		public static TaskInfoItem PreEvilWaitForChance => Instance[650];
 
-		/// <summary>
-		/// 探听消息
-		/// </summary>
 		public static TaskInfoItem MainStory_Investigate => Instance[677];
 
-		/// <summary>
-		/// 流民之忧
-		/// </summary>
 		public static TaskInfoItem MainStory_RefugeeDistress => Instance[678];
 
-		/// <summary>
-		/// 寻找食物
-		/// </summary>
 		public static TaskInfoItem MainStory_FindFood => Instance[679];
 
-		/// <summary>
-		/// 医者之忧
-		/// </summary>
 		public static TaskInfoItem MainStory_DoctorDistress => Instance[680];
 
-		/// <summary>
-		/// 寻找药材
-		/// </summary>
 		public static TaskInfoItem MainStory_FindHerbs => Instance[681];
 
-		/// <summary>
-		/// 宁氏之忧
-		/// </summary>
 		public static TaskInfoItem MainStory_NingDistress => Instance[682];
 
-		/// <summary>
-		/// 寻找衣物
-		/// </summary>
 		public static TaskInfoItem MainStory_FindClothes => Instance[683];
 
-		/// <summary>
-		/// 无名伤者
-		/// </summary>
 		public static TaskInfoItem MainStory_UnknownPatient => Instance[684];
 
-		/// <summary>
-		/// 前往柴山
-		/// </summary>
 		public static TaskInfoItem MainStory_GoToChaiMountain => Instance[685];
 
-		/// <summary>
-		/// 柴山异变
-		/// </summary>
 		public static TaskInfoItem MainStory_ChaiShanMutation => Instance[686];
 
-		/// <summary>
-		/// 十二邪仙0
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals0 => Instance[687];
 
-		/// <summary>
-		/// 十二邪仙1
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals1 => Instance[688];
 
-		/// <summary>
-		/// 十二邪仙2
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals2 => Instance[689];
 
-		/// <summary>
-		/// 十二邪仙3
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals3 => Instance[690];
 
-		/// <summary>
-		/// 十二邪仙4
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals4 => Instance[691];
 
-		/// <summary>
-		/// 十二邪仙5
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals5 => Instance[692];
 
-		/// <summary>
-		/// 十二邪仙6
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals6 => Instance[693];
 
-		/// <summary>
-		/// 十二邪仙7
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals7 => Instance[694];
 
-		/// <summary>
-		/// 十二邪仙8
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals8 => Instance[695];
 
-		/// <summary>
-		/// 十二邪仙9
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals9 => Instance[696];
 
-		/// <summary>
-		/// 十二邪仙10
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals10 => Instance[697];
 
-		/// <summary>
-		/// 十二邪仙11
-		/// </summary>
 		public static TaskInfoItem MainStory_TwelveEvilImmortals11 => Instance[698];
 
-		/// <summary>
-		/// 无绡去向
-		/// </summary>
 		public static TaskInfoItem MainStory_WhereaboutsofZiwuxiao => Instance[701];
 
-		/// <summary>
-		/// 子夜生变
-		/// </summary>
 		public static TaskInfoItem MainStory_MidnightUpheaval => Instance[702];
 
-		/// <summary>
-		/// 仙公踪迹
-		/// </summary>
 		public static TaskInfoItem MainStory_WhereaboutsofXuxiangong => Instance[703];
 
-		/// <summary>
-		/// 决战神魔
-		/// </summary>
 		public static TaskInfoItem MainStory_ShowdownofGodsandDemons => Instance[704];
 
-		/// <summary>
-		/// 空桑主线奇毒绝方
-		/// </summary>
 		public static TaskInfoItem Kongsang_MissionUnaccepted => Instance[101];
 
-		/// <summary>
-		/// 空桑主线无命寻人0
-		/// </summary>
 		public static TaskInfoItem Kongsang_SearchTarget0 => Instance[102];
 
-		/// <summary>
-		/// 空桑主线无命试毒0
-		/// </summary>
 		public static TaskInfoItem Kongsang_PoisonTest0 => Instance[103];
 
-		/// <summary>
-		/// 空桑主线上复掌门0
-		/// </summary>
 		public static TaskInfoItem Kongsang_ReplySect0 => Instance[104];
 
-		/// <summary>
-		/// 空桑主线无命寻人1
-		/// </summary>
 		public static TaskInfoItem Kongsang_SearchTarget1 => Instance[105];
 
-		/// <summary>
-		/// 空桑主线无命试毒1
-		/// </summary>
 		public static TaskInfoItem Kongsang_PoisonTest1 => Instance[106];
 
-		/// <summary>
-		/// 空桑主线上复掌门1
-		/// </summary>
 		public static TaskInfoItem Kongsang_ReplySect1 => Instance[107];
 
-		/// <summary>
-		/// 空桑主线无命寻人2
-		/// </summary>
 		public static TaskInfoItem Kongsang_SearchTarget2 => Instance[108];
 
-		/// <summary>
-		/// 空桑主线无命试毒2
-		/// </summary>
 		public static TaskInfoItem Kongsang_PoisonTest2 => Instance[109];
 
-		/// <summary>
-		/// 空桑主线上复掌门3
-		/// </summary>
 		public static TaskInfoItem Kongsang_ReplySect3 => Instance[110];
 
-		/// <summary>
-		/// 空桑主线寻找无命
-		/// </summary>
 		public static TaskInfoItem Kongsang_FindWLiao => Instance[111];
 
-		/// <summary>
-		/// 空桑主线上复掌门2
-		/// </summary>
 		public static TaskInfoItem Kongsang_ReplySect2 => Instance[112];
 
-		/// <summary>
-		/// 空桑主线百年奇遇
-		/// </summary>
 		public static TaskInfoItem Kongsang_WaitForAdventure => Instance[113];
 
-		/// <summary>
-		/// 空桑主线长生之死
-		/// </summary>
 		public static TaskInfoItem Kongsang_AdventureAppeared => Instance[114];
 
-		/// <summary>
-		/// 血犼主线调查血犼
-		/// </summary>
 		public static TaskInfoItem Xuehou_GraveDigging => Instance[115];
 
-		/// <summary>
-		/// 血犼主线破旧铃铛
-		/// </summary>
 		public static TaskInfoItem Xuehou_RustBell => Instance[116];
 
-		/// <summary>
-		/// 血犼主线老人异相
-		/// </summary>
 		public static TaskInfoItem Xuehou_OldmanMyth => Instance[117];
 
-		/// <summary>
-		/// 血犼主线红衣老人
-		/// </summary>
 		public static TaskInfoItem Xuehou_Oldman => Instance[118];
 
-		/// <summary>
-		/// 血犼主线调查血光
-		/// </summary>
 		public static TaskInfoItem Xuehou_CheckBloodBlock => Instance[119];
 
-		/// <summary>
-		/// 血犼主线墓地邂逅
-		/// </summary>
 		public static TaskInfoItem Xuehou_AdventureGrave => Instance[120];
 
-		/// <summary>
-		/// 血犼主线姬穸回村
-		/// </summary>
 		public static TaskInfoItem Xuehou_BringJixiBack => Instance[121];
 
-		/// <summary>
-		/// 血犼主线留在村中
-		/// </summary>
 		public static TaskInfoItem Xuehou_StayWithJixi => Instance[122];
 
-		/// <summary>
-		/// 血犼主线村中异事
-		/// </summary>
 		public static TaskInfoItem Xuehou_MythInVillage => Instance[123];
 
-		/// <summary>
-		/// 血犼主线真相线索1
-		/// </summary>
 		public static TaskInfoItem Xuehou_TruthClue1 => Instance[124];
 
-		/// <summary>
-		/// 血犼主线假象线索1
-		/// </summary>
 		public static TaskInfoItem Xuehou_FalsityClue1 => Instance[125];
 
-		/// <summary>
-		/// 血犼主线真相线索2
-		/// </summary>
 		public static TaskInfoItem Xuehou_TruthClue2 => Instance[126];
 
-		/// <summary>
-		/// 血犼主线假象线索2
-		/// </summary>
 		public static TaskInfoItem Xuehou_FalsityClue2 => Instance[127];
 
-		/// <summary>
-		/// 血犼主线真相线索3
-		/// </summary>
 		public static TaskInfoItem Xuehou_TruthClue3 => Instance[128];
 
-		/// <summary>
-		/// 血犼主线假象线索3
-		/// </summary>
 		public static TaskInfoItem Xuehou_FalsityClue3 => Instance[129];
 
-		/// <summary>
-		/// 血犼主线调查姬穸
-		/// </summary>
 		public static TaskInfoItem Xuehou_InterrogateJixi => Instance[130];
 
-		/// <summary>
-		/// 血犼主线传剑交谈
-		/// </summary>
 		public static TaskInfoItem Xuehou_PassLegacy => Instance[131];
 
-		/// <summary>
-		/// 少林主线少林异动
-		/// </summary>
 		public static TaskInfoItem Shaolin_MythinShaolin => Instance[132];
 
-		/// <summary>
-		/// 少林主线肮脏雕像
-		/// </summary>
 		public static TaskInfoItem Shaolin_MuddyStatue => Instance[133];
 
-		/// <summary>
-		/// 少林主线归还雕像
-		/// </summary>
 		public static TaskInfoItem Shaolin_ReturnStatue => Instance[134];
 
-		/// <summary>
-		/// 少林主线留在少林
-		/// </summary>
 		public static TaskInfoItem Shaolin_StayAndWait => Instance[135];
 
-		/// <summary>
-		/// 少林主线老僧相会
-		/// </summary>
 		public static TaskInfoItem Shaolin_BodhidharmaInDream => Instance[136];
 
-		/// <summary>
-		/// 少林主线雕像碎裂
-		/// </summary>
 		public static TaskInfoItem Shaolin_BrokenStatue => Instance[137];
 
-		/// <summary>
-		/// 少林主线禅武之争
-		/// </summary>
 		public static TaskInfoItem Shaolin_Conflict => Instance[138];
 
-		/// <summary>
-		/// 少林主线努力修习
-		/// </summary>
 		public static TaskInfoItem Shaolin_Endeavor => Instance[139];
 
-		/// <summary>
-		/// 少林主线老僧再临
-		/// </summary>
 		public static TaskInfoItem Shaolin_WaitForBodhidharma => Instance[140];
 
-		/// <summary>
-		/// 少林主线挖掘宝物
-		/// </summary>
 		public static TaskInfoItem Shaolin_DiggingSutra => Instance[141];
 
-		/// <summary>
-		/// 少林主线老僧传授
-		/// </summary>
 		public static TaskInfoItem Shaolin_StudyForBodhidharmaChallenge => Instance[142];
 
-		/// <summary>
-		/// 少林主线佛学书籍
-		/// </summary>
 		public static TaskInfoItem Shaolin_ObtainedSutra => Instance[143];
 
-		/// <summary>
-		/// 少林主线阅读佛经
-		/// </summary>
 		public static TaskInfoItem Shaolin_ReadSutra => Instance[144];
 
-		/// <summary>
-		/// 少林主线少林众塔
-		/// </summary>
 		public static TaskInfoItem Shaolin_VisitShaolin => Instance[145];
 
-		/// <summary>
-		/// 少林主线藏经阁楼
-		/// </summary>
 		public static TaskInfoItem Shaolin_SutraLibrary => Instance[146];
 
-		/// <summary>
-		/// 璇女主线璇女异动
-		/// </summary>
 		public static TaskInfoItem Xuannv_QinAndQing => Instance[147];
 
-		/// <summary>
-		/// 璇女主线询问古曲
-		/// </summary>
 		public static TaskInfoItem Xuannv_WaitForLetters => Instance[148];
 
-		/// <summary>
-		/// 璇女主线古曲旋律
-		/// </summary>
 		public static TaskInfoItem Xuannv_SeekLetterSender => Instance[149];
 
-		/// <summary>
-		/// 璇女主线镜里孤鸾
-		/// </summary>
 		public static TaskInfoItem Xuannv_SeekXuannv => Instance[150];
 
-		/// <summary>
-		/// 璇女主线寻人请求
-		/// </summary>
 		public static TaskInfoItem Xuannv_AdventureSoulInMirror => Instance[151];
 
-		/// <summary>
-		/// 璇女主线修习功法
-		/// </summary>
 		public static TaskInfoItem Xuannv_RefusedToSearch => Instance[152];
 
-		/// <summary>
-		/// 璇女新主线修习功法
-		/// </summary>
 		public static TaskInfoItem Xuannv_Study => Instance[153];
 
-		/// <summary>
-		/// 璇女新主线返回一明
-		/// </summary>
 		public static TaskInfoItem Xuannv_ReturnToMirror => Instance[154];
 
-		/// <summary>
-		/// 璇女新主线回璇女峰
-		/// </summary>
 		public static TaskInfoItem Xuannv_TakeShiToXuannv => Instance[155];
 
-		/// <summary>
-		/// 璇女新主线静待消息
-		/// </summary>
 		public static TaskInfoItem Xuannv_WaitForMessage => Instance[156];
 
-		/// <summary>
-		/// 璇女新主线查问天女
-		/// </summary>
 		public static TaskInfoItem Xuannv_AskShadow => Instance[157];
 
-		/// <summary>
-		/// 璇女新主线查问筠儿
-		/// </summary>
 		public static TaskInfoItem Xuannv_AskJuner => Instance[158];
 
-		/// <summary>
-		/// 璇女新主线查问璇女
-		/// </summary>
 		public static TaskInfoItem Xuannv_AskXuannvSect => Instance[159];
 
-		/// <summary>
-		/// 璇女新主线考试挂科
-		/// </summary>
 		public static TaskInfoItem Xuannv_FailAndRetake => Instance[160];
 
-		/// <summary>
-		/// 璇女新主线准备学习
-		/// </summary>
 		public static TaskInfoItem Xuannv_ReadyToStudy => Instance[161];
 
-		/// <summary>
-		/// 璇女主线前往寻人
-		/// </summary>
 		public static TaskInfoItem Xuannv_AcceptedToSearch => Instance[162];
 
-		/// <summary>
-		/// 璇女主线等候会面
-		/// </summary>
 		public static TaskInfoItem Xuannv_AdventureIllusionOfMirror => Instance[163];
 
-		/// <summary>
-		/// 璇女主线探访璇女
-		/// </summary>
 		public static TaskInfoItem Xuannv_SeekLove => Instance[164];
 
-		/// <summary>
-		/// 璇女主线回复掌门
-		/// </summary>
 		public static TaskInfoItem Xuannv_WaitForReturn => Instance[165];
 
-		/// <summary>
-		/// 孤鸾镜水
-		/// </summary>
 		public static TaskInfoItem PlayerShadowInMirror => Instance[166];
 
-		/// <summary>
-		/// 武当主线逆练功法
-		/// </summary>
 		public static TaskInfoItem Wudang_Prologue => Instance[167];
 
-		/// <summary>
-		/// 武当主线等待道长
-		/// </summary>
 		public static TaskInfoItem Wudang_WaitForSlobbyTaoistMonk => Instance[168];
 
-		/// <summary>
-		/// 武当主线道长探查
-		/// </summary>
 		public static TaskInfoItem Wudang_SloppyTaoistMonkRequest => Instance[169];
 
-		/// <summary>
-		/// 武当主线探访洞天
-		/// </summary>
 		public static TaskInfoItem Wudang_SeekSite => Instance[170];
 
-		/// <summary>
-		/// 武当主线回复道长
-		/// </summary>
 		public static TaskInfoItem Wudang_ReturnToSloppyTaoistMonk => Instance[171];
 
-		/// <summary>
-		/// 武当主线养护神树
-		/// </summary>
 		public static TaskInfoItem Wudang_CultivateHeavenlyTreeMain => Instance[172];
 
-		/// <summary>
-		/// 武当主线种植神树
-		/// </summary>
 		public static TaskInfoItem Wudang_PlantHeavenlyTree => Instance[173];
 
-		/// <summary>
-		/// 武当主线守卫神树
-		/// </summary>
 		public static TaskInfoItem Wudang_ProtectHeavenlyTree => Instance[174];
 
-		/// <summary>
-		/// 武当主线研修道法
-		/// </summary>
 		public static TaskInfoItem Wudang_ReadTaoistBook => Instance[175];
 
-		/// <summary>
-		/// 武当主线取神木种
-		/// </summary>
 		public static TaskInfoItem Wudang_GetHeavenlyTreeSeed => Instance[176];
 
-		/// <summary>
-		/// 武当主线道长做法
-		/// </summary>
 		public static TaskInfoItem Wudang_TaoistMonkSacrifices => Instance[177];
 
-		/// <summary>
-		/// 武当主线最终作法
-		/// </summary>
 		public static TaskInfoItem Wudang_WaitForTimePassing => Instance[178];
 
-		/// <summary>
-		/// 武当主线前往武当
-		/// </summary>
 		public static TaskInfoItem Wudang_VisitWudang => Instance[179];
 
-		/// <summary>
-		/// 武当主线等待仙缘
-		/// </summary>
 		public static TaskInfoItem Wudang_WaitForImmortals => Instance[180];
 
-		/// <summary>
-		/// 武当主线查问武当
-		/// </summary>
 		public static TaskInfoItem Wudang_AskWudang => Instance[181];
 
-		/// <summary>
-		/// 狮相主线狮相流言
-		/// </summary>
 		public static TaskInfoItem Shixiang_Anecdote => Instance[182];
 
-		/// <summary>
-		/// 狮相主线前往狮相
-		/// </summary>
 		public static TaskInfoItem Shixiang_ArriveSect => Instance[183];
 
-		/// <summary>
-		/// 狮相主线狮相传言
-		/// </summary>
 		public static TaskInfoItem Shixiang_AskForJokes => Instance[184];
 
-		/// <summary>
-		/// 狮相主线狮相异动
-		/// </summary>
 		public static TaskInfoItem Shixiang_Myth => Instance[185];
 
-		/// <summary>
-		/// 狮相主线狮相绝技
-		/// </summary>
 		public static TaskInfoItem Shixiang_PoemAdventure => Instance[186];
 
-		/// <summary>
-		/// 狮相主线静观其变
-		/// </summary>
 		public static TaskInfoItem Shixiang_WaitforLetters => Instance[187];
 
-		/// <summary>
-		/// 狮相主线探查狮相
-		/// </summary>
 		public static TaskInfoItem Shixiang_Arrive => Instance[188];
 
-		/// <summary>
-		/// 狮相主线消灭外道
-		/// </summary>
 		public static TaskInfoItem Shixiang_Heretics => Instance[189];
 
-		/// <summary>
-		/// 狮相主线上复门主
-		/// </summary>
 		public static TaskInfoItem Shixiang_ReplyHead => Instance[190];
 
-		/// <summary>
-		/// 狮相主线狮相异相
-		/// </summary>
 		public static TaskInfoItem Shixiang_Stay => Instance[191];
 
-		/// <summary>
-		/// 狮相主线剿灭叛徒
-		/// </summary>
 		public static TaskInfoItem Shixiang_Traitors => Instance[192];
 
-		/// <summary>
-		/// 狮相主线驱逐异族
-		/// </summary>
 		public static TaskInfoItem Shixiang_Barbarians => Instance[193];
 
-		/// <summary>
-		/// 狮相主线等待清理
-		/// </summary>
 		public static TaskInfoItem Shixiang_WaitForBattles => Instance[194];
 
-		/// <summary>
-		/// 狮相主线静待后续
-		/// </summary>
 		public static TaskInfoItem Shixiang_Ending => Instance[195];
 
-		/// <summary>
-		/// 金刚主线民不聊生
-		/// </summary>
 		public static TaskInfoItem Jingang_Poverty => Instance[196];
 
-		/// <summary>
-		/// 金刚主线前往金刚
-		/// </summary>
 		public static TaskInfoItem Jingang_ToJingang => Instance[197];
 
-		/// <summary>
-		/// 金刚剧情古刹何在
-		/// </summary>
 		public static TaskInfoItem Jingang_AdventureAppeared => Instance[198];
 
-		/// <summary>
-		/// 金刚主线古经迷踪
-		/// </summary>
 		public static TaskInfoItem Jingang_Adventure => Instance[199];
 
-		/// <summary>
-		/// 金刚主线解读残经
-		/// </summary>
 		public static TaskInfoItem Jingang_Haunted => Instance[200];
 
-		/// <summary>
-		/// 金刚主线高僧写经
-		/// </summary>
 		public static TaskInfoItem Jingang_AssistReincarnation => Instance[201];
 
-		/// <summary>
-		/// 金刚主线回复高僧
-		/// </summary>
 		public static TaskInfoItem Jingang_WaitForReincarnation => Instance[202];
 
-		/// <summary>
-		/// 金刚主线秦州换经
-		/// </summary>
 		public static TaskInfoItem Jingang_ToKunlun => Instance[203];
 
-		/// <summary>
-		/// 金刚主线襄阳换经
-		/// </summary>
 		public static TaskInfoItem Jingang_SearchMonk => Instance[204];
 
-		/// <summary>
-		/// 金刚主线太原换经
-		/// </summary>
 		public static TaskInfoItem Jingang_SecInfoSpreading => Instance[205];
 
-		/// <summary>
-		/// 金刚主线京城换经
-		/// </summary>
 		public static TaskInfoItem Jingang_RefuseAndFailing => Instance[206];
 
-		/// <summary>
-		/// 金刚主线高僧何往
-		/// </summary>
 		public static TaskInfoItem Jingang_MonkEnding => Instance[207];
 
-		/// <summary>
-		/// 金刚剧情高僧消失
-		/// </summary>
 		public static TaskInfoItem Jingang_MonkKilled => Instance[208];
 
-		/// <summary>
-		/// 金刚剧情中原僧人
-		/// </summary>
 		public static TaskInfoItem Jingang_SutraDiscussion => Instance[209];
 
-		/// <summary>
-		/// 金刚剧情疑问重重
-		/// </summary>
 		public static TaskInfoItem Jingang_SutraFeedback => Instance[210];
 
-		/// <summary>
-		/// 金刚剧情高僧写经
-		/// </summary>
 		public static TaskInfoItem Jingang_SutraExplaining => Instance[211];
 
-		/// <summary>
-		/// 金刚主线了结此事
-		/// </summary>
 		public static TaskInfoItem Jingang_BackToJingang => Instance[212];
 
-		/// <summary>
-		/// 金刚主线交还经文
-		/// </summary>
 		public static TaskInfoItem Jingang_ReturnSutra => Instance[213];
 
-		/// <summary>
-		/// 金刚主线真经无字
-		/// </summary>
 		public static TaskInfoItem Jingang_Ending => Instance[214];
 
-		/// <summary>
-		/// 五仙主线常来洗澡
-		/// </summary>
 		public static TaskInfoItem Wuxian_Bath => Instance[215];
 
-		/// <summary>
-		/// 五仙主线前往百花
-		/// </summary>
 		public static TaskInfoItem Wuxian_ToBaihua => Instance[216];
 
-		/// <summary>
-		/// 五仙主线五仙请求
-		/// </summary>
 		public static TaskInfoItem Wuxian_AcceptRequest => Instance[217];
 
-		/// <summary>
-		/// 五仙主线前往空桑
-		/// </summary>
 		public static TaskInfoItem Wuxian_ToKongsang => Instance[218];
 
-		/// <summary>
-		/// 五仙主线回到五仙
-		/// </summary>
 		public static TaskInfoItem Wuxian_BackHome => Instance[219];
 
-		/// <summary>
-		/// 五仙主线心愿未了
-		/// </summary>
 		public static TaskInfoItem Wuxian_WishComeTrue => Instance[220];
 
-		/// <summary>
-		/// 五仙主线五圣心毒
-		/// </summary>
 		public static TaskInfoItem Wuxian_Adventure => Instance[221];
 
-		/// <summary>
-		/// 峨眉主线峨眉凶案
-		/// </summary>
 		public static TaskInfoItem Emei_HomocideCases => Instance[222];
 
-		/// <summary>
-		/// 峨眉主线凶案线索
-		/// </summary>
 		public static TaskInfoItem Emei_Clues => Instance[223];
 
-		/// <summary>
-		/// 峨眉主线调查白猿
-		/// </summary>
 		public static TaskInfoItem Emei_InvestigateWhiteGibbon => Instance[224];
 
-		/// <summary>
-		/// 峨眉主线峨眉正宗
-		/// </summary>
 		public static TaskInfoItem Emei_Orthrodox => Instance[225];
 
-		/// <summary>
-		/// 峨眉主线何为正宗
-		/// </summary>
 		public static TaskInfoItem Emei_OrthrodoxAdventure => Instance[226];
 
-		/// <summary>
-		/// 峨眉主线等待奇遇
-		/// </summary>
 		public static TaskInfoItem Emei_WaitForAdventure => Instance[227];
 
-		/// <summary>
-		/// 峨眉主线寻找白猿
-		/// </summary>
 		public static TaskInfoItem Emei_SeekWhiteGibbon => Instance[228];
 
-		/// <summary>
-		/// 峨眉主线白猿消失
-		/// </summary>
 		public static TaskInfoItem Emei_WhiteGibbonsDisappeared => Instance[229];
 
-		/// <summary>
-		/// 峨眉主线小石消失
-		/// </summary>
 		public static TaskInfoItem Emei_ShiHoujiuDisappeared => Instance[230];
 
-		/// <summary>
-		/// 峨眉新主线初探风波
-		/// </summary>
 		public static TaskInfoItem Emei_Prologue => Instance[709];
 
-		/// <summary>
-		/// 峨眉新主线峨眉动向
-		/// </summary>
 		public static TaskInfoItem Emei_StormApproaches => Instance[710];
 
-		/// <summary>
-		/// 峨眉新主线峨眉山月
-		/// </summary>
 		public static TaskInfoItem Emei_Midnight => Instance[711];
 
-		/// <summary>
-		/// 峨眉新主线掌门密信
-		/// </summary>
 		public static TaskInfoItem Emei_SecretLetter => Instance[712];
 
-		/// <summary>
-		/// 峨眉新主线急赴峨眉
-		/// </summary>
 		public static TaskInfoItem Emei_Crisis => Instance[713];
 
-		/// <summary>
-		/// 峨眉新主线预备比武
-		/// </summary>
 		public static TaskInfoItem Emei_Preparing => Instance[714];
 
-		/// <summary>
-		/// 峨眉新主线预备比武0
-		/// </summary>
 		public static TaskInfoItem Emei_TeachingMember => Instance[715];
 
-		/// <summary>
-		/// 峨眉新主线预备比武1
-		/// </summary>
 		public static TaskInfoItem Emei_SeekForWhiteGibbon => Instance[716];
 
-		/// <summary>
-		/// 峨眉新主线预备比武2
-		/// </summary>
 		public static TaskInfoItem Emei_SeekForXiaoshi => Instance[717];
 
-		/// <summary>
-		/// 峨眉新主线预备比武3
-		/// </summary>
 		public static TaskInfoItem Emei_TalkToMember => Instance[718];
 
-		/// <summary>
-		/// 峨眉新主线预备比武4
-		/// </summary>
 		public static TaskInfoItem Emei_TalkToVillager => Instance[719];
 
-		/// <summary>
-		/// 峨眉新主线金顶比武
-		/// </summary>
 		public static TaskInfoItem Emei_Tournament => Instance[720];
 
-		/// <summary>
-		/// 峨眉新主线等待休养
-		/// </summary>
 		public static TaskInfoItem Emei_TakeBreak => Instance[731];
 
-		/// <summary>
-		/// 峨眉新主线峨眉现状
-		/// </summary>
 		public static TaskInfoItem Emei_NowStates => Instance[721];
 
-		/// <summary>
-		/// 峨眉新主线暂离峨眉
-		/// </summary>
 		public static TaskInfoItem Emei_Leaving => Instance[722];
 
-		/// <summary>
-		/// 峨眉新主线再寻白猿
-		/// </summary>
 		public static TaskInfoItem Emei_SeekWhiteGibbonAgain => Instance[723];
 
-		/// <summary>
-		/// 峨眉新主线追踪恶妖
-		/// </summary>
 		public static TaskInfoItem Emei_SeekForEvil => Instance[724];
 
-		/// <summary>
-		/// 峨眉新主线寻找恶妖0
-		/// </summary>
 		public static TaskInfoItem Emei_Chat => Instance[725];
 
-		/// <summary>
-		/// 峨眉新主线追击真凶
-		/// </summary>
 		public static TaskInfoItem Emei_Pursuit => Instance[726];
 
-		/// <summary>
-		/// 峨眉新主线别过群侠
-		/// </summary>
 		public static TaskInfoItem Emei_Farewell => Instance[727];
 
-		/// <summary>
-		/// 峨眉新主线漫步峨眉
-		/// </summary>
 		public static TaskInfoItem Emei_WalkInMountains => Instance[728];
 
-		/// <summary>
-		/// 峨眉新主线静待了结
-		/// </summary>
 		public static TaskInfoItem Emei_Finale => Instance[729];
 
-		/// <summary>
-		/// 梦回剧情跟上伏虞
-		/// </summary>
 		public static TaskInfoItem CrossArchive_FollowFuyu => Instance[231];
 
-		/// <summary>
-		/// 梦回剧情取回行囊
-		/// </summary>
 		public static TaskInfoItem CrossArchive_Items => Instance[232];
 
-		/// <summary>
-		/// 梦回剧情取回技艺
-		/// </summary>
 		public static TaskInfoItem CrossArchive_LifeSkills => Instance[233];
 
-		/// <summary>
-		/// 梦回剧情取回功法
-		/// </summary>
 		public static TaskInfoItem CrossArchive_CombatSkills => Instance[234];
 
-		/// <summary>
-		/// 五方神龙回太吾村
-		/// </summary>
 		public static TaskInfoItem LoongDLCToVillage => Instance[235];
 
-		/// <summary>
-		/// 五方神龙前往抓龙
-		/// </summary>
 		public static TaskInfoItem LoongDLCCaptureLoong => Instance[236];
 
-		/// <summary>
-		/// 五方神龙养育蛟卵
-		/// </summary>
 		public static TaskInfoItem LoongDLCNurtureJiao => Instance[237];
 
-		/// <summary>
-		/// 挑战白龙
-		/// </summary>
 		public static TaskInfoItem ChallengeWhiteLoong => Instance[238];
 
-		/// <summary>
-		/// 挑战黑龙
-		/// </summary>
 		public static TaskInfoItem ChallengeBlackLoong => Instance[239];
 
-		/// <summary>
-		/// 挑战青龙
-		/// </summary>
 		public static TaskInfoItem ChallengeBlueLoong => Instance[240];
 
-		/// <summary>
-		/// 挑战赤龙
-		/// </summary>
 		public static TaskInfoItem ChallengeRedLoong => Instance[241];
 
-		/// <summary>
-		/// 挑战黄龙
-		/// </summary>
 		public static TaskInfoItem ChallengeYellowLoong => Instance[242];
 
-		/// <summary>
-		/// 养育长蛟
-		/// </summary>
 		public static TaskInfoItem NurtureJiao => Instance[243];
 
-		/// <summary>
-		/// 繁育长蛟
-		/// </summary>
 		public static TaskInfoItem ReproductJiao => Instance[244];
 
-		/// <summary>
-		/// 五仙剧情此地危险
-		/// </summary>
 		public static TaskInfoItem Wuxian_InWugDanger => Instance[245];
 
-		/// <summary>
-		/// 五仙剧情查问五仙
-		/// </summary>
 		public static TaskInfoItem Wuxian_SeekWuxian => Instance[246];
 
-		/// <summary>
-		/// 五仙剧情前去洗澡
-		/// </summary>
 		public static TaskInfoItem Wuxian_TakeBath => Instance[247];
 
-		/// <summary>
-		/// 五仙剧情许下心愿
-		/// </summary>
 		public static TaskInfoItem Wuxian_MakeAWish => Instance[248];
 
-		/// <summary>
-		/// 五仙剧情五仙衰落
-		/// </summary>
 		public static TaskInfoItem Wuxian_RefuseRequest => Instance[249];
 
-		/// <summary>
-		/// 五仙剧情共跳盘王
-		/// </summary>
 		public static TaskInfoItem Wuxian_BaihuaAdventure => Instance[250];
 
-		/// <summary>
-		/// 五仙剧情找百花人
-		/// </summary>
 		public static TaskInfoItem Wuxian_SeekBaihua => Instance[251];
 
-		/// <summary>
-		/// 五仙剧情共祭星典
-		/// </summary>
 		public static TaskInfoItem Wuxian_KongsangAdventure => Instance[252];
 
-		/// <summary>
-		/// 五仙剧情找空桑人
-		/// </summary>
 		public static TaskInfoItem Wuxian_SeekKongsang => Instance[253];
 
-		/// <summary>
-		/// 五仙剧情跟随鸳虫
-		/// </summary>
 		public static TaskInfoItem Wuxian_FollowLove => Instance[254];
 
-		/// <summary>
-		/// 五仙剧情心愿已了
-		/// </summary>
 		public static TaskInfoItem Wuxian_FailingWish => Instance[255];
 
-		/// <summary>
-		/// 五仙剧情身中蛊毒
-		/// </summary>
 		public static TaskInfoItem Wuxian_Wugged => Instance[256];
 
-		/// <summary>
-		/// 五仙剧情见苒心毒
-		/// </summary>
 		public static TaskInfoItem Wuxian_MeetWithRan => Instance[257];
 
-		/// <summary>
-		/// 然山剧情前往然山
-		/// </summary>
 		public static TaskInfoItem Ranshan_ToRanshan => Instance[258];
 
-		/// <summary>
-		/// 然山剧情青琅一梦
-		/// </summary>
 		public static TaskInfoItem Ranshan_QinglangDream => Instance[259];
 
-		/// <summary>
-		/// 然山剧情迁思回虑
-		/// </summary>
 		public static TaskInfoItem Ranshan_AfterQinglang => Instance[260];
 
-		/// <summary>
-		/// 然山剧情准备比武
-		/// </summary>
 		public static TaskInfoItem Ranshan_LeaveRanshan => Instance[261];
 
-		/// <summary>
-		/// 然山剧情教导华居
-		/// </summary>
 		public static TaskInfoItem Ranshan_TeachHuaju => Instance[262];
 
-		/// <summary>
-		/// 然山剧情教导玄质
-		/// </summary>
 		public static TaskInfoItem Ranshan_TeachXuanzhi => Instance[263];
 
-		/// <summary>
-		/// 然山剧情教导迎娇
-		/// </summary>
 		public static TaskInfoItem Ranshan_TeachYingjiao => Instance[264];
 
-		/// <summary>
-		/// 然山剧情回到然山
-		/// </summary>
 		public static TaskInfoItem Ranshan_BackToRanshan => Instance[265];
 
-		/// <summary>
-		/// 然山剧情等待比武
-		/// </summary>
 		public static TaskInfoItem Ranshan_WaitForBiWu => Instance[266];
 
-		/// <summary>
-		/// 然山剧情三宗比武
-		/// </summary>
 		public static TaskInfoItem Ranshan_SanZongBiWu => Instance[267];
 
-		/// <summary>
-		/// 然山剧情无问仙踪
-		/// </summary>
 		public static TaskInfoItem Ranshan_End => Instance[268];
 
-		/// <summary>
-		/// 然山剧情进入青琅阁
-		/// </summary>
 		public static TaskInfoItem Ranshan_EnterQinglangge => Instance[269];
 
-		/// <summary>
-		/// 然山剧情仙途渺渺
-		/// </summary>
 		public static TaskInfoItem Ranshan_EndInAdvance => Instance[270];
 
-		/// <summary>
-		/// 百花剧情探查疯病
-		/// </summary>
 		public static TaskInfoItem Baihua_Manic => Instance[271];
 
-		/// <summary>
-		/// 百花剧情乡村怪病
-		/// </summary>
 		public static TaskInfoItem Baihua_AdventureVillageEndemic => Instance[272];
 
-		/// <summary>
-		/// 百花剧情寻医问诊
-		/// </summary>
 		public static TaskInfoItem Baihua_SeekMedCare => Instance[273];
 
-		/// <summary>
-		/// 百花剧情百花祖师
-		/// </summary>
 		public static TaskInfoItem Baihua_WaitForGurus => Instance[274];
 
-		/// <summary>
-		/// 百花剧情等待无忧
-		/// </summary>
 		public static TaskInfoItem Baihua_WaitForMelano => Instance[275];
 
-		/// <summary>
-		/// 百花剧情寻找祖师
-		/// </summary>
 		public static TaskInfoItem Baihua_SeekGuru => Instance[276];
 
-		/// <summary>
-		/// 百花剧情等待消息
-		/// </summary>
 		public static TaskInfoItem Baihua_WaitForGuruLetter => Instance[277];
 
-		/// <summary>
-		/// 百花剧情埋伏白一
-		/// </summary>
 		public static TaskInfoItem Baihua_SearchInfectedLeuko => Instance[278];
 
-		/// <summary>
-		/// 百花剧情埋伏白二
-		/// </summary>
 		public static TaskInfoItem Baihua_AmbushLeuko => Instance[279];
 
-		/// <summary>
-		/// 百花剧情埋伏玄一
-		/// </summary>
 		public static TaskInfoItem Baihua_SearchInfectedMelano => Instance[280];
 
-		/// <summary>
-		/// 百花剧情埋伏玄二
-		/// </summary>
 		public static TaskInfoItem Baihua_AmbushMelano => Instance[281];
 
-		/// <summary>
-		/// 百花剧情玄白回村
-		/// </summary>
 		public static TaskInfoItem Baihua_BringAnimalsBack => Instance[282];
 
-		/// <summary>
-		/// 百花剧情修复关系
-		/// </summary>
 		public static TaskInfoItem Baihua_RepairLMRelationship => Instance[283];
 
-		/// <summary>
-		/// 百花剧情关系白一
-		/// </summary>
 		public static TaskInfoItem Baihua_LeukoFav => Instance[284];
 
-		/// <summary>
-		/// 百花剧情关系白二
-		/// </summary>
 		public static TaskInfoItem Baihua_LeukoClose => Instance[285];
 
-		/// <summary>
-		/// 百花剧情关系白三
-		/// </summary>
 		public static TaskInfoItem Baihua_LHelpsM => Instance[286];
 
-		/// <summary>
-		/// 百花剧情关系玄一
-		/// </summary>
 		public static TaskInfoItem Baihua_MelanoFav => Instance[287];
 
-		/// <summary>
-		/// 百花剧情关系玄二
-		/// </summary>
 		public static TaskInfoItem Baihua_MelanoClose => Instance[288];
 
-		/// <summary>
-		/// 百花剧情关系玄三
-		/// </summary>
 		public static TaskInfoItem Baihua_MHelpsL => Instance[289];
 
-		/// <summary>
-		/// 百花剧情留守太吾
-		/// </summary>
 		public static TaskInfoItem Baihua_PandemicStart => Instance[290];
 
-		/// <summary>
-		/// 百花剧情谨慎留守
-		/// </summary>
 		public static TaskInfoItem Baihua_WaitForAdventure => Instance[291];
 
-		/// <summary>
-		/// 百花剧情复生之人
-		/// </summary>
 		public static TaskInfoItem Baihua_AdventureFinale => Instance[292];
 
-		/// <summary>
-		/// 百花剧情玄白复生
-		/// </summary>
 		public static TaskInfoItem Baihua_Finale => Instance[293];
 
-		/// <summary>
-		/// 伏龙剧情伏龙天灾
-		/// </summary>
 		public static TaskInfoItem Fulong_Diaster => Instance[294];
 
-		/// <summary>
-		/// 伏龙剧情伏龙祭典
-		/// </summary>
 		public static TaskInfoItem Fulong_Sacrifice => Instance[295];
 
-		/// <summary>
-		/// 伏龙剧情星陨坠火
-		/// </summary>
 		public static TaskInfoItem Fulong_Comet => Instance[296];
 
-		/// <summary>
-		/// 伏龙剧情返回伏龙
-		/// </summary>
 		public static TaskInfoItem Fulong_ReturnToFulong => Instance[297];
 
-		/// <summary>
-		/// 伏龙剧情停留伏龙
-		/// </summary>
 		public static TaskInfoItem Fulong_StayFulong => Instance[298];
 
-		/// <summary>
-		/// 伏龙剧情查问怪事
-		/// </summary>
 		public static TaskInfoItem Fulong_Mystery => Instance[299];
 
-		/// <summary>
-		/// 伏龙剧情查问琉璃
-		/// </summary>
 		public static TaskInfoItem Fulong_AskLazuli => Instance[300];
 
-		/// <summary>
-		/// 伏龙剧情游历天下
-		/// </summary>
 		public static TaskInfoItem Fulong_TravelWithLazuli => Instance[301];
 
-		/// <summary>
-		/// 伏龙剧情再返伏龙
-		/// </summary>
 		public static TaskInfoItem Fulong_BackToFulong => Instance[302];
 
-		/// <summary>
-		/// 伏龙剧情寻找鸡毛
-		/// </summary>
 		public static TaskInfoItem Fulong_SeekFeather => Instance[303];
 
-		/// <summary>
-		/// 伏龙剧情缝制羽衣
-		/// </summary>
 		public static TaskInfoItem Fulong_SewFeatherCoat => Instance[304];
 
-		/// <summary>
-		/// 伏龙剧情敌潜伏龙
-		/// </summary>
 		public static TaskInfoItem Fulong_FinaleAdventure => Instance[305];
 
-		/// <summary>
-		/// 伏龙剧情琉璃唤归
-		/// </summary>
 		public static TaskInfoItem Fulong_BackHome => Instance[306];
 
-		/// <summary>
-		/// 神鸡寻羽
-		/// </summary>
 		public static TaskInfoItem SideQuest_ChickenMap => Instance[307];
 
-		/// <summary>
-		/// 伏龙剧情扑灭天火
-		/// </summary>
 		public static TaskInfoItem Fulong_FireFighting => Instance[308];
 
-		/// <summary>
-		/// 伏龙剧情陪伴琉璃
-		/// </summary>
 		public static TaskInfoItem Fulong_StayWithLazuli => Instance[309];
 
-		/// <summary>
-		/// 伏龙剧情琉璃回村
-		/// </summary>
 		public static TaskInfoItem Fulong_TakeLazuliBackToTaiwuVillage => Instance[310];
 
-		/// <summary>
-		/// 伏龙剧情天火连绵
-		/// </summary>
 		public static TaskInfoItem Fulong_FireSeeking => Instance[311];
 
-		/// <summary>
-		/// 铸剑剧情砸锅卖铁
-		/// </summary>
 		public static TaskInfoItem Zhujian_Poverty => Instance[312];
 
-		/// <summary>
-		/// 铸剑剧情暗巷匠人
-		/// </summary>
 		public static TaskInfoItem Zhujian_Crisis => Instance[313];
 
-		/// <summary>
-		/// 铸剑剧情火照长空
-		/// </summary>
 		public static TaskInfoItem Zhujian_Furnace => Instance[314];
 
-		/// <summary>
-		/// 铸剑剧情烟雨湛卢
-		/// </summary>
 		public static TaskInfoItem Zhujian_MistyZhanlu => Instance[315];
 
-		/// <summary>
-		/// 铸剑剧情青铜开口
-		/// </summary>
 		public static TaskInfoItem Zhujian_TongshengTalking => Instance[316];
 
-		/// <summary>
-		/// 铸剑剧情杭州奇商
-		/// </summary>
 		public static TaskInfoItem Zhujian_AccessoryMerchant => Instance[317];
 
-		/// <summary>
-		/// 铸剑剧情劝导奇商
-		/// </summary>
 		public static TaskInfoItem Zhujian_ConvinceAccessory => Instance[318];
 
-		/// <summary>
-		/// 铸剑剧情找奇货斋
-		/// </summary>
 		public static TaskInfoItem Zhujian_ReplyAccessoryMerchant => Instance[319];
 
-		/// <summary>
-		/// 铸剑剧情文山书海
-		/// </summary>
 		public static TaskInfoItem Zhujian_BookMerchant => Instance[320];
 
-		/// <summary>
-		/// 铸剑剧情劝导商人
-		/// </summary>
 		public static TaskInfoItem Zhujian_ConvinceMerchants => Instance[321];
 
-		/// <summary>
-		/// 铸剑剧情答复伏牛
-		/// </summary>
 		public static TaskInfoItem Zhujian_ReplyFoodsMerchant => Instance[322];
 
-		/// <summary>
-		/// 铸剑剧情回春药堂
-		/// </summary>
 		public static TaskInfoItem Zhujian_MedicineMerchant => Instance[323];
 
-		/// <summary>
-		/// 铸剑剧情前往五湖
-		/// </summary>
 		public static TaskInfoItem Zhujian_SeekMaterialMerchant => Instance[324];
 
-		/// <summary>
-		/// 铸剑剧情建设分会
-		/// </summary>
 		public static TaskInfoItem Zhujian_ConstructBranch => Instance[325];
 
-		/// <summary>
-		/// 铸剑剧情手足俱全
-		/// </summary>
 		public static TaskInfoItem Zhujian_AdventureBodyCompelete => Instance[326];
 
-		/// <summary>
-		/// 铸剑剧情传承技艺
-		/// </summary>
 		public static TaskInfoItem Zhujian_Heir => Instance[327];
 
-		/// <summary>
-		/// 铸剑剧情铜生好感
-		/// </summary>
 		public static TaskInfoItem Zhujian_TongshengFav => Instance[328];
 
-		/// <summary>
-		/// 铸剑剧情等待器成
-		/// </summary>
 		public static TaskInfoItem Zhujian_History => Instance[329];
 
-		/// <summary>
-		/// 铸剑剧情前往湛庐
-		/// </summary>
 		public static TaskInfoItem Zhujian_ToZhanlu => Instance[330];
 
-		/// <summary>
-		/// 铸剑剧情湛卢夜色
-		/// </summary>
 		public static TaskInfoItem Zhujian_MidnightZhujian => Instance[331];
 
-		/// <summary>
-		/// 铸剑剧情试剑大典
-		/// </summary>
 		public static TaskInfoItem Zhujian_AdventureFinale => Instance[332];
 
-		/// <summary>
-		/// 铸剑剧情太原传艺
-		/// </summary>
 		public static TaskInfoItem Zhujian_TaiyuanHeirtage => Instance[333];
 
-		/// <summary>
-		/// 铸剑剧情襄阳传艺
-		/// </summary>
 		public static TaskInfoItem Zhujian_XiangyangHeritage => Instance[334];
 
-		/// <summary>
-		/// 铸剑剧情江陵传艺
-		/// </summary>
 		public static TaskInfoItem Zhujian_JianglingHeritage => Instance[335];
 
-		/// <summary>
-		/// 铸剑剧情江陵擒贼
-		/// </summary>
 		public static TaskInfoItem Zhujian_JianglingThief => Instance[336];
 
-		/// <summary>
-		/// 铸剑剧情襄阳擒贼
-		/// </summary>
 		public static TaskInfoItem Zhujian_XiangyangThief => Instance[337];
 
-		/// <summary>
-		/// 铸剑剧情秦州擒贼
-		/// </summary>
 		public static TaskInfoItem Zhujian_QinzhouThief => Instance[338];
 
-		/// <summary>
-		/// 铸剑剧情离开湛卢
-		/// </summary>
 		public static TaskInfoItem Zhujian_End => Instance[339];
 
-		/// <summary>
-		/// 新元山剧情拜访元山
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_VisitYuanshan => Instance[340];
 
-		/// <summary>
-		/// 新元山剧情前往静坐
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_Meditation => Instance[341];
 
-		/// <summary>
-		/// 新元山剧情定居点村
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_Village => Instance[342];
 
-		/// <summary>
-		/// 新元山剧情试炼一村
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_TrialVillage => Instance[343];
 
-		/// <summary>
-		/// 新元山剧情定居点寨
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_Stockade => Instance[344];
 
-		/// <summary>
-		/// 新元山剧情寻找阿念
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_SearchNian => Instance[345];
 
-		/// <summary>
-		/// 新元山剧情试炼二寨
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_TrialStockade => Instance[346];
 
-		/// <summary>
-		/// 新元山剧情定居点镇
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_Town => Instance[347];
 
-		/// <summary>
-		/// 新元山剧情试炼三镇
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_TrialTown => Instance[348];
 
-		/// <summary>
-		/// 新元山剧情再临元山
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_RevisitYuanshan => Instance[349];
 
-		/// <summary>
-		/// 新元山剧情静待参悟
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_WaitForEnlightment => Instance[350];
 
-		/// <summary>
-		/// 新元山剧情镇魔大阵
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_Adventure => Instance[351];
 
-		/// <summary>
-		/// 新元山剧情尘埃落定
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_Finale => Instance[352];
 
-		/// <summary>
-		/// 新元山剧情冷月孤影
-		/// </summary>
 		public static TaskInfoItem RemakeYuanshan_EasterEgg => Instance[353];
 
-		/// <summary>
-		/// 界青剧情荒野破庙
-		/// </summary>
 		public static TaskInfoItem Jieqing_Temple => Instance[354];
 
-		/// <summary>
-		/// 界青剧情七星血光
-		/// </summary>
 		public static TaskInfoItem Jieqing_BloodBeiDou => Instance[355];
 
-		/// <summary>
-		/// 界青剧情慈祥老人
-		/// </summary>
 		public static TaskInfoItem Jieqing_KindOldMan => Instance[356];
 
-		/// <summary>
-		/// 界青剧情下无生渊
-		/// </summary>
 		public static TaskInfoItem Jieqing_WuShengYuan => Instance[357];
 
-		/// <summary>
-		/// 界青剧情无名秘信
-		/// </summary>
 		public static TaskInfoItem Jieqing_Message => Instance[358];
 
-		/// <summary>
-		/// 界青剧情摔珠之期
-		/// </summary>
 		public static TaskInfoItem Jieqing_SmashPearl => Instance[359];
 
-		/// <summary>
-		/// 界青剧情最终决战
-		/// </summary>
 		public static TaskInfoItem Jieqing_FinalBattle => Instance[360];
 
-		/// <summary>
-		/// 界青剧情界青故人
-		/// </summary>
 		public static TaskInfoItem Jieqing_Recovery => Instance[361];
 
-		/// <summary>
-		/// 界青剧情探访玉蝉
-		/// </summary>
 		public static TaskInfoItem Jieqing_VisitYuChan => Instance[362];
 
-		/// <summary>
-		/// 界青剧情善恶无生
-		/// </summary>
 		public static TaskInfoItem Jieqing_End => Instance[363];
 
-		/// <summary>
-		/// 通用任务神木种植
-		/// </summary>
 		public static TaskInfoItem PlantTrees => Instance[364];
 
-		/// <summary>
-		/// 铸剑升级互动湛卢观戏
-		/// </summary>
 		public static TaskInfoItem ZhujianUpgrade_drama => Instance[365];
 
-		/// <summary>
-		/// 铸剑升级互动竹鹊传信
-		/// </summary>
 		public static TaskInfoItem ZhujianUpgrade_Start => Instance[366];
 
-		/// <summary>
-		/// 铸剑升级互动铜生观戏
-		/// </summary>
 		public static TaskInfoItem ZhujianUpgrade_Prelude => Instance[367];
 
-		/// <summary>
-		/// 铸剑升级互动山庄探秘
-		/// </summary>
 		public static TaskInfoItem ZhujianUpgrade_Epitasis => Instance[368];
 
-		/// <summary>
-		/// 铸剑升级互动玄机之谜
-		/// </summary>
 		public static TaskInfoItem ZhujianUpgrade_Adventure => Instance[369];
 
-		/// <summary>
-		/// 铸剑升级互动小童观戏
-		/// </summary>
 		public static TaskInfoItem ZhujianUpgrade_Ending => Instance[370];
 
-		/// <summary>
-		/// 武当升级互动白鹤寄书
-		/// </summary>
 		public static TaskInfoItem WudangUpgrade_Crane => Instance[371];
 
-		/// <summary>
-		/// 武当升级互动探查黑蛇
-		/// </summary>
 		public static TaskInfoItem WudangUpgrade_ExploreBlackSnake => Instance[372];
 
-		/// <summary>
-		/// 武当升级互动一言相期
-		/// </summary>
 		public static TaskInfoItem WudangUpgrade_Promise => Instance[373];
 
-		/// <summary>
-		/// 武当升级互动探望黑蛇
-		/// </summary>
 		public static TaskInfoItem WudangUpgrade_VisitBlackSnake => Instance[374];
 
-		/// <summary>
-		/// 璇女升级互动筠儿托梦
-		/// </summary>
 		public static TaskInfoItem UpgradeXuannv_Dreaming => Instance[375];
 
-		/// <summary>
-		/// 璇女升级互动再访璇女
-		/// </summary>
 		public static TaskInfoItem UpgradeXuannv_ToXuannv => Instance[376];
 
-		/// <summary>
-		/// 璇女升级互动再探宝珏
-		/// </summary>
 		public static TaskInfoItem UpgradeXuannv_CrackedMirror => Instance[377];
 
-		/// <summary>
-		/// 五仙升级互动思望苗疆
-		/// </summary>
 		public static TaskInfoItem WuxianUpgrade_Homesick => Instance[378];
 
-		/// <summary>
-		/// 五仙升级互动前往黑水
-		/// </summary>
 		public static TaskInfoItem WuxianUpgrade_Heishui => Instance[379];
 
-		/// <summary>
-		/// 五仙升级互动苗鼓之声
-		/// </summary>
 		public static TaskInfoItem WuxianUpgrade_Drum => Instance[380];
 
-		/// <summary>
-		/// 血犼升级互动鬼事渐息
-		/// </summary>
 		public static TaskInfoItem XuehouUpgrade_Begin => Instance[381];
 
-		/// <summary>
-		/// 血犼升级互动故人无音
-		/// </summary>
 		public static TaskInfoItem XuehouUpgrade_FollowLetter => Instance[382];
 
-		/// <summary>
-		/// 血犼升级互动扬州今事
-		/// </summary>
 		public static TaskInfoItem XuehouUpgrade_Yangzhou => Instance[383];
 
-		/// <summary>
-		/// 血犼升级互动寻墓而出
-		/// </summary>
 		public static TaskInfoItem XuehouUpgrade_Search => Instance[384];
 
-		/// <summary>
-		/// 空桑升级互动心毒问鼎
-		/// </summary>
 		public static TaskInfoItem KongsangUpgrade_Ask => Instance[385];
 
-		/// <summary>
-		/// 空桑升级互动观鼎生灰
-		/// </summary>
 		public static TaskInfoItem KongsangUpgrade_Check => Instance[386];
 
-		/// <summary>
-		/// 空桑升级互动药灰绽隙
-		/// </summary>
 		public static TaskInfoItem KongsangUpgrade_Cauldron => Instance[387];
 
-		/// <summary>
-		/// 空桑升级互动青鼎流辉
-		/// </summary>
 		public static TaskInfoItem KongsangUpgrade_View => Instance[388];
 
-		/// <summary>
-		/// 狮相升级互动前往村中
-		/// </summary>
 		public static TaskInfoItem ShixiangUpgrade_Village => Instance[389];
 
-		/// <summary>
-		/// 狮相升级互动等待回音
-		/// </summary>
 		public static TaskInfoItem ShixiangUpgrade_Echo => Instance[390];
 
-		/// <summary>
-		/// 狮相升级互动静待消息
-		/// </summary>
 		public static TaskInfoItem ShixiangUpgrade_Message => Instance[391];
 
-		/// <summary>
-		/// 狮相升级互动尘埃落定
-		/// </summary>
 		public static TaskInfoItem ShixiangUpgrade_End => Instance[392];
 
-		/// <summary>
-		/// 元山升级互动三气入梦
-		/// </summary>
 		public static TaskInfoItem YuanshanUpgrade_Dream => Instance[393];
 
-		/// <summary>
-		/// 元山升级互动行抵元山
-		/// </summary>
 		public static TaskInfoItem YuanshanUpgrade_Journey => Instance[394];
 
-		/// <summary>
-		/// 元山升级互动山谷妖踪
-		/// </summary>
 		public static TaskInfoItem YuanshanUpgrade_Valley => Instance[395];
 
-		/// <summary>
-		/// 然山升级互动纸鹤传书
-		/// </summary>
 		public static TaskInfoItem RanShan_message => Instance[396];
 
-		/// <summary>
-		/// 然山升级互动然山邪祟
-		/// </summary>
 		public static TaskInfoItem RanShan_Ghost => Instance[397];
 
-		/// <summary>
-		/// 然山升级互动众魂比武
-		/// </summary>
 		public static TaskInfoItem RanShan_ZhongHunBiWu => Instance[398];
 
-		/// <summary>
-		/// 然山升级互动心境深处
-		/// </summary>
 		public static TaskInfoItem RanShan_XinJing => Instance[399];
 
-		/// <summary>
-		/// 金刚升级互动村人异事
-		/// </summary>
 		public static TaskInfoItem JingangUpgrade_SupernaturalEvent => Instance[400];
 
-		/// <summary>
-		/// 金刚升级互动夜半惊魂
-		/// </summary>
 		public static TaskInfoItem JingangUpgrade_Ghost => Instance[401];
 
-		/// <summary>
-		/// 金刚升级互动一问究竟
-		/// </summary>
 		public static TaskInfoItem JingangUpgrade_Ask => Instance[402];
 
-		/// <summary>
-		/// 伏龙升级互动元鸡落羽
-		/// </summary>
 		public static TaskInfoItem FulongUpgrade_Chicken => Instance[403];
 
-		/// <summary>
-		/// 伏龙升级互动探查大王
-		/// </summary>
 		public static TaskInfoItem FulongUpgrade_Dawang => Instance[404];
 
-		/// <summary>
-		/// 伏龙升级互动琉璃制衣
-		/// </summary>
 		public static TaskInfoItem FulongUpgrade_GarmentManufacturing => Instance[405];
 
-		/// <summary>
-		/// 伏龙升级互动羽衣已成
-		/// </summary>
 		public static TaskInfoItem FulongUpgrade_Clothing => Instance[406];
 
-		/// <summary>
-		/// 百花升级互动风起故尘
-		/// </summary>
 		public static TaskInfoItem BaihuaUpgrade_Start => Instance[407];
 
-		/// <summary>
-		/// 百花升级互动白鹿解骨
-		/// </summary>
 		public static TaskInfoItem BaihuaUpgrade_LeukoHealer => Instance[408];
 
-		/// <summary>
-		/// 百花升级互动玄鸮定脉
-		/// </summary>
 		public static TaskInfoItem BaihuaUpgrade_MelanoHealer => Instance[409];
 
-		/// <summary>
-		/// 百花升级互动聚首齐论
-		/// </summary>
 		public static TaskInfoItem BaihuaUpgrade_Gather => Instance[410];
 
-		/// <summary>
-		/// 百花升级互动河谷追凶
-		/// </summary>
 		public static TaskInfoItem BaihuaUpgrade_Ending => Instance[411];
 
-		/// <summary>
-		/// 少林升级互动静待佛缘
-		/// </summary>
 		public static TaskInfoItem ShaolinUpgrade_Fate => Instance[412];
 
-		/// <summary>
-		/// 少林升级互动探访无字
-		/// </summary>
 		public static TaskInfoItem ShaolinUpgrade_Wuzi => Instance[413];
 
-		/// <summary>
-		/// 少林升级互动一探究竟
-		/// </summary>
 		public static TaskInfoItem ShaolinUpgrade_Investigate => Instance[414];
 
-		/// <summary>
-		/// 少林升级互动尘埃落定
-		/// </summary>
 		public static TaskInfoItem ShaolinUpgrade_Finale => Instance[415];
 
-		/// <summary>
-		/// 峨眉升级互动山间奇闻
-		/// </summary>
 		public static TaskInfoItem EmeiUpgrade_Start => Instance[671];
 
-		/// <summary>
-		/// 峨眉升级互动峨眉仙猿
-		/// </summary>
 		public static TaskInfoItem EmeiUpgrade_Xiaobaiyuan => Instance[672];
 
-		/// <summary>
-		/// 峨眉升级互动寻找白猿
-		/// </summary>
 		public static TaskInfoItem EmeiUpgrade_Baiyuan => Instance[673];
 
-		/// <summary>
-		/// 峨眉升级互动静待修行
-		/// </summary>
 		public static TaskInfoItem EmeiUpgrade_Study => Instance[674];
 
-		/// <summary>
-		/// 峨眉升级互动心猿已生
-		/// </summary>
 		public static TaskInfoItem EmeiUpgrade_Xinyuan => Instance[675];
 
-		/// <summary>
-		/// 峨眉升级互动静待消息
-		/// </summary>
 		public static TaskInfoItem EmeiUpgrade_Ending => Instance[676];
 
-		/// <summary>
-		/// 界青升级互动静待玉蝉
-		/// </summary>
 		public static TaskInfoItem JieqingUpgrade_Start => Instance[705];
 
-		/// <summary>
-		/// 界青升级互动渊底怪声
-		/// </summary>
 		public static TaskInfoItem JieqingUpgrade_Noise => Instance[706];
 
-		/// <summary>
-		/// 界青升级互动深渊异变
-		/// </summary>
 		public static TaskInfoItem JieqingUpgrade_Abyss => Instance[707];
 
-		/// <summary>
-		/// 界青升级互动天外寂星
-		/// </summary>
 		public static TaskInfoItem JieqingUpgrade_End => Instance[708];
+
+		public static TaskInfoItem DemonHeart => Instance[745];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static TaskInfo Instance = new TaskInfo();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -4058,15 +1665,15 @@ public class TaskInfo : ConfigData<TaskInfoItem, int>
 		_dataArray.Add(new TaskInfoItem(32, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_32"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_32"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_32"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_32"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_32"), 180, new List<int>(), new List<int> { 28 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 83, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(33, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_33"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_33"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_33"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_33"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_33"), 120, new List<int> { 117 }, new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(34, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_34"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_34"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_34"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_34"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_34"), 180, new List<int>(), new List<int> { 107 }, new List<int> { 97 }, isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(35, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_35"), 180, new List<int> { 77 }, new List<int> { 98 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(36, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_36"), 180, new List<int> { 78 }, new List<int> { 99 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(37, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_37"), 180, new List<int> { 79 }, new List<int> { 100 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(38, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_38"), 180, new List<int> { 80 }, new List<int> { 101 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(39, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_39"), 180, new List<int> { 81 }, new List<int> { 102 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(40, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_40"), 180, new List<int> { 82 }, new List<int> { 103 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(41, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_41"), 180, new List<int> { 83 }, new List<int> { 104 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(42, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_42"), 180, new List<int> { 84 }, new List<int> { 105 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(43, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_43"), 180, new List<int> { 85 }, new List<int> { 106 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(35, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_35"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_35"), 180, new List<int> { 77, 352 }, new List<int> { 98, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(36, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_36"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_36"), 180, new List<int> { 78, 352 }, new List<int> { 99, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(37, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_37"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_37"), 180, new List<int> { 79, 352 }, new List<int> { 100, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(38, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_38"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_38"), 180, new List<int> { 80, 352 }, new List<int> { 101, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(39, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_39"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_39"), 180, new List<int> { 81, 352 }, new List<int> { 102, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(40, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_40"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_40"), 180, new List<int> { 82, 352 }, new List<int> { 103, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(41, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_41"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_41"), 180, new List<int> { 83, 352 }, new List<int> { 104, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(42, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_42"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_42"), 180, new List<int> { 84, 352 }, new List<int> { 105, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(43, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_43"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_43"), 180, new List<int> { 85, 352 }, new List<int> { 106, 352 }, new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), 31, 75, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(44, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_44"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_44"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_44"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_44"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_44"), 180, new List<int> { 217 }, new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(45, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_45"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_45"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_45"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_45"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_45"), 180, new List<int> { 121 }, new List<int> { 215 }, new List<int>(), isTriggeredTask: false, unableRepeat: false, new List<int>(), 31, 83, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(46, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_46"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_46"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_46"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_46"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_46"), 180, new List<int> { 215 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: false, new List<int>(), 31, 83, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
@@ -5039,20 +2646,20 @@ public class TaskInfo : ConfigData<TaskInfoItem, int>
 		_dataArray.Add(new TaskInfoItem(684, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_684"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_684"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_684"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_684"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_684"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(685, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_685"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_685"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_685"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_685"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_685"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(686, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_686"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_686"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_686"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_686"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_686"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(687, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_687"), 120, new List<int> { 331 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(688, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_688"), 120, new List<int> { 332 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(689, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_689"), 120, new List<int> { 333 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(690, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_690"), 120, new List<int> { 334 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(691, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_691"), 120, new List<int> { 335 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(692, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_692"), 120, new List<int> { 336 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(693, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_693"), 120, new List<int> { 337 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(694, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_694"), 120, new List<int> { 338 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(695, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_695"), 120, new List<int> { 339 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(696, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_696"), 120, new List<int> { 340 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(697, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_697"), 120, new List<int> { 341 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(698, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_698"), 120, new List<int> { 342 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(687, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_687"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_687"), 120, new List<int> { 331, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(688, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_688"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_688"), 120, new List<int> { 332, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(689, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_689"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_689"), 120, new List<int> { 333, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(690, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_690"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_690"), 120, new List<int> { 334, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(691, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_691"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_691"), 120, new List<int> { 335, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(692, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_692"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_692"), 120, new List<int> { 336, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(693, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_693"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_693"), 120, new List<int> { 337, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(694, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_694"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_694"), 120, new List<int> { 338, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(695, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_695"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_695"), 120, new List<int> { 339, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(696, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_696"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_696"), 120, new List<int> { 340, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(697, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_697"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_697"), 120, new List<int> { 341, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(698, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_698"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_698"), 120, new List<int> { 342, 352 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(699, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_699"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_699"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_699"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_699"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_699"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), "MainStoryGoldenLineLoc", null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
-		_dataArray.Add(new TaskInfoItem(700, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_700"), 120, new List<int> { 347 }, new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 0));
+		_dataArray.Add(new TaskInfoItem(700, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_700"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_700"), 120, new List<int> { 347, 352 }, new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 0));
 		_dataArray.Add(new TaskInfoItem(701, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_701"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_701"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_701"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_701"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_701"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), "WushaoAdvBlock", null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(702, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_702"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_702"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_702"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_702"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_702"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), "LetterAdvBlock", null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(703, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_703"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_703"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_703"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_703"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_703"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), "TrailAdvBlock", null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
@@ -5126,12 +2733,42 @@ public class TaskInfo : ConfigData<TaskInfoItem, int>
 		_dataArray.Add(new TaskInfoItem(741, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_741"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_741"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_741"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_741"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_741"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(742, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_742"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_742"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_742"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_742"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_742"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 		_dataArray.Add(new TaskInfoItem(743, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_743"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_743"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_743"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_743"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_743"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(744, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_744"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_744"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_744"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_744"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_744"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(745, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_745"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_745"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_745"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_745"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_745"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(746, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_746"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_746"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_746"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_746"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_746"), 120, new List<int>(), new List<int>(), new List<int>(), isTriggeredTask: true, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(747, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_747"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_747"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_747"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_747"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_747"), 120, new List<int> { 356, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(748, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_748"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_748"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_748"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_748"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_748"), 120, new List<int> { 355, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short> { 1342 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(749, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_749"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_749"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_749"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_749"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_749"), 120, new List<int> { 354, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short> { 1341 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(750, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_750"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_750"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_750"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_750"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_750"), 120, new List<int> { 353, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 0, new List<short> { 1340 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(751, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_751"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_751"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_751"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_751"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_751"), 120, new List<int> { 347, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 0));
+		_dataArray.Add(new TaskInfoItem(752, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_752"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_752"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_752"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_752"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_752"), 120, new List<int> { 331, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1075 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(753, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_753"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_753"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_753"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_753"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_753"), 120, new List<int> { 332, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1076 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(754, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_754"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_754"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_754"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_754"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_754"), 120, new List<int> { 333, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1077 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(755, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_755"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_755"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_755"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_755"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_755"), 120, new List<int> { 334, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1078 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(756, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_756"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_756"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_756"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_756"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_756"), 120, new List<int> { 335, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1079 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(757, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_757"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_757"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_757"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_757"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_757"), 120, new List<int> { 336, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1080 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(758, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_758"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_758"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_758"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_758"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_758"), 120, new List<int> { 337, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1081 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(759, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_759"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_759"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_759"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_759"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_759"), 120, new List<int> { 338, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1082 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(760, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_760"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_760"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_760"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_760"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_760"), 120, new List<int> { 339, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1083 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(761, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_761"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_761"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_761"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_761"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_761"), 120, new List<int> { 340, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1084 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(762, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_762"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_762"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_762"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_762"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_762"), 120, new List<int> { 341, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1085 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(763, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_763"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_763"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_763"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_763"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_763"), 120, new List<int> { 342, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short> { 1086 }, null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(764, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_764"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_764"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_764"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_764"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_764"), 120, new List<int> { 86, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(765, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_765"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_765"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_765"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_765"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_765"), 120, new List<int> { 77, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(766, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_766"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_766"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_766"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_766"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_766"), 120, new List<int> { 78, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(767, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_767"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_767"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_767"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_767"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_767"), 120, new List<int> { 79, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(768, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_768"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_768"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_768"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_768"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_768"), 120, new List<int> { 80, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(769, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_769"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_769"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_769"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_769"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_769"), 120, new List<int> { 81, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(770, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_770"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_770"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_770"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_770"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_770"), 120, new List<int> { 82, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(771, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_771"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_771"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_771"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_771"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_771"), 120, new List<int> { 83, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(772, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_772"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_772"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_772"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_772"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_772"), 120, new List<int> { 84, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
+		_dataArray.Add(new TaskInfoItem(773, LocalStringManager.GetConfig("TaskInfo_language", "TaskTitle_773"), LocalStringManager.GetConfig("TaskInfo_language", "TaskOverview_773"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescription_773"), LocalStringManager.GetConfig("TaskInfo_language", "TaskBubblesContent_773"), LocalStringManager.GetConfig("TaskInfo_language", "TaskDescriptionMeet_773"), 120, new List<int> { 85, 351 }, new List<int>(), new List<int>(), isTriggeredTask: false, unableRepeat: true, new List<int>(), -1, -1, 2, new List<short>(), null, null, null, null, null, null, new AutoTriggerMonthlyEvent[0], 1));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<TaskInfoItem>(744);
+		_dataArray = new List<TaskInfoItem>(774);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

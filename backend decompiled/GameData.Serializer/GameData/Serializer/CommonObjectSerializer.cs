@@ -270,7 +270,6 @@ public static class CommonObjectSerializer
 			_tabsPending = true;
 		}
 
-		[CLSCompliant(false)]
 		public override void WriteLine(uint value)
 		{
 			OutputTabs();
@@ -384,19 +383,19 @@ public static class CommonObjectSerializer
 		}
 	}
 
-	private static IReadOnlyDictionary<string, MemberInfo> GetMemberDict(Type type)
+	private static IReadOnlyDictionary<string, MemberInfo> GetMemberDict(Type type, BindingFlags flags)
 	{
 		if (CachedMemberDict.TryGetValue(type, out var memberDict))
 		{
 			return memberDict;
 		}
 		memberDict = new Dictionary<string, MemberInfo>();
-		FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
+		FieldInfo[] fields = type.GetFields(flags);
 		foreach (FieldInfo fieldInfo in fields)
 		{
 			memberDict[fieldInfo.Name] = fieldInfo;
 		}
-		PropertyInfo[] properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+		PropertyInfo[] properties = type.GetProperties(flags);
 		foreach (PropertyInfo propertyInfo in properties)
 		{
 			if (propertyInfo.CanWrite && propertyInfo.CanRead && propertyInfo.GetIndexParameters().Length == 0)
@@ -410,10 +409,20 @@ public static class CommonObjectSerializer
 
 	private static IEnumerable<KeyValuePair<string, CommonObjectSerializationMember>> GetMembers(object obj, bool deserializing)
 	{
-		Type skipMemberAttr = typeof(CommonObjectSkipMemberAttribute);
-		foreach (var (name, member) in GetMemberDict(obj.GetType()))
+		IEnumerable<CommonObjectSerializationMember> extraMembers = null;
+		BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
+		if (obj is ICommonObjectSerializationAware aware)
 		{
-			if (member.IsDefined(skipMemberAttr) || (obj is ICommonObjectSerializationAware aware && aware.SkipMember(member, deserializing)))
+			if (aware.IncludeNonPublic)
+			{
+				flags |= BindingFlags.NonPublic;
+			}
+			extraMembers = aware.ExtraMembers(deserializing);
+		}
+		Type skipMemberAttr = typeof(CommonObjectSkipMemberAttribute);
+		foreach (var (name, member) in GetMemberDict(obj.GetType(), flags))
+		{
+			if (member.IsDefined(skipMemberAttr) || (obj is ICommonObjectSerializationAware aware2 && aware2.SkipMember(member, deserializing)))
 			{
 				continue;
 			}
@@ -440,11 +449,11 @@ public static class CommonObjectSerializer
 			}
 			yield return keyValuePair2;
 		}
-		if (!(obj is ICommonObjectSerializationAware aware2))
+		if (extraMembers == null)
 		{
 			yield break;
 		}
-		foreach (CommonObjectSerializationMember extra in aware2.ExtraMembers(deserializing))
+		foreach (CommonObjectSerializationMember extra in extraMembers)
 		{
 			yield return new KeyValuePair<string, CommonObjectSerializationMember>(extra.Name, extra);
 		}
@@ -1009,15 +1018,31 @@ public static class CommonObjectSerializer
 				JToken value;
 				if (typeof(IDictionary).IsAssignableFrom(typeHint))
 				{
+					Type keyType = typeHint.GetGenericArguments()[0];
 					Type valueType = typeHint.GetGenericArguments()[1];
 					IDictionary objDict = (IDictionary)Activator.CreateInstance(typeHint);
-					foreach (KeyValuePair<string, JToken> item4 in jObject)
+					if (keyType == typeof(string))
 					{
-						item4.Deconstruct(out key, out value);
-						string key2 = key;
-						JToken value2 = value;
-						DeserializeFromJsonValue(value2, out var valueData, (value2 is JObject && valueType == typeof(object)) ? typeof(Dictionary<object, object>) : valueType);
-						objDict[key2] = valueData;
+						foreach (KeyValuePair<string, JToken> item4 in jObject)
+						{
+							item4.Deconstruct(out key, out value);
+							string key2 = key;
+							JToken value2 = value;
+							DeserializeFromJsonValue(value2, out var valueData, (value2 is JObject && valueType == typeof(object)) ? typeof(Dictionary<object, object>) : valueType);
+							objDict[key2] = valueData;
+						}
+					}
+					else
+					{
+						foreach (KeyValuePair<string, JToken> item5 in jObject)
+						{
+							item5.Deconstruct(out key, out value);
+							string obj2 = key;
+							JToken value3 = value;
+							DeserializeFromJsonValue(value3, out var valueData2, (value3 is JObject && valueType == typeof(object)) ? typeof(Dictionary<object, object>) : valueType);
+							object actualKey = ConvertValue(obj2, keyType);
+							objDict[actualKey] = valueData2;
+						}
 					}
 					obj = objDict;
 					return;
@@ -1029,10 +1054,10 @@ public static class CommonObjectSerializer
 				}
 				foreach (KeyValuePair<string, CommonObjectSerializationMember> member3 in GetMembers(obj, deserializing: true))
 				{
-					member3.Deconstruct(out key, out var value3);
+					member3.Deconstruct(out key, out var value4);
 					string name = key;
-					CommonObjectSerializationMember member = value3;
-					if (!jObject.TryGetValue(name, out JToken value4))
+					CommonObjectSerializationMember member = value4;
+					if (!jObject.TryGetValue(name, out JToken value5))
 					{
 						if (obj is ICommonObjectSerializationAware aware2)
 						{
@@ -1041,7 +1066,7 @@ public static class CommonObjectSerializer
 					}
 					else
 					{
-						DeserializeFromJsonValue(value4, out var prop, member.TypeHint);
+						DeserializeFromJsonValue(value5, out var prop, member.TypeHint);
 						member.Setter(prop);
 						jObject.Remove(name);
 					}
@@ -1050,14 +1075,14 @@ public static class CommonObjectSerializer
 				{
 					return;
 				}
-				foreach (KeyValuePair<string, JToken> item5 in jObject)
+				foreach (KeyValuePair<string, JToken> item6 in jObject)
 				{
-					item5.Deconstruct(out key, out value);
+					item6.Deconstruct(out key, out value);
 					string name2 = key;
-					JToken value5 = value;
+					JToken value6 = value;
 					if (aware3.DeserializingUnknownField(name2, out var member2))
 					{
-						DeserializeFromJsonValue(value5, out var prop2, member2.TypeHint);
+						DeserializeFromJsonValue(value6, out var prop2, member2.TypeHint);
 						if (aware3 is ICommonObjectDeserializationDirectValue deserializationDirectValue)
 						{
 							deserializationDirectValue.OnUnknownFieldGet(name2, prop2);
@@ -1099,5 +1124,27 @@ public static class CommonObjectSerializer
 			}
 		}
 		throw new ArgumentOutOfRangeException("value", $"{value} is not a valid {enumType.Name}");
+	}
+
+	private static object ConvertValue(object obj, Type dstType)
+	{
+		if (obj == null)
+		{
+			return null;
+		}
+		Type srcType = obj.GetType();
+		if (dstType.IsAssignableFrom(srcType))
+		{
+			return obj;
+		}
+		if (obj is IFormatProvider formatProvider)
+		{
+			return formatProvider.GetFormat(dstType);
+		}
+		if (dstType.IsEnum)
+		{
+			return Enum.ToObject(dstType, obj);
+		}
+		return Convert.ChangeType(obj, dstType);
 	}
 }

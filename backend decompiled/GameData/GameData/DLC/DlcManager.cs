@@ -10,6 +10,9 @@ using GameData.DLC.GreenHillsRemain;
 using GameData.DLC.HappyNewYear2024;
 using GameData.DLC.HappyNewYear2025;
 using GameData.DLC.HappyNewYear2026;
+using GameData.DLC.SmarterChicken;
+using GameData.DLC.TaiwuAsXiangshu;
+using GameData.DLC.TameLoong;
 using GameData.Domains;
 using GameData.Domains.Global;
 using GameData.Domains.TaiwuEvent;
@@ -86,6 +89,8 @@ public static class DlcManager
 	{
 		return dlcId.AppId switch
 		{
+			4975570uL => new SmarterChickenEntry(), 
+			5093830uL => new TameLoongEntry(), 
 			2764950uL => new FiveLoongDlcEntry(), 
 			4395170uL => new HappyNewYear2026Entry(), 
 			4528730uL => new CricketPolymorphEntry(), 
@@ -95,6 +100,7 @@ public static class DlcManager
 			2172690uL => new GiftFromConchShip2Entry(), 
 			4834440uL => new EightYearsEntry(), 
 			4834450uL => new GreenHillsRemainEntry(), 
+			5093790uL => new TaiwuAsXiangshuEntry(), 
 			_ => null, 
 		};
 	}
@@ -128,6 +134,18 @@ public static class DlcManager
 			}
 		}
 		return false;
+	}
+
+	public static DlcId? GetDlcIdByAppId(ulong appId)
+	{
+		foreach (DlcInfo dlcInfo in _dlcInfoList)
+		{
+			if (dlcInfo.DlcId.AppId == appId)
+			{
+				return dlcInfo.DlcId;
+			}
+		}
+		return null;
 	}
 
 	public static List<DlcId> GetAllInstalledDlcIds()

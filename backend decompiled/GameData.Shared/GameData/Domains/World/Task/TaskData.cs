@@ -5,42 +5,21 @@ namespace GameData.Domains.World.Task;
 
 public struct TaskData : ISerializableGameData
 {
-	/// <summary>
-	/// 任务模板ID <see cref="T:Config.TaskInfo" />
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaskInfoId;
 
-	/// <summary>
-	/// 任务链模板ID <see cref="T:Config.TaskChain" />
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaskChainId;
 
-	/// <summary>
-	/// 任务状态
-	/// </summary>
 	[SerializableGameDataField]
 	public byte TaskStatus;
 
-	/// <summary>
-	/// 是否受阻
-	/// </summary>
 	public bool IsBlocked => TaskStatus == 1;
 
-	/// <summary>
-	/// 是否进行中
-	/// </summary>
 	public bool IsInProgress => TaskStatus == 0;
 
-	/// <summary>
-	/// 是否已完成
-	/// </summary>
 	public bool IsFinished => TaskStatus == 2;
 
-	/// <summary>
-	/// 是否并行
-	/// </summary>
 	public bool IsParallel => TaskChain.Instance[TaskChainId].Type == ETaskChainType.Parallel;
 
 	public override string ToString()
@@ -59,13 +38,11 @@ public struct TaskData : ISerializableGameData
 		return empty + taskChainName + " " + taskInfoName;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 9;
@@ -76,7 +53,6 @@ public struct TaskData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = TaskInfoId;
@@ -92,7 +68,6 @@ public struct TaskData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

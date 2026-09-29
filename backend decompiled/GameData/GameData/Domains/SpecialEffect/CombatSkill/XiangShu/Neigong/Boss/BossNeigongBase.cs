@@ -27,7 +27,7 @@ public class BossNeigongBase : CombatSkillEffectBase
 
 	private void OnCharAboutToFall(DataContext context, CombatCharacter combatChar, ECombatCharAboutToFallType type)
 	{
-		if (combatChar == base.CombatChar && type == ECombatCharAboutToFallType.AddPhase && base.CombatChar.GetBossPhase() <= 0 && (DomainManager.Combat.IsCharacterFallen(base.CombatChar) || DomainManager.Combat.CombatConfig.StartInSecondPhase) && !DomainManager.Combat.CombatConfig.SkipChangePhase)
+		if (combatChar == base.CombatChar && type == ECombatCharAboutToFallType.AddPhase && base.CombatChar.GetBossPhase() <= 0 && (DomainManager.Combat.IsCharacterFallen(base.CombatChar) || DomainManager.Combat.CombatConfig.StartInSecondPhase) && !DomainManager.Combat.CombatConfig.SkipChangePhase && DomainManager.Combat.IsMainCharacter(base.CombatChar))
 		{
 			DomainManager.Combat.Reset(context, base.CombatChar);
 			DomainManager.Combat.AddBossPhase(context, base.CombatChar, base.EffectId);

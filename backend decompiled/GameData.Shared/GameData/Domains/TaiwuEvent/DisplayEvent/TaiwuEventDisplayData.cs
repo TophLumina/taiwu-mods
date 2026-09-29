@@ -6,92 +6,50 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 传递给显示模块的事件数据组合
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
 public class TaiwuEventDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 事件的GUID
-	/// </summary>
 	[SerializableGameDataField]
 	public string EventGuid;
 
-	/// <summary>
-	/// 选项上的角色
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData MainCharacter;
 
-	/// <summary>
-	/// 背景图位置的人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData TargetCharacter;
 
-	/// <summary>
-	/// 用于目标角色显示的额外数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public TaiwuEventDisplayExtraData ExtraData;
 
-	/// <summary>
-	/// 事件经过占位符替换以后的最终字符串。
-	/// !!!没有进行颜色的替换!!!
-	/// </summary>
 	[SerializableGameDataField]
 	public string EventContent;
 
-	/// <summary>
-	/// 解析该事件要使用到的全部姓名相关数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<TaiwuEventCharacterNameDecodeData> NameDecodeDataList;
 
-	/// <summary>
-	/// 额外的格式化多语言Key
-	/// </summary>
 	[SerializableGameDataField]
 	public List<string> ExtraFormatLanguageKeys;
 
-	/// <summary>
-	/// 事件背景图的名字或者路径
-	/// </summary>
 	[SerializableGameDataField]
 	public string EventTexture;
 
-	/// <summary>
-	/// 事件背景遮罩控制码
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MaskControlCode;
 
-	/// <summary>
-	/// 事件背景遮罩渐变时间(使用的时候乘以0.01f)
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort MaskTweenTime;
 
-	/// <summary>
-	/// 被绑定于Esc快捷选中的选项在EventOptionInfos中的索引
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte EscOptionIndex;
 
-	/// <summary>
-	/// 事件处理好的用于显示UI的选项信息
-	/// </summary>
 	[SerializableGameDataField]
 	public List<EventOptionInfo> EventOptionInfos;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -136,7 +94,6 @@ public class TaiwuEventDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -326,7 +283,6 @@ public class TaiwuEventDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

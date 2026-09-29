@@ -30,12 +30,14 @@ public class LongZhuShi : CombatSkillEffectBase
 		CreateAffectedAllEnemyData(199, EDataModifyType.AddPercent, -1);
 		Events.RegisterHandler_CastSkillEnd(OnCastSkillEnd);
 		Events.RegisterHandler_PrepareSkillBegin(OnPrepareSkillBegin);
+		Events.RegisterHandler_CombatCharChanged(OnCombatCharChanged);
 	}
 
 	public override void OnDisable(DataContext context)
 	{
 		Events.UnRegisterHandler_CastSkillEnd(OnCastSkillEnd);
 		Events.UnRegisterHandler_PrepareSkillBegin(OnPrepareSkillBegin);
+		Events.UnRegisterHandler_CombatCharChanged(OnCombatCharChanged);
 	}
 
 	private void OnCastSkillEnd(DataContext context, int charId, bool isAlly, short skillId, sbyte power, bool interrupted)
@@ -71,13 +73,21 @@ public class LongZhuShi : CombatSkillEffectBase
 		{
 			ClearPowers(context);
 		}
-		if (base.CombatChar.IsAlly != isAlly && base.EffectCount > 0)
+		if (base.CombatChar.IsAlly != isAlly && base.EffectCount > 0 && base.IsCurrent)
 		{
 			CombatSkillKey skillKey = new CombatSkillKey(charId, skillId);
 			_reducePowerDict[skillKey] = _reducePowerDict.GetOrDefault(skillKey) + -30;
 			DomainManager.SpecialEffect.InvalidateCache(context, charId, 199);
 			ReduceEffectCount();
 			ShowSpecialEffectTips(0);
+		}
+	}
+
+	private void OnCombatCharChanged(DataContext context, bool isAlly)
+	{
+		if (isAlly == base.CombatChar.IsAlly)
+		{
+			InvalidateAllAffectDataCache(context);
 		}
 	}
 
@@ -89,6 +99,11 @@ public class LongZhuShi : CombatSkillEffectBase
 
 	public override int GetModifyValue(AffectedDataKey dataKey, int currModifyValue)
 	{
-		return CollectionExtensions.GetValueOrDefault(key: new CombatSkillKey(dataKey.CharId, dataKey.CombatSkillId), dictionary: _reducePowerDict, defaultValue: 0);
+		int baseValue = base.GetModifyValue(dataKey, currModifyValue);
+		if (!base.IsCurrent)
+		{
+			return baseValue;
+		}
+		return CollectionExtensions.GetValueOrDefault(key: new CombatSkillKey(dataKey.CharId, dataKey.CombatSkillId), dictionary: _reducePowerDict, defaultValue: baseValue);
 	}
 }

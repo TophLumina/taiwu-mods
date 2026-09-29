@@ -4,47 +4,30 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 建筑的异常内容
-/// </summary>
 public class BuildingExceptionItem : ISerializableGameData
 {
-	/// <summary>
-	/// 异常列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> ExceptionTypeList = new List<sbyte>();
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public BuildingExceptionItem()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public BuildingExceptionItem(BuildingExceptionItem other)
 	{
 		ExceptionTypeList = ((other.ExceptionTypeList == null) ? null : new List<sbyte>(other.ExceptionTypeList));
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(BuildingExceptionItem other)
 	{
 		ExceptionTypeList = ((other.ExceptionTypeList == null) ? null : new List<sbyte>(other.ExceptionTypeList));
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -56,7 +39,6 @@ public class BuildingExceptionItem : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -85,7 +67,6 @@ public class BuildingExceptionItem : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

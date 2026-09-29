@@ -3,9 +3,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 批量转赠物品的预览显示数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 public class TransferItemPreviewDisplayData : ISerializableGameData
 {
@@ -27,16 +24,10 @@ public class TransferItemPreviewDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public int FinalAlertness;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TransferItemPreviewDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TransferItemPreviewDisplayData(TransferItemPreviewDisplayData other)
 	{
 		OriginalFavor = other.OriginalFavor;
@@ -47,9 +38,6 @@ public class TransferItemPreviewDisplayData : ISerializableGameData
 		FinalAlertness = other.FinalAlertness;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TransferItemPreviewDisplayData other)
 	{
 		OriginalFavor = other.OriginalFavor;

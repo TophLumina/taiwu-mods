@@ -5,114 +5,57 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 玩家AI选项
-/// </summary>
-/// <summary>
-/// 玩家AI选项
-/// </summary>
 public class AiOptions : ISerializableGameData, ICommonObjectSerializationAware
 {
-	/// <summary>
-	/// 自动攻击
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoAttack;
 
-	/// <summary>
-	/// 自动切换兵器
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoChangeWeapon;
 
-	/// <summary>
-	/// 自动切换兵器内外比例
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public bool AutoChangeWeaponInnerRatio;
 
-	/// <summary>
-	/// 自动变招
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoChangeTrick;
 
-	/// <summary>
-	/// 自动解封
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoUnlock;
 
-	/// <summary>
-	/// 跳过生铸
-	/// </summary>
 	[SerializableGameDataField]
 	public bool SkipRawCreate;
 
-	/// <summary>
-	/// 自动移动
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoMove;
 
-	/// <summary>
-	/// 尝试躲避
-	/// </summary>
 	[SerializableGameDataField]
 	public bool TryDodge;
 
-	/// <summary>
-	/// 保存移动目标距离
-	/// </summary>
 	[SerializableGameDataField]
 	public bool SaveMoveTarget;
 
-	/// <summary>
-	/// 自动施展增幅
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoCostNeiliAllocation;
 
-	/// <summary>
-	/// 中断施展
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoInterrupt;
 
-	/// <summary>
-	/// 中断身法
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoClearAgile;
 
-	/// <summary>
-	/// 中断护体
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoClearDefense;
 
-	/// <summary>
-	/// 自动消耗蓄式
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoCostTrick;
 
-	/// <summary>
-	/// 自动施展功法（0-摧破、1-轻灵、2-护体）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] AutoCastSkill = new bool[3];
 
-	/// <summary>
-	/// 自动动作（0-疗伤、1-驱毒、2-逃跑）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] AutoUseOtherAction = new bool[3];
 
-	/// <summary>
-	/// 自动使用同道指令
-	/// </summary>
 	[SerializableGameDataField]
 	public bool[] AutoUseTeammateCommand = new bool[25];
 
@@ -145,16 +88,10 @@ public class AiOptions : ISerializableGameData, ICommonObjectSerializationAware
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AiOptions()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AiOptions(AiOptions other)
 	{
 		AutoAttack = other.AutoAttack;
@@ -194,9 +131,6 @@ public class AiOptions : ISerializableGameData, ICommonObjectSerializationAware
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AiOptions other)
 	{
 		AutoAttack = other.AutoAttack;
@@ -236,13 +170,11 @@ public class AiOptions : ISerializableGameData, ICommonObjectSerializationAware
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 14;
@@ -256,7 +188,6 @@ public class AiOptions : ISerializableGameData, ICommonObjectSerializationAware
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -347,7 +278,6 @@ public class AiOptions : ISerializableGameData, ICommonObjectSerializationAware
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

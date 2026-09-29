@@ -2,10 +2,7 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 筛选项标识枚举 - 每个枚举对应一个控件
-/// </summary>
-[SerializeAs(typeof(byte))]
+[SerializeTo(typeof(byte))]
 public enum EFilterItemKey : byte
 {
 	CharacterRelation,

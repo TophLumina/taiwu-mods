@@ -5,31 +5,20 @@ namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 [SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class HealingDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 可交互的品级
-	/// </summary>
 	[SerializableGameDataField]
 	public int InteractTargetGrade;
 
-	/// <summary>
-	/// 元鸡效果治疗入魔值的量
-	/// </summary>
 	[SerializableGameDataField]
 	public int HealXiangshuInfectionAmount;
 
-	/// <summary>
-	/// 地区恩义获取
-	/// </summary>
 	[SerializableGameDataField]
 	public int GainSpiritualDebt;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -40,7 +29,6 @@ public class HealingDisplayData : IVillagerRoleArrangementDisplayData, ISerializ
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(int*)pData = InteractTargetGrade;
@@ -56,7 +44,6 @@ public class HealingDisplayData : IVillagerRoleArrangementDisplayData, ISerializ
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

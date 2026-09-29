@@ -7,71 +7,32 @@ namespace Config;
 [Serializable]
 public class SecretInformationSpecialCondition : ConfigData<SecretInformationSpecialConditionItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 无
-		/// </summary>
 		public const short None = 0;
 
-		/// <summary>
-		/// 敌对门派
-		/// </summary>
 		public const short SectBecomeEnemy = 3;
 
-		/// <summary>
-		/// 玩家战斗
-		/// </summary>
 		public const short TaiwuFight = 17;
 
-		/// <summary>
-		/// 战力比拼
-		/// </summary>
 		public const short CompareCombatPoint = 23;
 
-		/// <summary>
-		/// 违法犯罪
-		/// </summary>
 		public const short BreakTheLaw = 54;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 无
-		/// </summary>
 		public static SecretInformationSpecialConditionItem None => Instance[(short)0];
 
-		/// <summary>
-		/// 敌对门派
-		/// </summary>
 		public static SecretInformationSpecialConditionItem SectBecomeEnemy => Instance[(short)3];
 
-		/// <summary>
-		/// 玩家战斗
-		/// </summary>
 		public static SecretInformationSpecialConditionItem TaiwuFight => Instance[(short)17];
 
-		/// <summary>
-		/// 战力比拼
-		/// </summary>
 		public static SecretInformationSpecialConditionItem CompareCombatPoint => Instance[(short)23];
 
-		/// <summary>
-		/// 违法犯罪
-		/// </summary>
 		public static SecretInformationSpecialConditionItem BreakTheLaw => Instance[(short)54];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SecretInformationSpecialCondition Instance = new SecretInformationSpecialCondition();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "CalcSectRule", "CalcOrganization", "TemplateId" };

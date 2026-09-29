@@ -7,841 +7,340 @@ namespace Config;
 [Serializable]
 public class SkillBook : ConfigData<SkillBookItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 乐论
-		/// </summary>
 		public const short YueLun = 1;
 
-		/// <summary>
-		/// 霓裳曲谱
-		/// </summary>
 		public const short NichangQupu = 6;
 
-		/// <summary>
-		/// 棋经十三篇
-		/// </summary>
 		public const short QiJingShiSanPian = 10;
 
-		/// <summary>
-		/// 烂柯谱
-		/// </summary>
 		public const short LankePu = 15;
 
-		/// <summary>
-		/// 笠翁对韵
-		/// </summary>
 		public const short LiWengDuiYun = 19;
 
-		/// <summary>
-		/// 永字八法
-		/// </summary>
 		public const short YongziBafa = 24;
 
-		/// <summary>
-		/// 益州名画录
-		/// </summary>
 		public const short YiZhouMingHuaLu = 28;
 
-		/// <summary>
-		/// 步辇图
-		/// </summary>
 		public const short BunianTu = 33;
 
-		/// <summary>
-		/// 渊海子平
-		/// </summary>
 		public const short YuanHaiZiPing = 37;
 
-		/// <summary>
-		/// 邹子
-		/// </summary>
 		public const short Zouzi = 42;
 
-		/// <summary>
-		/// 酒谱
-		/// </summary>
 		public const short JiuPu = 46;
 
-		/// <summary>
-		/// 大明水记
-		/// </summary>
 		public const short DamingShuiji = 51;
 
-		/// <summary>
-		/// 火爆诀
-		/// </summary>
 		public const short HuoBaoJue = 55;
 
-		/// <summary>
-		/// 考工记
-		/// </summary>
 		public const short KaogongJi = 60;
 
-		/// <summary>
-		/// 东园杂录
-		/// </summary>
 		public const short DongYuanZaLu = 64;
 
-		/// <summary>
-		/// 大匠传
-		/// </summary>
 		public const short DajiangZhuan = 69;
 
-		/// <summary>
-		/// 褚氏遗书
-		/// </summary>
 		public const short ChuShiYiShu = 73;
 
-		/// <summary>
-		/// 金匮要略
-		/// </summary>
 		public const short JinkuiYaolue = 78;
 
-		/// <summary>
-		/// 毒经
-		/// </summary>
 		public const short DuJing = 82;
 
-		/// <summary>
-		/// 本经下品注
-		/// </summary>
 		public const short BenjingXiapinZhu = 87;
 
-		/// <summary>
-		/// 黎人古语
-		/// </summary>
 		public const short LiRenGuYu = 91;
 
-		/// <summary>
-		/// 仪礼
-		/// </summary>
 		public const short Yili = 96;
 
-		/// <summary>
-		/// 六瑞图
-		/// </summary>
 		public const short LiuRuiTu = 100;
 
-		/// <summary>
-		/// 宝铊经
-		/// </summary>
 		public const short BaotaJing = 105;
 
-		/// <summary>
-		/// 文始真经
-		/// </summary>
 		public const short WenShiZhenJing = 109;
 
-		/// <summary>
-		/// 南华真经
-		/// </summary>
 		public const short NanhuaZhenjing = 114;
 
-		/// <summary>
-		/// 金刚经
-		/// </summary>
 		public const short JinGangJing = 118;
 
-		/// <summary>
-		/// 华严经
-		/// </summary>
 		public const short HuayanJing = 123;
 
-		/// <summary>
-		/// 宋嫂食单
-		/// </summary>
 		public const short SongSaoShiDan = 127;
 
-		/// <summary>
-		/// 食经
-		/// </summary>
 		public const short ShiJing = 132;
 
-		/// <summary>
-		/// 清异录
-		/// </summary>
 		public const short QingYiLu = 136;
 
-		/// <summary>
-		/// 七略
-		/// </summary>
 		public const short Qilue = 141;
 
-		/// <summary>
-		/// 水火硬气功
-		/// </summary>
 		public const short ShuiHuoYingQiGong = 146;
 
-		/// <summary>
-		/// 静禅功
-		/// </summary>
 		public const short JingChanGong = 148;
 
-		/// <summary>
-		/// 佛门狮子吼
-		/// </summary>
 		public const short FomenShizihou = 359;
 
-		/// <summary>
-		/// 杨仙公金身法
-		/// </summary>
 		public const short YangxiangongJinshenfa = 368;
 
-		/// <summary>
-		/// 生死八门
-		/// </summary>
 		public const short ShengsiBamen = 377;
 
-		/// <summary>
-		/// 无极劲
-		/// </summary>
 		public const short Wujijin = 386;
 
-		/// <summary>
-		/// 太初归藏诀
-		/// </summary>
 		public const short TaichuGuicangJue = 394;
 
-		/// <summary>
-		/// 象拟比转功
-		/// </summary>
 		public const short XiangniBizhuanGong = 407;
 
-		/// <summary>
-		/// 女娲补天式
-		/// </summary>
 		public const short NvwaButianShi = 415;
 
-		/// <summary>
-		/// 天铸玄铁册
-		/// </summary>
 		public const short TianzhuXuantieCe = 422;
 
-		/// <summary>
-		/// 白水长生法
-		/// </summary>
 		public const short BaishuiChangshengFa = 429;
 
-		/// <summary>
-		/// 大手印
-		/// </summary>
 		public const short Dashouyin = 438;
 
-		/// <summary>
-		/// 天蚕噬蛊
-		/// </summary>
 		public const short TiancanShigu = 446;
 
-		/// <summary>
-		/// 千年醉
-		/// </summary>
 		public const short QiannianZui = 462;
 
-		/// <summary>
-		/// 金刚般若掌
-		/// </summary>
 		public const short JingangBoreZhang = 479;
 
-		/// <summary>
-		/// 金刚三昧掌
-		/// </summary>
 		public const short JingangSanmeiZhang = 487;
 
-		/// <summary>
-		/// 武当纯阳拳
-		/// </summary>
 		public const short WudangChunyangQuan = 494;
 
-		/// <summary>
-		/// 云狂式
-		/// </summary>
 		public const short Yunkuangshi = 503;
 
-		/// <summary>
-		/// 寒冰神掌
-		/// </summary>
 		public const short HanbingShenzhang = 512;
 
-		/// <summary>
-		/// 须弥山四神掌
-		/// </summary>
 		public const short XumishanSishenzhang = 525;
 
-		/// <summary>
-		/// 青黄赤黑神掌
-		/// </summary>
 		public const short QinghuangchiheiShenzhang = 533;
 
-		/// <summary>
-		/// 离火六阳掌
-		/// </summary>
 		public const short LihuoLiuyangZhang = 541;
 
-		/// <summary>
-		/// 天魔残魂掌
-		/// </summary>
 		public const short TianmoCanhunZhang = 550;
 
-		/// <summary>
-		/// 大光明山一元指
-		/// </summary>
 		public const short DaguangmingshanYiyuanZhi = 564;
 
-		/// <summary>
-		/// 万花灵月指
-		/// </summary>
 		public const short WanhuaLingyueZhi = 573;
 
-		/// <summary>
-		/// 天地元一指
-		/// </summary>
 		public const short TiandiYuanyiZhi = 582;
 
-		/// <summary>
-		/// 璇玑指穴法
-		/// </summary>
 		public const short XuanjiZhixueFa = 589;
 
-		/// <summary>
-		/// 碧玉冰蚕蛊
-		/// </summary>
 		public const short BiyuBingcanGu = 603;
 
-		/// <summary>
-		/// 太素绝手
-		/// </summary>
 		public const short TaisuJueshou = 612;
 
-		/// <summary>
-		/// 血池鬼爪
-		/// </summary>
 		public const short XuechiGuizhua = 621;
 
-		/// <summary>
-		/// 云龙九现腿
-		/// </summary>
 		public const short YunlongJiuxianTui = 628;
 
-		/// <summary>
-		/// 飞山断海大八式
-		/// </summary>
 		public const short FeishanDuanhaiDabashi = 637;
 
-		/// <summary>
-		/// 阎王鬼脚
-		/// </summary>
 		public const short YanwangGuijiao = 645;
 
-		/// <summary>
-		/// 鸣龙掷
-		/// </summary>
 		public const short MinglongZhi = 662;
 
-		/// <summary>
-		/// 玉女神剑
-		/// </summary>
 		public const short YunvShenjian = 684;
 
-		/// <summary>
-		/// 太极剑法
-		/// </summary>
 		public const short TaijiJianfa = 691;
 
-		/// <summary>
-		/// 无上菩提剑
-		/// </summary>
 		public const short WushangPutiJian = 700;
 
-		/// <summary>
-		/// 阴阳逆剑
-		/// </summary>
 		public const short YinyangNijian = 708;
 
-		/// <summary>
-		/// 纯钧剑气
-		/// </summary>
 		public const short ChunjunJianqi = 717;
 
-		/// <summary>
-		/// 青蛛剑法
-		/// </summary>
 		public const short QingzhuJianfa = 725;
 
-		/// <summary>
-		/// 无瑕七绝剑
-		/// </summary>
 		public const short WuxiaQijuejian = 732;
 
-		/// <summary>
-		/// 天罡刀法
-		/// </summary>
 		public const short TaingangDaofa = 740;
 
-		/// <summary>
-		/// 金猊镇魔刀
-		/// </summary>
 		public const short JinniZhenmoDao = 748;
 
-		/// <summary>
-		/// 残刀式
-		/// </summary>
 		public const short CandaoShi = 757;
 
-		/// <summary>
-		/// 如意宝轮刀
-		/// </summary>
 		public const short RuyiBaolunDao = 765;
 
-		/// <summary>
-		/// 赤子斩龙刀
-		/// </summary>
 		public const short ChiziZhanlongDao = 774;
 
-		/// <summary>
-		/// 韦陀降魔杖
-		/// </summary>
 		public const short WeituoXiangmoZhang = 782;
 
-		/// <summary>
-		/// 狂龙狮子枪
-		/// </summary>
 		public const short KuanglongShiziQiang = 791;
 
-		/// <summary>
-		/// 架海神杖
-		/// </summary>
 		public const short JiahaiShenzhang = 800;
 
-		/// <summary>
-		/// 义父的天枢玄机
-		/// </summary>
 		public const short TianshuXuanjiByAdoptiveFather = 878;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 乐论
-		/// </summary>
 		public static SkillBookItem YueLun => Instance[(short)1];
 
-		/// <summary>
-		/// 霓裳曲谱
-		/// </summary>
 		public static SkillBookItem NichangQupu => Instance[(short)6];
 
-		/// <summary>
-		/// 棋经十三篇
-		/// </summary>
 		public static SkillBookItem QiJingShiSanPian => Instance[(short)10];
 
-		/// <summary>
-		/// 烂柯谱
-		/// </summary>
 		public static SkillBookItem LankePu => Instance[(short)15];
 
-		/// <summary>
-		/// 笠翁对韵
-		/// </summary>
 		public static SkillBookItem LiWengDuiYun => Instance[(short)19];
 
-		/// <summary>
-		/// 永字八法
-		/// </summary>
 		public static SkillBookItem YongziBafa => Instance[(short)24];
 
-		/// <summary>
-		/// 益州名画录
-		/// </summary>
 		public static SkillBookItem YiZhouMingHuaLu => Instance[(short)28];
 
-		/// <summary>
-		/// 步辇图
-		/// </summary>
 		public static SkillBookItem BunianTu => Instance[(short)33];
 
-		/// <summary>
-		/// 渊海子平
-		/// </summary>
 		public static SkillBookItem YuanHaiZiPing => Instance[(short)37];
 
-		/// <summary>
-		/// 邹子
-		/// </summary>
 		public static SkillBookItem Zouzi => Instance[(short)42];
 
-		/// <summary>
-		/// 酒谱
-		/// </summary>
 		public static SkillBookItem JiuPu => Instance[(short)46];
 
-		/// <summary>
-		/// 大明水记
-		/// </summary>
 		public static SkillBookItem DamingShuiji => Instance[(short)51];
 
-		/// <summary>
-		/// 火爆诀
-		/// </summary>
 		public static SkillBookItem HuoBaoJue => Instance[(short)55];
 
-		/// <summary>
-		/// 考工记
-		/// </summary>
 		public static SkillBookItem KaogongJi => Instance[(short)60];
 
-		/// <summary>
-		/// 东园杂录
-		/// </summary>
 		public static SkillBookItem DongYuanZaLu => Instance[(short)64];
 
-		/// <summary>
-		/// 大匠传
-		/// </summary>
 		public static SkillBookItem DajiangZhuan => Instance[(short)69];
 
-		/// <summary>
-		/// 褚氏遗书
-		/// </summary>
 		public static SkillBookItem ChuShiYiShu => Instance[(short)73];
 
-		/// <summary>
-		/// 金匮要略
-		/// </summary>
 		public static SkillBookItem JinkuiYaolue => Instance[(short)78];
 
-		/// <summary>
-		/// 毒经
-		/// </summary>
 		public static SkillBookItem DuJing => Instance[(short)82];
 
-		/// <summary>
-		/// 本经下品注
-		/// </summary>
 		public static SkillBookItem BenjingXiapinZhu => Instance[(short)87];
 
-		/// <summary>
-		/// 黎人古语
-		/// </summary>
 		public static SkillBookItem LiRenGuYu => Instance[(short)91];
 
-		/// <summary>
-		/// 仪礼
-		/// </summary>
 		public static SkillBookItem Yili => Instance[(short)96];
 
-		/// <summary>
-		/// 六瑞图
-		/// </summary>
 		public static SkillBookItem LiuRuiTu => Instance[(short)100];
 
-		/// <summary>
-		/// 宝铊经
-		/// </summary>
 		public static SkillBookItem BaotaJing => Instance[(short)105];
 
-		/// <summary>
-		/// 文始真经
-		/// </summary>
 		public static SkillBookItem WenShiZhenJing => Instance[(short)109];
 
-		/// <summary>
-		/// 南华真经
-		/// </summary>
 		public static SkillBookItem NanhuaZhenjing => Instance[(short)114];
 
-		/// <summary>
-		/// 金刚经
-		/// </summary>
 		public static SkillBookItem JinGangJing => Instance[(short)118];
 
-		/// <summary>
-		/// 华严经
-		/// </summary>
 		public static SkillBookItem HuayanJing => Instance[(short)123];
 
-		/// <summary>
-		/// 宋嫂食单
-		/// </summary>
 		public static SkillBookItem SongSaoShiDan => Instance[(short)127];
 
-		/// <summary>
-		/// 食经
-		/// </summary>
 		public static SkillBookItem ShiJing => Instance[(short)132];
 
-		/// <summary>
-		/// 清异录
-		/// </summary>
 		public static SkillBookItem QingYiLu => Instance[(short)136];
 
-		/// <summary>
-		/// 七略
-		/// </summary>
 		public static SkillBookItem Qilue => Instance[(short)141];
 
-		/// <summary>
-		/// 水火硬气功
-		/// </summary>
 		public static SkillBookItem ShuiHuoYingQiGong => Instance[(short)146];
 
-		/// <summary>
-		/// 静禅功
-		/// </summary>
 		public static SkillBookItem JingChanGong => Instance[(short)148];
 
-		/// <summary>
-		/// 佛门狮子吼
-		/// </summary>
 		public static SkillBookItem FomenShizihou => Instance[(short)359];
 
-		/// <summary>
-		/// 杨仙公金身法
-		/// </summary>
 		public static SkillBookItem YangxiangongJinshenfa => Instance[(short)368];
 
-		/// <summary>
-		/// 生死八门
-		/// </summary>
 		public static SkillBookItem ShengsiBamen => Instance[(short)377];
 
-		/// <summary>
-		/// 无极劲
-		/// </summary>
 		public static SkillBookItem Wujijin => Instance[(short)386];
 
-		/// <summary>
-		/// 太初归藏诀
-		/// </summary>
 		public static SkillBookItem TaichuGuicangJue => Instance[(short)394];
 
-		/// <summary>
-		/// 象拟比转功
-		/// </summary>
 		public static SkillBookItem XiangniBizhuanGong => Instance[(short)407];
 
-		/// <summary>
-		/// 女娲补天式
-		/// </summary>
 		public static SkillBookItem NvwaButianShi => Instance[(short)415];
 
-		/// <summary>
-		/// 天铸玄铁册
-		/// </summary>
 		public static SkillBookItem TianzhuXuantieCe => Instance[(short)422];
 
-		/// <summary>
-		/// 白水长生法
-		/// </summary>
 		public static SkillBookItem BaishuiChangshengFa => Instance[(short)429];
 
-		/// <summary>
-		/// 大手印
-		/// </summary>
 		public static SkillBookItem Dashouyin => Instance[(short)438];
 
-		/// <summary>
-		/// 天蚕噬蛊
-		/// </summary>
 		public static SkillBookItem TiancanShigu => Instance[(short)446];
 
-		/// <summary>
-		/// 千年醉
-		/// </summary>
 		public static SkillBookItem QiannianZui => Instance[(short)462];
 
-		/// <summary>
-		/// 金刚般若掌
-		/// </summary>
 		public static SkillBookItem JingangBoreZhang => Instance[(short)479];
 
-		/// <summary>
-		/// 金刚三昧掌
-		/// </summary>
 		public static SkillBookItem JingangSanmeiZhang => Instance[(short)487];
 
-		/// <summary>
-		/// 武当纯阳拳
-		/// </summary>
 		public static SkillBookItem WudangChunyangQuan => Instance[(short)494];
 
-		/// <summary>
-		/// 云狂式
-		/// </summary>
 		public static SkillBookItem Yunkuangshi => Instance[(short)503];
 
-		/// <summary>
-		/// 寒冰神掌
-		/// </summary>
 		public static SkillBookItem HanbingShenzhang => Instance[(short)512];
 
-		/// <summary>
-		/// 须弥山四神掌
-		/// </summary>
 		public static SkillBookItem XumishanSishenzhang => Instance[(short)525];
 
-		/// <summary>
-		/// 青黄赤黑神掌
-		/// </summary>
 		public static SkillBookItem QinghuangchiheiShenzhang => Instance[(short)533];
 
-		/// <summary>
-		/// 离火六阳掌
-		/// </summary>
 		public static SkillBookItem LihuoLiuyangZhang => Instance[(short)541];
 
-		/// <summary>
-		/// 天魔残魂掌
-		/// </summary>
 		public static SkillBookItem TianmoCanhunZhang => Instance[(short)550];
 
-		/// <summary>
-		/// 大光明山一元指
-		/// </summary>
 		public static SkillBookItem DaguangmingshanYiyuanZhi => Instance[(short)564];
 
-		/// <summary>
-		/// 万花灵月指
-		/// </summary>
 		public static SkillBookItem WanhuaLingyueZhi => Instance[(short)573];
 
-		/// <summary>
-		/// 天地元一指
-		/// </summary>
 		public static SkillBookItem TiandiYuanyiZhi => Instance[(short)582];
 
-		/// <summary>
-		/// 璇玑指穴法
-		/// </summary>
 		public static SkillBookItem XuanjiZhixueFa => Instance[(short)589];
 
-		/// <summary>
-		/// 碧玉冰蚕蛊
-		/// </summary>
 		public static SkillBookItem BiyuBingcanGu => Instance[(short)603];
 
-		/// <summary>
-		/// 太素绝手
-		/// </summary>
 		public static SkillBookItem TaisuJueshou => Instance[(short)612];
 
-		/// <summary>
-		/// 血池鬼爪
-		/// </summary>
 		public static SkillBookItem XuechiGuizhua => Instance[(short)621];
 
-		/// <summary>
-		/// 云龙九现腿
-		/// </summary>
 		public static SkillBookItem YunlongJiuxianTui => Instance[(short)628];
 
-		/// <summary>
-		/// 飞山断海大八式
-		/// </summary>
 		public static SkillBookItem FeishanDuanhaiDabashi => Instance[(short)637];
 
-		/// <summary>
-		/// 阎王鬼脚
-		/// </summary>
 		public static SkillBookItem YanwangGuijiao => Instance[(short)645];
 
-		/// <summary>
-		/// 鸣龙掷
-		/// </summary>
 		public static SkillBookItem MinglongZhi => Instance[(short)662];
 
-		/// <summary>
-		/// 玉女神剑
-		/// </summary>
 		public static SkillBookItem YunvShenjian => Instance[(short)684];
 
-		/// <summary>
-		/// 太极剑法
-		/// </summary>
 		public static SkillBookItem TaijiJianfa => Instance[(short)691];
 
-		/// <summary>
-		/// 无上菩提剑
-		/// </summary>
 		public static SkillBookItem WushangPutiJian => Instance[(short)700];
 
-		/// <summary>
-		/// 阴阳逆剑
-		/// </summary>
 		public static SkillBookItem YinyangNijian => Instance[(short)708];
 
-		/// <summary>
-		/// 纯钧剑气
-		/// </summary>
 		public static SkillBookItem ChunjunJianqi => Instance[(short)717];
 
-		/// <summary>
-		/// 青蛛剑法
-		/// </summary>
 		public static SkillBookItem QingzhuJianfa => Instance[(short)725];
 
-		/// <summary>
-		/// 无瑕七绝剑
-		/// </summary>
 		public static SkillBookItem WuxiaQijuejian => Instance[(short)732];
 
-		/// <summary>
-		/// 天罡刀法
-		/// </summary>
 		public static SkillBookItem TaingangDaofa => Instance[(short)740];
 
-		/// <summary>
-		/// 金猊镇魔刀
-		/// </summary>
 		public static SkillBookItem JinniZhenmoDao => Instance[(short)748];
 
-		/// <summary>
-		/// 残刀式
-		/// </summary>
 		public static SkillBookItem CandaoShi => Instance[(short)757];
 
-		/// <summary>
-		/// 如意宝轮刀
-		/// </summary>
 		public static SkillBookItem RuyiBaolunDao => Instance[(short)765];
 
-		/// <summary>
-		/// 赤子斩龙刀
-		/// </summary>
 		public static SkillBookItem ChiziZhanlongDao => Instance[(short)774];
 
-		/// <summary>
-		/// 韦陀降魔杖
-		/// </summary>
 		public static SkillBookItem WeituoXiangmoZhang => Instance[(short)782];
 
-		/// <summary>
-		/// 狂龙狮子枪
-		/// </summary>
 		public static SkillBookItem KuanglongShiziQiang => Instance[(short)791];
 
-		/// <summary>
-		/// 架海神杖
-		/// </summary>
 		public static SkillBookItem JiahaiShenzhang => Instance[(short)800];
 
-		/// <summary>
-		/// 义父的天枢玄机
-		/// </summary>
 		public static SkillBookItem TianshuXuanjiByAdoptiveFather => Instance[(short)878];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBook Instance = new SkillBook();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

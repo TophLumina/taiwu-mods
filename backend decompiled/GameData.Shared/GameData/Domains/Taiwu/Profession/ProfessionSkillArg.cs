@@ -10,124 +10,63 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Profession;
 
-/// <summary>
-/// 职业技能参数
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class ProfessionSkillArg : ISerializableGameData
 {
-	/// <summary>
-	/// 职业ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int ProfessionId;
 
-	/// <summary>
-	/// 技能ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int SkillId;
 
-	/// <summary>
-	/// 是否成功
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsSuccess;
 
-	/// <summary>
-	/// 道具参数
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey ItemKey;
 
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 功法类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CombatSkillType;
 
-	/// <summary>
-	/// 技艺类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LifeSkillType;
 
-	/// <summary>
-	/// 精制效果ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short EffectId;
 
-	/// <summary>
-	/// 是否鉴定是神采非凡 王公鉴定技能专加的字段
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsExtraordinary;
 
-	/// <summary>
-	/// 角色Id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> CharIds;
 
-	/// <summary>
-	/// 书籍Id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> BookIds;
 
-	/// <summary>
-	/// 跳过确认框直接进后面动画步骤
-	/// </summary>
 	[SerializableGameDataField]
 	public bool SkipConfirm;
 
-	/// <summary>
-	/// 跳过动画
-	/// </summary>
 	[SerializableGameDataField]
 	public bool SkipAnimation;
 
-	/// <summary>
-	/// 大夫技能，合成药品消耗的药品
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData MakeMedicineCostMedicine;
 
-	/// <summary>
-	/// 大夫技能，合成药品消耗的工具
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData MakeMedicineCostTool;
 
-	/// <summary>
-	/// 大夫技能，合成药品的次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int MakeMedicineCount;
 
-	/// <summary>
-	/// 旅人三技能的目标地点
-	/// </summary>
 	[SerializableGameDataField]
 	public Location ProfessionTravelerTargetLocation;
 
-	/// <summary>
-	/// 武师四/王公四技能作用地块
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> EffectBlocks;
 
-	/// <summary>
-	/// 战斗结果数据
-	/// <para>目前是用于武师四技能-风卷残云效果</para>
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatResultDisplayData CombatResultData;
 
@@ -156,18 +95,14 @@ public class ProfessionSkillArg : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 29;
-		totalSize += ItemKey.GetSerializedSize();
+		int totalSize = 57;
 		totalSize = ((CharIds == null) ? (totalSize + 2) : (totalSize + (2 + 4 * CharIds.Count)));
 		totalSize = ((BookIds == null) ? (totalSize + 2) : (totalSize + (2 + 4 * BookIds.Count)));
 		totalSize = ((MakeMedicineCostMedicine == null) ? (totalSize + 2) : (totalSize + (2 + MakeMedicineCostMedicine.GetSerializedSize())));
 		totalSize = ((MakeMedicineCostTool == null) ? (totalSize + 2) : (totalSize + (2 + MakeMedicineCostTool.GetSerializedSize())));
-		totalSize += ProfessionTravelerTargetLocation.GetSerializedSize();
 		totalSize = ((EffectBlocks == null) ? (totalSize + 2) : (totalSize + (2 + 2 * EffectBlocks.Count)));
 		totalSize = ((CombatResultData == null) ? (totalSize + 2) : (totalSize + (2 + CombatResultData.GetSerializedSize())));
-		totalSize += WeaponKey.GetSerializedSize();
 		totalSize = ((TrickList == null) ? (totalSize + 2) : (totalSize + (2 + TrickList.Count)));
-		totalSize += ToolKey.GetSerializedSize();
 		totalSize += 4;
 		if (CostMaterials != null)
 		{

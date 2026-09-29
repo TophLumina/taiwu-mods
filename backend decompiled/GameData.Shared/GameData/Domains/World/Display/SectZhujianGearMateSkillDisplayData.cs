@@ -8,81 +8,42 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.World.Display;
 
-/// <summary>
-/// 地区主线 - 铸剑 - 机关人 武学和技艺 显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class SectZhujianGearMateSkillDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 机关人数据
-	/// </summary>
 	[SerializableGameDataField]
 	public GearMate GearMate;
 
-	/// <summary>
-	/// 机关人显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData GearMateDisplayData;
 
-	/// <summary>
-	/// 武学资质
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillQualifications;
 
-	/// <summary>
-	/// 武学造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public CombatSkillShorts CombatSkillAttainments;
 
-	/// <summary>
-	/// 技艺资质
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillQualifications;
 
-	/// <summary>
-	/// 技艺造诣
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 目标已学技艺列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<LifeSkillItem> LearnedLifeSkills;
 
-	/// <summary>
-	/// 功法盘配置数据
-	/// </summary>
 	[SerializableGameDataField]
 	public short[] CombatSkillAttainmentPanels;
 
-	/// <summary>
-	/// 是否可以使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanUseWarehouse;
 
-	/// <summary>
-	/// 太吾持有的机关人可读书籍物品（包含行囊、私库、公库）
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> CanReadBookItemList;
 
-	/// <summary>
-	/// 书页显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, SkillBookPageDisplayData> PageDisplayDataDict;
 
-	/// <summary>
-	///             太吾历练
-	/// </summary>
 	[SerializableGameDataField]
 	public int TaiwuExp;
 
@@ -93,14 +54,10 @@ public class SectZhujianGearMateSkillDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 5;
+		int totalSize = 125;
 		totalSize = ((GearMate == null) ? (totalSize + 2) : (totalSize + (2 + GearMate.GetSerializedSize())));
 		totalSize = ((GearMateDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + GearMateDisplayData.GetSerializedSize())));
-		totalSize += CombatSkillQualifications.GetSerializedSize();
-		totalSize += CombatSkillAttainments.GetSerializedSize();
-		totalSize += LifeSkillQualifications.GetSerializedSize();
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize = ((LearnedLifeSkills == null) ? (totalSize + 2) : (totalSize + (2 + default(LifeSkillItem).GetSerializedSize() * LearnedLifeSkills.Count)));
+		totalSize = ((LearnedLifeSkills == null) ? (totalSize + 2) : (totalSize + (2 + 4 * LearnedLifeSkills.Count)));
 		totalSize = ((CombatSkillAttainmentPanels == null) ? (totalSize + 2) : (totalSize + (2 + 2 * CombatSkillAttainmentPanels.Length)));
 		if (CanReadBookItemList != null)
 		{

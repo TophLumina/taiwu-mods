@@ -7,461 +7,188 @@ namespace Config;
 [Serializable]
 public class Clothing : ConfigData<ClothingItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 山野竖褐
-		/// </summary>
 		public const short GeneralCombat0 = 0;
 
-		/// <summary>
-		/// 猎户装
-		/// </summary>
 		public const short GeneralCombat1 = 1;
 
-		/// <summary>
-		/// 戎服短打
-		/// </summary>
 		public const short GeneralCombat2 = 2;
 
-		/// <summary>
-		/// 练功服
-		/// </summary>
 		public const short GeneralCombat3 = 3;
 
-		/// <summary>
-		/// 锦衫
-		/// </summary>
 		public const short GeneralCombat4 = 4;
 
-		/// <summary>
-		/// 天师大氅
-		/// </summary>
 		public const short GeneralCombat5 = 5;
 
-		/// <summary>
-		/// 纳宝锦裘
-		/// </summary>
 		public const short GeneralCombat6 = 6;
 
-		/// <summary>
-		/// 将军披挂
-		/// </summary>
 		public const short GeneralCombat7 = 7;
 
-		/// <summary>
-		/// 绛纱金装
-		/// </summary>
 		public const short GeneralCombat8 = 8;
 
-		/// <summary>
-		/// 百衲衣
-		/// </summary>
 		public const short GeneralLife0 = 9;
 
-		/// <summary>
-		/// 布衣素裳
-		/// </summary>
 		public const short GeneralLife1 = 10;
 
-		/// <summary>
-		/// 劲衣
-		/// </summary>
 		public const short GeneralLife2 = 11;
 
-		/// <summary>
-		/// 坏色僧衣
-		/// </summary>
 		public const short GeneralLife3 = 12;
 
-		/// <summary>
-		/// 纹绣深衣
-		/// </summary>
 		public const short GeneralLife4 = 13;
 
-		/// <summary>
-		/// 老君袍
-		/// </summary>
 		public const short GeneralLife5 = 14;
 
-		/// <summary>
-		/// 福禄锦衣
-		/// </summary>
 		public const short GeneralLife6 = 15;
 
-		/// <summary>
-		/// 玉带紫袍
-		/// </summary>
 		public const short GeneralLife7 = 16;
 
-		/// <summary>
-		/// 衮龙黄袍
-		/// </summary>
 		public const short GeneralLife8 = 17;
 
-		/// <summary>
-		/// 武当_4
-		/// </summary>
 		public const short Wudang4 = 30;
 
-		/// <summary>
-		/// 然山_1
-		/// </summary>
 		public const short Ranshan1 = 37;
 
-		/// <summary>
-		/// 襁褓
-		/// </summary>
 		public const short BabyClothing = 64;
 
-		/// <summary>
-		/// 童衣
-		/// </summary>
 		public const short ChildClothing = 65;
 
-		/// <summary>
-		/// 相枢爪牙_1
-		/// </summary>
 		public const short xiangshuMinion1 = 66;
 
-		/// <summary>
-		/// 相枢爪牙_2
-		/// </summary>
 		public const short xiangshuMinion2 = 67;
 
-		/// <summary>
-		/// 相枢爪牙_3
-		/// </summary>
 		public const short xiangshuMinion3 = 68;
 
-		/// <summary>
-		/// 相枢爪牙_100
-		/// </summary>
 		public const short SkeletonLow = 69;
 
-		/// <summary>
-		/// 相枢爪牙_101
-		/// </summary>
 		public const short SkeletonMid = 70;
 
-		/// <summary>
-		/// 相枢爪牙_102
-		/// </summary>
 		public const short SkeletonHigh = 71;
 
-		/// <summary>
-		/// 霸戈衣
-		/// </summary>
 		public const short Bug = 72;
 
-		/// <summary>
-		/// 银导衣
-		/// </summary>
 		public const short Tutorial = 73;
 
-		/// <summary>
-		/// 斑皓衣
-		/// </summary>
 		public const short ISBNCloth = 74;
 
-		/// <summary>
-		/// 白蛟鳞衣
-		/// </summary>
 		public const short DLCJiaoWhite = 75;
 
-		/// <summary>
-		/// 黑蛟鳞衣
-		/// </summary>
 		public const short DLCJiaoBlack = 76;
 
-		/// <summary>
-		/// 青蛟鳞衣
-		/// </summary>
 		public const short DLCJiaoGreen = 77;
 
-		/// <summary>
-		/// 赤蛟鳞衣
-		/// </summary>
 		public const short DLCJiaoRed = 78;
 
-		/// <summary>
-		/// 黄蛟鳞衣
-		/// </summary>
 		public const short DLCJiaoYellow = 79;
 
-		/// <summary>
-		/// 烛月无双衣
-		/// </summary>
 		public const short DLCChineseNewYear = 80;
 
-		/// <summary>
-		/// 碧霄灵蛇衣
-		/// </summary>
 		public const short DLCYearOfSnakeCloth = 92;
 
-		/// <summary>
-		/// 青霄灵蛇衣
-		/// </summary>
 		public const short DLCYearOfSnakeClothBlue = 93;
 
-		/// <summary>
-		/// 琼霄灵蛇衣
-		/// </summary>
 		public const short DLCYearOfSnakeClothYellow = 94;
 
-		/// <summary>
-		/// 血褓1
-		/// </summary>
 		public const short ProtagonistFeatureClothing1 = 95;
 
-		/// <summary>
-		/// 血褓2
-		/// </summary>
 		public const short ProtagonistFeatureClothing2 = 96;
 
-		/// <summary>
-		/// 香驹衣
-		/// </summary>
 		public const short DLCYearOfHorseCloth = 97;
 
-		/// <summary>
-		/// 无念众
-		/// </summary>
 		public const short NoMindGuyCloth = 101;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 山野竖褐
-		/// </summary>
 		public static ClothingItem GeneralCombat0 => Instance[(short)0];
 
-		/// <summary>
-		/// 猎户装
-		/// </summary>
 		public static ClothingItem GeneralCombat1 => Instance[(short)1];
 
-		/// <summary>
-		/// 戎服短打
-		/// </summary>
 		public static ClothingItem GeneralCombat2 => Instance[(short)2];
 
-		/// <summary>
-		/// 练功服
-		/// </summary>
 		public static ClothingItem GeneralCombat3 => Instance[(short)3];
 
-		/// <summary>
-		/// 锦衫
-		/// </summary>
 		public static ClothingItem GeneralCombat4 => Instance[(short)4];
 
-		/// <summary>
-		/// 天师大氅
-		/// </summary>
 		public static ClothingItem GeneralCombat5 => Instance[(short)5];
 
-		/// <summary>
-		/// 纳宝锦裘
-		/// </summary>
 		public static ClothingItem GeneralCombat6 => Instance[(short)6];
 
-		/// <summary>
-		/// 将军披挂
-		/// </summary>
 		public static ClothingItem GeneralCombat7 => Instance[(short)7];
 
-		/// <summary>
-		/// 绛纱金装
-		/// </summary>
 		public static ClothingItem GeneralCombat8 => Instance[(short)8];
 
-		/// <summary>
-		/// 百衲衣
-		/// </summary>
 		public static ClothingItem GeneralLife0 => Instance[(short)9];
 
-		/// <summary>
-		/// 布衣素裳
-		/// </summary>
 		public static ClothingItem GeneralLife1 => Instance[(short)10];
 
-		/// <summary>
-		/// 劲衣
-		/// </summary>
 		public static ClothingItem GeneralLife2 => Instance[(short)11];
 
-		/// <summary>
-		/// 坏色僧衣
-		/// </summary>
 		public static ClothingItem GeneralLife3 => Instance[(short)12];
 
-		/// <summary>
-		/// 纹绣深衣
-		/// </summary>
 		public static ClothingItem GeneralLife4 => Instance[(short)13];
 
-		/// <summary>
-		/// 老君袍
-		/// </summary>
 		public static ClothingItem GeneralLife5 => Instance[(short)14];
 
-		/// <summary>
-		/// 福禄锦衣
-		/// </summary>
 		public static ClothingItem GeneralLife6 => Instance[(short)15];
 
-		/// <summary>
-		/// 玉带紫袍
-		/// </summary>
 		public static ClothingItem GeneralLife7 => Instance[(short)16];
 
-		/// <summary>
-		/// 衮龙黄袍
-		/// </summary>
 		public static ClothingItem GeneralLife8 => Instance[(short)17];
 
-		/// <summary>
-		/// 武当_4
-		/// </summary>
 		public static ClothingItem Wudang4 => Instance[(short)30];
 
-		/// <summary>
-		/// 然山_1
-		/// </summary>
 		public static ClothingItem Ranshan1 => Instance[(short)37];
 
-		/// <summary>
-		/// 襁褓
-		/// </summary>
 		public static ClothingItem BabyClothing => Instance[(short)64];
 
-		/// <summary>
-		/// 童衣
-		/// </summary>
 		public static ClothingItem ChildClothing => Instance[(short)65];
 
-		/// <summary>
-		/// 相枢爪牙_1
-		/// </summary>
 		public static ClothingItem xiangshuMinion1 => Instance[(short)66];
 
-		/// <summary>
-		/// 相枢爪牙_2
-		/// </summary>
 		public static ClothingItem xiangshuMinion2 => Instance[(short)67];
 
-		/// <summary>
-		/// 相枢爪牙_3
-		/// </summary>
 		public static ClothingItem xiangshuMinion3 => Instance[(short)68];
 
-		/// <summary>
-		/// 相枢爪牙_100
-		/// </summary>
 		public static ClothingItem SkeletonLow => Instance[(short)69];
 
-		/// <summary>
-		/// 相枢爪牙_101
-		/// </summary>
 		public static ClothingItem SkeletonMid => Instance[(short)70];
 
-		/// <summary>
-		/// 相枢爪牙_102
-		/// </summary>
 		public static ClothingItem SkeletonHigh => Instance[(short)71];
 
-		/// <summary>
-		/// 霸戈衣
-		/// </summary>
 		public static ClothingItem Bug => Instance[(short)72];
 
-		/// <summary>
-		/// 银导衣
-		/// </summary>
 		public static ClothingItem Tutorial => Instance[(short)73];
 
-		/// <summary>
-		/// 斑皓衣
-		/// </summary>
 		public static ClothingItem ISBNCloth => Instance[(short)74];
 
-		/// <summary>
-		/// 白蛟鳞衣
-		/// </summary>
 		public static ClothingItem DLCJiaoWhite => Instance[(short)75];
 
-		/// <summary>
-		/// 黑蛟鳞衣
-		/// </summary>
 		public static ClothingItem DLCJiaoBlack => Instance[(short)76];
 
-		/// <summary>
-		/// 青蛟鳞衣
-		/// </summary>
 		public static ClothingItem DLCJiaoGreen => Instance[(short)77];
 
-		/// <summary>
-		/// 赤蛟鳞衣
-		/// </summary>
 		public static ClothingItem DLCJiaoRed => Instance[(short)78];
 
-		/// <summary>
-		/// 黄蛟鳞衣
-		/// </summary>
 		public static ClothingItem DLCJiaoYellow => Instance[(short)79];
 
-		/// <summary>
-		/// 烛月无双衣
-		/// </summary>
 		public static ClothingItem DLCChineseNewYear => Instance[(short)80];
 
-		/// <summary>
-		/// 碧霄灵蛇衣
-		/// </summary>
 		public static ClothingItem DLCYearOfSnakeCloth => Instance[(short)92];
 
-		/// <summary>
-		/// 青霄灵蛇衣
-		/// </summary>
 		public static ClothingItem DLCYearOfSnakeClothBlue => Instance[(short)93];
 
-		/// <summary>
-		/// 琼霄灵蛇衣
-		/// </summary>
 		public static ClothingItem DLCYearOfSnakeClothYellow => Instance[(short)94];
 
-		/// <summary>
-		/// 血褓1
-		/// </summary>
 		public static ClothingItem ProtagonistFeatureClothing1 => Instance[(short)95];
 
-		/// <summary>
-		/// 血褓2
-		/// </summary>
 		public static ClothingItem ProtagonistFeatureClothing2 => Instance[(short)96];
 
-		/// <summary>
-		/// 香驹衣
-		/// </summary>
 		public static ClothingItem DLCYearOfHorseCloth => Instance[(short)97];
 
-		/// <summary>
-		/// 无念众
-		/// </summary>
 		public static ClothingItem NoMindGuyCloth => Instance[(short)101];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Clothing Instance = new Clothing();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -552,12 +279,12 @@ public class Clothing : ConfigData<ClothingItem, short>
 		_dataArray.Add(new ClothingItem(63, LocalStringManager.GetConfig("Clothing_language", "Name_63"), 3, 300, 6, 61, "icon_Clothing_houmuxueyi", LocalStringManager.GetConfig("Clothing_language", "Desc_63"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_63"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 40, 13800, 4, 7, 3600, 8, allowRandomCreate: true, 15, isSpecial: false, 4, 12, -1, new List<int>(), 2, -1, 64, 2, keepOnPassing: false, 280, 2, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_63"), 0));
 		_dataArray.Add(new ClothingItem(64, LocalStringManager.GetConfig("Clothing_language", "Name_64"), 3, 300, 0, -1, "icon_Clothing_qiangbao", LocalStringManager.GetConfig("Clothing_language", "Desc_64"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_64"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 10, 0, 0, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 0, 0, keepOnPassing: false, 0, 0, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_64"), 0));
 		_dataArray.Add(new ClothingItem(65, LocalStringManager.GetConfig("Clothing_language", "Name_65"), 3, 300, 0, -1, "icon_Clothing_tongyi", LocalStringManager.GetConfig("Clothing_language", "Desc_65"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_65"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 10, 0, 0, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 0, 1, keepOnPassing: false, 0, 0, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_65"), 0));
-		_dataArray.Add(new ClothingItem(66, LocalStringManager.GetConfig("Clothing_language", "Name_66"), 3, 300, 2, 66, "icon_Clothing_yingeyi", LocalStringManager.GetConfig("Clothing_language", "Desc_66"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_66"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 50, 0, 0, 0, 0, 0, allowRandomCreate: true, 15, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10000, 2, keepOnPassing: false, 60, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_66"), 0));
+		_dataArray.Add(new ClothingItem(66, LocalStringManager.GetConfig("Clothing_language", "Name_66"), 3, 300, 2, 66, "icon_Clothing_yingeyi", LocalStringManager.GetConfig("Clothing_language", "Desc_66"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_66"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 50, 0, 0, 0, 0, 0, allowRandomCreate: true, 15, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10000, 2, keepOnPassing: false, 60, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_66"), 0));
 		_dataArray.Add(new ClothingItem(67, LocalStringManager.GetConfig("Clothing_language", "Name_67"), 3, 300, 4, 66, "icon_Clothing_yehuopao", LocalStringManager.GetConfig("Clothing_language", "Desc_67"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_67"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 100, 0, 2, 0, 0, 0, allowRandomCreate: true, 10, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10001, 2, keepOnPassing: false, 150, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_67"), 0));
-		_dataArray.Add(new ClothingItem(68, LocalStringManager.GetConfig("Clothing_language", "Name_68"), 3, 300, 6, 66, "icon_Clothing_xuanshiheipi", LocalStringManager.GetConfig("Clothing_language", "Desc_68"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_68"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 200, 0, 4, 0, 0, 0, allowRandomCreate: true, 5, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10002, 2, keepOnPassing: false, 280, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_68"), 0));
-		_dataArray.Add(new ClothingItem(69, LocalStringManager.GetConfig("Clothing_language", "Name_69"), 3, 300, 2, 69, "icon_Clothing_yingeyi", LocalStringManager.GetConfig("Clothing_language", "Desc_69"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_69"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 50, 0, 0, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 20000, 2, keepOnPassing: false, 60, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_69"), 0));
+		_dataArray.Add(new ClothingItem(68, LocalStringManager.GetConfig("Clothing_language", "Name_68"), 3, 300, 6, 66, "icon_Clothing_xuanshiheipi", LocalStringManager.GetConfig("Clothing_language", "Desc_68"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_68"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 200, 0, 4, 0, 0, 0, allowRandomCreate: true, 5, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10002, 2, keepOnPassing: false, 280, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_68"), 0));
+		_dataArray.Add(new ClothingItem(69, LocalStringManager.GetConfig("Clothing_language", "Name_69"), 3, 300, 2, 69, "icon_Clothing_yingeyi", LocalStringManager.GetConfig("Clothing_language", "Desc_69"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_69"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 50, 0, 0, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 20000, 2, keepOnPassing: false, 60, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_69"), 0));
 		_dataArray.Add(new ClothingItem(70, LocalStringManager.GetConfig("Clothing_language", "Name_70"), 3, 300, 4, 69, "icon_Clothing_yehuopao", LocalStringManager.GetConfig("Clothing_language", "Desc_70"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_70"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 100, 0, 2, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 20001, 2, keepOnPassing: false, 150, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_70"), 0));
-		_dataArray.Add(new ClothingItem(71, LocalStringManager.GetConfig("Clothing_language", "Name_71"), 3, 300, 6, 69, "icon_Clothing_xuanshiheipi", LocalStringManager.GetConfig("Clothing_language", "Desc_71"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_71"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 200, 0, 4, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 20002, 2, keepOnPassing: false, 280, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_71"), 0));
+		_dataArray.Add(new ClothingItem(71, LocalStringManager.GetConfig("Clothing_language", "Name_71"), 3, 300, 6, 69, "icon_Clothing_xuanshiheipi", LocalStringManager.GetConfig("Clothing_language", "Desc_71"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_71"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 200, 0, 4, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 20002, 2, keepOnPassing: false, 280, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_71"), 0));
 		_dataArray.Add(new ClothingItem(72, LocalStringManager.GetConfig("Clothing_language", "Name_72"), 3, 300, 8, -1, "icon_Clothing_bageyi", LocalStringManager.GetConfig("Clothing_language", "Desc_72"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_72"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 0, 0, 6, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 30000, 2, keepOnPassing: true, 0, 4, "GiftFromConchShip1", LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_72"), 0));
 		_dataArray.Add(new ClothingItem(73, LocalStringManager.GetConfig("Clothing_language", "Name_73"), 3, 300, 8, -1, "icon_Clothing_yindaoyi", LocalStringManager.GetConfig("Clothing_language", "Desc_73"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_73"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 0, 0, 6, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 30001, 2, keepOnPassing: true, 0, 4, "GiftFromConchShip1", LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_73"), 0));
 		_dataArray.Add(new ClothingItem(74, LocalStringManager.GetConfig("Clothing_language", "Name_74"), 3, 300, 8, -1, "icon_Clothing_banhaoyi", LocalStringManager.GetConfig("Clothing_language", "Desc_74"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_74"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 0, 0, 6, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 66, 2, keepOnPassing: true, 0, 4, "GiftFromConchShip2", LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_74"), 0));
@@ -587,18 +314,22 @@ public class Clothing : ConfigData<ClothingItem, short>
 		_dataArray.Add(new ClothingItem(98, LocalStringManager.GetConfig("Clothing_language", "Name_98"), 3, 300, 6, -1, "icon_Clothing_tianmuyinyi", LocalStringManager.GetConfig("Clothing_language", "Desc_98"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_98"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 40, 13800, 4, 7, 3600, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 80, 2, keepOnPassing: false, 0, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_98"), 0));
 		_dataArray.Add(new ClothingItem(99, LocalStringManager.GetConfig("Clothing_language", "Name_99"), 3, 300, 8, -1, "icon_Clothing_jinshoutianmupao", LocalStringManager.GetConfig("Clothing_language", "Desc_99"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_99"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 40, 21150, 5, 9, 5400, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 81, 2, keepOnPassing: false, 0, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_99"), 0));
 		_dataArray.Add(new ClothingItem(100, LocalStringManager.GetConfig("Clothing_language", "Name_100"), 3, 300, 6, -1, "icon_Clothing_tianmuyi", LocalStringManager.GetConfig("Clothing_language", "Desc_100"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_100"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 40, 13800, 4, 7, 3600, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 79, 2, keepOnPassing: false, 0, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_100"), 0));
-		_dataArray.Add(new ClothingItem(101, LocalStringManager.GetConfig("Clothing_language", "Name_101"), 3, 300, 8, 101, "icon_Clothing_xiankepao", LocalStringManager.GetConfig("Clothing_language", "Desc_101"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_101"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: false, detachable: false, 5, 0, 21150, 5, 9, 1800, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 85, 2, keepOnPassing: false, 0, 0, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_101"), 0));
+		_dataArray.Add(new ClothingItem(101, LocalStringManager.GetConfig("Clothing_language", "Name_101"), 3, 300, 8, 101, "icon_Clothing_xiankepao", LocalStringManager.GetConfig("Clothing_language", "Desc_101"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_101"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: false, detachable: true, 5, 0, 21150, 5, 9, 1800, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 85, 2, keepOnPassing: false, 0, 0, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_101"), 0));
 		_dataArray.Add(new ClothingItem(102, LocalStringManager.GetConfig("Clothing_language", "Name_102"), 3, 300, 8, 102, "icon_Clothing_tiandaozhuang", LocalStringManager.GetConfig("Clothing_language", "Desc_102"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_102"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: false, detachable: true, 5, 0, 21150, 5, 9, 1800, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 82, 2, keepOnPassing: false, 0, 0, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_102"), 0));
 		_dataArray.Add(new ClothingItem(103, LocalStringManager.GetConfig("Clothing_language", "Name_103"), 3, 300, 8, 102, "icon_Clothing_zhongdaozhuang", LocalStringManager.GetConfig("Clothing_language", "Desc_103"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_103"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: false, detachable: true, 5, 0, 21150, 5, 9, 1800, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 83, 2, keepOnPassing: false, 0, 0, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_103"), 0));
 		_dataArray.Add(new ClothingItem(104, LocalStringManager.GetConfig("Clothing_language", "Name_104"), 3, 300, 8, 102, "icon_Clothing_xiedaozhuang", LocalStringManager.GetConfig("Clothing_language", "Desc_104"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_104"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: false, detachable: true, 5, 0, 21150, 5, 9, 1800, 8, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 84, 2, keepOnPassing: false, 0, 0, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_104"), 0));
 		_dataArray.Add(new ClothingItem(105, LocalStringManager.GetConfig("Clothing_language", "Name_105"), 3, 300, 8, 105, "icon_Clothing_qingshanyijiu", LocalStringManager.GetConfig("Clothing_language", "Desc_105"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_105"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 0, 0, 6, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 30012, 2, keepOnPassing: true, 0, 4, "GreenHillsRemain", LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_105"), 0));
 		_dataArray.Add(new ClothingItem(106, LocalStringManager.GetConfig("Clothing_language", "Name_106"), 3, 300, 8, 106, "icon_Clothing_bazaitongzhou", LocalStringManager.GetConfig("Clothing_language", "Desc_106"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_106"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 0, 0, 6, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 30014, 2, keepOnPassing: true, 0, 4, "EightYears", LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_106"), 0));
+		_dataArray.Add(new ClothingItem(107, LocalStringManager.GetConfig("Clothing_language", "Name_107"), 3, 300, 8, 107, "icon_Clothing_xuanxiangfashen", LocalStringManager.GetConfig("Clothing_language", "Desc_107"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_107"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: true, 5, 0, 0, 6, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 30015, 2, keepOnPassing: true, 0, 4, "TaiwuAsXiangshu", LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_107"), 0));
+		_dataArray.Add(new ClothingItem(108, LocalStringManager.GetConfig("Clothing_language", "Name_108"), 3, 300, 2, 108, "icon_Clothing_modaoyi", LocalStringManager.GetConfig("Clothing_language", "Desc_108"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_108"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 50, 0, 0, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10004, 2, keepOnPassing: false, 60, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_108"), 0));
+		_dataArray.Add(new ClothingItem(109, LocalStringManager.GetConfig("Clothing_language", "Name_109"), 3, 300, 4, 108, "icon_Clothing_modaofayi", LocalStringManager.GetConfig("Clothing_language", "Desc_109"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_109"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 100, 0, 2, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10005, 2, keepOnPassing: false, 150, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_109"), 0));
+		_dataArray.Add(new ClothingItem(110, LocalStringManager.GetConfig("Clothing_language", "Name_110"), 3, 300, 6, 108, "icon_Clothing_modaoshoukuiyi", LocalStringManager.GetConfig("Clothing_language", "Desc_110"), LocalStringManager.GetConfig("Clothing_language", "FunctionDesc_110"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: true, inheritable: true, detachable: false, 5, 200, 0, 4, 0, 0, 0, allowRandomCreate: false, 0, isSpecial: true, 4, 12, -1, new List<int>(), 2, -1, 10006, 2, keepOnPassing: false, 280, 4, null, LocalStringManager.GetConfig("Clothing_language", "SmallVillageDesc_110"), 0));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<ClothingItem>(107);
+		_dataArray = new List<ClothingItem>(111);
 		CreateItems0();
 		CreateItems1();
 	}

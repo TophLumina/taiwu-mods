@@ -4,41 +4,22 @@ using GameData.Utilities;
 
 namespace GameData.ActionPlanning.MonthlyAI;
 
-/// <summary>
-/// NPC行为规划数据, 包含了其所有目标和当前行为规划.
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public class ActionPlanningDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 持有目标的列表.
-	/// 不包含任务(目标集)分发的目标.
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterGoalDisplayData> Goals;
 
-	/// <summary>
-	/// 持有的任务
-	/// </summary>'
 	[SerializableGameDataField]
 	public CharacterMissionDisplayData[] Missions = new CharacterMissionDisplayData[4];
 
-	/// <summary>
-	/// 立场
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte BehaviorType;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public ActionPlanningDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public ActionPlanningDisplayData(ActionPlanningDisplayData other)
 	{
 		if (other.Goals != null)
@@ -65,9 +46,6 @@ public class ActionPlanningDisplayData : ISerializableGameData
 		BehaviorType = other.BehaviorType;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(ActionPlanningDisplayData other)
 	{
 		if (other.Goals != null)
@@ -94,13 +72,11 @@ public class ActionPlanningDisplayData : ISerializableGameData
 		BehaviorType = other.BehaviorType;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 1;
@@ -139,7 +115,6 @@ public class ActionPlanningDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -213,7 +188,6 @@ public class ActionPlanningDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -4,9 +4,6 @@ namespace GameData.Domains.Combat;
 
 public static class CombatDomainHelper
 {
-	/// <summary>
-	/// 数据域所辖数据
-	/// </summary>
 	public static class DataIds
 	{
 		public const ushort TimeScale = 0;
@@ -92,11 +89,12 @@ public static class CombatDomainHelper
 		public const ushort CombatQuickUseItemSlotDataList = 40;
 
 		public const ushort SkillDamageData = 41;
+
+		public const ushort NextAvailableChickenPointAppearCd = 42;
+
+		public const ushort ChickenPointZones = 43;
 	}
 
-	/// <summary>
-	/// 数据域中的方法
-	/// </summary>
 	public static class MethodIds
 	{
 		public const ushort PlayMoveStepSound = 0;
@@ -119,221 +117,219 @@ public static class CombatDomainHelper
 
 		public const ushort GetWeaponInnerRatio = 9;
 
-		public const ushort GetWeaponEffects = 10;
+		public const ushort StartPrepareOtherAction = 10;
 
-		public const ushort StartPrepareOtherAction = 11;
+		public const ushort GetProactiveSkillList = 11;
 
-		public const ushort GetProactiveSkillList = 12;
+		public const ushort StartPrepareSkill = 12;
 
-		public const ushort StartPrepareSkill = 13;
+		public const ushort GmCmd_ForceRecoverBreathAndStance = 13;
 
-		public const ushort GmCmd_ForceRecoverBreathAndStance = 14;
+		public const ushort GmCmd_AddTrick = 14;
 
-		public const ushort GmCmd_AddTrick = 15;
+		public const ushort GmCmd_AddInjury = 15;
 
-		public const ushort GmCmd_AddInjury = 16;
+		public const ushort GmCmd_ForceHealAllInjury = 16;
 
-		public const ushort GmCmd_ForceHealAllInjury = 17;
+		public const ushort GmCmd_AddPoison = 17;
 
-		public const ushort GmCmd_AddPoison = 18;
+		public const ushort GmCmd_ForceHealAllPoison = 18;
 
-		public const ushort GmCmd_ForceHealAllPoison = 19;
+		public const ushort GmCmd_ForceEnemyUseSkill = 19;
 
-		public const ushort GmCmd_ForceEnemyUseSkill = 20;
+		public const ushort GmCmd_ForceEnemyUseOtherAction = 20;
 
-		public const ushort GmCmd_ForceEnemyUseOtherAction = 21;
+		public const ushort GmCmd_ForceEnemyDefeat = 21;
 
-		public const ushort GmCmd_ForceEnemyDefeat = 22;
+		public const ushort GmCmd_ForceSelfDefeat = 22;
 
-		public const ushort GmCmd_ForceSelfDefeat = 23;
+		public const ushort GmCmd_SetNeiliAllocation = 23;
 
-		public const ushort GmCmd_SetNeiliAllocation = 24;
+		public const ushort GmCmd_AddFlaw = 24;
 
-		public const ushort GmCmd_AddFlaw = 25;
+		public const ushort GmCmd_HealAllFlaw = 25;
 
-		public const ushort GmCmd_HealAllFlaw = 26;
+		public const ushort GmCmd_AddAcupoint = 26;
 
-		public const ushort GmCmd_AddAcupoint = 27;
+		public const ushort GmCmd_HealAllAcupoint = 27;
 
-		public const ushort GmCmd_HealAllAcupoint = 28;
+		public const ushort GmCmd_FightBoss = 28;
 
-		public const ushort GmCmd_FightBoss = 29;
+		public const ushort GmCmd_FightAnimal = 29;
 
-		public const ushort GmCmd_FightAnimal = 30;
+		public const ushort GmCmd_EnableEnemyAi = 30;
 
-		public const ushort GmCmd_EnableEnemyAi = 31;
+		public const ushort GmCmd_EnableSkillFreeCast = 31;
 
-		public const ushort GmCmd_EnableSkillFreeCast = 32;
+		public const ushort GetHealInjuryBanReason = 32;
 
-		public const ushort GetHealInjuryBanReason = 33;
+		public const ushort GetHealPoisonBanReason = 33;
 
-		public const ushort GetHealPoisonBanReason = 34;
+		public const ushort UseItem = 34;
 
-		public const ushort UseItem = 35;
+		public const ushort PrepareCombat = 35;
 
-		public const ushort PrepareCombat = 36;
+		public const ushort StartCombat = 36;
 
-		public const ushort StartCombat = 37;
+		public const ushort SetTimeScale = 37;
 
-		public const ushort SetTimeScale = 38;
+		public const ushort SetPlayerAutoCombat = 38;
 
-		public const ushort SetPlayerAutoCombat = 39;
+		public const ushort SetAiOptions = 39;
 
-		public const ushort SetAiOptions = 40;
+		public const ushort SetMoveState = 40;
 
-		public const ushort SetMoveState = 41;
+		public const ushort GetCombatResultDisplayData = 41;
 
-		public const ushort GetCombatResultDisplayData = 42;
+		public const ushort SelectGetItem = 42;
 
-		public const ushort SelectGetItem = 43;
+		public const ushort Surrender = 43;
 
-		public const ushort Surrender = 44;
+		public const ushort EnterBossPuppetCombat = 44;
 
-		public const ushort EnterBossPuppetCombat = 45;
+		public const ushort RepairItem = 45;
 
-		public const ushort RepairItem = 46;
+		public const ushort PrepareEnemyEquipments = 46;
 
-		public const ushort PrepareEnemyEquipments = 47;
+		public const ushort EnableBulletTime = 47;
 
-		public const ushort EnableBulletTime = 48;
+		public const ushort GmCmd_SetImmortal = 48;
 
-		public const ushort GmCmd_SetImmortal = 49;
+		public const ushort CancelChangeTrick = 49;
 
-		public const ushort CancelChangeTrick = 50;
+		public const ushort ClearAllReserveAction = 50;
 
-		public const ushort ClearAllReserveAction = 51;
+		public const ushort IsInCombat = 51;
 
-		public const ushort IsInCombat = 52;
+		public const ushort GmCmd_FightTestOrgMember = 52;
 
-		public const ushort GmCmd_FightTestOrgMember = 53;
+		public const ushort GmCmd_FightRandomEnemy = 53;
 
-		public const ushort GmCmd_FightRandomEnemy = 54;
+		public const ushort GmCmd_ForceRecoverMobilityValue = 54;
 
-		public const ushort GmCmd_ForceRecoverMobilityValue = 55;
+		public const ushort GmCmd_UnitTestSetDistanceToTarget = 55;
 
-		public const ushort GmCmd_UnitTestSetDistanceToTarget = 56;
+		public const ushort GmCmd_UnitTestEquipSkill = 56;
 
-		public const ushort GmCmd_UnitTestEquipSkill = 57;
+		public const ushort GmCmd_UnitTestPrepare = 57;
 
-		public const ushort GmCmd_UnitTestPrepare = 58;
+		public const ushort GmCmd_UnitTestClearAllEquipSkill = 58;
 
-		public const ushort GmCmd_UnitTestClearAllEquipSkill = 59;
+		public const ushort GetFatalDamageStepDisplayData = 59;
 
-		public const ushort GetFatalDamageStepDisplayData = 60;
+		public const ushort GetMindDamageStepDisplayData = 60;
 
-		public const ushort GetMindDamageStepDisplayData = 61;
+		public const ushort GetBodyPartDamageStepDisplayData = 61;
 
-		public const ushort GetBodyPartDamageStepDisplayData = 62;
+		public const ushort GetCompleteDamageStepDisplayData = 62;
 
-		public const ushort GetCompleteDamageStepDisplayData = 63;
+		public const ushort GmCmd_ForceRecoverWugCount = 63;
 
-		public const ushort GmCmd_ForceRecoverWugCount = 64;
+		public const ushort GmCmd_FightCharacter = 64;
 
-		public const ushort GmCmd_FightCharacter = 65;
+		public const ushort GetChangeTrickDisplayData = 65;
 
-		public const ushort GetChangeTrickDisplayData = 66;
+		public const ushort ClearAffectingDefenseSkillManual = 66;
 
-		public const ushort ClearAffectingDefenseSkillManual = 67;
+		public const ushort ClearDefendInBlockAttackSkill = 67;
 
-		public const ushort ClearDefendInBlockAttackSkill = 68;
+		public const ushort GmCmd_HealAllFatal = 68;
 
-		public const ushort GmCmd_HealAllFatal = 69;
+		public const ushort GmCmd_HealAllDefeatMark = 69;
 
-		public const ushort GmCmd_HealAllDefeatMark = 70;
+		public const ushort GmCmd_AddAllDefeatMark = 70;
 
-		public const ushort GmCmd_AddAllDefeatMark = 71;
+		public const ushort GmCmd_AddFatal = 71;
 
-		public const ushort GmCmd_AddFatal = 72;
+		public const ushort GmCmd_HealAllDie = 72;
 
-		public const ushort GmCmd_HealAllDie = 73;
+		public const ushort GmCmd_AddDie = 73;
 
-		public const ushort GmCmd_AddDie = 74;
+		public const ushort GmCmd_HealAllMind = 74;
 
-		public const ushort GmCmd_HealAllMind = 75;
+		public const ushort GmCmd_HealInjury = 75;
 
-		public const ushort GmCmd_HealInjury = 76;
+		public const ushort GmCmd_AddMind = 76;
 
-		public const ushort GmCmd_AddMind = 77;
+		public const ushort SetTargetDistance = 77;
 
-		public const ushort SetTargetDistance = 78;
+		public const ushort ClearTargetDistance = 78;
 
-		public const ushort ClearTargetDistance = 79;
+		public const ushort SetJumpThreshold = 79;
 
-		public const ushort SetJumpThreshold = 80;
+		public const ushort GetPreviewAttackRange = 80;
 
-		public const ushort GetPreviewAttackRange = 81;
+		public const ushort SetPuppetUnyieldingFallen = 81;
 
-		public const ushort SetPuppetUnyieldingFallen = 82;
+		public const ushort SetPuppetDisableAi = 82;
 
-		public const ushort SetPuppetDisableAi = 83;
+		public const ushort InterruptSkillManual = 83;
 
-		public const ushort InterruptSkillManual = 84;
+		public const ushort ClearAffectingMoveSkillManual = 84;
 
-		public const ushort ClearAffectingMoveSkillManual = 85;
+		public const ushort UnlockAttack = 85;
 
-		public const ushort UnlockAttack = 86;
+		public const ushort IgnoreAllRawCreate = 86;
 
-		public const ushort IgnoreAllRawCreate = 87;
+		public const ushort IgnoreRawCreate = 87;
 
-		public const ushort IgnoreRawCreate = 88;
+		public const ushort DoRawCreate = 88;
 
-		public const ushort DoRawCreate = 89;
+		public const ushort GetAllCanRawCreateEquipmentSlots = 89;
 
-		public const ushort GetAllCanRawCreateEquipmentSlots = 90;
+		public const ushort GetUnlockSimulateResult = 90;
 
-		public const ushort GetUnlockSimulateResult = 91;
+		public const ushort GetDefeatMarksCountOutOfCombat = 91;
 
-		public const ushort GetDefeatMarksCountOutOfCombat = 92;
+		public const ushort ApplyCombatResultDataEffect = 92;
 
-		public const ushort ApplyCombatResultDataEffect = 93;
+		public const ushort ClearReserveNormalAttack = 93;
 
-		public const ushort ClearReserveNormalAttack = 94;
+		public const ushort ApplyVitalOnTeammate = 94;
 
-		public const ushort ApplyVitalOnTeammate = 95;
+		public const ushort RevertVitalOnTeammate = 95;
 
-		public const ushort RevertVitalOnTeammate = 96;
+		public const ushort GmCmd_ForceRecoverTeammateCommand = 96;
 
-		public const ushort GmCmd_ForceRecoverTeammateCommand = 97;
+		public const ushort RequestValidItemsInCombat = 97;
 
-		public const ushort RequestValidItemsInCombat = 98;
+		public const ushort RequestSwordFragmentSkillIds = 98;
 
-		public const ushort RequestSwordFragmentSkillIds = 99;
+		public const ushort UseSpecialItem = 99;
 
-		public const ushort UseSpecialItem = 100;
+		public const ushort NormalAttackImmediate = 100;
 
-		public const ushort NormalAttackImmediate = 101;
+		public const ushort InterruptOtherActionManual = 101;
 
-		public const ushort InterruptOtherActionManual = 102;
+		public const ushort PrepareSimulate = 102;
 
-		public const ushort PrepareSimulate = 103;
+		public const ushort PreparePreRandomTeammateCommands = 103;
 
-		public const ushort PreparePreRandomTeammateCommands = 104;
+		public const ushort GmCmd_FightNpc = 104;
 
-		public const ushort GmCmd_FightNpc = 105;
+		public const ushort SetCombatQuickUseItemSlotData = 105;
 
-		public const ushort SetCombatQuickUseItemSlotData = 106;
+		public const ushort GetCombatQuickUseItemSlotData = 106;
 
-		public const ushort GetCombatQuickUseItemSlotData = 107;
+		public const ushort GmCmd_FightBossInternal = 107;
 
-		public const ushort GmCmd_FightBossInternal = 108;
+		public const ushort ChangeTaiwuWeaponInnerRatioByWeaponKey = 108;
 
-		public const ushort ChangeTaiwuWeaponInnerRatioByWeaponKey = 109;
+		public const ushort GetWeaponExpectInnerRatio = 109;
 
-		public const ushort GetWeaponExpectInnerRatio = 110;
+		public const ushort GetMarkDisplayData = 110;
 
-		public const ushort GetMarkDisplayData = 111;
+		public const ushort GmCmd_FightTwelveImmortals = 111;
 
-		public const ushort GmCmd_FightTwelveImmortals = 112;
+		public const ushort InvokeChickenPoints = 112;
+
+		public const ushort FinishChickenPhase = 113;
+
+		public const ushort ApplyChickenEffect = 114;
 	}
 
-	/// <summary>
-	/// 数据域所辖数据的个数
-	/// </summary>
-	public const ushort DataCount = 42;
+	public const ushort DataCount = 44;
 
-	/// <summary>
-	/// 通过字段名获取数据 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> FieldName2DataId = new Dictionary<string, ushort>
 	{
 		{ "TimeScale", 0 },
@@ -377,37 +373,29 @@ public static class CombatDomainHelper
 		{ "DisableEnemyAi", 38 },
 		{ "PreferWeaponIndex", 39 },
 		{ "CombatQuickUseItemSlotDataList", 40 },
-		{ "SkillDamageData", 41 }
+		{ "SkillDamageData", 41 },
+		{ "NextAvailableChickenPointAppearCd", 42 },
+		{ "ChickenPointZones", 43 }
 	};
 
-	/// <summary>
-	/// 通过数据 ID 获取对应的字段名.
-	/// 字段名不一定要与字段的真实名称完全一致, 只要保证正反对应关系就行.
-	/// </summary>
-	public static readonly string[] DataId2FieldName = new string[42]
+	public static readonly string[] DataId2FieldName = new string[44]
 	{
 		"TimeScale", "AutoCombat", "CombatFrame", "CombatType", "CurrentDistance", "DamageCompareData", "SkillPowerAddInCombat", "SkillPowerReduceInCombat", "SkillPowerReplaceInCombat", "BgmIndex",
 		"CombatCharacterDict", "SelfTeam", "SelfCharId", "SelfTeamWisdomType", "SelfTeamWisdomCount", "EnemyTeam", "EnemyCharId", "EnemyTeamWisdomType", "EnemyTeamWisdomCount", "CombatStatus",
 		"ShowMercyOption", "SelectedMercyOption", "CarrierAnimalCombatCharId", "SpecialShowCombatCharId", "NotUsed", "WaitingDelaySettlement", "ShowUseGoldenWire", "IsPuppetCombat", "IsPlaygroundCombat", "SkillDataDict",
 		"WeaponDataDict", "ExpectRatioData", "TaiwuSpecialGroupCharIds", "LastTargetDistance", "ChangeTrickIndex", "ChangeTrickBodyPart", "ChangeTrickIsFlaw", "EnemyUnyieldingFallen", "DisableEnemyAi", "PreferWeaponIndex",
-		"CombatQuickUseItemSlotDataList", "SkillDamageData"
+		"CombatQuickUseItemSlotDataList", "SkillDamageData", "NextAvailableChickenPointAppearCd", "ChickenPointZones"
 	};
 
-	/// <summary>
-	/// DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
 	public static readonly string[][] DataId2ObjectFieldId2FieldName;
 
-	/// <summary>
-	/// 通过数据域方法名获取数据域方法 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> MethodName2MethodId;
 
 	public static readonly string[] MethodId2MethodName;
 
 	static CombatDomainHelper()
 	{
-		string[][] array = new string[42][];
+		string[][] array = new string[44][];
 		array[10] = CombatCharacterHelper.FieldId2FieldName;
 		array[29] = CombatSkillDataHelper.FieldId2FieldName;
 		array[30] = CombatWeaponDataHelper.FieldId2FieldName;
@@ -424,124 +412,126 @@ public static class CombatDomainHelper
 			{ "SelectChangeTrick", 7 },
 			{ "ChangeTaiwuWeaponInnerRatio", 8 },
 			{ "GetWeaponInnerRatio", 9 },
-			{ "GetWeaponEffects", 10 },
-			{ "StartPrepareOtherAction", 11 },
-			{ "GetProactiveSkillList", 12 },
-			{ "StartPrepareSkill", 13 },
-			{ "GmCmd_ForceRecoverBreathAndStance", 14 },
-			{ "GmCmd_AddTrick", 15 },
-			{ "GmCmd_AddInjury", 16 },
-			{ "GmCmd_ForceHealAllInjury", 17 },
-			{ "GmCmd_AddPoison", 18 },
-			{ "GmCmd_ForceHealAllPoison", 19 },
-			{ "GmCmd_ForceEnemyUseSkill", 20 },
-			{ "GmCmd_ForceEnemyUseOtherAction", 21 },
-			{ "GmCmd_ForceEnemyDefeat", 22 },
-			{ "GmCmd_ForceSelfDefeat", 23 },
-			{ "GmCmd_SetNeiliAllocation", 24 },
-			{ "GmCmd_AddFlaw", 25 },
-			{ "GmCmd_HealAllFlaw", 26 },
-			{ "GmCmd_AddAcupoint", 27 },
-			{ "GmCmd_HealAllAcupoint", 28 },
-			{ "GmCmd_FightBoss", 29 },
-			{ "GmCmd_FightAnimal", 30 },
-			{ "GmCmd_EnableEnemyAi", 31 },
-			{ "GmCmd_EnableSkillFreeCast", 32 },
-			{ "GetHealInjuryBanReason", 33 },
-			{ "GetHealPoisonBanReason", 34 },
-			{ "UseItem", 35 },
-			{ "PrepareCombat", 36 },
-			{ "StartCombat", 37 },
-			{ "SetTimeScale", 38 },
-			{ "SetPlayerAutoCombat", 39 },
-			{ "SetAiOptions", 40 },
-			{ "SetMoveState", 41 },
-			{ "GetCombatResultDisplayData", 42 },
-			{ "SelectGetItem", 43 },
-			{ "Surrender", 44 },
-			{ "EnterBossPuppetCombat", 45 },
-			{ "RepairItem", 46 },
-			{ "PrepareEnemyEquipments", 47 },
-			{ "EnableBulletTime", 48 },
-			{ "GmCmd_SetImmortal", 49 },
-			{ "CancelChangeTrick", 50 },
-			{ "ClearAllReserveAction", 51 },
-			{ "IsInCombat", 52 },
-			{ "GmCmd_FightTestOrgMember", 53 },
-			{ "GmCmd_FightRandomEnemy", 54 },
-			{ "GmCmd_ForceRecoverMobilityValue", 55 },
-			{ "GmCmd_UnitTestSetDistanceToTarget", 56 },
-			{ "GmCmd_UnitTestEquipSkill", 57 },
-			{ "GmCmd_UnitTestPrepare", 58 },
-			{ "GmCmd_UnitTestClearAllEquipSkill", 59 },
-			{ "GetFatalDamageStepDisplayData", 60 },
-			{ "GetMindDamageStepDisplayData", 61 },
-			{ "GetBodyPartDamageStepDisplayData", 62 },
-			{ "GetCompleteDamageStepDisplayData", 63 },
-			{ "GmCmd_ForceRecoverWugCount", 64 },
-			{ "GmCmd_FightCharacter", 65 },
-			{ "GetChangeTrickDisplayData", 66 },
-			{ "ClearAffectingDefenseSkillManual", 67 },
-			{ "ClearDefendInBlockAttackSkill", 68 },
-			{ "GmCmd_HealAllFatal", 69 },
-			{ "GmCmd_HealAllDefeatMark", 70 },
-			{ "GmCmd_AddAllDefeatMark", 71 },
-			{ "GmCmd_AddFatal", 72 },
-			{ "GmCmd_HealAllDie", 73 },
-			{ "GmCmd_AddDie", 74 },
-			{ "GmCmd_HealAllMind", 75 },
-			{ "GmCmd_HealInjury", 76 },
-			{ "GmCmd_AddMind", 77 },
-			{ "SetTargetDistance", 78 },
-			{ "ClearTargetDistance", 79 },
-			{ "SetJumpThreshold", 80 },
-			{ "GetPreviewAttackRange", 81 },
-			{ "SetPuppetUnyieldingFallen", 82 },
-			{ "SetPuppetDisableAi", 83 },
-			{ "InterruptSkillManual", 84 },
-			{ "ClearAffectingMoveSkillManual", 85 },
-			{ "UnlockAttack", 86 },
-			{ "IgnoreAllRawCreate", 87 },
-			{ "IgnoreRawCreate", 88 },
-			{ "DoRawCreate", 89 },
-			{ "GetAllCanRawCreateEquipmentSlots", 90 },
-			{ "GetUnlockSimulateResult", 91 },
-			{ "GetDefeatMarksCountOutOfCombat", 92 },
-			{ "ApplyCombatResultDataEffect", 93 },
-			{ "ClearReserveNormalAttack", 94 },
-			{ "ApplyVitalOnTeammate", 95 },
-			{ "RevertVitalOnTeammate", 96 },
-			{ "GmCmd_ForceRecoverTeammateCommand", 97 },
-			{ "RequestValidItemsInCombat", 98 },
-			{ "RequestSwordFragmentSkillIds", 99 },
-			{ "UseSpecialItem", 100 },
-			{ "NormalAttackImmediate", 101 },
-			{ "InterruptOtherActionManual", 102 },
-			{ "PrepareSimulate", 103 },
-			{ "PreparePreRandomTeammateCommands", 104 },
-			{ "GmCmd_FightNpc", 105 },
-			{ "SetCombatQuickUseItemSlotData", 106 },
-			{ "GetCombatQuickUseItemSlotData", 107 },
-			{ "GmCmd_FightBossInternal", 108 },
-			{ "ChangeTaiwuWeaponInnerRatioByWeaponKey", 109 },
-			{ "GetWeaponExpectInnerRatio", 110 },
-			{ "GetMarkDisplayData", 111 },
-			{ "GmCmd_FightTwelveImmortals", 112 }
+			{ "StartPrepareOtherAction", 10 },
+			{ "GetProactiveSkillList", 11 },
+			{ "StartPrepareSkill", 12 },
+			{ "GmCmd_ForceRecoverBreathAndStance", 13 },
+			{ "GmCmd_AddTrick", 14 },
+			{ "GmCmd_AddInjury", 15 },
+			{ "GmCmd_ForceHealAllInjury", 16 },
+			{ "GmCmd_AddPoison", 17 },
+			{ "GmCmd_ForceHealAllPoison", 18 },
+			{ "GmCmd_ForceEnemyUseSkill", 19 },
+			{ "GmCmd_ForceEnemyUseOtherAction", 20 },
+			{ "GmCmd_ForceEnemyDefeat", 21 },
+			{ "GmCmd_ForceSelfDefeat", 22 },
+			{ "GmCmd_SetNeiliAllocation", 23 },
+			{ "GmCmd_AddFlaw", 24 },
+			{ "GmCmd_HealAllFlaw", 25 },
+			{ "GmCmd_AddAcupoint", 26 },
+			{ "GmCmd_HealAllAcupoint", 27 },
+			{ "GmCmd_FightBoss", 28 },
+			{ "GmCmd_FightAnimal", 29 },
+			{ "GmCmd_EnableEnemyAi", 30 },
+			{ "GmCmd_EnableSkillFreeCast", 31 },
+			{ "GetHealInjuryBanReason", 32 },
+			{ "GetHealPoisonBanReason", 33 },
+			{ "UseItem", 34 },
+			{ "PrepareCombat", 35 },
+			{ "StartCombat", 36 },
+			{ "SetTimeScale", 37 },
+			{ "SetPlayerAutoCombat", 38 },
+			{ "SetAiOptions", 39 },
+			{ "SetMoveState", 40 },
+			{ "GetCombatResultDisplayData", 41 },
+			{ "SelectGetItem", 42 },
+			{ "Surrender", 43 },
+			{ "EnterBossPuppetCombat", 44 },
+			{ "RepairItem", 45 },
+			{ "PrepareEnemyEquipments", 46 },
+			{ "EnableBulletTime", 47 },
+			{ "GmCmd_SetImmortal", 48 },
+			{ "CancelChangeTrick", 49 },
+			{ "ClearAllReserveAction", 50 },
+			{ "IsInCombat", 51 },
+			{ "GmCmd_FightTestOrgMember", 52 },
+			{ "GmCmd_FightRandomEnemy", 53 },
+			{ "GmCmd_ForceRecoverMobilityValue", 54 },
+			{ "GmCmd_UnitTestSetDistanceToTarget", 55 },
+			{ "GmCmd_UnitTestEquipSkill", 56 },
+			{ "GmCmd_UnitTestPrepare", 57 },
+			{ "GmCmd_UnitTestClearAllEquipSkill", 58 },
+			{ "GetFatalDamageStepDisplayData", 59 },
+			{ "GetMindDamageStepDisplayData", 60 },
+			{ "GetBodyPartDamageStepDisplayData", 61 },
+			{ "GetCompleteDamageStepDisplayData", 62 },
+			{ "GmCmd_ForceRecoverWugCount", 63 },
+			{ "GmCmd_FightCharacter", 64 },
+			{ "GetChangeTrickDisplayData", 65 },
+			{ "ClearAffectingDefenseSkillManual", 66 },
+			{ "ClearDefendInBlockAttackSkill", 67 },
+			{ "GmCmd_HealAllFatal", 68 },
+			{ "GmCmd_HealAllDefeatMark", 69 },
+			{ "GmCmd_AddAllDefeatMark", 70 },
+			{ "GmCmd_AddFatal", 71 },
+			{ "GmCmd_HealAllDie", 72 },
+			{ "GmCmd_AddDie", 73 },
+			{ "GmCmd_HealAllMind", 74 },
+			{ "GmCmd_HealInjury", 75 },
+			{ "GmCmd_AddMind", 76 },
+			{ "SetTargetDistance", 77 },
+			{ "ClearTargetDistance", 78 },
+			{ "SetJumpThreshold", 79 },
+			{ "GetPreviewAttackRange", 80 },
+			{ "SetPuppetUnyieldingFallen", 81 },
+			{ "SetPuppetDisableAi", 82 },
+			{ "InterruptSkillManual", 83 },
+			{ "ClearAffectingMoveSkillManual", 84 },
+			{ "UnlockAttack", 85 },
+			{ "IgnoreAllRawCreate", 86 },
+			{ "IgnoreRawCreate", 87 },
+			{ "DoRawCreate", 88 },
+			{ "GetAllCanRawCreateEquipmentSlots", 89 },
+			{ "GetUnlockSimulateResult", 90 },
+			{ "GetDefeatMarksCountOutOfCombat", 91 },
+			{ "ApplyCombatResultDataEffect", 92 },
+			{ "ClearReserveNormalAttack", 93 },
+			{ "ApplyVitalOnTeammate", 94 },
+			{ "RevertVitalOnTeammate", 95 },
+			{ "GmCmd_ForceRecoverTeammateCommand", 96 },
+			{ "RequestValidItemsInCombat", 97 },
+			{ "RequestSwordFragmentSkillIds", 98 },
+			{ "UseSpecialItem", 99 },
+			{ "NormalAttackImmediate", 100 },
+			{ "InterruptOtherActionManual", 101 },
+			{ "PrepareSimulate", 102 },
+			{ "PreparePreRandomTeammateCommands", 103 },
+			{ "GmCmd_FightNpc", 104 },
+			{ "SetCombatQuickUseItemSlotData", 105 },
+			{ "GetCombatQuickUseItemSlotData", 106 },
+			{ "GmCmd_FightBossInternal", 107 },
+			{ "ChangeTaiwuWeaponInnerRatioByWeaponKey", 108 },
+			{ "GetWeaponExpectInnerRatio", 109 },
+			{ "GetMarkDisplayData", 110 },
+			{ "GmCmd_FightTwelveImmortals", 111 },
+			{ "InvokeChickenPoints", 112 },
+			{ "FinishChickenPhase", 113 },
+			{ "ApplyChickenEffect", 114 }
 		};
-		MethodId2MethodName = new string[113]
+		MethodId2MethodName = new string[115]
 		{
 			"PlayMoveStepSound", "ExecuteTeammateCommand", "GetCombatCharDisplayData", "SelectMercyOption", "ChangeWeapon", "NormalAttack", "StartChangeTrick", "SelectChangeTrick", "ChangeTaiwuWeaponInnerRatio", "GetWeaponInnerRatio",
-			"GetWeaponEffects", "StartPrepareOtherAction", "GetProactiveSkillList", "StartPrepareSkill", "GmCmd_ForceRecoverBreathAndStance", "GmCmd_AddTrick", "GmCmd_AddInjury", "GmCmd_ForceHealAllInjury", "GmCmd_AddPoison", "GmCmd_ForceHealAllPoison",
-			"GmCmd_ForceEnemyUseSkill", "GmCmd_ForceEnemyUseOtherAction", "GmCmd_ForceEnemyDefeat", "GmCmd_ForceSelfDefeat", "GmCmd_SetNeiliAllocation", "GmCmd_AddFlaw", "GmCmd_HealAllFlaw", "GmCmd_AddAcupoint", "GmCmd_HealAllAcupoint", "GmCmd_FightBoss",
-			"GmCmd_FightAnimal", "GmCmd_EnableEnemyAi", "GmCmd_EnableSkillFreeCast", "GetHealInjuryBanReason", "GetHealPoisonBanReason", "UseItem", "PrepareCombat", "StartCombat", "SetTimeScale", "SetPlayerAutoCombat",
-			"SetAiOptions", "SetMoveState", "GetCombatResultDisplayData", "SelectGetItem", "Surrender", "EnterBossPuppetCombat", "RepairItem", "PrepareEnemyEquipments", "EnableBulletTime", "GmCmd_SetImmortal",
-			"CancelChangeTrick", "ClearAllReserveAction", "IsInCombat", "GmCmd_FightTestOrgMember", "GmCmd_FightRandomEnemy", "GmCmd_ForceRecoverMobilityValue", "GmCmd_UnitTestSetDistanceToTarget", "GmCmd_UnitTestEquipSkill", "GmCmd_UnitTestPrepare", "GmCmd_UnitTestClearAllEquipSkill",
-			"GetFatalDamageStepDisplayData", "GetMindDamageStepDisplayData", "GetBodyPartDamageStepDisplayData", "GetCompleteDamageStepDisplayData", "GmCmd_ForceRecoverWugCount", "GmCmd_FightCharacter", "GetChangeTrickDisplayData", "ClearAffectingDefenseSkillManual", "ClearDefendInBlockAttackSkill", "GmCmd_HealAllFatal",
-			"GmCmd_HealAllDefeatMark", "GmCmd_AddAllDefeatMark", "GmCmd_AddFatal", "GmCmd_HealAllDie", "GmCmd_AddDie", "GmCmd_HealAllMind", "GmCmd_HealInjury", "GmCmd_AddMind", "SetTargetDistance", "ClearTargetDistance",
-			"SetJumpThreshold", "GetPreviewAttackRange", "SetPuppetUnyieldingFallen", "SetPuppetDisableAi", "InterruptSkillManual", "ClearAffectingMoveSkillManual", "UnlockAttack", "IgnoreAllRawCreate", "IgnoreRawCreate", "DoRawCreate",
-			"GetAllCanRawCreateEquipmentSlots", "GetUnlockSimulateResult", "GetDefeatMarksCountOutOfCombat", "ApplyCombatResultDataEffect", "ClearReserveNormalAttack", "ApplyVitalOnTeammate", "RevertVitalOnTeammate", "GmCmd_ForceRecoverTeammateCommand", "RequestValidItemsInCombat", "RequestSwordFragmentSkillIds",
-			"UseSpecialItem", "NormalAttackImmediate", "InterruptOtherActionManual", "PrepareSimulate", "PreparePreRandomTeammateCommands", "GmCmd_FightNpc", "SetCombatQuickUseItemSlotData", "GetCombatQuickUseItemSlotData", "GmCmd_FightBossInternal", "ChangeTaiwuWeaponInnerRatioByWeaponKey",
-			"GetWeaponExpectInnerRatio", "GetMarkDisplayData", "GmCmd_FightTwelveImmortals"
+			"StartPrepareOtherAction", "GetProactiveSkillList", "StartPrepareSkill", "GmCmd_ForceRecoverBreathAndStance", "GmCmd_AddTrick", "GmCmd_AddInjury", "GmCmd_ForceHealAllInjury", "GmCmd_AddPoison", "GmCmd_ForceHealAllPoison", "GmCmd_ForceEnemyUseSkill",
+			"GmCmd_ForceEnemyUseOtherAction", "GmCmd_ForceEnemyDefeat", "GmCmd_ForceSelfDefeat", "GmCmd_SetNeiliAllocation", "GmCmd_AddFlaw", "GmCmd_HealAllFlaw", "GmCmd_AddAcupoint", "GmCmd_HealAllAcupoint", "GmCmd_FightBoss", "GmCmd_FightAnimal",
+			"GmCmd_EnableEnemyAi", "GmCmd_EnableSkillFreeCast", "GetHealInjuryBanReason", "GetHealPoisonBanReason", "UseItem", "PrepareCombat", "StartCombat", "SetTimeScale", "SetPlayerAutoCombat", "SetAiOptions",
+			"SetMoveState", "GetCombatResultDisplayData", "SelectGetItem", "Surrender", "EnterBossPuppetCombat", "RepairItem", "PrepareEnemyEquipments", "EnableBulletTime", "GmCmd_SetImmortal", "CancelChangeTrick",
+			"ClearAllReserveAction", "IsInCombat", "GmCmd_FightTestOrgMember", "GmCmd_FightRandomEnemy", "GmCmd_ForceRecoverMobilityValue", "GmCmd_UnitTestSetDistanceToTarget", "GmCmd_UnitTestEquipSkill", "GmCmd_UnitTestPrepare", "GmCmd_UnitTestClearAllEquipSkill", "GetFatalDamageStepDisplayData",
+			"GetMindDamageStepDisplayData", "GetBodyPartDamageStepDisplayData", "GetCompleteDamageStepDisplayData", "GmCmd_ForceRecoverWugCount", "GmCmd_FightCharacter", "GetChangeTrickDisplayData", "ClearAffectingDefenseSkillManual", "ClearDefendInBlockAttackSkill", "GmCmd_HealAllFatal", "GmCmd_HealAllDefeatMark",
+			"GmCmd_AddAllDefeatMark", "GmCmd_AddFatal", "GmCmd_HealAllDie", "GmCmd_AddDie", "GmCmd_HealAllMind", "GmCmd_HealInjury", "GmCmd_AddMind", "SetTargetDistance", "ClearTargetDistance", "SetJumpThreshold",
+			"GetPreviewAttackRange", "SetPuppetUnyieldingFallen", "SetPuppetDisableAi", "InterruptSkillManual", "ClearAffectingMoveSkillManual", "UnlockAttack", "IgnoreAllRawCreate", "IgnoreRawCreate", "DoRawCreate", "GetAllCanRawCreateEquipmentSlots",
+			"GetUnlockSimulateResult", "GetDefeatMarksCountOutOfCombat", "ApplyCombatResultDataEffect", "ClearReserveNormalAttack", "ApplyVitalOnTeammate", "RevertVitalOnTeammate", "GmCmd_ForceRecoverTeammateCommand", "RequestValidItemsInCombat", "RequestSwordFragmentSkillIds", "UseSpecialItem",
+			"NormalAttackImmediate", "InterruptOtherActionManual", "PrepareSimulate", "PreparePreRandomTeammateCommands", "GmCmd_FightNpc", "SetCombatQuickUseItemSlotData", "GetCombatQuickUseItemSlotData", "GmCmd_FightBossInternal", "ChangeTaiwuWeaponInnerRatioByWeaponKey", "GetWeaponExpectInnerRatio",
+			"GetMarkDisplayData", "GmCmd_FightTwelveImmortals", "InvokeChickenPoints", "FinishChickenPhase", "ApplyChickenEffect"
 		};
 	}
 }

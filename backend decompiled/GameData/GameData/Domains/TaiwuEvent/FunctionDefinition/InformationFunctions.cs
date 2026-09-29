@@ -13,8 +13,8 @@ public class InformationFunctions
 	}
 
 	[EventFunction(595)]
-	private static string ApplyNormalInformation(EventScriptRuntime runtime, GameData.Domains.Character.Character character, NormalInformation normalInformation, string nextGuid1, string nextGuid2, string nextGuid3)
+	private static string ApplyNormalInformation(EventScriptRuntime runtime, GameData.Domains.Character.Character character, NormalInformation normalInformation, string effectiveGuid, string normalGuid, string ineffectiveGuid)
 	{
-		return GameData.Domains.TaiwuEvent.EventHelper.EventHelper.ApplyNormalInformation(character.GetId(), runtime.ArgBox, normalInformation, nextGuid1, nextGuid2, nextGuid3);
+		return GameData.Domains.TaiwuEvent.EventHelper.EventHelper.ApplyNormalInformation(character.GetId(), runtime.ArgBox, normalInformation, effectiveGuid, normalGuid, ineffectiveGuid);
 	}
 }

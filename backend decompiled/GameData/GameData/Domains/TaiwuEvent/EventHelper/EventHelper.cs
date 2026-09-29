@@ -16,6 +16,7 @@ using GameData.Common;
 using GameData.DLC;
 using GameData.DLC.FiveLoong;
 using GameData.DLC.Shared;
+using GameData.DLC.TameLoong;
 using GameData.DomainEvents;
 using GameData.Domains.Adventure;
 using GameData.Domains.Building;
@@ -67,7 +68,6 @@ using GameData.Domains.TaiwuEvent.Enum;
 using GameData.Domains.TaiwuEvent.EventManager;
 using GameData.Domains.TaiwuEvent.EventOption;
 using GameData.Domains.TaiwuEvent.FunctionDefinition;
-using GameData.Domains.TaiwuEvent.MonthlyEventActions;
 using GameData.Domains.World;
 using GameData.Domains.World.Display;
 using GameData.Domains.World.MonthlyEvent;
@@ -364,6 +364,7 @@ public static class EventHelper
 		return character?.GetInjuries().HasAnyInjury(isInnerInjury: false) ?? false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckRoleBodyPartInjured(GameData.Domains.Character.Character character, sbyte bodyPartType)
 	{
 		if (character == null)
@@ -417,6 +418,7 @@ public static class EventHelper
 		return character.GetDisorderOfQi() > 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static sbyte GetCharacterInjuryCount(GameData.Domains.Character.Character character)
 	{
 		Injuries injuries = character.GetInjuries();
@@ -430,6 +432,7 @@ public static class EventHelper
 		return count;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static int GetCharacterPoisonCount(GameData.Domains.Character.Character character)
 	{
 		PoisonInts poisonInts = character.GetPoisoned();
@@ -454,21 +457,25 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckHasLeftArm(GameData.Domains.Character.Character character)
 	{
 		return character?.GetHaveLeftArm() ?? false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckHasRightArm(GameData.Domains.Character.Character character)
 	{
 		return character?.GetHaveRightArm() ?? false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckHasLeftLeg(GameData.Domains.Character.Character character)
 	{
 		return character?.GetHaveLeftLeg() ?? false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckHasRightLeg(GameData.Domains.Character.Character character)
 	{
 		return character?.GetHaveRightLeg() ?? false;
@@ -512,11 +519,13 @@ public static class EventHelper
 		return character.GetFeatureIds().Contains(featureId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckRoleHasVirginity(GameData.Domains.Character.Character character)
 	{
 		return character?.HasVirginity() ?? false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckRoleIsInfertile(GameData.Domains.Character.Character character)
 	{
 		if (character == null)
@@ -536,6 +545,7 @@ public static class EventHelper
 		return featureIds.Contains(templateId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckRoleHasTwoWayAdored(int characterId)
 	{
 		return DomainManager.Character.HasTwoWayRelation(characterId, 16384);
@@ -565,6 +575,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CanCharacterBeShaved(int charId)
 	{
 		if (!DomainManager.Character.TryGetElement_Objects(charId, out var character))
@@ -643,6 +654,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CanCharacterBeKilled(int charId)
 	{
 		return charId != DomainManager.Character.GetAvoidDeathCharId();
@@ -714,6 +726,7 @@ public static class EventHelper
 		return DomainManager.Character.HasGuard(character.GetId(), character);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsGraveProtected(int graveId)
 	{
 		Grave grave = DomainManager.Character.GetElement_Graves(graveId);
@@ -730,6 +743,7 @@ public static class EventHelper
 		return (!createMotherRelation || !DomainManager.Character.TryGetElement_Objects(motherCharId, out motherChar) || motherChar.GetKidnapperId() >= 0 || motherChar.IsCompletelyInfected()) && (!createFatherRelation || !DomainManager.Character.TryGetElement_Objects(fatherCharId, out fatherChar) || fatherChar.GetKidnapperId() >= 0 || fatherChar.IsCompletelyInfected());
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool HasBloodGrandParentRelations(int charId, int relatedCharId)
 	{
 		return DomainManager.Character.HasBloodGrandParentRelations(charId, relatedCharId);
@@ -851,6 +865,7 @@ public static class EventHelper
 		return AiHelper.Relation.GetStartRelationSuccessRate_BoyOrGirlFriend(selfChar, targetChar, selfToTarget, targetToSelf, showCheckAnim: true);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckProposeMarriageSucceed(int charId, int relatedCharId)
 	{
 		GameData.Domains.Character.Character selfChar = DomainManager.Character.GetElement_Objects(charId);
@@ -891,11 +906,13 @@ public static class EventHelper
 		DomainManager.Character.UseCombatResources(Domain.MainThreadDataContext, charId, EHealActionType.Detox, detoxCountAdd);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RecoverHealCombatResources(int charId)
 	{
 		DomainManager.Character.RecoverHealCombatResources(Domain.MainThreadDataContext, charId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RecoverDetoxCombatResources(int charId)
 	{
 		DomainManager.Character.RecoverDetoxCombatResources(Domain.MainThreadDataContext, charId);
@@ -1008,6 +1025,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsCharacterHealthFull(GameData.Domains.Character.Character character)
 	{
 		short leftMaxHealth = DomainManager.Character.GetLeftMaxHealth(character.GetId());
@@ -1194,16 +1212,13 @@ public static class EventHelper
 		return DomainManager.Extra.HasCombatSkillExchangedSpecialWeapon(Domain.MainThreadDataContext, skillTemplateId);
 	}
 
-	public static bool IsInteractOfLoveInstalled()
-	{
-		return DlcManager.IsDlcInstalled(2305890uL);
-	}
-
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsGiftFromConchShip1Installed()
 	{
 		return DlcManager.IsDlcInstalled(2241120uL);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsGiftFromConchShip2Installed()
 	{
 		return DlcManager.IsDlcInstalled(2172690uL);
@@ -1214,29 +1229,44 @@ public static class EventHelper
 		return DlcManager.IsDlcInstalled(2764950uL);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsHappyNewYear2024Installed()
 	{
 		return DlcManager.IsDlcInstalled(2764960uL);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsYearOfSnakeClothInstalled()
 	{
 		return DlcManager.IsDlcInstalled(3464590uL);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsHappyNewYar2026DlcInstalled()
 	{
 		return DlcManager.IsDlcInstalled(4395170uL);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsEightYearsInstalled()
 	{
 		return DlcManager.IsDlcInstalled(4834440uL);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsGreenHillsRemainInstalled()
 	{
 		return DlcManager.IsDlcInstalled(4834450uL);
+	}
+
+	public static bool IsTaiwuAsXiangshuInstalled()
+	{
+		return DlcManager.IsDlcInstalled(5093790uL);
+	}
+
+	public static bool GetTaiwuAsXiangshuEntered()
+	{
+		return DomainManager.Story.GetTaiwuAsXiangshuEntered();
 	}
 
 	public static bool AbleToCricketBattle()
@@ -1428,6 +1458,7 @@ public static class EventHelper
 		return adventure.CoreId == coreId && adventure.StatusType == EAdventureStatusType.Ready;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool ForceOverrideMajorEvent(Location location, int coreId)
 	{
 		if (!location.IsValid())
@@ -1526,6 +1557,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckBlockHasPurpleBambooAvatar(MapBlockData mapBlock)
 	{
 		if (mapBlock == null || mapBlock.FixedCharacterSet == null)
@@ -1565,6 +1597,7 @@ public static class EventHelper
 		return (-1, -1);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckBlockHasAnimal(MapBlockData mapBlock)
 	{
 		return DomainManager.Extra.IsLocationContainsAnimal(new Location(mapBlock.AreaId, mapBlock.BlockId));
@@ -1581,6 +1614,7 @@ public static class EventHelper
 		return mapBlock != null && mapBlock.InfectedCharacterSet != null && mapBlock.InfectedCharacterSet.Count > 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int CheckEnemyEscapeRateFromTaiwu(short enemyTemplateId)
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
@@ -1623,6 +1657,7 @@ public static class EventHelper
 		return null;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static GameData.Domains.Character.Character GetBlockPurpleBambooAvatar(MapBlockData mapBlock)
 	{
 		if (mapBlock == null || mapBlock.FixedCharacterSet == null)
@@ -1640,11 +1675,7 @@ public static class EventHelper
 		return null;
 	}
 
-	public static bool IsTaiwuAvoidMapBlockEnemies()
-	{
-		return DomainManager.Taiwu.IsTaiwuAvoidMapBlockEnemies();
-	}
-
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool LocationIsAtSettlementOfArea(Location location, short areaId)
 	{
 		if (location.AreaId != areaId)
@@ -1665,6 +1696,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool LocationIsAtSettlementOfState(Location location, short stateTemplateId)
 	{
 		sbyte stateId = DomainManager.Map.GetStateIdByStateTemplateId(stateTemplateId);
@@ -1959,6 +1991,7 @@ public static class EventHelper
 		return character.GetOrganizationInfo().OrgTemplateId == targetOrganizationTemplateId;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsCharactersInHostileSects(GameData.Domains.Character.Character charA, GameData.Domains.Character.Character charB)
 	{
 		sbyte charAOrgTemplateId = charA.GetOrganizationInfo().OrgTemplateId;
@@ -1971,6 +2004,7 @@ public static class EventHelper
 		return DomainManager.Organization.GetSectFavorability(orgTemplateIdA, orgTemplateIdB) == -1;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static sbyte GetHostileSect(sbyte orgTemplateId)
 	{
 		for (sbyte i = 1; i < 15; i++)
@@ -2069,12 +2103,14 @@ public static class EventHelper
 		return Config.Organization.Instance[sectId].NoDrinking;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool HasCurrentTaiwuSendWorshipPostToSect(sbyte orgTemplateId)
 	{
 		Settlement settlement = DomainManager.Organization.GetSettlementByOrgTemplateId(orgTemplateId);
 		return DomainManager.Organization.GetElement_Sects(settlement.GetId()).GetTaiwuExploreStatus() > 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsPrincipal(int charId)
 	{
 		return DomainManager.Character.GetElement_Objects(charId).GetOrganizationInfo().Principal;
@@ -2094,6 +2130,12 @@ public static class EventHelper
 		return DomainManager.World.IsTaskInProgress(taskInfoId);
 	}
 
+	public static bool IsTaskFinished(int taskInfoId)
+	{
+		return DomainManager.World.IsTaskFinished(taskInfoId);
+	}
+
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool HasTeammates(bool ignoreBaby = false)
 	{
 		if (!ignoreBaby)
@@ -2265,6 +2307,7 @@ public static class EventHelper
 		DomainManager.Adventure.ExitMajorEvent(Domain.MainThreadDataContext);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static List<ItemKey> GetAdventureEnterItems()
 	{
 		return null;
@@ -2303,6 +2346,7 @@ public static class EventHelper
 		return data;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void SortAdventureCharacters(EventArgBox eventArgBox, bool isMajorChar, int groupId, CharacterSortType characterSortType, bool ascendingOrder)
 	{
 		AdventureCharacterSortUtils.Sort(eventArgBox, isMajorChar, groupId, characterSortType, ascendingOrder);
@@ -2346,35 +2390,15 @@ public static class EventHelper
 		return true;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void DestroyEnemyNest(EventArgBox argBox, sbyte behaviorType)
 	{
-		argBox.Get("AdventureSite", out AdventureSiteData siteData);
-		argBox.Get("AdventureLocation", out Location location);
-		short enemyNestId = EnemyNest.Instance.First((EnemyNestItem nest) => nest.AdventureId == siteData.TemplateId).TemplateId;
-		DomainManager.Adventure.DestroyEnemyNest(Domain.MainThreadDataContext, location.AreaId, enemyNestId, behaviorType);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static GameData.Domains.Character.Character CreateForcedToFollowCharacter(short areaId, sbyte gender, short adventureId)
 	{
-		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
-		sbyte enemyNestId = AdventureDomain.GetEnemyNestTemplateId(adventureId);
-		EnemyNestItem enemyNestCfg = EnemyNest.Instance[enemyNestId];
-		sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(areaId);
-		sbyte orgTemplateId = MapState.Instance[stateTemplateId].SectID;
-		short charTemplateId = OrganizationDomain.GetCharacterTemplateId(orgTemplateId, stateTemplateId, gender);
-		int leaderIndex = ((adventureId == 61) ? (orgTemplateId - 1) : (enemyNestCfg.Members.Count - 1));
-		CharacterItem enemyLeaderCfg = Config.Character.Instance[enemyNestCfg.Members[leaderIndex]];
-		OrganizationInfo orgInfo = taiwu.GetOrganizationInfo();
-		orgInfo.Grade = 0;
-		DataContext context = Domain.MainThreadDataContext;
-		IntelligentCharacterCreationInfo info = new IntelligentCharacterCreationInfo(taiwu.GetLocation(), orgInfo, charTemplateId);
-		info.BaseAttraction = (short)context.Random.Next(enemyLeaderCfg.BaseAttraction / 2, enemyLeaderCfg.BaseAttraction + 1);
-		info.Age = (short)context.Random.Next(12, 25);
-		GameData.Domains.Character.Character newCharacter = DomainManager.Character.CreateIntelligentCharacter(context, ref info);
-		DomainManager.Character.CompleteCreatingCharacter(newCharacter.GetId());
-		newCharacter.AddFeature(context, 678);
-		DomainManager.Character.ChangeFavorabilityOptional(context, newCharacter, taiwu, -10000, 0);
-		return newCharacter;
+		return null;
 	}
 
 	public static bool CheckEscapingRandomEnemy(short templateId)
@@ -2382,6 +2406,7 @@ public static class EventHelper
 		return DomainManager.Adventure.GetEscapingRandomEnemies().Contains(templateId);
 	}
 
+	[Obsolete]
 	public unsafe static ItemKey GetTraitorsGangTributeCombatSkillBook(sbyte orgTemplateId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -2398,23 +2423,13 @@ public static class EventHelper
 
 	public static bool TriggerBrideOpenContest(short settlementId)
 	{
-		MonthlyActionKey key = MonthlyEventActionsManager.PredefinedKeys["BrideOpenContestDefault"];
-		ConfigWrapperAction wrapperAction = (ConfigWrapperAction)Domain.GetMonthlyAction(key);
-		if (wrapperAction.CurrConfigMonthlyAction != null)
-		{
-			return false;
-		}
-		Settlement settlement = DomainManager.Organization.GetSettlement(settlementId);
-		sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(settlement.GetLocation().AreaId);
-		wrapperAction.CreateWrappedAction(ConfigMonthlyActionDefines.OrgTemplateIdToContestForTaiwuBride[stateTemplateId], -1);
-		return wrapperAction.CurrConfigMonthlyAction != null;
+		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsAnyBrideOpenContestTriggered()
 	{
-		MonthlyActionKey key = MonthlyEventActionsManager.PredefinedKeys["BrideOpenContestDefault"];
-		ConfigWrapperAction wrapperAction = (ConfigWrapperAction)Domain.GetMonthlyAction(key);
-		return wrapperAction.CurrConfigMonthlyAction != null;
+		return false;
 	}
 
 	public static void SetCharacterMarriageStyle1(int charId, bool isShowMarriageStyle1)
@@ -4045,6 +4060,7 @@ public static class EventHelper
 		return level <= 3;
 	}
 
+	[Obsolete]
 	public static GameData.Domains.Character.Animal TryGetAnimal(int id)
 	{
 		if (DomainManager.Extra.TryGetAnimal(id, out var animal))
@@ -4052,6 +4068,11 @@ public static class EventHelper
 			return animal;
 		}
 		throw new Exception($"Cannot find animal,animalId: {id}");
+	}
+
+	public static bool TryGetAnimal(int id, out GameData.Domains.Character.Animal animal)
+	{
+		return DomainManager.Extra.TryGetAnimal(id, out animal);
 	}
 
 	public static void RemoveAnimal(GameData.Domains.Character.Animal animal)
@@ -4106,7 +4127,10 @@ public static class EventHelper
 		GameData.Domains.Character.Character taiwu = argBox.GetCharacter("RoleTaiwu");
 		int animalId = -1;
 		argBox.Get(EventTriggerParameter.DefValue.AnimalId, ref animalId);
-		GameData.Domains.Character.Animal animal = TryGetAnimal(animalId);
+		if (!TryGetAnimal(animalId, out var animal))
+		{
+			return string.Empty;
+		}
 		short animalTemplateId = -1;
 		argBox.Get("AnimalCharacterTemplateId", ref animalTemplateId);
 		CharacterItem animalConfig = Config.Character.Instance[animalTemplateId];
@@ -4242,6 +4266,7 @@ public static class EventHelper
 		Domain.SaveGlobalEventArgumentBox();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static byte GetByteFromGlobalArgBox(string key)
 	{
 		byte value = 0;
@@ -4256,6 +4281,7 @@ public static class EventHelper
 		return value;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetShortFromGlobalArgBox(string key)
 	{
 		short value = 0;
@@ -4263,6 +4289,7 @@ public static class EventHelper
 		return value;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static ushort GetUshortFromGlobalArgBox(string key)
 	{
 		ushort value = 0;
@@ -4277,6 +4304,7 @@ public static class EventHelper
 		return value;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static float GetFloatFromGlobalArgBox(string key)
 	{
 		float value = 0f;
@@ -4334,6 +4362,7 @@ public static class EventHelper
 		return avoidValues.Items[attackHitType];
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetRolePenetrationValue(GameData.Domains.Character.Character character, bool inner)
 	{
 		if (character == null)
@@ -4344,6 +4373,7 @@ public static class EventHelper
 		return inner ? penetrationInts.Inner : penetrationInts.Outer;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetRolePenetrationResistValue(GameData.Domains.Character.Character character, bool inner)
 	{
 		if (character == null)
@@ -4364,6 +4394,7 @@ public static class EventHelper
 		return attributes.Items[attrType];
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static int GetRolePoisonByType(GameData.Domains.Character.Character character, sbyte poisonType)
 	{
 		if (character == null)
@@ -4373,6 +4404,7 @@ public static class EventHelper
 		return character.GetPoisoned().Items[poisonType];
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static int GetRolePoisonResistByType(GameData.Domains.Character.Character character, sbyte poisonType)
 	{
 		if (character == null)
@@ -4386,6 +4418,7 @@ public static class EventHelper
 		return character.GetPoisonResists().Items[poisonType];
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetRoleDisorderOfQiMaxValue()
 	{
 		return DisorderLevelOfQi.MaxValue;
@@ -4430,6 +4463,7 @@ public static class EventHelper
 		character.ChangeDisorderOfQi(Domain.MainThreadDataContext, delta);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static short GetRoleLifeSkillQualificationByType(GameData.Domains.Character.Character character, sbyte skillType)
 	{
 		if (character == null)
@@ -4458,6 +4492,7 @@ public static class EventHelper
 		return character?.GetLifeSkillAttainment(skillType) ?? 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static short GetRoleCombatSkillQualificationByType(GameData.Domains.Character.Character character, sbyte skillType)
 	{
 		if (character == null)
@@ -4476,6 +4511,7 @@ public static class EventHelper
 		return character.GetBaseCombatSkillQualifications().Items[skillType];
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetRoleCombatSkillAttainmentByType(GameData.Domains.Character.Character character, sbyte skillType)
 	{
 		return character?.GetCombatSkillAttainment(skillType) ?? 0;
@@ -4496,6 +4532,7 @@ public static class EventHelper
 		return character?.GetCurrAge() ?? 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetRoleActualAge(GameData.Domains.Character.Character character)
 	{
 		return character?.GetActualAge() ?? 0;
@@ -4510,16 +4547,19 @@ public static class EventHelper
 		return AgeGroup.GetAgeGroup(GetRoleAge(character)) == 2 && AgeGroup.GetAgeGroup(GetRoleCurrAge(character)) == 2;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetRoleHealthMax(GameData.Domains.Character.Character character)
 	{
 		return character?.GetMaxHealth() ?? 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetRoleLeftMaxHealth(GameData.Domains.Character.Character character)
 	{
 		return character?.GetLeftMaxHealth() ?? 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ChangeRoleBaseHealth(GameData.Domains.Character.Character character, short delta)
 	{
 		if (delta != 0)
@@ -4693,11 +4733,13 @@ public static class EventHelper
 		return character?.GetHappiness() ?? 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static sbyte GetRoleHappinessType(GameData.Domains.Character.Character character)
 	{
 		return character?.GetHappinessType() ?? (-1);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetRoleSamsaraCount(GameData.Domains.Character.Character character)
 	{
 		return character?.GetPreexistenceCharIds().Count ?? 0;
@@ -4758,11 +4800,13 @@ public static class EventHelper
 		return (short)Math.Clamp(changeValue, -32768, 32767);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ChangeFavorabilityOptionalFirstSightFavorability(GameData.Domains.Character.Character characterA, GameData.Domains.Character.Character characterB, short changeValue)
 	{
 		ChangeFavorabilityOptional(characterA, characterB, changeValue, 0);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ChangeFavorabilityOptionalGiftItem(GameData.Domains.Character.Character characterA, GameData.Domains.Character.Character characterB, short changeValue)
 	{
 		ChangeFavorabilityOptional(characterA, characterB, changeValue, 1);
@@ -4880,6 +4924,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RecordRoleFameActionJumpByFameType(GameData.Domains.Character.Character character, short fameActionId, sbyte targetFameType = -1, short fameMultiplier = 1)
 	{
 		character.RecordFameAction(Domain.MainThreadDataContext, fameActionId, targetFameType, fameMultiplier);
@@ -4898,6 +4943,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static void SetRoleMainAttribute(GameData.Domains.Character.Character character, sbyte attrType, short attrValue)
 	{
 		if (character == null)
@@ -5051,6 +5097,7 @@ public static class EventHelper
 		return allocation.Items[neiliType];
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetRoleWearingCloth(GameData.Domains.Character.Character character)
 	{
 		if (character == null)
@@ -5087,6 +5134,7 @@ public static class EventHelper
 		ChangeRoleInfectedValue(character, -(nowValue - setValue));
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void SetRoleInfectionValue(GameData.Domains.Character.Character character, byte infectionValue)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -5175,6 +5223,7 @@ public static class EventHelper
 		character.SetFeatureIds(featureIds, Domain.MainThreadDataContext);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static List<(ItemKey, short, bool)> GetCharacterEatingItems(GameData.Domains.Character.Character character)
 	{
 		if (character == null)
@@ -5193,6 +5242,7 @@ public static class EventHelper
 		return resultList;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void HealCharacterRandomInjury(GameData.Domains.Character.Character character)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -5240,6 +5290,7 @@ public static class EventHelper
 		character.SetDisorderOfQi(DisorderLevelOfQi.MinValue, Domain.MainThreadDataContext);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyHappiness(GameData.Domains.Character.Character character, sbyte targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyHappiness(Domain.MainThreadDataContext, character, targetValue);
@@ -5250,56 +5301,67 @@ public static class EventHelper
 		DomainManager.Character.TemporarilyModifyBaseMorality(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyFeatureIds(GameData.Domains.Character.Character character, List<short> targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyFeatureIds(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyBaseMainAttributes(GameData.Domains.Character.Character character, MainAttributes targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyBaseMainAttributes(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyDisorderOfQi(GameData.Domains.Character.Character character, short targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyDisorderOfQi(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyInjuries(GameData.Domains.Character.Character character, Injuries targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyInjuries(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyExtraNeili(GameData.Domains.Character.Character character, int targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyExtraNeili(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyConsummateLevel(GameData.Domains.Character.Character character, sbyte targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyConsummateLevel(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyBaseLifeSkillQualifications(GameData.Domains.Character.Character character, ref LifeSkillShorts targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyBaseLifeSkillQualifications(Domain.MainThreadDataContext, character, ref targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyBaseCombatSkillQualifications(GameData.Domains.Character.Character character, ref CombatSkillShorts targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyBaseCombatSkillQualifications(Domain.MainThreadDataContext, character, ref targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyResources(GameData.Domains.Character.Character character, ref ResourceInts targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyResources(Domain.MainThreadDataContext, character, ref targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyCurrMainAttributes(GameData.Domains.Character.Character character, MainAttributes targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyCurrMainAttributes(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyPoisoned(GameData.Domains.Character.Character character, ref PoisonInts targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyPoisoned(Domain.MainThreadDataContext, character, ref targetValue);
@@ -5310,16 +5372,19 @@ public static class EventHelper
 		DomainManager.Character.TemporarilyModifyCurrNeili(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyExtraNeiliAllocation(GameData.Domains.Character.Character character, NeiliAllocation targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyExtraNeiliAllocation(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyModifyXiangshuInfection(GameData.Domains.Character.Character character, byte targetValue)
 	{
 		DomainManager.Character.TemporarilyModifyXiangshuInfection(Domain.MainThreadDataContext, character, targetValue);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyChangeInjury(GameData.Domains.Character.Character character, sbyte bodyPartType, bool isInnerInjury, sbyte delta)
 	{
 		DomainManager.Character.BeginTemporaryModification(character, RevertibleCharacterPropertyType.Injuries);
@@ -5327,6 +5392,7 @@ public static class EventHelper
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static void TemporarilyChangeBaseLifeSkillQualification(GameData.Domains.Character.Character character, sbyte lifeSkillType, short delta)
 	{
 		LifeSkillShorts lifeSkillShorts = default(LifeSkillShorts);
@@ -5337,6 +5403,7 @@ public static class EventHelper
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static void TemporarilyChangeBaseCombatSkillQualification(GameData.Domains.Character.Character character, sbyte combatSkillType, short delta)
 	{
 		CombatSkillShorts combatSkillShorts = default(CombatSkillShorts);
@@ -5347,6 +5414,7 @@ public static class EventHelper
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyChangeResource(GameData.Domains.Character.Character character, sbyte resourceType, int delta)
 	{
 		DomainManager.Character.BeginTemporaryModification(character, RevertibleCharacterPropertyType.Resources);
@@ -5354,6 +5422,7 @@ public static class EventHelper
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static void TemporarilyChangeBaseMainAttribute(GameData.Domains.Character.Character character, sbyte mainAttributeType, short delta)
 	{
 		DomainManager.Character.BeginTemporaryModification(character, RevertibleCharacterPropertyType.BaseMainAttributes);
@@ -5364,6 +5433,7 @@ public static class EventHelper
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyChangeCurrMainAttribute(GameData.Domains.Character.Character character, sbyte mainAttributeType, short delta)
 	{
 		DomainManager.Character.BeginTemporaryModification(character, RevertibleCharacterPropertyType.CurrMainAttributes);
@@ -5381,6 +5451,7 @@ public static class EventHelper
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyAddFeatureId(GameData.Domains.Character.Character character, short featureId)
 	{
 		DomainManager.Character.BeginTemporaryModification(character, RevertibleCharacterPropertyType.FeatureIds);
@@ -5388,12 +5459,14 @@ public static class EventHelper
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TemporarilyChangePoisoned(GameData.Domains.Character.Character character, sbyte poisonType, int delta)
 	{
 		DomainManager.Character.BeginTemporaryModification(character, RevertibleCharacterPropertyType.Poisoned);
 		DomainManager.Character.RecordTemporaryModification();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ClearAllTemporaryModifications()
 	{
 		DomainManager.Character.RevertAllTemporaryModificationsOfAllCharacters(Domain.MainThreadDataContext);
@@ -5422,6 +5495,7 @@ public static class EventHelper
 		return DomainManager.Building.GetChickenData(chickenId).TemplateId;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	private static void SpiritualDebtInteractionChangeMorality(int charId, sbyte targetBehaviorType)
 	{
 		if (DomainManager.Character.TryGetElement_Objects(charId, out var character))
@@ -5543,6 +5617,7 @@ public static class EventHelper
 		DomainManager.Character.RemoveKidnappedCharacter(Domain.MainThreadDataContext, prisonerCharId, charId, isEscaped);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static KidnappedCharacter GetKidnappedCharacter(int kidnapperId, int kidnappedCharId)
 	{
 		KidnappedCharacterList kidnappedChars = DomainManager.Character.GetKidnappedCharacters(kidnapperId);
@@ -6223,9 +6298,9 @@ public static class EventHelper
 		DomainManager.Character.ConvertFixedCharacter(Domain.MainThreadDataContext, character, location, recreateAttributesAndQualifications);
 	}
 
-	public static void ConvertRandomEnemy(GameData.Domains.Character.Character fixedChar, Location location)
+	public static void ConvertRandomEnemy(GameData.Domains.Character.Character character, Location location)
 	{
-		DomainManager.Character.ConvertRandomEnemy(Domain.MainThreadDataContext, fixedChar, location);
+		DomainManager.Character.ConvertRandomEnemy(Domain.MainThreadDataContext, character, location);
 	}
 
 	public static int CreateFixedCharacterGrave(short templateId, Location location, sbyte level, int deathDate = int.MinValue)
@@ -6413,6 +6488,7 @@ public static class EventHelper
 		return grave.GetLevel();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetBloodParentId(int charId, sbyte gender)
 	{
 		return DomainManager.Character.GetBloodParent(charId, gender);
@@ -6544,6 +6620,17 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.SelectCombatSkill, charId, combatSKillIdList);
 	}
 
+	public static void StartSelectCombatSkillOfSpiritualDebtInteractionWudang(string nextEventGuid, EventArgBox argBox)
+	{
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		List<short> combatSKillIdList = GetCharCombatSkillList(taiwu.GetId(), 0, -1, 0, 8);
+		if (!string.IsNullOrEmpty(nextEventGuid))
+		{
+			AddEventInListenWithActionName(nextEventGuid, argBox, "FinishSelectCombatSkill");
+		}
+		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.SelectCombatSkillOfSpiritualDebtInteractionWudang, taiwu.GetId(), combatSKillIdList);
+	}
+
 	public static void CreateLifeSkillSelectRequestOfCharacter(TaiwuEventItem eventItem, int optionIndex, int charId, string resultSaveKey, List<short> lifeSKillIdList)
 	{
 		if (eventItem == null)
@@ -6640,6 +6727,7 @@ public static class EventHelper
 		return characters[index];
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CompareCombatPower(int charIdA, int charIdB)
 	{
 		return AdventureCharacterSortUtils.CompareCombatPower(charIdA, charIdB) >= 0;
@@ -6662,6 +6750,7 @@ public static class EventHelper
 		return DomainManager.Character.TryGetFixedCharacterByTemplateId(templateId, out character);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void StartSelectChar(string selectCompleteEvent, EventArgBox argBox, Predicate<GameData.Domains.Character.Character> predicate = null)
 	{
 		CharacterSet characterSet = DomainManager.Taiwu.GetGroupCharIds();
@@ -6707,6 +6796,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.UltimateSelectCharacterForDirectSamsaraMother, res);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void StartSelectChar(string selectCompleteEvent, EventArgBox argBox, List<GameData.Domains.Character.Character> characters)
 	{
 		List<int> charIdList = ObjectPool<List<int>>.Instance.Get();
@@ -6777,6 +6867,7 @@ public static class EventHelper
 		return count > 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static CharacterSet GetGroup(int leaderId)
 	{
 		return DomainManager.Character.GetGroup(leaderId);
@@ -6807,6 +6898,7 @@ public static class EventHelper
 		return Config.Character.Instance[charTemplateId].ConsummateLevel;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsCharacterAllPoisonImmune(GameData.Domains.Character.Character character)
 	{
 		for (sbyte i = 0; i < 6; i++)
@@ -6831,6 +6923,7 @@ public static class EventHelper
 		character.SetOrganizationInfo(OrganizationInfo.None, context);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public unsafe static bool CheckCharacterSamsara(int charA, int charB)
 	{
 		CharacterSamsaraData characterSamsaraData = DomainManager.Character.GetCharacterSamsaraData(charA);
@@ -7090,6 +7183,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void SetCharacterCustomName(GameData.Domains.Character.Character character, int parentId, string customGivenName)
 	{
 		GameData.Domains.Character.Character parentChar;
@@ -7449,6 +7543,18 @@ public static class EventHelper
 		}
 	}
 
+	public static void RemoveRelation(int charId, int relatedCharId, ushort relationType)
+	{
+		if (RelationType.ContainsNonRemovableRelations(relationType))
+		{
+			throw new Exception($"Unable to remove relations {relationType} that contains  non-removable relations in event.");
+		}
+		if (DomainManager.Character.TryGetRelation(charId, relatedCharId, out var relatedCharacter) && (relatedCharacter.RelationType & relationType) != 0)
+		{
+			EndRelation(charId, relatedCharId, relationType);
+		}
+	}
+
 	public static void AddAdoptiveParent(int charId, int relatedCharId)
 	{
 		DomainManager.Character.AddAdoptiveParentRelations(Domain.MainThreadDataContext, charId, relatedCharId);
@@ -7459,8 +7565,16 @@ public static class EventHelper
 	{
 		DomainManager.Character.AddHusbandOrWifeRelations(Domain.MainThreadDataContext, charId, relatedCharId);
 		DomainManager.TaiwuEvent.RecordCharacterRelationChanged(isRemove: false, charId, relatedCharId, 1024);
+		if (DomainManager.Character.TryGetElement_Objects(charId, out var character))
+		{
+			Location location = character.GetValidLocation();
+			int currDate = DomainManager.World.GetCurrDate();
+			LifeRecordCollection lifeRecordCollection = DomainManager.LifeRecord.GetLifeRecordCollection();
+			lifeRecordCollection.AddProposeMarriageSucceed(charId, currDate, relatedCharId, location);
+		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RestoreActualParentRelation(int childId, int parentId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -7604,6 +7718,7 @@ public static class EventHelper
 		return charIdList;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RemoveCharactersOfRelationsFromCore(int mainCharId, List<int> charIdCore, ushort relationFlag)
 	{
 		if (charIdCore == null || charIdCore.Count <= 0 || mainCharId < 0)
@@ -7735,6 +7850,7 @@ public static class EventHelper
 		return selfChar.GetPlotHarmActionPhase(random, targetChar, alertFactor, showCheckAnim);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static sbyte GetStealCombatSkillActionPhase(GameData.Domains.Character.Character selfChar, GameData.Domains.Character.Character targetChar, short combatSkillTemplateId, bool showCheckAnim = false)
 	{
 		IRandomSource random = Domain.MainThreadDataContext.Random;
@@ -7744,6 +7860,7 @@ public static class EventHelper
 		return selfChar.GetStealCombatSkillActionPhase(random, targetChar, combatSkillType, grade, showCheckAnim);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static sbyte GetStealLifeSkillActionPhase(GameData.Domains.Character.Character selfChar, GameData.Domains.Character.Character targetChar, short lifeSkillTemplateId, bool showCheckAnim = false)
 	{
 		IRandomSource random = Domain.MainThreadDataContext.Random;
@@ -8939,42 +9056,22 @@ public static class EventHelper
 			AddRelation(taiwu.GetId(), character.GetId(), 16384);
 			if (GetRoleBehavior(character) == 0)
 			{
-				if (IsDlcInstalled(2305890u))
-				{
-					return "a51ee3fc-bcbb-4f25-b3f4-dd9c3b9a05fa";
-				}
 				return "2b3a082e-d12b-492a-9539-634aa80bbca7";
 			}
 			if (GetRoleBehavior(character) == 1)
 			{
-				if (IsDlcInstalled(2305890u))
-				{
-					return "3df07665-f907-45e5-99cd-1c67cdc87186";
-				}
 				return "8b83baba-3429-41c8-baee-832e8af04349";
 			}
 			if (GetRoleBehavior(character) == 2)
 			{
-				if (IsDlcInstalled(2305890u))
-				{
-					return "255a434c-5c9a-4f65-bd1b-6e9db5143186";
-				}
 				return "ace4423d-fc88-4a9a-8b3a-c715b3f1e29f";
 			}
 			if (GetRoleBehavior(character) == 3)
 			{
-				if (IsDlcInstalled(2305890u))
-				{
-					return "8ecdbe26-a61e-49ab-80e9-248a899f709b";
-				}
 				return "97afbfce-3251-465e-a566-9bad8ddffa46";
 			}
 			if (GetRoleBehavior(character) == 4)
 			{
-				if (IsDlcInstalled(2305890u))
-				{
-					return "f375d1a2-2450-4794-b58f-6939569b179f";
-				}
 				return "4e13a531-ff44-4b63-b996-df654f81b9dd";
 			}
 		}
@@ -9006,6 +9103,7 @@ public static class EventHelper
 		return string.Empty;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static string ExecuteStealLifeSkill(EventArgBox argBox)
 	{
 		int charId = -1;
@@ -9038,6 +9136,7 @@ public static class EventHelper
 		};
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static string ExecuteStealCombatSkill(EventArgBox argBox)
 	{
 		int charId = -1;
@@ -9513,6 +9612,33 @@ public static class EventHelper
 		return DomainManager.Story.TryGetJixi();
 	}
 
+	public static TwelveImmortalsItem GetTwelveImmortalsConfig(int charId)
+	{
+		if (!DomainManager.Character.TryGetElement_Objects(charId, out var character))
+		{
+			return null;
+		}
+		short characterTemplateId = character.GetTemplateId();
+		foreach (TwelveImmortalsItem config in (IEnumerable<TwelveImmortalsItem>)TwelveImmortals.Instance)
+		{
+			if (characterTemplateId == config.Character)
+			{
+				return config;
+			}
+		}
+		return null;
+	}
+
+	public static bool IsBossCharacter(GameData.Domains.Character.Character character)
+	{
+		return CombatDomain.CharId2BossId.ContainsKey(character.GetTemplateId());
+	}
+
+	public static bool IsHideCharacterStates(GameData.Domains.Character.Character character)
+	{
+		return character.IsActiveExternalRelationState(188uL);
+	}
+
 	public static void SetGraveLevel(int targetGraveId, sbyte targetLevel)
 	{
 		if (targetLevel < 0)
@@ -9756,6 +9882,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ApplyAddMenteeByThreatening(int selfCharId, int threatenedCharId, int nominatedCharId)
 	{
 		if (DomainManager.Character.TryGetElement_Objects(nominatedCharId, out var _) && DomainManager.Character.TryGetElement_Objects(threatenedCharId, out var threatenedChar) && RelationTypeHelper.AllowAddingMenteeRelation(threatenedCharId, nominatedCharId))
@@ -9911,6 +10038,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ApplySeverMenteeByThreatening(int selfCharId, int threatenedCharId, int nominatedCharId)
 	{
 		if (DomainManager.Character.TryGetElement_Objects(threatenedCharId, out var threatenedChar) && DomainManager.Character.TryGetElement_Objects(nominatedCharId, out var _) && DomainManager.Character.HasRelation(threatenedCharId, nominatedCharId, 4096) && DomainManager.Character.HasRelation(nominatedCharId, threatenedCharId, 2048))
@@ -10390,6 +10518,7 @@ public static class EventHelper
 		return CombatDomain.CheckRopeHitOutOfCombat(Domain.MainThreadDataContext.Random, useChar, targetChar, combatType, useMaxMarkCount, ItemTemplateHelper.GetGrade(ropeKey.ItemType, ropeKey.TemplateId));
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void GetExpAndAuthorityAndAreaSpiritualDebtOutOfCombat(List<short> enemyTemplateIdList)
 	{
 		DomainManager.Combat.GetExpAndAuthorityAndAreaSpiritualDebtOutOfCombat(Domain.MainThreadDataContext, enemyTemplateIdList);
@@ -10408,6 +10537,10 @@ public static class EventHelper
 
 	public static string GetTriggeringRandomEnemyEventGuid(short enemyLeaderId)
 	{
+		if (DomainManager.Story.GetTaiwuAsXiangshuEntered() && IsXiangshuMinion(enemyLeaderId))
+		{
+			return "938b06f7-bfea-4488-83b6-2a79f3490132";
+		}
 		if (!DomainManager.Combat.TryGetWipeOutType(enemyLeaderId, out var type))
 		{
 			return "e5ecfaee-b6bc-4d5a-a15b-71b633b5a17a";
@@ -10422,10 +10555,6 @@ public static class EventHelper
 	public static bool TryTriggerRandomEnemy(EventArgBox argBox)
 	{
 		if (DomainManager.TaiwuEvent.GetHideAllMapBlockCharacters())
-		{
-			return false;
-		}
-		if (IsTaiwuAvoidMapBlockEnemies())
 		{
 			return false;
 		}
@@ -10448,6 +10577,10 @@ public static class EventHelper
 		}
 		SetMapRandomEnemyListToArgBox(argBox, "EnemyGroup", group);
 		short enemyLeaderId = group[0].TemplateId;
+		if (DomainManager.Story.GetTaiwuAsXiangshuEntered() && IsXiangshuMinion(enemyLeaderId))
+		{
+			return false;
+		}
 		sbyte taiwuFrameType = taiwu.GetFameType();
 		if (enemyLeaderId >= 375 && enemyLeaderId <= 383 && !FameType.AttackByRighteous(taiwuFrameType))
 		{
@@ -10670,8 +10803,9 @@ public static class EventHelper
 		skillIdList.RemoveAll(delegate(short skillId)
 		{
 			CombatSkillItem combatSkillItem = Config.CombatSkill.Instance[skillId];
+			short bookId = combatSkillItem.BookId;
 			GameData.Domains.CombatSkill.CombatSkill element_CombatSkills = DomainManager.CombatSkill.GetElement_CombatSkills(new CombatSkillKey(charId, skillId));
-			bool flag = (type >= 0 && combatSkillItem.Type != type) || (sectId >= 0 && combatSkillItem.SectId != sectId) || combatSkillItem.Grade < minGrade || combatSkillItem.Grade > maxGrade || (needBreak && !CombatSkillStateHelper.IsBrokenOut(element_CombatSkills.GetActivationState()));
+			bool flag = bookId < 0 || (type >= 0 && combatSkillItem.Type != type) || (sectId >= 0 && combatSkillItem.SectId != sectId) || combatSkillItem.Grade < minGrade || combatSkillItem.Grade > maxGrade || (needBreak && !CombatSkillStateHelper.IsBrokenOut(element_CombatSkills.GetActivationState()));
 			if (!flag && requireTaiwuNotLearnAndRead)
 			{
 				flag = DomainManager.Taiwu.TryGetTaiwuCombatSkill(skillId, out var combatSkill) || DomainManager.Taiwu.TryGetNotLearnCombatSkillReadingProgress(skillId, out combatSkill);
@@ -10741,6 +10875,7 @@ public static class EventHelper
 		return itemKey;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RevokeSectCombatSkill(int charId, sbyte sectId, bool onlyRemoveGradeAboveChar = false)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -10905,6 +11040,10 @@ public static class EventHelper
 
 	public static void LearnCombatSkillInSectCompetition(GameData.Domains.Character.Character teacher, GameData.Domains.Character.Character student, short combatSkillId)
 	{
+		if (Config.CombatSkill.Instance[combatSkillId].BookId < 0)
+		{
+			return;
+		}
 		sbyte skillBehaviorType = GetCharCombatSkillBehaviorType(teacher.GetId(), combatSkillId);
 		if (skillBehaviorType < 0)
 		{
@@ -10939,6 +11078,10 @@ public static class EventHelper
 
 	public static ItemKey TaiwuLearnCombatSkillInSectCompetition(GameData.Domains.Character.Character teacher, short combatSkillTemplateId)
 	{
+		if (Config.CombatSkill.Instance[combatSkillTemplateId].BookId < 0)
+		{
+			return ItemKey.Invalid;
+		}
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
 		List<short> taiwuList = GetCharCombatSkillList(taiwu.GetId(), -1, -1, 0, 8);
 		if (!taiwuList.Contains(combatSkillTemplateId))
@@ -11449,6 +11592,13 @@ public static class EventHelper
 		return DomainManager.Extra.GetDreamBackDlcEventArgBoxPublic();
 	}
 
+	public static EventArgBox GetDlcArgBox(uint appId)
+	{
+		DataContext context = Domain.MainThreadDataContext;
+		return DomainManager.Extra.GetOrCreateDlcArgBox(appId, context);
+	}
+
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsDlcEightYearsCanEnter()
 	{
 		if (GetBoolFromGlobalArgBox("ConchShip_PresetKey_FuyuHiltGuiding"))
@@ -11458,6 +11608,7 @@ public static class EventHelper
 		return !GetDlcArgBoxBool(EightYearsConstants.ClothGetFlag);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void AddDlcEightYearsCloth(string afterEvent, EventArgBox argBox)
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
@@ -11477,6 +11628,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void OnExitDlcEightYearsCloth()
 	{
 		EventArgBox argBox = GetDlcArgBox();
@@ -11484,6 +11636,7 @@ public static class EventHelper
 		SaveDlcArgBox();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsDlcGreenHillsRemainCanEnter()
 	{
 		if (GetBoolFromGlobalArgBox("ConchShip_PresetKey_FuyuHiltGuiding"))
@@ -11493,6 +11646,7 @@ public static class EventHelper
 		return !GetDlcArgBoxBool(GreenHillsRemainConstants.ClothGetFlag);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void AddDlcGreenHillsRemainCloth(string afterEvent, EventArgBox argBox)
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
@@ -11512,6 +11666,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void OnExitDlcGreenHillsRemainCloth()
 	{
 		EventArgBox argBox = GetDlcArgBox();
@@ -11745,6 +11900,7 @@ public static class EventHelper
 		SaveDlcArgBox();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static ItemKey AddEquipmentItemToRole(GameData.Domains.Character.Character character, sbyte itemType, short itemTemplateId, short equipmentEffectId = -1, bool tryEquipOn = true)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -11823,6 +11979,7 @@ public static class EventHelper
 		return DomainManager.Item.CreateItem(Domain.MainThreadDataContext, itemType, itemTemplateId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static ItemKey AddRandomMedicineToRole(GameData.Domains.Character.Character character, short itemSubType, int amount, sbyte expectedGrade = -1)
 	{
 		Tester.Assert(ItemSubType.GetType(itemSubType) == 8);
@@ -12115,6 +12272,7 @@ public static class EventHelper
 		DomainManager.Character.GetElement_Objects(charId).SetHatingItemRevealed(revealed, Domain.MainThreadDataContext);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool ConfiscateMaxGradeItem(int charId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -12153,6 +12311,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void GenerateSectClothing(int charId, sbyte orgTemplateId, sbyte grade)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -12446,6 +12605,7 @@ public static class EventHelper
 		return item;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static ItemKey SelectCharacterTopGradeItem(int charId, bool includeTransferable = false)
 	{
 		if (!DomainManager.Character.TryGetElement_Objects(charId, out var character))
@@ -12575,6 +12735,7 @@ public static class EventHelper
 		return counter;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static List<ItemKey> GetCharCricketList(int charId, int minWinCount = 0)
 	{
 		Dictionary<ItemKey, int> inventoryItems = DomainManager.Character.GetElement_Objects(charId).GetInventory().Items;
@@ -12609,6 +12770,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void SetCricketLeftLife(ItemKey itemKey, int leftLife)
 	{
 		if (DomainManager.Item.TryGetElement_Crickets(itemKey.Id, out var cricket))
@@ -13041,6 +13203,10 @@ public static class EventHelper
 	{
 		List<ItemKey> books = new List<ItemKey>();
 		List<sbyte> bookTypes = DomainManager.LegendaryBook.GetCharOwnedBookTypes(charId);
+		if (bookTypes == null)
+		{
+			return books;
+		}
 		for (int i = 0; i < bookTypes.Count; i++)
 		{
 			ItemKey book = DomainManager.LegendaryBook.GetLegendaryBookItem(bookTypes[i]);
@@ -13050,6 +13216,16 @@ public static class EventHelper
 			}
 		}
 		return books;
+	}
+
+	public static bool CharacterHasLegendaryBook(int charId)
+	{
+		List<sbyte> bookTypes = DomainManager.LegendaryBook.GetCharOwnedBookTypes(charId);
+		if (bookTypes != null && bookTypes.Count > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	public static void CreateRandomEnemiesOnValidBlocks(Location location, short maxSteps, int enemyAmount)
@@ -13177,6 +13353,7 @@ public static class EventHelper
 		return itemKey;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static List<short> GetNorLearnLifeSkillList(int charId, sbyte grade, sbyte type = -1)
 	{
 		List<short> notLearnSkillList = new List<short>();
@@ -13331,6 +13508,7 @@ public static class EventHelper
 		return config.LearnLifeSkillTypes.Contains(lifeSkillType);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsCanThreaten(int charA, int charB)
 	{
 		GameData.Domains.Character.Character characterA = DomainManager.Character.GetElement_Objects(charA);
@@ -13338,6 +13516,7 @@ public static class EventHelper
 		return characterA.GetConsummateLevel() > characterB.GetConsummateLevel();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsThreatenSuccess(int charA, int charB, sbyte concessionCount)
 	{
 		GameData.Domains.Character.Character characterA = DomainManager.Character.GetElement_Objects(charA);
@@ -13515,6 +13694,66 @@ public static class EventHelper
 		return false;
 	}
 
+	public static bool CanTameLoong()
+	{
+		return DlcManager.IsDlcInstalled(ImplementedDlc.DefValue.TameLoong.AppId);
+	}
+
+	public static bool CharacterIsLoong(GameData.Domains.Character.Character character)
+	{
+		return TameLoongData.GetEnemyTemplateIdByCharacterTemplateId(character.GetTemplateId()) != -1;
+	}
+
+	public static int GetLoongEnemyTemplateIdByItemKey(ItemKey key)
+	{
+		return TameLoongData.GetEnemyTemplateId(key);
+	}
+
+	public static int LoongPolymorphState(short enemyTemplateId)
+	{
+		return TameLoongEntry.PolymorphState(enemyTemplateId);
+	}
+
+	public static void ApplyMonthlyEventAnimalTamingResult(EventArgBox argBox, int combatResult)
+	{
+		argBox.Get("MonthlyEvent_arg1", out Location location);
+		argBox.Get("MonthlyEvent_arg2", out ItemKey itemKey);
+		argBox.Get("MonthlyEvent_arg3", out Location targetLocation);
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		GameData.Domains.Character.Animal animal = GetOrCreateAnimalByItemKey(itemKey);
+		LifeRecordCollection lifeRecordCollection = GetLifeRecordCollection();
+		int date = GetGameDate();
+		if ((combatResult == 0 || combatResult == 5) ? true : false)
+		{
+			ApplyAnimalTamingResult(taiwu, animal, isWin: true, targetLocation, argBox.GetOrDefault("ItemKeySeizeCarrierInCombat", ItemKey.Invalid));
+			AddInventoryItem(taiwu, itemKey);
+			int equipmentSlot = 0;
+			if (argBox.Get("EquipmentSlot", ref equipmentSlot) && equipmentSlot >= 0)
+			{
+				ChangeEquipment(taiwu.GetId(), -1, (sbyte)equipmentSlot, itemKey);
+			}
+			lifeRecordCollection.AddTameCarrierSucceed(taiwu.GetId(), date, itemKey.ItemType, itemKey.TemplateId, location);
+		}
+		else
+		{
+			ApplyAnimalTamingResult(taiwu, animal, isWin: false, targetLocation, ItemKey.Invalid);
+			if ((uint)(combatResult - 1) <= 3u)
+			{
+				lifeRecordCollection.AddTameCarrierFail(taiwu.GetId(), date, itemKey.ItemType, itemKey.TemplateId, location);
+			}
+			else
+			{
+				lifeRecordCollection.AddReleaseCarrier(taiwu.GetId(), date, itemKey.ItemType, itemKey.TemplateId, location);
+			}
+		}
+	}
+
+	public static int GetMainStoryEndingLine()
+	{
+		int line = -1;
+		return DomainManager.TaiwuEvent.GetGlobalEventArgumentBox().Get("MainStoryEndingLine", ref line) ? line : (-1);
+	}
+
 	public static bool IsTaiwuHaveLoongCombatMark(short characterTemplateId)
 	{
 		short fiveLoongCharacterTemplateId = characterTemplateId;
@@ -13669,7 +13908,7 @@ public static class EventHelper
 
 	public static short GetMapBlockLoongTemplateId(Location location, bool isCharacterClicked)
 	{
-		if (IsTaiwuAvoidMapBlockEnemies() && !isCharacterClicked)
+		if (!isCharacterClicked)
 		{
 			return -1;
 		}
@@ -13885,6 +14124,7 @@ public static class EventHelper
 		return DomainManager.Extra.BringUpJiaoFailProb(jiao);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int CalcCaptureEscapeJiaoRandomPropertyChangeProb(int jiaoId)
 	{
 		GameData.DLC.FiveLoong.Jiao jiao = TryGetJiaoData(jiaoId);
@@ -14019,6 +14259,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void UpdateJiaoEvolveRemainingMonth(int jiaoId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -14034,6 +14275,7 @@ public static class EventHelper
 		DomainManager.Extra.ChangeNurturance(context, poolId, nurturanceTemplateId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static ItemKey JiaoTakeOut(int poolId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -14095,6 +14337,7 @@ public static class EventHelper
 		return jiao.Id;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short JiaoGetCharIdByPool(int poolId)
 	{
 		if (!DomainManager.Extra.TryGetJiaoFromPool(poolId, out var jiao))
@@ -14215,6 +14458,7 @@ public static class EventHelper
 		DomainManager.Extra.SetJiaoFostered(poolId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool JiaoIsFostered(int poolId)
 	{
 		return DomainManager.Extra.IsJiaoFostered(poolId);
@@ -14227,10 +14471,12 @@ public static class EventHelper
 		int jiaoId = 0;
 		argBox.Get("JiaoId", ref jiaoId);
 		GameData.Domains.Character.Character taiwu = argBox.GetCharacter("RoleTaiwu");
-		Location taiwuLocation = taiwu.GetLocation();
 		int animalId = -1;
 		argBox.Get(EventTriggerParameter.DefValue.AnimalId, ref animalId);
-		GameData.Domains.Character.Animal animal = TryGetAnimal(animalId);
+		if (!TryGetAnimal(animalId, out var animal))
+		{
+			return string.Empty;
+		}
 		ItemKey itemKey = animal.ItemKey;
 		bool isMaterial = itemKey.ItemType == 5;
 		GameData.Domains.Character.Character jiao = argBox.GetCharacter("Jiao");
@@ -14342,6 +14588,7 @@ public static class EventHelper
 		lifeRecordCollection.AddDLCLoongRidingEffectBaxia02(taiwuCharId, currDate, location, childOfLoongId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool GetMainStoryPartTwoUnLockState()
 	{
 		return true;
@@ -14371,6 +14618,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.OpenMonthNotifyForCricketContent);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void OpenMajorEventPrepare(int majorEventCoreId)
 	{
 		Location taiwuLocation = DomainManager.Taiwu.GetTaiwu().GetLocation();
@@ -14512,9 +14760,10 @@ public static class EventHelper
 		DomainManager.World.SetSwordTombStatus(Domain.MainThreadDataContext, xiangshuAvatarIdTasksInOrder[0], 2);
 	}
 
-	public static void CreateAllSwordTombAdventure()
+	public static void CreateAllSwordTombAdventure(bool includeFirst)
 	{
-		for (int i = 1; i < 8; i++)
+		int startIndex = ((!includeFirst) ? 1 : 0);
+		for (int i = startIndex; i < 8; i++)
 		{
 			Location swordTombLocation = DomainManager.Map.GetElement_SwordTombLocations(i);
 			List<Location> tombLocationList = GetBlockLocationGroup(swordTombLocation);
@@ -14566,6 +14815,11 @@ public static class EventHelper
 	}
 
 	public static void MakeBrokenPerformAreaCharacterAllDead()
+	{
+		GameData.GameDataBridge.GameDataBridge.StartNextFrame(MakeBrokenPerformAreaCharacterAllDeadImmediate);
+	}
+
+	private static void MakeBrokenPerformAreaCharacterAllDeadImmediate()
 	{
 		DataContext context = Domain.MainThreadDataContext;
 		MapDomain mapDomain = DomainManager.Map;
@@ -15162,12 +15416,12 @@ public static class EventHelper
 
 	public static void StartUnlockTaiwuStation(EventArgBox argBox, string afterEvent)
 	{
-		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		Location stationLocation = DomainManager.Taiwu.GetTaiwuVillageStationLocation();
 		if (!string.IsNullOrEmpty(afterEvent))
 		{
 			AddEventInListenWithActionName(afterEvent, argBox, "UnlockTaiwuStationComplete");
 		}
-		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.StartUnlockTaiwuStation, taiwu.GetLocation());
+		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.StartUnlockTaiwuStation, stationLocation);
 	}
 
 	public static void ExecuteTaiwuVillageStationOpenDate()
@@ -16068,6 +16322,7 @@ public static class EventHelper
 		{
 			throw new Exception("no available enemyTeam passed !");
 		}
+		argBox.Set("EnemyLeaderId", enemyTeam[0]);
 		DomainManager.Combat.CombatEntry(context, enemyTeam, combatConfigId);
 	}
 
@@ -16246,6 +16501,7 @@ public static class EventHelper
 		return true;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ChangeSafetyForSettlementsInArea(short areaId, int delta)
 	{
 		DomainManager.Map.ChangeSettlementSafetyInArea(Domain.MainThreadDataContext, areaId, delta);
@@ -16258,6 +16514,7 @@ public static class EventHelper
 		settlement.ChangeSafety(Domain.MainThreadDataContext, delta);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ChangeCultureForSettlementsInArea(short areaId, int delta)
 	{
 		DomainManager.Map.ChangeSettlementCultureInArea(Domain.MainThreadDataContext, areaId, delta);
@@ -16338,7 +16595,7 @@ public static class EventHelper
 	{
 		Settlement settlement = DomainManager.Organization.GetSettlement(settlementId);
 		sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(settlement.GetLocation().AreaId);
-		sbyte areaTemplateId = MapState.Instance[stateTemplateId].MainAreaID;
+		short areaTemplateId = MapState.Instance[stateTemplateId].MainAreaID;
 		return MapArea.Instance[areaTemplateId].Name;
 	}
 
@@ -16363,6 +16620,7 @@ public static class EventHelper
 		return DomainManager.Map.GetBlockData(areaId, blockId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static EMapBlockType GetMapBlockType(short areaId, short blockId)
 	{
 		short blockTemplateId = DomainManager.Map.GetBlockData(areaId, blockId).TemplateId;
@@ -16438,6 +16696,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static MapBlockData GetRandomEdgeBlock(short areaId, sbyte edgeType, bool excludeAdventureLocation = false)
 	{
 		if (edgeType == 4)
@@ -16512,7 +16771,6 @@ public static class EventHelper
 
 	public static void RemoveAdventureSite(short areaId, short blockId, bool isTimeout, bool isComplete)
 	{
-		DomainManager.Adventure.RemoveAdventureSite(Domain.MainThreadDataContext, areaId, blockId, isTimeout, isComplete);
 	}
 
 	public static byte GetStepCountBetweenBlocksInSameArea(Location blockALocation, Location blockBLocation)
@@ -16629,6 +16887,7 @@ public static class EventHelper
 		return new Location(areaId, result);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static Location GetAreaStationLocation(short areaId)
 	{
 		return new Location(areaId, DomainManager.Map.GetElement_Areas(areaId).StationBlockId);
@@ -16639,6 +16898,7 @@ public static class EventHelper
 		return DomainManager.Map.GetElement_Areas(areaId).SettlementInfos.Select((SettlementInfo settlementInfo) => new Location(areaId, settlementInfo.BlockId)).ToList();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsLocationRangeHasBlockTemplate(Location location, int range, short blockTemplateId)
 	{
 		List<MapBlockData> neighborBlocks = ObjectPool<List<MapBlockData>>.Instance.Get();
@@ -16941,6 +17201,7 @@ public static class EventHelper
 		return DomainManager.Adventure.QueryMajorEventInLocation(location)?.CoreId ?? 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static Config.AdventureItem GetAdventureConfigOfLocation(Location location)
 	{
 		return null;
@@ -17044,6 +17305,7 @@ public static class EventHelper
 		return DomainManager.Map.GetRandomGraveBlock(context.Random, location);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static Location GetLocationExpectedCurrentState(Location currentLocation)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -17323,11 +17585,13 @@ public static class EventHelper
 		DomainManager.Merchant.ChangeMerchantFavorability(Domain.MainThreadDataContext, merchantType, delta);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetMerchantFavorability(sbyte merchantType)
 	{
 		return DomainManager.Merchant.GetCumulativeMoney(merchantType);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetMerchantFavorabilityPercent(sbyte merchantType)
 	{
 		return DomainManager.Merchant.GetCurFavorability(merchantType);
@@ -17672,12 +17936,12 @@ public static class EventHelper
 		}
 	}
 
-	public static string ApplyNormalInformation(int charId, EventArgBox argBox, NormalInformation normalInformation, string nextEventGuid1, string nextEventGuid2, string nextEventGuid3)
+	public static string ApplyNormalInformation(int charId, EventArgBox argBox, NormalInformation normalInformation, string effectiveGuid, string normalGuid, string ineffectiveGuid)
 	{
-		return ApplyNormalInformationWithEffectRate(charId, argBox, normalInformation, nextEventGuid1, nextEventGuid2, nextEventGuid3, 100);
+		return ApplyNormalInformationWithEffectRate(charId, argBox, normalInformation, effectiveGuid, normalGuid, ineffectiveGuid, 100);
 	}
 
-	public static string ApplyNormalInformationWithEffectRate(int charId, EventArgBox argBox, NormalInformation normalInformation, string nextEventGuid1, string nextEventGuid2, string nextEventGuid3, int effectRate, bool canChangeAlertness = true)
+	public static string ApplyNormalInformationWithEffectRate(int charId, EventArgBox argBox, NormalInformation normalInformation, string effectiveGuid, string normalGuid, string ineffectiveGuid, int effectRate, bool canChangeAlertness = true)
 	{
 		sbyte useResultType = GetNormalInformationUseResultType(charId, normalInformation);
 		InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
@@ -17725,7 +17989,7 @@ public static class EventHelper
 			{
 				ChangeAlertnessOnTalkByNormalInformationGood(charId, normalInformation.Level, info.TemplateId);
 			}
-			return nextEventGuid1;
+			return effectiveGuid;
 		case 1:
 			CostNormalInformationUsedCount(EventArgBox.TaiwuCharacterId, normalInformation);
 			ApplyNormalInformationSideEffectWithEffectRate(normalInformation, 1, EventArgBox.TaiwuCharacterId, charId, effectRate);
@@ -17733,13 +17997,13 @@ public static class EventHelper
 			{
 				ChangeAlertnessOnTalkByNormalInformationNormal(charId, normalInformation.Level, info.TemplateId);
 			}
-			return nextEventGuid2;
+			return normalGuid;
 		case 2:
 			CostNormalInformationUsedCount(EventArgBox.TaiwuCharacterId, normalInformation);
 			ApplyNormalInformationSideEffectWithEffectRate(normalInformation, 2, EventArgBox.TaiwuCharacterId, charId, effectRate);
-			return nextEventGuid3;
+			return ineffectiveGuid;
 		case 3:
-			return StartSwordTombInformationEvent(normalInformation, argBox);
+			return StartSwordTombInformationEvent(normalInformation, argBox, effectiveGuid, normalGuid, ineffectiveGuid);
 		default:
 			return string.Empty;
 		}
@@ -17794,7 +18058,7 @@ public static class EventHelper
 		return normalCollection.ReceivedCounts.TryGetValue(config.TemplateId, out receivedCount) ? receivedCount : 0;
 	}
 
-	public static string StartSwordTombInformationEvent(NormalInformation normalInformation, EventArgBox argBox)
+	private static string StartSwordTombInformationEvent(NormalInformation normalInformation, EventArgBox argBox, string effectiveGuid, string normalGuid, string ineffectiveGuid)
 	{
 		GameData.Domains.Character.Character character = argBox.GetCharacter("CharacterId");
 		int targetCharId = character.GetId();
@@ -17802,7 +18066,7 @@ public static class EventHelper
 		int receivedCount = GetTargetCharSwordTombInformationReceivedCount(targetCharId, normalInformation);
 		InformationItem config = Config.Information.Instance[normalInformation.TemplateId];
 		InformationInfoItem infoConfig = InformationInfo.Instance[config.InfoIds[normalInformation.Level]];
-		if (infoConfig.SwordInformationType == EInformationInfoSwordInformationType.SwordTombHuman || !infoConfig.Consume || receivedCount > 0)
+		if (infoConfig.SwordInformationType == EInformationInfoSwordInformationType.SwordTombHuman || !infoConfig.Consume || receivedCount > 0 || character.IsBoss())
 		{
 			EInformationInfoSwordInformationType swordInformationType = infoConfig.SwordInformationType;
 			bool flag = (uint)swordInformationType <= 1u;
@@ -17813,16 +18077,20 @@ public static class EventHelper
 			case 0:
 				AddLegacyPoint(35);
 				result = 0;
-				resultGuid = "44080243-84c6-40a0-95d4-31b68eecbca5";
+				resultGuid = effectiveGuid;
 				break;
 			case 1:
 				result = 1;
-				resultGuid = "a492637b-a49b-4041-b403-7b295bdccffe";
+				resultGuid = normalGuid;
 				break;
 			default:
 				result = 2;
-				resultGuid = "11e308de-e4c3-418b-a2c3-84fd637a19f8";
+				resultGuid = ineffectiveGuid;
 				break;
+			}
+			if (character.IsBoss())
+			{
+				resultGuid = "0df0bffb-562a-4325-ba62-1f51a8151557";
 			}
 			if (infoConfig.SwordInformationType == EInformationInfoSwordInformationType.SwordTombHuman)
 			{
@@ -18160,6 +18428,24 @@ public static class EventHelper
 		return 3;
 	}
 
+	public static string HandleBossInformationContent(EventArgBox argBox)
+	{
+		if (argBox.Get("SelectedNormalInformation", out NormalInformation normalInformation))
+		{
+			InformationItem config = Config.Information.Instance.GetItem(normalInformation.TemplateId);
+			if (config.TransformId >= 0)
+			{
+				config = Config.Information.Instance.GetItem(config.TransformId);
+			}
+			InformationInfoItem infoConfig = InformationInfo.Instance.GetItem(config.InfoIds.FirstOrDefault((short id) => id >= 0));
+			GameData.Domains.Character.Character character = argBox.GetCharacter("CharacterId");
+			short templateId = character.GetTemplateId();
+			sbyte bossTemplateId = Boss.Instance[CombatDomain.CharId2BossId[templateId]].TemplateId;
+			return infoConfig.BossAnswer[bossTemplateId];
+		}
+		return string.Empty;
+	}
+
 	public static void SettlementPrisonSetInfo(short buildingTemplateId, EventArgBox argBox)
 	{
 		Settlement settlement = GetTaiwuLocationSettlement();
@@ -18175,11 +18461,13 @@ public static class EventHelper
 		return true;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void AddBounty(Sect sect, GameData.Domains.Character.Character character, sbyte punishmentSeverity, short punishmentType, int duration = -1)
 	{
 		sect.AddBounty(Domain.MainThreadDataContext, character, punishmentSeverity, punishmentType, duration);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void AddBounty(int charId, sbyte orgTemplateId, short punishmentType)
 	{
 		if (DomainManager.Organization.GetSettlementByOrgTemplateId(orgTemplateId) is Sect sect && DomainManager.Character.TryGetElement_Objects(charId, out var character))
@@ -18192,6 +18480,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void AddTaiwuBounty(sbyte orgTemplateId, short punishmentType)
 	{
 		AddBounty(DomainManager.Taiwu.GetTaiwuCharId(), orgTemplateId, punishmentType);
@@ -19477,6 +19766,7 @@ public static class EventHelper
 		return DomainManager.TaiwuEvent.GetGlobalEventArgumentBox().GetInt("GuardCombatLevel");
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RemoveGuardCombatLevel()
 	{
 		DomainManager.TaiwuEvent.GetGlobalEventArgumentBox().Remove<int>("GuardCombatLevel");
@@ -19537,6 +19827,7 @@ public static class EventHelper
 		return grade <= professionData.GetSeniorityOrgGrade();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckFavorabilityIsSatisfy(GameData.Domains.Character.Character character)
 	{
 		sbyte behaviorType = character.GetBehaviorType();
@@ -19566,6 +19857,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckResourceIsEnoughToUseSkill(GameData.Domains.Character.Character character, short templateId)
 	{
 		if (DomainManager.Extra.NoProfessionSkillCost)
@@ -19770,6 +20062,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.SetDisableMoving, disableMove);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void OnSkillExecutedCoolDown(int professionId, int skillIndex)
 	{
 		GetProfessionData(professionId)?.OfflineSkillCooldown(skillIndex);
@@ -19826,6 +20119,7 @@ public static class EventHelper
 		return professionData.Seniority >= GameData.Domains.Taiwu.Profession.SharedMethods.GetSkillUnlockSeniority(skillTemplateId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int ProfessionSkillSeniorityNeed(int skillTemplateId)
 	{
 		ProfessionSkillItem skillCfg = ProfessionSkill.Instance[skillTemplateId];
@@ -19887,6 +20181,7 @@ public static class EventHelper
 		return 8;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CheckFavoribility(int characterId, sbyte targetLevel)
 	{
 		short favorability = DomainManager.Character.GetFavorability(characterId, DomainManager.Taiwu.GetTaiwuCharId());
@@ -19955,6 +20250,7 @@ public static class EventHelper
 		return (float)(data.WinsCount - data.LossesCount) >= (float)sumCount - MathF.Ceiling((float)(professionData.GetSeniorityPercent() * 7) / 100f);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsCricketIdentified(int cricketId)
 	{
 		return DomainManager.Extra.IsCricketIdentified(cricketId);
@@ -20308,16 +20604,6 @@ public static class EventHelper
 		return ProfessionRelatedConstants.TempleCountToSkillGrade[GetVisitedTempleCount()];
 	}
 
-	public static ItemKey GetCombatSkillBookAndRead(short combatSkillTemplateId)
-	{
-		return DomainManager.Taiwu.GetCombatSkillBookAndRead(Domain.MainThreadDataContext, combatSkillTemplateId, 50);
-	}
-
-	public static ItemKey GetLifeSkillBookAndRead(short lifeSkillTemplateId)
-	{
-		return DomainManager.Taiwu.GetLifeSkillBookAndRead(Domain.MainThreadDataContext, lifeSkillTemplateId, 50);
-	}
-
 	public static string GetTemplateDesc(Location location)
 	{
 		MapAreaItem config = DomainManager.Map.GetElement_Areas(location.AreaId).GetConfig();
@@ -20377,6 +20663,7 @@ public static class EventHelper
 		DomainManager.Extra.AddSavedSoul(Domain.MainThreadDataContext, charId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetSavedSoulCount()
 	{
 		ProfessionData professionData = DomainManager.Extra.GetProfessionData(6);
@@ -20405,6 +20692,7 @@ public static class EventHelper
 		ProfessionSkillHandle.BuddhistMonkSkill_SelectDirectedSamsara(Domain.MainThreadDataContext, motherId, reincarnatedCharId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void BuddhistMonkSkill3_SelectFeatureFromEvent(int reincarnatedCharId, short featureId)
 	{
 		ProfessionSkillHandle.BuddhistMonkSkill_SetSamsaraFeature(Domain.MainThreadDataContext, reincarnatedCharId, featureId);
@@ -20447,6 +20735,7 @@ public static class EventHelper
 		DomainManager.Information.AddSecretInformation(context, secretInfoOffset3);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool BuddhistMonkSkill3_CheckCanSelectFeature(short featureId)
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
@@ -20590,6 +20879,7 @@ public static class EventHelper
 		DomainManager.Extra.MartialArtistSkill3Execute(Domain.MainThreadDataContext, updateData: true);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetInfluencePowerBonusFactor()
 	{
 		return GetProfessionData(8)?.GetInfluencePowerBonusFactor() ?? 0;
@@ -20963,6 +21253,7 @@ public static class EventHelper
 		return DomainManager.Extra.CivilianSkill0Useful(orgCfg);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetLifeTimeAddValue(ItemKey itemKey)
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
@@ -21047,6 +21338,17 @@ public static class EventHelper
 			int seniority = ProfessionFormulaImpl.Calculate(6, value);
 			DomainManager.Extra.ChangeProfessionSeniority(Domain.MainThreadDataContext, 0, seniority);
 		}
+	}
+
+	public static void AddXiangshuProfessionSeniorityOne(GameData.Domains.Character.Character character)
+	{
+		DataContext context = Domain.MainThreadDataContext;
+		DomainManager.Story.AddXiangshuProfessionSeniorityOne(context, character);
+	}
+
+	public static void ShowTaiwuAsXiangshuSkill0Result()
+	{
+		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ShowTaiwuAsXiangshuSkill0Result, DomainManager.Extra.AsXiangshuSkill0Result);
 	}
 
 	public static void OnEnterPraiseOrAbuse(int charId, bool isPraise, EPraiseContentType contentType)
@@ -21525,6 +21827,7 @@ public static class EventHelper
 		return DomainManager.Information.DistributeSecretInformationToCharacter(Domain.MainThreadDataContext, (SecretInformationId)metaDataId, charId, sourceCharId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void BroadcastSecretInformation(int secretId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -21593,6 +21896,7 @@ public static class EventHelper
 		return result;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CharacterHasSecretInformationByTemplateId(int charId, short templateId)
 	{
 		return DomainManager.Information.CharacterHasSecretInformationByTemplateId(charId, templateId);
@@ -21646,6 +21950,7 @@ public static class EventHelper
 	{
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ApplySecretInformationBroadcastEffect(int metaDataId, short secretInformationEffectTemplateId)
 	{
 		ApplySecretInformationTargetEffect(metaDataId, -1, secretInformationEffectTemplateId);
@@ -21713,6 +22018,7 @@ public static class EventHelper
 		return package.SecretInformationDisplayDataList.Count > 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static List<int> GetSecretInformationDisseminationBranchCharacterIds(int secretId)
 	{
 		InformationDomain domain = DomainManager.Information;
@@ -21721,6 +22027,7 @@ public static class EventHelper
 			select record.SourceCharacterId).ToList();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static HashSet<int> GetSecretInformationRelatedCharacters(int secretId, int characterId, bool includeGeneral = true, bool includeAlive = true, bool includeDead = true)
 	{
 		HashSet<int> result = new HashSet<int>();
@@ -21728,7 +22035,7 @@ public static class EventHelper
 		if (secret != null)
 		{
 			secret.QueryParameters(out var occurence);
-			if (occurence.CharacterRelationshipSnapshotCollection.TryGetValue(characterId, out CharacterRelationshipSnapshot characterRelationshipSnapshot))
+			if (occurence.CharacterRelationshipSnapshotCollection.TryGetValue(characterId, out var characterRelationshipSnapshot))
 			{
 				Dictionary<int, CharacterExtraInfo> dict2 = occurence.CharacterExtraInfoCollection;
 				characterRelationshipSnapshot.RelatedCharacters.GetAllRelatedCharIds(result, includeGeneral);
@@ -21780,6 +22087,7 @@ public static class EventHelper
 		return result.ToList();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static LocalObjectPool<SecretInformationProcessor> GetSecretInformationProcessorPool()
 	{
 		return DomainManager.Information.SecretInformationProcessorPool;
@@ -21876,6 +22184,7 @@ public static class EventHelper
 		return 0;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static byte GetSecretInformationCharacterMonkTypeSnapshot(int secretId, int characterId)
 	{
 		GameData.Domains.Information.Secret.SecretInformation secret = DomainManager.Information.QuerySecretInformation((SecretInformationId)secretId);
@@ -21900,6 +22209,7 @@ public static class EventHelper
 		return new OrganizationInfo(-1, -1, principal: true, -1);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static List<short> GetSecretInformationAppliedStructs(short secretInformationAppliedStructGroupId, sbyte taiwuSecretInformationAppliedRelationId, sbyte oppositeSecretInformationAppliedRelationId)
 	{
 		return (from s in SecretInformationAppliedStruct.Instance
@@ -21912,6 +22222,7 @@ public static class EventHelper
 		return selectionIds.OrderBy((short id) => SecretInformationAppliedSelection.Instance[id].Priority);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetSecretInformationAuthorityCostWhenDisseminating(int secretId, int characterId)
 	{
 		InformationDomain domain = DomainManager.Information;
@@ -21926,14 +22237,14 @@ public static class EventHelper
 
 	public static void StartCheatSecretInformationSelect(int charId, string saveKey)
 	{
+		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
 		EventSelectInformationData selectInformationData = new EventSelectInformationData
 		{
-			RelatedCharacterId = charId,
+			RelatedCharacterId = taiwuCharId,
 			SaveKey = saveKey,
 			SelectComplete = false,
-			CharacterNameRelatedData = DomainManager.Character.GetNameRelatedData(charId)
+			CharacterNameRelatedData = DomainManager.Character.GetNameRelatedData(taiwuCharId)
 		};
-		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
 		SecretInformationDisplayPackage package = DomainManager.Information.GetCheatOnSecretInformationDisplayPackageForSelections(taiwuCharId, charId);
 		selectInformationData.ToSelectSecretInformationDataIdList = package.SecretInformationDisplayDataList.ConvertAll((SecretInformationDisplayData e) => (int)e.SecretInformationId);
 		selectInformationData.AvailableData = true;
@@ -22477,6 +22788,7 @@ public static class EventHelper
 		return DomainManager.Story.GetSectMainStoryActiveStatus(orgTemplateId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void SetSectMainStoryActiveStatus(sbyte orgTemplateId, bool pause)
 	{
 		DomainManager.Story.SetSectMainStoryActiveStatus(orgTemplateId, pause);
@@ -22649,6 +22961,7 @@ public static class EventHelper
 		return DomainManager.Organization.GetSettlementByOrgTemplateId(orgTemplateId)?.GetAvailableHighMember(8, 0);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CharacterIsOrganizationHigh(GameData.Domains.Character.Character character, sbyte orgTemplateId)
 	{
 		OrganizationInfo orgInfo = character.GetOrganizationInfo();
@@ -22669,6 +22982,7 @@ public static class EventHelper
 		sectChar?.SetApprovedTaiwu(context, approved);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void AddSectMemberFeature(int charId, sbyte orgTemplateId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -22679,6 +22993,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsLocationHasTargetSectCharacter(Location location, short orgTemplateId)
 	{
 		MapBlockData blockData = DomainManager.Map.GetBlockData(location.AreaId, location.BlockId);
@@ -22700,6 +23015,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetTargetSectCharacterAtLocation(Location location, short orgTemplateId, sbyte grade = -1)
 	{
 		MapBlockData blockData = DomainManager.Map.GetBlockData(location.AreaId, location.BlockId);
@@ -22727,6 +23043,7 @@ public static class EventHelper
 		return DomainManager.Organization.GetSettlementByOrgTemplateId(sectTemplateId).CalcApprovingRate();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short CalcSpiritualDebtActualCost(sbyte orgTemplateId, short baseCost)
 	{
 		if (!OrganizationDomain.IsSect(orgTemplateId))
@@ -22905,6 +23222,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void EndAllMentorAndMenteeRelations(int charId, short orgTemplateId)
 	{
 		DataContext context = Domain.MainThreadDataContext;
@@ -22954,6 +23272,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static GameData.Domains.Character.Character GetSectCharacter(Location location, sbyte orgTemplateId, sbyte minGrade, sbyte maxGrade)
 	{
 		Tester.Assert(!location.Equals(Location.Invalid));
@@ -22986,6 +23305,7 @@ public static class EventHelper
 		return GlobalArgBoxContainsKey<bool>(key);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void SaveSectCompetitionClothing(short organizationId)
 	{
 		string key = "ConchShip_PresetKey_SectCompetitionClothing" + GetSectCompetitionClothingTemplateId(organizationId);
@@ -23227,18 +23547,25 @@ public static class EventHelper
 		short selectedCombatSkill = -1;
 		foreach (var (combatSkillTemplateId, combatSkill2) in combatSkills)
 		{
-			if (selectedCombatSkill == -1)
+			if (Config.CombatSkill.Instance[combatSkillTemplateId].BookId >= 0)
 			{
-				selectedCombatSkill = combatSkillTemplateId;
+				if (selectedCombatSkill == -1)
+				{
+					selectedCombatSkill = combatSkillTemplateId;
+				}
+				if (!learnedCombatSkills.ContainsKey(combatSkillTemplateId))
+				{
+					selectedCombatSkill = combatSkillTemplateId;
+				}
+				if (Config.CombatSkill.Instance[combatSkillTemplateId].Grade >= Config.CombatSkill.Instance[selectedCombatSkill].Grade)
+				{
+					selectedCombatSkill = combatSkillTemplateId;
+				}
 			}
-			if (!learnedCombatSkills.ContainsKey(combatSkillTemplateId))
-			{
-				selectedCombatSkill = combatSkillTemplateId;
-			}
-			if (Config.CombatSkill.Instance[combatSkillTemplateId].Grade >= Config.CombatSkill.Instance[selectedCombatSkill].Grade)
-			{
-				selectedCombatSkill = combatSkillTemplateId;
-			}
+		}
+		if (selectedCombatSkill < 0)
+		{
+			return ItemKey.Invalid;
 		}
 		short bookId = Config.CombatSkill.Instance[selectedCombatSkill].BookId;
 		ushort readingState = combatSkills[selectedCombatSkill].GetReadingState();
@@ -23963,6 +24290,7 @@ public static class EventHelper
 		DomainManager.Building.PlaceBuildingAtBlock(Domain.MainThreadDataContext, sectLocation.AreaId, sectLocation.BlockId, buildingTemplateId, forcePlace: true, isRandom: false);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsSectMainStoryUnlocked(sbyte orgTemplateId)
 	{
 		sbyte b = orgTemplateId;
@@ -24142,11 +24470,10 @@ public static class EventHelper
 		return MajorEventCreate(settlement.GetLocation(), 633847190);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsEmeiStoryAdventureTwoTriggered()
 	{
-		MonthlyActionKey key = MonthlyEventActionsManager.PredefinedKeys["EmeiStoryDefault"];
-		ConfigWrapperAction wrapperAction = (ConfigWrapperAction)Domain.GetMonthlyAction(key);
-		return wrapperAction.CurrConfigMonthlyAction != null;
+		return false;
 	}
 
 	public static void SaveWhiteApeBlockId()
@@ -24422,6 +24749,7 @@ public static class EventHelper
 		DirectlyChangeFavorabilityOptional(shiHoujiu, taiwu, 3000, 4);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int EmeiGetSelectGoodEndCount()
 	{
 		EventArgBox sectArgBox = GetSectMainStoryEventArgBox(2);
@@ -25613,6 +25941,7 @@ public static class EventHelper
 		DirectlySetFavorabilities(character.GetId(), taiwu.GetId(), favorability, favorability);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void FulongEndTryRemoveFixedCharacter()
 	{
 		for (short i = 831; i <= 855; i++)
@@ -25956,11 +26285,13 @@ public static class EventHelper
 		return DomainManager.Building.CultivateFeather(context);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void AddJieqingMaskCharId(int charId)
 	{
 		DomainManager.TaiwuEvent.AddJieqingMaskCharId(charId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RemoveJieqingMaskCharId(int charId)
 	{
 		DomainManager.TaiwuEvent.RemoveJieqingMaskCharId(charId);
@@ -27481,6 +27812,7 @@ public static class EventHelper
 		character.SetLocation(Location.Invalid, context);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static string GetRanshanChapter2LetterContent(EventArgBox argBox)
 	{
 		StringBuilder stringBuilder = new StringBuilder();
@@ -27606,6 +27938,7 @@ public static class EventHelper
 		argBox.Set("SelectedTags", (ushort)0);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsRanshanChapter3CharacterContainsBetrayTag(EventArgBox argBox)
 	{
 		int charId = -1;
@@ -27799,6 +28132,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsRanshanChapter4AbleToTrigger()
 	{
 		return DomainManager.World.IsExtraTaskInProgress(269);
@@ -28138,6 +28472,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CharacterIsShaolinBuddhistAbbot(GameData.Domains.Character.Character character)
 	{
 		OrganizationInfo organizationInfo = character.GetOrganizationInfo();
@@ -28149,6 +28484,7 @@ public static class EventHelper
 		return character.GetOrganizationInfo().OrgTemplateId == 1;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool ShaolinSutraPavilionEntryPermit()
 	{
 		Settlement settlement = DomainManager.Organization.GetSettlementByOrgTemplateId(1);
@@ -29362,53 +29698,50 @@ public static class EventHelper
 	public static void GetWudangReverseBook(string afterString, EventArgBox argBox)
 	{
 		DataContext context = Domain.MainThreadDataContext;
-		short templateId1 = -1;
-		short templateId2 = -1;
-		short templateId3 = -1;
-		do
+		List<short> candidates = GetWudangLowestCombatSkillBookCandidates();
+		if (candidates.Count >= 3)
 		{
-			int type = context.Random.Next(0, 14);
-			templateId1 = GetCombatSkillId((sbyte)type, 4, 0);
+			short templateId1 = candidates[context.Random.Next(0, candidates.Count)];
+			candidates.Remove(templateId1);
+			short templateId2 = candidates[context.Random.Next(0, candidates.Count)];
+			candidates.Remove(templateId2);
+			short templateId3 = candidates[context.Random.Next(0, candidates.Count)];
+			ItemKey book1 = CreateSkillBook(Config.CombatSkill.Instance[templateId1].BookId, -1, -1, -1, 0);
+			ItemKey book2 = CreateSkillBook(Config.CombatSkill.Instance[templateId2].BookId, -1, -1, -1, 0);
+			ItemKey book3 = CreateSkillBook(Config.CombatSkill.Instance[templateId3].BookId, -1, -1, -1, 0);
+			GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+			AddInventoryItem(taiwu, book1);
+			AddInventoryItem(taiwu, book2);
+			AddInventoryItem(taiwu, book3);
+			List<(ItemKey, int)> list = new List<(ItemKey, int)>
+			{
+				(book1, 1),
+				(book2, 1),
+				(book3, 1)
+			};
+			ShowGetItemPageForItems(list, afterString, argBox);
 		}
-		while (templateId1 == -1);
-		do
-		{
-			int type2 = context.Random.Next(0, 14);
-			templateId2 = GetCombatSkillId((sbyte)type2, 4, 0);
-		}
-		while (templateId2 == -1 || templateId2 == templateId1);
-		do
-		{
-			int type3 = context.Random.Next(0, 14);
-			templateId3 = GetCombatSkillId((sbyte)type3, 4, 0);
-		}
-		while (templateId3 == -1 || templateId3 == templateId1 || templateId3 == templateId2);
-		ItemKey book1 = CreateSkillBook(Config.CombatSkill.Instance[templateId1].BookId, -1, -1, -1, 0);
-		ItemKey book2 = CreateSkillBook(Config.CombatSkill.Instance[templateId2].BookId, -1, -1, -1, 0);
-		ItemKey book3 = CreateSkillBook(Config.CombatSkill.Instance[templateId3].BookId, -1, -1, -1, 0);
-		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
-		AddInventoryItem(taiwu, book1);
-		AddInventoryItem(taiwu, book2);
-		AddInventoryItem(taiwu, book3);
-		List<(ItemKey, int)> list = new List<(ItemKey, int)>
-		{
-			(book1, 1),
-			(book2, 1),
-			(book3, 1)
-		};
-		ShowGetItemPageForItems(list, afterString, argBox);
 	}
 
 	public static short GetRandomWudangLowestCombatSkill()
 	{
 		DataContext context = Domain.MainThreadDataContext;
-		short templateId1 = -1;
-		while (templateId1 == -1)
+		List<short> candidates = GetWudangLowestCombatSkillBookCandidates();
+		return (short)((candidates.Count > 0) ? candidates[context.Random.Next(0, candidates.Count)] : (-1));
+	}
+
+	private static List<short> GetWudangLowestCombatSkillBookCandidates()
+	{
+		List<short> candidates = new List<short>();
+		for (int type = 0; type < 14; type++)
 		{
-			int type = context.Random.Next(0, 14);
-			templateId1 = GetCombatSkillId((sbyte)type, 4, 0);
+			short templateId = GetCombatSkillId((sbyte)type, 4, 0);
+			if (templateId >= 0 && Config.CombatSkill.Instance[templateId].BookId >= 0)
+			{
+				candidates.Add(templateId);
+			}
 		}
-		return templateId1;
+		return candidates;
 	}
 
 	public static bool LifeSkillBookAllPagesRead(GameData.Domains.Character.Character character, short skillTemplateId)
@@ -29963,6 +30296,7 @@ public static class EventHelper
 		return false;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool HaveHeavenlyTreeGrowing()
 	{
 		List<SectStoryHeavenlyTreeExtendable> trees = DomainManager.Extra.GetAllHeavenlyTrees();
@@ -30712,6 +31046,7 @@ public static class EventHelper
 		return DomainManager.Extra.GetSectMainStoryEventArgBox(12).Get(SectMainStoryEventArgKey.DefValue.WuxianPassLegacyEventTriggered, ref triggered) && triggered;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsWuxianEndingEventTriggered()
 	{
 		return DomainManager.Story.IsWuxianEndingEventTriggered();
@@ -31569,6 +31904,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.ShowCreateMirrorCharacter);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsCharacterMirrored(int id)
 	{
 		return DomainManager.Extra.SectXuannvIsCharacterMirrored(id);
@@ -31723,6 +32059,7 @@ public static class EventHelper
 		DomainManager.Extra.GenerateRandomBloodLightInXuehou(context);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsLocationContainsBloodLight(Location location)
 	{
 		return DomainManager.Extra.IsLocationContainsBloodLight(location);
@@ -32399,6 +32736,7 @@ public static class EventHelper
 		DomainManager.Character.GroupMove(context, character, newLocation);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int ProcessTaiwuCompensation(DataContext context, GameData.Domains.Character.Character taiwuChar, GameData.Domains.Character.Character receiverChar, int targetAmount)
 	{
 		int taiwuMoney = taiwuChar.GetResource(6);
@@ -32812,6 +33150,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void StartSelectCompletelyInfectedPrisoner(EventArgBox argBox, CharacterSelectFilter filter, Action onSelectFinish = null)
 	{
 		Tester.Assert(filter.FilterTemplateId == -1);
@@ -33236,11 +33575,14 @@ public static class EventHelper
 		foreach (short item in canLearn)
 		{
 			short bookId = Config.CombatSkill.Instance[item].BookId;
-			learnableBookTemplateIds.Add(bookId);
-			ItemDisplayData bookData = new ItemDisplayData(10, bookId);
-			bookData.IsSpecialInteract = true;
-			data.CanSelectItemList.Add(bookData);
-			bookData.AlertFactor = targetCharactger.GetItemAlertFactor(bookData.Key, 1);
+			if (bookId >= 0)
+			{
+				learnableBookTemplateIds.Add(bookId);
+				ItemDisplayData bookData = new ItemDisplayData(10, bookId);
+				bookData.IsSpecialInteract = true;
+				data.CanSelectItemList.Add(bookData);
+				bookData.AlertFactor = targetCharactger.GetItemAlertFactor(bookData.Key, 1);
+			}
 		}
 		for (int i = data.CanSelectItemList.Count - 1; i >= 0; i--)
 		{
@@ -33381,16 +33723,7 @@ public static class EventHelper
 
 	public static IEnumerable<GameData.Domains.Character.Character> GetValidGroupCharacter(bool ignoreBaby, bool ignoreChild, bool ignoreTaiwu)
 	{
-		HashSet<int> group = DomainManager.Taiwu.GetGroupCharIds().GetCollection();
-		int taiwuCharId = DomainManager.Taiwu.GetTaiwuCharId();
-		foreach (int charId in group)
-		{
-			GameData.Domains.Character.Character teammate = DomainManager.Character.GetElement_Objects(charId);
-			if ((!ignoreBaby || teammate.GetAgeGroup() != 0) && (!ignoreChild || teammate.GetAgeGroup() != 1) && (!ignoreTaiwu || charId != taiwuCharId))
-			{
-				yield return teammate;
-			}
-		}
+		return DomainManager.Taiwu.GetValidGroupCharacter(ignoreBaby, ignoreChild, ignoreTaiwu);
 	}
 
 	public static bool HasTeammateCommandInTaiwuGroup()
@@ -33421,6 +33754,7 @@ public static class EventHelper
 		return DomainManager.Taiwu.IsInGroup(charId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool CanTaiwuLearnGradeFromPrivateStudyTeacher(int teacherCharId, sbyte skillGrade)
 	{
 		if (CharacterIsInTaiwuGroup(teacherCharId))
@@ -33448,6 +33782,7 @@ public static class EventHelper
 		return DomainManager.Taiwu.GetTaiwu().GetLocation() == GetTaiwuVillageLocation();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void TeleportMoveTaiwuToLocation(Location location)
 	{
 		short areaId = location.AreaId;
@@ -33481,6 +33816,7 @@ public static class EventHelper
 		DomainManager.Taiwu.AllocateGenericGrid(Domain.MainThreadDataContext, equipType);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void DeallocateGenericGrid(sbyte equipType)
 	{
 		DomainManager.Taiwu.DeallocateGenericGrid(Domain.MainThreadDataContext, equipType);
@@ -33558,6 +33894,7 @@ public static class EventHelper
 		return itemKey;
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsCharacterBirthday(int charId)
 	{
 		if (!DomainManager.Character.TryGetElement_Objects(charId, out var character))
@@ -33955,6 +34292,7 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsDreamBackStateUnlocked(sbyte stateType)
 	{
 		return DomainManager.Extra.IsDreamBackStateUnlocked(stateType);
@@ -34131,6 +34469,7 @@ public static class EventHelper
 		return character.GetBehaviorType();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ChangePastTaiwuToCurrentTaiwuFavorability(int charId)
 	{
 		GameData.Domains.Character.Character character = DomainManager.Character.GetElement_Objects(charId);
@@ -34880,11 +35219,13 @@ public static class EventHelper
 		}
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsTriggeredEvent(string targetEventGuid)
 	{
 		return Domain.IsTriggeredEvent(targetEventGuid);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetEventTriggeredCount(string targetEventGuid)
 	{
 		return Domain.GetEventTriggeredCount(targetEventGuid);
@@ -34911,17 +35252,20 @@ public static class EventHelper
 		DomainManager.Extra.SetTaiwuInteractionCooldown(context, targetCharId, interactionType, cooldown);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void RemoveInteractionCooldown(int targetCharId, int interactionType)
 	{
 		DataContext context = Domain.MainThreadDataContext;
 		DomainManager.Extra.RemoveTaiwuInteractionCooldown(context, targetCharId, interactionType);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static int GetInteractionCooldown(int targetCharId, int interactionType)
 	{
 		return DomainManager.Extra.GetTaiwuInteractionCooldown(targetCharId, interactionType);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsInteractionInCooldown(int targetCharId, int interactionType)
 	{
 		return GetInteractionCooldown(targetCharId, interactionType) > 0;
@@ -34956,21 +35300,25 @@ public static class EventHelper
 		return DomainManager.Character.GetName(charId, realName);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetTotalVillagerCount()
 	{
 		return DomainManager.Taiwu.GetTotalVillagerCount();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetAvailableVillagerCount()
 	{
 		return DomainManager.Taiwu.GetAvailableVillagerCount();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static short GetWorkingVillagerCount()
 	{
 		return DomainManager.Taiwu.GetWorkingVillagerCount();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool[] GetRoleBookReadState(int roleId, ItemKey bookItemKey)
 	{
 		return DomainManager.Character.GetCharBookReadState(roleId, bookItemKey);
@@ -34986,6 +35334,7 @@ public static class EventHelper
 		return RandomUtils.GenerateRandomWeightCell(Domain.MainThreadDataContext.Random, list);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static List<short[]> GetRandomListFromWeightCore(IList<short[]> list, int count)
 	{
 		List<short[]> retList = new List<short[]>();
@@ -35160,6 +35509,7 @@ public static class EventHelper
 		return DomainManager.World.GetWorldFunctionsStatus(functionId);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void PlayCg(string cgName, string onCompleteEventId, EventArgBox argBox)
 	{
 		Domain.SetListenerWithActionName(onCompleteEventId, argBox, "CgPlayActionFinish");
@@ -35334,6 +35684,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.OpenGetItem_Item, itemDisplayDataList, arg2: false);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ShowWarehouse(ItemSourceType itemSourceType, string afterEvent = "", EventArgBox argBox = null)
 	{
 		if (!string.IsNullOrEmpty(afterEvent))
@@ -35411,6 +35762,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.OpenGetItem_Character, charIdList, (sbyte)(isVillager ? 15 : 14));
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static void ShowGetItemPageForCharacter(List<int> charIdList, EObtainType type, string afterEvent = "", EventArgBox argBox = null)
 	{
 		if (!string.IsNullOrEmpty(afterEvent))
@@ -35454,6 +35806,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.PlayMediaCommand, mediaName, canJump, onFinishAction, intParam);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool GetRestrictOptionsBehaviorType()
 	{
 		return DomainManager.World.GetRestrictOptionsBehaviorType();
@@ -35491,6 +35844,7 @@ public static class EventHelper
 		return GameData.ArchiveData.Common.GetCurrArchiveId();
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static bool IsApologeticGiftDlcExist()
 	{
 		return true;
@@ -35619,6 +35973,7 @@ public static class EventHelper
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.OpenCombatConflict);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static string GetCharacterFeatureDesc(short featureId)
 	{
 		return CharacterFeature.Instance[featureId].Desc;
@@ -35961,6 +36316,7 @@ public static class EventHelper
 		return DomainManager.Organization.GetCustomizePunishmentSeverityCost(stateId, isSect);
 	}
 
+	[Obsolete("No callers found; will be removed in a future version.")]
 	public static List<OptionConsumeInfo> GetEventConsumeInfoForProfessionSkill(int skillId)
 	{
 		ProfessionSkillItem skillConfig = ProfessionSkill.Instance[skillId];

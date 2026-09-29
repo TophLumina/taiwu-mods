@@ -325,7 +325,7 @@ public class Equipping
 		CharacterCombatSkillConfiguration configuration = DomainManager.Extra.TryGetCharacterCombatSkillConfiguration(charId);
 		bool canAutoEquipCombatSkills = isOutOfTaiwuGroup || !(configuration?.IsCombatSkillLocked ?? false);
 		bool canAutoAllocateNeili = isOutOfTaiwuGroup || !(configuration?.IsNeiliAllocationLocked ?? false);
-		bool canAutoEquipItems = !character.IsCreatedWithFixedTemplate() && (isOutOfTaiwuGroup || !DomainManager.Taiwu.GetManualChangeEquipGroupCharIds().Contains(charId));
+		bool canAutoEquipItems = !character.IsCreatedWithFixedTemplate() && !character.IsNonActorSkeleton() && (isOutOfTaiwuGroup || !DomainManager.Taiwu.GetManualChangeEquipGroupCharIds().Contains(charId));
 		ChooseLoopingNeigong(character, mod);
 		if (canAutoEquipCombatSkills)
 		{
@@ -356,7 +356,7 @@ public class Equipping
 		CharacterCombatSkillConfiguration configuration = DomainManager.Extra.TryGetCharacterCombatSkillConfiguration(charId);
 		bool canAutoEquipCombatSkills = isOutOfTaiwuGroup || !(configuration?.IsCombatSkillLocked ?? false);
 		bool canAutoAllocateNeili = isOutOfTaiwuGroup || !(configuration?.IsNeiliAllocationLocked ?? false);
-		bool canAutoEquipItems = !character.IsCreatedWithFixedTemplate() && (isOutOfTaiwuGroup || !DomainManager.Taiwu.GetManualChangeEquipGroupCharIds().Contains(charId));
+		bool canAutoEquipItems = !character.IsCreatedWithFixedTemplate() && !character.IsNonActorSkeleton() && (isOutOfTaiwuGroup || !DomainManager.Taiwu.GetManualChangeEquipGroupCharIds().Contains(charId));
 		ChooseLoopingNeigong(character, mod);
 		if (canAutoEquipCombatSkills)
 		{
@@ -2043,24 +2043,26 @@ public class Equipping
 	private void EquipItems(Character character, SelectEquipmentsModification mod)
 	{
 		ClassifyAvailableItems(character);
-		SelectWeapons(character, mod);
+		(ItemKey[] equipments, bool[] slotLocked) tuple = SelectWeapons(character, mod);
+		ItemKey[] equipments = tuple.equipments;
+		bool[] slotLocked = tuple.slotLocked;
 		OrganizationMemberItem orgMemberCfg = OrganizationDomain.GetOrgMemberConfig(character.GetOrganizationInfo());
 		PresetEquipmentItemWithProb[] orgEquipment = orgMemberCfg.Equipment;
-		_equippedItems[3] = SelectArmor(mod, _availableHelms, orgEquipment[0]);
-		_equippedItems[5] = SelectArmor(mod, _availableTorsos, orgEquipment[1]);
-		_equippedItems[6] = SelectArmor(mod, _availableBracers, orgEquipment[2]);
-		_equippedItems[7] = SelectArmor(mod, _availableBoots, orgEquipment[3]);
-		_equippedItems[8] = SelectAccessory(mod, _availableAccessories, orgEquipment[4]);
-		_equippedItems[9] = SelectAccessory(mod, _availableAccessories, orgEquipment[5]);
-		_equippedItems[10] = SelectAccessory(mod, _availableAccessories, orgEquipment[6]);
+		_equippedItems[3] = (slotLocked[3] ? equipments[3] : SelectArmor(mod, _availableHelms, orgEquipment[0]));
+		_equippedItems[5] = (slotLocked[5] ? equipments[5] : SelectArmor(mod, _availableTorsos, orgEquipment[1]));
+		_equippedItems[6] = (slotLocked[6] ? equipments[6] : SelectArmor(mod, _availableBracers, orgEquipment[2]));
+		_equippedItems[7] = (slotLocked[7] ? equipments[7] : SelectArmor(mod, _availableBoots, orgEquipment[3]));
+		_equippedItems[8] = (slotLocked[8] ? equipments[8] : SelectAccessory(mod, _availableAccessories, orgEquipment[4]));
+		_equippedItems[9] = (slotLocked[9] ? equipments[9] : SelectAccessory(mod, _availableAccessories, orgEquipment[5]));
+		_equippedItems[10] = (slotLocked[10] ? equipments[10] : SelectAccessory(mod, _availableAccessories, orgEquipment[6]));
 		short idealClothingTemplateId = character.GetIdealClothingTemplateId();
-		_equippedItems[4] = SelectClothing(character, mod, idealClothingTemplateId);
-		_equippedItems[11] = SelectCarrier(mod, _availableCarriers, orgEquipment[7]);
-		_equippedItems[12] = SelectCarrier(mod, _availableLivestockCarriers, orgEquipment[8], _availableBeastCarriers);
-		_equippedItems[13] = SelectCarrier(mod, _availableBeastCarriers, orgEquipment[9]);
-		_equippedItems[14] = SelectAccessory(mod, _availablePockets, orgEquipment[10]);
-		_equippedItems[15] = SelectAccessory(mod, _availablePockets, orgEquipment[11]);
-		_equippedItems[16] = SelectAccessory(mod, _availablePockets, orgEquipment[12]);
+		_equippedItems[4] = (slotLocked[4] ? equipments[4] : SelectClothing(character, mod, idealClothingTemplateId));
+		_equippedItems[11] = (slotLocked[11] ? equipments[11] : SelectCarrier(mod, _availableCarriers, orgEquipment[7]));
+		_equippedItems[12] = (slotLocked[12] ? equipments[12] : SelectCarrier(mod, _availableLivestockCarriers, orgEquipment[8], _availableBeastCarriers));
+		_equippedItems[13] = (slotLocked[13] ? equipments[13] : SelectCarrier(mod, _availableBeastCarriers, orgEquipment[9]));
+		_equippedItems[14] = (slotLocked[14] ? equipments[14] : SelectAccessory(mod, _availablePockets, orgEquipment[10]));
+		_equippedItems[15] = (slotLocked[15] ? equipments[15] : SelectAccessory(mod, _availablePockets, orgEquipment[11]));
+		_equippedItems[16] = (slotLocked[16] ? equipments[16] : SelectAccessory(mod, _availablePockets, orgEquipment[12]));
 		if (!CollectionUtils.Equals(character.GetEquipment(), _equippedItems, 17))
 		{
 			mod.EquippedItems = _equippedItems;
@@ -2279,7 +2281,7 @@ public class Equipping
 		return true;
 	}
 
-	private void SelectWeapons(Character character, SelectEquipmentsModification mod)
+	private (ItemKey[] equipments, bool[] slotLocked) SelectWeapons(Character character, SelectEquipmentsModification mod)
 	{
 		if (!GetWeaponScores(character, _availableWeapons, _suitableWeapons, _fixedBestWeapons))
 		{
@@ -2295,9 +2297,13 @@ public class Equipping
 				mod.PersonalNeedChanged = true;
 			}
 		}
-		_equippedItems[0] = SelectBestWeapon(removeSameType: true);
-		_equippedItems[1] = SelectBestWeapon(removeSameType: true);
-		_equippedItems[2] = SelectBestWeapon(removeSameType: false);
+		ItemKey[] equipments = character.GetEquipment();
+		bool[] locks = Config.Character.Instance.GetItemOrDefault(character.GetTemplateId())?.EquipmentLock ?? Array.Empty<bool>();
+		bool[] slotLocked = equipments.Select((ItemKey x, int i) => locks.CheckIndex(i) && locks[i]).ToArray();
+		_equippedItems[0] = (slotLocked[0] ? equipments[0] : SelectBestWeapon(removeSameType: true));
+		_equippedItems[1] = (slotLocked[1] ? equipments[1] : SelectBestWeapon(removeSameType: true));
+		_equippedItems[2] = (slotLocked[2] ? equipments[2] : SelectBestWeapon(removeSameType: false));
+		return (equipments: equipments, slotLocked: slotLocked);
 	}
 
 	private void SelectFixedWeapons(Character character, SelectEquipmentsModification mod)

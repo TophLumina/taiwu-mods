@@ -24,11 +24,13 @@ public class PreventMoveAndWeapon : CombatSkillEffectBase
 		CreateAffectedAllEnemyData(151, EDataModifyType.Custom, -1);
 		CreateAffectedAllEnemyData(197, EDataModifyType.AddPercent, -1);
 		Events.RegisterHandler_CastSkillEnd(OnCastSkillEnd);
+		Events.RegisterHandler_CombatCharChanged(OnCombatCharChanged);
 	}
 
 	public override void OnDisable(DataContext context)
 	{
 		Events.UnRegisterHandler_CastSkillEnd(OnCastSkillEnd);
+		Events.UnRegisterHandler_CombatCharChanged(OnCombatCharChanged);
 	}
 
 	private void OnCastSkillEnd(DataContext context, int charId, bool isAlly, short skillId, sbyte power, bool interrupted)
@@ -40,9 +42,17 @@ public class PreventMoveAndWeapon : CombatSkillEffectBase
 		}
 	}
 
+	private void OnCombatCharChanged(DataContext context, bool isAlly)
+	{
+		if (isAlly == base.CombatChar.IsAlly)
+		{
+			InvalidateCache(context, 197);
+		}
+	}
+
 	public override int GetModifyValue(AffectedDataKey dataKey, int currModifyValue)
 	{
-		if (base.EffectCount <= 0 || dataKey.FieldId != 197)
+		if (!base.IsCurrent || base.EffectCount <= 0 || dataKey.FieldId != 197)
 		{
 			return 0;
 		}
@@ -51,7 +61,7 @@ public class PreventMoveAndWeapon : CombatSkillEffectBase
 
 	public override int GetModifiedValue(AffectedDataKey dataKey, int dataValue)
 	{
-		if (DomainManager.Combat.GetElement_CombatCharacterDict(dataKey.CharId).IsAlly == base.CombatChar.IsAlly || !DomainManager.Combat.IsCurrentCombatCharacter(base.CombatChar) || base.EffectCount <= 0)
+		if (DomainManager.Combat.GetElement_CombatCharacterDict(dataKey.CharId).IsAlly == base.CombatChar.IsAlly || !base.IsCurrent || base.EffectCount <= 0)
 		{
 			return dataValue;
 		}

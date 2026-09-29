@@ -804,7 +804,10 @@ public class ScriptExecutionInstance
 			{
 				_toShowGetCharacters = new List<int>();
 			}
-			_toShowGetCharacters.Add(characterId);
+			if (!_toShowGetCharacters.Contains(characterId))
+			{
+				_toShowGetCharacters.Add(characterId);
+			}
 			_eObtainTypeGetCharacters = eObtainType;
 		}
 	}

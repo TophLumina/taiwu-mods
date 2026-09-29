@@ -9,14 +9,8 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Story.SectMainStory;
 
-/// <summary>
-/// 地区主线共享的计算方法
-/// </summary>
 public static class SectMainStorySharedMethods
 {
-	/// <summary>
-	/// 物品是否与指定独创心法突破格相宜
-	/// </summary>
 	public static bool IsEmeiBonusFit(short bonusTypeTemplateId, ItemKey itemKey)
 	{
 		SkillBreakPlateGridBonusTypeItem config = SkillBreakPlateGridBonusType.Instance[bonusTypeTemplateId];
@@ -39,9 +33,6 @@ public static class SectMainStorySharedMethods
 		return true;
 	}
 
-	/// <summary>
-	/// 计算物品给指定独创心法突破格提供的进度值
-	/// </summary>
 	public static int CalcEmeiBonusItemProgress(short bonusTypeTemplateId, IItemData data)
 	{
 		ItemKey itemKey = data.Key;
@@ -49,17 +40,11 @@ public static class SectMainStorySharedMethods
 		return Math.Max(IsEmeiBonusFit(bonusTypeTemplateId, itemKey) ? value : (value * (CValuePercent)GlobalConfig.Instance.SectStoryEmeiBonusNotFitProgressPercent), GlobalConfig.Instance.SectStoryEmeiBonusMinProgress);
 	}
 
-	/// <inheritdoc cref="M:GameData.Domains.Story.SectMainStory.SectMainStorySharedMethods.CalcEmeiBonusItemProgress(System.Int16,GameData.Domains.Item.IItemData)" />
 	public static int CalcEmeiBonusItemProgress(short bonusTypeTemplateId, IEnumerable<IItemData> itemKeys)
 	{
 		return itemKeys?.Select((IItemData x) => CalcEmeiBonusItemProgress(bonusTypeTemplateId, x)).Sum() ?? 0;
 	}
 
-	/// <summary>
-	/// 计算炼制王蛊总计需要消耗的毒素量
-	/// </summary>
-	/// <param name="jugData"></param>
-	/// <returns></returns>
 	public static int CalcWugJugRefiningCostPoisonValue(SectWuxianWugJugData jugData)
 	{
 		int wugJugRefiningCostPoison = GlobalConfig.Instance.WugJugRefiningCostPoison;
@@ -70,12 +55,6 @@ public static class SectMainStorySharedMethods
 		return wugJugRefiningCostPoison * bonus;
 	}
 
-	/// <summary>
-	/// 计算蛊王类型与消耗的毒素量
-	/// </summary>
-	/// <param name="costPoisons">消耗的毒素量，<see cref="T:GameData.Domains.Combat.PoisonType" /> 作为索引</param>
-	/// <param name="jugData">万蛊坛数据</param>
-	/// <returns>蛊王类型，-1 代表未知类型</returns>
 	public static sbyte CalcWugKingType(List<int> costPoisons, SectWuxianWugJugData jugData)
 	{
 		costPoisons.Clear();
@@ -135,9 +114,6 @@ public static class SectMainStorySharedMethods
 		return -1;
 	}
 
-	/// <summary>
-	/// 计算毒物投入万蛊坛提供的毒素量
-	/// </summary>
 	public static PoisonInts CalcDropPoisonValue(IItemData data)
 	{
 		PoisonInts values = default(PoisonInts);
@@ -167,9 +143,6 @@ public static class SectMainStorySharedMethods
 		return values;
 	}
 
-	/// <summary>
-	/// 计算投入一批物品万蛊坛提供的毒素量
-	/// </summary>
 	public static PoisonInts CalcDropPoisonValue(SectWuxianWugJugData jugData, IEnumerable<IItemData> items)
 	{
 		PoisonInts addPoisons = default(PoisonInts);

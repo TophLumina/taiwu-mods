@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SkillGradeData : ConfigData<SkillGradeDataItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillGradeData Instance = new SkillGradeData();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "PracticeQualificationRequirement", "PracticeExpCost" };

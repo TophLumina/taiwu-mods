@@ -3,26 +3,14 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Mod;
 
-/// <summary>
-/// 由 Steam workshop 的 FileId 和 Mod 版本号组成的Id
-/// </summary>
 public struct ModId(ulong fileId, ulong version, byte source) : ISerializableGameData, IEquatable<ModId>
 {
-	/// <summary>
-	/// Mod 发布时的文件Id
-	/// </summary>
 	[SerializableGameDataField]
 	public ulong FileId = fileId;
 
-	/// <summary>
-	/// Mod 的版本
-	/// </summary>
 	[SerializableGameDataField]
 	public ulong Version = version;
 
-	/// <summary>
-	/// Mod临时Id，用于本地Mod测试
-	/// </summary>
 	[SerializableGameDataField]
 	public byte Source = source;
 

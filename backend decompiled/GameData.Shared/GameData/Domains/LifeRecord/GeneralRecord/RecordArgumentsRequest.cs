@@ -5,43 +5,26 @@ using GameData.Utilities;
 
 namespace GameData.Domains.LifeRecord.GeneralRecord;
 
-/// <summary>
-/// 通知类参数请求
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public struct RecordArgumentsRequest(ArgumentCollection argumentCollection) : ISerializableGameData
 {
-	/// <summary>
-	/// 角色 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> Characters = argumentCollection.Characters;
 
-	/// <summary>
-	/// 地点 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public List<Location> Locations = argumentCollection.Locations;
 
-	/// <summary>
-	/// 定居点 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> Settlements = argumentCollection.Settlements;
 
-	/// <summary>
-	/// 蛟龙 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> JiaoLoongs = argumentCollection.JiaoLoongs;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -56,7 +39,6 @@ public struct RecordArgumentsRequest(ArgumentCollection argumentCollection) : IS
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -135,7 +117,6 @@ public struct RecordArgumentsRequest(ArgumentCollection argumentCollection) : IS
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

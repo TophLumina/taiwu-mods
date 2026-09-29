@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Organization;
 
-/// <summary>
-/// 监牢数据
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SettlementPrison : ISerializableGameData
 {
@@ -23,27 +20,15 @@ public class SettlementPrison : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "LastBreakInDate", "Prisoners", "Bounties" };
 	}
 
-	/// <summary>
-	/// 上次劫狱时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int LastBreakInDate;
 
-	/// <summary>
-	/// 关押的角色集合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SettlementPrisoner> Prisoners;
 
-	/// <summary>
-	/// 悬赏的角色集合 (仅包含存档的犯罪记录)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<SettlementBounty> Bounties;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SettlementPrison()
 	{
 		LastBreakInDate = int.MinValue;
@@ -51,11 +36,6 @@ public class SettlementPrison : ISerializableGameData
 		Bounties = new List<SettlementBounty>();
 	}
 
-	/// <summary>
-	/// 获取囚犯
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public SettlementPrisoner GetPrisoner(int charId)
 	{
 		for (int i = Prisoners.Count - 1; i >= 0; i--)
@@ -69,11 +49,6 @@ public class SettlementPrison : ISerializableGameData
 		return null;
 	}
 
-	/// <summary>
-	/// 获取赏金
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public SettlementBounty GetBounty(int charId)
 	{
 		for (int i = Bounties.Count - 1; i >= 0; i--)
@@ -87,12 +62,6 @@ public class SettlementPrison : ISerializableGameData
 		return null;
 	}
 
-	/// <summary>
-	/// 离线移除囚犯并返回被移除的囚犯数据.
-	/// 如果该囚犯不存在，则返回 null.
-	/// </summary>
-	/// <param name="charId"></param>
-	/// <returns></returns>
 	public SettlementPrisoner OfflineRemovePrisoner(int charId)
 	{
 		for (int i = Prisoners.Count - 1; i >= 0; i--)
@@ -107,10 +76,6 @@ public class SettlementPrison : ISerializableGameData
 		return null;
 	}
 
-	/// <summary>
-	/// 离线移除赏金并返回被移除的赏金数据.
-	/// 如果该赏金不存在，则返回 null.
-	/// </summary>
 	public SettlementBounty OfflineRemoveBounty(int charId)
 	{
 		for (int i = Bounties.Count - 1; i >= 0; i--)
@@ -125,9 +90,6 @@ public class SettlementPrison : ISerializableGameData
 		return null;
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SettlementPrison(SettlementPrison other)
 	{
 		LastBreakInDate = other.LastBreakInDate;
@@ -161,9 +123,6 @@ public class SettlementPrison : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SettlementPrison other)
 	{
 		LastBreakInDate = other.LastBreakInDate;
@@ -197,13 +156,11 @@ public class SettlementPrison : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -242,7 +199,6 @@ public class SettlementPrison : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -318,7 +274,6 @@ public class SettlementPrison : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

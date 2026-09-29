@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Profession;
 
-/// <summary>
-/// 太吾志向技能装配
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class TaiwuProfessionSkillSlots : ISerializableGameData
 {
@@ -20,20 +17,11 @@ public class TaiwuProfessionSkillSlots : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[1] { "Slots" };
 	}
 
-	/// <summary>
-	/// 各个等级技能的装配栏位
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList[] Slots;
 
-	/// <summary>
-	/// 技能等级数
-	/// </summary>
 	public const int LevelCount = 4;
 
-	/// <summary>
-	/// 初始化
-	/// </summary>
 	public void Initialize()
 	{
 		Slots = new IntList[4];
@@ -49,9 +37,6 @@ public class TaiwuProfessionSkillSlots : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 所有槽位是否均已装满
-	/// </summary>
 	public bool IsFull()
 	{
 		IntList[] slots = Slots;
@@ -68,30 +53,17 @@ public class TaiwuProfessionSkillSlots : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 指定志向技能是已被装备
-	/// </summary>
-	/// <param name="professionSkillId"></param>
-	/// <returns></returns>
 	public bool IsEquipped(int professionSkillId)
 	{
 		ProfessionSkillItem skillCfg = ProfessionSkill.Instance[professionSkillId];
 		return Slots[skillCfg.Level - 1].Items.Contains(professionSkillId);
 	}
 
-	/// <summary>
-	/// 指定志向技能是已被装备
-	/// </summary>
-	/// <param name="skillCfg"></param>
-	/// <returns></returns>
 	public bool IsEquipped(ProfessionSkillItem skillCfg)
 	{
 		return Slots[skillCfg.Level - 1].Items.Contains(skillCfg.TemplateId);
 	}
 
-	/// <summary>
-	/// 自身是旧状态，传入新状态，计算哪些技能是新增的
-	/// </summary>
 	public IEnumerable<int> GetNewlyEquippedSkills(TaiwuProfessionSkillSlots newSlots)
 	{
 		for (int i = 0; i < 4; i++)
@@ -108,9 +80,6 @@ public class TaiwuProfessionSkillSlots : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 自身是旧状态，传入新状态，计算哪些技能是移除的
-	/// </summary>
 	public IEnumerable<int> GetNewlyRemovedSkills(TaiwuProfessionSkillSlots newSlots)
 	{
 		for (int i = 0; i < 4; i++)
@@ -127,13 +96,11 @@ public class TaiwuProfessionSkillSlots : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -157,7 +124,6 @@ public class TaiwuProfessionSkillSlots : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -189,7 +155,6 @@ public class TaiwuProfessionSkillSlots : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

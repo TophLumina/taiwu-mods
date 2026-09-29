@@ -155,7 +155,7 @@ public class CorpseWormBase : WugEffectBase
 		{
 			return dataValue;
 		}
-		if (base.CombatChar.CheckHealthImmunity(base.CombatChar.GetDataContext()))
+		if (base.CombatChar.CheckImmunityAndShowEffect(EMarkType.Health))
 		{
 			return dataValue;
 		}

@@ -10,38 +10,24 @@ namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
 public struct CharacterSelectFilter : ISerializableGameData
 {
-	/// <summary>
-	/// 筛选规则配置表id
-	/// </summary>
 	[SerializableGameDataField]
 	public short FilterTemplateId;
 
-	/// <summary>
-	/// 选中的角色key
-	/// </summary>
 	[SerializableGameDataField]
 	public string SelectKey;
 
-	/// <summary>
-	/// 所有可以被选择的角色集合（仅限该条规则）
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public CharacterSet AvailableCharacters;
 
-	/// <summary>
-	/// 所有可以被选择的角色显示数据集合
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> AvailableCharactersDisplayDataList;
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 2;
@@ -68,7 +54,6 @@ public struct CharacterSelectFilter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -135,7 +120,6 @@ public struct CharacterSelectFilter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

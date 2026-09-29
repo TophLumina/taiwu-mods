@@ -190,20 +190,28 @@ public class AdventureRemakeFunctions
 	[EventFunction(241)]
 	private static void AdventureExit(EventScriptRuntime runtime, string afterEvent)
 	{
-		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddAdventureRemakeExitEvent(afterEvent, runtime.ArgBox);
-		AdventureExitResetCharacterState(runtime);
-		AdventureExitResetElementParameter(runtime);
-		AdventureExitResetElementBlockIndex(runtime, IntList.Create());
-		AdventureExitInterruptAllActions(runtime);
-		AdventureExitResetTaiwuBuff(runtime);
-		DomainManager.Adventure.ExitAdventureImmediate(runtime.Context);
+		AdventureTaiwu adventureTaiwu = DomainManager.Adventure.GetAdventureTaiwu();
+		if (adventureTaiwu.InAdventure)
+		{
+			GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddAdventureRemakeExitEvent(afterEvent, runtime.ArgBox);
+			AdventureExitResetCharacterState(runtime);
+			AdventureExitResetElementParameter(runtime);
+			AdventureExitResetElementBlockIndex(runtime, IntList.Create());
+			AdventureExitInterruptAllActions(runtime);
+			AdventureExitResetTaiwuBuff(runtime);
+			DomainManager.Adventure.ExitAdventureImmediate(runtime.Context);
+		}
 	}
 
 	[EventFunction(687)]
 	private static void AdventureExitNotReset(EventScriptRuntime runtime, string afterEvent)
 	{
-		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddAdventureRemakeExitEvent(afterEvent, runtime.ArgBox);
-		DomainManager.Adventure.ExitAdventureImmediate(runtime.Context);
+		AdventureTaiwu adventureTaiwu = DomainManager.Adventure.GetAdventureTaiwu();
+		if (adventureTaiwu.InAdventure)
+		{
+			GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddAdventureRemakeExitEvent(afterEvent, runtime.ArgBox);
+			DomainManager.Adventure.ExitAdventureImmediate(runtime.Context);
+		}
 	}
 
 	[EventFunction(688)]
@@ -677,6 +685,122 @@ public class AdventureRemakeFunctions
 			DomainManager.Adventure.SetAny(runtime.Context, adventureRuntime);
 		}
 		return ValueInfo.Void;
+	}
+
+	[EventFunction(899)]
+	private static ValueInfo AdventureRemoveElementAndHandleBoundCharacterByInstanceId(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		int adventureId = -1;
+		if (runtime.ArgBox.Get("ConchShipPresetKey_AdventureId", ref adventureId) && DomainManager.Adventure.TryGetElement_Adventures(adventureId, out var adventureRuntime))
+		{
+			int elementInstanceId = parameters[0].GetIntValue(evaluator);
+			AdventureElement element = adventureRuntime.GetElement(elementInstanceId);
+			if (element == null)
+			{
+				Logger.Warn($"AdventureRemoveElementAndHandleBoundCharacterByInstanceId, element not found, ElementId:{elementInstanceId}");
+			}
+			else
+			{
+				RemoveAdventureElementsAndHandleBoundCharacters(runtime, adventureRuntime, new AdventureElement[1] { element });
+			}
+		}
+		return ValueInfo.Void;
+	}
+
+	[EventFunction(947)]
+	private static ValueInfo AdventureRemoveElementsAndHandleBoundCharactersByCoreId(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		int adventureId = -1;
+		if (runtime.ArgBox.Get("ConchShipPresetKey_AdventureId", ref adventureId) && DomainManager.Adventure.TryGetElement_Adventures(adventureId, out var adventureRuntime))
+		{
+			int elementCoreId = parameters[0].GetIntValue(evaluator);
+			RemoveAdventureElementsAndHandleBoundCharacters(runtime, adventureRuntime, adventureRuntime.GetElementsByCoreId(elementCoreId).ToList());
+		}
+		return ValueInfo.Void;
+	}
+
+	[EventFunction(948)]
+	private static ValueInfo AdventureRemoveElementsAndHandleBoundCharactersByTag(EventScriptRuntime runtime, ASTNode[] parameters)
+	{
+		Evaluator evaluator = runtime.Evaluator;
+		int adventureId = -1;
+		if (runtime.ArgBox.Get("ConchShipPresetKey_AdventureId", ref adventureId) && DomainManager.Adventure.TryGetElement_Adventures(adventureId, out var adventureRuntime))
+		{
+			string elementTag = parameters[0].GetStringValue(evaluator);
+			RemoveAdventureElementsAndHandleBoundCharacters(runtime, adventureRuntime, adventureRuntime.GetElementsByTag(elementTag).ToList());
+		}
+		return ValueInfo.Void;
+	}
+
+	private static void RemoveAdventureElementsAndHandleBoundCharacters(EventScriptRuntime runtime, AdventureRuntime adventureRuntime, IEnumerable<AdventureElement> elements)
+	{
+		bool changed = false;
+		foreach (AdventureElement element in elements)
+		{
+			changed |= RemoveAdventureElementAndHandleBoundCharacter(runtime, adventureRuntime, element);
+		}
+		if (changed)
+		{
+			DomainManager.Adventure.SetAny(runtime.Context, adventureRuntime);
+		}
+	}
+
+	private static bool RemoveAdventureElementAndHandleBoundCharacter(EventScriptRuntime runtime, AdventureRuntime adventureRuntime, AdventureElement element)
+	{
+		if (adventureRuntime.StatusType == EAdventureStatusType.Releasing)
+		{
+			Logger.Warn($"RemoveAdventureElementAndHandleBoundCharacter is not allowed while adventure is releasing, AdventureId:{adventureRuntime.Id}");
+			return false;
+		}
+		int characterId = element.CharacterId;
+		if (characterId < 0)
+		{
+			return adventureRuntime.RemoveElement(element.Id);
+		}
+		if (!DomainManager.Character.TryGetElement_Objects(characterId, out var character))
+		{
+			adventureRuntime.DynamicUnbindCharacterAndRemoveElement(element);
+			return adventureRuntime.GetElement(element.Id) == null;
+		}
+		bool isCalledCharacter = adventureRuntime.IsCalledCharacter(characterId);
+		bool isTemporaryCharacter = adventureRuntime.IsTemporaryCharacter(characterId);
+		if (!isCalledCharacter && !isTemporaryCharacter)
+		{
+			Logger.Warn($"Adventure element bound character is not registered as called or temporary, ElementId:{element.Id}, CharacterId:{characterId}");
+			return adventureRuntime.RemoveElement(element.Id);
+		}
+		byte creatingType = character.GetCreatingType();
+		if (isCalledCharacter && creatingType == 1)
+		{
+			DomainManager.Character.GroupMove(runtime.Context, character, adventureRuntime.MapLocation);
+		}
+		switch (adventureRuntime.DynamicUnbindCharacterAndRemoveElement(element))
+		{
+		case EAdventureUnbindType.None:
+			Logger.Warn($"Adventure element character unbind failed, ElementId:{element.Id}, CharacterId:{characterId}");
+			return false;
+		case EAdventureUnbindType.Called:
+			DomainManager.Character.ReleaseCharacterByAdventure(runtime.Context, character);
+			return true;
+		default:
+			character.DeactivateExternalRelationState(runtime.Context, 4uL);
+			if (creatingType != 1)
+			{
+				DomainManager.Character.RemoveNonIntelligentCharacter(runtime.Context, character);
+				return true;
+			}
+			if (DomainManager.Character.IsTemporaryIntelligentCharacter(characterId))
+			{
+				DomainManager.Character.RemoveTemporaryIntelligentCharacter(runtime.Context, character);
+			}
+			else
+			{
+				Logger.Warn($"Adventure temporary character is not registered as temporary, CharacterId:{characterId}");
+			}
+			return true;
+		}
 	}
 
 	[EventFunction(272)]
@@ -2786,9 +2910,11 @@ public class AdventureRemakeFunctions
 		{
 			throw new Exception($"Failed to fill preset character {character} cause adventure not found.");
 		}
-		if (adventure.DynamicBindKeyCharacter(characterKey, charId))
+		AdventureElement element = adventure.DynamicBindPreCheckKey(characterKey, charId);
+		if (element != null)
 		{
-			runtime.Context.CallCharacterByAdventure(adventure.MapLocation, character);
+			adventure.DynamicBindCalledCharacter(element, charId);
+			DomainManager.Character.CallCharacterByAdventure(runtime.Context, adventure.MapLocation, character);
 			DomainManager.Adventure.SetAny(runtime.Context, adventure);
 			return;
 		}
@@ -3100,6 +3226,7 @@ public class AdventureRemakeFunctions
 		{
 			return;
 		}
+		DataContext context = runtime.Context;
 		Location location = adventure.MapLocation;
 		List<MapBlockData> validBlocks = ObjectPool<List<MapBlockData>>.Instance.Get();
 		DomainManager.Map.GetValidBlocksForRandomEnemy(location.AreaId, location.BlockId, 3, onSettlement: false, nearTaiwu: false, validBlocks);
@@ -3116,7 +3243,7 @@ public class AdventureRemakeFunctions
 				MapTemplateEnemyInfo enemyInfo = block.TemplateEnemyList[i];
 				if (enemyInfo.SourceAdventureBlockId == location.BlockId)
 				{
-					Events.RaiseTemplateEnemyLocationChanged(runtime.Context, enemyInfo, enemyLocation, Location.Invalid);
+					Events.RaiseTemplateEnemyLocationChanged(context, enemyInfo, enemyLocation, Location.Invalid);
 				}
 			}
 		}
@@ -3124,7 +3251,7 @@ public class AdventureRemakeFunctions
 		EAdventureRemoveType removeType = (EAdventureRemoveType)runtime.ArgBox.GetInt("ConchShipPresetKey_RemoveType");
 		if (removeType == EAdventureRemoveType.Complete)
 		{
-			DomainManager.Adventure.AddLegacyPointDestroyEnemyNest(runtime.Context, adventure.Core.Grade);
+			DomainManager.Adventure.ApplyDestroyEnemyNest(context, enemyNest.TemplateId);
 		}
 	}
 

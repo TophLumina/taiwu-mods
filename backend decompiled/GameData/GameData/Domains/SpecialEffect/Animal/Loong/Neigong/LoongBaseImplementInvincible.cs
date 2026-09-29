@@ -24,6 +24,10 @@ public class LoongBaseImplementInvincible : ISpecialEffectImplement, ISpecialEff
 		{
 			return dataValue;
 		}
+		if (EffectBase.CombatChar.AnimalConfig == null)
+		{
+			return dataValue;
+		}
 		return true;
 	}
 }

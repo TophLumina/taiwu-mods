@@ -3,16 +3,8 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 鸡
-/// </summary>
 public struct ChickenBlessingInfoData(ChickenBlessingInfoData other) : ISerializableGameData
 {
-	/// <summary>
-	/// 被鸡祝福的剩余时间
-	/// key: 被鸡祝福的特性 TemplateId
-	/// value: 被鸡祝福的剩余时间月数
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<short, sbyte> RemainingMonths = new Dictionary<short, sbyte>(other.RemainingMonths);
 

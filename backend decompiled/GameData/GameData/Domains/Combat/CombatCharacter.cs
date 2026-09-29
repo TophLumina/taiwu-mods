@@ -29,7 +29,7 @@ using Redzen.Random;
 namespace GameData.Domains.Combat;
 
 [SerializableGameData(NotForDisplayModule = true)]
-public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiParticipant, ICombatCharacterBridge, ISerializableGameData
+public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiParticipant, ICombatCharacterBridge, IImmunityMaskProvider, ISerializableGameData
 {
 	internal class FixedFieldInfos
 	{
@@ -289,111 +289,107 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 		public const int UseItemPreparePercent_Size = 1;
 
-		public const uint CombatReserveData_Offset = 559u;
-
-		public const int CombatReserveData_Size = 12;
-
-		public const uint XiangshuEffectId_Offset = 571u;
+		public const uint XiangshuEffectId_Offset = 559u;
 
 		public const int XiangshuEffectId_Size = 2;
 
-		public const uint HazardValue_Offset = 573u;
+		public const uint HazardValue_Offset = 561u;
 
 		public const int HazardValue_Size = 4;
 
-		public const uint AnimationTimeScale_Offset = 577u;
+		public const uint AnimationTimeScale_Offset = 565u;
 
 		public const int AnimationTimeScale_Size = 4;
 
-		public const uint AttackOutOfRange_Offset = 581u;
+		public const uint AttackOutOfRange_Offset = 569u;
 
 		public const int AttackOutOfRange_Size = 1;
 
-		public const uint BossPhase_Offset = 582u;
+		public const uint BossPhase_Offset = 570u;
 
 		public const int BossPhase_Size = 1;
 
-		public const uint ShowTransferInjuryCommand_Offset = 583u;
+		public const uint ShowTransferInjuryCommand_Offset = 571u;
 
 		public const int ShowTransferInjuryCommand_Size = 1;
 
-		public const uint ExecutingTeammateCommand_Offset = 584u;
+		public const uint ExecutingTeammateCommand_Offset = 572u;
 
 		public const int ExecutingTeammateCommand_Size = 1;
 
-		public const uint Visible_Offset = 585u;
+		public const uint Visible_Offset = 573u;
 
 		public const int Visible_Size = 1;
 
-		public const uint TeammateCommandPreparePercent_Offset = 586u;
+		public const uint TeammateCommandPreparePercent_Offset = 574u;
 
 		public const int TeammateCommandPreparePercent_Size = 1;
 
-		public const uint TeammateCommandTimePercent_Offset = 587u;
+		public const uint TeammateCommandTimePercent_Offset = 575u;
 
 		public const int TeammateCommandTimePercent_Size = 1;
 
-		public const uint AttackCommandWeaponKey_Offset = 588u;
+		public const uint AttackCommandWeaponKey_Offset = 576u;
 
 		public const int AttackCommandWeaponKey_Size = 8;
 
-		public const uint AttackCommandTrickType_Offset = 596u;
+		public const uint AttackCommandTrickType_Offset = 584u;
 
 		public const int AttackCommandTrickType_Size = 1;
 
-		public const uint DefendCommandSkillId_Offset = 597u;
+		public const uint DefendCommandSkillId_Offset = 585u;
 
 		public const int DefendCommandSkillId_Size = 2;
 
-		public const uint ShowEffectCommandIndex_Offset = 599u;
+		public const uint ShowEffectCommandIndex_Offset = 587u;
 
 		public const int ShowEffectCommandIndex_Size = 1;
 
-		public const uint AttackCommandSkillId_Offset = 600u;
+		public const uint AttackCommandSkillId_Offset = 588u;
 
 		public const int AttackCommandSkillId_Size = 2;
 
-		public const uint TargetDistance_Offset = 602u;
+		public const uint TargetDistance_Offset = 590u;
 
 		public const int TargetDistance_Size = 2;
 
-		public const uint NeiliAllocationCd_Offset = 604u;
+		public const uint NeiliAllocationCd_Offset = 592u;
 
 		public const int NeiliAllocationCd_Size = 8;
 
-		public const uint ProportionDelta_Offset = 612u;
+		public const uint ProportionDelta_Offset = 600u;
 
 		public const int ProportionDelta_Size = 8;
 
-		public const uint NormalAttackRecovery_Offset = 620u;
+		public const uint NormalAttackRecovery_Offset = 608u;
 
 		public const int NormalAttackRecovery_Size = 8;
 
-		public const uint ReserveNormalAttack_Offset = 628u;
+		public const uint ReserveNormalAttack_Offset = 616u;
 
 		public const int ReserveNormalAttack_Size = 1;
 
-		public const uint Gangqi_Offset = 629u;
+		public const uint Gangqi_Offset = 617u;
 
 		public const int Gangqi_Size = 4;
 
-		public const uint GangqiMax_Offset = 633u;
+		public const uint GangqiMax_Offset = 621u;
 
 		public const int GangqiMax_Size = 4;
 
-		public const uint MoveState_Offset = 637u;
+		public const uint MoveState_Offset = 625u;
 
 		public const int MoveState_Size = 1;
 
-		public const uint PlayerControllingMove_Offset = 638u;
+		public const uint PlayerControllingMove_Offset = 626u;
 
 		public const int PlayerControllingMove_Size = 1;
 
-		public const uint MindRhythm_Offset = 639u;
+		public const uint MindRhythm_Offset = 627u;
 
 		public const int MindRhythm_Size = 8;
 
-		public const uint MindUpheavalTime_Offset = 647u;
+		public const uint MindUpheavalTime_Offset = 635u;
 
 		public const int MindUpheavalTime_Size = 8;
 	}
@@ -729,10 +725,6 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public int NeedNormalAttackSkipPrepare;
 
-	public bool NeedBreakAttack;
-
-	public bool IsBreakAttacking;
-
 	public int ForbidNormalAttackEffectCount;
 
 	public bool CanNormalAttackInPrepareSkill;
@@ -890,6 +882,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public readonly List<TeammateCommandDisplayData> NeedShowCommandList = new List<TeammateCommandDisplayData>();
 
+	private readonly Dictionary<CombatCharacter, List<byte>> _showedAbsorbNeiliAllocations = new Dictionary<CombatCharacter, List<byte>>();
+
 	public string SpecialAnimationLoop;
 
 	public bool NeedSelectMercyOption;
@@ -897,6 +891,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 	public bool NeedDelaySettlement;
 
 	public bool NeedEnterSpecialShow = false;
+
+	public bool NeedUseGoldenWire = false;
 
 	[CollectionObjectField(false, true, false, false, false)]
 	private sbyte _bossPhase;
@@ -1202,9 +1198,9 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	private readonly List<IExtraUnlockEffect> _costedUnlockEffects = new List<IExtraUnlockEffect>();
 
-	public const int FixedSize = 655;
+	public const int FixedSize = 643;
 
-	public const int DynamicCount = 42;
+	public const int DynamicCount = 43;
 
 	private static readonly ushort[] ArchiveFieldIds = new ushort[133]
 	{
@@ -1214,17 +1210,17 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
 		43, 46, 47, 48, 49, 56, 57, 58, 59, 60,
 		61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
-		71, 72, 73, 74, 75, 80, 81, 89, 90, 100,
-		101, 103, 104, 105, 106, 107, 108, 109, 110, 111,
-		113, 117, 118, 123, 124, 125, 126, 127, 128, 130,
-		131, 28, 31, 42, 44, 45, 50, 51, 52, 53,
-		54, 55, 76, 77, 78, 79, 82, 83, 84, 85,
+		71, 72, 73, 74, 80, 81, 89, 90, 100, 101,
+		103, 104, 105, 106, 107, 108, 109, 110, 111, 113,
+		117, 118, 123, 124, 125, 126, 127, 128, 130, 131,
+		28, 31, 42, 44, 45, 50, 51, 52, 53, 54,
+		55, 75, 76, 77, 78, 79, 82, 83, 84, 85,
 		86, 87, 88, 91, 92, 93, 94, 95, 96, 97,
 		98, 99, 102, 112, 114, 115, 116, 119, 120, 121,
 		122, 129, 132
 	};
 
-	private static readonly int[] FixedArchiveFieldSizes = new int[91]
+	private static readonly int[] FixedArchiveFieldSizes = new int[90]
 	{
 		4, 4, 4, 8, 8, 8, 2, 1, 4, 4,
 		4, 4, 1, 2, 2, 4, 4, 6, 1, 56,
@@ -1232,10 +1228,9 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		64, 28, 28, 4, 4, 56, 56, 4, 4, 7,
 		7, 24, 24, 24, 18, 2, 1, 2, 1, 1,
 		1, 2, 2, 1, 2, 1, 1, 5, 1, 1,
-		1, 1, 8, 1, 12, 2, 4, 4, 1, 1,
-		1, 1, 1, 1, 1, 8, 1, 2, 1, 2,
-		2, 8, 8, 8, 1, 4, 4, 1, 1, 8,
-		8
+		1, 1, 8, 1, 2, 4, 4, 1, 1, 1,
+		1, 1, 1, 1, 8, 1, 2, 1, 2, 2,
+		8, 8, 8, 1, 4, 4, 1, 1, 8, 8
 	};
 
 	public BossItem BossConfig { get; private set; }
@@ -1317,6 +1312,18 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 	private string AttackPostfix => BossConfig?.AttackEffectPostfix[_usingWeaponIndex] ?? string.Empty;
 
 	public bool AnyRawCreate => _rawCreateEffects.Count > 0;
+
+	bool IImmunityMaskProvider.InnerInjuryImmunity => InnerInjuryImmunity;
+
+	bool IImmunityMaskProvider.OuterInjuryImmunity => OuterInjuryImmunity;
+
+	bool IImmunityMaskProvider.MindImmunity => MindImmunity;
+
+	bool IImmunityMaskProvider.FlawImmunity => FlawImmunity;
+
+	bool IImmunityMaskProvider.AcupointImmunity => AcupointImmunity;
+
+	public ImmunityMask Immunity => ImmunityMask.From(this) + _character.GetImmunityMask();
 
 	public MoveState MoveState => _moveState;
 
@@ -1460,8 +1467,6 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		_attackingTrickType = -1;
 		ForbidNormalAttackEffectCount = 0;
 		CanNormalAttackInPrepareSkill = false;
-		NeedBreakAttack = false;
-		IsBreakAttacking = false;
 		NeedNormalAttackImmediate = false;
 		NeedNormalAttackSkipPrepare = 0;
 		NormalAttackBodyPart = -1;
@@ -1709,6 +1714,10 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		{
 			_newPoisonsToShow.Initialize();
 			SetNewPoisonsToShow(ref _newPoisonsToShow, context);
+		}
+		foreach (List<byte> types in _showedAbsorbNeiliAllocations.Values)
+		{
+			types.Clear();
 		}
 	}
 
@@ -2735,6 +2744,12 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		}
 		value = -target.ChangeNeiliAllocation(context, type, -value);
 		ChangeNeiliAllocation(context, type, value);
+		List<byte> types = _showedAbsorbNeiliAllocations.GetOrNew(target);
+		if (types.Contains(type))
+		{
+			return true;
+		}
+		types.Add(type);
 		GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.CombatShowAbsorbNeiliAllocation, target._id, _id, type);
 		return true;
 	}
@@ -2766,9 +2781,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public void AddOrUpdateFlawOrAcupoint(DataContext context, sbyte bodyPart, bool isFlaw, sbyte level, bool raiseEvent = true, int leftFrames = -1, int totalFrames = -1)
 	{
-		if (isFlaw ? GetFlawImmunity() : GetAcupointImmunity())
+		if (CheckImmunityAndShowEffect(isFlaw ? EMarkType.Flaw : EMarkType.Acupoint))
 		{
-			ShowImmunityEffectTips(context, isFlaw ? EMarkType.Flaw : EMarkType.Acupoint);
 			return;
 		}
 		int maxCount = (isFlaw ? GetMaxFlawCount() : GetMaxAcupointCount());
@@ -2848,9 +2862,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public int UpgradeRandomFlawOrAcupoint(DataContext context, bool isFlaw, int count = 1, sbyte bodyPart = -1)
 	{
-		if (isFlaw ? GetFlawImmunity() : GetAcupointImmunity())
+		if (CheckImmunityAndShowEffect(isFlaw ? EMarkType.Flaw : EMarkType.Acupoint))
 		{
-			ShowImmunityEffectTips(context, isFlaw ? EMarkType.Flaw : EMarkType.Acupoint);
 			return 0;
 		}
 		int[] keepTimeArray = (isFlaw ? GlobalConfig.Instance.FlawBaseKeepTime : GlobalConfig.Instance.AcupointBaseKeepTime);
@@ -3083,6 +3096,14 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		}
 	}
 
+	public unsafe void AddPoisonToShow(DataContext context, sbyte poisonType, sbyte level, int poisonValue)
+	{
+		PoisonsAndLevels poisonToShow = _newPoisonsToShow;
+		poisonToShow.Levels[poisonType] = Math.Max(poisonToShow.Levels[poisonType], level);
+		poisonToShow.Values[poisonType] = (short)(Math.Max((int)poisonToShow.Values[poisonType], 0) + poisonValue);
+		SetNewPoisonsToShow(ref poisonToShow, context);
+	}
+
 	public void AddMindDamageToShow(DataContext context, int mindDamage)
 	{
 		DomainManager.Combat.AccumulateSkillDamage(context, this, EMarkType.Mind, mindDamage);
@@ -3218,14 +3239,11 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 	{
 		int add = 0;
 		int reduce = 0;
-		foreach (short featureId in _character.GetFeatureIds())
+		foreach (short featureId in _character.GetValidFeatureIds())
 		{
-			if (!_character.HideAndDisableFeature(featureId))
-			{
-				CharacterFeatureItem config = CharacterFeature.Instance[featureId];
-				add = Math.Max(add, config.SilenceFramePercent);
-				reduce = Math.Min(reduce, config.SilenceFramePercent);
-			}
+			CharacterFeatureItem config = CharacterFeature.Instance[featureId];
+			add = Math.Max(add, config.SilenceFramePercent);
+			reduce = Math.Min(reduce, config.SilenceFramePercent);
 		}
 		return (add: add, reduce: reduce);
 	}
@@ -3372,7 +3390,7 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public bool HasDoingOrReserveCommand()
 	{
-		bool hasCmd = StateMachine.GetCurrentStateType() != CombatCharacterStateType.Idle || _combatReserveData.AnyReserve || NeedNormalAttack || NeedChangeTrickAttack || NeedUnlockAttack || NeedBreakAttack || NeedUseSkillFreeId >= 0 || ChangeCharId >= 0;
+		bool hasCmd = StateMachine.GetCurrentStateType() != CombatCharacterStateType.Idle || _combatReserveData.AnyReserve || NeedNormalAttack || NeedChangeTrickAttack || NeedUnlockAttack || NeedUseGoldenWire || NeedUseSkillFreeId >= 0 || ChangeCharId >= 0;
 		if (!hasCmd && _combatDomain.IsMainCharacter(this))
 		{
 			int[] charList = (IsAlly ? _combatDomain.GetSelfTeam() : _combatDomain.GetEnemyTeam());
@@ -3390,7 +3408,7 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public void ClearAllDoingOrReserveCommand(DataContext context)
 	{
-		NeedChangeTrickAttack = (NeedUnlockAttack = (NeedBreakAttack = false));
+		NeedChangeTrickAttack = (NeedUnlockAttack = (NeedUseGoldenWire = false));
 		SetPreparingSkillId(-1, context);
 		SetAffectingMoveSkillId(-1, context);
 		SetAffectingDefendSkillId(-1, context);
@@ -3440,6 +3458,11 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		SetCombatReserveData(CombatReserveData.CreateTeammateCommand(teammateId, index), context);
 	}
 
+	public void SetNeedSmarterChicken(DataContext context, IReadOnlyList<int> ids)
+	{
+		SetCombatReserveData(CombatReserveData.CreateSmarterChicken(ids), context);
+	}
+
 	public void NormalAttackFree()
 	{
 		NeedFreeAttack = true;
@@ -3448,31 +3471,6 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 	public void FinishFreeAttack()
 	{
 		IsAutoNormalAttacking = false;
-	}
-
-	public bool GetOuterInjuryImmunity()
-	{
-		return _character.GetOuterInjuryImmunity() || OuterInjuryImmunity;
-	}
-
-	public bool GetInnerInjuryImmunity()
-	{
-		return _character.GetInnerInjuryImmunity() || InnerInjuryImmunity;
-	}
-
-	public bool GetMindImmunity()
-	{
-		return _character.GetMindImmunity() || MindImmunity;
-	}
-
-	public bool GetFlawImmunity()
-	{
-		return _character.GetFlawImmunity() || FlawImmunity;
-	}
-
-	public bool GetAcupointImmunity()
-	{
-		return _character.GetAcupointImmunity() || AcupointImmunity;
 	}
 
 	public void ClearAllSound(DataContext context)
@@ -4309,6 +4307,19 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		return _character.GetBehaviorType();
 	}
 
+	public string GetWrappedFullAnimationName(string animation)
+	{
+		if (BossConfig != null)
+		{
+			return BossConfig.AniPrefix[_bossPhase] + animation;
+		}
+		if (AnimalConfig != null)
+		{
+			return AnimalConfig.AniPrefix + animation;
+		}
+		return animation;
+	}
+
 	public string GetIdleAni()
 	{
 		int usingWeaponIndex = _usingWeaponIndex;
@@ -4423,56 +4434,19 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		return $"{Config.TrickType.Instance[trickType].AttackAnimations[UsingWeaponAction]}_{PursueAttackCount}";
 	}
 
-	public string GetNormalAttackAnimationFull(sbyte trickType)
-	{
-		string animation = GetNormalAttackAnimation(trickType);
-		return GetNormalAttackAnimationFull(animation);
-	}
-
-	public string GetNormalAttackAnimationFull(string animation)
-	{
-		if (BossConfig != null)
-		{
-			return BossConfig.AniPrefix[_bossPhase] + animation;
-		}
-		if (AnimalConfig != null)
-		{
-			return AnimalConfig.AniPrefix + animation;
-		}
-		return animation;
-	}
-
 	public PrepareAttackEffect GetPrepareAttackAni(sbyte trickType, int aniIndex)
 	{
 		TrickTypeItem trickData = Config.TrickType.Instance[trickType];
 		string aniName;
 		string fullAniName;
-		if (IsBreakAttacking)
-		{
-			if (BossConfig == null && AnimalConfig == null)
-			{
-				aniName = (fullAniName = trickData.AttackAnimations[aniIndex] + "_B0");
-			}
-			else if (BossConfig != null)
-			{
-				string postfix = BossConfig.AttackEffectPostfix[GetUsingWeaponIndex()];
-				aniName = BossConfig.AttackAnimation + "_B0" + postfix;
-				fullAniName = BossConfig.AniPrefix[GetBossPhase()] + aniName;
-			}
-			else
-			{
-				aniName = (fullAniName = null);
-			}
-			return new PrepareAttackEffect(aniName, fullAniName);
-		}
 		if (BossConfig == null && AnimalConfig == null)
 		{
 			aniName = (fullAniName = trickData.AttackAnimations[aniIndex] + "_7");
 		}
 		else if (BossConfig != null)
 		{
-			string postfix2 = BossConfig.AttackEffectPostfix[GetUsingWeaponIndex()];
-			aniName = BossConfig.AttackAnimation + "_7" + postfix2;
+			string postfix = BossConfig.AttackEffectPostfix[GetUsingWeaponIndex()];
+			aniName = BossConfig.AttackAnimation + "_7" + postfix;
 			fullAniName = BossConfig.AniPrefix[GetBossPhase()] + aniName;
 		}
 		else
@@ -4964,8 +4938,12 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		_markDataUids.Clear();
 	}
 
-	public void ShowImmunityEffectTips(DataContext context, EMarkType markType)
+	public bool CheckImmunityAndShowEffect(EMarkType markType)
 	{
+		if (!Immunity.IsImmune(markType))
+		{
+			return false;
+		}
 		if (1 == 0)
 		{
 		}
@@ -4985,10 +4963,12 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		{
 		}
 		int effectId = num;
-		if (effectId >= 0)
+		if (effectId < 0)
 		{
-			DomainManager.Combat.ShowSpecialEffectTips(_id, effectId, 0);
+			return true;
 		}
+		DomainManager.Combat.ShowSpecialEffectTips(_id, effectId, 0);
+		return true;
 	}
 
 	public int CalcMarkTypeCount()
@@ -5006,9 +4986,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public void AddInjury(DataContext context, sbyte bodyPart, bool isInner, int value, bool updateDefeatMark = false, bool changeToOld = false)
 	{
-		if (value <= 0 || (isInner ? GetInnerInjuryImmunity() : GetOuterInjuryImmunity()))
+		if (value <= 0 || CheckImmunityAndShowEffect(isInner ? EMarkType.Inner : EMarkType.Outer))
 		{
-			ShowImmunityEffectTips(context, isInner ? EMarkType.Inner : EMarkType.Outer);
 			return;
 		}
 		if (ChangeToMindMark)
@@ -5023,6 +5002,7 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 			injuries.Change(bodyPart, isInner, value);
 			SetInjuries(context, injuries, updateDefeatMark);
 		}
+		changeToOld = changeToOld || CheckEffectChangeToOld(context.Random, isInner);
 		if (changeToOld)
 		{
 			ChangeToOldInjury(context, bodyPart, isInner, value);
@@ -5030,11 +5010,16 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		Events.RaiseAddInjury(context, this, bodyPart, isInner, value, changeToOld);
 	}
 
+	private bool CheckEffectChangeToOld(IRandomSource random, bool inner)
+	{
+		int changeToOldOdds = DomainManager.SpecialEffect.ModifyValue(_id, (ushort)345, 0, inner ? 1 : 0, -1, -1, 0, 0, 0, 0);
+		return random.CheckPercentProb(changeToOldOdds);
+	}
+
 	public void AddRandomInjury(DataContext context, bool inner, int count = 1, bool changeToOld = false)
 	{
-		if (inner ? GetInnerInjuryImmunity() : GetOuterInjuryImmunity())
+		if (CheckImmunityAndShowEffect(inner ? EMarkType.Inner : EMarkType.Outer))
 		{
-			ShowImmunityEffectTips(context, inner ? EMarkType.Inner : EMarkType.Outer);
 			return;
 		}
 		if (ChangeToMindMark)
@@ -5117,6 +5102,28 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		}
 		ObjectPool<List<sbyte>>.Instance.Return(pool);
 		SetInjuries(context, injuries);
+	}
+
+	public void RemoveRandomInjury(DataContext context, bool inner, int count = 1)
+	{
+		List<sbyte> pool = ObjectPool<List<sbyte>>.Instance.Get();
+		Injuries injuries = GetInjuries().Subtract(GetOldInjuries());
+		for (sbyte i = 0; i < 7; i++)
+		{
+			sbyte value = injuries.Get(i, inner);
+			pool.AddRepeat(i, value);
+		}
+		bool anyRemoved = false;
+		foreach (sbyte bodyPart in RandomUtils.GetRandomUnrepeated(context.Random, count, pool))
+		{
+			anyRemoved = true;
+			RemoveInjury(context, bodyPart, inner, 1, updateDefeatMark: false);
+		}
+		ObjectPool<List<sbyte>>.Instance.Return(pool);
+		if (anyRemoved)
+		{
+			DomainManager.Combat.UpdateBodyDefeatMark(context, this);
+		}
 	}
 
 	public bool RemoveRandomInjury(DataContext context, int count = 1)
@@ -5333,9 +5340,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public void AddMindMark(DataContext context, int count, short skillId = -1, bool forceInfinite = false)
 	{
-		if (GetMindImmunity())
+		if (CheckImmunityAndShowEffect(EMarkType.Mind))
 		{
-			ShowImmunityEffectTips(context, EMarkType.Mind);
 			return;
 		}
 		count = DomainManager.SpecialEffect.ModifyData(_id, -1, 249, count);
@@ -5574,9 +5580,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public int AddFatalMark(DataContext context, int count, int type = -1, sbyte bodyPart = -1, bool addByValue = false, EDamageType damageType = EDamageType.None)
 	{
-		if (_character.GetFatalImmunity())
+		if (CheckImmunityAndShowEffect(EMarkType.Fatal))
 		{
-			ShowImmunityEffectTips(context, EMarkType.Fatal);
 			return 0;
 		}
 		count = DomainManager.SpecialEffect.ModifyData(_id, -1, 192, count, type, bodyPart, addByValue ? 1 : 0);
@@ -5708,9 +5713,8 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public void AddDieMark(DataContext context, CombatSkillKey skillKey, int count)
 	{
-		if (GetCharacter().GetDieImmunity())
+		if (CheckImmunityAndShowEffect(EMarkType.Die))
 		{
-			ShowImmunityEffectTips(context, EMarkType.Die);
 			return;
 		}
 		if (ChangeToMindMark)
@@ -5820,16 +5824,6 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		return (scatter: scatter, bulge: bulge);
 	}
 
-	public bool CheckHealthImmunity(DataContext context)
-	{
-		if (_character.GetFeatureIds().All((short x) => !CharacterFeature.Instance[x].IgnoreHealthMark))
-		{
-			return false;
-		}
-		ShowImmunityEffectTips(context, EMarkType.Health);
-		return true;
-	}
-
 	public void UpdateHealthMark(DataContext context)
 	{
 		sbyte oldCount = _defeatMarkCollection.HealthMarkCount;
@@ -5857,6 +5851,15 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		UpdateStateMark(context);
 		UpdateNeiliAllocationMark(context);
 		UpdateHealthMark(context);
+	}
+
+	public void SetTargetDistance(DataContext context, short targetDistance)
+	{
+		if (_targetDistance != targetDistance)
+		{
+			SetTargetDistance(targetDistance, context);
+			_combatDomain.UpdateAllTeammateCommandUsable(context, IsAlly, ETeammateCommandImplement.GotoTargetDistance);
+		}
 	}
 
 	public int CalcNormalAttackStartupFrames()
@@ -6648,7 +6651,7 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 			}
 		}
 		teammateChar.SetShowEffectCommandIndex((sbyte)index, context);
-		if (implement.IsFight() || implement.IsPushOrPull())
+		if (implement.IsFight() || implement.IsMove())
 		{
 			MoveData.ResetJumpState(context);
 		}
@@ -8981,6 +8984,7 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		_defenceSkillList = new List<short>();
 		_assistSkillList = new List<short>();
 		_otherActionCanUse = new bool[5];
+		_combatReserveData = new CombatReserveData();
 		_buffCombatStateCollection = new CombatStateCollection();
 		_debuffCombatStateCollection = new CombatStateCollection();
 		_specialCombatStateCollection = new CombatStateCollection();
@@ -9085,7 +9089,7 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 
 	public override int GetSerializedSizeWithoutHeader()
 	{
-		int totalSize = 823;
+		int totalSize = 815;
 		int dataSize = _tricks.GetSerializedSize();
 		totalSize += dataSize;
 		int dataSize2 = _injuryAutoHealCollection.GetSerializedSize();
@@ -9118,117 +9122,119 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		int contentSize5 = 2 * elementsCount5;
 		int dataSize11 = 2 + contentSize5;
 		totalSize += dataSize11;
-		int dataSize12 = _buffCombatStateCollection.GetSerializedSize();
+		int dataSize12 = _combatReserveData.GetSerializedSize();
 		totalSize += dataSize12;
-		int dataSize13 = _debuffCombatStateCollection.GetSerializedSize();
+		int dataSize13 = _buffCombatStateCollection.GetSerializedSize();
 		totalSize += dataSize13;
-		int dataSize14 = _specialCombatStateCollection.GetSerializedSize();
+		int dataSize14 = _debuffCombatStateCollection.GetSerializedSize();
 		totalSize += dataSize14;
-		int dataSize15 = _skillEffectCollection.GetSerializedSize();
+		int dataSize15 = _specialCombatStateCollection.GetSerializedSize();
 		totalSize += dataSize15;
-		int dataSize16 = _showEffectList.GetSerializedSize();
+		int dataSize16 = _skillEffectCollection.GetSerializedSize();
 		totalSize += dataSize16;
+		int dataSize17 = _showEffectList.GetSerializedSize();
+		totalSize += dataSize17;
 		int elementsCount6 = _animationToLoop.Length;
 		int contentSize6 = 2 * elementsCount6;
-		int dataSize17 = 4 + contentSize6;
-		totalSize += dataSize17;
+		int dataSize18 = 4 + contentSize6;
+		totalSize += dataSize18;
 		int elementsCount7 = _animationToPlayOnce.Length;
 		int contentSize7 = 2 * elementsCount7;
-		int dataSize18 = 4 + contentSize7;
-		totalSize += dataSize18;
+		int dataSize19 = 4 + contentSize7;
+		totalSize += dataSize19;
 		int elementsCount8 = _particleToPlay.Length;
 		int contentSize8 = 2 * elementsCount8;
-		int dataSize19 = 4 + contentSize8;
-		totalSize += dataSize19;
+		int dataSize20 = 4 + contentSize8;
+		totalSize += dataSize20;
 		int elementsCount9 = _particleToLoop.Length;
 		int contentSize9 = 2 * elementsCount9;
-		int dataSize20 = 4 + contentSize9;
-		totalSize += dataSize20;
+		int dataSize21 = 4 + contentSize9;
+		totalSize += dataSize21;
 		int elementsCount10 = _skillPetAnimation.Length;
 		int contentSize10 = 2 * elementsCount10;
-		int dataSize21 = 4 + contentSize10;
-		totalSize += dataSize21;
+		int dataSize22 = 4 + contentSize10;
+		totalSize += dataSize22;
 		int elementsCount11 = _petParticle.Length;
 		int contentSize11 = 2 * elementsCount11;
-		int dataSize22 = 4 + contentSize11;
-		totalSize += dataSize22;
+		int dataSize23 = 4 + contentSize11;
+		totalSize += dataSize23;
 		int elementsCount12 = _attackSoundToPlay.Length;
 		int contentSize12 = 2 * elementsCount12;
-		int dataSize23 = 4 + contentSize12;
-		totalSize += dataSize23;
+		int dataSize24 = 4 + contentSize12;
+		totalSize += dataSize24;
 		int elementsCount13 = _skillSoundToPlay.Length;
 		int contentSize13 = 2 * elementsCount13;
-		int dataSize24 = 4 + contentSize13;
-		totalSize += dataSize24;
+		int dataSize25 = 4 + contentSize13;
+		totalSize += dataSize25;
 		int elementsCount14 = _hitSoundToPlay.Length;
 		int contentSize14 = 2 * elementsCount14;
-		int dataSize25 = 4 + contentSize14;
-		totalSize += dataSize25;
+		int dataSize26 = 4 + contentSize14;
+		totalSize += dataSize26;
 		int elementsCount15 = _armorHitSoundToPlay.Length;
 		int contentSize15 = 2 * elementsCount15;
-		int dataSize26 = 4 + contentSize15;
-		totalSize += dataSize26;
+		int dataSize27 = 4 + contentSize15;
+		totalSize += dataSize27;
 		int elementsCount16 = _whooshSoundToPlay.Length;
 		int contentSize16 = 2 * elementsCount16;
-		int dataSize27 = 4 + contentSize16;
-		totalSize += dataSize27;
+		int dataSize28 = 4 + contentSize16;
+		totalSize += dataSize28;
 		int elementsCount17 = _shockSoundToPlay.Length;
 		int contentSize17 = 2 * elementsCount17;
-		int dataSize28 = 4 + contentSize17;
-		totalSize += dataSize28;
+		int dataSize29 = 4 + contentSize17;
+		totalSize += dataSize29;
 		int elementsCount18 = _stepSoundToPlay.Length;
 		int contentSize18 = 2 * elementsCount18;
-		int dataSize29 = 4 + contentSize18;
-		totalSize += dataSize29;
+		int dataSize30 = 4 + contentSize18;
+		totalSize += dataSize30;
 		int elementsCount19 = _dieSoundToPlay.Length;
 		int contentSize19 = 2 * elementsCount19;
-		int dataSize30 = 4 + contentSize19;
-		totalSize += dataSize30;
+		int dataSize31 = 4 + contentSize19;
+		totalSize += dataSize31;
 		int elementsCount20 = _soundToLoop.Length;
 		int contentSize20 = 2 * elementsCount20;
-		int dataSize31 = 4 + contentSize20;
-		totalSize += dataSize31;
+		int dataSize32 = 4 + contentSize20;
+		totalSize += dataSize32;
 		int elementsCount21 = _currTeammateCommands.Count;
 		int contentSize21 = elementsCount21;
-		int dataSize32 = 2 + contentSize21;
-		totalSize += dataSize32;
-		int dataSize33 = 2;
+		int dataSize33 = 2 + contentSize21;
+		totalSize += dataSize33;
+		int dataSize34 = 2;
 		int elementsCount22 = _teammateCommandBanReasons.Count;
 		for (int i = 0; i < elementsCount22; i++)
 		{
-			dataSize33 += _teammateCommandBanReasons[i].GetSerializedSize();
+			dataSize34 += _teammateCommandBanReasons[i].GetSerializedSize();
 		}
-		totalSize += dataSize33;
-		int dataSize34 = _oldInjuryAutoHealCollection.GetSerializedSize();
 		totalSize += dataSize34;
-		int dataSize35 = _mixPoisonAffectedCount.GetSerializedSize();
+		int dataSize35 = _oldInjuryAutoHealCollection.GetSerializedSize();
 		totalSize += dataSize35;
+		int dataSize36 = _mixPoisonAffectedCount.GetSerializedSize();
+		totalSize += dataSize36;
 		int elementsCount23 = _particleToLoopByCombatSkill.Length;
 		int contentSize22 = 2 * elementsCount23;
-		int dataSize36 = 4 + contentSize22;
-		totalSize += dataSize36;
+		int dataSize37 = 4 + contentSize22;
+		totalSize += dataSize37;
 		int elementsCount24 = _showCommandList.Count;
 		int contentSize23 = 8 * elementsCount24;
-		int dataSize37 = 2 + contentSize23;
-		totalSize += dataSize37;
+		int dataSize38 = 2 + contentSize23;
+		totalSize += dataSize38;
 		int elementsCount25 = _unlockPrepareValue.Count;
 		int contentSize24 = 4 * elementsCount25;
-		int dataSize38 = 2 + contentSize24;
-		totalSize += dataSize38;
+		int dataSize39 = 2 + contentSize24;
+		totalSize += dataSize39;
 		int elementsCount26 = _rawCreateEffects.Count;
 		int contentSize25 = 4 * elementsCount26;
-		int dataSize39 = 2 + contentSize25;
-		totalSize += dataSize39;
-		int dataSize40 = _rawCreateCollection.GetSerializedSize();
+		int dataSize40 = 2 + contentSize25;
 		totalSize += dataSize40;
+		int dataSize41 = _rawCreateCollection.GetSerializedSize();
+		totalSize += dataSize41;
 		int elementsCount27 = _scarMarkTime.Count;
 		int contentSize26 = 8 * elementsCount27;
-		int dataSize41 = 2 + contentSize26;
-		totalSize += dataSize41;
+		int dataSize42 = 2 + contentSize26;
+		totalSize += dataSize42;
 		int elementsCount28 = _teammateCommandCd.Count;
 		int contentSize27 = 8 * elementsCount28;
-		int dataSize42 = 2 + contentSize27;
-		return totalSize + dataSize42;
+		int dataSize43 = 2 + contentSize27;
+		return totalSize + dataSize43;
 	}
 
 	public unsafe override int SerializeWithoutHeader(byte* pData)
@@ -9410,7 +9416,6 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		pCurrData += _preparingItem.Serialize(pCurrData);
 		*pCurrData = _useItemPreparePercent;
 		pCurrData++;
-		pCurrData += _combatReserveData.Serialize(pCurrData);
 		*(short*)pCurrData = _xiangshuEffectId;
 		pCurrData += 2;
 		*(int*)pCurrData = _hazardValue;
@@ -9588,49 +9593,58 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		pCurrData += contentSize5;
 		byte* pBegin7 = pCurrData;
 		pCurrData += 4;
-		pCurrData += _buffCombatStateCollection.Serialize(pCurrData);
+		pCurrData += _combatReserveData.Serialize(pCurrData);
 		int fieldSize7 = (int)(pCurrData - pBegin7 - 4);
 		if (fieldSize7 > 4194304)
 		{
-			throw new Exception($"Size of field {"_buffCombatStateCollection"} must be less than {4096}KB");
+			throw new Exception($"Size of field {"_combatReserveData"} must be less than {4096}KB");
 		}
 		*(int*)pBegin7 = fieldSize7;
 		byte* pBegin8 = pCurrData;
 		pCurrData += 4;
-		pCurrData += _debuffCombatStateCollection.Serialize(pCurrData);
+		pCurrData += _buffCombatStateCollection.Serialize(pCurrData);
 		int fieldSize8 = (int)(pCurrData - pBegin8 - 4);
 		if (fieldSize8 > 4194304)
 		{
-			throw new Exception($"Size of field {"_debuffCombatStateCollection"} must be less than {4096}KB");
+			throw new Exception($"Size of field {"_buffCombatStateCollection"} must be less than {4096}KB");
 		}
 		*(int*)pBegin8 = fieldSize8;
 		byte* pBegin9 = pCurrData;
 		pCurrData += 4;
-		pCurrData += _specialCombatStateCollection.Serialize(pCurrData);
+		pCurrData += _debuffCombatStateCollection.Serialize(pCurrData);
 		int fieldSize9 = (int)(pCurrData - pBegin9 - 4);
 		if (fieldSize9 > 4194304)
 		{
-			throw new Exception($"Size of field {"_specialCombatStateCollection"} must be less than {4096}KB");
+			throw new Exception($"Size of field {"_debuffCombatStateCollection"} must be less than {4096}KB");
 		}
 		*(int*)pBegin9 = fieldSize9;
 		byte* pBegin10 = pCurrData;
 		pCurrData += 4;
-		pCurrData += _skillEffectCollection.Serialize(pCurrData);
+		pCurrData += _specialCombatStateCollection.Serialize(pCurrData);
 		int fieldSize10 = (int)(pCurrData - pBegin10 - 4);
 		if (fieldSize10 > 4194304)
 		{
-			throw new Exception($"Size of field {"_skillEffectCollection"} must be less than {4096}KB");
+			throw new Exception($"Size of field {"_specialCombatStateCollection"} must be less than {4096}KB");
 		}
 		*(int*)pBegin10 = fieldSize10;
 		byte* pBegin11 = pCurrData;
 		pCurrData += 4;
-		pCurrData += _showEffectList.Serialize(pCurrData);
+		pCurrData += _skillEffectCollection.Serialize(pCurrData);
 		int fieldSize11 = (int)(pCurrData - pBegin11 - 4);
 		if (fieldSize11 > 4194304)
 		{
-			throw new Exception($"Size of field {"_showEffectList"} must be less than {4096}KB");
+			throw new Exception($"Size of field {"_skillEffectCollection"} must be less than {4096}KB");
 		}
 		*(int*)pBegin11 = fieldSize11;
+		byte* pBegin12 = pCurrData;
+		pCurrData += 4;
+		pCurrData += _showEffectList.Serialize(pCurrData);
+		int fieldSize12 = (int)(pCurrData - pBegin12 - 4);
+		if (fieldSize12 > 4194304)
+		{
+			throw new Exception($"Size of field {"_showEffectList"} must be less than {4096}KB");
+		}
+		*(int*)pBegin12 = fieldSize12;
 		int elementsCount6 = _animationToLoop.Length;
 		int contentSize6 = 2 * elementsCount6;
 		if (contentSize6 > 4194300)
@@ -9917,7 +9931,7 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		}
 		pCurrData += contentSize21;
 		int elementsCount22 = _teammateCommandBanReasons.Count;
-		byte* pBegin12 = pCurrData;
+		byte* pBegin13 = pCurrData;
 		pCurrData += 4;
 		*(ushort*)pCurrData = (ushort)elementsCount22;
 		pCurrData += 2;
@@ -9925,30 +9939,30 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 		{
 			pCurrData += _teammateCommandBanReasons[num25].Serialize(pCurrData);
 		}
-		int fieldSize12 = (int)(pCurrData - pBegin12 - 4);
-		if (fieldSize12 > 4194304)
-		{
-			throw new Exception($"Size of field {"_teammateCommandBanReasons"} must be less than {4096}KB");
-		}
-		*(int*)pBegin12 = fieldSize12;
-		byte* pBegin13 = pCurrData;
-		pCurrData += 4;
-		pCurrData += _oldInjuryAutoHealCollection.Serialize(pCurrData);
 		int fieldSize13 = (int)(pCurrData - pBegin13 - 4);
 		if (fieldSize13 > 4194304)
 		{
-			throw new Exception($"Size of field {"_oldInjuryAutoHealCollection"} must be less than {4096}KB");
+			throw new Exception($"Size of field {"_teammateCommandBanReasons"} must be less than {4096}KB");
 		}
 		*(int*)pBegin13 = fieldSize13;
 		byte* pBegin14 = pCurrData;
 		pCurrData += 4;
-		pCurrData += _mixPoisonAffectedCount.Serialize(pCurrData);
+		pCurrData += _oldInjuryAutoHealCollection.Serialize(pCurrData);
 		int fieldSize14 = (int)(pCurrData - pBegin14 - 4);
 		if (fieldSize14 > 4194304)
 		{
-			throw new Exception($"Size of field {"_mixPoisonAffectedCount"} must be less than {4096}KB");
+			throw new Exception($"Size of field {"_oldInjuryAutoHealCollection"} must be less than {4096}KB");
 		}
 		*(int*)pBegin14 = fieldSize14;
+		byte* pBegin15 = pCurrData;
+		pCurrData += 4;
+		pCurrData += _mixPoisonAffectedCount.Serialize(pCurrData);
+		int fieldSize15 = (int)(pCurrData - pBegin15 - 4);
+		if (fieldSize15 > 4194304)
+		{
+			throw new Exception($"Size of field {"_mixPoisonAffectedCount"} must be less than {4096}KB");
+		}
+		*(int*)pBegin15 = fieldSize15;
 		int elementsCount23 = _particleToLoopByCombatSkill.Length;
 		int contentSize22 = 2 * elementsCount23;
 		if (contentSize22 > 4194300)
@@ -10011,15 +10025,15 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 			((int*)pCurrData)[num29] = _rawCreateEffects[num29];
 		}
 		pCurrData += contentSize25;
-		byte* pBegin15 = pCurrData;
+		byte* pBegin16 = pCurrData;
 		pCurrData += 4;
 		pCurrData += _rawCreateCollection.Serialize(pCurrData);
-		int fieldSize15 = (int)(pCurrData - pBegin15 - 4);
-		if (fieldSize15 > 4194304)
+		int fieldSize16 = (int)(pCurrData - pBegin16 - 4);
+		if (fieldSize16 > 4194304)
 		{
 			throw new Exception($"Size of field {"_rawCreateCollection"} must be less than {4096}KB");
 		}
-		*(int*)pBegin15 = fieldSize15;
+		*(int*)pBegin16 = fieldSize16;
 		int elementsCount27 = _scarMarkTime.Count;
 		int contentSize26 = 8 * elementsCount27;
 		if (contentSize26 > 4194300)
@@ -10386,9 +10400,6 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 				_useItemPreparePercent = *pCurrData;
 				pCurrData++;
 				break;
-			case 75:
-				pCurrData += _combatReserveData.Deserialize(pCurrData);
-				break;
 			case 80:
 				_xiangshuEffectId = *(short*)pCurrData;
 				pCurrData += 2;
@@ -10576,6 +10587,10 @@ public class CombatCharacter : BaseGameDataObject, IExpressionConverter, IAiPart
 				pCurrData += 2 * elementsCount8;
 				break;
 			}
+			case 75:
+				pCurrData += 4;
+				pCurrData += _combatReserveData.Deserialize(pCurrData);
+				break;
 			case 76:
 				pCurrData += 4;
 				pCurrData += _buffCombatStateCollection.Deserialize(pCurrData);

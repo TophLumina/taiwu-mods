@@ -36,15 +36,14 @@ public class TaiwuVillagerRoleDisplayData : ISerializableGameData
 	[SerializableGameDataField]
 	public AreaDisplayData[] AreaDisplayData;
 
-	/// <summary>
-	/// 村民昵称列表，可能为空（为空则需要前端处理成默认村民名称）
-	/// index与Config.VillagerRole.DefKey对应
-	/// </summary>
 	[SerializableGameDataField]
 	public string[] VillagerRoleNpcNickNames;
 
 	[SerializableGameDataField]
 	public CharacterSet Teammates;
+
+	[SerializableGameDataField]
+	public FarmerAutoWorkConfig FarmerMigrateWorkStatus;
 
 	public List<(CharacterLocationDisplayData location, VillagerRoleCharacterDisplayData charData)> OrderedLocations => (from location in LocationData?.Values
 		select (location: location, Villagers?.Values.FirstOrDefault(delegate(VillagerRoleCharacterDisplayData x)
@@ -79,7 +78,7 @@ public class TaiwuVillagerRoleDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 0;
+		int totalSize = 2;
 		if (VillagerRoleManageDisplayData != null)
 		{
 			totalSize += 2;
@@ -345,6 +344,8 @@ public class TaiwuVillagerRoleDisplayData : ISerializableGameData
 		int fieldSize4 = Teammates.Serialize(pCurrData);
 		pCurrData += fieldSize4;
 		Tester.Assert(fieldSize4 <= 65535);
+		*(FarmerAutoWorkConfig*)pCurrData = FarmerMigrateWorkStatus;
+		pCurrData += 2;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -567,6 +568,8 @@ public class TaiwuVillagerRoleDisplayData : ISerializableGameData
 			VillagerRoleNpcNickNames = null;
 		}
 		pCurrData += Teammates.Deserialize(pCurrData);
+		FarmerMigrateWorkStatus = *(FarmerAutoWorkConfig*)pCurrData;
+		pCurrData += 2;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

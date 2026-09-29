@@ -28,9 +28,6 @@ public class MakeItemDataObsolete : ISerializableGameData
 	[SerializableGameDataField]
 	public ItemKey MaterialKey;
 
-	/// <summary>
-	/// 是否精益求精
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsPerfect;
 

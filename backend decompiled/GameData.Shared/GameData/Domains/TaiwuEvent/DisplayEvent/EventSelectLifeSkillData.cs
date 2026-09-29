@@ -5,40 +5,20 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件系统选择技艺的数据(单选)
-/// </summary>
 public class EventSelectLifeSkillData : ISerializableGameData
 {
-	/// <summary>
-	/// 保存的选择的功法数据的key
-	/// </summary>
 	[SerializableGameDataField]
 	public string ResultSaveKey;
 
-	/// <summary>
-	/// 当前事件如果选择这个OptionKey对应的选项，则需要进行技艺数据选择
-	/// </summary>
 	[SerializableGameDataField]
 	public string OptionKey;
 
-	/// <summary>
-	/// 正在选择的功法所属的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public int CharId;
 
-	/// <summary>
-	/// 所有可选功法id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> CanSelectLifeSkillIdList;
 
-	/// <summary>
-	/// 选择结果的数据索引，不需要序列化，通过SetLifeSkillResult方法设置到参数盒子
-	/// 前端获取到此结果时自动把该值设置到-1表示还没进行过选择
-	/// 选择完毕后把该值改为有效值并自动再次选择该选项
-	/// </summary>
 	public int SelectResultIndex;
 
 	public EventSelectLifeSkillData()
@@ -61,13 +41,11 @@ public class EventSelectLifeSkillData : ISerializableGameData
 		CanSelectLifeSkillIdList = new List<short>(other.CanSelectLifeSkillIdList);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="!:ISerializableGameData.GetSerializeSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -81,7 +59,6 @@ public class EventSelectLifeSkillData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -152,7 +129,6 @@ public class EventSelectLifeSkillData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

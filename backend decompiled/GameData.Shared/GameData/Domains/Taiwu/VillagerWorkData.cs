@@ -3,17 +3,11 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 村民工作数据
-/// </summary>
 public class VillagerWorkData : ISerializableGameData
 {
 	[SerializableGameDataField]
 	public int CharacterId = -1;
 
-	/// <summary>
-	/// 工作类型 <see cref="T:GameData.Domains.Taiwu.VillagerWorkType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte WorkType = -1;
 

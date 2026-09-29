@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class LifeSkillCombatEffect : ConfigData<LifeSkillCombatEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static LifeSkillCombatEffect Instance = new LifeSkillCombatEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

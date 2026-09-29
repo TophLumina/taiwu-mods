@@ -9,177 +9,90 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Taiwu.Display;
 
-/// <summary>
-/// 交换界面的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true, NotRestrictCollectionSerializedSize = true)]
 public class ExchangeDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 交换数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public Exchange Exchange;
 
-	/// <summary>
-	/// 太吾行囊的所有物品列表，包括身上装备和资源
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuInventoryItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾仓库的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuWarehouseItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾公库的所有物品列表，包括资源
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuTreasuryItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾货仓的所有物品列表，包括资源
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuStockItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾饲槽的所有物品列表，包括资源
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TaiwuTroughItemDisplayDataList;
 
-	/// <summary>
-	/// 太吾的所有俘虏列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public KidnapMenuDisplayData TaiwuKidnapMenuDisplayData;
 
-	/// <summary>
-	/// 太吾人物显示数据，用于计算物品是否被锁定
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData TaiwuDisplayData;
 
-	/// <summary>
-	/// 太吾所学功法，用于计算物品是否被锁定，仅在换书时上传
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<short> TaiwuLearnedCombatSkills;
 
-	/// <summary>
-	/// 支持度对应品级，用于计算物品是否被锁定，仅在换书时上传
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ApproveHighestGrade;
 
-	/// <summary>
-	/// 支持度，用于计算物品是否被锁定，仅在换书时上传
-	/// </summary>
 	[SerializableGameDataField]
 	public short ApproveRate;
 
-	/// <summary>
-	/// 最大支持度，用于计算物品是否被锁定，仅在换书时上传
-	/// </summary>
 	[SerializableGameDataField]
 	public int ApproveRateMax;
 
-	/// <summary>
-	/// 目标人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData TargetCharacterDisplayData;
 
-	/// <summary>
-	/// 目标人物的戒心
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetCharacterAlertnessValue;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataList;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataList1;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataList2;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataList3;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataList4;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataList5;
 
-	/// <summary>
-	/// 目标人物的所有物品列表
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataList6;
 
-	/// <summary>
-	/// 目标人物的所有商店物品列表 - 回购页面
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public List<ItemDisplayData> TargetItemDisplayDataListBuyBack;
 
-	/// <summary>
-	/// 库房显示数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public TreasuryData TreasuryData;
 
-	/// <summary>
-	/// 太吾持有的关于对方的秘闻显示数据
-	/// </summary>
 	[SerializableGameDataField(SubDataMaxCount = int.MaxValue)]
 	public SecretInformationDisplayPackage SecretInformationDisplayPackage;
 
-	/// <summary>
-	/// 太吾能否使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransferItemToWarehouse;
 
-	/// <summary>
-	/// 私库初始重量
-	/// </summary>
 	[SerializableGameDataField]
 	public int WarehouseWeight;
 
-	/// <summary>
-	/// 公库初始重量
-	/// </summary>
 	[SerializableGameDataField]
 	public int TreasuryWeight;
 
-	/// <summary>
-	/// 货仓初始重量
-	/// </summary>
 	[SerializableGameDataField]
 	public int StockWeight;
 

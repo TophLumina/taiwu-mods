@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class AiCondition : ConfigData<AiConditionItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AiCondition Instance = new AiCondition();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "ParamStrings", "ParamInts", "GroupId", "TemplateId", "Type" };
@@ -161,12 +158,13 @@ public class AiCondition : ConfigData<AiConditionItem, int>
 		_dataArray.Add(new AiConditionItem(124, EAiConditionType.ExistAttackRatio, LocalStringManager.GetConfig("AiCondition_language", "Name_124"), LocalStringManager.GetConfig("AiCondition_language", "Desc_124"), null, new List<int> { 0, 0 }, 1));
 		_dataArray.Add(new AiConditionItem(125, EAiConditionType.ExistDefenseBounce, LocalStringManager.GetConfig("AiCondition_language", "Name_125"), LocalStringManager.GetConfig("AiCondition_language", "Desc_125"), null, new List<int> { 13 }, 1));
 		_dataArray.Add(new AiConditionItem(126, EAiConditionType.AttackMiss, LocalStringManager.GetConfig("AiCondition_language", "Name_126"), LocalStringManager.GetConfig("AiCondition_language", "Desc_126"), null, null, 1));
+		_dataArray.Add(new AiConditionItem(127, EAiConditionType.AnyReserve, LocalStringManager.GetConfig("AiCondition_language", "Name_127"), LocalStringManager.GetConfig("AiCondition_language", "Desc_127"), null, new List<int> { 3 }, 1));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<AiConditionItem>(127);
+		_dataArray = new List<AiConditionItem>(128);
 		CreateItems0();
 		CreateItems1();
 		CreateItems2();

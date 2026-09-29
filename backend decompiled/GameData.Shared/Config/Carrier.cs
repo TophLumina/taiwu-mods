@@ -8,881 +8,376 @@ namespace Config;
 [Serializable]
 public class Carrier : ConfigData<CarrierItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 独轮车
-		/// </summary>
 		public const short CarDrop0 = 0;
 
-		/// <summary>
-		/// 太平车
-		/// </summary>
 		public const short CarDrop1 = 1;
 
-		/// <summary>
-		/// 独辀战车
-		/// </summary>
 		public const short CarDrop2 = 2;
 
-		/// <summary>
-		/// 双辕安车
-		/// </summary>
 		public const short CarDrop3 = 3;
 
-		/// <summary>
-		/// 驷马轩车
-		/// </summary>
 		public const short CarDrop4 = 4;
 
-		/// <summary>
-		/// 木牛流马
-		/// </summary>
 		public const short CarDrop5 = 5;
 
-		/// <summary>
-		/// 麒麟华盖车
-		/// </summary>
 		public const short CarDrop6 = 6;
 
-		/// <summary>
-		/// 八角宝楼车
-		/// </summary>
 		public const short CarDrop7 = 7;
 
-		/// <summary>
-		/// 玄龙驭
-		/// </summary>
 		public const short CarDrop8 = 8;
 
-		/// <summary>
-		/// 竹板橇
-		/// </summary>
 		public const short CarCapture0 = 9;
 
-		/// <summary>
-		/// 陋棚栈车
-		/// </summary>
 		public const short CarCapture1 = 10;
 
-		/// <summary>
-		/// 下泽车
-		/// </summary>
 		public const short CarCapture2 = 11;
 
-		/// <summary>
-		/// 蒲轮大车
-		/// </summary>
 		public const short CarCapture3 = 12;
 
-		/// <summary>
-		/// 司里鼓车
-		/// </summary>
 		public const short CarCapture4 = 13;
 
-		/// <summary>
-		/// 武侯四轮车
-		/// </summary>
 		public const short CarCapture5 = 14;
 
-		/// <summary>
-		/// 风后车
-		/// </summary>
 		public const short CarCapture6 = 15;
 
-		/// <summary>
-		/// 龙雀云船
-		/// </summary>
 		public const short CarCapture7 = 16;
 
-		/// <summary>
-		/// 七香车
-		/// </summary>
 		public const short CarCapture8 = 17;
 
-		/// <summary>
-		/// 骡子
-		/// </summary>
 		public const short Horse0 = 18;
 
-		/// <summary>
-		/// 灰驴
-		/// </summary>
 		public const short Horse1 = 19;
 
-		/// <summary>
-		/// 瘦马
-		/// </summary>
 		public const short Horse2 = 20;
 
-		/// <summary>
-		/// 牯牛
-		/// </summary>
 		public const short Horse3 = 21;
 
-		/// <summary>
-		/// 骏马
-		/// </summary>
 		public const short Horse4 = 22;
 
-		/// <summary>
-		/// 西域白马
-		/// </summary>
 		public const short Horse5 = 23;
 
-		/// <summary>
-		/// 关外名驹
-		/// </summary>
 		public const short Horse6 = 24;
 
-		/// <summary>
-		/// 青牛
-		/// </summary>
 		public const short Horse7 = 25;
 
-		/// <summary>
-		/// 汗血宝马
-		/// </summary>
 		public const short Horse8 = 26;
 
-		/// <summary>
-		/// 猴子
-		/// </summary>
 		public const short Monkey0 = 27;
 
-		/// <summary>
-		/// 恶鹰
-		/// </summary>
 		public const short Eagle0 = 28;
 
-		/// <summary>
-		/// 野猪
-		/// </summary>
 		public const short Pig0 = 29;
 
-		/// <summary>
-		/// 棕熊
-		/// </summary>
 		public const short Bear0 = 30;
 
-		/// <summary>
-		/// 野牛
-		/// </summary>
 		public const short Bull0 = 31;
 
-		/// <summary>
-		/// 巨蛇
-		/// </summary>
 		public const short Snake0 = 32;
 
-		/// <summary>
-		/// 花豹
-		/// </summary>
 		public const short Jaguar0 = 33;
 
-		/// <summary>
-		/// 狮子
-		/// </summary>
 		public const short Lion0 = 34;
 
-		/// <summary>
-		/// 老虎
-		/// </summary>
 		public const short Tiger0 = 35;
 
-		/// <summary>
-		/// 灵猴
-		/// </summary>
 		public const short Monkey1 = 36;
 
-		/// <summary>
-		/// 金鹏
-		/// </summary>
 		public const short Eagle1 = 37;
 
-		/// <summary>
-		/// 玄猪
-		/// </summary>
 		public const short Pig1 = 38;
 
-		/// <summary>
-		/// 白熊
-		/// </summary>
 		public const short Bear1 = 39;
 
-		/// <summary>
-		/// 夔牛
-		/// </summary>
 		public const short Bull1 = 40;
 
-		/// <summary>
-		/// 巴蟒
-		/// </summary>
 		public const short Snake1 = 41;
 
-		/// <summary>
-		/// 黑豹
-		/// </summary>
 		public const short Jaguar1 = 42;
 
-		/// <summary>
-		/// 金狮
-		/// </summary>
 		public const short Lion1 = 43;
 
-		/// <summary>
-		/// 白虎
-		/// </summary>
 		public const short Tiger1 = 44;
 
-		/// <summary>
-		/// 焕心的瘦马
-		/// </summary>
 		public const short HorseOfHuanxin = 45;
 
-		/// <summary>
-		/// 白蛟
-		/// </summary>
 		public const short JiaoWhite = 46;
 
-		/// <summary>
-		/// 黑蛟
-		/// </summary>
 		public const short JiaoBlack = 47;
 
-		/// <summary>
-		/// 青蛟
-		/// </summary>
 		public const short JiaoGreen = 48;
 
-		/// <summary>
-		/// 赤蛟
-		/// </summary>
 		public const short JiaoRed = 49;
 
-		/// <summary>
-		/// 黄蛟
-		/// </summary>
 		public const short JiaoYellow = 50;
 
-		/// <summary>
-		/// 白黑蛟
-		/// </summary>
 		public const short JiaoWB = 51;
 
-		/// <summary>
-		/// 白青蛟
-		/// </summary>
 		public const short JiaoWG = 52;
 
-		/// <summary>
-		/// 白赤蛟
-		/// </summary>
 		public const short JiaoWR = 53;
 
-		/// <summary>
-		/// 白黄蛟
-		/// </summary>
 		public const short JiaoWY = 54;
 
-		/// <summary>
-		/// 黑青蛟
-		/// </summary>
 		public const short JiaoBG = 55;
 
-		/// <summary>
-		/// 黑赤蛟
-		/// </summary>
 		public const short JiaoBR = 56;
 
-		/// <summary>
-		/// 黑黄蛟
-		/// </summary>
 		public const short JiaoBY = 57;
 
-		/// <summary>
-		/// 青赤蛟
-		/// </summary>
 		public const short JiaoGR = 58;
 
-		/// <summary>
-		/// 青黄蛟
-		/// </summary>
 		public const short JiaoGY = 59;
 
-		/// <summary>
-		/// 赤黄蛟
-		/// </summary>
 		public const short JiaoRY = 60;
 
-		/// <summary>
-		/// 白黑青蛟
-		/// </summary>
 		public const short JiaoWBG = 61;
 
-		/// <summary>
-		/// 白黑赤蛟
-		/// </summary>
 		public const short JiaoWBR = 62;
 
-		/// <summary>
-		/// 白黑黄蛟
-		/// </summary>
 		public const short JiaoWBY = 63;
 
-		/// <summary>
-		/// 白青赤蛟
-		/// </summary>
 		public const short JiaoWGR = 64;
 
-		/// <summary>
-		/// 白青黄蛟
-		/// </summary>
 		public const short JiaoWGY = 65;
 
-		/// <summary>
-		/// 白赤黄蛟
-		/// </summary>
 		public const short JiaoWRY = 66;
 
-		/// <summary>
-		/// 黑青赤蛟
-		/// </summary>
 		public const short JiaoBGR = 67;
 
-		/// <summary>
-		/// 黑青黄蛟
-		/// </summary>
 		public const short JiaoBGY = 68;
 
-		/// <summary>
-		/// 黑赤黄蛟
-		/// </summary>
 		public const short JiaoBRY = 69;
 
-		/// <summary>
-		/// 青赤黄蛟
-		/// </summary>
 		public const short JiaoGRY = 70;
 
-		/// <summary>
-		/// 白黑青赤蛟
-		/// </summary>
 		public const short JiaoWBGR = 71;
 
-		/// <summary>
-		/// 白黑青黄蛟
-		/// </summary>
 		public const short JiaoWBGY = 72;
 
-		/// <summary>
-		/// 白黑赤黄蛟
-		/// </summary>
 		public const short JiaoWBRY = 73;
 
-		/// <summary>
-		/// 白青赤黄蛟
-		/// </summary>
 		public const short JiaoWGRY = 74;
 
-		/// <summary>
-		/// 黑青赤黄蛟
-		/// </summary>
 		public const short JiaoBGRY = 75;
 
-		/// <summary>
-		/// 白青赤黄黑蛟
-		/// </summary>
 		public const short JiaoWGRYB = 76;
 
-		/// <summary>
-		/// 囚牛
-		/// </summary>
 		public const short Qiuniu = 77;
 
-		/// <summary>
-		/// 睚眦
-		/// </summary>
 		public const short Yazi = 78;
 
-		/// <summary>
-		/// 嘲风
-		/// </summary>
 		public const short Chaofeng = 79;
 
-		/// <summary>
-		/// 蒲牢
-		/// </summary>
 		public const short Pulao = 80;
 
-		/// <summary>
-		/// 狻猊
-		/// </summary>
 		public const short Suanni = 81;
 
-		/// <summary>
-		/// 霸下
-		/// </summary>
 		public const short Baxia = 82;
 
-		/// <summary>
-		/// 狴犴
-		/// </summary>
 		public const short Bian = 83;
 
-		/// <summary>
-		/// 负屃
-		/// </summary>
 		public const short Fuxi = 84;
 
-		/// <summary>
-		/// 螭吻
-		/// </summary>
 		public const short Chiwen = 85;
+
+		public const short LoongWhite = 86;
+
+		public const short LoongBlack = 87;
+
+		public const short LoongGreen = 88;
+
+		public const short LoongRed = 89;
+
+		public const short LoongYellow = 90;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 独轮车
-		/// </summary>
 		public static CarrierItem CarDrop0 => Instance[(short)0];
 
-		/// <summary>
-		/// 太平车
-		/// </summary>
 		public static CarrierItem CarDrop1 => Instance[(short)1];
 
-		/// <summary>
-		/// 独辀战车
-		/// </summary>
 		public static CarrierItem CarDrop2 => Instance[(short)2];
 
-		/// <summary>
-		/// 双辕安车
-		/// </summary>
 		public static CarrierItem CarDrop3 => Instance[(short)3];
 
-		/// <summary>
-		/// 驷马轩车
-		/// </summary>
 		public static CarrierItem CarDrop4 => Instance[(short)4];
 
-		/// <summary>
-		/// 木牛流马
-		/// </summary>
 		public static CarrierItem CarDrop5 => Instance[(short)5];
 
-		/// <summary>
-		/// 麒麟华盖车
-		/// </summary>
 		public static CarrierItem CarDrop6 => Instance[(short)6];
 
-		/// <summary>
-		/// 八角宝楼车
-		/// </summary>
 		public static CarrierItem CarDrop7 => Instance[(short)7];
 
-		/// <summary>
-		/// 玄龙驭
-		/// </summary>
 		public static CarrierItem CarDrop8 => Instance[(short)8];
 
-		/// <summary>
-		/// 竹板橇
-		/// </summary>
 		public static CarrierItem CarCapture0 => Instance[(short)9];
 
-		/// <summary>
-		/// 陋棚栈车
-		/// </summary>
 		public static CarrierItem CarCapture1 => Instance[(short)10];
 
-		/// <summary>
-		/// 下泽车
-		/// </summary>
 		public static CarrierItem CarCapture2 => Instance[(short)11];
 
-		/// <summary>
-		/// 蒲轮大车
-		/// </summary>
 		public static CarrierItem CarCapture3 => Instance[(short)12];
 
-		/// <summary>
-		/// 司里鼓车
-		/// </summary>
 		public static CarrierItem CarCapture4 => Instance[(short)13];
 
-		/// <summary>
-		/// 武侯四轮车
-		/// </summary>
 		public static CarrierItem CarCapture5 => Instance[(short)14];
 
-		/// <summary>
-		/// 风后车
-		/// </summary>
 		public static CarrierItem CarCapture6 => Instance[(short)15];
 
-		/// <summary>
-		/// 龙雀云船
-		/// </summary>
 		public static CarrierItem CarCapture7 => Instance[(short)16];
 
-		/// <summary>
-		/// 七香车
-		/// </summary>
 		public static CarrierItem CarCapture8 => Instance[(short)17];
 
-		/// <summary>
-		/// 骡子
-		/// </summary>
 		public static CarrierItem Horse0 => Instance[(short)18];
 
-		/// <summary>
-		/// 灰驴
-		/// </summary>
 		public static CarrierItem Horse1 => Instance[(short)19];
 
-		/// <summary>
-		/// 瘦马
-		/// </summary>
 		public static CarrierItem Horse2 => Instance[(short)20];
 
-		/// <summary>
-		/// 牯牛
-		/// </summary>
 		public static CarrierItem Horse3 => Instance[(short)21];
 
-		/// <summary>
-		/// 骏马
-		/// </summary>
 		public static CarrierItem Horse4 => Instance[(short)22];
 
-		/// <summary>
-		/// 西域白马
-		/// </summary>
 		public static CarrierItem Horse5 => Instance[(short)23];
 
-		/// <summary>
-		/// 关外名驹
-		/// </summary>
 		public static CarrierItem Horse6 => Instance[(short)24];
 
-		/// <summary>
-		/// 青牛
-		/// </summary>
 		public static CarrierItem Horse7 => Instance[(short)25];
 
-		/// <summary>
-		/// 汗血宝马
-		/// </summary>
 		public static CarrierItem Horse8 => Instance[(short)26];
 
-		/// <summary>
-		/// 猴子
-		/// </summary>
 		public static CarrierItem Monkey0 => Instance[(short)27];
 
-		/// <summary>
-		/// 恶鹰
-		/// </summary>
 		public static CarrierItem Eagle0 => Instance[(short)28];
 
-		/// <summary>
-		/// 野猪
-		/// </summary>
 		public static CarrierItem Pig0 => Instance[(short)29];
 
-		/// <summary>
-		/// 棕熊
-		/// </summary>
 		public static CarrierItem Bear0 => Instance[(short)30];
 
-		/// <summary>
-		/// 野牛
-		/// </summary>
 		public static CarrierItem Bull0 => Instance[(short)31];
 
-		/// <summary>
-		/// 巨蛇
-		/// </summary>
 		public static CarrierItem Snake0 => Instance[(short)32];
 
-		/// <summary>
-		/// 花豹
-		/// </summary>
 		public static CarrierItem Jaguar0 => Instance[(short)33];
 
-		/// <summary>
-		/// 狮子
-		/// </summary>
 		public static CarrierItem Lion0 => Instance[(short)34];
 
-		/// <summary>
-		/// 老虎
-		/// </summary>
 		public static CarrierItem Tiger0 => Instance[(short)35];
 
-		/// <summary>
-		/// 灵猴
-		/// </summary>
 		public static CarrierItem Monkey1 => Instance[(short)36];
 
-		/// <summary>
-		/// 金鹏
-		/// </summary>
 		public static CarrierItem Eagle1 => Instance[(short)37];
 
-		/// <summary>
-		/// 玄猪
-		/// </summary>
 		public static CarrierItem Pig1 => Instance[(short)38];
 
-		/// <summary>
-		/// 白熊
-		/// </summary>
 		public static CarrierItem Bear1 => Instance[(short)39];
 
-		/// <summary>
-		/// 夔牛
-		/// </summary>
 		public static CarrierItem Bull1 => Instance[(short)40];
 
-		/// <summary>
-		/// 巴蟒
-		/// </summary>
 		public static CarrierItem Snake1 => Instance[(short)41];
 
-		/// <summary>
-		/// 黑豹
-		/// </summary>
 		public static CarrierItem Jaguar1 => Instance[(short)42];
 
-		/// <summary>
-		/// 金狮
-		/// </summary>
 		public static CarrierItem Lion1 => Instance[(short)43];
 
-		/// <summary>
-		/// 白虎
-		/// </summary>
 		public static CarrierItem Tiger1 => Instance[(short)44];
 
-		/// <summary>
-		/// 焕心的瘦马
-		/// </summary>
 		public static CarrierItem HorseOfHuanxin => Instance[(short)45];
 
-		/// <summary>
-		/// 白蛟
-		/// </summary>
 		public static CarrierItem JiaoWhite => Instance[(short)46];
 
-		/// <summary>
-		/// 黑蛟
-		/// </summary>
 		public static CarrierItem JiaoBlack => Instance[(short)47];
 
-		/// <summary>
-		/// 青蛟
-		/// </summary>
 		public static CarrierItem JiaoGreen => Instance[(short)48];
 
-		/// <summary>
-		/// 赤蛟
-		/// </summary>
 		public static CarrierItem JiaoRed => Instance[(short)49];
 
-		/// <summary>
-		/// 黄蛟
-		/// </summary>
 		public static CarrierItem JiaoYellow => Instance[(short)50];
 
-		/// <summary>
-		/// 白黑蛟
-		/// </summary>
 		public static CarrierItem JiaoWB => Instance[(short)51];
 
-		/// <summary>
-		/// 白青蛟
-		/// </summary>
 		public static CarrierItem JiaoWG => Instance[(short)52];
 
-		/// <summary>
-		/// 白赤蛟
-		/// </summary>
 		public static CarrierItem JiaoWR => Instance[(short)53];
 
-		/// <summary>
-		/// 白黄蛟
-		/// </summary>
 		public static CarrierItem JiaoWY => Instance[(short)54];
 
-		/// <summary>
-		/// 黑青蛟
-		/// </summary>
 		public static CarrierItem JiaoBG => Instance[(short)55];
 
-		/// <summary>
-		/// 黑赤蛟
-		/// </summary>
 		public static CarrierItem JiaoBR => Instance[(short)56];
 
-		/// <summary>
-		/// 黑黄蛟
-		/// </summary>
 		public static CarrierItem JiaoBY => Instance[(short)57];
 
-		/// <summary>
-		/// 青赤蛟
-		/// </summary>
 		public static CarrierItem JiaoGR => Instance[(short)58];
 
-		/// <summary>
-		/// 青黄蛟
-		/// </summary>
 		public static CarrierItem JiaoGY => Instance[(short)59];
 
-		/// <summary>
-		/// 赤黄蛟
-		/// </summary>
 		public static CarrierItem JiaoRY => Instance[(short)60];
 
-		/// <summary>
-		/// 白黑青蛟
-		/// </summary>
 		public static CarrierItem JiaoWBG => Instance[(short)61];
 
-		/// <summary>
-		/// 白黑赤蛟
-		/// </summary>
 		public static CarrierItem JiaoWBR => Instance[(short)62];
 
-		/// <summary>
-		/// 白黑黄蛟
-		/// </summary>
 		public static CarrierItem JiaoWBY => Instance[(short)63];
 
-		/// <summary>
-		/// 白青赤蛟
-		/// </summary>
 		public static CarrierItem JiaoWGR => Instance[(short)64];
 
-		/// <summary>
-		/// 白青黄蛟
-		/// </summary>
 		public static CarrierItem JiaoWGY => Instance[(short)65];
 
-		/// <summary>
-		/// 白赤黄蛟
-		/// </summary>
 		public static CarrierItem JiaoWRY => Instance[(short)66];
 
-		/// <summary>
-		/// 黑青赤蛟
-		/// </summary>
 		public static CarrierItem JiaoBGR => Instance[(short)67];
 
-		/// <summary>
-		/// 黑青黄蛟
-		/// </summary>
 		public static CarrierItem JiaoBGY => Instance[(short)68];
 
-		/// <summary>
-		/// 黑赤黄蛟
-		/// </summary>
 		public static CarrierItem JiaoBRY => Instance[(short)69];
 
-		/// <summary>
-		/// 青赤黄蛟
-		/// </summary>
 		public static CarrierItem JiaoGRY => Instance[(short)70];
 
-		/// <summary>
-		/// 白黑青赤蛟
-		/// </summary>
 		public static CarrierItem JiaoWBGR => Instance[(short)71];
 
-		/// <summary>
-		/// 白黑青黄蛟
-		/// </summary>
 		public static CarrierItem JiaoWBGY => Instance[(short)72];
 
-		/// <summary>
-		/// 白黑赤黄蛟
-		/// </summary>
 		public static CarrierItem JiaoWBRY => Instance[(short)73];
 
-		/// <summary>
-		/// 白青赤黄蛟
-		/// </summary>
 		public static CarrierItem JiaoWGRY => Instance[(short)74];
 
-		/// <summary>
-		/// 黑青赤黄蛟
-		/// </summary>
 		public static CarrierItem JiaoBGRY => Instance[(short)75];
 
-		/// <summary>
-		/// 白青赤黄黑蛟
-		/// </summary>
 		public static CarrierItem JiaoWGRYB => Instance[(short)76];
 
-		/// <summary>
-		/// 囚牛
-		/// </summary>
 		public static CarrierItem Qiuniu => Instance[(short)77];
 
-		/// <summary>
-		/// 睚眦
-		/// </summary>
 		public static CarrierItem Yazi => Instance[(short)78];
 
-		/// <summary>
-		/// 嘲风
-		/// </summary>
 		public static CarrierItem Chaofeng => Instance[(short)79];
 
-		/// <summary>
-		/// 蒲牢
-		/// </summary>
 		public static CarrierItem Pulao => Instance[(short)80];
 
-		/// <summary>
-		/// 狻猊
-		/// </summary>
 		public static CarrierItem Suanni => Instance[(short)81];
 
-		/// <summary>
-		/// 霸下
-		/// </summary>
 		public static CarrierItem Baxia => Instance[(short)82];
 
-		/// <summary>
-		/// 狴犴
-		/// </summary>
 		public static CarrierItem Bian => Instance[(short)83];
 
-		/// <summary>
-		/// 负屃
-		/// </summary>
 		public static CarrierItem Fuxi => Instance[(short)84];
 
-		/// <summary>
-		/// 螭吻
-		/// </summary>
 		public static CarrierItem Chiwen => Instance[(short)85];
+
+		public static CarrierItem LoongWhite => Instance[(short)86];
+
+		public static CarrierItem LoongBlack => Instance[(short)87];
+
+		public static CarrierItem LoongGreen => Instance[(short)88];
+
+		public static CarrierItem LoongRed => Instance[(short)89];
+
+		public static CarrierItem LoongYellow => Instance[(short)90];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static Carrier Instance = new Carrier();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>
@@ -993,12 +488,17 @@ public class Carrier : ConfigData<CarrierItem, short>
 		_dataArray.Add(new CarrierItem(83, LocalStringManager.GetConfig("Carrier_language", "Name_83"), 4, 404, 8, -1, "icon_Carrier_bian", LocalStringManager.GetConfig("Carrier_language", "Desc_83"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_83"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: true, 900, 0, 20, 6, 0, 150, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 0, 0, 0, 0, 0, 0, 293, 205, new sbyte[7], isFlying: false, 0, new List<short> { 63, 64, 65, 66, 67, 68, 69 }, new List<short> { 70, 71, 72, 73, 74, 75, 76 }, "NpcFace_bian_loong", 52, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
 		_dataArray.Add(new CarrierItem(84, LocalStringManager.GetConfig("Carrier_language", "Name_84"), 4, 404, 8, -1, "icon_Carrier_fuxi", LocalStringManager.GetConfig("Carrier_language", "Desc_84"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_84"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: true, 900, 0, 20, 6, 0, 150, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 0, 0, 0, 0, 0, 0, 294, 206, new sbyte[7], isFlying: false, 0, new List<short> { 56, 57, 58, 59, 60, 61, 62 }, new List<short> { 63, 64, 65, 66, 67, 68, 69 }, "NpcFace_fuxi_loong", 53, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
 		_dataArray.Add(new CarrierItem(85, LocalStringManager.GetConfig("Carrier_language", "Name_85"), 4, 404, 8, -1, "icon_Carrier_chiwen", LocalStringManager.GetConfig("Carrier_language", "Desc_85"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_85"), transferable: true, stackable: false, wagerable: true, refinable: false, poisonable: false, repairable: false, inheritable: true, detachable: true, 900, 0, 20, 6, 0, 150, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 0, 0, 0, 0, 0, 0, 295, 207, new sbyte[7], isFlying: false, 0, new List<short> { 70, 71, 72, 73, 74, 75, 76 }, new List<short> { 77, 78, 79, 80, 81, 82, 83 }, "NpcFace_chiwen_loong", 54, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
+		_dataArray.Add(new CarrierItem(86, LocalStringManager.GetConfig("Carrier_language", "Name_86"), 4, 405, 8, -1, "icon_Carrier_wusejiao", LocalStringManager.GetConfig("Carrier_language", "Desc_86"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_86"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: false, detachable: true, 800, 0, 61500, 6, 18, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 90, 10000, 6, 75, 75, 40, 246, 253, new sbyte[7], isFlying: false, 0, new List<short> { 56, 57, 58, 59, 60, 61, 62 }, new List<short> { 70, 71, 72, 73, 74, 75, 76 }, "NpcFace_bailong", 57, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
+		_dataArray.Add(new CarrierItem(87, LocalStringManager.GetConfig("Carrier_language", "Name_87"), 4, 405, 8, -1, "icon_Carrier_wusejiao", LocalStringManager.GetConfig("Carrier_language", "Desc_87"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_87"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: false, detachable: true, 800, 0, 61500, 6, 18, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 30, 10000, 18, 75, 75, 40, 247, 254, new sbyte[7], isFlying: false, 0, new List<short> { 63, 64, 65, 66, 67, 68, 69 }, new List<short> { 70, 71, 72, 73, 74, 75, 76 }, "NpcFace_heilong", 58, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
+		_dataArray.Add(new CarrierItem(88, LocalStringManager.GetConfig("Carrier_language", "Name_88"), 4, 405, 8, -1, "icon_Carrier_wusejiao", LocalStringManager.GetConfig("Carrier_language", "Desc_88"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_88"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: false, detachable: true, 800, 0, 61500, 6, 18, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 30, 10000, 6, 200, 75, 40, 248, 255, new sbyte[7], isFlying: false, 0, new List<short> { 77, 78, 79, 80, 81, 82, 83 }, new List<short> { 70, 71, 72, 73, 74, 75, 76 }, "NpcFace_qinglong", 59, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
+		_dataArray.Add(new CarrierItem(89, LocalStringManager.GetConfig("Carrier_language", "Name_89"), 4, 405, 8, -1, "icon_Carrier_wusejiao", LocalStringManager.GetConfig("Carrier_language", "Desc_89"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_89"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: false, detachable: true, 800, 0, 61500, 6, 18, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 30, 10000, 6, 75, 200, 80, 249, 256, new sbyte[7], isFlying: false, 0, new List<short> { 56, 57, 58, 59, 60, 61, 62 }, new List<short> { 70, 71, 72, 73, 74, 75, 76 }, "NpcFace_chilong", 60, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
+		_dataArray.Add(new CarrierItem(90, LocalStringManager.GetConfig("Carrier_language", "Name_90"), 4, 405, 8, -1, "icon_Carrier_wusejiao", LocalStringManager.GetConfig("Carrier_language", "Desc_90"), LocalStringManager.GetConfig("Carrier_language", "FunctionDesc_90"), transferable: false, stackable: false, wagerable: false, refinable: false, poisonable: false, repairable: false, inheritable: false, detachable: true, 800, 0, 61500, 6, 18, 10800, 8, allowRandomCreate: true, 0, isSpecial: true, 0, 36, -1, new List<int>(), 9, -1, 30, 30000, 6, 75, 75, 40, 250, 257, new sbyte[7], isFlying: false, 0, new List<short> { 63, 64, 65, 66, 67, 68, 69 }, new List<short> { 70, 71, 72, 73, 74, 75, 76 }, "NpcFace_huanglong", 61, new PoisonsAndLevels(default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short), default(short)), 100));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<CarrierItem>(86);
+		_dataArray = new List<CarrierItem>(91);
 		CreateItems0();
 		CreateItems1();
 	}

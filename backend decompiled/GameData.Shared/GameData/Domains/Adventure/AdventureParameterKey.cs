@@ -5,9 +5,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇变量键
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public struct AdventureParameterKey : ISerializableGameData, IEquatable<AdventureParameterKey>
 {
@@ -56,13 +53,11 @@ public struct AdventureParameterKey : ISerializableGameData, IEquatable<Adventur
 		_internalString = key;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 7;
@@ -74,7 +69,6 @@ public struct AdventureParameterKey : ISerializableGameData, IEquatable<Adventur
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -112,7 +106,6 @@ public struct AdventureParameterKey : ISerializableGameData, IEquatable<Adventur
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

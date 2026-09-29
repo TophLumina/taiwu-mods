@@ -7,61 +7,28 @@ namespace Config;
 [Serializable]
 public class AdventureRemakePerformanceEffect : ConfigData<AdventureRemakePerformanceEffectItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 测试
-		/// </summary>
 		public const short Test = 0;
 
-		/// <summary>
-		/// 大雾
-		/// </summary>
 		public const short BigFog = 1;
 
-		/// <summary>
-		/// 幻海背景
-		/// </summary>
 		public const short HuanhaiBack = 2;
 
-		/// <summary>
-		/// 神魔背景
-		/// </summary>
 		public const short GodDemonBack = 3;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 测试
-		/// </summary>
 		public static AdventureRemakePerformanceEffectItem Test => Instance[(short)0];
 
-		/// <summary>
-		/// 大雾
-		/// </summary>
 		public static AdventureRemakePerformanceEffectItem BigFog => Instance[(short)1];
 
-		/// <summary>
-		/// 幻海背景
-		/// </summary>
 		public static AdventureRemakePerformanceEffectItem HuanhaiBack => Instance[(short)2];
 
-		/// <summary>
-		/// 神魔背景
-		/// </summary>
 		public static AdventureRemakePerformanceEffectItem GodDemonBack => Instance[(short)3];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AdventureRemakePerformanceEffect Instance = new AdventureRemakePerformanceEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "Effects", "TemplateId" };

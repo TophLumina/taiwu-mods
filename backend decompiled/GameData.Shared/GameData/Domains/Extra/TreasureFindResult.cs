@@ -6,70 +6,36 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 挖掘道具结果
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct TreasureFindResult : ISerializableGameData
 {
-	/// <summary>
-	/// 请求无效
-	/// </summary>
 	[SerializableGameDataField]
 	public bool RequestInvalid;
 
-	/// <summary>
-	/// 挖掘地点
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 物品索引
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKeyAndDate ItemKeyAndDate;
 
-	/// <summary>
-	/// 物品数量
-	/// </summary>
 	[SerializableGameDataField]
 	public uint ItemCount;
 
-	/// <summary>
-	/// 心材模板 ID 
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaterialTemplateId;
 
-	/// <summary>
-	/// 挖掘心材失败时获得的资源类型
-	/// <see cref="T:GameData.Domains.Character.ResourceType" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ResourceType;
 
-	/// <summary>
-	/// 挖掘心材失败时获得的资源数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int ResourceCount;
 
-	/// <summary>
-	/// 额外物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemKey> ExtraItems;
 
-	/// <summary>
-	/// 额外物品类型
-	/// </summary>
 	[SerializableGameDataField]
 	private int _extraItemTypeInternal;
 
-	/// <summary>
-	/// 无效结果
-	/// </summary>
 	public static TreasureFindResult Invalid
 	{
 		get
@@ -80,14 +46,8 @@ public struct TreasureFindResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 挖到的物品索引
-	/// </summary>
 	public ItemKey ItemKey => ItemKeyAndDate.ItemKey;
 
-	/// <summary>
-	/// 挖掘到任意物品
-	/// </summary>
 	public bool AnyItem
 	{
 		get
@@ -100,14 +60,8 @@ public struct TreasureFindResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 挖掘到任意心材
-	/// </summary>
 	public bool AnyMaterial => MaterialTemplateId >= 0;
 
-	/// <summary>
-	/// 挖掘到任意资源
-	/// </summary>
 	public bool AnyResource
 	{
 		get
@@ -120,9 +74,6 @@ public struct TreasureFindResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 挖掘到额外物品
-	/// </summary>
 	public bool AnyExtraItem
 	{
 		get
@@ -135,14 +86,8 @@ public struct TreasureFindResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 额外物品类型
-	/// </summary>
 	public ETreasureExtraItemType ExtraItemType => (ETreasureExtraItemType)_extraItemTypeInternal;
 
-	/// <summary>
-	/// 成功挖掘到物品
-	/// </summary>
 	public bool Success
 	{
 		get
@@ -155,9 +100,6 @@ public struct TreasureFindResult : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 默认构造方法，将数量与结构都设为无效值
-	/// </summary>
 	public TreasureFindResult()
 	{
 		RequestInvalid = false;
@@ -171,17 +113,11 @@ public struct TreasureFindResult : ISerializableGameData
 		_extraItemTypeInternal = 0;
 	}
 
-	/// <summary>
-	/// 设置额外物品类型
-	/// </summary>
 	public void SetExtraItemType(ETreasureExtraItemType extraItemType)
 	{
 		_extraItemTypeInternal = (int)extraItemType;
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TreasureFindResult(TreasureFindResult other)
 	{
 		RequestInvalid = other.RequestInvalid;
@@ -195,9 +131,6 @@ public struct TreasureFindResult : ISerializableGameData
 		_extraItemTypeInternal = other._extraItemTypeInternal;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TreasureFindResult other)
 	{
 		RequestInvalid = other.RequestInvalid;
@@ -211,13 +144,11 @@ public struct TreasureFindResult : ISerializableGameData
 		_extraItemTypeInternal = other._extraItemTypeInternal;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 32;
@@ -229,7 +160,6 @@ public struct TreasureFindResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -271,7 +201,6 @@ public struct TreasureFindResult : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

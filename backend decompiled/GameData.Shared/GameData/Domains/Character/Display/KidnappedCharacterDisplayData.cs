@@ -4,33 +4,18 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 私人关押囚犯的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class KidnappedCharacterDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData CharacterDisplayData;
 
-	/// <summary>
-	/// 关押数据
-	/// </summary>
 	[SerializableGameDataField]
 	public KidnappedCharacter KidnappedCharacter;
 
-	/// <summary>
-	/// 总抵抗值=人物计算的+互动改变的
-	/// </summary>
 	[SerializableGameDataField]
 	public int TotalResistance;
 
-	/// <summary>
-	/// 逃跑概率
-	/// </summary>
 	[SerializableGameDataField]
 	public int EscapeRate;
 
@@ -41,9 +26,8 @@ public class KidnappedCharacterDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 8;
+		int totalSize = 28;
 		totalSize = ((CharacterDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CharacterDisplayData.GetSerializedSize())));
-		totalSize = ((KidnappedCharacter == null) ? (totalSize + 2) : (totalSize + (2 + KidnappedCharacter.GetSerializedSize())));
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

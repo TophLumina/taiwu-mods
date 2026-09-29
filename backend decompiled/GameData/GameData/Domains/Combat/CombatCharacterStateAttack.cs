@@ -72,7 +72,6 @@ public class CombatCharacterStateAttack : CombatCharacterStateBase
 
 	public override void OnExit()
 	{
-		CombatChar.IsBreakAttacking = false;
 		CombatChar.PursueAttackCount = 0;
 		CombatChar.SetAnimationToLoop(CombatChar.GetIdleAni(), CombatChar.GetDataContext());
 	}

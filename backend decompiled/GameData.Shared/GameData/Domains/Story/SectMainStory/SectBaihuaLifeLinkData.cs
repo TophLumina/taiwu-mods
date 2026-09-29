@@ -4,9 +4,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Story.SectMainStory;
 
-/// <summary>
-/// 百花地主生死门
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class SectBaihuaLifeLinkData : ISerializableGameData
 {
@@ -23,43 +20,21 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "LifeGateCharIds", "DeathGateCharIds", "Cooldown" };
 	}
 
-	/// <summary>
-	/// 生门角色Id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] LifeGateCharIds;
 
-	/// <summary>
-	/// 死门角色Id列表
-	/// </summary>
 	[SerializableGameDataField]
 	public int[] DeathGateCharIds;
 
-	/// <summary>
-	/// 剩余冷却时间，月
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Cooldown;
 
-	/// <summary>
-	/// 初始化时生门死门各自拥有的栏位数量
-	/// </summary>
 	public const int InitialGateCharCount = 4;
 
-	/// <summary>
-	/// 升级时生门四门各自增加的栏位数量
-	/// </summary>
 	public const int BonusGateCharCount = 4;
 
-	/// <summary>
-	/// 生门死门各自最大栏位数量
-	/// </summary>
 	public const int MaxGateCharCount = 8;
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <returns></returns>
 	public bool IsInitialized()
 	{
 		if (LifeGateCharIds != null)
@@ -69,9 +44,6 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		return false;
 	}
 
-	/// <summary>
-	/// 初始化
-	/// </summary>
 	public void Initialize()
 	{
 		LifeGateCharIds = new int[4];
@@ -80,9 +52,6 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		Array.Fill(DeathGateCharIds, -1);
 	}
 
-	/// <summary>
-	/// 升级栏位
-	/// </summary>
 	public void Upgrade()
 	{
 		int[] lifeGateCharIds = LifeGateCharIds;
@@ -107,16 +76,10 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SectBaihuaLifeLinkData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SectBaihuaLifeLinkData(SectBaihuaLifeLinkData other)
 	{
 		int[] item = other.LifeGateCharIds;
@@ -136,9 +99,6 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		Cooldown = other.Cooldown;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SectBaihuaLifeLinkData other)
 	{
 		int[] item = other.LifeGateCharIds;
@@ -158,13 +118,11 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		Cooldown = other.Cooldown;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 3;
@@ -177,7 +135,6 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -227,7 +184,6 @@ public class SectBaihuaLifeLinkData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

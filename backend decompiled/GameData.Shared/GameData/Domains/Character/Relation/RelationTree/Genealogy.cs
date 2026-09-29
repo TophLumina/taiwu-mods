@@ -5,9 +5,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Relation.RelationTree;
 
-/// <summary>
-/// 族谱
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true, NotRestrictCollectionSerializedSize = true)]
 public class Genealogy : ISerializableGameData
 {
@@ -38,70 +35,36 @@ public class Genealogy : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[10] { "CoreCharId", "BloodFatherId", "BloodMotherId", "GrandfatherId", "GrandmotherId", "MaternalGrandfatherId", "MaternalGrandmotherId", "Parents", "BrothersAndSisters", "Spouses" };
 	}
 
-	/// <summary>
-	/// 核心角色
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public int CoreCharId;
 
-	/// <summary>
-	/// 血亲父亲
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int BloodFatherId;
 
-	/// <summary>
-	/// 血亲母亲
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int BloodMotherId;
 
-	/// <summary>
-	/// 祖父
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public int GrandfatherId;
 
-	/// <summary>
-	/// 祖母
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public int GrandmotherId;
 
-	/// <summary>
-	/// 外祖父
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public int MaternalGrandfatherId;
 
-	/// <summary>
-	/// 外祖母
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public int MaternalGrandmotherId;
 
-	/// <summary>
-	/// 血亲父母 + 继亲父母 + 义亲父母 (需要排序)
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7, CollectionMaxElementsCount = int.MaxValue)]
 	public List<CharIdAndRelation> Parents;
 
-	/// <summary>
-	/// 自己 + 血亲手足 + 继亲手足 + 义亲手足 (需要排序).
-	/// 关系为 Invalid 时表示核心角色自己.
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8, CollectionMaxElementsCount = int.MaxValue)]
 	public List<CharIdAndRelation> BrothersAndSisters;
 
-	/// <summary>
-	/// 配偶及子女 (需要排序)
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9, CollectionMaxElementsCount = int.MaxValue)]
 	public List<SpouseAndChildren> Spouses;
 
-	/// <summary>
-	/// 族谱
-	/// </summary>
 	public Genealogy()
 	{
 		CoreCharId = -1;
@@ -124,8 +87,8 @@ public class Genealogy : ISerializableGameData
 	public int GetSerializedSize()
 	{
 		int totalSize = 30;
-		totalSize = ((Parents == null) ? (totalSize + 4) : (totalSize + (4 + default(CharIdAndRelation).GetSerializedSize() * Parents.Count)));
-		totalSize = ((BrothersAndSisters == null) ? (totalSize + 4) : (totalSize + (4 + default(CharIdAndRelation).GetSerializedSize() * BrothersAndSisters.Count)));
+		totalSize = ((Parents == null) ? (totalSize + 4) : (totalSize + (4 + 8 * Parents.Count)));
+		totalSize = ((BrothersAndSisters == null) ? (totalSize + 4) : (totalSize + (4 + 8 * BrothersAndSisters.Count)));
 		if (Spouses != null)
 		{
 			totalSize += 4;

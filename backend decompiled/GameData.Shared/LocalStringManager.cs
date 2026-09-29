@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using GameData;
 using GameData.Utilities;
 
-/// <summary>
-/// 多语言文本管理器
-/// </summary>
 public static class LocalStringManager
 {
 	public enum LanguageType
@@ -20,30 +18,15 @@ public static class LocalStringManager
 		JP
 	}
 
-	/// <summary>
-	/// 语言包信息
-	/// </summary>
 	public class LanguagePackInfo
 	{
-		/// <summary>
-		/// 语言包名
-		/// </summary>
 		public string PackName;
 
-		/// <summary>
-		/// 打包文本
-		/// </summary>
 		public Dictionary<string, string> PackedTexts;
 
-		/// <summary>
-		/// 语言包字典
-		/// </summary>
 		public Dictionary<string, string> MapLanguageData;
 	}
 
-	/// <summary>
-	/// 常驻的随时都可以查询任何语言文本的特殊 <see cref="T:LanguageKey" /> 集合
-	/// </summary>
 	public static readonly IReadOnlyCollection<LanguageKey> CrossLanguageKeys = new LanguageKey[6]
 	{
 		LanguageKey.LK_Yes,
@@ -82,24 +65,12 @@ public static class LocalStringManager
 
 	private static readonly StringBuilder StringBuilder = new StringBuilder();
 
-	/// <summary>
-	/// UI界面语言是否已经完成初始化
-	/// </summary>
 	public static bool UiLanguageInitReady => _cachedUiTexts != null;
 
-	/// <summary>
-	/// 配置表语言包是否完成初始化
-	/// </summary>
 	public static bool ConfigLanguageInitReady => _configLanguageMap != null;
 
-	/// <summary>
-	/// 当前语言索引
-	/// </summary>
 	public static string CurLanguageKey => ExternalDataBridge.Context.Language;
 
-	/// <summary>
-	/// 当前语言的枚举
-	/// </summary>
 	public static LanguageType CurLanguageType
 	{
 		get
@@ -112,9 +83,6 @@ public static class LocalStringManager
 		}
 	}
 
-	/// <summary>
-	/// 初始化数字转换器常量
-	/// </summary>
 	private static void CnNumberConverterInit()
 	{
 		_number2String = new string[10]
@@ -157,9 +125,6 @@ public static class LocalStringManager
 		_negative = Get(LanguageKey.LK_NumberNegative);
 	}
 
-	/// <summary>
-	/// 将数字转换为本地化字符串
-	/// </summary>
 	private static string CnNumberConverter(long number)
 	{
 		StringBuilder builder = StringBuilder;
@@ -286,29 +251,16 @@ public static class LocalStringManager
 		CollectLanguages();
 	}
 
-	/// <summary>
-	/// 用 LString 配置表的语言初始化
-	/// </summary>
 	public static void Init(LanguageType languageType)
 	{
 		InitByLanguageFileKey(languageType.ToString());
 	}
 
-	/// <summary>
-	/// 用 LString 配置表的语言初始化
-	/// </summary>
 	public static void Init(string languageKey)
 	{
 		InitByLanguageFileKey(languageKey);
 	}
 
-	/// <summary>
-	/// 处理一个语言包，后续支持多线程调用
-	/// </summary>
-	/// <param name="packName"></param>
-	/// <param name="lines"></param>
-	/// <returns></returns>
-	/// <exception cref="T:System.Exception"></exception>
 	private static LanguagePackInfo HandleLanguagePack(string packName, string[] lines)
 	{
 		if (lines == null || lines.Length <= 0)
@@ -365,18 +317,12 @@ public static class LocalStringManager
 		}
 	}
 
-	/// <summary>
-	/// 释放
-	/// </summary>
 	public static void Release()
 	{
 		_configLanguageMap.Clear();
 		_configLanguageMap = null;
 	}
 
-	/// <summary>
-	/// 获取语言配置，目前外部仅可在奇遇中调用
-	/// </summary>
 	public static string GetConfig(string packName, string key)
 	{
 		if (_configLanguageMap != null && _configLanguageMap.TryGetValue(packName, out var data) && data.PackedTexts.TryGetValue(key, out var text))
@@ -386,9 +332,6 @@ public static class LocalStringManager
 		return key;
 	}
 
-	/// <summary>
-	/// 获取语言配置
-	/// </summary>
 	[Obsolete("Config generator currently use GetConfig(string packName, string key) directly.")]
 	public static string GetConfig(string packName, string segment, int index)
 	{
@@ -396,9 +339,6 @@ public static class LocalStringManager
 		return GetConfig(packName, key);
 	}
 
-	/// <summary>
-	/// 转换语言列表
-	/// </summary>
 	[Obsolete("Config generator currently use GetConfig(string packName, string key) directly.")]
 	public static string[] GetConfigList(string packName, string segment, int index)
 	{
@@ -421,9 +361,6 @@ public static class LocalStringManager
 		return Array.Empty<string>();
 	}
 
-	/// <summary>
-	/// 转换语言列表
-	/// </summary>
 	[Obsolete("Config generator currently use GetConfig(string packName, string key) directly.")]
 	public static string[] GetConfigList(string packName, string segment, int index, int forcedAmount)
 	{
@@ -439,33 +376,21 @@ public static class LocalStringManager
 		return ret;
 	}
 
-	/// <summary>
-	/// 自校验
-	/// </summary>
 	public static bool SelfCheck()
 	{
 		return _cachedUiTexts.Length == Enum.GetValues(typeof(LanguageKey)).Length;
 	}
 
-	/// <summary>
-	/// 获取可用语言集合
-	/// </summary>
 	public static IReadOnlyCollection<string> GetAvailableLanguages()
 	{
 		return CrossLanguageTexts.Keys;
 	}
 
-	/// <summary>
-	/// 获得语言名
-	/// </summary>
 	public static string GetLanguageName(string language)
 	{
 		return GetCrossLanguage(LanguageKey.LK_SystemSetting_LocalizationSetting_Language_Self, language);
 	}
 
-	/// <summary>
-	/// 获得跨语言文本
-	/// </summary>
 	public static string GetCrossLanguage(LanguageKey key, string language)
 	{
 		if (CrossLanguageTexts.TryGetValue(language, out var texts) && texts.TryGetValue(key, out var languageName))
@@ -475,9 +400,6 @@ public static class LocalStringManager
 		return language;
 	}
 
-	/// <summary>
-	/// 获取文本
-	/// </summary>
 	public static string Get(string key)
 	{
 		if (_customLanguageHandlerOfKey != null)
@@ -495,41 +417,26 @@ public static class LocalStringManager
 		return Get(id);
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(string key, object arg0)
 	{
 		return Get(key).GetFormat(arg0);
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(string key, object arg0, object arg1)
 	{
 		return Get(key).GetFormat(arg0, arg1);
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(string key, object arg0, object arg1, object arg2)
 	{
 		return Get(key).GetFormat(arg0, arg1, arg2);
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(string key, params object[] args)
 	{
 		return Get(key).GetFormat(args);
 	}
 
-	/// <summary>
-	/// 获取文本
-	/// </summary>
 	public static string Get(LanguageKey id)
 	{
 		if (_customLanguageHandlerOfId == null)
@@ -552,41 +459,26 @@ public static class LocalStringManager
 		return _cachedUiTexts[(int)id];
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(LanguageKey id, object arg0)
 	{
 		return Get(id).GetFormat(arg0);
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(LanguageKey id, object arg0, object arg1)
 	{
 		return Get(id).GetFormat(arg0, arg1);
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(LanguageKey id, object arg0, object arg1, object arg2)
 	{
 		return Get(id).GetFormat(arg0, arg1, arg2);
 	}
 
-	/// <summary>
-	/// 获取格式化文本
-	/// </summary>
 	public static string GetFormat(LanguageKey id, params object[] args)
 	{
 		return Get(id).GetFormat(args);
 	}
 
-	/// <summary>
-	/// 获取本地化处理后的数字文本
-	/// </summary>
 	public static string GetLanguageNumber(long number)
 	{
 		if (CurLanguageType != LanguageType.CN)
@@ -596,9 +488,36 @@ public static class LocalStringManager
 		return CnNumberConverter(number);
 	}
 
-	/// <summary>
-	/// 对mod的语言包替换进行支持，把UI语言包进行替换
-	/// </summary>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string Tr(this LanguageKey languageKey)
+	{
+		return Get(languageKey);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string TrFormat(this LanguageKey languageKey, object arg0)
+	{
+		return GetFormat(languageKey, arg0);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string TrFormat(this LanguageKey languageKey, object arg0, object arg1)
+	{
+		return GetFormat(languageKey, arg0, arg1);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string TrFormat(this LanguageKey languageKey, object arg0, object arg1, object arg2)
+	{
+		return GetFormat(languageKey, arg0, arg1, arg2);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string TrFormat(this LanguageKey languageKey, params object[] args)
+	{
+		return GetFormat(languageKey, args);
+	}
+
 	public static void ReplaceStringPackForUI(string[] langArray)
 	{
 		if (langArray.Length != _cachedUiTexts.Length)
@@ -611,11 +530,6 @@ public static class LocalStringManager
 		}
 	}
 
-	/// <summary>
-	/// 注册一个自定义的多语言获取接口
-	/// </summary>
-	/// <param name="keyHandler"></param>
-	/// <param name="idHandler"></param>
 	public static void RegisterGetLanguageCustomHandler(Func<string, string> keyHandler, Func<ushort, string> idHandler)
 	{
 		if (keyHandler != null)
@@ -630,30 +544,16 @@ public static class LocalStringManager
 		}
 	}
 
-	/// <summary>
-	/// 对mod的语言包替换进行支持，直接替换
-	/// </summary>
-	/// <returns></returns>
 	public static string[] GetLocalUILanguageArray()
 	{
 		return _cachedUiTexts;
 	}
 
-	/// <summary>
-	/// 对mod的配置表语言包进行支持，直接替换
-	/// </summary>
-	/// <returns></returns>
 	public static Dictionary<string, LanguagePackInfo> GetConfigLanguageMap()
 	{
 		return _configLanguageMap;
 	}
 
-	/// <summary>
-	/// 根据当前语言习惯拼接姓名
-	/// </summary>
-	/// <param name="surname"></param>
-	/// <param name="givenName"></param>
-	/// <returns></returns>
 	public static string FormatFullName(string surname, string givenName)
 	{
 		if (CurLanguageType == LanguageType.EN)
@@ -672,12 +572,6 @@ public static class LocalStringManager
 		return FormatFullName(name.surname, name.givenName);
 	}
 
-	/// <summary>
-	/// 根据当前语言习惯拼接促织名称
-	/// </summary>
-	/// <param name="first"></param>
-	/// <param name="last"></param>
-	/// <returns></returns>
 	public static string FormatCricketName(string first, string last)
 	{
 		if (CurLanguageType == LanguageType.EN)

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class DevelopmentTeam : ConfigData<DevelopmentTeamItem, short>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DevelopmentTeam Instance = new DevelopmentTeam();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Title", "TeamInfo", "TemplateId" };

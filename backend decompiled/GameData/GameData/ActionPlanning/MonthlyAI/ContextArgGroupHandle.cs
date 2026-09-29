@@ -87,6 +87,7 @@ public struct ContextArgGroupHandle(IContextArgGroup argGroup)
 		GameData.Domains.Character.Character character;
 		AdventureRuntime adventure;
 		AdventureMajorEvent majorEvent;
+		Grave grave;
 		string result = parameterType switch
 		{
 			EPlanningParameterType.Integer => ((int)arg).ToString(), 
@@ -108,6 +109,7 @@ public struct ContextArgGroupHandle(IContextArgGroup argGroup)
 			EPlanningParameterType.CombatSkill => CombatSkill.Instance[CombatSkillTemplateId].Name, 
 			EPlanningParameterType.LifeSkill => LifeSkill.Instance[LifeSkillTemplateId].Name, 
 			EPlanningParameterType.PersonalityType => PersonalityType.ToString(), 
+			EPlanningParameterType.Grave => DomainManager.Character.TryGetElement_Graves(arg, out grave) ? grave.ToString() : GraveId.ToString(), 
 			_ => throw new ArgumentOutOfRangeException("parameterType", parameterType, null), 
 		};
 		if (1 == 0)

@@ -8,23 +8,11 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 各种资源的量
-/// </summary>
 [Serializable]
 public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<int>, IEnumerable
 {
-	/// <summary>
-	/// *** 定长数组中的数据在创建对象时并未初始化 ***
-	/// 排列顺序参见 <see cref="T:GameData.Domains.Character.ResourceType" />
-	/// </summary>
 	public unsafe fixed int Items[8];
 
-	/// <summary>
-	/// 直接通过 index 安全访问数据的接口.
-	/// 主要用于对性能要求不是特别严格的情况 (非过月逻辑中频繁调用或可能每帧多次调用的逻辑皆可)
-	/// </summary>
-	/// <param name="index">资源类型<see cref="T:GameData.Domains.Character.ResourceType" /></param>
 	public unsafe ref int this[int index]
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -43,10 +31,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		return GetEnumerator();
 	}
 
-	/// <summary>
-	/// 获取迭代器，方便Linq使用
-	/// </summary>
-	/// <returns></returns>
 	public IEnumerator<int> GetEnumerator()
 	{
 		for (int i = 0; i < 8; i++)
@@ -55,44 +39,21 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		}
 	}
 
-	/// <summary>
-	/// 获取某一项，性能详见<see cref="P:GameData.Domains.Character.ResourceInts.Item(System.Int32)" />
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
 	public int Get(int index)
 	{
 		return this[index];
 	}
 
-	/// <summary>
-	/// 设置某一项，性能详见<see cref="P:GameData.Domains.Character.ResourceInts.Item(System.Int32)" />
-	/// </summary>
-	/// <param name="index"></param>
-	/// <param name="value"></param>
-	/// <returns></returns>
 	public int Set(int index, int value)
 	{
 		return this[index] = value;
 	}
 
-	/// <summary>
-	/// 改变某一项，性能详见<see cref="P:GameData.Domains.Character.ResourceInts.Item(System.Int32)" />
-	/// </summary>
-	/// <param name="index"></param>
-	/// <param name="delta"></param>
-	/// <returns></returns>
 	public int Change(int index, int delta)
 	{
 		return this[index] += delta;
 	}
 
-	/// <summary>
-	/// 初始化对象, 为 fixed size buffer 填充默认值.
-	/// 其实现依赖 ResourceType.Count == 8.
-	/// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/unsafe-code#definite-assignment-checking" />
-	/// </summary>
-	/// <returns></returns>
 	public unsafe void Initialize()
 	{
 		fixed (int* items = Items)
@@ -104,10 +65,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		}
 	}
 
-	/// <summary>
-	/// 从配置表构造对象
-	/// </summary>
-	/// <param name="amounts"></param>
 	public unsafe ResourceInts(params int[] amounts)
 	{
 		for (int i = 0; i < 8; i++)
@@ -172,11 +129,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		}
 	}
 
-	/// <summary>
-	/// 添加资源.
-	/// 资源的数量不能小于零.
-	/// </summary>
-	/// <param name="delta"></param>
 	public unsafe void Add(ref ResourceInts delta)
 	{
 		for (int i = 0; i < 8; i++)
@@ -185,11 +137,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		}
 	}
 
-	/// <summary>
-	/// 添加资源，资源的数量不能小于零
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="value"></param>
 	public unsafe void Add(sbyte type, int value)
 	{
 		int result = Items[type] + value;
@@ -204,11 +151,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		Items[type] = result;
 	}
 
-	/// <summary>
-	/// 减少资源，资源的数量不能小于零
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="value"></param>
 	public unsafe void Subtract(sbyte type, int value)
 	{
 		int result = Items[type] - value;
@@ -219,11 +161,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		Items[type] = result;
 	}
 
-	/// <summary>
-	/// 计算并返回两者的差值
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public unsafe ResourceInts Subtract(ref ResourceInts other)
 	{
 		ResourceInts delta = default(ResourceInts);
@@ -234,9 +171,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		return delta;
 	}
 
-	/// <summary>
-	/// 获取倒转了正负号后的对象
-	/// </summary>
 	public unsafe ResourceInts GetReversed()
 	{
 		ResourceInts reversed = default(ResourceInts);
@@ -247,10 +181,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		return reversed;
 	}
 
-	/// <summary>
-	/// 是否含有非零值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool IsNonZero()
 	{
 		for (int i = 0; i < 8; i++)
@@ -263,11 +193,6 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		return false;
 	}
 
-	/// <summary>
-	/// 比较拥有的资源是否满足需求
-	/// </summary>
-	/// <param name="needResources"></param>
-	/// <returns></returns>
 	public unsafe bool CheckIsMeet(ref ResourceInts needResources)
 	{
 		for (int i = 0; i < 8; i++)
@@ -280,19 +205,11 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		return true;
 	}
 
-	/// <summary>
-	/// 比较拥有的资源是否满足需求
-	/// </summary>
-	/// <returns></returns>
 	public unsafe bool CheckIsMeet(sbyte type, int value)
 	{
 		return Items[type] >= value;
 	}
 
-	/// <summary>
-	/// 获取总和
-	/// </summary>
-	/// <returns></returns>
 	public unsafe int GetSum()
 	{
 		int sum = 0;
@@ -303,37 +220,21 @@ public struct ResourceInts : ISerializableGameData, ISerializable, IEnumerable<i
 		return sum;
 	}
 
-	/// <summary>
-	/// 获取总价值
-	/// </summary>
-	/// <returns></returns>
 	public unsafe long GetValueSum()
 	{
 		return (long)Items[0] * (long)Misc.DefValue.ResourceFood.BaseValue + (long)Items[1] * (long)Misc.DefValue.ResourceWood.BaseValue + (long)Items[2] * (long)Misc.DefValue.ResourceMetal.BaseValue + (long)Items[3] * (long)Misc.DefValue.ResourceJade.BaseValue + (long)Items[4] * (long)Misc.DefValue.ResourceFabric.BaseValue + (long)Items[5] * (long)Misc.DefValue.ResourceHerb.BaseValue + (long)Items[6] * (long)Misc.DefValue.ResourceMoney.BaseValue + (long)Items[7] * (long)Misc.DefValue.ResourceAuthority.BaseValue;
 	}
 
-	/// <summary>
-	/// 获取最大数量的资源类型
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetMaxType()
 	{
 		return GetMaxType(8);
 	}
 
-	/// <summary>
-	/// 获取最大数量的材料资源类型
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetMaxMaterialType()
 	{
 		return GetMaxType(6);
 	}
 
-	/// <summary>
-	/// 获取最大数量的财富资源类型
-	/// </summary>
-	/// <returns></returns>
 	public sbyte GetMaxWealthType()
 	{
 		return GetMaxType(7);

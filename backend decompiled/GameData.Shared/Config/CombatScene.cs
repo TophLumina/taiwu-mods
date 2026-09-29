@@ -7,31 +7,16 @@ namespace Config;
 [Serializable]
 public class CombatScene : ConfigData<CombatSceneItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 彩蛋
-		/// </summary>
 		public const short EasterEgg = 42;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 彩蛋
-		/// </summary>
 		public static CombatSceneItem EasterEgg => Instance[(short)42];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CombatScene Instance = new CombatScene();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "TemplateId", "PrefabPath" };
@@ -125,12 +110,13 @@ public class CombatScene : ConfigData<CombatSceneItem, short>
 		_dataArray.Add(new CombatSceneItem(70, new List<string> { "combat_scene_173/combat_scene_173" }, LocalStringManager.GetConfig("CombatScene_language", "Name_70"), hasWinterResource: true));
 		_dataArray.Add(new CombatSceneItem(71, new List<string> { "combat_scene_174/combat_scene_174" }, LocalStringManager.GetConfig("CombatScene_language", "Name_71"), hasWinterResource: true));
 		_dataArray.Add(new CombatSceneItem(72, new List<string> { "combat_scene_175/combat_scene_175" }, LocalStringManager.GetConfig("CombatScene_language", "Name_72"), hasWinterResource: true));
+		_dataArray.Add(new CombatSceneItem(73, new List<string> { "combat_scene_176/combat_scene_176" }, LocalStringManager.GetConfig("CombatScene_language", "Name_73"), hasWinterResource: false));
 	}
 
 	public override void Init()
 	{
 		base.Init();
-		_dataArray = new List<CombatSceneItem>(73);
+		_dataArray = new List<CombatSceneItem>(74);
 		CreateItems0();
 		CreateItems1();
 	}

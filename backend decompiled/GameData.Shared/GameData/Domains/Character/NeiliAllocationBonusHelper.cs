@@ -4,28 +4,13 @@ using Config;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 真气加成相关配置辅助工具集
-/// </summary>
 public static class NeiliAllocationBonusHelper
 {
-	/// <summary>
-	/// 计算功法在所有类型真气加成值（默认 100 真气、100 威力）
-	/// </summary>
-	/// <param name="config"></param>
-	/// <returns></returns>
 	public static List<(short propertyId, int value)> CalcDefaultNeiliAllocationBonus(this CombatSkillItem config)
 	{
 		return config.CalcNeiliAllocationBonus(100, (ECharacterPropertyReferencedType x) => x.CalcNeiliAllocationStepCount(100));
 	}
 
-	/// <summary>
-	/// 计算功法的所有类型真气加成值
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="power"></param>
-	/// <param name="stepProvider"></param>
-	/// <returns></returns>
 	public static List<(short propertyId, int value)> CalcNeiliAllocationBonus(this CombatSkillItem config, int power, Func<ECharacterPropertyReferencedType, int> stepProvider)
 	{
 		List<(short, int)> addPropertyList = new List<(short, int)>();
@@ -41,14 +26,6 @@ public static class NeiliAllocationBonusHelper
 		return addPropertyList;
 	}
 
-	/// <summary>
-	/// 计算功法的指定类型真气加成值
-	/// </summary>
-	/// <param name="config"></param>
-	/// <param name="type"></param>
-	/// <param name="step"></param>
-	/// <param name="power"></param>
-	/// <returns></returns>
 	public static int CalcNeiliAllocationBonus(this CombatSkillItem config, ECharacterPropertyReferencedType type, int step, int power)
 	{
 		int valuePerStep = config.GetMapping(type);
@@ -60,9 +37,6 @@ public static class NeiliAllocationBonusHelper
 		return valuePerStep * step * power * percent / 10000;
 	}
 
-	/// <summary>
-	/// 计算指定真气时的加成次数
-	/// </summary>
 	public static int CalcNeiliAllocationStepCount(this ECharacterPropertyReferencedType type, short allNeiliAllocationValue)
 	{
 		NeiliAllocation allocations = default(NeiliAllocation);
@@ -73,9 +47,6 @@ public static class NeiliAllocationBonusHelper
 		return type.CalcNeiliAllocationStepCount(allocations, allocations);
 	}
 
-	/// <summary>
-	/// 计算指定真气时的加成次数
-	/// </summary>
 	public static int CalcNeiliAllocationStepCount(this ECharacterPropertyReferencedType type, NeiliAllocation allocations, NeiliAllocation allocationEffects)
 	{
 		int stepCount = 0;
@@ -92,9 +63,6 @@ public static class NeiliAllocationBonusHelper
 		return stepCount;
 	}
 
-	/// <summary>
-	/// 是否攻击值
-	/// </summary>
 	public static bool IsPenetrate(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)(type - 10) <= 1u)
@@ -104,9 +72,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否防御值
-	/// </summary>
 	public static bool IsPenetrateResist(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)(type - 16) <= 1u)
@@ -116,9 +81,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否命中值
-	/// </summary>
 	public static bool IsHit(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)(type - 6) <= 3u)
@@ -128,9 +90,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否化解值
-	/// </summary>
 	public static bool IsAvoid(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)(type - 12) <= 3u)
@@ -140,9 +99,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否毒抗值
-	/// </summary>
 	public static bool IsPoisonResist(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)(type - 28) <= 5u)
@@ -152,12 +108,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 尝试转换为毒抗类型
-	/// </summary>
-	/// <param name="type"></param>
-	/// <param name="poisonType"></param>
-	/// <returns></returns>
 	public static bool TryParsePoisonResist(this ECharacterPropertyReferencedType type, out sbyte poisonType)
 	{
 		poisonType = type switch
@@ -173,11 +123,6 @@ public static class NeiliAllocationBonusHelper
 		return poisonType != -1;
 	}
 
-	/// <summary>
-	/// 是否为主要属性
-	/// </summary>
-	/// <param name="type"></param>
-	/// <returns></returns>
 	public static bool IsMainAttribute(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)type <= 5u)
@@ -187,9 +132,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 是否为次要属性
-	/// </summary>
 	public static bool IsSubAttribute(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)(type - 18) <= 9u)
@@ -199,9 +141,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 某类型是否为技艺造诣
-	/// </summary>
 	public static bool IsLifeSkillTypeAttainment(this ECharacterPropertyReferencedType type)
 	{
 		if ((uint)(type - 50) <= 15u)
@@ -211,9 +150,6 @@ public static class NeiliAllocationBonusHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 获取对应的主属性类型
-	/// </summary>
 	public static sbyte GetMainAttributeType(this ECharacterPropertyReferencedType type)
 	{
 		return type switch
@@ -234,9 +170,6 @@ public static class NeiliAllocationBonusHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取主属性精纯除数
-	/// </summary>
 	public static int GetMainAttributeConsummateDivisor(this ECharacterPropertyReferencedType type)
 	{
 		if (!type.IsHit() && !type.IsAvoid())
@@ -246,9 +179,6 @@ public static class NeiliAllocationBonusHelper
 		return 6;
 	}
 
-	/// <summary>
-	/// 获取主属性精纯影响 ID
-	/// </summary>
 	public static ushort GetMainAttributeConsummateFieldId(this ECharacterPropertyReferencedType type)
 	{
 		if (type.IsHit())
@@ -266,9 +196,6 @@ public static class NeiliAllocationBonusHelper
 		return 238;
 	}
 
-	/// <summary>
-	/// 尝试转换为主要属性类型
-	/// </summary>
 	public static bool TryParseMainAttributeType(this ECharacterPropertyReferencedType type, out sbyte mainAttributeType)
 	{
 		mainAttributeType = type switch
@@ -284,9 +211,6 @@ public static class NeiliAllocationBonusHelper
 		return mainAttributeType != 6;
 	}
 
-	/// <summary>
-	/// 尝试转换为武学资质类型
-	/// </summary>
 	public static bool TryParseCombatSkillQualificationType(this ECharacterPropertyReferencedType type, out sbyte combatSkillType)
 	{
 		combatSkillType = type switch
@@ -310,9 +234,6 @@ public static class NeiliAllocationBonusHelper
 		return combatSkillType != 14;
 	}
 
-	/// <summary>
-	/// 尝试转换为武学资质类型
-	/// </summary>
 	public static bool TryParseLifeSkillQualificationType(this ECharacterPropertyReferencedType type, out sbyte lifeSkillType)
 	{
 		lifeSkillType = type switch
@@ -338,9 +259,6 @@ public static class NeiliAllocationBonusHelper
 		return lifeSkillType != 16;
 	}
 
-	/// <summary>
-	/// 尝试转换为赋性类型
-	/// </summary>
 	public static bool TryParsePersonalityType(this ECharacterPropertyReferencedType type, out sbyte personalityType)
 	{
 		personalityType = type switch
@@ -357,9 +275,6 @@ public static class NeiliAllocationBonusHelper
 		return personalityType != 7;
 	}
 
-	/// <summary>
-	/// 尝试转换为命中类型
-	/// </summary>
 	public static bool TryParseHitType(this ECharacterPropertyReferencedType type, out sbyte hitType)
 	{
 		hitType = type switch
@@ -373,9 +288,6 @@ public static class NeiliAllocationBonusHelper
 		return hitType != -1;
 	}
 
-	/// <summary>
-	/// 尝试转换为化解类型
-	/// </summary>
 	public static bool TryParseAvoidType(this ECharacterPropertyReferencedType type, out sbyte avoidType)
 	{
 		avoidType = type switch
@@ -389,9 +301,6 @@ public static class NeiliAllocationBonusHelper
 		return avoidType != -1;
 	}
 
-	/// <summary>
-	/// 尝试转换为攻击类型
-	/// </summary>
 	public static bool TryParsePenetrateIsInner(this ECharacterPropertyReferencedType type, out bool penetrateIsInner)
 	{
 		bool num = type.IsPenetrate();
@@ -404,9 +313,6 @@ public static class NeiliAllocationBonusHelper
 		return num;
 	}
 
-	/// <summary>
-	/// 尝试转换为防御类型
-	/// </summary>
 	public static bool TryParsePenetrateResistIsInner(this ECharacterPropertyReferencedType type, out bool penetrateResistIsInner)
 	{
 		bool num = type.IsPenetrateResist();
@@ -419,9 +325,6 @@ public static class NeiliAllocationBonusHelper
 		return num;
 	}
 
-	/// <summary>
-	/// 获取属性映射值
-	/// </summary>
 	public static int GetMapping(this NeiliTypeItem config, ECharacterPropertyReferencedType type)
 	{
 		return type switch
@@ -458,9 +361,6 @@ public static class NeiliAllocationBonusHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取属性映射值
-	/// </summary>
 	public static int GetMapping(this NeiliAllocationEffectItem config, ECharacterPropertyReferencedType type)
 	{
 		return type switch
@@ -497,9 +397,6 @@ public static class NeiliAllocationBonusHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取属性映射值
-	/// </summary>
 	public static int GetMapping(this CombatSkillItem config, ECharacterPropertyReferencedType type)
 	{
 		return type switch
@@ -536,9 +433,6 @@ public static class NeiliAllocationBonusHelper
 		};
 	}
 
-	/// <summary>
-	/// 获取属性映射值
-	/// </summary>
 	public static int GetMapping(this SkillBreakPageEffectImplementItem config, ECharacterPropertyReferencedType type)
 	{
 		return type switch

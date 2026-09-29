@@ -31,7 +31,6 @@ using GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.Blade;
 using GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.DefenseAndAssist;
 using GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.FistAndPalm;
 using GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.Neigong;
-using GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.PestleEffect;
 using GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.Special;
 using GameData.Domains.SpecialEffect.CombatSkill.Kongsangpai.Agile;
 using GameData.Domains.SpecialEffect.CombatSkill.Kongsangpai.DefenseAndAssist;
@@ -1200,12 +1199,6 @@ public static class SpecialEffectType
 	public const int JingangSpecial6 = 11306;
 
 	public const int JingangSpecial7 = 11307;
-
-	public const int JingangPestle1 = 11401;
-
-	public const int JingangPestle3 = 11403;
-
-	public const int JingangPestle5 = 11405;
 
 	public const int JingangAgile0 = 11500;
 
@@ -3067,16 +3060,13 @@ public static class SpecialEffectType
 			11207 => new LiuShenWeiDao(), 
 			11208 => new MoHeJiaLuoDao(), 
 			11300 => new SuiShiChu(), 
-			11301 => new GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.Special.HuFaJinGangChu(), 
+			11301 => new HuFaJinGangChu(), 
 			11302 => new LuoChaChuFa(), 
-			11303 => new GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.Special.NuMuJinGangChu(), 
+			11303 => new NuMuJinGangChu(), 
 			11304 => new DaLunJinGangChu(), 
-			11305 => new GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.Special.DaWeiDeJinGangChu(), 
+			11305 => new DaWeiDeJinGangChu(), 
 			11306 => new RuYiBaoShuChu(), 
-			11307 => new GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.Special.BuDongMingWangChu(), 
-			11401 => new GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.PestleEffect.HuFaJinGangChu(), 
-			11403 => new GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.PestleEffect.NuMuJinGangChu(), 
-			11405 => new GameData.Domains.SpecialEffect.CombatSkill.Jingangzong.PestleEffect.DaWeiDeJinGangChu(), 
+			11307 => new BuDongMingWangChu(), 
 			11500 => new XianShiJiao(), 
 			11501 => new DaDingJiao(), 
 			11502 => new JinGangZuoFa(), 

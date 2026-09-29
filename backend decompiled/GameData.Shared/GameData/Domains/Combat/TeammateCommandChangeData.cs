@@ -4,35 +4,20 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 同道指令变化数据
-/// </summary>
 [SerializableGameData]
 public class TeammateCommandChangeData : ISerializableGameData
 {
-	/// <summary>
-	/// 己方阵营同道指令变化数据
-	/// </summary>
 	[SerializableGameDataField]
 	public TeammateCommandChangeDataPart LeftTeam;
 
-	/// <summary>
-	/// 敌方阵营同道指令变化数据
-	/// </summary>
 	[SerializableGameDataField]
 	public TeammateCommandChangeDataPart RightTeam;
 
-	/// <summary>
-	/// 获取角色最终的同道指令
-	/// </summary>
 	public IReadOnlyList<sbyte> GetCharTeammateCommands(int charId)
 	{
 		return GetCharTeammateCommandsInternal(charId);
 	}
 
-	/// <summary>
-	/// 获取角色最终的同道指令（内部调用，可修改返回值）
-	/// </summary>
 	private List<sbyte> GetCharTeammateCommandsInternal(int charId)
 	{
 		for (int i = 0; i < LeftTeam.TeammateCharIds.Count; i++)
@@ -52,9 +37,6 @@ public class TeammateCommandChangeData : ISerializableGameData
 		return null;
 	}
 
-	/// <summary>
-	/// 设置角色最终的同道指令
-	/// </summary>
 	public bool SetCharTeammateCommands(int charId, IEnumerable<sbyte> cmdTypes)
 	{
 		List<sbyte> finalCmdTypes = GetCharTeammateCommandsInternal(charId);
@@ -70,38 +52,27 @@ public class TeammateCommandChangeData : ISerializableGameData
 		return true;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TeammateCommandChangeData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TeammateCommandChangeData(TeammateCommandChangeData other)
 	{
 		LeftTeam = new TeammateCommandChangeDataPart(other.LeftTeam);
 		RightTeam = new TeammateCommandChangeDataPart(other.RightTeam);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TeammateCommandChangeData other)
 	{
 		LeftTeam = new TeammateCommandChangeDataPart(other.LeftTeam);
 		RightTeam = new TeammateCommandChangeDataPart(other.RightTeam);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 0;
@@ -114,7 +85,6 @@ public class TeammateCommandChangeData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -154,7 +124,6 @@ public class TeammateCommandChangeData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

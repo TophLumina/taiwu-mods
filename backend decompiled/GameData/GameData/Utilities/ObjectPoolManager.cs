@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Config;
 using GameData.Adventure;
+using GameData.Combat.Chicken;
 using GameData.Domains.Adventure;
 using GameData.Domains.Building;
 using GameData.Domains.Character;
@@ -79,6 +80,7 @@ public static class ObjectPoolManager
 		ObjectPool<HashSet<BuildingBlockKey>>.Instance = new CollectionObjectPool<HashSet<BuildingBlockKey>, BuildingBlockKey>(initialCount, maxCount);
 		ObjectPool<List<BuildingBlockKey>>.Instance = new CollectionObjectPool<List<BuildingBlockKey>, BuildingBlockKey>(initialCount, maxCount);
 		ObjectPool<List<DefeatMarkKey>>.Instance = new CollectionObjectPool<List<DefeatMarkKey>, DefeatMarkKey>(initialCount, maxCount);
+		ObjectPool<List<ChickenPointRuntime>>.Instance = new CollectionObjectPool<List<ChickenPointRuntime>, ChickenPointRuntime>(initialCount, maxCount);
 		ObjectPool<List<(ItemKey, int)>>.Instance = new CollectionObjectPool<List<(ItemKey, int)>, (ItemKey, int)>(initialCount, maxCount);
 		ObjectPool<StringBuilder>.Instance = new ObjectPool<StringBuilder>(initialCount, maxCount);
 		ObjectPool<List<TemplateKey>>.Instance = new ObjectPool<List<TemplateKey>>(initialCount, maxCount);

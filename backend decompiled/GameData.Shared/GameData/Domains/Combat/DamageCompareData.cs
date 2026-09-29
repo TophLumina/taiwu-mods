@@ -2,92 +2,47 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Combat;
 
-/// <summary>
-/// 伤害计算数值对比显示数据
-/// </summary>
 [SerializableGameData(NotForArchive = true, NoCopyConstructors = true)]
 public class DamageCompareData : ISerializableGameData
 {
-	/// <summary>
-	/// 单次攻击最大命中类型数
-	/// </summary>
 	private const int MaxHitType = 3;
 
-	/// <summary>
-	/// 是否玩家攻击
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsAlly;
 
-	/// <summary>
-	/// 功法Id，小于零时为普攻
-	/// </summary>
 	[SerializableGameDataField]
 	public short SkillId;
 
-	/// <summary>
-	/// 外伤攻击值
-	/// </summary>
 	[SerializableGameDataField]
 	public int OuterAttackValue;
 
-	/// <summary>
-	/// 内伤攻击值
-	/// </summary>
 	[SerializableGameDataField]
 	public int InnerAttackValue;
 
-	/// <summary>
-	/// 外伤防御值
-	/// </summary>
 	[SerializableGameDataField]
 	public int OuterDefendValue;
 
-	/// <summary>
-	/// 内伤防御值
-	/// </summary>
 	[SerializableGameDataField]
 	public int InnerDefendValue;
 
-	/// <summary>
-	/// 武器破甲
-	/// </summary>
 	[SerializableGameDataField]
 	public int WeaponAttack;
 
-	/// <summary>
-	/// 武器坚韧
-	/// </summary>
 	[SerializableGameDataField]
 	public int WeaponDefend;
 
-	/// <summary>
-	/// 防具破刃
-	/// </summary>
 	[SerializableGameDataField]
 	public int ArmorAttack;
 
-	/// <summary>
-	/// 防具坚韧
-	/// </summary>
 	[SerializableGameDataField]
 	public int ArmorDefend;
 
-	/// <summary>
-	/// 命中类型列表
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 3)]
 	public readonly sbyte[] HitType = new sbyte[3];
 
-	/// <summary>
-	/// 命中值列表
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 3)]
 	public readonly int[] HitValue = new int[3];
 
-	/// <summary>
-	/// 化解值列表
-	/// </summary>
 	[SerializableGameDataField(ArrayElementsCount = 3)]
 	public readonly int[] AvoidValue = new int[3];
 
@@ -109,13 +64,11 @@ public class DamageCompareData : ISerializableGameData
 		}
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 62;
@@ -126,7 +79,6 @@ public class DamageCompareData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -173,7 +125,6 @@ public class DamageCompareData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

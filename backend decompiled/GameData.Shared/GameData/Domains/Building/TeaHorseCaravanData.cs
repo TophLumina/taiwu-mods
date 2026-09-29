@@ -7,159 +7,77 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 茶马帮交易数据
-/// </summary>
 public class TeaHorseCaravanData : ISerializableGameData
 {
-	/// <summary>
-	/// 来自行囊
-	/// </summary>
 	public const sbyte FromInventory = 1;
 
-	/// <summary>
-	/// 来自仓库
-	/// </summary>
 	public const sbyte FromWarehouse = 2;
 
-	/// <summary>
-	/// 来自公库
-	/// </summary>
 	public const sbyte FromTreasury = 3;
 
-	/// <summary>
-	/// 来自货仓
-	/// </summary>
 	public const sbyte FromStockStorage = 4;
 
-	/// <summary>
-	/// 茶马帮初始补给值 100
-	/// </summary>
 	public const short CaravanReplenishmentInitValue = 100;
 
-	/// <summary>
-	/// 茶马帮初始知名度 100
-	/// </summary>
 	public const short CaravanAwarenessInitValue = 100;
 
-	/// <summary>
-	/// 商队补给每时节消耗 5
-	/// </summary>
 	public const short CaravanReplenishmentCostPerMonth = 5;
 
-	/// <summary>
-	///  携带物品：从行囊仓库等添加进来，丢失时需要从世界删除
-	///  item2 保存的是来源FromInventory或者FromWarehouse
-	/// </summary>
 	[SerializableGameDataField]
 	public List<(ItemKey, sbyte)> CarryGoodsList;
 
-	/// <summary>
-	/// 收获物品：只有最后回到太吾村才真正创造物品，之前丢失不需要从世界删除
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemKey> ExchangeGoodsList;
 
-	/// <summary>
-	/// 记录茶马帮遇到的事件，用来显示日志
-	/// </summary>
 	[Obsolete]
 	[SerializableGameDataField]
 	public List<short> DiaryList;
 
-	/// <summary>
-	/// 茶马帮状态：1：准备出发  2：前进  3：返回  4:携带物品返回待领取
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte CaravanState;
 
-	/// <summary>
-	/// 是否为搜集补给状态（搜集状态下不进行后续判断，过月变成false）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsStartSearch;
 
-	/// <summary>
-	/// 天气 
-	/// </summary>
 	[SerializableGameDataField]
 	public short Weather;
 
-	/// <summary>
-	/// 地形
-	/// </summary>
 	[SerializableGameDataField]
 	public short Terrain;
 
-	/// <summary>
-	/// 茶马帮知名度
-	/// </summary>
 	[SerializableGameDataField]
 	public short CaravanAwareness;
 
-	/// <summary>
-	/// 携带补给
-	/// </summary>
 	[SerializableGameDataField]
 	public short CaravanReplenishment;
 
-	/// <summary>
-	/// 无补给轮次(影响货物丢失概率)
-	/// </summary>
 	[SerializableGameDataField]
 	public short LackReplenishmentTurn;
 
-	/// <summary>
-	/// 是否出现搜集补给按钮
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsShowSeachReplenishment;
 
-	/// <summary>
-	/// 是否出现交换补给按钮
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsShowExchangeReplenishment;
 
-	/// <summary>
-	/// 与太吾村的距离
-	/// </summary>
 	[SerializableGameDataField]
 	public short DistanceToTaiwuVillage;
 
-	/// <summary>
-	/// 已经出发了的时间
-	/// </summary>
 	[SerializableGameDataField]
 	public short StartMonth;
 
-	/// <summary>
-	/// 可以交换补给的数量
-	/// </summary>
 	[SerializableGameDataField]
 	public short ExchangeReplenishmentAmountMax;
 
-	/// <summary>
-	/// 可以交换补给的数量
-	/// </summary>
 	[SerializableGameDataField]
 	public short ExchangeReplenishmentRemainAmount;
 
-	/// <summary>
-	/// 可以搜寻补给的上限
-	/// </summary>
 	[SerializableGameDataField]
 	public short SearchReplenishmentMax;
 
-	/// <summary>
-	/// 每次搜寻补给的数量
-	/// </summary>
 	[SerializableGameDataField]
 	public short SearchReplenishmentAmount;
 
-	/// <summary>
-	/// 构造方法, 初始化字段
-	/// </summary>
 	public TeaHorseCaravanData()
 	{
 		CarryGoodsList = new List<(ItemKey, sbyte)>();
@@ -169,22 +87,16 @@ public class TeaHorseCaravanData : ISerializableGameData
 		CaravanReplenishment = 100;
 	}
 
-	/// <summary>
-	/// 补给消耗（常规和天气）
-	/// </summary>
-	/// <returns></returns>
 	public int GetReplenishmentCost()
 	{
 		return TeaHorseCaravanWeather.Instance.GetItem(Weather).ReplenishmentChange + 5;
 	}
 
-	/// <inheritdoc />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc />
 	public int GetSerializedSize()
 	{
 		int totalSize = 26;
@@ -198,7 +110,6 @@ public class TeaHorseCaravanData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -291,7 +202,6 @@ public class TeaHorseCaravanData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

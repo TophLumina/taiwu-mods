@@ -3,40 +3,22 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Map;
 
-/// <summary>
-/// 长途旅行路线节点数据
-/// </summary>
 [AutoGenerateSerializableGameData(NotForArchive = true)]
 public class TravelRouteElement : ISerializableGameData
 {
-	/// <summary>
-	/// 旅行路线
-	/// </summary>
 	[SerializableGameDataField]
 	public short AreaId;
 
-	/// <summary>
-	/// 时间消耗 
-	/// </summary>
 	[SerializableGameDataField]
 	public short Cost;
 
-	/// <summary>
-	/// 此地驿站是否开启
-	/// </summary>
 	[SerializableGameDataField]
 	public bool StationUnlocked;
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public TravelRouteElement()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public TravelRouteElement(TravelRouteElement other)
 	{
 		AreaId = other.AreaId;
@@ -44,9 +26,6 @@ public class TravelRouteElement : ISerializableGameData
 		StationUnlocked = other.StationUnlocked;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(TravelRouteElement other)
 	{
 		AreaId = other.AreaId;

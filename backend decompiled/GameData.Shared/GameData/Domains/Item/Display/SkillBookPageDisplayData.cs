@@ -5,48 +5,26 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Item.Display;
 
-/// <summary>
-/// 书页显示数据
-/// </summary>
 [AutoGenerateSerializableGameData]
 public class SkillBookPageDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 物品 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey ItemKey;
 
-	/// <summary>
-	/// 书页状态
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] State;
 
-	/// <summary>
-	/// 研读进度
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] ReadingProgress;
 
-	/// <summary>
-	/// 正逆，仅功法书有
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] Type;
 
-	/// <summary>
-	/// 功法的全部研读进度
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] CombatSkillAllReadingProgress;
 
 	public bool IsCombatBook => ItemTemplateHelper.GetItemSubType(ItemKey.ItemType, ItemKey.TemplateId) == 1001;
 
-	/// <summary>
-	/// 书籍是否可修复（有书页是残缺状态即可修复）
-	/// </summary>
-	/// <returns></returns>
 	public bool CanFix()
 	{
 		bool canFix = false;
@@ -61,11 +39,6 @@ public class SkillBookPageDisplayData : ISerializableGameData
 		return canFix;
 	}
 
-	/// <summary>
-	/// 获取书籍第一个非完整页（残缺页、亡佚页）的页码和修复需要的总进度
-	/// 亡佚页修复总进度是残缺页的3倍
-	/// </summary>
-	/// <returns></returns>
 	public (sbyte pageNum, short needProgress) GetFixProgress()
 	{
 		sbyte grade = ItemTemplateHelper.GetGrade(ItemKey.ItemType, ItemKey.TemplateId);
@@ -89,16 +62,10 @@ public class SkillBookPageDisplayData : ISerializableGameData
 		return (pageNum: incompletePage, needProgress: needProgress);
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public SkillBookPageDisplayData()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public SkillBookPageDisplayData(SkillBookPageDisplayData other)
 	{
 		ItemKey = other.ItemKey;
@@ -132,9 +99,6 @@ public class SkillBookPageDisplayData : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(SkillBookPageDisplayData other)
 	{
 		ItemKey = other.ItemKey;
@@ -175,8 +139,7 @@ public class SkillBookPageDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 0;
-		totalSize += ItemKey.GetSerializedSize();
+		int totalSize = 8;
 		totalSize = ((State == null) ? (totalSize + 2) : (totalSize + (2 + State.Length)));
 		totalSize = ((ReadingProgress == null) ? (totalSize + 2) : (totalSize + (2 + ReadingProgress.Length)));
 		totalSize = ((Type == null) ? (totalSize + 2) : (totalSize + (2 + Type.Length)));

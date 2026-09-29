@@ -7,6 +7,7 @@ using System.Threading;
 using Config;
 using Config.ConfigCells;
 using GameData.Achievement;
+using GameData.Adventure;
 using GameData.ArchiveData;
 using GameData.Combat.Math;
 using GameData.Common;
@@ -138,6 +139,9 @@ public class WorldDomain : BaseGameDataDomain
 
 	private Version _currWorldGameVersion;
 
+	[DomainData(DomainDataType.SingleValue, true, false, true, false)]
+	private int _dreamBackCount;
+
 	[DomainData(DomainDataType.SingleValueCollection, true, false, true, true)]
 	private readonly Dictionary<short, sbyte> _triggeredGuidingChapterDictionary;
 
@@ -202,7 +206,7 @@ public class WorldDomain : BaseGameDataDomain
 
 	private readonly List<short> _candidateBuildings = new List<short>();
 
-	private readonly List<short> _candidateAdventures = new List<short>();
+	private readonly List<int> _candidateAdventures = new List<int>();
 
 	private readonly List<(short colorId, short partId)> _candidateCrickets = new List<(short, short)>();
 
@@ -352,7 +356,7 @@ public class WorldDomain : BaseGameDataDomain
 
 	private List<int> cachedResult = new List<int>();
 
-	private static readonly DataInfluence[][] CacheInfluences = new DataInfluence[59][];
+	private static readonly DataInfluence[][] CacheInfluences = new DataInfluence[60][];
 
 	private SpinLock _spinLockXiangshuProgress = new SpinLock(enableThreadOwnerTracking: false);
 
@@ -381,8 +385,6 @@ public class WorldDomain : BaseGameDataDomain
 	private SingleValueCollectionModificationCollection<int> _modificationsPermanentMonthNotifies = SingleValueCollectionModificationCollection<int>.Create();
 
 	private SingleValueCollectionModificationCollection<short> _modificationsAreaStoryWeathers = SingleValueCollectionModificationCollection<short>.Create();
-
-	private Queue<uint> _pendingLoadingOperationIds;
 
 	public int ActionPointRecovery => ApplyChallengeModeMoreActionPointRecovery();
 
@@ -420,6 +422,12 @@ public class WorldDomain : BaseGameDataDomain
 		}
 		EChallengeModeImplement implement = config.Implement;
 		return (uint)(implement - 26) <= 1u;
+	}
+
+	[NewDomainDataInitializer(1, 59)]
+	private void InitDreamBackCount()
+	{
+		_dreamBackCount = (DomainManager.Extra.GetIsDreamBack() ? 1 : 0);
 	}
 
 	private void OnInitializedDomainData()
@@ -1284,7 +1292,7 @@ public class WorldDomain : BaseGameDataDomain
 				sbyte progress = readState?.GetOrDefault(internalIndex) ?? 0;
 				if (progress != 100)
 				{
-					DomainManager.Taiwu.ReadSkillBookPageAndSetComplete(context, book, i);
+					DomainManager.Taiwu.ReadSkillBookPageAndSetComplete(context, book, i, addSeniority: true);
 				}
 			}
 		}
@@ -1576,6 +1584,7 @@ public class WorldDomain : BaseGameDataDomain
 		{
 			CurrDate = GetCurrDate(),
 			TaiwuGenerationsCount = DomainManager.Taiwu.GetTaiwuGenerationsCount(),
+			DreamBackCount = GetDreamBackCount(),
 			SavingTimestamp = DateTime.UtcNow.Ticks,
 			TaiwuSurname = surname,
 			TaiwuGivenName = givenName,
@@ -1603,7 +1612,7 @@ public class WorldDomain : BaseGameDataDomain
 			ModIds = ModDomain.GetLoadedModIds(),
 			DlcIds = DlcManager.GetAllInstalledDlcIds(),
 			GameVersionInfo = GetWorldVersionInfo(),
-			TotalTaiwuLifeSummaryInfo = DomainManager.Taiwu.GetTotalTaiwuLifeSummaryInfo(),
+			TotalTaiwuLifeSummaryInfoEx = DomainManager.Taiwu.GetTotalTaiwuLifeSummaryInfo(),
 			WorldFunctionStatuses = GetWorldFunctionsStatuses(),
 			MapStateTemplateId = stateTemplateId,
 			MapAreaTemplateId = areaTemplateId
@@ -1827,10 +1836,12 @@ public class WorldDomain : BaseGameDataDomain
 		crossArchiveGameData.FinalDateBeforeDreamBack = _currDate;
 		crossArchiveGameData.WorldCreationInfo = GetWorldCreationInfo();
 		crossArchiveGameData.WorldId = _worldId;
+		crossArchiveGameData.DreamBackCount = _dreamBackCount;
 	}
 
 	public override void UnpackCrossArchiveGameData(DataContext context, CrossArchiveGameData crossArchiveGameData)
 	{
+		SetDreamBackCount(crossArchiveGameData.DreamBackCount + 1, context);
 		foreach (KeyValuePair<int, string> pair in crossArchiveGameData.CustomTexts)
 		{
 			if (_customTexts.ContainsKey(pair.Key))
@@ -2470,7 +2481,7 @@ public class WorldDomain : BaseGameDataDomain
 		EventArgBox globalArgBox = DomainManager.TaiwuEvent.GetGlobalEventArgumentBox();
 		foreach (MonthlyEventItem monthlyEventCfg in (IEnumerable<MonthlyEventItem>)Config.MonthlyEvent.Instance)
 		{
-			if (monthlyEventCfg.AutoTriggerChance > 0 && !IsMonthlyEventInCooldown(monthlyEventCfg.TemplateId))
+			if (monthlyEventCfg.AutoTriggerChance > 0 && !IsMonthlyEventInCooldown(monthlyEventCfg.TemplateId) && (monthlyEventCfg.DlcAppId == 0 || DlcManager.IsDlcInstalled(monthlyEventCfg.DlcAppId)))
 			{
 				if (_monthlyEventLastTriggerDates.ContainsKey(monthlyEventCfg.TemplateId))
 				{
@@ -2612,9 +2623,9 @@ public class WorldDomain : BaseGameDataDomain
 			_candidateBuildings.Add(item2.TemplateId);
 		}
 		_candidateAdventures.Clear();
-		foreach (Config.AdventureItem item3 in (IEnumerable<Config.AdventureItem>)Config.Adventure.Instance)
+		foreach (AdventureData item3 in AdventureDomain.Core.AllAdventures)
 		{
-			_candidateAdventures.Add(item3.TemplateId);
+			_candidateAdventures.Add(item3.Id);
 		}
 		_candidateCrickets.Clear();
 		InitializeCandidateCrickets(_candidateCrickets);
@@ -2814,7 +2825,7 @@ public class WorldDomain : BaseGameDataDomain
 		case 10:
 		{
 			int selectedIndex3 = random.Next(_candidateAdventures.Count);
-			short adventureTemplateId = _candidateAdventures[selectedIndex3];
+			int adventureTemplateId = _candidateAdventures[selectedIndex3];
 			arguments.Add(adventureTemplateId);
 			break;
 		}
@@ -2858,7 +2869,7 @@ public class WorldDomain : BaseGameDataDomain
 		}
 		case 16:
 		{
-			short characterPropertyReferencedType = (short)random.Next(0, 161);
+			short characterPropertyReferencedType = (short)random.Next(0, 167);
 			arguments.Add(characterPropertyReferencedType);
 			break;
 		}
@@ -2915,7 +2926,7 @@ public class WorldDomain : BaseGameDataDomain
 		}
 		for (short templateId = startTemplateId; templateId <= endTemplateId; templateId++)
 		{
-			if (_canTestMonthlyEventTemplateIdList.Contains(startTemplateId))
+			if (_canTestMonthlyEventTemplateIdList.Contains(templateId))
 			{
 				(short, int, int) tuple = (templateId, selfCharId, targetCharId);
 				if (!_testMonthlyEventList.Contains(tuple))
@@ -4080,8 +4091,7 @@ public class WorldDomain : BaseGameDataDomain
 	private void GenerateMonthNotifyData()
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
-		PoisonInts poisoned = default(PoisonInts);
-		poisoned.Add(ref taiwu.GetPoisoned());
+		PoisonInts poisoned = new PoisonInts { ref taiwu.GetPoisoned() };
 		MonthNotify data = new MonthNotify
 		{
 			Date = _currDate + 1,
@@ -4185,8 +4195,8 @@ public class WorldDomain : BaseGameDataDomain
 	{
 		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
 		MonthNotify data = _monthNotifies[0];
-		PoisonInts poisoned = default(PoisonInts);
-		poisoned.Add(ref taiwu.GetPoisoned());
+		PoisonInts poisoned = new PoisonInts { ref taiwu.GetPoisoned() };
+		_currMonthlyNotifications.TryShrink(65535);
 		data.MonthlyNotificationCollection = _currMonthlyNotifications;
 		_currMonthlyNotifications = new MonthlyNotificationCollection();
 		List<RenderInfo> renderInfoList = new List<RenderInfo>();
@@ -4629,6 +4639,7 @@ public class WorldDomain : BaseGameDataDomain
 		DomainManager.Organization.UpdateSpecialCustomizedSeverity(context);
 		DomainManager.Extra.UpdateArtisanOrderProgress(context);
 		DomainManager.Taiwu.UpdateChildrenEducation(context);
+		DomainManager.TaiwuEvent.OnEvent_AdvanceMonthExecute();
 	}
 
 	private void PeriAdvanceMonth_CharacterFixedAction(DataContext context, DataMonitorManager monitor)
@@ -5180,7 +5191,7 @@ public class WorldDomain : BaseGameDataDomain
 	}
 
 	public WorldDomain()
-		: base(59)
+		: base(60)
 	{
 		_worldId = 0u;
 		_xiangshuProgress = 0;
@@ -5241,6 +5252,7 @@ public class WorldDomain : BaseGameDataDomain
 		_permanentMonthNotifies = new Dictionary<int, PermanentMonthNotify>(0);
 		_areaStoryWeathers = new Dictionary<short, sbyte>(0);
 		_waitForDecideChallengeModeIds = new List<int>();
+		_dreamBackCount = 0;
 		OnInitializedDomainData();
 	}
 
@@ -6195,6 +6207,17 @@ public class WorldDomain : BaseGameDataDomain
 		SetModifiedAndInvalidateInfluencedCache(58, DataStates, CacheInfluences, context);
 	}
 
+	public int GetDreamBackCount()
+	{
+		return _dreamBackCount;
+	}
+
+	private void SetDreamBackCount(int value, DataContext context)
+	{
+		_dreamBackCount = value;
+		SetModifiedAndInvalidateInfluencedCache(59, DataStates, CacheInfluences, context);
+	}
+
 	public override void OnInitializeGameDataModule()
 	{
 		InitializeOnInitializeGameDataModule();
@@ -6208,7 +6231,7 @@ public class WorldDomain : BaseGameDataDomain
 
 	public override void OnSaveWorld(ArchiveFileBase archive)
 	{
-		archive.WriteSingleValueUnmanaged((ushort)45);
+		archive.WriteSingleValueUnmanaged((ushort)46);
 		archive.WriteDomainDataMeta(0);
 		archive.WriteSingleValueUnmanaged(_worldId);
 		archive.WriteDomainDataMeta(2);
@@ -6299,6 +6322,8 @@ public class WorldDomain : BaseGameDataDomain
 		archive.WriteSingleValueCollectionUnmanagedKeyValue(_areaStoryWeathers);
 		archive.WriteDomainDataMeta(58);
 		archive.WriteSingleValueUnmanagedList(_waitForDecideChallengeModeIds);
+		archive.WriteDomainDataMeta(59);
+		archive.WriteSingleValueUnmanaged(_dreamBackCount);
 	}
 
 	public override void OnLoadWorld(ArchiveFileBase archive)
@@ -6453,6 +6478,9 @@ public class WorldDomain : BaseGameDataDomain
 				break;
 			case 58:
 				archive.ReadSingleValueUnmanagedList(ref _waitForDecideChallengeModeIds);
+				break;
+			case 59:
+				archive.ReadSingleValueUnmanaged(ref _dreamBackCount);
 				break;
 			default:
 				throw new Exception($"Unsupported dataId {domainDataMeta.DataId}");
@@ -6822,6 +6850,12 @@ public class WorldDomain : BaseGameDataDomain
 				BaseGameDataDomain.ResetModified(DataStates, 58);
 			}
 			return GameData.Serializer.Serializer.Serialize(_waitForDecideChallengeModeIds, dataPool);
+		case 59:
+			if (resetModified)
+			{
+				BaseGameDataDomain.ResetModified(DataStates, 59);
+			}
+			return GameData.Serializer.Serializer.Serialize(_dreamBackCount, dataPool);
 		default:
 			throw new Exception($"Unsupported dataId {dataId}");
 		}
@@ -7014,6 +7048,8 @@ public class WorldDomain : BaseGameDataDomain
 		case 57:
 			throw new Exception($"Not allow to set value of dataId {dataId}");
 		case 58:
+			throw new Exception($"Not allow to set value of dataId {dataId}");
+		case 59:
 			throw new Exception($"Not allow to set value of dataId {dataId}");
 		default:
 			throw new Exception($"Unsupported dataId {dataId}");
@@ -7499,6 +7535,8 @@ public class WorldDomain : BaseGameDataDomain
 			break;
 		case 58:
 			break;
+		case 59:
+			break;
 		default:
 			throw new Exception($"Unsupported dataId {dataId}");
 		}
@@ -7943,6 +7981,13 @@ public class WorldDomain : BaseGameDataDomain
 			}
 			BaseGameDataDomain.ResetModified(DataStates, 58);
 			return GameData.Serializer.Serializer.Serialize(_waitForDecideChallengeModeIds, dataPool);
+		case 59:
+			if (!BaseGameDataDomain.IsModified(DataStates, 59))
+			{
+				return -1;
+			}
+			BaseGameDataDomain.ResetModified(DataStates, 59);
+			return GameData.Serializer.Serializer.Serialize(_dreamBackCount, dataPool);
 		default:
 			throw new Exception($"Unsupported dataId {dataId}");
 		}
@@ -8305,6 +8350,12 @@ public class WorldDomain : BaseGameDataDomain
 				BaseGameDataDomain.ResetModified(DataStates, 58);
 			}
 			break;
+		case 59:
+			if (BaseGameDataDomain.IsModified(DataStates, 59))
+			{
+				BaseGameDataDomain.ResetModified(DataStates, 59);
+			}
+			break;
 		default:
 			throw new Exception($"Unsupported dataId {dataId}");
 		}
@@ -8373,6 +8424,7 @@ public class WorldDomain : BaseGameDataDomain
 			56 => BaseGameDataDomain.IsModified(DataStates, 56), 
 			57 => BaseGameDataDomain.IsModified(DataStates, 57), 
 			58 => BaseGameDataDomain.IsModified(DataStates, 58), 
+			59 => BaseGameDataDomain.IsModified(DataStates, 59), 
 			_ => throw new Exception($"Unsupported dataId {dataId}"), 
 		};
 	}
@@ -8450,6 +8502,7 @@ public class WorldDomain : BaseGameDataDomain
 		case 56:
 		case 57:
 		case 58:
+		case 59:
 			throw new Exception($"Cannot invalidate cache state of non-cache data {influence.TargetIndicator.DataId}");
 		}
 	}

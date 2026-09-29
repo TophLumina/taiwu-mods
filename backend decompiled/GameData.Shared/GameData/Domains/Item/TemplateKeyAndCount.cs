@@ -2,21 +2,12 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Item;
 
-/// <summary>
-/// 物品类型和模板id以及数量
-/// </summary>
 [SerializableGameData(NotForArchive = true)]
 public struct TemplateKeyAndCount : ISerializableGameData
 {
-	/// <summary>
-	/// 物品类型和模板id
-	/// </summary>
 	[SerializableGameDataField]
 	public TemplateKey TemplateKey;
 
-	/// <summary>
-	/// 数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int Count;
 
@@ -27,9 +18,6 @@ public struct TemplateKeyAndCount : ISerializableGameData
 		return result;
 	}
 
-	/// <summary>
-	/// 隐式转换
-	/// </summary>
 	public static implicit operator TemplateKeyAndCount(TemplateKey templateKey)
 	{
 		return new TemplateKeyAndCount
@@ -39,22 +27,17 @@ public struct TemplateKeyAndCount : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 反构造
-	/// </summary>
 	public void Deconstruct(out TemplateKey templateKey, out int count)
 	{
 		templateKey = TemplateKey;
 		count = Count;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 7;
@@ -65,7 +48,6 @@ public struct TemplateKeyAndCount : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -80,7 +62,6 @@ public struct TemplateKeyAndCount : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

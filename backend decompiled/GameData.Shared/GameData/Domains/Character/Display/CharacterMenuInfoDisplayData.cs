@@ -6,9 +6,6 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 给人物界面单独使用的显示信息，减少多次请求
-/// </summary>
 [AutoGenerateSerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public class CharacterMenuInfoDisplayData : ISerializableGameData
 {
@@ -61,117 +58,60 @@ public class CharacterMenuInfoDisplayData : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 基础显示数据
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public CharacterDisplayData CharacterDisplayData;
 
-	/// <summary>
-	/// 太吾的显示数据
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public CharacterDisplayData TaiwuDisplayData;
 
-	/// <summary>
-	/// 铭刻状态
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public sbyte InscriptionStatus;
 
-	/// <summary>
-	/// 指令列表
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	public List<sbyte> TeammateCommandList;
 
-	/// <summary>
-	/// 关注列表是否已满
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	public bool IsFollowingNpcListMax;
 
-	/// <summary>
-	/// 是否临时智能角色
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 5)]
 	public bool IsTemporaryIntelligentCharacter;
 
-	/// <summary>
-	/// 爱慕冷却时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 6)]
 	public int AdoredCoolDown;
 
-	/// <summary>
-	/// 仇视冷却时间
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 7)]
 	public int EnemyCoolDown;
 
-	/// <summary>
-	/// 单向关系结果码（用于判断爱慕/仇视按钮状态）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 8)]
 	public int OneWayRelationResultCode;
 
-	/// <summary>
-	/// 角色对太吾的债务
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 9)]
 	public Debts DebtsOfTaiwu;
 
-	/// <summary>
-	/// 太吾修改过指令的角色id
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 10)]
 	public List<int> ChangedTeammateCharIds;
 
-	/// <summary>
-	/// 神龙的信息 DLC开启时才有效
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 11)]
 	public List<LoongInfo> FiveLoongLocation;
 
-	/// <summary>
-	/// 是否与太吾交互过（用于好感度显示）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 12)]
 	public bool IsInteractedCharacter;
 
-	/// <summary>
-	/// 是否是隐居角色（用于身份显示）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 13)]
 	public bool IsReclusiveChar;
 
-	/// <summary>
-	/// 名誉行动记录（用于tooltip显示）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 14)]
 	public List<FameActionRecord> FameActionRecords;
 
-	/// <summary>
-	/// 角色喜恶物品信息
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 15)]
 	public CharacterLoveAndHateItemInfo LoveAndHateItemInfo;
 
-	/// <summary>
-	/// 是否是太吾
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 16)]
 	public bool IsTaiwu;
 
-	/// <summary>
-	/// 临时特性剩余时间映射（特性ID -&gt; 剩余时间）
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 17)]
 	public Dictionary<short, int> TemporaryFeatureLeftTimes;
 
-	/// <summary>
-	/// 戒心
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 18)]
 	public int Alertness;
 
@@ -195,7 +135,7 @@ public class CharacterMenuInfoDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 24;
+		int totalSize = 44;
 		totalSize = ((CharacterDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CharacterDisplayData.GetSerializedSize())));
 		totalSize = ((TaiwuDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + TaiwuDisplayData.GetSerializedSize())));
 		totalSize = ((TeammateCommandList == null) ? (totalSize + 2) : (totalSize + (2 + TeammateCommandList.Count)));
@@ -213,8 +153,7 @@ public class CharacterMenuInfoDisplayData : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize = ((FameActionRecords == null) ? (totalSize + 2) : (totalSize + (2 + default(FameActionRecord).GetSerializedSize() * FameActionRecords.Count)));
-		totalSize = ((LoveAndHateItemInfo == null) ? (totalSize + 2) : (totalSize + (2 + LoveAndHateItemInfo.GetSerializedSize())));
+		totalSize = ((FameActionRecords == null) ? (totalSize + 2) : (totalSize + (2 + 8 * FameActionRecords.Count)));
 		totalSize += 4;
 		if (TemporaryFeatureLeftTimes != null)
 		{

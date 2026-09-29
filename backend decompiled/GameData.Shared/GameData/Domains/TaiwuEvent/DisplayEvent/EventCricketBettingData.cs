@@ -7,111 +7,54 @@ using GameData.Utilities;
 
 namespace GameData.Domains.TaiwuEvent.DisplayEvent;
 
-/// <summary>
-/// 事件系统选择促织决斗奖励、押注数据信息
-/// </summary>
 [SerializableGameData(NoCopyConstructors = true)]
 public class EventCricketBettingData : ISerializableGameData
 {
-	/// <summary>
-	/// 选择需求是否已经处理
-	/// </summary>
 	public bool IsComplete;
 
-	/// <summary>
-	/// 确认/返回
-	/// </summary>
 	public bool IsConfirmed;
 
-	/// <summary>
-	/// 事件GUID
-	/// </summary>
 	public string SelectForEventGuid;
 
-	/// <summary>
-	/// 选择行为关联的事件选项Key
-	/// </summary>
 	public string SelectForOptionKey;
 
-	/// <summary>
-	/// 选择的赌注数据
-	/// </summary>
 	public Wager Wager;
 
-	/// <summary>
-	/// 选择的奖励Index
-	/// </summary>
 	public int Index;
 
-	/// <summary>
-	/// 选择数据是否是有效数据
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsValid;
 
-	/// <summary>
-	/// 是否开启自动押注
-	/// </summary>
 	[SerializableGameDataField]
 	public bool AutoBet;
 
-	/// <summary>
-	/// 己方人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData SelfCharacter;
 
-	/// <summary>
-	/// 对方人物显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData TargetCharacter;
 
-	/// <summary>
-	/// 可选择的奖励
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CricketWagerData> BetRewards;
 
-	/// <summary>
-	/// 可押注的物品
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> BetItems;
 
-	/// <summary>
-	/// 可押注的角色
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CharacterDisplayData> BetCharacters;
 
-	/// <summary>
-	/// 可押注的角色的价值
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, long> BetCharacterValueMap;
 
-	/// <summary>
-	/// 是否双倍伤害（促织大会限制）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool DoubleDamage;
 
-	/// <summary>
-	/// 是否仅允许未受伤的促织
-	/// </summary>
 	[SerializableGameDataField]
 	public bool OnlyNoInjuryCricket;
 
-	/// <summary>
-	/// 促织品级下限
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MinGrade;
 
-	/// <summary>
-	/// 促织品级上限
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte MaxGrade;
 
@@ -124,13 +67,11 @@ public class EventCricketBettingData : ISerializableGameData
 		BetCharacterValueMap = new Dictionary<int, long>();
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 6;
@@ -186,7 +127,6 @@ public class EventCricketBettingData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -329,7 +269,6 @@ public class EventCricketBettingData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

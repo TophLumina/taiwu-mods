@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Config;
 using GameData.Common;
 using GameData.Dependencies;
+using GameData.DomainEvents;
 using GameData.Domains.Item;
 using GameData.Serializer;
 
@@ -36,15 +38,11 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 
 		public const int AutoAttackEffect_Size = 3;
 
-		public const uint PestleEffect_Offset = 18u;
-
-		public const int PestleEffect_Size = 3;
-
-		public const uint FixedCdLeftFrame_Offset = 21u;
+		public const uint FixedCdLeftFrame_Offset = 18u;
 
 		public const int FixedCdLeftFrame_Size = 2;
 
-		public const uint FixedCdTotalFrame_Offset = 23u;
+		public const uint FixedCdTotalFrame_Offset = 20u;
 
 		public const int FixedCdTotalFrame_Size = 2;
 	}
@@ -77,17 +75,15 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 	private SkillEffectKey _autoAttackEffect;
 
 	[CollectionObjectField(false, true, false, false, false)]
-	private SkillEffectKey _pestleEffect;
+	private List<SkillEffectKey> _pestleEffect;
 
-	private long _pestleEffectId;
+	public const int FixedSize = 22;
 
-	public const int FixedSize = 25;
+	public const int DynamicCount = 1;
 
-	public const int DynamicCount = 0;
+	private static readonly ushort[] ArchiveFieldIds = new ushort[9] { 0, 1, 2, 3, 4, 5, 7, 8, 6 };
 
-	private static readonly ushort[] ArchiveFieldIds = new ushort[9] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-
-	private static readonly int[] FixedArchiveFieldSizes = new int[9] { 4, 6, 1, 2, 2, 3, 3, 2, 2 };
+	private static readonly int[] FixedArchiveFieldSizes = new int[8] { 4, 6, 1, 2, 2, 3, 2, 2 };
 
 	public CombatCharacter Character { get; }
 
@@ -121,7 +117,6 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 	{
 		_id = key.Id;
 		Character = character;
-		_pestleEffectId = -1L;
 	}
 
 	public void Init(DataContext context, int index)
@@ -133,27 +128,28 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 		SetFixedCdTotalFrame(0, context);
 		SetCanChangeTo(index >= 3 || GetDurability() > 0, context);
 		SetAutoAttackEffect(new SkillEffectKey(-1, isDirect: false), context);
-		SetPestleEffect(new SkillEffectKey(-1, isDirect: false), context);
+		_pestleEffect.Clear();
+		SetPestleEffect(_pestleEffect, context);
 	}
 
 	public void SetPestleEffect(DataContext context, int charId, string effectName, SkillEffectKey effectKey)
 	{
-		if (!_pestleEffect.Equals(effectKey))
+		if (!_pestleEffect.Contains(effectKey))
 		{
-			if (_pestleEffect.SkillId >= 0)
-			{
-				RemovePestleEffect(context);
-			}
-			SetPestleEffect(effectKey, context);
-			_pestleEffectId = DomainManager.SpecialEffect.Add(context, charId, effectName);
+			_pestleEffect.Add(effectKey);
+			SetPestleEffect(_pestleEffect, context);
+			DomainManager.SpecialEffect.Add(context, charId, effectKey, effectName);
 		}
 	}
 
 	public void RemovePestleEffect(DataContext context)
 	{
-		DomainManager.SpecialEffect.Remove(context, _pestleEffectId);
-		SetPestleEffect(new SkillEffectKey(-1, isDirect: false), context);
-		_pestleEffectId = -1L;
+		foreach (SkillEffectKey effectKey in _pestleEffect)
+		{
+			Events.RaiseRemovePestleEffect(context, effectKey);
+		}
+		_pestleEffect.Clear();
+		SetPestleEffect(_pestleEffect, context);
 	}
 
 	public int GetId()
@@ -222,12 +218,12 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 		SetModifiedAndInvalidateInfluencedCache(5, context);
 	}
 
-	public SkillEffectKey GetPestleEffect()
+	public List<SkillEffectKey> GetPestleEffect()
 	{
 		return _pestleEffect;
 	}
 
-	public void SetPestleEffect(SkillEffectKey pestleEffect, DataContext context)
+	public void SetPestleEffect(List<SkillEffectKey> pestleEffect, DataContext context)
 	{
 		_pestleEffect = pestleEffect;
 		SetModifiedAndInvalidateInfluencedCache(6, context);
@@ -270,11 +266,12 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 	public CombatWeaponData()
 	{
 		_weaponTricks = new sbyte[6];
+		_pestleEffect = new List<SkillEffectKey>();
 	}
 
 	public bool IsSerializedSizeFixed()
 	{
-		return true;
+		return false;
 	}
 
 	public int GetSerializedSize()
@@ -336,7 +333,11 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 
 	public override int GetSerializedSizeWithoutHeader()
 	{
-		return 25;
+		int totalSize = 26;
+		int elementsCount = _pestleEffect.Count;
+		int contentSize = 3 * elementsCount;
+		int dataSize = 2 + contentSize;
+		return totalSize + dataSize;
 	}
 
 	public unsafe override int SerializeWithoutHeader(byte* pData)
@@ -360,11 +361,24 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 		*(short*)pCurrData = _cdFrame;
 		pCurrData += 2;
 		pCurrData += _autoAttackEffect.Serialize(pCurrData);
-		pCurrData += _pestleEffect.Serialize(pCurrData);
 		*(short*)pCurrData = _fixedCdLeftFrame;
 		pCurrData += 2;
 		*(short*)pCurrData = _fixedCdTotalFrame;
 		pCurrData += 2;
+		int elementsCount = _pestleEffect.Count;
+		int contentSize = 3 * elementsCount;
+		if (contentSize > 4194300)
+		{
+			throw new Exception($"Size of field {"_pestleEffect"} must be less than {4096}KB");
+		}
+		*(int*)pCurrData = contentSize + 2;
+		pCurrData += 4;
+		*(ushort*)pCurrData = (ushort)elementsCount;
+		pCurrData += 2;
+		for (int j = 0; j < elementsCount; j++)
+		{
+			pCurrData += _pestleEffect[j].Serialize(pCurrData);
+		}
 		return (int)(pCurrData - pData);
 	}
 
@@ -407,9 +421,6 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 			case 5:
 				pCurrData += _autoAttackEffect.Deserialize(pCurrData);
 				break;
-			case 6:
-				pCurrData += _pestleEffect.Deserialize(pCurrData);
-				break;
 			case 7:
 				_fixedCdLeftFrame = *(short*)pCurrData;
 				pCurrData += 2;
@@ -418,6 +429,20 @@ public class CombatWeaponData : BaseGameDataObject, ISerializableGameData
 				_fixedCdTotalFrame = *(short*)pCurrData;
 				pCurrData += 2;
 				break;
+			case 6:
+			{
+				pCurrData += 4;
+				ushort elementsCount = *(ushort*)pCurrData;
+				pCurrData += 2;
+				_pestleEffect.Clear();
+				for (int j = 0; j < elementsCount; j++)
+				{
+					SkillEffectKey element = default(SkillEffectKey);
+					pCurrData += element.Deserialize(pCurrData);
+					_pestleEffect.Add(element);
+				}
+				break;
+			}
 			default:
 				if (fieldIndex < fixedFieldSizes.Length)
 				{

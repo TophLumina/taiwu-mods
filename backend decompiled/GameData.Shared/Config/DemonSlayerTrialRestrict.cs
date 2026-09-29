@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class DemonSlayerTrialRestrict : ConfigData<DemonSlayerTrialRestrictItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DemonSlayerTrialRestrict Instance = new DemonSlayerTrialRestrict();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Desc", "MutexGroupId", "MutexDemonId", "PreferCombatConfig", "EffectiveCombatConfigs", "TemplateId", "Power", "Weight", "EffectClassName" };

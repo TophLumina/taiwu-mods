@@ -6,40 +6,21 @@ namespace GameData.Domains.Taiwu.Display.VillagerRoleArrangement;
 [AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class FarmerDisplayData : IVillagerRoleArrangementDisplayData, ISerializableGameData
 {
-	/// <summary>
-	/// 可采集次数
-	/// </summary>
 	[SerializableGameDataField]
 	public int CollectResourceActionCount;
 
-	/// <summary>
-	/// 迁移成功率
-	/// </summary>
 	[SerializableGameDataField]
 	public int MigrateResourceSuccessRate;
 
-	/// <summary>
-	/// 迁移基础成功率
-	/// </summary>
 	[SerializableGameDataField]
 	public int MigrateResourceBaseSuccessRate;
 
-	/// <summary>
-	/// 迁移成功率加成
-	/// </summary>
 	[SerializableGameDataField]
 	public int MigrateResourceSuccessRateBonus;
 
-	/// <summary>
-	/// 建筑增加的迁移成功率
-	/// 计算：基础 * (建筑增加+100) / 100 + 额外加成
-	/// </summary>
 	[SerializableGameDataField]
 	public int MigrateResourceSuccessRateBuildingBonus;
 
-	/// <summary>
-	/// 元鸡升级心材概率
-	/// </summary>
 	[SerializableGameDataField]
 	public int UpgradeBuildingCoreRate;
 

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class BodyPart : ConfigData<BodyPartItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static BodyPart Instance = new BodyPart();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "AcupointDesc", "TemplateId", "AcupointParam", "MouseTipIcon", "OuterInjuryIcon", "InnerInjuryIcon" };

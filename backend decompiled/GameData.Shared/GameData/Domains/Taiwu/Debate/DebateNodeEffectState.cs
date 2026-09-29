@@ -2,9 +2,6 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 论点格子的特效
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public class DebateNodeEffectState : ISerializableGameData
 {
@@ -40,9 +37,6 @@ public class DebateNodeEffectState : ISerializableGameData
 	[SerializableGameDataField]
 	public bool IsHelpTaiwu;
 
-	/// <summary>
-	/// 无效
-	/// </summary>
 	public static readonly DebateNodeEffectState Invalid = new DebateNodeEffectState(-1, -1, -1, -1, isHelpTaiwu: false);
 
 	public DebateNodeEffectState(int id, int templateId, int casterId, int duration, bool isHelpTaiwu)
@@ -54,16 +48,15 @@ public class DebateNodeEffectState : ISerializableGameData
 		IsHelpTaiwu = isHelpTaiwu;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
+	public override string ToString()
+	{
+		return $"DebateNodeEffectState(id: {Id}, templateId: {TemplateId}, casterId: {CasterId}, duration: {Duration}, isHelpTaiwu: {IsHelpTaiwu})";
+	}
+
 	public DebateNodeEffectState()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DebateNodeEffectState(DebateNodeEffectState other)
 	{
 		Id = other.Id;
@@ -73,9 +66,6 @@ public class DebateNodeEffectState : ISerializableGameData
 		IsHelpTaiwu = other.IsHelpTaiwu;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DebateNodeEffectState other)
 	{
 		Id = other.Id;
@@ -85,13 +75,11 @@ public class DebateNodeEffectState : ISerializableGameData
 		IsHelpTaiwu = other.IsHelpTaiwu;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 19;
@@ -102,7 +90,6 @@ public class DebateNodeEffectState : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 5;
@@ -124,7 +111,6 @@ public class DebateNodeEffectState : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

@@ -7,9 +7,6 @@ namespace Config;
 [Serializable]
 public class SkillBreakBonusEffectImplement : ConfigData<SkillBreakBonusEffectImplementItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static SkillBreakBonusEffectImplement Instance = new SkillBreakBonusEffectImplement();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "AddRequirementType", "ReduceCostBreathType", "ReduceCostStanceType", "ReduceCastFrameType", "AddMaxPowerType", "TemplateId" };

@@ -25,9 +25,6 @@ namespace GameData.Domains;
 
 public static class DomainHelper
 {
-	/// <summary>
-	/// 数据域 ID
-	/// </summary>
 	public static class DomainIds
 	{
 		public const ushort Global = 0;
@@ -75,9 +72,6 @@ public static class DomainHelper
 		public const int Count = 21;
 	}
 
-	/// <summary>
-	/// 通过域名获取域 ID
-	/// </summary>
 	public static readonly Dictionary<string, ushort> DomainName2DomainId = new Dictionary<string, ushort>
 	{
 		{ "Global", 0 },
@@ -103,9 +97,6 @@ public static class DomainHelper
 		{ "Story", 20 }
 	};
 
-	/// <summary>
-	/// 通过数据域 ID 获取域名
-	/// </summary>
 	public static readonly string[] DomainId2DomainName = new string[21]
 	{
 		"Global", "World", "Map", "Organization", "Character", "Taiwu", "Item", "CombatSkill", "Combat", "Building",
@@ -113,9 +104,6 @@ public static class DomainHelper
 		"Story"
 	};
 
-	/// <summary>
-	/// 通过数据域 ID 获取数据 ID 与字段名的对应关系
-	/// </summary>
 	public static readonly string[][] DomainId2DataId2FieldName = new string[21][]
 	{
 		GlobalDomainHelper.DataId2FieldName,
@@ -141,9 +129,6 @@ public static class DomainHelper
 		StoryDomainHelper.DataId2FieldName
 	};
 
-	/// <summary>
-	/// DomainId -&gt; DataId -&gt; 集合对象内的 FieldId -&gt; FieldName
-	/// </summary>
 	public static readonly string[][][] DomainId2DataId2ObjectFieldId2FieldName = new string[21][][]
 	{
 		GlobalDomainHelper.DataId2ObjectFieldId2FieldName,

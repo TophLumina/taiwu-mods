@@ -13,64 +13,33 @@ public class ExchangeItem : ISerializableGameData, IEquatable<ExchangeItem>
 {
 	public enum EExchangeItemType
 	{
-		/// <summary>
-		/// 物品和资源
-		/// </summary>
 		Item,
-		/// <summary>
-		/// 俘虏
-		/// </summary>
 		Kidnap
 	}
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	[SerializableGameDataField]
 	public int Type;
 
-	/// <summary>
-	/// 当前交易的物品显示数据，跟原始不一样
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData ItemData;
 
-	/// <summary>
-	/// 原始物品显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData OriginItemData;
 
-	/// <summary>
-	/// 俘虏人物数据
-	/// </summary>
 	[SerializableGameDataField]
 	public KidnapCharDisplayData KidnapCharDisplayData;
 
-	/// <summary>
-	/// 未计算优势的总价值，可能为负数
-	/// </summary>
 	[SerializableGameDataField]
 	public long TotalValue;
 
-	/// <summary>
-	/// 选择的数量，正数表示太吾增加，负数表示太吾减少
-	/// </summary>
 	[SerializableGameDataField]
 	public int Count;
 
-	/// <summary>
-	/// 实际变化的物品数据
-	/// </summary>
 	[SerializableGameDataField]
 	public Inventory Inventory;
 
 	public EExchangeItemType TypeEnum => (EExchangeItemType)Type;
 
-	/// <summary>
-	/// 交易内容
-	/// </summary>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public ITradeableContent Content => TypeEnum switch
 	{
 		EExchangeItemType.Item => ItemData, 
@@ -78,15 +47,8 @@ public class ExchangeItem : ISerializableGameData, IEquatable<ExchangeItem>
 		_ => throw new ArgumentOutOfRangeException(), 
 	};
 
-	/// <summary>
-	/// 未计算优势的总价值的绝对值
-	/// </summary>
 	public long TotalValueAbs => Math.Abs(TotalValue);
 
-	/// <summary>
-	/// 品级
-	/// </summary>
-	/// <exception cref="T:System.ArgumentOutOfRangeException"></exception>
 	public sbyte Grade => TypeEnum switch
 	{
 		EExchangeItemType.Item => ItemData.Grade, 

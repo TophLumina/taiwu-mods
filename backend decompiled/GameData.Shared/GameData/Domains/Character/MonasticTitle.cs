@@ -3,23 +3,10 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 法号
-/// </summary>
 public struct MonasticTitle(short seniorityId, short suffixId) : ISerializableGameData, IEquatable<MonasticTitle>
 {
-	/// <summary>
-	/// 辈字 ID.
-	/// 小于 0 表示无效 ID.
-	/// 不同门派的辈字组不同.
-	/// </summary>
 	public short SeniorityId = seniorityId;
 
-	/// <summary>
-	/// 尾字 ID.
-	/// 小于 0 表示无效 ID.
-	/// 不同门派的尾字组不同.
-	/// </summary>
 	public short SuffixId = suffixId;
 
 	public bool IsSerializedSizeFixed()

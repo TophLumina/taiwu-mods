@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Config;
 using GameData.Domains.Adventure;
 using GameData.Domains.Character.Relation;
+using GameData.Domains.Combat;
 using GameData.Domains.Map;
 using GameData.Domains.Taiwu.Profession;
 using GameData.Utilities;
@@ -22,8 +23,6 @@ public class CharacterSortFilter
 	private CharacterSortFilterSettings _settings;
 
 	private List<int> _characterCounts;
-
-	private List<int> _maxSortingTypeCharIds;
 
 	private HashSet<int> _addedCharIdSet;
 
@@ -542,12 +541,9 @@ public class CharacterSortFilter
 		{
 			return false;
 		}
-		foreach (short featureId in character.GetFeatureIds())
+		if (character.GetImmunityMask().IsImmune(EMarkType.Health))
 		{
-			if (CharacterFeature.Instance[featureId].IgnoreHealthMark)
-			{
-				return false;
-			}
+			return false;
 		}
 		return true;
 	}

@@ -7,181 +7,76 @@ namespace Config;
 [Serializable]
 public class MapState : ConfigData<MapStateItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 无名之地
-		/// </summary>
 		public const sbyte NoName = 0;
 
-		/// <summary>
-		/// 京畿
-		/// </summary>
 		public const sbyte Jingji = 1;
 
-		/// <summary>
-		/// 巴蜀
-		/// </summary>
 		public const sbyte Bashu = 2;
 
-		/// <summary>
-		/// 广南
-		/// </summary>
 		public const sbyte Guangnan = 3;
 
-		/// <summary>
-		/// 荆北
-		/// </summary>
 		public const sbyte Jingbei = 4;
 
-		/// <summary>
-		/// 山西
-		/// </summary>
 		public const sbyte Shanxi = 5;
 
-		/// <summary>
-		/// 广东
-		/// </summary>
 		public const sbyte Guangdong = 6;
 
-		/// <summary>
-		/// 山东
-		/// </summary>
 		public const sbyte Shandong = 7;
 
-		/// <summary>
-		/// 荆南
-		/// </summary>
 		public const sbyte Jingnan = 8;
 
-		/// <summary>
-		/// 福建
-		/// </summary>
 		public const sbyte Fujian = 9;
 
-		/// <summary>
-		/// 辽东
-		/// </summary>
 		public const sbyte Liaodong = 10;
 
-		/// <summary>
-		/// 西域
-		/// </summary>
 		public const sbyte Xiyu = 11;
 
-		/// <summary>
-		/// 云南
-		/// </summary>
 		public const sbyte Yunnan = 12;
 
-		/// <summary>
-		/// 淮南
-		/// </summary>
 		public const sbyte Huainan = 13;
 
-		/// <summary>
-		/// 江南
-		/// </summary>
 		public const sbyte Jiangnan = 14;
 
-		/// <summary>
-		/// 江北
-		/// </summary>
 		public const sbyte Jiangbei = 15;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 无名之地
-		/// </summary>
 		public static MapStateItem NoName => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 京畿
-		/// </summary>
 		public static MapStateItem Jingji => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 巴蜀
-		/// </summary>
 		public static MapStateItem Bashu => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 广南
-		/// </summary>
 		public static MapStateItem Guangnan => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 荆北
-		/// </summary>
 		public static MapStateItem Jingbei => Instance[(sbyte)4];
 
-		/// <summary>
-		/// 山西
-		/// </summary>
 		public static MapStateItem Shanxi => Instance[(sbyte)5];
 
-		/// <summary>
-		/// 广东
-		/// </summary>
 		public static MapStateItem Guangdong => Instance[(sbyte)6];
 
-		/// <summary>
-		/// 山东
-		/// </summary>
 		public static MapStateItem Shandong => Instance[(sbyte)7];
 
-		/// <summary>
-		/// 荆南
-		/// </summary>
 		public static MapStateItem Jingnan => Instance[(sbyte)8];
 
-		/// <summary>
-		/// 福建
-		/// </summary>
 		public static MapStateItem Fujian => Instance[(sbyte)9];
 
-		/// <summary>
-		/// 辽东
-		/// </summary>
 		public static MapStateItem Liaodong => Instance[(sbyte)10];
 
-		/// <summary>
-		/// 西域
-		/// </summary>
 		public static MapStateItem Xiyu => Instance[(sbyte)11];
 
-		/// <summary>
-		/// 云南
-		/// </summary>
 		public static MapStateItem Yunnan => Instance[(sbyte)12];
 
-		/// <summary>
-		/// 淮南
-		/// </summary>
 		public static MapStateItem Huainan => Instance[(sbyte)13];
 
-		/// <summary>
-		/// 江南
-		/// </summary>
 		public static MapStateItem Jiangnan => Instance[(sbyte)14];
 
-		/// <summary>
-		/// 江北
-		/// </summary>
 		public static MapStateItem Jiangbei => Instance[(sbyte)15];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static MapState Instance = new MapState();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

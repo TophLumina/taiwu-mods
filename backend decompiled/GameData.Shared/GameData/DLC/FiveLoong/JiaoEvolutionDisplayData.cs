@@ -4,39 +4,21 @@ using GameData.Utilities;
 
 namespace GameData.DLC.FiveLoong;
 
-/// <summary>
-/// 五方神龙 - 蛟的进化前端显示数据
-/// </summary>
 [SerializableGameData]
 public class JiaoEvolutionDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 蛟Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int JiaoId;
 
-	/// <summary>
-	/// 当前随机的结果
-	/// </summary>
 	[SerializableGameDataField]
 	public short SimulationResult;
 
-	/// <summary>
-	/// 是否曾经有过该龙子
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsOwnedResult;
 
-	/// <summary>
-	/// 蛟模拟化形结果的状态
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Status;
 
-	/// <summary>
-	/// 蛟的物品展示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemDisplayData ItemDisplayData;
 
@@ -58,13 +40,11 @@ public class JiaoEvolutionDisplayData : ISerializableGameData
 		ItemDisplayData = itemDisplayData;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 8;
@@ -76,7 +56,6 @@ public class JiaoEvolutionDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -110,7 +89,6 @@ public class JiaoEvolutionDisplayData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

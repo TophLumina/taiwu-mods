@@ -6,6 +6,8 @@ namespace GameData.Serializer;
 
 public interface ICommonObjectSerializationAware
 {
+	bool IncludeNonPublic => false;
+
 	bool SkipMember(MemberInfo member, bool deserializing)
 	{
 		return false;

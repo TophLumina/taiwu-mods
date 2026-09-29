@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Config;
 using Config.ConfigCells.Character;
-using GameData.DLC;
 using GameData.DLC.FiveLoong;
 using GameData.Domains.Building;
 using GameData.Domains.Character;
@@ -17,15 +16,9 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Item.Display;
 
-/// <summary>
-/// 物品显示数据。用于向前端返回显示所需数据，使前端不必监听物品数据
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true, NoCopyConstructors = true)]
-public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableContent
+public class ItemDisplayData : IItemData, ITradeableContent, ISerializableGameData
 {
-	/// <summary>
-	/// 道具占用中状态类型
-	/// </summary>
 	public enum ItemUsingType
 	{
 		Invalid = -1,
@@ -36,9 +29,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		Referring
 	}
 
-	/// <summary>
-	/// 占用中物品的操作类型
-	/// </summary>
 	public enum ItemUsingOperationType
 	{
 		Default,
@@ -49,9 +39,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		Give
 	}
 
-	/// <summary>
-	/// 道具不可选状态类型
-	/// </summary>
 	public enum ItemUnavailableType
 	{
 		Valid,
@@ -66,370 +53,183 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 
 	private static readonly LocalObjectPool<Inventory> LocalObjectPool = new LocalObjectPool<Inventory>(2, 4);
 
-	/// <summary>
-	/// 物品索引
-	/// </summary>
 	[SerializableGameDataField]
 	private ItemKey _key;
 
-	/// <summary>
-	/// 特殊互动
-	/// </summary>
 	[SerializableGameDataField]
 	private bool _isSpecialInteractItem;
 
-	/// <summary>
-	/// 数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int Amount;
 
-	/// <summary>
-	/// 当前耐久
-	/// </summary>
 	[SerializableGameDataField]
 	public short Durability;
 
-	/// <summary>
-	/// 最大耐久
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaxDurability;
 
-	/// <summary>
-	/// 重量
-	/// </summary>
 	[SerializableGameDataField]
 	public int Weight;
 
-	/// <summary>
-	/// 价值
-	/// </summary>
 	[SerializableGameDataField]
 	public long Value;
 
-	/// <summary>
-	/// 特殊参数(促织的colorId,partID、相枢剑柄可施展功法封装于该字段)
-	/// </summary>
+	[SerializableGameDataField]
+	public long ExchangeValue;
+
 	[SerializableGameDataField]
 	public int SpecialArg;
 
-	/// <summary>
-	/// 装备使用槽位<see cref="T:GameData.Domains.Character.EquipmentSlot" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte EquipmentSlot = -1;
 
-	/// <summary>
-	/// 装备特效词条ID，仅用于装备
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> EquipmentEffectIds;
 
-	/// <summary>
-	/// 威力值，仅用于武器和防具
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemPowerInfo PowerInfo;
 
-	/// <summary>
-	/// 使用需求，仅用于武器和防具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<(int type, int required, int actual)> Requirements;
 
-	/// <summary>
-	/// 破甲/破刃，仅用于武器和防具
-	/// </summary>
 	[SerializableGameDataField]
 	public short EquipmentAttack;
 
-	/// <summary>
-	/// 坚韧，仅用于武器和防具
-	/// </summary>
 	[SerializableGameDataField]
 	public short EquipmentDefense;
 
-	/// <summary>
-	/// 改制衣装目标的模板ID，拿来显示衣装外观
-	/// </summary>
 	[SerializableGameDataField]
 	public short WeavedClothingTemplateId;
 
-	/// <summary>
-	/// 命中化解因子，仅用于武器和防具
-	/// </summary>
 	[SerializableGameDataField]
 	public HitOrAvoidShorts HitAvoidFactor;
 
-	/// <summary>
-	/// 攻防值，仅用于武器（破体破气总值、无效值）和防具（御体、御气）
-	/// </summary>
 	[SerializableGameDataField]
 	public (short, short) PenetrationInfo;
 
-	/// <summary>
-	/// 减伤因子，仅用于防具
-	/// </summary>
 	[SerializableGameDataField]
 	public OuterAndInnerShorts InjuryFactors;
 
-	/// <summary>
-	/// 武器破气比例，仅用于武器，范围0-100
-	/// 注意这里是实际值而非期待值
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte WeaponInnerRatio;
 
-	/// <summary>
-	/// 武器的式
-	/// </summary>
 	[SerializableGameDataField]
 	public List<sbyte> WeaponTrickList;
 
-	/// <summary>
-	/// 装备加的人物属性，key是ECharacterPropertyReferencedType
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, int> EquipmentPropertyBonusDict;
 
-	/// <summary>
-	/// 促织数据，仅用于促织类型物品
-	/// </summary>
 	[SerializableGameDataField]
 	public CricketData CricketData;
 
-	/// <summary>
-	/// 精制信息，仅用于部分装备
-	/// </summary>
 	[SerializableGameDataField]
 	public RefiningEffects RefiningEffects;
 
-	/// <summary>
-	/// 淬毒信息
-	/// </summary>
 	[SerializableGameDataField]
 	public FullPoisonEffects PoisonEffects;
 
-	/// <summary>
-	/// 物品制造时花费的材料份数，用于修理
-	/// </summary>
 	[SerializableGameDataField]
 	public MaterialResources MaterialResources;
 
 	[SerializableGameDataField]
 	public int AlertFactor;
 
-	/// <summary>
-	/// 合并显示的有毒物品，不包含自己，key是物品的key，value是数量
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<ItemKey, int> MergedPoisonItemDict;
 
-	/// <summary>
-	/// 合并显示的额外商品，不包含自己，key是物品的key，value是数量
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<ItemKey, int> MergedExtraGoodsItemDict;
 
-	/// <summary>
-	/// 物品来源 <see cref="T:GameData.Domains.Taiwu.ItemSourceType" /> 用于批量操作（拆解、修理、丢弃）的物品和工具
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ItemSourceType;
 
-	/// <summary>
-	/// 道具使用类型 <see cref="P:GameData.Domains.Item.Display.ItemDisplayData.UsingType" />
-	/// </summary>
 	[SerializableGameDataField]
 	private sbyte _usingType = -1;
 
-	/// <summary>
-	/// 定情信物数据
-	/// </summary>
-	[SerializableGameDataField]
-	public LoveTokenDataItem LoveTokenDataItem;
-
-	/// <summary>
-	/// 物品所有者的角色ID，构造时没传就会为无效值-1
-	/// </summary>
 	[SerializableGameDataField]
 	public int OwnerCharId;
 
-	/// <summary>
-	/// 是否阅读完毕
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsReadingFinished;
 
-	/// <summary>
-	/// 书页状态数组（0=完整，1=残缺，2=亡佚）
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] BookPageStates;
 
-	/// <summary>
-	/// 书页研读进度数组（0-100）
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] BookPageProgress;
 
-	/// <summary>
-	/// 书页类型数组（正读/逆读），仅功法书有效
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte[] BookPageTypes;
 
-	/// <summary>
-	/// 蛟龙显示数据
-	/// </summary>
 	[SerializableGameDataField]
 	public JiaoLoongDisplayData JiaoLoongDisplayData;
 
-	/// <summary>
-	/// 代步节省精力百分比
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte TravelTimeReduction;
 
-	/// <summary>
-	/// 代步行囊大小
-	/// </summary>
 	[SerializableGameDataField]
 	public short MaxInventoryLoadBonus;
 
-	/// <summary>
-	/// 野兽代步的驯服度
-	/// </summary>
 	[SerializableGameDataField]
 	public int CarrierTamePoint;
 
-	/// <summary>
-	/// 是否已寄托的奇书
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsThreeCorpseKeepingLegendaryBook;
 
-	/// <summary>
-	/// 额外商品类型
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte ExtraGoodsType;
 
-	/// <summary>
-	/// 道具不可用类型 <see cref="P:GameData.Domains.Item.Display.ItemDisplayData.UnavailableType" />
-	/// </summary>
 	[SerializableGameDataField]
 	private sbyte _unavailableType;
 
-	/// <summary>
-	/// 商品价格变动百分比
-	/// </summary>
 	[SerializableGameDataField]
 	public int PricePercent;
 
-	/// <summary>
-	/// 药物效果值，因有蛊虫等影响，故要从后端拿
-	/// </summary>
 	[SerializableGameDataField]
 	public int MedicineEffectValue;
 
-	/// <summary>
-	/// 是否被太吾锁定
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsLocked;
 
-	/// <summary>
-	/// 是否在当前促织预设中
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsInCurrentCricketPreset;
 
-	/// <summary>
-	/// 武器特效显示数据列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<WeaponEffectDisplayData> WeaponEffectDisplayDataList;
 
-	/// <summary>
-	/// 库房操作类型，仅前端用
-	/// </summary>
+	[SerializableGameDataField]
+	public bool ForceNotTransferable;
+
 	[Obsolete]
 	public ETreasuryOperation TreasuryOperation;
 
-	/// <summary>
-	/// 商店物品的恩义状态，仅前端用
-	/// </summary>
 	[Obsolete]
 	public EItemDebtState ItemDebtState;
 
-	/// <summary>
-	/// 商店物品的商店等级
-	/// 在茶马帮UI中被用于存储物品的index以及各种信息
-	/// </summary>
 	public int ItemShopLevel;
 
-	/// <summary>
-	/// 是否可交互
-	/// </summary>
 	public bool Interactable;
 
-	/// <summary>
-	/// 商店物品的价格变化状态，仅前端用
-	/// </summary>
 	public EItemPriceState ItemPriceState;
 
-	/// <summary>
-	/// 耐久变化文本，用于批量操作消耗工具的列
-	/// </summary>
 	public string DurabilityChange;
 
-	/// <summary>
-	/// 制造所需造诣，排序用
-	/// </summary>
 	public int MakeNeedAttainment;
 
-	/// <summary>
-	/// 制造所需技艺类型
-	/// </summary>
 	public int MakeNeedLifeSKillType = -1;
 
-	/// <summary>
-	/// 制造可用工具数量，排序用
-	/// </summary>
 	public int MakeAvailableToolCount;
 
-	/// <summary>
-	/// 制造可用引子数量，排序用
-	/// </summary>
 	public int MakeAvailableMaterialCount;
 
-	/// <summary>
-	/// 制造推荐引子
-	/// </summary>
 	public ItemDisplayData MakeRecommendMaterial;
 
-	/// <summary>
-	/// 制造推荐工具
-	/// </summary>
 	public ItemDisplayData MakeRecommendTool;
 
-	/// <summary>
-	/// 代制数据
-	/// </summary>
 	public ProductionData ProductionData;
 
-	/// <summary>
-	/// 峨眉心法进度
-	/// </summary>
 	public int SpecialBreakProgress;
 
-	/// <summary>
-	/// 获取物品索引，
-	/// 如果是可堆叠物品不能直接用于对比或选择，因为可能取到合并的淬毒物品，要用ContainsItemKey、GetAllItemKeysFromPool、GetOperationKeyListFromPool
-	/// 如果需要提取部分Key，应考虑使用<see cref="M:GameData.Domains.Item.Display.ItemDisplayData.Take(System.Int32,System.Boolean)" />方法
-	/// </summary>
 	public ItemKey Key
 	{
 		get
@@ -454,11 +254,30 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 物品真实key
-	/// 如果需要对key做操作，应考虑使用<see cref="M:GameData.Domains.Item.Display.ItemDisplayData.Take(System.Int32,System.Boolean)" />方法
-	/// </summary>
-	public ItemKey RealKey => _key;
+	public ItemKey RealKey
+	{
+		get
+		{
+			if (Amount > 0)
+			{
+				while (true)
+				{
+					int amount = Amount;
+					IEnumerable<int> enumerable = MergedExtraGoodsItemDict?.Values;
+					IEnumerable<int> first = enumerable ?? Enumerable.Empty<int>();
+					enumerable = MergedPoisonItemDict?.Values;
+					if (amount > first.Concat(enumerable ?? Enumerable.Empty<int>()).Sum())
+					{
+						break;
+					}
+					_key = Key;
+					MergedExtraGoodsItemDict?.Remove(_key);
+					MergedPoisonItemDict?.Remove(_key);
+				}
+			}
+			return _key;
+		}
+	}
 
 	bool ITradeableContent.Interactable
 	{
@@ -493,6 +312,18 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		set
 		{
 			Value = value;
+		}
+	}
+
+	long ITradeableContent.ExchangeValue
+	{
+		get
+		{
+			return ExchangeValue;
+		}
+		set
+		{
+			ExchangeValue = value;
 		}
 	}
 
@@ -584,6 +415,8 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
+	bool ITradeableContent.ForceNotTransferable => ForceNotTransferable;
+
 	int IItemData.Value => (int)Value;
 
 	short IItemData.Durability => Durability;
@@ -592,14 +425,8 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 
 	int ITradeableContent.AlertFactor => AlertFactor;
 
-	/// <summary>
-	/// 物品来源
-	/// </summary>
 	public ItemSourceType ItemSourceTypeEnum => (ItemSourceType)ItemSourceType;
 
-	/// <summary>
-	/// 道具使用类型
-	/// </summary>
 	public ItemUsingType UsingType
 	{
 		get
@@ -612,9 +439,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 道具不可用类型
-	/// </summary>
 	public ItemUnavailableType UnavailableType
 	{
 		get
@@ -627,9 +451,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 是否经过改制
-	/// </summary>
 	public bool IsWeaved
 	{
 		get
@@ -642,9 +463,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 判断此道具堆是否含有淬毒物品
-	/// </summary>
 	public bool HasAnyPoison
 	{
 		get
@@ -661,9 +479,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 判断此道具堆是否含有额外商品
-	/// </summary>
 	public bool HasAnyExtraGoods
 	{
 		get
@@ -680,19 +495,10 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 毒是否鉴定
-	/// </summary>
 	public bool PoisonIsIdentified => PoisonEffects?.IsIdentified ?? false;
 
-	/// <summary>
-	/// 是否为资源物品
-	/// </summary>
 	public bool IsResource => ItemTemplateHelper.IsMiscResource(_key.ItemType, _key.TemplateId);
 
-	/// <summary>
-	/// 资源类型
-	/// </summary>
 	public sbyte ResourceType
 	{
 		get
@@ -705,28 +511,19 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 可让渡
-	/// </summary>
 	public bool IsTransferable => ItemTemplateHelper.IsTransferable(_key.ItemType, _key.TemplateId);
 
-	/// <summary>
-	/// 额外商品类型
-	/// </summary>
 	public MerchantExtraGoodsType ExtraGoodsTypeEnum => (MerchantExtraGoodsType)ExtraGoodsType;
 
-	/// <summary>
-	/// 品级
-	/// </summary>
 	public sbyte Grade
 	{
 		get
 		{
-			if (!RealKey.HasTemplate)
+			if (!_key.HasTemplate)
 			{
 				return -1;
 			}
-			return ItemTemplateHelper.GetGrade(RealKey.ItemType, RealKey.TemplateId);
+			return ItemTemplateHelper.GetGrade(_key.ItemType, _key.TemplateId);
 		}
 	}
 
@@ -770,23 +567,11 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return GetOperationInventoryFromPool(amount, preview);
 	}
 
-	/// <summary>
-	/// 从对象池获取，必须归还
-	/// </summary>
-	/// <returns></returns>
 	public static Inventory GetInventoryFromPool()
 	{
 		return LocalObjectPool.Get();
 	}
 
-	/// <summary>
-	/// 获取若干物品key
-	/// 物品真实数量少于amount个，或小于0时会报错（继承自GetOperationInventoryFromPool）
-	/// 可能会以堆叠形式返回物品（即，amount &gt; 1）
-	/// </summary>
-	/// <param name="amount">可以为0，但不能为负数</param>
-	/// <param name="isPreview"></param>
-	/// <returns></returns>
 	public IEnumerable<(ItemKey Key, int Amount)> Take(int amount, bool isPreview = true)
 	{
 		if (amount == 0)
@@ -801,21 +586,12 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		ReturnInventoryToPool(inventory);
 	}
 
-	/// <summary>
-	/// 归还到对象池
-	/// </summary>
-	/// <param name="list"></param>
 	public static void ReturnInventoryToPool(Inventory list)
 	{
 		list.Items.Clear();
 		LocalObjectPool.Return(list);
 	}
 
-	/// <summary>
-	/// 获取所有的key，1个数量1个key，堆叠物品的key会重复，要归还
-	/// 资源物品只有1个key
-	/// </summary>
-	/// <returns></returns>
 	public Inventory GetAllInventoryFromPool()
 	{
 		Inventory inventory = GetInventoryFromPool();
@@ -858,13 +634,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return inventory;
 	}
 
-	/// <summary>
-	/// 根据数量获得Key的列表，并减少对应数量的合并的淬毒条目，要先于ChangeAmount调用。用于对物品的复数操作。list用过必须归还。
-	/// 资源物品不应用此方法
-	/// </summary>
-	/// <param name="amount"></param>
-	/// <param name="preview">预览模式不处理毒素，如需处理可后面手动调用ChangeAmount</param>
-	/// <returns></returns>
 	public Inventory GetOperationInventoryFromPool(int amount, bool preview = false)
 	{
 		Tester.Assert(amount <= Amount && amount > 0 && !IsResource);
@@ -888,16 +657,11 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 		if (!preview)
 		{
-			ChangePoisonData(allInventory);
-			ChangeExtraGoodData(allInventory);
+			ChangeAmount(allInventory, isAdd: false);
 		}
 		return allInventory;
 	}
 
-	/// <summary>
-	/// 在同一界面的两个容器之间，对物品进行非全部数量的操作时，要处理淬毒数据，比如商店、仓库。其他时候是否处理无所谓，因为切换界面会刷新。
-	/// </summary>
-	/// <param name="inventory">来自GetOperationKeyListFromPool</param>
 	private void ChangePoisonData(Inventory inventory)
 	{
 		if (MergedPoisonItemDict == null || MergedPoisonItemDict.Count <= 0)
@@ -921,10 +685,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 在同一界面的两个容器之间，对物品进行非全部数量的操作时，要处理额外商品数据，比如商店。其他时候是否处理无所谓，因为切换界面会刷新。
-	/// </summary>
-	/// <param name="inventory">来自GetOperationKeyListFromPool</param>
 	private void ChangeExtraGoodData(Inventory inventory)
 	{
 		if (MergedExtraGoodsItemDict == null || MergedExtraGoodsItemDict.Count <= 0)
@@ -957,11 +717,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return false;
 	}
 
-	/// <summary>
-	/// 检查是否包含目标ItemKey
-	/// </summary>
-	/// <param name="targetKey"></param>
-	/// <returns></returns>
 	public bool ContainsItemKey(ItemKey targetKey)
 	{
 		if (_key.Equals(targetKey))
@@ -978,11 +733,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return false;
 	}
 
-	/// <summary>
-	/// 是否可合并
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
 	public bool CanMerge(ItemDisplayData other)
 	{
 		if (!_key.TemplateEquals(other._key))
@@ -1021,7 +771,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		_key = ItemKey.Invalid;
 		RefiningEffects.Initialize();
 		UsingType = ItemUsingType.Invalid;
-		LoveTokenDataItem = new LoveTokenDataItem();
 		OwnerCharId = -1;
 		WeavedClothingTemplateId = -1;
 	}
@@ -1049,11 +798,10 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 			RefiningEffects = RefiningEffects,
 			PoisonEffects = PoisonEffects,
 			MaterialResources = MaterialResources,
-			MergedPoisonItemDict = MergedPoisonItemDict,
-			MergedExtraGoodsItemDict = MergedExtraGoodsItemDict,
+			MergedPoisonItemDict = ((MergedPoisonItemDict != null) ? new Dictionary<ItemKey, int>(MergedPoisonItemDict) : null),
+			MergedExtraGoodsItemDict = ((MergedExtraGoodsItemDict != null) ? new Dictionary<ItemKey, int>(MergedExtraGoodsItemDict) : null),
 			UsingType = UsingType,
 			ItemSourceType = ItemSourceType,
-			LoveTokenDataItem = LoveTokenDataItem,
 			OwnerCharId = OwnerCharId,
 			IsReadingFinished = IsReadingFinished,
 			CarrierTamePoint = CarrierTamePoint,
@@ -1070,9 +818,11 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 			IsLocked = IsLocked,
 			IsInCurrentCricketPreset = IsInCurrentCricketPreset,
 			EquipmentPropertyBonusDict = EquipmentPropertyBonusDict,
-			JiaoLoongDisplayData = JiaoLoongDisplayData
+			JiaoLoongDisplayData = JiaoLoongDisplayData,
+			PricePercent = PricePercent
 		};
 		newData.Value = (IsResource ? (GlobalConfig.ResourcesWorth[ResourceType] * newData.Amount) : Value);
+		newData.ExchangeValue = ExchangeValue;
 		if (Requirements != null)
 		{
 			newData.Requirements = new List<(int, int, int)>();
@@ -1081,9 +831,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return newData;
 	}
 
-	/// <summary>
-	/// 复制
-	/// </summary>
 	public ItemDisplayData Clone(ItemKey itemKey, sbyte itemSourceType)
 	{
 		ItemDisplayData itemDisplayData = Clone(1);
@@ -1095,20 +842,13 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return itemDisplayData;
 	}
 
-	/// <summary>
-	/// 附带合并信息的复制，操作复数物品时用此方法复制
-	/// </summary>
-	/// <param name="keyList">来自GetOperationKeyListFromPool</param>
-	/// <param name="itemSourceType"></param>
-	/// <returns></returns>
 	public ItemDisplayData Clone(List<ItemKey> keyList, sbyte itemSourceType)
 	{
 		ItemDisplayData newData = Clone(keyList.Count);
 		newData.ItemSourceType = itemSourceType;
 		newData.MergedPoisonItemDict = new Dictionary<ItemKey, int>();
 		newData.MergedExtraGoodsItemDict = new Dictionary<ItemKey, int>();
-		int poisonKeyIndex = keyList.FindIndex((ItemKey k) => !ModificationStateHelper.IsActive(k.ModificationState, 1));
-		newData._key = ((poisonKeyIndex >= 0) ? keyList[poisonKeyIndex] : keyList.First());
+		newData._key = keyList[Math.Max(0, keyList.FindIndex((ItemKey k) => !ModificationStateHelper.IsActive(k.ModificationState, 1)))];
 		if (keyList.Count > 1)
 		{
 			foreach (ItemKey key in keyList)
@@ -1134,11 +874,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return newData;
 	}
 
-	/// <summary>
-	/// 已经克隆出物品后如果还需要合并、拆开，用此方法改变数量
-	/// </summary>
-	/// <param name="inventory">来自GetOperationKeyListFromPool</param>
-	/// <param name="isAdd"></param>
 	public void ChangeAmount(Inventory inventory, bool isAdd)
 	{
 		foreach (var (key, amount) in inventory.Items)
@@ -1147,15 +882,22 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 	}
 
-	/// <summary>
-	/// 已经克隆出物品后如果还需要合并、拆开，用此方法改变数量。
-	/// 可能会交换_key和MergedPoisonItemDict，以保证_key尽可能是无毒的，而有毒的尽可能在MergedPoisonItemDict
-	/// </summary>
-	/// <param name="itemKey">来自GetOperationKeyListFromPool或者.Key</param>
-	/// <param name="isAdd"></param>
-	/// <param name="amount"></param>
 	public void ChangeAmount(ItemKey itemKey, bool isAdd, int amount = 1)
 	{
+		if (MergedExtraGoodsItemDict == null)
+		{
+			MergedExtraGoodsItemDict = new Dictionary<ItemKey, int>();
+		}
+		if (MergedPoisonItemDict == null)
+		{
+			MergedPoisonItemDict = new Dictionary<ItemKey, int>();
+		}
+		int keyAmount = 0;
+		if (itemKey != _key)
+		{
+			keyAmount = Amount - (from kv in MergedPoisonItemDict.Concat(MergedExtraGoodsItemDict)
+				select kv.Value).Sum();
+		}
 		if (isAdd)
 		{
 			Amount += amount;
@@ -1164,9 +906,10 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		{
 			Amount -= amount;
 		}
-		if (MergedExtraGoodsItemDict == null)
+		if (itemKey == _key)
 		{
-			MergedExtraGoodsItemDict = new Dictionary<ItemKey, int>();
+			keyAmount = Amount - (from kv in MergedPoisonItemDict.Concat(MergedExtraGoodsItemDict)
+				select kv.Value).Sum();
 		}
 		if (ModificationStateHelper.IsActive(itemKey.ModificationState, 8))
 		{
@@ -1180,12 +923,13 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 		else if (ModificationStateHelper.IsActive(_key.ModificationState, 8))
 		{
-			MergedExtraGoodsItemDict[_key] = amount;
+			if (keyAmount > 0)
+			{
+				MergedExtraGoodsItemDict[_key] = keyAmount;
+			}
 			_key = itemKey;
-		}
-		if (MergedPoisonItemDict == null)
-		{
-			MergedPoisonItemDict = new Dictionary<ItemKey, int>();
+			keyAmount = Amount - (from kv in MergedPoisonItemDict.Concat(MergedExtraGoodsItemDict)
+				select kv.Value).Sum();
 		}
 		if (ModificationStateHelper.IsActive(itemKey.ModificationState, 1))
 		{
@@ -1199,8 +943,19 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 		else if (ModificationStateHelper.IsActive(_key.ModificationState, 1))
 		{
-			MergedPoisonItemDict[_key] = amount;
+			if (keyAmount > 0)
+			{
+				MergedPoisonItemDict[_key] = keyAmount;
+			}
 			_key = itemKey;
+			keyAmount = Amount - (from kv in MergedPoisonItemDict.Concat(MergedExtraGoodsItemDict)
+				select kv.Value).Sum();
+		}
+		if (keyAmount == 0)
+		{
+			_key = Key;
+			MergedExtraGoodsItemDict.Remove(_key);
+			MergedPoisonItemDict.Remove(_key);
 		}
 	}
 
@@ -1211,12 +966,8 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		MaterialResources.Initialize();
 		RefiningEffects.Initialize();
 		EquipmentEffectIds = null;
-		LoveTokenDataItem = new LoveTokenDataItem(-1, -1, -1, -1, isTaiwuPresent: false);
 	}
 
-	/// <summary>
-	/// 基于纯配置构建前端使用的 ItemDisplayData
-	/// </summary>
 	public ItemDisplayData(sbyte itemType, short templateId)
 	{
 		_key = new ItemKey(itemType, 0, templateId, -1);
@@ -1260,16 +1011,9 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		}
 		ItemSourceType = -1;
 		UsingType = ItemUsingType.Invalid;
-		LoveTokenDataItem = new LoveTokenDataItem();
 		OwnerCharId = -1;
 	}
 
-	/// <summary>
-	/// 将资源转化为ItemDisplayData
-	/// </summary>
-	/// <param name="resourceType"></param>
-	/// <param name="amount"></param>
-	/// <param name="charId"></param>
 	public static ItemDisplayData CreateResource(sbyte resourceType, int amount, int charId = -1)
 	{
 		return new ItemDisplayData
@@ -1282,10 +1026,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		};
 	}
 
-	/// <summary>
-	/// 物品能否设置装备特效
-	/// </summary>
-	/// <returns></returns>
 	public bool CanSetEquipmentEffect()
 	{
 		sbyte curType = Key.ItemType;
@@ -1305,10 +1045,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return true;
 	}
 
-	/// <summary>
-	/// 有装备特效词条
-	/// </summary>
-	/// <returns></returns>
 	public bool HaveEquipmentEffect()
 	{
 		List<short> equipmentEffectIds = EquipmentEffectIds;
@@ -1319,9 +1055,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return false;
 	}
 
-	/// <summary>
-	/// 清除物品的使用状态，前端用
-	/// </summary>
 	public static void ClearItemUsingState(ItemDisplayData itemData, List<ItemDisplayData> itemList)
 	{
 		ItemDisplayData item = itemList?.Find((ItemDisplayData data) => data.ContainsItemKey(itemData.Key));
@@ -1341,16 +1074,14 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return 0;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
-		int totalSize = 138;
+		int totalSize = 127;
 		totalSize = ((EquipmentEffectIds == null) ? (totalSize + 2) : (totalSize + (2 + 2 * EquipmentEffectIds.Count)));
 		if (Requirements != null)
 		{
@@ -1396,7 +1127,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -1412,6 +1142,8 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		*(int*)pCurrData = Weight;
 		pCurrData += 4;
 		*(long*)pCurrData = Value;
+		pCurrData += 8;
+		*(long*)pCurrData = ExchangeValue;
 		pCurrData += 8;
 		*(int*)pCurrData = SpecialArg;
 		pCurrData += 4;
@@ -1519,7 +1251,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		pCurrData++;
 		*pCurrData = (byte)_usingType;
 		pCurrData++;
-		pCurrData += LoveTokenDataItem.Serialize(pCurrData);
 		*(int*)pCurrData = OwnerCharId;
 		pCurrData += 4;
 		*pCurrData = (IsReadingFinished ? ((byte)1) : ((byte)0));
@@ -1627,6 +1358,8 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 			*(short*)pCurrData = 0;
 			pCurrData += 2;
 		}
+		*pCurrData = (ForceNotTransferable ? ((byte)1) : ((byte)0));
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{
@@ -1635,7 +1368,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -1651,6 +1383,8 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		Weight = *(int*)pCurrData;
 		pCurrData += 4;
 		Value = *(long*)pCurrData;
+		pCurrData += 8;
+		ExchangeValue = *(long*)pCurrData;
 		pCurrData += 8;
 		SpecialArg = *(int*)pCurrData;
 		pCurrData += 4;
@@ -1773,11 +1507,6 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		pCurrData++;
 		_usingType = (sbyte)(*pCurrData);
 		pCurrData++;
-		if (LoveTokenDataItem == null)
-		{
-			LoveTokenDataItem = new LoveTokenDataItem();
-		}
-		pCurrData += LoveTokenDataItem.Deserialize(pCurrData);
 		OwnerCharId = *(int*)pCurrData;
 		pCurrData += 4;
 		IsReadingFinished = *pCurrData != 0;
@@ -1893,6 +1622,8 @@ public class ItemDisplayData : ISerializableGameData, IItemData, ITradeableConte
 		{
 			WeaponEffectDisplayDataList?.Clear();
 		}
+		ForceNotTransferable = *pCurrData != 0;
+		pCurrData++;
 		int totalSize = (int)(pCurrData - pData);
 		if (totalSize > 4)
 		{

@@ -10,111 +10,57 @@ using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Building;
 
-/// <summary>
-/// 制造界面的显示数据
-/// </summary>
 [AutoGenerateSerializableGameData(NoCopyConstructors = true)]
 public class BuildingMakeDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 产业地图的所有数据
-	/// </summary>
 	[SerializableGameDataField]
 	public List<BuildingBlockData> BlockList;
 
-	/// <summary>
-	/// 行囊道具，不含身上装备
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> InventoryItemList;
 
-	/// <summary>
-	/// 身上装备
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> EquippedItemList;
 
-	/// <summary>
-	/// 仓库道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> WarehouseItemList;
 
-	/// <summary>
-	/// 公库道具
-	/// </summary>
 	[SerializableGameDataField]
 	public List<ItemDisplayData> TreasuryItemList;
 
-	/// <summary>
-	/// 技艺
-	/// </summary>
 	[SerializableGameDataField]
 	public LifeSkillShorts LifeSkillAttainments;
 
-	/// <summary>
-	/// 徒手工具
-	/// </summary>
 	[SerializableGameDataField]
 	public ItemKey EmptyToolKey;
 
-	/// <summary>
-	/// 造诣需求减少百分比（附属建筑效果）
-	/// </summary>
 	[SerializableGameDataField]
 	public int BuildingAttainmentEffect;
 
-	/// <summary>
-	/// 太吾能否使用仓库
-	/// </summary>
 	[SerializableGameDataField]
 	public bool CanTransferItemToWarehouse;
 
-	/// <summary>
-	/// 太吾的人物数据
-	/// </summary>
 	[SerializableGameDataField]
 	public CharacterDisplayData CharacterDisplayData;
 
-	/// <summary>
-	/// 升级制造产物（附属建筑效果）
-	/// </summary>
 	[SerializableGameDataField]
 	public bool BuildingUpgradeMakeItem;
 
-	/// <summary>
-	/// 读完的厨艺书籍数量
-	/// </summary>
 	[SerializableGameDataField]
 	public int AllPagesReadCookingSkillBookCount;
 
-	/// <summary>
-	/// 存储位置
-	/// </summary>
 	[SerializableGameDataField]
 	public int StoreLocation;
 
-	/// <summary>
-	/// 拥有的衣装模板集合，作为改制目标
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> OwnedClothingList;
 
-	/// <summary>
-	/// 改制衣装的设置
-	/// </summary>
 	[SerializableGameDataField]
 	public WeaveClothingDisplaySetting WeaveClothingDisplaySetting;
 
-	/// <summary>
-	/// 衣装道具实例 ID -&gt; 改制目标衣装模板 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public Dictionary<int, short> ClothingDisplayModifications;
 
-	/// <summary>
-	/// 清除集合的引用类型数据，防止前端刷新数据时，已经引用的数据被更改
-	/// </summary>
 	public void Clear()
 	{
 		InventoryItemList?.Clear();
@@ -130,7 +76,7 @@ public class BuildingMakeDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 14;
+		int totalSize = 58;
 		if (BlockList != null)
 		{
 			totalSize += 2;
@@ -191,11 +137,8 @@ public class BuildingMakeDisplayData : ISerializableGameData
 		{
 			totalSize += 2;
 		}
-		totalSize += LifeSkillAttainments.GetSerializedSize();
-		totalSize += EmptyToolKey.GetSerializedSize();
 		totalSize = ((CharacterDisplayData == null) ? (totalSize + 2) : (totalSize + (2 + CharacterDisplayData.GetSerializedSize())));
 		totalSize = ((OwnedClothingList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * OwnedClothingList.Count)));
-		totalSize += WeaveClothingDisplaySetting.GetSerializedSize();
 		totalSize += 4;
 		if (ClothingDisplayModifications != null)
 		{

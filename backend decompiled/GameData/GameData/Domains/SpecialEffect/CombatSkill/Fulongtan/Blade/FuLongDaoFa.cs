@@ -5,8 +5,6 @@ namespace GameData.Domains.SpecialEffect.CombatSkill.Fulongtan.Blade;
 
 public class FuLongDaoFa : ChangePowerByEquipType
 {
-	protected override sbyte ChangePowerUnitReverse => 3;
-
 	public FuLongDaoFa()
 	{
 	}

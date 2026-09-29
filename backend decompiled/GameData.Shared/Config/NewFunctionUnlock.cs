@@ -7,301 +7,124 @@ namespace Config;
 [Serializable]
 public class NewFunctionUnlock : ConfigData<NewFunctionUnlockItem, byte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 周天运转
-		/// </summary>
 		public const byte Loop = 0;
 
-		/// <summary>
-		/// 研读书籍
-		/// </summary>
 		public const byte ReadBook = 1;
 
-		/// <summary>
-		/// 突破
-		/// </summary>
 		public const byte SkillBreak = 2;
 
-		/// <summary>
-		/// 采集资源
-		/// </summary>
 		public const byte WorldResourceCollection = 3;
 
-		/// <summary>
-		/// 制造
-		/// </summary>
 		public const byte Craft = 4;
 
-		/// <summary>
-		/// 秘闻
-		/// </summary>
 		public const byte Secret = 5;
 
-		/// <summary>
-		/// 促织决斗
-		/// </summary>
 		public const byte CracketFight = 6;
 
-		/// <summary>
-		/// 较艺决斗
-		/// </summary>
 		public const byte LifeSkillCombat = 7;
 
-		/// <summary>
-		/// 同道
-		/// </summary>
 		public const byte Company = 8;
 
-		/// <summary>
-		/// 太吾月报
-		/// </summary>
 		public const byte MonthlyNotifications = 9;
 
-		/// <summary>
-		/// 人物互动
-		/// </summary>
 		public const byte Talk = 10;
 
-		/// <summary>
-		/// 村民派遣
-		/// </summary>
 		public const byte SendVillager = 11;
 
-		/// <summary>
-		/// 太吾村
-		/// </summary>
 		public const byte TaiwuVillageManagement = 12;
 
-		/// <summary>
-		/// 人物志向
-		/// </summary>
 		public const byte Aspiration = 13;
 
-		/// <summary>
-		/// 传剑系统
-		/// </summary>
 		public const byte SwordLegacy = 14;
 
-		/// <summary>
-		/// 元鸡
-		/// </summary>
 		public const byte Chicken = 15;
 
-		/// <summary>
-		/// 世界旅行
-		/// </summary>
 		public const byte InterStateTravel = 16;
 
-		/// <summary>
-		/// 拜师学艺
-		/// </summary>
 		public const byte SkillLearning = 17;
 
-		/// <summary>
-		/// 恩义互动
-		/// </summary>
 		public const byte SpiritualDebtAction = 18;
 
-		/// <summary>
-		/// 交换藏书
-		/// </summary>
 		public const byte SkillBookExchange = 19;
 
-		/// <summary>
-		/// 茶马帮
-		/// </summary>
 		public const byte TeaCaravan = 20;
 
-		/// <summary>
-		/// 轮回台
-		/// </summary>
 		public const byte SamsaraPlatform = 21;
 
-		/// <summary>
-		/// 奇书系统
-		/// </summary>
 		public const byte LegendaryBook = 22;
 
-		/// <summary>
-		/// 紫竹化身
-		/// </summary>
 		public const byte JuniorXiangshuSummoning = 23;
 
-		/// <summary>
-		/// 武林大会
-		/// </summary>
 		public const byte MartialArtContest = 24;
 
-		/// <summary>
-		/// 自由模式
-		/// </summary>
 		public const byte FreeMode = 25;
 
-		/// <summary>
-		/// 返灵玉
-		/// </summary>
 		public const byte ReEvolutionJade = 26;
 
-		/// <summary>
-		/// 促织许愿
-		/// </summary>
 		public const byte WishingCricket = 27;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 周天运转
-		/// </summary>
 		public static NewFunctionUnlockItem Loop => Instance[(byte)0];
 
-		/// <summary>
-		/// 研读书籍
-		/// </summary>
 		public static NewFunctionUnlockItem ReadBook => Instance[(byte)1];
 
-		/// <summary>
-		/// 突破
-		/// </summary>
 		public static NewFunctionUnlockItem SkillBreak => Instance[(byte)2];
 
-		/// <summary>
-		/// 采集资源
-		/// </summary>
 		public static NewFunctionUnlockItem WorldResourceCollection => Instance[(byte)3];
 
-		/// <summary>
-		/// 制造
-		/// </summary>
 		public static NewFunctionUnlockItem Craft => Instance[(byte)4];
 
-		/// <summary>
-		/// 秘闻
-		/// </summary>
 		public static NewFunctionUnlockItem Secret => Instance[(byte)5];
 
-		/// <summary>
-		/// 促织决斗
-		/// </summary>
 		public static NewFunctionUnlockItem CracketFight => Instance[(byte)6];
 
-		/// <summary>
-		/// 较艺决斗
-		/// </summary>
 		public static NewFunctionUnlockItem LifeSkillCombat => Instance[(byte)7];
 
-		/// <summary>
-		/// 同道
-		/// </summary>
 		public static NewFunctionUnlockItem Company => Instance[(byte)8];
 
-		/// <summary>
-		/// 太吾月报
-		/// </summary>
 		public static NewFunctionUnlockItem MonthlyNotifications => Instance[(byte)9];
 
-		/// <summary>
-		/// 人物互动
-		/// </summary>
 		public static NewFunctionUnlockItem Talk => Instance[(byte)10];
 
-		/// <summary>
-		/// 村民派遣
-		/// </summary>
 		public static NewFunctionUnlockItem SendVillager => Instance[(byte)11];
 
-		/// <summary>
-		/// 太吾村
-		/// </summary>
 		public static NewFunctionUnlockItem TaiwuVillageManagement => Instance[(byte)12];
 
-		/// <summary>
-		/// 人物志向
-		/// </summary>
 		public static NewFunctionUnlockItem Aspiration => Instance[(byte)13];
 
-		/// <summary>
-		/// 传剑系统
-		/// </summary>
 		public static NewFunctionUnlockItem SwordLegacy => Instance[(byte)14];
 
-		/// <summary>
-		/// 元鸡
-		/// </summary>
 		public static NewFunctionUnlockItem Chicken => Instance[(byte)15];
 
-		/// <summary>
-		/// 世界旅行
-		/// </summary>
 		public static NewFunctionUnlockItem InterStateTravel => Instance[(byte)16];
 
-		/// <summary>
-		/// 拜师学艺
-		/// </summary>
 		public static NewFunctionUnlockItem SkillLearning => Instance[(byte)17];
 
-		/// <summary>
-		/// 恩义互动
-		/// </summary>
 		public static NewFunctionUnlockItem SpiritualDebtAction => Instance[(byte)18];
 
-		/// <summary>
-		/// 交换藏书
-		/// </summary>
 		public static NewFunctionUnlockItem SkillBookExchange => Instance[(byte)19];
 
-		/// <summary>
-		/// 茶马帮
-		/// </summary>
 		public static NewFunctionUnlockItem TeaCaravan => Instance[(byte)20];
 
-		/// <summary>
-		/// 轮回台
-		/// </summary>
 		public static NewFunctionUnlockItem SamsaraPlatform => Instance[(byte)21];
 
-		/// <summary>
-		/// 奇书系统
-		/// </summary>
 		public static NewFunctionUnlockItem LegendaryBook => Instance[(byte)22];
 
-		/// <summary>
-		/// 紫竹化身
-		/// </summary>
 		public static NewFunctionUnlockItem JuniorXiangshuSummoning => Instance[(byte)23];
 
-		/// <summary>
-		/// 武林大会
-		/// </summary>
 		public static NewFunctionUnlockItem MartialArtContest => Instance[(byte)24];
 
-		/// <summary>
-		/// 自由模式
-		/// </summary>
 		public static NewFunctionUnlockItem FreeMode => Instance[(byte)25];
 
-		/// <summary>
-		/// 返灵玉
-		/// </summary>
 		public static NewFunctionUnlockItem ReEvolutionJade => Instance[(byte)26];
 
-		/// <summary>
-		/// 促织许愿
-		/// </summary>
 		public static NewFunctionUnlockItem WishingCricket => Instance[(byte)27];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static NewFunctionUnlock Instance = new NewFunctionUnlock();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string>

@@ -18,6 +18,7 @@ using GameData.Domains.Item.Display;
 using GameData.Domains.LifeRecord;
 using GameData.Domains.Map;
 using GameData.Domains.Organization;
+using GameData.Domains.Taiwu.Profession;
 using GameData.Domains.TaiwuEvent.DisplayEvent;
 using GameData.Domains.TaiwuEvent.EventHelper;
 using GameData.Domains.World.Display;
@@ -29,6 +30,26 @@ namespace GameData.Domains.TaiwuEvent.FunctionDefinition;
 
 public class CharacterFunctions
 {
+	[EventFunction(963)]
+	private static bool CharacterHasSpecialAvatar(EventScriptRuntime runtime, GameData.Domains.Character.Character character)
+	{
+		CharacterItem itemOrDefault = Config.Character.Instance.GetItemOrDefault(character.GetTemplateId());
+		int result;
+		if (itemOrDefault != null)
+		{
+			string fixedAvatarName = itemOrDefault.FixedAvatarName;
+			if (fixedAvatarName != null)
+			{
+				result = ((fixedAvatarName.Length > 0) ? 1 : 0);
+				goto IL_002a;
+			}
+		}
+		result = 0;
+		goto IL_002a;
+		IL_002a:
+		return (byte)result != 0;
+	}
+
 	[EventFunction(18)]
 	private unsafe static void SpecifyCurrMainAttribute(EventScriptRuntime runtime, GameData.Domains.Character.Character character, sbyte mainAttributeType, int value)
 	{
@@ -826,13 +847,80 @@ public class CharacterFunctions
 	}
 
 	[EventFunction(242)]
-	private static void DestroyEnemyNest(EventScriptRuntime runtime, short enemyNestId, sbyte behaviorType)
+	private unsafe static void DestroyEnemyNest(EventScriptRuntime runtime, short enemyNestId, sbyte behaviorType)
 	{
 		if (behaviorType < 0)
 		{
 			throw new ArgumentOutOfRangeException("behaviorType", behaviorType, "Parameter '{nameof(behaviorType)}' must be >= 0, but was {behaviorType}.");
 		}
-		DomainManager.Adventure.DestroyEnemyNest(runtime.Context, DomainManager.Taiwu.GetTaiwu().GetLocation().AreaId, enemyNestId, behaviorType);
+		DataContext context = runtime.Context;
+		InstantNotificationCollection notificationCollection = DomainManager.World.GetInstantNotificationCollection();
+		GameData.Domains.Character.Character taiwu = DomainManager.Taiwu.GetTaiwu();
+		int taiwuCharId = taiwu.GetId();
+		EnemyNestItem enemyNestCfg = EnemyNest.Instance[enemyNestId];
+		Config.Character instance = Config.Character.Instance;
+		List<short> members = enemyNestCfg.Members;
+		CharacterItem enemyLeaderCfg = instance[members[members.Count - 1]];
+		short areaId = taiwu.GetLocation().AreaId;
+		DomainManager.Adventure.ApplyDestroyEnemyNest(context, enemyNestId);
+		DomainManager.Extra.ChangeAreaSpiritualDebt(context, areaId, enemyNestCfg.SpiritualDebtChange);
+		taiwu.ChangeResource(context, 6, enemyNestCfg.MoneyReward);
+		taiwu.ChangeResource(context, 7, enemyNestCfg.AuthorityReward);
+		taiwu.ChangeExp(context, enemyNestCfg.ExpReward);
+		switch (behaviorType)
+		{
+		case 0:
+			taiwu.RecordFameAction(context, 40, -1, 5, jumpAccordingToTargetFame: false);
+			DomainManager.Map.ChangeSettlementSafetyInArea(context, areaId, 1);
+			notificationCollection.AddFameIncreased(taiwuCharId);
+			break;
+		case 1:
+			taiwu.RecordFameAction(context, 38, -1, 5, jumpAccordingToTargetFame: false);
+			DomainManager.Map.ChangeSettlementCultureInArea(context, areaId, 1);
+			notificationCollection.AddFameIncreased(taiwuCharId);
+			break;
+		case 2:
+			DomainManager.Map.ChangeSettlementSafetyInArea(context, areaId, 1);
+			DomainManager.Map.ChangeSettlementCultureInArea(context, areaId, 1);
+			break;
+		case 3:
+		{
+			taiwu.RecordFameAction(context, 42, -1, 5, jumpAccordingToTargetFame: false);
+			taiwu.ChangeHappiness(context, 3);
+			int moneyGain = enemyLeaderCfg.Resources.Items[6];
+			moneyGain = context.Random.Next(moneyGain * 5, moneyGain * 10 + 1);
+			if (moneyGain > 0)
+			{
+				taiwu.ChangeResource(context, 6, moneyGain);
+				notificationCollection.AddResourceIncreased(taiwuCharId, 6, moneyGain);
+			}
+			notificationCollection.AddFameDecreased(taiwuCharId);
+			notificationCollection.AddHappinessIncreased(taiwuCharId);
+			break;
+		}
+		case 4:
+		{
+			taiwu.RecordFameAction(context, 44, -1, 5, jumpAccordingToTargetFame: false);
+			notificationCollection.AddFameDecreased(taiwuCharId);
+			sbyte stateTemplateId = DomainManager.Map.GetStateTemplateIdByAreaId(areaId);
+			sbyte orgTemplateId = MapState.Instance[stateTemplateId].SectID;
+			sbyte gender = Gender.GetRandom(context.Random);
+			short charTemplateId = OrganizationDomain.GetCharacterTemplateId(orgTemplateId, stateTemplateId, gender);
+			OrganizationInfo orgInfo = taiwu.GetOrganizationInfo();
+			orgInfo.Grade = 0;
+			IntelligentCharacterCreationInfo info = new IntelligentCharacterCreationInfo(taiwu.GetLocation(), orgInfo, charTemplateId);
+			info.BaseAttraction = (short)context.Random.Next(enemyLeaderCfg.BaseAttraction / 2, enemyLeaderCfg.BaseAttraction + 1);
+			info.Age = (short)context.Random.Next(16, 25);
+			GameData.Domains.Character.Character newCharacter = DomainManager.Character.CreateIntelligentCharacter(context, ref info);
+			int newCharId = newCharacter.GetId();
+			DomainManager.Character.CompleteCreatingCharacter(newCharId);
+			newCharacter.AddFeature(context, 678);
+			DomainManager.Character.ChangeFavorabilityOptional(context, newCharacter, taiwu, -10000, 0);
+			DomainManager.Taiwu.JoinGroup(context, newCharId);
+			GameData.GameDataBridge.GameDataBridge.AddDisplayEvent(DisplayEventType.OpenGetItem_Character, new List<int> { newCharId }, (sbyte)14);
+			break;
+		}
+		}
 	}
 
 	[EventFunction(298)]
@@ -1460,6 +1548,10 @@ public class CharacterFunctions
 		{
 			return false;
 		}
+		if (Config.CombatSkill.Instance[combatSkillTemplateId].BookId < 0)
+		{
+			return false;
+		}
 		(ItemKey, byte, byte, sbyte) bookTuple = GameData.Domains.TaiwuEvent.EventHelper.EventHelper.GetTeachCombatSkillBook(self.GetId(), combatSkillTemplateId);
 		bool success = GameData.Domains.TaiwuEvent.EventHelper.EventHelper.CheckLearnCombatSkillWithInstructionSucceed(target, combatSkillTemplateId);
 		TeachCombatSkillAction action = new TeachCombatSkillAction
@@ -1703,6 +1795,32 @@ public class CharacterFunctions
 		}
 	}
 
+	[EventFunction(955)]
+	public static void AddRelation(EventScriptRuntime runtime, GameData.Domains.Character.Character src, GameData.Domains.Character.Character dst, ushort relationType)
+	{
+		switch (relationType)
+		{
+		case 1024:
+			GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddHusbandOrWifeRelations(src.GetId(), dst.GetId());
+			break;
+		case 64:
+			GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddAdoptiveParent(src.GetId(), dst.GetId());
+			break;
+		case 128:
+			GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddAdoptiveParent(dst.GetId(), src.GetId());
+			break;
+		default:
+			GameData.Domains.TaiwuEvent.EventHelper.EventHelper.AddRelation(src.GetId(), dst.GetId(), relationType);
+			break;
+		}
+	}
+
+	[EventFunction(956)]
+	public static void RemoveRelation(EventScriptRuntime runtime, GameData.Domains.Character.Character src, GameData.Domains.Character.Character dst, ushort relationType)
+	{
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.RemoveRelation(src.GetId(), dst.GetId(), relationType);
+	}
+
 	[EventFunction(782)]
 	private static int GetCharacterFiveElements(EventScriptRuntime runtime, GameData.Domains.Character.Character character, sbyte fiveElementsType)
 	{
@@ -1741,6 +1859,7 @@ public class CharacterFunctions
 			{
 				ItemDisplayData itemDisplayData = DomainManager.Item.GetItemDisplayData(itemKey, EventArgBox.TaiwuCharacterId);
 				itemDisplayData.Amount = pair.Value;
+				itemDisplayData.IsLocked = false;
 				selectItemData.CanSelectItemList.Add(itemDisplayData);
 			}
 		}
@@ -1917,5 +2036,33 @@ public class CharacterFunctions
 	private static void UpdateFixedCharacterMonthlyMovement(EventScriptRuntime runtime, GameData.Domains.Character.Character character)
 	{
 		DomainManager.Character.UpdateFixedCharacterMovement(runtime.Context, character);
+	}
+
+	[EventFunction(932)]
+	private static void ChangeProfessionSeniority(EventScriptRuntime runtime, int templateId, int baseDelta)
+	{
+		DomainManager.Extra.ChangeProfessionSeniority(runtime.Context, templateId, baseDelta);
+	}
+
+	[EventFunction(941)]
+	private static void TaiwuAsXiangshuWipeOut(EventScriptRuntime runtime, bool addExp)
+	{
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.GetMapRandomEnemyListFromArgBox(runtime.ArgBox, "EnemyGroup", out var group);
+		Location location = DomainManager.Taiwu.GetTaiwu().GetLocation();
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.RemoveMapRandomEnemiesOnBlock(location, group);
+		GameData.Domains.TaiwuEvent.EventHelper.EventHelper.MapRandomEnemiesEscapeByCharacter(location, EventArgBox.TaiwuCharacterId);
+		if (!addExp)
+		{
+			return;
+		}
+		List<short> templateIds = new List<short>();
+		foreach (MapTemplateEnemyInfo item in group)
+		{
+			templateIds.Add(item.TemplateId);
+		}
+		int expAdd = DomainManager.Combat.GetExpAndAuthorityAndAreaSpiritualDebtOutOfCombat(runtime.Context, templateIds);
+		ProfessionFormulaItem seniorityFormula = ProfessionFormula.Instance[114];
+		int addSeniority = seniorityFormula.Calculate(expAdd);
+		DomainManager.Extra.ChangeProfessionSeniority(runtime.Context, 18, addSeniority);
 	}
 }

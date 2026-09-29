@@ -5,15 +5,9 @@ namespace GameData.DLC;
 
 public struct DlcId(ulong appId, ulong version) : ISerializableGameData, IEquatable<DlcId>
 {
-	/// <summary>
-	/// Dlc 发布时的文件Id
-	/// </summary>
 	[SerializableGameDataField]
 	public ulong AppId = appId;
 
-	/// <summary>
-	/// Dlc 的版本
-	/// </summary>
 	[SerializableGameDataField]
 	public ulong Version = version;
 
@@ -36,13 +30,11 @@ public struct DlcId(ulong appId, ulong version) : ISerializableGameData, IEquata
 		return $"{AppId}_{Version}";
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 16;
@@ -53,7 +45,6 @@ public struct DlcId(ulong appId, ulong version) : ISerializableGameData, IEquata
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(ulong*)pData = AppId;
@@ -67,7 +58,6 @@ public struct DlcId(ulong appId, ulong version) : ISerializableGameData, IEquata
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

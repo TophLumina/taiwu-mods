@@ -4,56 +4,28 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Information;
 
-/// <summary>
-/// 秘闻数据公开时显示过月通知的tips额外数据
-/// 本数据结构制作时仅考虑用于过月通知的Tips，因此设置的static变量是本次过月通知显示时所有实例通用的
-/// </summary>
 public class SecretInformationBroadcastTipsExtraData : ISerializableGameData
 {
-	/// <summary>
-	/// 秘闻元数据 Id
-	/// </summary>
 	[SerializableGameDataField]
 	public int MetaDataId;
 
-	/// <summary>
-	/// 因为秘闻公开导致对行为人结仇的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> StartEnemyRelationCharactersToActor;
 
-	/// <summary>
-	/// 因为秘闻公开导致对接受者结仇的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> StartEnemyRelationCharactersToReactor;
 
-	/// <summary>
-	/// 因为秘闻公开导致对接受者2结仇的角色id
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> StartEnemyRelationCharactersToSecactor;
 
-	/// <summary>
-	/// 因为秘闻公开导致对来源方结仇的角色id（第一个位置保存的是来源方id）
-	/// </summary>
 	[SerializableGameDataField]
 	public List<int> StartEnemyRelationCharactersToSource;
 
-	/// <summary>
-	/// 空构造方法用于反序列化
-	/// </summary>
-	public SecretInformationBroadcastTipsExtraData()
-	{
-	}
-
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 4;
@@ -68,7 +40,6 @@ public class SecretInformationBroadcastTipsExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -150,7 +121,6 @@ public class SecretInformationBroadcastTipsExtraData : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

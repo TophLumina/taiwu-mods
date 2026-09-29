@@ -19,21 +19,12 @@ public class ResourceBlockExtraData : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[3] { "BuildingBlockKey", "Progress", "Cooldown" };
 	}
 
-	/// <summary>
-	/// 产业建筑Key
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	public BuildingBlockKey BuildingBlockKey;
 
-	/// <summary>
-	/// 心材制造概率(分子)
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	public int Progress;
 
-	/// <summary>
-	/// 心材制造冷却
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	public int Cooldown;
 
@@ -58,8 +49,7 @@ public class ResourceBlockExtraData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 10;
-		totalSize += BuildingBlockKey.GetSerializedSize();
+		int totalSize = 18;
 		if (totalSize > 4)
 		{
 			return (totalSize + 3) / 4 * 4;

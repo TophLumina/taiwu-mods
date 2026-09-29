@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 关押角色显示数据。用于关押界面获取所有显示所需数据，避免监听
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializableGameData
 {
@@ -106,9 +103,6 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 
 	int ITradeableContent.AlertFactor => AlertFactor;
 
-	/// <summary>
-	/// 俘虏总是可交互
-	/// </summary>
 	public bool Interactable
 	{
 		get
@@ -139,10 +133,6 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 		}
 	}
 
-	/// <summary>
-	/// templateId为Misc的俘虏
-	/// id为俘虏的CharacterId
-	/// </summary>
 	public ItemKey Key
 	{
 		get
@@ -185,18 +175,11 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 		return GetAllItemKeysFromPool();
 	}
 
-	/// <summary>
-	/// 从对象池获取，必须归还
-	/// </summary>
-	/// <returns></returns>
 	public static Inventory GetItemKeyListFromPool()
 	{
 		return LocalObjectPool.Get();
 	}
 
-	/// <summary>
-	/// </summary>
-	/// <returns></returns>
 	public Inventory GetAllItemKeysFromPool()
 	{
 		Inventory itemKeyListFromPool = GetItemKeyListFromPool();
@@ -214,16 +197,10 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 		return 1;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public KidnapCharDisplayDataForInteraction()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public KidnapCharDisplayDataForInteraction(KidnapCharDisplayDataForInteraction other)
 	{
 		_key = other._key;
@@ -258,9 +235,6 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 		AlertFactor = other.AlertFactor;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(KidnapCharDisplayDataForInteraction other)
 	{
 		_key = other._key;
@@ -295,13 +269,11 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 		AlertFactor = other.AlertFactor;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 112;
@@ -313,7 +285,6 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -393,7 +364,6 @@ public class KidnapCharDisplayDataForInteraction : ITradeableContent, ISerializa
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

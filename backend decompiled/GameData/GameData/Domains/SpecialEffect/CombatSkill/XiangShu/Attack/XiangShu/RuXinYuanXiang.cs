@@ -34,7 +34,7 @@ public class RuXinYuanXiang : CombatSkillEffectBase
 		{
 			AddMaxEffectCount();
 		}
-		else if (isAlly != base.CombatChar.IsAlly && base.EffectCount > 0 && Config.CombatSkill.Instance[skillId].EquipType == 1)
+		else if (base.IsCurrent && isAlly != base.CombatChar.IsAlly && base.EffectCount > 0 && Config.CombatSkill.Instance[skillId].EquipType == 1)
 		{
 			DomainManager.Combat.AddGoneMadInjury(context, DomainManager.Combat.GetElement_CombatCharacterDict(charId), skillId, 200);
 			ReduceEffectCount();

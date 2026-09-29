@@ -5,85 +5,46 @@ using Config.Common;
 namespace Config;
 
 [Serializable]
-public class BehaviorType : ConfigData<BehaviorTypeItem, short>
+public class BehaviorType : ConfigData<BehaviorTypeItem, sbyte>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 刚正
-		/// </summary>
-		public const short Just = 0;
+		public const sbyte Just = 0;
 
-		/// <summary>
-		/// 仁善
-		/// </summary>
-		public const short Kind = 1;
+		public const sbyte Kind = 1;
 
-		/// <summary>
-		/// 中庸
-		/// </summary>
-		public const short Even = 2;
+		public const sbyte Even = 2;
 
-		/// <summary>
-		/// 叛逆
-		/// </summary>
-		public const short Rebel = 3;
+		public const sbyte Rebel = 3;
 
-		/// <summary>
-		/// 唯我
-		/// </summary>
-		public const short Egoistic = 4;
+		public const sbyte Egoistic = 4;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 刚正
-		/// </summary>
-		public static BehaviorTypeItem Just => Instance[(short)0];
+		public static BehaviorTypeItem Just => Instance[(sbyte)0];
 
-		/// <summary>
-		/// 仁善
-		/// </summary>
-		public static BehaviorTypeItem Kind => Instance[(short)1];
+		public static BehaviorTypeItem Kind => Instance[(sbyte)1];
 
-		/// <summary>
-		/// 中庸
-		/// </summary>
-		public static BehaviorTypeItem Even => Instance[(short)2];
+		public static BehaviorTypeItem Even => Instance[(sbyte)2];
 
-		/// <summary>
-		/// 叛逆
-		/// </summary>
-		public static BehaviorTypeItem Rebel => Instance[(short)3];
+		public static BehaviorTypeItem Rebel => Instance[(sbyte)3];
 
-		/// <summary>
-		/// 唯我
-		/// </summary>
-		public static BehaviorTypeItem Egoistic => Instance[(short)4];
+		public static BehaviorTypeItem Egoistic => Instance[(sbyte)4];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static BehaviorType Instance = new BehaviorType();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "Name", "Desc", "BetrayTips", "TemplateId", "ExchangeBook", "Icon" };
 
-	internal override int ToInt(short value)
+	internal override int ToInt(sbyte value)
 	{
 		return value;
 	}
 
-	internal override short ToTemplateId(int value)
+	internal override sbyte ToTemplateId(int value)
 	{
-		return (short)value;
+		return (sbyte)value;
 	}
 
 	private void CreateItems0()

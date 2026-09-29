@@ -3,57 +3,29 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu.Debate;
 
-/// <summary>
-/// 论点格子
-/// </summary>
 public class DebateNode : ISerializableGameData
 {
-	/// <summary>
-	/// 坐标
-	/// </summary>
 	[SerializableGameDataField]
 	public IntPair Coordinate;
 
-	/// <summary>
-	/// 是否对太吾有利
-	/// 总是拥有视野、未被对方棋子阻挡时可直接下子
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsVantage;
 
-	/// <summary>
-	/// 是否太吾可见
-	/// </summary>
 	[SerializableGameDataField]
 	public bool IsVisible;
 
-	/// <summary>
-	/// 太吾能否落子
-	/// </summary>
 	[SerializableGameDataField]
 	public bool TaiwuCanMakeMove;
 
-	/// <summary>
-	/// npc能否落子
-	/// </summary>
 	[SerializableGameDataField]
 	public bool NpcCanMakeMove;
 
-	/// <summary>
-	/// 棋子
-	/// </summary>
 	[SerializableGameDataField]
 	public int PawnId;
 
-	/// <summary>
-	/// 效果
-	/// </summary>
 	[SerializableGameDataField]
 	public DebateNodeEffectState EffectState;
 
-	/// <summary>
-	///
-	/// </summary>
 	public DebateNode(int x, int y)
 	{
 		Coordinate = new IntPair(x, y);
@@ -64,16 +36,10 @@ public class DebateNode : ISerializableGameData
 		EffectState = DebateNodeEffectState.Invalid;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public DebateNode()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public DebateNode(DebateNode other)
 	{
 		Coordinate = other.Coordinate;
@@ -85,9 +51,6 @@ public class DebateNode : ISerializableGameData
 		EffectState = new DebateNodeEffectState(other.EffectState);
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(DebateNode other)
 	{
 		Coordinate = other.Coordinate;
@@ -99,13 +62,11 @@ public class DebateNode : ISerializableGameData
 		EffectState = new DebateNodeEffectState(other.EffectState);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 16;
@@ -117,7 +78,6 @@ public class DebateNode : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -154,7 +114,6 @@ public class DebateNode : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

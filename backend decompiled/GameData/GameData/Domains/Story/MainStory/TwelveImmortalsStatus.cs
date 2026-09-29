@@ -17,9 +17,11 @@ public class TwelveImmortalsStatus : ISerializableGameData
 
 		public const ushort AlreadyIntoImpactRange = 4;
 
-		public const ushort Count = 5;
+		public const ushort SwordFragmentId = 5;
 
-		public static readonly string[] FieldId2FieldName = new string[5] { "Progress", "CharacterId", "AssistCharacterTemplateId", "AssistState", "AlreadyIntoImpactRange" };
+		public const ushort Count = 6;
+
+		public static readonly string[] FieldId2FieldName = new string[6] { "Progress", "CharacterId", "AssistCharacterTemplateId", "AssistState", "AlreadyIntoImpactRange", "SwordFragmentId" };
 	}
 
 	[SerializableGameDataField]
@@ -37,6 +39,9 @@ public class TwelveImmortalsStatus : ISerializableGameData
 	[SerializableGameDataField]
 	public bool AlreadyIntoImpactRange;
 
+	[SerializableGameDataField]
+	public short SwordFragmentId = -1;
+
 	public TwelveImmortalsStatus()
 	{
 	}
@@ -48,6 +53,7 @@ public class TwelveImmortalsStatus : ISerializableGameData
 		AssistCharacterTemplateId = other.AssistCharacterTemplateId;
 		AssistState = other.AssistState;
 		AlreadyIntoImpactRange = other.AlreadyIntoImpactRange;
+		SwordFragmentId = other.SwordFragmentId;
 	}
 
 	public void Assign(TwelveImmortalsStatus other)
@@ -57,6 +63,7 @@ public class TwelveImmortalsStatus : ISerializableGameData
 		AssistCharacterTemplateId = other.AssistCharacterTemplateId;
 		AssistState = other.AssistState;
 		AlreadyIntoImpactRange = other.AlreadyIntoImpactRange;
+		SwordFragmentId = other.SwordFragmentId;
 	}
 
 	public bool IsSerializedSizeFixed()
@@ -66,14 +73,14 @@ public class TwelveImmortalsStatus : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 11;
+		int totalSize = 13;
 		return (totalSize <= 4) ? totalSize : ((totalSize + 3) / 4 * 4);
 	}
 
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
-		*(short*)pCurrData = 5;
+		*(short*)pCurrData = 6;
 		pCurrData += 2;
 		*pCurrData = (byte)Progress;
 		pCurrData++;
@@ -85,6 +92,8 @@ public class TwelveImmortalsStatus : ISerializableGameData
 		pCurrData++;
 		*pCurrData = (AlreadyIntoImpactRange ? ((byte)1) : ((byte)0));
 		pCurrData++;
+		*(short*)pCurrData = SwordFragmentId;
+		pCurrData += 2;
 		int totalSize = (int)(pCurrData - pData);
 		return (totalSize <= 4) ? totalSize : ((totalSize + 3) / 4 * 4);
 	}
@@ -118,6 +127,11 @@ public class TwelveImmortalsStatus : ISerializableGameData
 		{
 			AlreadyIntoImpactRange = *pCurrData != 0;
 			pCurrData++;
+		}
+		if (fieldCount > 5)
+		{
+			SwordFragmentId = *(short*)pCurrData;
+			pCurrData += 2;
 		}
 		int totalSize = (int)(pCurrData - pData);
 		return (totalSize <= 4) ? totalSize : ((totalSize + 3) / 4 * 4);

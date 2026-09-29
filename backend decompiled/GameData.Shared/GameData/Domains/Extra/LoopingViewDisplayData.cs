@@ -3,115 +3,66 @@ using GameData.Domains.CombatSkill;
 using GameData.Domains.Taiwu.Display;
 using GameData.Serializer;
 using GameData.Utilities;
-using SerializableGameDataSourceGenerator;
 
 namespace GameData.Domains.Extra;
 
-/// <summary>
-/// 周天演练界面显示数据 - 一次性获取所有前端所需数据
-/// </summary>
-[AutoGenerateSerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
+[SerializableGameData(NoCopyConstructors = true, NotForArchive = true)]
 public class LoopingViewDisplayData : ISerializableGameData
 {
-	/// <summary>
-	/// 当前悟性
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurConcentration;
 
-	/// <summary>
-	/// 最大悟性
-	/// </summary>
 	[SerializableGameDataField]
 	public int MaxConcentration;
 
-	/// <summary>
-	/// 当前内力
-	/// </summary>
 	[SerializableGameDataField]
 	public int CurrNeili;
 
-	/// <summary>
-	/// 当前演练内功ID (-1表示无)
-	/// </summary>
 	[SerializableGameDataField]
 	public short LoopingNeigong = -1;
 
-	/// <summary>
-	/// 已学内功列表 (TemplateId列表)
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LearnedSkillList = new List<short>();
 
-	/// <summary>
-	/// 功法显示数据缓存
-	/// </summary>
 	[SerializableGameDataField]
 	public List<CombatSkillDisplayDataCharacterMenuListItem> CombatSkillDisplayDataList = new List<CombatSkillDisplayDataCharacterMenuListItem>();
 
-	/// <summary>
-	/// 辅助功法列表（3个槽位，-1表示空）
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> ReferenceSkillList = new List<short>();
 
-	/// <summary>
-	/// 槽位解锁状态（位掩码）
-	/// </summary>
 	[SerializableGameDataField]
 	public byte ReferenceSkillSlotUnlockStates;
 
-	/// <summary>
-	/// 额外真气进度
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList TaiwuExtraNeiliAllocationProgress;
 
-	/// <summary>
-	/// 每轮真气增量最小值
-	/// </summary>
 	[SerializableGameDataField]
 	public int ExtraNeiliPerLoopMin;
 
-	/// <summary>
-	/// 每轮真气增量最大值
-	/// </summary>
 	[SerializableGameDataField]
 	public int ExtraNeiliPerLoopMax;
 
-	/// <summary>
-	/// 每轮真气分配增量
-	/// </summary>
 	[SerializableGameDataField]
 	public IntList ExtraNeiliAllocationPerLoop;
 
-	/// <summary>
-	/// 当前策略列表
-	/// </summary>
+	[SerializableGameDataField]
+	public TaiwuNeiliProportionDisplayData NeiliData = new TaiwuNeiliProportionDisplayData();
+
+	[SerializableGameDataField]
+	public sbyte NeiliType = -1;
+
 	[SerializableGameDataField]
 	public List<QiArtStrategyDisplayData> TaiwuQiArtStrategyList = new List<QiArtStrategyDisplayData>();
 
-	/// <summary>
-	/// 可用策略列表
-	/// </summary>
 	[SerializableGameDataField]
 	public SByteList AvailableStrategies;
 
-	/// <summary>
-	/// 有事件的功法ID列表
-	/// </summary>
 	[SerializableGameDataField]
 	public List<short> LoopingEventSkillIdList = new List<short>();
 
-	/// <summary>
-	/// 生活技能战斗次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LoopInLifeSkillCombatCount;
 
-	/// <summary>
-	/// 战斗次数
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte LoopInCombatCount;
 
@@ -122,14 +73,16 @@ public class LoopingViewDisplayData : ISerializableGameData
 
 	public int GetSerializedSize()
 	{
-		int totalSize = 25;
+		int totalSize = 46;
 		totalSize = ((LearnedSkillList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * LearnedSkillList.Count)));
 		if (CombatSkillDisplayDataList != null)
 		{
 			totalSize += 2;
-			for (int i = 0; i < CombatSkillDisplayDataList.Count; i++)
+			int elementsCount = CombatSkillDisplayDataList.Count;
+			for (int i = 0; i < elementsCount; i++)
 			{
-				totalSize = ((CombatSkillDisplayDataList[i] == null) ? (totalSize + 2) : (totalSize + (2 + CombatSkillDisplayDataList[i].GetSerializedSize())));
+				CombatSkillDisplayDataCharacterMenuListItem element = CombatSkillDisplayDataList[i];
+				totalSize = ((element == null) ? (totalSize + 2) : (totalSize + (2 + element.GetSerializedSize())));
 			}
 		}
 		else
@@ -139,15 +92,7 @@ public class LoopingViewDisplayData : ISerializableGameData
 		totalSize = ((ReferenceSkillList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * ReferenceSkillList.Count)));
 		totalSize += TaiwuExtraNeiliAllocationProgress.GetSerializedSize();
 		totalSize += ExtraNeiliAllocationPerLoop.GetSerializedSize();
-		if (TaiwuQiArtStrategyList != null)
-		{
-			QiArtStrategyDisplayData TaiwuQiArtStrategyListElement = new QiArtStrategyDisplayData();
-			totalSize += 2 + TaiwuQiArtStrategyListElement.GetSerializedSize() * TaiwuQiArtStrategyList.Count;
-		}
-		else
-		{
-			totalSize += 2;
-		}
+		totalSize = ((TaiwuQiArtStrategyList == null) ? (totalSize + 2) : (totalSize + (2 + 8 * TaiwuQiArtStrategyList.Count)));
 		totalSize += AvailableStrategies.GetSerializedSize();
 		totalSize = ((LoopingEventSkillIdList == null) ? (totalSize + 2) : (totalSize + (2 + 2 * LoopingEventSkillIdList.Count)));
 		if (totalSize > 4)
@@ -176,9 +121,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			pCurrData += 2;
 			for (int i = 0; i < elementsCount; i++)
 			{
-				*(short*)pCurrData = LearnedSkillList[i];
-				pCurrData += 2;
+				((short*)pCurrData)[i] = LearnedSkillList[i];
 			}
+			pCurrData += 2 * elementsCount;
 		}
 		else
 		{
@@ -193,14 +138,15 @@ public class LoopingViewDisplayData : ISerializableGameData
 			pCurrData += 2;
 			for (int j = 0; j < elementsCount2; j++)
 			{
-				if (CombatSkillDisplayDataList[j] != null)
+				CombatSkillDisplayDataCharacterMenuListItem element = CombatSkillDisplayDataList[j];
+				if (element != null)
 				{
 					byte* intPtr = pCurrData;
 					pCurrData += 2;
-					int fieldSize = CombatSkillDisplayDataList[j].Serialize(pCurrData);
-					pCurrData += fieldSize;
-					Tester.Assert(fieldSize <= 65535);
-					*(ushort*)intPtr = (ushort)fieldSize;
+					int subDataSize = element.Serialize(pCurrData);
+					pCurrData += subDataSize;
+					Tester.Assert(subDataSize <= 65535);
+					*(ushort*)intPtr = (ushort)subDataSize;
 				}
 				else
 				{
@@ -222,9 +168,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			pCurrData += 2;
 			for (int k = 0; k < elementsCount3; k++)
 			{
-				*(short*)pCurrData = ReferenceSkillList[k];
-				pCurrData += 2;
+				((short*)pCurrData)[k] = ReferenceSkillList[k];
 			}
+			pCurrData += 2 * elementsCount3;
 		}
 		else
 		{
@@ -233,16 +179,19 @@ public class LoopingViewDisplayData : ISerializableGameData
 		}
 		*pCurrData = ReferenceSkillSlotUnlockStates;
 		pCurrData++;
-		int fieldSize2 = TaiwuExtraNeiliAllocationProgress.Serialize(pCurrData);
-		pCurrData += fieldSize2;
-		Tester.Assert(fieldSize2 <= 65535);
+		int fieldSize = TaiwuExtraNeiliAllocationProgress.Serialize(pCurrData);
+		pCurrData += fieldSize;
+		Tester.Assert(fieldSize <= 65535);
 		*(int*)pCurrData = ExtraNeiliPerLoopMin;
 		pCurrData += 4;
 		*(int*)pCurrData = ExtraNeiliPerLoopMax;
 		pCurrData += 4;
-		int fieldSize3 = ExtraNeiliAllocationPerLoop.Serialize(pCurrData);
-		pCurrData += fieldSize3;
-		Tester.Assert(fieldSize3 <= 65535);
+		int fieldSize2 = ExtraNeiliAllocationPerLoop.Serialize(pCurrData);
+		pCurrData += fieldSize2;
+		Tester.Assert(fieldSize2 <= 65535);
+		pCurrData += NeiliData.Serialize(pCurrData);
+		*pCurrData = (byte)NeiliType;
+		pCurrData++;
 		if (TaiwuQiArtStrategyList != null)
 		{
 			int elementsCount4 = TaiwuQiArtStrategyList.Count;
@@ -259,9 +208,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			*(short*)pCurrData = 0;
 			pCurrData += 2;
 		}
-		int fieldSize4 = AvailableStrategies.Serialize(pCurrData);
-		pCurrData += fieldSize4;
-		Tester.Assert(fieldSize4 <= 65535);
+		int fieldSize3 = AvailableStrategies.Serialize(pCurrData);
+		pCurrData += fieldSize3;
+		Tester.Assert(fieldSize3 <= 65535);
 		if (LoopingEventSkillIdList != null)
 		{
 			int elementsCount5 = LoopingEventSkillIdList.Count;
@@ -270,9 +219,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			pCurrData += 2;
 			for (int m = 0; m < elementsCount5; m++)
 			{
-				*(short*)pCurrData = LoopingEventSkillIdList[m];
-				pCurrData += 2;
+				((short*)pCurrData)[m] = LoopingEventSkillIdList[m];
 			}
+			pCurrData += 2 * elementsCount5;
 		}
 		else
 		{
@@ -308,7 +257,7 @@ public class LoopingViewDisplayData : ISerializableGameData
 		{
 			if (LearnedSkillList == null)
 			{
-				LearnedSkillList = new List<short>();
+				LearnedSkillList = new List<short>(elementsCount);
 			}
 			else
 			{
@@ -316,10 +265,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			}
 			for (int i = 0; i < elementsCount; i++)
 			{
-				short element = *(short*)pCurrData;
-				pCurrData += 2;
-				LearnedSkillList.Add(element);
+				LearnedSkillList.Add(((short*)pCurrData)[i]);
 			}
+			pCurrData += 2 * elementsCount;
 		}
 		else
 		{
@@ -331,7 +279,7 @@ public class LoopingViewDisplayData : ISerializableGameData
 		{
 			if (CombatSkillDisplayDataList == null)
 			{
-				CombatSkillDisplayDataList = new List<CombatSkillDisplayDataCharacterMenuListItem>();
+				CombatSkillDisplayDataList = new List<CombatSkillDisplayDataCharacterMenuListItem>(elementsCount2);
 			}
 			else
 			{
@@ -341,17 +289,16 @@ public class LoopingViewDisplayData : ISerializableGameData
 			{
 				ushort num = *(ushort*)pCurrData;
 				pCurrData += 2;
-				CombatSkillDisplayDataCharacterMenuListItem element2;
 				if (num > 0)
 				{
-					element2 = new CombatSkillDisplayDataCharacterMenuListItem();
-					pCurrData += element2.Deserialize(pCurrData);
+					CombatSkillDisplayDataCharacterMenuListItem element = new CombatSkillDisplayDataCharacterMenuListItem();
+					pCurrData += element.Deserialize(pCurrData);
+					CombatSkillDisplayDataList.Add(element);
 				}
 				else
 				{
-					element2 = null;
+					CombatSkillDisplayDataList.Add(null);
 				}
-				CombatSkillDisplayDataList.Add(element2);
 			}
 		}
 		else
@@ -364,7 +311,7 @@ public class LoopingViewDisplayData : ISerializableGameData
 		{
 			if (ReferenceSkillList == null)
 			{
-				ReferenceSkillList = new List<short>();
+				ReferenceSkillList = new List<short>(elementsCount3);
 			}
 			else
 			{
@@ -372,10 +319,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			}
 			for (int k = 0; k < elementsCount3; k++)
 			{
-				short element3 = *(short*)pCurrData;
-				pCurrData += 2;
-				ReferenceSkillList.Add(element3);
+				ReferenceSkillList.Add(((short*)pCurrData)[k]);
 			}
+			pCurrData += 2 * elementsCount3;
 		}
 		else
 		{
@@ -389,13 +335,20 @@ public class LoopingViewDisplayData : ISerializableGameData
 		ExtraNeiliPerLoopMax = *(int*)pCurrData;
 		pCurrData += 4;
 		pCurrData += ExtraNeiliAllocationPerLoop.Deserialize(pCurrData);
+		if (NeiliData == null)
+		{
+			NeiliData = new TaiwuNeiliProportionDisplayData();
+		}
+		pCurrData += NeiliData.Deserialize(pCurrData);
+		NeiliType = (sbyte)(*pCurrData);
+		pCurrData++;
 		ushort elementsCount4 = *(ushort*)pCurrData;
 		pCurrData += 2;
 		if (elementsCount4 > 0)
 		{
 			if (TaiwuQiArtStrategyList == null)
 			{
-				TaiwuQiArtStrategyList = new List<QiArtStrategyDisplayData>();
+				TaiwuQiArtStrategyList = new List<QiArtStrategyDisplayData>(elementsCount4);
 			}
 			else
 			{
@@ -403,9 +356,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			}
 			for (int l = 0; l < elementsCount4; l++)
 			{
-				QiArtStrategyDisplayData element4 = new QiArtStrategyDisplayData();
-				pCurrData += element4.Deserialize(pCurrData);
-				TaiwuQiArtStrategyList.Add(element4);
+				QiArtStrategyDisplayData element2 = new QiArtStrategyDisplayData();
+				pCurrData += element2.Deserialize(pCurrData);
+				TaiwuQiArtStrategyList.Add(element2);
 			}
 		}
 		else
@@ -419,7 +372,7 @@ public class LoopingViewDisplayData : ISerializableGameData
 		{
 			if (LoopingEventSkillIdList == null)
 			{
-				LoopingEventSkillIdList = new List<short>();
+				LoopingEventSkillIdList = new List<short>(elementsCount5);
 			}
 			else
 			{
@@ -427,10 +380,9 @@ public class LoopingViewDisplayData : ISerializableGameData
 			}
 			for (int m = 0; m < elementsCount5; m++)
 			{
-				short element5 = *(short*)pCurrData;
-				pCurrData += 2;
-				LoopingEventSkillIdList.Add(element5);
+				LoopingEventSkillIdList.Add(((short*)pCurrData)[m]);
 			}
+			pCurrData += 2 * elementsCount5;
 		}
 		else
 		{

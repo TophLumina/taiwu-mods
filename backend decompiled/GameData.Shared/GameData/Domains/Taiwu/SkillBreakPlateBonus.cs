@@ -9,9 +9,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Taiwu;
 
-/// <summary>
-/// 功法突破盘玄机格数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NoCopyConstructors = true)]
 public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBreakPlateBonus>
 {
@@ -32,49 +29,25 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		public static readonly string[] FieldId2FieldName = new string[5] { "InternalType", "InternalValue0", "InternalValue1", "InternalValue2", "InternalValue3" };
 	}
 
-	/// <summary>
-	/// 用于序列化的类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	private ESkillBreakPlateBonusType _internalType;
 
-	/// <summary>
-	/// 用于序列化的值一
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	private int _internalValue0;
 
-	/// <summary>
-	/// 用于序列化的值二
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	private int _internalValue1;
 
-	/// <summary>
-	/// 用于序列化的值三
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	private int _internalValue2;
 
-	/// <summary>
-	/// 用于序列化的值四
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	private int _internalValue3;
 
-	/// <summary>
-	/// 无效值
-	/// </summary>
 	public static SkillBreakPlateBonus Invalid => default(SkillBreakPlateBonus);
 
-	/// <summary>
-	/// 玄机格类型
-	/// </summary>
 	public ESkillBreakPlateBonusType Type => _internalType;
 
-	/// <summary>
-	/// 影响范围
-	/// </summary>
 	public int ImpactRange => Type switch
 	{
 		ESkillBreakPlateBonusType.None => 0, 
@@ -85,9 +58,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		_ => 0, 
 	};
 
-	/// <summary>
-	/// 玄机品级
-	/// </summary>
 	public sbyte Grade => (sbyte)MathUtils.Clamp(Type switch
 	{
 		ESkillBreakPlateBonusType.None => 0, 
@@ -98,14 +68,8 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		_ => 0, 
 	}, 0, 8);
 
-	/// <summary>
-	/// 补正后的道具类玄机品级
-	/// </summary>
 	private int GradePlus2 => Grade + 2;
 
-	/// <summary>
-	/// 玄机效果
-	/// </summary>
 	public SkillBreakBonusEffectItem Effect => Type switch
 	{
 		ESkillBreakPlateBonusType.Item => SkillBreakBonusEffect.Instance[ItemTemplateHelper.GetBreakBonusEffect(ItemType, ItemTemplateId)], 
@@ -115,9 +79,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		_ => null, 
 	};
 
-	/// <summary>
-	/// 道具类型
-	/// </summary>
 	public sbyte ItemType
 	{
 		get
@@ -130,9 +91,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 道具模板 ID
-	/// </summary>
 	public short ItemTemplateId
 	{
 		get
@@ -145,9 +103,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 药物作用类型
-	/// </summary>
 	public EMedicineEffectType MedicineEffectType
 	{
 		get
@@ -160,9 +115,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 是否有关联人物
-	/// </summary>
 	public bool HasRelationKey
 	{
 		get
@@ -176,9 +128,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 关系人物 ID
-	/// </summary>
 	public int RelationCharId
 	{
 		get
@@ -191,9 +140,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 关系关联人物 ID
-	/// </summary>
 	public int RelationRelatedCharId
 	{
 		get
@@ -206,14 +152,8 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 关系键
-	/// </summary>
 	public RelationKey RelationKey => new RelationKey(RelationCharId, RelationRelatedCharId);
 
-	/// <summary>
-	/// 关系类型
-	/// </summary>
 	public ushort RelationType
 	{
 		get
@@ -226,9 +166,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 好感值
-	/// </summary>
 	public short Favorability
 	{
 		get
@@ -241,9 +178,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 好感类型
-	/// </summary>
 	public sbyte FavorabilityType
 	{
 		get
@@ -256,9 +190,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 关系级别（判断正负方向后的关系类型）
-	/// </summary>
 	public sbyte FavorabilityLevel
 	{
 		get
@@ -275,9 +206,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 历练档位
-	/// </summary>
 	public int ExpLevel
 	{
 		get
@@ -290,9 +218,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <summary>
-	/// 亲友功法造诣值
-	/// </summary>
 	public int FriendAttainment
 	{
 		get
@@ -305,7 +230,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		}
 	}
 
-	/// <inheritdoc />
 	public override string ToString()
 	{
 		return Type switch
@@ -317,9 +241,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <summary>
-	/// 基于道具创建
-	/// </summary>
 	public static SkillBreakPlateBonus CreateItem(sbyte itemType, short templateId)
 	{
 		if (!SkillBreakPlateConstants.IsBonusItem(itemType, templateId))
@@ -334,9 +255,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <summary>
-	/// 基于历练创建
-	/// </summary>
 	public static SkillBreakPlateBonus CreateExp(int level)
 	{
 		if (level < 0 || level >= SkillBreakPlateConstants.ExpLevelValues.Count)
@@ -350,9 +268,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <summary>
-	/// 基于关系创建
-	/// </summary>
 	public static SkillBreakPlateBonus CreateRelation(RelationKey relation, ushort relationType, short favorability)
 	{
 		return new SkillBreakPlateBonus
@@ -365,9 +280,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <summary>
-	/// 基于亲友创建
-	/// </summary>
 	public static SkillBreakPlateBonus CreateFriend(RelationKey relation, short attainment, short favorability)
 	{
 		return new SkillBreakPlateBonus
@@ -380,9 +292,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <summary>
-	/// 基于虚空亲友创建，少林佛像使用
-	/// </summary>
 	public static SkillBreakPlateBonus CreateFriendVirtual(short attainment, short favorability)
 	{
 		return new SkillBreakPlateBonus
@@ -395,18 +304,11 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		};
 	}
 
-	/// <summary>
-	/// 判断是否需要移除当前玄机格加成数据
-	/// </summary>
-	/// <returns></returns>
 	public bool ShouldBeRemoved()
 	{
 		return Type == ESkillBreakPlateBonusType.None;
 	}
 
-	/// <summary>
-	/// 重置关系类玄机的角色 ID
-	/// </summary>
 	public SkillBreakPlateBonus ResetRelationCharIds()
 	{
 		if (HasRelationKey)
@@ -416,21 +318,11 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return this;
 	}
 
-	/// <summary>
-	/// 对于指定功法是否可用
-	/// </summary>
-	/// <param name="skillId">功法 ID</param>
-	/// <returns></returns>
 	public bool IsMatch(short skillId)
 	{
 		return Config.CombatSkill.Instance[skillId].MatchBreakPlateBonusEffect(Effect);
 	}
 
-	/// <summary>
-	/// 获取玄机效果实现
-	/// </summary>
-	/// <param name="equipType">功法装配类型</param>
-	/// <returns></returns>
 	public SkillBreakBonusEffectImplementItem GetImplement(sbyte equipType)
 	{
 		SkillBreakBonusEffectItem effect = Effect;
@@ -446,9 +338,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return SkillBreakBonusEffectImplement.Instance[implementId];
 	}
 
-	/// <summary>
-	/// 计算加成的造诣需求
-	/// </summary>
 	public int CalcAddLifeSkillRequirement(sbyte equipType, ref LifeSkillShorts lifeSkillAttainments)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -459,9 +348,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return MathUtils.Max(lifeSkillAttainments[implement.AddRequirementType] * GradePlus2 / 100, 1);
 	}
 
-	/// <summary>
-	/// 计算减少的提气值百分比
-	/// </summary>
 	public int CalcReduceCostBreath(sbyte equipType, ref LifeSkillShorts lifeSkillAttainments)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -472,9 +358,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return MathUtils.Clamp(lifeSkillAttainments[implement.ReduceCostBreathType] * GradePlus2 / 1000, 1, 5);
 	}
 
-	/// <summary>
-	/// 计算减少的架势值百分比
-	/// </summary>
 	public int CalcReduceCostStance(sbyte equipType, ref LifeSkillShorts lifeSkillAttainments)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -485,9 +368,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return MathUtils.Clamp(lifeSkillAttainments[implement.ReduceCostStanceType] * GradePlus2 / 1000, 1, 5);
 	}
 
-	/// <summary>
-	/// 计算减少的施展时间百分比
-	/// </summary>
 	public int CalcReduceCastFrame(sbyte equipType, ref LifeSkillShorts lifeSkillAttainments)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -498,9 +378,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return MathUtils.Clamp(lifeSkillAttainments[implement.ReduceCastFrameType] * GradePlus2 / 500, 1, 10);
 	}
 
-	/// <summary>
-	/// 计算增加的威力上限值
-	/// </summary>
 	public int CalcAddMaxPower(sbyte equipType, ref LifeSkillShorts lifeSkillAttainments)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -511,9 +388,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return MathUtils.Clamp(lifeSkillAttainments[implement.AddMaxPowerType] * GradePlus2 / 500, 1, 10);
 	}
 
-	/// <summary>
-	/// 计算提高的伤势阈值百分比
-	/// </summary>
 	public int CalcAddInjuryStep(sbyte equipType, bool inner)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -529,11 +403,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 5 + GradePlus2 * 2;
 	}
 
-	/// <summary>
-	/// 计算提高的重创阈值百分比
-	/// </summary>
-	/// <param name="equipType"></param>
-	/// <returns></returns>
 	public int CalcAddFatalStep(sbyte equipType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -544,11 +413,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 5 + GradePlus2 * 2;
 	}
 
-	/// <summary>
-	/// 计算提高的失神阈值百分比
-	/// </summary>
-	/// <param name="equipType"></param>
-	/// <returns></returns>
 	public int CalcAddMindStep(sbyte equipType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -559,9 +423,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 5 + GradePlus2 * 2;
 	}
 
-	/// <summary>
-	/// 计算运功加成数据
-	/// </summary>
 	public int CalcEquipAddProperty(sbyte equipType, ECharacterPropertyReferencedType type)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -580,9 +441,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return value + CalcEquipAddPropertyRelation(implement, type);
 	}
 
-	/// <summary>
-	/// 计算运功加成数据 - 药物类
-	/// </summary>
 	private int CalcEquipAddPropertyMedicine(SkillBreakBonusEffectImplementItem implement, ECharacterPropertyReferencedType type)
 	{
 		if (ItemType != 8)
@@ -606,9 +464,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return GradePlus2 * factor;
 	}
 
-	/// <summary>
-	/// 计算运功加成数据 - 药物类 - 加成系数
-	/// </summary>
 	private int CalcEquipAddPropertyMedicineFactor(SkillBreakBonusEffectImplementItem implement, ECharacterPropertyReferencedType type)
 	{
 		if (type.IsPenetrate())
@@ -638,9 +493,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return implement.SubAttributeFactor;
 	}
 
-	/// <summary>
-	/// 计算运功加成数据 - 茶酒类
-	/// </summary>
 	private int CalcEquipAddPropertyTeaWine(SkillBreakBonusEffectImplementItem implement, ECharacterPropertyReferencedType type)
 	{
 		if (ItemType != 9 || implement.SubAttributeFactor == 0 || !type.IsSubAttribute())
@@ -655,9 +507,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return GradePlus2 * factor;
 	}
 
-	/// <summary>
-	/// 计算运功加成数据 - 食物类
-	/// </summary>
 	private int CalcEquipAddPropertyFood(SkillBreakBonusEffectImplementItem implement, ECharacterPropertyReferencedType type)
 	{
 		if (ItemType != 7 || !implement.AddMainAttribute || !type.IsMainAttribute())
@@ -672,9 +521,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 0;
 	}
 
-	/// <summary>
-	/// 计算运功加成数据 - 奇窍加成
-	/// </summary>
 	private int CalcEquipAddPropertyAssist(SkillBreakBonusEffectImplementItem implement, ECharacterPropertyReferencedType type)
 	{
 		int addValue = (Grade + 3) * 2;
@@ -713,9 +559,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 0;
 	}
 
-	/// <summary>
-	/// 计算运功加成数据 - 关系加成
-	/// </summary>
 	private int CalcEquipAddPropertyRelation(SkillBreakBonusEffectImplementItem implement, ECharacterPropertyReferencedType type)
 	{
 		if (Type != ESkillBreakPlateBonusType.Relation)
@@ -741,9 +584,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 0;
 	}
 
-	/// <summary>
-	/// 计算减少的使用需求百分比
-	/// </summary>
 	public int CalcReduceRequirements(sbyte equipType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -758,9 +598,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 0;
 	}
 
-	/// <summary>
-	/// 计算增加的威力值
-	/// </summary>
 	public int CalcAddPower(sbyte equipType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -777,9 +614,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return SkillBreakPlateConstants.FriendAddPowerBase + MathUtils.Clamp(addPower, SkillBreakPlateConstants.FriendAddPowerExtraMin, SkillBreakPlateConstants.FriendAddPowerExtraMax);
 	}
 
-	/// <summary>
-	/// 计算增加的内外比例变化范围
-	/// </summary>
 	public int CalcInnerRatioChangeRange(sbyte equipType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(equipType);
@@ -790,9 +624,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return GradePlus2 * 2;
 	}
 
-	/// <summary>
-	/// 计算提供的功法栏位
-	/// </summary>
 	public sbyte CalcSpecificGridCount(sbyte equipType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(0);
@@ -803,9 +634,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return 0;
 	}
 
-	/// <summary>
-	/// 计算提供的威力上限
-	/// </summary>
 	public short CalcAddOtherSkillMaxPower(sbyte equipType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(0);
@@ -816,9 +644,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return (short)MathUtils.Max(Grade - 2, 1);
 	}
 
-	/// <summary>
-	/// 计算提供的内力总量
-	/// </summary>
 	public int CalcTotalObtainableNeili()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(0);
@@ -829,9 +654,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return GradePlus2 * implement.TotalObtainableNeili;
 	}
 
-	/// <summary>
-	/// 计算攻击范围
-	/// </summary>
 	public int CalcAddAttackRange(bool forward)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(1);
@@ -846,9 +668,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return Grade;
 	}
 
-	/// <summary>
-	/// 计算提高伤害百分比加成
-	/// </summary>
 	public int CalcMakeDamage()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(1);
@@ -859,9 +678,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return Grade + 3;
 	}
 
-	/// <summary>
-	/// 计算总命中百分比加成
-	/// </summary>
 	public int CalcTotalHit()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(1);
@@ -872,9 +688,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return Grade + 3;
 	}
 
-	/// <summary>
-	/// 计算功法毒素百分比加成
-	/// </summary>
 	public int CalcPoison(sbyte poisonType)
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(1);
@@ -893,9 +706,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return GradePlus2 * 2;
 	}
 
-	/// <summary>
-	/// 计算脚力持续消耗百分比加成
-	/// </summary>
 	public int CalcCostMobilityByFrame()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(2);
@@ -906,9 +716,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return -(Grade + 3);
 	}
 
-	/// <summary>
-	/// 计算脚力移动消耗百分比加成
-	/// </summary>
 	public int CalcCostMobilityByMove()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(2);
@@ -919,9 +726,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return -(Grade + 3);
 	}
 
-	/// <summary>
-	/// 计算移动间隔影响百分比加成
-	/// </summary>
 	public int CalcCostMobilityByCast()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(2);
@@ -932,9 +736,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return -(Grade + 3) * implement.CostMobilityByCastFactor;
 	}
 
-	/// <summary>
-	/// 计算身法命中百分比加成
-	/// </summary>
 	public int CalcAddHitOnCast()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(2);
@@ -945,9 +746,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return Grade + 3;
 	}
 
-	/// <summary>
-	/// 计算反击威力百分比加成
-	/// </summary>
 	public int CalcFightBackPower()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(3);
@@ -958,9 +756,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return (Grade + 3) * 2;
 	}
 
-	/// <summary>
-	/// 计算反震威力百分比加成
-	/// </summary>
 	public int CalcBouncePower()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(3);
@@ -971,9 +766,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return (Grade + 3) * 2;
 	}
 
-	/// <summary>
-	/// 计算防御系数百分比加成
-	/// </summary>
 	public int CalcAddPenetrateResist()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(3);
@@ -984,9 +776,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return Grade + 3;
 	}
 
-	/// <summary>
-	/// 计算化解系数百分比加成
-	/// </summary>
 	public int CalcAddAvoidValueOnCast()
 	{
 		SkillBreakBonusEffectImplementItem implement = GetImplement(3);
@@ -997,7 +786,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return Grade + 3;
 	}
 
-	/// <inheritdoc />
 	public bool Equals(SkillBreakPlateBonus other)
 	{
 		if (_internalType == other._internalType && _internalValue0 == other._internalValue0 && _internalValue1 == other._internalValue1 && _internalValue2 == other._internalValue2)
@@ -1007,7 +795,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override bool Equals(object obj)
 	{
 		if (obj is SkillBreakPlateBonus other)
@@ -1017,35 +804,26 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return false;
 	}
 
-	/// <inheritdoc />
 	public override int GetHashCode()
 	{
 		return (((((((_internalType.GetHashCode() * 397) ^ _internalValue0) * 397) ^ _internalValue1) * 397) ^ _internalValue2) * 397) ^ _internalValue3;
 	}
 
-	/// <summary>
-	/// 等于
-	/// </summary>
 	public static bool operator ==(SkillBreakPlateBonus left, SkillBreakPlateBonus right)
 	{
 		return left.Equals(right);
 	}
 
-	/// <summary>
-	/// 不等
-	/// </summary>
 	public static bool operator !=(SkillBreakPlateBonus left, SkillBreakPlateBonus right)
 	{
 		return !left.Equals(right);
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 19;
@@ -1056,7 +834,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		*(short*)pData = 5;
@@ -1078,7 +855,6 @@ public struct SkillBreakPlateBonus : ISerializableGameData, IEquatable<SkillBrea
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

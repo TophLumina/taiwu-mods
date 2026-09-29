@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character.Display;
 
-/// <summary>
-/// 特殊交互道具（各种毒和内外伤）
-/// </summary>
 [SerializableGameData(NotRestrictCollectionSerializedSize = true)]
 public class RawItemDisplayDataForInteraction : ITradeableContent, ISerializableGameData
 {
@@ -31,9 +28,6 @@ public class RawItemDisplayDataForInteraction : ITradeableContent, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// 可交互
-	/// </summary>
 	bool ITradeableContent.Interactable
 	{
 		get
@@ -46,9 +40,6 @@ public class RawItemDisplayDataForInteraction : ITradeableContent, ISerializable
 		}
 	}
 
-	/// <summary>
-	/// templateId为Misc的秘闻
-	/// </summary>
 	public ItemKey Key
 	{
 		get
@@ -89,18 +80,11 @@ public class RawItemDisplayDataForInteraction : ITradeableContent, ISerializable
 		return GetAllItemKeysFromPool();
 	}
 
-	/// <summary>
-	/// 从对象池获取，必须归还
-	/// </summary>
-	/// <returns></returns>
 	public static Inventory GetItemKeyListFromPool()
 	{
 		return LocalObjectPool.Get();
 	}
 
-	/// <summary>
-	/// </summary>
-	/// <returns></returns>
 	public Inventory GetAllItemKeysFromPool()
 	{
 		Inventory itemKeyListFromPool = GetItemKeyListFromPool();
@@ -118,38 +102,27 @@ public class RawItemDisplayDataForInteraction : ITradeableContent, ISerializable
 		return 4;
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public RawItemDisplayDataForInteraction()
 	{
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public RawItemDisplayDataForInteraction(RawItemDisplayDataForInteraction other)
 	{
 		_key = other._key;
 		Interactable = other.Interactable;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(RawItemDisplayDataForInteraction other)
 	{
 		_key = other._key;
 		Interactable = other.Interactable;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return true;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 9;
@@ -160,7 +133,6 @@ public class RawItemDisplayDataForInteraction : ITradeableContent, ISerializable
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -175,7 +147,6 @@ public class RawItemDisplayDataForInteraction : ITradeableContent, ISerializable
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

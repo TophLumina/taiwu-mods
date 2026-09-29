@@ -5,305 +5,134 @@ using Config.Common;
 namespace Config;
 
 [Serializable]
-public class CharacterMatcher : ConfigData<CharacterMatcherItem, byte>
+public class CharacterMatcher : ConfigData<CharacterMatcherItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 可智能互动
-		/// </summary>
-		public const byte CanInteractAsIntelligentCharacter = 0;
+		public const short CanInteractAsIntelligentCharacter = 0;
 
-		/// <summary>
-		/// 可定位非婴儿
-		/// </summary>
-		public const byte NonBabyAndCanBeLocaated = 82;
+		public const short NonBabyAndCanBeLocaated = 82;
 
-		/// <summary>
-		/// 可工作
-		/// </summary>
-		public const byte CanWork = 1;
+		public const short CanWork = 1;
 
-		/// <summary>
-		/// 可收养子女
-		/// </summary>
-		public const byte CanAdoptChild = 2;
+		public const short CanAdoptChild = 2;
 
-		/// <summary>
-		/// 可作为复仇目标
-		/// </summary>
-		public const byte CanBeRevengeTarget = 3;
+		public const short CanBeRevengeTarget = 3;
 
-		/// <summary>
-		/// 可进行入魔人过月行动
-		/// </summary>
-		public const byte CanPerformInfectedAction = 4;
+		public const short CanPerformInfectedAction = 4;
 
-		/// <summary>
-		/// 可接收秘闻
-		/// </summary>
-		public const byte CanReceiveSecretInformation = 5;
+		public const short CanReceiveSecretInformation = 5;
 
-		/// <summary>
-		/// 可成为紫竹化身跟随对象
-		/// </summary>
-		public const byte JuniorXiangshuFollowingCharacter = 6;
+		public const short JuniorXiangshuFollowingCharacter = 6;
 
-		/// <summary>
-		/// 可进行情感关系判断
-		/// </summary>
-		public const byte CanStartSexRelation = 8;
+		public const short CanStartSexRelation = 8;
 
-		/// <summary>
-		/// 可建立坟墓
-		/// </summary>
-		public const byte CanBeUndertaker = 9;
+		public const short CanBeUndertaker = 9;
 
-		/// <summary>
-		/// 可被奇书奇遇拉取
-		/// </summary>
-		public const byte AvailableForLegendaryBookAdventure = 10;
+		public const short AvailableForLegendaryBookAdventure = 10;
 
-		/// <summary>
-		/// 出神之地移动角色
-		/// </summary>
-		public const byte PrepareCharacterForSpiritualWanderPlace = 11;
+		public const short PrepareCharacterForSpiritualWanderPlace = 11;
 
-		/// <summary>
-		/// 可被悬赏
-		/// </summary>
-		public const byte CanHaveBounty = 12;
+		public const short CanHaveBounty = 12;
 
-		/// <summary>
-		/// 可被入魔人攻击
-		/// </summary>
-		public const byte CanBeAttackedByInfectedCharacter = 13;
+		public const short CanBeAttackedByInfectedCharacter = 13;
 
-		/// <summary>
-		/// 可被随机敌人袭击
-		/// </summary>
-		public const byte CanBeAttackedByRandomEnemy = 14;
+		public const short CanBeAttackedByRandomEnemy = 14;
 
-		/// <summary>
-		/// 可被动脱离队伍
-		/// </summary>
-		public const byte CanBeRemovedFromGroup = 15;
+		public const short CanBeRemovedFromGroup = 15;
 
-		/// <summary>
-		/// 太吾村商人自动行为目标
-		/// </summary>
-		public const byte CanBeMerchantAutoActionTarget = 16;
+		public const short CanBeMerchantAutoActionTarget = 16;
 
-		/// <summary>
-		/// 可成为姬兮击杀目标
-		/// </summary>
-		public const byte CanBeJixiKillingTarget = 17;
+		public const short CanBeJixiKillingTarget = 17;
 
-		/// <summary>
-		/// 可为村民安排工作
-		/// </summary>
-		public const byte VillagerAvailableForWork = 18;
+		public const short VillagerAvailableForWork = 18;
 
-		/// <summary>
-		/// 可设置为经营建筑学徒
-		/// </summary>
-		public const byte ChildVillagerAvailableForWork = 7;
+		public const short ChildVillagerAvailableForWork = 7;
 
-		/// <summary>
-		/// 可成为狮相互动添加对象
-		/// </summary>
-		public const byte InteractWithShixiangMemberEventTarget = 19;
+		public const short InteractWithShixiangMemberEventTarget = 19;
 
-		/// <summary>
-		/// 可成为峨眉地区主线中被袭击的对象
-		/// </summary>
-		public const byte EmeiPotentialVictims = 20;
+		public const short EmeiPotentialVictims = 20;
 
-		/// <summary>
-		/// 可发起邀约
-		/// </summary>
-		public const byte CanMakeAppointment = 53;
+		public const short CanMakeAppointment = 53;
 
-		/// <summary>
-		/// 在所属定居点
-		/// </summary>
-		public const byte InSettlement = 55;
+		public const short InSettlement = 55;
 
-		/// <summary>
-		/// 可赴宴的非村民宾客
-		/// </summary>
-		public const byte CanJoinFeast = 56;
+		public const short CanJoinFeast = 56;
 
-		/// <summary>
-		/// 可成为姬兮吸取内力目标
-		/// </summary>
-		public const byte CanBeJixiDrainTarget = 57;
+		public const short CanBeJixiDrainTarget = 57;
 
-		/// <summary>
-		/// 可指定姬兮吸取内力的目标
-		/// </summary>
-		public const byte CanBeSelectJixiDrainTarget = 58;
+		public const short CanBeSelectJixiDrainTarget = 58;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 可智能互动
-		/// </summary>
-		public static CharacterMatcherItem CanInteractAsIntelligentCharacter => Instance[(byte)0];
+		public static CharacterMatcherItem CanInteractAsIntelligentCharacter => Instance[(short)0];
 
-		/// <summary>
-		/// 可定位非婴儿
-		/// </summary>
-		public static CharacterMatcherItem NonBabyAndCanBeLocaated => Instance[(byte)82];
+		public static CharacterMatcherItem NonBabyAndCanBeLocaated => Instance[(short)82];
 
-		/// <summary>
-		/// 可工作
-		/// </summary>
-		public static CharacterMatcherItem CanWork => Instance[(byte)1];
+		public static CharacterMatcherItem CanWork => Instance[(short)1];
 
-		/// <summary>
-		/// 可收养子女
-		/// </summary>
-		public static CharacterMatcherItem CanAdoptChild => Instance[(byte)2];
+		public static CharacterMatcherItem CanAdoptChild => Instance[(short)2];
 
-		/// <summary>
-		/// 可作为复仇目标
-		/// </summary>
-		public static CharacterMatcherItem CanBeRevengeTarget => Instance[(byte)3];
+		public static CharacterMatcherItem CanBeRevengeTarget => Instance[(short)3];
 
-		/// <summary>
-		/// 可进行入魔人过月行动
-		/// </summary>
-		public static CharacterMatcherItem CanPerformInfectedAction => Instance[(byte)4];
+		public static CharacterMatcherItem CanPerformInfectedAction => Instance[(short)4];
 
-		/// <summary>
-		/// 可接收秘闻
-		/// </summary>
-		public static CharacterMatcherItem CanReceiveSecretInformation => Instance[(byte)5];
+		public static CharacterMatcherItem CanReceiveSecretInformation => Instance[(short)5];
 
-		/// <summary>
-		/// 可成为紫竹化身跟随对象
-		/// </summary>
-		public static CharacterMatcherItem JuniorXiangshuFollowingCharacter => Instance[(byte)6];
+		public static CharacterMatcherItem JuniorXiangshuFollowingCharacter => Instance[(short)6];
 
-		/// <summary>
-		/// 可进行情感关系判断
-		/// </summary>
-		public static CharacterMatcherItem CanStartSexRelation => Instance[(byte)8];
+		public static CharacterMatcherItem CanStartSexRelation => Instance[(short)8];
 
-		/// <summary>
-		/// 可建立坟墓
-		/// </summary>
-		public static CharacterMatcherItem CanBeUndertaker => Instance[(byte)9];
+		public static CharacterMatcherItem CanBeUndertaker => Instance[(short)9];
 
-		/// <summary>
-		/// 可被奇书奇遇拉取
-		/// </summary>
-		public static CharacterMatcherItem AvailableForLegendaryBookAdventure => Instance[(byte)10];
+		public static CharacterMatcherItem AvailableForLegendaryBookAdventure => Instance[(short)10];
 
-		/// <summary>
-		/// 出神之地移动角色
-		/// </summary>
-		public static CharacterMatcherItem PrepareCharacterForSpiritualWanderPlace => Instance[(byte)11];
+		public static CharacterMatcherItem PrepareCharacterForSpiritualWanderPlace => Instance[(short)11];
 
-		/// <summary>
-		/// 可被悬赏
-		/// </summary>
-		public static CharacterMatcherItem CanHaveBounty => Instance[(byte)12];
+		public static CharacterMatcherItem CanHaveBounty => Instance[(short)12];
 
-		/// <summary>
-		/// 可被入魔人攻击
-		/// </summary>
-		public static CharacterMatcherItem CanBeAttackedByInfectedCharacter => Instance[(byte)13];
+		public static CharacterMatcherItem CanBeAttackedByInfectedCharacter => Instance[(short)13];
 
-		/// <summary>
-		/// 可被随机敌人袭击
-		/// </summary>
-		public static CharacterMatcherItem CanBeAttackedByRandomEnemy => Instance[(byte)14];
+		public static CharacterMatcherItem CanBeAttackedByRandomEnemy => Instance[(short)14];
 
-		/// <summary>
-		/// 可被动脱离队伍
-		/// </summary>
-		public static CharacterMatcherItem CanBeRemovedFromGroup => Instance[(byte)15];
+		public static CharacterMatcherItem CanBeRemovedFromGroup => Instance[(short)15];
 
-		/// <summary>
-		/// 太吾村商人自动行为目标
-		/// </summary>
-		public static CharacterMatcherItem CanBeMerchantAutoActionTarget => Instance[(byte)16];
+		public static CharacterMatcherItem CanBeMerchantAutoActionTarget => Instance[(short)16];
 
-		/// <summary>
-		/// 可成为姬兮击杀目标
-		/// </summary>
-		public static CharacterMatcherItem CanBeJixiKillingTarget => Instance[(byte)17];
+		public static CharacterMatcherItem CanBeJixiKillingTarget => Instance[(short)17];
 
-		/// <summary>
-		/// 可为村民安排工作
-		/// </summary>
-		public static CharacterMatcherItem VillagerAvailableForWork => Instance[(byte)18];
+		public static CharacterMatcherItem VillagerAvailableForWork => Instance[(short)18];
 
-		/// <summary>
-		/// 可设置为经营建筑学徒
-		/// </summary>
-		public static CharacterMatcherItem ChildVillagerAvailableForWork => Instance[(byte)7];
+		public static CharacterMatcherItem ChildVillagerAvailableForWork => Instance[(short)7];
 
-		/// <summary>
-		/// 可成为狮相互动添加对象
-		/// </summary>
-		public static CharacterMatcherItem InteractWithShixiangMemberEventTarget => Instance[(byte)19];
+		public static CharacterMatcherItem InteractWithShixiangMemberEventTarget => Instance[(short)19];
 
-		/// <summary>
-		/// 可成为峨眉地区主线中被袭击的对象
-		/// </summary>
-		public static CharacterMatcherItem EmeiPotentialVictims => Instance[(byte)20];
+		public static CharacterMatcherItem EmeiPotentialVictims => Instance[(short)20];
 
-		/// <summary>
-		/// 可发起邀约
-		/// </summary>
-		public static CharacterMatcherItem CanMakeAppointment => Instance[(byte)53];
+		public static CharacterMatcherItem CanMakeAppointment => Instance[(short)53];
 
-		/// <summary>
-		/// 在所属定居点
-		/// </summary>
-		public static CharacterMatcherItem InSettlement => Instance[(byte)55];
+		public static CharacterMatcherItem InSettlement => Instance[(short)55];
 
-		/// <summary>
-		/// 可赴宴的非村民宾客
-		/// </summary>
-		public static CharacterMatcherItem CanJoinFeast => Instance[(byte)56];
+		public static CharacterMatcherItem CanJoinFeast => Instance[(short)56];
 
-		/// <summary>
-		/// 可成为姬兮吸取内力目标
-		/// </summary>
-		public static CharacterMatcherItem CanBeJixiDrainTarget => Instance[(byte)57];
+		public static CharacterMatcherItem CanBeJixiDrainTarget => Instance[(short)57];
 
-		/// <summary>
-		/// 可指定姬兮吸取内力的目标
-		/// </summary>
-		public static CharacterMatcherItem CanBeSelectJixiDrainTarget => Instance[(byte)58];
+		public static CharacterMatcherItem CanBeSelectJixiDrainTarget => Instance[(short)58];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static CharacterMatcher Instance = new CharacterMatcher();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "MerchantType", "Organization", "SubConditions", "TargetSubConditions", "TemplateId", "FavorRange", "TargetKey" };
 
-	internal override int ToInt(byte value)
+	internal override int ToInt(short value)
 	{
 		return value;
 	}
 
-	internal override byte ToTemplateId(int value)
+	internal override short ToTemplateId(int value)
 	{
-		return (byte)value;
+		return (short)value;
 	}
 
 	private void CreateItems0()

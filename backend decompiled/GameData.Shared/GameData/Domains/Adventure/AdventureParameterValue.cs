@@ -7,9 +7,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Adventure;
 
-/// <summary>
-/// 奇遇变量值
-/// </summary>
 [SerializableGameData(IsExtensible = true)]
 public struct AdventureParameterValue : ISerializableGameData
 {
@@ -30,39 +27,21 @@ public struct AdventureParameterValue : ISerializableGameData
 		public static readonly string[] FieldId2FieldName = new string[5] { "Type", "InternalValue0", "InternalValue1", "InternalByte", "InternalString" };
 	}
 
-	/// <summary>
-	/// 类型
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 0)]
 	private EAdventureParameterValueType _type;
 
-	/// <summary>
-	/// 第一个值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 1)]
 	private int _internalValue0;
 
-	/// <summary>
-	/// 第二个值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 2)]
 	private int _internalValue1;
 
-	/// <summary>
-	/// 字节值
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 3)]
 	private byte _internalByte;
 
-	/// <summary>
-	/// 字符串
-	/// </summary>
 	[SerializableGameDataField(FieldIndex = 4)]
 	private string _internalString;
 
-	/// <summary>
-	/// 是否为只读类型
-	/// </summary>
 	public bool Readonly
 	{
 		get
@@ -73,14 +52,8 @@ public struct AdventureParameterValue : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 当前值
-	/// </summary>
 	public int Current => _internalValue0;
 
-	/// <summary>
-	/// 最大值
-	/// </summary>
 	public int Max
 	{
 		get
@@ -93,9 +66,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 作为进度值
-	/// </summary>
 	public float AsProgress
 	{
 		get
@@ -108,9 +78,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 作为布尔值
-	/// </summary>
 	public bool AsBool
 	{
 		get
@@ -123,9 +90,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 作为索引值
-	/// </summary>
 	public AdventureBlockIndex AsIndex
 	{
 		get
@@ -138,9 +102,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 作为任务值
-	/// </summary>
 	public TaskData AsTask
 	{
 		get
@@ -158,9 +119,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		}
 	}
 
-	/// <summary>
-	/// 作为字符串
-	/// </summary>
 	public string AsString
 	{
 		get
@@ -217,9 +175,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		_internalString = valueStr;
 	}
 
-	/// <summary>
-	/// 设置值
-	/// </summary>
 	public void Set(int value)
 	{
 		if (!Readonly)
@@ -266,13 +221,11 @@ public struct AdventureParameterValue : ISerializableGameData
 		};
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 12;
@@ -284,7 +237,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -326,7 +278,6 @@ public struct AdventureParameterValue : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

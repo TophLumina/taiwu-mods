@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class AgeEffect : ConfigData<AgeEffectItem, sbyte>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static AgeEffect Instance = new AgeEffect();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "SkillQualificationPrecocious", "SkillQualificationLateBlooming", "FertilityMale", "FertilityFemale" };

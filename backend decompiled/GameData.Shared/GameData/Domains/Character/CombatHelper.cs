@@ -8,25 +8,12 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 战斗相关前后端共用常量及方法 (除功法外)
-/// </summary>
 public static class CombatHelper
 {
-	/// <summary>
-	/// 单个真气可分配的最大值
-	/// </summary>
 	public const short MaxNeiliAllocation = 100;
 
-	/// <summary>
-	/// 所有真气可分配的总最大值
-	/// </summary>
 	public const short MaxTotalNeiliAllocation = 400;
 
-	/// <summary>
-	/// 真气从零分配到指定点数时, 内力的累计消耗.
-	/// 数组下标 + 1 = 真气分配的点数.
-	/// </summary>
 	private static readonly short[] NeiliCumulativeCosts = new short[100]
 	{
 		1, 3, 6, 10, 15, 21, 28, 36, 45, 56,
@@ -41,10 +28,6 @@ public static class CombatHelper
 		6701, 6877, 7056, 7238, 7423, 7611, 7802, 7996, 8193, 8393
 	};
 
-	/// <summary>
-	/// 获取指定精纯境界可分配的真气总值
-	/// NOTE: 正常不要直接使用，请用<see cref="M:GameData.Domains.Character.CombatHelper.GetMaxTotalNeiliAllocationConsideringFeature(System.SByte,System.Collections.Generic.List{System.Int16},GameData.Domains.World.ChallengeModeData)" />
-	/// </summary>
 	[Obsolete]
 	public static short GetMaxTotalNeiliAllocation(sbyte consummateLevel)
 	{
@@ -56,9 +39,6 @@ public static class CombatHelper
 		return maxNeiliAllocation;
 	}
 
-	/// <summary>
-	/// 获取指定精纯境界可分配的真气总值，考虑惩罚特性
-	/// </summary>
 	public static short GetMaxTotalNeiliAllocationConsideringFeature(sbyte consummateLevel, List<short> featureIds, ChallengeModeData challengeModeData)
 	{
 		consummateLevel = Math.Min(consummateLevel, GlobalConfig.Instance.MaxConsummateLevel);
@@ -68,14 +48,6 @@ public static class CombatHelper
 		return (short)Math.Max(0, originMaxNeiliAllocation - allDebuff);
 	}
 
-	/// <summary>
-	/// 判断能否分配一点指定类型的真气
-	/// </summary>
-	/// <param name="neiliAllocationType">要分配的真气类型</param>
-	/// <param name="allocation">当前真气分配情况</param>
-	/// <param name="currNeili">当前内力值</param>
-	/// <param name="consummateLevel">当前精纯点</param>
-	/// <returns></returns>
 	[Obsolete]
 	public unsafe static bool CanAllocateNeili(byte neiliAllocationType, NeiliAllocation allocation, int currNeili, sbyte consummateLevel)
 	{
@@ -87,16 +59,6 @@ public static class CombatHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 判断能否分配一点指定类型的真气
-	/// </summary>
-	/// <param name="neiliAllocationType">要分配的真气类型</param>
-	/// <param name="allocation">当前真气分配情况</param>
-	/// <param name="currNeili">当前内力值</param>
-	/// <param name="consummateLevel">当前精纯点</param>
-	/// <param name="featureIds">当前特性</param>
-	/// <param name="challengeModeData"></param>
-	/// <returns></returns>
 	public unsafe static bool CanAllocateNeiliConsideringFeature(byte neiliAllocationType, NeiliAllocation allocation, int currNeili, sbyte consummateLevel, List<short> featureIds, ChallengeModeData challengeModeData)
 	{
 		short currValue = allocation.Items[(int)neiliAllocationType];
@@ -107,10 +69,6 @@ public static class CombatHelper
 		return false;
 	}
 
-	/// <summary>
-	/// 尝试用传入的内力将真气补齐到目标值. 该方法依照摧破、轻灵、护体、奇窍各一点直到无法再补的方式.
-	/// 该方法会修改传入的当前
-	/// </summary>
 	public unsafe static void TryAllocateToTargetAllocation(NeiliAllocation target, ref NeiliAllocation current, int maxNeili, ref int currNeili, int maxTotalAllocation = 400, int costPercent = 100)
 	{
 		int* allocationCosts = stackalloc int[4];
@@ -153,23 +111,12 @@ public static class CombatHelper
 		while ((state | allocated) != 15);
 	}
 
-	/// <summary>
-	/// 计算提升一点真气所需的内力值
-	/// </summary>
-	/// <param name="currAllocation">当前真气值</param>
-	/// <returns></returns>
 	public static int CalcNeiliCost(short currAllocation)
 	{
 		int num = currAllocation + 1;
 		return num + num * num / 100;
 	}
 
-	/// <summary>
-	/// 计算战中恢复真气所需的内力值
-	/// </summary>
-	/// <param name="currAllocation"></param>
-	/// <param name="qiDisorderLevel">内息紊乱级别<see cref="T:GameData.Domains.Character.DisorderLevelOfQi" /></param>
-	/// <returns></returns>
 	public static int CalcNeiliCostInCombat(short currAllocation, sbyte qiDisorderLevel)
 	{
 		CValuePercent neiliCostInCombat = QiDisorderEffect.Instance[qiDisorderLevel].NeiliCostInCombat;
@@ -180,11 +127,6 @@ public static class CombatHelper
 		return Math.Max(CalcNeiliCost(currAllocation) * neiliCostInCombat, 1);
 	}
 
-	/// <summary>
-	/// 计算把真气从零分配到指定点数, 需要消耗多少点内力
-	/// </summary>
-	/// <param name="neiliAllocation">目标真气点数, 取值范围 [0, MaxNeiliAllocation]</param>
-	/// <returns></returns>
 	public static int CalcNeiliCostFromZero(short neiliAllocation)
 	{
 		if (neiliAllocation == 0)
@@ -204,11 +146,6 @@ public static class CombatHelper
 		return totalCost;
 	}
 
-	/// <summary>
-	/// 计算配置指定的真气组合所需的内力
-	/// </summary>
-	/// <param name="allocation"></param>
-	/// <returns></returns>
 	public unsafe static int CalcRequiredNeili(NeiliAllocation allocation)
 	{
 		int value = 0;
@@ -219,12 +156,6 @@ public static class CombatHelper
 		return value;
 	}
 
-	/// <summary>
-	/// 计算消耗指定内力点数, 可以把真气从零分配到多少点
-	/// TODO: NeiliCumulativeCosts 当前最多分配到 100, 如果出现使用该方法的需求，需要支持更高的数字
-	/// </summary>
-	/// <param name="availableNeili">可供消耗的内力</param>
-	/// <returns></returns>
 	[Obsolete]
 	public unsafe static short CalcAllocatedNeili(int availableNeili)
 	{

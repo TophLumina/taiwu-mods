@@ -3,40 +3,20 @@ using GameData.Serializer;
 
 namespace GameData.Domains.Character.Ai;
 
-/// <summary>
-/// NPC移动目标
-/// </summary>
 public struct NpcTravelTarget : ISerializableGameData
 {
-	/// <summary>
-	/// 目标类型
-	/// </summary>
 	[SerializableGameDataField]
 	private bool _isTargetFixedLocation;
 
-	/// <summary>
-	/// 目标角色ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int TargetCharId;
 
-	/// <summary>
-	/// 固定目标地点
-	/// </summary>
 	[SerializableGameDataField]
 	private Location _targetLocation;
 
-	/// <summary>
-	/// 该目标剩余有效时间
-	/// </summary>
 	[SerializableGameDataField]
 	public int RemainingMonth;
 
-	/// <summary>
-	/// 以固定地点为目标
-	/// </summary>
-	/// <param name="targetLocation">目标地点</param>
-	/// <param name="maxDuration">该目标最长持续时间</param>
 	public NpcTravelTarget(Location targetLocation, int maxDuration)
 	{
 		_isTargetFixedLocation = true;
@@ -45,11 +25,6 @@ public struct NpcTravelTarget : ISerializableGameData
 		RemainingMonth = maxDuration;
 	}
 
-	/// <summary>
-	/// 以指定角色为目标
-	/// </summary>
-	/// <param name="targetCharId">目标角色</param>
-	/// <param name="maxDuration">该目标最长持续时间</param>
 	public NpcTravelTarget(int targetCharId, int maxDuration)
 	{
 		_isTargetFixedLocation = false;

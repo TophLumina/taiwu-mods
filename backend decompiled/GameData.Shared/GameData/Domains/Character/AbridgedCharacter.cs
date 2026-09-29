@@ -6,9 +6,6 @@ using GameData.Utilities;
 
 namespace GameData.Domains.Character;
 
-/// <summary>
-/// 精简版角色数据
-/// </summary>
 [SerializableGameData(IsExtensible = true, NotForDisplayModule = true)]
 public class AbridgedCharacter : ISerializableGameData
 {
@@ -57,112 +54,57 @@ public class AbridgedCharacter : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 角色实例 ID.
-	/// </summary>
 	[SerializableGameDataField]
 	public int Id;
 
-	/// <summary>
-	/// 角色模板 ID.
-	/// </summary>
 	[SerializableGameDataField]
 	public short CharTemplateId;
 
-	/// <summary>
-	/// 性别
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte Gender;
 
-	/// <summary>
-	/// 当前年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short CurrAge;
 
-	/// <summary>
-	/// 真实年龄
-	/// </summary>
 	[SerializableGameDataField]
 	public short ActualAge;
 
-	/// <summary>
-	/// 出家类型
-	/// </summary>
 	[SerializableGameDataField]
 	public byte MonkType;
 
-	/// <summary>
-	/// 基本信息 - 外貌
-	/// </summary>
 	[SerializableGameDataField]
 	public AvatarData Avatar;
 
-	/// <summary>
-	/// 基本信息 - 衣装的显示 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public short ClothingDisplayId;
 
-	/// <summary>
-	/// 随机姓名
-	/// </summary>
 	[SerializableGameDataField]
 	public FullName FullName;
 
-	/// <summary>
-	/// 从属信息
-	/// </summary>
 	[SerializableGameDataField]
 	public OrganizationInfo OrganizationInfo;
 
-	/// <summary>
-	/// 法号
-	/// </summary>
 	[SerializableGameDataField]
 	public MonasticTitle MonasticTitle;
 
-	/// <summary>
-	/// 自定义显示名 ID
-	/// </summary>
 	[SerializableGameDataField]
 	public int CustomDisplayNameId;
 
-	/// <summary>
-	/// 对太吾的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort SelfRelationToTaiwu;
 
-	/// <summary>
-	/// 太吾对自身的关系
-	/// </summary>
 	[SerializableGameDataField]
 	public ushort TaiwuRelationToSelf;
 
-	/// <summary>
-	/// 存活状态 (精简前)
-	/// <see cref="T:GameData.Domains.Character.AliveState" />
-	/// </summary>
 	[SerializableGameDataField]
 	public sbyte AliveState;
 
-	/// <summary>
-	/// 位置
-	/// </summary>
 	[SerializableGameDataField]
 	public Location Location;
 
-	/// <summary>
-	/// 出身日期
-	/// </summary>
 	[SerializableGameDataField]
 	public int BirthDate;
 
-	/// <summary>
-	/// 生成能够用于显示的形象数据
-	/// </summary>
 	public AvatarRelatedData GenerateAvatarRelatedData()
 	{
 		return new AvatarRelatedData
@@ -173,18 +115,12 @@ public class AbridgedCharacter : ISerializableGameData
 		};
 	}
 
-	/// <summary>
-	/// 默认空构造函数, 只用于反序列化.
-	/// </summary>
 	public AbridgedCharacter()
 	{
 		Id = -1;
 		Avatar = new AvatarData();
 	}
 
-	/// <summary>
-	/// 拷贝构造函数
-	/// </summary>
 	public AbridgedCharacter(AbridgedCharacter other)
 	{
 		Id = other.Id;
@@ -206,9 +142,6 @@ public class AbridgedCharacter : ISerializableGameData
 		BirthDate = other.BirthDate;
 	}
 
-	/// <summary>
-	/// 深度拷贝指定对象
-	/// </summary>
 	public void Assign(AbridgedCharacter other)
 	{
 		Id = other.Id;
@@ -230,13 +163,11 @@ public class AbridgedCharacter : ISerializableGameData
 		BirthDate = other.BirthDate;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.IsSerializedSizeFixed" />
 	public bool IsSerializedSizeFixed()
 	{
 		return false;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.GetSerializedSize" />
 	public int GetSerializedSize()
 	{
 		int totalSize = 55;
@@ -248,7 +179,6 @@ public class AbridgedCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Serialize(System.Byte*)" />
 	public unsafe int Serialize(byte* pData)
 	{
 		byte* pCurrData = pData;
@@ -304,7 +234,6 @@ public class AbridgedCharacter : ISerializableGameData
 		return totalSize;
 	}
 
-	/// <inheritdoc cref="M:GameData.Serializer.ISerializableGameData.Deserialize(System.Byte*)" />
 	public unsafe int Deserialize(byte* pData)
 	{
 		byte* pCurrData = pData;

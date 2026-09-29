@@ -909,7 +909,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealOuterInjurySucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealOuterInjuryItemSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 102);
 		AppendCharacter(charId);
@@ -923,7 +923,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealInnerInjurySucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealInnerInjuryItemSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 103);
 		AppendCharacter(charId);
@@ -937,7 +937,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestDetoxPoisonSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId, sbyte poisonType)
+	public void AddRequestDetoxPoisonItemSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId, sbyte poisonType)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 104);
 		AppendCharacter(charId);
@@ -953,7 +953,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealthSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealthItemSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 105);
 		AppendCharacter(charId);
@@ -967,7 +967,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealDisorderOfQiSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealDisorderOfQiItemSucceed(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 106);
 		AppendCharacter(charId);
@@ -1191,7 +1191,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealOuterInjuryFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealOuterInjuryItemFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 121);
 		AppendCharacter(charId);
@@ -1205,7 +1205,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealInnerInjuryFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealInnerInjuryItemFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 122);
 		AppendCharacter(charId);
@@ -1219,7 +1219,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestDetoxPoisonFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId, sbyte poisonType)
+	public void AddRequestDetoxPoisonItemFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId, sbyte poisonType)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 123);
 		AppendCharacter(charId);
@@ -1235,7 +1235,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealthFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealthItemFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 124);
 		AppendCharacter(charId);
@@ -1249,7 +1249,7 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddRequestHealDisorderOfQiFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
+	public void AddRequestHealDisorderOfQiItemFail(int selfCharId, int date, int charId, Location location, sbyte itemType, short itemTemplateId)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 125);
 		AppendCharacter(charId);
@@ -9447,13 +9447,6 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddIdentityActionYuanshan2(int selfCharId, int date, Location location)
-	{
-		int beginOffset = BeginAddingRecord(selfCharId, date, 1192);
-		AppendLocation(location);
-		EndAddingRecord(beginOffset);
-	}
-
 	public void AddIdentityActionYuanshan3(int selfCharId, int date, Location location)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 1193);
@@ -9467,21 +9460,6 @@ public class LifeRecordCollection : WriteableRecordCollection
 		AppendCharacter(charId);
 		AppendLocation(location);
 		AppendCombatSkill(combatSkillTemplateId);
-		EndAddingRecord(beginOffset);
-	}
-
-	public void AddIdentityActionYuanshan5(int selfCharId, int date, Location location)
-	{
-		int beginOffset = BeginAddingRecord(selfCharId, date, 1194);
-		AppendLocation(location);
-		EndAddingRecord(beginOffset);
-	}
-
-	public void AddIdentityActionYuanshan5Target(int selfCharId, int date, int charId, Location location)
-	{
-		int beginOffset = BeginAddingRecord(selfCharId, date, 1220);
-		AppendCharacter(charId);
-		AppendLocation(location);
 		EndAddingRecord(beginOffset);
 	}
 
@@ -10700,20 +10678,6 @@ public class LifeRecordCollection : WriteableRecordCollection
 		EndAddingRecord(beginOffset);
 	}
 
-	public void AddBuddistMeditate(int selfCharId, int date, Location location)
-	{
-		int beginOffset = BeginAddingRecord(selfCharId, date, 1371);
-		AppendLocation(location);
-		EndAddingRecord(beginOffset);
-	}
-
-	public void AddTaoistMeditate(int selfCharId, int date, Location location)
-	{
-		int beginOffset = BeginAddingRecord(selfCharId, date, 1372);
-		AppendLocation(location);
-		EndAddingRecord(beginOffset);
-	}
-
 	public void AddIdentityActionCaptureCricket1(int selfCharId, int date, Location location)
 	{
 		int beginOffset = BeginAddingRecord(selfCharId, date, 1373);
@@ -10877,6 +10841,206 @@ public class LifeRecordCollection : WriteableRecordCollection
 		int beginOffset = BeginAddingRecord(selfCharId, date, 1413);
 		AppendLocation(location);
 		AppendAdventure(adventureCoreId);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddDLCChickenRetranmogrifyToHuman(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1415);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddDLCChickenTurnToChickenForm(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1416);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddDLCLoongRetranmogrifyToHuman(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1417);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddDLCLoongTurnToLoongForm(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1418);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddXiangshuSkill0NPCEvilCase(int selfCharId, int date, int charId)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1419);
+		AppendCharacter(charId);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddXiangshuSkill0TaiwuEvilCase(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1420);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddXiangshuSkill1NPCEvilCorruption(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1421);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddXiangshuSkill1TaiwuEvilCorruption(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1422);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddXiangshuSkill0NPCItemDropCase(int selfCharId, int date, Location location, int charId, sbyte itemType, short itemTemplateId)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1423);
+		AppendLocation(location);
+		AppendCharacter(charId);
+		AppendItem(itemType, itemTemplateId);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddXiangshuSkill2TaiwuItemDropCase(int selfCharId, int date, Location location)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1424);
+		AppendLocation(location);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestHealInjurySucceedByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1425);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1433);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestDetoxPoisonSucceedByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1426);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1434);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestHealthSucceedByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1427);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1435);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestHealDisorderOfQiSucceedByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1428);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1436);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestHealInjuryFailByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1429);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1437);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestDetoxPoisonFailByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1430);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1438);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestHealthFailByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1431);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1439);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+	}
+
+	public void AddRequestHealDisorderOfQiFailByRes(int selfCharId, int date, int charId, Location location, int value, sbyte resourceType)
+	{
+		int beginOffset = BeginAddingRecord(selfCharId, date, 1432);
+		AppendCharacter(charId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
+		EndAddingRecord(beginOffset);
+		beginOffset = BeginAddingRecord(charId, date, 1440);
+		AppendCharacter(selfCharId);
+		AppendLocation(location);
+		AppendInteger(value);
+		AppendResource(resourceType);
 		EndAddingRecord(beginOffset);
 	}
 

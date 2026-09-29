@@ -7,91 +7,40 @@ namespace Config;
 [Serializable]
 public class WorldFavorability : ConfigData<WorldFavorabilityItem, short>
 {
-	/// <summary>
-	/// 配置表定义Key
-	/// </summary>
 	public static class DefKey
 	{
-		/// <summary>
-		/// 初见好感度
-		/// </summary>
 		public const short FirstSightFavorability = 0;
 
-		/// <summary>
-		/// 赠予物品
-		/// </summary>
 		public const short GiftItem = 1;
 
-		/// <summary>
-		/// 见闻闲谈
-		/// </summary>
 		public const short ShareInformation = 2;
 
-		/// <summary>
-		/// 重复互动事件
-		/// </summary>
 		public const short RepeatedEvent = 3;
 
-		/// <summary>
-		/// 剧情事件
-		/// </summary>
 		public const short StoryEvent = 4;
 
-		/// <summary>
-		/// NPC演化
-		/// </summary>
 		public const short MonthlyEvolution = 5;
 
-		/// <summary>
-		/// 剧情角色好感度
-		/// </summary>
 		public const short StoryCharacterFavorability = 6;
 	}
 
-	/// <summary>
-	/// 配置表快捷访问
-	/// </summary>
 	public static class DefValue
 	{
-		/// <summary>
-		/// 初见好感度
-		/// </summary>
 		public static WorldFavorabilityItem FirstSightFavorability => Instance[(short)0];
 
-		/// <summary>
-		/// 赠予物品
-		/// </summary>
 		public static WorldFavorabilityItem GiftItem => Instance[(short)1];
 
-		/// <summary>
-		/// 见闻闲谈
-		/// </summary>
 		public static WorldFavorabilityItem ShareInformation => Instance[(short)2];
 
-		/// <summary>
-		/// 重复互动事件
-		/// </summary>
 		public static WorldFavorabilityItem RepeatedEvent => Instance[(short)3];
 
-		/// <summary>
-		/// 剧情事件
-		/// </summary>
 		public static WorldFavorabilityItem StoryEvent => Instance[(short)4];
 
-		/// <summary>
-		/// NPC演化
-		/// </summary>
 		public static WorldFavorabilityItem MonthlyEvolution => Instance[(short)5];
 
-		/// <summary>
-		/// 剧情角色好感度
-		/// </summary>
 		public static WorldFavorabilityItem StoryCharacterFavorability => Instance[(short)6];
 	}
 
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static WorldFavorability Instance = new WorldFavorability();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId" };

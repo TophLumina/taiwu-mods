@@ -249,6 +249,19 @@ public class RawDataBlock : IBinary, ISerializableGameData
 		return 4;
 	}
 
+	public int TrimExcess()
+	{
+		if (RawData.Length <= Size)
+		{
+			return 0;
+		}
+		int result = RawData.Length - Size;
+		byte[] rawData = new byte[Size];
+		Buffer.BlockCopy(RawData, 0, rawData, 0, Size);
+		RawData = rawData;
+		return result;
+	}
+
 	[MethodImpl(MethodImplOptions.NoInlining)]
 	private void EnsureCapacityInternal(int oriCapacity, int desiredSize)
 	{

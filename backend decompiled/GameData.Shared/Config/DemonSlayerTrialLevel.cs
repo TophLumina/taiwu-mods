@@ -8,9 +8,6 @@ namespace Config;
 [Serializable]
 public class DemonSlayerTrialLevel : ConfigData<DemonSlayerTrialLevelItem, int>
 {
-	/// <summary>
-	/// 配置表实例
-	/// </summary>
 	public static DemonSlayerTrialLevel Instance = new DemonSlayerTrialLevel();
 
 	private readonly HashSet<string> RequiredFields = new HashSet<string> { "LevelName", "RewardItems", "RewardFeatureOptions", "TemplateId", "TotalPower", "RewardExp" };
