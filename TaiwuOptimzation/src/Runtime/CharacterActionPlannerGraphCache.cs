@@ -54,7 +54,8 @@ internal static class CharacterActionPlannerGraphCache
         out IEnumerable<INode<Character, StateKey>> actions)
     {
         actions = Array.Empty<INode<Character, StateKey>>();
-        if (!TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization)
+        if (!TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled ||
+            !TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization)
         {
             RecordConditionLookup(hit: false, miss: false, fallback: true, returnedNodeCount: 0);
             return false;
@@ -81,7 +82,8 @@ internal static class CharacterActionPlannerGraphCache
     /// <summary>在主线程初始化后预热快照，避免第一个 worker 在热路径中构建。</summary>
     public static void WarmUp(CharacterActionPlanner planner)
     {
-        if (TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization)
+        if (TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
+            TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization)
         {
             _ = EnsureSnapshot(planner);
         }

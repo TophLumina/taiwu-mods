@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GameBackendDir Condition="'$(GameBackendDir)' == ''">D:\SteamLibrary\steamapps\common\The Scroll Of Taiwu\Backend</GameBackendDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony" HintPath="$(GameBackendDir)\0Harmony.dll" />
+    <Reference Include="GameData" HintPath="$(GameBackendDir)\GameData.dll" Private="false" />
+    <Reference Include="GameData.Shared" HintPath="$(GameBackendDir)\GameData.Shared.dll" Private="false" />
+    <Reference Include="GameData.Common" HintPath="$(GameBackendDir)\GameData.Common.dll" Private="false" />
+    <Reference Include="GameData.ActionPlanning" HintPath="$(GameBackendDir)\GameData.ActionPlanning.dll" Private="false" />
+    <Reference Include="GameData.Utilities" HintPath="$(GameBackendDir)\GameData.Utilities.dll" Private="false" />
+    <Reference Include="GameData.Serializer" HintPath="$(GameBackendDir)\GameData.Serializer.dll" Private="false" />
+    <Reference Include="GameData.ArchiveData" HintPath="$(GameBackendDir)\GameData.ArchiveData.dll" Private="false" />
+    <Reference Include="Redzen" HintPath="$(GameBackendDir)\Redzen.dll" Private="false" />
+  </ItemGroup>
+</Project>

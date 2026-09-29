@@ -20,7 +20,7 @@ internal static class CharacterPlanningAgentSelectActionTargetPatch
     [ThreadStatic]
     private static Stack<List<int>>? _targetListPool;
 
-    private static bool Prepare() =>
+    internal static bool IsEnabled() =>
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
         TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
@@ -47,6 +47,11 @@ internal static class CharacterPlanningAgentSelectActionTargetPatch
         int rangeValue,
         ref Character? __result)
     {
+        if (!IsEnabled())
+        {
+            return true;
+        }
+
         List<int> targets = RentTargetList();
         try
         {
@@ -111,10 +116,6 @@ internal static class CharacterPlanningAgentSelectActionTargetPatch
 [HarmonyPatch]
 internal static class CharacterPlanningAgentSelectActionTargetGroupPatch
 {
-    private static bool Prepare() =>
-        TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
-        TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
-
     private static MethodBase TargetMethod() =>
         AccessTools.Method(
             typeof(CharacterPlanningAgent),
@@ -129,7 +130,7 @@ internal static class CharacterPlanningAgentSelectActionTargetGroupPatch
                 typeof(int),
             });
 
-    /// <summary>提前生成结果集合，避免原版 iterator 在 `yield` 之间长期占用 `_targetCharIds`。</summary>
+    /// <summary>每个枚举器独占池化列表，保留原版按 MoveNext 逐个抽取目标的随机数顺序。</summary>
     private static bool Prefix(
         CharacterPlanningAgent __instance,
         DataContext context,
@@ -140,27 +141,36 @@ internal static class CharacterPlanningAgentSelectActionTargetGroupPatch
         int rangeValue,
         ref IEnumerable<Character> __result)
     {
+        if (!CharacterPlanningAgentSelectActionTargetPatch.IsEnabled())
+        {
+            return true;
+        }
+
+        __result = SelectTargets(__instance, context, predicate, selector, selectCount, range, rangeValue);
+        return false;
+    }
+
+    private static IEnumerable<Character> SelectTargets(
+        CharacterPlanningAgent agent,
+        DataContext context,
+        Predicate<Character> predicate,
+        EPlanningActionCharacterSelector selector,
+        int selectCount,
+        EPlanningActionCharacterSelectRange range,
+        int rangeValue)
+    {
         List<int> targets = CharacterPlanningAgentSelectActionTargetPatch.RentTargetList();
         try
         {
-            __instance.GetAllActionTargets(context.Random, targets, predicate, selector, range, rangeValue);
-            List<Character> result = new(Math.Min(selectCount, targets.Count));
+            agent.GetAllActionTargets(context.Random, targets, predicate, selector, range, rangeValue);
             for (int i = 0; i < selectCount && targets.Count > 0; i++)
             {
                 int index = context.Random.Next(targets.Count);
                 int charId = targets[index];
-                result.Add(DomainManager.Character.GetElement_Objects(charId));
+                yield return DomainManager.Character.GetElement_Objects(charId);
                 targets[index] = targets[^1];
                 targets.RemoveAt(targets.Count - 1);
             }
-
-            __result = result;
-            return false;
-        }
-        catch
-        {
-            // 任意异常都回退原版，避免 worker 线程异常导致过月等待屏障无法结束。
-            return true;
         }
         finally
         {

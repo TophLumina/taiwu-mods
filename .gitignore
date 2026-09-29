@@ -10,3 +10,4 @@ note.md
 __pycache__
 data
 DBs
+.validation/

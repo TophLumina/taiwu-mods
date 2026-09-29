@@ -608,38 +608,40 @@ internal static class OfflineUpdateCurrentGoalActionsTargetPrefilter
         int stateTemplateId)
     {
         HashSet<int> result = new();
+        // MatchTargetCharacterByConditions 调用 Sense(args, candidate, actor, key)，
+        // 因此传感器的 self 是候选人、target 才是行动者；单向关系必须反转。
         switch (stateTemplateId)
         {
             case 302:
-                relationBuilder.AddReversedRelationMask(result, 16384);
+                relationBuilder.AddDirectRelationMask(result, 16384);
                 break;
             case 303:
-                relationBuilder.AddReversedRelationMask(result, 32768);
+                relationBuilder.AddDirectRelationMask(result, 32768);
                 break;
             case 304:
                 relationBuilder.AddDirectRelationMask(result, NonEnemyRelationMask);
                 relationBuilder.AddReversedRelationMask(result, NonEnemyRelationMask);
                 break;
             case 305:
-                relationBuilder.AddDirectRelationMask(result, 73);
+                relationBuilder.AddReversedRelationMask(result, 73);
                 break;
             case 306:
-                relationBuilder.AddDirectRelationMask(result, 292);
+                relationBuilder.AddReversedRelationMask(result, 292);
                 break;
             case 307:
-                relationBuilder.AddDirectRelationMask(result, 146);
+                relationBuilder.AddReversedRelationMask(result, 146);
                 break;
             case 308:
-                relationBuilder.AddDirectRelationMask(result, 8192);
+                relationBuilder.AddReversedRelationMask(result, 8192);
                 break;
             case 309:
-                relationBuilder.AddDirectRelationMask(result, 448);
+                relationBuilder.AddReversedRelationMask(result, 448);
                 break;
             case 310:
-                relationBuilder.AddDirectRelationMask(result, 1024);
+                relationBuilder.AddReversedRelationMask(result, 1024);
                 break;
             case 311:
-                relationBuilder.AddDirectRelationMask(result, 512);
+                relationBuilder.AddReversedRelationMask(result, 512);
                 break;
             case 312:
                 relationBuilder.AddDirectRelationMask(result, 16384);
@@ -651,7 +653,7 @@ internal static class OfflineUpdateCurrentGoalActionsTargetPrefilter
                 }
                 break;
             case 313:
-                relationBuilder.AddDirectRelationMask(result, 6144);
+                relationBuilder.AddReversedRelationMask(result, 6144);
                 break;
         }
 

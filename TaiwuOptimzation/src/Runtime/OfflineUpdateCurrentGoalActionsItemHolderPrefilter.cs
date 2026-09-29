@@ -164,16 +164,19 @@ internal static class OfflineUpdateCurrentGoalActionsItemHolderPrefilter
         TaiwuOptimizationSettings.AdvanceMonthOptimizationEnabled &&
         TaiwuOptimizationSettings.EnableCharacterActionPlanningOptimization;
 
+    // 按实现和 selector 识别语义，避免配置编号调整或被其他 mod 替换后误过滤。
     private static bool IsSupportedItemDemandAction(PlanningActionItem template) =>
-        template.TemplateId is 36 or 37 or 38 or 39 &&
-        template.CharacterSelector is
-            EPlanningActionCharacterSelector.RequestTarget or
-            EPlanningActionCharacterSelector.StealTarget or
-            EPlanningActionCharacterSelector.ScamTarget or
-            EPlanningActionCharacterSelector.RobTarget;
+        (template.ImplementationPath, template.CharacterSelector) switch
+        {
+            ("WealthDemandRequestItemAction", EPlanningActionCharacterSelector.RequestTarget) => true,
+            ("WealthDemandStealItemAction", EPlanningActionCharacterSelector.StealTarget) => true,
+            ("WealthDemandScamItemAction", EPlanningActionCharacterSelector.ScamTarget) => true,
+            ("WealthDemandRobItemAction", EPlanningActionCharacterSelector.RobTarget) => true,
+            _ => false,
+        };
 
     private static bool IsSupportedDetoxMedicineDemandAction(PlanningActionItem template) =>
-        template.TemplateId == 27 &&
+        template.ImplementationPath == "RequestDetoxPoisonItemAction" &&
         template.CharacterSelector == EPlanningActionCharacterSelector.RequestTarget;
 
     private static Snapshot BuildSnapshot(
