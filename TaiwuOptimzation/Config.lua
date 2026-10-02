@@ -3,7 +3,7 @@ return {
 		[1] = "TaiwuOptimization.dll",
 	},
 	Title = "[天幕心帷]过月性能优化",
-	Version = "0.3.0.0",
+	Version = "0.3.0.1",
 	Author = "man!",
 	Description = "[h1] 过月性能优化 [/h1]\r\n\r\n当前版本仅保留当前原版尚未覆盖的优化：NPC 月行动规划运行时缓存、密闻传播 occurrence holder count 聚合缓存，以及兼容原版格式的并行存档压缩。\r\n\r\n当前原版已经内置 secretId → holders 与 occurrenceId → secretIds 缓存，并使用它们处理秘闻代谢、广播和删除；本 Mod 不再替换这些原版流程。原版也已批量提交死亡 NPC 生平记录删除，本 Mod 已移除旧有 SQL 补丁。\r\n\r\n[list] [h2]当前主要优化[/h2]\r\n[*] NPC 目标范围索引、关系/物品候选预过滤和 target matcher 阶段缓存\r\n[*] NPC 主/副目标规划冻结快照，以及 primary ApplyAll 后的 delta 局部发布\r\n[*] 静态 planning graph 邻接缓存\r\n[*] 密闻传播阶段 occurrence holder count 聚合缓存\r\n[*] 启用并行存档压缩后，working.db 复制与多物理核心并行 DEFLATE 共用 1/2/4/8/16MB 存档块设置\r\n[*] 可选输出密闻月结、NPC 规划和 SaveWorld 写盘细分诊断\r\n[/list]\r\n\r\n[list] [h2]严格等价说明[/h2]\r\n[*] 缓存只替换查找、计数和候选缩小路径，不跳过结算，不延迟结算。\r\n[*] 高速缓存均为运行时内存结构，不写入存档，不改变原版存档格式。\r\n[*] NPC 最终 selector、predicate、关系判断、随机选择、目标选择和行动执行仍走原版。\r\n[*] 缓存异常、失效或版本不匹配时会尽量回退原版逻辑。\r\n[/list]\r\n\r\n[list] [h2]可选非等价项[/h2]\r\n[*] 可选降低未受保护远区 NPC 的主/副目标月行动点增长，默认关闭。\r\n[*] 太吾、队友、直接关系角色、特殊/事件/旅行中角色及保护区域角色保留原版增长。\r\n[/list]\r\n\r\n[b]使用 Harmony Patch，可能与修改密闻传播计数、NPC 行动规划、NPC 月行动点或相同存档写入方法的 Mod 冲突。[/b]",
 	Source = 0,
